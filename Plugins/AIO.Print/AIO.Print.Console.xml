@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AIO.Print.Console</name>
+    </assembly>
+    <members>
+        <member name="T:AIO.CPrint">
+            <summary>
+            输出
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.JsonResolver``1(``0)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:AIO.CPrint.Array(System.Array)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Array(System.String,System.Array)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Array(System.Collections.ArrayList)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Array(System.String,System.Collections.ArrayList)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Array``1(System.Collections.Generic.ICollection{``0})">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Array``1(System.String,System.Collections.Generic.ICollection{``0})">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Array``1(System.String,System.Collections.Generic.IList{``0})">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Array``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Array``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Format``1(System.String,``0)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Format``1(System.String,``0,``0)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Format``1(System.String,``0,``0,``0)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Format``2(System.String,``0,``1)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Format``3(System.String,``0,``1,``2)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Format``1(System.String,``0[])">
+            <summary>
+            使用指定的格式信息，将指定的对象数组（后跟当前行终止符）的文本表示形式写入标准输出流。
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Format(System.String,System.Object[])">
+            <summary>
+            使用指定的格式信息，将指定的对象数组（后跟当前行终止符）的文本表示形式写入标准输出流。
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Line``1(``0[])">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Line(System.Object[])">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Line``1(``0)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:AIO.CPrint.RunDetail(System.String,System.Collections.Generic.IEnumerable{System.Action},System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Run(System.String,System.Action,System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Run(System.String,System.Action,System.Action,System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Run(System.String,System.Action,System.Action,System.Action,System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Run(System.String,System.Action,System.Action,System.Action,System.Action,System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Run(System.String,System.Collections.Generic.ICollection{System.Action},System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Run``1(System.String,System.Action{``0},``0,System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Run``2(System.String,System.Action{``0,``1},``0,``1,System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Run``3(System.String,System.Action{``0,``1,``2},``0,``1,``2,System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Run``4(System.String,System.Action{``0,``1,``2,``3},``0,``1,``2,``3,System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:AIO.CPrint.CPrintElapse">
+            <summary>
+            执行时间
+            </summary>
+        </member>
+    </members>
+</doc>

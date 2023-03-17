@@ -1,0 +1,157 @@
+﻿using System.Collections.Generic;
+using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+namespace qtools.qhierarchy
+{
+    [ExecuteInEditMode]
+    [AddComponentMenu("")]
+    public class QObjectList : MonoBehaviour, ISerializationCallbackReceiver
+    {
+        public static List<QObjectList> instances = new List<QObjectList>();
+
+        public List<GameObject> lockedObjects = new List<GameObject>();
+        public List<GameObject> editModeVisibileObjects = new List<GameObject>();
+        public List<GameObject> editModeInvisibleObjects = new List<GameObject>();
+        public List<GameObject> wireframeHiddenObjects = new List<GameObject>();
+        public Dictionary<GameObject, Color> gameObjectColor = new Dictionary<GameObject, Color>();
+        public List<GameObject> gameObjectColorKeys = new List<GameObject>();
+        public List<Color> gameObjectColorValues = new List<Color>();
+
+        public void Awake()
+        {
+            checkIntegrity();
+
+            foreach (GameObject editModeGameObject in editModeVisibileObjects)
+                editModeGameObject.SetActive(!Application.isPlaying);
+
+            foreach (GameObject editModeGameObject in editModeInvisibleObjects)
+                editModeGameObject.SetActive(Application.isPlaying);
+
+            if (!Application.isEditor && Application.isPlaying)
+            {
+                instances.Remove(this);
+                DestroyImmediate(gameObject);
+                return;
+            }
+
+            instances.RemoveAll(item => item == null);
+            if (!instances.Contains(this)) instances.Add(this);
+        }
+
+        public void OnEnable()
+        {
+            if (!instances.Contains(this)) instances.Add(this);
+
+#if UNITY_EDITOR
+            foreach (var wireframeGameObject in wireframeHiddenObjects)
+            {
+                var component = wireframeGameObject.GetComponent<Renderer>();
+                if (component != null)
+                {
+#if UNITY_5_5_OR_NEWER
+                    EditorUtility.SetSelectedRenderState(component, EditorSelectedRenderState.Hidden);
+#else
+                    EditorUtility.SetSelectedWireframeHidden(component, true);
+#endif
+                }
+            }
+#endif
+        }
+
+        public void OnDestroy()
+        {
+            if (!Application.isPlaying)
+            {
+                checkIntegrity();
+
+                foreach (var gameObject in editModeVisibileObjects)
+                    gameObject.SetActive(false);
+
+                foreach (var gameObject in editModeInvisibleObjects)
+                    gameObject.SetActive(true);
+
+                foreach (var gameObject in lockedObjects)
+                    gameObject.hideFlags &= ~HideFlags.NotEditable;
+
+                instances.Remove(this);
+            }
+        }
+
+        public void merge(QObjectList anotherInstance)
+        {
+            for (var i = anotherInstance.lockedObjects.Count - 1; i >= 0; i--)
+            {
+                if (!lockedObjects.Contains(anotherInstance.lockedObjects[i]))
+                    lockedObjects.Add(anotherInstance.lockedObjects[i]);
+            }
+
+            for (var i = anotherInstance.editModeVisibileObjects.Count - 1; i >= 0; i--)
+            {
+                if (!editModeVisibileObjects.Contains(anotherInstance.editModeVisibileObjects[i]))
+                    editModeVisibileObjects.Add(anotherInstance.editModeVisibileObjects[i]);
+            }
+
+            for (var i = anotherInstance.editModeInvisibleObjects.Count - 1; i >= 0; i--)
+            {
+                if (!editModeInvisibleObjects.Contains(anotherInstance.editModeInvisibleObjects[i]))
+                    editModeInvisibleObjects.Add(anotherInstance.editModeInvisibleObjects[i]);
+            }
+
+            for (var i = anotherInstance.wireframeHiddenObjects.Count - 1; i >= 0; i--)
+            {
+                if (!wireframeHiddenObjects.Contains(anotherInstance.wireframeHiddenObjects[i]))
+                    wireframeHiddenObjects.Add(anotherInstance.wireframeHiddenObjects[i]);
+            }
+
+            for (var i = anotherInstance.gameObjectColorKeys.Count - 1; i >= 0; i--)
+            {
+                if (!gameObjectColorKeys.Contains(anotherInstance.gameObjectColorKeys[i]))
+                {
+                    gameObjectColorKeys.Add(anotherInstance.gameObjectColorKeys[i]);
+                    gameObjectColorValues.Add(anotherInstance.gameObjectColorValues[i]);
+                    gameObjectColor.Add(anotherInstance.gameObjectColorKeys[i], anotherInstance.gameObjectColorValues[i]);
+                }
+            }
+        }
+
+        public void checkIntegrity()
+        {
+            lockedObjects.RemoveAll(item => item == null);
+            editModeVisibileObjects.RemoveAll(item => item == null);
+            editModeInvisibleObjects.RemoveAll(item => item == null);
+            wireframeHiddenObjects.RemoveAll(item => item == null);
+
+            for (var i = gameObjectColorKeys.Count - 1; i >= 0; i--)
+            {
+                if (gameObjectColorKeys[i] == null)
+                {
+                    gameObjectColorKeys.RemoveAt(i);
+                    gameObjectColorValues.RemoveAt(i);
+                }
+            }
+
+            OnAfterDeserialize();
+        }
+
+        public void OnBeforeSerialize()
+        {
+            gameObjectColorKeys.Clear();
+            gameObjectColorValues.Clear();
+            foreach (KeyValuePair<GameObject, Color> pair in gameObjectColor)
+            {
+                gameObjectColorKeys.Add(pair.Key);
+                gameObjectColorValues.Add(pair.Value);
+            }
+        }
+
+        public void OnAfterDeserialize()
+        {
+            gameObjectColor.Clear();
+            for (int i = 0; i < gameObjectColorKeys.Count; i++)
+                gameObjectColor.Add(gameObjectColorKeys[i], gameObjectColorValues[i]);
+        }
+    }
+}

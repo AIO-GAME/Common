@@ -1,0 +1,10 @@
+[submodule "Packages~/hybridclr_unity"]
+	path = Packages~/hybridclr_unity
+	url = https://gitee.com/focus-creative-games/hybridclr_unity.git
+	ignore = all
+	branch = main
+	update = rebase
+	shallow = true
+	ignoreDirty = true
+	fetchRecurseSubmodules = true
+	depth = 1

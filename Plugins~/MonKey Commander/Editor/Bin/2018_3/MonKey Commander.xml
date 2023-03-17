@@ -1,0 +1,391 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MonKey Commander</name>
+    </assembly>
+    <members>
+        <member name="T:MonKey.Editor.Internal.GenericCommandParameterAutoComplete">
+            <summary>
+            The base class understood by MonKey as a provider of value for a text entered in the interface.
+            Extend this class if you want a specific behavior for your autocomplete.
+            Chances are that what you want is already implemented by one of the available classes in MonKeyAutoComplete though,
+            so I recommend you check it out first!
+            </summary>
+        </member>
+        <member name="F:MonKey.Editor.Internal.GenericCommandParameterAutoComplete.ParameterType">
+            <summary>
+            The type of the value that will be returned by the autocomplete
+            </summary>
+        </member>
+        <member name="M:MonKey.Editor.Internal.GenericCommandParameterAutoComplete.#ctor(System.Type)">
+            <summary>
+            You must specify the type in the constructor so that MonKey can recognize it
+            </summary>
+            <param name="parameterType"></param>
+        </member>
+        <member name="M:MonKey.Editor.Internal.GenericCommandParameterAutoComplete.InitializeAutoComplete">
+            <summary>
+            Called when the tab of teh variable is opened:
+            init here values to fetch even when no search terms are entered
+            </summary>
+        </member>
+        <member name="M:MonKey.Editor.Internal.GenericCommandParameterAutoComplete.DropAutoComplete">
+            <summary>
+            Called when the autoComplete is no longer needed
+            </summary>
+        </member>
+        <member name="M:MonKey.Editor.Internal.GenericCommandParameterAutoComplete.GenerateAndSortAutoComplete(System.String)">
+            <summary>
+            Called every time the user enters a search term : 
+            try to limit performance heavy operations, or thread them when possible
+            </summary>
+            <param name="searchTerms"></param>
+        </member>
+        <member name="P:MonKey.Editor.Internal.GenericCommandParameterAutoComplete.Count">
+            <summary>
+            The current amount of values suggested to the user
+            </summary>
+        </member>
+        <member name="M:MonKey.Editor.Internal.GenericCommandParameterAutoComplete.GetValue(System.Int32)">
+            <summary>
+            Retreives the value suggested from the id selected by the user in the list of available values.
+            </summary>
+            <param name="sortId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MonKey.Editor.Internal.GenericCommandParameterAutoComplete.GetStringValue(System.Int32)">
+            <summary>
+            The text representation of the value to display in the interface
+            </summary>
+            <param name="sortID"></param>
+            <returns></returns>
+        </member>
+        <member name="P:MonKey.Editor.Internal.GenericCommandParameterAutoComplete.SearchInstruction">
+            <summary>
+            The instruction text that will appear in the search bar
+            </summary>
+        </member>
+        <member name="M:MonKey.Editor.Internal.GenericCommandParameterAutoComplete.DrawAutoCompleteMember(System.Int32,System.String,System.Boolean)">
+            <summary>
+            Override to change the look of each auto complete member drawn
+            </summary>
+            <param name="id"></param>
+            <param name="searchTerms"> the terms entered by the user (as one string)</param>
+            <param name="selected"> true if the currently selected id is this one </param>
+        </member>
+        <member name="T:MonKey.Editor.Internal.StaticCommandParameterAutoComplete">
+            <summary>
+            Generates an auto-complete interface based on a static set of values from a dictionary
+            </summary>
+        </member>
+        <member name="M:MonKey.Editor.Internal.MonkeyStyle.GetIconForFile(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MonKey.Editor.Commands.ConstrainUtilities.DistanceConstraintSceneCommand">
+            <summary>
+            Constrains a set of objects to respect a 
+            certain distance between each other
+            </summary>
+        </member>
+        <member name="T:MonKey.Editor.Commands.ConstrainUtilities.DistanceConstraintSceneCommand.ConstrainOperation">
+            <summary>
+            The Mathematical constrains that can be applied
+            </summary>
+        </member>
+        <member name="F:MonKey.Editor.Commands.ConstrainUtilities.DistanceConstraintSceneCommand.Reference">
+            <summary>
+            the objects that will be measured against the others
+            </summary>
+        </member>
+        <member name="F:MonKey.Editor.Commands.ConstrainUtilities.DistanceConstraintSceneCommand.Constrained">
+            <summary>
+            the objects that will be constrained
+            </summary>
+        </member>
+        <member name="F:MonKey.Editor.Commands.ConstrainUtilities.DistanceConstraintSceneCommand.BetweenEach">
+            <summary>
+            Should the constrained objects 
+            also respect the mathematical operation between each-other
+            </summary>
+        </member>
+        <member name="F:MonKey.Editor.Commands.ConstrainUtilities.DistanceConstraintSceneCommand.Operation">
+            <summary>
+            The mathematical operation to consider
+            </summary>
+        </member>
+        <member name="F:MonKey.Editor.Commands.ConstrainUtilities.DistanceConstraintSceneCommand.Value">
+            <summary>
+            Tthe value used for the mathematical operation
+            </summary>
+        </member>
+        <member name="M:MonKey.Editor.Commands.ConstrainUtilities.DistanceConstraintSceneCommand.#ctor(UnityEngine.GameObject,UnityEngine.GameObject[],MonKey.Editor.Commands.ConstrainUtilities.DistanceConstraintSceneCommand.ConstrainOperation,System.Boolean,System.Single)">
+            <summary>
+            
+            </summary>
+            <param name="reference"></param>
+            <param name="constrained"></param>
+            <param name="operation"></param>
+            <param name="betweenEach"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:MonKey.Editor.Commands.ConstrainUtilities.DistanceConstraintSceneCommand.Update">
+            <summary>
+            constrain logic
+            </summary>
+        </member>
+        <member name="M:MonKey.Editor.Commands.ConstrainUtilities.DistanceConstraintSceneCommand.Stop">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MonKey.Editor.Commands.ConstrainUtilities.LockTransformsSceneCommand.Stop">
+            <inheritdoc />
+        </member>
+        <member name="M:MonKey.Editor.Commands.ConstrainUtilities.LockPlaneSceneTransform.Update">
+            <inheritdoc />
+        </member>
+        <member name="M:MonKey.Editor.Commands.CreationUtilities.TypeAuto">
+            <summary>
+            creates an auto complete that returns all the component types attached to a gameobject
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MonKey.Editor.Commands.SceneCommand">
+            <summary>
+            A scene command is an interactive commands on the scene that updates automatically and stops its logic when required.
+            It can be started and stopped using the MonkeyEditorUtils class.
+            </summary>
+        </member>
+        <member name="F:MonKey.Editor.Commands.SceneCommand.StopOnPlayStateChange">
+            <summary>
+            Should the scene command stops when the editor enters or exit play
+            </summary>
+        </member>
+        <member name="F:MonKey.Editor.Commands.SceneCommand.SceneCommandName">
+            <summary>
+            The name of the command that will be displayed in the interface on MonKey
+            </summary>
+        </member>
+        <member name="E:MonKey.Editor.Commands.SceneCommand.OnActionDone">
+            <summary>
+            An event raised when the Scene Command has just stopped
+            </summary>
+        </member>
+        <member name="M:MonKey.Editor.Commands.SceneCommand.Stop">
+            <summary>
+            Any logic that should happen when the command stops (for instance registering undo) can be done here.
+            </summary>
+        </member>
+        <member name="M:MonKey.Editor.Commands.SceneCommand.Update">
+            <summary>
+            Called on every Unity Update in the editor
+            </summary>
+        </member>
+        <member name="M:MonKey.Editor.Commands.SceneCommand.OnSceneGUI">
+            <summary>
+            Called when the scene is focused and the MonKey GUI is called.
+            Unity Requires some logic to be called on GUI, and will thorw en error message if you don't.
+            </summary>
+        </member>
+        <member name="M:MonKey.Editor.Commands.SceneCommand.DisplayFloatOption(System.String,System.Single@)">
+            <summary>
+            Displays a Float parameter on the scene interface
+            </summary>
+            <param name="name"></param>
+            <param name="value"></param>
+            <returns> true if teh value was changed</returns>
+        </member>
+        <member name="M:MonKey.Editor.Commands.SelectionUtilities.PrintOrderedSelection">
+            <summary>
+            Test of ordered Selection
+            </summary>
+        </member>
+        <member name="P:MonKey.Editor.MonkeyEditorUtils.OrderedSelectedGameObjects">
+            <summary>
+            While Unity does not keep track of the order with which you selected objects, MonKey does.
+            This Enumerator can help you retrieve the first object, the last, or anything in between, which can be very useful for custom commands.
+            </summary>
+        </member>
+        <member name="P:MonKey.Editor.MonkeyEditorUtils.OrderedSelectedObjects">
+            <summary>
+            The ordered list of objects.
+            </summary>
+        </member>
+        <member name="P:MonKey.Editor.MonkeyEditorUtils.OrderedSelectedTransform">
+            <summary>
+            The ordered list of transforms.
+            Keep in mind that this follows the same logic as Unity's:
+            the transforms contained are only the uppermost selected: if you select a transform and some of its children,
+            on the parent will appear in that list.
+            </summary>
+        </member>
+        <member name="P:MonKey.Editor.MonkeyEditorUtils.MousePosition">
+            <summary>
+            Keeps a reference to the mouse position so that it may be accessed outside of a GUI call: this can be useful when creating scene commands.
+            </summary>
+        </member>
+        <member name="P:MonKey.Editor.MonkeyEditorUtils.MouseSceneRay">
+            <summary>
+            Returns a ray that goes from the mouse position onto the scene.
+            </summary>
+        </member>
+        <member name="M:MonKey.Editor.MonkeyEditorUtils.GetMouseRayCastedPosition(UnityEngine.Transform[],System.Single,System.Boolean@,UnityEngine.Vector3@,System.Boolean)">
+            <summary>
+            /Returns the raycasted position of the mouse on the scene,
+            with the possibility to ignore some objects and to apply an offset.
+            This method outputs the normal of the collision point as well.
+            </summary>
+            <param name="transformsToIgnore"> The objects to ignore when raycasting</param>
+            <param name="hitOffset">the offset relative to the hit point</param>
+            <param name="collision"> returns true if the ray found a collision</param>
+            <param name="normal"> returns the normal vector on the hit point</param>
+            <returns></returns>
+        </member>
+        <member name="P:MonKey.Editor.MonkeyEditorUtils.LastGlobalEvent">
+            <summary>
+            Keeps a reference to the last Event that was called on GUI, so that you may use it outside of GUI logics.
+            </summary>
+        </member>
+        <member name="P:MonKey.Editor.MonkeyEditorUtils.CurrentSceneView">
+            <summary>
+            Returns the currently focused scene view.
+            </summary>
+        </member>
+        <member name="M:MonKey.Editor.MonkeyEditorUtils.GetProjectWindowFocusedFolder">
+            <summary>
+            Returns the folder that is currently focused in the project window. Keep in mind that this is not the same as the selected folder.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MonKey.Editor.MonkeyEditorUtils.GetCommandInfo(System.String)">
+            <summary>
+             Returns the data structure of the command of the specified name.
+            CommandInfo contains all the information used by MonKey to display and execute the command.
+            </summary>
+            <param name="commandName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MonKey.Editor.MonkeyEditorUtils.AddCustomReservedHotKeys(System.String,System.String[])">
+            <summary>
+             If you want to associate reserved hotkeys that are used for something external to MonKey,
+            you can specify it here, and it will appear visible in the console when a conflict happens.
+            </summary>
+            <param name="commandName"></param>
+            <param name="hotKeys"></param>
+        </member>
+        <member name="M:MonKey.Editor.MonkeyEditorUtils.AddSceneCommand(MonKey.Editor.Commands.SceneCommand)">
+            <summary>
+             Adds a scene command to the active ones on the scene.
+            </summary>
+            <param name="command"></param>
+        </member>
+        <member name="M:MonKey.Editor.MonkeyEditorUtils.CallCommand(System.String)">
+            <summary>
+            Calls a command by its name as if it would be selected in the MonKey console.
+            </summary>
+            <param name="commandName"></param>
+        </member>
+        <member name="M:MonKey.Editor.MonkeyEditorUtils.CreateUndoGroup(System.String)">
+            <summary>
+            Makes it easier to collapse few undo operations at once. Returns an undoID that you must use together with Undo.CollapseOperation.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MonKey.Editor.MonkeyEditorUtils.IsKeyDown(UnityEngine.KeyCode)">
+            <summary>
+            A Utility to know if a key is pressed by the user, to be used within a GUI block.
+            </summary>
+            <param name="keyCode"></param>
+            <returns></returns>
+        </member>
+        <member name="E:MonKey.Editor.MonkeyEditorUtils.OnCommandLoadingDone">
+            <summary>
+             An event you can register to, it will be called once all the MonKey commands are loaded.
+            </summary>
+        </member>
+        <member name="M:MonKey.Editor.MonkeyEditorUtils.UnRegisterQuickName(System.String)">
+            <summary>
+            Removes the quick name specified from MonKey
+            </summary>
+            <param name="quickName"></param>
+        </member>
+        <member name="M:MonKey.Editor.MonkeyEditorUtils.UnRegisterCommand(System.String)">
+            <summary>
+            Removes the specified command from MonKey
+            </summary>
+            <param name="commandName"></param>
+        </member>
+        <member name="M:MonKey.Editor.DefaultValuesUtilities.DefaultActiveObject">
+            <summary>
+            Returns the active object from the selection
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MonKey.Internal.KeyCombination.#ctor(System.String[])">
+            <summary>
+            Create a key combination by specifying every key and special key that need to be hit
+            See documentation for aliases that can be used.
+            </summary>
+            <param name="keys"></param>
+        </member>
+        <member name="M:MonKey.Internal.KeyCombination.#ctor(System.String)">
+            <summary>
+            Creates a new Key Combination based on the symbols used by Menu Items
+            (see https://docs.unity3d.com/ScriptReference/MenuItem.html)
+            </summary>
+            <param name="combinedKeys"></param>
+        </member>
+        <member name="M:MonKey.Internal.EditorGUIExt.HandleCopyPaste(System.Int32)">
+            <summary>
+            Thanks to https://forum.unity.com/threads/how-to-copy-and-paste-in-a-custom-editor-textfield.261087/
+            Add copy-paste functionality to any text field
+            Returns changed text or NULL.
+            Usage: text = HandleCopyPaste (controlID) ?? text;
+            </summary>
+        </member>
+        <member name="M:MonKey.Internal.EditorGUIExt.TextField(System.String,System.String,UnityEngine.GUIStyle,UnityEngine.GUILayoutOption[])">
+            <summary>
+            Thanks to https://forum.unity.com/threads/how-to-copy-and-paste-in-a-custom-editor-textfield.261087/
+            TextField with copy-paste support
+            </summary>
+        </member>
+        <member name="M:MonKey.AbstractUndo`1.Register(`0[])">
+            <summary>
+            Registers objects 
+            before a long series of operation,
+             so that the undo can be registered 
+            until the state it was in before the operations
+            </summary>
+            <param name="valuesToRegister"></param>
+        </member>
+        <member name="M:MonKey.AbstractUndo`1.RecordUndo">
+            <summary>
+            Creates an undo when all the operations 
+            are done to make sure all the undo is properly collapse
+            You must create an Undo id 
+            and collapse it after calling this method though.
+            </summary>
+        </member>
+        <member name="T:MonKey.TransformUndo">
+            <summary>
+            Registers transforms before a series of movement
+            </summary>
+        </member>
+        <member name="M:MonKey.TransformUndo.Register(UnityEngine.Transform[])">
+            <summary>
+            
+            </summary>
+            <param name="valuesToRegister"></param>
+        </member>
+        <member name="M:MonKey.TransformUndo.RecordUndo">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>

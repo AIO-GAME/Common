@@ -1,0 +1,4044 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AIO.PrCourse</name>
+    </assembly>
+    <members>
+        <member name="T:AIO.Executor">
+            <summary>
+            执行器
+            </summary>
+        </member>
+        <member name="P:AIO.Executor.Info">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Executor.Pr">
+            <summary>
+            执行的进程
+            </summary>
+        </member>
+        <member name="P:AIO.Executor.Next">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Executor.IsRunning">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Executor.IsFinish">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Executor.inputs">
+            <summary>
+            输出信息
+            </summary>
+        </member>
+        <member name="M:AIO.Executor.GetAwaiter">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Executor.#ctor(System.Diagnostics.ProcessStartInfo@)">
+            <summary>
+            执行器
+            </summary>
+        </member>
+        <member name="M:AIO.Executor.Link(AIO.IExecutor@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Executor.Sync">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Executor.Async">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Executor.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Executor.Input(System.String@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Executor.Input(System.Collections.Generic.ICollection{System.String}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Executor.Input(System.String[])">
+            <inheritdoc/>
+        </member>
+        <member name="F:AIO.Executor.CallBack">
+            <summary>
+            回调
+            </summary>
+        </member>
+        <member name="F:AIO.Executor.Progress">
+            <summary>
+            回调
+            </summary>
+        </member>
+        <member name="M:AIO.Executor.OnComplete(System.Action{AIO.IResult}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Executor.OnProgress(System.Action{System.Object,System.Diagnostics.DataReceivedEventArgs}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Executor.ReceiveProgress(System.Object,System.Diagnostics.DataReceivedEventArgs)">
+            <summary>
+            回调
+            </summary>
+        </member>
+        <member name="T:AIO.PrCourse">
+            <summary>
+            进程构造器
+            </summary>
+        </member>
+        <member name="P:AIO.PrCourse.Info">
+            <inheritdoc/>
+        </member>
+        <member name="F:AIO.PrCourse.IsLog">
+            <summary>
+            开启日志
+            </summary>
+        </member>
+        <member name="F:AIO.PrCourse.IsCache">
+            <summary>
+            是否捕获异常
+            </summary>
+        </member>
+        <member name="F:AIO.PrCourse.encoding">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="M:AIO.PrCourse.#ctor">
+            <summary>
+            创建进程构造器
+            </summary>
+        </member>
+        <member name="M:AIO.PrCourse.Execute">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrCourse.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrCourse.SetInEncoding(System.Text.Encoding)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrCourse.SetRedirectInput(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrCourse.SetFileName(System.String@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrCourse.SetRedirectOutput(System.Boolean@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrCourse.SetRedirectError(System.Boolean@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrCourse.SetInArgs(System.Collections.Generic.ICollection{System.String}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrCourse.SetInArgs(System.String@,System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrCourse.SetInArgs(System.String@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrCourse.SetInDomain(System.String@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrCourse.SetInErrorDialog(System.Boolean@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrCourse.SetInLoadUserProfile(System.Boolean@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrCourse.SetUserName(System.String@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrCourse.SetInPassword(System.String@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrCourse.SetInUseShellExecute(System.Boolean@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrCourse.SetInCreateNoWindow(System.Boolean@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrCourse.SetInWindow(System.Diagnostics.ProcessWindowStyle@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrCourse.SetInVers(AIO.EPrVerb@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrCourse.SetWorkingDir(System.String@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrCourse.Kill">
+            <summary>
+            结当前进程
+            </summary>
+        </member>
+        <member name="M:AIO.PrCourse.Create``1(System.ValueTuple{System.String,System.String}@,System.String@,System.Object[])">
+            <summary>
+            创建
+            </summary>
+            <typeparam name="T">执行器类型</typeparam>
+            <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
+            <param name="format">Format:NoNull</param>
+            <param name="args">格式化参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrCourse.Create``1(System.ValueTuple{System.String,System.String}@,System.Text.StringBuilder@)">
+            <summary>
+            创建
+            </summary>
+            <typeparam name="T">执行器类型</typeparam>
+            <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
+            <param name="args">参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrCourse.Create``1(System.ValueTuple{System.String,System.String}@,System.String@)">
+            <summary>
+            创建
+            </summary>
+            <typeparam name="T">执行器类型</typeparam>
+            <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
+            <param name="args">参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrCourse.Create``1(System.ValueTuple{System.String,System.String}@,System.Collections.Generic.ICollection{System.String}@)">
+            <summary>
+            创建
+            </summary>
+            <typeparam name="T">执行器类型</typeparam>
+            <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
+            <param name="args">参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrCourse.Create``1(System.ValueTuple{System.String,System.String}@)">
+            <summary>
+            创建
+            </summary>
+            <typeparam name="T">执行器类型</typeparam>
+            <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>        
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrCourse.Create``1(System.String@,System.String@,System.Object[])">
+            <summary>
+            创建
+            </summary>
+            <typeparam name="T">执行器类型</typeparam>
+            <param name="cmd">CMD路径:NoNull</param>
+            <param name="format">Format:NoNull</param>
+            <param name="args">格式化参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrCourse.Create``1(System.String@,System.Collections.Generic.ICollection{System.String}@)">
+            <summary>
+            创建
+            </summary>
+            <typeparam name="T">执行器类型</typeparam>
+            <param name="cmd">CMD路径:NoNull</param>
+            <param name="args">格式化参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrCourse.Create``1(System.String@,System.String@)">
+            <summary>
+            创建
+            </summary>
+            <typeparam name="T">执行器类型</typeparam>
+            <param name="cmd">CMD路径:NoNull</param>
+            <param name="args">格式化参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrCourse.Create``1(System.String@,System.Text.StringBuilder@)">
+            <summary>
+            创建
+            </summary>
+            <typeparam name="T">执行器类型</typeparam>
+            <param name="cmd">CMD路径:NoNull</param>
+            <param name="args">格式化参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrCourse.Create``1(System.String@)">
+            <summary>
+            创建
+            </summary>
+            <typeparam name="T">执行器类型</typeparam>
+            <param name="cmd">CMD路径:NoNull</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="T:AIO.Result">
+            <summary>
+            执行结果
+            </summary>
+        </member>
+        <member name="P:AIO.Result.Pr">
+            <summary>
+            Process
+            </summary>
+        </member>
+        <member name="M:AIO.Result.Finish">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Result.Finish(System.String@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Result.Link(AIO.IResult@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Result.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Result.Next">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Result.Last">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Result.StdOut">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Result.StdError">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Result.StdALL">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Result.StdExited">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Result.StdDisposed">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Result.ExitCode">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Result.StartTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Result.ExitTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Result.UserProcessorTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Result.TotalProcessorTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Result.PrivilegedProcessorTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Result.BasePriority">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Result.SessionId">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Result.Id">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Result.Info">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Result.ReceivedOutput(System.Object,System.Diagnostics.DataReceivedEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Result.ReceivedError(System.Object,System.Diagnostics.DataReceivedEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Result.ReceivedExited(System.Object,System.EventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Result.ReceivedDisposed(System.Object,System.EventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="T:AIO.EPrVerb">
+            <summary>
+            打开方式
+            </summary>
+        </member>
+        <member name="F:AIO.EPrVerb.Edit">
+            <summary>
+            编辑
+            </summary>
+        </member>
+        <member name="F:AIO.EPrVerb.Open">
+            <summary>
+            打开
+            </summary>
+        </member>
+        <member name="F:AIO.EPrVerb.OpenAsReadOnly">
+            <summary>
+            打开只读
+            </summary>
+        </member>
+        <member name="F:AIO.EPrVerb.Print">
+            <summary>
+            打印
+            </summary>
+        </member>
+        <member name="F:AIO.EPrVerb.RunAs">
+            <summary>
+            Admin身份运行
+            </summary>
+        </member>
+        <member name="F:AIO.EPrVerb.RunAsUser">
+            <summary>
+            User身份运行
+            </summary>
+        </member>
+        <member name="T:AIO.Extend">
+            <summary>
+            扩展
+            </summary>
+        </member>
+        <member name="M:AIO.Extend.Debug(AIO.IResult)">
+            <summary>
+            输出日志
+            </summary>
+            <param name="ret">执行结果</param>
+            <exception cref="T:System.Exception">异常信息</exception>
+        </member>
+        <member name="T:AIO.IExecutorInternal">
+            <summary>
+            内部执行器
+            </summary>
+        </member>
+        <member name="P:AIO.IExecutorInternal.IsRunning">
+            <summary>
+            表示当前执行器是否正在执行。
+            </summary>
+        </member>
+        <member name="P:AIO.IExecutorInternal.IsFinish">
+            <summary>
+            表示当前执行器是否已经完成。
+            </summary>
+        </member>
+        <member name="P:AIO.IExecutorInternal.Next">
+            <summary>
+            表示下一个执行器
+            </summary>
+        </member>
+        <member name="T:AIO.IExecutor">
+            <summary>
+            执行器
+            </summary>
+        </member>
+        <member name="M:AIO.IExecutor.GetAwaiter">
+            <summary>
+            提供一个等待异步任务完成的对象
+            </summary>
+        </member>
+        <member name="M:AIO.IExecutor.Link(AIO.IExecutor@)">
+            <summary>
+            设置下一个
+            </summary>
+        </member>
+        <member name="M:AIO.IExecutor.Sync">
+            <summary>
+            同步运行
+            </summary>
+        </member>
+        <member name="M:AIO.IExecutor.Async">
+            <summary>
+            异步运行
+            </summary>
+        </member>
+        <member name="M:AIO.IExecutor.Input(System.String@)">
+            <summary>
+            将输入信息添加到当前执行器的输入信息队列中
+            </summary>
+            <param name="message">消息</param>
+        </member>
+        <member name="M:AIO.IExecutor.Input(System.Collections.Generic.ICollection{System.String}@)">
+            <summary>
+            将输入信息添加到当前执行器的输入信息队列中
+            </summary>
+            <param name="messages">消息</param>
+        </member>
+        <member name="M:AIO.IExecutor.Input(System.String[])">
+            <summary>
+            将输入信息添加到当前执行器的输入信息队列中
+            </summary>
+            <param name="messages">消息</param>
+        </member>
+        <member name="M:AIO.IExecutor.OnComplete(System.Action{AIO.IResult}@)">
+            <summary>
+            设置执行完毕后的回调方法
+            </summary>
+            <param name="action">回调</param>
+        </member>
+        <member name="M:AIO.IExecutor.OnProgress(System.Action{System.Object,System.Diagnostics.DataReceivedEventArgs}@)">
+            <summary>
+            进度执行回调
+            </summary>
+        </member>
+        <member name="T:AIO.IPrCourseRead">
+            <summary>
+            进程构造器 只读
+            </summary>
+        </member>
+        <member name="P:AIO.IPrCourseRead.Info">
+            <summary>
+            ProcessStartInfo类型的属性，表示启动进程所需的信息。
+            </summary>
+        </member>
+        <member name="T:AIO.IPrCourse">
+            <summary>
+            进程构造器
+            </summary>
+        </member>
+        <member name="M:AIO.IPrCourse.Execute">
+            <summary>
+            生成执行器
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.IPrCourse.SetFileName(System.String@)">
+            <summary>
+            执行文件路径
+            </summary>
+            <param name="target"></param>
+            <returns>构造器</returns>
+        </member>
+        <member name="M:AIO.IPrCourse.SetRedirectOutput(System.Boolean@)">
+            <summary>
+            是否开启日志输出
+            </summary>
+            <returns>构造器</returns>
+        </member>
+        <member name="M:AIO.IPrCourse.SetRedirectError(System.Boolean@)">
+            <summary>
+            是否开启错误输出
+            </summary>
+            <returns>构造器</returns>
+        </member>
+        <member name="M:AIO.IPrCourse.SetInArgs(System.Collections.Generic.ICollection{System.String}@)">
+            <summary>
+            设置参数
+            </summary>
+            <returns>构造器</returns>
+        </member>
+        <member name="M:AIO.IPrCourse.SetInArgs(System.String@)">
+            <summary>
+            设置参数
+            </summary>
+            <param name="args"></param>
+            <returns>构造器</returns>
+        </member>
+        <member name="M:AIO.IPrCourse.SetInArgs(System.String@,System.Object[])">
+            <summary>
+            设置参数
+            </summary>
+            <returns>构造器</returns>
+        </member>
+        <member name="M:AIO.IPrCourse.SetInDomain(System.String@)">
+            <summary>
+            默认为当前应用程序范围
+            </summary>
+            <returns>构造器</returns>
+        </member>
+        <member name="M:AIO.IPrCourse.SetInErrorDialog(System.Boolean@)">
+            <summary>
+            是否显示错误对话框
+            </summary>
+            <returns>构造器</returns>
+        </member>
+        <member name="M:AIO.IPrCourse.SetInLoadUserProfile(System.Boolean@)">
+            <summary>
+            是否加载用户配置文件
+            </summary>
+            <returns>构造器</returns>
+        </member>
+        <member name="M:AIO.IPrCourse.SetUserName(System.String@)">
+            <summary>
+            设置用户名
+            </summary>
+            <returns>构造器</returns>
+        </member>
+        <member name="M:AIO.IPrCourse.SetInPassword(System.String@)">
+            <summary>
+            设置密码
+            </summary>
+            <returns>构造器</returns>
+        </member>
+        <member name="M:AIO.IPrCourse.SetInUseShellExecute(System.Boolean@)">
+            <summary>
+            设置执行方式
+            </summary>
+            true  : 指执行方式是系统执行 相当于用户双击文件，此时FileName不限于可执行文件(.exe)，例如网址，bat文件均可；
+            false : 程序创建进程 程序使用CreateProcess来创建进程，对进程的控制更多，但FileName必须是可执行文件(.exe)。
+            <returns>构造器</returns>
+        </member>
+        <member name="M:AIO.IPrCourse.SetInCreateNoWindow(System.Boolean@)">
+            <summary>
+            创建新窗口
+            </summary>
+            UseShellExecute = true  该值无效
+            UseShellExecute = false；CreateNoWindow = true 控制台无法显示 无法窗口关闭
+            <returns>构造器</returns>
+        </member>
+        <member name="M:AIO.IPrCourse.SetInWindow(System.Diagnostics.ProcessWindowStyle@)">
+            <summary>
+            用于设置GUI程序的窗口。对控制台程序无效。
+            </summary>
+            <returns>构造器</returns>
+        </member>
+        <member name="M:AIO.IPrCourse.SetInVers(AIO.EPrVerb@)">
+            <summary>
+            Verb控制
+            </summary>
+            文件的右键菜单里，除了“打开”，根据文件的不同还会出现“打印”，“编辑”，“以管理员身份运行”等选项，Verb控制的就是这个选项。
+            <returns>构造器</returns>
+        </member>
+        <member name="M:AIO.IPrCourse.SetWorkingDir(System.String@)">
+            <summary>
+            Verb控制
+            </summary>
+            文件的右键菜单里，除了“打开”，根据文件的不同还会出现“打印”，“编辑”，“以管理员身份运行”等选项，Verb控制的就是这个选项。
+            <returns>构造器</returns>
+        </member>
+        <member name="M:AIO.IPrCourse.SetInEncoding(System.Text.Encoding)">
+            <summary>
+            设置编码
+            </summary>
+            <returns>构造器</returns>
+        </member>
+        <member name="M:AIO.IPrCourse.SetRedirectInput(System.Boolean)">
+            <summary>
+            输入 开启
+            </summary>
+            <returns>构造器</returns>
+        </member>
+        <member name="T:AIO.IResultInternal">
+            <summary>
+            执行结果 内部类
+            </summary>
+        </member>
+        <member name="M:AIO.IResultInternal.Finish">
+            <summary>
+            完成
+            </summary>
+        </member>
+        <member name="M:AIO.IResultInternal.Finish(System.String@)">
+            <summary>
+            完成
+            </summary>
+        </member>
+        <member name="P:AIO.IResultInternal.Info">
+            <summary>
+            执行文件
+            </summary>
+        </member>
+        <member name="M:AIO.IResultInternal.ReceivedOutput(System.Object,System.Diagnostics.DataReceivedEventArgs)">
+            <summary>
+            输出回调
+            </summary>
+        </member>
+        <member name="M:AIO.IResultInternal.ReceivedError(System.Object,System.Diagnostics.DataReceivedEventArgs)">
+            <summary>
+            错误回调
+            </summary>
+        </member>
+        <member name="M:AIO.IResultInternal.ReceivedExited(System.Object,System.EventArgs)">
+            <summary>
+            退出回调
+            </summary>
+        </member>
+        <member name="M:AIO.IResultInternal.ReceivedDisposed(System.Object,System.EventArgs)">
+            <summary>
+            释放回调
+            </summary>
+        </member>
+        <member name="P:AIO.IResultInternal.BasePriority">
+            <summary>
+            获取关联进程的基本优先级
+            </summary>
+        </member>
+        <member name="P:AIO.IResultInternal.SessionId">
+            <summary>
+            获取关联进程的终端服务会话标识符。
+            </summary>
+        </member>
+        <member name="P:AIO.IResultInternal.Id">
+            <summary>
+            获取关联进程的唯一标识符。
+            </summary>
+        </member>
+        <member name="T:AIO.IResult">
+            <summary>
+            执行结果
+            </summary>
+        </member>
+        <member name="P:AIO.IResult.Next">
+            <summary>
+            下一个
+            </summary>
+        </member>
+        <member name="P:AIO.IResult.Last">
+            <summary>
+            上一个
+            </summary>
+        </member>
+        <member name="M:AIO.IResult.Link(AIO.IResult@)">
+            <summary>
+            链接
+            </summary>
+        </member>
+        <member name="P:AIO.IResult.StdOut">
+            <summary>
+            输出信息
+            </summary>
+        </member>
+        <member name="P:AIO.IResult.StdError">
+            <summary>
+            错误信息
+            </summary>
+        </member>
+        <member name="P:AIO.IResult.StdExited">
+            <summary>
+            退出信息
+            </summary>
+        </member>
+        <member name="P:AIO.IResult.StdDisposed">
+            <summary>
+            释放信息
+            </summary>
+        </member>
+        <member name="P:AIO.IResult.StdALL">
+            <summary>
+            全部信息
+            </summary>
+        </member>
+        <member name="P:AIO.IResult.ExitCode">
+            <summary>
+            退出码
+            </summary>
+        </member>
+        <member name="P:AIO.IResult.StartTime">
+            <summary>
+            任务开始时间
+            </summary>
+        </member>
+        <member name="P:AIO.IResult.ExitTime">
+            <summary>
+            任务结束时间
+            </summary>
+        </member>
+        <member name="P:AIO.IResult.TotalProcessorTime">
+            <summary>
+            获取此进程的总的处理器时间。
+            </summary>
+        </member>
+        <member name="P:AIO.IResult.UserProcessorTime">
+            <summary>
+            获取此进程的用户处理器时间。
+            </summary>
+        </member>
+        <member name="P:AIO.IResult.PrivilegedProcessorTime">
+            <summary>
+            获取此进程的特权处理器时间。
+            </summary>
+        </member>
+        <member name="T:AIO.PrGit">
+            <summary>
+            Git[WIN][MAC][LINUX]
+            </summary>
+            <summary>
+            Git[WIN][MAC][LINUX]
+            </summary>
+            <summary>
+            Git[WIN][MAC][LINUX]
+            </summary>
+            <summary>
+            Git[WIN][MAC][LINUX]
+            </summary>
+            <summary>
+            Push
+            </summary>
+        </member>
+        <member name="T:AIO.PrGit.Add">
+            <summary>
+            添加命令
+            usage: git add [(options)] [--] (pathspec)...
+            -n, --dry-run         dry run
+            -v, --verbose         be verbose
+            -i, --interactive     interactive picking
+            -p, --patch           select hunks interactively
+            -e, --edit            edit current diff and apply
+            -f, --force           allow adding otherwise ignored files
+            -u, --update          update tracked files
+            --renormalize         renormalize EOL of tracked files (implies -u)
+            -N, --intent-to-add   record only the fact that the path will be added later
+            -A, --all             add changes from all tracked and untracked files
+            --ignore-removal      ignore paths removed in the working tree (same as --no-all)
+            --refresh             don't add, only refresh the index
+            --ignore-errors       just skip files which cannot be added because of errors
+            --ignore-missing      check if - even missing - files are ignored in dry run
+            --sparse              allow updating entries outside of the sparse-checkout cone
+            --chmod (+|-)x        override the executable bit of the listed files
+            --pathspec-from-file (file)
+                                  read pathspec from file
+            --pathspec-file-nul   with --pathspec-from-file, pathspec elements are separated with NUL character
+            </summary>
+        </member>
+        <member name="M:AIO.PrGit.Add.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Add.ALL(System.String@)">
+            <summary>
+            添加所有文件
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.PrGit.Add.ALLWithV(System.String@)">
+            <summary>
+            添加所有文件 并显示详细信息
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.PrGit.Add.ALLWithN(System.String@)">
+            <summary>
+            列出文件
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.PrGit.Add.ALLWithVP(System.String@)">
+            <summary>
+            添加所有文件 并显示详细信息 并显示详细进度
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.PrGit.Add.ALLWithU(System.String@)">
+            <summary>
+            添加所有文件 并更新
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <returns></returns>
+        </member>
+        <member name="T:AIO.PrGit.Checkout">
+            <summary>
+            切换检出
+            </summary>
+        </member>
+        <member name="M:AIO.PrGit.Checkout.Execute(System.String@,System.String@)">
+            <summary>
+            Checkout 参数
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Checkout.Branch(System.String@,System.String@)">
+            <summary>
+            切换分支
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="branchName">分支</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrGit.Clean">
+            <summary>
+            清理命令
+            usage: git clean [-d] [-f] [-i] [-n] [-q] [-e (pattern)] [-x | -X] [--] (paths)...
+            -q, --quiet           do not print names of files removed
+            -n, --dry-run         dry run
+            -f, --force           force
+            -i, --interactive     interactive cleaning
+            -d                    remove whole directories
+            -e, --exclude pattern()
+            add (pattern) to ignore rules
+            -x                    remove ignored files, too  被忽略的文件也删除
+            -X                    remove only ignored files  只删被忽略的文件
+            </summary>
+        </member>
+        <member name="M:AIO.PrGit.Clean.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Clean.DryRun(System.String@)">
+            <summary>
+            显示被清理的文件
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Clean.DryRunDirectory(System.String@)">
+            <summary>
+            显示被清理的文件
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Clean.Directory(System.String@)">
+            <summary>
+            删除整个目录
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Clean.DirectoryWithExclude(System.String@,System.Collections.Generic.ICollection{System.String}@)">
+            <summary>
+            删除整个目录
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="exclude">排除文件列表</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Clean.DirectoryWithExclude(System.String@,System.String@)">
+            <summary>
+            删除整个目录
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="exclude">排除文件列表</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Clean.Force(System.String@,System.String@)">
+            <summary>
+            强制删除
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="path">路径</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Clean.ForceDirectory(System.String@)">
+            <summary>
+            强制删除整个目录
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Clean.ForceDirectoryWithExclude(System.String@,System.String@)">
+            <summary>
+            强制删除整个目录
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="exclude">排除文件列表</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Clean.ForceDirectoryWithExclude(System.String@,System.Collections.Generic.ICollection{System.String}@)">
+            <summary>
+            强制删除整个目录
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="exclude">排除文件列表</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Clean.ForceDirectoryX(System.String@)">
+            <summary>
+            强制删除整个目录
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Clean.ForceDirectoryx(System.String@)">
+            <summary>
+            强制删除整个目录
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrGit.Clone">
+            <summary>
+            克隆
+            </summary>
+        </member>
+        <member name="M:AIO.PrGit.Clone.Branch(System.String@,System.String@,System.String@)">
+            <summary>
+            克隆指定分支
+            </summary>
+            <param name="wrok">目标文件夹</param>
+            <param name="url">clone列表</param>
+            <param name="branch">分支</param>
+        </member>
+        <member name="M:AIO.PrGit.Clone.Default(System.String@,System.String@)">
+            <summary>
+            克隆默认分支
+            </summary>
+            <param name="wrok">目标文件夹</param>
+            <param name="url">clone列表</param>
+        </member>
+        <member name="M:AIO.PrGit.Clone.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrGit.Commit">
+            <summary>
+            提交
+            </summary>
+        </member>
+        <member name="M:AIO.PrGit.Commit.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Commit.Default(System.String,System.String)">
+            <summary>
+            Checkout 参数
+            </summary>
+            <param name="target">GIT 文件夹</param>
+            <param name="message">消息</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrGit.Init">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:AIO.PrGit.Init.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrGit.Pull">
+            <summary>
+            拉取
+            </summary>
+        </member>
+        <member name="M:AIO.PrGit.Pull.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Pull.Update(System.String@)">
+            <summary>
+            拉取
+            </summary>
+            <param name="work">工作文件夹</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Pull.UpdateWithALL(System.String@,System.String@)">
+            <summary>
+            拉取指定分支
+            </summary>
+            <param name="work">工作文件夹</param>
+            <param name="branch">远端分支</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Pull.UpdateWithBranch(System.String@,System.String@)">
+            <summary>
+            拉取指定分支
+            </summary>
+            <param name="work">工作文件夹</param>
+            <param name="branch">远端分支</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrGit.Remote">
+            <summary>
+            远端
+            </summary>
+        </member>
+        <member name="M:AIO.PrGit.Remote.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Remote.ListName(System.String@)">
+            <summary>
+            获取远端库
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Remote.ListNameAll(System.String@)">
+            <summary>
+            获取远端库
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Remote.Add(System.String@,System.String@,System.String@)">
+            <summary>
+            添加远端库
+            </summary>
+            <param name="work">Git 库</param>
+            <param name="remoteName">远端名</param>
+            <param name="url">远端路径</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Remote.SetUrlAdd(System.String@,System.String@,System.String@)">
+            <summary>
+            远端库 添加指定远端关联库
+            </summary>
+            <param name="work">Git 库</param>
+            <param name="remoteName">远端名</param>
+            <param name="url">远端路径</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Remote.SetUrlDel(System.String@,System.String@,System.String@)">
+            <summary>
+            远端库 删除指定远端关联库
+            </summary>
+            <param name="work">Git 库</param>
+            <param name="remoteName">远端名</param>
+            <param name="url">远端路径</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Remote.Remove(System.String@,System.String@)">
+            <summary>
+            远端库 删除远端库
+            </summary>
+            <param name="work">Git 库</param>
+            <param name="remoteName">远端名</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Remote.Remove(System.String@,System.String@,System.String@)">
+            <summary>
+            远端库 重命名远端库
+            </summary>
+            <param name="work">Git 库</param>
+            <param name="oldRemoteName">老</param>
+            <param name="newRemoteName">新</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrGit.Submodule">
+            <summary>
+            子模块
+            </summary>
+        </member>
+        <member name="M:AIO.PrGit.Submodule.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Submodule.UpdateWithALL(System.String@)">
+            <summary>
+            更新所有子模块
+            </summary>
+        </member>
+        <member name="M:AIO.PrGit.Upload(System.String,System.String)">
+            <summary>
+            上传 只支持最简单的操作
+            </summary>
+            <param name="target">GIT 文件夹</param>
+            <param name="commitData">提交信息</param>
+            <returns></returns>
+        </member>
+        <member name="F:AIO.PrGit.CMD">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.PrGit.Execute">
+            <summary>
+            运行
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.PrGit.Create(System.String@,System.String@,System.Object[])">
+            <summary>
+            创建
+            </summary>
+            <param name="work">工作路径:NoNull</param>                      
+            <param name="format">Format:NoNull</param>
+            <param name="args">格式化参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Create(System.String@,System.Text.StringBuilder@)">
+            <summary>
+            创建
+            </summary>
+            <param name="work">工作路径:NoNull</param>                   
+            <param name="args">参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Create(System.String@,System.String@)">
+            <summary>
+            创建
+            </summary>
+            <param name="work">工作路径:NoNull</param>             
+            <param name="args">参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Create(System.String@,System.Collections.Generic.ICollection{System.String}@)">
+            <summary>
+            创建
+            </summary>
+            <param name="work">工作路径:NoNull</param>                          
+            <param name="args">参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Create(System.String@)">
+            <summary>
+            创建
+            </summary>
+            <param name="work">工作路径:NoNull</param>            
+            <returns>结果执行器</returns>
+        </member>
+        <member name="T:AIO.PrGit.Branch">
+            <summary>
+            Branch
+            </summary>
+        </member>
+        <member name="M:AIO.PrGit.Branch.GetList(System.String@)">
+            <summary>
+            获取目标GIT库的分支列表
+            </summary>
+            <param name="work">Git文件夹</param>
+        </member>
+        <member name="M:AIO.PrGit.Branch.DelLocal(System.String@,System.String@,System.Boolean@)">
+            <summary>
+            删除指定本地分支
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="branch">分支</param>
+            <param name="isForce">是否强制删除 Ture:强制 False:不强制</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Branch.DelOrigin(System.String@,System.String@)">
+            <summary>
+            删除指定远端分支
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="branch">分支</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Branch.Create(System.String@,System.String@)">
+            <summary>
+            创建指定分支
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="branch">分支</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Branch.CurReName(System.String@,System.String@)">
+            <summary>
+            对当前分支重命名
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="branchName">分支</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Branch.Execute(System.String@,System.String@)">
+            <summary>
+            Branch 参数
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrGit.Push">
+            <summary>
+            拉取
+            </summary>
+        </member>
+        <member name="M:AIO.PrGit.Push.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Push.Update(System.String@)">
+            <summary>
+            push 参数
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrMac">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:AIO.PrMac.Cal">
+            <summary>
+            显示日历
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Cal.Execute(System.String)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="T:AIO.PrMac.Ln">
+            <summary>
+            显示系统的当前日期和时间
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Ln.Execute(System.String)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Ln.Execute">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="T:AIO.PrMac.Time">
+            <summary>
+            获取程序的执行时间
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Time.Execute(System.String)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="T:AIO.PrMac.Cat">
+            <summary>
+            文件查看相关命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Cat.Execute(System.String)">
+            <summary>
+            执行cat命令
+            </summary>
+            <param name="args">cat命令参数</param>
+            <returns>命令执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Cat.ViewFile(System.String[])">
+            <summary>
+            查看文件内容
+            </summary>
+            <param name="paths">文件路径</param>
+            <returns>命令执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Cat.ShowNonprinting(System.String[])">
+            <summary>
+            显示不可打印字符
+            </summary>
+            <param name="paths">文件路径</param>
+            <returns>命令执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Cat.ShowAll(System.String[])">
+            <summary>
+            显示所有字符（包括行尾符）
+            </summary>
+            <param name="paths">文件路径</param>
+            <returns>命令执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Cat.NumberLines(System.String[])">
+            <summary>
+            显示行号
+            </summary>
+            <param name="paths">文件路径</param>
+            <returns>命令执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Cat.NumberNonblankLines(System.String[])">
+            <summary>
+            只显示非空行的行号
+            </summary>
+            <param name="paths">文件路径</param>
+            <returns>命令执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Cat.ShowEnds(System.String[])">
+            <summary>
+            在行尾显示$符号
+            </summary>
+            <param name="paths">文件路径</param>
+            <returns>命令执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Cat.ShowTabs(System.String[])">
+            <summary>
+            将制表符显示为^I
+            </summary>
+            <param name="paths">文件路径</param>
+            <returns>命令执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Cat.ShowLineEndings(System.String[])">
+            <summary>
+            显示行尾符为$
+            </summary>
+            <param name="paths">文件路径</param>
+            <returns>命令执行器</returns>
+        </member>
+        <member name="T:AIO.PrMac.DirCmp">
+            <summary>
+            文件夹比较相关命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.DirCmp.CompareDirectories(System.String,System.String)">
+            <summary>
+            创建比较两个目录的命令行执行器
+            </summary>
+            <param name="path1">第一个目录的路径</param>
+            <param name="path2">第二个目录的路径</param>
+            <returns>执行器实例</returns>
+        </member>
+        <member name="M:AIO.PrMac.DirCmp.ShowDifferences(System.String,System.String)">
+            <summary>
+            比较两个目录的不同之处
+            </summary>
+            <param name="path1">第一个目录的路径</param>
+            <param name="path2">第二个目录的路径</param>
+            <returns>执行器实例</returns>
+        </member>
+        <member name="M:AIO.PrMac.DirCmp.ShowDetailedDifferences(System.String,System.String)">
+            <summary>
+            比较两个目录，输出详细的比较结果
+            </summary>
+            <param name="path1">第一个目录的路径</param>
+            <param name="path2">第二个目录的路径</param>
+            <returns>执行器实例</returns>
+        </member>
+        <member name="T:AIO.PrMac.Cp">
+            <summary>
+            复制
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Cp.Execute(System.String)">
+            <summary>
+            复制
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Cp.Execute(System.String,System.String,System.String)">
+            <summary>
+            复制
+            </summary>
+            <param name="source">源路径</param>
+            <param name="target">目标路径</param>
+            <param name="command">参数</param>
+        </member>
+        <member name="T:AIO.PrMac.In">
+            <summary>
+            联接文件
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.In.Execute(System.String,System.String,System.String)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.In.Execute(System.String)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="T:AIO.PrMac.Mkdir">
+            <summary>
+            目录相关命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Mkdir.Directory(System.String)">
+            <summary>
+            创建目录
+            </summary>
+            <param name="target">目标路径</param>
+        </member>
+        <member name="M:AIO.PrMac.Mkdir.Directory(System.String,System.String)">
+            <summary>
+            创建目录并设置权限
+            </summary>
+            <param name="target">目标路径</param>
+            <param name="permissions">目录权限 chmod中的权限</param>
+        </member>
+        <member name="M:AIO.PrMac.Mkdir.Move(System.String,System.String)">
+            <summary>
+            移动目录或重命名目录
+            </summary>
+            <param name="source">源目录路径</param>
+            <param name="target">目标目录路径</param>
+        </member>
+        <member name="M:AIO.PrMac.Mkdir.Permissions(System.String,System.String)">
+            <summary>
+            创建目录并设置权限
+            </summary>
+            <param name="target">目标路径</param>
+            <param name="permissions">目录权限 chmod中的权限</param>
+        </member>
+        <member name="T:AIO.PrMac.Move">
+            <summary>
+            改变文件名 或 所在目录
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Move.Execute(System.String,System.String)">
+            <summary>
+            改变文件名 或 所在目录
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Move.Execute(System.String,System.String,System.String)">
+            <summary>
+            改变文件名 或 所在目录
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Move.Execute(System.String)">
+            <summary>
+            改变文件名 或 所在目录
+            </summary>
+        </member>
+        <member name="T:AIO.PrMac.Nl">
+            <summary>
+            给文件加上行号
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Nl.Execute(System.String,System.String)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="T:AIO.PrMac.Open">
+            <summary>
+            打开指令
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Open.Path(System.String@)">
+            <summary>
+            打开文件
+            </summary>
+            <param name="target">目标路径</param>
+        </member>
+        <member name="M:AIO.PrMac.Open.Shell(System.String@)">
+            <summary>
+            用shell默认程序打开文件
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Open.URL(System.String@,System.String@)">
+            <summary>
+            打开网页
+            </summary>
+        </member>
+        <member name="T:AIO.PrMac.OsaScript">
+            <summary>
+            Bundle ID
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.OsaScript.BundleID(System.String)">
+            <summary>
+            执行查询Bundle ID
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.OsaScript.BundleID(System.String,System.String)">
+            <summary>
+            执行查询Bundle ID
+            </summary>
+        </member>
+        <member name="T:AIO.PrMac.Chmod">
+            <summary>
+            权限相关类
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Chmod.Set(System.String@,System.Int32)">
+            <summary>
+            设置权限的方法
+            </summary>
+            <param name="target">目标文件的路径</param>
+            <param name="args">需要设置的权限</param>
+            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Chmod.Set(System.String@,System.String)">
+            <summary>
+            设置权限的方法
+            </summary>
+            <param name="target">目标文件的路径</param>
+            <param name="args">需要设置的权限</param>
+            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Chmod.AddRWX(System.String@)">
+            <summary>
+            为目标文件添加读、写、执行权限的方法
+            </summary>
+            <param name="target">目标文件的路径</param>
+            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Chmod.SubRWX(System.String@)">
+            <summary>
+            为目标文件减少读、写、执行权限的方法
+            </summary>
+            <param name="target">目标文件的路径</param>
+            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Chmod.AddAW(System.String@)">
+            <summary>
+            为目标文件添加追加权限的方法
+            </summary>
+            <param name="target">目标文件的路径</param>
+            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Chmod.SubAW(System.String@)">
+            <summary>
+            为目标文件减少追加权限的方法
+            </summary>
+            <param name="target">目标文件的路径</param>
+            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Chmod.Set777(System.String@)">
+            <summary>
+            为目标文件设置权限 777
+            </summary>
+            <param name="target">目标文件的路径</param>
+            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Chmod.Set755(System.String@)">
+            <summary>
+            为目标文件设置权限 rwxr-xr-x 
+            </summary>
+            <param name="target">目标文件的路径</param>
+            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
+        </member>
+        <member name="T:AIO.PrMac.Rm">
+            <summary>
+            提供文件和目录操作的静态方法，仅在 Mac 和 Unix 上运行。
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Rm.File(System.String@)">
+            <summary>
+            删除指定文件，谨慎使用，使用前请先测试。
+            </summary>
+            <param name="target">要删除的文件路径。</param>
+            <returns>如果成功删除文件，返回空的 IExecutor 对象；如果文件不存在，返回包含异常信息的 IExecutor 对象。</returns>
+        </member>
+        <member name="M:AIO.PrMac.Rm.Directory(System.String@)">
+            <summary>
+            删除指定目录及其下所有文件和子目录。
+            </summary>
+            <param name="target">要删除的目录路径。</param>
+            <returns>如果成功删除目录，返回空的 IExecutor 对象；如果目录不存在，返回包含异常信息的 IExecutor 对象。</returns>
+        </member>
+        <member name="M:AIO.PrMac.Rm.Execute(System.String@)">
+            <summary>
+            在当前进程中执行指定的命令行。
+            </summary>
+            <param name="args">要执行的命令行参数。</param>
+            <returns>返回包含执行结果的 IExecutor 对象。</returns>
+        </member>
+        <member name="T:AIO.PrMac.Touch">
+            <summary>
+            更新文件的访问和修改时间
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Touch.Execute(System.String,System.String)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="T:AIO.PrMac.Uniq">
+            <summary>
+            去掉文件中的重复行
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Uniq.Execute(System.String,System.String,System.String)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Uniq.Execute(System.String,System.String)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Which(System.String)">
+            <summary>
+            查询软件
+            </summary>
+        </member>
+        <member name="T:AIO.PrMac.Ftp">
+            <summary>
+            在本地主机与远程主机之间传输文件
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Ftp.Execute(System.String)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="T:AIO.PrMac.Mail">
+            <summary>
+            阅读和发送电子邮件
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Mail.Execute(System.String)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="T:AIO.PrMac.Mesg">
+            <summary>
+            允许或拒绝接收报文
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Mesg.Execute(System.String)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="T:AIO.PrMac.Ping">
+            <summary>
+            给一个网络主机发送回应请求
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Ping.Execute(System.String)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="T:AIO.PrMac.Rcp">
+            <summary>
+            在本地主机与远程主机之间复制文件
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Rcp.Execute(System.String)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="T:AIO.PrMac.Rlogin">
+            <summary>
+            远程登录
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Rlogin.Execute(System.String)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="T:AIO.PrMac.Rsh">
+            <summary>
+            远程登录
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Rsh.Execute(System.String)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="T:AIO.PrMac.Telnet">
+            <summary>
+            远程登录
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Telnet.Execute(System.String)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="T:AIO.PrMac.Write">
+            <summary>
+            给另一用户发送报文
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Write.Execute(System.String)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="T:AIO.PrMac.Brew">
+            <summary>
+            安装命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Brew.Install(System.String)">
+            <summary>
+            安装包
+            </summary>
+            <param name="package">包名</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="T:AIO.PrMac.Duti">
+            <summary>
+            Mac 设置默认打开程序
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Duti.DefaultPrograms(System.String,System.String,System.String)">
+            <summary>
+            修改指定类型文件默认打开方式
+            </summary>
+            <param name="appName">Bundle ID</param>
+            <param name="uti">UTI类型</param>
+            <param name="role">文件角色:all,viewer,editor,shell,none</param>
+        </member>
+        <member name="T:AIO.PrMac.Kills">
+            <summary>
+            进程相关类
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Kills.Execute(System.String)">
+            <summary>
+            关闭指定进程
+            </summary>
+        </member>
+        <member name="T:AIO.PrMac.Ps">
+            <summary>
+            显示进程当前状态
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Ps.Execute(System.String)">
+            <summary>
+            显示进程当前状态
+            </summary>
+        </member>
+        <member name="T:AIO.PrMac.Security">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.PrMac.Security.CMS(System.String)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:AIO.PrMac.Sudo">
+            <summary>
+            最高权限运行
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Sudo.Execute(System.String)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="T:AIO.PrMac.Xcode">
+            <summary>
+            Xcode 进程命令
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.Xcode.Format_Clean">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.Xcode.Format_iBTool">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.Xcode.Format_ShowBuildSettings">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.Xcode.Format_Archive">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.Xcode.Format_ExportArchive">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.Xcode.Format_Test">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.Xcode.Format_TestCacheBuilding">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Xcode.Clean(System.String,AIO.Configuration)">
+            <summary>
+            清空
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Xcode.Archive(System.String,System.String,System.String,System.String,AIO.Configuration,System.String,System.Boolean)">
+            <summary>
+            打包
+            </summary>
+            <param name="project">项目路径</param>
+            <param name="scheme">项目名称</param>
+            <param name="workspace">项目名称.xcworkspace</param>
+            <param name="archivePath">Archive包存储路径</param>
+            <param name="configuration">构建配置</param>
+            <param name="sdkName"></param>
+            <param name="quiet"></param>
+        </member>
+        <member name="M:AIO.PrMac.Xcode.ArchiveExport(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            导出IPA
+            </summary>
+            <param name="archivePath">archive生成的产物路径</param>
+            <param name="exportPath">要导出ipa的路径</param>
+            <param name="exportOptionsPlist">导出时的配置信息路径</param>
+            <param name="allowProvisioningUpdates">允许xcodebuild与苹果网站通讯，进行自动签名，证书自动更新，生成。</param>
+        </member>
+        <member name="M:AIO.PrMac.Xcode.Test(System.String,System.String,AIO.Configuration,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            导出IPA
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Xcode.TestCacheBuilding(System.String,System.String,System.String,System.String)">
+            <summary>
+            UI测试/单元测试
+            </summary>
+            不进行代码编译，利用上次编译的缓存（包括工程编译+测试用例编译），进行重新跑测试。
+        </member>
+        <member name="M:AIO.PrMac.Xcode.Genstrings(System.String,System.String)">
+            <summary>
+            本地化命令
+            </summary>
+            <see url="https://www.jianshu.com/p/ecfab7e13aba"/>
+            本地化命令，根据指定的C/Object-C源文件生成.strings文件。
+        </member>
+        <member name="M:AIO.PrMac.Xcode.iBTool(System.String,System.String)">
+            <summary>
+            本地化命令
+            </summary>
+            本地化命令，作用于xib文件。
+        </member>
+        <member name="M:AIO.PrMac.Xcode.ShowBuildSettings(System.String,AIO.Configuration)">
+            <summary>
+            查看项目设置
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Xcode.ShellCommand">
+            <summary>
+            Shell 命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Xcode.GetCleanShellCommand(System.String,System.String)">
+            <summary>
+            获取清空指令
+            </summary>
+            <param name="project">.xcodeproj文件 路径</param>
+            <param name="configuration">构建类型</param>
+            <returns>Command</returns>
+        </member>
+        <member name="M:AIO.PrMac.Xcode.GetArchiveExportShellCommand(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            导出IPA
+            </summary>
+            <param name="archivePath">archive生成的产物路径</param>
+            <param name="exportPath">要导出ipa的路径</param>
+            <param name="exportOptionsPlist">导出时的配置信息路径</param>
+            <param name="allowProvisioningUpdates"></param>
+        </member>
+        <member name="M:AIO.PrMac.Xcode.GetArchiveShellCommand(System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            打包
+            </summary>
+            <param name="project">项目路径</param>
+            <param name="scheme">项目名称</param>
+            <param name="workspace">项目名称.xcworkspace</param>
+            <param name="archivePath">Archive包存储路径</param>
+            <param name="configuration">构建配置</param>
+            <param name="sdkName"></param>
+            <param name="quiet"></param>
+        </member>
+        <member name="T:AIO.PrMac.Git">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Git.TopInfo">
+            <summary>
+            头部信息
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Git.Execute(System.Text.StringBuilder,System.Boolean)">
+            <summary>
+            执行文件
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Git.RemoteSetUrl(System.String,System.Boolean)">
+            <summary>
+            设置远端镜像库
+            </summary>
+            <param name="targets">Git仓库</param>
+            <param name="quit">自动退出</param>
+        </member>
+        <member name="M:AIO.PrMac.Git.RemoteSetUrl(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            设置远端镜像库
+            </summary>
+            <param name="targets">Git仓库</param>
+            <param name="quit">自动退出</param>
+        </member>
+        <member name="M:AIO.PrMac.Git.Clone(System.String,System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            克隆
+            </summary>
+            <param name="target">目标目录</param>
+            <param name="urls">git地址</param>
+            <param name="quit">静默退出</param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.PrMac.Git.Clone(System.String,System.String,System.Boolean)">
+            <summary>
+            克隆
+            </summary>
+            <param name="target">目标文件夹</param>
+            <param name="urls">clone列表</param>
+            <param name="quit"></param>
+        </member>
+        <member name="M:AIO.PrMac.Git.Pull(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            拉取
+            </summary>
+            <param name="targets">文件路径列表</param>
+            <param name="quit">静默退出</param>
+        </member>
+        <member name="M:AIO.PrMac.Git.Pull(System.String,System.Boolean)">
+            <summary>
+            拉取
+            </summary>
+            <param name="target">文件路径</param>
+            <param name="quit">静默退出</param>
+        </member>
+        <member name="M:AIO.PrMac.Git.Add(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            添加修改的文件
+            </summary>
+            <param name="targets">文件路径列表</param>
+            <param name="quit"></param>
+        </member>
+        <member name="M:AIO.PrMac.Git.Add(System.String,System.Boolean)">
+            <summary>
+            添加修改的文件
+            </summary>
+            <param name="targets">文件路径列表</param>
+            <param name="quit"></param>
+        </member>
+        <member name="M:AIO.PrMac.Git.Commit(System.Collections.Generic.ICollection{System.ValueTuple{System.String,System.String}},System.Boolean)">
+            <summary>
+            添加修改的文件
+            </summary>
+            <param name="targets">
+            [Item1 : 文件路径]
+            [Item2 : 提交信息]
+            </param>
+            <param name="quit"></param>
+        </member>
+        <member name="M:AIO.PrMac.Git.Commit(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="targets"></param>
+            <param name="quit"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:AIO.PrMac.Git.Commit(System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="quit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.PrMac.Git.Commit(System.ValueTuple{System.String,System.String},System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="quit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.PrMac.Git.Push(System.Collections.Generic.ICollection{System.ValueTuple{System.String,System.String}},System.Boolean)">
+            <summary>
+            推送
+            </summary>
+            <param name="targets">
+            [Item1 : 文件路径]
+            [Item2 : 版本分支 默认 master]
+            </param>
+            <param name="quit"></param>
+        </member>
+        <member name="M:AIO.PrMac.Git.Push(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            推送
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Git.Push(System.ValueTuple{System.String,System.String},System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="quit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.PrMac.Git.Push(System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="quit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.PrMac.Git.Upload(System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="inputCommit"></param>
+            <param name="inputOrigin"></param>
+            <param name="quit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.PrMac.Git.Upload(System.Collections.Generic.ICollection{System.String},System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            1:拉取远端库
+            2:添加修改文件
+            3:提交本地修改信息
+            4:上传本地库到远端库
+            </summary>
+            <param name="targets">目标库</param>
+            <param name="inputOrigin">上传分支</param>
+            <param name="inputCommit">提交信息</param>
+            <param name="quit"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AIO.PrMac.Mono">
+            <summary>
+            Mono
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Mono.Exe(System.String,System.String[])">
+             <summary>
+            
+             </summary>
+             <param name="exe"></param>
+             <param name="command"></param>
+        </member>
+        <member name="T:AIO.PrMac.Shell">
+            <summary>
+            Shell 运行
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Shell.Execute(System.String)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Execute">
+            <summary>
+            执行
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.PrMac.Create(System.ValueTuple{System.String,System.String}@,System.String@,System.Object[])">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
+            <param name="format">Format:NoNull</param>
+            <param name="args">格式化参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Create(System.ValueTuple{System.String,System.String}@,System.Text.StringBuilder@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
+            <param name="args">参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Create(System.ValueTuple{System.String,System.String}@,System.String@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
+            <param name="args">参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Create(System.ValueTuple{System.String,System.String}@,System.Collections.Generic.ICollection{System.String}@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
+            <param name="args">参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Create(System.ValueTuple{System.String,System.String}@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>        
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Create(System.String@,System.String@,System.Object[])">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd">CMD路径:NoNull</param>
+            <param name="format">Format:NoNull</param>
+            <param name="args">格式化参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Create(System.String@,System.Collections.Generic.ICollection{System.String}@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd">CMD路径:NoNull</param>
+            <param name="args">格式化参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Create(System.String@,System.String@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd">CMD路径:NoNull</param>
+            <param name="args">格式化参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Create(System.String@,System.Text.StringBuilder@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd">CMD路径:NoNull</param>
+            <param name="args">格式化参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Create(System.String@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd">CMD路径:NoNull</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Chmod">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Brew">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Git">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Duti">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Rm">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Cat">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Mv">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Uniq">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Nl">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Touch">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Mkdir">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Cp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_DirCmp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Mono">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_OsaScript">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Sh">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_In">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Ln">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Cal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Time">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Telnet">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Rlogin">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Rsh">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Ftp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Rcp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Ping">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Mail">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Write">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Mesg">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Sudo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Open">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Kill">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Which">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Security">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Ps">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrMac.CMD_Xcodebuild">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:AIO.Configuration">
+            <summary>
+            构建配置
+            </summary>
+        </member>
+        <member name="F:AIO.Configuration.Debug">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:AIO.Configuration.Release">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:AIO.Configuration.ReleaseForProfiling">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:AIO.Configuration.ReleaseForRunning">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:AIO.PrCmd">
+            <summary>
+            CMD执行器
+            </summary>
+        </member>
+        <member name="T:AIO.PrCmd.Copy">
+            <summary>
+            复制
+            </summary>
+        </member>
+        <member name="M:AIO.PrCmd.Copy.Execute(System.String@,System.String@,System.String,System.String)">
+            <summary>
+            复制
+            </summary>
+            <param name="source">源路径</param>
+            <param name="target">目标路径</param>
+            <param name="arg1">源路径参数</param>
+            <param name="arg2">目标路径参数</param>
+        </member>
+        <member name="M:AIO.PrCmd.Copy.ALL(System.String@,System.String@)">
+            <summary>
+            复制
+            </summary>
+            <param name="source">源路径</param>
+            <param name="target">目标路径</param>
+        </member>
+        <member name="M:AIO.PrCmd.Copy.Binary(System.String@,System.String@)">
+            <summary>
+            二进制文件
+            </summary>
+            <param name="source">源路径</param>
+            <param name="target">目标路径</param>
+        </member>
+        <member name="M:AIO.PrCmd.Copy.ASCII(System.String@,System.String@)">
+            <summary>
+            文本文件
+            </summary>
+            <param name="source">源路径</param>
+            <param name="target">目标路径</param>
+        </member>
+        <member name="M:AIO.PrCmd.Copy.NetALL(System.String@,System.String@)">
+            <summary>
+            复制
+            </summary>
+            <param name="source">源路径</param>
+            <param name="target">目标路径</param>
+        </member>
+        <member name="M:AIO.PrCmd.Copy.NetBinary(System.String@,System.String@)">
+            <summary>
+            二进制文件
+            </summary>
+            <param name="source">源路径</param>
+            <param name="target">目标路径</param>
+        </member>
+        <member name="M:AIO.PrCmd.Copy.NetASCII(System.String@,System.String@)">
+            <summary>
+            复制网络文件
+            </summary>
+            <param name="source">源路径</param>
+            <param name="target">目标路径</param>
+        </member>
+        <member name="T:AIO.PrCmd.Del">
+            <summary>
+            删除 不区分文件与目录
+            </summary>
+        </member>
+        <member name="M:AIO.PrCmd.Del.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="M:AIO.PrCmd.Del.ReadOnly(System.String@)">
+            <summary>
+            删除 只读文件
+            </summary>
+        </member>
+        <member name="M:AIO.PrCmd.Del.ALL(System.String@)">
+            <summary>
+            删除 子目录下所有文件
+            </summary>
+        </member>
+        <member name="M:AIO.PrCmd.Del.ALL(System.Collections.Generic.ICollection{System.String}@)">
+            <summary>
+            删除 子目录下所有文件
+            </summary>
+        </member>
+        <member name="M:AIO.PrCmd.Del.ALL(System.String[])">
+            <summary>
+            删除 子目录下所有文件
+            </summary>
+        </member>
+        <member name="M:AIO.PrCmd.Del.Attributes(System.String@,System.String@)">
+            <summary>
+            删除 指定属性文件
+            </summary>
+        </member>
+        <member name="T:AIO.PrCmd.Mkdir">
+            <summary>
+            创建目录命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrCmd.Mkdir.Directory(System.String)">
+            <summary>
+            创建目录
+            </summary>
+        </member>
+        <member name="T:AIO.PrCmd.Move">
+            <summary>
+            移动或重命名 目录
+            </summary>
+        </member>
+        <member name="M:AIO.PrCmd.Move.Execute(System.String@,System.String@)">
+            <summary>
+            移动或重命名 目录
+            </summary>
+            <param name="source">源路径</param>
+            <param name="target">目标路径</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="F:AIO.PrCmd.CMD">
+            <summary>
+            HELP=>
+            CMD [/A | /U] [/Q] [/D] [/E:ON | /E:OFF] [/F:ON | /F:OFF] [/V:ON | /V:OFF] [[/S][/C | /K] string]
+            /C 执行字符串指定的命令然后终止
+            /K 执行字符串指定的命令但保留
+            /S 修改 /C 或 /K 之后的字符串处理(见下)
+            /Q 关闭回显
+            /D 禁止从注册表执行 AutoRun 命令(见下)
+            /A 使向管道或文件的内部命令输出成为 ANSI
+            /U 使向管道或文件的内部命令输出成为 Unicode
+            
+            /T:fg  设置前台/背景颜色(详细信息见 COLOR /?)
+            /E:ON  启用命令扩展(见下)
+            /E:OFF 禁用命令扩展(见下)
+            /F:ON  启用文件和目录名完成字符(见下)
+            /F:OFF 禁用文件和目录名完成字符(见下)
+            /V:ON  使用 ! 作为分隔符启用延迟的环境变量
+                   扩展。例如，/V:ON 会允许 !var! 在执行时扩展变量 var。var 语法会在输入时扩展变量，这与在一个 FOR 循环内不同。
+            /V:OFF 禁用延迟的环境扩展。        
+            </summary>
+        </member>
+        <member name="F:AIO.PrCmd.CMD_ARGS">
+            <summary>
+            CMD默认启动参数
+            </summary>
+        </member>
+        <member name="M:AIO.PrCmd.Execute">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrCmd.Create">
+            <summary>
+            创建构造器
+            </summary>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrCmd.Create(System.ValueTuple{System.String,System.String}@,System.String@,System.Object[])">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
+            <param name="format">Format:NoNull</param>
+            <param name="args">格式化参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrCmd.Create(System.ValueTuple{System.String,System.String}@,System.Text.StringBuilder@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
+            <param name="args">参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrCmd.Create(System.ValueTuple{System.String,System.String}@,System.String@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
+            <param name="args">参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrCmd.Create(System.ValueTuple{System.String,System.String}@,System.Collections.Generic.ICollection{System.String}@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
+            <param name="args">参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrCmd.Create(System.ValueTuple{System.String,System.String}@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>        
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrCmd.Create(System.String@,System.String@,System.Object[])">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd">CMD路径:NoNull</param>
+            <param name="format">Format:NoNull</param>
+            <param name="args">格式化参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrCmd.Create(System.String@,System.Collections.Generic.ICollection{System.String}@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd">CMD路径:NoNull</param>
+            <param name="args">格式化参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrCmd.Create(System.String@,System.String@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd">CMD路径:NoNull</param>
+            <param name="args">格式化参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrCmd.Create(System.String@,System.Text.StringBuilder@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd">CMD路径:NoNull</param>
+            <param name="args">格式化参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="T:AIO.PrCmd.Rmdir">
+            <summary>
+            删除文件夹
+            </summary>
+        </member>
+        <member name="M:AIO.PrCmd.Rmdir.Execute(System.String@)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="T:AIO.PrCmd.Shrpubw">
+            <summary>
+            windows 共享文件夹
+            </summary>
+        </member>
+        <member name="M:AIO.PrCmd.Shrpubw.Create(System.String@)">
+            <summary>
+            创建 windows 共享文件夹
+            </summary>
+        </member>
+        <member name="M:AIO.PrCmd.Shrpubw.Execute(System.String@)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="T:AIO.PrCmd.MkLink">
+            <summary>
+            符号链接
+            </summary>
+        </member>
+        <member name="M:AIO.PrCmd.MkLink.Directory(System.String@,System.String@)">
+            <summary>
+            符号链接 目录
+            </summary>
+            <param name="target">链接目标路径</param>
+            <param name="source">链接源路径</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrCmd.MkLink.HardDirectory(System.String@,System.String@)">
+            <summary>
+            硬链接 目录
+            </summary>
+            <param name="target">链接目标路径</param>
+            <param name="source">链接源路径</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrCmd.MkLink.Symbolic(System.String@,System.String@)">
+            <summary>
+            硬链接 目录或文件
+            </summary>
+            <param name="target">链接目标路径</param>
+            <param name="source">链接源路径</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrCmd.MkLink.Hard(System.String@,System.String@)">
+            <summary>
+            符号链接 目录或文件
+            </summary>
+            <param name="target">链接目标路径</param>
+            <param name="source">链接源路径</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.ResultException">
+            <summary>
+            进程执行结果(异常)
+            </summary>
+        </member>
+        <member name="P:AIO.ResultException.ExitCode">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultException.StdOut">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultException.StdError">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultException.StdALL">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultException.StdExited">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultException.StdDisposed">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultException.StartTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultException.ExitTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultException.UserProcessorTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultException.TotalProcessorTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultException.BasePriority">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultException.SessionId">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultException.Id">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultException.Info">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultException.PrivilegedProcessorTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultException.Last">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultException.Next">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.ResultException.Link(AIO.IResult@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.ResultException.Finish">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.ResultException.Finish(System.String@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.ResultException.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.ResultException.ReceivedOutput(System.Object,System.Diagnostics.DataReceivedEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.ResultException.ReceivedError(System.Object,System.Diagnostics.DataReceivedEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.ResultException.ReceivedExited(System.Object,System.EventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.ResultException.ReceivedDisposed(System.Object,System.EventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.ResultException.#ctor(System.Diagnostics.ProcessStartInfo@,System.Exception@)">
+            <summary>
+            进程执行结果(异常)
+            </summary>
+        </member>
+        <member name="M:AIO.ResultException.#ctor(System.Exception@)">
+            <summary>
+            进程执行结果(异常)
+            </summary>
+        </member>
+        <member name="T:AIO.ExecutorException">
+            <summary>
+            进程执行器(异常)
+            </summary>
+        </member>
+        <member name="M:AIO.ExecutorException.#ctor(System.Diagnostics.ProcessStartInfo@,System.Exception@)">
+            <summary>
+            进程执行器(异常)
+            </summary>
+        </member>
+        <member name="M:AIO.ExecutorException.Sync">
+            <inheritdoc/>
+        </member>
+        <member name="T:AIO.PrException">
+            <summary>
+            进程构造器(异常)
+            </summary>
+        </member>
+        <member name="M:AIO.PrException.#ctor(System.Exception@)">
+            <summary>
+            进程构造器(异常)
+            </summary>
+        </member>
+        <member name="M:AIO.PrException.Execute">
+            <inheritdoc/>
+        </member>
+        <member name="T:AIO.PrException`1">
+            <summary>
+            进程构造器(异常)
+            </summary>
+        </member>
+        <member name="M:AIO.PrException`1.#ctor(System.String@)">
+            <summary>
+            进程构造器(异常)
+            </summary>
+        </member>
+        <member name="M:AIO.PrException`1.#ctor(`0)">
+            <summary>
+            进程构造器(异常)
+            </summary>
+        </member>
+        <member name="M:AIO.PrException`1.Execute">
+            <inheritdoc/>
+        </member>
+        <member name="T:AIO.ResultEmpty">
+            <summary>
+            进程执行结果(空)
+            </summary>
+        </member>
+        <member name="P:AIO.ResultEmpty.ExitCode">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultEmpty.StartTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultEmpty.ExitTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultEmpty.UserProcessorTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultEmpty.TotalProcessorTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultEmpty.BasePriority">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultEmpty.SessionId">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultEmpty.Id">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultEmpty.PrivilegedProcessorTime">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.ResultEmpty.#ctor">
+            <summary>
+            进程执行结果(空)
+            </summary>
+        </member>
+        <member name="M:AIO.ResultEmpty.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.ResultEmpty.Finish">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.ResultEmpty.Finish(System.String@)">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultEmpty.Info">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.ResultEmpty.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:AIO.ExecutorEmpty">
+            <summary>
+            进程执行器(空)
+            </summary>
+        </member>
+        <member name="M:AIO.ExecutorEmpty.#ctor">
+            <summary>
+            进程执行器(空)
+            </summary>
+        </member>
+        <member name="M:AIO.ExecutorEmpty.Sync">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.ExecutorEmpty.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.ExecutorEmpty.Input(System.String@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.ExecutorEmpty.Input(System.Collections.Generic.ICollection{System.String}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.ExecutorEmpty.Input(System.String[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.ExecutorEmpty.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:AIO.PrEmpty">
+            <summary>
+            进程构造器(空)
+            </summary>
+        </member>
+        <member name="M:AIO.PrEmpty.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrEmpty.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrEmpty.Execute">
+            <inheritdoc/>
+        </member>
+        <member name="T:AIO.ExecutorError">
+            <summary>
+            进程执行器(错误)
+            </summary>
+        </member>
+        <member name="M:AIO.ExecutorError.#ctor(System.Diagnostics.ProcessStartInfo@)">
+            <summary>
+            进程执行器(错误)
+            </summary>
+        </member>
+        <member name="M:AIO.ExecutorError.Sync">
+            <inheritdoc/>
+        </member>
+        <member name="T:AIO.ResultError">
+            <summary>
+            进程执行结果(错误)
+            </summary>
+        </member>
+        <member name="P:AIO.ResultError.ExitCode">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultError.StartTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultError.ExitTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultError.UserProcessorTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultError.TotalProcessorTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultError.BasePriority">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultError.SessionId">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultError.Id">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.ResultError.PrivilegedProcessorTime">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.ResultError.#ctor(System.Diagnostics.Process)">
+            <summary>
+            进程执行结果(错误)
+            </summary>
+        </member>
+        <member name="T:AIO.PrError">
+            <summary>
+            进程执行构建(错误)
+            </summary>
+        </member>
+        <member name="M:AIO.PrError.Execute">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="T:AIO.PrNative">
+            <summary>
+            进程构造器 使用原生方式执行
+            </summary>
+        </member>
+        <member name="M:AIO.PrNative.Execute">
+            <inheritdoc/>
+        </member>
+        <member name="T:AIO.PrWin">
+            <summary>
+            WIN 平台命令
+            </summary>
+        </member>
+        <member name="T:AIO.PrWin.Certutil">
+            <summary>
+            Certutil 命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrWin.Certutil.MD5(System.String)">
+            <summary>
+            计算MD5
+            </summary>
+        </member>
+        <member name="T:AIO.PrWin.Git">
+            <summary>
+            GIT BAT 命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrWin.Git.Add(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            添加修改的文件
+            </summary>
+            <param name="targets">文件路径列表</param>
+            <param name="quit">静默退出</param>
+        </member>
+        <member name="M:AIO.PrWin.Git.Add(System.String,System.Boolean)">
+            <summary>
+            添加修改的文件
+            </summary>
+            <param name="target">文件路径</param>
+            <param name="quit">静默退出</param>
+        </member>
+        <member name="M:AIO.PrWin.Git.Clone(System.String,System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            克隆
+            </summary>
+            <param name="target">目标文件夹</param>
+            <param name="urls">clone列表</param>
+            <param name="quit">静默退出</param>
+        </member>
+        <member name="M:AIO.PrWin.Git.Clone(System.String,System.String,System.Boolean)">
+            <summary>
+            克隆
+            </summary>
+            <param name="target">目标文件夹</param>
+            <param name="url">clone列表</param>
+            <param name="quit">静默退出</param>
+        </member>
+        <member name="M:AIO.PrWin.Git.Commit(System.Collections.Generic.ICollection{System.ValueTuple{System.String,System.String}},System.Boolean)">
+            <summary>
+            提交
+            </summary>
+            <param name="targets">
+            [Item1 : 文件路径]
+            [Item2 : 提交信息]
+            </param>
+            <param name="quit">静默退出</param>
+        </member>
+        <member name="M:AIO.PrWin.Git.Commit(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            提交
+            </summary>
+            <param name="targets">文件路径</param>
+            <param name="quit">静默退出</param>
+        </member>
+        <member name="M:AIO.PrWin.Git.Commit(System.String,System.Boolean)">
+            <summary>
+            提交
+            </summary>
+            <param name="target">文件路径</param>
+            <param name="quit">静默退出</param>
+        </member>
+        <member name="M:AIO.PrWin.Git.Commit(System.ValueTuple{System.String,System.String},System.Boolean)">
+            <summary>
+            提交
+            </summary>
+            <param name="target">文件路径</param>
+            <param name="quit">静默退出</param>
+        </member>
+        <member name="M:AIO.PrWin.Git.Pull(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            拉取
+            </summary>
+            <param name="targets">文件路径列表</param>
+            <param name="quit">静默退出</param>
+        </member>
+        <member name="M:AIO.PrWin.Git.Pull(System.String,System.Boolean)">
+            <summary>
+            拉取
+            </summary>
+            <param name="target">文件路径列表</param>
+            <param name="quit">静默退出</param>
+        </member>
+        <member name="M:AIO.PrWin.Git.Push(System.Collections.Generic.ICollection{System.ValueTuple{System.String,System.String}},System.Boolean)">
+            <summary>
+            推送
+            </summary>
+            <param name="targets">
+            [Item1 : 文件路径]
+            [Item2 : 版本分支 默认 master]
+            </param>
+            <param name="quit">静默退出</param>
+        </member>
+        <member name="M:AIO.PrWin.Git.Push(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            推送
+            </summary>
+        </member>
+        <member name="M:AIO.PrWin.Git.Push(System.ValueTuple{System.String,System.String},System.Boolean)">
+            <summary>
+            推送
+            </summary>
+            <param name="target">
+            [Item1 : 文件路径]
+            [Item2 : 版本分支 默认 master]
+            </param>
+            <param name="quit">静默退出</param>
+        </member>
+        <member name="M:AIO.PrWin.Git.Push(System.String,System.Boolean)">
+            <summary>
+            推送
+            </summary>
+            <param name="target">文件路径</param>
+            <param name="quit">静默退出</param>
+        </member>
+        <member name="M:AIO.PrWin.Git.RemoteSetUrl(System.String,System.Boolean)">
+            <summary>
+            设置远端镜像库
+            </summary>
+            <param name="target">Git仓库</param>
+            <param name="quit">静默退出</param>
+        </member>
+        <member name="M:AIO.PrWin.Git.RemoteSetUrl(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            设置远端镜像库
+            </summary>
+            <param name="targets">Git仓库</param>
+            <param name="quit">静默退出</param>
+        </member>
+        <member name="M:AIO.PrWin.Git.Upload(System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            1:拉取远端库
+            2:添加修改文件
+            3:提交本地修改信息
+            4:上传本地库到远端库
+            </summary>
+            <param name="target">目标库</param>
+            <param name="inputOrigin">上传分支</param>
+            <param name="inputCommit">提交信息</param>
+            <param name="quit">静默退出</param>
+        </member>
+        <member name="M:AIO.PrWin.Git.Upload(System.Collections.Generic.ICollection{System.String},System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            1:拉取远端库
+            2:添加修改文件
+            3:提交本地修改信息
+            4:上传本地库到远端库
+            </summary>
+            <param name="targets">目标库</param>
+            <param name="inputOrigin">上传分支</param>
+            <param name="inputCommit">提交信息</param>
+            <param name="quit">静默退出</param>
+        </member>
+        <member name="T:AIO.PrWin.Comp">
+            <summary>
+            比较
+            </summary>
+        </member>
+        <member name="M:AIO.PrWin.Comp.Execute(System.String,System.String,System.String)">
+            <summary>
+            比较 以十进制显示差异
+            </summary>
+            <param name="source">指定要比较的第一批文件的位置和名称。</param>
+            <param name="target">指定要比较的第二批文件的位置和名称。</param>
+            <param name="args">[/D] [/A] [/L] [/N=number] [/C] [/OFF[LINE]] [/M]</param>
+        </member>
+        <member name="M:AIO.PrWin.Comp.Decimal(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            比较 以十进制显示差异
+            </summary>
+            <param name="source">指定要比较的第一批文件的位置和名称。</param>
+            <param name="target">指定要比较的第二批文件的位置和名称。</param>
+            <param name="caseASCII">忽略ASCII大小写</param>
+            <param name="skipOffline">Ture跳过脱机属性文件</param>
+        </member>
+        <member name="M:AIO.PrWin.Comp.DecimalASCII(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            比较 以十进制显示差异
+            </summary>
+            <param name="source">指定要比较的第一批文件的位置和名称。</param>
+            <param name="target">指定要比较的第二批文件的位置和名称。</param>
+            <param name="caseASCII">忽略ASCII大小写</param>
+            <param name="skipOffline">Ture跳过脱机属性文件</param>
+        </member>
+        <member name="M:AIO.PrWin.Comp.DecimalASCIILineNumbers(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            比较 以十进制显示差异
+            </summary>
+            <param name="source">指定要比较的第一批文件的位置和名称。</param>
+            <param name="target">指定要比较的第二批文件的位置和名称。</param>
+            <param name="caseASCII">忽略ASCII大小写</param>
+            <param name="skipOffline">Ture跳过脱机属性文件</param>
+        </member>
+        <member name="M:AIO.PrWin.Comp.ASCII(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            比较 以ASCII显示差异
+            </summary>
+            <param name="source">指定要比较的第一批文件的位置和名称。</param>
+            <param name="target">指定要比较的第二批文件的位置和名称。</param>
+            <param name="caseASCII">忽略ASCII大小写</param>
+            <param name="skipOffline">Ture跳过脱机属性文件</param>
+        </member>
+        <member name="M:AIO.PrWin.Comp.ASCIILineNumbers(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            比较 以ASCII显示差异
+            </summary>
+            <param name="source">指定要比较的第一批文件的位置和名称。</param>
+            <param name="target">指定要比较的第二批文件的位置和名称。</param>
+            <param name="caseASCII">忽略ASCII大小写</param>
+            <param name="skipOffline">Ture跳过脱机属性文件</param>
+        </member>
+        <member name="M:AIO.PrWin.Comp.LineNumbers(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            比较 以行号显示差异
+            </summary>
+            <param name="source">指定要比较的第一批文件的位置和名称。</param>
+            <param name="target">指定要比较的第二批文件的位置和名称。</param>
+            <param name="caseASCII">忽略ASCII大小写</param>
+            <param name="skipOffline">Ture跳过脱机属性文件</param>
+        </member>
+        <member name="M:AIO.PrWin.Comp.SpecifiedLineNumber(System.String,System.String,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            比较指定行数 以行号显示差异
+            </summary>
+            <param name="source">指定要比较的第一批文件的位置和名称</param>
+            <param name="target">指定要比较的第二批文件的位置和名称</param>
+            <param name="lineIndex">行数</param>
+            <param name="caseASCII">忽略ASCII大小写</param>
+            <param name="skipOffline">Ture跳过脱机属性文件</param>
+        </member>
+        <member name="M:AIO.PrWin.Comp.SpecifiedLineASCII(System.String,System.String,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            比较指定行数 以ASCII显示差异
+            </summary>
+            <param name="source">指定要比较的第一批文件的位置和名称</param>
+            <param name="target">指定要比较的第二批文件的位置和名称</param>
+            <param name="lineIndex">行数</param>
+            <param name="caseASCII">忽略ASCII大小写</param>
+            <param name="skipOffline">Ture跳过脱机属性文件</param>
+        </member>
+        <member name="M:AIO.PrWin.Comp.SpecifiedLineDecimal(System.String,System.String,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            比较指定行数 以十进制显示差异
+            </summary>
+            <param name="source">指定要比较的第一批文件的位置和名称</param>
+            <param name="target">指定要比较的第二批文件的位置和名称</param>
+            <param name="lineIndex">行数</param>
+            <param name="caseASCII">忽略ASCII大小写</param>
+            <param name="skipOffline">Ture跳过脱机属性文件</param>
+        </member>
+        <member name="T:AIO.PrWin.XCopy">
+            <summary>
+            复制文件夹
+            </summary>
+        </member>
+        <member name="M:AIO.PrWin.XCopy.Execute(System.String@,System.String@,System.String@)">
+            <summary>
+            复制文件夹
+            </summary>
+            <param name="source">源路径</param>
+            <param name="target">目标路径</param>
+            <param name="args">启动参数</param>
+        </member>
+        <member name="M:AIO.PrWin.XCopy.Directory(System.String@,System.String@,System.Boolean)">
+            <summary>
+            复制文件夹 包括空目录
+            </summary>
+            <param name="source">源路径</param>
+            <param name="target">目标路径</param>
+            <param name="isAll">Ture:包含空目录</param>
+        </member>
+        <member name="M:AIO.PrWin.XCopy.NetDirectory(System.String@,System.String@,System.Boolean)">
+            <summary>
+            网络 复制文件夹 包括空目录
+            </summary>
+            <param name="source">源路径</param>
+            <param name="target">目标路径</param>
+            <param name="isAll">Ture:包含空目录</param>
+        </member>
+        <member name="M:AIO.PrWin.XCopy.BigFile(System.String@,System.String@,System.Boolean)">
+            <summary>
+            复制大文件夹 包括空目录
+            </summary>
+            <param name="source">源路径</param>
+            <param name="target">目标路径</param>
+            <param name="isAll">Ture:包含空目录</param>
+        </member>
+        <member name="M:AIO.PrWin.XCopy.DirectoryTree(System.String@,System.String@,System.Boolean)">
+            <summary>
+            复制文件夹结构 不包含文件
+            </summary>
+            <param name="source">源路径</param>
+            <param name="target">目标路径</param>
+            <param name="isAll">Ture:包含空目录</param>
+        </member>
+        <member name="M:AIO.PrWin.XCopy.NetDirectoryTree(System.String@,System.String@,System.Boolean)">
+            <summary>
+            复制文件夹结构 不包含文件
+            </summary>
+            <param name="source">源路径</param>
+            <param name="target">目标路径</param>
+            <param name="isAll">Ture:包含空目录</param>
+        </member>
+        <member name="T:AIO.PrWin.Open">
+            <summary>
+            开启命令或操作
+            </summary>
+        </member>
+        <member name="M:AIO.PrWin.Open.Path(System.String@)">
+            <summary>
+            打开路径
+            </summary>
+            <param name="target">目标路径</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.ControlPanel">
+            <summary>
+            打开 windows 控制面板
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Wiaacmgr(System.String@)">
+            <summary>
+            打开 windows 扫描仪和照相机向导
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Wscript(System.String@)">
+            <summary>
+            打开 windows 脚本宿主设置
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Mspaint">
+            <summary>
+            打开 windows 画图板
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Mstsc">
+            <summary>
+            打开 windows 远程桌面连接
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Magnify">
+            <summary>
+            打开 windows 放大镜实用程序
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Mmc">
+            <summary>
+            打开 windows 控制台
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Mobsync">
+            <summary>
+            打开 windows 同步命令
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Dcomcnfg">
+            <summary>
+            打开 windows 系统组件服务
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Dvdplay">
+            <summary>
+            打开 windows Media Player
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Notepad">
+            <summary>
+            打开 windows 记事本
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Nslookup(System.String)">
+            <summary>
+            打开 windows 网络管理的工具向导
+            运行里输入 nslookup 即可打开 nslookup.exe程序 ，也可在cmd窗口输入，
+            用法见 https://wenku.baidu.com/view/4c130edca58da0116c174947.html）
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Narrator">
+            <summary>
+            打开 windows 屏幕“讲述人”
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Netstat(System.String)">
+            <summary>
+            打开 windows (TC)命令检查接口
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Sigverif">
+            <summary>
+            打开 windows 文件签名验证程序
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Sndrec32">
+            <summary>
+            打开 windows 录音机
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Taskmgr">
+            <summary>
+            打开 windows 任务管理器
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Eventvwr">
+            <summary>
+            打开 windows 事件查看器
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Eudcedit">
+            <summary>
+            打开 windows 造字程序
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Explorer(System.String)">
+            <summary>
+            打开 windows 资源管理器
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Perfmon">
+            <summary>
+            打开 windows 对象包装程序
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Regedit">
+            <summary>
+            打开 windows 注册表
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Regedt32">
+            <summary>
+            打开 windows 注册表编辑器
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Chkdsk(System.String)">
+            <summary>
+            打开 windows Chkdsk 磁盘检查
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Calc">
+            <summary>
+            打开 windows 计算器
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Charmap">
+            <summary>
+            打开 windows 字符映射表
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.SQLSERVER">
+            <summary>
+            打开 windows SQL SERVER 客户端网络实用程序
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Cleanmgr">
+            <summary>
+            打开 windows 垃圾整理
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.OSK">
+            <summary>
+            打开 windows 屏幕键盘
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Odbcad32">
+            <summary>
+            打开 windows ODBC数据源管理器
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Utilman">
+            <summary>
+            打开 windows 辅助工具管理器
+            </summary>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Wmimgmt">
+            <summary>
+            打开 windows 管理体系结构(控制台根节点 WMI控件)
+            </summary>
+        </member>
+        <member name="M:AIO.PrWin.Open.Services">
+            <summary>
+            打开 windows 本地服务设置 　
+            </summary>
+        </member>
+        <member name="M:AIO.PrWin.Open.Certmgr">
+            <summary>
+            打开 windows 证书管理实用程序
+            </summary>
+        </member>
+        <member name="M:AIO.PrWin.Open.Lusrmgr">
+            <summary>
+            打开 windows 本机用户和组
+            </summary>
+        </member>
+        <member name="M:AIO.PrWin.Open.Fsmgmt">
+            <summary>
+            打开 windows 共享文件夹管理器
+            </summary>
+        </member>
+        <member name="M:AIO.PrWin.Open.Devmgmt">
+            <summary>
+            打开 windows 设备管理器
+            </summary>
+        </member>
+        <member name="M:AIO.PrWin.Open.Diskmgmt">
+            <summary>
+            打开 windows 磁盘管理实用程序
+            </summary>
+        </member>
+        <member name="T:AIO.PrWin.Shutdown">
+            <summary>
+            windows 重启命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrWin.Shutdown.Restart(System.Int32@)">
+            <summary>
+            windows 重启命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrWin.Shutdown.LogOff(System.Int32@)">
+            <summary>
+            windows 注销命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrWin.Shutdown.Timer(System.Int32@)">
+            <summary>
+            windows 60秒倒计时关机命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrWin.Shutdown.TimerCancel">
+            <summary>
+            windows 取消倒计时关机
+            </summary>
+        </member>
+        <member name="M:AIO.PrWin.Execute">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.PrWin.Create(System.ValueTuple{System.String,System.String}@,System.String@,System.Object[])">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
+            <param name="format">Format:NoNull</param>
+            <param name="args">格式化参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Create(System.ValueTuple{System.String,System.String}@,System.Text.StringBuilder@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
+            <param name="args">参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Create(System.ValueTuple{System.String,System.String}@,System.String@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
+            <param name="args">参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Create(System.ValueTuple{System.String,System.String}@,System.Collections.Generic.ICollection{System.String}@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
+            <param name="args">参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Create(System.ValueTuple{System.String,System.String}@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>        
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Create(System.String@,System.String@,System.Object[])">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd">CMD路径:NoNull</param>
+            <param name="format">Format:NoNull</param>
+            <param name="args">格式化参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Create(System.String@,System.Collections.Generic.ICollection{System.String}@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd">CMD路径:NoNull</param>
+            <param name="args">格式化参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Create(System.String@,System.String@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd">CMD路径:NoNull</param>
+            <param name="args">格式化参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Create(System.String@,System.Text.StringBuilder@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd">CMD路径:NoNull</param>
+            <param name="args">格式化参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Create(System.String@)">
+            <summary>
+            创建
+            </summary>
+            <param name="cmd">CMD路径:NoNull</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="F:AIO.PrWin.CMD_Certutil">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.PrWin.CMD_Copy">
+            <summary>
+            适用于 复制文件
+            HELP => 
+            /A          : [仅复制有存档属性集的文件 但不更改属性]
+            /M          : [仅复制有存档属性集的文件 并关闭存档属性]
+            /D:         : [允许解密要创建的目标文件]
+            /V          : [验证新文件写入是否正确]
+            /N          : [复制带有非 8dot3 名称的文件时]
+            /Y          : [取消提示以确认要覆盖 现有目标文件]
+            /-Y         : [要提示以确认要覆盖现有目标文件]
+            /Z          : [用可重新启动模式复制已联网的文件]
+            /L          : [如果源是符号链接，请将链接复制到目标而不是源链接指向的实际文件]
+            source      : [指定要复制的文件]
+            destination : [为新文件指定目录和/或文件名]
+            </summary>
+        </member>
+        <member name="F:AIO.PrWin.CMD_Del">
+            <summary>
+            适用于删除文件
+            HELP => 
+            /P      : [删除每一个文件之前提示确认]
+            /F      : [强制删除只读文件]
+            /S      : [删除所有子目录中的指定的文件]
+            /Q      : [安静模式。删除全局通配符时，不要求确认]
+            /A      : [根据属性选择要删除的文件]
+            [R:只读文件] [L:重新分析点]
+            [H:隐藏文件] [A:准备存档的文件]
+            [O:脱机文件] [I:无内容索引文件]
+            [S:系统文件] [-:表示“否”的前缀]
+            </summary>
+        </member>
+        <member name="F:AIO.PrWin.CMD_Move">
+            <summary>
+            移动或重命名目录
+            HELP => 
+            [/Y]    :[关闭 移动文件时的确认]
+            [/-Y]   :[打开 移动文件时的确认]
+            </summary>
+        </member>
+        <member name="F:AIO.PrWin.CMD_Comp">
+            <summary>
+            HELP => 
+            COMP [data1] [data2] [/D] [/A] [/L] [/N=number] [/C] [/OFF[LINE]] [/M]
+            /D         : [以十进制格式显示差异]
+            /A         : [以 ASCII 字符显示差异]
+            /L         : [显示不同的行数]
+            /N=number  : [只比较每个文件中第一个指定的行数]
+            /C         : [比较文件时 ASCII 字母不区分大小写]
+            /OFF[LINE] : [不要跳过带有脱机属性集的文件]
+            /M         : [不提示比较更多文件]
+            </summary>
+        </member>
+        <member name="F:AIO.PrWin.CMD_Shrpubw">
+            <summary>
+            HELP => 
+            </summary>
+        </member>
+        <member name="F:AIO.PrWin.CMD_Mkdir">
+            <summary>
+            HELP => 
+            </summary>
+        </member>
+        <member name="F:AIO.PrWin.CMD_Rmdir">
+            <summary>
+            适用于 删除文件夹
+            HELP => 
+            RMDIR[/ S][/ Q][drive:] path
+            RD[/ S][/ Q][drive:] path
+               /S 除目录本身外，还将删除指定目录下的所有子目录和文件。用于删除目录树。
+               /Q 安静模式，带 /S 删除目录树时不要求确认
+            </summary>
+        </member>
+        <member name="F:AIO.PrWin.CMD_Mklink">
+            <summary>
+            HELP => 
+            MKLINK [[/D] | [/H] | [/J]] Link Target
+            /D Creates a directory symbolic link.Default is a file symbolic link.
+            /H Creates a hard link instead of a symbolic link.
+            /J Creates a Directory Junction.
+               Link Specifies the new symbolic link name.
+               Target Specifies the path(relative or absolute) that the new linkrefers to.
+            </summary>
+        </member>
+        <member name="F:AIO.PrWin.CMD_Xcopy">
+            <summary>
+            HELP => 
+            /A          : [仅复制有存档属性集的文件 但不更改属性]
+            /M          : [仅复制有存档属性集的文件 并关闭存档属性]
+            /D:m-d-y    : [复制在指定日期或指定日期以后更改的文件。 如果没有提供日期，只复制那些源时间比目标时间新的文件]
+            /P          : [创建每个目标文件之前提示你]
+            /S          : [复制目录和子目录，不包括空目录]
+            /E          : [复制目录和子目录，包括空目录。与 /S /E 相同。可以用来修改 /T]
+            /V          : [验证每个新文件的大小]
+            /W          : [提示你在复制前按键]
+            /C          : [即使有错误，也继续复制]
+            /I          : [如果目标不存在，且要复制多个文件，则假定目标必须是目录]
+            /Q          : [复制时不显示文件名]
+            /F          : [复制时显示完整的源文件名和目标文件名]
+            /L          : [显示要复制的文件]
+            /G          : [允许将加密文件复制到不支持加密的目标]
+            /H          : [也复制隐藏文件和系统文件]
+            /R          : [覆盖只读文件]
+            /T          : [创建目录结构，但不复制文件。不包括空目录或子目录。/T /E 包括空目录和子目录]
+            /U          : [只复制已经存在于目标中的文件]
+            /K          : [复制属性。一般的 Xcopy 会重置只读属性]
+            /N          : [用生成的短名称复制]
+            /O          : [复制文件所有权和 ACL 信息]
+            /X          : [复制文件审核设置(隐含 /O)]
+            /Y          : [取消提示以确认要覆盖 现有目标文件]
+            /-Y         : [要提示以确认要覆盖现有目标文件]
+            /Z          : [在可重新启动模式下复制网络文件]
+            /B          : [复制符号链接本身与链接目标]
+            /J          : [复制时不使用缓冲的 I/O。推荐复制大文件时使用]
+            source      : [指定要复制的文件]
+            destination : [为新文件指定目录和/或文件名]
+            </summary>
+        </member>
+        <member name="F:AIO.PrWin.Cmd_Shutdown">
+            <summary>
+            HELP =>
+            shutdown [/i | /l | /s | /sg | /r | /g | /a | /p | /h | /e | /o] [/hybrid] [/soft] [/fw] [/f] [/m \\computer][/t xxx][/d [p|u:]xx:yy [/c "comment"]]
+            No args    Display help. This is the same as typing /?.
+            /?         Display help. This is the same as not typing any options.
+            /i         Display the graphical user interface (GUI). This must be the first option. 
+             
+            /l         Log off. This cannot be used with /m or /d options.
+            /s         Shutdown the computer.
+            /sg        Shutdown the computer. On the next boot, if Automatic Restart Sign-On is enabled,
+                       automatically sign in and lock last interactive user. After sign in, restart any registered applications.     
+            /r         Full shutdown and restart the computer.
+            /g         Full shutdown and restart the computer. After the system is rebooted, if Automatic Restart Sign-On is enabled,
+                       automatically sign in and lock last interactive user. After sign in, restart any registered applications.    
+             /a        Abort a system shutdown. This can only be used during the time-out period.
+                       Combine with /fw to clear any pending boots to firmware. 
+             /p        Turn off the local computer with no time-out or warning. Can be used with /d and /f options.      
+             /h        Hibernate the local computer. Can be used with the /f option.    
+             /hybrid   Performs a shutdown of the computer and prepares it for fast startup. Must be used with /s option.   
+             /fw       Combine with a shutdown option to cause the next boot to go to the firmware user interface.         
+             /e        Document the reason for an unexpected shutdown of a computer.
+             /o        Go to the advanced boot options menu and restart the computer. Must be used with /r option.
+             /m \\computer Specify the target computer.
+             /t xxx    Set the time-out period before shutdown to xxx seconds.
+                       The valid range is 0-315360000 (10 years), with a default of 30.
+                       If the timeout period is greater than 0, the /f parameter is implied.   
+             /c "comment" Comment on the reason for the restart or shutdown. Maximum of 512 characters allowed.
+             /f         Force running applications to close without forewarning users.
+                        The /f parameter is implied when a value greater than 0 is specified for the /t parameter.      
+             /d [p|u:]xx:yy  Provide the reason for the restart or shutdown.
+                        p indicates that the restart or shutdown is planned.
+                        u indicates that the reason is user defined.
+                        If neither p nor u is specified the restart or shutdown is unplanned.   
+                        xx is the major reason number (positive integer less than 256).
+                        yy is the minor reason number (positive integer less than 65536).
+            </summary>
+        </member>
+        <member name="T:AIO.PrPlatform">
+            <summary>
+            命令 无需判断平台
+            </summary>
+            <summary>
+            命令 无需判断平台
+            </summary>
+            <summary>
+            命令 无需判断平台
+            </summary>
+            <summary>
+            命令 无需判断平台
+            </summary>
+        </member>
+        <member name="T:AIO.PrPlatform.File">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.PrPlatform.File.Link(System.String,System.String)">
+            <summary>
+            符号链接
+            </summary>
+        </member>
+        <member name="M:AIO.PrPlatform.File.Del(System.String)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:AIO.PrPlatform.Folder">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.PrPlatform.Folder.Link(System.String,System.String)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.PrPlatform.Folder.Del(System.String)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:AIO.PrPlatform.Folder.Create(System.String)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:AIO.PrPlatform.Git">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.GetValidUrl(System.String,System.Collections.Generic.ICollection{System.String})">
+            <summary>
+            获取有效Git路径
+            </summary>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.RemoteSetUrl(System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="quit"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.RemoteSetUrl(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="targets"></param>
+            <param name="quit"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Clone(System.String,System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="urls"></param>
+            <param name="quit"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Clone(System.String,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="url"></param>
+            <param name="quit"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Pull(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="targets"></param>
+            <param name="quit"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Pull(System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="quit"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Upload(System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="inputCommit"></param>
+            <param name="inputOrigin"></param>
+            <param name="quit"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Upload(System.Collections.Generic.ICollection{System.String},System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="inputCommit"></param>
+            <param name="inputOrigin"></param>
+            <param name="quit"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Commit(System.Collections.Generic.ICollection{System.ValueTuple{System.String,System.String}},System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="targets"></param>
+            <param name="quit"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Commit(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="targets"></param>
+            <param name="quit"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Commit(System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="targets"></param>
+            <param name="quit"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Commit(System.ValueTuple{System.String,System.String},System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="quit"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Push(System.ValueTuple{System.String,System.String},System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="quit"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Push(System.Collections.Generic.ICollection{System.ValueTuple{System.String,System.String}},System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="targets"></param>
+            <param name="quit"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Add(System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="quit"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Add(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="targets"></param>
+            <param name="quit"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="T:AIO.PrPlatform.Open">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.PrPlatform.Open.Path(System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.NetUtils.UrlCheck(System.String,System.Int32)">
+            <summary>
+            判断地址是否有效
+            </summary>
+        </member>
+    </members>
+</doc>

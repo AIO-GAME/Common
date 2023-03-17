@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{119376CD-BF44-4E12-A558-DEB3D2723D5A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AIO</RootNamespace>
+    <AssemblyName>AIO.PrCourse</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>bin\Debug\AIO.PrCourse.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\AIO.PrCourse.xml</DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Script\Abstract\Basics\Executor.cs" />
+    <Compile Include="Script\Abstract\Basics\PrCourse.cs" />
+    <Compile Include="Script\Abstract\Basics\PrCourseStatic.cs" />
+    <Compile Include="Script\Abstract\Basics\Result.cs" />
+    <Compile Include="Script\Abstract\EPrVerb.cs" />
+    <Compile Include="Script\Abstract\Extend.cs" />
+    <Compile Include="Script\Abstract\Interface\IExecutor.cs" />
+    <Compile Include="Script\Abstract\Interface\IPrCourse.cs" />
+    <Compile Include="Script\Abstract\Interface\IResult.cs" />
+    <Compile Include="Script\Category\Git\PrGitAdd.cs" />
+    <Compile Include="Script\Category\Git\PrGitCheckOut.cs" />
+    <Compile Include="Script\Category\Git\PrGitClean.cs" />
+    <Compile Include="Script\Category\Git\PrGitClone.cs" />
+    <Compile Include="Script\Category\Git\PrGitCommit.cs" />
+    <Compile Include="Script\Category\Git\PrGitInit.cs" />
+    <Compile Include="Script\Category\Git\PrGitPull.cs" />
+    <Compile Include="Script\Category\Git\PrGitRemote.cs" />
+    <Compile Include="Script\Category\Git\PrGitSubmodule.cs" />
+    <Compile Include="Script\Category\Git\PrGitUpload.cs" />
+    <Compile Include="Script\Category\Mac\DateTime\Cal\PrMacCal.cs" />
+    <Compile Include="Script\Category\Mac\DateTime\Ln\PrMacLn.cs" />
+    <Compile Include="Script\Category\Mac\DateTime\Time\PrMacTime.cs" />
+    <Compile Include="Script\Category\Mac\IO\Cat\PrMacCat.cs" />
+    <Compile Include="Script\Category\Mac\IO\Compare\PrMacCompare.cs" />
+    <Compile Include="Script\Category\Mac\IO\Cp\PrMacCp.cs" />
+    <Compile Include="Script\Category\Mac\IO\In\PrMacIn.cs" />
+    <Compile Include="Script\Category\Mac\IO\Mkdir\PrMacMkidr.cs" />
+    <Compile Include="Script\Category\Mac\IO\Move\PrMacMove.cs" />
+    <Compile Include="Script\Category\Mac\IO\Nl\PrMacNl.cs" />
+    <Compile Include="Script\Category\Mac\IO\Open\PrMacOpen.cs" />
+    <Compile Include="Script\Category\Mac\IO\Osascript\PrMacOsascript.cs" />
+    <Compile Include="Script\Category\Mac\IO\PrMacChmod.cs" />
+    <Compile Include="Script\Category\Mac\IO\Rm\PrMacRm.cs" />
+    <Compile Include="Script\Category\Mac\IO\Touch\PrMacTouch.cs" />
+    <Compile Include="Script\Category\Mac\IO\Uniq\PrMacUniq.cs" />
+    <Compile Include="Script\Category\Mac\IO\Which\PrMacWhich.cs" />
+    <Compile Include="Script\Category\Mac\Net\PrMacFtp.cs" />
+    <Compile Include="Script\Category\Mac\Net\PrMacMail.cs" />
+    <Compile Include="Script\Category\Mac\Net\PrMacMesg.cs" />
+    <Compile Include="Script\Category\Mac\Net\PrMacPing.cs" />
+    <Compile Include="Script\Category\Mac\Net\PrMacRcp.cs" />
+    <Compile Include="Script\Category\Mac\Net\PrMacRlogin.cs" />
+    <Compile Include="Script\Category\Mac\Net\PrMacRsh.cs" />
+    <Compile Include="Script\Category\Mac\Net\PrMacTelnet.cs" />
+    <Compile Include="Script\Category\Mac\Net\PrMacWrite.cs" />
+    <Compile Include="Script\Category\Mac\Program\Brew\PrMacBrew.cs" />
+    <Compile Include="Script\Category\Mac\Program\Duti\PrMacDuti.cs" />
+    <Compile Include="Script\Category\Mac\Program\Kill\PrMacKill.cs" />
+    <Compile Include="Script\Category\Mac\Program\Ps\PrMacPs.cs" />
+    <Compile Include="Script\Category\Mac\Program\Security\Security.cs" />
+    <Compile Include="Script\Category\Mac\Program\Sudo\PrMacSudo.cs" />
+    <Compile Include="Script\Category\Mac\Program\Xcode\PrMacXcode.cs" />
+    <Compile Include="Script\Category\Mac\Script\Git\PrMacGit.cs" />
+    <Compile Include="Script\Category\Mac\Script\Mono\PrMacMono.cs" />
+    <Compile Include="Script\Category\Mac\Script\Shell\PrMacShell.cs" />
+    <Compile Include="Script\Category\Win\Cmd\Copy\PrCmdCopy.cs" />
+    <Compile Include="Script\Category\Win\Cmd\Del\PrCmdDel.cs" />
+    <Compile Include="Script\Category\Win\Cmd\Mkdir\PrCmdMkdir.cs" />
+    <Compile Include="Script\Category\Win\Cmd\Move\PrCmdMove.cs" />
+    <Compile Include="Script\Category\Win\Cmd\PrCmd.cs" />
+    <Compile Include="Script\Category\Special\PrException.cs" />
+    <Compile Include="Script\Category\Special\PrEmpty.cs" />
+    <Compile Include="Script\Category\Special\PrError.cs" />
+    <Compile Include="Script\Category\Special\PrNative.cs" />
+    <Compile Include="Script\Category\Git\PrGit.cs" />
+    <Compile Include="Script\Category\Git\PrGitBranch.cs" />
+    <Compile Include="Script\Category\Git\PrGitPush.cs" />
+    <Compile Include="Script\Category\Mac\PrMac.cs" />
+    <Compile Include="Script\Category\Mac\PrMacConst.cs" />
+    <Compile Include="Script\Category\Win\Cmd\Rmdir\PrCmdRmdir.cs" />
+    <Compile Include="Script\Category\Win\Cmd\Shrpubw\PrCmdShrpubw.cs" />
+    <Compile Include="Script\Category\Win\Encryption\PrWinCertutil.cs" />
+    <Compile Include="Script\Category\Win\Git\PrWinGitAdd.cs" />
+    <Compile Include="Script\Category\Win\Git\PrWinGitClone.cs" />
+    <Compile Include="Script\Category\Win\Git\PrWinGitCommit.cs" />
+    <Compile Include="Script\Category\Win\Git\PrWinGitPull.cs" />
+    <Compile Include="Script\Category\Win\Git\PrWinGitPush.cs" />
+    <Compile Include="Script\Category\Win\Git\PrWinGitRemote.cs" />
+    <Compile Include="Script\Category\Win\Git\PrWinGitUpload.cs" />
+    <Compile Include="Script\Category\Win\IO\PrWinComp.cs" />
+    <Compile Include="Script\Category\Win\IO\PrWinMkLink.cs" />
+    <Compile Include="Script\Category\Win\IO\PrWinXCopy.cs" />
+    <Compile Include="Script\Category\Win\Open\PrWinOpen.cs" />
+    <Compile Include="Script\Category\Win\System\PrWinShutdown.cs" />
+    <Compile Include="Script\Platform\File.cs" />
+    <Compile Include="Script\Platform\Folder.cs" />
+    <Compile Include="Script\Platform\Git.cs" />
+    <Compile Include="Script\Platform\PrPlatform.cs" />
+    <Compile Include="Script\Category\Win\Git\PrWinGit.cs" />
+    <Compile Include="Script\Category\Win\PrWin.cs" />
+    <Compile Include="Script\Category\Win\PrWinConstcs.cs" />
+    <Compile Include="Script\Utils\NetUtils.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
