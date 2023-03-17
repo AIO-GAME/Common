@@ -1,0 +1,12 @@
+#lfs大文件
+*.a filter=lfs diff=lfs merge=lfs min-to-size=10M maxsize=50M text=auto -delta
+*.psd filter=lfs diff=lfs merge=lfs min-to-size=10M maxsize=50M text=auto -delta
+*.zip filter=lfs diff=lfs merge=lfs min-to-size=10M maxsize=50M text=auto -delta
+*.gz filter=lfs diff=lfs merge=lfs min-to-size=10M maxsize=50M text=auto -delta
+*.7z filter=lfs diff=lfs merge=lfs min-to-size=10M maxsize=50M text=auto -delta
+*.rar filter=lfs diff=lfs merge=lfs min-to-size=10M maxsize=50M text=auto -delta
+*.docx filter=lfs diff=lfs merge=lfs min-to-size=10M maxsize=50M text=auto -delta
+*.fls.exe filter=lfs diff=lfs merge=lfs min-to-size=20M maxsize=50M text=auto -delta
+*.exe filter=lfs diff=lfs merge=lfs min-to-size=20M maxsize=50M text=auto -delta
+*.msi filter=lfs diff=lfs merge=lfs min-to-size=20M maxsize=50M text=auto -delta
+*.unitypackage filter=lfs diff=lfs min-to-size=20M maxsize=100M merge=lfs text=auto -delta

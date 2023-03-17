@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <StartupObject>AIO.Program</StartupObject>
+    <RootNamespace>AIO</RootNamespace>
+    <LangVersion>7.3</LangVersion>
+    <AssemblyOriginatorKeyFile>..\..\AIO.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>E:\TencentGit\Packages\com.self.core\Tools~\Print\Print.Test\Print.Test.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>E:\TencentGit\Packages\com.self.core\Tools~\Print\Print.Test\Print.Test.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\AIO.pfx">
+      <Link>AIO.pfx</Link>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Print\Print.csproj" />
+  </ItemGroup>
+
+</Project>

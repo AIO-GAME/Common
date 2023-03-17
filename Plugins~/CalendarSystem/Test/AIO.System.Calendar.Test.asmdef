@@ -1,0 +1,18 @@
+{
+    "name": "AIO.System.Calendar.Test",
+    "rootNamespace": "AIO.System.Calendar.Test",
+    "references": [
+        "AIO.System.Calendar"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

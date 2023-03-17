@@ -1,0 +1,400 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AIO.Attribute</name>
+    </assembly>
+    <members>
+        <member name="T:AIO.RegistInitializeDLLAttribute">
+            <summary>
+            注册 DLL
+            </summary>
+        </member>
+        <member name="M:AIO.RegistInitializeDLLAttribute.#ctor(System.Type,System.String)">
+            <summary>
+            注册DLL
+            </summary>
+            <param name="type">类型</param>
+            <param name="name">名称</param>
+        </member>
+        <member name="M:AIO.RegistInitializeDLLAttribute.Invoke">
+            <summary>
+            实现
+            </summary>
+        </member>
+        <member name="T:AIO.RegistInitializePlatformAttribute">
+            <summary>
+            注册平台DLL
+            </summary>
+        </member>
+        <member name="F:AIO.RegistInitializePlatformAttribute.Platform">
+            <summary>
+            游戏平台
+            </summary>
+        </member>
+        <member name="M:AIO.RegistInitializePlatformAttribute.#ctor(System.Type,System.String,AIO.ERuntimePlatform)">
+            <summary>
+            注册DLL
+            </summary>
+        </member>
+        <member name="T:AIO.UnRegistInitializeDLLAttribute">
+            <summary>
+            注销 DLL
+            </summary>
+        </member>
+        <member name="M:AIO.UnRegistInitializeDLLAttribute.#ctor(System.Type,System.String)">
+            <summary>
+            注册DLL
+            </summary>
+            <param name="type">类型</param>
+            <param name="name">名称</param>
+        </member>
+        <member name="M:AIO.UnRegistInitializeDLLAttribute.Invoke">
+            <summary>
+            实现
+            </summary>
+        </member>
+        <member name="T:AIO.UnRegistInitializePlatformAttribute">
+            <summary>
+            注销平台DLL
+            </summary>
+        </member>
+        <member name="F:AIO.UnRegistInitializePlatformAttribute.Platform">
+            <summary>
+            游戏平台
+            </summary>
+        </member>
+        <member name="M:AIO.UnRegistInitializePlatformAttribute.#ctor(System.Type,System.String,AIO.ERuntimePlatform)">
+            <summary>
+            注册DLL
+            </summary>
+        </member>
+        <member name="T:AIO.EArgLabel">
+            <summary>
+            参数类型
+            </summary>
+        </member>
+        <member name="F:AIO.EArgLabel.Bool">
+            <summary>
+            BOOL
+            </summary>
+        </member>
+        <member name="F:AIO.EArgLabel.Integer">
+            <summary>
+            Int
+            </summary>
+        </member>
+        <member name="F:AIO.EArgLabel.IntegerArray">
+            <summary>
+            Int数组
+            </summary>
+        </member>
+        <member name="F:AIO.EArgLabel.String">
+            <summary>
+            字符串
+            </summary>
+        </member>
+        <member name="F:AIO.EArgLabel.StringArray">
+            <summary>
+            字符串数组
+            </summary>
+        </member>
+        <member name="F:AIO.EArgLabel.Enum">
+            <summary>
+            枚举
+            </summary>
+        </member>
+        <member name="T:AIO.ArgumentAttribute">
+            <summary>
+            属性解析
+            </summary>
+        </member>
+        <member name="P:AIO.ArgumentAttribute.Label">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:AIO.ArgumentAttribute.Type">
+            <summary>
+            参数类型
+            </summary>
+        </member>
+        <member name="M:AIO.ArgumentAttribute.#ctor(System.String,AIO.EArgLabel)">
+            <summary>
+            参数
+            </summary>
+        </member>
+        <member name="T:AIO.ArgumentCustom">
+            <summary>
+            自定义参数解析
+            </summary>
+        </member>
+        <member name="P:AIO.ArgumentCustom.Command">
+            <summary>
+            命令
+            </summary>
+        </member>
+        <member name="M:AIO.ArgumentCustom.SubResolver(System.Reflection.FieldInfo@,System.Attribute@,System.String@)">
+            <summary>
+            字段解析
+            </summary>
+            <param name="field">字段</param>
+            <param name="attribute">属性</param>
+            <param name="command">命令</param>
+            <returns>Ture:解析成功 False:解析失败</returns>
+        </member>
+        <member name="M:AIO.ArgumentCustom.Resolver(System.String@)">
+            <summary>
+            解析
+            </summary>
+            <param name="cmd"></param>
+        </member>
+        <member name="M:AIO.ArgumentCustom.ToString">
+            <summary>
+            重写转化 String
+            </summary>
+        </member>
+        <member name="M:AIO.ArgumentCustom.GetBool(System.String@,System.String@)">
+            <summary>
+            获取 Bool
+            </summary>
+        </member>
+        <member name="M:AIO.ArgumentCustom.GetString(System.String@,System.String@)">
+            <summary>
+            获取 String
+            </summary>
+        </member>
+        <member name="M:AIO.ArgumentCustom.GetStringArray(System.String@,System.String@)">
+            <summary>
+            获取 String Array
+            </summary>
+        </member>
+        <member name="M:AIO.ArgumentCustom.GetEnum(System.String@,System.Type@,System.String@)">
+            <summary>
+            获取 String Array
+            </summary>
+        </member>
+        <member name="M:AIO.ArgumentCustom.GetIntegerArray(System.String@,System.String@)">
+            <summary>
+            获取 String Array
+            </summary>
+        </member>
+        <member name="M:AIO.ArgumentCustom.GetInteger(System.String@,System.String@)">
+            <summary>
+            获取 Int
+            </summary>
+            如果为-1 则说明没有使用
+        </member>
+        <member name="T:AIO.ArgumentUtils">
+            <summary>
+            参数帮助类
+            </summary>
+        </member>
+        <member name="M:AIO.ArgumentUtils.ResolverCustomCur``1">
+            <summary>
+            解析自定义命令
+            </summary>
+        </member>
+        <member name="M:AIO.ArgumentUtils.ResolverCustom``1(System.String@)">
+            <summary>
+            解析自定义命令
+            </summary>
+        </member>
+        <member name="M:AIO.ArgumentUtils.ResolverCustom``1(System.Collections.Generic.IEnumerable{System.String}@)">
+            <summary>
+            解析自定义命令
+            </summary>
+        </member>
+        <member name="M:AIO.ArgumentUtils.ResolverCur``1">
+            <summary>
+            解析默认命令
+            </summary>
+        </member>
+        <member name="M:AIO.ArgumentUtils.Resolver``1(System.Collections.Generic.IEnumerable{System.String}@)">
+            <summary>
+            解析默认命令
+            </summary>
+        </member>
+        <member name="M:AIO.ArgumentUtils.Resolver``1(System.String@)">
+            <summary>
+            解析默认命令
+            </summary>
+        </member>
+        <member name="M:AIO.ArgumentUtils.Resolver``1(``0,System.String@)">
+            <summary>
+            解析
+            </summary>
+        </member>
+        <member name="M:AIO.ArgumentUtils.GetBool(System.String@,System.String@)">
+            <summary>
+            获取 Bool
+            </summary>
+        </member>
+        <member name="M:AIO.ArgumentUtils.GetString(System.String@,System.String@)">
+            <summary>
+            获取 String
+            </summary>
+        </member>
+        <member name="M:AIO.ArgumentUtils.GetStringArray(System.String@,System.String@)">
+            <summary>
+            获取 String Array
+            </summary>
+        </member>
+        <member name="M:AIO.ArgumentUtils.GetEnum(System.String,System.Type,System.String)">
+            <summary>
+            获取 String Array
+            </summary>
+        </member>
+        <member name="M:AIO.ArgumentUtils.GetIntegerArray(System.String@,System.String@)">
+            <summary>
+            获取 String Array
+            </summary>
+        </member>
+        <member name="M:AIO.ArgumentUtils.GetInteger(System.String@,System.String@)">
+            <summary>
+            获取 Int
+            </summary>
+            如果为-1 则说明没有使用
+        </member>
+        <member name="T:AIO.EnumDescriptionAttribute">
+            <summary>
+            枚举描述
+            </summary>
+        </member>
+        <member name="P:AIO.EnumDescriptionAttribute.Description">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="M:AIO.EnumDescriptionAttribute.#ctor(System.String)">
+            <summary>
+            枚举描述属性
+            </summary>
+            <param name="description">描述字段</param>
+        </member>
+        <member name="T:AIO.AttributeFieldExtend">
+            <summary>
+            扩展
+            </summary>
+        </member>
+        <member name="M:AIO.AttributeFieldExtend.GetDescription(System.Enum)">
+            <summary>
+            获取自定义属性值
+            </summary>
+        </member>
+        <member name="T:AIO.ERuntimePlatform">
+            <summary>
+              <para>The platform application is running. Returned by Application.platform.</para>
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.OSXEditor">
+            <summary>
+              <para>In the Unity editor on macOS.</para>
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.OSXPlayer">
+            <summary>
+              <para>In the player on macOS.</para>
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.WindowsPlayer">
+            <summary>
+              <para>In the player on Windows.</para>
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.OSXWebPlayer">
+            <summary>
+              <para>In the web player on macOS.</para>
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.OSXDashboardPlayer">
+            <summary>
+              <para>In the Dashboard widget on macOS.</para>
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.WindowsWebPlayer">
+            <summary>
+              <para>In the web player on Windows.</para>
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.WindowsEditor">
+            <summary>
+              <para>In the Unity editor on Windows.</para>
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.IPhonePlayer">
+            <summary>
+              <para>In the player on the iPhone.</para>
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.Android">
+            <summary>
+              <para>In the player on Android devices.</para>
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.LinuxPlayer">
+            <summary>
+              <para>In the player on Linux.</para>
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.LinuxEditor">
+            <summary>
+              <para>In the Unity editor on Linux.</para>
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.WebGLPlayer">
+            <summary>
+              <para>In the player on WebGL</para>
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.WSAPlayerX86">
+            <summary>
+              <para>In the player on Windows Store Apps when CPU architecture is X86.</para>
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.WSAPlayerX64">
+            <summary>
+              <para>In the player on Windows Store Apps when CPU architecture is X64.</para>
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.WSAPlayerARM">
+            <summary>
+              <para>In the player on Windows Store Apps when CPU architecture is ARM.</para>
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.PS4">
+            <summary>
+              <para>In the player on the Playstation 4.</para>
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.XboxOne">
+            <summary>
+              <para>In the player on Xbox One.</para>
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.tvOS">
+            <summary>
+              <para>In the player on the Apple's tvOS.</para>
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.Switch">
+            <summary>
+              <para>In the player on Nintendo Switch.</para>
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.Stadia">
+            <summary>
+              <para>In the player on Stadia.</para>
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.CloudRendering">
+            <summary>
+              <para>In the player on CloudRendering.</para>
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.PS5">
+            <summary>
+              <para>In the player on the Playstation 5.</para>
+            </summary>
+        </member>
+    </members>
+</doc>

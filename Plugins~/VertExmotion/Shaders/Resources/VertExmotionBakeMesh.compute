@@ -1,0 +1,73 @@
+﻿#pragma kernel CSMain
+
+
+#define SHADER_TARGET 30
+#define VERTEXMOTION_HIDE_STANDARD_FUNCTIONS
+#include "../VertExmotion.cginc"
+
+RWStructuredBuffer<float3> _vertexBuf;
+RWStructuredBuffer<float3> _normalBuf;
+RWStructuredBuffer<float4> _tangentBuf;
+RWStructuredBuffer<float4> _colorBuf;
+
+float4x4 _ObjectToWorld;
+float4x4 _WorldToObject;
+
+
+float4 VertExmotion(float4 vpos, float4 col)
+{
+    float4 wrldPos = mul(_ObjectToWorld, vpos);
+    float w = 0;
+    wrldPos = VertExmotionBase(wrldPos, col, w);
+    vpos.xyz = mul(_WorldToObject, wrldPos).xyz;
+    return vpos;
+}
+
+
+
+float4 VertExmotion(float4 vpos, float4 col, inout float weight)
+{
+    float4 wrldPos = mul(_ObjectToWorld, vpos);
+    wrldPos = VertExmotionBase(wrldPos, col, weight);
+    vpos.xyz = mul(_WorldToObject, wrldPos).xyz;
+    return vpos;
+}
+
+
+float4 VertExmotion(float4 vpos, float4 col, inout float3 n, float4 t)
+{
+	//_NormalCorrection = .8;
+    float w = 0;
+    float4 newpos = VertExmotion(vpos, col, w);
+#if SHADER_TARGET >= 30
+#if !VERTEXMOTION_NORMAL_CORRECTION_OFF
+	if (length(t.xyz) > 0 && KVM_NormalCorrection>0)
+	{
+		float4 biTan = float4(cross(n, t.xyz), 0);
+		float4 Tan = float4(cross( biTan.xyz, n.xyz), 0);
+		float4 posTan = VertExmotion(vpos + normalize(Tan) * .001, col);
+		float4 posBiTan = VertExmotion(vpos + normalize(biTan) * .001, col);
+		float3 newNormal = normalize(cross(normalize(posTan - newpos).xyz, normalize(posBiTan - newpos).xyz));
+		if(length(newNormal)>0)
+			n = lerp(n, newNormal, KVM_NormalCorrection*(w < KVM_NormalSmooth ? w * (1.0 / KVM_NormalSmooth) : 1));
+	}
+#endif
+#endif
+    return newpos;
+}
+
+
+[numthreads(512,1,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+
+    float4 vpos = float4(_vertexBuf[id.x], 1);
+    float4 col = _colorBuf[id.x];
+    float3 n = _normalBuf[id.x];
+    float4 t = _tangentBuf[id.x];  
+
+    vpos = VertExmotion(vpos,col, n, t);
+
+   _vertexBuf[id.x] = vpos.xyz;
+   _normalBuf[id.x] = n;
+}
