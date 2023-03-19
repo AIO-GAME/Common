@@ -62,10 +62,6 @@
     <Compile Include="Script\IO\IOUnityEditorGet.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Utils.Unity.Runtime\Utils.Unity.Runtime.csproj">
-      <Project>{dc29565f-e2e3-42af-b245-e38eb60914e3}</Project>
-      <Name>Utils.Unity.Runtime</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{b0d5708a-7c94-4bcb-805d-a718034e5724}</Project>
       <Name>Utils</Name>
