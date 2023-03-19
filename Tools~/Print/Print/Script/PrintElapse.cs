@@ -20,10 +20,10 @@ namespace AIO
         public string Title { get; }
 
         /// <summary>
-        /// 
+        /// 初始化
         /// </summary>
         /// <param name="title">消耗时间标题</param>
-        public PrintElapse(string title)
+        public PrintElapse(in string title)
         {
             Title = title;
         }
@@ -51,12 +51,12 @@ namespace AIO
         /// 完成
         /// </summary>
         /// <param name="format"></param>
-        public abstract void Finish(string format = "g");
+        public abstract void Finish(in string format = "g");
 
         /// <summary>
         /// 异常信息
         /// </summary>
-        public void Exception(Exception exception, string format = "g")
+        public void Exception(in Exception exception, in string format = "g")
         {
             stopWatch.Stop();
             throw new Exception(string.Format(CultureInfo.CurrentCulture, "{0}=>[{1}]", Title, stopWatch.Elapsed.ToString(format)), exception);

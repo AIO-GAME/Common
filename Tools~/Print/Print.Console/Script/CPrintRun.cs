@@ -8,136 +8,142 @@ namespace AIO
     public partial class CPrint
     {
         /// <summary>
-        /// 
+        /// 输出详细执行时间
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
-        public static void RunDetail(string title, IEnumerable<Action> actions, string format = "g")
+        public static void Run<T>(in string title, in T actions, in string format = "g") where T : IEnumerable<Action>
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Log)) return;
+            if (Print.IsNotOut || Print.NoStatus(Print.LOG)) return;
             var all = new CPrintElapse(title).Start();
             var index = 1;
             foreach (var action in actions)
             {
-                var p = new CPrintElapse(index++.ToString()).Start();
-                action.Invoke();
-                p.Finish(format);
+                using (var p = new CPrintElapse(index++.ToString()).Start())
+                {
+                    action.Invoke();
+                    p.Finish(format);
+                }
             }
 
             all.Finish();
         }
 
         /// <summary>
-        /// 
+        /// 输出详细执行时间
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
-        public static void Run(string title, Action action, string format = "g")
+        public static void Run(in string title, in Action action, in string format = "g")
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Log)) return;
-            var p = new CPrintElapse(title).Start();
-            action.Invoke();
-            p.Finish(format);
+            if (Print.IsNotOut || Print.NoStatus(Print.LOG)) return;
+            using (var p = new CPrintElapse(title).Start())
+            {
+                action.Invoke();
+                p.Finish(format);
+            };
         }
 
         /// <summary>
-        /// 
+        /// 输出详细执行时间
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
-        public static void Run(string title, Action action0, Action action1, string format = "g")
+        public static void Run(in string title, in Action action0, in Action action1, in string format = "g")
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Log)) return;
-            var p = new CPrintElapse(title).Start();
-            action0.Invoke();
-            action1.Invoke();
-            p.Finish(format);
+            if (Print.IsNotOut || Print.NoStatus(Print.LOG)) return;
+            using (var p = new CPrintElapse(title).Start())
+            {
+                action0.Invoke();
+                action1.Invoke();
+                p.Finish(format);
+            };
         }
 
         /// <summary>
-        /// 
+        ///  输出详细执行时间
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
-        public static void Run(string title, Action action0, Action action1, Action action2, string format = "g")
+        public static void Run(in string title, in Action action0, in Action action1, in Action action2, in string format = "g")
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Log)) return;
-            var p = new CPrintElapse(title).Start();
-            action0.Invoke();
-            action1.Invoke();
-            action2.Invoke();
-            p.Finish(format);
+            if (Print.IsNotOut || Print.NoStatus(Print.LOG)) return;
+            using (var p = new CPrintElapse(title).Start())
+            {
+                action0.Invoke();
+                action1.Invoke();
+                action2.Invoke();
+                p.Finish(format);
+            };
         }
 
         /// <summary>
-        /// 
+        /// 输出详细执行时间
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
-        public static void Run(string title, Action action0, Action action1, Action action2, Action action3, string format = "g")
+        public static void Run(in string title, in Action action0, in Action action1, in Action action2, in Action action3, in string format = "g")
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Log)) return;
-            var p = new CPrintElapse(title).Start();
-            action0.Invoke();
-            action1.Invoke();
-            action2.Invoke();
-            action3.Invoke();
-            p.Finish(format);
+            if (Print.IsNotOut || Print.NoStatus(Print.LOG)) return;
+            using (var p = new CPrintElapse(title).Start())
+            {
+                action0.Invoke();
+                action1.Invoke();
+                action2.Invoke();
+                action3.Invoke();
+                p.Finish(format);
+            };
         }
 
         /// <summary>
-        /// 
+        /// 输出详细执行时间
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
-        public static void Run(string title, ICollection<Action> actions, string format = "g")
+        public static void Run<T>(in string title, in Action<T> action, in T tValue, in string format = "g")
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Log)) return;
-            var p = new CPrintElapse(title).Start();
-            foreach (var action in actions) action.Invoke();
-            p.Finish(format);
+            if (Print.IsNotOut || Print.NoStatus(Print.LOG)) return;
+            using (var p = new CPrintElapse(title).Start())
+            {
+                action.Invoke(tValue);
+                p.Finish(format);
+            };
         }
 
         /// <summary>
-        /// 
+        /// 输出详细执行时间
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
-        public static void Run<T>(string title, Action<T> action, T tValue, string format = "g")
+        public static void Run<T, V>(in string title, in Action<T, V> action, in T tValue, in V vValue, in string format = "g")
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Log)) return;
-            var p = new CPrintElapse(title).Start();
-            action.Invoke(tValue);
-            p.Finish(format);
+            if (Print.IsNotOut || Print.NoStatus(Print.LOG)) return;
+            using (var p = new CPrintElapse(title).Start())
+            {
+                action.Invoke(tValue, vValue);
+                p.Finish(format);
+            };
         }
 
         /// <summary>
-        /// 
+        /// 输出详细执行时间
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
-        public static void Run<T, V>(string title, Action<T, V> action, T tValue, V vValue, string format = "g")
+        public static void Run<T, V, W>(in string title, in Action<T, V, W> action, in T tValue, in V vValue, in W wValue, in string format = "g")
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Log)) return;
-            var p = new CPrintElapse(title).Start();
-            action.Invoke(tValue, vValue);
-            p.Finish(format);
+            if (Print.IsNotOut || Print.NoStatus(Print.LOG)) return;
+            using (var p = new CPrintElapse(title).Start())
+            {
+                action.Invoke(tValue, vValue, wValue);
+                p.Finish(format);
+            };
         }
 
         /// <summary>
-        /// 
+        /// 输出详细执行时间
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
-        public static void Run<T, V, W>(string title, Action<T, V, W> action, T tValue, V vValue, W wValue, string format = "g")
+        public static void Run<T, V, W, Z>(in string title, in Action<T, V, W, Z> action, in T tValue, in V vValue, in W wValue, in Z zValue, in string format = "g")
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Log)) return;
-            var p = new CPrintElapse(title).Start();
-            action.Invoke(tValue, vValue, wValue);
-            p.Finish(format);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [Conditional(Print.MACRO_DEFINITION)]
-        public static void Run<T, V, W, Z>(string title, Action<T, V, W, Z> action, T tValue, V vValue, W wValue, Z zValue, string format = "g")
-        {
-            if (Print.IsNotOut || Print.NoStatus(Print.Log)) return;
-            var p = new CPrintElapse(title).Start();
-            action.Invoke(tValue, vValue, wValue, zValue);
-            p.Finish(format);
+            if (Print.IsNotOut || Print.NoStatus(Print.LOG)) return;
+            using (var p = new CPrintElapse(title).Start())
+            {
+                action.Invoke(tValue, vValue, wValue, zValue);
+                p.Finish(format);
+            };
         }
 
         /// <summary>
@@ -145,14 +151,14 @@ namespace AIO
         /// </summary>
         internal class CPrintElapse : PrintElapse
         {
-            public CPrintElapse(string title) : base(title)
+            public CPrintElapse(in string title) : base(title)
             {
             }
 
-            public override void Finish(string format = "g")
+            public override void Finish(in string format = "g")
             {
                 stopWatch.Stop();
-                Line(string.Format(CultureInfo.CurrentCulture, "{0}=>[{1}]", Title, stopWatch.Elapsed.ToString(format)));
+                Log(string.Format(CultureInfo.CurrentCulture, "{0}=>[{1}]", Title, stopWatch.Elapsed.ToString(format)));
             }
         }
     }

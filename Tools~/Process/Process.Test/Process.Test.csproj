@@ -3,10 +3,15 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <StartupObject>Process.Test.Program</StartupObject>
+    <StartupObject>AIO.Program</StartupObject>
+    <AssemblyName>AIO.Process.Test</AssemblyName>
+    <RootNamespace>AIO</RootNamespace>
   </PropertyGroup>
-
+  
   <ItemGroup>
-    <ProjectReference Include="..\Process\Process.csproj" />
+    <ProjectReference Include="..\Process\Process.csproj">
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <Private>false</Private>
+    </ProjectReference>
   </ItemGroup>
 </Project>

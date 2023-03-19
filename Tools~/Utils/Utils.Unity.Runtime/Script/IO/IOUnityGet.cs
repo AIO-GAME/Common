@@ -9,7 +9,7 @@ namespace AIO.Unity
     /// <summary>
     /// Unity IOUtils
     /// </summary>
-    public static partial class UIOUtils
+    public static partial class IOUtils
     {
         /// <summary>
         /// Unity默认路径
@@ -18,7 +18,7 @@ namespace AIO.Unity
 
         internal static int UnityPathLength { get; }
 
-        static UIOUtils()
+        static IOUtils()
         {
             UnityPath = Application.dataPath.Replace("Assets", "");
             UnityPathLength = UnityPath.Length;
@@ -37,7 +37,7 @@ namespace AIO.Unity
             value = Path.GetFullPath(value);
             if (!value.Contains(UnityPath)) return new string[] { };
             var array = new List<string>();
-            foreach (var item in IOUtils.GetFilesInfo(value, pattern, option))
+            foreach (var item in AIO. IOUtils.GetFilesInfo(value, pattern, option))
                 array.Add(item.FullName.Substring(UnityPathLength).Replace('\\', '/'));
             return array.ToArray();
         }
@@ -56,7 +56,7 @@ namespace AIO.Unity
             value = Path.GetFullPath(value);
             if (!value.Contains(UnityPath)) return new string[] { };
             var array = new List<string>();
-            foreach (var item in IOUtils.GetFilesInfo(value, filtration, pattern, option))
+            foreach (var item in AIO.IOUtils.GetFilesInfo(value, filtration, pattern, option))
                 array.Add(item.FullName.Substring(UnityPathLength).Replace('\\', '/'));
             return array.ToArray();
         }
@@ -75,7 +75,7 @@ namespace AIO.Unity
             value = Path.GetFullPath(value);
             if (!value.Contains(UnityPath)) return new string[] { };
             var array = new List<string>();
-            foreach (var item in IOUtils.GetFilesInfo(value, filtration, pattern, option))
+            foreach (var item in AIO.IOUtils.GetFilesInfo(value, filtration, pattern, option))
                 if (!item.Extension.Contains(".meta"))
                     array.Add(item.FullName.Substring(UnityPathLength).Replace('\\', '/'));
             return array.ToArray();
@@ -94,7 +94,7 @@ namespace AIO.Unity
             value = Path.GetFullPath(value);
             if (!value.Contains(UnityPath)) return new string[] { };
             var array = new List<string>();
-            foreach (var item in IOUtils.GetFilesInfo(value, pattern, option))
+            foreach (var item in AIO.IOUtils.GetFilesInfo(value, pattern, option))
                 if (!item.Extension.Contains(".meta"))
                     array.Add(item.FullName.Substring(UnityPathLength).Replace('\\', '/'));
             return array.ToArray();

@@ -8,12 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("AIO.Utils.Unity.Editor")]
 [assembly: AssemblyProduct("AIO.Utils.Unity.Editor")]
 [assembly: AssemblyDefaultAlias("AIO.Utils.Unity.Editor")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("AIO Unity Editor Utils")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
 
 // 将 ComVisible 设置为 false 会使此程序集中的类型
 //对 COM 组件不可见。如果需要从 COM 访问此程序集中的类型
@@ -23,15 +20,8 @@ using System.Runtime.InteropServices;
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
 [assembly: Guid("a86a24e6-c079-4e67-bc07-16d04cef5562")]
 
-// 程序集的版本信息由下列四个值组成: 
-//
-//      主版本
-//      次版本
-//      生成号
-//      修订号
-//
-//可以指定所有这些值，也可以使用“生成号”和“修订号”的默认值
-//通过使用 "*"，如下所示:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion(AssemblyInfo.Version)]
+[assembly: AssemblyFileVersion(AssemblyInfo.FileVersion)]
+[assembly: AssemblyCompany(AssemblyInfo.Company)]
+[assembly: AssemblyCopyright(AssemblyInfo.Copyright)]
+[assembly: AssemblyCulture(AssemblyInfo.Culture)]

@@ -12,7 +12,7 @@ namespace AIO.Unity.Editor
     /// <summary>
     /// Unity Editor IO Utils
     /// </summary>
-    public static partial class UEIOUtils
+    public static partial class IOUtils
     {
         /// <summary>
         /// 获取指定文件夹下的预制件

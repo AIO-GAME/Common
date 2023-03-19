@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AIO.Print.Unity.Editor</name>
+    </assembly>
+    <members>
+        <member name="F:AIO.Unity.Editor.UnityConsoleEditor.MENU_DEVELOPERMODE">
+            <summary>
+            输出日志
+            </summary>
+        </member>
+        <member name="F:AIO.Unity.Editor.UnityConsoleEditor.MENU_EDITOR_SWITCH_LOG">
+            <summary>
+            错误日志
+            </summary>
+        </member>
+        <member name="F:AIO.Unity.Editor.UnityConsoleEditor.MENU_EDITOR_SWITCH_ERROR">
+            <summary>
+            开发者模式
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.Editor.UnityConsoleEditor.OpenDeveloperMode">
+            <summary>
+            打开开发者模式
+            </summary>
+        </member>
+    </members>
+</doc>

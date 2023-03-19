@@ -60,6 +60,11 @@
     <Compile Include="Script\Field\ArgumentUtils.cs" />
     <Compile Include="Script\Field\EnumDescriptionAttribute.cs" />
     <Compile Include="Script\Enum\ERuntimePlatform.cs" />
+    <Compile Include="Script\Test.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>
