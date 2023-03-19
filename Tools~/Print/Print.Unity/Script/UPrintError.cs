@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Text;
 
 using UnityEngine;
@@ -14,134 +12,110 @@ namespace AIO
     public partial class UPrint
     {
         /// <summary>
-        /// 
+        /// 错误日志 Json 结构
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
-        public static void ErrorArray<T>(ICollection<T> objs)
+        public static void Error<T>(in T obj, in EFormat format)
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Error)) return;
-            if (objs is null)
+            if (Print.IsNotOut || Print.NoStatus(Print.ERROR)) return;
+            switch (format)
             {
-                Console.WriteLine("{0} is null", nameof(objs));
-                return;
-            }
-
-            var message = string.Format("Count: {0}\r\n", objs.Count);
-            if (objs.Count > 0)
-            {
-                var str = new StringBuilder(message).Append("\r\n");
-                foreach (var item in objs) str.Append(string.Format(item.ToString())).Append("\r\n");
-                message = str.Remove(message.Length - 2, 2).ToString();
-            }
-
-            Debug.unityLogger.Log(LogType.Error, message);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [Conditional(Print.MACRO_DEFINITION)]
-        public static void ErrorArray<T>(IList<T> objs)
-        {
-            if (Print.IsNotOut || Print.NoStatus(Print.Error)) return;
-            if (objs is null)
-            {
-                Console.WriteLine("{0} is null", nameof(objs));
-                return;
-            }
-
-            var message = string.Format("Count: {0}\r\n", objs.Count);
-            if (objs.Count > 0)
-            {
-                var str = new StringBuilder(message).Append("\r\n");
-                foreach (var item in objs) str.Append(string.Format(item.ToString())).Append("\r\n");
-                message = str.Remove(message.Length - 2, 2).ToString();
-            }
-
-            Debug.unityLogger.Log(LogType.Error, message);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [Conditional(Print.MACRO_DEFINITION)]
-        public static void ErrorArray<TK, TV>(IDictionary<TK, TV> objs)
-        {
-            if (Print.IsNotOut || Print.NoStatus(Print.Error)) return;
-            if (objs is null)
-            {
-                Console.WriteLine("{0} is null", nameof(objs));
-                return;
-            }
-
-            var message = string.Format("Count: {0}\r\n", objs.Count);
-            if (objs.Count > 0)
-            {
-                var index = 1;
-                var str = new StringBuilder(message).Append("\r\n");
-                foreach (var kv in objs)
-                {
-                    if (kv.Value != null)
+                case EFormat.Json:
+                    Debug.unityLogger.Log(LogType.Error, Json.Serialize(obj));
+                    return;
+                case EFormat.Array:
+                    if (obj is IEnumerable enumerable)
                     {
-                        str.AppendFormat("[{0}]{1}:{2}\r\n", index++, kv.Key.ToString(), kv.Value.ToString());
+                        Error(enumerable);
+                        return;
                     }
-                    else str.AppendFormat("[{0}]{1}:NULL\r\n", index++, kv.Key.ToString());
-                }
+                    break;
+            }
+            Debug.unityLogger.Log(LogType.Error, obj);
+        }
 
-                message = str.Remove(message.Length - 2, 2).ToString();
+        /// <summary>
+        /// 错误日志 Json 结构
+        /// </summary>
+        [Conditional(Print.MACRO_DEFINITION)]
+        public static void Error(in object obj)
+        {
+            if (Print.IsNotOut || Print.NoStatus(Print.ERROR)) return;
+            Debug.unityLogger.Log(LogType.Error, obj);
+        }
+
+        /// <summary>
+        /// 错误 
+        /// </summary>
+        [Conditional(Print.MACRO_DEFINITION)]
+        public static void Error<T>(in T objs) where T : IEnumerable
+        {
+            if (Print.IsNotOut || Print.NoStatus(Print.ERROR)) return;
+            if (objs == null)
+            {
+                Debug.unityLogger.Log(LogType.Error, string.Format("{0} is null", nameof(objs)));
+                return;
             }
 
-            Debug.unityLogger.Log(LogType.Error, message);
-        }
+            if (objs is IDictionary dictionary)
+            {
+                Debug.unityLogger.Log(LogType.Error, IDictionary(dictionary));
+                return;
+            }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        [Conditional(Print.MACRO_DEFINITION)]
-        public static void ErrorFormat<T>(string format, params T[] objs)
-        {
-            if (Print.IsNotOut || Print.NoStatus(Print.Error)) return;
-            Debug.unityLogger.LogFormat(LogType.Error, format, objs);
-        }
+            if (objs is IList list)
+            {
+                Debug.unityLogger.Log(LogType.Error, IList(list));
+                return;
+            }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        [Conditional(Print.MACRO_DEFINITION)]
-        public static void ErrorFormat(string format, params object[] objs)
-        {
-            if (Print.IsNotOut || Print.NoStatus(Print.Error)) return;
-            Debug.unityLogger.LogFormat(LogType.Error, format, objs);
-        }
+            if (objs is ICollection collection)
+            {
+                Debug.unityLogger.Log(LogType.Error, ICollection(collection));
+                return;
+            }
 
+            Debug.unityLogger.Log(LogType.Error, IEnumerable(objs));
+        }
+     
         /// <summary>
-        /// 
+        /// 错误 数组
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
         public static void Error<T>(params T[] objs)
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Error)) return;
-            Debug.unityLogger.Log(LogType.Error, string.Join(" ", objs.Select(arg => arg)));
+            if (Print.IsNotOut || Print.NoStatus(Print.ERROR)) return;
+            Debug.unityLogger.Log(LogType.Error, IList(objs));
         }
 
         /// <summary>
-        /// 
+        /// 错误 数组
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
         public static void Error(params object[] objs)
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Error)) return;
-            Debug.unityLogger.Log(LogType.Error, string.Join(" ", objs.Select(arg => arg)));
+            if (Print.IsNotOut || Print.NoStatus(Print.ERROR)) return;
+            Debug.unityLogger.Log(LogType.Error, IList(objs));
         }
 
         /// <summary>
-        /// 
+        /// 错误
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
-        public static void Error<T>(T objs)
+        public static void ErrorFormat<T>(in string format, params T[] objs)
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Error)) return;
-            Debug.unityLogger.Log(LogType.Error, objs);
+            if (Print.IsNotOut || Print.NoStatus(Print.ERROR)) return;
+            Debug.unityLogger.LogFormat(LogType.Error, string.Format(format, objs));
+        }
+
+        /// <summary>
+        /// 错误
+        /// </summary>
+        [Conditional(Print.MACRO_DEFINITION)]
+        public static void ErrorFormat(in string format, params object[] objs)
+        {
+            if (Print.IsNotOut || Print.NoStatus(Print.ERROR)) return;
+            Debug.unityLogger.LogFormat(LogType.Error, string.Format(format, objs));
         }
     }
 }

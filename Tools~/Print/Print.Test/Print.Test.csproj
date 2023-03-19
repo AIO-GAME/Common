@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,25 +6,30 @@
     <StartupObject>AIO.Program</StartupObject>
     <RootNamespace>AIO</RootNamespace>
     <LangVersion>7.3</LangVersion>
-    <AssemblyOriginatorKeyFile>..\..\AIO.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>E:\TencentGit\Packages\com.self.core\Tools~\Print\Print.Test\Print.Test.xml</DocumentationFile>
+  <PropertyGroup>
+    <AssemblyName>AIO.Print.Test</AssemblyName>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>E:\TencentGit\Packages\com.self.core\Tools~\Print\Print.Test\Print.Test.xml</DocumentationFile>
-  </PropertyGroup>
-
+  
   <ItemGroup>
-    <None Include="..\..\AIO.pfx">
-      <Link>AIO.pfx</Link>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Print\Print.csproj" />
+    <ProjectReference Include="..\Print.Console\Print.Console.csproj">
+      <Private>false</Private>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+    </ProjectReference>
+    <ProjectReference Include="..\Print.Unity.Editor\Print.Unity.Editor.csproj">
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <Private>false</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Print.Unity\Print.Unity.csproj">
+      <Private>false</Private>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+    </ProjectReference>
+    <ProjectReference Include="..\Print\Print.csproj">
+      <Private>false</Private>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+    </ProjectReference>
   </ItemGroup>
 
 </Project>

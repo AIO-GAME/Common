@@ -48,6 +48,7 @@
     {
         static void Main(string[] args)
         {
+            AIO.Script.Test.AAA();
             Console.WriteLine(" -------------------- ");
             try
             {

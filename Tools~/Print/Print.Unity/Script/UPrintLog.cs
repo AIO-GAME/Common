@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 
 using UnityEngine;
 
@@ -14,134 +10,110 @@ namespace AIO
     public partial class UPrint
     {
         /// <summary>
-        /// 
+        /// 日志
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
-        public static void LogArray<T>(ICollection<T> objs)
+        public static void Log<T>(in T obj,in EFormat format)
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Log)) return;
-            if (objs is null)
+            if (Print.IsNotOut || Print.NoStatus(Print.LOG)) return;
+            switch (format)
             {
-                Console.WriteLine("{0} is null", nameof(objs));
-                return;
-            }
-
-            var message = string.Format("Count: {0}\r\n", objs.Count);
-            if (objs.Count > 0)
-            {
-                var str = new StringBuilder(message).Append("\r\n");
-                foreach (var item in objs) str.Append(string.Format(item.ToString())).Append("\r\n");
-                message = str.Remove(message.Length - 2, 2).ToString();
-            }
-
-            Debug.unityLogger.Log(LogType.Log, message);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [Conditional(Print.MACRO_DEFINITION)]
-        public static void LogArray<T>(IList<T> objs)
-        {
-            if (Print.IsNotOut || Print.NoStatus(Print.Log)) return;
-            if (objs is null)
-            {
-                Console.WriteLine("{0} is null", nameof(objs));
-                return;
-            }
-
-            var message = string.Format("Count: {0}\r\n", objs.Count);
-            if (objs.Count > 0)
-            {
-                var str = new StringBuilder(message).Append("\r\n");
-                foreach (var item in objs) str.Append(string.Format(item.ToString())).Append("\r\n");
-                message = str.Remove(message.Length - 2, 2).ToString();
-            }
-
-            Debug.unityLogger.Log(LogType.Log, message);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [Conditional(Print.MACRO_DEFINITION)]
-        public static void LogArray<TK, TV>(IDictionary<TK, TV> objs)
-        {
-            if (Print.IsNotOut || Print.NoStatus(Print.Log)) return;
-            if (objs is null)
-            {
-                Console.WriteLine("{0} is null", nameof(objs));
-                return;
-            }
-
-            var message = string.Format("Count: {0}\r\n", objs.Count);
-            if (objs.Count > 0)
-            {
-                var index = 1;
-                var str = new StringBuilder(message).Append("\r\n");
-                foreach (var kv in objs)
-                {
-                    if (kv.Value != null)
+                case EFormat.Json:
+                    Debug.unityLogger.Log(LogType.Log, Json.Serialize(obj));
+                    return;
+                case EFormat.Array:
+                    if (obj is IEnumerable enumerable)
                     {
-                        str.AppendFormat("[{0}]{1}:{2}\r\n", index++, kv.Key.ToString(), kv.Value.ToString());
+                        Log(enumerable);
+                        return;
                     }
-                    else str.AppendFormat("[{0}]{1}:NULL\r\n", index++, kv.Key.ToString());
-                }
+                    break;
+            }
+            Debug.unityLogger.Log(LogType.Log, obj);
+        }
 
-                message = str.Remove(message.Length - 2, 2).ToString();
+        /// <summary>
+        /// 日志
+        /// </summary>
+        [Conditional(Print.MACRO_DEFINITION)]
+        public static void Log(in object objs) 
+        {
+            if (Print.IsNotOut || Print.NoStatus(Print.LOG)) return;
+            Debug.unityLogger.Log(LogType.Log, objs);
+        }
+
+        /// <summary>
+        /// 日志
+        /// </summary>
+        [Conditional(Print.MACRO_DEFINITION)]
+        public static void Log<T>(in T objs) where T : IEnumerable
+        {
+            if (Print.IsNotOut || Print.NoStatus(Print.LOG)) return;
+            if (objs == null)
+            {
+                Debug.unityLogger.Log(LogType.Log, string.Format("{0} is null", nameof(objs)));
+                return;
             }
 
-            Debug.unityLogger.Log(LogType.Log, message);
+            if (objs is IDictionary dictionary)
+            {
+                Debug.unityLogger.Log(LogType.Log, IDictionary(dictionary));
+                return;
+            }
+
+            if (objs is IList list)
+            {
+                Debug.unityLogger.Log(LogType.Log, IList(list));
+                return;
+            }
+
+            if (objs is ICollection collection)
+            {
+                Debug.unityLogger.Log(LogType.Log, ICollection(collection));
+                return;
+            }
+
+            Debug.unityLogger.Log(LogType.Log, IEnumerable(objs));
         }
 
         /// <summary>
-        /// 
+        /// 日志
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
-        public static void LogFormat<T>(string format, params T[] objs)
+        public static void LogFormat<T>(in string format, params T[] objs)
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Log)) return;
-            Debug.unityLogger.LogFormat(LogType.Log, format, objs);
+            if (Print.IsNotOut || Print.NoStatus(Print.LOG)) return;
+            Debug.unityLogger.LogFormat(LogType.Log, string.Format(format, objs));
         }
 
         /// <summary>
-        /// 
+        /// 日志
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
-        public static void LogFormat(string format, params object[] objs)
+        public static void LogFormat(in string format, params object[] objs)
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Log)) return;
-            Debug.unityLogger.LogFormat(LogType.Log, format, objs);
+            if (Print.IsNotOut || Print.NoStatus(Print.LOG)) return;
+            Debug.unityLogger.LogFormat(LogType.Log, string.Format(format, objs));
         }
 
         /// <summary>
-        /// 
+        /// 日志
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
         public static void Log<T>(params T[] objs)
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Log)) return;
-            Debug.unityLogger.Log(LogType.Log, string.Join(" ", objs.Select(arg => arg)));
+            if (Print.IsNotOut || Print.NoStatus(Print.LOG)) return;
+            Debug.unityLogger.Log(LogType.Log, IList(objs));
         }
 
         /// <summary>
-        /// 
+        /// 日志
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
         public static void Log(params object[] objs)
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Log)) return;
-            Debug.unityLogger.Log(LogType.Log, string.Join(" ", objs.Select(arg => arg)));
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [Conditional(Print.MACRO_DEFINITION)]
-        public static void Log<T>(T objs)
-        {
-            if (Print.IsNotOut || Print.NoStatus(Print.Log)) return;
-            Debug.unityLogger.Log(LogType.Log, objs);
+            if (Print.IsNotOut || Print.NoStatus(Print.LOG)) return;
+            Debug.unityLogger.Log(LogType.Log, IList(objs));
         }
     }
 }

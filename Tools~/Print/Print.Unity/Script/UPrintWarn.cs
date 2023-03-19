@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 
 using UnityEngine;
 
@@ -11,137 +7,115 @@ using Debug = UnityEngine.Debug;
 
 namespace AIO
 {
-    public static partial class UPrint
+    public  partial class UPrint
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        [Conditional(Print.MACRO_DEFINITION)]
-        public static void WarnArray<T>(ICollection<T> objs)
-        {
-            if (Print.IsNotOut || Print.NoStatus(Print.Warn)) return;
-            if (objs is null)
-            {
-                Console.WriteLine("{0} is null", nameof(objs));
-                return;
-            }
-
-            var message = string.Format("Count: {0}\r\n", objs.Count);
-            if (objs.Count > 0)
-            {
-                var str = new StringBuilder(message).Append("\r\n");
-                foreach (var item in objs) str.Append(string.Format(item.ToString())).Append("\r\n");
-                message = str.Remove(message.Length - 2, 2).ToString();
-            }
-
-            Debug.unityLogger.Log(LogType.Warning, message);
-        }
 
         /// <summary>
-        /// 
+        /// 警告
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
-        public static void WarnArray<T>(IList<T> objs)
+        public static void Warn<T>(in T obj, in EFormat format)
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Warn)) return;
-            if (objs is null)
+            if (Print.IsNotOut || Print.NoStatus(Print.WARNING)) return;
+            switch (format)
             {
-                Console.WriteLine("{0} is null", nameof(objs));
-                return;
-            }
-
-            var message = string.Format("Count: {0}\r\n", objs.Count);
-            if (objs.Count > 0)
-            {
-                var str = new StringBuilder(message).Append("\r\n");
-                foreach (var item in objs) str.Append(string.Format(item.ToString())).Append("\r\n");
-                message = str.Remove(message.Length - 2, 2).ToString();
-            }
-
-            Debug.unityLogger.Log(LogType.Warning, message);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [Conditional(Print.MACRO_DEFINITION)]
-        public static void WarnArray<TK, TV>(IDictionary<TK, TV> objs)
-        {
-            if (Print.IsNotOut || Print.NoStatus(Print.Warn)) return;
-            if (objs is null)
-            {
-                Console.WriteLine("{0} is null", nameof(objs));
-                return;
-            }
-
-            var message = string.Format("Count: {0}\r\n", objs.Count);
-            if (objs.Count > 0)
-            {
-                var index = 1;
-                var str = new StringBuilder(message).Append("\r\n");
-                foreach (var kv in objs)
-                {
-                    if (kv.Value != null)
+                case EFormat.Json:
+                    Debug.unityLogger.Log(LogType.Warning, Json.Serialize(obj));
+                    return;
+                case EFormat.Array:
+                    if (obj is IEnumerable enumerable)
                     {
-                        str.AppendFormat("[{0}]{1}:{2}\r\n", index++, kv.Key.ToString(), kv.Value.ToString());
+                        Warn(enumerable);
+                        return;
                     }
-                    else str.AppendFormat("[{0}]{1}:NULL\r\n", index++, kv.Key.ToString());
-                }
+                    break;
+            }
+            Debug.unityLogger.Log(LogType.Warning, obj);
+        }
 
-                message = str.Remove(message.Length - 2, 2).ToString();
+        /// <summary>
+        /// 警告
+        /// </summary>
+        [Conditional(Print.MACRO_DEFINITION)]
+        public static void Warn(in object objs)
+        {
+            if (Print.IsNotOut || Print.NoStatus(Print.WARNING)) return;
+            Debug.unityLogger.Log(LogType.Warning, objs);
+        }
+
+        /// <summary>
+        /// 警告
+        /// </summary>
+        [Conditional(Print.MACRO_DEFINITION)]
+        public static void Warn<T>(in T objs) where T : IEnumerable
+        {
+            if (Print.IsNotOut || Print.NoStatus(Print.WARNING)) return;
+            if (objs == null)
+            {
+                Debug.unityLogger.Log(LogType.Warning, string.Format("{0} is null", nameof(objs)));
+                return;
             }
 
-            Debug.unityLogger.Log(LogType.Warning, message);
+            if (objs is IDictionary dictionary)
+            {
+                Debug.unityLogger.Log(LogType.Warning, IDictionary(dictionary));
+                return;
+            }
+
+            if (objs is IList list)
+            {
+                Debug.unityLogger.Log(LogType.Warning, IList(list));
+                return;
+            }
+
+            if (objs is ICollection collection)
+            {
+                Debug.unityLogger.Log(LogType.Warning, ICollection(collection));
+                return;
+            }
+
+            Debug.unityLogger.Log(LogType.Warning, IEnumerable(objs));
         }
 
+       
         /// <summary>
-        /// 
+        /// 警告
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
-        public static void WarnFormat<T>(string format, params T[] objs)
+        public static void WarnFormat<T>(in string format, params T[] objs)
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Warn)) return;
-            Debug.unityLogger.LogFormat(LogType.Warning, format, objs);
+            if (Print.IsNotOut || Print.NoStatus(Print.WARNING)) return;
+            Debug.unityLogger.LogFormat(LogType.Warning, string.Format(format, objs));
         }
 
         /// <summary>
-        /// 
+        /// 警告
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
-        public static void WarnFormat(string format, params object[] objs)
+        public static void WarnFormat(in string format, params object[] objs)
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Warn)) return;
-            Debug.unityLogger.LogFormat(LogType.Warning, format, objs);
+            if (Print.IsNotOut || Print.NoStatus(Print.WARNING)) return;
+            Debug.unityLogger.LogFormat(LogType.Warning, string.Format(format, objs));
         }
 
         /// <summary>
-        /// 
+        /// 警告
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
         public static void Warn<T>(params T[] objs)
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Warn)) return;
-            Debug.unityLogger.Log(LogType.Warning, string.Join(" ", objs.Select(arg => arg)));
+            if (Print.IsNotOut || Print.NoStatus(Print.WARNING)) return;
+            Debug.unityLogger.Log(LogType.Warning, IList(objs));
         }
 
         /// <summary>
-        /// 
+        /// 警告
         /// </summary>
         [Conditional(Print.MACRO_DEFINITION)]
         public static void Warn(params object[] objs)
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.Warn)) return;
-            Debug.unityLogger.Log(LogType.Warning, string.Join(" ", objs.Select(arg => arg)));
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [Conditional(Print.MACRO_DEFINITION)]
-        public static void Warn<T>(T objs)
-        {
-            if (Print.IsNotOut || Print.NoStatus(Print.Warn)) return;
-            Debug.unityLogger.Log(LogType.Warning, objs);
+            if (Print.IsNotOut || Print.NoStatus(Print.WARNING)) return;
+            Debug.unityLogger.Log(LogType.Warning, IList(objs));
         }
     }
 }
