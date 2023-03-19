@@ -2,11 +2,8 @@
 {
     using AIO;
 
-    using Newtonsoft.Json;
-
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.IO;
     using System.Reflection;
 
@@ -78,7 +75,7 @@
 
             try
             {
-                var config = JsonConvert.DeserializeObject<HotDllConfig[]>(File.ReadAllText(Path.Combine(savePath, FileName)));
+                var config = ParseUtils.JsonDeserialize<HotDllConfig[]>(File.ReadAllText(Path.Combine(savePath, FileName)));
                 if (config == null) throw new ArgumentNullException($" ------------------ 文件下载错误 读取DllList.json失败");
 
                 var dic = new Dictionary<string, List<string>>();
