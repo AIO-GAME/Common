@@ -37,7 +37,8 @@ namespace AIO.Package.Editor
 
         protected void OnEnable()
         {
-            Root = Directory.GetParent(Application.dataPath).FullName;
+            Root = Application.dataPath.Replace("Assets", "Packages");
+
             List.Clear();
 
             foreach (var data in new DirectoryInfo(Root).GetFiles("*.asset.json", SearchOption.AllDirectories))
