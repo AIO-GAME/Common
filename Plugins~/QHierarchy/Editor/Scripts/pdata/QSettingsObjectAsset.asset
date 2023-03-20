@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 975be1c2eb04362418c67617e8ba442b, type: 3}
+  m_Script: {fileID: 11500000, guid: 50ba9f12ba867db4abd2559bc53c7f39, type: 3}
   m_Name: QSettingsObjectAsset
   m_EditorClassIdentifier: 
   settingStringNames: []
