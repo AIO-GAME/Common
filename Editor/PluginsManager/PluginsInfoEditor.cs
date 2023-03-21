@@ -1,42 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace AIO.Package.Editor
 {
+    /// <summary>
+    /// 插件管理
+    /// </summary>
     [CanEditMultipleObjects]
     [CustomEditor(typeof(PluginsInfo))]
     internal class PluginsInfoEditor : UnityEditor.Editor
     {
-        private PluginsInfo[] plugins;
+        private Dictionary<string, bool> InstallList;
 
         private DirectoryInfo Root;
+
+        private PluginsInfoEditor()
+        {
+            InstallList = new Dictionary<string, bool>();
+        }
 
         private void OnEnable()
         {
             Root = Directory.GetParent(Application.dataPath);
-            plugins = new PluginsInfo[targets.Length];
-            for (var i = 0; i < targets.Length; i++)
+            InstallList.Clear();
+            if (serializedObject.isEditingMultipleObjects)
             {
-                var path = AssetDatabase.GetAssetPath(targets[i]) + ".json";
-                plugins[i] = (PluginsInfo)targets[i];
-                if (File.Exists(path))
-                {
-                    var info = JsonUtility.FromJson<PluginsInfoJson>(File.ReadAllText(path)) ?? new PluginsInfoJson();
-                    plugins[i].Name = info.Name;
-                    plugins[i].MacroDefinition = info.MacroDefinition;
-                    plugins[i].SourceRelativePath = info.SourceRelativePath;
-                    plugins[i].TargetRelativePath = info.TargetRelativePath;
-                }
+                foreach (var o in serializedObject.targetObjects) UpdateInstallInfo(o);
             }
+            else UpdateInstallInfo(serializedObject.targetObject);
+        }
 
-            Undo.RegisterCreatedObjectUndo(this, nameof(PluginsInfoEditor));
+        private void UpdateInstallInfo(in Object obj)
+        {
+            var serialized = new SerializedObject(obj);
+            InstallList.Set(serialized.FindProperty("Name").stringValue, GetValidDir(Root.FullName, serialized.FindProperty("TargetRelativePath").stringValue)?.Exists);
         }
 
         internal static void PathIsRegex(string path)
@@ -55,80 +59,116 @@ namespace AIO.Package.Editor
 
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
-            foreach (var setting in plugins)
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("插件安装管理配置", new GUIStyle("PreLabel"));
+            if (GUILayout.Button("管理", GUILayout.Width(60))) PackageMenus.PluginsWindow();
+            EditorGUILayout.EndHorizontal();
+
+            foreach (var o in serializedObject.targetObjects)
             {
-                EditorGUILayout.LabelField("插件安装管理配置", new GUIStyle("PreLabel"));
+                var serialized = new SerializedObject(o);
+                var Name = serialized.FindProperty("Name");
+                var SourceRelativePath = serialized.FindProperty("SourceRelativePath");
+                var TargetRelativePath = serialized.FindProperty("TargetRelativePath");
+                var MacroDefinition = serialized.FindProperty("MacroDefinition");
+                var Introduction = serialized.FindProperty("Introduction");
+                
                 EditorGUILayout.BeginVertical(new GUIStyle("ChannelStripBg"));
 
-                EditorGUILayout.PrefixLabel("插件名");
-                setting.Name = EditorGUILayout.TextField(setting.Name);
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField(Name.stringValue, new GUIStyle("PreLabel"), GUILayout.ExpandWidth(true));
+                if (!string.IsNullOrEmpty(SourceRelativePath.stringValue) &&
+                    !string.IsNullOrEmpty(TargetRelativePath.stringValue))
+                {
+                    if (InstallList.Get<bool>(Name.stringValue))
+                    {
+                        if (GUILayout.Button("卸载", GUILayout.Width(57))) _ = UnInitialize((PluginsInfo)o);
+                    }
+                    else
+                    {
+                        if (GUILayout.Button("安装", GUILayout.Width(57))) _ = Initialize((PluginsInfo)o);
+                    }
+                }
+
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.Space();
                 EditorGUILayout.Space();
 
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.PrefixLabel("插件名");
+                Name.stringValue = EditorGUILayout.TextField(Name.stringValue);
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.Space();
+
+                EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.PrefixLabel("宏定义");
-                setting.MacroDefinition = EditorGUILayout.TextField(setting.MacroDefinition);
+                MacroDefinition.stringValue = EditorGUILayout.TextField(MacroDefinition.stringValue);
+                EditorGUILayout.EndHorizontal();
                 EditorGUILayout.Space();
 
                 EditorGUILayout.PrefixLabel("源文件相对路径");
-                setting.SourceRelativePath = EditorGUILayout.TextField(setting.SourceRelativePath);
+                TargetRelativePath.stringValue = EditorGUILayout.TextField(TargetRelativePath.stringValue);
                 EditorGUILayout.Space();
 
                 EditorGUILayout.PrefixLabel("链接相对路径");
-                setting.TargetRelativePath = EditorGUILayout.TextField(setting.TargetRelativePath);
+                SourceRelativePath.stringValue = EditorGUILayout.TextField(SourceRelativePath.stringValue);
                 EditorGUILayout.Space();
-
+                
+                EditorGUILayout.PrefixLabel("简介");
+                Introduction.stringValue = EditorGUILayout.TextArea(Introduction.stringValue,GUILayout.Height(50));
+                EditorGUILayout.Space();
+                
                 EditorGUILayout.EndVertical();
 
                 EditorGUILayout.Space();
-
-                if (!string.IsNullOrEmpty(setting.SourceRelativePath) &&
-                    !string.IsNullOrEmpty(setting.TargetRelativePath))
-                {
-                    EditorGUILayout.BeginHorizontal();
-
-                    if (GUILayout.Button("UnInstall")) _ = UnInitialize(setting);
-                    if (GUILayout.Button(" Install ")) _ = Initialize(setting);
-                    // if (GetValidDir(Root.FullName, setting.TargetRelativePath).Exists)
-                    // {
-                    // }
-                    // else
-                    // {
-                    // }
-
-                    EditorGUILayout.EndHorizontal();
-                }
+                serialized.SetIsDifferentCacheDirty();
+                serialized.ApplyModifiedPropertiesWithoutUndo();
+                serialized.Update();
             }
 
-            serializedObject.ApplyModifiedProperties();
+            serializedObject.SetIsDifferentCacheDirty();
+            serializedObject.ApplyModifiedPropertiesWithoutUndo();
+            serializedObject.Update();
         }
 
         private void OnValidate()
         {
-            Undo.RecordObject(this, nameof(PluginsInfoEditor));
+            if (serializedObject.hasModifiedProperties)
+            {
+                if (serializedObject.isEditingMultipleObjects)
+                {
+                    foreach (var o in serializedObject.targetObjects) UpdateInstallInfo(o);
+                }
+                else UpdateInstallInfo(serializedObject.targetObject);
+            }
+
+            serializedObject.ApplyModifiedPropertiesWithoutUndo();
         }
 
         private void OnDisable()
         {
-            for (var i = 0; i < targets.Length; i++)
-            {
-                var path = AssetDatabase.GetAssetPath(targets[i]);
-                var info = new PluginsInfoJson();
-                info.Name = plugins[i].Name;
-                info.MacroDefinition = plugins[i].MacroDefinition;
-                info.SourceRelativePath = plugins[i].SourceRelativePath;
-                info.TargetRelativePath = plugins[i].TargetRelativePath;
-                File.WriteAllText(path + ".json", JsonUtility.ToJson(info), Encoding.UTF8);
-            }
+            serializedObject.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        private void OnDestroy()
+        {
+            serializedObject.Dispose();
         }
 
         internal static DirectoryInfo GetValidDir(string rootdir, string value)
         {
+            if (string.IsNullOrEmpty(value)) return null;
+            var dirinfo = new DirectoryInfo(value);
+            if (dirinfo.Exists) return dirinfo;
             var root = new DirectoryInfo(Path.Combine(rootdir, Path.GetPathRoot(value)));
-            var name = Path.GetFileName(value);
+
+            var name = dirinfo.Name;
             try
             {
                 var regex = new Regex(value);
-                foreach (var directory in root.GetDirectories("*.*", SearchOption.AllDirectories))
+                foreach (var directory in root.GetDirectories("*.*", value.Contains("*") ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
                 {
                     if (directory.Name == name && regex.Match(directory.FullName).Success)
                         return directory;
@@ -139,21 +179,10 @@ namespace AIO.Package.Editor
                 // ignored
             }
 
-            return new DirectoryInfo(value);
+            return dirinfo;
         }
 
-        internal static async Task Initialize(PluginsInfo info)
-        {
-            await Initialize(new PluginsInfoJson
-            {
-                Name = info.Name,
-                MacroDefinition = info.MacroDefinition,
-                SourceRelativePath = info.SourceRelativePath,
-                TargetRelativePath = info.TargetRelativePath
-            });
-        }
-
-        internal static async Task Initialize(IEnumerable<PluginsInfoJson> infos)
+        internal static async Task Initialize(IEnumerable<PluginsInfo> infos)
         {
             var dataPath = Directory.GetParent(Application.dataPath).FullName;
             var list = new List<Task>();
@@ -195,7 +224,7 @@ namespace AIO.Package.Editor
             CompilationPipeline.RequestScriptCompilation();
         }
 
-        internal static async Task UnInitialize(IEnumerable<PluginsInfoJson> infos)
+        internal static async Task UnInitialize(IEnumerable<PluginsInfo> infos)
         {
             var dataPath = Directory.GetParent(Application.dataPath).FullName;
             var list = new List<Task>();
@@ -231,7 +260,7 @@ namespace AIO.Package.Editor
             CompilationPipeline.RequestScriptCompilation();
         }
 
-        internal static async Task Initialize(PluginsInfoJson info)
+        internal static async Task Initialize(PluginsInfo info)
         {
             var dataPath = Directory.GetParent(Application.dataPath).FullName;
             var source = GetValidDir(dataPath, info.SourceRelativePath);
@@ -262,7 +291,7 @@ namespace AIO.Package.Editor
             else Debug.LogErrorFormat("链接失败 {0} : {1} => {2}", info.Name, target.FullName, Result.StdALL);
         }
 
-        internal static async Task UnInitialize(PluginsInfoJson info)
+        internal static async Task UnInitialize(PluginsInfo info)
         {
             var target = GetValidDir(Application.dataPath, info.TargetRelativePath);
             if (!target.Exists)
@@ -281,17 +310,6 @@ namespace AIO.Package.Editor
                 CompilationPipeline.RequestScriptCompilation();
             }
             else Debug.LogErrorFormat("移除失败 {0} : {1} \n {2}", info.Name, target.FullName, Result.StdALL);
-        }
-
-        internal static async Task UnInitialize(PluginsInfo info)
-        {
-            await UnInitialize(new PluginsInfoJson
-            {
-                Name = info.Name,
-                MacroDefinition = info.MacroDefinition,
-                SourceRelativePath = info.SourceRelativePath,
-                TargetRelativePath = info.TargetRelativePath
-            });
         }
 
         /// <summary>
@@ -314,18 +332,24 @@ namespace AIO.Package.Editor
         /// <summary>
         /// 添加你想要的宏定义
         /// </summary>
-        internal static void AddScriptingDefineSymbols(string value)
+        internal static void AddScriptingDefineSymbols(params string[] value)
         {
             //获取当前是哪个平台
             var buildTargetGroup = EditorUserBuildSettings.selectedBuildTargetGroup;
             //获得当前平台已有的的宏定义
             var str = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
-            if (!str.Contains(value))
+            var list = str.Split(';');
+            var verify = new List<string>();
+            foreach (var v in value)
             {
-                //添加宏定义
-                str += ";" + value;
-                PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, str);
+                if (string.IsNullOrEmpty(v)) continue;
+                if (verify.Contain(v) || list.Contain(v)) continue;
+                verify.Add(v);
             }
+
+            //添加宏定义
+            str += ";" + string.Join(";", verify);
+            PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, str);
         }
     }
 }

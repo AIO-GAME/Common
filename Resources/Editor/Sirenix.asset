@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ca96fead514a742864f5ed790b6601, type: 3}
   m_Name: Sirenix
   m_EditorClassIdentifier: 
-  SourceRelativePath: 
-  Name: 
-  TargetRelativePath: 
-  MacroDefinition: 
+  SourceRelativePath: Packages\\com.*.package\\Plugins~\\Sirenix
+  Name: Odin Sirenix
+  TargetRelativePath: Assets\Plugins\Sirenix
+  MacroDefinition: SIRENIX
+  Introduction: "\u6570\u636E\u53EF\u89C6\u5316\u63D2\u4EF6"

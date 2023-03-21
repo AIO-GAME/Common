@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ca96fead514a742864f5ed790b6601, type: 3}
   m_Name: DesignTools
   m_EditorClassIdentifier: 
-  SourceRelativePath: 
-  Name: 
-  TargetRelativePath: 
+  SourceRelativePath: Packages\\com.*.package\\Plugins~\\DesignTools
+  Name: Design Tools Transform
+  TargetRelativePath: Assets\Plugins\DesignTools
   MacroDefinition: 
+  Introduction: "Transform\u63D2\u4EF6"

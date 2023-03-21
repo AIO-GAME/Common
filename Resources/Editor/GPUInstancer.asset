@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ca96fead514a742864f5ed790b6601, type: 3}
   m_Name: GPUInstancer
   m_EditorClassIdentifier: 
-  SourceRelativePath: 
-  Name: 
-  TargetRelativePath: 
+  SourceRelativePath: Packages\\com.*.package\\Plugins~\\GPUInstancer
+  Name: GPUInstancer
+  TargetRelativePath: Assets\Plugins\GPUInstancer
   MacroDefinition: 
+  Introduction: "GPU\u6E32\u67D3\u63D2\u4EF6 \u4F18\u5316\u63D2\u4EF6"

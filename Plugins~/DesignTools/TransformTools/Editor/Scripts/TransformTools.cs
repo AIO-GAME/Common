@@ -18,6 +18,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using Object = UnityEngine.Object;
 
 namespace PluginMaster
 {
@@ -25,7 +26,12 @@ namespace PluginMaster
     {
         #region BOUNDS
 
-        public enum Bound { MIN, CENTER, MAX }
+        public enum Bound
+        {
+            MIN,
+            CENTER,
+            MAX
+        }
 
         public enum RelativeTo
         {
@@ -36,7 +42,13 @@ namespace PluginMaster
             SELECTION,
             CANVAS
         }
-        public enum Axis { X, Y, Z }
+
+        public enum Axis
+        {
+            X,
+            Y,
+            Z
+        }
 
         private static Vector3 GetBound(Bounds bounds, Bound bound)
         {
@@ -49,16 +61,17 @@ namespace PluginMaster
                 case Bound.MAX:
                     return bounds.max;
             }
+
             return bounds.center;
         }
 
-        private static GameObject GetAnchorObject(GameObject[] selection, RelativeTo relativeTo, Axis axis, bool recursive = true)
+        private static GameObject GetAnchorObject(IReadOnlyList<GameObject> selection, RelativeTo relativeTo, Axis axis, bool recursive = true)
         {
-            if (selection.Length == 0) return null;
+            if (selection.Count == 0) return null;
             switch (relativeTo)
             {
                 case RelativeTo.LAST_SELECTED:
-                    return selection.Last<GameObject>();
+                    return selection.Last();
                 case RelativeTo.FIRST_SELECTED:
                     return selection[0];
                 case RelativeTo.BIGGEST_OBJECT:
@@ -75,6 +88,7 @@ namespace PluginMaster
                                     maxSize = bounds.size.x;
                                     biggestObject = obj;
                                 }
+
                                 break;
                             case Axis.Y:
                                 if (bounds.size.y > maxSize)
@@ -82,6 +96,7 @@ namespace PluginMaster
                                     maxSize = bounds.size.y;
                                     biggestObject = obj;
                                 }
+
                                 break;
                             case Axis.Z:
                                 if (bounds.size.z > maxSize)
@@ -89,9 +104,11 @@ namespace PluginMaster
                                     maxSize = bounds.size.z;
                                     biggestObject = obj;
                                 }
+
                                 break;
                         }
                     }
+
                     return biggestObject;
                 case RelativeTo.SMALLEST_OBJECT:
                     GameObject smallestObject = null;
@@ -107,6 +124,7 @@ namespace PluginMaster
                                     minSize = bounds.size.x;
                                     smallestObject = obj;
                                 }
+
                                 break;
                             case Axis.Y:
                                 if (bounds.size.y < minSize)
@@ -114,6 +132,7 @@ namespace PluginMaster
                                     minSize = bounds.size.y;
                                     smallestObject = obj;
                                 }
+
                                 break;
                             case Axis.Z:
                                 if (bounds.size.z < minSize)
@@ -121,9 +140,11 @@ namespace PluginMaster
                                     minSize = bounds.size.z;
                                     smallestObject = obj;
                                 }
+
                                 break;
                         }
                     }
+
                     return smallestObject;
                 default:
                     return null;
@@ -140,12 +161,14 @@ namespace PluginMaster
                 max = Vector3.Max(bounds.max, max);
                 min = Vector3.Min(bounds.min, min);
             }
+
             var size = max - min;
             var center = min + size / 2f;
             return new Bounds(center, size);
         }
 
-        private static Tuple<GameObject, Bounds> GetSelectionBounds(GameObject[] selection, RelativeTo relativeTo, Axis axis, bool recursive = true, BoundsUtils.ObjectProperty property = BoundsUtils.ObjectProperty.BOUNDING_BOX)
+        private static Tuple<GameObject, Bounds> GetSelectionBounds(GameObject[] selection, RelativeTo relativeTo, Axis axis, bool recursive = true,
+            BoundsUtils.ObjectProperty property = BoundsUtils.ObjectProperty.BOUNDING_BOX)
         {
             if (selection.Length == 0) return new Tuple<GameObject, Bounds>(null, new Bounds());
             var anchor = GetAnchorObject(selection, relativeTo, axis);
@@ -155,15 +178,16 @@ namespace PluginMaster
                 var canvasBounds = GetCanvasBounds(selection);
                 if (canvasBounds.size != Vector3.zero) return new Tuple<GameObject, Bounds>(null, GetCanvasBounds(selection));
             }
+
             return new Tuple<GameObject, Bounds>(null, GetSelectionBounds(selection, recursive, property));
         }
 
-        private static Bounds GetCanvasBounds(GameObject[] selection)
+        private static Bounds GetCanvasBounds(IReadOnlyCollection<GameObject> selection)
         {
-            if (selection.Length == 0) return new Bounds();
+            if (selection.Count == 0) return new Bounds();
             var max = new Vector3(float.MinValue, float.MinValue, float.MinValue);
             var min = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
-            bool noCanvasFound = true;
+            var noCanvasFound = true;
             foreach (var obj in selection)
             {
                 var canvas = GetTopmostCanvas(obj);
@@ -171,16 +195,18 @@ namespace PluginMaster
                 noCanvasFound = false;
                 var rectTransform = canvas.GetComponent<RectTransform>();
                 var halfSize = rectTransform.sizeDelta / 2;
-                max = Vector3.Max(max, rectTransform.position + (Vector3)halfSize);
-                min = Vector3.Min(min, rectTransform.position - (Vector3)halfSize);
+                var position = rectTransform.position;
+                max = Vector3.Max(max, position + (Vector3)halfSize);
+                min = Vector3.Min(min, position - (Vector3)halfSize);
             }
+
             if (noCanvasFound) return new Bounds();
             var size = max - min;
             var center = min + size / 2f;
             return new Bounds(center, size);
         }
 
-        private static Bounds GetCanvasBounds(Canvas canvas)
+        private static Bounds GetCanvasBounds(Component canvas)
         {
             var rectTransform = canvas.GetComponent<RectTransform>();
             return new Bounds(rectTransform.position, rectTransform.sizeDelta);
@@ -189,17 +215,25 @@ namespace PluginMaster
         private static Canvas GetTopmostCanvas(GameObject obj)
         {
             var canvasesInParent = obj.GetComponentsInParent<Canvas>();
-            if (canvasesInParent.Length == 0) return null;
-            if (canvasesInParent.Length == 1) return canvasesInParent[0];
+            switch (canvasesInParent.Length)
+            {
+                case 0: return null;
+                case 1: return canvasesInParent[0];
+            }
+
             foreach (var canvasInParent in canvasesInParent)
             {
                 var canvasCount = canvasInParent.GetComponentsInParent<Canvas>().Length;
                 if (canvasCount == 1) return canvasInParent;
             }
+
             return null;
         }
+
         #endregion
+
         #region ALIGN
+
         public static void Align(GameObject[] selection, RelativeTo relativeTo, Axis axis, Bound bound, bool AlignToAnchor,
             bool filterByTopLevel = true, BoundsUtils.ObjectProperty property = BoundsUtils.ObjectProperty.BOUNDING_BOX, bool recordAction = true)
         {
@@ -212,9 +246,8 @@ namespace PluginMaster
             var selectionBound = GetBound(selectionBoundsTuple.Item2, AlignToAnchor ? (bound == Bound.MAX ? Bound.MIN : Bound.MAX) : bound);
             var anchor = selectionBoundsTuple.Item1;
 
-            for (int i = 0; i < selection.Length; ++i)
+            foreach (var obj in selection)
             {
-                var obj = selection[i];
                 if (obj == anchor && relativeTo != RelativeTo.SELECTION) continue;
 
                 if (recordAction) Undo.RecordObject(obj.transform, COMMAND_NAME);
@@ -234,6 +267,7 @@ namespace PluginMaster
                         alignedPosition.z = obj.transform.position.z + selectionBound.z - objBound.z;
                         break;
                 }
+
                 var delta = alignedPosition - obj.transform.position;
                 obj.transform.position = alignedPosition;
                 if (anchor != null && anchor.transform.parent == obj.transform)
@@ -243,8 +277,11 @@ namespace PluginMaster
                 }
             }
         }
+
         #endregion
+
         #region DISTRIBUTE
+
         public static void Distribute(GameObject[] selection, Axis axis, Bound bound)
         {
             if (selection.Length < 2) return;
@@ -263,23 +300,24 @@ namespace PluginMaster
                     break;
             }
 
-            var min = GetBound(BoundsUtils.GetBoundsRecursive(sortedList.First<GameObject>().transform), bound);
-            var max = GetBound(BoundsUtils.GetBoundsRecursive(sortedList.Last<GameObject>().transform), bound);
+            var min = GetBound(BoundsUtils.GetBoundsRecursive(sortedList.First().transform), bound);
+            var max = GetBound(BoundsUtils.GetBoundsRecursive(sortedList.Last().transform), bound);
 
             var objDistance = 0f;
             switch (axis)
             {
                 case Axis.X:
-                    objDistance = (max.x - min.x) / (float)(selection.Length - 1);
+                    objDistance = (max.x - min.x) / (selection.Length - 1);
                     break;
                 case Axis.Y:
-                    objDistance = (max.y - min.y) / (float)(selection.Length - 1);
+                    objDistance = (max.y - min.y) / (selection.Length - 1);
                     break;
                 case Axis.Z:
-                    objDistance = (max.z - min.z) / (float)(selection.Length - 1);
+                    objDistance = (max.z - min.z) / (selection.Length - 1);
                     break;
             }
-            for (int i = 0; i < sortedList.Count; ++i)
+
+            for (var i = 0; i < sortedList.Count; ++i)
             {
                 var transform = sortedList[i].transform;
                 Undo.RecordObject(transform, COMMAND_NAME);
@@ -297,6 +335,7 @@ namespace PluginMaster
                         distributedPosition.z += min.z - objBound.z + objDistance * i;
                         break;
                 }
+
                 transform.position = distributedPosition;
             }
         }
@@ -308,7 +347,7 @@ namespace PluginMaster
             var selectionBounds = GetSelectionBounds(selection, RelativeTo.SELECTION, axis).Item2;
             var gapSize = selectionBounds.size;
             foreach (var obj in selection) gapSize -= BoundsUtils.GetBoundsRecursive(obj.transform).size;
-            gapSize /= (float)(selection.Length - 1);
+            gapSize /= selection.Length - 1;
 
             var sortedList = new List<GameObject>(selection);
             switch (axis)
@@ -324,7 +363,7 @@ namespace PluginMaster
                     break;
             }
 
-            var prevMax = BoundsUtils.GetBoundsRecursive(sortedList.First<GameObject>().transform).min - gapSize;
+            var prevMax = BoundsUtils.GetBoundsRecursive(sortedList.First().transform).min - gapSize;
 
             foreach (var obj in sortedList)
             {
@@ -345,40 +384,45 @@ namespace PluginMaster
                         distributedPosition.z += prevMax.z + gapSize.z - objMin.z;
                         break;
                 }
+
                 transform.position = Vector3.Lerp(transform.position, distributedPosition, strength);
                 prevMax = BoundsUtils.GetBoundsRecursive(transform).max;
             }
         }
+
         #endregion
+
         #region GRID ARRANGE
+
         public class ArrangeAxisData
         {
             private bool _overwrite = true;
-            private int _direction = 1;
-            private int _priority = 0;
-            private int _cells = 1;
-            private CellSizeType _cellSizeType = CellSizeType.BIGGEST_OBJECT;
             private float _cellSize = 0f;
-            private TransformTools.Bound _aligment = TransformTools.Bound.CENTER;
-            private float _spacing = 0f;
 
-            public ArrangeAxisData(int priority) => _priority = priority;
+            public ArrangeAxisData(int priority) => this.priority = priority;
 
-            public int direction { get => _direction; set => _direction = value; }
-            public int priority { get => _priority; set => _priority = value; }
-            public int cells { get => _cells; set => _cells = value; }
-            public Bound aligment { get => _aligment; set => _aligment = value; }
-            public float spacing { get => _spacing; set => _spacing = value; }
-            public CellSizeType cellSizeType { get => _cellSizeType; set => _cellSizeType = value; }
+            public int direction { get; set; } = 1;
+
+            public int priority { get; set; } = 0;
+
+            public int cells { get; set; } = 1;
+
+            public Bound aligment { get; set; } = Bound.CENTER;
+
+            public float spacing { get; set; } = 0f;
+
+            public CellSizeType cellSizeType { get; set; } = CellSizeType.BIGGEST_OBJECT;
+
             public float cellSize
             {
                 get => _cellSize;
                 set
                 {
-                    if (value < 0 || _cellSize == value) return;
+                    if (value < 0 || Math.Abs(_cellSize - value) < 0) return;
                     _cellSize = value;
                 }
             }
+
             public bool overwrite
             {
                 get => _overwrite;
@@ -388,8 +432,8 @@ namespace PluginMaster
                     _overwrite = value;
                     if (!_overwrite)
                     {
-                        _cells = 1;
-                        _priority = 2;
+                        cells = 1;
+                        priority = 2;
                     }
                 }
             }
@@ -417,17 +461,15 @@ namespace PluginMaster
 
         public class ArrangeData
         {
-            private ArrangeAxisData _x = new ArrangeAxisData(0);
-            private ArrangeAxisData _y = new ArrangeAxisData(1);
-            private ArrangeAxisData _z = new ArrangeAxisData(2);
             private SortBy _sortBy = SortBy.POSITION;
-            private List<TransformTools.Axis> _priorityList = new List<TransformTools.Axis> { TransformTools.Axis.X, TransformTools.Axis.Y, TransformTools.Axis.Z };
-            private BoundsUtils.ObjectProperty _alignProperty = BoundsUtils.ObjectProperty.BOUNDING_BOX;
-            private ArrangeRelativeTo _arrangeRelativeTo = ArrangeRelativeTo.SELECTION;
+            private List<Axis> _priorityList = new List<Axis> { Axis.X, Axis.Y, Axis.Z };
 
-            public ArrangeAxisData x { get => _x; set => _x = value; }
-            public ArrangeAxisData y { get => _y; set => _y = value; }
-            public ArrangeAxisData z { get => _z; set => _z = value; }
+            public ArrangeAxisData x { get; set; } = new ArrangeAxisData(0);
+
+            public ArrangeAxisData y { get; set; } = new ArrangeAxisData(1);
+
+            public ArrangeAxisData z { get; set; } = new ArrangeAxisData(2);
+
             public SortBy sortBy
             {
                 get => _sortBy;
@@ -445,13 +487,15 @@ namespace PluginMaster
                 }
             }
 
-            public BoundsUtils.ObjectProperty alignProperty { get => _alignProperty; set => _alignProperty = value; }
-            public ArrangeRelativeTo arrangeRelativeTo { get => _arrangeRelativeTo; set => _arrangeRelativeTo = value; }
+            public BoundsUtils.ObjectProperty alignProperty { get; set; } = BoundsUtils.ObjectProperty.BOUNDING_BOX;
+
+            public ArrangeRelativeTo arrangeRelativeTo { get; set; } = ArrangeRelativeTo.SELECTION;
 
             public ArrangeAxisData GetData(Axis axis)
             {
                 return axis == Axis.X ? x : axis == Axis.Y ? y : z;
             }
+
             public void UpdatePriorities(Axis axis)
             {
                 var activeAxes = Convert.ToInt32(x.overwrite) + Convert.ToInt32(y.overwrite) + Convert.ToInt32(z.overwrite);
@@ -461,6 +505,7 @@ namespace PluginMaster
                     if (y.overwrite) y.priority = Mathf.Min(y.priority, activeAxes - 1);
                     if (z.overwrite) z.priority = Mathf.Min(z.priority, activeAxes - 1);
                 }
+
                 _priorityList.Remove(axis);
                 _priorityList.Insert(GetData(axis).priority, axis);
 
@@ -469,18 +514,19 @@ namespace PluginMaster
                 {
                     switch (_priorityList[priority])
                     {
-                        case TransformTools.Axis.X:
+                        case Axis.X:
                             x.priority = priority;
                             break;
-                        case TransformTools.Axis.Y:
+                        case Axis.Y:
                             y.priority = priority;
                             break;
-                        case TransformTools.Axis.Z:
+                        case Axis.Z:
                             z.priority = priority;
                             break;
                     }
                 }
             }
+
             public Axis GetAxisByPriority(int priority) => _priorityList[priority];
             public ArrangeAxisData GetAxisDataByPriority(int priority) => GetData(_priorityList[priority]);
         }
@@ -517,6 +563,7 @@ namespace PluginMaster
                 if (!IsFirstCell(p1)) continue;
                 p2 = GetNextCellIndex(p2, dataList[2].cells);
             }
+
             return objDictionary;
         }
 
@@ -530,6 +577,7 @@ namespace PluginMaster
                 maxSize = Vector3.Max(maxSize, objBounds.size);
                 averageSize += objBounds.size;
             }
+
             averageSize /= selection.Length;
             var cellSize = new Vector3(
                 data.x.cellSizeType == CellSizeType.BIGGEST_OBJECT ? maxSize.x : data.x.cellSizeType == CellSizeType.BIGGEST_OBJECT_PER_GROUP ? averageSize.x : data.x.cellSize,
@@ -552,6 +600,7 @@ namespace PluginMaster
                     }
                 }
             }
+
             var unsorted = new List<GameObject>(selection);
             var objDict = new Dictionary<(int i, int j, int k), GameObject>();
 
@@ -578,12 +627,13 @@ namespace PluginMaster
                             minSqrDistanceToCenter = sqrDistanceToCenter;
                             closestCell = cell;
                         }
-                        else if (minSqrDistanceToCorner == sqrDistanceToCorner && sqrDistanceToCenter < minSqrDistanceToCenter)
+                        else if (Math.Abs(minSqrDistanceToCorner - sqrDistanceToCorner) < 0 && sqrDistanceToCenter < minSqrDistanceToCenter)
                         {
                             minSqrDistanceToCenter = sqrDistanceToCenter;
                             closestCell = cell;
                         }
                     }
+
                     if (cellObjectsDict.ContainsKey((closestCell.Key))) cellObjectsDict[closestCell.Key].Add((obj, minSqrDistanceToCorner, minSqrDistanceToCenter));
                     else
                     {
@@ -593,37 +643,39 @@ namespace PluginMaster
                 }
 
                 int GetKeyValue((int i, int j, int k) key) => key.i * (int)Mathf.Pow(10, data.x.priority + 1)
-                    + key.j * (int)Mathf.Pow(10, data.y.priority + 1)
-                    + key.k * (int)Mathf.Pow(10, data.z.priority + 1);
+                                                              + key.j * (int)Mathf.Pow(10, data.y.priority + 1)
+                                                              + key.k * (int)Mathf.Pow(10, data.z.priority + 1);
 
                 foreach (var cellObjs in cellObjectsDict)
                 {
                     var minSqrDistanceToCorner = cellObjs.Value[0].sqrDistanceToCorner;
                     var minSqrDistanceToCenter = cellObjs.Value[0].sqrDistanceToCenter;
-                    int minKeyValue = 0;
-                    GameObject closestObj = cellObjs.Value[0].obj;
-                    for (int i = 1; i < cellObjs.Value.Count; ++i)
+                    var minKeyValue = 0;
+                    var closestObj = cellObjs.Value[0].obj;
+                    for (var i = 1; i < cellObjs.Value.Count; ++i)
                     {
-                        var objData = cellObjs.Value[i];
+                        var (gameObject, sqrDistanceToCorner, sqrDistanceToCenter) = cellObjs.Value[i];
                         var keyValue = GetKeyValue(cellObjs.Key);
-                        if (objData.sqrDistanceToCorner < minSqrDistanceToCorner || (objData.sqrDistanceToCorner == minSqrDistanceToCorner && keyValue < minKeyValue))
+                        if (sqrDistanceToCorner < minSqrDistanceToCorner || (Math.Abs(sqrDistanceToCorner - minSqrDistanceToCorner) < 0 && keyValue < minKeyValue))
                         {
                             minKeyValue = keyValue;
-                            minSqrDistanceToCorner = objData.sqrDistanceToCorner;
-                            minSqrDistanceToCenter = objData.sqrDistanceToCenter;
-                            closestObj = objData.obj;
+                            minSqrDistanceToCorner = sqrDistanceToCorner;
+                            minSqrDistanceToCenter = sqrDistanceToCenter;
+                            closestObj = gameObject;
                         }
-                        else if (minSqrDistanceToCorner == objData.sqrDistanceToCorner && objData.sqrDistanceToCenter < minSqrDistanceToCenter)
+                        else if (Math.Abs(minSqrDistanceToCorner - sqrDistanceToCorner) < 0 && sqrDistanceToCenter < minSqrDistanceToCenter)
                         {
-                            minSqrDistanceToCenter = objData.sqrDistanceToCenter;
-                            closestObj = objData.obj;
+                            minSqrDistanceToCenter = sqrDistanceToCenter;
+                            closestObj = gameObject;
                         }
                     }
+
                     objDict.Add(cellObjs.Key, closestObj);
                     unsorted.Remove(closestObj);
                     cellDict.Remove(cellObjs.Key);
                 }
             }
+
             return objDict;
         }
 
@@ -635,7 +687,7 @@ namespace PluginMaster
 
             if (data.sortBy == SortBy.HIERARCHY) selection = SortByHierarchy(selection);
             var firstPosition = selection[0].transform.position;
-            var selectionCenter = Vector3.zero;
+            Vector3 selectionCenter;
             var selectionBounds = new Bounds();
             if (data.alignProperty == BoundsUtils.ObjectProperty.PIVOT)
             {
@@ -648,6 +700,7 @@ namespace PluginMaster
                 selectionBounds.center /= selection.Length;
             }
             else selectionBounds = GetSelectionBounds(selection, true, data.alignProperty);
+
             var originalSelectionCenter = selectionCenter = selectionBounds.center;
             Dictionary<(int i, int j, int k), GameObject> objDictionary;
             if (data.sortBy == SortBy.POSITION)
@@ -659,6 +712,7 @@ namespace PluginMaster
                     if (data.y.cellSizeType == CellSizeType.CUSTOM) selectionCenter.y = centerBounds.center.y;
                     if (data.z.cellSizeType == CellSizeType.CUSTOM) selectionCenter.z = centerBounds.center.z;
                 }
+
                 objDictionary = SortByPosition(selection, data, selectionBounds);
             }
             else objDictionary = SortBySelectionOrder(selection, data);
@@ -672,6 +726,7 @@ namespace PluginMaster
                     usedCells.y = Mathf.Max(usedCells.y, key.j);
                     usedCells.z = Mathf.Max(usedCells.z, key.k);
                 }
+
                 data.x.cells = usedCells.x + 1;
                 data.y.cells = usedCells.y + 1;
                 data.z.cells = usedCells.z + 1;
@@ -690,6 +745,7 @@ namespace PluginMaster
                         totalSize += cellSizes[a];
                         continue;
                     }
+
                     Axis secondaryAxis1 = Axis.Y;
                     Axis secondaryAxis2 = Axis.Z;
                     if (mainAxis == Axis.Y)
@@ -702,23 +758,26 @@ namespace PluginMaster
                         secondaryAxis1 = Axis.X;
                         secondaryAxis2 = Axis.Y;
                     }
+
                     var seondaryAxisData1 = data.GetData(secondaryAxis1);
                     var seondaryAxisData2 = data.GetData(secondaryAxis2);
 
                     List<GameObject> objList = new List<GameObject>();
                     for (int b = 0; b < seondaryAxisData1.cells; ++b)
-                        for (int c = 0; c < seondaryAxisData2.cells; ++c)
-                        {
-                            var i = mainAxis == Axis.X ? a : secondaryAxis1 == Axis.X ? b : c;
-                            var j = mainAxis == Axis.Y ? a : secondaryAxis1 == Axis.Y ? b : c;
-                            var k = mainAxis == Axis.Z ? a : secondaryAxis1 == Axis.Z ? b : c;
-                            if (objDictionary.ContainsKey((i, j, k))) objList.Add(objDictionary[(i, j, k)]);
-                        }
+                    for (int c = 0; c < seondaryAxisData2.cells; ++c)
+                    {
+                        var i = mainAxis == Axis.X ? a : secondaryAxis1 == Axis.X ? b : c;
+                        var j = mainAxis == Axis.Y ? a : secondaryAxis1 == Axis.Y ? b : c;
+                        var k = mainAxis == Axis.Z ? a : secondaryAxis1 == Axis.Z ? b : c;
+                        if (objDictionary.ContainsKey((i, j, k))) objList.Add(objDictionary[(i, j, k)]);
+                    }
+
                     Align(objList.ToArray(), RelativeTo.SELECTION, mainAxis, mainAxisData.aligment, false, true, data.alignProperty);
                     var size = GetSelectionBounds(objList.ToArray(), RelativeTo.SELECTION, mainAxis, true, data.alignProperty).Item2.size;
                     cellSizes[a] = mainAxis == Axis.X ? size.x : mainAxis == Axis.Y ? size.y : size.z;
                     totalSize += cellSizes[a];
                 }
+
                 totalSize += mainAxisData.spacing * (mainAxisData.cells - 1);
                 return cellSizes;
             }
@@ -728,19 +787,22 @@ namespace PluginMaster
             var cellSizesY = GetCellSizes(Axis.Y, out ArrangementSize.y);
             var cellSizesZ = GetCellSizes(Axis.Z, out ArrangementSize.z);
 
-            var firstCellCenter = data.arrangeRelativeTo == ArrangeRelativeTo.FIRST_OBJECT ? firstPosition
+            var firstCellCenter = data.arrangeRelativeTo == ArrangeRelativeTo.FIRST_OBJECT
+                ? firstPosition
                 : selectionCenter - Vector3.Scale(ArrangementSize, new Vector3(data.x.direction, data.y.direction, data.z.direction)) / 2f
-                + new Vector3(cellSizesX[0] * data.x.direction, cellSizesY[0] * data.y.direction, cellSizesZ[0] * data.z.direction) / 2f;
+                  + new Vector3(cellSizesX[0] * data.x.direction, cellSizesY[0] * data.y.direction, cellSizesZ[0] * data.z.direction) / 2f;
             if (data.x.cellSizeType == CellSizeType.CUSTOM)
             {
                 if (data.x.aligment == Bound.MIN) firstCellCenter.x += cellSizesX[0] / 2f;
                 else if (data.x.aligment == Bound.MAX) firstCellCenter.x -= cellSizesX[0] / 2f;
             }
+
             if (data.y.cellSizeType == CellSizeType.CUSTOM)
             {
                 if (data.y.aligment == Bound.MIN) firstCellCenter.y += cellSizesY[0] / 2f;
                 else if (data.y.aligment == Bound.MAX) firstCellCenter.y -= cellSizesY[0] / 2f;
             }
+
             if (data.z.cellSizeType == CellSizeType.CUSTOM)
             {
                 if (data.z.aligment == Bound.MIN) firstCellCenter.z += cellSizesZ[0] / 2f;
@@ -792,12 +854,16 @@ namespace PluginMaster
             {
                 var newBounds = GetSelectionBounds(selection, true, data.alignProperty);
                 var centerDelta = newBounds.center - originalSelectionCenter;
-                for (int i = 0; i < selection.Length; ++i) selection[i].transform.position -= centerDelta;
+                foreach (var item in selection) item.transform.position -= centerDelta;
             }
+
             return true;
         }
+
         #endregion
+
         #region REARRANGE
+
         public static void Rearrange(GameObject[] selection, ArrangeBy arrangeBy)
         {
             const string COMMAND_NAME = "Rearrange";
@@ -809,11 +875,15 @@ namespace PluginMaster
                 Undo.RecordObject(selection[i].transform, COMMAND_NAME);
                 selection[i].transform.position = selection[i + 1].transform.position;
             }
+
             Undo.RecordObject(selection[selection.Length - 1].transform, COMMAND_NAME);
             selection[selection.Length - 1].transform.position = firstPosition;
         }
+
         #endregion
+
         #region RADIAL ARRANGE
+
         public enum RotateAround
         {
             SELECTION_CENTER,
@@ -833,36 +903,31 @@ namespace PluginMaster
 
         public class RadialArrangeData
         {
-            private ArrangeBy _arrangeBy = ArrangeBy.SELECTION_ORDER;
             private RotateAround _rotateAround = RotateAround.SELECTION_CENTER;
             private Transform _centerTransform = null;
-            private Vector3 _center = Vector3.zero;
-            private Vector3 _axis = Vector3.forward;
-            private Shape _shape = Shape.CIRCLE;
-            private Vector2 _startEllipseAxes = Vector2.one;
-            private Vector2 _endEllipseAxes = Vector2.one;
-            private float _startAngle = 0f;
-            private float _maxArcAngle = 360f;
-            private bool _orientToRadius = false;
-            private Vector3 _orientDirection = Vector3.right;
-            private Vector3 _parallelDirection = Vector3.up;
-            private bool _overwriteX = true;
-            private bool _overwriteY = true;
-            private bool _overwriteZ = true;
-            private bool _lastSpotEmpty = false;
-            private float _spacing = 0f;
 
-            public ArrangeBy arrangeBy { get => _arrangeBy; set => _arrangeBy = value; }
-            public Vector3 axis { get => _axis; set => _axis = value; }
-            public Shape shape { get => _shape; set => _shape = value; }
-            public Vector2 startEllipseAxes { get => _startEllipseAxes; set => _startEllipseAxes = value; }
-            public Vector2 endEllipseAxes { get => _endEllipseAxes; set => _endEllipseAxes = value; }
-            public float startAngle { get => _startAngle; set => _startAngle = value; }
-            public float maxArcAngle { get => _maxArcAngle; set => _maxArcAngle = value; }
-            public bool orientToRadius { get => _orientToRadius; set => _orientToRadius = value; }
-            public Vector3 center { get => _center; set => _center = value; }
-            public Vector3 orientDirection { get => _orientDirection; set => _orientDirection = value; }
-            public Vector3 parallelDirection { get => _parallelDirection; set => _parallelDirection = value; }
+            public ArrangeBy arrangeBy { get; set; } = ArrangeBy.SELECTION_ORDER;
+
+            public Vector3 axis { get; set; } = Vector3.forward;
+
+            public Shape shape { get; set; } = Shape.CIRCLE;
+
+            public Vector2 startEllipseAxes { get; set; } = Vector2.one;
+
+            public Vector2 endEllipseAxes { get; set; } = Vector2.one;
+
+            public float startAngle { get; set; } = 0f;
+
+            public float maxArcAngle { get; set; } = 360f;
+
+            public bool orientToRadius { get; set; } = false;
+
+            public Vector3 center { get; set; } = Vector3.zero;
+
+            public Vector3 orientDirection { get; set; } = Vector3.right;
+
+            public Vector3 parallelDirection { get; set; } = Vector3.up;
+
             public Transform centerTransform
             {
                 get => _centerTransform;
@@ -873,6 +938,7 @@ namespace PluginMaster
                     UpdateCenter();
                 }
             }
+
             public RotateAround rotateAround
             {
                 get => _rotateAround;
@@ -884,26 +950,30 @@ namespace PluginMaster
                 }
             }
 
-            public bool overwriteX { get => _overwriteX; set => _overwriteX = value; }
-            public bool overwriteY { get => _overwriteY; set => _overwriteY = value; }
-            public bool overwriteZ { get => _overwriteZ; set => _overwriteZ = value; }
-            public bool lastSpotEmpty { get => _lastSpotEmpty; set => _lastSpotEmpty = value; }
-            public float spacing { get => _spacing; set => _spacing = value; }
+            public bool overwriteX { get; set; } = true;
+
+            public bool overwriteY { get; set; } = true;
+
+            public bool overwriteZ { get; set; } = true;
+
+            public bool lastSpotEmpty { get; set; } = false;
+
+            public float spacing { get; set; } = 0f;
 
             public void UpdateCenter()
             {
                 if (_centerTransform == null &&
                     (_rotateAround == RotateAround.TRANSFORM_POSITION
-                    || _rotateAround == RotateAround.OBJECT_BOUNDS_CENTER)) _center = Vector3.zero;
-                else if (_rotateAround == RotateAround.TRANSFORM_POSITION) _center = _centerTransform.transform.position;
-                else if (_rotateAround == RotateAround.OBJECT_BOUNDS_CENTER) _center = BoundsUtils.GetBoundsRecursive(_centerTransform).center;
+                     || _rotateAround == RotateAround.OBJECT_BOUNDS_CENTER)) center = Vector3.zero;
+                else if (_rotateAround == RotateAround.TRANSFORM_POSITION) center = _centerTransform.transform.position;
+                else if (_rotateAround == RotateAround.OBJECT_BOUNDS_CENTER) center = BoundsUtils.GetBoundsRecursive(_centerTransform).center;
             }
 
             public void UpdateCenter(GameObject[] selection)
             {
                 if (_rotateAround != RotateAround.SELECTION_CENTER) return;
-                if (selection.Length == 0) _center = Vector3.zero;
-                else _center = GetSelectionBounds(selection).center;
+                if (selection.Length == 0) center = Vector3.zero;
+                else center = GetSelectionBounds(selection).center;
             }
 
             public void UpdateCircleSpacing(int selectionCount)
@@ -913,8 +983,9 @@ namespace PluginMaster
                     spacing = 0f;
                     return;
                 }
+
                 var perimeter = Mathf.PI * startEllipseAxes.x * Mathf.Abs(maxArcAngle) / 180f;
-                spacing = perimeter / ((float)selectionCount - (lastSpotEmpty ? 0f : 1f));
+                spacing = perimeter / (selectionCount - (lastSpotEmpty ? 0f : 1f));
             }
 
             public void UpdateCircleRadius(int selectionCount)
@@ -924,14 +995,15 @@ namespace PluginMaster
                     startEllipseAxes = endEllipseAxes = Vector2.zero;
                     return;
                 }
-                var perimeter = spacing * ((float)selectionCount - (lastSpotEmpty ? 0f : 1f));
+
+                var perimeter = spacing * (selectionCount - (lastSpotEmpty ? 0f : 1f));
                 startEllipseAxes = endEllipseAxes = Vector2.one * (perimeter / Mathf.PI / Mathf.Abs(maxArcAngle) * 180f);
             }
         }
 
         private static float GetEllipseRadius(Vector2 ellipseAxes, float angle)
         {
-            if (ellipseAxes.x == ellipseAxes.y) return ellipseAxes.x;
+            if (Math.Abs(ellipseAxes.x - ellipseAxes.y) < 0) return ellipseAxes.x;
             var a = ellipseAxes.x;
             var b = ellipseAxes.y;
             var sin = Mathf.Sin(angle * Mathf.Deg2Rad);
@@ -954,7 +1026,7 @@ namespace PluginMaster
             data.UpdateCenter();
             var angle = data.startAngle;
 
-            var deltaAngle = data.maxArcAngle / ((float)selection.Length - (data.lastSpotEmpty ? 0f : 1f));
+            var deltaAngle = data.maxArcAngle / (selection.Length - (data.lastSpotEmpty ? 0f : 1f));
             var ellipseAxes = data.startEllipseAxes;
             var deltaEllipseAxes = (data.endEllipseAxes - data.startEllipseAxes) / ((float)selection.Length - 1);
             foreach (var obj in selection)
@@ -971,12 +1043,16 @@ namespace PluginMaster
                     obj.transform.rotation = Quaternion.identity;
                     LookAtCenter(obj.transform, data.center, data.axis, data.orientDirection, data.parallelDirection);
                 }
+
                 angle += deltaAngle;
                 ellipseAxes += deltaEllipseAxes;
             }
         }
+
         #endregion
+
         #region PROGRESSION
+
         public enum IncrementalDataType
         {
             CONSTANT_DELTA,
@@ -992,95 +1068,93 @@ namespace PluginMaster
 
         public class ProgressiveAxisData
         {
-            private float _constantDelta = 0f;
-            private AnimationCurve _curve = AnimationCurve.Constant(0, 1, 0);
-            private float _curveRangeMin = 0f;
-            private float _curveRangeSize = 0f;
-            private Rect _curveRange = new Rect(0, 0, 1, 1);
-            private bool _overwrite = true;
+            public float constantDelta { get; set; } = 0f;
 
-            public float constantDelta { get => _constantDelta; set => _constantDelta = value; }
-            public AnimationCurve curve { get => _curve; set => _curve = value; }
-            public float curveRangeMin { get => _curveRangeMin; set => _curveRangeMin = value; }
-            public float curveRangeSize { get => _curveRangeSize; set => _curveRangeSize = value; }
-            public Rect curveRange { get => _curveRange; set => _curveRange = value; }
-            public bool overwrite { get => _overwrite; set => _overwrite = value; }
+            public AnimationCurve curve { get; set; } = AnimationCurve.Constant(0, 1, 0);
+
+            public float curveRangeMin { get; set; } = 0f;
+
+            public float curveRangeSize { get; set; } = 0f;
+
+            public Rect curveRange { get; set; } = new Rect(0, 0, 1, 1);
+
+            public bool overwrite { get; set; } = true;
         }
 
         public class ProgressionData
         {
-            private ArrangeBy _arrangeOrder = ArrangeBy.HIERARCHY_ORDER;
-            private IncrementalDataType _type = IncrementalDataType.CONSTANT_DELTA;
-            private ProgressiveAxisData _x = new ProgressiveAxisData();
-            private ProgressiveAxisData _y = new ProgressiveAxisData();
-            private ProgressiveAxisData _z = new ProgressiveAxisData();
+            public ArrangeBy arrangeOrder { get; set; } = ArrangeBy.HIERARCHY_ORDER;
 
-            public ArrangeBy arrangeOrder { get => _arrangeOrder; set => _arrangeOrder = value; }
-            public IncrementalDataType type { get => _type; set => _type = value; }
+            public IncrementalDataType type { get; set; } = IncrementalDataType.CONSTANT_DELTA;
+
             public Vector3 constantDelta
             {
-                get => new Vector3(_x.constantDelta, _y.constantDelta, _z.constantDelta);
+                get => new Vector3(x.constantDelta, y.constantDelta, z.constantDelta);
                 set
                 {
-                    _x.constantDelta = value.x;
-                    _y.constantDelta = value.y;
-                    _z.constantDelta = value.z;
+                    x.constantDelta = value.x;
+                    y.constantDelta = value.y;
+                    z.constantDelta = value.z;
                 }
             }
+
             public Vector3 curveRangeMin
             {
-                get => new Vector3(_x.curveRangeMin, _y.curveRangeMin, _z.curveRangeMin);
+                get => new Vector3(x.curveRangeMin, y.curveRangeMin, z.curveRangeMin);
                 set
                 {
-                    if (new Vector3(_x.curveRangeMin, _y.curveRangeMin, _z.curveRangeMin) == value) return;
-                    var rangeX = _x.curveRange;
-                    rangeX.yMin = _x.curveRangeMin = value.x;
-                    _x.curveRange = rangeX;
-                    var rangeY = _y.curveRange;
-                    rangeY.yMin = _y.curveRangeMin = value.y;
-                    _y.curveRange = rangeY;
-                    var rangeZ = _z.curveRange;
-                    rangeZ.yMin = _z.curveRangeMin = value.z;
-                    _z.curveRange = rangeZ;
-                    UpdateRanges();
-                }
-            }
-            public Vector3 curveRangeSize
-            {
-                get => new Vector3(_x.curveRangeSize, _y.curveRangeSize, _z.curveRangeSize);
-                set
-                {
-                    if (new Vector3(_x.curveRangeSize, _y.curveRangeSize, _z.curveRangeSize) == value) return;
-                    _x.curveRangeSize = value.x;
-                    _y.curveRangeSize = value.y;
-                    _z.curveRangeSize = value.z;
+                    if (new Vector3(x.curveRangeMin, y.curveRangeMin, z.curveRangeMin) == value) return;
+                    var rangeX = x.curveRange;
+                    rangeX.yMin = x.curveRangeMin = value.x;
+                    x.curveRange = rangeX;
+                    var rangeY = y.curveRange;
+                    rangeY.yMin = y.curveRangeMin = value.y;
+                    y.curveRange = rangeY;
+                    var rangeZ = z.curveRange;
+                    rangeZ.yMin = z.curveRangeMin = value.z;
+                    z.curveRange = rangeZ;
                     UpdateRanges();
                 }
             }
 
-            public ProgressiveAxisData x { get => _x; set => _x = value; }
-            public ProgressiveAxisData y { get => _y; set => _y = value; }
-            public ProgressiveAxisData z { get => _z; set => _z = value; }
+            public Vector3 curveRangeSize
+            {
+                get => new Vector3(x.curveRangeSize, y.curveRangeSize, z.curveRangeSize);
+                set
+                {
+                    if (new Vector3(x.curveRangeSize, y.curveRangeSize, z.curveRangeSize) == value) return;
+                    x.curveRangeSize = value.x;
+                    y.curveRangeSize = value.y;
+                    z.curveRangeSize = value.z;
+                    UpdateRanges();
+                }
+            }
+
+            public ProgressiveAxisData x { get; set; } = new ProgressiveAxisData();
+
+            public ProgressiveAxisData y { get; set; } = new ProgressiveAxisData();
+
+            public ProgressiveAxisData z { get; set; } = new ProgressiveAxisData();
 
             private void UpdateRanges()
             {
-                var rangeX = _x.curveRange;
-                rangeX.yMax = _x.curveRangeMin + _x.curveRangeSize;
-                _x.curveRange = rangeX;
-                var rangeY = _y.curveRange;
-                rangeY.yMax = _y.curveRangeMin + _y.curveRangeSize;
-                _y.curveRange = rangeY;
-                var rangeZ = _z.curveRange;
-                rangeZ.yMax = _z.curveRangeMin + _z.curveRangeSize;
-                _z.curveRange = rangeZ;
+                var rangeX = x.curveRange;
+                rangeX.yMax = x.curveRangeMin + x.curveRangeSize;
+                x.curveRange = rangeX;
+                var rangeY = y.curveRange;
+                rangeY.yMax = y.curveRangeMin + y.curveRangeSize;
+                y.curveRange = rangeY;
+                var rangeZ = z.curveRange;
+                rangeZ.yMax = z.curveRangeMin + z.curveRangeSize;
+                z.curveRange = rangeZ;
             }
 
             public Vector3 EvaluateCurve(float t)
             {
                 return new Vector3(
-                    _x.overwrite ? _x.curve.Evaluate(t) : 0f,
-                    _y.overwrite ? _y.curve.Evaluate(t) : 0f,
-                    _z.overwrite ? _z.curve.Evaluate(t) : 0f);
+                    x.overwrite ? x.curve.Evaluate(t) : 0f,
+                    y.overwrite ? y.curve.Evaluate(t) : 0f,
+                    z.overwrite ? z.curve.Evaluate(t) : 0f);
             }
 
             public Rect GetRect(Axis axis)
@@ -1088,14 +1162,15 @@ namespace PluginMaster
                 switch (axis)
                 {
                     case Axis.X:
-                        return _x.curveRange;
+                        return x.curveRange;
                     case Axis.Y:
-                        return _y.curveRange;
+                        return y.curveRange;
                     default:
-                        return _z.curveRange;
+                        return z.curveRange;
                 }
             }
         }
+
         private static int[] GetHierarchyIndex(GameObject obj)
         {
             var idxList = new List<int>();
@@ -1104,8 +1179,8 @@ namespace PluginMaster
             {
                 idxList.Insert(0, parent.transform.GetSiblingIndex());
                 parent = parent.transform.parent;
-            }
-            while (parent != null);
+            } while (parent != null);
+
             return idxList.ToArray();
         }
 
@@ -1116,7 +1191,7 @@ namespace PluginMaster
             if (data.arrangeOrder == ArrangeBy.HIERARCHY_ORDER) selection = SortByHierarchy(selection);
             var position = selection[0].transform.position;
             var t = 0f;
-            var delta = 1f / ((float)selection.Length - 1f);
+            var delta = 1f / (selection.Length - 1f);
             var i = 0;
             GameObject prevObj = null;
             foreach (var obj in selection)
@@ -1145,11 +1220,13 @@ namespace PluginMaster
                     Undo.RecordObject(prevObj.transform, COMMAND_NAME);
                     LookAtNext(prevObj.transform, obj.transform.position, orientation);
                 }
+
                 if (data.type == IncrementalDataType.OBJECT_SIZE && i == selection.Length)
                 {
                     Undo.RecordObject(obj.transform, COMMAND_NAME);
                     obj.transform.eulerAngles = prevObj.transform.eulerAngles;
                 }
+
                 prevObj = obj;
             }
         }
@@ -1168,6 +1245,7 @@ namespace PluginMaster
             {
                 selection = SortByHierarchy(selection);
             }
+
             var eulerAngles = selection[0].transform.rotation.eulerAngles;
             var firstObjEulerAngles = eulerAngles;
             var t = 0f;
@@ -1177,8 +1255,9 @@ namespace PluginMaster
                 if (data.type == IncrementalDataType.CURVE)
                 {
                     eulerAngles = firstObjEulerAngles + data.EvaluateCurve(t);
-                    t += 1f / ((float)selection.Length - 1f);
+                    t += 1f / (selection.Length - 1f);
                 }
+
                 obj.transform.rotation = Quaternion.Euler(
                     data.x.overwrite ? eulerAngles.x : obj.transform.rotation.eulerAngles.x,
                     data.y.overwrite ? eulerAngles.y : obj.transform.rotation.eulerAngles.y,
@@ -1202,7 +1281,7 @@ namespace PluginMaster
                 if (data.type == IncrementalDataType.CURVE)
                 {
                     scale = firstObjScale + data.EvaluateCurve(t);
-                    t += 1f / ((float)selection.Length - 1f);
+                    t += 1f / (selection.Length - 1f);
                 }
 
                 obj.transform.localScale = new Vector3(
@@ -1213,28 +1292,30 @@ namespace PluginMaster
                 if (data.type == IncrementalDataType.CONSTANT_DELTA) scale += data.constantDelta;
             }
         }
+
         #endregion
+
         #region RANDOMIZE
+
         public class RandomizeAxisData
         {
-            private bool _randomizeAxis = true;
-            private RandomUtils.Range _offset = new RandomUtils.Range();
-            public bool randomizeAxis { get => _randomizeAxis; set => _randomizeAxis = value; }
-            public RandomUtils.Range offset { get => _offset; set => _offset = value; }
+            public bool randomizeAxis { get; set; } = true;
 
+            public RandomUtils.Range offset { get; set; } = new RandomUtils.Range();
         }
+
         public class RandomizeData
         {
-            private RandomizeAxisData _x = new RandomizeAxisData();
-            private RandomizeAxisData _y = new RandomizeAxisData();
-            private RandomizeAxisData _z = new RandomizeAxisData();
-            private float _multiplier = 1f;
-            public RandomizeAxisData x { get => _x; set => _x = value; }
-            public RandomizeAxisData y { get => _y; set => _y = value; }
-            public RandomizeAxisData z { get => _z; set => _z = value; }
-            public float multiplier { get => _multiplier; set => _multiplier = value; }
+            public RandomizeAxisData x { get; set; } = new RandomizeAxisData();
+
+            public RandomizeAxisData y { get; set; } = new RandomizeAxisData();
+
+            public RandomizeAxisData z { get; set; } = new RandomizeAxisData();
+
+            public float multiplier { get; set; } = 1f;
         }
-        public static void RandomizePositions(GameObject[] selection, RandomizeData data)
+
+        public static void RandomizePositions(IEnumerable<GameObject> selection, RandomizeData data)
         {
             const string COMMAND_NAME = "Randomize Position";
             foreach (var obj in selection)
@@ -1247,7 +1328,7 @@ namespace PluginMaster
             }
         }
 
-        public static void RandomizeRotations(GameObject[] selection, RandomizeData data)
+        public static void RandomizeRotations(IEnumerable<GameObject> selection, RandomizeData data)
         {
             const string COMMAND_NAME = "Randomize Rotation";
             foreach (var obj in selection)
@@ -1260,7 +1341,7 @@ namespace PluginMaster
             }
         }
 
-        public static void RandomizeScales(GameObject[] selection, RandomizeData data, bool separateAxes)
+        public static void RandomizeScales(IEnumerable<GameObject> selection, RandomizeData data, bool separateAxes)
         {
             const string COMMAND_NAME = "Randomize Scale";
             foreach (var obj in selection)
@@ -1280,24 +1361,27 @@ namespace PluginMaster
                 }
             }
         }
+
         #endregion
+
         #region HOMOGENIZE
+
         public class HomogenizeAxis
         {
-            private bool _homogenize = true;
-            private float _strength = 0.1f;
-            public bool homogenize { get => _homogenize; set => _homogenize = value; }
-            public float strength { get => _strength; set => _strength = value; }
+            public bool homogenize { get; set; } = true;
+
+            public float strength { get; set; } = 0.1f;
         }
+
         public class HomogenizeData
         {
-            private HomogenizeAxis _x = new HomogenizeAxis();
-            private HomogenizeAxis _y = new HomogenizeAxis();
-            private HomogenizeAxis _z = new HomogenizeAxis();
-            public HomogenizeAxis x { get => _x; set => _x = value; }
-            public HomogenizeAxis y { get => _y; set => _y = value; }
-            public HomogenizeAxis z { get => _z; set => _z = value; }
+            public HomogenizeAxis x { get; set; } = new HomogenizeAxis();
+
+            public HomogenizeAxis y { get; set; } = new HomogenizeAxis();
+
+            public HomogenizeAxis z { get; set; } = new HomogenizeAxis();
         }
+
         public static void HomogenizeSpacing(GameObject[] selection, HomogenizeData data)
         {
             const string COMMAND_NAME = "Homogenize Spacing";
@@ -1306,6 +1390,7 @@ namespace PluginMaster
             if (data.y.homogenize) DistributeGaps(selection, Axis.Y, data.y.strength, false);
             if (data.z.homogenize) DistributeGaps(selection, Axis.Z, data.z.strength, false);
         }
+
         public static void HomogenizeRotation(GameObject[] selection, HomogenizeData data)
         {
             const string COMMAND_NAME = "Homogenize Rotation";
@@ -1318,7 +1403,8 @@ namespace PluginMaster
                 if (euler.z < 0) euler.z = 360f + euler.z;
                 sum += euler;
             }
-            var average = sum / (float)selection.Length;
+
+            var average = sum / selection.Length;
             foreach (var obj in selection)
             {
                 Undo.RecordObject(obj.transform, COMMAND_NAME);
@@ -1335,7 +1421,7 @@ namespace PluginMaster
             const string COMMAND_NAME = "Homogenize Scale";
             var sum = Vector3.zero;
             foreach (var obj in selection) sum += obj.transform.localScale;
-            var average = sum / (float)selection.Length;
+            var average = sum / selection.Length;
             foreach (var obj in selection)
             {
                 Undo.RecordObject(obj.transform, COMMAND_NAME);
@@ -1346,34 +1432,35 @@ namespace PluginMaster
                 obj.transform.localScale = newScale;
             }
         }
+
         #endregion
+
         #region UNOVERLAP
+
         public class UnoverlapAxisData
         {
-            private bool _unoverlap = true;
-            private float _minDistance = 0f;
-            public bool unoverlap { get => _unoverlap; set => _unoverlap = value; }
-            public float minDistance { get => _minDistance; set => _minDistance = value; }
+            public bool unoverlap { get; set; } = true;
+
+            public float minDistance { get; set; } = 0f;
+
             public UnoverlapAxisData(bool unoverlap = true, float minDistance = 0f)
             {
-                _unoverlap = unoverlap;
-                _minDistance = minDistance;
+                this.unoverlap = unoverlap;
+                this.minDistance = minDistance;
             }
         }
 
         public class UnoverlapData
         {
-            private UnoverlapAxisData _x = new UnoverlapAxisData();
-            private UnoverlapAxisData _y = new UnoverlapAxisData();
-            private UnoverlapAxisData _z = new UnoverlapAxisData();
+            public UnoverlapAxisData x { get; set; } = new UnoverlapAxisData();
 
-            public UnoverlapAxisData x { get => _x; set => _x = value; }
-            public UnoverlapAxisData y { get => _y; set => _y = value; }
-            public UnoverlapAxisData z { get => _z; set => _z = value; }
+            public UnoverlapAxisData y { get; set; } = new UnoverlapAxisData();
 
-            public UnoverlapAxisData GetData(Axis axis)
+            public UnoverlapAxisData z { get; set; } = new UnoverlapAxisData();
+
+            public UnoverlapAxisData GetData(in Axis axis)
             {
-                return axis == Axis.X ? _x : axis == Axis.Y ? _y : _z;
+                return axis == Axis.X ? x : axis == Axis.Y ? y : z;
             }
         }
 
@@ -1392,6 +1479,7 @@ namespace PluginMaster
             public Vector3 transformPosition = Vector3.zero;
             public List<OverlapData> _dataList = new List<OverlapData>();
             public int moveCount = 0;
+
             public bool isOverlaped
             {
                 get
@@ -1400,6 +1488,7 @@ namespace PluginMaster
                     {
                         if (data.volume != 0) return true;
                     }
+
                     return false;
                 }
             }
@@ -1416,12 +1505,7 @@ namespace PluginMaster
 
             public float solutionVolume
             {
-                get
-                {
-                    var retVal = 0f;
-                    foreach (var data in _dataList) retVal += data.solutionVolume;
-                    return retVal;
-                }
+                get { return _dataList.Sum(data => data.solutionVolume); }
             }
 
             public List<Vector3> solutions
@@ -1449,6 +1533,7 @@ namespace PluginMaster
                     bestMove = move;
                 }
             }
+
             public bool ExecuteBestSolution(OverlapedObject[] selection, UnoverlapData unoverlapData)
             {
                 var bestMove = new Vector3(100000, 100000, 100000);
@@ -1459,6 +1544,7 @@ namespace PluginMaster
                     MoveTest(Axis.Y, unoverlapData.y.unoverlap, solution, ref minVol, ref bestMove);
                     MoveTest(Axis.Z, unoverlapData.z.unoverlap, solution, ref minVol, ref bestMove);
                 }
+
                 if (overlapedVolume > minVol)
                 {
                     bounds.center += bestMove;
@@ -1466,6 +1552,7 @@ namespace PluginMaster
                     ++moveCount;
                     return true;
                 }
+
                 return false;
             }
         }
@@ -1507,7 +1594,7 @@ namespace PluginMaster
 
                 tempObj._dataList = GetOverlapedData(tempSelection.ToArray(), 0, unoverlapData, false);
                 var vol = tempObj.overlapedVolume;
-                if (vol < minVol || (vol == minVol && Mathf.Abs(moveSize) < bestMove.magnitude))
+                if (vol < minVol || (Math.Abs(vol - minVol) < 0 && Mathf.Abs(moveSize) < bestMove.magnitude))
                 {
                     minVol = vol;
                     bestMove = move;
@@ -1524,7 +1611,7 @@ namespace PluginMaster
 
         private static OverlapData GetOverlapedData(OverlapedObject[] selection, int index, Bounds b2, UnoverlapData unoverlapData, bool getSolutionVolumen)
         {
-            Bounds b1 = selection[index].bounds;
+            var b1 = selection[index].bounds;
             var min = Vector3.Max(b1.min, b2.min);
             var max = Vector3.Min(b1.max, b2.max);
 
@@ -1541,6 +1628,7 @@ namespace PluginMaster
                 GetOverlapedDataAxis(Axis.Y, unoverlapData, selection, index, b1, b2, getSolutionVolumen, ref retVal, ref minVol, ref bestMove);
                 GetOverlapedDataAxis(Axis.Z, unoverlapData, selection, index, b1, b2, getSolutionVolumen, ref retVal, ref minVol, ref bestMove);
             }
+
             return retVal;
         }
 
@@ -1558,6 +1646,7 @@ namespace PluginMaster
                     if (retVal.Count >= 3) break;
                 }
             }
+
             return retVal;
         }
 
@@ -1566,18 +1655,18 @@ namespace PluginMaster
             var size = Vector3.Max(bounds.size, new Vector3(0.001f, 0.001f, 0.001f));
             return size.x * size.y * size.z;
         }
+
         private static int CompareOverlapedObjects(OverlapedObject obj1, OverlapedObject obj2)
         {
-
             if (obj1.moveCount < obj2.moveCount) return -1;
             else if (obj1.moveCount > obj2.moveCount) return 1;
             else
             {
-                float obj1Vol = GetBoundsVolume(obj1.bounds);
-                float obj2Vol = GetBoundsVolume(obj2.bounds);
-                float v1 = obj1.overlapedVolume / obj1Vol;
-                float v2 = obj2.overlapedVolume / obj2Vol;
-                if (v1 == v2)
+                var obj1Vol = GetBoundsVolume(obj1.bounds);
+                var obj2Vol = GetBoundsVolume(obj2.bounds);
+                var v1 = obj1.overlapedVolume / obj1Vol;
+                var v2 = obj2.overlapedVolume / obj2Vol;
+                if (Math.Abs(v1 - v2) < 0)
                 {
                     var r = obj1Vol.CompareTo(obj2Vol);
                     if (r != 0) return r;
@@ -1585,9 +1674,10 @@ namespace PluginMaster
                     v2 = obj2.solutionVolume / obj2Vol;
                     return v1.CompareTo(v2);
                 }
-                else if (v1 == 0) return 1;
-                else if (v2 == 0) return -1;
-                else
+
+                if (v1 == 0) return 1;
+                if (v2 == 0) return -1;
+
                 {
                     var r = v1.CompareTo(v2);
                     if (r != 0) return r;
@@ -1601,6 +1691,7 @@ namespace PluginMaster
             private readonly (int objId, Bounds bounds)[] _selection;
             private readonly UnoverlapData _unoverlapData;
             private bool _cancel = false;
+
             public Unoverlapper((int objId, Bounds bounds)[] selection, UnoverlapData unoverlapData)
             {
                 _selection = selection;
@@ -1624,7 +1715,7 @@ namespace PluginMaster
                     overlapedObj.bounds = obj.bounds;
                     overlapedObj.objId = obj.objId;
                     overlapedObj.bounds.center = new Vector3
-                        (_unoverlapData.x.unoverlap ? overlapedObj.bounds.center.x : 0f,
+                    (_unoverlapData.x.unoverlap ? overlapedObj.bounds.center.x : 0f,
                         _unoverlapData.y.unoverlap ? overlapedObj.bounds.center.y : 0f,
                         _unoverlapData.z.unoverlap ? overlapedObj.bounds.center.z : 0f);
                     overlapedObj.bounds.size = Vector3.Max(overlapedObj.bounds.size, minSize) + new Vector3(_unoverlapData.x.minDistance, _unoverlapData.y.minDistance, _unoverlapData.z.minDistance);
@@ -1638,7 +1729,7 @@ namespace PluginMaster
                     ++i;
                 }
 
-                overlapedList.Sort((obj1, obj2) => CompareOverlapedObjects(obj1, obj2));
+                overlapedList.Sort(CompareOverlapedObjects);
                 var prevProgress = 0f;
                 var overlapedObjects = 0;
                 do
@@ -1662,7 +1753,7 @@ namespace PluginMaster
                         }
                         else
                         {
-                            overlapedList.Sort((obj1, obj2) => CompareOverlapedObjects(obj1, obj2));
+                            overlapedList.Sort(CompareOverlapedObjects);
                             if (overlapedList[0] == first)
                             {
                                 overlapedList.RemoveAt(0);
@@ -1670,6 +1761,7 @@ namespace PluginMaster
                             }
                         }
                     }
+
                     overlapedObjects = 0;
                     i = 0;
                     foreach (var obj in overlapedList)
@@ -1679,10 +1771,11 @@ namespace PluginMaster
                         if (obj.isOverlaped) ++overlapedObjects;
                     }
 
-                    var progress = Mathf.Max(1f - (float)overlapedObjects / (float)_selection.Length, prevProgress);
-                    if (prevProgress != progress) progressChanged(progress);
+                    var progress = Mathf.Max(1f - overlapedObjects / (float)_selection.Length, prevProgress);
+                    if (Math.Abs(prevProgress - progress) > 0) progressChanged(progress);
                     prevProgress = progress;
                 } while (overlapedObjects > 0);
+
                 var boundsArray = overlapedList.Select(obj => (obj.objId, obj.transformPosition)).ToArray();
                 OnDone(boundsArray);
             }
@@ -1692,21 +1785,26 @@ namespace PluginMaster
                 _cancel = true;
             }
         }
+
         #endregion
+
         #region EDIT PIVOT
+
         private const string EDIT_PIVOT_COMMAND_NAME = "Edit Pivot";
 
-        private static Material _pivotMaterial = null;
-        private static Material pivotMaterial
+        private static UnityEngine.Material _pivotMaterial = null;
+
+        private static UnityEngine.Material pivotMaterial
         {
             get
             {
-                if (_pivotMaterial == null) _pivotMaterial = new Material(Shader.Find("PluginMaster/Pivot"));
+                if (_pivotMaterial == null) _pivotMaterial = new UnityEngine.Material(Shader.Find("PluginMaster/Pivot"));
                 return _pivotMaterial;
             }
         }
 
         private static Mesh _pivotMesh = null;
+
         private static Mesh pivotMesh
         {
             get
@@ -1722,7 +1820,7 @@ namespace PluginMaster
         {
             if (target == null || target.scene.rootCount == 0) return null;
             var pivot = new GameObject("Pivot");
-            Tools.current = Tool.Move;
+            Tools.current = UnityEditor.Tool.Move;
             pivot.transform.parent = target.transform;
             pivot.transform.localPosition = Vector3.zero;
             pivot.transform.localRotation = Quaternion.identity;
@@ -1731,14 +1829,15 @@ namespace PluginMaster
             _pivot = pivot;
             return pivot;
         }
+
         public static void SaveMesh(MeshFilter meshFilter, string savePath, Transform pivot)
         {
             Mesh mesh = meshFilter.sharedMesh;
             var otherFilters = new List<MeshFilter>();
             if (!string.IsNullOrEmpty(AssetDatabase.GetAssetPath(mesh)))
             {
-                mesh = UnityEngine.Object.Instantiate(mesh);
-                var allFilters = UnityEngine.Object.FindObjectsOfType<MeshFilter>();
+                mesh = Object.Instantiate(mesh);
+                var allFilters = Object.FindObjectsOfType<MeshFilter>();
                 foreach (var filter in allFilters)
                 {
                     if (filter == meshFilter) continue;
@@ -1747,6 +1846,7 @@ namespace PluginMaster
                     otherFilters.Add(filter);
                 }
             }
+
             AssetDatabase.CreateAsset(mesh, savePath);
             AssetDatabase.SaveAssets();
             Undo.RecordObject(meshFilter, EDIT_PIVOT_COMMAND_NAME);
@@ -1766,13 +1866,15 @@ namespace PluginMaster
 
         private static void EditSprite(SpriteRenderer renderer, Transform pivot)
         {
-            var rect = renderer.sprite.rect;
-            var pixelsPerUnit = renderer.sprite.pixelsPerUnit;
+            var sprite = renderer.sprite;
+            var rect = sprite.rect;
+            var pixelsPerUnit = sprite.pixelsPerUnit;
             var min = renderer.transform.InverseTransformPoint(renderer.bounds.min);
-            var pivot2D = new Vector2((pivot.localPosition.x - min.x) * pixelsPerUnit / rect.width, (pivot.localPosition.y - min.y) * pixelsPerUnit / rect.height);
+            var localPosition = pivot.localPosition;
+            var pivot2D = new Vector2((localPosition.x - min.x) * pixelsPerUnit / rect.width, (localPosition.y - min.y) * pixelsPerUnit / rect.height);
 
             var path = AssetDatabase.GetAssetPath(renderer.sprite);
-            TextureImporter textureImporter = AssetImporter.GetAtPath(path) as TextureImporter;
+            var textureImporter = AssetImporter.GetAtPath(path) as TextureImporter;
             Undo.RecordObject(textureImporter, EDIT_PIVOT_COMMAND_NAME);
             var settings = new TextureImporterSettings();
             textureImporter.ReadTextureSettings(settings);
@@ -1781,7 +1883,7 @@ namespace PluginMaster
             textureImporter.SetTextureSettings(settings);
             AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
 
-            var allRenderers = UnityEngine.Object.FindObjectsOfType<SpriteRenderer>();
+            var allRenderers = Object.FindObjectsOfType<SpriteRenderer>();
             foreach (var r in allRenderers)
             {
                 if (r == renderer) continue;
@@ -1838,30 +1940,35 @@ namespace PluginMaster
                 collider.sharedMesh = null;
                 collider.sharedMesh = meshFilter.sharedMesh;
             }
+
             var boxColliders = target.GetComponents<BoxCollider>();
             foreach (var collider in boxColliders)
             {
                 Undo.RecordObject(collider, EDIT_PIVOT_COMMAND_NAME);
                 collider.center -= pivot.localPosition;
             }
+
             var capsuleColliders = target.GetComponents<CapsuleCollider>();
             foreach (var collider in capsuleColliders)
             {
                 Undo.RecordObject(collider, EDIT_PIVOT_COMMAND_NAME);
                 collider.center -= pivot.localPosition;
             }
+
             var sphereColliders = target.GetComponents<SphereCollider>();
             foreach (var collider in sphereColliders)
             {
                 Undo.RecordObject(collider, EDIT_PIVOT_COMMAND_NAME);
                 collider.center -= pivot.localPosition;
             }
+
             var wheelColliders = target.GetComponents<WheelCollider>();
             foreach (var collider in wheelColliders)
             {
                 Undo.RecordObject(collider, EDIT_PIVOT_COMMAND_NAME);
                 collider.center -= pivot.localPosition;
             }
+
             var colliders2D = target.GetComponents<Collider2D>();
             foreach (var collider in colliders2D)
             {
@@ -1936,7 +2043,7 @@ namespace PluginMaster
             var pivot = CreateCenteredPivot(target);
             var meshFilter = target.GetComponent<MeshFilter>();
             SaveMesh(meshFilter, savePath, pivot.transform);
-            UnityEngine.Object.DestroyImmediate(pivot);
+            Object.DestroyImmediate(pivot);
             Selection.activeObject = target.gameObject;
         }
 
@@ -1945,41 +2052,44 @@ namespace PluginMaster
             if (target == null || target.gameObject.scene.rootCount == 0) return;
             var pivot = CreateCenteredPivot(target);
             ApplyPivot(pivot.transform);
-            UnityEngine.Object.DestroyImmediate(pivot);
+            Object.DestroyImmediate(pivot);
             Selection.activeObject = target.gameObject;
         }
 
         public static void DuringSceneGUI(SceneView sceneView)
         {
             if (_pivot == null) return;
-            var scale = Vector3.one * (HandleUtility.GetHandleSize(_pivot.transform.position) * 0.3f);
-            var matrix = Matrix4x4.TRS(_pivot.transform.position, Quaternion.identity, scale);
+            var position = _pivot.transform.position;
+            var scale = Vector3.one * (HandleUtility.GetHandleSize(position) * 0.3f);
+            var matrix = Matrix4x4.TRS(position, Quaternion.identity, scale);
             Graphics.DrawMesh(pivotMesh, matrix, pivotMaterial, 0, sceneView.camera);
         }
 
         #endregion
+
         #region PLACE ON SURFACE
+
         public class PlaceOnSurfaceData
         {
-            private Space _projectionDirectionSpace = Space.Self;
-            private Vector3 _projectionDirection = Vector3.down;
-            private bool _rotateToSurface = true;
-            private Vector3 _objectOrientation = Vector3.down;
-            private float _surfaceDistance = 0f;
-            private LayerMask _mask = ~0;
-            private bool _placeOnColliders = true;
-            public bool rotateToSurface { get => _rotateToSurface; set => _rotateToSurface = value; }
-            public Vector3 objectOrientation { get => _objectOrientation; set => _objectOrientation = value; }
-            public float surfaceDistance { get => _surfaceDistance; set => _surfaceDistance = value; }
-            public Vector3 projectionDirection { get => _projectionDirection; set => _projectionDirection = value; }
-            public Space projectionDirectionSpace { get => _projectionDirectionSpace; set => _projectionDirectionSpace = value; }
-            public LayerMask mask { get => _mask; set => _mask = value; }
-            public bool placeOnColliders { get => _placeOnColliders; set => _placeOnColliders = value; }
+            public bool rotateToSurface { get; set; } = true;
+
+            public Vector3 objectOrientation { get; set; } = Vector3.down;
+
+            public float surfaceDistance { get; set; } = 0f;
+
+            public Vector3 projectionDirection { get; set; } = Vector3.down;
+
+            public Space projectionDirectionSpace { get; set; } = Space.Self;
+
+            public LayerMask mask { get; set; } = ~0;
+
+            public bool placeOnColliders { get; set; } = true;
         }
 
         private static (Vector3 vertex, Transform transform)[] GetDirectionVertices(Transform target, Vector3 worldProjDir)
         {
-            var children = Array.FindAll(target.GetComponentsInChildren<MeshFilter>(), filter => filter != null && filter.sharedMesh != null).Select(filter => (filter.transform, filter.sharedMesh)).ToArray();
+            var children = Array.FindAll(target.GetComponentsInChildren<MeshFilter>(), filter => filter != null && filter.sharedMesh != null).Select(filter => (filter.transform, filter.sharedMesh))
+                .ToArray();
             var maxSqrDistance = float.MinValue;
             var bounds = BoundsUtils.GetBoundsRecursive(target);
             var vertices = new List<(Vector3 vertex, Transform transform)>() { (bounds.center, target) };
@@ -2004,6 +2114,7 @@ namespace PluginMaster
                     }
                 }
             }
+
             return vertices.ToArray();
         }
 
@@ -2027,6 +2138,7 @@ namespace PluginMaster
                     cross = target.TransformDirection(data.objectOrientation.y != 0 ? Vector3.forward : data.objectOrientation.z != 0 ? Vector3.right : Vector3.up);
                     orientAngle = worldOrientDir == worldProjDir ? 0 : 180;
                 }
+
                 target.Rotate(cross, orientAngle);
             }
 
@@ -2034,30 +2146,32 @@ namespace PluginMaster
             {
                 if (data.placeOnColliders) return Physics.Raycast(rayOrigin, worldProjDir, out hitInfo, float.MaxValue, data.mask);
                 hitInfo = new RaycastHit();
-                RaycastHit meshHitInfo, colliderHitInfo;
-                bool meshHit = RaycastMesh.Raycast(rayOrigin, worldProjDir, out meshHitInfo, out MeshFilter colliderFilter, filters, float.MaxValue);
-                bool colliderHit = Physics.Raycast(rayOrigin, worldProjDir, out colliderHitInfo, float.MaxValue, data.mask);
+                var meshHit = RaycastMesh.Raycast(rayOrigin, worldProjDir, out var meshHitInfo, out var colliderFilter, filters, float.MaxValue);
+                var colliderHit = Physics.Raycast(rayOrigin, worldProjDir, out var colliderHitInfo, float.MaxValue, data.mask);
                 if (colliderHit && meshHit)
                 {
                     hitInfo = colliderHitInfo.distance < meshHitInfo.distance ? colliderHitInfo : meshHitInfo;
                     return true;
                 }
-                else if (colliderHit)
+
+                if (colliderHit)
                 {
                     hitInfo = colliderHitInfo;
                     return true;
                 }
-                else if (meshHit)
+
+                if (meshHit)
                 {
                     hitInfo = meshHitInfo;
                     return true;
                 }
+
                 return false;
             }
 
-            if (target.GetComponentsInChildren<MeshFilter>().Count() == 0)
+            if (!target.GetComponentsInChildren<MeshFilter>().Any())
             {
-                if (Raycast(target.position, out RaycastHit hitInfo)) target.position = hitInfo.point;
+                if (Raycast(target.position, out var hitInfo)) target.position = hitInfo.point;
                 return;
             }
 
@@ -2066,9 +2180,8 @@ namespace PluginMaster
             var closestVertexInfoList = new List<((Vector3 vertex, Transform transform), RaycastHit hitInfo)>();
             foreach (var vertexTransform in dirVert)
             {
-                RaycastHit hitInfo;
                 var rayOrigin = vertexTransform.transform.TransformPoint(vertexTransform.vertex);
-                if (!Raycast(rayOrigin, out hitInfo)) continue;
+                if (!Raycast(rayOrigin, out var hitInfo)) continue;
                 if (hitInfo.distance < minDistance)
                 {
                     minDistance = hitInfo.distance;
@@ -2080,11 +2193,13 @@ namespace PluginMaster
                     closestVertexInfoList.Add((vertexTransform, hitInfo));
                 }
             }
+
             if (closestVertexInfoList.Count == 0)
             {
                 target.SetPositionAndRotation(originalPosition, originalRotation);
                 return;
             }
+
             var averageWorldVertex = Vector3.zero;
             var averageHitPoint = Vector3.zero;
             var averageNormal = Vector3.zero;
@@ -2094,6 +2209,7 @@ namespace PluginMaster
                 averageHitPoint += vertInfo.hitInfo.point;
                 averageNormal += vertInfo.hitInfo.normal;
             }
+
             averageWorldVertex /= closestVertexInfoList.Count;
             var averageVertex = target.InverseTransformPoint(averageWorldVertex);
             averageHitPoint /= closestVertexInfoList.Count;
@@ -2122,16 +2238,21 @@ namespace PluginMaster
                 var children = obj.transform.GetComponentsInChildren<Transform>(true);
                 foreach (var child in children)
                 {
-                    layerDictionary.Add(child.gameObject, child.gameObject.layer);
+                    var gameObject = child.gameObject;
+                    layerDictionary.Add(gameObject, gameObject.layer);
                     child.gameObject.layer = ignoreRaycast;
                 }
             }
+
             var filters = data.placeOnColliders ? null : RaycastMesh.FindMeshFilters(data.mask, selection);
             foreach (var obj in selection) PlaceOnSurface(obj.transform, data, filters);
             foreach (var item in layerDictionary) item.Key.layer = item.Value;
         }
+
         #endregion
+
         #region UTILS
+
         private static int CompareHierarchyIndex(GameObject obj1, GameObject obj2)
         {
             var idx1 = GetHierarchyIndex(obj1);
@@ -2144,8 +2265,7 @@ namespace PluginMaster
                 var result = idx1[depth].CompareTo(idx2[depth]);
                 if (result != 0) return result;
                 ++depth;
-            }
-            while (true);
+            } while (true);
         }
 
         private static GameObject[] SortByHierarchy(GameObject[] selection)

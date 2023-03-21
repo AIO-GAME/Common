@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ca96fead514a742864f5ed790b6601, type: 3}
   m_Name: AstarPathfindingProject
   m_EditorClassIdentifier: 
-  SourceRelativePath: 
-  Name: 
-  TargetRelativePath: 
+  SourceRelativePath: Packages\\com.*.package\\Plugins~\\AstarPathfindingProject
+  Name: Astar Pathfinding
+  TargetRelativePath: Assets\Plugins\AstarPathfinding
   MacroDefinition: 
+  Introduction: "A*\u7B97\u6CD5 \u5730\u56FE\u4F18\u5316"

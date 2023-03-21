@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ca96fead514a742864f5ed790b6601, type: 3}
   m_Name: MonKey Commander
   m_EditorClassIdentifier: 
-  SourceRelativePath: 
-  Name: 
-  TargetRelativePath: 
-  MacroDefinition: 
+  SourceRelativePath: Packages\\com.*.package\\Plugins~\\MonKey Commander
+  Name: MonKey Commander
+  TargetRelativePath: Assets\Plugins\MonKey Commander
+  MacroDefinition: MONKEYCOMMANDER
+  Introduction: "\u81EA\u5B9A\u4E49\u547D\u4EE4\u884C\u63D2\u4EF6"

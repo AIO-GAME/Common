@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ca96fead514a742864f5ed790b6601, type: 3}
   m_Name: CalendarSystem
   m_EditorClassIdentifier: 
-  SourceRelativePath: 
-  Name: 
-  TargetRelativePath: 
+  SourceRelativePath: Packages\\com.*.package\\Plugins~\\CalendarSystem
+  Name: Calendar System
+  TargetRelativePath: Assets\Plugins\CalendarSystem
   MacroDefinition: 
+  Introduction: "\u65E5\u5386\u4E8B\u4EF6\u7CFB\u7EDF"

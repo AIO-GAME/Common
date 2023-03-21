@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ca96fead514a742864f5ed790b6601, type: 3}
   m_Name: QHierarchy
   m_EditorClassIdentifier: 
-  SourceRelativePath: 
-  Name: 
-  TargetRelativePath: 
+  SourceRelativePath: Packages\\com.*.package\\Plugins~\\QHierarchy
+  Name: QHierarchy
+  TargetRelativePath: Assets\Plugins\QHierarchy
   MacroDefinition: 
+  Introduction: "\u5C42\u7EA7\u9762\u677F\u63D2\u4EF6"
