@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ca96fead514a742864f5ed790b6601, type: 3}
   m_Name: HybridCLR
   m_EditorClassIdentifier: 
-  SourceRelativePath: 
-  Name: 
-  TargetRelativePath: 
-  MacroDefinition: 
+  SourceRelativePath: Packages\\com.*.package\\Packages~\\hybridclr_unity
+  Name: HybridCLR
+  TargetRelativePath: Packages\com.focus-creative-games.hybridclr_unity
+  MacroDefinition: HYBRIDCLR
+  Introduction: "C#\u70ED\u66F4\u65B0"

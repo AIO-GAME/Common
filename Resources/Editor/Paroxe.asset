@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ca96fead514a742864f5ed790b6601, type: 3}
   m_Name: Paroxe
   m_EditorClassIdentifier: 
-  SourceRelativePath: 
-  Name: 
-  TargetRelativePath: 
+  SourceRelativePath: Packages\\com.*.package\\Plugins~\\Paroxe
+  Name: Paroxe PDFRenderer
+  TargetRelativePath: Assets\Plugins\Paroxe
   MacroDefinition: 
+  Introduction: "PDF\u9605\u8BFB\u6E32\u67D3"

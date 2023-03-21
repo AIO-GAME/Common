@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ca96fead514a742864f5ed790b6601, type: 3}
   m_Name: VertExmotion
   m_EditorClassIdentifier: 
-  SourceRelativePath: 
-  Name: 
-  TargetRelativePath: 
+  SourceRelativePath: Packages\\com.*.package\\Plugins~\\VertExmotion
+  Name: VertExmotion
+  TargetRelativePath: Assets\Plugins\VertExmotion
   MacroDefinition: 
+  Introduction: "\u7F51\u683C\u7F16\u8F91\u63D2\u4EF6"

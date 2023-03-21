@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ca96fead514a742864f5ed790b6601, type: 3}
   m_Name: BeastConsole
   m_EditorClassIdentifier: 
-  SourceRelativePath: 
-  Name: 
-  TargetRelativePath: 
-  MacroDefinition: 
+  SourceRelativePath: Packages\\com.*.package\\Plugins~\\BeastConsole
+  Name: Beast Console
+  TargetRelativePath: Assets\Plugins\BeastConsole
+  MacroDefinition: BEATCONSOLE
+  Introduction: "\u65E5\u5FD7\u63A7\u5236\u53F0"

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ca96fead514a742864f5ed790b6601, type: 3}
   m_Name: YooAsset
   m_EditorClassIdentifier: 
-  SourceRelativePath: 
-  Name: 
-  TargetRelativePath: 
-  MacroDefinition: 
+  SourceRelativePath: Packages\\com.*.package\\Packages~\\YooAsset
+  Name: Yoo Asset
+  TargetRelativePath: Packages\YooAsset
+  MacroDefinition: YooAsset
+  Introduction: "\u8D44\u6E90\u7BA1\u7406"

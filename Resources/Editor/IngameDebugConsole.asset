@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ca96fead514a742864f5ed790b6601, type: 3}
   m_Name: IngameDebugConsole
   m_EditorClassIdentifier: 
-  SourceRelativePath: 
-  Name: 
-  TargetRelativePath: 
+  SourceRelativePath: Packages\\com.*.package\\Plugins~\\IngameDebugConsole
+  Name: IngameDebugConsole
+  TargetRelativePath: Assets\Plugins\IngameDebugConsole
   MacroDefinition: 
+  Introduction: "\u63A7\u5236\u53F0"

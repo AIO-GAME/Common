@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ca96fead514a742864f5ed790b6601, type: 3}
   m_Name: ShaderControl
   m_EditorClassIdentifier: 
-  SourceRelativePath: 
-  Name: 
-  TargetRelativePath: 
+  SourceRelativePath: Packages\\com.*.package\\Plugins~\\ShaderControl
+  Name: Shader Control
+  TargetRelativePath: Assets\Plugins\ShaderControl
   MacroDefinition: 
+  Introduction: "Shader\u7BA1\u7406"

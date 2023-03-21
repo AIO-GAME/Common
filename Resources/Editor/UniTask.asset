@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ca96fead514a742864f5ed790b6601, type: 3}
   m_Name: UniTask
   m_EditorClassIdentifier: 
-  SourceRelativePath: 
-  Name: 
-  TargetRelativePath: 
-  MacroDefinition: 
+  SourceRelativePath: Packages\\com.*.package\\Plugins~\\UniTask
+  Name: UniTask
+  TargetRelativePath: Assets\Plugins\UniTask
+  MacroDefinition: UNITASK
+  Introduction: "\u5F02\u6B65\u4F5C\u4E1A\u6269\u5C55\u63D2\u4EF6"

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
 namespace AIO.Package.Editor
 {
+    /// <summary>
+    /// 插件管理界面
+    /// </summary>
     public class PluginsManagerWindow : EditorWindow
     {
         private static EditorWindow Window;
@@ -19,46 +21,60 @@ namespace AIO.Package.Editor
                 Window = null;
             }
 
-            Window = GetWindow<PluginsManagerWindow>("Plugins Manager Windows", true, types);
+            Window = GetWindow<PluginsManagerWindow>("Plugins Manager", true, types);
+            Window.minSize = new Vector2(500, 200);
             Window.wantsMouseMove = true;
             Window.Show(true); //展示     
         }
 
         protected Vector2 Vector;
-        internal Dictionary<string, PluginsInfoJson> List;
-        internal Dictionary<string, bool> ListStauts;
+
+        /// <summary>
+        /// 根节点
+        /// </summary>
+        internal Dictionary<string, PluginsInfo> RootData;
+
+        /// <summary>
+        /// 安装列表
+        /// </summary>
+        internal List<string> IntsallIndexList;
+
+        /// <summary>
+        /// 卸载列表
+        /// </summary>
+        internal List<string> UnIntsallIndexList;
+
         internal string Root;
 
         public PluginsManagerWindow()
         {
-            List = new Dictionary<string, PluginsInfoJson>();
-            ListStauts = new Dictionary<string, bool>();
+            DetailDic = new Dictionary<string, bool>();
+            UnInsallIsSelectDic = new Dictionary<string, bool>();
+            InsallIsSelectDic = new Dictionary<string, bool>();
+            RootData = new Dictionary<string, PluginsInfo>();
+            UnIntsallIndexList = new List<string>();
+            IntsallIndexList = new List<string>();
         }
 
         protected void OnEnable()
         {
             Root = Application.dataPath.Replace("Assets", "Packages");
 
-            List.Clear();
+            RootData.Clear();
+            DetailDic.Clear();
+            IntsallIndexList.Clear();
+            UnIntsallIndexList.Clear();
 
-            foreach (var data in new DirectoryInfo(Root).GetFiles("*.asset.json", SearchOption.AllDirectories))
+            foreach (var data in Unity.Editor.IOUtils.GetAssetsRes<PluginsInfo>("t:PluginsInfo", "Packages"))
             {
                 var filename = data.Name;
-                PluginsInfoJson json;
-                if (!List.ContainsKey(filename))
+                if (!RootData.ContainsKey(filename))
                 {
-                    try
-                    {
-                        json = JsonUtility.FromJson<PluginsInfoJson>(File.ReadAllText(data.FullName));
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine("Path : {0}, Error : {1}", data.FullName, e);
-                        continue;
-                    }
-
-                    List.Add(filename, json);
-                    ListStauts.Add(filename, PluginsInfoEditor.GetValidDir(Root, json.TargetRelativePath).Exists);
+                    DetailDic.Add(filename, false);
+                    RootData.Add(filename, data);
+                    if (PluginsInfoEditor.GetValidDir(Root, data.TargetRelativePath).Exists)
+                        UnIntsallIndexList.Add(filename);
+                    else IntsallIndexList.Add(filename);
                 }
             }
         }
@@ -66,50 +82,204 @@ namespace AIO.Package.Editor
         private void OnGUI()
         {
             EditorGUILayout.LabelField("插件安装管理", new GUIStyle("PreLabel"));
+            HeaderView();
+            Vector = EditorGUILayout.BeginScrollView(Vector);
+            InsallView();
+            EditorGUILayout.Space();
+            UnInsallView();
+            EditorGUILayout.EndScrollView();
+        }
 
+        private void HeaderView()
+        {
+        }
+
+        private bool InsallIsSelect = false;
+
+        private Dictionary<string, bool> InsallIsSelectDic;
+        private Dictionary<string, bool> DetailDic;
+
+        private void InsallView()
+        {
+            if (IntsallIndexList.Count == 0) return;
+
+            EditorGUILayout.BeginVertical(new GUIStyle("ChannelStripBg"));
             EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("卸载全部", GUILayout.Width(100), GUILayout.Height(20)))
+
+            if (GUILayout.Button(InsallIsSelect ? "取消" : "选择", GUILayout.Width(60)))
             {
-                _ = PluginsInfoEditor.UnInitialize(List.Values.Where(plugin => plugin != null));
+                InsallIsSelect = !InsallIsSelect;
+                InsallIsSelectDic.Clear();
+                foreach (var item in IntsallIndexList) InsallIsSelectDic.Add(item, false);
             }
 
-            if (GUILayout.Button("安装全部", GUILayout.Width(100), GUILayout.Height(20)))
+            if (InsallIsSelect)
             {
-                _ = PluginsInfoEditor.Initialize(List.Values.Where(plugin => plugin != null));
+                if (GUILayout.Button("执行", GUILayout.Width(60)))
+                {
+                    InsallIsSelect = false;
+                    if (InsallIsSelectDic.Count == 0) return;
+                    var temp = new List<PluginsInfo>();
+                    foreach (var item in IntsallIndexList.Where(V => InsallIsSelectDic[V]))
+                        temp.Add(RootData[item]);
+
+                    _ = PluginsInfoEditor.Initialize(temp);
+                    return;
+                }
+            }
+
+            EditorGUILayout.LabelField("安装列表", new GUIStyle("PreLabel"));
+
+            if (GUILayout.Button("安装全部", GUILayout.Width(60)))
+            {
+                _ = PluginsInfoEditor.Initialize(RootData.Values.Where(plugin => IntsallIndexList.Contains(plugin.Name)));
+                return;
             }
 
             EditorGUILayout.EndHorizontal();
 
-            Vector = EditorGUILayout.BeginScrollView(Vector);
-            EditorGUILayout.BeginVertical();
-            foreach (var plugin in List.Where(plugin => plugin.Value != null))
+            foreach (var Data in IntsallIndexList.Select(Name => RootData[Name]))
             {
-                EditorGUILayout.BeginHorizontal("IN ThumbnailShadow", GUILayout.Height(25));
-                EditorGUILayout.PrefixLabel(plugin.Value.Name);
-                EditorGUILayout.Separator();
-                EditorGUILayout.LabelField(plugin.Value.MacroDefinition);
-                EditorGUILayout.Separator();
-                if (ListStauts[plugin.Key])
+                EditorGUILayout.BeginVertical("IN ThumbnailShadow");
+
                 {
-                    if (GUILayout.Button("卸载", GUILayout.Width(100), GUILayout.Height(20)))
+                    EditorGUILayout.BeginHorizontal(GUILayout.Height(25));
+                    if (InsallIsSelect)
+                        InsallIsSelectDic[Data.Name] = EditorGUILayout.Toggle("", InsallIsSelectDic[Data.Name], new GUIStyle("MenuToggleItem"), GUILayout.Width(20));
+                    if (GUILayout.Button("详", GUILayout.Width(25), GUILayout.Height(20)))
                     {
-                        _ = PluginsInfoEditor.UnInitialize(plugin.Value);
+                        DetailDic[Data.Name] = !DetailDic[Data.Name];
                     }
-                }
-                else
-                {
-                    if (GUILayout.Button("安装", GUILayout.Width(100), GUILayout.Height(20)))
+
+                    EditorGUILayout.PrefixLabel(Data.Name);
+                    if (!InsallIsSelect)
                     {
-                        _ = PluginsInfoEditor.Initialize(plugin.Value);
+                        EditorGUILayout.Separator();
+                        EditorGUILayout.LabelField(Data.Introduction, GUILayout.Width(150));
+                        EditorGUILayout.Separator();
+                        if (GUILayout.Button("安装", GUILayout.Width(60), GUILayout.Height(20)))
+                        {
+                            _ = PluginsInfoEditor.Initialize(Data);
+                            return;
+                        }
                     }
+
+                    EditorGUILayout.EndHorizontal();
                 }
 
-                EditorGUILayout.EndHorizontal();
+                {
+                    if (DetailDic[Data.Name])
+                    {
+                        EditorGUILayout.LabelField("源文件路径 ->" + Data.SourceRelativePath);
+                        EditorGUILayout.LabelField("安装路径ㅤ ->" + Data.TargetRelativePath);
+                        if (!string.IsNullOrEmpty(Data.MacroDefinition))
+                        {
+                            EditorGUILayout.LabelField("宏定义ㅤㅤ ->" + Data.MacroDefinition);
+                        }
+
+                        if (!string.IsNullOrEmpty(Data.Introduction))
+                        {
+                            EditorGUILayout.LabelField("简介ㅤㅤㅤ ->" + Data.Introduction);
+                        }
+                    }
+                }
+                EditorGUILayout.EndVertical();
                 EditorGUILayout.Space();
             }
 
             EditorGUILayout.EndVertical();
-            EditorGUILayout.EndScrollView();
+        }
+
+        private bool UnInsallIsSelect = false;
+
+        private Dictionary<string, bool> UnInsallIsSelectDic;
+
+        private void UnInsallView()
+        {
+            if (UnIntsallIndexList.Count == 0) return;
+            EditorGUILayout.BeginVertical(new GUIStyle("ChannelStripBg"));
+
+            EditorGUILayout.BeginHorizontal();
+
+            if (GUILayout.Button(UnInsallIsSelect ? "取消" : "选择", GUILayout.Width(60)))
+            {
+                UnInsallIsSelect = !UnInsallIsSelect;
+                UnInsallIsSelectDic.Clear();
+                foreach (var item in UnIntsallIndexList) UnInsallIsSelectDic.Add(item, false);
+            }
+
+            if (UnInsallIsSelect)
+            {
+                if (GUILayout.Button("执行", GUILayout.Width(60)))
+                {
+                    UnInsallIsSelect = false;
+                    var temp = new List<PluginsInfo>();
+                    foreach (var item in UnIntsallIndexList.Where(V => UnInsallIsSelectDic[V]))
+                        temp.Add(RootData[item]);
+
+                    if (temp.Count == 0) return;
+
+                    _ = PluginsInfoEditor.Initialize(temp);
+                    return;
+                }
+            }
+
+            EditorGUILayout.LabelField("卸载列表", new GUIStyle("PreLabel"));
+            if (GUILayout.Button("卸载全部", GUILayout.Width(60)))
+            {
+                _ = PluginsInfoEditor.UnInitialize(RootData.Values.Where(plugin => UnIntsallIndexList.Contains(plugin.Name)));
+                return;
+            }
+
+            EditorGUILayout.EndHorizontal();
+
+            foreach (var Data in UnIntsallIndexList.Select(Name => RootData[Name]))
+            {
+                EditorGUILayout.BeginVertical("IN ThumbnailShadow");
+                {
+                    EditorGUILayout.BeginHorizontal(GUILayout.Height(25));
+                    if (UnInsallIsSelect) UnInsallIsSelectDic.Set(Data.Name, EditorGUILayout.Toggle("", UnInsallIsSelectDic[Data.Name], GUILayout.Width(20)));
+                    if (GUILayout.Button("详", GUILayout.Width(25), GUILayout.Height(20)))
+                    {
+                        DetailDic[Data.Name] = !DetailDic[Data.Name];
+                    }
+
+                    EditorGUILayout.PrefixLabel(Data.Name);
+                    if (!UnInsallIsSelect)
+                    {
+                        EditorGUILayout.Separator();
+                        EditorGUILayout.LabelField(Data.Introduction, GUILayout.Width(150));
+                        EditorGUILayout.Separator();
+                        if (GUILayout.Button("卸载", GUILayout.Width(60), GUILayout.Height(20)))
+                        {
+                            _ = PluginsInfoEditor.UnInitialize(Data);
+                            return;
+                        }
+                    }
+
+                    EditorGUILayout.EndHorizontal();
+                }
+                {
+                    if (DetailDic[Data.Name])
+                    {
+                        EditorGUILayout.LabelField("源文件路径 ->" + Data.SourceRelativePath);
+                        EditorGUILayout.LabelField("安装路径ㅤ ->" + Data.TargetRelativePath);
+                        if (!string.IsNullOrEmpty(Data.MacroDefinition))
+                        {
+                            EditorGUILayout.LabelField("宏定义ㅤㅤ ->" + Data.MacroDefinition);
+                        }
+
+                        if (!string.IsNullOrEmpty(Data.Introduction))
+                        {
+                            EditorGUILayout.LabelField("简介ㅤㅤㅤ ->" + Data.Introduction);
+                        }
+                    }
+                }
+                EditorGUILayout.EndVertical();
+                EditorGUILayout.Space();
+            }
+
+            EditorGUILayout.EndVertical();
         }
     }
 }

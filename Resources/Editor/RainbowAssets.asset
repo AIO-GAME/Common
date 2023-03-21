@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ca96fead514a742864f5ed790b6601, type: 3}
   m_Name: RainbowAssets
   m_EditorClassIdentifier: 
-  SourceRelativePath: 
-  Name: 
-  TargetRelativePath: 
+  SourceRelativePath: Packages\\com.*.package\\Plugins~\\RainbowAssets
+  Name: Rainbow Assets
+  TargetRelativePath: Assets\Plugins\RainbowAssets
   MacroDefinition: 
+  Introduction: "\u8D44\u6E90\u6587\u4EF6\u7BA1\u7406"
