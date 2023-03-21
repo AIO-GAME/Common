@@ -67,14 +67,14 @@ namespace qtools.qhierarchy
             {
                 checkIntegrity();
 
-                foreach (var gameObject in editModeVisibileObjects)
-                    gameObject.SetActive(false);
+                foreach (var value in editModeVisibileObjects)
+                    value.SetActive(false);
 
-                foreach (var gameObject in editModeInvisibleObjects)
-                    gameObject.SetActive(true);
+                foreach (var value in editModeInvisibleObjects)
+                    value.SetActive(true);
 
-                foreach (var gameObject in lockedObjects)
-                    gameObject.hideFlags &= ~HideFlags.NotEditable;
+                foreach (var value in lockedObjects)
+                    value.hideFlags &= ~HideFlags.NotEditable;
 
                 instances.Remove(this);
             }
@@ -140,7 +140,7 @@ namespace qtools.qhierarchy
         {
             gameObjectColorKeys.Clear();
             gameObjectColorValues.Clear();
-            foreach (KeyValuePair<GameObject, Color> pair in gameObjectColor)
+            foreach (var pair in gameObjectColor)
             {
                 gameObjectColorKeys.Add(pair.Key);
                 gameObjectColorValues.Add(pair.Value);
@@ -150,7 +150,7 @@ namespace qtools.qhierarchy
         public void OnAfterDeserialize()
         {
             gameObjectColor.Clear();
-            for (int i = 0; i < gameObjectColorKeys.Count; i++)
+            for (var i = 0; i < gameObjectColorKeys.Count; i++)
                 gameObjectColor.Add(gameObjectColorKeys[i], gameObjectColorValues[i]);
         }
     }

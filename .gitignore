@@ -4,7 +4,10 @@
 *.sln
 *.git
 
+!*.dll.meta
 !*.asset.meta
+!*.asmdef.meta
+!*.cs.meta
 
 .vs/
 .idea/
