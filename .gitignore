@@ -4,6 +4,8 @@
 *.sln
 *.git
 
+!*.asset.meta
+
 .vs/
 .idea/
 .gradle/
