@@ -1798,7 +1798,7 @@ namespace PluginMaster
         {
             get
             {
-                if (_pivotMaterial == null) _pivotMaterial = new UnityEngine.Material(Shader.Find("PluginMaster/Pivot"));
+                if (_pivotMaterial == null) _pivotMaterial = new UnityEngine.Material(UnityEngine.Shader.Find("PluginMaster/Pivot"));
                 return _pivotMaterial;
             }
         }
@@ -2271,7 +2271,7 @@ namespace PluginMaster
         private static GameObject[] SortByHierarchy(GameObject[] selection)
         {
             var sortedList = selection.ToList();
-            sortedList.Sort((obj1, obj2) => CompareHierarchyIndex(obj1, obj2));
+            sortedList.Sort(CompareHierarchyIndex);
             return sortedList.ToArray();
         }
 
