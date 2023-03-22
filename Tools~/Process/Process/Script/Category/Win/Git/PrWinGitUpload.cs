@@ -61,7 +61,7 @@ namespace AIO
                     {
                         str.AppendLine(string.Format("@echo {0}", Path.GetFileName(target)));
                         str.AppendLine(string.Format("@cd /d \"{0}\"", target.Replace('/', '\\')));
-                        str.AppendLine("@git pull -v --progress --allow-unrelated-histories --autostash --stat --recurse-submodules --update --ff-only");
+                        str.AppendLine("@git pull --all -v --progress --allow-unrelated-histories --autostash --stat --recurse-submodules --update --ff-only");
                         str.AppendLine("@git add .");
                         str.AppendLine("@git commit -m \"!commitArg!\"");
                         if (inputOrigin)
