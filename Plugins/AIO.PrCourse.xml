@@ -311,12 +311,13 @@
             <param name="args">格式化参数</param>
             <returns>结果执行器</returns>
         </member>
-        <member name="M:AIO.PrCourse.Create``1(System.String@)">
+        <member name="M:AIO.PrCourse.Create``1(System.String@,AIO.EPrVerb@)">
             <summary>
             创建
             </summary>
             <typeparam name="T">执行器类型</typeparam>
             <param name="cmd">CMD路径:NoNull</param>
+            <param name="verb">管理员权限</param>
             <returns>结果执行器</returns>
         </member>
         <member name="T:AIO.Result">
