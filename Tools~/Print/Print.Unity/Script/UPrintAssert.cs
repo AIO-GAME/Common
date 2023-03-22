@@ -1,7 +1,5 @@
 ﻿using System.Diagnostics;
-
 using UnityEngine;
-
 using Debug = UnityEngine.Debug;
 
 namespace AIO
@@ -15,8 +13,8 @@ namespace AIO
         [Conditional("UNITY_ASSERTIONS")]
         public static void Assert(in bool condition)
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.LOG) || condition) return;
-            Debug.unityLogger.Log(LogType.Assert, (object)"Assertion failed");
+            if (IsNotOut || NoStatus(LOG) || condition) return;
+            Debug.unityLogger.Log(LogType.Assert, "Assertion failed");
         }
 
         /// <summary>
@@ -25,7 +23,7 @@ namespace AIO
         [Conditional("UNITY_ASSERTIONS")]
         public static void Assert<T>(in T args)
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.LOG)) return;
+            if (IsNotOut || NoStatus(LOG)) return;
             Debug.unityLogger.Log(LogType.Assert, args);
         }
 
@@ -35,7 +33,7 @@ namespace AIO
         [Conditional("UNITY_ASSERTIONS")]
         public static void Assert<T, O>(in T args, in O uobject) where O : Object
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.LOG)) return;
+            if (IsNotOut || NoStatus(LOG)) return;
             Debug.unityLogger.Log(LogType.Assert, args, uobject);
         }
 
@@ -47,7 +45,7 @@ namespace AIO
         [Conditional("UNITY_ASSERTIONS")]
         public static void Assert<T>(in bool condition, in T context) where T : Object
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.LOG) || condition) return;
+            if (IsNotOut || NoStatus(LOG) || condition) return;
             Debug.unityLogger.Log(LogType.Assert, (object)"Assertion failed", context);
         }
 
@@ -59,7 +57,7 @@ namespace AIO
         [Conditional("UNITY_ASSERTIONS")]
         public static void Assert(in bool condition, in object message)
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.LOG) || condition) return;
+            if (IsNotOut || NoStatus(LOG) || condition) return;
             Debug.unityLogger.Log(LogType.Assert, message);
         }
 
@@ -71,8 +69,8 @@ namespace AIO
         [Conditional("UNITY_ASSERTIONS")]
         public static void Assert(in bool condition, in string message)
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.LOG) || condition) return;
-            Debug.unityLogger.Log(LogType.Assert, (object)message);
+            if (IsNotOut || NoStatus(LOG) || condition) return;
+            Debug.unityLogger.Log(LogType.Assert, message);
         }
 
         /// <summary>
@@ -84,7 +82,7 @@ namespace AIO
         [Conditional("UNITY_ASSERTIONS")]
         public static void Assert<T>(in bool condition, in object message, in T context) where T : Object
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.LOG) || condition) return;
+            if (IsNotOut || NoStatus(LOG) || condition) return;
             Debug.unityLogger.Log(LogType.Assert, message, context);
         }
 
@@ -97,7 +95,7 @@ namespace AIO
         [Conditional("UNITY_ASSERTIONS")]
         public static void Assert<T>(in bool condition, in string message, in T context) where T : Object
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.LOG) || condition) return;
+            if (IsNotOut || NoStatus(LOG) || condition) return;
             Debug.unityLogger.Log(LogType.Assert, (object)message, context);
         }
 
@@ -110,7 +108,7 @@ namespace AIO
         [Conditional("UNITY_ASSERTIONS")]
         public static void AssertFormat(in bool condition, in string format, params object[] args)
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.LOG) || condition) return;
+            if (IsNotOut || NoStatus(LOG) || condition) return;
             Debug.unityLogger.LogFormat(LogType.Assert, string.Format(format, args));
         }
 
@@ -124,7 +122,7 @@ namespace AIO
         [Conditional("UNITY_ASSERTIONS")]
         public static void AssertFormat<T>(in bool condition, in T context, in string format, params object[] args) where T : Object
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.LOG) || condition) return;
+            if (IsNotOut || NoStatus(LOG) || condition) return;
             Debug.unityLogger.LogFormat(LogType.Assert, context, string.Format(format, args));
         }
 
@@ -134,7 +132,7 @@ namespace AIO
         [Conditional("UNITY_ASSERTIONS")]
         public static void AssertFormat<T>(in string format, params T[] args)
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.LOG)) return;
+            if (IsNotOut || NoStatus(LOG)) return;
             Debug.unityLogger.Log(LogType.Assert, string.Format(format, args));
         }
 
@@ -144,7 +142,7 @@ namespace AIO
         [Conditional("UNITY_ASSERTIONS")]
         public static void AssertFormat(in string format, params object[] args)
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.LOG)) return;
+            if (IsNotOut || NoStatus(LOG)) return;
             Debug.unityLogger.Log(LogType.Assert, string.Format(format, args));
         }
     }

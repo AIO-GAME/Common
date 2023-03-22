@@ -143,7 +143,12 @@
         </member>
         <member name="M:AIO.UPrint.Error(System.Object@)">
             <summary>
-            错误日志 Json 结构
+            错误
+            </summary>
+        </member>
+        <member name="M:AIO.UPrint.Error(System.String@)">
+            <summary>
+            错误
             </summary>
         </member>
         <member name="M:AIO.UPrint.Error``1(``0@)">
@@ -172,6 +177,11 @@
             </summary>
         </member>
         <member name="M:AIO.UPrint.Log``1(``0@,AIO.EFormat@)">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="M:AIO.UPrint.Log(System.String@)">
             <summary>
             日志
             </summary>
@@ -257,6 +267,11 @@
             </summary>
         </member>
         <member name="M:AIO.UPrint.Warn``1(``0@,AIO.EFormat@)">
+            <summary>
+            警告
+            </summary>
+        </member>
+        <member name="M:AIO.UPrint.Warn(System.String@)">
             <summary>
             警告
             </summary>
