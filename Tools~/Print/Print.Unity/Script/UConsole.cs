@@ -4,12 +4,13 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+using System;
+using System.IO;
+using System.Text;
+using UnityEngine;
+
 namespace AIO
 {
-    using System;
-    using System.IO;
-    using System.Text;
-
     /// <summary>
     /// Unity 控制台输出
     /// </summary>
@@ -125,6 +126,7 @@ namespace AIO
             /// 正常输出
             /// </summary>
             Log,
+
             /// <summary>
             /// 错误输出
             /// </summary>
@@ -161,7 +163,7 @@ namespace AIO
             internal void SetPrint(bool value)
             {
                 IsPrint = value;
-                UnityEngine.Debug.Log(string.Concat(TAG_LOG, value ? "Enabled" : "Disable", " Success : ", Type.ToString()));
+                Debug.Log(string.Concat(TAG_LOG, value ? "Enabled" : "Disable", " Success : ", Type.ToString()));
             }
 
             private void Print(string message)
@@ -171,11 +173,11 @@ namespace AIO
                 switch (Type)
                 {
                     case UnityConsoleType.Error:
-                        UnityEngine.Debug.LogError(string.Concat(TAG_ERROR, message));
+                        Debug.LogError(string.Concat(TAG_ERROR, message));
                         break;
                     case UnityConsoleType.Log:
                     default:
-                        UnityEngine.Debug.Log(string.Concat(TAG_LOG, message));
+                        Debug.Log(string.Concat(TAG_LOG, message));
                         break;
                 }
             }
@@ -198,6 +200,7 @@ namespace AIO
                     str = Buffer.ToString();
                     Buffer.Length = 0;
                 }
+
                 Print(str);
             }
 
@@ -208,7 +211,6 @@ namespace AIO
             {
                 if (value != null)
                 {
-
                     var len = value.Length;
                     if (len > 0)
                     {

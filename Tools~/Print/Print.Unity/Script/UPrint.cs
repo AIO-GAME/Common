@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-
 using UnityEngine;
-
 using Debug = UnityEngine.Debug;
 using Object = UnityEngine.Object;
 
@@ -18,7 +16,6 @@ namespace AIO
         /// </summary>
         public class Console
         {
-
             #region :: ENABLED
 
             /// <summary>
@@ -37,7 +34,7 @@ namespace AIO
             /// </summary>
             public static void EnabledLog()
             {
-                if (Print.IsNotOut || Print.NoStatus(Print.LOG)) return;
+                if (IsNotOut || NoStatus(LOG)) return;
                 UnityConsole.EnabledLog();
             }
 
@@ -46,7 +43,7 @@ namespace AIO
             /// </summary>
             public static void EnabledError()
             {
-                if (Print.IsNotOut || Print.NoStatus(Print.ERROR)) return;
+                if (IsNotOut || NoStatus(ERROR)) return;
                 UnityConsole.EnabledError();
             }
 
@@ -81,20 +78,20 @@ namespace AIO
         /// <summary>
         /// 输出异常
         /// </summary>
-        [Conditional(Print.MACRO_DEFINITION)]
+        [Conditional(MACRO_DEFINITION)]
         public static void Exception<E, T>(in E exception, in T obj) where E : Exception where T : Object
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.EXCEPTION)) return;
+            if (IsNotOut || NoStatus(EXCEPTION)) return;
             Debug.unityLogger.Log(LogType.Exception, exception, obj);
         }
 
         /// <summary>
         /// 输出异常
         /// </summary>
-        [Conditional(Print.MACRO_DEFINITION)]
+        [Conditional(MACRO_DEFINITION)]
         public static void Exception<E>(in E exception) where E : Exception
         {
-            if (Print.IsNotOut || Print.NoStatus(Print.EXCEPTION)) return;
+            if (IsNotOut || NoStatus(EXCEPTION)) return;
             Debug.unityLogger.Log(LogType.Exception, exception, null);
         }
     }
