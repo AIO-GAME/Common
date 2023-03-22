@@ -156,15 +156,32 @@ namespace AIO
         #endregion
 
         /// <summary>
-        /// 
+        /// 移除
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T[] RemoveAt<T>(this T[] arrays, in int index)
         {
-            int newLength = arrays.Length - 1;
-            T[] copy = new T[newLength];
+            var newLength = arrays.Length - 1;
+            var copy = new T[newLength];
             Array.ConstrainedCopy(arrays, 0, copy, 0, index);
             Array.ConstrainedCopy(arrays, index + 1, copy, index, newLength - index);
+            return copy;
+        }
+
+        /// <summary>
+        /// 移除
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T[] Remove<T>(this T[] arrays, in T value)
+        {
+            var copy = new T[arrays.Length - 1];
+            for (var i = 0; i < arrays.Length; i++)
+            {
+                if (arrays[i].Equals(value)) continue;
+                if (i == copy.Length) throw new KeyNotFoundException(nameof(value));
+                copy[i] = arrays[i];
+            }
+
             return copy;
         }
     }

@@ -15,7 +15,6 @@ namespace AIO
     {
         public static partial class Git
         {
-
             /// <summary>
             /// 拉取
             /// </summary>
@@ -42,6 +41,7 @@ namespace AIO
 
                     str.AppendLine(LINE_BOTTOM);
                 }
+
                 return Execute(str, quit);
             }
 
@@ -50,7 +50,7 @@ namespace AIO
             /// </summary>
             /// <param name="target">文件路径列表</param>
             /// <param name="quit">静默退出</param>
-            public static IExecutor Pull(string target, bool quit = true)
+            public static IExecutor Pull(in string target, in bool quit = true)
             {
                 return Pull(new string[] { target }, quit);
             }

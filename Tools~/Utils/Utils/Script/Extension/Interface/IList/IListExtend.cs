@@ -14,74 +14,8 @@ namespace AIO
     /// </summary>
     public static partial class IListExtend
     {
-        /// <summary>
-        /// 数组 最后一个
-        /// </summary>
-        public static T Last<T>(this IList<T> array)
-        {
-            if (array is null) throw new ArgumentNullException(nameof(array));
-            if (array.Count <= 0) return default;
-            return array[array.Count - 1];
-        }
-
-        /// <summary>
-        /// 数组 第一个
-        /// </summary>
-        public static T First<T>(this IList<T> array)
-        {
-            if (array is null) throw new ArgumentNullException(nameof(array));
-            if (array.Count <= 0) return default;
-            return array[0];
-        }
-
-        /// <summary>
-        /// 获取指定下标元素
-        /// </summary>
-        public static T Get<T>(this IList<T> array, int idx)
-        {
-            if (array is null) throw new ArgumentNullException(nameof(array));
-            if (idx < 0 || idx >= array.Count) throw new IndexOutOfRangeException();
-            return array[idx];
-        }
-
-        /// <summary>
-        /// 设置指定下标元素
-        /// </summary>
-        public static void Set<T>(this IList<T> array, int idx, T value)
-        {
-            if (array is null) throw new ArgumentNullException(nameof(array));
-            if (idx < 0 || idx >= array.Count) throw new IndexOutOfRangeException();
-            array[idx] = value;
-        }
-
-        #region Remove
-
-        /// <summary>
-        /// 移除第一个元素
-        /// </summary>
-        public static T RemoveFirst<T>(this IList<T> array)
-        {
-            if (array is null) throw new ArgumentNullException(nameof(array));
-            if (array.Count <= 0) return default;
-            var r = array[0];
-            array.RemoveAt(0);
-            return r;
-        }
-
-        /// <summary>
-        /// 移除最后一个元素
-        /// </summary>
-        public static T RemoveLast<T>(this IList<T> array)
-        {
-            if (array is null) throw new ArgumentNullException(nameof(array));
-            if (array.Count <= 0) return default;
-            var idx = array.Count - 1;
-            var r = array[idx];
-            array.RemoveAt(idx);
-            return r;
-        }
-
-        #endregion
+    
+       
 
         /// <summary>
         /// 保留至少N个元素
@@ -108,47 +42,15 @@ namespace AIO
             }
         }
 
-        /// <summary>
-        /// 添加
-        /// </summary>
-        public static void Add<T>(this IList<T> array, params T[] arrys)
-        {
-            if (array is null) throw new ArgumentNullException(nameof(array));
-            foreach (var item in arrys) array.Add(item);
-        }
-
-        /// <summary>
-        /// 添加
-        /// </summary>
-        public static void Add<T>(this IList<T> array, in ICollection<T> arrys)
-        {
-            if (array is null) throw new ArgumentNullException(nameof(array));
-            foreach (var item in arrys) array.Add(item);
-        }
-
-        /// <summary>
-        /// 添加
-        /// </summary>
-        public static void AddRange<T>(this IList<T> array, in IList<T> others, int start, int end)
-        {
-            if (array is null) throw new ArgumentNullException(nameof(array));
-            if (others == null || others.Count == 0) return;
-
-            start = MathUtils.Clamp(start, 0, others.Count);
-            end = MathUtils.Clamp(end, start, others.Count);
-            if (start < others.Count - 1 && end > start)
-            {
-                for (var i = start; i < end; ++i) array.Add(others[i]);
-            }
-        }
+       
 
         /// <summary>
         /// 添加相同元素
         /// </summary>
-        public static void Union<T>(this IList<T> array, ICollection<T> others)
+        public static void Union<T>(this IList<T> array, in IEnumerable<T> others)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
-            if (others is null || others.Count == 0) return;
+            if (others is null) return;
             foreach (var t in others)
                 if (!array.Contains(t))
                     array.Add(t);
@@ -171,7 +73,7 @@ namespace AIO
         /// <summary>
         /// 是否存在重复的
         /// </summary>
-        public static bool ExistRepeat<T>(this IList<T> array, Func<T, T, bool> compare)
+        public static bool ExistRepeat<T>(this IList<T> array, in Func<T, T, bool> compare)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
             if (compare is null) throw new ArgumentNullException(nameof(compare));
@@ -186,7 +88,7 @@ namespace AIO
         /// <summary>
         /// 是否存在重复的
         /// </summary>
-        public static bool ExistRepeat<T>(this IList<T> array, IComparer<T> compare)
+        public static bool ExistRepeat<T>(this IList<T> array, in IComparer<T> compare)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
             if (compare is null) throw new ArgumentNullException(nameof(compare));
@@ -203,7 +105,7 @@ namespace AIO
         /// <summary>
         /// 交换数组元素位置
         /// </summary>
-        public static void Swap<T>(this IList<T> array, int A, int B)
+        public static void Swap<T>(this IList<T> array, in int A, in int B)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
             if (array.Count <= A || array.Count <= B) throw new IndexOutOfRangeException(nameof(array));
@@ -213,7 +115,7 @@ namespace AIO
         /// <summary>
         /// 交换数组元素位置
         /// </summary>
-        public static void Swap<T>(this IList<T> array, short A, short B)
+        public static void Swap<T>(this IList<T> array, in short A, in short B)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
             if (array.Count <= A || array.Count <= B) throw new IndexOutOfRangeException(nameof(array));
@@ -223,7 +125,7 @@ namespace AIO
         /// <summary>
         /// 交换数组元素位置
         /// </summary>
-        public static void Swap<T>(this IList<T> array, ushort A, ushort B)
+        public static void Swap<T>(this IList<T> array, in ushort A, in ushort B)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
             if (array.Count <= A || array.Count <= B) throw new IndexOutOfRangeException(nameof(array));
@@ -233,7 +135,7 @@ namespace AIO
         /// <summary>
         /// 交换数组元素位置
         /// </summary>
-        public static void Swap<T>(this IList<T> array, byte A, byte B)
+        public static void Swap<T>(this IList<T> array, in byte A, in byte B)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
             if (array.Count <= A || array.Count <= B) throw new IndexOutOfRangeException(nameof(array));
@@ -243,7 +145,7 @@ namespace AIO
         /// <summary>
         /// 交换数组元素位置
         /// </summary>
-        public static void Swap<T>(this IList<T> array, sbyte A, sbyte B)
+        public static void Swap<T>(this IList<T> array, in sbyte A, in sbyte B)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
             if (array.Count <= A || array.Count <= B) throw new IndexOutOfRangeException(nameof(array));
@@ -257,7 +159,7 @@ namespace AIO
         /// <summary>
         /// 获取最小值
         /// </summary>
-        public static T GetMinValue<T>(this IList<T> array, Func<T, T, sbyte> compare)
+        public static T GetMinValue<T>(this IList<T> array, in Func<T, T, sbyte> compare)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
             if (compare is null) throw new ArgumentNullException(nameof(compare));
@@ -272,7 +174,7 @@ namespace AIO
         /// <summary>
         /// 获取最小值
         /// </summary>
-        public static T GetMinValue<T>(this IList<T> array, IComparer<T> compare)
+        public static T GetMinValue<T>(this IList<T> array, in IComparer<T> compare)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
             if (compare is null) throw new ArgumentNullException(nameof(compare));
@@ -337,7 +239,7 @@ namespace AIO
         /// </param>
         /// <typeparam name="T">泛型</typeparam>
         /// <returns>极值</returns>
-        public static T GetMaxValue<T>(this IList<T> array, IComparer<T> compare)
+        public static T GetMaxValue<T>(this IList<T> array, in IComparer<T> compare)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
             if (compare is null) throw new ArgumentNullException(nameof(compare));
@@ -392,7 +294,7 @@ namespace AIO
         /// <summary>
         /// 获取最大最小值 第一个Max 第二个Min
         /// </summary>
-        public static (T, T) GetMaxMinValue<T>(this IList<T> array, IComparer<T> compare)
+        public static (T, T) GetMaxMinValue<T>(this IList<T> array, in IComparer<T> compare)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
             if (compare is null) throw new ArgumentNullException(nameof(compare));
@@ -412,7 +314,7 @@ namespace AIO
         /// <summary>
         /// 获取最大最小值 第一个Max 第二个Min
         /// </summary>
-        public static (T, T) GetMaxMinValue<T>(this IList<T> array, Func<T, T, sbyte> compare)
+        public static (T, T) GetMaxMinValue<T>(this IList<T> array, in Func<T, T, sbyte> compare)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
             if (compare is null) throw new ArgumentNullException(nameof(compare));

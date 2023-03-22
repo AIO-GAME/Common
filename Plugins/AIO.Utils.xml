@@ -146,7 +146,12 @@
         </member>
         <member name="M:AIO.ArrayExtend.RemoveAt``1(``0[],System.Int32@)">
             <summary>
-            
+            移除
+            </summary>
+        </member>
+        <member name="M:AIO.ArrayExtend.Remove``1(``0[],``0@)">
+            <summary>
+            移除
             </summary>
         </member>
         <member name="T:AIO.ByteExtendToConver">
@@ -351,16 +356,16 @@
             数组
             </summary>
         </member>
-        <member name="M:AIO.ICollectionExtend.Find``1(System.Collections.Generic.ICollection{``0},``0)">
+        <member name="M:AIO.ICollectionExtend.Find``1(System.Collections.Generic.ICollection{``0},``0@)">
             <summary>
-            
+            查找
             </summary>
             <param name="array"></param>
             <param name="value"></param>
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:AIO.ICollectionExtend.Find``1(System.Collections.Generic.ICollection{``0},``0,System.Int32)">
+        <member name="M:AIO.ICollectionExtend.Find``1(System.Collections.Generic.ICollection{``0},``0@,System.Int32)">
             <summary>
             
             </summary>
@@ -370,35 +375,26 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:AIO.ICollectionExtend.Contain``1(System.Collections.Generic.ICollection{``0},``0)">
+        <member name="T:AIO.IDictionaryExtend">
             <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="value"></param>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="T:AIO.DictionaryExtend">
-            <summary>
-            
+            字典扩展
             </summary>
         </member>
-        <member name="M:AIO.DictionaryExtend.Get(System.Collections.IDictionary,System.String@)">
+        <member name="M:AIO.IDictionaryExtend.Get(System.Collections.IDictionary,System.String@)">
             <summary>
             获取
             </summary>
             <param name="dic">字典</param>
             <param name="key">Key值</param>
         </member>
-        <member name="M:AIO.DictionaryExtend.Get(System.Collections.IDictionary,System.Object@)">
+        <member name="M:AIO.IDictionaryExtend.Get(System.Collections.IDictionary,System.Object@)">
             <summary>
             获取
             </summary>
             <param name="dic">字典</param>
             <param name="key">Key值</param>
         </member>
-        <member name="M:AIO.DictionaryExtend.Get``1(System.Collections.IDictionary,System.String@)">
+        <member name="M:AIO.IDictionaryExtend.Get``1(System.Collections.IDictionary,System.String@)">
             <summary>
             获取
             </summary>
@@ -406,7 +402,7 @@
             <param name="key">Key值</param>
             <typeparam name="T">任意泛型</typeparam>
         </member>
-        <member name="M:AIO.DictionaryExtend.Get``1(System.Collections.IDictionary,System.Object@)">
+        <member name="M:AIO.IDictionaryExtend.Get``1(System.Collections.IDictionary,System.Object@)">
             <summary>
             获取
             </summary>
@@ -414,23 +410,7 @@
             <param name="key">Key值</param>
             <typeparam name="T">任意泛型</typeparam>
         </member>
-        <member name="M:AIO.DictionaryExtend.Set(System.Collections.IDictionary,System.String@,System.Object@)">
-            <summary>
-            设置
-            </summary>
-            <param name="dic">字典</param>
-            <param name="key">Key值</param>
-            <param name="value">Value值</param>
-        </member>
-        <member name="M:AIO.DictionaryExtend.Set(System.Collections.IDictionary,System.Object@,System.Object@)">
-            <summary>
-            设置
-            </summary>
-            <param name="dic">字典</param>
-            <param name="key">Key值</param>
-            <param name="value">Value值</param>
-        </member>
-        <member name="M:AIO.DictionaryExtend.TryGet``1(System.Collections.IDictionary,System.String@,``0@)">
+        <member name="M:AIO.IDictionaryExtend.TryGet``1(System.Collections.IDictionary,System.String@,``0@)">
             <summary>
             尝试获取
             </summary>
@@ -439,7 +419,7 @@
             <param name="value">Value值</param>
             <typeparam name="T">任意泛型</typeparam>
         </member>
-        <member name="M:AIO.DictionaryExtend.TryGet``1(System.Collections.IDictionary,System.Object@,``0@)">
+        <member name="M:AIO.IDictionaryExtend.TryGet``1(System.Collections.IDictionary,System.Object@,``0@)">
             <summary>
             尝试获取
             </summary>
@@ -448,47 +428,34 @@
             <param name="value">Value值</param>
             <typeparam name="T">任意泛型</typeparam>
         </member>
-        <member name="M:AIO.DictionaryExtend.DictTo``1(System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
+        <member name="M:AIO.IDictionaryExtend.Get``2(System.Collections.Generic.Dictionary{``0,``1},``0@)">
             <summary>
-            
+            获取
             </summary>
-            <param name="dict"></param>
-            <param name="key"></param>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
+            <param name="dic">字典</param>
+            <param name="key">Key值</param>
         </member>
-        <member name="M:AIO.DictionaryExtend.TryGet``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)">
+        <member name="M:AIO.IDictionaryExtend.TryGet``2(System.Collections.Generic.Dictionary{``0,``1},``0@,``1@)">
             <summary>
-            
+            尝试获取
             </summary>
-            <param name="dict"></param>
-            <param name="key"></param>
-            <param name="def"></param>
-            <typeparam name="TK"></typeparam>
-            <typeparam name="TV"></typeparam>
-            <returns></returns>
+            <param name="dic">字典</param>
+            <param name="key">Key值</param>
+            <param name="value">Value值</param>
+            <typeparam name="K">任意泛型</typeparam>
+            <typeparam name="V">任意泛型</typeparam>
         </member>
-        <member name="M:AIO.DictionaryExtend.TryGetOrCreate``2(System.Collections.Generic.IDictionary{``0,``1},``0)">
+        <member name="M:AIO.IDictionaryExtend.TrySet``2(System.Collections.Generic.Dictionary{``0,``1},``0@,``1@)">
             <summary>
-            
+            尝试获取
             </summary>
-            <param name="dict"></param>
-            <param name="key"></param>
-            <typeparam name="TK"></typeparam>
-            <typeparam name="TV"></typeparam>
-            <returns></returns>
+            <param name="dic">字典</param>
+            <param name="key">Key值</param>
+            <param name="value">Value值</param>
+            <typeparam name="K">任意泛型</typeparam>
+            <typeparam name="V">任意泛型</typeparam>
         </member>
-        <member name="M:AIO.DictionaryExtend.TryRemove``2(System.Collections.Generic.IDictionary{``0,``1},``0)">
-            <summary>
-            
-            </summary>
-            <param name="dict"></param>
-            <param name="key"></param>
-            <typeparam name="TK"></typeparam>
-            <typeparam name="TV"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.DictionaryExtend.Union``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IDictionary{``0,``1})">
+        <member name="M:AIO.IDictionaryExtend.Union``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IDictionary{``0,``1})">
             <summary>
             
             </summary>
@@ -497,15 +464,90 @@
             <typeparam name="TK"></typeparam>
             <typeparam name="TV"></typeparam>
         </member>
-        <member name="T:AIO.ByteExtend">
+        <member name="M:AIO.IDictionaryExtend.Set(System.Collections.IDictionary,System.String@,System.Object@)">
             <summary>
-            字节数组扩展 读取
+            设置
             </summary>
+            <param name="dic">字典</param>
+            <param name="key">Key值</param>
+            <param name="value">Value值</param>
+        </member>
+        <member name="M:AIO.IDictionaryExtend.Set(System.Collections.IDictionary,System.Object@,System.Object@)">
             <summary>
-            字节数组扩展 写入
+            设置
+            </summary>
+            <param name="dic">字典</param>
+            <param name="key">Key值</param>
+            <param name="value">Value值</param>
+        </member>
+        <member name="M:AIO.IDictionaryExtend.Set``2(System.Collections.Generic.Dictionary{``0,``1},``0@,``1@)">
+            <summary>
+            设置
+            </summary>
+            <param name="dic">字典</param>
+            <param name="key">Key值</param>
+            <param name="value">Value值</param>
+        </member>
+        <member name="T:AIO.IEnumerableExtend">
+            <summary>
+            迭代器扩展
             </summary>
         </member>
-        <member name="M:AIO.ByteExtend.GetCharArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IEnumerableExtend.Contain``1(System.Collections.Generic.IEnumerable{``0},``0@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="value"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:AIO.IListExtend">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.Add``1(System.Collections.Generic.IList{``0},``0@,``0@)">
+            <summary>
+            添加
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.Add``1(System.Collections.Generic.IList{``0},``0@,``0@,``0@)">
+            <summary>
+            添加
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.Add``1(System.Collections.Generic.IList{``0},``0@,``0@,``0@,``0@)">
+            <summary>
+            添加
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.Add``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IEnumerable{``0}@)">
+            <summary>
+            添加
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.AddRange``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IList{``0}@,System.Int32,System.Int32)">
+            <summary>
+            添加
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.Get``1(System.Collections.Generic.IList{``0},System.Int32@)">
+            <summary>
+            获取指定下标元素
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.GetLast``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            数组 最后一个
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.GetFirst``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            数组 第一个
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.GetCharArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -514,7 +556,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetBoolArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetBoolArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -523,7 +565,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetSByteArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetSByteArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -532,7 +574,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetByteArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetByteArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -541,7 +583,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetInt16Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetInt16Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -550,7 +592,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetUInt16Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetUInt16Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -559,7 +601,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetUInt32Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetUInt32Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -568,7 +610,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetInt32Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetInt32Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -577,7 +619,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetUInt64Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetUInt64Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -586,7 +628,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetInt64Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetInt64Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -595,7 +637,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetFloatArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetFloatArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean,System.Boolean@)">
             <summary>
             
             </summary>
@@ -605,7 +647,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetDoubleArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetDoubleArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean,System.Boolean@)">
             <summary>
             
             </summary>
@@ -615,7 +657,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetDecimalArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetDecimalArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -624,7 +666,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetLenArray(System.Collections.Generic.IList{System.Byte},System.Int32@)">
+        <member name="M:AIO.IListExtend.GetLenArray(System.Collections.Generic.IList{System.Byte},System.Int32@)">
             <summary>
             
             </summary>
@@ -632,7 +674,7 @@
             <param name="index"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetStringArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Text.Encoding,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetStringArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Text.Encoding,System.Boolean@)">
             <summary>
             
             </summary>
@@ -642,7 +684,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetEnumArray``1(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetEnumArray``1(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -652,7 +694,7 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetBool(System.Collections.Generic.IList{System.Byte},System.Int32@)">
+        <member name="M:AIO.IListExtend.GetBool(System.Collections.Generic.IList{System.Byte},System.Int32@)">
             <summary>
             
             </summary>
@@ -660,7 +702,7 @@
             <param name="index"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetEnum``1(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetEnum``1(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -670,7 +712,7 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetChar(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetChar(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -679,7 +721,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetLen(System.Collections.Generic.IList{System.Byte},System.Int32@)">
+        <member name="M:AIO.IListExtend.GetLen(System.Collections.Generic.IList{System.Byte},System.Int32@)">
             <summary>
             
             </summary>
@@ -687,7 +729,7 @@
             <param name="index"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetByte(System.Collections.Generic.IList{System.Byte},System.Int32@)">
+        <member name="M:AIO.IListExtend.GetByte(System.Collections.Generic.IList{System.Byte},System.Int32@)">
             <summary>
             
             </summary>
@@ -695,7 +737,7 @@
             <param name="index"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetSByte(System.Collections.Generic.IList{System.Byte},System.Int32@)">
+        <member name="M:AIO.IListExtend.GetSByte(System.Collections.Generic.IList{System.Byte},System.Int32@)">
             <summary>
             
             </summary>
@@ -703,16 +745,7 @@
             <param name="index"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetInt16(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.ByteExtend.GetUInt16(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetInt16(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -721,7 +754,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetInt32(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetUInt16(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -730,7 +763,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetUInt32(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetInt32(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -739,7 +772,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetInt64(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetUInt32(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -748,7 +781,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetUInt64(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetInt64(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -757,7 +790,16 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetFloat(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetUInt64(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="reverse"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.IListExtend.GetFloat(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -768,7 +810,7 @@
             <returns></returns>
             <exception cref="T:System.NullReferenceException"></exception>
         </member>
-        <member name="M:AIO.ByteExtend.GetDouble(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetDouble(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -779,7 +821,7 @@
             <returns></returns>
             <exception cref="T:System.NullReferenceException"></exception>
         </member>
-        <member name="M:AIO.ByteExtend.GetDecimal(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetDecimal(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -788,7 +830,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetString(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Text.Encoding,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetString(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Text.Encoding,System.Boolean@)">
             <summary>
             
             </summary>
@@ -799,7 +841,7 @@
             <returns></returns>
             <exception cref="T:System.SystemException"></exception>
         </member>
-        <member name="M:AIO.ByteExtend.GetStringUTF8(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetStringUTF8(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -808,7 +850,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetStringASCII(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetStringASCII(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -817,7 +859,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetStringUnicode(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetStringUnicode(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
             <summary>
             
             </summary>
@@ -826,7 +868,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetJson``1(System.Collections.Generic.IList{System.Byte},System.Int32@,Newtonsoft.Json.JsonSerializerSettings,System.Text.Encoding,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetJson``1(System.Collections.Generic.IList{System.Byte},System.Int32@,Newtonsoft.Json.JsonSerializerSettings,System.Text.Encoding,System.Boolean@)">
             <summary>
             
             </summary>
@@ -838,7 +880,7 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetJsonUTF8``1(System.Collections.Generic.IList{System.Byte},System.Int32@,Newtonsoft.Json.JsonSerializerSettings,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetJsonUTF8``1(System.Collections.Generic.IList{System.Byte},System.Int32@,Newtonsoft.Json.JsonSerializerSettings,System.Boolean@)">
             <summary>
             
             </summary>
@@ -849,7 +891,7 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetJsonASCII``1(System.Collections.Generic.IList{System.Byte},System.Int32@,Newtonsoft.Json.JsonSerializerSettings,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetJsonASCII``1(System.Collections.Generic.IList{System.Byte},System.Int32@,Newtonsoft.Json.JsonSerializerSettings,System.Boolean@)">
             <summary>
             
             </summary>
@@ -860,7 +902,7 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.GetJsonUnicode``1(System.Collections.Generic.IList{System.Byte},System.Int32@,Newtonsoft.Json.JsonSerializerSettings,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetJsonUnicode``1(System.Collections.Generic.IList{System.Byte},System.Int32@,Newtonsoft.Json.JsonSerializerSettings,System.Boolean@)">
             <summary>
             
             </summary>
@@ -870,6 +912,166 @@
             <param name="reverse"></param>
             <typeparam name="T"></typeparam>
             <returns></returns>
+        </member>
+        <member name="M:AIO.IListExtend.Remain``1(System.Collections.Generic.IList{``0},System.Int32@,System.Boolean@)">
+            <summary>
+            保留至少N个元素
+            </summary>
+            <param name="array">数组</param>
+            <param name="count">移除数量</param>
+            <param name="front">Ture:从第一个移除 False:从最后一个移除</param>
+            <typeparam name="T">泛型</typeparam>
+            <exception cref="T:System.ArgumentNullException">参数为NULL</exception>
+        </member>
+        <member name="M:AIO.IListExtend.Union``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IEnumerable{``0}@)">
+            <summary>
+            添加相同元素
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.ExistRepeat``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            是否存在重复的
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.ExistRepeat``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Boolean}@)">
+            <summary>
+            是否存在重复的
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.ExistRepeat``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IComparer{``0}@)">
+            <summary>
+            是否存在重复的
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.Swap``1(System.Collections.Generic.IList{``0},System.Int32@,System.Int32@)">
+            <summary>
+            交换数组元素位置
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.Swap``1(System.Collections.Generic.IList{``0},System.Int16@,System.Int16@)">
+            <summary>
+            交换数组元素位置
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.Swap``1(System.Collections.Generic.IList{``0},System.UInt16@,System.UInt16@)">
+            <summary>
+            交换数组元素位置
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.Swap``1(System.Collections.Generic.IList{``0},System.Byte@,System.Byte@)">
+            <summary>
+            交换数组元素位置
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.Swap``1(System.Collections.Generic.IList{``0},System.SByte@,System.SByte@)">
+            <summary>
+            交换数组元素位置
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.GetMinValue``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.SByte}@)">
+            <summary>
+            获取最小值
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.GetMinValue``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IComparer{``0}@)">
+            <summary>
+            获取最小值
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.GetMinValue``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            获取最小值
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.IListExtend.GetMaxValue``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.SByte}@)">
+            <summary>
+            获取极值 最大值
+            </summary>
+            <param name="array">数组</param>
+            <param name="compare">
+            对比函数 返回值 0:相等
+            a大余b情况返回  1:获取最大值
+            a大余b情况返回 -1:获取最小值
+            </param>
+            <typeparam name="T">泛型</typeparam>
+            <returns>极值</returns>
+        </member>
+        <member name="M:AIO.IListExtend.GetMaxValue``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IComparer{``0}@)">
+            <summary>
+            获取极值 最大值
+            </summary>
+            <param name="array">数组</param>
+            <param name="compare">
+            对比函数 返回值 0:相等
+            a大余b情况返回  1:获取最大值
+            a大余b情况返回 -1:获取最小值
+            </param>
+            <typeparam name="T">泛型</typeparam>
+            <returns>极值</returns>
+        </member>
+        <member name="M:AIO.IListExtend.GetMaxValue``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            获取极值 最大值
+            </summary>
+            <param name="array">数组</param>
+            <typeparam name="T">泛型</typeparam>
+            <returns>极值</returns>
+        </member>
+        <member name="M:AIO.IListExtend.GetMaxMinValue``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            获取最大最小值 第一个Max 第二个Min
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.GetMaxMinValue``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IComparer{``0}@)">
+            <summary>
+            获取最大最小值 第一个Max 第二个Min
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.GetMaxMinValue``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.SByte}@)">
+            <summary>
+            获取最大最小值 第一个Max 第二个Min
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.RemoveFirst``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            移除第一个元素
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.Remove``1(System.Collections.Generic.IList{``0},System.Predicate{``0}@)">
+            <summary>
+            移除元素
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.RemoveDistinct``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            移除重复元素
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.RemoveLast``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            移除最后一个元素
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.Set``1(System.Collections.Generic.IList{``0},System.Int32@,``0@)">
+            <summary>
+            设置指定下标元素
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.SetLast``1(System.Collections.Generic.IList{``0},``0@)">
+            <summary>
+            设置最后一个元素
+            </summary>
+        </member>
+        <member name="M:AIO.IListExtend.SetFirst``1(System.Collections.Generic.IList{``0},``0@)">
+            <summary>
+            设置第一个元素
+            </summary>
+        </member>
+        <member name="T:AIO.ByteExtend">
+            <summary>
+            字节数组扩展 写入
+            </summary>
         </member>
         <member name="M:AIO.ByteExtend.SetCharArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Char}@,System.Boolean@)">
             <summary>
@@ -1322,176 +1524,6 @@
             <param name="reverse"></param>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="T:AIO.IListExtend">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Last``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            数组 最后一个
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.First``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            数组 第一个
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Get``1(System.Collections.Generic.IList{``0},System.Int32)">
-            <summary>
-            获取指定下标元素
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Set``1(System.Collections.Generic.IList{``0},System.Int32,``0)">
-            <summary>
-            设置指定下标元素
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.RemoveFirst``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            移除第一个元素
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.RemoveLast``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            移除最后一个元素
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Remain``1(System.Collections.Generic.IList{``0},System.Int32@,System.Boolean@)">
-            <summary>
-            保留至少N个元素
-            </summary>
-            <param name="array">数组</param>
-            <param name="count">移除数量</param>
-            <param name="front">Ture:从第一个移除 False:从最后一个移除</param>
-            <typeparam name="T">泛型</typeparam>
-            <exception cref="T:System.ArgumentNullException">参数为NULL</exception>
-        </member>
-        <member name="M:AIO.IListExtend.Add``1(System.Collections.Generic.IList{``0},``0[])">
-            <summary>
-            添加
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Add``1(System.Collections.Generic.IList{``0},System.Collections.Generic.ICollection{``0}@)">
-            <summary>
-            添加
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.AddRange``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IList{``0}@,System.Int32,System.Int32)">
-            <summary>
-            添加
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Union``1(System.Collections.Generic.IList{``0},System.Collections.Generic.ICollection{``0})">
-            <summary>
-            添加相同元素
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.ExistRepeat``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            是否存在重复的
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.ExistRepeat``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Boolean})">
-            <summary>
-            是否存在重复的
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.ExistRepeat``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IComparer{``0})">
-            <summary>
-            是否存在重复的
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Swap``1(System.Collections.Generic.IList{``0},System.Int32,System.Int32)">
-            <summary>
-            交换数组元素位置
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Swap``1(System.Collections.Generic.IList{``0},System.Int16,System.Int16)">
-            <summary>
-            交换数组元素位置
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Swap``1(System.Collections.Generic.IList{``0},System.UInt16,System.UInt16)">
-            <summary>
-            交换数组元素位置
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Swap``1(System.Collections.Generic.IList{``0},System.Byte,System.Byte)">
-            <summary>
-            交换数组元素位置
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Swap``1(System.Collections.Generic.IList{``0},System.SByte,System.SByte)">
-            <summary>
-            交换数组元素位置
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.GetMinValue``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.SByte})">
-            <summary>
-            获取最小值
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.GetMinValue``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IComparer{``0})">
-            <summary>
-            获取最小值
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.GetMinValue``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            获取最小值
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetMaxValue``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.SByte}@)">
-            <summary>
-            获取极值 最大值
-            </summary>
-            <param name="array">数组</param>
-            <param name="compare">
-            对比函数 返回值 0:相等
-            a大余b情况返回  1:获取最大值
-            a大余b情况返回 -1:获取最小值
-            </param>
-            <typeparam name="T">泛型</typeparam>
-            <returns>极值</returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetMaxValue``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IComparer{``0})">
-            <summary>
-            获取极值 最大值
-            </summary>
-            <param name="array">数组</param>
-            <param name="compare">
-            对比函数 返回值 0:相等
-            a大余b情况返回  1:获取最大值
-            a大余b情况返回 -1:获取最小值
-            </param>
-            <typeparam name="T">泛型</typeparam>
-            <returns>极值</returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetMaxValue``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            获取极值 最大值
-            </summary>
-            <param name="array">数组</param>
-            <typeparam name="T">泛型</typeparam>
-            <returns>极值</returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetMaxMinValue``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            获取最大最小值 第一个Max 第二个Min
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.GetMaxMinValue``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IComparer{``0})">
-            <summary>
-            获取最大最小值 第一个Max 第二个Min
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.GetMaxMinValue``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.SByte})">
-            <summary>
-            获取最大最小值 第一个Max 第二个Min
-            </summary>
-        </member>
         <member name="T:AIO.IntPtrExtend">
             <summary>
             句柄
@@ -1544,14 +1576,14 @@
             </summary>
             <param name="self"></param>
         </member>
-        <member name="M:AIO.StringExtend.FastToLower(System.String,System.Int32)">
+        <member name="M:AIO.StringExtend.FastToLower(System.String,System.Int32@)">
             <summary>
             
             </summary>
             <param name="self"></param>
             <param name="idx"></param>
         </member>
-        <member name="M:AIO.StringExtend.FastToUpper(System.String,System.Int32)">
+        <member name="M:AIO.StringExtend.FastToUpper(System.String,System.Int32@)">
             <summary>
             
             </summary>
@@ -1566,7 +1598,7 @@
             <param name="repeat"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.StringExtend.Add(System.Collections.Generic.List{System.String},System.Collections.Generic.ICollection{System.String}@)">
+        <member name="M:AIO.StringExtend.Add(System.Collections.Generic.IList{System.String},System.Collections.Generic.IEnumerable{System.String}@)">
             <summary>
             
             </summary>
@@ -1588,7 +1620,7 @@
             <param name="c"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.StringExtend.Contains(System.String,System.Collections.Generic.ICollection{System.String}@)">
+        <member name="M:AIO.StringExtend.Contains(System.String,System.Collections.Generic.IEnumerable{System.String}@)">
             <summary>
             判断字符串数组中 是否有重复
             </summary>

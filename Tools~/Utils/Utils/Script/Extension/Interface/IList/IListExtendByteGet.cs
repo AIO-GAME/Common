@@ -1,10 +1,4 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.CompilerServices;
@@ -13,10 +7,7 @@ using Newtonsoft.Json;
 
 namespace AIO
 {
-    /// <summary>
-    /// 字节数组扩展 读取
-    /// </summary>
-    public static partial class ByteExtend
+    public static partial class IListExtend
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static T[] GetLenArrayEmtpy<T>(this IList<byte> array, ref int index)
