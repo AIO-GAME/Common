@@ -15,5 +15,5 @@ MonoBehaviour:
   SourceRelativePath: Packages\\com.*.package\\Plugins~\\GPUInstancer
   Name: GPUInstancer
   TargetRelativePath: Assets\Plugins\GPUInstancer
-  MacroDefinition: 
+  MacroDefinition: GPU_INSTANCER
   Introduction: "GPU\u6E32\u67D3\u63D2\u4EF6 \u4F18\u5316\u63D2\u4EF6"

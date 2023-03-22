@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.Compilation;
 using UnityEngine;
 
 namespace AIO.Package.Editor
@@ -59,7 +60,17 @@ namespace AIO.Package.Editor
         protected void OnEnable()
         {
             Root = Application.dataPath.Replace("Assets", "Packages");
+            UpdateData();
+        }
 
+        private void compilationStarted(object o)
+        {
+            CompilationPipeline.compilationStarted -= compilationStarted;
+            UpdateData();
+        }
+
+        private void UpdateData()
+        {
             RootData.Clear();
             DetailDic.Clear();
             IntsallIndexList.Clear();
@@ -122,7 +133,7 @@ namespace AIO.Package.Editor
                     var temp = new List<PluginsInfo>();
                     foreach (var item in IntsallIndexList.Where(V => InsallIsSelectDic[V]))
                         temp.Add(RootData[item]);
-
+                    CompilationPipeline.compilationStarted += compilationStarted;
                     _ = PluginsInfoEditor.Initialize(temp);
                     return;
                 }
@@ -130,11 +141,13 @@ namespace AIO.Package.Editor
 
             EditorGUILayout.LabelField("安装列表", new GUIStyle("PreLabel"));
 
-            if (GUILayout.Button("安装全部", GUILayout.Width(60)))
-            {
-                _ = PluginsInfoEditor.Initialize(RootData.Values.Where(plugin => IntsallIndexList.Contains(plugin.Name)));
-                return;
-            }
+            if (!InsallIsSelect)
+                if (GUILayout.Button("安装全部", GUILayout.Width(60)))
+                {
+                    CompilationPipeline.compilationStarted += compilationStarted;
+                    _ = PluginsInfoEditor.Initialize(RootData.Values.Where(plugin => IntsallIndexList.Contains(plugin.Name)));
+                    return;
+                }
 
             EditorGUILayout.EndHorizontal();
 
@@ -145,20 +158,22 @@ namespace AIO.Package.Editor
                 {
                     EditorGUILayout.BeginHorizontal(GUILayout.Height(25));
                     if (InsallIsSelect)
-                        InsallIsSelectDic[Data.Name] = EditorGUILayout.Toggle("", InsallIsSelectDic[Data.Name], new GUIStyle("MenuToggleItem"), GUILayout.Width(20));
+                        InsallIsSelectDic[Data.Name] = EditorGUILayout.Toggle("", InsallIsSelectDic[Data.Name], GUILayout.Width(20));
                     if (GUILayout.Button("详", GUILayout.Width(25), GUILayout.Height(20)))
                     {
                         DetailDic[Data.Name] = !DetailDic[Data.Name];
                     }
 
                     EditorGUILayout.PrefixLabel(Data.Name);
+                    EditorGUILayout.Separator();
+                    EditorGUILayout.LabelField(Data.Introduction, GUILayout.Width(150));
+                    EditorGUILayout.Separator();
+
                     if (!InsallIsSelect)
                     {
-                        EditorGUILayout.Separator();
-                        EditorGUILayout.LabelField(Data.Introduction, GUILayout.Width(150));
-                        EditorGUILayout.Separator();
                         if (GUILayout.Button("安装", GUILayout.Width(60), GUILayout.Height(20)))
                         {
+                            CompilationPipeline.compilationStarted += compilationStarted;
                             _ = PluginsInfoEditor.Initialize(Data);
                             return;
                         }
@@ -218,18 +233,20 @@ namespace AIO.Package.Editor
                         temp.Add(RootData[item]);
 
                     if (temp.Count == 0) return;
-
-                    _ = PluginsInfoEditor.Initialize(temp);
+                    CompilationPipeline.compilationStarted += compilationStarted;
+                    _ = PluginsInfoEditor.UnInitialize(temp);
                     return;
                 }
             }
 
             EditorGUILayout.LabelField("卸载列表", new GUIStyle("PreLabel"));
-            if (GUILayout.Button("卸载全部", GUILayout.Width(60)))
-            {
-                _ = PluginsInfoEditor.UnInitialize(RootData.Values.Where(plugin => UnIntsallIndexList.Contains(plugin.Name)));
-                return;
-            }
+            if (!UnInsallIsSelect)
+                if (GUILayout.Button("卸载全部", GUILayout.Width(60)))
+                {
+                    CompilationPipeline.compilationStarted += compilationStarted;
+                    _ = PluginsInfoEditor.UnInitialize(RootData.Values.Where(plugin => UnIntsallIndexList.Contains(plugin.Name)));
+                    return;
+                }
 
             EditorGUILayout.EndHorizontal();
 
@@ -238,20 +255,21 @@ namespace AIO.Package.Editor
                 EditorGUILayout.BeginVertical("IN ThumbnailShadow");
                 {
                     EditorGUILayout.BeginHorizontal(GUILayout.Height(25));
-                    if (UnInsallIsSelect) UnInsallIsSelectDic.Set(Data.Name, EditorGUILayout.Toggle("", UnInsallIsSelectDic[Data.Name], GUILayout.Width(20)));
-                    if (GUILayout.Button("详", GUILayout.Width(25), GUILayout.Height(20)))
-                    {
-                        DetailDic[Data.Name] = !DetailDic[Data.Name];
-                    }
+
+                    if (UnInsallIsSelect)
+                        UnInsallIsSelectDic[Data.Name] = EditorGUILayout.Toggle("", UnInsallIsSelectDic[Data.Name], GUILayout.Width(20));
+                    if (GUILayout.Button("详", GUILayout.Width(25), GUILayout.Height(20))) DetailDic[Data.Name] = !DetailDic[Data.Name];
 
                     EditorGUILayout.PrefixLabel(Data.Name);
+                    EditorGUILayout.Separator();
+                    EditorGUILayout.LabelField(Data.Introduction, GUILayout.Width(150));
+                    EditorGUILayout.Separator();
+
                     if (!UnInsallIsSelect)
                     {
-                        EditorGUILayout.Separator();
-                        EditorGUILayout.LabelField(Data.Introduction, GUILayout.Width(150));
-                        EditorGUILayout.Separator();
                         if (GUILayout.Button("卸载", GUILayout.Width(60), GUILayout.Height(20)))
                         {
+                            CompilationPipeline.compilationStarted += compilationStarted;
                             _ = PluginsInfoEditor.UnInitialize(Data);
                             return;
                         }

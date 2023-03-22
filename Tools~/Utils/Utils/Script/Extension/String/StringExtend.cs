@@ -5,13 +5,12 @@
 |*|=============================================*/
 
 
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace AIO
 {
-    using System.Collections.Generic;
-    using System.Text;
-
     /*
     1)、Length：获得当前字符串中字符的个数
     2)、ToUpper():将字符转换成大写形式
@@ -71,9 +70,9 @@ namespace AIO
             {
                 fixed (char* pstr = self)
                 {
-                    for (int i = 0; i < self.Length; ++i)
+                    for (var i = 0; i < self.Length; ++i)
                     {
-                        char c = pstr[i];
+                        var c = pstr[i];
                         if (c >= CharUnit.ea && c <= CharUnit.ez)
                         {
                             pstr[i] = (char)(CharUnit.EA + (c - CharUnit.ea));
@@ -88,14 +87,14 @@ namespace AIO
         /// </summary>
         /// <param name="self"></param>
         /// <param name="idx"></param>
-        public static void FastToLower(this string self, int idx)
+        public static void FastToLower(this string self, in int idx)
         {
             if (self == null || self.Length <= idx || idx < 0) return;
             unsafe
             {
                 fixed (char* pstr = self)
                 {
-                    char c = pstr[idx];
+                    var c = pstr[idx];
                     if (c >= CharUnit.EA && c <= CharUnit.EZ)
                     {
                         pstr[idx] = (char)(CharUnit.ea + (c - CharUnit.EA));
@@ -109,7 +108,7 @@ namespace AIO
         /// </summary>
         /// <param name="self"></param>
         /// <param name="idx"></param>
-        public static void FastToUpper(this string self, int idx)
+        public static void FastToUpper(this string self, in int idx)
         {
             if (self == null || self.Length <= idx || idx < 0) return;
             unsafe
@@ -134,7 +133,7 @@ namespace AIO
         public static string Repeat(this string s, in int repeat)
         {
             var builder = new StringBuilder(repeat * s.Length);
-            for (int i = 0; i < repeat; i++) builder.Append(s);
+            for (var i = 0; i < repeat; i++) builder.Append(s);
             return builder.ToString();
         }
 
@@ -143,7 +142,7 @@ namespace AIO
         /// </summary>
         /// <param name="value"></param>
         /// <param name="parms"></param>
-        public static void Add(this List<string> value, in ICollection<string> parms)
+        public static void Add(this IList<string> value, in IEnumerable<string> parms)
         {
             foreach (var item in parms)
                 value.Add(item);
@@ -178,7 +177,7 @@ namespace AIO
         /// <param name="value">字符串</param>
         /// <param name="list">匹配数组</param>
         /// <returns>Ture:存在 False:不存在</returns>
-        public static bool Contains(this string value, in ICollection<string> list)
+        public static bool Contains(this string value, in IEnumerable<string> list)
         {
             foreach (var item in list)
                 if (value.Contains(item))

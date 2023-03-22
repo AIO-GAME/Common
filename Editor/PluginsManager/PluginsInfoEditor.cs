@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using NUnit.Framework;
 using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
@@ -72,7 +74,7 @@ namespace AIO.Package.Editor
                 var TargetRelativePath = serialized.FindProperty("TargetRelativePath");
                 var MacroDefinition = serialized.FindProperty("MacroDefinition");
                 var Introduction = serialized.FindProperty("Introduction");
-                
+
                 EditorGUILayout.BeginVertical(new GUIStyle("ChannelStripBg"));
 
                 EditorGUILayout.BeginHorizontal();
@@ -115,11 +117,11 @@ namespace AIO.Package.Editor
                 EditorGUILayout.PrefixLabel("链接相对路径");
                 SourceRelativePath.stringValue = EditorGUILayout.TextField(SourceRelativePath.stringValue);
                 EditorGUILayout.Space();
-                
+
                 EditorGUILayout.PrefixLabel("简介");
-                Introduction.stringValue = EditorGUILayout.TextArea(Introduction.stringValue,GUILayout.Height(50));
+                Introduction.stringValue = EditorGUILayout.TextArea(Introduction.stringValue, GUILayout.Height(50));
                 EditorGUILayout.Space();
-                
+
                 EditorGUILayout.EndVertical();
 
                 EditorGUILayout.Space();
@@ -186,6 +188,7 @@ namespace AIO.Package.Editor
         {
             var dataPath = Directory.GetParent(Application.dataPath).FullName;
             var list = new List<Task>();
+            var macroList = new List<string>();
             foreach (var info in infos)
             {
                 var source = GetValidDir(dataPath, info.SourceRelativePath);
@@ -202,32 +205,39 @@ namespace AIO.Package.Editor
                     continue;
                 }
 
+                if (!string.IsNullOrEmpty(info.MacroDefinition))
+                {
+                    if (info.MacroDefinition.Contains(';'))
+                    {
+                        macroList.Add(info.MacroDefinition.Split(';'));
+                    }
+                    else macroList.Add(info.MacroDefinition);
+                }
+
                 var parent = Directory.GetParent(target.FullName);
                 if (!parent.Exists) parent.Create();
 
-                var a = PrPlatform.Folder.Link(target.FullName, source.FullName).OnComplete(Result =>
-                {
-                    if (Result.ExitCode == 0)
-                    {
-                        Debug.LogFormat("链接成功 {0} : {1}", info.Name, target.FullName);
-                        if (!string.IsNullOrEmpty(info.MacroDefinition)) AddScriptingDefineSymbols(info.MacroDefinition);
-                    }
-                    else Debug.LogErrorFormat("链接失败 {0} : {1} => {2}", info.Name, target.FullName, Result.StdALL);
-                });
+                var a = PrPlatform.Folder.Link(target.FullName, source.FullName);
                 list.Add(a.Async());
             }
 
-            await Task.WhenAll(list);
+            if (list.Count > 0)
+            {
+                await Task.WhenAll(list);
+                AssetDatabase.Refresh();
+                AssetDatabase.RefreshSettings();
 
-            AssetDatabase.Refresh();
-            AssetDatabase.RefreshSettings();
-            CompilationPipeline.RequestScriptCompilation();
+                CompilationPipeline.compilationFinished += compilationFinished;
+                if (macroList.Count != 0) AddScriptingDefineSymbols(macroList.ToArray());
+                CompilationPipeline.RequestScriptCompilation();
+            }
         }
 
         internal static async Task UnInitialize(IEnumerable<PluginsInfo> infos)
         {
             var dataPath = Directory.GetParent(Application.dataPath).FullName;
             var list = new List<Task>();
+            var macroList = new List<string>();
             foreach (var info in infos)
             {
                 var target = GetValidDir(dataPath, info.TargetRelativePath);
@@ -237,27 +247,32 @@ namespace AIO.Package.Editor
                     continue;
                 }
 
+                if (!string.IsNullOrEmpty(info.MacroDefinition))
+                {
+                    if (info.MacroDefinition.Contains(';'))
+                    {
+                        macroList.Add(info.MacroDefinition.Split(';'));
+                    }
+                    else macroList.Add(info.MacroDefinition);
+                }
+
                 var parent = Directory.GetParent(target.FullName);
                 if (!parent.Exists) parent.Create();
 
-                var a = PrPlatform.File.Del(target.FullName + ".meta").Link(PrPlatform.Folder.Del(target.FullName)).OnComplete(Result =>
-                {
-                    if (Result.ExitCode == 0)
-                    {
-                        Debug.LogFormat("移除成功 {0} : {1}", info.Name, target.FullName);
-                        if (!string.IsNullOrEmpty(info.MacroDefinition)) DelScriptingDefineSymbols(info.MacroDefinition);
-                    }
-                    else Debug.LogErrorFormat("移除失败 {0} : {1} \n {2}", info.Name, target.FullName, Result.StdALL);
-                });
-
+                var a = PrPlatform.File.Del(target.FullName + ".meta").Link(PrPlatform.Folder.Del(target.FullName));
                 list.Add(a.Async());
             }
 
-            await Task.WhenAll(list);
+            if (list.Count > 0)
+            {
+                await Task.WhenAll(list);
 
-            AssetDatabase.Refresh();
-            AssetDatabase.RefreshSettings();
-            CompilationPipeline.RequestScriptCompilation();
+                AssetDatabase.Refresh();
+                AssetDatabase.RefreshSettings();
+                CompilationPipeline.compilationFinished += compilationFinished;
+                if (macroList.Count != 0) DelScriptingDefineSymbols(macroList.ToArray());
+                CompilationPipeline.RequestScriptCompilation();
+            }
         }
 
         internal static async Task Initialize(PluginsInfo info)
@@ -283,9 +298,10 @@ namespace AIO.Package.Editor
             if (Result.ExitCode == 0)
             {
                 Debug.LogFormat("链接成功 {0} : {1}", info.Name, target.FullName);
-                if (!string.IsNullOrEmpty(info.MacroDefinition)) AddScriptingDefineSymbols(info.MacroDefinition);
                 AssetDatabase.Refresh();
                 AssetDatabase.RefreshSettings();
+                if (!string.IsNullOrEmpty(info.MacroDefinition)) AddScriptingDefineSymbols(info.MacroDefinition.Split(';'));
+                CompilationPipeline.compilationFinished += compilationFinished;
                 CompilationPipeline.RequestScriptCompilation();
             }
             else Debug.LogErrorFormat("链接失败 {0} : {1} => {2}", info.Name, target.FullName, Result.StdALL);
@@ -304,29 +320,43 @@ namespace AIO.Package.Editor
             if (Result.ExitCode == 0)
             {
                 Debug.LogFormat("移除成功 {0} : {1}", info.Name, target.FullName);
-                if (!string.IsNullOrEmpty(info.MacroDefinition)) DelScriptingDefineSymbols(info.MacroDefinition);
                 AssetDatabase.Refresh();
                 AssetDatabase.RefreshSettings();
+                if (!string.IsNullOrEmpty(info.MacroDefinition)) DelScriptingDefineSymbols(info.MacroDefinition.Split(';'));
+                CompilationPipeline.compilationFinished += compilationFinished;
                 CompilationPipeline.RequestScriptCompilation();
             }
             else Debug.LogErrorFormat("移除失败 {0} : {1} \n {2}", info.Name, target.FullName, Result.StdALL);
         }
 
+        private static void compilationFinished(object o)
+        {
+            EditorUtility.ClearProgressBar();
+            EditorUtility.DisplayDialog("插件", "命令执行完毕", "OK");
+            CompilationPipeline.compilationFinished -= compilationFinished;
+        }
+
         /// <summary>
         /// 禁止你想要的宏定义
         /// </summary>
-        internal static void DelScriptingDefineSymbols(string value)
+        internal static void DelScriptingDefineSymbols(params string[] value)
         {
-            if (value.IsNullOrEmpty() || value.Length == 0) return;
+            if (value is null || value.Length == 0) return;
             //获取当前是哪个平台
             var buildTargetGroup = EditorUserBuildSettings.selectedBuildTargetGroup;
             //获得当前平台已有的的宏定义
-            var str = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
-            if (!str.IsNullOrEmpty() && str.Length != 0 && str.Contains(value))
+            var str = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup).Split(';');
+            if (str.Length == 0) return;
+
+            var verify = new List<string>(str);
+            verify.RemoveDistinct();
+            foreach (var item in value) verify.Remove(item);
+
+            if (verify.Count > 0)
             {
-                str = str.Replace(value, "");
-                PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, str);
+                PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, string.Join(";", verify));
             }
+            else PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, "");
         }
 
         /// <summary>
@@ -334,22 +364,21 @@ namespace AIO.Package.Editor
         /// </summary>
         internal static void AddScriptingDefineSymbols(params string[] value)
         {
+            if (value is null || value.Length == 0) return;
             //获取当前是哪个平台
             var buildTargetGroup = EditorUserBuildSettings.selectedBuildTargetGroup;
             //获得当前平台已有的的宏定义
-            var str = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
-            var list = str.Split(';');
-            var verify = new List<string>();
+            var str = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup).Split(';');
+            var verify = new List<string>(str);
             foreach (var v in value)
             {
-                if (string.IsNullOrEmpty(v)) continue;
-                if (verify.Contain(v) || list.Contain(v)) continue;
+                if (string.IsNullOrEmpty(v) || verify.Contain(v)) continue;
                 verify.Add(v);
             }
 
+            verify.RemoveDistinct();
             //添加宏定义
-            str += ";" + string.Join(";", verify);
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, str);
+            PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, string.Join(";", verify));
         }
     }
 }
