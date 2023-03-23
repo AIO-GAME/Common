@@ -28,7 +28,7 @@ namespace AIO
         /// <summary>
         /// 大写16进制数字字符
         /// </summary>
-        public readonly static char[] HEX_DIGIT =
+        public static readonly char[] HEX_DIGIT =
         {
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
         };
@@ -36,7 +36,7 @@ namespace AIO
         /// <summary>
         /// 小写写16进制数字字符
         /// </summary>
-        public readonly static char[] HEX_DIGIT_LOWER =
+        public static readonly char[] HEX_DIGIT_LOWER =
         {
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
         };
@@ -70,7 +70,7 @@ namespace AIO
         /// </summary>
         public static void ToHex(in char c, in StringBuilder builder, in bool lower = false)
         {
-            char[] table = lower ? HEX_DIGIT_LOWER : HEX_DIGIT;
+            var table = lower ? HEX_DIGIT_LOWER : HEX_DIGIT;
             builder.Append(table[(c >> 12) & HEX_BIT]);
             builder.Append(table[(c >> 8) & HEX_BIT]);
             builder.Append(table[(c >> 4) & HEX_BIT]);
@@ -233,7 +233,7 @@ namespace AIO
         public static string ToHex(in IList<byte> bytes, int pos, int len, in bool lower)
         {
             if (bytes == null || bytes.Count == 0) return "";
-            char[] array = new char[len << 1];// 乘以2
+            char[] array = new char[len << 1]; // 乘以2
             len += pos;
             char[] table = lower ? HEX_DIGIT_LOWER : HEX_DIGIT;
             for (int i = pos, index = 0; i < len; i++)
@@ -241,6 +241,7 @@ namespace AIO
                 array[index++] = table[(bytes[i] >> 4) & HEX_BIT];
                 array[index++] = table[bytes[i] & HEX_BIT];
             }
+
             return new string(array);
         }
 
@@ -292,11 +293,13 @@ namespace AIO
             {
                 if (src[offset + 1] == 'x' || src[offset + 1] == 'X') offset += 2;
             }
+
             long value = 0L;
             while (offset < len)
             {
                 value = (value << 4) | (ToDigit(src[offset++]) & 0x00000000FFFFFFFFL);
             }
+
             return value; // &HEX_LONG;
         }
 
@@ -311,11 +314,13 @@ namespace AIO
             {
                 if (src[offset + 1] == 'x' || src[offset + 1] == 'X') offset += 2;
             }
+
             long value = 0L;
             while (offset < len)
             {
                 value = (value << 4) | (ToDigit(src[offset++]) & 0x00000000FFFFFFFFL);
             }
+
             return value; // &HEX_LONG;
         }
 

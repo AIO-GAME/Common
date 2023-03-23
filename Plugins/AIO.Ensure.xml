@@ -1,0 +1,588 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AIO.Ensure</name>
+    </assembly>
+    <members>
+        <member name="T:AIO.Ensure">
+            <summary>
+            验证数据
+            </summary>
+        </member>
+        <member name="P:AIO.Ensure.IsActive">
+            <summary>
+            激活
+            </summary>
+        </member>
+        <member name="M:AIO.Ensure.Off">
+            <summary>
+            关闭
+            </summary>
+        </member>
+        <member name="M:AIO.Ensure.On">
+            <summary>
+            开启
+            </summary>
+        </member>
+        <member name="M:AIO.Ensure.That(System.String@)">
+            <summary>
+            可能
+            </summary>
+            <param name="paramName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.Ensure.OnRuntimeMethodLoad(System.Boolean@)">
+            <summary>
+            运行期间设置
+            </summary>
+        </member>
+        <member name="T:AIO.EnsureThat">
+            <summary>
+            验证参数
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.HasItems``1(``0[]@)">
+            <summary>
+            验证数据 报错条件
+            [value == null]
+            [value.Length &lt; 1]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.Any``1(``0[]@,System.Func{``0,System.Boolean}@)">
+            <summary>
+            验证数据 报错条件
+            [value.Any(predicate) == false]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.SizeIs``1(``0[]@,System.Int32@)">
+            <summary>
+            验证数据 报错条件
+            [value.Length != expected]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.SizeIs``1(``0[]@,System.Int64@)">
+            <summary>
+            验证数据 报错条件
+            [value.Length != expected]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsTrue(System.Boolean@)">
+            <summary>
+            验证数据 报错条件 value == false
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsFalse(System.Boolean@)">
+            <summary>
+            验证数据 报错条件 value == true
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsNotEmpty(System.Guid@)">
+            <summary>
+            验证数据 报错条件 value.Equals(Guid.Empty) == true
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsNull``1(``0@)">
+            <summary>
+            验证数据 报错条件 value != null
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsNotNull``1(``0)">
+            <summary>
+            验证数据 报错条件 value == null 
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsNotNullOrWhiteSpace(System.String@)">
+            <summary>
+            验证数据 报错条件
+            [value is null]
+            [value == null ]
+            [value.Trim() == string.Empty]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsNotNullOrEmpty(System.String@)">
+            <summary>
+            验证数据 报错条件
+            [value is null]
+            [value == ""]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsNotNull(System.String@)">
+            <summary>
+            验证数据 报错条件
+            [value is null]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsNotEmpty(System.String@)">
+            <summary>
+            验证数据 报错条件
+            [string.Empty == value]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.HasLengthBetween(System.String@,System.Int32@,System.Int32@)">
+            <summary>
+            验证数据 报错条件
+            [value is null]
+            [value.Length &lt; minLength]
+            [value.Length > maxLength]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.Matches(System.String@,System.String@)">
+            <summary>
+            验证数据 报错条件
+            [match.IsMatch(value) == false]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.Matches(System.String@,System.Text.RegularExpressions.Regex@)">
+            <summary>
+            验证数据 报错条件
+            [match.IsMatch(value) == false]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.SizeIs(System.String@,System.Int32@)">
+            <summary>
+            验证数据 报错条件
+            [value is null]
+            [value.Length != expected]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsEqualTo(System.String@,System.String@)">
+            <summary>
+            验证数据 报错条件
+            [string.Equals(value, expected) == false]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsEqualTo(System.String@,System.String@,System.StringComparison@)">
+            <summary>
+            验证数据 报错条件
+            [string.Equals(value, expected, comparison) == false]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsNotEqualTo(System.String@,System.String@)">
+            <summary>
+            验证数据 报错条件
+            [string.Equals(value, expected) == true]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsNotEqualTo(System.String@,System.String@,System.StringComparison@)">
+            <summary>
+            验证数据 报错条件
+            [string.Equals(value, expected, comparison) == true]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsGuid(System.String@)">
+            <summary>
+            验证数据 报错条件
+            [Regex(@"[a-fA-F0-9]{8}(\-[a-fA-F0-9]{4}){3}\-[a-fA-F0-9]{12}").IsMatch(value) == false]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsOfType``1(``0@,System.Type@)">
+            <summary>
+            验证数据 报错条件
+            [expectedType.IsAssignableFrom(param?.GetType()) == false]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsOfType(System.Type@,System.Type@)">
+            <summary>
+            验证数据 报错条件
+            [expectedType.IsAssignableFrom(param) == false]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsOfType``1(System.Object@)">
+            <summary>
+            验证数据 报错条件
+            [typeof(T).IsAssignableFrom(param) == false]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsOfType``1(System.Type@)">
+            <summary>
+            验证数据 报错条件
+            [typeof(T).IsAssignableFrom(param) == false]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.HasItems``1(``0@)">
+            <summary>
+            验证数据 报错条件
+            [value == null]
+            [value.Count &lt; 1]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.HasItems``1(System.Collections.Generic.ICollection{``0}@)">
+            <summary>
+            验证数据 报错条件
+            [value == null]
+            [value.Count &lt; 1]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.SizeIs``1(``0@,System.Int32@)">
+            <summary>
+            验证数据 报错条件
+            [value.Count != expected]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.SizeIs``1(``0@,System.Int64@)">
+            <summary>
+            验证数据 报错条件
+            [value.Count != expected]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.SizeIs``1(System.Collections.Generic.ICollection{``0}@,System.Int32@)">
+            <summary>
+            验证数据 报错条件
+            [value.Count != expected]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.SizeIs``1(System.Collections.Generic.ICollection{``0}@,System.Int64@)">
+            <summary>
+            验证数据 报错条件
+            [value.Count != expected]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.Any``1(System.Collections.Generic.ICollection{``0}@,System.Func{``0,System.Boolean}@)">
+            <summary>
+            验证数据 报错条件
+            [!value.Any(predicate)]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.Is``1(``0@,``0@)">
+            <summary>
+            验证数据 报错条件
+            [param.CompareTo(value) != 0]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsNot``1(``0@,``0@)">
+            <summary>
+            验证数据 报错条件
+            [param.CompareTo(value) == 0]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsLt``1(``0@,``0@)">
+            <summary>
+            验证数据 报错条件
+            [param.CompareTo(value) >= 0]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsLte``1(``0@,``0@)">
+            <summary>
+            验证数据 报错条件
+            [param.CompareTo(value) > 0]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsGt``1(``0@,``0@)">
+            <summary>
+            验证数据 报错条件
+            [param.CompareTo(value) &lt;= 0]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsGte``1(``0@,``0@)">
+            <summary>
+            验证数据 报错条件
+            [param.CompareTo(value) &lt; 0]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsInRange``1(``0@,``0@,``0@)">
+            <summary>
+            验证数据 报错条件
+            [param.CompareTo(min) &lt; 0]
+            [param.CompareTo(max) > 0]
+            </summary>
+        </member>
+        <member name="F:AIO.EnsureThat.paramName">
+            <summary>
+            参数名
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.SizeIs``2(System.Collections.Generic.IDictionary{``0,``1}@,System.Int32@)">
+            <summary>
+            验证数据 报错条件
+            [value.Count != expected]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.SizeIs``2(System.Collections.Generic.IDictionary{``0,``1}@,System.Int64@)">
+            <summary>
+            验证数据 报错条件
+            [value.Count != expected]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsKeyOf``2(System.Collections.Generic.IDictionary{``0,``1}@,``0@,System.String@)">
+            <summary>
+            验证数据 报错条件
+            [value.ContainsKey(expectedKey) == false]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.HasItems``2(System.Collections.Generic.IDictionary{``0,``1}@)">
+            <summary>
+            验证数据 报错条件
+            [value == null]
+            [value.Count &lt; 1]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.SizeIs``1(System.Collections.Generic.IList{``0}@,System.Int32@)">
+            <summary>
+            验证数据 报错条件
+            [value.Count != expected]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.SizeIs``1(System.Collections.Generic.IList{``0}@,System.Int64@)">
+            <summary>
+            验证数据 报错条件
+            [value.Count != expected]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.Any``1(System.Collections.Generic.IList{``0}@,System.Func{``0,System.Boolean}@)">
+            <summary>
+            验证数据 报错条件
+            [value.Any(predicate) == false]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.HasItems``1(System.Collections.Generic.IList{``0}@)">
+            <summary>
+            验证数据 报错条件
+            [value == null]
+            [value.Count &lt; 1]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsNotNull``1(System.Nullable{``0}@)">
+            <summary>
+            验证数据 报错条件 value == null
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.IsNotDefault``1(``0@)">
+            <summary>
+            验证数据 报错条件
+            [default(T).Equals(param)]
+            </summary>
+        </member>
+        <member name="M:AIO.EnsureThat.HasNoNullItem``1(``0)">
+            <summary>
+            验证数据 报错条件
+            [value == null]
+            [value[x] == null]
+            </summary>
+        </member>
+        <member name="T:AIO.ExceptionMessages">
+            <summary>
+            异常消息
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Common_IsNull_Failed">
+            <summary>
+            在期望为空值的情况下实际上有一个值分配给它时，显示此错误消息。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Common_IsNotNull_Failed">
+            <summary>
+            在期望具有非空值的情况下实际上为 null 时，显示此错误消息。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Booleans_IsTrueFailed">
+            <summary>
+            当预期求值为 true 的表达式实际上求值为 false 时，显示此错误消息。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Booleans_IsFalseFailed">
+            <summary>
+            当预期求值为 false 的表达式实际上求值为 true 时，显示此错误消息。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Collections_Any_Failed">
+            <summary>
+            当谓词（返回 true/false 值的函数）未匹配集合中的任何元素时，显示此错误消息。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Collections_ContainsKey_Failed">
+            <summary>
+            当在集合中未找到指定的键时，显示此错误消息。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Collections_HasItemsFailed">
+            <summary>
+            当期望集合至少有一个项目，但为空时，显示此错误消息。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Collections_HasNoNullItemFailed">
+            <summary>
+            当不允许集合包含任何 null 项，但找到一个或多个 null 项时，显示此错误消息。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Collections_SizeIs_Failed">
+            <summary>
+            当集合的大小与预期大小不匹配时，显示此错误消息。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Comp_Is_Failed">
+            <summary>
+            当一个值不等于预期值时，将会显示此错误消息。该消息包含两个参数：第一个参数是实际值，第二个参数是预期值。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Comp_IsNot_Failed">
+            <summary>
+            当一个值等于预期值时，将会显示此错误消息。该消息包含两个参数：第一个参数是实际值，第二个参数是预期值。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Comp_IsNotLt">
+            <summary>
+            当一个值大于或等于限制值时，将会显示此错误消息。该消息包含两个参数：第一个参数是实际值，第二个参数是限制值。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Comp_IsNotLte">
+            <summary>
+            当一个值大于限制值时，将会显示此错误消息。该消息包含两个参数：第一个参数是实际值，第二个参数是限制值。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Comp_IsNotGt">
+            <summary>
+            当一个值小于或等于限制值时，将会显示此错误消息。该消息包含两个参数：第一个参数是实际值，第二个参数是限制值。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Comp_IsNotGte">
+            <summary>
+            当一个值小于限制值时，将会显示此错误消息。该消息包含两个参数：第一个参数是实际值，第二个参数是限制值。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Comp_IsNotInRange_ToLow">
+            <summary>
+            当一个值小于最小值时，将会显示此错误消息。该消息包含两个参数：第一个参数是实际值，第二个参数是最小值。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Comp_IsNotInRange_ToHigh">
+            <summary>
+            当一个值大于最大值时，将会显示此错误消息。该消息包含两个参数：第一个参数是实际值，第二个参数是最大值。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Guids_IsNotEmpty_Failed">
+            <summary>
+            不允许使用空 GUID。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Strings_IsEqualTo_Failed">
+            <summary>
+            当一个字符串不等于预期字符串时，将会显示此错误消息。该消息包含两个参数：第一个参数是实际字符串，第二个参数是预期字符串。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Strings_IsNotEqualTo_Failed">
+            <summary>
+            当一个字符串等于预期字符串时，将会显示此错误消息。该消息包含两个参数：第一个参数是实际字符串，第二个参数是预期字符串。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Strings_SizeIs_Failed">
+            <summary>
+            当字符串长度与预期长度不匹配时，将会显示此错误消息。该消息包含两个参数：第一个参数是预期长度，第二个参数是实际长度。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Strings_IsNotNullOrWhiteSpace_Failed">
+            <summary>
+            不允许字符串为空、 null 或仅由空格组成。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Strings_IsNotNullOrEmpty_Failed">
+            <summary>
+            不允许字符串为 null 或为空。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Strings_HasLengthBetween_Failed_ToShort">
+            <summary>
+            字符串长度不够，必须在 {0} 和 {1} 之间，但实际长度为 {2}。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Strings_HasLengthBetween_Failed_ToLong">
+            <summary>
+            字符串过长，必须在 {0} 和 {1} 之间，但实际长度为 {2}。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Strings_Matches_Failed">
+            <summary>
+            当一个字符串不匹配预期的正则表达式时，将会显示此错误消息。该消息包含两个参数：第一个参数是实际字符串，第二个参数是预期正则表达式。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Strings_IsNotEmpty_Failed">
+            <summary>
+            不允许使用空字符串。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Strings_IsGuid_Failed">
+            <summary>
+            当一个字符串不是有效的 GUID 时，将会显示此错误消息。该消息包含一个参数：字符串。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Types_IsOfType_Failed">
+            <summary>
+            当期望的类型与实际类型不匹配时，将会显示此错误消息。该消息包含两个参数：第一个参数是期望类型，第二个参数是实际类型。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Reflection_HasAttribute_Failed">
+            <summary>
+            当类型未定义指定的属性时，将会显示此错误消息。该消息包含两个参数：第一个参数是类型名称，第二个参数是属性名称。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Reflection_HasConstructor_Failed">
+            <summary>
+            当类型没有接受指定参数的构造函数时，将会显示此错误消息。该消息包含两个参数：第一个参数是类型名称，第二个参数是参数列表。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.Reflection_HasPublicConstructor_Failed">
+            <summary>
+            当类型没有公共接受指定参数的构造函数时，将会显示此错误消息。该消息包含两个参数：第一个参数是类型名称，第二个参数是参数列表。
+            </summary>
+        </member>
+        <member name="F:AIO.ExceptionMessages.ValueTypes_IsNotDefault_Failed">
+            <summary>
+            参数期望值不是默认值。
+            </summary>
+        </member>
+        <member name="T:AssemblyInfo">
+            <summary>
+            程序集信息
+            </summary>
+        </member>
+        <member name="F:AssemblyInfo.KEY">
+            <summary>
+            密钥信息
+            </summary>
+        </member>
+        <member name="F:AssemblyInfo.PublicKey">
+            <summary>
+            公钥
+            </summary>
+        </member>
+        <member name="F:AssemblyInfo.Token">
+            <summary>
+            公钥Token
+            </summary>
+        </member>
+        <member name="F:AssemblyInfo.Version">
+            <summary>
+            版本
+            </summary>
+        </member>
+        <member name="F:AssemblyInfo.FileVersion">
+            <summary>
+            指示编译器使用 Win32 文件版本资源的特定版本号。 Win32 文件版本不需要与程序集的版本号相同。
+            </summary>
+        </member>
+        <member name="F:AssemblyInfo.KeyFile">
+            <summary>
+            密钥位置
+            </summary>
+        </member>
+        <member name="F:AssemblyInfo.KeyName">
+            <summary>
+            密钥位置
+            </summary>
+        </member>
+        <member name="F:AssemblyInfo.Company">
+            <summary>
+            作者
+            </summary>
+        </member>
+        <member name="F:AssemblyInfo.Copyright">
+            <summary>
+            程序集属性
+            </summary>
+        </member>
+        <member name="F:AssemblyInfo.Culture">
+            <summary>
+            支持的区域性
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -27,14 +27,13 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright(AssemblyInfo.Copyright)]
 [assembly: AssemblyCulture(AssemblyInfo.Culture)]
 
-[assembly: InternalsVisibleTo("AIO.Utils")]
 [assembly: InternalsVisibleTo("AIO.Utils.Unity.Runtime")]
 [assembly: InternalsVisibleTo("AIO.Utils.Unity.Editor")]
 
 /// <summary>
 /// 程序集信息
 /// </summary>
-public static class AssemblyInfo
+static class AssemblyInfo
 {
     /// <summary>
     /// 密钥信息
@@ -44,7 +43,8 @@ public static class AssemblyInfo
     /// <summary>
     /// 公钥
     /// </summary>
-    public const string PublicKey = "002400000480000094000000060200000024000052534131000400000100010015955a571ef6904bd2bad9d840866399d7985020e6f2f7db9ec57370d5b7b0524fc70e54059bd367789d8c55bd159f4d3766852ea223e215c8bc7454916da83b445e7ea746828372350de16ebe00a41a7159cd27f626ab320b450af0f27cf1d24fc0405b769225e1914ac5da2f82eef67e567607d3c1e0b30725ccb442d55fdb";
+    public const string PublicKey =
+        "002400000480000094000000060200000024000052534131000400000100010015955a571ef6904bd2bad9d840866399d7985020e6f2f7db9ec57370d5b7b0524fc70e54059bd367789d8c55bd159f4d3766852ea223e215c8bc7454916da83b445e7ea746828372350de16ebe00a41a7159cd27f626ab320b450af0f27cf1d24fc0405b769225e1914ac5da2f82eef67e567607d3c1e0b30725ccb442d55fdb";
 
     /// <summary>
     /// 公钥Token

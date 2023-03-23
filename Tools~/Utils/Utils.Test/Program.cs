@@ -1,12 +1,11 @@
 ﻿namespace Utils
 {
     using AIO;
-
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Reflection;                                                
-                             
+    using System.Reflection;
+
     /// <summary>
     /// 热更DLL
     /// </summary>
@@ -51,11 +50,22 @@
     {
         static void Main(string[] args)
         {
-            Test();
+            var dic = new Dictionary<string, int>()
+            {
+                { "1", 2 },
+                { "2", 2 },
+                { "3", 2 },
+                { "4", 2 },
+            };
+            dic.Set("a", 1);
+            Console.WriteLine(dic.Get("1"));
+            Console.WriteLine(dic.Get<int>("1"));
+            // Test();
             Console.Read();
         }
 
         public const string FileName = "ver.json";
+
         public async static void Test()
         {
             var list = new List<string>();
@@ -68,10 +78,7 @@
             await new HttpDownload(Path.Combine(url, FileName), savePath).OnException(CharacterInfo =>
             {
                 Console.WriteLine(" ------------------ 配置下载发生异常:{0} {1}", CharacterInfo.URL, CharacterInfo.Exception);
-            }).OnComplete(CharacterInfo =>
-            {
-                Console.WriteLine(" ------------------ 配置下载完成 ------------------ ");
-            });
+            }).OnComplete(CharacterInfo => { Console.WriteLine(" ------------------ 配置下载完成 ------------------ "); });
 
             try
             {
@@ -104,14 +111,11 @@
                         var path = Path.Combine(savePath, d.Key);
                         Console.WriteLine(" ------------------ 开始更新 DLL ------------------ " + path);
                         if (!Directory.Exists(path)) Directory.CreateDirectory(path);
-                        await new HttpDownload(d.Value, path).SetDownloadNum(5).OnException(CharacterInfo =>
-                        {
-                            Console.WriteLine(string.Format(" 配置下载发生异常: {0} {1}", CharacterInfo.URL, CharacterInfo.Exception));
-                        }).OnComplete(downloadInfo =>
-                        {
-                            Console.WriteLine("URL : {0} 文件大小 : {1} 消耗时间 : {2} MD5 : {3}", downloadInfo.URL, downloadInfo.FileSize, downloadInfo.Time, downloadInfo.MD5);
-
-                        }).Async(20);
+                        await new HttpDownload(d.Value, path).SetDownloadNum(5)
+                            .OnException(CharacterInfo => { Console.WriteLine(string.Format(" 配置下载发生异常: {0} {1}", CharacterInfo.URL, CharacterInfo.Exception)); }).OnComplete(downloadInfo =>
+                            {
+                                Console.WriteLine("URL : {0} 文件大小 : {1} 消耗时间 : {2} MD5 : {3}", downloadInfo.URL, downloadInfo.FileSize, downloadInfo.Time, downloadInfo.MD5);
+                            }).Async(20);
                     }
                 }
             }

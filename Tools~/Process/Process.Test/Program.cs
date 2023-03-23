@@ -1,5 +1,4 @@
 ﻿using AIO;
-
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
@@ -138,8 +137,6 @@ namespace AIO
             {
                 Console.WriteLine(ex);
             }
-
-
         }
 
         public static IEnumerator enumerator()

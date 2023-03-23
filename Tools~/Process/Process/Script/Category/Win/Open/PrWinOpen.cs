@@ -22,7 +22,19 @@ namespace AIO
             /// <returns>执行器</returns>
             public static IExecutor Path(in string target)
             {
+                if (System.IO.File.Exists(target)) return Path(target, EPrVerb.RunAs);
                 return Create<PrNative>(target);
+            }
+
+            /// <summary>
+            /// 打开路径
+            /// </summary>
+            /// <param name="target">目标路径</param>
+            /// <param name="verb">权限</param>
+            /// <returns>执行器</returns>
+            public static IExecutor Path(in string target, in EPrVerb verb)
+            {
+                return Create<PrNative>(target, verb);
             }
 
             /// <summary>

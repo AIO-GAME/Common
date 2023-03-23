@@ -61,6 +61,10 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Extension\Extension\Extension.csproj">
+      <Project>{f2c7d3ad-fd65-42d7-8c3f-eaf85dad3e05}</Project>
+      <Name>Extension</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{b0d5708a-7c94-4bcb-805d-a718034e5724}</Project>
       <Name>Utils</Name>

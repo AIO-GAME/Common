@@ -59,2178 +59,414 @@
             支持的区域性
             </summary>
         </member>
-        <member name="T:AIO.ActionExtend">
+        <member name="T:AIO.IKeyedCollection`2">
             <summary>
-            函数扩展
+            键迭代器
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TItem"></typeparam>
+        </member>
+        <member name="P:AIO.IKeyedCollection`2.Item(`0@)">
+            <summary>
+            获取值
             </summary>
         </member>
-        <member name="M:AIO.ActionExtend.GetTotalTime(System.Action)">
+        <member name="P:AIO.IKeyedCollection`2.Item(System.Int32@)">
             <summary>
-            获取当前函数执行总时间
+            获取值
             </summary>
         </member>
-        <member name="M:AIO.ActionExtend.GetTotalTime``1(System.Action{``0},``0)">
+        <member name="M:AIO.IKeyedCollection`2.TryGetValue(`0@,`1@)">
             <summary>
-            获取当前函数执行总时间
+            尝试获取值
             </summary>
         </member>
-        <member name="M:AIO.ActionExtend.GetTotalTime``2(System.Action{``0,``1},``0,``1)">
+        <member name="M:AIO.IKeyedCollection`2.Contains(`0@)">
             <summary>
-            获取当前函数执行总时间
+            存在
             </summary>
+            <param name="key"></param>
+            <returns></returns>
         </member>
-        <member name="M:AIO.ActionExtend.GetTotalTime``3(System.Action{``0,``1,``2},``0,``1,``2)">
-            <summary>
-            获取当前函数执行总时间
-            </summary>
-        </member>
-        <member name="M:AIO.ActionExtend.GetTotalTime``4(System.Action{``0,``1,``2,``3},``0,``1,``2,``3)">
-            <summary>
-            获取当前函数执行总时间
-            </summary>
-        </member>
-        <member name="M:AIO.ActionExtend.GetTotalTime``1(System.Action{``0[]},``0[])">
-            <summary>
-            获取当前函数执行总时间
-            </summary>
-        </member>
-        <member name="T:AIO.ArrayExtend">
-            <summary>
-            数组方法
-            </summary>
-        </member>
-        <member name="M:AIO.ArrayExtend.AutoMaticExpansion``1(``0[],System.Int32@,System.Int32@)">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:AIO.ArrayExtend.CopyTo``1(``0[],System.Int32@)">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:AIO.ArrayExtend.Add``1(``0[],``0@)">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:AIO.ArrayExtend.Add``1(``0[],``0[])">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:AIO.ArrayExtend.Add``1(``0[],System.Collections.Generic.ICollection{``0}@)">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:AIO.ArrayExtend.Insert``1(``0[],System.Int32@,``0[])">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:AIO.ArrayExtend.Insert``1(``0[],System.Int32@,System.Array@)">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:AIO.ArrayExtend.Insert``1(``0[],System.Int32@,``0@)">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:AIO.ArrayExtend.Insert``1(``0[],System.Int32,System.Collections.Generic.ICollection{``0}@)">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:AIO.ArrayExtend.RemoveAt``1(``0[],System.Int32@)">
+        <member name="M:AIO.IKeyedCollection`2.Remove(`0@)">
             <summary>
             移除
             </summary>
+            <param name="key">值</param>
+            <returns>返回值</returns>
         </member>
-        <member name="M:AIO.ArrayExtend.Remove``1(``0[],``0@)">
+        <member name="T:AIO.IMergedCollection`1">
             <summary>
-            移除
+            合并集合
             </summary>
-        </member>
-        <member name="T:AIO.ByteExtendToConver">
-            <summary>
-            字节扩展 包含类型 byte byte[]
-            </summary>
-        </member>
-        <member name="M:AIO.ByteExtendToConver.ToConverHex16x(System.Byte)">
-            <summary>
-            字节 转小写16进制字符
-            </summary>
-        </member>
-        <member name="M:AIO.ByteExtendToConver.ToConverHex16x(System.Byte[])">
-            <summary>
-            字节数组 转小写16进制字符
-            </summary>
-        </member>
-        <member name="M:AIO.ByteExtendToConver.ToConverHex16X(System.Byte)">
-            <summary>
-            字节 转大写16进制字符
-            </summary>
-        </member>
-        <member name="M:AIO.ByteExtendToConver.ToConverHex16X(System.Byte[])">
-            <summary>
-            字节数组 转大写16进制字符
-            </summary>
-        </member>
-        <member name="M:AIO.ByteExtendToConver.ToConverHex16X(System.Byte[],System.Int32,System.Int32)">
-            <summary>
-            从指定字节数组中 获取多个字节转化为大写16进制字符串
-            </summary>
-            <param name="bytes"></param>
-            <param name="offset">开始位置</param>
-            <param name="count">获取长度</param>
-        </member>
-        <member name="M:AIO.ByteExtendToConver.ToConverHex16x(System.Byte[],System.Int32,System.Int32)">
-            <summary>
-            从指定字节数组中 获取多个字节转化为大写16进制字符串
-            </summary>
-            <param name="bytes"></param>
-            <param name="offset">开始位置</param>
-            <param name="count">获取长度</param>
-        </member>
-        <member name="M:AIO.ByteExtendToConver.ToConverString(System.Byte[])">
-            <summary>
-            转化为字符串
-            </summary>
-        </member>
-        <member name="M:AIO.ByteExtendToConver.ToConverString(System.Byte[],System.Int32,System.Int32)">
-            <summary>
-            获取指定字节数组转化为字符串
-            </summary>
-        </member>
-        <member name="M:AIO.ByteExtendToConver.ToConverStringUTF8(System.Byte[])">
-            <summary>
-            转化为字符串 UTF8格式
-            </summary>
-        </member>
-        <member name="M:AIO.ByteExtendToConver.ToConverStringUTF8(System.Byte[],System.Int32,System.Int32)">
-            <summary>
-            获取指定字节数组转化为字符串 UTF8格式
-            </summary>
-        </member>
-        <member name="T:AIO.CharExtend">
-            <summary>
-            字符扩展
-            </summary>
-            <summary>
-            字符扩展
-            </summary>
-            <summary>
-            字符扩展
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.Repeat(System.Char,System.Int32)">
-            <summary>
-            重复字符
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.GetBytesLength(System.Char)">
-            <summary>
-            判断当前字符是否为单字节
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.GetCodeASCII(System.Char)">
-            <summary>
-            获取 ASCII 码
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.GetCodeUnicode(System.Char)">
-            <summary>
-            获取 Unicode 码
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.IsSingleByte(System.Char)">
-            <summary>
-            判断当前字符是否为单字节
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.IsDigit(System.Char)">
-            <summary>
-            判断当前字符 是否为数字
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.IsHighSurrogate(System.Char)">
-            <summary>
-            判断当前字符 是否是一个高代理项
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.IsLetter(System.Char)">
-            <summary>
-            判断当前字符 是否属于 Unicode 字母类别
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.IsLetterOrDigit(System.Char)">
-            <summary>
-            判断当前字符 是否属于字母或十进制数字类别
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.IsLower(System.Char)">
-            <summary>
-            判断当前字符 是否属于小写字母类别
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.IsLowSurrogate(System.Char)">
-            <summary>
-            判断当前字符 是否是一个低代理项
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.IsNumber(System.Char)">
-            <summary>
-            判断当前字符 是否属于 Unicode 数字
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.IsPunctuation(System.Char)">
-            <summary>
-            判断当前字符 是否属于标点符号类别
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.IsSeparator(System.Char)">
-            <summary>
-            判断当前字符 是否属于分隔符类别
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.IsSurrogate(System.Char)">
-            <summary>
-            判断当前字符 是否具有代理项代码单位
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.IsSurrogatePair(System.Char,System.Char)">
-            <summary>
-            判断当前两个字符 是否形成一个代理项对
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.IsSymbol(System.Char)">
-            <summary>
-            判断当前字符 是否属于符号字符类别
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.IsUpper(System.Char)">
-            <summary>
-            判断当前字符 是否为大小字母类别
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.IsWhiteSpace(System.Char)">
-            <summary>
-            判断当前字符 是否属于空格类别
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.IsChinese(System.Char)">
-            <summary>
-            判断当前字符 是否属于中文字符
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.ToConverSByte(System.Char)">
-            <summary>
-            转化为字节
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.ToConverBytes(System.Char,System.Text.Encoding)">
-            <summary>
-            转化为字节数组
-            </summary>
-        </member>
-        <member name="M:AIO.CharExtend.ToConverBase64(System.Char,System.Text.Encoding)">
-            <summary>
-            获取Base64
-            </summary>
-        </member>
-        <member name="T:AIO.EnumExtend">
-            <summary>
-            枚举扩展
-            </summary>
-        </member>
-        <member name="M:AIO.EnumExtend.GetAttribute``1(System.Enum)">
-            <summary>
-            获取属性值
-            </summary>
-        </member>
-        <member name="T:AIO.ICollectionExtend">
-            <summary>
-            数组
-            </summary>
-        </member>
-        <member name="M:AIO.ICollectionExtend.Find``1(System.Collections.Generic.ICollection{``0},``0@)">
-            <summary>
-            查找
-            </summary>
-            <param name="array"></param>
-            <param name="value"></param>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.ICollectionExtend.Find``1(System.Collections.Generic.ICollection{``0},``0@,System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="value"></param>
-            <param name="number"></param>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="T:AIO.IDictionaryExtend">
-            <summary>
-            字典扩展
-            </summary>
-        </member>
-        <member name="M:AIO.IDictionaryExtend.Get(System.Collections.IDictionary,System.String@)">
-            <summary>
-            获取
-            </summary>
-            <param name="dic">字典</param>
-            <param name="key">Key值</param>
-        </member>
-        <member name="M:AIO.IDictionaryExtend.Get(System.Collections.IDictionary,System.Object@)">
-            <summary>
-            获取
-            </summary>
-            <param name="dic">字典</param>
-            <param name="key">Key值</param>
-        </member>
-        <member name="M:AIO.IDictionaryExtend.Get``1(System.Collections.IDictionary,System.String@)">
-            <summary>
-            获取
-            </summary>
-            <param name="dic">字典</param>
-            <param name="key">Key值</param>
-            <typeparam name="T">任意泛型</typeparam>
-        </member>
-        <member name="M:AIO.IDictionaryExtend.Get``1(System.Collections.IDictionary,System.Object@)">
-            <summary>
-            获取
-            </summary>
-            <param name="dic">字典</param>
-            <param name="key">Key值</param>
-            <typeparam name="T">任意泛型</typeparam>
-        </member>
-        <member name="M:AIO.IDictionaryExtend.TryGet``1(System.Collections.IDictionary,System.String@,``0@)">
-            <summary>
-            尝试获取
-            </summary>
-            <param name="dic">字典</param>
-            <param name="key">Key值</param>
-            <param name="value">Value值</param>
-            <typeparam name="T">任意泛型</typeparam>
-        </member>
-        <member name="M:AIO.IDictionaryExtend.TryGet``1(System.Collections.IDictionary,System.Object@,``0@)">
-            <summary>
-            尝试获取
-            </summary>
-            <param name="dic">字典</param>
-            <param name="key">Key值</param>
-            <param name="value">Value值</param>
-            <typeparam name="T">任意泛型</typeparam>
-        </member>
-        <member name="M:AIO.IDictionaryExtend.Get``2(System.Collections.Generic.Dictionary{``0,``1},``0@)">
-            <summary>
-            获取
-            </summary>
-            <param name="dic">字典</param>
-            <param name="key">Key值</param>
-        </member>
-        <member name="M:AIO.IDictionaryExtend.TryGet``2(System.Collections.Generic.Dictionary{``0,``1},``0@,``1@)">
-            <summary>
-            尝试获取
-            </summary>
-            <param name="dic">字典</param>
-            <param name="key">Key值</param>
-            <param name="value">Value值</param>
-            <typeparam name="K">任意泛型</typeparam>
-            <typeparam name="V">任意泛型</typeparam>
-        </member>
-        <member name="M:AIO.IDictionaryExtend.TrySet``2(System.Collections.Generic.Dictionary{``0,``1},``0@,``1@)">
-            <summary>
-            尝试获取
-            </summary>
-            <param name="dic">字典</param>
-            <param name="key">Key值</param>
-            <param name="value">Value值</param>
-            <typeparam name="K">任意泛型</typeparam>
-            <typeparam name="V">任意泛型</typeparam>
-        </member>
-        <member name="M:AIO.IDictionaryExtend.Union``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            
-            </summary>
-            <param name="dict"></param>
-            <param name="others"></param>
-            <typeparam name="TK"></typeparam>
-            <typeparam name="TV"></typeparam>
-        </member>
-        <member name="M:AIO.IDictionaryExtend.Set(System.Collections.IDictionary,System.String@,System.Object@)">
-            <summary>
-            设置
-            </summary>
-            <param name="dic">字典</param>
-            <param name="key">Key值</param>
-            <param name="value">Value值</param>
-        </member>
-        <member name="M:AIO.IDictionaryExtend.Set(System.Collections.IDictionary,System.Object@,System.Object@)">
-            <summary>
-            设置
-            </summary>
-            <param name="dic">字典</param>
-            <param name="key">Key值</param>
-            <param name="value">Value值</param>
-        </member>
-        <member name="M:AIO.IDictionaryExtend.Set``2(System.Collections.Generic.Dictionary{``0,``1},``0@,``1@)">
-            <summary>
-            设置
-            </summary>
-            <param name="dic">字典</param>
-            <param name="key">Key值</param>
-            <param name="value">Value值</param>
-        </member>
-        <member name="T:AIO.IEnumerableExtend">
-            <summary>
-            迭代器扩展
-            </summary>
-        </member>
-        <member name="M:AIO.IEnumerableExtend.Contain``1(System.Collections.Generic.IEnumerable{``0},``0@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="value"></param>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="T:AIO.IListExtend">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Add``1(System.Collections.Generic.IList{``0},``0@,``0@)">
-            <summary>
-            添加
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Add``1(System.Collections.Generic.IList{``0},``0@,``0@,``0@)">
-            <summary>
-            添加
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Add``1(System.Collections.Generic.IList{``0},``0@,``0@,``0@,``0@)">
-            <summary>
-            添加
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Add``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IEnumerable{``0}@)">
-            <summary>
-            添加
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.AddRange``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IList{``0}@,System.Int32,System.Int32)">
-            <summary>
-            添加
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Get``1(System.Collections.Generic.IList{``0},System.Int32@)">
-            <summary>
-            获取指定下标元素
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.GetLast``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            数组 最后一个
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.GetFirst``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            数组 第一个
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.GetCharArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetBoolArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetSByteArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetByteArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetInt16Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetUInt16Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetUInt32Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetInt32Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetUInt64Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetInt64Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetFloatArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="all"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetDoubleArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="all"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetDecimalArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetLenArray(System.Collections.Generic.IList{System.Byte},System.Int32@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetStringArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Text.Encoding,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="encoding"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetEnumArray``1(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetBool(System.Collections.Generic.IList{System.Byte},System.Int32@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetEnum``1(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetChar(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetLen(System.Collections.Generic.IList{System.Byte},System.Int32@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetByte(System.Collections.Generic.IList{System.Byte},System.Int32@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetSByte(System.Collections.Generic.IList{System.Byte},System.Int32@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetInt16(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetUInt16(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetInt32(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetUInt32(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetInt64(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetUInt64(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetFloat(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="all"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-            <exception cref="T:System.NullReferenceException"></exception>
-        </member>
-        <member name="M:AIO.IListExtend.GetDouble(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="all"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-            <exception cref="T:System.NullReferenceException"></exception>
-        </member>
-        <member name="M:AIO.IListExtend.GetDecimal(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetString(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Text.Encoding,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="encoding"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-            <exception cref="T:System.SystemException"></exception>
-        </member>
-        <member name="M:AIO.IListExtend.GetStringUTF8(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetStringASCII(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetStringUnicode(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetJson``1(System.Collections.Generic.IList{System.Byte},System.Int32@,Newtonsoft.Json.JsonSerializerSettings,System.Text.Encoding,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="settings"></param>
-            <param name="encoding"></param>
-            <param name="reverse"></param>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetJsonUTF8``1(System.Collections.Generic.IList{System.Byte},System.Int32@,Newtonsoft.Json.JsonSerializerSettings,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="settings"></param>
-            <param name="reverse"></param>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetJsonASCII``1(System.Collections.Generic.IList{System.Byte},System.Int32@,Newtonsoft.Json.JsonSerializerSettings,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="settings"></param>
-            <param name="reverse"></param>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetJsonUnicode``1(System.Collections.Generic.IList{System.Byte},System.Int32@,Newtonsoft.Json.JsonSerializerSettings,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="settings"></param>
-            <param name="reverse"></param>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.Remain``1(System.Collections.Generic.IList{``0},System.Int32@,System.Boolean@)">
-            <summary>
-            保留至少N个元素
-            </summary>
-            <param name="array">数组</param>
-            <param name="count">移除数量</param>
-            <param name="front">Ture:从第一个移除 False:从最后一个移除</param>
-            <typeparam name="T">泛型</typeparam>
-            <exception cref="T:System.ArgumentNullException">参数为NULL</exception>
-        </member>
-        <member name="M:AIO.IListExtend.Union``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IEnumerable{``0}@)">
-            <summary>
-            添加相同元素
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.ExistRepeat``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            是否存在重复的
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.ExistRepeat``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Boolean}@)">
-            <summary>
-            是否存在重复的
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.ExistRepeat``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IComparer{``0}@)">
-            <summary>
-            是否存在重复的
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Swap``1(System.Collections.Generic.IList{``0},System.Int32@,System.Int32@)">
-            <summary>
-            交换数组元素位置
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Swap``1(System.Collections.Generic.IList{``0},System.Int16@,System.Int16@)">
-            <summary>
-            交换数组元素位置
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Swap``1(System.Collections.Generic.IList{``0},System.UInt16@,System.UInt16@)">
-            <summary>
-            交换数组元素位置
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Swap``1(System.Collections.Generic.IList{``0},System.Byte@,System.Byte@)">
-            <summary>
-            交换数组元素位置
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Swap``1(System.Collections.Generic.IList{``0},System.SByte@,System.SByte@)">
-            <summary>
-            交换数组元素位置
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.GetMinValue``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.SByte}@)">
-            <summary>
-            获取最小值
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.GetMinValue``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IComparer{``0}@)">
-            <summary>
-            获取最小值
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.GetMinValue``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            获取最小值
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetMaxValue``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.SByte}@)">
-            <summary>
-            获取极值 最大值
-            </summary>
-            <param name="array">数组</param>
-            <param name="compare">
-            对比函数 返回值 0:相等
-            a大余b情况返回  1:获取最大值
-            a大余b情况返回 -1:获取最小值
-            </param>
-            <typeparam name="T">泛型</typeparam>
-            <returns>极值</returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetMaxValue``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IComparer{``0}@)">
-            <summary>
-            获取极值 最大值
-            </summary>
-            <param name="array">数组</param>
-            <param name="compare">
-            对比函数 返回值 0:相等
-            a大余b情况返回  1:获取最大值
-            a大余b情况返回 -1:获取最小值
-            </param>
-            <typeparam name="T">泛型</typeparam>
-            <returns>极值</returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetMaxValue``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            获取极值 最大值
-            </summary>
-            <param name="array">数组</param>
-            <typeparam name="T">泛型</typeparam>
-            <returns>极值</returns>
-        </member>
-        <member name="M:AIO.IListExtend.GetMaxMinValue``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            获取最大最小值 第一个Max 第二个Min
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.GetMaxMinValue``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IComparer{``0}@)">
-            <summary>
-            获取最大最小值 第一个Max 第二个Min
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.GetMaxMinValue``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.SByte}@)">
-            <summary>
-            获取最大最小值 第一个Max 第二个Min
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.RemoveFirst``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            移除第一个元素
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Remove``1(System.Collections.Generic.IList{``0},System.Predicate{``0}@)">
-            <summary>
-            移除元素
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.RemoveDistinct``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            移除重复元素
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.RemoveLast``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            移除最后一个元素
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.Set``1(System.Collections.Generic.IList{``0},System.Int32@,``0@)">
-            <summary>
-            设置指定下标元素
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.SetLast``1(System.Collections.Generic.IList{``0},``0@)">
-            <summary>
-            设置最后一个元素
-            </summary>
-        </member>
-        <member name="M:AIO.IListExtend.SetFirst``1(System.Collections.Generic.IList{``0},``0@)">
-            <summary>
-            设置第一个元素
-            </summary>
-        </member>
-        <member name="T:AIO.ByteExtend">
-            <summary>
-            字节数组扩展 写入
-            </summary>
-        </member>
-        <member name="M:AIO.ByteExtend.SetCharArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Char}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetByteArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Byte}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetSByteArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.SByte}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetBoolArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Boolean}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetInt16Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Int16}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetInt32Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Int32}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetInt64Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Int64}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetUInt16Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.UInt16}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetUInt32Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.UInt32}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetUInt64Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.UInt64}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetLenArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Int32}@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetFloatArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Single}@,System.Boolean,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="all"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetDoubleArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Double}@,System.Boolean,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="all"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetDecimalArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Decimal}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetStringArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.String}@,System.Text.Encoding,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="encoding"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetStringArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Text.StringBuilder}@,System.Text.Encoding,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="encoding"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetStringUTF8Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.String}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetStringUTF8ASCII(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.String}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetStringUTF8Unicode(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.String}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetStringUTF8Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Text.StringBuilder}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetStringUTF8ASCII(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Text.StringBuilder}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetStringUTF8Unicode(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Text.StringBuilder}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetBool(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetChar(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Char@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ByteExtend.SetLen(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Int32@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <exception cref="T:System.SystemException"></exception>
-        </member>
-        <member name="M:AIO.ByteExtend.SetEnum``1(System.Collections.Generic.IList{System.Byte},``0@,System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="value"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="M:AIO.ByteExtend.SetByte(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Byte@)">
+        <member name="M:AIO.IMergedCollection`1.Includes``1">
             <summary>
-            
+            包含
             </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
         </member>
-        <member name="M:AIO.ByteExtend.SetSByte(System.Collections.Generic.IList{System.Byte},System.Int32@,System.SByte@)">
+        <member name="M:AIO.IMergedCollection`1.Includes(System.Type)">
             <summary>
-            
+            包含
             </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
         </member>
-        <member name="M:AIO.ByteExtend.SetInt16(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Int16@,System.Boolean@)">
+        <member name="T:AIO.ISet`1">
             <summary>
-            
+            这是一个泛型集合接口，保证其元素的唯一性，这个唯一性是由某个比较器定义的。它还支持基本的集合操作，如并集、交集、补集和排他补集。
             </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
         </member>
-        <member name="M:AIO.ByteExtend.SetInt32(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Int32@,System.Boolean@)">
+        <member name="M:AIO.ISet`1.Add(`0)">
             <summary>
-            
+            将ITEM添加到集合中，如果已存在，则返回false；
             </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
+            <param name="item"></param>
+            <returns>Ture:不存在 False:已存在</returns>
         </member>
-        <member name="M:AIO.ByteExtend.SetInt64(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Int64@,System.Boolean@)">
+        <member name="M:AIO.ISet`1.UnionWith(System.Collections.Generic.IEnumerable{`0}@)">
             <summary>
-            
+            对该集合进行与另一个IEnumerable (T)对象的并集运算；
             </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
         </member>
-        <member name="M:AIO.ByteExtend.SetUInt16(System.Collections.Generic.IList{System.Byte},System.Int32@,System.UInt16@,System.Boolean@)">
+        <member name="M:AIO.ISet`1.IntersectWith(System.Collections.Generic.IEnumerable{`0}@)">
             <summary>
-            
+            对该集合进行与另一个IEnumerable (T)对象的交集运算；
             </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
         </member>
-        <member name="M:AIO.ByteExtend.SetUInt32(System.Collections.Generic.IList{System.Byte},System.Int32@,System.UInt32@,System.Boolean@)">
+        <member name="M:AIO.ISet`1.ExceptWith(System.Collections.Generic.IEnumerable{`0}@)">
             <summary>
-            
+            将该集合中与其他集合重复的元素移除；
             </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
         </member>
-        <member name="M:AIO.ByteExtend.SetUInt64(System.Collections.Generic.IList{System.Byte},System.Int32@,System.UInt64@,System.Boolean@)">
+        <member name="M:AIO.ISet`1.SymmetricExceptWith(System.Collections.Generic.IEnumerable{`0}@)">
             <summary>
-            
+            将该集合变换成只包含在该集合或者另一个集合中而不同时属于两个集合的元素；
             </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
         </member>
-        <member name="M:AIO.ByteExtend.SetFloat(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Single@,System.Boolean@,System.Boolean@)">
+        <member name="M:AIO.ISet`1.IsSubsetOf(System.Collections.Generic.IEnumerable{`0}@)">
             <summary>
-            
+            判断该集合是否是另一个集合的子集；
             </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="all"></param>
-            <param name="reverse"></param>
+            <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.SetDouble(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Double@,System.Boolean@,System.Boolean@)">
+        <member name="M:AIO.ISet`1.IsSupersetOf(System.Collections.Generic.IEnumerable{`0}@)">
             <summary>
-            
+            判断该集合是否是另一个集合的超集；
             </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="all"></param>
-            <param name="reverse"></param>
+            <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.SetDecimal(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Decimal@,System.Boolean@)">
+        <member name="M:AIO.ISet`1.IsProperSupersetOf(System.Collections.Generic.IEnumerable{`0}@)">
             <summary>
-            
+            判断该集合是否是另一个集合的真超集；
             </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
+            <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.SetString(System.Collections.Generic.IList{System.Byte},System.Int32@,System.String@,System.Text.Encoding@,System.Boolean@)">
+        <member name="M:AIO.ISet`1.IsProperSubsetOf(System.Collections.Generic.IEnumerable{`0}@)">
             <summary>
-            
+            判断该集合是否是另一个集合的真子集；
             </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="encoding"></param>
-            <param name="reverse"></param>
+            <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.SetString(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Text.StringBuilder@,System.Text.Encoding@,System.Boolean@)">
+        <member name="M:AIO.ISet`1.Overlaps(System.Collections.Generic.IEnumerable{`0}@)">
             <summary>
-            
+            判断该集合是否与另一个集合存在共同的元素；
             </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="encoding"></param>
-            <param name="reverse"></param>
+            <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.SetStringUTF8(System.Collections.Generic.IList{System.Byte},System.Int32@,System.String@,System.Boolean@)">
+        <member name="M:AIO.ISet`1.SetEquals(System.Collections.Generic.IEnumerable{`0}@)">
             <summary>
-            
+            判断该集合是否与另一个集合有完全相同的元素，且仅有这些元素。
             </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
+            <returns></returns>
         </member>
-        <member name="M:AIO.ByteExtend.SetStringASCII(System.Collections.Generic.IList{System.Byte},System.Int32@,System.String@,System.Boolean@)">
+        <member name="T:AIO.MergedCollection`1">
             <summary>
-            
+            合并合计
             </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
         </member>
-        <member name="M:AIO.ByteExtend.SetStringUnicode(System.Collections.Generic.IList{System.Byte},System.Int32@,System.String@,System.Boolean@)">
+        <member name="M:AIO.MergedCollection`1.#ctor">
             <summary>
-            
+            初始化
             </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
         </member>
-        <member name="M:AIO.ByteExtend.SetStringUTF8(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Text.StringBuilder@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
+        <member name="P:AIO.MergedCollection`1.Count">
+            <inheritdoc />
         </member>
-        <member name="M:AIO.ByteExtend.SetStringASCII(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Text.StringBuilder@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
+        <member name="P:AIO.MergedCollection`1.IsReadOnly">
+            <inheritdoc />
         </member>
-        <member name="M:AIO.ByteExtend.SetStringUnicode(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Text.StringBuilder@,System.Boolean@)">
+        <member name="M:AIO.MergedCollection`1.Include``1(System.Collections.Generic.ICollection{``0})">
             <summary>
-            
+            包含
             </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
         </member>
-        <member name="M:AIO.ByteExtend.SetJson``1(System.Collections.Generic.IList{System.Byte},System.Int32@,``0@,System.Text.Encoding@,System.Boolean@)">
+        <member name="M:AIO.MergedCollection`1.Includes``1">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.MergedCollection`1.Includes(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.MergedCollection`1.ForType``1">
+            <summary>
+            获取指定类型合集
+            </summary>
+        </member>
+        <member name="M:AIO.MergedCollection`1.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.MergedCollection`1.Contains(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.MergedCollection`1.Add(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.MergedCollection`1.Clear">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.MergedCollection`1.Remove(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.MergedCollection`1.CopyTo(`0[],System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.VariantCollection`2">
+            <summary>
+            变种泛型 TImplementation必须是TBase的子类或本身
+            </summary>
+            <typeparam name="TBase"></typeparam>
+            <typeparam name="TImplementation"></typeparam>
+        </member>
+        <member name="M:AIO.VariantCollection`2.#ctor(System.Collections.Generic.ICollection{`1}@)">
+            <summary>
+            初始化VariantCollection对象，
+            </summary>
+            <param name="implementation"></param>
+        </member>
+        <member name="P:AIO.VariantCollection`2.Implementation">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="P:AIO.VariantCollection`2.Count">
+            <summary>
+            获取 Implementation 中包含的元素数。
+            </summary>
+        </member>
+        <member name="P:AIO.VariantCollection`2.IsReadOnly">
+            <summary>
+            获取一个值，该值指示 Implementation 是否为只读。
+            </summary>
+        </member>
+        <member name="M:AIO.VariantCollection`2.GetEnumerator">
+            <summary>
+            返回一个IEnumerator(TBase)类型的枚举器，用于遍历 implementatio n中的元素；
+            </summary>
+            <returns>支持在泛型集合上进行简单迭代</returns>
+        </member>
+        <member name="M:AIO.VariantCollection`2.Add(`0)">
+            <summary>
+            将某项添加到 implementatio 中。
+            </summary>
+        </member>
+        <member name="M:AIO.VariantCollection`2.Clear">
+            <summary>
+            从implementation中移除所有元素；
+            </summary>
+        </member>
+        <member name="M:AIO.VariantCollection`2.Contains(`0)">
+            <summary>
+            判断implementation是否包含某个TBase类型的item。
+            如果item不是TImplementation类型，则抛出NotSupportedException异常；
+            </summary>
+        </member>
+        <member name="M:AIO.VariantCollection`2.Remove(`0)">
+            <summary>
+            从implementation中移除指定的TBase类型的item。
+            如果item不是TImplementation类型，则抛出NotSupportedException异常；
+            </summary>
+        </member>
+        <member name="M:AIO.VariantCollection`2.CopyTo(`0[],System.Int32)">
+            <summary>
+            将implementation中的元素复制到一个TBase类型的数组中。
+            如果array为null，则抛出ArgumentNullException异常；
+            如果arrayIndex小于0，则抛出ArgumentOutOfRangeException异常；
+            如果array的长度减去arrayIndex小于Count，则抛出ArgumentException异常。
+            </summary>
+        </member>
+        <member name="T:AIO.INotifiedCollectionItem">
+            <summary>
+            通知集合
+            </summary>
+        </member>
+        <member name="M:AIO.INotifiedCollectionItem.BeforeAdd">
+            <summary>
+            广播之后添加
+            </summary>
+        </member>
+        <member name="M:AIO.INotifiedCollectionItem.AfterAdd">
+            <summary>
+            广播之前添加
+            </summary>
+        </member>
+        <member name="M:AIO.INotifiedCollectionItem.BeforeRemove">
+            <summary>
+            广播之后移除
+            </summary>
+        </member>
+        <member name="M:AIO.INotifiedCollectionItem.AfterRemove">
+            <summary>
+            广播之前移除
+            </summary>
+        </member>
+        <member name="T:AIO.DebugDictionary`2">
+            <summary>
+            输出字典
+            </summary>
+        </member>
+        <member name="P:AIO.DebugDictionary`2.Item(`0)">
+            <summary>
+            输出字典Value值
+            </summary>
+        </member>
+        <member name="P:AIO.DebugDictionary`2.label">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:AIO.DebugDictionary`2.debug">
+            <summary>
+            是否输出
+            </summary>
+        </member>
+        <member name="P:AIO.DebugDictionary`2.Count">
+            <inheritdoc cref="T:System.Collections.ICollection" />
+        </member>
+        <member name="P:AIO.DebugDictionary`2.Keys">
+            <inheritdoc cref="T:System.Collections.IDictionary" />
+        </member>
+        <member name="P:AIO.DebugDictionary`2.Values">
+            <inheritdoc cref="T:System.Collections.IDictionary" />
+        </member>
+        <member name="M:AIO.DebugDictionary`2.Clear">
+            <inheritdoc cref="T:System.Collections.IDictionary" />
+        </member>
+        <member name="M:AIO.DebugDictionary`2.Contains(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <inheritdoc cref="T:System.Collections.IDictionary" />
+        </member>
+        <member name="M:AIO.DebugDictionary`2.GetEnumerator">
+            <inheritdoc cref="T:System.Collections.IDictionary" />
+        </member>
+        <member name="M:AIO.DebugDictionary`2.ContainsKey(`0)">
+            <inheritdoc cref="T:System.Collections.IDictionary" />
+        </member>
+        <member name="M:AIO.DebugDictionary`2.Add(`0,`1)">
+            <inheritdoc cref="T:System.Collections.IDictionary" />
+        </member>
+        <member name="M:AIO.DebugDictionary`2.Remove(`0)">
+            <inheritdoc cref="T:System.Collections.IDictionary" />
+        </member>
+        <member name="M:AIO.DebugDictionary`2.TryGetValue(`0,`1@)">
+            <inheritdoc cref="T:System.Collections.IDictionary" />
+        </member>
+        <member name="T:AIO.FlexibleDictionary`2">
             <summary>
             
             </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="encoding"></param>
-            <param name="reverse"></param>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+        </member>
+        <member name="P:AIO.FlexibleDictionary`2.Item(`0)">
+            <summary>
+            获取V值
+            </summary>
+        </member>
+        <member name="T:AIO.INotifyCollectionChanged`1">
+            <summary>
+            通知集合 改变事件
+            </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="M:AIO.ByteExtend.SetJsonUTF8``1(System.Collections.Generic.IList{System.Byte},System.Int32@,``0@,System.Boolean@)">
+        <member name="E:AIO.INotifyCollectionChanged`1.ItemAdded">
             <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:AIO.ByteExtend.SetJsonASCII``1(System.Collections.Generic.IList{System.Byte},System.Int32@,``0@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:AIO.ByteExtend.SetJsonUnicode``1(System.Collections.Generic.IList{System.Byte},System.Int32@,``0@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array">数组</param>
-            <param name="index">下标</param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="T:AIO.IntPtrExtend">
-            <summary>
-            句柄
-            </summary>
-            <summary>
-            句柄
+            添加事件
             </summary>
         </member>
-        <member name="M:AIO.IntPtrExtend.ToConverMemory(System.IntPtr)">
+        <member name="E:AIO.INotifyCollectionChanged`1.ItemRemoved">
             <summary>
-            转化为引用地址
+            移除事件
             </summary>
         </member>
-        <member name="M:AIO.IntPtrExtend.ToConverInts(System.IntPtr)">
+        <member name="E:AIO.INotifyCollectionChanged`1.CollectionChanged">
             <summary>
-            
+            修改事件
             </summary>
-            <param name="intPtr"></param>
+        </member>
+        <member name="T:AIO.HashUtils">
+            <summary>
+            hash工具
+            </summary>
+        </member>
+        <member name="M:AIO.HashUtils.GetHashCode``1(``0@)">
+            <summary>
+            获取哈希值
+            </summary>
+        </member>
+        <member name="M:AIO.HashUtils.GetHashCode``2(``0@,``1@)">
+            <summary>
+            获取哈希值
+            </summary>
+        </member>
+        <member name="M:AIO.HashUtils.GetHashCode``3(``0@,``1@,``2@)">
+            <summary>
+            获取哈希值
+            </summary>
+        </member>
+        <member name="M:AIO.HashUtils.GetHashCode``4(``0@,``1@,``2@,``3@)">
+            <summary>
+            获取哈希值
+            </summary>
+        </member>
+        <member name="M:AIO.HashUtils.GetHashCode``5(``0@,``1@,``2@,``3@,``4@)">
+            <summary>
+            获取哈希值
+            </summary>
+        </member>
+        <member name="M:AIO.HashUtils.GetHashCodeAlloc(System.Object[])">
+            <summary>
+            获取哈希值
+            </summary>
+        </member>
+        <member name="M:AIO.HashUtils.GetMD5(System.IO.Stream,System.Int64)">
+            <summary>
+            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得MD5
+            实现稍微复杂，但可使用与传输文件或接收文件时同步计算MD5值
+            可自定义缓冲区大小，计算速度较快
+            </summary>
+            <param name="stream">数据流</param>
+            <param name="bufferSize">自定义缓冲区大小16K</param>
+            <returns>MD5Hash</returns>
+        </member>
+        <member name="M:AIO.HashUtils.GetMD5ByHashAlgorithm(System.IO.Stream,System.Int64)">
+            <summary>
+            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得MD5
+            实现稍微复杂，但可使用与传输文件或接收文件时同步计算MD5值
+            可自定义缓冲区大小，计算速度较快
+            </summary>
+            <param name="stream"></param>
+            <param name="bufferSize">自定义缓冲区大小16K</param>
+        </member>
+        <member name="M:AIO.HashUtils.ToHash(System.Byte[])">
+            <summary>
+            转化为哈希值
+            </summary>
+        </member>
+        <member name="M:AIO.HashUtils.VerifyCrc32Hash(System.String,System.String)">
+            <summary>
+            比较32位校验码
+            </summary>
+            <param name="input"></param>
+            <param name="hash"></param>
             <returns></returns>
-        </member>
-        <member name="M:AIO.IntPtrExtend.ToConverObject(System.IntPtr)">
-            <summary>
-            
-            </summary>
-            <param name="intPtr"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AIO.SocketExtend">
-            <summary>
-            Socket 扩展
-            </summary>
-        </member>
-        <member name="M:AIO.SocketExtend.ToConverIP(System.Net.Sockets.Socket)">
-            <summary>
-            转化为IP地址
-            </summary>
-        </member>
-        <member name="T:AIO.StringExtend">
-            <summary> 字符工具类 </summary>
-        </member>
-        <member name="M:AIO.StringExtend.FastToLower(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="self"></param>
-        </member>
-        <member name="M:AIO.StringExtend.FastToUpper(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="self"></param>
-        </member>
-        <member name="M:AIO.StringExtend.FastToLower(System.String,System.Int32@)">
-            <summary>
-            
-            </summary>
-            <param name="self"></param>
-            <param name="idx"></param>
-        </member>
-        <member name="M:AIO.StringExtend.FastToUpper(System.String,System.Int32@)">
-            <summary>
-            
-            </summary>
-            <param name="self"></param>
-            <param name="idx"></param>
-        </member>
-        <member name="M:AIO.StringExtend.Repeat(System.String,System.Int32@)">
-            <summary>
-            
-            </summary>
-            <param name="s"></param>
-            <param name="repeat"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.StringExtend.Add(System.Collections.Generic.IList{System.String},System.Collections.Generic.IEnumerable{System.String}@)">
-            <summary>
-            
-            </summary>
-            <param name="value"></param>
-            <param name="parms"></param>
-        </member>
-        <member name="M:AIO.StringExtend.EqualsNull(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.StringExtend.Contains(System.String,System.Char)">
-            <summary>
-            
-            </summary>
-            <param name="value"></param>
-            <param name="c"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.StringExtend.Contains(System.String,System.Collections.Generic.IEnumerable{System.String}@)">
-            <summary>
-            判断字符串数组中 是否有重复
-            </summary>
-            <param name="value">字符串</param>
-            <param name="list">匹配数组</param>
-            <returns>Ture:存在 False:不存在</returns>
-        </member>
-        <member name="M:AIO.StringExtend.Reverse(System.String)">
-            <summary> 字符串反转 </summary>
-        </member>
-        <member name="M:AIO.StringExtend.Clone(System.Char,System.Int32@)">
-            <summary>
-            重复N此 复制传入数据
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.Clone(System.Char,System.UInt32@)">
-            <summary>
-            重复N此 复制传入数据
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.Clone(System.String,System.UInt32@)">
-            <summary>
-            重复N此 复制传入数据
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.AppendFrontDes(System.String,System.Char,System.Int32)">
-            <summary>
-            在最前添加指定字符到指定长度
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.AppendFront(System.String,System.String[])">
-            <summary>
-            合并字符 前面
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.AppendFront(System.String,System.Char[])">
-            <summary>
-            在最前添加指定字符
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.AppendLastDes(System.String,System.Char,System.Int32)">
-            <summary>
-            在最后添加指定字符到指定字节长度
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.AppendLast(System.String,System.String[])">
-            <summary>
-            合并字符 后面
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.AppendLast(System.String,System.Char[])">
-            <summary>
-            在最后添加指定字符到指定长度
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.InsertFixed(System.String,System.Int32,System.Object)">
-            <summary>
-            循环插入指定内容
-            效果: str="888" space=1 info="-" 输出 "8-8-8"
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidatePath(System.String,System.Int32[])">
-            <summary>
-            判断路径是是否包含指定字符
-            </summary>
-            <returns>Ture:符合 False:不符合</returns>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidatePath(System.String,System.Collections.Generic.List{System.Int32})">
-            <summary>
-            判断路径是是否包含指定字符
-            </summary>
-            <returns>Ture:符合 False:不符合</returns>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidatePath(System.String,System.Int32,System.Int32)">
-            <summary>
-            判断路径是是否包含指定字符
-            </summary>
-            <returns>Ture:符合 False:不符合</returns>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidateMonth(System.String)">
-            <summary>
-            验证一年的12个月
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidateChinese(System.String)">
-            <summary>
-            验证输入汉字
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidateLength(System.String,System.Int32)">
-            <summary>
-            验证输入字符串 是否满足指定个数
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidateMinMaxLength(System.String,System.Int32,System.Int32)">
-            <summary>
-            验证当前字符串是否在指定长度范围内
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidateDay(System.String)">
-            <summary>
-            验证一个月的31天
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidate2Decimal(System.String)">
-            <summary>
-            验证两位小数
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IsNullOrEmpty(System.String)">
-            <summary> 判断字符是否为空 </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidateNumeric(System.String)">
-            <summary>
-            是否为Numeric
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidateInt(System.String)">
-            <summary>
-            是否为Int
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidateBool(System.String)">
-            <summary>
-            是否为Bool
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidateNum(System.String)">
-            <summary>
-            是否为整数
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidateUnsign(System.String)">
-            <summary>
-            是否为Unsign
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidateDate(System.String)">
-            <summary>
-            验证是否为 YYYY MM DD 格式 包含闰年 平年
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidateDateString(System.String)">
-            <summary>
-            判断字符串是否是yy-mm-dd字符串
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidatePhone(System.String)">
-            <summary>
-            验证手机号码
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidateIPSect(System.String)">
-            <summary>
-            是否为IP分段
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidateEmail(System.String)">
-            <summary>
-            是否电子邮件
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IsPostalcode(System.String)">
-            <summary>
-            验证邮编
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidateIDcard(System.String)">
-            <summary>
-            验证身份证号
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidateIDcard18(System.String)">
-            <summary>
-            验证身份证号18
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidateIDcard15(System.String)">
-            <summary>
-            验证身份证号15
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IDcard15To18(System.String)">
-            <summary>
-            15位省份证号码升18位
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.GetHttpHost(System.String)">
-            <summary>
-            获取Http主机名 如果有端口 包含端口
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.GetRegexMatches(System.String,System.String)">
-            <summary>
-            根据正则表达式 获取对应内容
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.IsValidateUrl(System.String)">
-            <summary>
-            验证URL是否有效
-            </summary>
-            <param name="url"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.StringExtend.PathGetFileName(System.String,System.Boolean)">
-            <summary>
-            获取文件名 HasExtension = false 没有扩展名
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.PathCombine(System.String,System.String)">
-            <summary>
-            获取路径
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.PathCombine(System.String,System.String[])">
-            <summary>
-            获取路径
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.PathGetExtension(System.String)">
-            <summary>
-            获取文件扩展名
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.PathChangeExtension(System.String,System.String)">
-            <summary>
-            修改文件扩展名
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.PathNormalize(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="path"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.StringExtend.PathGetRoot(System.String)">
-            <summary>
-            获取根目录 I:\
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.PathGetLastFloder(System.String)">
-            <summary>
-            获取上一级目录
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.RichS(System.String,System.Int32@)">
-            <summary>
-            富文本 字号
-            </summary>
-            <param name="content"></param>
-            <param name="s">字号大小</param>
-        </member>
-        <member name="M:AIO.StringExtend.RichC(System.String,System.String@)">
-            <summary>
-            富文本 颜色
-            </summary>
-            <param name="content"></param>
-            <param name="c">颜色值</param>
-        </member>
-        <member name="M:AIO.StringExtend.RichI(System.String)">
-            <summary>
-            富文本 斜体
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.RichB(System.String)">
-            <summary>
-            富文本 加粗
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.RichBI(System.String)">
-            <summary>
-            富文本 加粗 斜体
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.RichSB(System.String,System.String@)">
-            <summary>
-            富文本 字号 加粗
-            </summary>
-            <param name="content"></param>
-            <param name="s">字号大小</param>
-        </member>
-        <member name="M:AIO.StringExtend.RichSI(System.String,System.Int32@)">
-            <summary>
-            富文本 字号 斜体
-            </summary>
-            <param name="content"></param>
-            <param name="s">字号大小</param>
-        </member>
-        <member name="M:AIO.StringExtend.RichCS(System.String,System.Int32@,System.String@)">
-            <summary>
-            富文本 字号 颜色
-            </summary>
-            <param name="content"></param>
-            <param name="s">字号大小</param>
-            <param name="c">颜色值</param>
-        </member>
-        <member name="M:AIO.StringExtend.RichCB(System.String,System.String@)">
-            <summary>
-            富文本 颜色 加粗
-            </summary>
-            <param name="content"></param>
-            <param name="c">颜色值</param>
-        </member>
-        <member name="M:AIO.StringExtend.RichCI(System.String,System.String@)">
-            <summary>
-            富文本 颜色 斜体
-            </summary>
-            <param name="content"></param>
-            <param name="c">颜色值</param>
-        </member>
-        <member name="M:AIO.StringExtend.RichSBI(System.String,System.String@)">
-            <summary>
-            富文本 字号 加粗 斜体
-            </summary>
-            <param name="content"></param>
-            <param name="s">字号大小</param>
-        </member>
-        <member name="M:AIO.StringExtend.RichCSB(System.String,System.Int32@,System.String@)">
-            <summary>
-            富文本 颜色 字号 加粗
-            </summary>
-            <param name="content"></param>
-            <param name="s">字号大小</param>
-            <param name="c">颜色值</param>
-        </member>
-        <member name="M:AIO.StringExtend.RichCSI(System.String,System.Int32@,System.String@)">
-            <summary>
-            富文本 颜色 字号 斜体
-            </summary>
-            <param name="content"></param>
-            <param name="s">字号大小</param>
-            <param name="c">颜色值</param>
-        </member>
-        <member name="M:AIO.StringExtend.RichCBI(System.String,System.String@)">
-            <summary>
-            富文本 颜色 加粗 斜体
-            </summary>
-            <param name="content"></param>
-            <param name="c">颜色值</param>
-        </member>
-        <member name="M:AIO.StringExtend.RichAll(System.String,System.Int32@,System.String@)">
-            <summary>
-            富文本 颜色 字号 加粗 斜体
-            </summary>
-            <param name="content"></param>
-            <param name="s">字号大小</param>
-            <param name="c">颜色值</param>
-        </member>
-        <member name="M:AIO.StringExtend.SplitEx(System.String,System.Char)">
-            <summary>
-            分组
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.SplitOnce(System.String,System.Char)">
-            <summary>
-            分组一次
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.SplitLine(System.String)">
-            <summary>
-            将字符串以行拆分为数组
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.GetBytesLength(System.String)">
-            <summary>
-            获取字节长度
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.GetOcclusion(System.String,System.String,System.Char,System.Char)">
-            <summary>
-            获取闭合字符段
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.SetOcclusion(System.String,System.String,System.Char,System.Char)">
-            <summary>
-            获取闭合字符段
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToLower(System.Collections.Generic.IList{System.String})">
-            <summary>
-            
-            </summary>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverStringFileSize(System.Int64)">
-            <summary>
-            将文件大小(字节)转换为最适合的显示方式
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverStringMoney(System.Int64)">
-            <summary>
-            转换为格式:00,000,000
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverULong(System.String)">
-            <summary>
-            解析字符串为 ulong
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverUInt(System.String)">
-            <summary>
-            解析字符串为 UInt
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverUshort(System.String)">
-            <summary>
-            解析字符串为 UShort
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverDouble(System.String)">
-            <summary>
-            解析字符串为 Double
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverDecimal(System.String)">
-            <summary>
-            解析字符串为 Decimal
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverDateTime(System.String)">
-            <summary>
-            解析字符串为 DateTime
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverChar(System.String)">
-            <summary>
-            解析字符串为 Char
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverBytes(System.String)">
-            <summary>
-            解析字符串为 Byte
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverBoolean(System.String)">
-            <summary>
-            解析字符串为 Boolean
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverSByte(System.String)">
-            <summary>
-            解析字符串为 SByte
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverShort(System.String)">
-            <summary>
-            解析字符串为 Short
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverInt(System.String)">
-            <summary>
-            解析字符串为 Int
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverLong(System.String)">
-            <summary>
-            解析字符串为 Long
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverFloat(System.String)">
-            <summary>
-            解析字符串为 Float
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverInts(System.String)">
-            <summary>
-            解析字符串(以,分割)为一维数字数组
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverInts(System.String,System.Char)">
-            <summary>
-            解析字符串(以,分割)为一维数字数组
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverIntss(System.String)">
-            <summary>
-            解析字符串(以,|分割)为二维数字数组
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverIntsss(System.String)">
-            <summary>
-            解析字符串(以,|,:分割)为三维数字数组
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverInts(System.String[])">
-            <summary>
-            
-            </summary>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverIntss(System.String[][])">
-            <summary>
-            
-            </summary>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverIntsss(System.String[][][])">
-            <summary>
-            
-            </summary>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverLongs(System.String)">
-            <summary>
-            解析字符串(以,分割)为一维数字数组
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverLongss(System.String)">
-            <summary>
-            解析字符串(以,|分割)为二维数字数组
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverLongs(System.String[])">
-            <summary>
-            
-            </summary>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverLongss(System.String[][])">
-            <summary>
-            
-            </summary>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverLongsss(System.String[][][])">
-            <summary>
-            
-            </summary>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverStrings(System.String)">
-            <summary>
-            解析字符串(以,分割)为一维数字数组
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverStrings(System.String,System.Char)">
-            <summary>
-            
-            </summary>
-            <param name="value"></param>
-            <param name="split"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverStringss(System.String)">
-            <summary>
-            解析字符串(以,|分割)为二维数字数组
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverStringsss(System.String)">
-            <summary>
-            解析字符串(以,|分割)为三维数字数组
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverBools(System.String[])">
-            <summary>
-            转换为Bool 一维数组
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverBoolss(System.String[][])">
-            <summary>
-            转换为Bool 二维数组
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverBoolsss(System.String[][][])">
-            <summary>
-            转换为Bool 三维数组
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverBase64(System.String)">
-            <summary>
-            转换Base64
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.FromBase64ToStr(System.String)">
-            <summary>
-            Base64转化为Str
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverUnitsCNS(System.String,System.Int32@)">
-            <summary>
-            阿拉伯数字全部转化为中文数字 有单位 传入需全部为数字字符 简体中文
-            </summary>
-            <param name="num"></param>
-            <param name="unitNum">单位截止下标,默认0,1:万后,2:亿后,3:万亿</param>
-        </member>
-        <member name="M:AIO.StringExtend.ToConverNoUnitsCNS(System.String)">
-            <summary>
-            阿拉伯数字全部转化为中文数字 无单位 传入需全部为数字字符 简体中文
-            </summary>
-        </member>
-        <member name="T:AIO.TypeExtend">
-            <summary>
-            类扩展
-            </summary>
-            <see>
-                <cref>https://docs.microsoft.com/en-us/dotnet/api/system.type?view=net-5.0</cref>
-            </see>
-        </member>
-        <member name="M:AIO.TypeExtend.Reset``1(``0,System.Reflection.BindingFlags)">
-            <summary>
-            重置类数据
-            </summary>
         </member>
         <member name="T:AIO.IOUtils">
             <summary>
@@ -2946,43 +1182,6 @@
             <param name="bts"></param>
             <param name="encoding"></param>
             <param name="offset"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AIO.HashUtils">
-            <summary>
-            hash工具
-            </summary>
-        </member>
-        <member name="M:AIO.HashUtils.GetMD5(System.IO.Stream,System.Int64)">
-            <summary>
-            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得MD5
-            实现稍微复杂，但可使用与传输文件或接收文件时同步计算MD5值
-            可自定义缓冲区大小，计算速度较快
-            </summary>
-            <param name="stream">数据流</param>
-            <param name="bufferSize">自定义缓冲区大小16K</param>
-            <returns>MD5Hash</returns>
-        </member>
-        <member name="M:AIO.HashUtils.GetMD5ByHashAlgorithm(System.IO.Stream,System.Int64)">
-            <summary>
-            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得MD5
-            实现稍微复杂，但可使用与传输文件或接收文件时同步计算MD5值
-            可自定义缓冲区大小，计算速度较快
-            </summary>
-            <param name="stream"></param>
-            <param name="bufferSize">自定义缓冲区大小16K</param>
-        </member>
-        <member name="M:AIO.HashUtils.ToHash(System.Byte[])">
-            <summary>
-            转化为哈希值
-            </summary>
-        </member>
-        <member name="M:AIO.HashUtils.VerifyCrc32Hash(System.String,System.String)">
-            <summary>
-            比较32位校验码
-            </summary>
-            <param name="input"></param>
-            <param name="hash"></param>
             <returns></returns>
         </member>
         <member name="T:AIO.HexUtils">
@@ -5805,6 +4004,230 @@
         <member name="M:AIO.MaskWordUtils.LoadMaskWord(System.String)">
             <summary> 加载屏蔽文本 </summary>
         </member>
+        <member name="T:AIO.StringUtils">
+            <summary>
+            字符串工具库
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IsValidateMonth(System.String@)">
+            <summary>
+            验证一年的12个月
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IsValidateChinese(System.String@)">
+            <summary>
+            验证输入汉字
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IsValidateLength(System.String@,System.Int32)">
+            <summary>
+            验证输入字符串 是否满足指定个数
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IsValidateMinMaxLength(System.String@,System.Int32,System.Int32)">
+            <summary>
+            验证当前字符串是否在指定长度范围内
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IsValidateDay(System.String@)">
+            <summary>
+            验证一个月的31天
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IsValidate2Decimal(System.String@)">
+            <summary>
+            验证两位小数
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IsNullOrEmpty(System.String@)">
+            <summary> 判断字符是否为空 </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IsValidateNumeric(System.String@)">
+            <summary>
+            是否为Numeric
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IsValidateInt(System.String@)">
+            <summary>
+            是否为Int
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IsValidateBool(System.String@)">
+            <summary>
+            是否为Bool
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IsValidateNum(System.String)">
+            <summary>
+            是否为整数
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IsValidateUnsign(System.String)">
+            <summary>
+            是否为Unsign
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IsValidateDate(System.String@)">
+            <summary>
+            验证是否为 YYYY MM DD 格式 包含闰年 平年
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IsValidateDateString(System.String@)">
+            <summary>
+            判断字符串是否是yy-mm-dd字符串
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IsValidatePhone(System.String@)">
+            <summary>
+            验证手机号码
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IsValidateIPSect(System.String@)">
+            <summary>
+            是否为IP分段
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IsValidateEmail(System.String@)">
+            <summary>
+            是否电子邮件
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IsPostalcode(System.String@)">
+            <summary>
+            验证邮编
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IsValidateIDcard(System.String@)">
+            <summary>
+            验证身份证号
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IsValidateIDcard18(System.String@)">
+            <summary>
+            验证中国身份证号18
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IsValidateIDcard15(System.String@)">
+            <summary>
+            验证身份证号15
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IDcard15To18(System.String@)">
+            <summary>
+            15位省份证号码升18位
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.GetHttpHost(System.String@)">
+            <summary>
+            获取Http主机名 如果有端口 包含端口
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.GetRegexMatches(System.String@,System.String)">
+            <summary>
+            根据正则表达式 获取对应内容
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.IsValidateUrl(System.String,System.String)">
+            <summary>
+            验证URL是否有效
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.ToConvertBlock(System.String[])">
+            <summary>
+            转化为区块
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.ToConvertSpace(System.String[])">
+            <summary>
+            转化为区块
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.ToConvert(AIO.StringBlock@,System.String[])">
+            <summary>
+            转化为区块
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.ToConverUnitsCNS(System.String,System.Int32@)">
+            <summary>
+            阿拉伯数字全部转化为中文数字 有单位 传入需全部为数字字符 简体中文
+            </summary>
+            <param name="num"></param>
+            <param name="unitNum">单位截止下标,默认0,1:万后,2:亿后,3:万亿</param>
+        </member>
+        <member name="M:AIO.StringUtils.ToConverNoUnitsCNS(System.String)">
+            <summary>
+            阿拉伯数字全部转化为中文数字 无单位 传入需全部为数字字符 简体中文
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.StringToHexView(System.Byte[]@,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="buff"></param>
+            <param name="len"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.StringUtils.StringToHex(System.Byte[]@,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="buff"></param>
+            <param name="len"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.StringUtils.HexStringToBytes(System.String@)">
+            <summary>
+            
+            </summary>
+            <param name="hexStr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.StringUtils.BtsToBase64(System.Byte[]@)">
+            <summary>
+            
+            </summary>
+            <param name="buff"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.StringUtils.Base64ToBts(System.String@)">
+            <summary>
+            
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.StringUtils.GetMD5(System.String@,System.Text.Encoding@)">
+            <summary>
+            
+            </summary>
+            <param name="sDataIn"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.StringUtils.GetMD5(System.Collections.Generic.ICollection{System.String}@,System.Text.Encoding@)">
+            <summary>
+            
+            </summary>
+            <param name="sDataIn"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.StringUtils.IsNullOrWhiteSpace(System.String@)">
+            <summary>
+            是空还是空白
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.FallbackEmpty(System.String,System.String@)">
+            <summary>
+            如果指示指定的字符串是 null 还是 System.String.Empty 字符串。
+            则回退
+            </summary>
+        </member>
+        <member name="M:AIO.StringUtils.FallbackWhitespace(System.String,System.String@)">
+            <summary>
+            如果所有字符串为空白则回退
+            </summary>
+        </member>
         <member name="T:AIO.StringBlock">
             <summary>
             字符串区块 字符单位
@@ -5854,79 +4277,6 @@
             
             </summary>
             <param name="context"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AIO.StringUtils">
-            <summary>
-            字符串工具库
-            </summary>
-        </member>
-        <member name="M:AIO.StringUtils.ToConvertBlock(System.String[])">
-            <summary>
-            转化为区块
-            </summary>
-        </member>
-        <member name="M:AIO.StringUtils.ToConvertSpace(System.String[])">
-            <summary>
-            转化为区块
-            </summary>
-        </member>
-        <member name="M:AIO.StringUtils.ToConvert(AIO.StringBlock,System.String[])">
-            <summary>
-            转化为区块
-            </summary>
-        </member>
-        <member name="M:AIO.StringUtils.StringToHexView(System.Byte[]@,System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="buff"></param>
-            <param name="len"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.StringUtils.StringToHex(System.Byte[]@,System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="buff"></param>
-            <param name="len"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.StringUtils.HexStringToBytes(System.String@)">
-            <summary>
-            
-            </summary>
-            <param name="hexStr"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.StringUtils.BtsToBase64(System.Byte[]@)">
-            <summary>
-            
-            </summary>
-            <param name="buff"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.StringUtils.Base64ToBts(System.String@)">
-            <summary>
-            
-            </summary>
-            <param name="str"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.StringUtils.GetMD5(System.String@,System.Text.Encoding)">
-            <summary>
-            
-            </summary>
-            <param name="sDataIn"></param>
-            <param name="encoding"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.StringUtils.GetMD5(System.Collections.Generic.ICollection{System.String}@,System.Text.Encoding)">
-            <summary>
-            
-            </summary>
-            <param name="sDataIn"></param>
-            <param name="encoding"></param>
             <returns></returns>
         </member>
         <member name="T:AIO.AssemblyUtils">
