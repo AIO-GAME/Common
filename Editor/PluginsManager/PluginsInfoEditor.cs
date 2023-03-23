@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using NUnit.Framework;
 using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
@@ -349,7 +348,7 @@ namespace AIO.Package.Editor
             if (str.Length == 0) return;
 
             var verify = new List<string>(str);
-            verify.RemoveDistinct();
+            verify.RemoveRepeat();
             foreach (var item in value) verify.Remove(item);
 
             if (verify.Count > 0)
@@ -372,11 +371,11 @@ namespace AIO.Package.Editor
             var verify = new List<string>(str);
             foreach (var v in value)
             {
-                if (string.IsNullOrEmpty(v) || verify.Contain(v)) continue;
+                if (string.IsNullOrEmpty(v) || verify.Contains(v)) continue;
                 verify.Add(v);
             }
 
-            verify.RemoveDistinct();
+            verify.RemoveRepeat();
             //添加宏定义
             PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, string.Join(";", verify));
         }

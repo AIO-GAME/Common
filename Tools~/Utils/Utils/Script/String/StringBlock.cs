@@ -1,9 +1,9 @@
-﻿namespace AIO
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
+namespace AIO
+{
     /// <summary>
     /// 字符串区块 字符单位
     /// </summary>

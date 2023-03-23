@@ -82,38 +82,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Script\Extension\Action\ActionExtend.cs" />
-    <Compile Include="Script\Extension\Arrays\ArrayExtend.cs" />
-    <Compile Include="Script\Extension\Byte\ByteExtendToConver.cs" />
-    <Compile Include="Script\Extension\Char\CharExtend.cs" />
-    <Compile Include="Script\Extension\Char\CharExtendGet.cs" />
-    <Compile Include="Script\Extension\Char\CharExtendJudge.cs" />
-    <Compile Include="Script\Extension\Char\CharExtendToConver.cs" />
-    <Compile Include="Script\Extension\Enum\EnumExtend.cs" />
-    <Compile Include="Script\Extension\Interface\ICollection\ICollectionExtend.cs" />
-    <Compile Include="Script\Extension\Interface\IDictionary\IDictionaryExtendGet.cs" />
-    <Compile Include="Script\Extension\Interface\IDictionary\IDictionaryExtend.cs" />
-    <Compile Include="Script\Extension\Interface\IDictionary\IDictionaryExtendSet.cs" />
-    <Compile Include="Script\Extension\Interface\IEnumerable\IEnumerableExtend.cs" />
-    <Compile Include="Script\Extension\Interface\IList\IListExtendAdd.cs" />
-    <Compile Include="Script\Extension\Interface\IList\IListExtendGet.cs" />
-    <Compile Include="Script\Extension\Interface\IList\IListExtendByteGet.cs" />
-    <Compile Include="Script\Extension\Interface\IList\IListExtendByteSet.cs" />
-    <Compile Include="Script\Extension\Interface\IList\IListExtend.cs" />
-    <Compile Include="Script\Extension\Interface\IList\IListExtendRmove.cs" />
-    <Compile Include="Script\Extension\Interface\IList\IListExtendSet.cs" />
-    <Compile Include="Script\Extension\IntPtr\IntPtrExtend.cs" />
-    <Compile Include="Script\Extension\IntPtr\IntPtrExtendToConver.cs" />
-    <Compile Include="Script\Extension\Socket\SocketExtend.cs" />
-    <Compile Include="Script\Extension\String\StringExtend.cs" />
-    <Compile Include="Script\Extension\String\StringExtendInsert.cs" />
-    <Compile Include="Script\Extension\String\StringExtendIsValidate.cs" />
-    <Compile Include="Script\Extension\String\StringExtendPath.cs" />
-    <Compile Include="Script\Extension\String\StringExtendRichText.cs" />
-    <Compile Include="Script\Extension\String\StringExtendSplit.cs" />
-    <Compile Include="Script\Extension\String\StringExtendToConver.cs" />
-    <Compile Include="Script\Extension\Thread\ThreadExtend.cs" />
-    <Compile Include="Script\Extension\Type\TypeExtend.cs" />
+    <Compile Include="Script\Interface\ICollection\IKeyedCollection.cs" />
+    <Compile Include="Script\Interface\ICollection\IMergedCollection.cs" />
+    <Compile Include="Script\Interface\ICollection\ISet.cs" />
+    <Compile Include="Script\Interface\ICollection\MergedCollection.cs" />
+    <Compile Include="Script\Interface\ICollection\VariantCollection.cs" />
+    <Compile Include="Script\Interface\INotified\INotifiedCollectionItem.cs" />
+    <Compile Include="Script\Interface\IDictionary\DebugDictionary.cs" />
+    <Compile Include="Script\Interface\IDictionary\FlexibleDictionary.cs" />
+    <Compile Include="Script\Interface\INotified\INotifyCollectionChanged.cs" />
+    <Compile Include="Script\Math\HashUtilsGet.cs" />
     <Compile Include="Script\IO\Base\IOBytes.cs" />
     <Compile Include="Script\IO\Base\IOCopy.cs" />
     <Compile Include="Script\IO\Base\IOCore.cs" />
@@ -160,8 +138,9 @@
     <Compile Include="Script\Parse\Yaml.cs" />
     <Compile Include="Script\String\IDNoUtils.cs" />
     <Compile Include="Script\String\MaskWordUtils.cs" />
+    <Compile Include="Script\String\String.Utils.IS.cs" />
     <Compile Include="Script\String\StringBlock.cs" />
-    <Compile Include="Script\String\StringUtils.cs" />
+    <Compile Include="Script\String\String.Utils.cs" />
     <Compile Include="Script\System\AssemblyUtils.cs" />
     <Compile Include="Script\System\ClassUtils.cs" />
     <Compile Include="Script\System\GCUtils.cs" />
@@ -177,6 +156,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Extension\Extension\Extension.csproj">
+      <Project>{f2c7d3ad-fd65-42d7-8c3f-eaf85dad3e05}</Project>
+      <Name>Extension</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

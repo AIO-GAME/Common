@@ -15,7 +15,7 @@ namespace AIO
     /// <summary>
     /// hash工具
     /// </summary>
-    public static class HashUtils
+    public static partial class HashUtils
     {
         /// <summary>
         /// 通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得MD5

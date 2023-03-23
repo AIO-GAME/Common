@@ -320,6 +320,14 @@
             <param name="verb">管理员权限</param>
             <returns>结果执行器</returns>
         </member>
+        <member name="M:AIO.PrCourse.Create``1(System.String@)">
+            <summary>
+            创建
+            </summary>
+            <typeparam name="T">执行器类型</typeparam>
+            <param name="cmd">CMD路径:NoNull</param>
+            <returns>结果执行器</returns>
+        </member>
         <member name="T:AIO.Result">
             <summary>
             执行结果
@@ -3378,6 +3386,14 @@
             打开路径
             </summary>
             <param name="target">目标路径</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Open.Path(System.String@,AIO.EPrVerb@)">
+            <summary>
+            打开路径
+            </summary>
+            <param name="target">目标路径</param>
+            <param name="verb">权限</param>
             <returns>执行器</returns>
         </member>
         <member name="M:AIO.PrWin.Open.ControlPanel">

@@ -139,9 +139,20 @@ namespace AIO
         /// <param name="cmd">CMD路径:NoNull</param>
         /// <param name="verb">管理员权限</param>
         /// <returns>结果执行器</returns>
-        protected static IExecutor Create<T>(in string cmd, in EPrVerb verb = EPrVerb.RunAs) where T : class, IPrCourse, new()
+        protected static IExecutor Create<T>(in string cmd, in EPrVerb verb) where T : class, IPrCourse, new()
         {
             return Activator.CreateInstance<T>().SetInVers(verb).SetFileName(cmd).Execute();
+        }
+
+        /// <summary>
+        /// 创建
+        /// </summary>
+        /// <typeparam name="T">执行器类型</typeparam>
+        /// <param name="cmd">CMD路径:NoNull</param>
+        /// <returns>结果执行器</returns>
+        protected static IExecutor Create<T>(in string cmd) where T : class, IPrCourse, new()
+        {
+            return Activator.CreateInstance<T>().SetFileName(cmd).Execute();
         }
 
         #endregion
