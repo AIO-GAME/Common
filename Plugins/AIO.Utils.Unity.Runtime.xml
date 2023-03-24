@@ -4,6 +4,418 @@
         <name>AIO.Utils.Unity.Runtime</name>
     </assembly>
     <members>
+        <member name="F:AIO.Unity.UnityFSSerializer._availableConverters">
+            <summary>
+            Converters that can be used for type registration.
+            </summary>
+        </member>
+        <member name="F:AIO.Unity.UnityFSSerializer._availableDirectConverters">
+            <summary>
+            Direct converters (optimized _converters). We use these so we don't
+            have to perform a scan through every item in _converters and can
+            instead just do an O(1) lookup. This is potentially important to perf
+            when there are a ton of direct converters.
+            </summary>
+        </member>
+        <member name="F:AIO.Unity.UnityFSSerializer._processors">
+            <summary>
+            Processors that are available.
+            </summary>
+        </member>
+        <member name="F:AIO.Unity.UnityFSSerializer._references">
+            <summary>
+            Reference manager for cycle detection.
+            </summary>
+        </member>
+        <member name="F:AIO.Unity.UnityFSSerializer._abstractTypeRemap">
+            <summary>
+            Allow the user to provide default storage types for interfaces and abstract
+            classes. For example, a model could have IList{int} as a parameter, but the
+            serialization data does not specify a List{int} type. A IList{} -> List{}
+            remapping will cause List{} to be used as the default storage type. see
+            https://github.com/jacobdufault/fullserializer/issues/120 for additional
+            context.
+            </summary>
+        </member>
+        <member name="F:AIO.Unity.UnityFSSerializer._cachedConverterTypeInstances">
+            <summary>
+            Converter type to converter instance lookup table. This
+            could likely be stored inside
+            from serialized type to converter.
+            </summary>
+        </member>
+        <member name="F:AIO.Unity.UnityFSSerializer._cachedConverters">
+            <summary>
+            A cache from type to it's converter.
+            </summary>
+        </member>
+        <member name="F:AIO.Unity.UnityFSSerializer._cachedProcessors">
+            <summary>
+            A cache from type to the set of processors that are interested in it.
+            </summary>
+        </member>
+        <member name="F:AIO.Unity.UnityFSSerializer.Context">
+            <summary>
+            A context object that fsConverters can use to customize how they
+            operate.
+            </summary>
+        </member>
+        <member name="F:AIO.Unity.UnityFSSerializer.Config">
+            <summary>
+            Configuration options. Also see fsGlobalConfig.
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.UnityFSSerializer.AddProcessor(AIO.fsObjectProcessor)">
+            <summary>
+            Add a new processor to the serializer. Multiple processors can run at
+            the same time in the same order they were added in.
+            </summary>
+            <param name="processor">The processor to add.</param>
+        </member>
+        <member name="M:AIO.Unity.UnityFSSerializer.RemoveProcessor``1">
+            <summary>
+            Remove all processors which derive from TProcessor.
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.UnityFSSerializer.SetDefaultStorageType(System.Type,System.Type)">
+            <summary>
+            Provide a default storage type for the given abstract or interface type. If
+            a type is deserialized which contains an interface/abstract field type and a
+            mapping is provided, the mapped type will be used by default. For example,
+            IList{T} => List{T} or IDictionary{TKey, TValue} => Dictionary{TKey, TValue}.
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.UnityFSSerializer.GetProcessors(System.Type)">
+            <summary>
+            Fetches all of the processors for the given type.
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.UnityFSSerializer.AddConverter(AIO.fsBaseConverter)">
+            <summary>
+            Adds a new converter that can be used to customize how an object is
+            serialized and deserialized.
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.UnityFSSerializer.GetConverter(System.Type,System.Type)">
+            <summary>
+            Fetches a converter that can serialize/deserialize the given type.
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.UnityFSSerializer.TrySerialize``1(``0,AIO.fsData@)">
+            <summary>
+            Helper method that simply forwards the call to
+            TrySerialize(typeof(T), instance, out data);
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.UnityFSSerializer.TryDeserialize``1(AIO.fsData,``0@)">
+            <summary>
+            Generic wrapper around TryDeserialize that simply forwards the call.
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.UnityFSSerializer.TrySerialize(System.Type,System.Object,AIO.fsData@)">
+            <summary>
+            Serialize the given value.
+            </summary>
+            <param name="storageType">
+            The type of field/property that stores the object instance. This is
+            important particularly for inheritance, as a field storing an
+            IInterface instance should have type information included.
+            </param>
+            <param name="instance">
+            The actual object instance to serialize.
+            </param>
+            <param name="data">The serialized state of the object.</param>
+            <returns>If serialization was successful.</returns>
+        </member>
+        <member name="M:AIO.Unity.UnityFSSerializer.TrySerialize(System.Type,System.Type,System.Object,AIO.fsData@)">
+            <summary>
+            Serialize the given value.
+            </summary>
+            <param name="storageType">
+            The type of field/property that stores the object instance. This is
+            important particularly for inheritance, as a field storing an
+            IInterface instance should have type information included.
+            </param>
+            <param name="overrideConverterType">
+            An fsBaseConverter derived type that will be used to serialize the
+            object instead of the converter found via the normal discovery
+            mechanisms.
+            </param>
+            <param name="instance">
+            The actual object instance to serialize.
+            </param>
+            <param name="data">The serialized state of the object.</param>
+            <returns>If serialization was successful.</returns>
+        </member>
+        <member name="M:AIO.Unity.UnityFSSerializer.TryDeserialize(AIO.fsData,System.Type,System.Object@)">
+            <summary>
+            Attempts to deserialize a value from a serialized state.
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.UnityFSSerializer.TryDeserialize(AIO.fsData,System.Type,System.Type,System.Object@)">
+            <summary>
+            Attempts to deserialize a value from a serialized state.
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.UnityFSSerializer.EnsureDictionary(AIO.fsData)">
+            <summary>
+            Ensures that the data is a dictionary. If it is not, then it is
+            wrapped inside of one.
+            </summary>
+        </member>
+        <member name="T:AIO.Unity.UnityFSSerializer.fsLazyCycleDefinitionWriter">
+            <summary>
+            This manages instance writing so that we do not write unnecessary $id
+            fields. We only need to write out an $id field when there is a
+            corresponding $ref field. This is able to write $id references lazily
+            because the fsData instance is not actually written out to text until
+            we have entirely finished serializing it.
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.UnityFSSerializer.IsReservedKeyword(System.String)">
+            <summary>
+            Returns true if the given key is a special keyword that full
+            serializer uses to add additional metadata on top of the emitted
+            JSON.
+            </summary>
+        </member>
+        <member name="F:AIO.Unity.UnityFSSerializer.Key_ObjectReference">
+            <summary>
+            This is an object reference in part of a cyclic graph.
+            </summary>
+        </member>
+        <member name="F:AIO.Unity.UnityFSSerializer.Key_ObjectDefinition">
+            <summary>
+            This is an object definition, as part of a cyclic graph.
+            </summary>
+        </member>
+        <member name="F:AIO.Unity.UnityFSSerializer.Key_InstanceType">
+            <summary>
+            This specifies the actual type of an object (the instance type was
+            different from the field type).
+            </summary>
+        </member>
+        <member name="F:AIO.Unity.UnityFSSerializer.Key_Version">
+            <summary>
+            The version string for the serialized data.
+            </summary>
+        </member>
+        <member name="F:AIO.Unity.UnityFSSerializer.Key_Content">
+            <summary>
+            If we have to add metadata but the original serialized state was not
+            a dictionary, then this will contain the original data.
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.UnityFSSerializer.StripDeserializationMetadata(AIO.fsData@)">
+            <summary>
+            Strips all deserialization metadata from the object, like $type and
+            $content fields.
+            </summary>
+            <remarks>
+            After making this call, you will *not* be able to deserialize the
+            same object instance. The metadata is strictly necessary for
+            deserialization!
+            </remarks>
+        </member>
+        <member name="M:AIO.Unity.UnityFSSerializer.ConvertLegacyData(AIO.fsData@)">
+            <summary>
+            This function converts legacy serialization data into the new format,
+            so that the import process can be unified and ignore the old format.
+            </summary>
+        </member>
+        <member name="T:AIO.Unity.PlatformUtils">
+            <summary>
+            平台工具类
+            </summary>
+        </member>
+        <member name="F:AIO.Unity.PlatformUtils.supportsJit">
+            <summary>
+            支持jit
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.PlatformUtils.IsEditor(UnityEngine.RuntimePlatform)">
+            <summary>
+            是否为编辑器
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.PlatformUtils.IsAndroid(UnityEngine.RuntimePlatform)">
+            <summary>
+            是否为安卓平台
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.PlatformUtils.IsIOS(UnityEngine.RuntimePlatform)">
+            <summary>
+            是否为安卓平台
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.PlatformUtils.IsWebGL(UnityEngine.RuntimePlatform)">
+            <summary>
+            是否为安卓平台
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.PlatformUtils.IsStandalone(UnityEngine.RuntimePlatform)">
+            <summary>
+            是否为独立平台
+            </summary>
+        </member>
+        <member name="T:AIO.Unity.ISerializationDependency">
+            <inheritdoc/>
+        </member>
+        <member name="T:AIO.Unity.ISerializationDepender">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Unity.ISerializationDepender.DeserializationDependencies">
+            <summary>
+            依赖集合
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ISerializationDepender.OnAfterDependenciesDeserialized">
+            <summary>
+            在依赖反序列化之后
+            </summary>
+        </member>
+        <member name="T:AIO.Unity.Serialization">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="F:AIO.Unity.Serialization.ConstructorWarning">
+            <summary>
+            构造函数警告
+            </summary>
+        </member>
+        <member name="P:AIO.Unity.Serialization.isUnitySerializing">
+            <summary>
+            Unity序列化
+            </summary>
+        </member>
+        <member name="P:AIO.Unity.Serialization.isCustomSerializing">
+            <summary>
+            自定义序列化
+            </summary>
+        </member>
+        <member name="P:AIO.Unity.Serialization.isSerializing">
+            <summary>
+            是否序列化
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.Serialization.CloneViaSerialization``1(``0,System.Boolean@)">
+            <summary>
+            复制序列化
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.Unity.Serialization.CloneViaSerializationInto``2(``0,``1@,System.Boolean@)">
+            <summary>
+            复制序列化
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.Serialization.PrettyPrint(System.String@)">
+            <summary>
+            美化打印
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.Serialization.AwaitDependencies(AIO.Unity.ISerializationDepender@)">
+            <summary>
+            等待依赖关系
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.Serialization.NotifyDependencyDeserializing(AIO.Unity.ISerializationDependency@)">
+            <summary>
+            通知依赖项反序列化
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.Serialization.NotifyDependencyDeserialized(AIO.Unity.ISerializationDependency@)">
+            <summary>
+            通知依赖项反序列化
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.Serialization.NotifyDependencyUnavailable(AIO.Unity.ISerializationDependency@)">
+            <summary>
+            通知依赖项不可用
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.Serialization.NotifyDependencyAvailable(AIO.Unity.ISerializationDependency@)">
+            <summary>
+            通知依赖项可用
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.Serialization.LogStuckDependers">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="T:AIO.Unity.SerializationOperation">
+            <summary>
+            序列化可选参数
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.SerializationOperation.#ctor">
+            <summary>
+            序列化可选参数
+            </summary>
+        </member>
+        <member name="P:AIO.Unity.SerializationOperation.serializer">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="P:AIO.Unity.SerializationOperation.objectReferences">
+            <summary>
+            引用对象列表
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.SerializationOperation.Reset">
+            <summary>
+            重置
+            </summary>
+        </member>
+        <member name="T:AIO.Unity.Ray2DConverter">
+            <summary>
+             A ray in 2D space.
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.Ray2DConverter.DoSerialize(UnityEngine.Ray2D@,System.Collections.Generic.IDictionary{System.String,AIO.fsData}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.Ray2DConverter.DoDeserialize(System.Collections.Generic.IDictionary{System.String,AIO.fsData}@,UnityEngine.Ray2D@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.Ray2DConverter.CreateInstance(AIO.fsData@,System.Type@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:AIO.Unity.RayConverter">
+            <summary>
+            Ray 转换器
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.RayConverter.DoDeserialize(System.Collections.Generic.IDictionary{System.String,AIO.fsData}@,UnityEngine.Ray@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.RayConverter.CreateInstance(AIO.fsData@,System.Type@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:AIO.Unity.UnityObjectConverter">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.UnityObjectConverter.CanProcess(System.Type@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.UnityObjectConverter.RequestCycleSupport(System.Type@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.UnityObjectConverter.RequestInheritanceSupport(System.Type@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.UnityObjectConverter.TrySerialize(System.Object@,AIO.fsData@,System.Type@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.UnityObjectConverter.TryDeserialize(AIO.fsData@,System.Object@,System.Type@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.UnityObjectConverter.CreateInstance(AIO.fsData@,System.Type@)">
+            <inheritdoc/>
+        </member>
         <member name="T:AIO.Unity.IOUtils">
             <summary>
             Unity IOUtils
@@ -51,6 +463,109 @@
             <param name="pattern">匹配模式</param>
             <param name="option">查找模式</param>
             <returns>以Assets路径为节点的路径数组</returns>
+        </member>
+        <member name="T:AIO.Unity.ProfiledSegment">
+            <summary>
+            调试片段
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ProfiledSegment.#ctor(AIO.Unity.ProfiledSegment@,System.String@)">
+            <summary>
+            初始化
+            </summary>
+            <param name="parent">父节点片段</param>
+            <param name="name">名称</param>
+        </member>
+        <member name="P:AIO.Unity.ProfiledSegment.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:AIO.Unity.ProfiledSegment.Stopwatch">
+            <summary>
+            精度计时器
+            </summary>
+        </member>
+        <member name="P:AIO.Unity.ProfiledSegment.Calls">
+            <summary>
+            调用次数
+            </summary>
+        </member>
+        <member name="P:AIO.Unity.ProfiledSegment.Parent">
+            <summary>
+            父片段
+            </summary>
+        </member>
+        <member name="P:AIO.Unity.ProfiledSegment.Children">
+            <summary>
+            子片段集合
+            </summary>
+        </member>
+        <member name="T:AIO.Unity.ProfiledSegmentCollection">
+            <summary>
+            调试判断集合
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ProfiledSegmentCollection.GetKeyForItem(AIO.Unity.ProfiledSegment)">
+            <summary>
+            在派生类中实现时，将从指定元素提取键。
+            </summary>
+        </member>
+        <member name="T:AIO.Unity.ProfilingScope">
+            <summary>
+            调试区域
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ProfilingScope.#ctor(System.String@)">
+            <summary>
+            创建
+            </summary>
+            <param name="name">名称</param>
+        </member>
+        <member name="M:AIO.Unity.ProfilingScope.Dispose">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="T:AIO.Unity.ProfilingUtils">
+            <summary>
+            调试工具类
+            </summary>
+        </member>
+        <member name="F:AIO.Unity.ProfilingUtils.lock">
+            <summary>
+            锁
+            </summary>
+        </member>
+        <member name="P:AIO.Unity.ProfilingUtils.RootSegment">
+            <summary>
+            根节点采样片段
+            </summary>
+        </member>
+        <member name="P:AIO.Unity.ProfilingUtils.CurrentSegment">
+            <summary>
+            当前调试片段
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ProfilingUtils.Clear">
+            <summary>
+            清除采样片段
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ProfilingUtils.SampleBlock(System.String@)">
+            <summary>
+            获取采样区域
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ProfilingUtils.BeginSample(System.String@)">
+            <summary>
+            开始采样
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ProfilingUtils.EndSample">
+            <summary>
+            结束采样
+            </summary>
         </member>
     </members>
 </doc>

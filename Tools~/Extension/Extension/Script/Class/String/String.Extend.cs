@@ -37,6 +37,55 @@ namespace AIO
     /// </summary>
     public static partial class StringExtend
     {
+        public static void PartsAround(this string str, char c, out string before, out string after)
+        {
+            var index = str.IndexOf(c);
+
+            if (index > 0)
+            {
+                before = str.Substring(0, index);
+                after = str.Substring(index + 1);
+            }
+            else
+            {
+                before = str;
+                after = null;
+            }
+        }
+        public static string PartAfter(this string str, char c)
+        {
+
+            var index = str.IndexOf(c);
+
+            if (index > 0)
+            {
+                return str.Substring(index + 1);
+            }
+            else
+            {
+                return str;
+            }
+        }
+
+        public static string ReplaceMultiple(this string str, HashSet<char> haystacks, char replacement)
+        {
+            var sb = new StringBuilder();
+
+            foreach (var current in str)
+            {
+                if (haystacks.Contains(current))
+                {
+                    sb.Append(replacement);
+                }
+                else
+                {
+                    sb.Append(current);
+                }
+            }
+
+            return sb.ToString();
+        }
+
         /// <summary>
         /// 转化为小写
         /// </summary>

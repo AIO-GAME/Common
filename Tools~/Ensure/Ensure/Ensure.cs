@@ -26,10 +26,10 @@ namespace AIO
         public static void On() => IsActive = true;
 
         /// <summary>
-        /// 可能
+        /// 验证
         /// </summary>
-        /// <param name="paramName"></param>
-        /// <returns></returns>
+        /// <param name="paramName">参数名</param>
+        /// <returns>参数验证</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static EnsureThat That(in string paramName)
         {

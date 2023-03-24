@@ -1,42 +1,41 @@
-﻿namespace AIO
-{
-    using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
+namespace AIO
+{
     /// <summary>
     /// 键迭代器
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TItem"></typeparam>
-    public interface IKeyedCollection<TKey, TItem> : ICollection<TItem>
+    public interface IKeyedCollection<TKey, TItem> :
+        ICollection<TItem>,
+        IEnumerable<TItem>,
+        IEnumerable
     {
         /// <summary>
         /// 获取值
         /// </summary>
-        TItem this[in TKey key] { get; }
+        TItem this[TKey key] { get; }
 
         /// <summary>
         /// 获取值
         /// </summary>
-        TItem this[in int index] { get; }
-
+        TItem this[int index] { get; }
 
         /// <summary>
         /// 尝试获取值
         /// </summary>
-        bool TryGetValue(in TKey key, out TItem value);
+        bool TryGetValue(TKey key, out TItem value);
 
         /// <summary>
         /// 存在
         /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        bool Contains(in TKey key);
+        bool Contains(TKey key);
 
         /// <summary>
         /// 移除
         /// </summary>
-        /// <param name="key">值</param>
-        /// <returns>返回值</returns>
-        bool Remove(in TKey key);
+        bool Remove(TKey key);
     }
 }

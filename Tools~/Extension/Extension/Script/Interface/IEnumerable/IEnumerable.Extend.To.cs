@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
@@ -7,6 +8,14 @@ namespace AIO
 {
     public partial class IEnumerableExtend
     {
+        /// <summary>
+        /// 转化为HashSet
+        /// </summary>
+        public static HashSet<T> ToHashSet<T>(this IEnumerable<T> enumerable)
+        {
+            return new HashSet<T>(enumerable);
+        }
+
         /// <summary>
         /// 将 IEnumerable 中的元素转换为以指定分隔符分隔的字符串
         /// </summary>

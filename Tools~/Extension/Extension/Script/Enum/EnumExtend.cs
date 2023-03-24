@@ -5,6 +5,9 @@
 |*|=============================================*/
 
 
+using System.Collections.Generic;
+using System.Linq;
+
 namespace AIO
 {
     using System;
@@ -19,12 +22,27 @@ namespace AIO
         /// </summary>
         public static T GetAttribute<T>(this Enum value) where T : Attribute
         {
-            if (value == null) { throw new ArgumentException("value"); }
+            if (value == null)
+            {
+                throw new ArgumentException("value");
+            }
+
             var description = value.ToString();
             var fieldInfo = value.GetType().GetField(description);
             var attributes = (T[])fieldInfo.GetCustomAttributes(typeof(T), false);
             if (attributes != null && attributes.Length > 0) return attributes[0];
-            else return null;
+            return null;
+        }
+
+        /// <summary>
+        /// Gets attributes on an enum member, eg. enum E { [Attr] A }
+        /// </summary>
+        public static IEnumerable<T> GetAttributeOfEnumMember<T>(this Enum enumVal) where T : Attribute
+        {
+            var type = enumVal.GetType();
+            var memInfo = type.GetMember(enumVal.ToString());
+            var attributes = memInfo[0].GetCustomAttributes(typeof(T), false);
+            return attributes.Cast<T>();
         }
     }
 }

@@ -26,10 +26,10 @@
         </member>
         <member name="M:AIO.Ensure.That(System.String@)">
             <summary>
-            可能
+            验证
             </summary>
-            <param name="paramName"></param>
-            <returns></returns>
+            <param name="paramName">参数名</param>
+            <returns>参数验证</returns>
         </member>
         <member name="M:AIO.Ensure.OnRuntimeMethodLoad(System.Boolean@)">
             <summary>

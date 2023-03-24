@@ -30,8 +30,6 @@ using System.Runtime.InteropServices;
 //通过使用 "*"，如下所示:
 // [assembly: AssemblyVersion("1.0.*")]
 
-
-
 [assembly: AssemblyVersion(AssemblyInfo.Version)]
 [assembly: AssemblyFileVersion(AssemblyInfo.FileVersion)]
 [assembly: AssemblyCompany(AssemblyInfo.Company)]
@@ -41,7 +39,7 @@ using System.Runtime.InteropServices;
 /// <summary>
 /// 程序集信息
 /// </summary>
-public static class AssemblyInfo
+internal static class AssemblyInfo
 {
     /// <summary>
     /// 密钥信息

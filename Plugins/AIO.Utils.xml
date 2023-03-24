@@ -59,6 +59,236 @@
             支持的区域性
             </summary>
         </member>
+        <member name="T:AIO.ConversionType">
+            <summary>
+            转换类型
+            </summary>
+        </member>
+        <member name="F:AIO.ConversionType.Impossible">
+            <summary>
+            不可能转换
+            </summary>
+        </member>
+        <member name="F:AIO.ConversionType.Identity">
+            <summary>
+            同等转换
+            </summary>
+        </member>
+        <member name="F:AIO.ConversionType.Upcast">
+            <summary>
+            向上转换
+            </summary>
+        </member>
+        <member name="F:AIO.ConversionType.Downcast">
+            <summary>
+            向下转换
+            </summary>
+        </member>
+        <member name="F:AIO.ConversionType.NumericImplicit">
+            <summary>
+            数字隐式
+            </summary>
+        </member>
+        <member name="F:AIO.ConversionType.NumericExplicit">
+            <summary>
+            数字显示
+            </summary>
+        </member>
+        <member name="F:AIO.ConversionType.UserDefinedImplicit">
+            <summary>
+            用户自定义隐式
+            </summary>
+        </member>
+        <member name="F:AIO.ConversionType.UserDefinedExplicit">
+            <summary>
+            用户自定义显式
+            </summary>
+        </member>
+        <member name="F:AIO.ConversionType.UserDefinedThenNumericImplicit">
+            <summary>
+            用户定义的数字隐式
+            </summary>
+        </member>
+        <member name="F:AIO.ConversionType.UserDefinedThenNumericExplicit">
+            <summary>
+            用户定义的数字显式
+            </summary>
+        </member>
+        <member name="F:AIO.ConversionType.EnumerableToArray">
+            <summary>
+            集合转化为数组
+            </summary>
+        </member>
+        <member name="F:AIO.ConversionType.EnumerableToList">
+            <summary>
+            集合转化为列表
+            </summary>
+        </member>
+        <member name="F:AIO.ConversionType.ToString">
+            <summary>
+            字符串
+            </summary>
+        </member>
+        <member name="T:AIO.ConversionUtils">
+            <summary>
+            转换工具类
+            </summary>
+        </member>
+        <member name="M:AIO.ConversionUtils.HasImplicitNumericConversion(System.Type@,System.Type@)">
+            <summary>
+            是否存在 隐式数字转换
+            </summary>
+        </member>
+        <member name="M:AIO.ConversionUtils.HasExplicitNumericConversion(System.Type@,System.Type@)">
+            <summary>
+            是否存在 显式数字转换
+            </summary>
+        </member>
+        <member name="M:AIO.ConversionUtils.HasNumericConversion(System.Type@,System.Type@)">
+            <summary>
+            是否存在 数字转换功能
+            </summary>
+        </member>
+        <member name="M:AIO.ConversionUtils.FindUserDefinedConversionMethods(AIO.ConversionUtils.ConversionQuery@)">
+            <summary>
+            查找用户定义的转换方法
+            </summary>
+        </member>
+        <member name="M:AIO.ConversionUtils.CanConvert(System.Object@,System.Type@,System.Boolean@)">
+            <summary>
+            是否能转换
+            </summary>
+        </member>
+        <member name="M:AIO.ConversionUtils.CanConvert(System.Type@,System.Type@,System.Boolean@)">
+            <summary>
+            是否能转换
+            </summary>
+        </member>
+        <member name="M:AIO.ConversionUtils.Convert(System.Object@,System.Type@)">
+            <summary>
+            转换
+            </summary>
+        </member>
+        <member name="M:AIO.ConversionUtils.Convert``1(System.Object@)">
+            <summary>
+            转换
+            </summary>
+        </member>
+        <member name="M:AIO.ConversionUtils.TryConvert(System.Object@,System.Type@,System.Object@,System.Boolean@)">
+            <summary>
+            尝试转换
+            </summary>
+        </member>
+        <member name="M:AIO.ConversionUtils.TryConvert``1(System.Object@,``0@,System.Boolean@)">
+            <summary>
+            尝试转换
+            </summary>
+        </member>
+        <member name="M:AIO.ConversionUtils.IsConvertibleTo(System.Type,System.Type@,System.Boolean@)">
+            <summary>
+            可转化为
+            </summary>
+        </member>
+        <member name="M:AIO.ConversionUtils.IsConvertibleTo(System.Object,System.Type@,System.Boolean@)">
+            <summary>
+            可转化为
+            </summary>
+        </member>
+        <member name="M:AIO.ConversionUtils.IsConvertibleTo``1(System.Object,System.Boolean@)">
+            <summary>
+            可转化为
+            </summary>
+        </member>
+        <member name="M:AIO.ConversionUtils.ConvertTo(System.Object,System.Type@)">
+            <summary>
+            转化为
+            </summary>
+        </member>
+        <member name="M:AIO.ConversionUtils.ConvertTo``1(System.Object)">
+            <summary>
+            转化为
+            </summary>
+        </member>
+        <member name="M:AIO.ConversionUtils.GetRequiredConversion(System.Type@,System.Type@)">
+            <summary>
+            获得所需的转换
+            </summary>
+        </member>
+        <member name="M:AIO.ConversionUtils.GetRequiredConversion(System.Object@,System.Type@)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:AIO.AmbiguousOperatorException">
+            <summary>
+            模棱两可的运算符
+            </summary>
+        </member>
+        <member name="M:AIO.AmbiguousOperatorException.#ctor(System.String@,System.Type@,System.Type@)">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.InvalidConversionException">
+            <summary>
+            表示当进行无效类型转换时引发的异常。
+            </summary>
+        </member>
+        <member name="M:AIO.InvalidConversionException.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.InvalidConversionException.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.InvalidConversionException.#ctor(System.String,System.Exception)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="T:AIO.InvalidOperatorException">
+            <summary>
+            无效的运算符
+            </summary>
+        </member>
+        <member name="M:AIO.InvalidOperatorException.#ctor(System.String@,System.Type@)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.InvalidOperatorException.#ctor(System.String@,System.Type@,System.Type@)">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.OperatorException">
+            <summary>
+            运算符异常
+            </summary>
+        </member>
+        <member name="M:AIO.OperatorException.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.OperatorException.#ctor(System.String@)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.OperatorException.#ctor(System.String@,System.Exception@)">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.UnexpectedEnumValueException`1">
+            <summary>
+            表示当枚举类型的值不在预期范围内时引发的异常。
+            </summary>
+            <typeparam name="T">枚举类型</typeparam>
+        </member>
+        <member name="M:AIO.UnexpectedEnumValueException`1.#ctor(`0)">
+            <summary>
+            使用指定的枚举值初始化 UnexpectedEnumValueException&lt;T&gt; 类的新实例。
+            </summary>
+            <param name="value">不在预期范围内的枚举值</param>
+        </member>
+        <member name="P:AIO.UnexpectedEnumValueException`1.Value">
+            <summary>
+            获取引发当前异常的枚举值。
+            </summary>
+        </member>
         <member name="T:AIO.IKeyedCollection`2">
             <summary>
             键迭代器
@@ -66,34 +296,30 @@
             <typeparam name="TKey"></typeparam>
             <typeparam name="TItem"></typeparam>
         </member>
-        <member name="P:AIO.IKeyedCollection`2.Item(`0@)">
+        <member name="P:AIO.IKeyedCollection`2.Item(`0)">
             <summary>
             获取值
             </summary>
         </member>
-        <member name="P:AIO.IKeyedCollection`2.Item(System.Int32@)">
+        <member name="P:AIO.IKeyedCollection`2.Item(System.Int32)">
             <summary>
             获取值
             </summary>
         </member>
-        <member name="M:AIO.IKeyedCollection`2.TryGetValue(`0@,`1@)">
+        <member name="M:AIO.IKeyedCollection`2.TryGetValue(`0,`1@)">
             <summary>
             尝试获取值
             </summary>
         </member>
-        <member name="M:AIO.IKeyedCollection`2.Contains(`0@)">
+        <member name="M:AIO.IKeyedCollection`2.Contains(`0)">
             <summary>
             存在
             </summary>
-            <param name="key"></param>
-            <returns></returns>
         </member>
-        <member name="M:AIO.IKeyedCollection`2.Remove(`0@)">
+        <member name="M:AIO.IKeyedCollection`2.Remove(`0)">
             <summary>
             移除
             </summary>
-            <param name="key">值</param>
-            <returns>返回值</returns>
         </member>
         <member name="T:AIO.IMergedCollection`1">
             <summary>
@@ -2204,6 +2430,168 @@
             Http 工具类
             </summary>
         </member>
+        <member name="T:AIO.BinaryOperator">
+            <summary>
+            二目运算符
+            </summary>
+        </member>
+        <member name="F:AIO.BinaryOperator.Addition">
+            <summary>
+            加法运算
+            </summary>
+        </member>
+        <member name="F:AIO.BinaryOperator.Subtraction">
+            <summary>
+            减法运算
+            </summary>
+        </member>
+        <member name="F:AIO.BinaryOperator.Multiplication">
+            <summary>
+            乘法运算
+            </summary>
+        </member>
+        <member name="F:AIO.BinaryOperator.Division">
+            <summary>
+            除法运算
+            </summary>
+        </member>
+        <member name="F:AIO.BinaryOperator.Modulo">
+            <summary>
+            取模运算
+            </summary>
+        </member>
+        <member name="F:AIO.BinaryOperator.And">
+            <summary>
+            逻辑与
+            </summary>
+        </member>
+        <member name="F:AIO.BinaryOperator.Or">
+            <summary>
+            逻辑或
+            </summary>
+        </member>
+        <member name="F:AIO.BinaryOperator.ExclusiveOr">
+            <summary>
+            逻辑异或
+            </summary>
+        </member>
+        <member name="F:AIO.BinaryOperator.Equality">
+            <summary>
+            等于
+            </summary>
+        </member>
+        <member name="F:AIO.BinaryOperator.Inequality">
+            <summary>
+            不相等
+            </summary>
+        </member>
+        <member name="F:AIO.BinaryOperator.GreaterThan">
+            <summary>
+            大于
+            </summary>
+        </member>
+        <member name="F:AIO.BinaryOperator.LessThan">
+            <summary>
+            小余
+            </summary>
+        </member>
+        <member name="F:AIO.BinaryOperator.GreaterThanOrEqual">
+            <summary>
+            大于或等于
+            </summary>
+        </member>
+        <member name="F:AIO.BinaryOperator.LessThanOrEqual">
+            <summary>
+            小于或等于
+            </summary>
+        </member>
+        <member name="F:AIO.BinaryOperator.LeftShift">
+            <summary>
+            向左移
+            </summary>
+        </member>
+        <member name="F:AIO.BinaryOperator.RightShift">
+            <summary>
+            向右移
+            </summary>
+        </member>
+        <member name="T:AIO.UnaryOperator">
+            <summary>
+            一元运算符
+            </summary>
+        </member>
+        <member name="F:AIO.UnaryOperator.LogicalNegation">
+            <summary>
+            逻辑非
+            </summary>
+        </member>
+        <member name="F:AIO.UnaryOperator.NumericNegation">
+            <summary>
+            取反
+            </summary>
+        </member>
+        <member name="F:AIO.UnaryOperator.Increment">
+            <summary>
+            自增 ++
+            </summary>
+        </member>
+        <member name="F:AIO.UnaryOperator.Decrement">
+            <summary>
+            自减 --
+            </summary>
+        </member>
+        <member name="F:AIO.UnaryOperator.Plus">
+            <summary>
+            加
+            </summary>
+        </member>
+        <member name="T:AIO.BinaryOperatorHandler">
+            <summary>
+            二进制运算符 处理程序
+            </summary>
+        </member>
+        <member name="M:AIO.BinaryOperatorHandler.#ctor(System.String@,System.String@,System.String@,System.String@)">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.OperatorHandler">
+            <summary>
+            运算符操作
+            </summary>
+        </member>
+        <member name="M:AIO.OperatorHandler.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            运算符操作
+            </summary>
+            <param name="name">名称</param>
+            <param name="verb">动词</param>
+            <param name="symbol">标志</param>
+            <param name="customMethodName">定制方法名</param>
+        </member>
+        <member name="P:AIO.OperatorHandler.name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:AIO.OperatorHandler.verb">
+            <summary>
+            动词
+            </summary>
+        </member>
+        <member name="P:AIO.OperatorHandler.symbol">
+            <summary>
+            标志
+            </summary>
+        </member>
+        <member name="P:AIO.OperatorHandler.customMethodName">
+            <summary>
+            自定义函数名
+            </summary>
+        </member>
+        <member name="T:AIO.OperatorUtils">
+            <summary>
+            运算符工具类
+            </summary>
+        </member>
         <member name="T:AIO.RandomUtils">
             <summary>
             随机数工具类
@@ -3941,6 +4329,1980 @@
             Converts an object into its XML representation.
             </summary>
             <param name="writer">The <see cref="T:System.Xml.XmlWriter"/> stream to which the object is serialized.</param>
+        </member>
+        <member name="T:AIO.DoNotSerializeAttribute">
+            <summary>
+            无序列化
+            </summary>
+        </member>
+        <member name="M:AIO.DoNotSerializeAttribute.#ctor">
+            <summary>
+            无序列化
+            </summary>
+        </member>
+        <member name="T:AIO.fsForwardAttribute">
+            <summary>
+            This allows you to forward serialization of an object to one of its
+            members. For example,
+            [fsForward("Values")]
+            struct Wrapper {
+            public int[] Values;
+            }
+            Then `Wrapper` will be serialized into a JSON array of integers. It will
+            be as if `Wrapper` doesn't exist.
+            </summary>
+        </member>
+        <member name="M:AIO.fsForwardAttribute.#ctor(System.String)">
+            <summary>
+            Forward object serialization to an instance member. See class
+            comment.
+            </summary>
+            <param name="memberName">
+            The name of the member that we should serialize this object as.
+            </param>
+        </member>
+        <member name="F:AIO.fsForwardAttribute.MemberName">
+            <summary>
+            The name of the member we should serialize as.
+            </summary>
+        </member>
+        <member name="T:AIO.fsIgnoreAttribute">
+            <summary>
+            用[JsonIgnore]注释的给定属性或字段将不会被序列化。
+            </summary>
+        </member>
+        <member name="T:AIO.fsObjectAttribute">
+            <summary>
+            此属性控制类型的某些序列化行为
+            </summary>
+        </member>
+        <member name="M:AIO.fsObjectAttribute.#ctor">
+            <summary>
+            此属性控制类型的某些序列化行为
+            </summary>
+        </member>
+        <member name="M:AIO.fsObjectAttribute.#ctor(System.String@,System.Type[])">
+            <summary>
+            此属性控制类型的某些序列化行为
+            </summary>
+        </member>
+        <member name="F:AIO.fsObjectAttribute.PreviousModels">
+            <summary>
+            The previous model that should be used if an old version of this
+            object is encountered. Using this attribute also requires that the
+            type have a public constructor that takes only one parameter, an
+            object instance of the given type. Use of this parameter *requires*
+            that the VersionString parameter is also set.
+            </summary>
+        </member>
+        <member name="F:AIO.fsObjectAttribute.VersionString">
+            <summary>
+            The version string to use for this model. This should be unique among
+            all prior versions of this model that is supported for importation.
+            If PreviousModel is set, then this attribute must also be set. A good
+            valid example for this is "v1", "v2", "v3", ...
+            </summary>
+        </member>
+        <member name="F:AIO.fsObjectAttribute.MemberSerialization">
+            <summary>
+            This controls the behavior for member serialization. The default
+            behavior is fsMemberSerialization.Default.
+            </summary>
+        </member>
+        <member name="F:AIO.fsObjectAttribute.Converter">
+            <summary>
+            Specify a custom converter to use for serialization. The converter
+            type needs to derive from fsBaseConverter. This defaults to null.
+            </summary>
+        </member>
+        <member name="F:AIO.fsObjectAttribute.Processor">
+            <summary>
+            Specify a custom processor to use during serialization. The processor
+            type needs to derive from fsObjectProcessor and the call to
+            CanProcess is not invoked. This defaults to null.
+            </summary>
+        </member>
+        <member name="T:AIO.fsPropertyAttribute">
+            <summary>
+            显式地标记要序列化的属性。这也可用于指定属性在序列化期间应该使用的名称。
+            </summary>
+        </member>
+        <member name="M:AIO.fsPropertyAttribute.#ctor">
+            <summary>
+            属性
+            </summary>
+        </member>
+        <member name="M:AIO.fsPropertyAttribute.#ctor(System.String@)">
+            <summary>
+            属性
+            </summary>
+            <param name="name">名称</param>
+        </member>
+        <member name="F:AIO.fsPropertyAttribute.Name">
+            <summary>
+            属性将在JSON序列化中使用的名称。
+            </summary>
+        </member>
+        <member name="F:AIO.fsPropertyAttribute.Converter">
+            <summary>
+            为给定类型使用自定义转换器。指定要使用的转换器使用typeof。
+            </summary>
+        </member>
+        <member name="T:AIO.SerializeAsAttribute">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AIO.SerializeAsAttribute.#ctor(System.String@)">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="T:AIO.SerializeAttribute">
+            <summary>
+            序列化属性
+            </summary>
+        </member>
+        <member name="M:AIO.SerializeAttribute.#ctor">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="T:AIO.fsDataType">
+            <summary>
+            JsonData 实例可以存储的实际类型。
+            </summary>
+        </member>
+        <member name="F:AIO.fsDataType.Array">
+            <summary>
+            数组
+            </summary>
+        </member>
+        <member name="F:AIO.fsDataType.Object">
+            <summary>
+            对象
+            </summary>
+        </member>
+        <member name="F:AIO.fsDataType.Double">
+            <summary>
+            浮点数
+            </summary>
+        </member>
+        <member name="F:AIO.fsDataType.Int64">
+            <summary>
+            整数
+            </summary>
+        </member>
+        <member name="F:AIO.fsDataType.Boolean">
+            <summary>
+            布尔值
+            </summary>
+        </member>
+        <member name="F:AIO.fsDataType.String">
+            <summary>
+            字符串
+            </summary>
+        </member>
+        <member name="F:AIO.fsDataType.Null">
+            <summary>
+            空值
+            </summary>
+        </member>
+        <member name="T:AIO.fsMemberSerialization">
+            <summary>
+            Controls how the reflected converter handles member serialization.
+            </summary>
+        </member>
+        <member name="F:AIO.fsMemberSerialization.OptIn">
+            <summary>
+            Only members with [SerializeField] or [fsProperty] attributes are
+            serialized.
+            </summary>
+        </member>
+        <member name="F:AIO.fsMemberSerialization.OptOut">
+            <summary>
+            Only members with [NotSerialized] or [fsIgnore] will not be
+            serialized.
+            </summary>
+        </member>
+        <member name="F:AIO.fsMemberSerialization.Default">
+            <summary>
+            The default member serialization behavior is applied.
+            </summary>
+        </member>
+        <member name="T:AIO.fsDuplicateVersionNameException">
+            <summary>
+            出现多个相同类型
+            </summary>
+        </member>
+        <member name="M:AIO.fsDuplicateVersionNameException.#ctor(System.Type,System.Type,System.String)">
+            <summary>
+            出现多个相同类型
+            </summary>
+        </member>
+        <member name="T:AIO.fsMissingVersionConstructorException">
+            <summary>
+            缺少一个数据的构造类型
+            </summary>
+        </member>
+        <member name="M:AIO.fsMissingVersionConstructorException.#ctor(System.Type@,System.Type@)">
+            <summary>
+            缺少一个数据的构造类型
+            </summary>
+        </member>
+        <member name="M:AIO.fsTypeExtensions.CSharpName(System.Type,System.Boolean)">
+            <summary>
+            Returns a pretty name for the type in the style of one that you'd see
+            in C#.
+            </summary>
+            <parparam name="includeNamespace">
+            Should the name include namespaces?
+            </parparam>
+        </member>
+        <member name="T:AIO.fsISerializationCallbacks">
+            <summary>
+            Extend this interface on your type to receive notifications about
+            serialization/deserialization events. If you don't have access to the
+            type itself, then you can write an fsObjectProcessor instead.
+            </summary>
+        </member>
+        <member name="M:AIO.fsISerializationCallbacks.OnBeforeSerialize(System.Type)">
+            <summary>
+            Called before serialization.
+            </summary>
+        </member>
+        <member name="M:AIO.fsISerializationCallbacks.OnAfterSerialize(System.Type,AIO.fsData@)">
+            <summary>
+            Called after serialization.
+            </summary>
+            <param name="storageType">
+            The field/property type that is storing the instance.
+            </param>
+            <param name="data">The data that was serialized.</param>
+        </member>
+        <member name="M:AIO.fsISerializationCallbacks.OnBeforeDeserialize(System.Type,AIO.fsData@)">
+            <summary>
+            Called before deserialization.
+            </summary>
+            <param name="storageType">
+            The field/property type that is storing the instance.
+            </param>
+            <param name="data">
+            The data that will be used for deserialization.
+            </param>
+        </member>
+        <member name="M:AIO.fsISerializationCallbacks.OnAfterDeserialize(System.Type)">
+            <summary>
+            Called after deserialization.
+            </summary>
+            <param name="storageType">
+            The field/property type that is storing the instance.
+            </param>
+            <param name="instance">The type of the instance.</param>
+        </member>
+        <member name="T:AIO.IOptimizedAccessor">
+            <summary>
+            优化访问器
+            </summary>
+        </member>
+        <member name="M:AIO.IOptimizedAccessor.Compile">
+            <summary>
+            编译器
+            </summary>
+        </member>
+        <member name="M:AIO.IOptimizedAccessor.GetValue(System.Object@)">
+            <summary>
+            获取值
+            </summary>
+            <param name="target">参数</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:AIO.IOptimizedAccessor.SetValue(System.Object@,System.Object@)">
+            <summary>
+            设置值
+            </summary>
+            <param name="target">目标值</param>
+            <param name="value">设置值</param>
+        </member>
+        <member name="T:AIO.IOptimizedInvoker">
+            <summary>
+            优化调用
+            </summary>
+        </member>
+        <member name="M:AIO.IOptimizedInvoker.Compile">
+            <summary>
+            编译
+            </summary>
+        </member>
+        <member name="M:AIO.IOptimizedInvoker.Invoke(System.Object@)">
+            <summary>
+            调用
+            </summary>
+        </member>
+        <member name="M:AIO.IOptimizedInvoker.Invoke(System.Object@,System.Object@)">
+            <summary>
+            调用
+            </summary>
+        </member>
+        <member name="M:AIO.IOptimizedInvoker.Invoke(System.Object@,System.Object@,System.Object@)">
+            <summary>
+            调用
+            </summary>
+        </member>
+        <member name="M:AIO.IOptimizedInvoker.Invoke(System.Object@,System.Object@,System.Object@,System.Object@)">
+            <summary>
+            调用
+            </summary>
+        </member>
+        <member name="M:AIO.IOptimizedInvoker.Invoke(System.Object@,System.Object@,System.Object@,System.Object@,System.Object@)">
+            <summary>
+            调用
+            </summary>
+        </member>
+        <member name="M:AIO.IOptimizedInvoker.Invoke(System.Object@,System.Object@,System.Object@,System.Object@,System.Object@,System.Object@)">
+            <summary>
+            调用
+            </summary>
+        </member>
+        <member name="M:AIO.IOptimizedInvoker.Invoke(System.Object@,System.Object[])">
+            <summary>
+            调用
+            </summary>
+        </member>
+        <member name="T:AIO.fsAotCompilationManager">
+            <summary>
+            The AOT compilation manager
+            </summary>
+        </member>
+        <member name="P:AIO.fsAotCompilationManager.AvailableAotCompilations">
+            <summary>
+            Ahead of time compilations that are available. The type maps to the
+            object type the generated converter will serialize/deserialize, and
+            the string is the text content for a converter that will do the
+            serialization.
+            <para />
+            The generated serializer is completely independent and you don't need
+            to do anything. Simply add the file to your project and it'll get
+            used instead of the reflection based one.
+            </summary>
+        </member>
+        <member name="M:AIO.fsAotCompilationManager.TryToPerformAotCompilation(AIO.fsConfig,System.Type,System.String@)">
+            <summary>
+            This is a helper method that makes it simple to run an AOT
+            compilation on the given type.
+            </summary>
+            <param name="config">
+            The configuration to use when running AOT compilation.
+            </param>
+            <param name="type">
+            The type to perform the AOT compilation on.
+            </param>
+            <param name="aotCompiledClassInCSharp">
+            The AOT class. Add this C# code to your project.
+            </param>
+            <returns>True if AOT compilation was successful.</returns>
+        </member>
+        <member name="M:AIO.fsAotCompilationManager.AddAotCompilation(System.Type,AIO.fsMetaProperty[],System.Boolean)">
+            <summary>
+            Adds a new AOT compilation unit.
+            </summary>
+            <param name="type">The type of object we are AOT compiling.</param>
+            <param name="members">
+            The members on the object which will be serialized/deserialized.
+            </param>
+        </member>
+        <member name="M:AIO.fsAotCompilationManager.GenerateDirectConverterForTypeInCSharp(System.Type,AIO.fsMetaProperty[],System.Boolean)">
+            <summary>
+            AOT compiles the object (in C#).
+            </summary>
+        </member>
+        <member name="T:AIO.fsBaseConverter">
+            <summary>
+            The serialization converter allows for customization of the serialization
+            process.
+            </summary>
+            <remarks>
+            You do not want to derive from this class - there is no way to actually
+            use it within the serializer.. Instead, derive from either fsConverter or
+            fsDirectConverter
+            </remarks>
+        </member>
+        <member name="F:AIO.fsBaseConverter.Serializer">
+            <summary>
+            The serializer that was owns this converter.
+            </summary>
+        </member>
+        <member name="M:AIO.fsBaseConverter.CreateInstance(AIO.fsData@,System.Type@)">
+            <summary>
+            Construct an object instance that will be passed to TryDeserialize.
+            This should **not** deserialize the object.
+            </summary>
+            <param name="data">The data the object was serialized with.</param>
+            <param name="storageType">
+            The field/property type that is storing the instance.
+            </param>
+            <returns>An object instance</returns>
+        </member>
+        <member name="M:AIO.fsBaseConverter.RequestCycleSupport(System.Type@)">
+            <summary>
+            If true, then the serializer will support cyclic references with the
+            given converted type.
+            </summary>
+            <param name="storageType">
+            The field/property type that is currently storing the object that is
+            being serialized.
+            </param>
+        </member>
+        <member name="M:AIO.fsBaseConverter.RequestInheritanceSupport(System.Type@)">
+            <summary>
+            If true, then the serializer will include inheritance data for the
+            given converter.
+            </summary>
+            <param name="storageType">
+            The field/property type that is currently storing the object that is
+            being serialized.
+            </param>
+        </member>
+        <member name="M:AIO.fsBaseConverter.TrySerialize(System.Object@,AIO.fsData@,System.Type@)">
+            <summary>
+            Serialize the actual object into the given data storage.
+            </summary>
+            <param name="instance">
+            The object instance to serialize. This will never be null.
+            </param>
+            <param name="serialized">The serialized state.</param>
+            <param name="storageType">
+            The field/property type that is storing this instance.
+            </param>
+            <returns>If serialization was successful.</returns>
+        </member>
+        <member name="M:AIO.fsBaseConverter.TryDeserialize(AIO.fsData@,System.Object@,System.Type@)">
+            <summary>
+            Deserialize data into the object instance.
+            </summary>
+            <param name="data">Serialization data to deserialize from.</param>
+            <param name="instance">
+            The object instance to deserialize into.
+            </param>
+            <param name="storageType">
+            The field/property type that is storing the instance.
+            </param>
+            <returns>
+            True if serialization was successful, false otherwise.
+            </returns>
+        </member>
+        <member name="M:AIO.fsBaseConverter.FailExpectedType(AIO.fsData@,AIO.fsDataType[])">
+            <summary>
+            检查预期类型
+            </summary>
+        </member>
+        <member name="M:AIO.fsBaseConverter.CheckType(AIO.fsData@,AIO.fsDataType@)">
+            <summary>
+            检查类型
+            </summary>
+        </member>
+        <member name="M:AIO.fsBaseConverter.CheckKey(AIO.fsData@,System.String@,AIO.fsData@)">
+            <summary>
+            检查Key值
+            </summary>
+        </member>
+        <member name="M:AIO.fsBaseConverter.CheckKey(System.Collections.Generic.IDictionary{System.String,AIO.fsData}@,System.String@,AIO.fsData@)">
+            <summary>
+            检查Key值
+            </summary>
+        </member>
+        <member name="M:AIO.fsBaseConverter.SerializeMember``1(System.Collections.Generic.IDictionary{System.String,AIO.fsData}@,System.Type@,System.String@,``0@)">
+            <summary>
+            序列化成员
+            </summary>
+        </member>
+        <member name="M:AIO.fsBaseConverter.DeserializeMember``1(System.Collections.Generic.IDictionary{System.String,AIO.fsData}@,System.Type@,System.String@,``0@)">
+            <summary>
+            反序列化成员
+            </summary>
+        </member>
+        <member name="T:AIO.fsConfig">
+            <summary>
+            Enables some top-level customization of Full Serializer.
+            </summary>
+        </member>
+        <member name="F:AIO.fsConfig.SerializeAttributes">
+            <summary>
+            The attributes that will force a field or property to be serialized.
+            </summary>
+        </member>
+        <member name="F:AIO.fsConfig.IgnoreSerializeAttributes">
+            <summary>
+            The attributes that will force a field or property to *not* be
+            serialized.
+            </summary>
+        </member>
+        <member name="F:AIO.fsConfig.DefaultMemberSerialization">
+            <summary>
+            The default member serialization.
+            </summary>
+        </member>
+        <member name="F:AIO.fsConfig.GetJsonNameFromMemberName">
+            <summary>
+            Convert a C# field/property name into the key used for the JSON
+            object. For example, you could force all JSON names to lowercase
+            with:
+            fsConfig.GetJsonNameFromMemberName = (name, info) =&gt;
+            name.ToLower();
+            This will only be used when the name is not explicitly specified with
+            fsProperty.
+            </summary>
+        </member>
+        <member name="F:AIO.fsConfig.EnablePropertySerialization">
+            <summary>
+            If false, then *all* property serialization support will be disabled
+            - even properties explicitly annotated with fsProperty or any other
+            opt-in annotation.
+            Setting this to false means that SerializeNonAutoProperties and
+            SerializeNonPublicSetProperties will be completely ignored.
+            </summary>
+        </member>
+        <member name="F:AIO.fsConfig.SerializeNonAutoProperties">
+            <summary>
+            Should the default serialization behaviour include non-auto
+            properties?
+            </summary>
+        </member>
+        <member name="F:AIO.fsConfig.SerializeNonPublicSetProperties">
+            <summary>
+            Should the default serialization behaviour include properties with
+            non-public setters?
+            </summary>
+        </member>
+        <member name="F:AIO.fsConfig.CustomDateTimeFormatString">
+            <summary>
+            If not null, this string format will be used for DateTime instead of
+            the default one.
+            </summary>
+        </member>
+        <member name="F:AIO.fsConfig.Serialize64BitIntegerAsString">
+            <summary>
+            Int64 and UInt64 will be serialized and deserialized as string for
+            compatibility
+            </summary>
+        </member>
+        <member name="F:AIO.fsConfig.SerializeEnumsAsInteger">
+            <summary>
+            Enums are serialized using their names by default. Setting this to
+            true will serialize them as integers instead.
+            </summary>
+        </member>
+        <member name="T:AIO.fsContext">
+            <summary>
+            fsContext stores global metadata that can be used to customize how
+            fsConverters operate during serialization.
+            </summary>
+        </member>
+        <member name="F:AIO.fsContext._contextObjects">
+            <summary>
+            All of the context objects.
+            </summary>
+        </member>
+        <member name="M:AIO.fsContext.Reset">
+            <summary>
+            Removes all context objects from the context.
+            </summary>
+        </member>
+        <member name="M:AIO.fsContext.Set``1(``0@)">
+            <summary>
+            Sets the context object for the given type with the given value.
+            </summary>
+        </member>
+        <member name="M:AIO.fsContext.Has``1">
+            <summary>
+            Returns true if there is a context object for the given type.
+            </summary>
+        </member>
+        <member name="M:AIO.fsContext.Get``1">
+            <summary>
+            Fetches the context object for the given type.
+            </summary>
+        </member>
+        <member name="T:AIO.fsConverter">
+            <summary>
+            The serialization converter allows for customization of the serialization
+            process.
+            </summary>
+        </member>
+        <member name="M:AIO.fsConverter.CanProcess(System.Type@)">
+            <summary>
+            Can this converter serialize and deserialize the given object type?
+            </summary>
+            <param name="type">The given object type.</param>
+            <returns>
+            True if the converter can serialize it, false otherwise.
+            </returns>
+        </member>
+        <member name="T:AIO.fsConverterRegistrar">
+            <summary>
+            This class allows arbitrary code to easily register global converters. To
+            add a converter, simply declare a new field called "Register_*" that
+            stores the type of converter you would like to add. Alternatively, you
+            can do the same with a method called "Register_*"; just add the converter
+            type to the `Converters` list.
+            </summary>
+        </member>
+        <member name="F:AIO.fsConverterRegistrar.Converters">
+            <summary>
+            转化类型列表
+            </summary>
+        </member>
+        <member name="T:AIO.fsCyclicReferenceManager">
+            <summary>
+            轮询引用管理
+            </summary>
+        </member>
+        <member name="M:AIO.fsCyclicReferenceManager.Enter">
+            <summary>
+            进入
+            </summary>
+        </member>
+        <member name="M:AIO.fsCyclicReferenceManager.Exit">
+            <summary>
+            退出
+            </summary>
+        </member>
+        <member name="M:AIO.fsCyclicReferenceManager.GetReferenceObject(System.Int32@)">
+            <summary>
+            获取引用对象
+            </summary>
+        </member>
+        <member name="M:AIO.fsCyclicReferenceManager.AddReferenceWithId(System.Int32@,System.Object@)">
+            <summary>
+            添加引用对象ID
+            </summary>
+        </member>
+        <member name="M:AIO.fsCyclicReferenceManager.GetReferenceId(System.Object@)">
+            <summary>
+            获取引用对象ID
+            </summary>
+        </member>
+        <member name="M:AIO.fsCyclicReferenceManager.IsReference(System.Object@)">
+            <summary>
+            是否为引用
+            </summary>
+        </member>
+        <member name="M:AIO.fsCyclicReferenceManager.MarkSerialized(System.Object@)">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="T:AIO.fsData">
+            <summary>
+            A union type that stores a serialized value. The stored type can be one
+            of six different
+            types: null, boolean, double, Int64, string, Dictionary, or List.
+            </summary>
+        </member>
+        <member name="F:AIO.fsData._value">
+            <summary>
+            The raw value that this serialized data stores. It can be one of six
+            different types; a boolean, a double, Int64, a string, a Dictionary,
+            or a List.
+            </summary>
+        </member>
+        <member name="M:AIO.fsData.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.fsData.#ctor">
+            <summary>
+            Creates a fsData instance that holds null.
+            </summary>
+        </member>
+        <member name="M:AIO.fsData.#ctor(System.Boolean)">
+            <summary>
+            Creates a fsData instance that holds a boolean.
+            </summary>
+        </member>
+        <member name="M:AIO.fsData.#ctor(System.Double)">
+            <summary>
+            Creates a fsData instance that holds a double.
+            </summary>
+        </member>
+        <member name="M:AIO.fsData.#ctor(System.Int64)">
+            <summary>
+            Creates a new fsData instance that holds an integer.
+            </summary>
+        </member>
+        <member name="M:AIO.fsData.#ctor(System.String)">
+            <summary>
+            Creates a fsData instance that holds a string.
+            </summary>
+        </member>
+        <member name="M:AIO.fsData.#ctor(System.Collections.Generic.Dictionary{System.String,AIO.fsData})">
+            <summary>
+            Creates a fsData instance that holds a dictionary of values.
+            </summary>
+        </member>
+        <member name="M:AIO.fsData.#ctor(System.Collections.Generic.List{AIO.fsData})">
+            <summary>
+            Creates a fsData instance that holds a list of values.
+            </summary>
+        </member>
+        <member name="M:AIO.fsData.CreateDictionary">
+            <summary>
+            Helper method to create a fsData instance that holds a dictionary.
+            </summary>
+        </member>
+        <member name="M:AIO.fsData.CreateList">
+            <summary>
+            Helper method to create a fsData instance that holds a list.
+            </summary>
+        </member>
+        <member name="M:AIO.fsData.CreateList(System.Int32)">
+            <summary>
+            Helper method to create a fsData instance that holds a list with the
+            initial capacity.
+            </summary>
+        </member>
+        <member name="F:AIO.fsData.True">
+            <summary>
+            Ture
+            </summary>
+        </member>
+        <member name="F:AIO.fsData.False">
+            <summary>
+            False
+            </summary>
+        </member>
+        <member name="F:AIO.fsData.Null">
+            <summary>
+            Null
+            </summary>
+        </member>
+        <member name="M:AIO.fsData.BecomeDictionary">
+            <summary>
+            Transforms the internal fsData instance into a dictionary.
+            </summary>
+        </member>
+        <member name="M:AIO.fsData.Clone">
+            <summary>
+            Returns a shallow clone of this data instance.
+            </summary>
+        </member>
+        <member name="P:AIO.fsData.Type">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:AIO.fsData.IsNull">
+            <summary>
+            Returns true if this fsData instance maps back to null.
+            </summary>
+        </member>
+        <member name="P:AIO.fsData.IsDouble">
+            <summary>
+            Returns true if this fsData instance maps back to a double.
+            </summary>
+        </member>
+        <member name="P:AIO.fsData.IsInt64">
+            <summary>
+            Returns true if this fsData instance maps back to an Int64.
+            </summary>
+        </member>
+        <member name="P:AIO.fsData.IsBool">
+            <summary>
+            Returns true if this fsData instance maps back to a boolean.
+            </summary>
+        </member>
+        <member name="P:AIO.fsData.IsString">
+            <summary>
+            Returns true if this fsData instance maps back to a string.
+            </summary>
+        </member>
+        <member name="P:AIO.fsData.IsDictionary">
+            <summary>
+            Returns true if this fsData instance maps back to a Dictionary.
+            </summary>
+        </member>
+        <member name="P:AIO.fsData.IsList">
+            <summary>
+            Returns true if this fsData instance maps back to a List.
+            </summary>
+        </member>
+        <member name="P:AIO.fsData.AsDouble">
+            <summary>
+            Casts this fsData to a double. Throws an exception if it is not a
+            double.
+            </summary>
+        </member>
+        <member name="P:AIO.fsData.AsInt64">
+            <summary>
+            Casts this fsData to an Int64. Throws an exception if it is not an
+            Int64.
+            </summary>
+        </member>
+        <member name="P:AIO.fsData.AsBool">
+            <summary>
+            Casts this fsData to a boolean. Throws an exception if it is not a
+            boolean.
+            </summary>
+        </member>
+        <member name="P:AIO.fsData.AsString">
+            <summary>
+            Casts this fsData to a string. Throws an exception if it is not a
+            string.
+            </summary>
+        </member>
+        <member name="P:AIO.fsData.AsDictionary">
+            <summary>
+            Casts this fsData to a Dictionary. Throws an exception if it is not a
+            Dictionary.
+            </summary>
+        </member>
+        <member name="P:AIO.fsData.AsList">
+            <summary>
+            Casts this fsData to a List. Throws an exception if it is not a List.
+            </summary>
+        </member>
+        <member name="M:AIO.fsData.Cast``1">
+            <summary>
+            Internal helper method to cast the underlying storage to the given
+            type or throw a pretty printed exception on failure.
+            </summary>
+        </member>
+        <member name="M:AIO.fsData.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to the current
+            object.
+            </summary>
+        </member>
+        <member name="M:AIO.fsData.Equals(AIO.fsData)">
+            <summary>
+            Determines whether the specified object is equal to the current
+            object.
+            </summary>
+        </member>
+        <member name="M:AIO.fsData.op_Equality(AIO.fsData,AIO.fsData)">
+            <summary>
+            Returns true iff a == b.
+            </summary>
+        </member>
+        <member name="M:AIO.fsData.op_Inequality(AIO.fsData,AIO.fsData)">
+            <summary>
+            Returns true iff a != b.
+            </summary>
+        </member>
+        <member name="M:AIO.fsData.GetHashCode">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms
+            and data structures like a hash table.
+            </returns>
+        </member>
+        <member name="T:AIO.fsDateConverter">
+            <summary>
+            Supports serialization for DateTime, DateTimeOffset, and TimeSpan.
+            </summary>
+        </member>
+        <member name="T:AIO.fsDirectConverter">
+            <summary>
+            The direct converter is similar to a regular converter, except that it
+            targets specifically only one type. This means that it can be used
+            without performance impact when discovering converters. It is strongly
+            recommended that you derive from fsDirectConverter{TModel}.
+            </summary>
+            <remarks>
+            Due to the way that direct converters operate, inheritance is *not*
+            supported. Direct converters will only be used with the exact ModelType
+            object.
+            </remarks>
+        </member>
+        <member name="P:AIO.fsDirectConverter.ModelType">
+            <summary>
+            模块类型
+            </summary>
+        </member>
+        <member name="T:AIO.fsDirectConverter`1">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.fsDirectConverter`1.ModelType">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.fsDirectConverter`1.TrySerialize(System.Object@,AIO.fsData@,System.Type@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.fsDirectConverter`1.TryDeserialize(AIO.fsData@,System.Object@,System.Type@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:AIO.fsEnumConverter">
+            <summary>
+            Serializes and deserializes enums by their current name.
+            </summary>
+        </member>
+        <member name="M:AIO.fsEnumConverter.ArrayContains``1(System.Collections.Generic.IReadOnlyList{``0},``0)">
+            <summary>
+            Returns true if the given value is contained within the specified
+            array.
+            </summary>
+        </member>
+        <member name="T:AIO.fsGlobalConfig">
+            <summary>
+            Global configuration options.
+            </summary>
+        </member>
+        <member name="F:AIO.fsGlobalConfig.IsCaseSensitive">
+            <summary>
+            Should deserialization be case sensitive? If this is false and the
+            JSON has multiple members with the same keys only separated by case,
+            then this results in undefined behavior.
+            </summary>
+        </member>
+        <member name="F:AIO.fsGlobalConfig.AllowInternalExceptions">
+            <summary>
+            If exceptions are allowed internally, then additional date formats
+            can be deserialized. Note that the Full Serializer public API will
+            *not* throw exceptions with this enabled; errors will still be
+            returned in a fsResult instance.
+            </summary>
+        </member>
+        <member name="F:AIO.fsGlobalConfig.InternalFieldPrefix">
+            <summary>
+            This string will be used to prefix fields used internally by
+            FullSerializer.
+            </summary>
+        </member>
+        <member name="T:AIO.fsGuidConverter">
+            <summary>
+            Serializes and deserializes guids.
+            </summary>
+        </member>
+        <member name="M:AIO.fsGuidConverter.CanProcess(System.Type@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.fsGuidConverter.RequestCycleSupport(System.Type@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.fsGuidConverter.RequestInheritanceSupport(System.Type@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.fsGuidConverter.TrySerialize(System.Object@,AIO.fsData@,System.Type@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.fsGuidConverter.TryDeserialize(AIO.fsData@,System.Object@,System.Type@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.fsGuidConverter.CreateInstance(AIO.fsData@,System.Type@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:AIO.fsIEnumerableConverter">
+            <summary>
+            Provides serialization support for anything which extends from
+            `IEnumerable` and has an `Add` method.
+            </summary>
+        </member>
+        <member name="M:AIO.fsIEnumerableConverter.GetElementType(System.Type)">
+            <summary>
+            Fetches the element type for objects inside of the collection.
+            </summary>
+        </member>
+        <member name="T:AIO.fsJsonParser">
+            <summary>
+            A simple recursive descent parser for JSON.
+            </summary>
+        </member>
+        <member name="M:AIO.fsJsonParser.SkipSpace">
+            <summary>
+            Skips input such that Character() will return a non-whitespace
+            character
+            </summary>
+        </member>
+        <member name="M:AIO.fsJsonParser.TryParseNumber(AIO.fsData@)">
+            <summary>
+            Parses numbers that follow the regular expression [-+](\d+|\d*\.\d*)
+            </summary>
+        </member>
+        <member name="M:AIO.fsJsonParser.TryParseString(System.String@)">
+            <summary>
+            Parses a string
+            </summary>
+        </member>
+        <member name="M:AIO.fsJsonParser.TryParseArray(AIO.fsData@)">
+            <summary>
+            Parses an array
+            </summary>
+        </member>
+        <member name="M:AIO.fsJsonParser.Parse(System.String@,AIO.fsData@)">
+            <summary>
+            Parses the specified input. Returns a failure state if parsing
+            failed.
+            </summary>
+            <param name="input">The input to parse.</param>
+            <param name="data">
+            The parsed data. This is undefined if parsing fails.
+            </param>
+            <returns>The parsed input.</returns>
+        </member>
+        <member name="M:AIO.fsJsonParser.Parse(System.String@)">
+            <summary>
+            Helper method for Parse that does not allow the error information to
+            be recovered.
+            </summary>
+        </member>
+        <member name="T:AIO.fsJsonPrinter">
+            <summary>
+            Json 输出
+            </summary>
+        </member>
+        <member name="M:AIO.fsJsonPrinter.InsertSpacing(System.IO.TextWriter,System.Int32)">
+            <summary>
+            Inserts the given number of indents into the builder.
+            </summary>
+        </member>
+        <member name="M:AIO.fsJsonPrinter.EscapeString(System.String)">
+            <summary>
+            Escapes a string.
+            </summary>
+        </member>
+        <member name="M:AIO.fsJsonPrinter.BuildPrettyString(AIO.fsData,System.IO.TextWriter,System.Int32)">
+            <summary>
+            Formats this data into the given builder.
+            </summary>
+        </member>
+        <member name="M:AIO.fsJsonPrinter.PrettyJson(AIO.fsData,System.IO.TextWriter)">
+            <summary>
+            Writes the pretty JSON output data to the given stream.
+            </summary>
+            <param name="data">The data to print.</param>
+            <param name="outputStream">Where to write the printed data.</param>
+        </member>
+        <member name="M:AIO.fsJsonPrinter.PrettyJson(AIO.fsData)">
+            <summary>
+            Returns the data in a pretty printed JSON format.
+            </summary>
+        </member>
+        <member name="M:AIO.fsJsonPrinter.CompressedJson(AIO.fsData,System.IO.StreamWriter)">
+            <summary>
+            Writes the compressed JSON output data to the given stream.
+            </summary>
+            <param name="data">The data to print.</param>
+            <param name="outputStream">Where to write the printed data.</param>
+        </member>
+        <member name="M:AIO.fsJsonPrinter.CompressedJson(AIO.fsData)">
+            <summary>
+            Returns the data in a relatively compressed JSON format.
+            </summary>
+        </member>
+        <member name="M:AIO.fsJsonPrinter.ConvertDoubleToString(System.Double)">
+            <summary>
+            Utility method that converts a double to a string.
+            </summary>
+        </member>
+        <member name="T:AIO.fsMetaProperty">
+            <summary>
+            A property or field on a MetaType. This unifies the FieldInfo and
+            PropertyInfo classes.
+            </summary>
+        </member>
+        <member name="F:AIO.fsMetaProperty._memberInfo">
+            <summary>
+            Internal handle to the reflected member.
+            </summary>
+        </member>
+        <member name="P:AIO.fsMetaProperty.StorageType">
+            <summary>
+            The type of value that is stored inside of the property. For example,
+            for an int field, StorageType will be typeof(int).
+            </summary>
+        </member>
+        <member name="P:AIO.fsMetaProperty.OverrideConverterType">
+            <summary>
+            A custom fsBaseConverter instance to use for this field/property, if
+            requested. This will be null if the default converter selection
+            algorithm should be used. This is specified using the [fsObject]
+            annotation with the Converter field.
+            </summary>
+        </member>
+        <member name="P:AIO.fsMetaProperty.CanRead">
+            <summary>
+            Can this property be read?
+            </summary>
+        </member>
+        <member name="P:AIO.fsMetaProperty.CanWrite">
+            <summary>
+            Can this property be written to?
+            </summary>
+        </member>
+        <member name="P:AIO.fsMetaProperty.JsonName">
+            <summary>
+            The serialized name of the property, as it should appear in JSON.
+            </summary>
+        </member>
+        <member name="P:AIO.fsMetaProperty.MemberName">
+            <summary>
+            The name of the actual member.
+            </summary>
+        </member>
+        <member name="P:AIO.fsMetaProperty.IsPublic">
+            <summary>
+            Is this member public?
+            </summary>
+        </member>
+        <member name="P:AIO.fsMetaProperty.IsReadOnly">
+            <summary>
+            Is this type readonly? We can modify readonly properties using
+            reflection, but not using generated C#.
+            </summary>
+        </member>
+        <member name="M:AIO.fsMetaProperty.Write(System.Object@,System.Object@)">
+            <summary>
+            Writes a value to the property that this MetaProperty represents,
+            using given object instance as the context.
+            </summary>
+        </member>
+        <member name="M:AIO.fsMetaProperty.Read(System.Object@)">
+            <summary>
+            Reads a value from the property that this MetaProperty represents,
+            using the given object instance as the context.
+            </summary>
+        </member>
+        <member name="T:AIO.fsMetaType">
+            <summary>
+            MetaType contains metadata about a type. This is used by the reflection
+            serializer.
+            </summary>
+        </member>
+        <member name="P:AIO.fsMetaType.HasDefaultConstructor">
+            <summary>
+            Returns true if the type represented by this metadata contains a
+            default constructor.
+            </summary>
+        </member>
+        <member name="M:AIO.fsMetaType.EmitAotData">
+            <summary>
+            Attempt to emit an AOT compiled direct converter for this type.
+            </summary>
+            <returns>True if AOT data was emitted, false otherwise.</returns>
+        </member>
+        <member name="M:AIO.fsMetaType.CreateInstance">
+            <summary>
+            Creates a new instance of the type that this metadata points back to.
+            If this type has a default constructor, then Activator.CreateInstance
+            will be used to construct the type (or Array.CreateInstance if it an
+            array). Otherwise, an uninitialized object created via
+            FormatterServices.GetSafeUninitializedObject is used to construct the
+            instance.
+            </summary>
+        </member>
+        <member name="M:AIO.fsMetaType.ClearCache">
+            <summary>
+            Clears out the cached type results. Useful if some prior assumptions
+            become invalid, ie, the default member serialization mode.
+            </summary>
+        </member>
+        <member name="M:AIO.fsMetaType.CanSerializeProperty(AIO.fsConfig,System.Reflection.PropertyInfo,System.Reflection.MemberInfo[],System.Boolean)">
+            <summary>
+            Returns if the given property should be serialized.
+            </summary>
+            <param name="annotationFreeValue">
+            Should a property without any annotations be serialized?
+            </param>
+        </member>
+        <member name="T:AIO.fsNullableConverter">
+            <summary>
+            The reflected converter will properly serialize nullable types. However,
+            we do it here instead as we can emit less serialization data.
+            </summary>
+        </member>
+        <member name="T:AIO.fsObjectProcessor">
+            <summary>
+                <para>
+                Enables injecting code before/after an object has been serialized. This
+                is most useful if you want to run the default serialization process but
+                apply a pre/post processing step.
+                </para>
+                <para>
+                Multiple object processors can be active at the same time. When running
+                they are called in a "nested" fashion - if we have processor1 and
+                process2 added to the serializer in that order (p1 then p2), then the
+                execution order will be p1#Before p2#Before /serialization/ p2#After
+                p1#After.
+                </para>
+            </summary>
+        </member>
+        <member name="M:AIO.fsObjectProcessor.CanProcess(System.Type@)">
+            <summary>
+            Is the processor interested in objects of the given type?
+            </summary>
+            <param name="type">The given type.</param>
+            <returns>
+            True if the processor should be applied, false otherwise.
+            </returns>
+        </member>
+        <member name="M:AIO.fsObjectProcessor.OnBeforeSerialize(System.Type@,System.Object@)">
+            <summary>
+            Called before serialization.
+            </summary>
+            <param name="storageType">
+            The field/property type that is storing the instance.
+            </param>
+            <param name="instance">The type of the instance.</param>
+        </member>
+        <member name="M:AIO.fsObjectProcessor.OnAfterSerialize(System.Type@,System.Object@,AIO.fsData@)">
+            <summary>
+            Called after serialization.
+            </summary>
+            <param name="storageType">
+            The field/property type that is storing the instance.
+            </param>
+            <param name="instance">The type of the instance.</param>
+            <param name="data">The data that was serialized.</param>
+        </member>
+        <member name="M:AIO.fsObjectProcessor.OnBeforeDeserialize(System.Type@,AIO.fsData@)">
+            <summary>
+            Called before deserialization.
+            </summary>
+            <param name="storageType">
+            The field/property type that is storing the instance.
+            </param>
+            <param name="data">
+            The data that will be used for deserialization.
+            </param>
+        </member>
+        <member name="M:AIO.fsObjectProcessor.OnBeforeDeserializeAfterInstanceCreation(System.Type@,System.Object@,AIO.fsData@)">
+            <summary>
+            Called before deserialization has begun but *after* the object
+            instance has been created. This will get invoked even if the user
+            passed in an existing instance.
+            </summary>
+            <remarks>
+            **IMPORTANT**: The actual instance that gets passed here is *not*
+            guaranteed to be an a subtype of storageType, since the value for
+            instance is whatever the active converter returned for
+            CreateInstance() - ie, some converters will return dummy types in
+            CreateInstance() if instance creation cannot be separated from
+            deserialization (ie, KeyValuePair).
+            </remarks>
+            <param name="storageType">
+            The field/property type that is storing the instance.
+            </param>
+            <param name="instance">
+            The created object instance. No deserialization has been applied to
+            it.
+            </param>
+            <param name="data">
+            The data that will be used for deserialization.
+            </param>
+        </member>
+        <member name="M:AIO.fsObjectProcessor.OnAfterDeserialize(System.Type@,System.Object@)">
+            <summary>
+            Called after deserialization.
+            </summary>
+            <param name="storageType">
+            The field/property type that is storing the instance.
+            </param>
+            <param name="instance">The type of the instance.</param>
+        </member>
+        <member name="T:AIO.fsOption`1">
+            <summary>
+            简单选项类型。这类似于可空类型。
+            </summary>
+        </member>
+        <member name="P:AIO.fsOption`1.HasValue">
+            <summary>
+            是否存在值
+            </summary>
+        </member>
+        <member name="P:AIO.fsOption`1.IsEmpty">
+            <summary>
+            是否为NULL
+            </summary>
+        </member>
+        <member name="P:AIO.fsOption`1.Value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="M:AIO.fsOption`1.#ctor(`0@)">
+            <summary>
+            可选类型
+            </summary>
+        </member>
+        <member name="F:AIO.fsOption`1.Empty">
+            <summary>
+            空
+            </summary>
+        </member>
+        <member name="T:AIO.fsOption">
+            <summary>
+            可选
+            </summary>
+        </member>
+        <member name="M:AIO.fsOption.Just``1(``0@)">
+            <summary>
+            正确的
+            </summary>
+        </member>
+        <member name="T:AIO.fsPortableReflection">
+            <summary>
+            This wraps reflection types so that it is portable across different Unity
+            runtimes.
+            </summary>
+        </member>
+        <member name="F:AIO.fsPortableReflection.EmptyTypes">
+            <summary>
+            空类型数组
+            </summary>
+        </member>
+        <member name="M:AIO.fsPortableReflection.HasAttribute``1(System.Reflection.MemberInfo@)">
+            <summary>
+            Returns true if the given attribute is defined on the given element.
+            </summary>
+        </member>
+        <member name="M:AIO.fsPortableReflection.HasAttribute``1(System.Reflection.MemberInfo@,System.Boolean@)">
+            <summary>
+            Returns true if the given attribute is defined on the given element.
+            </summary>
+        </member>
+        <member name="M:AIO.fsPortableReflection.HasAttribute(System.Reflection.MemberInfo@,System.Type@)">
+            <summary>
+            Returns true if the given attribute is defined on the given element.
+            </summary>
+        </member>
+        <member name="M:AIO.fsPortableReflection.HasAttribute(System.Reflection.MemberInfo@,System.Type@,System.Boolean@)">
+            <summary>
+            Returns true if the given attribute is defined on the given element.
+            </summary>
+        </member>
+        <member name="M:AIO.fsPortableReflection.GetAttribute(System.Reflection.MemberInfo@,System.Type@,System.Boolean@)">
+            <summary>
+            Fetches the given attribute from the given MemberInfo. This method
+            applies caching and is allocation free (after caching has been
+            performed).
+            </summary>
+            <param name="element">
+            The MemberInfo the get the attribute from.
+            </param>
+            <param name="attributeType">The type of attribute to fetch.</param>
+            <param name="shouldCache"></param>
+            <returns>The attribute or null.</returns>
+        </member>
+        <member name="M:AIO.fsPortableReflection.GetAttribute``1(System.Reflection.MemberInfo@,System.Boolean@)">
+            <summary>
+            Fetches the given attribute from the given MemberInfo.
+            </summary>
+            <typeparam name="TAttribute">
+            The type of attribute to fetch.
+            </typeparam>
+            <param name="element">
+            The MemberInfo to get the attribute from.
+            </param>
+            <param name="shouldCache">
+            Should this computation be cached? If this is the only time it will
+            ever be done, don't bother caching.
+            </param>
+            <returns>The attribute or null.</returns>
+        </member>
+        <member name="M:AIO.fsPortableReflection.GetAttribute``1(System.Reflection.MemberInfo@)">
+            <summary>
+            Fetches the given attribute from the given MemberInfo.
+            </summary>
+            <typeparam name="TAttribute">
+            The type of attribute to fetch.
+            </typeparam>
+            <param name="element">
+            The MemberInfo to get the attribute from.
+            </param>
+            <param name="shouldCache">
+            Should this computation be cached? If this is the only time it will
+            ever be done, don't bother caching.
+            </param>
+            <returns>The attribute or null.</returns>
+        </member>
+        <member name="M:AIO.fsPortableReflection.AsMemberInfo(System.Type)">
+            <summary>
+            转化为成员信息
+            </summary>
+        </member>
+        <member name="M:AIO.fsPortableReflection.IsType(System.Reflection.MemberInfo)">
+            <summary>
+            判断是否为类型
+            </summary>
+        </member>
+        <member name="T:AIO.fsReflectedConverter">
+            <summary>
+            反射转换器
+            </summary>
+        </member>
+        <member name="M:AIO.fsReflectionUtility.GetInterface(System.Type,System.Type)">
+            <summary>
+            Searches for a particular implementation of the given interface type
+            inside of the type. This is particularly useful if the interface type
+            is an open type, ie, typeof(IFace{}), because this method will then
+            return IFace{} but with appropriate type parameters inserted.
+            </summary>
+            <param name="type">The base type to search for interface</param>
+            <param name="interfaceType">
+            The interface type to search for. Can be an open generic type.
+            </param>
+            <returns>
+            The actual interface type that the type contains, or null if there is
+            no implementation of the given interfaceType on type.
+            </returns>
+        </member>
+        <member name="T:AIO.fsResult">
+            <summary>
+            The result of some sort of operation. A result is either successful or
+            not, but if it is successful then there may be a set of warnings/messages
+            associated with it. These warnings describe the performed error recovery
+            operations.
+            </summary>
+        </member>
+        <member name="F:AIO.fsResult._success">
+            <summary>
+            Is this result successful?
+            </summary>
+            <remarks>
+            This is intentionally a `success` state so that when the object is
+            default constructed it defaults to a failure state.
+            </remarks>
+        </member>
+        <member name="F:AIO.fsResult._messages">
+            <summary>
+            The warning or error messages associated with the result. This may be
+            null if there are no messages.
+            </summary>
+        </member>
+        <member name="M:AIO.fsResult.AddMessage(System.String)">
+            <summary>
+            Adds a new message to this result.
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:AIO.fsResult.AddMessages(AIO.fsResult)">
+            <summary>
+            Adds only the messages from the other result into this result,
+            ignoring the success/failure status of the other result.
+            </summary>
+        </member>
+        <member name="M:AIO.fsResult.Merge(AIO.fsResult)">
+            <summary>
+            Merges the other result into this one. If the other result failed,
+            then this one too will have failed.
+            </summary>
+            <remarks>
+            Note that you can use += instead of this method so that you don't
+            bury the actual method call that is generating the other fsResult.
+            </remarks>
+        </member>
+        <member name="F:AIO.fsResult.Success">
+            <summary>
+            A successful result.
+            </summary>
+        </member>
+        <member name="M:AIO.fsResult.Warn(System.String)">
+            <summary>
+            Create a result that is successful but contains the given warning
+            message.
+            </summary>
+        </member>
+        <member name="M:AIO.fsResult.Fail(System.String)">
+            <summary>
+            Create a result that failed.
+            </summary>
+        </member>
+        <member name="M:AIO.fsResult.op_Addition(AIO.fsResult,AIO.fsResult)">
+            <summary>
+            Only use this as +=!
+            </summary>
+        </member>
+        <member name="P:AIO.fsResult.Failed">
+            <summary>
+            Did this result fail? If so, you can see the reasons why in
+            `RawMessages`.
+            </summary>
+        </member>
+        <member name="P:AIO.fsResult.Succeeded">
+            <summary>
+            Was the result a success? Note that even successful operations may
+            have warning messages (`RawMessages`) associated with them.
+            </summary>
+        </member>
+        <member name="P:AIO.fsResult.HasWarnings">
+            <summary>
+            Does this result have any warnings? This says nothing about if it
+            failed or succeeded, just if it has warning messages associated with
+            it.
+            </summary>
+        </member>
+        <member name="M:AIO.fsResult.AssertSuccess">
+            <summary>
+            A simply utility method that will assert that this result is
+            successful. If it is not, then an exception is thrown.
+            </summary>
+        </member>
+        <member name="M:AIO.fsResult.AssertSuccessWithoutWarnings">
+            <summary>
+            A simple utility method that will assert that this result is
+            successful and that there are no warning messages. This throws an
+            exception if either of those asserts are false.
+            </summary>
+        </member>
+        <member name="P:AIO.fsResult.AsException">
+            <summary>
+            Utility method to convert the result to an exception. This method is
+            only defined is `Failed` returns true.
+            </summary>
+        </member>
+        <member name="P:AIO.fsResult.RawMessages">
+            <summary>
+            原始信息
+            </summary>
+        </member>
+        <member name="P:AIO.fsResult.FormattedMessages">
+            <summary>
+            格式化信息
+            </summary>
+        </member>
+        <member name="F:AIO.fsSerializer._availableConverters">
+            <summary>
+            Converters that can be used for type registration.
+            </summary>
+        </member>
+        <member name="F:AIO.fsSerializer._availableDirectConverters">
+            <summary>
+            Direct converters (optimized _converters). We use these so we don't
+            have to perform a scan through every item in _converters and can
+            instead just do an O(1) lookup. This is potentially important to perf
+            when there are a ton of direct converters.
+            </summary>
+        </member>
+        <member name="F:AIO.fsSerializer._processors">
+            <summary>
+            Processors that are available.
+            </summary>
+        </member>
+        <member name="F:AIO.fsSerializer._references">
+            <summary>
+            Reference manager for cycle detection.
+            </summary>
+        </member>
+        <member name="F:AIO.fsSerializer._abstractTypeRemap">
+            <summary>
+            Allow the user to provide default storage types for interfaces and abstract
+            classes. For example, a model could have IList{int} as a parameter, but the
+            serialization data does not specify a List{int} type. A IList{} -> List{}
+            remapping will cause List{} to be used as the default storage type. see
+            https://github.com/jacobdufault/fullserializer/issues/120 for additional
+            context.
+            </summary>
+        </member>
+        <member name="F:AIO.fsSerializer._cachedConverterTypeInstances">
+            <summary>
+            Converter type to converter instance lookup table. This
+            could likely be stored inside
+            from serialized type to converter.
+            </summary>
+        </member>
+        <member name="F:AIO.fsSerializer._cachedConverters">
+            <summary>
+            A cache from type to it's converter.
+            </summary>
+        </member>
+        <member name="F:AIO.fsSerializer._cachedProcessors">
+            <summary>
+            A cache from type to the set of processors that are interested in it.
+            </summary>
+        </member>
+        <member name="F:AIO.fsSerializer.Context">
+            <summary>
+            A context object that fsConverters can use to customize how they
+            operate.
+            </summary>
+        </member>
+        <member name="F:AIO.fsSerializer.Config">
+            <summary>
+            Configuration options. Also see fsGlobalConfig.
+            </summary>
+        </member>
+        <member name="M:AIO.fsSerializer.AddProcessor(AIO.fsObjectProcessor)">
+            <summary>
+            Add a new processor to the serializer. Multiple processors can run at
+            the same time in the same order they were added in.
+            </summary>
+            <param name="processor">The processor to add.</param>
+        </member>
+        <member name="M:AIO.fsSerializer.RemoveProcessor``1">
+            <summary>
+            Remove all processors which derive from TProcessor.
+            </summary>
+        </member>
+        <member name="M:AIO.fsSerializer.SetDefaultStorageType(System.Type,System.Type)">
+            <summary>
+            Provide a default storage type for the given abstract or interface type. If
+            a type is deserialized which contains an interface/abstract field type and a
+            mapping is provided, the mapped type will be used by default. For example,
+            IList{T} => List{T} or IDictionary{TKey, TValue} => Dictionary{TKey, TValue}.
+            </summary>
+        </member>
+        <member name="M:AIO.fsSerializer.GetProcessors(System.Type)">
+            <summary>
+            Fetches all of the processors for the given type.
+            </summary>
+        </member>
+        <member name="M:AIO.fsSerializer.AddConverter(AIO.fsBaseConverter)">
+            <summary>
+            Adds a new converter that can be used to customize how an object is
+            serialized and deserialized.
+            </summary>
+        </member>
+        <member name="M:AIO.fsSerializer.GetConverter(System.Type,System.Type)">
+            <summary>
+            Fetches a converter that can serialize/deserialize the given type.
+            </summary>
+        </member>
+        <member name="M:AIO.fsSerializer.TrySerialize``1(``0,AIO.fsData@)">
+            <summary>
+            Helper method that simply forwards the call to
+            TrySerialize(typeof(T), instance, out data);
+            </summary>
+        </member>
+        <member name="M:AIO.fsSerializer.TryDeserialize``1(AIO.fsData,``0@)">
+            <summary>
+            Generic wrapper around TryDeserialize that simply forwards the call.
+            </summary>
+        </member>
+        <member name="M:AIO.fsSerializer.TrySerialize(System.Type,System.Object,AIO.fsData@)">
+            <summary>
+            Serialize the given value.
+            </summary>
+            <param name="storageType">
+            The type of field/property that stores the object instance. This is
+            important particularly for inheritance, as a field storing an
+            IInterface instance should have type information included.
+            </param>
+            <param name="instance">
+            The actual object instance to serialize.
+            </param>
+            <param name="data">The serialized state of the object.</param>
+            <returns>If serialization was successful.</returns>
+        </member>
+        <member name="M:AIO.fsSerializer.TrySerialize(System.Type,System.Type,System.Object,AIO.fsData@)">
+            <summary>
+            Serialize the given value.
+            </summary>
+            <param name="storageType">
+            The type of field/property that stores the object instance. This is
+            important particularly for inheritance, as a field storing an
+            IInterface instance should have type information included.
+            </param>
+            <param name="overrideConverterType">
+            An fsBaseConverter derived type that will be used to serialize the
+            object instead of the converter found via the normal discovery
+            mechanisms.
+            </param>
+            <param name="instance">
+            The actual object instance to serialize.
+            </param>
+            <param name="data">The serialized state of the object.</param>
+            <returns>If serialization was successful.</returns>
+        </member>
+        <member name="M:AIO.fsSerializer.TryDeserialize(AIO.fsData,System.Type,System.Object@)">
+            <summary>
+            Attempts to deserialize a value from a serialized state.
+            </summary>
+        </member>
+        <member name="M:AIO.fsSerializer.TryDeserialize(AIO.fsData,System.Type,System.Type,System.Object@)">
+            <summary>
+            Attempts to deserialize a value from a serialized state.
+            </summary>
+        </member>
+        <member name="M:AIO.fsSerializer.EnsureDictionary(AIO.fsData)">
+            <summary>
+            Ensures that the data is a dictionary. If it is not, then it is
+            wrapped inside of one.
+            </summary>
+        </member>
+        <member name="T:AIO.fsSerializer.fsLazyCycleDefinitionWriter">
+            <summary>
+            This manages instance writing so that we do not write unnecessary $id
+            fields. We only need to write out an $id field when there is a
+            corresponding $ref field. This is able to write $id references lazily
+            because the fsData instance is not actually written out to text until
+            we have entirely finished serializing it.
+            </summary>
+        </member>
+        <member name="M:AIO.fsSerializer.IsReservedKeyword(System.String)">
+            <summary>
+            Returns true if the given key is a special keyword that full
+            serializer uses to add additional metadata on top of the emitted
+            JSON.
+            </summary>
+        </member>
+        <member name="F:AIO.fsSerializer.Key_ObjectReference">
+            <summary>
+            This is an object reference in part of a cyclic graph.
+            </summary>
+        </member>
+        <member name="F:AIO.fsSerializer.Key_ObjectDefinition">
+            <summary>
+            This is an object definition, as part of a cyclic graph.
+            </summary>
+        </member>
+        <member name="F:AIO.fsSerializer.Key_InstanceType">
+            <summary>
+            This specifies the actual type of an object (the instance type was
+            different from the field type).
+            </summary>
+        </member>
+        <member name="F:AIO.fsSerializer.Key_Version">
+            <summary>
+            The version string for the serialized data.
+            </summary>
+        </member>
+        <member name="F:AIO.fsSerializer.Key_Content">
+            <summary>
+            If we have to add metadata but the original serialized state was not
+            a dictionary, then this will contain the original data.
+            </summary>
+        </member>
+        <member name="M:AIO.fsSerializer.StripDeserializationMetadata(AIO.fsData@)">
+            <summary>
+            Strips all deserialization metadata from the object, like $type and
+            $content fields.
+            </summary>
+            <remarks>
+            After making this call, you will *not* be able to deserialize the
+            same object instance. The metadata is strictly necessary for
+            deserialization!
+            </remarks>
+        </member>
+        <member name="M:AIO.fsSerializer.ConvertLegacyData(AIO.fsData@)">
+            <summary>
+            This function converts legacy serialization data into the new format,
+            so that the import process can be unified and ignore the old format.
+            </summary>
+        </member>
+        <member name="T:AIO.fsVersionedType">
+            <summary>
+            版本类型
+            </summary>
+        </member>
+        <member name="F:AIO.fsVersionedType.Ancestors">
+            <summary>
+            The direct ancestors that this type can import.
+            </summary>
+        </member>
+        <member name="F:AIO.fsVersionedType.VersionString">
+            <summary>
+            The identifying string that is unique among all ancestors.
+            </summary>
+        </member>
+        <member name="F:AIO.fsVersionedType.ModelType">
+            <summary>
+            The modeling type that this versioned type maps back to.
+            </summary>
+        </member>
+        <member name="M:AIO.fsVersionedType.Migrate(System.Object)">
+            <summary>
+            Migrate from an instance of an ancestor.
+            </summary>
+        </member>
+        <member name="M:AIO.fsVersionedType.ToString">
+            <summary>
+            内容转化为字符串
+            </summary>
+        </member>
+        <member name="M:AIO.fsVersionedType.op_Equality(AIO.fsVersionedType,AIO.fsVersionedType)">
+            <summary>
+            相等
+            </summary>
+        </member>
+        <member name="M:AIO.fsVersionedType.op_Inequality(AIO.fsVersionedType,AIO.fsVersionedType)">
+            <summary>
+            不相等
+            </summary>
+        </member>
+        <member name="M:AIO.fsVersionedType.Equals(System.Object)">
+            <summary>
+            判断是否相等
+            </summary>
+        </member>
+        <member name="M:AIO.fsVersionedType.GetHashCode">
+            <summary>
+            获取哈希值
+            </summary>
+        </member>
+        <member name="T:AIO.fsVersionManager">
+            <summary>
+            版本管理
+            </summary>
+        </member>
+        <member name="M:AIO.fsVersionManager.GetVersionImportPath(System.String@,AIO.fsVersionedType@,System.Collections.Generic.List{AIO.fsVersionedType}@)">
+            <summary>
+            导入路径
+            </summary>
+        </member>
+        <member name="M:AIO.fsVersionManager.VerifyConstructors(AIO.fsVersionedType@)">
+            <summary>
+            Verifies that the given type has constructors to migrate from all
+            ancestor types.
+            </summary>
+        </member>
+        <member name="M:AIO.fsVersionManager.VerifyUniqueVersionStrings(AIO.fsVersionedType@)">
+            <summary>
+            Verifies that the given version graph contains only unique versions.
+            </summary>
+        </member>
+        <member name="T:AIO.fsWeakReferenceConverter">
+            <summary>
+            Serializes and deserializes WeakReferences.
+            </summary>
+        </member>
+        <member name="T:AIO.LooseAssemblyName">
+            <summary>
+            分散程序集名称
+            </summary>
+        </member>
+        <member name="F:AIO.LooseAssemblyName.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="M:AIO.LooseAssemblyName.#ctor(System.String)">
+            <summary>
+            分散程序集名称
+            </summary>
+        </member>
+        <member name="M:AIO.LooseAssemblyName.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.LooseAssemblyName.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.LooseAssemblyName.op_Equality(AIO.LooseAssemblyName,AIO.LooseAssemblyName)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.LooseAssemblyName.op_Inequality(AIO.LooseAssemblyName,AIO.LooseAssemblyName)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.LooseAssemblyName.op_Implicit(System.String)~AIO.LooseAssemblyName">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.LooseAssemblyName.op_Implicit(AIO.LooseAssemblyName)~System.String">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.LooseAssemblyName.op_Explicit(System.Reflection.AssemblyName)~AIO.LooseAssemblyName">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.LooseAssemblyName.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:AIO.LooseAssemblyNameConverter">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.LooseAssemblyNameConverter.ModelType">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.LooseAssemblyNameConverter.CreateInstance(AIO.fsData@,System.Type@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.LooseAssemblyNameConverter.TrySerialize(System.Object@,AIO.fsData@,System.Type@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.LooseAssemblyNameConverter.TryDeserialize(AIO.fsData@,System.Object@,System.Type@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:AIO.Namespace">
+            <summary>
+            命名空间
+            </summary>
+        </member>
+        <member name="P:AIO.Namespace.Root">
+            <summary>
+            根节点命名空间
+            </summary>
+        </member>
+        <member name="P:AIO.Namespace.Parent">
+            <summary>
+            父命名空间
+            </summary>
+        </member>
+        <member name="P:AIO.Namespace.FullName">
+            <summary>
+            完整命名空间
+            </summary>
+        </member>
+        <member name="P:AIO.Namespace.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:AIO.Namespace.IsRoot">
+            <summary>
+            是否为根节点
+            </summary>
+        </member>
+        <member name="P:AIO.Namespace.IsGlobal">
+            <summary>
+            是否为全局
+            </summary>
+        </member>
+        <member name="P:AIO.Namespace.Ancestors">
+            <summary>
+            获取所有父类命名空间
+            </summary>
+        </member>
+        <member name="M:AIO.Namespace.AndAncestors">
+            <summary>
+            获取所有父类命名空间
+            </summary>
+        </member>
+        <member name="M:AIO.Namespace.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Namespace.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Namespace.Global">
+            <summary>
+            全局命名空间
+            </summary>
+        </member>
+        <member name="M:AIO.Namespace.FromFullName(System.String)">
+            <summary>
+            转化为完整命名空间
+            </summary>
+        </member>
+        <member name="M:AIO.Namespace.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Namespace.op_Implicit(System.String@)~AIO.Namespace">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Namespace.op_Implicit(AIO.Namespace@)~System.String">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Namespace.op_Equality(AIO.Namespace@,AIO.Namespace@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Namespace.op_Inequality(AIO.Namespace@,AIO.Namespace@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Namespace.Collection.TryGetValue(System.String,AIO.Namespace@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:AIO.NamespaceConverter">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.NamespaceConverter.ModelType">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.NamespaceConverter.CreateInstance(AIO.fsData@,System.Type@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.NamespaceConverter.TrySerialize(System.Object@,AIO.fsData@,System.Type@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.NamespaceConverter.TryDeserialize(AIO.fsData@,System.Object@,System.Type@)">
+            <inheritdoc/>
         </member>
         <member name="T:AIO.IDNoUtils">
             <summary>

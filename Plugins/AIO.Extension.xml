@@ -109,6 +109,69 @@
             获取当前函数执行总时间
             </summary>
         </member>
+        <member name="T:AIO.FieldInfoExtend">
+            <summary>
+            字段信息扩展
+            </summary>
+        </member>
+        <member name="M:AIO.FieldInfoExtend.CanWrite(System.Reflection.FieldInfo)">
+            <summary>
+            是否能写入
+            </summary>
+        </member>
+        <member name="T:AIO.MethodBaseExtend">
+            <summary>
+            函数扩展
+            </summary>
+        </member>
+        <member name="T:AIO.MethodInfoExtend">
+            <summary>
+            函数信息扩展
+            </summary>
+        </member>
+        <member name="M:AIO.MethodInfoExtend.MakeGenericMethodVia(System.Reflection.MethodInfo,System.Type[])">
+            <summary>
+            使用给定的类型构造泛型方法，返回一个 MethodInfo 对象。
+            </summary>
+            <remarks>
+            返回的方法可能是开放构造的方法。
+            </remarks>
+            <param name="openConstructedMethod">要构造的开放构造方法</param>
+            <param name="closedConstructedParameterTypes">用于构造泛型参数的类型</param>
+            <returns>构造的泛型方法的 MethodInfo 对象</returns>
+        </member>
+        <member name="M:AIO.MethodInfoExtend.IsUserDefinedConversion(System.Reflection.MethodInfo)">
+            <summary>
+            检查给定方法是否为用户定义的转换运算符。
+            </summary>
+            <param name="method">要检查的方法</param>
+            <returns>如果方法为用户定义的转换运算符，则为 true；否则为 false。</returns>
+        </member>
+        <member name="M:AIO.MethodInfoExtend.IsStatic(System.Reflection.MemberInfo)">
+            <summary>
+            是否为静态
+            </summary>
+        </member>
+        <member name="T:AIO.ParameterInfoExtend">
+            <summary>
+            参数信息扩展
+            </summary>
+        </member>
+        <member name="M:AIO.ParameterInfoExtend.HasOutModifier(System.Reflection.ParameterInfo)">
+            <summary>
+            是否为Out
+            </summary>
+        </member>
+        <member name="T:AIO.PropertyInfoExtend">
+            <summary>
+            属性信息扩展
+            </summary>
+        </member>
+        <member name="M:AIO.PropertyInfoExtend.IsStatic(System.Reflection.PropertyInfo)">
+            <summary>
+            是否为静态
+            </summary>
+        </member>
         <member name="T:AIO.StringBuilderExtend">
             <summary>
             可变字符串扩展
@@ -665,6 +728,384 @@
             格式化
             </summary>
         </member>
+        <member name="T:AIO.TypeExtend">
+            <summary>
+            类扩展
+            </summary>
+            <see>
+                <cref>https://docs.microsoft.com/en-us/dotnet/api/system.type?view=net-5.0</cref>
+            </see>
+        </member>
+        <member name="M:AIO.TypeExtend.AndBaseTypeAndInterfaces(System.Type)">
+            <summary>
+            获取指定类型及其基类和接口实现的列表。
+            </summary>
+            <param name="type">要获取列表的类型。</param>
+            <returns>包含指定类型及其基类和接口实现的 <see cref="T:System.Collections.Generic.IEnumerable`1"/> 对象。</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.BaseTypeAndInterfaces(System.Type,System.Boolean)">
+            <summary>
+            获取指定类型的基类和实现的接口列表。
+            </summary>
+            <param name="type">要获取列表的类型。</param>
+            <param name="inheritedInterfaces">指定是否包括继承的接口，默认为 true。</param>
+            <returns>包含指定类型的基类和实现的接口列表的 <see cref="T:System.Collections.Generic.IEnumerable`1"/> 对象。</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.AndInterfaces(System.Type)">
+            <summary>
+            获取指定类型及其实现的接口列表。
+            </summary>
+            <param name="type">要获取列表的类型。</param>
+            <returns>包含指定类型及其实现的接口列表的 <see cref="T:System.Collections.Generic.IEnumerable`1"/> 对象。</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.AndHierarchy(System.Type)">
+            <summary>
+            获取指定类型及其继承层次结构中的所有类型列表。
+            </summary>
+            <param name="type">要获取列表的类型。</param>
+            <returns>包含指定类型及其继承层次结构中的所有类型列表的 <see cref="T:System.Collections.Generic.IEnumerable`1"/> 对象。</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.Yield(System.Type)">
+            <summary>
+            返回包含当前 <see cref="T:System.Type"/> 的单元素序列。
+            </summary>
+            <param name="t">要返回的类型。</param>
+            <returns>一个包含指定类型的单元素序列。</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.Hierarchy(System.Type)">
+            <summary>
+            获取指定类型及其继承层次结构中的所有类型列表，不包括实现的接口。
+            </summary>
+            <param name="type">要获取列表的类型。</param>
+            <returns>包含指定类型及其继承层次结构中的所有类型列表（不包括实现的接口）的 <see cref="T:System.Collections.Generic.IEnumerable`1"/> 对象。</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.GetFlattenedMember(System.Type,System.String@)">
+            <summary>
+            获取指定类型及其基类中所有名为 <paramref name="memberName"/> 的成员列表。
+            </summary>
+            <param name="type">要获取成员列表的类型。</param>
+            <param name="memberName">成员名称。</param>
+            <returns>包含指定类型及其基类中所有名为 <paramref name="memberName"/> 的成员列表的 <see cref="T:System.Reflection.MemberInfo"/> 数组。</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.GetFlattenedMethod(System.Type,System.String@)">
+            <summary>
+            获取指定类型及其基类中第一个名为 <paramref name="methodName"/> 的方法。
+            </summary>
+            <param name="type">要获取方法的类型。</param>
+            <param name="methodName">方法名称。</param>
+            <returns>指定类型及其基类中第一个名为 <paramref name="methodName"/> 的方法，如果未找到则返回 null。</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.GetFlattenedMethods(System.Type,System.String)">
+            <summary>
+            获取指定类型及其基类中所有名为 <paramref name="methodName"/> 的方法列表。
+            </summary>
+            <param name="type">要获取方法列表的类型。</param>
+            <param name="methodName">方法名称。</param>
+            <returns>包含指定类型及其基类中所有名为 <paramref name="methodName"/> 的方法列表的 <see cref="T:System.Reflection.MethodInfo"/> 枚举。</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.GetFlattenedProperty(System.Type,System.String@)">
+            <summary>
+            获取指定类型及其基类中第一个名为 <paramref name="propertyName"/> 的属性。
+            </summary>
+            <param name="type">要获取属性的类型。</param>
+            <param name="propertyName">属性名称。</param>
+            <returns>指定类型及其基类中第一个名为 <paramref name="propertyName"/> 的属性，如果未找到则返回 null。</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.GetInterfaces(System.Type,System.Boolean@)">
+            <summary>
+            获取指定类型所实现的所有接口列表，可选择是否包括继承的接口。
+            </summary>
+            <param name="type">要获取接口列表的类型。</param>
+            <param name="includeInherited">指定是否包括继承的接口。</param>
+            <returns>包含指定类型所实现的所有接口列表的 <see cref="T:System.Type"/> 枚举。</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.GetListElementType(System.Type,System.Boolean@)">
+            <summary>
+            获取泛型列表类型的元素类型。如果无法确定元素类型，则返回 null（或 <see cref="T:System.Object"/>）。
+            </summary>
+            <param name="listType">要获取元素类型的泛型列表类型。</param>
+            <param name="allowNonGeneric">指定当列表类型不是泛型列表类型时，是否返回 <see cref="T:System.Object"/> 作为元素类型。</param>
+            <returns>泛型列表类型的元素类型，如果无法确定元素类型，则返回 null（或 <see cref="T:System.Object"/>）。</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.GetEnumerableElementType(System.Type,System.Boolean@)">
+            <summary>
+            获取可枚举类型的元素类型。如果无法确定元素类型，则返回 null（或 <see cref="T:System.Object"/>）。
+            </summary>
+            <param name="enumerableType">要获取元素类型的可枚举类型。</param>
+            <param name="allowNonGeneric">指定当列表类型不是泛型列表类型时，是否返回 <see cref="T:System.Object"/> 作为元素类型。</param>
+            <returns>可枚举类型的元素类型，如果无法确定元素类型，则返回 null（或 <see cref="T:System.Object"/>）。</returns>
+            <see>
+                <cref>http://stackoverflow.com/a/12728562</cref>
+            </see>
+        </member>
+        <member name="M:AIO.TypeExtend.GetDictionaryItemType(System.Type,System.Boolean@,System.Int32@)">
+            <summary>
+            获取字典类型的键或值类型。如果无法确定键或值类型，则返回 null（或 <see cref="T:System.Object"/>）。
+            </summary>
+            <param name="dictionaryType">要获取键或值类型的字典类型。</param>
+            <param name="allowNonGeneric">指定当字典类型不是泛型字典类型时，是否返回 <see cref="T:System.Object"/> 作为键或值类型。</param>
+            <param name="genericArgumentIndex">指定要获取的泛型参数的索引。</param>
+            <returns>字典类型的键或值类型，如果无法确定键或值类型，则返回 null（或 <see cref="T:System.Object"/>）。</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.GetDictionaryKeyType(System.Type,System.Boolean@)">
+            <summary>
+            获取字典类型的键类型。如果无法确定键类型，则返回 null（或 <see cref="T:System.Object"/>）。
+            </summary>
+            <param name="dictionaryType">要获取键类型的字典类型。</param>
+            <param name="allowNonGeneric">指定当字典类型不是泛型字典类型时，是否返回 <see cref="T:System.Object"/> 作为键类型。</param>
+            <returns>字典类型的键类型，如果无法确定键类型，则返回 null（或 <see cref="T:System.Object"/>）。</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.GetDictionaryValueType(System.Type,System.Boolean@)">
+            <summary>
+            获取字典类型的值类型。如果无法确定值类型，则返回 null（或 <see cref="T:System.Object"/>）。
+            </summary>
+            <param name="dictionaryType">要获取值类型的字典类型。</param>
+            <param name="allowNonGeneric">指定当字典类型不是泛型字典类型时，是否返回 <see cref="T:System.Object"/> 作为值类型。</param>
+            <returns>字典类型的值类型，如果无法确定值类型，则返回 null（或 <see cref="T:System.Object"/>）。</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.GetTypesSafely(System.Reflection.Assembly)">
+            <summary>
+            安全地获取程序集中定义的所有类型。如果无法加载某些类型，则跳过它们并返回已成功加载的类型列表。
+            </summary>
+            <param name="assembly">要获取类型列表的程序集。</param>
+            <returns>包含程序集中定义的所有已成功加载类型的 <see cref="T:System.Type"/> 枚举。</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.IsUpcast(System.Type,System.Type@)">
+            <summary>
+            确定给定的源 Type 是否可以向上转换为指定的目标 Type。
+            </summary>
+            <param name="source">要检查向上转换的 Type。</param>
+            <param name="destination">source Type 要转换成的 Type。</param>
+            <returns>如果从源 Type 到目标 Type 存在向上转换，则为 true；否则为 false。</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.IsDowncast(System.Type,System.Type@)">
+            <summary>
+            确定给定的源 Type 是否可以向下转换为指定的目标 Type。
+            </summary>
+            <param name="source">要检查向下转换的 Type。</param>
+            <param name="destination">source Type 要转换成的 Type。</param>
+            <returns>如果从源 Type 到目标 Type 存在向下转换，则为 true；否则为 false。</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.IsNumeric(System.Type)">
+            <summary>
+            判断是否为数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.TypeExtend.IsNullable(System.Type)">
+            <summary>
+            检查类型是否可空
+            </summary>
+            <returns>如果类型是引用类型或可空类型，则返回 true</returns>
+            <see>
+                <cref>http://stackoverflow.com/a/1770232</cref>
+            </see>
+        </member>
+        <member name="M:AIO.TypeExtend.IsReferenceType(System.Type)">
+            <summary>
+            检查类型是否为引用类型
+            </summary>
+            <returns>如果类型不是值类型，则返回 true</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.IsStruct(System.Type)">
+            <summary>
+            检查类型是否为 struct
+            </summary>
+            <returns>如果类型是值类型，但不是原始类型或枚举类型，则返回 true</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.IsAssignableFrom``1(System.Type,``0@)">
+            <summary>
+            检查类型是否可以从给定对象转换而来
+            </summary>
+        </member>
+        <member name="M:AIO.TypeExtend.IsBasic(System.Type)">
+            <summary>
+            检查类型是否为基本类型
+            </summary>
+        </member>
+        <member name="M:AIO.TypeExtend.IsStatic(System.Type)">
+            <summary>
+            检查类型是否为静态
+            </summary>
+            <returns>如果类型是抽象的和密封的，则返回 true（静态类）</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.IsAbstract(System.Type)">
+            <summary>
+            检查类型是否为抽象
+            </summary>
+            <returns>如果类型是抽象的，则返回 true，但不要用于静态类型</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.IsConcrete(System.Type)">
+            <summary>
+            检查类型是否具体
+            </summary>
+            <returns>如果类型不是抽象的、接口或包含泛型参数，则返回 true</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.IsMakeGenericTypeVia(System.Type,System.Type)">
+            <summary>
+            判断一个类型是否能通过另一个类型构造而来
+            </summary>
+        </member>
+        <member name="M:AIO.TypeExtend.MakeGenericTypeVia(System.Type,System.Type@,System.Collections.Generic.IDictionary{System.Type,System.Type}@,System.Boolean@)">
+            <summary>
+            使用另一个关闭构造类型的类型参数，将开放式构造类型解析为已关闭构造类型。
+            请务必小心谨慎，并且确保所有的泛型参数和类型都正确地指定和解析，以避免出现意外行为和错误结果。
+            </summary>
+            <param name="openConstructedType">要解析的开放式构造类型。</param>
+            <param name="closedConstructedType">将用于解析的已关闭构造类型。</param>
+            <param name="resolvedGenericParameters">递归解析过程中已解析的泛型参数的字典。此参数可以为空，但不应为 null。</param>
+            <param name="safe">如果为 true，则在无法安全地将开放式构造类型解析为已关闭构造类型时引发异常。如果为 false，则回退到不安全的行为，这可能会导致错误的结果或异常。</param>
+            <returns>使用已关闭构造类型的类型参数实例化时与开放式构造类型对应的已关闭构造类型。</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.Resolve(System.Type)">
+            <summary>
+            返回类型本身，具有一致的接口。
+            </summary>
+            <param name="type">要解析的类型</param>
+            <returns>输入的类型实例本身</returns>
+        </member>
+        <member name="M:AIO.TypeExtend.Reset``1(``0,System.Collections.Generic.ICollection{System.String}@,System.Collections.Generic.ICollection{System.String}@,System.Type@,System.Func{System.Type,System.Boolean}@,System.Boolean@)">
+            <summary>
+            将对象的所有字段和属性重置为它们的默认值。
+            </summary>
+            <typeparam name="T">要重置的对象类型</typeparam>
+            <param name="obj">要重置的对象</param>
+            <param name="fieldNames">要重置的字段名称（可选）</param>
+            <param name="propNames">要重置的属性名称（可选）</param>
+            <param name="resetReadOnly">是否重置只读字段和属性（默认为false）</param>
+            <param name="typeFilter">用于过滤要重置的对象的类型（默认为null）</param>
+            <param name="customFilter">自定义过滤器</param>
+        </member>
+        <member name="M:AIO.TypeExtend.Reset``1(``0,System.Collections.Generic.ICollection{System.String}@,System.Collections.Generic.ICollection{System.String}@,System.Func{System.Type,System.Boolean}@,System.Boolean@)">
+            <summary>
+            将对象的所有字段和属性重置为它们的默认值，可以根据自定义过滤器和类型过滤器进行筛选。
+            </summary>
+            <typeparam name="T">要重置的对象类型</typeparam>
+            <param name="obj">要重置的对象</param>
+            <param name="fieldNames">要重置的字段名称（可选）</param>
+            <param name="propNames">要重置的属性名称（可选）</param>
+            <param name="customFilter">自定义过滤器</param>
+            <param name="resetReadOnly">是否重置只读字段和属性（默认为false）</param>
+        </member>
+        <member name="M:AIO.TypeExtend.Reset``1(``0,System.Collections.Generic.ICollection{System.String}@,System.Collections.Generic.ICollection{System.String}@,System.Type@,System.Boolean@)">
+            <summary>
+            将对象的所有字段和属性重置为它们的默认值，可以根据自定义过滤器和类型过滤器进行筛选。
+            </summary>
+            <typeparam name="T">要重置的对象类型</typeparam>
+            <param name="obj">要重置的对象</param>
+            <param name="fieldNames">要重置的字段名称（可选）</param>
+            <param name="propNames">要重置的属性名称（可选）</param>
+            <param name="typeFilter">用于过滤要重置的对象的类型（默认为null）</param>
+            <param name="resetReadOnly">是否重置只读字段和属性（默认为false）</param>
+        </member>
+        <member name="M:AIO.TypeExtend.Reset``1(``0,System.Type@,System.Func{System.Type,System.Boolean}@,System.Boolean@)">
+            <summary>
+            将对象的所有字段和属性重置为它们的默认值，可以根据自定义过滤器和类型过滤器进行筛选。
+            </summary>
+            <typeparam name="T">要重置的对象类型</typeparam>
+            <param name="obj">要重置的对象</param>
+            <param name="typeFilter">用于过滤要重置的对象的类型（默认为null）</param>
+            <param name="customFilter">自定义过滤器</param>
+            <param name="resetReadOnly">是否重置只读字段和属性（默认为false）</param>
+        </member>
+        <member name="M:AIO.TypeExtend.Reset``1(``0,System.Func{System.Type,System.Boolean}@,System.Boolean@)">
+            <summary>
+            将对象的所有字段和属性重置为它们的默认值，可以根据自定义过滤器和类型过滤器进行筛选。
+            </summary>
+            <typeparam name="T">要重置的对象类型</typeparam>
+            <param name="obj">要重置的对象</param>
+            <param name="customFilter">自定义过滤器</param>
+            <param name="resetReadOnly">是否重置只读字段和属性（默认为false）</param>
+        </member>
+        <member name="M:AIO.TypeExtend.Reset``1(``0,System.Boolean@,System.Type@)">
+            <summary>
+            将对象的所有字段和属性重置为它们的默认值，可以根据自定义过滤器和类型过滤器进行筛选。
+            </summary>
+            <typeparam name="T">要重置的对象类型</typeparam>
+            <param name="obj">要重置的对象</param>
+            <param name="typeFilter">用于过滤要重置的对象的类型（默认为null）</param>
+            <param name="resetReadOnly">是否重置只读字段和属性（默认为false）</param>
+        </member>
+        <member name="M:AIO.TypeExtend.Reset``1(``0,System.Collections.Generic.ICollection{System.String}@,System.Collections.Generic.ICollection{System.String}@,System.Boolean@)">
+            <summary>
+            将对象的所有字段和属性重置为它们的默认值，可以根据自定义过滤器和类型过滤器进行筛选。
+            </summary>
+            <typeparam name="T">要重置的对象类型</typeparam>
+            <param name="obj">要重置的对象</param>
+            <param name="fieldNames">要重置的字段名称（可选）</param>
+            <param name="propNames">要重置的属性名称（可选）</param>
+            <param name="resetReadOnly">是否重置只读字段和属性（默认为false）</param>
+        </member>
+        <member name="M:AIO.TypeExtend.Reset``1(``0,System.Boolean@)">
+            <summary>
+            将对象的所有字段和属性重置为它们的默认值，可以根据自定义过滤器和类型过滤器进行筛选。
+            </summary>
+            <typeparam name="T">要重置的对象类型</typeparam>
+            <param name="obj">要重置的对象</param>
+            <param name="resetReadOnly">是否重置只读字段和属性（默认为false）</param>
+        </member>
+        <member name="M:AIO.TypeExtend.ResetFields``1(``0,System.Collections.Generic.ICollection{System.String}@,System.Boolean@)">
+            <summary>
+            重置指定字段名称的字段为它们的默认值。
+            </summary>
+            <typeparam name="T">要重置的对象类型</typeparam>
+            <param name="obj">要重置的对象</param>
+            <param name="fieldNames">要重置的字段名称</param>
+            <param name="resetReadOnly">是否重置只读字段（默认为false）</param>
+        </member>
+        <member name="M:AIO.TypeExtend.ResetFields``1(``0,System.Boolean@)">
+            <summary>
+            重置指定字段名称的字段为它们的默认值。
+            </summary>
+            <typeparam name="T">要重置的对象类型</typeparam>
+            <param name="obj">要重置的对象</param>
+            <param name="resetReadOnly">是否重置只读字段（默认为false）</param>
+        </member>
+        <member name="M:AIO.TypeExtend.ResetProperties``1(``0,System.Boolean@)">
+            <summary>
+            重置指定属性名称的属性为它们的默认值。
+            </summary>
+            <typeparam name="T">要重置的对象类型</typeparam>
+            <param name="obj">要重置的对象</param>
+            <param name="resetReadOnly">是否重置只读属性（默认为false）</param>
+        </member>
+        <member name="M:AIO.TypeExtend.ResetProperties``1(``0,System.Collections.Generic.ICollection{System.String}@,System.Boolean@)">
+            <summary>
+            重置指定属性名称的属性为它们的默认值。
+            </summary>
+            <typeparam name="T">要重置的对象类型</typeparam>
+            <param name="obj">要重置的对象</param>
+            <param name="propNames">要重置的属性名称</param>
+            <param name="resetReadOnly">是否重置只读属性（默认为false）</param>
+        </member>
+        <member name="T:AIO.GenericClosingException">
+            <summary>
+            这是一个密封类 GenericClosingException，继承自 Exception
+            </summary>
+        </member>
+        <member name="M:AIO.GenericClosingException.#ctor(System.String@)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.GenericClosingException.#ctor(System.Type@,System.Type@)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="T:AIO.ICustomAttributeProviderExtend">
+            <summary>
+            为支持自定义属性的反映对象提供自定义属性。扩展
+            </summary>
+        </member>
+        <member name="M:AIO.ICustomAttributeProviderExtend.GetCustomAttributes``1(System.Reflection.ICustomAttributeProvider,System.Boolean@)">
+            <summary>
+            获取自定义属性
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="attributeType">类型</param>
+            <param name="inherit">为 true 时，查找继承的自定义特性的层次结构链。</param>
+            <returns>属性集合</returns>
+        </member>
         <member name="T:AIO.IDictionaryExtend">
             <summary>
             字典扩展
@@ -823,6 +1264,11 @@
             <param name="chars">集合</param>
             <param name="targetChars">匹配集合</param>
             <returns>Ture:存在 False:不存在</returns>
+        </member>
+        <member name="M:AIO.IEnumerableExtend.ToHashSet``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为HashSet
+            </summary>
         </member>
         <member name="M:AIO.IEnumerableExtend.ToSeparatedString(System.Collections.IEnumerable,System.String@)">
             <summary>
@@ -1567,6 +2013,11 @@
             获取指定字节数组转化为字符串
             </summary>
         </member>
+        <member name="M:AIO.ISpanExtend.ToHexString(System.Byte[])">
+            <summary>
+            转化为二进制文本
+            </summary>
+        </member>
         <member name="M:AIO.ISpanExtend.ToConverStringUTF8(System.Byte[])">
             <summary>
             转化为字符串 UTF8格式
@@ -1622,19 +2073,6 @@
             转化为IP地址
             </summary>
         </member>
-        <member name="T:AIO.TypeExtend">
-            <summary>
-            类扩展
-            </summary>
-            <see>
-                <cref>https://docs.microsoft.com/en-us/dotnet/api/system.type?view=net-5.0</cref>
-            </see>
-        </member>
-        <member name="M:AIO.TypeExtend.Reset``1(``0,System.Reflection.BindingFlags)">
-            <summary>
-            重置类数据
-            </summary>
-        </member>
         <member name="T:AIO.EnumExtend">
             <summary>
             枚举扩展
@@ -1643,6 +2081,11 @@
         <member name="M:AIO.EnumExtend.GetAttribute``1(System.Enum)">
             <summary>
             获取属性值
+            </summary>
+        </member>
+        <member name="M:AIO.EnumExtend.GetAttributeOfEnumMember``1(System.Enum)">
+            <summary>
+            Gets attributes on an enum member, eg. enum E { [Attr] A }
             </summary>
         </member>
         <member name="T:AIO.ICollectionExtend">
@@ -2119,6 +2562,21 @@
             字节 转大写16进制字符
             </summary>
         </member>
+        <member name="T:AIO.ITypeExtend">
+            <summary>
+            类型扩展
+            </summary>
+        </member>
+        <member name="M:AIO.ITypeExtend.GetDeclaredConstructors(System.Runtime.InteropServices._Type)">
+            <summary>
+            获取申明的全部构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.ITypeExtend.GetDeclaredConstructor(System.Runtime.InteropServices._Type,System.Type[]@)">
+            <summary>
+            获取申明构造函数
+            </summary>
+        </member>
         <member name="T:AIO.CharExtend">
             <summary>
             字符扩展
@@ -2296,6 +2754,56 @@
         <member name="M:AIO.LongExtened.ToConverStringMoney(System.Int64)">
             <summary>
             转换为格式:00,000,000
+            </summary>
+        </member>
+        <member name="T:AIO.IReflectExtend">
+            <summary>
+            扩展
+            </summary>
+        </member>
+        <member name="F:AIO.IReflectExtend.DeclaredFlags">
+            <summary>
+            申明
+            </summary>
+        </member>
+        <member name="M:AIO.IReflectExtend.GetDeclaredProperty(System.Reflection.IReflect,System.String@)">
+            <summary>
+            获取申明的指定属性
+            </summary>
+        </member>
+        <member name="M:AIO.IReflectExtend.GetDeclaredField(System.Reflection.IReflect,System.String@)">
+            <summary>
+            获取申明的指定字段
+            </summary>
+        </member>
+        <member name="M:AIO.IReflectExtend.GetDeclaredMethod(System.Reflection.IReflect,System.String@)">
+            <summary>
+            获取申明的指定函数
+            </summary>
+        </member>
+        <member name="M:AIO.IReflectExtend.GetDeclaredMember(System.Reflection.IReflect,System.String@)">
+            <summary>
+            获取申明的指定成员
+            </summary>
+        </member>
+        <member name="M:AIO.IReflectExtend.GetDeclaredMethods(System.Reflection.IReflect)">
+            <summary>
+            获取声明的全部函数
+            </summary>
+        </member>
+        <member name="M:AIO.IReflectExtend.GetDeclaredProperties(System.Reflection.IReflect)">
+            <summary>
+            获取声明的全部属性
+            </summary>
+        </member>
+        <member name="M:AIO.IReflectExtend.GetDeclaredFields(System.Reflection.IReflect)">
+            <summary>
+            获取声明的全部字段
+            </summary>
+        </member>
+        <member name="M:AIO.IReflectExtend.GetDeclaredMembers(System.Reflection.IReflect)">
+            <summary>
+            获取声明的全部成员
             </summary>
         </member>
     </members>

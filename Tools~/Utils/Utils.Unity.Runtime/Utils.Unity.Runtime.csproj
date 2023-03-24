@@ -55,12 +55,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Script\Extension\UnityObject.Extend.IS.cs" />
+    <Compile Include="Script\fsSerializer\Unity\fsSerializationCallbackReceiverProcessor.cs" />
+    <Compile Include="Script\fsSerializer\Unity\UnityFSSerializer.cs" />
+    <Compile Include="Script\Platform\PlatformUtils.cs" />
+    <Compile Include="Script\Serialization\ISerializationDependency.cs" />
+    <Compile Include="Script\Serialization\ISerializationDepender.cs" />
+    <Compile Include="Script\Serialization\Serialization.cs" />
+    <Compile Include="Script\Serialization\SerializationData.cs" />
+    <Compile Include="Script\Serialization\SerializationOperation.cs" />
+    <Compile Include="Script\fsSerializer\Unity\Ray2DConverter.cs" />
+    <Compile Include="Script\fsSerializer\Unity\RayConverter.cs" />
+    <Compile Include="Script\fsSerializer\Unity\UnityObjectConverter.cs" />
     <Compile Include="Script\IO\IOUnityGet.cs" />
+    <Compile Include="Script\Profiling\ProfiledSegment.cs" />
+    <Compile Include="Script\Profiling\ProfiledSegmentCollection.cs" />
+    <Compile Include="Script\Profiling\ProfilingScope.cs" />
+    <Compile Include="Script\Profiling\ProfilingUtils.cs" />
+    <Compile Include="Script\Thread\UnityThread.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Ensure\Ensure\Ensure.csproj">
+      <Project>{3e725c5e-8dd9-4ab3-8042-96effab382b4}</Project>
+      <Name>Ensure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Extension\Extension\Extension.csproj">
       <Project>{f2c7d3ad-fd65-42d7-8c3f-eaf85dad3e05}</Project>
       <Name>Extension</Name>

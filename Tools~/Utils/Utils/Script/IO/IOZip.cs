@@ -7,7 +7,6 @@
 namespace AIO
 {
     using ICSharpCode.SharpZipLib.Zip;
-
     using System;
     using System.IO;
 
@@ -119,10 +118,12 @@ namespace AIO
             {
                 throw new ArgumentException("要解压的文件不存在。");
             }
+
             if (!DirExists(save))
             {
                 throw new ArgumentException("要解压到的目录不存在！");
             }
+
             long totalLength = 0;
             using (ZipInputStream s = new ZipInputStream(File.OpenRead(zip)))
             {
@@ -149,6 +150,7 @@ namespace AIO
                     {
                         Directory.CreateDirectory(directory);
                     }
+
                     using (FileStream streamWriter = File.Create(save + theEntry.Name))
                     {
                         int size = 2048;
@@ -163,9 +165,11 @@ namespace AIO
                             {
                                 break;
                             }
+
                             currentLength += size;
                             progressAction?.Invoke(currentLength * 1f / totalLength);
                         }
+
                         entryAction?.Invoke(save + theEntry.Name);
                     }
                 }
