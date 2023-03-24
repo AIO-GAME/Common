@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using Newtonsoft.Json;
 using UnityEditor;
@@ -250,6 +251,12 @@ namespace AIO.Package.Editor
         public static void PluginsWindow()
         {
             PluginsManagerWindow.Open(types);
+        }
+
+        [MenuItem(GitLabel + "Open Dll Project")]
+        public static async void OpenDllProject()
+        {
+            await PrWin.Open.Path(Path.Combine(Package.URL, "Tools~", "ALL.sln"), EPrVerb.Open);
         }
     }
 }
