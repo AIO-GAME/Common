@@ -4,12 +4,271 @@ using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace AIO
 {
+    public static class Testss
+    {
+        /// <summary>
+        /// 获取类型及其基类和接口实现的列表
+        /// </summary>
+        public static IEnumerable<Type> AndBaseTypeAndInterfaces(this Type type)
+        {
+            return type.Yield().Concat(type.BaseTypeAndInterfaces());
+        }
+
+        public static IEnumerable<Type> BaseTypeAndInterfaces(this Type type, bool inheritedInterfaces = true)
+        {
+            var types = Enumerable.Empty<Type>();
+
+            if (type.BaseType != null)
+            {
+                types = types.Concat(type.BaseType.Yield());
+            }
+
+            types = types.Concat(type.GetInterfaces(inheritedInterfaces));
+
+            return types;
+        }
+
+        /// <summary>
+        /// 获取接口
+        /// </summary>
+        public static IEnumerable<Type> GetInterfaces(this Type type, in bool includeInherited)
+        {
+            if (includeInherited || type.BaseType == null)
+            {
+                return type.GetInterfaces();
+            }
+
+            return type.GetInterfaces().Except(type.BaseType.GetInterfaces());
+        }
+
+        public static IEnumerable<T> Yield<T>(this T t)
+        {
+            yield return t;
+        }
+
+        /// <summary>
+        /// 尝试获取
+        /// </summary>
+        /// <param name="dic">字典</param>
+        /// <param name="key">Key值</param>
+        /// <param name="value">Value值</param>
+        /// <typeparam name="K">任意泛型</typeparam>
+        /// <typeparam name="V">任意泛型</typeparam>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool TrySet<K, V>(this IDictionary<K, V> dic, in K key, in V value)
+        {
+            if (dic is null) throw new ArgumentNullException(nameof(dic));
+            if (key == null) throw new ArgumentNullException(nameof(key));
+
+            if (dic.ContainsKey(key))
+            {
+                dic[key] = value;
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 判断一个类型是否能通过另一个类型构造而来
+        /// </summary>
+        public static bool IsMakeGenericTypeVia(this Type openConstructedType, Type closedConstructedType)
+        {
+            if (openConstructedType is null) throw new ArgumentNullException(nameof(openConstructedType));
+            if (closedConstructedType is null) throw new ArgumentNullException(nameof(closedConstructedType));
+
+            if (openConstructedType == closedConstructedType) return true;
+            if (openConstructedType.IsGenericParameter) // 如果开放式构造类型是泛型参数（例如：T）
+            {
+                var constraintAttributes = openConstructedType.GenericParameterAttributes;
+                if (constraintAttributes != GenericParameterAttributes.None)
+                {
+                    if (constraintAttributes.HasFlag(GenericParameterAttributes.NotNullableValueTypeConstraint) &&
+                        !closedConstructedType.IsValueType)
+                        return false;
+
+                    if (constraintAttributes.HasFlag(GenericParameterAttributes.ReferenceTypeConstraint) &&
+                        closedConstructedType.IsValueType)
+                        return false;
+
+                    if (constraintAttributes.HasFlag(GenericParameterAttributes.DefaultConstructorConstraint) &&
+                        closedConstructedType.GetConstructor(Type.EmptyTypes) == null)
+                        return false;
+                }
+
+                foreach (var constraint in openConstructedType.GetGenericParameterConstraints())
+                {
+                    if (!constraint.IsAssignableFrom(closedConstructedType)) return false;
+                }
+
+                return true;
+            }
+
+            while (openConstructedType.ContainsGenericParameters)
+            {
+                if (openConstructedType.IsGenericType &&
+                    closedConstructedType.IsGenericType &&
+                    openConstructedType.GetGenericTypeDefinition() == closedConstructedType.GetGenericTypeDefinition())
+                {
+                    var openArgs = openConstructedType.GetGenericArguments();
+                    var closedArgs = closedConstructedType.GetGenericArguments();
+
+                    for (var i = 0; i < openArgs.Length; i++)
+                    {
+                        if (!IsMakeGenericTypeVia(openArgs[i], closedArgs[i]))
+                            return false;
+                    }
+
+                    return true;
+                }
+
+                if (openConstructedType.IsArray)
+                {
+                    if (!closedConstructedType.IsArray || closedConstructedType.GetArrayRank() != openConstructedType.GetArrayRank())
+                        return false;
+
+                    openConstructedType = openConstructedType.GetElementType();
+                    closedConstructedType = closedConstructedType.GetElementType();
+                }
+                else if (openConstructedType.IsByRef)
+                {
+                    if (!closedConstructedType.IsByRef) return false;
+                    openConstructedType = openConstructedType.GetElementType();
+                    closedConstructedType = closedConstructedType.GetElementType();
+                }
+                else
+                {
+                    return openConstructedType.IsAssignableFrom(closedConstructedType);
+                }
+            }
+
+            return openConstructedType.IsAssignableFrom(closedConstructedType);
+        }
+
+        /// <summary>>
+        /// 使用另一个关闭构造类型的类型参数，将开放式构造类型解析为已关闭构造类型。
+        /// </summary>
+        /// <param name="openConstructedType">要解析的开放式构造类型。</param>
+        /// <param name="closedConstructedType">将用于解析的已关闭构造类型。</param>
+        /// <param name="resolvedGenericParameters">递归解析过程中已解析的泛型参数的字典。此参数可以为空，但不应为 null。</param>
+        /// <param name="safe">如果为 true，则在无法安全地将开放式构造类型解析为已关闭构造类型时引发异常。如果为 false，则回退到不安全的行为，这可能会导致错误的结果或异常。</param>
+        /// <returns>使用已关闭构造类型的类型参数实例化时与开放式构造类型对应的已关闭构造类型。</returns>
+        public static Type MakeGenericTypeVia(
+            this Type openConstructedType,
+            Type closedConstructedType,
+            IDictionary<Type, Type> resolvedGenericParameters,
+            bool safe = true)
+        {
+            if (openConstructedType is null) throw new ArgumentNullException(nameof(openConstructedType));
+            if (closedConstructedType is null) throw new ArgumentNullException(nameof(closedConstructedType));
+            if (resolvedGenericParameters is null) throw new ArgumentNullException(nameof(resolvedGenericParameters));
+
+            if (safe && !openConstructedType.IsMakeGenericTypeVia(closedConstructedType))
+                throw new GenericClosingException(openConstructedType, closedConstructedType);
+
+            if (openConstructedType == closedConstructedType)
+                return openConstructedType;
+
+            if (openConstructedType.IsGenericParameter)
+            {
+                // The open-constructed type is a generic parameter.
+                // We can directly map it to the closed-constructed type.
+
+                if (!closedConstructedType.ContainsGenericParameters &&
+                    !resolvedGenericParameters.TrySet(openConstructedType, closedConstructedType) &&
+                    resolvedGenericParameters[openConstructedType] != closedConstructedType)
+                    throw new InvalidOperationException("Nested generic parameters resolve to different values.");
+
+                return closedConstructedType;
+            }
+
+            if (!openConstructedType.ContainsGenericParameters)
+                return openConstructedType;
+
+            if (openConstructedType.IsGenericType)
+            {
+                var openConstructedGenericDefinition = openConstructedType.GetGenericTypeDefinition();
+                var openConstructedGenericArguments = openConstructedType.GetGenericArguments();
+
+                foreach (var inheritedCloseConstructedType in closedConstructedType.AndBaseTypeAndInterfaces())
+                {
+                    if (inheritedCloseConstructedType.IsGenericType &&
+                        inheritedCloseConstructedType.GetGenericTypeDefinition() == openConstructedGenericDefinition)
+                    {
+                        var inheritedClosedConstructedGenericArguments = inheritedCloseConstructedType.GetGenericArguments();
+
+                        var closedConstructedGenericArguments = new Type[openConstructedGenericArguments.Length];
+
+                        for (var i = 0; i < openConstructedGenericArguments.Length; i++)
+                        {
+                            closedConstructedGenericArguments[i] = openConstructedGenericArguments[i].MakeGenericTypeVia(
+                                inheritedClosedConstructedGenericArguments[i],
+                                resolvedGenericParameters,
+                                safe: false);
+                        }
+
+                        return openConstructedGenericDefinition.MakeGenericType(closedConstructedGenericArguments);
+                    }
+                }
+
+                throw new GenericClosingException(openConstructedType, closedConstructedType);
+            }
+
+            if (openConstructedType.IsArray)
+            {
+                if (!closedConstructedType.IsArray || closedConstructedType.GetArrayRank() != openConstructedType.GetArrayRank())
+                    throw new GenericClosingException(openConstructedType, closedConstructedType);
+
+                var openConstructedElementType = openConstructedType.GetElementType();
+                var closedConstructedElementType = closedConstructedType.GetElementType();
+
+                return openConstructedElementType.MakeGenericTypeVia(closedConstructedElementType, resolvedGenericParameters, safe: false).MakeArrayType(openConstructedType.GetArrayRank());
+            }
+
+            if (openConstructedType.IsByRef)
+            {
+                if (!closedConstructedType.IsByRef)
+                    throw new GenericClosingException(openConstructedType, closedConstructedType);
+
+                var openConstructedElementType = openConstructedType.GetElementType();
+                var closedConstructedElementType = closedConstructedType.GetElementType();
+
+                return openConstructedElementType.MakeGenericTypeVia(closedConstructedElementType, resolvedGenericParameters, safe: false).MakeByRefType();
+            }
+
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// 这是一个密封类 GenericClosingException，继承自 Exception
+    /// </summary>
+    public sealed class GenericClosingException : Exception
+    {
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public GenericClosingException(string message) : base(message)
+        {
+        }
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public GenericClosingException(Type open, Type closed) : base($"Open-constructed type '{open}' is not assignable from closed-constructed type '{closed}'.")
+        {
+        }
+    }
+
     class Program
     {
         private static void Main(string[] args)
@@ -20,197 +279,41 @@ namespace AIO
             Console.Read();
         }
 
-        private static void WIN11_TEST_PASS_API()
+        public static void MakeGenericTypeVia_Should_Resolve_Closed_Generic_Type()
         {
-            PrWin.Open.Wiaacmgr().Sync();
-            PrWin.Open.Wscript().Sync();
-            PrWin.Open.Mspaint().Sync();
-            PrWin.Open.Mstsc().Sync();
-            PrWin.Open.Magnify().Sync();
-            PrWin.Open.Mmc().Sync();
-            PrWin.Open.Mobsync().Sync();
-            PrWin.Open.Dcomcnfg().Sync();
-            PrWin.Open.Dvdplay().Sync();
-            PrWin.Open.Notepad().Sync();
-            PrWin.Open.Nslookup("www.baidu.com").Sync();
-            PrWin.Open.Narrator().Sync();
-            PrWin.Open.Sigverif().Sync();
-            PrWin.Open.Taskmgr().Sync();
-            PrWin.Open.Eventvwr().Sync();
-            PrWin.Open.Eudcedit().Sync();
-            PrWin.Open.Explorer(@"E:/Test/Test1").Sync();
-            PrWin.Open.Perfmon().Sync();
-            PrWin.Open.Regedit().Sync();
-            PrWin.Open.Regedt32().Sync();
-            PrWin.Open.Chkdsk().Sync();
-            PrWin.Open.Calc().Sync();
-            PrWin.Open.Charmap().Sync();
-            PrWin.Open.SQLSERVER().Sync();
-            PrWin.Open.Cleanmgr().Sync();
-            PrWin.Open.OSK().Sync();
-            PrWin.Open.Odbcad32().Sync();
-            PrWin.Open.Utilman().Sync();
-            PrWin.Open.Netstat().Sync();
-            PrWin.Open.Sndrec32().Sync();
+            // Arrange
+            var openConstructedType = typeof(List<>);
+            var closedConstructedType = typeof(List<int>);
+            var expectedClosedConstructedType = typeof(List<int>);
+
+            var resolvedGenericParameters = new Dictionary<Type, Type>();
+
+            // Act
+            var actualClosedConstructedType = openConstructedType.MakeGenericTypeVia(closedConstructedType, resolvedGenericParameters);
+
+            // Assert
+            Assert.AreEqual(expectedClosedConstructedType, actualClosedConstructedType);
         }
 
-        private static void MAC_TEST_PASS_API()
+        public static void MakeGenericTypeVia_Should_Resolve_Nested_Generic_Type()
         {
-            PrMac.Open.Path("").Sync();
-            PrMac.Git.Add("").Sync();
-            PrMac.Git.Clone("", "").Sync();
+            // Arrange
+            var openConstructedType = typeof(Dictionary<,>);
+            var closedConstructedType = typeof(Dictionary<string, List<int>>);
+            var expectedClosedConstructedType = typeof(Dictionary<string, List<int>>);
+
+            var resolvedGenericParameters = new Dictionary<Type, Type>();
+
+            // Act
+            var actualClosedConstructedType = openConstructedType.MakeGenericTypeVia(closedConstructedType, resolvedGenericParameters);
+
+            // Assert
+            Assert.AreEqual(expectedClosedConstructedType, actualClosedConstructedType);
         }
 
-        private async static void Test()
+        private static void Test()
         {
-            PrCourse.IsLog = false;
-
-            //await PrWin.Open.ControlPanel();
-            //Console.WriteLine("---------------");
-
-            //PrWin.Open.Calc().Sync();
-            //Console.WriteLine("---------------");
-            //var a = PrWin.Open.Calc().OnComplete((ret) =>
-            //{
-            //    Console.WriteLine("Calc");
-            //});
-
-            //PrWin.Open.ControlPanel().Link(a).OnComplete((ret) =>
-            //{
-            //    Console.WriteLine("ControlPanel");
-            //}).Async();
-
-            //await PrWin.Certutil.MD5(@"E:\TencentGit\Packages\com.self.package").OnProgress
-            //((o, e) =>
-            //{
-            //    Console.WriteLine(" -------------OnProgress------------- ");
-            //    Console.WriteLine(e.Data);
-            //}).OnComplete((r) =>
-            //{
-            //    Console.WriteLine(" -------------OnComplete------------- ");
-            //    Console.WriteLine(r.StdALL);
-            //});
-
-            //var b = await new Awaiter();
-            //Console.WriteLine(b.value);
-
-
-            //var path = @"Packages\\com\.[^\\]+\.package\\Plugins~\\RainbowAssets";
-
-            //if (Regex.IsMatch(@"^[^\\/:*?\""<>|,]+$", Path.GetFileName(path)))
-            //{
-            //    Console.WriteLine("请勿在文件名中包含\\ / : * ？ \" < > |等字符，请重新输入有效文件名！");
-            //}
-            //else Console.WriteLine("文件名有效");
-
-            //if (Regex.IsMatch(path, @"^([a-zA-Z]:\\)?[^/:*?\""<>|,]*$"))
-            //{
-            //    if (Regex.IsMatch(path, @"^([a-zA-Z]:\\)?[^/:*?\""<>|,]*" + path))
-            //    {
-            //        Console.WriteLine("文件路径有效");
-            //    }
-            //    else Console.WriteLine("非法的文件保存路径，请重新选择或输入！");
-            //}
-            //else Console.WriteLine("文件路径有效");
-
-            var root = new DirectoryInfo(@"E:\TencentGit\AIO20200337");
-            var value = "Packages\\\\[^\\\\]*\\\\Plugins~\\\\BeastConsole";
-            var name = Path.GetFileName(value);
-            Console.WriteLine(name);
-            try
-            {
-                var regex = new Regex(value + "\\b");
-                foreach (var directory in root.GetDirectories("*.*", SearchOption.AllDirectories))
-                {
-                    try
-                    {
-                        if (directory.Name == name && regex.Match(directory.FullName).Success)
-                            Console.WriteLine(directory.FullName);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine("{0} => {1}", directory.FullName, e);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-        }
-
-        public static IEnumerator enumerator()
-        {
-            yield return PrWin.Open.ControlPanel();
-            Console.WriteLine("---------------");
-            yield return PrWin.Open.Calc();
-            Console.WriteLine("---------------");
-        }
-
-        public class Awaiter
-        {
-            public static int v = 0;
-            Result r;
-
-            public TaskAwaiter<Result> GetAwaiter()
-            {
-                Console.WriteLine(" ----------- GetAwaiter ----------- ");
-                return Task.Factory.StartNew(() =>
-                {
-                    while (r.IsCompleted == false)
-                        if (v++ >= 1000)
-                            r.Finish();
-
-                    return r;
-                }).GetAwaiter();
-                //while (r.IsCompleted == false)
-                //{
-                //    //Console.WriteLine(" ----------- 等待异步操作 ----------- {0}", v++);
-                //    v++;
-                //}
-                //return r;
-            }
-
-            public Awaiter()
-            {
-                r = new Result();
-            }
-        }
-
-        public class Result : ICriticalNotifyCompletion, INotifyCompletion
-        {
-            public int value { get; private set; }
-
-            public bool IsCompleted { get; private set; }
-
-            public Result()
-            {
-                value = 99;
-                IsCompleted = false;
-            }
-
-            public void Finish()
-            {
-                IsCompleted = true;
-            }
-
-            public Result GetResult()
-            {
-                Console.WriteLine(" ----------- GetResult ----------- ");
-                return this;
-            }
-
-            public void UnsafeOnCompleted(Action continuation)
-            {
-                continuation();
-                Console.WriteLine(" ----------- Unsafe OnCompleted ----------- ");
-            }
-
-            public void OnCompleted(Action continuation)
-            {
-                continuation();
-                Console.WriteLine(" ----------- On Completed ----------- ");
-            }
+            MakeGenericTypeVia_Should_Resolve_Nested_Generic_Type();
         }
     }
 }

@@ -51,8 +51,23 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Script\Class\Action\Action.Extend.cs" />
+    <Compile Include="Script\Class\FieldInfo\FieldInfo.Extend.IS.cs" />
+    <Compile Include="Script\Class\MethodBase\MethodBase.Extend.Get.cs" />
+    <Compile Include="Script\Class\MethodInfo\MethodInfo.Extend.cs" />
+    <Compile Include="Script\Class\MethodInfo\MethodInfo.Extend.IS.cs" />
+    <Compile Include="Script\Class\ParameterInfo\ParameterInfo.Extend.cs" />
+    <Compile Include="Script\Class\PropertyInfo\PropertyInfo.Extend.IS.cs" />
     <Compile Include="Script\Class\StringBuilder\StringBuilderExtend.cs" />
     <Compile Include="Script\Class\String\String.Extend.Path.cs" />
+    <Compile Include="Script\Class\String\String.Extend.To.cs" />
+    <Compile Include="Script\Class\String\String.Extend.Trim.cs" />
+    <Compile Include="Script\Class\Type\Type.Extend.And.cs" />
+    <Compile Include="Script\Class\Type\Type.Extend.Get.cs" />
+    <Compile Include="Script\Class\Type\Type.Extend.IS.cs" />
+    <Compile Include="Script\Class\Type\Type.Extend.To.cs" />
+    <Compile Include="Script\Exception\GenericClosingException.cs" />
+    <Compile Include="Script\Interface\Empty.cs" />
+    <Compile Include="Script\Interface\ICustomAttributeProvider\ICustomAttributeProvider.Extend.cs" />
     <Compile Include="Script\Interface\IDictionary\IDictionary.Extend.Add.cs" />
     <Compile Include="Script\Interface\IDictionary\IDictionary.Extend.Remove.cs" />
     <Compile Include="Script\Interface\IDictionary\IDictionary.Extend.Swap.cs" />
@@ -84,7 +99,7 @@
     <Compile Include="Script\Class\String\String.Extend.ToConver.cs" />
     <Compile Include="Script\Class\String\String.Extend.Format.cs" />
     <Compile Include="Script\Class\Thread\ThreadExtend.cs" />
-    <Compile Include="Script\Class\Type\TypeExtend.cs" />
+    <Compile Include="Script\Class\Type\Type.Extend.Reset.cs" />
     <Compile Include="Script\Enum\EnumExtend.cs" />
     <Compile Include="Script\Interface\ICollection\ICollection.Extend.Find.cs" />
     <Compile Include="Script\Interface\IComparable\IComparable.Extend.cs" />
@@ -103,6 +118,7 @@
     <Compile Include="Script\Interface\IList\IList.Extend.Rmove.cs" />
     <Compile Include="Script\Interface\IList\IList.Extend.Set.cs" />
     <Compile Include="Script\Interface\IList\String\IList.String.Extend.Add.cs" />
+    <Compile Include="Script\Interface\IType\IType.Extend.cs" />
     <Compile Include="Script\Struct\Byte\Byte.Extend.cs" />
     <Compile Include="Script\Struct\Char\Char.Extend.cs" />
     <Compile Include="Script\Struct\Char\Char.Extend.Get.cs" />
@@ -116,6 +132,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Script\Interface\ISpan\ISpan.Extend.Copy.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Script\Interface\IReflect\IReflect.Extend.Get.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

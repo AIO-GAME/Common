@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace AIO
@@ -22,7 +23,15 @@ namespace AIO
         {
             return Encoding.Default.GetString(bytes, offset, count);
         }
-
+        
+        /// <summary>
+        /// 转化为二进制文本
+        /// </summary>
+        public static string ToHexString(this byte[] bytes)
+        {
+            return BitConverter.ToString(bytes).Replace("-", "");
+        }
+        
         /// <summary>
         /// 转化为字符串 UTF8格式
         /// </summary>
