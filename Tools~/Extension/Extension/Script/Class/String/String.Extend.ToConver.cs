@@ -13,7 +13,6 @@ namespace AIO
 {
     public static partial class StringExtend
     {
-      
         /// <summary>
         /// 解析字符串为 ulong
         /// </summary>
@@ -157,7 +156,7 @@ namespace AIO
         {
             if (string.IsNullOrEmpty(value))
                 return Array.Empty<int>();
-            var strs = value.Split(new char[] { ',' });
+            var strs = value.Split(',');
             var returns = new int[strs.Length];
             for (var i = 0; i < returns.Length; i++)
             {
@@ -171,10 +170,10 @@ namespace AIO
         /// 解析字符串(以,分割)为一维数字数组
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int[] ToConverInts(this string value, char split)
+        public static int[] ToConverInts(this string value, in char split)
         {
             if (string.IsNullOrEmpty(value)) return Array.Empty<int>();
-            var strs = value.Split(new char[] { split });
+            var strs = value.Split(split);
             var returns = new int[strs.Length];
             for (var i = 0; i < returns.Length; i++)
             {

@@ -8,7 +8,8 @@ namespace AIO
     public sealed class InvalidOperatorException : OperatorException
     {
         /// <inheritdoc />
-        public InvalidOperatorException(in string symbol, in Type type) : base($"Operator '{symbol}' cannot be applied to operand of type '{type?.ToString() ?? "null"}'.")
+        public InvalidOperatorException(in string symbol, in Type type) : base(
+            $"Operator '{symbol}' cannot be applied to operand of type '{type?.ToString() ?? "null"}'.")
         {
         }
 

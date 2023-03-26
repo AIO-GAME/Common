@@ -57,7 +57,7 @@
     <Compile Include="Script\Class\MethodInfo\MethodInfo.Extend.IS.cs" />
     <Compile Include="Script\Class\ParameterInfo\ParameterInfo.Extend.cs" />
     <Compile Include="Script\Class\PropertyInfo\PropertyInfo.Extend.IS.cs" />
-    <Compile Include="Script\Class\StringBuilder\StringBuilderExtend.cs" />
+    <Compile Include="Script\Class\StringBuilder\StringBuilder.Extend.cs" />
     <Compile Include="Script\Class\String\String.Extend.Path.cs" />
     <Compile Include="Script\Class\String\String.Extend.To.cs" />
     <Compile Include="Script\Class\String\String.Extend.Trim.cs" />
@@ -98,7 +98,7 @@
     <Compile Include="Script\Class\String\String.Extend.Split.cs" />
     <Compile Include="Script\Class\String\String.Extend.ToConver.cs" />
     <Compile Include="Script\Class\String\String.Extend.Format.cs" />
-    <Compile Include="Script\Class\Thread\ThreadExtend.cs" />
+    <Compile Include="Script\Class\Thread\Thread.Extend.cs" />
     <Compile Include="Script\Class\Type\Type.Extend.Reset.cs" />
     <Compile Include="Script\Enum\EnumExtend.cs" />
     <Compile Include="Script\Interface\ICollection\ICollection.Extend.Find.cs" />
@@ -119,7 +119,7 @@
     <Compile Include="Script\Interface\IList\IList.Extend.Set.cs" />
     <Compile Include="Script\Interface\IList\String\IList.String.Extend.Add.cs" />
     <Compile Include="Script\Interface\IType\IType.Extend.cs" />
-    <Compile Include="Script\Struct\Byte\Byte.Extend.cs" />
+    <Compile Include="Script\Struct\Byte\Byte.Extend.To.cs" />
     <Compile Include="Script\Struct\Char\Char.Extend.cs" />
     <Compile Include="Script\Struct\Char\Char.Extend.Get.cs" />
     <Compile Include="Script\Struct\Char\Char.Extend.IS.cs" />

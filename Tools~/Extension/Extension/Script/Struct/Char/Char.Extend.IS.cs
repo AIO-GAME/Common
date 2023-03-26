@@ -1,4 +1,6 @@
-﻿namespace AIO
+﻿using System.Runtime.CompilerServices;
+
+namespace AIO
 {
     public partial class CharExtend
     {
@@ -7,6 +9,7 @@
         /// </summary>
         /// <param name="c">要检查的字符</param>
         /// <returns>如果字符是单词分隔符，则为 true；否则为 false</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsWordDelimiter(this char c)
         {
             return char.IsWhiteSpace(c) || char.IsSymbol(c) || char.IsPunctuation(c);
@@ -16,16 +19,18 @@
         /// 判断字符串在指定范围
         /// </summary>
         /// <returns></returns>
-        public static bool IsInRange(this char c, char start, char end)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInRange(this char c, in char start, in char end)
         {
             return start <= c && c <= end;
         }
-        
+
         /// <summary>
         /// 判断字符串在指定范围
         /// </summary>
         /// <returns></returns>
-        public static bool IsInRange(this char c, int start, int end)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsInRange(this char c, in int start, in int end)
         {
             return start <= c && c <= end;
         }
@@ -37,6 +42,7 @@
         /// <param name="current">当前字符</param>
         /// <param name="next">后一个字符，如果不存在则为 null</param>
         /// <returns>如果该字符可能是单词开始，则为 true；否则为 false</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsWordBeginning(this char? c, in char current, in char? next)
         {
             var isFirst = c == null;

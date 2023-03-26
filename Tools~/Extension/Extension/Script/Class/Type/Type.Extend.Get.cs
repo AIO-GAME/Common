@@ -9,22 +9,23 @@ namespace AIO
 {
     public partial class TypeExtend
     {
-        public static MemberInfo[] GetExtendedMembers(this Type type, BindingFlags flags)
+        /// <summary>
+        /// 获取指定类型的所有成员信息，并包括扩展方法。
+        /// </summary>
+        /// <param name="type">要获取其成员信息的类型。</param>
+        /// <param name="flags">用于控制成员信息筛选的 BindingFlags 枚举值之一。</param>
+        /// <returns>一个数组，包含指定类型的所有成员信息以及扩展方法。</returns>
+        public static MemberInfo[] GetExtendedMembers(this Type type, in BindingFlags flags)
         {
             var members = type.GetMembers(flags).ToHashSet();
-
-            foreach (var extensionMethod in type.GetExtensionMethods())
-            {
-                members.Add(extensionMethod);
-            }
-
+            foreach (var extensionMethod in type.GetExtensionMethods()) members.Add(extensionMethod);
             return members.ToArray();
         }
 
         private static readonly Lazy<ExtensionMethodCache> ExtensionMethodsCache;
         private static readonly Lazy<Dictionary<Type, MethodInfo[]>> InheritedExtensionMethodsCache;
         private static readonly Lazy<HashSet<MethodInfo>> GenericExtensionMethods;
-        private static readonly List<Type> _types = new List<Type>();
+        private static readonly List<Type> types = new List<Type>();
 
         internal class ExtensionMethodCache
         {
@@ -32,7 +33,7 @@ namespace AIO
             {
                 // Cache a list of all extension methods in assemblies
                 // http://stackoverflow.com/a/299526
-                Cache = _types
+                Cache = types
                     .Where(type => type.IsStatic() && !type.IsGenericType && !type.IsNested)
                     .SelectMany(type => type.GetMethods())
                     .Where(method => method.IsExtension())
@@ -76,7 +77,13 @@ namespace AIO
             }
         }
 
-        public static IEnumerable<MethodInfo> GetExtensionMethods(this Type thisArgumentType, bool inherited = true)
+        /// <summary>
+        /// 获取指定类型的所有扩展方法。
+        /// </summary>
+        /// <param name="thisArgumentType">扩展方法的第一个参数类型。</param>
+        /// <param name="inherited">是否包括从基类继承而来的扩展方法，默认为 true。</param>
+        /// <returns>一个 IEnumerable，包含指定类型的所有扩展方法。</returns>
+        public static IEnumerable<MethodInfo> GetExtensionMethods(this Type thisArgumentType, in bool inherited = true)
         {
             if (inherited)
             {
@@ -91,11 +98,9 @@ namespace AIO
                     return inheritedExtensionMethods;
                 }
             }
-            else
-            {
-                var methodInfos = ExtensionMethodsCache.Value.Cache;
-                return methodInfos.Where(method => method.GetParameters()[0].ParameterType == thisArgumentType);
-            }
+
+            var methodInfos = ExtensionMethodsCache.Value.Cache;
+            return methodInfos.Where(method => method.GetParameters()[0].ParameterType == thisArgumentType);
         }
 
         /// <summary>
@@ -362,15 +367,15 @@ namespace AIO
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<Type> GetTypesSafely(this Assembly assembly)
         {
-            Type[] types;
+            Type[] array;
 
             try
             {
-                types = assembly.GetTypes();
+                array = assembly.GetTypes();
             }
             catch (ReflectionTypeLoadException ex) when (ex.Types.Any(t => t != null))
             {
-                types = ex.Types.Where(t => t != null).ToArray();
+                array = ex.Types.Where(t => t != null).ToArray();
             }
             catch (Exception ex)
             {
@@ -378,15 +383,11 @@ namespace AIO
                 yield break;
             }
 
-            foreach (var type in types)
+            foreach (var type in array)
             {
                 // Apparently void can be returned somehow:
                 // http://support.ludiq.io/topics/483
-                if (type == typeof(void))
-                {
-                    continue;
-                }
-
+                if (type == typeof(void)) continue;
                 yield return type;
             }
         }

@@ -20,14 +20,13 @@ namespace AIO
         }
 
         #region Array
-
         /// <summary>
-        /// 
+        /// 从字节数组中提取一个字符串，并将其转换为字符数组。
         /// </summary>
-        /// <param name="array"></param>
-        /// <param name="index"></param>
-        /// <param name="reverse"></param>
-        /// <returns></returns>
+        /// <param name="array">要从中提取字符串的字节数组。</param>
+        /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
+        /// <param name="reverse">是否反转字节序。</param>
+        /// <returns>从字节数组中提取出的字符串的字符数组表示形式。</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static char[] GetCharArray(this IList<byte> array, ref int index, in bool reverse = false)
         {
@@ -38,12 +37,12 @@ namespace AIO
         }
 
         /// <summary>
-        /// 
+        /// 从字节数组中提取多个Bool，并将其转换为字符数组。
         /// </summary>
-        /// <param name="array"></param>
-        /// <param name="index"></param>
-        /// <param name="reverse"></param>
-        /// <returns></returns>
+        /// <param name="array">要从中提取字符串的字节数组。</param>
+        /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
+        /// <param name="reverse">是否反转字节序。</param>
+        /// <returns>从字节数组中提取出的字符串的字符数组表示形式。</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool[] GetBoolArray(this IList<byte> array, ref int index, in bool reverse = false)
         {
@@ -60,12 +59,12 @@ namespace AIO
         }
 
         /// <summary>
-        /// 
+        /// 从字节数组中提取多个SByte，并将其转换为字符数组。
         /// </summary>
-        /// <param name="array"></param>
-        /// <param name="index"></param>
-        /// <param name="reverse"></param>
-        /// <returns></returns>
+        /// <param name="array">要从中提取字符串的字节数组。</param>
+        /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
+        /// <param name="reverse">是否反转字节序。</param>
+        /// <returns>从字节数组中提取出的字符串的字符数组表示形式。</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static sbyte[] GetSByteArray(this IList<byte> array, ref int index, in bool reverse = false)
         {
@@ -81,13 +80,9 @@ namespace AIO
             return list;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="array"></param>
-        /// <param name="index"></param>
-        /// <param name="reverse"></param>
-        /// <returns></returns>
+        /// <param name="array">要从中提取字符串的字节数组。</param>
+        /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
+        /// <param name="reverse">是否反转字节序。</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte[] GetByteArray(this IList<byte> array, ref int index, in bool reverse = false)
         {
@@ -103,13 +98,9 @@ namespace AIO
             return list;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="array"></param>
-        /// <param name="index"></param>
-        /// <param name="reverse"></param>
-        /// <returns></returns>
+        /// <param name="array">要从中提取字符串的字节数组。</param>
+        /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
+        /// <param name="reverse">是否反转字节序。</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static short[] GetInt16Array(this IList<byte> array, ref int index, in bool reverse = false)
         {
@@ -119,13 +110,9 @@ namespace AIO
             return list;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="array"></param>
-        /// <param name="index"></param>
-        /// <param name="reverse"></param>
-        /// <returns></returns>
+        /// <param name="array">要从中提取字符串的字节数组。</param>
+        /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
+        /// <param name="reverse">是否反转字节序。</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ushort[] GetUInt16Array(this IList<byte> array, ref int index, in bool reverse = false)
         {
@@ -135,13 +122,9 @@ namespace AIO
             return list;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="array"></param>
-        /// <param name="index"></param>
-        /// <param name="reverse"></param>
-        /// <returns></returns>
+        /// <param name="array">要从中提取字符串的字节数组。</param>
+        /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
+        /// <param name="reverse">是否反转字节序。</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint[] GetUInt32Array(this IList<byte> array, ref int index, in bool reverse = false)
         {
@@ -151,13 +134,9 @@ namespace AIO
             return list;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="array"></param>
-        /// <param name="index"></param>
-        /// <param name="reverse"></param>
-        /// <returns></returns>
+        /// <param name="array">要从中提取字符串的字节数组。</param>
+        /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
+        /// <param name="reverse">是否反转字节序。</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int[] GetInt32Array(this IList<byte> array, ref int index, in bool reverse = false)
         {
@@ -167,13 +146,9 @@ namespace AIO
             return list;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="array"></param>
-        /// <param name="index"></param>
-        /// <param name="reverse"></param>
-        /// <returns></returns>
+        /// <param name="array">要从中提取字符串的字节数组。</param>
+        /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
+        /// <param name="reverse">是否反转字节序。</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong[] GetUInt64Array(this IList<byte> array, ref int index, in bool reverse = false)
         {
@@ -183,13 +158,9 @@ namespace AIO
             return list;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="array"></param>
-        /// <param name="index"></param>
-        /// <param name="reverse"></param>
-        /// <returns></returns>
+        /// <param name="array">要从中提取字符串的字节数组。</param>
+        /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
+        /// <param name="reverse">是否反转字节序。</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long[] GetInt64Array(this IList<byte> array, ref int index, in bool reverse = false)
         {
@@ -199,14 +170,10 @@ namespace AIO
             return list;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="array"></param>
-        /// <param name="index"></param>
-        /// <param name="all"></param>
-        /// <param name="reverse"></param>
-        /// <returns></returns>
+        /// <param name="array">要从中提取字符串的字节数组。</param>
+        /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
+        /// <param name="all">全部</param>
+        /// <param name="reverse">是否反转字节序。</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float[] GetFloatArray(this IList<byte> array, ref int index, bool all = false, in bool reverse = false)
         {
@@ -216,14 +183,10 @@ namespace AIO
             return list;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="array"></param>
-        /// <param name="index"></param>
-        /// <param name="all"></param>
-        /// <param name="reverse"></param>
-        /// <returns></returns>
+        /// <param name="array">要从中提取字符串的字节数组。</param>
+        /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
+        /// <param name="all">全部</param>
+        /// <param name="reverse">是否反转字节序。</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double[] GetDoubleArray(this IList<byte> array, ref int index, bool all = false, in bool reverse = false)
         {
@@ -233,13 +196,9 @@ namespace AIO
             return list;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="array"></param>
-        /// <param name="index"></param>
-        /// <param name="reverse"></param>
-        /// <returns></returns>
+        /// <param name="array">要从中提取字符串的字节数组。</param>
+        /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
+        /// <param name="reverse">是否反转字节序。</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static decimal[] GetDecimalArray(this IList<byte> array, ref int index, in bool reverse = false)
         {
@@ -249,12 +208,8 @@ namespace AIO
             return list;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="array"></param>
-        /// <param name="index"></param>
-        /// <returns></returns>
+        /// <param name="array">要从中提取字符串的字节数组。</param>
+        /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int[] GetLenArray(this IList<byte> array, ref int index)
         {
@@ -264,14 +219,10 @@ namespace AIO
             return list;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="array"></param>
-        /// <param name="index"></param>
-        /// <param name="encoding"></param>
-        /// <param name="reverse"></param>
-        /// <returns></returns>
+        /// <param name="array">要从中提取字符串的字节数组。</param>
+        /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
+        /// <param name="encoding">格式化</param>
+        /// <param name="reverse">是否反转字节序。</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string[] GetStringArray(this IList<byte> array, ref int index, Encoding encoding = null, in bool reverse = false)
         {
@@ -281,14 +232,9 @@ namespace AIO
             return list;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="array"></param>
-        /// <param name="index"></param>
-        /// <param name="reverse"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <param name="array">要从中提取字符串的字节数组。</param>
+        /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
+        /// <param name="reverse">是否反转字节序。</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T[] GetEnumArray<T>(this IList<byte> array, ref int index, in bool reverse = false) where T : Enum
         {
@@ -301,11 +247,8 @@ namespace AIO
         #endregion
 
         /// <summary>
-        /// 
+        /// 获取 bool 值
         /// </summary>
-        /// <param name="array"></param>
-        /// <param name="index"></param>
-        /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool GetBool(this IList<byte> array, ref int index)
         {
@@ -313,13 +256,8 @@ namespace AIO
         }
 
         /// <summary>
-        /// 
+        /// 获取 Enum 值
         /// </summary>
-        /// <param name="array"></param>
-        /// <param name="index"></param>
-        /// <param name="reverse"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T GetEnum<T>(this IList<byte> array, ref int index, in bool reverse = false) where T : Enum
         {
@@ -327,12 +265,8 @@ namespace AIO
         }
 
         /// <summary>
-        /// 
+        /// 获取 Char 值
         /// </summary>
-        /// <param name="array"></param>
-        /// <param name="index"></param>
-        /// <param name="reverse"></param>
-        /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static char GetChar(this IList<byte> array, ref int index, in bool reverse = false)
         {

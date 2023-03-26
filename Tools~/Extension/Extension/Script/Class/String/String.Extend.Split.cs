@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -65,17 +66,9 @@ namespace AIO
         {
             if (string.IsNullOrWhiteSpace(str)) return Array.Empty<string>();
 
-            var lines = new List<string>();
-            foreach (var line in XSplit(str, '\n'))
-            {
-                var trimmedLine = line.Trim('\r', '\n');
-                if (!string.IsNullOrEmpty(trimmedLine))
-                {
-                    lines.Add(trimmedLine);
-                }
-            }
-
-            return lines.ToArray();
+            return XSplit(str, '\n')
+                .Select(line => line.Trim('\r', '\n'))
+                .Where(trimmedLine => !string.IsNullOrEmpty(trimmedLine)).ToArray();
         }
 
         /// <summary>

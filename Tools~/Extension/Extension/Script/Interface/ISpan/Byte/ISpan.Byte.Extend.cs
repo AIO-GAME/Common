@@ -23,10 +23,11 @@ namespace AIO
         {
             return Encoding.Default.GetString(bytes, offset, count);
         }
-        
+
         /// <summary>
         /// 转化为二进制文本
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToHexString(this byte[] bytes)
         {
             return BitConverter.ToString(bytes).Replace("-", "");

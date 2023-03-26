@@ -22,7 +22,6 @@ namespace AIO
     //  char    表示无符号的16位整数     0~65535
 
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     /// <summary>

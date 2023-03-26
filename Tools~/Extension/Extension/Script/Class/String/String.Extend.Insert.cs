@@ -5,12 +5,11 @@
 |*|=============================================*/
 
 
+using System;
 using System.Runtime.CompilerServices;
 
 namespace AIO
 {
-    using System;
-
     public static partial class StringExtend
     {
         /// <summary>
@@ -30,13 +29,16 @@ namespace AIO
             var context = info.ToString();
 
             // 计算需要插入的次数
-            var insertCount = (int)Math.Ceiling((double)(str.Length / space)) - 1;
-
-            // 插入指定内容字符串
-            for (var i = 0; i < insertCount; i++)
+            if (string.IsNullOrEmpty(str))
             {
-                var index = (i + 1) * space + i * context.Length;
-                str = str.Insert(index, context);
+                var insertCount = (int)Math.Ceiling(str.Length / (double)space) - 1;
+
+                // 插入指定内容字符串
+                for (var i = 0; i < insertCount; i++)
+                {
+                    var index = (i + 1) * space + i * context.Length;
+                    str = str.Insert(index, context);
+                }
             }
 
             return str;

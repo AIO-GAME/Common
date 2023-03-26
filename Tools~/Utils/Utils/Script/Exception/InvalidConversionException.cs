@@ -17,14 +17,15 @@ namespace AIO
         /// <summary>
         /// 构造函数
         /// </summary>
-        public InvalidConversionException(string message) : base(message)
+        public InvalidConversionException(in string message) : base(message)
         {
         }
 
         /// <summary>
         /// 构造函数
         /// </summary>
-        public InvalidConversionException(string message, Exception innerException) : base(message, innerException)
+        public InvalidConversionException(in string message, in Exception innerException)
+            : base(message, innerException)
         {
         }
     }

@@ -55,10 +55,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Script\Extension\UnityObject.Extend.IS.cs" />
+    <Compile Include="Script\Color\U.Color.cs" />
+    <Compile Include="Script\Extension\Object.Extend.cs" />
+    <Compile Include="Script\Extension\RuntimePlatform.Extend.cs" />
     <Compile Include="Script\fsSerializer\Unity\fsSerializationCallbackReceiverProcessor.cs" />
     <Compile Include="Script\fsSerializer\Unity\UnityFSSerializer.cs" />
-    <Compile Include="Script\Platform\PlatformUtils.cs" />
+    <Compile Include="Script\Math\AngleFixed.cs" />
+    <Compile Include="Script\Platform\U.Platform.cs" />
+    <Compile Include="Script\Pool\Cacheable.cs" />
+    <Compile Include="Script\Pool\CacheableLife.cs" />
+    <Compile Include="Script\Pool\CacheableLite.cs" />
+    <Compile Include="Script\Pool\ICacheableHandler.cs" />
+    <Compile Include="Script\Pool\ILiteCacheable.cs" />
+    <Compile Include="Script\Pool\LiteCacheableState.cs" />
+    <Compile Include="Script\Pool\LitePool.cs" />
+    <Compile Include="Script\Pool\U.Pool.cs" />
+    <Compile Include="Script\Prefs\U.Prefs.cs" />
+    <Compile Include="Script\Prefs\U.Prefs.Load.cs" />
+    <Compile Include="Script\Profiling\U.Profiler.cs" />
     <Compile Include="Script\Serialization\ISerializationDependency.cs" />
     <Compile Include="Script\Serialization\ISerializationDepender.cs" />
     <Compile Include="Script\Serialization\Serialization.cs" />
@@ -67,15 +81,21 @@
     <Compile Include="Script\fsSerializer\Unity\Ray2DConverter.cs" />
     <Compile Include="Script\fsSerializer\Unity\RayConverter.cs" />
     <Compile Include="Script\fsSerializer\Unity\UnityObjectConverter.cs" />
-    <Compile Include="Script\IO\IOUnityGet.cs" />
+    <Compile Include="Script\IO\U.IO.Unity.cs" />
     <Compile Include="Script\Profiling\ProfiledSegment.cs" />
     <Compile Include="Script\Profiling\ProfiledSegmentCollection.cs" />
     <Compile Include="Script\Profiling\ProfilingScope.cs" />
     <Compile Include="Script\Profiling\ProfilingUtils.cs" />
+    <Compile Include="Script\SystemInfo\U.SystemInfo.cs" />
+    <Compile Include="Script\Task\U.Task.cs" />
     <Compile Include="Script\Thread\UnityThread.cs" />
+    <Compile Include="UtilsManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Compile Include="Script\Math\U.Math.cs" />
+    <Compile Include="Script\Thread\U.Thread.cs" />
+    <Compile Include="Script\Prefs\U.Prefs.Svae.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Ensure\Ensure\Ensure.csproj">

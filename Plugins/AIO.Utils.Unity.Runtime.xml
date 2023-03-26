@@ -4,6 +4,690 @@
         <name>AIO.Utils.Unity.Runtime</name>
     </assembly>
     <members>
+        <member name="T:UtilsEngine">
+            <summary>
+            工具类
+            </summary>
+        </member>
+        <member name="T:UtilsEngine.ColorX">
+            <summary>
+            颜色工具类
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.ColorX.ColorToInt(UnityEngine.Color@)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.ColorX.NewColor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            颜色 R G B A
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.ColorX.IntToColor(System.UInt32)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.ColorX.HexStringToColor(System.String,UnityEngine.Color)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.ColorX.ColorToHexString(UnityEngine.Color)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.ColorX.ToHex(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            #FFFFFF 转换为 16进制
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.ColorX.ParseHtmlString(System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.ColorX.HexToColor(System.String)">
+            <summary>
+            hex转换到color
+            </summary>
+        </member>
+        <member name="T:UtilsEngine.Platform">
+            <summary>
+            平台工具类
+            </summary>
+        </member>
+        <member name="F:UtilsEngine.Platform.supportsJit">
+            <summary>
+            支持jit
+            </summary>
+        </member>
+        <member name="F:UtilsEngine.Pool.Cache">
+            <summary>
+            缓存列表
+            </summary>
+        </member>
+        <member name="T:UtilsEngine.Prefs">
+            <summary>
+            持久化数据
+            </summary>
+        </member>
+        <member name="T:UtilsEngine.ProfilerX">
+            <summary>
+            分析器
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.ProfilerX.GetMemoryObject``1(``0)">
+            <summary>
+            获取当前数据 在Unity内部声明内存
+            </summary>
+            <param name="obj">数据</param>
+            <returns>占用内存</returns>
+        </member>
+        <member name="T:UtilsEngine.IO">
+            <summary>
+            Unity IO
+            </summary>
+        </member>
+        <member name="P:UtilsEngine.IO.UnityPath">
+            <summary>
+            Unity默认路径
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.IO.GetFilesRelativeAsset(System.String,System.String@,System.IO.SearchOption@)">
+            <summary>
+            获取资源文件夹下
+            </summary>
+            <param name="value">路径</param>
+            <param name="pattern">匹配模式</param>
+            <param name="option">查找模式</param>
+            <returns>以Assets路径为节点的路径数组</returns>
+        </member>
+        <member name="M:UtilsEngine.IO.GetFilesRelativeAsset(System.String,System.Func{System.IO.FileInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
+            <summary>
+            获取资源文件夹下
+            </summary>
+            <param name="value">路径</param>
+            <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
+            <param name="pattern">匹配模式</param>
+            <param name="option">查找模式</param>
+            <returns>以Assets路径为节点的路径数组</returns>
+        </member>
+        <member name="M:UtilsEngine.IO.GetFilesRelativeAssetNoMeta(System.String,System.Func{System.IO.FileInfo,System.Boolean},System.String,System.IO.SearchOption)">
+            <summary>
+            获取资源文件夹下 屏蔽meta文件
+            </summary>
+            <param name="value">路径</param>
+            <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
+            <param name="pattern">匹配模式</param>
+            <param name="option">查找模式</param>
+            <returns>以Assets路径为节点的路径数组</returns>
+        </member>
+        <member name="M:UtilsEngine.IO.GetFilesRelativeAssetNoMeta(System.String,System.String@,System.IO.SearchOption@)">
+            <summary>
+            获取资源文件夹下 屏蔽meta文件
+            </summary>
+            <param name="value">路径</param>
+            <param name="pattern">匹配模式</param>
+            <param name="option">查找模式</param>
+            <returns>以Assets路径为节点的路径数组</returns>
+        </member>
+        <member name="T:UtilsEngine.SystemInfoX">
+            <summary>
+            设备信息 Unity API 2019_or_new
+            </summary>
+            <summary>
+            设备信息 Unity API
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsTessellationShaders">
+            <summary>
+            是否支持镶嵌着色器
+            Are tessellation shaders supported
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsRayTracing">
+            <summary>
+            检查当前配置是否支持射线跟踪。
+            Checks if ray tracing is supported by the current configuration.
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsMipMaxLevel">
+            <summary>
+            是否 Mip达到最高等级
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.MaxComputeBufferInputsCompute">
+            <summary>
+            确定Unity在一个计算着色器中同时支持多少计算缓冲读取
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.MaxComputeBufferInputsDomain">
+            <summary>
+            确定Unity在一个域着色器中同时支持多少计算缓冲读取
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.MaxComputeBufferInputsFragment">
+            <summary>
+            确定Unity在碎片着色器中同时支持多少计算缓冲读取
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.MaxComputeBufferInputsGeometry">
+            <summary>
+            确定Unity在一个几何着色器中同时支持多少计算缓冲读取。
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.MaxComputeBufferInputsHull">
+            <summary>
+            确定Unity在一个赫尔着色器中同时支持多少计算缓冲读取。
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.MaxComputeBufferInputsVertex">
+            <summary>
+            确定Unity在一个顶点着色器中同时支持多少计算缓冲读取。
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.MaxComputeWorkGroupSize">
+            <summary>
+            在单个本地工作组中可以分派到计算着色器的最大调用总数
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.MaxComputeWorkGroupSizeX">
+            <summary>
+            在X维度中，计算着色器可以使用的最大工作组数
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.MaxComputeWorkGroupSizeY">
+            <summary>
+            在Y维度中，计算着色器可以使用的最大工作组数
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.MaxComputeWorkGroupSizeZ">
+            <summary>
+            在Z维度中，计算着色器可以使用的最大工作组数
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.MaxCubemapSize">
+            <summary>
+            最大立方地图纹理大小
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.MaxTextureSize">
+            <summary>
+            最大的纹理尺寸
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsMinConstantBufferOffsetAlignment">
+            <summary>
+            是否 使用Shader绑定常量缓冲区时的最小缓冲区偏移量(以字节为单位)。 SetConstantBuffer或Material.SetConstantBuffer。
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsVertexAttributeFormat(UnityEngine.Rendering.VertexAttributeFormat,System.Int32)">
+            <summary>
+            指示此设备是否支持给定的顶点属性格式和维度组合。
+            Indicates whether the given combination of a vertex attribute format and dimension is supported on this device.
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsUsesLoadStoreActions">
+            <summary>
+            如果图形API考虑了RenderBufferLoadAction和RenderBufferStoreAction，则为True，否则为false。
+            True if the Graphics API takes RenderBufferLoadAction and RenderBufferStoreAction into account, false if otherwise.
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetCompatibleFormat(UnityEngine.Experimental.Rendering.GraphicsFormat,UnityEngine.Experimental.Rendering.FormatUsage)">
+            <summary>
+            获取兼容的图像格式
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetGraphicsFormat(UnityEngine.Experimental.Rendering.DefaultFormat)">
+            <summary>
+            获取图形格式
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsFormatSupported(UnityEngine.Experimental.Rendering.GraphicsFormat,UnityEngine.Experimental.Rendering.FormatUsage)">
+            <summary>
+            是否 支持指定格式
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetRenderingThreadingMode">
+            <summary>
+            应用程序的实际渲染线程模式
+            Application's actual rendering threading mode
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetSupportedRandomWriteTargetCount">
+            <summary>
+            Unity同时支持的随机写目标(UAV)的最大数量。
+            The maximum number of random write targets (UAV) that Unity supports simultaneously.
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsGeometryShaders">
+            <summary>
+            是否支持几何着色
+            Are geometry shaders supported
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsGraphicsFence">
+            <summary>
+            当平台支持GraphicsFences时返回true，否则返回false。
+            Returns true when the platform supports GraphicsFences, and false if otherwise.
+            </summary>
+        </member>
+        <member name="F:UtilsEngine.SystemInfoX.UnsupportedIdentifier">
+            <summary>
+            SystemInfo字符串属性返回的值，该属性在当前平台上不受支持。
+            Value returned by SystemInfo string properties which are not supported on the current platform.
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetBatteryStatus">
+            <summary>
+            获取设备电池状态
+            </summary>
+            <!--
+            Unknown     : 如果电池状态不可用 无法确定设备的电池状态。
+            Charging    : 设备已插入并正在充电。
+            Discharging : 设备被拔出并正在放电。
+            NotCharging : 设备已插入，但未充电。
+            Full        : 设备已插入，电池已满。
+            -->
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetTextureSupport">
+            <summary>
+            支持多种复制纹理功能的情况。
+            </summary>
+            <!--
+            None           : No support for Graphics.CopyTexture.                                    : 不支持Graphics.CopyTexture。
+            Basic          : Basic Graphics.CopyTexture support.                                    : 基本图形CopyTexture支持
+            Copy3D         : Support for Texture3D in Graphics.CopyTexture.                         : 在Graphics.CopyTexture中支持Texture3D
+            DifferentTypes : Support for Graphics.CopyTexture between different texture types.      : 支持图形 不同纹理类型之间的CopyTexture
+            TextureToRT    : Support for Texture to RenderTexture copies in Graphics.CopyTexture.   : 在Graphics.CopyTexture中支持纹理到渲染纹理副本。
+            RTToTexture    : Support for RenderTexture to Texture copies in Graphics.CopyTexture.   : 在Graphics.CopyTexture中支持渲染纹理到纹理拷贝。
+            -->
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetDeviceModel">
+            <summary>
+            获取设备模型
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetDeviceName">
+            <summary>
+            获取用户设备自定义名称
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetDeviceType">
+            <summary>
+            返回程序运行所在的设备类型 PC电脑、掌上型等
+            </summary>
+            <!--
+             Unknown = 0  : Device type is unknown.You should never see this in practice. : 设备类型未知。 你不应该在实践中看到这种情况
+             Handheld = 1 : A handheld device like mobile phone or a tablet.              : 像移动电话或平板电脑这样的手持设备。
+             Console = 2  : A stationary gaming console.                                  : 一个固定的游戏机。
+             Desktop = 3  : Desktop or laptop computer.                                   : 台式或笔记本电脑。
+            -->
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetDeviceUniqueIdentifier">
+            <summary>
+            设备的唯一标识符。每一台设备都有唯一的标识符。
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetGraphicsDeviceID">
+            <summary>
+            获取图形设备ID 显卡的唯一标识符ID。
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetGraphicsDeviceName">
+            <summary>
+            显卡的名称
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetGraphicsDeviceType">
+            <summary>
+            图形设备类型 显卡的类型
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetGraphicsDeviceVendor">
+            <summary>
+            图形设备供应商 显卡的供应商
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetGraphicsDeviceVendorID">
+            <summary>
+            设备厂商ID 显卡供应商的唯一识别码ID
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetGraphicsDeviceVersion">
+            <summary>
+            图形设备版本 显卡的类型和版本
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetGraphicsMemorySize">
+            <summary>
+            图形内存大小 显存大小
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsGraphicsMultiThreaded">
+            <summary>
+            是否支持多线程渲染
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetGraphicsShaderLevel">
+            <summary>
+            图形着色器水平 显卡着色器的级别。
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsGraphicsUVStartsAtTop">
+            <summary>
+            图形UV是否从顶部开始
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsDynamicUniformArrayIndexingInFragmentShaders">
+            <summary>
+            是否 在碎片着色器中 有动态统一数组索引
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsHiddenSurfaceRemovalOnGPU">
+            <summary>
+            是否 GPU上有隐藏表面去除
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetNpotSupport">
+            <summary>
+            GPU提供了什么NPOT(两种尺寸的非电源)纹理支持
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetOperatingSystem">
+            <summary>
+            返回运行游戏的操作系统家族
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetOperatingSystemFamily">
+            <summary>
+            返回运行游戏的操作系统家族
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetProcessorCount">
+            <summary>
+            处理器存在的数量
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetProcessorFrequency">
+            <summary>
+            处理器频率(MHz)
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetProcessorType">
+            <summary>
+            处理器的名字
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.operatingSystemFamily">
+            <summary>
+            返回运行游戏的操作系统系列
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetSupportedRenderTargetCount">
+            <summary>
+            支持多少同时呈现目标(mrt)
+            How many simultaneous render targets (MRTs) are supported
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupports2DArrayTextures">
+            <summary>
+            是否支持2D数组纹理
+            Are 2D Array textures supported
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupports32bitsIndexBuffer">
+            <summary>
+            是否支持32位索引缓冲区
+            Are 32-bit index buffers supported
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupports3DRenderTextures">
+            <summary>
+            是否支持3D(体积)渲染纹理
+            Are 3D (volume) RenderTextures supported
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupports3DTextures">
+            <summary>
+            是否支持3D(体积)纹理
+            Are 3D (volume) textures supported
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsAccelerometer">
+            <summary>
+            是否设备上有加速度计
+            Is an accelerometer available on the device
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsAsyncCompute">
+            <summary>
+            当平台支持异步计算队列时返回true，否则返回false。
+            Returns true when the platform supports asynchronous compute queues and false if otherwise.
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsAsyncGPUReadback">
+            <summary>
+            如果此设备可以异步读回GPU数据，则返回true，否则返回false。
+            Returns true if asynchronous readback of GPU data is available for this device and false otherwise.
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsAudio">
+            <summary>
+            是否有音频设备可用于回放
+            Is there an Audio device available for playback
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsBlendingOnRenderTextureFormat(UnityEngine.RenderTextureFormat)">
+            <summary>
+            渲染纹理格式是否支持混合
+            Is blending supported on render texture format
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsComputeShaders">
+            <summary>
+            是否支持计算着色器
+            Are compute shaders supported
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsCubemapArrayTextures">
+            <summary>
+            是否支持Cubemap数组纹理
+            Are Cubemap Array textures supported
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsGyroscope">
+            <summary>
+            是否设备上有陀螺仪
+            Is a gyroscope available on the device
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsHardwareQuadTopology">
+            <summary>
+            是否硬件是否支持四元拓扑
+            Does the hardware support quad topology
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsInstancing">
+            <summary>
+            是否支持GPU绘制调用实例化
+            Is GPU draw call instancing supported
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsLocationService">
+            <summary>
+            设备是否能够报告其位置
+            Is the device capable of reporting its location
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsMipStreaming">
+            <summary>
+            是否支持纹理mip贴图流
+            Is streaming of texture mip maps supported
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsMotionVectors">
+            <summary>
+            该平台是否支持运动向量。
+            Whether motion vectors are supported on this platform.
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsMultisampleAutoResolve">
+            <summary>
+            如果多重采样纹理被自动解析，则返回true
+            Returns true if multisampled textures are resolved automatically
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetSsupportsMultisampledTextures">
+            <summary>
+            是否支持多采样纹理
+            Are multisampled textures supported
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsRawShadowDepthSampling">
+            <summary>
+            是否支持从阴影贴图中采样原始深度
+            Is sampling raw depth from shadowmaps supported
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsRenderTextureFormat(UnityEngine.RenderTextureFormat)">
+            <summary>
+            是否支持渲染纹理格式
+            Is render texture format supported
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsSeparatedRenderTargetsBlend">
+            <summary>
+            当平台在渲染多个渲染目标时支持不同的混合模式时返回true，否则返回false。
+            Returns true when the platform supports different blend modes when rendering to multiple render targets, or false otherwise.
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsShadows">
+            <summary>
+            是否支持内置阴影
+            Are built-in shadows supported
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsSparseTextures">
+            <summary>
+            是否支持稀疏纹理
+            Are sparse textures supported
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsTextureFormat(UnityEngine.TextureFormat)">
+            <summary>
+            这个设备是否支持纹理格式
+            Is texture format supported on this device
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetSupportsTextureWrapMirrorOnce">
+            <summary>
+            如果支持“Mirror Once”纹理缠绕模式，返回true
+            Returns true if the 'Mirror Once' texture wrap mode is supported
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsSupportsVibration">
+            <summary>
+            设备是否能够通过振动向用户提供触觉反馈
+            Is the device capable of providing the user haptic feedback by vibration
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.GetSystemMemorySize">
+            <summary>
+            当前系统内存的数量
+            Amount of system memory present
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.SystemInfoX.IsUsesReversedZBuffer">
+            <summary>
+            如果当前平台使用了反向深度缓冲区(近平面的值范围为1，远平面的值范围为0)，则该属性为true，如果深度缓冲区为normal(0为near, 1为far)，则为false。
+            This property is true if the current platform uses a reversed depth buffer (where values range from 1 at the near plane and 0 at far plane), and false if the depth buffer is normal (0 is near, 1 is far).
+            </summary>
+        </member>
+        <member name="T:UtilsEngine.MathX">
+            <summary>
+            Unity 计算
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.MathX.Distance(UnityEngine.Vector2,UnityEngine.Vector2)">
+            <summary> 
+            两点距离
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.MathX.IsRect(UnityEngine.Rect@,UnityEngine.Rect@)">
+            <summary> 
+            矩形相交
+            </summary>
+        </member>
+        <member name="T:UtilsEngine.ThreadX">
+            <summary>
+            提供在特定线程上下文（SynchronizationContext）中异步执行回调函数或操作的静态方法。
+            </summary>
+        </member>
+        <member name="F:UtilsEngine.ThreadX.syncContext">
+            <summary>
+            当前线程的同步上下文。
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.ThreadX.SyncPost(System.Threading.SendOrPostCallback,System.Object)">
+            <summary>
+            将传入的回调函数和状态对象封装成一个操作，并通过同步上下文的 Post 方法异步执行。
+            </summary>
+            <param name="d">要执行的回调函数。</param>
+            <param name="state">传递给回调函数的状态对象。</param>
+        </member>
+        <member name="M:UtilsEngine.ThreadX.SyncPost(System.Action)">
+            <summary>
+            将传入的 Action 对象封装成一个操作，并在执行时捕获异常进行处理后，通过同步上下文的 Post 方法异步执行。
+            </summary>
+            <param name="act">要执行的 Action 对象。</param>
+        </member>
+        <member name="M:UtilsEngine.ThreadX.SynchronizationPost(System.Threading.SendOrPostCallback,System.Object)">
+            <summary>
+            将传入的回调函数和状态对象封装成一个操作，并通过 SyncPost 方法异步执行，实际上就是 SyncPost 方法的一个别名。
+            </summary>
+            <param name="d">要执行的回调函数。</param>
+            <param name="state">传递给回调函数的状态对象。</param>
+        </member>
+        <member name="M:UtilsEngine.ThreadX.SynchronizationPost(System.Action)">
+            <summary>
+            将传入的 Action 对象封装成一个操作，并通过 SyncPost 方法异步执行，实际上也是 SyncPost 方法的一个别名。
+            </summary>
+            <param name="act">要执行的 Action 对象。</param>
+        </member>
+        <member name="T:AIO.Unity.RuntimePlatformExtend">
+            <summary>
+            扩展
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.RuntimePlatformExtend.IsEditor(UnityEngine.RuntimePlatform)">
+            <summary>
+            是否为编辑器
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.RuntimePlatformExtend.IsAndroid(UnityEngine.RuntimePlatform)">
+            <summary>
+            是否为安卓平台
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.RuntimePlatformExtend.IsIOS(UnityEngine.RuntimePlatform)">
+            <summary>
+            是否为安卓平台
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.RuntimePlatformExtend.IsWebGL(UnityEngine.RuntimePlatform)">
+            <summary>
+            是否为安卓平台
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.RuntimePlatformExtend.IsStandalone(UnityEngine.RuntimePlatform)">
+            <summary>
+            是否为独立平台
+            </summary>
+        </member>
         <member name="F:AIO.Unity.UnityFSSerializer._availableConverters">
             <summary>
             Converters that can be used for type registration.
@@ -223,41 +907,6 @@
             so that the import process can be unified and ignore the old format.
             </summary>
         </member>
-        <member name="T:AIO.Unity.PlatformUtils">
-            <summary>
-            平台工具类
-            </summary>
-        </member>
-        <member name="F:AIO.Unity.PlatformUtils.supportsJit">
-            <summary>
-            支持jit
-            </summary>
-        </member>
-        <member name="M:AIO.Unity.PlatformUtils.IsEditor(UnityEngine.RuntimePlatform)">
-            <summary>
-            是否为编辑器
-            </summary>
-        </member>
-        <member name="M:AIO.Unity.PlatformUtils.IsAndroid(UnityEngine.RuntimePlatform)">
-            <summary>
-            是否为安卓平台
-            </summary>
-        </member>
-        <member name="M:AIO.Unity.PlatformUtils.IsIOS(UnityEngine.RuntimePlatform)">
-            <summary>
-            是否为安卓平台
-            </summary>
-        </member>
-        <member name="M:AIO.Unity.PlatformUtils.IsWebGL(UnityEngine.RuntimePlatform)">
-            <summary>
-            是否为安卓平台
-            </summary>
-        </member>
-        <member name="M:AIO.Unity.PlatformUtils.IsStandalone(UnityEngine.RuntimePlatform)">
-            <summary>
-            是否为独立平台
-            </summary>
-        </member>
         <member name="T:AIO.Unity.ISerializationDependency">
             <inheritdoc/>
         </member>
@@ -416,54 +1065,6 @@
         <member name="M:AIO.Unity.UnityObjectConverter.CreateInstance(AIO.fsData@,System.Type@)">
             <inheritdoc/>
         </member>
-        <member name="T:AIO.Unity.IOUtils">
-            <summary>
-            Unity IOUtils
-            </summary>
-        </member>
-        <member name="P:AIO.Unity.IOUtils.UnityPath">
-            <summary>
-            Unity默认路径
-            </summary>
-        </member>
-        <member name="M:AIO.Unity.IOUtils.GetFilesRelativeAsset(System.String,System.String,System.IO.SearchOption)">
-            <summary>
-            获取资源文件夹下
-            </summary>
-            <param name="value">路径</param>
-            <param name="pattern">匹配模式</param>
-            <param name="option">查找模式</param>
-            <returns>以Assets路径为节点的路径数组</returns>
-        </member>
-        <member name="M:AIO.Unity.IOUtils.GetFilesRelativeAsset(System.String,System.Func{System.IO.FileInfo,System.Boolean},System.String,System.IO.SearchOption)">
-            <summary>
-            获取资源文件夹下
-            </summary>
-            <param name="value">路径</param>
-            <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
-            <param name="pattern">匹配模式</param>
-            <param name="option">查找模式</param>
-            <returns>以Assets路径为节点的路径数组</returns>
-        </member>
-        <member name="M:AIO.Unity.IOUtils.GetFilesRelativeAssetNoMeta(System.String,System.Func{System.IO.FileInfo,System.Boolean},System.String,System.IO.SearchOption)">
-            <summary>
-            获取资源文件夹下 屏蔽meta文件
-            </summary>
-            <param name="value">路径</param>
-            <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
-            <param name="pattern">匹配模式</param>
-            <param name="option">查找模式</param>
-            <returns>以Assets路径为节点的路径数组</returns>
-        </member>
-        <member name="M:AIO.Unity.IOUtils.GetFilesRelativeAssetNoMeta(System.String,System.String,System.IO.SearchOption)">
-            <summary>
-            获取资源文件夹下 屏蔽meta文件
-            </summary>
-            <param name="value">路径</param>
-            <param name="pattern">匹配模式</param>
-            <param name="option">查找模式</param>
-            <returns>以Assets路径为节点的路径数组</returns>
-        </member>
         <member name="T:AIO.Unity.ProfiledSegment">
             <summary>
             调试片段
@@ -565,6 +1166,76 @@
         <member name="M:AIO.Unity.ProfilingUtils.EndSample">
             <summary>
             结束采样
+            </summary>
+        </member>
+        <member name="T:AIO.AngleFixed">
+            <summary>
+            枚举类型，表示一些固定的角度值。
+            </summary>
+        </member>
+        <member name="F:AIO.AngleFixed.DegreesA180">
+            <summary>
+            角度为180度。
+            </summary>
+        </member>
+        <member name="F:AIO.AngleFixed.DegreesA135">
+            <summary>
+            角度为135度。
+            </summary>
+        </member>
+        <member name="F:AIO.AngleFixed.DegreesA90">
+            <summary>
+            角度为90度。
+            </summary>
+        </member>
+        <member name="F:AIO.AngleFixed.DegreesA45">
+            <summary>
+            角度为45度。
+            </summary>
+        </member>
+        <member name="F:AIO.AngleFixed.Zero">
+            <summary>
+            角度为0度。
+            </summary>
+        </member>
+        <member name="F:AIO.AngleFixed.DegreesS45">
+            <summary>
+            角度为-45度。
+            </summary>
+        </member>
+        <member name="F:AIO.AngleFixed.DegreesS90">
+            <summary>
+            角度为-90度。
+            </summary>
+        </member>
+        <member name="F:AIO.AngleFixed.DegreesS135">
+            <summary>
+            角度为-135度。
+            </summary>
+        </member>
+        <member name="F:AIO.AngleFixed.DegreesS180">
+            <summary>
+            角度为-180度。
+            </summary>
+        </member>
+        <member name="T:UnityThread">
+            <summary>
+            Unity线程
+            </summary>
+        </member>
+        <member name="F:UnityThread.actionQueuesUpdateFunc">
+            <summary>
+            Update等待队列
+            </summary>
+        </member>
+        <member name="F:UnityThread.mAactionCopiedQueueUpdateFunc">
+            <summary>
+            Update执行队列
+            </summary>
+        </member>
+        <member name="F:UnityThread.noActionQueueToExecuteUpdateFunc">
+            <summary>
+            执行状态
             </summary>
         </member>
     </members>

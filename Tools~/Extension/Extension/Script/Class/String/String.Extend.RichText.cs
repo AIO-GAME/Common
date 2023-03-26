@@ -11,8 +11,6 @@ namespace AIO
 {
     public static partial class StringExtend
     {
-        #region RichText
-
         /// <summary>
         /// 富文本 字号
         /// </summary>
@@ -175,7 +173,5 @@ namespace AIO
         {
             return string.Concat("<i><b><size=", s, "><color=", c, ">", content, "</color></size></b></i>");
         }
-
-        #endregion
     }
 }

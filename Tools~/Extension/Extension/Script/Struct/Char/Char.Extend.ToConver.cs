@@ -8,6 +8,7 @@
 namespace AIO
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Text;
 
     /// <summary>
@@ -18,6 +19,7 @@ namespace AIO
         /// <summary>
         /// 转化为字节
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static sbyte ToConverSByte(this char value)
         {
             return Convert.ToSByte(value);
@@ -26,7 +28,8 @@ namespace AIO
         /// <summary>
         /// 转化为字节数组
         /// </summary>
-        public static byte[] ToConverBytes(this char value, Encoding encoding = null)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte[] ToConverBytes(this char value, in Encoding encoding = null)
         {
             return (encoding ?? Encoding.Default).GetBytes(new char[] { value });
         }
@@ -34,7 +37,8 @@ namespace AIO
         /// <summary>
         /// 获取Base64
         /// </summary>
-        public static string ToConverBase64(this char value, Encoding encoding = null)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToConverBase64(this char value, in Encoding encoding = null)
         {
             return Convert.ToBase64String((encoding ?? Encoding.Default).GetBytes(value.ToString()));
         }

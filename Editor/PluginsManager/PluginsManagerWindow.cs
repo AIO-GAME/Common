@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AIO.Unity.Editor;
 using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
@@ -76,7 +77,7 @@ namespace AIO.Package.Editor
             IntsallIndexList.Clear();
             UnIntsallIndexList.Clear();
 
-            foreach (var data in Unity.Editor.IOUtils.GetAssetsRes<PluginsInfo>("t:PluginsInfo", "Packages"))
+            foreach (var data in UtilsEditor.IO.GetAssetsRes<PluginsInfo>("t:PluginsInfo", "Packages"))
             {
                 var filename = data.Name;
                 if (!RootData.ContainsKey(filename))

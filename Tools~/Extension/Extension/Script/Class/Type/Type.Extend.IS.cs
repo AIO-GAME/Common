@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace AIO
@@ -166,16 +167,14 @@ namespace AIO
                         return false;
                 }
 
-                foreach (var constraint in openConstructedType.GetGenericParameterConstraints())
-                {
-                    if (!constraint.IsAssignableFrom(closedConstructedType)) return false;
-                }
-
-                return true;
+                return openConstructedType.GetGenericParameterConstraints()
+                    .All(constraint => constraint.IsAssignableFrom(closedConstructedType));
             }
 
-            while (openConstructedType.ContainsGenericParameters)
+            while (openConstructedType != null && openConstructedType.ContainsGenericParameters)
             {
+                if (closedConstructedType == null) return false;
+
                 if (openConstructedType.IsGenericType &&
                     closedConstructedType.IsGenericType &&
                     openConstructedType.GetGenericTypeDefinition() == closedConstructedType.GetGenericTypeDefinition())
@@ -183,13 +182,7 @@ namespace AIO
                     var openArgs = openConstructedType.GetGenericArguments();
                     var closedArgs = closedConstructedType.GetGenericArguments();
 
-                    for (var i = 0; i < openArgs.Length; i++)
-                    {
-                        if (!IsMakeGenericTypeVia(openArgs[i], closedArgs[i]))
-                            return false;
-                    }
-
-                    return true;
+                    return !openArgs.Where((t, i) => !IsMakeGenericTypeVia(t, closedArgs[i])).Any();
                 }
 
                 if (openConstructedType.IsArray)
@@ -212,6 +205,7 @@ namespace AIO
                 }
             }
 
+            if (openConstructedType == null) return false;
             return openConstructedType.IsAssignableFrom(closedConstructedType);
         }
 
@@ -293,7 +287,8 @@ namespace AIO
                 var openConstructedElementType = openConstructedType.GetElementType();
                 var closedConstructedElementType = closedConstructedType.GetElementType();
 
-                return openConstructedElementType.MakeGenericTypeVia(closedConstructedElementType, resolvedGenericParameters, safe: false).MakeArrayType(openConstructedType.GetArrayRank());
+                return openConstructedElementType.MakeGenericTypeVia(closedConstructedElementType, resolvedGenericParameters, safe: false)
+                    .MakeArrayType(openConstructedType.GetArrayRank());
             }
 
             if (openConstructedType.IsByRef)

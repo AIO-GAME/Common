@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace AIO
 {
@@ -20,23 +21,20 @@ namespace AIO
         /// <summary>
         /// 获取属性值
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T GetAttribute<T>(this Enum value) where T : Attribute
         {
-            if (value == null)
-            {
-                throw new ArgumentException("value");
-            }
-
+            if (value == null) throw new ArgumentException("value");
             var description = value.ToString();
             var fieldInfo = value.GetType().GetField(description);
             var attributes = (T[])fieldInfo.GetCustomAttributes(typeof(T), false);
-            if (attributes != null && attributes.Length > 0) return attributes[0];
-            return null;
+            return attributes.Length > 0 ? attributes[0] : null;
         }
 
         /// <summary>
         /// Gets attributes on an enum member, eg. enum E { [Attr] A }
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<T> GetAttributeOfEnumMember<T>(this Enum enumVal) where T : Attribute
         {
             var type = enumVal.GetType();

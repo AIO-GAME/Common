@@ -42,6 +42,7 @@ namespace AIO
         /// <param name="resetReadOnly">是否重置只读字段和属性（默认为false）</param>
         /// <param name="typeFilter">用于过滤要重置的对象的类型（默认为null）</param>
         /// <param name="customFilter">自定义过滤器</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Reset<T>(
             this T obj,
             in ICollection<string> fieldNames,
@@ -73,6 +74,7 @@ namespace AIO
         /// <param name="propNames">要重置的属性名称（可选）</param>
         /// <param name="customFilter">自定义过滤器</param>
         /// <param name="resetReadOnly">是否重置只读字段和属性（默认为false）</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Reset<T>(
             this T obj,
             in ICollection<string> fieldNames,
@@ -100,6 +102,7 @@ namespace AIO
         /// <param name="propNames">要重置的属性名称（可选）</param>
         /// <param name="typeFilter">用于过滤要重置的对象的类型（默认为null）</param>
         /// <param name="resetReadOnly">是否重置只读字段和属性（默认为false）</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Reset<T>(
             this T obj,
             in ICollection<string> fieldNames,
@@ -126,6 +129,7 @@ namespace AIO
         /// <param name="typeFilter">用于过滤要重置的对象的类型（默认为null）</param>
         /// <param name="customFilter">自定义过滤器</param>
         /// <param name="resetReadOnly">是否重置只读字段和属性（默认为false）</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Reset<T>(
             this T obj,
             in Type typeFilter,
@@ -150,6 +154,7 @@ namespace AIO
         /// <param name="obj">要重置的对象</param>
         /// <param name="customFilter">自定义过滤器</param>
         /// <param name="resetReadOnly">是否重置只读字段和属性（默认为false）</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Reset<T>(
             this T obj,
             in Func<Type, bool> customFilter,
@@ -170,6 +175,7 @@ namespace AIO
         /// <param name="obj">要重置的对象</param>
         /// <param name="typeFilter">用于过滤要重置的对象的类型（默认为null）</param>
         /// <param name="resetReadOnly">是否重置只读字段和属性（默认为false）</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Reset<T>(
             this T obj,
             in bool resetReadOnly,
@@ -191,6 +197,7 @@ namespace AIO
         /// <param name="fieldNames">要重置的字段名称（可选）</param>
         /// <param name="propNames">要重置的属性名称（可选）</param>
         /// <param name="resetReadOnly">是否重置只读字段和属性（默认为false）</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Reset<T>(
             this T obj,
             in ICollection<string> fieldNames,
@@ -210,6 +217,7 @@ namespace AIO
         /// <typeparam name="T">要重置的对象类型</typeparam>
         /// <param name="obj">要重置的对象</param>
         /// <param name="resetReadOnly">是否重置只读字段和属性（默认为false）</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Reset<T>(this T obj, in bool resetReadOnly = false) where T : class, new()
         {
             ResetFields(obj, resetReadOnly);
@@ -336,6 +344,7 @@ namespace AIO
         /// <param name="obj">要重置的对象</param>
         /// <param name="propNames">要重置的属性名称</param>
         /// <param name="resetReadOnly">是否重置只读属性（默认为false）</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ResetProperties<T>(this T obj, in ICollection<string> propNames, in bool resetReadOnly = false)
         {
             foreach (var prop in obj.GetType().GetProperties(Flags))

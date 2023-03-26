@@ -6,9 +6,7 @@ namespace AIO
     /// <summary>
     /// 键迭代器
     /// </summary>
-    /// <typeparam name="TKey"></typeparam>
-    /// <typeparam name="TItem"></typeparam>
-    public interface IKeyedCollection<TKey, TItem> :
+    public interface IKeyedCollection<in TKey, TItem> :
         ICollection<TItem>,
         IEnumerable<TItem>,
         IEnumerable
@@ -17,11 +15,6 @@ namespace AIO
         /// 获取值
         /// </summary>
         TItem this[TKey key] { get; }
-
-        /// <summary>
-        /// 获取值
-        /// </summary>
-        TItem this[int index] { get; }
 
         /// <summary>
         /// 尝试获取值

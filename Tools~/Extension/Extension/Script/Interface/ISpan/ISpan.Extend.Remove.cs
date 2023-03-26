@@ -36,7 +36,8 @@ namespace AIO
         /// <summary>
         /// 移除
         /// </summary>
-        public static T[] Remove<T>(this T[] array, T value) where T : IEqualityComparer<T>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T[] Remove<T>(this T[] array,in T value) where T : IEqualityComparer<T>
         {
             var result = new T[array.Length - 1];
             var index = 0;
