@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace AIO
 {
@@ -10,6 +11,7 @@ namespace AIO
         /// <summary>
         /// 是否为静态
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsStatic(this PropertyInfo propertyInfo)
         {
             return (propertyInfo.GetGetMethod(true)?.IsStatic ?? false) ||

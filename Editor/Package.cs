@@ -13,7 +13,7 @@ namespace AIO.Package.Editor
         static Package()
         {
             var regex = new Regex(RegexName);
-            foreach (var info in IOUtils.GetFlodersInfo(Application.dataPath.Replace("Assets", "Packages")))
+            foreach (var info in  Utils.IO.GetFoldersInfo(Application.dataPath.Replace("Assets", "Packages")))
                 if (regex.IsMatch(info.Name))
                     URL = info.FullName;
         }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Diagnostics;
 using System.Text;
+using System.Runtime.CompilerServices;
 
 namespace AIO
 {
@@ -85,13 +86,14 @@ namespace AIO
         /// <summary>
         /// 判断状态
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool NoStatus(in int status)
         {
             if (CurOutLevel < 0) return true;
             return (CurOutLevel & status) != status;
         }
 
-
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static IEnumerable<char> IEnumerable<T>(in T objs) where T : IEnumerable
         {
             var str = new StringBuilder();
@@ -110,6 +112,7 @@ namespace AIO
             return message;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static IEnumerable<char> ICollection<T>(in T objs) where T : ICollection
         {
             var r = string.Format("Count: {0}\r\n", objs.Count);
@@ -124,6 +127,7 @@ namespace AIO
             return r;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static IEnumerable<char> IList<T>(in T objs) where T : IList
         {
             var r = string.Format("Count: {0}\r\n", objs.Count);
@@ -138,6 +142,7 @@ namespace AIO
             return r;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static IEnumerable<char> IDictionary<T>(in T objs) where T : IDictionary
         {
             var r = string.Format("Count: {0}\r\n", objs.Count);

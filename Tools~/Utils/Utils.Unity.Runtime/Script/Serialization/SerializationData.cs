@@ -28,7 +28,7 @@ namespace AIO.Unity
         public SerializationData(string json, IEnumerable<UnityObject> objectReferences)
         {
             _json = json;
-            _objectReferences = objectReferences?.ToArray() ?? Empty<UnityObject>.array;
+            _objectReferences = objectReferences?.ToArray() ?? Empty<UnityObject>.Array;
 
 #if DEBUG_SERIALIZATION
             _guid = Guid.NewGuid().ToString();

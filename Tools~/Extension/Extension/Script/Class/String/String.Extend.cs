@@ -5,7 +5,6 @@
 |*|=============================================*/
 
 
-using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -37,7 +36,22 @@ namespace AIO
     /// </summary>
     public static partial class StringExtend
     {
-        public static void PartsAround(this string str, char c, out string before, out string after)
+        /// <summary>
+        /// 获取字符串中某个字符左右两侧的部分。
+        /// </summary>
+        /// <param name="str">指定的字符串。</param>
+        /// <param name="c">要查找的字符。</param>
+        /// <param name="before">输出参数，表示 c 左侧的字符串。</param>
+        /// <param name="after">输出参数，表示 c 右侧的字符串。</param>
+        /// <remarks>
+        /// 如果字符串中不包含指定的字符，则 before 为整个字符串，after 为 null。
+        /// </remarks>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void PartsAround(
+            this string str,
+            in char c,
+            out string before,
+            out string after)
         {
             var index = str.IndexOf(c);
 
@@ -52,35 +66,37 @@ namespace AIO
                 after = null;
             }
         }
-        public static string PartAfter(this string str, char c)
-        {
 
+        /// <summary>
+        /// 获取字符串中某个字符右侧的部分。
+        /// </summary>
+        /// <param name="str">指定的字符串。</param>
+        /// <param name="c">要查找的字符。</param>
+        /// <returns>包含 c 右侧内容的字符串；如果字符串中不包含指定的字符，则返回整个字符串。</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string PartAfter(this string str, in char c)
+        {
             var index = str.IndexOf(c);
 
-            if (index > 0)
-            {
-                return str.Substring(index + 1);
-            }
-            else
-            {
-                return str;
-            }
+            if (index > 0) return str.Substring(index + 1);
+            return str;
         }
 
-        public static string ReplaceMultiple(this string str, HashSet<char> haystacks, char replacement)
+        /// <summary>
+        /// 将字符串中多个指定字符替换为另一个字符。
+        /// </summary>
+        /// <param name="str">指定的字符串。</param>
+        /// <param name="haystacks">要替换的字符集合。</param>
+        /// <param name="replacement">替换为此字符。</param>
+        /// <returns>替换后的字符串。</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ReplaceMultiple(this string str, in HashSet<char> haystacks, in char replacement)
         {
             var sb = new StringBuilder();
 
             foreach (var current in str)
             {
-                if (haystacks.Contains(current))
-                {
-                    sb.Append(replacement);
-                }
-                else
-                {
-                    sb.Append(current);
-                }
+                sb.Append(haystacks.Contains(current) ? replacement : current);
             }
 
             return sb.ToString();

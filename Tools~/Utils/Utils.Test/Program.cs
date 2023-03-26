@@ -82,7 +82,7 @@
 
             try
             {
-                var config = ParseUtils.JsonDeserialize<HotDllConfig[]>(File.ReadAllText(Path.Combine(savePath, FileName)));
+                var config = Utils.Json.Deserialize<HotDllConfig[]>(File.ReadAllText(Path.Combine(savePath, FileName)));
                 if (config == null) throw new ArgumentNullException($" ------------------ 文件下载错误 读取DllList.json失败");
 
                 var dic = new Dictionary<string, List<string>>();

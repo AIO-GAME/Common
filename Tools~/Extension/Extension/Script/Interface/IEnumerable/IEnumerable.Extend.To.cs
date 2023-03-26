@@ -11,6 +11,7 @@ namespace AIO
         /// <summary>
         /// 转化为HashSet
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static HashSet<T> ToHashSet<T>(this IEnumerable<T> enumerable)
         {
             return new HashSet<T>(enumerable);

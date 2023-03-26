@@ -10,7 +10,7 @@
     [AttributeUsage(AttributeTargets.Assembly)]
     public class RegistInitializeDLLAttribute : Attribute
     {
-        internal BindingFlags FLAGS = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+        internal const BindingFlags FLAGS = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
 
         private Type typeName { get; }
 

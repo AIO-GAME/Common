@@ -4,12 +4,17 @@
         <name>AIO.Utils.Unity.Editor</name>
     </assembly>
     <members>
-        <member name="T:AIO.Unity.Editor.IOUtils">
+        <member name="T:AIO.Unity.Editor.UtilsEditor">
+            <summary>
+            工具类
+            </summary>
+        </member>
+        <member name="T:AIO.Unity.Editor.UtilsEditor.IO">
             <summary>
             Unity Editor IO Utils
             </summary>
         </member>
-        <member name="M:AIO.Unity.Editor.IOUtils.GetAssetsRes``1(System.String,System.String[])">
+        <member name="M:AIO.Unity.Editor.UtilsEditor.IO.GetAssetsRes``1(System.String@,System.String[])">
             <summary>
             获取指定文件夹下的预制件
             </summary>
@@ -17,7 +22,7 @@
             <param name="folder">文件夹</param>
             <returns>预制件数组</returns>
         </member>
-        <member name="M:AIO.Unity.Editor.IOUtils.GetAssetsRes``1(System.String,System.Func{``0,System.Boolean},System.String[])">
+        <member name="M:AIO.Unity.Editor.UtilsEditor.IO.GetAssetsRes``1(System.String@,System.Func{``0,System.Boolean},System.String[])">
             <summary>
             获取指定文件夹下的预制件
             </summary>
@@ -26,7 +31,7 @@
             <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
             <returns>预制件数组</returns>
         </member>
-        <member name="M:AIO.Unity.Editor.IOUtils.GetAssetsPath(System.String,System.String[])">
+        <member name="M:AIO.Unity.Editor.UtilsEditor.IO.GetAssetsPath(System.String@,System.String[])">
             <summary>
             获取资源的相对路径
             </summary>
@@ -34,7 +39,7 @@
             <param name="folders">文件夹</param>
             <returns>路径数组</returns>
         </member>
-        <member name="M:AIO.Unity.Editor.IOUtils.GetAssetsPath(System.String,System.Func{System.String,System.Boolean},System.String[])">
+        <member name="M:AIO.Unity.Editor.UtilsEditor.IO.GetAssetsPath(System.String@,System.Func{System.String,System.Boolean},System.String[])">
             <summary>
             获取资源的相对路径
             </summary>
@@ -43,7 +48,7 @@
             <param name="folders">文件夹</param>
             <returns>路径数组</returns>
         </member>
-        <member name="M:AIO.Unity.Editor.IOUtils.GetAssetPrefabs(System.Func{UnityEngine.GameObject,System.Boolean},System.String[])">
+        <member name="M:AIO.Unity.Editor.UtilsEditor.IO.GetAssetPrefabs(System.Func{UnityEngine.GameObject,System.Boolean},System.String[])">
             <summary>
             获取指定文件夹下的预制件
             </summary>
@@ -51,21 +56,21 @@
             <param name="folder">文件夹</param>
             <returns>预制件数组</returns>
         </member>
-        <member name="M:AIO.Unity.Editor.IOUtils.GetAssetPrefabs(System.String[])">
+        <member name="M:AIO.Unity.Editor.UtilsEditor.IO.GetAssetPrefabs(System.String[])">
             <summary>
             获取指定文件夹下的预制件
             </summary>
             <param name="folder">文件夹</param>
             <returns>预制件数组</returns>
         </member>
-        <member name="M:AIO.Unity.Editor.IOUtils.GetAssetClips(System.String[])">
+        <member name="M:AIO.Unity.Editor.UtilsEditor.IO.GetAssetClips(System.String[])">
             <summary>
             获取指定文件夹下的音频文件
             </summary>
             <param name="folder">文件夹</param>
             <returns>预制件数组</returns>
         </member>
-        <member name="M:AIO.Unity.Editor.IOUtils.GetAssetClips(System.Func{UnityEngine.AnimationClip,System.Boolean},System.String[])">
+        <member name="M:AIO.Unity.Editor.UtilsEditor.IO.GetAssetClips(System.Func{UnityEngine.AnimationClip,System.Boolean},System.String[])">
             <summary>
             获取指定文件夹下的音频文件
             </summary>
@@ -73,19 +78,19 @@
             <param name="folder">文件夹</param>
             <returns>预制件数组</returns>
         </member>
-        <member name="M:AIO.Unity.Editor.IOUtils.GetAssetPrefabs``1(System.String[])">
+        <member name="M:AIO.Unity.Editor.UtilsEditor.IO.GetAssetPrefabs``1(System.String[])">
             <summary>
             获取预制件身上的组件
             </summary>
         </member>
-        <member name="M:AIO.Unity.Editor.IOUtils.GetAssetPrefabsPath(System.String[])">
+        <member name="M:AIO.Unity.Editor.UtilsEditor.IO.GetAssetPrefabsPath(System.String[])">
             <summary>
             获取预制件资源路径
             </summary>
             <param name="folders">文件夹</param>
             <returns>预制件数组</returns>
         </member>
-        <member name="M:AIO.Unity.Editor.IOUtils.GetAssetPrefabsPath(System.Func{System.String,System.Boolean},System.String[])">
+        <member name="M:AIO.Unity.Editor.UtilsEditor.IO.GetAssetPrefabsPath(System.Func{System.String,System.Boolean},System.String[])">
             <summary>
             获取预制件资源路径
             </summary>

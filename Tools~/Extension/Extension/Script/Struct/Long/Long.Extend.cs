@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace AIO
 {
@@ -10,6 +11,7 @@ namespace AIO
         /// <summary>
         /// 将文件大小(字节)转换为最适合的显示方式
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToConverStringFileSize(this long size)
         {
             var result = "0KB";
@@ -30,6 +32,7 @@ namespace AIO
         /// <summary>
         /// 转换为格式:00,000,000
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToConverStringMoney(this long value)
         {
             var tmp = value % 1000;

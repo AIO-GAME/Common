@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace AIO
 {
@@ -10,7 +11,6 @@ namespace AIO
     /// </summary>
     public static partial class MethodInfoExtend
     {
- 
         /// <summary>
         /// 使用给定的类型构造泛型方法，返回一个 MethodInfo 对象。
         /// </summary>
@@ -20,18 +20,25 @@ namespace AIO
         /// <param name="openConstructedMethod">要构造的开放构造方法</param>
         /// <param name="closedConstructedParameterTypes">用于构造泛型参数的类型</param>
         /// <returns>构造的泛型方法的 MethodInfo 对象</returns>
-        public static MethodInfo MakeGenericMethodVia(this MethodInfo openConstructedMethod, params Type[] closedConstructedParameterTypes)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static MethodInfo MakeGenericMethodVia(
+            this MethodInfo openConstructedMethod,
+            params Type[] closedConstructedParameterTypes)
         {
             if (!openConstructedMethod.ContainsGenericParameters) return openConstructedMethod;
             var resolvedGenericParameters = new Dictionary<Type, Type>();
 
             for (var i = 0; i < openConstructedMethod.GetParameters().Length; i++)
             {
-                openConstructedMethod.GetParameters()[i].ParameterType.MakeGenericTypeVia(closedConstructedParameterTypes[i], resolvedGenericParameters);
+                openConstructedMethod.GetParameters()[i].ParameterType
+                    .MakeGenericTypeVia(closedConstructedParameterTypes[i], resolvedGenericParameters);
             }
 
-            var closedConstructedGenericArguments = openConstructedMethod.GetGenericArguments().Select(openConstructedGenericArgument =>
-                resolvedGenericParameters.ContainsKey(openConstructedGenericArgument) ? resolvedGenericParameters[openConstructedGenericArgument] : openConstructedGenericArgument).ToArray();
+            var closedConstructedGenericArguments = openConstructedMethod.GetGenericArguments().Select(
+                openConstructedGenericArgument =>
+                    resolvedGenericParameters.ContainsKey(openConstructedGenericArgument)
+                        ? resolvedGenericParameters[openConstructedGenericArgument]
+                        : openConstructedGenericArgument).ToArray();
 
             return openConstructedMethod.MakeGenericMethod(closedConstructedGenericArguments);
         }

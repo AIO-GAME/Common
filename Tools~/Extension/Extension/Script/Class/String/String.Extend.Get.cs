@@ -31,7 +31,7 @@ namespace AIO
                 if (item == runit)
                 {
                     if (Falg == false) Falg = true;
-                    if (Falg) State += 1;
+                    State += 1;
                 }
                 else if (item == lunit)
                 {
@@ -39,7 +39,7 @@ namespace AIO
                 }
 
                 Index++;
-                if (State == 0 && Falg == true) break;
+                if (State == 0 && Falg) break;
             }
 
             return Passages.Substring(0, Index);

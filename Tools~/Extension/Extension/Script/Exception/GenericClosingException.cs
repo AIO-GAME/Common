@@ -17,7 +17,8 @@ namespace AIO
         /// <summary>
         /// 构造函数
         /// </summary>
-        public GenericClosingException(in Type open, in Type closed) : base($"Open-constructed type '{open}' is not assignable from closed-constructed type '{closed}'.")
+        public GenericClosingException(in Type open, in Type closed) : base(
+            $"Open-constructed type '{open}' is not assignable from closed-constructed type '{closed}'.")
         {
         }
     }

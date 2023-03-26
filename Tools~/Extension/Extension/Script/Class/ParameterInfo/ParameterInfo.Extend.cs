@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace AIO
 {
@@ -11,6 +12,7 @@ namespace AIO
         /// <summary>
         /// 是否为Out
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool HasOutModifier(this ParameterInfo parameterInfo)
         {
             if (parameterInfo is null) throw new ArgumentNullException(nameof(parameterInfo));

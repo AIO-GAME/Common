@@ -12,7 +12,8 @@ namespace AIO
         /// 使用指定的枚举值初始化 UnexpectedEnumValueException&lt;T&gt; 类的新实例。
         /// </summary>
         /// <param name="value">不在预期范围内的枚举值</param>
-        public UnexpectedEnumValueException(T value) : base("Value " + value + " of enum " + typeof(T).Name + " is unexpected.")
+        public UnexpectedEnumValueException(in T value)
+            : base($"Value {value} of enum {typeof(T).Name} is unexpected.")
         {
             Value = value;
         }
