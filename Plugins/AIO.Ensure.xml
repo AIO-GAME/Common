@@ -38,20 +38,20 @@
         </member>
         <member name="M:AIO.StringExtension.Inject(System.String,System.Object[])">
             <summary>
-            将指定数组中对应对象的字符串表示形式替换为指定字符串中的格式项。输入字符串格式使用占位符如{0}、{1}等。
+            ��ָ�������ж�Ӧ������ַ�����ʾ��ʽ�滻Ϊָ���ַ����еĸ�ʽ������ַ�����ʽʹ��ռλ����{0}��{1}�ȡ�
             </summary>
-            <param name="format">输入字符串格式。</param>
-            <param name="formattingArgs">包含要格式化和注入到字符串中的值的对象数组。</param>
-            <returns>将格式项替换为相应对象的字符串表示形式后的字符串副本。</returns>
+            <param name="format">�����ַ�����ʽ��</param>
+            <param name="formattingArgs">����Ҫ��ʽ����ע�뵽�ַ����е�ֵ�Ķ������顣</param>
+            <returns>����ʽ���滻Ϊ��Ӧ������ַ�����ʾ��ʽ����ַ���������</returns>
         </member>
         <member name="M:AIO.StringExtension.Inject(System.String,System.String[])">
             <summary>
-            将指定数组中对应对象的字符串表示形式替换为指定字符串中的格式项。输入字符串格式使用占位符如{0}、{1}等。
-            此方法是上一个方法的重载，但它接受一个字符串数组而不是对象数组。
+            ��ָ�������ж�Ӧ������ַ�����ʾ��ʽ�滻Ϊָ���ַ����еĸ�ʽ������ַ�����ʽʹ��ռλ����{0}��{1}�ȡ�
+            �˷�������һ�����������أ���������һ���ַ�����������Ƕ������顣
             </summary>
-            <param name="format">输入字符串格式。</param>
-            <param name="formattingArgs">包含要格式化和注入到字符串中的值的字符串数组。</param>
-            <returns>将格式项替换为相应对象的字符串表示形式后的字符串副本。</returns>
+            <param name="format">�����ַ�����ʽ��</param>
+            <param name="formattingArgs">����Ҫ��ʽ����ע�뵽�ַ����е�ֵ���ַ������顣</param>
+            <returns>����ʽ���滻Ϊ��Ӧ������ַ�����ʾ��ʽ����ַ���������</returns>
         </member>
         <member name="T:AIO.EnsureThat">
             <summary>
