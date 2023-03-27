@@ -29,9 +29,9 @@ public partial class Utils
             in string value,
             in Func<FileInfo, bool> filtration,
             in string pattern = "*",
-            in SearchOption option = SearchOption.AllDirectories)
+            in SearchOption option = SearchOption.TopDirectoryOnly)
         {
-            if (!ExistsFolder(value)) return Array.Empty<FileInfo>();
+            if (!Directory.Exists(value)) return Array.Empty<FileInfo>();
             return new DirectoryInfo(value).GetFiles(pattern, option).Where(filtration);
         }
 
@@ -42,9 +42,9 @@ public partial class Utils
         public static IEnumerable<FileInfo> GetFilesInfo(
             in string value,
             in string pattern = "*",
-            in SearchOption option = SearchOption.AllDirectories)
+            in SearchOption option = SearchOption.TopDirectoryOnly)
         {
-            if (!ExistsFolder(value)) return Array.Empty<FileInfo>();
+            if (!Directory.Exists(value)) return Array.Empty<FileInfo>();
             return new DirectoryInfo(value).GetFiles(pattern, option);
         }
 
@@ -55,7 +55,7 @@ public partial class Utils
         public static IEnumerable<FileInfo> GetFilesInfo(
             in DirectoryInfo value,
             in string pattern = "*",
-            in SearchOption option = SearchOption.AllDirectories)
+            in SearchOption option = SearchOption.TopDirectoryOnly)
         {
             if (!value.Exists) return Array.Empty<FileInfo>();
             return value.GetFiles(pattern, option);
@@ -72,7 +72,7 @@ public partial class Utils
         public static IEnumerable<string> GetFiles(
             in string value,
             in string pattern = "*",
-            in SearchOption option = SearchOption.AllDirectories)
+            in SearchOption option = SearchOption.TopDirectoryOnly)
         {
             return GetFilesInfo(value, pattern, option).Select(item => item.FullName);
         }
@@ -90,7 +90,7 @@ public partial class Utils
             in string value,
             in Func<FileInfo, bool> filtration,
             in string pattern = "*",
-            in SearchOption option = SearchOption.AllDirectories)
+            in SearchOption option = SearchOption.TopDirectoryOnly)
         {
             return GetFilesInfo(value, filtration, pattern, option).Select(item => item.FullName);
         }
@@ -106,7 +106,7 @@ public partial class Utils
         public static IEnumerable<string> GetFilesRelative(
             in string value,
             in string pattern = "*",
-            in SearchOption option = SearchOption.AllDirectories)
+            in SearchOption option = SearchOption.TopDirectoryOnly)
         {
             var len = value.Length;
             return GetFilesInfo(value, pattern, option).Select(item => item.FullName.Substring(len));
@@ -125,7 +125,7 @@ public partial class Utils
             in string value,
             in Func<FileInfo, bool> filtration,
             in string pattern = "*",
-            in SearchOption option = SearchOption.AllDirectories)
+            in SearchOption option = SearchOption.TopDirectoryOnly)
         {
             var len = value.Length;
             return GetFilesInfo(value, filtration, pattern, option).Select(item => item.FullName.Substring(len));
@@ -142,7 +142,7 @@ public partial class Utils
         public static IEnumerable<string> GetFilesName(
             in string value,
             in string pattern = "*",
-            in SearchOption option = SearchOption.AllDirectories)
+            in SearchOption option = SearchOption.TopDirectoryOnly)
         {
             return GetFilesInfo(value, pattern, option).Select(item => item.Name);
         }
@@ -160,7 +160,7 @@ public partial class Utils
             in string value,
             in Func<FileInfo, bool> filtration,
             in string pattern = "*",
-            in SearchOption option = SearchOption.AllDirectories)
+            in SearchOption option = SearchOption.TopDirectoryOnly)
         {
             return GetFilesInfo(value, filtration, pattern, option).Select(item => item.Name);
         }
@@ -176,9 +176,9 @@ public partial class Utils
         public static IEnumerable<DirectoryInfo> GetFoldersInfo(
             in string value,
             in string pattern = "*",
-            in SearchOption option = SearchOption.AllDirectories)
+            in SearchOption option = SearchOption.TopDirectoryOnly)
         {
-            if (!ExistsFolder(value)) return Array.Empty<DirectoryInfo>();
+            if (!Directory.Exists(value)) return Array.Empty<DirectoryInfo>();
             return new DirectoryInfo(value).GetDirectories(pattern, option);
         }
 
@@ -195,9 +195,9 @@ public partial class Utils
             in string value,
             in Func<DirectoryInfo, bool> filtration,
             in string pattern = "*",
-            in SearchOption option = SearchOption.AllDirectories)
+            in SearchOption option = SearchOption.TopDirectoryOnly)
         {
-            if (!ExistsFolder(value)) return Array.Empty<DirectoryInfo>();
+            if (!Directory.Exists(value)) return Array.Empty<DirectoryInfo>();
             return new DirectoryInfo(value).GetDirectories(pattern, option).Where(filtration);
         }
 
@@ -212,7 +212,7 @@ public partial class Utils
         public static IEnumerable<string> GetFolders(
             in string value,
             in string pattern = "*",
-            in SearchOption option = SearchOption.AllDirectories)
+            in SearchOption option = SearchOption.TopDirectoryOnly)
         {
             return GetFoldersInfo(value, pattern, option).Select(item => item.FullName);
         }
@@ -229,7 +229,7 @@ public partial class Utils
             in string value,
             in Func<DirectoryInfo, bool> filtration,
             in string pattern = "*",
-            in SearchOption option = SearchOption.AllDirectories)
+            in SearchOption option = SearchOption.TopDirectoryOnly)
         {
             return GetFoldersInfo(value, filtration, pattern, option).Select(item => item.FullName);
         }
@@ -241,7 +241,7 @@ public partial class Utils
         public static IEnumerable<string> GetFoldersName(
             in string value,
             in string pattern = "*",
-            in SearchOption option = SearchOption.AllDirectories)
+            in SearchOption option = SearchOption.TopDirectoryOnly)
         {
             return GetFoldersInfo(value, pattern, option).Select(item => item.Name);
         }
@@ -254,7 +254,7 @@ public partial class Utils
             in string value,
             in Func<DirectoryInfo, bool> filtration,
             in string pattern = "*",
-            in SearchOption option = SearchOption.AllDirectories)
+            in SearchOption option = SearchOption.TopDirectoryOnly)
         {
             return GetFoldersInfo(value, filtration, pattern, option).Select(item => item.Name);
         }

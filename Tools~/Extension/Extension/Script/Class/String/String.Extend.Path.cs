@@ -20,10 +20,20 @@ namespace AIO
         /// 获取路径
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string PathCombine(this string str1, in string str2)
+        public static string PathCombine(this string str1, params string[] str2)
         {
-            if (string.IsNullOrEmpty(str1)) return "";
-            if (string.IsNullOrEmpty(str2)) return str1;
+            var a = new string[str2.Length + 1];
+            a[0] = str1;
+            Array.ConstrainedCopy(str2, 0, a, 1, str2.Length);
+            return Path.Combine(a).Replace('\\', '/');
+        }
+
+        /// <summary>
+        /// 获取路径
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string PathCombine(this string str1, string str2)
+        {
             return Path.Combine(str1, str2).Replace('\\', '/');
         }
 
@@ -31,12 +41,18 @@ namespace AIO
         /// 获取路径
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string PathCombine(this string str1, params string[] str2)
+        public static string PathCombine(this string str1, string str2, string str3)
         {
-            var a = new string[str2.Length + 1];
-            a[0] = str1;
-            Array.Copy(str2, 0, a, 1, str2.Length);
-            return Path.Combine(a).Replace('\\', '/');
+            return Path.Combine(str1, str2, str3).Replace('\\', '/');
+        }
+
+        /// <summary>
+        /// 获取路径
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string PathCombine(this string str1, string str2, string str3, string str4)
+        {
+            return Path.Combine(str1, str2, str3, str4).Replace('\\', '/');
         }
 
         /// <summary>
