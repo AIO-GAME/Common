@@ -20,7 +20,7 @@ public partial class Utils
             in string path,
             in string charset)
         {
-            return Encoding.GetEncoding(charset).GetString(ReadFile(path));
+            return (Encoding.GetEncoding(charset) ?? Encoding.UTF8).GetString(ReadFile(path));
         }
 
         /// <summary>
@@ -37,7 +37,8 @@ public partial class Utils
             in string charset,
             in bool concat = false)
         {
-            var b = Encoding.GetEncoding(charset).GetBytes(text.ToString());
+            var e = Encoding.GetEncoding(string.IsNullOrEmpty(charset) ? "utf-8" : charset);
+            var b = (e ?? Encoding.UTF8).GetBytes(text.ToString());
             return Write(path, b, 0, b.Length, concat);
         }
 
@@ -55,7 +56,8 @@ public partial class Utils
             in string charset,
             in bool concat = false)
         {
-            var b = Encoding.GetEncoding(charset).GetBytes(text);
+            var e = Encoding.GetEncoding(string.IsNullOrEmpty(charset) ? "utf-8" : charset);
+            var b = (e ?? Encoding.UTF8).GetBytes(text.ToString());
             return Write(path, b, 0, b.Length, concat);
         }
     }
