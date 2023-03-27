@@ -250,17 +250,17 @@
             获取路径
             </summary>
         </member>
-        <member name="M:AIO.StringExtend.PathCombine(System.String,System.String)">
+        <member name="M:AIO.StringExtend.PathCombine(System.String,System.String@)">
             <summary>
             获取路径
             </summary>
         </member>
-        <member name="M:AIO.StringExtend.PathCombine(System.String,System.String,System.String)">
+        <member name="M:AIO.StringExtend.PathCombine(System.String,System.String@,System.String@)">
             <summary>
             获取路径
             </summary>
         </member>
-        <member name="M:AIO.StringExtend.PathCombine(System.String,System.String,System.String,System.String)">
+        <member name="M:AIO.StringExtend.PathCombine(System.String,System.String@,System.String@,System.String@)">
             <summary>
             获取路径
             </summary>

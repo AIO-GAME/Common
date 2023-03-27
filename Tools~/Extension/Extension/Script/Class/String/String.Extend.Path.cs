@@ -32,7 +32,7 @@ namespace AIO
         /// 获取路径
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string PathCombine(this string str1, string str2)
+        public static string PathCombine(this string str1, in string str2)
         {
             return Path.Combine(str1, str2).Replace('\\', '/');
         }
@@ -41,7 +41,7 @@ namespace AIO
         /// 获取路径
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string PathCombine(this string str1, string str2, string str3)
+        public static string PathCombine(this string str1, in string str2, in string str3)
         {
             return Path.Combine(str1, str2, str3).Replace('\\', '/');
         }
@@ -50,7 +50,7 @@ namespace AIO
         /// 获取路径
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string PathCombine(this string str1, string str2, string str3, string str4)
+        public static string PathCombine(this string str1, in string str2, in string str3, in string str4)
         {
             return Path.Combine(str1, str2, str3, str4).Replace('\\', '/');
         }
