@@ -24,7 +24,7 @@ namespace AIO
         /// 移除元素
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int Remove<T>(this IList<T> array, in Predicate<T> match)
+        public static IList<T> Remove<T>(this IList<T> array, in Predicate<T> match)
         {
             if (match is null) throw new ArgumentNullException(nameof(match));
 
@@ -45,17 +45,17 @@ namespace AIO
                 Array.Clear((Array)array, j, count);
             }
 
-            return count;
+            return array;
         }
 
         /// <summary>
         /// 移除重复元素
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void RemoveRepeat<T>(this IList<T> array)
+        public static IList<T> RemoveRepeat<T>(this IList<T> array)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
-            if (array.Count <= 1) return;
+            if (array.Count <= 1) return array;
             var hashSet = new HashSet<T>();
             for (var i = 0; i < array.Count; i++)
             {
@@ -73,6 +73,8 @@ namespace AIO
                     array.RemoveAt(i--);
                 }
             }
+
+            return array;
         }
 
         /// <summary>
@@ -95,17 +97,18 @@ namespace AIO
         /// <exception cref="ArgumentNullException">Thrown if the collection argument is null.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if either index is less than zero or greater than or equal to the number of elements in the IList.</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void RemoveGroup<T>(this IList<T> array, in int startIndex, in int endIndex)
+        public static IList<T> RemoveGroup<T>(this IList<T> array, in int startIndex, in int endIndex)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
             if (startIndex < 0 || startIndex >= array.Count) throw new ArgumentOutOfRangeException(nameof(startIndex));
             if (endIndex <= startIndex || endIndex > array.Count) throw new ArgumentOutOfRangeException(nameof(endIndex));
 
             var countToRemove = endIndex - startIndex;
-            if (countToRemove == 0) return;
+            if (countToRemove == 0) return array;
 
             for (var i = startIndex; i < endIndex; i++)
                 array.RemoveAt(startIndex);
+            return array;
         }
 
         /// <summary>
@@ -117,11 +120,11 @@ namespace AIO
         /// <typeparam name="T">泛型</typeparam>
         /// <exception cref="ArgumentNullException">参数为NULL</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Remove<T>(this IList<T> collection, in int retainCount, in bool removeFromStart)
+        public static IList<T> Remove<T>(this IList<T> collection, in int retainCount, in bool removeFromStart)
         {
             if (collection is null) throw new ArgumentNullException(nameof(collection), "The input collection is null.");
 
-            if (retainCount <= 0 || collection.Count <= retainCount) return;
+            if (retainCount <= 0 || collection.Count <= retainCount) return collection;
 
             if (removeFromStart)
             {
@@ -137,6 +140,8 @@ namespace AIO
                 collection.Clear();
                 foreach (var item in retainedItems) collection.Add(item);
             }
+
+            return collection;
         }
     }
 }

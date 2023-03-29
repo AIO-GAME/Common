@@ -968,6 +968,32 @@
             <param name="searchPatterns">条件 "*value*"</param>
             <returns></returns>
         </member>
+        <member name="M:Utils.IO.TryPathsForFile(System.String,System.Collections.Generic.IEnumerable{System.String}@)">
+            <summary>
+            在给定的文件夹路径列表中查找指定文件名的文件，并返回第一个存在的文件完整路径。
+            </summary>
+            <param name="fileName">要查找的文件名。</param>
+            <param name="directories">包含所有可能包含该文件的文件夹路径的 IEnumerable 类型实例。</param>
+            <returns>如果找到该文件，则返回完整路径，否则返回 null。</returns>
+        </member>
+        <member name="M:Utils.IO.TryPathsForFile(System.String@,System.String[])">
+            <summary>
+            在给定的文件夹路径列表中查找指定文件名的文件，并返回第一个存在的文件完整路径。
+            </summary>
+            <param name="fileName">要查找的文件名。</param>
+            <param name="directories">包含所有可能包含该文件的文件夹路径的可变参数数组。</param>
+            <returns>如果找到该文件，则返回完整路径，否则返回 null。</returns>
+        </member>
+        <member name="M:Utils.IO.GetRelativePath(System.String,System.String)">
+            <summary>
+            获取指定路径相对于给定目录的相对路径。
+            </summary>
+            <param name="path">要获取其相对路径的文件或文件夹的路径。</param>
+            <param name="directory">相对路径将基于此目录计算的目标目录。</param>
+            <returns>相对路径字符串。</returns>
+            <exception cref="T:System.ArgumentNullException">当 path 或 directory 为 null 时，抛出此异常。</exception>
+            <exception cref="T:System.UriFormatException">使用 URI 库时，如果 path 或 directory 不是有效的 URI 字符串，则抛出此异常。</exception>
+        </member>
         <member name="M:Utils.IO.GetFilesInfo(System.String@,System.Func{System.IO.FileInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
             <summary>
             获取当前所有文件夹中所有文件信息
@@ -1939,6 +1965,19 @@
             </summary>
         </member>
         <member name="M:Utils.MathX.Clamp(System.Int32@,System.Int32@,System.Int32@)">
+            <summary>
+            该方法将给定的整数值限制在指定的范围内，并返回新的整数值。
+            </summary>
+            <param name = "value" > 要限制的整数值。</param>
+            <param name = "min" > 范围的最小值。</param>
+            <param name = "max" > 范围的最大值。</param>
+            <returns>被限制的整数值，如果输入值在指定范围内则返回它本身。</returns>
+            <remarks>
+            如果输入值小于最小值，则返回最小值；如果输入值大于最大值，则返回最大值。
+            该方法使用 C# 中的 "in" 关键字，表示输入参数是只读引用类型。
+            </remarks> 
+        </member>
+        <member name="M:Utils.MathX.Clamp(System.Single@,System.Single@,System.Single@)">
             <summary>
             该方法将给定的整数值限制在指定的范围内，并返回新的整数值。
             </summary>
@@ -3895,6 +3934,21 @@
             获取系统启动后 经过的毫秒数
             </summary>
         </member>
+        <member name="T:AIO.IPoolable">
+            <summary>
+            对象池
+            </summary>
+        </member>
+        <member name="M:AIO.IPoolable.New">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="M:AIO.IPoolable.Free">
+            <summary>
+            释放
+            </summary>
+        </member>
         <member name="T:AIO.ConversionQuery">
             <summary>
             用于查询类型转换的结构体，实现了IEquatable接口
@@ -4610,7 +4664,7 @@
             序列化
             </summary>
         </member>
-        <member name="M:AIO.SerializeAsAttribute.#ctor(System.String@)">
+        <member name="M:AIO.SerializeAsAttribute.#ctor(System.String)">
             <summary>
             序列化
             </summary>
@@ -6497,6 +6551,11 @@
             获取值
             </summary>
         </member>
+        <member name="P:AIO.IKeyedCollection`2.Item(System.Int32)">
+            <summary>
+            获取值
+            </summary>
+        </member>
         <member name="M:AIO.IKeyedCollection`2.TryGetValue(`0,`1@)">
             <summary>
             尝试获取值
@@ -6525,7 +6584,7 @@
             <typeparam name="TI">指定类型</typeparam>
             <returns>如果包含则为真，否则为假</returns>
         </member>
-        <member name="M:AIO.IMergedCollection`1.Includes(System.Type@)">
+        <member name="M:AIO.IMergedCollection`1.Includes(System.Type)">
             <summary>
             检查指定类型是否包含在集合中
             </summary>
@@ -6645,7 +6704,7 @@
             <typeparam name="TI">泛型类型</typeparam>
             <returns>是否包含某个类型的集合</returns>
         </member>
-        <member name="M:AIO.MergedCollection`1.Includes(System.Type@)">
+        <member name="M:AIO.MergedCollection`1.Includes(System.Type)">
             <summary>
             是否包含某个类型的集合
             </summary>
@@ -8378,6 +8437,196 @@
         <member name="F:AIO.ScriptType.UnityShader">
             <summary>
             Unity Shader
+            </summary>
+        </member>
+        <member name="T:Pool">
+            <summary>
+            对象池
+            </summary>
+        </member>
+        <member name="T:Pool.Generic`1">
+            <summary>
+            通用
+            </summary>
+        </member>
+        <member name="M:Pool.Generic`1.New(System.Func{`0})">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="M:Pool.Generic`1.Free(`0)">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="T:Pool.HashSet`1">
+            <summary>
+            HashSet对象池
+            </summary>
+        </member>
+        <member name="M:Pool.HashSet`1.New">
+            <summary>
+            创建新的
+            </summary>
+        </member>
+        <member name="M:Pool.HashSet`1.Free(System.Collections.Generic.HashSet{`0})">
+            <summary>
+            释放HashSet
+            </summary>
+        </member>
+        <member name="T:Pool.List`1">
+            <summary>
+            List对象池
+            </summary>
+        </member>
+        <member name="M:Pool.List`1.New">
+            <summary>
+            创建新的
+            </summary>
+        </member>
+        <member name="M:Pool.List`1.Free(System.Collections.Generic.List{`0})">
+            <summary>
+            释放List
+            </summary>
+        </member>
+        <member name="T:Pool.Stack`1">
+            <summary>
+            Stack对象池
+            </summary>
+        </member>
+        <member name="M:Pool.Stack`1.New">
+            <summary>
+            创建新的
+            </summary>
+        </member>
+        <member name="M:Pool.Stack`1.Free(System.Collections.Generic.Stack{`0})">
+            <summary>
+            释放Stack
+            </summary>
+        </member>
+        <member name="T:Pool.Dictionary`2">
+            <summary>
+            Dictionary 对象池
+            </summary>
+        </member>
+        <member name="M:Pool.Dictionary`2.New">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="M:Pool.Dictionary`2.Free(System.Collections.Generic.Dictionary{`0,`1})">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="T:Pool.Queue`1">
+            <summary>
+            Queue对象池
+            </summary>
+        </member>
+        <member name="M:Pool.Queue`1.New">
+            <summary>
+            创建新的
+            </summary>
+        </member>
+        <member name="M:Pool.Queue`1.Free(System.Collections.Generic.Queue{`0})">
+            <summary>
+            释放Queue
+            </summary>
+        </member>
+        <member name="T:PoolExtend">
+            <summary>
+            扩展
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToHashSetPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为HashSet并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToHashSetPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为HashSet并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToHashSetPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为HashSet并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.Free``1(System.Collections.Generic.HashSet{``0})">
+            <summary>
+            释放HashSet
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToListPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToListPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToListPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.Free``1(System.Collections.Generic.List{``0})">
+            <summary>
+            释放List
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToStackPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为Stack并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToStackPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Stack并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToStackPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Stack并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.Free``1(System.Collections.Generic.Stack{``0})">
+            <summary>
+            释放Stack
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToDictionaryPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为 Dictionary 并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.Free``2(System.Collections.Generic.Dictionary{``0,``1})">
+            <summary>
+            释放 Dictionary
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToQueuePooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToQueuePooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToQueuePooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.Free``1(System.Collections.Generic.Queue{``0})">
+            <summary>
+            释放Queue
             </summary>
         </member>
         <member name="T:Unit">

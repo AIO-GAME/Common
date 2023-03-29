@@ -21,6 +21,6 @@ namespace AIO
         /// </summary>
         /// <param name="elementType">元素的类型</param>
         /// <returns>如果包含则为真，否则为假</returns>
-        bool Includes(in Type elementType);
+        bool Includes(Type elementType);
     }
 }

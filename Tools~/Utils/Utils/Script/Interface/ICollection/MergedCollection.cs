@@ -60,7 +60,7 @@ namespace AIO
         /// </summary>
         /// <param name="implementationType">实现类型</param>
         /// <returns>是否包含某个类型的集合</returns>
-        public bool Includes(in Type implementationType)
+        public bool Includes(Type implementationType)
         {
             return GetCollectionForType(implementationType, false) != null;
         }

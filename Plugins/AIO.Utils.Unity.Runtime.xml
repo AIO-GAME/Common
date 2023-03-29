@@ -54,47 +54,54 @@
             hex转换到color
             </summary>
         </member>
-        <member name="T:UtilsEngine.Platform">
+        <member name="T:UtilsEngine.GO">
             <summary>
-            平台工具类
+            GameObject 工具
             </summary>
         </member>
-        <member name="F:UtilsEngine.Platform.supportsJit">
+        <member name="M:UtilsEngine.GO.TrulyEqual(UnityEngine.Object@,UnityEngine.Object@)">
             <summary>
-            支持jit
+            真正的相等
             </summary>
-        </member>
-        <member name="F:UtilsEngine.Pool.Cache">
-            <summary>
-            缓存列表
-            </summary>
-        </member>
-        <member name="T:UtilsEngine.Prefs">
-            <summary>
-            持久化数据
-            </summary>
-        </member>
-        <member name="T:UtilsEngine.ProfilerX">
-            <summary>
-            分析器
-            </summary>
-        </member>
-        <member name="M:UtilsEngine.ProfilerX.GetMemoryObject``1(``0)">
-            <summary>
-            获取当前数据 在Unity内部声明内存
-            </summary>
-            <param name="obj">数据</param>
-            <returns>占用内存</returns>
         </member>
         <member name="T:UtilsEngine.IO">
             <summary>
             Unity IO
             </summary>
         </member>
-        <member name="P:UtilsEngine.IO.UnityPath">
+        <!-- Badly formed XML comment ignored for member "M:UtilsEngine.IO.FromAssets(System.String@)" -->
+        <member name="M:UtilsEngine.IO.FromProject(System.String@)">
             <summary>
-            Unity默认路径
+            将指定的项目路径转换为相对于项目根目录的相对路径。
             </summary>
+            <param name="path">项目路径</param>
+            <returns>相对于项目根目录的相对路径</returns>
+        </member>
+        <member name="M:UtilsEngine.IO.CreateParentDirectoryIfNeeded(System.String@)">
+            <summary>
+            如果不存在指定文件路径的父目录，则创建它。
+            </summary>
+            <param name="path">文件路径</param>
+        </member>
+        <member name="M:UtilsEngine.IO.CreateDirectoryIfNeeded(System.String@)">
+            <summary>
+            如果不存在指定的目录，则创建它。
+            </summary>
+            <param name="path">目录路径</param>
+        </member>
+        <member name="M:UtilsEngine.IO.DeleteDirectoryIfExists(System.String@)">
+            <summary>
+            如果存在指定的目录，则删除它及其关联的“.meta”文件。
+            </summary>
+            <param name="path">目录路径</param>
+        </member>
+        <member name="M:UtilsEngine.IO.MakeSafeFilename(System.String,System.Char@)">
+            <summary>
+            用指定的替换字符替换文件名中的任何无效字符。该方法使用Path.GetInvalidFileNameChars()方法检索被视为文件名不允许字符的字符数组。
+            </summary>
+            <param name="filename">要转换的文件名</param>
+            <param name="replace">要替换无效字符的字符</param>
+            <returns>已转换的文件名</returns>
         </member>
         <member name="M:UtilsEngine.IO.GetFilesRelativeAsset(System.String,System.String@,System.IO.SearchOption@)">
             <summary>
@@ -133,6 +140,38 @@
             <param name="pattern">匹配模式</param>
             <param name="option">查找模式</param>
             <returns>以Assets路径为节点的路径数组</returns>
+        </member>
+        <member name="T:UtilsEngine.Platform">
+            <summary>
+            平台工具类
+            </summary>
+        </member>
+        <member name="F:UtilsEngine.Platform.supportsJit">
+            <summary>
+            支持jit
+            </summary>
+        </member>
+        <member name="F:UtilsEngine.Pool.Cache">
+            <summary>
+            缓存列表
+            </summary>
+        </member>
+        <member name="T:UtilsEngine.Prefs">
+            <summary>
+            持久化数据
+            </summary>
+        </member>
+        <member name="T:UtilsEngine.ProfilerX">
+            <summary>
+            分析器
+            </summary>
+        </member>
+        <member name="M:UtilsEngine.ProfilerX.GetMemoryObject``1(``0)">
+            <summary>
+            获取当前数据 在Unity内部声明内存
+            </summary>
+            <param name="obj">数据</param>
+            <returns>占用内存</returns>
         </member>
         <member name="T:UtilsEngine.SystemInfoX">
             <summary>
@@ -657,6 +696,32 @@
             将传入的 Action 对象封装成一个操作，并通过 SyncPost 方法异步执行，实际上也是 SyncPost 方法的一个别名。
             </summary>
             <param name="act">要执行的 Action 对象。</param>
+        </member>
+        <member name="T:UtilsEngine.Paths">
+            <summary>
+            提供了一些与路径相关的实用方法。
+            包含与程序集有关的实用方法和属性的静态类
+            </summary>
+        </member>
+        <member name="P:UtilsEngine.Paths.Assets">
+            <summary>
+            获取当前项目 Assets 文件夹的完整路径。
+            </summary>
+        </member>
+        <member name="P:UtilsEngine.Paths.StreamingAssetsPath">
+            <summary>
+            获取当前项目 Streaming Assets 文件夹的完整路径。
+            </summary>
+        </member>
+        <member name="P:UtilsEngine.Paths.PersistentDataPath">
+            <summary>
+            获取当前项目 Persistent Assets 文件夹的完整路径。
+            </summary>
+        </member>
+        <member name="P:UtilsEngine.Paths.Project">
+            <summary>
+            获取当前项目所在文件夹的完整路径。
+            </summary>
         </member>
         <member name="T:AIO.Unity.RuntimePlatformExtend">
             <summary>
