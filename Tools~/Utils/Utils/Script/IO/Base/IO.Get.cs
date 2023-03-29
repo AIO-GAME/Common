@@ -5,6 +5,8 @@
 |*|=============================================*/
 
 
+using AIO;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,6 +18,71 @@ public partial class Utils
 {
     public partial class IO
     {
+        /// <summary>
+        /// 在给定的文件夹路径列表中查找指定文件名的文件，并返回第一个存在的文件完整路径。
+        /// </summary>
+        /// <param name="fileName">要查找的文件名。</param>
+        /// <param name="directories">包含所有可能包含该文件的文件夹路径的 IEnumerable 类型实例。</param>
+        /// <returns>如果找到该文件，则返回完整路径，否则返回 null。</returns>
+        public static string TryPathsForFile(string fileName, in IEnumerable<string> directories)
+        {
+            return directories.Select(directory => Path.Combine(directory, fileName)).FirstOrDefault(File.Exists);
+        }
+
+        /// <summary>
+        /// 在给定的文件夹路径列表中查找指定文件名的文件，并返回第一个存在的文件完整路径。
+        /// </summary>
+        /// <param name="fileName">要查找的文件名。</param>
+        /// <param name="directories">包含所有可能包含该文件的文件夹路径的可变参数数组。</param>
+        /// <returns>如果找到该文件，则返回完整路径，否则返回 null。</returns>
+        public static string TryPathsForFile(in string fileName, params string[] directories)
+        {
+            return TryPathsForFile(fileName, (IEnumerable<string>)directories);
+        }
+
+        /// <summary>
+        /// 获取指定路径相对于给定目录的相对路径。
+        /// </summary>
+        /// <param name="path">要获取其相对路径的文件或文件夹的路径。</param>
+        /// <param name="directory">相对路径将基于此目录计算的目标目录。</param>
+        /// <returns>相对路径字符串。</returns>
+        /// <exception cref="ArgumentNullException">当 path 或 directory 为 null 时，抛出此异常。</exception>
+        /// <exception cref="UriFormatException">使用 URI 库时，如果 path 或 directory 不是有效的 URI 字符串，则抛出此异常。</exception>
+        public static string GetRelativePath(string path, string directory)
+        {
+            Ensure.That(nameof(path)).IsNotNull(path);
+            Ensure.That(nameof(directory)).IsNotNull(directory);
+
+            if (!directory.EndsWith(Path.DirectorySeparatorChar.ToString()))
+            {
+                directory += Path.DirectorySeparatorChar;
+            }
+
+            try
+            {
+                // Optimization: Try a simple substring if possible
+                path = path.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
+                directory = directory.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
+
+                if (path.StartsWith(directory, StringComparison.Ordinal))
+                {
+                    return path.Substring(directory.Length);
+                }
+
+                // Otherwise, use the URI library
+
+                var pathUri = new Uri(path);
+                var folderUri = new Uri(directory);
+
+                return Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString()
+                    .Replace('/', Path.DirectorySeparatorChar));
+            }
+            catch (UriFormatException ufex)
+            {
+                throw new UriFormatException($"Failed to get relative path.\nPath: {path}\nDirectory:{directory}\n{ufex}");
+            }
+        }
+
         /// <summary>
         /// 获取当前所有文件夹中所有文件信息
         /// </summary>

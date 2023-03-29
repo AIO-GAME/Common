@@ -9,9 +9,7 @@ public partial class Utils
         /// 使用异步 从文件中读取数据
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Task<byte[]> ReadFileAsync(
-            string Path
-        )
+        public static Task<byte[]> ReadFileAsync(string Path)
         {
             return ReadAsync(Path);
         }

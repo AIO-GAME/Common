@@ -14,7 +14,7 @@ namespace AIO
         /// <summary>
         /// 输出开关
         /// </summary>
-        internal static bool IsNotOut { get; private set; }
+        internal static bool IsNotOut { get; private set; } = false;
 
         /// <summary>
         /// 类型
@@ -100,7 +100,7 @@ namespace AIO
             var count = 0;
             foreach (var item in objs)
             {
-                str.Append(string.Format("{0}:{1}", count++, item.ToString())).Append("\r\n");
+                str.Append(string.Format("{0}:{1}", count++, item)).Append("\r\n");
             }
 
             var message = string.Format("Count: {0}\r\n", count);
@@ -154,9 +154,9 @@ namespace AIO
                 {
                     if (dic.Value != null)
                     {
-                        str.Append($"[{index++}]{dic.Key?.ToString()}:{dic.Value}\r\n");
+                        str.Append($"[{index++}]{dic.Key}:{dic.Value}\r\n");
                     }
-                    else str.Append($"[{index++}]{dic.Key?.ToString()}:NULL\r\n");
+                    else str.Append($"[{index++}]{dic.Key}:NULL\r\n");
                 }
 
                 r = str.Remove(r.Length - 2, 2).ToString();

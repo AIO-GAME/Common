@@ -8,6 +8,8 @@
         /// <summary>
         /// 序列化
         /// </summary>
-        public SerializeAsAttribute(in string name) : base(name) { }
+        public SerializeAsAttribute(string name) : base(name)
+        {
+        }
     }
 }

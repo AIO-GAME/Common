@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>AIO</RootNamespace>
-    <StartupObject>Utils.Program</StartupObject>
+    <StartupObject>Program</StartupObject>
     <SignAssembly>true</SignAssembly>
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
@@ -19,6 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Extension\Extension\Extension.csproj" />
+    <ProjectReference Include="..\Utils.Unity.Editor\Utils.Unity.Editor.csproj" />
+    <ProjectReference Include="..\Utils.Unity.Runtime\Utils.Unity.Runtime.csproj" />
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Private>false</Private>
       <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>

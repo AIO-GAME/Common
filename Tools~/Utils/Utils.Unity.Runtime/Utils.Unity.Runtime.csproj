@@ -60,6 +60,8 @@
     <Compile Include="Script\Extension\RuntimePlatform.Extend.cs" />
     <Compile Include="Script\fsSerializer\Unity\fsSerializationCallbackReceiverProcessor.cs" />
     <Compile Include="Script\fsSerializer\Unity\UnityFSSerializer.cs" />
+    <Compile Include="Script\GameObject\U.GameObject.cs" />
+    <Compile Include="Script\IO\U.IO.cs" />
     <Compile Include="Script\Math\AngleFixed.cs" />
     <Compile Include="Script\Platform\U.Platform.cs" />
     <Compile Include="Script\Pool\Cacheable.cs" />
@@ -81,7 +83,7 @@
     <Compile Include="Script\fsSerializer\Unity\Ray2DConverter.cs" />
     <Compile Include="Script\fsSerializer\Unity\RayConverter.cs" />
     <Compile Include="Script\fsSerializer\Unity\UnityObjectConverter.cs" />
-    <Compile Include="Script\IO\U.IO.Unity.cs" />
+    <Compile Include="Script\IO\U.IO.Get.cs" />
     <Compile Include="Script\Profiling\ProfiledSegment.cs" />
     <Compile Include="Script\Profiling\ProfiledSegmentCollection.cs" />
     <Compile Include="Script\Profiling\ProfilingScope.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="Script\Math\U.Math.cs" />
     <Compile Include="Script\Thread\U.Thread.cs" />
     <Compile Include="Script\Prefs\U.Prefs.Svae.cs" />
+    <Compile Include="Script\Path\U.Path.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Ensure\Ensure\Ensure.csproj">
@@ -112,6 +115,9 @@
       <Private>False</Private>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Script\Exception\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -281,7 +281,7 @@ public class MonKeySettings : ScriptableObject
     /// <summary>
     /// 控制台覆盖热键
     /// </summary>
-    public KeyCode MonkeyConsoleOverrideHotKey = KeyCode.BackQuote;
+    public KeyCode MonkeyConsoleOverrideHotKey = KeyCode.F1;
 
     /// <summary>
     /// 窗口展示时暂停游戏

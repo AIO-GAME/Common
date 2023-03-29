@@ -17,6 +17,11 @@ namespace AIO
         TItem this[TKey key] { get; }
 
         /// <summary>
+        /// 获取值
+        /// </summary>
+        TItem this[int index] { get; }
+
+        /// <summary>
         /// 尝试获取值
         /// </summary>
         bool TryGetValue(TKey key, out TItem value);

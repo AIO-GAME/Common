@@ -34,6 +34,25 @@ public partial class Utils
             if (value > max) return max;
             return value;
         }
+        
+        ///<summary>
+        ///该方法将给定的整数值限制在指定的范围内，并返回新的整数值。
+        ///</summary>
+        ///<param name = "value" > 要限制的整数值。</param>
+        ///<param name = "min" > 范围的最小值。</param>
+        ///<param name = "max" > 范围的最大值。</param>
+        ///<returns>被限制的整数值，如果输入值在指定范围内则返回它本身。</returns>
+        ///<remarks>
+        ///如果输入值小于最小值，则返回最小值；如果输入值大于最大值，则返回最大值。
+        ///该方法使用 C# 中的 "in" 关键字，表示输入参数是只读引用类型。
+        ///</remarks> 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Clamp(in float value, in float min, in float max)
+        {
+            if (value < min) return min;
+            if (value > max) return max;
+            return value;
+        }
 
         /// <summary>
         /// 判断给定的层级是否在掩码中。
