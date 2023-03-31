@@ -310,32 +310,6 @@
             </summary>
             如果为-1 则说明没有使用
         </member>
-        <member name="T:AIO.EnumDescriptionAttribute">
-            <summary>
-            枚举描述
-            </summary>
-        </member>
-        <member name="P:AIO.EnumDescriptionAttribute.Description">
-            <summary>
-            描述
-            </summary>
-        </member>
-        <member name="M:AIO.EnumDescriptionAttribute.#ctor(System.String)">
-            <summary>
-            枚举描述属性
-            </summary>
-            <param name="description">描述字段</param>
-        </member>
-        <member name="T:AIO.AttributeFieldExtend">
-            <summary>
-            扩展
-            </summary>
-        </member>
-        <member name="M:AIO.AttributeFieldExtend.GetDescription(System.Enum)">
-            <summary>
-            获取自定义属性值
-            </summary>
-        </member>
         <member name="T:AIO.ERuntimePlatform">
             <summary>
               <para>The platform application is running. Returned by Application.platform.</para>

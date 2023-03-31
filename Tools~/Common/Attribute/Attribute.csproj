@@ -58,7 +58,6 @@
     <Compile Include="Script\Field\ArgumentAttribute.cs" />
     <Compile Include="Script\Field\ArgumentCustom.cs" />
     <Compile Include="Script\Field\ArgumentUtils.cs" />
-    <Compile Include="Script\Field\EnumDescriptionAttribute.cs" />
     <Compile Include="Script\Enum\ERuntimePlatform.cs" />
     <Compile Include="Script\Test.cs" />
   </ItemGroup>
