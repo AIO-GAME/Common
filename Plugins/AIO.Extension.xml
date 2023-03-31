@@ -2227,6 +2227,16 @@
             Gets attributes on an enum member, eg. enum E { [Attr] A }
             </summary>
         </member>
+        <member name="M:AIO.EnumExtend.GetDescriptionDic``1(``0)">
+            <summary>
+            获取指定描述列表
+            </summary>
+        </member>
+        <member name="M:AIO.EnumExtend.GetDescription``1(``0)">
+            <summary>
+            获取自定义属性值
+            </summary>
+        </member>
         <member name="T:AIO.ICollectionExtend">
             <summary>
             集合
