@@ -4,6 +4,32 @@
         <name>AIO.Utils.Unity.Editor</name>
     </assembly>
     <members>
+        <member name="T:AIO.Unity.Editor.RectExtension">
+            <summary>
+            矩形扩展
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.Editor.RectExtension.DrawGUI(UnityEngine.Rect,UnityEngine.Color@,UnityEngine.Color@)">
+            <summary>
+            GUI绘制矩形
+            </summary>
+            <param name="rect">矩形</param>
+            <param name="fillColor">填充颜色</param>
+            <param name="outlineColor">描边颜色</param>
+        </member>
+        <member name="M:AIO.Unity.Editor.RectExtension.DrawGUI(UnityEngine.Rect,UnityEngine.Color@)">
+            <summary>
+            GUI绘制矩形
+            </summary>
+            <param name="rect">矩形</param>
+            <param name="fillColor">填充颜色</param>
+        </member>
+        <member name="M:AIO.Unity.Editor.RectExtension.DrawGUI(UnityEngine.Rect)">
+            <summary>
+            GUI绘制矩形
+            </summary>
+            <param name="rect">矩形</param>
+        </member>
         <member name="T:AIO.Unity.Editor.UnityEditorInternalException">
             <summary>
             这个类表示在访问Unity内部编辑器函数时发生错误时抛出的异常。
