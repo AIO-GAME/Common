@@ -1000,6 +1000,11 @@
             对象变为禁用或非活跃状态时调用此函数
             </summary>
         </member>
+        <member name="M:AIO.Unity.ScriptableBasics.Reset">
+            <summary>
+            重置为默认值。
+            </summary>
+        </member>
         <member name="M:AIO.Unity.ScriptableBasics.OnValidate">
             <summary>
             当该脚本被加载或检视面板的值被修改时调用此函数(仅在编辑器中调用）
@@ -1037,6 +1042,9 @@
         <member name="M:AIO.Unity.ScriptableData.OnEnable">
             <inheritdoc/>
         </member>
+        <member name="M:AIO.Unity.ScriptableData.Reset">
+            <inheritdoc/>
+        </member>
         <member name="M:AIO.Unity.ScriptableData.Equals(System.Object)">
             <inheritdoc/>
         </member>
@@ -1063,6 +1071,216 @@
             </summary>
         </member>
         <member name="M:AIO.Unity.ScriptableData.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:AIO.Unity.ScriptableDictionary`2">
+            <summary>
+            可持久化 字典数据
+            </summary>
+            <typeparam name="K">Key类型</typeparam>
+            <typeparam name="V">Value类型</typeparam>
+        </member>
+        <member name="F:AIO.Unity.ScriptableDictionary`2.Collection">
+            <summary>
+            集合
+            </summary>
+        </member>
+        <member name="P:AIO.Unity.ScriptableDictionary`2.Count">
+            <summary>
+            大小
+            </summary>
+        </member>
+        <member name="P:AIO.Unity.ScriptableDictionary`2.IsReadOnly">
+            <summary>
+            只读
+            </summary>
+        </member>
+        <member name="P:AIO.Unity.ScriptableDictionary`2.Item(`0)">
+            <summary>
+            获取Value值
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableDictionary`2.Add(`0,`1)">
+            <summary>
+            添加值
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableDictionary`2.Add(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <summary>
+            添加值
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableDictionary`2.Clear">
+            <summary>
+            清空
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableDictionary`2.Contains(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <summary>
+            判断值是否存在
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableDictionary`2.ContainsKey(`0)">
+            <summary>
+            判断值是否存在
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableDictionary`2.ContainsValue(`1)">
+            <summary>
+            判断值是否存在
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableDictionary`2.CopyTo(System.Collections.Generic.KeyValuePair{`0,`1}[],System.Int32)">
+            <summary>
+            复制值
+            </summary>
+            <param name="array">目标数组</param>
+            <param name="arrayIndex">目标数组开始下标</param>
+        </member>
+        <member name="M:AIO.Unity.ScriptableDictionary`2.Remove(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <summary>
+            移除数据
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableDictionary`2.Remove(`0)">
+            <summary>
+            移除数据
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableDictionary`2.TryGetValue(`0,`1@)">
+            <summary>
+            尝试获取值
+            </summary>
+            <param name="key">键值</param>
+            <param name="value">返回值</param>
+            <returns>是否成功获取</returns>
+        </member>
+        <member name="P:AIO.Unity.ScriptableDictionary`2.Keys">
+            <summary>
+            键集合
+            </summary>
+        </member>
+        <member name="P:AIO.Unity.ScriptableDictionary`2.Values">
+            <summary>
+            值集合
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableDictionary`2.GetEnumerator">
+            <summary>
+            获取迭代器
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableDictionary`2.OnDeserialize">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.ScriptableDictionary`2.OnSerialize">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.ScriptableDictionary`2.ToSerialize">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableDictionary`2.ToDeserialize">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableDictionary`2.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:AIO.Unity.ScriptableList`1">
+            <summary>
+            可持久化 列表数据
+            </summary>
+            <typeparam name="V">Value类型</typeparam>
+        </member>
+        <member name="F:AIO.Unity.ScriptableList`1.Collection">
+            <summary>
+            集合
+            </summary>
+        </member>
+        <member name="P:AIO.Unity.ScriptableList`1.Item(System.Int32)">
+            <summary>
+            获取值
+            </summary>
+            <param name="index">下标</param>
+            <returns></returns>
+        </member>
+        <member name="P:AIO.Unity.ScriptableList`1.Count">
+            <summary>
+            集合数量
+            </summary>
+        </member>
+        <member name="P:AIO.Unity.ScriptableList`1.IsReadOnly">
+            <summary>
+            是否为只读
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableList`1.Add(`0)">
+            <summary>
+            添加
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableList`1.Clear">
+            <summary>
+            清空
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableList`1.Contains(`0)">
+            <summary>
+            判断存在
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableList`1.CopyTo(`0[],System.Int32)">
+            <summary>
+            复制到新数组
+            </summary>
+            <param name="array">目标数组</param>
+            <param name="arrayIndex">目标数组下标</param>
+        </member>
+        <member name="M:AIO.Unity.ScriptableList`1.GetEnumerator">
+            <summary>
+            获取泛型迭代器
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableList`1.IndexOf(`0)">
+            <summary>
+            判断元素存在下标 值为-1 未找到
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableList`1.Insert(System.Int32,`0)">
+            <summary>
+            插入
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableList`1.Remove(`0)">
+            <summary>
+            移除
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableList`1.RemoveAt(System.Int32)">
+            <summary>
+            移除指定下标元素
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableList`1.OnDeserialize">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.ScriptableList`1.OnSerialize">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.ScriptableList`1.ToSerialize">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableList`1.ToDeserialize">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableList`1.Dispose">
             <inheritdoc/>
         </member>
         <member name="T:AIO.Unity.ISerializationDependency">
