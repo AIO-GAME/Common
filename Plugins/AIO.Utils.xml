@@ -3934,6 +3934,26 @@
             获取系统启动后 经过的毫秒数
             </summary>
         </member>
+        <member name="T:AIO.ISerialize">
+            <summary>
+            序列化 反序列化
+            </summary>
+        </member>
+        <member name="P:AIO.ISerialize.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="M:AIO.ISerialize.Serialize">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AIO.ISerialize.Deserialize">
+            <summary>
+            反序列化
+            </summary>
+        </member>
         <member name="T:AIO.IPoolable">
             <summary>
             对象池

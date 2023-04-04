@@ -972,6 +972,99 @@
             so that the import process can be unified and ignore the old format.
             </summary>
         </member>
+        <member name="T:AIO.Unity.ScriptableBasics">
+            <summary>
+            Unity 可持续化数据
+            </summary>
+        </member>
+        <member name="P:AIO.Unity.ScriptableBasics.Data">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.ScriptableBasics.Awake">
+            <summary>
+            此函数在脚本启动时调用
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableBasics.OnEnable">
+            <summary>
+            当对象已启用并处于活动状态时调用此函数
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableBasics.OnDestroy">
+            <summary>
+            要销毁对象时调用此函数
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableBasics.OnDisable">
+            <summary>
+            对象变为禁用或非活跃状态时调用此函数
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableBasics.OnValidate">
+            <summary>
+            当该脚本被加载或检视面板的值被修改时调用此函数(仅在编辑器中调用）
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableBasics.Deserialize">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.ScriptableBasics.Serialize">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.ScriptableBasics.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:AIO.Unity.ScriptableData">
+            <summary>
+            Unity 可持续化数据 
+            保存为二进制数据
+            只保存数据 需要需要编辑重写 
+            请使用Editor重写
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableData.Awake">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.ScriptableData.OnDestroy">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.ScriptableData.OnValidate">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.ScriptableData.OnDisable">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.ScriptableData.OnEnable">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.ScriptableData.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.ScriptableData.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.ScriptableData.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.ScriptableData.Deserialize">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.ScriptableData.Serialize">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.ScriptableData.OnDeserialize">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableData.OnSerialize">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableData.Dispose">
+            <inheritdoc/>
+        </member>
         <member name="T:AIO.Unity.ISerializationDependency">
             <inheritdoc/>
         </member>

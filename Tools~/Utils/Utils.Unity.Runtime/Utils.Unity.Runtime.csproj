@@ -75,6 +75,7 @@
     <Compile Include="Script\Prefs\U.Prefs.cs" />
     <Compile Include="Script\Prefs\U.Prefs.Load.cs" />
     <Compile Include="Script\Profiling\U.Profiler.cs" />
+    <Compile Include="Script\ScriptableObject\Scriptable.cs" />
     <Compile Include="Script\Serialization\ISerializationDependency.cs" />
     <Compile Include="Script\Serialization\ISerializationDepender.cs" />
     <Compile Include="Script\Serialization\Serialization.cs" />
@@ -116,9 +117,7 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Script\Exception\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

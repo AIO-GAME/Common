@@ -61,6 +61,7 @@
     <Compile Include="Script\Interface\ICollection\MergedKeyedCollection.cs" />
     <Compile Include="Script\Interface\ICollection\VariantKeyedCollection.cs" />
     <Compile Include="Script\Interface\IEqualityComparer\ReferenceEqualityComparer.cs" />
+    <Compile Include="Script\Interface\ISerialize.cs" />
     <Compile Include="Script\Pool\Pool.Generic.cs" />
     <Compile Include="Script\Pool\IPoolable.cs" />
     <Compile Include="Script\Pool\Pool.HashSet.cs" />
