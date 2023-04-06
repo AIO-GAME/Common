@@ -1,11 +1,12 @@
-﻿using AIO;
-
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
+using AIO;
 using UnityEngine;
 
 public static partial class UtilsEngine
 {
+    /// <summary>
+    /// 对象池
+    /// </summary>
     public static class Pool
     {
         /// <summary>
@@ -45,6 +46,7 @@ public static partial class UtilsEngine
                 r = cache.Pop();
                 if (r) break;
             }
+
             if (r == null) r = Object.Instantiate(prefab);
             r.SetPrefab(prefab);
             r.transform.SetParent(parent, false);

@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
-
 using UnityEngine;
 
 public static partial class UtilsEngine
 {
     public static partial class Prefs
     {
+        /// <summary>
+        /// 加载字符串
+        /// </summary>
+        /// <param name="key">类型</param>
+        /// <param name="field">字段名称</param>
+        /// <typeparam name="T">泛型类型</typeparam>
+        /// <returns>字符串</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string LoadString<T>(in T key, in string field)
         {

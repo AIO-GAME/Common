@@ -76,6 +76,7 @@
     <Compile Include="Script\Prefs\U.Prefs.Load.cs" />
     <Compile Include="Script\Profiling\U.Profiler.cs" />
     <Compile Include="Script\ScriptableObject\ScriptableBasics.cs" />
+    <Compile Include="Script\ScriptableObject\ScriptableHashSet.cs" />
     <Compile Include="Script\ScriptableObject\ScriptableData.cs" />
     <Compile Include="Script\ScriptableObject\ScriptableDictionary.cs" />
     <Compile Include="Script\ScriptableObject\ScriptableList.cs" />

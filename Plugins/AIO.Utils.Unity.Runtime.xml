@@ -1019,6 +1019,66 @@
         <member name="M:AIO.Unity.ScriptableBasics.Dispose">
             <inheritdoc/>
         </member>
+        <member name="T:AIO.Unity.ScriptableHashSet`1">
+            <summary>
+            可持久化 列表数据
+            </summary>
+            <typeparam name="V">Value类型</typeparam>
+        </member>
+        <member name="F:AIO.Unity.ScriptableHashSet`1.Collection">
+            <summary>
+            集合
+            </summary>
+        </member>
+        <member name="P:AIO.Unity.ScriptableHashSet`1.Count">
+            <summary>
+            数量
+            </summary>
+        </member>
+        <member name="P:AIO.Unity.ScriptableHashSet`1.IsReadOnly">
+            <summary>
+            是否为只读
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableHashSet`1.Add(`0)">
+            <summary>
+            添加
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableHashSet`1.Clear">
+            <summary>
+            清空
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableHashSet`1.Contains(`0)">
+            <summary>
+            存在
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableHashSet`1.CopyTo(`0[],System.Int32)">
+            <summary>
+            复制
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableHashSet`1.GetEnumerator">
+            <summary>
+            集合迭代器
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableHashSet`1.Remove(`0)">
+            <summary>
+            移除
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableHashSet`1.OnDeserialize">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.ScriptableHashSet`1.OnSerialize">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Unity.ScriptableHashSet`1.Dispose">
+            <inheritdoc/>
+        </member>
         <member name="T:AIO.Unity.ScriptableData">
             <summary>
             Unity 可持续化数据 
@@ -1068,6 +1128,16 @@
         <member name="M:AIO.Unity.ScriptableData.OnSerialize">
             <summary>
             序列化
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableData.ToSerialize(AIO.IWrite)">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableData.ToDeserialize(AIO.IRead)">
+            <summary>
+            反序列化
             </summary>
         </member>
         <member name="M:AIO.Unity.ScriptableData.Dispose">
@@ -1176,16 +1246,6 @@
         <member name="M:AIO.Unity.ScriptableDictionary`2.OnSerialize">
             <inheritdoc/>
         </member>
-        <member name="M:AIO.Unity.ScriptableDictionary`2.ToSerialize">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AIO.Unity.ScriptableDictionary`2.ToDeserialize">
-            <summary>
-            反序列化
-            </summary>
-        </member>
         <member name="M:AIO.Unity.ScriptableDictionary`2.Dispose">
             <inheritdoc/>
         </member>
@@ -1269,16 +1329,6 @@
         </member>
         <member name="M:AIO.Unity.ScriptableList`1.OnSerialize">
             <inheritdoc/>
-        </member>
-        <member name="M:AIO.Unity.ScriptableList`1.ToSerialize">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AIO.Unity.ScriptableList`1.ToDeserialize">
-            <summary>
-            反序列化
-            </summary>
         </member>
         <member name="M:AIO.Unity.ScriptableList`1.Dispose">
             <inheritdoc/>

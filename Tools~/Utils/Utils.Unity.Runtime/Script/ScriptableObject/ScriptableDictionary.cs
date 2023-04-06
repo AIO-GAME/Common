@@ -174,31 +174,17 @@
         protected sealed override void OnDeserialize()
         {
             Collection = Pool.Dictionary<K, V>.New();
-            if (Data == null) return;
-            ToDeserialize();
+            if (Data == null || Data.Length == 0) return;
+            ToDeserialize(new BufferByte(Data));
         }
 
         /// <inheritdoc/>
         protected sealed override void OnSerialize()
         {
             if (Collection == null) Collection = Pool.Dictionary<K, V>.New();
-            ToSerialize();
-        }
-
-        /// <summary>
-        /// 序列化
-        /// </summary>
-        protected virtual void ToSerialize()
-        {
-
-        }
-
-        /// <summary>
-        /// 反序列化
-        /// </summary>
-        protected virtual void ToDeserialize()
-        {
-
+            var buffer = new BufferByte();
+            ToSerialize(buffer);
+            Data = buffer.ToArray();
         }
 
         /// <inheritdoc/>

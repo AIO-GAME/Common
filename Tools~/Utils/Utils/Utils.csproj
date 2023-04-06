@@ -213,6 +213,35 @@
     <Compile Include="Script\System\Serializer\FS\System\Namespace.cs" />
     <Compile Include="Script\System\Serializer\FS\System\NamespaceConverter.cs" />
     <Compile Include="Script\System\Serializer\FS\TypeName.cs" />
+    <Compile Include="Script\Tools\Buffer\Buffer.cs" />
+    <Compile Include="Script\Tools\Buffer\Buffer.Extend.cs" />
+    <Compile Include="Script\Tools\Buffer\BufferArray.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Bool.Array.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Bool.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Byte.Array.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Byte.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Char.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.cs" />
+    <Compile Include="Script\Tools\Buffer\BufferChar.cs" />
+    <Compile Include="Script\Tools\Buffer\BufferRing.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Decimal.Array.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Double.Array.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Double.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Enum.Array.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Float.Array.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Float.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Int16.Array.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Int32.Array.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.int64.Array.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Int64.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Json.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Len.Array.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Len.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.SByte.Array.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.SByte.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.String.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Decimal.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Enum.cs" />
     <Compile Include="Script\UtilsManager.cs" />
     <Compile Include="Script\Interface\ICollection\IKeyedCollection.cs" />
     <Compile Include="Script\Interface\ICollection\IMergedCollection.cs" />
@@ -305,6 +334,9 @@
     <None Include="app.config" />
     <Compile Include="Script\Pool\Pool.Dictionary.cs" />
     <Compile Include="Script\Pool\Pool.Queue.cs" />
+    <Compile Include="Script\Tools\Buffer\Buffer.List.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Int32.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Int16.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Ensure\Ensure\Ensure.csproj">

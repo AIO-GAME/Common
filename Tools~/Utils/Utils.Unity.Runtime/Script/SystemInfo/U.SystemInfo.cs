@@ -238,10 +238,10 @@ public static partial class UtilsEngine
         /// 当前渲染器是否直接支持绑定常量缓冲区
         /// Does the current renderer support binding constant buffers directly
         /// </summary>
-        //public static bool IsSupportsSetConstantBuffer()
-        //{
-        //    return SystemInfo.supportsSetConstantBuffer;
-        //}
+        public static bool IsSupportsSetConstantBuffer()
+        {
+            return SystemInfo.supportsSetConstantBuffer;
+        }
 
         /// <summary>
         /// SystemInfo字符串属性返回的值，该属性在当前平台上不受支持。
