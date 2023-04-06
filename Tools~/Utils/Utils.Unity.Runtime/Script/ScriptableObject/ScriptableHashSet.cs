@@ -10,26 +10,15 @@ namespace AIO.Unity
     /// </summary>
     /// <typeparam name="V">Value类型</typeparam>
     [DisplayName("可持久化 列表数据"), Description("处理数据主要数据为列表结构的数据文件")]
-    public abstract class ScriptableList<V> : ScriptableData, IList<V>
+    public class ScriptableHashSet<V> : ScriptableData, ICollection<V>
     {
         /// <summary>
         /// 集合
         /// </summary>
-        [NonSerialized] protected List<V> Collection;
+        [NonSerialized] protected HashSet<V> Collection;
 
         /// <summary>
-        /// 获取值
-        /// </summary>
-        /// <param name="index">下标</param>
-        /// <returns></returns>
-        public V this[int index]
-        {
-            get => Collection[index];
-            set => Collection[index] = value;
-        }
-
-        /// <summary>
-        /// 集合数量
+        /// 数量
         /// </summary>
         public int Count => Collection.Count;
 
@@ -55,7 +44,7 @@ namespace AIO.Unity
         }
 
         /// <summary>
-        /// 判断存在
+        /// 存在
         /// </summary>
         public bool Contains(V item)
         {
@@ -63,10 +52,8 @@ namespace AIO.Unity
         }
 
         /// <summary>
-        /// 复制到新数组
+        /// 复制
         /// </summary>
-        /// <param name="array">目标数组</param>
-        /// <param name="arrayIndex">目标数组下标</param>
         public void CopyTo(V[] array, int arrayIndex)
         {
             if (arrayIndex < 0 || arrayIndex >= array.Length)
@@ -86,35 +73,14 @@ namespace AIO.Unity
         }
 
         /// <summary>
-        /// 获取泛型迭代器
+        /// 集合迭代器
         /// </summary>
         public IEnumerator<V> GetEnumerator()
         {
-            return ((IEnumerable<V>)Collection).GetEnumerator();
-        }
-
-        /// <summary>
-        /// 判断元素存在下标 值为-1 未找到
-        /// </summary>
-        public int IndexOf(V item)
-        {
-            for (var i = 0; i < Collection.Count; i++)
+            foreach (var item in Collection)
             {
-                if (Collection[i].Equals(item))
-                {
-                    return i;
-                }
+                yield return item;
             }
-
-            return -1;
-        }
-
-        /// <summary>
-        /// 插入
-        /// </summary>
-        public void Insert(int index, V item)
-        {
-            Collection.Insert(index, item);
         }
 
         /// <summary>
@@ -125,14 +91,6 @@ namespace AIO.Unity
             return Collection.Remove(item);
         }
 
-        /// <summary>
-        /// 移除指定下标元素
-        /// </summary>
-        public void RemoveAt(int index)
-        {
-            Collection.RemoveAt(index);
-        }
-
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
@@ -141,7 +99,7 @@ namespace AIO.Unity
         /// <inheritdoc/>
         protected sealed override void OnDeserialize()
         {
-            Collection = Pool.List<V>.New();
+            Collection = Pool.HashSet<V>.New();
             if (Data == null || Data.Length == 0) return;
             ToDeserialize(new BufferByte(Data));
         }
@@ -149,7 +107,7 @@ namespace AIO.Unity
         /// <inheritdoc/>
         protected sealed override void OnSerialize()
         {
-            if (Collection == null) Collection = Pool.List<V>.New();
+            if (Collection == null) Collection = Pool.HashSet<V>.New();
             var buffer = new BufferByte();
             ToSerialize(buffer);
             Data = buffer.ToArray();
@@ -159,7 +117,7 @@ namespace AIO.Unity
         public sealed override void Dispose()
         {
             Serialize();
-            Pool.List<V>.Free(Collection);
+            Pool.HashSet<V>.Free(Collection);
         }
     }
 }

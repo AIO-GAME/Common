@@ -4,6 +4,7 @@ public partial class UtilsEngine
 {
     public static partial class IO
     {
+        /// <summary>
         /// 将指定的资源路径转换为相对于项目“assets”目录的相对路径。
         /// </summary>
         /// <param name="path">资源路径</param>

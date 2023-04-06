@@ -79,7 +79,8 @@
         /// </summary>
         protected virtual void OnDeserialize()
         {
-
+            if (Data == null || Data.Length == 0) return;
+            ToDeserialize(new BufferByte(Data));
         }
 
         /// <summary>
@@ -87,8 +88,25 @@
         /// </summary>
         protected virtual void OnSerialize()
         {
-
+            var buffer = new BufferByte();
+            ToSerialize(buffer);
+            Data = buffer.ToArray();
         }
+
+        /// <summary>
+        /// 序列化
+        /// </summary>
+        protected virtual void ToSerialize(IWrite buffer)
+        {
+        }
+
+        /// <summary>
+        /// 反序列化
+        /// </summary>
+        protected virtual void ToDeserialize(IRead buffer)
+        {
+        }
+
 
         /// <inheritdoc/>
         public override void Dispose()

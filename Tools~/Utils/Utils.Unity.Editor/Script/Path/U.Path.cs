@@ -70,7 +70,6 @@
             public static string UserSettings { get; }
 
             /// <summary>
-            /// <summary>
             /// 项目日志文件夹路径
             /// </summary>
             public static string Packages { get; }

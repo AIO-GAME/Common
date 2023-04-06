@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+
 using AIO;
+
+using Newtonsoft.Json.Linq;
 
 /// <summary>
 /// 热更DLL
@@ -46,19 +49,22 @@ public struct HotDllConfig
 
 class Program
 {
+    private const int V = 0;
+
     static void Main(string[] args)
     {
-        var dic = new Dictionary<string, int>()
-        {
-            { "1", 2 },
-            { "2", 2 },
-            { "3", 2 },
-            { "4", 2 },
-        };
-        dic.Set("a", 1);
-        Console.WriteLine(dic.Get("1"));
-        Console.WriteLine(dic.Get<int>("1"));
-        // Test();
+        Console.WriteLine((byte)(V | 0x80));
+        //var dic = new Dictionary<string, int>()
+        //{
+        //    { "1", 2 },
+        //    { "2", 2 },
+        //    { "3", 2 },
+        //    { "4", 2 },
+        //};
+        //dic.Set("a", 1);
+        //Console.WriteLine(dic.Get("1"));
+        //Console.WriteLine(dic.Get<int>("1"));
+        //// Test();
         Console.Read();
     }
 

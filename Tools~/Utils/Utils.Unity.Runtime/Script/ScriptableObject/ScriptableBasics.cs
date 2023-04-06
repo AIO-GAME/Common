@@ -1,10 +1,9 @@
-﻿namespace AIO.Unity
+﻿using System;
+using System.ComponentModel;
+using UnityEngine;
+
+namespace AIO.Unity
 {
-    using System;
-    using System.ComponentModel;
-
-    using UnityEngine;
-
     /// <summary>
     /// Unity 可持续化数据
     /// </summary>
@@ -13,25 +12,18 @@
         /// <inheritdoc/>
         public byte[] Data
         {
-            get
-            {
-                return data;
-            }
-            protected set
-            {
-                data = value;
-            }
+            get { return data; }
+            protected set { data = value; }
         }
 
-        [Description("数据")]
-        [SerializeReference, SerializeField] private byte[] data;
+        [Description("数据")] [SerializeReference, SerializeField]
+        private byte[] data;
 
         /// <summary>
         /// 此函数在脚本启动时调用
         /// </summary>
         protected virtual void Awake()
         {
-
         }
 
         /// <summary>
@@ -46,7 +38,6 @@
         /// </summary>
         protected virtual void OnDestroy()
         {
-
         }
 
         /// <summary>
@@ -54,7 +45,6 @@
         /// </summary>
         protected virtual void OnDisable()
         {
-
         }
 
         /// <summary>
@@ -62,7 +52,6 @@
         /// </summary>
         protected virtual void Reset()
         {
-
         }
 
         /// <summary>
@@ -70,7 +59,6 @@
         /// </summary>
         protected virtual void OnValidate()
         {
-
         }
 
         /// <inheritdoc/>
@@ -82,5 +70,4 @@
         /// <inheritdoc/>
         public abstract void Dispose();
     }
-
 }

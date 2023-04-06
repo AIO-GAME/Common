@@ -6543,6 +6543,1112 @@
         <member name="M:AIO.NamespaceConverter.TryDeserialize(AIO.fsData@,System.Object@,System.Type@)">
             <inheritdoc/>
         </member>
+        <member name="T:AIO.Buffer`1">
+            <summary>
+            缓冲流
+            </summary>
+            <summary>
+            接口
+            </summary>
+        </member>
+        <member name="F:AIO.Buffer`1.CAPACITY">
+            <summary>
+            默认容量:32B = 256bit
+            </summary>
+        </member>
+        <member name="F:AIO.Buffer`1.MAX_CAPACITY">
+            <summary>
+            最大缓存:4M
+            </summary>
+        </member>
+        <member name="P:AIO.Buffer`1.Arrays">
+            <summary>
+            数据缓存
+            </summary>
+        </member>
+        <member name="F:AIO.Buffer`1.WriteIndex">
+            <summary>
+            当前写入位置
+            </summary>
+        </member>
+        <member name="F:AIO.Buffer`1.ReadIndex">
+            <summary>
+            当前读取位置
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.#ctor(System.Int32)">
+            <summary>
+            构建一个指定容量的Buffer
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.#ctor(`0[])">
+            <summary>
+            构建一个指定数据的ByteBuffer
+            </summary>
+        </member>
+        <member name="P:AIO.Buffer`1.WriteOffset">
+            <summary>
+            缓存写入进度: 当前首位
+            </summary>
+        </member>
+        <member name="P:AIO.Buffer`1.ReadOffset">
+            <summary>
+            缓存写入进度: 当前读取游标下标
+            </summary>
+        </member>
+        <member name="P:AIO.Buffer`1.Count">
+            <summary> 
+            返回数据可读取长度
+            </summary>
+        </member>
+        <member name="P:AIO.Buffer`1.Capacity">
+            <summary> 
+            数据缓存:容量
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.Clear">
+            <summary> 
+            清空
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.ToArray">
+            <summary> 
+            获取有效字节数组
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.Write(AIO.Buffer{`0}@)">
+            <summary> 
+            将指定字节缓冲区数据写入当前缓存区
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.ICollection{`0}@)">
+            <summary> 
+            将指定字节缓冲区数据写入当前缓存区
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.IList{`0}@)">
+            <summary> 
+            写入byte数组
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.IList{`0}@,System.Int32@,System.Int32@)">
+            <summary>
+            写入byte数组(从position开始写入len个)
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.ICollection{`0}@,System.Int32@,System.Int32@)">
+            <summary>
+            写入byte数组(从position开始写入len个)
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.op_Addition(AIO.Buffer{`0},AIO.Buffer{`0}@)">
+            <summary>
+            增加
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.op_Addition(AIO.Buffer{`0},`0[]@)">
+            <summary>
+            增加
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.op_Addition(AIO.Buffer{`0},System.Collections.Generic.ICollection{`0}@)">
+            <summary>
+            增加
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.op_Implicit(AIO.Buffer{`0}@)~`0[]">
+            <summary>
+            隐式转化为数组
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.op_Implicit(AIO.Buffer{`0}@)~System.Collections.Generic.HashSet{`0}">
+            <summary>
+            隐式转化为数组
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.op_Implicit(AIO.Buffer{`0}@)~System.Collections.Generic.List{`0}">
+            <summary>
+            隐式转化为List
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.Dispose">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="T:AIO.BufferArray`1">
+            <summary>
+            接口方法
+            </summary>
+            <summary>
+            属性 私有方法
+            </summary>
+            <summary>
+            基础方法
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.Clear">
+            <summary>
+            清除 当前清空中重置标识下标 不重写数据
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.ToArray">
+            <summary>
+            转化为数组
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.Dispose">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.CopyTo(`0[],System.Int32)">
+            <summary>
+            拷贝
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.Clone">
+            <summary>
+            克隆
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.GetEnumerator">
+            <summary>
+            迭代
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.ToString">
+            <summary>
+            输出
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.Reverse">
+            <summary>
+            反转
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.Contains(`0)">
+            <summary>
+            判断是否有相同元素
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.Swap(System.Int32,System.Int32)">
+            <summary>
+            交换数组元素位置
+            </summary>
+        </member>
+        <member name="F:AIO.BufferArray`1.CAPACITY">
+            <summary>
+            容量
+            </summary>
+        </member>
+        <member name="P:AIO.BufferArray`1.Array">
+            <summary>
+            当前数组
+            </summary>
+        </member>
+        <member name="P:AIO.BufferArray`1.Offset">
+            <summary>
+            数据写入下标
+            </summary>
+        </member>
+        <member name="P:AIO.BufferArray`1.Capacity">
+            <summary>
+            容量
+            </summary>
+        </member>
+        <member name="P:AIO.BufferArray`1.Count">
+            <summary>
+            当前容器数量
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.UpStepCapacity">
+            <summary>
+            扩大容量
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.Set(`0,System.Int32)">
+            <summary>
+            修改元素
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.Get(System.Int32)">
+            <summary>
+            获取元素
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.Set(`0,System.Int64)">
+            <summary>
+            修改元素
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.Get(System.Int64)">
+            <summary>
+            获取元素
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.GetLast">
+            <summary>
+            获取最后一个元素
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.GetFirst">
+            <summary>
+            获取第一个元素
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.Add(`0)">
+            <summary>
+            添加
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.Add(`0,System.Int32)">
+            <summary>
+            添加
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.Add(`0[])">
+            <summary>
+            添加
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.Add``1(``0)">
+            <summary>
+            添加
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.Insert(System.Int32,`0)">
+            <summary>
+            插入
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.Insert(System.Int32,`0[])">
+            <summary>
+            插入
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.Insert``1(System.Int32,``0)">
+            <summary>
+            插入
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.IndexOf(`0)">
+            <summary>
+            查找指定元素在第几位
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.IndexOf(`0,System.Int32)">
+            <summary>
+            获取指定值下标 从元素第几个开始查找
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.Remove(`0)">
+            <summary>
+            移除指定元素
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.RemoveAt(System.Int32)">
+            <summary>
+            移除指定下标元素
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.System#Collections#Generic#IList{T}#RemoveAt(System.Int32)">
+            <summary>
+            移除指定下标元素
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.RemoveFirst">
+            <summary>
+            移除第一个
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.RemoveLast">
+            <summary>
+            移除最后一个
+            </summary>
+        </member>
+        <member name="T:AIO.IWrite">
+            <summary>
+            Buffer 写入接口
+            </summary>
+        </member>
+        <member name="M:AIO.IWrite.WriteBoolArray(System.Collections.Generic.ICollection{System.Boolean}@,System.Boolean@)">
+            <summary>
+            写入Bool数组
+            </summary>
+            <param name="value">输入值</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IWrite.WriteBool(System.Boolean@)">
+            <summary>
+            写入Bool
+            </summary>
+        </member>
+        <member name="M:AIO.IWrite.Write(AIO.Buffer{System.Byte}@)">
+            <summary> 
+            将指定字节缓冲区数据写入当前缓存区
+            </summary>
+        </member>
+        <member name="M:AIO.IWrite.Write(System.Collections.Generic.IList{System.Byte}@,System.Int32@,System.Int32@)">
+            <summary> 
+            将指定字节缓冲区数据写入当前缓存区
+            </summary>/>
+        </member>
+        <member name="M:AIO.IWrite.Write(System.Collections.Generic.ICollection{System.Byte}@,System.Int32@,System.Int32@)">
+            <summary> 
+            将指定字节缓冲区数据写入当前缓存区
+            </summary>
+        </member>
+        <member name="M:AIO.IWrite.WriteJson``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Text.Encoding,System.Boolean@)">
+            <summary>
+            写入Json数据
+            </summary>
+            <param name="value">输入源</param>
+            <param name="settings">json压缩设置</param>
+            <param name="encoding">编码</param>
+            <param name="reverse">反转</param>
+            <typeparam name="T">泛型</typeparam>
+        </member>
+        <member name="M:AIO.IWrite.WriteJsonUTF8``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+            <summary>
+            写入Json数据
+            </summary>
+            <param name="value">输入源</param>
+            <param name="settings">json压缩设置</param>
+            <param name="reverse">反转</param>
+            <typeparam name="T">泛型</typeparam>
+        </member>
+        <member name="M:AIO.IWrite.WriteJsonASCII``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+            <summary>
+            写入Json数据
+            </summary>
+            <param name="value">输入源</param>
+            <param name="settings">json压缩设置</param>
+            <param name="reverse">反转</param>
+            <typeparam name="T">泛型</typeparam>
+        </member>
+        <member name="M:AIO.IWrite.WriteJsonUnicode``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+            <summary>
+            写入Json数据
+            </summary>
+            <param name="value">输入源</param>
+            <param name="settings">json压缩设置</param>
+            <param name="reverse">反转</param>
+            <typeparam name="T">泛型</typeparam>
+        </member>
+        <member name="M:AIO.IWrite.WriteLenArray(System.Collections.Generic.ICollection{System.Int32}@)">
+            <summary>
+            写入Sbyte数组
+            </summary>
+            <param name="value">输入源</param>
+        </member>
+        <member name="M:AIO.IWrite.WriteLen(System.Byte@)">
+            <summary> 写入一个长度, 0至512M </summary>
+            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
+            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
+            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
+            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
+        </member>
+        <member name="M:AIO.IWrite.WriteLen(System.SByte@)">
+            <summary> 写入一个长度, 0至512M </summary>
+            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
+            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
+            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
+            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
+        </member>
+        <member name="M:AIO.IWrite.WriteLen(System.UInt16@)">
+            <summary> 写入一个长度, 0至512M </summary>
+            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
+            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
+            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
+            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
+        </member>
+        <member name="M:AIO.IWrite.WriteLen(System.Int16@)">
+            <summary> 写入一个长度, 0至512M </summary>
+            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
+            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
+            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
+            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
+        </member>
+        <member name="M:AIO.IWrite.WriteLen(System.Int32@)">
+            <summary> 写入一个长度, 0至512M </summary>
+            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
+            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
+            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
+            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
+        </member>
+        <member name="M:AIO.IWrite.WriteSByteArray(System.Collections.Generic.ICollection{System.SByte}@,System.Boolean@)">
+            <summary>
+            写入Sbyte数组
+            </summary>
+            <param name="value">输入源</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IWrite.WriteSByte(System.SByte@)">
+            <summary>
+            写入Sbyte数组
+            </summary>
+            <param name="value">输入源</param>
+        </member>
+        <member name="M:AIO.IWrite.WriteString(System.String@,System.Text.Encoding@,System.Boolean@)">
+            <summary>
+            写入字符串
+            </summary>
+            <param name="value">输入值</param>
+            <param name="encoding">编码</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IWrite.WriteString(System.Text.StringBuilder@,System.Text.Encoding@,System.Boolean@)">
+            <summary>
+            写入字符串
+            </summary>
+            <param name="value">输入值</param>
+            <param name="encoding">编码</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IWrite.WriteStringUTF8(System.String@,System.Boolean@)">
+            <summary>
+            写入字符串
+            </summary>
+            <param name="value">输入值</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IWrite.WriteStringUTF8(System.Text.StringBuilder@,System.Boolean@)">
+            <summary>
+            写入字符串
+            </summary>
+            <param name="value">输入值</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IWrite.WriteStringASCII(System.String@,System.Boolean@)">
+            <summary>
+            写入字符串
+            </summary>
+            <param name="value">输入值</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IWrite.WriteStringASCII(System.Text.StringBuilder@,System.Boolean@)">
+            <summary>
+            写入字符串
+            </summary>
+            <param name="value">输入值</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IWrite.WriteStringUnicode(System.String@,System.Boolean@)">
+            <summary>
+            写入字符串
+            </summary>
+            <param name="value">输入值</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IWrite.WriteStringUnicode(System.Text.StringBuilder@,System.Boolean@)">
+            <summary>
+            写入字符串
+            </summary>
+            <param name="value">输入值</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="T:AIO.IRead">
+            <summary>
+            Buffer 读取接口
+            </summary>
+        </member>
+        <member name="M:AIO.IRead.ReadBoolArray(System.Boolean@)">
+            <summary>
+            读取Bool数组
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>Bool数组</returns>
+        </member>
+        <member name="M:AIO.IRead.ReadBool">
+            <summary>
+            读取Bool
+            </summary>
+        </member>
+        <member name="M:AIO.IRead.ReadLenArray">
+            <summary>
+            读取Sbyte数组
+            </summary>
+            <returns>返回数组</returns>
+        </member>
+        <member name="M:AIO.IRead.ReadLen">
+            <summary> 读取一个长度 0至512M </summary>
+            原理 : 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
+            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
+            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
+            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
+        </member>
+        <member name="M:AIO.IRead.ReadSByteArray(System.Boolean@)">
+            <summary>
+            读取Sbyte数组
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>返回数组</returns>
+        </member>
+        <member name="M:AIO.IRead.ReadSByte">
+            <summary>
+            读取Sbyte数组
+            </summary>
+            <returns>返回数组</returns>
+        </member>
+        <member name="M:AIO.IRead.ReadStringUTF8(System.Boolean@)">
+            <summary>
+            读取字符串
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:AIO.IRead.ReadStringASCII(System.Boolean@)">
+            <summary>
+            读取字符串
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:AIO.IRead.ReadStringUnicode(System.Boolean@)">
+            <summary>
+            读取字符串
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:AIO.IRead.ReadString(System.Text.Encoding@,System.Boolean@)">
+            <summary>
+            读取字符串
+            </summary>
+            <param name="encoding">编码</param>
+            <param name="reverse">是否反转</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="T:AIO.BufferByte">
+            <summary>
+            字节缓存类
+            </summary>
+            提供 write, read, set, get 方法
+            write  :  将写入字节缓存,改变写入进度
+            read   :  从字节缓存中读取,改变读取进度
+            set    :  需要传入索引,在字节缓存的指定索引处写入一个,不影响缓存读写进度
+            get    :  需要传入索引,在字节缓存的指定索引处读取一个,不影响缓存读写进度
+            method_:  为倒序写入 倒序读取
+        </member>
+        <member name="M:AIO.BufferByte.ReadBoolArray(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteBoolArray(System.Collections.Generic.ICollection{System.Boolean}@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadBool">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteBool(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadByteArray(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteByteArray(System.Collections.Generic.ICollection{System.Byte}@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadByte">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteByte(System.Byte@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadChar(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadCharArray(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteCharArray(System.Collections.Generic.ICollection{System.Char}@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteChar(System.Char@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.BufferByte.#ctor(System.Byte[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.BufferByte.#ctor(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.BufferByte.Write(AIO.Buffer{System.Byte}@)">
+            <inheritdoc cref="T:AIO.IWrite"/>
+        </member>
+        <member name="M:AIO.BufferByte.Write(System.Collections.Generic.IList{System.Byte}@,System.Int32@,System.Int32@)">
+            <inheritdoc cref="T:AIO.IWrite"/>
+        </member>
+        <member name="M:AIO.BufferByte.Write(System.Collections.Generic.ICollection{System.Byte}@,System.Int32@,System.Int32@)">
+            <inheritdoc cref="T:AIO.IWrite"/>
+        </member>
+        <member name="M:AIO.BufferByte.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.BufferByte.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.BufferByte.ReadDecimalArray(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteDecimalArray(System.Collections.Generic.ICollection{System.Decimal}@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadDoubleArray(System.Boolean@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteDoubleArray(System.Collections.Generic.ICollection{System.Double}@,System.Boolean@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadDouble(System.Boolean@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteDouble(System.Double@,System.Boolean,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadEnumArray``1(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteEnumArray``1(System.Collections.Generic.ICollection{``0}@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadFloatArray(System.Boolean@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteFloatArray(System.Collections.Generic.ICollection{System.Single}@,System.Boolean@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadFloat(System.Boolean@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteFloat(System.Single@,System.Boolean,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadUint16Array(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadInt16Array(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteUint16Array(System.Collections.Generic.ICollection{System.UInt16}@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteInt16Array(System.Collections.Generic.ICollection{System.Int16}@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadInt32Array(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadUint32Array(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteInt32Array(System.Collections.Generic.ICollection{System.Int32}@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteUint32Array(System.Collections.Generic.ICollection{System.UInt32}@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadInt64Array(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadUInt64Array(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteInt64Array(System.Collections.Generic.ICollection{System.Int64}@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteUInt64Array(System.Collections.Generic.ICollection{System.UInt64}@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadInt64(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadUInt64(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteInt64(System.Int64@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteUInt64(System.UInt64@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteJson``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Text.Encoding,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteJsonUTF8``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteJsonASCII``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteJsonUnicode``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadLenArray">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteLenArray(System.Collections.Generic.ICollection{System.Int32}@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadLen">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteLen(System.Int32@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteLen(System.UInt16@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteLen(System.Int16@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteLen(System.Byte@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteLen(System.SByte@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadSByteArray(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteSByteArray(System.Collections.Generic.ICollection{System.SByte}@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadSByte">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteSByte(System.SByte@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadString(System.Text.Encoding@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadStringUTF8(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadStringASCII(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadStringUnicode(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteString(System.String@,System.Text.Encoding@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteString(System.Text.StringBuilder@,System.Text.Encoding@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteStringUTF8(System.String@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteStringUTF8(System.Text.StringBuilder@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteStringASCII(System.String@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteStringASCII(System.Text.StringBuilder@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteStringUnicode(System.String@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteStringUnicode(System.Text.StringBuilder@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadDecimal(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteDecimal(System.Decimal@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadEnum``1(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteEnum``1(``0@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadInt32(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadUInt32(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteInt32(System.Int32@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteUInt32(System.UInt32@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadInt16(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadUInt16(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteInt16(System.Int16@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteUInt16(System.UInt16@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="T:AIO.BufferChar">
+            <summary>
+             字符缓存
+             建议使用 StringBuilder
+            </summary>
+        </member>
+        <member name="F:AIO.BufferChar.CAPACITY">
+            <summary> 容量 </summary>
+        </member>
+        <member name="F:AIO.BufferChar.NULL">
+            <summary> 空 </summary>
+        </member>
+        <member name="F:AIO.BufferChar.array">
+            <summary> 字符数组 </summary>
+        </member>
+        <member name="F:AIO.BufferChar.top">
+            <summary> 首位:下一个写入位置 </summary>
+        </member>
+        <member name="F:AIO.BufferChar.offset">
+            <summary> 游标:下一个读取位置 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.#ctor">
+            <summary> 构建一个默认的字符缓冲对象 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.#ctor(System.Int32)">
+            <summary> 构建一个指定容量的字符缓冲对象 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.#ctor(System.Char[])">
+            <summary> 通过一个字符数组构建一个字符缓冲对象 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.#ctor(System.Char[],System.Int32,System.Int32)">
+            <summary> 通过一个字符数组，offset开始数量为len的区域构建一个字符缓冲 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.#ctor(System.String)">
+            <summary> 通过一个字符串构建一个字符缓冲对象 </summary>
+        </member>
+        <member name="P:AIO.BufferChar.Capacity">
+            <summary> 容量 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.SetCapacity(System.Int32)">
+            <summary> 设置容量 </summary>
+        </member>
+        <member name="P:AIO.BufferChar.Top">
+            <summary> 首位 </summary>
+        </member>
+        <member name="P:AIO.BufferChar.Offset">
+            <summary> 游标 </summary>
+        </member>
+        <member name="P:AIO.BufferChar.Length">
+            <summary> 长度 </summary>
+        </member>
+        <member name="P:AIO.BufferChar.Array">
+            <summary> 获取字符数组 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.Read">
+            <summary> 读取一个字符 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.Read(System.Int32)">
+            <summary> 读取指定下标字符 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.Write(System.Char)">
+            <summary> 写入一个字符 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.Write(System.Char,System.Int32)">
+            <summary> 将字符写到指定下标 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.Read(System.Char[],System.Int32,System.Int32)">
+            <summary> 读取len个字符到数组chars中，从下标index开始 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.Write(System.Char[],System.Int32,System.Int32)">
+            <summary> 写入一个字符数组，冲下标offset开始，数量len </summary>
+        </member>
+        <member name="M:AIO.BufferChar.Append(System.Object)">
+            <summary> 附加一个对象 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.Append(System.String)">
+            <summary> 附加一个字符串 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.Append(System.String,System.Int32,System.Int32)">
+            <summary> 附加一个字符串,从字符串start索引开始添加len个字符 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.Append(System.String,System.Int32)">
+            <summary> 附加一个字符串,从字符串start索引开始添加len个字符 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.Append(System.Char[])">
+            <summary> 附加一组字符 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.Append(System.Char[],System.Int32,System.Int32)">
+            <summary> 附加一组字符，冲指定下标offset开始，附加len数量个字符 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.Append(System.Boolean)">
+            <summary> 附加一个boolean </summary>
+        </member>
+        <member name="M:AIO.BufferChar.Append(System.Char)">
+            <summary> 附加一个char </summary>
+        </member>
+        <member name="M:AIO.BufferChar.Append(System.Int32)">
+            <summary> 附加一个int </summary>
+        </member>
+        <member name="M:AIO.BufferChar.Append(System.Int64)">
+            <summary> 附加一个long </summary>
+        </member>
+        <member name="M:AIO.BufferChar.Append(System.Single)">
+            <summary> 附加一个float </summary>
+        </member>
+        <member name="M:AIO.BufferChar.Append(System.Double)">
+            <summary> 附加一个double </summary>
+        </member>
+        <member name="M:AIO.BufferChar.ToArray">
+            <summary> 转换为字符数组 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.Clear">
+            <summary> 清除 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.GetString">
+            <summary> 获取字符串 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.GetString(System.Int32,System.Int32)">
+            <summary> 获取字符串 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.GetHashCode">
+            <summary> hash码 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.Equals(System.Object)">
+            <summary> 比对方法 </summary>
+        </member>
+        <member name="M:AIO.BufferChar.ToString">
+            <summary> 信息 </summary>
+        </member>
+        <member name="T:AIO.BufferRing`1">
+            <summary>
+            闭环数据流
+            </summary>
+            参考链接
+            <see cref="!:https://ifeve.com/dissecting-disruptor-whats-so-special/"/>
+        </member>
+        <member name="F:AIO.BufferRing`1.FreedDic">
+            <summary>
+            存储队列 该队列专门存储数据作为对象池
+            </summary>
+        </member>
+        <member name="F:AIO.BufferRing`1.UsedDic">
+            <summary>
+            读写队列 该队列专门处理数据读写
+            </summary>
+        </member>
+        <member name="P:AIO.BufferRing`1.Capacity">
+            <summary>
+            容量
+            </summary>
+        </member>
+        <member name="P:AIO.BufferRing`1.First">
+            <summary>
+            第一个读取的数组长度 队列最上面的数据数组
+            </summary>
+        </member>
+        <member name="P:AIO.BufferRing`1.Last">
+            <summary>
+            最后读取的数组长度 队列最下面的数据数组
+            </summary>
+        </member>
+        <member name="P:AIO.BufferRing`1.Count">
+            <summary>
+            当前可读取数据长度
+            </summary>
+        </member>
+        <member name="P:AIO.BufferRing`1.WriteOffset">
+            <summary>
+            缓存写入进度: 当前首位
+            </summary>
+        </member>
+        <member name="M:AIO.BufferRing`1.ToArray">
+            <summary> 返回:有效字节数组 </summary>
+        </member>
+        <member name="M:AIO.BufferRing`1.#ctor(System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.BufferRing`1.#ctor(`0[],System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.BufferRing`1.AddLast">
+            <summary>
+            添加 读写数据数组 进入 读写队列
+            </summary>
+        </member>
+        <member name="M:AIO.BufferRing`1.RemoveFirst">
+            <summary>
+            移除最上层的数据 添加进入到对象池
+            </summary>
+        </member>
+        <member name="M:AIO.BufferRing`1.Read(`0[])">
+            <summary>
+            读取
+            </summary>
+        </member>
+        <member name="M:AIO.BufferRing`1.Read(System.Int32)">
+            <summary>
+            读取
+            </summary>
+        </member>
+        <member name="M:AIO.BufferRing`1.Read(`0[],System.Int32,System.Int32)">
+            <summary>
+            读取
+            </summary>
+            <param name="Buffer">字节数组</param>
+            <param name="Offset">开始值 偏移量</param>
+            <param name="Count">读取长度</param>
+            <returns>实际读取长度</returns>
+        </member>
+        <member name="M:AIO.BufferRing`1.Write(System.Collections.Generic.IList{`0}@)">
+            <summary>
+            写入
+            </summary>
+            <param name="buffer">写入数组</param>
+            <param name="offset">偏移量</param>
+            <param name="count">长度</param>
+        </member>
+        <member name="M:AIO.BufferRing`1.Write(System.Collections.Generic.IList{`0}@,System.Int32@,System.Int32@)">
+            <summary>
+            写入
+            </summary>
+            <param name="buffer">写入数组</param>
+            <param name="offset">偏移量</param>
+            <param name="count">长度</param>
+        </member>
+        <member name="M:AIO.BufferRing`1.Clear">
+            <summary>
+            重置
+            </summary>
+        </member>
+        <member name="M:AIO.BufferRing`1.IsLastFull">
+            <summary>
+            判断Last数组是否满
+            </summary>
+        </member>
+        <member name="M:AIO.BufferRing`1.Dispose">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="M:AIO.RingBufferExtend.Read(AIO.BufferRing{System.Byte},System.IO.Stream,System.Int32)">
+            <summary>
+            读取数据流
+            </summary>
+        </member>
+        <member name="M:AIO.RingBufferExtend.Write(AIO.BufferRing{System.Byte},System.IO.Stream)">
+            <summary>
+            写入数据
+            </summary>
+        </member>
         <member name="T:AIO.UtilsAttribute">
             <summary>
             工具类属性
