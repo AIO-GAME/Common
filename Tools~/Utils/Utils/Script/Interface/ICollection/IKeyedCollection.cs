@@ -6,10 +6,7 @@ namespace AIO
     /// <summary>
     /// 键迭代器
     /// </summary>
-    public interface IKeyedCollection<in TKey, TItem> :
-        ICollection<TItem>,
-        IEnumerable<TItem>,
-        IEnumerable
+    public interface IKeyedCollection<in TKey, TItem> : ICollection<TItem>
     {
         /// <summary>
         /// 获取值

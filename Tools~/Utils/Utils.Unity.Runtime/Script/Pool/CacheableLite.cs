@@ -2,26 +2,46 @@
 {
     using System;
 
-    public class CacheableLite : ILiteCacheable
+    /// <summary>
+    /// 快捷缓存
+    /// </summary>
+    public abstract class CacheableLite : ILiteCacheable
     {
-        public LiteCacheableState CacheState { get; private set; }
+        /// <inheritdoc />
+        public ELiteCacheableState CacheState { get; private set; }
 
-        public bool CacheIsIdle => CacheState == LiteCacheableState.Idle;
+        /// <inheritdoc />
+        public bool CacheIsIdle => CacheState == ELiteCacheableState.Idle;
 
-        public bool CacheIsRunning => CacheState == LiteCacheableState.Running;
+        /// <inheritdoc />
+        public bool CacheIsRunning => CacheState == ELiteCacheableState.Running;
 
+        /// <summary>
+        /// 检出回调
+        /// </summary>
         protected Action<CacheableLite> actCheckIn;
 
-        protected virtual void DoReset() { }
+        /// <summary>
+        /// 重置
+        /// </summary>
+        protected virtual void DoReset()
+        {
+        }
 
-        protected virtual void DoDispose(bool disposing) { }
+        /// <summary>
+        /// 释放
+        /// </summary>
+        /// <param name="disposing">是否立即处理</param>
+        protected virtual void DoDispose(in bool disposing)
+        {
+        }
 
         internal void SetCacher(Action<CacheableLite> value)
         {
             actCheckIn = value;
         }
 
-        internal void SetState(LiteCacheableState value)
+        internal void SetState(ELiteCacheableState value)
         {
             CacheState = value;
         }
@@ -32,11 +52,13 @@
             GC.SuppressFinalize(this);
         }
 
+        /// <inheritdoc />
         public void Reset()
         {
             DoReset();
         }
 
+        /// <inheritdoc />
         public void Recycle()
         {
             if (actCheckIn != null) actCheckIn.Invoke(this);

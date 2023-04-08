@@ -10,19 +10,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-
 public partial class Utils
 {
     /// <summary>
     /// 随机数工具类
     /// </summary>
-    public static partial class RandomX
+    public static partial class Random
     {
-        private static Random random;
+        private static System.Random random;
 
-        static RandomX()
+        static Random()
         {
-            random = new Random(Guid.NewGuid().GetHashCode());
+            random = new System.Random(System.Guid.NewGuid().GetHashCode());
         }
 
         #region Refresh
@@ -33,16 +32,16 @@ public partial class Utils
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Refresh()
         {
-            random = new Random(Guid.NewGuid().GetHashCode());
+            random = new System.Random(System.Guid.NewGuid().GetHashCode());
         }
 
         /// <summary>
         /// 刷新随机种子
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Refresh(in Random Random)
+        public static void Refresh(in System.Random randomValue)
         {
-            random = Random;
+            random = randomValue;
         }
 
         /// <summary>
@@ -51,7 +50,7 @@ public partial class Utils
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Refresh(in int seed)
         {
-            random = new Random(seed);
+            random = new System.Random(seed);
         }
 
         #endregion
@@ -670,7 +669,7 @@ public partial class Utils
             if (weights.Count <= 1) return weights.Count - 1;
 
             var sum = weights.Sum();
-            var number_rand = random.Next(0, System.Math.Max(sum, weightRandomMinVal));
+            var number_rand = random.Next(0, Math.Max(sum, weightRandomMinVal));
             for (int i = 0, sum_temp = 0; i < weights.Count; i++)
             {
                 sum_temp += weights[i];

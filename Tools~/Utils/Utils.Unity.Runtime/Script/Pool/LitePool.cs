@@ -1,28 +1,48 @@
-﻿namespace AIO
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace AIO
 {
-    using System;
-    using System.Collections.Generic;
-
-    using UnityEngine;
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class LitePool<T> where T : CacheableLite, IDisposable, new()
     {
+        /// <summary>
+        /// 类型名称
+        /// </summary>
         public string Name => typeof(T).Name;
 
+        /// <summary>
+        /// 缓存数量
+        /// </summary>
         public int CacheCount => cache.Count;
 
-        private List<T> cache;
+        private readonly List<T> cache;
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="count"></param>
         public LitePool(in int count = 5)
         {
             cache = new List<T>(count);
         }
 
+        /// <summary>
+        /// 创建元素
+        /// </summary>
         protected virtual T CreateItem()
         {
             return new T();
         }
 
+        /// <summary>
+        /// 检出
+        /// </summary>
+        /// <returns></returns>
         public T CheckOut()
         {
             if (cache.Count > 0)
@@ -31,7 +51,7 @@
                 var r = cache[idx];
                 cache.RemoveAt(idx);
 
-                r.SetState(LiteCacheableState.Running);
+                r.SetState(ELiteCacheableState.Running);
                 return r;
             }
             else
@@ -39,7 +59,7 @@
                 var r = CreateItem();
                 r.SetCacher(CheckIn);
 
-                r.SetState(LiteCacheableState.Running);
+                r.SetState(ELiteCacheableState.Running);
                 return r;
             }
         }
@@ -52,7 +72,7 @@
             try
             {
                 cache.Add((T)value);
-                value.SetState(LiteCacheableState.Idle);
+                value.SetState(ELiteCacheableState.Idle);
                 value.Reset();
             }
             catch (Exception e)
@@ -61,6 +81,10 @@
             }
         }
 
+        /// <summary>
+        /// 减少到指定数量
+        /// </summary>
+        /// <param name="count"></param>
         public void Reduce(int count)
         {
             while (cache.Count > count)

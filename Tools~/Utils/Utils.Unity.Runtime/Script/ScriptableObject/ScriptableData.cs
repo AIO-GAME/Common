@@ -96,14 +96,14 @@
         /// <summary>
         /// 序列化
         /// </summary>
-        protected virtual void ToSerialize(IWrite buffer)
+        protected virtual void ToSerialize(IWriteData buffer)
         {
         }
 
         /// <summary>
         /// 反序列化
         /// </summary>
-        protected virtual void ToDeserialize(IRead buffer)
+        protected virtual void ToDeserialize(IReadData buffer)
         {
         }
 

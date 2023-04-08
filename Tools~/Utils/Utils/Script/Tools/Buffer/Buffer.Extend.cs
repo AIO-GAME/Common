@@ -1,8 +1,7 @@
-﻿namespace AIO
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace AIO
+{
     public partial class Buffer<T>
     {
         /// <summary>
@@ -18,6 +17,15 @@
         /// 增加
         /// </summary>
         public static Buffer<T> operator +(Buffer<T> Buffer, in T[] Target)
+        {
+            Buffer.Write(Target);
+            return Buffer;
+        }
+
+        /// <summary>
+        /// 增加
+        /// </summary>
+        public static Buffer<T> operator +(Buffer<T> Buffer, in HashSet<T> Target)
         {
             Buffer.Write(Target);
             return Buffer;

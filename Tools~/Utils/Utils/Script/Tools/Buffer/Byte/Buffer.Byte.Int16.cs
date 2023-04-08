@@ -1,4 +1,6 @@
-﻿namespace AIO
+﻿using System.Collections.Generic;
+
+namespace AIO
 {
     public partial class BufferByte
     {
@@ -9,9 +11,9 @@
         }
 
         /// <inheritdoc/> 
-        public ushort ReadUInt16(in bool reverse = false)
+        public short[] ReadInt16Array(in bool reverse = false)
         {
-            return Arrays.GetUInt16(ref ReadIndex, reverse);
+            return Arrays.GetInt16Array(ref ReadIndex, reverse);
         }
 
         /// <inheritdoc/> 
@@ -22,22 +24,11 @@
         }
 
         /// <inheritdoc/> 
-        public void WriteUInt16(in ushort value, in bool reverse = false)
+        public void WriteInt16Array(in ICollection<short> value, in bool reverse = false)
         {
-            AutomaticExpansion(2);
-            Arrays.SetUInt16(ref WriteIndex, value, reverse);
+            WriteLen(value.Count);
+            AutomaticExpansion(value.Count * 2);
+            foreach (var item in value) Arrays.SetInt16(ref WriteIndex, item, reverse);
         }
-    }
-
-    public partial interface IWrite
-    {
-        void WriteInt16(in short value, in bool reverse = false);
-        void WriteUInt16(in ushort value, in bool reverse = false);
-    }
-
-    public partial interface IRead
-    {
-        ushort ReadUInt16(in bool reverse = false);
-        short ReadInt16(in bool reverse = false);
     }
 }

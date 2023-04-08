@@ -6,15 +6,15 @@ public static partial class Utils
     /// 生成一个新的 GUID 对象。
     /// </summary>
     /// <returns>新的 GUID 对象。</returns>
-    public static class GuidX
+    public static class Guid
     {
         /// <summary>
         /// 生成一个新的 GUID 对象。
         /// </summary>
         /// <returns>新的 GUID 对象。</returns>
-        public static Guid New()
+        public static System.Guid New()
         {
-            return Guid.NewGuid();
+            return System.Guid.NewGuid();
         }
 
         /// <summary>
@@ -22,9 +22,10 @@ public static partial class Utils
         /// </summary>
         /// <param name="format">指定 GUID 字符串的格式，默认为 "N" 格式。</param>
         /// <returns>新的 GUID 字符串。</returns>
-        public static string New(in string format = "N")
+        public static string New(in string format)
         {
-            return Guid.NewGuid().ToString(format);
+            if (format == null) throw new ArgumentNullException(nameof(format));
+            return System.Guid.NewGuid().ToString(format);
         }
 
         /// <summary>
@@ -33,7 +34,7 @@ public static partial class Utils
         /// <returns>新的 Base64 编码的 GUID 字符串。</returns>
         public static string NewBase64()
         {
-            var s = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
+            var s = Convert.ToBase64String(System.Guid.NewGuid().ToByteArray());
             return s.Substring(0, s.Length - 2);
         }
     }

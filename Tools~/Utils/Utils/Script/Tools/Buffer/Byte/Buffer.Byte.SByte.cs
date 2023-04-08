@@ -1,4 +1,6 @@
-﻿namespace AIO
+﻿using System.Collections.Generic;
+
+namespace AIO
 {
     public partial class BufferByte
     {
@@ -9,28 +11,23 @@
         }
 
         /// <inheritdoc/> 
+        public sbyte[] ReadSByteArray(in bool reverse = false)
+        {
+            return Arrays.GetSByteArray(ref ReadIndex, reverse);
+        }
+
+        /// <inheritdoc/> 
         public void WriteSByte(in sbyte value)
         {
             AutomaticExpansion(1);
             Arrays[WriteIndex++] = (byte)value;
         }
-    }
 
-    public partial interface IWrite
-    {
-        /// <summary>
-        /// 写入Sbyte数组
-        /// </summary>
-        /// <param name="value">输入源</param>
-        void WriteSByte(in sbyte value);
-    }
-
-    public partial interface IRead
-    {
-        /// <summary>
-        /// 读取Sbyte数组
-        /// </summary>
-        /// <returns>返回数组</returns>
-        sbyte ReadSByte();
+        /// <inheritdoc/> 
+        public void WriteSByteArray(in ICollection<sbyte> value, in bool reverse = false)
+        {
+            AutomaticExpansion(value.Count);
+            Arrays.SetSByteArray(ref WriteIndex, value, reverse);
+        }
     }
 }

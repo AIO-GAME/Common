@@ -850,7 +850,7 @@ public partial class Utils
         /// </summary>
         [SecurityCritical]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int QueryInterface(IntPtr pUnk, ref Guid iid, out IntPtr ppv)
+        public static int QueryInterface(IntPtr pUnk, ref System.Guid iid, out IntPtr ppv)
         {
             return Marshal.QueryInterface(pUnk, ref iid, out ppv);
         }
@@ -1422,7 +1422,7 @@ public partial class Utils
         /// <returns></returns>
         [SecuritySafeCritical]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Type GetTypeFromCLSID(Guid clsid)
+        public static Type GetTypeFromCLSID(System.Guid clsid)
         {
             return Marshal.GetTypeFromCLSID(clsid);
         }

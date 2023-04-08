@@ -312,117 +312,197 @@
         </member>
         <member name="T:AIO.ERuntimePlatform">
             <summary>
-              <para>The platform application is running. Returned by Application.platform.</para>
+            The platform application is running. Returned by Application.platform.
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.GameCoreScarlett">
+            <summary>
+             In the Unity editor on GameCoreScarlett.
             </summary>
         </member>
         <member name="F:AIO.ERuntimePlatform.OSXEditor">
             <summary>
-              <para>In the Unity editor on macOS.</para>
+            In the Unity editor on macOS.
             </summary>
         </member>
         <member name="F:AIO.ERuntimePlatform.OSXPlayer">
             <summary>
-              <para>In the player on macOS.</para>
+            In the player on macOS.
             </summary>
         </member>
         <member name="F:AIO.ERuntimePlatform.WindowsPlayer">
             <summary>
-              <para>In the player on Windows.</para>
+            In the player on Windows.
             </summary>
         </member>
         <member name="F:AIO.ERuntimePlatform.OSXWebPlayer">
             <summary>
-              <para>In the web player on macOS.</para>
+            In the web player on macOS.
             </summary>
         </member>
         <member name="F:AIO.ERuntimePlatform.OSXDashboardPlayer">
             <summary>
-              <para>In the Dashboard widget on macOS.</para>
+            In the Dashboard widget on macOS.
             </summary>
         </member>
         <member name="F:AIO.ERuntimePlatform.WindowsWebPlayer">
             <summary>
-              <para>In the web player on Windows.</para>
+            In the web player on Windows.
             </summary>
         </member>
         <member name="F:AIO.ERuntimePlatform.WindowsEditor">
             <summary>
-              <para>In the Unity editor on Windows.</para>
+            In the Unity editor on Windows.
             </summary>
         </member>
         <member name="F:AIO.ERuntimePlatform.IPhonePlayer">
             <summary>
-              <para>In the player on the iPhone.</para>
+            In the player on the iPhone.
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.PS3">
+            <summary>
+            In the Unity editor on PS3.
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.XBOX360">
+            <summary>
+            In the Unity editor on XBOX360.
             </summary>
         </member>
         <member name="F:AIO.ERuntimePlatform.Android">
             <summary>
-              <para>In the player on Android devices.</para>
+            In the player on Android devices.
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.NaCl">
+            <summary>
+            In the Unity editor on NaCl.
             </summary>
         </member>
         <member name="F:AIO.ERuntimePlatform.LinuxPlayer">
             <summary>
-              <para>In the player on Linux.</para>
+            In the player on Linux.
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.FlashPlayer">
+            <summary>
+            In the player on FlashPlayer.
             </summary>
         </member>
         <member name="F:AIO.ERuntimePlatform.LinuxEditor">
             <summary>
-              <para>In the Unity editor on Linux.</para>
+            In the Unity editor on Linux.
             </summary>
         </member>
         <member name="F:AIO.ERuntimePlatform.WebGLPlayer">
             <summary>
-              <para>In the player on WebGL</para>
+            In the player on WebGL
             </summary>
         </member>
         <member name="F:AIO.ERuntimePlatform.WSAPlayerX86">
             <summary>
-              <para>In the player on Windows Store Apps when CPU architecture is X86.</para>
+            In the player on Windows Store Apps when CPU architecture is X86.
             </summary>
         </member>
         <member name="F:AIO.ERuntimePlatform.WSAPlayerX64">
             <summary>
-              <para>In the player on Windows Store Apps when CPU architecture is X64.</para>
+            In the player on Windows Store Apps when CPU architecture is X64.
             </summary>
         </member>
         <member name="F:AIO.ERuntimePlatform.WSAPlayerARM">
             <summary>
-              <para>In the player on Windows Store Apps when CPU architecture is ARM.</para>
+            In the player on Windows Store Apps when CPU architecture is ARM.
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.WP8Player">
+            <summary>
+            In the web player on WP8Player.
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.BB10Player">
+            <summary>
+            In the web player on BB10Player.
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.BlackBerryPlayer">
+            <summary>
+            In the web player on BlackBerryPlayer.
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.TizenPlayer">
+            <summary>
+            In the web player on TizenPlayer.
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.PSP2">
+            <summary>
+            In the web player on PSP2.
             </summary>
         </member>
         <member name="F:AIO.ERuntimePlatform.PS4">
             <summary>
-              <para>In the player on the Playstation 4.</para>
+            In the player on the Playstation 4.
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.PSM">
+            <summary>
+            In the web player on PSM.
             </summary>
         </member>
         <member name="F:AIO.ERuntimePlatform.XboxOne">
             <summary>
-              <para>In the player on Xbox One.</para>
+            In the player on Xbox One.
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.SamsungTVPlayer">
+            <summary>
+            In the web player on SamsungTVPlayer.
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.WiiU">
+            <summary>
+            In the web player on WiiU.
             </summary>
         </member>
         <member name="F:AIO.ERuntimePlatform.tvOS">
             <summary>
-              <para>In the player on the Apple's tvOS.</para>
+            In the player on the Apple's tvOS.
             </summary>
         </member>
         <member name="F:AIO.ERuntimePlatform.Switch">
             <summary>
-              <para>In the player on Nintendo Switch.</para>
+            In the player on Nintendo Switch.
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.Lumin">
+            <summary>
+            In the web player on Lumin.
             </summary>
         </member>
         <member name="F:AIO.ERuntimePlatform.Stadia">
             <summary>
-              <para>In the player on Stadia.</para>
+            In the player on Stadia.
             </summary>
         </member>
         <member name="F:AIO.ERuntimePlatform.CloudRendering">
             <summary>
-              <para>In the player on CloudRendering.</para>
+            In the player on CloudRendering.
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.GameCoreXboxSeries">
+            <summary>
+            In the web player on GameCoreXboxSeries.
+            </summary>
+        </member>
+        <member name="F:AIO.ERuntimePlatform.GameCoreXboxOne">
+            <summary>
+            In the web player on GameCoreXboxOne.
             </summary>
         </member>
         <member name="F:AIO.ERuntimePlatform.PS5">
             <summary>
-              <para>In the player on the Playstation 5.</para>
+            In the player on the Playstation 5.
             </summary>
         </member>
         <member name="T:AIO.Script.Test">
