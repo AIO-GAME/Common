@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{72173960-51C4-43EB-AEB9-998CCCE0309D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AIO</RootNamespace>
+    <AssemblyName>AIO.Tools</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\AIO.Tools.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\AIO.Tools.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Script\Buffer\Array\BufferArray.cs" />
+    <Compile Include="Script\Buffer\Buffer.cs" />
+    <Compile Include="Script\Buffer\Buffer.Extend.cs" />
+    <Compile Include="Script\Buffer\Buffer.Generics.cs" />
+    <Compile Include="Script\Buffer\Buffer.List.cs" />
+    <Compile Include="Script\Buffer\Byte\Buffer.Byte.Bool.cs" />
+    <Compile Include="Script\Buffer\Byte\Buffer.Byte.Byte.cs" />
+    <Compile Include="Script\Buffer\Byte\Buffer.Byte.Char.cs" />
+    <Compile Include="Script\Buffer\Byte\Buffer.Byte.cs" />
+    <Compile Include="Script\Buffer\Byte\Buffer.Byte.Decimal.cs" />
+    <Compile Include="Script\Buffer\Byte\Buffer.Byte.Double.cs" />
+    <Compile Include="Script\Buffer\Byte\Buffer.Byte.Enum.cs" />
+    <Compile Include="Script\Buffer\Byte\Buffer.Byte.Float.cs" />
+    <Compile Include="Script\Buffer\Byte\Buffer.Byte.Int16.cs" />
+    <Compile Include="Script\Buffer\Byte\Buffer.Byte.Int32.cs" />
+    <Compile Include="Script\Buffer\Byte\Buffer.Byte.Int64.cs" />
+    <Compile Include="Script\Buffer\Byte\Buffer.Byte.Json.cs" />
+    <Compile Include="Script\Buffer\Byte\Buffer.Byte.Len.cs" />
+    <Compile Include="Script\Buffer\Byte\Buffer.Byte.SByte.cs" />
+    <Compile Include="Script\Buffer\Byte\Buffer.Byte.String.cs" />
+    <Compile Include="Script\Buffer\Byte\Buffer.Byte.UInt16.cs" />
+    <Compile Include="Script\Buffer\Byte\Buffer.Byte.UInt32.cs" />
+    <Compile Include="Script\Buffer\Byte\Buffer.Byte.UInt64.cs" />
+    <Compile Include="Script\Buffer\Char\BufferChar.cs" />
+    <Compile Include="Script\Buffer\Interface\IReadData.cs" />
+    <Compile Include="Script\Buffer\Interface\IWriteData.cs" />
+    <Compile Include="Script\Buffer\Interface\Read\IReadBool.cs" />
+    <Compile Include="Script\Buffer\Interface\Read\IReadByte.cs" />
+    <Compile Include="Script\Buffer\Interface\Read\IReadChar.cs" />
+    <Compile Include="Script\Buffer\Interface\Read\IReadDecimal.cs" />
+    <Compile Include="Script\Buffer\Interface\Read\IReadDouble.cs" />
+    <Compile Include="Script\Buffer\Interface\Read\IReadEnum.cs" />
+    <Compile Include="Script\Buffer\Interface\Read\IReadFloat.cs" />
+    <Compile Include="Script\Buffer\Interface\Read\IReadInt16.cs" />
+    <Compile Include="Script\Buffer\Interface\Read\IReadInt32.cs" />
+    <Compile Include="Script\Buffer\Interface\Read\IReadInt64.cs" />
+    <Compile Include="Script\Buffer\Interface\Read\IReadJson.cs" />
+    <Compile Include="Script\Buffer\Interface\Read\IReadLength.cs" />
+    <Compile Include="Script\Buffer\Interface\Read\IReadSByte.cs" />
+    <Compile Include="Script\Buffer\Interface\Read\IReadString.cs" />
+    <Compile Include="Script\Buffer\Interface\Read\IReadUInt16.cs" />
+    <Compile Include="Script\Buffer\Interface\Read\IReadUInt32.cs" />
+    <Compile Include="Script\Buffer\Interface\Read\IReadUInt64.cs" />
+    <Compile Include="Script\Buffer\Interface\Write\IWriteBool.cs" />
+    <Compile Include="Script\Buffer\Interface\Write\IWriteByte.cs" />
+    <Compile Include="Script\Buffer\Interface\Write\IWriteChar.cs" />
+    <Compile Include="Script\Buffer\Interface\Write\IWriteDecimal.cs" />
+    <Compile Include="Script\Buffer\Interface\Write\IWriteDouble.cs" />
+    <Compile Include="Script\Buffer\Interface\Write\IWriteEnum.cs" />
+    <Compile Include="Script\Buffer\Interface\Write\IWriteFloat.cs" />
+    <Compile Include="Script\Buffer\Interface\Write\IWriteInt16.cs" />
+    <Compile Include="Script\Buffer\Interface\Write\IWriteInt32.cs" />
+    <Compile Include="Script\Buffer\Interface\Write\IWriteInt64.cs" />
+    <Compile Include="Script\Buffer\Interface\Write\IWriteJson.cs" />
+    <Compile Include="Script\Buffer\Interface\Write\IWriteLength.cs" />
+    <Compile Include="Script\Buffer\Interface\Write\IWriteSByte.cs" />
+    <Compile Include="Script\Buffer\Interface\Write\IWriteString.cs" />
+    <Compile Include="Script\Buffer\Interface\Write\IWriteUInt16.cs" />
+    <Compile Include="Script\Buffer\Interface\Write\IWriteUInt32.cs" />
+    <Compile Include="Script\Buffer\Interface\Write\IWriteUInt64.cs" />
+    <Compile Include="Script\Buffer\Ring\BufferRing.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Extension\Extension\Extension.csproj">
+      <Project>{f2c7d3ad-fd65-42d7-8c3f-eaf85dad3e05}</Project>
+      <Name>Extension</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utils\Utils\Utils.csproj">
+      <Project>{b0d5708a-7c94-4bcb-805d-a718034e5724}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

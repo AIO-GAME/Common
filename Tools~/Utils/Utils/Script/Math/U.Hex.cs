@@ -32,7 +32,7 @@ public partial class Utils
         public static readonly char[] HEX_DIGIT =
         {
                 '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
-            };
+        };
 
         /// <summary>
         /// 小写写16进制数字字符
@@ -40,7 +40,7 @@ public partial class Utils
         public static readonly char[] HEX_DIGIT_LOWER =
         {
                 '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
-            };
+        };
 
         /// <summary>
         /// 将16进制字符转换为数字
