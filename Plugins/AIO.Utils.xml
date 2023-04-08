@@ -64,123 +64,30 @@
             工具类
             </summary>
         </member>
-        <member name="T:Utils.GuidX">
+        <member name="T:Utils.Guid">
             <summary>
             生成一个新的 GUID 对象。
             </summary>
             <returns>新的 GUID 对象。</returns>
         </member>
-        <member name="M:Utils.GuidX.New">
+        <member name="M:Utils.Guid.New">
             <summary>
             生成一个新的 GUID 对象。
             </summary>
             <returns>新的 GUID 对象。</returns>
         </member>
-        <member name="M:Utils.GuidX.New(System.String@)">
+        <member name="M:Utils.Guid.New(System.String@)">
             <summary>
             生成一个新的 GUID 字符串。
             </summary>
             <param name="format">指定 GUID 字符串的格式，默认为 "N" 格式。</param>
             <returns>新的 GUID 字符串。</returns>
         </member>
-        <member name="M:Utils.GuidX.NewBase64">
+        <member name="M:Utils.Guid.NewBase64">
             <summary>
             生成一个新的 Base64 编码的 GUID 字符串。
             </summary>
             <returns>新的 Base64 编码的 GUID 字符串。</returns>
-        </member>
-        <member name="T:Utils.Conversion">
-            <summary>
-            转换工具类
-            </summary>
-        </member>
-        <member name="M:Utils.Conversion.HasImplicitNumericConversion(System.Type@,System.Type@)">
-            <summary>
-            是否存在 隐式数字转换
-            </summary>
-        </member>
-        <member name="M:Utils.Conversion.HasExplicitNumericConversion(System.Type@,System.Type@)">
-            <summary>
-            是否存在 显式数字转换
-            </summary>
-        </member>
-        <member name="M:Utils.Conversion.HasNumericConversion(System.Type@,System.Type@)">
-            <summary>
-            是否存在 数字转换功能
-            </summary>
-        </member>
-        <member name="M:Utils.Conversion.FindUserDefinedConversionMethods(AIO.ConversionQuery@)">
-            <summary>
-            查找用户定义的转换方法
-            </summary>
-        </member>
-        <member name="M:Utils.Conversion.CanConvert(System.Object@,System.Type@,System.Boolean@)">
-            <summary>
-            是否能转换
-            </summary>
-        </member>
-        <member name="M:Utils.Conversion.CanConvert(System.Type@,System.Type@,System.Boolean@)">
-            <summary>
-            是否能转换
-            </summary>
-        </member>
-        <member name="M:Utils.Conversion.Convert(System.Object@,System.Type@)">
-            <summary>
-            转换
-            </summary>
-        </member>
-        <member name="M:Utils.Conversion.Convert``1(System.Object@)">
-            <summary>
-            转换
-            </summary>
-        </member>
-        <member name="M:Utils.Conversion.TryConvert(System.Object@,System.Type@,System.Object@,System.Boolean@)">
-            <summary>
-            尝试转换
-            </summary>
-        </member>
-        <member name="M:Utils.Conversion.TryConvert``1(System.Object@,``0@,System.Boolean@)">
-            <summary>
-            尝试转换
-            </summary>
-        </member>
-        <member name="M:Utils.Conversion.IsConvertibleTo(System.Type@,System.Type@,System.Boolean@)">
-            <summary>
-            可转化为
-            </summary>
-        </member>
-        <member name="M:Utils.Conversion.IsConvertibleTo(System.Object@,System.Type@,System.Boolean@)">
-            <summary>
-            可转化为
-            </summary>
-        </member>
-        <member name="M:Utils.Conversion.IsConvertibleTo``1(System.Object@,System.Boolean@)">
-            <summary>
-            可转化为
-            </summary>
-        </member>
-        <member name="M:Utils.Conversion.ConvertTo(System.Object@,System.Type@)">
-            <summary>
-            转化为
-            </summary>
-        </member>
-        <member name="M:Utils.Conversion.ConvertTo``1(System.Object@)">
-            <summary>
-            转化为
-            </summary>
-        </member>
-        <member name="M:Utils.Conversion.GetRequiredConversion(System.Type@,System.Type@)">
-            <summary>
-            获得所需的转换
-            </summary>
-        </member>
-        <member name="M:Utils.Conversion.GetRequiredConversion(System.Object@,System.Type@)">
-            <summary>
-            
-            </summary>
-            <param name="value"></param>
-            <param name="type"></param>
-            <returns></returns>
         </member>
         <member name="T:Utils.Hash">
             <summary>
@@ -1201,21 +1108,6 @@
             </summary>
             <returns>True:存在 False:不存在</returns>
         </member>
-        <member name="T:Utils.Operator">
-            <summary>
-            运算符工具类
-            </summary>
-        </member>
-        <member name="F:Utils.Operator.operatorNames">
-            <summary>
-            运算符名称
-            </summary>
-        </member>
-        <member name="F:Utils.Operator.operatorRanks">
-            <summary>
-            运算符优先级
-            </summary>
-        </member>
         <member name="T:Utils.MD5X">
             <summary>
             计算MD5
@@ -1240,27 +1132,27 @@
             <param name="stream"></param>
             <param name="bufferSize">自定义缓冲区大小16K</param>
         </member>
-        <member name="T:Utils.RandomX">
+        <member name="T:Utils.Random">
             <summary>
             随机数工具类
             </summary>
         </member>
-        <member name="M:Utils.RandomX.Refresh">
+        <member name="M:Utils.Random.Refresh">
             <summary>
             刷新随机种子
             </summary>
         </member>
-        <member name="M:Utils.RandomX.Refresh(System.Random@)">
+        <member name="M:Utils.Random.Refresh(System.Random@)">
             <summary>
             刷新随机种子
             </summary>
         </member>
-        <member name="M:Utils.RandomX.Refresh(System.Int32@)">
+        <member name="M:Utils.Random.Refresh(System.Int32@)">
             <summary>
             刷新随机种子
             </summary>
         </member>
-        <member name="M:Utils.RandomX.RandArray``1(System.Int32,System.Collections.Generic.ICollection{``0}@)">
+        <member name="M:Utils.Random.RandArray``1(System.Int32,System.Collections.Generic.ICollection{``0}@)">
             <summary>
             
             </summary>
@@ -1269,7 +1161,7 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandArray``1(System.Int32@,System.Collections.Generic.IList{``0}@)">
+        <member name="M:Utils.Random.RandArray``1(System.Int32@,System.Collections.Generic.IList{``0}@)">
             <summary>
             
             </summary>
@@ -1278,13 +1170,13 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandArray``1(System.Int32,System.Collections.Generic.IList{``0},System.Int32@,System.Int32)">
+        <member name="M:Utils.Random.RandArray``1(System.Int32,System.Collections.Generic.IList{``0},System.Int32@,System.Int32)">
             <param name="array"></param>
             <param name="lower">下限-包含</param>
             <param name="upper">上限-不包含</param>
             <param name="count"></param>
         </member>
-        <member name="M:Utils.RandomX.RandArray``2(System.Int32@,System.Collections.Generic.IDictionary{``0,``1}@)">
+        <member name="M:Utils.Random.RandArray``2(System.Int32@,System.Collections.Generic.IDictionary{``0,``1}@)">
             <summary>
             
             </summary>
@@ -1294,7 +1186,7 @@
             <typeparam name="T2"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandArrayValue``1(System.Collections.Generic.IList{``0}@)">
+        <member name="M:Utils.Random.RandArrayValue``1(System.Collections.Generic.IList{``0}@)">
             <summary>
             
             </summary>
@@ -1302,7 +1194,7 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandArrayValue``1(System.Collections.Generic.ICollection{``0}@)">
+        <member name="M:Utils.Random.RandArrayValue``1(System.Collections.Generic.ICollection{``0}@)">
             <summary>
             
             </summary>
@@ -1311,7 +1203,7 @@
             <returns></returns>
             <exception cref="T:System.SystemException"></exception>
         </member>
-        <member name="M:Utils.RandomX.RandArrayValue``2(System.Collections.Generic.IDictionary{``0,``1}@)">
+        <member name="M:Utils.Random.RandArrayValue``2(System.Collections.Generic.IDictionary{``0,``1}@)">
             <summary>
             
             </summary>
@@ -1321,65 +1213,65 @@
             <returns></returns>
             <exception cref="T:System.SystemException"></exception>
         </member>
-        <member name="M:Utils.RandomX.RandArrayValue``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@)">
+        <member name="M:Utils.Random.RandArrayValue``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@)">
             <param name="array"></param>
             <param name="lower">下限-包含</param>
             <param name="upper">上限-不包含</param>
         </member>
-        <member name="M:Utils.RandomX.RandArrayValue``1(System.Collections.Generic.ICollection{``0}@,System.Int32@,System.Int32)">
+        <member name="M:Utils.Random.RandArrayValue``1(System.Collections.Generic.ICollection{``0}@,System.Int32@,System.Int32)">
             <param name="array"></param>
             <param name="lower">下限-包含</param>
             <param name="upper">上限-不包含</param>
         </member>
-        <member name="M:Utils.RandomX.RandArrayValue``2(System.Collections.Generic.IDictionary{``0,``1}@,System.Int32@,System.Int32)">
+        <member name="M:Utils.Random.RandArrayValue``2(System.Collections.Generic.IDictionary{``0,``1}@,System.Int32@,System.Int32)">
             <param name="array"></param>
             <param name="lower">下限-包含</param>
             <param name="upper">上限-不包含</param>
         </member>
-        <member name="M:Utils.RandomX.RandArrayWeight(System.Collections.Generic.IList{System.Single}@)">
+        <member name="M:Utils.Random.RandArrayWeight(System.Collections.Generic.IList{System.Single}@)">
             <summary>
             随机权重 
             </summary>
             <param name="weights">传入数组的总和 应为1</param>
         </member>
-        <member name="M:Utils.RandomX.RandArrayWeight``1(System.Collections.Generic.IList{System.Single}@,System.Collections.Generic.IList{``0}@)">
+        <member name="M:Utils.Random.RandArrayWeight``1(System.Collections.Generic.IList{System.Single}@,System.Collections.Generic.IList{``0}@)">
             <summary>
             随机权重
             </summary>
             <param name="weights">传入数组的总和 应为1</param>
             <param name="values"></param>
         </member>
-        <member name="M:Utils.RandomX.RandBool">
+        <member name="M:Utils.Random.RandBool">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandBoolArray(System.Int32@)">
+        <member name="M:Utils.Random.RandBoolArray(System.Int32@)">
             <summary>
             
             </summary>
             <param name="count"></param>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandByte">
+        <member name="M:Utils.Random.RandByte">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandBytes(System.Byte@,System.Int32@)">
+        <member name="M:Utils.Random.RandBytes(System.Byte@,System.Int32@)">
             <param name="lower">下限-包含</param>
             <param name="upper">上限-不包含</param>
         </member>
-        <member name="M:Utils.RandomX.RandByteArray(System.Int32@)">
+        <member name="M:Utils.Random.RandByteArray(System.Int32@)">
             <summary>
             
             </summary>
             <param name="count"></param>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandByteArray(System.Int32@,System.Int32@,System.Int32)">
+        <member name="M:Utils.Random.RandByteArray(System.Int32@,System.Int32@,System.Int32)">
             <summary>
             
             </summary>
@@ -1389,20 +1281,20 @@
             <returns></returns>
             <exception cref="T:System.ArgumentException"></exception>
         </member>
-        <member name="M:Utils.RandomX.RandSByte">
+        <member name="M:Utils.Random.RandSByte">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandSByteArray(System.Int32@)">
+        <member name="M:Utils.Random.RandSByteArray(System.Int32@)">
             <summary>
             
             </summary>
             <param name="count"></param>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandSByteArray(System.Int32@,System.SByte@,System.SByte@)">
+        <member name="M:Utils.Random.RandSByteArray(System.Int32@,System.SByte@,System.SByte@)">
             <summary>
             
             </summary>
@@ -1411,98 +1303,98 @@
             <param name="upper"></param>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandUInt16">
+        <member name="M:Utils.Random.RandUInt16">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandUInt16(System.UInt16@,System.Int32@)">
+        <member name="M:Utils.Random.RandUInt16(System.UInt16@,System.Int32@)">
             <param name="lower">下限-包含</param>
             <param name="upper">上限-不包含</param>
         </member>
-        <member name="M:Utils.RandomX.RandUInt16Array(System.Int32@)">
+        <member name="M:Utils.Random.RandUInt16Array(System.Int32@)">
             <summary>
             
             </summary>
             <param name="count"></param>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandUInt32(System.UInt32@,System.UInt32@)">
+        <member name="M:Utils.Random.RandUInt32(System.UInt32@,System.UInt32@)">
             <param name="lower">下限-包含</param>
             <param name="upper">上限-不包含</param>
         </member>
-        <member name="M:Utils.RandomX.RandUInt32">
+        <member name="M:Utils.Random.RandUInt32">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandUInt32Array(System.Int32@)">
+        <member name="M:Utils.Random.RandUInt32Array(System.Int32@)">
             <summary>
             
             </summary>
             <param name="count"></param>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandUInt64(System.UInt64@,System.UInt64@)">
+        <member name="M:Utils.Random.RandUInt64(System.UInt64@,System.UInt64@)">
             <param name="lower">下限-包含</param>
             <param name="upper">上限-不包含</param>
         </member>
-        <member name="M:Utils.RandomX.RandUInt64">
+        <member name="M:Utils.Random.RandUInt64">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandUInt64Array(System.Int32@)">
+        <member name="M:Utils.Random.RandUInt64Array(System.Int32@)">
             <summary>
             
             </summary>
             <param name="count"></param>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandInt16(System.Int16@,System.Int32@)">
+        <member name="M:Utils.Random.RandInt16(System.Int16@,System.Int32@)">
             <param name="lower">下限-包含</param>
             <param name="upper">上限-不包含</param>
         </member>
-        <member name="M:Utils.RandomX.RandInt16">
+        <member name="M:Utils.Random.RandInt16">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandInt16Array(System.Int32@)">
+        <member name="M:Utils.Random.RandInt16Array(System.Int32@)">
             <summary>
             
             </summary>
             <param name="count"></param>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandInt32">
+        <member name="M:Utils.Random.RandInt32">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandInt32(System.Int32@,System.Int32@)">
+        <member name="M:Utils.Random.RandInt32(System.Int32@,System.Int32@)">
             <param name="lower">下限-包含</param>
             <param name="upper">上限-不包含</param>
         </member>
-        <member name="M:Utils.RandomX.RandInt32Array(System.Int32,System.Int32,System.Int32,System.Boolean)">
+        <member name="M:Utils.Random.RandInt32Array(System.Int32,System.Int32,System.Int32,System.Boolean)">
             <param name="count"></param>
             <param name="minValue">下限-包含</param>
             <param name="maxValue">上限-不包含</param>
             <param name="hasRepeat">是否包含重复 Ture:包含 False:不包含</param>
         </member>
-        <member name="M:Utils.RandomX.RandInt32ArrayWeight(System.Collections.Generic.IList{System.Int32})">
+        <member name="M:Utils.Random.RandInt32ArrayWeight(System.Collections.Generic.IList{System.Int32})">
             <summary>
             
             </summary>
             <param name="weights"></param>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandInt32ArrayWeight(System.Collections.Generic.IList{System.Int32},System.Int32)">
+        <member name="M:Utils.Random.RandInt32ArrayWeight(System.Collections.Generic.IList{System.Int32},System.Int32)">
             <summary>
             
             </summary>
@@ -1510,30 +1402,30 @@
             <param name="weightRandomMinVal"></param>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandInt64">
+        <member name="M:Utils.Random.RandInt64">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandInt64(System.Int64@,System.Int64@)">
+        <member name="M:Utils.Random.RandInt64(System.Int64@,System.Int64@)">
             <param name="lower">下限-包含</param>
             <param name="upper">上限-不包含</param>
         </member>
-        <member name="M:Utils.RandomX.RandInt64Array(System.Int32@)">
+        <member name="M:Utils.Random.RandInt64Array(System.Int32@)">
             <summary>
             
             </summary>
             <param name="count"></param>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandFloat">
+        <member name="M:Utils.Random.RandFloat">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandFloat(System.Boolean,System.Boolean)">
+        <member name="M:Utils.Random.RandFloat(System.Boolean,System.Boolean)">
             <summary>
             
             </summary>
@@ -1541,20 +1433,20 @@
             <param name="hasInfinity"></param>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.RandDouble">
+        <member name="M:Utils.Random.RandDouble">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Utils.RandomX.BreakArray``1(System.Collections.Generic.IList{``0})">
+        <member name="M:Utils.Random.BreakArray``1(System.Collections.Generic.IList{``0})">
             <summary>
             
             </summary>
             <param name="array"></param>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="M:Utils.RandomX.BreakArray``1(System.Collections.Generic.IList{``0},System.Int32@,System.Int32)">
+        <member name="M:Utils.Random.BreakArray``1(System.Collections.Generic.IList{``0},System.Int32@,System.Int32)">
             <summary>
             
             </summary>
@@ -1564,7 +1456,7 @@
             <typeparam name="T"></typeparam>
             <exception cref="T:System.ArgumentException"></exception>
         </member>
-        <member name="M:Utils.RandomX.NextLong(System.Int64,System.Int64)">
+        <member name="M:Utils.Random.NextLong(System.Int64,System.Int64)">
             <summary>
             
             </summary>
@@ -3934,6 +3826,208 @@
             获取系统启动后 经过的毫秒数
             </summary>
         </member>
+        <member name="T:AIO.MergedKeyedCollection`2">
+            <summary>
+            合并键控集合
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TItem"></typeparam>
+        </member>
+        <member name="M:AIO.MergedKeyedCollection`2.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="F:AIO.MergedKeyedCollection`2.collections">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.MergedKeyedCollection`2.collectionsLookup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AIO.MergedKeyedCollection`2.Item(`0)">
+            <summary>
+            获取值
+            </summary>
+            <param name="key">键值</param>
+            <exception cref="T:System.ArgumentNullException">key为Null</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">值不存在</exception>
+        </member>
+        <member name="P:AIO.MergedKeyedCollection`2.Count">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.MergedKeyedCollection`2.IsReadOnly">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.MergedKeyedCollection`2.Includes``1">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.MergedKeyedCollection`2.Includes(System.Type)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.MergedKeyedCollection`2.ForType``1">
+            <summary>
+            
+            </summary>
+            <typeparam name="TSubItem"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.MergedKeyedCollection`2.Include``1(AIO.IKeyedCollection{`0,``0})">
+            <summary>
+            
+            </summary>
+            <param name="collection"></param>
+            <typeparam name="TSubItem"></typeparam>
+        </member>
+        <member name="M:AIO.MergedKeyedCollection`2.GetCollectionForItem(`1)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.MergedKeyedCollection`2.GetCollectionForType(System.Type,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="throwOnFail"></param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:AIO.MergedKeyedCollection`2.GetCollectionForKey(`0,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <param name="throwOnFail"></param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:AIO.MergedKeyedCollection`2.TryGetValue(`0,`1@)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.MergedKeyedCollection`2.Add(`1)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:AIO.MergedKeyedCollection`2.Clear">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.MergedKeyedCollection`2.Contains(`1)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.MergedKeyedCollection`2.Remove(`1)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.MergedKeyedCollection`2.CopyTo(`1[],System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.MergedKeyedCollection`2.Contains(`0)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.MergedKeyedCollection`2.Remove(`0)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.MergedKeyedCollection`2.GetEnumerator">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AIO.MergedKeyedCollection`2.Enumerator">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.MergedKeyedCollection`2.Enumerator.#ctor(AIO.MergedKeyedCollection{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.MergedKeyedCollection`2.Enumerator.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.MergedKeyedCollection`2.Enumerator.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.MergedKeyedCollection`2.Enumerator.Current">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.VariantKeyedCollection`3">
+            <summary>
+            
+            </summary>
+            <typeparam name="TBase"></typeparam>
+            <typeparam name="TImplementation"></typeparam>
+            <typeparam name="TKey"></typeparam>
+        </member>
+        <member name="M:AIO.VariantKeyedCollection`3.#ctor(AIO.IKeyedCollection{`2,`1}@)">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.VariantKeyedCollection`3.Item(`2)">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.VariantKeyedCollection`3.implementation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.VariantKeyedCollection`3.TryGetValue(`2,`0@)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.VariantKeyedCollection`3.Contains(`2)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.VariantKeyedCollection`3.Remove(`2)">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.ReferenceEqualityComparer">
+            <summary>
+            引用比较
+            </summary>
+        </member>
+        <member name="F:AIO.ReferenceEqualityComparer.Instance">
+            <summary>
+            实例
+            </summary>
+        </member>
+        <member name="M:AIO.ReferenceEqualityComparer.GetHashCode(System.Object)">
+            <summary>
+            获取哈希值
+            </summary>
+        </member>
+        <member name="T:AIO.ReferenceEqualityComparer`1">
+            <summary>
+            引用比较
+            </summary>
+        </member>
+        <member name="F:AIO.ReferenceEqualityComparer`1.Instance">
+            <summary>
+            获取哈希值
+            </summary>
+        </member>
+        <member name="M:AIO.ReferenceEqualityComparer`1.GetHashCode(`0)">
+            <summary>
+            获取哈希值
+            </summary>
+        </member>
         <member name="T:AIO.ISerialize">
             <summary>
             序列化 反序列化
@@ -3967,127 +4061,6 @@
         <member name="M:AIO.IPoolable.Free">
             <summary>
             释放
-            </summary>
-        </member>
-        <member name="T:AIO.ConversionQuery">
-            <summary>
-            用于查询类型转换的结构体，实现了IEquatable接口
-            </summary>
-        </member>
-        <member name="F:AIO.ConversionQuery.source">
-            <summary>
-            源类型
-            </summary>
-        </member>
-        <member name="F:AIO.ConversionQuery.destination">
-            <summary>
-            目标类型
-            </summary>
-        </member>
-        <member name="M:AIO.ConversionQuery.#ctor(System.Type@,System.Type@)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="source">源类型</param>
-            <param name="destination">目标类型</param>
-        </member>
-        <member name="M:AIO.ConversionQuery.Equals(AIO.ConversionQuery)">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.ConversionQuery.Equals(System.Object)">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.ConversionQuery.GetHashCode">
-            <inheritdoc/>
-        </member>
-        <member name="T:AIO.ConversionQueryComparer">
-            <summary>
-            该结构体实现了IEqualityComparer接口，用于比较ConversionQuery类型的对象
-            </summary>
-        </member>
-        <member name="M:AIO.ConversionQueryComparer.Equals(AIO.ConversionQuery,AIO.ConversionQuery)">
-            <summary>
-            重写Equals方法，比较两个ConversionQuery对象是否相等
-            </summary>
-            <param name="x">第一个ConversionQuery对象</param>
-            <param name="y">第二个ConversionQuery对象</param>
-            <returns>如果两个对象相等，则返回true，否则返回false</returns>
-        </member>
-        <member name="M:AIO.ConversionQueryComparer.GetHashCode(AIO.ConversionQuery)">
-            <summary>
-            重写GetHashCode方法，获取ConversionQuery对象的哈希码
-            </summary>
-            <param name="obj">ConversionQuery对象</param>
-            <returns>ConversionQuery对象的哈希码</returns>
-        </member>
-        <member name="T:AIO.ConversionType">
-            <summary>
-            转换类型
-            </summary>
-        </member>
-        <member name="F:AIO.ConversionType.Impossible">
-            <summary>
-            不可能转换
-            </summary>
-        </member>
-        <member name="F:AIO.ConversionType.Identity">
-            <summary>
-            同等转换
-            </summary>
-        </member>
-        <member name="F:AIO.ConversionType.Upcast">
-            <summary>
-            向上转换
-            </summary>
-        </member>
-        <member name="F:AIO.ConversionType.Downcast">
-            <summary>
-            向下转换
-            </summary>
-        </member>
-        <member name="F:AIO.ConversionType.NumericImplicit">
-            <summary>
-            数字隐式
-            </summary>
-        </member>
-        <member name="F:AIO.ConversionType.NumericExplicit">
-            <summary>
-            数字显示
-            </summary>
-        </member>
-        <member name="F:AIO.ConversionType.UserDefinedImplicit">
-            <summary>
-            用户自定义隐式
-            </summary>
-        </member>
-        <member name="F:AIO.ConversionType.UserDefinedExplicit">
-            <summary>
-            用户自定义显式
-            </summary>
-        </member>
-        <member name="F:AIO.ConversionType.UserDefinedThenNumericImplicit">
-            <summary>
-            用户定义的数字隐式
-            </summary>
-        </member>
-        <member name="F:AIO.ConversionType.UserDefinedThenNumericExplicit">
-            <summary>
-            用户定义的数字显式
-            </summary>
-        </member>
-        <member name="F:AIO.ConversionType.EnumerableToArray">
-            <summary>
-            集合转化为数组
-            </summary>
-        </member>
-        <member name="F:AIO.ConversionType.EnumerableToList">
-            <summary>
-            集合转化为列表
-            </summary>
-        </member>
-        <member name="F:AIO.ConversionType.ToString">
-            <summary>
-            字符串
             </summary>
         </member>
         <member name="T:AIO.AmbiguousOperatorException">
@@ -4158,171 +4131,6 @@
         <member name="P:AIO.UnexpectedEnumValueException`1.Value">
             <summary>
             获取引发当前异常的枚举值。
-            </summary>
-        </member>
-        <member name="T:AIO.BinaryOperator">
-            <summary>
-            二目运算符
-            </summary>
-        </member>
-        <member name="F:AIO.BinaryOperator.Addition">
-            <summary>
-            加法运算
-            </summary>
-        </member>
-        <member name="F:AIO.BinaryOperator.Subtraction">
-            <summary>
-            减法运算
-            </summary>
-        </member>
-        <member name="F:AIO.BinaryOperator.Multiplication">
-            <summary>
-            乘法运算
-            </summary>
-        </member>
-        <member name="F:AIO.BinaryOperator.Division">
-            <summary>
-            除法运算
-            </summary>
-        </member>
-        <member name="F:AIO.BinaryOperator.Modulo">
-            <summary>
-            取模运算
-            </summary>
-        </member>
-        <member name="F:AIO.BinaryOperator.And">
-            <summary>
-            逻辑与
-            </summary>
-        </member>
-        <member name="F:AIO.BinaryOperator.Or">
-            <summary>
-            逻辑或
-            </summary>
-        </member>
-        <member name="F:AIO.BinaryOperator.ExclusiveOr">
-            <summary>
-            逻辑异或
-            </summary>
-        </member>
-        <member name="F:AIO.BinaryOperator.Equality">
-            <summary>
-            等于
-            </summary>
-        </member>
-        <member name="F:AIO.BinaryOperator.Inequality">
-            <summary>
-            不相等
-            </summary>
-        </member>
-        <member name="F:AIO.BinaryOperator.GreaterThan">
-            <summary>
-            大于
-            </summary>
-        </member>
-        <member name="F:AIO.BinaryOperator.LessThan">
-            <summary>
-            小余
-            </summary>
-        </member>
-        <member name="F:AIO.BinaryOperator.GreaterThanOrEqual">
-            <summary>
-            大于或等于
-            </summary>
-        </member>
-        <member name="F:AIO.BinaryOperator.LessThanOrEqual">
-            <summary>
-            小于或等于
-            </summary>
-        </member>
-        <member name="F:AIO.BinaryOperator.LeftShift">
-            <summary>
-            向左移
-            </summary>
-        </member>
-        <member name="F:AIO.BinaryOperator.RightShift">
-            <summary>
-            向右移
-            </summary>
-        </member>
-        <member name="T:AIO.UnaryOperator">
-            <summary>
-            一元运算符
-            </summary>
-        </member>
-        <member name="F:AIO.UnaryOperator.LogicalNegation">
-            <summary>
-            逻辑非
-            </summary>
-        </member>
-        <member name="F:AIO.UnaryOperator.NumericNegation">
-            <summary>
-            取反
-            </summary>
-        </member>
-        <member name="F:AIO.UnaryOperator.Increment">
-            <summary>
-            自增 ++
-            </summary>
-        </member>
-        <member name="F:AIO.UnaryOperator.Decrement">
-            <summary>
-            自减 --
-            </summary>
-        </member>
-        <member name="F:AIO.UnaryOperator.Plus">
-            <summary>
-            加
-            </summary>
-        </member>
-        <member name="T:AIO.AndHandler">
-            <summary>
-            按位逻辑运算符或位运算符
-            </summary>
-        </member>
-        <member name="M:AIO.AndHandler.#ctor">
-            <inheritdoc/>
-        </member>
-        <member name="T:AIO.BinaryOperatorHandler">
-            <summary>
-            二进制运算符 处理程序
-            </summary>
-        </member>
-        <member name="M:AIO.BinaryOperatorHandler.#ctor(System.String@,System.String@,System.String@,System.String@)">
-            <inheritdoc />
-        </member>
-        <member name="T:AIO.OperatorHandler">
-            <summary>
-            运算符操作
-            </summary>
-        </member>
-        <member name="M:AIO.OperatorHandler.#ctor(System.String@,System.String@,System.String@,System.String@)">
-            <summary>
-            运算符操作
-            </summary>
-            <param name="name">名称</param>
-            <param name="verb">动词</param>
-            <param name="symbol">标志</param>
-            <param name="customMethodName">定制方法名</param>
-        </member>
-        <member name="P:AIO.OperatorHandler.Name">
-            <summary>
-            名称
-            </summary>
-        </member>
-        <member name="P:AIO.OperatorHandler.Verb">
-            <summary>
-            动词
-            </summary>
-        </member>
-        <member name="P:AIO.OperatorHandler.Symbol">
-            <summary>
-            标志
-            </summary>
-        </member>
-        <member name="P:AIO.OperatorHandler.CustomMethodName">
-            <summary>
-            自定义函数名
             </summary>
         </member>
         <member name="T:AIO.HttpDownload">
@@ -4561,2121 +4369,6 @@
             maximum length of address
             </summary>
         </member>
-        <member name="T:AIO.DoNotSerializeAttribute">
-            <summary>
-            无序列化
-            </summary>
-        </member>
-        <member name="M:AIO.DoNotSerializeAttribute.#ctor">
-            <summary>
-            无序列化
-            </summary>
-        </member>
-        <member name="T:AIO.fsForwardAttribute">
-            <summary>
-            This allows you to forward serialization of an object to one of its
-            members. For example,
-            [fsForward("Values")]
-            struct Wrapper {
-            public int[] Values;
-            }
-            Then `Wrapper` will be serialized into a JSON array of integers. It will
-            be as if `Wrapper` doesn't exist.
-            </summary>
-        </member>
-        <member name="M:AIO.fsForwardAttribute.#ctor(System.String)">
-            <summary>
-            Forward object serialization to an instance member. See class
-            comment.
-            </summary>
-            <param name="memberName">
-            The name of the member that we should serialize this object as.
-            </param>
-        </member>
-        <member name="F:AIO.fsForwardAttribute.MemberName">
-            <summary>
-            The name of the member we should serialize as.
-            </summary>
-        </member>
-        <member name="T:AIO.fsIgnoreAttribute">
-            <summary>
-            用[JsonIgnore]注释的给定属性或字段将不会被序列化。
-            </summary>
-        </member>
-        <member name="T:AIO.fsObjectAttribute">
-            <summary>
-            此属性控制类型的某些序列化行为
-            </summary>
-        </member>
-        <member name="M:AIO.fsObjectAttribute.#ctor">
-            <summary>
-            此属性控制类型的某些序列化行为
-            </summary>
-        </member>
-        <member name="M:AIO.fsObjectAttribute.#ctor(System.String@,System.Type[])">
-            <summary>
-            此属性控制类型的某些序列化行为
-            </summary>
-        </member>
-        <member name="F:AIO.fsObjectAttribute.PreviousModels">
-            <summary>
-            The previous model that should be used if an old version of this
-            object is encountered. Using this attribute also requires that the
-            type have a public constructor that takes only one parameter, an
-            object instance of the given type. Use of this parameter *requires*
-            that the VersionString parameter is also set.
-            </summary>
-        </member>
-        <member name="F:AIO.fsObjectAttribute.VersionString">
-            <summary>
-            The version string to use for this model. This should be unique among
-            all prior versions of this model that is supported for importation.
-            If PreviousModel is set, then this attribute must also be set. A good
-            valid example for this is "v1", "v2", "v3", ...
-            </summary>
-        </member>
-        <member name="F:AIO.fsObjectAttribute.MemberSerialization">
-            <summary>
-            This controls the behavior for member serialization. The default
-            behavior is fsMemberSerialization.Default.
-            </summary>
-        </member>
-        <member name="F:AIO.fsObjectAttribute.Converter">
-            <summary>
-            Specify a custom converter to use for serialization. The converter
-            type needs to derive from fsBaseConverter. This defaults to null.
-            </summary>
-        </member>
-        <member name="F:AIO.fsObjectAttribute.Processor">
-            <summary>
-            Specify a custom processor to use during serialization. The processor
-            type needs to derive from fsObjectProcessor and the call to
-            CanProcess is not invoked. This defaults to null.
-            </summary>
-        </member>
-        <member name="T:AIO.fsPropertyAttribute">
-            <summary>
-            显式地标记要序列化的属性。这也可用于指定属性在序列化期间应该使用的名称。
-            </summary>
-        </member>
-        <member name="M:AIO.fsPropertyAttribute.#ctor">
-            <summary>
-            属性
-            </summary>
-        </member>
-        <member name="M:AIO.fsPropertyAttribute.#ctor(System.String@)">
-            <summary>
-            属性
-            </summary>
-            <param name="name">名称</param>
-        </member>
-        <member name="F:AIO.fsPropertyAttribute.Name">
-            <summary>
-            属性将在JSON序列化中使用的名称。
-            </summary>
-        </member>
-        <member name="F:AIO.fsPropertyAttribute.Converter">
-            <summary>
-            为给定类型使用自定义转换器。指定要使用的转换器使用typeof。
-            </summary>
-        </member>
-        <member name="T:AIO.SerializeAsAttribute">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AIO.SerializeAsAttribute.#ctor(System.String)">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="T:AIO.SerializeAttribute">
-            <summary>
-            序列化属性
-            </summary>
-        </member>
-        <member name="M:AIO.SerializeAttribute.#ctor">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="T:AIO.fsDataType">
-            <summary>
-            JsonData 实例可以存储的实际类型。
-            </summary>
-        </member>
-        <member name="F:AIO.fsDataType.Array">
-            <summary>
-            数组
-            </summary>
-        </member>
-        <member name="F:AIO.fsDataType.Object">
-            <summary>
-            对象
-            </summary>
-        </member>
-        <member name="F:AIO.fsDataType.Double">
-            <summary>
-            浮点数
-            </summary>
-        </member>
-        <member name="F:AIO.fsDataType.Int64">
-            <summary>
-            整数
-            </summary>
-        </member>
-        <member name="F:AIO.fsDataType.Boolean">
-            <summary>
-            布尔值
-            </summary>
-        </member>
-        <member name="F:AIO.fsDataType.String">
-            <summary>
-            字符串
-            </summary>
-        </member>
-        <member name="F:AIO.fsDataType.Null">
-            <summary>
-            空值
-            </summary>
-        </member>
-        <member name="T:AIO.fsMemberSerialization">
-            <summary>
-            Controls how the reflected converter handles member serialization.
-            </summary>
-        </member>
-        <member name="F:AIO.fsMemberSerialization.OptIn">
-            <summary>
-            Only members with [SerializeField] or [fsProperty] attributes are
-            serialized.
-            </summary>
-        </member>
-        <member name="F:AIO.fsMemberSerialization.OptOut">
-            <summary>
-            Only members with [NotSerialized] or [fsIgnore] will not be
-            serialized.
-            </summary>
-        </member>
-        <member name="F:AIO.fsMemberSerialization.Default">
-            <summary>
-            The default member serialization behavior is applied.
-            </summary>
-        </member>
-        <member name="T:AIO.fsDuplicateVersionNameException">
-            <summary>
-            出现多个相同类型
-            </summary>
-        </member>
-        <member name="M:AIO.fsDuplicateVersionNameException.#ctor(System.Type,System.Type,System.String)">
-            <summary>
-            出现多个相同类型
-            </summary>
-        </member>
-        <member name="T:AIO.fsMissingVersionConstructorException">
-            <summary>
-            缺少一个数据的构造类型
-            </summary>
-        </member>
-        <member name="M:AIO.fsMissingVersionConstructorException.#ctor(System.Type@,System.Type@)">
-            <summary>
-            缺少一个数据的构造类型
-            </summary>
-        </member>
-        <member name="M:AIO.fsTypeExtensions.CSharpName(System.Type,System.Boolean)">
-            <summary>
-            Returns a pretty name for the type in the style of one that you'd see
-            in C#.
-            </summary>
-            <parparam name="includeNamespace">
-            Should the name include namespaces?
-            </parparam>
-        </member>
-        <member name="T:AIO.fsISerializationCallbacks">
-            <summary>
-            Extend this interface on your type to receive notifications about
-            serialization/deserialization events. If you don't have access to the
-            type itself, then you can write an fsObjectProcessor instead.
-            </summary>
-        </member>
-        <member name="M:AIO.fsISerializationCallbacks.OnBeforeSerialize(System.Type)">
-            <summary>
-            Called before serialization.
-            </summary>
-        </member>
-        <member name="M:AIO.fsISerializationCallbacks.OnAfterSerialize(System.Type,AIO.fsData@)">
-            <summary>
-            Called after serialization.
-            </summary>
-            <param name="storageType">
-            The field/property type that is storing the instance.
-            </param>
-            <param name="data">The data that was serialized.</param>
-        </member>
-        <member name="M:AIO.fsISerializationCallbacks.OnBeforeDeserialize(System.Type,AIO.fsData@)">
-            <summary>
-            Called before deserialization.
-            </summary>
-            <param name="storageType">
-            The field/property type that is storing the instance.
-            </param>
-            <param name="data">
-            The data that will be used for deserialization.
-            </param>
-        </member>
-        <member name="M:AIO.fsISerializationCallbacks.OnAfterDeserialize(System.Type)">
-            <summary>
-            Called after deserialization.
-            </summary>
-            <param name="storageType">
-            The field/property type that is storing the instance.
-            </param>
-            <param name="instance">The type of the instance.</param>
-        </member>
-        <member name="T:AIO.IOptimizedAccessor">
-            <summary>
-            优化访问器
-            </summary>
-        </member>
-        <member name="M:AIO.IOptimizedAccessor.Compile">
-            <summary>
-            编译器
-            </summary>
-        </member>
-        <member name="M:AIO.IOptimizedAccessor.GetValue(System.Object@)">
-            <summary>
-            获取值
-            </summary>
-            <param name="target">参数</param>
-            <returns>值</returns>
-        </member>
-        <member name="M:AIO.IOptimizedAccessor.SetValue(System.Object@,System.Object@)">
-            <summary>
-            设置值
-            </summary>
-            <param name="target">目标值</param>
-            <param name="value">设置值</param>
-        </member>
-        <member name="T:AIO.IOptimizedInvoker">
-            <summary>
-            优化调用
-            </summary>
-        </member>
-        <member name="M:AIO.IOptimizedInvoker.Compile">
-            <summary>
-            编译
-            </summary>
-        </member>
-        <member name="M:AIO.IOptimizedInvoker.Invoke(System.Object@)">
-            <summary>
-            调用
-            </summary>
-        </member>
-        <member name="M:AIO.IOptimizedInvoker.Invoke(System.Object@,System.Object@)">
-            <summary>
-            调用
-            </summary>
-        </member>
-        <member name="M:AIO.IOptimizedInvoker.Invoke(System.Object@,System.Object@,System.Object@)">
-            <summary>
-            调用
-            </summary>
-        </member>
-        <member name="M:AIO.IOptimizedInvoker.Invoke(System.Object@,System.Object@,System.Object@,System.Object@)">
-            <summary>
-            调用
-            </summary>
-        </member>
-        <member name="M:AIO.IOptimizedInvoker.Invoke(System.Object@,System.Object@,System.Object@,System.Object@,System.Object@)">
-            <summary>
-            调用
-            </summary>
-        </member>
-        <member name="M:AIO.IOptimizedInvoker.Invoke(System.Object@,System.Object@,System.Object@,System.Object@,System.Object@,System.Object@)">
-            <summary>
-            调用
-            </summary>
-        </member>
-        <member name="M:AIO.IOptimizedInvoker.Invoke(System.Object@,System.Object[])">
-            <summary>
-            调用
-            </summary>
-        </member>
-        <member name="T:AIO.fsAotCompilationManager">
-            <summary>
-            The AOT compilation manager
-            </summary>
-        </member>
-        <member name="P:AIO.fsAotCompilationManager.AvailableAotCompilations">
-            <summary>
-            Ahead of time compilations that are available. The type maps to the
-            object type the generated converter will serialize/deserialize, and
-            the string is the text content for a converter that will do the
-            serialization.
-            <para />
-            The generated serializer is completely independent and you don't need
-            to do anything. Simply add the file to your project and it'll get
-            used instead of the reflection based one.
-            </summary>
-        </member>
-        <member name="M:AIO.fsAotCompilationManager.TryToPerformAotCompilation(AIO.fsConfig,System.Type,System.String@)">
-            <summary>
-            This is a helper method that makes it simple to run an AOT
-            compilation on the given type.
-            </summary>
-            <param name="config">
-            The configuration to use when running AOT compilation.
-            </param>
-            <param name="type">
-            The type to perform the AOT compilation on.
-            </param>
-            <param name="aotCompiledClassInCSharp">
-            The AOT class. Add this C# code to your project.
-            </param>
-            <returns>True if AOT compilation was successful.</returns>
-        </member>
-        <member name="M:AIO.fsAotCompilationManager.AddAotCompilation(System.Type,AIO.fsMetaProperty[],System.Boolean)">
-            <summary>
-            Adds a new AOT compilation unit.
-            </summary>
-            <param name="type">The type of object we are AOT compiling.</param>
-            <param name="members">
-            The members on the object which will be serialized/deserialized.
-            </param>
-        </member>
-        <member name="M:AIO.fsAotCompilationManager.GenerateDirectConverterForTypeInCSharp(System.Type,AIO.fsMetaProperty[],System.Boolean)">
-            <summary>
-            AOT compiles the object (in C#).
-            </summary>
-        </member>
-        <member name="T:AIO.fsBaseConverter">
-            <summary>
-            The serialization converter allows for customization of the serialization
-            process.
-            </summary>
-            <remarks>
-            You do not want to derive from this class - there is no way to actually
-            use it within the serializer.. Instead, derive from either fsConverter or
-            fsDirectConverter
-            </remarks>
-        </member>
-        <member name="F:AIO.fsBaseConverter.Serializer">
-            <summary>
-            The serializer that was owns this converter.
-            </summary>
-        </member>
-        <member name="M:AIO.fsBaseConverter.CreateInstance(AIO.fsData@,System.Type@)">
-            <summary>
-            Construct an object instance that will be passed to TryDeserialize.
-            This should **not** deserialize the object.
-            </summary>
-            <param name="data">The data the object was serialized with.</param>
-            <param name="storageType">
-            The field/property type that is storing the instance.
-            </param>
-            <returns>An object instance</returns>
-        </member>
-        <member name="M:AIO.fsBaseConverter.RequestCycleSupport(System.Type@)">
-            <summary>
-            If true, then the serializer will support cyclic references with the
-            given converted type.
-            </summary>
-            <param name="storageType">
-            The field/property type that is currently storing the object that is
-            being serialized.
-            </param>
-        </member>
-        <member name="M:AIO.fsBaseConverter.RequestInheritanceSupport(System.Type@)">
-            <summary>
-            If true, then the serializer will include inheritance data for the
-            given converter.
-            </summary>
-            <param name="storageType">
-            The field/property type that is currently storing the object that is
-            being serialized.
-            </param>
-        </member>
-        <member name="M:AIO.fsBaseConverter.TrySerialize(System.Object@,AIO.fsData@,System.Type@)">
-            <summary>
-            Serialize the actual object into the given data storage.
-            </summary>
-            <param name="instance">
-            The object instance to serialize. This will never be null.
-            </param>
-            <param name="serialized">The serialized state.</param>
-            <param name="storageType">
-            The field/property type that is storing this instance.
-            </param>
-            <returns>If serialization was successful.</returns>
-        </member>
-        <member name="M:AIO.fsBaseConverter.TryDeserialize(AIO.fsData@,System.Object@,System.Type@)">
-            <summary>
-            Deserialize data into the object instance.
-            </summary>
-            <param name="data">Serialization data to deserialize from.</param>
-            <param name="instance">
-            The object instance to deserialize into.
-            </param>
-            <param name="storageType">
-            The field/property type that is storing the instance.
-            </param>
-            <returns>
-            True if serialization was successful, false otherwise.
-            </returns>
-        </member>
-        <member name="M:AIO.fsBaseConverter.FailExpectedType(AIO.fsData@,AIO.fsDataType[])">
-            <summary>
-            检查预期类型
-            </summary>
-        </member>
-        <member name="M:AIO.fsBaseConverter.CheckType(AIO.fsData@,AIO.fsDataType@)">
-            <summary>
-            检查类型
-            </summary>
-        </member>
-        <member name="M:AIO.fsBaseConverter.CheckKey(AIO.fsData@,System.String@,AIO.fsData@)">
-            <summary>
-            检查Key值
-            </summary>
-        </member>
-        <member name="M:AIO.fsBaseConverter.CheckKey(System.Collections.Generic.IDictionary{System.String,AIO.fsData}@,System.String@,AIO.fsData@)">
-            <summary>
-            检查Key值
-            </summary>
-        </member>
-        <member name="M:AIO.fsBaseConverter.SerializeMember``1(System.Collections.Generic.IDictionary{System.String,AIO.fsData}@,System.Type@,System.String@,``0@)">
-            <summary>
-            序列化成员
-            </summary>
-        </member>
-        <member name="M:AIO.fsBaseConverter.DeserializeMember``1(System.Collections.Generic.IDictionary{System.String,AIO.fsData}@,System.Type@,System.String@,``0@)">
-            <summary>
-            反序列化成员
-            </summary>
-        </member>
-        <member name="T:AIO.fsConfig">
-            <summary>
-            Enables some top-level customization of Full Serializer.
-            </summary>
-        </member>
-        <member name="F:AIO.fsConfig.SerializeAttributes">
-            <summary>
-            The attributes that will force a field or property to be serialized.
-            </summary>
-        </member>
-        <member name="F:AIO.fsConfig.IgnoreSerializeAttributes">
-            <summary>
-            The attributes that will force a field or property to *not* be
-            serialized.
-            </summary>
-        </member>
-        <member name="F:AIO.fsConfig.DefaultMemberSerialization">
-            <summary>
-            The default member serialization.
-            </summary>
-        </member>
-        <member name="F:AIO.fsConfig.GetJsonNameFromMemberName">
-            <summary>
-            Convert a C# field/property name into the key used for the JSON
-            object. For example, you could force all JSON names to lowercase
-            with:
-            fsConfig.GetJsonNameFromMemberName = (name, info) =&gt;
-            name.ToLower();
-            This will only be used when the name is not explicitly specified with
-            fsProperty.
-            </summary>
-        </member>
-        <member name="F:AIO.fsConfig.EnablePropertySerialization">
-            <summary>
-            If false, then *all* property serialization support will be disabled
-            - even properties explicitly annotated with fsProperty or any other
-            opt-in annotation.
-            Setting this to false means that SerializeNonAutoProperties and
-            SerializeNonPublicSetProperties will be completely ignored.
-            </summary>
-        </member>
-        <member name="F:AIO.fsConfig.SerializeNonAutoProperties">
-            <summary>
-            Should the default serialization behaviour include non-auto
-            properties?
-            </summary>
-        </member>
-        <member name="F:AIO.fsConfig.SerializeNonPublicSetProperties">
-            <summary>
-            Should the default serialization behaviour include properties with
-            non-public setters?
-            </summary>
-        </member>
-        <member name="F:AIO.fsConfig.CustomDateTimeFormatString">
-            <summary>
-            If not null, this string format will be used for DateTime instead of
-            the default one.
-            </summary>
-        </member>
-        <member name="F:AIO.fsConfig.Serialize64BitIntegerAsString">
-            <summary>
-            Int64 and UInt64 will be serialized and deserialized as string for
-            compatibility
-            </summary>
-        </member>
-        <member name="F:AIO.fsConfig.SerializeEnumsAsInteger">
-            <summary>
-            Enums are serialized using their names by default. Setting this to
-            true will serialize them as integers instead.
-            </summary>
-        </member>
-        <member name="T:AIO.fsContext">
-            <summary>
-            fsContext stores global metadata that can be used to customize how
-            fsConverters operate during serialization.
-            </summary>
-        </member>
-        <member name="F:AIO.fsContext._contextObjects">
-            <summary>
-            All of the context objects.
-            </summary>
-        </member>
-        <member name="M:AIO.fsContext.Reset">
-            <summary>
-            Removes all context objects from the context.
-            </summary>
-        </member>
-        <member name="M:AIO.fsContext.Set``1(``0@)">
-            <summary>
-            Sets the context object for the given type with the given value.
-            </summary>
-        </member>
-        <member name="M:AIO.fsContext.Has``1">
-            <summary>
-            Returns true if there is a context object for the given type.
-            </summary>
-        </member>
-        <member name="M:AIO.fsContext.Get``1">
-            <summary>
-            Fetches the context object for the given type.
-            </summary>
-        </member>
-        <member name="T:AIO.fsConverter">
-            <summary>
-            The serialization converter allows for customization of the serialization
-            process.
-            </summary>
-        </member>
-        <member name="M:AIO.fsConverter.CanProcess(System.Type@)">
-            <summary>
-            Can this converter serialize and deserialize the given object type?
-            </summary>
-            <param name="type">The given object type.</param>
-            <returns>
-            True if the converter can serialize it, false otherwise.
-            </returns>
-        </member>
-        <member name="T:AIO.fsConverterRegistrar">
-            <summary>
-            This class allows arbitrary code to easily register global converters. To
-            add a converter, simply declare a new field called "Register_*" that
-            stores the type of converter you would like to add. Alternatively, you
-            can do the same with a method called "Register_*"; just add the converter
-            type to the `Converters` list.
-            </summary>
-        </member>
-        <member name="F:AIO.fsConverterRegistrar.Converters">
-            <summary>
-            转化类型列表
-            </summary>
-        </member>
-        <member name="T:AIO.fsCyclicReferenceManager">
-            <summary>
-            轮询引用管理
-            </summary>
-        </member>
-        <member name="M:AIO.fsCyclicReferenceManager.Enter">
-            <summary>
-            进入
-            </summary>
-        </member>
-        <member name="M:AIO.fsCyclicReferenceManager.Exit">
-            <summary>
-            退出
-            </summary>
-        </member>
-        <member name="M:AIO.fsCyclicReferenceManager.GetReferenceObject(System.Int32@)">
-            <summary>
-            获取引用对象
-            </summary>
-        </member>
-        <member name="M:AIO.fsCyclicReferenceManager.AddReferenceWithId(System.Int32@,System.Object@)">
-            <summary>
-            添加引用对象ID
-            </summary>
-        </member>
-        <member name="M:AIO.fsCyclicReferenceManager.GetReferenceId(System.Object@)">
-            <summary>
-            获取引用对象ID
-            </summary>
-        </member>
-        <member name="M:AIO.fsCyclicReferenceManager.IsReference(System.Object@)">
-            <summary>
-            是否为引用
-            </summary>
-        </member>
-        <member name="M:AIO.fsCyclicReferenceManager.MarkSerialized(System.Object@)">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="T:AIO.fsData">
-            <summary>
-            A union type that stores a serialized value. The stored type can be one
-            of six different
-            types: null, boolean, double, Int64, string, Dictionary, or List.
-            </summary>
-        </member>
-        <member name="F:AIO.fsData._value">
-            <summary>
-            The raw value that this serialized data stores. It can be one of six
-            different types; a boolean, a double, Int64, a string, a Dictionary,
-            or a List.
-            </summary>
-        </member>
-        <member name="M:AIO.fsData.ToString">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.fsData.#ctor">
-            <summary>
-            Creates a fsData instance that holds null.
-            </summary>
-        </member>
-        <member name="M:AIO.fsData.#ctor(System.Boolean)">
-            <summary>
-            Creates a fsData instance that holds a boolean.
-            </summary>
-        </member>
-        <member name="M:AIO.fsData.#ctor(System.Double)">
-            <summary>
-            Creates a fsData instance that holds a double.
-            </summary>
-        </member>
-        <member name="M:AIO.fsData.#ctor(System.Int64)">
-            <summary>
-            Creates a new fsData instance that holds an integer.
-            </summary>
-        </member>
-        <member name="M:AIO.fsData.#ctor(System.String)">
-            <summary>
-            Creates a fsData instance that holds a string.
-            </summary>
-        </member>
-        <member name="M:AIO.fsData.#ctor(System.Collections.Generic.Dictionary{System.String,AIO.fsData})">
-            <summary>
-            Creates a fsData instance that holds a dictionary of values.
-            </summary>
-        </member>
-        <member name="M:AIO.fsData.#ctor(System.Collections.Generic.List{AIO.fsData})">
-            <summary>
-            Creates a fsData instance that holds a list of values.
-            </summary>
-        </member>
-        <member name="M:AIO.fsData.CreateDictionary">
-            <summary>
-            Helper method to create a fsData instance that holds a dictionary.
-            </summary>
-        </member>
-        <member name="M:AIO.fsData.CreateList">
-            <summary>
-            Helper method to create a fsData instance that holds a list.
-            </summary>
-        </member>
-        <member name="M:AIO.fsData.CreateList(System.Int32)">
-            <summary>
-            Helper method to create a fsData instance that holds a list with the
-            initial capacity.
-            </summary>
-        </member>
-        <member name="F:AIO.fsData.True">
-            <summary>
-            Ture
-            </summary>
-        </member>
-        <member name="F:AIO.fsData.False">
-            <summary>
-            False
-            </summary>
-        </member>
-        <member name="F:AIO.fsData.Null">
-            <summary>
-            Null
-            </summary>
-        </member>
-        <member name="M:AIO.fsData.BecomeDictionary">
-            <summary>
-            Transforms the internal fsData instance into a dictionary.
-            </summary>
-        </member>
-        <member name="M:AIO.fsData.Clone">
-            <summary>
-            Returns a shallow clone of this data instance.
-            </summary>
-        </member>
-        <member name="P:AIO.fsData.Type">
-            <summary>
-            类型
-            </summary>
-        </member>
-        <member name="P:AIO.fsData.IsNull">
-            <summary>
-            Returns true if this fsData instance maps back to null.
-            </summary>
-        </member>
-        <member name="P:AIO.fsData.IsDouble">
-            <summary>
-            Returns true if this fsData instance maps back to a double.
-            </summary>
-        </member>
-        <member name="P:AIO.fsData.IsInt64">
-            <summary>
-            Returns true if this fsData instance maps back to an Int64.
-            </summary>
-        </member>
-        <member name="P:AIO.fsData.IsBool">
-            <summary>
-            Returns true if this fsData instance maps back to a boolean.
-            </summary>
-        </member>
-        <member name="P:AIO.fsData.IsString">
-            <summary>
-            Returns true if this fsData instance maps back to a string.
-            </summary>
-        </member>
-        <member name="P:AIO.fsData.IsDictionary">
-            <summary>
-            Returns true if this fsData instance maps back to a Dictionary.
-            </summary>
-        </member>
-        <member name="P:AIO.fsData.IsList">
-            <summary>
-            Returns true if this fsData instance maps back to a List.
-            </summary>
-        </member>
-        <member name="P:AIO.fsData.AsDouble">
-            <summary>
-            Casts this fsData to a double. Throws an exception if it is not a
-            double.
-            </summary>
-        </member>
-        <member name="P:AIO.fsData.AsInt64">
-            <summary>
-            Casts this fsData to an Int64. Throws an exception if it is not an
-            Int64.
-            </summary>
-        </member>
-        <member name="P:AIO.fsData.AsBool">
-            <summary>
-            Casts this fsData to a boolean. Throws an exception if it is not a
-            boolean.
-            </summary>
-        </member>
-        <member name="P:AIO.fsData.AsString">
-            <summary>
-            Casts this fsData to a string. Throws an exception if it is not a
-            string.
-            </summary>
-        </member>
-        <member name="P:AIO.fsData.AsDictionary">
-            <summary>
-            Casts this fsData to a Dictionary. Throws an exception if it is not a
-            Dictionary.
-            </summary>
-        </member>
-        <member name="P:AIO.fsData.AsList">
-            <summary>
-            Casts this fsData to a List. Throws an exception if it is not a List.
-            </summary>
-        </member>
-        <member name="M:AIO.fsData.Cast``1">
-            <summary>
-            Internal helper method to cast the underlying storage to the given
-            type or throw a pretty printed exception on failure.
-            </summary>
-        </member>
-        <member name="M:AIO.fsData.Equals(System.Object)">
-            <summary>
-            Determines whether the specified object is equal to the current
-            object.
-            </summary>
-        </member>
-        <member name="M:AIO.fsData.Equals(AIO.fsData)">
-            <summary>
-            Determines whether the specified object is equal to the current
-            object.
-            </summary>
-        </member>
-        <member name="M:AIO.fsData.op_Equality(AIO.fsData,AIO.fsData)">
-            <summary>
-            Returns true iff a == b.
-            </summary>
-        </member>
-        <member name="M:AIO.fsData.op_Inequality(AIO.fsData,AIO.fsData)">
-            <summary>
-            Returns true iff a != b.
-            </summary>
-        </member>
-        <member name="M:AIO.fsData.GetHashCode">
-            <summary>
-            Returns a hash code for this instance.
-            </summary>
-            <returns>
-            A hash code for this instance, suitable for use in hashing algorithms
-            and data structures like a hash table.
-            </returns>
-        </member>
-        <member name="T:AIO.fsDateConverter">
-            <summary>
-            Supports serialization for DateTime, DateTimeOffset, and TimeSpan.
-            </summary>
-        </member>
-        <member name="T:AIO.fsDirectConverter">
-            <summary>
-            The direct converter is similar to a regular converter, except that it
-            targets specifically only one type. This means that it can be used
-            without performance impact when discovering converters. It is strongly
-            recommended that you derive from fsDirectConverter{TModel}.
-            </summary>
-            <remarks>
-            Due to the way that direct converters operate, inheritance is *not*
-            supported. Direct converters will only be used with the exact ModelType
-            object.
-            </remarks>
-        </member>
-        <member name="P:AIO.fsDirectConverter.ModelType">
-            <summary>
-            模块类型
-            </summary>
-        </member>
-        <member name="T:AIO.fsDirectConverter`1">
-            <inheritdoc/>
-        </member>
-        <member name="P:AIO.fsDirectConverter`1.ModelType">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.fsDirectConverter`1.TrySerialize(System.Object@,AIO.fsData@,System.Type@)">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.fsDirectConverter`1.TryDeserialize(AIO.fsData@,System.Object@,System.Type@)">
-            <inheritdoc/>
-        </member>
-        <member name="T:AIO.fsEnumConverter">
-            <summary>
-            Serializes and deserializes enums by their current name.
-            </summary>
-        </member>
-        <member name="M:AIO.fsEnumConverter.ArrayContains``1(System.Collections.Generic.IReadOnlyList{``0},``0)">
-            <summary>
-            Returns true if the given value is contained within the specified
-            array.
-            </summary>
-        </member>
-        <member name="T:AIO.fsGlobalConfig">
-            <summary>
-            Global configuration options.
-            </summary>
-        </member>
-        <member name="F:AIO.fsGlobalConfig.IsCaseSensitive">
-            <summary>
-            Should deserialization be case sensitive? If this is false and the
-            JSON has multiple members with the same keys only separated by case,
-            then this results in undefined behavior.
-            </summary>
-        </member>
-        <member name="F:AIO.fsGlobalConfig.AllowInternalExceptions">
-            <summary>
-            If exceptions are allowed internally, then additional date formats
-            can be deserialized. Note that the Full Serializer public API will
-            *not* throw exceptions with this enabled; errors will still be
-            returned in a fsResult instance.
-            </summary>
-        </member>
-        <member name="F:AIO.fsGlobalConfig.InternalFieldPrefix">
-            <summary>
-            This string will be used to prefix fields used internally by
-            FullSerializer.
-            </summary>
-        </member>
-        <member name="T:AIO.fsGuidConverter">
-            <summary>
-            Serializes and deserializes guids.
-            </summary>
-        </member>
-        <member name="M:AIO.fsGuidConverter.CanProcess(System.Type@)">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.fsGuidConverter.RequestCycleSupport(System.Type@)">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.fsGuidConverter.RequestInheritanceSupport(System.Type@)">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.fsGuidConverter.TrySerialize(System.Object@,AIO.fsData@,System.Type@)">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.fsGuidConverter.TryDeserialize(AIO.fsData@,System.Object@,System.Type@)">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.fsGuidConverter.CreateInstance(AIO.fsData@,System.Type@)">
-            <inheritdoc/>
-        </member>
-        <member name="T:AIO.fsIEnumerableConverter">
-            <summary>
-            Provides serialization support for anything which extends from
-            `IEnumerable` and has an `Add` method.
-            </summary>
-        </member>
-        <member name="M:AIO.fsIEnumerableConverter.GetElementType(System.Type)">
-            <summary>
-            Fetches the element type for objects inside of the collection.
-            </summary>
-        </member>
-        <member name="T:AIO.fsJsonParser">
-            <summary>
-            A simple recursive descent parser for JSON.
-            </summary>
-        </member>
-        <member name="M:AIO.fsJsonParser.SkipSpace">
-            <summary>
-            Skips input such that Character() will return a non-whitespace
-            character
-            </summary>
-        </member>
-        <member name="M:AIO.fsJsonParser.TryParseNumber(AIO.fsData@)">
-            <summary>
-            Parses numbers that follow the regular expression [-+](\d+|\d*\.\d*)
-            </summary>
-        </member>
-        <member name="M:AIO.fsJsonParser.TryParseString(System.String@)">
-            <summary>
-            Parses a string
-            </summary>
-        </member>
-        <member name="M:AIO.fsJsonParser.TryParseArray(AIO.fsData@)">
-            <summary>
-            Parses an array
-            </summary>
-        </member>
-        <member name="M:AIO.fsJsonParser.Parse(System.String@,AIO.fsData@)">
-            <summary>
-            Parses the specified input. Returns a failure state if parsing
-            failed.
-            </summary>
-            <param name="input">The input to parse.</param>
-            <param name="data">
-            The parsed data. This is undefined if parsing fails.
-            </param>
-            <returns>The parsed input.</returns>
-        </member>
-        <member name="M:AIO.fsJsonParser.Parse(System.String@)">
-            <summary>
-            Helper method for Parse that does not allow the error information to
-            be recovered.
-            </summary>
-        </member>
-        <member name="T:AIO.fsJsonPrinter">
-            <summary>
-            Json 输出
-            </summary>
-        </member>
-        <member name="M:AIO.fsJsonPrinter.InsertSpacing(System.IO.TextWriter,System.Int32)">
-            <summary>
-            Inserts the given number of indents into the builder.
-            </summary>
-        </member>
-        <member name="M:AIO.fsJsonPrinter.EscapeString(System.String)">
-            <summary>
-            Escapes a string.
-            </summary>
-        </member>
-        <member name="M:AIO.fsJsonPrinter.BuildPrettyString(AIO.fsData,System.IO.TextWriter,System.Int32)">
-            <summary>
-            Formats this data into the given builder.
-            </summary>
-        </member>
-        <member name="M:AIO.fsJsonPrinter.PrettyJson(AIO.fsData,System.IO.TextWriter)">
-            <summary>
-            Writes the pretty JSON output data to the given stream.
-            </summary>
-            <param name="data">The data to print.</param>
-            <param name="outputStream">Where to write the printed data.</param>
-        </member>
-        <member name="M:AIO.fsJsonPrinter.PrettyJson(AIO.fsData)">
-            <summary>
-            Returns the data in a pretty printed JSON format.
-            </summary>
-        </member>
-        <member name="M:AIO.fsJsonPrinter.CompressedJson(AIO.fsData,System.IO.StreamWriter)">
-            <summary>
-            Writes the compressed JSON output data to the given stream.
-            </summary>
-            <param name="data">The data to print.</param>
-            <param name="outputStream">Where to write the printed data.</param>
-        </member>
-        <member name="M:AIO.fsJsonPrinter.CompressedJson(AIO.fsData)">
-            <summary>
-            Returns the data in a relatively compressed JSON format.
-            </summary>
-        </member>
-        <member name="M:AIO.fsJsonPrinter.ConvertDoubleToString(System.Double)">
-            <summary>
-            Utility method that converts a double to a string.
-            </summary>
-        </member>
-        <member name="T:AIO.fsMetaProperty">
-            <summary>
-            A property or field on a MetaType. This unifies the FieldInfo and
-            PropertyInfo classes.
-            </summary>
-        </member>
-        <member name="F:AIO.fsMetaProperty._memberInfo">
-            <summary>
-            Internal handle to the reflected member.
-            </summary>
-        </member>
-        <member name="P:AIO.fsMetaProperty.StorageType">
-            <summary>
-            The type of value that is stored inside of the property. For example,
-            for an int field, StorageType will be typeof(int).
-            </summary>
-        </member>
-        <member name="P:AIO.fsMetaProperty.OverrideConverterType">
-            <summary>
-            A custom fsBaseConverter instance to use for this field/property, if
-            requested. This will be null if the default converter selection
-            algorithm should be used. This is specified using the [fsObject]
-            annotation with the Converter field.
-            </summary>
-        </member>
-        <member name="P:AIO.fsMetaProperty.CanRead">
-            <summary>
-            Can this property be read?
-            </summary>
-        </member>
-        <member name="P:AIO.fsMetaProperty.CanWrite">
-            <summary>
-            Can this property be written to?
-            </summary>
-        </member>
-        <member name="P:AIO.fsMetaProperty.JsonName">
-            <summary>
-            The serialized name of the property, as it should appear in JSON.
-            </summary>
-        </member>
-        <member name="P:AIO.fsMetaProperty.MemberName">
-            <summary>
-            The name of the actual member.
-            </summary>
-        </member>
-        <member name="P:AIO.fsMetaProperty.IsPublic">
-            <summary>
-            Is this member public?
-            </summary>
-        </member>
-        <member name="P:AIO.fsMetaProperty.IsReadOnly">
-            <summary>
-            Is this type readonly? We can modify readonly properties using
-            reflection, but not using generated C#.
-            </summary>
-        </member>
-        <member name="M:AIO.fsMetaProperty.Write(System.Object@,System.Object@)">
-            <summary>
-            Writes a value to the property that this MetaProperty represents,
-            using given object instance as the context.
-            </summary>
-        </member>
-        <member name="M:AIO.fsMetaProperty.Read(System.Object@)">
-            <summary>
-            Reads a value from the property that this MetaProperty represents,
-            using the given object instance as the context.
-            </summary>
-        </member>
-        <member name="T:AIO.fsMetaType">
-            <summary>
-            MetaType contains metadata about a type. This is used by the reflection
-            serializer.
-            </summary>
-        </member>
-        <member name="P:AIO.fsMetaType.HasDefaultConstructor">
-            <summary>
-            Returns true if the type represented by this metadata contains a
-            default constructor.
-            </summary>
-        </member>
-        <member name="M:AIO.fsMetaType.EmitAotData">
-            <summary>
-            Attempt to emit an AOT compiled direct converter for this type.
-            </summary>
-            <returns>True if AOT data was emitted, false otherwise.</returns>
-        </member>
-        <member name="M:AIO.fsMetaType.CreateInstance">
-            <summary>
-            Creates a new instance of the type that this metadata points back to.
-            If this type has a default constructor, then Activator.CreateInstance
-            will be used to construct the type (or Array.CreateInstance if it an
-            array). Otherwise, an uninitialized object created via
-            FormatterServices.GetSafeUninitializedObject is used to construct the
-            instance.
-            </summary>
-        </member>
-        <member name="M:AIO.fsMetaType.ClearCache">
-            <summary>
-            Clears out the cached type results. Useful if some prior assumptions
-            become invalid, ie, the default member serialization mode.
-            </summary>
-        </member>
-        <member name="M:AIO.fsMetaType.CanSerializeProperty(AIO.fsConfig,System.Reflection.PropertyInfo,System.Reflection.MemberInfo[],System.Boolean)">
-            <summary>
-            Returns if the given property should be serialized.
-            </summary>
-            <param name="annotationFreeValue">
-            Should a property without any annotations be serialized?
-            </param>
-        </member>
-        <member name="T:AIO.fsNullableConverter">
-            <summary>
-            The reflected converter will properly serialize nullable types. However,
-            we do it here instead as we can emit less serialization data.
-            </summary>
-        </member>
-        <member name="T:AIO.fsObjectProcessor">
-            <summary>
-                <para>
-                Enables injecting code before/after an object has been serialized. This
-                is most useful if you want to run the default serialization process but
-                apply a pre/post processing step.
-                </para>
-                <para>
-                Multiple object processors can be active at the same time. When running
-                they are called in a "nested" fashion - if we have processor1 and
-                process2 added to the serializer in that order (p1 then p2), then the
-                execution order will be p1#Before p2#Before /serialization/ p2#After
-                p1#After.
-                </para>
-            </summary>
-        </member>
-        <member name="M:AIO.fsObjectProcessor.CanProcess(System.Type@)">
-            <summary>
-            Is the processor interested in objects of the given type?
-            </summary>
-            <param name="type">The given type.</param>
-            <returns>
-            True if the processor should be applied, false otherwise.
-            </returns>
-        </member>
-        <member name="M:AIO.fsObjectProcessor.OnBeforeSerialize(System.Type@,System.Object@)">
-            <summary>
-            Called before serialization.
-            </summary>
-            <param name="storageType">
-            The field/property type that is storing the instance.
-            </param>
-            <param name="instance">The type of the instance.</param>
-        </member>
-        <member name="M:AIO.fsObjectProcessor.OnAfterSerialize(System.Type@,System.Object@,AIO.fsData@)">
-            <summary>
-            Called after serialization.
-            </summary>
-            <param name="storageType">
-            The field/property type that is storing the instance.
-            </param>
-            <param name="instance">The type of the instance.</param>
-            <param name="data">The data that was serialized.</param>
-        </member>
-        <member name="M:AIO.fsObjectProcessor.OnBeforeDeserialize(System.Type@,AIO.fsData@)">
-            <summary>
-            Called before deserialization.
-            </summary>
-            <param name="storageType">
-            The field/property type that is storing the instance.
-            </param>
-            <param name="data">
-            The data that will be used for deserialization.
-            </param>
-        </member>
-        <member name="M:AIO.fsObjectProcessor.OnBeforeDeserializeAfterInstanceCreation(System.Type@,System.Object@,AIO.fsData@)">
-            <summary>
-            Called before deserialization has begun but *after* the object
-            instance has been created. This will get invoked even if the user
-            passed in an existing instance.
-            </summary>
-            <remarks>
-            **IMPORTANT**: The actual instance that gets passed here is *not*
-            guaranteed to be an a subtype of storageType, since the value for
-            instance is whatever the active converter returned for
-            CreateInstance() - ie, some converters will return dummy types in
-            CreateInstance() if instance creation cannot be separated from
-            deserialization (ie, KeyValuePair).
-            </remarks>
-            <param name="storageType">
-            The field/property type that is storing the instance.
-            </param>
-            <param name="instance">
-            The created object instance. No deserialization has been applied to
-            it.
-            </param>
-            <param name="data">
-            The data that will be used for deserialization.
-            </param>
-        </member>
-        <member name="M:AIO.fsObjectProcessor.OnAfterDeserialize(System.Type@,System.Object@)">
-            <summary>
-            Called after deserialization.
-            </summary>
-            <param name="storageType">
-            The field/property type that is storing the instance.
-            </param>
-            <param name="instance">The type of the instance.</param>
-        </member>
-        <member name="T:AIO.fsOption`1">
-            <summary>
-            简单选项类型。这类似于可空类型。
-            </summary>
-        </member>
-        <member name="P:AIO.fsOption`1.HasValue">
-            <summary>
-            是否存在值
-            </summary>
-        </member>
-        <member name="P:AIO.fsOption`1.IsEmpty">
-            <summary>
-            是否为NULL
-            </summary>
-        </member>
-        <member name="P:AIO.fsOption`1.Value">
-            <summary>
-            值
-            </summary>
-        </member>
-        <member name="M:AIO.fsOption`1.#ctor(`0@)">
-            <summary>
-            可选类型
-            </summary>
-        </member>
-        <member name="F:AIO.fsOption`1.Empty">
-            <summary>
-            空
-            </summary>
-        </member>
-        <member name="T:AIO.fsOption">
-            <summary>
-            可选
-            </summary>
-        </member>
-        <member name="M:AIO.fsOption.Just``1(``0@)">
-            <summary>
-            正确的
-            </summary>
-        </member>
-        <member name="T:AIO.fsPortableReflection">
-            <summary>
-            This wraps reflection types so that it is portable across different Unity
-            runtimes.
-            </summary>
-        </member>
-        <member name="F:AIO.fsPortableReflection.EmptyTypes">
-            <summary>
-            空类型数组
-            </summary>
-        </member>
-        <member name="M:AIO.fsPortableReflection.HasAttribute``1(System.Reflection.MemberInfo@)">
-            <summary>
-            Returns true if the given attribute is defined on the given element.
-            </summary>
-        </member>
-        <member name="M:AIO.fsPortableReflection.HasAttribute``1(System.Reflection.MemberInfo@,System.Boolean@)">
-            <summary>
-            Returns true if the given attribute is defined on the given element.
-            </summary>
-        </member>
-        <member name="M:AIO.fsPortableReflection.HasAttribute(System.Reflection.MemberInfo@,System.Type@)">
-            <summary>
-            Returns true if the given attribute is defined on the given element.
-            </summary>
-        </member>
-        <member name="M:AIO.fsPortableReflection.HasAttribute(System.Reflection.MemberInfo@,System.Type@,System.Boolean@)">
-            <summary>
-            Returns true if the given attribute is defined on the given element.
-            </summary>
-        </member>
-        <member name="M:AIO.fsPortableReflection.GetAttribute(System.Reflection.MemberInfo@,System.Type@,System.Boolean@)">
-            <summary>
-            Fetches the given attribute from the given MemberInfo. This method
-            applies caching and is allocation free (after caching has been
-            performed).
-            </summary>
-            <param name="element">
-            The MemberInfo the get the attribute from.
-            </param>
-            <param name="attributeType">The type of attribute to fetch.</param>
-            <param name="shouldCache"></param>
-            <returns>The attribute or null.</returns>
-        </member>
-        <member name="M:AIO.fsPortableReflection.GetAttribute``1(System.Reflection.MemberInfo@,System.Boolean@)">
-            <summary>
-            Fetches the given attribute from the given MemberInfo.
-            </summary>
-            <typeparam name="TAttribute">
-            The type of attribute to fetch.
-            </typeparam>
-            <param name="element">
-            The MemberInfo to get the attribute from.
-            </param>
-            <param name="shouldCache">
-            Should this computation be cached? If this is the only time it will
-            ever be done, don't bother caching.
-            </param>
-            <returns>The attribute or null.</returns>
-        </member>
-        <member name="M:AIO.fsPortableReflection.GetAttribute``1(System.Reflection.MemberInfo@)">
-            <summary>
-            Fetches the given attribute from the given MemberInfo.
-            </summary>
-            <typeparam name="TAttribute">
-            The type of attribute to fetch.
-            </typeparam>
-            <param name="element">
-            The MemberInfo to get the attribute from.
-            </param>
-            <param name="shouldCache">
-            Should this computation be cached? If this is the only time it will
-            ever be done, don't bother caching.
-            </param>
-            <returns>The attribute or null.</returns>
-        </member>
-        <member name="M:AIO.fsPortableReflection.AsMemberInfo(System.Type)">
-            <summary>
-            转化为成员信息
-            </summary>
-        </member>
-        <member name="M:AIO.fsPortableReflection.IsType(System.Reflection.MemberInfo)">
-            <summary>
-            判断是否为类型
-            </summary>
-        </member>
-        <member name="T:AIO.fsReflectedConverter">
-            <summary>
-            反射转换器
-            </summary>
-        </member>
-        <member name="M:AIO.fsReflectionUtility.GetInterface(System.Type,System.Type)">
-            <summary>
-            Searches for a particular implementation of the given interface type
-            inside of the type. This is particularly useful if the interface type
-            is an open type, ie, typeof(IFace{}), because this method will then
-            return IFace{} but with appropriate type parameters inserted.
-            </summary>
-            <param name="type">The base type to search for interface</param>
-            <param name="interfaceType">
-            The interface type to search for. Can be an open generic type.
-            </param>
-            <returns>
-            The actual interface type that the type contains, or null if there is
-            no implementation of the given interfaceType on type.
-            </returns>
-        </member>
-        <member name="T:AIO.fsResult">
-            <summary>
-            The result of some sort of operation. A result is either successful or
-            not, but if it is successful then there may be a set of warnings/messages
-            associated with it. These warnings describe the performed error recovery
-            operations.
-            </summary>
-        </member>
-        <member name="F:AIO.fsResult._success">
-            <summary>
-            Is this result successful?
-            </summary>
-            <remarks>
-            This is intentionally a `success` state so that when the object is
-            default constructed it defaults to a failure state.
-            </remarks>
-        </member>
-        <member name="F:AIO.fsResult._messages">
-            <summary>
-            The warning or error messages associated with the result. This may be
-            null if there are no messages.
-            </summary>
-        </member>
-        <member name="M:AIO.fsResult.AddMessage(System.String)">
-            <summary>
-            Adds a new message to this result.
-            </summary>
-            <param name="message"></param>
-        </member>
-        <member name="M:AIO.fsResult.AddMessages(AIO.fsResult)">
-            <summary>
-            Adds only the messages from the other result into this result,
-            ignoring the success/failure status of the other result.
-            </summary>
-        </member>
-        <member name="M:AIO.fsResult.Merge(AIO.fsResult)">
-            <summary>
-            Merges the other result into this one. If the other result failed,
-            then this one too will have failed.
-            </summary>
-            <remarks>
-            Note that you can use += instead of this method so that you don't
-            bury the actual method call that is generating the other fsResult.
-            </remarks>
-        </member>
-        <member name="F:AIO.fsResult.Success">
-            <summary>
-            A successful result.
-            </summary>
-        </member>
-        <member name="M:AIO.fsResult.Warn(System.String)">
-            <summary>
-            Create a result that is successful but contains the given warning
-            message.
-            </summary>
-        </member>
-        <member name="M:AIO.fsResult.Fail(System.String)">
-            <summary>
-            Create a result that failed.
-            </summary>
-        </member>
-        <member name="M:AIO.fsResult.op_Addition(AIO.fsResult,AIO.fsResult)">
-            <summary>
-            Only use this as +=!
-            </summary>
-        </member>
-        <member name="P:AIO.fsResult.Failed">
-            <summary>
-            Did this result fail? If so, you can see the reasons why in
-            `RawMessages`.
-            </summary>
-        </member>
-        <member name="P:AIO.fsResult.Succeeded">
-            <summary>
-            Was the result a success? Note that even successful operations may
-            have warning messages (`RawMessages`) associated with them.
-            </summary>
-        </member>
-        <member name="P:AIO.fsResult.HasWarnings">
-            <summary>
-            Does this result have any warnings? This says nothing about if it
-            failed or succeeded, just if it has warning messages associated with
-            it.
-            </summary>
-        </member>
-        <member name="M:AIO.fsResult.AssertSuccess">
-            <summary>
-            A simply utility method that will assert that this result is
-            successful. If it is not, then an exception is thrown.
-            </summary>
-        </member>
-        <member name="M:AIO.fsResult.AssertSuccessWithoutWarnings">
-            <summary>
-            A simple utility method that will assert that this result is
-            successful and that there are no warning messages. This throws an
-            exception if either of those asserts are false.
-            </summary>
-        </member>
-        <member name="P:AIO.fsResult.AsException">
-            <summary>
-            Utility method to convert the result to an exception. This method is
-            only defined is `Failed` returns true.
-            </summary>
-        </member>
-        <member name="P:AIO.fsResult.RawMessages">
-            <summary>
-            原始信息
-            </summary>
-        </member>
-        <member name="P:AIO.fsResult.FormattedMessages">
-            <summary>
-            格式化信息
-            </summary>
-        </member>
-        <member name="F:AIO.fsSerializer._availableConverters">
-            <summary>
-            Converters that can be used for type registration.
-            </summary>
-        </member>
-        <member name="F:AIO.fsSerializer._availableDirectConverters">
-            <summary>
-            Direct converters (optimized _converters). We use these so we don't
-            have to perform a scan through every item in _converters and can
-            instead just do an O(1) lookup. This is potentially important to perf
-            when there are a ton of direct converters.
-            </summary>
-        </member>
-        <member name="F:AIO.fsSerializer._processors">
-            <summary>
-            Processors that are available.
-            </summary>
-        </member>
-        <member name="F:AIO.fsSerializer._references">
-            <summary>
-            Reference manager for cycle detection.
-            </summary>
-        </member>
-        <member name="F:AIO.fsSerializer._abstractTypeRemap">
-            <summary>
-            Allow the user to provide default storage types for interfaces and abstract
-            classes. For example, a model could have IList{int} as a parameter, but the
-            serialization data does not specify a List{int} type. A IList{} -> List{}
-            remapping will cause List{} to be used as the default storage type. see
-            https://github.com/jacobdufault/fullserializer/issues/120 for additional
-            context.
-            </summary>
-        </member>
-        <member name="F:AIO.fsSerializer._cachedConverterTypeInstances">
-            <summary>
-            Converter type to converter instance lookup table. This
-            could likely be stored inside
-            from serialized type to converter.
-            </summary>
-        </member>
-        <member name="F:AIO.fsSerializer._cachedConverters">
-            <summary>
-            A cache from type to it's converter.
-            </summary>
-        </member>
-        <member name="F:AIO.fsSerializer._cachedProcessors">
-            <summary>
-            A cache from type to the set of processors that are interested in it.
-            </summary>
-        </member>
-        <member name="F:AIO.fsSerializer.Context">
-            <summary>
-            A context object that fsConverters can use to customize how they
-            operate.
-            </summary>
-        </member>
-        <member name="F:AIO.fsSerializer.Config">
-            <summary>
-            Configuration options. Also see fsGlobalConfig.
-            </summary>
-        </member>
-        <member name="M:AIO.fsSerializer.AddProcessor(AIO.fsObjectProcessor)">
-            <summary>
-            Add a new processor to the serializer. Multiple processors can run at
-            the same time in the same order they were added in.
-            </summary>
-            <param name="processor">The processor to add.</param>
-        </member>
-        <member name="M:AIO.fsSerializer.RemoveProcessor``1">
-            <summary>
-            Remove all processors which derive from TProcessor.
-            </summary>
-        </member>
-        <member name="M:AIO.fsSerializer.SetDefaultStorageType(System.Type,System.Type)">
-            <summary>
-            Provide a default storage type for the given abstract or interface type. If
-            a type is deserialized which contains an interface/abstract field type and a
-            mapping is provided, the mapped type will be used by default. For example,
-            IList{T} => List{T} or IDictionary{TKey, TValue} => Dictionary{TKey, TValue}.
-            </summary>
-        </member>
-        <member name="M:AIO.fsSerializer.GetProcessors(System.Type)">
-            <summary>
-            Fetches all of the processors for the given type.
-            </summary>
-        </member>
-        <member name="M:AIO.fsSerializer.AddConverter(AIO.fsBaseConverter)">
-            <summary>
-            Adds a new converter that can be used to customize how an object is
-            serialized and deserialized.
-            </summary>
-        </member>
-        <member name="M:AIO.fsSerializer.GetConverter(System.Type,System.Type)">
-            <summary>
-            Fetches a converter that can serialize/deserialize the given type.
-            </summary>
-        </member>
-        <member name="M:AIO.fsSerializer.TrySerialize``1(``0,AIO.fsData@)">
-            <summary>
-            Helper method that simply forwards the call to
-            TrySerialize(typeof(T), instance, out data);
-            </summary>
-        </member>
-        <member name="M:AIO.fsSerializer.TryDeserialize``1(AIO.fsData,``0@)">
-            <summary>
-            Generic wrapper around TryDeserialize that simply forwards the call.
-            </summary>
-        </member>
-        <member name="M:AIO.fsSerializer.TrySerialize(System.Type,System.Object,AIO.fsData@)">
-            <summary>
-            Serialize the given value.
-            </summary>
-            <param name="storageType">
-            The type of field/property that stores the object instance. This is
-            important particularly for inheritance, as a field storing an
-            IInterface instance should have type information included.
-            </param>
-            <param name="instance">
-            The actual object instance to serialize.
-            </param>
-            <param name="data">The serialized state of the object.</param>
-            <returns>If serialization was successful.</returns>
-        </member>
-        <member name="M:AIO.fsSerializer.TrySerialize(System.Type,System.Type,System.Object,AIO.fsData@)">
-            <summary>
-            Serialize the given value.
-            </summary>
-            <param name="storageType">
-            The type of field/property that stores the object instance. This is
-            important particularly for inheritance, as a field storing an
-            IInterface instance should have type information included.
-            </param>
-            <param name="overrideConverterType">
-            An fsBaseConverter derived type that will be used to serialize the
-            object instead of the converter found via the normal discovery
-            mechanisms.
-            </param>
-            <param name="instance">
-            The actual object instance to serialize.
-            </param>
-            <param name="data">The serialized state of the object.</param>
-            <returns>If serialization was successful.</returns>
-        </member>
-        <member name="M:AIO.fsSerializer.TryDeserialize(AIO.fsData,System.Type,System.Object@)">
-            <summary>
-            Attempts to deserialize a value from a serialized state.
-            </summary>
-        </member>
-        <member name="M:AIO.fsSerializer.TryDeserialize(AIO.fsData,System.Type,System.Type,System.Object@)">
-            <summary>
-            Attempts to deserialize a value from a serialized state.
-            </summary>
-        </member>
-        <member name="M:AIO.fsSerializer.EnsureDictionary(AIO.fsData)">
-            <summary>
-            Ensures that the data is a dictionary. If it is not, then it is
-            wrapped inside of one.
-            </summary>
-        </member>
-        <member name="T:AIO.fsSerializer.fsLazyCycleDefinitionWriter">
-            <summary>
-            This manages instance writing so that we do not write unnecessary $id
-            fields. We only need to write out an $id field when there is a
-            corresponding $ref field. This is able to write $id references lazily
-            because the fsData instance is not actually written out to text until
-            we have entirely finished serializing it.
-            </summary>
-        </member>
-        <member name="M:AIO.fsSerializer.IsReservedKeyword(System.String)">
-            <summary>
-            Returns true if the given key is a special keyword that full
-            serializer uses to add additional metadata on top of the emitted
-            JSON.
-            </summary>
-        </member>
-        <member name="F:AIO.fsSerializer.Key_ObjectReference">
-            <summary>
-            This is an object reference in part of a cyclic graph.
-            </summary>
-        </member>
-        <member name="F:AIO.fsSerializer.Key_ObjectDefinition">
-            <summary>
-            This is an object definition, as part of a cyclic graph.
-            </summary>
-        </member>
-        <member name="F:AIO.fsSerializer.Key_InstanceType">
-            <summary>
-            This specifies the actual type of an object (the instance type was
-            different from the field type).
-            </summary>
-        </member>
-        <member name="F:AIO.fsSerializer.Key_Version">
-            <summary>
-            The version string for the serialized data.
-            </summary>
-        </member>
-        <member name="F:AIO.fsSerializer.Key_Content">
-            <summary>
-            If we have to add metadata but the original serialized state was not
-            a dictionary, then this will contain the original data.
-            </summary>
-        </member>
-        <member name="M:AIO.fsSerializer.StripDeserializationMetadata(AIO.fsData@)">
-            <summary>
-            Strips all deserialization metadata from the object, like $type and
-            $content fields.
-            </summary>
-            <remarks>
-            After making this call, you will *not* be able to deserialize the
-            same object instance. The metadata is strictly necessary for
-            deserialization!
-            </remarks>
-        </member>
-        <member name="M:AIO.fsSerializer.ConvertLegacyData(AIO.fsData@)">
-            <summary>
-            This function converts legacy serialization data into the new format,
-            so that the import process can be unified and ignore the old format.
-            </summary>
-        </member>
-        <member name="T:AIO.fsVersionedType">
-            <summary>
-            版本类型
-            </summary>
-        </member>
-        <member name="F:AIO.fsVersionedType.Ancestors">
-            <summary>
-            The direct ancestors that this type can import.
-            </summary>
-        </member>
-        <member name="F:AIO.fsVersionedType.VersionString">
-            <summary>
-            The identifying string that is unique among all ancestors.
-            </summary>
-        </member>
-        <member name="F:AIO.fsVersionedType.ModelType">
-            <summary>
-            The modeling type that this versioned type maps back to.
-            </summary>
-        </member>
-        <member name="M:AIO.fsVersionedType.Migrate(System.Object)">
-            <summary>
-            Migrate from an instance of an ancestor.
-            </summary>
-        </member>
-        <member name="M:AIO.fsVersionedType.ToString">
-            <summary>
-            内容转化为字符串
-            </summary>
-        </member>
-        <member name="M:AIO.fsVersionedType.op_Equality(AIO.fsVersionedType,AIO.fsVersionedType)">
-            <summary>
-            相等
-            </summary>
-        </member>
-        <member name="M:AIO.fsVersionedType.op_Inequality(AIO.fsVersionedType,AIO.fsVersionedType)">
-            <summary>
-            不相等
-            </summary>
-        </member>
-        <member name="M:AIO.fsVersionedType.Equals(System.Object)">
-            <summary>
-            判断是否相等
-            </summary>
-        </member>
-        <member name="M:AIO.fsVersionedType.GetHashCode">
-            <summary>
-            获取哈希值
-            </summary>
-        </member>
-        <member name="T:AIO.fsVersionManager">
-            <summary>
-            版本管理
-            </summary>
-        </member>
-        <member name="M:AIO.fsVersionManager.GetVersionImportPath(System.String@,AIO.fsVersionedType@,System.Collections.Generic.List{AIO.fsVersionedType}@)">
-            <summary>
-            导入路径
-            </summary>
-        </member>
-        <member name="M:AIO.fsVersionManager.VerifyConstructors(AIO.fsVersionedType@)">
-            <summary>
-            Verifies that the given type has constructors to migrate from all
-            ancestor types.
-            </summary>
-        </member>
-        <member name="M:AIO.fsVersionManager.VerifyUniqueVersionStrings(AIO.fsVersionedType@)">
-            <summary>
-            Verifies that the given version graph contains only unique versions.
-            </summary>
-        </member>
-        <member name="T:AIO.fsWeakReferenceConverter">
-            <summary>
-            Serializes and deserializes WeakReferences.
-            </summary>
-        </member>
-        <member name="T:AIO.LooseAssemblyName">
-            <summary>
-            分散程序集名称
-            </summary>
-        </member>
-        <member name="F:AIO.LooseAssemblyName.Name">
-            <summary>
-            名称
-            </summary>
-        </member>
-        <member name="M:AIO.LooseAssemblyName.#ctor(System.String)">
-            <summary>
-            分散程序集名称
-            </summary>
-        </member>
-        <member name="M:AIO.LooseAssemblyName.Equals(System.Object)">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.LooseAssemblyName.GetHashCode">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.LooseAssemblyName.op_Equality(AIO.LooseAssemblyName,AIO.LooseAssemblyName)">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.LooseAssemblyName.op_Inequality(AIO.LooseAssemblyName,AIO.LooseAssemblyName)">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.LooseAssemblyName.op_Implicit(System.String)~AIO.LooseAssemblyName">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.LooseAssemblyName.op_Implicit(AIO.LooseAssemblyName)~System.String">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.LooseAssemblyName.op_Explicit(System.Reflection.AssemblyName)~AIO.LooseAssemblyName">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.LooseAssemblyName.ToString">
-            <inheritdoc/>
-        </member>
-        <member name="T:AIO.LooseAssemblyNameConverter">
-            <inheritdoc/>
-        </member>
-        <member name="P:AIO.LooseAssemblyNameConverter.ModelType">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.LooseAssemblyNameConverter.CreateInstance(AIO.fsData@,System.Type@)">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.LooseAssemblyNameConverter.TrySerialize(System.Object@,AIO.fsData@,System.Type@)">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.LooseAssemblyNameConverter.TryDeserialize(AIO.fsData@,System.Object@,System.Type@)">
-            <inheritdoc/>
-        </member>
-        <member name="T:AIO.Namespace">
-            <summary>
-            命名空间
-            </summary>
-        </member>
-        <member name="P:AIO.Namespace.Root">
-            <summary>
-            根节点命名空间
-            </summary>
-        </member>
-        <member name="P:AIO.Namespace.Parent">
-            <summary>
-            父命名空间
-            </summary>
-        </member>
-        <member name="P:AIO.Namespace.FullName">
-            <summary>
-            完整命名空间
-            </summary>
-        </member>
-        <member name="P:AIO.Namespace.Name">
-            <summary>
-            名称
-            </summary>
-        </member>
-        <member name="P:AIO.Namespace.IsRoot">
-            <summary>
-            是否为根节点
-            </summary>
-        </member>
-        <member name="P:AIO.Namespace.IsGlobal">
-            <summary>
-            是否为全局
-            </summary>
-        </member>
-        <member name="P:AIO.Namespace.Ancestors">
-            <summary>
-            获取所有父类命名空间
-            </summary>
-        </member>
-        <member name="M:AIO.Namespace.AndAncestors">
-            <summary>
-            获取所有父类命名空间
-            </summary>
-        </member>
-        <member name="M:AIO.Namespace.GetHashCode">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.Namespace.ToString">
-            <inheritdoc/>
-        </member>
-        <member name="P:AIO.Namespace.Global">
-            <summary>
-            全局命名空间
-            </summary>
-        </member>
-        <member name="M:AIO.Namespace.FromFullName(System.String)">
-            <summary>
-            转化为完整命名空间
-            </summary>
-        </member>
-        <member name="M:AIO.Namespace.Equals(System.Object)">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.Namespace.op_Implicit(System.String@)~AIO.Namespace">
-            <summary>
-            隐式转换
-            </summary>
-        </member>
-        <member name="M:AIO.Namespace.op_Implicit(AIO.Namespace@)~System.String">
-            <summary>
-            隐式转换
-            </summary>
-        </member>
-        <member name="M:AIO.Namespace.op_Equality(AIO.Namespace@,AIO.Namespace@)">
-            <summary>
-            等于
-            </summary>
-        </member>
-        <member name="M:AIO.Namespace.op_Inequality(AIO.Namespace@,AIO.Namespace@)">
-            <summary>
-            不等于
-            </summary>
-        </member>
-        <member name="M:AIO.Namespace.Collection.TryGetValue(System.String,AIO.Namespace@)">
-            <inheritdoc/>
-        </member>
-        <member name="T:AIO.NamespaceConverter">
-            <inheritdoc/>
-        </member>
-        <member name="P:AIO.NamespaceConverter.ModelType">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.NamespaceConverter.CreateInstance(AIO.fsData@,System.Type@)">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.NamespaceConverter.TrySerialize(System.Object@,AIO.fsData@,System.Type@)">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.NamespaceConverter.TryDeserialize(AIO.fsData@,System.Object@,System.Type@)">
-            <inheritdoc/>
-        </member>
-        <member name="T:AIO.Buffer`1">
-            <summary>
-            缓冲流
-            </summary>
-            <summary>
-            接口
-            </summary>
-        </member>
-        <member name="F:AIO.Buffer`1.CAPACITY">
-            <summary>
-            默认容量:32B = 256bit
-            </summary>
-        </member>
-        <member name="F:AIO.Buffer`1.MAX_CAPACITY">
-            <summary>
-            最大缓存:4M
-            </summary>
-        </member>
-        <member name="P:AIO.Buffer`1.Arrays">
-            <summary>
-            数据缓存
-            </summary>
-        </member>
-        <member name="F:AIO.Buffer`1.WriteIndex">
-            <summary>
-            当前写入位置
-            </summary>
-        </member>
-        <member name="F:AIO.Buffer`1.ReadIndex">
-            <summary>
-            当前读取位置
-            </summary>
-        </member>
-        <member name="M:AIO.Buffer`1.#ctor(System.Int32)">
-            <summary>
-            构建一个指定容量的Buffer
-            </summary>
-        </member>
-        <member name="M:AIO.Buffer`1.#ctor(`0[])">
-            <summary>
-            构建一个指定数据的ByteBuffer
-            </summary>
-        </member>
-        <member name="P:AIO.Buffer`1.WriteOffset">
-            <summary>
-            缓存写入进度: 当前首位
-            </summary>
-        </member>
-        <member name="P:AIO.Buffer`1.ReadOffset">
-            <summary>
-            缓存写入进度: 当前读取游标下标
-            </summary>
-        </member>
-        <member name="P:AIO.Buffer`1.Count">
-            <summary> 
-            返回数据可读取长度
-            </summary>
-        </member>
-        <member name="P:AIO.Buffer`1.Capacity">
-            <summary> 
-            数据缓存:容量
-            </summary>
-        </member>
-        <member name="M:AIO.Buffer`1.Clear">
-            <summary> 
-            清空
-            </summary>
-        </member>
-        <member name="M:AIO.Buffer`1.ToArray">
-            <summary> 
-            获取有效字节数组
-            </summary>
-        </member>
-        <member name="M:AIO.Buffer`1.Write(AIO.Buffer{`0}@)">
-            <summary> 
-            将指定字节缓冲区数据写入当前缓存区
-            </summary>
-        </member>
-        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.ICollection{`0}@)">
-            <summary> 
-            将指定字节缓冲区数据写入当前缓存区
-            </summary>
-        </member>
-        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.IList{`0}@)">
-            <summary> 
-            写入byte数组
-            </summary>
-        </member>
-        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.IList{`0}@,System.Int32@,System.Int32@)">
-            <summary>
-            写入byte数组(从position开始写入len个)
-            </summary>
-        </member>
-        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.ICollection{`0}@,System.Int32@,System.Int32@)">
-            <summary>
-            写入byte数组(从position开始写入len个)
-            </summary>
-        </member>
-        <member name="M:AIO.Buffer`1.op_Addition(AIO.Buffer{`0},AIO.Buffer{`0}@)">
-            <summary>
-            增加
-            </summary>
-        </member>
-        <member name="M:AIO.Buffer`1.op_Addition(AIO.Buffer{`0},`0[]@)">
-            <summary>
-            增加
-            </summary>
-        </member>
-        <member name="M:AIO.Buffer`1.op_Addition(AIO.Buffer{`0},System.Collections.Generic.ICollection{`0}@)">
-            <summary>
-            增加
-            </summary>
-        </member>
-        <member name="M:AIO.Buffer`1.op_Implicit(AIO.Buffer{`0}@)~`0[]">
-            <summary>
-            隐式转化为数组
-            </summary>
-        </member>
-        <member name="M:AIO.Buffer`1.op_Implicit(AIO.Buffer{`0}@)~System.Collections.Generic.HashSet{`0}">
-            <summary>
-            隐式转化为数组
-            </summary>
-        </member>
-        <member name="M:AIO.Buffer`1.op_Implicit(AIO.Buffer{`0}@)~System.Collections.Generic.List{`0}">
-            <summary>
-            隐式转化为List
-            </summary>
-        </member>
-        <member name="M:AIO.Buffer`1.Dispose">
-            <summary>
-            释放
-            </summary>
-        </member>
         <member name="T:AIO.BufferArray`1">
             <summary>
             接口方法
@@ -6762,6 +4455,31 @@
             当前容器数量
             </summary>
         </member>
+        <member name="P:AIO.BufferArray`1.IsReadOnly">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BufferArray`1.Item(System.Int32)">
+            <inheritdoc cref="P:System.Collections.Generic.IList`1.Item(System.Int32)" />
+        </member>
+        <member name="P:AIO.BufferArray`1.Item(System.Int64)">
+            <inheritdoc cref="P:System.Collections.Generic.IList`1.Item(System.Int32)" />
+        </member>
+        <member name="M:AIO.BufferArray`1.#ctor(System.Int32@)">
+            <summary>
+            初始化
+            </summary>
+            <param name="capacity">容量</param>
+        </member>
+        <member name="M:AIO.BufferArray`1.#ctor">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.#ctor(`0[],System.Int32@)">
+            <summary>
+            初始化
+            </summary>
+        </member>
         <member name="M:AIO.BufferArray`1.UpStepCapacity">
             <summary>
             扩大容量
@@ -6772,17 +4490,17 @@
             修改元素
             </summary>
         </member>
-        <member name="M:AIO.BufferArray`1.Get(System.Int32)">
+        <member name="M:AIO.BufferArray`1.Get(System.Int32@)">
             <summary>
             获取元素
             </summary>
         </member>
-        <member name="M:AIO.BufferArray`1.Set(`0,System.Int64)">
+        <member name="M:AIO.BufferArray`1.Set(`0,System.Int64@)">
             <summary>
             修改元素
             </summary>
         </member>
-        <member name="M:AIO.BufferArray`1.Get(System.Int64)">
+        <member name="M:AIO.BufferArray`1.Get(System.Int64@)">
             <summary>
             获取元素
             </summary>
@@ -6802,7 +4520,7 @@
             添加
             </summary>
         </member>
-        <member name="M:AIO.BufferArray`1.Add(`0,System.Int32)">
+        <member name="M:AIO.BufferArray`1.Add(`0,System.Int32@)">
             <summary>
             添加
             </summary>
@@ -6816,6 +4534,12 @@
             <summary>
             添加
             </summary>
+        </member>
+        <member name="M:AIO.BufferArray`1.AddFirst(`0)">
+            <summary>
+            添加指定元素
+            </summary>
+            <param name="item">元素</param>
         </member>
         <member name="M:AIO.BufferArray`1.Insert(System.Int32,`0)">
             <summary>
@@ -6867,258 +4591,221 @@
             移除最后一个
             </summary>
         </member>
-        <member name="T:AIO.IWrite">
+        <member name="T:AIO.Buffer">
             <summary>
-            Buffer 写入接口
+            数据缓存留
             </summary>
         </member>
-        <member name="M:AIO.IWrite.WriteBoolArray(System.Collections.Generic.ICollection{System.Boolean}@,System.Boolean@)">
+        <member name="F:AIO.Buffer.CAPACITY">
             <summary>
-            写入Bool数组
-            </summary>
-            <param name="value">输入值</param>
-            <param name="reverse">是否反转</param>
-        </member>
-        <member name="M:AIO.IWrite.WriteBool(System.Boolean@)">
-            <summary>
-            写入Bool
+            默认容量:32B = 256bit
             </summary>
         </member>
-        <member name="M:AIO.IWrite.Write(AIO.Buffer{System.Byte}@)">
+        <member name="F:AIO.Buffer.MAX_CAPACITY">
+            <summary>
+            最大缓存:4M
+            </summary>
+        </member>
+        <member name="F:AIO.Buffer.WriteIndex">
+            <summary>
+            当前写入位置
+            </summary>
+        </member>
+        <member name="F:AIO.Buffer.ReadIndex">
+            <summary>
+            当前读取位置
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer.#ctor">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer.Clear">
+            <summary> 
+            清空
+            </summary>
+        </member>
+        <member name="P:AIO.Buffer.WriteOffset">
+            <summary>
+            缓存写入进度: 当前首位
+            </summary>
+        </member>
+        <member name="P:AIO.Buffer.ReadOffset">
+            <summary>
+            缓存写入进度: 当前读取游标下标
+            </summary>
+        </member>
+        <member name="P:AIO.Buffer.Count">
+            <summary> 
+            返回数据可读取长度
+            </summary>
+        </member>
+        <member name="P:AIO.Buffer.Capacity">
+            <summary> 
+            数据缓存:容量
+            </summary>
+        </member>
+        <member name="T:AIO.Buffer`1">
+            <summary>
+            缓冲流
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.#ctor(System.Int32@)">
+            <summary>
+            构建一个指定容量的Buffer
+            </summary>
+        </member>
+        <member name="P:AIO.Buffer`1.Arrays">
+            <summary>
+            数据缓存
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.#ctor(`0[]@)">
+            <summary>
+            构建一个指定数据的ByteBuffer
+            </summary>
+        </member>
+        <member name="P:AIO.Buffer`1.Capacity">
+            <summary> 
+            数据缓存:容量
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.ToArray">
+            <summary> 
+            获取有效字节数组
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.Write(AIO.Buffer{`0}@)">
             <summary> 
             将指定字节缓冲区数据写入当前缓存区
             </summary>
         </member>
-        <member name="M:AIO.IWrite.Write(System.Collections.Generic.IList{System.Byte}@,System.Int32@,System.Int32@)">
-            <summary> 
-            将指定字节缓冲区数据写入当前缓存区
-            </summary>/>
-        </member>
-        <member name="M:AIO.IWrite.Write(System.Collections.Generic.ICollection{System.Byte}@,System.Int32@,System.Int32@)">
+        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.ICollection{`0}@)">
             <summary> 
             将指定字节缓冲区数据写入当前缓存区
             </summary>
         </member>
-        <member name="M:AIO.IWrite.WriteJson``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Text.Encoding,System.Boolean@)">
-            <summary>
-            写入Json数据
-            </summary>
-            <param name="value">输入源</param>
-            <param name="settings">json压缩设置</param>
-            <param name="encoding">编码</param>
-            <param name="reverse">反转</param>
-            <typeparam name="T">泛型</typeparam>
-        </member>
-        <member name="M:AIO.IWrite.WriteJsonUTF8``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
-            <summary>
-            写入Json数据
-            </summary>
-            <param name="value">输入源</param>
-            <param name="settings">json压缩设置</param>
-            <param name="reverse">反转</param>
-            <typeparam name="T">泛型</typeparam>
-        </member>
-        <member name="M:AIO.IWrite.WriteJsonASCII``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
-            <summary>
-            写入Json数据
-            </summary>
-            <param name="value">输入源</param>
-            <param name="settings">json压缩设置</param>
-            <param name="reverse">反转</param>
-            <typeparam name="T">泛型</typeparam>
-        </member>
-        <member name="M:AIO.IWrite.WriteJsonUnicode``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
-            <summary>
-            写入Json数据
-            </summary>
-            <param name="value">输入源</param>
-            <param name="settings">json压缩设置</param>
-            <param name="reverse">反转</param>
-            <typeparam name="T">泛型</typeparam>
-        </member>
-        <member name="M:AIO.IWrite.WriteLenArray(System.Collections.Generic.ICollection{System.Int32}@)">
-            <summary>
-            写入Sbyte数组
-            </summary>
-            <param name="value">输入源</param>
-        </member>
-        <member name="M:AIO.IWrite.WriteLen(System.Byte@)">
-            <summary> 写入一个长度, 0至512M </summary>
-            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
-            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
-            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
-            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
-        </member>
-        <member name="M:AIO.IWrite.WriteLen(System.SByte@)">
-            <summary> 写入一个长度, 0至512M </summary>
-            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
-            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
-            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
-            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
-        </member>
-        <member name="M:AIO.IWrite.WriteLen(System.UInt16@)">
-            <summary> 写入一个长度, 0至512M </summary>
-            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
-            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
-            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
-            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
-        </member>
-        <member name="M:AIO.IWrite.WriteLen(System.Int16@)">
-            <summary> 写入一个长度, 0至512M </summary>
-            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
-            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
-            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
-            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
-        </member>
-        <member name="M:AIO.IWrite.WriteLen(System.Int32@)">
-            <summary> 写入一个长度, 0至512M </summary>
-            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
-            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
-            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
-            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
-        </member>
-        <member name="M:AIO.IWrite.WriteSByteArray(System.Collections.Generic.ICollection{System.SByte}@,System.Boolean@)">
-            <summary>
-            写入Sbyte数组
-            </summary>
-            <param name="value">输入源</param>
-            <param name="reverse">是否反转</param>
-        </member>
-        <member name="M:AIO.IWrite.WriteSByte(System.SByte@)">
-            <summary>
-            写入Sbyte数组
-            </summary>
-            <param name="value">输入源</param>
-        </member>
-        <member name="M:AIO.IWrite.WriteString(System.String@,System.Text.Encoding@,System.Boolean@)">
-            <summary>
-            写入字符串
-            </summary>
-            <param name="value">输入值</param>
-            <param name="encoding">编码</param>
-            <param name="reverse">是否反转</param>
-        </member>
-        <member name="M:AIO.IWrite.WriteString(System.Text.StringBuilder@,System.Text.Encoding@,System.Boolean@)">
-            <summary>
-            写入字符串
-            </summary>
-            <param name="value">输入值</param>
-            <param name="encoding">编码</param>
-            <param name="reverse">是否反转</param>
-        </member>
-        <member name="M:AIO.IWrite.WriteStringUTF8(System.String@,System.Boolean@)">
-            <summary>
-            写入字符串
-            </summary>
-            <param name="value">输入值</param>
-            <param name="reverse">是否反转</param>
-        </member>
-        <member name="M:AIO.IWrite.WriteStringUTF8(System.Text.StringBuilder@,System.Boolean@)">
-            <summary>
-            写入字符串
-            </summary>
-            <param name="value">输入值</param>
-            <param name="reverse">是否反转</param>
-        </member>
-        <member name="M:AIO.IWrite.WriteStringASCII(System.String@,System.Boolean@)">
-            <summary>
-            写入字符串
-            </summary>
-            <param name="value">输入值</param>
-            <param name="reverse">是否反转</param>
-        </member>
-        <member name="M:AIO.IWrite.WriteStringASCII(System.Text.StringBuilder@,System.Boolean@)">
-            <summary>
-            写入字符串
-            </summary>
-            <param name="value">输入值</param>
-            <param name="reverse">是否反转</param>
-        </member>
-        <member name="M:AIO.IWrite.WriteStringUnicode(System.String@,System.Boolean@)">
-            <summary>
-            写入字符串
-            </summary>
-            <param name="value">输入值</param>
-            <param name="reverse">是否反转</param>
-        </member>
-        <member name="M:AIO.IWrite.WriteStringUnicode(System.Text.StringBuilder@,System.Boolean@)">
-            <summary>
-            写入字符串
-            </summary>
-            <param name="value">输入值</param>
-            <param name="reverse">是否反转</param>
-        </member>
-        <member name="T:AIO.IRead">
-            <summary>
-            Buffer 读取接口
+        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.IList{`0}@)">
+            <summary> 
+            写入byte数组
             </summary>
         </member>
-        <member name="M:AIO.IRead.ReadBoolArray(System.Boolean@)">
+        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.IList{`0}@,System.Int32@,System.Int32@)">
             <summary>
-            读取Bool数组
-            </summary>
-            <param name="reverse">是否反转</param>
-            <returns>Bool数组</returns>
-        </member>
-        <member name="M:AIO.IRead.ReadBool">
-            <summary>
-            读取Bool
+            写入byte数组(从position开始写入len个)
             </summary>
         </member>
-        <member name="M:AIO.IRead.ReadLenArray">
+        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.ICollection{`0}@,System.Int32@,System.Int32@)">
             <summary>
-            读取Sbyte数组
+            写入byte数组(从position开始写入len个)
             </summary>
-            <returns>返回数组</returns>
         </member>
-        <member name="M:AIO.IRead.ReadLen">
-            <summary> 读取一个长度 0至512M </summary>
-            原理 : 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
-            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
-            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
-            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
-        </member>
-        <member name="M:AIO.IRead.ReadSByteArray(System.Boolean@)">
+        <member name="M:AIO.Buffer`1.op_Addition(AIO.Buffer{`0},AIO.Buffer{`0}@)">
             <summary>
-            读取Sbyte数组
+            增加
             </summary>
-            <param name="reverse">是否反转</param>
-            <returns>返回数组</returns>
         </member>
-        <member name="M:AIO.IRead.ReadSByte">
+        <member name="M:AIO.Buffer`1.op_Addition(AIO.Buffer{`0},`0[]@)">
             <summary>
-            读取Sbyte数组
+            增加
             </summary>
-            <returns>返回数组</returns>
         </member>
-        <member name="M:AIO.IRead.ReadStringUTF8(System.Boolean@)">
+        <member name="M:AIO.Buffer`1.op_Addition(AIO.Buffer{`0},System.Collections.Generic.HashSet{`0}@)">
             <summary>
-            读取字符串
+            增加
             </summary>
-            <param name="reverse">是否反转</param>
-            <returns>字符串</returns>
         </member>
-        <member name="M:AIO.IRead.ReadStringASCII(System.Boolean@)">
+        <member name="M:AIO.Buffer`1.op_Addition(AIO.Buffer{`0},System.Collections.Generic.ICollection{`0}@)">
             <summary>
-            读取字符串
+            增加
             </summary>
-            <param name="reverse">是否反转</param>
-            <returns>字符串</returns>
         </member>
-        <member name="M:AIO.IRead.ReadStringUnicode(System.Boolean@)">
+        <member name="M:AIO.Buffer`1.op_Implicit(AIO.Buffer{`0}@)~`0[]">
             <summary>
-            读取字符串
+            隐式转化为数组
             </summary>
-            <param name="reverse">是否反转</param>
-            <returns>字符串</returns>
         </member>
-        <member name="M:AIO.IRead.ReadString(System.Text.Encoding@,System.Boolean@)">
+        <member name="M:AIO.Buffer`1.op_Implicit(AIO.Buffer{`0}@)~System.Collections.Generic.HashSet{`0}">
             <summary>
-            读取字符串
+            隐式转化为数组
             </summary>
-            <param name="encoding">编码</param>
-            <param name="reverse">是否反转</param>
-            <returns>字符串</returns>
+        </member>
+        <member name="M:AIO.Buffer`1.op_Implicit(AIO.Buffer{`0}@)~System.Collections.Generic.List{`0}">
+            <summary>
+            隐式转化为List
+            </summary>
+        </member>
+        <member name="P:AIO.Buffer`1.IsReadOnly">
+            <summary>
+            是否为只读
+            </summary>
+        </member>
+        <member name="P:AIO.Buffer`1.Item(System.Int32)">
+            <summary>
+            获取指定元素
+            </summary>
+            <param name="index">下标</param>
+        </member>
+        <member name="M:AIO.Buffer`1.IndexOf(`0)">
+            <summary>
+            判断元素所在下标
+            </summary>
+            <param name="item">元素</param>
+            <returns>-1未找到指定下标</returns>
+        </member>
+        <member name="M:AIO.Buffer`1.Insert(System.Int32,`0)">
+            <summary>
+            在指定位置插入元素
+            </summary>
+            <param name="index">下标</param>
+            <param name="item">元素</param>
+            <exception cref="T:System.IndexOutOfRangeException">数组越界</exception>
+        </member>
+        <member name="M:AIO.Buffer`1.RemoveAt(System.Int32)">
+            <summary>
+            移除指定下标元素
+            </summary>
+            <param name="index">下标</param>
+            <exception cref="T:System.IndexOutOfRangeException">数组越界</exception>
+        </member>
+        <member name="M:AIO.Buffer`1.Add(`0)">
+            <summary>
+            添加指定元素
+            </summary>
+            <param name="item">元素</param>
+        </member>
+        <member name="M:AIO.Buffer`1.Contains(`0)">
+            <summary>
+            确定序列是否包含指定的元素使用的默认相等比较器。
+            </summary>
+            <param name="item">要在其中定位某个值的序列。</param>
+            <returns>true 如果源序列包含具有指定的值; 的元素否则为 false。</returns>
+        </member>
+        <member name="M:AIO.Buffer`1.CopyTo(`0[],System.Int32)">
+            <summary>
+            复制
+            </summary>
+            <param name="array">目标数组</param>
+            <param name="arrayIndex">数组下标</param>
+        </member>
+        <member name="M:AIO.Buffer`1.Remove(`0)">
+            <summary>
+            移除指定元素
+            </summary>
+            <param name="item">元素</param>
+            <returns>true 移除成功 false 集合不包含该元素</returns>
+        </member>
+        <member name="M:AIO.Buffer`1.GetEnumerator">
+            <summary>
+            获取迭代器
+            </summary>
+            <returns>返回指定元素</returns>
+        </member>
+        <member name="M:AIO.Buffer`1.Dispose">
+            <summary>
+            释放
+            </summary>
         </member>
         <member name="T:AIO.BufferByte">
             <summary>
@@ -7131,28 +4818,28 @@
             get    :  需要传入索引,在字节缓存的指定索引处读取一个,不影响缓存读写进度
             method_:  为倒序写入 倒序读取
         </member>
-        <member name="M:AIO.BufferByte.ReadBoolArray(System.Boolean@)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteBoolArray(System.Collections.Generic.ICollection{System.Boolean}@,System.Boolean@)">
-            <inheritdoc/> 
-        </member>
         <member name="M:AIO.BufferByte.ReadBool">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadBoolArray(System.Boolean@)">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.WriteBool(System.Boolean@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadByteArray(System.Boolean@)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteByteArray(System.Collections.Generic.ICollection{System.Byte}@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteBoolArray(System.Collections.Generic.ICollection{System.Boolean}@,System.Boolean@)">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.ReadByte">
             <inheritdoc/> 
         </member>
+        <member name="M:AIO.BufferByte.ReadByteArray(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
         <member name="M:AIO.BufferByte.WriteByte(System.Byte@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteByteArray(System.Collections.Generic.ICollection{System.Byte}@,System.Boolean@)">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.ReadChar(System.Boolean@)">
@@ -7161,29 +4848,29 @@
         <member name="M:AIO.BufferByte.ReadCharArray(System.Boolean@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteCharArray(System.Collections.Generic.ICollection{System.Char}@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteChar(System.Char@,System.Boolean@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteChar(System.Char@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteCharArray(System.Collections.Generic.ICollection{System.Char}@,System.Boolean@)">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:AIO.BufferByte.#ctor(System.Byte[])">
+        <member name="M:AIO.BufferByte.#ctor(System.Byte[]@)">
             <inheritdoc/>
         </member>
-        <member name="M:AIO.BufferByte.#ctor(System.Int32)">
+        <member name="M:AIO.BufferByte.#ctor(System.Int32@)">
             <inheritdoc/>
         </member>
         <member name="M:AIO.BufferByte.Write(AIO.Buffer{System.Byte}@)">
-            <inheritdoc cref="T:AIO.IWrite"/>
+            <inheritdoc />
         </member>
         <member name="M:AIO.BufferByte.Write(System.Collections.Generic.IList{System.Byte}@,System.Int32@,System.Int32@)">
-            <inheritdoc cref="T:AIO.IWrite"/>
+            <inheritdoc />
         </member>
         <member name="M:AIO.BufferByte.Write(System.Collections.Generic.ICollection{System.Byte}@,System.Int32@,System.Int32@)">
-            <inheritdoc cref="T:AIO.IWrite"/>
+            <inheritdoc />
         </member>
         <member name="M:AIO.BufferByte.ToString">
             <inheritdoc/>
@@ -7191,91 +4878,91 @@
         <member name="M:AIO.BufferByte.Dispose">
             <inheritdoc/>
         </member>
-        <member name="M:AIO.BufferByte.ReadDecimalArray(System.Boolean@)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteDecimalArray(System.Collections.Generic.ICollection{System.Decimal}@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadDouble(System.Boolean@,System.Boolean@)">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.ReadDoubleArray(System.Boolean@,System.Boolean@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteDoubleArray(System.Collections.Generic.ICollection{System.Double}@,System.Boolean@,System.Boolean@)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadDouble(System.Boolean@,System.Boolean@)">
-            <inheritdoc/> 
-        </member>
         <member name="M:AIO.BufferByte.WriteDouble(System.Double@,System.Boolean,System.Boolean@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadEnumArray``1(System.Boolean@)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteEnumArray``1(System.Collections.Generic.ICollection{``0}@,System.Boolean@)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadFloatArray(System.Boolean@,System.Boolean@)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteFloatArray(System.Collections.Generic.ICollection{System.Single}@,System.Boolean@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteDoubleArray(System.Collections.Generic.ICollection{System.Double}@,System.Boolean@,System.Boolean@)">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.ReadFloat(System.Boolean@,System.Boolean@)">
             <inheritdoc/> 
         </member>
+        <member name="M:AIO.BufferByte.ReadFloatArray(System.Boolean@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
         <member name="M:AIO.BufferByte.WriteFloat(System.Single@,System.Boolean,System.Boolean@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadUint16Array(System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteFloatArray(System.Collections.Generic.ICollection{System.Single}@,System.Boolean@,System.Boolean@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadInt16Array(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadUInt16(System.Boolean@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteUint16Array(System.Collections.Generic.ICollection{System.UInt16}@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteUInt16(System.UInt16@,System.Boolean@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteInt16Array(System.Collections.Generic.ICollection{System.Int16}@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadUInt16Array(System.Boolean@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadInt32Array(System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteUInt16Array(System.Collections.Generic.ICollection{System.UInt16}@,System.Boolean@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadUint32Array(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadUInt32(System.Boolean@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteInt32Array(System.Collections.Generic.ICollection{System.Int32}@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadUInt32Array(System.Boolean@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteUint32Array(System.Collections.Generic.ICollection{System.UInt32}@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteUInt32(System.UInt32@,System.Boolean@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadInt64Array(System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteUInt32Array(System.Collections.Generic.ICollection{System.UInt32}@,System.Boolean@)">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.ReadUInt64Array(System.Boolean@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteInt64Array(System.Collections.Generic.ICollection{System.Int64}@,System.Boolean@)">
-            <inheritdoc/> 
-        </member>
         <member name="M:AIO.BufferByte.WriteUInt64Array(System.Collections.Generic.ICollection{System.UInt64}@,System.Boolean@)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadInt64(System.Boolean@)">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.ReadUInt64(System.Boolean@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteInt64(System.Int64@,System.Boolean@)">
-            <inheritdoc/> 
-        </member>
         <member name="M:AIO.BufferByte.WriteUInt64(System.UInt64@,System.Boolean@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteJson``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Text.Encoding,System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadInt64(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadInt64Array(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteInt64Array(System.Collections.Generic.ICollection{System.Int64}@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteInt64(System.Int64@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadJson``1(Newtonsoft.Json.JsonSerializerSettings@,System.Text.Encoding@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadJsonUTF8``1(Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadJsonASCII``1(Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadJsonUnicode``1(Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteJson``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Text.Encoding@,System.Boolean@)">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.WriteJsonUTF8``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
@@ -7287,13 +4974,10 @@
         <member name="M:AIO.BufferByte.WriteJsonUnicode``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadLenArray">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteLenArray(System.Collections.Generic.ICollection{System.Int32}@)">
-            <inheritdoc/> 
-        </member>
         <member name="M:AIO.BufferByte.ReadLen">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadLenArray">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.WriteLen(System.Int32@)">
@@ -7311,16 +4995,19 @@
         <member name="M:AIO.BufferByte.WriteLen(System.SByte@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadSByteArray(System.Boolean@)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteSByteArray(System.Collections.Generic.ICollection{System.SByte}@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteLenArray(System.Collections.Generic.ICollection{System.Int32}@)">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.ReadSByte">
             <inheritdoc/> 
         </member>
+        <member name="M:AIO.BufferByte.ReadSByteArray(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
         <member name="M:AIO.BufferByte.WriteSByte(System.SByte@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteSByteArray(System.Collections.Generic.ICollection{System.SByte}@,System.Boolean@)">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.ReadString(System.Text.Encoding@,System.Boolean@)">
@@ -7362,37 +5049,49 @@
         <member name="M:AIO.BufferByte.ReadDecimal(System.Boolean@)">
             <inheritdoc/> 
         </member>
+        <member name="M:AIO.BufferByte.ReadDecimalArray(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
         <member name="M:AIO.BufferByte.WriteDecimal(System.Decimal@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteDecimalArray(System.Collections.Generic.ICollection{System.Decimal}@,System.Boolean@)">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.ReadEnum``1(System.Boolean@)">
             <inheritdoc/> 
         </member>
+        <member name="M:AIO.BufferByte.ReadEnumArray``1(System.Boolean@)">
+            <inheritdoc/> 
+        </member>
         <member name="M:AIO.BufferByte.WriteEnum``1(``0@,System.Boolean@)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteEnumArray``1(System.Collections.Generic.ICollection{``0}@,System.Boolean@)">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.ReadInt32(System.Boolean@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadUInt32(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadInt32Array(System.Boolean@)">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.WriteInt32(System.Int32@,System.Boolean@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteUInt32(System.UInt32@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteInt32Array(System.Collections.Generic.ICollection{System.Int32}@,System.Boolean@)">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.ReadInt16(System.Boolean@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadUInt16(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadInt16Array(System.Boolean@)">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.WriteInt16(System.Int16@,System.Boolean@)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteUInt16(System.UInt16@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteInt16Array(System.Collections.Generic.ICollection{System.Int16}@,System.Boolean@)">
             <inheritdoc/> 
         </member>
         <member name="T:AIO.BufferChar">
@@ -7524,12 +5223,757 @@
         <member name="M:AIO.BufferChar.ToString">
             <summary> 信息 </summary>
         </member>
+        <member name="T:AIO.IReadData">
+            <summary>
+            数据读取接口
+            </summary>
+        </member>
+        <member name="T:AIO.IWriteData">
+            <summary>
+            写入数据
+            </summary>
+        </member>
+        <member name="T:AIO.IReadBool">
+            <summary>
+            读取Bool
+            </summary>
+        </member>
+        <member name="M:AIO.IReadBool.ReadBool">
+            <summary>
+            读取 Bool 数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IReadBool.ReadBoolArray(System.Boolean@)">
+            <summary>
+            读取 Bool数组 数据类型
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>Bool数组</returns>
+        </member>
+        <member name="T:AIO.IReadByte">
+            <summary>
+            读取数据
+            </summary>
+        </member>
+        <member name="M:AIO.IReadByte.ReadByte">
+            <summary>
+            读取 Byte 数据类型
+            </summary>
+            <returns>数据值</returns>
+        </member>
+        <member name="M:AIO.IReadByte.ReadByteArray(System.Boolean@)">
+            <summary>
+            读取 Byte 数组 数据类型
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>数据值</returns>
+        </member>
+        <member name="T:AIO.IReadChar">
+            <summary>
+            读取数据
+            </summary>
+        </member>
+        <member name="M:AIO.IReadChar.ReadChar(System.Boolean@)">
+            <summary>
+            读取 Char 数据类型
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>数据值</returns>
+        </member>
+        <member name="M:AIO.IReadChar.ReadCharArray(System.Boolean@)">
+            <summary>
+            读取 Char 数组 数据类型
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>数据值</returns>
+        </member>
+        <member name="T:AIO.IReadDecimal">
+            <summary>
+            读取数据
+            </summary>
+        </member>
+        <member name="M:AIO.IReadDecimal.ReadDecimal(System.Boolean@)">
+            <summary>
+            读取 Decimal 数据类型
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>数据值</returns>
+        </member>
+        <member name="M:AIO.IReadDecimal.ReadDecimalArray(System.Boolean@)">
+            <summary>
+            读取 Decimal 数组 数据类型
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>数据值</returns>
+        </member>
+        <member name="T:AIO.IReadDouble">
+            <summary>
+            读取数据
+            </summary>
+        </member>
+        <member name="M:AIO.IReadDouble.ReadDouble(System.Boolean@,System.Boolean@)">
+            <summary>
+            读取 Double 数据类型
+            </summary>
+            <param name="all">全部</param>
+            <param name="reverse">是否反转</param>
+            <returns>数据值</returns>
+        </member>
+        <member name="M:AIO.IReadDouble.ReadDoubleArray(System.Boolean@,System.Boolean@)">
+            <summary>
+            读取 Double 数组 数据类型
+            </summary>
+            <param name="all">全部</param>
+            <param name="reverse">是否反转</param>
+            <returns>数据值</returns>
+        </member>
+        <member name="T:AIO.IReadEnum">
+            <summary>
+            读取数据
+            </summary>
+        </member>
+        <member name="M:AIO.IReadEnum.ReadEnum``1(System.Boolean@)">
+            <summary>
+            读取 枚举 数据类型
+            </summary>
+            <param name="reverse">是否反转</param>
+            <typeparam name="T">枚举类型</typeparam>
+            <returns>枚举值</returns>
+        </member>
+        <member name="M:AIO.IReadEnum.ReadEnumArray``1(System.Boolean@)">
+            <summary>
+            读取 枚举数组 数据类型
+            </summary>
+            <param name="reverse">是否反转</param>
+            <typeparam name="T">枚举类型</typeparam>
+            <returns>枚举值数组</returns>
+        </member>
+        <member name="T:AIO.IReadFloat">
+            <summary>
+            读取数据
+            </summary>
+        </member>
+        <member name="M:AIO.IReadFloat.ReadFloatArray(System.Boolean@,System.Boolean@)">
+            <summary>
+            读取 Float 数组 数据类型
+            </summary>
+            <param name="all"></param>
+            <param name="reverse">是否反转</param>
+            <returns>数据值</returns>
+        </member>
+        <member name="M:AIO.IReadFloat.ReadFloat(System.Boolean@,System.Boolean@)">
+            <summary>
+            读取 Float 数据类型
+            </summary>
+            <param name="all">全部</param>
+            <param name="reverse">是否反转</param>
+            <returns>数据值</returns>
+        </member>
+        <member name="T:AIO.IReadInt16">
+            <summary>
+            读取数据
+            </summary>
+        </member>
+        <member name="M:AIO.IReadInt16.ReadInt16(System.Boolean@)">
+            <summary>
+            读取 Int16 数据类型
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>数据值</returns>
+        </member>
+        <member name="M:AIO.IReadInt16.ReadInt16Array(System.Boolean@)">
+            <summary>
+            读取 Int16 数据类型
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>数据值</returns>
+        </member>
+        <member name="T:AIO.IReadInt32">
+            <summary>
+            读取数据
+            </summary>
+        </member>
+        <member name="M:AIO.IReadInt32.ReadInt32(System.Boolean@)">
+            <summary>
+            读取 Int32 数据类型
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>数据值</returns>
+        </member>
+        <member name="M:AIO.IReadInt32.ReadInt32Array(System.Boolean@)">
+            <summary>
+            读取 Int32 数组 数据类型
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>数据值</returns>
+        </member>
+        <member name="T:AIO.IReadInt64">
+            <summary>
+            读取数据
+            </summary>
+        </member>
+        <member name="M:AIO.IReadInt64.ReadInt64(System.Boolean@)">
+            <summary>
+            读取 Int64 数据类型
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>数据值</returns>
+        </member>
+        <member name="M:AIO.IReadInt64.ReadInt64Array(System.Boolean@)">
+            <summary>
+            读取 Int64 数组 数据类型
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>数据值</returns>
+        </member>
+        <member name="T:AIO.IReadJson">
+            <summary>
+            读取数据
+            </summary>
+        </member>
+        <member name="M:AIO.IReadJson.ReadJson``1(Newtonsoft.Json.JsonSerializerSettings@,System.Text.Encoding@,System.Boolean@)">
+            <summary>
+            读取Json数据
+            </summary>
+            <param name="settings">反序列化设置</param>
+            <param name="encoding">字符串编码</param>
+            <param name="reverse">反转</param>
+            <typeparam name="T">数据泛型</typeparam>
+            <returns>数据值</returns>
+        </member>
+        <member name="M:AIO.IReadJson.ReadJsonUTF8``1(Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+            <summary>
+            读取Json数据
+            </summary>
+            <param name="settings">反序列化设置</param>
+            <param name="reverse">反转</param>
+            <typeparam name="T">数据泛型</typeparam>
+            <returns>数据值</returns>
+        </member>
+        <member name="M:AIO.IReadJson.ReadJsonASCII``1(Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+            <summary>
+            读取Json数据
+            </summary>
+            <param name="settings">反序列化设置</param>
+            <param name="reverse">反转</param>
+            <typeparam name="T">数据泛型</typeparam>
+            <returns>数据值</returns>
+        </member>
+        <member name="M:AIO.IReadJson.ReadJsonUnicode``1(Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+            <summary>
+            读取Json数据
+            </summary>
+            <param name="settings">反序列化设置</param>
+            <param name="reverse">反转</param>
+            <typeparam name="T">数据泛型</typeparam>
+            <returns>数据值</returns>
+        </member>
+        <member name="T:AIO.IReadLength">
+            <summary>
+            读取数据
+            </summary>
+        </member>
+        <member name="M:AIO.IReadLength.ReadLen">
+            <summary>
+            读取一个长度 0至512M
+            </summary>
+            原理 : 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
+            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
+            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
+            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
+        </member>
+        <member name="M:AIO.IReadLength.ReadLenArray">
+            <summary>
+            读取一个长度数组
+            </summary>
+            <returns>返回数组</returns>
+        </member>
+        <member name="T:AIO.IReadSByte">
+            <summary>
+            读取数据
+            </summary>
+        </member>
+        <member name="M:AIO.IReadSByte.ReadSByte">
+            <summary>
+            读取 SByte 数据类型
+            </summary>
+            <returns>返回数组</returns>
+        </member>
+        <member name="M:AIO.IReadSByte.ReadSByteArray(System.Boolean@)">
+            <summary>
+            读取 Sbyte 数组 数据类型
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>返回数组</returns>
+        </member>
+        <member name="T:AIO.IReadString">
+            <summary>
+            读取 数据 String
+            </summary>
+        </member>
+        <member name="M:AIO.IReadString.ReadStringUTF8(System.Boolean@)">
+            <summary>
+            读取字符串
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:AIO.IReadString.ReadStringASCII(System.Boolean@)">
+            <summary>
+            读取字符串
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:AIO.IReadString.ReadStringUnicode(System.Boolean@)">
+            <summary>
+            读取字符串
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:AIO.IReadString.ReadString(System.Text.Encoding@,System.Boolean@)">
+            <summary>
+            读取字符串
+            </summary>
+            <param name="encoding">编码</param>
+            <param name="reverse">是否反转</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="T:AIO.IReadUInt16">
+            <summary>
+            读取数据
+            </summary>
+        </member>
+        <member name="M:AIO.IReadUInt16.ReadUInt16(System.Boolean@)">
+            <summary>
+            读取 UInt16 数据类型
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>数据值</returns>
+        </member>
+        <member name="M:AIO.IReadUInt16.ReadUInt16Array(System.Boolean@)">
+            <summary>
+            读取 UInt16 数组 数据类型
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>数据值</returns>
+        </member>
+        <member name="T:AIO.IReadUInt32">
+            <summary>
+            读取数据
+            </summary>
+        </member>
+        <member name="M:AIO.IReadUInt32.ReadUInt32(System.Boolean@)">
+            <summary>
+            读取 UInt32 数据类型
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>数据值</returns>
+        </member>
+        <member name="M:AIO.IReadUInt32.ReadUInt32Array(System.Boolean@)">
+            <summary>
+            读取 UInt32 数组 数据类型
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>数据值</returns>
+        </member>
+        <member name="T:AIO.IReadUInt64">
+            <summary>
+            读取数据
+            </summary>
+        </member>
+        <member name="M:AIO.IReadUInt64.ReadUInt64(System.Boolean@)">
+            <summary>
+            读取 UInt64 数据类型
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>数据值</returns>
+        </member>
+        <member name="M:AIO.IReadUInt64.ReadUInt64Array(System.Boolean@)">
+            <summary>
+            读取 UInt64 数组 数据类型
+            </summary>
+            <param name="reverse">是否反转</param>
+            <returns>数据值</returns>
+        </member>
+        <member name="T:AIO.IWriteBool">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteBool.WriteBool(System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteBool.WriteBoolArray(System.Collections.Generic.ICollection{System.Boolean}@,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+            <param name="value">输入值</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="T:AIO.IWriteByte">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteByte.WriteByte(System.Byte@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:AIO.IWriteByte.WriteByteArray(System.Collections.Generic.ICollection{System.Byte}@,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="T:AIO.IWriteChar">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteChar.WriteChar(System.Char@,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteChar.WriteCharArray(System.Collections.Generic.ICollection{System.Char}@,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="T:AIO.IWriteDecimal">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteDecimal.WriteDecimal(System.Decimal@,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteDecimal.WriteDecimalArray(System.Collections.Generic.ICollection{System.Decimal}@,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="T:AIO.IWriteDouble">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteDouble.WriteDouble(System.Double@,System.Boolean,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteDouble.WriteDoubleArray(System.Collections.Generic.ICollection{System.Double}@,System.Boolean@,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="T:AIO.IWriteEnum">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteEnum.WriteEnum``1(``0@,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteEnum.WriteEnumArray``1(System.Collections.Generic.ICollection{``0}@,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="T:AIO.IWriteFloat">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteFloat.WriteFloat(System.Single@,System.Boolean,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteFloat.WriteFloatArray(System.Collections.Generic.ICollection{System.Single}@,System.Boolean@,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="T:AIO.IWriteInt16">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteInt16.WriteInt16(System.Int16@,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteInt16.WriteInt16Array(System.Collections.Generic.ICollection{System.Int16}@,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="T:AIO.IWriteInt32">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteInt32.WriteInt32(System.Int32@,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteInt32.WriteInt32Array(System.Collections.Generic.ICollection{System.Int32}@,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="T:AIO.IWriteInt64">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteInt64.WriteInt64(System.Int64@,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteInt64.WriteInt64Array(System.Collections.Generic.ICollection{System.Int64}@,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="T:AIO.IWriteJson">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteJson.WriteJson``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Text.Encoding@,System.Boolean@)">
+            <summary>
+            写入Json数据
+            </summary>
+            <param name="value">输入源</param>
+            <param name="settings">json压缩设置</param>
+            <param name="encoding">编码</param>
+            <param name="reverse">反转</param>
+            <typeparam name="T">泛型</typeparam>
+        </member>
+        <member name="M:AIO.IWriteJson.WriteJsonUTF8``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+            <summary>
+            写入Json数据
+            </summary>
+            <param name="value">输入源</param>
+            <param name="settings">json压缩设置</param>
+            <param name="reverse">反转</param>
+            <typeparam name="T">泛型</typeparam>
+        </member>
+        <member name="M:AIO.IWriteJson.WriteJsonASCII``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+            <summary>
+            写入Json数据
+            </summary>
+            <param name="value">输入源</param>
+            <param name="settings">json压缩设置</param>
+            <param name="reverse">反转</param>
+            <typeparam name="T">泛型</typeparam>
+        </member>
+        <member name="M:AIO.IWriteJson.WriteJsonUnicode``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+            <summary>
+            写入Json数据
+            </summary>
+            <param name="value">输入源</param>
+            <param name="settings">json压缩设置</param>
+            <param name="reverse">反转</param>
+            <typeparam name="T">泛型</typeparam>
+        </member>
+        <member name="T:AIO.IWriteLength">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteLength.WriteLen(System.Byte@)">
+            <summary> 写入一个长度, 0至512M </summary>
+            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
+            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
+            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
+            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
+        </member>
+        <member name="M:AIO.IWriteLength.WriteLen(System.SByte@)">
+            <summary> 写入一个长度, 0至512M </summary>
+            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
+            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
+            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
+            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
+        </member>
+        <member name="M:AIO.IWriteLength.WriteLen(System.UInt16@)">
+            <summary> 写入一个长度, 0至512M </summary>
+            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
+            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
+            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
+            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
+        </member>
+        <member name="M:AIO.IWriteLength.WriteLen(System.Int16@)">
+            <summary> 写入一个长度, 0至512M </summary>
+            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
+            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
+            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
+            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
+        </member>
+        <member name="M:AIO.IWriteLength.WriteLen(System.Int32@)">
+            <summary> 写入一个长度, 0至512M </summary>
+            原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
+            1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
+            01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
+            001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
+        </member>
+        <member name="M:AIO.IWriteLength.WriteLenArray(System.Collections.Generic.ICollection{System.Int32}@)">
+            <summary>
+            写入Sbyte数组
+            </summary>
+            <param name="value">输入源</param>
+        </member>
+        <member name="T:AIO.IWriteSByte">
+            <summary>
+            写入数据 SByte Array
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteSByte.WriteSByte(System.SByte@)">
+            <summary>
+            写入Sbyte数组
+            </summary>
+            <param name="value">输入源</param>
+        </member>
+        <member name="M:AIO.IWriteSByte.WriteSByteArray(System.Collections.Generic.ICollection{System.SByte}@,System.Boolean@)">
+            <summary>
+            写入Sbyte数组
+            </summary>
+            <param name="value">输入源</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="T:AIO.IWriteString">
+            <summary>
+            写入数据 String
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteString.WriteString(System.String@,System.Text.Encoding@,System.Boolean@)">
+            <summary>
+            写入字符串
+            </summary>
+            <param name="value">输入值</param>
+            <param name="encoding">编码</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IWriteString.WriteString(System.Text.StringBuilder@,System.Text.Encoding@,System.Boolean@)">
+            <summary>
+            写入字符串
+            </summary>
+            <param name="value">输入值</param>
+            <param name="encoding">编码</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IWriteString.WriteStringUTF8(System.String@,System.Boolean@)">
+            <summary>
+            写入字符串
+            </summary>
+            <param name="value">输入值</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IWriteString.WriteStringUTF8(System.Text.StringBuilder@,System.Boolean@)">
+            <summary>
+            写入字符串
+            </summary>
+            <param name="value">输入值</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IWriteString.WriteStringASCII(System.String@,System.Boolean@)">
+            <summary>
+            写入字符串
+            </summary>
+            <param name="value">输入值</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IWriteString.WriteStringASCII(System.Text.StringBuilder@,System.Boolean@)">
+            <summary>
+            写入字符串
+            </summary>
+            <param name="value">输入值</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IWriteString.WriteStringUnicode(System.String@,System.Boolean@)">
+            <summary>
+            写入字符串
+            </summary>
+            <param name="value">输入值</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="M:AIO.IWriteString.WriteStringUnicode(System.Text.StringBuilder@,System.Boolean@)">
+            <summary>
+            写入字符串
+            </summary>
+            <param name="value">输入值</param>
+            <param name="reverse">是否反转</param>
+        </member>
+        <member name="T:AIO.IWriteUInt16">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteUInt16.WriteUInt16(System.UInt16@,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteUInt16.WriteUInt16Array(System.Collections.Generic.ICollection{System.UInt16}@,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="T:AIO.IWriteUInt32">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteUInt32.WriteUInt32(System.UInt32@,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteUInt32.WriteUInt32Array(System.Collections.Generic.ICollection{System.UInt32}@,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="T:AIO.IWriteUInt64">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteUInt64.WriteUInt64(System.UInt64@,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteUInt64.WriteUInt64Array(System.Collections.Generic.ICollection{System.UInt64}@,System.Boolean@)">
+            <summary>
+            写入指定数据类型
+            </summary>
+        </member>
         <member name="T:AIO.BufferRing`1">
             <summary>
             闭环数据流
             </summary>
             参考链接
-            <see cref="!:https://ifeve.com/dissecting-disruptor-whats-so-special/"/>
+            <see>
+                <cref>https://ifeve.com/dissecting-disruptor-whats-so-special/</cref>
+            </see>
         </member>
         <member name="F:AIO.BufferRing`1.FreedDic">
             <summary>
@@ -7574,7 +6018,7 @@
             构造函数
             </summary>
         </member>
-        <member name="M:AIO.BufferRing`1.#ctor(`0[],System.Int32)">
+        <member name="M:AIO.BufferRing`1.#ctor(System.Collections.Generic.IList{`0},System.Int32)">
             <summary>
             构造函数
             </summary>
@@ -7605,29 +6049,17 @@
             </summary>
             <param name="Buffer">字节数组</param>
             <param name="Offset">开始值 偏移量</param>
-            <param name="Count">读取长度</param>
+            <param name="count">读取长度</param>
             <returns>实际读取长度</returns>
         </member>
         <member name="M:AIO.BufferRing`1.Write(System.Collections.Generic.IList{`0}@)">
-            <summary>
-            写入
-            </summary>
-            <param name="buffer">写入数组</param>
-            <param name="offset">偏移量</param>
-            <param name="count">长度</param>
+            <inheritdoc />
         </member>
         <member name="M:AIO.BufferRing`1.Write(System.Collections.Generic.IList{`0}@,System.Int32@,System.Int32@)">
-            <summary>
-            写入
-            </summary>
-            <param name="buffer">写入数组</param>
-            <param name="offset">偏移量</param>
-            <param name="count">长度</param>
+            <inheritdoc />
         </member>
         <member name="M:AIO.BufferRing`1.Clear">
-            <summary>
-            重置
-            </summary>
+            <inheritdoc />
         </member>
         <member name="M:AIO.BufferRing`1.IsLastFull">
             <summary>
@@ -7635,11 +6067,14 @@
             </summary>
         </member>
         <member name="M:AIO.BufferRing`1.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.RingBufferExtend">
             <summary>
-            释放
+            扩展
             </summary>
         </member>
-        <member name="M:AIO.RingBufferExtend.Read(AIO.BufferRing{System.Byte},System.IO.Stream,System.Int32)">
+        <member name="M:AIO.RingBufferExtend.Read(AIO.BufferRing{System.Byte},System.IO.Stream,System.Int32@)">
             <summary>
             读取数据流
             </summary>

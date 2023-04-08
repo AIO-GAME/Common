@@ -196,7 +196,11 @@
             用户自定义设置
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:AIO.Unity.Editor.UtilsEditor.Paths.Packages" -->
+        <member name="P:AIO.Unity.Editor.UtilsEditor.Paths.Packages">
+            <summary>
+            项目日志文件夹路径
+            </summary>
+        </member>
         <member name="P:AIO.Unity.Editor.UtilsEditor.Paths.Logs">
             <summary>
             项目日志文件夹路径

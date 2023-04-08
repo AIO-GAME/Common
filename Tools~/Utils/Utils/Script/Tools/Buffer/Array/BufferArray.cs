@@ -34,7 +34,7 @@ namespace AIO
         /// </summary>
         public T[] ToArray()
         {
-            T[] Temp = new T[Offset];
+            var Temp = new T[Offset];
             System.Array.Copy(Array, 0, Temp, 0, Offset);
             return Temp;
         }
@@ -45,6 +45,8 @@ namespace AIO
         public void Dispose()
         {
             Array = null;
+            Offset = Capacity;
+            IsReadOnly = false;
         }
 
         /// <summary>
@@ -53,8 +55,8 @@ namespace AIO
         public void CopyTo(T[] array, int index)
         {
             if (index > Offset || index < 0) return;
-            int Len = array.Length > Offset ? Offset : array.Length;
-            System.Array.Copy(Array, index, array, 0, Len);
+            var len = array.Length > Offset ? Offset : array.Length;
+            System.Array.Copy(Array, index, array, 0, len);
         }
 
         /// <summary>
@@ -70,24 +72,24 @@ namespace AIO
         /// </summary>
         public IEnumerator<T> GetEnumerator()
         {
-            for (int i = 0; i < Offset; i++)
+            for (var i = 0; i < Offset; i++)
                 yield return Array[i];
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            for (int i = 0; i < Offset; i++)
+            for (var i = 0; i < Offset; i++)
                 yield return Array[i];
         }
 
         /// <summary>
         /// 输出
         /// </summary>
-        public override string ToString()
+        public sealed override string ToString()
         {
             var builder = new StringBuilder().Append('[');
-            for (int i = 0; i < Offset; i++)
-                builder.Append(Array[i].ToString()).Append(',');
+            for (var i = 0; i < Offset; i++)
+                builder.Append(Array[i]).Append(',');
             return builder.Append(']').ToString().Replace(",]", "]");
         }
 
@@ -96,14 +98,10 @@ namespace AIO
         /// </summary>
         public void Reverse()
         {
-            int right;
-            T t;
-            for (int i = 0; i < Math.Ceiling(Offset / 2f); i++)
+            for (var i = 0; i < Math.Ceiling(Offset / 2f); i++)
             {
-                right = Offset - 1 - i;
-                t = Array[i];
-                Array[i] = Array[right];
-                Array[right] = t;
+                var right = Offset - 1 - i;
+                (Array[i], Array[right]) = (Array[right], Array[i]);
             }
         }
 
@@ -120,9 +118,7 @@ namespace AIO
         /// </summary>
         public void Swap(int A, int B)
         {
-            T temp = Array[A];
-            Array[A] = Array[B];
-            Array[B] = temp;
+            (Array[A], Array[B]) = (Array[B], Array[A]);
         }
     }
 
@@ -154,45 +150,48 @@ namespace AIO
         /// <summary>
         /// 当前容器数量
         /// </summary>
-        public int Count
-        {
-            get { return Offset; }
-        }
+        public int Count => Offset;
 
+        /// <inheritdoc />
         public bool IsReadOnly { get; private set; }
 
+        /// <inheritdoc cref="IList{T}.this" />
         public T this[int index]
         {
             get => Get(index);
             set => Set(value, index);
         }
 
+        /// <inheritdoc cref="IList{T}.this" />
         public T this[long index]
         {
             get => Get(index);
             set => Set(value, index);
         }
 
-        public BufferArray(int Capacity)
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="capacity">容量</param>
+        public BufferArray(in int capacity)
         {
-            this.Capacity = Capacity;
-            Array = new T[Capacity];
+            Capacity = capacity;
+            Array = new T[capacity];
         }
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
         public BufferArray() : this(CAPACITY)
         {
         }
 
-        public BufferArray(T[] array, int Capacity = CAPACITY) : this(Capacity)
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        public BufferArray(T[] array, in int Capacity = CAPACITY) : this(Capacity)
         {
             Add(array);
-        }
-
-        ~BufferArray()
-        {
-            Array = null;
-            Offset = Capacity;
-            IsReadOnly = false;
         }
 
         /// <summary>
@@ -201,7 +200,7 @@ namespace AIO
         private void UpStepCapacity()
         {
             Capacity <<= 1;
-            T[] Temp = new T[Capacity];
+            var Temp = new T[Capacity];
             System.Array.Copy(Array, 0, Temp, 0, Array.Length);
             Array = Temp;
         }
@@ -213,13 +212,13 @@ namespace AIO
         {
             if (Index > Offset || Index < 0)
                 throw new IndexOutOfRangeException();
-            else Array[Index] = Obj;
+            Array[Index] = Obj;
         }
 
         /// <summary>
         /// 获取元素
         /// </summary>
-        private T Get(int Index)
+        private T Get(in int Index)
         {
             if (Index > Offset || Index < 0)
                 throw new IndexOutOfRangeException();
@@ -229,7 +228,7 @@ namespace AIO
         /// <summary>
         /// 修改元素
         /// </summary>
-        private void Set(T Obj, long Index)
+        private void Set(T Obj, in long Index)
         {
             if (Index > Offset || Index < 0)
                 throw new IndexOutOfRangeException();
@@ -239,11 +238,11 @@ namespace AIO
         /// <summary>
         /// 获取元素
         /// </summary>
-        private T Get(long Index)
+        private T Get(in long Index)
         {
             if (Index > Offset || Index < 0)
                 throw new IndexOutOfRangeException();
-            else return Array[Index];
+            return Array[Index];
         }
     }
 
@@ -286,9 +285,9 @@ namespace AIO
         /// <summary>
         /// 添加
         /// </summary>
-        public void Add(T Obj, int Count)
+        public void Add(T Obj, in int count)
         {
-            for (int i = 0; i < Count; i++)
+            for (var i = 0; i < count; i++)
                 Add(Obj);
         }
 
@@ -316,9 +315,13 @@ namespace AIO
                 Array[Offset++] = item;
         }
 
-        public void AddFirst(T Obj)
+        /// <summary>
+        /// 添加指定元素
+        /// </summary>
+        /// <param name="item">元素</param>
+        public void AddFirst(T item)
         {
-            Insert(0, Obj);
+            Insert(0, item);
         }
 
         #endregion
@@ -378,16 +381,16 @@ namespace AIO
         /// <summary>
         /// 获取指定值下标 从元素第几个开始查找
         /// </summary>
-        private int IndexOf(T Obj, int Offset)
+        private int IndexOf(T Obj, int offset)
         {
             if (Obj == null) throw new ArgumentNullException($"Buffer Array IndexOf Obj is null!");
-            for (int i = Offset; i < this.Offset; i++)
+            for (var i = offset; i < Offset; i++)
             {
                 if (Obj.Equals(Array[i]))
                     return i;
             }
 
-            if (this.Offset == 0) return -1;
+            if (Offset == 0) return -1;
             throw new IndexOutOfRangeException($"Buffer Array IndexOf Index Out of!");
         }
 

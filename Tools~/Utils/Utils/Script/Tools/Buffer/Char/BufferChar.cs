@@ -5,10 +5,11 @@
 |*|=============================================*/
 
 
+using System;
+using System.Globalization;
+
 namespace AIO
 {
-    using System;
-
     ///<summary>
     /// 字符缓存
     /// 建议使用 StringBuilder
@@ -31,12 +32,14 @@ namespace AIO
         private int offset;
 
         ///<summary> 构建一个默认的字符缓冲对象 </summary>
-        public BufferChar() : this(CAPACITY) { }
+        public BufferChar() : this(CAPACITY)
+        {
+        }
 
         ///<summary> 构建一个指定容量的字符缓冲对象 </summary>
         public BufferChar(int capacity)
         {
-            if (capacity < 1) throw new SystemException(typeof(BufferChar).Name + " <init>, invalid capatity:" + capacity);
+            if (capacity < 1) throw new SystemException(nameof(BufferChar) + " <init>, invalid capacity:" + capacity);
             this.array = new char[capacity];
             this.top = 0;
             this.offset = 0;
@@ -45,9 +48,7 @@ namespace AIO
         ///<summary> 通过一个字符数组构建一个字符缓冲对象 </summary>
         public BufferChar(char[] chars)
         {
-            if (chars == null)
-                throw new SystemException(typeof(BufferChar).Name + " <init>, null data");
-            this.array = chars;
+            this.array = chars ?? throw new SystemException(nameof(BufferChar) + " <init>, null data");
             this.top = chars.Length;
             this.offset = 0;
         }
@@ -56,11 +57,11 @@ namespace AIO
         public BufferChar(char[] chars, int offset, int len)
         {
             if (chars == null)
-                throw new SystemException(typeof(BufferChar).Name + " <init>, null data");
+                throw new SystemException(nameof(BufferChar) + " <init>, null data");
             if ((offset < 0) || (offset > chars.Length))
-                throw new SystemException(typeof(BufferChar).Name + " <init>, invalid index:" + offset);
+                throw new SystemException(nameof(BufferChar) + " <init>, invalid index:" + offset);
             if ((len < 0) || (chars.Length < offset + len))
-                throw new SystemException(typeof(BufferChar).Name + " <init>, invalid length:" + len);
+                throw new SystemException(nameof(BufferChar) + " <init>, invalid length:" + len);
             this.array = chars;
             this.top = (offset + len);
             this.offset = offset;
@@ -70,7 +71,7 @@ namespace AIO
         public BufferChar(string str)
         {
             if (str == null)
-                throw new SystemException(typeof(BufferChar).Name + " <init>, null str");
+                throw new SystemException(nameof(BufferChar) + " <init>, null str");
             int i = str.Length;
             this.array = new char[i + CAPACITY];
             str.CopyTo(0, this.array, 0, i);
@@ -85,11 +86,11 @@ namespace AIO
         ///<summary> 设置容量 </summary>
         protected virtual void SetCapacity(int value)
         {
-            int i = this.array.Length;
+            var i = this.array.Length;
             if (value <= i) return;
             for (; i < value; i = (i << 1) + 1)
                 ;
-            char[] chars = new char[i];
+            var chars = new char[i];
             System.Array.Copy(this.array, 0, chars, 0, this.top);
             this.array = chars;
         }
@@ -100,7 +101,7 @@ namespace AIO
             get => top;
             set
             {
-                if (value < offset) throw new SystemException(typeof(BufferChar).Name + " setTop, invalid top:" + value);
+                if (value < offset) throw new SystemException(nameof(BufferChar) + " setTop, invalid top:" + value);
                 if (value > array.Length) SetCapacity(value);
                 top = value;
             }
@@ -113,7 +114,7 @@ namespace AIO
             set
             {
                 if ((value < 0) || (value > top))
-                    throw new SystemException(typeof(BufferChar).Name + " setOffset, invalid offset:" + value);
+                    throw new SystemException(nameof(BufferChar) + " setOffset, invalid offset:" + value);
                 offset = value;
             }
         }
@@ -240,6 +241,7 @@ namespace AIO
                 this.array[i + 4] = 'e';
                 this.top += 5;
             }
+
             return this;
         }
 
@@ -260,6 +262,7 @@ namespace AIO
                 Append("-2147483648");
                 return this;
             }
+
             int i = this.top, j = 0, k = 0, l;
             if (number < 0)
             {
@@ -277,12 +280,14 @@ namespace AIO
                 j = k + 1;
                 if (this.array.Length < i + j) this.SetCapacity(i + j);
             }
+
             while (k >= 0)
             {
                 this.array[(i + k)] = (char)('0' + number % 10);
                 number /= 10;
                 --k;
             }
+
             this.top += j;
             return this;
         }
@@ -295,6 +300,7 @@ namespace AIO
                 Append("-9223372036854775808");
                 return this;
             }
+
             int i = this.top, j = 0, k = 0;
             long l;
             if (number < 0L)
@@ -313,12 +319,14 @@ namespace AIO
                 j = k + 1;
                 if (this.array.Length < i + j) this.SetCapacity(i + j);
             }
+
             while (k >= 0)
             {
                 this.array[(i + k)] = (char)(int)('0' + number % 10L);
                 number /= 10L;
                 --k;
             }
+
             this.top += j;
             return this;
         }
@@ -326,13 +334,13 @@ namespace AIO
         ///<summary> 附加一个float </summary>
         public BufferChar Append(float number)
         {
-            return Append(number.ToString());
+            return Append(number.ToString(NumberFormatInfo.CurrentInfo));
         }
 
         ///<summary> 附加一个double </summary>
         public BufferChar Append(double number)
         {
-            return Append(number.ToString());
+            return Append(number.ToString(NumberFormatInfo.CurrentInfo));
         }
 
         ///<summary> 转换为字符数组 </summary>
@@ -353,21 +361,21 @@ namespace AIO
         ///<summary> 获取字符串 </summary>
         public string GetString()
         {
-            return new String(this.array, this.offset, this.top - this.offset);
+            return new string(this.array, this.offset, this.top - this.offset);
         }
 
         ///<summary> 获取字符串 </summary>
         public string GetString(int sindex, int len)
         {
             if (len > this.top - this.offset) len = this.top - this.offset;
-            return new String(this.array, this.offset + sindex, len);
+            return new string(this.array, this.offset + sindex, len);
         }
 
         ///<summary> hash码 </summary>
         public override int GetHashCode()
         {
-            int code = 0;
-            for (int i = this.offset; i < this.top; ++i)
+            var code = 0;
+            for (var i = this.offset; i < this.top; ++i)
                 code = 31 * code + this.array[i];
             return code;
         }
@@ -377,13 +385,14 @@ namespace AIO
         {
             if (this == obj) return true;
             if (!(obj is BufferChar)) return false;
-            BufferChar charBuffer = (BufferChar)obj;
+            var charBuffer = (BufferChar)obj;
             if (charBuffer.top != top) return false;
             if (charBuffer.offset != offset) return false;
-            for (int i = top - 1; i >= 0; --i)
+            for (var i = top - 1; i >= 0; --i)
             {
                 if (charBuffer.array[i] != array[i]) return false;
             }
+
             return true;
         }
 

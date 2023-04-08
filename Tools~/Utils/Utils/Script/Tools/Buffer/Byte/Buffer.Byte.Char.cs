@@ -23,6 +23,14 @@ namespace AIO
         }
 
         /// <inheritdoc/> 
+        public void WriteChar(in char value, in bool reverse = false)
+        {
+            var bytes = BitConverter.GetBytes(value);
+            AutomaticExpansion(bytes.Length + 4);
+            Arrays.SetByteArray(ref WriteIndex, bytes, reverse);
+        }
+
+        /// <inheritdoc/> 
         public void WriteCharArray(in ICollection<char> value, in bool reverse = false)
         {
             AutomaticExpansion(4);
@@ -44,27 +52,5 @@ namespace AIO
             AutomaticExpansion(bytes.Length);
             Arrays.SetByteArray(ref WriteIndex, bytes, reverse);
         }
-
-        /// <inheritdoc/> 
-        public void WriteChar(in char value, in bool reverse = false)
-        {
-            var bytes = BitConverter.GetBytes(value);
-            AutomaticExpansion(bytes.Length + 4);
-            Arrays.SetByteArray(ref WriteIndex, bytes, reverse);
-        }
-    }
-
-    public partial interface IWrite
-    {
-        void WriteChar(in char value, in bool reverse = false);
-
-        void WriteCharArray(in ICollection<char> value, in bool reverse = false);
-    }
-
-    public partial interface IRead
-    {
-        char ReadChar(in bool reverse = false);
-
-        char[] ReadCharArray(in bool reverse = false);
     }
 }

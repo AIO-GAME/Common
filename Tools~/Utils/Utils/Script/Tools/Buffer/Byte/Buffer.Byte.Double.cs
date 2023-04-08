@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
@@ -13,20 +14,23 @@ namespace AIO
         }
 
         /// <inheritdoc/> 
+        public double[] ReadDoubleArray(in bool all, in bool reverse = false)
+        {
+            return Arrays.GetDoubleArray(ref ReadIndex, all, reverse);
+        }
+
+        /// <inheritdoc/> 
         public void WriteDouble(in double value, bool all = false, in bool reverse = false)
         {
             var bytes = all ? Encoding.UTF8.GetBytes(value.ToString(NumberFormatInfo.CurrentInfo)) : BitConverter.GetBytes(value);
             WriteByteArray(bytes, reverse);
         }
-    }
 
-    public partial interface IWrite
-    {
-        void WriteDouble(in double value, bool all = false, in bool reverse = false);
-    }
-
-    public partial interface IRead
-    {
-        double ReadDouble(in bool all = false, in bool reverse = false);
+        /// <inheritdoc/> 
+        public void WriteDoubleArray(in ICollection<double> value, in bool all, in bool reverse = false)
+        {
+            WriteLen(value.Count);
+            foreach (var item in value) WriteDouble(item, all, reverse);
+        }
     }
 }
