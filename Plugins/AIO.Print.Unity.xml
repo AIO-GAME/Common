@@ -156,16 +156,6 @@
             错误 
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Error``1(``0[])">
-            <summary>
-            错误 数组
-            </summary>
-        </member>
-        <member name="M:AIO.UPrint.Error(System.Object[])">
-            <summary>
-            错误 数组
-            </summary>
-        </member>
         <member name="M:AIO.UPrint.ErrorFormat``1(System.String@,``0[])">
             <summary>
             错误
@@ -202,16 +192,6 @@
             </summary>
         </member>
         <member name="M:AIO.UPrint.LogFormat(System.String@,System.Object[])">
-            <summary>
-            日志
-            </summary>
-        </member>
-        <member name="M:AIO.UPrint.Log``1(``0[])">
-            <summary>
-            日志
-            </summary>
-        </member>
-        <member name="M:AIO.UPrint.Log(System.Object[])">
             <summary>
             日志
             </summary>
@@ -292,16 +272,6 @@
             </summary>
         </member>
         <member name="M:AIO.UPrint.WarnFormat(System.String@,System.Object[])">
-            <summary>
-            警告
-            </summary>
-        </member>
-        <member name="M:AIO.UPrint.Warn``1(``0[])">
-            <summary>
-            警告
-            </summary>
-        </member>
-        <member name="M:AIO.UPrint.Warn(System.Object[])">
             <summary>
             警告
             </summary>

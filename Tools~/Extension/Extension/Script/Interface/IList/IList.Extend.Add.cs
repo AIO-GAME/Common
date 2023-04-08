@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 namespace AIO
 {
@@ -10,7 +8,6 @@ namespace AIO
         /// <summary>
         /// 添加相同元素
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void AddUnion<T>(this IList<T> array, in IEnumerable<T> others)
         {
             if (array is null) throw new ArgumentNullException(nameof(array), "The input array is null.");
@@ -24,7 +21,6 @@ namespace AIO
         /// <summary>
         /// 添加
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Add<T>(this IList<T> array, in T a1, in T a2)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
@@ -35,7 +31,6 @@ namespace AIO
         /// <summary>
         /// 添加
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Add<T>(this IList<T> array, in T a1, in T a2, in T a3)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
@@ -47,7 +42,6 @@ namespace AIO
         /// <summary>
         /// 添加
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Add<T>(this IList<T> array, in T a1, in T a2, in T a3, in T a4)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
@@ -60,7 +54,6 @@ namespace AIO
         /// <summary>
         /// 添加
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Add<T>(this IList<T> array, in IEnumerable<T> arrys)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
@@ -70,7 +63,6 @@ namespace AIO
         /// <summary>
         /// 添加
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void AddDicValue<T>(this IList<T> array, in IDictionary<object, T> arrys)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
@@ -80,7 +72,6 @@ namespace AIO
         /// <summary>
         /// 添加
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void AddDicKey<T>(this IList<T> array, in IDictionary<T, object> arrys)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
@@ -90,7 +81,6 @@ namespace AIO
         /// <summary>
         /// 添加
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void AddRange<T>(this IList<T> array, in IList<T> others, int start, int end)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));

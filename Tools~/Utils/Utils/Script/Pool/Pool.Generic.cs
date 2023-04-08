@@ -1,8 +1,6 @@
-﻿using AIO;
+﻿using System;
+using AIO;
 
-using System;
-
-using X = System.Collections.Generic;
 public static partial class Pool
 {
     /// <summary>
@@ -10,9 +8,11 @@ public static partial class Pool
     /// </summary>
     public static class Generic<T> where T : class, IPoolable
     {
-        private static readonly object @lock = new object();
-        private static readonly X.Stack<T> free = new X.Stack<T>();
-        private static readonly X.HashSet<T> busy = new X.HashSet<T>(ReferenceEqualityComparer<T>.Instance);
+        private static readonly System.Collections.Generic.Stack<T>
+            free = new System.Collections.Generic.Stack<T>();
+
+        private static readonly System.Collections.Generic.HashSet<T>
+            busy = new System.Collections.Generic.HashSet<T>(ReferenceEqualityComparer<T>.Instance);
 
         /// <summary>
         /// 创建

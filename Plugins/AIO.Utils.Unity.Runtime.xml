@@ -1206,12 +1206,12 @@
             序列化
             </summary>
         </member>
-        <member name="M:AIO.Unity.ScriptableData.ToSerialize(AIO.IWriteData)">
+        <member name="M:AIO.Unity.ScriptableData.ToSerialize(AIO.IWriteIData)">
             <summary>
             序列化
             </summary>
         </member>
-        <member name="M:AIO.Unity.ScriptableData.ToDeserialize(AIO.IReadData)">
+        <member name="M:AIO.Unity.ScriptableData.ToDeserialize(AIO.IReadIData)">
             <summary>
             反序列化
             </summary>

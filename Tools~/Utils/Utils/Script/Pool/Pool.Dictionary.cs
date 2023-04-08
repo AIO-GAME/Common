@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using X = System.Collections.Generic;
-
 public static partial class Pool
 {
     /// <summary>
@@ -10,20 +8,22 @@ public static partial class Pool
     /// </summary>
     public static class Dictionary<K, V>
     {
-        private static readonly object @lock = new object();
-        private static readonly X.Stack<X.Dictionary<K, V>> free = new X.Stack<X.Dictionary<K, V>>();
-        private static readonly X.HashSet<X.Dictionary<K, V>> busy = new X.HashSet<X.Dictionary<K, V>>();
+        private static readonly System.Collections.Generic.Stack<System.Collections.Generic.Dictionary<K, V>>
+            free = new System.Collections.Generic.Stack<System.Collections.Generic.Dictionary<K, V>>();
+
+        private static readonly System.Collections.Generic.HashSet<System.Collections.Generic.Dictionary<K, V>>
+            busy = new System.Collections.Generic.HashSet<System.Collections.Generic.Dictionary<K, V>>();
 
         /// <summary>
         /// 创建
         /// </summary>
-        public static X.Dictionary<K, V> New()
+        public static System.Collections.Generic.Dictionary<K, V> New()
         {
             lock (@lock)
             {
                 if (free.Count == 0)
                 {
-                    free.Push(new X.Dictionary<K, V>());
+                    free.Push(new System.Collections.Generic.Dictionary<K, V>());
                 }
 
                 var array = free.Pop();
@@ -37,7 +37,7 @@ public static partial class Pool
         /// <summary>
         /// 释放
         /// </summary>
-        public static void Free(X.Dictionary<K, V> list)
+        public static void Free(System.Collections.Generic.Dictionary<K, V> list)
         {
             lock (@lock)
             {
@@ -54,7 +54,6 @@ public static partial class Pool
             }
         }
     }
-
 }
 
 public static partial class PoolExtend

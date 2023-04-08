@@ -85,26 +85,6 @@ namespace AIO
         }
 
         /// <summary>
-        /// 错误 数组
-        /// </summary>
-        [Conditional(MACRO_DEFINITION)]
-        public static void Error<T>(params T[] objs)
-        {
-            if (IsNotOut || NoStatus(ERROR)) return;
-            Debug.unityLogger.Log(LogType.Error, IList(objs));
-        }
-
-        /// <summary>
-        /// 错误 数组
-        /// </summary>
-        [Conditional(MACRO_DEFINITION)]
-        public static void Error(params object[] objs)
-        {
-            if (IsNotOut || NoStatus(ERROR)) return;
-            Debug.unityLogger.Log(LogType.Error, IList(objs));
-        }
-
-        /// <summary>
         /// 错误
         /// </summary>
         [Conditional(MACRO_DEFINITION)]

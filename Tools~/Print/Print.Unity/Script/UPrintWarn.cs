@@ -104,25 +104,5 @@ namespace AIO
             if (IsNotOut || NoStatus(WARNING)) return;
             Debug.unityLogger.LogFormat(LogType.Warning, string.Format(format, objs));
         }
-
-        /// <summary>
-        /// 警告
-        /// </summary>
-        [Conditional(MACRO_DEFINITION)]
-        public static void Warn<T>(params T[] objs)
-        {
-            if (IsNotOut || NoStatus(WARNING)) return;
-            Debug.unityLogger.Log(LogType.Warning, IList(objs));
-        }
-
-        /// <summary>
-        /// 警告
-        /// </summary>
-        [Conditional(MACRO_DEFINITION)]
-        public static void Warn(params object[] objs)
-        {
-            if (IsNotOut || NoStatus(WARNING)) return;
-            Debug.unityLogger.Log(LogType.Warning, IList(objs));
-        }
     }
 }

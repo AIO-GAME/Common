@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extension", "Extension\Exte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools", "Tools\Tools\Tools.csproj", "{72173960-51C4-43EB-AEB9-998CCCE0309D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZTest", "ZTest\ZTest.csproj", "{011BA598-4E9F-4EA7-98C6-6C6F4DEF8C60}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,10 @@ Global
 		{72173960-51C4-43EB-AEB9-998CCCE0309D}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{72173960-51C4-43EB-AEB9-998CCCE0309D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72173960-51C4-43EB-AEB9-998CCCE0309D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{011BA598-4E9F-4EA7-98C6-6C6F4DEF8C60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{011BA598-4E9F-4EA7-98C6-6C6F4DEF8C60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{011BA598-4E9F-4EA7-98C6-6C6F4DEF8C60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{011BA598-4E9F-4EA7-98C6-6C6F4DEF8C60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

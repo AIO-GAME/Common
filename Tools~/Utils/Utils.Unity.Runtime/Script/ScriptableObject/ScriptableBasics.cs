@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using UnityEngine;
 
 namespace AIO.Unity
@@ -7,13 +6,13 @@ namespace AIO.Unity
     /// <summary>
     /// Unity 可持续化数据
     /// </summary>
-    public abstract class ScriptableBasics : ScriptableObject, ISerialize, IDisposable
+    public abstract class ScriptableBasics : ScriptableObject, IBinStorage
     {
         /// <inheritdoc/>
         public byte[] Data
         {
-            get { return data; }
-            protected set { data = value; }
+            get => data;
+            protected set => data = value;
         }
 
         [Description("数据")] [SerializeReference, SerializeField]

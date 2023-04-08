@@ -103,25 +103,5 @@ namespace AIO
             if (IsNotOut || NoStatus(LOG)) return;
             Debug.unityLogger.LogFormat(LogType.Log, string.Format(format, objs));
         }
-
-        /// <summary>
-        /// 日志
-        /// </summary>
-        [Conditional(MACRO_DEFINITION)]
-        public static void Log<T>(params T[] objs)
-        {
-            if (IsNotOut || NoStatus(LOG)) return;
-            Debug.unityLogger.Log(LogType.Log, IList(objs));
-        }
-
-        /// <summary>
-        /// 日志
-        /// </summary>
-        [Conditional(MACRO_DEFINITION)]
-        public static void Log(params object[] objs)
-        {
-            if (IsNotOut || NoStatus(LOG)) return;
-            Debug.unityLogger.Log(LogType.Log, IList(objs));
-        }
     }
 }
