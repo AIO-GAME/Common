@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using X = System.Collections.Generic;
-
 public static partial class Pool
 {
     /// <summary>
@@ -10,20 +8,22 @@ public static partial class Pool
     /// </summary>
     public static class Queue<T>
     {
-        private static readonly object @lock = new object();
-        private static readonly X.Stack<X.Queue<T>> free = new X.Stack<X.Queue<T>>();
-        private static readonly X.HashSet<X.Queue<T>> busy = new X.HashSet<X.Queue<T>>();
+        private static readonly System.Collections.Generic.Stack<System.Collections.Generic.Queue<T>>
+            free = new System.Collections.Generic.Stack<System.Collections.Generic.Queue<T>>();
+
+        private static readonly System.Collections.Generic.HashSet<System.Collections.Generic.Queue<T>>
+            busy = new System.Collections.Generic.HashSet<System.Collections.Generic.Queue<T>>();
 
         /// <summary>
         /// 创建新的
         /// </summary>
-        public static X.Queue<T> New()
+        public static System.Collections.Generic.Queue<T> New()
         {
             lock (@lock)
             {
                 if (free.Count == 0)
                 {
-                    free.Push(new X.Queue<T>());
+                    free.Push(new System.Collections.Generic.Queue<T>());
                 }
 
                 var array = free.Pop();
@@ -37,7 +37,7 @@ public static partial class Pool
         /// <summary>
         /// 释放Queue
         /// </summary>
-        public static void Free(X.Queue<T> Queue)
+        public static void Free(System.Collections.Generic.Queue<T> Queue)
         {
             lock (@lock)
             {
@@ -54,7 +54,6 @@ public static partial class Pool
             }
         }
     }
-
 }
 
 public static partial class PoolExtend

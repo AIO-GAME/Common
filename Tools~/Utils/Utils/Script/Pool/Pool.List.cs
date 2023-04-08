@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
-using X = System.Collections.Generic;
+using System.Linq;
 
 public static partial class Pool
 {
@@ -10,20 +9,23 @@ public static partial class Pool
     /// </summary>
     public static class List<T>
     {
-        private static readonly object @lock = new object();
-        private static readonly X.Stack<X.List<T>> free = new X.Stack<X.List<T>>();
-        private static readonly X.HashSet<X.List<T>> busy = new X.HashSet<X.List<T>>();
+
+        private static readonly System.Collections.Generic.Stack<System.Collections.Generic.List<T>>
+            free = new System.Collections.Generic.Stack<System.Collections.Generic.List<T>>();
+
+        private static readonly System.Collections.Generic.HashSet<System.Collections.Generic.List<T>>
+            busy = new System.Collections.Generic.HashSet<System.Collections.Generic.List<T>>();
 
         /// <summary>
         /// 创建新的
         /// </summary>
-        public static X.List<T> New()
+        public static System.Collections.Generic.List<T> New()
         {
             lock (@lock)
             {
                 if (free.Count == 0)
                 {
-                    free.Push(new X.List<T>());
+                    free.Push(new System.Collections.Generic.List<T>());
                 }
 
                 var array = free.Pop();
@@ -37,7 +39,7 @@ public static partial class Pool
         /// <summary>
         /// 释放List
         /// </summary>
-        public static void Free(X.List<T> list)
+        public static void Free(System.Collections.Generic.List<T> list)
         {
             lock (@lock)
             {
@@ -47,15 +49,13 @@ public static partial class Pool
                 }
 
                 list.Clear();
-
                 busy.Remove(list);
-
                 free.Push(list);
             }
         }
     }
-
 }
+
 public static partial class PoolExtend
 {
     /// <summary>
@@ -64,7 +64,7 @@ public static partial class PoolExtend
     public static List<T> ToListPooled<T>(this IEnumerable<T> source)
     {
         var list = Pool.List<T>.New();
-        foreach (var item in source) list.Add(item);
+        list.AddRange(source);
         return list;
     }
 
@@ -74,7 +74,7 @@ public static partial class PoolExtend
     public static List<T> ToListPooledKey<T, V>(this IDictionary<T, V> source)
     {
         var list = Pool.List<T>.New();
-        foreach (var item in source) list.Add(item.Key);
+        list.AddRange(source.Select(item => item.Key));
         return list;
     }
 
@@ -84,7 +84,7 @@ public static partial class PoolExtend
     public static List<T> ToListPooledValue<V, T>(this IDictionary<V, T> source)
     {
         var list = Pool.List<T>.New();
-        foreach (var item in source) list.Add(item.Value);
+        list.AddRange(source.Select(item => item.Value));
         return list;
     }
 

@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Specialized;
+using System.Linq;
+using AIO;
+
 namespace ALL.Test
 {
     using NUnit.Framework;
@@ -12,7 +17,7 @@ namespace ALL.Test
         [Test]
         public void Test1()
         {
-            System.Console.WriteLine("-------------------");
+          
         }
     }
 }

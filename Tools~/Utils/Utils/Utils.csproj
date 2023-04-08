@@ -61,11 +61,11 @@
     <Compile Include="Script\Interface\ICollection\MergedKeyedCollection.cs" />
     <Compile Include="Script\Interface\ICollection\VariantKeyedCollection.cs" />
     <Compile Include="Script\Interface\IEqualityComparer\ReferenceEqualityComparer.cs" />
-    <Compile Include="Script\Interface\ISerialize.cs" />
     <Compile Include="Script\Pool\Pool.Generic.cs" />
     <Compile Include="Script\Pool\IPoolable.cs" />
     <Compile Include="Script\Pool\Pool.HashSet.cs" />
     <Compile Include="Script\Pool\Pool.List.cs" />
+    <Compile Include="Script\Pool\Pool.SortedList.cs" />
     <Compile Include="Script\Pool\Pool.Stack.cs" />
     <Compile Include="Script\Exception\AmbiguousOperatorException.cs" />
     <Compile Include="Script\Exception\InvalidConversionException.cs" />

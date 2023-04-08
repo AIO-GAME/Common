@@ -86,34 +86,33 @@ namespace AIO
         /// <summary>
         /// 判断状态
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         internal static bool NoStatus(in int status)
         {
             if (CurOutLevel < 0) return true;
             return (CurOutLevel & status) != status;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static IEnumerable<char> IEnumerable<T>(in T objs) where T : IEnumerable
+
+        internal static IEnumerable<char> IEnumerable(in IEnumerable objs)
         {
             var str = new StringBuilder();
             var count = 0;
             foreach (var item in objs)
             {
-                str.Append(string.Format("{0}:{1}", count++, item)).Append("\r\n");
+                str.Append(string.Format("{0}:{1}", count++, item.ToString())).Append("\r\n");
             }
 
             var message = string.Format("Count: {0}\r\n", count);
             if (str.Length > 0)
             {
                 str.Insert(0, message);
-                message = str.Remove(message.Length - 2, 2).ToString();
+                message = str.Remove(str.Length - 2, 2).ToString();
             }
             return message;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static IEnumerable<char> ICollection<T>(in T objs) where T : ICollection
+        internal static IEnumerable<char> ICollection(in ICollection objs)
         {
             var r = string.Format("Count: {0}\r\n", objs.Count);
             if (objs.Count > 0)
@@ -121,14 +120,13 @@ namespace AIO
                 var index = 1;
                 var str = new StringBuilder(r).Append("\r\n");
                 foreach (var item in objs)
-                    str.Append(index++).Append(':').Append(item).Append("\r\n");
-                r = str.Remove(r.Length - 2, 2).ToString();
+                    str.Append(index++).Append(':').Append(item.ToString()).Append("\r\n");
+                r = str.Remove(str.Length - 2, 2).ToString();
             }
             return r;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static IEnumerable<char> IList<T>(in T objs) where T : IList
+        internal static IEnumerable<char> IList(in IList objs)
         {
             var r = string.Format("Count: {0}\r\n", objs.Count);
             if (objs.Count > 0)
@@ -136,14 +134,13 @@ namespace AIO
                 var index = 1;
                 var str = new StringBuilder(r).Append("\r\n");
                 foreach (var item in objs)
-                    str.Append(index++).Append(':').Append(item).Append("\r\n");
-                r = str.Remove(r.Length - 2, 2).ToString();
+                    str.Append(index++).Append(':').Append(item.ToString()).Append("\r\n");
+                r = str.Remove(str.Length - 2, 2).ToString();
             }
             return r;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static IEnumerable<char> IDictionary<T>(in T objs) where T : IDictionary
+        internal static IEnumerable<char> IDictionary(in IDictionary objs)
         {
             var r = string.Format("Count: {0}\r\n", objs.Count);
             if (objs.Count > 0)
@@ -153,16 +150,12 @@ namespace AIO
                 foreach (DictionaryEntry dic in objs)
                 {
                     if (dic.Value != null)
-                    {
-                        str.Append($"[{index++}]{dic.Key}:{dic.Value}\r\n");
-                    }
-                    else str.Append($"[{index++}]{dic.Key}:NULL\r\n");
+                        str.Append($"[{index++}]{dic.Key.ToString()}:{dic.Value.ToString()}\r\n");
+                    else str.Append($"[{index++}]{dic.Key.ToString()}:NULL\r\n");
                 }
-
-                r = str.Remove(r.Length - 2, 2).ToString();
+                r = str.Remove(str.Length - 2, 2).ToString();
             }
             return r;
         }
-
     }
 }

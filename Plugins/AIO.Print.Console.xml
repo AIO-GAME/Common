@@ -9,17 +9,7 @@
             打印
             </summary>
         </member>
-        <member name="M:AIO.CPrint.Log``1(``0[])">
-            <summary>
-            日志
-            </summary>
-        </member>
-        <member name="M:AIO.CPrint.Log(System.Object[])">
-            <summary>
-            日志
-            </summary>
-        </member>
-        <member name="M:AIO.CPrint.Log``1(``0@,AIO.EFormat)">
+        <member name="M:AIO.CPrint.Log``1(``0@,AIO.EFormat@)">
             <summary>
             日志
             </summary>
@@ -29,7 +19,22 @@
             日志
             </summary>
         </member>
-        <member name="M:AIO.CPrint.Log``1(``0@)">
+        <member name="M:AIO.CPrint.Log(System.Collections.IDictionary@)">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Log(System.Collections.IList@)">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Log(System.Collections.ICollection@)">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.Log(System.Collections.IEnumerable@)">
             <summary>
             日志
             </summary>

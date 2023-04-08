@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using X = System.Collections.Generic;
-
 /// <summary>
 /// 对象池
 /// </summary>
@@ -13,20 +11,22 @@ public static partial class Pool
     /// </summary>
     public static class Stack<T>
     {
-        private static readonly object @lock = new object();
-        private static readonly X.Stack<X.Stack<T>> free = new X.Stack<X.Stack<T>>();
-        private static readonly X.HashSet<X.Stack<T>> busy = new X.HashSet<X.Stack<T>>();
+        private static readonly System.Collections.Generic.Stack<System.Collections.Generic.Stack<T>>
+            free = new System.Collections.Generic.Stack<System.Collections.Generic.Stack<T>>();
+
+        private static readonly System.Collections.Generic.HashSet<System.Collections.Generic.Stack<T>>
+            busy = new System.Collections.Generic.HashSet<System.Collections.Generic.Stack<T>>();
 
         /// <summary>
         /// 创建新的
         /// </summary>
-        public static X.Stack<T> New()
+        public static System.Collections.Generic.Stack<T> New()
         {
             lock (@lock)
             {
                 if (free.Count == 0)
                 {
-                    free.Push(new X.Stack<T>());
+                    free.Push(new System.Collections.Generic.Stack<T>());
                 }
 
                 var array = free.Pop();
@@ -40,7 +40,7 @@ public static partial class Pool
         /// <summary>
         /// 释放Stack
         /// </summary>
-        public static void Free(X.Stack<T> Stack)
+        public static void Free(System.Collections.Generic.Stack<T> Stack)
         {
             lock (@lock)
             {
@@ -57,7 +57,6 @@ public static partial class Pool
             }
         }
     }
-
 }
 
 /// <summary>

@@ -508,6 +508,18 @@
             get    :  需要传入索引,在字节缓存的指定索引处读取一个,不影响缓存读写进度
             method_:  为倒序写入 倒序读取
         </member>
+        <member name="M:AIO.BufferByte.WriteCollection``1(System.Collections.Generic.ICollection{``0}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BufferByte.ReadCollection``1(System.Collections.Generic.ICollection{``0})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BufferByte.WriteDictionary``2(System.Collections.Generic.IDictionary{``0,``1}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BufferByte.ReadDictionary``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <inheritdoc />
+        </member>
         <member name="M:AIO.BufferByte.ReadBool">
             <inheritdoc/> 
         </member>
@@ -565,6 +577,33 @@
         <member name="M:AIO.BufferByte.ToString">
             <inheritdoc/>
         </member>
+        <member name="M:AIO.BufferByte.ReadData``1">
+            <summary>
+            读取数据
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <returns>值</returns>
+        </member>
+        <member name="M:AIO.BufferByte.ReadDataArray``1(System.Collections.Generic.ICollection{``0})">
+            <summary>
+            读取数据
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <returns>值</returns>
+        </member>
+        <member name="M:AIO.BufferByte.WriteData``1(``0)">
+            <summary>
+            写入二进制数据
+            </summary>
+            <param name="buffer">数据</param>
+        </member>
+        <member name="M:AIO.BufferByte.WriteDataArray``1(System.Collections.Generic.ICollection{``0}@)">
+            <summary>
+            读取数据
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <returns>值</returns>
+        </member>
         <member name="M:AIO.BufferByte.Dispose">
             <inheritdoc/>
         </member>
@@ -615,6 +654,12 @@
         </member>
         <member name="M:AIO.BufferByte.WriteFloatArray(System.Collections.Generic.ICollection{System.Single}@,System.Boolean@,System.Boolean@)">
             <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteList``1(System.Collections.Generic.IList{``0}@)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BufferByte.ReadList``1(System.Collections.Generic.IList{``0})">
+            <inheritdoc />
         </member>
         <member name="M:AIO.BufferByte.ReadInt16(System.Boolean@)">
             <inheritdoc/> 
@@ -913,15 +958,87 @@
         <member name="M:AIO.BufferChar.ToString">
             <summary> 信息 </summary>
         </member>
-        <member name="T:AIO.IReadData">
+        <member name="T:AIO.IReadIData">
             <summary>
             数据读取接口
             </summary>
         </member>
-        <member name="T:AIO.IWriteData">
+        <member name="P:AIO.IReadIData.Count">
+            <summary>
+            可读数据长度
+            </summary>
+        </member>
+        <member name="M:AIO.IReadIData.ReadData``1">
+            <summary>
+            读取数据
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <returns>值</returns>
+        </member>
+        <member name="M:AIO.IReadIData.ReadDataArray``1(System.Collections.Generic.ICollection{``0})">
+            <summary>
+            读取数据
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <returns>值</returns>
+        </member>
+        <member name="T:AIO.IReadICollection">
+            <summary>
+            读取字典
+            </summary>
+        </member>
+        <member name="M:AIO.IReadICollection.ReadCollection``1(System.Collections.Generic.ICollection{``0})">
+            <summary>
+            读取字典
+            </summary>
+        </member>
+        <member name="T:AIO.IReadIDictionary">
+            <summary>
+            读取字典
+            </summary>
+        </member>
+        <member name="M:AIO.IReadIDictionary.ReadDictionary``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            读取字典
+            </summary>
+        </member>
+        <member name="T:AIO.IReadIList">
+            <summary>
+            读取字典
+            </summary>
+        </member>
+        <member name="M:AIO.IReadIList.ReadList``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            读取字典
+            </summary>
+        </member>
+        <member name="T:AIO.IReset">
+            <summary>
+            重置
+            </summary>
+        </member>
+        <member name="M:AIO.IReset.Reset">
+            <summary>
+            重置
+            </summary>
+        </member>
+        <member name="T:AIO.IWriteIData">
             <summary>
             写入数据
             </summary>
+        </member>
+        <member name="M:AIO.IWriteIData.WriteData``1(``0)">
+            <summary>
+            写入二进制数据
+            </summary>
+            <param name="buffer">数据</param>
+        </member>
+        <member name="M:AIO.IWriteIData.WriteDataArray``1(System.Collections.Generic.ICollection{``0}@)">
+            <summary>
+            读取数据
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <returns>值</returns>
         </member>
         <member name="T:AIO.IReadBool">
             <summary>
@@ -1397,6 +1514,36 @@
             写入指定数据类型
             </summary>
         </member>
+        <member name="T:AIO.IWriteICollection">
+            <summary>
+            写入字典
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteICollection.WriteCollection``1(System.Collections.Generic.ICollection{``0}@)">
+            <summary>
+            写入字典
+            </summary>
+        </member>
+        <member name="T:AIO.IWriteIDictionary">
+            <summary>
+            写入字典
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteIDictionary.WriteDictionary``2(System.Collections.Generic.IDictionary{``0,``1}@)">
+            <summary>
+            写入字典
+            </summary>
+        </member>
+        <member name="T:AIO.IWriteIList">
+            <summary>
+            写入字典
+            </summary>
+        </member>
+        <member name="M:AIO.IWriteIList.WriteList``1(System.Collections.Generic.IList{``0}@)">
+            <summary>
+            写入字典
+            </summary>
+        </member>
         <member name="T:AIO.IWriteInt16">
             <summary>
             写入指定数据类型
@@ -1773,6 +1920,809 @@
             <summary>
             写入数据
             </summary>
+        </member>
+        <member name="T:AIO.IBinDeserialize">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AIO.IBinDeserialize.Deserialize(AIO.IReadIData)">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="T:AIO.IBinSerialize">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AIO.IBinSerialize.Serialize(AIO.IWriteIData)">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="T:AIO.IBinStorage">
+            <summary>
+            二进制数据存储
+            </summary>
+        </member>
+        <member name="P:AIO.IBinStorage.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="T:AIO.IDeserialize">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AIO.IDeserialize.Deserialize">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="T:AIO.ISerialize">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AIO.ISerialize.Serialize">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="T:AIO.BinDictionary`2">
+            <summary>
+            数据字典
+            </summary>
+            <typeparam name="K">Key泛型</typeparam>
+            <typeparam name="V">Value泛型</typeparam>
+        </member>
+        <member name="P:AIO.BinDictionary`2.Collection">
+            <summary>
+            集合
+            </summary>
+        </member>
+        <member name="M:AIO.BinDictionary`2.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.BinDictionary`2.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.Deserialize(AIO.IReadIData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.Serialize(AIO.IWriteIData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.Reset">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.Add(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.Clear">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.Contains(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.CopyTo(System.Collections.Generic.KeyValuePair{`0,`1}[],System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.Remove(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinDictionary`2.Count">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinDictionary`2.IsReadOnly">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.ContainsKey(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.Add(`0,`1)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.Remove(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.TryGetValue(`0,`1@)">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinDictionary`2.Item(`0)">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinDictionary`2.Keys">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinDictionary`2.Values">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.BinQueue`1">
+            <summary>
+            数据队列
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:AIO.BinQueue`1.Collection">
+            <summary>
+            集合
+            </summary>
+        </member>
+        <member name="M:AIO.BinQueue`1.#ctor">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:AIO.BinQueue`1.Dispose">
+            <summary>
+            执行与释放或重置非托管资源关联的应用程序定义的任务。
+            </summary>
+        </member>
+        <member name="M:AIO.BinQueue`1.Deserialize(AIO.IReadIData)">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AIO.BinQueue`1.Serialize(AIO.IWriteIData)">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AIO.BinQueue`1.Reset">
+            <summary>
+            重置
+            </summary>
+        </member>
+        <member name="M:AIO.BinQueue`1.GetEnumerator">
+            <summary>返回一个循环访问集合的枚举器。</summary>
+            <returns>用于循环访问集合的枚举数。</returns>
+        </member>
+        <member name="M:AIO.BinQueue`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>返回循环访问集合的枚举数。</summary>
+            <returns>
+              一个可用于循环访问集合的 <see cref="T:System.Collections.IEnumerator" /> 对象。
+            </returns>
+        </member>
+        <member name="M:AIO.BinQueue`1.CopyTo(System.Array,System.Int32)">
+            <summary>
+              从特定的 <see cref="T:System.Collections.ICollection" /> 索引处开始，将 <see cref="T:System.Array" /> 的元素复制到一个 <see cref="T:System.Array" /> 中。
+            </summary>
+            <param name="array">
+              一维 <see cref="T:System.Array" />，它是从 <see cref="T:System.Collections.ICollection" /> 复制的元素的目标。
+              <see cref="T:System.Array" /> 必须具有从零开始的索引。
+            </param>
+            <param name="index">
+              <paramref name="array" /> 中从零开始的索引，从此处开始复制。
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="array" /> 为 <see langword="null" />。
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="index" /> 小于零。
+            </exception>
+            <exception cref="T:System.ArgumentException">
+              <paramref name="array" /> 是多维的。
+              - 或 -
+              源中的元素数目 <see cref="T:System.Collections.ICollection" /> 大于从的可用空间 <paramref name="index" /> 目标从头到尾 <paramref name="array" />。
+              - 或 -
+              无法自动将源 <see cref="T:System.Collections.ICollection" /> 的类型转换为目标 <paramref name="array" /> 的类型。
+            </exception>
+        </member>
+        <member name="P:AIO.BinQueue`1.System#Collections#ICollection#Count">
+            <summary>
+              获取 <see cref="T:System.Collections.ICollection" /> 中包含的元素数。
+            </summary>
+            <returns>
+              <see cref="T:System.Collections.ICollection" /> 中包含的元素数。
+            </returns>
+        </member>
+        <member name="P:AIO.BinQueue`1.SyncRoot">
+            <summary>
+              获取可用于同步对 <see cref="T:System.Collections.ICollection" /> 的访问的对象。
+            </summary>
+            <returns>
+              可用于同步对 <see cref="T:System.Collections.ICollection" /> 的访问的对象。
+            </returns>
+        </member>
+        <member name="P:AIO.BinQueue`1.IsSynchronized">
+            <summary>
+              获取一个值，该值指示是否同步对 <see cref="T:System.Collections.ICollection" /> 的访问（线程安全）。
+            </summary>
+            <returns>
+              如果对 <see langword="true" /> 的访问是同步的（线程安全），则为 <see cref="T:System.Collections.ICollection" />；否则为 <see langword="false" />。
+            </returns>
+        </member>
+        <member name="P:AIO.BinQueue`1.System#Collections#Generic#IReadOnlyCollection{T}#Count">
+            <summary>获取集合中的元素数。</summary>
+            <returns>集合中的元素数。</returns>
+        </member>
+        <member name="T:AIO.BinSortedList`2">
+            <summary>
+            数据字典
+            </summary>
+            <typeparam name="TKey">Key泛型</typeparam>
+            <typeparam name="TValue">Value泛型</typeparam>
+        </member>
+        <member name="P:AIO.BinSortedList`2.Collection">
+            <summary>
+            集合
+            </summary>
+        </member>
+        <member name="M:AIO.BinSortedList`2.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.BinSortedList`2.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.Deserialize(AIO.IReadIData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.Serialize(AIO.IWriteIData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.Reset">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.Add(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.Clear">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.Contains(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.CopyTo(System.Collections.Generic.KeyValuePair{`0,`1}[],System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.Remove(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.CopyTo(System.Array,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinSortedList`2.Count">
+            <inheritdoc cref="P:System.Collections.Generic.ICollection`1.Count" />
+        </member>
+        <member name="P:AIO.BinSortedList`2.SyncRoot">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinSortedList`2.IsSynchronized">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinSortedList`2.IsReadOnly">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.ContainsKey(`0)">
+            <inheritdoc cref="M:System.Collections.Generic.IDictionary`2.ContainsKey(`0)" />
+        </member>
+        <member name="M:AIO.BinSortedList`2.Add(`0,`1)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.Remove(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.TryGetValue(`0,`1@)">
+            <inheritdoc cref="M:System.Collections.Generic.IDictionary`2.TryGetValue(`0,`1@)" />
+        </member>
+        <member name="P:AIO.BinSortedList`2.Item(`0)">
+            <inheritdoc cref="P:System.Collections.Generic.IDictionary`2.Item(`0)" />
+        </member>
+        <member name="P:AIO.BinSortedList`2.System#Collections#Generic#IReadOnlyDictionary{TKey,TValue}#Keys">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinSortedList`2.System#Collections#Generic#IReadOnlyDictionary{TKey,TValue}#Values">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinSortedList`2.Keys">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinSortedList`2.Values">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.BinStack`1">
+            <summary>
+            数据队列
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:AIO.BinStack`1.Collection">
+            <summary>
+            集合
+            </summary>
+        </member>
+        <member name="M:AIO.BinStack`1.#ctor">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:AIO.BinStack`1.Dispose">
+            <summary>
+            执行与释放或重置非托管资源关联的应用程序定义的任务。
+            </summary>
+        </member>
+        <member name="M:AIO.BinStack`1.Deserialize(AIO.IReadIData)">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AIO.BinStack`1.Serialize(AIO.IWriteIData)">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AIO.BinStack`1.Reset">
+            <summary>
+            重置
+            </summary>
+        </member>
+        <member name="M:AIO.BinStack`1.GetEnumerator">
+            <summary>返回一个循环访问集合的枚举器。</summary>
+            <returns>用于循环访问集合的枚举数。</returns>
+        </member>
+        <member name="M:AIO.BinStack`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>返回循环访问集合的枚举数。</summary>
+            <returns>
+              一个可用于循环访问集合的 <see cref="T:System.Collections.IEnumerator" /> 对象。
+            </returns>
+        </member>
+        <member name="M:AIO.BinStack`1.CopyTo(System.Array,System.Int32)">
+            <summary>
+              从特定的 <see cref="T:System.Collections.ICollection" /> 索引处开始，将 <see cref="T:System.Array" /> 的元素复制到一个 <see cref="T:System.Array" /> 中。
+            </summary>
+            <param name="array">
+              一维 <see cref="T:System.Array" />，它是从 <see cref="T:System.Collections.ICollection" /> 复制的元素的目标。
+              <see cref="T:System.Array" /> 必须具有从零开始的索引。
+            </param>
+            <param name="index">
+              <paramref name="array" /> 中从零开始的索引，从此处开始复制。
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="array" /> 为 <see langword="null" />。
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="index" /> 小于零。
+            </exception>
+            <exception cref="T:System.ArgumentException">
+              <paramref name="array" /> 是多维的。
+              - 或 -
+              源中的元素数目 <see cref="T:System.Collections.ICollection" /> 大于从的可用空间 <paramref name="index" /> 目标从头到尾 <paramref name="array" />。
+              - 或 -
+              无法自动将源 <see cref="T:System.Collections.ICollection" /> 的类型转换为目标 <paramref name="array" /> 的类型。
+            </exception>
+        </member>
+        <member name="P:AIO.BinStack`1.System#Collections#ICollection#Count">
+            <summary>
+              获取 <see cref="T:System.Collections.ICollection" /> 中包含的元素数。
+            </summary>
+            <returns>
+              <see cref="T:System.Collections.ICollection" /> 中包含的元素数。
+            </returns>
+        </member>
+        <member name="P:AIO.BinStack`1.SyncRoot">
+            <summary>
+              获取可用于同步对 <see cref="T:System.Collections.ICollection" /> 的访问的对象。
+            </summary>
+            <returns>
+              可用于同步对 <see cref="T:System.Collections.ICollection" /> 的访问的对象。
+            </returns>
+        </member>
+        <member name="P:AIO.BinStack`1.IsSynchronized">
+            <summary>
+              获取一个值，该值指示是否同步对 <see cref="T:System.Collections.ICollection" /> 的访问（线程安全）。
+            </summary>
+            <returns>
+              如果对 <see langword="true" /> 的访问是同步的（线程安全），则为 <see cref="T:System.Collections.ICollection" />；否则为 <see langword="false" />。
+            </returns>
+        </member>
+        <member name="P:AIO.BinStack`1.System#Collections#Generic#IReadOnlyCollection{T}#Count">
+            <summary>获取集合中的元素数。</summary>
+            <returns>集合中的元素数。</returns>
+        </member>
+        <member name="T:AIO.Storage">
+            <summary>
+            数据存储
+            </summary>
+        </member>
+        <member name="M:AIO.Storage.#ctor(System.String@)">
+            <summary>
+            数据存储
+            </summary>
+            <param name="path">存储读取路径</param>
+        </member>
+        <member name="M:AIO.Storage.Deserialize">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AIO.Storage.Serialize">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AIO.Storage.Dispose">
+            <summary>
+            执行与释放或重置非托管资源关联的应用程序定义的任务
+            </summary>
+        </member>
+        <member name="M:AIO.Storage.OnDeserialize(AIO.IReadIData)">
+            <summary>
+            反序列化
+            </summary>
+            <param name="buffer">读取接口 如果长度等于0则说明没有数据</param>
+        </member>
+        <member name="M:AIO.Storage.OnSerialize(AIO.IWriteIData)">
+            <summary>
+            序列化
+            </summary>
+            <param name="buffer">存储接口</param>
+        </member>
+        <member name="M:AIO.Storage.OnReset">
+            <summary>
+            重置数据
+            </summary>
+        </member>
+        <member name="M:AIO.Storage.Reset">
+            <summary>
+            重置数据
+            </summary>
+        </member>
+        <member name="P:AIO.Storage.Item(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.Storage.Count">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.Storage.IsReadOnly">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.Storage.Add(AIO.IBinData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.Storage.Clear">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.Storage.Contains(AIO.IBinData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.Storage.CopyTo(AIO.IBinData[],System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.Storage.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.Storage.IndexOf(AIO.IBinData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.Storage.Insert(System.Int32,AIO.IBinData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.Storage.Remove(AIO.IBinData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.Storage.RemoveAt(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.IBinData">
+            <summary>
+            数据序列化
+            </summary>
+        </member>
+        <member name="T:AIO.BinHashSet`1">
+            <summary>
+            列表存储
+            </summary>
+        </member>
+        <member name="P:AIO.BinHashSet`1.Collection">
+            <summary>
+            集合
+            </summary>
+        </member>
+        <member name="M:AIO.BinHashSet`1.#ctor">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:AIO.BinHashSet`1.Dispose">
+            <summary>
+            执行与释放或重置非托管资源关联的应用程序定义的任务
+            </summary>
+        </member>
+        <member name="M:AIO.BinHashSet`1.Deserialize(AIO.IReadIData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinHashSet`1.Serialize(AIO.IWriteIData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinHashSet`1.GetEnumerator">
+            <summary>返回一个循环访问集合的枚举器。</summary>
+            <returns>用于循环访问集合的枚举数。</returns>
+        </member>
+        <member name="M:AIO.BinHashSet`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>返回循环访问集合的枚举数。</summary>
+            <returns>
+              一个可用于循环访问集合的 <see cref="T:System.Collections.IEnumerator" /> 对象。
+            </returns>
+        </member>
+        <member name="M:AIO.BinHashSet`1.Add(`0)">
+            <summary>
+              将某项添加到 <see cref="T:System.Collections.Generic.ICollection`1" /> 中。
+            </summary>
+            <param name="item">
+              要添加到 <see cref="T:System.Collections.Generic.ICollection`1" /> 的对象。
+            </param>
+            <exception cref="T:System.NotSupportedException">
+              <see cref="T:System.Collections.Generic.ICollection`1" /> 为只读。
+            </exception>
+        </member>
+        <member name="M:AIO.BinHashSet`1.UnionWith(System.Collections.Generic.IEnumerable{`0}@)">
+            <summary>
+            对该集合进行与另一个IEnumerable (T)对象的并集运算；
+            </summary>
+            <param name="other">另一个集合</param>
+        </member>
+        <member name="M:AIO.BinHashSet`1.IntersectWith(System.Collections.Generic.IEnumerable{`0}@)">
+            <summary>
+            对该集合进行与另一个IEnumerable (T)对象的交集运算；
+            </summary>
+            <param name="other">另一个集合</param>
+        </member>
+        <member name="M:AIO.BinHashSet`1.ExceptWith(System.Collections.Generic.IEnumerable{`0}@)">
+            <summary>
+            将该集合中与其他集合重复的元素移除；
+            </summary>
+            <param name="other">另一个集合</param>
+        </member>
+        <member name="M:AIO.BinHashSet`1.SymmetricExceptWith(System.Collections.Generic.IEnumerable{`0}@)">
+            <summary>
+            将该集合变换成只包含在该集合或者另一个集合中而不同时属于两个集合的元素；
+            </summary>
+            <param name="other">另一个集合</param>
+        </member>
+        <member name="M:AIO.BinHashSet`1.IsSubsetOf(System.Collections.Generic.IEnumerable{`0}@)">
+            <summary>
+            判断该集合是否是另一个集合的子集；
+            </summary>
+            <param name="other">另一个集合</param>
+            <returns>True:是 False:否</returns>
+        </member>
+        <member name="M:AIO.BinHashSet`1.IsSupersetOf(System.Collections.Generic.IEnumerable{`0}@)">
+            <summary>
+            判断该集合是否是另一个集合的超集；
+            </summary>
+            <param name="other">另一个集合</param>
+            <returns>True:是 False:否</returns>
+        </member>
+        <member name="M:AIO.BinHashSet`1.IsProperSupersetOf(System.Collections.Generic.IEnumerable{`0}@)">
+            <summary>
+            判断该集合是否是另一个集合的真超集；
+            </summary>
+            <param name="other">另一个集合</param>
+            <returns>True:是 False:否</returns>
+        </member>
+        <member name="M:AIO.BinHashSet`1.IsProperSubsetOf(System.Collections.Generic.IEnumerable{`0}@)">
+            <summary>
+            判断该集合是否是另一个集合的真子集；
+            </summary>
+            <param name="other">另一个集合</param>
+            <returns>True:是 False:否</returns>
+        </member>
+        <member name="M:AIO.BinHashSet`1.Overlaps(System.Collections.Generic.IEnumerable{`0}@)">
+            <summary>
+            判断该集合是否与另一个集合存在共同的元素；
+            </summary>
+            <param name="other">另一个集合</param>
+            <returns>True:是 False:否</returns>
+        </member>
+        <member name="M:AIO.BinHashSet`1.SetEquals(System.Collections.Generic.IEnumerable{`0}@)">
+            <summary>
+            判断该集合是否与另一个集合有完全相同的元素，且仅有这些元素。
+            </summary>
+            <param name="other">另一个集合</param>
+            <returns>True:是 False:否</returns>
+        </member>
+        <member name="M:AIO.BinHashSet`1.AIO#ISet{T}#Add(`0)">
+            <summary>
+            将ITEM添加到集合中，如果已存在，则返回false；
+            </summary>
+            <param name="item">要添加的元素</param>
+            <returns>Ture:不存在 False:已存在</returns>
+        </member>
+        <member name="M:AIO.BinHashSet`1.Clear">
+            <summary>
+              从 <see cref="T:System.Collections.Generic.ICollection`1" /> 中移除所有项。
+            </summary>
+            <exception cref="T:System.NotSupportedException">
+              <see cref="T:System.Collections.Generic.ICollection`1" /> 为只读。
+            </exception>
+        </member>
+        <member name="M:AIO.BinHashSet`1.Contains(`0)">
+            <summary>
+              确定 <see cref="T:System.Collections.Generic.ICollection`1" /> 是否包含特定值。
+            </summary>
+            <param name="item">
+              要在 <see cref="T:System.Collections.Generic.ICollection`1" /> 中定位的对象。
+            </param>
+            <returns>
+              如果在 <see langword="true" /> 中找到 <paramref name="item" />，则为 <see cref="T:System.Collections.Generic.ICollection`1" />；否则为 <see langword="false" />。
+            </returns>
+        </member>
+        <member name="M:AIO.BinHashSet`1.CopyTo(`0[],System.Int32)">
+            <summary>
+              从特定的 <see cref="T:System.Collections.Generic.ICollection`1" /> 索引处开始，将 <see cref="T:System.Array" /> 的元素复制到一个 <see cref="T:System.Array" /> 中。
+            </summary>
+            <param name="array">
+              一维 <see cref="T:System.Array" />，它是从 <see cref="T:System.Collections.Generic.ICollection`1" /> 复制的元素的目标。
+              <see cref="T:System.Array" /> 必须具有从零开始的索引。
+            </param>
+            <param name="arrayIndex">
+              <paramref name="array" /> 中从零开始的索引，从此处开始复制。
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="array" /> 为 <see langword="null" />。
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="arrayIndex" /> 小于 0。
+            </exception>
+            <exception cref="T:System.ArgumentException">
+              源中的元素数目 <see cref="T:System.Collections.Generic.ICollection`1" /> 大于从的可用空间 <paramref name="arrayIndex" /> 目标从头到尾 <paramref name="array" />。
+            </exception>
+        </member>
+        <member name="M:AIO.BinHashSet`1.Remove(`0)">
+            <summary>
+              从 <see cref="T:System.Collections.Generic.ICollection`1" /> 中移除特定对象的第一个匹配项。
+            </summary>
+            <param name="item">
+              要从 <see cref="T:System.Collections.Generic.ICollection`1" /> 中删除的对象。
+            </param>
+            <returns>
+              如果从 <see langword="true" /> 中成功移除 <paramref name="item" />，则为 <see cref="T:System.Collections.Generic.ICollection`1" />；否则为 <see langword="false" />。
+               如果在原始 <see langword="false" /> 中没有找到 <paramref name="item" />，该方法也会返回 <see cref="T:System.Collections.Generic.ICollection`1" />。
+            </returns>
+            <exception cref="T:System.NotSupportedException">
+              <see cref="T:System.Collections.Generic.ICollection`1" /> 为只读。
+            </exception>
+        </member>
+        <member name="P:AIO.BinHashSet`1.Count">
+            <summary>
+              获取 <see cref="T:System.Collections.Generic.ICollection`1" /> 中包含的元素数。
+            </summary>
+            <returns>
+              <see cref="T:System.Collections.Generic.ICollection`1" /> 中包含的元素数。
+            </returns>
+        </member>
+        <member name="P:AIO.BinHashSet`1.IsReadOnly">
+            <summary>
+              获取一个值，该值指示 <see cref="T:System.Collections.Generic.ICollection`1" /> 是否为只读。
+            </summary>
+            <returns>
+              如果 <see langword="true" /> 是只读的，则为 <see cref="T:System.Collections.Generic.ICollection`1" />；否则为 <see langword="false" />。
+            </returns>
+        </member>
+        <member name="M:AIO.BinHashSet`1.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+              使用将目标对象序列化所需的数据填充 <see cref="T:System.Runtime.Serialization.SerializationInfo" />。
+            </summary>
+            <param name="info">
+              要填充数据的 <see cref="T:System.Runtime.Serialization.SerializationInfo" />。
+            </param>
+            <param name="context">
+              此序列化的目标（请参见 <see cref="T:System.Runtime.Serialization.StreamingContext" />）。
+            </param>
+            <exception cref="T:System.Security.SecurityException">
+              调用方没有所要求的权限。
+            </exception>
+        </member>
+        <member name="M:AIO.BinHashSet`1.OnDeserialization(System.Object)">
+            <summary>在整个对象图形已经反序列化时运行。</summary>
+            <param name="sender">
+              启动回调的对象。
+               当前未实现该参数的功能。
+            </param>
+        </member>
+        <member name="M:AIO.BinHashSet`1.Reset">
+            <summary>
+            重置
+            </summary>
+        </member>
+        <member name="T:AIO.BinList`1">
+            <summary>
+            列表存储
+            </summary>
+        </member>
+        <member name="P:AIO.BinList`1.Collection">
+            <summary>
+            集合
+            </summary>
+        </member>
+        <member name="M:AIO.BinList`1.#ctor">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:AIO.BinList`1.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.Reset">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.Deserialize(AIO.IReadIData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.Serialize(AIO.IWriteIData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.Add(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.Clear">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.Contains(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.CopyTo(`0[],System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.Remove(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.CopyTo(System.Array,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinList`1.Count">
+            <summary>
+              获取 <see cref="T:System.Collections.Generic.ICollection`1" /> 中包含的元素数。
+            </summary>
+            <returns>
+              <see cref="T:System.Collections.Generic.ICollection`1" /> 中包含的元素数。
+            </returns>
+        </member>
+        <member name="P:AIO.BinList`1.SyncRoot">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinList`1.IsSynchronized">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinList`1.IsReadOnly">
+            <inheritdoc cref="P:System.Collections.Generic.ICollection`1.IsReadOnly" />
+        </member>
+        <member name="M:AIO.BinList`1.IndexOf(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.Insert(System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.RemoveAt(System.Int32)">
+            <inheritdoc cref="M:System.Collections.Generic.IList`1.RemoveAt(System.Int32)" />
+        </member>
+        <member name="P:AIO.BinList`1.Item(System.Int32)">
+            <inheritdoc cref="P:System.Collections.Generic.IList`1.Item(System.Int32)" />
         </member>
     </members>
 </doc>
