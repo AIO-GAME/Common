@@ -958,6 +958,21 @@
         <member name="M:AIO.BufferChar.ToString">
             <summary> 信息 </summary>
         </member>
+        <member name="T:AIO.ILoad">
+            <summary>
+            加载文件等等
+            </summary>
+        </member>
+        <member name="M:AIO.ILoad.Load">
+            <summary>
+            加载
+            </summary>
+        </member>
+        <member name="T:AIO.ISave">
+            <summary>
+            加载文件等等
+            </summary>
+        </member>
         <member name="T:AIO.IReadIData">
             <summary>
             数据读取接口
