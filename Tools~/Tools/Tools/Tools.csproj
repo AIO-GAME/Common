@@ -75,6 +75,8 @@
     <Compile Include="Script\Buffer\Byte\Buffer.Byte.UInt32.cs" />
     <Compile Include="Script\Buffer\Byte\Buffer.Byte.UInt64.cs" />
     <Compile Include="Script\Buffer\Char\BufferChar.cs" />
+    <Compile Include="Script\Interface\ILoad.cs" />
+    <Compile Include="Script\Interface\ISave.cs" />
     <Compile Include="Script\Interface\Read\IReadData.cs" />
     <Compile Include="Script\Interface\Read\IReadICollection.cs" />
     <Compile Include="Script\Interface\Read\IReadIDictionary.cs" />

@@ -10,9 +10,19 @@ namespace AIO
         IDisposable,
         IDeserialize,
         ISerialize,
-        IReset
+        IReset,
+        ISave,
+        ILoad
     {
+        /// <summary>
+        /// 保存读取路径
+        /// </summary>
         private readonly string Path;
+
+        /// <summary>
+        /// 字节数据
+        /// </summary>
+        private readonly BufferByte Buffer;
 
         /// <summary>
         /// 数据存储
@@ -23,6 +33,7 @@ namespace AIO
             if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
             Path = path;
             Collection = Pool.List<IBinData>.New();
+            Buffer = new BufferByte();
         }
 
         /// <summary>
@@ -30,11 +41,8 @@ namespace AIO
         /// </summary>
         public void Deserialize()
         {
-            var buffer = !File.Exists(Path)
-                ? new BufferByte()
-                : new BufferByte(Utils.IO.Read(Path));
-            OnDeserialize(buffer);
-            foreach (var item in Collection) item.Deserialize(buffer);
+            OnDeserialize(Buffer);
+            foreach (var item in Collection) item.Deserialize(Buffer);
         }
 
         /// <summary>
@@ -42,11 +50,9 @@ namespace AIO
         /// </summary>
         public void Serialize()
         {
-            var buffer = new BufferByte();
-            OnSerialize(buffer);
-            foreach (var item in Collection) item.Serialize(buffer);
-            if (buffer.Count == 0) return;
-            Utils.IO.Write(Path, buffer, 0, buffer.WriteOffset, false);
+            Buffer.Clear();
+            OnSerialize(Buffer);
+            foreach (var item in Collection) item.Serialize(Buffer);
         }
 
         /// <summary>
@@ -55,8 +61,10 @@ namespace AIO
         public void Dispose()
         {
             Serialize();
+            Save();
             foreach (var item in Collection) item.Dispose();
             Collection.Free();
+            Buffer.Dispose();
         }
 
         /// <summary>
@@ -90,6 +98,24 @@ namespace AIO
             Collection.Clear();
             OnReset();
             Serialize();
+        }
+
+        /// <summary>
+        /// 保存文件
+        /// </summary>
+        public void Save()
+        {
+            if (Buffer.Count == 0) return;
+            Utils.IO.Write(Path, Buffer, 0, Buffer.WriteOffset, false);
+        }
+
+        /// <summary>
+        /// 加载
+        /// </summary>
+        public void Load()
+        {
+            Buffer.Clear();
+            if (File.Exists(Path)) Buffer.Write(Utils.IO.Read(Path));
         }
     }
 }
