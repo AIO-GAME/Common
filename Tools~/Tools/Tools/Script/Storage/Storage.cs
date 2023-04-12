@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 
 namespace AIO
 {
@@ -10,28 +9,23 @@ namespace AIO
         IDisposable,
         IDeserialize,
         ISerialize,
-        IReset,
-        ISave,
-        ILoad
+        IReset
     {
-        /// <summary>
-        /// 保存读取路径
-        /// </summary>
-        private readonly string Path;
-
         /// <summary>
         /// 字节数据
         /// </summary>
-        private readonly BufferByte Buffer;
+        protected BufferByte Buffer { get; private set; }
+
+        /// <summary>
+        /// 数据有效长度 需要调动序列化 Serialize
+        /// </summary>
+        public byte[] Data => Buffer.ToArray();
 
         /// <summary>
         /// 数据存储
         /// </summary>
-        /// <param name="path">存储读取路径</param>
-        protected Storage(in string path)
+        protected Storage()
         {
-            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
-            Path = path;
             Collection = Pool.List<IBinData>.New();
             Buffer = new BufferByte();
         }
@@ -60,8 +54,6 @@ namespace AIO
         /// </summary>
         public void Dispose()
         {
-            Serialize();
-            Save();
             foreach (var item in Collection) item.Dispose();
             Collection.Free();
             Buffer.Dispose();
@@ -71,7 +63,7 @@ namespace AIO
         /// 反序列化
         /// </summary>
         /// <param name="buffer">读取接口 如果长度等于0则说明没有数据</param>
-        protected virtual void OnDeserialize(IReadIData buffer)
+        protected virtual void OnDeserialize(IReadData buffer)
         {
         }
 
@@ -79,7 +71,7 @@ namespace AIO
         /// 序列化
         /// </summary>
         /// <param name="buffer">存储接口</param>
-        protected virtual void OnSerialize(IWriteIData buffer)
+        protected virtual void OnSerialize(IWriteData buffer)
         {
         }
 
@@ -98,24 +90,6 @@ namespace AIO
             Collection.Clear();
             OnReset();
             Serialize();
-        }
-
-        /// <summary>
-        /// 保存文件
-        /// </summary>
-        public void Save()
-        {
-            if (Buffer.Count == 0) return;
-            Utils.IO.Write(Path, Buffer, 0, Buffer.WriteOffset, false);
-        }
-
-        /// <summary>
-        /// 加载
-        /// </summary>
-        public void Load()
-        {
-            Buffer.Clear();
-            if (File.Exists(Path)) Buffer.Write(Utils.IO.Read(Path));
         }
     }
 }

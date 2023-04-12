@@ -38,7 +38,7 @@ namespace AIO
         /// <summary>
         /// 反序列化
         /// </summary>
-        public void Deserialize(IReadIData buffer)
+        public void Deserialize(IReadData buffer)
         {
             var len = buffer.ReadLen();
             for (var i = 0; i < len; i++) Collection.Enqueue(buffer.ReadData<T>());
@@ -47,7 +47,7 @@ namespace AIO
         /// <summary>
         /// 序列化
         /// </summary>
-        public void Serialize(IWriteIData buffer)
+        public void Serialize(IWriteData buffer)
         {
             buffer.WriteLen(Collection.Count);
             foreach (var item in Collection) buffer.WriteData(item);
@@ -142,5 +142,16 @@ namespace AIO
         /// <summary>获取集合中的元素数。</summary>
         /// <returns>集合中的元素数。</returns>
         int IReadOnlyCollection<T>.Count => Collection.Count;
+
+        /// <inheritdoc />
+        public virtual object Clone()
+        {
+            var data = new BinQueue<T>();
+            foreach (var item in Collection)
+            {
+                data.Collection.Enqueue((T)item.Clone());
+            }
+            return data;
+        }
     }
 }

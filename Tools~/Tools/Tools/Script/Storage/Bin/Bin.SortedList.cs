@@ -38,7 +38,7 @@ namespace AIO
         }
 
         /// <inheritdoc />
-        public void Deserialize(IReadIData buffer)
+        public void Deserialize(IReadData buffer)
         {
             if (buffer.Count == 0) return;
             var len = buffer.ReadLen();
@@ -47,7 +47,7 @@ namespace AIO
         }
 
         /// <inheritdoc />
-        public void Serialize(IWriteIData buffer)
+        public void Serialize(IWriteData buffer)
         {
             buffer.WriteLen(Collection.Count);
             foreach (var item in Collection)
@@ -192,5 +192,18 @@ namespace AIO
 
         /// <inheritdoc />
         public ICollection<TValue> Values => Collection.Values;
+
+
+        /// <inheritdoc />
+        public virtual object Clone()
+        {
+            var data = new BinSortedList<TKey, TValue>();
+            foreach (var item in Collection)
+            {
+                data.Collection.Add((TKey)item.Key.Clone(), (TValue)item.Value.Clone());
+            }
+
+            return data;
+        }
     }
 }

@@ -5,7 +5,7 @@ namespace AIO
     /// <summary>
     /// 写入数据
     /// </summary>
-    public partial interface IWriteIData :
+    public partial interface IWriteData :
         IWriteBool,
         IWriteByte,
         IWriteChar,
