@@ -66,6 +66,34 @@ namespace AIO.Unity
         /// <inheritdoc/>
         public abstract void Serialize();
 
+        private bool IsOnlyOnceDeserialize { get; set; } = false;
+
+        private bool IsOnlyOnceSerialize { get; set; } = false;
+
+        /// <summary>
+        /// 只执行一次反序列化
+        /// </summary>
+        public void OnceDeserialize()
+        {
+            if (IsOnlyOnceDeserialize == false)
+            {
+                IsOnlyOnceDeserialize = true;
+                Deserialize();
+            }
+        }
+
+        /// <summary>
+        /// 只执行一次序列化
+        /// </summary>
+        public void OnceSerialize()
+        {
+            if (IsOnlyOnceSerialize == false)
+            {
+                IsOnlyOnceSerialize = true;
+                Serialize();
+            }
+        }
+
         /// <inheritdoc/>
         public abstract void Dispose();
     }

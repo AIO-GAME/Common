@@ -1092,6 +1092,16 @@
         <member name="M:AIO.Unity.ScriptableBasics.Serialize">
             <inheritdoc/>
         </member>
+        <member name="M:AIO.Unity.ScriptableBasics.OnceDeserialize">
+            <summary>
+            只执行一次反序列化
+            </summary>
+        </member>
+        <member name="M:AIO.Unity.ScriptableBasics.OnceSerialize">
+            <summary>
+            只执行一次序列化
+            </summary>
+        </member>
         <member name="M:AIO.Unity.ScriptableBasics.Dispose">
             <inheritdoc/>
         </member>
