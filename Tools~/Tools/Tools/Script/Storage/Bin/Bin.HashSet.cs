@@ -47,14 +47,14 @@ namespace AIO
         }
 
         /// <inheritdoc />
-        public void Deserialize(IReadIData buffer)
+        public void Deserialize(IReadData buffer)
         {
             if (buffer.Count == 0) return;
             buffer.ReadDataArray(Collection);
         }
 
         /// <inheritdoc />
-        public void Serialize(IWriteIData buffer)
+        public void Serialize(IWriteData buffer)
         {
             buffer.WriteDataArray(Collection);
         }
@@ -327,6 +327,18 @@ namespace AIO
             {
                 item.Reset();
             }
+        }
+
+        /// <inheritdoc />
+        public virtual object Clone()
+        {
+            var data = new BinHashSet<T>();
+            foreach (var item in Collection)
+            {
+                data.Collection.Add((T)item.Clone());
+            }
+
+            return data;
         }
     }
 }

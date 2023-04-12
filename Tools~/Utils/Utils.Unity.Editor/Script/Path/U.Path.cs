@@ -1,17 +1,14 @@
-﻿namespace AIO.Unity.Editor
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Reflection;
+using UnityEditor;
+using UnityEngine;
+using Debug = UnityEngine.Debug;
+
+namespace AIO.Unity.Editor
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Reflection;
-
-    using UnityEditor;
-
-    using UnityEngine;
-
-    using Debug = UnityEngine.Debug;
-
     public static partial class UtilsEditor
     {
         /// <summary>
@@ -38,7 +35,7 @@
 
                 try
                 {
-                    SyncVS = typeof(Editor).Assembly.GetType("UnityEditor.SyncVS", true);
+                    SyncVS = typeof(UnityEditor.Editor).Assembly.GetType("UnityEditor.SyncVS", true);
                     SyncVS_SyncSolution = SyncVS.GetMethod("SyncSolution", BindingFlags.Static | BindingFlags.Public);
 
                     if (SyncVS_SyncSolution == null) throw new MissingMemberException(SyncVS.ToString(), "SyncSolution");
@@ -247,7 +244,6 @@
             }
 
             #endregion
-
 
             #region .NET
 

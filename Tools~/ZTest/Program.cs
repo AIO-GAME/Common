@@ -20,7 +20,7 @@ namespace ZTest
         /// <summary>
         /// 反序列化
         /// </summary>
-        public void Deserialize(IReadIData buffer)
+        public void Deserialize(IReadData buffer)
         {
             if (buffer.Count == 0) return;
             Name = buffer.ReadInt64();
@@ -29,7 +29,7 @@ namespace ZTest
         /// <summary>
         /// 序列化
         /// </summary>
-        public void Serialize(IWriteIData buffer)
+        public void Serialize(IWriteData buffer)
         {
             buffer.WriteInt64(Name);
         }
@@ -39,6 +39,11 @@ namespace ZTest
         public override string ToString()
         {
             return Name.ToString();
+        }
+
+        public object Clone()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -55,7 +60,7 @@ namespace ZTest
         }
     }
 
-    public class TestStorage : Storage
+    public class TestStorage : StorageFile
     {
         public readonly BinList<TestData> List;
         public readonly BinDictionary<TestData, TestData> Dic;
@@ -68,16 +73,16 @@ namespace ZTest
         {
             List = new BinList<TestData>();
             Dic = new BinDictionary<TestData, TestData>();
-            Add(List);
-            Add(Dic);
+            AddBin(List);
+            AddBin(Dic);
         }
 
-        protected override void OnDeserialize(IReadIData buffer)
+        protected override void OnDeserialize(IReadData buffer)
         {
             if (buffer.Count == 0) return;
         }
 
-        protected override void OnSerialize(IWriteIData buffer)
+        protected override void OnSerialize(IWriteData buffer)
         {
         }
 

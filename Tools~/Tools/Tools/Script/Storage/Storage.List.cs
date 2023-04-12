@@ -1,96 +1,64 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace AIO
 {
-    public partial class Storage : IList<IBinData>
+    public partial class Storage 
     {
         private readonly List<IBinData> Collection;
 
-        /// <inheritdoc />
-        public IBinData this[int index]
-        {
-            get => Collection[index];
-            set => Collection[index] = value;
-        }
+        /// <summary>
+        /// 数据有效长度 需要调动序列化 Serialize
+        /// </summary>
+        public int Count => Buffer.Count;
 
-        /// <inheritdoc />
-        public int Count => Collection.Count;
-
-        /// <inheritdoc />
-        public bool IsReadOnly => false;
-
-        /// <inheritdoc />
-        public void Add(IBinData item)
+        /// <summary>
+        /// 添加数据bin
+        /// </summary>
+        public void AddBin(IBinData item)
         {
             Collection.Add(item);
         }
 
-        /// <inheritdoc />
-        public void Clear()
+        /// <summary>
+        /// 清空数据Bin
+        /// </summary>
+        public void ClearBin()
         {
             Collection.Clear();
         }
 
-        /// <inheritdoc />
-        public bool Contains(IBinData item)
+        /// <summary>
+        /// 判断是否存在数据
+        /// </summary>
+        /// <param name="item">数据</param>
+        /// <returns>Ture存在 False不存在</returns>
+        public bool ContainBin(IBinData item)
         {
             return Collection.Contains(item);
         }
 
-        /// <inheritdoc />
-        public void CopyTo(IBinData[] array, int arrayIndex)
-        {
-            if (arrayIndex < 0 || arrayIndex >= array.Length)
-            {
-                throw new ArgumentOutOfRangeException(nameof(arrayIndex), "The value of arrayIndex is out of range.");
-            }
-
-            foreach (var item in Collection)
-            {
-                if (arrayIndex >= array.Length)
-                {
-                    throw new ArgumentException("The length of array is less than the number of elements in the collection.");
-                }
-
-                array[arrayIndex++] = item;
-            }
-        }
-
-        /// <inheritdoc />
-        public IEnumerator<IBinData> GetEnumerator()
-        {
-            return ((IEnumerable<IBinData>)Collection).GetEnumerator();
-        }
-
-        /// <inheritdoc />
-        public int IndexOf(IBinData item)
+        /// <summary>
+        /// 获取当前数据的下标
+        /// </summary>
+        public int IndexOfBin(IBinData item)
         {
             return Collection.IndexOf(item);
         }
 
-        /// <inheritdoc />
-        public void Insert(int index, IBinData item)
+        /// <summary>
+        /// 插入
+        /// </summary>
+        public void InsertBin(int index, IBinData item)
         {
             Collection.Insert(index, item);
         }
 
-        /// <inheritdoc />
-        public bool Remove(IBinData item)
+        /// <summary>
+        /// 移除指定数据
+        /// </summary>
+        public bool RemoveBin(IBinData item)
         {
             return Collection.Remove(item);
-        }
-
-        /// <inheritdoc />
-        public void RemoveAt(int index)
-        {
-            Collection.RemoveAt(index);
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
         }
     }
 }

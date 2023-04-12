@@ -5,7 +5,7 @@ namespace AIO
     /// <summary>
     /// 数据读取接口
     /// </summary>
-    public interface IReadIData :
+    public interface IReadData :
         IReadBool,
         IReadByte,
         IReadChar,

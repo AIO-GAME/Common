@@ -970,27 +970,32 @@
         </member>
         <member name="T:AIO.ISave">
             <summary>
-            加载文件等等
+            保存文件
             </summary>
         </member>
-        <member name="T:AIO.IReadIData">
+        <member name="M:AIO.ISave.Save">
+            <summary>
+            保存文件
+            </summary>
+        </member>
+        <member name="T:AIO.IReadData">
             <summary>
             数据读取接口
             </summary>
         </member>
-        <member name="P:AIO.IReadIData.Count">
+        <member name="P:AIO.IReadData.Count">
             <summary>
             可读数据长度
             </summary>
         </member>
-        <member name="M:AIO.IReadIData.ReadData``1">
+        <member name="M:AIO.IReadData.ReadData``1">
             <summary>
             读取数据
             </summary>
             <typeparam name="T">泛型</typeparam>
             <returns>值</returns>
         </member>
-        <member name="M:AIO.IReadIData.ReadDataArray``1(System.Collections.Generic.ICollection{``0})">
+        <member name="M:AIO.IReadData.ReadDataArray``1(System.Collections.Generic.ICollection{``0})">
             <summary>
             读取数据
             </summary>
@@ -1037,18 +1042,18 @@
             重置
             </summary>
         </member>
-        <member name="T:AIO.IWriteIData">
+        <member name="T:AIO.IWriteData">
             <summary>
             写入数据
             </summary>
         </member>
-        <member name="M:AIO.IWriteIData.WriteData``1(``0)">
+        <member name="M:AIO.IWriteData.WriteData``1(``0)">
             <summary>
             写入二进制数据
             </summary>
             <param name="buffer">数据</param>
         </member>
-        <member name="M:AIO.IWriteIData.WriteDataArray``1(System.Collections.Generic.ICollection{``0}@)">
+        <member name="M:AIO.IWriteData.WriteDataArray``1(System.Collections.Generic.ICollection{``0}@)">
             <summary>
             读取数据
             </summary>
@@ -1941,7 +1946,7 @@
             反序列化
             </summary>
         </member>
-        <member name="M:AIO.IBinDeserialize.Deserialize(AIO.IReadIData)">
+        <member name="M:AIO.IBinDeserialize.Deserialize(AIO.IReadData)">
             <summary>
             反序列化
             </summary>
@@ -1951,7 +1956,7 @@
             序列化
             </summary>
         </member>
-        <member name="M:AIO.IBinSerialize.Serialize(AIO.IWriteIData)">
+        <member name="M:AIO.IBinSerialize.Serialize(AIO.IWriteData)">
             <summary>
             序列化
             </summary>
@@ -2006,10 +2011,10 @@
         <member name="M:AIO.BinDictionary`2.Dispose">
             <inheritdoc />
         </member>
-        <member name="M:AIO.BinDictionary`2.Deserialize(AIO.IReadIData)">
+        <member name="M:AIO.BinDictionary`2.Deserialize(AIO.IReadData)">
             <inheritdoc />
         </member>
-        <member name="M:AIO.BinDictionary`2.Serialize(AIO.IWriteIData)">
+        <member name="M:AIO.BinDictionary`2.Serialize(AIO.IWriteData)">
             <inheritdoc />
         </member>
         <member name="M:AIO.BinDictionary`2.Reset">
@@ -2063,6 +2068,9 @@
         <member name="P:AIO.BinDictionary`2.Values">
             <inheritdoc />
         </member>
+        <member name="M:AIO.BinDictionary`2.Clone">
+            <inheritdoc />
+        </member>
         <member name="T:AIO.BinQueue`1">
             <summary>
             数据队列
@@ -2084,12 +2092,12 @@
             执行与释放或重置非托管资源关联的应用程序定义的任务。
             </summary>
         </member>
-        <member name="M:AIO.BinQueue`1.Deserialize(AIO.IReadIData)">
+        <member name="M:AIO.BinQueue`1.Deserialize(AIO.IReadData)">
             <summary>
             反序列化
             </summary>
         </member>
-        <member name="M:AIO.BinQueue`1.Serialize(AIO.IWriteIData)">
+        <member name="M:AIO.BinQueue`1.Serialize(AIO.IWriteData)">
             <summary>
             序列化
             </summary>
@@ -2162,6 +2170,9 @@
             <summary>获取集合中的元素数。</summary>
             <returns>集合中的元素数。</returns>
         </member>
+        <member name="M:AIO.BinQueue`1.Clone">
+            <inheritdoc />
+        </member>
         <member name="T:AIO.BinSortedList`2">
             <summary>
             数据字典
@@ -2182,10 +2193,10 @@
         <member name="M:AIO.BinSortedList`2.Dispose">
             <inheritdoc />
         </member>
-        <member name="M:AIO.BinSortedList`2.Deserialize(AIO.IReadIData)">
+        <member name="M:AIO.BinSortedList`2.Deserialize(AIO.IReadData)">
             <inheritdoc />
         </member>
-        <member name="M:AIO.BinSortedList`2.Serialize(AIO.IWriteIData)">
+        <member name="M:AIO.BinSortedList`2.Serialize(AIO.IWriteData)">
             <inheritdoc />
         </member>
         <member name="M:AIO.BinSortedList`2.Reset">
@@ -2254,6 +2265,9 @@
         <member name="P:AIO.BinSortedList`2.Values">
             <inheritdoc />
         </member>
+        <member name="M:AIO.BinSortedList`2.Clone">
+            <inheritdoc />
+        </member>
         <member name="T:AIO.BinStack`1">
             <summary>
             数据队列
@@ -2275,12 +2289,12 @@
             执行与释放或重置非托管资源关联的应用程序定义的任务。
             </summary>
         </member>
-        <member name="M:AIO.BinStack`1.Deserialize(AIO.IReadIData)">
+        <member name="M:AIO.BinStack`1.Deserialize(AIO.IReadData)">
             <summary>
             反序列化
             </summary>
         </member>
-        <member name="M:AIO.BinStack`1.Serialize(AIO.IWriteIData)">
+        <member name="M:AIO.BinStack`1.Serialize(AIO.IWriteData)">
             <summary>
             序列化
             </summary>
@@ -2353,16 +2367,28 @@
             <summary>获取集合中的元素数。</summary>
             <returns>集合中的元素数。</returns>
         </member>
+        <member name="M:AIO.BinStack`1.Clone">
+            <inheritdoc />
+        </member>
         <member name="T:AIO.Storage">
             <summary>
             数据存储
             </summary>
         </member>
-        <member name="M:AIO.Storage.#ctor(System.String@)">
+        <member name="P:AIO.Storage.Buffer">
+            <summary>
+            字节数据
+            </summary>
+        </member>
+        <member name="P:AIO.Storage.Data">
+            <summary>
+            数据有效长度 需要调动序列化 Serialize
+            </summary>
+        </member>
+        <member name="M:AIO.Storage.#ctor">
             <summary>
             数据存储
             </summary>
-            <param name="path">存储读取路径</param>
         </member>
         <member name="M:AIO.Storage.Deserialize">
             <summary>
@@ -2379,13 +2405,13 @@
             执行与释放或重置非托管资源关联的应用程序定义的任务
             </summary>
         </member>
-        <member name="M:AIO.Storage.OnDeserialize(AIO.IReadIData)">
+        <member name="M:AIO.Storage.OnDeserialize(AIO.IReadData)">
             <summary>
             反序列化
             </summary>
             <param name="buffer">读取接口 如果长度等于0则说明没有数据</param>
         </member>
-        <member name="M:AIO.Storage.OnSerialize(AIO.IWriteIData)">
+        <member name="M:AIO.Storage.OnSerialize(AIO.IWriteData)">
             <summary>
             序列化
             </summary>
@@ -2401,41 +2427,42 @@
             重置数据
             </summary>
         </member>
-        <member name="P:AIO.Storage.Item(System.Int32)">
-            <inheritdoc />
-        </member>
         <member name="P:AIO.Storage.Count">
-            <inheritdoc />
+            <summary>
+            数据有效长度 需要调动序列化 Serialize
+            </summary>
         </member>
-        <member name="P:AIO.Storage.IsReadOnly">
-            <inheritdoc />
+        <member name="M:AIO.Storage.AddBin(AIO.IBinData)">
+            <summary>
+            添加数据bin
+            </summary>
         </member>
-        <member name="M:AIO.Storage.Add(AIO.IBinData)">
-            <inheritdoc />
+        <member name="M:AIO.Storage.ClearBin">
+            <summary>
+            清空数据Bin
+            </summary>
         </member>
-        <member name="M:AIO.Storage.Clear">
-            <inheritdoc />
+        <member name="M:AIO.Storage.ContainBin(AIO.IBinData)">
+            <summary>
+            判断是否存在数据
+            </summary>
+            <param name="item">数据</param>
+            <returns>Ture存在 False不存在</returns>
         </member>
-        <member name="M:AIO.Storage.Contains(AIO.IBinData)">
-            <inheritdoc />
+        <member name="M:AIO.Storage.IndexOfBin(AIO.IBinData)">
+            <summary>
+            获取当前数据的下标
+            </summary>
         </member>
-        <member name="M:AIO.Storage.CopyTo(AIO.IBinData[],System.Int32)">
-            <inheritdoc />
+        <member name="M:AIO.Storage.InsertBin(System.Int32,AIO.IBinData)">
+            <summary>
+            插入
+            </summary>
         </member>
-        <member name="M:AIO.Storage.GetEnumerator">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.Storage.IndexOf(AIO.IBinData)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.Storage.Insert(System.Int32,AIO.IBinData)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.Storage.Remove(AIO.IBinData)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.Storage.RemoveAt(System.Int32)">
-            <inheritdoc />
+        <member name="M:AIO.Storage.RemoveBin(AIO.IBinData)">
+            <summary>
+            移除指定数据
+            </summary>
         </member>
         <member name="T:AIO.IBinData">
             <summary>
@@ -2462,10 +2489,10 @@
             执行与释放或重置非托管资源关联的应用程序定义的任务
             </summary>
         </member>
-        <member name="M:AIO.BinHashSet`1.Deserialize(AIO.IReadIData)">
+        <member name="M:AIO.BinHashSet`1.Deserialize(AIO.IReadData)">
             <inheritdoc />
         </member>
-        <member name="M:AIO.BinHashSet`1.Serialize(AIO.IWriteIData)">
+        <member name="M:AIO.BinHashSet`1.Serialize(AIO.IWriteData)">
             <inheritdoc />
         </member>
         <member name="M:AIO.BinHashSet`1.GetEnumerator">
@@ -2659,6 +2686,9 @@
             重置
             </summary>
         </member>
+        <member name="M:AIO.BinHashSet`1.Clone">
+            <inheritdoc />
+        </member>
         <member name="T:AIO.BinList`1">
             <summary>
             列表存储
@@ -2680,10 +2710,10 @@
         <member name="M:AIO.BinList`1.Reset">
             <inheritdoc />
         </member>
-        <member name="M:AIO.BinList`1.Deserialize(AIO.IReadIData)">
+        <member name="M:AIO.BinList`1.Deserialize(AIO.IReadData)">
             <inheritdoc />
         </member>
-        <member name="M:AIO.BinList`1.Serialize(AIO.IWriteIData)">
+        <member name="M:AIO.BinList`1.Serialize(AIO.IWriteData)">
             <inheritdoc />
         </member>
         <member name="M:AIO.BinList`1.GetEnumerator">
@@ -2738,6 +2768,35 @@
         </member>
         <member name="P:AIO.BinList`1.Item(System.Int32)">
             <inheritdoc cref="P:System.Collections.Generic.IList`1.Item(System.Int32)" />
+        </member>
+        <member name="M:AIO.BinList`1.Clone">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.StorageFile">
+            <summary>
+            数据文件
+            </summary>
+        </member>
+        <member name="F:AIO.StorageFile.Path">
+            <summary>
+            保存读取路径
+            </summary>
+        </member>
+        <member name="M:AIO.StorageFile.#ctor(System.String@)">
+            <summary>
+            数据存储
+            </summary>
+            <param name="path">存储读取路径</param>
+        </member>
+        <member name="M:AIO.StorageFile.Save">
+            <summary>
+            保存文件
+            </summary>
+        </member>
+        <member name="M:AIO.StorageFile.Load">
+            <summary>
+            加载
+            </summary>
         </member>
     </members>
 </doc>

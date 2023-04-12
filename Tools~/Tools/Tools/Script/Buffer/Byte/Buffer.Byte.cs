@@ -18,7 +18,7 @@ namespace AIO
     /// set    :  需要传入索引,在字节缓存的指定索引处写入一个,不影响缓存读写进度
     /// get    :  需要传入索引,在字节缓存的指定索引处读取一个,不影响缓存读写进度
     /// method_:  为倒序写入 倒序读取
-    public sealed partial class BufferByte : Buffer<byte>, IWriteIData, IReadIData
+    public sealed partial class BufferByte : Buffer<byte>, IWriteData, IReadData
     {
         /// <inheritdoc/>
         public BufferByte()

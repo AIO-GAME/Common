@@ -8,6 +8,6 @@ namespace AIO
         /// <summary>
         /// 反序列化
         /// </summary>
-        void Deserialize(IReadIData buffer);
+        void Deserialize(IReadData buffer);
     }
 }
