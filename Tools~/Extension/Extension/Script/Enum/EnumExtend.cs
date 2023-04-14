@@ -49,18 +49,18 @@ namespace AIO
         public static Dictionary<T, string> GetDescriptionDic<T>(this T value) where T : struct, Enum
         {
             var type = typeof(T);
-            var DescriptionDic = new Dictionary<T, string>();
+            var descriptionDic = new Dictionary<T, string>();
             var values = Enum.GetNames(type);
             foreach (var field in type.GetFields(BindingFlags.Public | BindingFlags.Static))
             {
                 var attribute = field.GetCustomAttribute(typeof(DescriptionAttribute), false);
 
                 if (attribute is DescriptionAttribute description)
-                    DescriptionDic.Add((T)field.GetValue(null), description.Description);
-                else DescriptionDic.Add((T)field.GetValue(null), field.Name);
+                    descriptionDic.Add((T)field.GetValue(null), description.Description);
+                else descriptionDic.Add((T)field.GetValue(null), field.Name);
             }
 
-            return DescriptionDic;
+            return descriptionDic;
         }
 
         /// <summary>
