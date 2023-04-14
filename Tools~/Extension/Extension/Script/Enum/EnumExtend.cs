@@ -50,14 +50,14 @@ namespace AIO
         {
             var type = typeof(T);
             var DescriptionDic = new Dictionary<T, string>();
-            var index = 0;
-            var values = Enum.GetValues(type);
+            var values = Enum.GetNames(type);
             foreach (var field in type.GetFields(BindingFlags.Public | BindingFlags.Static))
             {
                 var attribute = field.GetCustomAttribute(typeof(DescriptionAttribute), false);
+
                 if (attribute is DescriptionAttribute description)
-                    DescriptionDic.Add((T)values.GetValue(index++), description.Description);
-                else DescriptionDic.Add((T)values.GetValue(index++), field.Name);
+                    DescriptionDic.Add((T)field.GetValue(null), description.Description);
+                else DescriptionDic.Add((T)field.GetValue(null), field.Name);
             }
 
             return DescriptionDic;
