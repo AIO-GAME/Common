@@ -88,16 +88,6 @@ namespace AIO
         /// 日志
         /// </summary>
         [Conditional(MACRO_DEFINITION)]
-        public static void LogFormat<T>(in string format, params T[] objs)
-        {
-            if (IsNotOut || NoStatus(LOG)) return;
-            Debug.unityLogger.LogFormat(LogType.Log, string.Format(format, objs));
-        }
-
-        /// <summary>
-        /// 日志
-        /// </summary>
-        [Conditional(MACRO_DEFINITION)]
         public static void LogFormat(in string format, params object[] objs)
         {
             if (IsNotOut || NoStatus(LOG)) return;

@@ -74,6 +74,16 @@
             使用指定的格式信息，将指定的对象数组（后跟当前行终止符）的文本表示形式写入标准输出流。
             </summary>
         </member>
+        <member name="M:AIO.CPrint.RunAsync(System.String,System.Threading.Tasks.Task,System.String)">
+            <summary>
+            输出详细执行时间
+            </summary>
+        </member>
+        <member name="M:AIO.CPrint.RunAsync``1(System.String,``0,System.String)">
+            <summary>
+            输出详细执行时间
+            </summary>
+        </member>
         <member name="M:AIO.CPrint.Run``1(System.String@,``0@,System.String@)">
             <summary>
             输出详细执行时间

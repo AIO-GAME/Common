@@ -186,11 +186,6 @@
             日志
             </summary>
         </member>
-        <member name="M:AIO.UPrint.LogFormat``1(System.String@,``0[])">
-            <summary>
-            日志
-            </summary>
-        </member>
         <member name="M:AIO.UPrint.LogFormat(System.String@,System.Object[])">
             <summary>
             日志
@@ -231,17 +226,52 @@
             输出详细执行时间
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Run``2(System.String@,System.Action{``0,``1}@,``0@,``1,System.String@)">
+        <member name="M:AIO.UPrint.Run``2(System.String@,System.Action{``0,``1}@,``0@,``1@,System.String@)">
             <summary>
             输出详细执行时间
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Run``3(System.String@,System.Action{``0,``1,``2}@,``0@,``1,``2@,System.String@)">
+        <member name="M:AIO.UPrint.Run``3(System.String@,System.Action{``0,``1,``2}@,``0@,``1@,``2@,System.String@)">
             <summary>
             输出详细执行时间
             </summary>
         </member>
         <member name="M:AIO.UPrint.Run``4(System.String@,System.Action{``0,``1,``2,``3}@,``0@,``1@,``2@,``3@,System.String@)">
+            <summary>
+            输出详细执行时间
+            </summary>
+        </member>
+        <member name="M:AIO.UPrint.Run``2(System.String@,System.Func{``0,``1}@,``0@,System.String@)">
+            <summary>
+            输出详细执行时间
+            </summary>
+        </member>
+        <member name="M:AIO.UPrint.Run``3(System.String@,System.Func{``0,``1,``2}@,``0@,``1@,System.String@)">
+            <summary>
+            输出详细执行时间
+            </summary>
+        </member>
+        <member name="M:AIO.UPrint.Run``4(System.String@,System.Func{``0,``1,``2,``3}@,``0@,``1@,``2@,System.String@)">
+            <summary>
+            输出详细执行时间
+            </summary>
+        </member>
+        <member name="M:AIO.UPrint.Run``5(System.String@,System.Func{``0,``1,``2,``3,``4}@,``0@,``1@,``2@,``3@,System.String@)">
+            <summary>
+            输出详细执行时间
+            </summary>
+        </member>
+        <member name="M:AIO.UPrint.Run``1(System.String,``0,System.String)">
+            <summary>
+            输出详细执行时间
+            </summary>
+        </member>
+        <member name="M:AIO.UPrint.Run(System.String,System.Threading.Tasks.Task,System.String)">
+            <summary>
+            输出详细执行时间
+            </summary>
+        </member>
+        <member name="M:AIO.UPrint.Run``1(System.String,System.Threading.Tasks.Task{``0},System.String)">
             <summary>
             输出详细执行时间
             </summary>
