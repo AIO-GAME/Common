@@ -84,17 +84,6 @@ namespace AIO
             }
         }
 
-
-        /// <summary>
-        /// 警告
-        /// </summary>
-        [Conditional(MACRO_DEFINITION)]
-        public static void WarnFormat<T>(in string format, params T[] objs)
-        {
-            if (IsNotOut || NoStatus(WARNING)) return;
-            Debug.unityLogger.LogFormat(LogType.Warning, string.Format(format, objs));
-        }
-
         /// <summary>
         /// 警告
         /// </summary>
