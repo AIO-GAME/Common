@@ -296,11 +296,6 @@
             警告
             </summary>
         </member>
-        <member name="M:AIO.UPrint.WarnFormat``1(System.String@,``0[])">
-            <summary>
-            警告
-            </summary>
-        </member>
         <member name="M:AIO.UPrint.WarnFormat(System.String@,System.Object[])">
             <summary>
             警告
