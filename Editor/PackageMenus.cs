@@ -102,6 +102,22 @@ namespace AIO.Package.Editor
             await PrPlatform.Git.Pull(vs, false);
         }
 
+#if UNITY_EDITOR_WIN
+        [MenuItem(GitLabel + "Git Pull Branch/All", false, 1)]
+        public static async void GITPullBranch()
+        {
+            var PackagePath = Application.dataPath.Replace("Assets", "Packages");
+            var FilePath = Path.Combine(PackagePath, PackageManagerWindow.PACKAGE_CLONE_FILE);
+            var PackageData = JsonConvert.DeserializeObject<PackageData>(File.ReadAllText(FilePath));
+            PackageData.GetNames();
+            var vs = PackageData.Names
+                .Select(item => Path.Combine(PackagePath, item))
+                .Where(Directory.Exists).ToList();
+
+            await PrWin.Git.PullBranch(vs, false);
+        }
+#endif
+
 #if MONKEYCOMMANDER
         [MonKey.Command("Git Upload All",
             Help = "所有Git库 添加 提交 推送",
