@@ -39,12 +39,18 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup>
-    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json" />
-    <Reference Include="YamlDotNet" />
-    <Reference Include="ICSharpCode.SharpZipLib" />
+    <Reference Include="Newtonsoft.Json">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="YamlDotNet">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -201,11 +207,62 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>@set CUR_DLL=$(ProjectDir)$(OutDir)
+@cd /d $(SolutionDir)
+@cd ..
+@set cur=%25cd%25\Plugins\
+
+@set dllname=ICSharpCode.SharpZipLib
+@copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll
+)
+@if exist %25CUR_DLL%25%25dllname%25.xml (
+@copy /y /v %25CUR_DLL%25%25dllname%25.xml %25cur%25%25dllname%25.xml
+)
+
+@set dllname=YamlDotNet
+@copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll
+)
+@if exist %25CUR_DLL%25%25dllname%25.xml (
+@copy /y /v %25CUR_DLL%25%25dllname%25.xml %25cur%25%25dllname%25.xml
+)
+
+@set dllname=$(TargetName)
+@if exist %25CUR_DLL%25%25dllname%25.dll (
+@copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll
+)
+@if exist %25CUR_DLL%25%25dllname%25.xml (
+@copy /y /v %25CUR_DLL%25%25dllname%25.xml %25cur%25%25dllname%25.xml
+)
+
+</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
+    <PreBuildEvent>@cd /d $(SolutionDir)
+@cd ..
+@set cur=%25cd%25\Plugins\
+
+@set dllname=$(TargetName)
+@if exist %25cur%25%25dllname%25.dll (
+@del /s /q %25cur%25%25dllname%25.dll
+)
+@if exist %25cur%25%25dllname%25.xml (
+@del /s /q %25cur%25%25dllname%25.xml
+)
+
+@set dllname=YamlDotNet
+@if exist %25cur%25%25dllname%25.dll (
+@del /s /q %25cur%25%25dllname%25.dll
+)
+@if exist %25cur%25%25dllname%25.xml (
+@del /s /q %25cur%25%25dllname%25.xml
+)
+
+@set dllname=ICSharpCode.SharpZipLib
+@if exist %25cur%25%25dllname%25.dll (
+@del /s /q %25cur%25%25dllname%25.dll
+)
+@if exist %25cur%25%25dllname%25.xml (
+@del /s /q %25cur%25%25dllname%25.xml
+)</PreBuildEvent>
   </PropertyGroup>
 </Project>

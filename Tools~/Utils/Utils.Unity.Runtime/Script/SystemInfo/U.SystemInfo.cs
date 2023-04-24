@@ -139,11 +139,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsMinConstantBufferOffsetAlignment()
         {
-#if UNITY_2020_3_OR_NEWER
             return SystemInfo.constantBufferOffsetAlignment == 0;
-#else
-            return SystemInfo.minConstantBufferOffsetAlignment;
-#endif
         }
 
         /// <summary>
@@ -469,7 +465,7 @@ public static partial class UtilsEngine
         /// <summary>
         /// 返回运行游戏的操作系统系列
         /// </summary>
-        public static OperatingSystemFamily operatingSystemFamily()
+        public static OperatingSystemFamily OperatingSystemFamily()
         {
             return SystemInfo.operatingSystemFamily;
         }

@@ -6,9 +6,8 @@
 |*|=============================================*/
 
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
@@ -54,13 +53,9 @@ namespace AIO.Package.Editor
             var FilePath = Path.Combine(PackagePath, PackageManagerWindow.PACKAGE_CLONE_FILE);
             var PackageData = JsonConvert.DeserializeObject<PackageData>(File.ReadAllText(FilePath));
             PackageData.GetNames();
-            var vs = new List<string>();
-            foreach (var item in PackageData.Names)
-            {
-                var name = Path.Combine(PackagePath, item);
-                if (Directory.Exists(name)) vs.Add(name);
-            }
-
+            var vs = PackageData.Names
+                .Select(item => Path.Combine(PackagePath, item))
+                .Where(Directory.Exists).ToList();
             await PrPlatform.Git.RemoteSetUrl(vs, false);
         }
 
@@ -100,12 +95,9 @@ namespace AIO.Package.Editor
             var FilePath = Path.Combine(PackagePath, PackageManagerWindow.PACKAGE_CLONE_FILE);
             var PackageData = JsonConvert.DeserializeObject<PackageData>(File.ReadAllText(FilePath));
             PackageData.GetNames();
-            var vs = new List<string>();
-            foreach (var item in PackageData.Names)
-            {
-                var name = Path.Combine(PackagePath, item);
-                if (Directory.Exists(name)) vs.Add(name);
-            }
+            var vs = PackageData.Names
+                .Select(item => Path.Combine(PackagePath, item))
+                .Where(Directory.Exists).ToList();
 
             await PrPlatform.Git.Pull(vs, false);
         }
@@ -127,13 +119,9 @@ namespace AIO.Package.Editor
             var FilePath = Path.Combine(PackagePath, PackageManagerWindow.PACKAGE_CLONE_FILE);
             var PackageData = JsonConvert.DeserializeObject<PackageData>(File.ReadAllText(FilePath));
             PackageData.GetNames();
-            var vs = new List<string>();
-            foreach (var item in PackageData.Names)
-            {
-                var name = Path.Combine(PackagePath, item);
-                if (Directory.Exists(name)) vs.Add(name);
-            }
-
+            var vs = PackageData.Names
+                .Select(item => Path.Combine(PackagePath, item))
+                .Where(Directory.Exists).ToList();
             await PrPlatform.Git.Upload(vs, true, false, false);
         }
 
@@ -154,12 +142,11 @@ namespace AIO.Package.Editor
             var FilePath = Path.Combine(PackagePath, PackageManagerWindow.PACKAGE_CLONE_FILE);
             var PackageData = JsonConvert.DeserializeObject<PackageData>(File.ReadAllText(FilePath));
             PackageData.GetNames();
-            var vs = new List<(string, string)>();
-            foreach (var item in PackageData.Names)
-            {
-                var name = Path.Combine(PackagePath, item);
-                if (Directory.Exists(name)) vs.Add((name, ""));
-            }
+            var vs = (from item in PackageData.Names
+                select Path.Combine(PackagePath, item)
+                into name
+                where Directory.Exists(name)
+                select (name, "")).ToList();
 
             await PrPlatform.Git.Push(vs, false);
         }
@@ -181,12 +168,9 @@ namespace AIO.Package.Editor
             var FilePath = Path.Combine(PackagePath, PackageManagerWindow.PACKAGE_CLONE_FILE);
             var PackageData = JsonConvert.DeserializeObject<PackageData>(File.ReadAllText(FilePath));
             PackageData.GetNames();
-            var vs = new List<string>();
-            foreach (var item in PackageData.Names)
-            {
-                var name = Path.Combine(PackagePath, item);
-                if (Directory.Exists(name)) vs.Add(name);
-            }
+            var vs = PackageData.Names
+                .Select(item => Path.Combine(PackagePath, item))
+                .Where(Directory.Exists).ToList();
 
             await PrPlatform.Git.Add(vs, false);
         }
@@ -208,13 +192,9 @@ namespace AIO.Package.Editor
             var FilePath = Path.Combine(PackagePath, PackageManagerWindow.PACKAGE_CLONE_FILE);
             var PackageData = JsonConvert.DeserializeObject<PackageData>(File.ReadAllText(FilePath));
             PackageData.GetNames();
-            var vs = new List<string>();
-            foreach (var item in PackageData.Names)
-            {
-                var name = Path.Combine(PackagePath, item);
-                if (Directory.Exists(name)) vs.Add(name);
-            }
-
+            var vs = PackageData.Names
+                .Select(item => Path.Combine(PackagePath, item))
+                .Where(Directory.Exists).ToList();
             await PrPlatform.Git.Commit(vs, false);
         }
 
