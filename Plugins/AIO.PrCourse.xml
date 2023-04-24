@@ -3149,6 +3149,13 @@
             <param name="targets">文件路径列表</param>
             <param name="quit">静默退出</param>
         </member>
+        <member name="M:AIO.PrWin.Git.PullBranch(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            拉取
+            </summary>
+            <param name="targets">文件路径列表</param>
+            <param name="quit">静默退出</param>
+        </member>
         <member name="M:AIO.PrWin.Git.Pull(System.String@,System.Boolean@)">
             <summary>
             拉取
