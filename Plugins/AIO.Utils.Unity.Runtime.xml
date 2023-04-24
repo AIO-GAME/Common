@@ -710,7 +710,7 @@
             处理器的名字
             </summary>
         </member>
-        <member name="M:UtilsEngine.SystemInfoX.operatingSystemFamily">
+        <member name="M:UtilsEngine.SystemInfoX.OperatingSystemFamily">
             <summary>
             返回运行游戏的操作系统系列
             </summary>

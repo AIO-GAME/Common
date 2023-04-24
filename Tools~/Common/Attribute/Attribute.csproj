@@ -63,7 +63,32 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>@set CUR_DLL=$(ProjectDir)$(OutDir)
+@cd /d $(SolutionDir)
+@cd ..
+@set cur=%25cd%25\Plugins\
+
+@set dllname=$(TargetName)
+@if exist %25CUR_DLL%25%25dllname%25.dll (
+@copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll
+)
+@if exist %25CUR_DLL%25%25dllname%25.xml (
+@copy /y /v %25CUR_DLL%25%25dllname%25.xml %25cur%25%25dllname%25.xml
+)
+</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>@cd /d $(SolutionDir)
+@cd ..
+@set cur=%25cd%25\Plugins\
+
+@set dllname=$(TargetName)
+@if exist %25cur%25%25dllname%25.dll (
+@del /s /q %25cur%25%25dllname%25.dll
+)
+@if exist %25cur%25%25dllname%25.xml (
+@del /s /q %25cur%25%25dllname%25.xml
+)
+</PreBuildEvent>
   </PropertyGroup>
 </Project>
