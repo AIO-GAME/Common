@@ -59,68 +59,184 @@
             支持的区域性
             </summary>
         </member>
-        <member name="T:AIO.RegistInitializeDLLAttribute">
+        <member name="T:DllAutomation">
             <summary>
-            注册 DLL
+            DLL自动化处理
             </summary>
         </member>
-        <member name="M:AIO.RegistInitializeDLLAttribute.#ctor(System.Type,System.String)">
+        <member name="F:DllAutomation.Order">
             <summary>
-            注册DLL
-            </summary>
-            <param name="type">类型</param>
-            <param name="name">名称</param>
-        </member>
-        <member name="M:AIO.RegistInitializeDLLAttribute.Invoke">
-            <summary>
-            实现
+            存储Dic列表 从小到达排序
             </summary>
         </member>
-        <member name="T:AIO.RegistInitializePlatformAttribute">
+        <member name="F:DllAutomation.InterfaceName">
             <summary>
-            注册平台DLL
+            接口名
             </summary>
         </member>
-        <member name="F:AIO.RegistInitializePlatformAttribute.Platform">
+        <member name="M:DllAutomation.Initialize(System.Reflection.Assembly@)">
             <summary>
-            游戏平台
+            初始化
             </summary>
         </member>
-        <member name="M:AIO.RegistInitializePlatformAttribute.#ctor(System.Type,System.String,AIO.ERuntimePlatform)">
+        <member name="M:DllAutomation.Initialize(System.Collections.Generic.IEnumerable{System.Reflection.Assembly}@)">
             <summary>
-            注册DLL
+            初始化
             </summary>
         </member>
-        <member name="T:AIO.UnRegistInitializeDLLAttribute">
+        <member name="M:DllAutomation.InstallTimer">
             <summary>
-            注销 DLL
+            实现计时器
             </summary>
         </member>
-        <member name="M:AIO.UnRegistInitializeDLLAttribute.#ctor(System.Type,System.String)">
+        <member name="M:DllAutomation.Install">
             <summary>
-            注册DLL
-            </summary>
-            <param name="type">类型</param>
-            <param name="name">名称</param>
-        </member>
-        <member name="M:AIO.UnRegistInitializeDLLAttribute.Invoke">
-            <summary>
-            实现
+            实现计时器
             </summary>
         </member>
-        <member name="T:AIO.UnRegistInitializePlatformAttribute">
+        <member name="M:DllAutomation.UnInstallTimer">
             <summary>
-            注销平台DLL
+            卸载 实现计时器
             </summary>
         </member>
-        <member name="F:AIO.UnRegistInitializePlatformAttribute.Platform">
+        <member name="M:DllAutomation.Uninstall">
             <summary>
-            游戏平台
+            实现计时器
             </summary>
         </member>
-        <member name="M:AIO.UnRegistInitializePlatformAttribute.#ctor(System.Type,System.String,AIO.ERuntimePlatform)">
+        <member name="T:DllAutomationAttribute">
             <summary>
-            注册DLL
+            DLL 注入属性
+            </summary>
+        </member>
+        <member name="P:DllAutomationAttribute.Priority">
+            <summary>
+            优先级
+            </summary>
+        </member>
+        <member name="P:DllAutomationAttribute.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:DllAutomationAttribute.SystemType">
+            <summary>
+            系统类型
+            </summary>
+        </member>
+        <member name="M:DllAutomationAttribute.#ctor(System.Type,System.String,System.Int32)">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:DllAutomationAttribute.#ctor(System.Type,System.Int32)">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="T:IDllAutomation">
+            <summary>
+            DLL自动化处理
+            </summary>
+        </member>
+        <member name="M:IDllAutomation.Install">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:IDllAutomation.UnInstall">
+            <summary>
+            卸载
+            </summary>
+        </member>
+        <member name="T:ISystemAutomation">
+            <summary>
+            系统自动化
+            </summary>
+        </member>
+        <member name="M:ISystemAutomation.Install">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:ISystemAutomation.UnInstall">
+            <summary>
+            卸载
+            </summary>
+        </member>
+        <member name="T:SystemAutomation">
+            <summary>
+            系统自动化注册
+            </summary>
+        </member>
+        <member name="F:SystemAutomation.Order">
+            <summary>
+            存储Dic列表 从小到达排序
+            </summary>
+        </member>
+        <member name="F:SystemAutomation.InterfaceName">
+            <summary>
+            接口名
+            </summary>
+        </member>
+        <member name="M:SystemAutomation.Initialize(System.Reflection.Assembly@)">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:SystemAutomation.Initialize(System.Collections.Generic.IEnumerable{System.Reflection.Assembly}@)">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:SystemAutomation.InstallTimer">
+            <summary>
+            实现计时器
+            </summary>
+        </member>
+        <member name="M:SystemAutomation.Install">
+            <summary>
+            实现计时器
+            </summary>
+        </member>
+        <member name="M:SystemAutomation.Uninstall">
+            <summary>
+            卸载 
+            </summary>
+        </member>
+        <member name="M:SystemAutomation.UnInstallTimer">
+            <summary>
+            卸载 实现计时器
+            </summary>
+        </member>
+        <member name="T:SystemAutomationAttribute">
+            <summary>
+            系统自动化注册属性
+            </summary>
+        </member>
+        <member name="P:SystemAutomationAttribute.Priority">
+            <summary>
+            优先级
+            </summary>
+        </member>
+        <member name="P:SystemAutomationAttribute.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:SystemAutomationAttribute.SystemType">
+            <summary>
+            系统类型
+            </summary>
+        </member>
+        <member name="M:SystemAutomationAttribute.#ctor(System.Type,System.String,System.Int32)">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:SystemAutomationAttribute.#ctor(System.Type,System.Int32)">
+            <summary>
+            初始化
             </summary>
         </member>
         <member name="T:AIO.EArgLabel">

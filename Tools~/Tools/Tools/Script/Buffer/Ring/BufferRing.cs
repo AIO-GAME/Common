@@ -181,6 +181,7 @@ namespace AIO
         {
             if (Buffer.Length < Offset + count)
                 Console.WriteLine($"Buffer List length < count, buffer length: {Buffer.Length} {Offset} {count}");
+
             var length = this.Count;
             // 传入读取长度 比 存储容量小的时候 则默认读取 存储容量的最大值 并将实际读取长度返回
             if (length < count) count = length;

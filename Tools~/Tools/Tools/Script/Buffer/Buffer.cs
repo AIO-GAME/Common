@@ -1,12 +1,11 @@
 using System;
-using System.Runtime.CompilerServices;
 
 namespace AIO
 {
     /// <summary>
     /// 数据缓存留
     /// </summary>
-    public abstract partial class Buffer
+    public partial class Buffer
     {
         /// <summary>
         /// 默认容量:32B = 256bit
@@ -31,7 +30,6 @@ namespace AIO
         /// <summary>
         /// 初始化
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected Buffer()
         {
             WriteIndex = ReadIndex = 0;
@@ -81,5 +79,23 @@ namespace AIO
         /// 数据缓存:容量
         /// </summary>
         public virtual int Capacity { get; protected set; }
+
+        /// <summary>
+        /// 跳过
+        /// </summary>
+        public void Skip(in int count)
+        {
+            ReadIndex += count;
+        }
+
+        /// <summary>
+        /// 检查剩余数量 
+        /// Flase:不满足
+        /// Ture:满足
+        /// </summary>
+        public bool CheckSize(in int size)
+        {
+            return WriteIndex - ReadIndex >= size;
+        }
     }
 }

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-/// <summary>
-/// 对象池
-/// </summary>
 public static partial class Pool
 {
     /// <summary>
