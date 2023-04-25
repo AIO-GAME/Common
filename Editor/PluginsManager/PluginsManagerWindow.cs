@@ -268,6 +268,18 @@ namespace AIO.Package.Editor
 
                     if (!UnInsallIsSelect)
                     {
+                        if (!string.IsNullOrEmpty(Data.MacroDefinition))
+                        {
+                            if (GUILayout.Button("更新宏", GUILayout.Width(60), GUILayout.Height(20)))
+                            {
+                                PluginsInfoEditor.AddScriptingDefineSymbols(Data.MacroDefinition.Split(';'));
+                                AssetDatabase.Refresh();
+                                AssetDatabase.RefreshSettings();
+                                CompilationPipeline.RequestScriptCompilation();
+                                return;
+                            }
+                        }
+
                         if (GUILayout.Button("卸载", GUILayout.Width(60), GUILayout.Height(20)))
                         {
                             CompilationPipeline.compilationStarted += compilationStarted;
