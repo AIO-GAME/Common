@@ -12,7 +12,7 @@ namespace AIO
     /// <summary>
     /// 缓冲流
     /// </summary>
-    public abstract partial class Buffer<T> : Buffer where T : struct
+    public partial class Buffer<T> : Buffer where T : struct
     {
         /// <summary>
         /// 构建一个指定容量的Buffer

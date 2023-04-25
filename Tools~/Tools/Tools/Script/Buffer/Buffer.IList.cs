@@ -5,9 +5,7 @@ using System.Linq;
 
 namespace AIO
 {
-    public partial class Buffer<T> :
-        IList<T>,
-        IDisposable
+    public partial class Buffer<T> : IList<T>, IDisposable
     {
         /// <summary>
         /// 是否为只读
@@ -142,6 +140,6 @@ namespace AIO
         /// <summary>
         /// 释放
         /// </summary>
-        public abstract void Dispose();
+        public virtual void Dispose() { Arrays = null; }
     }
 }

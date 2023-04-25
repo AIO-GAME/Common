@@ -51,10 +51,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Script\Assembly\RegistInitializeDLLAttribute.cs" />
-    <Compile Include="Script\Assembly\RegistInitializePlatformAttribute.cs" />
-    <Compile Include="Script\Assembly\UnRegistInitializeDLLAttribute.cs" />
-    <Compile Include="Script\Assembly\UnRegistInitializePlatformAttribute.cs" />
+    <Compile Include="Script\Assembly\DllAutomation\DllAutomation.cs" />
+    <Compile Include="Script\Assembly\DllAutomation\DllAutomationAttribute.cs" />
+    <Compile Include="Script\Assembly\DllAutomation\IDllAutomation.cs" />
+    <Compile Include="Script\Class\SystemAutomation\ISystemAutomation.cs" />
+    <Compile Include="Script\Class\SystemAutomation\SystemAutomation.cs" />
+    <Compile Include="Script\Class\SystemAutomation\SystemAttribute.cs" />
     <Compile Include="Script\Field\ArgumentAttribute.cs" />
     <Compile Include="Script\Field\ArgumentCustom.cs" />
     <Compile Include="Script\Field\ArgumentUtils.cs" />

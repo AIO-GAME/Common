@@ -59,228 +59,6 @@
             支持的区域性
             </summary>
         </member>
-        <member name="T:AIO.BufferArray`1">
-            <summary>
-            接口方法
-            </summary>
-            <summary>
-            属性 私有方法
-            </summary>
-            <summary>
-            基础方法
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.Clear">
-            <summary>
-            清除 当前清空中重置标识下标 不重写数据
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.ToArray">
-            <summary>
-            转化为数组
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.Dispose">
-            <summary>
-            释放
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.CopyTo(`0[],System.Int32)">
-            <summary>
-            拷贝
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.Clone">
-            <summary>
-            克隆
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.GetEnumerator">
-            <summary>
-            迭代
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.ToString">
-            <summary>
-            输出
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.Reverse">
-            <summary>
-            反转
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.Contains(`0)">
-            <summary>
-            判断是否有相同元素
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.Swap(System.Int32,System.Int32)">
-            <summary>
-            交换数组元素位置
-            </summary>
-        </member>
-        <member name="F:AIO.BufferArray`1.CAPACITY">
-            <summary>
-            容量
-            </summary>
-        </member>
-        <member name="P:AIO.BufferArray`1.Array">
-            <summary>
-            当前数组
-            </summary>
-        </member>
-        <member name="P:AIO.BufferArray`1.Offset">
-            <summary>
-            数据写入下标
-            </summary>
-        </member>
-        <member name="P:AIO.BufferArray`1.Capacity">
-            <summary>
-            容量
-            </summary>
-        </member>
-        <member name="P:AIO.BufferArray`1.Count">
-            <summary>
-            当前容器数量
-            </summary>
-        </member>
-        <member name="P:AIO.BufferArray`1.IsReadOnly">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BufferArray`1.Item(System.Int32)">
-            <inheritdoc cref="P:System.Collections.Generic.IList`1.Item(System.Int32)" />
-        </member>
-        <member name="P:AIO.BufferArray`1.Item(System.Int64)">
-            <inheritdoc cref="P:System.Collections.Generic.IList`1.Item(System.Int32)" />
-        </member>
-        <member name="M:AIO.BufferArray`1.#ctor(System.Int32@)">
-            <summary>
-            初始化
-            </summary>
-            <param name="capacity">容量</param>
-        </member>
-        <member name="M:AIO.BufferArray`1.#ctor">
-            <summary>
-            初始化
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.#ctor(`0[],System.Int32@)">
-            <summary>
-            初始化
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.UpStepCapacity">
-            <summary>
-            扩大容量
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.Set(`0,System.Int32)">
-            <summary>
-            修改元素
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.Get(System.Int32@)">
-            <summary>
-            获取元素
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.Set(`0,System.Int64@)">
-            <summary>
-            修改元素
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.Get(System.Int64@)">
-            <summary>
-            获取元素
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.GetLast">
-            <summary>
-            获取最后一个元素
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.GetFirst">
-            <summary>
-            获取第一个元素
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.Add(`0)">
-            <summary>
-            添加
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.Add(`0,System.Int32@)">
-            <summary>
-            添加
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.Add(`0[])">
-            <summary>
-            添加
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.Add``1(``0)">
-            <summary>
-            添加
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.AddFirst(`0)">
-            <summary>
-            添加指定元素
-            </summary>
-            <param name="item">元素</param>
-        </member>
-        <member name="M:AIO.BufferArray`1.Insert(System.Int32,`0)">
-            <summary>
-            插入
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.Insert(System.Int32,`0[])">
-            <summary>
-            插入
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.Insert``1(System.Int32,``0)">
-            <summary>
-            插入
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.IndexOf(`0)">
-            <summary>
-            查找指定元素在第几位
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.IndexOf(`0,System.Int32)">
-            <summary>
-            获取指定值下标 从元素第几个开始查找
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.Remove(`0)">
-            <summary>
-            移除指定元素
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.RemoveAt(System.Int32)">
-            <summary>
-            移除指定下标元素
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.System#Collections#Generic#IList{T}#RemoveAt(System.Int32)">
-            <summary>
-            移除指定下标元素
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.RemoveFirst">
-            <summary>
-            移除第一个
-            </summary>
-        </member>
-        <member name="M:AIO.BufferArray`1.RemoveLast">
-            <summary>
-            移除最后一个
-            </summary>
-        </member>
         <member name="T:AIO.Buffer">
             <summary>
             数据缓存留
@@ -334,6 +112,18 @@
         <member name="P:AIO.Buffer.Capacity">
             <summary> 
             数据缓存:容量
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer.Skip(System.Int32@)">
+            <summary>
+            跳过
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer.CheckSize(System.Int32@)">
+            <summary>
+            检查剩余数量 
+            Flase:不满足
+            Ture:满足
             </summary>
         </member>
         <member name="T:AIO.Buffer`1">
@@ -496,6 +286,15 @@
             <summary>
             释放
             </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.Equals(AIO.Buffer{`0},AIO.Buffer{`0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Buffer`1.GetHashCode(AIO.Buffer{`0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Buffer`1.Clone">
+            <inheritdoc/>
         </member>
         <member name="T:AIO.BufferByte">
             <summary>
@@ -828,135 +627,6 @@
         </member>
         <member name="M:AIO.BufferByte.WriteUInt64(System.UInt64@,System.Boolean@)">
             <inheritdoc/> 
-        </member>
-        <member name="T:AIO.BufferChar">
-            <summary>
-             字符缓存
-             建议使用 StringBuilder
-            </summary>
-        </member>
-        <member name="F:AIO.BufferChar.CAPACITY">
-            <summary> 容量 </summary>
-        </member>
-        <member name="F:AIO.BufferChar.NULL">
-            <summary> 空 </summary>
-        </member>
-        <member name="F:AIO.BufferChar.array">
-            <summary> 字符数组 </summary>
-        </member>
-        <member name="F:AIO.BufferChar.top">
-            <summary> 首位:下一个写入位置 </summary>
-        </member>
-        <member name="F:AIO.BufferChar.offset">
-            <summary> 游标:下一个读取位置 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.#ctor">
-            <summary> 构建一个默认的字符缓冲对象 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.#ctor(System.Int32)">
-            <summary> 构建一个指定容量的字符缓冲对象 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.#ctor(System.Char[])">
-            <summary> 通过一个字符数组构建一个字符缓冲对象 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.#ctor(System.Char[],System.Int32,System.Int32)">
-            <summary> 通过一个字符数组，offset开始数量为len的区域构建一个字符缓冲 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.#ctor(System.String)">
-            <summary> 通过一个字符串构建一个字符缓冲对象 </summary>
-        </member>
-        <member name="P:AIO.BufferChar.Capacity">
-            <summary> 容量 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.SetCapacity(System.Int32)">
-            <summary> 设置容量 </summary>
-        </member>
-        <member name="P:AIO.BufferChar.Top">
-            <summary> 首位 </summary>
-        </member>
-        <member name="P:AIO.BufferChar.Offset">
-            <summary> 游标 </summary>
-        </member>
-        <member name="P:AIO.BufferChar.Length">
-            <summary> 长度 </summary>
-        </member>
-        <member name="P:AIO.BufferChar.Array">
-            <summary> 获取字符数组 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.Read">
-            <summary> 读取一个字符 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.Read(System.Int32)">
-            <summary> 读取指定下标字符 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.Write(System.Char)">
-            <summary> 写入一个字符 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.Write(System.Char,System.Int32)">
-            <summary> 将字符写到指定下标 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.Read(System.Char[],System.Int32,System.Int32)">
-            <summary> 读取len个字符到数组chars中，从下标index开始 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.Write(System.Char[],System.Int32,System.Int32)">
-            <summary> 写入一个字符数组，冲下标offset开始，数量len </summary>
-        </member>
-        <member name="M:AIO.BufferChar.Append(System.Object)">
-            <summary> 附加一个对象 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.Append(System.String)">
-            <summary> 附加一个字符串 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.Append(System.String,System.Int32,System.Int32)">
-            <summary> 附加一个字符串,从字符串start索引开始添加len个字符 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.Append(System.String,System.Int32)">
-            <summary> 附加一个字符串,从字符串start索引开始添加len个字符 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.Append(System.Char[])">
-            <summary> 附加一组字符 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.Append(System.Char[],System.Int32,System.Int32)">
-            <summary> 附加一组字符，冲指定下标offset开始，附加len数量个字符 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.Append(System.Boolean)">
-            <summary> 附加一个boolean </summary>
-        </member>
-        <member name="M:AIO.BufferChar.Append(System.Char)">
-            <summary> 附加一个char </summary>
-        </member>
-        <member name="M:AIO.BufferChar.Append(System.Int32)">
-            <summary> 附加一个int </summary>
-        </member>
-        <member name="M:AIO.BufferChar.Append(System.Int64)">
-            <summary> 附加一个long </summary>
-        </member>
-        <member name="M:AIO.BufferChar.Append(System.Single)">
-            <summary> 附加一个float </summary>
-        </member>
-        <member name="M:AIO.BufferChar.Append(System.Double)">
-            <summary> 附加一个double </summary>
-        </member>
-        <member name="M:AIO.BufferChar.ToArray">
-            <summary> 转换为字符数组 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.Clear">
-            <summary> 清除 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.GetString">
-            <summary> 获取字符串 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.GetString(System.Int32,System.Int32)">
-            <summary> 获取字符串 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.GetHashCode">
-            <summary> hash码 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.Equals(System.Object)">
-            <summary> 比对方法 </summary>
-        </member>
-        <member name="M:AIO.BufferChar.ToString">
-            <summary> 信息 </summary>
         </member>
         <member name="T:AIO.ILoad">
             <summary>

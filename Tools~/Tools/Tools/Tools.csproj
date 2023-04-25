@@ -50,11 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Script\Buffer\Array\BufferArray.cs" />
     <Compile Include="Script\Buffer\Buffer.cs" />
     <Compile Include="Script\Buffer\Buffer.Extend.cs" />
     <Compile Include="Script\Buffer\Buffer.Generics.cs" />
-    <Compile Include="Script\Buffer\Buffer.List.cs" />
+    <Compile Include="Script\Buffer\Buffer.IList.cs" />
     <Compile Include="Script\Buffer\Byte\Buffer.Byte.ICollection.cs" />
     <Compile Include="Script\Buffer\Byte\Buffer.Byte.IDictionary.cs" />
     <Compile Include="Script\Buffer\Byte\Buffer.Byte.Bool.cs" />
@@ -76,7 +75,6 @@
     <Compile Include="Script\Buffer\Byte\Buffer.Byte.UInt16.cs" />
     <Compile Include="Script\Buffer\Byte\Buffer.Byte.UInt32.cs" />
     <Compile Include="Script\Buffer\Byte\Buffer.Byte.UInt64.cs" />
-    <Compile Include="Script\Buffer\Char\BufferChar.cs" />
     <Compile Include="Script\Interface\ILoad.cs" />
     <Compile Include="Script\Interface\ISave.cs" />
     <Compile Include="Script\Interface\Read\IReadData.cs" />
@@ -151,6 +149,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Compile Include="Script\Buffer\Buffer.IEqualityComparer.cs" />
+    <Compile Include="Script\Buffer\Buffer.ICloneable.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

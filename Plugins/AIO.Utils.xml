@@ -61,7 +61,59 @@
         </member>
         <member name="T:Utils">
             <summary>
-            工具类
+            工具库
+            </summary>
+        </member>
+        <member name="T:Utils.DataEncrypt">
+            <summary>
+            数据加密解密
+            </summary>
+        </member>
+        <member name="M:Utils.DataEncrypt.Encrypt(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            加密
+            </summary>
+            <param name="data">数据源</param>
+            <param name="rgbKey">对称算法的密钥</param>
+            <param name="rgbIV">对称算法的初始化向量</param>
+            <returns></returns>
+        </member>
+        <member name="M:Utils.DataEncrypt.Encrypt(System.Byte[])">
+            <summary>
+            加密
+            </summary>
+        </member>
+        <member name="M:Utils.DataEncrypt.Encrypt(System.String)">
+            <summary>
+            加密
+            </summary>
+        </member>
+        <member name="M:Utils.DataEncrypt.EncryptToStr(System.String)">
+            <summary>
+            加密
+            </summary>
+        </member>
+        <member name="M:Utils.DataEncrypt.Decrypt(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            解码 
+            </summary>
+            <param name="data">数据源</param>
+            <param name="rgbKey">对称算法的密钥</param>
+            <param name="rgbIV">对称算法的初始化向量</param>
+        </member>
+        <member name="M:Utils.DataEncrypt.Decrypt(System.Byte[])">
+            <summary>
+            解码 
+            </summary>
+        </member>
+        <member name="M:Utils.DataEncrypt.DecryptToStr(System.Byte[])">
+            <summary>
+            解码 
+            </summary>
+        </member>
+        <member name="M:Utils.DataEncrypt.Decrypt(System.String)">
+            <summary>
+            解码 
             </summary>
         </member>
         <member name="T:Utils.Guid">
@@ -138,11 +190,6 @@
         <member name="M:Utils.Hash.GetHashCodeAlloc(System.Object[])">
             <summary>
             获取哈希值
-            </summary>
-        </member>
-        <member name="T:Utils.IO">
-            <summary>
-            IO 工具类
             </summary>
         </member>
         <member name="M:Utils.IO.MoveFile(System.String@,System.String@,System.Boolean@)">
@@ -3826,6 +3873,21 @@
             获取系统启动后 经过的毫秒数
             </summary>
         </member>
+        <member name="T:Utils.HashTable">
+            <summary>
+            HashTabel 工具类
+            </summary>
+        </member>
+        <member name="M:Utils.HashTable.Create(System.Object[])">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="M:Utils.HashTable.Create(System.Collections.Generic.IDictionary{System.Object,System.Object})">
+            <summary>
+            创建
+            </summary>
+        </member>
         <member name="T:AIO.MergedKeyedCollection`2">
             <summary>
             合并键控集合
@@ -4347,24 +4409,6 @@
         <member name="F:AIO.Define.MAX_LENGTH_OF_ADDRESS">
             <summary>
             maximum length of address
-            </summary>
-        </member>
-        <member name="T:AIO.UtilsAttribute">
-            <summary>
-            工具类属性
-            如果使用该属性 请实现静态函数
-            Initialize
-            Dispose
-            </summary>
-        </member>
-        <member name="M:AIO.UtilsAttribute.InvokeInitialize(System.Type)">
-            <summary>
-            实现
-            </summary>
-        </member>
-        <member name="M:AIO.UtilsAttribute.InvokeDispose(System.Type)">
-            <summary>
-            销毁
             </summary>
         </member>
         <member name="T:AIO.IKeyedCollection`2">
