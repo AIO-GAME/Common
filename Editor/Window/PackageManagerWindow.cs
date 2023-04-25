@@ -134,7 +134,7 @@ namespace AIO.Package.Editor
             Package.GetNames();
             EditorGUILayout.BeginVertical("SelectionRect");
             EditorGUILayout.LabelField("", "Package Folder List", "PreLabel");
-            for (int i = 0; i < Package.Names.Count; i++)
+            for (var i = 0; i < Package.Names.Count; i++)
             {
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.PrefixLabel($"NO.{i + 1} {Package.Names[i]}");
