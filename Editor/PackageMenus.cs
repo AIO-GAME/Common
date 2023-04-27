@@ -8,6 +8,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
@@ -233,7 +234,6 @@ namespace AIO.Package.Editor
             PackageManagerWindow.Open(types);
         }
 
-
 #if MONKEYCOMMANDER
         [MonKey.Command("Plugins Manager Windows",
             Help = "插件管理面板",
@@ -249,10 +249,13 @@ namespace AIO.Package.Editor
             PluginsManagerWindow.Open(types);
         }
 
-        [MenuItem(GitLabel + "Open Dll Project")]
+#if UNITY_EDITOR_WIN
+        [MenuItem("Assets/Open C# Project DLL")]
         public static async void OpenDllProject()
         {
-            await PrWin.Open.Path(Path.Combine(Package.URL, "Tools~", "ALL.sln"), EPrVerb.Open);
+            var executor = PrCmd.Create().Input($"start \"DLL Project\" {Path.Combine(Package.URL, "Tools~", "ALL.sln")} /B /Max /HIGH");
+            (await executor.Async()).Debug();
         }
+#endif
     }
 }

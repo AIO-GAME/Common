@@ -9,7 +9,6 @@ namespace AIO
         /// <summary>
         /// 验证数据 报错条件 value != null
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void IsNull<T>(in T value)
         {
             if (!Ensure.IsActive) return;
@@ -20,7 +19,6 @@ namespace AIO
         /// <summary>
         /// 验证数据 报错条件 value == null 
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void IsNotNull<T>(T value)
         {
             if (!Ensure.IsActive) return;

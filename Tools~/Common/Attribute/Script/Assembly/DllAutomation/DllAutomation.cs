@@ -113,7 +113,7 @@ public static class DllAutomation
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Automation Installation DLL : {0} -> Error : {1}", system.Item1.Name, ex.Message);
+                    Console.WriteLine("Automation Installation DLL : {0} -> Error : {1}", system.Item1.Name, ex);
                     watch.Stop();
                 }
 
@@ -152,7 +152,7 @@ public static class DllAutomation
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Automation Installation DLL: {0} -> Error : {1}", system.Item1.Name, ex.Message);
+                    Console.WriteLine("Automation Installation DLL: {0} -> Error : {1}", system.Item1.Name, ex);
                 }
             }
         }
@@ -186,7 +186,7 @@ public static class DllAutomation
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Automation UnInstallation DLL : {0} -> Error : {1}", system.Item1.Name, ex.Message);
+                    Console.WriteLine("Automation UnInstallation DLL : {0} -> Error : {1}", system.Item1.Name, ex);
                     watch.Stop();
                 }
 
@@ -225,7 +225,7 @@ public static class DllAutomation
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Automation UnInstallation DLL: {0} -> Error : {1}", system.Item1.Name, ex.Message);
+                    Console.WriteLine("Automation UnInstallation DLL: {0} -> Error : {1}", system.Item1.Name, ex);
                 }
             }
         }

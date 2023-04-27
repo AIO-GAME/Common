@@ -12,7 +12,7 @@ namespace AIO
         /// [value == null ]
         /// [value.Trim() == string.Empty]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void IsNotNullOrWhiteSpace(in string value)
         {
             if (Ensure.IsActive == false) return;
@@ -30,7 +30,7 @@ namespace AIO
         /// [value is null]
         /// [value == ""]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void IsNotNullOrEmpty(in string value)
         {
             if (Ensure.IsActive == false) return;
@@ -47,7 +47,7 @@ namespace AIO
         /// 验证数据 报错条件
         /// [value is null]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void IsNotNull(in string value)
         {
             if (Ensure.IsActive == false) return;
@@ -62,7 +62,7 @@ namespace AIO
         /// 验证数据 报错条件
         /// [string.Empty == value]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void IsNotEmpty(in string value)
         {
             if (Ensure.IsActive == false) return;
@@ -79,7 +79,7 @@ namespace AIO
         /// [value.Length &lt; minLength]
         /// [value.Length > maxLength]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void HasLengthBetween(in string value, in int minLength, in int maxLength)
         {
             if (Ensure.IsActive == false) return;
@@ -102,7 +102,7 @@ namespace AIO
         /// 验证数据 报错条件
         /// [match.IsMatch(value) == false]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void Matches(in string value, in string match)
         {
             Matches(value, new Regex(match));
@@ -112,7 +112,7 @@ namespace AIO
         /// 验证数据 报错条件
         /// [match.IsMatch(value) == false]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void Matches(in string value, in Regex match)
         {
             if (Ensure.IsActive == false) return;
@@ -128,7 +128,7 @@ namespace AIO
         /// [value is null]
         /// [value.Length != expected]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void SizeIs(in string value, in int expected)
         {
             if (Ensure.IsActive == false) return;
@@ -145,7 +145,7 @@ namespace AIO
         /// 验证数据 报错条件
         /// [string.Equals(value, expected) == false]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void IsEqualTo(in string value, in string expected)
         {
             if (Ensure.IsActive == false) return;
@@ -160,7 +160,7 @@ namespace AIO
         /// 验证数据 报错条件
         /// [string.Equals(value, expected, comparison) == false]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void IsEqualTo(in string value, in string expected, in StringComparison comparison)
         {
             if (Ensure.IsActive == false) return;
@@ -175,7 +175,7 @@ namespace AIO
         /// 验证数据 报错条件
         /// [string.Equals(value, expected) == true]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void IsNotEqualTo(in string value, in string expected)
         {
             if (Ensure.IsActive == false) return;
@@ -190,7 +190,7 @@ namespace AIO
         /// 验证数据 报错条件
         /// [string.Equals(value, expected, comparison) == true]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void IsNotEqualTo(in string value, in string expected, in StringComparison comparison)
         {
             if (Ensure.IsActive == false) return;
@@ -205,7 +205,7 @@ namespace AIO
         /// 验证数据 报错条件
         /// [Regex(@"[a-fA-F0-9]{8}(\-[a-fA-F0-9]{4}){3}\-[a-fA-F0-9]{12}").IsMatch(value) == false]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void IsGuid(in string value)
         {
             if (Ensure.IsActive == false) return;

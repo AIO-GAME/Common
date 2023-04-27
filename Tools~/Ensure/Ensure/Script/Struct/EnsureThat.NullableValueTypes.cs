@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 
 namespace AIO
 {
@@ -8,7 +7,6 @@ namespace AIO
         /// <summary>
         /// 验证数据 报错条件 value == null
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void IsNotNull<T>(in T? value) where T : struct
         {
             if (!Ensure.IsActive) return;
