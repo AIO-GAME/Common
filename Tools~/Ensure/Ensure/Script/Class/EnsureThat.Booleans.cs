@@ -8,7 +8,7 @@ namespace AIO
         /// <summary>
         /// 验证数据 报错条件 value == false
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void IsTrue(in bool value)
         {
             if (!Ensure.IsActive) return;
@@ -19,7 +19,7 @@ namespace AIO
         /// <summary>
         /// 验证数据 报错条件 value == true
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void IsFalse(in bool value)
         {
             if (!Ensure.IsActive) return;

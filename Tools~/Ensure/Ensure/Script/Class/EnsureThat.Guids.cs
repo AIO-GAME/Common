@@ -8,7 +8,6 @@ namespace AIO
         /// <summary>
         /// 验证数据 报错条件 value.Equals(Guid.Empty) == true
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void IsNotEmpty(in Guid value)
         {
             if (!Ensure.IsActive) return;

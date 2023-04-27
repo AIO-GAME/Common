@@ -113,7 +113,7 @@ public static class SystemAutomation
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Automation Installation System : {0} -> Error : {1}", system.Item1.Name, ex.Message);
+                    Console.WriteLine("Automation Installation System : {0} -> Error : {1}", system.Item1.Name, ex);
                     watch.Stop();
                 }
 
@@ -152,7 +152,7 @@ public static class SystemAutomation
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Automation Installation System : {0} -> Error : {1}", system.Item1.Name, ex.Message);
+                    Console.WriteLine("Automation Installation System : {0} -> Error : {1}", system.Item1.Name, ex);
                 }
 
             }
@@ -178,7 +178,7 @@ public static class SystemAutomation
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Automation UnInstallation System : {0} -> Error : {1}", system.Item1.Name, ex.Message);
+                    Console.WriteLine("Automation UnInstallation System : {0} -> Error : {1}", system.Item1.Name, ex);
                 }
             }
         }
@@ -208,7 +208,7 @@ public static class SystemAutomation
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Automation UnInstallation System : {0} -> Error : {1}", system.Item1.Name, ex.Message);
+                    Console.WriteLine("Automation UnInstallation System : {0} -> Error : {1}", system.Item1.Name, ex);
                     watch.Stop();
                 }
 

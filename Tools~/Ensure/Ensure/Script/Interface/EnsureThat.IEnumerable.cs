@@ -11,7 +11,7 @@ namespace AIO
         /// [value == null]
         /// [value[x] == null]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void HasNoNullItem<T>(T value) where T : class, IEnumerable
         {
             if (!Ensure.IsActive) return;

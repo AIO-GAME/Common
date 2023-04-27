@@ -61,8 +61,19 @@
     <Compile Include="Script\Field\ArgumentCustom.cs" />
     <Compile Include="Script\Field\ArgumentUtils.cs" />
     <Compile Include="Script\Enum\ERuntimePlatform.cs" />
-    <Compile Include="Script\Test.cs" />
+    <Compile Include="Script\Method\Comman\Exception\GCommandDuplicationKeyException.cs" />
+    <Compile Include="Script\Method\Comman\Exception\GCommandException.cs" />
+    <Compile Include="Script\Method\Comman\Exception\GCommandInvokeException.cs" />
+    <Compile Include="Script\Method\Comman\Exception\GCommandNotFoundException.cs" />
+    <Compile Include="Script\Method\Comman\Exception\GCommandNotSupportedException.cs" />
+    <Compile Include="Script\Method\Comman\Exception\GCommandParameterException.cs" />
+    <Compile Include="Script\Method\Comman\Exception\GCommandResolverException.cs" />
+    <Compile Include="Script\Method\Comman\Exception\GCommandVerifyException.cs" />
+    <Compile Include="Script\Method\Comman\GCommandSearchDatabase.cs" />
+    <Compile Include="Script\Method\Comman\GCommandAttribute.cs" />
+    <Compile Include="Script\Method\Comman\GCommandSystem.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>@set CUR_DLL=$(ProjectDir)$(OutDir)

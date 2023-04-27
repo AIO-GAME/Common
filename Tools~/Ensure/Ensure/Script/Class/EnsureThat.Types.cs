@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 
 namespace AIO
 {
@@ -9,7 +8,7 @@ namespace AIO
         /// 验证数据 报错条件
         /// [expectedType.IsAssignableFrom(param?.GetType()) == false]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void IsOfType<T>(in T param, in Type expectedType)
         {
             if (!Ensure.IsActive) return;
@@ -24,7 +23,7 @@ namespace AIO
         /// 验证数据 报错条件
         /// [expectedType.IsAssignableFrom(param) == false]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void IsOfType(in Type param, in Type expectedType)
         {
             if (!Ensure.IsActive) return;
@@ -39,7 +38,7 @@ namespace AIO
         /// 验证数据 报错条件
         /// [typeof(T).IsAssignableFrom(param) == false]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void IsOfType<T>(in object param)
         {
             IsOfType(param, typeof(T));
@@ -49,7 +48,7 @@ namespace AIO
         /// 验证数据 报错条件
         /// [typeof(T).IsAssignableFrom(param) == false]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void IsOfType<T>(in Type param)
         {
             IsOfType(param, typeof(T));

@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace AIO
 {
@@ -15,7 +14,7 @@ namespace AIO
         /// [value == null]
         /// [value.Count &lt; 1]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void HasItems<T>(in T value) where T : class, ICollection
         {
             if (!Ensure.IsActive) return;
@@ -30,7 +29,7 @@ namespace AIO
         /// [value == null]
         /// [value.Count &lt; 1]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void HasItems<T>(in ICollection<T> value)
         {
             if (!Ensure.IsActive) return;
@@ -48,7 +47,7 @@ namespace AIO
         /// 验证数据 报错条件
         /// [value.Count != expected]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void SizeIs<T>(in T value, in int expected) where T : ICollection
         {
             if (!Ensure.IsActive) return;
@@ -60,7 +59,7 @@ namespace AIO
         /// 验证数据 报错条件
         /// [value.Count != expected]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void SizeIs<T>(in T value, in long expected) where T : ICollection
         {
             if (!Ensure.IsActive) return;
@@ -72,7 +71,7 @@ namespace AIO
         /// 验证数据 报错条件
         /// [value.Count != expected]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void SizeIs<T>(in ICollection<T> value, in int expected)
         {
             if (!Ensure.IsActive) return;
@@ -84,7 +83,7 @@ namespace AIO
         /// 验证数据 报错条件
         /// [value.Count != expected]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void SizeIs<T>(in ICollection<T> value, in long expected)
         {
             if (!Ensure.IsActive) return;
@@ -100,7 +99,7 @@ namespace AIO
         /// 验证数据 报错条件
         /// [!value.Any(predicate)]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void Any<T>(in ICollection<T> value, in Func<T, bool> predicate)
         {
             if (!Ensure.IsActive) return;

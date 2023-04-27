@@ -11,7 +11,7 @@ namespace AIO
         /// [value == null]
         /// [value.Length &lt; 1]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void HasItems<T>(in T[] value)
         {
             if (!Ensure.IsActive) return;
@@ -25,7 +25,7 @@ namespace AIO
         /// 验证数据 报错条件
         /// [value.Any(predicate) == false]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void Any<T>(in T[] value, in Func<T, bool> predicate)
         {
             if (!Ensure.IsActive) return;
@@ -40,7 +40,7 @@ namespace AIO
         /// 验证数据 报错条件
         /// [value.Length != expected]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void SizeIs<T>(in T[] value, in int expected)
         {
             if (!Ensure.IsActive) return;
@@ -55,7 +55,7 @@ namespace AIO
         /// 验证数据 报错条件
         /// [value.Length != expected]
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public void SizeIs<T>(in T[] value, in long expected)
         {
             if (!Ensure.IsActive) return;

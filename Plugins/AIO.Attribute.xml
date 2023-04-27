@@ -621,14 +621,247 @@
             In the player on the Playstation 5.
             </summary>
         </member>
-        <member name="T:AIO.Script.Test">
+        <member name="M:GCommandDuplicationKeyException.#ctor(System.Int32,System.String,System.String)">
             <summary>
-            
+            游戏命令Key存在多个
             </summary>
         </member>
-        <member name="M:AIO.Script.Test.AAA">
+        <member name="T:GCommandException">
             <summary>
-            
+            游戏命令异常
+            </summary>
+        </member>
+        <member name="T:GCommandInvokeException">
+            <summary>
+            命令执行异常
+            </summary>
+        </member>
+        <member name="M:GCommandNotFoundException.#ctor(System.Int32)">
+            <summary>
+            查询指定游戏命令异常
+            </summary>
+        </member>
+        <member name="T:GCommandNotSupportedException">
+            <summary>
+            游戏命令不受支持
+            </summary>
+        </member>
+        <member name="M:GCommandParameterNoMatchException.#ctor(System.Int32,System.Object[])">
+            <summary>
+            游戏命令参数不匹配
+            </summary>
+        </member>
+        <member name="T:GCommandResolverException">
+            <summary>
+            游戏命令解析异常
+            </summary>
+        </member>
+        <member name="M:GCommandResolverException.#ctor(System.String)">
+            <summary>
+            游戏命令解析异常
+            </summary>
+        </member>
+        <member name="T:GCommandVerifyException">
+            <summary>
+            命令验证异常
+            </summary>
+        </member>
+        <member name="T:GCommandSearchDatabase">
+            <summary>
+            命令结构
+            </summary>
+        </member>
+        <member name="P:GCommandSearchDatabase.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:GCommandSearchDatabase.Commands">
+            <summary>
+            命令
+            </summary>
+        </member>
+        <member name="P:GCommandSearchDatabase.Parent">
+            <summary>
+            父标题
+            </summary>
+        </member>
+        <member name="P:GCommandSearchDatabase.Child">
+            <summary>
+            父标题
+            </summary>
+        </member>
+        <member name="M:GCommandSearchDatabase.#ctor(System.String)">
+            <summary>
+            命令结构
+            </summary>
+        </member>
+        <member name="M:GCommandSearchDatabase.#ctor(System.String,GCommandSearchDatabase)">
+            <summary>
+            命令结构
+            </summary>
+        </member>
+        <member name="M:GCommandSearchDatabase.Add(GCommandAttribute)">
+            <summary>
+            添加
+            </summary>
+        </member>
+        <member name="M:GCommandSearchDatabase.Add(System.String,GCommandAttribute)">
+            <summary>
+            添加
+            </summary>
+        </member>
+        <member name="M:GCommandSearchDatabase.Add(System.Collections.Generic.IList{System.String},GCommandAttribute)">
+            <summary>
+            添加
+            </summary>
+        </member>
+        <member name="M:GCommandSearchDatabase.Dispose">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="M:GCommandSearchDatabase.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:GCommandAttribute">
+            <summary>
+            命令属性
+            放置在 构造函数 抽象函数 非静态函数 虚函数 重写函数 函数泛型 都会自动过滤
+            验证函数同样要求 并且不能包含参数
+            </summary>
+        </member>
+        <member name="P:GCommandAttribute.ID">
+            <summary>
+            命令ID
+            </summary>
+        </member>
+        <member name="F:GCommandAttribute.Validation">
+            <summary>
+            验证函数
+            </summary>
+        </member>
+        <member name="P:GCommandAttribute.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:GCommandAttribute.HeaderList">
+            <summary>
+            标题分段列表
+            </summary>
+        </member>
+        <member name="F:GCommandAttribute.Help">
+            <summary>
+            一些帮助显示，以便用户理解命令
+            </summary>
+        </member>
+        <member name="F:GCommandAttribute.Name">
+            <summary>
+            可以用来搜索命令的名称
+            </summary>
+        </member>
+        <member name="F:GCommandAttribute.QuickName">
+            <summary>
+            可以搜索命令的快速名称(使其简短以快速访问命令)
+            </summary>
+        </member>
+        <member name="F:GCommandAttribute.Category">
+            <summary>
+            该类别的命令可以帮助您浏览它
+            </summary>
+        </member>
+        <member name="M:GCommandAttribute.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:GCommandAttribute.#ctor(System.Int32)">
+            <summary>
+            游戏命令
+            </summary>
+        </member>
+        <member name="P:GCommandAttribute.CommandMethod">
+            <summary>
+            方法
+            </summary>
+        </member>
+        <member name="P:GCommandAttribute.Parameters">
+            <summary>
+            参数
+            </summary>
+        </member>
+        <member name="P:GCommandAttribute.RuntimeType">
+            <summary>
+            所属类
+            </summary>
+        </member>
+        <member name="P:GCommandAttribute.ValidationMethod">
+            <summary>
+            验证函数 Validation
+            </summary>
+        </member>
+        <member name="P:GCommandAttribute.FullName">
+            <summary>
+            全局命名
+            </summary>
+        </member>
+        <member name="T:GCommandSystem">
+            <summary>
+            游戏命令系统
+            </summary>
+        </member>
+        <member name="M:GCommandSystem.Initialize">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:GCommandSystem.Register(System.Collections.Generic.IEnumerable{System.Reflection.Assembly})">
+            <summary>
+            注册
+            </summary>
+        </member>
+        <member name="M:GCommandSystem.Register(System.Reflection.Assembly)">
+            <summary>
+            注册
+            </summary>
+        </member>
+        <member name="M:GCommandSystem.Register(System.Type)">
+            <summary>
+            注册
+            </summary>
+        </member>
+        <member name="M:GCommandSystem.Register(System.Type,System.Reflection.MethodInfo)">
+            <summary>
+            注册
+            </summary>
+        </member>
+        <member name="M:GCommandSystem.Debug">
+            <summary>
+            打印
+            </summary>
+        </member>
+        <member name="M:GCommandSystem.Export(System.String@)">
+            <summary>
+            导出命令
+            </summary>
+        </member>
+        <member name="M:GCommandSystem.Invoke(System.String@)">
+            <summary>
+            解析字符串
+            </summary>
+        </member>
+        <member name="M:GCommandSystem.Invoke(System.Int32@,System.Object[])">
+            <summary>
+            解析字符串
+            </summary>
+        </member>
+        <member name="M:GCommandSystem.Invoke(System.Int32@)">
+            <summary>
+            解析字符串
+            </summary>
+        </member>
+        <member name="M:GCommandSystem.UnRegister">
+            <summary>
+            撤销注册命令
             </summary>
         </member>
     </members>

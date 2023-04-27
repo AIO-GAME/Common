@@ -5,23 +5,23 @@ namespace AIO
     internal static class StringExtension
     {
         /// <summary>
-        /// ½«Ö¸¶¨Êý×éÖÐ¶ÔÓ¦¶ÔÏóµÄ×Ö·û´®±íÊ¾ÐÎÊ½Ìæ»»ÎªÖ¸¶¨×Ö·û´®ÖÐµÄ¸ñÊ½Ïî¡£ÊäÈë×Ö·û´®¸ñÊ½Ê¹ÓÃÕ¼Î»·ûÈç{0}¡¢{1}µÈ¡£
+        /// ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ê½ï¿½æ»»ÎªÖ¸ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ÐµÄ¸ï¿½Ê½ï¿½î¡£ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ê½Ê¹ï¿½ï¿½Õ¼Î»ï¿½ï¿½ï¿½ï¿½{0}ï¿½ï¿½{1}ï¿½È¡ï¿½
         /// </summary>
-        /// <param name="format">ÊäÈë×Ö·û´®¸ñÊ½¡£</param>
-        /// <param name="formattingArgs">°üº¬Òª¸ñÊ½»¯ºÍ×¢Èëµ½×Ö·û´®ÖÐµÄÖµµÄ¶ÔÏóÊý×é¡£</param>
-        /// <returns>½«¸ñÊ½ÏîÌæ»»ÎªÏàÓ¦¶ÔÏóµÄ×Ö·û´®±íÊ¾ÐÎÊ½ºóµÄ×Ö·û´®¸±±¾¡£</returns>
+        /// <param name="format">ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½</param>
+        /// <param name="formattingArgs">ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½×¢ï¿½ëµ½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ðµï¿½Öµï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é¡£</param>
+        /// <returns>ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½æ»»Îªï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</returns>
         internal static string Inject(this string format, params object[] formattingArgs)
         {
             return string.Format(format, formattingArgs);
         }
 
         /// <summary>
-        /// ½«Ö¸¶¨Êý×éÖÐ¶ÔÓ¦¶ÔÏóµÄ×Ö·û´®±íÊ¾ÐÎÊ½Ìæ»»ÎªÖ¸¶¨×Ö·û´®ÖÐµÄ¸ñÊ½Ïî¡£ÊäÈë×Ö·û´®¸ñÊ½Ê¹ÓÃÕ¼Î»·ûÈç{0}¡¢{1}µÈ¡£
-        /// ´Ë·½·¨ÊÇÉÏÒ»¸ö·½·¨µÄÖØÔØ£¬µ«Ëü½ÓÊÜÒ»¸ö×Ö·û´®Êý×é¶ø²»ÊÇ¶ÔÏóÊý×é¡£
+        /// ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ê½ï¿½æ»»ÎªÖ¸ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ÐµÄ¸ï¿½Ê½ï¿½î¡£ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ê½Ê¹ï¿½ï¿½Õ¼Î»ï¿½ï¿½ï¿½ï¿½{0}ï¿½ï¿½{1}ï¿½È¡ï¿½
+        /// ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é¡£
         /// </summary>
-        /// <param name="format">ÊäÈë×Ö·û´®¸ñÊ½¡£</param>
-        /// <param name="formattingArgs">°üº¬Òª¸ñÊ½»¯ºÍ×¢Èëµ½×Ö·û´®ÖÐµÄÖµµÄ×Ö·û´®Êý×é¡£</param>
-        /// <returns>½«¸ñÊ½ÏîÌæ»»ÎªÏàÓ¦¶ÔÏóµÄ×Ö·û´®±íÊ¾ÐÎÊ½ºóµÄ×Ö·û´®¸±±¾¡£</returns>
+        /// <param name="format">ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½</param>
+        /// <param name="formattingArgs">ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½×¢ï¿½ëµ½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ðµï¿½Öµï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é¡£</param>
+        /// <returns>ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½æ»»Îªï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</returns>
         internal static string Inject(this string format, params string[] formattingArgs)
         {
             return string.Format(format, formattingArgs.Select(a => a as object).ToArray());

@@ -30,7 +30,6 @@ namespace AIO
         /// </summary>
         /// <param name="paramName">参数名</param>
         /// <returns>参数验证</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static EnsureThat That(in string paramName)
         {
             instance.paramName = paramName;
@@ -40,7 +39,6 @@ namespace AIO
         /// <summary>
         /// 运行期间设置
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void OnRuntimeMethodLoad(in bool isActive)
         {
             IsActive = isActive;
