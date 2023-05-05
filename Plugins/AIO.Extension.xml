@@ -109,6 +109,25 @@
             获取当前函数执行总时间
             </summary>
         </member>
+        <member name="T:AIO.AppDomainExtension">
+            <summary>
+            App Domain 扩展
+            </summary>
+        </member>
+        <member name="M:AIO.AppDomainExtension.GetAttributes``1(System.AppDomain,System.Boolean@)">
+            <summary>
+            获取属性
+            </summary>
+            <typeparam name="T">属性类型</typeparam>
+            <returns>属性数组</returns>
+        </member>
+        <member name="M:AIO.AppDomainExtension.GetAttributes``1(System.AppDomain,System.Func{System.Type,``0,``0},System.Boolean@)">
+            <summary>
+            获取属性
+            </summary>
+            <typeparam name="T">属性类型</typeparam>
+            <returns>属性数组</returns>
+        </member>
         <member name="T:AIO.FieldInfoExtend">
             <summary>
             字段信息扩展

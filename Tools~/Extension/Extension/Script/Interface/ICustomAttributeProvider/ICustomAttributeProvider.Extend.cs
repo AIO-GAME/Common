@@ -1,11 +1,11 @@
 ﻿namespace AIO
 {
     using System.Reflection;
-using System.Runtime.CompilerServices;
+    using System.Runtime.CompilerServices;
 
-/// <summary>
-/// 为支持自定义属性的反映对象提供自定义属性。扩展
-/// </summary>
+    /// <summary>
+    /// 为支持自定义属性的反映对象提供自定义属性。扩展
+    /// </summary>
     public static class ICustomAttributeProviderExtend
     {
         /// <summary>
