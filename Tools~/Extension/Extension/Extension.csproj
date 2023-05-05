@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Script\Class\Action\Action.Extend.cs" />
+    <Compile Include="Script\Class\AppDomain\AppDomainExtension.cs" />
     <Compile Include="Script\Class\FieldInfo\FieldInfo.Extend.IS.cs" />
     <Compile Include="Script\Class\MethodBase\MethodBase.Extend.Get.cs" />
     <Compile Include="Script\Class\MethodInfo\MethodInfo.Extend.cs" />
