@@ -85,7 +85,7 @@ namespace AIO
         /// </summary>
         public void Skip(in int count)
         {
-            ReadIndex += count;
+            ReadIndex += count + 1;
         }
 
         /// <summary>

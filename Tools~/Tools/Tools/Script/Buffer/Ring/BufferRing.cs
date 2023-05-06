@@ -211,9 +211,8 @@ namespace AIO
             return count;
         }
 
-
         /// <inheritdoc />
-        public override void Write(in IList<T> buffer)
+        public override void Write(in ICollection<T> buffer)
         {
             if (buffer == null) return;
             Write(buffer, 0, buffer.Count);

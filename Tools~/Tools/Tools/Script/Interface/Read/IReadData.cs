@@ -45,5 +45,18 @@ namespace AIO
         /// <typeparam name="T">泛型</typeparam>
         /// <returns>值</returns>
         void ReadDataArray<T>(ICollection<T> collection) where T : IBinDeserialize, new();
+
+        /// <summary>
+        /// 检查是否有指定数据长度
+        /// </summary>
+        /// <param name="count">长度</param>
+        /// <returns>Ture:满足 False:不满足</returns>
+        bool CheckSize(in int count);
+
+        /// <summary>
+        /// 跳过读取指定长度
+        /// </summary>
+        /// <param name="count">长度</param>
+        void Skip(in int count);
     }
 }

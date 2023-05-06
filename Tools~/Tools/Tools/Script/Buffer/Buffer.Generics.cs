@@ -39,8 +39,9 @@ namespace AIO
             }
             else
             {
-                Arrays = bytes;
                 WriteIndex = bytes.Length;
+                Arrays = new T[WriteIndex];
+                Array.ConstrainedCopy(bytes, 0, Arrays, 0, WriteIndex);
             }
 
             ReadIndex = 0;
@@ -60,7 +61,7 @@ namespace AIO
                     // 每次扩大一倍 +1是防止i=0导致死循环
                     while (c < value) c = (c << 1) + 1;
                     var newArray = new T[c];
-                    Array.Copy(Arrays, 0, newArray, 0, WriteIndex);
+                    Array.ConstrainedCopy(Arrays, 0, newArray, 0, WriteIndex);
                     Arrays = newArray;
                 }
             }
@@ -74,7 +75,7 @@ namespace AIO
             var Len = WriteIndex - ReadIndex;
             if (Len <= 0) return Array.Empty<T>();
             var bytes = new T[Len];
-            Array.Copy(Arrays, ReadIndex, bytes, 0, Len);
+            Array.ConstrainedCopy(Arrays, ReadIndex, bytes, 0, Len);
             return bytes;
         }
 
@@ -89,15 +90,7 @@ namespace AIO
         /// <summary> 
         /// 将指定字节缓冲区数据写入当前缓存区
         /// </summary>
-        public virtual void Write(in ICollection<T> data)
-        {
-            Write(data, 0, data.Count);
-        }
-
-        /// <summary> 
-        /// 写入byte数组
-        /// </summary>
-        public virtual void Write(in IList<T> bytes)
+        public virtual void Write(in ICollection<T> bytes)
         {
             Write(bytes, 0, bytes.Count);
         }
@@ -112,7 +105,7 @@ namespace AIO
 
             var EndIndex = WriteIndex + len;
             if (Arrays.Length < EndIndex) Capacity = EndIndex;
-            for (var i = pos; i < len; i++) Arrays[WriteIndex + i] = bytes[i];
+            for (var i = pos; i < len; i++) Arrays[WriteIndex++] = bytes[i];
             WriteIndex = EndIndex;
         }
 
@@ -130,7 +123,7 @@ namespace AIO
             foreach (var item in bytes)
             {
                 if (i++ >= len) break;
-                Arrays[WriteIndex + i] = item;
+                Arrays[WriteIndex++] = item;
             }
 
             WriteIndex = EndIndex;

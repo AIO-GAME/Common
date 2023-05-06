@@ -14,6 +14,6 @@ internal class GCommandDuplicationKeyException : Exception
     {
         ID = id;
         Name1 = name1;
-        Name1 = name1;
+        Name2 = name2;
     }
 }
