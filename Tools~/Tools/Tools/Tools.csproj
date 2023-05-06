@@ -50,6 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Script\Bean\GBeanRegisterAttribute.cs" />
+    <Compile Include="Script\Bean\GBeanSystem.cs" />
+    <Compile Include="Script\Bean\GBean.cs" />
     <Compile Include="Script\Buffer\Buffer.cs" />
     <Compile Include="Script\Buffer\Buffer.Extend.cs" />
     <Compile Include="Script\Buffer\Buffer.Generics.cs" />

@@ -46,6 +46,27 @@ namespace AIO
             WriteByteArray(data);
         }
 
+        /// <summary>
+        /// 读取数据
+        /// </summary>
+        /// <param name="start">开始下标</param>
+        /// <param name="count">长度</param>
+        /// <returns>返回数组</returns>
+        public BufferByte Read(in int start, in int count)
+        {
+            if (count <= 0) return new BufferByte();
+            if (start + count > WriteIndex)
+            {
+                throw new Exception(
+                    string.Format("数组越界: start + count > source length -> {0} + {1} = {2}",
+                    start, count, WriteIndex));
+            }
+            var buffer = new byte[count];
+            Array.ConstrainedCopy(Arrays, start, buffer, 0, count);
+            Array.Reverse(buffer);
+            return new BufferByte(buffer);
+        }
+
         /// <inheritdoc />
         public override void Write(in IList<byte> bytes, in int pos, in int len)
         {

@@ -1,10 +1,104 @@
-﻿using System;
-using System.Reflection;
+﻿using AIO;
 
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 namespace ZTest
 {
+    [GBeanRegister(2)]
+    public class SettingBean2 : GBean
+    {
+        /// <summary>
+        /// 音量
+        /// </summary>
+        public static float Volume;
+
+        /// <summary>
+        /// 开关
+        /// </summary>
+        public static bool OnOff;
+
+        public static List<string> aaaaa;
+
+        public override void Deserialize(IReadData buffer)
+        {
+            Volume = buffer.ReadFloat();
+            OnOff = buffer.ReadBool();
+            var len = buffer.ReadLen();
+            for (int i = 0; i < len; i++) aaaaa.Add(buffer.ReadString());
+        }
+
+        public override void Serialize(IWriteData buffer)
+        {
+            buffer.WriteFloat(Volume);
+            buffer.WriteBool(OnOff);
+            buffer.WriteLen(aaaaa.Count);
+            for (int i = 0; i < aaaaa.Count; i++) buffer.WriteString(aaaaa[i]);
+        }
+
+        public override void Initialize()
+        {
+            Volume = 1;
+            OnOff = false;
+            aaaaa = new List<string>();
+        }
+
+        public override void Frist()
+        {
+            Volume = 1;
+            OnOff = false;
+        }
+    }
+
+    [GBeanRegister(1)]
+    public class SettingBean : GBean
+    {
+        /// <summary>
+        /// 音量
+        /// </summary>
+        public static float Volume;
+
+        /// <summary>
+        /// 开关
+        /// </summary>
+        public static bool OnOff;
+
+        public static List<string> aaaaa;
+
+        public override void Deserialize(IReadData buffer)
+        {
+            Volume = buffer.ReadFloat();
+            OnOff = buffer.ReadBool();
+            var len = buffer.ReadLen();
+            for (int i = 0; i < len; i++) aaaaa.Add(buffer.ReadString());
+        }
+
+        public override void Serialize(IWriteData buffer)
+        {
+            buffer.WriteFloat(Volume);
+            buffer.WriteBool(OnOff);
+            buffer.WriteLen(aaaaa.Count);
+            for (int i = 0; i < aaaaa.Count; i++) buffer.WriteString(aaaaa[i]);
+        }
+
+        public override void Initialize()
+        {
+            Volume = 1;
+            OnOff = false;
+            aaaaa = new List<string>();
+        }
+
+        public override void Frist()
+        {
+            Volume = 1;
+            OnOff = false;
+        }
+    }
+
     class Program
     {
+
         [GCommand(101, Help = "获取浮点数属性 arg")]
         public static void GetActorAAAA()
         {
@@ -65,23 +159,46 @@ namespace ZTest
         {
             try
             {
-                GCommandSystem.Initialize();
-                GCommandSystem.Register(Assembly.GetExecutingAssembly());
-                GCommandSystem.Debug();
-                Console.WriteLine("--------------------------");
-                //GCommandSystem.Invoke("[102:\"asdasd\"]");
-                GCommandSystem.Invoke("[102:asdasd]");
-                //GCommandSystem.Invoke("[103:1]");
-                //GCommandSystem.Invoke("[103:1,\"2\",True]");
-                //GCommandSystem.Invoke("[103:1,\"2\",False]");
-                //GCommandSystem.Invoke("[103:1,\"2\",1,False]");
-                //GCommandSystem.Invoke("[103:1,\"2\",1,False,True]");
+                GBean();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
             Console.ReadKey();
+        }
+
+        static async void GBean()
+        {
+            GBeanSystem.Progress = (progress) =>
+            {
+                Console.WriteLine("数据读取进度 => {0:P3}", progress);
+            };
+
+            Console.WriteLine(" -----------< >-----------< >----------- ");
+            if (File.Exists(@"E:\Work-G\g108\Archived.dat")) File.Delete(@"E:\Work-G\g108\Archived.dat");
+            GBeanSystem.Initialize(@"E:\Work-G\g108\Archived.dat");
+            Console.WriteLine(" -----------< > Load  ");
+            await GBeanSystem.Load();
+            Console.WriteLine(" -----------< > Save  ");
+            GBeanSystem.Save();
+            Console.WriteLine(" -----------< > Load  ");
+            await GBeanSystem.Load();
+        }
+
+        static void GCommand()
+        {
+            GCommandSystem.Initialize();
+            GCommandSystem.Register(Assembly.GetExecutingAssembly());
+            GCommandSystem.Debug();
+            Console.WriteLine("--------------------------");
+            //GCommandSystem.Invoke("[102:\"asdasd\"]");
+            GCommandSystem.Invoke("[102:asdasd]");
+            //GCommandSystem.Invoke("[103:1]");
+            //GCommandSystem.Invoke("[103:1,\"2\",True]");
+            //GCommandSystem.Invoke("[103:1,\"2\",False]");
+            //GCommandSystem.Invoke("[103:1,\"2\",1,False]");
+            //GCommandSystem.Invoke("[103:1,\"2\",1,False,True]");
         }
     }
 }

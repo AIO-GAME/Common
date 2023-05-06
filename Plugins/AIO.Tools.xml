@@ -59,6 +59,109 @@
             支持的区域性
             </summary>
         </member>
+        <member name="T:AIO.GBeanRegisterAttribute">
+            <summary>
+            游戏数据注册
+            </summary>
+        </member>
+        <member name="P:AIO.GBeanRegisterAttribute.ID">
+            <summary>
+            唯一ID
+            </summary>
+        </member>
+        <member name="M:AIO.GBeanRegisterAttribute.#ctor(System.Int32)">
+            <summary>
+            游戏数据注册
+            </summary>
+            <param name="id">唯一ID</param>
+        </member>
+        <member name="T:AIO.GBeanSystem">
+            <summary>
+            游戏数据储存管理
+            </summary>
+        </member>
+        <member name="F:AIO.GBeanSystem.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="F:AIO.GBeanSystem.Bean">
+            <summary>
+            源数据
+            </summary>
+        </member>
+        <member name="P:AIO.GBeanSystem.Progress">
+            <summary>
+            进度回调
+            </summary>
+        </member>
+        <member name="F:AIO.GBeanSystem.TargetPath">
+            <summary>
+            目标存储读取路径
+            </summary>
+        </member>
+        <member name="M:AIO.GBeanSystem.GetMD5(System.Byte[]@)">
+            <summary>
+            获取二进制MD5码
+            </summary>
+        </member>
+        <member name="M:AIO.GBeanSystem.Initialize(System.String@)">
+            <summary>
+            初始化数据
+            </summary>
+        </member>
+        <member name="M:AIO.GBeanSystem.Load">
+            <summary>
+            加载数据
+            </summary>
+        </member>
+        <member name="M:AIO.GBeanSystem.Save">
+            <summary>
+            保存数据
+            </summary>
+        </member>
+        <member name="M:AIO.GBeanSystem.Clean">
+            <summary>
+            清空数据
+            </summary>
+        </member>
+        <member name="M:AIO.GBeanSystem.Reset">
+            <summary>
+            重置数据
+            </summary>
+        </member>
+        <member name="T:AIO.GBean">
+            <summary>
+            游戏数据
+            </summary>
+        </member>
+        <member name="M:AIO.GBean.Deserialize(AIO.IReadData)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.GBean.Serialize(AIO.IWriteData)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.GBean.Initialize">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.GBean.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.GBean.Frist">
+            <summary>
+            首次数据存放
+            </summary>
+        </member>
+        <member name="M:AIO.GBean.Clean">
+            <summary>
+            清空数据
+            </summary>
+        </member>
+        <member name="M:AIO.GBean.Reset">
+            <summary>
+            重置
+            </summary>
+        </member>
         <member name="T:AIO.Buffer">
             <summary>
             数据缓存留
@@ -199,11 +302,6 @@
         <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.ICollection{`0}@)">
             <summary> 
             将指定字节缓冲区数据写入当前缓存区
-            </summary>
-        </member>
-        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.IList{`0}@)">
-            <summary> 
-            写入byte数组
             </summary>
         </member>
         <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.IList{`0}@,System.Int32@,System.Int32@)">
@@ -366,6 +464,14 @@
         </member>
         <member name="M:AIO.BufferByte.Write(AIO.Buffer{System.Byte}@)">
             <inheritdoc />
+        </member>
+        <member name="M:AIO.BufferByte.Read(System.Int32@,System.Int32@)">
+            <summary>
+            读取数据
+            </summary>
+            <param name="start">开始下标</param>
+            <param name="count">长度</param>
+            <returns>返回数组</returns>
         </member>
         <member name="M:AIO.BufferByte.Write(System.Collections.Generic.IList{System.Byte}@,System.Int32@,System.Int32@)">
             <inheritdoc />
@@ -671,6 +777,19 @@
             </summary>
             <typeparam name="T">泛型</typeparam>
             <returns>值</returns>
+        </member>
+        <member name="M:AIO.IReadData.CheckSize(System.Int32@)">
+            <summary>
+            检查是否有指定数据长度
+            </summary>
+            <param name="count">长度</param>
+            <returns>Ture:满足 False:不满足</returns>
+        </member>
+        <member name="M:AIO.IReadData.Skip(System.Int32@)">
+            <summary>
+            跳过读取指定长度
+            </summary>
+            <param name="count">长度</param>
         </member>
         <member name="T:AIO.IReadICollection">
             <summary>
@@ -1579,7 +1698,7 @@
             <param name="count">读取长度</param>
             <returns>实际读取长度</returns>
         </member>
-        <member name="M:AIO.BufferRing`1.Write(System.Collections.Generic.IList{`0}@)">
+        <member name="M:AIO.BufferRing`1.Write(System.Collections.Generic.ICollection{`0}@)">
             <inheritdoc />
         </member>
         <member name="M:AIO.BufferRing`1.Write(System.Collections.Generic.IList{`0}@,System.Int32@,System.Int32@)">
