@@ -1,10 +1,9 @@
-﻿namespace Attribute.Test
+﻿using System;
+using System.Collections.Generic;
+using AIO;
+
+namespace Attribute.Test
 {
-    using AIO;
-
-    using System;
-    using System.Collections.Generic;
-
     /// <summary>
     /// 打包指令集
     /// </summary>
@@ -48,7 +47,6 @@
     {
         static void Main(string[] args)
         {
-            AIO.Script.Test.AAA();
             Console.WriteLine(" -------------------- ");
             try
             {
