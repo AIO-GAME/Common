@@ -12,7 +12,8 @@ namespace Pathfinding {
 	using System.Linq;
 
 	/// <summary>Base class for RecastGraph and NavMeshGraph</summary>
-	public abstract class NavmeshBase : NavGraph, INavmesh, INavmeshHolder, ITransformedGraph {
+	public abstract class NavmeshBase : NavGraph, INavmesh, INavmeshHolder, ITransformedGraph
+		, IRaycastableGraph {
 #if ASTAR_RECAST_LARGER_TILES
 		// Larger tiles
 		public const int VertexIndexMask = 0xFFFFF;
@@ -120,7 +121,7 @@ namespace Pathfinding {
 		/// Does not update the <see cref="transform"/> field.
 		/// See: <see cref="RelocateNodes(GraphTransform)"/>
 		/// </summary>
-		public abstract GraphTransform CalculateTransform ();
+		public abstract GraphTransform CalculateTransform();
 
 		/// <summary>
 		/// Called when tiles have been completely recalculated.
@@ -249,7 +250,7 @@ namespace Pathfinding {
 
 			if (tiles != null) {
 				for (int i = 0; i < tiles.Length; i++) {
-					Pathfinding.Util.ObjectPool<BBTree>.Release (ref tiles[i].bbTree);
+					Pathfinding.Util.ObjectPool<BBTree>.Release(ref tiles[i].bbTree);
 				}
 			}
 		}
@@ -310,7 +311,7 @@ namespace Pathfinding {
 					   vertsInGraphSpace = new Int3[0],
 					   tris = new int[0],
 					   nodes = new TriangleMeshNode[0],
-					   bbTree = ObjectPool<BBTree>.Claim (),
+					   bbTree = ObjectPool<BBTree>.Claim(),
 					   graph = this,
 			};
 		}
@@ -561,9 +562,9 @@ namespace Pathfinding {
 		/// Version: Since 3.7.6 the implementation is thread safe
 		/// </summary>
 		protected static void CreateNodeConnections (TriangleMeshNode[] nodes) {
-			List<Connection> connections = ListPool<Connection>.Claim ();
+			List<Connection> connections = ListPool<Connection>.Claim();
 
-			var nodeRefs = ObjectPoolSimple<Dictionary<Int2, int> >.Claim ();
+			var nodeRefs = ObjectPoolSimple<Dictionary<Int2, int> >.Claim();
 
 			nodeRefs.Clear();
 
@@ -620,8 +621,8 @@ namespace Pathfinding {
 			}
 
 			nodeRefs.Clear();
-			ObjectPoolSimple<Dictionary<Int2, int> >.Release (ref nodeRefs);
-			ListPool<Connection>.Release (ref connections);
+			ObjectPoolSimple<Dictionary<Int2, int> >.Release(ref nodeRefs);
+			ListPool<Connection>.Release(ref connections);
 		}
 
 		/// <summary>
@@ -683,7 +684,7 @@ namespace Pathfinding {
 
 			// Find all nodes of the second tile which are adjacent to the border between the tiles.
 			// This is used to speed up the matching process (the impact can be very significant for large tiles, but is insignificant for small ones).
-			TriangleMeshNode[] closeToEdge = ArrayPool<TriangleMeshNode>.Claim (nodes2.Length);
+			TriangleMeshNode[] closeToEdge = ArrayPool<TriangleMeshNode>.Claim(nodes2.Length);
 			int numCloseToEdge = 0;
 			for (int j = 0; j < nodes2.Length; j++) {
 				TriangleMeshNode nodeB = nodes2[j];
@@ -751,7 +752,7 @@ namespace Pathfinding {
 				}
 			}
 
-			ArrayPool<TriangleMeshNode>.Release (ref closeToEdge);
+			ArrayPool<TriangleMeshNode>.Release(ref closeToEdge);
 		}
 
 		/// <summary>
@@ -786,7 +787,7 @@ namespace Pathfinding {
 
 				// Remove the connections array explicitly for performance.
 				// Otherwise the Destroy method will try to remove the connections in both directions one by one which is slow.
-				ArrayPool<Connection>.Release (ref node.connections, true);
+				ArrayPool<Connection>.Release(ref node.connections, true);
 				node.Destroy();
 			}
 		}
@@ -839,7 +840,7 @@ namespace Pathfinding {
 			for (int i = 0; i < nodes.Length; i++) {
 				if (nodes[i] != null) batchNodesToDestroy.Add(nodes[i]);
 			}
-			ObjectPool<BBTree>.Release (ref tile.bbTree);
+			ObjectPool<BBTree>.Release(ref tile.bbTree);
 			// TODO: Pool tile object and various arrays in it?
 			tiles[x + z*tileXCount] = null;
 		}
@@ -866,7 +867,7 @@ namespace Pathfinding {
 			for (int i = 0, j = 0; i < tris.Length; i += 3, j++) {
 				recycling[verts[tris[i+0]].GetHashCode() + verts[tris[i+1]].GetHashCode() + verts[tris[i+2]].GetHashCode()] = j;
 			}
-			var connectionsToKeep = ListPool<Connection>.Claim ();
+			var connectionsToKeep = ListPool<Connection>.Claim();
 
 			for (int i = 0; i < nodes.Length; i++) {
 				var node = nodes[i];
@@ -888,7 +889,7 @@ namespace Pathfinding {
 								connectionsToKeep.Add(node.connections[j]);
 							}
 						}
-						ArrayPool<Connection>.Release (ref node.connections, true);
+						ArrayPool<Connection>.Release(ref node.connections, true);
 						if (connectionsToKeep.Count > 0) {
 							node.connections = connectionsToKeep.ToArrayFromPool();
 							node.SetConnectivityDirty();
@@ -899,7 +900,7 @@ namespace Pathfinding {
 			}
 
 			recycling.Clear();
-			ListPool<Connection>.Release (ref connectionsToKeep);
+			ListPool<Connection>.Release(ref connectionsToKeep);
 		}
 
 		/// <summary>
@@ -939,7 +940,7 @@ namespace Pathfinding {
 				w = w,
 				d = d,
 				tris = tris,
-				bbTree = ObjectPool<BBTree>.Claim (),
+				bbTree = ObjectPool<BBTree>.Claim(),
 				graph = this,
 			};
 
@@ -1031,6 +1032,318 @@ namespace Pathfinding {
 			navmeshUpdateData = new NavmeshUpdates.NavmeshUpdateSettings(this);
 		}
 
+		/// <summary>
+		/// Returns if there is an obstacle between origin and end on the graph.
+		/// This is not the same as Physics.Linecast, this function traverses the \b graph and looks for collisions instead of checking for collider intersection.
+		///
+		/// [Open online documentation to see images]
+		/// </summary>
+		public bool Linecast (Vector3 origin, Vector3 end) {
+			return Linecast(origin, end, null);
+		}
+
+		/// <summary>
+		/// Returns if there is an obstacle between origin and end on the graph.
+		///
+		/// This is not the same as Physics.Linecast, this function traverses the \b graph and looks for collisions instead of checking for collider intersection.
+		///
+		/// [Open online documentation to see images]
+		/// </summary>
+		/// <param name="origin">Point to linecast from.</param>
+		/// <param name="end">Point to linecast to.</param>
+		/// <param name="hit">Contains info on what was hit, see GraphHitInfo.</param>
+		/// <param name="hint">You may pass the node closest to the start point if you already know it for a minor performance boost.
+		/// 			   If null, a search for the closest node will be done. This parameter is mostly deprecated and should be avoided. Pass null instead.</param>
+		public bool Linecast (Vector3 origin, Vector3 end, GraphNode hint, out GraphHitInfo hit) {
+			return Linecast(this, origin, end, hint, out hit, null);
+		}
+
+		/// <summary>
+		/// Returns if there is an obstacle between origin and end on the graph.
+		///
+		/// This is not the same as Physics.Linecast, this function traverses the \b graph and looks for collisions instead of checking for collider intersection.
+		///
+		/// [Open online documentation to see images]
+		/// </summary>
+		/// <param name="origin">Point to linecast from.</param>
+		/// <param name="end">Point to linecast to.</param>
+		/// <param name="hint">You may pass the node closest to the start point if you already know it for a minor performance boost.
+		/// 			   If null, a search for the closest node will be done. This parameter is mostly deprecated and should be avoided. Pass null instead.</param>
+		public bool Linecast (Vector3 origin, Vector3 end, GraphNode hint) {
+			GraphHitInfo hit;
+
+			return Linecast(this, origin, end, hint, out hit, null);
+		}
+
+		/// <summary>
+		/// Returns if there is an obstacle between origin and end on the graph.
+		///
+		/// This is not the same as Physics.Linecast, this function traverses the \b graph and looks for collisions instead of checking for collider intersection.
+		///
+		/// [Open online documentation to see images]
+		/// </summary>
+		/// <param name="origin">Point to linecast from.</param>
+		/// <param name="end">Point to linecast to.</param>
+		/// <param name="hit">Contains info on what was hit, see GraphHitInfo.</param>
+		/// <param name="hint">You may pass the node closest to the start point if you already know it for a minor performance boost.
+		/// 			   If null, a search for the closest node will be done. This parameter is mostly deprecated and should be avoided. Pass null instead.</param>
+		/// <param name="trace">If a list is passed, then it will be filled with all nodes the linecast traverses.</param>
+		public bool Linecast (Vector3 origin, Vector3 end, GraphNode hint, out GraphHitInfo hit, List<GraphNode> trace) {
+			return Linecast(this, origin, end, hint, out hit, trace);
+		}
+
+		/// <summary>
+		/// Returns if there is an obstacle between origin and end on the graph.
+		///
+		/// This is not the same as Physics.Linecast, this function traverses the \b graph and looks for collisions instead of checking for collider intersection.
+		///
+		/// [Open online documentation to see images]
+		/// </summary>
+		/// <param name="origin">Point to linecast from.</param>
+		/// <param name="end">Point to linecast to.</param>
+		/// <param name="hit">Contains info on what was hit, see GraphHitInfo.</param>
+		/// <param name="trace">If a list is passed, then it will be filled with all nodes the linecast traverses.</param>
+		/// <param name="filter">If not null then the delegate will be called for each node and if it returns false the node will be treated as unwalkable and a hit will be returned.
+		///               Note that unwalkable nodes are always treated as unwalkable regardless of what this filter returns.</param>
+		public bool Linecast (Vector3 origin, Vector3 end, out GraphHitInfo hit, List<GraphNode> trace, System.Func<GraphNode, bool> filter) {
+			return Linecast(this, origin, end, null, out hit, trace, filter);
+		}
+
+		/// <summary>
+		/// Returns if there is an obstacle between origin and end on the graph.
+		///
+		/// This is not the same as Physics.Linecast, this function traverses the \b graph and looks for collisions instead of checking for collider intersection.
+		///
+		/// [Open online documentation to see images]
+		/// </summary>
+		/// <param name="graph">The graph to perform the search on.</param>
+		/// <param name="origin">Point to start from.</param>
+		/// <param name="end">Point to linecast to.</param>
+		/// <param name="hit">Contains info on what was hit, see GraphHitInfo.</param>
+		/// <param name="hint">You may pass the node closest to the start point if you already know it for a minor performance boost.
+		/// 			   If null, a search for the closest node will be done. This parameter is mostly deprecated and should be avoided. Pass null instead.</param>
+		public static bool Linecast (NavmeshBase graph, Vector3 origin, Vector3 end, GraphNode hint, out GraphHitInfo hit) {
+			return Linecast(graph, origin, end, hint, out hit, null);
+		}
+
+		/// <summary>Cached <see cref="Pathfinding.NNConstraint.None"/> with distanceXZ=true to reduce allocations</summary>
+		static readonly NNConstraint NNConstraintNoneXZ = new NNConstraint {
+			constrainWalkability = false,
+			constrainArea = false,
+			constrainTags = false,
+			constrainDistance = false,
+			graphMask = -1,
+			distanceXZ = true,
+		};
+
+		/// <summary>Used to optimize linecasts by precomputing some values</summary>
+		static readonly byte[] LinecastShapeEdgeLookup;
+
+		static NavmeshBase () {
+			// Want want to figure out which side of a triangle that a ray exists using.
+			// There are only 3*3*3 = 27 different options for the [left/right/colinear] options for the 3 vertices of a triangle.
+			// So we can precompute the result to improve the performance of linecasts.
+			// For simplicity we reserve 2 bits for each side which means that we have 4*4*4 = 64 entries in the lookup table.
+			LinecastShapeEdgeLookup = new byte[64];
+			Side[] sideOfLine = new Side[3];
+			for (int i = 0; i < LinecastShapeEdgeLookup.Length; i++) {
+				sideOfLine[0] = (Side)((i >> 0) & 0x3);
+				sideOfLine[1] = (Side)((i >> 2) & 0x3);
+				sideOfLine[2] = (Side)((i >> 4) & 0x3);
+				LinecastShapeEdgeLookup[i] = 0xFF;
+				// Value 3 is an invalid value. So we just skip it.
+				if (sideOfLine[0] != (Side)3 && sideOfLine[1] != (Side)3 && sideOfLine[2] != (Side)3) {
+					// Figure out the side of the triangle that the line exits.
+					// In case the line passes through one of the vertices of the triangle
+					// there may be multiple alternatives. In that case pick the edge
+					// which contains the fewest vertices that lie on the line.
+					// This prevents a potential infinite loop when a linecast is done colinear
+					// to the edge of a triangle.
+					int bestBadness = int.MaxValue;
+					for (int j = 0; j < 3; j++) {
+						if ((sideOfLine[j] == Side.Left || sideOfLine[j] == Side.Colinear) && (sideOfLine[(j+1)%3] == Side.Right || sideOfLine[(j+1)%3] == Side.Colinear)) {
+							var badness = (sideOfLine[j] == Side.Colinear ? 1 : 0) + (sideOfLine[(j+1)%3] == Side.Colinear ? 1 : 0);
+							if (badness < bestBadness) {
+								LinecastShapeEdgeLookup[i] = (byte)j;
+								bestBadness = badness;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// Returns if there is an obstacle between origin and end on the graph.
+		///
+		/// This is not the same as Physics.Linecast, this function traverses the \b graph and looks for collisions instead of checking for collider intersections.
+		///
+		/// Note: This method only makes sense for graphs in which there is a definite 'up' direction. For example it does not make sense for e.g spherical graphs,
+		/// navmeshes in which characters can walk on walls/ceilings or other curved worlds. If you try to use this method on such navmeshes it may output nonsense.
+		///
+		/// [Open online documentation to see images]
+		/// </summary>
+		/// <param name="graph">The graph to perform the search on</param>
+		/// <param name="origin">Point to start from. This point should be on the navmesh. It will be snapped to the closest point on the navmesh otherwise.</param>
+		/// <param name="end">Point to linecast to</param>
+		/// <param name="hit">Contains info on what was hit, see GraphHitInfo</param>
+		/// <param name="hint">If you already know the node which contains the origin point, you may pass it here for slighly improved performance. If null, a search for the closest node will be done.</param>
+		/// <param name="trace">If a list is passed, then it will be filled with all nodes along the line up until it hits an obstacle or reaches the end.</param>
+		/// <param name="filter">If not null then the delegate will be called for each node and if it returns false the node will be treated as unwalkable and a hit will be returned.
+		///               Note that unwalkable nodes are always treated as unwalkable regardless of what this filter returns.</param>
+		public static bool Linecast (NavmeshBase graph, Vector3 origin, Vector3 end, GraphNode hint, out GraphHitInfo hit, List<GraphNode> trace, System.Func<GraphNode, bool> filter = null) {
+			hit = new GraphHitInfo();
+
+			if (float.IsNaN(origin.x + origin.y + origin.z)) throw new System.ArgumentException("origin is NaN");
+			if (float.IsNaN(end.x + end.y + end.z)) throw new System.ArgumentException("end is NaN");
+
+			var node = hint as TriangleMeshNode;
+			if (node == null) {
+				node = graph.GetNearest(origin, NNConstraintNoneXZ).node as TriangleMeshNode;
+
+				if (node == null) {
+					Debug.LogError("Could not find a valid node to start from");
+					hit.origin = origin;
+					hit.point = origin;
+					return true;
+				}
+			}
+
+			// Snap the origin to the navmesh
+			var i3originInGraphSpace = node.ClosestPointOnNodeXZInGraphSpace(origin);
+			hit.origin = graph.transform.Transform((Vector3)i3originInGraphSpace);
+
+			if (!node.Walkable || (filter != null && !filter(node))) {
+				hit.node = node;
+				hit.point = hit.origin;
+				hit.tangentOrigin = hit.origin;
+				return true;
+			}
+
+			var endInGraphSpace = graph.transform.InverseTransform(end);
+			var i3endInGraphSpace = (Int3)endInGraphSpace;
+
+			// Fast early out check
+			if (i3originInGraphSpace == i3endInGraphSpace) {
+				hit.point = hit.origin;
+				hit.node = node;
+				if (trace != null) trace.Add(node);
+				return false;
+			}
+
+			int counter = 0;
+			while (true) {
+				counter++;
+				if (counter > 2000) {
+					Debug.LogError("Linecast was stuck in infinite loop. Breaking.");
+					return true;
+				}
+
+				if (trace != null) trace.Add(node);
+
+				Int3 a0, a1, a2;
+				node.GetVerticesInGraphSpace(out a0, out a1, out a2);
+				int sideOfLine = (byte)VectorMath.SideXZ(i3originInGraphSpace, i3endInGraphSpace, a0);
+				sideOfLine |= (byte)VectorMath.SideXZ(i3originInGraphSpace, i3endInGraphSpace, a1) << 2;
+				sideOfLine |= (byte)VectorMath.SideXZ(i3originInGraphSpace, i3endInGraphSpace, a2) << 4;
+				// Use a lookup table to figure out which side of this triangle that the ray exits
+				int shapeEdgeA = (int)LinecastShapeEdgeLookup[sideOfLine];
+				// The edge consists of the vertex with index 'sharedEdgeA' and the next vertex after that (index '(sharedEdgeA+1)%3')
+
+				var sideNodeExit = VectorMath.SideXZ(shapeEdgeA == 0 ? a0 : (shapeEdgeA == 1 ? a1 : a2), shapeEdgeA == 0 ? a1 : (shapeEdgeA == 1 ? a2 : a0), i3endInGraphSpace);
+				if (sideNodeExit != Side.Left) {
+					// Ray stops before it leaves the current node.
+					// The endpoint must be inside the current node.
+
+					hit.point = end;
+					hit.node = node;
+
+					var endNode = graph.GetNearest(end, NNConstraintNoneXZ).node as TriangleMeshNode;
+					if (endNode == node || endNode == null) {
+						// We ended up at the right node.
+						// If endNode == null we also take this branch.
+						// That case may happen if a linecast is made to a point, but the point way a very large distance straight up into the air.
+						// The linecast may indeed reach the right point, but it's so far away up into the air that the GetNearest method will stop searching.
+						return false;
+					} else {
+						// The closest node to the end point was not the node we ended up at.
+						// This can happen if a linecast is done between two floors of a building.
+						// The linecast may reach the right location when seen from above
+						// but it will have ended up on the wrong floor of the building.
+						// This indicates that the start and end points cannot be connected by a valid straight line on the navmesh.
+						return true;
+					}
+				}
+
+				if (shapeEdgeA == 0xFF) {
+					// Line does not intersect node at all?
+					// This may theoretically happen if the origin was not properly snapped to the inside of the triangle, but is instead a tiny distance outside the node.
+					Debug.LogError("Line does not intersect node at all");
+					hit.node = node;
+					hit.point = hit.tangentOrigin = hit.origin;
+					return true;
+				} else {
+					bool success = false;
+					var nodeConnections = node.connections;
+
+					// Check all node connetions to see which one is the next node along the ray's path
+					for (int i = 0; i < nodeConnections.Length; i++) {
+						if (nodeConnections[i].shapeEdge == shapeEdgeA) {
+							// This might be the next node that we enter
+
+							var neighbour = nodeConnections[i].node as TriangleMeshNode;
+							if (neighbour == null || !neighbour.Walkable || (filter != null && !filter(neighbour))) continue;
+
+							var neighbourConnections = neighbour.connections;
+							int shapeEdgeB = -1;
+							for (int j = 0; j < neighbourConnections.Length; j++) {
+								if (neighbourConnections[j].node == node) {
+									shapeEdgeB = neighbourConnections[j].shapeEdge;
+									break;
+								}
+							}
+
+							if (shapeEdgeB == -1) {
+								// Connection was mono-directional!
+								// This shouldn't normally happen on navmeshes (when the shapeEdge matches at least) unless a user has done something strange to the navmesh.
+								continue;
+							}
+
+							var side1 = VectorMath.SideXZ(i3originInGraphSpace, i3endInGraphSpace, neighbour.GetVertexInGraphSpace(shapeEdgeB));
+							var side2 = VectorMath.SideXZ(i3originInGraphSpace, i3endInGraphSpace, neighbour.GetVertexInGraphSpace((shapeEdgeB+1) % 3));
+
+							// Check if the line enters this edge
+							success = (side1 == Side.Right || side1 == Side.Colinear) && (side2 == Side.Left || side2 == Side.Colinear);
+
+							if (!success) continue;
+
+							// Ray has entered the neighbouring node.
+							// After the first node, it is possible to prove the loop invariant that shapeEdgeA will *never* end up as -1 (checked above)
+							// Since side = Colinear acts essentially as a wildcard. side1 and side2 can be the most restricted if they are side1=right, side2=left.
+							// Then when we get to the next node we know that the sideOfLine array is either [*, Right, Left], [Left, *, Right] or [Right, Left, *], where * is unknown.
+							// We are looking for the sequence [Left, Right] (possibly including Colinear as wildcard). We will always find this sequence regardless of the value of *.
+							node = neighbour;
+							break;
+						}
+					}
+
+					if (!success) {
+						// Node did not enter any neighbours
+						// It must have hit the border of the navmesh
+						var hitEdgeStartInGraphSpace = (Vector3)(shapeEdgeA == 0 ? a0 : (shapeEdgeA == 1 ? a1 : a2));
+						var hitEdgeEndInGraphSpace = (Vector3)(shapeEdgeA == 0 ? a1 : (shapeEdgeA == 1 ? a2 : a0));
+						var intersectionInGraphSpace = VectorMath.LineIntersectionPointXZ(hitEdgeStartInGraphSpace, hitEdgeEndInGraphSpace, (Vector3)i3originInGraphSpace, (Vector3)i3endInGraphSpace);
+						hit.point = graph.transform.Transform(intersectionInGraphSpace);
+						hit.node = node;
+						var hitEdgeStart = graph.transform.Transform(hitEdgeStartInGraphSpace);
+						var hitEdgeEnd = graph.transform.Transform(hitEdgeEndInGraphSpace);
+						hit.tangent = hitEdgeEnd - hitEdgeStart;
+						hit.tangentOrigin = hitEdgeStart;
+						return true;
+					}
+				}
+			}
+		}
 
 		public override void OnDrawGizmos (Pathfinding.Util.RetainedGizmos gizmos, bool drawNodes) {
 			if (!drawNodes) {
@@ -1115,8 +1428,8 @@ namespace Pathfinding {
 			for (int i = startTile; i < endTile; i++) if (tiles[i] != null) numNodes += tiles[i].nodes.Length;
 
 			// Vertex array might be a bit larger than necessary, but that's ok
-			var vertices = ArrayPool<Vector3>.Claim (numNodes*3);
-			var colors = ArrayPool<Color>.Claim (numNodes*3);
+			var vertices = ArrayPool<Vector3>.Claim(numNodes*3);
+			var colors = ArrayPool<Color>.Claim(numNodes*3);
 			int offset = 0;
 			for (int i = startTile; i < endTile; i++) {
 				var tile = tiles[i];
@@ -1141,8 +1454,8 @@ namespace Pathfinding {
 			if (showMeshOutline) helper.DrawWireTriangles(vertices, colors, numNodes);
 
 			// Return lists to the pool
-			ArrayPool<Vector3>.Release (ref vertices);
-			ArrayPool<Color>.Release (ref colors);
+			ArrayPool<Vector3>.Release(ref vertices);
+			ArrayPool<Color>.Release(ref colors);
 		}
 
 		/// <summary>Creates an outline of the navmesh for use in OnDrawGizmos in the editor</summary>
@@ -1286,7 +1599,7 @@ namespace Pathfinding {
 						z = tz,
 						w = reader.ReadInt32(),
 						d = reader.ReadInt32(),
-						bbTree = ObjectPool<BBTree>.Claim (),
+						bbTree = ObjectPool<BBTree>.Claim(),
 						graph = this,
 					};
 

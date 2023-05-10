@@ -26,13 +26,13 @@ using Thread = System.Threading.Thread;
 [HelpURL("http://arongranberg.com/astar/docs/class_astar_path.php")]
 public class AstarPath : VersionedMonoBehaviour {
 	/// <summary>The version number for the A* %Pathfinding Project</summary>
-	public static readonly System.Version Version = new System.Version(4, 2, 15);
+	public static readonly System.Version Version = new System.Version(4, 2, 17);
 
 	/// <summary>Information about where the package was downloaded</summary>
 	public enum AstarDistribution { WebsiteDownload, AssetStore, PackageManager };
 
 	/// <summary>Used by the editor to guide the user to the correct place to download updates</summary>
-	public static readonly AstarDistribution Distribution = AstarDistribution.WebsiteDownload;
+	public static readonly AstarDistribution Distribution = AstarDistribution.AssetStore;
 
 	/// <summary>
 	/// Which branch of the A* %Pathfinding Project is this release.
@@ -827,7 +827,7 @@ public class AstarPath : VersionedMonoBehaviour {
 	/// </summary>
 	private void LogPathResults (Path path) {
 		if (logPathResults != PathLog.None && (path.error || logPathResults != PathLog.OnlyErrors)) {
-			string debug = path.DebugString(logPathResults);
+			string debug = (path as IPathInternals).DebugString(logPathResults);
 
 			if (logPathResults == PathLog.InGame) {
 				inGameDebugPath = debug;
@@ -1088,6 +1088,10 @@ public class AstarPath : VersionedMonoBehaviour {
 	/// See: graph-updates (view in online documentation for working links)
 	/// </summary>
 	public void UpdateGraphs (GraphUpdateObject ob) {
+		if (ob.internalStage != GraphUpdateObject.STAGE_CREATED) {
+			throw new System.Exception("You are trying to update graphs using the same graph update object twice. Please create a new GraphUpdateObject instead.");
+		}
+		ob.internalStage = GraphUpdateObject.STAGE_PENDING;
 		graphUpdates.AddToQueue(ob);
 
 		// If we should limit graph updates, start a coroutine which waits until we should update graphs
@@ -1189,6 +1193,10 @@ public class AstarPath : VersionedMonoBehaviour {
 		return 0;
 #else
 		if (count == ThreadCount.AutomaticLowLoad || count == ThreadCount.AutomaticHighLoad) {
+#if ASTARDEBUG
+			Debug.Log(SystemInfo.systemMemorySize + " " + SystemInfo.processorCount + " " + SystemInfo.processorType);
+#endif
+
 			int logicalCores = Mathf.Max(1, SystemInfo.processorCount);
 			int memory = SystemInfo.systemMemorySize;
 
@@ -1198,11 +1206,27 @@ public class AstarPath : VersionedMonoBehaviour {
 			}
 
 			if (logicalCores <= 1) return 0;
+
 			if (memory <= 512) return 0;
 
-			return 1;
+			if (count == ThreadCount.AutomaticHighLoad) {
+				if (memory <= 1024) logicalCores = System.Math.Min(logicalCores, 2);
+			} else {
+				//Always run at at most processorCount-1 threads (one core reserved for unity thread).
+				// Many computers use hyperthreading, so dividing by two is used to remove the hyperthreading cores, pathfinding
+				// doesn't scale well past the number of physical cores anyway
+				logicalCores /= 2;
+				logicalCores = Mathf.Max(1, logicalCores);
+
+				if (memory <= 1024) logicalCores = System.Math.Min(logicalCores, 2);
+
+				logicalCores = System.Math.Min(logicalCores, 6);
+			}
+
+			return logicalCores;
 		} else {
-			return (int)count > 0 ? 1 : 0;
+			int val = (int)count;
+			return val;
 		}
 #endif
 	}
@@ -1263,11 +1287,6 @@ public class AstarPath : VersionedMonoBehaviour {
 		// Outside of play mode everything is synchronous, so no threads are used.
 		if (!Application.isPlaying) numThreads = 0;
 
-		// Trying to prevent simple modding to add support for more than one thread
-		if (numThreads > 1) {
-			threadCount = ThreadCount.One;
-			numThreads = 1;
-		}
 
 		int numProcessors = Mathf.Max(numThreads, 1);
 		bool multithreaded = numThreads > 0;
@@ -1677,19 +1696,9 @@ public class AstarPath : VersionedMonoBehaviour {
 			GraphModifier.FindAllModifiers();
 		}
 
-		int startFrame = Time.frameCount;
 
 		yield return new Progress(0.05F, "Pre processing graphs");
 
-		// Yes, this constraint is trivial to circumvent
-		// the code is the same because it is annoying
-		// to have to have separate code for the free
-		// and the pro version that does essentially the same thing.
-		// I would appreciate if you purchased the pro version of the A* Pathfinding Project
-		// if you need async scanning.
-		if (Time.frameCount != startFrame) {
-			throw new System.Exception("Async scanning can only be done in the pro version of the A* Pathfinding Project");
-		}
 
 		if (OnPreScan != null) {
 			OnPreScan(this);
@@ -1699,6 +1708,7 @@ public class AstarPath : VersionedMonoBehaviour {
 
 		data.LockGraphStructure();
 
+		Physics2D.SyncTransforms();
 		var watch = System.Diagnostics.Stopwatch.StartNew();
 
 		// Destroy previous nodes
@@ -1973,9 +1983,10 @@ public class AstarPath : VersionedMonoBehaviour {
 	static readonly NNConstraint NNConstraintNone = NNConstraint.None;
 
 	/// <summary>
-	/// Returns the nearest node to a position using the specified NNConstraint.
-	/// Searches through all graphs for their nearest nodes to the specified position and picks the closest one.\n
-	/// Using the NNConstraint.None constraint.
+	/// Returns the nearest node to a position.
+	/// This method will search through all graphs and query them for the closest node to this position, and then it will return the closest one of those.
+	///
+	/// Equivalent to GetNearest(position, NNConstraint.None).
 	///
 	/// <code>
 	/// // Find the closest node to this GameObject's position
