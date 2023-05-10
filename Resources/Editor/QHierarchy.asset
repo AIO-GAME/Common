@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SourceRelativePath: Packages\\com.*.package\\Plugins~\\QHierarchy
   Name: QHierarchy
-  TargetRelativePath: Assets\Plugins\QHierarchy
+  TargetRelativePath: Packages\QHierarchy
   MacroDefinition: 
   Introduction: "\u5C42\u7EA7\u9762\u677F\u63D2\u4EF6"

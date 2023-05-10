@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SourceRelativePath: Packages\\com.*.package\\Plugins~\\AstarPathfindingProject
   Name: Astar Pathfinding
-  TargetRelativePath: Assets\Plugins\AstarPathfinding
+  TargetRelativePath: Packages\AstarPathfinding
   MacroDefinition: 
   Introduction: "A*\u7B97\u6CD5 \u5730\u56FE\u4F18\u5316"

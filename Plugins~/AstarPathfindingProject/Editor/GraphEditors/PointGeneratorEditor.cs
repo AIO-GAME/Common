@@ -6,13 +6,13 @@ namespace Pathfinding {
 	public class PointGraphEditor : GraphEditor {
 		static readonly GUIContent[] nearestNodeDistanceModeLabels = {
 			new GUIContent("Node"),
-			new GUIContent("Connection (pro version only)"),
+			new GUIContent("Connection (slower)"),
 		};
 
 		public override void OnInspectorGUI (NavGraph target) {
 			var graph = target as PointGraph;
 
-			graph.root = ObjectField(new GUIContent("Root", "All childs of this object will be used as nodes, if it is not set, a tag search will be used instead (see below)"), graph.root, typeof(Transform), true) as Transform;
+			graph.root = ObjectField(new GUIContent("Root", "All childs of this object will be used as nodes, if it is not set, a tag search will be used instead (see below)"), graph.root, typeof(Transform), true, false) as Transform;
 
 			graph.recursive = EditorGUILayout.Toggle(new GUIContent("Recursive", "Should childs of the childs in the root GameObject be searched"), graph.recursive);
 			graph.searchTag = EditorGUILayout.TagField(new GUIContent("Tag", "If root is not set, all objects with this tag will be used as nodes"), graph.searchTag);
@@ -45,7 +45,12 @@ namespace Pathfinding {
 				EditorGUI.indentLevel--;
 			}
 
-			EditorGUILayout.Popup(new GUIContent("Nearest node queries find closest"), 0, nearestNodeDistanceModeLabels);
+			graph.optimizeForSparseGraph = EditorGUILayout.Toggle(new GUIContent("Optimize For Sparse Graph", "Check online documentation for more information."), graph.optimizeForSparseGraph);
+			graph.nearestNodeDistanceMode = (PointGraph.NodeDistanceMode)EditorGUILayout.Popup(new GUIContent("Nearest node queries find closest"), (int)graph.nearestNodeDistanceMode, nearestNodeDistanceModeLabels);
+
+			if (graph.nearestNodeDistanceMode == PointGraph.NodeDistanceMode.Connection && !graph.optimizeForSparseGraph) {
+				EditorGUILayout.HelpBox("Connection mode can only be used if Optimize For Sparse Graph is enabled", MessageType.Error);
+			}
 		}
 	}
 }
