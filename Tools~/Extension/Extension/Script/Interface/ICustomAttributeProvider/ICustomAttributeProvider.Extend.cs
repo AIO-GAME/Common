@@ -12,13 +12,24 @@
         /// 获取自定义属性
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="attributeType">类型</param>
+        /// <param name="member">类型</param>
         /// <param name="inherit">为 true 时，查找继承的自定义特性的层次结构链。</param>
         /// <returns>属性集合</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T[] GetCustomAttributes<T>(this ICustomAttributeProvider attributeType, in bool inherit)
+        public static T[] GetCustomAttributes<T>(this ICustomAttributeProvider member, in bool inherit)
         {
-            return attributeType.GetCustomAttributes(typeof(T), inherit) as T[];
+            return member.GetCustomAttributes(typeof(T), inherit) as T[];
+        }
+
+        /// <summary>
+        /// Returns the first <typeparamref name="TAttribute"/> attribute on the `member` or <c>null</c> if there is none.
+        /// </summary>
+        public static TAttribute GetAttribute<TAttribute>(this ICustomAttributeProvider member, bool inherit = false)
+            where TAttribute : class
+        {
+            var type = typeof(TAttribute);
+            if (member.IsDefined(type, inherit))
+                return (TAttribute)member.GetCustomAttributes(type, inherit)[0];
+            return null;
         }
     }
 }

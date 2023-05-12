@@ -1,0 +1,774 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AIO.Attribute.Unity.Editor</name>
+    </assembly>
+    <members>
+        <member name="T:AIO.UNIT">
+            <summary>
+            单位
+            </summary>
+        </member>
+        <member name="T:AIO.UNIT.DegreesAttribute">
+            <summary>
+            [单位:度][Unit:º]
+            </summary>
+        </member>
+        <member name="M:AIO.UNIT.DegreesAttribute.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.UNIT.DegreesPerSecondAttribute">
+            <summary>
+            [单位:度/秒][Unit:º/s]
+            </summary>
+        </member>
+        <member name="M:AIO.UNIT.DegreesPerSecondAttribute.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.UNIT.MetersAttribute">
+            <summary>
+            [单位:米][Unit:m]
+            </summary>
+        </member>
+        <member name="M:AIO.UNIT.MetersAttribute.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.UNIT.MetersPerSecondAttribute">
+            <summary>
+            [单位:米/秒][Unit:m/s]
+            </summary>
+        </member>
+        <member name="M:AIO.UNIT.MetersPerSecondAttribute.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.UNIT.MetersPerSecondPerSecondAttribute">
+            <summary>
+            [单位:米/毫秒][Unit:m/s²]
+            </summary>
+        </member>
+        <member name="M:AIO.UNIT.MetersPerSecondPerSecondAttribute.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.UNIT.MultiplierAttribute">
+            <summary>
+            [单位:乘数][Unit:x]
+            </summary>
+        </member>
+        <member name="M:AIO.UNIT.MultiplierAttribute.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.UNIT.SecondsAttribute">
+            <summary>
+            [单位:秒][Unit:s]
+            </summary>
+        </member>
+        <member name="M:AIO.UNIT.SecondsAttribute.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.UNIT.KilometersAttribute">
+            <summary>
+            [单位:千米][Unit:km]
+            </summary>
+        </member>
+        <member name="M:AIO.UNIT.KilometersAttribute.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.UNIT.MetersAndCentimetersAttribute">
+            <summary>
+            [单位:米 厘米换算][Unit:m cm]
+            </summary>
+        </member>
+        <member name="M:AIO.UNIT.MetersAndCentimetersAttribute.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.CollectionPropertyAccessor">
+            <summary>[Editor-Only] A <see cref="T:AIO.PropertyAccessor"/> for a specific element index in a collection.</summary>
+        </member>
+        <member name="F:AIO.CollectionPropertyAccessor.ElementIndex">
+            <summary>The index of the array element this accessor targets.</summary>
+        </member>
+        <member name="M:AIO.CollectionPropertyAccessor.#ctor(AIO.PropertyAccessor,System.String,System.Reflection.FieldInfo,System.Int32)">
+            <summary>[Internal] Creates a new <see cref="T:AIO.CollectionPropertyAccessor"/>.</summary>
+        </member>
+        <member name="M:AIO.CollectionPropertyAccessor.GetFieldElementType(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.CollectionPropertyAccessor.GetElementType(System.Type)">
+            <summary>Returns the type of elements in the array.</summary>
+        </member>
+        <member name="M:AIO.CollectionPropertyAccessor.GetCollection(System.Object)">
+            <summary>Returns the collection object targeted by this accessor.</summary>
+        </member>
+        <member name="M:AIO.CollectionPropertyAccessor.GetValue(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.CollectionPropertyAccessor.SetCollection(System.Object,System.Object)">
+            <summary>Sets the collection object targeted by this accessor.</summary>
+        </member>
+        <member name="M:AIO.CollectionPropertyAccessor.SetValue(System.Object,System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.CollectionPropertyAccessor.ToString">
+            <summary>Returns a description of this accessor's path.</summary>
+        </member>
+        <member name="M:AIO.CollectionPropertyAccessor.GetCollectionPath">
+            <summary>Returns the <see cref="P:UnityEditor.SerializedProperty.propertyPath"/> of the array containing the target.</summary>
+        </member>
+        <member name="M:AIO.CollectionPropertyAccessor.GetPath">
+            <summary>Returns this accessor's <see cref="P:UnityEditor.SerializedProperty.propertyPath"/>.</summary>
+        </member>
+        <member name="T:AIO.CompactUnitConversionCache">
+            <summary>[Editor-Only]
+            A system for formatting floats as strings that fit into a limited area and storing the results so they can be
+            reused to minimise the need for garbage collection, particularly for string construction.
+            </summary>
+            <example>
+            With <c>"x"</c> as the suffix:
+            <list type="bullet">
+            <item><c>1.111111</c> could instead show <c>1.111~x</c>.</item>
+            <item><c>0.00001234567</c> would normally show <c>1.234567e-05</c>, but with this it instead shows <c>0~x</c>
+            because very small values generally aren't useful.</item>
+            <item><c>99999999</c> shows <c>1e+08x</c> because very large values are already approximations and trying to
+            format them correctly would be very difficult.</item>
+            </list>
+            This system only affects the display value. Once you select a field, it shows its actual value.
+            </example>
+            https://kybernetik.com.au/animancer/api/Animancer.Editor/CompactUnitConversionCache
+            
+        </member>
+        <member name="F:AIO.CompactUnitConversionCache.Suffix">
+            <summary>The suffix added to the end of each value.</summary>
+        </member>
+        <member name="F:AIO.CompactUnitConversionCache.ApproximateSuffix">
+            <summary>The <see cref="F:AIO.CompactUnitConversionCache.Suffix"/> with a <c>~</c> before it to indicate an approximation.</summary>
+        </member>
+        <member name="F:AIO.CompactUnitConversionCache.ConvertedZero">
+            <summary>The value <c>0</c> with the <see cref="F:AIO.CompactUnitConversionCache.Suffix"/>.</summary>
+        </member>
+        <member name="F:AIO.CompactUnitConversionCache.ConvertedSmallPositive">
+            <summary>The value <c>0</c> with the <see cref="F:AIO.CompactUnitConversionCache.ApproximateSuffix"/>.</summary>
+        </member>
+        <member name="F:AIO.CompactUnitConversionCache.ConvertedSmallNegative">
+            <summary>The value <c>-0</c> with the <see cref="F:AIO.CompactUnitConversionCache.ApproximateSuffix"/>.</summary>
+        </member>
+        <member name="F:AIO.CompactUnitConversionCache._SuffixWidth">
+            <summary>The pixel width of the <see cref="F:AIO.CompactUnitConversionCache.Suffix"/> when drawn by <see cref="P:UnityEditor.EditorStyles.numberField"/>.</summary>
+        </member>
+        <member name="F:AIO.CompactUnitConversionCache.Caches">
+            <summary>The caches for each character count.</summary>
+            <remarks><c>this[x]</c> is a cache that outputs strings with <c>x</c> characters.</remarks>
+        </member>
+        <member name="F:AIO.CompactUnitConversionCache._WidthCache">
+            <summary>Strings mapped to the width they would require for a <see cref="P:UnityEditor.EditorStyles.numberField"/>.</summary>
+        </member>
+        <member name="F:AIO.CompactUnitConversionCache._FieldPadding">
+            <summary>Padding around the text in a <see cref="P:UnityEditor.EditorStyles.numberField"/>.</summary>
+        </member>
+        <member name="F:AIO.CompactUnitConversionCache._ApproximateSymbolWidth">
+            <summary>The pixel width of the <c>~</c> character when drawn by <see cref="P:UnityEditor.EditorStyles.numberField"/>.</summary>
+        </member>
+        <member name="F:AIO.CompactUnitConversionCache._DecimalSeparator">
+            <summary>The character(s) used to separate decimal values in the current OS language.</summary>
+        </member>
+        <member name="F:AIO.CompactUnitConversionCache.SmallExponentialThreshold">
+            <summary>Values smaller than this become <c>0~</c> or <c>-0~</c>.</summary>
+        </member>
+        <member name="F:AIO.CompactUnitConversionCache.LargeExponentialThreshold">
+            <summary>Values larger than this can't be approximated.</summary>
+        </member>
+        <member name="M:AIO.CompactUnitConversionCache.#ctor(System.String)">
+            <summary>Creates a new <see cref="T:AIO.CompactUnitConversionCache"/>.</summary>
+        </member>
+        <member name="M:AIO.CompactUnitConversionCache.Convert(System.Single,System.Single,System.Boolean)">
+            <summary>
+            Returns a cached string representing the `value` trimmed to fit within the `width` (if necessary) and with
+            the <see cref="F:AIO.CompactUnitConversionCache.Suffix"/> added on the end.
+            </summary>
+        </member>
+        <member name="M:AIO.CompactUnitConversionCache.CalculateCacheIndex(System.Single,System.Single)">
+            <summary>Calculate the index of the cache to use for the given parameters.</summary>
+        </member>
+        <member name="M:AIO.CompactUnitConversionCache.GetCache(System.Int32)">
+            <summary>Creates and returns a cache for the specified `characterCount`.</summary>
+        </member>
+        <member name="M:AIO.CompactUnitConversionCache.GetExponentialFormat(System.Int32)">
+            <summary>Returns a format string to include the specified number of `digits` in an exponential number.</summary>
+        </member>
+        <member name="T:AIO.ConversionCache`2">
+            <summary>[Editor-Only]
+            A simple system for converting objects and storing the results so they can be reused to minimise the need for
+            garbage collection, particularly for string construction.
+            </summary>
+            <remarks>This class doesn't use any Editor-Only functionality, but it's unlikely to be useful at runtime.</remarks>
+            https://kybernetik.com.au/animancer/api/Animancer.Editor/ConversionCache_2
+            
+        </member>
+        <member name="M:AIO.ConversionCache`2.#ctor(System.Func{`0,`1})">
+            <summary>
+            Creates a new <see cref="T:AIO.ConversionCache`2"/> which uses the specified delegate to convert values.
+            </summary>
+        </member>
+        <member name="M:AIO.ConversionCache`2.Convert(`0)">
+            <summary>
+            If a value has already been cached for the specified `key`, return it. Otherwise create a new one using
+            the delegate provided in the constructor and cache it.
+            <para></para>
+            If the `key` is <c>null</c>, this method returns the default <typeparamref name="TValue"/>.
+            </summary>
+            <remarks>This method also periodically removes values that have not been used recently.</remarks>
+        </member>
+        <member name="T:AIO.PropertyAccessor">
+            <summary>[Editor-Only]
+            A wrapper for accessing the underlying values and fields of a <see cref="T:UnityEditor.SerializedProperty"/>.
+            </summary>
+        </member>
+        <member name="F:AIO.PropertyAccessor.Parent">
+            <summary>The accessor for the field which this accessor is nested inside.</summary>
+        </member>
+        <member name="F:AIO.PropertyAccessor.Name">
+            <summary>The name of the field wrapped by this accessor.</summary>
+        </member>
+        <member name="F:AIO.PropertyAccessor.Field">
+            <summary>The field wrapped by this accessor.</summary>
+        </member>
+        <member name="F:AIO.PropertyAccessor.FieldElementType">
+            <summary>
+            The type of the wrapped <see cref="F:AIO.PropertyAccessor.Field"/>.
+            Or if it's a collection, this is the type of items in the collection.
+            </summary>
+        </member>
+        <member name="M:AIO.PropertyAccessor.#ctor(AIO.PropertyAccessor,System.String,System.Reflection.FieldInfo)">
+            <summary>[Internal] Creates a new <see cref="T:AIO.PropertyAccessor"/>.</summary>
+        </member>
+        <member name="M:AIO.PropertyAccessor.#ctor(AIO.PropertyAccessor,System.String,System.Reflection.FieldInfo,System.Type)">
+            <summary>Creates a new <see cref="T:AIO.PropertyAccessor"/>.</summary>
+        </member>
+        <member name="M:AIO.PropertyAccessor.GetField(System.Object@)">
+            <summary>Returns the <see cref="F:AIO.PropertyAccessor.Field"/> if there is one or tries to get it from the object's type.</summary>
+            
+            <remarks>
+            If this accessor has a <see cref="F:AIO.PropertyAccessor.Parent"/>, the `obj` must be associated with the root
+            <see cref="T:UnityEditor.SerializedProperty"/> and this method will change it to reference the parent field's value.
+            </remarks>
+            
+            <example><code>
+            [Serializable]
+            public class InnerClass
+            {
+                public float value;
+            }
+            
+            [Serializable]
+            public class RootClass
+            {
+                public InnerClass inner;
+            }
+            
+            public class MyBehaviour : MonoBehaviour
+            {
+                public RootClass root;
+            }
+            
+            [UnityEditor.CustomEditor(typeof(MyBehaviour))]
+            public class MyEditor : UnityEditor.Editor
+            {
+                private void OnEnable()
+                {
+                    var serializedObject = new SerializedObject(target);
+                    var rootProperty = serializedObject.FindProperty("root");
+                    var innerProperty = rootProperty.FindPropertyRelative("inner");
+                    var valueProperty = innerProperty.FindPropertyRelative("value");
+            
+                    var accessor = valueProperty.GetAccessor();
+            
+                    object obj = target;
+                    var valueField = accessor.GetField(ref obj);
+                    // valueField is a FieldInfo referring to InnerClass.value.
+                    // obj now holds the ((MyBehaviour)target).root.inner.
+                }
+            }
+            </code></example>
+            
+        </member>
+        <member name="M:AIO.PropertyAccessor.GetField(System.Type,System.String)">
+            <summary>Returns a field with the specified `name` in the `declaringType` or any of its base types.</summary>
+        </member>
+        <member name="M:AIO.PropertyAccessor.GetField(System.Object)">
+            <summary>
+            Returns the <see cref="F:AIO.PropertyAccessor.Field"/> if there is one, otherwise calls <see cref="M:AIO.PropertyAccessor.GetField(System.Object@)"/>.
+            </summary>
+        </member>
+        <member name="M:AIO.PropertyAccessor.GetField(UnityEditor.SerializedObject)">
+            <summary>
+            Calls <see cref="M:AIO.PropertyAccessor.GetField(System.Object)"/> with the <see cref="P:UnityEditor.SerializedObject.targetObject"/>.
+            </summary>
+        </member>
+        <member name="M:AIO.PropertyAccessor.GetField(UnityEditor.SerializedProperty)">
+            <summary>
+            Calls <see cref="M:AIO.PropertyAccessor.GetField(UnityEditor.SerializedObject)"/> with the
+            <see cref="P:UnityEditor.SerializedProperty.serializedObject"/>.
+            </summary>
+        </member>
+        <member name="M:AIO.PropertyAccessor.GetFieldElementType(System.Object)">
+            <summary>
+            Returns the <see cref="F:AIO.PropertyAccessor.FieldElementType"/> if there is one, otherwise calls <see cref="M:AIO.PropertyAccessor.GetField(System.Object@)"/>
+            and returns its <see cref="P:System.Reflection.FieldInfo.FieldType"/>.
+            </summary>
+        </member>
+        <member name="M:AIO.PropertyAccessor.GetFieldElementType(UnityEditor.SerializedObject)">
+            <summary>
+            Calls <see cref="M:AIO.PropertyAccessor.GetFieldElementType(System.Object)"/> with the
+            <see cref="P:UnityEditor.SerializedObject.targetObject"/>.
+            </summary>
+        </member>
+        <member name="M:AIO.PropertyAccessor.GetFieldElementType(UnityEditor.SerializedProperty)">
+            <summary>
+            Calls <see cref="M:AIO.PropertyAccessor.GetFieldElementType(UnityEditor.SerializedObject)"/> with the
+            <see cref="P:UnityEditor.SerializedProperty.serializedObject"/>.
+            </summary>
+        </member>
+        <member name="M:AIO.PropertyAccessor.GetValue(System.Object)">
+            <summary>
+            Gets the value of the from the <see cref="F:AIO.PropertyAccessor.Parent"/> (if there is one), then uses it to get and return
+            the value of the <see cref="F:AIO.PropertyAccessor.Field"/>.
+            </summary>
+        </member>
+        <member name="M:AIO.PropertyAccessor.GetValue(UnityEditor.SerializedObject)">
+            <summary>
+            Gets the value of the from the <see cref="F:AIO.PropertyAccessor.Parent"/> (if there is one), then uses it to get and return
+            the value of the <see cref="F:AIO.PropertyAccessor.Field"/>.
+            </summary>
+        </member>
+        <member name="M:AIO.PropertyAccessor.GetValue(UnityEditor.SerializedProperty)">
+            <summary>
+            Gets the value of the from the <see cref="F:AIO.PropertyAccessor.Parent"/> (if there is one), then uses it to get and return
+            the value of the <see cref="F:AIO.PropertyAccessor.Field"/>.
+            </summary>
+        </member>
+        <member name="M:AIO.PropertyAccessor.SetValue(System.Object,System.Object)">
+            <summary>
+            Gets the value of the from the <see cref="F:AIO.PropertyAccessor.Parent"/> (if there is one), then uses it to set the value
+            of the <see cref="F:AIO.PropertyAccessor.Field"/>.
+            </summary>
+        </member>
+        <member name="M:AIO.PropertyAccessor.SetValue(UnityEditor.SerializedObject,System.Object)">
+            <summary>
+            Gets the value of the from the <see cref="F:AIO.PropertyAccessor.Parent"/> (if there is one), then uses it to set the value
+            of the <see cref="F:AIO.PropertyAccessor.Field"/>.
+            </summary>
+        </member>
+        <member name="M:AIO.PropertyAccessor.SetValue(UnityEditor.SerializedProperty,System.Object)">
+            <summary>
+            Gets the value of the from the <see cref="F:AIO.PropertyAccessor.Parent"/> (if there is one), then uses it to set the value
+            of the <see cref="F:AIO.PropertyAccessor.Field"/>.
+            </summary>
+        </member>
+        <member name="M:AIO.PropertyAccessor.ResetValue(UnityEditor.SerializedProperty,System.String)">
+            <summary>
+            Resets the value of the <see cref="T:UnityEditor.SerializedProperty"/> to the default value of its type by executing
+            its constructor and field initializers.
+            </summary>
+            <remarks>
+            If you don't want to run constructors and field initializers, you can call
+            </remarks>
+            <example><code>
+            SerializedProperty property;
+            property.GetAccessor().ResetValue(property);
+            </code></example>
+        </member>
+        <member name="M:AIO.PropertyAccessor.ToString">
+            <summary>Returns a description of this accessor's path.</summary>
+        </member>
+        <member name="M:AIO.PropertyAccessor.GetPath">
+            <summary>Returns a this accessor's <see cref="P:UnityEditor.SerializedProperty.propertyPath"/>.</summary>
+        </member>
+        <member name="T:AIO.SelfDrawerDrawer">
+            <summary>
+            Draws the GUI for a <see cref="T:AIO.SelfDrawerAttribute"/> field.
+            </summary>
+        </member>
+        <member name="P:AIO.SelfDrawerDrawer.Attribute">
+            <summary>Casts the <see cref="P:UnityEditor.PropertyDrawer.attribute"/>.</summary>
+        </member>
+        <member name="M:AIO.SelfDrawerDrawer.CanCacheInspectorGUI(UnityEditor.SerializedProperty)">
+            <summary>Calls <see cref="M:AIO.SelfDrawerAttribute.CanCacheInspectorGUI(UnityEditor.SerializedProperty)"/>.</summary>
+        </member>
+        <member name="M:AIO.SelfDrawerDrawer.GetPropertyHeight(UnityEditor.SerializedProperty,UnityEngine.GUIContent)">
+            <summary>Calls <see cref="M:AIO.SelfDrawerAttribute.GetPropertyHeight(UnityEditor.SerializedProperty,UnityEngine.GUIContent)"/>.</summary>
+        </member>
+        <member name="M:AIO.SelfDrawerDrawer.OnGUI(UnityEngine.Rect,UnityEditor.SerializedProperty,UnityEngine.GUIContent)">
+            <summary>Calls <see cref="M:AIO.SelfDrawerAttribute.OnGUI(UnityEngine.Rect,UnityEditor.SerializedProperty,UnityEngine.GUIContent)"/>.</summary>
+        </member>
+        <member name="T:AIO.Validate">
+            <summary>
+            验证
+            </summary>
+        </member>
+        <member name="T:AIO.Validate.Value">
+            <summary>A rule that defines which values are valid.</summary>
+            https://kybernetik.com.au/animancer/api/Animancer/Value
+        </member>
+        <member name="F:AIO.Validate.Value.Any">
+            <summary>
+            Any value is allowed.
+            </summary>
+        </member>
+        <member name="F:AIO.Validate.Value.ZeroToOne">
+            <summary>
+            Only values between 0 (inclusive) and 1 (inclusive) are allowed.
+            </summary>
+        </member>
+        <member name="F:AIO.Validate.Value.IsNotNegative">
+            <summary>
+            Only 0 or positive values are allowed.
+            </summary>
+        </member>
+        <member name="F:AIO.Validate.Value.IsFinite">
+            <summary>
+            Infinity and NaN are not allowed.
+            </summary>
+        </member>
+        <member name="F:AIO.Validate.Value.IsFiniteOrNaN">
+            <summary>
+            Infinity is not allowed.</summary>
+        </member>
+        <member name="M:AIO.Validate.ValueRule(System.Single@,AIO.Validate.Value)">
+            <summary>
+            Enforces the `rule` on the `value`.
+            </summary>
+        </member>
+        <member name="T:AIO.DefaultValueAttribute">
+            <summary>[Editor-Conditional] Specifies the default value of a field and a secondary fallback.</summary>
+            https://kybernetik.com.au/animancer/api/Animancer/DefaultValueAttribute
+        </member>
+        <member name="P:AIO.DefaultValueAttribute.Primary">
+            <summary>The main default value.</summary>
+        </member>
+        <member name="P:AIO.DefaultValueAttribute.Secondary">
+            <summary>The fallback value to use if the target value was already equal to the <see cref="P:AIO.DefaultValueAttribute.Primary"/>.</summary>
+        </member>
+        <member name="M:AIO.DefaultValueAttribute.#ctor(System.Object,System.Object)">
+            <summary>Creates a new <see cref="T:AIO.DefaultValueAttribute"/>.</summary>
+        </member>
+        <member name="M:AIO.DefaultValueAttribute.#ctor">
+            <summary>Creates a new <see cref="T:AIO.DefaultValueAttribute"/>.</summary>
+        </member>
+        <member name="M:AIO.DefaultValueAttribute.SetToDefault``1(``0@,UnityEditor.SerializedProperty)">
+            <summary>[Editor-Only]
+            If the field represented by the `property` has a <see cref="T:AIO.DefaultValueAttribute"/>, this method sets
+            the `value` to its <see cref="P:AIO.DefaultValueAttribute.Primary"/> value. If it was already at the value, it sets it to the
+            <see cref="P:AIO.DefaultValueAttribute.Secondary"/> value instead. And if the field has no attribute, it uses the default for the type.
+            </summary>
+        </member>
+        <member name="M:AIO.DefaultValueAttribute.SetToDefault``1(``0@,System.Reflection.FieldInfo)">
+            <summary>[Editor-Only]
+            If the field represented by the `property` has a <see cref="T:AIO.DefaultValueAttribute"/>, this method sets
+            the `value` to its <see cref="P:AIO.DefaultValueAttribute.Primary"/> value. If it was already at the value, it sets it to the
+            <see cref="P:AIO.DefaultValueAttribute.Secondary"/> value instead. And if the field has no attribute, it uses the default for the type.
+            </summary>
+        </member>
+        <member name="M:AIO.DefaultValueAttribute.SetToDefault``1(``0@)">
+            <summary>[Editor-Only]
+            Sets the `value` equal to the <see cref="P:AIO.DefaultValueAttribute.Primary"/> value. If it was already at the value, it sets it equal
+            to the <see cref="P:AIO.DefaultValueAttribute.Secondary"/> value instead.
+            </summary>
+        </member>
+        <member name="M:AIO.DefaultValueAttribute.SetToDefault``1(``0@,``0,``0)">
+            <summary>[Editor-Only]
+            Sets the `value` equal to the `primary` value. If it was already at the value, it sets it equal to the
+            `secondary` value instead.
+            </summary>
+        </member>
+        <member name="T:AIO.SelfDrawerAttribute">
+            <summary>[Editor-Conditional]
+            一个PropertyAttribute，它可以自己绘制，而不需要单独的PropertyDrawer
+            </summary>
+        </member>
+        <member name="M:AIO.SelfDrawerAttribute.CanCacheInspectorGUI(UnityEditor.SerializedProperty)">
+            <summary>[Editor-Only] Can the GUI for the `property` be cached?</summary>
+        </member>
+        <member name="M:AIO.SelfDrawerAttribute.GetPropertyHeight(UnityEditor.SerializedProperty,UnityEngine.GUIContent)">
+            <summary>[Editor-Only] Calculates the height of the GUI for the `property`.</summary>
+        </member>
+        <member name="M:AIO.SelfDrawerAttribute.OnGUI(UnityEngine.Rect,UnityEditor.SerializedProperty,UnityEngine.GUIContent)">
+            <summary>[Editor-Only] Draws the GUI for the `property`.</summary>
+        </member>
+        <member name="T:AIO.UnitsAttribute">
+            <summary>
+            单位属性
+            </summary>
+        </member>
+        <member name="P:AIO.UnitsAttribute.Rule">
+            <summary>The validation rule applied to the value.</summary>
+        </member>
+        <member name="M:AIO.UnitsAttribute.#ctor">
+            <summary>Creates a new <see cref="T:AIO.UnitsAttribute"/>.</summary>
+        </member>
+        <member name="M:AIO.UnitsAttribute.#ctor(System.String)">
+            <summary>Creates a new <see cref="T:AIO.UnitsAttribute"/>.</summary>
+        </member>
+        <member name="M:AIO.UnitsAttribute.#ctor(System.Single[],System.Collections.Generic.IReadOnlyList{System.String},System.Int32)">
+            <summary>Creates a new <see cref="T:AIO.UnitsAttribute"/>.</summary>
+        </member>
+        <member name="P:AIO.UnitsAttribute.Multipliers">
+            <summary>[Editor-Only] The unit conversion ratios.</summary>
+            <remarks><c>valueInUnitX = valueInBaseUnits * Multipliers[x];</c></remarks>
+        </member>
+        <member name="P:AIO.UnitsAttribute.DisplayConverters">
+            <summary>[Editor-Only] The converters used to generate display strings for each of the fields.</summary>
+        </member>
+        <member name="P:AIO.UnitsAttribute.UnitIndex">
+            <summary>[Editor-Only] The index of the <see cref="P:AIO.UnitsAttribute.DisplayConverters"/> for the attributed serialized value.</summary>
+        </member>
+        <member name="P:AIO.UnitsAttribute.IsOptional">
+            <summary>[Editor-Only] Should the field have a toggle to set its value to <see cref="F:System.Single.NaN"/>?</summary>
+        </member>
+        <member name="P:AIO.UnitsAttribute.DefaultValue">
+            <summary>[Editor-Only] The value to display if the actual value is <see cref="F:System.Single.NaN"/>.</summary>
+        </member>
+        <member name="M:AIO.UnitsAttribute.SetUnits(System.Single[],AIO.CompactUnitConversionCache[],System.Int32)">
+            <summary>[Editor-Only] Sets the unit details.</summary>
+        </member>
+        <member name="M:AIO.UnitsAttribute.GetPropertyHeight(UnityEditor.SerializedProperty,UnityEngine.GUIContent)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.UnitsAttribute.GetLineCount(UnityEditor.SerializedProperty,UnityEngine.GUIContent)">
+            <summary>[Editor-Only] Determines how many lines tall the `property` should be.</summary>
+        </member>
+        <member name="M:AIO.UnitsAttribute.BeginProperty(UnityEngine.Rect,UnityEditor.SerializedProperty,UnityEngine.GUIContent@,System.Single@)">
+            <summary>[Editor-Only] Begins a GUI property block to be ended by <see cref="M:AIO.UnitsAttribute.EndProperty(UnityEngine.Rect,UnityEditor.SerializedProperty,System.Single@)"/>.</summary>
+        </member>
+        <member name="M:AIO.UnitsAttribute.EndProperty(UnityEngine.Rect,UnityEditor.SerializedProperty,System.Single@)">
+            <summary>[Editor-Only] Ends a GUI property block started by <see cref="M:AIO.UnitsAttribute.BeginProperty(UnityEngine.Rect,UnityEditor.SerializedProperty,UnityEngine.GUIContent@,System.Single@)"/>.</summary>
+        </member>
+        <member name="M:AIO.UnitsAttribute.OnGUI(UnityEngine.Rect,UnityEditor.SerializedProperty,UnityEngine.GUIContent)">
+            <summary>[Editor-Only]
+            Draws this attribute's fields for the `property`.
+            </summary>
+        </member>
+        <member name="M:AIO.UnitsAttribute.DoFieldGUI(UnityEngine.Rect,UnityEngine.GUIContent,System.Single@)">
+            <summary>[Editor-Only] Draws this attribute's fields.</summary>
+        </member>
+        <member name="M:AIO.UnitsAttribute.DoSpecialFloatField(UnityEngine.Rect,UnityEngine.GUIContent,System.Single,AIO.CompactUnitConversionCache)">
+            <summary>[Editor-Only]
+            Draws a <see cref="M:UnityEditor.EditorGUI.FloatField(UnityEngine.Rect,UnityEngine.GUIContent,System.Single)"/> with an alternate string when it is not
+            selected (for example, "1" might become "1s" to indicate "seconds").
+            </summary>
+            <remarks>
+            This method treats most <see cref="T:UnityEngine.EventType"/>s normally, but for <see cref="F:UnityEngine.EventType.Repaint"/> it
+            instead draws a text field with the converted string.
+            </remarks>
+        </member>
+        <member name="M:AIO.UnitsAttribute.GetDisplayValue(System.Single,System.Single)">
+            <summary>[Editor-Only] Returns the value that should be displayed for a given field.</summary>
+        </member>
+        <member name="T:AIO.UnitGUI">
+            <summary>[Editor-Only] Various GUI utilities used throughout Animancer.</summary>
+        </member>
+        <member name="M:AIO.UnitGUI.ToStringCached(System.Single)">
+            <summary>[Animancer Extension]
+            Calls <see cref="M:System.Single.ToString(System.String)"/> using <c>"g"</c> as the format and caches the result.
+            </summary>
+        </member>
+        <member name="F:AIO.UnitGUI.WarningFieldColor">
+            <summary>
+            The highlight color used for fields showing a warning.
+            </summary>
+        </member>
+        <member name="F:AIO.UnitGUI.ErrorFieldColor">
+            <summary>
+            The highlight color used for fields showing an error.
+            </summary>
+        </member>
+        <member name="F:AIO.UnitGUI.DontExpandWidth">
+            <summary>
+            <see cref="M:UnityEngine.GUILayout.ExpandWidth(System.Boolean)"/> set to false.
+            </summary>
+        </member>
+        <member name="P:AIO.UnitGUI.LineHeight">
+            <summary>
+            Returns <see cref="P:UnityEditor.EditorGUIUtility.singleLineHeight"/>.
+            </summary>
+        </member>
+        <member name="P:AIO.UnitGUI.StandardSpacing">
+            <summary>
+            Returns <see cref="P:UnityEditor.EditorGUIUtility.standardVerticalSpacing"/>.
+            </summary>
+        </member>
+        <member name="P:AIO.UnitGUI.IndentSize">
+            <summary>
+            The number of pixels of indentation for each <see cref="P:UnityEditor.EditorGUI.indentLevel"/> increment.
+            </summary>
+        </member>
+        <member name="P:AIO.UnitGUI.ToggleWidth">
+            <summary>The width of a standard <see cref="P:UnityEngine.GUISkin.toggle"/> with no label.</summary>
+        </member>
+        <member name="P:AIO.UnitGUI.TextColor">
+            <summary>The color of the standard label text.</summary>
+        </member>
+        <member name="P:AIO.UnitGUI.MiniButton">
+            <summary>A more compact <see cref="P:UnityEditor.EditorStyles.miniButton"/> with a fixed size as a tiny box.</summary>
+        </member>
+        <member name="M:AIO.UnitGUI.RepaintEverything">
+            <summary>Wrapper around <see cref="M:UnityEditorInternal.InternalEditorUtility.RepaintAllViews"/>.</summary>
+        </member>
+        <member name="T:AIO.UnitGUI.SpacingMode">
+            <summary>Indicates where <see cref="M:AIO.UnitGUI.LayoutSingleLineRect(AIO.UnitGUI.SpacingMode)"/> should add the <see cref="P:AIO.UnitGUI.StandardSpacing"/>.</summary>
+        </member>
+        <member name="F:AIO.UnitGUI.SpacingMode.None">
+            <summary>No extra space.</summary>
+        </member>
+        <member name="F:AIO.UnitGUI.SpacingMode.Before">
+            <summary>Add extra space before the new area.</summary>
+        </member>
+        <member name="F:AIO.UnitGUI.SpacingMode.After">
+            <summary>Add extra space after the new area.</summary>
+        </member>
+        <member name="F:AIO.UnitGUI.SpacingMode.BeforeAndAfter">
+            <summary>Add extra space before and after the new area.</summary>
+        </member>
+        <member name="M:AIO.UnitGUI.LayoutSingleLineRect(AIO.UnitGUI.SpacingMode)">
+            <summary>
+            Uses <see cref="M:UnityEngine.GUILayoutUtility.GetRect(System.Single,System.Single)"/> to get a <see cref="T:UnityEngine.Rect"/> occupying a single
+            standard line with the <see cref="P:AIO.UnitGUI.StandardSpacing"/> added according to the specified `spacing`.
+            </summary>
+        </member>
+        <member name="M:AIO.UnitGUI.NextVerticalArea(UnityEngine.Rect@)">
+            <summary>
+            If the <see cref="P:UnityEngine.Rect.height"/> is positive, this method moves the <see cref="P:UnityEngine.Rect.y"/> by that amount and
+            adds the <see cref="P:UnityEditor.EditorGUIUtility.standardVerticalSpacing"/>.
+            </summary>
+        </member>
+        <member name="M:AIO.UnitGUI.StealFromLeft(UnityEngine.Rect@,System.Single,System.Single)">
+            <summary>
+            Subtracts the `width` from the left side of the `area` and returns a new <see cref="T:UnityEngine.Rect"/> occupying the
+            removed section.
+            </summary>
+        </member>
+        <member name="M:AIO.UnitGUI.StealFromRight(UnityEngine.Rect@,System.Single,System.Single)">
+            <summary>
+            Subtracts the `width` from the right side of the `area` and returns a new <see cref="T:UnityEngine.Rect"/> occupying the
+            removed section.
+            </summary>
+        </member>
+        <member name="M:AIO.UnitGUI.SplitHorizontally(UnityEngine.Rect,System.String,System.String,System.Single@,System.Single@,UnityEngine.Rect@,UnityEngine.Rect@)">
+            <summary>
+            Divides the given `area` such that the fields associated with both labels will have equal space
+            remaining after the labels themselves.
+            </summary>
+        </member>
+        <member name="M:AIO.UnitGUI.CreateWidthCache(UnityEngine.GUIStyle)">
+            <summary>
+            Creates a <see cref="T:AIO.ConversionCache`2"/> for calculating the GUI width occupied by text using the
+            specified `style`.
+            </summary>
+        </member>
+        <member name="M:AIO.UnitGUI.CalculateLabelWidth(System.String)">
+            <summary>
+            Calls <see cref="M:UnityEngine.GUIStyle.CalcMinMaxWidth(UnityEngine.GUIContent,System.Single@,System.Single@)"/> using <see cref="P:UnityEngine.GUISkin.label"/> and returns the max
+            width. The result is cached for efficient reuse.
+            </summary>
+        </member>
+        <member name="M:AIO.UnitGUI.BeginVerticalBox(UnityEngine.GUIStyle)">
+            <summary>
+            Begins a vertical layout group using the given style and decreases the
+            <see cref="P:UnityEditor.EditorGUIUtility.labelWidth"/> to compensate for the indentation.
+            </summary>
+        </member>
+        <member name="M:AIO.UnitGUI.EndVerticalBox(UnityEngine.GUIStyle)">
+            <summary>
+            Ends a layout group started by <see cref="M:AIO.UnitGUI.BeginVerticalBox(UnityEngine.GUIStyle)"/> and restores the
+            <see cref="P:UnityEditor.EditorGUIUtility.labelWidth"/>.
+            </summary>
+        </member>
+        <member name="M:AIO.UnitGUI.DoWeightLabel(UnityEngine.Rect@,System.Single)">
+            <summary>
+            Draws a label showing the `weight` aligned to the right side of the `area` and reduces its
+            <see cref="P:UnityEngine.Rect.width"/> to remove that label from its area.
+            </summary>
+        </member>
+        <member name="M:AIO.UnitGUI.WeightToShortString(System.Single,System.Boolean@)">
+            <summary>Returns a string which approximates the `weight` into no more than 3 digits.</summary>
+        </member>
+        <member name="F:AIO.UnitGUI._TightLabelWidth">
+            <summary>The <see cref="P:UnityEditor.EditorGUIUtility.labelWidth"/> from before <see cref="M:AIO.UnitGUI.BeginTightLabel(System.String)"/>.</summary>
+        </member>
+        <member name="M:AIO.UnitGUI.BeginTightLabel(System.String)">
+            <summary>Stores the <see cref="P:UnityEditor.EditorGUIUtility.labelWidth"/> and changes it to the exact width of the `label`.</summary>
+        </member>
+        <member name="M:AIO.UnitGUI.EndTightLabel">
+            <summary>Reverts <see cref="P:UnityEditor.EditorGUIUtility.labelWidth"/> to its previous value.</summary>
+        </member>
+        <member name="M:AIO.UnitGUI.GetNarrowText(System.String)">
+            <summary>
+            Returns the `text` without any spaces if <see cref="P:UnityEditor.EditorGUIUtility.wideMode"/> is false.
+            Otherwise simply returns the `text` without any changes.
+            </summary>
+        </member>
+        <member name="M:AIO.UnitGUI.LoadIcon(System.String)">
+            <summary>Loads an icon texture and sets it to use <see cref="F:UnityEngine.FilterMode.Bilinear"/>.</summary>
+        </member>
+        <member name="M:AIO.UnitGUI.TryUseClickEvent(UnityEngine.Rect,System.Int32)">
+            <summary>
+            Returns true and uses the current event if it is <see cref="F:UnityEngine.EventType.MouseUp"/> inside the specified
+            `area`.
+            </summary>
+        </member>
+        <member name="M:AIO.UnitGUI.TryUseClickEventInLastRect(System.Int32)">
+            <summary>
+            Returns true and uses the current event if it is <see cref="F:UnityEngine.EventType.MouseUp"/> inside the last GUI Layout
+            <see cref="T:UnityEngine.Rect"/> that was drawn.
+            </summary>
+        </member>
+        <member name="M:AIO.UnitGUI.HandleDragAndDrop``1(UnityEngine.Rect,System.Func{``0,System.Boolean},System.Action{``0},UnityEditor.DragAndDropVisualMode)">
+            <summary>
+            Invokes `onDrop` if the <see cref="P:UnityEngine.Event.current"/> is a drag and drop event inside the `dropArea`.
+            </summary>
+        </member>
+        <member name="M:AIO.UnitGUI.TryDrop``1(System.Collections.IEnumerable,System.Func{``0,System.Boolean},System.Action{``0},System.Boolean,UnityEditor.DragAndDropVisualMode)">
+            <summary>
+            Updates the <see cref="P:UnityEditor.DragAndDrop.visualMode"/> or calls `onDrop` for each of the `objects`.
+            </summary>
+        </member>
+        <member name="M:AIO.UnitGUI.Deselect">
+            <summary>Deselects any selected IMGUI control.</summary>
+        </member>
+        <member name="M:AIO.UnitHelper.SetValue(UnityEditor.SerializedProperty,System.Object,System.Object)">
+            <summary>
+            Sets the value of the specified <see cref="T:UnityEditor.SerializedProperty"/>.
+            </summary>
+        </member>
+        <member name="M:AIO.UnitHelper.SetValue(UnityEditor.SerializedProperty,System.Object)">
+            <summary>
+            Sets the value of the <see cref="T:UnityEditor.SerializedProperty"/>.
+            </summary>
+        </member>
+        <member name="P:AIO.UnitHelper.GradientValue">
+            <summary><c>SerializedProperty.gradientValue</c> is internal.</summary>
+        </member>
+        <member name="M:AIO.UnitHelper.GetValue(UnityEditor.SerializedProperty,System.Object)">
+            <summary>
+            Gets the value of the specified <see cref="T:UnityEditor.SerializedProperty"/>.
+            </summary>
+        </member>
+        <member name="M:AIO.UnitHelper.GetAccessor(UnityEditor.SerializedProperty)">
+            <summary>
+            Returns an <see cref="T:AIO.PropertyAccessor"/> that can be used to access the details of the specified `property`.
+            </summary>
+        </member>
+        <member name="M:AIO.UnitHelper.GetAccessor(UnityEditor.SerializedProperty,System.String,System.Type@)">
+            <summary>
+            Returns an <see cref="T:AIO.PropertyAccessor"/> for a <see cref="T:UnityEditor.SerializedProperty"/> with the specified `propertyPath`
+            on the specified `type` of object.
+            </summary>
+        </member>
+        <member name="M:AIO.UnitHelper.GetField(AIO.PropertyAccessor,UnityEditor.SerializedProperty,System.Type,System.String)">
+            <summary>Returns a field with the specified `name` in the `declaringType` or any of its base types.</summary>
+            <remarks>Uses the <see cref="F:AIO.UnitHelper.InstanceBindings"/>.</remarks>
+        </member>
+        <member name="M:AIO.UnitHelper.GetField(System.Type,System.String)">
+            <summary>Returns a field with the specified `name` in the `declaringType` or any of its base types.</summary>
+            <remarks>Uses the <see cref="F:AIO.UnitHelper.InstanceBindings"/>.</remarks>
+        </member>
+    </members>
+</doc>

@@ -26,10 +26,13 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright(AssemblyInfo.Copyright)]
 [assembly: AssemblyCulture(AssemblyInfo.Culture)]
 
+[assembly: InternalsVisibleTo("AIO.Attribute.Unity")]
+[assembly: InternalsVisibleTo("AIO.Attribute.Unity.Editor")]
+
 /// <summary>
 /// 程序集信息
 /// </summary>
-public static class AssemblyInfo
+internal static class AssemblyInfo
 {
     /// <summary>
     /// 密钥信息

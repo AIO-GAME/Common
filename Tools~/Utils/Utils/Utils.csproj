@@ -69,6 +69,7 @@
     <Compile Include="Script\Interface\ICollection\VariantKeyedCollection.cs" />
     <Compile Include="Script\Interface\IEqualityComparer\ReferenceEqualityComparer.cs" />
     <Compile Include="Script\Pool\Pool.cs" />
+    <Compile Include="Script\Pool\Pool.Dispose.cs" />
     <Compile Include="Script\Pool\Pool.Generic.cs" />
     <Compile Include="Script\Interface\IPoolable.cs" />
     <Compile Include="Script\Pool\Pool.HashSet.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Script\Net\Http\HttpDownload.cs" />
     <Compile Include="Script\Net\Http\HttpDownloadInfo.cs" />
     <Compile Include="Script\Database\U.Binary.cs" />
+    <Compile Include="Script\Pool\Pool.Using.cs" />
     <Compile Include="Script\System\Marshal\Define.cs" />
     <Compile Include="Script\Interface\ICollection\IKeyedCollection.cs" />
     <Compile Include="Script\Interface\ICollection\IMergedCollection.cs" />

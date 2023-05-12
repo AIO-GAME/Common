@@ -39,7 +39,7 @@
     <ProjectReference Include="..\Utils\Utils.Unity.Editor\Utils.Unity.Editor.csproj">
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="..\Utils\Utils.Unity.Runtime\Utils.Unity.Runtime.csproj">
+    <ProjectReference Include="..\Utils\Utils.Unity.Runtime\Utils.Unity.csproj">
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="..\Utils\Utils\Utils.csproj">

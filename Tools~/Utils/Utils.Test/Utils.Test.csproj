@@ -20,7 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Extension\Extension\Extension.csproj" />
     <ProjectReference Include="..\Utils.Unity.Editor\Utils.Unity.Editor.csproj" />
-    <ProjectReference Include="..\Utils.Unity.Runtime\Utils.Unity.Runtime.csproj" />
+    <ProjectReference Include="..\Utils.Unity.Runtime\Utils.Unity.csproj" />
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Private>false</Private>
       <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>

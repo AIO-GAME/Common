@@ -27,7 +27,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright(AssemblyInfo.Copyright)]
 [assembly: AssemblyCulture(AssemblyInfo.Culture)]
 
-[assembly: InternalsVisibleTo("AIO.Utils.Unity.Runtime")]
+[assembly: InternalsVisibleTo("AIO.Utils.Unity")]
 [assembly: InternalsVisibleTo("AIO.Utils.Unity.Editor")]
 
 /// <summary>
@@ -64,12 +64,12 @@ static class AssemblyInfo
     /// <summary>
     /// 密钥位置
     /// </summary>
-    internal const string KeyFile = "..\\..\\Resources\\PublicKey\\AIO.snk";
+    public const string KeyFile = "..\\..\\Resources\\PublicKey\\AIO.snk";
 
     /// <summary>
     /// 密钥位置
     /// </summary>
-    internal const string KeyName = "AIO.snk";
+    public const string KeyName = "AIO.snk";
 
     /// <summary>
     /// 作者

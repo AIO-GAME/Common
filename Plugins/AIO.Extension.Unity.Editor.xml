@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AIO.Extension.Unity.Editor</name>
+    </assembly>
+    <members>
+        <member name="T:AIO.MenuFunctionState">
+            <summary>
+            The possible states for a function in a <see cref="T:UnityEditor.GenericMenu"/>.
+            </summary>
+        </member>
+        <member name="F:AIO.MenuFunctionState.Normal">
+            <summary>
+            正常显示
+            </summary>
+        </member>
+        <member name="F:AIO.MenuFunctionState.Selected">
+            <summary>
+            在它旁边有一个复选标记，表示它已被选中。
+            </summary>
+        </member>
+        <member name="F:AIO.MenuFunctionState.Disabled">
+            <summary>
+            颜色变灰，无法使用。
+            </summary>
+        </member>
+        <member name="T:AIO.GenericMenuExtend">
+            <summary>
+            菜单扩展
+            </summary>
+        </member>
+        <member name="M:AIO.GenericMenuExtend.AddFunction(UnityEditor.GenericMenu,System.String,AIO.MenuFunctionState,UnityEditor.GenericMenu.MenuFunction)">
+            <summary>
+            添加菜单项，以便为每个属性的目标对象执行指定的函数。
+            </summary>
+        </member>
+        <member name="M:AIO.GenericMenuExtend.AddFunction(UnityEditor.GenericMenu,System.String,System.Boolean,UnityEditor.GenericMenu.MenuFunction)">
+            <summary>
+            添加菜单项，以便为每个属性的目标对象执行指定的函数。
+            </summary>
+        </member>
+        <member name="M:AIO.GenericMenuExtend.AddPropertyModifierFunction(UnityEditor.GenericMenu,UnityEditor.SerializedProperty,System.String,System.Boolean,System.Action{UnityEditor.SerializedProperty})">
+            <summary>
+            添加菜单项，以便为每个属性的目标对象执行指定的函数。
+            </summary>
+        </member>
+        <member name="M:AIO.GenericMenuExtend.AddPropertyModifierFunction(UnityEditor.GenericMenu,UnityEditor.SerializedProperty,System.String,System.Action{UnityEditor.SerializedProperty})">
+            <summary>
+            添加一个菜单项，以便为每个属性的目标对象执行指定的函数。
+            </summary>
+        </member>
+        <member name="M:AIO.GenericMenuExtend.AddPropertyModifierFunction(UnityEditor.GenericMenu,UnityEditor.SerializedProperty,System.String,AIO.MenuFunctionState,System.Action{UnityEditor.SerializedProperty})">
+            <summary>
+            为每个属性的目标对象添加一个菜单项，以执行指定的函数。
+            </summary>
+        </member>
+        <member name="T:AIO.SerializedPropertyExtend">
+            <summary>
+            序列化属性扩展
+            </summary>
+        </member>
+        <member name="M:AIO.SerializedPropertyExtend.ForEachTarget(UnityEditor.SerializedProperty,System.Action{UnityEditor.SerializedProperty},System.String)">
+            <summary>
+            对每个SerializedObject使用一个新的SerializedProperty执行一次' action '。或者如果只有一个目标，它使用' property '。
+            </summary>
+        </member>
+        <member name="M:AIO.SerializedPropertyExtend.IsDefaultValueByType(UnityEditor.SerializedProperty)">
+            <summary>
+            Is the value of the `property` the same as the default serialized value for its type?
+            </summary>
+        </member>
+        <member name="M:AIO.SerializedPropertyExtend.ResetValue(UnityEditor.SerializedProperty,System.String)">
+            <summary>
+            Resets the value of the <see cref="T:UnityEditor.SerializedProperty"/> to the default value of its type and all its field
+            types, ignoring values set by constructors or field initializers.
+            </summary>
+            <remarks>
+            If you want to run constructors and field initializers, you can call
+            </remarks>
+        </member>
+        <member name="T:AIO.TypeExtend">
+            <summary>
+            类扩展
+            </summary>
+        </member>
+        <member name="M:AIO.TypeExtend.GetPropertyType(System.Type)">
+            <summary>
+            返回表示指定“类型”字段的SerializedPropertyType。
+            </summary>
+        </member>
+    </members>
+</doc>

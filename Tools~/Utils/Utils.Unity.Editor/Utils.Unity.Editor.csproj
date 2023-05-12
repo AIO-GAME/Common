@@ -68,9 +68,9 @@
     <Compile Include="UtilsManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Utils.Unity.Runtime\Utils.Unity.Runtime.csproj">
+    <ProjectReference Include="..\Utils.Unity.Runtime\Utils.Unity.csproj">
       <Project>{dc29565f-e2e3-42af-b245-e38eb60914e3}</Project>
-      <Name>Utils.Unity.Runtime</Name>
+      <Name>Utils.Unity</Name>
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>False</Private>
     </ProjectReference>
