@@ -192,6 +192,11 @@
             获取哈希值
             </summary>
         </member>
+        <member name="T:Utils.IO">
+            <summary>
+            IO工具类
+            </summary>
+        </member>
         <member name="M:Utils.IO.MoveFile(System.String@,System.String@,System.Boolean@)">
             <summary>
             移动文件
@@ -6314,12 +6319,38 @@
             对象池
             </summary>
         </member>
+        <member name="T:Pool.Disposable`1">
+            <summary>
+            An <see cref="T:System.IDisposable"/> to allow pooled objects to be acquired and released within <c>using</c>
+            statements instead of needing to manually release everything.
+            </summary>
+        </member>
+        <member name="F:Pool.Disposable`1.Item">
+            <summary>
+            The object acquired from the <see cref="T:Pool.Disposable`1"/>.
+            </summary>
+        </member>
+        <member name="F:Pool.Disposable`1.OnRelease">
+            <summary>
+            Called by IDisposable.Dispose.
+            </summary>
+        </member>
+        <member name="M:Pool.Disposable`1.#ctor(`0,System.Action{`0})">
+            <summary>
+            释放
+            </summary>
+        </member>
         <member name="T:Pool.Generic`1">
             <summary>
             通用
             </summary>
         </member>
         <member name="M:Pool.Generic`1.New(System.Func{`0})">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="M:Pool.Generic`1.New">
             <summary>
             创建
             </summary>
@@ -6387,6 +6418,46 @@
         <member name="M:Pool.Stack`1.Free(System.Collections.Generic.Stack{`0})">
             <summary>
             释放Stack
+            </summary>
+        </member>
+        <member name="M:Pool.Using``1(``0@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:Pool.Using``1(``0@,System.Action{``0})">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:Pool.Using``1(``0,System.Action{``0})">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:Pool.Using``1(System.Collections.Generic.List{``0}@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:Pool.Using``1(System.Collections.Generic.HashSet{``0}@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:Pool.Using``1(System.Collections.Generic.Stack{``0}@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:Pool.Using``1(System.Collections.Generic.Queue{``0}@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:Pool.Using``2(System.Collections.Generic.Dictionary{``0,``1}@)">
+            <summary>
+            引用释放
             </summary>
         </member>
         <member name="T:Pool.Dictionary`2">

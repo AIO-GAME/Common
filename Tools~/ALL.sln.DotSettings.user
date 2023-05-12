@@ -2,6 +2,7 @@
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=C_003A_005CUsers_005CSAM_005C_002Enuget_005Cpackages_005Csharpziplib_002Enetstandard_005C1_002E0_002E7_005Clib_005Cnet45_005CICSharpCode_002ESharpZipLib_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=C_003A_005CUsers_005CSAM_005C_002Enuget_005Cpackages_005Cyamldotnet_005C13_002E0_002E2_005Clib_005Cnet45_005CYamlDotNet_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CWork_002DG_005Cg108_005Cproj_005CPackages_005Ccom_002Eblz_002Epackage_005CTools_007E_005Cpackages_005CNewtonsoft_002EJson_002E13_002E0_002E3_005Clib_005Cnet45_005CNewtonsoft_002EJson_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CWork_002DG_005Cg108_005Cproj_005CPackages_005Ccom_002Eblz_002Epackage_005CTools_007E_005CResources_005CPlugins_005CUnityEngine_002ETextRenderingModule_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3f3ad447_002Dcdb8_002D47de_002Dbc53_002D070540375919/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::055F8899-DC5B-4978-BA0E-4194A4F0B7DA::.NETCoreApp,Version=v3.1::ALL.Test.Tests&lt;/TestId&gt;&#xD;

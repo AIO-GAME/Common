@@ -6,7 +6,7 @@ public static partial class Pool
     /// <summary>
     /// 通用
     /// </summary>
-    public static class Generic<T> where T : class, IPoolable
+    public static class Generic<T> where T : class, IPoolable, new()
     {
         private static readonly System.Collections.Generic.Stack<T>
             free = new System.Collections.Generic.Stack<T>();
@@ -21,17 +21,23 @@ public static partial class Pool
         {
             lock (@lock)
             {
-                if (free.Count == 0)
-                {
-                    free.Push(constructor());
-                }
-
-                var item = free.Pop();
-
+                var item = constructor();
                 item.New();
-
                 busy.Add(item);
+                return item;
+            }
+        }
 
+        /// <summary>
+        /// 创建
+        /// </summary>
+        public static T New()
+        {
+            lock (@lock)
+            {
+                var item = Activator.CreateInstance<T>();
+                item.New();
+                busy.Add(item);
                 return item;
             }
         }
@@ -43,13 +49,8 @@ public static partial class Pool
         {
             lock (@lock)
             {
-                if (!busy.Remove(item))
-                {
-                    throw new ArgumentException("The item to free is not in use by the pool.", nameof(item));
-                }
-
+                if (!busy.Remove(item)) throw new ArgumentException("The item to free is not in use by the pool.", nameof(item));
                 item.Free();
-
                 free.Push(item);
             }
         }

@@ -1,13 +1,14 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Extension")]
+[assembly: AssemblyTitle("AIO.Extension")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyProduct("Extension")]
+[assembly: AssemblyProduct("AIO.Extension")]
 [assembly: AssemblyTrademark("")]
 
 // 将 ComVisible 设置为 false 会使此程序集中的类型
@@ -24,10 +25,13 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright(AssemblyInfo.Copyright)]
 [assembly: AssemblyCulture(AssemblyInfo.Culture)]
 
+[assembly: InternalsVisibleTo("AIO.Extension.Unity")]
+[assembly: InternalsVisibleTo("AIO.Extension.Unity.Editor")]
+
 /// <summary>
 /// 程序集信息
 /// </summary>
-internal static class AssemblyInfo
+static class AssemblyInfo
 {
     /// <summary>
     /// 密钥信息

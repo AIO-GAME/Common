@@ -1325,9 +1325,14 @@
             获取自定义属性
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="attributeType">类型</param>
+            <param name="member">类型</param>
             <param name="inherit">为 true 时，查找继承的自定义特性的层次结构链。</param>
             <returns>属性集合</returns>
+        </member>
+        <member name="M:AIO.ICustomAttributeProviderExtend.GetAttribute``1(System.Reflection.ICustomAttributeProvider,System.Boolean)">
+            <summary>
+            Returns the first <typeparamref name="TAttribute"/> attribute on the `member` or <c>null</c> if there is none.
+            </summary>
         </member>
         <member name="T:AIO.IDictionaryExtend">
             <summary>
@@ -2748,6 +2753,17 @@
         <member name="M:AIO.ITypeExtend.GetDeclaredConstructor(System.Runtime.InteropServices._Type,System.Type[]@)">
             <summary>
             获取申明构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.ITypeExtend.GetNameCS(System.Type,System.Boolean@)">
+            <summary>
+            获取C#中类型的名称
+            </summary>
+            <remarks>获取存储在字典缓存中的值</remarks>
+        </member>
+        <member name="M:AIO.ITypeExtend.AppendNameAndGenericArguments(System.Text.StringBuilder,System.Type,System.Boolean@,System.Int32)">
+            <summary>
+            Appends the generic arguments of `type` (after skipping the specified number).
             </summary>
         </member>
         <member name="T:AIO.CharExtend">

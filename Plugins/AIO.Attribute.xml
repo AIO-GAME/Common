@@ -621,6 +621,15 @@
             In the player on the Playstation 5.
             </summary>
         </member>
+        <member name="F:AIO.Strings.ProductName">
+            <summary>The name of this product.</summary>
+        </member>
+        <member name="F:AIO.Strings.UnityEditor">
+            <summary>The conditional compilation symbol for Editor-Only code.</summary>
+        </member>
+        <member name="F:AIO.Strings.Assertions">
+            <summary>The conditional compilation symbol for assertions.</summary>
+        </member>
         <member name="M:GCommandDuplicationKeyException.#ctor(System.Int32,System.String,System.String)">
             <summary>
             游戏命令Key存在多个

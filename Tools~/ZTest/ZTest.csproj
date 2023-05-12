@@ -10,6 +10,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\Attribute\Attribute.csproj" />
     <ProjectReference Include="..\Ensure\Ensure\Ensure.csproj" />
+    <ProjectReference Include="..\Extension\Extension.Unity.Editor\Extension.Unity.Editor.csproj" />
+    <ProjectReference Include="..\Extension\Extension.Unity\Extension.Unity.csproj" />
     <ProjectReference Include="..\Extension\Extension\Extension.csproj" />
     <ProjectReference Include="..\Print\Print.Console\Print.Console.csproj" />
     <ProjectReference Include="..\Print\Print.Unity.Editor\Print.Unity.Editor.csproj" />
@@ -18,7 +20,7 @@
     <ProjectReference Include="..\Process\Process\Process.csproj" />
     <ProjectReference Include="..\Tools\Tools\Tools.csproj" />
     <ProjectReference Include="..\Utils\Utils.Unity.Editor\Utils.Unity.Editor.csproj" />
-    <ProjectReference Include="..\Utils\Utils.Unity.Runtime\Utils.Unity.Runtime.csproj" />
+    <ProjectReference Include="..\Utils\Utils.Unity.Runtime\Utils.Unity.csproj" />
     <ProjectReference Include="..\Utils\Utils\Utils.csproj" />
   </ItemGroup>
 

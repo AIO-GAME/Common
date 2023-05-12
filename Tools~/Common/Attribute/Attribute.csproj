@@ -72,8 +72,8 @@
     <Compile Include="Script\Method\Comman\GCommandSearchDatabase.cs" />
     <Compile Include="Script\Method\Comman\GCommandAttribute.cs" />
     <Compile Include="Script\Method\Comman\GCommandSystem.cs" />
+    <Compile Include="Setting\Strings.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>@set CUR_DLL=$(ProjectDir)$(OutDir)
