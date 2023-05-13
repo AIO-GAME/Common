@@ -43,15 +43,15 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEditor.CoreModule">
-      <HintPath>..\..\..\..\..\..\config\C#\Plugins\UnityEditor.CoreModule.dll</HintPath>
+      <HintPath>..\..\Resources\Plugins\UnityEditor.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\config\C#\Plugins\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\..\Resources\Plugins\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\config\C#\Plugins\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>..\..\Resources\Plugins\UnityEngine.IMGUIModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
