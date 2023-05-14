@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{12AFF001-8A23-469C-B160-15535AF5FD4C}</ProjectGuid>
+    <ProjectGuid>{A86A24E6-C079-4E67-BC07-16D04CEF5562}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AIO</RootNamespace>
-    <AssemblyName>AIO.Attribute.Unity</AssemblyName>
+    <RootNamespace>AIO.Common.Unity.Editor</RootNamespace>
+    <AssemblyName>AIO.Common.Unity.Editor</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -21,9 +21,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\AIO.Utils.Unity.Editor.xml</DocumentationFile>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>bin\Debug\AIO.Attribute.Unity.xml</DocumentationFile>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,9 +31,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>bin\Release\AIO.Attribute.Unity.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\AIO.Utils.Unity.Editor.xml</DocumentationFile>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,21 +45,55 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEditor.CoreModule">
+      <HintPath>..\..\Resources\Plugins\UnityEditor.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>..\..\Resources\Plugins\UnityEngine.AnimationModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\Resources\Plugins\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\Resources\Plugins\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Script\Exception\RectExtension.cs" />
+    <Compile Include="Script\Exception\UnityEditorInternalException.cs" />
+    <Compile Include="Script\Extension\GenericMenu\GenericMenu.Extend.cs" />
+    <Compile Include="Script\Extension\SerializedProperty\SerializedProperty.Extend.cs" />
+    <Compile Include="Script\Extension\SerializedProperty\SerializedProperty.Extend.Get.cs" />
+    <Compile Include="Script\Extension\SerializedProperty\SerializedProperty.Extend.Set.cs" />
+    <Compile Include="Script\Extension\Type\Type.Extend.cs" />
+    <Compile Include="Script\Utils\IO\U.IO.Get.cs" />
+    <Compile Include="Script\Utils\Path\U.Path.cs" />
+    <Compile Include="UtilsManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Attribute\Attribute.csproj">
-      <Project>{fb87a31e-75ad-48a0-85b1-6bd42bdc4b81}</Project>
-      <Name>Attribute</Name>
+    <ProjectReference Include="..\Common.Unity\Common.Unity.csproj">
+      <Project>{dc29565f-e2e3-42af-b245-e38eb60914e3}</Project>
+      <Name>Common.Unity</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{b0d5708a-7c94-4bcb-805d-a718034e5724}</Project>
+      <Name>Common</Name>
+      <Private>False</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>@set CUR_DLL=$(ProjectDir)$(OutDir)

@@ -1,0 +1,442 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B0D5708A-7C94-4BCB-805D-A718034E5724}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AIO</RootNamespace>
+    <AssemblyName>AIO.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>bin\Debug\AIO.Utils.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>bin\Release\AIO.Utils.xml</DocumentationFile>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="YamlDotNet">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Script\Extension\Class\Action\Action.Extend.cs" />
+    <Compile Include="Script\Extension\Class\AppDomain\AppDomainExtension.cs" />
+    <Compile Include="Script\Extension\Class\FieldInfo\FieldInfo.Extend.IS.cs" />
+    <Compile Include="Script\Extension\Class\IntPtr\IntPtr.Extend.cs" />
+    <Compile Include="Script\Extension\Class\IntPtr\IntPtr.Extend.ToConver.cs" />
+    <Compile Include="Script\Extension\Class\MethodBase\MethodBase.Extend.Get.cs" />
+    <Compile Include="Script\Extension\Class\MethodInfo\MethodInfo.Extend.cs" />
+    <Compile Include="Script\Extension\Class\MethodInfo\MethodInfo.Extend.IS.cs" />
+    <Compile Include="Script\Extension\Class\ParameterInfo\ParameterInfo.Extend.cs" />
+    <Compile Include="Script\Extension\Class\PropertyInfo\PropertyInfo.Extend.IS.cs" />
+    <Compile Include="Script\Extension\Class\Socket\Socket.Extend.cs" />
+    <Compile Include="Script\Extension\Class\StringBuilder\StringBuilder.Extend.cs" />
+    <Compile Include="Script\Extension\Class\String\String.Extend.Append.cs" />
+    <Compile Include="Script\Extension\Class\String\String.Extend.Contains.cs" />
+    <Compile Include="Script\Extension\Class\String\String.Extend.cs" />
+    <Compile Include="Script\Extension\Class\String\String.Extend.Filter.cs" />
+    <Compile Include="Script\Extension\Class\String\String.Extend.Format.cs" />
+    <Compile Include="Script\Extension\Class\String\String.Extend.Get.cs" />
+    <Compile Include="Script\Extension\Class\String\String.Extend.Indexes.cs" />
+    <Compile Include="Script\Extension\Class\String\String.Extend.Insert.cs" />
+    <Compile Include="Script\Extension\Class\String\String.Extend.IS.cs" />
+    <Compile Include="Script\Extension\Class\String\String.Extend.Path.cs" />
+    <Compile Include="Script\Extension\Class\String\String.Extend.RichText.cs" />
+    <Compile Include="Script\Extension\Class\String\String.Extend.Split.cs" />
+    <Compile Include="Script\Extension\Class\String\String.Extend.To.cs" />
+    <Compile Include="Script\Extension\Class\String\String.Extend.ToConver.cs" />
+    <Compile Include="Script\Extension\Class\String\String.Extend.Trim.cs" />
+    <Compile Include="Script\Extension\Class\Thread\Thread.Extend.cs" />
+    <Compile Include="Script\Extension\Class\Type\Type.Extend.And.cs" />
+    <Compile Include="Script\Extension\Class\Type\Type.Extend.Get.cs" />
+    <Compile Include="Script\Extension\Class\Type\Type.Extend.IS.cs" />
+    <Compile Include="Script\Extension\Class\Type\Type.Extend.Reset.cs" />
+    <Compile Include="Script\Extension\Class\Type\Type.Extend.To.cs" />
+    <Compile Include="Script\Extension\Enum\EnumExtend.cs" />
+    <Compile Include="Script\Extension\Exception\GenericClosingException.cs" />
+    <Compile Include="Script\Extension\Interface\Empty.cs" />
+    <Compile Include="Script\Extension\Interface\ICollection\ICollection.Extend.Find.cs" />
+    <Compile Include="Script\Extension\Interface\IComparable\IComparable.Extend.cs" />
+    <Compile Include="Script\Extension\Interface\ICustomAttributeProvider\ICustomAttributeProvider.Extend.cs" />
+    <Compile Include="Script\Extension\Interface\IDictionary\IDictionary.Extend.Add.cs" />
+    <Compile Include="Script\Extension\Interface\IDictionary\IDictionary.Extend.cs" />
+    <Compile Include="Script\Extension\Interface\IDictionary\IDictionary.Extend.Get.cs" />
+    <Compile Include="Script\Extension\Interface\IDictionary\IDictionary.Extend.Remove.cs" />
+    <Compile Include="Script\Extension\Interface\IDictionary\IDictionary.Extend.Set.cs" />
+    <Compile Include="Script\Extension\Interface\IDictionary\IDictionary.Extend.Swap.cs" />
+    <Compile Include="Script\Extension\Interface\IEnumerable\Byte\IEnumerable.Byte.Extend.cs" />
+    <Compile Include="Script\Extension\Interface\IEnumerable\Char\IEnumerable.Char.Extend.Contains.cs" />
+    <Compile Include="Script\Extension\Interface\IEnumerable\IEnumerable.Extend.Contains.cs" />
+    <Compile Include="Script\Extension\Interface\IEnumerable\IEnumerable.Extend.Find.cs" />
+    <Compile Include="Script\Extension\Interface\IEnumerable\IEnumerable.Extend.To.cs" />
+    <Compile Include="Script\Extension\Interface\IList\Byte\IList.Byte.Extend.cs" />
+    <Compile Include="Script\Extension\Interface\IList\Byte\IList.Byte.Extend.Get.cs" />
+    <Compile Include="Script\Extension\Interface\IList\Byte\IList.Byte.Extend.Set.cs" />
+    <Compile Include="Script\Extension\Interface\IList\IList.Extend.Add.cs" />
+    <Compile Include="Script\Extension\Interface\IList\IList.Extend.Exist.cs" />
+    <Compile Include="Script\Extension\Interface\IList\IList.Extend.Get.cs" />
+    <Compile Include="Script\Extension\Interface\IList\IList.Extend.IndexOf.cs" />
+    <Compile Include="Script\Extension\Interface\IList\IList.Extend.Insert.cs" />
+    <Compile Include="Script\Extension\Interface\IList\IList.Extend.Rmove.cs" />
+    <Compile Include="Script\Extension\Interface\IList\IList.Extend.Set.cs" />
+    <Compile Include="Script\Extension\Interface\IList\IList.Extend.Swap.cs" />
+    <Compile Include="Script\Extension\Interface\IList\String\IList.String.Extend.Add.cs" />
+    <Compile Include="Script\Extension\Interface\IList\String\IList.String.Extend.Pad.cs" />
+    <Compile Include="Script\Extension\Interface\IList\String\IList.String.Extend.To.cs" />
+    <Compile Include="Script\Extension\Interface\IList\String\IList.String.Extend.Trim.cs" />
+    <Compile Include="Script\Extension\Interface\IReflect\IReflect.Extend.Get.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\Byte\ISpan.Byte.Extend.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Add.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Copy.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Insert.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Remove.cs" />
+    <Compile Include="Script\Extension\Interface\IType\IType.Extend.cs" />
+    <Compile Include="Script\Extension\Struct\Byte\Byte.Extend.To.cs" />
+    <Compile Include="Script\Extension\Struct\Char\Char.Extend.cs" />
+    <Compile Include="Script\Extension\Struct\Char\Char.Extend.Get.cs" />
+    <Compile Include="Script\Extension\Struct\Char\Char.Extend.IS.cs" />
+    <Compile Include="Script\Extension\Struct\Char\Char.Extend.Judge.cs" />
+    <Compile Include="Script\Extension\Struct\Char\Char.Extend.ToConver.cs" />
+    <Compile Include="Script\Extension\Struct\Long\Long.Extend.cs" />
+    <Compile Include="Script\Tools\Bean\GBean.cs" />
+    <Compile Include="Script\Tools\Bean\GBeanRegisterAttribute.cs" />
+    <Compile Include="Script\Tools\Bean\GBeanSystem.cs" />
+    <Compile Include="Script\Tools\Buffer\Buffer.cs" />
+    <Compile Include="Script\Tools\Buffer\Buffer.Extend.cs" />
+    <Compile Include="Script\Tools\Buffer\Buffer.Generics.cs" />
+    <Compile Include="Script\Tools\Buffer\Buffer.ICloneable.cs" />
+    <Compile Include="Script\Tools\Buffer\Buffer.IEqualityComparer.cs" />
+    <Compile Include="Script\Tools\Buffer\Buffer.IList.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Bool.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Byte.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Char.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Decimal.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Double.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Enum.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Float.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.ICollection.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.IDictionary.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.IList.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Int16.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Int32.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Int64.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Json.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Len.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.SByte.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.String.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.UInt16.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.UInt32.cs" />
+    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.UInt64.cs" />
+    <Compile Include="Script\Tools\Buffer\Ring\BufferRing.cs" />
+    <Compile Include="Script\Tools\Interface\ILoad.cs" />
+    <Compile Include="Script\Tools\Interface\ISave.cs" />
+    <Compile Include="Script\Tools\Interface\Read\IReadBool.cs" />
+    <Compile Include="Script\Tools\Interface\Read\IReadByte.cs" />
+    <Compile Include="Script\Tools\Interface\Read\IReadChar.cs" />
+    <Compile Include="Script\Tools\Interface\Read\IReadData.cs" />
+    <Compile Include="Script\Tools\Interface\Read\IReadDecimal.cs" />
+    <Compile Include="Script\Tools\Interface\Read\IReadDouble.cs" />
+    <Compile Include="Script\Tools\Interface\Read\IReadEnum.cs" />
+    <Compile Include="Script\Tools\Interface\Read\IReadFloat.cs" />
+    <Compile Include="Script\Tools\Interface\Read\IReadICollection.cs" />
+    <Compile Include="Script\Tools\Interface\Read\IReadIDictionary.cs" />
+    <Compile Include="Script\Tools\Interface\Read\IReadIList.cs" />
+    <Compile Include="Script\Tools\Interface\Read\IReadInt16.cs" />
+    <Compile Include="Script\Tools\Interface\Read\IReadInt32.cs" />
+    <Compile Include="Script\Tools\Interface\Read\IReadInt64.cs" />
+    <Compile Include="Script\Tools\Interface\Read\IReadJson.cs" />
+    <Compile Include="Script\Tools\Interface\Read\IReadLength.cs" />
+    <Compile Include="Script\Tools\Interface\Read\IReadSByte.cs" />
+    <Compile Include="Script\Tools\Interface\Read\IReadString.cs" />
+    <Compile Include="Script\Tools\Interface\Read\IReadUInt16.cs" />
+    <Compile Include="Script\Tools\Interface\Read\IReadUInt32.cs" />
+    <Compile Include="Script\Tools\Interface\Read\IReadUInt64.cs" />
+    <Compile Include="Script\Tools\Interface\Storage\IBinData.cs" />
+    <Compile Include="Script\Tools\Interface\Storage\IBinDeserialize.cs" />
+    <Compile Include="Script\Tools\Interface\Storage\IBinSerialize.cs" />
+    <Compile Include="Script\Tools\Interface\Storage\IBinStorage.cs" />
+    <Compile Include="Script\Tools\Interface\Storage\IDeserialize.cs" />
+    <Compile Include="Script\Tools\Interface\Storage\IReset.cs" />
+    <Compile Include="Script\Tools\Interface\Storage\ISerialize.cs" />
+    <Compile Include="Script\Tools\Interface\Write\IWriteBool.cs" />
+    <Compile Include="Script\Tools\Interface\Write\IWriteByte.cs" />
+    <Compile Include="Script\Tools\Interface\Write\IWriteChar.cs" />
+    <Compile Include="Script\Tools\Interface\Write\IWriteData.cs" />
+    <Compile Include="Script\Tools\Interface\Write\IWriteDecimal.cs" />
+    <Compile Include="Script\Tools\Interface\Write\IWriteDouble.cs" />
+    <Compile Include="Script\Tools\Interface\Write\IWriteEnum.cs" />
+    <Compile Include="Script\Tools\Interface\Write\IWriteFloat.cs" />
+    <Compile Include="Script\Tools\Interface\Write\IWriteICollection.cs" />
+    <Compile Include="Script\Tools\Interface\Write\IWriteIDictionary.cs" />
+    <Compile Include="Script\Tools\Interface\Write\IWriteIList.cs" />
+    <Compile Include="Script\Tools\Interface\Write\IWriteInt16.cs" />
+    <Compile Include="Script\Tools\Interface\Write\IWriteInt32.cs" />
+    <Compile Include="Script\Tools\Interface\Write\IWriteInt64.cs" />
+    <Compile Include="Script\Tools\Interface\Write\IWriteJson.cs" />
+    <Compile Include="Script\Tools\Interface\Write\IWriteLength.cs" />
+    <Compile Include="Script\Tools\Interface\Write\IWriteSByte.cs" />
+    <Compile Include="Script\Tools\Interface\Write\IWriteString.cs" />
+    <Compile Include="Script\Tools\Interface\Write\IWriteUInt16.cs" />
+    <Compile Include="Script\Tools\Interface\Write\IWriteUInt32.cs" />
+    <Compile Include="Script\Tools\Interface\Write\IWriteUInt64.cs" />
+    <Compile Include="Script\Tools\Storage\Bin\Bin.Dictionary.cs" />
+    <Compile Include="Script\Tools\Storage\Bin\Bin.HashSet.cs" />
+    <Compile Include="Script\Tools\Storage\Bin\Bin.List.cs" />
+    <Compile Include="Script\Tools\Storage\Bin\Bin.Queue.cs" />
+    <Compile Include="Script\Tools\Storage\Bin\Bin.SortedList.cs" />
+    <Compile Include="Script\Tools\Storage\Bin\Bin.Stack.cs" />
+    <Compile Include="Script\Tools\Storage\Storage.cs" />
+    <Compile Include="Script\Tools\Storage\Storage.List.cs" />
+    <Compile Include="Script\Tools\Storage\StorageFile.cs" />
+    <Compile Include="Script\Utils.cs" />
+    <Compile Include="Script\Utils\Database\PList\IPListElement.cs" />
+    <Compile Include="Script\Utils\Database\PList\PListBinaryReader.cs" />
+    <Compile Include="Script\Utils\Database\PList\PListBinaryWriter.cs" />
+    <Compile Include="Script\Utils\Database\PList\PListContainer\PListArray.cs" />
+    <Compile Include="Script\Utils\Database\PList\PListContainer\PListDict.cs" />
+    <Compile Include="Script\Utils\Database\PList\PListElement.cs" />
+    <Compile Include="Script\Utils\Database\PList\PListElementFactory.cs" />
+    <Compile Include="Script\Utils\Database\PList\PListExceptions\PListException.cs" />
+    <Compile Include="Script\Utils\Database\PList\PListExceptions\PListFormatException.cs" />
+    <Compile Include="Script\Utils\Database\PList\PListFormat.cs" />
+    <Compile Include="Script\Utils\Database\PList\PListPrimitives\PListBool.cs" />
+    <Compile Include="Script\Utils\Database\PList\PListPrimitives\PListData.cs" />
+    <Compile Include="Script\Utils\Database\PList\PListPrimitives\PListDate.cs" />
+    <Compile Include="Script\Utils\Database\PList\PListPrimitives\PListFill.cs" />
+    <Compile Include="Script\Utils\Database\PList\PListPrimitives\PListInteger.cs" />
+    <Compile Include="Script\Utils\Database\PList\PListPrimitives\PListNull.cs" />
+    <Compile Include="Script\Utils\Database\PList\PListPrimitives\PListReal.cs" />
+    <Compile Include="Script\Utils\Database\PList\PListPrimitives\PListString.cs" />
+    <Compile Include="Script\Utils\Database\PList\PListRoot.cs" />
+    <Compile Include="Script\Utils\Database\U.Base64.cs" />
+    <Compile Include="Script\Utils\Database\U.Binary.cs" />
+    <Compile Include="Script\Utils\Database\U.DataEncrypt.cs" />
+    <Compile Include="Script\Utils\Database\U.HashTable.cs" />
+    <Compile Include="Script\Utils\Database\U.Json.cs" />
+    <Compile Include="Script\Utils\Database\U.Sort.cs" />
+    <Compile Include="Script\Utils\Database\U.Xml.cs" />
+    <Compile Include="Script\Utils\Database\U.Yaml.cs" />
+    <Compile Include="Script\Utils\Exception\AmbiguousOperatorException.cs" />
+    <Compile Include="Script\Utils\Exception\InvalidConversionException.cs" />
+    <Compile Include="Script\Utils\Exception\InvalidOperatorException.cs" />
+    <Compile Include="Script\Utils\Exception\OperatorException.cs" />
+    <Compile Include="Script\Utils\Exception\UnexpectedEnumValueException.cs" />
+    <Compile Include="Script\Utils\Guid\U.Guid.cs" />
+    <Compile Include="Script\Utils\Interface\ICollection\IKeyedCollection.cs" />
+    <Compile Include="Script\Utils\Interface\ICollection\IMergedCollection.cs" />
+    <Compile Include="Script\Utils\Interface\ICollection\ISet.cs" />
+    <Compile Include="Script\Utils\Interface\ICollection\MergedCollection.cs" />
+    <Compile Include="Script\Utils\Interface\ICollection\MergedKeyedCollection.cs" />
+    <Compile Include="Script\Utils\Interface\ICollection\VariantCollection.cs" />
+    <Compile Include="Script\Utils\Interface\ICollection\VariantKeyedCollection.cs" />
+    <Compile Include="Script\Utils\Interface\IDictionary\DebugDictionary.cs" />
+    <Compile Include="Script\Utils\Interface\IDictionary\FlexibleDictionary.cs" />
+    <Compile Include="Script\Utils\Interface\IEqualityComparer\ReferenceEqualityComparer.cs" />
+    <Compile Include="Script\Utils\Interface\INotified\INotifiedCollectionItem.cs" />
+    <Compile Include="Script\Utils\Interface\INotified\INotifyCollectionChanged.cs" />
+    <Compile Include="Script\Utils\Interface\IPoolable.cs" />
+    <Compile Include="Script\Utils\IO\Base\IO.Clear.cs" />
+    <Compile Include="Script\Utils\IO\Base\IO.Copy.cs" />
+    <Compile Include="Script\Utils\IO\Base\IO.Create.Async.cs" />
+    <Compile Include="Script\Utils\IO\Base\IO.Create.cs" />
+    <Compile Include="Script\Utils\IO\Base\IO.Delete.Async.cs" />
+    <Compile Include="Script\Utils\IO\Base\IO.Delete.cs" />
+    <Compile Include="Script\Utils\IO\Base\IO.Encoding.cs" />
+    <Compile Include="Script\Utils\IO\Base\IO.Exists.cs" />
+    <Compile Include="Script\Utils\IO\Base\IO.Find.cs" />
+    <Compile Include="Script\Utils\IO\Base\IO.Get.cs" />
+    <Compile Include="Script\Utils\IO\Base\IO.Move.cs" />
+    <Compile Include="Script\Utils\IO\Binary\IO.Byte.Async.cs" />
+    <Compile Include="Script\Utils\IO\Binary\IO.Byte.cs" />
+    <Compile Include="Script\Utils\IO\Binary\IO.File.Async.cs" />
+    <Compile Include="Script\Utils\IO\Binary\IO.File.cs" />
+    <Compile Include="Script\Utils\IO\Binary\IO.Zip.Compress.cs" />
+    <Compile Include="Script\Utils\IO\Binary\IO.Zip.Uncompressed.cs" />
+    <Compile Include="Script\Utils\IO\Text\IO.Base64.Async.cs" />
+    <Compile Include="Script\Utils\IO\Text\IO.Base64.cs" />
+    <Compile Include="Script\Utils\IO\Text\IO.Json.Async.cs" />
+    <Compile Include="Script\Utils\IO\Text\IO.Json.cs" />
+    <Compile Include="Script\Utils\IO\Text\IO.PList.Async.cs" />
+    <Compile Include="Script\Utils\IO\Text\IO.PList.cs" />
+    <Compile Include="Script\Utils\IO\Text\IO.Text.Async.cs" />
+    <Compile Include="Script\Utils\IO\Text\IO.Text.cs" />
+    <Compile Include="Script\Utils\IO\Text\IO.Text.Unicode.Async.cs" />
+    <Compile Include="Script\Utils\IO\Text\IO.Text.Unicode.cs" />
+    <Compile Include="Script\Utils\IO\Text\IO.Text.UTF8.Async.cs" />
+    <Compile Include="Script\Utils\IO\Text\IO.Text.UTF8.cs" />
+    <Compile Include="Script\Utils\IO\Text\IO.XML.Async.cs" />
+    <Compile Include="Script\Utils\IO\Text\IO.XML.cs" />
+    <Compile Include="Script\Utils\IO\Text\IO.Yaml.Async.cs" />
+    <Compile Include="Script\Utils\IO\Text\IO.Yaml.cs" />
+    <Compile Include="Script\Utils\Math\Hash\U.Hash.cs" />
+    <Compile Include="Script\Utils\Math\Hash\U.Hash.Get.cs" />
+    <Compile Include="Script\Utils\Math\U.Hex.cs" />
+    <Compile Include="Script\Utils\Math\U.Math.cs" />
+    <Compile Include="Script\Utils\Math\U.MD5.cs" />
+    <Compile Include="Script\Utils\Math\U.Random.cs" />
+    <Compile Include="Script\Utils\Math\U.Status.cs" />
+    <Compile Include="Script\Utils\Math\U.Time.cs" />
+    <Compile Include="Script\Utils\Net\Http\HttpDownload.cs" />
+    <Compile Include="Script\Utils\Net\Http\HttpDownloadInfo.cs" />
+    <Compile Include="Script\Utils\Net\Http\U.Http.cs" />
+    <Compile Include="Script\Utils\Pool\Pool.cs" />
+    <Compile Include="Script\Utils\Pool\Pool.Dictionary.cs" />
+    <Compile Include="Script\Utils\Pool\Pool.Dispose.cs" />
+    <Compile Include="Script\Utils\Pool\Pool.Generic.cs" />
+    <Compile Include="Script\Utils\Pool\Pool.HashSet.cs" />
+    <Compile Include="Script\Utils\Pool\Pool.List.cs" />
+    <Compile Include="Script\Utils\Pool\Pool.Queue.cs" />
+    <Compile Include="Script\Utils\Pool\Pool.SortedList.cs" />
+    <Compile Include="Script\Utils\Pool\Pool.Stack.cs" />
+    <Compile Include="Script\Utils\Pool\Pool.Using.cs" />
+    <Compile Include="Script\Utils\String\StringBlock.cs" />
+    <Compile Include="Script\Utils\String\U.IDNo.cs" />
+    <Compile Include="Script\Utils\String\U.MaskWord.cs" />
+    <Compile Include="Script\Utils\String\U.String.cs" />
+    <Compile Include="Script\Utils\String\U.String.IS.cs" />
+    <Compile Include="Script\Utils\System\Marshal\Define.cs" />
+    <Compile Include="Script\Utils\System\Marshal\U.Marshal.cs" />
+    <Compile Include="Script\Utils\System\U.Assembly.cs" />
+    <Compile Include="Script\Utils\System\U.Class.cs" />
+    <Compile Include="Script\Utils\System\U.GC.cs" />
+    <Compile Include="Script\Utils\System\U.SystemInfo.cs" />
+    <Compile Include="Script\Utils\Unit\ScriptType.cs" />
+    <Compile Include="Script\Utils\Unit\Unit.Char.cs" />
+    <Compile Include="Script\Utils\Unit\Unit.Chinese.cs" />
+    <Compile Include="Script\Utils\Unit\Unit.Color.cs" />
+    <Compile Include="Script\Utils\Unit\Unit.Suffix.cs" />
+    <Compile Include="Script\Utils\Unit\Unit.Time.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="SharpZipLib.NETStandard" Version="1.0.7" />
+    <PackageReference Include="System.Buffers" Version="4.5.1" />
+    <PackageReference Include="System.Memory" Version="4.5.4" />
+    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.3" />
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.2" />
+    <PackageReference Include="YamlDotNet">
+      <Version>13.0.2</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Script\Exception" />
+    <Folder Include="Script\Extension" />
+    <Folder Include="Script\Utils" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Ensure\Ensure.csproj">
+      <Project>{3e725c5e-8dd9-4ab3-8042-96effab382b4}</Project>
+      <Name>Ensure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>@set CUR_DLL=$(ProjectDir)$(OutDir)
+@cd /d $(SolutionDir)
+@cd ..
+@set cur=%25cd%25\Plugins\
+
+@set dllname=ICSharpCode.SharpZipLib
+@copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll
+)
+@if exist %25CUR_DLL%25%25dllname%25.xml (
+@copy /y /v %25CUR_DLL%25%25dllname%25.xml %25cur%25%25dllname%25.xml
+)
+
+@set dllname=YamlDotNet
+@copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll
+)
+@if exist %25CUR_DLL%25%25dllname%25.xml (
+@copy /y /v %25CUR_DLL%25%25dllname%25.xml %25cur%25%25dllname%25.xml
+)
+
+@set dllname=$(TargetName)
+@if exist %25CUR_DLL%25%25dllname%25.dll (
+@copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll
+)
+@if exist %25CUR_DLL%25%25dllname%25.xml (
+@copy /y /v %25CUR_DLL%25%25dllname%25.xml %25cur%25%25dllname%25.xml
+)
+
+</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>@cd /d $(SolutionDir)
+@cd ..
+@set cur=%25cd%25\Plugins\
+
+@set dllname=$(TargetName)
+@if exist %25cur%25%25dllname%25.dll (
+@del /s /q %25cur%25%25dllname%25.dll
+)
+@if exist %25cur%25%25dllname%25.xml (
+@del /s /q %25cur%25%25dllname%25.xml
+)
+
+@set dllname=YamlDotNet
+@if exist %25cur%25%25dllname%25.dll (
+@del /s /q %25cur%25%25dllname%25.dll
+)
+@if exist %25cur%25%25dllname%25.xml (
+@del /s /q %25cur%25%25dllname%25.xml
+)
+
+@set dllname=ICSharpCode.SharpZipLib
+@if exist %25cur%25%25dllname%25.dll (
+@del /s /q %25cur%25%25dllname%25.dll
+)
+@if exist %25cur%25%25dllname%25.xml (
+@del /s /q %25cur%25%25dllname%25.xml
+)</PreBuildEvent>
+  </PropertyGroup>
+</Project>

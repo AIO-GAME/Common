@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>AIO</RootNamespace>
+    <StartupObject>Program1</StartupObject>
+    <SignAssembly>true</SignAssembly>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.46" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.Unity.Editor\Common.Unity.Editor.csproj" />
+    <ProjectReference Include="..\..\Common\Common.Unity\Common.Unity.csproj" />
+    <ProjectReference Include="..\..\Common\Common\Common.csproj" />
+  </ItemGroup>
+  <PropertyGroup>
+    <DelaySign>false</DelaySign>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageIcon>AIO.ico</PackageIcon>
+    <PackageIconUrl />
+    <AssemblyName>AIO.Utils.Test</AssemblyName>
+  </PropertyGroup>
+</Project>
