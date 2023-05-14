@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace AIO
 {
@@ -16,24 +17,20 @@ namespace AIO
     public static partial class PrPlatform
     {
         /// <summary>
-        /// 
+        /// Git命令
         /// </summary>
         public static partial class Git
         {
             /// <summary>
             /// 获取有效Git路径
             /// </summary>
-            private static List<string> GetValidUrl(string target, ICollection<string> urls)
+            private static List<string> GetValidUrl(string target, IEnumerable<string> urls)
             {
-                var list = new List<string>();
-                foreach (var item in urls)
-                {
-                    var name = Path.GetFileName(item).Replace(".git", "").Replace(".ssh", "");
-                    var path = Path.Combine(target, name);
-                    if (!Directory.Exists(path)) list.Add(item);
-                }
-
-                return list;
+                return (from item in urls
+                    let name = Path.GetFileName(item).Replace(".git", "").Replace(".ssh", "")
+                    let path = Path.Combine(target, name)
+                    where !Directory.Exists(path)
+                    select item).ToList();
             }
 
             #region Remote
@@ -41,7 +38,7 @@ namespace AIO
             /// <summary>
             /// 
             /// </summary>
-            /// <param name="target"></param>
+            /// <param name="target">目标路径</param>
             /// <param name="quit"></param>
             /// <returns></returns>
             /// <exception cref="NotImplementedException"></exception>
@@ -64,7 +61,7 @@ namespace AIO
             /// <summary>
             /// 
             /// </summary>
-            /// <param name="targets"></param>
+            /// <param name="targets">目标路径</param>
             /// <param name="quit"></param>
             /// <returns></returns>
             /// <exception cref="NotImplementedException"></exception>
@@ -91,7 +88,7 @@ namespace AIO
             /// <summary>
             /// 
             /// </summary>
-            /// <param name="target"></param>
+            /// <param name="target">目标路径</param>
             /// <param name="urls"></param>
             /// <param name="quit"></param>
             /// <returns></returns>
@@ -115,7 +112,7 @@ namespace AIO
             /// <summary>
             /// 
             /// </summary>
-            /// <param name="target"></param>
+            /// <param name="target">目标路径</param>
             /// <param name="url"></param>
             /// <param name="quit"></param>
             /// <returns></returns>
@@ -143,7 +140,7 @@ namespace AIO
             /// <summary>
             /// 
             /// </summary>
-            /// <param name="targets"></param>
+            /// <param name="targets">目标路径</param>
             /// <param name="quit"></param>
             /// <returns></returns>
             /// <exception cref="NotImplementedException"></exception>
@@ -166,7 +163,7 @@ namespace AIO
             /// <summary>
             /// 
             /// </summary>
-            /// <param name="target"></param>
+            /// <param name="target">目标路径</param>
             /// <param name="quit"></param>
             /// <returns></returns>
             /// <exception cref="NotImplementedException"></exception>
@@ -189,9 +186,9 @@ namespace AIO
             #endregion
 
             /// <summary>
-            /// 
+            /// Git上传
             /// </summary>
-            /// <param name="target"></param>
+            /// <param name="target">目标路径</param>
             /// <param name="inputCommit"></param>
             /// <param name="inputOrigin"></param>
             /// <param name="quit"></param>
@@ -215,9 +212,9 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            /// Git上传
             /// </summary>
-            /// <param name="target"></param>
+            /// <param name="target">目标路径</param>
             /// <param name="inputCommit"></param>
             /// <param name="inputOrigin"></param>
             /// <param name="quit"></param>
@@ -241,9 +238,9 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            /// Git 提交
             /// </summary>
-            /// <param name="targets"></param>
+            /// <param name="targets">目标路径</param>
             /// <param name="quit"></param>
             /// <returns></returns>
             /// <exception cref="NotImplementedException"></exception>
@@ -265,9 +262,9 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            /// Git 提交
             /// </summary>
-            /// <param name="targets"></param>
+            /// <param name="targets">目标路径</param>
             /// <param name="quit"></param>
             /// <returns></returns>
             /// <exception cref="NotImplementedException"></exception>
@@ -288,9 +285,9 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            /// Git 提交
             /// </summary>
-            /// <param name="targets"></param>
+            /// <param name="targets">目标路径</param>
             /// <param name="quit"></param>
             /// <returns></returns>
             /// <exception cref="NotImplementedException"></exception>
@@ -311,9 +308,9 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            /// Git 提交
             /// </summary>
-            /// <param name="target"></param>
+            /// <param name="target">目标路径</param>
             /// <param name="quit"></param>
             /// <returns></returns>
             /// <exception cref="NotImplementedException"></exception>
@@ -334,9 +331,9 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            /// Git 推送
             /// </summary>
-            /// <param name="target"></param>
+            /// <param name="target">目标路径</param>
             /// <param name="quit"></param>
             /// <returns></returns>
             /// <exception cref="NotImplementedException"></exception>
@@ -357,9 +354,9 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            /// Git 推送
             /// </summary>
-            /// <param name="targets"></param>
+            /// <param name="targets">目标路径</param>
             /// <param name="quit"></param>
             /// <returns></returns>
             /// <exception cref="NotImplementedException"></exception>
@@ -380,9 +377,9 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            /// Git 添加
             /// </summary>
-            /// <param name="target"></param>
+            /// <param name="target">目标路径</param>
             /// <param name="quit"></param>
             /// <returns></returns>
             /// <exception cref="NotImplementedException"></exception>
@@ -403,9 +400,9 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            /// Git 添加
             /// </summary>
-            /// <param name="targets"></param>
+            /// <param name="targets">目标路径</param>
             /// <param name="quit"></param>
             /// <returns></returns>
             /// <exception cref="NotImplementedException"></exception>

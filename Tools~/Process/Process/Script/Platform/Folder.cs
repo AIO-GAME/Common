@@ -14,12 +14,12 @@ namespace AIO
     public partial class PrPlatform
     {
         /// <summary>
-        ///
+        /// 文件夹命令
         /// </summary>
         public static class Folder
         {
             /// <summary>
-            ///
+            /// 链接文件夹
             /// </summary>
             public static IExecutor Link(string target, string source)
             {
@@ -38,7 +38,7 @@ namespace AIO
             }
 
             /// <summary>
-            ///
+            /// 删除文件夹
             /// </summary>
             public static IExecutor Del(string target)
             {
@@ -57,7 +57,7 @@ namespace AIO
             }
 
             /// <summary>
-            ///
+            /// 创建文件夹
             /// </summary>
             public static IExecutor Create(string target)
             {

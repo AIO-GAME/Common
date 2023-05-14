@@ -277,10 +277,7 @@ namespace AIO
             /// <summary>
             ///
             /// </summary>
-            public override Encoding Encoding
-            {
-                get { return Encoding.Default; }
-            }
+            public override Encoding Encoding => Encoding.Default;
 
             #endregion
         }

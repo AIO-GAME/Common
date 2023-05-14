@@ -22,7 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>bin\Debug\AIO.Utils.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\AIO.Common.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,7 +32,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>bin\Release\AIO.Utils.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\AIO.Common.xml</DocumentationFile>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup>
@@ -369,9 +369,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Script\Exception" />
-    <Folder Include="Script\Extension" />
-    <Folder Include="Script\Utils" />
+    <Folder Include="Script\Exception\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Ensure\Ensure.csproj">

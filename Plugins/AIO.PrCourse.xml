@@ -3925,31 +3925,31 @@
              </summary>
         </member>
         <member name="T:AIO.PrPlatform.Folder">
-             <summary>
-            
-             </summary>
+            <summary>
+            文件夹命令
+            </summary>
         </member>
         <member name="M:AIO.PrPlatform.Folder.Link(System.String,System.String)">
-             <summary>
-            
-             </summary>
+            <summary>
+            链接文件夹
+            </summary>
         </member>
         <member name="M:AIO.PrPlatform.Folder.Del(System.String)">
-             <summary>
-            
-             </summary>
+            <summary>
+            删除文件夹
+            </summary>
         </member>
         <member name="M:AIO.PrPlatform.Folder.Create(System.String)">
-             <summary>
-            
-             </summary>
+            <summary>
+            创建文件夹
+            </summary>
         </member>
         <member name="T:AIO.PrPlatform.Git">
             <summary>
-            
+            Git命令
             </summary>
         </member>
-        <member name="M:AIO.PrPlatform.Git.GetValidUrl(System.String,System.Collections.Generic.ICollection{System.String})">
+        <member name="M:AIO.PrPlatform.Git.GetValidUrl(System.String,System.Collections.Generic.IEnumerable{System.String})">
             <summary>
             获取有效Git路径
             </summary>
@@ -3958,7 +3958,7 @@
             <summary>
             
             </summary>
-            <param name="target"></param>
+            <param name="target">目标路径</param>
             <param name="quit"></param>
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
@@ -3967,7 +3967,7 @@
             <summary>
             
             </summary>
-            <param name="targets"></param>
+            <param name="targets">目标路径</param>
             <param name="quit"></param>
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
@@ -3976,7 +3976,7 @@
             <summary>
             
             </summary>
-            <param name="target"></param>
+            <param name="target">目标路径</param>
             <param name="urls"></param>
             <param name="quit"></param>
             <returns></returns>
@@ -3986,7 +3986,7 @@
             <summary>
             
             </summary>
-            <param name="target"></param>
+            <param name="target">目标路径</param>
             <param name="url"></param>
             <param name="quit"></param>
             <returns></returns>
@@ -3996,7 +3996,7 @@
             <summary>
             
             </summary>
-            <param name="targets"></param>
+            <param name="targets">目标路径</param>
             <param name="quit"></param>
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
@@ -4005,16 +4005,16 @@
             <summary>
             
             </summary>
-            <param name="target"></param>
+            <param name="target">目标路径</param>
             <param name="quit"></param>
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
         <member name="M:AIO.PrPlatform.Git.Upload(System.String,System.Boolean,System.Boolean,System.Boolean)">
             <summary>
-            
+            Git上传
             </summary>
-            <param name="target"></param>
+            <param name="target">目标路径</param>
             <param name="inputCommit"></param>
             <param name="inputOrigin"></param>
             <param name="quit"></param>
@@ -4023,9 +4023,9 @@
         </member>
         <member name="M:AIO.PrPlatform.Git.Upload(System.Collections.Generic.ICollection{System.String},System.Boolean,System.Boolean,System.Boolean)">
             <summary>
-            
+            Git上传
             </summary>
-            <param name="target"></param>
+            <param name="target">目标路径</param>
             <param name="inputCommit"></param>
             <param name="inputOrigin"></param>
             <param name="quit"></param>
@@ -4034,72 +4034,72 @@
         </member>
         <member name="M:AIO.PrPlatform.Git.Commit(System.Collections.Generic.ICollection{System.ValueTuple{System.String,System.String}},System.Boolean)">
             <summary>
-            
+            Git 提交
             </summary>
-            <param name="targets"></param>
+            <param name="targets">目标路径</param>
             <param name="quit"></param>
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
         <member name="M:AIO.PrPlatform.Git.Commit(System.Collections.Generic.ICollection{System.String},System.Boolean)">
             <summary>
-            
+            Git 提交
             </summary>
-            <param name="targets"></param>
+            <param name="targets">目标路径</param>
             <param name="quit"></param>
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
         <member name="M:AIO.PrPlatform.Git.Commit(System.String,System.Boolean)">
             <summary>
-            
+            Git 提交
             </summary>
-            <param name="targets"></param>
+            <param name="targets">目标路径</param>
             <param name="quit"></param>
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
         <member name="M:AIO.PrPlatform.Git.Commit(System.ValueTuple{System.String,System.String},System.Boolean)">
             <summary>
-            
+            Git 提交
             </summary>
-            <param name="target"></param>
+            <param name="target">目标路径</param>
             <param name="quit"></param>
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
         <member name="M:AIO.PrPlatform.Git.Push(System.ValueTuple{System.String,System.String},System.Boolean)">
             <summary>
-            
+            Git 推送
             </summary>
-            <param name="target"></param>
+            <param name="target">目标路径</param>
             <param name="quit"></param>
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
         <member name="M:AIO.PrPlatform.Git.Push(System.Collections.Generic.ICollection{System.ValueTuple{System.String,System.String}},System.Boolean)">
             <summary>
-            
+            Git 推送
             </summary>
-            <param name="targets"></param>
+            <param name="targets">目标路径</param>
             <param name="quit"></param>
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
         <member name="M:AIO.PrPlatform.Git.Add(System.String,System.Boolean)">
             <summary>
-            
+            Git 添加
             </summary>
-            <param name="target"></param>
+            <param name="target">目标路径</param>
             <param name="quit"></param>
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
         <member name="M:AIO.PrPlatform.Git.Add(System.Collections.Generic.ICollection{System.String},System.Boolean)">
             <summary>
-            
+            Git 添加
             </summary>
-            <param name="targets"></param>
+            <param name="targets">目标路径</param>
             <param name="quit"></param>
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>

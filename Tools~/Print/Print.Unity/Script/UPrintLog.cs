@@ -63,7 +63,7 @@ namespace AIO
             if (IsNotOut || NoStatus(LOG)) return;
             if (objs == null)
             {
-                Debug.unityLogger.Log(LogType.Log, string.Format("{0} is null", nameof(objs)));
+                Debug.unityLogger.Log(LogType.Log, "objs is null");
                 return;
             }
 
