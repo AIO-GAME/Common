@@ -8,10 +8,9 @@
 namespace AIO.Unity.Editor
 {
     using UnityEditor;
-
     using UnityEngine;
 
-    static class UnityConsoleEditor
+    internal static class UnityConsoleEditor
     {
         private static bool IS_EDITOR_SWITCH_LOG => PlayerPrefs.GetInt(MENU_EDITOR_SWITCH_LOG, -1) == 1;
         private static bool IS_EDITOR_SWITCH_ERROR => PlayerPrefs.GetInt(MENU_EDITOR_SWITCH_ERROR, -1) == 1;
@@ -63,8 +62,10 @@ namespace AIO.Unity.Editor
         {
             MenuRefresh();
 
-            if (IS_EDITOR_SWITCH_ERROR) UnityConsole.EnabledError(); else UnityConsole.DisableError();
-            if (IS_EDITOR_SWITCH_LOG) UnityConsole.EnabledLog(); else UnityConsole.DisableLog();
+            if (IS_EDITOR_SWITCH_ERROR) UnityConsole.EnabledError();
+            else UnityConsole.DisableError();
+            if (IS_EDITOR_SWITCH_LOG) UnityConsole.EnabledLog();
+            else UnityConsole.DisableLog();
         }
 
         /// <summary>
