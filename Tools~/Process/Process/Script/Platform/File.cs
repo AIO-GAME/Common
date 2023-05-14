@@ -34,7 +34,7 @@ namespace AIO
                         return PrCmd.MkLink.Symbolic(target, source);
                     case PlatformID.MacOSX:
                     case PlatformID.Unix:
-                        return PrMac.In.Execute(source, target, "-s");
+                        return PrMac.In.Execute(source, target);
                     default: throw new NotImplementedException();
                 }
             }

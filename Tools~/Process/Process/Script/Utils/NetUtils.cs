@@ -4,10 +4,10 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+using System.Net;
+
 namespace AIO
 {
-    using System.Net;
-
     internal static class NetUtils
     {
         /// <summary>

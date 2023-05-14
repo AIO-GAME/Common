@@ -1,5 +1,4 @@
-﻿
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -10,8 +9,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("AIO.PrCourse")]
 [assembly: AssemblyDefaultAlias("AIO.PrCourse")]
 [assembly: AssemblyDescription("进程包装")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyTrademark("")]
 
 // 将 ComVisible 设置为 false 会使此程序集中的类型
 //对 COM 组件不可见。如果需要从 COM 访问此程序集中的类型
@@ -31,7 +28,7 @@ using System.Runtime.InteropServices;
 /// <summary>
 /// 程序集信息
 /// </summary>
-public static class AssemblyInfo
+internal static class AssemblyInfo
 {
     /// <summary>
     /// 密钥信息
@@ -41,7 +38,8 @@ public static class AssemblyInfo
     /// <summary>
     /// 公钥
     /// </summary>
-    public const string PublicKey = "002400000480000094000000060200000024000052534131000400000100010015955a571ef6904bd2bad9d840866399d7985020e6f2f7db9ec57370d5b7b0524fc70e54059bd367789d8c55bd159f4d3766852ea223e215c8bc7454916da83b445e7ea746828372350de16ebe00a41a7159cd27f626ab320b450af0f27cf1d24fc0405b769225e1914ac5da2f82eef67e567607d3c1e0b30725ccb442d55fdb";
+    public const string PublicKey =
+        "002400000480000094000000060200000024000052534131000400000100010015955a571ef6904bd2bad9d840866399d7985020e6f2f7db9ec57370d5b7b0524fc70e54059bd367789d8c55bd159f4d3766852ea223e215c8bc7454916da83b445e7ea746828372350de16ebe00a41a7159cd27f626ab320b450af0f27cf1d24fc0405b769225e1914ac5da2f82eef67e567607d3c1e0b30725ccb442d55fdb";
 
     /// <summary>
     /// 公钥Token
