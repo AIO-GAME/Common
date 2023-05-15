@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+
 using UnityEditor;
+
 using UnityEngine;
 
 namespace AIO
@@ -12,10 +14,14 @@ namespace AIO
     [Conditional(Strings.UnityEditor)]
     public class UnitsAttribute : SelfDrawerAttribute
     {
-        /// <summary>The validation rule applied to the value.</summary>
+        /// <summary>
+        /// The validation rule applied to the value.
+        /// </summary>
         public Validate.Value Rule { get; set; }
 
-        /// <summary>Creates a new <see cref="UnitsAttribute"/>.</summary>
+        /// <summary>
+        /// Creates a new <see cref="UnitsAttribute"/>.
+        /// </summary>
         protected UnitsAttribute()
         {
         }
@@ -83,9 +89,7 @@ namespace AIO
         protected static void BeginProperty(Rect area, SerializedProperty property, ref GUIContent label, out float value)
         {
             label = EditorGUI.BeginProperty(area, label, property);
-
             EditorGUI.BeginChangeCheck();
-
             value = property.floatValue;
         }
 
@@ -238,7 +242,6 @@ namespace AIO
             return value;
         }
 
-
         private void DoOptionalBeforeGUI(bool isOptional, Rect area, out Rect toggleArea, out bool guiWasEnabled, out float previousLabelWidth)
         {
             toggleArea = area;
@@ -271,7 +274,6 @@ namespace AIO
                 }
             }
         }
-
 
         private void DoOptionalAfterGUI(bool isOptional, Rect area, ref float value, float defaultValue, bool guiWasEnabled, float previousLabelWidth)
         {

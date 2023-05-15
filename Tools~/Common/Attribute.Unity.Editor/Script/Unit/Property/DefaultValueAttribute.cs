@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Reflection;
+
 using UnityEditor;
 
 namespace AIO
@@ -11,11 +12,14 @@ namespace AIO
     [Conditional(Strings.UnityEditor)]
     public class DefaultValueAttribute : Attribute
     {
-        /// <summary>The main default value.</summary>
+        /// <summary>
+        /// The main default value.
+        /// </summary>
         public object Primary { get; protected set; }
 
-
-        /// <summary>The fallback value to use if the target value was already equal to the <see cref="Primary"/>.</summary>
+        /// <summary>
+        /// The fallback value to use if the target value was already equal to the <see cref="Primary"/>.
+        /// </summary>
         public object Secondary { get; protected set; }
 
         /// <summary>Creates a new <see cref="DefaultValueAttribute"/>.</summary>
@@ -26,11 +30,12 @@ namespace AIO
         }
 
 
-        /// <summary>Creates a new <see cref="DefaultValueAttribute"/>.</summary>
+        /// <summary>
+        /// Creates a new <see cref="DefaultValueAttribute"/>.
+        /// </summary>
         private DefaultValueAttribute()
         {
         }
-
 
         /// <summary>[Editor-Only]
         /// If the field represented by the `property` has a <see cref="DefaultValueAttribute"/>, this method sets
@@ -64,7 +69,6 @@ namespace AIO
             else value = default;
         }
 
-
         /// <summary>[Editor-Only]
         /// Sets the `value` equal to the <see cref="Primary"/> value. If it was already at the value, it sets it equal
         /// to the <see cref="Secondary"/> value instead.
@@ -85,7 +89,6 @@ namespace AIO
                 return;
             }
         }
-
 
         /// <summary>[Editor-Only]
         /// Sets the `value` equal to the `primary` value. If it was already at the value, it sets it equal to the
