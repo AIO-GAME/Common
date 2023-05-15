@@ -1,6 +1,6 @@
 ﻿namespace AIO
 {
-using System.Runtime.CompilerServices;
+    using System.Runtime.CompilerServices;
     using System.Text;
 
     /// <summary>
@@ -12,7 +12,7 @@ using System.Runtime.CompilerServices;
         /// 重复字符
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string Repeat(this char c,in int repeat)
+        public static string Repeat(this char c, in int repeat)
         {
             return new string(c, repeat);
         }

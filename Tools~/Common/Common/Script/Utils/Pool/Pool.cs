@@ -5,5 +5,5 @@
 /// </summary>
 public static partial class Pool
 {
-  
+
 }

@@ -20,7 +20,7 @@
         /// <inheritdoc />
         public TBase this[TKey key] => implementation[key];
 
- 
+
         /// <summary>
         /// 
         /// </summary>

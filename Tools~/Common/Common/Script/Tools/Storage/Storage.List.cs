@@ -2,7 +2,7 @@
 
 namespace AIO
 {
-    public partial class Storage 
+    public partial class Storage
     {
         private readonly List<IBinData> Collection;
 

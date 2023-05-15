@@ -8,6 +8,6 @@ namespace AIO
     /// </summary>
     public static partial class IDictionaryExtend
     {
-       
+
     }
 }

@@ -32,7 +32,7 @@ namespace AIO
         {
             return BitConverter.ToString(bytes).Replace("-", "");
         }
-        
+
         /// <summary>
         /// 转化为字符串 UTF8格式
         /// </summary>
