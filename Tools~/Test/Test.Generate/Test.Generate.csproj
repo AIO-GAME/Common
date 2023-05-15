@@ -6,6 +6,7 @@
     <StartupObject>ZTest.Program</StartupObject>
     <RunPostBuildEvent>Always</RunPostBuildEvent>
     <RootNamespace>ZTest</RootNamespace>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>

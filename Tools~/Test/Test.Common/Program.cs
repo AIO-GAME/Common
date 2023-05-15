@@ -1,9 +1,52 @@
 ﻿
+using AIO;
+
 class Program
 {
     static void Main(string[] args)
     {
+        var buffer = new BufferByte();
+        {
+            buffer.WriteUInt32(1);
+            var value = buffer.ReadUInt32();
+        }
 
+        {
+            buffer.WriteLen(10);
+            var value = buffer.ReadLen();
+        }
+
+        {
+            //buffer.WriteStringUTF8("asdasdasd");
+            //var value = buffer.ReadStringUTF8();
+            //System.Console.WriteLine(value);
+            System.Console.WriteLine(9 | 0x80);
+            try
+            {
+                unchecked
+                {
+                    System.Console.WriteLine((sbyte)(9 | 0x80));
+                    System.Console.WriteLine((sbyte)(-119 & 0x7F));
+                }
+            }
+            catch (System.Exception ex)
+            {
+                System.Console.WriteLine(ex);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        System.Console.Read();
     }
 }
 // using System;
