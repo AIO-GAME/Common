@@ -17,9 +17,9 @@ class Program
         }
 
         {
-            //buffer.WriteStringUTF8("asdasdasd");
-            //var value = buffer.ReadStringUTF8();
-            //System.Console.WriteLine(value);
+            buffer.WriteStringUTF8("asdasdasd");
+            var value = buffer.ReadStringUTF8();
+            System.Console.WriteLine(value);
             System.Console.WriteLine(9 | 0x80);
             try
             {
