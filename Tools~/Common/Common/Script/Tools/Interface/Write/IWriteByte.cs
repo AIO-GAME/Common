@@ -12,7 +12,7 @@ namespace AIO
         /// </summary>
         /// <param name="value"></param>
         void WriteByte(in byte value);
-        
+
         /// <summary>
         /// 写入指定数据类型
         /// </summary>

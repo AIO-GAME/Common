@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-public  partial class Pool
+public partial class Pool
 {
     private static readonly object @lock = new object();
 

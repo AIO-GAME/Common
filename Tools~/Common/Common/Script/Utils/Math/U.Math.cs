@@ -34,7 +34,7 @@ public partial class Utils
             if (value > max) return max;
             return value;
         }
-        
+
         ///<summary>
         ///该方法将给定的整数值限制在指定的范围内，并返回新的整数值。
         ///</summary>

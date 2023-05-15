@@ -9,7 +9,7 @@ namespace AIO.PList
     {
         /// <inheritdoc />
         public PListFormatException() { }
-     
+
         /// <inheritdoc />
         public PListFormatException(string message) : base(message) { }
 

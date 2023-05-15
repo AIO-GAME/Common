@@ -6,7 +6,7 @@ namespace AIO
 {
     public static partial class IListExtend
     {
-      
+
         /// <summary>
         /// 交换数组元素位置
         /// </summary>

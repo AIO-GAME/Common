@@ -14,7 +14,7 @@ namespace AIO
             var len = GetLen(array, ref index);
             if (len < 0) return null;
             if (len == 0) return Array.Empty<T>();
-          
+
             if (len > array.Count) throw new SystemException("data overflow:" + len);
             return new T[len];
         }
