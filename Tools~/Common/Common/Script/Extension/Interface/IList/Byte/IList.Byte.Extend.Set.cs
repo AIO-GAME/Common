@@ -27,7 +27,6 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetCharArray(this IList<byte> array, ref int index, in ICollection<char> value, in bool reverse = false)
         {
             var str = new StringBuilder();
@@ -42,10 +41,10 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetByteArray(this IList<byte> array, ref int index, in ICollection<byte> value, in bool reverse = false)
         {
             SetLen(array, ref index, value.Count);
+            Console.WriteLine("-----------------");
             if (reverse)
             {
                 var j = index;
@@ -67,7 +66,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetSByteArray(this IList<byte> array, ref int index, in ICollection<sbyte> value, in bool reverse = false)
         {
             SetLen(array, ref index, value.Count);
@@ -92,7 +91,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetBoolArray(this IList<byte> array, ref int index, in ICollection<bool> value, in bool reverse = false)
         {
             SetLen(array, ref index, value.Count);
@@ -117,7 +116,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetInt16Array(this IList<byte> array, ref int index, in ICollection<short> value, in bool reverse = false)
         {
             SetLen(array, ref index, value.Count);
@@ -131,7 +130,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetInt32Array(this IList<byte> array, ref int index, in ICollection<int> value, in bool reverse = false)
         {
             SetLen(array, ref index, value.Count);
@@ -145,7 +144,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetInt64Array(this IList<byte> array, ref int index, in ICollection<long> value, in bool reverse = false)
         {
             SetLen(array, ref index, value.Count);
@@ -159,7 +158,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetUInt16Array(this IList<byte> array, ref int index, in ICollection<ushort> value, in bool reverse = false)
         {
             SetLen(array, ref index, value.Count);
@@ -173,7 +172,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetUInt32Array(this IList<byte> array, ref int index, in ICollection<uint> value, in bool reverse = false)
         {
             SetLen(array, ref index, value.Count);
@@ -187,7 +186,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetUInt64Array(this IList<byte> array, ref int index, in ICollection<ulong> value, in bool reverse = false)
         {
             SetLen(array, ref index, value.Count);
@@ -200,7 +199,7 @@ namespace AIO
         /// <param name="array"></param>
         /// <param name="index"></param>
         /// <param name="value"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetLenArray(this IList<byte> array, ref int index, in ICollection<int> value)
         {
             SetLen(array, ref index, value.Count);
@@ -215,7 +214,7 @@ namespace AIO
         /// <param name="value"></param>
         /// <param name="all"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetFloatArray(this IList<byte> array, ref int index, in ICollection<float> value, bool all = false, in bool reverse = false)
         {
             SetLen(array, ref index, value.Count);
@@ -230,7 +229,7 @@ namespace AIO
         /// <param name="value"></param>
         /// <param name="all"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetDoubleArray(this IList<byte> array, ref int index, in ICollection<double> value, bool all = false, in bool reverse = false)
         {
             SetLen(array, ref index, value.Count);
@@ -244,7 +243,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetDecimalArray(this IList<byte> array, ref int index, in ICollection<decimal> value, in bool reverse = false)
         {
             SetLen(array, ref index, value.Count);
@@ -259,7 +258,7 @@ namespace AIO
         /// <param name="value"></param>
         /// <param name="encoding"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetStringArray(this IList<byte> array, ref int index, in ICollection<string> value, Encoding encoding = null, in bool reverse = false)
         {
             SetLen(array, ref index, value.Count);
@@ -274,7 +273,7 @@ namespace AIO
         /// <param name="value"></param>
         /// <param name="encoding"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetStringArray(this IList<byte> array, ref int index, in ICollection<StringBuilder> value, Encoding encoding = null, in bool reverse = false)
         {
             SetLen(array, ref index, value.Count);
@@ -288,7 +287,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetStringUTF8Array(this IList<byte> array, ref int index, in ICollection<string> value, in bool reverse = false)
         {
             SetLen(array, ref index, value.Count);
@@ -302,7 +301,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetStringUTF8ASCII(this IList<byte> array, ref int index, in ICollection<string> value, in bool reverse = false)
         {
             SetLen(array, ref index, value.Count);
@@ -316,7 +315,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetStringUTF8Unicode(this IList<byte> array, ref int index, in ICollection<string> value, in bool reverse = false)
         {
             SetLen(array, ref index, value.Count);
@@ -330,7 +329,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetStringUTF8Array(this IList<byte> array, ref int index, in ICollection<StringBuilder> value, in bool reverse = false)
         {
             SetLen(array, ref index, value.Count);
@@ -344,7 +343,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetStringUTF8ASCII(this IList<byte> array, ref int index, in ICollection<StringBuilder> value, in bool reverse = false)
         {
             SetLen(array, ref index, value.Count);
@@ -358,7 +357,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetStringUTF8Unicode(this IList<byte> array, ref int index, in ICollection<StringBuilder> value, in bool reverse = false)
         {
             SetLen(array, ref index, value.Count);
@@ -373,7 +372,7 @@ namespace AIO
         /// <param name="array"></param>
         /// <param name="index"></param>
         /// <param name="value"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetBool(this IList<byte> array, ref int index, in bool value)
         {
             array[index++] = (byte)(value ? 1 : 0);
@@ -386,7 +385,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetChar(this IList<byte> array, ref int index, in char value, in bool reverse = false)
         {
             var bytes = BitConverter.GetBytes(value);
@@ -400,23 +399,22 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <exception cref="SystemException"></exception>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetLen(this IList<byte> array, ref int index, in int value)
         {
             if (value >= 0x20000000 || value < 0) throw new SystemException("value overflow , current max overflow = (2^29-1) ! invalid len:" + value);
             if (value < 0x80)
             {
-                SetSByte(array, ref index, (sbyte)(value | 0x80));
+                unchecked { SetSByte(array, ref index, (sbyte)(value | 0x80)); }
                 return;
             }
-
             if (value < 0x4000)
             {
-                SetUInt16(array, ref index, (ushort)(value | 0x4000), true);
+                unchecked { SetUInt16(array, ref index, (ushort)(value | 0x4000), true); }
                 return;
             }
 
-            SetInt32(array, ref index, value | 0x20000000, true);
+            unchecked { SetInt32(array, ref index, value | 0x20000000, true); }
         }
 
         /// <summary>
@@ -427,7 +425,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="reverse"></param>
         /// <typeparam name="T"></typeparam>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetEnum<T>(this IList<byte> array, in T value, ref int index, in bool reverse = false) where T : Enum
         {
             SetInt32(array, ref index, value.GetHashCode(), reverse);
@@ -435,7 +433,7 @@ namespace AIO
 
         #region SetNumber
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         private static void SetNumber(this IList<byte> array, ref int index, in long value, in byte place, in bool reverse = false)
         {
             if (reverse)
@@ -446,7 +444,7 @@ namespace AIO
                     array[index++] = (byte)(value >> (i * 8));
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         private static void SetNumber(this IList<byte> array, ref int index, in int value, in byte place, in bool reverse = false)
         {
             if (reverse)
@@ -457,7 +455,7 @@ namespace AIO
                     array[index++] = (byte)(value >> (i * 8));
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         private static void SetNumber(this IList<byte> array, ref int index, in uint value, in byte place, in bool reverse = false)
         {
             if (reverse)
@@ -468,7 +466,7 @@ namespace AIO
                     array[index++] = (byte)(value >> (i * 8));
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         private static void SetNumber(this IList<byte> array, ref int index, in ulong value, in byte place, in bool reverse = false)
         {
             if (reverse)
@@ -489,7 +487,7 @@ namespace AIO
         /// <param name="array"></param>
         /// <param name="index"></param>
         /// <param name="value"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetByte(this IList<byte> array, ref int index, in byte value)
         {
             array[index++] = value;
@@ -501,10 +499,10 @@ namespace AIO
         /// <param name="array"></param>
         /// <param name="index"></param>
         /// <param name="value"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetSByte(this IList<byte> array, ref int index, in sbyte value)
         {
-            array[index++] = (byte)value;
+            unchecked { array[index++] = (byte)value; }
         }
 
         /// <summary>
@@ -514,7 +512,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetInt16(this IList<byte> array, ref int index, in short value, in bool reverse = false)
         {
             SetNumber(array, ref index, value, 2, reverse);
@@ -527,7 +525,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetInt32(this IList<byte> array, ref int index, in int value, in bool reverse = false)
         {
             SetNumber(array, ref index, value, 4, reverse);
@@ -540,7 +538,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetInt64(this IList<byte> array, ref int index, in long value, in bool reverse = false)
         {
             SetNumber(array, ref index, value, 8, reverse);
@@ -553,7 +551,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetUInt16(this IList<byte> array, ref int index, in ushort value, in bool reverse = false)
         {
             SetNumber(array, ref index, value, 2, reverse);
@@ -566,7 +564,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetUInt32(this IList<byte> array, ref int index, in uint value, in bool reverse = false)
         {
             SetNumber(array, ref index, value, 4, reverse);
@@ -579,7 +577,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetUInt64(this IList<byte> array, ref int index, in ulong value, in bool reverse = false)
         {
             SetNumber(array, ref index, value, 8, reverse);
@@ -593,7 +591,7 @@ namespace AIO
         /// <param name="value"></param>
         /// <param name="all"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetFloat(this IList<byte> array, ref int index, in float value, in bool all = false, in bool reverse = false)
         {
             byte[] bytes;
@@ -610,7 +608,7 @@ namespace AIO
         /// <param name="value"></param>
         /// <param name="all"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetDouble(this IList<byte> array, ref int index, in double value, in bool all = false, in bool reverse = false)
         {
             byte[] bytes;
@@ -626,7 +624,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetDecimal(this IList<byte> array, ref int index, in decimal value, in bool reverse = false)
         {
             var list = decimal.GetBits(value);
@@ -646,7 +644,7 @@ namespace AIO
         /// <param name="value"></param>
         /// <param name="encoding"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetString(this IList<byte> array, ref int index, in string value, in Encoding encoding = null, in bool reverse = false)
         {
             if (value == null)
@@ -673,7 +671,7 @@ namespace AIO
         /// <param name="value"></param>
         /// <param name="encoding"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetString(this IList<byte> array, ref int index, in StringBuilder value, in Encoding encoding = null, in bool reverse = false)
         {
             if (value == null)
@@ -699,7 +697,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetStringUTF8(this IList<byte> array, ref int index, in string value, in bool reverse = false)
         {
             SetString(array, ref index, value, Encoding.UTF8, reverse);
@@ -712,7 +710,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetStringASCII(this IList<byte> array, ref int index, in string value, in bool reverse = false)
         {
             SetString(array, ref index, value, Encoding.ASCII, reverse);
@@ -725,7 +723,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetStringUnicode(this IList<byte> array, ref int index, in string value, in bool reverse = false)
         {
             SetString(array, ref index, value, Encoding.Unicode, reverse);
@@ -738,7 +736,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetStringUTF8(this IList<byte> array, ref int index, in StringBuilder value, in bool reverse = false)
         {
             SetString(array, ref index, value, Encoding.UTF8, reverse);
@@ -751,7 +749,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetStringASCII(this IList<byte> array, ref int index, in StringBuilder value, in bool reverse = false)
         {
             SetString(array, ref index, value, Encoding.ASCII, reverse);
@@ -764,7 +762,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static void SetStringUnicode(this IList<byte> array, ref int index, in StringBuilder value, in bool reverse = false)
         {
             SetString(array, ref index, value, Encoding.Unicode, reverse);

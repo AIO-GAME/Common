@@ -442,16 +442,22 @@
             https://kybernetik.com.au/animancer/api/Animancer/DefaultValueAttribute
         </member>
         <member name="P:AIO.DefaultValueAttribute.Primary">
-            <summary>The main default value.</summary>
+            <summary>
+            The main default value.
+            </summary>
         </member>
         <member name="P:AIO.DefaultValueAttribute.Secondary">
-            <summary>The fallback value to use if the target value was already equal to the <see cref="P:AIO.DefaultValueAttribute.Primary"/>.</summary>
+            <summary>
+            The fallback value to use if the target value was already equal to the <see cref="P:AIO.DefaultValueAttribute.Primary"/>.
+            </summary>
         </member>
         <member name="M:AIO.DefaultValueAttribute.#ctor(System.Object,System.Object)">
             <summary>Creates a new <see cref="T:AIO.DefaultValueAttribute"/>.</summary>
         </member>
         <member name="M:AIO.DefaultValueAttribute.#ctor">
-            <summary>Creates a new <see cref="T:AIO.DefaultValueAttribute"/>.</summary>
+            <summary>
+            Creates a new <see cref="T:AIO.DefaultValueAttribute"/>.
+            </summary>
         </member>
         <member name="M:AIO.DefaultValueAttribute.SetToDefault``1(``0@,UnityEditor.SerializedProperty)">
             <summary>[Editor-Only]
@@ -485,13 +491,19 @@
             </summary>
         </member>
         <member name="M:AIO.SelfDrawerAttribute.CanCacheInspectorGUI(UnityEditor.SerializedProperty)">
-            <summary>[Editor-Only] Can the GUI for the `property` be cached?</summary>
+            <summary>[Editor-Only]
+            Can the GUI for the `property` be cached?
+            </summary>
         </member>
         <member name="M:AIO.SelfDrawerAttribute.GetPropertyHeight(UnityEditor.SerializedProperty,UnityEngine.GUIContent)">
-            <summary>[Editor-Only] Calculates the height of the GUI for the `property`.</summary>
+            <summary>[Editor-Only]
+            Calculates the height of the GUI for the `property`.
+            </summary>
         </member>
         <member name="M:AIO.SelfDrawerAttribute.OnGUI(UnityEngine.Rect,UnityEditor.SerializedProperty,UnityEngine.GUIContent)">
-            <summary>[Editor-Only] Draws the GUI for the `property`.</summary>
+            <summary>[Editor-Only]
+            Draws the GUI for the `property`.
+            </summary>
         </member>
         <member name="T:AIO.UnitsAttribute">
             <summary>
@@ -499,10 +511,14 @@
             </summary>
         </member>
         <member name="P:AIO.UnitsAttribute.Rule">
-            <summary>The validation rule applied to the value.</summary>
+            <summary>
+            The validation rule applied to the value.
+            </summary>
         </member>
         <member name="M:AIO.UnitsAttribute.#ctor">
-            <summary>Creates a new <see cref="T:AIO.UnitsAttribute"/>.</summary>
+            <summary>
+            Creates a new <see cref="T:AIO.UnitsAttribute"/>.
+            </summary>
         </member>
         <member name="M:AIO.UnitsAttribute.#ctor(System.String)">
             <summary>Creates a new <see cref="T:AIO.UnitsAttribute"/>.</summary>

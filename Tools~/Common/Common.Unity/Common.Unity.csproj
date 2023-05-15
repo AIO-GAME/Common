@@ -110,9 +110,6 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Script\Exception\" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>@set CUR_DLL=$(ProjectDir)$(OutDir)

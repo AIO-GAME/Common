@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace AIO
 {
     public static partial class IListExtend
     {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         private static T[] GetLenArrayEmtpy<T>(this IList<byte> array, ref int index)
         {
             var len = GetLen(array, ref index);
@@ -27,7 +26,7 @@ namespace AIO
         /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
         /// <param name="reverse">是否反转字节序。</param>
         /// <returns>从字节数组中提取出的字符串的字符数组表示形式。</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static char[] GetCharArray(this IList<byte> array, ref int index, in bool reverse = false)
         {
             var str = GetString(array, ref index, Encoding.UTF8, reverse);
@@ -43,7 +42,7 @@ namespace AIO
         /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
         /// <param name="reverse">是否反转字节序。</param>
         /// <returns>从字节数组中提取出的字符串的字符数组表示形式。</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static bool[] GetBoolArray(this IList<byte> array, ref int index, in bool reverse = false)
         {
             var list = GetLenArrayEmtpy<bool>(array, ref index);
@@ -65,7 +64,7 @@ namespace AIO
         /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
         /// <param name="reverse">是否反转字节序。</param>
         /// <returns>从字节数组中提取出的字符串的字符数组表示形式。</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static sbyte[] GetSByteArray(this IList<byte> array, ref int index, in bool reverse = false)
         {
             var list = GetLenArrayEmtpy<sbyte>(array, ref index);
@@ -83,7 +82,7 @@ namespace AIO
         /// <param name="array">要从中提取字符串的字节数组。</param>
         /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
         /// <param name="reverse">是否反转字节序。</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static byte[] GetByteArray(this IList<byte> array, ref int index, in bool reverse = false)
         {
             var list = GetLenArrayEmtpy<byte>(array, ref index);
@@ -101,7 +100,7 @@ namespace AIO
         /// <param name="array">要从中提取字符串的字节数组。</param>
         /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
         /// <param name="reverse">是否反转字节序。</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static short[] GetInt16Array(this IList<byte> array, ref int index, in bool reverse = false)
         {
             var list = GetLenArrayEmtpy<short>(array, ref index);
@@ -113,7 +112,7 @@ namespace AIO
         /// <param name="array">要从中提取字符串的字节数组。</param>
         /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
         /// <param name="reverse">是否反转字节序。</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static ushort[] GetUInt16Array(this IList<byte> array, ref int index, in bool reverse = false)
         {
             var list = GetLenArrayEmtpy<ushort>(array, ref index);
@@ -125,7 +124,7 @@ namespace AIO
         /// <param name="array">要从中提取字符串的字节数组。</param>
         /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
         /// <param name="reverse">是否反转字节序。</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static uint[] GetUInt32Array(this IList<byte> array, ref int index, in bool reverse = false)
         {
             var list = GetLenArrayEmtpy<uint>(array, ref index);
@@ -137,7 +136,7 @@ namespace AIO
         /// <param name="array">要从中提取字符串的字节数组。</param>
         /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
         /// <param name="reverse">是否反转字节序。</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static int[] GetInt32Array(this IList<byte> array, ref int index, in bool reverse = false)
         {
             var list = GetLenArrayEmtpy<int>(array, ref index);
@@ -149,7 +148,7 @@ namespace AIO
         /// <param name="array">要从中提取字符串的字节数组。</param>
         /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
         /// <param name="reverse">是否反转字节序。</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static ulong[] GetUInt64Array(this IList<byte> array, ref int index, in bool reverse = false)
         {
             var list = GetLenArrayEmtpy<ulong>(array, ref index);
@@ -161,7 +160,7 @@ namespace AIO
         /// <param name="array">要从中提取字符串的字节数组。</param>
         /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
         /// <param name="reverse">是否反转字节序。</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static long[] GetInt64Array(this IList<byte> array, ref int index, in bool reverse = false)
         {
             var list = GetLenArrayEmtpy<long>(array, ref index);
@@ -174,7 +173,7 @@ namespace AIO
         /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
         /// <param name="all">全部</param>
         /// <param name="reverse">是否反转字节序。</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static float[] GetFloatArray(this IList<byte> array, ref int index, bool all = false, in bool reverse = false)
         {
             var list = GetLenArrayEmtpy<float>(array, ref index);
@@ -187,7 +186,7 @@ namespace AIO
         /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
         /// <param name="all">全部</param>
         /// <param name="reverse">是否反转字节序。</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static double[] GetDoubleArray(this IList<byte> array, ref int index, bool all = false, in bool reverse = false)
         {
             var list = GetLenArrayEmtpy<double>(array, ref index);
@@ -199,7 +198,7 @@ namespace AIO
         /// <param name="array">要从中提取字符串的字节数组。</param>
         /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
         /// <param name="reverse">是否反转字节序。</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static decimal[] GetDecimalArray(this IList<byte> array, ref int index, in bool reverse = false)
         {
             var list = GetLenArrayEmtpy<decimal>(array, ref index);
@@ -210,7 +209,7 @@ namespace AIO
 
         /// <param name="array">要从中提取字符串的字节数组。</param>
         /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static int[] GetLenArray(this IList<byte> array, ref int index)
         {
             var list = GetLenArrayEmtpy<int>(array, ref index);
@@ -223,7 +222,7 @@ namespace AIO
         /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
         /// <param name="encoding">格式化</param>
         /// <param name="reverse">是否反转字节序。</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static string[] GetStringArray(this IList<byte> array, ref int index, Encoding encoding = null, in bool reverse = false)
         {
             var list = GetLenArrayEmtpy<string>(array, ref index);
@@ -235,7 +234,7 @@ namespace AIO
         /// <param name="array">要从中提取字符串的字节数组。</param>
         /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
         /// <param name="reverse">是否反转字节序。</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static T[] GetEnumArray<T>(this IList<byte> array, ref int index, in bool reverse = false) where T : Enum
         {
             var list = GetLenArrayEmtpy<T>(array, ref index);
@@ -249,7 +248,7 @@ namespace AIO
         /// <summary>
         /// 获取 bool 值
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static bool GetBool(this IList<byte> array, ref int index)
         {
             return array[index++] != 0;
@@ -258,7 +257,7 @@ namespace AIO
         /// <summary>
         /// 获取 Enum 值
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static T GetEnum<T>(this IList<byte> array, ref int index, in bool reverse = false) where T : Enum
         {
             return (T)Enum.Parse(typeof(T), GetInt32(array, ref index, reverse).ToString());
@@ -267,7 +266,7 @@ namespace AIO
         /// <summary>
         /// 获取 Char 值
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static char GetChar(this IList<byte> array, ref int index, in bool reverse = false)
         {
             var bytes = GetByteArray(array, ref index, reverse);
@@ -280,7 +279,7 @@ namespace AIO
         /// <param name="array"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static int GetLen(this IList<byte> array, ref int index)
         {
             var n = array[index] & 0xFF;
@@ -292,7 +291,7 @@ namespace AIO
 
         #region Number
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         private static long GetNumber(this IList<byte> array, ref int index, int place, long unit, in bool reverse = false)
         {
             var value = 0L;
@@ -312,7 +311,7 @@ namespace AIO
         /// <param name="array"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static byte GetByte(this IList<byte> array, ref int index)
         {
             return array[index++];
@@ -324,7 +323,7 @@ namespace AIO
         /// <param name="array"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static sbyte GetSByte(this IList<byte> array, ref int index)
         {
             return (sbyte)array[index++];
@@ -337,7 +336,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="reverse"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static short GetInt16(this IList<byte> array, ref int index, in bool reverse = false)
         {
             return (short)GetNumber(array, ref index, 2, 0xFF, reverse);
@@ -350,7 +349,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="reverse"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static ushort GetUInt16(this IList<byte> array, ref int index, in bool reverse = false)
         {
             return (ushort)GetNumber(array, ref index, 2, 0xFFU, reverse);
@@ -363,7 +362,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="reverse"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static int GetInt32(this IList<byte> array, ref int index, in bool reverse = false)
         {
             return (int)GetNumber(array, ref index, 4, 0xFF, reverse);
@@ -376,7 +375,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="reverse"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static uint GetUInt32(this IList<byte> array, ref int index, in bool reverse = false)
         {
             return (uint)GetNumber(array, ref index, 4, 0xFFU, reverse);
@@ -389,7 +388,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="reverse"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static long GetInt64(this IList<byte> array, ref int index, in bool reverse = false)
         {
             return GetNumber(array, ref index, 8, 0xFFFL, reverse);
@@ -402,7 +401,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="reverse"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static ulong GetUInt64(this IList<byte> array, ref int index, in bool reverse = false)
         {
             var value = 0UL;
@@ -425,7 +424,7 @@ namespace AIO
         /// <param name="reverse"></param>
         /// <returns></returns>
         /// <exception cref="NullReferenceException"></exception>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static float GetFloat(this IList<byte> array, ref int index, in bool all = false, in bool reverse = false)
         {
             var bytes = GetByteArray(array, ref index, reverse);
@@ -447,7 +446,7 @@ namespace AIO
         /// <param name="reverse"></param>
         /// <returns></returns>
         /// <exception cref="NullReferenceException"></exception>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static double GetDouble(this IList<byte> array, ref int index, in bool all = false, in bool reverse = false)
         {
             var bytes = GetByteArray(array, ref index, reverse);
@@ -467,7 +466,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="reverse"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static decimal GetDecimal(this IList<byte> array, ref int index, in bool reverse = false)
         {
             var list = new int[GetLen(array, ref index)];
@@ -488,7 +487,7 @@ namespace AIO
         /// <param name="reverse"></param>
         /// <returns></returns>
         /// <exception cref="SystemException"></exception>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static string GetString(this IList<byte> array, ref int index, Encoding encoding = null, in bool reverse = false)
         {
             var len = GetLen(array, ref index);
@@ -524,7 +523,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="reverse"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static string GetStringUTF8(this IList<byte> array, ref int index, in bool reverse = false)
         {
             return GetString(array, ref index, Encoding.UTF8, reverse);
@@ -537,7 +536,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="reverse"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static string GetStringASCII(this IList<byte> array, ref int index, in bool reverse = false)
         {
             return GetString(array, ref index, Encoding.ASCII, reverse);
@@ -550,7 +549,7 @@ namespace AIO
         /// <param name="index"></param>
         /// <param name="reverse"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         public static string GetStringUnicode(this IList<byte> array, ref int index, in bool reverse = false)
         {
             return GetString(array, ref index, Encoding.Unicode, reverse);

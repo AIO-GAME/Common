@@ -39,7 +39,7 @@ namespace AIO
 
             if (value.Length <= 0)
             {
-                WriteLen(value.Length);
+                WriteLen(0);
                 return;
             }
 

@@ -6,7 +6,6 @@
 
 using System.IO;
 using System.Runtime.CompilerServices;
-
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -20,7 +19,6 @@ public partial class Utils
         /// <summary>
         /// 序列化
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Serialize(in object data)
         {
             var serializer = new SerializerBuilder().WithIndentedSequences()
@@ -31,7 +29,6 @@ public partial class Utils
         /// <summary>
         /// 序列化
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToJson(in string data)
         {
             var deserializer = new DeserializerBuilder().Build();
@@ -43,7 +40,6 @@ public partial class Utils
         /// <summary>
         /// 反序列化
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Deserialize<T>(in string data)
         {
             return new DeserializerBuilder()
