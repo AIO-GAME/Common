@@ -13,11 +13,11 @@ namespace AIO
             // 第一个字节若小于 0x20否则该字节不能表示为长度
             if (n < 0x20) return -1;
             // 第一个字节若大于 0x20(二进制为:0010 0000)则减去 1<<5<<(8*3)    (补3个字节位数)即为长度值 int.MaxValue - int.MinValue  
-            if (n < 0x40) return Arrays.GetInt32(ref ReadIndex) & 0x1FFFFFFF; //1 << 29 - 1 = 536870911 = 0x1FFFFFFF
+            if (n < 0x40) unchecked { return Arrays.GetInt32(ref ReadIndex) & 0x1FFFFFFF; }//1 << 29 - 1 = 536870911 = 0x1FFFFFFF
             // 第一个字节若大于 0x40(二进制为:0100 0000)则减去 1<<6<<8        (补1个字节位数)即为长度值 ushort.MaxValue - ushort.MinValue
-            if (n < 0x80) return Arrays.GetUInt16(ref ReadIndex) & 0x3FFF; //1 << 14 - 1 = 16383 = 0x3FFF
+            if (n < 0x80) unchecked { return Arrays.GetUInt16(ref ReadIndex) & 0x3FFF; } //1 << 14 - 1 = 16383 = 0x3FFF
             // 第一个字节若大于 0x80(二进制为:1000 0000)则减去 1<<7                        即为长度值                       
-            else return ReadByte() & 0x7F; //1 << 7 - 1 = 127 = 0x7F
+            else unchecked { return ReadByte() & 0x7F; } //1 << 7 - 1 = 127 = 0x7F
         }
 
         /// <inheritdoc/> 
