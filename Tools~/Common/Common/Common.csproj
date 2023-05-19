@@ -217,6 +217,12 @@
     <Compile Include="Script\Tools\Interface\Write\IWriteUInt16.cs" />
     <Compile Include="Script\Tools\Interface\Write\IWriteUInt32.cs" />
     <Compile Include="Script\Tools\Interface\Write\IWriteUInt64.cs" />
+    <Compile Include="Script\Tools\Mail\Mail.Usage.cs" />
+    <Compile Include="Script\Tools\Mail\MailHandle.cs" />
+    <Compile Include="Script\Tools\Mail\MailMultipInfo.cs" />
+    <Compile Include="Script\Tools\Mail\MailMultipleHandle.cs" />
+    <Compile Include="Script\Tools\Mail\MailSingleHandle.cs" />
+    <Compile Include="Script\Tools\Mail\MailSingleInfo.cs" />
     <Compile Include="Script\Tools\Storage\Bin\Bin.Dictionary.cs" />
     <Compile Include="Script\Tools\Storage\Bin\Bin.HashSet.cs" />
     <Compile Include="Script\Tools\Storage\Bin\Bin.List.cs" />
@@ -226,6 +232,7 @@
     <Compile Include="Script\Tools\Storage\Storage.cs" />
     <Compile Include="Script\Tools\Storage\Storage.List.cs" />
     <Compile Include="Script\Tools\Storage\StorageFile.cs" />
+    <Compile Include="Script\Tools\Timer\TimerTaskContainer.cs" />
     <Compile Include="Script\Utils.cs" />
     <Compile Include="Script\Utils\Database\PList\IPListElement.cs" />
     <Compile Include="Script\Utils\Database\PList\PListBinaryReader.cs" />

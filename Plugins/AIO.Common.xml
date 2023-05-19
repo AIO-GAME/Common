@@ -4721,6 +4721,317 @@
             写入指定数据类型
             </summary>
         </member>
+        <member name="T:AIO.MailHandle">
+            <summary>
+            邮件处理
+            </summary>
+        </member>
+        <member name="P:AIO.MailHandle.SmtpClient">
+            <summary>
+            Smtp客户端
+            </summary>
+        </member>
+        <member name="P:AIO.MailHandle.MailMessage">
+            <summary>
+            邮件主体
+            </summary>
+        </member>
+        <member name="P:AIO.MailHandle.Addresser">
+            <summary>
+            发件人
+            </summary>
+        </member>
+        <member name="P:AIO.MailHandle.MailMessageIsBodyHtml">
+            <summary>
+            是否支持内容为HTML
+            </summary>
+        </member>
+        <member name="P:AIO.MailHandle.MailMessagePriority">
+            <summary>
+            信息优先级
+            </summary>
+        </member>
+        <member name="P:AIO.MailHandle.ClientHost">
+            <summary>
+            Host Example : smtp.exmail.qq.com
+            </summary>
+        </member>
+        <member name="P:AIO.MailHandle.ClientEnableSsl">
+            <summary>
+            是否启用SSL
+            </summary>
+        </member>
+        <member name="P:AIO.MailHandle.ClientPort">
+            <summary>
+            端口
+            </summary>
+        </member>
+        <member name="P:AIO.MailHandle.ClientCredentials">
+            <summary>
+            通行证
+            </summary>
+        </member>
+        <member name="P:AIO.MailHandle.Subject">
+            <summary>
+            默认标题
+            </summary>
+        </member>
+        <member name="M:AIO.MailHandle.AddCRecipients(System.Net.Mail.MailAddress[])">
+            <summary>
+            添加 抄送人
+            </summary>
+        </member>
+        <member name="M:AIO.MailHandle.AddCRecipients(System.String[])">
+            <summary>
+            添加 抄送人
+            </summary>
+        </member>
+        <member name="M:AIO.MailHandle.ClearCRecipients(System.Net.Mail.MailAddress[])">
+            <summary>
+            清空抄送人
+            </summary>
+        </member>
+        <member name="M:AIO.MailHandle.RemoveCRecipients(System.Net.Mail.MailAddress[])">
+            <summary>
+            移除 抄送人
+            </summary>
+        </member>
+        <member name="M:AIO.MailHandle.RemoveCRecipients(System.String[])">
+            <summary>
+            移除 抄送人
+            </summary>
+        </member>
+        <member name="M:AIO.MailHandle.SendMail(System.Action)">
+            <summary>
+            发送邮件
+            </summary>
+        </member>
+        <member name="M:AIO.MailHandle.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.MailMultipInfo">
+            <summary>
+            邮件 一对一 传入参数
+            </summary>
+        </member>
+        <member name="F:AIO.MailMultipInfo.Form">
+            <summary>
+            发送者 地址
+            </summary>
+        </member>
+        <member name="F:AIO.MailMultipInfo.FormPort">
+            <summary>
+            发送者 端口
+            </summary>
+        </member>
+        <member name="F:AIO.MailMultipInfo.FormDisplayName">
+            <summary>
+            发送者  昵称  如果没有则用地址代替
+            </summary>
+        </member>
+        <member name="F:AIO.MailMultipInfo.Passwrod">
+            <summary>
+            凭证授权码
+            </summary>
+        </member>
+        <member name="F:AIO.MailMultipInfo.Encoding">
+            <summary>
+            编码格式
+            </summary>
+        </member>
+        <member name="F:AIO.MailMultipInfo.ClientHost">
+            <summary>
+            连接服务器 地址 例子:"smtp.qq.com"
+            </summary>
+        </member>
+        <member name="F:AIO.MailMultipInfo.ClientEnableSsl">
+            <summary>
+            连接服务器 SSL验证
+            </summary>
+        </member>
+        <member name="F:AIO.MailMultipInfo.ClientTimeout">
+            <summary>
+            连接服务器 超时秒限制
+            </summary>
+        </member>
+        <member name="F:AIO.MailMultipInfo.ClientDeliveryMethod">
+            <summary>
+            连接服务器 连接方式
+            </summary>
+        </member>
+        <member name="F:AIO.MailMultipInfo.ClientUseDefaultCredentials">
+            <summary>
+            连接服务器 是否使用默认凭证
+            </summary>
+        </member>
+        <member name="M:AIO.MailMultipInfo.#ctor(System.String,System.String,System.String)">
+            <summary>
+            邮件
+            </summary>
+            <param name="form"></param>
+            <param name="to"></param>
+            <param name="passwrod"></param>
+        </member>
+        <member name="T:AIO.MailMultipleHandle">
+            <summary>
+            邮件 一对多
+            </summary>
+        </member>
+        <member name="M:AIO.MailMultipleHandle.#ctor(AIO.MailMultipInfo,System.String)">
+            <summary>
+            邮件
+            </summary>
+            <param name="Info"></param>
+            <param name="subject"></param>
+        </member>
+        <member name="M:AIO.MailMultipleHandle.AddRecipients(System.Net.Mail.MailAddress[])">
+            <summary>
+            添加 收件人
+            </summary>
+        </member>
+        <member name="M:AIO.MailMultipleHandle.AddRecipients(System.String[])">
+            <summary>
+            添加 收件人
+            </summary>
+        </member>
+        <member name="M:AIO.MailMultipleHandle.RemoveRecipients(System.Net.Mail.MailAddress[])">
+            <summary>
+            移除 收件人
+            </summary>
+        </member>
+        <member name="M:AIO.MailMultipleHandle.RemoveRecipients(System.String[])">
+            <summary>
+            移除 收件人
+            </summary>
+        </member>
+        <member name="M:AIO.MailMultipleHandle.Send(System.String,System.Action)">
+            <summary>
+            发送邮件
+            </summary>
+            <param name="Body">内容主体</param>
+            <param name="CallBack">回调</param>
+        </member>
+        <member name="M:AIO.MailMultipleHandle.Send(System.String,System.Net.Mail.MailAddress[],System.Action)">
+            <summary>
+            发送邮件
+            </summary>
+            <param name="Body">内容主体</param>
+            <param name="CallBack">回调</param>
+            <param name="Addresses">接收者</param>
+        </member>
+        <member name="M:AIO.MailMultipleHandle.Send(System.String,System.String,System.Action)">
+            <summary>
+            发送邮件
+            </summary>
+            <param name="Label">邮件标题</param>
+            <param name="Body">内容主体</param>
+            <param name="CallBack">回调</param>
+        </member>
+        <member name="T:AIO.MailSingleHandle">
+            <summary>
+            单对单 直接发送
+            </summary>
+        </member>
+        <member name="P:AIO.MailSingleHandle.Recipients">
+            <summary>
+            收件人
+            </summary>
+        </member>
+        <member name="M:AIO.MailSingleHandle.#ctor(AIO.MailSingleInfo,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="Info"></param>
+            <param name="subject"></param>
+        </member>
+        <member name="M:AIO.MailSingleHandle.Send(System.String,System.Action)">
+            <summary>
+            发送邮件
+            </summary>
+            <param name="Body">内容主体</param>
+            <param name="CallBack">回调</param>
+        </member>
+        <member name="M:AIO.MailSingleHandle.Send(System.String,System.String,System.Action)">
+            <summary>
+            发送邮件
+            </summary>
+            <param name="Label">邮件标题</param>
+            <param name="Body">内容主体</param>
+            <param name="CallBack">回调</param>
+        </member>
+        <member name="T:AIO.MailSingleInfo">
+            <summary>
+            邮件 一对一 传入参数
+            </summary>
+        </member>
+        <member name="F:AIO.MailSingleInfo.Form">
+            <summary>
+            发送者 地址
+            </summary>
+        </member>
+        <member name="F:AIO.MailSingleInfo.FormPort">
+            <summary>
+            发送者 端口
+            </summary>
+        </member>
+        <member name="F:AIO.MailSingleInfo.FormDisplayName">
+            <summary>
+            发送者  昵称  如果没有则用地址代替
+            </summary>
+        </member>
+        <member name="F:AIO.MailSingleInfo.To">
+            <summary>
+            接收者 地址
+            </summary>
+        </member>
+        <member name="F:AIO.MailSingleInfo.ToDisplayName">
+            <summary>
+            接收者 昵称
+            </summary>
+        </member>
+        <member name="F:AIO.MailSingleInfo.Passwrod">
+            <summary>
+            凭证授权码
+            </summary>
+        </member>
+        <member name="F:AIO.MailSingleInfo.Encoding">
+            <summary>
+            编码格式
+            </summary>
+        </member>
+        <member name="F:AIO.MailSingleInfo.ClientHost">
+            <summary>
+            连接服务器 地址 例子:"smtp.qq.com"
+            </summary>
+        </member>
+        <member name="F:AIO.MailSingleInfo.ClientEnableSsl">
+            <summary>
+            连接服务器 SSL验证
+            </summary>
+        </member>
+        <member name="F:AIO.MailSingleInfo.ClientTimeout">
+            <summary>
+            连接服务器 超时秒限制
+            </summary>
+        </member>
+        <member name="F:AIO.MailSingleInfo.ClientDeliveryMethod">
+            <summary>
+            连接服务器 连接方式
+            </summary>
+        </member>
+        <member name="F:AIO.MailSingleInfo.ClientUseDefaultCredentials">
+            <summary>
+            连接服务器 是否使用默认凭证
+            </summary>
+        </member>
+        <member name="M:AIO.MailSingleInfo.#ctor(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="form"></param>
+            <param name="to"></param>
+            <param name="passwrod"></param>
+        </member>
         <member name="T:AIO.BinDictionary`2">
             <summary>
             数据字典
