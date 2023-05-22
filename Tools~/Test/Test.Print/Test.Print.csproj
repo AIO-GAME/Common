@@ -17,6 +17,7 @@
     <ProjectReference Include="..\..\Print\Print.Console\Print.Console.csproj" />
     <ProjectReference Include="..\..\Print\Print.Unity\Print.Unity.csproj" />
     <ProjectReference Include="..\..\Print\Print\Print.csproj" />
+    <ProjectReference Include="..\..\Process\Process\Process.csproj" />
   </ItemGroup>
 
 </Project>

@@ -34,7 +34,7 @@ namespace AIO
             /// <returns></returns>
             public static IExecutor ALL(in string work)
             {
-                return Create(work, "svn status | awk '{if ($1 == \"?\") {print $2} }' | xargs svn add");
+                return Create(work, "add *. --parents --no-auto-props");
             }
 
             /// <summary>
@@ -45,7 +45,7 @@ namespace AIO
             /// <returns></returns>
             public static IExecutor ALLWithExtension(in string work, in string ext)
             {
-                return Create(work, $"add *.{ext} --no-ignore --force");
+                return Create(work, "add *.{0} --parents --no-auto-props", ext);
             }
 
             /// <summary>
@@ -56,7 +56,7 @@ namespace AIO
             /// <returns></returns>
             public static IExecutor Specify(in string work, in string path)
             {
-                return Create(work, $"add {path}");
+                return Create(work, $"add {path} --parents");
             }
         }
     }

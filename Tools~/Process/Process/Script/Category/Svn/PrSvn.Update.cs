@@ -24,6 +24,16 @@ namespace AIO
                 if (string.IsNullOrEmpty(args)) throw new System.ArgumentNullException(nameof(args));
                 return Create(work, "update {0}", args);
             }
+
+            /// <summary>
+            /// 更新全部
+            /// </summary>
+            /// <param name="work">文件夹</param>
+            /// <returns>执行器</returns>
+            public static IExecutor ALL(in string work)
+            {
+                return Create(work, "update . --parents --ignore-externals");
+            }
         }
     }
 }
