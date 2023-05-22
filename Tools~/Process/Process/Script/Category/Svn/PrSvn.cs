@@ -1,8 +1,8 @@
-﻿/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-11-23                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+/*|============|*|
+|*|Author:     |*| xinan                
+|*|Date:       |*| 2023-05-21               
+|*|E-Mail:     |*| 1398581458@qq.com     
+|*|============|*/
 
 using System;
 using System.Collections.Generic;
@@ -11,19 +11,18 @@ using System.Text;
 namespace AIO
 {
     /// <summary>
-    /// Git[WIN][MAC][LINUX]
+    /// PrSvn[WIN][MAC][LINUX]
     /// </summary>
-    public sealed partial class PrGit : PrCourse
+    public sealed partial class PrSvn : PrCourse
     {
         /// <summary>
         /// 命令
         /// </summary>
-        public const string CMD = "git";
+        public const string CMD = "svn";
 
         /// <summary>
         /// 运行
         /// </summary>
-        /// <returns></returns>
         public override IExecutor Execute()
         {
             try
@@ -55,7 +54,7 @@ namespace AIO
 
         private static IPrCourse Create()
         {
-            return Activator.CreateInstance<PrGit>().SetInEncoding(Encoding.UTF8);
+            return Activator.CreateInstance<PrSvn>().SetInEncoding(Encoding.UTF8);
         }
 
         #region Create
