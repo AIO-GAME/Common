@@ -1207,7 +1207,7 @@
         </member>
         <member name="F:AIO.PrGit.CMD">
             <summary>
-            
+            命令
             </summary>
         </member>
         <member name="M:AIO.PrGit.Execute">
@@ -2474,6 +2474,374 @@
              <summary>
             
              </summary>
+        </member>
+        <member name="T:AIO.PrSvn">
+            <summary>
+            PrSvn[WIN][MAC][LINUX]
+            </summary>
+        </member>
+        <member name="T:AIO.PrSvn.Add">
+            <summary>
+            添加命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrSvn.Add.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrSvn.Add.ALL(System.String@)">
+            <summary>
+            添加所有文件
+            </summary>
+            <param name="work">文件夹</param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.PrSvn.Add.ALLWithExtension(System.String@,System.String@)">
+            <summary>
+            添加所有文件 并显示详细信息
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="ext">扩展类型 不包含. 例:(.php)->(php)</param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.PrSvn.Add.Specify(System.String@,System.String@)">
+            <summary>
+            添加指定文件
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="path">被添加资源路径</param>
+            <returns></returns>
+        </member>
+        <member name="T:AIO.PrSvn.Cat">
+            <summary>
+            查找 命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrSvn.Cat.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrSvn.Commit">
+            <summary>
+            提交 命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrSvn.Commit.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrSvn.Commit.ALL(System.String@,System.String@)">
+            <summary>
+            提交全部
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="message">提交消息</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="F:AIO.PrSvn.CMD">
+            <summary>
+            命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrSvn.Execute">
+            <summary>
+            运行
+            </summary>
+        </member>
+        <member name="M:AIO.PrSvn.Create(System.String@,System.String@,System.Object[])">
+            <summary>
+            创建
+            </summary>
+            <param name="work">工作路径:NoNull</param>                      
+            <param name="format">Format:NoNull</param>
+            <param name="args">格式化参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrSvn.Create(System.String@,System.Text.StringBuilder@)">
+            <summary>
+            创建
+            </summary>
+            <param name="work">工作路径:NoNull</param>                   
+            <param name="args">参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrSvn.Create(System.String@,System.String@)">
+            <summary>
+            创建
+            </summary>
+            <param name="work">工作路径:NoNull</param>             
+            <param name="args">参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrSvn.Create(System.String@,System.Collections.Generic.ICollection{System.String}@)">
+            <summary>
+            创建
+            </summary>
+            <param name="work">工作路径:NoNull</param>                          
+            <param name="args">参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrSvn.Create(System.String@)">
+            <summary>
+            创建
+            </summary>
+            <param name="work">工作路径:NoNull</param>            
+            <returns>结果执行器</returns>
+        </member>
+        <member name="T:AIO.PrSvn.Delete">
+            <summary>
+            删除 命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrSvn.Delete.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrSvn.Delete.ALL(System.String@)">
+            <summary>
+            删除所有文件
+            </summary>
+            <param name="work">文件夹</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrSvn.Delete.ALLWithExtension(System.String@,System.String@)">
+            <summary>
+            删除指定类型的所有文件
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="ext">扩展类型 不包含. 例:(.php)->(php)</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrSvn.Delete.Specify(System.String@,System.String@)">
+            <summary>
+            删除指定文件
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="path">被添加资源路径</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrSvn.Delete.URL(System.String@,System.String@)">
+            <summary>
+            删除指定URL
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="url">URL地址</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrSvn.Delete.ALLWithChnage(System.String@)">
+            <summary>
+            删除已修改的全部文件
+            </summary>
+            <param name="work">文件夹</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrSvn.Diff">
+            <summary>
+            对比 命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrSvn.Diff.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrSvn.Help">
+            <summary>
+            帮助 命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrSvn.Help.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrSvn.Infos">
+            <summary>
+            信息 命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrSvn.Infos.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrSvn.List">
+            <summary>
+            列表 命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrSvn.List.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrSvn.Log">
+            <summary>
+            日志 命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrSvn.Log.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrSvn.Merge">
+            <summary>
+            合并 命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrSvn.Merge.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrSvn.Mkdir">
+            <summary>
+            创建文件夹 命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrSvn.Mkdir.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrSvn.Resolved">
+            <summary>
+            解决冲突 命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrSvn.Resolved.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrSvn.Revert">
+            <summary>
+            还原 命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrSvn.Revert.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrSvn.Revert.Specify(System.String@,System.String@)">
+            <summary>
+            还原指定文件
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="path">资源路径</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrSvn.Revert.SpecifyWithExtension(System.String@,System.String@)">
+            <summary>
+            还原指定文件
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="extension">扩展名</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrSvn.Status">
+            <summary>
+            状态 命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrSvn.Status.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrSvn.Switch">
+            <summary>
+            切换 命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrSvn.Switch.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrSvn.Update">
+            <summary>
+            更新 命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrSvn.Update.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="M:AIO.PrSvn.Update.ALL(System.String@)">
+            <summary>
+            更新全部
+            </summary>
+            <param name="work">文件夹</param>
+            <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrSvn.CheckOut">
+            <summary>
+            导出 命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrSvn.CheckOut.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
         </member>
         <member name="T:AIO.PrCmd">
             <summary>

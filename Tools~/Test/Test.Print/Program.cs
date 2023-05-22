@@ -1,11 +1,10 @@
-﻿namespace AIO
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System;
 
-    class Program
+namespace AIO
+{
+    internal class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Console.WriteLine(" - ----------------------- - ");
 
@@ -23,15 +22,14 @@
             Console.Read();
         }
 
-        static void Test1()
+        public static void Test1()
         {
-            var bbb = new Dictionary<string, int>(10);
-            for (int i = 0; i < 10; i++)
-            {
-                bbb.Add(DateTime.Now.AddDays(i).ToString(), i);
-            }
+            var svnroot = @"E:\Work-G\g108\config";
+            var extension = "txt";
 
-            CPrint.Log(bbb);
+            PrSvn.Update.ALL(svnroot).Sync().Debug();
+            PrSvn.Add.ALLWithExtension(svnroot, extension).Sync().Debug();
+            PrSvn.Commit.Execute(svnroot, "SVN测试").Sync().Debug();
         }
     }
 }
