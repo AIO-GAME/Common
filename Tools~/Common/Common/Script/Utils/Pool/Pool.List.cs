@@ -9,7 +9,6 @@ public static partial class Pool
     /// </summary>
     public static class List<T>
     {
-
         private static readonly System.Collections.Generic.Stack<System.Collections.Generic.List<T>>
             free = new System.Collections.Generic.Stack<System.Collections.Generic.List<T>>();
 
