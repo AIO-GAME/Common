@@ -23,7 +23,6 @@ namespace AIO
         /// <summary>
         /// 获取属性值
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T GetAttribute<T>(this Enum value) where T : Attribute
         {
             var fieldInfo = value.GetType().GetField(value.ToString());
@@ -34,7 +33,6 @@ namespace AIO
         /// <summary>
         /// Gets attributes on an enum member, eg. enum E { [Attr] A }
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<T> GetAttributeOfEnumMember<T>(this Enum enumVal) where T : Attribute
         {
             var type = enumVal.GetType();
@@ -66,7 +64,6 @@ namespace AIO
         /// <summary>
         /// 获取自定义属性值
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string GetDescription<T>(this T value) where T : struct, Enum
         {
             var description = value.ToString();
