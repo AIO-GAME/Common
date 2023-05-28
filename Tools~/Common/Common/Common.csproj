@@ -356,6 +356,7 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.46" />
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.3</Version>
     </PackageReference>
@@ -383,6 +384,12 @@
 @cd /d $(SolutionDir)
 @cd ..
 @set cur=%25cd%25\Plugins\
+@set dllname=HtmlAgilityPack
+@copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll
+)
+@if exist %25CUR_DLL%25%25dllname%25.xml (
+@copy /y /v %25CUR_DLL%25%25dllname%25.xml %25cur%25%25dllname%25.xml
+)
 
 @set dllname=ICSharpCode.SharpZipLib
 @copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll
