@@ -11,7 +11,7 @@ mergeInto(LibraryManager.library, {
 		var xhr = new XMLHttpRequest();
 		xhr.open('HEAD', Pointer_stringify(url), false);
 		xhr.send();
-		return xhr.status == 200 ? 1 : 0;
+		return xhr.status == 200;
 	},
 
 	// Check whether the directory exists
@@ -28,22 +28,28 @@ mergeInto(LibraryManager.library, {
 	 * @param {string} url 
 	 * @param {(int)=>int} callback 
 	 */
-	JSReadBinaryFile: function (url, callback) {
+	JSReadBinaryFile: function (url) {
 		var xhr = new XMLHttpRequest();
-		xhr.open('GET', Pointer_stringify(url), true);
+		xhr.open('GET', Pointer_stringify(url), false);
 		xhr.responseType = 'arraybuffer';
+
+		var tbuffer = 0;
+		var tlength = 0;
 		xhr.onload = function () {
 			if (xhr.status == 200) {
 				var byteArray = new Uint8Array(xhr.response);
 				var buffer = _malloc(byteArray.length);
 				HEAPU8.set(byteArray, buffer);
-				Runtime.dynCall('vii', callback, [buffer, byteArray.length]);
+				tbuffer = buffer;
+				tlength = byteArray.length;
+				// Runtime.dynCall('vii', callback, [buffer, byteArray.length]);
 				_free(buffer);
 			} else {
-				Runtime.dynCall('vii', callback, [0, 0]);
+				// Runtime.dynCall('vii', callback, [0, 0]);
 			}
 		};
 		xhr.send();
+		return [tbuffer, tlength];
 	},
 
 /**
@@ -51,7 +57,7 @@ mergeInto(LibraryManager.library, {
  * @param {string} path
  * @param {(string)=>any} callback
  */
- ReadXMLFile : function (path, callback) {
+ JSReadXMLFile : function (path, callback) {
   var xhr = new XMLHttpRequest();
   xhr.responseType = 'document';
   xhr.onload = function() {
@@ -80,7 +86,7 @@ mergeInto(LibraryManager.library, {
  * @param  callback 
  * 
  */
-ReadJSONFile:function (path, callback) {
+JSReadJSONFile:function (path, callback) {
   var xhr = new XMLHttpRequest();
   xhr.responseType = 'text';
   xhr.onload = function() {
@@ -105,7 +111,7 @@ ReadJSONFile:function (path, callback) {
 
 
 //write binary file 
-WriteBinaryFile2:function (filePath, data, size) {
+JSWriteBinaryFile2:function (filePath, data, size) {
   var dataArray = new Uint8Array(HEAPU8.buffer, data, size);
   var file = new Blob([dataArray], {type: "application/octet-stream"});
   saveAs(file, UTF8ToString(filePath));
@@ -114,7 +120,7 @@ WriteBinaryFile2:function (filePath, data, size) {
 
 
 //write XML file 
-WriteXmlFile2 :  function (filePath, obj) {
+JSWriteXmlFile2 :  function (filePath, obj) {
   var xw = new XMLWriter();
   xw.startDocument();
   xw.startElement("root");
@@ -134,7 +140,7 @@ WriteXmlFile2 :  function (filePath, obj) {
 
 
 //write JSON file 
-WriteJsonFile : function (filePath, obj) {
+JSWriteJsonFile : function (filePath, obj) {
   var json = JSON.stringify(obj);
 
   var blob = new Blob([json], {type: "application/json"});
@@ -148,7 +154,7 @@ WriteJsonFile : function (filePath, obj) {
  * @param {string} filePathPtr 
  * @returns {boolean}
  */
-DeleteFile :  function(filePathPtr) {
+JSDeleteFile :  function(filePathPtr) {
   var filePath = UTF8ToString(filePathPtr); 
 
   try {
@@ -174,7 +180,7 @@ DeleteFile :  function(filePathPtr) {
  * @param {string} newPathPtr 
  * @returns {boolean}
  */
-MoveFile: function(oldPathPtr, newPathPtr) {
+JSMoveFile: function(oldPathPtr, newPathPtr) {
   var oldPath = UTF8ToString(oldPathPtr);
   var newPath = UTF8ToString(newPathPtr); 
 
@@ -217,7 +223,7 @@ CopyFile: function (srcPath, destPath) {
  * @param {boolean} recursive 
  * @returns {*} 
  */
-ReadFolder:function(folderPathPtr, recursive) {
+JSReadFolder:function(folderPathPtr, recursive) {
   var folderPath = UTF8ToString(folderPathPtr); 
 
   try {
@@ -252,25 +258,23 @@ ReadFolder:function(folderPathPtr, recursive) {
 
 
 // write folder
-WriteFolder: function (path) {
+JSCreateFolder: function (path) {
   var folderPath = Pointer_stringify(path);
   FS.mkdir(folderPath);
 },
 
-
-
- DeleteFolder:function (path) {
+JSDeleteFolder:function (path) {
   var folderPath = Pointer_stringify(path);
   FS.rmdir(folderPath);
 },
 
-MoveFolder: function (oldPath, newPath) {
+JSMoveFolder: function (oldPath, newPath) {
   var oldFolderPath = Pointer_stringify(oldPath);
   var newFolderPath = Pointer_stringify(newPath);
   FS.rename(oldFolderPath, newFolderPath);
 },
 
-CopyFolder:function (srcPath, destPath) {
+JSCopyFolder:function (srcPath, destPath) {
   var srcFolderPath = Pointer_stringify(srcPath);
   var destFolderPath = Pointer_stringify(destPath);
 
