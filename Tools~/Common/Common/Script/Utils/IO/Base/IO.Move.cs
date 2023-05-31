@@ -10,6 +10,9 @@ public partial class Utils
         /// <summary>
         /// 移动文件
         /// </summary>
+        /// <param name="source">源路径</param>
+        /// <param name="target">目标路径</param>
+        /// <param name="overlay">Ture:覆盖 False:不覆盖</param>
         public static void MoveFile(
             in string source,
             in string target,
@@ -23,12 +26,20 @@ public partial class Utils
                 else return;
             }
 
+            if (!Directory.GetParent(target).Exists)
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(target));
+            }
+
             File.Move(source, target);
         }
 
         /// <summary>
-        /// 移动文件夹
+        /// 移动文件
         /// </summary>
+        /// <param name="source">源路径</param>
+        /// <param name="target">目标路径</param>
+        /// <param name="overlay">Ture:覆盖 False:不覆盖</param>
         public static void MoveFolder(
             in string source,
             in string target,

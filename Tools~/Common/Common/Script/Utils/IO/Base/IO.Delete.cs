@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 public partial class Utils
@@ -13,7 +12,6 @@ public partial class Utils
         /// 删除文件
         /// </summary>
         /// <param name="path">文件相对路径</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DeleteFile(in string path)
         {
             if (File.Exists(path)) File.Delete(path);
@@ -23,7 +21,6 @@ public partial class Utils
         /// 删除文件
         /// </summary>
         /// <param name="path">文件相对路径</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DeleteFile(in FileInfo path)
         {
             if (path.Exists) path.Delete();
@@ -33,7 +30,6 @@ public partial class Utils
         /// 删除文件
         /// </summary>
         /// <param name="list">文件相对路径</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DeleteFile(in IEnumerable<string> list)
         {
             Parallel.ForEach(list, file => { DeleteFile(file); });
@@ -43,7 +39,6 @@ public partial class Utils
         /// 删除文件
         /// </summary>
         /// <param name="list">文件相对路径</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DeleteFile(in IEnumerable<FileInfo> list)
         {
             Parallel.ForEach(list, file => { DeleteFile(file); });
@@ -53,7 +48,6 @@ public partial class Utils
         /// 删除文件
         /// </summary>
         /// <param name="list">文件相对路径</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DeleteFile(params FileInfo[] list)
         {
             Parallel.ForEach(list, file => { DeleteFile(file); });
@@ -63,7 +57,6 @@ public partial class Utils
         /// 删除文件
         /// </summary>
         /// <param name="list">文件相对路径</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DeleteFile(params string[] list)
         {
             Parallel.ForEach(list, file => { DeleteFile(file); });
@@ -75,7 +68,6 @@ public partial class Utils
         /// <param name="folder">文件夹路径</param>
         /// <param name="pattern">匹配模式</param>
         /// <param name="option">查询模式</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DeleteFile(
             in string folder,
             in string pattern,
@@ -89,7 +81,6 @@ public partial class Utils
         /// <summary>
         /// 删除文件夹
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DeleteFolder(
             in DirectoryInfo folder,
             in SearchOption option = SearchOption.AllDirectories,
@@ -103,7 +94,6 @@ public partial class Utils
         /// <summary>
         /// 删除文件夹
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DeleteFolder(
             in string folder,
             in SearchOption option = SearchOption.AllDirectories,
@@ -115,7 +105,6 @@ public partial class Utils
         /// <summary>
         /// 删除文件夹
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DeleteFolder(
             in IEnumerable<string> folders,
             SearchOption option = SearchOption.AllDirectories,
@@ -127,7 +116,6 @@ public partial class Utils
         /// <summary>
         /// 删除文件夹
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DeleteFolder(
             in IEnumerable<DirectoryInfo> folders,
             SearchOption option = SearchOption.AllDirectories,

@@ -6,7 +6,6 @@
 
 
 using System.IO;
-using System.Runtime.CompilerServices;
 
 public partial class Utils
 {
@@ -15,7 +14,6 @@ public partial class Utils
         /// <summary>
         /// 拷贝子节点
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void CopyChildNode(
             in string sourceFilePath,
             in string destinationFilePath,
@@ -37,7 +35,6 @@ public partial class Utils
         /// <param name="sourceFilePath">原文件路径</param>
         /// <param name="destinationFilePath">目标文件路径</param>
         /// <param name="overwrite"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void CopyFolderPart(
             in string sourceFilePath,
             in string destinationFilePath,
@@ -68,7 +65,6 @@ public partial class Utils
         /// <param name="sourceFilePath">原文件路径</param>
         /// <param name="destinationFilePath">目标文件路径</param>
         /// <param name="overwrite"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void CopyFolderAll(
             in string sourceFilePath,
             in string destinationFilePath,
@@ -94,7 +90,6 @@ public partial class Utils
         /// <summary>
         /// 复制文件
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool CopyFile(
             in string fromPath,
             in string toPath,
@@ -115,7 +110,6 @@ public partial class Utils
         /// <param name="destinationFilePath">目标文件的路径</param>
         /// <param name="bufferSize">缓冲区大小，用于每次读取和写入的字节数</param>
         /// <returns>是否成功复制文件</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool CopyFile(
             in string sourceFilePath,
             in string destinationFilePath,
