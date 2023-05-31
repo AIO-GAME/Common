@@ -158,24 +158,23 @@ var IOUtilsWebGL = {
    */
   MoveFile: function (sourcePath, targetPath) {
     var oldPath = UTF8ToString(sourcePath);
-    var newPath = UTF8ToString(targetPath);
-
-    try {
-      var xhr = new XMLHttpRequest();
-      xhr.open('MOVE', oldPath, false);
-      xhr.setRequestHeader('Destination', newPath);
-      xhr.send();
-
-      if (xhr.status === 200) {
-        return true;
-      } else {
-        console.error('Failed to move file from ' + oldPath + ' to ' + newPath);
-        return false;
-      }
-    } catch (error) {
-      console.error('Failed to move file from ' + oldPath + ' to ' + newPath);
-      return false;
-    }
+        var newPath = UTF8ToString(targetPath);
+        try {
+            var xhr = new XMLHttpRequest;
+            xhr.open("GET", oldPath, false);
+            xhr.setRequestHeader("Destination", newPath);
+            xhr.send();
+            console.log(xhr)
+            if (xhr.status === 200) {
+                return true
+            } else {
+                console.error("Failed to move file from " + oldPath + " to " + newPath);
+                return false
+            }
+        } catch (error) {
+            console.error("Failed to move file from " + oldPath + " to " + newPath);
+            return false
+        }
   },
 
   /**
@@ -186,9 +185,27 @@ var IOUtilsWebGL = {
    */
   CopyFile: function (sourcePath, targetPath) {
     var srcFilePath = UTF8ToString(sourcePath);
-    var destFilePath = UTF8ToString(targetPath);
-    var data = FS.readFile(srcFilePath);
-    FS.writeFile(destFilePath, data);
+        var destFilePath = UTF8ToString(targetPath);
+        var directoryPath = destFilePath.substring(0, destFilePath.lastIndexOf("/"));
+        if (!FS.analyzePath(directoryPath).exists) {
+            FS.mkdirTree(directoryPath);
+        }
+        var data
+        try{
+            var data = FS.readFile(sourcePath);
+        }catch{
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", UTF8ToString(sourcePath), false);
+            xhr.send();
+            var str = "";
+            if (xhr.status == 200) {
+                var res = xhr.response;
+                data = res;
+              
+            }
+            xhr = null;
+        }
+        FS.writeFile(destFilePath, data)
   },
 
   /**
