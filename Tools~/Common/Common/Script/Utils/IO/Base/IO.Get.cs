@@ -5,14 +5,12 @@
 |*|=============================================*/
 
 
-using AIO;
-
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
+using AIO;
 
 public partial class Utils
 {
@@ -91,7 +89,6 @@ public partial class Utils
         /// <param name="pattern">匹配模式</param>
         /// <param name="option">搜查模式</param>
         /// <returns>所有文件信息数组</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<FileInfo> GetFilesInfo(
             in string value,
             in Func<FileInfo, bool> filtration,
@@ -105,7 +102,6 @@ public partial class Utils
         /// <summary>
         /// 获取当前所有文件夹中所有文件信息
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<FileInfo> GetFilesInfo(
             in string value,
             in string pattern = "*",
@@ -118,7 +114,6 @@ public partial class Utils
         /// <summary>
         /// 获取当前所有文件夹中所有文件信息
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<FileInfo> GetFilesInfo(
             in DirectoryInfo value,
             in string pattern = "*",
@@ -135,7 +130,6 @@ public partial class Utils
         /// <param name="pattern">匹配模式</param>
         /// <param name="option">搜索模式</param>
         /// <returns>所有文件夹 绝对路径</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<string> GetFiles(
             in string value,
             in string pattern = "*",
@@ -152,7 +146,6 @@ public partial class Utils
         /// <param name="pattern">匹配模式</param>
         /// <param name="option">搜索模式</param>
         /// <returns>所有文件夹 绝对路径</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<string> GetFiles(
             in string value,
             in Func<FileInfo, bool> filtration,
@@ -169,7 +162,6 @@ public partial class Utils
         /// <param name="pattern">匹配模式</param>
         /// <param name="option">搜索模式</param>
         /// <returns>所有文件夹 相对路径</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<string> GetFilesRelative(
             in string value,
             in string pattern = "*",
@@ -187,7 +179,6 @@ public partial class Utils
         /// <param name="pattern">匹配模式</param>
         /// <param name="option">搜索模式</param>
         /// <returns>所有文件夹 相对路径</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<string> GetFilesRelative(
             in string value,
             in Func<FileInfo, bool> filtration,
@@ -205,7 +196,6 @@ public partial class Utils
         /// <param name="pattern">匹配模式</param>
         /// <param name="option">搜索模式</param>
         /// <returns>所有文件名称</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<string> GetFilesName(
             in string value,
             in string pattern = "*",
@@ -222,7 +212,6 @@ public partial class Utils
         /// <param name="pattern">匹配模式</param>
         /// <param name="option">搜索模式</param>
         /// <returns>所有文件名称</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<string> GetFilesName(
             in string value,
             in Func<FileInfo, bool> filtration,
@@ -239,7 +228,6 @@ public partial class Utils
         /// <param name="pattern">匹配模式</param>
         /// <param name="option">搜索模式</param>
         /// <returns>所有文件夹名称</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<DirectoryInfo> GetFoldersInfo(
             in string value,
             in string pattern = "*",
@@ -257,7 +245,6 @@ public partial class Utils
         /// <param name="pattern">匹配模式</param>
         /// <param name="option">搜索模式</param>
         /// <returns>所有文件夹名称</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<DirectoryInfo> GetFoldersInfo(
             in string value,
             in Func<DirectoryInfo, bool> filtration,
@@ -275,7 +262,6 @@ public partial class Utils
         /// <param name="pattern">匹配模式</param>
         /// <param name="option">搜索模式</param>
         /// <returns>所有文件夹名称</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<string> GetFolders(
             in string value,
             in string pattern = "*",
@@ -304,7 +290,6 @@ public partial class Utils
         /// <summary>
         /// 获取该文件夹下所有文件夹名 不含子文件夹 不包含自己
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<string> GetFoldersName(
             in string value,
             in string pattern = "*",
@@ -316,7 +301,6 @@ public partial class Utils
         /// <summary>
         /// 获取该文件夹下所有文件夹名 不含子文件夹 不包含自己
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<string> GetFoldersName(
             in string value,
             in Func<DirectoryInfo, bool> filtration,
@@ -329,7 +313,6 @@ public partial class Utils
         /// <summary>
         /// 返回文件大小 默认单位KB
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double GetFileSize(in string path, in float unit = 1024f)
         {
             if (!ExistsFile(path)) return 0;
@@ -340,7 +323,6 @@ public partial class Utils
         /// 返回文件字节长度
         /// </summary>
         /// <param name="Path">文件相对路径</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long GetFileLength(in string Path)
         {
             if (!ExistsFile(Path)) return 0;
@@ -353,7 +335,6 @@ public partial class Utils
         /// <param name="file">文件路径</param>
         /// <param name="extension">是否有后缀</param>
         /// <returns>文件名</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string GetFileName(string file, bool extension = true)
         {
             if (extension) return Path.GetFileName(file);
@@ -365,7 +346,6 @@ public partial class Utils
         /// </summary>
         /// <param name="file">文件路径</param>
         /// <returns>文件名</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string GetFileExtension(string file)
         {
             return Path.GetExtension(file);
@@ -375,7 +355,6 @@ public partial class Utils
         /// 获取当前所有文件夹中所有文件信息
         /// </summary>
         /// <param name="value">文件夹路径</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FileInfo GetFileInfo(string value)
         {
             if (!ExistsFile(value)) return null;
@@ -385,7 +364,6 @@ public partial class Utils
         /// <summary>
         /// 获取文件的哈希值
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string GetFileHash(string Path)
         {
             if (!ExistsFile(Path)) throw new FileNotFoundException($"获取文件的哈希值 参数错误 <{Path}>, 不存在");
@@ -407,7 +385,6 @@ public partial class Utils
         /// <summary>
         /// 获取文件的MD5值
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string GetFileMD5(string path, long bufferSize = 1024 * 16)
         {
             if (!ExistsFile(path)) throw new FileNotFoundException($"获取文件的哈希值 参数错误 <{path}>, 不存在");
@@ -449,7 +426,6 @@ public partial class Utils
         /// <summary>
         /// 获取最后写入时间
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static DateTime GetLastWriteTimeUtc(string Path)
         {
             return !ExistsFile(Path) ? DateTime.MinValue : File.GetLastWriteTimeUtc(Path);
@@ -458,7 +434,6 @@ public partial class Utils
         /// <summary>
         /// 获取创建文件时间
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static DateTime GetCreationTimeUtc(string Path)
         {
             return !ExistsFile(Path) ? DateTime.MinValue : File.GetCreationTimeUtc(Path);
@@ -467,7 +442,6 @@ public partial class Utils
         /// <summary>
         /// 获取文件属性
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static FileAttributes GetAttributes(string Path)
         {
             return !ExistsFile(Path) ? 0 : File.GetAttributes(Path);
