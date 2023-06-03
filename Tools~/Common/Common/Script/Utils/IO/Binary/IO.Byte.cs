@@ -7,7 +7,6 @@
 
 using System;
 using System.IO;
-using System.Runtime.CompilerServices;
 
 public partial class Utils
 {
@@ -17,7 +16,6 @@ public partial class Utils
         /// 加载 Byte Array
         /// </summary>
         /// <param name="path">路径</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte[] ReadByteArray(in string path)
         {
             return Read(path);
@@ -26,7 +24,6 @@ public partial class Utils
         /// <summary>
         /// 写入数据
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool WriteByteArray(
             in string path,
             in byte[] bytes,
@@ -89,7 +86,7 @@ public partial class Utils
 
                     while (offset < length)
                     {
-                        var count = System.Math.Min(bufferSize, length - offset);
+                        var count = Math.Min(bufferSize, length - offset);
                         var n = fsSource.ReadAsync(buffer, offset, count).GetAwaiter().GetResult();
                         if (n == 0) break; // 到达文件末尾
                         offset += n;

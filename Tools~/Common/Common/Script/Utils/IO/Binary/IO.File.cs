@@ -5,8 +5,6 @@
 |*|=============================================*/
 
 
-using System.Runtime.CompilerServices;
-
 public partial class Utils
 {
     public partial class IO
@@ -14,7 +12,6 @@ public partial class Utils
         /// <summary>
         /// 从文件中读取数据
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte[] ReadFile(in string Path)
         {
             return Read(Path);
@@ -27,7 +24,6 @@ public partial class Utils
         /// <param name="Path">路径</param>
         /// <param name="Bytes">内容</param>
         /// <param name="Concat">true:拼接 | false:覆盖</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool WriteFile(
             in string Path,
             in byte[] Bytes,

@@ -7,8 +7,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.CompilerServices;
-
 using ICSharpCode.SharpZipLib.Zip;
 
 public partial class Utils
@@ -23,7 +21,6 @@ public partial class Utils
         /// <param name="progressAction">进度回调</param>
         /// <param name="entryAction">文件实体回调</param>
         /// <param name="restoreDateTime">是否恢复提取文件的日期和时间的标志</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void UncompressedZip(
             in string path,
             string targetDirectory,
@@ -44,7 +41,6 @@ public partial class Utils
         /// <param name="entryAction">文件实体回调</param>
         /// <param name="fileFilter">文件过滤器</param>
         /// <param name="restoreDateTime">是否恢复提取文件的日期和时间的标志</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void UncompressedZip(
             in string path,
             string targetDirectory,
@@ -111,7 +107,6 @@ public partial class Utils
         /// <param name="progressAction">进度回调</param>
         /// <param name="fileFilter">文件过滤器</param>
         /// <param name="restoreDateTime">是否恢复提取文件的日期和时间的标志</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void UncompressedZip(
             in string path,
             string targetDirectory,
@@ -129,7 +124,6 @@ public partial class Utils
         /// <param name="targetDirectory">保存路径</param>
         /// <param name="progressAction">进度回调</param>
         /// <param name="restoreDateTime">是否恢复提取文件的日期和时间的标志</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void UncompressedZip(
             in string path,
             string targetDirectory,
@@ -187,7 +181,6 @@ public partial class Utils
         /// <param name="path">解压包路径</param>
         /// <param name="targetDirectory">保存路径</param>
         /// <param name="restoreDateTime">是否恢复提取文件的日期和时间的标志</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerator<string> UncompressedZip(
             in string path,
             string targetDirectory,

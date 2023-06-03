@@ -10,11 +10,50 @@ var IOUtilsWebGL = {
   },
 
   /**
+   * Path to the file or folder
+   * return 0: not exist
+   * return 1: file
+   * return 2: folder
+   * return 3: other
+   */
+  IsPathFileOrFolder: function (path) {
+    var targetPath = UTF8ToString(path);
+    var analyze = FS.analyzePath(targetPath);
+    if (analyze.exists) {
+      if (FS.isFile(analyze.object.mode)) {
+        return 1;
+      } else if (FS.isDir(analyze.object.mode)) {
+        return 2;
+      } else {
+        return 3;
+      }
+    }
+    return 0;
+  },
+
+  /**
+   * free memory address
+   * @param {int} ptr
+   */
+  FreeMemory: function (ptr) {
+    var index = freeMemoryList.indexOf(ptr);
+    if (index >= 0) {
+      freeMemoryList.splice(index, 1);
+      _free(ptr)
+    }
+  },
+
+  /**
+   * free memory list
+   */
+  $freeMemoryList: new Array(),
+
+  /**
    * check whether the file exists
    * @param {string} filePath
    * @return {boolean}
    */
-  Exists: function (filePath) {
+  ExistsFile: function (filePath) {
     var status = false;
     var fPath = UTF8ToString(filePath);
     if (/^http/.test(fPath)) {
@@ -25,7 +64,38 @@ var IOUtilsWebGL = {
       xhr = null;
     } else {
       try {
-        status = FS.analyzePath(fPath).exists;
+        var analyze = FS.analyzePath(fPath.replace("\\", "/"));
+        if (analyze.exists && FS.isFile(analyze.object.mode)) {
+          status = true;
+        }
+      } catch (err) {
+        console.error("read the local file failed -> error " + err);
+      }
+    }
+    fPath = null;
+    return status;
+  },
+
+  /**
+   * check whether the directory exists
+   * @param {string} filePath
+   * @return {boolean}
+   */
+  ExistsDirectory: function (filePath) {
+    var status = false;
+    var fPath = UTF8ToString(filePath);
+    if (/^http/.test(fPath)) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", fPath, false);
+      xhr.send();
+      status = xhr.status == 200;
+      xhr = null;
+    } else {
+      try {
+        var analyze = FS.analyzePath(fPath.replace("\\", "/"));
+        if (analyze.exists && FS.isDir(analyze.object.mode)) {
+          status = true;
+        }
       } catch (err) {
         console.error("read the local file failed -> error " + err);
       }
@@ -43,19 +113,24 @@ var IOUtilsWebGL = {
     var fPath = UTF8ToString(filePath);
     var size = 0;
     if (/^http/.test(fPath)) {
-      var xhr = new XMLHttpRequest();
+      var xhr = new XMLHttpRequest;
       xhr.open("HEAD", fPath, false);
       xhr.send();
-      size = xhr.getResponseHeader("Content-Length");
+      size = xhr.getResponseHeader("Content-Length")
     } else {
       try {
-        size = FS.stat(fPath).size;
+        fPath = fPath.replace("\\", "/");
+        if (FS.analyzePath(fPath).exists) {
+          var stat = FS.stat(fPath);
+          size = stat.size
+        }
       } catch (err) {
-        console.error("can not read the file, please confirm the file is existing -> error " + err);
+        console.log("err  -> " + err)
       }
     }
-    return size;
+    return size
   },
+
 
   /**
    * read binary file
@@ -64,46 +139,47 @@ var IOUtilsWebGL = {
    */
   ReadBinaryFile: function (filePath) {
     var fPath = UTF8ToString(filePath);
+    var str = "";
+    var array = null;
     if (/^http/.test(fPath)) {
-      var str = "";
       var xhr = new XMLHttpRequest;
-      xhr.open("GET", UTF8ToString(filePath), false);
+      xhr.open("GET", fPath, false);
       xhr.send();
       if (xhr.status === 200) {
         var res = xhr.response;
-        var array = new Array;
+        array = [];
         for (var i = 0, j = res.length; i < j; ++i) {
           array.push(res.charCodeAt(i))
         }
         res = null;
-        try {
-          var buffer = _malloc(array.length);
-          HEAPU8.set(array, buffer);
-          str = buffer + "," + array.length
-        } finally {
-          _free(buffer)
-        }
       }
-      xhr = null;
-      try {
-        var strBufferSize = lengthBytesUTF8(str) + 1;
-        var strBuffer = _malloc(strBufferSize);
-        stringToUTF8(str, strBuffer, strBufferSize);
-        return strBuffer
-      } catch (err) {
-        console.error("something -> error " + err)
-      }
+      xhr = null
     } else {
-      try {
-        var content = FS.readFile(fPath);
-        var buffer2 = _malloc(content.length);
-        writeArrayToMemory(content, buffer2);
-        return buffer2
-      } catch (err) {
-        console.error("please confirm the file is existing -> error " + err)
+      fPath = fPath.replace("\\", "/");
+      var analyze = FS.analyzePath(fPath);
+      if (analyze.exists && FS.isFile(analyze.object.mode)) {
+        array = FS.readFile(fPath)
       }
     }
-    return null;
+    if (array != null) {
+      try {
+        var buffer = _malloc(array.length);
+        HEAPU8.set(array, buffer);
+        str = buffer + "," + array.length;
+      } finally {
+        freeMemoryList.push(buffer);
+      }
+    }
+    var strBufferSize = lengthBytesUTF8(str) + 1;
+    var strBuffer = _malloc(strBufferSize);
+    try {
+      stringToUTF8(str, strBuffer, strBufferSize)
+    } catch (err) {
+      console.error("something -> error " + err)
+    } finally {
+      str = null;
+      return strBuffer;
+    }
   },
 
   /**
@@ -113,64 +189,105 @@ var IOUtilsWebGL = {
    */
   ReadTextFile: function (filePath) {
     var fPath = UTF8ToString(filePath);
+    var str = "";
     if (/^http/.test(fPath)) {
-      var xhr = new XMLHttpRequest();
+      var xhr = new XMLHttpRequest;
       xhr.open("GET", fPath, false);
       xhr.onerror = (function () {
         console.error("Network error")
       });
       xhr.send();
-      var str = "";
       if (xhr.status === 200) {
         str = xhr.response
       } else {
         console.error("Request url = " + fPath + "failed: " + xhr.statusText)
       }
-      xhr = null;
-      var bufferSize = lengthBytesUTF8(str) + 1;
-      var buffer = _malloc(bufferSize);
-      stringToUTF8(str, buffer, bufferSize);
-      return buffer;
+      xhr = null
     } else {
-      var content = FS.readFile(fPath, { encoding: 'utf8' });
-      var buffer = _malloc(content.length + 1);
-      stringToUTF8(content, buffer);
-      return buffer;
+      fPath = fPath.replace("\\", "/");
+      var analyze = FS.analyzePath(fPath);
+      if (analyze.exists && FS.isFile(analyze.object.mode)) {
+        str = FS.readFile(fPath, { encoding: "utf8" })
+      }
     }
+
+    var bufferSize = lengthBytesUTF8(str) + 1;
+    var buffer = _malloc(str.length + 32);
+    stringToUTF8(str, buffer, bufferSize);
+    return buffer
   },
 
   /**
    * write binary file
    * @param {string} filePath
    * @param {byte[]} data
-   * @param {size} size
+   * @param {number} size
+   * @param {boolean} overwrite
    */
-  WriteBinaryFile: function (filePath, data, size) {
-    var dataArray = new Uint8Array(HEAPU8.buffer, data, size);
-    var file = new Blob([dataArray], { type: "application/octet-stream" });
-    saveAs(file, UTF8ToString(filePath));
-  },
+  WriteBinaryFile: function (overwrite, filePath, data, size) {
+    var target = UTF8ToString(filePath).replace("\\", "/");
+    var analyze = FS.analyzePath(target);
+    if (analyze.exists && FS.isFile(analyze.object.mode)) {
+      if (overwrite) FS.unlink(target);
+      else return;
+    }
 
-  /**
-   * write json file
-   * @param {string} filePath
-   * @param {object} obj
-   */
-  WriteJsonFile: function (filePath, obj) {
-    var json = JSON.stringify(obj);
-    var blob = new Blob([json], { type: "application/json" });
-    saveAs(blob, UTF8ToString(filePath));
+    var parent = PATH.dirname(target);
+    analyze = FS.analyzePath(parent);
+    if (!analyze.exists) {
+      FS.mkdirTree(parent);
+      FS.chmod(parent, 511);
+    } else if (analyze.exists && !FS.isDir(analyze.object.mode)) {
+      FS.mkdir(parent, analyze.object.mode);
+      FS.chmod(parent, 511);
+    }
+
+    try {
+      var byteArray = new Uint8Array(Module.HEAPU8.buffer, data, size);
+      FS.writeFile(target, byteArray, { encoding: 'binary', flag: 'w' });
+    } catch (error) {
+      console.error("failed to write binary file: " + target + " -> " + error)
+    } finally {
+      analyze = null;
+      target = null;
+      byteArray = null;
+    }
   },
 
   /**
    * write text file
    * @param {string} filePath
    * @param {string} obj
+   * @param {boolean} overwrite
    */
-  WriteTextFile: function (filePath, obj) {
-    var content = UTF8ToString(obj);
-    var blob = new Blob([content], { type: "application/text" });
-    saveAs(blob, UTF8ToString(filePath));
+  WriteTextFile: function (filePath, obj, overwrite) {
+    var target = UTF8ToString(filePath).replace("\\", "/");
+    var analyze = FS.analyzePath(target);
+    if (analyze.exists && FS.isFile(analyze.object.mode)) {
+      if (overwrite) FS.unlink(target);
+      else return;
+    }
+
+    var parent = PATH.dirname(target);
+    analyze = FS.analyzePath(parent);
+    if (!analyze.exists) {
+      FS.mkdirTree(parent);
+      FS.chmod(parent, 511);
+    } else if (!FS.isDir(analyze.object.mode)) {
+      FS.mkdir(parent, analyze.object.mode);
+      FS.chmod(parent, 511);
+    }
+
+    try {
+      var data = UTF8ToString(obj);
+      FS.writeFile(target, data, { encoding: 'utf8', flag: 'w' });
+    } catch (error) {
+      console.error("failed to write text file: " + target + " -> " + error);
+    } finally {
+      analyze = null;
+      target = null;
+      data = null;
+    }
   },
 
   /**
@@ -179,15 +296,15 @@ var IOUtilsWebGL = {
    * @returns {boolean}
    */
   DeleteFile: function (filePath) {
-    var fPath = UTF8ToString(filePath);
+    var fPath = UTF8ToString(filePath).replace("\\", "/");
     var status = false;
     if (/^http/.test(fPath)) {
       try {
-        var xhr = new XMLHttpRequest();
+        var xhr = new XMLHttpRequest;
         xhr.open("DELETE", fPath, false);
         xhr.send();
         if (xhr.status === 200) {
-          status = true;
+          status = true
         } else {
           console.error("failed to delete file: " + fPath);
         }
@@ -198,37 +315,60 @@ var IOUtilsWebGL = {
       }
     } else {
       try {
-        FS.unlink(fPath);
+        var analyze = FS.analyzePath(fPath);
+        if (analyze.exists && FS.isFile(analyze.object.mode))
+          FS.unlink(fPath);
+        status = true;
       } catch (error) {
-        console.error("cannot find the file -> error " + error);
+        console.error(" error  -> " + error)
+      } finally {
+        analyze = null;
       }
     }
-    return status;
+    return status
   },
 
   /**
    * move file
    * @param {string} sourcePath
    * @param {string} targetPath
+   * @param {boolean} overwrite
    * @returns {boolean}
    */
-  MoveFile: function (sourcePath, targetPath) {
-    var oldPath = UTF8ToString(sourcePath);
-    var newPath = UTF8ToString(targetPath);
+  MoveFile: function (sourcePath, targetPath, overwrite) {
+    var oldPath = UTF8ToString(sourcePath).replace("\\", "/");
+    var newPath = UTF8ToString(targetPath).replace("\\", "/");
+
+    var newAnalyze = FS.analyzePath(newPath);
+    if (newAnalyze.exists && FS.isFile(newAnalyze.object.mode) && !overwrite) {
+      if (!overwrite) {
+        console.log(newPath + " -> file exist , skip");
+        return
+      } else {
+        FS.unlink(newPath)
+      }
+    }
+
     try {
-      FS.stat(oldPath, function (eer, stats) {
-        if (err) throw err;
-        if (stats.isFile()) {
-          FS.rename(oldPath, newPath, function (err) {
-            if (err) throw err;
-            _SyncDB();
-          });
-        } else {
-          console.error('The file does not exist or is occupied -> ' + oldPath);
-        }
-      });
+      var parentDir = PATH.dirname(newPath)
+      var parentAnalyze = FS.analyzePath(parentDir)
+      if (!parentAnalyze.exists) {
+        FS.mkdirTree(parentDir);
+        FS.chmod(parentDir, 511);
+      } else if (!FS.isDir(parentAnalyze.object.mode)) {
+        FS.mkdir(parentDir, parentAnalyze.object.mode);
+        FS.chmod(parentDir, 511);
+      }
+
+      var data = FS.readFile(oldPath, { encoding: "binary" });
+      FS.writeFile(newPath, data, { encoding: 'binary' });
+      FS.unlink(oldPath);
     } catch (error) {
-      console.error("can not find the file -> error " + error);
+      console.error("error  ->" + error)
+    } finally {
+      data = null;
+      parentAnalyze = null;
+      parentDir = null;
     }
   },
 
@@ -269,7 +409,6 @@ var IOUtilsWebGL = {
         console.error("something error -> error " + error)
       }
     }
-    _SyncDB();
     return status
   },
 
@@ -313,8 +452,22 @@ var IOUtilsWebGL = {
    * @param {string} path
    */
   CreateDirectory: function (path) {
-    var folderPath = UTF8ToString(path);
-    FS.mkdir(folderPath);
+    try {
+      var fPath = UTF8ToString(path).replace("\\", "/");
+      var analyze = FS.analyzePath(fPath);
+      if (!analyze.exists) {
+        FS.mkdirTree(fPath);
+        FS.chmod(fPath, 511);
+      } else if (!FS.isDir(analyze.object.mode)) {
+        FS.mkdir(fPath, analyze.object.mode);
+        FS.chmod(fPath, 511);
+      }
+    } catch (error) {
+      console.log("create dir : " + fPath + " -> error " + error)
+    } finally {
+      fPath = null;
+      analyze = null
+    }
   },
 
   /**
@@ -322,11 +475,31 @@ var IOUtilsWebGL = {
    * @param {string} path
    */
   DeleteDirectory: function (path) {
-    var folderPath = UTF8ToString(path);
+    var fPath = UTF8ToString(path).replace("\\", "/");
+    var analyze = FS.analyzePath(fPath);
     try {
-      FS.rmdir(folderPath);
+      if (analyze.exists && FS.isDir(analyze.object.mode)) {
+        var stack = [fPath];
+        while (stack.length > 0) {
+          var currentPath = stack.pop();
+          var files = FS.readdir(currentPath);
+          for (var i = 0; i < files.length; i++) {
+            if (files[i] === "." || files[i] === "..") continue;
+            var filePath = currentPath + "/" + files[i];
+            var analyzeTemp = FS.analyzePath(filePath);
+            if (analyzeTemp.exists) {
+              if (FS.isDir(analyzeTemp.object.mode)) stack.push(filePath);
+              else FS.unlink(filePath);
+            }
+          }
+        }
+        FS.rmdir(fPath);
+      }
     } catch (error) {
-      console.log("delete error -> error " + error);
+      console.log("delete dir : " + fPath + " -> error " + error)
+    } finally {
+      analyze = null;
+      fPath = null
     }
   },
 
@@ -334,75 +507,93 @@ var IOUtilsWebGL = {
    * move folder
    * @param {string} path
    */
-  MoveDirectory: function (oldPath, newPath) {
-    var oldFolderPath = UTF8ToString(oldPath);
-    var newFolderPath = UTF8ToString(newPath);
+  MoveDirectory: function (oldPath, newPath, overwrite) {
+    var oldFolderPath = UTF8ToString(oldPath).replace("\\", "/");
+    var newFolderPath = UTF8ToString(newPath).replace("\\", "/");
+    var oldAnalyze = FS.analyzePath(oldFolderPath);
+    var newAnalyze = FS.analyzePath(newFolderPath);
     try {
-      FS.rename(oldFolderPath, newFolderPath);
+      if (oldAnalyze.exists && FS.isDir(oldAnalyze.object.mode)) {
+        // if new folder not exist, rename directly
+        if (!newAnalyze.exists || !FS.isDir(newAnalyze.object.mode)) {
+          FS.rename(oldFolderPath, newFolderPath);
+        } else if (overwrite) {
+          // delete new folder
+          FS.rmdir(newFolderPath);
+          FS.rename(oldFolderPath, newFolderPath);
+        }
+      }
     } catch (error) {
-      console.log("move failed -> error " + error);
+      console.log("move dir failed | " + oldFolderPath + " -> " + newFolderPath + "| -> error " + error);
+    } finally {
+      oldAnalyze = null;
+      newAnalyze = null;
+      oldFolderPath = null;
+      newFolderPath = null;
     }
   },
 
   /**
    * copy folder
-   * @param {string} path
+   * @param {string} sourcePath
+   * @param {string} destinationPath
+   * @param {boolean} copySubdirectories
+   * @param {boolean} overwrite
    */
-  CopyDirectory: function (sourcePath, destinationPath, copySubdirectories) {
+  CopyDirectory: function (sourcePath, destinationPath, copySubdirectories, overwrite) {
     var source = UTF8ToString(sourcePath);
-    var destination = UTF8ToString(destinationPath);
-    if (!FS.isDir(source)) FS.mkdir(destination);
+    var destination = UTF8ToString(destinationPath).replace("\\", "/");
+
     if (/^http/.test(source)) {
-      var xhr = new XMLHttpRequest();
-      // xhr.responseType = "blob"
-      try {
-        xhr.open("GET", source, false);
-        xhr.send();
-        if (xhr.status === 200) {
-          var folderData = xhr.responseText;
-          var files = folderData.files;
-          console.log(xhr)
-          var folders = folderData.folders;
-          for (var i = 0; i < files.length; i++) {
-            var remoteFilePath = source + "/" + files[i];
-            var localFilePath = destination + "/" + files[i];
-            var fileData = Module.ccall("ReadRemoteFile", "string", ["string"], [remoteFilePath]);
-            Module.ccall("WriteFile", "void", ["string", "string"], [localFilePath, fileData])
-          }
-          if (copySubdirectories) {
-            for (var j = 0; j < folders.length; j++) {
-              var remoteSubfolderPath = source + "/" + folders[j];
-              var localSubfolderPath = destination + "/" + folders[j];
-              Module.ccall("CopyRemoteFolder", "void", ["string", "string", "boolean"], [remoteSubfolderPath, localSubfolderPath, copySubdirectories])
-            }
-          } else {
-            console.error("Failed to copy remote folder: " + source)
-          }
-        }
-      } catch (error) {
-        console.error("Failed to copy remote folder: " + source + error)
-      } finally {
-        xhr = null
-      }
+      console.warn("Cannot copy HTTP directory " + source);
+      return;
+    }
+
+    var analyze = FS.analyzePath(destination);
+    if (!analyze.exists) {
+      FS.mkdirTree(destination);
+      FS.chmod(destination, 511)
     } else {
-      var files = FS.readdir(source);
-      for (var i = 0; i < files.length; i++) {
-        var file = files[i];
-        if (file === "." || file === "..") {
-          continue
-        }
-        var sourceFilePath = source + "/" + file;
-        var destinationFilePath = destination + "/" + file;
-        if (FS.isDir(FS.stat(sourceFilePath).mode)) {
-          if (copySubdirectories) {
-            this._CopyDirectory(sourceFilePath, destinationFilePath, copySubdirectories)
-          }
-        } else {
-          FS.copyFile(sourceFilePath, destinationFilePath)
-        }
+      if (!FS.isDir(analyze.object.mode)) {
+        FS.mkdir(destination, analyze.object.mode);
+        FS.chmod(destination, 511)
+      } else if (overwrite) {
+        FS.rmdir(destination);
+        FS.mkdir(destination);
+        FS.chmod(destination, 511)
+      } else return;
+    }
+
+    var files = FS.readdir(source);
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      if (file === "." || file === "..") continue;
+
+      var sourceFilePath = source + "/" + file;
+      analyze = FS.analyzePath(sourceFilePath);
+
+      var destinationFilePath = destination + "/" + file;
+      if (FS.isDir(analyze.mode) && copySubdirectories) {
+        var sourceBufferSize = lengthBytesUTF8(sourceFilePath) + 1;
+        var sourceBuffer = _malloc(sourceFilePath.length + 32);
+        stringToUTF8(sourceFilePath, sourceBuffer, sourceBufferSize);
+
+        var destinationBufferSize = lengthBytesUTF8(destinationFilePath) + 1;
+        var destinationBuffer = _malloc(destinationFilePath.length + 32);
+        stringToUTF8(destinationFilePath, destinationBuffer, destinationBufferSize);
+
+        this._CopyDirectory(sourceBuffer, destinationBuffer, copySubdirectories, overwrite)
+      } else if (FS.isFile(analyze.mode)) {
+        FS.copyFile(sourceFilePath, destinationFilePath)
       }
     }
+
+    analyze = null;
+    source = null;
+    destination = null;
+    files = null;
   }
 };
 
+autoAddDeps(IOUtilsWebGL, '$freeMemoryList');
 mergeInto(LibraryManager.library, IOUtilsWebGL);
