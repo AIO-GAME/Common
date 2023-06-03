@@ -8,7 +8,6 @@ public partial class Utils
         /// <summary>
         /// 使用异步 从文件中读取数据
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Task<byte[]> ReadFileAsync(string Path)
         {
             return ReadAsync(Path);
@@ -20,7 +19,6 @@ public partial class Utils
         /// <param name="Path">路径</param>
         /// <param name="Bytes">内容</param>
         /// <param name="Concat">true:拼接 | false:覆盖</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Task<bool> WriteFileAsync(
             string Path,
             byte[] Bytes,

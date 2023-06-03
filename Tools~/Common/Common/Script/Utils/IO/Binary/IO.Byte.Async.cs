@@ -11,7 +11,6 @@ public partial class Utils
         /// 异步 加载 Byte Array
         /// </summary>
         /// <param name="path">路径</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static async Task<byte[]> ReadByteArrayAsync(string path)
         {
             return await ReadAsync(path);
@@ -20,7 +19,6 @@ public partial class Utils
         /// <summary>
         /// 异步 写入数据
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static async Task<bool> WriteByteArrayAsync(
             string path,
             byte[] bytes,
