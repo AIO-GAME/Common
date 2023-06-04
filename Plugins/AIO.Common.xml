@@ -5032,808 +5032,6 @@
             <param name="to"></param>
             <param name="passwrod"></param>
         </member>
-        <member name="T:AIO.BinDictionary`2">
-            <summary>
-            数据字典
-            </summary>
-            <typeparam name="K">Key泛型</typeparam>
-            <typeparam name="V">Value泛型</typeparam>
-        </member>
-        <member name="P:AIO.BinDictionary`2.Collection">
-            <summary>
-            集合
-            </summary>
-        </member>
-        <member name="M:AIO.BinDictionary`2.#ctor">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="M:AIO.BinDictionary`2.Dispose">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.Deserialize(AIO.IReadData)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.Serialize(AIO.IWriteData)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.Reset">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.GetEnumerator">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.System#Collections#IEnumerable#GetEnumerator">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.Add(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.Clear">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.Contains(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.CopyTo(System.Collections.Generic.KeyValuePair{`0,`1}[],System.Int32)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.Remove(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinDictionary`2.Count">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinDictionary`2.IsReadOnly">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.ContainsKey(`0)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.Add(`0,`1)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.Remove(`0)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.TryGetValue(`0,`1@)">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinDictionary`2.Item(`0)">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinDictionary`2.Keys">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinDictionary`2.Values">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinDictionary`2.Clone">
-            <inheritdoc />
-        </member>
-        <member name="T:AIO.BinHashSet`1">
-            <summary>
-            列表存储
-            </summary>
-        </member>
-        <member name="P:AIO.BinHashSet`1.Collection">
-            <summary>
-            集合
-            </summary>
-        </member>
-        <member name="M:AIO.BinHashSet`1.#ctor">
-            <summary>
-            初始化
-            </summary>
-        </member>
-        <member name="M:AIO.BinHashSet`1.Dispose">
-            <summary>
-            执行与释放或重置非托管资源关联的应用程序定义的任务
-            </summary>
-        </member>
-        <member name="M:AIO.BinHashSet`1.Deserialize(AIO.IReadData)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinHashSet`1.Serialize(AIO.IWriteData)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinHashSet`1.GetEnumerator">
-            <summary>返回一个循环访问集合的枚举器。</summary>
-            <returns>用于循环访问集合的枚举数。</returns>
-        </member>
-        <member name="M:AIO.BinHashSet`1.System#Collections#IEnumerable#GetEnumerator">
-            <summary>返回循环访问集合的枚举数。</summary>
-            <returns>
-              一个可用于循环访问集合的 <see cref="T:System.Collections.IEnumerator" /> 对象。
-            </returns>
-        </member>
-        <member name="M:AIO.BinHashSet`1.Add(`0)">
-            <summary>
-              将某项添加到 <see cref="T:System.Collections.Generic.ICollection`1" /> 中。
-            </summary>
-            <param name="item">
-              要添加到 <see cref="T:System.Collections.Generic.ICollection`1" /> 的对象。
-            </param>
-            <exception cref="T:System.NotSupportedException">
-              <see cref="T:System.Collections.Generic.ICollection`1" /> 为只读。
-            </exception>
-        </member>
-        <member name="M:AIO.BinHashSet`1.UnionWith(System.Collections.Generic.IEnumerable{`0}@)">
-            <summary>
-            对该集合进行与另一个IEnumerable (T)对象的并集运算；
-            </summary>
-            <param name="other">另一个集合</param>
-        </member>
-        <member name="M:AIO.BinHashSet`1.IntersectWith(System.Collections.Generic.IEnumerable{`0}@)">
-            <summary>
-            对该集合进行与另一个IEnumerable (T)对象的交集运算；
-            </summary>
-            <param name="other">另一个集合</param>
-        </member>
-        <member name="M:AIO.BinHashSet`1.ExceptWith(System.Collections.Generic.IEnumerable{`0}@)">
-            <summary>
-            将该集合中与其他集合重复的元素移除；
-            </summary>
-            <param name="other">另一个集合</param>
-        </member>
-        <member name="M:AIO.BinHashSet`1.SymmetricExceptWith(System.Collections.Generic.IEnumerable{`0}@)">
-            <summary>
-            将该集合变换成只包含在该集合或者另一个集合中而不同时属于两个集合的元素；
-            </summary>
-            <param name="other">另一个集合</param>
-        </member>
-        <member name="M:AIO.BinHashSet`1.IsSubsetOf(System.Collections.Generic.IEnumerable{`0}@)">
-            <summary>
-            判断该集合是否是另一个集合的子集；
-            </summary>
-            <param name="other">另一个集合</param>
-            <returns>True:是 False:否</returns>
-        </member>
-        <member name="M:AIO.BinHashSet`1.IsSupersetOf(System.Collections.Generic.IEnumerable{`0}@)">
-            <summary>
-            判断该集合是否是另一个集合的超集；
-            </summary>
-            <param name="other">另一个集合</param>
-            <returns>True:是 False:否</returns>
-        </member>
-        <member name="M:AIO.BinHashSet`1.IsProperSupersetOf(System.Collections.Generic.IEnumerable{`0}@)">
-            <summary>
-            判断该集合是否是另一个集合的真超集；
-            </summary>
-            <param name="other">另一个集合</param>
-            <returns>True:是 False:否</returns>
-        </member>
-        <member name="M:AIO.BinHashSet`1.IsProperSubsetOf(System.Collections.Generic.IEnumerable{`0}@)">
-            <summary>
-            判断该集合是否是另一个集合的真子集；
-            </summary>
-            <param name="other">另一个集合</param>
-            <returns>True:是 False:否</returns>
-        </member>
-        <member name="M:AIO.BinHashSet`1.Overlaps(System.Collections.Generic.IEnumerable{`0}@)">
-            <summary>
-            判断该集合是否与另一个集合存在共同的元素；
-            </summary>
-            <param name="other">另一个集合</param>
-            <returns>True:是 False:否</returns>
-        </member>
-        <member name="M:AIO.BinHashSet`1.SetEquals(System.Collections.Generic.IEnumerable{`0}@)">
-            <summary>
-            判断该集合是否与另一个集合有完全相同的元素，且仅有这些元素。
-            </summary>
-            <param name="other">另一个集合</param>
-            <returns>True:是 False:否</returns>
-        </member>
-        <member name="M:AIO.BinHashSet`1.AIO#ISet{T}#Add(`0)">
-            <summary>
-            将ITEM添加到集合中，如果已存在，则返回false；
-            </summary>
-            <param name="item">要添加的元素</param>
-            <returns>Ture:不存在 False:已存在</returns>
-        </member>
-        <member name="M:AIO.BinHashSet`1.Clear">
-            <summary>
-              从 <see cref="T:System.Collections.Generic.ICollection`1" /> 中移除所有项。
-            </summary>
-            <exception cref="T:System.NotSupportedException">
-              <see cref="T:System.Collections.Generic.ICollection`1" /> 为只读。
-            </exception>
-        </member>
-        <member name="M:AIO.BinHashSet`1.Contains(`0)">
-            <summary>
-              确定 <see cref="T:System.Collections.Generic.ICollection`1" /> 是否包含特定值。
-            </summary>
-            <param name="item">
-              要在 <see cref="T:System.Collections.Generic.ICollection`1" /> 中定位的对象。
-            </param>
-            <returns>
-              如果在 <see langword="true" /> 中找到 <paramref name="item" />，则为 <see cref="T:System.Collections.Generic.ICollection`1" />；否则为 <see langword="false" />。
-            </returns>
-        </member>
-        <member name="M:AIO.BinHashSet`1.CopyTo(`0[],System.Int32)">
-            <summary>
-              从特定的 <see cref="T:System.Collections.Generic.ICollection`1" /> 索引处开始，将 <see cref="T:System.Array" /> 的元素复制到一个 <see cref="T:System.Array" /> 中。
-            </summary>
-            <param name="array">
-              一维 <see cref="T:System.Array" />，它是从 <see cref="T:System.Collections.Generic.ICollection`1" /> 复制的元素的目标。
-              <see cref="T:System.Array" /> 必须具有从零开始的索引。
-            </param>
-            <param name="arrayIndex">
-              <paramref name="array" /> 中从零开始的索引，从此处开始复制。
-            </param>
-            <exception cref="T:System.ArgumentNullException">
-              <paramref name="array" /> 为 <see langword="null" />。
-            </exception>
-            <exception cref="T:System.ArgumentOutOfRangeException">
-              <paramref name="arrayIndex" /> 小于 0。
-            </exception>
-            <exception cref="T:System.ArgumentException">
-              源中的元素数目 <see cref="T:System.Collections.Generic.ICollection`1" /> 大于从的可用空间 <paramref name="arrayIndex" /> 目标从头到尾 <paramref name="array" />。
-            </exception>
-        </member>
-        <member name="M:AIO.BinHashSet`1.Remove(`0)">
-            <summary>
-              从 <see cref="T:System.Collections.Generic.ICollection`1" /> 中移除特定对象的第一个匹配项。
-            </summary>
-            <param name="item">
-              要从 <see cref="T:System.Collections.Generic.ICollection`1" /> 中删除的对象。
-            </param>
-            <returns>
-              如果从 <see langword="true" /> 中成功移除 <paramref name="item" />，则为 <see cref="T:System.Collections.Generic.ICollection`1" />；否则为 <see langword="false" />。
-               如果在原始 <see langword="false" /> 中没有找到 <paramref name="item" />，该方法也会返回 <see cref="T:System.Collections.Generic.ICollection`1" />。
-            </returns>
-            <exception cref="T:System.NotSupportedException">
-              <see cref="T:System.Collections.Generic.ICollection`1" /> 为只读。
-            </exception>
-        </member>
-        <member name="P:AIO.BinHashSet`1.Count">
-            <summary>
-              获取 <see cref="T:System.Collections.Generic.ICollection`1" /> 中包含的元素数。
-            </summary>
-            <returns>
-              <see cref="T:System.Collections.Generic.ICollection`1" /> 中包含的元素数。
-            </returns>
-        </member>
-        <member name="P:AIO.BinHashSet`1.IsReadOnly">
-            <summary>
-              获取一个值，该值指示 <see cref="T:System.Collections.Generic.ICollection`1" /> 是否为只读。
-            </summary>
-            <returns>
-              如果 <see langword="true" /> 是只读的，则为 <see cref="T:System.Collections.Generic.ICollection`1" />；否则为 <see langword="false" />。
-            </returns>
-        </member>
-        <member name="M:AIO.BinHashSet`1.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
-            <summary>
-              使用将目标对象序列化所需的数据填充 <see cref="T:System.Runtime.Serialization.SerializationInfo" />。
-            </summary>
-            <param name="info">
-              要填充数据的 <see cref="T:System.Runtime.Serialization.SerializationInfo" />。
-            </param>
-            <param name="context">
-              此序列化的目标（请参见 <see cref="T:System.Runtime.Serialization.StreamingContext" />）。
-            </param>
-            <exception cref="T:System.Security.SecurityException">
-              调用方没有所要求的权限。
-            </exception>
-        </member>
-        <member name="M:AIO.BinHashSet`1.OnDeserialization(System.Object)">
-            <summary>在整个对象图形已经反序列化时运行。</summary>
-            <param name="sender">
-              启动回调的对象。
-               当前未实现该参数的功能。
-            </param>
-        </member>
-        <member name="M:AIO.BinHashSet`1.Reset">
-            <summary>
-            重置
-            </summary>
-        </member>
-        <member name="M:AIO.BinHashSet`1.Clone">
-            <inheritdoc />
-        </member>
-        <member name="T:AIO.BinList`1">
-            <summary>
-            列表存储
-            </summary>
-        </member>
-        <member name="P:AIO.BinList`1.Collection">
-            <summary>
-            集合
-            </summary>
-        </member>
-        <member name="M:AIO.BinList`1.#ctor">
-            <summary>
-            初始化
-            </summary>
-        </member>
-        <member name="M:AIO.BinList`1.Dispose">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.Reset">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.Deserialize(AIO.IReadData)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.Serialize(AIO.IWriteData)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.GetEnumerator">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.System#Collections#IEnumerable#GetEnumerator">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.Add(`0)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.Clear">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.Contains(`0)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.CopyTo(`0[],System.Int32)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.Remove(`0)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.CopyTo(System.Array,System.Int32)">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinList`1.Count">
-            <summary>
-              获取 <see cref="T:System.Collections.Generic.ICollection`1" /> 中包含的元素数。
-            </summary>
-            <returns>
-              <see cref="T:System.Collections.Generic.ICollection`1" /> 中包含的元素数。
-            </returns>
-        </member>
-        <member name="P:AIO.BinList`1.SyncRoot">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinList`1.IsSynchronized">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinList`1.IsReadOnly">
-            <inheritdoc cref="P:System.Collections.Generic.ICollection`1.IsReadOnly" />
-        </member>
-        <member name="M:AIO.BinList`1.IndexOf(`0)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.Insert(System.Int32,`0)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinList`1.RemoveAt(System.Int32)">
-            <inheritdoc cref="M:System.Collections.Generic.IList`1.RemoveAt(System.Int32)" />
-        </member>
-        <member name="P:AIO.BinList`1.Item(System.Int32)">
-            <inheritdoc cref="P:System.Collections.Generic.IList`1.Item(System.Int32)" />
-        </member>
-        <member name="M:AIO.BinList`1.Clone">
-            <inheritdoc />
-        </member>
-        <member name="T:AIO.BinQueue`1">
-            <summary>
-            数据队列
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="P:AIO.BinQueue`1.Collection">
-            <summary>
-            集合
-            </summary>
-        </member>
-        <member name="M:AIO.BinQueue`1.#ctor">
-            <summary>
-            初始化
-            </summary>
-        </member>
-        <member name="M:AIO.BinQueue`1.Dispose">
-            <summary>
-            执行与释放或重置非托管资源关联的应用程序定义的任务。
-            </summary>
-        </member>
-        <member name="M:AIO.BinQueue`1.Deserialize(AIO.IReadData)">
-            <summary>
-            反序列化
-            </summary>
-        </member>
-        <member name="M:AIO.BinQueue`1.Serialize(AIO.IWriteData)">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AIO.BinQueue`1.Reset">
-            <summary>
-            重置
-            </summary>
-        </member>
-        <member name="M:AIO.BinQueue`1.GetEnumerator">
-            <summary>返回一个循环访问集合的枚举器。</summary>
-            <returns>用于循环访问集合的枚举数。</returns>
-        </member>
-        <member name="M:AIO.BinQueue`1.System#Collections#IEnumerable#GetEnumerator">
-            <summary>返回循环访问集合的枚举数。</summary>
-            <returns>
-              一个可用于循环访问集合的 <see cref="T:System.Collections.IEnumerator" /> 对象。
-            </returns>
-        </member>
-        <member name="M:AIO.BinQueue`1.CopyTo(System.Array,System.Int32)">
-            <summary>
-              从特定的 <see cref="T:System.Collections.ICollection" /> 索引处开始，将 <see cref="T:System.Array" /> 的元素复制到一个 <see cref="T:System.Array" /> 中。
-            </summary>
-            <param name="array">
-              一维 <see cref="T:System.Array" />，它是从 <see cref="T:System.Collections.ICollection" /> 复制的元素的目标。
-              <see cref="T:System.Array" /> 必须具有从零开始的索引。
-            </param>
-            <param name="index">
-              <paramref name="array" /> 中从零开始的索引，从此处开始复制。
-            </param>
-            <exception cref="T:System.ArgumentNullException">
-              <paramref name="array" /> 为 <see langword="null" />。
-            </exception>
-            <exception cref="T:System.ArgumentOutOfRangeException">
-              <paramref name="index" /> 小于零。
-            </exception>
-            <exception cref="T:System.ArgumentException">
-              <paramref name="array" /> 是多维的。
-              - 或 -
-              源中的元素数目 <see cref="T:System.Collections.ICollection" /> 大于从的可用空间 <paramref name="index" /> 目标从头到尾 <paramref name="array" />。
-              - 或 -
-              无法自动将源 <see cref="T:System.Collections.ICollection" /> 的类型转换为目标 <paramref name="array" /> 的类型。
-            </exception>
-        </member>
-        <member name="P:AIO.BinQueue`1.System#Collections#ICollection#Count">
-            <summary>
-              获取 <see cref="T:System.Collections.ICollection" /> 中包含的元素数。
-            </summary>
-            <returns>
-              <see cref="T:System.Collections.ICollection" /> 中包含的元素数。
-            </returns>
-        </member>
-        <member name="P:AIO.BinQueue`1.SyncRoot">
-            <summary>
-              获取可用于同步对 <see cref="T:System.Collections.ICollection" /> 的访问的对象。
-            </summary>
-            <returns>
-              可用于同步对 <see cref="T:System.Collections.ICollection" /> 的访问的对象。
-            </returns>
-        </member>
-        <member name="P:AIO.BinQueue`1.IsSynchronized">
-            <summary>
-              获取一个值，该值指示是否同步对 <see cref="T:System.Collections.ICollection" /> 的访问（线程安全）。
-            </summary>
-            <returns>
-              如果对 <see langword="true" /> 的访问是同步的（线程安全），则为 <see cref="T:System.Collections.ICollection" />；否则为 <see langword="false" />。
-            </returns>
-        </member>
-        <member name="P:AIO.BinQueue`1.System#Collections#Generic#IReadOnlyCollection{T}#Count">
-            <summary>获取集合中的元素数。</summary>
-            <returns>集合中的元素数。</returns>
-        </member>
-        <member name="M:AIO.BinQueue`1.Clone">
-            <inheritdoc />
-        </member>
-        <member name="T:AIO.BinSortedList`2">
-            <summary>
-            数据字典
-            </summary>
-            <typeparam name="TKey">Key泛型</typeparam>
-            <typeparam name="TValue">Value泛型</typeparam>
-        </member>
-        <member name="P:AIO.BinSortedList`2.Collection">
-            <summary>
-            集合
-            </summary>
-        </member>
-        <member name="M:AIO.BinSortedList`2.#ctor">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="M:AIO.BinSortedList`2.Dispose">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.Deserialize(AIO.IReadData)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.Serialize(AIO.IWriteData)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.Reset">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.GetEnumerator">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.System#Collections#IEnumerable#GetEnumerator">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.Add(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.Clear">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.Contains(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.CopyTo(System.Collections.Generic.KeyValuePair{`0,`1}[],System.Int32)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.Remove(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.CopyTo(System.Array,System.Int32)">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinSortedList`2.Count">
-            <inheritdoc cref="P:System.Collections.Generic.ICollection`1.Count" />
-        </member>
-        <member name="P:AIO.BinSortedList`2.SyncRoot">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinSortedList`2.IsSynchronized">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinSortedList`2.IsReadOnly">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.ContainsKey(`0)">
-            <inheritdoc cref="M:System.Collections.Generic.IDictionary`2.ContainsKey(`0)" />
-        </member>
-        <member name="M:AIO.BinSortedList`2.Add(`0,`1)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.Remove(`0)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.TryGetValue(`0,`1@)">
-            <inheritdoc cref="M:System.Collections.Generic.IDictionary`2.TryGetValue(`0,`1@)" />
-        </member>
-        <member name="P:AIO.BinSortedList`2.Item(`0)">
-            <inheritdoc cref="P:System.Collections.Generic.IDictionary`2.Item(`0)" />
-        </member>
-        <member name="P:AIO.BinSortedList`2.System#Collections#Generic#IReadOnlyDictionary{TKey,TValue}#Keys">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinSortedList`2.System#Collections#Generic#IReadOnlyDictionary{TKey,TValue}#Values">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinSortedList`2.Keys">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.BinSortedList`2.Values">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BinSortedList`2.Clone">
-            <inheritdoc />
-        </member>
-        <member name="T:AIO.BinStack`1">
-            <summary>
-            数据队列
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="P:AIO.BinStack`1.Collection">
-            <summary>
-            集合
-            </summary>
-        </member>
-        <member name="M:AIO.BinStack`1.#ctor">
-            <summary>
-            初始化
-            </summary>
-        </member>
-        <member name="M:AIO.BinStack`1.Dispose">
-            <summary>
-            执行与释放或重置非托管资源关联的应用程序定义的任务。
-            </summary>
-        </member>
-        <member name="M:AIO.BinStack`1.Deserialize(AIO.IReadData)">
-            <summary>
-            反序列化
-            </summary>
-        </member>
-        <member name="M:AIO.BinStack`1.Serialize(AIO.IWriteData)">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AIO.BinStack`1.Reset">
-            <summary>
-            重置
-            </summary>
-        </member>
-        <member name="M:AIO.BinStack`1.GetEnumerator">
-            <summary>返回一个循环访问集合的枚举器。</summary>
-            <returns>用于循环访问集合的枚举数。</returns>
-        </member>
-        <member name="M:AIO.BinStack`1.System#Collections#IEnumerable#GetEnumerator">
-            <summary>返回循环访问集合的枚举数。</summary>
-            <returns>
-              一个可用于循环访问集合的 <see cref="T:System.Collections.IEnumerator" /> 对象。
-            </returns>
-        </member>
-        <member name="M:AIO.BinStack`1.CopyTo(System.Array,System.Int32)">
-            <summary>
-              从特定的 <see cref="T:System.Collections.ICollection" /> 索引处开始，将 <see cref="T:System.Array" /> 的元素复制到一个 <see cref="T:System.Array" /> 中。
-            </summary>
-            <param name="array">
-              一维 <see cref="T:System.Array" />，它是从 <see cref="T:System.Collections.ICollection" /> 复制的元素的目标。
-              <see cref="T:System.Array" /> 必须具有从零开始的索引。
-            </param>
-            <param name="index">
-              <paramref name="array" /> 中从零开始的索引，从此处开始复制。
-            </param>
-            <exception cref="T:System.ArgumentNullException">
-              <paramref name="array" /> 为 <see langword="null" />。
-            </exception>
-            <exception cref="T:System.ArgumentOutOfRangeException">
-              <paramref name="index" /> 小于零。
-            </exception>
-            <exception cref="T:System.ArgumentException">
-              <paramref name="array" /> 是多维的。
-              - 或 -
-              源中的元素数目 <see cref="T:System.Collections.ICollection" /> 大于从的可用空间 <paramref name="index" /> 目标从头到尾 <paramref name="array" />。
-              - 或 -
-              无法自动将源 <see cref="T:System.Collections.ICollection" /> 的类型转换为目标 <paramref name="array" /> 的类型。
-            </exception>
-        </member>
-        <member name="P:AIO.BinStack`1.System#Collections#ICollection#Count">
-            <summary>
-              获取 <see cref="T:System.Collections.ICollection" /> 中包含的元素数。
-            </summary>
-            <returns>
-              <see cref="T:System.Collections.ICollection" /> 中包含的元素数。
-            </returns>
-        </member>
-        <member name="P:AIO.BinStack`1.SyncRoot">
-            <summary>
-              获取可用于同步对 <see cref="T:System.Collections.ICollection" /> 的访问的对象。
-            </summary>
-            <returns>
-              可用于同步对 <see cref="T:System.Collections.ICollection" /> 的访问的对象。
-            </returns>
-        </member>
-        <member name="P:AIO.BinStack`1.IsSynchronized">
-            <summary>
-              获取一个值，该值指示是否同步对 <see cref="T:System.Collections.ICollection" /> 的访问（线程安全）。
-            </summary>
-            <returns>
-              如果对 <see langword="true" /> 的访问是同步的（线程安全），则为 <see cref="T:System.Collections.ICollection" />；否则为 <see langword="false" />。
-            </returns>
-        </member>
-        <member name="P:AIO.BinStack`1.System#Collections#Generic#IReadOnlyCollection{T}#Count">
-            <summary>获取集合中的元素数。</summary>
-            <returns>集合中的元素数。</returns>
-        </member>
-        <member name="M:AIO.BinStack`1.Clone">
-            <inheritdoc />
-        </member>
-        <member name="T:AIO.Storage">
-            <summary>
-            数据存储
-            </summary>
-        </member>
-        <member name="P:AIO.Storage.Buffer">
-            <summary>
-            字节数据
-            </summary>
-        </member>
-        <member name="P:AIO.Storage.Data">
-            <summary>
-            数据有效长度 需要调动序列化 Serialize
-            </summary>
-        </member>
-        <member name="M:AIO.Storage.#ctor">
-            <summary>
-            数据存储
-            </summary>
-        </member>
-        <member name="M:AIO.Storage.Deserialize">
-            <summary>
-            反序列化
-            </summary>
-        </member>
-        <member name="M:AIO.Storage.Serialize">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AIO.Storage.Dispose">
-            <summary>
-            执行与释放或重置非托管资源关联的应用程序定义的任务
-            </summary>
-        </member>
-        <member name="M:AIO.Storage.OnDeserialize(AIO.IReadData)">
-            <summary>
-            反序列化
-            </summary>
-            <param name="buffer">读取接口 如果长度等于0则说明没有数据</param>
-        </member>
-        <member name="M:AIO.Storage.OnSerialize(AIO.IWriteData)">
-            <summary>
-            序列化
-            </summary>
-            <param name="buffer">存储接口</param>
-        </member>
-        <member name="M:AIO.Storage.OnReset">
-            <summary>
-            重置数据
-            </summary>
-        </member>
-        <member name="M:AIO.Storage.Reset">
-            <summary>
-            重置数据
-            </summary>
-        </member>
-        <member name="P:AIO.Storage.Count">
-            <summary>
-            数据有效长度 需要调动序列化 Serialize
-            </summary>
-        </member>
-        <member name="M:AIO.Storage.AddBin(AIO.IBinData)">
-            <summary>
-            添加数据bin
-            </summary>
-        </member>
-        <member name="M:AIO.Storage.ClearBin">
-            <summary>
-            清空数据Bin
-            </summary>
-        </member>
-        <member name="M:AIO.Storage.ContainBin(AIO.IBinData)">
-            <summary>
-            判断是否存在数据
-            </summary>
-            <param name="item">数据</param>
-            <returns>Ture存在 False不存在</returns>
-        </member>
-        <member name="M:AIO.Storage.IndexOfBin(AIO.IBinData)">
-            <summary>
-            获取当前数据的下标
-            </summary>
-        </member>
-        <member name="M:AIO.Storage.InsertBin(System.Int32,AIO.IBinData)">
-            <summary>
-            插入
-            </summary>
-        </member>
-        <member name="M:AIO.Storage.RemoveBin(AIO.IBinData)">
-            <summary>
-            移除指定数据
-            </summary>
-        </member>
-        <member name="T:AIO.StorageFile">
-            <summary>
-            数据文件
-            </summary>
-        </member>
-        <member name="F:AIO.StorageFile.Path">
-            <summary>
-            保存读取路径
-            </summary>
-        </member>
-        <member name="M:AIO.StorageFile.#ctor(System.String@)">
-            <summary>
-            数据存储
-            </summary>
-            <param name="path">存储读取路径</param>
-        </member>
-        <member name="M:AIO.StorageFile.Save">
-            <summary>
-            保存文件
-            </summary>
-        </member>
-        <member name="M:AIO.StorageFile.Load">
-            <summary>
-            加载
-            </summary>
-        </member>
         <member name="T:AIO.PList.IPListElementExten">
             <summary>
             A .Net representation of a  PList element exten
@@ -7124,6 +6322,883 @@
             </summary>
             <param name="writer">The <see cref="T:System.Xml.XmlWriter"/> stream to which the object is serialized.</param>
         </member>
+        <member name="T:AIO.BinDictionary`2">
+            <summary>
+            数据字典
+            </summary>
+            <typeparam name="K">Key泛型</typeparam>
+            <typeparam name="V">Value泛型</typeparam>
+        </member>
+        <member name="P:AIO.BinDictionary`2.Collection">
+            <summary>
+            集合
+            </summary>
+        </member>
+        <member name="M:AIO.BinDictionary`2.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.BinDictionary`2.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.Deserialize(AIO.IReadData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.Serialize(AIO.IWriteData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.Reset">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.Add(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.Clear">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.Contains(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.CopyTo(System.Collections.Generic.KeyValuePair{`0,`1}[],System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.Remove(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinDictionary`2.Count">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinDictionary`2.IsReadOnly">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.ContainsKey(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.Add(`0,`1)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.Remove(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.TryGetValue(`0,`1@)">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinDictionary`2.Item(`0)">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinDictionary`2.Keys">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinDictionary`2.Values">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinDictionary`2.Clone">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.BinHashSet`1">
+            <summary>
+            列表存储
+            </summary>
+        </member>
+        <member name="P:AIO.BinHashSet`1.Collection">
+            <summary>
+            集合
+            </summary>
+        </member>
+        <member name="M:AIO.BinHashSet`1.#ctor">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:AIO.BinHashSet`1.Dispose">
+            <summary>
+            执行与释放或重置非托管资源关联的应用程序定义的任务
+            </summary>
+        </member>
+        <member name="M:AIO.BinHashSet`1.Deserialize(AIO.IReadData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinHashSet`1.Serialize(AIO.IWriteData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinHashSet`1.GetEnumerator">
+            <summary>返回一个循环访问集合的枚举器。</summary>
+            <returns>用于循环访问集合的枚举数。</returns>
+        </member>
+        <member name="M:AIO.BinHashSet`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>返回循环访问集合的枚举数。</summary>
+            <returns>
+              一个可用于循环访问集合的 <see cref="T:System.Collections.IEnumerator" /> 对象。
+            </returns>
+        </member>
+        <member name="M:AIO.BinHashSet`1.Add(`0)">
+            <summary>
+              将某项添加到 <see cref="T:System.Collections.Generic.ICollection`1" /> 中。
+            </summary>
+            <param name="item">
+              要添加到 <see cref="T:System.Collections.Generic.ICollection`1" /> 的对象。
+            </param>
+            <exception cref="T:System.NotSupportedException">
+              <see cref="T:System.Collections.Generic.ICollection`1" /> 为只读。
+            </exception>
+        </member>
+        <member name="M:AIO.BinHashSet`1.UnionWith(System.Collections.Generic.IEnumerable{`0}@)">
+            <summary>
+            对该集合进行与另一个IEnumerable (T)对象的并集运算；
+            </summary>
+            <param name="other">另一个集合</param>
+        </member>
+        <member name="M:AIO.BinHashSet`1.IntersectWith(System.Collections.Generic.IEnumerable{`0}@)">
+            <summary>
+            对该集合进行与另一个IEnumerable (T)对象的交集运算；
+            </summary>
+            <param name="other">另一个集合</param>
+        </member>
+        <member name="M:AIO.BinHashSet`1.ExceptWith(System.Collections.Generic.IEnumerable{`0}@)">
+            <summary>
+            将该集合中与其他集合重复的元素移除；
+            </summary>
+            <param name="other">另一个集合</param>
+        </member>
+        <member name="M:AIO.BinHashSet`1.SymmetricExceptWith(System.Collections.Generic.IEnumerable{`0}@)">
+            <summary>
+            将该集合变换成只包含在该集合或者另一个集合中而不同时属于两个集合的元素；
+            </summary>
+            <param name="other">另一个集合</param>
+        </member>
+        <member name="M:AIO.BinHashSet`1.IsSubsetOf(System.Collections.Generic.IEnumerable{`0}@)">
+            <summary>
+            判断该集合是否是另一个集合的子集；
+            </summary>
+            <param name="other">另一个集合</param>
+            <returns>True:是 False:否</returns>
+        </member>
+        <member name="M:AIO.BinHashSet`1.IsSupersetOf(System.Collections.Generic.IEnumerable{`0}@)">
+            <summary>
+            判断该集合是否是另一个集合的超集；
+            </summary>
+            <param name="other">另一个集合</param>
+            <returns>True:是 False:否</returns>
+        </member>
+        <member name="M:AIO.BinHashSet`1.IsProperSupersetOf(System.Collections.Generic.IEnumerable{`0}@)">
+            <summary>
+            判断该集合是否是另一个集合的真超集；
+            </summary>
+            <param name="other">另一个集合</param>
+            <returns>True:是 False:否</returns>
+        </member>
+        <member name="M:AIO.BinHashSet`1.IsProperSubsetOf(System.Collections.Generic.IEnumerable{`0}@)">
+            <summary>
+            判断该集合是否是另一个集合的真子集；
+            </summary>
+            <param name="other">另一个集合</param>
+            <returns>True:是 False:否</returns>
+        </member>
+        <member name="M:AIO.BinHashSet`1.Overlaps(System.Collections.Generic.IEnumerable{`0}@)">
+            <summary>
+            判断该集合是否与另一个集合存在共同的元素；
+            </summary>
+            <param name="other">另一个集合</param>
+            <returns>True:是 False:否</returns>
+        </member>
+        <member name="M:AIO.BinHashSet`1.SetEquals(System.Collections.Generic.IEnumerable{`0}@)">
+            <summary>
+            判断该集合是否与另一个集合有完全相同的元素，且仅有这些元素。
+            </summary>
+            <param name="other">另一个集合</param>
+            <returns>True:是 False:否</returns>
+        </member>
+        <member name="M:AIO.BinHashSet`1.AIO#ISet{T}#Add(`0)">
+            <summary>
+            将ITEM添加到集合中，如果已存在，则返回false；
+            </summary>
+            <param name="item">要添加的元素</param>
+            <returns>Ture:不存在 False:已存在</returns>
+        </member>
+        <member name="M:AIO.BinHashSet`1.Clear">
+            <summary>
+              从 <see cref="T:System.Collections.Generic.ICollection`1" /> 中移除所有项。
+            </summary>
+            <exception cref="T:System.NotSupportedException">
+              <see cref="T:System.Collections.Generic.ICollection`1" /> 为只读。
+            </exception>
+        </member>
+        <member name="M:AIO.BinHashSet`1.Contains(`0)">
+            <summary>
+              确定 <see cref="T:System.Collections.Generic.ICollection`1" /> 是否包含特定值。
+            </summary>
+            <param name="item">
+              要在 <see cref="T:System.Collections.Generic.ICollection`1" /> 中定位的对象。
+            </param>
+            <returns>
+              如果在 <see langword="true" /> 中找到 <paramref name="item" />，则为 <see cref="T:System.Collections.Generic.ICollection`1" />；否则为 <see langword="false" />。
+            </returns>
+        </member>
+        <member name="M:AIO.BinHashSet`1.CopyTo(`0[],System.Int32)">
+            <summary>
+              从特定的 <see cref="T:System.Collections.Generic.ICollection`1" /> 索引处开始，将 <see cref="T:System.Array" /> 的元素复制到一个 <see cref="T:System.Array" /> 中。
+            </summary>
+            <param name="array">
+              一维 <see cref="T:System.Array" />，它是从 <see cref="T:System.Collections.Generic.ICollection`1" /> 复制的元素的目标。
+              <see cref="T:System.Array" /> 必须具有从零开始的索引。
+            </param>
+            <param name="arrayIndex">
+              <paramref name="array" /> 中从零开始的索引，从此处开始复制。
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="array" /> 为 <see langword="null" />。
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="arrayIndex" /> 小于 0。
+            </exception>
+            <exception cref="T:System.ArgumentException">
+              源中的元素数目 <see cref="T:System.Collections.Generic.ICollection`1" /> 大于从的可用空间 <paramref name="arrayIndex" /> 目标从头到尾 <paramref name="array" />。
+            </exception>
+        </member>
+        <member name="M:AIO.BinHashSet`1.Remove(`0)">
+            <summary>
+              从 <see cref="T:System.Collections.Generic.ICollection`1" /> 中移除特定对象的第一个匹配项。
+            </summary>
+            <param name="item">
+              要从 <see cref="T:System.Collections.Generic.ICollection`1" /> 中删除的对象。
+            </param>
+            <returns>
+              如果从 <see langword="true" /> 中成功移除 <paramref name="item" />，则为 <see cref="T:System.Collections.Generic.ICollection`1" />；否则为 <see langword="false" />。
+               如果在原始 <see langword="false" /> 中没有找到 <paramref name="item" />，该方法也会返回 <see cref="T:System.Collections.Generic.ICollection`1" />。
+            </returns>
+            <exception cref="T:System.NotSupportedException">
+              <see cref="T:System.Collections.Generic.ICollection`1" /> 为只读。
+            </exception>
+        </member>
+        <member name="P:AIO.BinHashSet`1.Count">
+            <summary>
+              获取 <see cref="T:System.Collections.Generic.ICollection`1" /> 中包含的元素数。
+            </summary>
+            <returns>
+              <see cref="T:System.Collections.Generic.ICollection`1" /> 中包含的元素数。
+            </returns>
+        </member>
+        <member name="P:AIO.BinHashSet`1.IsReadOnly">
+            <summary>
+              获取一个值，该值指示 <see cref="T:System.Collections.Generic.ICollection`1" /> 是否为只读。
+            </summary>
+            <returns>
+              如果 <see langword="true" /> 是只读的，则为 <see cref="T:System.Collections.Generic.ICollection`1" />；否则为 <see langword="false" />。
+            </returns>
+        </member>
+        <member name="M:AIO.BinHashSet`1.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+              使用将目标对象序列化所需的数据填充 <see cref="T:System.Runtime.Serialization.SerializationInfo" />。
+            </summary>
+            <param name="info">
+              要填充数据的 <see cref="T:System.Runtime.Serialization.SerializationInfo" />。
+            </param>
+            <param name="context">
+              此序列化的目标（请参见 <see cref="T:System.Runtime.Serialization.StreamingContext" />）。
+            </param>
+            <exception cref="T:System.Security.SecurityException">
+              调用方没有所要求的权限。
+            </exception>
+        </member>
+        <member name="M:AIO.BinHashSet`1.OnDeserialization(System.Object)">
+            <summary>在整个对象图形已经反序列化时运行。</summary>
+            <param name="sender">
+              启动回调的对象。
+               当前未实现该参数的功能。
+            </param>
+        </member>
+        <member name="M:AIO.BinHashSet`1.Reset">
+            <summary>
+            重置
+            </summary>
+        </member>
+        <member name="M:AIO.BinHashSet`1.Clone">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.BinList`1">
+            <summary>
+            列表存储
+            </summary>
+        </member>
+        <member name="P:AIO.BinList`1.Collection">
+            <summary>
+            集合
+            </summary>
+        </member>
+        <member name="M:AIO.BinList`1.#ctor">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:AIO.BinList`1.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.Reset">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.Deserialize(AIO.IReadData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.Serialize(AIO.IWriteData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.Add(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.Clear">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.Contains(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.CopyTo(`0[],System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.Remove(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.CopyTo(System.Array,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinList`1.Count">
+            <summary>
+              获取 <see cref="T:System.Collections.Generic.ICollection`1" /> 中包含的元素数。
+            </summary>
+            <returns>
+              <see cref="T:System.Collections.Generic.ICollection`1" /> 中包含的元素数。
+            </returns>
+        </member>
+        <member name="P:AIO.BinList`1.SyncRoot">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinList`1.IsSynchronized">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinList`1.IsReadOnly">
+            <inheritdoc cref="P:System.Collections.Generic.ICollection`1.IsReadOnly" />
+        </member>
+        <member name="M:AIO.BinList`1.IndexOf(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.Insert(System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinList`1.RemoveAt(System.Int32)">
+            <inheritdoc cref="M:System.Collections.Generic.IList`1.RemoveAt(System.Int32)" />
+        </member>
+        <member name="P:AIO.BinList`1.Item(System.Int32)">
+            <inheritdoc cref="P:System.Collections.Generic.IList`1.Item(System.Int32)" />
+        </member>
+        <member name="M:AIO.BinList`1.Clone">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.BinQueue`1">
+            <summary>
+            数据队列
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:AIO.BinQueue`1.Collection">
+            <summary>
+            集合
+            </summary>
+        </member>
+        <member name="M:AIO.BinQueue`1.#ctor">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:AIO.BinQueue`1.Dispose">
+            <summary>
+            执行与释放或重置非托管资源关联的应用程序定义的任务。
+            </summary>
+        </member>
+        <member name="M:AIO.BinQueue`1.Deserialize(AIO.IReadData)">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AIO.BinQueue`1.Serialize(AIO.IWriteData)">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AIO.BinQueue`1.Reset">
+            <summary>
+            重置
+            </summary>
+        </member>
+        <member name="M:AIO.BinQueue`1.GetEnumerator">
+            <summary>返回一个循环访问集合的枚举器。</summary>
+            <returns>用于循环访问集合的枚举数。</returns>
+        </member>
+        <member name="M:AIO.BinQueue`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>返回循环访问集合的枚举数。</summary>
+            <returns>
+              一个可用于循环访问集合的 <see cref="T:System.Collections.IEnumerator" /> 对象。
+            </returns>
+        </member>
+        <member name="M:AIO.BinQueue`1.CopyTo(System.Array,System.Int32)">
+            <summary>
+              从特定的 <see cref="T:System.Collections.ICollection" /> 索引处开始，将 <see cref="T:System.Array" /> 的元素复制到一个 <see cref="T:System.Array" /> 中。
+            </summary>
+            <param name="array">
+              一维 <see cref="T:System.Array" />，它是从 <see cref="T:System.Collections.ICollection" /> 复制的元素的目标。
+              <see cref="T:System.Array" /> 必须具有从零开始的索引。
+            </param>
+            <param name="index">
+              <paramref name="array" /> 中从零开始的索引，从此处开始复制。
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="array" /> 为 <see langword="null" />。
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="index" /> 小于零。
+            </exception>
+            <exception cref="T:System.ArgumentException">
+              <paramref name="array" /> 是多维的。
+              - 或 -
+              源中的元素数目 <see cref="T:System.Collections.ICollection" /> 大于从的可用空间 <paramref name="index" /> 目标从头到尾 <paramref name="array" />。
+              - 或 -
+              无法自动将源 <see cref="T:System.Collections.ICollection" /> 的类型转换为目标 <paramref name="array" /> 的类型。
+            </exception>
+        </member>
+        <member name="P:AIO.BinQueue`1.System#Collections#ICollection#Count">
+            <summary>
+              获取 <see cref="T:System.Collections.ICollection" /> 中包含的元素数。
+            </summary>
+            <returns>
+              <see cref="T:System.Collections.ICollection" /> 中包含的元素数。
+            </returns>
+        </member>
+        <member name="P:AIO.BinQueue`1.SyncRoot">
+            <summary>
+              获取可用于同步对 <see cref="T:System.Collections.ICollection" /> 的访问的对象。
+            </summary>
+            <returns>
+              可用于同步对 <see cref="T:System.Collections.ICollection" /> 的访问的对象。
+            </returns>
+        </member>
+        <member name="P:AIO.BinQueue`1.IsSynchronized">
+            <summary>
+              获取一个值，该值指示是否同步对 <see cref="T:System.Collections.ICollection" /> 的访问（线程安全）。
+            </summary>
+            <returns>
+              如果对 <see langword="true" /> 的访问是同步的（线程安全），则为 <see cref="T:System.Collections.ICollection" />；否则为 <see langword="false" />。
+            </returns>
+        </member>
+        <member name="P:AIO.BinQueue`1.System#Collections#Generic#IReadOnlyCollection{T}#Count">
+            <summary>获取集合中的元素数。</summary>
+            <returns>集合中的元素数。</returns>
+        </member>
+        <member name="M:AIO.BinQueue`1.Clone">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.BinSortedList`2">
+            <summary>
+            数据字典
+            </summary>
+            <typeparam name="TKey">Key泛型</typeparam>
+            <typeparam name="TValue">Value泛型</typeparam>
+        </member>
+        <member name="P:AIO.BinSortedList`2.Collection">
+            <summary>
+            集合
+            </summary>
+        </member>
+        <member name="M:AIO.BinSortedList`2.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.BinSortedList`2.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.Deserialize(AIO.IReadData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.Serialize(AIO.IWriteData)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.Reset">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.Add(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.Clear">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.Contains(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.CopyTo(System.Collections.Generic.KeyValuePair{`0,`1}[],System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.Remove(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.CopyTo(System.Array,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinSortedList`2.Count">
+            <inheritdoc cref="P:System.Collections.Generic.ICollection`1.Count" />
+        </member>
+        <member name="P:AIO.BinSortedList`2.SyncRoot">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinSortedList`2.IsSynchronized">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinSortedList`2.IsReadOnly">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.ContainsKey(`0)">
+            <inheritdoc cref="M:System.Collections.Generic.IDictionary`2.ContainsKey(`0)" />
+        </member>
+        <member name="M:AIO.BinSortedList`2.Add(`0,`1)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.Remove(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.TryGetValue(`0,`1@)">
+            <inheritdoc cref="M:System.Collections.Generic.IDictionary`2.TryGetValue(`0,`1@)" />
+        </member>
+        <member name="P:AIO.BinSortedList`2.Item(`0)">
+            <inheritdoc cref="P:System.Collections.Generic.IDictionary`2.Item(`0)" />
+        </member>
+        <member name="P:AIO.BinSortedList`2.System#Collections#Generic#IReadOnlyDictionary{TKey,TValue}#Keys">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinSortedList`2.System#Collections#Generic#IReadOnlyDictionary{TKey,TValue}#Values">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinSortedList`2.Keys">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.BinSortedList`2.Values">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BinSortedList`2.Clone">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.BinStack`1">
+            <summary>
+            数据队列
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:AIO.BinStack`1.Collection">
+            <summary>
+            集合
+            </summary>
+        </member>
+        <member name="M:AIO.BinStack`1.#ctor">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:AIO.BinStack`1.Dispose">
+            <summary>
+            执行与释放或重置非托管资源关联的应用程序定义的任务。
+            </summary>
+        </member>
+        <member name="M:AIO.BinStack`1.Deserialize(AIO.IReadData)">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AIO.BinStack`1.Serialize(AIO.IWriteData)">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AIO.BinStack`1.Reset">
+            <summary>
+            重置
+            </summary>
+        </member>
+        <member name="M:AIO.BinStack`1.GetEnumerator">
+            <summary>返回一个循环访问集合的枚举器。</summary>
+            <returns>用于循环访问集合的枚举数。</returns>
+        </member>
+        <member name="M:AIO.BinStack`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>返回循环访问集合的枚举数。</summary>
+            <returns>
+              一个可用于循环访问集合的 <see cref="T:System.Collections.IEnumerator" /> 对象。
+            </returns>
+        </member>
+        <member name="M:AIO.BinStack`1.CopyTo(System.Array,System.Int32)">
+            <summary>
+              从特定的 <see cref="T:System.Collections.ICollection" /> 索引处开始，将 <see cref="T:System.Array" /> 的元素复制到一个 <see cref="T:System.Array" /> 中。
+            </summary>
+            <param name="array">
+              一维 <see cref="T:System.Array" />，它是从 <see cref="T:System.Collections.ICollection" /> 复制的元素的目标。
+              <see cref="T:System.Array" /> 必须具有从零开始的索引。
+            </param>
+            <param name="index">
+              <paramref name="array" /> 中从零开始的索引，从此处开始复制。
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="array" /> 为 <see langword="null" />。
+            </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="index" /> 小于零。
+            </exception>
+            <exception cref="T:System.ArgumentException">
+              <paramref name="array" /> 是多维的。
+              - 或 -
+              源中的元素数目 <see cref="T:System.Collections.ICollection" /> 大于从的可用空间 <paramref name="index" /> 目标从头到尾 <paramref name="array" />。
+              - 或 -
+              无法自动将源 <see cref="T:System.Collections.ICollection" /> 的类型转换为目标 <paramref name="array" /> 的类型。
+            </exception>
+        </member>
+        <member name="P:AIO.BinStack`1.System#Collections#ICollection#Count">
+            <summary>
+              获取 <see cref="T:System.Collections.ICollection" /> 中包含的元素数。
+            </summary>
+            <returns>
+              <see cref="T:System.Collections.ICollection" /> 中包含的元素数。
+            </returns>
+        </member>
+        <member name="P:AIO.BinStack`1.SyncRoot">
+            <summary>
+              获取可用于同步对 <see cref="T:System.Collections.ICollection" /> 的访问的对象。
+            </summary>
+            <returns>
+              可用于同步对 <see cref="T:System.Collections.ICollection" /> 的访问的对象。
+            </returns>
+        </member>
+        <member name="P:AIO.BinStack`1.IsSynchronized">
+            <summary>
+              获取一个值，该值指示是否同步对 <see cref="T:System.Collections.ICollection" /> 的访问（线程安全）。
+            </summary>
+            <returns>
+              如果对 <see langword="true" /> 的访问是同步的（线程安全），则为 <see cref="T:System.Collections.ICollection" />；否则为 <see langword="false" />。
+            </returns>
+        </member>
+        <member name="P:AIO.BinStack`1.System#Collections#Generic#IReadOnlyCollection{T}#Count">
+            <summary>获取集合中的元素数。</summary>
+            <returns>集合中的元素数。</returns>
+        </member>
+        <member name="M:AIO.BinStack`1.Clone">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.Storage">
+            <summary>
+            数据存储
+            </summary>
+        </member>
+        <member name="P:AIO.Storage.Buffer">
+            <summary>
+            字节数据
+            </summary>
+        </member>
+        <member name="P:AIO.Storage.Data">
+            <summary>
+            数据有效长度 需要调动序列化 Serialize
+            </summary>
+        </member>
+        <member name="M:AIO.Storage.#ctor">
+            <summary>
+            数据存储
+            </summary>
+        </member>
+        <member name="M:AIO.Storage.Deserialize">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AIO.Storage.Serialize">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AIO.Storage.Dispose">
+            <summary>
+            执行与释放或重置非托管资源关联的应用程序定义的任务
+            </summary>
+        </member>
+        <member name="M:AIO.Storage.OnDeserialize(AIO.IReadData)">
+            <summary>
+            反序列化
+            </summary>
+            <param name="buffer">读取接口 如果长度等于0则说明没有数据</param>
+        </member>
+        <member name="M:AIO.Storage.OnSerialize(AIO.IWriteData)">
+            <summary>
+            序列化
+            </summary>
+            <param name="buffer">存储接口</param>
+        </member>
+        <member name="M:AIO.Storage.OnReset">
+            <summary>
+            重置数据
+            </summary>
+        </member>
+        <member name="M:AIO.Storage.Reset">
+            <summary>
+            重置数据
+            </summary>
+        </member>
+        <member name="P:AIO.Storage.Count">
+            <summary>
+            数据有效长度 需要调动序列化 Serialize
+            </summary>
+        </member>
+        <member name="M:AIO.Storage.AddBin(AIO.IBinData)">
+            <summary>
+            添加数据bin
+            </summary>
+        </member>
+        <member name="M:AIO.Storage.ClearBin">
+            <summary>
+            清空数据Bin
+            </summary>
+        </member>
+        <member name="M:AIO.Storage.ContainBin(AIO.IBinData)">
+            <summary>
+            判断是否存在数据
+            </summary>
+            <param name="item">数据</param>
+            <returns>Ture存在 False不存在</returns>
+        </member>
+        <member name="M:AIO.Storage.IndexOfBin(AIO.IBinData)">
+            <summary>
+            获取当前数据的下标
+            </summary>
+        </member>
+        <member name="M:AIO.Storage.InsertBin(System.Int32,AIO.IBinData)">
+            <summary>
+            插入
+            </summary>
+        </member>
+        <member name="M:AIO.Storage.RemoveBin(AIO.IBinData)">
+            <summary>
+            移除指定数据
+            </summary>
+        </member>
+        <member name="T:AIO.StorageFile">
+            <summary>
+            数据文件
+            </summary>
+        </member>
+        <member name="F:AIO.StorageFile.Path">
+            <summary>
+            保存读取路径
+            </summary>
+        </member>
+        <member name="M:AIO.StorageFile.#ctor(System.String@)">
+            <summary>
+            数据存储
+            </summary>
+            <param name="path">存储读取路径</param>
+        </member>
+        <member name="M:AIO.StorageFile.Save">
+            <summary>
+            保存文件
+            </summary>
+        </member>
+        <member name="M:AIO.StorageFile.Load">
+            <summary>
+            加载
+            </summary>
+        </member>
+        <member name="T:AIO.ScriptType">
+            <summary>
+            脚本类型
+            </summary>
+        </member>
+        <member name="F:AIO.ScriptType.CScript">
+            <summary>
+            C#
+            </summary>
+        </member>
+        <member name="F:AIO.ScriptType.Lua">
+            <summary>
+            Lua
+            </summary>
+        </member>
+        <member name="F:AIO.ScriptType.Java">
+            <summary>
+            Java
+            </summary>
+        </member>
+        <member name="F:AIO.ScriptType.Python">
+            <summary>
+            Python
+            </summary>
+        </member>
+        <member name="F:AIO.ScriptType.PHP">
+            <summary>
+            PHP
+            </summary>
+        </member>
+        <member name="F:AIO.ScriptType.Shell">
+            <summary>
+            Shell
+            </summary>
+        </member>
+        <member name="F:AIO.ScriptType.Bat">
+            <summary>
+            Bat
+            </summary>
+        </member>
+        <member name="F:AIO.ScriptType.Object_C">
+            <summary>
+            OC
+            </summary>
+        </member>
+        <member name="F:AIO.ScriptType.TypeScript">
+            <summary>
+            TS
+            </summary>
+        </member>
+        <member name="F:AIO.ScriptType.FScript">
+            <summary>
+            F#
+            </summary>
+        </member>
+        <member name="F:AIO.ScriptType.Rust">
+            <summary>
+            Rust
+            </summary>
+        </member>
+        <member name="F:AIO.ScriptType.Ruby">
+            <summary>
+            Ruby
+            </summary>
+        </member>
+        <member name="F:AIO.ScriptType.Go">
+            <summary>
+            Go
+            </summary>
+        </member>
+        <member name="F:AIO.ScriptType.UnityShader">
+            <summary>
+            Unity Shader
+            </summary>
+        </member>
         <member name="T:AIO.AmbiguousOperatorException">
             <summary>
             模棱两可的运算符
@@ -8180,84 +8255,1006 @@
             maximum length of address
             </summary>
         </member>
-        <member name="T:AIO.ScriptType">
+        <member name="T:Pool">
             <summary>
-            脚本类型
+            对象池
             </summary>
         </member>
-        <member name="F:AIO.ScriptType.CScript">
+        <member name="T:Pool.Dictionary`2">
             <summary>
-            C#
+            Dictionary 对象池
             </summary>
         </member>
-        <member name="F:AIO.ScriptType.Lua">
+        <member name="M:Pool.Dictionary`2.New">
             <summary>
-            Lua
+            创建
             </summary>
         </member>
-        <member name="F:AIO.ScriptType.Java">
+        <member name="M:Pool.Dictionary`2.Free(System.Collections.Generic.Dictionary{`0,`1})">
             <summary>
-            Java
+            释放
             </summary>
         </member>
-        <member name="F:AIO.ScriptType.Python">
+        <member name="T:Pool.Disposable`1">
             <summary>
-            Python
+            An <see cref="T:System.IDisposable"/> to allow pooled objects to be acquired and released within <c>using</c>
+            statements instead of needing to manually release everything.
             </summary>
         </member>
-        <member name="F:AIO.ScriptType.PHP">
+        <member name="F:Pool.Disposable`1.Item">
             <summary>
-            PHP
+            The object acquired from the <see cref="T:Pool.Disposable`1"/>.
             </summary>
         </member>
-        <member name="F:AIO.ScriptType.Shell">
+        <member name="F:Pool.Disposable`1.OnRelease">
             <summary>
-            Shell
+            Called by IDisposable.Dispose.
             </summary>
         </member>
-        <member name="F:AIO.ScriptType.Bat">
+        <member name="M:Pool.Disposable`1.#ctor(`0,System.Action{`0})">
             <summary>
-            Bat
+            释放
             </summary>
         </member>
-        <member name="F:AIO.ScriptType.Object_C">
+        <member name="T:Pool.Generic`1">
             <summary>
-            OC
+            通用
             </summary>
         </member>
-        <member name="F:AIO.ScriptType.TypeScript">
+        <member name="M:Pool.Generic`1.New(System.Func{`0})">
             <summary>
-            TS
+            创建
             </summary>
         </member>
-        <member name="F:AIO.ScriptType.FScript">
+        <member name="M:Pool.Generic`1.New">
             <summary>
-            F#
+            创建
             </summary>
         </member>
-        <member name="F:AIO.ScriptType.Rust">
+        <member name="M:Pool.Generic`1.Free(`0)">
             <summary>
-            Rust
+            释放
             </summary>
         </member>
-        <member name="F:AIO.ScriptType.Ruby">
+        <member name="T:Pool.HashSet`1">
             <summary>
-            Ruby
+            HashSet对象池
             </summary>
         </member>
-        <member name="F:AIO.ScriptType.Go">
+        <member name="M:Pool.HashSet`1.New">
             <summary>
-            Go
+            创建新的
             </summary>
         </member>
-        <member name="F:AIO.ScriptType.UnityShader">
+        <member name="M:Pool.HashSet`1.Free(System.Collections.Generic.HashSet{`0})">
             <summary>
-            Unity Shader
+            释放HashSet
             </summary>
+        </member>
+        <member name="T:Pool.List`1">
+            <summary>
+            List对象池
+            </summary>
+        </member>
+        <member name="M:Pool.List`1.New">
+            <summary>
+            创建新的
+            </summary>
+        </member>
+        <member name="M:Pool.List`1.Free(System.Collections.Generic.List{`0})">
+            <summary>
+            释放List
+            </summary>
+        </member>
+        <member name="T:Pool.Queue`1">
+            <summary>
+            Queue对象池
+            </summary>
+        </member>
+        <member name="M:Pool.Queue`1.New">
+            <summary>
+            创建新的
+            </summary>
+        </member>
+        <member name="M:Pool.Queue`1.Free(System.Collections.Generic.Queue{`0})">
+            <summary>
+            释放Queue
+            </summary>
+        </member>
+        <member name="T:Pool.SortedList`2">
+            <summary>
+            Dictionary 对象池
+            </summary>
+        </member>
+        <member name="M:Pool.SortedList`2.New">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="M:Pool.SortedList`2.Free(System.Collections.Generic.SortedList{`0,`1})">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="T:Pool.Stack`1">
+            <summary>
+            Stack对象池
+            </summary>
+        </member>
+        <member name="M:Pool.Stack`1.New">
+            <summary>
+            创建新的
+            </summary>
+        </member>
+        <member name="M:Pool.Stack`1.Free(System.Collections.Generic.Stack{`0})">
+            <summary>
+            释放Stack
+            </summary>
+        </member>
+        <member name="M:Pool.Using``1(``0@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:Pool.Using``1(``0@,System.Action{``0})">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:Pool.Using``1(``0,System.Action{``0})">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:Pool.Using``1(System.Collections.Generic.List{``0}@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:Pool.Using``1(System.Collections.Generic.HashSet{``0}@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:Pool.Using``1(System.Collections.Generic.Stack{``0}@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:Pool.Using``1(System.Collections.Generic.Queue{``0}@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:Pool.Using``2(System.Collections.Generic.Dictionary{``0,``1}@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="T:PoolExtend">
+            <summary>
+            扩展
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToDictionaryPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为 Dictionary 并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.Free``2(System.Collections.Generic.Dictionary{``0,``1})">
+            <summary>
+            释放 Dictionary
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToHashSetPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为HashSet并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToHashSetPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为HashSet并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToHashSetPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为HashSet并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.Free``1(System.Collections.Generic.HashSet{``0})">
+            <summary>
+            释放HashSet
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToListPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToListPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToListPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.Free``1(System.Collections.Generic.List{``0})">
+            <summary>
+            释放List
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToQueuePooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToQueuePooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToQueuePooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.Free``1(System.Collections.Generic.Queue{``0})">
+            <summary>
+            释放Queue
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToSortedListPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为 Dictionary 并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.Free``2(System.Collections.Generic.SortedList{``0,``1})">
+            <summary>
+            释放 Dictionary
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToStackPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为Stack并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToStackPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Stack并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToStackPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Stack并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.Free``1(System.Collections.Generic.Stack{``0})">
+            <summary>
+            释放Stack
+            </summary>
+        </member>
+        <member name="T:Unit">
+            <summary>
+            单位
+            </summary>
+        </member>
+        <member name="T:Unit.Char">
+            <summary>
+            只读变量
+            </summary>
+        </member>
+        <member name="F:Unit.Char.C0">
+            <summary>
+            0的字符
+            </summary>
+        </member>
+        <member name="F:Unit.Char.BEL">
+            <summary>
+            响铃
+            </summary>
+        </member>
+        <member name="F:Unit.Char.BackSpace">
+            <summary>
+            回格
+            </summary>
+        </member>
+        <member name="F:Unit.Char.TabH">
+            <summary>
+            tab(水平制表符)
+            </summary>
+        </member>
+        <member name="F:Unit.Char.NewLine">
+            <summary>
+            换行
+            </summary>
+        </member>
+        <member name="F:Unit.Char.TabV">
+            <summary>
+            tab(垂直制表符)
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Page">
+            <summary>
+            换页
+            </summary>
+        </member>
+        <member name="F:Unit.Char.EnterNewLine">
+            <summary>
+            回车 chr(13) &amp; chr(10) 回车和换行的组合
+            </summary>
+        </member>
+        <member name="F:Unit.Char.End">
+            <summary>
+            结束 End
+            </summary>
+        </member>
+        <member name="F:Unit.Char.PauseBreak">
+            <summary>
+            脱离 Pause Break
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Space">
+            <summary>
+            空格
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Exclamation">
+            <summary>
+            !
+            </summary>
+        </member>
+        <member name="F:Unit.Char.DoubleQuote">
+            <summary>
+            "
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Pound">
+            <summary>
+            #
+            </summary>
+        </member>
+        <member name="F:Unit.Char.USD">
+            <summary>
+            $
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Modulus">
+            <summary>
+            -%
+            </summary>
+        </member>
+        <member name="F:Unit.Char.AND">
+            <summary>
+            -&amp;
+            </summary>
+        </member>
+        <member name="F:Unit.Char.SingleQuote">
+            <summary>
+            -’
+            </summary>
+        </member>
+        <member name="F:Unit.Char.LeftBracket">
+            <summary>
+            -(
+            </summary>
+        </member>
+        <member name="F:Unit.Char.RightBracket">
+            <summary>
+            -)
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Asterisk">
+            <summary>
+            *
+            </summary>
+        </member>
+        <member name="F:Unit.Char.ADD">
+            <summary>
+            +
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Comma">
+            <summary>
+            ,
+            </summary>
+        </member>
+        <member name="F:Unit.Char.SUB">
+            <summary>
+            -
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Point">
+            <summary>
+            .
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Slash">
+            <summary>
+            /
+            </summary>
+        </member>
+        <member name="F:Unit.Char.N0">
+            <summary>
+            0
+            </summary>
+        </member>
+        <member name="F:Unit.Char.N1">
+            <summary>
+            1
+            </summary>
+        </member>
+        <member name="F:Unit.Char.N2">
+            <summary>
+            2
+            </summary>
+        </member>
+        <member name="F:Unit.Char.N3">
+            <summary>
+            3
+            </summary>
+        </member>
+        <member name="F:Unit.Char.N4">
+            <summary>
+            4
+            </summary>
+        </member>
+        <member name="F:Unit.Char.N5">
+            <summary>
+            5
+            </summary>
+        </member>
+        <member name="F:Unit.Char.N6">
+            <summary>
+            6
+            </summary>
+        </member>
+        <member name="F:Unit.Char.N7">
+            <summary>
+            7
+            </summary>
+        </member>
+        <member name="F:Unit.Char.N8">
+            <summary>
+            8
+            </summary>
+        </member>
+        <member name="F:Unit.Char.N9">
+            <summary>
+            9
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Number">
+            <summary>
+            数字
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Colon">
+            <summary>
+            :
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Semicolon">
+            <summary>
+            ;
+            </summary>
+        </member>
+        <member name="F:Unit.Char.LessThanSign">
+            <summary>
+            &lt;
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Equality">
+            <summary>
+            61 =
+            </summary>
+        </member>
+        <member name="F:Unit.Char.EA">
+            62 >　
+            63 ?
+            64 @
+            <summary>
+            65 A
+            </summary>
+        </member>
+        <member name="F:Unit.Char.EZ">
+            66 B
+            67 C
+            68 D
+            69 E
+            70 F
+            71 G
+            72 H
+            73 I
+            74 J
+            75 K
+            76 L
+            77 M
+            78 N
+            79 O
+            80 P
+            81 Q
+            82 R
+            83 S
+            84 T
+            85 U
+            86 V
+            87 W
+            88 X
+            89 Y
+            <summary>
+            90 Z
+            </summary>
+        </member>
+        <member name="F:Unit.Char.EAlphaBet">
+            <summary>
+            大写A-大写Z
+            </summary>
+        </member>
+        <member name="F:Unit.Char.UnderLine">
+            91 [
+            92 /　
+            92 /
+            93]
+            94 ^
+            <summary>
+            95 _
+            </summary>
+        </member>
+        <member name="F:Unit.Char.ea">
+            96 `
+            <summary>
+            97 a
+            </summary>
+        </member>
+        <member name="F:Unit.Char.ez">
+            98 b
+            99 c
+            100 d
+            101 e
+            102 f
+            103 g
+            104 h
+            105 i
+            106 j
+            107 k
+            108 l
+            109 m
+            110 n
+            111 o
+            112 p
+            113 q
+            114 r
+            115 s
+            116 t
+            117 u
+            118 v
+            119 w
+            120 x
+            121 y
+            <summary>
+            122 z
+            </summary>
+        </member>
+        <member name="F:Unit.Char.eAlphaBet">
+            <summary>
+            小写e-小写z
+            </summary>
+        </member>
+        <member name="T:Unit.Chinese">
+            <summary>
+            中文单位
+            </summary>
+        </member>
+        <member name="F:Unit.Chinese.CNSNum">
+            <summary>
+            数字单位:个数组
+            </summary>
+        </member>
+        <member name="F:Unit.Chinese.CNSDigit">
+            <summary>
+            数字单位:位数组
+            </summary>
+        </member>
+        <member name="F:Unit.Chinese.CNSUnits">
+            <summary>
+            数字单位:单位数组
+            </summary>
+        </member>
+        <member name="F:Unit.Chinese.NumberChar">
+            <summary>
+            数字字符串
+            </summary>
+        </member>
+        <member name="T:Unit.Color">
+            <summary>
+            颜色库
+            </summary>
+        </member>
+        <member name="F:Unit.Color.Write">
+            <summary> 白色 1 </summary>
+        </member>
+        <member name="F:Unit.Color.Red">
+            <summary> 红色 5 </summary>
+        </member>
+        <member name="F:Unit.Color.Green">
+            <summary> 绿色 3 </summary>
+        </member>
+        <member name="F:Unit.Color.Blue">
+            <summary> 蓝色 4 </summary>
+        </member>
+        <member name="F:Unit.Color.Peony">
+            <summary> 牡丹红 5 </summary>
+        </member>
+        <member name="F:Unit.Color.Cyan">
+            <summary> 青色 6 </summary>
+        </member>
+        <member name="F:Unit.Color.Yellow">
+            <summary> 黄色 7 </summary>
+        </member>
+        <member name="F:Unit.Color.Black">
+            <summary> 黑色 8 </summary>
+        </member>
+        <member name="F:Unit.Color.Gary">
+            <summary> 灰色 41 </summary>
+        </member>
+        <member name="F:Unit.Color.SeaBlue">
+            <summary> 海蓝 9 </summary>
+        </member>
+        <member name="F:Unit.Color.Orange">
+            <summary> 橙色 81 </summary>
+        </member>
+        <member name="F:Unit.Color.Chocolate">
+            <summary> 巧克力色 10 </summary>
+        </member>
+        <member name="F:Unit.Color.BluishViolet">
+            <summary> 蓝紫色 11 </summary>
+        </member>
+        <member name="F:Unit.Color.Brassiness">
+            <summary> 黄铜色 12 </summary>
+        </member>
+        <member name="F:Unit.Color.BrightGold">
+            <summary> 亮金色 13 </summary>
+        </member>
+        <member name="F:Unit.Color.Brown">
+            <summary> 棕色 14 </summary>
+        </member>
+        <member name="F:Unit.Color.Aeneous1">
+            <summary> 青铜色1 15 </summary>
+        </member>
+        <member name="F:Unit.Color.Aeneous2">
+            <summary> 青铜色2 16 </summary>
+        </member>
+        <member name="F:Unit.Color.Bluewore">
+            <summary> 士官服蓝色 17 </summary>
+        </member>
+        <member name="F:Unit.Color.Coppercold">
+            <summary> 冷铜色 18 </summary>
+        </member>
+        <member name="F:Unit.Color.Coppery">
+            <summary> 铜色 19 </summary>
+        </member>
+        <member name="F:Unit.Color.Redcoral">
+            <summary> 珊瑚红 20 </summary>
+        </member>
+        <member name="F:Unit.Color.Hyacinthine">
+            <summary> 紫蓝色 21 </summary>
+        </member>
+        <member name="F:Unit.Color.Copperdeep">
+            <summary> 深铜 22 </summary>
+        </member>
+        <member name="F:Unit.Color.Greendeep">
+            <summary> 深绿 23 </summary>
+        </member>
+        <member name="F:Unit.Color.Darkcoppergreen">
+            <summary> 深铜绿色 24 </summary>
+        </member>
+        <member name="F:Unit.Color.Darkolivegreen">
+            <summary> 深橄榄绿 25 </summary>
+        </member>
+        <member name="F:Unit.Color.Bluedeep">
+            <summary> 深蓝花色 26 </summary>
+        </member>
+        <member name="F:Unit.Color.Modena">
+            <summary> 深紫色 27 </summary>
+        </member>
+        <member name="F:Unit.Color.BlueSLATEdeep">
+            <summary> 深石板蓝 28 </summary>
+        </member>
+        <member name="F:Unit.Color.Slabsdeep">
+            <summary> 深铅灰色 29 </summary>
+        </member>
+        <member name="F:Unit.Color.Browndark">
+            <summary> 深棕褐色 30 </summary>
+        </member>
+        <member name="F:Unit.Color.Turquoisedeep">
+            <summary> 深绿松石色 32 </summary>
+        </member>
+        <member name="F:Unit.Color.Colordark">
+            <summary> 暗木色 33 </summary>
+        </member>
+        <member name="F:Unit.Color.Greylight">
+            <summary> 淡灰色 34 </summary>
+        </member>
+        <member name="F:Unit.Color.Redearthgreyrose">
+            <summary> 土灰玫瑰红色 35 </summary>
+        </member>
+        <member name="F:Unit.Color.Longstone">
+            <summary> 长石色 36 </summary>
+        </member>
+        <member name="F:Unit.Color.Firebrick">
+            <summary> 火砖色 37 </summary>
+        </member>
+        <member name="F:Unit.Color.Greenforest">
+            <summary> 森林绿 38 </summary>
+        </member>
+        <member name="F:Unit.Color.Golden">
+            <summary> 金色 39 </summary>
+        </member>
+        <member name="F:Unit.Color.Foresythia">
+            <summary> 鲜黄色 40 </summary>
+        </member>
+        <member name="F:Unit.Color.Aerugo">
+            <summary> 铜绿色 42 </summary>
+        </member>
+        <member name="F:Unit.Color.Yellowbluish">
+            <summary> 青黄色 43 </summary>
+        </member>
+        <member name="F:Unit.Color.Greenhunter">
+            <summary> 猎人绿 44 </summary>
+        </member>
+        <member name="F:Unit.Color.Redindian">
+            <summary> 印度红 45 </summary>
+        </member>
+        <member name="F:Unit.Color.Yellowearthy">
+            <summary> 土黄色 46 </summary>
+        </member>
+        <member name="F:Unit.Color.Wathet">
+            <summary> 浅蓝色 47 </summary>
+        </member>
+        <member name="F:Unit.Color.Greyfrench">
+            <summary> 浅灰色 48 </summary>
+        </member>
+        <member name="F:Unit.Color.Bluelightsteel">
+            <summary> 浅钢蓝色 49 </summary>
+        </member>
+        <member name="F:Unit.Color.Colorlight">
+            <summary> 浅木色 59 </summary>
+        </member>
+        <member name="F:Unit.Color.Greenlime">
+            <summary> 石灰绿色 60 </summary>
+        </member>
+        <member name="F:Unit.Color.Bisque">
+            <summary> 桔黄色 61 </summary>
+        </member>
+        <member name="F:Unit.Color.Maroon">
+            <summary> 褐红色 62 </summary> 62
+        </member>
+        <member name="T:Unit.Suffix">
+            <summary>
+            后缀
+            </summary>
+        </member>
+        <member name="F:Unit.Suffix.TextureSuffix">
+            <summary>
+            图片文件后缀
+            </summary>
+        </member>
+        <member name="F:Unit.Suffix.VideoSuffix">
+            <summary>
+            视频文件后缀
+            </summary>
+        </member>
+        <member name="F:Unit.Suffix.SoundSuffix">
+            <summary>
+            音频文件后缀
+            </summary>
+        </member>
+        <member name="F:Unit.Suffix.TextSuffix">
+            <summary>
+            文本文件后缀
+            </summary>
+        </member>
+        <member name="F:Unit.Suffix.ShaderSuffix">
+            <summary>
+            shader文件后缀
+            </summary>
+        </member>
+        <member name="F:Unit.Suffix.FontSuffix">
+            <summary>
+            字体后缀
+            </summary>
+        </member>
+        <member name="F:Unit.Suffix.Animation">
+            <summary>
+            动画文件后缀
+            </summary>
+        </member>
+        <member name="F:Unit.Suffix.Animator">
+            <summary>
+            控制器文件后缀
+            </summary>
+        </member>
+        <member name="F:Unit.Suffix.Material">
+            <summary>
+            材质文件后缀
+            </summary>
+        </member>
+        <member name="F:Unit.Suffix.PrefabSuffix">
+            <summary>
+            预制体文件后缀
+            </summary>
+        </member>
+        <member name="F:Unit.Suffix.RTextureSuffix">
+            <summary>
+            渲染纹理后缀
+            </summary>
+        </member>
+        <member name="T:Unit.Time">
+            <summary>
+            时间
+            </summary>
+        </member>
+        <member name="T:Unit.Time.SencondUnit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Unit.Time.SencondUnit.SECOND">
+            <summary> 秒 </summary>
+        </member>
+        <member name="F:Unit.Time.SencondUnit.MILLISCOND">
+            <summary> 毫秒 </summary>
+        </member>
+        <member name="F:Unit.Time.SencondUnit.MICROSECOND">
+            <summary> 微秒 </summary>
+        </member>
+        <member name="F:Unit.Time.SencondUnit.NANOSECOND">
+            <summary> 纳秒 </summary>
+        </member>
+        <member name="F:Unit.Time.SencondUnit.NANOSECOND_100">
+            <summary> 100纳秒计数单位 </summary>
+        </member>
+        <member name="M:Unit.Time.GetSencondUnit(Unit.Time.SencondUnit)">
+            <summary>
+            获取秒 计数单位 秒
+            </summary>
+        </member>
+        <member name="M:Unit.Time.GetMinUnit(Unit.Time.SencondUnit)">
+            <summary>
+            获取秒 计数单位 分
+            </summary>
+        </member>
+        <member name="M:Unit.Time.GetHourUnit(Unit.Time.SencondUnit)">
+            <summary>
+            获取秒 计数单位 时
+            </summary>
+        </member>
+        <member name="M:Unit.Time.GetDayUnit(Unit.Time.SencondUnit)">
+            <summary>
+            获取秒 计数单位 时
+            </summary>
+        </member>
+        <member name="M:Unit.Time.GetWeekUnit(Unit.Time.SencondUnit)">
+            <summary>
+            获取秒 计数单位 时
+            </summary>
+        </member>
+        <member name="T:Unit.Time.DateTimeUnit">
+            <summary>
+            时间间隔
+            </summary>
+        </member>
+        <member name="F:Unit.Time.DateTimeUnit.Day">
+            <summary> 日 </summary>
+        </member>
+        <member name="F:Unit.Time.DateTimeUnit.Week">
+            <summary> 周 </summary>
+        </member>
+        <member name="F:Unit.Time.DateTimeUnit.Month">
+            <summary> 月 </summary>
+        </member>
+        <member name="F:Unit.Time.DateTimeUnit.Season">
+            <summary> 季 </summary>
+        </member>
+        <member name="F:Unit.Time.DateTimeUnit.Year">
+            <summary> 年 </summary>
+        </member>
+        <member name="F:Unit.Time.UNIT_WEEK_DAY">
+            <summary> 一周7天 </summary>
+        </member>
+        <member name="F:Unit.Time.UNIT_DAY_HOUR">
+            <summary> 一天24时 </summary>
+        </member>
+        <member name="F:Unit.Time.UNIT_HOUR_MIN">
+            <summary> 一时60分 </summary>
+        </member>
+        <member name="F:Unit.Time.UNIT_MIN_SECOND">
+            <summary> 一分60秒 </summary>
+        </member>
+        <member name="F:Unit.Time.SECOND">
+            <summary> 秒 单位时间（秒） s </summary>
+        </member>
+        <member name="F:Unit.Time.SECOND_MIN">
+            <summary> 分 单位时间（秒） s </summary>
+        </member>
+        <member name="F:Unit.Time.SECOND_HOUR">
+            <summary> 时 单位时间（秒） s </summary>
+        </member>
+        <member name="F:Unit.Time.SECOND_DAY">
+            <summary> 日 单位时间（秒） s </summary>
+        </member>
+        <member name="F:Unit.Time.SECOND_WEEK">
+            <summary> 周 单位时间（秒） s </summary>
+        </member>
+        <member name="F:Unit.Time.MS_SECOND">
+            <summary> 秒 单位时间（毫秒） ms </summary>
+        </member>
+        <member name="F:Unit.Time.MS_MIN">
+            <summary> 分 单位时间（毫秒） ms  </summary>
+        </member>
+        <member name="F:Unit.Time.MS_HOUR">
+            <summary> 时 单位时间（毫秒） ms  </summary>
+        </member>
+        <member name="F:Unit.Time.MS_DAY">
+            <summary> 日 单位时间（毫秒） ms  </summary>
+        </member>
+        <member name="F:Unit.Time.MS_WEEK">
+            <summary> 周 单位时间（毫秒） ms  </summary>
+        </member>
+        <member name="F:Unit.Time.μS_SECOND">
+            <summary> 秒 单位时间（微秒） μs </summary>
+        </member>
+        <member name="F:Unit.Time.μS_MIN">
+            <summary> 分 单位时间（微秒） μs </summary>
+        </member>
+        <member name="F:Unit.Time.μS_HOUR">
+            <summary> 时 单位时间（微秒） μs </summary>
+        </member>
+        <member name="F:Unit.Time.μS_DAY">
+            <summary> 天 单位时间（微秒） μs </summary>
+        </member>
+        <member name="F:Unit.Time.μS_WEEK">
+            <summary> 周 单位时间（微秒） μs </summary>
+        </member>
+        <member name="F:Unit.Time.NS_SECOND">
+            <summary> 秒 单位时间（纳秒） ns </summary>
+        </member>
+        <member name="F:Unit.Time.NS_MIN">
+            <summary> 分 单位时间（纳秒） ns </summary>
+        </member>
+        <member name="F:Unit.Time.NS_HOUR">
+            <summary> 时 单位时间（纳秒） ns </summary>
+        </member>
+        <member name="F:Unit.Time.NS_DAY">
+            <summary> 天 单位时间（纳秒） ns </summary>
+        </member>
+        <member name="F:Unit.Time.NS_WEEK">
+            <summary> 周 单位时间（纳秒） ns </summary>
+        </member>
+        <member name="P:Unit.Time.Milliseconds">
+            <summary> 1毫秒 </summary>
+        </member>
+        <member name="P:Unit.Time.Second">
+            <summary> 1秒钟 </summary>
+        </member>
+        <member name="P:Unit.Time.Minute">
+            <summary> 1分钟 </summary>
+        </member>
+        <member name="P:Unit.Time.Hour">
+            <summary> 1小时 </summary>
+        </member>
+        <member name="P:Unit.Time.Day">
+            <summary> 1天 </summary>
+        </member>
+        <member name="F:Unit.Time.GREENWICH">
+            <summary> 格林威治时间UTC参照点：1970年1月1日0时0分0秒 </summary>
         </member>
         <member name="T:Utils">
             <summary>
-            工具库
+            Utils 工具库
             </summary>
         </member>
         <member name="T:Utils.Base64">
@@ -9817,12 +10814,12 @@
             将指定16进制字符数组转换为10进制数字
             </summary>
         </member>
-        <member name="T:Utils.MathX">
+        <member name="T:Utils.Math">
             <summary>
             数学库
             </summary>
         </member>
-        <member name="M:Utils.MathX.Clamp(System.Int32@,System.Int32@,System.Int32@)">
+        <member name="M:Utils.Math.Clamp(System.Int32@,System.Int32@,System.Int32@)">
             <summary>
             该方法将给定的整数值限制在指定的范围内，并返回新的整数值。
             </summary>
@@ -9835,7 +10832,7 @@
             该方法使用 C# 中的 "in" 关键字，表示输入参数是只读引用类型。
             </remarks> 
         </member>
-        <member name="M:Utils.MathX.Clamp(System.Single@,System.Single@,System.Single@)">
+        <member name="M:Utils.Math.Clamp(System.Single@,System.Single@,System.Single@)">
             <summary>
             该方法将给定的整数值限制在指定的范围内，并返回新的整数值。
             </summary>
@@ -9848,7 +10845,7 @@
             该方法使用 C# 中的 "in" 关键字，表示输入参数是只读引用类型。
             </remarks> 
         </member>
-        <member name="M:Utils.MathX.InMask(System.Int32@,System.Int32@)">
+        <member name="M:Utils.Math.InMask(System.Int32@,System.Int32@)">
             <summary>
             判断给定的层级是否在掩码中。
             </summary>
@@ -9856,7 +10853,7 @@
             <param name="mask">掩码，用二进制表示哪些层级被包括</param>
             <returns>如果层级在掩码中，返回 true；否则返回 false。</returns>
         </member>
-        <member name="M:Utils.MathX.InMask(System.Int64@,System.Int64@)">
+        <member name="M:Utils.Math.InMask(System.Int64@,System.Int64@)">
             <summary>
             判断给定的层级是否在掩码中。
             </summary>
@@ -9864,7 +10861,7 @@
             <param name="mask">掩码，用二进制表示哪些层级被包括</param>
             <returns>如果层级在掩码中，返回 true；否则返回 false。</returns>
         </member>
-        <member name="M:Utils.MathX.OutMask(System.Int32@,System.Int32@)">
+        <member name="M:Utils.Math.OutMask(System.Int32@,System.Int32@)">
             <summary>
             判断给定的层级是否在掩码中。
             </summary>
@@ -9872,7 +10869,7 @@
             <param name="mask">掩码，用二进制表示哪些层级被包括</param>
             <returns>如果层级不在掩码中，返回 true；否则返回 false。</returns>
         </member>
-        <member name="M:Utils.MathX.OutMask(System.Int64@,System.Int64@)">
+        <member name="M:Utils.Math.OutMask(System.Int64@,System.Int64@)">
             <summary>
             判断给定的层级是否在掩码中。
             </summary>
@@ -9880,37 +10877,37 @@
             <param name="mask">掩码，用二进制表示哪些层级被包括</param>
             <returns>如果层级不在掩码中，返回 true；否则返回 false。</returns>
         </member>
-        <member name="M:Utils.MathX.ArrayPerCent(System.Collections.Generic.IList{System.Int32}@)">
+        <member name="M:Utils.Math.ArrayPerCent(System.Collections.Generic.IList{System.Int32}@)">
             <summary>
             数组百分比计算
             </summary>
         </member>
-        <member name="M:Utils.MathX.ArrayPerCent(System.Collections.Generic.IList{System.Int64}@)">
+        <member name="M:Utils.Math.ArrayPerCent(System.Collections.Generic.IList{System.Int64}@)">
             <summary>
             数组百分比计算
             </summary>
         </member>
-        <member name="M:Utils.MathX.ArrayPerCent(System.Collections.Generic.IList{System.Single}@)">
+        <member name="M:Utils.Math.ArrayPerCent(System.Collections.Generic.IList{System.Single}@)">
             <summary>
             数组百分比计算
             </summary>
         </member>
-        <member name="F:Utils.MathX.EARTH_RADIUS">
+        <member name="F:Utils.Math.EARTH_RADIUS">
             <summary>
             单位
             </summary>
         </member>
-        <member name="F:Utils.MathX.Deg2Rad">
+        <member name="F:Utils.Math.Deg2Rad">
             <summary>
             单位
             </summary>
         </member>
-        <member name="F:Utils.MathX.Rad2Deg">
+        <member name="F:Utils.Math.Rad2Deg">
             <summary>
             单位
             </summary>
         </member>
-        <member name="M:Utils.MathX.Distance(System.Single@,System.Single@,System.Single@,System.Single@)">
+        <member name="M:Utils.Math.Distance(System.Single@,System.Single@,System.Single@,System.Single@)">
             <summary>
             计算两个点之间的直线距离。
             </summary>
@@ -9920,77 +10917,77 @@
             <param name="y2">第二个点的 y 坐标</param>
             <returns>两个点之间的距离</returns>
         </member>
-        <member name="M:Utils.MathX.Sin(System.Double@)">
+        <member name="M:Utils.Math.Sin(System.Double@)">
             <summary>
             返回给定角度的正弦值。
             </summary>
             <param name="f">给定角度，单位为弧度</param>
             <returns>角度的正弦值</returns>
         </member>
-        <member name="M:Utils.MathX.Asin(System.Double@)">
+        <member name="M:Utils.Math.Asin(System.Double@)">
             <summary>
             返回给定角度的反正弦值。
             </summary>
             <param name="f">要计算反正弦值的角度，范围为 -1 到 1 之间</param>
             <returns>指定角度的反正弦值，返回值的单位为弧度</returns>
         </member>
-        <member name="M:Utils.MathX.Cos(System.Double@)">
+        <member name="M:Utils.Math.Cos(System.Double@)">
             <summary>
             返回给定角度的余弦值。
             </summary>
             <param name="f">要计算余弦值的角度，单位为弧度</param>
             <returns>指定角度的余弦值</returns>
         </member>
-        <member name="M:Utils.MathX.Acos(System.Double@)">
+        <member name="M:Utils.Math.Acos(System.Double@)">
             <summary>
             返回给定角度的反余弦值。
             </summary>
             <param name="f">要计算反余弦值的角度，范围为 -1 到 1 之间</param>
             <returns>指定角度的反余弦值，返回值的单位为弧度</returns>
         </member>
-        <member name="M:Utils.MathX.Abs(System.Double@)">
+        <member name="M:Utils.Math.Abs(System.Double@)">
             <summary>
             返回给定值的绝对值。
             </summary>
             <param name="value">要计算绝对值的值</param>
             <returns>指定值的绝对值</returns>
         </member>
-        <member name="M:Utils.MathX.Abs(System.Single@)">
+        <member name="M:Utils.Math.Abs(System.Single@)">
             <summary>
             返回给定值的绝对值。
             </summary>
             <param name="value">要计算绝对值的值</param>
             <returns>指定值的绝对值</returns>
         </member>
-        <member name="M:Utils.MathX.Abs(System.Int64@)">
+        <member name="M:Utils.Math.Abs(System.Int64@)">
             <summary>
             返回给定值的绝对值。
             </summary>
             <param name="value">要计算绝对值的值</param>
             <returns>指定值的绝对值</returns>
         </member>
-        <member name="M:Utils.MathX.Round(System.Double@)">
+        <member name="M:Utils.Math.Round(System.Double@)">
             <summary>
             对传入的 double 类型数值进行四舍五入操作。
             </summary>
             <param name="value">需要进行四舍五入的 double 类型数值。</param>
             <returns>返回四舍五入后的 double 类型数值。</returns>
         </member>
-        <member name="M:Utils.MathX.Ceil(System.Double@)">
+        <member name="M:Utils.Math.Ceil(System.Double@)">
             <summary>
             对传入的 double 类型数值进行向上取整操作。
             </summary>
             <param name="value">需要进行向上取整的 double 类型数值。</param>
             <returns>返回向上取整后的 double 类型数值。</returns>
         </member>
-        <member name="M:Utils.MathX.Floor(System.Double@)">
+        <member name="M:Utils.Math.Floor(System.Double@)">
             <summary>
             对传入的 double 类型数值进行向下取整操作。
             </summary>
             <param name="value">需要进行向下取整的 double 类型数值。</param>
             <returns>返回向下取整后的 double 类型数值。</returns>
         </member>
-        <member name="M:Utils.MathX.Mod(System.Int32,System.Int32@)">
+        <member name="M:Utils.Math.Mod(System.Int32,System.Int32@)">
             <summary>
             对传入的 int 类型数值进行模运算操作，返回非负结果。
             </summary>
@@ -9998,7 +10995,7 @@
             <param name="space">模数，即取模时的除数，必须为正整数。</param>
             <returns>返回非负的模运算结果。</returns>
         </member>
-        <member name="M:Utils.MathX.GetGPSDistance(System.Double@,System.Double@,System.Double@,System.Double@)">
+        <member name="M:Utils.Math.GetGPSDistance(System.Double@,System.Double@,System.Double@,System.Double@)">
             <summary>
             计算两个 GPS 坐标点之间的距离（单位：米）。
             </summary>
@@ -10008,26 +11005,26 @@
             <param name="lng2">第二个坐标点的经度。</param>
             <returns>返回两个 GPS 坐标点之间的距离（单位：米）。</returns>
         </member>
-        <member name="M:Utils.MathX.Rad(System.Double@)">
+        <member name="M:Utils.Math.Rad(System.Double@)">
             <summary>
             将角度转换为弧度。
             </summary>
             <param name="d">需要转换的角度。</param>
             <returns>返回对应的弧度值。</returns>
         </member>
-        <member name="M:Utils.MathX.GetDistance(System.Double)">
+        <member name="M:Utils.Math.GetDistance(System.Double)">
             <summary>
             将距离值转换为字符串，单位为米或千米。
             </summary>
             <param name="value">需要转换的距离值。</param>
             <returns>返回对应的字符串，包含单位。</returns>
         </member>
-        <member name="T:Utils.MD5X">
+        <member name="T:Utils.MD5">
             <summary>
             计算MD5
             </summary>
         </member>
-        <member name="M:Utils.MD5X.GetMD5(System.IO.Stream,System.Int64@)">
+        <member name="M:Utils.MD5.GetMD5(System.IO.Stream,System.Int64@)">
             <summary>
             通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得MD5
             实现稍微复杂，但可使用与传输文件或接收文件时同步计算MD5值
@@ -10037,7 +11034,7 @@
             <param name="bufferSize">自定义缓冲区大小16K</param>
             <returns>MD5Hash</returns>
         </member>
-        <member name="M:Utils.MD5X.GetMD5ByHashAlgorithm(System.IO.Stream,System.Int64@)">
+        <member name="M:Utils.MD5.GetMD5ByHashAlgorithm(System.IO.Stream,System.Int64@)">
             <summary>
             通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得MD5
             实现稍微复杂，但可使用与传输文件或接收文件时同步计算MD5值
@@ -11060,96 +12057,96 @@
             验证URL是否有效
             </summary>
         </member>
-        <member name="T:Utils.MarshalEx">
+        <member name="T:Utils.Marshal">
             <summary>
-            Marshal 类
+            SMarshal 类
             </summary>
             <see>
                 <cref>https://msdn.microsoft.com/zh-cn/library/system.runtime.interopservices.marshal(VS.80).aspx</cref>
             </see>
             <!--提供了一个方法集，这些方法用于分配非托管内存、复制非托管内存块、将托管类型转换为非托管类型 此外还提供了在与非托管代码交互时使用的其他杂项方法-->
-            <!--备注 Marshal 类中定义的 static 方法对于处理非托管代码至关重要。此类中定义的大多数方法通常由需要-->
+            <!--备注 SMarshal 类中定义的 static 方法对于处理非托管代码至关重要。此类中定义的大多数方法通常由需要-->
             <!--此类型的任何公共静态（Visual Basic 中的 Shared）成员都是线程安全的，但不保证所有实例成员都 是线程安全的-->
         </member>
-        <member name="P:Utils.MarshalEx.SystemDefaultCharSize">
+        <member name="P:Utils.Marshal.SystemDefaultCharSize">
             <summary>
             表示系统上的默认字符大小；Unicode 系统上默认值为 2，ANSI 系统上默认值为 1。 此字段为只读。
             </summary>
         </member>
-        <member name="P:Utils.MarshalEx.SystemMaxDBCSCharSize">
+        <member name="P:Utils.Marshal.SystemMaxDBCSCharSize">
             <summary>
             表示用于当前操作系统的双字节字符集 (DBCS) 的最大大小（以字节为单位）。 此字段为只读。
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.SizeOf``1(``0)">
+        <member name="M:Utils.Marshal.SizeOf``1(``0)">
             <summary>
             获取 结构体实例 空间大小
             </summary>
             <param name="obj">返回对象的非托管大小 以字节为单位</param>
         </member>
-        <member name="M:Utils.MarshalEx.SizeOf``1">
+        <member name="M:Utils.Marshal.SizeOf``1">
             <summary>
             获取 结构体实例 空间大小
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.AllocHGlobal(System.Int32)">
+        <member name="M:Utils.Marshal.AllocHGlobal(System.Int32)">
             <summary>
             使用指定的字节数从进程的非托管内存中分配内存。
             </summary>
             <param name="size">内存中所需的字节数</param>
             <returns>一个指向新分配内存的指针 这个内存必须使用Marshal.FreeHGlobal 来释放 </returns>
         </member>
-        <member name="M:Utils.MarshalEx.AddRef(System.IntPtr)">
+        <member name="M:Utils.Marshal.AddRef(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.AllocCoTaskMem(System.Int32)">
+        <member name="M:Utils.Marshal.AllocCoTaskMem(System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.AreComObjectsAvailableForCleanup">
+        <member name="M:Utils.Marshal.AreComObjectsAvailableForCleanup">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.BindToMoniker(System.String)">
+        <member name="M:Utils.Marshal.BindToMoniker(System.String)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ChangeWrapperHandleStrength(System.Object,System.Boolean)">
+        <member name="M:Utils.Marshal.ChangeWrapperHandleStrength(System.Object,System.Boolean)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.CleanupUnusedObjectsInCurrentContext">
+        <member name="M:Utils.Marshal.CleanupUnusedObjectsInCurrentContext">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.AllocHGlobal(System.IntPtr)">
+        <member name="M:Utils.Marshal.AllocHGlobal(System.IntPtr)">
             <summary>
             使用指定的字节数从进程的非托管内存中分配内存。
             </summary>
             <param name="ptr">内存中所需的字节数</param>
             <returns>一个指向新分配内存的指针 这个内存必须使用Marshal.FreeHGlobal 来释放 </returns>
         </member>
-        <member name="M:Utils.MarshalEx.FreeHGlobal(System.IntPtr)">
+        <member name="M:Utils.Marshal.FreeHGlobal(System.IntPtr)">
             <summary>
             释放内存中指针
             </summary>
             <param name="hglobal">内存中的指针</param>
         </member>
-        <member name="M:Utils.MarshalEx.CreateAggregatedObject``1(System.IntPtr,``0)">
+        <member name="M:Utils.Marshal.CreateAggregatedObject``1(System.IntPtr,``0)">
             <summary>
             创建聚合对象
             </summary>
             <param name="ptr">指针</param>
             <param name="obj">数据</param>
         </member>
-        <member name="M:Utils.MarshalEx.CreateWrapperOfType``1(System.Object)">
+        <member name="M:Utils.Marshal.CreateWrapperOfType``1(System.Object)">
             <summary>
             创建类型的包装器
             </summary>
@@ -11157,7 +12154,7 @@
             <param name="obj">数据</param>
             <returns>包装数据</returns>
         </member>
-        <member name="M:Utils.MarshalEx.CreateWrapperOfType``2(``0)">
+        <member name="M:Utils.Marshal.CreateWrapperOfType``2(``0)">
             <summary>
             创建类型的包装器
             </summary>
@@ -11166,307 +12163,307 @@
             <param name="obj">数据</param>
             <returns>包装器</returns>
         </member>
-        <member name="M:Utils.MarshalEx.Copy(System.Single[],System.Int32,System.IntPtr,System.Int32)">
+        <member name="M:Utils.Marshal.Copy(System.Single[],System.Int32,System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.Copy(System.IntPtr[],System.Int32,System.IntPtr,System.Int32)">
+        <member name="M:Utils.Marshal.Copy(System.IntPtr[],System.Int32,System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.Copy(System.IntPtr,System.Single[],System.Int32,System.Int32)">
+        <member name="M:Utils.Marshal.Copy(System.IntPtr,System.Single[],System.Int32,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.Copy(System.IntPtr,System.IntPtr[],System.Int32,System.Int32)">
+        <member name="M:Utils.Marshal.Copy(System.IntPtr,System.IntPtr[],System.Int32,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.Copy(System.IntPtr,System.Int64[],System.Int32,System.Int32)">
+        <member name="M:Utils.Marshal.Copy(System.IntPtr,System.Int64[],System.Int32,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.Copy(System.IntPtr,System.Int32[],System.Int32,System.Int32)">
+        <member name="M:Utils.Marshal.Copy(System.IntPtr,System.Int32[],System.Int32,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.Copy(System.IntPtr,System.Double[],System.Int32,System.Int32)">
+        <member name="M:Utils.Marshal.Copy(System.IntPtr,System.Double[],System.Int32,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.Copy(System.IntPtr,System.Int16[],System.Int32,System.Int32)">
+        <member name="M:Utils.Marshal.Copy(System.IntPtr,System.Int16[],System.Int32,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.Copy(System.IntPtr,System.Byte[],System.Int32,System.Int32)">
+        <member name="M:Utils.Marshal.Copy(System.IntPtr,System.Byte[],System.Int32,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.Copy(System.Int64[],System.Int32,System.IntPtr,System.Int32)">
+        <member name="M:Utils.Marshal.Copy(System.Int64[],System.Int32,System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)">
+        <member name="M:Utils.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.Copy(System.Int16[],System.Int32,System.IntPtr,System.Int32)">
+        <member name="M:Utils.Marshal.Copy(System.Int16[],System.Int32,System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.Copy(System.Double[],System.Int32,System.IntPtr,System.Int32)">
+        <member name="M:Utils.Marshal.Copy(System.Double[],System.Int32,System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.Copy(System.Char[],System.Int32,System.IntPtr,System.Int32)">
+        <member name="M:Utils.Marshal.Copy(System.Char[],System.Int32,System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.Copy(System.Byte[],System.Int32,System.IntPtr,System.Int32)">
+        <member name="M:Utils.Marshal.Copy(System.Byte[],System.Int32,System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.Copy(System.IntPtr,System.Char[],System.Int32,System.Int32)">
+        <member name="M:Utils.Marshal.Copy(System.IntPtr,System.Char[],System.Int32,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ReadByte(System.Object,System.Int32)">
+        <member name="M:Utils.Marshal.ReadByte(System.Object,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ReadByte(System.IntPtr)">
+        <member name="M:Utils.Marshal.ReadByte(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ReadByte(System.IntPtr,System.Int32)">
+        <member name="M:Utils.Marshal.ReadByte(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ReadInt16(System.IntPtr)">
+        <member name="M:Utils.Marshal.ReadInt16(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ReadInt16(System.IntPtr,System.Int32)">
+        <member name="M:Utils.Marshal.ReadInt16(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ReadInt16(System.Object,System.Int32)">
+        <member name="M:Utils.Marshal.ReadInt16(System.Object,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ReadInt32(System.IntPtr)">
+        <member name="M:Utils.Marshal.ReadInt32(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ReadInt32(System.IntPtr,System.Int32)">
+        <member name="M:Utils.Marshal.ReadInt32(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ReadInt32(System.Object,System.Int32)">
+        <member name="M:Utils.Marshal.ReadInt32(System.Object,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ReadInt64(System.Object,System.Int32)">
+        <member name="M:Utils.Marshal.ReadInt64(System.Object,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ReadInt64(System.IntPtr,System.Int32)">
+        <member name="M:Utils.Marshal.ReadInt64(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ReadInt64(System.IntPtr)">
+        <member name="M:Utils.Marshal.ReadInt64(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ReadIntPtr(System.IntPtr)">
+        <member name="M:Utils.Marshal.ReadIntPtr(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ReadIntPtr(System.IntPtr,System.Int32)">
+        <member name="M:Utils.Marshal.ReadIntPtr(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ReadIntPtr(System.Object,System.Int32)">
+        <member name="M:Utils.Marshal.ReadIntPtr(System.Object,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.WriteByte(System.Object,System.Int32,System.Byte)">
+        <member name="M:Utils.Marshal.WriteByte(System.Object,System.Int32,System.Byte)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.WriteByte(System.IntPtr,System.Int32,System.Byte)">
+        <member name="M:Utils.Marshal.WriteByte(System.IntPtr,System.Int32,System.Byte)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.WriteByte(System.IntPtr,System.Byte)">
+        <member name="M:Utils.Marshal.WriteByte(System.IntPtr,System.Byte)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.WriteInt16(System.IntPtr,System.Char)">
+        <member name="M:Utils.Marshal.WriteInt16(System.IntPtr,System.Char)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.WriteInt16(System.IntPtr,System.Int16)">
+        <member name="M:Utils.Marshal.WriteInt16(System.IntPtr,System.Int16)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.WriteInt16(System.IntPtr,System.Int32,System.Char)">
+        <member name="M:Utils.Marshal.WriteInt16(System.IntPtr,System.Int32,System.Char)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.WriteInt16(System.IntPtr,System.Int32,System.Int16)">
+        <member name="M:Utils.Marshal.WriteInt16(System.IntPtr,System.Int32,System.Int16)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.WriteInt16(System.Object,System.Int32,System.Char)">
+        <member name="M:Utils.Marshal.WriteInt16(System.Object,System.Int32,System.Char)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.WriteInt16(System.Object,System.Int32,System.Int16)">
+        <member name="M:Utils.Marshal.WriteInt16(System.Object,System.Int32,System.Int16)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.WriteInt32(System.IntPtr,System.Int32)">
+        <member name="M:Utils.Marshal.WriteInt32(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.WriteInt32(System.IntPtr,System.Int32,System.Int32)">
+        <member name="M:Utils.Marshal.WriteInt32(System.IntPtr,System.Int32,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.WriteInt32(System.Object,System.Int32,System.Int32)">
+        <member name="M:Utils.Marshal.WriteInt32(System.Object,System.Int32,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.WriteInt64(System.Object,System.Int32,System.Int64)">
+        <member name="M:Utils.Marshal.WriteInt64(System.Object,System.Int32,System.Int64)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.WriteInt64(System.IntPtr,System.Int32,System.Int64)">
+        <member name="M:Utils.Marshal.WriteInt64(System.IntPtr,System.Int32,System.Int64)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.WriteInt64(System.IntPtr,System.Int64)">
+        <member name="M:Utils.Marshal.WriteInt64(System.IntPtr,System.Int64)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.WriteIntPtr(System.IntPtr,System.Int32,System.IntPtr)">
+        <member name="M:Utils.Marshal.WriteIntPtr(System.IntPtr,System.Int32,System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.WriteIntPtr(System.IntPtr,System.IntPtr)">
+        <member name="M:Utils.Marshal.WriteIntPtr(System.IntPtr,System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.WriteIntPtr(System.Object,System.Int32,System.IntPtr)">
+        <member name="M:Utils.Marshal.WriteIntPtr(System.Object,System.Int32,System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ZeroFreeBSTR(System.IntPtr)">
+        <member name="M:Utils.Marshal.ZeroFreeBSTR(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ZeroFreeCoTaskMemAnsi(System.IntPtr)">
+        <member name="M:Utils.Marshal.ZeroFreeCoTaskMemAnsi(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ZeroFreeCoTaskMemUnicode(System.IntPtr)">
+        <member name="M:Utils.Marshal.ZeroFreeCoTaskMemUnicode(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ZeroFreeGlobalAllocAnsi(System.IntPtr)">
+        <member name="M:Utils.Marshal.ZeroFreeGlobalAllocAnsi(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ZeroFreeGlobalAllocUnicode(System.IntPtr)">
+        <member name="M:Utils.Marshal.ZeroFreeGlobalAllocUnicode(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.StructureToPtr(System.Object,System.IntPtr,System.Boolean)">
+        <member name="M:Utils.Marshal.StructureToPtr(System.Object,System.IntPtr,System.Boolean)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.DestroyStructure(System.IntPtr,System.Type)">
+        <member name="M:Utils.Marshal.DestroyStructure(System.IntPtr,System.Type)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.DestroyStructure``1(System.IntPtr)">
+        <member name="M:Utils.Marshal.DestroyStructure``1(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.FinalReleaseComObject(System.Object)">
+        <member name="M:Utils.Marshal.FinalReleaseComObject(System.Object)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.FreeBSTR(System.IntPtr)">
+        <member name="M:Utils.Marshal.FreeBSTR(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.FreeCoTaskMem(System.IntPtr)">
+        <member name="M:Utils.Marshal.FreeCoTaskMem(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.StructureToPtr``1(``0,System.IntPtr,System.Boolean)">
+        <member name="M:Utils.Marshal.StructureToPtr``1(``0,System.IntPtr,System.Boolean)">
             <summary>
             将数据从托管对象封送到非托管内存块
             </summary>
@@ -11475,292 +12472,292 @@
             <param name="ptr">指向非托管内存块的指针，在调用此方法之前必须分配该内存块</param>
             <param name="fDeleteOld">在ptr参数上使用DestroyStructure方法复制数据</param>
         </member>
-        <member name="M:Utils.MarshalEx.ThrowExceptionForHR(System.Int32)">
+        <member name="M:Utils.Marshal.ThrowExceptionForHR(System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ThrowExceptionForHR(System.Int32,System.IntPtr)">
+        <member name="M:Utils.Marshal.ThrowExceptionForHR(System.Int32,System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.UnsafeAddrOfPinnedArrayElement(System.Array,System.Int32)">
+        <member name="M:Utils.Marshal.UnsafeAddrOfPinnedArrayElement(System.Array,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.UnsafeAddrOfPinnedArrayElement``1(``0[],System.Int32)">
+        <member name="M:Utils.Marshal.UnsafeAddrOfPinnedArrayElement``1(``0[],System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.QueryInterface(System.IntPtr,System.Guid@,System.IntPtr@)">
+        <member name="M:Utils.Marshal.QueryInterface(System.IntPtr,System.Guid@,System.IntPtr@)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.IsComObject(System.Object)">
+        <member name="M:Utils.Marshal.IsComObject(System.Object)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.OffsetOf(System.Type,System.String)">
+        <member name="M:Utils.Marshal.OffsetOf(System.Type,System.String)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.OffsetOf``1(System.String)">
+        <member name="M:Utils.Marshal.OffsetOf``1(System.String)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.Prelink(System.Reflection.MethodInfo)">
+        <member name="M:Utils.Marshal.Prelink(System.Reflection.MethodInfo)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.PrelinkAll(System.Type)">
+        <member name="M:Utils.Marshal.PrelinkAll(System.Type)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.StringToBSTR(System.String)">
+        <member name="M:Utils.Marshal.StringToBSTR(System.String)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.StringToCoTaskMemAnsi(System.String)">
+        <member name="M:Utils.Marshal.StringToCoTaskMemAnsi(System.String)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.StringToCoTaskMemAuto(System.String)">
+        <member name="M:Utils.Marshal.StringToCoTaskMemAuto(System.String)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.StringToCoTaskMemUni(System.String)">
+        <member name="M:Utils.Marshal.StringToCoTaskMemUni(System.String)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.StringToHGlobalAnsi(System.String)">
+        <member name="M:Utils.Marshal.StringToHGlobalAnsi(System.String)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.StringToHGlobalAuto(System.String)">
+        <member name="M:Utils.Marshal.StringToHGlobalAuto(System.String)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.StringToHGlobalUni(System.String)">
+        <member name="M:Utils.Marshal.StringToHGlobalUni(System.String)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.SecureStringToBSTR(System.Security.SecureString)">
+        <member name="M:Utils.Marshal.SecureStringToBSTR(System.Security.SecureString)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.SecureStringToCoTaskMemAnsi(System.Security.SecureString)">
+        <member name="M:Utils.Marshal.SecureStringToCoTaskMemAnsi(System.Security.SecureString)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.SecureStringToCoTaskMemUnicode(System.Security.SecureString)">
+        <member name="M:Utils.Marshal.SecureStringToCoTaskMemUnicode(System.Security.SecureString)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.SecureStringToGlobalAllocAnsi(System.Security.SecureString)">
+        <member name="M:Utils.Marshal.SecureStringToGlobalAllocAnsi(System.Security.SecureString)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.SecureStringToGlobalAllocUnicode(System.Security.SecureString)">
+        <member name="M:Utils.Marshal.SecureStringToGlobalAllocUnicode(System.Security.SecureString)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ReAllocCoTaskMem(System.IntPtr,System.Int32)">
+        <member name="M:Utils.Marshal.ReAllocCoTaskMem(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ReAllocHGlobal(System.IntPtr,System.IntPtr)">
+        <member name="M:Utils.Marshal.ReAllocHGlobal(System.IntPtr,System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.Release(System.IntPtr)">
+        <member name="M:Utils.Marshal.Release(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.ReleaseComObject(System.Object)">
+        <member name="M:Utils.Marshal.ReleaseComObject(System.Object)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.PtrToStringAnsi(System.IntPtr,System.Int32)">
+        <member name="M:Utils.Marshal.PtrToStringAnsi(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.PtrToStringAnsi(System.IntPtr)">
+        <member name="M:Utils.Marshal.PtrToStringAnsi(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.PtrToStringAuto(System.IntPtr)">
+        <member name="M:Utils.Marshal.PtrToStringAuto(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.PtrToStringAuto(System.IntPtr,System.Int32)">
+        <member name="M:Utils.Marshal.PtrToStringAuto(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.PtrToStringBSTR(System.IntPtr)">
+        <member name="M:Utils.Marshal.PtrToStringBSTR(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.PtrToStringUni(System.IntPtr)">
+        <member name="M:Utils.Marshal.PtrToStringUni(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.PtrToStringUni(System.IntPtr,System.Int32)">
+        <member name="M:Utils.Marshal.PtrToStringUni(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.PtrToStructure(System.IntPtr,System.Object)">
+        <member name="M:Utils.Marshal.PtrToStructure(System.IntPtr,System.Object)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.PtrToStructure(System.IntPtr,System.Type)">
+        <member name="M:Utils.Marshal.PtrToStructure(System.IntPtr,System.Type)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.PtrToStructure``1(System.IntPtr)">
+        <member name="M:Utils.Marshal.PtrToStructure``1(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.PtrToStructure``1(System.IntPtr,``0)">
+        <member name="M:Utils.Marshal.PtrToStructure``1(System.IntPtr,``0)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.GetComInterfaceForObject(System.Object,System.Type,System.Runtime.InteropServices.CustomQueryInterfaceMode)">
+        <member name="M:Utils.Marshal.GetComInterfaceForObject(System.Object,System.Type,System.Runtime.InteropServices.CustomQueryInterfaceMode)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.GetComInterfaceForObject``2(``0)">
+        <member name="M:Utils.Marshal.GetComInterfaceForObject``2(``0)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.GetComInterfaceForObject(System.Object,System.Type)">
+        <member name="M:Utils.Marshal.GetComInterfaceForObject(System.Object,System.Type)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.GetDelegateForFunctionPointer(System.IntPtr,System.Type)">
+        <member name="M:Utils.Marshal.GetDelegateForFunctionPointer(System.IntPtr,System.Type)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.GetDelegateForFunctionPointer``1(System.IntPtr)">
+        <member name="M:Utils.Marshal.GetDelegateForFunctionPointer``1(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.GetExceptionCode">
+        <member name="M:Utils.Marshal.GetExceptionCode">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.GetExceptionForHR(System.Int32)">
+        <member name="M:Utils.Marshal.GetExceptionForHR(System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.GetExceptionForHR(System.Int32,System.IntPtr)">
+        <member name="M:Utils.Marshal.GetExceptionForHR(System.Int32,System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.GetFunctionPointerForDelegate(System.Delegate)">
+        <member name="M:Utils.Marshal.GetFunctionPointerForDelegate(System.Delegate)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.GetFunctionPointerForDelegate``1(``0)">
+        <member name="M:Utils.Marshal.GetFunctionPointerForDelegate``1(``0)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.GetHRForException(System.Exception)">
+        <member name="M:Utils.Marshal.GetHRForException(System.Exception)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.GetHRForLastWin32Error">
+        <member name="M:Utils.Marshal.GetHRForLastWin32Error">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.GetIUnknownForObject(System.Object)">
+        <member name="M:Utils.Marshal.GetIUnknownForObject(System.Object)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.GetLastWin32Error">
+        <member name="M:Utils.Marshal.GetLastWin32Error">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.GetNativeVariantForObject(System.Object,System.IntPtr)">
+        <member name="M:Utils.Marshal.GetNativeVariantForObject(System.Object,System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.GetNativeVariantForObject``1(``0,System.IntPtr)">
+        <member name="M:Utils.Marshal.GetNativeVariantForObject``1(``0,System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.GetObjectForIUnknown(System.IntPtr)">
+        <member name="M:Utils.Marshal.GetObjectForIUnknown(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.GetObjectForNativeVariant(System.IntPtr)">
+        <member name="M:Utils.Marshal.GetObjectForNativeVariant(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.GetObjectForNativeVariant``1(System.IntPtr)">
+        <member name="M:Utils.Marshal.GetObjectForNativeVariant``1(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.GetObjectsForNativeVariants(System.IntPtr,System.Int32)">
+        <member name="M:Utils.Marshal.GetObjectsForNativeVariants(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.GetObjectsForNativeVariants``1(System.IntPtr,System.Int32)">
+        <member name="M:Utils.Marshal.GetObjectsForNativeVariants``1(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
@@ -11769,83 +12766,83 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:Utils.MarshalEx.GetStartComSlot(System.Type)">
+        <member name="M:Utils.Marshal.GetStartComSlot(System.Type)">
             <summary>
             
             </summary>
             <param name="t"></param>
             <returns></returns>
         </member>
-        <member name="M:Utils.MarshalEx.GetTypeFromCLSID(System.Guid)">
+        <member name="M:Utils.Marshal.GetTypeFromCLSID(System.Guid)">
             <summary>
             
             </summary>
             <param name="clsid"></param>
             <returns></returns>
         </member>
-        <member name="M:Utils.MarshalEx.GetTypeInfoName(System.Runtime.InteropServices.ComTypes.ITypeInfo)">
+        <member name="M:Utils.Marshal.GetTypeInfoName(System.Runtime.InteropServices.ComTypes.ITypeInfo)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:Utils.MarshalEx.GetUniqueObjectForIUnknown(System.IntPtr)">
+        <member name="M:Utils.Marshal.GetUniqueObjectForIUnknown(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="T:Utils.AssemblyX">
+        <member name="T:Utils.Assembly">
             <summary>
             程序集
             </summary>
         </member>
-        <member name="M:Utils.AssemblyX.GetAllType">
+        <member name="M:Utils.Assembly.GetAllType">
             <summary>
             获取所有的类
             </summary>
         </member>
-        <member name="M:Utils.AssemblyX.GetAllType``1">
+        <member name="M:Utils.Assembly.GetAllType``1">
             <summary>
             获取所有的类
             </summary>
         </member>
-        <member name="M:Utils.AssemblyX.GetReferanceAssemblies(System.AppDomain)">
+        <member name="M:Utils.Assembly.GetReferanceAssemblies(System.AppDomain)">
             <summary>
             获取所有程序集
             </summary>
         </member>
-        <member name="M:Utils.AssemblyX.GetAllAssemblieHasAttributeType``1">
+        <member name="M:Utils.Assembly.GetAllAssemblieHasAttributeType``1">
             <summary>
             获取全部程序集中 包含指定特性的类 输出 key=命名空间加类名 value=类
             </summary>
         </member>
-        <member name="M:Utils.AssemblyX.GetMethodInfo(System.String,System.String,System.String)">
+        <member name="M:Utils.Assembly.GetMethodInfo(System.String,System.String,System.String)">
             <summary>
             获取方法
             </summary>
         </member>
-        <member name="M:Utils.AssemblyX.GetMethodInfo(System.Reflection.Assembly,System.String,System.String)">
+        <member name="M:Utils.Assembly.GetMethodInfo(System.Reflection.Assembly,System.String,System.String)">
             <summary>
             获取方法
             </summary>
         </member>
-        <member name="M:Utils.AssemblyX.GetMethodInfo``1(``0,System.String)">
+        <member name="M:Utils.Assembly.GetMethodInfo``1(``0,System.String)">
             <summary>
             获取方法
             </summary>
         </member>
-        <member name="T:Utils.ClassX">
+        <member name="T:Utils.Class">
             <summary>
             类工具
             </summary>
         </member>
-        <member name="M:Utils.ClassX.RemoveAllEvent``1(``0,System.String)">
+        <member name="M:Utils.Class.RemoveAllEvent``1(``0,System.String)">
             <summary>
             清除事件
             </summary>
             <param name="obj"></param>
             <param name="name"></param>
         </member>
-        <member name="M:Utils.ClassX.GetMembers(System.Object,System.Reflection.BindingFlags)">
+        <member name="M:Utils.Class.GetMembers(System.Object,System.Reflection.BindingFlags)">
             <summary>
             
             </summary>
@@ -11853,7 +12850,7 @@
             <param name="flags"></param>
             <returns></returns>
         </member>
-        <member name="M:Utils.ClassX.GetMethods(System.Object,System.Reflection.BindingFlags)">
+        <member name="M:Utils.Class.GetMethods(System.Object,System.Reflection.BindingFlags)">
             <summary>
             
             </summary>
@@ -11861,12 +12858,12 @@
             <param name="flags"></param>
             <returns></returns>
         </member>
-        <member name="M:Utils.ClassX.GetType(System.String)">
+        <member name="M:Utils.Class.GetType(System.String)">
             <summary>
             C# Type类获取类型方法(通过字符串型的类名)
             </summary>
         </member>
-        <member name="T:Utils.GCX">
+        <member name="T:Utils.GC">
             <see>
                 <cref>https://docs.microsoft.com/zh-cn/dotnet/api/system.gc?view=net-5.0</cref>
             </see>
@@ -11875,36 +12872,36 @@
             最近一代中的对象位于第0代中。 垃圾回收器的这种实现支持三代对象，第0代、第1代和第2代。
             可以检索属性的值 MaxGeneration ，以确定系统支持的最大代数。-->
         </member>
-        <member name="P:Utils.GCX.MaxGeneration">
+        <member name="P:Utils.GC.MaxGeneration">
             <summary>
             获取系统当前支持的最大代数
             </summary>
         </member>
-        <member name="M:Utils.GCX.SuppressFinalize(System.Object)">
+        <member name="M:Utils.GC.SuppressFinalize(System.Object)">
             <summary>
             阻止GC调用Finalize方法
             </summary>
             <!--因为Finalize方法的调用会牺牲部分性能。如果你的Dispose方法已经对委托管资源作了清理，就没必要让GC再调用对象的Finalize方法-->
         </member>
-        <member name="M:Utils.GCX.Collect">
+        <member name="M:Utils.GC.Collect">
             <summary>
             强制对所有代进行即时垃圾回收
             </summary>
         </member>
-        <member name="M:Utils.GCX.Collect(System.Int32)">
+        <member name="M:Utils.GC.Collect(System.Int32)">
             <summary>
             强制对 0 代到指定代进行即时垃圾回收。
             </summary>
             <param name="generation">代</param>
         </member>
-        <member name="M:Utils.GCX.Collect(System.Int32,System.GCCollectionMode)">
+        <member name="M:Utils.GC.Collect(System.Int32,System.GCCollectionMode)">
             <summary>
             强制在 GCCollectionMode 值所指定的时间对 0 代到指定代进行垃圾回收。
             </summary>
             <param name="generation">代</param>
             <param name="gCCollectionMode">GC模式集合</param>
         </member>
-        <member name="M:Utils.GCX.Collect(System.Int32,System.GCCollectionMode,System.Boolean)">
+        <member name="M:Utils.GC.Collect(System.Int32,System.GCCollectionMode,System.Boolean)">
             <summary>
             在由 GCCollectionMode 值指定的时间，强制对 0 代到指定代进行垃圾回收，另有数值指定回收是否应该为阻碍性。
             </summary>
@@ -11912,7 +12909,7 @@
             <param name="gCCollectionMode">GC模式集合</param>
             <param name="blocking">阻塞</param>
         </member>
-        <member name="M:Utils.GCX.Collect(System.Int32,System.GCCollectionMode,System.Boolean,System.Boolean)">
+        <member name="M:Utils.GC.Collect(System.Int32,System.GCCollectionMode,System.Boolean,System.Boolean)">
             <summary>
             在由 GCCollectionMode 值指定的时间，强制对 0 代到指定代进行垃圾回收，另有数值指定回收应该为阻碍性还是压缩性。
             </summary>
@@ -11921,37 +12918,37 @@
             <param name="blocking">阻塞</param>
             <param name="compacting">压缩</param>
         </member>
-        <member name="M:Utils.GCX.CollectionCount(System.Int32)">
+        <member name="M:Utils.GC.CollectionCount(System.Int32)">
             <summary>
             返回已经对对象的指定代进行的垃圾回收次数。
             </summary>
             <param name="generation">代</param>
         </member>
-        <member name="M:Utils.GCX.CancelFullGCNotification">
+        <member name="M:Utils.GC.CancelFullGCNotification">
             <summary>
             取消注册垃圾回收通知。
             </summary>
         </member>
-        <member name="M:Utils.GCX.AddMemoryPressure(System.Int64)">
+        <member name="M:Utils.GC.AddMemoryPressure(System.Int64)">
             <summary>
             通知运行时在安排垃圾回收时应考虑分配大量的非托管内存
             </summary>
             <param name="bytesAllocated">分配的字节数</param>
         </member>
-        <member name="M:Utils.GCX.RemoveMemoryPressure(System.Int64)">
+        <member name="M:Utils.GC.RemoveMemoryPressure(System.Int64)">
             <summary>
             通知运行时已释放非托管内存，在安排垃圾回收时不需要再考虑它。
             </summary>
             <param name="bytesAllocated">分配的字节数</param>
         </member>
-        <member name="M:Utils.GCX.TryStartNoGCRegion(System.Int64)">
+        <member name="M:Utils.GC.TryStartNoGCRegion(System.Int64)">
             <summary>
             如果指定数量的内存可用，则在关键路径执行期间尝试禁止垃圾回收。
             </summary>
             <param name="totalSize">总空间</param>
             <returns>是否成功</returns>
         </member>
-        <member name="M:Utils.GCX.TryStartNoGCRegion(System.Int64,System.Boolean)">
+        <member name="M:Utils.GC.TryStartNoGCRegion(System.Int64,System.Boolean)">
             <summary>
             如果指定数量的内存可用，则在关键路径执行期间尝试禁止垃圾回收；
             并在初始没有足够内存可用的情况下，
@@ -11961,7 +12958,7 @@
             <param name="disallowFullBlockingGC">禁止完全阻塞GC</param>
             <returns>是否成功</returns>
         </member>
-        <member name="M:Utils.GCX.TryStartNoGCRegion(System.Int64,System.Int64)">
+        <member name="M:Utils.GC.TryStartNoGCRegion(System.Int64,System.Int64)">
             <summary>
             如果指定数量的内存可用于大对象堆和小对象堆，则在关键路径执行期间尝试禁止垃圾回收。
             </summary>
@@ -11969,7 +12966,7 @@
             <param name="lohSize">大对象堆</param>
             <returns>是否成功</returns>
         </member>
-        <member name="M:Utils.GCX.TryStartNoGCRegion(System.Int64,System.Int64,System.Boolean)">
+        <member name="M:Utils.GC.TryStartNoGCRegion(System.Int64,System.Int64,System.Boolean)">
             <summary>
             如果指定数量的内存可用大对象堆和小对象堆，则在关键路径执行期间尝试禁止垃圾回收；
             并在初始没有足够内存可用的情况下，控制垃圾回收器是否进行完整的阻碍性垃圾回收。
@@ -11979,1118 +12976,121 @@
             <param name="disallowFullBlockingGC">禁止完全阻塞GC</param>
             <returns>是否成功</returns>
         </member>
-        <member name="M:Utils.GCX.EndNoGCRegion">
+        <member name="M:Utils.GC.EndNoGCRegion">
             <summary>
-            结束无 GC 区域延迟模式
+            结束无 SGC 区域延迟模式
             </summary>
         </member>
-        <member name="M:Utils.GCX.GetGeneration(System.Object)">
+        <member name="M:Utils.GC.GetGeneration(System.Object)">
             <summary>
             返回指定对象的当前代数。
             </summary>
             <param name="obj">数据</param>
             <returns>代</returns>
         </member>
-        <member name="M:Utils.GCX.GetGeneration(System.WeakReference)">
+        <member name="M:Utils.GC.GetGeneration(System.WeakReference)">
             <summary>
             返回指定弱引用的目标的当前代数。
             </summary>
             <param name="obj">数据</param>
             <returns>代</returns>
         </member>
-        <member name="M:Utils.GCX.GetTotalMemory(System.Boolean)">
+        <member name="M:Utils.GC.GetTotalMemory(System.Boolean)">
             <summary>
             检索当前认为要分配的字节数
             </summary>
             <param name="forceFullCollection">是否可以等待较短间隔再返回，以便系统回收垃圾和终结对象。</param>
             <returns>全部内存大小</returns>
         </member>
-        <member name="M:Utils.GCX.KeepAlive(System.Object)">
+        <member name="M:Utils.GC.KeepAlive(System.Object)">
             <summary>
             引用指定对象，使其从当前例程开始到调用此方法的那一刻为止均不符合进行垃圾回收的条件。
             </summary>
             <param name="obj">指定对象</param>
         </member>
-        <member name="M:Utils.GCX.RegisterForFullGCNotification(System.Int32,System.Int32)">
+        <member name="M:Utils.GC.RegisterForFullGCNotification(System.Int32,System.Int32)">
             <summary>
             注册完整GC通知
             </summary>
             <param name="maxGenerationThreshold">马克斯代阈值</param>
             <param name="largeObjectHeapThreshold">大对象堆阈值</param>
         </member>
-        <member name="M:Utils.GCX.ReRegisterForFinalize(System.Object)">
+        <member name="M:Utils.GC.ReRegisterForFinalize(System.Object)">
             <summary>
             请求系统调用指定对象的终结器，此前已为该对象调用 SuppressFinalize(Object)。
             </summary>
             <param name="obj">数据</param>
         </member>
-        <member name="M:Utils.GCX.WaitForFullGCApproach">
+        <member name="M:Utils.GC.WaitForFullGCApproach">
             <summary>
             返回已注册通知的状态，用于确定公共语言运行时是否即将引发完整、阻碍性垃圾回收。
             </summary>
             <returns>GC通知状态</returns>
         </member>
-        <member name="M:Utils.GCX.WaitForFullGCApproach(System.Int32)">
+        <member name="M:Utils.GC.WaitForFullGCApproach(System.Int32)">
             <summary>
             在指定的超时期限内，返回已注册通知的状态，用于确定公共语言运行时是否即将引发完整、阻碍性垃圾回收。
             </summary>
             <param name="millisecondsTimeout">毫秒超时时间</param>
             <returns>GC通知状态</returns>
         </member>
-        <member name="M:Utils.GCX.WaitForFullGCComplete">
+        <member name="M:Utils.GC.WaitForFullGCComplete">
             <summary>
             返回已注册通知的状态，用于确定公共语言运行时引发的完整、阻碍性垃圾回收是否已完成。
             </summary>
             <returns>GC通知状态</returns>
         </member>
-        <member name="M:Utils.GCX.WaitForFullGCComplete(System.Int32)">
+        <member name="M:Utils.GC.WaitForFullGCComplete(System.Int32)">
             <summary>
             在指定的超时期限内，返回已注册通知的状态，用于确定公共语言运行时引发的完整、阻碍性垃圾回收是否已完成。
             </summary>
             <param name="millisecondsTimeout">毫秒超时时间</param>
             <returns>GC通知状态</returns>
         </member>
-        <member name="M:Utils.GCX.WaitForPendingFinalizers">
+        <member name="M:Utils.GC.WaitForPendingFinalizers">
             <summary>
             挂起当前线程，直到处理终结器队列的线程清空该队列为止。
             </summary>
         </member>
-        <member name="T:Utils.SystemInfoX">
+        <member name="T:Utils.SystemInfo">
             <summary>
             设备信息 .NET API
             </summary>
         </member>
-        <member name="M:Utils.SystemInfoX.GetEquipmentName">
+        <member name="M:Utils.SystemInfo.GetEquipmentName">
             <summary>
             获取用户设备名
             </summary>
         </member>
-        <member name="M:Utils.SystemInfoX.GetPlatform">
+        <member name="M:Utils.SystemInfo.GetPlatform">
             <summary>
             获取平台名称
             </summary>
         </member>
-        <member name="M:Utils.SystemInfoX.GetNowVersion">
+        <member name="M:Utils.SystemInfo.GetNowVersion">
             <summary>
             获取平台版本号
             </summary>
         </member>
-        <member name="M:Utils.SystemInfoX.GetUserDomainName">
+        <member name="M:Utils.SystemInfo.GetUserDomainName">
             <summary>
             获取当前设备 连接网络名称
             </summary>
         </member>
-        <member name="M:Utils.SystemInfoX.GetSystemDirectory">
+        <member name="M:Utils.SystemInfo.GetSystemDirectory">
             <summary>
             获取系统跟目录
             </summary>
         </member>
-        <member name="M:Utils.SystemInfoX.GetNowTime">
+        <member name="M:Utils.SystemInfo.GetNowTime">
             <summary>
             获取系统当前时间
             </summary>
         </member>
-        <member name="M:Utils.SystemInfoX.GetStartSystemTickCount">
+        <member name="M:Utils.SystemInfo.GetStartSystemTickCount">
             <summary>
             获取系统启动后 经过的毫秒数
             </summary>
-        </member>
-        <member name="T:Pool">
-            <summary>
-            对象池
-            </summary>
-        </member>
-        <member name="T:Pool.Dictionary`2">
-            <summary>
-            Dictionary 对象池
-            </summary>
-        </member>
-        <member name="M:Pool.Dictionary`2.New">
-            <summary>
-            创建
-            </summary>
-        </member>
-        <member name="M:Pool.Dictionary`2.Free(System.Collections.Generic.Dictionary{`0,`1})">
-            <summary>
-            释放
-            </summary>
-        </member>
-        <member name="T:Pool.Disposable`1">
-            <summary>
-            An <see cref="T:System.IDisposable"/> to allow pooled objects to be acquired and released within <c>using</c>
-            statements instead of needing to manually release everything.
-            </summary>
-        </member>
-        <member name="F:Pool.Disposable`1.Item">
-            <summary>
-            The object acquired from the <see cref="T:Pool.Disposable`1"/>.
-            </summary>
-        </member>
-        <member name="F:Pool.Disposable`1.OnRelease">
-            <summary>
-            Called by IDisposable.Dispose.
-            </summary>
-        </member>
-        <member name="M:Pool.Disposable`1.#ctor(`0,System.Action{`0})">
-            <summary>
-            释放
-            </summary>
-        </member>
-        <member name="T:Pool.Generic`1">
-            <summary>
-            通用
-            </summary>
-        </member>
-        <member name="M:Pool.Generic`1.New(System.Func{`0})">
-            <summary>
-            创建
-            </summary>
-        </member>
-        <member name="M:Pool.Generic`1.New">
-            <summary>
-            创建
-            </summary>
-        </member>
-        <member name="M:Pool.Generic`1.Free(`0)">
-            <summary>
-            释放
-            </summary>
-        </member>
-        <member name="T:Pool.HashSet`1">
-            <summary>
-            HashSet对象池
-            </summary>
-        </member>
-        <member name="M:Pool.HashSet`1.New">
-            <summary>
-            创建新的
-            </summary>
-        </member>
-        <member name="M:Pool.HashSet`1.Free(System.Collections.Generic.HashSet{`0})">
-            <summary>
-            释放HashSet
-            </summary>
-        </member>
-        <member name="T:Pool.List`1">
-            <summary>
-            List对象池
-            </summary>
-        </member>
-        <member name="M:Pool.List`1.New">
-            <summary>
-            创建新的
-            </summary>
-        </member>
-        <member name="M:Pool.List`1.Free(System.Collections.Generic.List{`0})">
-            <summary>
-            释放List
-            </summary>
-        </member>
-        <member name="T:Pool.Queue`1">
-            <summary>
-            Queue对象池
-            </summary>
-        </member>
-        <member name="M:Pool.Queue`1.New">
-            <summary>
-            创建新的
-            </summary>
-        </member>
-        <member name="M:Pool.Queue`1.Free(System.Collections.Generic.Queue{`0})">
-            <summary>
-            释放Queue
-            </summary>
-        </member>
-        <member name="T:Pool.SortedList`2">
-            <summary>
-            Dictionary 对象池
-            </summary>
-        </member>
-        <member name="M:Pool.SortedList`2.New">
-            <summary>
-            创建
-            </summary>
-        </member>
-        <member name="M:Pool.SortedList`2.Free(System.Collections.Generic.SortedList{`0,`1})">
-            <summary>
-            释放
-            </summary>
-        </member>
-        <member name="T:Pool.Stack`1">
-            <summary>
-            Stack对象池
-            </summary>
-        </member>
-        <member name="M:Pool.Stack`1.New">
-            <summary>
-            创建新的
-            </summary>
-        </member>
-        <member name="M:Pool.Stack`1.Free(System.Collections.Generic.Stack{`0})">
-            <summary>
-            释放Stack
-            </summary>
-        </member>
-        <member name="M:Pool.Using``1(``0@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:Pool.Using``1(``0@,System.Action{``0})">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:Pool.Using``1(``0,System.Action{``0})">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:Pool.Using``1(System.Collections.Generic.List{``0}@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:Pool.Using``1(System.Collections.Generic.HashSet{``0}@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:Pool.Using``1(System.Collections.Generic.Stack{``0}@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:Pool.Using``1(System.Collections.Generic.Queue{``0}@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:Pool.Using``2(System.Collections.Generic.Dictionary{``0,``1}@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="T:PoolExtend">
-            <summary>
-            扩展
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToDictionaryPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为 Dictionary 并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.Free``2(System.Collections.Generic.Dictionary{``0,``1})">
-            <summary>
-            释放 Dictionary
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToHashSetPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为HashSet并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToHashSetPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为HashSet并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToHashSetPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为HashSet并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.Free``1(System.Collections.Generic.HashSet{``0})">
-            <summary>
-            释放HashSet
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToListPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为List并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToListPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为List并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToListPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为List并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.Free``1(System.Collections.Generic.List{``0})">
-            <summary>
-            释放List
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToQueuePooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为Queue并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToQueuePooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为Queue并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToQueuePooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为Queue并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.Free``1(System.Collections.Generic.Queue{``0})">
-            <summary>
-            释放Queue
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToSortedListPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为 Dictionary 并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.Free``2(System.Collections.Generic.SortedList{``0,``1})">
-            <summary>
-            释放 Dictionary
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToStackPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为Stack并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToStackPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为Stack并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToStackPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为Stack并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.Free``1(System.Collections.Generic.Stack{``0})">
-            <summary>
-            释放Stack
-            </summary>
-        </member>
-        <member name="T:Unit">
-            <summary>
-            单位
-            </summary>
-        </member>
-        <member name="T:Unit.Char">
-            <summary>
-            只读变量
-            </summary>
-        </member>
-        <member name="F:Unit.Char.C0">
-            <summary>
-            0的字符
-            </summary>
-        </member>
-        <member name="F:Unit.Char.BEL">
-            <summary>
-            响铃
-            </summary>
-        </member>
-        <member name="F:Unit.Char.BackSpace">
-            <summary>
-            回格
-            </summary>
-        </member>
-        <member name="F:Unit.Char.TabH">
-            <summary>
-            tab(水平制表符)
-            </summary>
-        </member>
-        <member name="F:Unit.Char.NewLine">
-            <summary>
-            换行
-            </summary>
-        </member>
-        <member name="F:Unit.Char.TabV">
-            <summary>
-            tab(垂直制表符)
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Page">
-            <summary>
-            换页
-            </summary>
-        </member>
-        <member name="F:Unit.Char.EnterNewLine">
-            <summary>
-            回车 chr(13) &amp; chr(10) 回车和换行的组合
-            </summary>
-        </member>
-        <member name="F:Unit.Char.End">
-            <summary>
-            结束 End
-            </summary>
-        </member>
-        <member name="F:Unit.Char.PauseBreak">
-            <summary>
-            脱离 Pause Break
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Space">
-            <summary>
-            空格
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Exclamation">
-            <summary>
-            !
-            </summary>
-        </member>
-        <member name="F:Unit.Char.DoubleQuote">
-            <summary>
-            "
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Pound">
-            <summary>
-            #
-            </summary>
-        </member>
-        <member name="F:Unit.Char.USD">
-            <summary>
-            $
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Modulus">
-            <summary>
-            -%
-            </summary>
-        </member>
-        <member name="F:Unit.Char.AND">
-            <summary>
-            -&amp;
-            </summary>
-        </member>
-        <member name="F:Unit.Char.SingleQuote">
-            <summary>
-            -’
-            </summary>
-        </member>
-        <member name="F:Unit.Char.LeftBracket">
-            <summary>
-            -(
-            </summary>
-        </member>
-        <member name="F:Unit.Char.RightBracket">
-            <summary>
-            -)
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Asterisk">
-            <summary>
-            *
-            </summary>
-        </member>
-        <member name="F:Unit.Char.ADD">
-            <summary>
-            +
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Comma">
-            <summary>
-            ,
-            </summary>
-        </member>
-        <member name="F:Unit.Char.SUB">
-            <summary>
-            -
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Point">
-            <summary>
-            .
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Slash">
-            <summary>
-            /
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N0">
-            <summary>
-            0
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N1">
-            <summary>
-            1
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N2">
-            <summary>
-            2
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N3">
-            <summary>
-            3
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N4">
-            <summary>
-            4
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N5">
-            <summary>
-            5
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N6">
-            <summary>
-            6
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N7">
-            <summary>
-            7
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N8">
-            <summary>
-            8
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N9">
-            <summary>
-            9
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Number">
-            <summary>
-            数字
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Colon">
-            <summary>
-            :
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Semicolon">
-            <summary>
-            ;
-            </summary>
-        </member>
-        <member name="F:Unit.Char.LessThanSign">
-            <summary>
-            &lt;
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Equality">
-            <summary>
-            61 =
-            </summary>
-        </member>
-        <member name="F:Unit.Char.EA">
-            62 >　
-            63 ?
-            64 @
-            <summary>
-            65 A
-            </summary>
-        </member>
-        <member name="F:Unit.Char.EZ">
-            66 B
-            67 C
-            68 D
-            69 E
-            70 F
-            71 G
-            72 H
-            73 I
-            74 J
-            75 K
-            76 L
-            77 M
-            78 N
-            79 O
-            80 P
-            81 Q
-            82 R
-            83 S
-            84 T
-            85 U
-            86 V
-            87 W
-            88 X
-            89 Y
-            <summary>
-            90 Z
-            </summary>
-        </member>
-        <member name="F:Unit.Char.EAlphaBet">
-            <summary>
-            大写A-大写Z
-            </summary>
-        </member>
-        <member name="F:Unit.Char.UnderLine">
-            91 [
-            92 /　
-            92 /
-            93]
-            94 ^
-            <summary>
-            95 _
-            </summary>
-        </member>
-        <member name="F:Unit.Char.ea">
-            96 `
-            <summary>
-            97 a
-            </summary>
-        </member>
-        <member name="F:Unit.Char.ez">
-            98 b
-            99 c
-            100 d
-            101 e
-            102 f
-            103 g
-            104 h
-            105 i
-            106 j
-            107 k
-            108 l
-            109 m
-            110 n
-            111 o
-            112 p
-            113 q
-            114 r
-            115 s
-            116 t
-            117 u
-            118 v
-            119 w
-            120 x
-            121 y
-            <summary>
-            122 z
-            </summary>
-        </member>
-        <member name="F:Unit.Char.eAlphaBet">
-            <summary>
-            小写e-小写z
-            </summary>
-        </member>
-        <member name="T:Unit.Chinese">
-            <summary>
-            中文单位
-            </summary>
-        </member>
-        <member name="F:Unit.Chinese.CNSNum">
-            <summary>
-            数字单位:个数组
-            </summary>
-        </member>
-        <member name="F:Unit.Chinese.CNSDigit">
-            <summary>
-            数字单位:位数组
-            </summary>
-        </member>
-        <member name="F:Unit.Chinese.CNSUnits">
-            <summary>
-            数字单位:单位数组
-            </summary>
-        </member>
-        <member name="F:Unit.Chinese.NumberChar">
-            <summary>
-            数字字符串
-            </summary>
-        </member>
-        <member name="T:Unit.Color">
-            <summary>
-            颜色库
-            </summary>
-        </member>
-        <member name="F:Unit.Color.Write">
-            <summary> 白色 1 </summary>
-        </member>
-        <member name="F:Unit.Color.Red">
-            <summary> 红色 5 </summary>
-        </member>
-        <member name="F:Unit.Color.Green">
-            <summary> 绿色 3 </summary>
-        </member>
-        <member name="F:Unit.Color.Blue">
-            <summary> 蓝色 4 </summary>
-        </member>
-        <member name="F:Unit.Color.Peony">
-            <summary> 牡丹红 5 </summary>
-        </member>
-        <member name="F:Unit.Color.Cyan">
-            <summary> 青色 6 </summary>
-        </member>
-        <member name="F:Unit.Color.Yellow">
-            <summary> 黄色 7 </summary>
-        </member>
-        <member name="F:Unit.Color.Black">
-            <summary> 黑色 8 </summary>
-        </member>
-        <member name="F:Unit.Color.Gary">
-            <summary> 灰色 41 </summary>
-        </member>
-        <member name="F:Unit.Color.SeaBlue">
-            <summary> 海蓝 9 </summary>
-        </member>
-        <member name="F:Unit.Color.Orange">
-            <summary> 橙色 81 </summary>
-        </member>
-        <member name="F:Unit.Color.Chocolate">
-            <summary> 巧克力色 10 </summary>
-        </member>
-        <member name="F:Unit.Color.BluishViolet">
-            <summary> 蓝紫色 11 </summary>
-        </member>
-        <member name="F:Unit.Color.Brassiness">
-            <summary> 黄铜色 12 </summary>
-        </member>
-        <member name="F:Unit.Color.BrightGold">
-            <summary> 亮金色 13 </summary>
-        </member>
-        <member name="F:Unit.Color.Brown">
-            <summary> 棕色 14 </summary>
-        </member>
-        <member name="F:Unit.Color.Aeneous1">
-            <summary> 青铜色1 15 </summary>
-        </member>
-        <member name="F:Unit.Color.Aeneous2">
-            <summary> 青铜色2 16 </summary>
-        </member>
-        <member name="F:Unit.Color.Bluewore">
-            <summary> 士官服蓝色 17 </summary>
-        </member>
-        <member name="F:Unit.Color.Coppercold">
-            <summary> 冷铜色 18 </summary>
-        </member>
-        <member name="F:Unit.Color.Coppery">
-            <summary> 铜色 19 </summary>
-        </member>
-        <member name="F:Unit.Color.Redcoral">
-            <summary> 珊瑚红 20 </summary>
-        </member>
-        <member name="F:Unit.Color.Hyacinthine">
-            <summary> 紫蓝色 21 </summary>
-        </member>
-        <member name="F:Unit.Color.Copperdeep">
-            <summary> 深铜 22 </summary>
-        </member>
-        <member name="F:Unit.Color.Greendeep">
-            <summary> 深绿 23 </summary>
-        </member>
-        <member name="F:Unit.Color.Darkcoppergreen">
-            <summary> 深铜绿色 24 </summary>
-        </member>
-        <member name="F:Unit.Color.Darkolivegreen">
-            <summary> 深橄榄绿 25 </summary>
-        </member>
-        <member name="F:Unit.Color.Bluedeep">
-            <summary> 深蓝花色 26 </summary>
-        </member>
-        <member name="F:Unit.Color.Modena">
-            <summary> 深紫色 27 </summary>
-        </member>
-        <member name="F:Unit.Color.BlueSLATEdeep">
-            <summary> 深石板蓝 28 </summary>
-        </member>
-        <member name="F:Unit.Color.Slabsdeep">
-            <summary> 深铅灰色 29 </summary>
-        </member>
-        <member name="F:Unit.Color.Browndark">
-            <summary> 深棕褐色 30 </summary>
-        </member>
-        <member name="F:Unit.Color.Turquoisedeep">
-            <summary> 深绿松石色 32 </summary>
-        </member>
-        <member name="F:Unit.Color.Colordark">
-            <summary> 暗木色 33 </summary>
-        </member>
-        <member name="F:Unit.Color.Greylight">
-            <summary> 淡灰色 34 </summary>
-        </member>
-        <member name="F:Unit.Color.Redearthgreyrose">
-            <summary> 土灰玫瑰红色 35 </summary>
-        </member>
-        <member name="F:Unit.Color.Longstone">
-            <summary> 长石色 36 </summary>
-        </member>
-        <member name="F:Unit.Color.Firebrick">
-            <summary> 火砖色 37 </summary>
-        </member>
-        <member name="F:Unit.Color.Greenforest">
-            <summary> 森林绿 38 </summary>
-        </member>
-        <member name="F:Unit.Color.Golden">
-            <summary> 金色 39 </summary>
-        </member>
-        <member name="F:Unit.Color.Foresythia">
-            <summary> 鲜黄色 40 </summary>
-        </member>
-        <member name="F:Unit.Color.Aerugo">
-            <summary> 铜绿色 42 </summary>
-        </member>
-        <member name="F:Unit.Color.Yellowbluish">
-            <summary> 青黄色 43 </summary>
-        </member>
-        <member name="F:Unit.Color.Greenhunter">
-            <summary> 猎人绿 44 </summary>
-        </member>
-        <member name="F:Unit.Color.Redindian">
-            <summary> 印度红 45 </summary>
-        </member>
-        <member name="F:Unit.Color.Yellowearthy">
-            <summary> 土黄色 46 </summary>
-        </member>
-        <member name="F:Unit.Color.Wathet">
-            <summary> 浅蓝色 47 </summary>
-        </member>
-        <member name="F:Unit.Color.Greyfrench">
-            <summary> 浅灰色 48 </summary>
-        </member>
-        <member name="F:Unit.Color.Bluelightsteel">
-            <summary> 浅钢蓝色 49 </summary>
-        </member>
-        <member name="F:Unit.Color.Colorlight">
-            <summary> 浅木色 59 </summary>
-        </member>
-        <member name="F:Unit.Color.Greenlime">
-            <summary> 石灰绿色 60 </summary>
-        </member>
-        <member name="F:Unit.Color.Bisque">
-            <summary> 桔黄色 61 </summary>
-        </member>
-        <member name="F:Unit.Color.Maroon">
-            <summary> 褐红色 62 </summary> 62
-        </member>
-        <member name="T:Unit.Suffix">
-            <summary>
-            后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.TextureSuffix">
-            <summary>
-            图片文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.VideoSuffix">
-            <summary>
-            视频文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.SoundSuffix">
-            <summary>
-            音频文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.TextSuffix">
-            <summary>
-            文本文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.ShaderSuffix">
-            <summary>
-            shader文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.FontSuffix">
-            <summary>
-            字体后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.Animation">
-            <summary>
-            动画文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.Animator">
-            <summary>
-            控制器文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.Material">
-            <summary>
-            材质文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.PrefabSuffix">
-            <summary>
-            预制体文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.RTextureSuffix">
-            <summary>
-            渲染纹理后缀
-            </summary>
-        </member>
-        <member name="T:Unit.Time">
-            <summary>
-            时间
-            </summary>
-        </member>
-        <member name="T:Unit.Time.SencondUnit">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Unit.Time.SencondUnit.SECOND">
-            <summary> 秒 </summary>
-        </member>
-        <member name="F:Unit.Time.SencondUnit.MILLISCOND">
-            <summary> 毫秒 </summary>
-        </member>
-        <member name="F:Unit.Time.SencondUnit.MICROSECOND">
-            <summary> 微秒 </summary>
-        </member>
-        <member name="F:Unit.Time.SencondUnit.NANOSECOND">
-            <summary> 纳秒 </summary>
-        </member>
-        <member name="F:Unit.Time.SencondUnit.NANOSECOND_100">
-            <summary> 100纳秒计数单位 </summary>
-        </member>
-        <member name="M:Unit.Time.GetSencondUnit(Unit.Time.SencondUnit)">
-            <summary>
-            获取秒 计数单位 秒
-            </summary>
-        </member>
-        <member name="M:Unit.Time.GetMinUnit(Unit.Time.SencondUnit)">
-            <summary>
-            获取秒 计数单位 分
-            </summary>
-        </member>
-        <member name="M:Unit.Time.GetHourUnit(Unit.Time.SencondUnit)">
-            <summary>
-            获取秒 计数单位 时
-            </summary>
-        </member>
-        <member name="M:Unit.Time.GetDayUnit(Unit.Time.SencondUnit)">
-            <summary>
-            获取秒 计数单位 时
-            </summary>
-        </member>
-        <member name="M:Unit.Time.GetWeekUnit(Unit.Time.SencondUnit)">
-            <summary>
-            获取秒 计数单位 时
-            </summary>
-        </member>
-        <member name="T:Unit.Time.DateTimeUnit">
-            <summary>
-            时间间隔
-            </summary>
-        </member>
-        <member name="F:Unit.Time.DateTimeUnit.Day">
-            <summary> 日 </summary>
-        </member>
-        <member name="F:Unit.Time.DateTimeUnit.Week">
-            <summary> 周 </summary>
-        </member>
-        <member name="F:Unit.Time.DateTimeUnit.Month">
-            <summary> 月 </summary>
-        </member>
-        <member name="F:Unit.Time.DateTimeUnit.Season">
-            <summary> 季 </summary>
-        </member>
-        <member name="F:Unit.Time.DateTimeUnit.Year">
-            <summary> 年 </summary>
-        </member>
-        <member name="F:Unit.Time.UNIT_WEEK_DAY">
-            <summary> 一周7天 </summary>
-        </member>
-        <member name="F:Unit.Time.UNIT_DAY_HOUR">
-            <summary> 一天24时 </summary>
-        </member>
-        <member name="F:Unit.Time.UNIT_HOUR_MIN">
-            <summary> 一时60分 </summary>
-        </member>
-        <member name="F:Unit.Time.UNIT_MIN_SECOND">
-            <summary> 一分60秒 </summary>
-        </member>
-        <member name="F:Unit.Time.SECOND">
-            <summary> 秒 单位时间（秒） s </summary>
-        </member>
-        <member name="F:Unit.Time.SECOND_MIN">
-            <summary> 分 单位时间（秒） s </summary>
-        </member>
-        <member name="F:Unit.Time.SECOND_HOUR">
-            <summary> 时 单位时间（秒） s </summary>
-        </member>
-        <member name="F:Unit.Time.SECOND_DAY">
-            <summary> 日 单位时间（秒） s </summary>
-        </member>
-        <member name="F:Unit.Time.SECOND_WEEK">
-            <summary> 周 单位时间（秒） s </summary>
-        </member>
-        <member name="F:Unit.Time.MS_SECOND">
-            <summary> 秒 单位时间（毫秒） ms </summary>
-        </member>
-        <member name="F:Unit.Time.MS_MIN">
-            <summary> 分 单位时间（毫秒） ms  </summary>
-        </member>
-        <member name="F:Unit.Time.MS_HOUR">
-            <summary> 时 单位时间（毫秒） ms  </summary>
-        </member>
-        <member name="F:Unit.Time.MS_DAY">
-            <summary> 日 单位时间（毫秒） ms  </summary>
-        </member>
-        <member name="F:Unit.Time.MS_WEEK">
-            <summary> 周 单位时间（毫秒） ms  </summary>
-        </member>
-        <member name="F:Unit.Time.μS_SECOND">
-            <summary> 秒 单位时间（微秒） μs </summary>
-        </member>
-        <member name="F:Unit.Time.μS_MIN">
-            <summary> 分 单位时间（微秒） μs </summary>
-        </member>
-        <member name="F:Unit.Time.μS_HOUR">
-            <summary> 时 单位时间（微秒） μs </summary>
-        </member>
-        <member name="F:Unit.Time.μS_DAY">
-            <summary> 天 单位时间（微秒） μs </summary>
-        </member>
-        <member name="F:Unit.Time.μS_WEEK">
-            <summary> 周 单位时间（微秒） μs </summary>
-        </member>
-        <member name="F:Unit.Time.NS_SECOND">
-            <summary> 秒 单位时间（纳秒） ns </summary>
-        </member>
-        <member name="F:Unit.Time.NS_MIN">
-            <summary> 分 单位时间（纳秒） ns </summary>
-        </member>
-        <member name="F:Unit.Time.NS_HOUR">
-            <summary> 时 单位时间（纳秒） ns </summary>
-        </member>
-        <member name="F:Unit.Time.NS_DAY">
-            <summary> 天 单位时间（纳秒） ns </summary>
-        </member>
-        <member name="F:Unit.Time.NS_WEEK">
-            <summary> 周 单位时间（纳秒） ns </summary>
-        </member>
-        <member name="P:Unit.Time.Milliseconds">
-            <summary> 1毫秒 </summary>
-        </member>
-        <member name="P:Unit.Time.Second">
-            <summary> 1秒钟 </summary>
-        </member>
-        <member name="P:Unit.Time.Minute">
-            <summary> 1分钟 </summary>
-        </member>
-        <member name="P:Unit.Time.Hour">
-            <summary> 1小时 </summary>
-        </member>
-        <member name="P:Unit.Time.Day">
-            <summary> 1天 </summary>
-        </member>
-        <member name="F:Unit.Time.GREENWICH">
-            <summary> 格林威治时间UTC参照点：1970年1月1日0时0分0秒 </summary>
         </member>
     </members>
 </doc>
