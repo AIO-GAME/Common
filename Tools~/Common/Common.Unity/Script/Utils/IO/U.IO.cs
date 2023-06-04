@@ -1,6 +1,9 @@
 ﻿using System.IO;
+using System.Linq;
 
-public partial class UtilsEngine
+using AUtils = Utils;
+
+public static partial class UtilsEngine
 {
     public static partial class IO
     {
@@ -11,7 +14,7 @@ public partial class UtilsEngine
         /// <returns>相对于“assets”目录的相对路径</returns>
         public static string FromAssets(in string path)
         {
-            return Utils.IO.GetRelativePath(path, Paths.Assets);
+            return AUtils.IO.GetRelativePath(path, UtilsEngine.Path.Assets);
         }
 
         /// <summary>
@@ -21,7 +24,7 @@ public partial class UtilsEngine
         /// <returns>相对于项目根目录的相对路径</returns>
         public static string FromProject(in string path)
         {
-            return Utils.IO.GetRelativePath(path, Paths.Project);
+            return AUtils.IO.GetRelativePath(path, UtilsEngine.Path.Project);
         }
 
         /// <summary>
@@ -30,7 +33,7 @@ public partial class UtilsEngine
         /// <param name="path">文件路径</param>
         public static void CreateParentDirectoryIfNeeded(in string path)
         {
-            CreateDirectoryIfNeeded(Directory.GetParent(path).FullName);
+            CreateDirectoryIfNeeded(Directory.GetParent(path)?.FullName);
         }
 
         /// <summary>
@@ -49,7 +52,7 @@ public partial class UtilsEngine
         public static void DeleteDirectoryIfExists(in string path)
         {
             if (Directory.Exists(path)) Directory.Delete(path, true);
-            var metaFilePath = Path.Combine(Path.GetDirectoryName(path), Path.GetFileName(path) + ".meta");
+            var metaFilePath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(path) ?? string.Empty, System.IO.Path.GetFileName(path) + ".meta");
             if (File.Exists(metaFilePath)) File.Delete(metaFilePath);
         }
 
@@ -59,10 +62,9 @@ public partial class UtilsEngine
         /// <param name="filename">要转换的文件名</param>
         /// <param name="replace">要替换无效字符的字符</param>
         /// <returns>已转换的文件名</returns>
-        public static string MakeSafeFilename(string filename, in char replace)
+        public static string MakeSafeFilename(string filename, char replace)
         {
-            foreach (var c in Path.GetInvalidFileNameChars()) filename = filename.Replace(c, replace);
-            return filename;
+            return System.IO.Path.GetInvalidFileNameChars().Aggregate(filename, (current, c) => current.Replace(c, replace));
         }
     }
 }

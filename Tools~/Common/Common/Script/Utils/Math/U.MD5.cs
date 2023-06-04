@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 
 public partial class Utils
@@ -8,7 +7,7 @@ public partial class Utils
     /// <summary>
     /// 计算MD5
     /// </summary>
-    public static partial class MD5X
+    public static partial class MD5
     {
         /// <summary>
         /// 通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得MD5
@@ -18,7 +17,6 @@ public partial class Utils
         /// <param name="stream">数据流</param>
         /// <param name="bufferSize">自定义缓冲区大小16K</param>
         /// <returns>MD5Hash</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string GetMD5(Stream stream, in long bufferSize = 1024 * 16)
         {
             return stream == null ? null : GetMD5ByHashAlgorithm(stream, bufferSize);
@@ -31,7 +29,6 @@ public partial class Utils
         /// </summary>
         /// <param name="stream"></param>
         /// <param name="bufferSize">自定义缓冲区大小16K</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string GetMD5ByHashAlgorithm(Stream stream, in long bufferSize = 1024 * 16)
         {
             var buffer = new byte[bufferSize];

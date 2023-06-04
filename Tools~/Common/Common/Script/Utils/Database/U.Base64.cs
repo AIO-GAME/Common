@@ -19,7 +19,6 @@ public partial class Utils
         /// <summary>
         /// 序列化 未加密
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Serialize<T>(in T data)
         {
             using (var stream = new MemoryStream())
@@ -33,7 +32,6 @@ public partial class Utils
         /// <summary>
         /// 反序列化 未加密
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Deserialize<T>(in string data)
         {
             using (var stream = new MemoryStream())

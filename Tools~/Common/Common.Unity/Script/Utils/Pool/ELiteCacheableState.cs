@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace AIO
+namespace AIO.Unity
 {
     /// <summary>
     /// 缓存状态

@@ -1,7 +1,5 @@
 ﻿
-using System.Runtime.CompilerServices;
-
-public partial class UtilsEngine
+public static partial class UtilsEngine
 {
     /// <summary>
     /// 平台工具类
@@ -18,7 +16,6 @@ public partial class UtilsEngine
             supportsJit = CheckJitSupport();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool CheckJitSupport()
         {
             // Temporary hotfix

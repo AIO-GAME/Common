@@ -86,7 +86,7 @@ public partial class Utils
 
                     while (offset < length)
                     {
-                        var count = Math.Min(bufferSize, length - offset);
+                        var count = System.Math.Min(bufferSize, length - offset);
                         var n = fsSource.ReadAsync(buffer, offset, count).GetAwaiter().GetResult();
                         if (n == 0) break; // 到达文件末尾
                         offset += n;

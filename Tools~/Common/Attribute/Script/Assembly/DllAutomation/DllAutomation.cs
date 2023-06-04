@@ -12,7 +12,7 @@ public static class DllAutomation
     private static Dictionary<int, List<(DllAutomationAttribute, IDllAutomation)>> Dic;
 
     /// <summary>
-    /// 存储Dic列表 从小到达排序
+    /// 存储 Dic 列表 从小到达排序
     /// </summary>
     private static List<int> Order;
 

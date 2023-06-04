@@ -2,7 +2,6 @@
 using System.Globalization;
 using System.Net;
 using System.Net.Http;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -13,7 +12,6 @@ public partial class Utils
         /// <summary>
         /// 验证一年的12个月
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsValidateMonth(in string value)
         {
             return Regex.IsMatch(value, @"^(0?[[1-9]|1[0-2])$");
@@ -22,7 +20,6 @@ public partial class Utils
         /// <summary>
         /// 验证输入汉字
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsValidateChinese(in string value)
         {
             return Regex.IsMatch(value, $@"^[/u4e00-/u9fa5],{{0,}}$");
@@ -31,7 +28,6 @@ public partial class Utils
         /// <summary>
         /// 验证输入字符串 是否满足指定个数
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsValidateLength(in string value, int number)
         {
             return Regex.IsMatch(value, string.Concat("^.{", number, "}$"));
@@ -40,7 +36,6 @@ public partial class Utils
         /// <summary>
         /// 验证当前字符串是否在指定长度范围内
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsValidateMinMaxLength(in string value, int min, int max)
         {
             return Regex.IsMatch(value, string.Concat("^/d{", min, ',', max, "}$"));
@@ -49,7 +44,6 @@ public partial class Utils
         /// <summary>
         /// 验证一个月的31天
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsValidateDay(in string value)
         {
             return Regex.IsMatch(value, @"^((0?[1-9])|((1|2)[0-9])|30|31)$");
@@ -58,7 +52,6 @@ public partial class Utils
         /// <summary>
         /// 验证两位小数
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsValidate2Decimal(in string value)
         {
             return Regex.IsMatch(value, @"^[0-9]*[.]{1}[0-9]{2}$");
@@ -67,7 +60,6 @@ public partial class Utils
         /// <summary> 
         /// 判断字符是否为空 
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNullOrEmpty(in string value)
         {
             return string.IsNullOrEmpty(value);
@@ -76,7 +68,6 @@ public partial class Utils
         /// <summary>
         /// 是否为Numeric
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsValidateNumeric(in string value)
         {
             return Regex.IsMatch(value, @"^[+-]?\d*[.]?\d*$");
@@ -85,7 +76,6 @@ public partial class Utils
         /// <summary>
         /// 是否为Int
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsValidateInt(in string value)
         {
             return Regex.IsMatch(value, "^-?\\d+$");
@@ -94,7 +84,6 @@ public partial class Utils
         /// <summary>
         /// 是否为Bool
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsValidateBool(in string value)
         {
             return Convert.ToBoolean(value);
@@ -103,7 +92,6 @@ public partial class Utils
         /// <summary>
         /// 是否为整数
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsValidateNum(string strNum)
         {
             return Regex.IsMatch(strNum, "^[0-9]*$");
@@ -112,7 +100,6 @@ public partial class Utils
         /// <summary>
         /// 是否为Unsign
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsValidateUnsign(string value)
         {
             return Regex.IsMatch(value, @"^\d*[.]?\d*$");
@@ -121,7 +108,6 @@ public partial class Utils
         /// <summary>
         /// 验证是否为 YYYY MM DD 格式 包含闰年 平年
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsValidateDate(in string value)
         {
             var bValids = Regex.IsMatch(value,
@@ -132,7 +118,6 @@ public partial class Utils
         /// <summary>
         /// 判断字符串是否是yy-mm-dd字符串
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsValidateDateString(in string value)
         {
             return Regex.IsMatch(value, @"（\d{4}）-（\d{1,2}）-（\d{1,2}）");
@@ -141,7 +126,6 @@ public partial class Utils
         /// <summary>
         /// 验证手机号码
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsValidatePhone(in string value)
         {
             return Regex.IsMatch(value, @"^1(?:3\d|4[4-9]|5[0-35-9]|6[67]|7[013-8]|8\d|9\d)\d{8}$");
@@ -150,7 +134,6 @@ public partial class Utils
         /// <summary>
         /// 是否为IP分段
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsValidateIPSect(in string value)
         {
             return Regex.IsMatch(value,
@@ -160,7 +143,6 @@ public partial class Utils
         /// <summary>
         /// 是否电子邮件
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsValidateEmail(in string value)
         {
             return Regex.IsMatch(value,
@@ -170,7 +152,6 @@ public partial class Utils
         /// <summary>
         /// 验证邮编
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsPostalcode(in string value)
         {
             return Regex.IsMatch(value, @"^\d{6}$");
@@ -179,7 +160,6 @@ public partial class Utils
         /// <summary>
         /// 验证身份证号
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsValidateIDcard(in string value)
         {
             switch (value.Length)
@@ -193,7 +173,6 @@ public partial class Utils
         /// <summary>
         /// 验证中国身份证号18
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsValidateIDcard18(in string value)
         {
             //数字验证
@@ -208,10 +187,9 @@ public partial class Utils
             if (address.IndexOf(value.Remove(2), StringComparison.CurrentCulture) == -1) return false;
 
             var birth = value.Substring(6, 8).Insert(6, "-").Insert(4, "-");
-            var time = new DateTime();
 
             //生日验证
-            if (DateTime.TryParse(birth, out time) == false) return false;
+            if (DateTime.TryParse(birth, out _) == false) return false;
 
             var arrVerifyCode = ("1,0,x,9,8,7,6,5,4,3,2").Split(',');
             var Wi = ("7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2").Split(',');
@@ -229,7 +207,6 @@ public partial class Utils
         /// <summary>
         /// 验证身份证号15
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsValidateIDcard15(in string value)
         {
             //数字验证
@@ -241,10 +218,9 @@ public partial class Utils
             if (address.IndexOf(value.Remove(2), StringComparison.CurrentCulture) == -1) return false;
 
             var birth = value.Substring(6, 6).Insert(4, "-").Insert(2, "-");
-            var time = new DateTime();
 
             //生日验证
-            if (DateTime.TryParse(birth, out time) == false) return false;
+            if (DateTime.TryParse(birth, out _) == false) return false;
 
             return true; //符合15位身份证标准
         }
@@ -252,7 +228,6 @@ public partial class Utils
         /// <summary>
         /// 15位省份证号码升18位
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string IDcard15To18(in string value)
         {
             // 不是15位身份证号码，直接返回原字符串
@@ -284,7 +259,6 @@ public partial class Utils
         /// <summary>
         /// 获取Http主机名 如果有端口 包含端口
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string GetHttpHost(in string value)
         {
             if (Uri.TryCreate(value, UriKind.Absolute, out var uriResult) && uriResult.Scheme == Uri.UriSchemeHttp)
@@ -298,7 +272,6 @@ public partial class Utils
         /// <summary>
         /// 根据正则表达式 获取对应内容
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static MatchCollection GetRegexMatches(in string value, string Regex)
         {
             return new Regex(@Regex).Matches(value);
@@ -308,11 +281,9 @@ public partial class Utils
         /// <summary>
         /// 验证URL是否有效
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static async Task<bool> IsValidateUrl(string url, string unit = "http://")
         {
-            Uri uri;
-            if (!Uri.TryCreate(url, UriKind.Absolute, out uri))
+            if (!Uri.TryCreate(url, UriKind.Absolute, out _))
             {
                 url = string.Concat(unit + url);
             }

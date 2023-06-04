@@ -8,51 +8,51 @@ public partial class Utils
     /// <summary>
     /// 数据加密解密
     /// </summary>
-    public class DataEncrypt
+    public static class DataEncrypt
     {
-        internal static byte[] RGBKey =
+        internal static readonly byte[] RGBKey =
         {
-                (byte)20,
-                (byte)'b',
-                (byte)'l',
-                (byte)'a',
-                (byte)'z',
-                (byte)'e',
-                (byte)141,
-                (byte)'j',
-                (byte)'o',
-                (byte)'y',
-                (byte)21,
-                (byte)'p',
-                (byte)'r',
-                (byte)'0',
-                (byte)'j',
-                (byte)'6',
-            };
+            (byte)20,
+            (byte)'b',
+            (byte)'l',
+            (byte)'a',
+            (byte)'z',
+            (byte)'e',
+            (byte)141,
+            (byte)'j',
+            (byte)'o',
+            (byte)'y',
+            (byte)21,
+            (byte)'p',
+            (byte)'r',
+            (byte)'0',
+            (byte)'j',
+            (byte)'6',
+        };
 
-        internal static byte[] RGBIV =
+        internal static readonly byte[] RGBIV =
         {
-                (byte)131,
-                (byte)'L',
-                (byte)'L',
-                (byte)'M',
-                (byte)167,
-                (byte)'s',
-                (byte)'t',
-                (byte)'e',
-                (byte)'a',
-                (byte)'l',
-                (byte)'d',
-                (byte)'r',
-                (byte)'e',
-                (byte)'a',
-                (byte)'m',
-                (byte)201,
-            };
+            (byte)131,
+            (byte)'L',
+            (byte)'L',
+            (byte)'M',
+            (byte)167,
+            (byte)'s',
+            (byte)'t',
+            (byte)'e',
+            (byte)'a',
+            (byte)'l',
+            (byte)'d',
+            (byte)'r',
+            (byte)'e',
+            (byte)'a',
+            (byte)'m',
+            (byte)201,
+        };
 
         #region Encrypt
 
-        static byte[] Crypt(byte[] data, ICryptoTransform cryptor)
+        private static byte[] Crypt(byte[] data, ICryptoTransform cryptor)
         {
             using (var m = new MemoryStream())
             {

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-public partial class UtilsEngine
+using AUtils = Utils;
+
+public static partial class UtilsEngine
 {
     /// <summary>
     /// Unity IO
@@ -23,10 +25,10 @@ public partial class UtilsEngine
             in SearchOption option = SearchOption.TopDirectoryOnly)
         {
             if (!Directory.Exists(value)) return Array.Empty<string>();
-            value = Path.GetFullPath(value);
-            if (!value.Contains(Paths.Project)) return Array.Empty<string>();
-            return Utils.IO.GetFilesInfo(value, pattern, option)
-                .Select(item => item.FullName.Substring(Paths.Project.Length));
+            value = System.IO.Path.GetFullPath(value);
+            if (!value.Contains(Path.Project)) return Array.Empty<string>();
+            return AUtils.IO.GetFilesInfo(value, pattern, option)
+                .Select(item => item.FullName.Substring(Path.Project.Length));
         }
 
         /// <summary>
@@ -44,10 +46,10 @@ public partial class UtilsEngine
             in SearchOption option = SearchOption.TopDirectoryOnly)
         {
             if (!Directory.Exists(value)) return Array.Empty<string>();
-            value = Path.GetFullPath(value);
-            if (!value.Contains(Paths.Project)) return Array.Empty<string>();
-            return Utils.IO.GetFilesInfo(value, filtration, pattern, option)
-                .Select(item => item.FullName.Substring(Paths.Project.Length));
+            value = System.IO.Path.GetFullPath(value);
+            if (!value.Contains(Path.Project)) return Array.Empty<string>();
+            return AUtils.IO.GetFilesInfo(value, filtration, pattern, option)
+                .Select(item => item.FullName.Substring(Path.Project.Length));
         }
 
         /// <summary>
@@ -65,12 +67,12 @@ public partial class UtilsEngine
             SearchOption option = SearchOption.TopDirectoryOnly)
         {
             if (!Directory.Exists(value)) return Array.Empty<string>();
-            value = Path.GetFullPath(value);
-            if (!value.Contains(Paths.Project)) return Array.Empty<string>();
+            value = System.IO.Path.GetFullPath(value);
+            if (!value.Contains(Path.Project)) return Array.Empty<string>();
             return
-                from item in Utils.IO.GetFilesInfo(value, filtration, pattern, option)
+                from item in AUtils.IO.GetFilesInfo(value, filtration, pattern, option)
                 where !item.Extension.Contains(".meta")
-                select item.FullName.Substring(Paths.Project.Length);
+                select item.FullName.Substring(Path.Project.Length);
         }
 
         /// <summary>
@@ -86,12 +88,12 @@ public partial class UtilsEngine
             in SearchOption option = SearchOption.TopDirectoryOnly)
         {
             if (!Directory.Exists(value)) return Array.Empty<string>();
-            value = Path.GetFullPath(value);
-            if (!value.Contains(Paths.Project)) return Array.Empty<string>();
+            value = System.IO.Path.GetFullPath(value);
+            if (!value.Contains(Path.Project)) return Array.Empty<string>();
             return
-                from item in Utils.IO.GetFilesInfo(value, pattern, option)
+                from item in AUtils.IO.GetFilesInfo(value, pattern, option)
                 where !item.Extension.Contains(".meta")
-                select item.FullName.Substring(Paths.Project.Length);
+                select item.FullName.Substring(Path.Project.Length);
         }
     }
 }

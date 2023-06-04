@@ -223,6 +223,35 @@
     <Compile Include="Script\Tools\Mail\MailMultipleHandle.cs" />
     <Compile Include="Script\Tools\Mail\MailSingleHandle.cs" />
     <Compile Include="Script\Tools\Mail\MailSingleInfo.cs" />
+    <Compile Include="Script\Tools\PList\IPListElement.cs" />
+    <Compile Include="Script\Tools\PList\PListBinaryReader.cs" />
+    <Compile Include="Script\Tools\PList\PListBinaryWriter.cs" />
+    <Compile Include="Script\Tools\PList\PListContainer\PListArray.cs" />
+    <Compile Include="Script\Tools\PList\PListContainer\PListDict.cs" />
+    <Compile Include="Script\Tools\PList\PListElement.cs" />
+    <Compile Include="Script\Tools\PList\PListElementFactory.cs" />
+    <Compile Include="Script\Tools\PList\PListExceptions\PListException.cs" />
+    <Compile Include="Script\Tools\PList\PListExceptions\PListFormatException.cs" />
+    <Compile Include="Script\Tools\PList\PListFormat.cs" />
+    <Compile Include="Script\Tools\PList\PListPrimitives\PListBool.cs" />
+    <Compile Include="Script\Tools\PList\PListPrimitives\PListData.cs" />
+    <Compile Include="Script\Tools\PList\PListPrimitives\PListDate.cs" />
+    <Compile Include="Script\Tools\PList\PListPrimitives\PListFill.cs" />
+    <Compile Include="Script\Tools\PList\PListPrimitives\PListInteger.cs" />
+    <Compile Include="Script\Tools\PList\PListPrimitives\PListNull.cs" />
+    <Compile Include="Script\Tools\PList\PListPrimitives\PListReal.cs" />
+    <Compile Include="Script\Tools\PList\PListPrimitives\PListString.cs" />
+    <Compile Include="Script\Tools\PList\PListRoot.cs" />
+    <Compile Include="Script\Tools\Pool\Pool.cs" />
+    <Compile Include="Script\Tools\Pool\Pool.Dictionary.cs" />
+    <Compile Include="Script\Tools\Pool\Pool.Dispose.cs" />
+    <Compile Include="Script\Tools\Pool\Pool.Generic.cs" />
+    <Compile Include="Script\Tools\Pool\Pool.HashSet.cs" />
+    <Compile Include="Script\Tools\Pool\Pool.List.cs" />
+    <Compile Include="Script\Tools\Pool\Pool.Queue.cs" />
+    <Compile Include="Script\Tools\Pool\Pool.SortedList.cs" />
+    <Compile Include="Script\Tools\Pool\Pool.Stack.cs" />
+    <Compile Include="Script\Tools\Pool\Pool.Using.cs" />
     <Compile Include="Script\Tools\Storage\Bin\Bin.Dictionary.cs" />
     <Compile Include="Script\Tools\Storage\Bin\Bin.HashSet.cs" />
     <Compile Include="Script\Tools\Storage\Bin\Bin.List.cs" />
@@ -233,26 +262,12 @@
     <Compile Include="Script\Tools\Storage\Storage.List.cs" />
     <Compile Include="Script\Tools\Storage\StorageFile.cs" />
     <Compile Include="Script\Tools\Timer\TimerTaskContainer.cs" />
-    <Compile Include="Script\Utils.cs" />
-    <Compile Include="Script\Utils\Database\PList\IPListElement.cs" />
-    <Compile Include="Script\Utils\Database\PList\PListBinaryReader.cs" />
-    <Compile Include="Script\Utils\Database\PList\PListBinaryWriter.cs" />
-    <Compile Include="Script\Utils\Database\PList\PListContainer\PListArray.cs" />
-    <Compile Include="Script\Utils\Database\PList\PListContainer\PListDict.cs" />
-    <Compile Include="Script\Utils\Database\PList\PListElement.cs" />
-    <Compile Include="Script\Utils\Database\PList\PListElementFactory.cs" />
-    <Compile Include="Script\Utils\Database\PList\PListExceptions\PListException.cs" />
-    <Compile Include="Script\Utils\Database\PList\PListExceptions\PListFormatException.cs" />
-    <Compile Include="Script\Utils\Database\PList\PListFormat.cs" />
-    <Compile Include="Script\Utils\Database\PList\PListPrimitives\PListBool.cs" />
-    <Compile Include="Script\Utils\Database\PList\PListPrimitives\PListData.cs" />
-    <Compile Include="Script\Utils\Database\PList\PListPrimitives\PListDate.cs" />
-    <Compile Include="Script\Utils\Database\PList\PListPrimitives\PListFill.cs" />
-    <Compile Include="Script\Utils\Database\PList\PListPrimitives\PListInteger.cs" />
-    <Compile Include="Script\Utils\Database\PList\PListPrimitives\PListNull.cs" />
-    <Compile Include="Script\Utils\Database\PList\PListPrimitives\PListReal.cs" />
-    <Compile Include="Script\Utils\Database\PList\PListPrimitives\PListString.cs" />
-    <Compile Include="Script\Utils\Database\PList\PListRoot.cs" />
+    <Compile Include="Script\Unit\ScriptType.cs" />
+    <Compile Include="Script\Unit\Unit.Char.cs" />
+    <Compile Include="Script\Unit\Unit.Chinese.cs" />
+    <Compile Include="Script\Unit\Unit.Color.cs" />
+    <Compile Include="Script\Unit\Unit.Suffix.cs" />
+    <Compile Include="Script\Unit\Unit.Time.cs" />
     <Compile Include="Script\Utils\Database\U.Base64.cs" />
     <Compile Include="Script\Utils\Database\U.Binary.cs" />
     <Compile Include="Script\Utils\Database\U.DataEncrypt.cs" />
@@ -324,16 +339,6 @@
     <Compile Include="Script\Utils\Net\Http\HttpDownload.cs" />
     <Compile Include="Script\Utils\Net\Http\HttpDownloadInfo.cs" />
     <Compile Include="Script\Utils\Net\Http\U.Http.cs" />
-    <Compile Include="Script\Utils\Pool\Pool.cs" />
-    <Compile Include="Script\Utils\Pool\Pool.Dictionary.cs" />
-    <Compile Include="Script\Utils\Pool\Pool.Dispose.cs" />
-    <Compile Include="Script\Utils\Pool\Pool.Generic.cs" />
-    <Compile Include="Script\Utils\Pool\Pool.HashSet.cs" />
-    <Compile Include="Script\Utils\Pool\Pool.List.cs" />
-    <Compile Include="Script\Utils\Pool\Pool.Queue.cs" />
-    <Compile Include="Script\Utils\Pool\Pool.SortedList.cs" />
-    <Compile Include="Script\Utils\Pool\Pool.Stack.cs" />
-    <Compile Include="Script\Utils\Pool\Pool.Using.cs" />
     <Compile Include="Script\Utils\String\StringBlock.cs" />
     <Compile Include="Script\Utils\String\U.IDNo.cs" />
     <Compile Include="Script\Utils\String\U.MaskWord.cs" />
@@ -345,12 +350,7 @@
     <Compile Include="Script\Utils\System\U.Class.cs" />
     <Compile Include="Script\Utils\System\U.GC.cs" />
     <Compile Include="Script\Utils\System\U.SystemInfo.cs" />
-    <Compile Include="Script\Utils\Unit\ScriptType.cs" />
-    <Compile Include="Script\Utils\Unit\Unit.Char.cs" />
-    <Compile Include="Script\Utils\Unit\Unit.Chinese.cs" />
-    <Compile Include="Script\Utils\Unit\Unit.Color.cs" />
-    <Compile Include="Script\Utils\Unit\Unit.Suffix.cs" />
-    <Compile Include="Script\Utils\Unit\Unit.Time.cs" />
+    <Compile Include="Script\Utils\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -376,6 +376,7 @@
     <ProjectReference Include="..\..\Ensure\Ensure.csproj">
       <Project>{3e725c5e-8dd9-4ab3-8042-96effab382b4}</Project>
       <Name>Ensure</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -412,11 +413,13 @@
 @if exist %25CUR_DLL%25%25dllname%25.xml (
 @copy /y /v %25CUR_DLL%25%25dllname%25.xml %25cur%25%25dllname%25.xml
 )
-
 </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>@cd /d $(SolutionDir)
+@cd ..
+@set cur=%25cd%25\Plugins\
+@cd /d $(SolutionDir)
 @cd ..
 @set cur=%25cd%25\Plugins\
 

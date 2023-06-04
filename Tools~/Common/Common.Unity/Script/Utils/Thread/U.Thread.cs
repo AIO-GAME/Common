@@ -1,16 +1,18 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
+using UnityEngine;
 
 public static partial class UtilsEngine
 {
     /// <summary>
     /// 提供在特定线程上下文（SynchronizationContext）中异步执行回调函数或操作的静态方法。
     /// </summary>
-    public static class ThreadX
+    public static class Thread
     {
         /// <summary>
         /// 当前线程的同步上下文。
         /// </summary>
-        private readonly static SynchronizationContext syncContext = SynchronizationContext.Current;
+        private static readonly SynchronizationContext syncContext = SynchronizationContext.Current;
 
         /// <summary>
         /// 将传入的回调函数和状态对象封装成一个操作，并通过同步上下文的 Post 方法异步执行。
@@ -26,7 +28,7 @@ public static partial class UtilsEngine
         /// 将传入的 Action 对象封装成一个操作，并在执行时捕获异常进行处理后，通过同步上下文的 Post 方法异步执行。
         /// </summary>
         /// <param name="act">要执行的 Action 对象。</param>
-        public static void SyncPost(System.Action act)
+        public static void SyncPost(Action act)
         {
             syncContext.Post((obj) =>
             {
@@ -34,9 +36,9 @@ public static partial class UtilsEngine
                 {
                     act.Invoke();
                 }
-                catch (System.Exception e)
+                catch (Exception e)
                 {
-                    throw e;
+                    Debug.LogException(e);
                 }
             }, null);
         }
@@ -55,7 +57,7 @@ public static partial class UtilsEngine
         /// 将传入的 Action 对象封装成一个操作，并通过 SyncPost 方法异步执行，实际上也是 SyncPost 方法的一个别名。
         /// </summary>
         /// <param name="act">要执行的 Action 对象。</param>
-        public static void SynchronizationPost(System.Action act)
+        public static void SynchronizationPost(Action act)
         {
             SyncPost(act);
         }

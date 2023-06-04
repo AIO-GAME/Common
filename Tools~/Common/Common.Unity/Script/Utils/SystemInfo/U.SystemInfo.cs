@@ -1,16 +1,13 @@
-﻿#define UNITY_2017_1_OR_NEWER
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.Rendering;
 
-#if UNITY_2017_1_OR_NEWER
 public static partial class UtilsEngine
 {
     /// <summary>
     /// 设备信息 Unity API 2019_or_new
     /// </summary>
-    public static partial class SystemInfoX
+    public static partial class SystemInfo
     {
         /// <summary>
         /// 是否支持镶嵌着色器
@@ -18,7 +15,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsTessellationShaders()
         {
-            return SystemInfo.supportsTessellationShaders;
+            return UnityEngine.SystemInfo.supportsTessellationShaders;
         }
 
         /// <summary>
@@ -27,7 +24,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsRayTracing()
         {
-            return SystemInfo.supportsRayTracing;
+            return UnityEngine.SystemInfo.supportsRayTracing;
         }
 
         /// <summary>
@@ -35,7 +32,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsMipMaxLevel()
         {
-            return SystemInfo.hasMipMaxLevel;
+            return UnityEngine.SystemInfo.hasMipMaxLevel;
         }
 
         /// <summary>
@@ -43,7 +40,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static int MaxComputeBufferInputsCompute()
         {
-            return SystemInfo.maxComputeBufferInputsCompute;
+            return UnityEngine.SystemInfo.maxComputeBufferInputsCompute;
         }
 
         /// <summary>
@@ -51,7 +48,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static int MaxComputeBufferInputsDomain()
         {
-            return SystemInfo.maxComputeBufferInputsDomain;
+            return UnityEngine.SystemInfo.maxComputeBufferInputsDomain;
         }
 
         /// <summary>
@@ -59,7 +56,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static int MaxComputeBufferInputsFragment()
         {
-            return SystemInfo.maxComputeBufferInputsFragment;
+            return UnityEngine.SystemInfo.maxComputeBufferInputsFragment;
         }
 
         /// <summary>
@@ -67,7 +64,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static int MaxComputeBufferInputsGeometry()
         {
-            return SystemInfo.maxComputeBufferInputsGeometry;
+            return UnityEngine.SystemInfo.maxComputeBufferInputsGeometry;
         }
 
         /// <summary>
@@ -75,7 +72,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static int MaxComputeBufferInputsHull()
         {
-            return SystemInfo.maxComputeBufferInputsHull;
+            return UnityEngine.SystemInfo.maxComputeBufferInputsHull;
         }
 
         /// <summary>
@@ -83,7 +80,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static int MaxComputeBufferInputsVertex()
         {
-            return SystemInfo.maxComputeBufferInputsVertex;
+            return UnityEngine.SystemInfo.maxComputeBufferInputsVertex;
         }
 
         /// <summary>
@@ -91,7 +88,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static int MaxComputeWorkGroupSize()
         {
-            return SystemInfo.maxComputeWorkGroupSize;
+            return UnityEngine.SystemInfo.maxComputeWorkGroupSize;
         }
 
         /// <summary>
@@ -99,7 +96,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static int MaxComputeWorkGroupSizeX()
         {
-            return SystemInfo.maxComputeWorkGroupSizeX;
+            return UnityEngine.SystemInfo.maxComputeWorkGroupSizeX;
         }
 
         /// <summary>
@@ -107,7 +104,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static int MaxComputeWorkGroupSizeY()
         {
-            return SystemInfo.maxComputeWorkGroupSizeY;
+            return UnityEngine.SystemInfo.maxComputeWorkGroupSizeY;
         }
 
         /// <summary>
@@ -115,7 +112,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static int MaxComputeWorkGroupSizeZ()
         {
-            return SystemInfo.maxComputeWorkGroupSizeZ;
+            return UnityEngine.SystemInfo.maxComputeWorkGroupSizeZ;
         }
 
         /// <summary>
@@ -123,7 +120,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static int MaxCubemapSize()
         {
-            return SystemInfo.maxCubemapSize;
+            return UnityEngine.SystemInfo.maxCubemapSize;
         }
 
         /// <summary>
@@ -131,7 +128,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static int MaxTextureSize()
         {
-            return SystemInfo.maxTextureSize;
+            return UnityEngine.SystemInfo.maxTextureSize;
         }
 
         /// <summary>
@@ -139,7 +136,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsMinConstantBufferOffsetAlignment()
         {
-            return SystemInfo.constantBufferOffsetAlignment == 0;
+            return UnityEngine.SystemInfo.constantBufferOffsetAlignment == 0;
         }
 
         /// <summary>
@@ -148,7 +145,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsVertexAttributeFormat(VertexAttributeFormat format, int dimension)
         {
-            return SystemInfo.SupportsVertexAttributeFormat(format, dimension);
+            return UnityEngine.SystemInfo.SupportsVertexAttributeFormat(format, dimension);
         }
 
         /// <summary>
@@ -157,7 +154,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsUsesLoadStoreActions()
         {
-            return SystemInfo.usesLoadStoreActions;
+            return UnityEngine.SystemInfo.usesLoadStoreActions;
         }
 
         /// <summary>
@@ -165,7 +162,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static GraphicsFormat GetCompatibleFormat(GraphicsFormat format, FormatUsage usage)
         {
-            return SystemInfo.GetCompatibleFormat(format, usage);
+            return UnityEngine.SystemInfo.GetCompatibleFormat(format, usage);
         }
 
         /// <summary>
@@ -173,7 +170,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static GraphicsFormat GetGraphicsFormat(DefaultFormat format)
         {
-            return SystemInfo.GetGraphicsFormat(format);
+            return UnityEngine.SystemInfo.GetGraphicsFormat(format);
         }
 
         /// <summary>
@@ -181,7 +178,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsFormatSupported(GraphicsFormat format, FormatUsage usage)
         {
-            return SystemInfo.IsFormatSupported(format, usage);
+            return UnityEngine.SystemInfo.IsFormatSupported(format, usage);
         }
 
         /// <summary>
@@ -190,7 +187,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static RenderingThreadingMode GetRenderingThreadingMode()
         {
-            return SystemInfo.renderingThreadingMode;
+            return UnityEngine.SystemInfo.renderingThreadingMode;
         }
 
         /// <summary>
@@ -199,7 +196,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static int GetSupportedRandomWriteTargetCount()
         {
-            return SystemInfo.supportedRandomWriteTargetCount;
+            return UnityEngine.SystemInfo.supportedRandomWriteTargetCount;
         }
 
         /// <summary>
@@ -208,7 +205,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsGeometryShaders()
         {
-            return SystemInfo.supportsGeometryShaders;
+            return UnityEngine.SystemInfo.supportsGeometryShaders;
         }
 
         /// <summary>
@@ -217,18 +214,17 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsGraphicsFence()
         {
-            return SystemInfo.supportsGraphicsFence;
+            return UnityEngine.SystemInfo.supportsGraphicsFence;
         }
     }
 }
-#endif
 
 public static partial class UtilsEngine
 {
     /// <summary>
     /// 设备信息 Unity API
     /// </summary>
-    public static partial class SystemInfoX
+    public static partial class SystemInfo
     {
         /// <summary>
         /// 当前渲染器是否直接支持绑定常量缓冲区
@@ -236,14 +232,14 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsSetConstantBuffer()
         {
-            return SystemInfo.supportsSetConstantBuffer;
+            return UnityEngine.SystemInfo.supportsSetConstantBuffer;
         }
 
         /// <summary>
         /// SystemInfo字符串属性返回的值，该属性在当前平台上不受支持。
-        /// Value returned by SystemInfo string properties which are not supported on the current platform.
+        /// Value returned by UnityEngine. SystemInfo string properties which are not supported on the current platform.
         /// </summary>
-        public const string UnsupportedIdentifier = SystemInfo.unsupportedIdentifier;
+        public const string UnsupportedIdentifier = UnityEngine.SystemInfo.unsupportedIdentifier;
 
         /// <summary>
         /// 获取设备电池状态
@@ -257,7 +253,7 @@ public static partial class UtilsEngine
         /// -->
         public static BatteryStatus GetBatteryStatus()
         {
-            return SystemInfo.batteryStatus;
+            return UnityEngine.SystemInfo.batteryStatus;
         }
 
         /// <summary>
@@ -273,7 +269,7 @@ public static partial class UtilsEngine
         /// -->
         public static CopyTextureSupport GetTextureSupport()
         {
-            return SystemInfo.copyTextureSupport;
+            return UnityEngine.SystemInfo.copyTextureSupport;
         }
 
         /// <summary>
@@ -281,7 +277,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static string GetDeviceModel()
         {
-            return SystemInfo.deviceModel;
+            return UnityEngine.SystemInfo.deviceModel;
         }
 
         /// <summary>
@@ -289,7 +285,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static string GetDeviceName()
         {
-            return SystemInfo.deviceName;
+            return UnityEngine.SystemInfo.deviceName;
         }
 
         /// <summary>
@@ -303,7 +299,7 @@ public static partial class UtilsEngine
         /// -->
         public static DeviceType GetDeviceType()
         {
-            return SystemInfo.deviceType;
+            return UnityEngine.SystemInfo.deviceType;
         }
 
         /// <summary>
@@ -311,7 +307,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static string GetDeviceUniqueIdentifier()
         {
-            return SystemInfo.deviceUniqueIdentifier;
+            return UnityEngine.SystemInfo.deviceUniqueIdentifier;
         }
 
         #region Graphics Device
@@ -321,7 +317,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static int GetGraphicsDeviceID()
         {
-            return SystemInfo.graphicsDeviceID;
+            return UnityEngine.SystemInfo.graphicsDeviceID;
         }
 
         /// <summary>
@@ -329,7 +325,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static string GetGraphicsDeviceName()
         {
-            return SystemInfo.graphicsDeviceName;
+            return UnityEngine.SystemInfo.graphicsDeviceName;
         }
 
         /// <summary>
@@ -337,7 +333,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static GraphicsDeviceType GetGraphicsDeviceType()
         {
-            return SystemInfo.graphicsDeviceType;
+            return UnityEngine.SystemInfo.graphicsDeviceType;
         }
 
         /// <summary>
@@ -345,7 +341,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static string GetGraphicsDeviceVendor()
         {
-            return SystemInfo.graphicsDeviceVendor;
+            return UnityEngine.SystemInfo.graphicsDeviceVendor;
         }
 
         /// <summary>
@@ -353,7 +349,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static int GetGraphicsDeviceVendorID()
         {
-            return SystemInfo.graphicsDeviceVendorID;
+            return UnityEngine.SystemInfo.graphicsDeviceVendorID;
         }
 
         /// <summary>
@@ -361,7 +357,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static string GetGraphicsDeviceVersion()
         {
-            return SystemInfo.graphicsDeviceVersion;
+            return UnityEngine.SystemInfo.graphicsDeviceVersion;
         }
 
         /// <summary>
@@ -369,7 +365,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static int GetGraphicsMemorySize()
         {
-            return SystemInfo.graphicsMemorySize;
+            return UnityEngine.SystemInfo.graphicsMemorySize;
         }
 
         /// <summary>
@@ -377,7 +373,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsGraphicsMultiThreaded()
         {
-            return SystemInfo.graphicsMultiThreaded;
+            return UnityEngine.SystemInfo.graphicsMultiThreaded;
         }
 
         /// <summary>
@@ -385,7 +381,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static int GetGraphicsShaderLevel()
         {
-            return SystemInfo.graphicsShaderLevel;
+            return UnityEngine.SystemInfo.graphicsShaderLevel;
         }
 
         /// <summary>
@@ -393,7 +389,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsGraphicsUVStartsAtTop()
         {
-            return SystemInfo.graphicsUVStartsAtTop;
+            return UnityEngine.SystemInfo.graphicsUVStartsAtTop;
         }
 
         /// <summary>
@@ -401,7 +397,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsDynamicUniformArrayIndexingInFragmentShaders()
         {
-            return SystemInfo.hasDynamicUniformArrayIndexingInFragmentShaders;
+            return UnityEngine.SystemInfo.hasDynamicUniformArrayIndexingInFragmentShaders;
         }
 
         /// <summary>
@@ -409,7 +405,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsHiddenSurfaceRemovalOnGPU()
         {
-            return SystemInfo.hasHiddenSurfaceRemovalOnGPU;
+            return UnityEngine.SystemInfo.hasHiddenSurfaceRemovalOnGPU;
         }
 
         /// <summary>
@@ -417,7 +413,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static NPOTSupport GetNpotSupport()
         {
-            return SystemInfo.npotSupport;
+            return UnityEngine.SystemInfo.npotSupport;
         }
 
         #endregion
@@ -427,7 +423,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static string GetOperatingSystem()
         {
-            return SystemInfo.operatingSystem;
+            return UnityEngine.SystemInfo.operatingSystem;
         }
 
         /// <summary>
@@ -435,7 +431,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static OperatingSystemFamily GetOperatingSystemFamily()
         {
-            return SystemInfo.operatingSystemFamily;
+            return UnityEngine.SystemInfo.operatingSystemFamily;
         }
 
         /// <summary>
@@ -443,7 +439,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static int GetProcessorCount()
         {
-            return SystemInfo.processorCount;
+            return UnityEngine.SystemInfo.processorCount;
         }
 
         /// <summary>
@@ -451,7 +447,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static int GetProcessorFrequency()
         {
-            return SystemInfo.processorFrequency;
+            return UnityEngine.SystemInfo.processorFrequency;
         }
 
         /// <summary>
@@ -459,7 +455,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static string GetProcessorType()
         {
-            return SystemInfo.processorType;
+            return UnityEngine.SystemInfo.processorType;
         }
 
         /// <summary>
@@ -467,7 +463,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static OperatingSystemFamily OperatingSystemFamily()
         {
-            return SystemInfo.operatingSystemFamily;
+            return UnityEngine.SystemInfo.operatingSystemFamily;
         }
 
         /// <summary>
@@ -476,7 +472,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static float GetSupportedRenderTargetCount()
         {
-            return SystemInfo.supportedRenderTargetCount;
+            return UnityEngine.SystemInfo.supportedRenderTargetCount;
         }
 
         /// <summary>
@@ -485,7 +481,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupports2DArrayTextures()
         {
-            return SystemInfo.supports2DArrayTextures;
+            return UnityEngine.SystemInfo.supports2DArrayTextures;
         }
 
         /// <summary>
@@ -494,7 +490,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupports32bitsIndexBuffer()
         {
-            return SystemInfo.supports32bitsIndexBuffer;
+            return UnityEngine.SystemInfo.supports32bitsIndexBuffer;
         }
 
         /// <summary>
@@ -503,7 +499,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupports3DRenderTextures()
         {
-            return SystemInfo.supports3DRenderTextures;
+            return UnityEngine.SystemInfo.supports3DRenderTextures;
         }
 
         /// <summary>
@@ -512,7 +508,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupports3DTextures()
         {
-            return SystemInfo.supports3DTextures;
+            return UnityEngine.SystemInfo.supports3DTextures;
         }
 
         /// <summary>
@@ -521,7 +517,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsAccelerometer()
         {
-            return SystemInfo.supportsAccelerometer;
+            return UnityEngine.SystemInfo.supportsAccelerometer;
         }
 
         /// <summary>
@@ -530,7 +526,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsAsyncCompute()
         {
-            return SystemInfo.supportsAsyncCompute;
+            return UnityEngine.SystemInfo.supportsAsyncCompute;
         }
 
         /// <summary>
@@ -539,7 +535,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsAsyncGPUReadback()
         {
-            return SystemInfo.supportsAsyncGPUReadback;
+            return UnityEngine.SystemInfo.supportsAsyncGPUReadback;
         }
 
         /// <summary>
@@ -548,7 +544,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsAudio()
         {
-            return SystemInfo.supportsAudio;
+            return UnityEngine.SystemInfo.supportsAudio;
         }
 
         /// <summary>
@@ -557,7 +553,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsBlendingOnRenderTextureFormat(RenderTextureFormat format)
         {
-            return SystemInfo.SupportsBlendingOnRenderTextureFormat(format);
+            return UnityEngine.SystemInfo.SupportsBlendingOnRenderTextureFormat(format);
         }
 
         /// <summary>
@@ -566,7 +562,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsComputeShaders()
         {
-            return SystemInfo.supportsComputeShaders;
+            return UnityEngine.SystemInfo.supportsComputeShaders;
         }
 
         /// <summary>
@@ -575,7 +571,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsCubemapArrayTextures()
         {
-            return SystemInfo.supportsCubemapArrayTextures;
+            return UnityEngine.SystemInfo.supportsCubemapArrayTextures;
         }
 
         /// <summary>
@@ -584,7 +580,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsGyroscope()
         {
-            return SystemInfo.supportsGyroscope;
+            return UnityEngine.SystemInfo.supportsGyroscope;
         }
 
         /// <summary>
@@ -593,7 +589,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsHardwareQuadTopology()
         {
-            return SystemInfo.supportsHardwareQuadTopology;
+            return UnityEngine.SystemInfo.supportsHardwareQuadTopology;
         }
 
         /// <summary>
@@ -602,7 +598,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsInstancing()
         {
-            return SystemInfo.supportsInstancing;
+            return UnityEngine.SystemInfo.supportsInstancing;
         }
 
         /// <summary>
@@ -611,7 +607,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsLocationService()
         {
-            return SystemInfo.supportsLocationService;
+            return UnityEngine.SystemInfo.supportsLocationService;
         }
 
         /// <summary>
@@ -620,7 +616,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsMipStreaming()
         {
-            return SystemInfo.supportsMipStreaming;
+            return UnityEngine.SystemInfo.supportsMipStreaming;
         }
 
         /// <summary>
@@ -629,7 +625,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsMotionVectors()
         {
-            return SystemInfo.supportsMotionVectors;
+            return UnityEngine.SystemInfo.supportsMotionVectors;
         }
 
         /// <summary>
@@ -638,7 +634,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsMultisampleAutoResolve()
         {
-            return SystemInfo.supportsMultisampleAutoResolve;
+            return UnityEngine.SystemInfo.supportsMultisampleAutoResolve;
         }
 
         /// <summary>
@@ -647,7 +643,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static int GetSsupportsMultisampledTextures()
         {
-            return SystemInfo.supportsMultisampledTextures;
+            return UnityEngine.SystemInfo.supportsMultisampledTextures;
         }
 
         /// <summary>
@@ -656,7 +652,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsRawShadowDepthSampling()
         {
-            return SystemInfo.supportsRawShadowDepthSampling;
+            return UnityEngine.SystemInfo.supportsRawShadowDepthSampling;
         }
 
         /// <summary>
@@ -665,7 +661,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsRenderTextureFormat(RenderTextureFormat format)
         {
-            return SystemInfo.SupportsRenderTextureFormat(format);
+            return UnityEngine.SystemInfo.SupportsRenderTextureFormat(format);
         }
 
         /// <summary>
@@ -674,7 +670,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsSeparatedRenderTargetsBlend()
         {
-            return SystemInfo.supportsSeparatedRenderTargetsBlend;
+            return UnityEngine.SystemInfo.supportsSeparatedRenderTargetsBlend;
         }
 
         /// <summary>
@@ -683,7 +679,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsShadows()
         {
-            return SystemInfo.supportsShadows;
+            return UnityEngine.SystemInfo.supportsShadows;
         }
 
         /// <summary>
@@ -692,7 +688,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsSparseTextures()
         {
-            return SystemInfo.supportsSparseTextures;
+            return UnityEngine.SystemInfo.supportsSparseTextures;
         }
 
         /// <summary>
@@ -701,7 +697,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsTextureFormat(TextureFormat format)
         {
-            return SystemInfo.SupportsTextureFormat(format);
+            return UnityEngine.SystemInfo.SupportsTextureFormat(format);
         }
 
         /// <summary>
@@ -710,7 +706,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static int GetSupportsTextureWrapMirrorOnce()
         {
-            return SystemInfo.supportsTextureWrapMirrorOnce;
+            return UnityEngine.SystemInfo.supportsTextureWrapMirrorOnce;
         }
 
         /// <summary>
@@ -719,7 +715,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsSupportsVibration()
         {
-            return SystemInfo.supportsVibration;
+            return UnityEngine.SystemInfo.supportsVibration;
         }
 
         /// <summary>
@@ -728,7 +724,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static int GetSystemMemorySize()
         {
-            return SystemInfo.systemMemorySize;
+            return UnityEngine.SystemInfo.systemMemorySize;
         }
 
         /// <summary>
@@ -737,7 +733,7 @@ public static partial class UtilsEngine
         /// </summary>
         public static bool IsUsesReversedZBuffer()
         {
-            return SystemInfo.usesReversedZBuffer;
+            return UnityEngine.SystemInfo.usesReversedZBuffer;
         }
     }
 }

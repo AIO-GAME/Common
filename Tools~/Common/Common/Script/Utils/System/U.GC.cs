@@ -6,13 +6,12 @@
 
 
 using System;
-using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
 using System.Security;
+using SGC = System.GC;
 
 public partial class Utils
 {
-
     /*
      1、只管理内存，非托管资源，如文件句柄，GDI资源，数据库连接等还需要用户去管理。
 
@@ -49,24 +48,23 @@ public partial class Utils
     /// 对象的代数或 age 指示对象所属的代。 最近创建的对象是较新的生成的一部分，其生成号比之前在应用程序生命周期中创建的对象的生成号要低。
     /// 最近一代中的对象位于第0代中。 垃圾回收器的这种实现支持三代对象，第0代、第1代和第2代。
     /// 可以检索属性的值 MaxGeneration ，以确定系统支持的最大代数。-->
-    public static class GCX
+    public static class GC
     {
         /* 代是内存中对象的相对生存期的单位。 */
 
         /// <summary>
         /// 获取系统当前支持的最大代数
         /// </summary>
-        public static int MaxGeneration => GC.MaxGeneration;
+        public static int MaxGeneration => SGC.MaxGeneration;
 
         /// <summary>
         /// 阻止GC调用Finalize方法
         /// </summary>
         /// <!--因为Finalize方法的调用会牺牲部分性能。如果你的Dispose方法已经对委托管资源作了清理，就没必要让GC再调用对象的Finalize方法-->
         [SecurityCritical]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SuppressFinalize(object obj)
         {
-            GC.SuppressFinalize(obj);
+            SGC.SuppressFinalize(obj);
         }
 
         #region Collect
@@ -75,10 +73,9 @@ public partial class Utils
         /// 强制对所有代进行即时垃圾回收
         /// </summary>
         [SecurityCritical]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Collect()
         {
-            GC.Collect();
+            SGC.Collect();
         }
 
         /// <summary>
@@ -86,10 +83,9 @@ public partial class Utils
         /// </summary>
         /// <param name="generation">代</param>
         [SecurityCritical]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Collect(int generation)
         {
-            GC.Collect(generation);
+            SGC.Collect(generation);
         }
 
         /// <summary>
@@ -98,10 +94,9 @@ public partial class Utils
         /// <param name="generation">代</param>
         /// <param name="gCCollectionMode">GC模式集合</param>
         [SecurityCritical]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Collect(int generation, GCCollectionMode gCCollectionMode)
         {
-            GC.Collect(generation, gCCollectionMode);
+            SGC.Collect(generation, gCCollectionMode);
         }
 
         /// <summary>
@@ -111,10 +106,9 @@ public partial class Utils
         /// <param name="gCCollectionMode">GC模式集合</param>
         /// <param name="blocking">阻塞</param>
         [SecurityCritical]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Collect(int generation, GCCollectionMode gCCollectionMode, bool blocking)
         {
-            GC.Collect(generation, gCCollectionMode, blocking);
+            SGC.Collect(generation, gCCollectionMode, blocking);
         }
 
         /// <summary>
@@ -125,21 +119,19 @@ public partial class Utils
         /// <param name="blocking">阻塞</param>
         /// <param name="compacting">压缩</param>
         [SecurityCritical]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Collect(int generation, GCCollectionMode gCCollectionMode, bool blocking, bool compacting)
         {
-            GC.Collect(generation, gCCollectionMode, blocking, compacting);
+            SGC.Collect(generation, gCCollectionMode, blocking, compacting);
         }
 
         /// <summary>
         /// 返回已经对对象的指定代进行的垃圾回收次数。
         /// </summary>
         /// <param name="generation">代</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecurityCritical, ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static void CollectionCount(int generation)
         {
-            GC.CollectionCount(generation);
+            SGC.CollectionCount(generation);
         }
 
         #endregion
@@ -148,10 +140,9 @@ public partial class Utils
         /// 取消注册垃圾回收通知。
         /// </summary>
         [SecurityCritical]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void CancelFullGCNotification()
         {
-            GC.CancelFullGCNotification();
+            SGC.CancelFullGCNotification();
         }
 
         /// <summary>
@@ -159,10 +150,9 @@ public partial class Utils
         /// </summary>
         /// <param name="bytesAllocated">分配的字节数</param>
         [SecurityCritical]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void AddMemoryPressure(long bytesAllocated)
         {
-            GC.AddMemoryPressure(bytesAllocated);
+            SGC.AddMemoryPressure(bytesAllocated);
         }
 
         /// <summary>
@@ -170,10 +160,9 @@ public partial class Utils
         /// </summary>
         /// <param name="bytesAllocated">分配的字节数</param>
         [SecurityCritical]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void RemoveMemoryPressure(long bytesAllocated)
         {
-            GC.RemoveMemoryPressure(bytesAllocated);
+            SGC.RemoveMemoryPressure(bytesAllocated);
         }
 
         #region 创建 关闭 无CG模式
@@ -184,10 +173,9 @@ public partial class Utils
         /// <param name="totalSize">总空间</param>
         /// <returns>是否成功</returns>
         [SecurityCritical]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool TryStartNoGCRegion(long totalSize)
         {
-            return GC.TryStartNoGCRegion(totalSize);
+            return SGC.TryStartNoGCRegion(totalSize);
         }
 
         /// <summary>
@@ -199,10 +187,9 @@ public partial class Utils
         /// <param name="disallowFullBlockingGC">禁止完全阻塞GC</param>
         /// <returns>是否成功</returns>
         [SecurityCritical]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool TryStartNoGCRegion(long totalSize, bool disallowFullBlockingGC)
         {
-            return GC.TryStartNoGCRegion(totalSize, disallowFullBlockingGC);
+            return SGC.TryStartNoGCRegion(totalSize, disallowFullBlockingGC);
         }
 
         /// <summary>
@@ -212,10 +199,9 @@ public partial class Utils
         /// <param name="lohSize">大对象堆</param>
         /// <returns>是否成功</returns>
         [SecurityCritical]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool TryStartNoGCRegion(long totalSize, long lohSize)
         {
-            return GC.TryStartNoGCRegion(totalSize, lohSize);
+            return SGC.TryStartNoGCRegion(totalSize, lohSize);
         }
 
         /// <summary>
@@ -227,20 +213,18 @@ public partial class Utils
         /// <param name="disallowFullBlockingGC">禁止完全阻塞GC</param>
         /// <returns>是否成功</returns>
         [SecurityCritical]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool TryStartNoGCRegion(long totalSize, long lohSize, bool disallowFullBlockingGC)
         {
-            return GC.TryStartNoGCRegion(totalSize, lohSize, disallowFullBlockingGC);
+            return SGC.TryStartNoGCRegion(totalSize, lohSize, disallowFullBlockingGC);
         }
 
         /// <summary>
-        /// 结束无 GC 区域延迟模式
+        /// 结束无 SGC 区域延迟模式
         /// </summary>
         [SecurityCritical]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void EndNoGCRegion()
         {
-            GC.EndNoGCRegion();
+            SGC.EndNoGCRegion();
         }
 
         #endregion
@@ -251,10 +235,9 @@ public partial class Utils
         /// <param name="obj">数据</param>
         /// <returns>代</returns>
         [SecurityCritical]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetGeneration(object obj)
         {
-            return GC.GetGeneration(obj);
+            return SGC.GetGeneration(obj);
         }
 
         /// <summary>
@@ -263,10 +246,9 @@ public partial class Utils
         /// <param name="obj">数据</param>
         /// <returns>代</returns>
         [SecurityCritical]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetGeneration(WeakReference obj)
         {
-            return GC.GetGeneration(obj);
+            return SGC.GetGeneration(obj);
         }
 
         /// <summary>
@@ -275,21 +257,19 @@ public partial class Utils
         /// <param name="forceFullCollection">是否可以等待较短间隔再返回，以便系统回收垃圾和终结对象。</param>
         /// <returns>全部内存大小</returns>
         [SecurityCritical]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long GetTotalMemory(bool forceFullCollection)
         {
-            return GC.GetTotalMemory(forceFullCollection);
+            return SGC.GetTotalMemory(forceFullCollection);
         }
 
         /// <summary>
         /// 引用指定对象，使其从当前例程开始到调用此方法的那一刻为止均不符合进行垃圾回收的条件。
         /// </summary>
         /// <param name="obj">指定对象</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static void KeepAlive(object obj)
         {
-            GC.KeepAlive(obj);
+            SGC.KeepAlive(obj);
         }
 
         /// <summary>
@@ -298,21 +278,19 @@ public partial class Utils
         /// <param name="maxGenerationThreshold">马克斯代阈值</param>
         /// <param name="largeObjectHeapThreshold">大对象堆阈值</param>
         [SecurityCritical]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void RegisterForFullGCNotification(int maxGenerationThreshold, int largeObjectHeapThreshold)
         {
-            GC.RegisterForFullGCNotification(maxGenerationThreshold, largeObjectHeapThreshold);
+            SGC.RegisterForFullGCNotification(maxGenerationThreshold, largeObjectHeapThreshold);
         }
 
         /// <summary>
         /// 请求系统调用指定对象的终结器，此前已为该对象调用 SuppressFinalize(Object)。
         /// </summary>
         /// <param name="obj">数据</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecuritySafeCritical]
         public static void ReRegisterForFinalize(object obj)
         {
-            GC.ReRegisterForFinalize(obj);
+            SGC.ReRegisterForFinalize(obj);
         }
 
         /// <summary>
@@ -320,10 +298,9 @@ public partial class Utils
         /// </summary>
         /// <returns>GC通知状态</returns>
         [SecurityCritical]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static GCNotificationStatus WaitForFullGCApproach()
         {
-            return GC.WaitForFullGCApproach();
+            return SGC.WaitForFullGCApproach();
         }
 
         /// <summary>
@@ -332,10 +309,9 @@ public partial class Utils
         /// <param name="millisecondsTimeout">毫秒超时时间</param>
         /// <returns>GC通知状态</returns>
         [SecurityCritical]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static GCNotificationStatus WaitForFullGCApproach(int millisecondsTimeout)
         {
-            return GC.WaitForFullGCApproach(millisecondsTimeout);
+            return SGC.WaitForFullGCApproach(millisecondsTimeout);
         }
 
         /// <summary>
@@ -343,10 +319,9 @@ public partial class Utils
         /// </summary>
         /// <returns>GC通知状态</returns>
         [SecurityCritical]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static GCNotificationStatus WaitForFullGCComplete()
         {
-            return GC.WaitForFullGCComplete();
+            return SGC.WaitForFullGCComplete();
         }
 
         /// <summary>
@@ -355,20 +330,18 @@ public partial class Utils
         /// <param name="millisecondsTimeout">毫秒超时时间</param>
         /// <returns>GC通知状态</returns>
         [SecurityCritical]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static GCNotificationStatus WaitForFullGCComplete(int millisecondsTimeout)
         {
-            return GC.WaitForFullGCComplete(millisecondsTimeout);
+            return SGC.WaitForFullGCComplete(millisecondsTimeout);
         }
 
         /// <summary>
         /// 挂起当前线程，直到处理终结器队列的线程清空该队列为止。
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [SecuritySafeCritical]
         public static void WaitForPendingFinalizers()
         {
-            GC.WaitForPendingFinalizers();
+            SGC.WaitForPendingFinalizers();
         }
 
         //#region Net-5.0
@@ -380,7 +353,7 @@ public partial class Utils
         //[SecurityCritical]
         //public static void AllocateArray(int i, bool b)
         //{
-        //    GC.AllocateArray(i, b);
+        //    SGC.AllocateArray(i, b);
         //}
 
         //#endregion

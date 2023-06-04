@@ -8,12 +8,12 @@ public static partial class UtilsEngine
     /// 提供了一些与路径相关的实用方法。
     /// 包含与程序集有关的实用方法和属性的静态类
     /// </summary>
-    public static class Paths
+    public static class Path
     {
-        static Paths()
+        static Path()
         {
             Assets = Application.dataPath;
-            Project = Directory.GetParent(Assets).FullName;
+            Project = Directory.GetParent(Assets)?.FullName;
             StreamingAssetsPath = Application.streamingAssetsPath;
             PersistentDataPath = Application.persistentDataPath;
         }

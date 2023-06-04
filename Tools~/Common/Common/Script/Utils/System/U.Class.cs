@@ -7,22 +7,21 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 
 public partial class Utils
 {
     /// <summary>
     /// 类工具
     /// </summary>
-    public static class ClassX
+    public static class Class
     {
         /// <summary>
         /// 清除事件
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="name"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void RemoveAllEvent<T>(T obj, string name)
         {
             var newType = obj.GetType();
@@ -46,7 +45,6 @@ public partial class Utils
         /// <param name="obj"></param>
         /// <param name="flags"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static MethodInfo[] GetMembers(object obj, BindingFlags flags)
         {
             var type = obj.GetType();
@@ -59,38 +57,24 @@ public partial class Utils
         /// <param name="obj"></param>
         /// <param name="flags"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static MethodInfo[] GetMethods(object obj, BindingFlags flags)
         {
             var type = obj.GetType();
-            var list = new List<MethodInfo>();
-
             var methods = type.GetMethods(flags);
-            foreach (var item in methods)
-            {
-                if (item.MemberType == MemberTypes.Method)
-                    list.Add(item);
-            }
-
-            return list.ToArray();
+            return methods.Where(item => item.MemberType == MemberTypes.Method).ToArray();
         }
 
         /// <summary>
         /// C# Type类获取类型方法(通过字符串型的类名)
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Type GetType(string typeName)
         {
-            Type type;
             var assemblyArray = AppDomain.CurrentDomain.GetAssemblies();
             var assemblyArrayLength = assemblyArray.Length;
             for (var i = 0; i < assemblyArrayLength; ++i)
             {
-                type = assemblyArray[i].GetType(typeName);
-                if (type != null)
-                {
-                    return type;
-                }
+                var type = assemblyArray[i].GetType(typeName);
+                if (type != null) return type;
             }
 
             for (var i = 0; (i < assemblyArrayLength); ++i)

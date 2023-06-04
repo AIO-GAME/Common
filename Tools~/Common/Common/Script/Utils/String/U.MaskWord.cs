@@ -20,7 +20,6 @@ public partial class Utils
         /// <summary>
         /// 替换屏蔽字为*
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Replace(string str)
         {
             if (words.Length == 0) return str;
@@ -41,7 +40,6 @@ public partial class Utils
         /// <summary>
         /// 加载屏蔽文本
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void LoadMaskWord(string context)
         {
             if (words.Length == 0)

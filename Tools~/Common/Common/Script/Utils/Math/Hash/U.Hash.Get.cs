@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Runtime.CompilerServices;
 
 public static partial class Utils
 {
@@ -11,7 +10,6 @@ public static partial class Utils
         /// <summary>
         /// 获取哈希值
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetHashCode<T>(in T a)
         {
             return a?.GetHashCode() ?? 0;
@@ -20,7 +18,6 @@ public static partial class Utils
         /// <summary>
         /// 获取哈希值
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetHashCode<T1, T2>(in T1 a, in T2 b)
         {
             unchecked
@@ -37,7 +34,6 @@ public static partial class Utils
         /// <summary>
         /// 获取哈希值
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetHashCode<T1, T2, T3>(in T1 a, in T2 b, in T3 c)
         {
             unchecked
@@ -55,7 +51,6 @@ public static partial class Utils
         /// <summary>
         /// 获取哈希值
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetHashCode<T1, T2, T3, T4>(in T1 a, in T2 b, in T3 c, in T4 d)
         {
             unchecked
@@ -74,7 +69,6 @@ public static partial class Utils
         /// <summary>
         /// 获取哈希值
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetHashCode<T1, T2, T3, T4, T5>(in T1 a, in T2 b, in T3 c, in T4 d, in T5 e)
         {
             unchecked
@@ -94,7 +88,6 @@ public static partial class Utils
         /// <summary>
         /// 获取哈希值
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetHashCodeAlloc(params object[] values)
         {
             unchecked

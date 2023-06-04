@@ -4,12 +4,10 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
-using AIO;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
+using AIO;
 
 public partial class Utils
 {
@@ -22,7 +20,6 @@ public partial class Utils
         /// <summary>
         /// 自动扩容，并保存数据
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static T[] AutomaticArray<T>(in Array array, in T value)
         {
             if (array == null) return new T[] { value };
@@ -39,7 +36,6 @@ public partial class Utils
         /// <summary>
         /// 计数排序
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IList<int> Counting(in IList<int> array)
         {
             if (array.Count < 2) return array; // 求最大最小值
@@ -67,7 +63,6 @@ public partial class Utils
         /// <summary>
         /// 计数排序
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IList<long> Counting(in IList<long> array)
         {
             if (array.Count < 2) return array; // 求最大最小值
@@ -99,7 +94,6 @@ public partial class Utils
         /// <summary>
         /// 基数排序
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IList<long> Radix(in IList<long> array)
         {
             if (array.Count < 2) return array;
@@ -133,7 +127,6 @@ public partial class Utils
         /// <summary>
         /// 基数排序
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IList<int> Radix(in IList<int> array)
         {
             if (array.Count < 2) return array;
@@ -167,7 +160,6 @@ public partial class Utils
         /// <summary>
         /// 基数排序
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IList<short> Radix(in IList<short> array)
         {
             if (array.Count < 2) return array;
@@ -205,7 +197,6 @@ public partial class Utils
         /// <summary>
         /// 桶排序
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IList<long> Bucket(in IList<long> array)
         {
             if (array.Count < 2) return array;
@@ -232,7 +223,6 @@ public partial class Utils
         /// <summary>
         /// 桶排序
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IList<int> Bucket(in IList<int> array)
         {
             if (array.Count < 2) return array;
@@ -259,7 +249,6 @@ public partial class Utils
         /// <summary>
         /// 桶排序
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IList<short> Bucket(in IList<short> array)
         {
             if (array.Count < 2) return array;
@@ -286,7 +275,6 @@ public partial class Utils
         /// <summary>
         /// 桶排序
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IList<float> Bucket(in IList<float> array, in int coefficient = 10)
         {
             // 创建bucket时，在二维中增加一组标识位，其中bucket[x, 0]表示这一维所包含的数字的个数
@@ -322,7 +310,6 @@ public partial class Utils
         /// <summary>
         /// 桶排序
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IList<double> Bucket(in IList<double> array, in int coefficient = 10)
         {
             // 创建bucket时，在二维中增加一组标识位，其中bucket[x, 0]表示这一维所包含的数字的个数
@@ -358,7 +345,6 @@ public partial class Utils
         /// <summary>
         /// 桶排序
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IList<decimal> Bucket(in IList<decimal> array, in int coefficient = 10)
         {
             // 创建bucket时，在二维中增加一组标识位，其中bucket[x, 0]表示这一维所包含的数字的个数
@@ -396,7 +382,6 @@ public partial class Utils
         /// </summary>  
         /// <param name="linkedList"> 要排序的链表 </param>  
         /// <param name="num"> 要插入排序的数字 </param>  
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void InsertIntoLinkList<T>(LinkedList<T> linkedList, T num) where T : IComparable
         {
             // 链表为空时，插入到第一位  
@@ -426,14 +411,13 @@ public partial class Utils
         /// 归并排序
         /// 数据量:1000以下适用
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IList<T> Merge<T>(in IList<T> array, in Func<T, T, int> Comparer)
         {
             if (array.Count < 2) return array;
             return MergeSort(array, 0, array.Count - 1, Comparer);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         private static IList<T> MergeSort<T>(in IList<T> array, in int left, in int right,
             in Func<T, T, int> Comparer)
         {
@@ -448,7 +432,7 @@ public partial class Utils
             return array;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         private static IList<T> Merge<T>(in IList<T> array, in int left, in int median, in int right,
             in Func<T, T, int> Comparer)
         {
@@ -498,14 +482,13 @@ public partial class Utils
         /// 归并排序
         /// 数据量:1000以下适用
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IList<T> Merge<T>(in IList<T> array) where T : IComparable
         {
             if (array.Count < 2) return array;
             return MergeSort(array, 0, array.Count - 1);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         private static IList<T> MergeSort<T>(in IList<T> array, in int left, in int right) where T : IComparable
         {
             if (left < right)
@@ -519,7 +502,7 @@ public partial class Utils
             return array;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         private static IList<T> Merge<T>(in IList<T> array, in int left, in int median, in int right)
             where T : IComparable
         {
@@ -573,7 +556,6 @@ public partial class Utils
         /// 堆排序
         /// 数据量:1000以下适用
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IList<T> Heap<T>(in IList<T> array) where T : IComparable
         {
             if (array.Count < 2) return array;
@@ -594,7 +576,6 @@ public partial class Utils
         /// <summary>
         /// 将指定的结点调整为堆。
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void HeapSort_MaxHeaping<T>(in IList<T> array, in int index, in int size)
             where T : IComparable
         {
@@ -614,7 +595,6 @@ public partial class Utils
         /// 堆排序
         /// 数据量:1000以下适用
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IList<T> Heap<T>(in IList<T> array, in Func<T, T, int> Comparer)
         {
             if (array.Count < 2) return array;
@@ -635,7 +615,6 @@ public partial class Utils
         /// <summary>
         /// 将指定的结点调整为堆。
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void HeapSort_MaxHeaping<T>(in IList<T> array, in int index, in int size,
             in Func<T, T, int> Comparer)
         {

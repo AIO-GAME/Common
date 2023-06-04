@@ -5,19 +5,17 @@
 |*|=============================================*/
 
 using System;
-using System.Runtime.CompilerServices;
 
 public partial class Utils
 {
     /// <summary>
     /// 设备信息 .NET API
     /// </summary>
-    public static partial class SystemInfoX
+    public static partial class SystemInfo
     {
         /// <summary>
         /// 获取用户设备名
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string GetEquipmentName()
         {
             return Environment.MachineName;
@@ -26,7 +24,6 @@ public partial class Utils
         /// <summary>
         /// 获取平台名称
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static PlatformID GetPlatform()
         {
             return Environment.OSVersion.Platform;
@@ -35,7 +32,6 @@ public partial class Utils
         /// <summary>
         /// 获取平台版本号
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Version GetNowVersion()
         {
             return Environment.OSVersion.Version;
@@ -44,7 +40,6 @@ public partial class Utils
         /// <summary>
         /// 获取当前设备 连接网络名称
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string GetUserDomainName()
         {
             return Environment.UserDomainName;
@@ -53,7 +48,6 @@ public partial class Utils
         /// <summary>
         /// 获取系统跟目录
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string GetSystemDirectory()
         {
             return Environment.SystemDirectory;
@@ -62,7 +56,6 @@ public partial class Utils
         /// <summary>
         /// 获取系统当前时间
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string GetNowTime()
         {
             return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -71,7 +64,6 @@ public partial class Utils
         /// <summary>
         /// 获取系统启动后 经过的毫秒数
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetStartSystemTickCount()
         {
             return Environment.TickCount;
