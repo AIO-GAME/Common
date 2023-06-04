@@ -20,7 +20,6 @@ public static partial class Utils
         /// <summary>
         /// 转化为哈希值
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static string ToHash(byte[] data)
         {
             if (data == null) return default;
@@ -36,7 +35,6 @@ public static partial class Utils
         /// <param name="input"></param>
         /// <param name="hash"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool VerifyCrc32Hash(string input, string hash)
         {
             var comparer = StringComparer.OrdinalIgnoreCase;

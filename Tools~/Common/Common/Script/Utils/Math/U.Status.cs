@@ -6,7 +6,6 @@
 
 
 using System;
-using System.Runtime.CompilerServices;
 
 public static partial class Utils
 {
@@ -25,7 +24,6 @@ public static partial class Utils
         /// 1 << 2 = 4 相等
         /// 1 << 3 = 8 不相等
         /// -->
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Square(int index, int mask)
         {
             return (1 << index & mask) != 0;
@@ -37,7 +35,6 @@ public static partial class Utils
         /// <param name="index">次幂值 T:1,2,3..</param>
         /// <param name="mask">对比值 T:4,8,16,32..</param>
         /// <returns>Ture:相等 Flase:不相等</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Square(long index, long mask)
         {
             return ((1 << (int)index) & (int)mask) != 0;
@@ -56,7 +53,6 @@ public static partial class Utils
         /// <param name="status">操作状态</param>
         /// <returns>true有相交</returns>
         [Obsolete("已过时:不推荐使用 原因:性能耗时与值类型相比 差距为几百倍 推荐使用int值")]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Mix(Enum source, Enum status)
         {
             return (source.GetHashCode() & status.GetHashCode()) != 0;
@@ -68,7 +64,6 @@ public static partial class Utils
         /// <param name="source">源状态</param>
         /// <param name="status">操作状态</param>
         /// <returns>true有相交</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Mix(in byte source, in byte status)
         {
             return (source & status) != 0;
@@ -80,7 +75,6 @@ public static partial class Utils
         /// <param name="source">源状态</param>
         /// <param name="status">操作状态</param>
         /// <returns>true有相交</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Mix(in short source, in short status)
         {
             return (source & status) != 0;
@@ -92,7 +86,6 @@ public static partial class Utils
         /// <param name="source">源状态</param>
         /// <param name="status">操作状态</param>
         /// <returns>true有相交</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Mix(in int source, in int status)
         {
             return (source & status) != 0;
@@ -104,7 +97,6 @@ public static partial class Utils
         /// <param name="source">源状态</param>
         /// <param name="status">操作状态</param>
         /// <returns>true有相交</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Mix(in long source, in long status)
         {
             return (source & status) != 0;
@@ -134,7 +126,6 @@ public static partial class Utils
         /// <param name="source">源状态</param>
         /// <param name="status">操作状态</param>
         /// <param name="b">Ture 状态添加 false 状态移除</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static short Set(in short source, in short status, in bool b)
         {
             if (b) return (short)(source | status);
@@ -147,7 +138,6 @@ public static partial class Utils
         /// <param name="source">源状态</param>
         /// <param name="status">操作状态</param>
         /// <param name="b">Ture 状态添加 false 状态移除</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Set(in int source, in int status, in bool b)
         {
             if (b) return source | status;
@@ -160,7 +150,6 @@ public static partial class Utils
         /// <param name="source">源状态</param>
         /// <param name="status">操作状态</param>
         /// <param name="b">Ture 状态添加 false 状态移除</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long Set(in long source, in long status, in bool b)
         {
             if (b) return source | status;
@@ -177,7 +166,6 @@ public static partial class Utils
         /// 是否有指定状态（包含指定状态，但不限于指定状态）
         /// </summary>
         [Obsolete("已过时:不推荐使用 原因:性能耗时与值类型相比 差距为几百倍 推荐使用int值")]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Has(in Enum eSource, in Enum eStatus)
         {
             var source = eSource.GetHashCode();
@@ -191,7 +179,6 @@ public static partial class Utils
         /// </summary>
         /// <param name="source">源状态</param>
         /// <param name="status">操作状态</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Has(in short source, in short status)
         {
             if (source < 0) return false;
@@ -203,7 +190,6 @@ public static partial class Utils
         /// </summary>
         /// <param name="source">源状态</param>
         /// <param name="status">操作状态</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Has(in int source, in int status)
         {
             if (source < 0) return false;
@@ -215,7 +201,6 @@ public static partial class Utils
         /// </summary>
         /// <param name="source">源状态</param>
         /// <param name="status">操作状态</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Has(in long source, in long status)
         {
             if (source < 0) return false;
@@ -234,7 +219,6 @@ public static partial class Utils
         /// <param name="source">源状态</param>
         /// <param name="status">操作状态</param>
         [Obsolete("已过时:不推荐使用 原因:性能耗时与值类型相比 差距为几百倍 推荐使用int值")]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Only<T>(in T source, in T status) where T : IComparable
         {
             return source.CompareTo(status) == 0;
@@ -245,7 +229,6 @@ public static partial class Utils
         /// </summary>
         /// <param name="source">源状态</param>
         /// <param name="status">操作状态</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Only(in int source, in int status)
         {
             return source == status;
@@ -256,7 +239,6 @@ public static partial class Utils
         /// </summary>
         /// <param name="source">源状态</param>
         /// <param name="status">操作状态</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Only(in long source, in uint status)
         {
             return source == status;
@@ -267,7 +249,6 @@ public static partial class Utils
         /// </summary>
         /// <param name="source">源状态</param>
         /// <param name="status">操作状态</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Only(in long source, in long status)
         {
             return source == status;
@@ -278,7 +259,6 @@ public static partial class Utils
         /// </summary>
         /// <param name="source">源状态</param>
         /// <param name="status">操作状态</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Only(in ulong source, ulong status)
         {
             return source == status;
@@ -289,7 +269,6 @@ public static partial class Utils
         /// </summary>
         /// <param name="source">源状态</param>
         /// <param name="status">操作状态</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Only(in short source, in short status)
         {
             return source == status;
@@ -300,7 +279,6 @@ public static partial class Utils
         /// </summary>
         /// <param name="source">源状态</param>
         /// <param name="status">操作状态</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Only(in ushort source, in ushort status)
         {
             return source == status;
@@ -311,7 +289,6 @@ public static partial class Utils
         /// </summary>
         /// <param name="source">源状态</param>
         /// <param name="status">操作状态</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Only(in byte source, in byte status)
         {
             return source == status;
@@ -322,7 +299,6 @@ public static partial class Utils
         /// </summary>
         /// <param name="source">源状态</param>
         /// <param name="status">操作状态</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Only(in float source, in float status)
         {
             // ReSharper disable once CompareOfFloatsByEqualityOperator
@@ -370,7 +346,6 @@ public static partial class Utils
         /// <param name="source">源状态</param>
         /// <param name="status">操作状态</param>
         /// <returns>新状态</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static short Del(in short source, in short status)
         {
             return (short)(source & (~status));
@@ -382,7 +357,6 @@ public static partial class Utils
         /// <param name="source">源状态</param>
         /// <param name="status">操作状态</param>
         /// <returns>新状态</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Del(in int source, in int status)
         {
             return source & (~status);
@@ -394,7 +368,6 @@ public static partial class Utils
         /// <param name="source">源状态</param>
         /// <param name="status">操作状态</param>
         /// <returns>新状态</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long Del(in long source, in long status)
         {
             return source & (~status);

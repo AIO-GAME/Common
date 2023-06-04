@@ -6,9 +6,7 @@
 
 
 using System;
-using System.Runtime.CompilerServices;
 using System.Text;
-
 using EDateTimeUnit = Unit.Time.DateTimeUnit;
 using ESecondUnit = Unit.Time.SencondUnit;
 
@@ -47,7 +45,6 @@ public partial class Utils
         /// <summary>
         /// 获取当前时间 文字格式
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string GetCurrTimeStr(in string format = "yyyy-MM-dd HH:mm:ss")
         {
             return DateTime.Now.ToString(format);
@@ -56,7 +53,6 @@ public partial class Utils
         /// <summary>
         /// 获取当前时间搓
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long GetCurrTime(in ESecondUnit unit = ESecondUnit.MILLISCOND)
         {
             return Normalize(DateTime.Now, unit);
@@ -65,7 +61,6 @@ public partial class Utils
         /// <summary>
         /// 获取时间搓
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long GetDateTime(in string format, in ESecondUnit unit = ESecondUnit.MILLISCOND)
         {
             return Normalize(Convert.ToDateTime(format), unit);
@@ -74,7 +69,6 @@ public partial class Utils
         /// <summary>
         /// 格式化时间，参数：格林威治时间，格式化格式（具体见文件末尾）
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Format(in long time, in string format = "yyyy-MM-dd 00:00:00",
             ESecondUnit unit = ESecondUnit.MILLISCOND)
         {
@@ -84,7 +78,6 @@ public partial class Utils
         /// <summary>
         /// © 获取DateTime 时间磋单位支持 纳秒 微秒 毫秒 秒
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static DateTime GetDateTime(in long time, in ESecondUnit unit = ESecondUnit.MILLISCOND)
         {
             long Ticks;
@@ -112,7 +105,6 @@ public partial class Utils
         /// <summary>
         /// © 获取TimeSpan 时间磋单位支持 纳秒 微秒 毫秒 秒
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TimeSpan GetTimeSpan(in long time, in ESecondUnit unit = ESecondUnit.MILLISCOND)
         {
             switch (unit)
@@ -133,7 +125,6 @@ public partial class Utils
         /// <summary>
         /// 获取指定单位的时间搓
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long Normalize(in DateTime date, in ESecondUnit unit = ESecondUnit.MILLISCOND)
         {
             switch (unit)
@@ -150,7 +141,6 @@ public partial class Utils
         /// <summary>
         /// 获取当天差距 时间信息
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long GetCurrDateToDay(in int space = 0, in ESecondUnit unit = ESecondUnit.MILLISCOND)
         {
             return Normalize(DateTime.Today.AddDays(space), unit);
@@ -230,7 +220,6 @@ public partial class Utils
         /// <summary>
         /// 获取时间倒计时字符串表示(ms) 01:59:08
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string GetCountDown(
             in long time,
             in ESecondUnit unit = ESecondUnit.MILLISCOND)
@@ -256,7 +245,6 @@ public partial class Utils
         /// <summary>
         /// 获取传入时间距离当前时间的文字描述
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string GetPreHumanityTime(
             long time,
             in ESecondUnit unit = ESecondUnit.MILLISCOND)
@@ -296,7 +284,6 @@ public partial class Utils
         /// <summary>
         /// 与当前时间比较 如果小于当前时间为Ture
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool CompareNowTime(in DateTime dateTime)
         {
             return DateTime.Now > dateTime;
@@ -305,7 +292,6 @@ public partial class Utils
         /// <summary>
         /// 与当前时间比较 如果小于当前时间为Ture
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool CompareNowTime(
             in long time,
             in ESecondUnit unit = ESecondUnit.MILLISCOND)
@@ -319,7 +305,6 @@ public partial class Utils
         /// 求离最近发表时间的函数
         /// </summary>
         /// <returns> 返回时间描述 </returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string DateStringFromNow(in DateTime dt)
         {
             var span = DateTime.Now - dt;
@@ -339,7 +324,6 @@ public partial class Utils
         /// <param name="writeDate">输入日期</param>
         /// <param name="n">比较天数</param>
         /// <returns>大于天数返回true，小于返回false</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool CompareDateDay(
             in string today,
             in string writeDate,
@@ -353,7 +337,6 @@ public partial class Utils
         /// <summary>
         /// 获取两时间相差
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string GetDisTime(
             in DateTime dateBegin,
             in DateTime dateEnd,
@@ -365,7 +348,6 @@ public partial class Utils
         /// <summary>
         /// 获取两时间相差
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string GetDisTime(
             in long dateBegin,
             in long dateEnd,
@@ -377,7 +359,6 @@ public partial class Utils
         /// <summary>
         /// 判断是否同日
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsToday(
             in long time1,
             in long time2,

@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <StartupObject>ZTest.Program</StartupObject>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+    <RootNamespace>ZTest</RootNamespace>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Attribute.Unity.Editor\Attribute.Unity.Editor.csproj" />
+    <ProjectReference Include="..\..\Common\Attribute.Unity\Attribute.Unity.csproj" />
+    <ProjectReference Include="..\..\Common\Attribute\Attribute.csproj" />
+    <ProjectReference Include="..\..\Common\Common.Unity.Editor\Common.Unity.Editor.csproj" />
+    <ProjectReference Include="..\..\Common\Common.Unity\Common.Unity.csproj" />
+    <ProjectReference Include="..\..\Common\Common\Common.csproj" />
+    <ProjectReference Include="..\..\Ensure\Ensure.csproj" />
+    <ProjectReference Include="..\..\Print\Print.Console\Print.Console.csproj" />
+    <ProjectReference Include="..\..\Print\Print.Unity.Editor\Print.Unity.Editor.csproj" />
+    <ProjectReference Include="..\..\Print\Print.Unity\Print.Unity.csproj" />
+    <ProjectReference Include="..\..\Print\Print\Print.csproj" />
+    <ProjectReference Include="..\..\Process\Process\Process.csproj" />
+  </ItemGroup>
+
+</Project>

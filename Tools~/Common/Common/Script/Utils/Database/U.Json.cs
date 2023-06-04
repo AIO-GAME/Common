@@ -7,9 +7,7 @@
 
 using System;
 using System.Globalization;
-using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
-
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -66,7 +64,6 @@ public partial class Utils
         /// <summary>
         /// 序列化
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Serialize(in object data)
         {
             return JsonConvert.SerializeObject(data, JSONNormalSettings);
@@ -75,7 +72,6 @@ public partial class Utils
         /// <summary>
         /// 序列化
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Serialize(in object data, in JsonSerializerSettings settings)
         {
             return JsonConvert.SerializeObject(data, settings);
@@ -84,7 +80,6 @@ public partial class Utils
         /// <summary>
         /// 序列化
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Serialize<T>(in T data, in JsonSerializerSettings settings)
         {
             return JsonConvert.SerializeObject(data, typeof(T), settings);
@@ -93,7 +88,6 @@ public partial class Utils
         /// <summary>
         /// 序列化
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Serialize<T>(in T data)
         {
             return JsonConvert.SerializeObject(data, typeof(T), JSONNormalSettings);
@@ -102,7 +96,6 @@ public partial class Utils
         /// <summary>
         /// 反序列化
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static JObject Deserialize(in string data, in JsonSerializerSettings settings)
         {
             return JsonConvert.DeserializeObject<JObject>(data, settings);
@@ -111,7 +104,6 @@ public partial class Utils
         /// <summary>
         /// 反序列化
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static JObject Deserialize(in string data)
         {
             return JsonConvert.DeserializeObject<JObject>(data, JSONNormalSettings);
@@ -120,7 +112,6 @@ public partial class Utils
         /// <summary>
         /// 反序列化
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Deserialize<T>(in string data, in JsonSerializerSettings settings)
         {
             return JsonConvert.DeserializeObject<T>(data, settings);
@@ -129,7 +120,6 @@ public partial class Utils
         /// <summary>
         /// 反序列化
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Deserialize<T>(in string data)
         {
             return JsonConvert.DeserializeObject<T>(data, JSONNormalSettings);
@@ -138,7 +128,6 @@ public partial class Utils
         /// <summary>
         /// 反序列化
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static object Deserialize(in string data, in Type type, in JsonSerializerSettings settings)
         {
             return JsonConvert.DeserializeObject(data, type, settings);
@@ -147,7 +136,6 @@ public partial class Utils
         /// <summary>
         /// 反序列化
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static object Deserialize(in string data, in Type type)
         {
             return JsonConvert.DeserializeObject(data, type, JSONNormalSettings);
@@ -156,7 +144,6 @@ public partial class Utils
         /// <summary>
         /// 反序列化 填充对象
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void PopulateObject<T>(string data, T TargetObj, in JsonSerializerSettings settings)
         {
             JsonConvert.PopulateObject(data, TargetObj, settings);
@@ -165,7 +152,6 @@ public partial class Utils
         /// <summary>
         /// 反序列化 填充对象
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void PopulateObject<T>(string data, T TargetObj)
         {
             JsonConvert.PopulateObject(data, TargetObj, JSONNormalSettings);
@@ -174,7 +160,6 @@ public partial class Utils
         /// <summary>
         /// 反序列化 填充对象
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void PopulateObject(string data, object TargetObj, in JsonSerializerSettings settings)
         {
             JsonConvert.PopulateObject(data, TargetObj, settings);
@@ -183,7 +168,6 @@ public partial class Utils
         /// <summary>
         /// 反序列化 填充对象
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void PopulateObject(string data, object TargetObj)
         {
             JsonConvert.PopulateObject(data, TargetObj, JSONNormalSettings);

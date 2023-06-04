@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AIO
+namespace AIO.Unity
 {
     /// <summary>
     /// 

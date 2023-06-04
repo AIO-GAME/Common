@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using AUtils = Utils;
 
 public static partial class UtilsEngine
 {
@@ -11,7 +12,7 @@ public static partial class UtilsEngine
         /// <param name="key">类型</param>
         /// <param name="field">字段名称</param>
         /// <typeparam name="T">泛型类型</typeparam>
-        /// <returns>字符串</returns>
+        /// <returns>返回值</returns>
         public static string LoadString<T>(in T key, in string field)
         {
             var fullName = key.GetType().FullName;
@@ -20,12 +21,12 @@ public static partial class UtilsEngine
         }
 
         /// <summary>
-        /// 
+        /// 加载Int
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="field"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <param name="key">类型</param>
+        /// <param name="field">字段名称</param>
+        /// <typeparam name="T">泛型类型</typeparam>
+        /// <returns>返回值</returns>
         public static int LoadInt<T>(in T key, in string field)
         {
             var fullName = key.GetType().FullName;
@@ -34,12 +35,12 @@ public static partial class UtilsEngine
         }
 
         /// <summary>
-        /// 
+        /// 加载Bool
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="field"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <param name="key">类型</param>
+        /// <param name="field">字段名称</param>
+        /// <typeparam name="T">泛型类型</typeparam>
+        /// <returns>返回值</returns>
         public static bool LoadBool<T>(in T key, in string field)
         {
             var fullName = key.GetType().FullName;
@@ -48,11 +49,11 @@ public static partial class UtilsEngine
         }
 
         /// <summary>
-        /// 
+        /// 加载String
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="def"></param>
-        /// <returns></returns>
+        /// <param name="key">key</param>
+        /// <param name="def">默认值</param>
+        /// <returns>返回值</returns>
         public static string LoadString(in string key, in string def = null)
         {
             if (PlayerPrefs.HasKey(string.Concat(key, "_String"))) return def;
@@ -60,11 +61,11 @@ public static partial class UtilsEngine
         }
 
         /// <summary>
-        /// 
+        /// 加载Int
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="def"></param>
-        /// <returns></returns>
+        /// <param name="key">key</param>
+        /// <param name="def">默认值</param>
+        /// <returns>返回值</returns>
         public static int LoadInt(in string key, in int def = 0)
         {
             if (PlayerPrefs.HasKey(string.Concat(key, "_Int"))) return def;
@@ -72,12 +73,12 @@ public static partial class UtilsEngine
         }
 
         /// <summary>
-        /// 
+        /// 加载Enum
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="def"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <param name="key">key</param>
+        /// <param name="def">默认值</param>
+        /// <typeparam name="T">枚举泛型</typeparam>
+        /// <returns>返回值</returns>
         public static T LoadEnum<T>(in string key, in T def = default) where T : Enum
         {
             if (PlayerPrefs.HasKey(string.Concat(key, "_Enum"))) return def;
@@ -85,12 +86,12 @@ public static partial class UtilsEngine
         }
 
         /// <summary>
-        /// 
+        /// 加载Json数据
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="def"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <param name="key">key</param>
+        /// <param name="def">默认值</param>
+        /// <typeparam name="T">泛型</typeparam>
+        /// <returns>返回值</returns>
         public static T LoadJsonData<T>(in string key, in T def = default)
         {
             if (PlayerPrefs.HasKey(string.Concat(key, "_Json"))) return def;
@@ -98,11 +99,11 @@ public static partial class UtilsEngine
         }
 
         /// <summary>
-        /// 
+        /// 加载Float
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="def"></param>
-        /// <returns></returns>
+        /// <param name="key">key</param>
+        /// <param name="def">默认值</param>
+        /// <returns>返回值</returns>
         public static float LoadFloat(in string key, in float def = 0)
         {
             if (PlayerPrefs.HasKey(string.Concat(key, "_Float"))) return def;

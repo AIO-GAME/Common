@@ -8,7 +8,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 public partial class Utils
 {
@@ -29,7 +28,6 @@ public partial class Utils
         /// <summary>
         /// 刷新随机种子
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Refresh()
         {
             random = new System.Random(System.Guid.NewGuid().GetHashCode());
@@ -38,7 +36,6 @@ public partial class Utils
         /// <summary>
         /// 刷新随机种子
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Refresh(in System.Random randomValue)
         {
             random = randomValue;
@@ -47,7 +44,6 @@ public partial class Utils
         /// <summary>
         /// 刷新随机种子
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Refresh(in int seed)
         {
             random = new System.Random(seed);
@@ -64,7 +60,6 @@ public partial class Utils
         /// <param name="array"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T[] RandArray<T>(int count, in ICollection<T> array)
         {
             var arr = new T[count];
@@ -90,7 +85,6 @@ public partial class Utils
         /// <param name="array"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T[] RandArray<T>(in int count, in IList<T> array)
         {
             var arr = new T[count];
@@ -102,7 +96,6 @@ public partial class Utils
         /// <param name="lower">下限-包含</param>
         /// <param name="upper">上限-不包含</param>
         /// <param name="count"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T[] RandArray<T>(int count, IList<T> array, in int lower, int upper)
         {
             if (upper > array.Count) upper = array.Count;
@@ -120,7 +113,6 @@ public partial class Utils
         /// <typeparam name="T1"></typeparam>
         /// <typeparam name="T2"></typeparam>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Dictionary<T1, T2> RandArray<T1, T2>(in int count, in IDictionary<T1, T2> array)
         {
             if (array == null) return null;
@@ -154,7 +146,6 @@ public partial class Utils
         /// <param name="array"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T RandArrayValue<T>(in IList<T> array)
         {
             return array[RandInt32(0, array.Count)];
@@ -167,7 +158,6 @@ public partial class Utils
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         /// <exception cref="SystemException"></exception>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T RandArrayValue<T>(in ICollection<T> array)
         {
             var value = random.Next(0, array.Count);
@@ -185,7 +175,6 @@ public partial class Utils
         /// <typeparam name="T2"></typeparam>
         /// <returns></returns>
         /// <exception cref="SystemException"></exception>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static KeyValuePair<T1, T2> RandArrayValue<T1, T2>(in IDictionary<T1, T2> array)
         {
             var value = random.Next(0, array.Count);
@@ -198,7 +187,6 @@ public partial class Utils
         /// <param name="array"></param>
         /// <param name="lower">下限-包含</param>
         /// <param name="upper">上限-不包含</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T RandArrayValue<T>(in IList<T> array, in int lower, in int upper)
         {
             return array[random.Next(lower, array.Count < upper ? array.Count : upper)];
@@ -207,7 +195,6 @@ public partial class Utils
         /// <param name="array"></param>
         /// <param name="lower">下限-包含</param>
         /// <param name="upper">上限-不包含</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T RandArrayValue<T>(in ICollection<T> array, in int lower, int upper)
         {
             if (upper > array.Count) upper = array.Count;
@@ -222,7 +209,6 @@ public partial class Utils
         /// <param name="array"></param>
         /// <param name="lower">下限-包含</param>
         /// <param name="upper">上限-不包含</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static KeyValuePair<T1, T2> RandArrayValue<T1, T2>(in IDictionary<T1, T2> array, in int lower,
             int upper)
         {
@@ -239,7 +225,6 @@ public partial class Utils
         /// 随机权重 
         /// </summary>
         /// <param name="weights">传入数组的总和 应为1</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int RandArrayWeight(in IList<float> weights)
         {
             var r = random.Next(0, 100) / 100f;
@@ -258,7 +243,6 @@ public partial class Utils
         /// </summary>
         /// <param name="weights">传入数组的总和 应为1</param>
         /// <param name="values"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T RandArrayWeight<T>(in IList<float> weights, in IList<T> values)
         {
             var r = random.Next(0, 100) / 100f;
@@ -280,7 +264,6 @@ public partial class Utils
         /// 
         /// </summary>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool RandBool()
         {
             return random.Next(0, 2) == 0;
@@ -291,7 +274,6 @@ public partial class Utils
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool[] RandBoolArray(in int count)
         {
             var arr = new bool[count];
@@ -307,7 +289,6 @@ public partial class Utils
         /// 
         /// </summary>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte RandByte()
         {
             return (byte)random.Next(0, 256);
@@ -315,7 +296,6 @@ public partial class Utils
 
         /// <param name="lower">下限-包含</param>
         /// <param name="upper">上限-不包含</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte RandBytes(in byte lower, in int upper)
         {
             return (byte)random.Next(lower, byte.MaxValue < upper ? byte.MaxValue : upper);
@@ -326,7 +306,6 @@ public partial class Utils
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte[] RandByteArray(in int count)
         {
             var arr = new byte[count];
@@ -342,7 +321,6 @@ public partial class Utils
         /// <param name="max"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte[] RandByteArray(in int count, in int min, int max)
         {
             if (min < byte.MinValue) throw new ArgumentException("min value should less byte.MinValue value");
@@ -365,7 +343,6 @@ public partial class Utils
         /// 
         /// </summary>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static sbyte RandSByte()
         {
             return (sbyte)random.Next(sbyte.MinValue, sbyte.MaxValue);
@@ -376,7 +353,6 @@ public partial class Utils
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static sbyte[] RandSByteArray(in int count)
         {
             var bytes = new sbyte[count];
@@ -392,7 +368,6 @@ public partial class Utils
         /// <param name="lower"></param>
         /// <param name="upper"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static sbyte[] RandSByteArray(in int count, in sbyte lower, in sbyte upper)
         {
             var bytes = new sbyte[count];
@@ -409,7 +384,6 @@ public partial class Utils
         /// 
         /// </summary>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ushort RandUInt16()
         {
             var bytes = new byte[2];
@@ -419,7 +393,6 @@ public partial class Utils
 
         /// <param name="lower">下限-包含</param>
         /// <param name="upper">上限-不包含</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ushort RandUInt16(in ushort lower, in int upper)
         {
             return (ushort)random.Next(lower, ushort.MaxValue < upper ? ushort.MaxValue : upper);
@@ -430,7 +403,6 @@ public partial class Utils
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ushort[] RandUInt16Array(in int count)
         {
             var bytes = new byte[2 * count];
@@ -450,7 +422,6 @@ public partial class Utils
 
         /// <param name="lower">下限-包含</param>
         /// <param name="upper">上限-不包含</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint RandUInt32(in uint lower, in uint upper)
         {
             var bytes = new byte[4];
@@ -465,7 +436,6 @@ public partial class Utils
         /// 
         /// </summary>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint RandUInt32()
         {
             var bytes = new byte[4];
@@ -478,7 +448,6 @@ public partial class Utils
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint[] RandUInt32Array(in int count)
         {
             var bytes = new byte[4 * count];
@@ -498,7 +467,6 @@ public partial class Utils
 
         /// <param name="lower">下限-包含</param>
         /// <param name="upper">上限-不包含</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong RandUInt64(in ulong lower, in ulong upper)
         {
             var bytes = new byte[8];
@@ -513,7 +481,6 @@ public partial class Utils
         /// 
         /// </summary>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong RandUInt64()
         {
             var byte8 = new byte[8];
@@ -526,7 +493,6 @@ public partial class Utils
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong[] RandUInt64Array(in int count)
         {
             var bytes = new byte[8 * count];
@@ -546,7 +512,6 @@ public partial class Utils
 
         /// <param name="lower">下限-包含</param>
         /// <param name="upper">上限-不包含</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static short RandInt16(in short lower, in int upper)
         {
             return (short)random.Next(lower, short.MaxValue < upper ? short.MaxValue : upper);
@@ -556,7 +521,6 @@ public partial class Utils
         /// 
         /// </summary>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static short RandInt16()
         {
             var bytes = new byte[2];
@@ -569,7 +533,6 @@ public partial class Utils
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static short[] RandInt16Array(in int count)
         {
             var bytes = new byte[2 * count];
@@ -591,7 +554,6 @@ public partial class Utils
         /// 
         /// </summary>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int RandInt32()
         {
             return random.Next();
@@ -599,7 +561,6 @@ public partial class Utils
 
         /// <param name="lower">下限-包含</param>
         /// <param name="upper">上限-不包含</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int RandInt32(in int lower, in int upper)
         {
             return random.Next(lower, upper);
@@ -609,7 +570,6 @@ public partial class Utils
         /// <param name="minValue">下限-包含</param>
         /// <param name="maxValue">上限-不包含</param>
         /// <param name="hasRepeat">是否包含重复 Ture:包含 False:不包含</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int[] RandInt32Array(int count, int minValue, int maxValue, bool hasRepeat = false)
         {
             var arr = new int[count];
@@ -641,7 +601,6 @@ public partial class Utils
         /// </summary>
         /// <param name="weights"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int RandInt32ArrayWeight(IList<int> weights)
         {
             if (weights.Count <= 1) return weights.Count - 1;
@@ -663,13 +622,12 @@ public partial class Utils
         /// <param name="weights"></param>
         /// <param name="weightRandomMinVal"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int RandInt32ArrayWeight(IList<int> weights, int weightRandomMinVal)
         {
             if (weights.Count <= 1) return weights.Count - 1;
 
             var sum = weights.Sum();
-            var number_rand = random.Next(0, Math.Max(sum, weightRandomMinVal));
+            var number_rand = random.Next(0, System.Math.Max(sum, weightRandomMinVal));
             for (int i = 0, sum_temp = 0; i < weights.Count; i++)
             {
                 sum_temp += weights[i];
@@ -687,7 +645,6 @@ public partial class Utils
         /// 
         /// </summary>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long RandInt64()
         {
             var bytes = new byte[8];
@@ -697,7 +654,6 @@ public partial class Utils
 
         /// <param name="lower">下限-包含</param>
         /// <param name="upper">上限-不包含</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long RandInt64(in long lower, in long upper)
         {
             var bytes = new byte[8];
@@ -713,7 +669,6 @@ public partial class Utils
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long[] RandInt64Array(in int count)
         {
             var bytes = new byte[8 * count];
@@ -735,7 +690,6 @@ public partial class Utils
         /// 
         /// </summary>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float RandFloat()
         {
             var bytes = new byte[4];
@@ -749,7 +703,6 @@ public partial class Utils
         /// <param name="hasNan"></param>
         /// <param name="hasInfinity"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float RandFloat(bool hasNan, bool hasInfinity)
         {
             while (true)
@@ -771,7 +724,6 @@ public partial class Utils
         /// 
         /// </summary>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double RandDouble()
         {
             var bytes = new byte[8];
@@ -788,7 +740,6 @@ public partial class Utils
         /// </summary>
         /// <param name="array"></param>
         /// <typeparam name="T"></typeparam>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void BreakArray<T>(IList<T> array)
         {
             if (array == null || array.Count < 2) return;
@@ -808,7 +759,6 @@ public partial class Utils
         /// <param name="upper"></param>
         /// <typeparam name="T"></typeparam>
         /// <exception cref="ArgumentException"></exception>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void BreakArray<T>(IList<T> array, in int lower, int upper)
         {
             if (array == null || array.Count < 2) return;
@@ -833,7 +783,6 @@ public partial class Utils
         /// <param name="maxValue"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long NextLong(long minValue, long maxValue)
         {
             if (minValue > maxValue)

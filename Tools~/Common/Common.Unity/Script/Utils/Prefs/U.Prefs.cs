@@ -1,5 +1,5 @@
-﻿using System.Runtime.CompilerServices;
-using UnityEngine;
+﻿using UnityEngine;
+using AUtils = Utils;
 
 public static partial class UtilsEngine
 {

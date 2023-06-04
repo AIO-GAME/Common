@@ -6,7 +6,6 @@
 
 using System;
 using System.Globalization;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 using UnityEngine;
@@ -16,13 +15,12 @@ public static partial class UtilsEngine
     /// <summary>
     /// 颜色工具类
     /// </summary>
-    public static partial class ColorX
+    public static partial class Color
     {
         /// <summary>
-        /// 
+        /// 颜色 R G B A
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint ColorToInt(in Color col)
+        public static uint ColorToInt(in UnityEngine.Color col)
         {
             return
                 (uint)(col.b * 255) |
@@ -34,17 +32,15 @@ public static partial class UtilsEngine
         /// <summary>
         /// 颜色 R G B A
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Color NewColor(int red, int green, int blue, int alpha)
+        public static UnityEngine.Color NewColor(int red, int green, int blue, int alpha)
         {
-            return new Color(red / 255f, green / 255f, blue / 255f, alpha / 255f);
+            return new UnityEngine.Color(red / 255f, green / 255f, blue / 255f, alpha / 255f);
         }
 
         /// <summary>
-        /// 
+        /// 颜色 R G B A
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Color IntToColor(uint col)
+        public static UnityEngine.Color IntToColor(uint col)
         {
             var b = (byte)(col & 0xff);
             var g = (byte)(col >> 8 & 0xff);
@@ -54,10 +50,9 @@ public static partial class UtilsEngine
         }
 
         /// <summary>
-        /// 
+        /// 十六进制颜色转换为颜色
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Color HexStringToColor(string hexColorStr, Color def)
+        public static UnityEngine.Color HexStringToColor(string hexColorStr, UnityEngine.Color def)
         {
             if (string.IsNullOrEmpty(hexColorStr)) return def;
 
@@ -69,7 +64,7 @@ public static partial class UtilsEngine
             catch (Exception e)
             {
                 Debug.LogException(new Exception($"invalid hexColorStr: {hexColorStr}", e));
-                return Color.white;
+                return UnityEngine.Color.white;
             }
 
             var b = (byte)(colorValue & 0xff);
@@ -79,10 +74,9 @@ public static partial class UtilsEngine
         }
 
         /// <summary>
-        /// 
+        /// 颜色转为16进制
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string ColorToHexString(Color col)
+        public static string ColorToHexString(UnityEngine.Color col)
         {
             int c = (int)(col.b * 255) |
                     ((int)(col.g * 255) << 8 & 0xff00) |
@@ -93,7 +87,6 @@ public static partial class UtilsEngine
         /// <summary>
         /// #FFFFFF 转换为 16进制
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToHex(int red, int green, int blue, int alpha)
         {
             // RGBA 顺序不可改
@@ -108,8 +101,7 @@ public static partial class UtilsEngine
         /// <summary>
         /// 
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Color ParseHtmlString(string htmlString)
+        public static UnityEngine.Color ParseHtmlString(string htmlString)
         {
             ColorUtility.TryParseHtmlString(htmlString, out var color);
             return color;
@@ -118,20 +110,18 @@ public static partial class UtilsEngine
         /// <summary>
         /// hex转换到color
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Color HexToColor(string hex)
+        public static UnityEngine.Color HexToColor(string hex)
         {
-            if (hex == null || hex.Length < 6) return Color.white;
-            var tempVar = NumberStyles.HexNumber;
-            byte br = byte.Parse(hex.Substring(0, 2), tempVar);
-            byte bg = byte.Parse(hex.Substring(2, 2), tempVar);
-            byte bb = byte.Parse(hex.Substring(4, 2), tempVar);
+            if (hex == null || hex.Length < 6) return UnityEngine.Color.white;
+            var br = byte.Parse(hex.Substring(0, 2), NumberStyles.HexNumber);
+            var bg = byte.Parse(hex.Substring(2, 2), NumberStyles.HexNumber);
+            var bb = byte.Parse(hex.Substring(4, 2), NumberStyles.HexNumber);
             //byte cc = byte.Parse(hex.Substring(6, 2), tempVar);
-            float r = br / 255f;
-            float g = bg / 255f;
-            float b = bb / 255f;
+            var r = br / 255f;
+            var g = bg / 255f;
+            var b = bb / 255f;
             //float a = cc / 255f;
-            return new Color(r, g, b);
+            return new UnityEngine.Color(r, g, b);
         }
     }
 }

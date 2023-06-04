@@ -5,13 +5,11 @@
 |*|=============================================*/
 
 
-using AIO;
-
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
+using AIO;
 
 public partial class Utils
 {
@@ -26,7 +24,6 @@ public partial class Utils
         /// <summary>
         /// 转化为区块
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToConvertBlock(params string[] context)
         {
             return BlockTemplate.Convert(context);
@@ -35,7 +32,6 @@ public partial class Utils
         /// <summary>
         /// 转化为区块
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToConvertSpace(params string[] context)
         {
             return SpaceTemplate.Convert(context);
@@ -44,7 +40,6 @@ public partial class Utils
         /// <summary>
         /// 转化为区块
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToConvert(in StringBlock Unicode, params string[] context)
         {
             return (Unicode ?? SpaceTemplate).Convert(context);
@@ -55,7 +50,6 @@ public partial class Utils
         /// </summary>
         /// <param name="num"></param>
         /// <param name="unitNum">单位截止下标,默认0,1:万后,2:亿后,3:万亿</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToConvertUnitsCNS(string num, in int unitNum = 0)
         {
             if (num.Length == 0) return num;
@@ -103,7 +97,6 @@ public partial class Utils
         /// <summary>
         /// 阿拉伯数字全部转化为中文数字 无单位 传入需全部为数字字符 简体中文
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToConvertNoUnitsCNS(string num)
         {
             if (num.Length == 0) return num;
@@ -154,7 +147,6 @@ public partial class Utils
         /// <param name="buff"></param>
         /// <param name="len"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string StringToHexView(in byte[] buff, int len)
         {
             if (len * 3 > gLen) len = gLen / 3;
@@ -182,7 +174,6 @@ public partial class Utils
         /// <param name="buff"></param>
         /// <param name="len"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string StringToHex(in byte[] buff, int len = 0)
         {
             len = len <= 0 ? buff.Length : len;
@@ -197,7 +188,7 @@ public partial class Utils
             return new string(r);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+
         private static byte CharToByte(in char c)
         {
             return (byte)(c >= 0x41 ? c - 0x41 : c - 0x30);
@@ -208,7 +199,6 @@ public partial class Utils
         /// </summary>
         /// <param name="hexStr"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte[] HexStringToBytes(in string hexStr)
         {
             var r = new byte[hexStr.Length / 2];
@@ -225,7 +215,6 @@ public partial class Utils
         /// </summary>
         /// <param name="buff"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string BtsToBase64(in byte[] buff)
         {
             return Convert.ToBase64String(buff);
@@ -236,7 +225,6 @@ public partial class Utils
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte[] Base64ToBts(in string str)
         {
             return Convert.FromBase64String(str);
@@ -248,7 +236,6 @@ public partial class Utils
         /// <param name="sDataIn"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string GetMD5(in string sDataIn, in Encoding encoding = null)
         {
             var str = "";
@@ -265,7 +252,6 @@ public partial class Utils
         /// <param name="sDataIn"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string[] GetMD5(in ICollection<string> sDataIn, in Encoding encoding = null)
         {
             var md5str = new string[sDataIn.Count];
@@ -290,7 +276,6 @@ public partial class Utils
         /// <summary>
         /// 是空还是空白
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNullOrWhiteSpace(in string s)
         {
             return s == null || s.Trim() == string.Empty;
@@ -300,7 +285,6 @@ public partial class Utils
         /// 如果指示指定的字符串是 null 还是 System.String.Empty 字符串。
         /// 则回退
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string FallbackEmpty(string s, in string fallback)
         {
             if (string.IsNullOrEmpty(s)) s = fallback;
@@ -310,7 +294,6 @@ public partial class Utils
         /// <summary>
         /// 如果所有字符串为空白则回退
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string FallbackWhitespace(string s, in string fallback)
         {
             if (IsNullOrWhiteSpace(s)) s = fallback;

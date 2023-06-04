@@ -41,21 +41,20 @@ public partial class Utils
 
         private static readonly string[] City = new string[]
         {
-                null, null, null, null, null, null, null, null, null, null, null,
-                "北京", "天津", "河北", "山西", "内蒙古", null, null, null, null, null, "辽宁",
-                "吉林", "黑龙江", null, null, null, null, null, null, null, "上海", "江苏",
-                "浙江", "安微", "福建", "江西", "山东", null, null, null, "河南", "湖北", "湖南",
-                "广东", "广西", "海南", null, null, null, "重庆", "四川", "贵州", "云南", "西藏",
-                null, null, null, null, null, null, "陕西", "甘肃", "青海", "宁夏", "新疆",
-                null, null, null, null, null, "台湾", null, null, null, null, null,
-                null, null, null, null, "香港", "澳门", null, null, null, null, null,
-                null, null, null, "国外"
+            null, null, null, null, null, null, null, null, null, null, null,
+            "北京", "天津", "河北", "山西", "内蒙古", null, null, null, null, null, "辽宁",
+            "吉林", "黑龙江", null, null, null, null, null, null, null, "上海", "江苏",
+            "浙江", "安微", "福建", "江西", "山东", null, null, null, "河南", "湖北", "湖南",
+            "广东", "广西", "海南", null, null, null, "重庆", "四川", "贵州", "云南", "西藏",
+            null, null, null, null, null, null, "陕西", "甘肃", "青海", "宁夏", "新疆",
+            null, null, null, null, null, "台湾", null, null, null, null, null,
+            null, null, null, null, "香港", "澳门", null, null, null, null, null,
+            null, null, null, "国外"
         };
 
         /// <summary>
         /// 判断当前字符是否符合中国身份证
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool CheckIDNo(string IDNo)
         {
             if (string.IsNullOrEmpty(IDNo))
@@ -89,7 +88,6 @@ public partial class Utils
         /// <summary>
         /// 15位省份证升级至18位
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string UpdateIDNo15to18(string IDNo)
         {
             // 15位一代身份证号码的正则表达式

@@ -3,6 +3,7 @@
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=C_003A_005CUsers_005CSAM_005C_002Enuget_005Cpackages_005Cyamldotnet_005C13_002E0_002E2_005Clib_005Cnet45_005CYamlDotNet_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CWork_002DG_005Cg108_005Cproj_005CPackages_005Ccom_002Eblz_002Epackage_005CTools_007E_005Cpackages_005CNewtonsoft_002EJson_002E13_002E0_002E3_005Clib_005Cnet45_005CNewtonsoft_002EJson_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CWork_002DG_005Cg108_005Cproj_005CPackages_005Ccom_002Eblz_002Epackage_005CTools_007E_005CResources_005CPlugins_005CUnityEngine_002ETextRenderingModule_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=F_003A_005CUnity_005CAIO2021_005CPackages_005Ccom_002Eself_002Epackage_005CTools_007E_005CResources_005CPlugins_005CUnityEngine_002ETextRenderingModule_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;PhysicalFolder Path="C:\Program Files\dotnet\sdk\NuGetFallbackFolder\newtonsoft.json\10.0.1" Loaded="True" /&gt;&#xD;
   &lt;PhysicalFolder Path="C:\Program Files\dotnet\sdk\NuGetFallbackFolder\newtonsoft.json\11.0.2" Loaded="True" /&gt;&#xD;

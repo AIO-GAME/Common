@@ -21,7 +21,6 @@ public partial class Utils
         /// <summary>
         /// 序列化
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Serialize<T>(
             in T sourceObj,
             in string xmlRootName = null,
@@ -59,7 +58,6 @@ public partial class Utils
         /// <summary>
         /// 反序列化
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Deserialize<T>(
             in string value,
             in Encoding encoding = null)

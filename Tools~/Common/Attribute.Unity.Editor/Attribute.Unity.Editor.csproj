@@ -50,15 +50,19 @@
     <Reference Include="System.Xml" />
     <Reference Include="UnityEditor.CoreModule">
       <HintPath>..\..\Resources\Plugins\UnityEditor.CoreModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\Resources\Plugins\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\Resources\Plugins\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\Resources\Plugins\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -80,10 +84,12 @@
     <ProjectReference Include="..\Attribute.Unity\Attribute.Unity.csproj">
       <Project>{12aff001-8a23-469c-b160-15535af5fd4c}</Project>
       <Name>Attribute.Unity</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Attribute\Attribute.csproj">
       <Project>{fb87a31e-75ad-48a0-85b1-6bd42bdc4b81}</Project>
       <Name>Attribute</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
