@@ -17,7 +17,6 @@ public partial class Utils
             return Read(Path);
         }
 
-
         /// <summary>
         /// 将数据写入文件,是否追加到文件尾 默认覆盖文件
         /// </summary>
