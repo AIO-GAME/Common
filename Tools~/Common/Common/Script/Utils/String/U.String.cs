@@ -16,10 +16,17 @@ public partial class Utils
     /// <summary>
     /// 字符串工具库
     /// </summary>
-    public partial class String
+    public static partial class String
     {
-        private static readonly StringBlock BlockTemplate = new StringBlock("╔╗║╚╝══║", 75);
-        private static readonly StringBlock SpaceTemplate = new StringBlock("        ", 75);
+        private static readonly StringBlock BlockTemplate;
+        private static readonly StringBlock SpaceTemplate;
+
+        static String()
+        {
+            BlockTemplate = new StringBlock("╔╗║╚╝══║", 75);
+            SpaceTemplate = new StringBlock("        ", 75);
+            CacheBuilder = new StringBuilder(1024);
+        }
 
         /// <summary>
         /// 转化为区块
@@ -142,7 +149,7 @@ public partial class Utils
         private const int gLen = 1 * 1024 * 3;
 
         /// <summary>
-        /// 
+        /// 二进制转字符串
         /// </summary>
         /// <param name="buff"></param>
         /// <param name="len"></param>
@@ -187,7 +194,6 @@ public partial class Utils
 
             return new string(r);
         }
-
 
         private static byte CharToByte(in char c)
         {

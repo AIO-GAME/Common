@@ -42,8 +42,15 @@
     <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.SharpZipLib" />
-    <Reference Include="Newtonsoft.Json" />
+    <Reference Include="HtmlAgilityPack, Version=1.11.46.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a">
+      <HintPath>..\..\Resources\Nuget\htmlagilitypack\1.11.46\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.0.7.0, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
+      <HintPath>..\..\Resources\Nuget\sharpziplib.netstandard\1.0.7\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\..\Resources\Nuget\newtonsoft.json\13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
@@ -51,7 +58,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="YamlDotNet" />
+    <Reference Include="YamlDotNet, Version=13.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e">
+      <HintPath>..\..\Resources\Nuget\yamldotnet\13.1.0\lib\net47\YamlDotNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -328,6 +337,8 @@
     <Compile Include="Script\Utils\IO\Text\IO.XML.cs" />
     <Compile Include="Script\Utils\IO\Text\IO.Yaml.Async.cs" />
     <Compile Include="Script\Utils\IO\Text\IO.Yaml.cs" />
+    <Compile Include="Script\Utils\Math\Hash\CRC32Algorithm.cs" />
+    <Compile Include="Script\Utils\Math\Hash\SafeProxy.cs" />
     <Compile Include="Script\Utils\Math\Hash\U.Hash.cs" />
     <Compile Include="Script\Utils\Math\Hash\U.Hash.Get.cs" />
     <Compile Include="Script\Utils\Math\U.Hex.cs" />
@@ -342,6 +353,7 @@
     <Compile Include="Script\Utils\String\StringBlock.cs" />
     <Compile Include="Script\Utils\String\U.IDNo.cs" />
     <Compile Include="Script\Utils\String\U.MaskWord.cs" />
+    <Compile Include="Script\Utils\String\U.String.Builder.cs" />
     <Compile Include="Script\Utils\String\U.String.cs" />
     <Compile Include="Script\Utils\String\U.String.IS.cs" />
     <Compile Include="Script\Utils\System\Marshal\Define.cs" />
@@ -357,20 +369,14 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.46" />
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>13.0.3</Version>
-    </PackageReference>
-    <PackageReference Include="SharpZipLib.NETStandard">
-      <Version>1.0.7</Version>
-    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="SharpZipLib.NETStandard" Version="1.0.7" />
+    <PackageReference Include="YamlDotNet" Version="13.1.0" />
     <PackageReference Include="System.Buffers" Version="4.5.1" />
     <PackageReference Include="System.Memory" Version="4.5.4" />
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.3" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.2" />
-    <PackageReference Include="YamlDotNet">
-      <Version>13.1.0</Version>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Ensure\Ensure.csproj">

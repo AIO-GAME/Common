@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections;
+using System.Threading.Tasks;
 
 /// <summary>
 /// 系统自动化
@@ -6,12 +7,22 @@
 public interface ISystemAutomation
 {
     /// <summary>
-    /// 初始化
+    /// 异步 初始化
     /// </summary>
-    Task Install();
+    Task InstallAsync();
 
     /// <summary>
-    /// 卸载
+    /// 异步 卸载
     /// </summary>
-    Task UnInstall();
+    Task UnInstallAsync();
+
+    /// <summary>
+    /// 同步 初始化
+    /// </summary>
+    IEnumerator InstallSync();
+
+    /// <summary>
+    /// 同步 卸载
+    /// </summary>
+    IEnumerator UnInstallSync();
 }

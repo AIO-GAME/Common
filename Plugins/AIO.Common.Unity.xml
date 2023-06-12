@@ -708,85 +708,110 @@
             Is the <see cref="F:UnityEngine.Vector4.x"/> or <see cref="F:UnityEngine.Vector4.y"/> or <see cref="F:UnityEngine.Vector4.z"/> or <see cref="F:UnityEngine.Vector4.w"/> NaN?
             </summary>
         </member>
-        <member name="T:UnityThread">
+        <member name="T:UnityAsync">
             <summary>
             Unity线程
             </summary>
         </member>
-        <member name="F:UnityThread.actionQueuesUpdateFunc">
-            <summary>
-            Update等待队列
-            </summary>
-        </member>
-        <member name="F:UnityThread.mAactionCopiedQueueUpdateFunc">
-            <summary>
-            Update执行队列
-            </summary>
-        </member>
-        <member name="F:UnityThread.noActionQueueToExecuteUpdateFunc">
-            <summary>
-            执行状态
-            </summary>
-        </member>
-        <member name="M:UnityThread.Initialize(System.Boolean)">
+        <member name="M:UnityAsync.Initialize(System.Boolean)">
             <summary>
             初始化
             </summary>
             <param name="visible">是否可见</param>
         </member>
-        <member name="M:UnityThread.Awake">
-            <summary>
-            初始化
-            </summary>
-        </member>
-        <member name="M:UnityThread.ExecuteCoroutine(System.Collections.IEnumerator)">
-            <summary>
-            执行协程
-            </summary>
-        </member>
-        <member name="M:UnityThread.ExecuteInUpdate(System.Action)">
-            <summary>
-            在Update中执行
-            </summary>
-        </member>
-        <member name="M:UnityThread.ExecuteInUpdate(System.Action[])">
-            <summary>
-            在Update中执行
-            </summary>
-        </member>
-        <member name="M:UnityThread.Update">
-            <summary>
-            更新
-            </summary>
-        </member>
-        <member name="M:UnityThread.ExecuteInLateUpdate(System.Action)">
-            <summary>
-            在LateUpdate更新
-            </summary>
-        </member>
-        <member name="M:UnityThread.LateUpdate">
-            <summary>
-            在LateUpdate更新
-            </summary>
-        </member>
-        <member name="M:UnityThread.ExecuteInFixedUpdate(System.Action)">
-            <summary>
-            在FixedUpdate更新
-            </summary>
-        </member>
-        <member name="M:UnityThread.FixedUpdate">
-            <summary>
-            在FixedUpdate更新
-            </summary>
-        </member>
-        <member name="M:UnityThread.Job(System.Action)">
+        <member name="M:UnityAsync.RunTask(System.Action)">
             <summary>
             开一个新的作业执行函数
             </summary>
         </member>
-        <member name="M:UnityThread.OnDisable">
+        <member name="M:UnityAsync.ThreadMono.Awake">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:UnityAsync.ThreadMono.OnDisable">
             <summary>
             关闭
+            </summary>
+        </member>
+        <member name="M:UnityAsync.ThreadMono.FixedUpdate">
+            <summary>
+            在FixedUpdate更新
+            </summary>
+        </member>
+        <member name="M:UnityAsync.ExecuteInFixedUpdate(System.Action)">
+            <summary>
+            在FixedUpdate更新
+            </summary>
+        </member>
+        <member name="M:UnityAsync.ExecuteInLateUpdate(System.Action)">
+            <summary>
+            在LateUpdate更新
+            </summary>
+        </member>
+        <member name="F:UnityAsync.actionQueuesUpdateFunc">
+            <summary>
+            Update等待队列
+            </summary>
+        </member>
+        <member name="F:UnityAsync.noActionQueueToExecuteUpdateFunc">
+            <summary>
+            执行状态
+            </summary>
+        </member>
+        <member name="M:UnityAsync.ExecuteInUpdate``1(``0)">
+            <summary>
+            执行协程
+            </summary>
+        </member>
+        <member name="M:UnityAsync.ExecuteInUpdate``1(``0,``0)">
+            <summary>
+            执行协程
+            </summary>
+        </member>
+        <member name="M:UnityAsync.ExecuteInUpdate``1(``0,``0,``0)">
+            <summary>
+            执行协程
+            </summary>
+        </member>
+        <member name="M:UnityAsync.ExecuteInUpdate``1(``0[])">
+            <summary>
+            执行协程
+            </summary>
+        </member>
+        <member name="M:UnityAsync.ExecuteInUpdate``1(System.Action{``0},``0)">
+            <summary>
+            在Update中执行
+            </summary>
+        </member>
+        <member name="M:UnityAsync.ExecuteInUpdate``2(System.Action{``0,``1},``0,``1)">
+            <summary>
+            在Update中执行
+            </summary>
+        </member>
+        <member name="M:UnityAsync.ExecuteInUpdate``3(System.Action{``0,``1,``2},``0,``1,``2)">
+            <summary>
+            在Update中执行
+            </summary>
+        </member>
+        <member name="M:UnityAsync.ExecuteInUpdate``4(System.Action{``0,``1,``2,``3},``0,``1,``2,``3)">
+            <summary>
+            在Update中执行
+            </summary>
+        </member>
+        <member name="M:UnityAsync.ExecuteInUpdate(System.Action)">
+            <summary>
+            在Update中执行
+            </summary>
+        </member>
+        <member name="M:UnityAsync.ExecuteInUpdate(System.Action,System.Action)">
+            <summary>
+            在Update中执行
+            </summary>
+        </member>
+        <member name="M:UnityAsync.ExecuteInUpdate(System.Action[])">
+            <summary>
+            在Update中执行
             </summary>
         </member>
         <member name="T:UtilsEngine">

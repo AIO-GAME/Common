@@ -24,7 +24,7 @@ public class SystemAutomationAttribute : Attribute
     /// <summary>
     /// 初始化
     /// </summary>
-    public SystemAutomationAttribute(Type system, string name, int priority = 0)
+    public SystemAutomationAttribute(Type system, string name, int priority)
     {
         Priority = priority;
         SystemType = system;
@@ -34,10 +34,30 @@ public class SystemAutomationAttribute : Attribute
     /// <summary>
     /// 初始化
     /// </summary>
-    public SystemAutomationAttribute(Type system, int priority = 0)
+    public SystemAutomationAttribute(Type system, int priority)
     {
         SystemType = system;
         Priority = priority;
+        Name = system.Name;
+    }
+
+    /// <summary>
+    /// 初始化
+    /// </summary>
+    public SystemAutomationAttribute(Type system, string name)
+    {
+        SystemType = system;
+        Priority = 0;
+        Name = name;
+    }
+
+    /// <summary>
+    /// 初始化
+    /// </summary>
+    public SystemAutomationAttribute(Type system)
+    {
+        SystemType = system;
+        Priority = 0;
         Name = system.Name;
     }
 }
