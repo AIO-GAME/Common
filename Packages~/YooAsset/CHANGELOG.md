@@ -2,6 +2,157 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.4.8] - 2023-03-10
+
+### Fixed
+
+- 修复了同步加载原生文件，程序卡死的问题。
+- 修复了可编程构建管线，当项目里没有着色器，如果有引用内置着色器会导致打包失败的问题。
+- 修复了在Unity2021.3版本下着色器收集界面错乱的问题。
+
+### Changed
+
+- 优化了打包逻辑，提高构建速度。
+
+- 支持自定义日志处理，方便收集线上问题。
+
+  ```c#
+  public class YooAssets
+  {
+      /// <summary>
+      /// 初始化资源系统
+      /// </summary>
+      /// <param name="logger">自定义日志处理</param>
+      public static void Initialize(ILogger logger = null)
+  }
+  ```
+
+## [1.4.7] - 2023-03-03
+
+### Fixed
+
+- 修复了在运行时资源引用链无效的问题。
+- 修复了在构建过程中发生异常后进度条未消失的问题。
+- 修复了使用SBP构建管线，如果有原生文件会导致打包失败的问题。
+
+### Changed
+
+- 支持自定义下载请求
+
+  ```c#
+  /// <summary>
+  /// 设置下载系统参数，自定义下载请求
+  /// </summary>
+  public static void SetDownloadSystemUnityWebRequest(DownloadRequestDelegate requestDelegate)
+  ```
+
+- 优化了打包时资源包引用关系计算的逻辑。
+
+- 优化了缓存系统初始化逻辑，支持分帧获取所有缓存文件。
+
+- 优化了缓存系统的存储目录结构，提高了文件夹查询速度。
+
+- 优化了在资源收集界面，点击查看Collector主资源列表卡顿问题。
+
+- 优化了资源对象加载耗时统计的逻辑，现在更加准确了。
+
+- 优化了资源加载器查询逻辑。
+
+- 优化了资源下载系统，下载文件的验证支持了多线程。
+
+- 着色器变种收集界面增加单次照射数量的控制。
+
+## [1.4.6-preview] - 2023-02-22
+
+### Changed
+
+- EVerifyLevel新增Middle级别。
+
+  ```c#
+  public enum EVerifyLevel
+  {
+      /// <summary>
+      /// 验证文件存在
+      /// </summary>
+      Low,
+      
+      /// <summary>
+      /// 验证文件大小
+      /// </summary>
+      Middle,
+  
+      /// <summary>
+      /// 验证文件大小和CRC
+      /// </summary>
+      High,
+  }
+  ```
+
+- 补丁清单的资源包列表新增引用链。
+
+  （解决复杂依赖关系下，错误卸载资源包的问题）
+
+- 缓存系统支持后缀格式存储。
+
+  （解决原生文件没有后缀格式的问题）
+
+- 收集界面增加用户自定义数据栏。
+
+## [1.4.5-preview] - 2023-02-17
+
+### Fixed
+
+- (#67)修复了报告查看界面在Unity2021.3上的兼容性问题。
+- (#66)修复了在Unity2021.3上编辑器模拟模式运行报错的问题。
+
+### Changed
+
+- 接口变更：IPackRule
+
+  ````c#
+  /// <summary>
+  /// 资源打包规则接口
+  /// </summary>
+  public interface IPackRule
+  {
+      /// <summary>
+      /// 获取打包规则结果
+      /// </summary>
+      PackRuleResult GetPackRuleResult(PackRuleData data);
+  
+      /// <summary>
+      /// 是否为原生文件打包规则
+      /// </summary>
+      bool IsRawFilePackRule();
+  }
+  ````
+
+## [1.4.4-preview] - 2023-02-14
+
+### Fixed
+
+- (#65)修复了AssetBundle构建宏逻辑错误。
+- 修复了AssetBundle加载宏逻辑错误。
+
+## [1.4.3-preview] - 2023-02-10
+
+全新的缓存系统！
+
+### Fixed
+
+- 修复了WebGL平台本地文件验证报错。
+- 修复了WEBGL平台加载原生文件失败的问题。
+- 修复了通过Handle句柄查询资源包下载进度为零的问题。
+
+### Changed
+
+- 着色器变种收集增加分批次处理功能。
+- Unity2021版本开始不再支持内置构建管线。
+
+### Removed
+
+- 太空战机DEMO移除了BetterStreamingAssets插件。
+
 ## [1.4.2-preview] - 2023-01-03
 
 ### Fixed

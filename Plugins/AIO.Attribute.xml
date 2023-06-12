@@ -64,6 +64,18 @@
             DLL自动化处理
             </summary>
         </member>
+        <member name="M:DllAutomation.LoadAsync(System.Boolean)">
+            <summary>
+            安装 dll
+            </summary>
+            <param name="hasTimer">输出时间</param>
+        </member>
+        <member name="M:DllAutomation.UnLoadAsync(System.Boolean)">
+            <summary>
+            卸载 dll
+            </summary>
+            <param name="hasTimer">输出时间</param>
+        </member>
         <member name="F:DllAutomation.Order">
             <summary>
             存储 Dic 列表 从小到达排序
@@ -84,25 +96,22 @@
             初始化
             </summary>
         </member>
-        <member name="M:DllAutomation.InstallTimer">
+        <member name="M:DllAutomation.OutPut">
             <summary>
-            实现计时器
+            输出信息
             </summary>
         </member>
-        <member name="M:DllAutomation.Install">
+        <member name="M:DllAutomation.LoadSync(System.Boolean)">
             <summary>
-            实现计时器
+            安装 dll
             </summary>
+            <param name="hasTimer">输出时间</param>
         </member>
-        <member name="M:DllAutomation.UnInstallTimer">
+        <member name="M:DllAutomation.UnLoadSync(System.Boolean)">
             <summary>
-            卸载 实现计时器
+            卸载 dll
             </summary>
-        </member>
-        <member name="M:DllAutomation.Uninstall">
-            <summary>
-            实现计时器
-            </summary>
+            <param name="hasTimer">输出时间</param>
         </member>
         <member name="T:DllAutomationAttribute">
             <summary>
@@ -139,14 +148,24 @@
             DLL自动化处理
             </summary>
         </member>
-        <member name="M:IDllAutomation.Install">
+        <member name="M:IDllAutomation.InstallAsync">
             <summary>
-            初始化
+            异步 初始化
             </summary>
         </member>
-        <member name="M:IDllAutomation.UnInstall">
+        <member name="M:IDllAutomation.UnInstallAsync">
             <summary>
-            卸载
+            异步 卸载
+            </summary>
+        </member>
+        <member name="M:IDllAutomation.InstallSync">
+            <summary>
+            同步 初始化
+            </summary>
+        </member>
+        <member name="M:IDllAutomation.UnInstallSync">
+            <summary>
+            同步 卸载
             </summary>
         </member>
         <member name="T:ISystemAutomation">
@@ -154,19 +173,51 @@
             系统自动化
             </summary>
         </member>
-        <member name="M:ISystemAutomation.Install">
+        <member name="M:ISystemAutomation.InstallAsync">
             <summary>
-            初始化
+            异步 初始化
             </summary>
         </member>
-        <member name="M:ISystemAutomation.UnInstall">
+        <member name="M:ISystemAutomation.UnInstallAsync">
             <summary>
-            卸载
+            异步 卸载
+            </summary>
+        </member>
+        <member name="M:ISystemAutomation.InstallSync">
+            <summary>
+            同步 初始化
+            </summary>
+        </member>
+        <member name="M:ISystemAutomation.UnInstallSync">
+            <summary>
+            同步 卸载
             </summary>
         </member>
         <member name="T:SystemAutomation">
             <summary>
             系统自动化注册
+            </summary>
+        </member>
+        <member name="M:SystemAutomation.LoadAsync(System.Boolean)">
+            <summary>
+            安装 
+            </summary>
+            <param name="hasTimer">输出时间</param>
+        </member>
+        <member name="M:SystemAutomation.UnLoadAsync(System.Boolean)">
+            <summary>
+            卸载 
+            </summary>
+            <param name="hasTimer">输出时间</param>
+        </member>
+        <member name="E:SystemAutomation.OnException">
+            <summary>
+            异常信息
+            </summary>
+        </member>
+        <member name="E:SystemAutomation.OnSuccessful">
+            <summary>
+            成功信息
             </summary>
         </member>
         <member name="F:SystemAutomation.Order">
@@ -189,25 +240,22 @@
             初始化
             </summary>
         </member>
-        <member name="M:SystemAutomation.InstallTimer">
+        <member name="M:SystemAutomation.OutPut">
             <summary>
-            实现计时器
+            输出信息
             </summary>
         </member>
-        <member name="M:SystemAutomation.Install">
+        <member name="M:SystemAutomation.LoadSync(System.Boolean)">
             <summary>
-            实现计时器
+            安装 dll
             </summary>
+            <param name="hasTimer">输出时间</param>
         </member>
-        <member name="M:SystemAutomation.Uninstall">
+        <member name="M:SystemAutomation.UnLoadSync(System.Boolean)">
             <summary>
-            卸载 
+            卸载 dll
             </summary>
-        </member>
-        <member name="M:SystemAutomation.UnInstallTimer">
-            <summary>
-            卸载 实现计时器
-            </summary>
+            <param name="hasTimer">输出时间</param>
         </member>
         <member name="T:SystemAutomationAttribute">
             <summary>
@@ -235,6 +283,16 @@
             </summary>
         </member>
         <member name="M:SystemAutomationAttribute.#ctor(System.Type,System.Int32)">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:SystemAutomationAttribute.#ctor(System.Type,System.String)">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:SystemAutomationAttribute.#ctor(System.Type)">
             <summary>
             初始化
             </summary>

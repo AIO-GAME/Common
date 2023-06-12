@@ -4,7 +4,6 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
-
 using System;
 using System.Globalization;
 using System.Runtime.Serialization;

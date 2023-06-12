@@ -7968,6 +7968,107 @@
             释放
             </summary>
         </member>
+        <member name="T:AIO.CRC32Algorithm">
+            <summary>
+            This is .NET safe implementation of Crc32 algorithm.
+            Implementation of CRC-32.
+            This class supports several convenient static methods returning the CRC as UInt32.
+            </summary>
+        </member>
+        <member name="M:AIO.CRC32Algorithm.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AIO.CRC32Algorithm"/> class. 
+            </summary>
+        </member>
+        <member name="M:AIO.CRC32Algorithm.Initialize">
+            <summary>
+            Resets internal state of the algorithm. Used internally.
+            </summary>
+        </member>
+        <member name="M:AIO.CRC32Algorithm.HashCore(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Appends CRC-32 from given buffer
+            </summary>
+        </member>
+        <member name="M:AIO.CRC32Algorithm.HashFinal">
+            <summary>
+            Computes CRC-32 from <see cref="M:AIO.CRC32Algorithm.HashCore(System.Byte[],System.Int32,System.Int32)"/>
+            </summary>
+        </member>
+        <member name="M:AIO.CRC32Algorithm.Append(System.UInt32,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Computes CRC-32 from multiple buffers.
+            Call this method multiple times to chain multiple buffers.
+            </summary>
+            <param name="initial">
+            Initial CRC value for the algorithm. It is zero for the first buffer.
+            Subsequent buffers should have their initial value set to CRC value returned by previous call to this method.
+            </param>
+            <param name="input">Input buffer with data to be checksummed.</param>
+            <param name="offset">Offset of the input data within the buffer.</param>
+            <param name="length">Length of the input data in the buffer.</param>
+            <returns>Accumulated CRC-32 of all buffers processed so far.</returns>
+        </member>
+        <member name="M:AIO.CRC32Algorithm.Append(System.UInt32,System.Byte[])">
+            <summary>
+            Computes CRC-32 from multiple buffers.
+            Call this method multiple times to chain multiple buffers.
+            </summary>
+            <param name="initial">
+            Initial CRC value for the algorithm. It is zero for the first buffer.
+            Subsequent buffers should have their initial value set to CRC value returned by previous call to this method.
+            </param>
+            <param name="input">Input buffer containing data to be checksummed.</param>
+            <returns>Accumulated CRC-32 of all buffers processed so far.</returns>
+        </member>
+        <member name="M:AIO.CRC32Algorithm.Compute(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Computes CRC-32 from input buffer.
+            </summary>
+            <param name="input">Input buffer with data to be checksummed.</param>
+            <param name="offset">Offset of the input data within the buffer.</param>
+            <param name="length">Length of the input data in the buffer.</param>
+            <returns>CRC-32 of the data in the buffer.</returns>
+        </member>
+        <member name="M:AIO.CRC32Algorithm.Compute(System.Byte[])">
+            <summary>
+            Computes CRC-32 from input buffer.
+            </summary>
+            <param name="input">Input buffer containing data to be checksummed.</param>
+            <returns>CRC-32 of the buffer.</returns>
+        </member>
+        <member name="M:AIO.CRC32Algorithm.ComputeAndWriteToEnd(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Computes CRC-32 from input buffer and writes it after end of data (buffer should have 4 bytes reserved space for it). Can be used in conjunction with <see cref="M:AIO.CRC32Algorithm.IsValidWithCrcAtEnd(System.Byte[],System.Int32,System.Int32)"/>
+            </summary>
+            <param name="input">Input buffer with data to be checksummed.</param>
+            <param name="offset">Offset of the input data within the buffer.</param>
+            <param name="length">Length of the input data in the buffer.</param>
+            <returns>CRC-32 of the data in the buffer.</returns>
+        </member>
+        <member name="M:AIO.CRC32Algorithm.ComputeAndWriteToEnd(System.Byte[])">
+            <summary>
+            Computes CRC-32 from input buffer - 4 bytes and writes it as last 4 bytes of buffer. Can be used in conjunction with <see cref="M:AIO.CRC32Algorithm.IsValidWithCrcAtEnd(System.Byte[])"/>
+            </summary>
+            <param name="input">Input buffer with data to be checksummed.</param>
+            <returns>CRC-32 of the data in the buffer.</returns>
+        </member>
+        <member name="M:AIO.CRC32Algorithm.IsValidWithCrcAtEnd(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Validates correctness of CRC-32 data in source buffer with assumption that CRC-32 data located at end of buffer in reverse bytes order. Can be used in conjunction with <see cref="M:AIO.CRC32Algorithm.ComputeAndWriteToEnd(System.Byte[],System.Int32,System.Int32)"/>
+            </summary>
+            <param name="input">Input buffer with data to be checksummed.</param>
+            <param name="offset">Offset of the input data within the buffer.</param>
+            <param name="lengthWithCrc">Length of the input data in the buffer with CRC-32 bytes.</param>
+            <returns>Is checksum valid.</returns>
+        </member>
+        <member name="M:AIO.CRC32Algorithm.IsValidWithCrcAtEnd(System.Byte[])">
+            <summary>
+            Validates correctness of CRC-32 data in source buffer with assumption that CRC-32 data located at end of buffer in reverse bytes order. Can be used in conjunction with <see cref="M:AIO.CRC32Algorithm.ComputeAndWriteToEnd(System.Byte[],System.Int32,System.Int32)"/>
+            </summary>
+            <param name="input">Input buffer with data to be checksummed.</param>
+            <returns>Is checksum valid.</returns>
+        </member>
         <member name="T:AIO.HttpDownload">
             <summary>
             Http下载
@@ -10646,18 +10747,65 @@
             hash工具
             </summary>
         </member>
-        <member name="M:Utils.Hash.ToHash(System.Byte[])">
+        <member name="M:Utils.Hash.StringSHA1(System.String@)">
             <summary>
-            转化为哈希值
+            获取字符串的Hash值
             </summary>
         </member>
-        <member name="M:Utils.Hash.VerifyCrc32Hash(System.String,System.String)">
+        <member name="M:Utils.Hash.FileSHA1(System.String@)">
             <summary>
-            比较32位校验码
+            获取文件的Hash值
             </summary>
-            <param name="input"></param>
-            <param name="hash"></param>
-            <returns></returns>
+        </member>
+        <member name="M:Utils.Hash.StreamSHA1(System.IO.Stream)">
+            <summary>
+            获取数据流的Hash值
+            </summary>
+        </member>
+        <member name="M:Utils.Hash.BytesSHA1(System.Byte[])">
+            <summary>
+            获取字节数组的Hash值
+            </summary>
+        </member>
+        <member name="M:Utils.Hash.StringMD5(System.String@)">
+            <summary>
+            获取字符串的MD5
+            </summary>
+        </member>
+        <member name="M:Utils.Hash.FileMD5(System.String@)">
+            <summary>
+            获取文件的MD5
+            </summary>
+        </member>
+        <member name="M:Utils.Hash.StreamMD5(System.IO.Stream)">
+            <summary>
+            获取数据流的MD5
+            </summary>
+        </member>
+        <member name="M:Utils.Hash.BytesMD5(System.Byte[])">
+            <summary>
+            获取字节数组的MD5
+            </summary>
+        </member>
+        <member name="M:Utils.Hash.StringCRC32(System.String)">
+            <summary>
+            获取字符串的CRC32
+            </summary>
+        </member>
+        <member name="M:Utils.Hash.FileCRC32(System.String)">
+            <summary>
+            获取文件的CRC32
+            </summary>
+        </member>
+        <member name="M:Utils.Hash.StreamCRC32(System.IO.Stream)">
+            <summary>
+            获取数据流的CRC32
+            </summary>
+        </member>
+        <member name="M:Utils.Hash.BytesCRC32(System.Byte[])">
+            <summary>
+            获取字节数组的CRC32
+            </summary>
         </member>
         <member name="M:Utils.Hash.GetHashCode``1(``0@)">
             <summary>
@@ -11836,6 +11984,66 @@
             字符串工具库
             </summary>
         </member>
+        <member name="M:Utils.String.Format(System.String,System.Object)">
+            <summary>
+            字符串格式化
+            </summary>
+            <param name="format">格式化</param>
+            <param name="arg0">参数</param>
+            <returns>字符串</returns>
+            <exception cref="T:System.ArgumentNullException">参数异常</exception>
+        </member>
+        <member name="M:Utils.String.Format(System.String,System.Object,System.Object)">
+            <summary>
+            字符串格式化
+            </summary>
+            <param name="format">格式化</param>
+            <param name="arg0">参数</param>
+            <param name="arg1">参数</param>
+            <returns>字符串</returns>
+            <exception cref="T:System.ArgumentNullException">参数异常</exception>
+        </member>
+        <member name="M:Utils.String.Format(System.String,System.Object,System.Object,System.Object)">
+            <summary>
+            字符串格式化
+            </summary>
+            <param name="format">格式化</param>
+            <param name="arg0">参数</param>
+            <param name="arg1">参数</param>
+            <param name="arg2">参数</param>
+            <returns>字符串</returns>
+            <exception cref="T:System.ArgumentNullException">参数异常</exception>
+        </member>
+        <member name="M:Utils.String.Format(System.String,System.Object[])">
+            <summary>
+            字符串格式化
+            </summary>
+            <param name="format">格式化</param>
+            <param name="args">参数</param>
+            <returns>字符串</returns>
+            <exception cref="T:System.ArgumentNullException">参数异常</exception>
+        </member>
+        <member name="M:Utils.String.RemoveFirstChar(System.String)">
+            <summary>
+            移除第一个字符
+            </summary>
+            <param name="str">字符串</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:Utils.String.RemoveLastChar(System.String)">
+            <summary>
+            移除最后一个字符
+            </summary>
+            <param name="str">字符串</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:Utils.String.RemoveExtension(System.String)">
+            <summary>
+            移除扩展名
+            </summary>
+            <param name="str">字符串</param>
+            <returns>字符串</returns>
+        </member>
         <member name="M:Utils.String.ToConvertBlock(System.String[])">
             <summary>
             转化为区块
@@ -11865,7 +12073,7 @@
         </member>
         <member name="M:Utils.String.StringToHexView(System.Byte[]@,System.Int32)">
             <summary>
-            
+            二进制转字符串
             </summary>
             <param name="buff"></param>
             <param name="len"></param>

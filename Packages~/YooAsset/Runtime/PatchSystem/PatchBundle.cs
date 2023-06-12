@@ -41,6 +41,11 @@ namespace YooAsset
 		/// </summary>
 		public string[] Tags;
 
+		/// <summary>
+		/// 引用该资源包的ID列表
+		/// </summary>
+		public int[] ReferenceIDs;
+
 
 		/// <summary>
 		/// 所属的包裹名称
@@ -66,8 +71,17 @@ namespace YooAsset
 				if (string.IsNullOrEmpty(_cachedDataFilePath) == false)
 					return _cachedDataFilePath;
 
-				string cacheRoot = PersistentHelper.GetCacheFolderPath(PackageName);
-				_cachedDataFilePath = $"{cacheRoot}/{CacheGUID}/{YooAssetSettings.CacheBundleDataFileName}";
+				string folderName = FileHash.Substring(0, 2);
+				if (IsRawFile)
+				{
+					string cacheRoot = PersistentHelper.GetCachedRawFileFolderPath(PackageName);
+					_cachedDataFilePath = $"{cacheRoot}/{folderName}/{CacheGUID}/{YooAssetSettings.CacheBundleDataFileName}{_fileExtension}";
+				}
+				else
+				{
+					string cacheRoot = PersistentHelper.GetCachedBundleFileFolderPath(PackageName);
+					_cachedDataFilePath = $"{cacheRoot}/{folderName}/{CacheGUID}/{YooAssetSettings.CacheBundleDataFileName}";
+				}
 				return _cachedDataFilePath;
 			}
 		}
@@ -83,8 +97,17 @@ namespace YooAsset
 				if (string.IsNullOrEmpty(_cachedInfoFilePath) == false)
 					return _cachedInfoFilePath;
 
-				string cacheRoot = PersistentHelper.GetCacheFolderPath(PackageName);
-				_cachedInfoFilePath = $"{cacheRoot}/{CacheGUID}/{YooAssetSettings.CacheBundleInfoFileName}";
+				string folderName = FileHash.Substring(0, 2);
+				if (IsRawFile)
+				{
+					string cacheRoot = PersistentHelper.GetCachedRawFileFolderPath(PackageName);
+					_cachedInfoFilePath = $"{cacheRoot}/{folderName}/{CacheGUID}/{YooAssetSettings.CacheBundleInfoFileName}";
+				}
+				else
+				{
+					string cacheRoot = PersistentHelper.GetCachedBundleFileFolderPath(PackageName);
+					_cachedInfoFilePath = $"{cacheRoot}/{folderName}/{CacheGUID}/{YooAssetSettings.CacheBundleInfoFileName}";
+				}
 				return _cachedInfoFilePath;
 			}
 		}
@@ -122,7 +145,7 @@ namespace YooAsset
 		}
 
 		/// <summary>
-		/// 文件名称（远端文件名和内置文件名）
+		/// 文件名称
 		/// </summary>
 		private string _fileName;
 		public string FileName
@@ -132,6 +155,20 @@ namespace YooAsset
 				if (string.IsNullOrEmpty(_fileName))
 					throw new Exception("Should never get here !");
 				return _fileName;
+			}
+		}
+
+		/// <summary>
+		/// 文件后缀名
+		/// </summary>
+		private string _fileExtension;
+		public string FileExtension
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(_fileExtension))
+					throw new Exception("Should never get here !");
+				return _fileExtension;
 			}
 		}
 
@@ -146,7 +183,8 @@ namespace YooAsset
 		public void ParseBundle(string packageName, int nameStype)
 		{
 			PackageName = packageName;
-			_fileName = PatchManifestTools.CreateBundleFileName(nameStype, BundleName, FileHash, IsRawFile);
+			_fileExtension = PatchManifestTools.GetRemoteBundleFileExtension(BundleName);
+			_fileName = PatchManifestTools.GetRemoteBundleFileName(nameStype, BundleName, _fileExtension, FileHash);
 		}
 
 		/// <summary>

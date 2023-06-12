@@ -25,7 +25,7 @@ namespace YooAsset.Editor
 			var buildParameters = buildParametersContext.Parameters;
 			string pipelineOutputDirectory = buildParametersContext.GetPipelineOutputDirectory();
 			string packageOutputDirectory = buildParametersContext.GetPackageOutputDirectory();
-			BuildRunner.Log($"开始拷贝补丁文件到补丁包目录：{packageOutputDirectory}");
+			BuildLogger.Log($"开始拷贝补丁文件到补丁包目录：{packageOutputDirectory}");
 
 			if (buildParameters.BuildPipeline == EBuildPipeline.ScriptableBuildPipeline)
 			{
@@ -67,8 +67,8 @@ namespace YooAsset.Editor
 
 			// 拷贝所有补丁文件
 			int progressValue = 0;
-			int patchFileTotalCount = buildMapContext.BundleInfos.Count;
-			foreach (var bundleInfo in buildMapContext.BundleInfos)
+			int patchFileTotalCount = buildMapContext.Collection.Count;
+			foreach (var bundleInfo in buildMapContext.Collection)
 			{
 				EditorTools.CopyFile(bundleInfo.PatchInfo.BuildOutputFilePath, bundleInfo.PatchInfo.PatchOutputFilePath, true);
 				EditorTools.DisplayProgressBar("拷贝补丁文件", ++progressValue, patchFileTotalCount);
