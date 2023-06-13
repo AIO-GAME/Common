@@ -25,4 +25,9 @@ public interface IDllAutomation
     /// 同步 卸载
     /// </summary>
     IEnumerator UnInstallSync();
+
+    /// <summary>
+    /// 运行
+    /// </summary>
+    void Run();
 }

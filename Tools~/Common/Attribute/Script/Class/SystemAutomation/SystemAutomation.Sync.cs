@@ -16,8 +16,8 @@ public partial class SystemAutomation
     /// <param name="hasTimer">输出时间</param>
     public static IEnumerator LoadSync(bool hasTimer = false)
     {
-        if (hasTimer) return InstallSync();
-        return InstallSyncTimer();
+        if (hasTimer) yield return InstallSyncTimer();
+        else yield return InstallSync();
     }
 
     /// <summary>
@@ -26,8 +26,8 @@ public partial class SystemAutomation
     /// <param name="hasTimer">输出时间</param>
     public static IEnumerator UnLoadSync(bool hasTimer = false)
     {
-        if (hasTimer) return UnInstallSyncTimer();
-        return UninstallSync();
+        if (hasTimer) yield return UninstallSync();
+        else yield return UnInstallSyncTimer();
     }
 
     #region Install
@@ -48,6 +48,7 @@ public partial class SystemAutomation
                 watch.Start();
                 yield return automation.InstallSync();
                 watch.Stop();
+                Console.WriteLine($"Automation {nameof(InstallSyncTimer)} System : {attribute.Name} -> Successful");
                 var timer = watch.Elapsed - alltimelong;
                 var title = string.Format("{0} {1}", num, attribute.Name);
                 allDic.Add(title, timer);
@@ -66,6 +67,8 @@ public partial class SystemAutomation
                 timer, (timer.Ticks / (double)allTimer.Ticks * 100)).PadRight(30);
             Console.WriteLine("Automation Installation System Time : {0} -> {1}", timeinfo, key);
         }
+
+        yield break;
     }
 
     private static IEnumerator InstallSync()
@@ -75,8 +78,11 @@ public partial class SystemAutomation
             foreach (var (attribute, automation) in Dic[index])
             {
                 yield return automation.InstallSync();
+                Console.WriteLine($"Automation {nameof(InstallSync)} System : {attribute.Name} -> Successful");
             }
         }
+
+        yield break;
     }
 
     #endregion
@@ -90,8 +96,11 @@ public partial class SystemAutomation
             foreach (var (attribute, automation) in Dic[Order[i]])
             {
                 yield return automation.UnInstallSync();
+                Console.WriteLine($"Automation {nameof(UninstallSync)} System : {attribute.Name} -> Successful");
             }
         }
+
+        yield break;
     }
 
     private static IEnumerator UnInstallSyncTimer()
@@ -104,14 +113,15 @@ public partial class SystemAutomation
 
         for (var i = Order.Count - 1; i >= 0; i--)
         {
-            foreach (var (attr, auto) in Dic[Order[i]])
+            foreach (var (attribute, auto) in Dic[Order[i]])
             {
                 var alltimelong = watch.Elapsed;
                 watch.Start();
                 yield return auto.UnInstallSync();
+                Console.WriteLine($"Automation {nameof(UnInstallSyncTimer)} System : {attribute.Name} -> Successful");
                 watch.Stop();
                 var timer = watch.Elapsed - alltimelong;
-                var title = string.Format("{0} {1}", num, attr.Name);
+                var title = string.Format("{0} {1}", num, attribute.Name);
                 allDic.Add(title, timer);
                 sort.Add(num, title);
                 allTimer += timer;
@@ -128,6 +138,8 @@ public partial class SystemAutomation
                 timer, (timer.Ticks / (double)allTimer.Ticks * 100)).PadRight(30);
             Console.WriteLine("Automation UnInstallation System Time : {0} -> {1}", timeinfo, key);
         }
+
+        yield break;
     }
 
     #endregion

@@ -111,4 +111,25 @@ public static partial class DllAutomation
 
         return str.ToString();
     }
+
+    /// <summary>
+    /// 运行  
+    /// </summary>
+    public static void Run()
+    {
+        foreach (var index in Order)
+        {
+            foreach (var (attribute, automation) in Dic[index])
+            {
+                try
+                {
+                    automation.Run();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Automation Installation DLL: {0} -> Error : {1}", attribute.Name, ex);
+                }
+            }
+        }
+    }
 }

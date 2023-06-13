@@ -16,8 +16,8 @@ public partial class SystemAutomation
     /// <param name="hasTimer">输出时间</param>
     public static Task LoadAsync(bool hasTimer = false)
     {
-        if (hasTimer) return InstallAsync();
-        return InstallAsyncTimer();
+        if (hasTimer) return InstallAsyncTimer();
+        return InstallAsync();
     }
 
     /// <summary>
@@ -26,8 +26,8 @@ public partial class SystemAutomation
     /// <param name="hasTimer">输出时间</param>
     public static Task UnLoadAsync(bool hasTimer = false)
     {
-        if (hasTimer) return UnInstallAsyncTimer();
-        return UnInstallAsync();
+        if (hasTimer) return UnInstallAsync();
+        return UnInstallAsyncTimer();
     }
 
     /// <summary>
@@ -108,10 +108,6 @@ public partial class SystemAutomation
                     if (OnException != null) OnException.Invoke(attribute, ex);
                     else Console.WriteLine($"Automation {nameof(InstallAsync)} System : {attribute.Name} -> Error : {ex}");
                 }
-                finally
-                {
-                    Console.WriteLine($"Automation {nameof(InstallAsync)} System : {attribute.Name} -> Install End");
-                }
             }
         }
     }
@@ -136,10 +132,6 @@ public partial class SystemAutomation
                 {
                     if (OnException != null) OnException.Invoke(attribute, ex);
                     else Console.WriteLine($"Automation {nameof(UnInstallAsync)} System : {attribute.Name} -> Error : {ex}");
-                }
-                finally
-                {
-                    Console.WriteLine($"Automation {nameof(InstallAsync)} System : {attribute.Name} -> Uninstall End");
                 }
             }
         }

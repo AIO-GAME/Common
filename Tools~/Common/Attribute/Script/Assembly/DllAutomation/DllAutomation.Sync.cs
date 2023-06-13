@@ -16,8 +16,8 @@ public partial class DllAutomation
     /// <param name="hasTimer">输出时间</param>
     public static IEnumerator LoadSync(bool hasTimer = false)
     {
-        if (hasTimer) return InstallSync();
-        return InstallSyncTimer();
+        if (hasTimer) yield return InstallSync();
+        else yield return InstallSyncTimer();
     }
 
     /// <summary>
@@ -26,8 +26,8 @@ public partial class DllAutomation
     /// <param name="hasTimer">输出时间</param>
     public static IEnumerator UnLoadSync(bool hasTimer = false)
     {
-        if (hasTimer) return UnInstallSyncTimer();
-        return UninstallSync();
+        if (hasTimer) yield return UninstallSync();
+        else yield return UnInstallSyncTimer();
     }
 
     #region Install
@@ -65,6 +65,8 @@ public partial class DllAutomation
             var timeinfo = string.Format("[<color=#E47833><b>{1:00.0000}% | {0:G}</b></color>]", timer, (timer.Ticks / (double)allTimer.Ticks * 100)).PadRight(30);
             Console.WriteLine("Automation Installation DLL Time : {0} -> {1}", timeinfo, key);
         }
+
+        yield break;
     }
 
     private static IEnumerator InstallSync()
@@ -76,6 +78,8 @@ public partial class DllAutomation
                 yield return automation.InstallSync();
             }
         }
+
+        yield break;
     }
 
     #endregion
@@ -115,6 +119,8 @@ public partial class DllAutomation
             var timeinfo = string.Format("[<color=#E47833><b>{1:00.0000}% | {0:G}</b></color>]", timer, (timer.Ticks / (double)allTimer.Ticks * 100)).PadRight(30);
             Console.WriteLine("Automation UnInstallation DLL Time : {0} -> {1}", timeinfo, key);
         }
+
+        yield break;
     }
 
     private static IEnumerator UninstallSync()
@@ -126,6 +132,8 @@ public partial class DllAutomation
                 yield return automation.UnInstallSync();
             }
         }
+
+        yield break;
     }
 
     #endregion

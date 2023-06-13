@@ -101,6 +101,11 @@
             输出信息
             </summary>
         </member>
+        <member name="M:DllAutomation.Run">
+            <summary>
+            运行  
+            </summary>
+        </member>
         <member name="M:DllAutomation.LoadSync(System.Boolean)">
             <summary>
             安装 dll
@@ -166,6 +171,11 @@
         <member name="M:IDllAutomation.UnInstallSync">
             <summary>
             同步 卸载
+            </summary>
+        </member>
+        <member name="M:IDllAutomation.Run">
+            <summary>
+            运行
             </summary>
         </member>
         <member name="T:ISystemAutomation">
