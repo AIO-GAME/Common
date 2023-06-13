@@ -21,8 +21,8 @@ public partial class DllAutomation
     /// <param name="hasTimer">输出时间</param>
     public static Task UnLoadAsync(bool hasTimer = false)
     {
-        if (hasTimer) return UnInstallAsyncTimer();
-        return UninstallAsync();
+        if (hasTimer) return UninstallAsync();
+        return UnInstallAsyncTimer();
     }
 
     #region Install
