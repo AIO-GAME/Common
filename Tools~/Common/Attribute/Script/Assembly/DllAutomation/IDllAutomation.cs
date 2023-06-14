@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿#if NO_UNITY
+using System.Collections;
 using System.Threading.Tasks;
 
 /// <summary>
@@ -31,3 +32,4 @@ public interface IDllAutomation
     /// </summary>
     void Run();
 }
+#endif

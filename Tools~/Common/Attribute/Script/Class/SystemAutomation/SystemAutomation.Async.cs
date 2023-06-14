@@ -2,7 +2,7 @@
 |*|Author:   |*| -> SAM
 |*|Date:     |*| -> 2023-06-12
 |*|==========|*/
-
+#if NO_UNITY
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -26,8 +26,8 @@ public partial class SystemAutomation
     /// <param name="hasTimer">输出时间</param>
     public static Task UnLoadAsync(bool hasTimer = false)
     {
-        if (hasTimer) return UnInstallAsync();
-        return UnInstallAsyncTimer();
+        if (hasTimer) return UnInstallAsyncTimer();
+        return UnInstallAsync();
     }
 
     /// <summary>
@@ -188,3 +188,4 @@ public partial class SystemAutomation
 
     #endregion
 }
+#endif

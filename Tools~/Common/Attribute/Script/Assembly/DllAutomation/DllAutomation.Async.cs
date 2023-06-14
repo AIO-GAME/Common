@@ -1,4 +1,8 @@
-﻿using System;
+﻿
+#if NO_UNITY
+
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -11,8 +15,8 @@ public partial class DllAutomation
     /// <param name="hasTimer">输出时间</param>
     public static Task LoadAsync(bool hasTimer = false)
     {
-        if (hasTimer) return InstallAsync();
-        return InstallAsyncTimer();
+        if (hasTimer) return InstallAsyncTimer();
+        return InstallAsync();
     }
 
     /// <summary>
@@ -21,8 +25,8 @@ public partial class DllAutomation
     /// <param name="hasTimer">输出时间</param>
     public static Task UnLoadAsync(bool hasTimer = false)
     {
-        if (hasTimer) return UninstallAsync();
-        return UnInstallAsyncTimer();
+        if (hasTimer) return UnInstallAsyncTimer();
+        return UninstallAsync();
     }
 
     #region Install
@@ -159,3 +163,4 @@ public partial class DllAutomation
 
     #endregion
 }
+#endif

@@ -713,6 +713,11 @@
             Unity线程
             </summary>
         </member>
+        <member name="P:UnityAsync.MainThread">
+            <summary>
+            主线程执行
+            </summary>
+        </member>
         <member name="M:UnityAsync.Initialize(System.Boolean)">
             <summary>
             初始化

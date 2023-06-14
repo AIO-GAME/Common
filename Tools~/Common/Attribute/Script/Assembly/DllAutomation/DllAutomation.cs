@@ -3,6 +3,8 @@
 |*|Date:     |*| -> 2023-06-12
 |*|==========|*/
 
+#if NO_UNITY
+
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -133,3 +135,5 @@ public static partial class DllAutomation
         }
     }
 }
+
+#endif

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NO_UNITY
+using System;
 
 /// <summary>
 /// 系统自动化注册属性
@@ -61,3 +62,4 @@ public class SystemAutomationAttribute : Attribute
         Name = system.Name;
     }
 }
+#endif
