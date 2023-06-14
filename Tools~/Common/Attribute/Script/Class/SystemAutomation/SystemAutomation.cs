@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NO_UNITY
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
@@ -107,3 +108,4 @@ public static partial class SystemAutomation
         return str.ToString();
     }
 }
+#endif

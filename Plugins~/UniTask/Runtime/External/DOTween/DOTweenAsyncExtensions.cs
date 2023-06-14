@@ -236,10 +236,10 @@ namespace Cysharp.Threading.Tasks
                 if (cancellationToken.IsCancellationRequested)
                 {
                     if (this.cancelBehaviour == TweenCancelBehaviour.KillAndCancelAwait
-                      |*|| this.cancelBehaviour == TweenCancelBehaviour.KillWithCompleteCallbackAndCancelAwait
-                      |*|| this.cancelBehaviour == TweenCancelBehaviour.CompleteAndCancelAwait
-                      |*|| this.cancelBehaviour == TweenCancelBehaviour.CompleteWithSequenceCallbackAndCancelAwait
-                      |*|| this.cancelBehaviour == TweenCancelBehaviour.CancelAwait)
+                        || this.cancelBehaviour == TweenCancelBehaviour.KillWithCompleteCallbackAndCancelAwait
+                        || this.cancelBehaviour == TweenCancelBehaviour.CompleteAndCancelAwait
+                        || this.cancelBehaviour == TweenCancelBehaviour.CompleteWithSequenceCallbackAndCancelAwait
+                        || this.cancelBehaviour == TweenCancelBehaviour.CancelAwait)
                     {
                         canceled = true;
                     }

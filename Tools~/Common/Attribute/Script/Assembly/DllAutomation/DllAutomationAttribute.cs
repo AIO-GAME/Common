@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+#if NO_UNITY
+
+using System;
 using System.Reflection;
 
 /// <summary>
@@ -42,3 +45,4 @@ public class DllAutomationAttribute : Attribute
         Name = Assembly.GetAssembly(system).GetName().Name;
     }
 }
+#endif

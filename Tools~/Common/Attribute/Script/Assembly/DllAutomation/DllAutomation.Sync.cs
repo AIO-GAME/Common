@@ -3,6 +3,8 @@
 |*|Date:     |*| -> 2023-06-12
 |*|==========|*/
 
+#if NO_UNITY
+
 using System.Collections;
 using System;
 using System.Collections.Generic;
@@ -16,8 +18,8 @@ public partial class DllAutomation
     /// <param name="hasTimer">输出时间</param>
     public static IEnumerator LoadSync(bool hasTimer = false)
     {
-        if (hasTimer) yield return InstallSync();
-        else yield return InstallSyncTimer();
+        if (hasTimer) yield return InstallSyncTimer();
+        else yield return InstallSync();
     }
 
     /// <summary>
@@ -26,8 +28,8 @@ public partial class DllAutomation
     /// <param name="hasTimer">输出时间</param>
     public static IEnumerator UnLoadSync(bool hasTimer = false)
     {
-        if (hasTimer) yield return UninstallSync();
-        else yield return UnInstallSyncTimer();
+        if (hasTimer) yield return UnInstallSyncTimer();
+        else yield return UninstallSync();
     }
 
     #region Install
@@ -138,3 +140,4 @@ public partial class DllAutomation
 
     #endregion
 }
+#endif

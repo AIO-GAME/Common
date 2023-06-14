@@ -12,6 +12,11 @@ public static partial class UnityAsync
     private static bool IsWebGL;
 
     /// <summary>
+    /// 主线程执行
+    /// </summary>
+    public static MonoBehaviour MainThread => instance;
+
+    /// <summary>
     /// 初始化
     /// </summary>
     /// <param name="visible">是否可见</param>

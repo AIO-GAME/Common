@@ -2,7 +2,7 @@
 |*|Author:   |*| -> SAM
 |*|Date:     |*| -> 2023-06-12
 |*|==========|*/
-
+#if NO_UNITY
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,8 +26,8 @@ public partial class SystemAutomation
     /// <param name="hasTimer">输出时间</param>
     public static IEnumerator UnLoadSync(bool hasTimer = false)
     {
-        if (hasTimer) yield return UninstallSync();
-        else yield return UnInstallSyncTimer();
+        if (hasTimer) yield return UnInstallSyncTimer();
+        else yield return UninstallSync();
     }
 
     #region Install
@@ -144,3 +144,4 @@ public partial class SystemAutomation
 
     #endregion
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿#if NO_UNITY
+using System.Collections;
 using System.Threading.Tasks;
 
 /// <summary>
@@ -26,3 +27,4 @@ public interface ISystemAutomation
     /// </summary>
     IEnumerator UnInstallSync();
 }
+#endif
