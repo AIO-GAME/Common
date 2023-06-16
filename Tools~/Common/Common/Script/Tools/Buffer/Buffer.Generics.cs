@@ -17,7 +17,7 @@ namespace AIO
         /// <summary>
         /// 构建一个指定容量的Buffer
         /// </summary>
-        protected Buffer(in int capacity = CAPACITY)
+        protected Buffer(int capacity = CAPACITY)
         {
             Arrays = new T[capacity < 8 ? 8 : capacity];
         }
@@ -30,7 +30,7 @@ namespace AIO
         /// <summary>
         /// 构建一个指定数据的ByteBuffer
         /// </summary>
-        protected Buffer(in T[] bytes)
+        protected Buffer(T[] bytes)
         {
             if (bytes == null || bytes.Length == 0)
             {
@@ -82,7 +82,7 @@ namespace AIO
         /// <summary> 
         /// 将指定字节缓冲区数据写入当前缓存区
         /// </summary>
-        public virtual void Write(in Buffer<T> data)
+        public virtual void Write(Buffer<T> data)
         {
             Write(data.Arrays, data.ReadIndex, data.Count);
         }
@@ -90,7 +90,7 @@ namespace AIO
         /// <summary> 
         /// 将指定字节缓冲区数据写入当前缓存区
         /// </summary>
-        public virtual void Write(in ICollection<T> bytes)
+        public virtual void Write(ICollection<T> bytes)
         {
             Write(bytes, 0, bytes.Count);
         }
@@ -98,7 +98,7 @@ namespace AIO
         /// <summary>
         /// 写入byte数组(从position开始写入len个)
         /// </summary>
-        public virtual void Write(in IList<T> bytes, in int pos, in int len)
+        public virtual void Write(IList<T> bytes, int pos, int len)
         {
             if (len <= 0) return;
             if (pos >= len) throw new IndexOutOfRangeException("pos should have less than len");
@@ -112,7 +112,7 @@ namespace AIO
         /// <summary>
         /// 写入byte数组(从position开始写入len个)
         /// </summary>
-        public virtual void Write(in ICollection<T> bytes, in int pos, in int len)
+        public virtual void Write(ICollection<T> bytes, int pos, int len)
         {
             if (len <= 0) return;
             if (pos >= len) throw new IndexOutOfRangeException("pos should have less than len");

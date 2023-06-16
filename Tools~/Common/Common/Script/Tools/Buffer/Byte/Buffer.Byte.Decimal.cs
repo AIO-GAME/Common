@@ -5,19 +5,19 @@ namespace AIO
     public partial class BufferByte
     {
         /// <inheritdoc/> 
-        public decimal ReadDecimal(in bool reverse = false)
+        public decimal ReadDecimal(bool reverse = false)
         {
             return Arrays.GetDecimal(ref ReadIndex, reverse);
         }
 
         /// <inheritdoc/> 
-        public decimal[] ReadDecimalArray(in bool reverse = false)
+        public decimal[] ReadDecimalArray(bool reverse = false)
         {
             return Arrays.GetDecimalArray(ref ReadIndex, reverse);
         }
 
         /// <inheritdoc/> 
-        public void WriteDecimal(in decimal value, in bool reverse = false)
+        public void WriteDecimal(decimal value, bool reverse = false)
         {
             var array = decimal.GetBits(value);
             WriteLen(array.Length);
@@ -26,7 +26,7 @@ namespace AIO
         }
 
         /// <inheritdoc/> 
-        public void WriteDecimalArray(in ICollection<decimal> value, in bool reverse = false)
+        public void WriteDecimalArray(ICollection<decimal> value, bool reverse = false)
         {
             WriteLen(value.Count);
             foreach (var item in value) WriteDecimal(item, reverse);

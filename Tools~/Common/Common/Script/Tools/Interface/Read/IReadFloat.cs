@@ -11,7 +11,7 @@ namespace AIO
         /// <param name="all"></param>
         /// <param name="reverse">是否反转</param>
         /// <returns>数据值</returns>
-        float[] ReadFloatArray(in bool all, in bool reverse = false);
+        float[] ReadFloatArray(bool all, bool reverse = false);
 
         /// <summary>
         /// 读取 Float 数据类型
@@ -19,6 +19,6 @@ namespace AIO
         /// <param name="all">全部</param>
         /// <param name="reverse">是否反转</param>
         /// <returns>数据值</returns>
-        float ReadFloat(in bool all = false, in bool reverse = false);
+        float ReadFloat(bool all = false, bool reverse = false);
     }
 }

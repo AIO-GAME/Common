@@ -10,11 +10,11 @@ namespace AIO
         /// <summary>
         /// 写入指定数据类型
         /// </summary>
-        void WriteDouble(in double value, bool all = false, in bool reverse = false);
+        void WriteDouble(double value, bool all = false, bool reverse = false);
 
         /// <summary>
         /// 写入指定数据类型
         /// </summary>
-        void WriteDoubleArray(in ICollection<double> value, in bool all, in bool reverse = false);
+        void WriteDoubleArray(ICollection<double> value, bool all, bool reverse = false);
     }
 }

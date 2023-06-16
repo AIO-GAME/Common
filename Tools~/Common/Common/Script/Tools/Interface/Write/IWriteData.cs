@@ -39,6 +39,6 @@ namespace AIO
         /// </summary>
         /// <typeparam name="T">泛型</typeparam>
         /// <returns>值</returns>
-        void WriteDataArray<T>(in ICollection<T> collection) where T : IBinSerialize, new();
+        void WriteDataArray<T>(ICollection<T> collection) where T : IBinSerialize, new();
     }
 }

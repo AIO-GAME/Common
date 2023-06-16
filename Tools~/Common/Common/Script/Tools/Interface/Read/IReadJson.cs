@@ -17,7 +17,7 @@ namespace AIO
         /// <param name="reverse">反转</param>
         /// <typeparam name="T">数据泛型</typeparam>
         /// <returns>数据值</returns>
-        T ReadJson<T>(in JsonSerializerSettings settings = null, in Encoding encoding = null, in bool reverse = false);
+        T ReadJson<T>(JsonSerializerSettings settings = null, Encoding encoding = null, bool reverse = false);
 
         /// <summary>
         /// 读取Json数据
@@ -26,7 +26,7 @@ namespace AIO
         /// <param name="reverse">反转</param>
         /// <typeparam name="T">数据泛型</typeparam>
         /// <returns>数据值</returns>
-        T ReadJsonUTF8<T>(in JsonSerializerSettings settings = null, in bool reverse = false);
+        T ReadJsonUTF8<T>(JsonSerializerSettings settings = null, bool reverse = false);
 
         /// <summary>
         /// 读取Json数据
@@ -35,7 +35,7 @@ namespace AIO
         /// <param name="reverse">反转</param>
         /// <typeparam name="T">数据泛型</typeparam>
         /// <returns>数据值</returns>
-        T ReadJsonASCII<T>(in JsonSerializerSettings settings = null, in bool reverse = false);
+        T ReadJsonASCII<T>(JsonSerializerSettings settings = null, bool reverse = false);
 
         /// <summary>
         /// 读取Json数据
@@ -44,6 +44,6 @@ namespace AIO
         /// <param name="reverse">反转</param>
         /// <typeparam name="T">数据泛型</typeparam>
         /// <returns>数据值</returns>
-        T ReadJsonUnicode<T>(in JsonSerializerSettings settings = null, in bool reverse = false);
+        T ReadJsonUnicode<T>(JsonSerializerSettings settings = null, bool reverse = false);
     }
 }

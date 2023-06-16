@@ -10,11 +10,11 @@ namespace AIO
         /// <summary>
         /// 写入指定数据类型
         /// </summary>
-        void WriteFloat(in float value, bool all = false, in bool reverse = false);
+        void WriteFloat(float value, bool all = false, bool reverse = false);
 
         /// <summary>
         /// 写入指定数据类型
         /// </summary>
-        void WriteFloatArray(in ICollection<float> value, in bool all, in bool reverse = false);
+        void WriteFloatArray(ICollection<float> value, bool all, bool reverse = false);
     }
 }

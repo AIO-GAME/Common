@@ -5,31 +5,31 @@ namespace AIO
     public partial class BufferByte
     {
         /// <inheritdoc/> 
-        public string ReadString(in Encoding encoding = null, in bool reverse = false)
+        public string ReadString(Encoding encoding = null, bool reverse = false)
         {
             return Arrays.GetString(ref ReadIndex, encoding, reverse);
         }
 
         /// <inheritdoc/> 
-        public string ReadStringUTF8(in bool reverse = false)
+        public string ReadStringUTF8(bool reverse = false)
         {
             return Arrays.GetString(ref ReadIndex, Encoding.UTF8, reverse);
         }
 
         /// <inheritdoc/> 
-        public string ReadStringASCII(in bool reverse = false)
+        public string ReadStringASCII(bool reverse = false)
         {
             return Arrays.GetString(ref ReadIndex, Encoding.ASCII, reverse);
         }
 
         /// <inheritdoc/> 
-        public string ReadStringUnicode(in bool reverse = false)
+        public string ReadStringUnicode(bool reverse = false)
         {
             return Arrays.GetString(ref ReadIndex, Encoding.Unicode, reverse);
         }
 
         /// <inheritdoc/> 
-        public void WriteString(in string value, in Encoding encoding = null, in bool reverse = false)
+        public void WriteString(string value, Encoding encoding = null, bool reverse = false)
         {
             if (value == null)
             {
@@ -47,7 +47,7 @@ namespace AIO
         }
 
         /// <inheritdoc/> 
-        public void WriteString(in StringBuilder value, in Encoding encoding = null, in bool reverse = false)
+        public void WriteString(StringBuilder value, Encoding encoding = null, bool reverse = false)
         {
             if (value == null)
             {
@@ -65,37 +65,37 @@ namespace AIO
         }
 
         /// <inheritdoc/> 
-        public void WriteStringUTF8(in string value, in bool reverse = false)
+        public void WriteStringUTF8(string value, bool reverse = false)
         {
             WriteString(value, Encoding.UTF8, reverse);
         }
 
         /// <inheritdoc/> 
-        public void WriteStringUTF8(in StringBuilder value, in bool reverse = false)
+        public void WriteStringUTF8(StringBuilder value, bool reverse = false)
         {
             WriteString(value, Encoding.UTF8, reverse);
         }
 
         /// <inheritdoc/> 
-        public void WriteStringASCII(in string value, in bool reverse = false)
+        public void WriteStringASCII(string value, bool reverse = false)
         {
             WriteString(value, Encoding.ASCII, reverse);
         }
 
         /// <inheritdoc/> 
-        public void WriteStringASCII(in StringBuilder value, in bool reverse = false)
+        public void WriteStringASCII(StringBuilder value, bool reverse = false)
         {
             WriteString(value, Encoding.ASCII, reverse);
         }
 
         /// <inheritdoc/> 
-        public void WriteStringUnicode(in string value, in bool reverse = false)
+        public void WriteStringUnicode(string value, bool reverse = false)
         {
             WriteString(value, Encoding.Unicode, reverse);
         }
 
         /// <inheritdoc/> 
-        public void WriteStringUnicode(in StringBuilder value, in bool reverse = false)
+        public void WriteStringUnicode(StringBuilder value, bool reverse = false)
         {
             WriteString(value, Encoding.Unicode, reverse);
         }

@@ -7,14 +7,14 @@ namespace AIO
     public partial class BufferByte
     {
         /// <inheritdoc/> 
-        public char ReadChar(in bool reverse = false)
+        public char ReadChar(bool reverse = false)
         {
             var bytes = Arrays.GetByteArray(ref ReadIndex, reverse);
             return BitConverter.ToChar(bytes, 0);
         }
 
         /// <inheritdoc/> 
-        public char[] ReadCharArray(in bool reverse = false)
+        public char[] ReadCharArray(bool reverse = false)
         {
             var str = Arrays.GetString(ref ReadIndex, Encoding.UTF8, reverse);
             if (str == null) return null;
@@ -23,7 +23,7 @@ namespace AIO
         }
 
         /// <inheritdoc/> 
-        public void WriteChar(in char value, in bool reverse = false)
+        public void WriteChar(char value, bool reverse = false)
         {
             var bytes = BitConverter.GetBytes(value);
             AutomaticExpansion(bytes.Length + 4);
@@ -31,7 +31,7 @@ namespace AIO
         }
 
         /// <inheritdoc/> 
-        public void WriteCharArray(in ICollection<char> value, in bool reverse = false)
+        public void WriteCharArray(ICollection<char> value, bool reverse = false)
         {
             AutomaticExpansion(4);
             if (value == null)

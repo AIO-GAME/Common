@@ -10,6 +10,6 @@ namespace AIO
         /// <summary>
         /// 写入字典
         /// </summary>
-        void WriteCollection<T>(in ICollection<T> value);
+        void WriteCollection<T>(ICollection<T> value);
     }
 }

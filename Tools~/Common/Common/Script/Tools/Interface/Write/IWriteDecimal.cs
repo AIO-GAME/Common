@@ -10,11 +10,11 @@ namespace AIO
         /// <summary>
         /// 写入指定数据类型
         /// </summary>
-        void WriteDecimal(in decimal value, in bool reverse = false);
+        void WriteDecimal(decimal value, bool reverse = false);
 
         /// <summary>
         /// 写入指定数据类型
         /// </summary>
-        void WriteDecimalArray(in ICollection<decimal> value, in bool reverse = false);
+        void WriteDecimalArray(ICollection<decimal> value, bool reverse = false);
     }
 }

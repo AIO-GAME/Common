@@ -15,6 +15,6 @@ namespace AIO
         /// </summary>
         /// <param name="reverse">是否反转</param>
         /// <returns>Bool数组</returns>
-        bool[] ReadBoolArray(in bool reverse = false);
+        bool[] ReadBoolArray(bool reverse = false);
     }
 }

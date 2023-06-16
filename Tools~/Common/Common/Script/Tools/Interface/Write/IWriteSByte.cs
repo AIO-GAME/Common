@@ -11,13 +11,13 @@ namespace AIO
         /// 写入Sbyte数组
         /// </summary>
         /// <param name="value">输入源</param>
-        void WriteSByte(in sbyte value);
+        void WriteSByte(sbyte value);
 
         /// <summary>
         /// 写入Sbyte数组
         /// </summary>
         /// <param name="value">输入源</param>
         /// <param name="reverse">是否反转</param>
-        void WriteSByteArray(in ICollection<sbyte> value, in bool reverse = false);
+        void WriteSByteArray(ICollection<sbyte> value, bool reverse = false);
     }
 }

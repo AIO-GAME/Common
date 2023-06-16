@@ -83,7 +83,7 @@ namespace AIO
         /// <summary>
         /// 跳过
         /// </summary>
-        public void Skip(in int count)
+        public void Skip(int count)
         {
             ReadIndex += count + 1;
         }
@@ -93,7 +93,7 @@ namespace AIO
         /// Flase:不满足
         /// Ture:满足
         /// </summary>
-        public bool CheckSize(in int size)
+        public bool CheckSize(int size)
         {
             return WriteIndex - ReadIndex >= size;
         }

@@ -17,7 +17,7 @@ namespace AIO
         /// <param name="encoding">编码</param>
         /// <param name="reverse">反转</param>
         /// <typeparam name="T">泛型</typeparam>
-        void WriteJson<T>(in T value, in JsonSerializerSettings settings = null, in Encoding encoding = null, in bool reverse = false);
+        void WriteJson<T>(T value, JsonSerializerSettings settings = null, Encoding encoding = null, bool reverse = false);
 
         /// <summary>
         /// 写入Json数据
@@ -26,7 +26,7 @@ namespace AIO
         /// <param name="settings">json压缩设置</param>
         /// <param name="reverse">反转</param>
         /// <typeparam name="T">泛型</typeparam>
-        void WriteJsonUTF8<T>(in T value, in JsonSerializerSettings settings = null, in bool reverse = false);
+        void WriteJsonUTF8<T>(T value, JsonSerializerSettings settings = null, bool reverse = false);
 
         /// <summary>
         /// 写入Json数据
@@ -35,7 +35,7 @@ namespace AIO
         /// <param name="settings">json压缩设置</param>
         /// <param name="reverse">反转</param>
         /// <typeparam name="T">泛型</typeparam>
-        void WriteJsonASCII<T>(in T value, in JsonSerializerSettings settings = null, in bool reverse = false);
+        void WriteJsonASCII<T>(T value, JsonSerializerSettings settings = null, bool reverse = false);
 
         /// <summary>
         /// 写入Json数据
@@ -44,6 +44,6 @@ namespace AIO
         /// <param name="settings">json压缩设置</param>
         /// <param name="reverse">反转</param>
         /// <typeparam name="T">泛型</typeparam>
-        void WriteJsonUnicode<T>(in T value, in JsonSerializerSettings settings = null, in bool reverse = false);
+        void WriteJsonUnicode<T>(T value, JsonSerializerSettings settings = null, bool reverse = false);
     }
 }

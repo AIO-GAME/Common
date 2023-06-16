@@ -6,7 +6,7 @@ namespace AIO
     public partial class BufferByte
     {
         /// <inheritdoc />
-        public void WriteList<T>(in IList<T> value)
+        public void WriteList<T>(IList<T> value)
         {
             if (value is null) throw new ArgumentNullException(nameof(value));
             WriteJsonUTF8(value);

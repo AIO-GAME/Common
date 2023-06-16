@@ -11,13 +11,13 @@ namespace AIO
         /// 写入指定数据类型
         /// </summary>
         /// <param name="value"></param>
-        void WriteByte(in byte value);
+        void WriteByte(byte value);
 
         /// <summary>
         /// 写入指定数据类型
         /// </summary>
         /// <param name="value"></param>
         /// <param name="reverse"></param>
-        void WriteByteArray(in ICollection<byte> value, in bool reverse = false);
+        void WriteByteArray(ICollection<byte> value, bool reverse = false);
     }
 }

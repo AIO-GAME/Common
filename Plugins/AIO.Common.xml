@@ -1685,7 +1685,7 @@
             <param name="offset">开始位置</param>
             <param name="count">获取长度</param>
         </member>
-        <member name="M:AIO.IListExtend.GetCharArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetCharArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <summary>
             从字节数组中提取一个字符串，并将其转换为字符数组。
             </summary>
@@ -1694,7 +1694,7 @@
             <param name="reverse">是否反转字节序。</param>
             <returns>从字节数组中提取出的字符串的字符数组表示形式。</returns>
         </member>
-        <member name="M:AIO.IListExtend.GetBoolArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetBoolArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <summary>
             从字节数组中提取多个Bool，并将其转换为字符数组。
             </summary>
@@ -1703,7 +1703,7 @@
             <param name="reverse">是否反转字节序。</param>
             <returns>从字节数组中提取出的字符串的字符数组表示形式。</returns>
         </member>
-        <member name="M:AIO.IListExtend.GetSByteArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetSByteArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <summary>
             从字节数组中提取多个SByte，并将其转换为字符数组。
             </summary>
@@ -1712,54 +1712,54 @@
             <param name="reverse">是否反转字节序。</param>
             <returns>从字节数组中提取出的字符串的字符数组表示形式。</returns>
         </member>
-        <member name="M:AIO.IListExtend.GetByteArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetByteArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <param name="array">要从中提取字符串的字节数组。</param>
             <param name="index">指向要提取的字符串的第一个字节的索引。</param>
             <param name="reverse">是否反转字节序。</param>
         </member>
-        <member name="M:AIO.IListExtend.GetInt16Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetInt16Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <param name="array">要从中提取字符串的字节数组。</param>
             <param name="index">指向要提取的字符串的第一个字节的索引。</param>
             <param name="reverse">是否反转字节序。</param>
         </member>
-        <member name="M:AIO.IListExtend.GetUInt16Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetUInt16Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <param name="array">要从中提取字符串的字节数组。</param>
             <param name="index">指向要提取的字符串的第一个字节的索引。</param>
             <param name="reverse">是否反转字节序。</param>
         </member>
-        <member name="M:AIO.IListExtend.GetUInt32Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetUInt32Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <param name="array">要从中提取字符串的字节数组。</param>
             <param name="index">指向要提取的字符串的第一个字节的索引。</param>
             <param name="reverse">是否反转字节序。</param>
         </member>
-        <member name="M:AIO.IListExtend.GetInt32Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetInt32Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <param name="array">要从中提取字符串的字节数组。</param>
             <param name="index">指向要提取的字符串的第一个字节的索引。</param>
             <param name="reverse">是否反转字节序。</param>
         </member>
-        <member name="M:AIO.IListExtend.GetUInt64Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetUInt64Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <param name="array">要从中提取字符串的字节数组。</param>
             <param name="index">指向要提取的字符串的第一个字节的索引。</param>
             <param name="reverse">是否反转字节序。</param>
         </member>
-        <member name="M:AIO.IListExtend.GetInt64Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetInt64Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <param name="array">要从中提取字符串的字节数组。</param>
             <param name="index">指向要提取的字符串的第一个字节的索引。</param>
             <param name="reverse">是否反转字节序。</param>
         </member>
-        <member name="M:AIO.IListExtend.GetFloatArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean,System.Boolean@)">
-            <param name="array">要从中提取字符串的字节数组。</param>
-            <param name="index">指向要提取的字符串的第一个字节的索引。</param>
-            <param name="all">全部</param>
-            <param name="reverse">是否反转字节序。</param>
-        </member>
-        <member name="M:AIO.IListExtend.GetDoubleArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetFloatArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean,System.Boolean)">
             <param name="array">要从中提取字符串的字节数组。</param>
             <param name="index">指向要提取的字符串的第一个字节的索引。</param>
             <param name="all">全部</param>
             <param name="reverse">是否反转字节序。</param>
         </member>
-        <member name="M:AIO.IListExtend.GetDecimalArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetDoubleArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean,System.Boolean)">
+            <param name="array">要从中提取字符串的字节数组。</param>
+            <param name="index">指向要提取的字符串的第一个字节的索引。</param>
+            <param name="all">全部</param>
+            <param name="reverse">是否反转字节序。</param>
+        </member>
+        <member name="M:AIO.IListExtend.GetDecimalArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <param name="array">要从中提取字符串的字节数组。</param>
             <param name="index">指向要提取的字符串的第一个字节的索引。</param>
             <param name="reverse">是否反转字节序。</param>
@@ -1768,28 +1768,27 @@
             <param name="array">要从中提取字符串的字节数组。</param>
             <param name="index">指向要提取的字符串的第一个字节的索引。</param>
         </member>
-        <member name="M:AIO.IListExtend.GetStringArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Text.Encoding,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetStringArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Text.Encoding,System.Boolean)">
             <param name="array">要从中提取字符串的字节数组。</param>
             <param name="index">指向要提取的字符串的第一个字节的索引。</param>
             <param name="encoding">格式化</param>
             <param name="reverse">是否反转字节序。</param>
         </member>
-        <member name="M:AIO.IListExtend.GetEnumArray``1(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetEnumArray``1(System.Collections.Generic.IList{System.Byte},System.Int32@)">
             <param name="array">要从中提取字符串的字节数组。</param>
             <param name="index">指向要提取的字符串的第一个字节的索引。</param>
-            <param name="reverse">是否反转字节序。</param>
         </member>
         <member name="M:AIO.IListExtend.GetBool(System.Collections.Generic.IList{System.Byte},System.Int32@)">
             <summary>
             获取 bool 值
             </summary>
         </member>
-        <member name="M:AIO.IListExtend.GetEnum``1(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetEnum``1(System.Collections.Generic.IList{System.Byte},System.Int32@)">
             <summary>
             获取 Enum 值
             </summary>
         </member>
-        <member name="M:AIO.IListExtend.GetChar(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetChar(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <summary>
             获取 Char 值
             </summary>
@@ -1818,7 +1817,7 @@
             <param name="index"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.IListExtend.GetInt16(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetInt16(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <summary>
             
             </summary>
@@ -1827,7 +1826,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.IListExtend.GetUInt16(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetUInt16(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <summary>
             
             </summary>
@@ -1836,7 +1835,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.IListExtend.GetInt32(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetInt32(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <summary>
             
             </summary>
@@ -1845,7 +1844,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.IListExtend.GetUInt32(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetUInt32(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <summary>
             
             </summary>
@@ -1854,7 +1853,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.IListExtend.GetInt64(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetInt64(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <summary>
             
             </summary>
@@ -1863,7 +1862,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.IListExtend.GetUInt64(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetUInt64(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <summary>
             
             </summary>
@@ -1872,18 +1871,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.IListExtend.GetFloat(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="all"></param>
-            <param name="reverse"></param>
-            <returns></returns>
-            <exception cref="T:System.NullReferenceException"></exception>
-        </member>
-        <member name="M:AIO.IListExtend.GetDouble(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetFloat(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean,System.Boolean)">
             <summary>
             
             </summary>
@@ -1894,7 +1882,18 @@
             <returns></returns>
             <exception cref="T:System.NullReferenceException"></exception>
         </member>
-        <member name="M:AIO.IListExtend.GetDecimal(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetDouble(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="all"></param>
+            <param name="reverse"></param>
+            <returns></returns>
+            <exception cref="T:System.NullReferenceException"></exception>
+        </member>
+        <member name="M:AIO.IListExtend.GetDecimal(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <summary>
             
             </summary>
@@ -1903,7 +1902,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.IListExtend.GetString(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Text.Encoding,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetString(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Text.Encoding,System.Boolean)">
             <summary>
             
             </summary>
@@ -1914,7 +1913,7 @@
             <returns></returns>
             <exception cref="T:System.SystemException"></exception>
         </member>
-        <member name="M:AIO.IListExtend.GetStringUTF8(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetStringUTF8(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <summary>
             
             </summary>
@@ -1923,7 +1922,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.IListExtend.GetStringASCII(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetStringASCII(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <summary>
             
             </summary>
@@ -1932,7 +1931,7 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
-        <member name="M:AIO.IListExtend.GetStringUnicode(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IListExtend.GetStringUnicode(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <summary>
             
             </summary>
@@ -3153,12 +3152,12 @@
             数据缓存:容量
             </summary>
         </member>
-        <member name="M:AIO.Buffer.Skip(System.Int32@)">
+        <member name="M:AIO.Buffer.Skip(System.Int32)">
             <summary>
             跳过
             </summary>
         </member>
-        <member name="M:AIO.Buffer.CheckSize(System.Int32@)">
+        <member name="M:AIO.Buffer.CheckSize(System.Int32)">
             <summary>
             检查剩余数量 
             Flase:不满足
@@ -3205,7 +3204,7 @@
             隐式转化为List
             </summary>
         </member>
-        <member name="M:AIO.Buffer`1.#ctor(System.Int32@)">
+        <member name="M:AIO.Buffer`1.#ctor(System.Int32)">
             <summary>
             构建一个指定容量的Buffer
             </summary>
@@ -3215,7 +3214,7 @@
             数据缓存
             </summary>
         </member>
-        <member name="M:AIO.Buffer`1.#ctor(`0[]@)">
+        <member name="M:AIO.Buffer`1.#ctor(`0[])">
             <summary>
             构建一个指定数据的ByteBuffer
             </summary>
@@ -3230,22 +3229,22 @@
             获取有效字节数组
             </summary>
         </member>
-        <member name="M:AIO.Buffer`1.Write(AIO.Buffer{`0}@)">
+        <member name="M:AIO.Buffer`1.Write(AIO.Buffer{`0})">
             <summary> 
             将指定字节缓冲区数据写入当前缓存区
             </summary>
         </member>
-        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.ICollection{`0}@)">
+        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.ICollection{`0})">
             <summary> 
             将指定字节缓冲区数据写入当前缓存区
             </summary>
         </member>
-        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.IList{`0}@,System.Int32@,System.Int32@)">
+        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.IList{`0},System.Int32,System.Int32)">
             <summary>
             写入byte数组(从position开始写入len个)
             </summary>
         </member>
-        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.ICollection{`0}@,System.Int32@,System.Int32@)">
+        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.ICollection{`0},System.Int32,System.Int32)">
             <summary>
             写入byte数组(从position开始写入len个)
             </summary>
@@ -3344,52 +3343,52 @@
         <member name="M:AIO.BufferByte.ReadBool">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadBoolArray(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadBoolArray(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteBool(System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteBool(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteBoolArray(System.Collections.Generic.ICollection{System.Boolean}@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteBoolArray(System.Collections.Generic.ICollection{System.Boolean},System.Boolean)">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.ReadByte">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadByteArray(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadByteArray(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteByte(System.Byte@)">
+        <member name="M:AIO.BufferByte.WriteByte(System.Byte)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteByteArray(System.Collections.Generic.ICollection{System.Byte}@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteByteArray(System.Collections.Generic.ICollection{System.Byte},System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadChar(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadChar(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadCharArray(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadCharArray(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteChar(System.Char@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteChar(System.Char,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteCharArray(System.Collections.Generic.ICollection{System.Char}@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteCharArray(System.Collections.Generic.ICollection{System.Char},System.Boolean)">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.#ctor">
             <inheritdoc/>
         </member>
-        <member name="M:AIO.BufferByte.#ctor(System.Byte[]@)">
+        <member name="M:AIO.BufferByte.#ctor(System.Byte[])">
             <inheritdoc/>
         </member>
-        <member name="M:AIO.BufferByte.#ctor(System.Int32@)">
+        <member name="M:AIO.BufferByte.#ctor(System.Int32)">
             <inheritdoc/>
         </member>
-        <member name="M:AIO.BufferByte.Write(AIO.Buffer{System.Byte}@)">
+        <member name="M:AIO.BufferByte.Write(AIO.Buffer{System.Byte})">
             <inheritdoc />
         </member>
-        <member name="M:AIO.BufferByte.Read(System.Int32@,System.Int32@)">
+        <member name="M:AIO.BufferByte.Read(System.Int32,System.Int32)">
             <summary>
             读取数据
             </summary>
@@ -3397,10 +3396,10 @@
             <param name="count">长度</param>
             <returns>返回数组</returns>
         </member>
-        <member name="M:AIO.BufferByte.Write(System.Collections.Generic.IList{System.Byte}@,System.Int32@,System.Int32@)">
+        <member name="M:AIO.BufferByte.Write(System.Collections.Generic.IList{System.Byte},System.Int32,System.Int32)">
             <inheritdoc />
         </member>
-        <member name="M:AIO.BufferByte.Write(System.Collections.Generic.ICollection{System.Byte}@,System.Int32@,System.Int32@)">
+        <member name="M:AIO.BufferByte.Write(System.Collections.Generic.ICollection{System.Byte},System.Int32,System.Int32)">
             <inheritdoc />
         </member>
         <member name="M:AIO.BufferByte.ToString">
@@ -3426,7 +3425,7 @@
             </summary>
             <param name="buffer">数据</param>
         </member>
-        <member name="M:AIO.BufferByte.WriteDataArray``1(System.Collections.Generic.ICollection{``0}@)">
+        <member name="M:AIO.BufferByte.WriteDataArray``1(System.Collections.Generic.ICollection{``0})">
             <summary>
             读取数据
             </summary>
@@ -3436,130 +3435,130 @@
         <member name="M:AIO.BufferByte.Dispose">
             <inheritdoc/>
         </member>
-        <member name="M:AIO.BufferByte.ReadDecimal(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadDecimal(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadDecimalArray(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadDecimalArray(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteDecimal(System.Decimal@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteDecimal(System.Decimal,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteDecimalArray(System.Collections.Generic.ICollection{System.Decimal}@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteDecimalArray(System.Collections.Generic.ICollection{System.Decimal},System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadDouble(System.Boolean@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadDouble(System.Boolean,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadDoubleArray(System.Boolean@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadDoubleArray(System.Boolean,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteDouble(System.Double@,System.Boolean,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteDouble(System.Double,System.Boolean,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteDoubleArray(System.Collections.Generic.ICollection{System.Double}@,System.Boolean@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteDoubleArray(System.Collections.Generic.ICollection{System.Double},System.Boolean,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadEnum``1(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadEnum``1">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadEnumArray``1(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadEnumArray``1">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteEnum``1(``0@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteEnum``1(``0)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteEnumArray``1(System.Collections.Generic.ICollection{``0}@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteEnumArray``1(System.Collections.Generic.ICollection{``0})">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadFloat(System.Boolean@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadFloat(System.Boolean,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadFloatArray(System.Boolean@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadFloatArray(System.Boolean,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteFloat(System.Single@,System.Boolean,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteFloat(System.Single,System.Boolean,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteFloatArray(System.Collections.Generic.ICollection{System.Single}@,System.Boolean@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteFloatArray(System.Collections.Generic.ICollection{System.Single},System.Boolean,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteCollection``1(System.Collections.Generic.ICollection{``0}@)">
+        <member name="M:AIO.BufferByte.WriteCollection``1(System.Collections.Generic.ICollection{``0})">
             <inheritdoc />
         </member>
         <member name="M:AIO.BufferByte.ReadCollection``1(System.Collections.Generic.ICollection{``0})">
             <inheritdoc />
         </member>
-        <member name="M:AIO.BufferByte.WriteDictionary``2(System.Collections.Generic.IDictionary{``0,``1}@)">
+        <member name="M:AIO.BufferByte.WriteDictionary``2(System.Collections.Generic.IDictionary{``0,``1})">
             <inheritdoc />
         </member>
         <member name="M:AIO.BufferByte.ReadDictionary``2(System.Collections.Generic.IDictionary{``0,``1})">
             <inheritdoc />
         </member>
-        <member name="M:AIO.BufferByte.WriteList``1(System.Collections.Generic.IList{``0}@)">
+        <member name="M:AIO.BufferByte.WriteList``1(System.Collections.Generic.IList{``0})">
             <inheritdoc />
         </member>
         <member name="M:AIO.BufferByte.ReadList``1(System.Collections.Generic.IList{``0})">
             <inheritdoc />
         </member>
-        <member name="M:AIO.BufferByte.ReadInt16(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadInt16(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadInt16Array(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadInt16Array(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteInt16(System.Int16@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteInt16(System.Int16,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteInt16Array(System.Collections.Generic.ICollection{System.Int16}@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteInt16Array(System.Collections.Generic.ICollection{System.Int16},System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadInt32(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadInt32(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadInt32Array(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadInt32Array(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteInt32(System.Int32@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteInt32(System.Int32,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteInt32Array(System.Collections.Generic.ICollection{System.Int32}@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteInt32Array(System.Collections.Generic.ICollection{System.Int32},System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadInt64(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadInt64(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadInt64Array(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadInt64Array(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteInt64Array(System.Collections.Generic.ICollection{System.Int64}@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteInt64Array(System.Collections.Generic.ICollection{System.Int64},System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteInt64(System.Int64@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteInt64(System.Int64,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadJson``1(Newtonsoft.Json.JsonSerializerSettings@,System.Text.Encoding@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadJson``1(Newtonsoft.Json.JsonSerializerSettings,System.Text.Encoding,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadJsonUTF8``1(Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadJsonUTF8``1(Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadJsonASCII``1(Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadJsonASCII``1(Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadJsonUnicode``1(Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadJsonUnicode``1(Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteJson``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Text.Encoding@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteJson``1(``0,Newtonsoft.Json.JsonSerializerSettings,System.Text.Encoding,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteJsonUTF8``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteJsonUTF8``1(``0,Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteJsonASCII``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteJsonASCII``1(``0,Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteJsonUnicode``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteJsonUnicode``1(``0,Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.ReadLen">
@@ -3568,106 +3567,106 @@
         <member name="M:AIO.BufferByte.ReadLenArray">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteLen(System.Int32@)">
+        <member name="M:AIO.BufferByte.WriteLen(System.Int32)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteLen(System.UInt16@)">
+        <member name="M:AIO.BufferByte.WriteLen(System.UInt16)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteLen(System.Int16@)">
+        <member name="M:AIO.BufferByte.WriteLen(System.Int16)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteLen(System.Byte@)">
+        <member name="M:AIO.BufferByte.WriteLen(System.Byte)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteLen(System.SByte@)">
+        <member name="M:AIO.BufferByte.WriteLen(System.SByte)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteLenArray(System.Collections.Generic.ICollection{System.Int32}@)">
+        <member name="M:AIO.BufferByte.WriteLenArray(System.Collections.Generic.ICollection{System.Int32})">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.ReadSByte">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadSByteArray(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadSByteArray(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteSByte(System.SByte@)">
+        <member name="M:AIO.BufferByte.WriteSByte(System.SByte)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteSByteArray(System.Collections.Generic.ICollection{System.SByte}@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteSByteArray(System.Collections.Generic.ICollection{System.SByte},System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadString(System.Text.Encoding@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadString(System.Text.Encoding,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadStringUTF8(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadStringUTF8(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadStringASCII(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadStringASCII(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadStringUnicode(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadStringUnicode(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteString(System.String@,System.Text.Encoding@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteString(System.String,System.Text.Encoding,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteString(System.Text.StringBuilder@,System.Text.Encoding@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteString(System.Text.StringBuilder,System.Text.Encoding,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteStringUTF8(System.String@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteStringUTF8(System.String,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteStringUTF8(System.Text.StringBuilder@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteStringUTF8(System.Text.StringBuilder,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteStringASCII(System.String@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteStringASCII(System.String,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteStringASCII(System.Text.StringBuilder@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteStringASCII(System.Text.StringBuilder,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteStringUnicode(System.String@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteStringUnicode(System.String,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteStringUnicode(System.Text.StringBuilder@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteStringUnicode(System.Text.StringBuilder,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadUInt16(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadUInt16(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteUInt16(System.UInt16@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteUInt16(System.UInt16,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadUInt16Array(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadUInt16Array(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteUInt16Array(System.Collections.Generic.ICollection{System.UInt16}@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteUInt16Array(System.Collections.Generic.ICollection{System.UInt16},System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadUInt32(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadUInt32(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadUInt32Array(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadUInt32Array(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteUInt32(System.UInt32@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteUInt32(System.UInt32,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteUInt32Array(System.Collections.Generic.ICollection{System.UInt32}@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteUInt32Array(System.Collections.Generic.ICollection{System.UInt32},System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadUInt64Array(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadUInt64Array(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteUInt64Array(System.Collections.Generic.ICollection{System.UInt64}@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteUInt64Array(System.Collections.Generic.ICollection{System.UInt64},System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadUInt64(System.Boolean@)">
+        <member name="M:AIO.BufferByte.ReadUInt64(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteUInt64(System.UInt64@,System.Boolean@)">
+        <member name="M:AIO.BufferByte.WriteUInt64(System.UInt64,System.Boolean)">
             <inheritdoc/> 
         </member>
         <member name="T:AIO.BufferRing`1">
@@ -3756,10 +3755,10 @@
             <param name="count">读取长度</param>
             <returns>实际读取长度</returns>
         </member>
-        <member name="M:AIO.BufferRing`1.Write(System.Collections.Generic.ICollection{`0}@)">
+        <member name="M:AIO.BufferRing`1.Write(System.Collections.Generic.ICollection{`0})">
             <inheritdoc />
         </member>
-        <member name="M:AIO.BufferRing`1.Write(System.Collections.Generic.IList{`0}@,System.Int32@,System.Int32@)">
+        <member name="M:AIO.BufferRing`1.Write(System.Collections.Generic.IList{`0},System.Int32,System.Int32)">
             <inheritdoc />
         </member>
         <member name="M:AIO.BufferRing`1.Clear">
@@ -3818,7 +3817,7 @@
             读取 Bool 数据类型
             </summary>
         </member>
-        <member name="M:AIO.IReadBool.ReadBoolArray(System.Boolean@)">
+        <member name="M:AIO.IReadBool.ReadBoolArray(System.Boolean)">
             <summary>
             读取 Bool数组 数据类型
             </summary>
@@ -3836,7 +3835,7 @@
             </summary>
             <returns>数据值</returns>
         </member>
-        <member name="M:AIO.IReadByte.ReadByteArray(System.Boolean@)">
+        <member name="M:AIO.IReadByte.ReadByteArray(System.Boolean)">
             <summary>
             读取 Byte 数组 数据类型
             </summary>
@@ -3848,14 +3847,14 @@
             读取数据
             </summary>
         </member>
-        <member name="M:AIO.IReadChar.ReadChar(System.Boolean@)">
+        <member name="M:AIO.IReadChar.ReadChar(System.Boolean)">
             <summary>
             读取 Char 数据类型
             </summary>
             <param name="reverse">是否反转</param>
             <returns>数据值</returns>
         </member>
-        <member name="M:AIO.IReadChar.ReadCharArray(System.Boolean@)">
+        <member name="M:AIO.IReadChar.ReadCharArray(System.Boolean)">
             <summary>
             读取 Char 数组 数据类型
             </summary>
@@ -3886,14 +3885,14 @@
             <typeparam name="T">泛型</typeparam>
             <returns>值</returns>
         </member>
-        <member name="M:AIO.IReadData.CheckSize(System.Int32@)">
+        <member name="M:AIO.IReadData.CheckSize(System.Int32)">
             <summary>
             检查是否有指定数据长度
             </summary>
             <param name="count">长度</param>
             <returns>Ture:满足 False:不满足</returns>
         </member>
-        <member name="M:AIO.IReadData.Skip(System.Int32@)">
+        <member name="M:AIO.IReadData.Skip(System.Int32)">
             <summary>
             跳过读取指定长度
             </summary>
@@ -3904,14 +3903,14 @@
             读取数据
             </summary>
         </member>
-        <member name="M:AIO.IReadDecimal.ReadDecimal(System.Boolean@)">
+        <member name="M:AIO.IReadDecimal.ReadDecimal(System.Boolean)">
             <summary>
             读取 Decimal 数据类型
             </summary>
             <param name="reverse">是否反转</param>
             <returns>数据值</returns>
         </member>
-        <member name="M:AIO.IReadDecimal.ReadDecimalArray(System.Boolean@)">
+        <member name="M:AIO.IReadDecimal.ReadDecimalArray(System.Boolean)">
             <summary>
             读取 Decimal 数组 数据类型
             </summary>
@@ -3923,7 +3922,7 @@
             读取数据
             </summary>
         </member>
-        <member name="M:AIO.IReadDouble.ReadDouble(System.Boolean@,System.Boolean@)">
+        <member name="M:AIO.IReadDouble.ReadDouble(System.Boolean,System.Boolean)">
             <summary>
             读取 Double 数据类型
             </summary>
@@ -3931,7 +3930,7 @@
             <param name="reverse">是否反转</param>
             <returns>数据值</returns>
         </member>
-        <member name="M:AIO.IReadDouble.ReadDoubleArray(System.Boolean@,System.Boolean@)">
+        <member name="M:AIO.IReadDouble.ReadDoubleArray(System.Boolean,System.Boolean)">
             <summary>
             读取 Double 数组 数据类型
             </summary>
@@ -3944,19 +3943,17 @@
             读取数据
             </summary>
         </member>
-        <member name="M:AIO.IReadEnum.ReadEnum``1(System.Boolean@)">
+        <member name="M:AIO.IReadEnum.ReadEnum``1">
             <summary>
             读取 枚举 数据类型
             </summary>
-            <param name="reverse">是否反转</param>
             <typeparam name="T">枚举类型</typeparam>
             <returns>枚举值</returns>
         </member>
-        <member name="M:AIO.IReadEnum.ReadEnumArray``1(System.Boolean@)">
+        <member name="M:AIO.IReadEnum.ReadEnumArray``1">
             <summary>
             读取 枚举数组 数据类型
             </summary>
-            <param name="reverse">是否反转</param>
             <typeparam name="T">枚举类型</typeparam>
             <returns>枚举值数组</returns>
         </member>
@@ -3965,7 +3962,7 @@
             读取数据
             </summary>
         </member>
-        <member name="M:AIO.IReadFloat.ReadFloatArray(System.Boolean@,System.Boolean@)">
+        <member name="M:AIO.IReadFloat.ReadFloatArray(System.Boolean,System.Boolean)">
             <summary>
             读取 Float 数组 数据类型
             </summary>
@@ -3973,7 +3970,7 @@
             <param name="reverse">是否反转</param>
             <returns>数据值</returns>
         </member>
-        <member name="M:AIO.IReadFloat.ReadFloat(System.Boolean@,System.Boolean@)">
+        <member name="M:AIO.IReadFloat.ReadFloat(System.Boolean,System.Boolean)">
             <summary>
             读取 Float 数据类型
             </summary>
@@ -4016,14 +4013,14 @@
             读取数据
             </summary>
         </member>
-        <member name="M:AIO.IReadInt16.ReadInt16(System.Boolean@)">
+        <member name="M:AIO.IReadInt16.ReadInt16(System.Boolean)">
             <summary>
             读取 Int16 数据类型
             </summary>
             <param name="reverse">是否反转</param>
             <returns>数据值</returns>
         </member>
-        <member name="M:AIO.IReadInt16.ReadInt16Array(System.Boolean@)">
+        <member name="M:AIO.IReadInt16.ReadInt16Array(System.Boolean)">
             <summary>
             读取 Int16 数据类型
             </summary>
@@ -4035,14 +4032,14 @@
             读取数据
             </summary>
         </member>
-        <member name="M:AIO.IReadInt32.ReadInt32(System.Boolean@)">
+        <member name="M:AIO.IReadInt32.ReadInt32(System.Boolean)">
             <summary>
             读取 Int32 数据类型
             </summary>
             <param name="reverse">是否反转</param>
             <returns>数据值</returns>
         </member>
-        <member name="M:AIO.IReadInt32.ReadInt32Array(System.Boolean@)">
+        <member name="M:AIO.IReadInt32.ReadInt32Array(System.Boolean)">
             <summary>
             读取 Int32 数组 数据类型
             </summary>
@@ -4054,14 +4051,14 @@
             读取数据
             </summary>
         </member>
-        <member name="M:AIO.IReadInt64.ReadInt64(System.Boolean@)">
+        <member name="M:AIO.IReadInt64.ReadInt64(System.Boolean)">
             <summary>
             读取 Int64 数据类型
             </summary>
             <param name="reverse">是否反转</param>
             <returns>数据值</returns>
         </member>
-        <member name="M:AIO.IReadInt64.ReadInt64Array(System.Boolean@)">
+        <member name="M:AIO.IReadInt64.ReadInt64Array(System.Boolean)">
             <summary>
             读取 Int64 数组 数据类型
             </summary>
@@ -4073,7 +4070,7 @@
             读取数据
             </summary>
         </member>
-        <member name="M:AIO.IReadJson.ReadJson``1(Newtonsoft.Json.JsonSerializerSettings@,System.Text.Encoding@,System.Boolean@)">
+        <member name="M:AIO.IReadJson.ReadJson``1(Newtonsoft.Json.JsonSerializerSettings,System.Text.Encoding,System.Boolean)">
             <summary>
             读取Json数据
             </summary>
@@ -4083,7 +4080,7 @@
             <typeparam name="T">数据泛型</typeparam>
             <returns>数据值</returns>
         </member>
-        <member name="M:AIO.IReadJson.ReadJsonUTF8``1(Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+        <member name="M:AIO.IReadJson.ReadJsonUTF8``1(Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
             <summary>
             读取Json数据
             </summary>
@@ -4092,7 +4089,7 @@
             <typeparam name="T">数据泛型</typeparam>
             <returns>数据值</returns>
         </member>
-        <member name="M:AIO.IReadJson.ReadJsonASCII``1(Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+        <member name="M:AIO.IReadJson.ReadJsonASCII``1(Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
             <summary>
             读取Json数据
             </summary>
@@ -4101,7 +4098,7 @@
             <typeparam name="T">数据泛型</typeparam>
             <returns>数据值</returns>
         </member>
-        <member name="M:AIO.IReadJson.ReadJsonUnicode``1(Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+        <member name="M:AIO.IReadJson.ReadJsonUnicode``1(Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
             <summary>
             读取Json数据
             </summary>
@@ -4141,7 +4138,7 @@
             </summary>
             <returns>返回数组</returns>
         </member>
-        <member name="M:AIO.IReadSByte.ReadSByteArray(System.Boolean@)">
+        <member name="M:AIO.IReadSByte.ReadSByteArray(System.Boolean)">
             <summary>
             读取 Sbyte 数组 数据类型
             </summary>
@@ -4153,28 +4150,28 @@
             读取 数据 String
             </summary>
         </member>
-        <member name="M:AIO.IReadString.ReadStringUTF8(System.Boolean@)">
+        <member name="M:AIO.IReadString.ReadStringUTF8(System.Boolean)">
             <summary>
             读取字符串
             </summary>
             <param name="reverse">是否反转</param>
             <returns>字符串</returns>
         </member>
-        <member name="M:AIO.IReadString.ReadStringASCII(System.Boolean@)">
+        <member name="M:AIO.IReadString.ReadStringASCII(System.Boolean)">
             <summary>
             读取字符串
             </summary>
             <param name="reverse">是否反转</param>
             <returns>字符串</returns>
         </member>
-        <member name="M:AIO.IReadString.ReadStringUnicode(System.Boolean@)">
+        <member name="M:AIO.IReadString.ReadStringUnicode(System.Boolean)">
             <summary>
             读取字符串
             </summary>
             <param name="reverse">是否反转</param>
             <returns>字符串</returns>
         </member>
-        <member name="M:AIO.IReadString.ReadString(System.Text.Encoding@,System.Boolean@)">
+        <member name="M:AIO.IReadString.ReadString(System.Text.Encoding,System.Boolean)">
             <summary>
             读取字符串
             </summary>
@@ -4187,14 +4184,14 @@
             读取数据
             </summary>
         </member>
-        <member name="M:AIO.IReadUInt16.ReadUInt16(System.Boolean@)">
+        <member name="M:AIO.IReadUInt16.ReadUInt16(System.Boolean)">
             <summary>
             读取 UInt16 数据类型
             </summary>
             <param name="reverse">是否反转</param>
             <returns>数据值</returns>
         </member>
-        <member name="M:AIO.IReadUInt16.ReadUInt16Array(System.Boolean@)">
+        <member name="M:AIO.IReadUInt16.ReadUInt16Array(System.Boolean)">
             <summary>
             读取 UInt16 数组 数据类型
             </summary>
@@ -4206,14 +4203,14 @@
             读取数据
             </summary>
         </member>
-        <member name="M:AIO.IReadUInt32.ReadUInt32(System.Boolean@)">
+        <member name="M:AIO.IReadUInt32.ReadUInt32(System.Boolean)">
             <summary>
             读取 UInt32 数据类型
             </summary>
             <param name="reverse">是否反转</param>
             <returns>数据值</returns>
         </member>
-        <member name="M:AIO.IReadUInt32.ReadUInt32Array(System.Boolean@)">
+        <member name="M:AIO.IReadUInt32.ReadUInt32Array(System.Boolean)">
             <summary>
             读取 UInt32 数组 数据类型
             </summary>
@@ -4225,14 +4222,14 @@
             读取数据
             </summary>
         </member>
-        <member name="M:AIO.IReadUInt64.ReadUInt64(System.Boolean@)">
+        <member name="M:AIO.IReadUInt64.ReadUInt64(System.Boolean)">
             <summary>
             读取 UInt64 数据类型
             </summary>
             <param name="reverse">是否反转</param>
             <returns>数据值</returns>
         </member>
-        <member name="M:AIO.IReadUInt64.ReadUInt64Array(System.Boolean@)">
+        <member name="M:AIO.IReadUInt64.ReadUInt64Array(System.Boolean)">
             <summary>
             读取 UInt64 数组 数据类型
             </summary>
@@ -4309,12 +4306,12 @@
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteBool.WriteBool(System.Boolean@)">
+        <member name="M:AIO.IWriteBool.WriteBool(System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteBool.WriteBoolArray(System.Collections.Generic.ICollection{System.Boolean}@,System.Boolean@)">
+        <member name="M:AIO.IWriteBool.WriteBoolArray(System.Collections.Generic.ICollection{System.Boolean},System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>
@@ -4326,13 +4323,13 @@
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteByte.WriteByte(System.Byte@)">
+        <member name="M:AIO.IWriteByte.WriteByte(System.Byte)">
             <summary>
             写入指定数据类型
             </summary>
             <param name="value"></param>
         </member>
-        <member name="M:AIO.IWriteByte.WriteByteArray(System.Collections.Generic.ICollection{System.Byte}@,System.Boolean@)">
+        <member name="M:AIO.IWriteByte.WriteByteArray(System.Collections.Generic.ICollection{System.Byte},System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>
@@ -4344,12 +4341,12 @@
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteChar.WriteChar(System.Char@,System.Boolean@)">
+        <member name="M:AIO.IWriteChar.WriteChar(System.Char,System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteChar.WriteCharArray(System.Collections.Generic.ICollection{System.Char}@,System.Boolean@)">
+        <member name="M:AIO.IWriteChar.WriteCharArray(System.Collections.Generic.ICollection{System.Char},System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>
@@ -4365,7 +4362,7 @@
             </summary>
             <param name="buffer">数据</param>
         </member>
-        <member name="M:AIO.IWriteData.WriteDataArray``1(System.Collections.Generic.ICollection{``0}@)">
+        <member name="M:AIO.IWriteData.WriteDataArray``1(System.Collections.Generic.ICollection{``0})">
             <summary>
             读取数据
             </summary>
@@ -4377,12 +4374,12 @@
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteDecimal.WriteDecimal(System.Decimal@,System.Boolean@)">
+        <member name="M:AIO.IWriteDecimal.WriteDecimal(System.Decimal,System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteDecimal.WriteDecimalArray(System.Collections.Generic.ICollection{System.Decimal}@,System.Boolean@)">
+        <member name="M:AIO.IWriteDecimal.WriteDecimalArray(System.Collections.Generic.ICollection{System.Decimal},System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>
@@ -4392,12 +4389,12 @@
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteDouble.WriteDouble(System.Double@,System.Boolean,System.Boolean@)">
+        <member name="M:AIO.IWriteDouble.WriteDouble(System.Double,System.Boolean,System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteDouble.WriteDoubleArray(System.Collections.Generic.ICollection{System.Double}@,System.Boolean@,System.Boolean@)">
+        <member name="M:AIO.IWriteDouble.WriteDoubleArray(System.Collections.Generic.ICollection{System.Double},System.Boolean,System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>
@@ -4407,12 +4404,12 @@
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteEnum.WriteEnum``1(``0@,System.Boolean@)">
+        <member name="M:AIO.IWriteEnum.WriteEnum``1(``0)">
             <summary>
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteEnum.WriteEnumArray``1(System.Collections.Generic.ICollection{``0}@,System.Boolean@)">
+        <member name="M:AIO.IWriteEnum.WriteEnumArray``1(System.Collections.Generic.ICollection{``0})">
             <summary>
             写入指定数据类型
             </summary>
@@ -4422,12 +4419,12 @@
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteFloat.WriteFloat(System.Single@,System.Boolean,System.Boolean@)">
+        <member name="M:AIO.IWriteFloat.WriteFloat(System.Single,System.Boolean,System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteFloat.WriteFloatArray(System.Collections.Generic.ICollection{System.Single}@,System.Boolean@,System.Boolean@)">
+        <member name="M:AIO.IWriteFloat.WriteFloatArray(System.Collections.Generic.ICollection{System.Single},System.Boolean,System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>
@@ -4437,7 +4434,7 @@
             写入字典
             </summary>
         </member>
-        <member name="M:AIO.IWriteICollection.WriteCollection``1(System.Collections.Generic.ICollection{``0}@)">
+        <member name="M:AIO.IWriteICollection.WriteCollection``1(System.Collections.Generic.ICollection{``0})">
             <summary>
             写入字典
             </summary>
@@ -4447,7 +4444,7 @@
             写入字典
             </summary>
         </member>
-        <member name="M:AIO.IWriteIDictionary.WriteDictionary``2(System.Collections.Generic.IDictionary{``0,``1}@)">
+        <member name="M:AIO.IWriteIDictionary.WriteDictionary``2(System.Collections.Generic.IDictionary{``0,``1})">
             <summary>
             写入字典
             </summary>
@@ -4457,7 +4454,7 @@
             写入字典
             </summary>
         </member>
-        <member name="M:AIO.IWriteIList.WriteList``1(System.Collections.Generic.IList{``0}@)">
+        <member name="M:AIO.IWriteIList.WriteList``1(System.Collections.Generic.IList{``0})">
             <summary>
             写入字典
             </summary>
@@ -4467,12 +4464,12 @@
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteInt16.WriteInt16(System.Int16@,System.Boolean@)">
+        <member name="M:AIO.IWriteInt16.WriteInt16(System.Int16,System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteInt16.WriteInt16Array(System.Collections.Generic.ICollection{System.Int16}@,System.Boolean@)">
+        <member name="M:AIO.IWriteInt16.WriteInt16Array(System.Collections.Generic.ICollection{System.Int16},System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>
@@ -4482,12 +4479,12 @@
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteInt32.WriteInt32(System.Int32@,System.Boolean@)">
+        <member name="M:AIO.IWriteInt32.WriteInt32(System.Int32,System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteInt32.WriteInt32Array(System.Collections.Generic.ICollection{System.Int32}@,System.Boolean@)">
+        <member name="M:AIO.IWriteInt32.WriteInt32Array(System.Collections.Generic.ICollection{System.Int32},System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>
@@ -4497,12 +4494,12 @@
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteInt64.WriteInt64(System.Int64@,System.Boolean@)">
+        <member name="M:AIO.IWriteInt64.WriteInt64(System.Int64,System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteInt64.WriteInt64Array(System.Collections.Generic.ICollection{System.Int64}@,System.Boolean@)">
+        <member name="M:AIO.IWriteInt64.WriteInt64Array(System.Collections.Generic.ICollection{System.Int64},System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>
@@ -4512,7 +4509,7 @@
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteJson.WriteJson``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Text.Encoding@,System.Boolean@)">
+        <member name="M:AIO.IWriteJson.WriteJson``1(``0,Newtonsoft.Json.JsonSerializerSettings,System.Text.Encoding,System.Boolean)">
             <summary>
             写入Json数据
             </summary>
@@ -4522,7 +4519,7 @@
             <param name="reverse">反转</param>
             <typeparam name="T">泛型</typeparam>
         </member>
-        <member name="M:AIO.IWriteJson.WriteJsonUTF8``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+        <member name="M:AIO.IWriteJson.WriteJsonUTF8``1(``0,Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
             <summary>
             写入Json数据
             </summary>
@@ -4531,7 +4528,7 @@
             <param name="reverse">反转</param>
             <typeparam name="T">泛型</typeparam>
         </member>
-        <member name="M:AIO.IWriteJson.WriteJsonASCII``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+        <member name="M:AIO.IWriteJson.WriteJsonASCII``1(``0,Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
             <summary>
             写入Json数据
             </summary>
@@ -4540,7 +4537,7 @@
             <param name="reverse">反转</param>
             <typeparam name="T">泛型</typeparam>
         </member>
-        <member name="M:AIO.IWriteJson.WriteJsonUnicode``1(``0@,Newtonsoft.Json.JsonSerializerSettings@,System.Boolean@)">
+        <member name="M:AIO.IWriteJson.WriteJsonUnicode``1(``0,Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
             <summary>
             写入Json数据
             </summary>
@@ -4554,42 +4551,42 @@
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteLength.WriteLen(System.Byte@)">
+        <member name="M:AIO.IWriteLength.WriteLen(System.Byte)">
             <summary> 写入一个长度, 0至512M </summary>
             原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
             1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
             01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
             001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
         </member>
-        <member name="M:AIO.IWriteLength.WriteLen(System.SByte@)">
+        <member name="M:AIO.IWriteLength.WriteLen(System.SByte)">
             <summary> 写入一个长度, 0至512M </summary>
             原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
             1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
             01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
             001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
         </member>
-        <member name="M:AIO.IWriteLength.WriteLen(System.UInt16@)">
+        <member name="M:AIO.IWriteLength.WriteLen(System.UInt16)">
             <summary> 写入一个长度, 0至512M </summary>
             原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
             1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
             01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
             001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
         </member>
-        <member name="M:AIO.IWriteLength.WriteLen(System.Int16@)">
+        <member name="M:AIO.IWriteLength.WriteLen(System.Int16)">
             <summary> 写入一个长度, 0至512M </summary>
             原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
             1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
             01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
             001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
         </member>
-        <member name="M:AIO.IWriteLength.WriteLen(System.Int32@)">
+        <member name="M:AIO.IWriteLength.WriteLen(System.Int32)">
             <summary> 写入一个长度, 0至512M </summary>
             原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)
             1xx 开头:长度值占1个字节,且值只能是剩下的 07=(08-1) 位能表示的范围,即:0~(2^07-1)=0~127
             01x 开头:长度值占2个字节,且值只能是剩下的 14=(16-2) 位能表示的范围,即:0~(2^14-1)=0~163,83
             001 开头:长度值占4个字节,且值只能是剩下的 29=(32-3) 位能表示的范围,即:0~(2^29-1)=0~536,870,91
         </member>
-        <member name="M:AIO.IWriteLength.WriteLenArray(System.Collections.Generic.ICollection{System.Int32}@)">
+        <member name="M:AIO.IWriteLength.WriteLenArray(System.Collections.Generic.ICollection{System.Int32})">
             <summary>
             写入Sbyte数组
             </summary>
@@ -4600,13 +4597,13 @@
             写入数据 SByte Array
             </summary>
         </member>
-        <member name="M:AIO.IWriteSByte.WriteSByte(System.SByte@)">
+        <member name="M:AIO.IWriteSByte.WriteSByte(System.SByte)">
             <summary>
             写入Sbyte数组
             </summary>
             <param name="value">输入源</param>
         </member>
-        <member name="M:AIO.IWriteSByte.WriteSByteArray(System.Collections.Generic.ICollection{System.SByte}@,System.Boolean@)">
+        <member name="M:AIO.IWriteSByte.WriteSByteArray(System.Collections.Generic.ICollection{System.SByte},System.Boolean)">
             <summary>
             写入Sbyte数组
             </summary>
@@ -4618,7 +4615,7 @@
             写入数据 String
             </summary>
         </member>
-        <member name="M:AIO.IWriteString.WriteString(System.String@,System.Text.Encoding@,System.Boolean@)">
+        <member name="M:AIO.IWriteString.WriteString(System.String,System.Text.Encoding,System.Boolean)">
             <summary>
             写入字符串
             </summary>
@@ -4626,7 +4623,7 @@
             <param name="encoding">编码</param>
             <param name="reverse">是否反转</param>
         </member>
-        <member name="M:AIO.IWriteString.WriteString(System.Text.StringBuilder@,System.Text.Encoding@,System.Boolean@)">
+        <member name="M:AIO.IWriteString.WriteString(System.Text.StringBuilder,System.Text.Encoding,System.Boolean)">
             <summary>
             写入字符串
             </summary>
@@ -4634,42 +4631,42 @@
             <param name="encoding">编码</param>
             <param name="reverse">是否反转</param>
         </member>
-        <member name="M:AIO.IWriteString.WriteStringUTF8(System.String@,System.Boolean@)">
+        <member name="M:AIO.IWriteString.WriteStringUTF8(System.String,System.Boolean)">
             <summary>
             写入字符串
             </summary>
             <param name="value">输入值</param>
             <param name="reverse">是否反转</param>
         </member>
-        <member name="M:AIO.IWriteString.WriteStringUTF8(System.Text.StringBuilder@,System.Boolean@)">
+        <member name="M:AIO.IWriteString.WriteStringUTF8(System.Text.StringBuilder,System.Boolean)">
             <summary>
             写入字符串
             </summary>
             <param name="value">输入值</param>
             <param name="reverse">是否反转</param>
         </member>
-        <member name="M:AIO.IWriteString.WriteStringASCII(System.String@,System.Boolean@)">
+        <member name="M:AIO.IWriteString.WriteStringASCII(System.String,System.Boolean)">
             <summary>
             写入字符串
             </summary>
             <param name="value">输入值</param>
             <param name="reverse">是否反转</param>
         </member>
-        <member name="M:AIO.IWriteString.WriteStringASCII(System.Text.StringBuilder@,System.Boolean@)">
+        <member name="M:AIO.IWriteString.WriteStringASCII(System.Text.StringBuilder,System.Boolean)">
             <summary>
             写入字符串
             </summary>
             <param name="value">输入值</param>
             <param name="reverse">是否反转</param>
         </member>
-        <member name="M:AIO.IWriteString.WriteStringUnicode(System.String@,System.Boolean@)">
+        <member name="M:AIO.IWriteString.WriteStringUnicode(System.String,System.Boolean)">
             <summary>
             写入字符串
             </summary>
             <param name="value">输入值</param>
             <param name="reverse">是否反转</param>
         </member>
-        <member name="M:AIO.IWriteString.WriteStringUnicode(System.Text.StringBuilder@,System.Boolean@)">
+        <member name="M:AIO.IWriteString.WriteStringUnicode(System.Text.StringBuilder,System.Boolean)">
             <summary>
             写入字符串
             </summary>
@@ -4681,12 +4678,12 @@
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteUInt16.WriteUInt16(System.UInt16@,System.Boolean@)">
+        <member name="M:AIO.IWriteUInt16.WriteUInt16(System.UInt16,System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteUInt16.WriteUInt16Array(System.Collections.Generic.ICollection{System.UInt16}@,System.Boolean@)">
+        <member name="M:AIO.IWriteUInt16.WriteUInt16Array(System.Collections.Generic.ICollection{System.UInt16},System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>
@@ -4696,12 +4693,12 @@
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteUInt32.WriteUInt32(System.UInt32@,System.Boolean@)">
+        <member name="M:AIO.IWriteUInt32.WriteUInt32(System.UInt32,System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteUInt32.WriteUInt32Array(System.Collections.Generic.ICollection{System.UInt32}@,System.Boolean@)">
+        <member name="M:AIO.IWriteUInt32.WriteUInt32Array(System.Collections.Generic.ICollection{System.UInt32},System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>
@@ -4711,12 +4708,12 @@
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteUInt64.WriteUInt64(System.UInt64@,System.Boolean@)">
+        <member name="M:AIO.IWriteUInt64.WriteUInt64(System.UInt64,System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteUInt64.WriteUInt64Array(System.Collections.Generic.ICollection{System.UInt64}@,System.Boolean@)">
+        <member name="M:AIO.IWriteUInt64.WriteUInt64Array(System.Collections.Generic.ICollection{System.UInt64},System.Boolean)">
             <summary>
             写入指定数据类型
             </summary>

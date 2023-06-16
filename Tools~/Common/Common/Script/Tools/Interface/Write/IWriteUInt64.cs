@@ -10,11 +10,11 @@ namespace AIO
         /// <summary>
         /// 写入指定数据类型
         /// </summary>
-        void WriteUInt64(in ulong value, in bool reverse = false);
+        void WriteUInt64(ulong value, bool reverse = false);
 
         /// <summary>
         /// 写入指定数据类型
         /// </summary>
-        void WriteUInt64Array(in ICollection<ulong> value, in bool reverse = false);
+        void WriteUInt64Array(ICollection<ulong> value, bool reverse = false);
     }
 }

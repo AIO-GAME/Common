@@ -6,30 +6,31 @@ namespace AIO
     public partial class BufferByte
     {
         /// <inheritdoc/> 
-        public T ReadEnum<T>(in bool reverse = false) where T : struct, Enum
+        public T ReadEnum<T>() where T : struct, Enum
         {
-            return (T)Enum.Parse(typeof(T), Arrays.GetInt32(ref ReadIndex, reverse).ToString());
+            return (T)Enum.Parse(typeof(T), ReadInt32().ToString());
         }
 
         /// <inheritdoc/> 
-        public T[] ReadEnumArray<T>(in bool reverse = false) where T : struct, Enum
+        public T[] ReadEnumArray<T>() where T : struct, Enum
         {
-            return Arrays.GetEnumArray<T>(ref ReadIndex, reverse);
+            var list = new T[ReadLen()];
+            for (var i = 0; i < list.Length; i++) list[i] = (T)Enum.Parse(typeof(T), ReadInt32().ToString());
+            return list;
         }
 
         /// <inheritdoc/> 
-        public void WriteEnum<T>(in T value, in bool reverse = false) where T : struct, Enum
+        public void WriteEnum<T>(T value) where T : struct, Enum
         {
-            AutomaticExpansion(4);
-            Arrays.SetInt32(ref WriteIndex, value.GetHashCode(), reverse);
+            WriteInt32(value.GetHashCode());
         }
 
         /// <inheritdoc/> 
-        public void WriteEnumArray<T>(in ICollection<T> value, in bool reverse = false) where T : struct, Enum
+        public void WriteEnumArray<T>(ICollection<T> value) where T : struct, Enum
         {
             WriteLen(value.Count);
             AutomaticExpansion(value.Count * 4);
-            foreach (var item in value) Arrays.SetInt32(ref WriteIndex, item.GetHashCode(), reverse);
+            foreach (var item in value) WriteInt32(item.GetHashCode());
         }
     }
 }

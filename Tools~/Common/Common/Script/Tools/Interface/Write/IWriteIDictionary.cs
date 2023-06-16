@@ -10,6 +10,6 @@ namespace AIO
         /// <summary>
         /// 写入字典
         /// </summary>
-        void WriteDictionary<K, V>(in IDictionary<K, V> value);
+        void WriteDictionary<K, V>(IDictionary<K, V> value);
     }
 }
