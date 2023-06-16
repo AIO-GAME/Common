@@ -10,13 +10,13 @@ namespace AIO
         /// </summary>
         /// <param name="reverse">是否反转</param>
         /// <returns>数据值</returns>
-        ulong ReadUInt64(in bool reverse = false);
+        ulong ReadUInt64(bool reverse = false);
 
         /// <summary>
         /// 读取 UInt64 数组 数据类型
         /// </summary>
         /// <param name="reverse">是否反转</param>
         /// <returns>数据值</returns>
-        ulong[] ReadUInt64Array(in bool reverse = false);
+        ulong[] ReadUInt64Array(bool reverse = false);
     }
 }

@@ -212,14 +212,14 @@ namespace AIO
         }
 
         /// <inheritdoc />
-        public override void Write(in ICollection<T> buffer)
+        public override void Write(ICollection<T> buffer)
         {
             if (buffer == null) return;
             Write(buffer, 0, buffer.Count);
         }
 
         /// <inheritdoc />
-        public override void Write(in IList<T> buffer, in int offset, in int count)
+        public override void Write(IList<T> buffer, int offset, int count)
         {
             if (buffer == null) return;
             var alreadyCopyCount = 0;

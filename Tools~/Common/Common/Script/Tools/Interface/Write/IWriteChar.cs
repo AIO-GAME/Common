@@ -10,11 +10,11 @@ namespace AIO
         /// <summary>
         /// 写入指定数据类型
         /// </summary>
-        void WriteChar(in char value, in bool reverse = false);
+        void WriteChar(char value, bool reverse = false);
 
         /// <summary>
         /// 写入指定数据类型
         /// </summary>
-        void WriteCharArray(in ICollection<char> value, in bool reverse = false);
+        void WriteCharArray(ICollection<char> value, bool reverse = false);
     }
 }

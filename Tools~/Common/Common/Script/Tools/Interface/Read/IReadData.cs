@@ -51,12 +51,12 @@ namespace AIO
         /// </summary>
         /// <param name="count">长度</param>
         /// <returns>Ture:满足 False:不满足</returns>
-        bool CheckSize(in int count);
+        bool CheckSize(int count);
 
         /// <summary>
         /// 跳过读取指定长度
         /// </summary>
         /// <param name="count">长度</param>
-        void Skip(in int count);
+        void Skip(int count);
     }
 }

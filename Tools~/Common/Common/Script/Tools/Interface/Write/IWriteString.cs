@@ -13,7 +13,7 @@ namespace AIO
         /// <param name="value">输入值</param>
         /// <param name="encoding">编码</param>
         /// <param name="reverse">是否反转</param>
-        void WriteString(in string value, in Encoding encoding = null, in bool reverse = false);
+        void WriteString(string value, Encoding encoding = null, bool reverse = false);
 
         /// <summary>
         /// 写入字符串
@@ -21,48 +21,48 @@ namespace AIO
         /// <param name="value">输入值</param>
         /// <param name="encoding">编码</param>
         /// <param name="reverse">是否反转</param>
-        void WriteString(in StringBuilder value, in Encoding encoding = null, in bool reverse = false);
+        void WriteString(StringBuilder value, Encoding encoding = null, bool reverse = false);
 
         /// <summary>
         /// 写入字符串
         /// </summary>
         /// <param name="value">输入值</param>
         /// <param name="reverse">是否反转</param>
-        void WriteStringUTF8(in string value, in bool reverse = false);
+        void WriteStringUTF8(string value, bool reverse = false);
 
         /// <summary>
         /// 写入字符串
         /// </summary>
         /// <param name="value">输入值</param>
         /// <param name="reverse">是否反转</param>
-        void WriteStringUTF8(in StringBuilder value, in bool reverse = false);
+        void WriteStringUTF8(StringBuilder value, bool reverse = false);
 
         /// <summary>
         /// 写入字符串
         /// </summary>
         /// <param name="value">输入值</param>
         /// <param name="reverse">是否反转</param>
-        void WriteStringASCII(in string value, in bool reverse = false);
+        void WriteStringASCII(string value, bool reverse = false);
 
         /// <summary>
         /// 写入字符串
         /// </summary>
         /// <param name="value">输入值</param>
         /// <param name="reverse">是否反转</param>
-        void WriteStringASCII(in StringBuilder value, in bool reverse = false);
+        void WriteStringASCII(StringBuilder value, bool reverse = false);
 
         /// <summary>
         /// 写入字符串
         /// </summary>
         /// <param name="value">输入值</param>
         /// <param name="reverse">是否反转</param>
-        void WriteStringUnicode(in string value, in bool reverse = false);
+        void WriteStringUnicode(string value, bool reverse = false);
 
         /// <summary>
         /// 写入字符串
         /// </summary>
         /// <param name="value">输入值</param>
         /// <param name="reverse">是否反转</param>
-        void WriteStringUnicode(in StringBuilder value, in bool reverse = false);
+        void WriteStringUnicode(StringBuilder value, bool reverse = false);
     }
 }

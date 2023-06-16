@@ -26,22 +26,22 @@ namespace AIO
         }
 
         /// <inheritdoc/>
-        public BufferByte(in byte[] bytes) : base(bytes)
+        public BufferByte(byte[] bytes) : base(bytes)
         {
         }
 
         /// <inheritdoc/>
-        public BufferByte(in int capacity) : base(capacity)
+        public BufferByte(int capacity) : base(capacity)
         {
         }
 
-        private void AutomaticExpansion(in int place)
+        private void AutomaticExpansion(int place)
         {
             if (Arrays.Length <= WriteIndex + place) Capacity = WriteIndex + place;
         }
 
         /// <inheritdoc />
-        public override void Write(in Buffer<byte> data)
+        public override void Write(Buffer<byte> data)
         {
             WriteByteArray(data);
         }
@@ -52,15 +52,16 @@ namespace AIO
         /// <param name="start">开始下标</param>
         /// <param name="count">长度</param>
         /// <returns>返回数组</returns>
-        public BufferByte Read(in int start, in int count)
+        public BufferByte Read(int start, int count)
         {
             if (count <= 0) return new BufferByte();
             if (start + count > WriteIndex)
             {
                 throw new Exception(
                     string.Format("数组越界: start + count > source length -> {0} + {1} = {2}",
-                    start, count, WriteIndex));
+                        start, count, WriteIndex));
             }
+
             var buffer = new byte[count];
             Array.ConstrainedCopy(Arrays, start, buffer, 0, count);
             Array.Reverse(buffer);
@@ -68,13 +69,13 @@ namespace AIO
         }
 
         /// <inheritdoc />
-        public override void Write(in IList<byte> bytes, in int pos, in int len)
+        public override void Write(IList<byte> bytes, int pos, int len)
         {
             WriteByteArray(bytes);
         }
 
         /// <inheritdoc />
-        public override void Write(in ICollection<byte> bytes, in int pos, in int len)
+        public override void Write(ICollection<byte> bytes, int pos, int len)
         {
             WriteByteArray(bytes);
         }
@@ -128,7 +129,7 @@ namespace AIO
         /// </summary>
         /// <typeparam name="T">泛型</typeparam>
         /// <returns>值</returns>
-        public void WriteDataArray<T>(in ICollection<T> collection) where T : IBinSerialize, new()
+        public void WriteDataArray<T>(ICollection<T> collection) where T : IBinSerialize, new()
         {
             if (collection == null) throw new ArgumentNullException(nameof(collection));
             WriteLen(collection.Count);

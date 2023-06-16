@@ -16,6 +16,6 @@ namespace AIO
         /// </summary>
         /// <param name="reverse">是否反转</param>
         /// <returns>数据值</returns>
-        byte[] ReadByteArray(in bool reverse = false);
+        byte[] ReadByteArray(bool reverse = false);
     }
 }

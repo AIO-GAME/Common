@@ -6,7 +6,7 @@ namespace AIO
     public partial class BufferByte
     {
         /// <inheritdoc />
-        public void WriteDictionary<K, V>(in IDictionary<K, V> value)
+        public void WriteDictionary<K, V>(IDictionary<K, V> value)
         {
             if (value is null) throw new ArgumentNullException(nameof(value));
             WriteJsonUTF8(value);

@@ -10,6 +10,6 @@ namespace AIO
         /// <summary>
         /// 写入字典
         /// </summary>
-        void WriteList<T>(in IList<T> value);
+        void WriteList<T>(IList<T> value);
     }
 }

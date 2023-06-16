@@ -16,6 +16,6 @@ namespace AIO
         /// </summary>
         /// <param name="reverse">是否反转</param>
         /// <returns>返回数组</returns>
-        sbyte[] ReadSByteArray(in bool reverse = false);
+        sbyte[] ReadSByteArray(bool reverse = false);
     }
 }

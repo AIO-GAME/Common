@@ -11,11 +11,11 @@ namespace AIO
         /// <summary>
         /// 写入指定数据类型
         /// </summary>
-        void WriteEnum<T>(in T value, in bool reverse = false) where T : struct, Enum;
+        void WriteEnum<T>(T value) where T : struct, Enum;
 
         /// <summary>
         /// 写入指定数据类型
         /// </summary>
-        void WriteEnumArray<T>(in ICollection<T> value, in bool reverse = false) where T : struct, Enum;
+        void WriteEnumArray<T>(ICollection<T> value) where T : struct, Enum;
     }
 }

@@ -11,20 +11,20 @@ namespace AIO
         }
 
         /// <inheritdoc/> 
-        public sbyte[] ReadSByteArray(in bool reverse = false)
+        public sbyte[] ReadSByteArray(bool reverse = false)
         {
             return Arrays.GetSByteArray(ref ReadIndex, reverse);
         }
 
         /// <inheritdoc/> 
-        public void WriteSByte(in sbyte value)
+        public void WriteSByte(sbyte value)
         {
             AutomaticExpansion(1);
             Arrays[WriteIndex++] = (byte)value;
         }
 
         /// <inheritdoc/> 
-        public void WriteSByteArray(in ICollection<sbyte> value, in bool reverse = false)
+        public void WriteSByteArray(ICollection<sbyte> value, bool reverse = false)
         {
             AutomaticExpansion(value.Count);
             Arrays.SetSByteArray(ref WriteIndex, value, reverse);

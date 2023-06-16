@@ -5,13 +5,13 @@ namespace AIO
     public partial class BufferByte
     {
         /// <inheritdoc/> 
-        public ulong[] ReadUInt64Array(in bool reverse = false)
+        public ulong[] ReadUInt64Array(bool reverse = false)
         {
             return Arrays.GetUInt64Array(ref ReadIndex, reverse);
         }
 
         /// <inheritdoc/> 
-        public void WriteUInt64Array(in ICollection<ulong> value, in bool reverse = false)
+        public void WriteUInt64Array(ICollection<ulong> value, bool reverse = false)
         {
             WriteLen(value.Count);
             AutomaticExpansion(value.Count * 8);
@@ -19,13 +19,13 @@ namespace AIO
         }
 
         /// <inheritdoc/> 
-        public ulong ReadUInt64(in bool reverse = false)
+        public ulong ReadUInt64(bool reverse = false)
         {
             return Arrays.GetUInt64(ref ReadIndex, reverse);
         }
 
         /// <inheritdoc/> 
-        public void WriteUInt64(in ulong value, in bool reverse = false)
+        public void WriteUInt64(ulong value, bool reverse = false)
         {
             AutomaticExpansion(8);
             Arrays.SetUInt64(ref WriteIndex, value, reverse);

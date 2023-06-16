@@ -10,13 +10,13 @@ namespace AIO
         /// </summary>
         /// <param name="reverse">是否反转</param>
         /// <returns>数据值</returns>
-        long ReadInt64(in bool reverse = false);
+        long ReadInt64(bool reverse = false);
 
         /// <summary>
         /// 读取 Int64 数组 数据类型
         /// </summary>
         /// <param name="reverse">是否反转</param>
         /// <returns>数据值</returns>
-        long[] ReadInt64Array(in bool reverse = false);
+        long[] ReadInt64Array(bool reverse = false);
     }
 }

@@ -11,20 +11,20 @@ namespace AIO
         }
 
         /// <inheritdoc/> 
-        public bool[] ReadBoolArray(in bool reverse = false)
+        public bool[] ReadBoolArray(bool reverse = false)
         {
             return Arrays.GetBoolArray(ref ReadIndex, reverse);
         }
 
         /// <inheritdoc/> 
-        public void WriteBool(in bool b)
+        public void WriteBool(bool b)
         {
             AutomaticExpansion(1);
             Arrays[WriteIndex++] = (byte)(b ? 1 : 0);
         }
 
         /// <inheritdoc/> 
-        public void WriteBoolArray(in ICollection<bool> value, in bool reverse = false)
+        public void WriteBoolArray(ICollection<bool> value, bool reverse = false)
         {
             WriteLen(value.Count);
             AutomaticExpansion(value.Count);

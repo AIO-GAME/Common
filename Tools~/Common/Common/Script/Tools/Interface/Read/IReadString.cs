@@ -12,21 +12,21 @@ namespace AIO
         /// </summary>
         /// <param name="reverse">是否反转</param>
         /// <returns>字符串</returns>
-        string ReadStringUTF8(in bool reverse = false);
+        string ReadStringUTF8(bool reverse = false);
 
         /// <summary>
         /// 读取字符串
         /// </summary>
         /// <param name="reverse">是否反转</param>
         /// <returns>字符串</returns>
-        string ReadStringASCII(in bool reverse = false);
+        string ReadStringASCII(bool reverse = false);
 
         /// <summary>
         /// 读取字符串
         /// </summary>
         /// <param name="reverse">是否反转</param>
         /// <returns>字符串</returns>
-        string ReadStringUnicode(in bool reverse = false);
+        string ReadStringUnicode(bool reverse = false);
 
         /// <summary>
         /// 读取字符串
@@ -34,6 +34,6 @@ namespace AIO
         /// <param name="encoding">编码</param>
         /// <param name="reverse">是否反转</param>
         /// <returns>字符串</returns>
-        string ReadString(in Encoding encoding = null, in bool reverse = false);
+        string ReadString(Encoding encoding = null, bool reverse = false);
     }
 }

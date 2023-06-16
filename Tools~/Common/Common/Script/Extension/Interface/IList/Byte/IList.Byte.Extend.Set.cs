@@ -44,19 +44,20 @@ namespace AIO
         public static void SetByteArray(this IList<byte> array, ref int index, in ICollection<byte> value, in bool reverse = false)
         {
             SetLen(array, ref index, value.Count);
-            Console.WriteLine("-----------------");
-            if (reverse)
+            unchecked
             {
-                var j = index;
-                foreach (var item in value) array[j++] = item;
+                if (reverse)
+                {
+                    var j = index;
+                    foreach (var item in value) array[j++] = item;
+                }
+                else
+                {
+                    var j = index + value.Count - 1;
+                    foreach (var item in value) array[j--] = item;
+                }
+                index += value.Count;
             }
-            else
-            {
-                var j = index + value.Count - 1;
-                foreach (var item in value) array[j--] = item;
-            }
-
-            index += value.Count;
         }
 
         /// <summary>
@@ -447,34 +448,43 @@ namespace AIO
 
         private static void SetNumber(this IList<byte> array, ref int index, in int value, in byte place, in bool reverse = false)
         {
-            if (reverse)
-                for (byte i = 0, j = (byte)(place - 1); i < place; i++, j--)
-                    array[index++] = (byte)(value >> (j * 8));
-            else
-                for (byte i = 0; i < place; i++)
-                    array[index++] = (byte)(value >> (i * 8));
+            unchecked
+            {
+                if (reverse)
+                    for (byte i = 0, j = (byte)(place - 1); i < place; i++, j--)
+                        array[index++] = (byte)(value >> (j * 8));
+                else
+                    for (byte i = 0; i < place; i++)
+                        array[index++] = (byte)(value >> (i * 8));
+            }
         }
 
 
         private static void SetNumber(this IList<byte> array, ref int index, in uint value, in byte place, in bool reverse = false)
         {
-            if (reverse)
-                for (byte i = 0, j = (byte)(place - 1); i < place; i++, j--)
-                    array[index++] = (byte)(value >> (j * 8));
-            else
-                for (byte i = 0; i < place; i++)
-                    array[index++] = (byte)(value >> (i * 8));
+            unchecked
+            {
+                if (reverse)
+                    for (byte i = 0, j = (byte)(place - 1); i < place; i++, j--)
+                        array[index++] = (byte)(value >> (j * 8));
+                else
+                    for (byte i = 0; i < place; i++)
+                        array[index++] = (byte)(value >> (i * 8));
+            }
         }
 
 
         private static void SetNumber(this IList<byte> array, ref int index, in ulong value, in byte place, in bool reverse = false)
         {
-            if (reverse)
-                for (byte i = 0, j = (byte)(place - 1); i < place; i++, j--)
-                    array[index++] = (byte)(value >> (j * 8));
-            else
-                for (byte i = 0; i < place; i++)
-                    array[index++] = (byte)(value >> (i * 8));
+            unchecked
+            {
+                if (reverse)
+                    for (byte i = 0, j = (byte)(place - 1); i < place; i++, j--)
+                        array[index++] = (byte)(value >> (j * 8));
+                else
+                    for (byte i = 0; i < place; i++)
+                        array[index++] = (byte)(value >> (i * 8));
+            }
         }
 
         #endregion
@@ -490,7 +500,10 @@ namespace AIO
 
         public static void SetByte(this IList<byte> array, ref int index, in byte value)
         {
-            array[index++] = value;
+            unchecked
+            {
+                array[index++] = value;
+            }
         }
 
         /// <summary>
