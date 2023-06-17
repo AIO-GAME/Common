@@ -20,26 +20,26 @@ mergeInto(LibraryManager.library, {
 
     // Set the screen to full
     OpenJSObserver : function(){
-        var canvas = document.getElementById("unity-canvas");
-        var bodyEle = document.querySelector("body");
-        var resizeObserver = new ResizeObserver(function(entries) {
-            for (var i = 0; i < entries.length; i++) {
-                var target = entries[i].target;
-                var re = target.getBoundingClientRect();
-                var width = re.width;
-                var height = re.height;
-                canvas.style.width = width+ "px";
-                canvas.style.height = bodyEle.clientHeight+ "px";
-            }
-        });
-        var targetEle = document.querySelector("body");
-        resizeObserver.observe(targetEle);
+        // var canvas = document.getElementById("unity-canvas");
+        // var bodyEle = document.querySelector("body");
+        // var resizeObserver = new ResizeObserver(function(entries) {
+        //     for (var i = 0; i < entries.length; i++) {
+        //         var target = entries[i].target;
+        //         var re = target.getBoundingClientRect();
+        //         var width = re.width;
+        //         var height = re.height;
+        //         canvas.style.width = width+ "px";
+        //         canvas.style.height = bodyEle.clientHeight+ "px";
+        //     }
+        // });
+        // var targetEle = document.querySelector("body");
+        // resizeObserver.observe(targetEle);
     },
 
     // Set the screen to full
     DestoryJSObserver : function(){
-        var targetEle = document.querySelector("body");
-        var resizeObserver = new ResizeObserver();
-        resizeObserver.unobserve(targetEle);
+        // var targetEle = document.querySelector("body");
+        // var resizeObserver = new ResizeObserver();
+        // resizeObserver.unobserve(targetEle);
     }
 });
