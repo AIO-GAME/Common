@@ -1,0 +1,17 @@
+{
+    "name": "StompyRobot.SROptions",
+    "rootNamespace": "",
+    "references": [
+        "GUID:05dbf8cd246c9274c8a78a65142e5f8a",
+        "GUID:bcc75752368a72b4aba4043ea13b2a1a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

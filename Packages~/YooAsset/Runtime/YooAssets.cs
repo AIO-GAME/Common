@@ -30,7 +30,6 @@ namespace YooAsset
 				_driver = new UnityEngine.GameObject($"[{nameof(YooAssets)}]");
 				_driver.AddComponent<YooAssetsDriver>();
 				UnityEngine.Object.DontDestroyOnLoad(_driver);
-				YooLogger.Log($"{nameof(YooAssets)} initialize !");
 
 #if DEBUG
 				// 添加远程调试脚本
