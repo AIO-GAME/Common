@@ -31,6 +31,7 @@ namespace AIO.Package.Editor
         {
             Root = Directory.GetParent(Application.dataPath);
             InstallList.Clear();
+
             if (serializedObject.isEditingMultipleObjects)
             {
                 foreach (var o in serializedObject.targetObjects) UpdateInstallInfo(o);
@@ -40,8 +41,13 @@ namespace AIO.Package.Editor
 
         private void UpdateInstallInfo(in Object obj)
         {
+            if (obj is null) return;
             var serialized = new SerializedObject(obj);
-            InstallList.Set(serialized.FindProperty("Name").stringValue, GetValidDir(Root.FullName, serialized.FindProperty("TargetRelativePath").stringValue)?.Exists);
+            var Name = serialized.FindProperty("Name");
+            var TargetRelativePath = serialized.FindProperty("TargetRelativePath");
+            if (string.IsNullOrEmpty(Name.stringValue)) return;
+            if (string.IsNullOrEmpty(TargetRelativePath.stringValue)) return;
+            InstallList.Set(Name.stringValue, GetValidDir(Root.FullName, TargetRelativePath.stringValue).Exists);
         }
 
         internal static void PathIsRegex(string path)
@@ -81,7 +87,7 @@ namespace AIO.Package.Editor
                 if (!string.IsNullOrEmpty(SourceRelativePath.stringValue) &&
                     !string.IsNullOrEmpty(TargetRelativePath.stringValue))
                 {
-                    if (InstallList.Get<bool>(Name.stringValue))
+                    if (InstallList.GetOrDefault<bool>(Name.stringValue, false))
                     {
                         if (GUILayout.Button("卸载", GUILayout.Width(57))) _ = UnInitialize((PluginsInfo)o);
                     }
