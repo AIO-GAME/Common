@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 namespace AIO.Unity
 {
     /// <summary>
     /// Unity 可持续化数据
     /// </summary>
+    [Preserve]
     public abstract class ScriptableBasics : ScriptableObject, IBinStorage
     {
         /// <inheritdoc/>

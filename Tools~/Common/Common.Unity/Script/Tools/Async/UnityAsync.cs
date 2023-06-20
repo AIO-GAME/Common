@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Scripting;
 
 /// <summary>
 /// Unity线程
 /// </summary>
+[Preserve]
 public static partial class UnityAsync
 {
     private static ThreadMono instance;
@@ -43,6 +45,7 @@ public static partial class UnityAsync
         else Task.Factory.StartNew(action.Invoke);
     }
 
+    [Preserve]
     internal partial class ThreadMono : MonoBehaviour
     {
         /// <summary>

@@ -1,7 +1,8 @@
 ﻿using System.IO;
 using System.Linq;
-
-using AUtils = Utils;
+using SPath = System.IO.Path;
+using SDirectory = System.IO.Directory;
+using SFile = System.IO.File;
 
 public static partial class UtilsEngine
 {
@@ -14,7 +15,7 @@ public static partial class UtilsEngine
         /// <returns>相对于“assets”目录的相对路径</returns>
         public static string FromAssets(in string path)
         {
-            return AUtils.IO.GetRelativePath(path, UtilsEngine.Path.Assets);
+            return Utils.IO.GetRelativePath(path, Path.Assets);
         }
 
         /// <summary>
@@ -24,7 +25,7 @@ public static partial class UtilsEngine
         /// <returns>相对于项目根目录的相对路径</returns>
         public static string FromProject(in string path)
         {
-            return AUtils.IO.GetRelativePath(path, UtilsEngine.Path.Project);
+            return Utils.IO.GetRelativePath(path, Path.Project);
         }
 
         /// <summary>
@@ -33,7 +34,7 @@ public static partial class UtilsEngine
         /// <param name="path">文件路径</param>
         public static void CreateParentDirectoryIfNeeded(in string path)
         {
-            CreateDirectoryIfNeeded(Directory.GetParent(path)?.FullName);
+            CreateDirectoryIfNeeded(SDirectory.GetParent(path)?.FullName);
         }
 
         /// <summary>
@@ -42,7 +43,7 @@ public static partial class UtilsEngine
         /// <param name="path">目录路径</param>
         public static void CreateDirectoryIfNeeded(in string path)
         {
-            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+            if (!SDirectory.Exists(path)) SDirectory.CreateDirectory(path);
         }
 
         /// <summary>
@@ -51,9 +52,9 @@ public static partial class UtilsEngine
         /// <param name="path">目录路径</param>
         public static void DeleteDirectoryIfExists(in string path)
         {
-            if (Directory.Exists(path)) Directory.Delete(path, true);
-            var metaFilePath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(path) ?? string.Empty, System.IO.Path.GetFileName(path) + ".meta");
-            if (File.Exists(metaFilePath)) File.Delete(metaFilePath);
+            if (SDirectory.Exists(path)) SDirectory.Delete(path, true);
+            var metaFilePath = SPath.Combine(SPath.GetDirectoryName(path) ?? string.Empty, SPath.GetFileName(path) + ".meta");
+            if (SFile.Exists(metaFilePath)) SFile.Delete(metaFilePath);
         }
 
         /// <summary>
@@ -64,7 +65,7 @@ public static partial class UtilsEngine
         /// <returns>已转换的文件名</returns>
         public static string MakeSafeFilename(string filename, char replace)
         {
-            return System.IO.Path.GetInvalidFileNameChars().Aggregate(filename, (current, c) => current.Replace(c, replace));
+            return SPath.GetInvalidFileNameChars().Aggregate(filename, (current, c) => current.Replace(c, replace));
         }
     }
 }

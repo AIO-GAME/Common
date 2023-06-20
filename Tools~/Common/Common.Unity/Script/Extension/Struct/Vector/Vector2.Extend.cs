@@ -1,23 +1,17 @@
-﻿namespace AIO
+﻿using UnityEngine;
+
+namespace AIO
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
-
-	using UnityEngine;
-
-	/// <summary>
-	/// Vector2 扩展
-	/// </summary>
-	public static class Vector2Extend
-	{
-		/// <summary>
-		/// Is the <see cref="Vector2.x"/> or <see cref="Vector2.y"/> NaN?
-		/// </summary>
-		public static bool IsNaN(this Vector2 vector) =>
-			float.IsNaN(vector.x) ||
-			float.IsNaN(vector.y);
-	}
+    /// <summary>
+    /// Vector2 扩展
+    /// </summary>
+    public static class Vector2Extend
+    {
+        /// <summary>
+        /// Is the <see cref="Vector2.x"/> or <see cref="Vector2.y"/> NaN?
+        /// </summary>
+        public static bool IsNaN(this Vector2 vector) =>
+            float.IsNaN(vector.x) ||
+            float.IsNaN(vector.y);
+    }
 }
