@@ -1,9 +1,7 @@
-﻿namespace AIO.Unity
+﻿using UnityEngine;
+
+namespace AIO.Unity
 {
-    using System.Runtime.CompilerServices;
-
-    using UnityEngine;
-
     /// <summary>
     /// 扩展
     /// </summary>
@@ -12,7 +10,6 @@
         /// <summary>
         /// 是否为编辑器
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsEditor(this RuntimePlatform platform)
         {
             return
@@ -24,7 +21,6 @@
         /// <summary>
         /// 是否为安卓平台
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsAndroid(this RuntimePlatform platform)
         {
             return
@@ -34,7 +30,6 @@
         /// <summary>
         /// 是否为安卓平台
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsIOS(this RuntimePlatform platform)
         {
             return
@@ -44,7 +39,6 @@
         /// <summary>
         /// 是否为安卓平台
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsWebGL(this RuntimePlatform platform)
         {
             return
@@ -54,7 +48,6 @@
         /// <summary>
         /// 是否为独立平台
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsStandalone(this RuntimePlatform platform)
         {
             return

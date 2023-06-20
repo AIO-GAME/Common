@@ -1,7 +1,7 @@
-﻿namespace AIO
-{
-    using UnityEngine;
+﻿using UnityEngine;
 
+namespace AIO
+{
     /// <summary>
     /// Vector4 扩展
     /// </summary>
