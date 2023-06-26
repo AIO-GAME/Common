@@ -5,7 +5,6 @@ using System.IO;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
-using AUtils = Utils;
 using Debug = UnityEngine.Debug;
 
 namespace UnityEditor
@@ -363,7 +362,7 @@ namespace UnityEditor
                         return null;
                     }
 
-                    var path = AUtils.IO.TryPathsForFile("xbuild", environmentPaths);
+                    var path = UtilsGen.IO.TryPathsForFile("xbuild", environmentPaths);
 
                     return path;
                 }

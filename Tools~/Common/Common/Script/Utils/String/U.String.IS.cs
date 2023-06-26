@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-public partial class Utils
+public partial class UtilsGen
 {
     public partial class String
     {

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-public static partial class Utils
+public static partial class UtilsGen
 {
     /// <summary>
     /// hash工具

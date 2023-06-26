@@ -3,7 +3,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
 
-public partial class Utils
+public partial class UtilsGen
 {
     /// <summary>
     /// Binary 文件 解析

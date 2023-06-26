@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using AUtils = Utils;
 
 namespace UnityEngine
 {
@@ -97,7 +96,7 @@ namespace UnityEngine
             public static T LoadJsonData<T>(in string key, in T def = default)
             {
                 if (PlayerPrefs.HasKey(string.Concat(key, "_Json"))) return def;
-                return AUtils.Json.Deserialize<T>(PlayerPrefs.GetString(key));
+                return UtilsGen.Json.Deserialize<T>(PlayerPrefs.GetString(key));
             }
 
             /// <summary>

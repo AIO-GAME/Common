@@ -8,7 +8,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-public partial class Utils
+public partial class UtilsGen
 {
     /// <summary> 
     /// 屏蔽字

@@ -10,7 +10,7 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-public partial class Utils
+public partial class UtilsGen
 {
     /// <summary>
     /// Json 工具类

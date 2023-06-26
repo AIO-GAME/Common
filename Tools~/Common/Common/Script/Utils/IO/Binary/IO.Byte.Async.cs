@@ -3,7 +3,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-public partial class Utils
+public partial class UtilsGen
 {
     public partial class IO
     {

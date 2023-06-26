@@ -30,7 +30,7 @@ namespace UnityEngine
                 if (!SDirectory.Exists(value)) return Array.Empty<string>();
                 value = SPath.GetFullPath(value);
                 if (!value.Contains(Path.Project)) return Array.Empty<string>();
-                return global::Utils.IO.GetFilesInfo(value, pattern, option)
+                return global::UtilsGen.IO.GetFilesInfo(value, pattern, option)
                     .Select(item => item.FullName.Substring(Path.Project.Length));
             }
 
@@ -51,7 +51,7 @@ namespace UnityEngine
                 if (!SDirectory.Exists(value)) return Array.Empty<string>();
                 value = SPath.GetFullPath(value);
                 if (!value.Contains(Path.Project)) return Array.Empty<string>();
-                return global::Utils.IO.GetFilesInfo(value, filtration, pattern, option)
+                return global::UtilsGen.IO.GetFilesInfo(value, filtration, pattern, option)
                     .Select(item => item.FullName.Substring(Path.Project.Length));
             }
 
@@ -73,7 +73,7 @@ namespace UnityEngine
                 value = SPath.GetFullPath(value);
                 if (!value.Contains(Path.Project)) return Array.Empty<string>();
                 return
-                    from item in global::Utils.IO.GetFilesInfo(value, filtration, pattern, option)
+                    from item in global::UtilsGen.IO.GetFilesInfo(value, filtration, pattern, option)
                     where !item.Extension.Contains(".meta")
                     select item.FullName.Substring(Path.Project.Length);
             }
@@ -94,7 +94,7 @@ namespace UnityEngine
                 value = SPath.GetFullPath(value);
                 if (!value.Contains(Path.Project)) return Array.Empty<string>();
                 return
-                    from item in global::Utils.IO.GetFilesInfo(value, pattern, option)
+                    from item in global::UtilsGen.IO.GetFilesInfo(value, pattern, option)
                     where !item.Extension.Contains(".meta")
                     select item.FullName.Substring(Path.Project.Length);
             }

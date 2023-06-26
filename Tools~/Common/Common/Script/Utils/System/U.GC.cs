@@ -10,7 +10,7 @@ using System.Runtime.ConstrainedExecution;
 using System.Security;
 using SGC = System.GC;
 
-public partial class Utils
+public partial class UtilsGen
 {
     /*
      1、只管理内存，非托管资源，如文件句柄，GDI资源，数据库连接等还需要用户去管理。

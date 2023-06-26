@@ -1,7 +1,12 @@
 {
     "name": "AIO.Package.Editor",
     "rootNamespace": "UnityEditor",
-    "references": [],
+    "references": [
+        "YooAsset",
+        "YooAsset.Editor",
+        "Unity.VisualEffectGraph.Editor",
+        "Unity.VisualEffectGraph.Runtime"
+    ],
     "includePlatforms": [
         "Editor"
     ],
@@ -11,6 +16,17 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.tuyoogame.yooasset",
+            "expression": "",
+            "define": "SUPPORT_YOOASSET"
+        },
+        {
+            "name": "com.unity.visualeffectgraph",
+            "expression": "",
+            "define": "SUPPORT_VISUAL_EFFECT_GRAPH"
+        }
+    ],
     "noEngineReferences": false
 }

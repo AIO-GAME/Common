@@ -1,6 +1,6 @@
 using System.IO;
 
-public partial class Utils
+public partial class UtilsGen
 {
     /// <summary>
     /// IO工具类
