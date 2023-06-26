@@ -8,6 +8,7 @@ using System;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 
 public partial class Utils
 {
@@ -19,7 +20,7 @@ public partial class Utils
         /// <summary>
         /// 序列化 未加密
         /// </summary>
-        public static string Serialize<T>(in T data)
+        public static string Serialize<T>(T data) 
         {
             using (var stream = new MemoryStream())
             {
@@ -30,9 +31,39 @@ public partial class Utils
         }
 
         /// <summary>
+        /// 序列化 未加密
+        /// </summary>
+        public static string Serialize<T>(in T data) where T : struct
+        {
+            using (var stream = new MemoryStream())
+            {
+                new BinaryFormatter().Serialize(stream, data); //将数据序列化
+                stream.Flush();
+                return Convert.ToBase64String(stream.ToArray());
+            }
+        }
+
+        /// <summary>
+        /// 序列化 未加密
+        /// </summary>
+        public static string Serialize(byte[] data, Base64FormattingOptions options = Base64FormattingOptions.None)
+        {
+            return Convert.ToBase64String(data, options);
+        }
+
+        /// <summary>
+        /// 序列化 未加密
+        /// </summary>
+        public static string Serialize(string data, Encoding encoding = null)
+        {
+            return Convert.ToBase64String((encoding ?? Encoding.UTF8).GetBytes(data));
+        }
+
+
+        /// <summary>
         /// 反序列化 未加密
         /// </summary>
-        public static T Deserialize<T>(in string data)
+        public static T Deserialize<T>(string data)
         {
             using (var stream = new MemoryStream())
             {

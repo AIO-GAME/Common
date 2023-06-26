@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 public partial class Utils
@@ -8,7 +7,6 @@ public partial class Utils
         /// <summary>
         /// 读取 Base64 文件 编码utf-8
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static async Task<T> ReadBase64Async<T>(string path, string charset = "utf-8")
         {
             var Content = await ReadTextAsync(path, charset);
@@ -18,7 +16,6 @@ public partial class Utils
         /// <summary>
         /// 读取 Base64 文件 编码utf-8
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static async Task<T> ReadBase64UTF8Async<T>(string path)
         {
             var Content = await ReadUTF8Async(path);
@@ -28,7 +25,6 @@ public partial class Utils
         /// <summary>
         /// 写入 Base64 文件 编码utf-8
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static async Task<bool> WriteBase64Async<T>(string path, T value, string charset = "utf-8")
         {
             if (value == null) return false;
@@ -38,7 +34,6 @@ public partial class Utils
         /// <summary>
         /// 写入 Base64 文件 编码utf-8
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static async Task<bool> WriteBase64UTF8Async<T>(string path, T text)
         {
             if (text == null) return false;

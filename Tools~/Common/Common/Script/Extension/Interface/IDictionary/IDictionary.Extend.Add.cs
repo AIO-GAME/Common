@@ -8,7 +8,6 @@ namespace AIO
         /// <summary>
         /// 添加相同元素
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void AddUnion<TK, TV>(this IDictionary<TK, TV> dict, in IDictionary<TK, TV> others)
         {
             if (dict == null || others == null) return;

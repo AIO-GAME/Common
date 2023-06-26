@@ -76,8 +76,6 @@ namespace AIO
                 action.Invoke();
                 p.Finish(format);
             }
-
-            ;
         }
 
         /// <summary>
@@ -93,8 +91,6 @@ namespace AIO
                 action1.Invoke();
                 p.Finish(format);
             }
-
-            ;
         }
 
         /// <summary>
@@ -111,8 +107,6 @@ namespace AIO
                 action2.Invoke();
                 p.Finish(format);
             }
-
-            ;
         }
 
         /// <summary>
@@ -130,8 +124,6 @@ namespace AIO
                 action3.Invoke();
                 p.Finish(format);
             }
-
-            ;
         }
 
         /// <summary>
@@ -146,8 +138,6 @@ namespace AIO
                 action.Invoke(tValue);
                 p.Finish(format);
             }
-
-            ;
         }
 
         /// <summary>
@@ -162,8 +152,6 @@ namespace AIO
                 action.Invoke(tValue, vValue);
                 p.Finish(format);
             }
-
-            ;
         }
 
         /// <summary>
@@ -178,8 +166,6 @@ namespace AIO
                 action.Invoke(tValue, vValue, wValue);
                 p.Finish(format);
             }
-
-            ;
         }
 
         /// <summary>
@@ -194,8 +180,6 @@ namespace AIO
                 action.Invoke(tValue, vValue, wValue, zValue);
                 p.Finish(format);
             }
-
-            ;
         }
 
         /// <summary>
@@ -203,11 +187,11 @@ namespace AIO
         /// </summary>
         internal class CPrintElapse : PrintElapse
         {
-            public CPrintElapse(in string title) : base(title)
+            public CPrintElapse(string title) : base(title)
             {
             }
 
-            public override void Finish(in string format = "g")
+            public override void Finish(string format = "g")
             {
                 stopWatch.Stop();
                 Log(string.Format(CultureInfo.CurrentCulture, "{0}=>[{1}]", Title, stopWatch.Elapsed.ToString(format)));

@@ -7,7 +7,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 namespace AIO
 {
@@ -18,7 +17,6 @@ namespace AIO
         /// </summary>
         /// <param name="dic">字典</param>
         /// <param name="key">Key值</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static V Get<k, V>(this IDictionary<k, V> dic, in k key)
         {
             if (dic is null) throw new ArgumentNullException(nameof(dic));
@@ -34,7 +32,6 @@ namespace AIO
         /// <param name="dic">字典</param>
         /// <param name="key">Key值</param>
         /// <param name="defaultValue">默认值</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static V GetOrDefault<k, V>(this IDictionary<k, V> dic, in k key, in V defaultValue = default)
         {
             if (dic is null) throw new ArgumentNullException(nameof(dic));
@@ -50,7 +47,6 @@ namespace AIO
         /// <param name="dic">字典</param>
         /// <param name="key">Key值</param>
         /// <param name="defaultValue">默认值</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static object GetOrDefault(this IDictionary dic, in object key, in object defaultValue = null)
         {
             if (dic is null) throw new ArgumentNullException(nameof(dic));
@@ -66,7 +62,6 @@ namespace AIO
         /// <param name="dic">字典</param>
         /// <param name="key">Key值</param>
         /// <typeparam name="T">任意泛型</typeparam>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Get<T>(this IDictionary dic, in string key)
         {
             if (dic is null) throw new ArgumentNullException(nameof(dic));
@@ -82,7 +77,6 @@ namespace AIO
         /// <param name="dic">字典</param>
         /// <param name="key">Key值</param>
         /// <param name="defaultValue">默认值</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static object GetOrDefault(this IDictionary dic, in string key, in object defaultValue = null)
         {
             if (dic is null) throw new ArgumentNullException(nameof(dic));
@@ -97,7 +91,6 @@ namespace AIO
         /// </summary>
         /// <param name="dic">字典</param>
         /// <param name="key">Key值</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static object Get(this IDictionary dic, in object key)
         {
             if (dic is null) throw new ArgumentNullException(nameof(dic));
@@ -113,7 +106,6 @@ namespace AIO
         /// <param name="dic">字典</param>
         /// <param name="key">Key值</param>
         /// <typeparam name="T">任意泛型</typeparam>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Get<T>(this IDictionary dic, in object key)
         {
             if (dic is null) throw new ArgumentNullException(nameof(dic));
@@ -129,7 +121,6 @@ namespace AIO
         /// <param name="dic">字典</param>
         /// <param name="key">Key值</param>
         /// <param name="defaultValue">默认值</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T GetOrDefault<T>(this IDictionary dic, in object key, in T defaultValue = default)
         {
             if (dic is null) throw new ArgumentNullException(nameof(dic));
@@ -146,7 +137,6 @@ namespace AIO
         /// <param name="key">Key值</param>
         /// <param name="value">Value值</param>
         /// <typeparam name="T">任意泛型</typeparam>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool TryGet<T>(this IDictionary dic, in string key, out T value)
         {
             if (dic is null) throw new ArgumentNullException(nameof(dic));
@@ -169,7 +159,6 @@ namespace AIO
         /// <param name="key">Key值</param>
         /// <param name="value">Value值</param>
         /// <typeparam name="T">任意泛型</typeparam>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool TryGet<T>(this IDictionary dic, in object key, out T value)
         {
             if (dic is null) throw new ArgumentNullException(nameof(dic));
@@ -193,7 +182,6 @@ namespace AIO
         /// <param name="value">Value值</param>
         /// <typeparam name="K">任意泛型</typeparam>
         /// <typeparam name="V">任意泛型</typeparam>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool TryGet<K, V>(this IDictionary<K, V> dic, in K key, out V value)
         {
             if (dic is null) throw new ArgumentNullException(nameof(dic));
