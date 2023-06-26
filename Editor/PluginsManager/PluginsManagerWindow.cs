@@ -272,7 +272,7 @@ namespace UnityEditor
                         {
                             if (GUILayout.Button("更新宏", GUILayout.Width(60), GUILayout.Height(20)))
                             {
-                                PluginsInfoEditor.AddScriptingDefineSymbols(Data.MacroDefinition.Split(';'));
+                                UtilsEditor.Symbols.AddScriptingDefine(Data.MacroDefinition.Split(';'));
                                 AssetDatabase.Refresh();
                                 AssetDatabase.RefreshSettings();
                                 CompilationPipeline.RequestScriptCompilation();
