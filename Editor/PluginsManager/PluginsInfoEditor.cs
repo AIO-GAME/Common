@@ -232,7 +232,7 @@ namespace UnityEditor
                 AssetDatabase.RefreshSettings();
 
                 CompilationPipeline.compilationFinished += compilationFinished;
-                if (macroList.Count != 0) AddScriptingDefineSymbols(macroList.ToArray());
+                if (macroList.Count != 0) UtilsEditor.Symbols.AddScriptingDefine(macroList.ToArray());
                 CompilationPipeline.RequestScriptCompilation();
             }
         }
@@ -274,7 +274,7 @@ namespace UnityEditor
                 AssetDatabase.Refresh();
                 AssetDatabase.RefreshSettings();
                 CompilationPipeline.compilationFinished += compilationFinished;
-                if (macroList.Count != 0) DelScriptingDefineSymbols(macroList.ToArray());
+                if (macroList.Count != 0) UtilsEditor.Symbols.DelScriptingDefine(macroList.ToArray());
                 CompilationPipeline.RequestScriptCompilation();
             }
         }
@@ -304,7 +304,7 @@ namespace UnityEditor
                 Debug.LogFormat("链接成功 {0} : {1}", info.Name, target.FullName);
                 AssetDatabase.Refresh();
                 AssetDatabase.RefreshSettings();
-                if (!string.IsNullOrEmpty(info.MacroDefinition)) AddScriptingDefineSymbols(info.MacroDefinition.Split(';'));
+                if (!string.IsNullOrEmpty(info.MacroDefinition)) UtilsEditor.Symbols.AddScriptingDefine(info.MacroDefinition.Split(';'));
                 CompilationPipeline.compilationFinished += compilationFinished;
                 CompilationPipeline.RequestScriptCompilation();
             }
@@ -326,7 +326,7 @@ namespace UnityEditor
                 Debug.LogFormat("移除成功 {0} : {1}", info.Name, target.FullName);
                 AssetDatabase.Refresh();
                 AssetDatabase.RefreshSettings();
-                if (!string.IsNullOrEmpty(info.MacroDefinition)) DelScriptingDefineSymbols(info.MacroDefinition.Split(';'));
+                if (!string.IsNullOrEmpty(info.MacroDefinition)) UtilsEditor.Symbols.DelScriptingDefine(info.MacroDefinition.Split(';'));
                 CompilationPipeline.compilationFinished += compilationFinished;
                 CompilationPipeline.RequestScriptCompilation();
             }
@@ -338,51 +338,6 @@ namespace UnityEditor
             EditorUtility.ClearProgressBar();
             EditorUtility.DisplayDialog("插件", "命令执行完毕", "OK");
             CompilationPipeline.compilationFinished -= compilationFinished;
-        }
-
-        /// <summary>
-        /// 禁止你想要的宏定义
-        /// </summary>
-        internal static void DelScriptingDefineSymbols(params string[] value)
-        {
-            if (value is null || value.Length == 0) return;
-            //获取当前是哪个平台
-            var buildTargetGroup = EditorUserBuildSettings.selectedBuildTargetGroup;
-            //获得当前平台已有的的宏定义
-            var str = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup).Split(';');
-            if (str.Length == 0) return;
-
-            var verify = new List<string>(str);
-            verify.RemoveRepeat();
-            foreach (var item in value) verify.Remove(item);
-
-            if (verify.Count > 0)
-            {
-                PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, string.Join(";", verify));
-            }
-            else PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, "");
-        }
-
-        /// <summary>
-        /// 添加你想要的宏定义
-        /// </summary>
-        internal static void AddScriptingDefineSymbols(params string[] value)
-        {
-            if (value is null || value.Length == 0) return;
-            //获取当前是哪个平台
-            var buildTargetGroup = EditorUserBuildSettings.selectedBuildTargetGroup;
-            //获得当前平台已有的的宏定义
-            var str = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup).Split(';');
-            var verify = new List<string>(str);
-            foreach (var v in value)
-            {
-                if (string.IsNullOrEmpty(v) || verify.Contains(v)) continue;
-                verify.Add(v);
-            }
-
-            verify.RemoveRepeat();
-            //添加宏定义
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, string.Join(";", verify));
         }
     }
 }

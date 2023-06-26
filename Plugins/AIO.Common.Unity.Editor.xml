@@ -2161,6 +2161,36 @@
             </summary>
             <returns>占用空间</returns>
         </member>
+        <member name="T:UnityEditor.UtilsEditor.Symbols">
+            <summary>
+            Symbols
+            </summary>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Symbols.DelScriptingDefine(System.String[])">
+            <summary>
+            禁止你想要的宏定义
+            </summary>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Symbols.GetScriptingDefine">
+            <summary>
+            获得当前平台已有的的宏定义
+            </summary>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Symbols.DelScriptingDefine(System.Collections.Generic.ICollection{System.String})">
+            <summary>
+            禁止你想要的宏定义
+            </summary>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Symbols.AddScriptingDefine(System.String[])">
+            <summary>
+            添加你想要的宏定义
+            </summary>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Symbols.AddScriptingDefine(System.Collections.Generic.ICollection{System.String})">
+            <summary>
+            添加你想要的宏定义
+            </summary>
+        </member>
         <member name="T:UnityEditor.UtilsEditor.Window">
             <summary>
             Window Util

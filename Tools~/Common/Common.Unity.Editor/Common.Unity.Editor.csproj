@@ -112,6 +112,7 @@
     <Compile Include="Script\Utils\IO\U.IO.Get.cs" />
     <Compile Include="Script\Utils\Path\U.Path.cs" />
     <Compile Include="Script\Utils\Profiler\U.Profiler.cs" />
+    <Compile Include="Script\Utils\Symbols\U.Symbols.cs" />
     <Compile Include="Script\Utils\Util.cs" />
     <Compile Include="Script\Utils\Window\U.Window.cs" />
   </ItemGroup>
