@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace AIO
+namespace UnityEngine
 {
     /// <summary>
     /// Vector3 扩展

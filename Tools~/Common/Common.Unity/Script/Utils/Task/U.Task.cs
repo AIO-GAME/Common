@@ -1,22 +1,25 @@
 ﻿using System;
 using UnityEngine;
 
-public static partial class UtilsEngine
+namespace UnityEngine
 {
-    /// <summary>
-    /// 作业
-    /// </summary>
-    public static class Task
+    public static partial class UtilsEngine
     {
         /// <summary>
-        /// 作业运行
+        /// 作业
         /// </summary>
-        /// <param name="action">函数</param>
-        public static async System.Threading.Tasks.Task RunOnThread(Action action)
+        public static class Task
         {
-            if (action == null) return;
-            if (Application.platform == RuntimePlatform.WebGLPlayer) action.Invoke();
-            else await System.Threading.Tasks.Task.Run(action);
+            /// <summary>
+            /// 作业运行
+            /// </summary>
+            /// <param name="action">函数</param>
+            public static async System.Threading.Tasks.Task RunOnThread(Action action)
+            {
+                if (action == null) return;
+                if (Application.platform == RuntimePlatform.WebGLPlayer) action.Invoke();
+                else await System.Threading.Tasks.Task.Run(action);
+            }
         }
     }
 }

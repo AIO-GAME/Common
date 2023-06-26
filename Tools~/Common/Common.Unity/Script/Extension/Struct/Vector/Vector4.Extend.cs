@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace AIO
+namespace UnityEngine
 {
     /// <summary>
     /// Vector4 扩展

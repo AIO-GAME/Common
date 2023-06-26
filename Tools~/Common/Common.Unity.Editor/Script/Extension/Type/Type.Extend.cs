@@ -1,17 +1,14 @@
-﻿namespace AIO
+﻿using System;
+using UnityEngine;
+using Object = UnityEngine.Object;
+
+namespace UnityEditor
 {
-    using System;
-
-    using UnityEditor;
-
-    using UnityEngine;
-
     /// <summary>
     /// 类扩展
     /// </summary>
     public static partial class TypeExtend
     {
-
         /// <summary>
         /// 返回表示指定“类型”字段的SerializedPropertyType。
         /// </summary>
@@ -73,7 +70,7 @@
                 return SerializedPropertyType.BoundsInt;
 
             // Special.
-            if (typeof(UnityEngine.Object).IsAssignableFrom(type))
+            if (typeof(Object).IsAssignableFrom(type))
                 return SerializedPropertyType.ObjectReference;
 
             if (type.IsEnum)
@@ -81,6 +78,5 @@
 
             return SerializedPropertyType.Generic;
         }
-
     }
 }

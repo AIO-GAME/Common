@@ -7,19 +7,22 @@
 using UnityEditor;
 using UnityEngine;
 
-public partial class UtilsEditor
+namespace UnityEditor
 {
-    /// <summary>
-    /// 资源
-    /// </summary>
-    public static partial class Asset
+    public partial class UtilsEditor
     {
         /// <summary>
-        /// 标记目标
+        /// 资源
         /// </summary>
-        public static void SetDirty(Object obj)
+        public static partial class Asset
         {
-            EditorUtility.SetDirty(obj);
+            /// <summary>
+            /// 标记目标
+            /// </summary>
+            public static void SetDirty(Object obj)
+            {
+                EditorUtility.SetDirty(obj);
+            }
         }
     }
 }

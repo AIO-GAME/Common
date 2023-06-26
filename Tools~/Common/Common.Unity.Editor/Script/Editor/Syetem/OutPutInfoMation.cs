@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
 
-namespace AIO.Unity.Editor
+namespace UnityEditor
 {
     /// <summary>
     /// 输出信息

@@ -1,6 +1,4 @@
-﻿using UnityEditor;
-
-namespace AIO
+﻿namespace UnityEditor
 {
     public partial class SerializedPropertyExtend
     {

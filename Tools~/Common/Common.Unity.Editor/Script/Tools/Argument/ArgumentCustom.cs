@@ -1,10 +1,9 @@
-﻿namespace AIO
-{
-    using System;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Text;
+﻿using System;
+using System.Reflection;
+using System.Text;
 
+namespace UnityEditor
+{
     /// <summary>
     /// 自定义参数解析
     /// </summary>
@@ -22,7 +21,6 @@
         /// <param name="attribute">属性</param>
         /// <param name="command">命令</param>
         /// <returns>Ture:解析成功 False:解析失败</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected virtual bool SubResolver(ref FieldInfo field, in Attribute attribute, in string command)
         {
             if (!(attribute is ArgumentAttribute attrib)) return false;
@@ -50,6 +48,7 @@
                     field.SetValue(this, null);
                     break;
             }
+
             return true;
         }
 
@@ -57,12 +56,11 @@
         /// 解析
         /// </summary>
         /// <param name="cmd"></param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Resolver(in string cmd)
         {
             Command = cmd;
             var fields = GetType().GetFields();
-            for (int i = 0; i < fields.Length; i++)
+            for (var i = 0; i < fields.Length; i++)
             {
                 var index = i;
                 if (!(fields[i].IsPublic && !fields[i].IsStatic)) continue;
@@ -76,7 +74,6 @@
         /// <summary>
         /// 重写转化 String
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString()
         {
             var str = new StringBuilder().Append("Command:").AppendLine();
@@ -93,56 +90,50 @@
         /// <summary>
         /// 获取 Bool
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected virtual bool GetBool(in string command, in string key)
         {
-            return ArgumentUtils.GetBool(command, key);
+            return UtilsEditor.Argument.GetBool(command, key);
         }
 
         /// <summary>
         /// 获取 String
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected virtual string GetString(in string command, in string key)
         {
-            return ArgumentUtils.GetString(command, key);
+            return UtilsEditor.Argument.GetString(command, key);
         }
 
         /// <summary>
         /// 获取 String Array
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected virtual string[] GetStringArray(in string command, in string key)
         {
-            return ArgumentUtils.GetStringArray(command, key);
+            return UtilsEditor.Argument.GetStringArray(command, key);
         }
 
         /// <summary>
         /// 获取 String Array
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected virtual object GetEnum(in string command, in Type type, in string key)
         {
-            return ArgumentUtils.GetEnum(command, type, key);
+            return UtilsEditor.Argument.GetEnum(command, type, key);
         }
 
         /// <summary>
         /// 获取 String Array
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected virtual int[] GetIntegerArray(in string command, in string key)
         {
-            return ArgumentUtils.GetIntegerArray(command, key);
+            return UtilsEditor.Argument.GetIntegerArray(command, key);
         }
 
         /// <summary>
         /// 获取 Int
         /// </summary>
         /// 如果为-1 则说明没有使用
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected virtual int GetInteger(in string command, in string key)
         {
-            return ArgumentUtils.GetInteger(command, key);
+            return UtilsEditor.Argument.GetInteger(command, key);
         }
     }
 }

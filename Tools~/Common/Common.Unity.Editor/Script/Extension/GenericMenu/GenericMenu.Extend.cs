@@ -1,11 +1,9 @@
-﻿namespace AIO
+﻿using System;
+using AIO;
+using UnityEngine;
+
+namespace UnityEditor
 {
-    using System;
-
-    using UnityEditor;
-
-    using UnityEngine;
-
     /// <summary>
     /// The possible states for a function in a <see cref="GenericMenu"/>.
     /// </summary>
@@ -32,7 +30,6 @@
     /// </summary>
     public static partial class GenericMenuExtend
     {
-
         /// <summary>
         /// 添加菜单项，以便为每个属性的目标对象执行指定的函数。
         /// </summary>

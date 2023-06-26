@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using AUtils = Utils;
 
+namespace UnityEngine
+{
     public static partial class UtilsEngine
     {
         public static partial class Prefs
@@ -215,7 +217,7 @@ using AUtils = Utils;
             /// </summary>
             public static void SaveDictionary<K, V>(in string key, in IDictionary<K, V> values)
             {
-                PlayerPrefs.SetString(string.Concat(key, "_IDictionary"), Utils.Json.Serialize(values));
+                PlayerPrefs.SetString(string.Concat(key, "_IDictionary"), AUtils.Json.Serialize(values));
                 PlayerPrefs.Save();
             }
 
@@ -224,7 +226,7 @@ using AUtils = Utils;
             /// </summary>
             public static void SaveList<V>(in string key, in IList<V> values)
             {
-                PlayerPrefs.SetString(string.Concat(key, "_IList"), Utils.Json.Serialize(values));
+                PlayerPrefs.SetString(string.Concat(key, "_IList"), AUtils.Json.Serialize(values));
                 PlayerPrefs.Save();
             }
 
@@ -233,7 +235,7 @@ using AUtils = Utils;
             /// </summary>
             public static void SaveCollection<V>(in string key, in ICollection<V> values)
             {
-                PlayerPrefs.SetString(string.Concat(key, "_ICollection"), Utils.Json.Serialize(values));
+                PlayerPrefs.SetString(string.Concat(key, "_ICollection"), AUtils.Json.Serialize(values));
                 PlayerPrefs.Save();
             }
 
@@ -242,7 +244,7 @@ using AUtils = Utils;
             /// </summary>
             public static void SaveJsonData<T>(in string key, in T value)
             {
-                PlayerPrefs.SetString(string.Concat(key, "_Json"), Utils.Json.Serialize(value));
+                PlayerPrefs.SetString(string.Concat(key, "_Json"), AUtils.Json.Serialize(value));
                 PlayerPrefs.Save();
             }
 
@@ -256,3 +258,4 @@ using AUtils = Utils;
             }
         }
     }
+}

@@ -1,9 +1,7 @@
-﻿namespace AIO
-{
-    using System;
-    using System.Reflection;
-    using UnityEditor;
+﻿using System;
 
+namespace UnityEditor
+{
     /// <summary>
     /// 序列化属性扩展
     /// </summary>
@@ -29,7 +27,7 @@
             else
             {
                 var path = property.propertyPath;
-                for (int i = 0; i < targets.Length; i++)
+                for (var i = 0; i < targets.Length; i++)
                 {
                     using (var serializedObject = new SerializedObject(targets[i]))
                     {

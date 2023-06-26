@@ -61,9 +61,6 @@
     <Compile Include="Script\Class\SystemAutomation\SystemAutomation.cs" />
     <Compile Include="Script\Class\SystemAutomation\SystemAttribute.cs" />
     <Compile Include="Script\Class\SystemAutomation\SystemAutomation.Sync.cs" />
-    <Compile Include="Script\Field\ArgumentAttribute.cs" />
-    <Compile Include="Script\Field\ArgumentCustom.cs" />
-    <Compile Include="Script\Field\ArgumentUtils.cs" />
     <Compile Include="Script\Enum\ERuntimePlatform.cs" />
     <Compile Include="Script\Method\Comman\Exception\GCommandDuplicationKeyException.cs" />
     <Compile Include="Script\Method\Comman\Exception\GCommandException.cs" />
