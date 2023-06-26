@@ -282,7 +282,7 @@
             标题
             </summary>
         </member>
-        <member name="M:AIO.PrintElapse.#ctor(System.String@)">
+        <member name="M:AIO.PrintElapse.#ctor(System.String)">
             <summary>
             初始化
             </summary>
@@ -298,13 +298,13 @@
             时间重置
             </summary>
         </member>
-        <member name="M:AIO.PrintElapse.Finish(System.String@)">
+        <member name="M:AIO.PrintElapse.Finish(System.String)">
             <summary>
             完成
             </summary>
             <param name="format"></param>
         </member>
-        <member name="M:AIO.PrintElapse.Exception(System.Exception@,System.String@)">
+        <member name="M:AIO.PrintElapse.Exception(System.Exception,System.String)">
             <summary>
             异常信息
             </summary>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 namespace AIO
 {
@@ -13,7 +12,6 @@ namespace AIO
         /// <param name="dic">字典</param>
         /// <param name="key">Key值</param>
         /// <param name="value">Value值</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Set(this IDictionary dic, in object key, in object value)
         {
             if (dic is null) throw new ArgumentNullException(nameof(dic));
@@ -29,7 +27,6 @@ namespace AIO
         /// <param name="dic">字典</param>
         /// <param name="key">Key值</param>
         /// <param name="value">Value值</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Set<K, V>(this IDictionary<K, V> dic, in K key, in V value)
         {
             if (dic is null) throw new ArgumentNullException(nameof(dic));
@@ -47,7 +44,6 @@ namespace AIO
         /// <param name="value">Value值</param>
         /// <typeparam name="K">任意泛型</typeparam>
         /// <typeparam name="V">任意泛型</typeparam>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool TrySet<K, V>(this IDictionary<K, V> dic, in K key, in V value)
         {
             if (dic is null) throw new ArgumentNullException(nameof(dic));

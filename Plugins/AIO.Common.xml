@@ -9360,12 +9360,27 @@
             Base64 文件 解析
             </summary>
         </member>
+        <member name="M:Utils.Base64.Serialize``1(``0)">
+            <summary>
+            序列化 未加密
+            </summary>
+        </member>
         <member name="M:Utils.Base64.Serialize``1(``0@)">
             <summary>
             序列化 未加密
             </summary>
         </member>
-        <member name="M:Utils.Base64.Deserialize``1(System.String@)">
+        <member name="M:Utils.Base64.Serialize(System.Byte[],System.Base64FormattingOptions)">
+            <summary>
+            序列化 未加密
+            </summary>
+        </member>
+        <member name="M:Utils.Base64.Serialize(System.String,System.Text.Encoding)">
+            <summary>
+            序列化 未加密
+            </summary>
+        </member>
+        <member name="M:Utils.Base64.Deserialize``1(System.String)">
             <summary>
             反序列化 未加密
             </summary>
@@ -10454,6 +10469,16 @@
             </summary>
         </member>
         <member name="M:Utils.IO.WriteBase64UTF8``1(System.String@,``0@)">
+            <summary>
+            写入 Base64 文件 编码utf-8
+            </summary>
+        </member>
+        <member name="M:Utils.IO.WriteBase64``1(System.String@,``0@,System.String)">
+            <summary>
+            写入 Base64 文件 根据编码
+            </summary>
+        </member>
+        <member name="M:Utils.IO.WriteBase64UTF8``1(System.String@,``0)">
             <summary>
             写入 Base64 文件 编码utf-8
             </summary>

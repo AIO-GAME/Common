@@ -16,7 +16,7 @@ namespace AIO
             {
             }
 
-            public override void Finish(in string format = "g")
+            public override void Finish(string format = "g")
             {
                 stopWatch.Stop();
                 Log(string.Format("{0} {1} {2}", $"[<color=#E47833><b>{stopWatch.Elapsed.ToString(format)}</b></color>]".PadRight(30), "->", Title));
