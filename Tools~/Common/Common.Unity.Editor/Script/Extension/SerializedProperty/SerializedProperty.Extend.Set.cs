@@ -1,13 +1,7 @@
-﻿namespace AIO
+﻿namespace UnityEditor
 {
-    using System;
-    using System.Text;
-    using UnityEditor;
-    using UnityEngine;
-
     public partial class SerializedPropertyExtend
     {
-        
         /// <summary>
         /// Resets the value of the <see cref="SerializedProperty"/> to the default value of its type and all its field
         /// types, ignoring values set by constructors or field initializers.
@@ -109,7 +103,5 @@
                     break;
             }
         }
-
-        
     }
 }

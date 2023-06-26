@@ -5,9 +5,12 @@
 |*|============|*/
 
 
-public partial class UtilsEditor
+namespace UnityEditor
 {
-    public partial class Asset
+    public partial class UtilsEditor
     {
+        public partial class Asset
+        {
+        }
     }
 }

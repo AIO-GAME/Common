@@ -4,9 +4,12 @@
 |*|E-Mail:     |*| 1398581458@qq.com     
 |*|============|*/
 
-/// <summary>
-/// Utils Unity Engine
-/// </summary>
-public static partial class UtilsEngine
+namespace UnityEngine
 {
+    /// <summary>
+    /// Utils Unity Engine
+    /// </summary>
+    public static partial class UtilsEngine
+    {
+    }
 }

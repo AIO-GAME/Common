@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AIO.Package.Editor;
 using AIO.Unity.Editor;
 using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
 
-namespace AIO.Package.Editor
+namespace UnityEditor
 {
     /// <summary>
     /// 插件管理界面

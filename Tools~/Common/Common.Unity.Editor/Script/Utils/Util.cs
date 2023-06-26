@@ -4,9 +4,12 @@
 |*|E-Mail:     |*| 1398581458@qq.com     
 |*|============|*/
 
-/// <summary>
-/// Utils Unity Editor
-/// </summary>
-public static partial class UtilsEditor
+namespace UnityEditor
 {
+    /// <summary>
+    /// Utils Unity Editor
+    /// </summary>
+    public static partial class UtilsEditor
+    {
+    }
 }

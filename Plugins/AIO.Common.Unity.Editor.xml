@@ -4,17 +4,17 @@
         <name>AIO.Common.Unity.Editor</name>
     </assembly>
     <members>
-        <member name="T:AIO.Unity.Editor.OutPutInfoMation">
+        <member name="T:UnityEditor.OutPutInfoMation">
             <summary>
             输出信息
             </summary>
         </member>
-        <member name="T:AIO.Unity.Editor.RectExtension">
+        <member name="T:UnityEditor.RectExtension">
             <summary>
             矩形扩展
             </summary>
         </member>
-        <member name="M:AIO.Unity.Editor.RectExtension.DrawGUI(UnityEngine.Rect,UnityEngine.Color@,UnityEngine.Color@)">
+        <member name="M:UnityEditor.RectExtension.DrawGUI(UnityEngine.Rect,UnityEngine.Color@,UnityEngine.Color@)">
             <summary>
             GUI绘制矩形
             </summary>
@@ -22,117 +22,93 @@
             <param name="fillColor">填充颜色</param>
             <param name="outlineColor">描边颜色</param>
         </member>
-        <member name="M:AIO.Unity.Editor.RectExtension.DrawGUI(UnityEngine.Rect,UnityEngine.Color@)">
+        <member name="M:UnityEditor.RectExtension.DrawGUI(UnityEngine.Rect,UnityEngine.Color@)">
             <summary>
             GUI绘制矩形
             </summary>
             <param name="rect">矩形</param>
             <param name="fillColor">填充颜色</param>
         </member>
-        <member name="M:AIO.Unity.Editor.RectExtension.DrawGUI(UnityEngine.Rect)">
+        <member name="M:UnityEditor.RectExtension.DrawGUI(UnityEngine.Rect)">
             <summary>
             GUI绘制矩形
             </summary>
             <param name="rect">矩形</param>
         </member>
-        <member name="T:AIO.Unity.Editor.UnityEditorInternalException">
+        <member name="T:UnityEditor.UnityEditorInternalException">
             <summary>
             这个类表示在访问Unity内部编辑器函数时发生错误时抛出的异常。
             </summary>
         </member>
-        <member name="M:AIO.Unity.Editor.UnityEditorInternalException.#ctor(System.Exception@)">
+        <member name="M:UnityEditor.UnityEditorInternalException.#ctor(System.Exception@)">
             <inheritdoc/>
         </member>
-        <member name="T:AIO.Unity.Editor.SymlinkTools">
-            <summary>
-            符号链接工具类
-            An editor utility for easily creating symlinks in your project.
-            Adds a Menu item under `Assets/Create/Folder (Symlink)`, and 
-            draws a small indicator in the Project view for folders that are
-            symlinks.
-            </summary>
-        </member>
-        <member name="M:AIO.Unity.Editor.SymlinkTools.#cctor">
-            <summary>
-            Static constructor subscribes to projectWindowItemOnGUI delegate.
-            </summary>
-        </member>
-        <member name="M:AIO.Unity.Editor.SymlinkTools.OnProjectWindowItemGUI(System.String,UnityEngine.Rect)">
-            <summary>
-            Draw a little indicator if folder is a symlink
-            </summary>
-            <param name="guid"></param>
-            <param name="r"></param>
-        </member>
-        <member name="M:AIO.Unity.Editor.SymlinkTools.SymlinkAbsolute">
-            Add a menu item in the Assets/Create category to add symlinks to directories.
-        </member>
-        <member name="T:AIO.MenuFunctionState">
+        <member name="T:UnityEditor.MenuFunctionState">
             <summary>
             The possible states for a function in a <see cref="T:UnityEditor.GenericMenu"/>.
             </summary>
         </member>
-        <member name="F:AIO.MenuFunctionState.Normal">
+        <member name="F:UnityEditor.MenuFunctionState.Normal">
             <summary>
             正常显示
             </summary>
         </member>
-        <member name="F:AIO.MenuFunctionState.Selected">
+        <member name="F:UnityEditor.MenuFunctionState.Selected">
             <summary>
             在它旁边有一个复选标记，表示它已被选中。
             </summary>
         </member>
-        <member name="F:AIO.MenuFunctionState.Disabled">
+        <member name="F:UnityEditor.MenuFunctionState.Disabled">
             <summary>
             颜色变灰，无法使用。
             </summary>
         </member>
-        <member name="T:AIO.GenericMenuExtend">
+        <member name="T:UnityEditor.GenericMenuExtend">
             <summary>
             菜单扩展
             </summary>
         </member>
-        <member name="M:AIO.GenericMenuExtend.AddFunction(UnityEditor.GenericMenu,System.String,AIO.MenuFunctionState,UnityEditor.GenericMenu.MenuFunction)">
+        <member name="M:UnityEditor.GenericMenuExtend.AddFunction(UnityEditor.GenericMenu,System.String,UnityEditor.MenuFunctionState,UnityEditor.GenericMenu.MenuFunction)">
             <summary>
             添加菜单项，以便为每个属性的目标对象执行指定的函数。
             </summary>
         </member>
-        <member name="M:AIO.GenericMenuExtend.AddFunction(UnityEditor.GenericMenu,System.String,System.Boolean,UnityEditor.GenericMenu.MenuFunction)">
+        <member name="M:UnityEditor.GenericMenuExtend.AddFunction(UnityEditor.GenericMenu,System.String,System.Boolean,UnityEditor.GenericMenu.MenuFunction)">
             <summary>
             添加菜单项，以便为每个属性的目标对象执行指定的函数。
             </summary>
         </member>
-        <member name="M:AIO.GenericMenuExtend.AddPropertyModifierFunction(UnityEditor.GenericMenu,UnityEditor.SerializedProperty,System.String,System.Boolean,System.Action{UnityEditor.SerializedProperty})">
+        <member name="M:UnityEditor.GenericMenuExtend.AddPropertyModifierFunction(UnityEditor.GenericMenu,UnityEditor.SerializedProperty,System.String,System.Boolean,System.Action{UnityEditor.SerializedProperty})">
             <summary>
             添加菜单项，以便为每个属性的目标对象执行指定的函数。
             </summary>
         </member>
-        <member name="M:AIO.GenericMenuExtend.AddPropertyModifierFunction(UnityEditor.GenericMenu,UnityEditor.SerializedProperty,System.String,System.Action{UnityEditor.SerializedProperty})">
+        <member name="M:UnityEditor.GenericMenuExtend.AddPropertyModifierFunction(UnityEditor.GenericMenu,UnityEditor.SerializedProperty,System.String,System.Action{UnityEditor.SerializedProperty})">
             <summary>
             添加一个菜单项，以便为每个属性的目标对象执行指定的函数。
             </summary>
         </member>
-        <member name="M:AIO.GenericMenuExtend.AddPropertyModifierFunction(UnityEditor.GenericMenu,UnityEditor.SerializedProperty,System.String,AIO.MenuFunctionState,System.Action{UnityEditor.SerializedProperty})">
+        <member name="M:UnityEditor.GenericMenuExtend.AddPropertyModifierFunction(UnityEditor.GenericMenu,UnityEditor.SerializedProperty,System.String,UnityEditor.MenuFunctionState,System.Action{UnityEditor.SerializedProperty})">
             <summary>
             为每个属性的目标对象添加一个菜单项，以执行指定的函数。
             </summary>
         </member>
-        <member name="T:AIO.SerializedPropertyExtend">
+        <member name="T:UnityEditor.SerializedPropertyExtend">
             <summary>
             序列化属性扩展
             </summary>
         </member>
-        <member name="M:AIO.SerializedPropertyExtend.ForEachTarget(UnityEditor.SerializedProperty,System.Action{UnityEditor.SerializedProperty},System.String)">
+        <member name="M:UnityEditor.SerializedPropertyExtend.ForEachTarget(UnityEditor.SerializedProperty,System.Action{UnityEditor.SerializedProperty},System.String)">
             <summary>
             对每个SerializedObject使用一个新的SerializedProperty执行一次' action '。或者如果只有一个目标，它使用' property '。
             </summary>
         </member>
-        <member name="M:AIO.SerializedPropertyExtend.IsDefaultValueByType(UnityEditor.SerializedProperty)">
+        <member name="M:UnityEditor.SerializedPropertyExtend.IsDefaultValueByType(UnityEditor.SerializedProperty)">
             <summary>
             Is the value of the `property` the same as the default serialized value for its type?
             </summary>
         </member>
-        <member name="M:AIO.SerializedPropertyExtend.ResetValue(UnityEditor.SerializedProperty,System.String)">
+        <member name="M:UnityEditor.SerializedPropertyExtend.ResetValue(UnityEditor.SerializedProperty,System.String)">
             <summary>
             Resets the value of the <see cref="T:UnityEditor.SerializedProperty"/> to the default value of its type and all its field
             types, ignoring values set by constructors or field initializers.
@@ -141,72 +117,1615 @@
             If you want to run constructors and field initializers, you can call
             </remarks>
         </member>
-        <member name="T:AIO.TypeExtend">
+        <member name="T:UnityEditor.TypeExtend">
             <summary>
             类扩展
             </summary>
         </member>
-        <member name="M:AIO.TypeExtend.GetPropertyType(System.Type)">
+        <member name="M:UnityEditor.TypeExtend.GetPropertyType(System.Type)">
             <summary>
             返回表示指定“类型”字段的SerializedPropertyType。
             </summary>
         </member>
-        <member name="T:UtilsEditor">
+        <member name="T:UnityEditor.ArgumentAttribute">
+            <summary>
+            属性解析
+            </summary>
+        </member>
+        <member name="P:UnityEditor.ArgumentAttribute.Label">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:UnityEditor.ArgumentAttribute.Type">
+            <summary>
+            参数类型
+            </summary>
+        </member>
+        <member name="M:UnityEditor.ArgumentAttribute.#ctor(System.String,UnityEditor.EArgLabel)">
+            <summary>
+            参数
+            </summary>
+        </member>
+        <member name="T:UnityEditor.ArgumentCustom">
+            <summary>
+            自定义参数解析
+            </summary>
+        </member>
+        <member name="P:UnityEditor.ArgumentCustom.Command">
+            <summary>
+            命令
+            </summary>
+        </member>
+        <member name="M:UnityEditor.ArgumentCustom.SubResolver(System.Reflection.FieldInfo@,System.Attribute@,System.String@)">
+            <summary>
+            字段解析
+            </summary>
+            <param name="field">字段</param>
+            <param name="attribute">属性</param>
+            <param name="command">命令</param>
+            <returns>Ture:解析成功 False:解析失败</returns>
+        </member>
+        <member name="M:UnityEditor.ArgumentCustom.Resolver(System.String@)">
+            <summary>
+            解析
+            </summary>
+            <param name="cmd"></param>
+        </member>
+        <member name="M:UnityEditor.ArgumentCustom.ToString">
+            <summary>
+            重写转化 String
+            </summary>
+        </member>
+        <member name="M:UnityEditor.ArgumentCustom.GetBool(System.String@,System.String@)">
+            <summary>
+            获取 Bool
+            </summary>
+        </member>
+        <member name="M:UnityEditor.ArgumentCustom.GetString(System.String@,System.String@)">
+            <summary>
+            获取 String
+            </summary>
+        </member>
+        <member name="M:UnityEditor.ArgumentCustom.GetStringArray(System.String@,System.String@)">
+            <summary>
+            获取 String Array
+            </summary>
+        </member>
+        <member name="M:UnityEditor.ArgumentCustom.GetEnum(System.String@,System.Type@,System.String@)">
+            <summary>
+            获取 String Array
+            </summary>
+        </member>
+        <member name="M:UnityEditor.ArgumentCustom.GetIntegerArray(System.String@,System.String@)">
+            <summary>
+            获取 String Array
+            </summary>
+        </member>
+        <member name="M:UnityEditor.ArgumentCustom.GetInteger(System.String@,System.String@)">
+            <summary>
+            获取 Int
+            </summary>
+            如果为-1 则说明没有使用
+        </member>
+        <member name="T:UnityEditor.EArgLabel">
+            <summary>
+            参数类型
+            </summary>
+        </member>
+        <member name="F:UnityEditor.EArgLabel.Bool">
+            <summary>
+            BOOL
+            </summary>
+        </member>
+        <member name="F:UnityEditor.EArgLabel.Integer">
+            <summary>
+            Int
+            </summary>
+        </member>
+        <member name="F:UnityEditor.EArgLabel.IntegerArray">
+            <summary>
+            Int数组
+            </summary>
+        </member>
+        <member name="F:UnityEditor.EArgLabel.String">
+            <summary>
+            字符串
+            </summary>
+        </member>
+        <member name="F:UnityEditor.EArgLabel.StringArray">
+            <summary>
+            字符串数组
+            </summary>
+        </member>
+        <member name="F:UnityEditor.EArgLabel.Enum">
+            <summary>
+            枚举
+            </summary>
+        </member>
+        <member name="T:UnityEditor.UnityArgsCommand">
+            <summary>
+            Unity 接收函数
+            </summary>
+        </member>
+        <member name="F:UnityEditor.UnityArgsCommand.batchmode">
+            <summary>
+            以批处理模式运行 Unity。请始终将此命令与其他命令行参数结合使用，从而确保不会出现弹出窗口且无需任何人为干预。在执行脚本代码期间发生异常时，资源服务器更新失败时，或其他操作失败时，Unity 将立即退出并返回代码 1。
+            请注意，在批处理模式下，Unity 会将其日志输出的最小版本发送到控制台。但是，日志文件仍包含完整的日志信息。当 Editor 打开某个项目时，您无法以批处理模式打开相同的项目；一次只能运行一个 Unity 实例。
+            要检查是否正在以批处理模式运行 Editor 或独立平台播放器，请使用 Application.isBatchMode 运算符。
+            如果在使用 -batchmode 时还没有导入项目，则目标平台为默认平台。要强制选择其他平台，请使用 -buildTarget 选项。
+            </summary>
+        </member>
+        <member name="F:UnityEditor.UnityArgsCommand.quit">
+            <summary>
+            在其他命令执行完毕后退出 Unity Editor。这可能导致错误消息被隐藏（但是，它们仍会出现在 Editor.log 文件中）。
+            </summary>
+        </member>
+        <member name="F:UnityEditor.UnityArgsCommand.silentcrashes">
+            <summary>
+            阻止 Unity 显示独立平台播放器崩溃时出现的对话框。希望在自动的构建或测试中运行播放器时（此时不希望对话框提示阻碍自动化过程），此参数非常有用。
+            </summary>
+        </member>
+        <member name="F:UnityEditor.UnityArgsCommand.nolog">
+            <summary>
+            不生成输出日志。通常，Unity 将 output_log.txt 写入到 Log Files 文件夹中，其中会打印 Debug.Log 输出。
+            </summary>
+        </member>
+        <member name="F:UnityEditor.UnityArgsCommand.nographics">
+            <summary>
+            在批处理模式下运行此命令时，不会初始化图形设备。这样，在没有 GPU 的机器上可以运行自动化工作流程。
+            </summary>
+        </member>
+        <member name="F:UnityEditor.UnityArgsCommand.nostereorendering">
+            <summary>
+            关闭立体渲染。
+            </summary>
+        </member>
+        <member name="F:UnityEditor.UnityArgsCommand.deepprofiling">
+            <summary>
+            对 CPU 性能分析器启用深度性能分析选项。
+            </summary>
+        </member>
+        <member name="F:UnityEditor.UnityArgsCommand.diagdebugshadercompiler">
+            <summary>
+            Unity 仅启动一个着色器编译器实例，并将其超时强制为一小时。对于调试着色器编译器问题很有用。
+            </summary>
+        </member>
+        <member name="F:UnityEditor.UnityArgsCommand.enableCodeCoverage">
+            <summary>
+            启用代码覆盖率并允许访问 Coverage API。
+            </summary>
+        </member>
+        <member name="F:UnityEditor.UnityArgsCommand.stackTraceLogType">
+            <summary>
+            允许详细调试。所有设置都允许选择 None、Script Only 和 Full。（例如，-stackTraceLogType Full）
+            </summary>
+        </member>
+        <member name="F:UnityEditor.UnityArgsCommand.executeMethod">
+            <summary>
+            执行函数
+            </summary>
+        </member>
+        <member name="F:UnityEditor.UnityArgsCommand.executeMethodArgs">
+            <summary>
+            执行函数
+            </summary>
+        </member>
+        <member name="F:UnityEditor.UnityArgsCommand.projectPath">
+            <summary>
+            项目路径
+            </summary>
+        </member>
+        <member name="F:UnityEditor.UnityArgsCommand.buildLinux64Player">
+            <summary>
+            构建 64 位独立平台 Linux 播放器（例如，-buildLinux64Player path/to/your/build）。
+            </summary>
+        </member>
+        <member name="F:UnityEditor.UnityArgsCommand.buildOSXUniversalPlayer">
+            <summary>
+            构建 64 位独立平台 Mac OSX 播放器（例如，-buildOSXUniversalPlayer path/to/your/build.app）。
+            </summary>
+        </member>
+        <member name="F:UnityEditor.UnityArgsCommand.buildTarget">
+            <summary>
+            在加载项目之前选择有效的构建目标。可能的选项包括：
+            Standalone、Win、Win64、OSXUniversal、Linux64、iOS、Android、
+            WebGL、XboxOne、PS4、WindowsStoreApps、Switch、tvOS。
+            </summary>
+        </member>
+        <member name="F:UnityEditor.UnityArgsCommand.buildWindowsPlayer">
+            <summary>
+            构建 32 位独立平台 Windows 播放器（例如，-buildWindowsPlayer path/to/your/build.exe）。
+            </summary>
+        </member>
+        <member name="F:UnityEditor.UnityArgsCommand.buildWindows64Player">
+            <summary>
+            构建 64 位独立平台 Windows 播放器（例如，-buildWindows64Player path/to/your/build.exe）。
+            </summary>
+        </member>
+        <member name="F:UnityEditor.UnityArgsCommand.createProject">
+            <summary>
+            在指定路径中创建一个空项目。
+            </summary>
+        </member>
+        <member name="F:UnityEditor.UnityArgsCommand.profilerlogfile">
+            <summary>
+            此参数可以设置 Unity Profiler 在启动时将性能分析数据流式传输到 .raw 文件。对播放器和 Editor 都有效。
+            </summary>
+        </member>
+        <member name="F:UnityEditor.UnityArgsCommand.setDefaultPlatformTextureFormat">
+            <summary>
+            在导入纹理或构建项目之前，将默认纹理压缩设置为所需的格式。这样就不必再使用所需的格式导入纹理。可用的格式为 dxt、pvrtc、atc、etc、etc2 和 astc。
+            </summary>
+        </member>
+        <member name="T:UnityEditor.WindowExtraAttribute">
+            <summary>
+            额外的窗口
+            </summary>
+        </member>
+        <member name="P:UnityEditor.WindowExtraAttribute.Group">
+            <summary>
+            组
+            </summary>
+        </member>
+        <member name="P:UnityEditor.WindowExtraAttribute.Order">
+            <summary>
+            顺序
+            </summary>
+        </member>
+        <member name="M:UnityEditor.WindowExtraAttribute.#ctor(System.String,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:UnityEditor.WindowExtraAttribute.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:UnityEditor.WindowMinSizeAttribute">
+            <summary>
+            最小的窗口大小
+            </summary>
+        </member>
+        <member name="P:UnityEditor.WindowMinSizeAttribute.Width">
+            <summary>
+            宽度
+            </summary>
+        </member>
+        <member name="P:UnityEditor.WindowMinSizeAttribute.Height">
+            <summary>
+            高度
+            </summary>
+        </member>
+        <member name="M:UnityEditor.WindowMinSizeAttribute.#ctor(System.Single,System.Single)">
+            <inheritdoc />
+        </member>
+        <member name="M:UnityEditor.WindowMinSizeAttribute.#ctor(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:UnityEditor.WindowMinSizeAttribute.#ctor(UnityEngine.Vector2)">
+            <inheritdoc />
+        </member>
+        <member name="T:UnityEditor.WindowTitleAttribute">
+            <summary>
+            窗口名
+            </summary>
+        </member>
+        <member name="P:UnityEditor.WindowTitleAttribute.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="M:UnityEditor.WindowTitleAttribute.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:UnityEditor.WindowTitleAttribute.#ctor(System.String,UnityEngine.Texture)">
+            <inheritdoc />
+        </member>
+        <member name="M:UnityEditor.WindowTitleAttribute.#ctor(System.String,UnityEngine.Texture,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:UnityEditor.WindowTitleAttribute.#ctor(UnityEngine.Texture,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:UnityEditor.WindowTitleAttribute.#ctor(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:UnityEditor.WindowTitleAttribute.#ctor(UnityEngine.GUIContent)">
+            <inheritdoc />
+        </member>
+        <member name="T:UnityEditor.EmptyEditor">
+            <summary>
+            Editor 基类 无预览窗口 数据类
+            </summary>
+        </member>
+        <member name="P:UnityEditor.EmptyEditor.Preview">
+            <summary>
+            开启预览窗口
+            </summary>
+        </member>
+        <member name="F:UnityEditor.EmptyEditor.Vector">
+            <summary>
+            scorll pos
+            </summary>
+        </member>
+        <member name="F:UnityEditor.EmptyEditor.UndoNmae">
+            <summary>
+            撤销操作名字
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyEditor.Awake">
+            <summary>
+            鼠标点击进入调用
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyEditor.OnEnable">
+            <summary>
+            每次开启调用
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyEditor.OnDisable">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyEditor.OnDestroy">
+            <summary>
+            销毁时调用
+            </summary>
+        </member>
+        <member name="T:UnityEditor.InspertorMultiple">
+            <summary>
+            修改多个Inspertor物体属性
+            </summary>
+        </member>
+        <member name="F:UnityEditor.InspertorMultiple.UNDO">
+            <summary>
+            常量 撤销标识码
+            </summary>
+        </member>
+        <member name="F:UnityEditor.InspertorMultiple.SerObj">
+            <summary>
+            目标对象
+            </summary>
+        </member>
+        <member name="M:UnityEditor.InspertorMultiple.Awake">
+            <inheritdoc />
+        </member>
+        <member name="M:UnityEditor.InspertorMultiple.OnEnable">
+            <inheritdoc />
+        </member>
+        <member name="M:UnityEditor.InspertorMultiple.OnDisable">
+            <inheritdoc />
+        </member>
+        <member name="M:UnityEditor.InspertorMultiple.OnDestroy">
+            <inheritdoc />
+        </member>
+        <member name="M:UnityEditor.InspertorMultiple.OnInspectorGUI">
+            <summary>
+            执行这一个函数来一个自定义检视面板
+            </summary>
+        </member>
+        <member name="M:UnityEditor.InspertorMultiple.OnGUI">
+            <summary>
+            绘制 Inspertor 面板
+            </summary>
+        </member>
+        <member name="M:UnityEditor.InspertorMultiple.OnChange">
+            <summary>
+            Inspertor 发生改动时调用
+            </summary>
+        </member>
+        <member name="T:UnityEditor.InspertorSingle">
+            <summary>
+            修改单个Inspertor物体属性
+            </summary>
+        </member>
+        <member name="F:UnityEditor.InspertorSingle.UNDO">
+            <summary>
+            常量 撤销标识码
+            </summary>
+        </member>
+        <member name="F:UnityEditor.InspertorSingle.SerObj">
+            <summary>
+            目标对象
+            </summary>
+        </member>
+        <member name="M:UnityEditor.InspertorSingle.Awake">
+            <inheritdoc />
+        </member>
+        <member name="M:UnityEditor.InspertorSingle.OnEnable">
+            <inheritdoc />
+        </member>
+        <member name="M:UnityEditor.InspertorSingle.OnDisable">
+            <inheritdoc />
+        </member>
+        <member name="M:UnityEditor.InspertorSingle.OnDestroy">
+            <inheritdoc />
+        </member>
+        <member name="M:UnityEditor.InspertorSingle.OnInspectorGUI">
+            <summary>
+            执行这一个函数来一个自定义检视面板
+            </summary>
+        </member>
+        <member name="M:UnityEditor.InspertorSingle.OnGUI">
+            <summary>
+            绘制 Inspertor 面板
+            </summary>
+        </member>
+        <member name="M:UnityEditor.InspertorSingle.OnChange">
+            <summary>
+            Inspertor 发生改动时调用
+            </summary>
+        </member>
+        <member name="T:UnityEditor.EmptyGraphWindow">
+            <summary>
+            自定义窗口基类
+            </summary>
+            <summary>
+            EmptyGraphWindow
+            </summary>
+        </member>
+        <member name="P:UnityEditor.EmptyGraphWindow.CurrentWidth">
+            <summary>
+            当前窗口宽度
+            </summary>
+        </member>
+        <member name="P:UnityEditor.EmptyGraphWindow.CurrentWidthHalf">
+            <summary>
+            当前窗口宽度一半
+            </summary>
+        </member>
+        <member name="P:UnityEditor.EmptyGraphWindow.CurrentHeight">
+            <summary>
+            当前窗口高度
+            </summary>
+        </member>
+        <member name="P:UnityEditor.EmptyGraphWindow.CurrentHeightHalf">
+            <summary>
+            当前窗口高度一半
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.#ctor(System.Single,System.Single)">
+            <summary>
+            当前窗口中心点
+            </summary>
+            <param name="w">宽</param>
+            <param name="h">高</param>
+        </member>
+        <member name="P:UnityEditor.EmptyGraphWindow.ReliablePosition">
+            <summary>
+            当前窗口中心点
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.ToString">
+            <summary>
+            转化为信息字符串
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.AddItemsToMenu(UnityEditor.GenericMenu)">
+            <summary>
+            添加自定义菜单项
+            </summary>
+            <param name="menu">菜单信息</param>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.Awake">
+            <summary>
+            脚本启用时调用
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.CreateGUI">
+            <summary>
+            CreateGUl在编辑器窗口的rootVisualElement准备填充时被调用。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.OnEnable">
+            <summary>
+            该函数在加载对象时被调用。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.OnGUI">
+            <summary>
+            在这里实现您自己的编辑器GUI。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.OnAddedAsTab">
+            <summary>
+            当编辑器窗口作为选项卡添加时调用。放入选项卡 在选项卡被添加 都会触发
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.OnTabDetached">
+            <summary>
+            在拖放过程中调用。当一个编辑器窗口标签被分离时，此函数没有文档。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.OnBecameVisible">
+            <summary>
+            当打开编辑器窗口时调用。此函数未记录。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.OnBecameInvisible">
+            <summary>
+            当编辑器窗口关闭时调用。此函数没有记录。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.OnMainWindowMove">
+            <summary>
+            当主窗口移动时调用。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.OnDidOpenScene">
+            <summary>
+            当场景被打开时调用。此函数没有记录。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.OnHierarchyChange">
+            <summary>
+            用于在层次结构中的对象或对象组发生更改时发送的消息的处理程序。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.OnFocus">
+            <summary>
+            当窗口获得键盘焦点时调用。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.SaveChanges">
+            <summary>
+            对窗口的内容执行保存操作。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.OnShowButton(UnityEngine.Rect@)">
+            <summary>
+            允许编辑器窗格在通用菜单旁边显示一个小按钮(例如检查器锁图标)。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.OnModifierKeysChanged">
+            <summary>
+            当修改键被更改时调用。自动注册和取消编辑器应用程序。modifierKeysChanged event该函数无文档。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.OnBackingScaleFactorChanged">
+            <summary>
+            在更改此EditorWindow的UI缩放时调用。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.OnInspectorUpdate">
+            <summary>
+            以每秒10帧的速度被调用，给检查器一个更新的机会。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.OnValidate">
+            <summary>
+            只有编辑器的函数，Unity在脚本加载或检查器中的值改变时调用。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.OnDisable">
+            <summary>
+            当可脚本化对象超出作用域时调用此函数。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.OnDestroy">
+            <summary>
+            调用OnDestroy关闭EditorWindow窗口。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.OnSelectionChange">
+            <summary>
+            每当选择发生变化时调用。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.OnProjectChange">
+            <summary>
+            每当项目状态更改时发送的消息的处理程序。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.OnLostFocus">
+            <summary>
+            当窗口失去键盘焦点时调用。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.Reset">
+            <summary>
+            重置为默认值。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.OnAddItemsToMenu(UnityEditor.GenericMenu)">
+            <summary>
+            将自定义菜单项添加到编辑器窗口。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.Update">
+            <summary>
+            在所有可见窗口上每秒调用多次。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.Open``1(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            打开窗口
+            </summary>
+            <param name="title">标题</param>
+            <param name="utility">边框</param>
+            <param name="focus">聚焦</param>
+            <typeparam name="T"><see cref="T:UnityEditor.EditorWindow"/></typeparam>
+            <returns><see cref="T:UnityEditor.EditorWindow"/></returns>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.Open``1(System.String,System.Boolean,System.Type[])">
+            <summary>
+            打开窗口
+            </summary>
+            <param name="title">标题</param>
+            <param name="types">类型数组</param>
+            <param name="focus">聚焦</param>
+            <typeparam name="T"><see cref="T:UnityEditor.EditorWindow"/></typeparam>
+            <returns><see cref="T:UnityEditor.EditorWindow"/></returns>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.Open``1(System.Boolean,System.Type[])">
+            <summary>
+            打开窗口
+            </summary>
+            <param name="types">类型数组</param>
+            <param name="focus">聚焦</param>
+            <typeparam name="T"><see cref="T:UnityEditor.EditorWindow"/></typeparam>
+            <returns><see cref="T:UnityEditor.EditorWindow"/></returns>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.Open``1(System.String,System.Type[])">
+            <summary>
+            打开窗口
+            </summary>
+            <param name="title">标题</param>
+            <param name="types">类型数组</param>
+            <typeparam name="T"><see cref="T:UnityEditor.EditorWindow"/></typeparam>
+            <returns><see cref="T:UnityEditor.EditorWindow"/></returns>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.Open``1(UnityEngine.Rect,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            打开窗口
+            </summary>
+            <param name="rect">矩形信息</param>
+            <param name="title">标题</param>
+            <param name="utility">边框</param>
+            <param name="focus">聚焦</param>
+            <typeparam name="T"><see cref="T:UnityEditor.EditorWindow"/></typeparam>
+            <returns><see cref="T:UnityEditor.EditorWindow"/></returns>
+        </member>
+        <member name="M:UnityEditor.EmptyGraphWindow.Free``1(``0)">
+            <summary>
+            释放窗口
+            </summary>
+            <typeparam name="T"><see cref="T:UnityEditor.EditorWindow"/></typeparam>
+            <returns><see cref="T:UnityEditor.EditorWindow"/></returns>
+        </member>
+        <member name="T:UnityEditor.GraphicEnum">
+            <summary>
+            图形枚举类
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicEnum.GetDescription``1">
+            <summary>
+            获取描述信息
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicEnum.GetDescription(System.Type@)">
+            <summary>
+            获取描述
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicEnum.GetValue``1">
+            <summary>
+            获取值
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicEnum.GetValue(System.Type@)">
+            <summary>
+            获取值
+            </summary>
+        </member>
+        <member name="F:UnityEditor.GraphicEnum.ShowName">
+            <summary>
+            显示名称
+            </summary>
+        </member>
+        <member name="F:UnityEditor.GraphicEnum.MultipleChoice">
+            <summary>
+            单项选择
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicEnum.Update``1(``0@)">
+            <summary>
+            更新
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicEnum.Update``1(``0@,System.Boolean@,System.Boolean@)">
+            <summary>
+            更新
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicEnum.Update``1(``0@,System.Boolean@)">
+            <summary>
+            更新
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicEnum.OnDraw">
+            <summary>
+            绘制
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicEnum.EventContextClick(UnityEngine.Event@)">
+            <summary>
+            打开事件
+            </summary>
+        </member>
+        <member name="T:UnityEditor.GraphicEnum.EnumInfo">
+            <summary>
+            枚举信息
+            </summary>
+        </member>
+        <member name="F:UnityEditor.GraphicEnum.EnumInfo.DescriptionDic">
+            <summary>
+            枚举信息字典
+            </summary>
+        </member>
+        <member name="P:UnityEditor.GraphicEnum.EnumInfo.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicEnum.EnumInfo.Create(System.Type@)">
+            <summary>
+            创建枚举信息
+            </summary>
+            <param name="type">类型</param>
+            <returns><see cref="T:UnityEditor.GraphicEnum.EnumInfo"/></returns>
+        </member>
+        <member name="M:UnityEditor.GraphicEnum.EnumInfo.Create``1">
+            <summary>
+            创建枚举信息
+            </summary>
+        </member>
+        <member name="T:UnityEditor.GraphicRect">
+            <summary>
+            图形矩形
+            </summary>
+        </member>
+        <member name="P:UnityEditor.GraphicRect.Items">
+            <summary>
+            子项
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.Hide">
+            <summary>
+            隐藏
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.Show">
+            <summary>
+            显示
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.Draw">
+            <summary>
+            绘制
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.Overview(UnityEngine.Vector2@)">
+            <summary>
+            居中
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.ToString">
+            <summary>
+            输出信息
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.OnOpenEvent">
+            <summary>
+            开启输入事件监听
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventValidateCommand(UnityEngine.Event@)">
+            <summary>
+            事件类型 验证命令
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventTouchUp(UnityEngine.Event@)">
+            <summary>
+            事件类型 触摸抬起
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventTouchStationary(UnityEngine.Event@)">
+            <summary>
+            事件类型 触摸静止
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventTouchMove(UnityEngine.Event@)">
+            <summary>
+            事件类型 触摸移动
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventTouchEnter(UnityEngine.Event@)">
+            <summary>
+            事件类型 触摸进入
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventTouchLeave(UnityEngine.Event@)">
+            <summary>
+            事件类型 触摸离开
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventTouchDown(UnityEngine.Event@)">
+            <summary>
+            事件类型 触摸按下
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventScrollWheel(UnityEngine.Event@)">
+            <summary>
+            事件类型 滚轮滚动
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventExecuteCommand(UnityEngine.Event@)">
+            <summary>
+            事件类型 执行命令
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventKeyUp(UnityEngine.Event@,UnityEngine.KeyCode@)">
+            <summary>
+            事件类型 鼠标抬起
+            </summary>
+            <param name="eventData"></param>
+            <param name="keyCode"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventKeyDown(UnityEngine.Event@,UnityEngine.KeyCode@)">
+            <summary>
+            事件类型 鼠标按下
+            </summary>
+            <param name="eventData"></param>
+            <param name="keyCode"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventDragUpdated(UnityEngine.Event@)">
+            <summary>
+            事件类型 拖拽更新
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventDragPerform(UnityEngine.Event@)">
+            <summary>
+            事件类型 拖拽执行
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventDragExited(UnityEngine.Event@)">
+            <summary>
+            事件类型 拖拽退出
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventRepaint(UnityEngine.Event@)">
+            <summary>
+            事件类型 重绘
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventLayout(UnityEngine.Event@)">
+            <summary>
+            事件类型 布局
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventIgnore(UnityEngine.Event@)">
+            <summary>
+            事件类型 忽略
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventUsed(UnityEngine.Event@)">
+            <summary>
+            事件类型 失去焦点
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventContextClick(UnityEngine.Event@)">
+            <summary>
+            事件类型 右键点击
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventMouseLeaveWindow(UnityEngine.Event@)">
+            <summary>
+            事件类型 鼠标离开窗口
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventMouseEnterWindow(UnityEngine.Event@)">
+            <summary>
+            事件类型 鼠标进入窗口
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventMouseMove(UnityEngine.Event@)">
+            <summary>
+            事件类型 鼠标离开
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventMouseDrag(UnityEngine.Event@)">
+            <summary>
+            事件类型 鼠标拖拽
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventMouseUp(UnityEngine.Event@)">
+            <summary>
+            事件类型 鼠标抬起
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.EventMouseDown(UnityEngine.Event@)">
+            <summary>
+            事件类型 鼠标按下
+            </summary>
+            <param name="eventData"></param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.DrawRect(UnityEngine.Rect@,UnityEngine.Color@,UnityEngine.Color@)">
+            <summary>
+            绘制矩形
+            </summary>
+            <param name="rect">矩形</param>
+            <param name="fillColor">填充颜色</param>
+            <param name="outlineColor">描边颜色</param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.DrawRect(UnityEngine.Rect@,UnityEngine.Color@)">
+            <summary>
+            绘制矩形
+            </summary>
+            <param name="rect">矩形</param>
+            <param name="fillColor">填充颜色</param>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.DrawRect(UnityEngine.Rect@)">
+            <summary>
+            绘制矩形
+            </summary>
+            <param name="rect">矩形</param>
+        </member>
+        <member name="P:UnityEditor.GraphicRect.IsShow">
+            <summary>
+            是否显示该矩形
+            </summary>
+        </member>
+        <member name="P:UnityEditor.GraphicRect.IsEvent">
+            <summary>
+            是否接收事件
+            </summary>
+        </member>
+        <member name="P:UnityEditor.GraphicRect.RectData">
+            <summary>
+            矩形范围
+            </summary>
+        </member>
+        <member name="P:UnityEditor.GraphicRect.Position">
+            <summary>
+            坐标信息
+            </summary>
+        </member>
+        <member name="P:UnityEditor.GraphicRect.X">
+            <summary>
+            坐标信息 X
+            </summary>
+        </member>
+        <member name="P:UnityEditor.GraphicRect.Y">
+            <summary>
+            坐标信息 Y
+            </summary>
+        </member>
+        <member name="P:UnityEditor.GraphicRect.Size">
+            <summary>
+            大小信息
+            </summary>
+        </member>
+        <member name="P:UnityEditor.GraphicRect.Width">
+            <summary>
+            大小信息 宽度
+            </summary>
+        </member>
+        <member name="P:UnityEditor.GraphicRect.Height">
+            <summary>
+            大小信息 高度
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.Clear">
+            <summary>
+            清空数据
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.Dispose">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.Reset">
+            <summary>
+            重置
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.OnAwake">
+            <summary>
+            进入初始化
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicRect.OnDraw">
+            <summary>
+            进入绘制
+            </summary>
+        </member>
+        <member name="T:UnityEditor.GraphicWindow">
+            <summary>
+            图形窗口
+            </summary>
+        </member>
+        <member name="P:UnityEditor.GraphicWindow.Group">
+            <summary>
+            组名 编写额外的窗口
+            </summary>
+        </member>
+        <member name="P:UnityEditor.GraphicWindow.Title">
+            <summary>
+            标题名
+            </summary>
+        </member>
+        <member name="P:UnityEditor.GraphicWindow.MinSize">
+            <summary>
+            最小大小
+            </summary>
+        </member>
+        <member name="F:UnityEditor.GraphicWindow.GroupList">
+            <summary>
+            组列表
+            </summary>
+        </member>
+        <member name="P:UnityEditor.GraphicWindow.GraphicItems">
+            <summary>
+            视图元素
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.OnGUIStyle">
+            <summary>
+            初始化皮肤格式化
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.OnEnable">
+            <inheritdoc />
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.Awake">
+            <inheritdoc />
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.OnAwake">
+            <summary>
+            脚本启用时调用
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.GetExtraPaneTypes">
+            <summary>
+            获取与窗口关联的额外窗格。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.Update">
+            <summary>
+            在所有可见窗口上每秒调用多次。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.OnUpdate">
+            <summary>
+            在所有可见窗口上每秒调用多次。
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.OnOpenEvent">
+            <summary>
+            开启输入事件监听
+            </summary>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventValidateCommand(UnityEngine.Event@)">
+            <summary>
+             验证一个特殊的命令(例如复制和粘贴)。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventTouchUp(UnityEngine.Event@)">
+            <summary>
+            直接操作装置(手指、笔)离开屏幕。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventTouchStationary(UnityEngine.Event@)">
+            <summary>
+            直接操作装置(手指、笔)静止事件(长触)
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventTouchMove(UnityEngine.Event@)">
+            <summary>
+            直接操纵装置(手指、笔)在屏幕上移动(拖动)。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventTouchEnter(UnityEngine.Event@)">
+            <summary>
+            直接操作装置(手指、笔)进入屏幕。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventTouchLeave(UnityEngine.Event@)">
+            <summary>
+            直接操作装置(手指、笔)离开屏幕。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventTouchDown(UnityEngine.Event@)">
+            <summary>
+            直接操作装置(手指、笔)触摸屏幕。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventScrollWheel(UnityEngine.Event@)">
+            <summary>
+            滚轮被移动了。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventExecuteCommand(UnityEngine.Event@)">
+            <summary>
+            执行一个特殊的命令。复制粘贴
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventKeyUp(UnityEngine.Event@,UnityEngine.KeyCode@)">
+            <summary>
+            松开一个键盘键。
+            </summary>
+            <param name="eventData">数据</param>
+            <param name="keyCode">按键类型</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventKeyDown(UnityEngine.Event@,UnityEngine.KeyCode@)">
+            <summary>
+            按了一个键盘键。
+            </summary>
+            <param name="eventData">数据</param>
+            <param name="keyCode">按键类型</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventDragUpdated(UnityEngine.Event@)">
+            <summary>
+            编辑器:拖放操作更新。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventDragPerform(UnityEngine.Event@)">
+            <summary>
+            仅限编辑器:执行拖放操作。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventDragExited(UnityEngine.Event@)">
+            <summary>
+            仅限编辑器:拖放操作退出。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventRepaint(UnityEngine.Event@)">
+            <summary>
+            重绘事件。每帧发送一个。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventLayout(UnityEngine.Event@)">
+            <summary>
+            一个布局事件。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventIgnore(UnityEngine.Event@)">
+            <summary>
+            事件应该被忽略。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventUsed(UnityEngine.Event@)">
+            <summary>
+            已经处理的事件
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventContextClick(UnityEngine.Event@)">
+            <summary>
+            鼠标右键单击
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventMouseLeaveWindow(UnityEngine.Event@)">
+            <summary>
+            鼠标离开窗口
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventMouseEnterWindow(UnityEngine.Event@)">
+            <summary>
+            鼠标进入窗口
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventMouseMove(UnityEngine.Event@)">
+            <summary>
+            鼠标移动
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventMouseDrag(UnityEngine.Event@)">
+            <summary>
+            鼠标拖拽
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventMouseUp(UnityEngine.Event@)">
+            <summary>
+            鼠标送开
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.GraphicWindow.EventMouseDown(UnityEngine.Event@)">
+            <summary>
+            鼠标按下
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="T:UnityEditor.SymlinkTools">
+            <summary>
+            符号链接工具类
+            An editor utility for easily creating symlinks in your project.
+            Adds a Menu item under `Assets/Create/Folder (Symlink)`, and 
+            draws a small indicator in the Project view for folders that are
+            symlinks.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.SymlinkTools.#cctor">
+            <summary>
+            Static constructor subscribes to projectWindowItemOnGUI delegate.
+            </summary>
+        </member>
+        <member name="M:UnityEditor.SymlinkTools.OnProjectWindowItemGUI(System.String,UnityEngine.Rect)">
+            <summary>
+            Draw a little indicator if folder is a symlink
+            </summary>
+            <param name="guid"></param>
+            <param name="r"></param>
+        </member>
+        <member name="M:UnityEditor.SymlinkTools.SymlinkAbsolute">
+            Add a menu item in the Assets/Create category to add symlinks to directories.
+        </member>
+        <member name="T:UnityEditor.IGraphEvent">
+            <summary>
+            图像事件触发
+            </summary>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.OnOpenEvent">
+            <summary>
+            开启事件监听
+            </summary>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventValidateCommand(UnityEngine.Event@)">
+            <summary>
+             验证一个特殊的命令(例如复制和粘贴)。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventTouchUp(UnityEngine.Event@)">
+            <summary>
+            直接操作装置(手指、笔)离开屏幕。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventTouchStationary(UnityEngine.Event@)">
+            <summary>
+            直接操作装置(手指、笔)静止事件(长触)
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventTouchMove(UnityEngine.Event@)">
+            <summary>
+            直接操纵装置(手指、笔)在屏幕上移动(拖动)。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventTouchEnter(UnityEngine.Event@)">
+            <summary>
+            直接操作装置(手指、笔)进入屏幕。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventTouchLeave(UnityEngine.Event@)">
+            <summary>
+            直接操作装置(手指、笔)离开屏幕。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventTouchDown(UnityEngine.Event@)">
+            <summary>
+            直接操作装置(手指、笔)触摸屏幕。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventScrollWheel(UnityEngine.Event@)">
+            <summary>
+            滚轮被移动了。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventExecuteCommand(UnityEngine.Event@)">
+            <summary>
+            执行一个特殊的命令。复制粘贴
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventKeyUp(UnityEngine.Event@,UnityEngine.KeyCode@)">
+            <summary>
+            松开一个键盘键。
+            </summary>
+            <param name="eventData">数据</param>
+            <param name="keyCode">按键类型</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventKeyDown(UnityEngine.Event@,UnityEngine.KeyCode@)">
+            <summary>
+            按了一个键盘键。
+            </summary>
+            <param name="eventData">数据</param>
+            <param name="keyCode">按键类型</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventDragUpdated(UnityEngine.Event@)">
+            <summary>
+            编辑器:拖放操作更新。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventDragPerform(UnityEngine.Event@)">
+            <summary>
+            仅限编辑器:执行拖放操作。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventDragExited(UnityEngine.Event@)">
+            <summary>
+            仅限编辑器:拖放操作退出。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventRepaint(UnityEngine.Event@)">
+            <summary>
+            重绘事件。每帧发送一个。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventLayout(UnityEngine.Event@)">
+            <summary>
+            一个布局事件。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventIgnore(UnityEngine.Event@)">
+            <summary>
+            事件应该被忽略。
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventUsed(UnityEngine.Event@)">
+            <summary>
+            已经处理的事件
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventContextClick(UnityEngine.Event@)">
+            <summary>
+            鼠标右键单击
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventMouseLeaveWindow(UnityEngine.Event@)">
+            <summary>
+            鼠标离开窗口
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventMouseEnterWindow(UnityEngine.Event@)">
+            <summary>
+            鼠标进入窗口
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventMouseMove(UnityEngine.Event@)">
+            <summary>
+            鼠标移动
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventMouseDrag(UnityEngine.Event@)">
+            <summary>
+            鼠标拖拽
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventMouseUp(UnityEngine.Event@)">
+            <summary>
+            鼠标送开
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="M:UnityEditor.IGraphEvent.EventMouseDown(UnityEngine.Event@)">
+            <summary>
+            鼠标按下
+            </summary>
+            <param name="eventData">数据</param>
+        </member>
+        <member name="T:UnityEditor.IGraphRect">
+            <summary>
+            图形范围
+            </summary>
+        </member>
+        <member name="P:UnityEditor.IGraphRect.RectData">
+            <summary>
+            矩形范围
+            </summary>
+        </member>
+        <member name="M:UnityEditor.IGraphRect.Draw">
+            <summary>
+            绘制
+            </summary>
+        </member>
+        <member name="M:UnityEditor.IGraphRect.Clear">
+            <summary>
+            清空数据
+            </summary>
+        </member>
+        <member name="M:UnityEditor.IGraphRect.OnAwake">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="T:UnityEditor.UtilsEditor">
             <summary>
             Utils Unity Editor
             </summary>
         </member>
-        <member name="T:UtilsEditor.Asset">
+        <member name="T:UnityEditor.UtilsEditor.Argument">
+            <summary>
+            参数帮助类
+            </summary>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Argument.ResolverCustomCur``1">
+            <summary>
+            解析自定义命令
+            </summary>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Argument.ResolverCustom``1(System.String@)">
+            <summary>
+            解析自定义命令
+            </summary>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Argument.ResolverCustom``1(System.Collections.Generic.IEnumerable{System.String}@)">
+            <summary>
+            解析自定义命令
+            </summary>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Argument.ResolverCur``1">
+            <summary>
+            解析默认命令
+            </summary>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Argument.Resolver``1(System.Collections.Generic.IEnumerable{System.String}@)">
+            <summary>
+            解析默认命令
+            </summary>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Argument.Resolver``1(System.String@)">
+            <summary>
+            解析默认命令
+            </summary>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Argument.Resolver``1(``0,System.String@)">
+            <summary>
+            解析
+            </summary>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Argument.GetBool(System.String@,System.String@)">
+            <summary>
+            获取 Bool
+            </summary>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Argument.GetString(System.String@,System.String@)">
+            <summary>
+            获取 String
+            </summary>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Argument.GetStringArray(System.String@,System.String@)">
+            <summary>
+            获取 String Array
+            </summary>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Argument.GetEnum(System.String,System.Type,System.String)">
+            <summary>
+            获取 String Array
+            </summary>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Argument.GetIntegerArray(System.String@,System.String@)">
+            <summary>
+            获取 String Array
+            </summary>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Argument.GetInteger(System.String@,System.String@)">
+            <summary>
+            获取 Int
+            </summary>
+            如果为-1 则说明没有使用
+        </member>
+        <member name="T:UnityEditor.UtilsEditor.Asset">
             <summary>
             资源
             </summary>
         </member>
-        <member name="M:UtilsEditor.Asset.ApplyAssets">
+        <member name="M:UnityEditor.UtilsEditor.Asset.ApplyAssets">
             <summary>
             保存所有资源
             </summary>
         </member>
-        <member name="M:UtilsEditor.Asset.ApplyPrefab(UnityEngine.GameObject)">
+        <member name="M:UnityEditor.UtilsEditor.Asset.ApplyPrefab(UnityEngine.GameObject)">
             <summary>
             保存预制件修改
             </summary>
         </member>
-        <member name="M:UtilsEditor.Asset.SetDirty(UnityEngine.Object)">
+        <member name="M:UnityEditor.UtilsEditor.Asset.SetDirty(UnityEngine.Object)">
             <summary>
             标记目标
             </summary>
         </member>
-        <member name="M:UtilsEditor.Asset.GetAssetPath(UnityEngine.Object)">
+        <member name="M:UnityEditor.UtilsEditor.Asset.GetAssetPath(UnityEngine.Object)">
             <summary>
             获取资源的相对路径
             </summary>
         </member>
-        <member name="M:UtilsEditor.Asset.GetSelectAsText">
+        <member name="M:UnityEditor.UtilsEditor.Asset.GetSelectAsText">
             <summary>
             获取选中资源信息
             </summary>
             <returns>选中信息</returns>
         </member>
-        <member name="M:UtilsEditor.Asset.GetSelectAssetPath">
+        <member name="M:UnityEditor.UtilsEditor.Asset.GetSelectAssetPath">
             <summary>
             获取选中资源路径
             </summary>
             <returns></returns>
         </member>
-        <member name="M:UtilsEditor.Asset.GetSelectPaths">
+        <member name="M:UnityEditor.UtilsEditor.Asset.GetSelectPaths">
             <summary>
             获取多个选中路径
             </summary>
             <returns></returns>
         </member>
-        <member name="M:UtilsEditor.Asset.LoadAndInstance(System.String)">
+        <member name="M:UnityEditor.UtilsEditor.Asset.LoadAndInstance(System.String)">
             <summary>
             加载 并 实例化 资源
             </summary>
             <param name="assetPath">资源路径</param>
             <returns>实体</returns>
         </member>
-        <member name="M:UtilsEditor.Asset.LoadAndInstance(System.String,UnityEngine.Transform)">
+        <member name="M:UnityEditor.UtilsEditor.Asset.LoadAndInstance(System.String,UnityEngine.Transform)">
             <summary>
             加载 并 实例化 资源
             </summary>
@@ -214,7 +1733,7 @@
             <param name="parent">父节点</param>
             <returns>实体</returns>
         </member>
-        <member name="M:UtilsEditor.Asset.LoadAndInstance(System.String,UnityEngine.Transform,UnityEngine.Vector3)">
+        <member name="M:UnityEditor.UtilsEditor.Asset.LoadAndInstance(System.String,UnityEngine.Transform,UnityEngine.Vector3)">
             <summary>
             加载 并 实例化 资源
             </summary>
@@ -223,7 +1742,7 @@
             <param name="pos">实例化坐标</param>
             <returns>实体</returns>
         </member>
-        <member name="M:UtilsEditor.Asset.LoadAndInstance(System.String,UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Quaternion)">
+        <member name="M:UnityEditor.UtilsEditor.Asset.LoadAndInstance(System.String,UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Quaternion)">
             <summary>
             加载 并 实例化 资源
             </summary>
@@ -233,7 +1752,7 @@
             <param name="rot">旋转信息</param>
             <returns>实体</returns>
         </member>
-        <member name="M:UtilsEditor.Asset.LoadAndInstance(System.String,UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.Vector3)">
+        <member name="M:UnityEditor.UtilsEditor.Asset.LoadAndInstance(System.String,UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.Vector3)">
             <summary>
             加载 并 实例化 资源
             </summary>
@@ -244,7 +1763,7 @@
             <param name="scale">缩放</param>
             <returns>实体</returns>
         </member>
-        <member name="M:UtilsEditor.Asset.LoadAndInstance``1(System.String,UnityEngine.Transform)">
+        <member name="M:UnityEditor.UtilsEditor.Asset.LoadAndInstance``1(System.String,UnityEngine.Transform)">
             <summary>
             加载 并 实例化 资源
             </summary>
@@ -252,7 +1771,7 @@
             <param name="parent">父物体</param>
             <returns>实体</returns>
         </member>
-        <member name="M:UtilsEditor.Asset.SearchDirs(System.String,System.String)">
+        <member name="M:UnityEditor.UtilsEditor.Asset.SearchDirs(System.String,System.String)">
             <summary>
             遍历查找符合的文件
             </summary>
@@ -260,7 +1779,7 @@
             <param name="folder">文件夹</param>
             <returns>路径</returns>
         </member>
-        <member name="M:UtilsEditor.Asset.SearchDirs(System.String,System.String[])">
+        <member name="M:UnityEditor.UtilsEditor.Asset.SearchDirs(System.String,System.String[])">
             <summary>
             遍历查找符合的文件
             </summary>
@@ -268,12 +1787,97 @@
             <param name="folder">文件夹</param>
             <returns>路径</returns>
         </member>
-        <member name="T:UtilsEditor.IO">
+        <member name="T:UnityEditor.UtilsEditor.GUIStyle">
+            <summary>
+            皮肤管理类
+            </summary>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.GUIStyle.Get(System.String@)">
+            <summary>
+            获取皮肤
+            </summary>
+        </member>
+        <member name="P:UnityEditor.UtilsEditor.GUIStyle.StatusBarIcon">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UnityEditor.UtilsEditor.GUIStyle.INThumbnailShadow">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UnityEditor.UtilsEditor.GUIStyle.TEBoxBackground">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UnityEditor.UtilsEditor.GUIStyle.FlowNode5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UnityEditor.UtilsEditor.GUIStyle.FlowNode5On">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UnityEditor.UtilsEditor.GUIStyle.FlowNode1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UnityEditor.UtilsEditor.GUIStyle.FlowNode1On">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UnityEditor.UtilsEditor.GUIStyle.FlowNode3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UnityEditor.UtilsEditor.GUIStyle.FlowNode3On">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UnityEditor.UtilsEditor.GUIStyle.FlowNode0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UnityEditor.UtilsEditor.GUIStyle.FlowNode0On">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UnityEditor.UtilsEditor.GUIStyle.FlowNode4">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UnityEditor.UtilsEditor.GUIStyle.FlowNode4On">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UnityEditor.UtilsEditor.GUIStyle.LabelStyle">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:UnityEditor.UtilsEditor.GUIStyle.BlockTypeGUIStyle">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:UnityEditor.UtilsEditor.IO">
             <summary>
             Unity Editor IO Utils
             </summary>
         </member>
-        <member name="M:UtilsEditor.IO.GetAssetsRes``1(System.String@,System.String[])">
+        <member name="M:UnityEditor.UtilsEditor.IO.GetAssetsRes``1(System.String@,System.String[])">
             <summary>
             获取指定文件夹下的预制件
             </summary>
@@ -281,7 +1885,7 @@
             <param name="folder">文件夹</param>
             <returns>预制件数组</returns>
         </member>
-        <member name="M:UtilsEditor.IO.GetAssetsRes``1(System.String@,System.Func{``0,System.Boolean},System.String[])">
+        <member name="M:UnityEditor.UtilsEditor.IO.GetAssetsRes``1(System.String@,System.Func{``0,System.Boolean},System.String[])">
             <summary>
             获取指定文件夹下的预制件
             </summary>
@@ -290,7 +1894,7 @@
             <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
             <returns>预制件数组</returns>
         </member>
-        <member name="M:UtilsEditor.IO.GetAssetsPath(System.String@,System.String[])">
+        <member name="M:UnityEditor.UtilsEditor.IO.GetAssetsPath(System.String@,System.String[])">
             <summary>
             获取资源的相对路径
             </summary>
@@ -298,7 +1902,7 @@
             <param name="folders">文件夹</param>
             <returns>路径数组</returns>
         </member>
-        <member name="M:UtilsEditor.IO.GetAssetsPath(System.String@,System.Func{System.String,System.Boolean},System.String[])">
+        <member name="M:UnityEditor.UtilsEditor.IO.GetAssetsPath(System.String@,System.Func{System.String,System.Boolean},System.String[])">
             <summary>
             获取资源的相对路径
             </summary>
@@ -307,7 +1911,7 @@
             <param name="folders">文件夹</param>
             <returns>路径数组</returns>
         </member>
-        <member name="M:UtilsEditor.IO.GetAssetPrefabs(System.Func{UnityEngine.GameObject,System.Boolean},System.String[])">
+        <member name="M:UnityEditor.UtilsEditor.IO.GetAssetPrefabs(System.Func{UnityEngine.GameObject,System.Boolean},System.String[])">
             <summary>
             获取指定文件夹下的预制件
             </summary>
@@ -315,21 +1919,21 @@
             <param name="folder">文件夹</param>
             <returns>预制件数组</returns>
         </member>
-        <member name="M:UtilsEditor.IO.GetAssetPrefabs(System.String[])">
+        <member name="M:UnityEditor.UtilsEditor.IO.GetAssetPrefabs(System.String[])">
             <summary>
             获取指定文件夹下的预制件
             </summary>
             <param name="folder">文件夹</param>
             <returns>预制件数组</returns>
         </member>
-        <member name="M:UtilsEditor.IO.GetAssetClips(System.String[])">
+        <member name="M:UnityEditor.UtilsEditor.IO.GetAssetClips(System.String[])">
             <summary>
             获取指定文件夹下的音频文件
             </summary>
             <param name="folder">文件夹</param>
             <returns>预制件数组</returns>
         </member>
-        <member name="M:UtilsEditor.IO.GetAssetClips(System.Func{UnityEngine.AnimationClip,System.Boolean},System.String[])">
+        <member name="M:UnityEditor.UtilsEditor.IO.GetAssetClips(System.Func{UnityEngine.AnimationClip,System.Boolean},System.String[])">
             <summary>
             获取指定文件夹下的音频文件
             </summary>
@@ -337,19 +1941,19 @@
             <param name="folder">文件夹</param>
             <returns>预制件数组</returns>
         </member>
-        <member name="M:UtilsEditor.IO.GetAssetPrefabs``1(System.String[])">
+        <member name="M:UnityEditor.UtilsEditor.IO.GetAssetPrefabs``1(System.String[])">
             <summary>
             获取预制件身上的组件
             </summary>
         </member>
-        <member name="M:UtilsEditor.IO.GetAssetPrefabsPath(System.String[])">
+        <member name="M:UnityEditor.UtilsEditor.IO.GetAssetPrefabsPath(System.String[])">
             <summary>
             获取预制件资源路径
             </summary>
             <param name="folders">文件夹</param>
             <returns>预制件数组</returns>
         </member>
-        <member name="M:UtilsEditor.IO.GetAssetPrefabsPath(System.Func{System.String,System.Boolean},System.String[])">
+        <member name="M:UnityEditor.UtilsEditor.IO.GetAssetPrefabsPath(System.Func{System.String,System.Boolean},System.String[])">
             <summary>
             获取预制件资源路径
             </summary>
@@ -357,7 +1961,7 @@
             <param name="folders">文件夹</param>
             <returns>预制件数组</returns>
         </member>
-        <member name="M:UtilsEditor.IO.GetFilesRelativeAsset(System.String,System.String@,System.IO.SearchOption@)">
+        <member name="M:UnityEditor.UtilsEditor.IO.GetFilesRelativeAsset(System.String,System.String@,System.IO.SearchOption@)">
             <summary>
             获取资源文件夹下
             </summary>
@@ -366,7 +1970,7 @@
             <param name="option">查找模式</param>
             <returns>以Assets路径为节点的路径数组</returns>
         </member>
-        <member name="M:UtilsEditor.IO.GetFilesRelativeAsset(System.String,System.Func{System.IO.FileInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
+        <member name="M:UnityEditor.UtilsEditor.IO.GetFilesRelativeAsset(System.String,System.Func{System.IO.FileInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
             <summary>
             获取资源文件夹下
             </summary>
@@ -376,7 +1980,7 @@
             <param name="option">查找模式</param>
             <returns>以Assets路径为节点的路径数组</returns>
         </member>
-        <member name="M:UtilsEditor.IO.GetFilesRelativeAssetNoMeta(System.String,System.Func{System.IO.FileInfo,System.Boolean},System.String,System.IO.SearchOption)">
+        <member name="M:UnityEditor.UtilsEditor.IO.GetFilesRelativeAssetNoMeta(System.String,System.Func{System.IO.FileInfo,System.Boolean},System.String,System.IO.SearchOption)">
             <summary>
             获取资源文件夹下 屏蔽meta文件
             </summary>
@@ -386,7 +1990,7 @@
             <param name="option">查找模式</param>
             <returns>以Assets路径为节点的路径数组</returns>
         </member>
-        <member name="M:UtilsEditor.IO.GetFilesRelativeAssetNoMeta(System.String,System.String@,System.IO.SearchOption@)">
+        <member name="M:UnityEditor.UtilsEditor.IO.GetFilesRelativeAssetNoMeta(System.String,System.String@,System.IO.SearchOption@)">
             <summary>
             获取资源文件夹下 屏蔽meta文件
             </summary>
@@ -395,167 +1999,228 @@
             <param name="option">查找模式</param>
             <returns>以Assets路径为节点的路径数组</returns>
         </member>
-        <member name="T:UtilsEditor.Path">
+        <member name="T:UnityEditor.UtilsEditor.Path">
             <summary>
             提供了一些与路径相关的实用方法。
             包含与程序集有关的实用方法和属性的静态类
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.ProjectSettings">
+        <member name="P:UnityEditor.UtilsEditor.Path.ProjectSettings">
             <summary>
             获取当前项目的 ProjectSettings 文件夹的完整路径。
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.EditorDefaultResources">
+        <member name="P:UnityEditor.UtilsEditor.Path.EditorDefaultResources">
             <summary>
             获取当前项目的 Editor Default Resources 文件夹的完整路径。
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.Backups">
+        <member name="P:UnityEditor.UtilsEditor.Path.Backups">
             <summary>
             获取当前项目的 Backups 文件夹的完整路径。
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.UserSettings">
+        <member name="P:UnityEditor.UtilsEditor.Path.UserSettings">
             <summary>
             用户自定义设置
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.Packages">
+        <member name="P:UnityEditor.UtilsEditor.Path.Packages">
             <summary>
             项目日志文件夹路径
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.Logs">
+        <member name="P:UnityEditor.UtilsEditor.Path.Logs">
             <summary>
             项目日志文件夹路径
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.StreamingAssets">
+        <member name="P:UnityEditor.UtilsEditor.Path.StreamingAssets">
             <summary>
             获取当前项目 Streaming Assets 文件夹的完整路径。
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.PersistentData">
+        <member name="P:UnityEditor.UtilsEditor.Path.PersistentData">
             <summary>
             获取当前项目 Persistent Assets 文件夹的完整路径。
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.Assets">
+        <member name="P:UnityEditor.UtilsEditor.Path.Assets">
             <summary>
             获取当前项目 Assets 文件夹的完整路径。
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.Editor">
+        <member name="P:UnityEditor.UtilsEditor.Path.Editor">
             <summary>
             获取 Unity 编辑器的可执行文件的完整路径。
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.EditorContents">
+        <member name="P:UnityEditor.UtilsEditor.Path.EditorContents">
             <summary>
             获取 Unity 编辑器的安装目录的完整路径。
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.Project">
+        <member name="P:UnityEditor.UtilsEditor.Path.Project">
             <summary>
             获取当前项目所在文件夹的完整路径。
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.ProjectName">
+        <member name="P:UnityEditor.UtilsEditor.Path.ProjectName">
             <summary>
             获取当前项目名称。
             </summary>
         </member>
-        <member name="F:UtilsEditor.Path.SyncVS">
+        <member name="F:UnityEditor.UtilsEditor.Path.SyncVS">
             <summary>
             Unity编辑器内部的SyncVS类型
             </summary>
         </member>
-        <member name="F:UtilsEditor.Path.SyncVS_SyncSolution">
+        <member name="F:UnityEditor.UtilsEditor.Path.SyncVS_SyncSolution">
             <summary>
             SyncVS.SyncSolution()方法的MethodInfo对象
             </summary>
         </member>
-        <member name="M:UtilsEditor.Path.SyncUnitySolution">
+        <member name="M:UnityEditor.UtilsEditor.Path.SyncUnitySolution">
             <summary>
             同步Unity工程的解决方案文件
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.RuntimeAssemblyFirstPassProject">
+        <member name="P:UnityEditor.UtilsEditor.Path.RuntimeAssemblyFirstPassProject">
             <summary>
             获取程序集的第一编译阶段所对应的项目文件的完整路径
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.RuntimeAssemblySecondPassProject">
+        <member name="P:UnityEditor.UtilsEditor.Path.RuntimeAssemblySecondPassProject">
             <summary>
             获取程序集的第二编译阶段所对应的项目文件的完整路径
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.EditorAssemblyFirstPassProject">
+        <member name="P:UnityEditor.UtilsEditor.Path.EditorAssemblyFirstPassProject">
             <summary>
             获取编辑器程序集的第一编译阶段所对应的项目文件的完整路径
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.EditorAssemblySecondPassProject">
+        <member name="P:UnityEditor.UtilsEditor.Path.EditorAssemblySecondPassProject">
             <summary>
             获取编辑器程序集的第二编译阶段所对应的项目文件的完整路径
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.AssemblyProjects">
+        <member name="P:UnityEditor.UtilsEditor.Path.AssemblyProjects">
             <summary>
             获取所有与程序集相关的项目文件的完整路径
             </summary>
         </member>
-        <member name="M:UtilsEditor.Path.PreferredProjectPath(System.String,System.String)">
+        <member name="M:UnityEditor.UtilsEditor.Path.PreferredProjectPath(System.String,System.String)">
             <summary>
             比较两个项目文件的最后写入时间，选择其中一个作为当前项目的项目文件
             </summary>
         </member>
-        <member name="F:UtilsEditor.Path.MsBuildDownloadLink">
+        <member name="F:UnityEditor.UtilsEditor.Path.MsBuildDownloadLink">
             <summary>
             MSBuild的下载链接
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.environmentPaths">
+        <member name="P:UnityEditor.UtilsEditor.Path.environmentPaths">
             <summary>
             获取系统环境变量PATH并分割成字符串数组
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.ProgramFilesx86">
+        <member name="P:UnityEditor.UtilsEditor.Path.ProgramFilesx86">
             <summary>
             获取x86程序文件夹路径，兼容32位和64位操作系统
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.MSBuild">
+        <member name="P:UnityEditor.UtilsEditor.Path.MSBuild">
             <summary>
             获取MSBuild.exe文件的完整路径
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.XBuild">
+        <member name="P:UnityEditor.UtilsEditor.Path.XBuild">
             <summary>
             获取xbuild命令的完整路径
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.RoslynCompiler">
+        <member name="P:UnityEditor.UtilsEditor.Path.RoslynCompiler">
             <summary>
             Roslyn编译器csc.exe的完整路径
             </summary>
         </member>
-        <member name="P:UtilsEditor.Path.ProjectBuilder">
+        <member name="P:UnityEditor.UtilsEditor.Path.ProjectBuilder">
             <summary>
             项目构建工具的完整路径
             </summary>
         </member>
-        <member name="T:UtilsEditor.Profiler">
+        <member name="T:UnityEditor.UtilsEditor.Profiler">
             <summary>
             Profiler Editor
             </summary>
         </member>
-        <member name="M:UtilsEditor.Profiler.GetStorageMemoryTexture``1(``0)">
+        <member name="M:UnityEditor.UtilsEditor.Profiler.GetStorageMemoryTexture``1(``0)">
             <summary>
             获取 Texture 磁盘占用大小
             </summary>
             <returns>占用空间</returns>
+        </member>
+        <member name="T:UnityEditor.UtilsEditor.Window">
+            <summary>
+            Window Util
+            </summary>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Window.Open``1(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            打开窗口
+            </summary>
+            <param name="title">标题</param>
+            <param name="utility">边框</param>
+            <param name="focus">聚焦</param>
+            <typeparam name="T"><see cref="T:UnityEditor.EditorWindow"/></typeparam>
+            <returns><see cref="T:UnityEditor.EditorWindow"/></returns>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Window.Open``1(System.String,System.Boolean,System.Type[])">
+            <summary>
+            打开窗口
+            </summary>
+            <param name="title">标题</param>
+            <param name="types">类型数组</param>
+            <param name="focus">聚焦</param>
+            <typeparam name="T"><see cref="T:UnityEditor.EditorWindow"/></typeparam>
+            <returns><see cref="T:UnityEditor.EditorWindow"/></returns>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Window.Open``1(System.Boolean,System.Type[])">
+            <summary>
+            打开窗口
+            </summary>
+            <param name="types">类型数组</param>
+            <param name="focus">聚焦</param>
+            <typeparam name="T"><see cref="T:UnityEditor.EditorWindow"/></typeparam>
+            <returns><see cref="T:UnityEditor.EditorWindow"/></returns>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Window.Open``1(System.String,System.Type[])">
+            <summary>
+            打开窗口
+            </summary>
+            <param name="title">标题</param>
+            <param name="types">类型数组</param>
+            <typeparam name="T"><see cref="T:UnityEditor.EditorWindow"/></typeparam>
+            <returns><see cref="T:UnityEditor.EditorWindow"/></returns>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Window.Open``1(UnityEngine.Rect,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            打开窗口
+            </summary>
+            <param name="rect">矩形信息</param>
+            <param name="title">标题</param>
+            <param name="utility">边框</param>
+            <param name="focus">聚焦</param>
+            <typeparam name="T"><see cref="T:UnityEditor.EditorWindow"/></typeparam>
+            <returns><see cref="T:UnityEditor.EditorWindow"/></returns>
+        </member>
+        <member name="M:UnityEditor.UtilsEditor.Window.Free``1(``0)">
+            <summary>
+            释放窗口
+            </summary>
+            <typeparam name="T"><see cref="T:UnityEditor.EditorWindow"/></typeparam>
+            <returns><see cref="T:UnityEditor.EditorWindow"/></returns>
         </member>
     </members>
 </doc>

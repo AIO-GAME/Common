@@ -8,34 +8,37 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 
-public partial class UtilsEditor
+namespace UnityEditor
 {
-    public partial class Asset
+    public partial class UtilsEditor
     {
-        /// <summary>
-        /// 遍历查找符合的文件
-        /// </summary>
-        /// <param name="filter">过滤器</param>
-        /// <param name="folder">文件夹</param>
-        /// <returns>路径</returns>
-        public static IList<string> SearchDirs(string filter, string folder)
+        public partial class Asset
         {
-            return AssetDatabase.FindAssets(filter, new string[] { folder })
-                .Select(AssetDatabase.GUIDToAssetPath)
-                .ToList();
-        }
+            /// <summary>
+            /// 遍历查找符合的文件
+            /// </summary>
+            /// <param name="filter">过滤器</param>
+            /// <param name="folder">文件夹</param>
+            /// <returns>路径</returns>
+            public static IList<string> SearchDirs(string filter, string folder)
+            {
+                return AssetDatabase.FindAssets(filter, new string[] { folder })
+                    .Select(AssetDatabase.GUIDToAssetPath)
+                    .ToList();
+            }
 
-        /// <summary>
-        /// 遍历查找符合的文件
-        /// </summary>
-        /// <param name="filter">过滤器</param>
-        /// <param name="folder">文件夹</param>
-        /// <returns>路径</returns>
-        public static IList<string> SearchDirs(string filter, string[] folder)
-        {
-            return AssetDatabase.FindAssets(filter, folder)
-                .Select(AssetDatabase.GUIDToAssetPath)
-                .ToList();
+            /// <summary>
+            /// 遍历查找符合的文件
+            /// </summary>
+            /// <param name="filter">过滤器</param>
+            /// <param name="folder">文件夹</param>
+            /// <returns>路径</returns>
+            public static IList<string> SearchDirs(string filter, string[] folder)
+            {
+                return AssetDatabase.FindAssets(filter, folder)
+                    .Select(AssetDatabase.GUIDToAssetPath)
+                    .ToList();
+            }
         }
     }
 }

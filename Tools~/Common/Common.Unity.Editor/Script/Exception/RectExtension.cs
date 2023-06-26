@@ -1,14 +1,10 @@
-﻿namespace AIO.Unity.Editor
+﻿using UnityEngine;
+
+namespace UnityEditor
 {
-
-    using UnityEditor;
-
-    using UnityEngine;
-
     /// <summary>
     /// 矩形扩展
     /// </summary>
-
     public static class RectExtension
     {
         /// <summary>

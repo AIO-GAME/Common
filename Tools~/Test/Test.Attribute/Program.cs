@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using AIO;
+using UnityEditor;
 
 namespace Attribute.Test
 {
@@ -27,8 +27,7 @@ namespace Attribute.Test
         /// <summary>
         /// 配置路径
         /// </summary>
-        [Argument(CFGPATH, EArgLabel.String)]
-        public string cfgpath;
+        [Argument(CFGPATH, EArgLabel.String)] public string cfgpath;
 
         /// <summary>
         /// 输出路径
@@ -56,6 +55,7 @@ namespace Attribute.Test
             {
                 Console.WriteLine(ex);
             }
+
             Console.WriteLine(" -------------------- ");
             Console.Read();
         }
@@ -73,7 +73,7 @@ namespace Attribute.Test
                 "/Applications/xcarray/SAM/IOSBuild"
             };
 
-            var argsss = ArgumentUtils.ResolverCustom<BuildArgsCommand>(list);
+            var argsss = UtilsEditor.Argument.ResolverCustom<BuildArgsCommand>(list);
             Console.WriteLine(argsss.androidproject);
             Console.WriteLine(argsss.buildfolder);
             Console.WriteLine(argsss.cfgpath);

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace AIO.Unity
+namespace UnityEngine
 {
     /// <summary>
     /// 扩展

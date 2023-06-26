@@ -12,7 +12,7 @@ using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-namespace AIO.Unity.Editor
+namespace UnityEditor
 {
     /// <summary>
     /// 符号链接工具类

@@ -4,9 +4,9 @@
 |*|==========|*/
 
 using System.IO;
-using UnityEditor;
+using AIO;
 
-namespace AIO.Package.Editor
+namespace UnityEditor
 {
     /// <summary>
     /// Menu_Open
