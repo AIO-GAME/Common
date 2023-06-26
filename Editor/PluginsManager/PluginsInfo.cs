@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace AIO.Package.Editor
+namespace UnityEditor
 {
     [CreateAssetMenu(menuName = "Plugins/Info", fileName = "PluginsInfo")]
     internal class PluginsInfo : ScriptableObject

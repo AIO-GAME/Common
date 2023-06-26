@@ -92,10 +92,10 @@ namespace UnityEngine
             {
                 // RGBA 顺序不可改
                 var cb = new StringBuilder("#");
-                global::Utils.Hex.ToHex((byte)red, cb);
-                global::Utils.Hex.ToHex((byte)green, cb);
-                global::Utils.Hex.ToHex((byte)blue, cb);
-                global::Utils.Hex.ToHex((byte)alpha, cb);
+                global::UtilsGen.Hex.ToHex((byte)red, cb);
+                global::UtilsGen.Hex.ToHex((byte)green, cb);
+                global::UtilsGen.Hex.ToHex((byte)blue, cb);
+                global::UtilsGen.Hex.ToHex((byte)alpha, cb);
                 return cb.ToString();
             }
 

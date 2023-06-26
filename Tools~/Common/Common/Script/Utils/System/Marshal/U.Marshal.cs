@@ -12,7 +12,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Security;
 using SMarshal = System.Runtime.InteropServices.Marshal;
 
-public partial class Utils
+public partial class UtilsGen
 {
     /// <summary>
     /// SMarshal 类

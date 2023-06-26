@@ -9,7 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class Utils
+public partial class UtilsGen
 {
     /// <summary>
     /// 随机数工具类

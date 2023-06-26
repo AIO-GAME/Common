@@ -8,7 +8,7 @@
 using System;
 using System.IO;
 
-public partial class Utils
+public partial class UtilsGen
 {
     public partial class IO
     {

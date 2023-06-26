@@ -11,7 +11,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-public partial class Utils
+public partial class UtilsGen
 {
     /// <summary>
     /// XML 工具类

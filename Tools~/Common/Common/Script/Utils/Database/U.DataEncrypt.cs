@@ -3,7 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-public partial class Utils
+public partial class UtilsGen
 {
     /// <summary>
     /// 数据加密解密

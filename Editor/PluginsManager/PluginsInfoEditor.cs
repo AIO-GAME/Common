@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using UnityEditor;
+using AIO;
 using UnityEditor.Compilation;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace AIO.Package.Editor
+namespace UnityEditor
 {
     /// <summary>
     /// 插件管理
     /// </summary>
     [CanEditMultipleObjects]
     [CustomEditor(typeof(PluginsInfo))]
-    internal class PluginsInfoEditor : UnityEditor.Editor
+    internal class PluginsInfoEditor : Editor
     {
         private Dictionary<string, bool> InstallList;
 
@@ -68,7 +67,7 @@ namespace AIO.Package.Editor
         {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("插件安装管理配置", new GUIStyle("PreLabel"));
-            if (GUILayout.Button("管理", GUILayout.Width(60))) PackageMenus.PluginsWindow();
+            if (GUILayout.Button("管理", GUILayout.Width(60))) EditorMenu.PluginsWindow();
             EditorGUILayout.EndHorizontal();
 
             foreach (var o in serializedObject.targetObjects)

@@ -6,7 +6,7 @@
 
 using System;
 using UnityEngine;
-using AUtils = Utils;
+
 namespace UnityEditor
 {
     public static partial class UtilsEditor
@@ -22,7 +22,7 @@ namespace UnityEditor
             /// <returns>占用空间</returns>
             public static long GetStorageMemoryTexture<T>(T obj) where T : Texture
             {
-                var method = AUtils.Assembly.GetMethodInfo(
+                var method = UtilsGen.Assembly.GetMethodInfo(
                     "UnityEditor.dll",
                     "UnityEditor.TextureUtil",
                     "GetStorageMemorySize");

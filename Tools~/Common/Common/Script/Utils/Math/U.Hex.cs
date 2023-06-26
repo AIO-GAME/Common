@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-public partial class Utils
+public partial class UtilsGen
 {
     /// <summary>
     /// 16进制操作类

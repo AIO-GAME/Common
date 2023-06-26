@@ -1,6 +1,4 @@
-﻿using AUtils = Utils;
-
-namespace AIO.Unity
+﻿namespace AIO.Unity
 {
     /// <summary>
     /// Unity 可持续化数据 
@@ -55,7 +53,7 @@ namespace AIO.Unity
         /// <inheritdoc/>
         public sealed override int GetHashCode()
         {
-            return AUtils.Hash.GetHashCode(Data);
+            return UtilsGen.Hash.GetHashCode(Data);
         }
 
         /// <inheritdoc/>

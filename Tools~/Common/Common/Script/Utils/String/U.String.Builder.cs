@@ -6,7 +6,7 @@
 using System;
 using System.Text;
 
-public partial class Utils
+public partial class UtilsGen
 {
     public partial class String
     {

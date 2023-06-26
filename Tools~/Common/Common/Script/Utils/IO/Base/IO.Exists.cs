@@ -7,7 +7,7 @@
 using System.IO;
 using System.Runtime.CompilerServices;
 
-public partial class Utils
+public partial class UtilsGen
 {
     public partial class IO
     {

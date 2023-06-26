@@ -17,7 +17,7 @@ namespace UnityEngine
             /// <returns>相对于“assets”目录的相对路径</returns>
             public static string FromAssets(in string path)
             {
-                return global::Utils.IO.GetRelativePath(path, Path.Assets);
+                return global::UtilsGen.IO.GetRelativePath(path, Path.Assets);
             }
 
             /// <summary>
@@ -27,7 +27,7 @@ namespace UnityEngine
             /// <returns>相对于项目根目录的相对路径</returns>
             public static string FromProject(in string path)
             {
-                return global::Utils.IO.GetRelativePath(path, Path.Project);
+                return global::UtilsGen.IO.GetRelativePath(path, Path.Project);
             }
 
             /// <summary>

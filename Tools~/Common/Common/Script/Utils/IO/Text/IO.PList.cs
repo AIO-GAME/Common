@@ -2,7 +2,7 @@ using System.Runtime.CompilerServices;
 
 using AIO.PList;
 
-public partial class Utils
+public partial class UtilsGen
 {
     public partial class IO
     {

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
 
-public partial class Utils
+public partial class UtilsGen
 {
     public partial class IO
     {

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-public partial class Utils
+public partial class UtilsGen
 {
     /// <summary>
     /// 程序集

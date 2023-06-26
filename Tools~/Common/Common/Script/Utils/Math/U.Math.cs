@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SMath = System.Math;
 
-public partial class Utils
+public partial class UtilsGen
 {
     /// <summary>
     /// 数学库

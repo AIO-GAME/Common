@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-public partial class Utils
+public partial class UtilsGen
 {
     /// <summary>
     /// Http 工具类
