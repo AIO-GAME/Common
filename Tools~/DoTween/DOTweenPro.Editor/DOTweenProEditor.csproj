@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DOTweenProEditor</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>net35</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>7.3</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="DOTweenPro">
+      <HintPath>..\..\UnityProject\G108-Win\Packages\com.blz.package\Plugins~\Demigiant\DOTweenPro\DOTweenPro.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>..\..\UnityProject\G108-WebGL\Packages\com.blz.package\Tools~\Resources\Plugins\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\UnityProject\G108-WebGL\Packages\com.blz.package\Tools~\Resources\Plugins\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween">
+      <HintPath>..\..\UnityProject\G108-Win\Packages\com.blz.package\Plugins~\Demigiant\DOTween\DOTween.dll</HintPath>
+    </Reference>
+    <Reference Include="DemiEditor">
+      <HintPath>..\..\UnityProject\G108-Win\Assets\Plugins\Demigiant\DemiLib\Core\Editor\DemiEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="DemiLib">
+      <HintPath>..\..\UnityProject\G108-Win\Assets\Plugins\Demigiant\DemiLib\Core\DemiLib.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTweenEditor">
+      <HintPath>..\..\UnityProject\G108-Win\Packages\com.blz.package\Plugins~\Demigiant\DOTween\Editor\DOTweenEditor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
