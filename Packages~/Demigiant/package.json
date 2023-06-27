@@ -1,0 +1,13 @@
+{
+    "name": "com.demigiant.dotween",
+    "displayName": "DOTween Pro",
+    "version": "1.4.8",
+    "unity": "2018.4",
+    "description": "DOTween and DOTween Pro are copyright (c) 2014-2018 Daniele Giardini - Demigiant",
+    "author": {
+        "name": "Demigiant",
+        "url": "http://www.demigiant.com"
+    },
+    "relatedPackages": {},
+    "dependencies": {}
+}
