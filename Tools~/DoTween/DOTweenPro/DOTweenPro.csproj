@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DOTweenPro</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>net35</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>7.3</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\UnityProject\G108-WebGL\Packages\com.blz.package\Tools~\Resources\Plugins\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween">
+      <HintPath>..\..\UnityProject\G108-Win\Packages\com.blz.package\Plugins~\Demigiant\DOTween\DOTween.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

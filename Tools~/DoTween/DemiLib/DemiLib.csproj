@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{12AFF001-8A23-469C-B160-15535AF5FD4C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DemiLib</RootNamespace>
+    <AssemblyName>DemiLib</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>bin\Debug\DemiLib.xml</DocumentationFile>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>bin\Release\DemiLib.xml</DocumentationFile>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <NoWarn>CS1591;</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\Resources\Plugins\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>..\..\..\..\..\..\G108\proj\Packages\com.blz.package\Tools~\Resources\Plugins\UnityEngine.InputLegacyModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DG.DemiLib.Attributes\DeScriptExecutionOrderAttribute.cs" />
+    <Compile Include="DG.DemiLib.Core\GUIUtils.cs" />
+    <Compile Include="DG.DemiLib.External\DeHierarchyComponent.cs" />
+    <Compile Include="DG.DemiLib\DeColorBG.cs" />
+    <Compile Include="DG.DemiLib\DeColorContent.cs" />
+    <Compile Include="DG.DemiLib\DeColorGlobal.cs" />
+    <Compile Include="DG.DemiLib\DeColorPalette.cs" />
+    <Compile Include="DG.DemiLib\DeInputUtils.cs" />
+    <Compile Include="DG.DemiLib\DeScope.cs" />
+    <Compile Include="DG.DemiLib\DeSkinColor.cs" />
+    <Compile Include="DG.DemiLib\IEditorGUINode.cs" />
+    <Compile Include="DG.DemiLib\IntRange.cs" />
+    <Compile Include="DG.DemiLib\Range.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>@cd /d $(SolutionDir)
+@cd ../..
+@set cur=%25cd%25\Packages~\Demigiant\Plugins\
+
+@set dllname=$(TargetName)
+@if exist %25cur%25%25dllname%25.dll (
+@del /s /q %25cur%25%25dllname%25.dll
+)
+@if exist %25cur%25%25dllname%25.xml (
+@del /s /q %25cur%25%25dllname%25.xml
+)
+</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>@set CUR_DLL=$(ProjectDir)$(OutDir)
+@cd /d $(SolutionDir)
+@cd ../..
+@set cur=%25cd%25\Packages~\Demigiant\Plugins\
+
+@set dllname=$(TargetName)
+@if exist %25CUR_DLL%25%25dllname%25.dll (
+@copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll
+)
+@if exist %25CUR_DLL%25%25dllname%25.xml (
+@copy /y /v %25CUR_DLL%25%25dllname%25.xml %25cur%25%25dllname%25.xml
+)
+</PostBuildEvent>
+  </PropertyGroup>
+</Project>

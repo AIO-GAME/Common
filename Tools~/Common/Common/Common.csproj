@@ -66,6 +66,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Script\Extension\Class\Action\Action.Extend.cs" />
     <Compile Include="Script\Extension\Class\AppDomain\AppDomainExtension.cs" />
+    <Compile Include="Script\Extension\Class\Assembly\AssemblyExtension.cs" />
     <Compile Include="Script\Extension\Class\FieldInfo\FieldInfo.Extend.IS.cs" />
     <Compile Include="Script\Extension\Class\IntPtr\IntPtr.Extend.cs" />
     <Compile Include="Script\Extension\Class\IntPtr\IntPtr.Extend.ToConver.cs" />

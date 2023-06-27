@@ -1,4 +1,0 @@
-<linker>
-       <assembly fullname="DOTween.Modules" preserve="all"/>
-       <assembly fullname="DOTweenPro.Scripts" preserve="all"/>
-</linker>

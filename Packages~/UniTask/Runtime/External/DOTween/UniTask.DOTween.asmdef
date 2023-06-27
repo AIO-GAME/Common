@@ -1,5 +1,6 @@
 {
     "name": "UniTask.DOTween",
+    "rootNamespace": "",
     "references": [
         "UniTask",
         "DOTween.Modules"
@@ -13,7 +14,7 @@
     "defineConstraints": [],
     "versionDefines": [
         {
-            "name": "com.demigiant.dotween",
+            "name": "com.demigiant.demilib",
             "expression": "",
             "define": "UNITASK_DOTWEEN_SUPPORT"
         }

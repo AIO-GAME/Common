@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DOTween</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>net472</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>7.3</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>bin\Release\DOTween.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591;1573</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Core" />
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\..\..\..\G108\proj\Packages\com.blz.package\Tools~\Resources\Plugins\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="@cd /d $(SolutionDir)&#xD;&#xA;@cd ../..&#xD;&#xA;@set cur=%25cd%25\Packages~\Demigiant\Plugins\&#xD;&#xA;&#xD;&#xA;@set dllname=$(TargetName)&#xD;&#xA;@if exist %25cur%25%25dllname%25.dll (&#xD;&#xA;@del /s /q %25cur%25%25dllname%25.dll&#xD;&#xA;)&#xD;&#xA;@if exist %25cur%25%25dllname%25.xml (&#xD;&#xA;@del /s /q %25cur%25%25dllname%25.xml&#xD;&#xA;)&#xD;&#xA;" />
+  </Target>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="@set CUR_DLL=$(ProjectDir)$(OutDir)&#xD;&#xA;@cd /d $(SolutionDir)&#xD;&#xA;@cd ../..&#xD;&#xA;@set cur=%25cd%25\Packages~\Demigiant\Plugins\&#xD;&#xA;&#xD;&#xA;@set dllname=$(TargetName)&#xD;&#xA;@if exist %25CUR_DLL%25%25dllname%25.dll (&#xD;&#xA;@copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll&#xD;&#xA;)&#xD;&#xA;@if exist %25CUR_DLL%25%25dllname%25.xml (&#xD;&#xA;@copy /y /v %25CUR_DLL%25%25dllname%25.xml %25cur%25%25dllname%25.xml&#xD;&#xA;)&#xD;&#xA;" />
+  </Target>
+</Project>
