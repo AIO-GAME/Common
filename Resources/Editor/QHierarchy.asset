@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ca96fead514a742864f5ed790b6601, type: 3}
   m_Name: QHierarchy
   m_EditorClassIdentifier: 
-  SourceRelativePath: Packages\\com.*.package\\Plugins~\\QHierarchy
+  SourceRelativePath: Packages\\com.*.package\\Packages~\\QHierarchy
   Name: QHierarchy
   TargetRelativePath: Packages\com.unity.qhierarchy
   MacroDefinition: 
