@@ -15,5 +15,5 @@ MonoBehaviour:
   SourceRelativePath: Packages\\com.*.package\\Plugins~\\UniTask
   Name: UniTask
   TargetRelativePath: Packages\UniTask
-  MacroDefinition: UNITASK
+  MacroDefinition: 
   Introduction: "\u5F02\u6B65\u4F5C\u4E1A\u6269\u5C55\u63D2\u4EF6"

@@ -15,5 +15,5 @@ MonoBehaviour:
   SourceRelativePath: Packages\\com.*.package\\Packages~\\hybridclr_unity
   Name: HybridCLR
   TargetRelativePath: Packages\com.focus-creative-games.hybridclr_unity
-  MacroDefinition: HYBRIDCLR
+  MacroDefinition: 
   Introduction: "C#\u70ED\u66F4\u65B0"

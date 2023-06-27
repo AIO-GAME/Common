@@ -15,5 +15,5 @@ MonoBehaviour:
   SourceRelativePath: Packages\\com.*.package\\Plugins~\\Sirenix
   Name: Odin Sirenix
   TargetRelativePath: Assets\Plugins\Sirenix
-  MacroDefinition: SIRENIX;ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;ODIN_INSPECTOR_EDITOR_ONLY
+  MacroDefinition: ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;ODIN_INSPECTOR_EDITOR_ONLY
   Introduction: "\u6570\u636E\u53EF\u89C6\u5316\u63D2\u4EF6"
