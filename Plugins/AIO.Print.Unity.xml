@@ -4,104 +4,96 @@
         <name>AIO.Print.Unity</name>
     </assembly>
     <members>
-        <member name="T:AIO.UPrint">
+        <member name="T:UnityEngine.Print">
             <summary>
             Unity 输出
             </summary>
         </member>
-        <member name="T:AIO.UPrint.Console">
+        <member name="T:UnityEngine.Print.Console">
             <summary>
             控制台
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Console.EnabledALL">
+        <member name="M:UnityEngine.Print.Console.EnabledALL">
             <summary>
             开启 全部输出
             EDITOR  : [编辑器模式 只需启动一次 可实现在编辑模式和运行时自动开启]
             RUNTIME : [发布运行模式 程序每次启动 都需调用一次]
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Console.EnabledLog">
+        <member name="M:UnityEngine.Print.Console.EnabledLog">
             <summary>
             关闭 LOG 输出
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Console.EnabledError">
+        <member name="M:UnityEngine.Print.Console.EnabledError">
             <summary>
             关闭 ERROR 输出
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Console.DisableALL">
+        <member name="M:UnityEngine.Print.Console.DisableALL">
             <summary>
             关闭 全部输出
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Console.DisableLog">
+        <member name="M:UnityEngine.Print.Console.DisableLog">
             <summary>
             关闭 LOG 输出
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Console.DisableError">
+        <member name="M:UnityEngine.Print.Console.DisableError">
             <summary>
             关闭 ERROR 输出
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Exception``2(``0@,``1@)">
+        <member name="M:UnityEngine.Print.Exception``2(``0@,``1@)">
             <summary>
             输出异常
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Exception``1(``0@)">
+        <member name="M:UnityEngine.Print.Exception``1(``0@)">
             <summary>
             输出异常
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Assert(System.Boolean@)">
+        <member name="M:UnityEngine.Print.Assert(System.Boolean@)">
             <summary>
               <para>Assert a condition and logs an error message to the Unity console on failure.</para>
             </summary>
             <param name="condition">Condition you expect to be true.</param>
         </member>
-        <member name="M:AIO.UPrint.Assert``1(``0@)">
+        <member name="M:UnityEngine.Print.Assert``1(``0@)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Assert``2(``0@,``1@)">
+        <member name="M:UnityEngine.Print.Assert``2(``0@,``1@)">
             <summary>
             断言
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Assert``1(System.Boolean@,``0@)">
+        <member name="M:UnityEngine.Print.Assert``1(System.Boolean@,``0@)">
             <summary>
               <para>Assert a condition and logs an error message to the Unity console on failure.</para>
             </summary>
             <param name="condition">Condition you expect to be true.</param>
             <param name="context">Object to which the message applies.</param>
         </member>
-        <member name="M:AIO.UPrint.Assert(System.Boolean@,System.Object@)">
+        <member name="M:UnityEngine.Print.Assert(System.Boolean@,System.Object@)">
             <summary>
               <para>Assert a condition and logs an error message to the Unity console on failure.</para>
             </summary>
             <param name="condition">Condition you expect to be true.</param>
             <param name="message">String or object to be converted to string representation for display.</param>
         </member>
-        <member name="M:AIO.UPrint.Assert(System.Boolean@,System.String@)">
+        <member name="M:UnityEngine.Print.Assert(System.Boolean@,System.String@)">
             <summary>
               <para>Assert a condition and logs an error message to the Unity console on failure.</para>
             </summary>
             <param name="condition">Condition you expect to be true.</param>
             <param name="message">String or object to be converted to string representation for display.</param>
         </member>
-        <member name="M:AIO.UPrint.Assert``1(System.Boolean@,System.Object@,``0@)">
-            <summary>
-              <para>Assert a condition and logs an error message to the Unity console on failure.</para>
-            </summary>
-            <param name="condition">Condition you expect to be true.</param>
-            <param name="context">Object to which the message applies.</param>
-            <param name="message">String or object to be converted to string representation for display.</param>
-        </member>
-        <member name="M:AIO.UPrint.Assert``1(System.Boolean@,System.String@,``0@)">
+        <member name="M:UnityEngine.Print.Assert``1(System.Boolean@,System.Object@,``0@)">
             <summary>
               <para>Assert a condition and logs an error message to the Unity console on failure.</para>
             </summary>
@@ -109,7 +101,15 @@
             <param name="context">Object to which the message applies.</param>
             <param name="message">String or object to be converted to string representation for display.</param>
         </member>
-        <member name="M:AIO.UPrint.AssertFormat(System.Boolean@,System.String@,System.Object[])">
+        <member name="M:UnityEngine.Print.Assert``1(System.Boolean@,System.String@,``0@)">
+            <summary>
+              <para>Assert a condition and logs an error message to the Unity console on failure.</para>
+            </summary>
+            <param name="condition">Condition you expect to be true.</param>
+            <param name="context">Object to which the message applies.</param>
+            <param name="message">String or object to be converted to string representation for display.</param>
+        </member>
+        <member name="M:UnityEngine.Print.AssertFormat(System.Boolean@,System.String@,System.Object[])">
             <summary>
               <para>Assert a condition and logs a formatted error message to the Unity console on failure.</para>
             </summary>
@@ -117,7 +117,7 @@
             <param name="format">A composite format string.</param>
             <param name="args">Format arguments.</param>
         </member>
-        <member name="M:AIO.UPrint.AssertFormat``1(System.Boolean@,``0@,System.String@,System.Object[])">
+        <member name="M:UnityEngine.Print.AssertFormat``1(System.Boolean@,``0@,System.String@,System.Object[])">
             <summary>
               <para>Assert a condition and logs a formatted error message to the Unity console on failure.</para>
             </summary>
@@ -126,247 +126,247 @@
             <param name="args">Format arguments.</param>
             <param name="context">Object to which the message applies.</param>
         </member>
-        <member name="M:AIO.UPrint.AssertFormat``1(System.String@,``0[])">
+        <member name="M:UnityEngine.Print.AssertFormat``1(System.String@,``0[])">
             <summary>
             断言
             </summary>
         </member>
-        <member name="M:AIO.UPrint.AssertFormat(System.String@,System.Object[])">
+        <member name="M:UnityEngine.Print.AssertFormat(System.String@,System.Object[])">
             <summary>
             断言
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Error``1(``0@,AIO.EFormat@)">
+        <member name="M:UnityEngine.Print.Error``1(``0@,AIO.EFormat@)">
             <summary>
             错误日志 Json 结构
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Error(System.Object@)">
+        <member name="M:UnityEngine.Print.Error(System.Object@)">
             <summary>
             错误
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Error(System.String@)">
+        <member name="M:UnityEngine.Print.Error(System.String@)">
             <summary>
             错误
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Error``1(``0@)">
+        <member name="M:UnityEngine.Print.Error``1(``0@)">
             <summary>
             错误 
             </summary>
         </member>
-        <member name="M:AIO.UPrint.ErrorFormat``1(System.String@,``0[])">
+        <member name="M:UnityEngine.Print.ErrorFormat``1(System.String@,``0[])">
             <summary>
             错误
             </summary>
         </member>
-        <member name="M:AIO.UPrint.ErrorFormat(System.String@,System.Object[])">
+        <member name="M:UnityEngine.Print.ErrorFormat(System.String@,System.Object[])">
             <summary>
             错误
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Log``1(``0@,AIO.EFormat@)">
+        <member name="M:UnityEngine.Print.Log``1(``0@,AIO.EFormat@)">
             <summary>
             日志
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Log(System.String@)">
+        <member name="M:UnityEngine.Print.Log(System.String@)">
             <summary>
             日志
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Log(System.Object@)">
+        <member name="M:UnityEngine.Print.Log(System.Object@)">
             <summary>
             日志
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Log``1(``0@)">
+        <member name="M:UnityEngine.Print.Log``1(``0@)">
             <summary>
             日志
             </summary>
         </member>
-        <member name="M:AIO.UPrint.LogFormat(System.String@,System.Object[])">
+        <member name="M:UnityEngine.Print.LogFormat(System.String@,System.Object[])">
             <summary>
             日志
             </summary>
         </member>
-        <member name="T:AIO.UPrint.UPrintElapse">
+        <member name="T:UnityEngine.Print.UPrintElapse">
             <summary>
             执行时间
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Run``1(System.String@,``0@,System.String@)">
+        <member name="M:UnityEngine.Print.Run``1(System.String@,``0@,System.String@)">
             <summary>
             输出详细执行时间
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Run(System.String@,System.Action@,System.String@)">
+        <member name="M:UnityEngine.Print.Run(System.String@,System.Action@,System.String@)">
             <summary>
             输出详细执行时间
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Run(System.String@,System.Action@,System.Action@,System.String@)">
+        <member name="M:UnityEngine.Print.Run(System.String@,System.Action@,System.Action@,System.String@)">
             <summary>
             输出详细执行时间
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Run(System.String@,System.Action@,System.Action@,System.Action@,System.String@)">
+        <member name="M:UnityEngine.Print.Run(System.String@,System.Action@,System.Action@,System.Action@,System.String@)">
             <summary>
             输出详细执行时间
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Run(System.String@,System.Action@,System.Action@,System.Action@,System.Action@,System.String@)">
+        <member name="M:UnityEngine.Print.Run(System.String@,System.Action@,System.Action@,System.Action@,System.Action@,System.String@)">
             <summary>
             输出详细执行时间
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Run``1(System.String@,System.Action{``0}@,``0@,System.String@)">
+        <member name="M:UnityEngine.Print.Run``1(System.String@,System.Action{``0}@,``0@,System.String@)">
             <summary>
             输出详细执行时间
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Run``2(System.String@,System.Action{``0,``1}@,``0@,``1@,System.String@)">
+        <member name="M:UnityEngine.Print.Run``2(System.String@,System.Action{``0,``1}@,``0@,``1@,System.String@)">
             <summary>
             输出详细执行时间
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Run``3(System.String@,System.Action{``0,``1,``2}@,``0@,``1@,``2@,System.String@)">
+        <member name="M:UnityEngine.Print.Run``3(System.String@,System.Action{``0,``1,``2}@,``0@,``1@,``2@,System.String@)">
             <summary>
             输出详细执行时间
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Run``4(System.String@,System.Action{``0,``1,``2,``3}@,``0@,``1@,``2@,``3@,System.String@)">
+        <member name="M:UnityEngine.Print.Run``4(System.String@,System.Action{``0,``1,``2,``3}@,``0@,``1@,``2@,``3@,System.String@)">
             <summary>
             输出详细执行时间
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Run``2(System.String@,System.Func{``0,``1}@,``0@,System.String@)">
+        <member name="M:UnityEngine.Print.Run``2(System.String@,System.Func{``0,``1}@,``0@,System.String@)">
             <summary>
             输出详细执行时间
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Run``3(System.String@,System.Func{``0,``1,``2}@,``0@,``1@,System.String@)">
+        <member name="M:UnityEngine.Print.Run``3(System.String@,System.Func{``0,``1,``2}@,``0@,``1@,System.String@)">
             <summary>
             输出详细执行时间
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Run``4(System.String@,System.Func{``0,``1,``2,``3}@,``0@,``1@,``2@,System.String@)">
+        <member name="M:UnityEngine.Print.Run``4(System.String@,System.Func{``0,``1,``2,``3}@,``0@,``1@,``2@,System.String@)">
             <summary>
             输出详细执行时间
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Run``5(System.String@,System.Func{``0,``1,``2,``3,``4}@,``0@,``1@,``2@,``3@,System.String@)">
+        <member name="M:UnityEngine.Print.Run``5(System.String@,System.Func{``0,``1,``2,``3,``4}@,``0@,``1@,``2@,``3@,System.String@)">
             <summary>
             输出详细执行时间
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Run``1(System.String,``0,System.String)">
+        <member name="M:UnityEngine.Print.Run``1(System.String,``0,System.String)">
             <summary>
             输出详细执行时间
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Run(System.String,System.Threading.Tasks.Task,System.String)">
+        <member name="M:UnityEngine.Print.Run(System.String,System.Threading.Tasks.Task,System.String)">
             <summary>
             输出详细执行时间
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Run``1(System.String,System.Threading.Tasks.Task{``0},System.String)">
+        <member name="M:UnityEngine.Print.Run``1(System.String,System.Threading.Tasks.Task{``0},System.String)">
             <summary>
             输出详细执行时间
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Warn``1(``0@,AIO.EFormat@)">
+        <member name="M:UnityEngine.Print.Warn``1(``0@,AIO.EFormat@)">
             <summary>
             警告
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Warn(System.String@)">
+        <member name="M:UnityEngine.Print.Warn(System.String@)">
             <summary>
             警告
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Warn(System.Object@)">
+        <member name="M:UnityEngine.Print.Warn(System.Object@)">
             <summary>
             警告
             </summary>
         </member>
-        <member name="M:AIO.UPrint.Warn``1(``0@)">
+        <member name="M:UnityEngine.Print.Warn``1(``0@)">
             <summary>
             警告
             </summary>
         </member>
-        <member name="M:AIO.UPrint.WarnFormat(System.String@,System.Object[])">
+        <member name="M:UnityEngine.Print.WarnFormat(System.String@,System.Object[])">
             <summary>
             警告
             </summary>
         </member>
-        <member name="T:AIO.UnityConsole">
+        <member name="T:UnityEngine.UnityConsole">
             <summary>
             Unity 控制台输出
             </summary>
         </member>
-        <member name="F:AIO.UnityConsole.WriterOut">
+        <member name="F:UnityEngine.UnityConsole.WriterOut">
             <summary>
             Unity Log 输出
             </summary>
         </member>
-        <member name="F:AIO.UnityConsole.WriterError">
+        <member name="F:UnityEngine.UnityConsole.WriterError">
             <summary>
             Unity Error 输出
             </summary>
         </member>
-        <member name="F:AIO.UnityConsole.OriginalOut">
+        <member name="F:UnityEngine.UnityConsole.OriginalOut">
             <summary>
             源 输出
             </summary>
         </member>
-        <member name="F:AIO.UnityConsole.OriginalError">
+        <member name="F:UnityEngine.UnityConsole.OriginalError">
             <summary>
             源 输出
             </summary>
         </member>
-        <member name="M:AIO.UnityConsole.EnabledLog">
+        <member name="M:UnityEngine.UnityConsole.EnabledLog">
             <summary>
             关闭 LOG 输出
             </summary>
         </member>
-        <member name="M:AIO.UnityConsole.EnabledError">
+        <member name="M:UnityEngine.UnityConsole.EnabledError">
             <summary>
             关闭 LOG 输出
             </summary>
         </member>
-        <member name="M:AIO.UnityConsole.ENABLED_ALL_NO_CONDITION">
+        <member name="M:UnityEngine.UnityConsole.ENABLED_ALL_NO_CONDITION">
             <summary>
             关闭 LOG 输出
             </summary>
         </member>
-        <member name="M:AIO.UnityConsole.DisableALL">
+        <member name="M:UnityEngine.UnityConsole.DisableALL">
             <summary>
             关闭 全部输出
             </summary>
         </member>
-        <member name="M:AIO.UnityConsole.DisableLog">
+        <member name="M:UnityEngine.UnityConsole.DisableLog">
             <summary>
             关闭 LOG 输出
             </summary>
         </member>
-        <member name="M:AIO.UnityConsole.DisableError">
+        <member name="M:UnityEngine.UnityConsole.DisableError">
             <summary>
             关闭 ERROR 输出
             </summary>
         </member>
-        <member name="F:AIO.UnityConsole.UnityConsoleType.Log">
+        <member name="F:UnityEngine.UnityConsole.UnityConsoleType.Log">
             <summary>
             正常输出
             </summary>
         </member>
-        <member name="F:AIO.UnityConsole.UnityConsoleType.Error">
+        <member name="F:UnityEngine.UnityConsole.UnityConsoleType.Error">
             <summary>
             错误输出
             </summary>
         </member>
-        <member name="T:AIO.UnityConsole.UnityTextWriter">
+        <member name="T:UnityEngine.UnityConsole.UnityTextWriter">
             <summary>
             Unity 重置定向 输出
             Redirects writes to System.Console to Unity3D's Debug.Log.
@@ -374,27 +374,27 @@
             <see url="https://www.jacksondunstan.com/articles/2986"/>
             <author name="Jackson Dunstan"/>
         </member>
-        <member name="M:AIO.UnityConsole.UnityTextWriter.Flush">
+        <member name="M:UnityEngine.UnityConsole.UnityTextWriter.Flush">
             <summary>
             刷新
             </summary>
         </member>
-        <member name="M:AIO.UnityConsole.UnityTextWriter.Write(System.String)">
+        <member name="M:UnityEngine.UnityConsole.UnityTextWriter.Write(System.String)">
             <summary>
             写入
             </summary>
         </member>
-        <member name="M:AIO.UnityConsole.UnityTextWriter.Write(System.Char)">
+        <member name="M:UnityEngine.UnityConsole.UnityTextWriter.Write(System.Char)">
              <summary>
             
              </summary>
         </member>
-        <member name="M:AIO.UnityConsole.UnityTextWriter.Write(System.Char[],System.Int32,System.Int32)">
+        <member name="M:UnityEngine.UnityConsole.UnityTextWriter.Write(System.Char[],System.Int32,System.Int32)">
              <summary>
             
              </summary>
         </member>
-        <member name="P:AIO.UnityConsole.UnityTextWriter.Encoding">
+        <member name="P:UnityEngine.UnityConsole.UnityTextWriter.Encoding">
              <summary>
             
              </summary>

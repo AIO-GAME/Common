@@ -116,10 +116,12 @@ namespace SRDebugger.Internal
             yield return _webRequest.SendWebRequest();
 #endif
 
-#if !UNITY_2017_1_OR_NEWER
-            if(_webRequest.isError)
-#else
+#if UNITY_2020_1_OR_NEWER
             if (_webRequest.result == UnityWebRequest.Result.ConnectionError)
+#elif UNITY_2019_1_OR_NEWER
+            if(_webRequest.isNetworkError)
+#else
+            if(_webRequest.isError)
 #endif
             {
                 ErrorMessage = "Request Error: " + _webRequest.error;
