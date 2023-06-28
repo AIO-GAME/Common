@@ -1,0 +1,30 @@
+{
+    "name": "AIO.Package.Editor",
+    "references": [
+        "YooAsset",
+        "YooAsset.Editor",
+        "AIO.Extensions.Unity.Editor",
+        "AIO.General.Unity.Editor",
+        "AIO.Attribute.Unity.Editor",
+        "AIO.Attribute.Unity",
+        "AIO.Extensions.Unity",
+        "AIO.General.Unity"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.tuyoogame.yooasset",
+            "expression": "",
+            "define": "SUPPORT_YOOASSET"
+        }
+    ],
+    "noEngineReferences": false
+}
