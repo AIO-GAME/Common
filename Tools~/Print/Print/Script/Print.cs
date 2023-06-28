@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Runtime.CompilerServices;
 
-namespace AIO
+namespace AIO.Internal
 {
     /// <summary>
     /// 打印输出

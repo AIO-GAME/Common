@@ -1,4 +1,4 @@
-﻿using AIO;
+﻿using AIO.Internal;
 
 using System.Collections;
 using System.Diagnostics;

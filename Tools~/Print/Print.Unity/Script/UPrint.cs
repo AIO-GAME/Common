@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-using APrint = AIO.Print;
+using APrint = AIO.Internal.Print;
 
 namespace UnityEngine
 {

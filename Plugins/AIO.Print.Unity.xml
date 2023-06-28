@@ -136,7 +136,7 @@
             断言
             </summary>
         </member>
-        <member name="M:UnityEngine.Print.Error``1(``0@,AIO.EFormat@)">
+        <member name="M:UnityEngine.Print.Error``1(``0@,EFormat@)">
             <summary>
             错误日志 Json 结构
             </summary>
@@ -166,7 +166,7 @@
             错误
             </summary>
         </member>
-        <member name="M:UnityEngine.Print.Log``1(``0@,AIO.EFormat@)">
+        <member name="M:UnityEngine.Print.Log``1(``0@,EFormat@)">
             <summary>
             日志
             </summary>
@@ -276,7 +276,7 @@
             输出详细执行时间
             </summary>
         </member>
-        <member name="M:UnityEngine.Print.Warn``1(``0@,AIO.EFormat@)">
+        <member name="M:UnityEngine.Print.Warn``1(``0@,EFormat@)">
             <summary>
             警告
             </summary>

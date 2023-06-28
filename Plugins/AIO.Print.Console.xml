@@ -9,7 +9,7 @@
             打印
             </summary>
         </member>
-        <member name="M:AIO.CPrint.Log``1(``0@,AIO.EFormat@)">
+        <member name="M:AIO.CPrint.Log``1(``0@,EFormat@)">
             <summary>
             日志
             </summary>
