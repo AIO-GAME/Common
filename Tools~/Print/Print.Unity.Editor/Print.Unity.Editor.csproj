@@ -75,7 +75,7 @@
     <PostBuildEvent>@set CUR_DLL=$(ProjectDir)$(OutDir)
 @cd /d $(SolutionDir)
 @cd ..
-@set cur=%25cd%25\Plugins\
+@set cur=%25cd%25\Plugins\Editor\
 
 @set dllname=$(TargetName)
 @if exist %25CUR_DLL%25%25dllname%25.dll (
@@ -89,7 +89,7 @@
   <PropertyGroup>
     <PreBuildEvent>@cd /d $(SolutionDir)
 @cd ..
-@set cur=%25cd%25\Plugins\
+@set cur=%25cd%25\Plugins\Editor\
 
 @set dllname=$(TargetName)
 @if exist %25cur%25%25dllname%25.dll (

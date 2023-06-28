@@ -17,6 +17,8 @@
     <ProjectReference Include="..\..\Common\Common.Unity\Common.Unity.csproj" />
     <ProjectReference Include="..\..\Common\Common\Common.csproj" />
     <ProjectReference Include="..\..\Ensure\Ensure.csproj" />
+    <ProjectReference Include="..\..\Plugins\Plugins.Unity.Editor\Plugins.Unity.Editor.csproj" />
+    <ProjectReference Include="..\..\Plugins\Plugins.Unity\Plugins.Unity.csproj" />
     <ProjectReference Include="..\..\Print\Print.Console\Print.Console.csproj" />
     <ProjectReference Include="..\..\Print\Print.Unity.Editor\Print.Unity.Editor.csproj" />
     <ProjectReference Include="..\..\Print\Print.Unity\Print.Unity.csproj" />
