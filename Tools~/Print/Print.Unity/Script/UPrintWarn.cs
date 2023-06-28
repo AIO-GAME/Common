@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using System.Diagnostics;
-using UnityEngine;
-using Debug = UnityEngine.Debug;
+﻿using AIO;
 
-namespace AIO
+using System.Collections;
+using System.Diagnostics;
+
+namespace UnityEngine
 {
-    public partial class UPrint
+    public partial class Print
     {
         /// <summary>
         /// 警告

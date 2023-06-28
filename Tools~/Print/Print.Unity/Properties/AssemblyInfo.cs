@@ -39,4 +39,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture(AssemblyInfo.Culture)]
 //[assembly: AssemblyKeyFile(AssemblyInfo.KeyFile)]
 
-[assembly: InternalsVisibleTo("AIO.Print.Unity.Editor")]
+[assembly: InternalsVisibleTo("AIO.Extensions.Unity.Editor")]
+[assembly: InternalsVisibleTo("AIO.General.Unity.Editor")]
+[assembly: InternalsVisibleTo("AIO.Attribute.Unity.Editor")]

@@ -1,11 +1,13 @@
-﻿using System;
+﻿using AIO;
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace AIO
+namespace UnityEngine
 {
-    public partial class UPrint
+    public partial class Print
     {
         /// <summary>
         /// 执行时间

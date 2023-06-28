@@ -54,7 +54,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>..\..\..\..\..\..\G108\proj\Packages\com.blz.package\Tools~\Resources\Plugins\UnityEngine.InputLegacyModule.dll</HintPath>
+      <HintPath>..\..\Resources\Plugins\UnityEngine.InputLegacyModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

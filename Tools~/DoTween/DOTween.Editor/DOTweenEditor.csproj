@@ -21,22 +21,22 @@
   <ItemGroup>
     <Reference Include="System.Core" />
     <Reference Include="UnityEditor.CoreModule">
-      <HintPath>..\..\..\..\..\..\G108\proj\Packages\com.blz.package\Tools~\Resources\Plugins\UnityEditor.CoreModule.dll</HintPath>
+      <HintPath>..\..\Resources\Plugins\UnityEditor.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\..\..\..\G108\proj\Packages\com.blz.package\Tools~\Resources\Plugins\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\..\Resources\Plugins\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>..\..\..\..\..\..\G108\proj\Packages\com.blz.package\Tools~\Resources\Plugins\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>..\..\Resources\Plugins\UnityEngine.IMGUIModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.PhysicsModule">
-      <HintPath>..\..\..\..\..\..\G108\proj\Packages\com.blz.package\Tools~\Resources\Plugins\UnityEngine.PhysicsModule.dll</HintPath>
+      <HintPath>..\..\Resources\Plugins\UnityEngine.PhysicsModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>..\..\..\..\..\..\G108\proj\Packages\com.blz.package\Tools~\Resources\Plugins\UnityEngine.TextRenderingModule.dll</HintPath>
+      <HintPath>..\..\Resources\Plugins\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UIModule">
-      <HintPath>..\..\..\..\..\..\G108\proj\Packages\com.blz.package\Tools~\Resources\Plugins\UnityEngine.UIModule.dll</HintPath>
+      <HintPath>..\..\Resources\Plugins\UnityEngine.UIModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">

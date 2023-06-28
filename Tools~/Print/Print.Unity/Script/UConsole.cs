@@ -7,9 +7,8 @@
 using System;
 using System.IO;
 using System.Text;
-using UnityEngine;
 
-namespace AIO
+namespace UnityEngine
 {
     /// <summary>
     /// Unity 控制台输出

@@ -46,7 +46,11 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\..\G108\proj\Packages\com.blz.package\Tools~\Resources\Plugins\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Resources\Plugins\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>

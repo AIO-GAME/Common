@@ -18,8 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Common.Unity.Editor\Common.Unity.Editor.csproj" />
-    <ProjectReference Include="..\..\Common\Common.Unity\Common.Unity.csproj" />
     <ProjectReference Include="..\..\Common\Common\Common.csproj" />
   </ItemGroup>
   <PropertyGroup>

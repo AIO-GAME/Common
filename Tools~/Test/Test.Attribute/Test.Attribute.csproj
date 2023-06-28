@@ -10,10 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Attribute.Unity.Editor\Attribute.Unity.Editor.csproj" />
-    <ProjectReference Include="..\..\Common\Attribute.Unity\Attribute.Unity.csproj" />
     <ProjectReference Include="..\..\Common\Attribute\Attribute.csproj" />
-    <ProjectReference Include="..\..\Common\Common.Unity.Editor\Common.Unity.Editor.csproj" />
   </ItemGroup>
 
 </Project>
