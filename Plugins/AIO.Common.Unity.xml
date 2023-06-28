@@ -4,6 +4,26 @@
         <name>AIO.Common.Unity</name>
     </assembly>
     <members>
+        <member name="T:UnityEngine.AssemblyExtension">
+            <summary>
+            程序集扩展
+            </summary>
+        </member>
+        <member name="F:UnityEngine.AssemblyExtension.ADBPathSlash">
+            <summary>
+            Path slash for AssetDatabase format
+            </summary>
+        </member>
+        <member name="F:UnityEngine.AssemblyExtension.ADBPathSlashToReplace">
+            <summary>
+            Path slash to replace for AssetDatabase format
+            </summary>
+        </member>
+        <member name="M:UnityEngine.AssemblyExtension.ADBDir(System.Reflection.Assembly)">
+            <summary>
+            AssetDatabase path to the assembly directory, without final slash
+            </summary>
+        </member>
         <member name="T:UnityEngine.GUIStyleExtend">
             <summary>
             GUI Style 扩展
