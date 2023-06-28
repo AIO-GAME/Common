@@ -59,210 +59,210 @@
             支持的区域性
             </summary>
         </member>
-        <member name="T:AIO.EFormat">
+        <member name="T:EFormat">
             <summary>
             解析格式
             </summary>
         </member>
-        <member name="F:AIO.EFormat.None">
+        <member name="F:EFormat.None">
             <summary>
             默认 直接调用 ToString
             </summary>
         </member>
-        <member name="F:AIO.EFormat.Json">
+        <member name="F:EFormat.Json">
             <summary>
             Json格式
             </summary>
         </member>
-        <member name="F:AIO.EFormat.Array">
+        <member name="F:EFormat.Array">
             <summary>
             数组格式
             </summary>
         </member>
-        <member name="T:AIO.EPrint">
+        <member name="T:EPrint">
             <summary>
             输出类型
             </summary>
         </member>
-        <member name="F:AIO.EPrint.Log">
+        <member name="F:EPrint.Log">
             <summary>
             日志
             </summary>
         </member>
-        <member name="F:AIO.EPrint.Warn">
+        <member name="F:EPrint.Warn">
             <summary>
             警告
             </summary>
         </member>
-        <member name="F:AIO.EPrint.Error">
+        <member name="F:EPrint.Error">
             <summary>
             错误
             </summary>
         </member>
-        <member name="F:AIO.EPrint.Exception">
+        <member name="F:EPrint.Exception">
             <summary>
             异常
             </summary>
         </member>
-        <member name="F:AIO.EPrint.Log_Warn">
+        <member name="F:EPrint.Log_Warn">
             <summary>
             日志 警告                 
             </summary>
         </member>
-        <member name="F:AIO.EPrint.Log_Warn_Error">
+        <member name="F:EPrint.Log_Warn_Error">
             <summary>
             日志 警告 错误                 
             </summary>
         </member>
-        <member name="F:AIO.EPrint.Log_Warn_Exception">
+        <member name="F:EPrint.Log_Warn_Exception">
             <summary>
             日志 警告 异常                 
             </summary>
         </member>
-        <member name="F:AIO.EPrint.Log_Error">
+        <member name="F:EPrint.Log_Error">
             <summary>
             日志 错误                 
             </summary>
         </member>
-        <member name="F:AIO.EPrint.Log_Error_Exception">
+        <member name="F:EPrint.Log_Error_Exception">
             <summary>
             日志 错误 异常                 
             </summary>
         </member>
-        <member name="F:AIO.EPrint.Log_Exception">
+        <member name="F:EPrint.Log_Exception">
             <summary>
             日志 异常       
             </summary>
         </member>
-        <member name="F:AIO.EPrint.ALL">
+        <member name="F:EPrint.ALL">
             <summary>
             日志 警告 错误 异常
             </summary>
         </member>
-        <member name="F:AIO.MiniJSON.lastErrorIndex">
+        <member name="F:AIO.Internal.MiniJSON.lastErrorIndex">
             <summary>
             On decoding, this value holds the position at which the parse failed (-1 = no error).
             </summary>
         </member>
-        <member name="M:AIO.MiniJSON.Decode(System.String)">
+        <member name="M:AIO.Internal.MiniJSON.Decode(System.String)">
             <summary>
             Parses the string json into a value
             </summary>
             <param name="json">A JSON string.</param>
             <returns>An ArrayList, a Hashtable, a double, a string, null, true, or false</returns>
         </member>
-        <member name="M:AIO.MiniJSON.Encode(System.Object)">
+        <member name="M:AIO.Internal.MiniJSON.Encode(System.Object)">
             <summary>
             Converts a Hashtable / ArrayList / Dictionary(string,string) object into a JSON string
             </summary>
             <param name="json">A Hashtable / ArrayList</param>
             <returns>A JSON encoded string, or null if object 'json' is not serializable</returns>
         </member>
-        <member name="M:AIO.MiniJSON.LastDecodeSuccessful">
+        <member name="M:AIO.Internal.MiniJSON.LastDecodeSuccessful">
             <summary>
             On decoding, this function returns the position at which the parse failed (-1 = no error).
             </summary>
             <returns></returns>
         </member>
-        <member name="M:AIO.MiniJSON.GetLastErrorIndex">
+        <member name="M:AIO.Internal.MiniJSON.GetLastErrorIndex">
             <summary>
             On decoding, this function returns the position at which the parse failed (-1 = no error).
             </summary>
             <returns></returns>
         </member>
-        <member name="M:AIO.MiniJSON.GetLastErrorSnippet">
+        <member name="M:AIO.Internal.MiniJSON.GetLastErrorSnippet">
             <summary>
             If a decoding error occurred, this function returns a piece of the JSON string
             at which the error took place. To ease debugging.
             </summary>
             <returns></returns>
         </member>
-        <member name="T:AIO.Json">
+        <member name="T:AIO.Internal.Json">
             <summary>
             
             </summary>
         </member>
-        <member name="M:AIO.Json.Serialize(System.Object)">
+        <member name="M:AIO.Internal.Json.Serialize(System.Object)">
             <summary>
             序列化
             </summary>
         </member>
-        <member name="M:AIO.Json.Serialize``1(``0)">
+        <member name="M:AIO.Internal.Json.Serialize``1(``0)">
             <summary>
             序列化
             </summary>
         </member>
-        <member name="M:AIO.Json.Deserialize(System.String)">
+        <member name="M:AIO.Internal.Json.Deserialize(System.String)">
             <summary>
             反序列化
             </summary>
         </member>
-        <member name="M:AIO.Json.Deserialize``1(System.String)">
+        <member name="M:AIO.Internal.Json.Deserialize``1(System.String)">
             <summary>
             反序列化
             </summary>
         </member>
-        <member name="T:AIO.Print">
+        <member name="T:AIO.Internal.Print">
             <summary>
             打印输出
             </summary>
         </member>
-        <member name="P:AIO.Print.IsNotOut">
+        <member name="P:AIO.Internal.Print.IsNotOut">
             <summary>
             输出开关
             </summary>
         </member>
-        <member name="P:AIO.Print.CurOutLevel">
+        <member name="P:AIO.Internal.Print.CurOutLevel">
             <summary>
             类型
             </summary>
         </member>
-        <member name="F:AIO.Print.LOG">
+        <member name="F:AIO.Internal.Print.LOG">
             <summary>
             日志
             </summary>
         </member>
-        <member name="F:AIO.Print.WARNING">
+        <member name="F:AIO.Internal.Print.WARNING">
             <summary>
             警告
             </summary>
         </member>
-        <member name="F:AIO.Print.ERROR">
+        <member name="F:AIO.Internal.Print.ERROR">
             <summary>
             错误
             </summary>
         </member>
-        <member name="F:AIO.Print.EXCEPTION">
+        <member name="F:AIO.Internal.Print.EXCEPTION">
             <summary>
             异常
             </summary>
         </member>
-        <member name="M:AIO.Print.Level(AIO.EPrint@)">
+        <member name="M:AIO.Internal.Print.Level(EPrint@)">
             <summary>
             显示日志
             </summary>
         </member>
-        <member name="M:AIO.Print.Show">
+        <member name="M:AIO.Internal.Print.Show">
             <summary>
             显示日志
             </summary>
         </member>
-        <member name="M:AIO.Print.Show(AIO.EPrint@)">
+        <member name="M:AIO.Internal.Print.Show(EPrint@)">
             <summary>
             显示日志
             </summary>
         </member>
-        <member name="M:AIO.Print.Close">
+        <member name="M:AIO.Internal.Print.Close">
             <summary>
             关闭日志
             </summary>
         </member>
-        <member name="F:AIO.Print.MACRO_DEFINITION">
+        <member name="F:AIO.Internal.Print.MACRO_DEFINITION">
             <summary>
             宏定义
             </summary>
         </member>
-        <member name="M:AIO.Print.NoStatus(System.Int32@)">
+        <member name="M:AIO.Internal.Print.NoStatus(System.Int32@)">
             <summary>
             判断状态
             </summary>

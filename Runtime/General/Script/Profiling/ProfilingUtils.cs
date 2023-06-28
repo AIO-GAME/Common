@@ -64,12 +64,7 @@
             CurrentSegment = CurrentSegment.Children[name];
             CurrentSegment.Calls++;
             CurrentSegment.Stopwatch.Start();
-#if UNITY_2020_1_OR_NEWER
-            if (UnityThread.allowsAPI)
-#endif
-            {
-                Profiler.BeginSample(name);
-            }
+            Profiler.BeginSample(name);
         }
 
         /// <summary>
@@ -85,12 +80,7 @@
                 CurrentSegment = CurrentSegment.Parent;
             }
             
-#if UNITY_2020_1_OR_NEWER
-            if (UnityThread.allowsAPI)
-#endif
-            {
-                Profiler.EndSample();
-            }
+            Profiler.EndSample();
 
             Monitor.Exit(@lock);
         }

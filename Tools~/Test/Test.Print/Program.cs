@@ -6,20 +6,7 @@ namespace AIO
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine(" - ----------------------- - ");
-
-            try
-            {
-                Print.Show(EPrint.ALL);
-                Test1();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-
-            Console.WriteLine(" - ----------------------- -   ");
-            Console.Read();
+     
         }
 
         public static void Test1()

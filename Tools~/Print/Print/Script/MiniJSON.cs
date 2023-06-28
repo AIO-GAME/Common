@@ -1,4 +1,4 @@
-﻿namespace AIO
+﻿namespace AIO.Internal
 {
     using System;
     using System.Collections;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Threading.Tasks;
+using AIO.Internal;
 
 namespace AIO
 {

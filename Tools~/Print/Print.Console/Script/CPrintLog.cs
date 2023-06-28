@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AIO.Internal;
 
 namespace AIO
 {
@@ -39,8 +40,10 @@ namespace AIO
                         Log(enumerable);
                         return;
                     }
+
                     break;
             }
+
             Console.WriteLine(obj);
         }
 
