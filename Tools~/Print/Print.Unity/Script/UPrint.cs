@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
-using UnityEngine;
-using Debug = UnityEngine.Debug;
-using Object = UnityEngine.Object;
 
-namespace AIO
+using APrint = AIO.Print;
+
+namespace UnityEngine
 {
     /// <summary>
     /// Unity 输出
     /// </summary>
-    public partial class UPrint : Print
+    public partial class Print : APrint
     {
         /// <summary>
         /// 控制台

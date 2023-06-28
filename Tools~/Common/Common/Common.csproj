@@ -47,6 +47,7 @@
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.0.7.0, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
       <HintPath>..\..\Resources\Nuget\sharpziplib.netstandard\1.0.7\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
       <HintPath>..\..\Resources\Nuget\newtonsoft.json\13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -60,6 +61,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="YamlDotNet, Version=13.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e">
       <HintPath>..\..\Resources\Nuget\yamldotnet\13.1.0\lib\net47\YamlDotNet.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>

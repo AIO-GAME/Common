@@ -1,10 +1,8 @@
 ﻿using System.Diagnostics;
-using UnityEngine;
-using Debug = UnityEngine.Debug;
 
-namespace AIO
+namespace UnityEngine
 {
-    public partial class UPrint
+    public partial class Print
     {
         /// <summary>
         ///   <para>Assert a condition and logs an error message to the Unity console on failure.</para>
