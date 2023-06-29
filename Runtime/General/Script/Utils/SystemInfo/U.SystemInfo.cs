@@ -11,6 +11,7 @@ namespace UnityEngine
         /// </summary>
         public static partial class SystemInfo
         {
+#if UNITY_2019_1_OR_NEWER
             /// <summary>
             /// 是否支持镶嵌着色器
             /// Are tessellation shaders supported
@@ -116,6 +117,7 @@ namespace UnityEngine
             {
                 return UnityEngine.SystemInfo.maxComputeWorkGroupSizeZ;
             }
+#endif
 
             /// <summary>
             /// 最大立方地图纹理大小
@@ -152,8 +154,7 @@ namespace UnityEngine
             {
                 return UnityEngine.SystemInfo.SupportsVertexAttributeFormat(format, dimension);
             }
-#endif
-            
+
             /// <summary>
             /// 如果图形API考虑了RenderBufferLoadAction和RenderBufferStoreAction，则为True，否则为false。
             /// True if the Graphics API takes RenderBufferLoadAction and RenderBufferStoreAction into account, false if otherwise.
@@ -171,7 +172,6 @@ namespace UnityEngine
                 return UnityEngine.SystemInfo.GetCompatibleFormat(format, usage);
             }
 
-#if UNITY_2019_1_OR_NEWER
             /// <summary>
             /// 获取图形格式
             /// </summary>
@@ -180,7 +180,7 @@ namespace UnityEngine
                 return UnityEngine.SystemInfo.GetGraphicsFormat(format);
             }
 #endif
-            
+
             /// <summary>
             /// 是否 支持指定格式
             /// </summary>
@@ -198,7 +198,6 @@ namespace UnityEngine
             {
                 return UnityEngine.SystemInfo.renderingThreadingMode;
             }
-#endif
 
             /// <summary>
             /// Unity同时支持的随机写目标(UAV)的最大数量。
@@ -226,6 +225,7 @@ namespace UnityEngine
             {
                 return UnityEngine.SystemInfo.supportsGraphicsFence;
             }
+#endif
         }
     }
 
@@ -236,6 +236,8 @@ namespace UnityEngine
         /// </summary>
         public static partial class SystemInfo
         {
+            
+#if UNITY_2019_1_OR_NEWER
             /// <summary>
             /// 当前渲染器是否直接支持绑定常量缓冲区
             /// Does the current renderer support binding constant buffers directly
@@ -244,7 +246,8 @@ namespace UnityEngine
             {
                 return UnityEngine.SystemInfo.supportsSetConstantBuffer;
             }
-
+#endif
+            
             /// <summary>
             /// SystemInfo字符串属性返回的值，该属性在当前平台上不受支持。
             /// Value returned by UnityEngine. SystemInfo string properties which are not supported on the current platform.
