@@ -54,29 +54,29 @@ namespace AIO.Unity.Editor
         protected override void OnGUI()
         {
             var Height = GTOption.Height(60);
-            GTLayout.BE.Horizontal(() =>
+            GELayout.Horizontal(() =>
             {
                 GTOption.Space(10);
-                GTLayout.AC.Label("类名", Width);
-                GTLayout.AC.Label("命名空间", GTOption.Width(200));
-                GTLayout.AC.Label("静态类", Width);
-                GTLayout.AC.Label("属性", GTOption.Width(500));
+                GELayout.Label("类名", Width);
+                GELayout.Label("命名空间", GTOption.Width(200));
+                GELayout.Label("静态类", Width);
+                GELayout.Label("属性", GTOption.Width(500));
                 GTOption.Space(10);
             }, Content, GTOption.Height(40));
-            Vector = GTLayout.BE.ScrollView(() =>
+            Vector = GELayout.ScrollView(() =>
             {
                 foreach (var item in List)
-                    GTLayout.BE.Horizontal(() => { DrawItem(item); }, Content, Height);
+                    GELayout.Horizontal(() => { DrawItem(item); }, Content, Height);
             }, Vector);
         }
 
         private void DrawItem(Type type)
         {
             GTOption.Space(10);
-            GTLayout.AC.Label(type.Name, Width);
-            GTLayout.AC.Label(type.Namespace, GTOption.Width(200));
-            GTLayout.AC.Label(type.IsAbstract, Width);
-            GTLayout.AC.Label(type.Attributes.ToString(), GTOption.Width(500));
+            GELayout.Label(type.Name, Width);
+            GELayout.Label(type.Namespace, GTOption.Width(200));
+            GELayout.Label(type.IsAbstract, Width);
+            GELayout.Label(type.Attributes.ToString(), GTOption.Width(500));
             GTOption.Space(10);
         }
     }

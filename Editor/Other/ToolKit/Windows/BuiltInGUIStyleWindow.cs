@@ -73,13 +73,13 @@ namespace AIO.Unity.Editor
                     }
             }
 
-            GTLayout.BE.Horizontal(() =>
+            GELayout.Horizontal(() =>
             {
-                search = GTLayout.AC.FieldText(search, Label);
-                if (GTLayout.AC.Button("Find", GTOption.Width(50))) FindSearchStyles();
+                search = GELayout.Field(search, Label);
+                if (GELayout.Button("Find", GTOption.Width(50))) FindSearchStyles();
             }, EditorStyles.helpBox, GTOption.WidthExpand(true), GTOption.Height(30));
 
-            Vector = GTLayout.BE.ScrollView(DrawContext, Vector);
+            Vector = GELayout.ScrollView(DrawContext, Vector);
         }
 
         private void FindSearchStyles()
@@ -95,29 +95,29 @@ namespace AIO.Unity.Editor
             var Height = GTOption.Height(60);
             //if (!search.ToLower().IsNullOrEmpty() && Array.ContainsKey(search.ToLower()))
             //{
-            //    GTLayout.BE.Horizontal(() => { DrawItem(Array[search.ToLower()]); }, Content, Height);
+            //    GTLayout.Horizontal(() => { DrawItem(Array[search.ToLower()]); }, Content, Height);
             //}
             //else
             //{
             //    foreach (var style in Array.Values)
             //    {
-            //        GTLayout.BE.Horizontal(() => { DrawItem(style); }, Content, Height);
+            //        GTLayout.Horizontal(() => { DrawItem(style); }, Content, Height);
             //    }
             //}
             foreach (var style in Array.Values)
             {
-                GTLayout.BE.Horizontal(() => { DrawItem(style); }, Content, Height);
+                GELayout.Horizontal(() => { DrawItem(style); }, Content, Height);
             }
         }
 
         private void DrawItem(GUIStyle style)
         {
             GTOption.Space(10);
-            GTLayout.AC.LabelPrefix(style.name);
+            GELayout.LabelPrefix(style.name);
             GTOption.Separator();
-            GTLayout.AC.LabelSelectable(style.name, style, Height);
+            GELayout.LabelSelectable(style.name, style, Height);
             GTOption.Separator();
-            GTLayout.AC.Button("Copy", () =>
+            GELayout.Button("Copy", () =>
             {
                 var textEditor = new TextEditor();
                 textEditor.text = style.name;
