@@ -1188,7 +1188,7 @@ namespace Borodar.RainbowCore.RList.Editor
 
 		public void DoLayoutList()
 		{
-			Rect controlRect = EditorGUILayout.GetControlRect(false, GetHeight(), EditorStyles.largeLabel);
+			var controlRect = EditorGUILayout.GetControlRect(false, GetHeight(), EditorStyles.largeLabel);
 			DoList(EditorGUI.IndentedRect(controlRect), label);
 		}
 

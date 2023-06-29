@@ -235,6 +235,7 @@
     <Compile Include="Script\Tools\Mail\MailMultipleHandle.cs" />
     <Compile Include="Script\Tools\Mail\MailSingleHandle.cs" />
     <Compile Include="Script\Tools\Mail\MailSingleInfo.cs" />
+    <Compile Include="Script\Tools\NetWork\BytesSerializable.cs" />
     <Compile Include="Script\Tools\PList\IPListElement.cs" />
     <Compile Include="Script\Tools\PList\PListBinaryReader.cs" />
     <Compile Include="Script\Tools\PList\PListBinaryWriter.cs" />
