@@ -84,7 +84,7 @@ MonoBehaviour:
     BackgroundType: 0
     BackgroundTexture: {fileID: 0}
     IsBackgroundRecursive: 0
-    IsHidden: 0
+    IsHidden: 1
   - Type: 0
     Key: Fonts
     Ordinal: 6
@@ -457,3 +457,15 @@ MonoBehaviour:
     BackgroundTexture: {fileID: 0}
     IsBackgroundRecursive: 1
     IsHidden: 1
+  - Type: 0
+    Key: Settings
+    Ordinal: 37
+    Priority: 0
+    IconType: 1
+    SmallIcon: {fileID: 2800000, guid: b4b9254e5f1afc64f87a6ef2726ebbfa, type: 3}
+    LargeIcon: {fileID: 2800000, guid: b4b9254e5f1afc64f87a6ef2726ebbfa, type: 3}
+    IsIconRecursive: 1
+    BackgroundType: 50
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 1
+    IsHidden: 0
