@@ -64,11 +64,20 @@ namespace AIO.Unity.Editor
             UpdateData();
         }
 
+#if UNITY_2019_1_OR_NEWER
         private void compilationStarted(object o)
         {
+            CompilationPipeline.assemblyCompilationFinished -= compilationStarted;
             CompilationPipeline.compilationStarted -= compilationStarted;
             UpdateData();
         }
+#else
+        private void compilationStarted(string o)
+        {
+            CompilationPipeline.assemblyCompilationStarted -= compilationStarted;
+            UpdateData();
+        }
+#endif
 
         private void UpdateData()
         {
@@ -134,7 +143,11 @@ namespace AIO.Unity.Editor
                     var temp = new List<PluginsInfo>();
                     foreach (var item in IntsallIndexList.Where(V => InsallIsSelectDic[V]))
                         temp.Add(RootData[item]);
+#if UNITY_2019_1_OR_NEWER
                     CompilationPipeline.compilationStarted += compilationStarted;
+#else
+                    CompilationPipeline.assemblyCompilationStarted += compilationStarted;
+#endif
                     _ = PluginsInfoEditor.Initialize(temp);
                     return;
                 }
@@ -145,7 +158,11 @@ namespace AIO.Unity.Editor
             if (!InsallIsSelect)
                 if (GUILayout.Button("安装全部", GUILayout.Width(60)))
                 {
+#if UNITY_2019_1_OR_NEWER
                     CompilationPipeline.compilationStarted += compilationStarted;
+#else
+                    CompilationPipeline.assemblyCompilationStarted += compilationStarted;
+#endif
                     _ = PluginsInfoEditor.Initialize(RootData.Values.Where(plugin => IntsallIndexList.Contains(plugin.Name)));
                     return;
                 }
@@ -174,7 +191,11 @@ namespace AIO.Unity.Editor
                     {
                         if (GUILayout.Button("安装", GUILayout.Width(60), GUILayout.Height(20)))
                         {
-                            CompilationPipeline.compilationStarted += compilationStarted;
+#if UNITY_2019_1_OR_NEWER
+                    CompilationPipeline.compilationStarted += compilationStarted;
+#else
+                            CompilationPipeline.assemblyCompilationStarted += compilationStarted;
+#endif
                             _ = PluginsInfoEditor.Initialize(Data);
                             return;
                         }
@@ -234,7 +255,11 @@ namespace AIO.Unity.Editor
                         temp.Add(RootData[item]);
 
                     if (temp.Count == 0) return;
+#if UNITY_2019_1_OR_NEWER
                     CompilationPipeline.compilationStarted += compilationStarted;
+#else
+                    CompilationPipeline.assemblyCompilationStarted += compilationStarted;
+#endif
                     _ = PluginsInfoEditor.UnInitialize(temp);
                     return;
                 }
@@ -244,7 +269,11 @@ namespace AIO.Unity.Editor
             if (!UnInsallIsSelect)
                 if (GUILayout.Button("卸载全部", GUILayout.Width(60)))
                 {
+#if UNITY_2019_1_OR_NEWER
                     CompilationPipeline.compilationStarted += compilationStarted;
+#else
+                    CompilationPipeline.assemblyCompilationStarted += compilationStarted;
+#endif
                     _ = PluginsInfoEditor.UnInitialize(RootData.Values.Where(plugin => UnIntsallIndexList.Contains(plugin.Name)));
                     return;
                 }
@@ -277,14 +306,20 @@ namespace AIO.Unity.Editor
 #if UNITY_2020_1_OR_NEWER
                                 AssetDatabase.RefreshSettings();
 #endif
+#if UNITY_2019_1_OR_NEWER
                                 CompilationPipeline.RequestScriptCompilation();
+#endif
                                 return;
                             }
                         }
 
                         if (GUILayout.Button("卸载", GUILayout.Width(60), GUILayout.Height(20)))
                         {
+#if UNITY_2019_1_OR_NEWER
                             CompilationPipeline.compilationStarted += compilationStarted;
+#else
+                            CompilationPipeline.assemblyCompilationStarted += compilationStarted;
+#endif
                             _ = PluginsInfoEditor.UnInitialize(Data);
                             return;
                         }

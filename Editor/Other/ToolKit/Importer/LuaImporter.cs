@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.IO;
-using UnityEditor.AssetImporters;
 using UnityEngine;
 using AIO;
-#if !UNITY_2020_1_OR_NEWER
+#if UNITY_2019_1_OR_NEWER
+using UnityEditor.AssetImporters;
+#endif
+#if UNITY_2018_1_OR_NEWER && !UNITY_2020_1_OR_NEWER
 using UnityEditor.Experimental.AssetImporters;
 #endif
 namespace AIO.Unity.Editor

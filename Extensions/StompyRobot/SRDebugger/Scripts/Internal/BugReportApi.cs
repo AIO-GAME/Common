@@ -121,7 +121,7 @@ namespace SRDebugger.Internal
 #elif UNITY_2019_1_OR_NEWER
             if(_webRequest.isNetworkError)
 #else
-            if(_webRequest.isError)
+            if(_webRequest.isNetworkError)
 #endif
             {
                 ErrorMessage = "Request Error: " + _webRequest.error;

@@ -63,10 +63,12 @@ namespace AIO.Unity.Editor
         static void InitCompile()
         {
             //**************不需要这个可以注释********************************
+#if UNITY_2019_1_OR_NEWER
             CompilationPipeline.compilationStarted -= OnCompilationStarted;
             CompilationPipeline.compilationStarted += OnCompilationStarted;
             CompilationPipeline.compilationFinished -= OnCompilationFinished;
             CompilationPipeline.compilationFinished += OnCompilationFinished;
+#endif
             //**************************************************************
 
             //域重载事件监听
@@ -121,7 +123,9 @@ namespace AIO.Unity.Editor
                     if (tempData)
                     {
                         UnlockReloadDomain();
+#if UNITY_2019_1_OR_NEWER
                         EditorUtility.RequestScriptReload();
+#endif
                     }
                     break;
                 case PlayModeStateChange.EnteredPlayMode:
@@ -203,9 +207,10 @@ namespace AIO.Unity.Editor
 
             PlayerPrefs.SetInt(kManualReloadDomain, 1);
             //编辑器设置 projectsetting->editor->enterPlayModeSetting
+#if UNITY_2019_1_OR_NEWER
             EditorSettings.enterPlayModeOptionsEnabled = true;
             EditorSettings.enterPlayModeOptions = EnterPlayModeOptions.DisableDomainReload;
-
+#endif
             LockRealodDomain();
         }
 
@@ -219,7 +224,9 @@ namespace AIO.Unity.Editor
 
             PlayerPrefs.SetInt(kManualReloadDomain, 0);
             UnlockReloadDomain();
+#if UNITY_2019_1_OR_NEWER
             EditorSettings.enterPlayModeOptionsEnabled = false;
+#endif
         }
 
         //手动刷新
@@ -229,7 +236,9 @@ namespace AIO.Unity.Editor
             if (IsManualReload)
             {
                 UnlockReloadDomain();
+#if UNITY_2019_1_OR_NEWER
                 EditorUtility.RequestScriptReload();
+#endif
             }
         }
     }
