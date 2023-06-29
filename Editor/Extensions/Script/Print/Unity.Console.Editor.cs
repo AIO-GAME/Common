@@ -35,8 +35,7 @@ namespace AIO.Unity.Editor
         [MenuItem(MENU_EDITOR_SWITCH_LOG)]
         private static void EditorSwitchLOG()
         {
-            PlayerPrefs.SetInt(MENU_EDITOR_SWITCH_LOG, !IS_EDITOR_SWITCH_LOG ? 1 : -1);
-            PlayerPrefs.Save();
+            EditorPrefs.SetInt(MENU_EDITOR_SWITCH_LOG, !IS_EDITOR_SWITCH_LOG ? 1 : -1);
             EditorProxy();
 #if UNITY_2020_1_OR_NEWER
             AssetDatabase.RefreshSettings();
@@ -48,8 +47,7 @@ namespace AIO.Unity.Editor
         [MenuItem(MENU_EDITOR_SWITCH_ERROR)]
         private static void EditorSwitchERROR()
         {
-            PlayerPrefs.SetInt(MENU_EDITOR_SWITCH_ERROR, !IS_EDITOR_SWITCH_ERROR ? 1 : -1);
-            PlayerPrefs.Save();
+            EditorPrefs.SetInt(MENU_EDITOR_SWITCH_ERROR, !IS_EDITOR_SWITCH_ERROR ? 1 : -1);
             EditorProxy();
 #if UNITY_2020_1_OR_NEWER
             AssetDatabase.RefreshSettings();
@@ -84,7 +82,7 @@ namespace AIO.Unity.Editor
         private static void OpenDeveloperMode()
         {
             EditorPrefs.SetBool("DeveloperMode", !IS_DEVELOPERMODE);
-            PlayerPrefs.SetInt(MENU_DEVELOPERMODE, !IS_DEVELOPERMODE ? 1 : -1);
+            EditorPrefs.SetInt(MENU_DEVELOPERMODE, !IS_DEVELOPERMODE ? 1 : -1);
             MenuRefresh();
         }
     }
