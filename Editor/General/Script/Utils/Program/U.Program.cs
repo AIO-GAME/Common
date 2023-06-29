@@ -1,12 +1,21 @@
-﻿using System;
+﻿/*|✩ - - - - - |||
+|||✩ Author:   ||| -> SAM
+|||✩ Date:     ||| -> 2023-06-29
+|||✩ Document: ||| -> 
+|||✩ - - - - - |*/
+
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using Debug = UnityEngine.Debug;
 
-namespace AIO.Unity.Editor
+namespace UnityEditor
 {
-    public static class ProgramUtils
+    /// <summary>
+    /// 程序设置
+    /// </summary>
+    public class Program
     {
 #if UNITY_EDITOR_WIN
 
@@ -42,7 +51,7 @@ namespace AIO.Unity.Editor
         /// </summary>
         private static IntPtr myWindowHandle;
 
-        static ProgramUtils()
+        static Program()
         {
 #if UNITY_EDITOR_WIN
             var handle = (IntPtr)Process.GetCurrentProcess().Id; //获取进程ID
@@ -92,6 +101,7 @@ namespace AIO.Unity.Editor
                 myWindowHandle = hwnd;
                 return false;
             }
+
             return true;
 #else
             return false;

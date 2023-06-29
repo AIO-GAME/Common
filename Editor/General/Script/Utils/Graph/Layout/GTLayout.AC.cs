@@ -12,94 +12,23 @@
 ↓  History:     |*| |>"<|                         |*|╰◎═◎╯╯╚◎═══◎╝╚◎══◎╝╚◎════◎╝╚◎═◎╝╚◎════◎╝╚◎═◎╝  ↩
 ↓===================================================================================================*/
 
-namespace AIO.Unity.Editor
+using System;
+using System.Collections.Generic;
+using UnityEditor.EditorTools;
+using UnityEngine;
+using UnityEngine.Internal;
+using Object = UnityEngine.Object;
+
+namespace UnityEditor
 {
-    using System;
-    using System.Collections.Generic;
-
-    using UnityEditor;
-
-    using UnityEngine;
-    using UnityEngine.Internal;
-
     public static partial class GTLayout
     {
         /// <summary>
         /// 数值绘制函数
         /// </summary>
-        public static class AC
+        public static partial class AC
         {
-            /// <summary>
-            /// 复制字符按钮
-            /// </summary>
-            public static void ButtonCopyText(string name, float height, float width, string content, GUIStyle style = null)
-            {
-                if (Button(name, style, GUILayout.Height(height), GUILayout.Width(width))) CopyTextAction(content);
-            }
-
-            /* ----------------Bounds---------------- */
-
-            #region 绘制轴对齐的边框 Bounds
-
-            /// <summary> 绘制轴对齐的边框 </summary>
-            /// <param name="action">方法体</param>
-            /// <param name="value">表示轴对齐的边框</param>
-            /// <param name="options">排版格式</param>
-            public static Bounds BoundsField(Bounds value, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.BoundsField(value, options);
-            }
-
-            /// <summary> 绘制轴对齐的边框 </summary>
-            /// <param name="label">标签</param>
-            /// <param name="value">表示轴对齐的边框</param>
-            /// <param name="options">排版格式</param>
-            public static Bounds BoundsField(string label, Bounds value, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.BoundsField(label, value, options);
-            }
-
-            /// <summary> 绘制轴对齐的边框 </summary>
-            /// <param name="label">标签</param>
-            /// <param name="value">表示轴对齐的边框</param>
-            /// <param name="options">排版格式</param>
-            public static Bounds BoundsField(GUIContent label, Bounds value, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.BoundsField(label, value, options);
-            }
-
-            #endregion
-
-            #region 绘制轴对齐的边框 BoundsInt
-
-            /// <summary> 绘制轴对齐的边框 </summary>
-            /// <param name="value">表示轴对齐的边框</param>
-            /// <param name="options">排版格式</param>
-            public static BoundsInt BoundsField(BoundsInt value, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.BoundsIntField(value, options);
-            }
-
-            /// <summary> 绘制轴对齐的边框 </summary>
-            /// <param name="label">标签</param>
-            /// <param name="value">表示轴对齐的边框</param>
-            /// <param name="options">排版格式</param>
-            public static BoundsInt BoundsField(string label, BoundsInt value, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.BoundsIntField(label, value, options);
-            }
-
-            /// <summary> 绘制轴对齐的边框 </summary>
-            /// <param name="label">标签</param>
-            /// <param name="value">表示轴对齐的边框</param>
-            /// <param name="options">排版格式</param>
-            public static BoundsInt BoundsField(GUIContent label, BoundsInt value, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.BoundsIntField(label, value, options);
-            }
-
-            #endregion
-
+         
             /* ----------------Field-Delayed---------------- */
 
             #region 延迟文本 FieldDelayedDouble
@@ -313,82 +242,6 @@ namespace AIO.Unity.Editor
 
             #endregion
 
-            #region 延迟文本 FieldDelayedText
-
-            /// <summary> 延迟文本 string </summary>
-            /// <param name="value">值</param>
-            /// <param name="label">标签</param>
-            /// <param name="options">排版格式</param>
-            public static void FieldDelayedText(SerializedProperty value, GUIContent label, params GUILayoutOption[] options)
-            {
-                EditorGUILayout.DelayedTextField(value, label, options);
-            }
-
-            /// <summary> 延迟文本 string </summary>
-            /// <param name="value">值</param>
-            /// <param name="options">排版格式</param>
-            public static void FieldDelayedText(SerializedProperty value, params GUILayoutOption[] options)
-            {
-                EditorGUILayout.DelayedTextField(value, options);
-            }
-
-            /// <summary> 延迟文本 string </summary>
-            /// <param name="value">值</param>
-            /// <param name="label">标签</param>
-            /// <param name="options">排版格式</param>
-            public static string FieldDelayedText(GUIContent label, string value, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.DelayedTextField(label, value, options);
-            }
-
-            /// <summary> 延迟文本 string </summary>
-            /// <param name="value">值</param>
-            /// <param name="options">排版格式</param>
-            /// <param name="label">标签</param>
-            /// <param name="style">显示风格</param>
-            public static string FieldDelayedText(GUIContent label, string value, GUIStyle style, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.DelayedTextField(label, value, style, options);
-            }
-
-            /// <summary> 延迟文本 string </summary>
-            /// <param name="label">标签</param>
-            /// <param name="value">值</param>
-            /// <param name="options">排版格式</param>
-            public static string FieldDelayedText(string label, string value, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.DelayedTextField(label, value, options);
-            }
-
-            /// <summary> 延迟文本 string </summary>
-            /// <param name="value">值</param>
-            /// <param name="style">显示风格</param>
-            /// <param name="options">排版格式</param>
-            public static string FieldDelayedText(string value, GUIStyle style, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.DelayedTextField(value, style, options);
-            }
-
-            /// <summary> 延迟文本 string </summary>
-            /// <param name="value">值</param>
-            /// <param name="options">排版格式</param>
-            public static string FieldDelayedText(string value, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.DelayedTextField(value, options);
-            }
-
-            /// <summary> 延迟文本 string </summary>
-            /// <param name="label">标签</param>
-            /// <param name="value">值</param>
-            /// <param name="style">显示风格</param>
-            /// <param name="options">排版格式</param>
-            public static string FieldDelayedText(string label, string value, GUIStyle style, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.DelayedTextField(label, value, style, options);
-            }
-
-            #endregion
-
             /* ----------------Field---------------- */
 
             #region 序列化属性 FieldProperty
@@ -421,39 +274,6 @@ namespace AIO.Unity.Editor
             public static bool FieldProperty(SerializedProperty property, bool includeChildren, params GUILayoutOption[] options)
             {
                 return EditorGUILayout.PropertyField(property, includeChildren, options);
-            }
-
-            #endregion
-
-            #region 颜色选择框 FieldColor
-
-            /// <summary> 颜色选择框 </summary>
-            /// <param name="label">标签</param>
-            /// <param name="value">颜色</param>
-            /// <param name="showEyedropper">颜色选择器显示滴管控制</param>
-            /// <param name="showAlpha">用户设置颜色的alpha值</param>
-            /// <param name="hdr">true:颜色视为HDR值,false:视为标准的LDR</param>
-            /// <param name="options">排版格式</param>
-            public static Color FieldColor(GUIContent label, Color value, bool showEyedropper, bool showAlpha, bool hdr, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.ColorField(label, value, showEyedropper, showAlpha, hdr, options);
-            }
-
-            /// <summary> 颜色选择框 </summary>
-            /// <param name="label">标签</param>
-            /// <param name="value">颜色</param>
-            /// <param name="options">排版格式</param>
-            public static Color FieldColor(string label, Color value, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.ColorField(label, value, options);
-            }
-
-            /// <summary> 颜色选择框 </summary>
-            /// <param name="value">颜色</param>
-            /// <param name="options">排版格式</param>
-            public static Color FieldColor(Color value, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.ColorField(value, options);
             }
 
             #endregion
@@ -757,64 +577,6 @@ namespace AIO.Unity.Editor
                 return EditorGUILayout.GradientField(value, options);
             }
 #endif
-            #endregion
-
-            #region 文本文本框 FieldText
-
-            /// <summary> 文本文本框 FieldText </summary>
-            /// <param name="text">值</param>
-            /// <param name="options">排版格式</param>
-            public static string FieldText(string text, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.TextField(text, options);
-            }
-
-            /// <summary> 文本文本框 FieldText </summary>
-            /// <param name="label">标签</param>
-            /// <param name="text">值</param>
-            /// <param name="style">显示风格</param>
-            /// <param name="options">排版格式</param>
-            public static string FieldText(GUIContent label, string text, GUIStyle style, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.TextField(label, text, options);
-            }
-
-            /// <summary> 文本文本框 FieldText </summary>
-            /// <param name="label">标签</param>
-            /// <param name="text">值</param>
-            /// <param name="options">排版格式</param>
-            public static string FieldText(GUIContent label, string text, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.TextField(label, text, options);
-            }
-
-            /// <summary> 文本文本框 FieldText </summary>
-            /// <param name="label">标签</param>
-            /// <param name="text">值</param>
-            /// <param name="style">显示风格</param>
-            /// <param name="options">排版格式</param>
-            public static string FieldText(string label, string text, GUIStyle style, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.TextField(label, text, options);
-            }
-
-            /// <summary> 文本文本框 FieldText </summary>
-            /// <param name="label">标签</param>
-            /// <param name="text">值</param>
-            /// <param name="options">排版格式</param>
-            public static string FieldText(string label, string text, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.TextField(label, text, options);
-            }
-
-            /// <summary> 文本文本框 FieldText </summary>
-            /// <param name="text">值</param>
-            /// <param name="style">显示风格</param>
-            /// <param name="options">排版格式</param>
-            public static string FieldText(string text, GUIStyle style, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.TextField(text, style, options);
-            }
 
             #endregion
 
@@ -1045,7 +807,6 @@ namespace AIO.Unity.Editor
                 return EditorGUILayout.LayerField(label, layer, style, options);
             }
 
-
             #endregion
 
             #region 文本框 FieldLong
@@ -1187,19 +948,19 @@ namespace AIO.Unity.Editor
             #region 物体文本框 FieldObject
 
             /// <summary> 物体文本框 FieldObject </summary>
-            public static T FieldObject<T>(T Obj, bool allowSceneObjects, params GUILayoutOption[] options) where T : UnityEngine.Object
+            public static T FieldObject<T>(T Obj, bool allowSceneObjects, params GUILayoutOption[] options) where T : Object
             {
                 return (T)EditorGUILayout.ObjectField(Obj, typeof(T), allowSceneObjects, options);
             }
 
             /// <summary> 物体文本框 FieldObject </summary>
-            public static T FieldObject<T>(T Obj, string name, bool allowSceneObjects, params GUILayoutOption[] options) where T : UnityEngine.Object
+            public static T FieldObject<T>(T Obj, string name, bool allowSceneObjects, params GUILayoutOption[] options) where T : Object
             {
                 return (T)EditorGUILayout.ObjectField(name, Obj, typeof(T), allowSceneObjects, options);
             }
 
             /// <summary> 物体文本框 FieldObject </summary>
-            public static T FieldObject<T>(T Obj, GUIContent name, bool allowSceneObjects, params GUILayoutOption[] options) where T : UnityEngine.Object
+            public static T FieldObject<T>(T Obj, GUIContent name, bool allowSceneObjects, params GUILayoutOption[] options) where T : Object
             {
                 return (T)EditorGUILayout.ObjectField(name, Obj, typeof(T), allowSceneObjects, options);
             }
@@ -1494,7 +1255,6 @@ namespace AIO.Unity.Editor
                 return (T)EditorGUILayout.EnumPopup(selected, options);
             }
 #endif
-
 
             #endregion
 
@@ -2003,6 +1763,7 @@ namespace AIO.Unity.Editor
                 return (T)EditorGUILayout.EnumFlagsField(enumValue, style, options);
             }
 #endif
+
             #endregion
 
             #region 枚举菜单 EnumMaskField 已弃用
@@ -2055,304 +1816,7 @@ namespace AIO.Unity.Editor
 
             /* ----------------Toggle---------------- */
 
-            #region 开关按钮 Toggle
-
-            /// <summary> 开关按钮 </summary>
-            /// <param name="label">标签</param>
-            /// <param name="value">值</param>
-            /// <param name="options">排版格式</param>
-            public static bool Toggle(string label, bool value, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.Toggle(label, value, options);
-            }
-
-            /// <summary> 开关按钮 </summary>
-            /// <param name="label">标签</param>
-            /// <param name="value">值</param>
-            /// <param name="options">排版格式</param>
-            public static bool Toggle(GUIContent label, bool value, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.Toggle(label, value, options);
-            }
-
-            /// <summary> 开关按钮 </summary>
-            /// <param name="value">值</param>
-            /// <param name="options">排版格式</param>
-            public static bool Toggle(bool value, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.Toggle(value, options);
-            }
-
-            /// <summary> 开关按钮 </summary>
-            /// <param name="label">标签</param>
-            /// <param name="value">值</param>
-            /// <param name="style">显示风格</param>
-            /// <param name="options">排版格式</param>
-            public static bool Toggle(string label, bool value, GUIStyle style, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.Toggle(label, value, style, options);
-            }
-
-            /// <summary> 开关按钮 </summary>
-            /// <param name="label">标签</param>
-            /// <param name="value">值</param>
-            /// <param name="style">显示风格</param>
-            /// <param name="options">排版格式</param>
-            public static bool Toggle(GUIContent label, bool value, GUIStyle style, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.Toggle(label, value, style, options);
-            }
-
-            /// <summary> 开关按钮 </summary>
-            /// <param name="value">值</param>
-            /// <param name="style">显示风格</param>
-            /// <param name="options">排版格式</param>
-            public static bool Toggle(bool value, GUIStyle style, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.Toggle(value, style, options);
-            }
-
-            #endregion
-
-            #region 左侧开关 右侧标签 ToggleLeft
-
-            /// <summary> 左侧开关 右侧标签 </summary>
-            /// <param name="label">标签</param>
-            /// <param name="value">值</param>
-            /// <param name="options">排版格式</param>
-            public static bool ToggleLeft(string label, bool value, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.ToggleLeft(label, value, options);
-            }
-
-            /// <summary> 左侧开关 右侧标签 </summary>
-            /// <param name="label">标签</param>
-            /// <param name="value">值</param>
-            /// <param name="options">排版格式</param>
-            public static bool ToggleLeft(GUIContent label, bool value, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.ToggleLeft(label, value, options);
-            }
-
-            /// <summary> 左侧开关 右侧标签 </summary>
-            /// <param name="label">标签</param>
-            /// <param name="value">值</param>
-            /// <param name="labelStyle">标签显示风格</param>
-            /// <param name="options">排版格式</param>
-            public static bool ToggleLeft(string label, bool value, GUIStyle labelStyle, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.ToggleLeft(label, value, labelStyle, options);
-            }
-
-            /// <summary> 左侧开关 右侧标签 </summary>
-            /// <param name="label">标签</param>
-            /// <param name="value">值</param>
-            /// <param name="labelStyle">标签显示风格</param>
-            /// <param name="options">排版格式</param>
-            public static bool ToggleLeft(GUIContent label, bool value, GUIStyle labelStyle, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.ToggleLeft(label, value, labelStyle, options);
-            }
-
-            #endregion
-
-            /* ----------------Label---------------- */
-
-            #region 前置标签 LabelPrefix
-
-            /// <summary> 前置标签 </summary>
-            /// <param name="label">标签</param>
-            /// <param name="followingStyle">后面的显示风格</param>
-            /// <param name="labelStyle"></param>
-            public static void LabelPrefix(GUIContent label, GUIStyle followingStyle, GUIStyle labelStyle)
-            {
-                EditorGUILayout.PrefixLabel(label, followingStyle, labelStyle);
-            }
-
-            /// <summary> 前置标签 </summary>
-            /// <param name="label">标签</param>
-            [ExcludeFromDocs]
-            public static void LabelPrefix(GUIContent label)
-            {
-                EditorGUILayout.PrefixLabel(label);
-            }
-
-            /// <summary> 前置标签 </summary>
-            /// <param name="label">标签</param>
-            /// <param name="followingStyle">后面的显示风格</param>
-            /// <param name="style">显示风格</param>
-            public static void LabelPrefix(string label, GUIStyle followingStyle, GUIStyle style)
-            {
-                EditorGUILayout.PrefixLabel(label, followingStyle, style);
-            }
-
-            /// <summary> 前置标签 </summary>
-            /// <param name="label">标签</param>
-            /// <param name="followingStyle">后面的显示风格</param>
-            public static void LabelPrefix(GUIContent label, [DefaultValue("\"Button\"")] GUIStyle followingStyle)
-            {
-                EditorGUILayout.PrefixLabel(label, followingStyle);
-            }
-
-            /// <summary> 前置标签 </summary>
-            /// <param name="label">标签</param>
-            /// <param name="followingStyle">后面的显示风格</param>
-            public static void LabelPrefix(string label, [DefaultValue("\"Button\"")] GUIStyle followingStyle)
-            {
-                EditorGUILayout.PrefixLabel(label, followingStyle);
-            }
-
-            /// <summary> 前置标签 </summary>
-            /// <param name="label">标签</param>
-            [ExcludeFromDocs]
-            public static void LabelPrefix(string label)
-            {
-                EditorGUILayout.PrefixLabel(label);
-            }
-
-            /// <summary> 前置标签 </summary>
-            /// <param name="label">标签</param>
-            [ExcludeFromDocs]
-            public static void LabelPrefix(int label)
-            {
-                EditorGUILayout.PrefixLabel(label.ToString());
-            }
-
-            #endregion
-
-            #region 可选择标签 LabelSelectable
-
-            /// <summary> 可选择标签 SelectableLabel </summary>
-            /// <param name="text">文本内容</param>
-            /// <param name="style">显示风格</param>
-            /// <param name="options">排版格式</param>
-            public static void LabelSelectable(string text, GUIStyle style, params GUILayoutOption[] options)
-            {
-                EditorGUILayout.SelectableLabel(text, style, options);
-            }
-
-            /// <summary> 可选择标签 SelectableLabel </summary>
-            /// <param name="text">文本内容</param>
-            /// <param name="style">显示风格</param>
-            /// <param name="options">排版格式</param>
-            public static void LabelSelectable(int text, GUIStyle style, params GUILayoutOption[] options)
-            {
-                EditorGUILayout.SelectableLabel(text.ToString(), style, options);
-            }
-
-            /// <summary> 可选择标签 SelectableLabel </summary>
-            /// <param name="text">文本内容</param>
-            /// <param name="options">排版格式</param>
-            public static void LabelSelectable(string text, params GUILayoutOption[] options)
-            {
-                EditorGUILayout.SelectableLabel(text, options);
-            }
-
-            /// <summary> 可选择标签 SelectableLabel </summary>
-            /// <param name="text">文本内容</param>
-            /// <param name="options">排版格式</param>
-            public static void LabelSelectable(int text, params GUILayoutOption[] options)
-            {
-                EditorGUILayout.SelectableLabel(text.ToString(), options);
-            }
-
-            #endregion
-
-            #region 标签 Label GUI
-
-            /// <summary> 标签 </summary>
-            /// <param name="image">图标</param>
-            /// <param name="options">排版格式</param>
-            public static void Label(Texture image, params GUILayoutOption[] options)
-            {
-                GUILayout.Label(image, options);
-            }
-
-            /// <summary> 标签 </summary>
-            /// <param name="obj">内容</param>
-            /// <param name="options">排版格式</param>
-            public static void Label(object obj, params GUILayoutOption[] options)
-            {
-                GUILayout.Label(obj.ToString(), options);
-            }
-
-            /// <summary> 标签 </summary>
-            /// <param name="text">文本内容</param>
-            /// <param name="options">排版格式</param>
-            public static void Label(string text, params GUILayoutOption[] options)
-            {
-                GUILayout.Label(text, options);
-            }
-
-            /// <summary> 标签 </summary>
-            /// <param name="text">文本内容</param>
-            /// <param name="options">排版格式</param>
-            public static void Label(GUIContent text, params GUILayoutOption[] options)
-            {
-                GUILayout.Label(text, options);
-            }
-
-
-            /// <summary> 标签 </summary>
-            /// <param name="image">图标</param>
-            /// <param name="style">显示风格</param>
-            /// <param name="options">排版格式</param>
-            public static void Label(Texture image, GUIStyle style, params GUILayoutOption[] options)
-            {
-                GUILayout.Label(image, style, options);
-            }
-
-            /// <summary> 标签 </summary>
-            /// <param name="text">文本内容</param>
-            /// <param name="style">显示风格</param>
-            /// <param name="options">排版格式</param>
-            public static void Label(string text, GUIStyle style, params GUILayoutOption[] options)
-            {
-                GUILayout.Label(text, style, options);
-            }
-
-            /// <summary> 标签 </summary>
-            /// <param name="obj">内容</param>
-            /// <param name="options">排版格式</param>
-            /// <param name="style">显示风格</param>
-            public static void Label(object obj, GUIStyle style, params GUILayoutOption[] options)
-            {
-                GUILayout.Label(obj.ToString(), style, options);
-            }
-
-            /// <summary> 标签 </summary>
-            /// <param name="text">文本内容</param>
-            /// <param name="style">显示风格</param>
-            /// <param name="options">排版格式</param>
-            public static void Label(GUIContent text, GUIStyle style, params GUILayoutOption[] options)
-            {
-                GUILayout.Label(text, style, options);
-            }
-
-            #endregion
-
             /* ----------------Other---------------- */
-
-            #region 文本区域 TextArea
-
-            /// <summary> 文本区域 TextArea </summary>
-            /// <param name="text">文本内容</param>
-            /// <param name="options">排版格式</param>
-            public static string TextArea(string text, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.TextArea(text, options);
-            }
-
-            /// <summary> 文本区域 TextArea </summary>
-            /// <param name="text">文本内容</param>
-            /// <param name="style">显示风格</param>
-            /// <param name="options">排版格式</param>
-            public static string TextArea(string text, GUIStyle style, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.TextArea(text, style, options);
-            }
-
-            #endregion
 
             #region 折叠式箭头 Foldout
 
@@ -2370,7 +1834,7 @@ namespace AIO.Unity.Editor
             /// <param name="foldout">显示的折叠状态</param>
             /// <param name="content">显示的标签</param>
             /// <returns>true:呈现子对象,false:隐藏</returns>
-            [ExcludeFromDocs]//从文档中排除
+            [ExcludeFromDocs] //从文档中排除
             public static bool Foldout(string content, bool foldout)
             {
                 return EditorGUILayout.Foldout(foldout, content);
@@ -2515,7 +1979,7 @@ namespace AIO.Unity.Editor
             /// <param name="foldout">箭头显示的折叠状态</param>
             /// <param name="targetObj">标题栏用于的对象(例如组件)或对象</param>
             /// <returns>用户选择的折叠状态</returns>
-            public static bool InspectorTitlebar(bool foldout, UnityEngine.Object targetObj)
+            public static bool InspectorTitlebar(bool foldout, Object targetObj)
             {
                 return EditorGUILayout.InspectorTitlebar(foldout, targetObj);
             }
@@ -2525,7 +1989,7 @@ namespace AIO.Unity.Editor
             /// <param name="targetObj">标题栏用于的对象(例如组件)或对象</param>
             /// <param name="expandable">是否允许打开</param>
             /// <returns>用户选择的折叠状态</returns>
-            public static bool InspectorTitlebar(bool foldout, UnityEngine.Object targetObj, bool expandable)
+            public static bool InspectorTitlebar(bool foldout, Object targetObj, bool expandable)
             {
                 return EditorGUILayout.InspectorTitlebar(foldout, targetObj, expandable);
             }
@@ -2533,7 +1997,7 @@ namespace AIO.Unity.Editor
             /// <summary> 类似于检查窗口的标题栏 </summary>
             /// <param name="targetObjs">标题栏用于的对象(例如组件)或对象</param>
             /// <returns>用户选择的折叠状态</returns>
-            public static void InspectorTitlebar(UnityEngine.Object[] targetObjs)
+            public static void InspectorTitlebar(Object[] targetObjs)
             {
                 EditorGUILayout.InspectorTitlebar(targetObjs);
             }
@@ -2552,7 +2016,7 @@ namespace AIO.Unity.Editor
             /// <param name="targetObjs">标题栏用于的对象(例如组件)或对象</param>
             /// <param name="expandable">是否允许打开</param>
             /// <returns>用户选择的折叠状态</returns>
-            public static bool InspectorTitlebar(bool foldout, UnityEngine.Object[] targetObjs, bool expandable)
+            public static bool InspectorTitlebar(bool foldout, Object[] targetObjs, bool expandable)
             {
                 return EditorGUILayout.InspectorTitlebar(foldout, targetObjs, expandable);
             }
@@ -2561,245 +2025,41 @@ namespace AIO.Unity.Editor
             /// <param name="foldout">箭头显示的折叠状态</param>
             /// <param name="targetObjs">标题栏用于的对象(例如组件)或对象</param>
             /// <returns>用户选择的折叠状态</returns>
-            public static bool InspectorTitlebar(bool foldout, UnityEngine.Object[] targetObjs)
+            public static bool InspectorTitlebar(bool foldout, Object[] targetObjs)
             {
                 return EditorGUILayout.InspectorTitlebar(foldout, targetObjs);
             }
 
             #endregion
 
-            #region 下拉按钮 DropdownButton
-
-            /// <summary> 延迟文本 Double </summary>
-            /// <param name="focusType">按钮是否可以通过键盘选择</param>
-            /// <param name="label">标签</param>
-            /// <param name="options">排版格式</param>
-            /// <param name="style">显示风格</param>
-            public static bool DropdownButton(GUIContent label, FocusType focusType, GUIStyle style, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.DropdownButton(label, focusType, style, options);
-            }
-
-            /// <summary> 延迟文本 Double </summary>
-            /// <param name="focusType">按钮是否可以通过键盘选择</param>
-            /// <param name="label">标签</param>
-            /// <param name="options">排版格式</param>
-            public static bool DropdownButton(GUIContent label, FocusType focusType, params GUILayoutOption[] options)
-            {
-                return EditorGUILayout.DropdownButton(label, focusType, options);
-            }
-
-            #endregion
-
             #region 工具基类 EditorToolbar
+
 #if UNITY_2019 || UNITY_2018_3
 
             /// <summary> 工具 bar </summary>
             /// <param name="tools">使用指定的编辑器工具集合填充工具栏 基类</param>
-            public static void EditorToolbar(params UnityEditor.EditorTools.EditorTool[] tools)
+            public static void EditorToolbar(params EditorTool[] tools)
             {
                 EditorGUILayout.EditorToolbar(tools);
             }
 
             /// <summary> 目标对象的 EditorTool Attribute </summary>
             /// <param name="target">工具对象</param>
-            public static void EditorToolbarForTarget(UnityEngine.Object target)
+            public static void EditorToolbarForTarget(Object target)
             {
                 EditorGUILayout.EditorToolbarForTarget(target);
             }
 
             /// <summary> 目标对象的 EditorTool Attribute </summary>
             /// <param name="tools">工具对象</param>
-            public static void EditorToolbar<T>(IList<T> tools) where T : UnityEditor.EditorTools.EditorTool
+            public static void EditorToolbar<T>(IList<T> tools) where T : EditorTool
             {
                 EditorGUILayout.EditorToolbar<T>(tools);
             }
 #endif
-            #endregion
-
-            #region 按钮 Button
-
-            /// <summary> 按钮 Button </summary>
-            public static bool Button(string name, params GUILayoutOption[] options)
-            {
-                return GUILayout.Button(name, options);
-            }
-
-            /// <summary> 按钮 Button </summary>
-            public static bool Button(string name, int Width, int Height)
-            {
-                return GUILayout.Button(name, GUILayout.Width(Width), GUILayout.Height(Height), GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
-            }
-
-            /// <summary> 按钮 Button </summary>
-            public static bool Button(string name, int Width)
-            {
-                return GUILayout.Button(name, GUILayout.Width(Width));
-            }
-
-            /// <summary> 按钮 Button </summary>
-            public static bool Button(string name, float Width)
-            {
-                return GUILayout.Button(name, GUILayout.Width(Width), GUILayout.ExpandWidth(true));
-            }
-
-            /// <summary> 按钮 Button </summary>
-            public static bool Button(GUIContent name, params GUILayoutOption[] options)
-            {
-                return GUILayout.Button(name, options);
-            }
-
-            /// <summary> 按钮 Button </summary>
-            public static bool Button(Texture image, params GUILayoutOption[] options)
-            {
-                return GUILayout.Button(image, options);
-            }
-
-            /// <summary> 按钮 Button </summary>
-            public static bool Button(string name, GUIStyle style, params GUILayoutOption[] options)
-            {
-                return GUILayout.Button(name, style, options);
-            }
-
-            /// <summary> 按钮 Button </summary>
-            public static bool Button(GUIContent name, GUIStyle style, params GUILayoutOption[] options)
-            {
-                return GUILayout.Button(name, style, options);
-            }
-
-            /// <summary> 按钮 Button </summary>
-            public static bool Button(Texture image, GUIStyle style, params GUILayoutOption[] options)
-            {
-                return GUILayout.Button(image, style, options);
-            }
-
-            /// <summary> 按钮 Button </summary>
-            public static void Button(string name, Action action, params GUILayoutOption[] options)
-            {
-                if (GUILayout.Button(name, options)) action();
-            }
-
-            /// <summary> 按钮 Button </summary>
-            public static void Button(GUIContent name, Action action, params GUILayoutOption[] options)
-            {
-                if (GUILayout.Button(name, options)) action();
-            }
-
-            /// <summary> 按钮 Button </summary>
-            public static void Button(Texture image, Action action, params GUILayoutOption[] options)
-            {
-                if (GUILayout.Button(image, options)) action();
-            }
-
-            /// <summary> 按钮 Button </summary>
-            public static void Button(string name, Action action, GUIStyle style, params GUILayoutOption[] options)
-            {
-                if (GUILayout.Button(name, style, options)) action();
-            }
-
-            /// <summary> 按钮 Button </summary>
-            public static void Button(GUIContent name, Action action, GUIStyle style, params GUILayoutOption[] options)
-            {
-                if (GUILayout.Button(name, style, options)) action();
-            }
-
-            /// <summary> 按钮 Button </summary>
-            public static void Button(Texture image, Action action, GUIStyle style, params GUILayoutOption[] options)
-            {
-                if (GUILayout.Button(image, style, options)) action();
-            }
-
-            /// <summary> 按钮 Button </summary>
-            public static void Button(string name, Action action, float h, float w)
-            {
-                if (GUILayout.Button(name, EditorStyles.miniButton, GUILayout.Height(h), GUILayout.Height(w))) action();
-            }
-
-            /// <summary> 重复按钮 ButtonRepeat </summary>
-            /// <param name="name"> 名字 </param>
-            public static bool ButtonRepeat(string name, params GUILayoutOption[] options)
-            {
-                return GUILayout.RepeatButton(name, options);
-            }
-
-            /// <summary> 重复按钮 ButtonRepeat </summary>
-            /// <param name="name"> 名字 </param>
-            public static bool ButtonRepeat(GUIContent name, params GUILayoutOption[] options)
-            {
-                return GUILayout.RepeatButton(name, options);
-            }
-
-            /// <summary> 重复按钮 ButtonRepeat </summary>
-            /// <param name="image"> 图片 </param>
-            public static bool ButtonRepeat(Texture image, params GUILayoutOption[] options)
-            {
-                return GUILayout.RepeatButton(image, options);
-            }
-
-            /// <summary> 重复按钮 ButtonRepeat </summary>
-            /// <param name="name"> 名字 </param>
-            public static bool ButtonRepeat(string name, GUIStyle style, params GUILayoutOption[] options)
-            {
-                return GUILayout.RepeatButton(name, style, options);
-            }
-
-            /// <summary> 重复按钮 ButtonRepeat </summary>
-            /// <param name="name"> 名字 </param>
-            public static bool ButtonRepeat(GUIContent name, GUIStyle style, params GUILayoutOption[] options)
-            {
-                return GUILayout.RepeatButton(name, style, options);
-            }
-
-            /// <summary> 重复按钮 ButtonRepeat </summary>
-            /// <param name="image"> 图片 </param>
-            public static bool ButtonRepeat(Texture image, GUIStyle style, params GUILayoutOption[] options)
-            {
-                return GUILayout.RepeatButton(image, style, options);
-            }
-
-            /// <summary> 重复按钮 ButtonRepeat </summary>
-            /// <param name="name"> 名字 </param>
-            public static void ButtonRepeat(Action action, string name, params GUILayoutOption[] options)
-            {
-                if (GUILayout.RepeatButton(name, options)) action();
-            }
-
-            /// <summary> 重复按钮 ButtonRepeat </summary>
-            /// <param name="name"> 名字 </param>
-            public static void ButtonRepeat(Action action, GUIContent name, params GUILayoutOption[] options)
-            {
-                if (GUILayout.RepeatButton(name, options)) action();
-            }
-
-            /// <summary> 重复按钮 ButtonRepeat </summary>
-            /// <param name="name"> 名字 </param>
-            public static void ButtonRepeat(Action action, string name, GUIStyle style, params GUILayoutOption[] options)
-            {
-                if (GUILayout.RepeatButton(name, style, options)) action();
-            }
-
-            /// <summary> 重复按钮 ButtonRepeat </summary>
-            /// <param name="name"> 名字 </param>
-            public static void ButtonRepeat(Action action, GUIContent name, GUIStyle style, params GUILayoutOption[] options)
-            {
-                if (GUILayout.RepeatButton(name, style, options)) action();
-            }
-
-            /// <summary> 重复按钮 ButtonRepeat </summary>
-            /// <param name="texture"> 图片 </param>
-            public static void ButtonRepeat(Action action, Texture texture, params GUILayoutOption[] options)
-            {
-                if (GUILayout.RepeatButton(texture, options)) action();
-            }
-
-            /// <summary> 重复按钮 ButtonRepeat </summary>
-            /// <param name="texture"> 图片 </param>
-            public static void ButtonRepeat(Action action, Texture texture, GUIStyle style, params GUILayoutOption[] options)
-            {
-                if (GUILayout.RepeatButton(texture, style, options)) action();
-            }
 
             #endregion
+
         }
     }
 }

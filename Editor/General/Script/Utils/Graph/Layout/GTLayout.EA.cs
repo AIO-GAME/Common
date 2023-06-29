@@ -11,7 +11,7 @@
 ↓  Description: |*| |U_U|                         |*|╭╯L ╭╠╣There╠╣ Is ╠╣Always╠╣ A ╠╣Better╠╣Way╟  ↩
 ↓  History:     |*| |>"<|                         |*|╰◎═◎╯╯╚◎═══◎╝╚◎══◎╝╚◎════◎╝╚◎═◎╝╚◎════◎╝╚◎═◎╝  ↩
 ↓===================================================================================================*/
-namespace AIO.Unity.Editor
+namespace UnityEditor
 {
     using System;
 
