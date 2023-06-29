@@ -17,7 +17,11 @@ namespace AIO.Unity
             protected set => data = value;
         }
 
-        [Description("数据")] [SerializeReference, SerializeField]
+#if UNITY_2019_1_OR_NEWER
+        [SerializeReference]
+#endif
+        [Description("数据")]
+        [SerializeField]
         private byte[] data;
 
         /// <summary>

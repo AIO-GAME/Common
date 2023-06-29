@@ -11,8 +11,7 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [
-        "!DISABLE_SRDEBUGGER",
-        "UNITY_2019_1_OR_NEWER"
+        "!DISABLE_SRDEBUGGER"
     ],
     "versionDefines": [],
     "noEngineReferences": false

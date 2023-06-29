@@ -1,9 +1,6 @@
 {
     "name": "AIO.Package.Editor",
     "references": [
-        "YooAsset",
-        "YooAsset.Editor",
-        "AIO.Extensions.Unity.Editor",
         "AIO.General.Unity.Editor",
         "AIO.Attribute.Unity.Editor",
         "AIO.Attribute.Unity",

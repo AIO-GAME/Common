@@ -143,6 +143,7 @@ namespace UnityEngine
             }
 #endif
 
+#if UNITY_2019_1_OR_NEWER
             /// <summary>
             /// 指示此设备是否支持给定的顶点属性格式和维度组合。
             /// Indicates whether the given combination of a vertex attribute format and dimension is supported on this device.
@@ -151,7 +152,8 @@ namespace UnityEngine
             {
                 return UnityEngine.SystemInfo.SupportsVertexAttributeFormat(format, dimension);
             }
-
+#endif
+            
             /// <summary>
             /// 如果图形API考虑了RenderBufferLoadAction和RenderBufferStoreAction，则为True，否则为false。
             /// True if the Graphics API takes RenderBufferLoadAction and RenderBufferStoreAction into account, false if otherwise.
@@ -169,6 +171,7 @@ namespace UnityEngine
                 return UnityEngine.SystemInfo.GetCompatibleFormat(format, usage);
             }
 
+#if UNITY_2019_1_OR_NEWER
             /// <summary>
             /// 获取图形格式
             /// </summary>
@@ -176,7 +179,8 @@ namespace UnityEngine
             {
                 return UnityEngine.SystemInfo.GetGraphicsFormat(format);
             }
-
+#endif
+            
             /// <summary>
             /// 是否 支持指定格式
             /// </summary>
@@ -185,6 +189,7 @@ namespace UnityEngine
                 return UnityEngine.SystemInfo.IsFormatSupported(format, usage);
             }
 
+#if UNITY_2019_1_OR_NEWER
             /// <summary>
             /// 应用程序的实际渲染线程模式
             /// Application's actual rendering threading mode
@@ -193,6 +198,7 @@ namespace UnityEngine
             {
                 return UnityEngine.SystemInfo.renderingThreadingMode;
             }
+#endif
 
             /// <summary>
             /// Unity同时支持的随机写目标(UAV)的最大数量。
