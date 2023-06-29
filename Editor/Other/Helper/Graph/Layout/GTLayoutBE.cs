@@ -254,7 +254,11 @@ namespace AIO.Unity.Editor
             public static bool FoldoutHeaderGroup(Action action, bool foldout, string content, GUIStyle style = null)
             {
                 if (action == null) return false;
+#if UNITY_2019_1_OR_NEWER
                 foldout = AC.ToggleLeft(content, foldout, style ?? "FoldoutHeader", GTOption.WidthExpand(true));
+#else
+                foldout = AC.ToggleLeft(content, foldout, style ?? "GUIEditor.BreadcrumbLeft", GTOption.WidthExpand(true));
+#endif
                 Space();
                 if (foldout) action?.Invoke();
                 return foldout;
@@ -267,11 +271,15 @@ namespace AIO.Unity.Editor
             /// <param name="style">显示风格</param>
             /// <param name="menuAction">操作菜单</param>
             /// <param name="menuIcon">菜单ICON显示风格</param>
-            public static bool FoldoutHeaderGroup(Action action, bool foldout, GUIContent content, [DefaultValue("EditorStyles.foldoutHeader")] GUIStyle style = null)
+            public static bool FoldoutHeaderGroup(Action action, bool foldout, GUIContent content, [UDefaultValue("EditorStyles.foldoutHeader")] GUIStyle style = null)
             {
                 if (action == null) return false;
                 Space();
+#if UNITY_2019_1_OR_NEWER
                 foldout = AC.Toggle(content, foldout, style ?? "FoldoutHeader");
+#else
+                foldout = AC.Toggle(content, foldout, style ?? "GUIEditor.BreadcrumbLeft", GTOption.WidthExpand(true));
+#endif
                 if (foldout) action?.Invoke();
                 return foldout;
             }
@@ -285,7 +293,11 @@ namespace AIO.Unity.Editor
             public static bool FoldoutHeaderToggle(Action action, bool foldout, string content, GUIStyle style = null)
             {
                 if (action == null) return false;
+#if UNITY_2019_1_OR_NEWER
                 foldout = AC.ToggleLeft(content, foldout, style ?? "FoldoutHeader", GTOption.WidthExpand(true));
+#else
+                foldout = AC.ToggleLeft(content, foldout, style ?? "GUIEditor.BreadcrumbLeft", GTOption.WidthExpand(true));
+#endif
                 Space();
                 if (foldout) action?.Invoke();
                 return foldout;
@@ -300,7 +312,11 @@ namespace AIO.Unity.Editor
             {
                 if (action == null) return false;
                 Space();
+#if UNITY_2019_1_OR_NEWER
                 foldout = AC.Toggle(content, foldout, style ?? "FoldoutHeader");
+#else
+                foldout = AC.Toggle(content, foldout, style ?? "GUIEditor.BreadcrumbLeft");
+#endif
                 if (foldout) action?.Invoke();
                 return foldout;
             }
@@ -315,7 +331,7 @@ namespace AIO.Unity.Editor
             public static bool FadeGroup(Action action, float value)
             {
                 if (action == null) return false;
-                bool off = EditorGUILayout.BeginFadeGroup(value);
+                var off = EditorGUILayout.BeginFadeGroup(value);
                 if (off)
                 {
                     Space();

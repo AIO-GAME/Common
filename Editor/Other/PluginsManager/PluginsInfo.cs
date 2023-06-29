@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#pragma warning disable CS0649
+using UnityEngine;
 
 namespace AIO.Unity.Editor
 {
@@ -31,3 +32,4 @@ namespace AIO.Unity.Editor
         public string Introduction;
     }
 }
+#pragma warning restore CS0649

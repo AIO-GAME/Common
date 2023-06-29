@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using AIO;
+using UnityEditor.Experimental.UIElements;
 using UnityEngine;
 
 namespace UnityEditor
@@ -117,15 +118,24 @@ namespace UnityEditor
         {
         }
 
+
         /// <summary>
         /// 获取与窗口关联的额外窗格。
         /// </summary>
+#if UNITY_2019_1_OR_NEWER
         public sealed override IEnumerable<Type> GetExtraPaneTypes()
         {
             if (string.IsNullOrEmpty(Group)) return base.GetExtraPaneTypes();
             GroupList.Add(base.GetExtraPaneTypes());
             return GroupList;
         }
+#else
+        public  IEnumerable<Type> GetExtraPaneTypes()
+        {
+            if (string.IsNullOrEmpty(Group)) return Array.Empty<Type>();
+            return GroupList;
+        }
+#endif
 
         /// <summary>
         /// 在所有可见窗口上每秒调用多次。

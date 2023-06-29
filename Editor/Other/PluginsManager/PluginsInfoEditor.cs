@@ -233,10 +233,13 @@ namespace AIO.Unity.Editor
 #if UNITY_2020_1_OR_NEWER
                 AssetDatabase.RefreshSettings();
 #endif
-
+#if UNITY_2019_1_OR_NEWER
                 CompilationPipeline.compilationFinished += compilationFinished;
+#endif
                 if (macroList.Count != 0) UtilsEditor.Symbols.AddScriptingDefine(macroList.ToArray());
+#if UNITY_2019_1_OR_NEWER
                 CompilationPipeline.RequestScriptCompilation();
+#endif
             }
         }
 
@@ -278,9 +281,13 @@ namespace AIO.Unity.Editor
 #if UNITY_2020_1_OR_NEWER
                 AssetDatabase.RefreshSettings();
 #endif
+#if UNITY_2019_1_OR_NEWER
                 CompilationPipeline.compilationFinished += compilationFinished;
+#endif
                 if (macroList.Count != 0) UtilsEditor.Symbols.DelScriptingDefine(macroList.ToArray());
+#if UNITY_2019_1_OR_NEWER
                 CompilationPipeline.RequestScriptCompilation();
+#endif
             }
         }
 
@@ -312,8 +319,10 @@ namespace AIO.Unity.Editor
                 AssetDatabase.RefreshSettings();
 #endif
                 if (!string.IsNullOrEmpty(info.MacroDefinition)) UtilsEditor.Symbols.AddScriptingDefine(info.MacroDefinition.Split(';'));
+#if UNITY_2019_1_OR_NEWER
                 CompilationPipeline.compilationFinished += compilationFinished;
                 CompilationPipeline.RequestScriptCompilation();
+#endif
             }
             else Debug.LogErrorFormat("链接失败 {0} : {1} => {2}", info.Name, target.FullName, Result.StdALL);
         }
@@ -336,8 +345,10 @@ namespace AIO.Unity.Editor
                 AssetDatabase.RefreshSettings();
 #endif
                 if (!string.IsNullOrEmpty(info.MacroDefinition)) UtilsEditor.Symbols.DelScriptingDefine(info.MacroDefinition.Split(';'));
+#if UNITY_2019_1_OR_NEWER
                 CompilationPipeline.compilationFinished += compilationFinished;
                 CompilationPipeline.RequestScriptCompilation();
+#endif
             }
             else Debug.LogErrorFormat("移除失败 {0} : {1} \n {2}", info.Name, target.FullName, Result.StdALL);
         }
@@ -346,7 +357,9 @@ namespace AIO.Unity.Editor
         {
             EditorUtility.ClearProgressBar();
             EditorUtility.DisplayDialog("插件", "命令执行完毕", "OK");
+#if UNITY_2019_1_OR_NEWER
             CompilationPipeline.compilationFinished -= compilationFinished;
+#endif
         }
     }
 }
