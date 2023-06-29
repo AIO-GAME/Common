@@ -115,58 +115,58 @@ namespace AIO.Unity.Editor
 
         protected override void OnGUI()
         {
-            GTLayout.BE.Horizontal(() =>
+            GELayout.Horizontal(() =>
             {
-                GTLayout.AC.FieldLabel($"路径 :");
+                GELayout.Label($"路径 :");
                 GTOption.Separator();
             });
 
-            GTLayout.BE.Horizontal(() =>
+            GELayout.Horizontal(() =>
             {
-                if (GTLayout.AC.Button("Load"))
+                if (GELayout.Button("Load"))
                 {
                     Load();
                 }
 
-                if (GTLayout.AC.Button("Save"))
+                if (GELayout.Button("Save"))
                 {
                     Save();
                 }
 
-                if (GTLayout.AC.Button("Add"))
+                if (GELayout.Button("Add"))
                 {
                     SymbolsList.Add("");
                 }
 
-                if (GTLayout.AC.Button("Show"))
+                if (GELayout.Button("Show"))
                 {
                 }
 
-                if (GTLayout.AC.Button("Hide"))
+                if (GELayout.Button("Hide"))
                 {
                 }
             });
 
-            Vector = GTLayout.BE.ScrollView(() =>
+            Vector = GELayout.ScrollView(() =>
             {
-                GTLayout.AC.FieldLabel($"宏定义");
+                GELayout.Label($"宏定义");
                 for (var i = 0; i < SymbolsList.Count; i++)
                 {
                     var i1 = i;
-                    GTLayout.BE.Horizontal(() =>
+                    GELayout.Horizontal(() =>
                     {
-                        SymbolsList[i1] = GTLayout.AC.FieldText($"NO.{i1}", SymbolsList[i1]);
-                        if (GTLayout.AC.Button("Enabled", GUILayout.Width(60)))
+                        SymbolsList[i1] = GELayout.Field($"NO.{i1}", SymbolsList[i1]);
+                        if (GELayout.Button("Enabled", GUILayout.Width(60)))
                         {
                             AddScriptingDefineSymbols(SymbolsList[i1]);
                         }
 
-                        if (GTLayout.AC.Button("Forbid", GUILayout.Width(60)))
+                        if (GELayout.Button("Forbid", GUILayout.Width(60)))
                         {
                             DelScriptingDefineSymbols(SymbolsList[i1]);
                         }
 
-                        if (GTLayout.AC.Button("DEL", GUILayout.Width(60)))
+                        if (GELayout.Button("DEL", GUILayout.Width(60)))
                         {
                             DelScriptingDefineSymbols(SymbolsList[i1]);
                             SymbolsList.RemoveAt(i1);

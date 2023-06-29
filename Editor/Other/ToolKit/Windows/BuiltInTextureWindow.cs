@@ -12,12 +12,12 @@
 ↓  History:     |*| |>"<|                         |*|╰◎═◎╯╯╚◎═══◎╝╚◎══◎╝╚◎════◎╝╚◎═◎╝╚◎════◎╝╚◎═◎╝  ↩
 ↓===================================================================================================*/
 
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
+
 namespace AIO.Unity.Editor
 {
-    using System.Collections.Generic;
-    using UnityEditor;
-    using UnityEngine;
-
     /// <summary>
     /// Unity内置图标
     /// </summary>
@@ -65,8 +65,8 @@ namespace AIO.Unity.Editor
 
         protected override void OnGUI()
         {
-            DrawAcrossNumber = GTLayout.AC.SliderInt("行ICON显示数量", DrawAcrossNumber, 2, 7);
-            Vector = GTLayout.BE.ScrollView(() =>
+            DrawAcrossNumber = GELayout.Slider("行ICON显示数量", DrawAcrossNumber, 2, 7);
+            Vector = GELayout.ScrollView(() =>
             {
                 for (int i = 0; i < m_Icons.Count; i += DrawAcrossNumber)
                 {
@@ -80,7 +80,7 @@ namespace AIO.Unity.Editor
         /// </summary>
         protected void DrawItemAcross(int i, int count)
         {
-            GTLayout.BE.Horizontal(() =>
+            GELayout.Horizontal(() =>
             {
                 for (int j = 0, index; j < count; j++)
                 {
@@ -96,8 +96,8 @@ namespace AIO.Unity.Editor
         /// </summary>
         protected void DrawItem(string Name)
         {
-            GTLayout.AC.LabelSelectable(Name, TextWidth, Height);
-            GTLayout.AC.Button(EditorGUIUtility.IconContent(Name), () =>
+            GELayout.LabelSelectable(Name, TextWidth, Height);
+            GELayout.Button(EditorGUIUtility.IconContent(Name), () =>
             {
                 TextEditor textEditor = new TextEditor();
                 textEditor.text = Name;

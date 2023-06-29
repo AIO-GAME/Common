@@ -1,55 +1,57 @@
-/*=================================================================================================|*|
+﻿/*=================================================================================================|*|
 ↓  Copyright(C) 2022 by DefaultCompany            |*| ╭╩╮╮╮╔════╗╔═══════╗╔════╗╔═══════╗╔═══════╗  ↩
 ↓  All Rights Reserved By Author lihongliu.       |*|╭╯L ╭╠╣ No ╠╣ Pains ╠╣ No ╠╣ Gains ╠╣ XNSKY ╟  ↩
 ↓  Author:      |*| XiNan                         |*|╰◎═◎╯╯╚◎══◎╝╚◎═════◎╝╚◎══◎╝╚◎═════◎╝╚◎═════◎╝  ↩
 ↓  Email:       |*| 1398581458@qq.com                                                               ↩
 ↓  Version:     |*| 1.0                           |*| ╭╩╮╮╮╔════╗╔═══╗╔═══╗╔═══════╗╔════╗╔══════╗  ↩
 ↓  UnityVersion:|*| 2021.2.13f1c1                 |*|╭╯H ╭╠╣Only╠╣You╠╣Can╠╣Cantrol╠╣Your╠╣Future╟  ↩
-↓  Date:        |*| 2022-03-06                    |*|╰◎═◎╯╯╚◎══◎╝╚◎═◎╝╚◎═◎╝╚◎═════◎╝╚◎══◎╝╚◎════◎╝  ↩
+↓  Date:        |*| 2022-03-03                    |*|╰◎═◎╯╯╚◎══◎╝╚◎═◎╝╚◎═◎╝╚◎═════◎╝╚◎══◎╝╚◎════◎╝  ↩
 ↓  URL:         |*| www.XiNansky.com                                                                ↩
-↓  Nowtime:     |*| 12:51:55                      |*| ╭╩╮╮╮╔═════╗╔════╗╔══════╗╔═══╗╔══════╗╔═══╗  ↩
+↓  Nowtime:     |*| 13:09:24                      |*| ╭╩╮╮╮╔═════╗╔════╗╔══════╗╔═══╗╔══════╗╔═══╗  ↩
 ↓  Description: |*| |U_U|                         |*|╭╯L ╭╠╣There╠╣ Is ╠╣Always╠╣ A ╠╣Better╠╣Way╟  ↩
 ↓  History:     |*| |>"<|                         |*|╰◎═◎╯╯╚◎═══◎╝╚◎══◎╝╚◎════◎╝╚◎═◎╝╚◎════◎╝╚◎═◎╝  ↩
 ↓===================================================================================================*/
 
-using System;
-using AIO.Unity.Editor;
-using UnityEditor;
 using UnityEngine;
 
 namespace UnityEditor
 {
-    public static class GraphicRectExtend
+    public partial class GERect
     {
-#if UNITY_2020_3_OR_NEWER
+        #region 序列化属性 Field Property
+
         /// <summary>
-        /// 折叠开始
+        /// SerializedProperty创建一个字段
         /// </summary>
-        public static bool FoldoutHeaderGroupBegin(this GraphicRect rect, Vector2 Size, bool flodout, string content,
-            GUIStyle style = null, Action<Rect> menuAction = null, GUIStyle menuIcon = null)
+        public static bool SP(Rect rect, SerializedProperty property, string label, bool includeChildren = false)
         {
-            return GERect.FoldoutHeaderGroupBegin(new Rect(rect.Position, Size), flodout, content, style, menuAction, menuIcon);
+            return EditorGUI.PropertyField(rect, property, new GUIContent(label), includeChildren);
         }
 
         /// <summary>
-        /// 折叠结束
+        /// SerializedProperty创建一个字段
         /// </summary>
-        public static void FoldoutHeaderGroupEnd(this GraphicRect rect)
+        public static bool SP(Rect rect, SerializedProperty property, GUIContent label, bool includeChildren = false)
         {
-            GERect.FoldoutHeaderGroupEnd();
+            return EditorGUI.PropertyField(rect, property, label, includeChildren);
         }
 
         /// <summary>
-        /// 折叠
+        /// SerializedProperty创建一个字段
         /// </summary>
-        public static bool FoldoutHeaderGroup(this GraphicRect rect, Action action, Vector2 Size, bool flodout, string content,
-            GUIStyle style = null, Action<Rect> menuAction = null, GUIStyle menuIcon = null)
+        public static bool SP(Rect rect, SerializedProperty property, bool includeChildren = false)
         {
-            var ON = GERect.FoldoutHeaderGroupBegin(new Rect(rect.Position, Size), flodout, content, style, menuAction, menuIcon);
-            if (ON) action?.Invoke();
-            GERect.FoldoutHeaderGroupEnd();
-            return ON;
+            return EditorGUI.PropertyField(rect, property, includeChildren);
         }
-#endif
+
+        /// <summary>
+        /// SerializedProperty创建一个字段
+        /// </summary>
+        public static bool SP(Vector4 pos, Vector4 size, SerializedProperty property, bool includeChildren = false)
+        {
+            return EditorGUI.PropertyField(new Rect(pos, size), property, includeChildren);
+        }
+
+        #endregion
     }
 }
