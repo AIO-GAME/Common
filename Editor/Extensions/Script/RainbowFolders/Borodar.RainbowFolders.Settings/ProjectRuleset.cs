@@ -51,7 +51,6 @@ namespace Borodar.RainbowFolders.Settings
 
                     foreach (var expr in paths)
                     {
-                        Console.WriteLine(expr);
                         _instance = AssetDatabase.LoadAssetAtPath<ProjectRuleset>(expr);
                         if (_instance != null)
                         {
