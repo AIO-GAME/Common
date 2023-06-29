@@ -1,19 +1,17 @@
 {
-    "name": "StompyRobot.SRDebugger",
+    "name": "AIO.Extensions.Editor.RainbowFolders",
     "references": [
-        "StompyRobot.SRF",
-        "Unity.InputSystem"
+        "AIO.Extensions.Unity"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": [
-        "!DISABLE_SRDEBUGGER",
-        "UNITY_2019_1_OR_NEWER"
-    ],
+    "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false
 }

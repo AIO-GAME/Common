@@ -1,29 +1,25 @@
 {
-    "name": "UniTask.YooAsset",
+    "name": "AIO.Extensions.Editor.YooAsset",
     "references": [
-        "UniTask",
-        "YooAsset"
+        "YooAsset",
+        "YooAsset.Editor"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [
-        "UNITASK_SUPPORT",
-        "UNITASK_YOOASSET_SUPPORT"
+        "SUPPORT_YOOASSET"
     ],
     "versionDefines": [
         {
             "name": "com.tuyoogame.yooasset",
             "expression": "",
-            "define": "UNITASK_YOOASSET_SUPPORT"
-        },
-        {
-            "name": "com.cysharp.unitask",
-            "expression": "",
-            "define": "UNITASK_SUPPORT"
+            "define": "SUPPORT_YOOASSET"
         }
     ],
     "noEngineReferences": false
