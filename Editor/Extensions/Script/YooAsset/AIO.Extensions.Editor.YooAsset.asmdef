@@ -12,9 +12,7 @@
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": [
-        "SUPPORT_YOOASSET"
-    ],
+    "defineConstraints": [],
     "versionDefines": [
         {
             "name": "com.tuyoogame.yooasset",
