@@ -13,9 +13,9 @@ namespace AIO.Unity.Editor
 {
     internal static class UnityConsoleEditor
     {
-        private static bool IS_EDITOR_SWITCH_LOG => PlayerPrefs.GetInt(MENU_EDITOR_SWITCH_LOG, -1) == 1;
-        private static bool IS_EDITOR_SWITCH_ERROR => PlayerPrefs.GetInt(MENU_EDITOR_SWITCH_ERROR, -1) == 1;
-        private static bool IS_DEVELOPERMODE => PlayerPrefs.GetInt(MENU_DEVELOPERMODE, -1) == 1;
+        private static bool IS_EDITOR_SWITCH_LOG => EditorPrefs.GetInt(MENU_EDITOR_SWITCH_LOG, -1) == 1;
+        private static bool IS_EDITOR_SWITCH_ERROR => EditorPrefs.GetInt(MENU_EDITOR_SWITCH_ERROR, -1) == 1;
+        private static bool IS_DEVELOPERMODE => EditorPrefs.GetInt(MENU_DEVELOPERMODE, -1) == 1;
 
         /// <summary>
         /// 输出日志

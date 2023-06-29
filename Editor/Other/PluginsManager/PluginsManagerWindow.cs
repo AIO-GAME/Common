@@ -67,7 +67,6 @@ namespace AIO.Unity.Editor
 #if UNITY_2019_1_OR_NEWER
         private void compilationStarted(object o)
         {
-            CompilationPipeline.assemblyCompilationFinished -= compilationStarted;
             CompilationPipeline.compilationStarted -= compilationStarted;
             UpdateData();
         }
