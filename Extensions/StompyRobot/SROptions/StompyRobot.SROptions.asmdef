@@ -1,9 +1,8 @@
 {
     "name": "StompyRobot.SROptions",
-    "rootNamespace": "",
     "references": [
-        "GUID:05dbf8cd246c9274c8a78a65142e5f8a",
-        "GUID:bcc75752368a72b4aba4043ea13b2a1a"
+        "StompyRobot.SRF",
+        "StompyRobot.SRDebugger"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -11,7 +10,9 @@
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": [],
+    "defineConstraints": [
+        "UNITY_2019_1_OR_NEWER"
+    ],
     "versionDefines": [],
     "noEngineReferences": false
 }

@@ -1,8 +1,6 @@
 {
-    "name": "AIO.Extensions.Unity.Editor",
-    "references": [
-        "AIO.Extensions.Unity"
-    ],
+    "name": "AIO.Extensions.Editor.Print",
+    "references": [],
     "includePlatforms": [
         "Editor"
     ],
