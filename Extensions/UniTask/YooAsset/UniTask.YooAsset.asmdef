@@ -10,10 +10,7 @@
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": [
-        "UNITASK_SUPPORT",
-        "UNITASK_YOOASSET_SUPPORT"
-    ],
+    "defineConstraints": [],
     "versionDefines": [
         {
             "name": "com.tuyoogame.yooasset",
