@@ -17,7 +17,7 @@ using UnityEditor;
 using UnityEngine;
 using UDefaultValue = UnityEngine.Internal.DefaultValueAttribute;
 
-namespace AIO.Unity.Editor
+namespace UnityEditor
 {
     public static partial class GTLayout
     {

@@ -15,7 +15,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace AIO.Unity.Editor
+namespace UnityEditor
 {
     public static partial class GT
     {

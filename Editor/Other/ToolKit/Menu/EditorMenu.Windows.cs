@@ -5,7 +5,6 @@
 |*|=============================================*/
 
 using System;
-using AIO.Unity.Editor;
 using UnityEditor;
 
 namespace AIO.Unity.Editor
@@ -33,60 +32,24 @@ namespace AIO.Unity.Editor
         private const string LABLE_BuiltInTextureWindow = "Built In Texture Window";
         private const string LABLE_ScriptingDefineSymbolsEditor = "Scripting Define Symbols Editor";
 
-#if MONKEYCOMMANDER
-        [MonKey.Command(LABLE_AssestManagerWindow,
-            Help = "资源管理器",
-            Category = "Windows",
-            DefaultValidation = MonKey.DefaultValidation.IN_EDIT_MODE,
-            AlwaysShow = true,
-            IgnoreHotKeyConflict = false
-        )]
-#endif
         [MenuItem("Tools/Window/" + LABLE_AssestManagerWindow, false, 101)]
         public static void OpenAssestManagerWindow()
         {
             UtilsEditor.Window.Open<AssestManagerGraphWindow>(LABLE_AssestManagerWindow, true, DockedWindowTypes);
         }
 
-#if MONKEYCOMMANDER
-        [MonKey.Command(LABLE_BuiltInGUIStyleWindow,
-            Help = "GUIStyle 风格管理器",
-            Category = "Windows",
-            DefaultValidation = MonKey.DefaultValidation.IN_EDIT_MODE,
-            AlwaysShow = true,
-            IgnoreHotKeyConflict = false
-        )]
-#endif
         [MenuItem("Tools/Window/" + LABLE_BuiltInGUIStyleWindow, false, 102)]
         public static void OpenBuiltInGUIStyleWindow()
         {
             UtilsEditor.Window.Open<BuiltInGUIStyleGraphWindow>(LABLE_BuiltInGUIStyleWindow, true, DockedWindowTypes);
         }
 
-#if MONKEYCOMMANDER
-        [MonKey.Command(LABLE_BuiltInTextureWindow,
-            Help = "Texture 管理器",
-            Category = "Windows",
-            DefaultValidation = MonKey.DefaultValidation.IN_EDIT_MODE,
-            AlwaysShow = true,
-            IgnoreHotKeyConflict = false
-        )]
-#endif
         [MenuItem("Tools/Window/" + LABLE_BuiltInTextureWindow, false, 103)]
         public static void OpenBuiltInTextureWindow()
         {
             UtilsEditor.Window.Open<BuiltInTextureGraphWindow>(LABLE_BuiltInTextureWindow, true, DockedWindowTypes);
         }
 
-#if MONKEYCOMMANDER
-        [MonKey.Command(LABLE_ScriptingDefineSymbolsEditor,
-            Help = "宏定义 管理器",
-            Category = "Windows",
-            DefaultValidation = MonKey.DefaultValidation.IN_EDIT_MODE,
-            AlwaysShow = true,
-            IgnoreHotKeyConflict = false
-        )]
-#endif
         [MenuItem("Tools/Window/" + LABLE_ScriptingDefineSymbolsEditor, false, 104)]
         public static void OpenScriptingDefineSymbolsEditor()
         {
