@@ -330,6 +330,30 @@
             在最后添加指定字符到指定长度
             </summary>
         </member>
+        <member name="M:AIO.StringExtend.Contains(System.String,System.String@)">
+            <summary>
+            判断集合中 是否有重复
+            </summary>
+            <param name="chars">集合</param>
+            <param name="targetChars">匹配集合</param>
+            <returns>Ture:存在 False:不存在</returns>
+        </member>
+        <member name="M:AIO.StringExtend.Contains(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            判断集合中 是否有重复
+            </summary>
+            <param name="chars">集合</param>
+            <param name="targetChars">匹配集合</param>
+            <returns>Ture:存在 False:不存在</returns>
+        </member>
+        <member name="M:AIO.StringExtend.Contains(System.Collections.Generic.IEnumerable{System.String},System.String)">
+            <summary>
+            判断集合中 是否有重复
+            </summary>
+            <param name="chars">集合</param>
+            <param name="targetChars">匹配集合</param>
+            <returns>Ture:存在 False:不存在</returns>
+        </member>
         <member name="M:AIO.StringExtend.ContainsOrdinalIgnoreCase(System.String,System.String@)">
             <summary>
             检查字符串是否包含指定的子字符串，忽略大小写
@@ -532,17 +556,17 @@
             获取路径
             </summary>
         </member>
-        <member name="M:AIO.StringExtend.PathCombine(System.String,System.String@)">
+        <member name="M:AIO.StringExtend.PathCombine(System.String,System.String)">
             <summary>
             获取路径
             </summary>
         </member>
-        <member name="M:AIO.StringExtend.PathCombine(System.String,System.String@,System.String@)">
+        <member name="M:AIO.StringExtend.PathCombine(System.String,System.String,System.String)">
             <summary>
             获取路径
             </summary>
         </member>
-        <member name="M:AIO.StringExtend.PathCombine(System.String,System.String@,System.String@,System.String@)">
+        <member name="M:AIO.StringExtend.PathCombine(System.String,System.String,System.String,System.String)">
             <summary>
             获取路径
             </summary>
@@ -552,7 +576,7 @@
             获取文件扩展名
             </summary>
         </member>
-        <member name="M:AIO.StringExtend.PathChangeExtension(System.String,System.String@)">
+        <member name="M:AIO.StringExtend.PathChangeExtension(System.String,System.String)">
             <summary>
             修改文件扩展名
             </summary>

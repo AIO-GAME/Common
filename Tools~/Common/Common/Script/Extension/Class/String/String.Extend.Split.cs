@@ -18,7 +18,6 @@ namespace AIO
         /// <summary>
         /// 分组
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string[] XSplit(this string src, in char ch)
         {
             if (string.IsNullOrEmpty(src)) return Array.Empty<string>();
@@ -44,7 +43,6 @@ namespace AIO
         /// <summary>
         /// 分组一次
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (string, string) SplitOnce(this string src, in char ch)
         {
             if (string.IsNullOrWhiteSpace(src)) return (string.Empty, string.Empty);
@@ -61,7 +59,6 @@ namespace AIO
         /// <summary>
         /// 将字符串以行拆分为数组
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string[] SplitLine(this string str)
         {
             if (string.IsNullOrWhiteSpace(str)) return Array.Empty<string>();
@@ -74,7 +71,6 @@ namespace AIO
         /// <summary>
         /// 单词分割
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string SplitWords(this string s, in char separator)
         {
             if (string.IsNullOrWhiteSpace(s)) return string.Empty;

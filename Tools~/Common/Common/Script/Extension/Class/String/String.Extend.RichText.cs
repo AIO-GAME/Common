@@ -16,7 +16,6 @@ namespace AIO
         /// </summary>
         /// <param name="content"></param>
         /// <param name="s">字号大小</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string RichS(this string content, in int s)
         {
             return string.Concat("<size=", s, ">", content, "</size>");
@@ -27,7 +26,6 @@ namespace AIO
         /// </summary>
         /// <param name="content"></param>
         /// <param name="c">颜色值</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string RichC(this string content, in string c)
         {
             return string.Concat("<color=", c, ">", content, "</color>");
@@ -36,7 +34,6 @@ namespace AIO
         /// <summary>
         /// 富文本 斜体
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string RichI(this string content)
         {
             return string.Concat("<i>", content, "</i>");
@@ -45,7 +42,6 @@ namespace AIO
         /// <summary>
         /// 富文本 加粗
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string RichB(this string content)
         {
             return string.Concat("<b>", content, "</b>");
@@ -54,7 +50,6 @@ namespace AIO
         /// <summary>
         /// 富文本 加粗 斜体
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string RichBI(this string content)
         {
             return string.Concat("<i><b>", content, "</b></i>");
@@ -65,7 +60,6 @@ namespace AIO
         /// </summary>
         /// <param name="content"></param>
         /// <param name="s">字号大小</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string RichSB(this string content, in string s)
         {
             return string.Concat("<b><size=", s, ">", content, "</size></b>");
@@ -76,7 +70,6 @@ namespace AIO
         /// </summary>
         /// <param name="content"></param>
         /// <param name="s">字号大小</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string RichSI(this string content, in int s)
         {
             return string.Concat("<i><size=", s, ">", content, "</size></i>");
@@ -88,7 +81,6 @@ namespace AIO
         /// <param name="content"></param>
         /// <param name="s">字号大小</param>
         /// <param name="c">颜色值</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string RichCS(this string content, in int s, in string c)
         {
             return string.Concat("<size=", s, "><color=", c, ">", content, "</color></size>");
@@ -99,7 +91,6 @@ namespace AIO
         /// </summary>
         /// <param name="content"></param>
         /// <param name="c">颜色值</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string RichCB(this string content, in string c)
         {
             return string.Concat("<b><color=", c, ">", content, "</color></b>");
@@ -110,7 +101,6 @@ namespace AIO
         /// </summary>
         /// <param name="content"></param>
         /// <param name="c">颜色值</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string RichCI(this string content, in string c)
         {
             return string.Concat("<i><color=", c, ">", content, "</color></i>");
@@ -121,7 +111,6 @@ namespace AIO
         /// </summary>
         /// <param name="content"></param>
         /// <param name="s">字号大小</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string RichSBI(this string content, in string s)
         {
             return string.Concat("<i><b><size=", s, ">", content, "</size></b></i>");
@@ -133,7 +122,6 @@ namespace AIO
         /// <param name="content"></param>
         /// <param name="s">字号大小</param>
         /// <param name="c">颜色值</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string RichCSB(this string content, in int s, in string c)
         {
             return string.Concat("<b><size=", s, "><color=", c, ">", content, "</color></size></b>");
@@ -145,7 +133,6 @@ namespace AIO
         /// <param name="content"></param>
         /// <param name="s">字号大小</param>
         /// <param name="c">颜色值</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string RichCSI(this string content, in int s, in string c)
         {
             return string.Concat("<i><size=", s, "><color=", c, ">", content, "</color></size></i>");
@@ -156,7 +143,6 @@ namespace AIO
         /// </summary>
         /// <param name="content"></param>
         /// <param name="c">颜色值</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string RichCBI(this string content, in string c)
         {
             return string.Concat("<i><b><color=", c, ">", content, "</color></b></i>");
@@ -168,7 +154,6 @@ namespace AIO
         /// <param name="content"></param>
         /// <param name="s">字号大小</param>
         /// <param name="c">颜色值</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string RichAll(this string content, in int s, in string c)
         {
             return string.Concat("<i><b><size=", s, "><color=", c, ">", content, "</color></size></b></i>");

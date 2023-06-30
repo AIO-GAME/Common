@@ -8,7 +8,6 @@ namespace AIO
         /// <summary>
         /// 格式化
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Format(this string format, params object[] formattingArgs)
         {
             return string.Format(format, formattingArgs);
@@ -17,7 +16,6 @@ namespace AIO
         /// <summary>
         /// 格式化
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Format(this string format, params string[] formattingArgs)
         {
             return string.Format(format, formattingArgs.Select(a => a as object).ToArray());

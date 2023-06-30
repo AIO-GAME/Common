@@ -1,12 +1,18 @@
-﻿using System;
+﻿/*|✩ - - - - - |||
+|||✩ Author:   ||| -> SAM
+|||✩ Date:     ||| -> 2023-06-30
+|||✩ Document: ||| -> 
+|||✩ - - - - - |*/
+
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UnityEngine
+namespace UnityEditor
 {
-    public static partial class UtilsEngine
+    public partial class UtilsEditor
     {
-        public static partial class Prefs
+        public partial class Prefs
         {
             #region String
 
@@ -15,8 +21,7 @@ namespace UnityEngine
             /// </summary>
             public static void SaveString(in string key, in string value)
             {
-                PlayerPrefs.SetString(string.Concat(key, "_String"), value);
-                PlayerPrefs.Save();
+                EditorPrefs.SetString(string.Concat(key, "_String"), value);
             }
 
             /// <summary>
@@ -27,8 +32,7 @@ namespace UnityEngine
                 var fullName = typeof(T).FullName;
                 if (!string.IsNullOrEmpty(fullName))
                 {
-                    PlayerPrefs.SetString(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value);
-                    PlayerPrefs.Save();
+                    EditorPrefs.SetString(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value);
                 }
             }
 
@@ -41,8 +45,7 @@ namespace UnityEngine
                 var fullName = clazz.GetType().FullName;
                 if (!string.IsNullOrEmpty(fullName))
                 {
-                    PlayerPrefs.SetString(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value);
-                    PlayerPrefs.Save();
+                    EditorPrefs.SetString(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value);
                 }
             }
 
@@ -55,8 +58,7 @@ namespace UnityEngine
             /// </summary>
             public static void SaveBoolean(in string key, in bool value)
             {
-                PlayerPrefs.SetInt(string.Concat(key, "_Boolean"), value ? 1 : 0);
-                PlayerPrefs.Save();
+                EditorPrefs.SetInt(string.Concat(key, "_Boolean"), value ? 1 : 0);
             }
 
             /// <summary>
@@ -68,8 +70,7 @@ namespace UnityEngine
                 var fullName = typeof(T).FullName;
                 if (!string.IsNullOrEmpty(fullName))
                 {
-                    PlayerPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value ? 1 : 0);
-                    PlayerPrefs.Save();
+                    EditorPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value ? 1 : 0);
                 }
             }
 
@@ -81,8 +82,7 @@ namespace UnityEngine
                 var fullName = typeof(T).FullName;
                 if (!string.IsNullOrEmpty(fullName))
                 {
-                    PlayerPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value ? 1 : 0);
-                    PlayerPrefs.Save();
+                    EditorPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value ? 1 : 0);
                 }
             }
 
@@ -98,8 +98,7 @@ namespace UnityEngine
                 var fullName = typeof(T).FullName;
                 if (!string.IsNullOrEmpty(fullName))
                 {
-                    PlayerPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value);
-                    PlayerPrefs.Save();
+                    EditorPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value);
                 }
             }
 
@@ -111,8 +110,7 @@ namespace UnityEngine
                 var fullName = typeof(T).FullName;
                 if (!string.IsNullOrEmpty(fullName))
                 {
-                    PlayerPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value);
-                    PlayerPrefs.Save();
+                    EditorPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value);
                 }
             }
 
@@ -121,8 +119,7 @@ namespace UnityEngine
             /// </summary>
             public static void SaveInt(in string key, in int value)
             {
-                PlayerPrefs.SetInt(string.Concat(key, "_Int"), value);
-                PlayerPrefs.Save();
+                EditorPrefs.SetInt(string.Concat(key, "_Int"), value);
             }
 
             #endregion
@@ -134,8 +131,7 @@ namespace UnityEngine
             /// </summary>
             public static void SaveEnum(string key, Enum value)
             {
-                PlayerPrefs.SetInt(string.Concat(key, "_Enum"), value.GetHashCode());
-                PlayerPrefs.Save();
+                EditorPrefs.SetInt(string.Concat(key, "_Enum"), value.GetHashCode());
             }
 
             /// <summary>
@@ -146,8 +142,7 @@ namespace UnityEngine
                 var fullName = key.GetType().FullName;
                 if (!string.IsNullOrEmpty(fullName))
                 {
-                    PlayerPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value.GetHashCode());
-                    PlayerPrefs.Save();
+                    EditorPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value.GetHashCode());
                 }
             }
 
@@ -159,8 +154,7 @@ namespace UnityEngine
                 var fullName = key.GetType().FullName;
                 if (!string.IsNullOrEmpty(fullName))
                 {
-                    PlayerPrefs.SetInt(string.Concat(fullName.GetHashCode()), value.GetHashCode());
-                    PlayerPrefs.Save();
+                    EditorPrefs.SetInt(string.Concat(fullName.GetHashCode()), value.GetHashCode());
                 }
             }
 
@@ -171,9 +165,8 @@ namespace UnityEngine
             /// </summary>
             public static void SaveVector2(in string key, in Vector2 value)
             {
-                PlayerPrefs.SetFloat(string.Concat(key, "_v2_x"), value.x);
-                PlayerPrefs.SetFloat(string.Concat(key, "_v2_y"), value.y);
-                PlayerPrefs.Save();
+                EditorPrefs.SetFloat(string.Concat(key, "_v2_x"), value.x);
+                EditorPrefs.SetFloat(string.Concat(key, "_v2_y"), value.y);
             }
 
             /// <summary>
@@ -181,10 +174,9 @@ namespace UnityEngine
             /// </summary>
             public static void SaveVector3(in string key, in Vector3 value)
             {
-                PlayerPrefs.SetFloat(string.Concat(key, "_v3_x"), value.x);
-                PlayerPrefs.SetFloat(string.Concat(key, "_v3_y"), value.y);
-                PlayerPrefs.SetFloat(string.Concat(key, "_v3_z"), value.z);
-                PlayerPrefs.Save();
+                EditorPrefs.SetFloat(string.Concat(key, "_v3_x"), value.x);
+                EditorPrefs.SetFloat(string.Concat(key, "_v3_y"), value.y);
+                EditorPrefs.SetFloat(string.Concat(key, "_v3_z"), value.z);
             }
 
             /// <summary>
@@ -192,11 +184,10 @@ namespace UnityEngine
             /// </summary>
             public static void SaveVector4(in string key, in Vector4 value)
             {
-                PlayerPrefs.SetFloat(string.Concat(key, "_v4_x"), value.x);
-                PlayerPrefs.SetFloat(string.Concat(key, "_v4_y"), value.y);
-                PlayerPrefs.SetFloat(string.Concat(key, "_v4_z"), value.z);
-                PlayerPrefs.SetFloat(string.Concat(key, "_v4_w"), value.w);
-                PlayerPrefs.Save();
+                EditorPrefs.SetFloat(string.Concat(key, "_v4_x"), value.x);
+                EditorPrefs.SetFloat(string.Concat(key, "_v4_y"), value.y);
+                EditorPrefs.SetFloat(string.Concat(key, "_v4_z"), value.z);
+                EditorPrefs.SetFloat(string.Concat(key, "_v4_w"), value.w);
             }
 
             /// <summary>
@@ -204,11 +195,10 @@ namespace UnityEngine
             /// </summary>
             public static void SaveQuaternion(in string key, in Quaternion value)
             {
-                PlayerPrefs.SetFloat(key + "_Quaternion_x", value.x);
-                PlayerPrefs.SetFloat(key + "_Quaternion_y", value.y);
-                PlayerPrefs.SetFloat(key + "_Quaternion_z", value.z);
-                PlayerPrefs.SetFloat(key + "_Quaternion_w", value.w);
-                PlayerPrefs.Save();
+                EditorPrefs.SetFloat(key + "_Quaternion_x", value.x);
+                EditorPrefs.SetFloat(key + "_Quaternion_y", value.y);
+                EditorPrefs.SetFloat(key + "_Quaternion_z", value.z);
+                EditorPrefs.SetFloat(key + "_Quaternion_w", value.w);
             }
 
             /// <summary>
@@ -216,8 +206,7 @@ namespace UnityEngine
             /// </summary>
             public static void SaveDictionary<K, V>(in string key, in IDictionary<K, V> values)
             {
-                PlayerPrefs.SetString(string.Concat(key, "_IDictionary"), UtilsGen.Json.Serialize(values));
-                PlayerPrefs.Save();
+                EditorPrefs.SetString(string.Concat(key, "_IDictionary"), UtilsGen.Json.Serialize(values));
             }
 
             /// <summary>
@@ -225,8 +214,7 @@ namespace UnityEngine
             /// </summary>
             public static void SaveList<V>(in string key, in IList<V> values)
             {
-                PlayerPrefs.SetString(string.Concat(key, "_IList"), UtilsGen.Json.Serialize(values));
-                PlayerPrefs.Save();
+                EditorPrefs.SetString(string.Concat(key, "_IList"), UtilsGen.Json.Serialize(values));
             }
 
             /// <summary>
@@ -234,8 +222,7 @@ namespace UnityEngine
             /// </summary>
             public static void SaveCollection<V>(in string key, in ICollection<V> values)
             {
-                PlayerPrefs.SetString(string.Concat(key, "_ICollection"), UtilsGen.Json.Serialize(values));
-                PlayerPrefs.Save();
+                EditorPrefs.SetString(string.Concat(key, "_ICollection"), UtilsGen.Json.Serialize(values));
             }
 
             /// <summary>
@@ -243,8 +230,7 @@ namespace UnityEngine
             /// </summary>
             public static void SaveJsonData<T>(in string key, in T value)
             {
-                PlayerPrefs.SetString(string.Concat(key, "_Json"), UtilsGen.Json.Serialize(value));
-                PlayerPrefs.Save();
+                EditorPrefs.SetString(string.Concat(key, "_Json"), UtilsGen.Json.Serialize(value));
             }
 
             /// <summary>
@@ -252,8 +238,7 @@ namespace UnityEngine
             /// </summary>
             public static void SaveFloat(in string key, in float value)
             {
-                PlayerPrefs.SetFloat(string.Concat(key, "_Float"), value);
-                PlayerPrefs.Save();
+                EditorPrefs.SetFloat(string.Concat(key, "_Float"), value);
             }
         }
     }

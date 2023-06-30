@@ -9,7 +9,6 @@ namespace AIO
         /// <summary>
         /// 获取字节长度
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetBytesLength(this string str)
         {
             return Encoding.BigEndianUnicode.GetByteCount(str);
@@ -18,7 +17,6 @@ namespace AIO
         /// <summary>
         /// 获取闭合字符段
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string GetOcclusion(this string str, string label, char runit = '{', char lunit = '}')
         {
             var SIndex = str.LastIndexOf(label, StringComparison.OrdinalIgnoreCase);
@@ -48,7 +46,6 @@ namespace AIO
         /// <summary>
         /// 获取闭合字符段
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string SetOcclusion(this string str, string content, char runit = '{', char lunit = '}')
         {
             var builder = new StringBuilder();

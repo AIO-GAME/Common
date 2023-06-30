@@ -18,6 +18,22 @@ namespace UnityEditor
     {
         private Rect Rect { get; set; }
 
+        /// <summary>
+        /// 中心点
+        /// </summary>
+        public Rect Center
+        {
+            get { return new Rect(Rect.size / 2, Rect.size); }
+        }
+
+        /// <summary>
+        /// 中心点
+        /// </summary>
+        public Vector2 CenterPosition
+        {
+            get { return Rect.size / 2; }
+        }
+
         private bool isShow;
 
         private bool isEvent;

@@ -9,7 +9,6 @@ namespace AIO
         /// <summary>
         /// 获取文件名 HasExtension = false 没有扩展名
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string PathGetFileName(this string filePath, in bool HasExtension = true)
         {
             if (HasExtension) return Path.GetFileName(filePath);
@@ -19,7 +18,6 @@ namespace AIO
         /// <summary>
         /// 获取路径
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string PathCombine(this string str1, params string[] str2)
         {
             var a = new string[str2.Length + 1];
@@ -31,8 +29,7 @@ namespace AIO
         /// <summary>
         /// 获取路径
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string PathCombine(this string str1, in string str2)
+        public static string PathCombine(this string str1, string str2)
         {
             return Path.Combine(str1, str2).Replace('\\', '/');
         }
@@ -40,8 +37,7 @@ namespace AIO
         /// <summary>
         /// 获取路径
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string PathCombine(this string str1, in string str2, in string str3)
+        public static string PathCombine(this string str1, string str2, string str3)
         {
             return Path.Combine(str1, str2, str3).Replace('\\', '/');
         }
@@ -49,8 +45,7 @@ namespace AIO
         /// <summary>
         /// 获取路径
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string PathCombine(this string str1, in string str2, in string str3, in string str4)
+        public static string PathCombine(this string str1, string str2, string str3, string str4)
         {
             return Path.Combine(str1, str2, str3, str4).Replace('\\', '/');
         }
@@ -58,7 +53,6 @@ namespace AIO
         /// <summary>
         /// 获取文件扩展名
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string PathGetExtension(this string filePath)
         {
             return Path.GetExtension(filePath);
@@ -67,16 +61,14 @@ namespace AIO
         /// <summary>
         /// 修改文件扩展名
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string PathChangeExtension(this string filePath, in string Extension)
+        public static string PathChangeExtension(this string filePath, string extension)
         {
-            return Path.ChangeExtension(filePath, Extension);
+            return Path.ChangeExtension(filePath, extension);
         }
 
         /// <summary>
         /// 一个新的规范化字符串，其文本值与此字符串相同，但其二进制表示形式符合范式
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string PathNormalize(this string path)
         {
             if (string.IsNullOrEmpty(path)) return path;
@@ -86,7 +78,6 @@ namespace AIO
         /// <summary>
         /// 获取根目录 I:\
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string PathGetRoot(this string filePath)
         {
             return Path.GetPathRoot(filePath);
@@ -95,7 +86,6 @@ namespace AIO
         /// <summary>
         /// 获取上一级目录
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string PathGetLastFloder(this string filePath)
         {
             return Path.GetDirectoryName(filePath);

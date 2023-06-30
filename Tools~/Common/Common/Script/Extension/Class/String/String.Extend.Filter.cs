@@ -1,9 +1,7 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Text;
 
 namespace AIO
 {
-    using System.Text;
-
     public partial class StringExtend
     {
         /// <summary>
@@ -16,7 +14,6 @@ namespace AIO
         /// <param name="symbols">是否保留符号</param>
         /// <param name="punctuation">是否保留标点符号</param>
         /// <returns>过滤后的字符串</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Filter(this string s,
             in bool letters = true,
             in bool numbers = true,
@@ -54,7 +51,6 @@ namespace AIO
         /// <param name="symbols">是否保留符号</param>
         /// <param name="punctuation">是否保留标点符号</param>
         /// <returns>替换后的字符串</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string FilterReplace(this string s,
             in char replacement,
             in bool merge,
@@ -97,7 +93,6 @@ namespace AIO
         /// <summary>
         /// 美化
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Prettify(this string s)
         {
             return s.FirstCharacterToUpper().SplitWords(' ');
@@ -106,7 +101,6 @@ namespace AIO
         /// <summary>
         /// 首字母转为大写
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string FirstCharacterToUpper(this string s)
         {
             if (string.IsNullOrEmpty(s) || char.IsUpper(s, 0)) return s;

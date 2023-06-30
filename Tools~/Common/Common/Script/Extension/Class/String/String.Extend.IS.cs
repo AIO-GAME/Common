@@ -73,7 +73,6 @@ namespace AIO
         /// <summary>
         /// 是否为单词开始
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsWordBeginning(this string str, in int index)
         {
             if (string.IsNullOrEmpty(str) || index < 0 || index >= str.Length)
@@ -91,7 +90,6 @@ namespace AIO
         /// <summary>
         /// 判断是否为Null
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNullOrEmpty(this string str)
         {
             return string.IsNullOrEmpty(str);

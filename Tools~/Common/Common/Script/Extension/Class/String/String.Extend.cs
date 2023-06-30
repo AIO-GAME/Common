@@ -46,7 +46,6 @@ namespace AIO
         /// <remarks>
         /// 如果字符串中不包含指定的字符，则 before 为整个字符串，after 为 null。
         /// </remarks>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void PartsAround(
             this string str,
             in char c,
@@ -73,7 +72,6 @@ namespace AIO
         /// <param name="str">指定的字符串。</param>
         /// <param name="c">要查找的字符。</param>
         /// <returns>包含 c 右侧内容的字符串；如果字符串中不包含指定的字符，则返回整个字符串。</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string PartAfter(this string str, in char c)
         {
             var index = str.IndexOf(c);
@@ -89,7 +87,6 @@ namespace AIO
         /// <param name="haystacks">要替换的字符集合。</param>
         /// <param name="replacement">替换为此字符。</param>
         /// <returns>替换后的字符串。</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ReplaceMultiple(this string str, in HashSet<char> haystacks, in char replacement)
         {
             var sb = new StringBuilder();
@@ -105,7 +102,6 @@ namespace AIO
         /// <summary>
         /// 转化为小写
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void XToLower(this string str)
         {
             if (string.IsNullOrEmpty(str)) return;
@@ -129,7 +125,6 @@ namespace AIO
         /// <summary>
         /// 转化为大写
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void XToUpper(this string str)
         {
             if (string.IsNullOrEmpty(str)) return;
@@ -153,7 +148,6 @@ namespace AIO
         /// <summary>
         /// 转化为小写
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void XToLower(this string str, in int idx)
         {
             if (str == null || str.Length <= idx || idx < 0) return;
@@ -173,7 +167,6 @@ namespace AIO
         /// <summary>
         /// 转化为大写
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void XToUpper(this string str, in int idx)
         {
             if (str == null || str.Length <= idx || idx < 0) return;
@@ -193,7 +186,6 @@ namespace AIO
         /// <summary>
         /// 重复
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Repeat(this string str, in int repeat)
         {
             var builder = new StringBuilder(repeat * str.Length);
@@ -204,7 +196,6 @@ namespace AIO
         /// <summary>
         /// 比较Null值
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string EqualsNull(this string str)
         {
             return string.IsNullOrWhiteSpace(str) ? "null" : str;
@@ -214,7 +205,6 @@ namespace AIO
         /// <summary>
         /// 字符串反转
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Reverse(this string str)
         {
             var a = str.ToCharArray();
@@ -230,7 +220,6 @@ namespace AIO
         /// <summary>
         /// 重复N此 复制传入数据
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Clone(this string str, in uint num)
         {
             if (num <= 0) return str;
@@ -242,7 +231,6 @@ namespace AIO
         /// <summary>
         /// 重复N此 复制传入数据
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Clone(this char str, in uint num)
         {
             if (num <= 0) return string.Empty;
