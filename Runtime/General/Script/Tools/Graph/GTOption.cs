@@ -28,6 +28,14 @@ namespace UnityEngine
         }
 
         /// <summary>
+        /// 宽度 固定值
+        /// </summary>
+        public static GUILayoutOption Width(in bool value)
+        {
+            return GUILayout.ExpandWidth(value);
+        }
+
+        /// <summary>
         /// 宽度 自动伸缩
         /// </summary>
         public static GUILayoutOption WidthExpand(in bool value)
@@ -65,6 +73,14 @@ namespace UnityEngine
         public static GUILayoutOption Height(in float value)
         {
             return GUILayout.Height(value);
+        }
+
+        /// <summary>
+        /// 高度 固定
+        /// </summary>
+        public static GUILayoutOption Height(in bool value)
+        {
+            return GUILayout.ExpandHeight(value);
         }
 
         /// <summary>

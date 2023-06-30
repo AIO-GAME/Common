@@ -13,12 +13,11 @@ namespace AIO
         /// <param name="haystack">要搜索的字符串</param>
         /// <param name="needle">要在 haystack 中搜索的子字符串</param>
         /// <returns>包含 needle 的所有索引的 IEnumerable(int) 对象</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IEnumerable<int> IndexesOf(this string haystack, string needle)
         {
             if (string.IsNullOrEmpty(needle)) yield break;
 
-            for (var index = 0; ; index += needle.Length)
+            for (var index = 0;; index += needle.Length)
             {
                 index = haystack.IndexOf(needle, index, StringComparison.OrdinalIgnoreCase);
 

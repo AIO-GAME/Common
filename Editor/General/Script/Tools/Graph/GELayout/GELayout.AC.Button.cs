@@ -20,7 +20,7 @@ namespace UnityEditor
         /// <summary> 按钮 Button </summary>
         public static bool Button(string name, int Width, int Height)
         {
-            return GUILayout.Button(name, GUILayout.Width(Width), GUILayout.Height(Height), GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
+            return GUILayout.Button(name, GUILayout.Width(Width), GUILayout.Height(Height));
         }
 
         /// <summary> 按钮 Button </summary>
@@ -32,7 +32,13 @@ namespace UnityEditor
         /// <summary> 按钮 Button </summary>
         public static bool Button(string name, float Width)
         {
-            return GUILayout.Button(name, GUILayout.Width(Width), GUILayout.ExpandWidth(true));
+            return GUILayout.Button(name, GUILayout.Width(Width));
+        }
+
+        /// <summary> 按钮 Button </summary>
+        public static bool Button(string name, float Width, float Height)
+        {
+            return GUILayout.Button(name, GUILayout.Width(Width),GUILayout.Height(Height));
         }
 
         /// <summary> 按钮 Button </summary>

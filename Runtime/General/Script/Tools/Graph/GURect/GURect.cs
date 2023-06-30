@@ -4,10 +4,12 @@
 |||✩ Document: ||| -> 
 |||✩ - - - - - |*/
 
+using System;
+
 namespace UnityEngine
 {
     public static partial class GURect
     {
-    
+
     }
 }

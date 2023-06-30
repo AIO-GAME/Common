@@ -20,7 +20,6 @@ namespace AIO
         /// <param name="space">间隔长度</param>
         /// <param name="info">指定内容</param>
         /// <returns>插入指定内容后的字符串</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string InsertFixed<T>(this string str, in int space, in T info)
         {
             if (string.IsNullOrEmpty(str) || space <= 0) return str;

@@ -37,6 +37,22 @@ namespace UnityEditor
             EditorGUILayout.HelpBox(content, wide);
         }
 
+        /// <summary> 帮助框 HelpBox </summary>
+        /// <param name="content">内容</param>
+        /// <param name="wide">true:帮助框覆盖整个窗口宽度;false:只覆盖控制部分</param>
+        public static void HelpBox(string content, bool wide = true)
+        {
+            EditorGUILayout.HelpBox(new GUIContent(content), wide);
+        }
+
+        /// <summary> 帮助框 HelpBox </summary>
+        /// <param name="content">内容</param>
+        /// <param name="wide">true:帮助框覆盖整个窗口宽度;false:只覆盖控制部分</param>
+        public static void HelpBox(Texture content, bool wide = true)
+        {
+            EditorGUILayout.HelpBox(new GUIContent(content), wide);
+        }
+
         #endregion
     }
 }

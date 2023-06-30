@@ -20,6 +20,11 @@ namespace UnityEditor
         Rect RectData { get; }
 
         /// <summary>
+        /// 中心点
+        /// </summary>
+        Rect Center { get; }
+
+        /// <summary>
         /// 绘制
         /// </summary>
         void Draw();
