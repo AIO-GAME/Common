@@ -1,30 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 public static partial class Pool
 {
     /// <summary>
     /// List对象池
     /// </summary>
-    internal static class AList<T>
+    internal static class ALinkedList<T>
     {
-        private static readonly Stack<List<T>>
-            free = new Stack<List<T>>();
+        private static readonly Stack<LinkedList<T>>
+            free = new Stack<LinkedList<T>>();
 
-        private static readonly HashSet<List<T>>
-            busy = new HashSet<List<T>>();
+        private static readonly HashSet<LinkedList<T>>
+            busy = new HashSet<LinkedList<T>>();
 
         /// <summary>
         /// 创建新的
         /// </summary>
-        public static List<T> New()
+        public static LinkedList<T> New()
         {
             lock (@lock)
             {
                 if (free.Count == 0)
                 {
-                    free.Push(new List<T>());
+                    free.Push(new LinkedList<T>());
                 }
 
                 var array = free.Pop();
@@ -38,7 +36,7 @@ public static partial class Pool
         /// <summary>
         /// 释放List
         /// </summary>
-        public static void Free(List<T> array)
+        public static void Free(LinkedList<T> array)
         {
             lock (@lock)
             {
@@ -55,38 +53,38 @@ public static partial class PoolExtend
     /// <summary>
     /// 转化为List并存入对象池
     /// </summary>
-    public static List<T> ToListPooled<T>(this IEnumerable<T> source)
+    public static LinkedList<T> ToLinkedListPooled<T>(this IEnumerable<T> source)
     {
-        var list = Pool.AList<T>.New();
-        list.AddRange(source);
+        var list = Pool.ALinkedList<T>.New();
+        foreach (var item in source) list.AddLast(item);
         return list;
     }
 
     /// <summary>
     /// 转化为List并存入对象池
     /// </summary>
-    public static List<T> ToListPooledKey<T, V>(this IDictionary<T, V> source)
+    public static LinkedList<T> ToLinkedListPooledKey<T, V>(this IDictionary<T, V> source)
     {
-        var list = Pool.AList<T>.New();
-        list.AddRange(source.Select(item => item.Key));
+        var list = Pool.ALinkedList<T>.New();
+        foreach (var item in source) list.AddLast(item.Key);
         return list;
     }
 
     /// <summary>
     /// 转化为List并存入对象池
     /// </summary>
-    public static List<T> ToListPooledValue<V, T>(this IDictionary<V, T> source)
+    public static LinkedList<T> ToLinkedListPooledValue<V, T>(this IDictionary<V, T> source)
     {
-        var list = Pool.AList<T>.New();
-        list.AddRange(source.Select(item => item.Value));
+        var list = Pool.ALinkedList<T>.New();
+        foreach (var item in source) list.AddLast(item.Value);
         return list;
     }
 
     /// <summary>
     /// 释放List
     /// </summary>
-    public static void Free<T>(this List<T> list)
+    public static void Free<T>(this LinkedList<T> list)
     {
-        Pool.AList<T>.Free(list);
+        Pool.ALinkedList<T>.Free(list);
     }
 }

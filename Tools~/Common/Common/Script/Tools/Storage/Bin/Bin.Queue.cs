@@ -24,7 +24,7 @@ namespace AIO
         /// </summary>
         public BinQueue()
         {
-            Collection = Pool.Queue<T>.New();
+            Collection = Pool.AQueue<T>.New();
         }
 
         /// <summary>

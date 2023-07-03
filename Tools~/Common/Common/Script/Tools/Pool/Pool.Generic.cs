@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 using AIO;
 
 public static partial class Pool
@@ -9,11 +9,11 @@ public static partial class Pool
     /// </summary>
     public static class Generic<T> where T : class, IPoolable, new()
     {
-        private static readonly System.Collections.Generic.Stack<T>
-            free = new System.Collections.Generic.Stack<T>();
+        private static readonly Stack<T>
+            free = new Stack<T>();
 
-        private static readonly System.Collections.Generic.HashSet<T>
-            busy = new System.Collections.Generic.HashSet<T>(ReferenceEqualityComparer<T>.Instance);
+        private static readonly HashSet<T>
+            busy = new HashSet<T>(ReferenceEqualityComparer<T>.Instance);
 
         /// <summary>
         /// 创建
@@ -50,7 +50,7 @@ public static partial class Pool
         {
             lock (@lock)
             {
-                if (!busy.Remove(item)) throw new ArgumentException("The item to free is not in use by the pool.", nameof(item));
+                if (busy.Contains(item)) busy.Remove(item);
                 item.Free();
                 free.Push(item);
             }

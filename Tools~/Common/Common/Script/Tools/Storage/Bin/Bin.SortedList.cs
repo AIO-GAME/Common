@@ -28,7 +28,7 @@ namespace AIO
         /// </summary>
         public BinSortedList()
         {
-            Collection = Pool.SortedList<TKey, TValue>.New();
+            Collection = Pool.ASortedList<TKey, TValue>.New();
         }
 
         /// <inheritdoc />

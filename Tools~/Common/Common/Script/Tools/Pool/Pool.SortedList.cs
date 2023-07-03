@@ -8,24 +8,24 @@ public partial class Pool
     /// <summary>
     /// Dictionary 对象池
     /// </summary>
-    public static class SortedList<K, V>
+    internal static class ASortedList<K, V>
     {
-        private static readonly System.Collections.Generic.Stack<System.Collections.Generic.SortedList<K, V>>
-            free = new System.Collections.Generic.Stack<System.Collections.Generic.SortedList<K, V>>();
+        private static readonly Stack<SortedList<K, V>>
+            free = new Stack<SortedList<K, V>>();
 
-        private static readonly System.Collections.Generic.HashSet<System.Collections.Generic.SortedList<K, V>>
-            busy = new System.Collections.Generic.HashSet<System.Collections.Generic.SortedList<K, V>>();
+        private static readonly HashSet<SortedList<K, V>>
+            busy = new HashSet<SortedList<K, V>>();
 
         /// <summary>
         /// 创建
         /// </summary>
-        public static System.Collections.Generic.SortedList<K, V> New()
+        public static SortedList<K, V> New()
         {
             lock (@lock)
             {
                 if (free.Count == 0)
                 {
-                    free.Push(new System.Collections.Generic.SortedList<K, V>());
+                    free.Push(new SortedList<K, V>());
                 }
 
                 var array = free.Pop();
@@ -39,20 +39,13 @@ public partial class Pool
         /// <summary>
         /// 释放
         /// </summary>
-        public static void Free(System.Collections.Generic.SortedList<K, V> list)
+        public static void Free(SortedList<K, V> array)
         {
             lock (@lock)
             {
-                if (!busy.Contains(list))
-                {
-                    throw new ArgumentException("The list to free is not in use by the pool.", nameof(list));
-                }
-
-                list.Clear();
-
-                busy.Remove(list);
-
-                free.Push(list);
+                array.Clear();
+                if (busy.Contains(array)) busy.Remove(array);
+                free.Push(array);
             }
         }
     }
@@ -65,7 +58,7 @@ public static partial class PoolExtend
     /// </summary>
     public static SortedList<int, V> ToSortedListPooled<V>(this IEnumerable<V> source)
     {
-        var list = Pool.SortedList<int, V>.New();
+        var list = Pool.ASortedList<int, V>.New();
         var index = 0;
         foreach (var item in source) list.Add(index++, item);
         return list;
@@ -76,6 +69,6 @@ public static partial class PoolExtend
     /// </summary>
     public static void Free<K, V>(this SortedList<K, V> list)
     {
-        Pool.SortedList<K, V>.Free(list);
+        Pool.ASortedList<K, V>.Free(list);
     }
 }

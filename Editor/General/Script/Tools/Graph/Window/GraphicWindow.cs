@@ -46,7 +46,7 @@ namespace UnityEditor
         /// <inheritdoc />
         public GraphicWindow()
         {
-            GraphicItems = Pool.List<GraphicRect>.New();
+            GraphicItems = Pool.List<GraphicRect>();
             GroupList = new List<Type>();
             var attribute = GetType().GetCustomAttribute<WindowExtraAttribute>(false);
             if (attribute != null && !string.IsNullOrEmpty(attribute.Group))
