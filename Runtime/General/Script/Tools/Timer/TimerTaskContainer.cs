@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using APool = Pool;
 
 namespace UnityEngine
 {
@@ -53,7 +54,7 @@ namespace UnityEngine
             Unit = unit;
             Counter = counter;
             Watch = Stopwatch.StartNew();
-            List = Pool.List<TimerOperator>();
+            List = APool.List<TimerOperator>();
 
             foreach (var item in operators)
             {
