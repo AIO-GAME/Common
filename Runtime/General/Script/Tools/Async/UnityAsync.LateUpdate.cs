@@ -3,7 +3,11 @@
 |*|Date:     |*| -> 2023-06-11
 |*|==========|*/
 
+
 #define ENABLE_LATEUPDATE_FUNCTION_CALLBACK
+#if SUPPORTE_UNITASK
+using Cysharp.Threading.Tasks;
+#endif
 
 #if (ENABLE_LATEUPDATE_FUNCTION_CALLBACK)
 
@@ -44,8 +48,13 @@ public partial class UnityAsync
                 actionQueuesLateUpdateFunc.Clear();
                 noActionQueueToExecuteLateUpdateFunc = true;
             }
-
-            for (var i = 0; i < mActionCopiedQueueLateUpdateFunc.Count; i++) mActionCopiedQueueLateUpdateFunc[i].Invoke();
+            
+            foreach (var action in mActionCopiedQueueLateUpdateFunc)
+#if SUPPORTE_UNITASK
+            UniTask.RunOnThreadPool(action);
+#else
+                action.Invoke();
+#endif
         }
     }
 }

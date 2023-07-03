@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using AIO;
 
-namespace AIO.Unity
+namespace UnityEngine
 {
     /// <summary>
     /// 可持久化 列表数据
@@ -99,7 +100,7 @@ namespace AIO.Unity
         /// <inheritdoc/>
         protected sealed override void OnDeserialize()
         {
-            Collection = Pool.HashSet<V>.New();
+            Collection = Pool.HashSet<V>();
             if (Data == null || Data.Length == 0) return;
             ToDeserialize(new BufferByte(Data));
         }
@@ -107,7 +108,7 @@ namespace AIO.Unity
         /// <inheritdoc/>
         protected sealed override void OnSerialize()
         {
-            if (Collection == null) Collection = Pool.HashSet<V>.New();
+            if (Collection == null) Collection = Pool.HashSet<V>();
             var buffer = new BufferByte();
             ToSerialize(buffer);
             Data = buffer.ToArray();
@@ -117,7 +118,7 @@ namespace AIO.Unity
         public sealed override void Dispose()
         {
             Serialize();
-            Pool.HashSet<V>.Free(Collection);
+            Pool.Free(Collection);
         }
     }
 }

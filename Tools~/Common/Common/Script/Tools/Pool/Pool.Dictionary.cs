@@ -6,24 +6,24 @@ public static partial class Pool
     /// <summary>
     /// Dictionary 对象池
     /// </summary>
-    public static class Dictionary<K, V>
+    internal static class ADictionary<K, V>
     {
-        private static readonly System.Collections.Generic.Stack<System.Collections.Generic.Dictionary<K, V>>
-            free = new System.Collections.Generic.Stack<System.Collections.Generic.Dictionary<K, V>>();
+        private static readonly Stack<Dictionary<K, V>>
+            free = new Stack<Dictionary<K, V>>();
 
-        private static readonly System.Collections.Generic.HashSet<System.Collections.Generic.Dictionary<K, V>>
-            busy = new System.Collections.Generic.HashSet<System.Collections.Generic.Dictionary<K, V>>();
+        private static readonly HashSet<Dictionary<K, V>>
+            busy = new HashSet<Dictionary<K, V>>();
 
         /// <summary>
         /// 创建
         /// </summary>
-        public static System.Collections.Generic.Dictionary<K, V> New()
+        public static Dictionary<K, V> New()
         {
             lock (@lock)
             {
                 if (free.Count == 0)
                 {
-                    free.Push(new System.Collections.Generic.Dictionary<K, V>());
+                    free.Push(new Dictionary<K, V>());
                 }
 
                 var array = free.Pop();
@@ -37,20 +37,13 @@ public static partial class Pool
         /// <summary>
         /// 释放
         /// </summary>
-        public static void Free(System.Collections.Generic.Dictionary<K, V> list)
+        public static void Free(Dictionary<K, V> array)
         {
             lock (@lock)
             {
-                if (!busy.Contains(list))
-                {
-                    throw new ArgumentException("The list to free is not in use by the pool.", nameof(list));
-                }
-
-                list.Clear();
-
-                busy.Remove(list);
-
-                free.Push(list);
+                array.Clear();
+                if (busy.Contains(array)) busy.Remove(array);
+                free.Push(array);
             }
         }
     }
@@ -63,7 +56,7 @@ public static partial class PoolExtend
     /// </summary>
     public static Dictionary<int, V> ToDictionaryPooled<V>(this IEnumerable<V> source)
     {
-        var list = Pool.Dictionary<int, V>.New();
+        var list = Pool.ADictionary<int, V>.New();
         var index = 0;
         foreach (var item in source) list.Add(index++, item);
         return list;
@@ -74,6 +67,6 @@ public static partial class PoolExtend
     /// </summary>
     public static void Free<K, V>(this Dictionary<K, V> list)
     {
-        Pool.Dictionary<K, V>.Free(list);
+        Pool.ADictionary<K, V>.Free(list);
     }
 }

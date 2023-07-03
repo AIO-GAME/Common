@@ -1,29 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 public static partial class Pool
 {
     /// <summary>
     /// Queue对象池
     /// </summary>
-    public static class Queue<T>
+    internal static class AQueue<T>
     {
-        private static readonly System.Collections.Generic.Stack<System.Collections.Generic.Queue<T>>
-            free = new System.Collections.Generic.Stack<System.Collections.Generic.Queue<T>>();
+        private static readonly Stack<Queue<T>>
+            free = new Stack<Queue<T>>();
 
-        private static readonly System.Collections.Generic.HashSet<System.Collections.Generic.Queue<T>>
-            busy = new System.Collections.Generic.HashSet<System.Collections.Generic.Queue<T>>();
+        private static readonly HashSet<Queue<T>>
+            busy = new HashSet<Queue<T>>();
 
         /// <summary>
         /// 创建新的
         /// </summary>
-        public static System.Collections.Generic.Queue<T> New()
+        public static Queue<T> New()
         {
             lock (@lock)
             {
                 if (free.Count == 0)
                 {
-                    free.Push(new System.Collections.Generic.Queue<T>());
+                    free.Push(new Queue<T>());
                 }
 
                 var array = free.Pop();
@@ -37,20 +36,13 @@ public static partial class Pool
         /// <summary>
         /// 释放Queue
         /// </summary>
-        public static void Free(System.Collections.Generic.Queue<T> Queue)
+        public static void Free(Queue<T> array)
         {
             lock (@lock)
             {
-                if (!busy.Contains(Queue))
-                {
-                    throw new ArgumentException("The Queue to free is not in use by the pool.", nameof(Queue));
-                }
-
-                Queue.Clear();
-
-                busy.Remove(Queue);
-
-                free.Push(Queue);
+                array.Clear();
+                if (busy.Contains(array)) busy.Remove(array);
+                free.Push(array);
             }
         }
     }
@@ -63,7 +55,7 @@ public static partial class PoolExtend
     /// </summary>
     public static Queue<T> ToQueuePooled<T>(this IEnumerable<T> source)
     {
-        var Queue = Pool.Queue<T>.New();
+        var Queue = Pool.AQueue<T>.New();
         foreach (var item in source) Queue.Enqueue(item);
         return Queue;
     }
@@ -73,7 +65,7 @@ public static partial class PoolExtend
     /// </summary>
     public static Queue<T> ToQueuePooledKey<T, V>(this IDictionary<T, V> source)
     {
-        var Queue = Pool.Queue<T>.New();
+        var Queue = Pool.AQueue<T>.New();
         foreach (var item in source) Queue.Enqueue(item.Key);
         return Queue;
     }
@@ -83,7 +75,7 @@ public static partial class PoolExtend
     /// </summary>
     public static Queue<T> ToQueuePooledValue<V, T>(this IDictionary<V, T> source)
     {
-        var Queue = Pool.Queue<T>.New();
+        var Queue = Pool.AQueue<T>.New();
         foreach (var item in source) Queue.Enqueue(item.Value);
         return Queue;
     }
@@ -93,6 +85,6 @@ public static partial class PoolExtend
     /// </summary>
     public static void Free<T>(this Queue<T> Queue)
     {
-        Pool.Queue<T>.Free(Queue);
+        Pool.AQueue<T>.Free(Queue);
     }
 }

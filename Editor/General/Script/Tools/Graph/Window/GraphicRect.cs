@@ -49,7 +49,7 @@ namespace UnityEditor
         protected GraphicRect()
         {
             Rect = new Rect();
-            Items = Pool.List<GraphicRect>.New();
+            Items = Pool.List<GraphicRect>();
             Awake();
             isShow = true;
         }

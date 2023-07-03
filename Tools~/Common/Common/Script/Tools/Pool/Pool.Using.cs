@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public partial class Pool
 {
@@ -16,7 +17,7 @@ public partial class Pool
     /// <summary>
     /// 引用释放
     /// </summary>
-    public static IDisposable Using<T>(out T value, Action<T> onRelease)
+    public static IDisposable Using<T>(out T value, Action<T> onRelease) where T : class, new()
     {
         var disposable = new Disposable<T>(Activator.CreateInstance<T>(), onRelease);
         value = disposable.Item;
@@ -34,10 +35,10 @@ public partial class Pool
     /// <summary>
     /// 引用释放
     /// </summary>
-    public static IDisposable Using<T>(out System.Collections.Generic.List<T> value)
+    public static IDisposable Using<T>(out List<T> value)
     {
-        var disposable = new Disposable<System.Collections.Generic.List<T>>(
-            List<T>.New(),
+        var disposable = new Disposable<List<T>>(
+            AList<T>.New(),
             release => { release.Free(); });
         value = disposable.Item;
         return disposable;
@@ -46,10 +47,10 @@ public partial class Pool
     /// <summary>
     /// 引用释放
     /// </summary>
-    public static IDisposable Using<T>(out System.Collections.Generic.HashSet<T> value)
+    public static IDisposable Using<T>(out HashSet<T> value)
     {
-        var disposable = new Disposable<System.Collections.Generic.HashSet<T>>(
-            HashSet<T>.New(),
+        var disposable = new Disposable<HashSet<T>>(
+            AHashSet<T>.New(),
             release => { release.Free(); });
         value = disposable.Item;
         return disposable;
@@ -58,10 +59,10 @@ public partial class Pool
     /// <summary>
     /// 引用释放
     /// </summary>
-    public static IDisposable Using<T>(out System.Collections.Generic.Stack<T> value)
+    public static IDisposable Using<T>(out Stack<T> value)
     {
-        var disposable = new Disposable<System.Collections.Generic.Stack<T>>(
-            Stack<T>.New(),
+        var disposable = new Disposable<Stack<T>>(
+            AStack<T>.New(),
             release => { release.Free(); });
         value = disposable.Item;
         return disposable;
@@ -70,10 +71,10 @@ public partial class Pool
     /// <summary>
     /// 引用释放
     /// </summary>
-    public static IDisposable Using<T>(out System.Collections.Generic.Queue<T> value)
+    public static IDisposable Using<T>(out Queue<T> value)
     {
-        var disposable = new Disposable<System.Collections.Generic.Queue<T>>(
-            Queue<T>.New(),
+        var disposable = new Disposable<Queue<T>>(
+            AQueue<T>.New(),
             release => { release.Free(); });
         value = disposable.Item;
         return disposable;
@@ -82,10 +83,10 @@ public partial class Pool
     /// <summary>
     /// 引用释放
     /// </summary>
-    public static IDisposable Using<K, V>(out System.Collections.Generic.Dictionary<K, V> value)
+    public static IDisposable Using<K, V>(out Dictionary<K, V> value)
     {
-        var disposable = new Disposable<System.Collections.Generic.Dictionary<K, V>>(
-            Dictionary<K, V>.New(),
+        var disposable = new Disposable<Dictionary<K, V>>(
+            ADictionary<K, V>.New(),
             release => { release.Free(); });
         value = disposable.Item;
         return disposable;

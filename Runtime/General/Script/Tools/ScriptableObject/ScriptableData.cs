@@ -1,4 +1,6 @@
-﻿namespace AIO.Unity
+﻿using AIO;
+
+namespace UnityEngine
 {
     /// <summary>
     /// Unity 可持续化数据 

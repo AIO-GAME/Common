@@ -1,4 +1,8 @@
-﻿using System;
+﻿#if SUPPORTE_UNITASK
+using Cysharp.Threading.Tasks;
+#endif
+
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Scripting;
@@ -11,7 +15,10 @@ public static partial class UnityAsync
 {
     private static ThreadMono instance;
 
-    private static bool IsWebGL;
+    /// <summary>
+    /// 是否允许线程
+    /// </summary>
+    private static bool IsAllowThread;
 
     /// <summary>
     /// 主线程执行
@@ -33,7 +40,7 @@ public static partial class UnityAsync
             instance = obj.AddComponent<ThreadMono>();
         }
 
-        IsWebGL = Application.platform == RuntimePlatform.WebGLPlayer;
+        IsAllowThread = Application.platform == RuntimePlatform.WebGLPlayer;
     }
 
     /// <summary>
@@ -41,8 +48,13 @@ public static partial class UnityAsync
     /// </summary>
     public static void RunTask(Action action)
     {
-        if (IsWebGL) ExecuteInUpdate(action);
-        else Task.Factory.StartNew(action.Invoke);
+        if (IsAllowThread) ExecuteInUpdate(action);
+        else
+#if SUPPORTE_UNITASK
+            UniTask.RunOnThreadPool(action);
+#else
+            Task.Factory.StartNew(action.Invoke);
+#endif
     }
 
     [Preserve]

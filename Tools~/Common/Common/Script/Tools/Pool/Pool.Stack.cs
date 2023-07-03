@@ -1,29 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 public static partial class Pool
 {
     /// <summary>
     /// Stack对象池
     /// </summary>
-    public static class Stack<T>
+    internal static class AStack<T>
     {
-        private static readonly System.Collections.Generic.Stack<System.Collections.Generic.Stack<T>>
-            free = new System.Collections.Generic.Stack<System.Collections.Generic.Stack<T>>();
+        private static readonly Stack<Stack<T>>
+            free = new Stack<Stack<T>>();
 
-        private static readonly System.Collections.Generic.HashSet<System.Collections.Generic.Stack<T>>
-            busy = new System.Collections.Generic.HashSet<System.Collections.Generic.Stack<T>>();
+        private static readonly HashSet<Stack<T>>
+            busy = new HashSet<Stack<T>>();
 
         /// <summary>
         /// 创建新的
         /// </summary>
-        public static System.Collections.Generic.Stack<T> New()
+        public static Stack<T> New()
         {
             lock (@lock)
             {
                 if (free.Count == 0)
                 {
-                    free.Push(new System.Collections.Generic.Stack<T>());
+                    free.Push(new Stack<T>());
                 }
 
                 var array = free.Pop();
@@ -37,20 +36,13 @@ public static partial class Pool
         /// <summary>
         /// 释放Stack
         /// </summary>
-        public static void Free(System.Collections.Generic.Stack<T> Stack)
+        public static void Free(Stack<T> array)
         {
             lock (@lock)
             {
-                if (!busy.Contains(Stack))
-                {
-                    throw new ArgumentException("The Stack to free is not in use by the pool.", nameof(Stack));
-                }
-
-                Stack.Clear();
-
-                busy.Remove(Stack);
-
-                free.Push(Stack);
+                array.Clear();
+                if (busy.Contains(array)) busy.Remove(array);
+                free.Push(array);
             }
         }
     }
@@ -66,7 +58,7 @@ public static partial class PoolExtend
     /// </summary>
     public static Stack<T> ToStackPooled<T>(this IEnumerable<T> source)
     {
-        var Stack = Pool.Stack<T>.New();
+        var Stack = Pool.AStack<T>.New();
         foreach (var item in source) Stack.Push(item);
         return Stack;
     }
@@ -76,7 +68,7 @@ public static partial class PoolExtend
     /// </summary>
     public static Stack<T> ToStackPooledKey<T, V>(this IDictionary<T, V> source)
     {
-        var Stack = Pool.Stack<T>.New();
+        var Stack = Pool.AStack<T>.New();
         foreach (var item in source) Stack.Push(item.Key);
         return Stack;
     }
@@ -86,7 +78,7 @@ public static partial class PoolExtend
     /// </summary>
     public static Stack<T> ToStackPooledValue<V, T>(this IDictionary<V, T> source)
     {
-        var Stack = Pool.Stack<T>.New();
+        var Stack = Pool.AStack<T>.New();
         foreach (var item in source) Stack.Push(item.Value);
         return Stack;
     }
@@ -96,6 +88,6 @@ public static partial class PoolExtend
     /// </summary>
     public static void Free<T>(this Stack<T> Stack)
     {
-        Pool.Stack<T>.Free(Stack);
+        Pool.AStack<T>.Free(Stack);
     }
 }
