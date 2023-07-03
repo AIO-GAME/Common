@@ -8,12 +8,9 @@ using SFile = System.IO.File;
 
 namespace UnityEngine
 {
-    public static partial class UtilsEngine
+    public partial class UtilsEngine
     {
-        /// <summary>
-        /// IO 工具类
-        /// </summary>
-        public static partial class IO
+        public partial class IO
         {
             /// <summary>
             /// 获取资源文件夹下

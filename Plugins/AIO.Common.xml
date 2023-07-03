@@ -8393,17 +8393,112 @@
             对象池
             </summary>
         </member>
-        <member name="T:Pool.Dictionary`2">
+        <member name="M:Pool.List``1">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.List`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.List`1"/></returns>
+        </member>
+        <member name="M:Pool.Free``1(System.Collections.Generic.List{``0})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.List`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+        </member>
+        <member name="M:Pool.HashSet``1">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.HashSet`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.HashSet`1"/></returns>
+        </member>
+        <member name="M:Pool.Free``1(System.Collections.Generic.HashSet{``0})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.HashSet`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+        </member>
+        <member name="M:Pool.LinkedList``1">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.LinkedList`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.LinkedList`1"/></returns>
+        </member>
+        <member name="M:Pool.Free``1(System.Collections.Generic.LinkedList{``0})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.LinkedList`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+        </member>
+        <member name="M:Pool.Stack``1">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.Stack`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.Stack`1"/></returns>
+        </member>
+        <member name="M:Pool.Free``1(System.Collections.Generic.Stack{``0})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.Stack`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+        </member>
+        <member name="M:Pool.Queue``1">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.Queue`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.Queue`1"/></returns>
+        </member>
+        <member name="M:Pool.Free``1(System.Collections.Generic.Queue{``0})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.Queue`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+        </member>
+        <member name="M:Pool.SortedList``2">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.SortedList`2"/>
+            </summary>
+            <typeparam name="K">Generic</typeparam>
+            <typeparam name="V">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.Dictionary`2"/></returns>
+        </member>
+        <member name="M:Pool.Free``2(System.Collections.Generic.SortedList{``0,``1})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.SortedList`2"/>
+            </summary>
+            <typeparam name="K">Generic</typeparam>
+            <typeparam name="V">Generic</typeparam>
+        </member>
+        <member name="M:Pool.Dictionary``2">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.Dictionary`2"/>
+            </summary>
+            <typeparam name="K">Generic</typeparam>
+            <typeparam name="V">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.Dictionary`2"/></returns>
+        </member>
+        <member name="M:Pool.Free``2(System.Collections.Generic.Dictionary{``0,``1})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.Dictionary`2"/>
+            </summary>
+            <typeparam name="K">Generic</typeparam>
+            <typeparam name="V">Generic</typeparam>
+        </member>
+        <member name="T:Pool.ADictionary`2">
             <summary>
             Dictionary 对象池
             </summary>
         </member>
-        <member name="M:Pool.Dictionary`2.New">
+        <member name="M:Pool.ADictionary`2.New">
             <summary>
             创建
             </summary>
         </member>
-        <member name="M:Pool.Dictionary`2.Free(System.Collections.Generic.Dictionary{`0,`1})">
+        <member name="M:Pool.ADictionary`2.Free(System.Collections.Generic.Dictionary{`0,`1})">
             <summary>
             释放
             </summary>
@@ -8449,77 +8544,92 @@
             释放
             </summary>
         </member>
-        <member name="T:Pool.HashSet`1">
+        <member name="T:Pool.AHashSet`1">
             <summary>
             HashSet对象池
             </summary>
         </member>
-        <member name="M:Pool.HashSet`1.New">
+        <member name="M:Pool.AHashSet`1.New">
             <summary>
             创建新的
             </summary>
         </member>
-        <member name="M:Pool.HashSet`1.Free(System.Collections.Generic.HashSet{`0})">
+        <member name="M:Pool.AHashSet`1.Free(System.Collections.Generic.HashSet{`0})">
             <summary>
             释放HashSet
             </summary>
         </member>
-        <member name="T:Pool.List`1">
+        <member name="T:Pool.ALinkedList`1">
             <summary>
             List对象池
             </summary>
         </member>
-        <member name="M:Pool.List`1.New">
+        <member name="M:Pool.ALinkedList`1.New">
             <summary>
             创建新的
             </summary>
         </member>
-        <member name="M:Pool.List`1.Free(System.Collections.Generic.List{`0})">
+        <member name="M:Pool.ALinkedList`1.Free(System.Collections.Generic.LinkedList{`0})">
             <summary>
             释放List
             </summary>
         </member>
-        <member name="T:Pool.Queue`1">
+        <member name="T:Pool.AList`1">
+            <summary>
+            List对象池
+            </summary>
+        </member>
+        <member name="M:Pool.AList`1.New">
+            <summary>
+            创建新的
+            </summary>
+        </member>
+        <member name="M:Pool.AList`1.Free(System.Collections.Generic.List{`0})">
+            <summary>
+            释放List
+            </summary>
+        </member>
+        <member name="T:Pool.AQueue`1">
             <summary>
             Queue对象池
             </summary>
         </member>
-        <member name="M:Pool.Queue`1.New">
+        <member name="M:Pool.AQueue`1.New">
             <summary>
             创建新的
             </summary>
         </member>
-        <member name="M:Pool.Queue`1.Free(System.Collections.Generic.Queue{`0})">
+        <member name="M:Pool.AQueue`1.Free(System.Collections.Generic.Queue{`0})">
             <summary>
             释放Queue
             </summary>
         </member>
-        <member name="T:Pool.SortedList`2">
+        <member name="T:Pool.ASortedList`2">
             <summary>
             Dictionary 对象池
             </summary>
         </member>
-        <member name="M:Pool.SortedList`2.New">
+        <member name="M:Pool.ASortedList`2.New">
             <summary>
             创建
             </summary>
         </member>
-        <member name="M:Pool.SortedList`2.Free(System.Collections.Generic.SortedList{`0,`1})">
+        <member name="M:Pool.ASortedList`2.Free(System.Collections.Generic.SortedList{`0,`1})">
             <summary>
             释放
             </summary>
         </member>
-        <member name="T:Pool.Stack`1">
+        <member name="T:Pool.AStack`1">
             <summary>
             Stack对象池
             </summary>
         </member>
-        <member name="M:Pool.Stack`1.New">
+        <member name="M:Pool.AStack`1.New">
             <summary>
             创建新的
             </summary>
         </member>
-        <member name="M:Pool.Stack`1.Free(System.Collections.Generic.Stack{`0})">
+        <member name="M:Pool.AStack`1.Free(System.Collections.Generic.Stack{`0})">
             <summary>
             释放Stack
             </summary>
@@ -8597,6 +8707,26 @@
         <member name="M:PoolExtend.Free``1(System.Collections.Generic.HashSet{``0})">
             <summary>
             释放HashSet
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToLinkedListPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToLinkedListPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToLinkedListPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.Free``1(System.Collections.Generic.LinkedList{``0})">
+            <summary>
+            释放List
             </summary>
         </member>
         <member name="M:PoolExtend.ToListPooled``1(System.Collections.Generic.IEnumerable{``0})">

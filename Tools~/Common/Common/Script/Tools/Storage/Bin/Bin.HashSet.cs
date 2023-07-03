@@ -35,7 +35,7 @@ namespace AIO
         /// </summary>
         public BinHashSet()
         {
-            Collection = Pool.HashSet<T>.New();
+            Collection = Pool.AHashSet<T>.New();
         }
 
         /// <summary>

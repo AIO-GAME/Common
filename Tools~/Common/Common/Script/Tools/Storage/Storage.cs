@@ -26,7 +26,7 @@ namespace AIO
         /// </summary>
         protected Storage()
         {
-            Collection = Pool.List<IBinData>.New();
+            Collection = Pool.AList<IBinData>.New();
             Buffer = new BufferByte();
         }
 

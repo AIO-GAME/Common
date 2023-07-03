@@ -26,7 +26,7 @@ namespace AIO
         /// </summary>
         public BinList()
         {
-            Collection = Pool.List<T>.New();
+            Collection = Pool.AList<T>.New();
         }
 
 

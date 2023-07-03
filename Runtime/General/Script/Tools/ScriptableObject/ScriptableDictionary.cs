@@ -1,10 +1,11 @@
-﻿namespace AIO.Unity
-{
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.ComponentModel;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using AIO;
 
+namespace UnityEngine
+{
     /// <summary>
     /// 可持久化 字典数据
     /// </summary>
@@ -110,6 +111,7 @@
                 {
                     throw new ArgumentException("The length of array is less than the number of elements in the collection.");
                 }
+
                 array[arrayIndex++] = item;
             }
         }
@@ -173,7 +175,7 @@
         /// <inheritdoc/>
         protected sealed override void OnDeserialize()
         {
-            Collection = Pool.Dictionary<K, V>.New();
+            Collection = Pool.Dictionary<K, V>();
             if (Data == null || Data.Length == 0) return;
             ToDeserialize(new BufferByte(Data));
         }
@@ -181,7 +183,7 @@
         /// <inheritdoc/>
         protected sealed override void OnSerialize()
         {
-            if (Collection == null) Collection = Pool.Dictionary<K, V>.New();
+            if (Collection == null) Collection = Pool.Dictionary<K, V>();
             var buffer = new BufferByte();
             ToSerialize(buffer);
             Data = buffer.ToArray();
@@ -191,7 +193,7 @@
         public sealed override void Dispose()
         {
             Serialize();
-            Pool.Dictionary<K, V>.Free(Collection);
+            Pool.Free(Collection);
         }
     }
 }
