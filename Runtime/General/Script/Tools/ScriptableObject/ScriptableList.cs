@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using AIO;
+using APool = Pool;
 
 namespace UnityEngine
 {
@@ -142,7 +143,7 @@ namespace UnityEngine
         /// <inheritdoc/>
         protected sealed override void OnDeserialize()
         {
-            Collection = Pool.List<V>();
+            Collection = APool.List<V>();
             if (Data == null || Data.Length == 0) return;
             ToDeserialize(new BufferByte(Data));
         }
@@ -150,7 +151,7 @@ namespace UnityEngine
         /// <inheritdoc/>
         protected sealed override void OnSerialize()
         {
-            if (Collection == null) Collection = Pool.List<V>();
+            if (Collection == null) Collection = APool.List<V>();
             var buffer = new BufferByte();
             ToSerialize(buffer);
             Data = buffer.ToArray();
@@ -160,7 +161,7 @@ namespace UnityEngine
         public sealed override void Dispose()
         {
             Serialize();
-            Pool.Free(Collection);
+            APool.Free(Collection);
         }
     }
 }

@@ -14,6 +14,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using APool = Pool;
 
 namespace UnityEngine
 {
@@ -64,8 +65,8 @@ namespace UnityEngine
 
         internal TimerOperator(byte index, long unit, long slotUnit, int maxCount = 2048)
         {
-            TimersCache = Pool.List<TimerExe>();
-            Timers = Pool.LinkedList<TimerExe>();
+            TimersCache = APool.List<TimerExe>();
+            Timers = APool.LinkedList<TimerExe>();
             Index = index;
             Unit = unit * slotUnit;
             SlotUnit = slotUnit;
