@@ -5,6 +5,10 @@
 
 #define ENABLE_UPDATE_FUNCTION_CALLBACK
 
+#if SUPPORTE_UNITASK
+using Cysharp.Threading.Tasks;
+#endif
+
 #if (ENABLE_UPDATE_FUNCTION_CALLBACK)
 
 using System;
@@ -195,7 +199,12 @@ public partial class UnityAsync
             }
 
             //实现执行队列
-            for (var i = 0; i < mAactionCopiedQueueUpdateFunc.Count; i++) mAactionCopiedQueueUpdateFunc[i].Invoke();
+            foreach (var action in mAactionCopiedQueueUpdateFunc)
+#if SUPPORTE_UNITASK
+                UniTask.RunOnThreadPool(action);
+#else
+                action.Invoke();
+#endif
         }
     }
 }

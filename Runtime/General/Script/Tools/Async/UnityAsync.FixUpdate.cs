@@ -5,8 +5,11 @@
 
 #define ENABLE_FIXEDUPDATE_FUNCTION_CALLBACK
 
-#if (ENABLE_FIXEDUPDATE_FUNCTION_CALLBACK)
+#if SUPPORTE_UNITASK
+using Cysharp.Threading.Tasks;
+#endif
 
+#if (ENABLE_FIXEDUPDATE_FUNCTION_CALLBACK)
 using System;
 using System.Collections.Generic;
 
@@ -48,8 +51,12 @@ public partial class UnityAsync
                 actionQueuesFixedUpdateFunc.Clear();
                 noActionQueueToExecuteFixedUpdateFunc = true;
             }
-
-            for (var i = 0; i < mActionCopiedQueueFixedUpdateFunc.Count; i++) mActionCopiedQueueFixedUpdateFunc[i].Invoke();
+            foreach (var action in mActionCopiedQueueFixedUpdateFunc)
+#if SUPPORTE_UNITASK
+                UniTask.RunOnThreadPool(action);
+#else
+                action.Invoke();
+#endif
         }
     }
 }

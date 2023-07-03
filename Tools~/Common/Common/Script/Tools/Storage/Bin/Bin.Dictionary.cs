@@ -25,7 +25,7 @@ namespace AIO
         /// </summary>
         public BinDictionary()
         {
-            Collection = Pool.Dictionary<K, V>.New();
+            Collection = Pool.ADictionary<K, V>.New();
         }
 
         /// <inheritdoc />

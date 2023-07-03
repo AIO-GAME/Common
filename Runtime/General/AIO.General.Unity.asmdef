@@ -1,6 +1,13 @@
 {
     "name": "AIO.General.Unity",
-    "references": [],
+    "references": [
+        "UniTask",
+        "UniTask.Addressables",
+        "UniTask.DOTween",
+        "UniTask.Linq",
+        "UniTask.YooAsset",
+        "YooAsset"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
@@ -8,6 +15,22 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.cysharp.unitask",
+            "expression": "",
+            "define": "SUPPORTE_UNITASK"
+        },
+        {
+            "name": "com.tuyoogame.yooasset",
+            "expression": "",
+            "define": "SUPPORTE_YOOASSET"
+        },
+        {
+            "name": "com.demigiant.dotween",
+            "expression": "",
+            "define": "SUPPORTE_DOTWEEN"
+        }
+    ],
     "noEngineReferences": false
 }

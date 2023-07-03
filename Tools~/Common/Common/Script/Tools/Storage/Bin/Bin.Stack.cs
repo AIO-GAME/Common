@@ -24,7 +24,7 @@ namespace AIO
         /// </summary>
         public BinStack()
         {
-            Collection = Pool.Stack<T>.New();
+            Collection = Pool.AStack<T>.New();
         }
 
         /// <summary>
