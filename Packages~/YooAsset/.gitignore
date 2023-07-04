@@ -1,0 +1,15 @@
+!*.meta
+!*.dll.meta
+!*.asset.meta
+!*.asmdef.meta
+!*.cs.meta
+
+*.log
+*.DS_Store
+*.sln
+
+*.git/
+*.vs/
+*.idea/
+*.gradle/
+*.consulo/
