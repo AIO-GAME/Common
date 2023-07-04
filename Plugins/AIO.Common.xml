@@ -11154,6 +11154,16 @@
             数学库
             </summary>
         </member>
+        <member name="M:UtilsGen.Math.Log(System.Int32)">
+            <summary>
+            判断当前值是2的几次幂
+            </summary>
+        </member>
+        <member name="M:UtilsGen.Math.Log(System.Int64)">
+            <summary>
+            判断当前值是2的几次幂
+            </summary>
+        </member>
         <member name="M:UtilsGen.Math.Clamp(System.Int32@,System.Int32@,System.Int32@)">
             <summary>
             该方法将给定的整数值限制在指定的范围内，并返回新的整数值。

@@ -5,6 +5,9 @@
 |||✩ - - - - - |*/
 
 using System;
+using System.ComponentModel;
+using UnityEditor.TestTools;
+using UnityEngine;
 
 namespace UnityEditor
 {
@@ -38,6 +41,16 @@ namespace UnityEditor
                 var fullName = key.GetType().FullName;
                 if (string.IsNullOrEmpty(fullName)) return 0;
                 return EditorPrefs.GetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode()));
+            }
+
+            /// <summary>
+            /// 加载Bool
+            /// </summary>
+            /// <param name="field">字段名称</param>
+            /// <returns>返回值</returns>
+            public static bool LoadBool(in string field)
+            {
+                return EditorPrefs.GetInt(string.Concat(field, "_Boolean")) == 1;
             }
 
             /// <summary>
