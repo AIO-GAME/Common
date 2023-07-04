@@ -1,9 +1,9 @@
 {
     "name": "Sirenix.OdinInspector.Modules.UnityMathematics",
+    "rootNamespace": "",
     "references": [
         "Unity.Mathematics"
     ],
-    "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
@@ -18,5 +18,15 @@
         "Sirenix.Serialization.dll"
     ],
     "autoReferenced": true,
-    "defineConstraints": []
+    "defineConstraints": [
+        "!UNITY_2021_1_OR_NEWER"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.unity.mathematics",
+            "expression": "",
+            "define": "SUPPORT_UNITY_MATHEMATICS"
+        }
+    ],
+    "noEngineReferences": false
 }
