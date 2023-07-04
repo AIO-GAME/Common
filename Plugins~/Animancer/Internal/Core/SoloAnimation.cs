@@ -79,8 +79,13 @@ namespace Animancer
         /// </summary>
         public bool StopOnDisable
         {
+#if UNITY_2021_1_OR_NEWER
+            get => !_Animator.keepAnimatorStateOnDisable;
+            set => _Animator.keepAnimatorStateOnDisable = !value;
+#else
             get => !_Animator.keepAnimatorControllerStateOnDisable;
             set => _Animator.keepAnimatorControllerStateOnDisable = !value;
+#endif
         }
 
         /************************************************************************************************************************/
@@ -304,8 +309,11 @@ namespace Animancer
         private void OnDisable()
         {
             IsPlaying = false;
-
+#if UNITY_2021_1_OR_NEWER
+            if (_Animator.keepAnimatorStateOnDisable)
+#else
             if (_Animator.keepAnimatorControllerStateOnDisable)
+#endif
                 return;
 
             if (IsInitialised)
@@ -537,4 +545,3 @@ namespace Animancer.Editor
 /************************************************************************************************************************/
 #endif
 /************************************************************************************************************************/
-

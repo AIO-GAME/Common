@@ -6,7 +6,7 @@
 
 namespace Sirenix.OdinInspector.Modules.UnityMathematics.Editor
 {
-#if UNITY_EDITOR
+#if UNITY_EDITOR && SUPPORT_UNITY_MATHEMATICS
     using System;
     using System.Collections.Generic;
     using System.Reflection;
