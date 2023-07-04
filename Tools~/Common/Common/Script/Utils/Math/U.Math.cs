@@ -15,6 +15,38 @@ public partial class UtilsGen
     /// </summary>
     public static class Math
     {
+        /// <summary>
+        /// 判断当前值是2的几次幂
+        /// </summary>
+        public static int Log(int n)
+        {
+            var count = 0;
+            if (n == 1) return 0;
+            while (n > 1)
+            {
+                n >>= 1;
+                count++;
+            }
+
+            return count;
+        }
+        
+        /// <summary>
+        /// 判断当前值是2的几次幂
+        /// </summary>
+        public static int Log(long n)
+        {
+            var count = 0;
+            if (n == 1) return 0;
+            while (n > 1)
+            {
+                n >>= 1;
+                count++;
+            }
+
+            return count;
+        }
+
         ///<summary>
         ///该方法将给定的整数值限制在指定的范围内，并返回新的整数值。
         ///</summary>
