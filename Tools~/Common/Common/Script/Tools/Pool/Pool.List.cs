@@ -22,15 +22,9 @@ public static partial class Pool
         {
             lock (@lock)
             {
-                if (free.Count == 0)
-                {
-                    free.Push(new List<T>());
-                }
-
+                if (free.Count == 0) free.Push(new List<T>());
                 var array = free.Pop();
-
                 busy.Add(array);
-
                 return array;
             }
         }
