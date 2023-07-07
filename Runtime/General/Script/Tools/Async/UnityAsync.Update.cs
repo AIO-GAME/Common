@@ -39,6 +39,73 @@ public partial class UnityAsync
     /// <summary>
     /// 执行协程
     /// </summary>
+    public static void ExecuteInUpdate<T>(Func<T> coroutine) where T : IEnumerator
+    {
+        if (instance == null) return;
+        ExecuteInUpdate(() => instance.StartCoroutine(coroutine()));
+    }
+
+    /// <summary>
+    /// 执行协程
+    /// </summary>
+    public static void ExecuteInUpdate<T>(params Func<T>[] coroutine) where T : IEnumerator
+    {
+        if (instance == null) return;
+        ExecuteInUpdate(() =>
+        {
+            for (var i = 0; i < coroutine.Length; i++)
+            {
+                instance.StartCoroutine(coroutine[i]());
+            }
+        });
+    }
+
+    /// <summary>
+    /// 执行协程
+    /// </summary>
+    public static void ExecuteInUpdate<T>(IList<Func<T>> coroutines) where T : IEnumerator
+    {
+        if (instance == null) return;
+        ExecuteInUpdate(() =>
+        {
+            for (var i = 0; i < coroutines.Count; i++)
+            {
+                instance.StartCoroutine(coroutines[i]());
+            }
+        });
+    }
+
+    /// <summary>
+    /// 执行协程
+    /// </summary>
+    public static void StartCoroutine<T>(T coroutines) where T : IEnumerator
+    {
+        if (instance == null) return;
+        instance.StartCoroutine(coroutines);
+    }
+
+    /// <summary>
+    /// 执行协程
+    /// </summary>
+    public static void StartCoroutine<T>(Func<T> coroutines) where T : IEnumerator
+    {
+        if (instance == null) return;
+        instance.StartCoroutine(coroutines());
+    }
+
+    /// <summary>
+    /// 执行协程
+    /// </summary>
+    public static void StartCoroutine<T>(IList<Func<T>> coroutines) where T : IEnumerator
+    {
+        if (instance is null || coroutines is null) return;
+        for (var i = 0; i < coroutines.Count; i++)
+            instance.StartCoroutine(coroutines[i]());
+    }
+
+    /// <summary>
+    /// 执行协程
+    /// </summary>
     public static void ExecuteInUpdate<T>(T coroutine1, T coroutine2) where T : IEnumerator
     {
         if (instance == null) return;
@@ -87,7 +154,7 @@ public partial class UnityAsync
 
         lock (actionQueuesUpdateFunc)
         {
-            actionQueuesUpdateFunc.Add(() => action(arg));
+            // actionQueuesUpdateFunc.Add(() => action(arg));
             noActionQueueToExecuteUpdateFunc = false;
         }
     }
@@ -177,9 +244,23 @@ public partial class UnityAsync
         }
     }
 
+    /// <summary>
+    /// 在Update中执行
+    /// </summary>
+    public static void ExecuteInUpdate(ICollection<Action> action)
+    {
+        if (action == null) throw new ArgumentNullException(nameof(action));
+
+        lock (actionQueuesUpdateFunc)
+        {
+            actionQueuesUpdateFunc.AddRange(action);
+            noActionQueueToExecuteUpdateFunc = false;
+        }
+    }
+
     internal partial class ThreadMono
     {
-        private readonly List<Action> mAactionCopiedQueueUpdateFunc = new List<Action>();
+        private readonly List<Delegate> mAactionCopiedQueueUpdateFunc = new List<Delegate>();
 
         public void Update()
         {
@@ -198,7 +279,20 @@ public partial class UnityAsync
             }
 
             //实现执行队列
-            foreach (var action in mAactionCopiedQueueUpdateFunc)   action.Invoke();
+            // foreach (var action in mAactionCopiedQueueUpdateFunc) action?.DynamicInvoke();
+            if (mAactionCopiedQueueUpdateFunc.Count == 0) return;
+            StartCoroutine(Invoke(mAactionCopiedQueueUpdateFunc.ToArray()));
+            mAactionCopiedQueueUpdateFunc.Clear();
+        }
+
+        private static IEnumerator Invoke(IList<Delegate> delegates)
+        {
+            for (var i = 0; i < delegates.Count; i++)
+            {
+                delegates[i]?.DynamicInvoke();
+            }
+
+            yield break;
         }
     }
 }

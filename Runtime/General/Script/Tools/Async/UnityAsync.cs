@@ -43,6 +43,10 @@ public static partial class UnityAsync
         IsAllowThread = Application.platform == RuntimePlatform.WebGLPlayer;
     }
 
+    public static void Dispose()
+    {
+    }
+
     /// <summary>
     /// 开一个新的作业执行函数
     /// </summary>
