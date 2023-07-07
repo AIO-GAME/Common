@@ -75,6 +75,7 @@ namespace UnityEngine
             CurrentTime = Watch.ElapsedMilliseconds;
             Interval = CurrentTime - (Number * Duration);
 
+#if UNITY_2021_1_OR_NEWER
             switch (--Loop) //次数减少
             {
                 case 0:
@@ -91,6 +92,21 @@ namespace UnityEngine
                     return true; //无限循环
                 }
             }
+#else
+            --Loop;
+            if (Loop == 0)
+            {
+                Watch.Stop();
+                Watch = null;
+                Debug.Log(ToString());
+                return false; //达到次数
+            }
+
+            Debug.Log(ToString());
+            CreateTime = EndTime;
+            EndTime = Duration + CreateTime - Interval;
+            return true; //无限循环
+#endif
         }
 
         public int CompareTo(ITimerExecutor other)
