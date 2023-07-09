@@ -40,7 +40,7 @@ public static partial class UnityAsync
             instance = obj.AddComponent<ThreadMono>();
         }
 
-        IsAllowThread = Application.platform == RuntimePlatform.WebGLPlayer;
+        IsAllowThread = Application.platform != RuntimePlatform.WebGLPlayer;
     }
 
     public static void Dispose()
@@ -52,13 +52,23 @@ public static partial class UnityAsync
     /// </summary>
     public static void RunTask(Action action)
     {
-        if (IsAllowThread) ExecuteInUpdate(action);
-        else
+        if (IsAllowThread)
+        {
 #if SUPPORTE_UNITASK
             UniTask.RunOnThreadPool(action);
 #else
-            Task.Factory.StartNew(action.Invoke);
+            Task.Factory.StartNew(action);
 #endif
+        }
+        else ExecuteInUpdate(action);
+    }
+
+    /// <summary>
+    /// 开一个新的作业执行函数
+    /// </summary>
+    public static void RunTask(Delegate action)
+    {
+        ExecuteInUpdate(action);
     }
 
     [Preserve]

@@ -22,6 +22,14 @@ namespace UnityEngine
     /// </summary>
     internal abstract class TimerExecutor<T> : ITimerExecutor<T> where T : Delegate
     {
+        protected long TID { get; set; }
+
+        long ITimerExecutor.TID
+        {
+            get => TID;
+            set => TID = value;
+        }
+
         public long CreateTime { get; private set; }
 
         public long Duration { get; }
@@ -30,15 +38,46 @@ namespace UnityEngine
 
         public long Interval { get; private set; }
 
-        public int Loop { get; private set; }
+        internal int Loop { get; set; }
+
+        int ITimerExecutor.Loop
+        {
+            get => Loop;
+            set => Loop = value;
+        }
 
         public uint Number { get; private set; }
 
-        byte ITimerExecutor.OperatorIndex { get; set; }
+        internal byte OperatorIndex { get; set; }
+
+        byte ITimerExecutor.OperatorIndex
+        {
+            get => OperatorIndex;
+            set => OperatorIndex = value;
+        }
 
         public Stopwatch Watch { get; private set; }
 
         public T Delegates { get; protected set; }
+
+        /// <summary>
+        /// 定时计算器
+        /// </summary>
+        /// <param name="duration">定时长度 单位为毫秒</param>
+        /// <param name="loop">循环次数</param>
+        /// <param name="createTime">创建时间</param>
+        /// <param name="tid">识别ID</param>
+        protected TimerExecutor(long duration, int loop, long createTime, long tid)
+        {
+            Watch = Stopwatch.StartNew();
+            Loop = loop;
+            Duration = duration;
+            CreateTime = createTime;
+            EndTime = duration + createTime;
+            Number = 0;
+            Interval = 0;
+            TID = tid;
+        }
 
         /// <summary>
         /// 定时计算器
@@ -57,8 +96,6 @@ namespace UnityEngine
             Interval = 0;
         }
 
-        public abstract void Execute();
-
         /// <summary>
         /// 获取当前时间
         /// </summary>
@@ -69,44 +106,48 @@ namespace UnityEngine
         /// 返回Ture: 可以循环
         /// 返回False:循环结束
         /// </summary>
-        public bool UpdateLoop()
+        public virtual bool UpdateLoop()
         {
-            Number = Number + 1; //次数增加
-            CurrentTime = Watch.ElapsedMilliseconds;
-            Interval = CurrentTime - (Number * Duration);
-
-#if UNITY_2021_1_OR_NEWER
-            switch (--Loop) //次数减少
+            if (Loop > 0)
             {
-                case 0:
-                    Watch.Stop();
-                    Watch = null;
-                    Debug.Log(ToString());
-                    return false; //达到次数
-                case < 0:
-                case > 0:
-                {
-                    Debug.Log(ToString());
-                    CreateTime = EndTime;
-                    EndTime = Duration + CreateTime - Interval;
-                    return true; //无限循环
-                }
+                Number = Number + 1; //次数增加
+                CurrentTime = Watch.ElapsedMilliseconds;
+                Interval = CurrentTime - (Number * Duration);
+                CreateTime = EndTime;
+                EndTime = Duration + CreateTime - Interval;
+                Loop--;
+                return true;
             }
-#else
-            --Loop;
+
             if (Loop == 0)
             {
+                Number = Number + 1; //次数增加
+                CurrentTime = Watch.ElapsedMilliseconds;
+                Interval = CurrentTime - (Number * Duration);
                 Watch.Stop();
                 Watch = null;
-                Debug.Log(ToString());
                 return false; //达到次数
             }
 
-            Debug.Log(ToString());
-            CreateTime = EndTime;
-            EndTime = Duration + CreateTime - Interval;
-            return true; //无限循环
-#endif
+            if (Loop == -1) //无限循环
+            {
+                Number = Number + 1; //次数增加
+                CurrentTime = Watch.ElapsedMilliseconds;
+                Interval = CurrentTime - (Number * Duration);
+                // Console.WriteLine(ToString());
+                CreateTime = EndTime;
+                EndTime = Duration + CreateTime - Interval;
+                return true;
+            }
+
+            if (Loop == -2) //不执行回调结束
+            {
+                Watch.Stop();
+                Watch = null;
+                return false;
+            }
+
+            return false;
         }
 
         public int CompareTo(ITimerExecutor other)
@@ -124,13 +165,35 @@ namespace UnityEngine
         public sealed override string ToString()
         {
             var builder = new StringBuilder();
-            builder.Append("定时单位").Append('=').Append(Duration.ToString("00000000")).Append(' ');
-            builder.Append("创建时间").Append('=').Append(CreateTime.ToString("00000000")).Append(' ');
-            builder.Append("结束时间").Append('=').Append(EndTime.ToString("00000000")).Append(' ');
+            builder.Append("定时单位").Append('=').Append(Duration.ToString("00000000ms")).Append(' ');
+            builder.Append("初始层级").Append('=').Append(OperatorIndex).Append(' ');
+            builder.Append("创建时间").Append('=').Append(CreateTime.ToString("00000000ms")).Append(' ');
+            builder.Append("结束时间").Append('=').Append(EndTime.ToString("00000000ms")).Append(' ');
             builder.Append("循环次数").Append('=').Append(Number.ToString("00000")).Append(' ');
-            builder.Append("实际时间").Append('=').Append(CurrentTime.ToString("00000000")).Append(' ');
-            builder.Append("误差时间").Append('=').Append(Interval.ToString("00000")).Append(' ');
+            builder.Append("实际时间").Append('=').Append(CurrentTime.ToString("00000000ms")).Append(' ');
+            builder.Append("误差时间").Append('=').Append(Interval.ToString("00000ms")).Append(' ');
             return builder.ToString();
         }
+
+        public void Execute()
+        {
+            if (Loop == -2)
+            {
+                Dispose();
+                return;
+            }
+
+            if (Delegates is null)
+            {
+                Dispose();
+                return;
+            }
+
+            xExecute();
+
+            if (Loop == 0) Dispose();
+        }
+
+        protected abstract void xExecute();
     }
 }

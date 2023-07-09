@@ -20,7 +20,7 @@ public partial class UnityAsync
     /// <summary>
     /// Update等待队列
     /// </summary>
-    [ContextStatic] private static readonly List<Action> actionQueuesUpdateFunc = new List<Action>();
+    [ContextStatic] private static readonly List<Delegate> actionQueuesUpdateFunc = new List<Delegate>();
 
     /// <summary>
     /// 执行状态
@@ -159,52 +159,80 @@ public partial class UnityAsync
         }
     }
 
-    /// <summary>
-    /// 在Update中执行
-    /// </summary>
-    public static void ExecuteInUpdate<T1, T2>(Action<T1, T2> action, T1 arg1, T2 arg2)
-    {
-        if (action == null) throw new ArgumentNullException(nameof(action));
-
-        lock (actionQueuesUpdateFunc)
-        {
-            actionQueuesUpdateFunc.Add(() => action(arg1, arg2));
-            noActionQueueToExecuteUpdateFunc = false;
-        }
-    }
-
-    /// <summary>
-    /// 在Update中执行
-    /// </summary>
-    public static void ExecuteInUpdate<T1, T2, T3>(Action<T1, T2, T3> action, T1 arg1, T2 arg2, T3 arg3)
-    {
-        if (action == null) throw new ArgumentNullException(nameof(action));
-
-        lock (actionQueuesUpdateFunc)
-        {
-            actionQueuesUpdateFunc.Add(() => action(arg1, arg2, arg3));
-            noActionQueueToExecuteUpdateFunc = false;
-        }
-    }
-
-    /// <summary>
-    /// 在Update中执行
-    /// </summary>
-    public static void ExecuteInUpdate<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
-    {
-        if (action == null) throw new ArgumentNullException(nameof(action));
-
-        lock (actionQueuesUpdateFunc)
-        {
-            actionQueuesUpdateFunc.Add(() => action(arg1, arg2, arg3, arg4));
-            noActionQueueToExecuteUpdateFunc = false;
-        }
-    }
+    // /// <summary>
+    // /// 在Update中执行
+    // /// </summary>
+    // public static void ExecuteInUpdate<T1, T2>(Action<T1, T2> action, T1 arg1, T2 arg2)
+    // {
+    //     if (action == null) throw new ArgumentNullException(nameof(action));
+    //
+    //     lock (actionQueuesUpdateFunc)
+    //     {
+    //         actionQueuesUpdateFunc.Add(() => action(arg1, arg2));
+    //         noActionQueueToExecuteUpdateFunc = false;
+    //     }
+    // }
+    //
+    // /// <summary>
+    // /// 在Update中执行
+    // /// </summary>
+    // public static void ExecuteInUpdate<T1, T2, T3>(Action<T1, T2, T3> action, T1 arg1, T2 arg2, T3 arg3)
+    // {
+    //     if (action == null) throw new ArgumentNullException(nameof(action));
+    //
+    //     lock (actionQueuesUpdateFunc)
+    //     {
+    //         actionQueuesUpdateFunc.Add(() => action(arg1, arg2, arg3));
+    //         noActionQueueToExecuteUpdateFunc = false;
+    //     }
+    // }
+    //
+    // /// <summary>
+    // /// 在Update中执行
+    // /// </summary>
+    // public static void ExecuteInUpdate<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
+    // {
+    //     if (action == null) throw new ArgumentNullException(nameof(action));
+    //
+    //     lock (actionQueuesUpdateFunc)
+    //     {
+    //         actionQueuesUpdateFunc.Add(() => action(arg1, arg2, arg3, arg4));
+    //         noActionQueueToExecuteUpdateFunc = false;
+    //     }
+    // }
 
     /// <summary>
     /// 在Update中执行
     /// </summary>
     public static void ExecuteInUpdate(Action action)
+    {
+        if (action == null) throw new ArgumentNullException(nameof(action));
+
+        lock (actionQueuesUpdateFunc)
+        {
+            actionQueuesUpdateFunc.Add(action);
+            noActionQueueToExecuteUpdateFunc = false;
+        }
+    }
+
+    /// <summary>
+    /// 在Update中执行
+    /// </summary>
+    public static void ExecuteInUpdate(params Delegate[] action)
+    {
+        if (action == null) throw new ArgumentNullException(nameof(action));
+
+        lock (actionQueuesUpdateFunc)
+        {
+            actionQueuesUpdateFunc.AddRange(action);
+            noActionQueueToExecuteUpdateFunc = false;
+        }
+    }
+
+    /// <summary>
+    /// 在Update中执行
+    /// </summary>
+    public static void ExecuteInUpdate(Delegate action)
     {
         if (action == null) throw new ArgumentNullException(nameof(action));
 

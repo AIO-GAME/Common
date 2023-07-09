@@ -19,8 +19,13 @@ namespace UnityEngine
     /// <summary>
     /// 定时任务处理器
     /// </summary>
-    internal interface ITimerExecutor : IComparable<ITimerExecutor>, IDisposable
+    public interface ITimerExecutor : IComparable<ITimerExecutor>, IDisposable
     {
+        /// <summary>
+        /// 定时器索引
+        /// </summary>
+        long TID { get; protected set; }
+
         /// <summary>
         /// 创建时间 单位毫秒
         /// </summary>
@@ -43,11 +48,12 @@ namespace UnityEngine
 
         /// <summary>
         /// 循环次数
+        /// -2:回调已经被删除 无法再次执行
         /// -1:代表无限
         /// =0:代表执行一次
         /// >0:代表循环次数
         /// </summary>
-        int Loop { get; }
+        int Loop { get; internal set; }
 
         /// <summary>
         /// 当前任务实际循环次数

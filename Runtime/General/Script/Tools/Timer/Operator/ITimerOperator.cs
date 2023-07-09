@@ -9,12 +9,12 @@ using System.Collections.Generic;
 
 namespace UnityEngine
 {
-    internal partial interface ITimerOperator : IDisposable
+    public partial interface ITimerOperator : IDisposable
     {
         /// <summary>
         /// 时间层级序列
         /// </summary>
-        byte Index { get; }
+        int Index { get; }
 
         /// <summary>
         /// 当前定时器计时总单位
@@ -56,22 +56,22 @@ namespace UnityEngine
         /// <summary>
         /// 添加任务执行器 进入数据源
         /// </summary>
-        void AddTimerSource(List<ITimerExecutor> timer);
+        void AddTimerSource(List<ITimerExecutor> executors);
 
         /// <summary>
         /// 添加任务执行器 进入数据源
         /// </summary>
-        void AddTimerSource(ITimerExecutor timer);
+        void AddTimerSource(ITimerExecutor executor);
 
         /// <summary>
         /// 添加任务执行器 进入缓存
         /// </summary>
-        void AddTimerCache(ITimerExecutor timer);
+        void AddTimerCache(ITimerExecutor executor);
 
         /// <summary>
         /// 添加任务执行器 进入缓存
         /// </summary> 
-        void AddTimerCache(params ITimerExecutor[] timer);
+        void AddTimerCache(params ITimerExecutor[] executors);
 
         /// <summary>
         /// 更新周期性收集的数据 加入链表
@@ -101,6 +101,6 @@ namespace UnityEngine
         /// <summary>
         /// 数据推送
         /// </summary>
-        void ReceiveFromData(ITimerOperator source);
+        void ReceiveFromData(ITimerOperator @operator);
     }
 }

@@ -20,6 +20,14 @@ namespace UnityEngine
     /// </summary>
     public static partial class TimerSystem
     {
+        public static class Settings
+        {
+            /// <summary>
+            /// 开启 循环任务线程
+            /// </summary>
+            public static bool EnableLoopThread { get; set; } = true;
+        }
+
         /// <summary>
         /// 计时器 精确时间刻度器
         /// </summary>
@@ -34,6 +42,11 @@ namespace UnityEngine
         /// 多层级定时器 Task 副 没有添加接口 只有消耗 有多个
         /// </summary>
         [ContextStatic] private static List<ITimerContainer> TaskList;
+
+        /// <summary>
+        /// 无限循环定时器容器
+        /// </summary>
+        [ContextStatic] private static ITimerContainer LoopContainer;
 
         /// <summary>
         /// 当前容器列表剩余数量
@@ -65,7 +78,16 @@ namespace UnityEngine
         [ContextStatic] private static CancellationTokenSource TaskHandleTokenSource;
 
         /// <summary>
-        /// 当前计时器计算单位
+        /// 计时器单位回调
+        /// </summary>
+        public static event TimerUnitsTask TimingUnitsEvent;
+
+        internal static List<(long, long, long)> TimingUnits { get; private set; }
+
+        private static Dictionary<long, ITimerExecutor> TimerExecutors;
+
+        /// <summary>
+        /// 当前计时器计算单位 ms
         /// </summary>
         public static long Unit { get; private set; }
 
@@ -77,12 +99,7 @@ namespace UnityEngine
         /// <summary>
         /// 开关
         /// </summary>
-        public static bool SWITCH { get; private set; }
-
-        /// <summary>
-        /// 计时器单位
-        /// </summary>
-        [ContextStatic] private static List<long> TimerUnits;
+        internal static bool SWITCH { get; private set; }
 
         /// <summary>
         /// 获取定时器信息
@@ -90,16 +107,22 @@ namespace UnityEngine
         public new static void ToString()
         {
             var builder = new StringBuilder();
-            builder.Append("-----------<主分层器>-----------").AppendLine();
+            builder.Append("-----------<主定时器 层器>-----------").AppendLine();
             lock (MainList)
             {
                 foreach (var item in MainList)
                 {
-                    builder.Append(item).AppendLine();
+                    builder.Append(item).AppendLine().AppendLine();
                 }
             }
 
-            builder.Append("-----------<辅分层器>-----------").AppendLine();
+            builder.Append("-----------<无限循环 层级>-----------").AppendLine();
+            lock (LoopContainer)
+            {
+                builder.Append(LoopContainer).AppendLine();
+            }
+
+            builder.Append("-----------<辅助执行 层级>-----------").AppendLine();
             lock (TaskList)
             {
                 foreach (var item in TaskList)

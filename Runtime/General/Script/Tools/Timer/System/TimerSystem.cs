@@ -12,6 +12,7 @@
 ***************************************************/
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,16 +21,10 @@ using Unitx = Unit;
 
 namespace UnityEngine
 {
-    public enum ETimerUnit
-    {
-        Second,
-        Min,
-        Hour,
-        Day,
-        Week,
-        Month,
-        Year,
-    }
+    /// <summary>
+    /// 定时器单位回调
+    /// </summary>
+    public delegate void TimerUnitsTask(List<(long, long, long)> units);
 
     /// <summary>
     /// 定时器 时间调度器
@@ -38,23 +33,44 @@ namespace UnityEngine
     {
         public static void Initialize(long updatelisttime = 10, int capacity = 1024 * 8)
         {
+            Watch = Stopwatch.StartNew();
+
+            //保持当前计算单位是毫秒 因为当前时间单位计算底层是纳秒
+            Unit = Unitx.Time.SECOND * 2;
+
+            TaskList = APool.List<ITimerContainer>();
+            MainList = APool.List<ITimerOperator>();
+            TimingUnits = APool.List<(long, long, long)>();
+            TimerExecutors = APool.Dictionary<long, ITimerExecutor>();
+
+            if (TimingUnitsEvent is null)
+            {
+                TimingUnits.Add((Unitx.Time.MS_SECOND, Unit, Unitx.Time.MS_SECOND / Unit));
+                TimingUnits.Add((Unitx.Time.MS_MIN, Unitx.Time.MS_SECOND, 60));
+                TimingUnits.Add((Unitx.Time.MS_HOUR, Unitx.Time.MS_MIN, 60));
+                TimingUnits.Add((Unitx.Time.MS_DAY, Unitx.Time.MS_HOUR, 24));
+                TimingUnits.Add((Unitx.Time.MS_WEEK, Unitx.Time.MS_DAY, 7));
+            }
+            else TimingUnitsEvent.Invoke(TimingUnits);
+
             RemainNum = 0;
             UpdateCacheTime = 0;
             Capacity = capacity;
             UPDATELISTTIME = updatelisttime;
 
-            Watch = Stopwatch.StartNew();
-
-            TaskList = APool.List<ITimerContainer>();
-            MainList = APool.List<ITimerOperator>();
-            TimerUnits = APool.List<long>();
-
             RegisterList();
+
             SWITCH = true;
 
             TaskHandleTokenSource = new CancellationTokenSource();
             TaskHandleToken = TaskHandleTokenSource.Token;
             ThreadHandle = Task.Factory.StartNew(Update, TaskHandleToken);
+
+            if (Settings.EnableLoopThread)
+            {
+                LoopContainer = new TimerContainerLoop(Unit);
+                LoopContainer.Start();
+            }
         }
 
         static partial void Update();
@@ -64,17 +80,11 @@ namespace UnityEngine
         /// </summary>
         private static void RegisterList()
         {
-            //保持当前计算单位是毫秒 因为当前时间单位计算底层是纳秒
             MainList.Clear();
-            Unit = Unitx.Time.SECOND * 2;
-            MainList.Add(new TimerOperatorAuto(0, Unit, Unitx.Time.MS_SECOND / Unit)); //01秒
-            MainList.Add(new TimerOperatorAuto(1, Unitx.Time.MS_SECOND, 60)); //60秒
-            MainList.Add(new TimerOperatorAuto(2, Unitx.Time.MS_MIN, 60)); //60分
-            MainList.Add(new TimerOperatorAuto(3, Unitx.Time.MS_HOUR, 24)); //24时
-            MainList.Add(new TimerOperatorAuto(4, Unitx.Time.MS_DAY, 7)); //07天
-
-            TimerUnits.Clear();
-            for (var i = 0; i < MainList.Count; i++) TimerUnits.Add(MainList[i].Unit);
+            for (byte i = 0; i < TimingUnits.Count; i++)
+            {
+                MainList.Add(new TimerOperatorAuto(i, TimingUnits[i].Item2, TimingUnits[i].Item3));
+            }
         }
 
         /// <summary>
@@ -89,15 +99,25 @@ namespace UnityEngine
         {
             ToString();
             SWITCH = false;
+            TaskList.Free();
+            MainList.Free();
+            TimingUnits.Free();
+            TimerExecutors.Free();
+
             try
             {
+                lock (LoopContainer)
+                {
+                    LoopContainer.Cancel();
+                    LoopContainer = null;
+                }
+
                 lock (TaskList)
                 {
                     for (var i = 0; i < TaskList.Count; i++) TaskList[i].Cancel();
                     TaskList.Clear();
                     TaskList = null;
                 }
-
 
                 lock (MainList)
                 {

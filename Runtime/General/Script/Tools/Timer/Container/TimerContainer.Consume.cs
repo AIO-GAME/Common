@@ -25,15 +25,14 @@ namespace UnityEngine
     /// <summary>
     /// 辅助定时器
     /// </summary>
-    internal partial class TimerContainerTask : TimerContainer
+    internal sealed class TimerContainerConsume : TimerContainer
     {
-        private Task TaskHandle;
+        /// <summary>
+        /// 当前辅助定时器总数量
+        /// </summary>
+        private int TotalNum { get; }
 
-        private CancellationToken TaskHandleToken;
-
-        private CancellationTokenSource TaskHandleTokenSource;
-
-        public TimerContainerTask(long unit, long counter, List<ITimerOperator> operators)
+        public TimerContainerConsume(long unit, long counter, List<ITimerOperator> operators)
         {
             Unit = unit;
             Counter = counter;
@@ -51,6 +50,7 @@ namespace UnityEngine
                 }
             }
 
+            if (List.Count <= 0) return;
 
             List.Sort((a, b) =>
             {
@@ -71,23 +71,19 @@ namespace UnityEngine
             long nowMilliseconds;
             try
             {
-                while (RemainNum > 0)
+                while (TimerSystem.SWITCH && RemainNum > 0)
                 {
                     nowMilliseconds = Watch.ElapsedMilliseconds;
 
                     if (nowMilliseconds >= Unit) // 更新间隔
                     {
                         Watch.Restart();
-
                         Counter += nowMilliseconds;
                         UpdateCacheTime += nowMilliseconds;
                         if (UpdateCacheTime > TimerSystem.UPDATELISTTIME)
                         {
                             UpdateCacheTime = 0; // 重置缓存更新时间
-                            for (var i = 0; i < List.Count; i++)
-                            {
-                                List[i].TimersUpdate();
-                            }
+                            for (var i = 0; i < List.Count; i++) List[i].TimersUpdate();
                         }
 
                         List[0].SlotUpdate(Unit);
@@ -116,7 +112,7 @@ namespace UnityEngine
                     }
                 }
 #if UNITY_EDITOR
-                Print.Log($"[辅助定时器:{ID}] [容器数量:{List.Count}] [状态:结束] 精度单位:{Unit} 当前时间:{Counter} 任务总数量:{TotalNum} 完成任务数量:{TotalNum - RemainNum}");
+                Print.Log($"[辅助定时器:{ID}] [容器数量:{List.Count}] [状态:结束] 精度单位:{Unit} 当前时间:{Counter} 任务总数量:{TotalNum} 完成任务数量:{TotalNum - RemainNum} 剩余任务数量:{RemainNum}");
 #endif
             }
             catch (Exception e)
@@ -175,6 +171,21 @@ namespace UnityEngine
         private void EvolutionCallBack(int Index, List<ITimerExecutor> list)
         {
             List[Index].AddTimerSource(list);
+        }
+
+        public override void Dispose()
+        {
+            TimerSystem.DisposeContainer(this);
+            base.Dispose();
+        }
+
+
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+            builder.AppendLine($"[{GetType().Name} ID:{ID}] [容器数量:{List.Count}] 精度单位:{Unit} 当前时间:{Counter} 任务总数量:{TotalNum} 完成任务数量:{TotalNum - RemainNum} 剩余任务数量:{RemainNum}");
+            foreach (var item in List) builder.AppendLine(item.ToString()).AppendLine();
+            return builder.ToString();
         }
     }
 }

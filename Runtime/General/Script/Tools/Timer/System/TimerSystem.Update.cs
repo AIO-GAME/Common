@@ -31,48 +31,61 @@ namespace UnityEngine
                     nowMilliseconds = Watch.ElapsedMilliseconds;
                     if (nowMilliseconds >= Unit) //更新间隔
                     {
+                        Watch.Restart();
                         Counter += nowMilliseconds;
                         UpdateCacheTime += nowMilliseconds;
-                        Watch.Restart();
-                    }
 
-                    if (UpdateCacheTime > UPDATELISTTIME)
-                    {
-                        UpdateCacheTime = 0; // 重置缓存更新时间
-                        for (var i = 0; i < MainList.Count; i++)
+                        if (UpdateCacheTime > UPDATELISTTIME)
                         {
-                            MainList[i].TimersUpdate();
+                            UpdateCacheTime = 0; // 重置缓存更新时间
+                            for (var i = 0; i < MainList.Count; i++)
+                            {
+                                MainList[i].TimersUpdate();
+                            }
                         }
-                    }
 
-                    //如果当前List队列中 没有定时器任务 直接跳过
-                    if (RemainNum <= 0) continue;
-
-                    if (nowMilliseconds >= Unit)
-                    {
                         lock (MainList)
                         {
-                            MainList[0].SlotUpdate(Unit);
-                            RemainNum = RemainNum - MainList[0].BottomUpdate(Counter);
-                            if (RemainNum <= 0)
+                            if (RemainNum <= 0) // 更新格子
                             {
-                                RemainNum = 0; //重新计算剩余数量 保证异步线程修改 出现数据丢失
-                                foreach (var item in MainList) RemainNum = RemainNum + item.AllCount;
-                                if (RemainNum <= 0) continue;
-                            }
-
-                            if (MainList[0].Slot >= MainList[0].SlotUnit)
-                            {
-                                MainList[0].SlotResest();
-                                for (var i = 1; i < MainList.Count; i++)
+                                MainList[0].SlotUpdate(Unit);
+                                if (MainList[0].Slot >= MainList[0].SlotUnit)
                                 {
-                                    MainList[i].SlotUpdate(MainList[i - 1].Unit);
-                                    if (MainList[i].Slot >= MainList[i].SlotUnit)
+                                    MainList[0].SlotResest();
+                                    for (var i = 1; i < MainList.Count; i++)
                                     {
-                                        MainList[i].OtherUpdate(Counter);
-                                        MainList[i].SlotResest();
+                                        MainList[i].SlotUpdate(MainList[i - 1].Unit);
+                                        if (MainList[i].Slot >= MainList[i].SlotUnit)
+                                        {
+                                            MainList[i].SlotResest();
+                                        }
+                                        else break;
                                     }
-                                    else break;
+                                }
+                            }
+                            else
+                            {
+                                MainList[0].SlotUpdate(Unit);
+                                RemainNum = RemainNum - MainList[0].BottomUpdate(Counter);
+                                if (RemainNum <= 0)
+                                {
+                                    RemainNum = 0; //重新计算剩余数量 保证异步线程修改 出现数据丢失
+                                    foreach (var item in MainList) RemainNum = RemainNum + item.AllCount;
+                                }
+
+                                if (MainList[0].Slot >= MainList[0].SlotUnit)
+                                {
+                                    MainList[0].SlotResest();
+                                    for (var i = 1; i < MainList.Count; i++)
+                                    {
+                                        MainList[i].SlotUpdate(MainList[i - 1].Unit);
+                                        if (MainList[i].Slot >= MainList[i].SlotUnit)
+                                        {
+                                            MainList[i].OtherUpdate(Counter);
+                                            MainList[i].SlotResest();
+                                        }
+                                        else break;
+                                    }
                                 }
                             }
                         }

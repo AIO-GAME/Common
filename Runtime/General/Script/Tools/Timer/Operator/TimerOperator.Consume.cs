@@ -26,7 +26,16 @@ namespace UnityEngine
             Action<List<ITimerExecutor>> loopEvent,
             Action<int, List<ITimerExecutor>> evolutionEvent)
         {
-            ReceiveFromData(timerOperator);
+            Index = timerOperator.Index;
+            Slot = timerOperator.Slot;
+            SlotUnit = timerOperator.SlotUnit;
+            AllCount = timerOperator.AllCount;
+            MaxCount = timerOperator.MaxCount;
+            Unit = timerOperator.Unit;
+
+            TimersCache = timerOperator.TimersCache;
+            Timers = timerOperator.Timers;
+
             DoneEvent = doneEvent;
             LoopEvent = loopEvent;
             EvolutionEvent = evolutionEvent;
@@ -45,10 +54,8 @@ namespace UnityEngine
                     var executor = Timers.First.Value;
                     if (executor.EndTime <= nowTime)
                     {
-                        //只有当Index为0的时候 才会出发此条件 并且再次加入队列
+                        FinshNumber++;
                         if (executor.UpdateLoop()) LoopList.Add(executor);
-                        else FinshNumber++;
-
                         DoneList.Add(executor);
                         Timers.RemoveFirst();
                     }
@@ -56,11 +63,11 @@ namespace UnityEngine
                 }
             }
 
-            AllCount = AllCount - LoopList.Count - DoneList.Count;
-            if (LoopList.Count > 0) LoopEvent?.Invoke(LoopList);
+            AllCount -= FinshNumber;
+            if (LoopList.Count > 0) LoopEvent.Invoke(LoopList);
             else LoopList.Free();
 
-            if (DoneList.Count > 0) DoneEvent?.Invoke(DoneList);
+            if (DoneList.Count > 0) DoneEvent.Invoke(DoneList);
             else DoneList.Free();
 
             return FinshNumber;
@@ -86,7 +93,7 @@ namespace UnityEngine
             if (EvolutionList.Count > 0)
             {
                 AllCount -= EvolutionList.Count;
-                EvolutionEvent?.Invoke(Index - 1, EvolutionList);
+                EvolutionEvent.Invoke(Index - 1, EvolutionList);
             }
             else EvolutionList.Free();
         }
