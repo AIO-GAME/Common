@@ -16,6 +16,8 @@ namespace UnityEngine
     /// </summary>
     internal interface ITimerContainer : IDisposable
     {
+        ITimerOperator this[int index] { get; }
+
         /// <summary>
         /// 精度表
         /// </summary>
@@ -42,14 +44,14 @@ namespace UnityEngine
         int RemainNum { get; }
 
         /// <summary>
-        /// 当前辅助定时器总数量
-        /// </summary>
-        int TotalNum { get; }
-
-        /// <summary>
         /// 取消定时器
         /// </summary>
         void Cancel();
+
+        /// <summary>
+        /// 开始定时器
+        /// </summary>
+        void Start();
 
         int ID { get; }
 
@@ -57,5 +59,17 @@ namespace UnityEngine
         /// 更新刷新List时间
         /// </summary>
         long UpdateCacheTime { get; }
+
+        string ToString();
+
+        /// <summary>
+        /// 推送更新
+        /// </summary>
+        void PushUpdate(ITimerExecutor timer);
+
+        /// <summary>
+        /// 推送更新
+        /// </summary>
+        public void PushUpdate(List<ITimerExecutor> timer);
     }
 }

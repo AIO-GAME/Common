@@ -8,23 +8,44 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using APool = Pool;
+using Unitx = Unit;
 
 namespace UnityEngine
 {
     /// <summary>
     /// 消耗型定时器
     /// </summary>
-    internal abstract class TimerOperator : ITimerOperator
+    public abstract class TimerOperator : ITimerOperator
     {
-        public byte Index { get; private set; }
+        /// <summary>
+        /// 获取新的定时器容器
+        /// </summary>
+        internal static ICollection<T> NewTimerOperator<T>() where T : TimerOperator, new()
+        {
+            var List = APool.List<T>();
+            foreach (var (AllSlot, Uint, Slot) in TimerSystem.TimingUnits)
+            {
+                var operators = Activator.CreateInstance<T>();
+                operators.Index = List.Count;
+                operators.Unit = Uint * Slot;
+                operators.SlotUnit = Slot;
+                operators.MaxCount = 2048;
+                operators.Slot = 0;
+                List.Add(operators);
+            }
 
-        public long Unit { get; private set; }
+            return List;
+        }
 
-        public long SlotUnit { get; private set; }
+        public int Index { get; protected set; }
 
-        public LinkedList<ITimerExecutor> Timers { get; private set; }
+        public long Unit { get; protected set; }
 
-        public List<ITimerExecutor> TimersCache { get; private set; }
+        public long SlotUnit { get; protected set; }
+
+        public LinkedList<ITimerExecutor> Timers { get; protected set; }
+
+        public List<ITimerExecutor> TimersCache { get; protected set; }
 
         /// <summary>
         /// 计算当前瞬间 定时器全部数量
@@ -37,23 +58,28 @@ namespace UnityEngine
             set => AllCount = value;
         }
 
-        public int MaxCount { get; private set; }
+        public int MaxCount { get; protected set; }
 
-        public long Slot { get; private set; }
+        public long Slot { get; protected set; }
 
         protected TimerOperator()
         {
+            TimersCache = APool.List<ITimerExecutor>();
+            Timers = APool.LinkedList<ITimerExecutor>();
+            Slot = 0;
+            MaxCount = 2048;
         }
 
-        protected TimerOperator(byte index, long unit, long slotUnit, int maxCount = 2048)
+        public TimerOperator(int index, long unit, long slotUnit, int maxCount = 2048)
         {
             TimersCache = APool.List<ITimerExecutor>();
             Timers = APool.LinkedList<ITimerExecutor>();
+            Slot = 0;
+            MaxCount = maxCount;
+
             Index = index;
             Unit = unit * slotUnit;
             SlotUnit = slotUnit;
-            MaxCount = maxCount;
-            Slot = 0;
         }
 
         public void Dispose()
@@ -70,41 +96,44 @@ namespace UnityEngine
             @string.Append("定时器序号:").Append(Index).AppendLine();
             @string.Append("计时单位:").Append(Unit).Append("ms").AppendLine();
             @string.Append("当前时间:").Append(Slot).AppendLine();
-            @string.Append("队列数量:").Append(Timers.Count).AppendLine();
-            @string.Append("队列信息:").AppendLine();
-            foreach (var item in Timers)
+            @string.Append("队列数量:").Append(Timers.Count);
+            if (Timers.Count > 0)
             {
-                @string.Append("[").Append(' ');
-                @string.Append("Count  =").Append(item.Duration).Append("ms").Append(' ');
-                @string.Append("Create =").Append(item.CreateTime).Append("ms").Append(' ');
-                @string.Append("End    =").Append(item.EndTime).Append("ms").Append(' ');
-                @string.Append("]").AppendLine();
+                @string.Append("\n队列信息:\n[");
+                foreach (var item in Timers)
+                {
+                    @string.AppendLine().Append("定时单位 =").Append(item.Duration).Append("ms").Append(' ');
+                    @string.Append("创建时间 =").Append(item.CreateTime).Append("ms").Append(' ');
+                    @string.Append("结束时间 =").Append(item.EndTime).Append("ms").Append(' ');
+                }
+
+                @string.AppendLine("\n]");
             }
 
             return @string.ToString();
         }
 
-        public void AddTimerSource(List<ITimerExecutor> timer)
-        {
-            if (timer.Count == 0) return;
-            AllCount += timer.Count;
-            TimersUpdate(timer);
-        }
-
-        public void AddTimerSource(ITimerExecutor timer)
+        public virtual void AddTimerSource(ITimerExecutor executor)
         {
             AllCount += 1;
-            TimersUpdate(timer);
+            TimersUpdate(executor);
+        }
+
+        public virtual void AddTimerSource(List<ITimerExecutor> executors)
+        {
+            if (executors.Count == 0) return;
+            AllCount += executors.Count;
+            TimersUpdate(executors);
         }
 
         /// <summary>
         /// 添加任务执行器 进入缓存
         /// </summary>
-        public void AddTimerCache(ITimerExecutor timer)
+        public virtual void AddTimerCache(ITimerExecutor executor)
         {
             lock (TimersCache)
             {
-                TimersCache.Add(timer);
+                TimersCache.Add(executor);
 
                 if (TimersCache.Count >= MaxCount)
                 {
@@ -117,12 +146,12 @@ namespace UnityEngine
             AllCount += 1;
         }
 
-        public void AddTimerCache(params ITimerExecutor[] timer)
+        public virtual void AddTimerCache(params ITimerExecutor[] executors)
         {
-            if (timer.Length == 0) return;
+            if (executors.Length == 0) return;
             lock (TimersCache)
             {
-                for (var i = 0; i < timer.Length; i++) TimersCache.Add(timer[i]);
+                for (var i = 0; i < executors.Length; i++) TimersCache.Add(executors[i]);
                 if (TimersCache.Count >= MaxCount)
                 {
                     TimersUpdate(TimersCache);
@@ -130,7 +159,7 @@ namespace UnityEngine
                 }
             }
 
-            AllCount += timer.Length;
+            AllCount += executors.Length;
         }
 
         public void SlotUpdate(long UpdateSlot = 1)
@@ -143,17 +172,17 @@ namespace UnityEngine
             Slot = 0;
         }
 
-        public void ReceiveFromData(ITimerOperator source)
+        public void ReceiveFromData(ITimerOperator @operator)
         {
-            Index = source.Index;
-            Slot = source.Slot;
-            SlotUnit = source.SlotUnit;
-            AllCount = source.AllCount;
-            MaxCount = source.MaxCount;
-            Unit = source.Unit;
+            Index = @operator.Index;
+            Slot = @operator.Slot;
+            SlotUnit = @operator.SlotUnit;
+            AllCount = @operator.AllCount;
+            MaxCount = @operator.MaxCount;
+            Unit = @operator.Unit;
 
-            TimersCache = source.TimersCache;
-            Timers = source.Timers;
+            TimersCache = @operator.TimersCache;
+            Timers = @operator.Timers;
         }
 
         public void TimersUpdate()
@@ -201,7 +230,12 @@ namespace UnityEngine
         {
             try
             {
-                executors.Sort((a, b) => a.EndTime < b.EndTime ? -1 : 1);
+                executors.Sort((a, b) =>
+                {
+                    if (a.EndTime > b.EndTime) return 1;
+                    if (a.EndTime < b.EndTime) return -1;
+                    return 0;
+                });
 
                 //当前为单项遍历 只遍历一次 准备优化为 双向遍历 只遍历一次
                 lock (Timers)

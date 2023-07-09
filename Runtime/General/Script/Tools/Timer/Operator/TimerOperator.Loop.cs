@@ -6,19 +6,33 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Text;
 using APool = Pool;
 
 namespace UnityEngine
 {
-    public class TimerOperatorAuto : TimerOperator
+    /// <summary>
+    /// 消耗型定时器
+    /// </summary>
+    internal class TimerOperatorLoop : TimerOperator
     {
-        public TimerOperatorAuto()
-        {
-        }
+        private Action<List<ITimerExecutor>> DoneEvent;
+        private Action<List<ITimerExecutor>> LoopEvent;
+        private Action<int, List<ITimerExecutor>> EvolutionEvent;
 
-        public TimerOperatorAuto(byte index, long unit, long slotUnit, int maxCount = 2048) : base(index, unit, slotUnit, maxCount)
+        public TimerOperatorLoop(
+            byte index,
+            long unit,
+            long slotUnit,
+            Action<List<ITimerExecutor>> doneEvent,
+            Action<List<ITimerExecutor>> loopEvent,
+            Action<int, List<ITimerExecutor>> evolutionEvent,
+            int maxCount = 2048
+        ) : base(index, unit, slotUnit, maxCount)
         {
+            DoneEvent = doneEvent;
+            LoopEvent = loopEvent;
+            EvolutionEvent = evolutionEvent;
         }
 
         public override int BottomUpdate(long nowTime)
@@ -34,10 +48,8 @@ namespace UnityEngine
                     var executor = Timers.First.Value;
                     if (executor.EndTime <= nowTime)
                     {
-                        //只有当Index为0的时候 才会出发此条件 并且再次加入队列
+                        FinshNumber++;
                         if (executor.UpdateLoop()) LoopList.Add(executor);
-                        else FinshNumber++;
-
                         DoneList.Add(executor);
                         Timers.RemoveFirst();
                     }
@@ -45,19 +57,18 @@ namespace UnityEngine
                 }
             }
 
-            AllCount = AllCount - LoopList.Count - DoneList.Count;
-            if (LoopList.Count > 0) TimerSystem.AddLoop(LoopList);
-            else LoopList.Free();
-
+            AllCount -= FinshNumber;
             if (DoneList.Count > 0)
             {
-                Task.Factory.StartNew(() =>
-                {
-                    for (var i = 0; i < DoneList.Count; i++) DoneList[i].Execute();
-                    DoneList.Free();
-                });
+                DoneEvent.Invoke(DoneList);
+                if (LoopList.Count > 0) LoopEvent.Invoke(LoopList);
+                else LoopList.Free();
             }
-            else DoneList.Free();
+            else
+            {
+                DoneList.Free();
+                LoopList.Free();
+            }
 
             return FinshNumber;
         }
@@ -81,8 +92,8 @@ namespace UnityEngine
 
             if (EvolutionList.Count > 0)
             {
-                AllCount = AllCount - EvolutionList.Count;
-                TimerSystem.UpdateSlot(Index - 1, EvolutionList);
+                AllCount -= EvolutionList.Count;
+                EvolutionEvent.Invoke(Index - 1, EvolutionList);
             }
             else EvolutionList.Free();
         }
