@@ -24,8 +24,11 @@ namespace UnityEngine
         /// <summary>
         /// 定时器索引
         /// </summary>
+#if UNITY_2021_1_OR_NEWER
         long TID { get; protected set; }
-
+#else
+        long TID { get; internal set; }
+#endif
         /// <summary>
         /// 创建时间 单位毫秒
         /// </summary>
