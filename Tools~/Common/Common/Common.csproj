@@ -255,6 +255,8 @@
     <Compile Include="Script\Tools\PList\PListPrimitives\PListReal.cs" />
     <Compile Include="Script\Tools\PList\PListPrimitives\PListString.cs" />
     <Compile Include="Script\Tools\PList\PListRoot.cs" />
+    <Compile Include="Script\Tools\PoolSystem\PoolSystem.cs" />
+    <Compile Include="Script\Tools\PoolSystem\PoolSystem.Static.cs" />
     <Compile Include="Script\Tools\Pool\Pool.cs" />
     <Compile Include="Script\Tools\Pool\Pool.Dictionary.cs" />
     <Compile Include="Script\Tools\Pool\Pool.Dispose.cs" />
@@ -266,6 +268,7 @@
     <Compile Include="Script\Tools\Pool\Pool.SortedList.cs" />
     <Compile Include="Script\Tools\Pool\Pool.Stack.cs" />
     <Compile Include="Script\Tools\Pool\Pool.Using.cs" />
+    <Compile Include="Script\Tools\Singleton\Singleton.cs" />
     <Compile Include="Script\Tools\Storage\Bin\Bin.Dictionary.cs" />
     <Compile Include="Script\Tools\Storage\Bin\Bin.HashSet.cs" />
     <Compile Include="Script\Tools\Storage\Bin\Bin.List.cs" />
