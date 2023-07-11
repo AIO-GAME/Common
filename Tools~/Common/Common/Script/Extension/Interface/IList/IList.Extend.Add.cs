@@ -54,7 +54,7 @@ namespace AIO
         /// <summary>
         /// 添加
         /// </summary>
-        public static void Add<T>(this IList<T> array, in IEnumerable<T> arrys)
+        public static void Add<T>(this IList<T> array, IEnumerable<T> arrys)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
             foreach (var item in arrys) array.Add(item);
@@ -63,7 +63,7 @@ namespace AIO
         /// <summary>
         /// 添加
         /// </summary>
-        public static void AddDicValue<T>(this IList<T> array, in IDictionary<object, T> arrys)
+        public static void AddDicValue<T>(this IList<T> array, IDictionary<object, T> arrys)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
             foreach (var item in arrys) array.Add(item.Value);
@@ -72,7 +72,7 @@ namespace AIO
         /// <summary>
         /// 添加
         /// </summary>
-        public static void AddDicKey<T>(this IList<T> array, in IDictionary<T, object> arrys)
+        public static void AddDicKey<T>(this IList<T> array, IDictionary<T, object> arrys)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
             foreach (var item in arrys) array.Add(item.Key);
@@ -81,7 +81,7 @@ namespace AIO
         /// <summary>
         /// 添加
         /// </summary>
-        public static void AddRange<T>(this IList<T> array, in IList<T> others, int start, int end)
+        public static void AddRange<T>(this IList<T> array, IList<T> others, int start, int end)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
             if (others == null || others.Count == 0) return;
