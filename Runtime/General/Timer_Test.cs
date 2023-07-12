@@ -49,7 +49,7 @@ public class Timer_Test : MonoBehaviour
 
         if (GULayout.Button("移除循环定时器"))
         {
-            TimerSystem.PopLoop(1000);
+            TimerSystem.Pop(1000);
         }
 
         if (GULayout.Button("清空计数"))

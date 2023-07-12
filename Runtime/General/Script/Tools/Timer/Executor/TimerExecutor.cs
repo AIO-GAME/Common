@@ -116,7 +116,7 @@ namespace UnityEngine
         /// </summary>
         public virtual bool UpdateLoop()
         {
-            if (Loop > 0)
+            if (Loop > 1)
             {
                 Number = Number + 1; //次数增加
                 CurrentTime = Watch.ElapsedMilliseconds;
@@ -127,7 +127,7 @@ namespace UnityEngine
                 return true;
             }
 
-            if (Loop == 0)
+            if (Loop == 1 || Loop == 0)
             {
                 Number = Number + 1; //次数增加
                 CurrentTime = Watch.ElapsedMilliseconds;
