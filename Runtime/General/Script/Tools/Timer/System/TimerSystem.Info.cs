@@ -84,7 +84,7 @@ namespace UnityEngine
 
         internal static List<(long, long, long)> TimingUnits { get; private set; }
 
-        private static Dictionary<long, ITimerExecutor> TimerExecutors;
+        internal static Dictionary<long, ITimerExecutor> TimerExecutors { get; private set; }
 
         /// <summary>
         /// 当前计时器计算单位 ms

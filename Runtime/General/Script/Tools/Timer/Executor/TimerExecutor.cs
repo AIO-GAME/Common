@@ -77,6 +77,14 @@ namespace UnityEngine
             Number = 0;
             Interval = 0;
             TID = tid;
+            if (TID != 0)
+            {
+                if (TimerSystem.TimerExecutors.ContainsKey(tid))
+                {
+                    Debug.LogErrorFormat("TimerSystem.PushLoop: {0} already exists", tid);
+                }
+                else TimerSystem.TimerExecutors.Add(tid, this);
+            }
         }
 
         /// <summary>
@@ -126,6 +134,8 @@ namespace UnityEngine
                 Interval = CurrentTime - (Number * Duration);
                 Watch.Stop();
                 Watch = null;
+                if (TID != 0 && TimerSystem.TimerExecutors.ContainsKey(TID))
+                    TimerSystem.TimerExecutors.Remove(TID);
                 return false; //达到次数
             }
 
@@ -144,6 +154,8 @@ namespace UnityEngine
             {
                 Watch.Stop();
                 Watch = null;
+                if (TID != 0 && TimerSystem.TimerExecutors.ContainsKey(TID))
+                    TimerSystem.TimerExecutors.Remove(TID);
                 return false;
             }
 
