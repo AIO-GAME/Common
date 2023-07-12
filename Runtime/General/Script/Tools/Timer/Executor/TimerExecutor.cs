@@ -22,7 +22,7 @@ namespace UnityEngine
     /// </summary>
     internal abstract class TimerExecutor<T> : ITimerExecutor<T> where T : Delegate
     {
-        protected long TID { get; set; }
+        protected long TID { get; set; } = 0;
 
         long ITimerExecutor.TID
         {
@@ -144,7 +144,6 @@ namespace UnityEngine
                 Number = Number + 1; //次数增加
                 CurrentTime = Watch.ElapsedMilliseconds;
                 Interval = CurrentTime - (Number * Duration);
-                // Console.WriteLine(ToString());
                 CreateTime = EndTime;
                 EndTime = Duration + CreateTime - Interval;
                 return true;
@@ -154,8 +153,6 @@ namespace UnityEngine
             {
                 Watch.Stop();
                 Watch = null;
-                if (TID != 0 && TimerSystem.TimerExecutors.ContainsKey(TID))
-                    TimerSystem.TimerExecutors.Remove(TID);
                 return false;
             }
 
@@ -189,13 +186,7 @@ namespace UnityEngine
 
         public void Execute()
         {
-            if (Loop == -2)
-            {
-                Dispose();
-                return;
-            }
-
-            if (Delegates is null)
+            if (Loop == -2 || Delegates is null)
             {
                 Dispose();
                 return;

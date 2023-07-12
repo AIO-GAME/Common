@@ -92,10 +92,9 @@ namespace UnityEngine
         /// <summary>
         /// 添加定时任务处理器
         /// </summary>
-        public static void PushLoop(string tidstring, long duration, Action delegateValue)
+        public static void PushLoop(string tid, long duration, Action delegateValue)
         {
-            var tid = tidstring.GetHashCode();
-            AddUpdate(new TimerExecutorAction(tid, duration, -1, Counter, delegateValue));
+            AddUpdate(new TimerExecutorAction(tid.GetHashCode(), duration, -1, Counter, delegateValue));
         }
 
         /// <summary>
@@ -121,27 +120,35 @@ namespace UnityEngine
         /// </summary>
         public static void Pop(long tid)
         {
-            if (!TimerExecutors.TryGetValue(tid, out var executor)) return;
-            executor.Loop = -2;
+            if (!TimerExecutors.ContainsKey(tid)) return;
+            TimerExecutors[tid].Loop = -2;
             TimerExecutors.Remove(tid);
         }
 
         /// <summary>
         /// 取出循环任务
         /// </summary>
-        public static void Pop(string tidstring)
+        public static void Pop(string tidstrtiding)
         {
-            var tid = tidstring.GetHashCode();
-            if (!TimerExecutors.TryGetValue(tid, out var executor)) return;
-            executor.Loop = -2;
-            TimerExecutors.Remove(tid);
+            var tid = tidstrtiding.GetHashCode();
+            if (TimerExecutors.ContainsKey(tid))
+            {
+                TimerExecutors[tid].Loop = -2;
+                TimerExecutors.Remove(tid);
+            }
         }
 
+        /// <summary>
+        /// 判断任务是否存在
+        /// </summary>
         public static bool Exist(long tid)
         {
             return TimerExecutors.ContainsKey(tid);
         }
 
+        /// <summary>
+        /// 判断任务是否存在
+        /// </summary>
         public static bool Exist(string tid)
         {
             return TimerExecutors.ContainsKey(tid.GetHashCode());

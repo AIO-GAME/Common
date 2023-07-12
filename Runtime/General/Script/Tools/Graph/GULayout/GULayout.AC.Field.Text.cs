@@ -30,22 +30,32 @@ namespace UnityEngine
 
         /// <summary> 文本文本框 FieldText </summary>
         /// <param name="label">标签</param>
-        /// <param name="text">值</param>
+        /// <param name="style">显示风格</param>
         /// <param name="options">排版格式</param>
-        public static string Field(string label, GUIStyle text, params GUILayoutOption[] options)
+        public static string Field(string label, GUIStyle style, params GUILayoutOption[] options)
         {
-            return GUILayout.TextField(label, text, options);
+            return GUILayout.TextField(label, style, options);
         }
 
         /// <summary> 文本文本框 FieldText </summary>
         /// <param name="label">标签</param>
-        /// <param name="text">值</param>
+        /// <param name="style">显示风格</param>
         /// <param name="options">排版格式</param>
-        public static string Field(string label, string text, params GUILayoutOption[] options)
+        public static string Field(string label, string style, params GUILayoutOption[] options)
         {
-            return GUILayout.TextField(label, text, options);
+            return GUILayout.TextField(label, style, options);
         }
 
         #endregion
+
+
+        /// <summary> 文本文本框 FieldText </summary>
+        /// <param name="label">标签</param>
+        /// <param name="value">值</param>
+        /// <param name="options">排版格式</param>
+        public static int Field(string label, int value, params GUILayoutOption[] options)
+        {
+            return int.Parse(GUILayout.TextField(label, value, options));
+        }
     }
 }
