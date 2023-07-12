@@ -103,8 +103,68 @@ public partial class UnityAsync
             instance.StartCoroutine(coroutines[i]());
     }
 
+    #region StopCoroutine
+
     /// <summary>
-    /// 执行协程
+    /// 结束协程
+    /// </summary>
+    public static void StopCoroutine<T>(T coroutines) where T : IEnumerator
+    {
+        if (instance == null) return;
+        instance.StopCoroutine(coroutines);
+    }
+
+    /// <summary>
+    /// 结束协程
+    /// </summary>
+    public static void StopCoroutine(Coroutine coroutines)
+    {
+        if (instance == null) return;
+        instance.StopCoroutine(coroutines);
+    }
+
+    /// <summary>
+    /// 结束协程
+    /// </summary>
+    public static void StopCoroutine<T>(Func<T> coroutines) where T : IEnumerator
+    {
+        if (instance == null) return;
+        instance.StopCoroutine(coroutines());
+    }
+
+    /// <summary>
+    /// 结束协程
+    /// </summary>
+    public static void StopCoroutine(Func<Coroutine> coroutines)
+    {
+        if (instance == null) return;
+        instance.StopCoroutine(coroutines());
+    }
+
+    /// <summary>
+    /// 结束协程
+    /// </summary>
+    public static void StopCoroutine<T>(IList<Func<T>> coroutines) where T : IEnumerator
+    {
+        if (instance is null || coroutines is null) return;
+        for (var i = 0; i < coroutines.Count; i++)
+            instance.StopCoroutine(coroutines[i]());
+    }
+
+    /// <summary>
+    /// 结束协程
+    /// </summary>
+    public static void StopCoroutine(IList<Func<Coroutine>> coroutines)
+    {
+        if (instance is null || coroutines is null) return;
+        for (var i = 0; i < coroutines.Count; i++)
+            instance.StopCoroutine(coroutines[i]());
+    }
+
+    #endregion
+
+    /// <summary>
+    /// 执行
     /// </summary>
     public static void ExecuteInUpdate<T>(T coroutine1, T coroutine2) where T : IEnumerator
     {
