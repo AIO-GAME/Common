@@ -255,8 +255,10 @@
     <Compile Include="Script\Tools\PList\PListPrimitives\PListReal.cs" />
     <Compile Include="Script\Tools\PList\PListPrimitives\PListString.cs" />
     <Compile Include="Script\Tools\PList\PListRoot.cs" />
-    <Compile Include="Script\Tools\PoolSystem\PoolSystem.cs" />
-    <Compile Include="Script\Tools\PoolSystem\PoolSystem.Static.cs" />
+    <Compile Include="Script\Tools\PoolSystem\List\PoolSystem.cs" />
+    <Compile Include="Script\Tools\PoolSystem\List\PoolSystem.Static.cs" />
+    <Compile Include="Script\Tools\PoolSystem\Type\PoolTypeSystem.cs" />
+    <Compile Include="Script\Tools\PoolSystem\Type\PoolTypeSystem.Static.cs" />
     <Compile Include="Script\Tools\Pool\Pool.cs" />
     <Compile Include="Script\Tools\Pool\Pool.Dictionary.cs" />
     <Compile Include="Script\Tools\Pool\Pool.Dispose.cs" />

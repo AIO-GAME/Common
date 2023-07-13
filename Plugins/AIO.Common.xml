@@ -6356,7 +6356,7 @@
         </member>
         <member name="T:AIO.PoolSystem`2">
             <summary>
-            对象池系统
+            一维对象池系统
             </summary>
             <typeparam name="E">对象池泛型</typeparam>
             <typeparam name="T">实体泛型</typeparam>
@@ -6369,12 +6369,6 @@
         <member name="M:AIO.PoolSystem`2.GetEID(`1)">
             <summary>
              获取实体唯一ID
-            </summary>
-            <param name="entity">实体</param>
-        </member>
-        <member name="M:AIO.PoolSystem`2.GetTID(`1)">
-            <summary>
-             获取配置类型唯一ID
             </summary>
             <param name="entity">实体</param>
         </member>
@@ -6406,11 +6400,6 @@
         <member name="P:AIO.PoolSystem`2.FreePool">
             <summary>
             空闲的对象
-            </summary>
-        </member>
-        <member name="P:AIO.PoolSystem`2.Surviving">
-            <summary>
-            存活的对象
             </summary>
         </member>
         <member name="M:AIO.PoolSystem`2.CreateInstance">
@@ -6466,7 +6455,130 @@
             </summary>
             <param name="entity">实体</param>
         </member>
+        <member name="M:AIO.PoolSystem`2.Recycle(System.Int32)">
+            <summary>
+            回收对象
+            </summary>
+            <param name="eid">实体ID</param>
+        </member>
         <member name="M:AIO.PoolSystem`2.RecycleBusy">
+            <summary>
+            回收所有正在使用的对象
+            </summary>
+        </member>
+        <member name="T:AIO.PoolTypeSystem`2">
+            <summary>
+            二维对象池系统
+            </summary>
+            <typeparam name="E">对象池泛型</typeparam>
+            <typeparam name="T">实体泛型</typeparam>
+        </member>
+        <member name="M:AIO.PoolTypeSystem`2.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.PoolTypeSystem`2.GetEID(`1)">
+            <summary>
+             获取实体唯一ID
+            </summary>
+            <param name="entity">实体</param>
+        </member>
+        <member name="M:AIO.PoolTypeSystem`2.GetTID(`1)">
+            <summary>
+             获取配置类型唯一ID
+            </summary>
+            <param name="entity">实体</param>
+        </member>
+        <member name="M:AIO.PoolTypeSystem`2.ClearCache">
+            <summary>
+             清空缓存数据
+            </summary>
+        </member>
+        <member name="M:AIO.PoolTypeSystem`2.Dispose">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="P:AIO.PoolTypeSystem`2.Instance">
+            <summary>
+            实例
+            </summary>
+        </member>
+        <member name="P:AIO.PoolTypeSystem`2.HasInstance">
+            <summary>
+            是否存在实例
+            </summary>
+        </member>
+        <member name="P:AIO.PoolTypeSystem`2.BusyPool">
+            <summary>
+            使用中的对象
+            </summary>
+        </member>
+        <member name="P:AIO.PoolTypeSystem`2.FreePool">
+            <summary>
+            空闲的对象
+            </summary>
+        </member>
+        <member name="P:AIO.PoolTypeSystem`2.Surviving">
+            <summary>
+            存活的对象
+            </summary>
+        </member>
+        <member name="M:AIO.PoolTypeSystem`2.CreateInstance">
+            <summary>
+            初始化系统
+            </summary>
+        </member>
+        <member name="M:AIO.PoolTypeSystem`2.UnInstall">
+            <summary>
+            卸载系统
+            </summary>
+        </member>
+        <member name="M:AIO.PoolTypeSystem`2.GetBusyPool">
+            <summary>
+            获取使用中的对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.PoolTypeSystem`2.GetSurviving(System.Int32@)">
+            <summary>
+            获取单位类型
+            </summary>
+            <param name="id">实例ID</param>
+            <returns>实例单位对象</returns>
+        </member>
+        <member name="M:AIO.PoolTypeSystem`2.GetSurviving(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            获取单位类型
+            </summary>
+            <param name="ids">实例ID列表</param>
+            <returns>实例单位对象</returns>
+        </member>
+        <member name="M:AIO.PoolTypeSystem`2.ClearCacheData">
+            <summary>
+            清理缓存数据
+            </summary>
+        </member>
+        <member name="M:AIO.PoolTypeSystem`2.AddSurviving(`1)">
+            <summary>
+             添加存活对象
+            </summary>
+            <param name="entity">实体</param>
+        </member>
+        <member name="M:AIO.PoolTypeSystem`2.RemoveSurviving(`1)">
+            <summary>
+            移除存活对象
+            </summary>
+            <param name="entity">实体</param>
+        </member>
+        <member name="M:AIO.PoolTypeSystem`2.Recycle(`1)">
+            <summary>
+            回收对象
+            </summary>
+            <param name="entity">实体</param>
+        </member>
+        <member name="M:AIO.PoolTypeSystem`2.RecycleBusy">
             <summary>
             回收所有正在使用的对象
             </summary>
