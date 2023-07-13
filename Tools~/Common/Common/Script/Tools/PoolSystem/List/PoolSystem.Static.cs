@@ -41,17 +41,12 @@ namespace AIO
         /// <summary>
         /// 使用中的对象
         /// </summary>
-        protected static Dictionary<int, List<E>> BusyPool { get; private set; }
+        protected static Dictionary<int, E> BusyPool { get; private set; }
 
         /// <summary>
         /// 空闲的对象
         /// </summary>
-        protected static Dictionary<int, Queue<E>> FreePool { get; private set; }
-
-        /// <summary>
-        /// 存活的对象
-        /// </summary>
-        protected static Dictionary<int, E> Surviving { get; private set; }
+        protected static Queue<E> FreePool { get; private set; }
 
         /// <summary>
         /// 初始化系统
@@ -70,7 +65,6 @@ namespace AIO
         {
             BusyPool.Free();
             FreePool.Free();
-            Surviving.Free();
             mInstance.Dispose();
             mInstance = null;
         }
@@ -97,7 +91,7 @@ namespace AIO
         /// <returns>实例单位对象</returns>
         public static E GetSurviving(in int id)
         {
-            if (Surviving.ContainsKey(id)) return Surviving[id];
+            if (BusyPool.ContainsKey(id)) return BusyPool[id];
             throw new KeyNotFoundException(string.Format("对象不存在 ID -> {0}", id));
         }
 
@@ -111,7 +105,7 @@ namespace AIO
             var list = Pool.List<E>();
             foreach (var id in ids)
             {
-                if (Surviving.ContainsKey(id)) list.Add(Surviving[id]);
+                if (BusyPool.ContainsKey(id)) list.Add(BusyPool[id]);
                 throw new KeyNotFoundException(string.Format("对象不存在 ID -> {0}", id));
             }
 
@@ -137,7 +131,7 @@ namespace AIO
         protected static void AddSurviving(E entity)
         {
             var eid = Instance.GetEID(entity);
-            if (!Surviving.ContainsKey(eid)) Surviving.Add(eid, entity);
+            if (!BusyPool.ContainsKey(eid)) BusyPool.Add(eid, entity);
         }
 
         /// <summary>
@@ -147,7 +141,7 @@ namespace AIO
         protected static void RemoveSurviving(E entity)
         {
             var eid = Instance.GetEID(entity);
-            if (Surviving.ContainsKey(eid)) Surviving.Remove(eid);
+            if (BusyPool.ContainsKey(eid)) BusyPool.Remove(eid);
         }
 
         /// <summary>
@@ -156,38 +150,34 @@ namespace AIO
         /// <param name="entity">实体</param>
         public static void Recycle(E entity)
         {
-            var tid = Instance.GetTID(entity);
-
-            if (BusyPool.ContainsKey(tid))
-                BusyPool[tid].Remove(entity);
-            else
-                BusyPool.Add(tid, Pool.List<E>());
-
-            if (!FreePool.ContainsKey(tid))
-                FreePool.Add(tid, Pool.Queue<E>());
-
-            FreePool[tid].Enqueue(entity);
-
+            FreePool.Enqueue(entity);
             RemoveSurviving(entity);
         }
 
+        /// <summary>
+        /// 回收对象
+        /// </summary>
+        /// <param name="eid">实体ID</param>
+        public static void Recycle(int eid)
+        {
+            if (BusyPool.TryGetValue(eid, out var entity))
+            {
+                FreePool.Enqueue(entity);
+                RemoveSurviving(entity);
+            }
+        }
 
         /// <summary>
         /// 回收所有正在使用的对象
         /// </summary>
         public static void RecycleBusy()
         {
-            foreach (var item in BusyPool)
+            foreach (var entity in BusyPool)
             {
-                foreach (var entity in item.Value)
-                {
-                    var eid = Instance.GetEID(entity);
-                    FreePool[eid].Enqueue(entity);
-                    RemoveSurviving(entity);
-                }
-
-                item.Value.Clear();
+                FreePool.Enqueue(entity.Value);
             }
+
+            BusyPool.Clear();
         }
     }
 }

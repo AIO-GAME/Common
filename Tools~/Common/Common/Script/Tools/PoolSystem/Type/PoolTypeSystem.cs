@@ -12,16 +12,16 @@ using AIO;
 namespace AIO
 {
     /// <summary>
-    /// 对象池系统
+    /// 二维对象池系统
     /// </summary>
     /// <typeparam name="E">对象池泛型</typeparam>
     /// <typeparam name="T">实体泛型</typeparam>
-    public abstract partial class PoolSystem<T, E> : IDisposable where T : PoolSystem<T, E>, new()
+    public abstract partial class PoolTypeSystem<T, E> : IDisposable where T : PoolTypeSystem<T, E>, new()
     {
         /// <summary>
         /// 构造函数
         /// </summary>
-        public PoolSystem()
+        public PoolTypeSystem()
         {
             BusyPool = Pool.Dictionary<int, List<E>>();
             FreePool = Pool.Dictionary<int, Queue<E>>();
