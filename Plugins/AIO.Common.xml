@@ -508,6 +508,11 @@
             格式化
             </summary>
         </member>
+        <member name="M:AIO.StringExtend.Format(System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            格式化
+            </summary>
+        </member>
         <member name="M:AIO.StringExtend.GetBytesLength(System.String)">
             <summary>
             获取字节长度
