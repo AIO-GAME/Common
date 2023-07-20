@@ -181,8 +181,7 @@ namespace AIO
             {
                 foreach (var entity in item.Value)
                 {
-                    var eid = Instance.GetEID(entity);
-                    FreePool[eid].Enqueue(entity);
+                    FreePool[Instance.GetTID(entity)].Enqueue(entity);
                     RemoveSurviving(entity);
                 }
 
