@@ -70,7 +70,7 @@ namespace UnityEngine
         public void Cancel()
         {
             if (TaskHandle is null) return;
-            if (!TaskHandle.IsCompleted) TaskHandleTokenSource.Cancel(true);
+            if (!TaskHandle.IsCompleted) TaskHandleTokenSource?.Cancel(true);
             else TaskHandle.Dispose();
         }
 

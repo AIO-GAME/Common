@@ -20,5 +20,22 @@ namespace AIO
         {
             return string.Format(format, formattingArgs.Select(a => a as object).ToArray());
         }
+
+        /// <summary>
+        /// 格式化
+        /// </summary>
+        public static string Format(this string format, params int[] formattingArgs)
+        {
+            return string.Format(format, formattingArgs.Select(a => a as object).ToArray());
+        }
+
+
+        /// <summary>
+        /// 格式化
+        /// </summary>
+        public static string Format(this string format, int arg1, int arg2, int arg3)
+        {
+            return string.Format(format, arg1, arg2, arg3);
+        }
     }
 }
