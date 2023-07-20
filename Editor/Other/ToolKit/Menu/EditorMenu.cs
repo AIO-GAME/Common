@@ -14,7 +14,7 @@ namespace AIO.Unity.Editor
         static Package()
         {
             var regex = new Regex(RegexName);
-            foreach (var info in  UtilsGen.IO.GetFoldersInfo(Application.dataPath.Replace("Assets", "Packages")))
+            foreach (var info in UtilsGen.IO.GetFoldersInfo(Application.dataPath.Replace("Assets", "Packages")))
                 if (regex.IsMatch(info.Name))
                     URL = info.FullName;
         }
@@ -25,7 +25,8 @@ namespace AIO.Unity.Editor
         internal const string Command_Git_Commit = "Git Commit";
         internal const string Command_Git_Upload = "Git Upload";
         internal const string Command_Git_Remote_Pull = "Git Remote Pull";
-
+        internal const string Command_Git_Clean_FDX = "Git Clean";
+        
 #if MONKEYCOMMANDER
         [MonKey.Command(Command_Git_Remote_Pull + " " + Label,
             Help = "设置远端GIT库 | Setting Remote Git Library",
@@ -40,6 +41,12 @@ namespace AIO.Unity.Editor
         public static void GitRemoteSetUrl()
         {
             PrPlatform.Git.RemoteSetUrl(URL, false).Async();
+        }
+
+        [MenuItem("Package/" + Command_Git_Clean_FDX + "/" + Label)]
+        public static void GitClean()
+        {
+            PrGit.Clean.ForceDirectoryx(URL).Async();
         }
 
 #if MONKEYCOMMANDER
