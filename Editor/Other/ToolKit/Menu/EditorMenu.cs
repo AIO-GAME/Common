@@ -26,7 +26,7 @@ namespace AIO.Unity.Editor
         internal const string Command_Git_Upload = "Git Upload";
         internal const string Command_Git_Remote_Pull = "Git Remote Pull";
         internal const string Command_Git_Clean_FDX = "Git Clean";
-        
+
 #if MONKEYCOMMANDER
         [MonKey.Command(Command_Git_Remote_Pull + " " + Label,
             Help = "设置远端GIT库 | Setting Remote Git Library",
@@ -44,9 +44,9 @@ namespace AIO.Unity.Editor
         }
 
         [MenuItem("Package/" + Command_Git_Clean_FDX + "/" + Label)]
-        public static void GitClean()
+        public static async void GitClean()
         {
-            PrGit.Clean.ForceDirectoryx(URL).Async();
+            await PrGit.Clean.ForceDirectoryx(URL).Async();
         }
 
 #if MONKEYCOMMANDER
