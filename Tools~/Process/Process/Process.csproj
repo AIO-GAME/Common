@@ -72,6 +72,7 @@
     <Compile Include="Script\Category\Git\PrGit.Init.cs" />
     <Compile Include="Script\Category\Git\PrGit.Pull.cs" />
     <Compile Include="Script\Category\Git\PrGit.Remote.cs" />
+    <Compile Include="Script\Category\Git\PrGit.Reset.cs" />
     <Compile Include="Script\Category\Git\PrGit.Submodule.cs" />
     <Compile Include="Script\Category\Git\PrGit.Upload.cs" />
     <Compile Include="Script\Category\Mac\DateTime\Cal\PrMacCal.cs" />

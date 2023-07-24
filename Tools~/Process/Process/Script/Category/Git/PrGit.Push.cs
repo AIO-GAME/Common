@@ -8,9 +8,6 @@ using System;
 
 namespace AIO
 {
-    /// <summary>
-    /// Push
-    /// </summary>
     public partial class PrGit
     {
         /// <summary>

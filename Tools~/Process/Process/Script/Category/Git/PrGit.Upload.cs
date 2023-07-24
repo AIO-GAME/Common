@@ -6,9 +6,6 @@
 
 namespace AIO
 {
-    /// <summary>
-    /// Git[WIN][MAC][LINUX]
-    /// </summary>
     public partial class PrGit
     {
         /// <summary>
