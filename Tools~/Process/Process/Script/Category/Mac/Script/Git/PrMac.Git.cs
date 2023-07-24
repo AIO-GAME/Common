@@ -28,6 +28,7 @@ namespace AIO
                     Console.WriteLine("{0} 未安装 程序自动安装中 Missing : {1}", CMD_Git, result.StdOut);
                     Brew.Install(CMD_Git).Sync();
                 }
+
                 GITPATH = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, string.Concat(AppDomain.CurrentDomain.BaseDirectory.GetHashCode(), ".sh"));
             }
 
@@ -90,6 +91,53 @@ namespace AIO
 
                 File.WriteAllText(GITPATH, co.ToString(), Encoding.UTF8);
                 return Open.Shell(GITPATH);
+            }
+
+            #endregion
+
+            #region Clean
+
+            /// <summary>
+            /// 拉取
+            /// </summary>
+            /// <param name="targets">文件路径列表</param>
+            /// <param name="agrs">参数</param>
+            /// <param name="quit">静默退出</param>
+            public static IExecutor Clean(ICollection<string> targets, string agrs = "-fd -x", bool quit = true)
+            {
+                if (targets == null) throw new ArgumentNullException(nameof(targets));
+                if (targets.Count == 0) return null;
+                var str = new StringBuilder();
+                foreach (var target in targets)
+                {
+                    if (string.IsNullOrEmpty(target)) throw new ArgumentNullException(nameof(target));
+                    str.AppendLine(LINE_TOP);
+                    if (!Directory.Exists(target))
+                    {
+                        str.AppendFormat("\n echo $\"Error:{0}$\" \n", new FileNotFoundException(nameof(target), target).Message);
+                    }
+                    else
+                    {
+                        str.AppendLine(string.Format("path=\"{0}\"", target.Replace('\\', '/')));
+                        str.AppendLine("echo $\"${path}\" && chmod 777 ${path} && cd ${path}");
+                        str.AppendLine($"git clean {agrs}");
+                    }
+
+                    str.AppendLine(LINE_BOTTOM);
+                }
+
+                return Execute(str, quit);
+            }
+
+            /// <summary>
+            /// 拉取
+            /// </summary>
+            /// <param name="agrs">参数</param>
+            /// <param name="target">文件路径</param>
+            /// <param name="quit">静默退出</param>
+            public static IExecutor Clean(string target, string agrs = "-fd -x", bool quit = true)
+            {
+                return Clean(new string[] { target }, agrs, quit);
             }
 
             #endregion
