@@ -23,7 +23,7 @@ namespace AIO.Unity.Editor
         /// <summary>
         /// 生成
         /// </summary>
-        [MenuItem("Git/~~~Generate~~~")]
+        [MenuItem("Git/~~~Generate~~~", false, 999)]
         internal static void Generate()
         {
             var dataPath = Application.dataPath.Replace("Assets", "");
