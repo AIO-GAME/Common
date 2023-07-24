@@ -2014,6 +2014,22 @@
             执行文件
             </summary>
         </member>
+        <member name="M:AIO.PrMac.Git.Clean(System.Collections.Generic.ICollection{System.String},System.String,System.Boolean)">
+            <summary>
+            拉取
+            </summary>
+            <param name="targets">文件路径列表</param>
+            <param name="agrs">参数</param>
+            <param name="quit">静默退出</param>
+        </member>
+        <member name="M:AIO.PrMac.Git.Clean(System.String,System.String,System.Boolean)">
+            <summary>
+            拉取
+            </summary>
+            <param name="agrs">参数</param>
+            <param name="target">文件路径</param>
+            <param name="quit">静默退出</param>
+        </member>
         <member name="M:AIO.PrMac.Git.RemoteSetUrl(System.String,System.Boolean)">
             <summary>
             设置远端镜像库
@@ -3463,6 +3479,22 @@
             <param name="target">文件路径</param>
             <param name="quit">静默退出</param>
         </member>
+        <member name="M:AIO.PrWin.Git.Clean(System.Collections.Generic.ICollection{System.String},System.String,System.Boolean)">
+            <summary>
+            清空修改的文件
+            </summary>
+            <param name="targets">文件路径列表</param>
+            <param name="args">参数</param>
+            <param name="quit">静默退出</param>
+        </member>
+        <member name="M:AIO.PrWin.Git.Clean(System.String,System.String,System.Boolean)">
+            <summary>
+            添加修改的文件
+            </summary>
+            <param name="target">文件路径</param>
+            <param name="args">参数</param>
+            <param name="quit">静默退出</param>
+        </member>
         <member name="M:AIO.PrWin.Git.Clone(System.String,System.Collections.Generic.ICollection{System.String},System.Boolean)">
             <summary>
             克隆
@@ -4471,6 +4503,24 @@
             <param name="quit"></param>
             <returns></returns>
             <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Clean(System.Collections.Generic.ICollection{System.String},System.String,System.Boolean)">
+            <summary>
+            Git 添加
+            </summary>
+            <param name="targets">目标路径</param>
+            <param name="args">参数</param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Clean(System.String,System.String,System.Boolean)">
+            <summary>
+            Git 添加
+            </summary>
+            <param name="targets">目标路径</param>
+            <param name="args">参数</param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
         </member>
         <member name="T:AIO.PrPlatform.Open">
             <summary>

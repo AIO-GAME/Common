@@ -421,6 +421,52 @@ namespace AIO
                     default: throw new NotImplementedException();
                 }
             }
+
+            /// <summary>
+            /// Git 添加
+            /// </summary>
+            /// <param name="targets">目标路径</param>
+            /// <param name="args">参数</param>
+            /// <param name="quit">静默退出</param>
+            /// <exception cref="NotImplementedException">未实现</exception>
+            public static IExecutor Clean(ICollection<string> targets, string args = "-fd -x", bool quit = false)
+            {
+                switch (Environment.OSVersion.Platform)
+                {
+                    case PlatformID.Win32NT:
+                    case PlatformID.Win32S:
+                    case PlatformID.Win32Windows:
+                    case PlatformID.WinCE:
+                        return PrWin.Git.Clean(targets, args, quit);
+                    case PlatformID.MacOSX:
+                    case PlatformID.Unix:
+                        return PrMac.Git.Clean(targets, args, quit);
+                    default: throw new NotImplementedException();
+                }
+            }
+
+            /// <summary>
+            /// Git 添加
+            /// </summary>
+            /// <param name="targets">目标路径</param>
+            /// <param name="args">参数</param>
+            /// <param name="quit">静默退出</param>
+            /// <exception cref="NotImplementedException">未实现</exception>
+            public static IExecutor Clean(string targets, string args = "-fd -x", bool quit = false)
+            {
+                switch (Environment.OSVersion.Platform)
+                {
+                    case PlatformID.Win32NT:
+                    case PlatformID.Win32S:
+                    case PlatformID.Win32Windows:
+                    case PlatformID.WinCE:
+                        return PrWin.Git.Clean(targets, args, quit);
+                    case PlatformID.MacOSX:
+                    case PlatformID.Unix:
+                        return PrMac.Git.Clean(targets, args, quit);
+                    default: throw new NotImplementedException();
+                }
+            }
         }
     }
 }

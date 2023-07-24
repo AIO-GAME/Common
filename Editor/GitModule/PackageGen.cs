@@ -9,9 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using UnityEditor;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
@@ -20,38 +18,41 @@ namespace AIO.Unity.Editor
     /// <summary>
     /// PackageGen
     /// </summary>
-    internal class PackageGen
+    internal static partial class PackageGen
     {
         /// <summary>
         /// 生成
         /// </summary>
-        [MenuItem("Package/~~~测试~~~/生成")]
+        [MenuItem("Git/~~~Generate~~~")]
         internal static void Generate()
         {
-            var search = Client.Search("com.blz.package");
+            var dataPath = Application.dataPath.Replace("Assets", "");
+
             var packageInfos = AssetDatabase.FindAssets("package", new string[] { "Packages" })
                 .Select(AssetDatabase.GUIDToAssetPath)
                 .Where(x => AssetDatabase.LoadAssetAtPath<TextAsset>(x) != null)
                 .Select(PackageInfo.FindForAssetPath)
                 .GroupBy(x => x.assetPath)
-                .Select(y => y.First())
-                .Where(x => Directory.Exists(Path.Combine(x.assetPath, ".git")))
+                .Select(x => x.First())
+                .Where(x => Directory.Exists(Path.Combine(dataPath, x.resolvedPath, ".git")))
                 .ToList();
             CreateTemplate(packageInfos);
         }
 
         private const string CMD_Git = "Git";
-        internal const string CMD_Git_Pull = "Pull";
-        internal const string CMD_Git_Push = "Push";
-        internal const string CMD_Git_Add = "Add";
-        internal const string CMD_Git_Commit = "Commit";
-        internal const string CMD_Git_Upload = "Upload";
-        internal const string CMD_Git_Remote_Pull = "Remote Pull";
-        internal const string CMD_Git_Clean_FDX = "Clean";
+        internal const string CMD_Git_Pull = nameof(PrPlatform.Git.Pull);
+        internal const string CMD_Git_Push = nameof(PrPlatform.Git.Push);
+        internal const string CMD_Git_Add = nameof(PrPlatform.Git.Add);
+        internal const string CMD_Git_Commit = nameof(PrPlatform.Git.Commit);
+        internal const string CMD_Git_Upload = nameof(PrPlatform.Git.Upload);
+        internal const string CMD_Git_RemoteSetUrl = nameof(PrPlatform.Git.RemoteSetUrl);
+        internal const string CMD_Git_Clean = nameof(PrPlatform.Git.Clean);
+        internal const string CMD_Git_Clone = nameof(PrPlatform.Git.Clone);
 
         public static void CreateTemplate(IEnumerable<PackageInfo> infos)
         {
-            var OutPath = Application.dataPath.Replace("Assets", "Packages/com.blz.package/Editor/GitModule/AutomaticGeneration");
+            var ProjectPath = Application.dataPath.Replace("Assets", "");
+            var OutPath = Path.Combine(ProjectPath, "Packages/com.blz.package/Editor/GitModule/AutomaticGeneration");
 
             const string tips = @"/*|============================================|*|
 |*|Author:        |*|Automatic Generation      |*|
@@ -62,32 +63,99 @@ namespace AIO.Unity.Editor
     using UnityEditor;
     using UnityEngine;
 ";
+            const string URL = "Application.dataPath.Replace(\"Assets\", URL)";
 
             var savaDir = new Dictionary<string, string>();
             var str = new StringBuilder();
+            int index;
 
             foreach (var info in infos)
             {
+                index = 1;
                 str.Clear();
                 str.AppendFormat(tips, DateTime.Now.ToString("yyyy-MM-dd")).Append("\r\n\r\n");
                 str.AppendFormat("namespace {0}\r\n{1}", "AIO.Unity.Editor", "{");
                 str.AppendFormat("{0}\r\n", usings);
 
-                str.AppendFormat("    /// <summary>\r\n    /// Git管理 {0}\r\n    /// </summary>\r\n", info.displayName);
-                str.AppendFormat("    internal static partial class Git_{0}\r\n", info.name.Replace('.', '_').ToUpper()).Append("    {\r\n");
+                str.AppendFormat("    /// <summary>\r\n    /// Git Manager {0}\r\n    /// </summary>\r\n", info.displayName);
+                str.AppendFormat("    internal static partial class Git_{0}\r\n", info.name.Replace('-', '_').Replace('.', '_').ToUpper()).Append("    {\r\n");
 
-                str.AppendFormat("        internal const string URL = \"{0}\";\r\n", info.assetPath);
+                str.AppendFormat("        internal const string URL = \"{0}\";\r\n", info.resolvedPath.Replace('\\', '/').Replace(ProjectPath, ""));
                 str.AppendFormat("        internal const string DisplayName = \"{0}\";\r\n", info.displayName);
                 str.AppendFormat("        internal const string PackageName = \"{0}\";\r\n", info.name);
 
-                str.AppendFormat("        [MenuItem(\"{0}/{1}/\" + DisplayName)]\r\n",
-                    CMD_Git, CMD_Git_Add);
-                str.AppendFormat("        internal static async void {0}()\r\n{1}",
-                    nameof(CMD_Git_Add), "        {\r\n");
-                str.AppendFormat("            await PrPlatform.Git.{0}(Application.dataPath.Replace(\"Assets\", URL), false).Async();\r\n{1}",
-                    CMD_Git_Add, "        }\r\n");
+                {
+                    str.AppendLine();
+                    str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false, {2})]\r\n",
+                        CMD_Git, "添加", ++index);
+                    str.AppendFormat("        internal static async void {0}()\r\n{1}",
+                        nameof(CMD_Git_Add), "        {\r\n");
+                    str.AppendFormat("            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
+                        CMD_Git_Add, URL, "        }\r\n");
+                }
 
-                str.Append("\r\n    }\r\n}");
+                {
+                    str.AppendLine();
+                    str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false, {2})]\r\n",
+                        CMD_Git, "拉取", ++index);
+                    str.AppendFormat("        internal static async void {0}()\r\n{1}",
+                        nameof(CMD_Git_Pull), "        {\r\n");
+                    str.AppendFormat("            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
+                        CMD_Git_Pull, URL, "        }\r\n");
+                }
+
+                {
+                    str.AppendLine();
+                    str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false, {2})]\r\n",
+                        CMD_Git, "推送", ++index);
+                    str.AppendFormat("        internal static async void {0}()\r\n{1}",
+                        nameof(CMD_Git_Push), "        {\r\n");
+                    str.AppendFormat("            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
+                        CMD_Git_Push, $"({URL}, null)", "        }\r\n");
+                }
+
+                {
+                    str.AppendLine();
+                    str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false, {2})]\r\n",
+                        CMD_Git, "提交", ++index);
+                    str.AppendFormat("        internal static async void {0}()\r\n{1}",
+                        nameof(CMD_Git_Commit), "        {\r\n");
+                    str.AppendFormat("            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
+                        CMD_Git_Commit, $"({URL},null)", "        }\r\n");
+                }
+
+                {
+                    str.AppendLine();
+                    str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false, {2})]\r\n",
+                        CMD_Git, "上传", ++index);
+                    str.AppendFormat("        internal static async void {0}()\r\n{1}",
+                        nameof(CMD_Git_Upload), "        {\r\n");
+                    str.AppendFormat("            await PrPlatform.Git.{0}(\r\n                {1}, false, false, false\r\n            ).Async();\r\n{2}",
+                        CMD_Git_Upload, URL, "        }\r\n");
+                }
+
+                {
+                    str.AppendLine();
+                    str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false, {2})]\r\n",
+                        CMD_Git, "清理", ++index);
+                    str.AppendFormat("        internal static async void {0}()\r\n{1}",
+                        nameof(CMD_Git_Clean), "        {\r\n");
+                    str.AppendFormat("            await PrPlatform.Git.{0}(\r\n                {1}, \"-fd -x" +
+                                     "\", false\r\n            ).Async();\r\n{2}",
+                        CMD_Git_Clean, URL, "        }\r\n");
+                }
+
+                {
+                    str.AppendLine();
+                    str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false, {2})]\r\n",
+                        CMD_Git, "设置关联远端库", ++index);
+                    str.AppendFormat("        internal static async void {0}()\r\n{1}",
+                        nameof(CMD_Git_RemoteSetUrl), "        {\r\n");
+                    str.AppendFormat("            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
+                        CMD_Git_RemoteSetUrl, URL, "        }\r\n");
+                }
+
+                str.Append("    }\r\n}");
                 savaDir.Add(info.name, str.ToString());
             }
 
@@ -97,6 +165,11 @@ namespace AIO.Unity.Editor
 
             foreach (var item in savaDir)
                 File.WriteAllText(Path.Combine(OutPath, string.Concat(item.Key, ".cs")), item.Value, Encoding.UTF8);
+            
+            AssetDatabase.Refresh();
+#if UNITY_2020_1_OR_NEWER
+            AssetDatabase.RefreshSettings();
+#endif
         }
     }
 }
