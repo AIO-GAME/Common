@@ -20,13 +20,13 @@ namespace AIO.Unity.Editor
     {
         internal static Type[] types = new Type[] { typeof(PluginsManagerWindow), typeof(PackageManagerWindow) };
 
-        [MenuItem("Setting/Package")]
+        [MenuItem("Tools/Setting/Package")]
         public static void SettingWindow()
         {
             PackageManagerWindow.Open(types);
         }
 
-        [MenuItem("Setting/Plugins")]
+        [MenuItem("Tools/Setting/Plugins")]
         public static void PluginsWindow()
         {
             PluginsManagerWindow.Open(types);
