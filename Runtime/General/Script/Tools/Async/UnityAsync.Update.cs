@@ -356,21 +356,28 @@ public partial class UnityAsync
             if (noActionQueueToExecuteUpdateFunc) return;
 
             //清空队列中 残留的操作函数
-            mAactionCopiedQueueUpdateFunc.Clear();
-            lock (actionQueuesUpdateFunc)
+            lock (mAactionCopiedQueueUpdateFunc)
             {
-                //将等待队列中的操作 复制到执行队列中
-                mAactionCopiedQueueUpdateFunc.AddRange(actionQueuesUpdateFunc);
-                actionQueuesUpdateFunc.Clear();
-                //并开启执行状态
-                noActionQueueToExecuteUpdateFunc = true;
+                mAactionCopiedQueueUpdateFunc.Clear();
+                lock (actionQueuesUpdateFunc)
+                {
+                    //将等待队列中的操作 复制到执行队列中
+                    mAactionCopiedQueueUpdateFunc.AddRange(actionQueuesUpdateFunc);
+                    actionQueuesUpdateFunc.Clear();
+                    //并开启执行状态
+                    noActionQueueToExecuteUpdateFunc = true;
+                }
             }
+
 
             //实现执行队列
             // foreach (var action in mAactionCopiedQueueUpdateFunc) action?.DynamicInvoke();
-            if (mAactionCopiedQueueUpdateFunc.Count == 0) return;
-            StartCoroutine(Invoke(mAactionCopiedQueueUpdateFunc.ToArray()));
-            mAactionCopiedQueueUpdateFunc.Clear();
+            lock (mAactionCopiedQueueUpdateFunc)
+            {
+                if (mAactionCopiedQueueUpdateFunc.Count == 0) return;
+                StartCoroutine(Invoke(mAactionCopiedQueueUpdateFunc.ToArray()));
+                mAactionCopiedQueueUpdateFunc.Clear();
+            }
         }
 
         private static IEnumerator Invoke(IList<Delegate> delegates)
