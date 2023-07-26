@@ -16,9 +16,9 @@ namespace AIO.Unity.Editor
     {
         private static class Open
         {
-            private const string Title = "System/Open Editor Data/";
+            private const string Title = "Tools/Open/Unity Editor Data/";
 
-            [MenuItem(Title + "Unity Editor Data")]
+            [MenuItem(Title + "Data")]
             public static async void OpenApplicationContentsPath()
             {
                 await PrPlatform.Open.Path(EditorApplication.applicationContentsPath);
