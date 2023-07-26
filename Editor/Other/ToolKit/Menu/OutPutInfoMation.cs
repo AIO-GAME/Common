@@ -15,7 +15,7 @@ namespace UnityEditor
     /// </summary>
     internal static partial class OutPutInfoMation
     {
-        [MenuItem("System/Output/List Player Assemblies in Console")]
+        [MenuItem("Tools/Output/List Player Assemblies in Console")]
         public static void PrintAssemblyNames()
         {
             Debug.Log("== Player Assemblies ==");
