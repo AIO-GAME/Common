@@ -14,7 +14,7 @@ namespace AIO
     public sealed partial class PrMac
     {
         /// <summary>
-        /// 
+        /// Git 命令
         /// </summary>
         public static partial class Git
         {
@@ -32,7 +32,64 @@ namespace AIO
                 GITPATH = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, string.Concat(AppDomain.CurrentDomain.BaseDirectory.GetHashCode(), ".sh"));
             }
 
-            #region Function
+            /// <summary>
+            /// 获取执行器命令
+            /// </summary>
+            /// <param name="targets">文件路径列表</param>
+            /// <param name="args">参数</param>
+            /// <returns><see cref="StringBuilder"/></returns>
+            private static StringBuilder GetExecute(ICollection<string> targets, string args)
+            {
+                if (targets == null) throw new ArgumentNullException(nameof(targets));
+                var str = new StringBuilder();
+                if (targets.Count == 0) return str;
+                foreach (var target in targets)
+                {
+                    if (string.IsNullOrEmpty(target)) throw new ArgumentNullException(nameof(target));
+                    str.AppendLine(LINE_TOP);
+                    if (!Directory.Exists(target))
+                    {
+                        str.AppendFormat("\n echo $\"Error:{0}$\" \n", new FileNotFoundException(nameof(target), target).Message);
+                    }
+                    else
+                    {
+                        str.AppendLine(string.Format("path=\"{0}\"", target.Replace('\\', '/')));
+                        str.AppendLine("echo $\"${path}\" && chmod 777 ${path} && cd ${path}");
+                        str.AppendLine($"git {args}");
+                    }
+
+                    str.AppendLine(LINE_BOTTOM);
+                }
+
+                return str;
+            }
+
+            /// <summary>
+            /// 拉取
+            /// </summary>
+            /// <param name="target">文件路径列表</param>
+            /// <param name="args">参数</param>
+            /// <returns><see cref="StringBuilder"/></returns>
+            private static StringBuilder GetExecute(string target, string args)
+            {
+                if (string.IsNullOrEmpty(target)) throw new ArgumentNullException(nameof(target));
+                var str = new StringBuilder();
+                str.AppendLine(LINE_TOP);
+                if (!Directory.Exists(target))
+                {
+                    str.AppendFormat("\n echo $\"Error:{0}$\" \n", new FileNotFoundException(nameof(target), target).Message);
+                }
+                else
+                {
+                    str.AppendLine(string.Format("path=\"{0}\"", target.Replace('\\', '/')));
+                    str.AppendLine("echo $\"${path}\" && chmod 777 ${path} && cd ${path}");
+                    str.AppendLine($"git {args}");
+                }
+
+                str.AppendLine(LINE_BOTTOM);
+                return str;
+            }
+
 
             private const string LINE_TOP = "echo $\"─────────────────────────────────────\"";
             private const string LINE_BOTTOM = "echo $\"─────────────────────────────────────\" && echo";
@@ -92,507 +149,6 @@ namespace AIO
                 File.WriteAllText(GITPATH, co.ToString(), Encoding.UTF8);
                 return Open.Shell(GITPATH);
             }
-
-            #endregion
-
-            #region Clean
-
-            /// <summary>
-            /// 拉取
-            /// </summary>
-            /// <param name="targets">文件路径列表</param>
-            /// <param name="agrs">参数</param>
-            /// <param name="quit">静默退出</param>
-            public static IExecutor Clean(ICollection<string> targets, string agrs = "-fd -x", bool quit = true)
-            {
-                if (targets == null) throw new ArgumentNullException(nameof(targets));
-                if (targets.Count == 0) return null;
-                var str = new StringBuilder();
-                foreach (var target in targets)
-                {
-                    if (string.IsNullOrEmpty(target)) throw new ArgumentNullException(nameof(target));
-                    str.AppendLine(LINE_TOP);
-                    if (!Directory.Exists(target))
-                    {
-                        str.AppendFormat("\n echo $\"Error:{0}$\" \n", new FileNotFoundException(nameof(target), target).Message);
-                    }
-                    else
-                    {
-                        str.AppendLine(string.Format("path=\"{0}\"", target.Replace('\\', '/')));
-                        str.AppendLine("echo $\"${path}\" && chmod 777 ${path} && cd ${path}");
-                        str.AppendLine($"git clean {agrs}");
-                    }
-
-                    str.AppendLine(LINE_BOTTOM);
-                }
-
-                return Execute(str, quit);
-            }
-
-            /// <summary>
-            /// 拉取
-            /// </summary>
-            /// <param name="agrs">参数</param>
-            /// <param name="target">文件路径</param>
-            /// <param name="quit">静默退出</param>
-            public static IExecutor Clean(string target, string agrs = "-fd -x", bool quit = true)
-            {
-                return Clean(new string[] { target }, agrs, quit);
-            }
-
-            #endregion
-
-            #region Remote
-
-            /// <summary>
-            /// 设置远端镜像库
-            /// </summary>
-            /// <param name="targets">Git仓库</param>
-            /// <param name="quit">自动退出</param>
-            public static IExecutor RemoteSetUrl(string targets, bool quit = true)
-            {
-                return RemoteSetUrl(new string[] { targets }, quit);
-            }
-
-            /// <summary>
-            /// 设置远端镜像库
-            /// </summary>
-            /// <param name="targets">Git仓库</param>
-            /// <param name="quit">自动退出</param>
-            public static IExecutor RemoteSetUrl(ICollection<string> targets, bool quit = true)
-            {
-                if (targets is null) throw new ArgumentNullException(nameof(targets));
-                if (targets.Count == 0) return null;
-                var str = new StringBuilder();
-                str.AppendLine("echo $\"请输入关联的远端库名称 or Please enter the name of the associated remote library\"");
-                str.AppendLine("TIP=\"\"");
-                str.AppendLine("read -p \"$TIP\" remoteName");
-                foreach (var target in targets)
-                {
-                    str.AppendLine(LINE_TOP);
-                    if (!Directory.Exists(target))
-                    {
-                        str.AppendFormat("\n echo $\"Error:{0}$\" \n", new FileNotFoundException(nameof(target), target).Message);
-                    }
-                    else
-                    {
-                        str.AppendLine(string.Format("path=\"{0}\"", target.Replace('\\', '/')));
-                        str.AppendLine("echo $\"${path}\" && chmod 777 \"${path}\" && cd \"${path}\"");
-
-                        str.AppendLine("echo $\"请输入关联的远端库地址 or Please enter the associated remote library address\"");
-                        str.AppendLine("TIP=\"\"");
-                        str.AppendLine("read -p \"$TIP\" url");
-
-                        str.AppendLine("git remote set-url --add origin \"${url}\"");
-                        str.AppendLine("git remote add \"${remoteName}\" \"${url}\"");
-                        str.AppendLine("git lfs push origin --all");
-                        str.AppendLine("git pull \"${remoteName}\" master -f -t --allow-unrelated-histories");
-                        str.AppendLine("git merge \"${remoteName}\" --allow-unrelated-histories");
-                        str.AppendLine("git add .");
-                        str.AppendLine("git commit -m \"remote set-url add origin ${url}\"");
-                        str.AppendLine("git push -u origin master");
-                    }
-
-                    str.AppendLine(LINE_BOTTOM);
-                }
-
-                return Execute(str, quit);
-            }
-
-            #endregion
-
-            #region Clone
-
-            /// <summary>
-            /// 克隆
-            /// </summary>
-            /// <param name="target">目标目录</param>
-            /// <param name="urls">git地址</param>
-            /// <param name="quit">静默退出</param>
-            /// <returns></returns>
-            public static IExecutor Clone(string target, ICollection<string> urls, bool quit = true)
-            {
-                if (urls == null) throw new ArgumentNullException();
-                if (urls.Count == 0) return null;
-                if (!Directory.Exists(target)) throw new FileNotFoundException($"the destination path does not exist {target}");
-                var str = new StringBuilder();
-                target = target.Replace('\\', '/');
-                str.AppendLine(string.Format("target=\"{0}\" && chmod 777 ${1}", target, "target"));
-                foreach (var item in urls)
-                {
-                    var name = Path.GetFileName(item).Replace(".git", "").Replace(".ssh", "");
-                    var path = Path.Combine(target, name).Replace('\\', '/');
-                    str.AppendLine(LINE_TOP);
-                    str.AppendLine(string.Format("path=\"{0}\"", path));
-                    str.AppendLine(string.Format("url=\"{0}\"", item));
-                    str.AppendLine("echo $\"${path}\" && cd ${target}");
-                    str.AppendLine("git clone ${url}");
-                    str.AppendLine("chmod 777 ${path} && cd ${path}");
-                    str.AppendLine("git submodule update --init --recursive");
-
-
-                    str.AppendLine(LINE_BOTTOM);
-                }
-
-                return Execute(str, quit);
-            }
-
-            /// <summary>
-            /// 克隆
-            /// </summary>
-            /// <param name="target">目标文件夹</param>
-            /// <param name="urls">clone列表</param>
-            /// <param name="quit"></param>
-            public static IExecutor Clone(string target, string urls, bool quit = true)
-            {
-                return Clone(target, new string[] { urls }, quit);
-            }
-
-            #endregion
-
-            #region Pull
-
-            /// <summary>
-            /// 拉取
-            /// </summary>
-            /// <param name="targets">文件路径列表</param>
-            /// <param name="quit">静默退出</param>
-            public static IExecutor Pull(ICollection<string> targets, bool quit = true)
-            {
-                if (targets == null) throw new ArgumentNullException(nameof(targets));
-                if (targets.Count == 0) return null;
-                var str = new StringBuilder();
-                foreach (var target in targets)
-                {
-                    if (string.IsNullOrEmpty(target)) throw new ArgumentNullException(nameof(target));
-                    str.AppendLine(LINE_TOP);
-                    if (!Directory.Exists(target))
-                    {
-                        str.AppendFormat("\n echo $\"Error:{0}$\" \n", new FileNotFoundException(nameof(target), target).Message);
-                    }
-                    else
-                    {
-                        str.AppendLine(string.Format("path=\"{0}\"", target.Replace('\\', '/')));
-                        str.AppendLine("echo $\"${path}\" && chmod 777 ${path} && cd ${path}");
-                        str.AppendLine("git pull -v --progress --allow-unrelated-histories --autostash --stat --recurse-submodules --update --ff-only");
-                    }
-
-                    str.AppendLine(LINE_BOTTOM);
-                }
-
-                return Execute(str, quit);
-            }
-
-            /// <summary>
-            /// 拉取
-            /// </summary>
-            /// <param name="target">文件路径</param>
-            /// <param name="quit">静默退出</param>
-            public static IExecutor Pull(string target, bool quit = true)
-            {
-                return Pull(new string[] { target }, quit);
-            }
-
-            #endregion
-
-            #region Add
-
-            /// <summary>
-            /// 添加修改的文件
-            /// </summary>
-            /// <param name="targets">文件路径列表</param>
-            /// <param name="quit"></param>
-            public static IExecutor Add(ICollection<string> targets, bool quit = true)
-            {
-                if (targets == null) throw new ArgumentNullException();
-                var str = new StringBuilder();
-                foreach (var target in targets)
-                {
-                    str.AppendLine(LINE_TOP);
-                    if (!Directory.Exists(target))
-                    {
-                        str.AppendFormat("\n echo $\"Error:{0}$\" \n", new FileNotFoundException(nameof(target), target).Message);
-                    }
-                    else
-                    {
-                        str.AppendLine(string.Format("path=\"{0}\"", target.Replace('\\', '/')));
-                        str.AppendLine("echo $\"${path}\" && chmod 777 \"${path}\" && cd \"${path}\"");
-                        str.AppendLine("git add .");
-                    }
-
-                    str.AppendLine(LINE_BOTTOM);
-                }
-
-                return Execute(str, quit);
-            }
-
-            /// <summary>
-            /// 添加修改的文件
-            /// </summary>
-            /// <param name="targets">文件路径列表</param>
-            /// <param name="quit"></param>
-            public static IExecutor Add(string targets, bool quit = true)
-            {
-                return Add(new string[] { targets }, quit);
-            }
-
-            #endregion
-
-            #region Commit
-
-            /// <summary>
-            /// 添加修改的文件
-            /// </summary>
-            /// <param name="targets">
-            /// [Item1 : 文件路径]
-            /// [Item2 : 提交信息]
-            /// </param>
-            /// <param name="quit"></param>
-            public static IExecutor Commit(ICollection<(string, string)> targets, bool quit = true)
-            {
-                if (targets == null) throw new ArgumentNullException();
-                var str = new StringBuilder();
-                foreach (var t in targets)
-                {
-                    var target = t.Item1.Replace('\\', '/');
-                    str.AppendLine(LINE_TOP);
-                    if (!Directory.Exists(target))
-                    {
-                        str.AppendFormat("\n echo $\"Error:{0}$\" \n", new FileNotFoundException(nameof(t), target).Message);
-                    }
-                    else
-                    {
-                        str.AppendLine(string.Format("path=\"{0}\"", target.Replace('\\', '/')));
-                        str.AppendLine(string.Format("commitArg={0}", t.Item2 ?? "default submission information"));
-                        str.AppendLine("echo $\"${path}\" && chmod 777 \"${path}\" && cd \"${path}\"");
-                        str.AppendLine("git commit -m \"${commitArg}\"");
-                    }
-
-                    str.AppendLine(LINE_BOTTOM);
-                }
-
-                return Execute(str, quit);
-            }
-
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="targets"></param>
-            /// <param name="quit"></param>
-            /// <returns></returns>
-            /// <exception cref="ArgumentNullException"></exception>
-            public static IExecutor Commit(ICollection<string> targets, bool quit = true)
-            {
-                if (targets == null) throw new ArgumentNullException();
-                var str = new StringBuilder();
-                str.AppendLine("echo $\"请输入提交信息 or please enter the submission information\"");
-                str.AppendLine("TIP=\"\"");
-                str.AppendLine("read -p \"$TIP\" commitArg");
-                foreach (var target in targets)
-                {
-                    str.AppendLine(LINE_TOP);
-                    if (!Directory.Exists(target))
-                    {
-                        str.AppendFormat("\n echo $\"Error:{0}$\" \n", new FileNotFoundException(nameof(target), target).Message);
-                    }
-                    else
-                    {
-                        str.AppendLine(string.Format("path=\"{0}\"", target.Replace('\\', '/')));
-                        str.AppendLine("echo $\"${path}\" && chmod 777 \"${path}\" && cd \"${path}\"");
-                        str.AppendLine("git commit -m \"${commitArg}\"");
-                    }
-
-                    str.AppendLine(LINE_BOTTOM);
-                }
-
-                return Execute(str, quit);
-            }
-
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="target"></param>
-            /// <param name="quit"></param>
-            /// <returns></returns>
-            public static IExecutor Commit(string target, bool quit = true)
-            {
-                return Commit(new string[] { target }, quit);
-            }
-
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="target"></param>
-            /// <param name="quit"></param>
-            /// <returns></returns>
-            public static IExecutor Commit((string, string) target, bool quit = true)
-            {
-                return Commit(new (string, string)[] { target }, quit);
-            }
-
-            #endregion
-
-            #region Push
-
-            /// <summary>
-            /// 推送
-            /// </summary>
-            /// <param name="targets">
-            /// [Item1 : 文件路径]
-            /// [Item2 : 版本分支 默认 master]
-            /// </param>
-            /// <param name="quit"></param>
-            public static IExecutor Push(ICollection<(string, string)> targets, bool quit = true)
-            {
-                if (targets == null) throw new ArgumentNullException();
-                var str = new StringBuilder();
-                foreach (var t in targets)
-                {
-                    var target = t.Item1.Replace('\\', '/');
-                    str.AppendLine(LINE_TOP);
-                    if (!Directory.Exists(target))
-                    {
-                        str.AppendFormat("\n echo $\"Error:{0}$\" \n", new FileNotFoundException(nameof(target), target).Message);
-                    }
-                    else
-                    {
-                        str.AppendLine(string.Format("path=\"{0}\"", target.Replace('\\', '/')));
-                        str.AppendLine("echo $\"${path}\" && chmod 777 \"${path}\" && cd \"${path}\"");
-                        if (!string.IsNullOrEmpty(t.Item2))
-                        {
-                            str.AppendLine(string.Format("originArg={0}", t.Item2));
-                            str.AppendLine("git push -u origin \"${originArg}\"");
-                        }
-                        else str.AppendLine("git push");
-                    }
-
-                    str.AppendLine(LINE_BOTTOM);
-                }
-
-                return Execute(str, quit);
-            }
-
-            /// <summary>
-            /// 推送
-            /// </summary>
-            public static IExecutor Push(ICollection<string> targets, bool quit = true)
-            {
-                if (targets == null) throw new ArgumentNullException();
-                var str = new StringBuilder();
-                foreach (var target in targets)
-                {
-                    str.AppendLine(LINE_TOP);
-                    if (!Directory.Exists(target))
-                    {
-                        str.AppendFormat("\n echo $\"Error:{0}$\" \n", new FileNotFoundException(nameof(target), target).Message);
-                    }
-                    else
-                    {
-                        str.AppendLine(string.Format("path=\"{0}\"", target.Replace('\\', '/')));
-                        str.AppendLine("echo $\"${path}\" && chmod 777 \"${path}\" && cd \"${path}\"");
-                        str.AppendLine("git push");
-                    }
-
-                    str.AppendLine(LINE_BOTTOM);
-                }
-
-                return Execute(str, quit);
-            }
-
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="target"></param>
-            /// <param name="quit"></param>
-            /// <returns></returns>
-            public static IExecutor Push((string, string) target, bool quit = true)
-            {
-                return Push(new (string, string)[] { target }, quit);
-            }
-
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="target"></param>
-            /// <param name="quit"></param>
-            /// <returns></returns>
-            public static IExecutor Push(string target, bool quit = true)
-            {
-                return Push(new string[] { target }, quit);
-            }
-
-            #endregion
-
-            #region Upload
-
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="target"></param>
-            /// <param name="inputCommit"></param>
-            /// <param name="inputOrigin"></param>
-            /// <param name="quit"></param>
-            /// <returns></returns>
-            public static IExecutor Upload(string target, bool inputCommit = false, bool inputOrigin = false, bool quit = true)
-            {
-                return Upload(new string[] { target }, inputCommit, inputOrigin, quit);
-            }
-
-            /// <summary>
-            /// 1:拉取远端库
-            /// 2:添加修改文件
-            /// 3:提交本地修改信息
-            /// 4:上传本地库到远端库
-            /// </summary>
-            /// <param name="targets">目标库</param>
-            /// <param name="inputOrigin">上传分支</param>
-            /// <param name="inputCommit">提交信息</param>
-            /// <param name="quit"></param>
-            /// <returns></returns>
-            public static IExecutor Upload(ICollection<string> targets, bool inputCommit = false, bool inputOrigin = false, bool quit = true)
-            {
-                if (targets == null) throw new ArgumentNullException();
-                var str = new StringBuilder();
-
-                if (inputCommit)
-                {
-                    str.AppendLine("echo $\"请输入提交信息 or please enter the submission information\"");
-                    str.AppendLine("TIP=\"\"");
-                    str.AppendLine("read -p \"$TIP\" commitArg");
-                }
-                else str.AppendLine("commitArg=default submission information");
-
-                foreach (var target in targets)
-                {
-                    str.AppendLine(LINE_TOP);
-                    if (!Directory.Exists(target))
-                    {
-                        str.AppendFormat("\n echo $\"Error:{0}$\" \n", new FileNotFoundException(nameof(target), target).Message);
-                    }
-                    else
-                    {
-                        str.AppendLine(string.Format("path=\"{0}\"", target.Replace('\\', '/')));
-                        str.AppendLine("echo $\"${path}\" && chmod 777 \"${path}\" && cd \"${path}\"");
-                        str.AppendLine("git pull -v --progress --allow-unrelated-histories --autostash --stat --recurse-submodules --update --ff-only");
-                        str.AppendLine("git add .");
-                        str.AppendLine("git commit -m \"${commitArg}\"");
-                        if (inputOrigin)
-                        {
-                            str.AppendLine("echo $\"请推送分支 or please input push origin target\"");
-                            str.AppendLine("TIP=\"\"");
-                            str.AppendLine("read -p \"$TIP\" originArg");
-                            str.AppendLine("git push -u origin \"${originArg}\"");
-                        }
-                        else str.AppendLine("git push");
-                    }
-
-                    str.AppendLine(LINE_BOTTOM);
-                }
-
-                return Execute(str, quit);
-            }
-
-            #endregion
         }
     }
 }
