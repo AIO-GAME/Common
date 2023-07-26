@@ -17,8 +17,6 @@ using UnityEngine;
 
 namespace AIO.Unity.Editor
 {
-  
-
     public class PackageManagerWindow : EditorWindow
     {
         public const string PACKAGE_CLONE_FILE = "AutoGitClone.ini";
@@ -156,7 +154,7 @@ namespace AIO.Unity.Editor
                     if (info.Exists) list.Add(info.FullName);
                 }
 
-                PrPlatform.Git.Add(list, false).Async();
+                PrPlatform.Git.Add(list, ".", false).Async();
             }
 
             if (GUILayout.Button("Del All", GUILayout.Width(width), GUILayout.ExpandWidth(true)))

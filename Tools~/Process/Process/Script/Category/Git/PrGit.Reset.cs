@@ -13,7 +13,7 @@ namespace AIO
         /// <summary>
         /// 重置
         /// </summary>
-        public sealed class Reset
+        public static class Reset
         {
             /// <summary>
             /// 执行
@@ -75,7 +75,7 @@ namespace AIO
                 if (string.IsNullOrEmpty(work)) throw new ArgumentNullException(nameof(work));
                 return Create(work, "reset --merge");
             }
-            
+
             /// <summary>
             /// 
             /// </summary>

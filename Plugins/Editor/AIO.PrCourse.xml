@@ -805,18 +805,6 @@
             <summary>
             Git[WIN][MAC][LINUX]
             </summary>
-            <summary>
-            Git[WIN][MAC][LINUX]
-            </summary>
-            <summary>
-            Git[WIN][MAC][LINUX]
-            </summary>
-            <summary>
-            Git[WIN][MAC][LINUX]
-            </summary>
-            <summary>
-            Push
-            </summary>
         </member>
         <member name="T:AIO.PrGit.Add">
             <summary>
@@ -1178,6 +1166,59 @@
             <param name="oldRemoteName">老</param>
             <param name="newRemoteName">新</param>
             <returns>执行器</returns>
+        </member>
+        <member name="T:AIO.PrGit.Reset">
+            <summary>
+            重置
+            </summary>
+        </member>
+        <member name="M:AIO.PrGit.Reset.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="args">参数</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Reset.Hard(System.String@)">
+            <summary>
+            重置分支的引用以外，还会重置暂存区和工作区。
+            </summary>
+            <param name="work">文件夹</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrGit.Reset.Soft(System.String@)">
+            <summary>
+            重置分支的引用，不会修改暂存区和工作区
+            </summary>
+            <param name="work">文件夹</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrGit.Reset.Mixed(System.String@)">
+            <summary>
+            重置分支的引用以外，还会重置暂存区
+            </summary>
+            <param name="work">文件夹</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrGit.Reset.Merge(System.String@)">
+            <summary>
+            
+            </summary>
+            <param name="work">文件夹</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrGit.Reset.Keep(System.String@)">
+            <summary>
+            
+            </summary>
+            <param name="work">文件夹</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
         </member>
         <member name="T:AIO.PrGit.Submodule">
             <summary>
@@ -2001,8 +2042,191 @@
         </member>
         <member name="T:AIO.PrMac.Git">
             <summary>
-            
+            Git 命令
             </summary>
+        </member>
+        <member name="T:AIO.PrMac.Git.Add">
+            <summary>
+            添加
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Git.Add.Execute(System.Collections.Generic.ICollection{System.String},System.String,System.Boolean)">
+            <summary>
+            执行 <see cref="T:AIO.PrMac"/> <see cref="T:AIO.PrMac.Git"/> <see cref="T:AIO.PrMac.Git.Add"/>
+            </summary>
+            <param name="targets">文件路径列表</param>
+            <param name="args">参数</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Git.Add.Execute(System.String,System.String,System.Boolean)">
+            <summary>
+            执行 <see cref="T:AIO.PrMac"/> <see cref="T:AIO.PrMac.Git"/> <see cref="T:AIO.PrMac.Git.Add"/>
+            </summary>
+            <param name="target">文件路径列表</param>
+            <param name="args">参数</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Git.Add.ALL(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            添加修改的文件
+            </summary>
+            <param name="targets">文件路径列表</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Git.Add.ALL(System.String,System.Boolean)">
+            <summary>
+            添加修改的文件
+            </summary>
+            <param name="target">文件路径列表</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="T:AIO.PrMac.Git.Clean">
+            <summary>
+            清理
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Git.Clean.Execute(System.Collections.Generic.ICollection{System.String},System.String,System.Boolean)">
+            <summary>
+            执行 <see cref="T:AIO.PrMac"/> <see cref="T:AIO.PrMac.Git"/> <see cref="T:AIO.PrMac.Git.Clean"/>
+            </summary>
+            <param name="targets">文件路径列表</param>
+            <param name="agrs">参数</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Git.Clean.ForceDirX(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            强制清理文件夹 并不使用用.gitignore 中忽略的文件
+            </summary>
+            <param name="targets">文件路径</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Git.Clean.ForceDir(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            强制清理文件夹
+            </summary>
+            <param name="targets">文件路径</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Git.Clean.Execute(System.String,System.String,System.Boolean)">
+            <summary>
+            执行 <see cref="T:AIO.PrMac"/> <see cref="T:AIO.PrMac.Git"/> <see cref="T:AIO.PrMac.Git.Clean"/>
+            </summary>
+            <param name="target">文件路径列表</param>
+            <param name="agrs">参数</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Git.Clean.ForceDirX(System.String,System.Boolean)">
+            <summary>
+            强制清理文件夹 并不使用用.gitignore 中忽略的文件
+            </summary>
+            <param name="target">文件路径</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Git.Clean.ForceDir(System.String,System.Boolean)">
+            <summary>
+            强制清理文件夹
+            </summary>
+            <param name="target">文件路径</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="T:AIO.PrMac.Git.Clone">
+            <summary>
+            克隆
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Git.Clone.Execute(System.String,System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            执行 <see cref="T:AIO.PrMac"/> <see cref="T:AIO.PrMac.Git"/> <see cref="T:AIO.PrMac.Git.Clone"/>
+            </summary>
+            <param name="target">目标目录</param>
+            <param name="urls">git地址</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Git.Clone.Execute(System.String,System.String,System.Boolean)">
+            <summary>
+            执行 <see cref="T:AIO.PrMac"/> <see cref="T:AIO.PrMac.Git"/> <see cref="T:AIO.PrMac.Git.Clone"/>
+            </summary>
+            <param name="target">目标目录</param>
+            <param name="urls">git地址</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="T:AIO.PrMac.Git.Commit">
+            <summary>
+            提交命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Git.Commit.Execute(System.Collections.Generic.ICollection{System.ValueTuple{System.String,System.String}},System.Boolean)">
+            <summary>
+            执行 <see cref="T:AIO.PrMac"/> <see cref="T:AIO.PrMac.Git"/> <see cref="T:AIO.PrMac.Git.Commit"/>
+            </summary>
+            <param name="targets">
+            [Item1 : 文件路径]
+            [Item2 : 提交信息]
+            </param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">targets is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrMac.Git.Commit.Execute(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            执行 <see cref="T:AIO.PrMac"/> <see cref="T:AIO.PrMac.Git"/> <see cref="T:AIO.PrMac.Git.Commit"/>
+            </summary>
+            <param name="targets">
+            [Item1 : 文件路径]
+            [Item2 : 提交信息]
+            </param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">targets is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrMac.Git.Commit.Execute(System.String,System.Boolean)">
+            <summary>
+            执行 <see cref="T:AIO.PrMac"/> <see cref="T:AIO.PrMac.Git"/> <see cref="T:AIO.PrMac.Git.Commit"/>
+            </summary>
+            <param name="target">文件路径</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">targets is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrMac.Git.Commit.Execute(System.ValueTuple{System.String,System.String},System.Boolean)">
+            <summary>
+            执行 <see cref="T:AIO.PrMac"/> <see cref="T:AIO.PrMac.Git"/> <see cref="T:AIO.PrMac.Git.Commit"/>
+            </summary>
+            <param name="target">
+            [Item1 : 文件路径]
+            [Item2 : 提交信息]
+            </param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">targets is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrMac.Git.GetExecute(System.Collections.Generic.ICollection{System.String},System.String)">
+            <summary>
+            获取执行器命令
+            </summary>
+            <param name="targets">文件路径列表</param>
+            <param name="args">参数</param>
+            <returns><see cref="T:System.Text.StringBuilder"/></returns>
+        </member>
+        <member name="M:AIO.PrMac.Git.GetExecute(System.String,System.String)">
+            <summary>
+            拉取
+            </summary>
+            <param name="target">文件路径列表</param>
+            <param name="args">参数</param>
+            <returns><see cref="T:System.Text.StringBuilder"/></returns>
         </member>
         <member name="M:AIO.PrMac.Git.TopInfo">
             <summary>
@@ -2013,53 +2237,6 @@
             <summary>
             执行文件
             </summary>
-        </member>
-        <member name="M:AIO.PrMac.Git.Clean(System.Collections.Generic.ICollection{System.String},System.String,System.Boolean)">
-            <summary>
-            拉取
-            </summary>
-            <param name="targets">文件路径列表</param>
-            <param name="agrs">参数</param>
-            <param name="quit">静默退出</param>
-        </member>
-        <member name="M:AIO.PrMac.Git.Clean(System.String,System.String,System.Boolean)">
-            <summary>
-            拉取
-            </summary>
-            <param name="agrs">参数</param>
-            <param name="target">文件路径</param>
-            <param name="quit">静默退出</param>
-        </member>
-        <member name="M:AIO.PrMac.Git.RemoteSetUrl(System.String,System.Boolean)">
-            <summary>
-            设置远端镜像库
-            </summary>
-            <param name="targets">Git仓库</param>
-            <param name="quit">自动退出</param>
-        </member>
-        <member name="M:AIO.PrMac.Git.RemoteSetUrl(System.Collections.Generic.ICollection{System.String},System.Boolean)">
-            <summary>
-            设置远端镜像库
-            </summary>
-            <param name="targets">Git仓库</param>
-            <param name="quit">自动退出</param>
-        </member>
-        <member name="M:AIO.PrMac.Git.Clone(System.String,System.Collections.Generic.ICollection{System.String},System.Boolean)">
-            <summary>
-            克隆
-            </summary>
-            <param name="target">目标目录</param>
-            <param name="urls">git地址</param>
-            <param name="quit">静默退出</param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.PrMac.Git.Clone(System.String,System.String,System.Boolean)">
-            <summary>
-            克隆
-            </summary>
-            <param name="target">目标文件夹</param>
-            <param name="urls">clone列表</param>
-            <param name="quit"></param>
         </member>
         <member name="M:AIO.PrMac.Git.Pull(System.Collections.Generic.ICollection{System.String},System.Boolean)">
             <summary>
@@ -2074,55 +2251,6 @@
             </summary>
             <param name="target">文件路径</param>
             <param name="quit">静默退出</param>
-        </member>
-        <member name="M:AIO.PrMac.Git.Add(System.Collections.Generic.ICollection{System.String},System.Boolean)">
-            <summary>
-            添加修改的文件
-            </summary>
-            <param name="targets">文件路径列表</param>
-            <param name="quit"></param>
-        </member>
-        <member name="M:AIO.PrMac.Git.Add(System.String,System.Boolean)">
-            <summary>
-            添加修改的文件
-            </summary>
-            <param name="targets">文件路径列表</param>
-            <param name="quit"></param>
-        </member>
-        <member name="M:AIO.PrMac.Git.Commit(System.Collections.Generic.ICollection{System.ValueTuple{System.String,System.String}},System.Boolean)">
-            <summary>
-            添加修改的文件
-            </summary>
-            <param name="targets">
-            [Item1 : 文件路径]
-            [Item2 : 提交信息]
-            </param>
-            <param name="quit"></param>
-        </member>
-        <member name="M:AIO.PrMac.Git.Commit(System.Collections.Generic.ICollection{System.String},System.Boolean)">
-            <summary>
-            
-            </summary>
-            <param name="targets"></param>
-            <param name="quit"></param>
-            <returns></returns>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="M:AIO.PrMac.Git.Commit(System.String,System.Boolean)">
-            <summary>
-            
-            </summary>
-            <param name="target"></param>
-            <param name="quit"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.PrMac.Git.Commit(System.ValueTuple{System.String,System.String},System.Boolean)">
-            <summary>
-            
-            </summary>
-            <param name="target"></param>
-            <param name="quit"></param>
-            <returns></returns>
         </member>
         <member name="M:AIO.PrMac.Git.Push(System.Collections.Generic.ICollection{System.ValueTuple{System.String,System.String}},System.Boolean)">
             <summary>
@@ -2154,6 +2282,133 @@
             <param name="target"></param>
             <param name="quit"></param>
             <returns></returns>
+        </member>
+        <member name="M:AIO.PrMac.Git.RemoteSetUrl(System.String,System.Boolean)">
+            <summary>
+            设置远端镜像库
+            </summary>
+            <param name="targets">Git仓库</param>
+            <param name="quit">自动退出</param>
+        </member>
+        <member name="M:AIO.PrMac.Git.RemoteSetUrl(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            设置远端镜像库
+            </summary>
+            <param name="targets">Git仓库</param>
+            <param name="quit">自动退出</param>
+        </member>
+        <member name="T:AIO.PrMac.Git.Reset">
+            <summary>
+            清理
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Git.Reset.Execute(System.Collections.Generic.ICollection{System.String},System.String,System.Boolean)">
+            <summary>
+            执行 <see cref="T:AIO.PrMac"/> <see cref="T:AIO.PrMac.Git"/> <see cref="T:AIO.PrMac.Git.Reset"/>
+            </summary>
+            <param name="targets">文件路径列表</param>
+            <param name="agrs">参数</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Git.Reset.Execute(System.String,System.String,System.Boolean)">
+            <summary>
+            执行 <see cref="T:AIO.PrMac"/> <see cref="T:AIO.PrMac.Git"/> <see cref="T:AIO.PrMac.Git.Reset"/>
+            </summary>
+            <param name="target">文件路径列表</param>
+            <param name="agrs">参数</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Git.Reset.Hard(System.String@,System.Boolean)">
+            <summary>
+            重置分支的引用以外，还会重置暂存区和工作区。
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrMac.Git.Reset.Soft(System.String@,System.Boolean)">
+            <summary>
+            重置分支的引用，不会修改暂存区和工作区
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrMac.Git.Reset.Mixed(System.String@,System.Boolean)">
+            <summary>
+            重置分支的引用以外，还会重置暂存区
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrMac.Git.Reset.Merge(System.String@,System.Boolean)">
+            <summary>
+            重置索引并更新工作树中的提交和Head之间不同文件 单保留索引和工作树之间不同的文件(即有未添加的更改) 如果一个不同于提交和索引的文件有未分级的更改 重置将被终止
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrMac.Git.Reset.Keep(System.String@,System.Boolean)">
+            <summary>
+            重置索引并更新 如果提交和HEAD之间的文件与HEAD不同，则重置将中止。
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrMac.Git.Reset.Hard(System.Collections.Generic.ICollection{System.String}@,System.Boolean)">
+            <summary>
+            重置分支的引用以外，还会重置暂存区和工作区。
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrMac.Git.Reset.Soft(System.Collections.Generic.ICollection{System.String}@,System.Boolean)">
+            <summary>
+            重置分支的引用，不会修改暂存区和工作区
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrMac.Git.Reset.Mixed(System.Collections.Generic.ICollection{System.String}@,System.Boolean)">
+            <summary>
+            重置分支的引用以外，还会重置暂存区
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrMac.Git.Reset.Merge(System.Collections.Generic.ICollection{System.String}@,System.Boolean)">
+            <summary>
+            重置索引并更新工作树中的提交和Head之间不同文件 单保留索引和工作树之间不同的文件(即有未添加的更改) 如果一个不同于提交和索引的文件有未分级的更改 重置将被终止
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrMac.Git.Reset.Keep(System.Collections.Generic.ICollection{System.String}@,System.Boolean)">
+            <summary>
+            重置索引并更新 如果提交和HEAD之间的文件与HEAD不同，则重置将中止。
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
         </member>
         <member name="M:AIO.PrMac.Git.Upload(System.String,System.Boolean,System.Boolean,System.Boolean)">
             <summary>
@@ -3465,82 +3720,177 @@
             GIT BAT 命令
             </summary>
         </member>
-        <member name="M:AIO.PrWin.Git.Add(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+        <member name="T:AIO.PrWin.Git.Add">
             <summary>
-            添加修改的文件
+            添加命令
             </summary>
-            <param name="targets">文件路径列表</param>
-            <param name="quit">静默退出</param>
         </member>
-        <member name="M:AIO.PrWin.Git.Add(System.String,System.Boolean)">
+        <member name="M:AIO.PrWin.Git.Add.Execute(System.Collections.Generic.ICollection{System.String},System.String,System.Boolean)">
             <summary>
-            添加修改的文件
-            </summary>
-            <param name="target">文件路径</param>
-            <param name="quit">静默退出</param>
-        </member>
-        <member name="M:AIO.PrWin.Git.Clean(System.Collections.Generic.ICollection{System.String},System.String,System.Boolean)">
-            <summary>
-            清空修改的文件
+            执行 <see cref="T:AIO.PrWin"/> <see cref="T:AIO.PrWin.Git"/> <see cref="T:AIO.PrWin.Git.Add"/>
             </summary>
             <param name="targets">文件路径列表</param>
             <param name="args">参数</param>
             <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">targets is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
         </member>
-        <member name="M:AIO.PrWin.Git.Clean(System.String,System.String,System.Boolean)">
+        <member name="M:AIO.PrWin.Git.Add.Execute(System.String,System.String,System.Boolean)">
             <summary>
-            添加修改的文件
+            执行 <see cref="T:AIO.PrWin"/> <see cref="T:AIO.PrWin.Git"/> <see cref="T:AIO.PrWin.Git.Add"/>
             </summary>
             <param name="target">文件路径</param>
             <param name="args">参数</param>
             <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">targets is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
         </member>
-        <member name="M:AIO.PrWin.Git.Clone(System.String,System.Collections.Generic.ICollection{System.String},System.Boolean)">
+        <member name="M:AIO.PrWin.Git.Add.ALL(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            添加全部修改文件
+            </summary>
+            <param name="targets">文件路径列表</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">targets is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrWin.Git.Add.ALL(System.String,System.Boolean)">
+            <summary>
+            添加全部修改文件
+            </summary>
+            <param name="target">文件路径</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">targets is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="T:AIO.PrWin.Git.Clean">
+            <summary>
+            清理
+            </summary>
+        </member>
+        <member name="M:AIO.PrWin.Git.Clean.Execute(System.Collections.Generic.ICollection{System.String},System.String,System.Boolean)">
+            <summary>
+            执行 <see cref="T:AIO.PrWin"/> <see cref="T:AIO.PrWin.Git"/> <see cref="T:AIO.PrWin.Git.Clean"/>
+            </summary>
+            <param name="targets">文件路径列表</param>
+            <param name="args">参数</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">targets is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrWin.Git.Clean.Execute(System.String,System.String,System.Boolean)">
+            <summary>
+            执行 <see cref="T:AIO.PrWin"/> <see cref="T:AIO.PrWin.Git"/> <see cref="T:AIO.PrWin.Git.Clean"/>
+            </summary>
+            <param name="target">文件路径</param>
+            <param name="args">参数</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">targets is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrWin.Git.Clean.ForceDirX(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            强制清理文件夹 并不使用用.gitignore 中忽略的文件
+            </summary>
+            <param name="targets">文件路径</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Git.Clean.ForceDir(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            强制清理文件夹
+            </summary>
+            <param name="targets">文件路径</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Git.Clean.ForceDirX(System.String,System.Boolean)">
+            <summary>
+            强制清理文件夹 并不使用用.gitignore 中忽略的文件
+            </summary>
+            <param name="target">文件路径</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrWin.Git.Clean.ForceDir(System.String,System.Boolean)">
+            <summary>
+            强制清理文件夹
+            </summary>
+            <param name="target">文件路径</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="T:AIO.PrWin.Git.Clone">
             <summary>
             克隆
             </summary>
-            <param name="target">目标文件夹</param>
-            <param name="urls">clone列表</param>
-            <param name="quit">静默退出</param>
         </member>
-        <member name="M:AIO.PrWin.Git.Clone(System.String,System.String,System.Boolean)">
+        <member name="M:AIO.PrWin.Git.Clone.Execute(System.String,System.Collections.Generic.ICollection{System.String},System.Boolean)">
             <summary>
-            克隆
+            执行 <see cref="T:AIO.PrWin"/> <see cref="T:AIO.PrWin.Git"/> <see cref="T:AIO.PrWin.Git.Clone"/>
             </summary>
             <param name="target">目标文件夹</param>
-            <param name="url">clone列表</param>
+            <param name="urls">clone地址列表</param>
             <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">targets is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
         </member>
-        <member name="M:AIO.PrWin.Git.Commit(System.Collections.Generic.ICollection{System.ValueTuple{System.String,System.String}},System.Boolean)">
+        <member name="M:AIO.PrWin.Git.Clone.Execute(System.String,System.String,System.Boolean)">
             <summary>
-            提交
+            执行 <see cref="T:AIO.PrWin"/> <see cref="T:AIO.PrWin.Git"/> <see cref="T:AIO.PrWin.Git.Clone"/>
+            </summary>
+            <param name="target">文件路径</param>
+            <param name="url">Clone地址</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">targets is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="T:AIO.PrWin.Git.Commit">
+            <summary>
+            提交命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrWin.Git.Commit.Execute(System.Collections.Generic.ICollection{System.ValueTuple{System.String,System.String}},System.Boolean)">
+            <summary>
+            执行 <see cref="T:AIO.PrWin"/> <see cref="T:AIO.PrWin.Git"/> <see cref="T:AIO.PrWin.Git.Commit"/>
             </summary>
             <param name="targets">
             [Item1 : 文件路径]
             [Item2 : 提交信息]
             </param>
             <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">targets is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
         </member>
-        <member name="M:AIO.PrWin.Git.Commit(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+        <member name="M:AIO.PrWin.Git.Commit.Execute(System.Collections.Generic.ICollection{System.String},System.Boolean)">
             <summary>
-            提交
+            执行 <see cref="T:AIO.PrWin"/> <see cref="T:AIO.PrWin.Git"/> <see cref="T:AIO.PrWin.Git.Commit"/>
             </summary>
             <param name="targets">文件路径</param>
             <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">targets is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
         </member>
-        <member name="M:AIO.PrWin.Git.Commit(System.String,System.Boolean)">
+        <member name="M:AIO.PrWin.Git.Commit.Execute(System.String,System.Boolean)">
             <summary>
-            提交
+            执行 <see cref="T:AIO.PrWin"/> <see cref="T:AIO.PrWin.Git"/> <see cref="T:AIO.PrWin.Git.Commit"/>
             </summary>
             <param name="target">文件路径</param>
             <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">targets is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
         </member>
-        <member name="M:AIO.PrWin.Git.Commit(System.ValueTuple{System.String,System.String},System.Boolean)">
+        <member name="M:AIO.PrWin.Git.Commit.Execute(System.ValueTuple{System.String,System.String},System.Boolean)">
             <summary>
-            提交
+            执行 <see cref="T:AIO.PrWin"/> <see cref="T:AIO.PrWin.Git"/> <see cref="T:AIO.PrWin.Git.Commit"/>
             </summary>
-            <param name="target">文件路径</param>
+            <param name="target">
+            [Item1 : 文件路径]
+            [Item2 : 提交信息]
+            </param>
             <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">targets is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
         </member>
         <member name="M:AIO.PrWin.Git.Pull(System.Collections.Generic.ICollection{System.String},System.Boolean)">
             <summary>
@@ -3632,6 +3982,137 @@
             <param name="inputOrigin">上传分支</param>
             <param name="inputCommit">提交信息</param>
             <param name="quit">静默退出</param>
+        </member>
+        <member name="T:AIO.PrWin.Git.Reset">
+            <summary>
+            重置
+            </summary>
+        </member>
+        <member name="M:AIO.PrWin.Git.Reset.Execute(System.Collections.Generic.ICollection{System.String},System.String,System.Boolean)">
+            <summary>
+            执行 <see cref="T:AIO.PrWin"/> <see cref="T:AIO.PrWin.Git"/> <see cref="T:AIO.PrWin.Git.Reset"/>
+            </summary>
+            <param name="targets">文件路径列表</param>
+            <param name="args">参数</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">targets is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrWin.Git.Reset.Execute(System.String,System.String,System.Boolean)">
+            <summary>
+            执行 <see cref="T:AIO.PrWin"/> <see cref="T:AIO.PrWin.Git"/> <see cref="T:AIO.PrWin.Git.Reset"/>
+            </summary>
+            <param name="target">文件路径</param>
+            <param name="args">参数</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">targets is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrWin.Git.Reset.Hard(System.String@,System.Boolean)">
+            <summary>
+            重置分支的引用以外，还会重置暂存区和工作区。
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrWin.Git.Reset.Soft(System.String@,System.Boolean)">
+            <summary>
+            重置分支的引用，不会修改暂存区和工作区
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrWin.Git.Reset.Mixed(System.String@,System.Boolean)">
+            <summary>
+            重置分支的引用以外，还会重置暂存区
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrWin.Git.Reset.Merge(System.String@,System.Boolean)">
+            <summary>
+            重置索引并更新工作树中的提交和Head之间不同文件 单保留索引和工作树之间不同的文件(即有未添加的更改) 如果一个不同于提交和索引的文件有未分级的更改 重置将被终止
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrWin.Git.Reset.Keep(System.String@,System.Boolean)">
+            <summary>
+            重置索引并更新 如果提交和HEAD之间的文件与HEAD不同，则重置将中止。
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrWin.Git.Reset.Hard(System.Collections.Generic.ICollection{System.String}@,System.Boolean)">
+            <summary>
+            重置分支的引用以外，还会重置暂存区和工作区。
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrWin.Git.Reset.Soft(System.Collections.Generic.ICollection{System.String}@,System.Boolean)">
+            <summary>
+            重置分支的引用，不会修改暂存区和工作区
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrWin.Git.Reset.Mixed(System.Collections.Generic.ICollection{System.String}@,System.Boolean)">
+            <summary>
+            重置分支的引用以外，还会重置暂存区
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrWin.Git.Reset.Merge(System.Collections.Generic.ICollection{System.String}@,System.Boolean)">
+            <summary>
+            重置索引并更新工作树中的提交和Head之间不同文件 单保留索引和工作树之间不同的文件(即有未添加的更改) 如果一个不同于提交和索引的文件有未分级的更改 重置将被终止
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrWin.Git.Reset.Keep(System.Collections.Generic.ICollection{System.String}@,System.Boolean)">
+            <summary>
+            重置索引并更新 如果提交和HEAD之间的文件与HEAD不同，则重置将中止。
+            </summary>
+            <param name="work">文件夹</param>
+            <param name="quit">静默退出</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="M:AIO.PrWin.Git.GetExecute(System.Collections.Generic.ICollection{System.String},System.String)">
+            <summary>
+            获取执行器命令
+            </summary>
+            <param name="targets">文件路径列表</param>
+            <param name="args">参数</param>
+            <returns><see cref="T:System.Text.StringBuilder"/></returns>
+        </member>
+        <member name="M:AIO.PrWin.Git.GetExecute(System.String,System.String)">
+            <summary>
+            获取执行器命令
+            </summary>
+            <param name="target">文件路径列表</param>
+            <param name="args">参数</param>
+            <returns><see cref="T:System.Text.StringBuilder"/></returns>
         </member>
         <member name="T:AIO.PrWin.Comp">
             <summary>
@@ -4310,19 +4791,23 @@
             </summary>
         </member>
         <member name="T:AIO.PrPlatform.File">
-             <summary>
-            
-             </summary>
+            <summary>
+            文件
+            </summary>
         </member>
         <member name="M:AIO.PrPlatform.File.Link(System.String,System.String)">
             <summary>
             符号链接
             </summary>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
         </member>
         <member name="M:AIO.PrPlatform.File.Del(System.String)">
-             <summary>
-            
-             </summary>
+            <summary>
+            删除
+            </summary>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
         </member>
         <member name="T:AIO.PrPlatform.Folder">
             <summary>
@@ -4333,204 +4818,326 @@
             <summary>
             链接文件夹
             </summary>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
         </member>
         <member name="M:AIO.PrPlatform.Folder.Del(System.String)">
             <summary>
             删除文件夹
             </summary>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
         </member>
         <member name="M:AIO.PrPlatform.Folder.Create(System.String)">
             <summary>
             创建文件夹
             </summary>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
         </member>
         <member name="T:AIO.PrPlatform.Git">
             <summary>
             Git命令
             </summary>
         </member>
+        <member name="M:AIO.PrPlatform.Git.Add(System.String,System.String,System.Boolean)">
+            <summary>
+            <see cref="T:AIO.PrPlatform"/> Git Add
+            </summary>
+            <param name="target">目标路径</param>
+            <param name="args">默认参数 .</param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Add(System.Collections.Generic.ICollection{System.String},System.String,System.Boolean)">
+            <summary>
+            <see cref="T:AIO.PrPlatform"/> Git Add
+            </summary>
+            <param name="targets">目标路径</param>
+            <param name="args">默认参数 .</param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Clean(System.Collections.Generic.ICollection{System.String},System.String,System.Boolean)">
+            <summary>
+            <see cref="T:AIO.PrPlatform"/> Git Clean
+            </summary>
+            <param name="targets">目标路径</param>
+            <param name="args">默认参数-fdx</param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Clean(System.String,System.String,System.Boolean)">
+            <summary>
+            <see cref="T:AIO.PrPlatform"/> Git Clean
+            </summary>
+            <param name="target">目标路径</param>
+            <param name="args">默认参数-fdx</param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
         <member name="M:AIO.PrPlatform.Git.GetValidUrl(System.String,System.Collections.Generic.IEnumerable{System.String})">
             <summary>
             获取有效Git路径
             </summary>
         </member>
-        <member name="M:AIO.PrPlatform.Git.RemoteSetUrl(System.String,System.Boolean)">
-            <summary>
-            
-            </summary>
-            <param name="target">目标路径</param>
-            <param name="quit"></param>
-            <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:AIO.PrPlatform.Git.RemoteSetUrl(System.Collections.Generic.ICollection{System.String},System.Boolean)">
-            <summary>
-            
-            </summary>
-            <param name="targets">目标路径</param>
-            <param name="quit"></param>
-            <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
         <member name="M:AIO.PrPlatform.Git.Clone(System.String,System.Collections.Generic.ICollection{System.String},System.Boolean)">
             <summary>
-            
+            <see cref="T:AIO.PrPlatform"/> Git Clone
             </summary>
             <param name="target">目标路径</param>
             <param name="urls"></param>
-            <param name="quit"></param>
-            <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
         </member>
         <member name="M:AIO.PrPlatform.Git.Clone(System.String,System.String,System.Boolean)">
             <summary>
-            
+            <see cref="T:AIO.PrPlatform"/> Git Clone
             </summary>
             <param name="target">目标路径</param>
             <param name="url"></param>
-            <param name="quit"></param>
-            <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:AIO.PrPlatform.Git.Pull(System.Collections.Generic.ICollection{System.String},System.Boolean)">
-            <summary>
-            
-            </summary>
-            <param name="targets">目标路径</param>
-            <param name="quit"></param>
-            <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:AIO.PrPlatform.Git.Pull(System.String,System.Boolean)">
-            <summary>
-            
-            </summary>
-            <param name="target">目标路径</param>
-            <param name="quit"></param>
-            <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:AIO.PrPlatform.Git.Upload(System.String,System.Boolean,System.Boolean,System.Boolean)">
-            <summary>
-            Git上传
-            </summary>
-            <param name="target">目标路径</param>
-            <param name="inputCommit"></param>
-            <param name="inputOrigin"></param>
-            <param name="quit"></param>
-            <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:AIO.PrPlatform.Git.Upload(System.Collections.Generic.ICollection{System.String},System.Boolean,System.Boolean,System.Boolean)">
-            <summary>
-            Git上传
-            </summary>
-            <param name="target">目标路径</param>
-            <param name="inputCommit"></param>
-            <param name="inputOrigin"></param>
-            <param name="quit"></param>
-            <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
         </member>
         <member name="M:AIO.PrPlatform.Git.Commit(System.Collections.Generic.ICollection{System.ValueTuple{System.String,System.String}},System.Boolean)">
             <summary>
-            Git 提交
+            <see cref="T:AIO.PrPlatform"/> Git Commit
             </summary>
             <param name="targets">目标路径</param>
-            <param name="quit"></param>
-            <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
         </member>
         <member name="M:AIO.PrPlatform.Git.Commit(System.Collections.Generic.ICollection{System.String},System.Boolean)">
             <summary>
-            Git 提交
+            <see cref="T:AIO.PrPlatform"/> Git Commit
             </summary>
             <param name="targets">目标路径</param>
-            <param name="quit"></param>
-            <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
         </member>
         <member name="M:AIO.PrPlatform.Git.Commit(System.String,System.Boolean)">
             <summary>
-            Git 提交
+            <see cref="T:AIO.PrPlatform"/> Git Commit
             </summary>
             <param name="targets">目标路径</param>
-            <param name="quit"></param>
-            <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
         </member>
         <member name="M:AIO.PrPlatform.Git.Commit(System.ValueTuple{System.String,System.String},System.Boolean)">
             <summary>
-            Git 提交
+            <see cref="T:AIO.PrPlatform"/> Git Commit
             </summary>
             <param name="target">目标路径</param>
-            <param name="quit"></param>
-            <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Pull(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            <see cref="T:AIO.PrPlatform"/> Git Pull
+            </summary>
+            <param name="targets">目标路径</param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Pull(System.String,System.Boolean)">
+            <summary>
+            <see cref="T:AIO.PrPlatform"/> Git Pull
+            </summary>
+            <param name="target">目标路径</param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
         </member>
         <member name="M:AIO.PrPlatform.Git.Push(System.ValueTuple{System.String,System.String},System.Boolean)">
             <summary>
-            Git 推送
+            <see cref="T:AIO.PrPlatform"/> Git Push
             </summary>
             <param name="target">目标路径</param>
-            <param name="quit"></param>
-            <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
         </member>
         <member name="M:AIO.PrPlatform.Git.Push(System.Collections.Generic.ICollection{System.ValueTuple{System.String,System.String}},System.Boolean)">
             <summary>
-            Git 推送
+            <see cref="T:AIO.PrPlatform"/> Git Push
             </summary>
             <param name="targets">目标路径</param>
-            <param name="quit"></param>
-            <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
         </member>
-        <member name="M:AIO.PrPlatform.Git.Add(System.String,System.Boolean)">
+        <member name="M:AIO.PrPlatform.Git.RemoteSetUrl(System.String,System.Boolean)">
             <summary>
-            Git 添加
+            <see cref="T:AIO.PrPlatform"/> Git RemoteSetUrl
             </summary>
             <param name="target">目标路径</param>
-            <param name="quit"></param>
-            <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:AIO.PrPlatform.Git.Add(System.Collections.Generic.ICollection{System.String},System.Boolean)">
-            <summary>
-            Git 添加
-            </summary>
-            <param name="targets">目标路径</param>
-            <param name="quit"></param>
-            <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:AIO.PrPlatform.Git.Clean(System.Collections.Generic.ICollection{System.String},System.String,System.Boolean)">
-            <summary>
-            Git 添加
-            </summary>
-            <param name="targets">目标路径</param>
-            <param name="args">参数</param>
             <param name="quit">静默退出</param>
             <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
         </member>
-        <member name="M:AIO.PrPlatform.Git.Clean(System.String,System.String,System.Boolean)">
+        <member name="M:AIO.PrPlatform.Git.RemoteSetUrl(System.Collections.Generic.ICollection{System.String},System.Boolean)">
             <summary>
-            Git 添加
+            <see cref="T:AIO.PrPlatform"/> Git RemoteSetUrl
             </summary>
             <param name="targets">目标路径</param>
-            <param name="args">参数</param>
             <param name="quit">静默退出</param>
             <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Reset(System.Collections.Generic.ICollection{System.String},System.String,System.Boolean)">
+            <summary>
+            <see cref="T:AIO.PrPlatform"/> Git Reset
+            </summary>
+            <param name="targets">目标路径</param>
+            <param name="args">默认参数-fdx</param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Reset(System.String,System.String,System.Boolean)">
+            <summary>
+            <see cref="T:AIO.PrPlatform"/> Git Reset
+            </summary>
+            <param name="target">目标路径</param>
+            <param name="args">默认参数-fdx</param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.ResetHard(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            <see cref="T:AIO.PrPlatform"/> Git Reset Hard
+            </summary>
+            <param name="targets">目标路径</param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.ResetHard(System.String,System.Boolean)">
+            <summary>
+            <see cref="T:AIO.PrPlatform"/> Git Reset Hard
+            </summary>
+            <param name="target">目标路径</param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.ResetSoft(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            <see cref="T:AIO.PrPlatform"/> Git Reset Soft
+            </summary>
+            <param name="targets">目标路径</param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.ResetSoft(System.String,System.Boolean)">
+            <summary>
+            <see cref="T:AIO.PrPlatform"/> Git Reset Soft
+            </summary>
+            <param name="target">目标路径</param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.ResetKeep(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            <see cref="T:AIO.PrPlatform"/> Git Reset Keep
+            </summary>
+            <param name="targets">目标路径</param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.ResetKeep(System.String,System.Boolean)">
+            <summary>
+            <see cref="T:AIO.PrPlatform"/> Git Reset Keep
+            </summary>
+            <param name="target">目标路径</param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.ResetMerge(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            <see cref="T:AIO.PrPlatform"/> Git Reset Merge
+            </summary>
+            <param name="targets">目标路径</param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.ResetMerge(System.String,System.Boolean)">
+            <summary>
+            <see cref="T:AIO.PrPlatform"/> Git Reset Merge
+            </summary>
+            <param name="target">目标路径</param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.ResetMixed(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            <see cref="T:AIO.PrPlatform"/> Git Reset Mixed
+            </summary>
+            <param name="targets">目标路径</param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.ResetMixed(System.String,System.Boolean)">
+            <summary>
+            <see cref="T:AIO.PrPlatform"/> Git Reset Mixed
+            </summary>
+            <param name="target">目标路径</param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Upload(System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            <see cref="T:AIO.PrPlatform"/> Git Upload
+            </summary>
+            <param name="target">目标路径</param>
+            <param name="inputCommit"></param>
+            <param name="inputOrigin"></param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.Upload(System.Collections.Generic.ICollection{System.String},System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            <see cref="T:AIO.PrPlatform"/> Git Upload
+            </summary>
+            <param name="target">目标路径</param>
+            <param name="inputCommit"></param>
+            <param name="inputOrigin"></param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
         </member>
         <member name="T:AIO.PrPlatform.Open">
             <summary>
-            
+            打开路径
             </summary>
         </member>
         <member name="M:AIO.PrPlatform.Open.Path(System.String)">
             <summary>
-            
+            目标路径
             </summary>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
         </member>
         <member name="M:AIO.NetUtils.UrlCheck(System.String,System.Int32)">
             <summary>

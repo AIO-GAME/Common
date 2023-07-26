@@ -15,13 +15,15 @@ namespace AIO
     public static partial class PrPlatform
     {
         /// <summary>
-        /// 
+        /// 打开路径
         /// </summary>
         public static class Open
         {
             /// <summary>
-            /// 
+            /// 目标路径
             /// </summary>
+            /// <exception cref="NotImplementedException">未实现</exception>
+            /// <returns><see cref="IExecutor"/>执行器</returns>
             public static IExecutor Path(string target)
             {
                 if (Directory.Exists(target) || System.IO.File.Exists(target))

@@ -13,44 +13,54 @@ namespace AIO
 {
     public partial class PrWin
     {
-        public static partial class Git
+        public partial class Git
         {
             /// <summary>
             /// 克隆
             /// </summary>
-            /// <param name="target">目标文件夹</param>
-            /// <param name="urls">clone列表</param>
-            /// <param name="quit">静默退出</param>
-            public static IExecutor Clone(string target, ICollection<string> urls, bool quit = true)
+            public static class Clone
             {
-                if (urls is null) return new PrException(new ArgumentNullException(nameof(urls))).Execute();
-                if (urls.Count == 0) return new PrEmpty().Execute();
-                if (!Directory.Exists(target)) return new PrException(new Exception($"the destination path does not exist {target}")).Execute();
-
-                var str = new StringBuilder();
-                foreach (var url in urls)
+                /// <summary>
+                /// 执行 <see cref="PrWin"/> <see cref="Git"/> <see cref="Clone"/>
+                /// </summary>
+                /// <param name="target">目标文件夹</param>
+                /// <param name="urls">clone地址列表</param>
+                /// <param name="quit">静默退出</param>
+                /// <returns><see cref="IExecutor"/>执行器</returns>
+                /// <exception cref="ArgumentNullException">targets is null<code><see cref="ArgumentNullException"/></code></exception>
+                public static IExecutor Execute(string target, ICollection<string> urls, bool quit = true)
                 {
-                    var name = Path.GetFileName(url).Replace(".git", "").Replace(".ssh", "");
-                    var path = Path.Combine(target, name).Replace('/', '\\');
-                    str.AppendLine(LINE_TOP);
-                    str.AppendLine(string.Format("@echo {0} && @cd /d {1}", path, target));
-                    str.AppendLine(string.Format("@git clone {0} && @cd /d {1}", url, path));
-                    str.AppendLine("@git submodule update --init --recursive");
-                    str.AppendLine(LINE_BOTTOM);
+                    if (urls is null) return new PrException(new ArgumentNullException(nameof(urls))).Execute();
+                    if (urls.Count == 0) return new PrEmpty().Execute();
+                    if (!Directory.Exists(target)) return new PrException(new Exception($"the destination path does not exist {target}")).Execute();
+
+                    var str = new StringBuilder();
+                    foreach (var url in urls)
+                    {
+                        var name = Path.GetFileName(url).Replace(".git", "").Replace(".ssh", "");
+                        var path = Path.Combine(target, name).Replace('/', '\\');
+                        str.AppendLine(LINE_TOP);
+                        str.AppendLine(string.Format("@echo {0} && @cd /d {1}", path, target));
+                        str.AppendLine(string.Format("@git clone {0} && @cd /d {1}", url, path));
+                        str.AppendLine("@git submodule update --init --recursive");
+                        str.AppendLine(LINE_BOTTOM);
+                    }
+
+                    return Git.Execute(str, quit);
                 }
 
-                return Execute(str, quit);
-            }
-
-            /// <summary>
-            /// 克隆
-            /// </summary>
-            /// <param name="target">目标文件夹</param>
-            /// <param name="url">clone列表</param>
-            /// <param name="quit">静默退出</param>
-            public static IExecutor Clone(string target, string url, bool quit = true)
-            {
-                return Clone(target, new string[] { url }, quit);
+                /// <summary>
+                /// 执行 <see cref="PrWin"/> <see cref="Git"/> <see cref="Clone"/>
+                /// </summary>
+                /// <param name="target">文件路径</param>
+                /// <param name="url">Clone地址</param>
+                /// <param name="quit">静默退出</param>
+                /// <returns><see cref="IExecutor"/>执行器</returns>
+                /// <exception cref="ArgumentNullException">targets is null<code><see cref="ArgumentNullException"/></code></exception>
+                public static IExecutor Execute(string target, string url, bool quit = true)
+                {
+                    return Execute(target, new string[] { url }, quit);
+                }
             }
         }
     }
