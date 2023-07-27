@@ -83,12 +83,7 @@
         public const string CMD_Sh = "sh";
 
         /// <summary>
-        /// 
-        /// </summary>
-        public const string CMD_In = "In";
-
-        /// <summary>
-        /// 
+        /// 链接文件
         /// </summary>
         public const string CMD_Ln = "ln";
 
