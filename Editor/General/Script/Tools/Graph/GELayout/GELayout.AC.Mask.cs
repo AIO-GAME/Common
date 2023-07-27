@@ -89,6 +89,15 @@ namespace UnityEditor
             return EditorGUILayout.MaskField(mask, displayedOptions, options);
         }
 
+        /// <summary> 屏蔽文本框 FieldMask </summary>
+        /// <param name="mask">选择值</param>
+        /// <param name="displayedOptions">选择内容</param>
+        /// <param name="options">排版格式</param>
+        public static int Mask(int mask, ICollection<string> displayedOptions, params GUILayoutOption[] options)
+        {
+            return EditorGUILayout.MaskField(mask, displayedOptions.ToArray(), options);
+        }
+
         #endregion
     }
 }

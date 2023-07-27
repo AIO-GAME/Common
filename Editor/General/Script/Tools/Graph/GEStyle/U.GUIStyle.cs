@@ -49,7 +49,12 @@ namespace UnityEditor
         /// 
         /// </summary>
         public static UGUIStyle ChannelStripBg => Get(nameof(ChannelStripBg));
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public static UGUIStyle CurveEditorBackground => Get("CurveEditorBackground");
+        
         /// <summary>
         /// 
         /// </summary>

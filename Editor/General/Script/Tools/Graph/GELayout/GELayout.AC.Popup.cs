@@ -182,6 +182,16 @@ namespace UnityEditor
         /// <param name="displayedOptions">弹窗内容</param>
         /// <param name="options">排版格式</param>
         /// <param name="label">标签</param>
+        public static int Popup(string label, int selectedIndex, ICollection<string> displayedOptions, params GUILayoutOption[] options)
+        {
+            return EditorGUILayout.Popup(label, selectedIndex, displayedOptions.ToArray(), options);
+        }
+
+        /// <summary> 弹窗 Popup </summary>
+        /// <param name="selectedIndex">值</param>
+        /// <param name="displayedOptions">弹窗内容</param>
+        /// <param name="options">排版格式</param>
+        /// <param name="label">标签</param>
         public static int Popup(GUIContent label, int selectedIndex, GUIContent[] displayedOptions, params GUILayoutOption[] options)
         {
             return EditorGUILayout.Popup(label, selectedIndex, displayedOptions, options);
@@ -224,6 +234,15 @@ namespace UnityEditor
         public static int Popup(int selectedIndex, string[] displayedOptions, params GUILayoutOption[] options)
         {
             return EditorGUILayout.Popup(selectedIndex, displayedOptions, options);
+        }
+
+        /// <summary> 弹窗 Popup </summary>
+        /// <param name="selectedIndex">值</param>
+        /// <param name="displayedOptions">弹窗内容</param>
+        /// <param name="options">排版格式</param>
+        public static int Popup(int selectedIndex, ICollection<string> displayedOptions, params GUILayoutOption[] options)
+        {
+            return EditorGUILayout.Popup(selectedIndex, displayedOptions.ToArray(), options);
         }
 
         #endregion
