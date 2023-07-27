@@ -28,7 +28,12 @@ namespace UnityEditor
         /// <summary>
         /// 
         /// </summary>
-        public static UGUIStyle ObjectPickerLargeStatus => Get(nameof(ObjectPickerLargeStatus));
+        public static UGUIStyle ObjectPickerLargeStatus => Get("ObjectPickerLargeStatus");
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static UGUIStyle WhiteLargeCenterLabel => Get("WhiteLargeCenterLabel");
 
         /// <summary>
         /// 
@@ -44,11 +49,12 @@ namespace UnityEditor
         /// 
         /// </summary>
         public static UGUIStyle ChannelStripBg => Get(nameof(ChannelStripBg));
+
         /// <summary>
         /// 
         /// </summary>
         public static UGUIStyle INThumbnailShadow => Get("IN ThumbnailShadow");
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -112,11 +118,11 @@ namespace UnityEditor
         /// <summary>
         /// 
         /// </summary>
-        public static UGUIStyle CenteredLabel => Get(nameof(CenteredLabel));
+        public static UGUIStyle CenteredLabel => Get("CenteredLabel");
 
         /// <summary>
         /// 
         /// </summary>
-        public static UGUIStyle DropzoneStyle => Get(nameof(DropzoneStyle));
+        public static UGUIStyle DropzoneStyle => Get("DropzoneStyle");
     }
 }
