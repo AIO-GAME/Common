@@ -23,7 +23,28 @@ namespace AIO
             /// </summary>
             /// <exception cref="NotImplementedException">未实现</exception>
             /// <returns><see cref="IExecutor"/>执行器</returns>
-            public static IExecutor Link(string target, string source)
+            public static IExecutor Link(string target, string source, in string args)
+            {
+                switch (Environment.OSVersion.Platform)
+                {
+                    case PlatformID.Win32NT:
+                    case PlatformID.Win32S:
+                    case PlatformID.Win32Windows:
+                    case PlatformID.WinCE:
+                        return PrCmd.MkLink.Execute(target, source, args);
+                    case PlatformID.MacOSX:
+                    case PlatformID.Unix:
+                        return PrMac.Ln.Execute(source, target, args);
+                    default: throw new NotImplementedException();
+                }
+            }
+
+            /// <summary>
+            /// 软链接文件夹
+            /// </summary>
+            /// <exception cref="NotImplementedException">未实现</exception>
+            /// <returns><see cref="IExecutor"/>执行器</returns>
+            public static IExecutor Symbolic(string target, string source)
             {
                 switch (Environment.OSVersion.Platform)
                 {
@@ -34,7 +55,28 @@ namespace AIO
                         return PrCmd.MkLink.Directory(target, source);
                     case PlatformID.MacOSX:
                     case PlatformID.Unix:
-                        return PrMac.In.Execute(source, target);
+                        return PrMac.Ln.Symbolic(source, target);
+                    default: throw new NotImplementedException();
+                }
+            }
+
+            /// <summary>
+            /// 硬链接文件夹
+            /// </summary>
+            /// <exception cref="NotImplementedException">未实现</exception>
+            /// <returns><see cref="IExecutor"/>执行器</returns>
+            public static IExecutor Hard(string target, string source)
+            {
+                switch (Environment.OSVersion.Platform)
+                {
+                    case PlatformID.Win32NT:
+                    case PlatformID.Win32S:
+                    case PlatformID.Win32Windows:
+                    case PlatformID.WinCE:
+                        return PrCmd.MkLink.HardDirectory(target, source);
+                    case PlatformID.MacOSX:
+                    case PlatformID.Unix:
+                        return PrMac.Ln.Hard(source, target);
                     default: throw new NotImplementedException();
                 }
             }

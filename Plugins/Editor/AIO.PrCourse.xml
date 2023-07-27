@@ -1384,21 +1384,6 @@
             执行
             </summary>
         </member>
-        <member name="T:AIO.PrMac.Ln">
-            <summary>
-            显示系统的当前日期和时间
-            </summary>
-        </member>
-        <member name="M:AIO.PrMac.Ln.Execute(System.String)">
-            <summary>
-            执行
-            </summary>
-        </member>
-        <member name="M:AIO.PrMac.Ln.Execute">
-            <summary>
-            执行
-            </summary>
-        </member>
         <member name="T:AIO.PrMac.Time">
             <summary>
             获取程序的执行时间
@@ -1477,6 +1462,69 @@
             <param name="paths">文件路径</param>
             <returns>命令执行器</returns>
         </member>
+        <member name="T:AIO.PrMac.Chmod">
+            <summary>
+            权限相关类
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Chmod.Set(System.String@,System.Int32)">
+            <summary>
+            设置权限的方法
+            </summary>
+            <param name="target">目标文件的路径</param>
+            <param name="args">需要设置的权限</param>
+            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Chmod.Set(System.String@,System.String)">
+            <summary>
+            设置权限的方法
+            </summary>
+            <param name="target">目标文件的路径</param>
+            <param name="args">需要设置的权限</param>
+            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Chmod.AddRWX(System.String@)">
+            <summary>
+            为目标文件添加读、写、执行权限的方法
+            </summary>
+            <param name="target">目标文件的路径</param>
+            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Chmod.SubRWX(System.String@)">
+            <summary>
+            为目标文件减少读、写、执行权限的方法
+            </summary>
+            <param name="target">目标文件的路径</param>
+            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Chmod.AddAW(System.String@)">
+            <summary>
+            为目标文件添加追加权限的方法
+            </summary>
+            <param name="target">目标文件的路径</param>
+            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Chmod.SubAW(System.String@)">
+            <summary>
+            为目标文件减少追加权限的方法
+            </summary>
+            <param name="target">目标文件的路径</param>
+            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Chmod.Set777(System.String@)">
+            <summary>
+            为目标文件设置权限 777
+            </summary>
+            <param name="target">目标文件的路径</param>
+            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
+        </member>
+        <member name="M:AIO.PrMac.Chmod.Set755(System.String@)">
+            <summary>
+            为目标文件设置权限 rwxr-xr-x 
+            </summary>
+            <param name="target">目标文件的路径</param>
+            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
+        </member>
         <member name="T:AIO.PrMac.DirCmp">
             <summary>
             文件夹比较相关命令
@@ -1524,17 +1572,27 @@
             <param name="target">目标路径</param>
             <param name="command">参数</param>
         </member>
-        <member name="T:AIO.PrMac.In">
+        <member name="T:AIO.PrMac.Ln">
             <summary>
             联接文件
             </summary>
         </member>
-        <member name="M:AIO.PrMac.In.Execute(System.String,System.String,System.String)">
+        <member name="M:AIO.PrMac.Ln.Execute(System.String,System.String,System.String)">
             <summary>
             执行
             </summary>
         </member>
-        <member name="M:AIO.PrMac.In.Execute(System.String)">
+        <member name="M:AIO.PrMac.Ln.Symbolic(System.String,System.String)">
+            <summary>
+            软连接
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Ln.Hard(System.String,System.String)">
+            <summary>
+            硬连接
+            </summary>
+        </member>
+        <member name="M:AIO.PrMac.Ln.Execute(System.String)">
             <summary>
             执行
             </summary>
@@ -1636,69 +1694,6 @@
             <summary>
             执行查询Bundle ID
             </summary>
-        </member>
-        <member name="T:AIO.PrMac.Chmod">
-            <summary>
-            权限相关类
-            </summary>
-        </member>
-        <member name="M:AIO.PrMac.Chmod.Set(System.String@,System.Int32)">
-            <summary>
-            设置权限的方法
-            </summary>
-            <param name="target">目标文件的路径</param>
-            <param name="args">需要设置的权限</param>
-            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
-        </member>
-        <member name="M:AIO.PrMac.Chmod.Set(System.String@,System.String)">
-            <summary>
-            设置权限的方法
-            </summary>
-            <param name="target">目标文件的路径</param>
-            <param name="args">需要设置的权限</param>
-            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
-        </member>
-        <member name="M:AIO.PrMac.Chmod.AddRWX(System.String@)">
-            <summary>
-            为目标文件添加读、写、执行权限的方法
-            </summary>
-            <param name="target">目标文件的路径</param>
-            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
-        </member>
-        <member name="M:AIO.PrMac.Chmod.SubRWX(System.String@)">
-            <summary>
-            为目标文件减少读、写、执行权限的方法
-            </summary>
-            <param name="target">目标文件的路径</param>
-            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
-        </member>
-        <member name="M:AIO.PrMac.Chmod.AddAW(System.String@)">
-            <summary>
-            为目标文件添加追加权限的方法
-            </summary>
-            <param name="target">目标文件的路径</param>
-            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
-        </member>
-        <member name="M:AIO.PrMac.Chmod.SubAW(System.String@)">
-            <summary>
-            为目标文件减少追加权限的方法
-            </summary>
-            <param name="target">目标文件的路径</param>
-            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
-        </member>
-        <member name="M:AIO.PrMac.Chmod.Set777(System.String@)">
-            <summary>
-            为目标文件设置权限 777
-            </summary>
-            <param name="target">目标文件的路径</param>
-            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
-        </member>
-        <member name="M:AIO.PrMac.Chmod.Set755(System.String@)">
-            <summary>
-            为目标文件设置权限 rwxr-xr-x 
-            </summary>
-            <param name="target">目标文件的路径</param>
-            <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
         </member>
         <member name="T:AIO.PrMac.Rm">
             <summary>
@@ -2621,14 +2616,9 @@
             
             </summary>
         </member>
-        <member name="F:AIO.PrMac.CMD_In">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="F:AIO.PrMac.CMD_Ln">
             <summary>
-            
+            链接文件
             </summary>
         </member>
         <member name="F:AIO.PrMac.CMD_Cal">
@@ -3175,64 +3165,6 @@
             <param name="source">源路径</param>
             <param name="target">目标路径</param>
         </member>
-        <member name="T:AIO.PrCmd.Del">
-            <summary>
-            删除 不区分文件与目录
-            </summary>
-        </member>
-        <member name="M:AIO.PrCmd.Del.Execute(System.String@,System.String@)">
-            <summary>
-            执行
-            </summary>
-        </member>
-        <member name="M:AIO.PrCmd.Del.ReadOnly(System.String@)">
-            <summary>
-            删除 只读文件
-            </summary>
-        </member>
-        <member name="M:AIO.PrCmd.Del.ALL(System.String@)">
-            <summary>
-            删除 子目录下所有文件
-            </summary>
-        </member>
-        <member name="M:AIO.PrCmd.Del.ALL(System.Collections.Generic.ICollection{System.String}@)">
-            <summary>
-            删除 子目录下所有文件
-            </summary>
-        </member>
-        <member name="M:AIO.PrCmd.Del.ALL(System.String[])">
-            <summary>
-            删除 子目录下所有文件
-            </summary>
-        </member>
-        <member name="M:AIO.PrCmd.Del.Attributes(System.String@,System.String@)">
-            <summary>
-            删除 指定属性文件
-            </summary>
-        </member>
-        <member name="T:AIO.PrCmd.Mkdir">
-            <summary>
-            创建目录命令
-            </summary>
-        </member>
-        <member name="M:AIO.PrCmd.Mkdir.Directory(System.String)">
-            <summary>
-            创建目录
-            </summary>
-        </member>
-        <member name="T:AIO.PrCmd.Move">
-            <summary>
-            移动或重命名 目录
-            </summary>
-        </member>
-        <member name="M:AIO.PrCmd.Move.Execute(System.String@,System.String@)">
-            <summary>
-            移动或重命名 目录
-            </summary>
-            <param name="source">源路径</param>
-            <param name="target">目标路径</param>
-            <returns>执行器</returns>
-        </member>
         <member name="F:AIO.PrCmd.CMD">
             <summary>
             HELP=>
@@ -3342,6 +3274,64 @@
             <param name="args">格式化参数</param>
             <returns>结果执行器</returns>
         </member>
+        <member name="T:AIO.PrCmd.Del">
+            <summary>
+            删除 不区分文件与目录
+            </summary>
+        </member>
+        <member name="M:AIO.PrCmd.Del.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="M:AIO.PrCmd.Del.ReadOnly(System.String@)">
+            <summary>
+            删除 只读文件
+            </summary>
+        </member>
+        <member name="M:AIO.PrCmd.Del.ALL(System.String@)">
+            <summary>
+            删除 子目录下所有文件
+            </summary>
+        </member>
+        <member name="M:AIO.PrCmd.Del.ALL(System.Collections.Generic.ICollection{System.String}@)">
+            <summary>
+            删除 子目录下所有文件
+            </summary>
+        </member>
+        <member name="M:AIO.PrCmd.Del.ALL(System.String[])">
+            <summary>
+            删除 子目录下所有文件
+            </summary>
+        </member>
+        <member name="M:AIO.PrCmd.Del.Attributes(System.String@,System.String@)">
+            <summary>
+            删除 指定属性文件
+            </summary>
+        </member>
+        <member name="T:AIO.PrCmd.Mkdir">
+            <summary>
+            创建目录命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrCmd.Mkdir.Directory(System.String)">
+            <summary>
+            创建目录
+            </summary>
+        </member>
+        <member name="T:AIO.PrCmd.Move">
+            <summary>
+            移动或重命名 目录
+            </summary>
+        </member>
+        <member name="M:AIO.PrCmd.Move.Execute(System.String@,System.String@)">
+            <summary>
+            移动或重命名 目录
+            </summary>
+            <param name="source">源路径</param>
+            <param name="target">目标路径</param>
+            <returns>执行器</returns>
+        </member>
         <member name="T:AIO.PrCmd.Rmdir">
             <summary>
             删除文件夹
@@ -3371,6 +3361,15 @@
             <summary>
             符号链接
             </summary>
+        </member>
+        <member name="M:AIO.PrCmd.MkLink.Execute(System.String@,System.String@,System.String@)">
+            <summary>
+            符号链接 目录
+            </summary>
+            <param name="target">链接目标路径</param>
+            <param name="source">链接源路径</param>
+            <param name="args">参数</param>
+            <returns>执行器</returns>
         </member>
         <member name="M:AIO.PrCmd.MkLink.Directory(System.String@,System.String@)">
             <summary>
@@ -3703,16 +3702,6 @@
         <member name="T:AIO.PrWin">
             <summary>
             WIN 平台命令
-            </summary>
-        </member>
-        <member name="T:AIO.PrWin.Certutil">
-            <summary>
-            Certutil 命令
-            </summary>
-        </member>
-        <member name="M:AIO.PrWin.Certutil.MD5(System.String)">
-            <summary>
-            计算MD5
             </summary>
         </member>
         <member name="T:AIO.PrWin.Git">
@@ -4114,6 +4103,16 @@
             <param name="args">参数</param>
             <returns><see cref="T:System.Text.StringBuilder"/></returns>
         </member>
+        <member name="T:AIO.PrWin.Certutil">
+            <summary>
+            Certutil 命令
+            </summary>
+        </member>
+        <member name="M:AIO.PrWin.Certutil.MD5(System.String)">
+            <summary>
+            计算MD5
+            </summary>
+        </member>
         <member name="T:AIO.PrWin.Comp">
             <summary>
             比较
@@ -4210,59 +4209,6 @@
             <param name="lineIndex">行数</param>
             <param name="caseASCII">忽略ASCII大小写</param>
             <param name="skipOffline">Ture跳过脱机属性文件</param>
-        </member>
-        <member name="T:AIO.PrWin.XCopy">
-            <summary>
-            复制文件夹
-            </summary>
-        </member>
-        <member name="M:AIO.PrWin.XCopy.Execute(System.String@,System.String@,System.String@)">
-            <summary>
-            复制文件夹
-            </summary>
-            <param name="source">源路径</param>
-            <param name="target">目标路径</param>
-            <param name="args">启动参数</param>
-        </member>
-        <member name="M:AIO.PrWin.XCopy.Directory(System.String@,System.String@,System.Boolean)">
-            <summary>
-            复制文件夹 包括空目录
-            </summary>
-            <param name="source">源路径</param>
-            <param name="target">目标路径</param>
-            <param name="isAll">Ture:包含空目录</param>
-        </member>
-        <member name="M:AIO.PrWin.XCopy.NetDirectory(System.String@,System.String@,System.Boolean)">
-            <summary>
-            网络 复制文件夹 包括空目录
-            </summary>
-            <param name="source">源路径</param>
-            <param name="target">目标路径</param>
-            <param name="isAll">Ture:包含空目录</param>
-        </member>
-        <member name="M:AIO.PrWin.XCopy.BigFile(System.String@,System.String@,System.Boolean)">
-            <summary>
-            复制大文件夹 包括空目录
-            </summary>
-            <param name="source">源路径</param>
-            <param name="target">目标路径</param>
-            <param name="isAll">Ture:包含空目录</param>
-        </member>
-        <member name="M:AIO.PrWin.XCopy.DirectoryTree(System.String@,System.String@,System.Boolean)">
-            <summary>
-            复制文件夹结构 不包含文件
-            </summary>
-            <param name="source">源路径</param>
-            <param name="target">目标路径</param>
-            <param name="isAll">Ture:包含空目录</param>
-        </member>
-        <member name="M:AIO.PrWin.XCopy.NetDirectoryTree(System.String@,System.String@,System.Boolean)">
-            <summary>
-            复制文件夹结构 不包含文件
-            </summary>
-            <param name="source">源路径</param>
-            <param name="target">目标路径</param>
-            <param name="isAll">Ture:包含空目录</param>
         </member>
         <member name="T:AIO.PrWin.Open">
             <summary>
@@ -4532,6 +4478,59 @@
             windows 取消倒计时关机
             </summary>
         </member>
+        <member name="T:AIO.PrWin.XCopy">
+            <summary>
+            复制文件夹
+            </summary>
+        </member>
+        <member name="M:AIO.PrWin.XCopy.Execute(System.String@,System.String@,System.String@)">
+            <summary>
+            复制文件夹
+            </summary>
+            <param name="source">源路径</param>
+            <param name="target">目标路径</param>
+            <param name="args">启动参数</param>
+        </member>
+        <member name="M:AIO.PrWin.XCopy.Directory(System.String@,System.String@,System.Boolean)">
+            <summary>
+            复制文件夹 包括空目录
+            </summary>
+            <param name="source">源路径</param>
+            <param name="target">目标路径</param>
+            <param name="isAll">Ture:包含空目录</param>
+        </member>
+        <member name="M:AIO.PrWin.XCopy.NetDirectory(System.String@,System.String@,System.Boolean)">
+            <summary>
+            网络 复制文件夹 包括空目录
+            </summary>
+            <param name="source">源路径</param>
+            <param name="target">目标路径</param>
+            <param name="isAll">Ture:包含空目录</param>
+        </member>
+        <member name="M:AIO.PrWin.XCopy.BigFile(System.String@,System.String@,System.Boolean)">
+            <summary>
+            复制大文件夹 包括空目录
+            </summary>
+            <param name="source">源路径</param>
+            <param name="target">目标路径</param>
+            <param name="isAll">Ture:包含空目录</param>
+        </member>
+        <member name="M:AIO.PrWin.XCopy.DirectoryTree(System.String@,System.String@,System.Boolean)">
+            <summary>
+            复制文件夹结构 不包含文件
+            </summary>
+            <param name="source">源路径</param>
+            <param name="target">目标路径</param>
+            <param name="isAll">Ture:包含空目录</param>
+        </member>
+        <member name="M:AIO.PrWin.XCopy.NetDirectoryTree(System.String@,System.String@,System.Boolean)">
+            <summary>
+            复制文件夹结构 不包含文件
+            </summary>
+            <param name="source">源路径</param>
+            <param name="target">目标路径</param>
+            <param name="isAll">Ture:包含空目录</param>
+        </member>
         <member name="M:AIO.PrWin.Execute">
             <inheritdoc/>
         </member>
@@ -4795,9 +4794,23 @@
             文件
             </summary>
         </member>
-        <member name="M:AIO.PrPlatform.File.Link(System.String,System.String)">
+        <member name="M:AIO.PrPlatform.File.Link(System.String,System.String,System.String@)">
             <summary>
             符号链接
+            </summary>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.File.Symbolic(System.String,System.String)">
+            <summary>
+            软链接
+            </summary>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.File.Hard(System.String,System.String)">
+            <summary>
+            硬链接
             </summary>
             <exception cref="T:System.NotImplementedException">未实现</exception>
             <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
@@ -4814,9 +4827,23 @@
             文件夹命令
             </summary>
         </member>
-        <member name="M:AIO.PrPlatform.Folder.Link(System.String,System.String)">
+        <member name="M:AIO.PrPlatform.Folder.Link(System.String,System.String,System.String@)">
             <summary>
             链接文件夹
+            </summary>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Folder.Symbolic(System.String,System.String)">
+            <summary>
+            软链接文件夹
+            </summary>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Folder.Hard(System.String,System.String)">
+            <summary>
+            硬链接文件夹
             </summary>
             <exception cref="T:System.NotImplementedException">未实现</exception>
             <returns><see cref="T:AIO.IExecutor"/>执行器</returns>

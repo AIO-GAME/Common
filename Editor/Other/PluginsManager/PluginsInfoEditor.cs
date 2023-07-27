@@ -222,7 +222,7 @@ namespace AIO.Unity.Editor
                 var parent = Directory.GetParent(target.FullName);
                 if (!parent.Exists) parent.Create();
 
-                var a = PrPlatform.Folder.Link(target.FullName, source.FullName);
+                var a = PrPlatform.Folder.Symbolic(target.FullName, source.FullName);
                 list.Add(a.Async());
             }
 
@@ -310,7 +310,7 @@ namespace AIO.Unity.Editor
 
             var parent = Directory.GetParent(target.FullName);
             if (!parent.Exists) parent.Create();
-            var Result = await PrPlatform.Folder.Link(target.FullName, source.FullName);
+            var Result = await PrPlatform.Folder.Symbolic(target.FullName, source.FullName);
             if (Result.ExitCode == 0)
             {
                 Debug.LogFormat("链接成功 {0} : {1}", info.Name, target.FullName);
