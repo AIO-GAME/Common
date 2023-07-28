@@ -1,8 +1,9 @@
-﻿using System.Diagnostics;
-
-using UnityEditor;
-
+﻿using System;
+using System.Diagnostics;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace AIO
 {
@@ -10,21 +11,24 @@ namespace AIO
     /// 一个PropertyAttribute，它可以自己绘制，而不需要单独的PropertyDrawer
     /// </summary>
     [Conditional(Strings.UnityEditor)]
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public abstract class SelfDrawerAttribute : PropertyAttribute
     {
+#if UNITY_EDITOR
         /// <summary>[Editor-Only]
         /// Can the GUI for the `property` be cached?
         /// </summary>
         public virtual bool CanCacheInspectorGUI(SerializedProperty property) => true;
-
+        
         /// <summary>[Editor-Only]
         /// Calculates the height of the GUI for the `property`.
         /// </summary>
         public virtual float GetPropertyHeight(SerializedProperty property, GUIContent label) => EditorGUIUtility.singleLineHeight;
-
+        
         /// <summary>[Editor-Only]
         /// Draws the GUI for the `property`.
         /// </summary>
         public abstract void OnGUI(Rect area, SerializedProperty property, GUIContent label);
+#endif
     }
 }

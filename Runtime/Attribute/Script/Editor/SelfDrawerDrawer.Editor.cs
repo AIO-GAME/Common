@@ -1,17 +1,12 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using UnityEditor;
 using UnityEngine;
 
 namespace AIO
 {
-    /// <summary>
-    /// Draws the GUI for a <see cref="SelfDrawerAttribute"/> field.
-    /// </summary>
     [CustomPropertyDrawer(typeof(SelfDrawerAttribute), true)]
-    internal sealed class SelfDrawerDrawer : PropertyDrawer
+    internal sealed partial class SelfDrawerDrawer : PropertyDrawer
     {
-        /// <summary>Casts the <see cref="PropertyDrawer.attribute"/>.</summary>
-        public SelfDrawerAttribute Attribute => (SelfDrawerAttribute)attribute;
-
         /// <summary>Calls <see cref="SelfDrawerAttribute.CanCacheInspectorGUI"/>.</summary>
         public override bool CanCacheInspectorGUI(SerializedProperty property)
             => Attribute.CanCacheInspectorGUI(property);
@@ -25,3 +20,4 @@ namespace AIO
             => Attribute.OnGUI(area, property, label);
     }
 }
+#endif

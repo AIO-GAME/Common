@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Reflection;
-using UnityEditor;
 using UnityEngine;
 
 namespace AIO
@@ -25,7 +24,6 @@ namespace AIO
 
         /// <inheritdoc/>
         public override Type GetFieldElementType(object obj) => FieldElementType ?? GetElementType(GetField(ref obj)?.FieldType);
-
 
         /// <summary>Returns the type of elements in the array.</summary>
         public static Type GetElementType(Type fieldType)
@@ -94,13 +92,26 @@ namespace AIO
         }
 
 
-        /// <summary>Returns a description of this accessor's path.</summary>
+        /// <summary>
+        /// Returns a description of this accessor's path.
+        /// </summary>
         public override string ToString() => $"{base.ToString()}[{ElementIndex}]";
 
-        /// <summary>Returns the <see cref="SerializedProperty.propertyPath"/> of the array containing the target.</summary>
+#if UNITY_EDITOR
+        /// <summary>
+        /// Returns the
+        /// <see cref="UnityEditor.SerializedProperty.propertyPath"/>
+        /// of the array containing the target.
+        /// </summary>
+#endif
         public string GetCollectionPath() => base.GetPath();
 
-        /// <summary>Returns this accessor's <see cref="SerializedProperty.propertyPath"/>.</summary>
+#if UNITY_EDITOR
+        /// <summary>
+        /// Returns this accessor's
+        /// <see cref="UnityEditor.SerializedProperty.propertyPath"/>.
+        /// </summary>
+#endif
         public override string GetPath() => $"{base.GetPath()}.Array.data[{ElementIndex}]";
     }
 }
