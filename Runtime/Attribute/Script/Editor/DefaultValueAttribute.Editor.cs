@@ -1,42 +1,20 @@
-﻿using System;
+﻿/*|✩ - - - - - |||
+|||✩ Author:   ||| -> SAM
+|||✩ Date:     ||| -> 2023-07-28
+|||✩ Document: ||| -> 
+|||✩ - - - - - |*/
+
+#if UNITY_EDITOR
+
+using System;
 using System.Diagnostics;
 using System.Reflection;
-
 using UnityEditor;
 
 namespace AIO
 {
-    /// <summary>[Editor-Conditional] Specifies the default value of a field and a secondary fallback.</summary>
-    /// https://kybernetik.com.au/animancer/api/Animancer/DefaultValueAttribute
-    [AttributeUsage(AttributeTargets.Field)]
-    [Conditional(Strings.UnityEditor)]
-    public class DefaultValueAttribute : Attribute
+    public partial class DefaultValueAttribute
     {
-        /// <summary>
-        /// The main default value.
-        /// </summary>
-        public object Primary { get; protected set; }
-
-        /// <summary>
-        /// The fallback value to use if the target value was already equal to the <see cref="Primary"/>.
-        /// </summary>
-        public object Secondary { get; protected set; }
-
-        /// <summary>Creates a new <see cref="DefaultValueAttribute"/>.</summary>
-        public DefaultValueAttribute(object primary, object secondary = null)
-        {
-            Primary = primary;
-            Secondary = secondary;
-        }
-
-
-        /// <summary>
-        /// Creates a new <see cref="DefaultValueAttribute"/>.
-        /// </summary>
-        private DefaultValueAttribute()
-        {
-        }
-
         /// <summary>[Editor-Only]
         /// If the field represented by the `property` has a <see cref="DefaultValueAttribute"/>, this method sets
         /// the `value` to its <see cref="Primary"/> value. If it was already at the value, it sets it to the
@@ -103,3 +81,4 @@ namespace AIO
         }
     }
 }
+#endif

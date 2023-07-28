@@ -1,9 +1,9 @@
-﻿namespace AIO
-{
-    using System;
-    using System.Collections.Generic;
-    using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
+namespace AIO
+{
     /// <summary>[Editor-Only]
     /// A simple system for converting objects and storing the results so they can be reused to minimise the need for
     /// garbage collection, particularly for string construction.
@@ -56,7 +56,7 @@
             var frame = Time.frameCount;
             if (_LastCleanupFrame + 100 < frame)
             {
-                for (int i = Keys.Count - 1; i >= 0; i--)
+                for (var i = Keys.Count - 1; i >= 0; i--)
                 {
                     var checkKey = Keys[i];
                     if (!Cache.TryGetValue(checkKey, out cached) ||
