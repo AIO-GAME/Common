@@ -67,6 +67,9 @@
         <member name="P:AIO.Executor.Info">
             <inheritdoc/>
         </member>
+        <member name="P:AIO.Executor.EnableOutput">
+            <inheritdoc/>
+        </member>
         <member name="P:AIO.Executor.Pr">
             <summary>
             执行的进程
@@ -89,7 +92,7 @@
         <member name="M:AIO.Executor.GetAwaiter">
             <inheritdoc/>
         </member>
-        <member name="M:AIO.Executor.#ctor(System.Diagnostics.ProcessStartInfo@)">
+        <member name="M:AIO.Executor.#ctor(System.Diagnostics.ProcessStartInfo@,System.Boolean@)">
             <summary>
             执行器
             </summary>
@@ -142,6 +145,9 @@
             </summary>
         </member>
         <member name="P:AIO.PrCourse.Info">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.PrCourse.EnableOutput">
             <inheritdoc/>
         </member>
         <member name="F:AIO.PrCourse.IsLog">
@@ -542,6 +548,11 @@
         <member name="P:AIO.IPrCourseRead.Info">
             <summary>
             ProcessStartInfo类型的属性，表示启动进程所需的信息。
+            </summary>
+        </member>
+        <member name="P:AIO.IPrCourseRead.EnableOutput">
+            <summary>
+            开启输出日志
             </summary>
         </member>
         <member name="T:AIO.IPrCourse">
@@ -1327,14 +1338,6 @@
             >1:当前分支落后的提交数
             -1:未知错误
             </returns>
-        </member>
-        <member name="M:AIO.PrGit.Upload(System.String,System.String)">
-            <summary>
-            上传 只支持最简单的操作
-            </summary>
-            <param name="target">GIT 文件夹</param>
-            <param name="commitData">提交信息</param>
-            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="F:AIO.PrGit.CMD">
             <summary>
@@ -3685,7 +3688,7 @@
             进程执行器(空)
             </summary>
         </member>
-        <member name="M:AIO.ExecutorEmpty.#ctor">
+        <member name="M:AIO.ExecutorEmpty.#ctor(System.Boolean)">
             <summary>
             进程执行器(空)
             </summary>
@@ -3728,6 +3731,11 @@
             </summary>
         </member>
         <member name="M:AIO.ExecutorError.#ctor(System.Diagnostics.ProcessStartInfo@)">
+            <summary>
+            进程执行器(错误)
+            </summary>
+        </member>
+        <member name="M:AIO.ExecutorError.#ctor(System.Diagnostics.ProcessStartInfo@,System.Boolean@)">
             <summary>
             进程执行器(错误)
             </summary>

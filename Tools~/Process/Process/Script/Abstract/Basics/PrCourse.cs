@@ -21,6 +21,9 @@ namespace AIO
         /// <inheritdoc/>
         public ProcessStartInfo Info { get; protected set; }
 
+        /// <inheritdoc/>
+        public bool EnableOutput { get; set; } = true;
+
         /// <summary>
         /// 开启日志
         /// </summary>
@@ -47,7 +50,7 @@ namespace AIO
         /// <inheritdoc/>
         public virtual IExecutor Execute()
         {
-            return new Executor(Info);
+            return new Executor(Info, EnableOutput);
         }
 
         /// <inheritdoc/>

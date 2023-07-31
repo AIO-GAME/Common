@@ -51,7 +51,7 @@ namespace AIO
                 return new ExecutorException(Info, ex);
             }
 
-            return new Executor(Info);
+            return new Executor(Info, EnableOutput);
         }
 
         private static IPrCourse Create()

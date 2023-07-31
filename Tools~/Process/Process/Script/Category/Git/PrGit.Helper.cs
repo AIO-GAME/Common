@@ -41,20 +41,27 @@ namespace AIO
             /// </returns>
             public static async Task<int> GetBehind(string target)
             {
-                await Fetch.Origin(target);
-                var ret = await Status.Execute(target);
-                var lines = ret.StdOut.ToString().Split('\n');
-                foreach (var line in lines)
                 {
-                    if (!line.StartsWith("Your branch")) continue;
-                    if (line.StartsWith("Your branch is up to date with")) return 0;
-                    if (line.StartsWith("Your branch is behind"))
+                    var execute = Fetch.Origin(target);
+                    execute.EnableOutput = false;
+                    await execute;
+                }
+                {
+                    var execute = Status.Execute(target);
+                    execute.EnableOutput = false;
+                    var ret = await execute;
+                    var lines = ret.StdOut.ToString().Split('\n');
+                    foreach (var line in lines)
                     {
-                        var behind = line.Split(' ')[6];
-                        return int.Parse(behind);
+                        if (!line.StartsWith("Your branch")) continue;
+                        if (line.StartsWith("Your branch is up to date with")) return 0;
+                        if (line.StartsWith("Your branch is behind"))
+                        {
+                            var behind = line.Split(' ')[6];
+                            return int.Parse(behind);
+                        }
                     }
                 }
-
                 return -1;
             }
         }

@@ -40,7 +40,8 @@ namespace AIO
                     else result = new ResultException(Pr.StartInfo, ex);
                 }
 
-                result.Finish(inputs.ToString()).Debug();
+                result.Finish(inputs.ToString());
+                if (EnableOutput) result.Debug();
                 if (Next != null) return result.Link(Next.Sync());
                 return result;
             }

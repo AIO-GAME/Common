@@ -78,7 +78,6 @@
     <Compile Include="Script\Category\Git\PrGit.Status.cs" />
     <Compile Include="Script\Category\Git\PrGit.Submodule.cs" />
     <Compile Include="Script\Category\Git\PrGit.Helper.cs" />
-    <Compile Include="Script\Category\Git\PrGit.Upload.cs" />
     <Compile Include="Script\Category\Mac\DateTime\PrMac.Cal.cs" />
     <Compile Include="Script\Category\Mac\DateTime\PrMac.Time.cs" />
     <Compile Include="Script\Category\Mac\IO\PrMac.Cat.cs" />

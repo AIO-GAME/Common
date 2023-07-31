@@ -29,7 +29,7 @@ namespace AIO
 
             if (PrCourse.IsCache && !string.IsNullOrEmpty(ret.StdError.ToString()))
                 throw new Exception(ret.StdError.ToString());
-            else Console.WriteLine(ret.StdALL);
+            Console.WriteLine(ret.StdALL);
 
             if (ret.Next != null) Debug(ret.Next);
         }

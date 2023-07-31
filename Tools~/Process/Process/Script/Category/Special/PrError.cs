@@ -21,11 +21,20 @@ namespace AIO
         {
         }
 
+        /// <summary>
+        /// 进程执行器(错误)
+        /// </summary>
+        public ExecutorError(in ProcessStartInfo info, in bool enableOutput = true) : base(info, enableOutput)
+        {
+        }
+
+
         /// <inheritdoc/>
         public override IResult Sync()
         {
             var result = new ResultError(Pr);
-            result.Finish(inputs.ToString()).Debug();
+            result.Finish(inputs.ToString());
+            if (EnableOutput) result.Debug();
             if (Next != null) return result.Link(Next.Sync());
             return result;
         }
@@ -68,7 +77,6 @@ namespace AIO
         /// </summary>
         public ResultError(Process process) : base(process)
         {
-
         }
     }
 
@@ -82,7 +90,7 @@ namespace AIO
         /// </summary>
         public override IExecutor Execute()
         {
-            return new ExecutorError(Info);
+            return new ExecutorError(Info, EnableOutput);
         }
     }
 }

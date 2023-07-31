@@ -20,6 +20,11 @@ namespace AIO
         /// ProcessStartInfo类型的属性，表示启动进程所需的信息。
         /// </summary>
         ProcessStartInfo Info { get; }
+
+        /// <summary>
+        /// 开启输出日志
+        /// </summary>
+        bool EnableOutput { get; set; }
     }
 
     /// <summary>

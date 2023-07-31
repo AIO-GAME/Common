@@ -47,13 +47,11 @@ namespace AIO
         /// </summary>
         public ResultEmpty() : base(null)
         {
-
         }
 
         /// <inheritdoc/>
         public override void Dispose()
         {
-
         }
 
         /// <inheritdoc/>
@@ -86,7 +84,7 @@ namespace AIO
         /// <summary>
         /// 进程执行器(空)
         /// </summary>
-        public ExecutorEmpty() : base(null)
+        public ExecutorEmpty(bool enableOutput = true) : base(null, enableOutput)
         {
         }
 
@@ -102,7 +100,6 @@ namespace AIO
         /// <inheritdoc/>
         public override void Dispose()
         {
-
         }
 
         /// <inheritdoc/>
@@ -135,11 +132,9 @@ namespace AIO
     /// </summary>
     public sealed partial class PrEmpty : PrCourse
     {
-
         /// <inheritdoc/>
         public override void Dispose()
         {
-
         }
 
         /// <inheritdoc/>
@@ -151,7 +146,7 @@ namespace AIO
         /// <inheritdoc/>
         public override IExecutor Execute()
         {
-            return new ExecutorEmpty();
+            return new ExecutorEmpty(EnableOutput);
         }
     }
 }
