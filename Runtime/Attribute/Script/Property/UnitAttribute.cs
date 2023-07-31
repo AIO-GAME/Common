@@ -90,7 +90,6 @@ namespace AIO
 
         private void Check(string type)
         {
-            Console.WriteLine(type);
             if (_unitsAttribute == null)
             {
                 switch (type)
@@ -98,14 +97,22 @@ namespace AIO
                     case "double":
                         _unitsAttribute = new UnitsDoubleAttribute(MultipliersDouble, DisplayConverters, UnitIndex);
                         break;
-                    case "long":
-                        _unitsAttribute = new UnitsLongAttribute(MultipliersDouble, DisplayConverters, UnitIndex);
-                        break;
                     case "float":
                         _unitsAttribute = new UnitsFloatAttribute(MultipliersDouble, DisplayConverters, UnitIndex);
                         break;
+                    case "long":
+                        _unitsAttribute = new UnitsLongAttribute(MultipliersDouble, DisplayConverters, UnitIndex);
+                        break;
                     case "int":
                         _unitsAttribute = new UnitsInt32Attribute(MultipliersDouble, DisplayConverters, UnitIndex);
+                        break;
+                    case "ulong":
+                    case "uint":
+                    case "short":
+                    case "ushort":
+                    case "byte":
+                    case "sbyte":
+                    default:
                         break;
                 }
             }
@@ -115,12 +122,27 @@ namespace AIO
         public override void OnGUI(Rect area, SerializedProperty property, GUIContent label)
         {
             Check(property.type);
-            _unitsAttribute.OnGUI(area, property, label);
+            if (_unitsAttribute is null)
+            {
+                EditorGUI.LabelField(area, label.text, $"[Error] Unit {property.type} is not supported", EditorStyles.helpBox);
+            }
+            else _unitsAttribute.OnGUI(area, property, label);
         }
+
+        /// <summary> [Editor-Only]
+        /// Determines how many lines tall the `property` should be.
+        /// </summary>
+        private int GetLineCount(SerializedProperty property, GUIContent label) => EditorGUIUtility.wideMode ? 1 : 2;
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             Check(property.type);
+            if (_unitsAttribute is null)
+            {
+                var lineCount = GetLineCount(property, label);
+                return EditorGUIUtility.singleLineHeight * lineCount + EditorGUIUtility.standardVerticalSpacing * (lineCount - 1);
+            }
+
             return _unitsAttribute.GetPropertyHeight(property, label);
         }
 #endif
