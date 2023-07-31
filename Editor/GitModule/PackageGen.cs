@@ -95,7 +95,7 @@ namespace AIO.Unity.Editor
                 
                 {
                     str.AppendLine();
-                    str.AppendFormat("        [MenuItem(\"Git/\" + DisplayName + \"/Open\", false, 0)]\r\n");
+                    str.AppendFormat("        [MenuItem(\"Git/\" + DisplayName + \"/打开 Open\", false, 0)]\r\n");
                     str.AppendFormat("        internal static async void Open()\r\n").Append("        {\r\n");
                     str.AppendFormat("            await PrPlatform.Open.Path(Application.dataPath.Replace(\"Assets\", URL));\r\n").Append("        }\r\n");
                 }
@@ -103,13 +103,13 @@ namespace AIO.Unity.Editor
                 {
                     str.AppendLine();
                     str.AppendFormat("        private static bool HasUpdate = false;\r\n\r\n");
-                    str.AppendFormat("        [MenuItem(\"Git/\" + DisplayName + \"/Refresh\", false, 1)]\r\n");
+                    str.AppendFormat("        [MenuItem(\"Git/\" + DisplayName + \"/刷新 Refresh\", false, 1)]\r\n");
                     str.AppendFormat("        internal static async void Refresh()\r\n").Append("        {\r\n");
                     str.AppendFormat("            var ret = await PrGit.Helper.GetBehind(Application.dataPath.Replace(\"Assets\", URL));\r\n");
                     str.AppendFormat("            HasUpdate = ret > 0;\r\n");
                     str.AppendFormat("            if (ret < 0)").Append("            {\r\n");
                     str.AppendFormat("                Debug.LogError(\"Refresh Error: \" + ret);\r\n");
-                    str.AppendFormat("            return;\r\n").Append("            }\r\n        }\r\n");
+                    str.AppendFormat("                return;\r\n").Append("            }\r\n        }\r\n");
                 }
 
                 {
