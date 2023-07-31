@@ -164,15 +164,6 @@ namespace AIO.Unity.Editor
             await PrPlatform.Git.ResetSoft(list, false);
         }
 
-        [MenuItem(CMD_GIT + "/All/设置关联远端库 Remote SetUrl", false, 7)]
-        private static async void GITGitRemoteSetUrl()
-        {
-            var list = GetInfo()
-                .Select(x => x.resolvedPath)
-                .ToList();
-            await PrPlatform.Git.RemoteSetUrl(list, false);
-        }
-
         #endregion
     }
 }
