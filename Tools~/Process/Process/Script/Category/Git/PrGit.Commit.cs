@@ -11,7 +11,7 @@ namespace AIO
     public partial class PrGit
     {
         /// <summary>
-        /// 提交
+        /// <see cref="PrGit"/> <see cref="Commit"/> 提交
         /// </summary>
         public sealed class Commit
         {
@@ -20,7 +20,7 @@ namespace AIO
             /// </summary>
             /// <param name="work">GIT 文件夹</param>
             /// <param name="args">参数</param>
-            /// <returns>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor Execute(in string work, in string args)
             {
                 if (string.IsNullOrEmpty(args)) throw new ArgumentNullException(nameof(args));
@@ -32,7 +32,7 @@ namespace AIO
             /// </summary>
             /// <param name="target">GIT 文件夹</param>
             /// <param name="message">消息</param>
-            /// <returns>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor Default(string target, string message = "-m \"default submission information\"")
             {
                 if (string.IsNullOrEmpty(message)) throw new ArgumentNullException(nameof(message));

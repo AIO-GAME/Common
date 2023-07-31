@@ -11,9 +11,9 @@ namespace AIO
     public partial class PrGit
     {
         /// <summary>
-        /// 克隆
+        /// <see cref="PrGit"/> <see cref="Clone"/> 克隆
         /// </summary>
-        public sealed class Clone
+        public static class Clone
         {
             /// <summary>
             /// 克隆指定分支
@@ -21,6 +21,7 @@ namespace AIO
             /// <param name="wrok">目标文件夹</param>
             /// <param name="url">clone列表</param>
             /// <param name="branch">分支</param>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor Branch(in string wrok, in string url, in string branch)
             {
                 if (string.IsNullOrEmpty(branch)) throw new ArgumentNullException(nameof(branch));
@@ -33,6 +34,7 @@ namespace AIO
             /// </summary>
             /// <param name="wrok">目标文件夹</param>
             /// <param name="url">clone列表</param>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor Default(in string wrok, in string url)
             {
                 if (!NetUtils.UrlCheck(url)) throw new ArgumentException(string.Concat("Url not a valid address : ", url));
@@ -44,7 +46,7 @@ namespace AIO
             /// </summary>
             /// <param name="work">GIT 文件夹</param>
             /// <param name="args">参数</param>
-            /// <returns>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor Execute(in string work, in string args)
             {
                 if (string.IsNullOrEmpty(args)) throw new ArgumentNullException(nameof(args));

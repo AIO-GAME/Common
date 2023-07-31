@@ -11,16 +11,16 @@ namespace AIO
     public partial class PrGit
     {
         /// <summary>
-        /// 远端
+        /// <see cref="PrGit"/> <see cref="Remote"/> 远端
         /// </summary>
-        public sealed class Remote
+        public static class Remote
         {
             /// <summary>
             /// 执行
             /// </summary>
             /// <param name="work">GIT 文件夹</param>
             /// <param name="args">参数</param>
-            /// <returns>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor Execute(in string work, in string args)
             {
                 if (string.IsNullOrEmpty(args)) throw new ArgumentNullException(nameof(args));
@@ -30,7 +30,7 @@ namespace AIO
             /// <summary>
             /// 获取远端库
             /// </summary>
-            /// <returns>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor ListName(in string work)
             {
                 return Create(work, "remote");
@@ -39,7 +39,7 @@ namespace AIO
             /// <summary>
             /// 获取远端库
             /// </summary>
-            /// <returns>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor ListNameAll(in string work)
             {
                 return Create(work, "remote -v show");
@@ -51,7 +51,7 @@ namespace AIO
             /// <param name="work">Git 库</param>
             /// <param name="remoteName">远端名</param>
             /// <param name="url">远端路径</param>
-            /// <returns>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor Add(in string work, in string remoteName, in string url)
             {
                 if (string.IsNullOrEmpty(remoteName)) throw new ArgumentNullException();
@@ -65,7 +65,7 @@ namespace AIO
             /// <param name="work">Git 库</param>
             /// <param name="remoteName">远端名</param>
             /// <param name="url">远端路径</param>
-            /// <returns>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor SetUrlAdd(in string work, in string remoteName, in string url)
             {
                 if (string.IsNullOrEmpty(remoteName)) throw new ArgumentNullException();
@@ -79,7 +79,7 @@ namespace AIO
             /// <param name="work">Git 库</param>
             /// <param name="remoteName">远端名</param>
             /// <param name="url">远端路径</param>
-            /// <returns>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor SetUrlDel(in string work, in string remoteName, in string url)
             {
                 if (string.IsNullOrEmpty(remoteName)) throw new ArgumentNullException();
@@ -92,7 +92,7 @@ namespace AIO
             /// </summary>
             /// <param name="work">Git 库</param>
             /// <param name="remoteName">远端名</param>
-            /// <returns>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor Remove(in string work, in string remoteName)
             {
                 if (string.IsNullOrEmpty(remoteName)) throw new ArgumentNullException();
@@ -105,7 +105,7 @@ namespace AIO
             /// <param name="work">Git 库</param>
             /// <param name="oldRemoteName">老</param>
             /// <param name="newRemoteName">新</param>
-            /// <returns>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor Remove(in string work, in string oldRemoteName, in string newRemoteName)
             {
                 if (string.IsNullOrEmpty(oldRemoteName)) throw new ArgumentNullException();

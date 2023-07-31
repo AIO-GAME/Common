@@ -11,7 +11,7 @@ namespace AIO
     public partial class PrGit
     {
         /// <summary>
-        /// 添加命令
+        /// <see cref="PrGit"/> <see cref="Add"/> 添加命令
         /// usage: git add [(options)] [--] (pathspec)...
         /// -n, --dry-run         dry run
         /// -v, --verbose         be verbose
@@ -33,7 +33,7 @@ namespace AIO
         ///                       read pathspec from file
         /// --pathspec-file-nul   with --pathspec-from-file, pathspec elements are separated with NUL character
         /// </summary>
-        public sealed class Add
+        public static class Add
         {
             /// <summary>
             /// 执行
@@ -51,7 +51,7 @@ namespace AIO
             /// 添加所有文件
             /// </summary>
             /// <param name="work">GIT 文件夹</param>
-            /// <returns></returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor ALL(in string work)
             {
                 return Create(work, "add --all");
@@ -61,7 +61,7 @@ namespace AIO
             /// 添加所有文件 并显示详细信息
             /// </summary>
             /// <param name="work">GIT 文件夹</param>
-            /// <returns></returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor ALLWithV(in string work)
             {
                 return Create(work, "add --all --verbose");
@@ -71,7 +71,7 @@ namespace AIO
             /// 列出文件
             /// </summary>
             /// <param name="work">GIT 文件夹</param>
-            /// <returns></returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor ALLWithN(in string work)
             {
                 return Create(work, "add --all --dry-run");
@@ -81,7 +81,7 @@ namespace AIO
             /// 添加所有文件 并显示详细信息 并显示详细进度
             /// </summary>
             /// <param name="work">GIT 文件夹</param>
-            /// <returns></returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor ALLWithVP(in string work)
             {
                 return Create(work, "add --all --verbose --progress");
@@ -91,7 +91,7 @@ namespace AIO
             /// 添加所有文件 并更新
             /// </summary>
             /// <param name="work">GIT 文件夹</param>
-            /// <returns></returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor ALLWithU(in string work)
             {
                 return Create(work, "add --all --update");

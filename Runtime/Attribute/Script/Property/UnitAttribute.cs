@@ -106,14 +106,7 @@ namespace AIO
                     case "int":
                         _unitsAttribute = new UnitsInt32Attribute(MultipliersDouble, DisplayConverters, UnitIndex);
                         break;
-                    case "ulong":
-                    case "uint":
-                    case "short":
-                    case "ushort":
-                    case "byte":
-                    case "sbyte":
-                    default:
-                        break;
+                    default: return;
                 }
             }
         }

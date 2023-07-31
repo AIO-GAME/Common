@@ -190,6 +190,7 @@ namespace AIO
         {
             public CPrintElapse(string title) : base(title)
             {
+             
             }
 
             public override void Finish(string format = "g")

@@ -20,22 +20,6 @@ namespace AIO.Unity.Editor
         private const string GitLabel = "Package/";
         private const int DEFAULT = 0;
 
-        [MenuItem(CMD_Git + CMD_Git_Push, true, DEFAULT)]
-        [MenuItem(CMD_Git + CMD_Git_Pull, true, DEFAULT + 100)]
-        [MenuItem(CMD_Git + CMD_Git_Clone, true, DEFAULT + 200)]
-        [MenuItem(CMD_Git + CMD_Git_Add, true, DEFAULT + 300)]
-        [MenuItem(CMD_Git + CMD_Git_Commit, true, DEFAULT + 400)]
-        [MenuItem(CMD_Git + CMD_Git_Upload, true, DEFAULT + 500)]
-        [MenuItem(CMD_Git + CMD_Git_RemoteSetUrl, true, DEFAULT + 600)]
-        [MenuItem(CMD_Git + CMD_Git_Clean, true, DEFAULT + 1000)]
-        private static void Refresh()
-        {
-            AssetDatabase.Refresh();
-#if UNITY_2020_1_OR_NEWER
-            AssetDatabase.RefreshSettings();
-#endif
-        }
-
         private static IEnumerable<PackageInfo> GetInfo()
         {
             var packageInfos = AssetDatabase.FindAssets("package", new string[] { "Packages" })
@@ -52,7 +36,7 @@ namespace AIO.Unity.Editor
 
         #region Git All
 
-        [MenuItem(CMD_Git + "/All/克隆 Clone", false, 0)]
+        [MenuItem(CMD_GIT + "/All/克隆 Clone", false, 0)]
         private static async void GITClone()
         {
             var PackagePath = Application.dataPath.Replace("Assets", "Packages");
@@ -61,7 +45,7 @@ namespace AIO.Unity.Editor
             await PrPlatform.Git.Clone(PackagePath, PackageData.Get<List<string>>("URL"), false);
         }
 
-        [MenuItem(CMD_Git + "/All/添加 Add [.]", false, 1)]
+        [MenuItem(CMD_GIT + "/All/添加 Add [.]", false, 1)]
         private static async void GITAdd()
         {
             var list = GetInfo()
@@ -70,7 +54,7 @@ namespace AIO.Unity.Editor
             await PrPlatform.Git.Add(list, ".", false);
         }
 
-        [MenuItem(CMD_Git + "/All/拉取 Pull", false, 2)]
+        [MenuItem(CMD_GIT + "/All/拉取 Pull", false, 2)]
         private static async void GITPull()
         {
             var list = GetInfo()
@@ -80,7 +64,7 @@ namespace AIO.Unity.Editor
         }
 
 #if UNITY_EDITOR_WIN
-        [MenuItem(CMD_Git + "/All/拉取分支 Pull Branch", false, 2)]
+        [MenuItem(CMD_GIT + "/All/拉取分支 Pull Branch", false, 2)]
         private static async void GITPullBranch()
         {
             var list = GetInfo()
@@ -90,7 +74,7 @@ namespace AIO.Unity.Editor
         }
 #endif
 
-        [MenuItem(CMD_Git + "/All/推送 Push", false, 3)]
+        [MenuItem(CMD_GIT + "/All/推送 Push", false, 3)]
         private static async void GITPush()
         {
             var list = GetInfo()
@@ -99,7 +83,7 @@ namespace AIO.Unity.Editor
             await PrPlatform.Git.Push(list, false);
         }
 
-        [MenuItem(CMD_Git + "/All/提交 Commit", false, 4)]
+        [MenuItem(CMD_GIT + "/All/提交 Commit", false, 4)]
         private static async void GITCommit()
         {
             var list = GetInfo()
@@ -108,7 +92,7 @@ namespace AIO.Unity.Editor
             await PrPlatform.Git.Commit(list, false);
         }
 
-        [MenuItem(CMD_Git + "/All/上传 Pull Add Commit Push", false, 5)]
+        [MenuItem(CMD_GIT + "/All/上传 Pull Add Commit Push", false, 5)]
         private static async void GITUpload()
         {
             var list = GetInfo()
@@ -117,7 +101,7 @@ namespace AIO.Unity.Editor
             await PrPlatform.Git.Upload(list, true, false, false);
         }
 
-        [MenuItem(CMD_Git + "/All/清理 Clean/-FDX 强制清理文件夹 不受忽略文件影响", false, 6)]
+        [MenuItem(CMD_GIT + "/All/清理 Clean/-FDX 强制清理文件夹 不受忽略文件影响", false, 6)]
         private static async void CleanFDX()
         {
             var list = GetInfo()
@@ -126,7 +110,7 @@ namespace AIO.Unity.Editor
             await PrPlatform.Git.Clean(list, "-fdx", false);
         }
 
-        [MenuItem(CMD_Git + "/All/清理 Clean/-FD 强制清理文件夹", false, 6)]
+        [MenuItem(CMD_GIT + "/All/清理 Clean/-FD 强制清理文件夹", false, 6)]
         private static async void CleanFD()
         {
             var list = GetInfo()
@@ -135,7 +119,7 @@ namespace AIO.Unity.Editor
             await PrPlatform.Git.Clean(list, "-fd", false);
         }
 
-        [MenuItem(CMD_Git + "/All/重置 Reset/--Hard 重置 [分支 暂存区 工作区]", false, 6)]
+        [MenuItem(CMD_GIT + "/All/重置 Reset/--Hard 重置 [分支 暂存区 工作区]", false, 6)]
         private static async void ResetHard()
         {
             var list = GetInfo()
@@ -144,7 +128,7 @@ namespace AIO.Unity.Editor
             await PrPlatform.Git.ResetHard(list, false);
         }
 
-        [MenuItem(CMD_Git + "/All/重置 Reset/--Keep 重置 [索引] 如果提交和HEAD之间的文件与HEAD不同，则重置将中止", false, 6)]
+        [MenuItem(CMD_GIT + "/All/重置 Reset/--Keep 重置 [索引] 如果提交和HEAD之间的文件与HEAD不同，则重置将中止", false, 6)]
         private static async void ResetKeep()
         {
             var list = GetInfo()
@@ -153,7 +137,7 @@ namespace AIO.Unity.Editor
             await PrPlatform.Git.ResetKeep(list, false);
         }
 
-        [MenuItem(CMD_Git + "/All/重置 Reset/--Merge 重置 [索引 暂存区] 更改和索引产生 重置将被终止", false, 6)]
+        [MenuItem(CMD_GIT + "/All/重置 Reset/--Merge 重置 [索引 暂存区] 更改和索引产生 重置将被终止", false, 6)]
         private static async void ResetMerge()
         {
             var list = GetInfo()
@@ -162,7 +146,7 @@ namespace AIO.Unity.Editor
             await PrPlatform.Git.ResetMerge(list, false);
         }
 
-        [MenuItem(CMD_Git + "/All/重置 Reset/--Mixed 重置 [分支 暂存区]", false, 6)]
+        [MenuItem(CMD_GIT + "/All/重置 Reset/--Mixed 重置 [分支 暂存区]", false, 6)]
         private static async void ResetMixed()
         {
             var list = GetInfo()
@@ -171,7 +155,7 @@ namespace AIO.Unity.Editor
             await PrPlatform.Git.ResetMixed(list, false);
         }
 
-        [MenuItem(CMD_Git + "/All/重置 Reset/--Soft 重置 [分支]", false, 6)]
+        [MenuItem(CMD_GIT + "/All/重置 Reset/--Soft 重置 [分支]", false, 6)]
         private static async void ResetSoft()
         {
             var list = GetInfo()
@@ -180,7 +164,7 @@ namespace AIO.Unity.Editor
             await PrPlatform.Git.ResetSoft(list, false);
         }
 
-        [MenuItem(CMD_Git + "/All/设置关联远端库 Remote SetUrl", false, 7)]
+        [MenuItem(CMD_GIT + "/All/设置关联远端库 Remote SetUrl", false, 7)]
         private static async void GITGitRemoteSetUrl()
         {
             var list = GetInfo()

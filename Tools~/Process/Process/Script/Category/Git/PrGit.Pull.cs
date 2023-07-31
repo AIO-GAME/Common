@@ -11,16 +11,16 @@ namespace AIO
     public partial class PrGit
     {
         /// <summary>
-        /// 拉取
+        /// <see cref="PrGit"/> <see cref="Pull"/> 拉取
         /// </summary>
-        public sealed class Pull
+        public static class Pull
         {
             /// <summary>
             /// 执行
             /// </summary>
             /// <param name="work">GIT 文件夹</param>
             /// <param name="args">参数</param>
-            /// <returns>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor Execute(in string work, in string args)
             {
                 if (string.IsNullOrEmpty(args)) throw new ArgumentNullException(nameof(args));
@@ -32,7 +32,7 @@ namespace AIO
             /// 拉取
             /// </summary>
             /// <param name="work">工作文件夹</param>
-            /// <returns>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor Update(in string work)
             {
                 return Create(work, "pull --verbose --ff-only --progress --autostash --recurse-submodules");
@@ -43,7 +43,7 @@ namespace AIO
             /// </summary>
             /// <param name="work">工作文件夹</param>
             /// <param name="branch">远端分支</param>
-            /// <returns>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor UpdateWithALL(in string work, in string branch)
             {
                 if (string.IsNullOrEmpty(branch)) throw new ArgumentNullException(nameof(branch));
@@ -55,7 +55,7 @@ namespace AIO
             /// </summary>
             /// <param name="work">工作文件夹</param>
             /// <param name="branch">远端分支</param>
-            /// <returns>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor UpdateWithBranch(in string work, in string branch)
             {
                 if (string.IsNullOrEmpty(branch)) throw new ArgumentNullException(nameof(branch));

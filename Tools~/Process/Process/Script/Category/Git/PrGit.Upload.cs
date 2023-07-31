@@ -13,7 +13,7 @@ namespace AIO
         /// </summary>
         /// <param name="target">GIT 文件夹</param>
         /// <param name="commitData">提交信息</param>
-        /// <returns></returns>
+        /// <returns><see cref="IExecutor"/> – 执行器</returns>
         public static IExecutor Upload(string target, string commitData = "-m \"default submission information\"")
         {
             var ret = Pull.Update(target);

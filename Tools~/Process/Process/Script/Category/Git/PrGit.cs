@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace AIO
@@ -69,6 +70,7 @@ namespace AIO
         /// <returns>结果执行器</returns>
         public static IExecutor Create(in string work, in string format, params object[] args)
         {
+            if (string.IsNullOrEmpty(work)) throw new ArgumentNullException(nameof(work));
             return Create().SetWorkingDir(work).SetInArgs(format, args).Execute();
         }
 

@@ -808,7 +808,7 @@
         </member>
         <member name="T:AIO.PrGit.Add">
             <summary>
-            添加命令
+            <see cref="T:AIO.PrGit"/> <see cref="T:AIO.PrGit.Add"/> 添加命令
             usage: git add [(options)] [--] (pathspec)...
             -n, --dry-run         dry run
             -v, --verbose         be verbose
@@ -844,39 +844,39 @@
             添加所有文件
             </summary>
             <param name="work">GIT 文件夹</param>
-            <returns></returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Add.ALLWithV(System.String@)">
             <summary>
             添加所有文件 并显示详细信息
             </summary>
             <param name="work">GIT 文件夹</param>
-            <returns></returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Add.ALLWithN(System.String@)">
             <summary>
             列出文件
             </summary>
             <param name="work">GIT 文件夹</param>
-            <returns></returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Add.ALLWithVP(System.String@)">
             <summary>
             添加所有文件 并显示详细信息 并显示详细进度
             </summary>
             <param name="work">GIT 文件夹</param>
-            <returns></returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Add.ALLWithU(System.String@)">
             <summary>
             添加所有文件 并更新
             </summary>
             <param name="work">GIT 文件夹</param>
-            <returns></returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="T:AIO.PrGit.Checkout">
             <summary>
-            切换检出
+            <see cref="T:AIO.PrGit"/> <see cref="T:AIO.PrGit.Checkout"/> 切换检出
             </summary>
         </member>
         <member name="M:AIO.PrGit.Checkout.Execute(System.String@,System.String@)">
@@ -885,7 +885,7 @@
             </summary>
             <param name="work">GIT 文件夹</param>
             <param name="args">参数</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Checkout.Branch(System.String@,System.String@)">
             <summary>
@@ -893,11 +893,11 @@
             </summary>
             <param name="work">GIT 文件夹</param>
             <param name="branchName">分支</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="T:AIO.PrGit.Clean">
             <summary>
-            清理命令
+            <see cref="T:AIO.PrGit"/> <see cref="T:AIO.PrGit.Clean"/> 清理命令
             usage: git clean [-d] [-f] [-i] [-n] [-q] [-e (pattern)] [-x | -X] [--] (paths)...
             -q, --quiet           do not print names of files removed
             -n, --dry-run         dry run
@@ -916,28 +916,28 @@
             </summary>
             <param name="work">GIT 文件夹</param>
             <param name="args">参数</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Clean.DryRun(System.String@)">
             <summary>
             显示被清理的文件
             </summary>
             <param name="work">GIT 文件夹</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Clean.DryRunDirectory(System.String@)">
             <summary>
             显示被清理的文件
             </summary>
             <param name="work">GIT 文件夹</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Clean.Directory(System.String@)">
             <summary>
             删除整个目录
             </summary>
             <param name="work">GIT 文件夹</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Clean.DirectoryWithExclude(System.String@,System.Collections.Generic.ICollection{System.String}@)">
             <summary>
@@ -945,7 +945,7 @@
             </summary>
             <param name="work">GIT 文件夹</param>
             <param name="exclude">排除文件列表</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Clean.DirectoryWithExclude(System.String@,System.String@)">
             <summary>
@@ -953,7 +953,7 @@
             </summary>
             <param name="work">GIT 文件夹</param>
             <param name="exclude">排除文件列表</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Clean.Force(System.String@,System.String@)">
             <summary>
@@ -961,14 +961,14 @@
             </summary>
             <param name="work">GIT 文件夹</param>
             <param name="path">路径</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Clean.ForceDirectory(System.String@)">
             <summary>
             强制删除整个目录
             </summary>
             <param name="work">GIT 文件夹</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Clean.ForceDirectoryWithExclude(System.String@,System.String@)">
             <summary>
@@ -976,7 +976,7 @@
             </summary>
             <param name="work">GIT 文件夹</param>
             <param name="exclude">排除文件列表</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Clean.ForceDirectoryWithExclude(System.String@,System.Collections.Generic.ICollection{System.String}@)">
             <summary>
@@ -984,25 +984,25 @@
             </summary>
             <param name="work">GIT 文件夹</param>
             <param name="exclude">排除文件列表</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Clean.ForceDirectoryX(System.String@)">
             <summary>
             强制删除整个目录
             </summary>
             <param name="work">GIT 文件夹</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Clean.ForceDirectoryx(System.String@)">
             <summary>
             强制删除整个目录
             </summary>
             <param name="work">GIT 文件夹</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="T:AIO.PrGit.Clone">
             <summary>
-            克隆
+            <see cref="T:AIO.PrGit"/> <see cref="T:AIO.PrGit.Clone"/> 克隆
             </summary>
         </member>
         <member name="M:AIO.PrGit.Clone.Branch(System.String@,System.String@,System.String@)">
@@ -1012,6 +1012,7 @@
             <param name="wrok">目标文件夹</param>
             <param name="url">clone列表</param>
             <param name="branch">分支</param>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Clone.Default(System.String@,System.String@)">
             <summary>
@@ -1019,6 +1020,7 @@
             </summary>
             <param name="wrok">目标文件夹</param>
             <param name="url">clone列表</param>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Clone.Execute(System.String@,System.String@)">
             <summary>
@@ -1026,11 +1028,11 @@
             </summary>
             <param name="work">GIT 文件夹</param>
             <param name="args">参数</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="T:AIO.PrGit.Commit">
             <summary>
-            提交
+            <see cref="T:AIO.PrGit"/> <see cref="T:AIO.PrGit.Commit"/> 提交
             </summary>
         </member>
         <member name="M:AIO.PrGit.Commit.Execute(System.String@,System.String@)">
@@ -1039,7 +1041,7 @@
             </summary>
             <param name="work">GIT 文件夹</param>
             <param name="args">参数</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Commit.Default(System.String,System.String)">
             <summary>
@@ -1047,11 +1049,40 @@
             </summary>
             <param name="target">GIT 文件夹</param>
             <param name="message">消息</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
+        </member>
+        <member name="T:AIO.PrGit.Fetch">
+            <summary>
+            <see cref="T:AIO.PrGit"/> <see cref="T:AIO.PrGit.Fetch"/>
+            </summary>
+        </member>
+        <member name="M:AIO.PrGit.Fetch.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="args">参数</param>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Fetch.Origin(System.String@)">
+            <summary>
+            <see cref="T:AIO.PrGit"/> <see cref="T:AIO.PrGit.Fetch"/> <see cref="M:AIO.PrGit.Fetch.Origin(System.String@)"/>
+            同步远程库的数据到本地
+            查找 “origin” 是哪一个服务器 从中抓取本地没有的数据，并且更新本地数据库，移动 origin/master 指针指向新的、更新后的位置。
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Fetch.ALL(System.String@)">
+            <summary>
+            同步远程库的数据到本地
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="T:AIO.PrGit.Init">
             <summary>
-            初始化
+            <see cref="T:AIO.PrGit"/> <see cref="T:AIO.PrGit.Init"/> 初始化
             </summary>
         </member>
         <member name="M:AIO.PrGit.Init.Execute(System.String@,System.String@)">
@@ -1060,11 +1091,24 @@
             </summary>
             <param name="work">GIT 文件夹</param>
             <param name="args">参数</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
+        </member>
+        <member name="T:AIO.PrGit.Merge">
+            <summary>
+            <see cref="T:AIO.PrGit"/> <see cref="T:AIO.PrGit.Merge"/>
+            </summary>
+        </member>
+        <member name="M:AIO.PrGit.Merge.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="args">参数</param>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="T:AIO.PrGit.Pull">
             <summary>
-            拉取
+            <see cref="T:AIO.PrGit"/> <see cref="T:AIO.PrGit.Pull"/> 拉取
             </summary>
         </member>
         <member name="M:AIO.PrGit.Pull.Execute(System.String@,System.String@)">
@@ -1073,14 +1117,14 @@
             </summary>
             <param name="work">GIT 文件夹</param>
             <param name="args">参数</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Pull.Update(System.String@)">
             <summary>
             拉取
             </summary>
             <param name="work">工作文件夹</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Pull.UpdateWithALL(System.String@,System.String@)">
             <summary>
@@ -1088,7 +1132,7 @@
             </summary>
             <param name="work">工作文件夹</param>
             <param name="branch">远端分支</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Pull.UpdateWithBranch(System.String@,System.String@)">
             <summary>
@@ -1096,11 +1140,11 @@
             </summary>
             <param name="work">工作文件夹</param>
             <param name="branch">远端分支</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="T:AIO.PrGit.Remote">
             <summary>
-            远端
+            <see cref="T:AIO.PrGit"/> <see cref="T:AIO.PrGit.Remote"/> 远端
             </summary>
         </member>
         <member name="M:AIO.PrGit.Remote.Execute(System.String@,System.String@)">
@@ -1109,19 +1153,19 @@
             </summary>
             <param name="work">GIT 文件夹</param>
             <param name="args">参数</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Remote.ListName(System.String@)">
             <summary>
             获取远端库
             </summary>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Remote.ListNameAll(System.String@)">
             <summary>
             获取远端库
             </summary>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Remote.Add(System.String@,System.String@,System.String@)">
             <summary>
@@ -1130,7 +1174,7 @@
             <param name="work">Git 库</param>
             <param name="remoteName">远端名</param>
             <param name="url">远端路径</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Remote.SetUrlAdd(System.String@,System.String@,System.String@)">
             <summary>
@@ -1139,7 +1183,7 @@
             <param name="work">Git 库</param>
             <param name="remoteName">远端名</param>
             <param name="url">远端路径</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Remote.SetUrlDel(System.String@,System.String@,System.String@)">
             <summary>
@@ -1148,7 +1192,7 @@
             <param name="work">Git 库</param>
             <param name="remoteName">远端名</param>
             <param name="url">远端路径</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Remote.Remove(System.String@,System.String@)">
             <summary>
@@ -1156,7 +1200,7 @@
             </summary>
             <param name="work">Git 库</param>
             <param name="remoteName">远端名</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Remote.Remove(System.String@,System.String@,System.String@)">
             <summary>
@@ -1165,11 +1209,11 @@
             <param name="work">Git 库</param>
             <param name="oldRemoteName">老</param>
             <param name="newRemoteName">新</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="T:AIO.PrGit.Reset">
             <summary>
-            重置
+            <see cref="T:AIO.PrGit"/> <see cref="T:AIO.PrGit.Reset"/> 重置
             </summary>
         </member>
         <member name="M:AIO.PrGit.Reset.Execute(System.String@,System.String@)">
@@ -1178,14 +1222,14 @@
             </summary>
             <param name="work">GIT 文件夹</param>
             <param name="args">参数</param>
-            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Reset.Hard(System.String@)">
             <summary>
             重置分支的引用以外，还会重置暂存区和工作区。
             </summary>
             <param name="work">文件夹</param>
-            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
             <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
         </member>
         <member name="M:AIO.PrGit.Reset.Soft(System.String@)">
@@ -1193,7 +1237,7 @@
             重置分支的引用，不会修改暂存区和工作区
             </summary>
             <param name="work">文件夹</param>
-            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
             <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
         </member>
         <member name="M:AIO.PrGit.Reset.Mixed(System.String@)">
@@ -1201,7 +1245,7 @@
             重置分支的引用以外，还会重置暂存区
             </summary>
             <param name="work">文件夹</param>
-            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
             <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
         </member>
         <member name="M:AIO.PrGit.Reset.Merge(System.String@)">
@@ -1209,7 +1253,7 @@
             
             </summary>
             <param name="work">文件夹</param>
-            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
             <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
         </member>
         <member name="M:AIO.PrGit.Reset.Keep(System.String@)">
@@ -1217,12 +1261,32 @@
             
             </summary>
             <param name="work">文件夹</param>
-            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
             <exception cref="T:System.ArgumentNullException">work is null<code><see cref="T:System.ArgumentNullException"/></code></exception>
+        </member>
+        <member name="T:AIO.PrGit.Status">
+            <summary>
+            <see cref="T:AIO.PrGit"/> <see cref="T:AIO.PrGit.Status"/> 状态
+            </summary>
+        </member>
+        <member name="M:AIO.PrGit.Status.Execute(System.String@,System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <param name="args">参数</param>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Status.Execute(System.String@)">
+            <summary>
+            执行
+            </summary>
+            <param name="work">GIT 文件夹</param>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="T:AIO.PrGit.Submodule">
             <summary>
-            子模块
+            <see cref="T:AIO.PrGit"/> <see cref="T:AIO.PrGit.Submodule"/> 子模块
             </summary>
         </member>
         <member name="M:AIO.PrGit.Submodule.Execute(System.String@,System.String@)">
@@ -1231,12 +1295,38 @@
             </summary>
             <param name="work">GIT 文件夹</param>
             <param name="args">参数</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Submodule.UpdateWithALL(System.String@)">
             <summary>
             更新所有子模块
             </summary>
+            <param name="work">GIT 文件夹</param>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
+        </member>
+        <member name="T:AIO.PrGit.Helper">
+            <summary>
+            <see cref="T:AIO.PrGit"/> <see cref="T:AIO.PrGit.Helper"/>
+            </summary>
+        </member>
+        <member name="M:AIO.PrGit.Helper.Upload(System.String,System.String)">
+            <summary>
+            <see cref="T:AIO.PrGit"/> <see cref="T:AIO.PrGit.Helper"/> <see cref="M:AIO.PrGit.Helper.Upload(System.String,System.String)"/> 上传 只支持最简单的操作
+            </summary>
+            <param name="target">GIT 文件夹</param>
+            <param name="commitData">提交信息</param>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Helper.GetBehind(System.String)">
+            <summary>
+            <see cref="T:AIO.PrGit"/> <see cref="T:AIO.PrGit.Helper"/> <see cref="M:AIO.PrGit.Helper.GetBehind(System.String)"/> 获取当前分支落后的提交数
+            </summary>
+            <param name="target">GIT 文件夹</param>
+            <returns>
+            0:当前分支是最新的
+            >1:当前分支落后的提交数
+            -1:未知错误
+            </returns>
         </member>
         <member name="M:AIO.PrGit.Upload(System.String,System.String)">
             <summary>
@@ -1244,7 +1334,7 @@
             </summary>
             <param name="target">GIT 文件夹</param>
             <param name="commitData">提交信息</param>
-            <returns></returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="F:AIO.PrGit.CMD">
             <summary>
@@ -1299,7 +1389,7 @@
         </member>
         <member name="T:AIO.PrGit.Branch">
             <summary>
-            Branch
+            <see cref="T:AIO.PrGit"/> <see cref="T:AIO.PrGit.Branch"/>
             </summary>
         </member>
         <member name="M:AIO.PrGit.Branch.GetList(System.String@)">
@@ -1307,6 +1397,7 @@
             获取目标GIT库的分支列表
             </summary>
             <param name="work">Git文件夹</param>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Branch.DelLocal(System.String@,System.String@,System.Boolean@)">
             <summary>
@@ -1315,7 +1406,7 @@
             <param name="work">GIT 文件夹</param>
             <param name="branch">分支</param>
             <param name="isForce">是否强制删除 Ture:强制 False:不强制</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Branch.DelOrigin(System.String@,System.String@)">
             <summary>
@@ -1323,7 +1414,7 @@
             </summary>
             <param name="work">GIT 文件夹</param>
             <param name="branch">分支</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Branch.Create(System.String@,System.String@)">
             <summary>
@@ -1331,7 +1422,7 @@
             </summary>
             <param name="work">GIT 文件夹</param>
             <param name="branch">分支</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Branch.CurReName(System.String@,System.String@)">
             <summary>
@@ -1339,7 +1430,7 @@
             </summary>
             <param name="work">GIT 文件夹</param>
             <param name="branchName">分支</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Branch.Execute(System.String@,System.String@)">
             <summary>
@@ -1347,11 +1438,11 @@
             </summary>
             <param name="work">GIT 文件夹</param>
             <param name="args">参数</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="T:AIO.PrGit.Push">
             <summary>
-            拉取
+            <see cref="T:AIO.PrGit"/> <see cref="T:AIO.PrGit.Push"/> 拉取
             </summary>
         </member>
         <member name="M:AIO.PrGit.Push.Execute(System.String@,System.String@)">
@@ -1360,14 +1451,14 @@
             </summary>
             <param name="work">GIT 文件夹</param>
             <param name="args">参数</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="M:AIO.PrGit.Push.Update(System.String@)">
             <summary>
             push 参数
             </summary>
             <param name="work">GIT 文件夹</param>
-            <returns>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
         <member name="T:AIO.PrMac">
              <summary>
