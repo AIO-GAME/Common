@@ -61,6 +61,7 @@ namespace AIO.Unity.Editor
 |*|=============================================*/";
 
             const string usings = @"
+    using System;
     using UnityEditor;
     using UnityEngine;
     using System.IO;
@@ -111,8 +112,8 @@ namespace AIO.Unity.Editor
                     str.AppendFormat("        internal static async void Refresh()\r\n").Append("        {\r\n");
                     str.AppendFormat("            var ret = await PrGit.Helper.GetBehind(Application.dataPath.Replace(\"Assets\", URL));\r\n");
                     str.AppendFormat("            HasUpdate = ret > 0;\r\n");
-                    str.AppendFormat("            if (ret < 0)").Append("            {\r\n");
-                    str.AppendFormat("                Debug.LogError(\"Refresh Error: \" + ret);\r\n");
+                    str.AppendFormat("            if (ret < 0)\r\n").Append("            {\r\n");
+                    str.Append("                Debug.LogWarning($\"Refresh : 本地Git库版本 提交数超过 远程库版本 : {Math.Abs(ret)}\");\r\n");
                     str.AppendFormat("                return;\r\n").Append("            }\r\n        }\r\n");
                 }
 

@@ -170,7 +170,7 @@ namespace AIO
         /// <summary>
         /// 进程执行器(异常)
         /// </summary>
-        public ExecutorException(in ProcessStartInfo info, in Exception exception) : base(info)
+        public ExecutorException(in ProcessStartInfo info, in Exception exception) : base(info, true)
         {
             Exception = exception;
         }
@@ -182,7 +182,8 @@ namespace AIO
             var result = new ResultException(Pr.StartInfo, Exception);
             IsFinish = true;
             IsRunning = false;
-            result.Finish(inputs.ToString()).Debug();
+            result.Finish(inputs.ToString());
+            if (EnableOutput) result.Debug();
             if (Next != null) return result.Link(Next.Sync());
             return result;
         }

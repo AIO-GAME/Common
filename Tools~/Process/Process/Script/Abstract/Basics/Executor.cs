@@ -21,6 +21,9 @@ namespace AIO
         /// <inheritdoc/>
         public ProcessStartInfo Info { get; }
 
+        /// <inheritdoc/>
+        public bool EnableOutput { get; set; } = true;
+
         /// <summary>
         /// 执行的进程
         /// </summary>
@@ -49,13 +52,14 @@ namespace AIO
         /// <summary>
         /// 执行器
         /// </summary>
-        public Executor(in ProcessStartInfo info)
+        public Executor(in ProcessStartInfo info, in bool enableOutput = true)
         {
             IsFinish = IsRunning = false;
             Info = info;
             Pr = new Process();
             if (info != null) Pr.StartInfo = info;
             inputs = new StringBuilder();
+            EnableOutput = enableOutput;
         }
 
         /// <inheritdoc/>
@@ -130,7 +134,7 @@ namespace AIO
 
             result.Finish(inputs.ToString());
             if (CallBack != null) CallBack.Invoke(result);
-            result.Debug();
+            if (EnableOutput) result.Debug();
             if (Next != null) return result.Link(Next.Sync());
             return result;
         }
