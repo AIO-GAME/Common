@@ -1,19 +1,20 @@
-﻿/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-11-23                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+﻿/*|✩ - - - - - |||
+|||✩ Author:   ||| -> SAM
+|||✩ Date:     ||| -> 2023-07-31
+|||✩ Document: ||| -> 
+|||✩ - - - - - |*/
 
 using System;
+using System.IO;
 
 namespace AIO
 {
     public partial class PrGit
     {
         /// <summary>
-        /// <see cref="PrGit"/> <see cref="Init"/> 初始化
+        /// <see cref="PrGit"/> <see cref="Merge"/>
         /// </summary>
-        public static class Init
+        public static class Merge
         {
             /// <summary>
             /// 执行
@@ -24,7 +25,8 @@ namespace AIO
             public static IExecutor Execute(in string work, in string args)
             {
                 if (string.IsNullOrEmpty(args)) throw new ArgumentNullException(nameof(args));
-                return Create(work, "init {0}", args);
+                if (!Directory.Exists(work)) throw new DirectoryNotFoundException(work);
+                return Create(work, "commit {0}", args);
             }
         }
     }

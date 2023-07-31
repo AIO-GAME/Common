@@ -11,7 +11,7 @@ namespace AIO
     public partial class PrGit
     {
         /// <summary>
-        /// 重置
+        /// <see cref="PrGit"/> <see cref="Reset"/> 重置
         /// </summary>
         public static class Reset
         {
@@ -20,7 +20,7 @@ namespace AIO
             /// </summary>
             /// <param name="work">GIT 文件夹</param>
             /// <param name="args">参数</param>
-            /// <returns><see cref="IExecutor"/>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor Execute(in string work, in string args)
             {
                 if (string.IsNullOrEmpty(args)) throw new ArgumentNullException(nameof(args));
@@ -31,7 +31,7 @@ namespace AIO
             /// 重置分支的引用以外，还会重置暂存区和工作区。
             /// </summary>
             /// <param name="work">文件夹</param>
-            /// <returns><see cref="IExecutor"/>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             /// <exception cref="ArgumentNullException">work is null<code><see cref="ArgumentNullException"/></code></exception>
             public static IExecutor Hard(in string work)
             {
@@ -43,7 +43,7 @@ namespace AIO
             /// 重置分支的引用，不会修改暂存区和工作区
             /// </summary>
             /// <param name="work">文件夹</param>
-            /// <returns><see cref="IExecutor"/>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             /// <exception cref="ArgumentNullException">work is null<code><see cref="ArgumentNullException"/></code></exception>
             public static IExecutor Soft(in string work)
             {
@@ -55,7 +55,7 @@ namespace AIO
             /// 重置分支的引用以外，还会重置暂存区
             /// </summary>
             /// <param name="work">文件夹</param>
-            /// <returns><see cref="IExecutor"/>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             /// <exception cref="ArgumentNullException">work is null<code><see cref="ArgumentNullException"/></code></exception>
             public static IExecutor Mixed(in string work)
             {
@@ -68,7 +68,7 @@ namespace AIO
             /// 
             /// </summary>
             /// <param name="work">文件夹</param>
-            /// <returns><see cref="IExecutor"/>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             /// <exception cref="ArgumentNullException">work is null<code><see cref="ArgumentNullException"/></code></exception>
             public static IExecutor Merge(in string work)
             {
@@ -80,7 +80,7 @@ namespace AIO
             /// 
             /// </summary>
             /// <param name="work">文件夹</param>
-            /// <returns><see cref="IExecutor"/>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             /// <exception cref="ArgumentNullException">work is null<code><see cref="ArgumentNullException"/></code></exception>
             public static IExecutor Keep(in string work)
             {

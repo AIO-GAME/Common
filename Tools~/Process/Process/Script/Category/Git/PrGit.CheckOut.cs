@@ -11,16 +11,16 @@ namespace AIO
     public partial class PrGit
     {
         /// <summary>
-        /// 切换检出
+        /// <see cref="PrGit"/> <see cref="Checkout"/> 切换检出
         /// </summary>
-        public sealed class Checkout
+        public static class Checkout
         {
             /// <summary>
             /// Checkout 参数
             /// </summary>
             /// <param name="work">GIT 文件夹</param>
             /// <param name="args">参数</param>
-            /// <returns>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor Execute(in string work, in string args)
             {
                 if (string.IsNullOrEmpty(args)) throw new ArgumentNullException(nameof(args));
@@ -32,7 +32,7 @@ namespace AIO
             /// </summary>
             /// <param name="work">GIT 文件夹</param>
             /// <param name="branchName">分支</param>
-            /// <returns>执行器</returns>
+            /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor Branch(in string work, in string branchName)
             {
                 return Create(work, "checkout {0}", branchName);

@@ -69,11 +69,15 @@
     <Compile Include="Script\Category\Git\PrGit.Clean.cs" />
     <Compile Include="Script\Category\Git\PrGit.Clone.cs" />
     <Compile Include="Script\Category\Git\PrGit.Commit.cs" />
+    <Compile Include="Script\Category\Git\PrGit.Fetch.cs" />
     <Compile Include="Script\Category\Git\PrGit.Init.cs" />
+    <Compile Include="Script\Category\Git\PrGit.Merge.cs" />
     <Compile Include="Script\Category\Git\PrGit.Pull.cs" />
     <Compile Include="Script\Category\Git\PrGit.Remote.cs" />
     <Compile Include="Script\Category\Git\PrGit.Reset.cs" />
+    <Compile Include="Script\Category\Git\PrGit.Status.cs" />
     <Compile Include="Script\Category\Git\PrGit.Submodule.cs" />
+    <Compile Include="Script\Category\Git\PrGit.Helper.cs" />
     <Compile Include="Script\Category\Git\PrGit.Upload.cs" />
     <Compile Include="Script\Category\Mac\DateTime\PrMac.Cal.cs" />
     <Compile Include="Script\Category\Mac\DateTime\PrMac.Time.cs" />

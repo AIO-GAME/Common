@@ -1,19 +1,20 @@
-﻿/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-11-23                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+﻿/*|✩ - - - - - |||
+|||✩ Author:   ||| -> SAM
+|||✩ Date:     ||| -> 2023-07-31
+|||✩ Document: ||| -> 
+|||✩ - - - - - |*/
 
 using System;
+using System.IO;
 
 namespace AIO
 {
     public partial class PrGit
     {
         /// <summary>
-        /// <see cref="PrGit"/> <see cref="Submodule"/> 子模块
+        /// <see cref="PrGit"/> <see cref="Status"/> 状态
         /// </summary>
-        public static class Submodule
+        public static class Status
         {
             /// <summary>
             /// 执行
@@ -24,17 +25,19 @@ namespace AIO
             public static IExecutor Execute(in string work, in string args)
             {
                 if (string.IsNullOrEmpty(args)) throw new ArgumentNullException(nameof(args));
-                return Create(work, "submodule {0}", args);
+                if (!Directory.Exists(work)) throw new DirectoryNotFoundException(work);
+                return Create(work, "status {0}", args);
             }
 
             /// <summary>
-            /// 更新所有子模块
+            /// 执行
             /// </summary>
             /// <param name="work">GIT 文件夹</param>
             /// <returns><see cref="IExecutor"/> – 执行器</returns>
-            public static IExecutor UpdateWithALL(in string work)
+            public static IExecutor Execute(in string work)
             {
-                return Create(work, "update --recursive --remote --verbose --progress");
+                if (!Directory.Exists(work)) throw new DirectoryNotFoundException(work);
+                return Create(work, "status");
             }
         }
     }

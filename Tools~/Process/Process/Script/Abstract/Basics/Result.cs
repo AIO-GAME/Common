@@ -149,25 +149,25 @@ namespace AIO
         /// <inheritdoc/>
         public void ReceivedOutput(object sender, DataReceivedEventArgs e)
         {
-            if (e != null) StdOut.Append(e.Data);
+            if (e != null) StdOut.AppendLine(e.Data);
         }
 
         /// <inheritdoc/>
         public void ReceivedError(object sender, DataReceivedEventArgs e)
         {
-            if (e != null) StdError.Append(e.Data);
+            if (e != null) StdError.AppendLine(e.Data);
         }
 
         /// <inheritdoc/>
         public void ReceivedExited(object sender, EventArgs e)
         {
-            if (e != null) StdExited.Append(e);
+            if (e != null) StdExited.AppendLine(e.ToString());
         }
 
         /// <inheritdoc/>
         public void ReceivedDisposed(object sender, EventArgs e)
         {
-            if (e != null) StdDisposed.Append(e);
+            if (e != null) StdDisposed.AppendLine(e.ToString());
         }
 
         #endregion
