@@ -82,6 +82,7 @@ namespace AIO.Unity.Editor
                 str.AppendFormat("{0}\r\n", usings);
 
                 str.AppendFormat("    /// <summary>\r\n    /// Git Manager {0}\r\n    /// </summary>\r\n", info.displayName);
+                str.AppendFormat("    [InitializeOnLoad]\r\n");
                 str.AppendFormat("    internal static partial class {0}\r\n", classname).Append("    {\r\n");
 
                 str.AppendFormat("        internal const string URL = \"{0}\";\r\n", info.resolvedPath.Replace('\\', '/').Replace(ProjectPath, ""));
@@ -91,6 +92,7 @@ namespace AIO.Unity.Editor
                 {
                     str.AppendLine();
                     str.AppendFormat("        static {0}()\r\n", classname).Append("        {\r\n");
+                    str.Append("            Refresh();\r\n");
                     str.Append("        }\r\n");
                 }
                 
