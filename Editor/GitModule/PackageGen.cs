@@ -31,7 +31,7 @@ namespace AIO.Unity.Editor
         /// <summary>
         /// 生成
         /// </summary>
-        [MenuItem("Git/~~~Generate~~~", false, 999)]
+        [MenuItem("Git/~~~Generate~~~", false, 9999)]
         internal static void Generate()
         {
             var dataPath = Application.dataPath.Replace("Assets", "");
@@ -63,6 +63,7 @@ namespace AIO.Unity.Editor
             const string usings = @"
     using UnityEditor;
     using UnityEngine;
+    using System.IO;
 ";
             const string URL = "Application.dataPath.Replace(\"Assets\", URL)";
 
@@ -97,6 +98,7 @@ namespace AIO.Unity.Editor
                     str.AppendLine();
                     str.AppendFormat("        [MenuItem(\"Git/\" + DisplayName + \"/打开 Open\", false, 0)]\r\n");
                     str.AppendFormat("        internal static async void Open()\r\n").Append("        {\r\n");
+                    str.AppendFormat("            Selection.activeObject = AssetDatabase.LoadAssetAtPath<TextAsset>(Path.Combine(URL, \"package.json\"));\r\n");
                     str.AppendFormat("            await PrPlatform.Open.Path(Application.dataPath.Replace(\"Assets\", URL));\r\n").Append("        }\r\n");
                 }
 
