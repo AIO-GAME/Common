@@ -27,7 +27,7 @@ namespace UnityEngine
 #if UNITY_2021_1_OR_NEWER
         long TID { get; protected set; }
 #else
-        long TID { get; internal set; }
+        long TID { get; set; }
 #endif
         /// <summary>
         /// 创建时间 单位毫秒
@@ -56,7 +56,7 @@ namespace UnityEngine
         /// =0:代表执行一次
         /// >0:代表循环次数
         /// </summary>
-        int Loop { get; internal set; }
+        int Loop { get; set; }
 
         /// <summary>
         /// 当前任务实际循环次数
@@ -66,7 +66,7 @@ namespace UnityEngine
         /// <summary>
         /// 操作索引
         /// </summary>
-        byte OperatorIndex { get; internal set; }
+        byte OperatorIndex { get; set; }
 
         /// <summary>
         /// 精度器 记录当前任务实际持续时间

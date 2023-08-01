@@ -67,7 +67,11 @@ namespace UnityEditor
                 layers.GetArrayElementAtIndex(layerindex).stringValue = namevalue;
                 objects.UpdateIfRequiredOrScript();
                 objects.ApplyModifiedProperties();
+#if UNITY_2020_1_OR_NEWER
                 AssetDatabase.SaveAssetIfDirty(asset);
+#else
+                AssetDatabase.SaveAssets();
+#endif
             }
 
             /// <summary>
@@ -111,7 +115,11 @@ namespace UnityEditor
 
                 objects.UpdateIfRequiredOrScript();
                 objects.ApplyModifiedProperties();
+#if UNITY_2020_1_OR_NEWER
                 AssetDatabase.SaveAssetIfDirty(asset);
+#else
+                AssetDatabase.SaveAssets();
+#endif
             }
 
             /// <summary>
