@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+#if UNITY_EDITOR
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Codice.Client.Common;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -60,8 +57,6 @@ public class Timer_Test : MonoBehaviour
 
     private static long TotalValue;
 
-    public static CurrentDirectory Dictionary = new CurrentDirectory();
-
     private void Callback100()
     {
         Debug.LogFormat("-> 任务完成 Duration {0} : Number -> {1} ", 1000, 1);
@@ -112,3 +107,4 @@ public class Timer_Test : MonoBehaviour
         UnityAsync.Dispose();
     }
 }
+#endif

@@ -70,6 +70,6 @@ namespace UnityEngine
         /// <summary>
         /// 推送更新
         /// </summary>
-        public void PushUpdate(List<ITimerExecutor> timer);
+        void PushUpdate(List<ITimerExecutor> timer);
     }
 }

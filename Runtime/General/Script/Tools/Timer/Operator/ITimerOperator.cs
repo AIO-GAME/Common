@@ -39,7 +39,7 @@ namespace UnityEngine
         /// <summary>
         /// 计算当前瞬间 定时器全部数量
         /// </summary>
-        int AllCount { get; internal set; }
+        int AllCount { get; set; }
 
         /// <summary>
         /// 当前执行器 一次性最多缓存个数
