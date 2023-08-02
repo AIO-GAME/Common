@@ -5,8 +5,8 @@ using YooAsset.Editor;
 
 namespace AIO.Unity.Editor
 {
-    [DisplayName("收集Lua代码及其他文件")]
-    public class FilterRuleLua : IFilterRule
+    [DisplayName("收集 Lua代码及其他文件")]
+    public class CollectRuleLua : IFilterRule
     {
         public bool IsCollectAsset(FilterRuleData data)
         {
