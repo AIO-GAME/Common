@@ -42,7 +42,7 @@ namespace AIO.Unity.Editor
                 .Select(PackageInfo.FindForAssetPath)
                 .GroupBy(x => x.assetPath)
                 .Select(x => x.First())
-                .Where(x => Directory.Exists(Path.Combine(dataPath, x.resolvedPath, ".git")))
+                .Where(x => UtilsGen.IO.Exists(Path.Combine(dataPath, x.resolvedPath, ".git")))
                 .ToList();
             CreateTemplate(packageInfos);
         }
