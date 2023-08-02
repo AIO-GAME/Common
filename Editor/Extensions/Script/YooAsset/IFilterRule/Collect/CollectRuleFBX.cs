@@ -4,8 +4,8 @@ using YooAsset.Editor;
 
 namespace AIO.Unity.Editor
 {
-    [DisplayName("收集FBX资源")]
-    public class FilterRuleFBX : IFilterRule
+    [DisplayName("收集 FBX资源")]
+    public class CollectRuleFBX : IFilterRule
     {
         public bool IsCollectAsset(FilterRuleData data)
         {
