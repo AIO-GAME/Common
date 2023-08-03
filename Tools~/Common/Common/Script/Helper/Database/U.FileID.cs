@@ -39,6 +39,7 @@ public partial class UtilsGen
                 return result;
             }
         }
+
         /// <summary>
         /// 计算类型的 FileID
         /// </summary>
@@ -62,7 +63,6 @@ public partial class UtilsGen
         }
 
 
-
         /// <summary>
         /// 计算类型的 FileID
         /// </summary>
@@ -71,7 +71,7 @@ public partial class UtilsGen
         {
             var type = typeof(T);
             var toBeHashed = string.Concat("s\0\0\0", type.Namespace, type.Name);
-            using (var hash = new MD4())
+            using (HashAlgorithm hash = new MD4())
             {
                 hash.Initialize();
                 var hashed = hash.ComputeHash(Encoding.UTF8.GetBytes(toBeHashed));
@@ -105,6 +105,7 @@ public partial class UtilsGen
         public MD4()
         {
             _x = new uint[16];
+            Initialize();
         }
 
         public override void Initialize()
@@ -177,7 +178,10 @@ public partial class UtilsGen
 
         private IEnumerable<byte> Padding()
         {
-            return Repeat(128, 1).Concat(Repeat(0, ((_bytesProcessed + 8) & 0x7fffffc0) + 55 - _bytesProcessed)).Concat(Bytes((uint)_bytesProcessed << 3)).Concat(Repeat(0, 4));
+            return Repeat(128, 1)
+                .Concat(Repeat(0, ((_bytesProcessed + 8) & 0x7fffffc0) + 55 - _bytesProcessed))
+                .Concat(Bytes((uint)_bytesProcessed << 3))
+                .Concat(Repeat(0, 4));
         }
 
         private void Process16WordBlock()
