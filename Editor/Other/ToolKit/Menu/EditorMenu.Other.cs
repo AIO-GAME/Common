@@ -5,6 +5,7 @@
 |||✩ - - - - - |*/
 
 using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
@@ -16,186 +17,176 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Profiling.Memory.Experimental;
 using YamlDotNet.Serialization;
 
 namespace AIO.Unity.Editor
 {
-    public class MD4 : HashAlgorithm
+    public class ScriptIDViewer : EditorWindow
     {
-        private uint _a;
-        private uint _b;
-        private uint _c;
-        private uint _d;
-        private uint[] _x;
-        private int _bytesProcessed;
-
-        public MD4()
+        [MenuItem("Tools/Debug/ScriptIDViewer")]
+        public static void Open()
         {
-            _x = new uint[16];
-            Initialize();
+            var wnd = GetWindow<ScriptIDViewer>("ScriptIDViewer");
+            wnd.Show();
+            wnd.minSize = new Vector2(600, 400);
+            wnd.maxSize = new Vector2(600, 400);
         }
 
-        public override void Initialize()
+        private void Awake()
         {
-            _a = 0x67452301;
-            _b = 0xefcdab89;
-            _c = 0x98badcfe;
-            _d = 0x10325476;
-            _bytesProcessed = 0;
+            m_material = new Material(Shader.Find("Hidden/Internal-Colored"));
+            m_material.hideFlags = HideFlags.HideAndDontSave;
         }
 
-        protected override void HashCore(byte[] array, int offset, int length)
+        private void OnGUI()
         {
-            ProcessMessage(Bytes(array, offset, length));
+            EditorGUILayout.BeginVertical();
+            EditorGUILayout.Space();
+            GetId();
+            DrawLine();
+            GetScriptId();
+            DrawLine();
+            GetAssetFromId();
+            DrawLine();
+            GetDllScriptId();
+            EditorGUILayout.Space();
+            EditorGUILayout.EndVertical();
         }
 
-        protected override byte[] HashFinal()
+        private MonoBehaviour _mono;
+
+        void GetId()
         {
-            try
+            _mono = EditorGUILayout.ObjectField(_mono, typeof(MonoBehaviour), true) as MonoBehaviour;
+            if (_mono)
             {
-                ProcessMessage(Padding());
-                return new[] { _a, _b, _c, _d }.SelectMany(word => Bytes(word)).ToArray();
+                string guid;
+                long fid;
+                var script = MonoScript.FromMonoBehaviour(_mono);
+                var path = AssetDatabase.TryGetGUIDAndLocalFileIdentifier(script, out guid, out fid);
+                EditorGUILayout.TextField("fileID", fid.ToString());
+                EditorGUILayout.TextField("guid", guid);
             }
-            finally
+        }
+
+        private MonoScript _script;
+
+        void GetScriptId()
+        {
+            _script = EditorGUILayout.ObjectField(_script, typeof(MonoScript), true) as MonoScript;
+            if (_script)
             {
-                Initialize();
+                string guid;
+                long fid;
+                var path = AssetDatabase.TryGetGUIDAndLocalFileIdentifier(_script, out guid, out fid);
+                EditorGUILayout.TextField("fileID", fid.ToString());
+                EditorGUILayout.TextField("guid", guid);
             }
         }
 
-        private void ProcessMessage(IEnumerable<byte> bytes)
+        string _guid, _fid;
+        string _result;
+
+        void GetAssetFromId()
         {
-            foreach (byte b in bytes)
+            EditorGUILayout.BeginHorizontal();
+            _fid = EditorGUILayout.TextField("fileID", _fid);
+            _guid = EditorGUILayout.TextField("guid", _guid);
+            if (GUILayout.Button("find"))
             {
-                int c = _bytesProcessed & 63;
-                int i = c >> 2;
-                int s = (c & 3) << 3;
-                _x[i] = (_x[i] & ~((uint)255 << s)) | ((uint)b << s);
-                if (c == 63)
+                _result = "未找到";
+                var path = AssetDatabase.GUIDToAssetPath(_guid);
+                var assets = AssetDatabase.LoadAllAssetsAtPath(path);
+                string guid;
+                long fid;
+
+                for (int i = 0; i < assets.Length; i++)
                 {
-                    Process16WordBlock();
+                    var asset = assets[i];
+                    var s = AssetDatabase.TryGetGUIDAndLocalFileIdentifier(asset, out guid, out fid);
+                    if (s && _fid == fid.ToString())
+                    {
+                        var script = asset as MonoScript;
+                        string name;
+                        if (script != null)
+                            name = script.GetClass().FullName;
+                        else
+                            name = asset.name;
+                        _result = string.Format("{0}->{1}", path, name);
+                        break;
+                    }
+                }
+            }
+
+            EditorGUILayout.EndHorizontal();
+            GUILayout.TextField(_result);
+        }
+
+
+        private DefaultAsset _dll;
+        private string _dll_guid;
+        private long _dll_fid;
+        private UnityEngine.Object[] _dllAssets;
+        private float _scrollValueX = 0;
+        private float _scrollValueY = 0;
+        private Vector2 _scroll;
+
+        void GetDllScriptId()
+        {
+            _dll = EditorGUILayout.ObjectField(".dll", _dll, typeof(DefaultAsset), true) as DefaultAsset;
+            GUILayout.BeginHorizontal();
+            EditorGUILayout.TextField("fileID", _dll_fid.ToString());
+            EditorGUILayout.TextField("guid", _dll_guid);
+            GUILayout.EndHorizontal();
+            if (GUILayout.Button("Open") && _dll != null)
+            {
+                var path = AssetDatabase.GetAssetPath(_dll);
+                if (path.EndsWith(".dll"))
+                    _dllAssets = AssetDatabase.LoadAllAssetsAtPath(path);
+                else
+                    _dllAssets = null;
+            }
+
+            if (_dllAssets != null && _dllAssets.Length > 0)
+            {
+                _scroll = EditorGUILayout.BeginScrollView(_scroll, GUILayout.Width(600));
+                for (int i = 0; i < _dllAssets.Length; i++)
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    GUILayout.TextField(_dllAssets[i].name);
+                    if (GUILayout.Button("view", GUILayout.Width(100)))
+                    {
+                        var s = AssetDatabase.TryGetGUIDAndLocalFileIdentifier(_dllAssets[i], out _dll_guid, out _dll_fid);
+                    }
+
+                    EditorGUILayout.EndHorizontal();
                 }
 
-                _bytesProcessed++;
+                EditorGUILayout.EndScrollView();
             }
         }
 
-        private static IEnumerable<byte> Bytes(byte[] bytes, int offset, int length)
+        Material m_material;
+
+        void DrawLine()
         {
-            for (int i = offset; i < length; i++)
+            EditorGUILayout.Space(20);
+            if (Event.current.type == EventType.Repaint)
             {
-                yield return bytes[i];
-            }
-        }
-
-        private IEnumerable<byte> Bytes(uint word)
-        {
-            yield return (byte)(word & 255);
-            yield return (byte)((word >> 8) & 255);
-            yield return (byte)((word >> 16) & 255);
-            yield return (byte)((word >> 24) & 255);
-        }
-
-        private IEnumerable<byte> Repeat(byte value, int count)
-        {
-            for (int i = 0; i < count; i++)
-            {
-                yield return value;
-            }
-        }
-
-        private IEnumerable<byte> Padding()
-        {
-            return Repeat(128, 1)
-                .Concat(Repeat(0, ((_bytesProcessed + 8) & 0x7fffffc0) + 55 - _bytesProcessed))
-                .Concat(Bytes((uint)_bytesProcessed << 3))
-                .Concat(Repeat(0, 4));
-        }
-
-        private void Process16WordBlock()
-        {
-            uint aa = _a;
-            uint bb = _b;
-            uint cc = _c;
-            uint dd = _d;
-            foreach (int k in new[] { 0, 4, 8, 12 })
-            {
-                aa = Round1Operation(aa, bb, cc, dd, _x[k], 3);
-                dd = Round1Operation(dd, aa, bb, cc, _x[k + 1], 7);
-                cc = Round1Operation(cc, dd, aa, bb, _x[k + 2], 11);
-                bb = Round1Operation(bb, cc, dd, aa, _x[k + 3], 19);
-            }
-
-            foreach (int k in new[] { 0, 1, 2, 3 })
-            {
-                aa = Round2Operation(aa, bb, cc, dd, _x[k], 3);
-                dd = Round2Operation(dd, aa, bb, cc, _x[k + 4], 5);
-                cc = Round2Operation(cc, dd, aa, bb, _x[k + 8], 9);
-                bb = Round2Operation(bb, cc, dd, aa, _x[k + 12], 13);
-            }
-
-            foreach (int k in new[] { 0, 2, 1, 3 })
-            {
-                aa = Round3Operation(aa, bb, cc, dd, _x[k], 3);
-                dd = Round3Operation(dd, aa, bb, cc, _x[k + 8], 9);
-                cc = Round3Operation(cc, dd, aa, bb, _x[k + 4], 11);
-                bb = Round3Operation(bb, cc, dd, aa, _x[k + 12], 15);
-            }
-
-            unchecked
-            {
-                _a += aa;
-                _b += bb;
-                _c += cc;
-                _d += dd;
-            }
-        }
-
-        private static uint ROL(uint value, int numberOfBits)
-        {
-            return (value << numberOfBits) | (value >> (32 - numberOfBits));
-        }
-
-        private static uint Round1Operation(uint a, uint b, uint c, uint d, uint xk, int s)
-        {
-            unchecked
-            {
-                return ROL(a + ((b & c) | (~b & d)) + xk, s);
-            }
-        }
-
-        private static uint Round2Operation(uint a, uint b, uint c, uint d, uint xk, int s)
-        {
-            unchecked
-            {
-                return ROL(a + ((b & c) | (b & d) | (c & d)) + xk + 0x5a827999, s);
-            }
-        }
-
-        private static uint Round3Operation(uint a, uint b, uint c, uint d, uint xk, int s)
-        {
-            unchecked
-            {
-                return ROL(a + (b ^ c ^ d) + xk + 0x6ed9eba1, s);
-            }
-        }
-    }
-
-    public static class FileIDUtil
-    {
-        public static int Compute(Type t)
-        {
-            string toBeHashed = "s\0\0\0" + t.Namespace + t.Name;
-            using (HashAlgorithm hash = new MD4())
-            {
-                byte[] hashed = hash.ComputeHash(Encoding.UTF8.GetBytes(toBeHashed));
-                int result = 0;
-                for (int i = 3; i >= 0; --i)
-                {
-                    result <<= 8;
-                    result |= hashed[i];
-                }
-
-                return result;
+                var lastRect = GUILayoutUtility.GetLastRect();
+                var rect = new Rect(0, lastRect.y, 600, 20);
+                GL.PushMatrix();
+                m_material.SetPass(0);
+                GL.LoadPixelMatrix();
+                GL.Begin(GL.QUADS);
+                GL.Color(new Color32(78, 201, 176, 255));
+                GL.Vertex3(rect.x, rect.y, 0);
+                GL.Vertex3(rect.x + rect.width, rect.y, 0);
+                GL.Vertex3(rect.x + rect.width, rect.y + rect.height, 0);
+                GL.Vertex3(rect.x, rect.y + rect.height, 0);
+                GL.End();
+                GL.PopMatrix();
             }
         }
     }
@@ -398,7 +389,7 @@ namespace AIO.Unity.Editor
                 if (!_path2type.TryAdd(fullpath, type))
                     Console.WriteLine(string.Format("error:type {0} path {1} existed!", type.Name, ShortPathName(_metadir, fullpath)));
 
-                if (!_type2fileid.TryAdd(type, FileIDUtil.Compute(type).ToString()))
+                if (!_type2fileid.TryAdd(type, UtilsGen.FileID.Compute(type).ToString()))
                     Console.WriteLine(string.Format("error:type {0} add fileid failed", type.Name));
             });
         }
@@ -564,12 +555,38 @@ namespace AIO.Unity.Editor
                 Assembly.LoadFile(@"G:\UnityProject\G108-Win-2020\Packages\com.blz.config\DBVC\DBVC.dll"),
                 Assembly.LoadFile(@"G:\UnityProject\G108-Win-2020\Packages\com.blz.config\DBVC\ClientCore.dll"),
             };
-            Test2(assemblies);
+            var dirs = new List<DirectoryInfo>
+            {
+                new DirectoryInfo(@"G:\UnityProject\G201\proj\third-plugins\client-core\ClientCore"),
+                new DirectoryInfo(@"G:\UnityProject\G201\proj\third-plugins\client-core\DBVC"),
+            };
+            Test2(assemblies, dirs);
         }
 
-        private static void Test2(ICollection<Assembly> assemblies)
+        private struct ScriptDataInfo
         {
-            var fileidDic = new Dictionary<string, long>();
+            public string GUID;
+
+            public long FileID;
+
+            public string RealPath;
+
+            public string FileName;
+
+            public string NameSpace;
+        }
+
+        private static void Test2(
+            ICollection<Assembly> assemblies,
+            ICollection<DirectoryInfo> dirs)
+        {
+            // 
+            var fileidDic = new Dictionary<long, string>();
+            var md5 = new Dictionary<string, string>()
+            {
+                { "356a8f05a6726e645ade74e1e74b6523", "ClientCore" },
+                { "53d0d244ae5b5d343b19aced455b29ca", "DBVC" },
+            };
 
             foreach (var assembly in assemblies)
             {
@@ -579,8 +596,138 @@ namespace AIO.Unity.Editor
                     if (!type.IsSubclassOf(typeof(UnityEngine.Object))) continue;
 
                     var fileid = UtilsGen.FileID.Compute(type);
-                    fileidDic.Add(type.FullName, fileid);
-                    Console.WriteLine("{0} [ fileid : {1} ]", type.FullName, fileid);
+                    fileidDic.Add(fileid, type.FullName);
+                    // Console.WriteLine("{0} [ fileid : {1} ]", type.FullName, fileid);
+                }
+            }
+
+            var guidDic = new Dictionary<string, string>();
+            foreach (var directory in dirs)
+            {
+                foreach (var file in directory.GetFiles("*.cs", SearchOption.AllDirectories))
+                {
+                    if (file.Name.StartsWith("AssemblyInfo")) continue;
+                    if (file.Extension.Contains(".meta")) continue;
+                    if (!file.Extension.Contains(".cs")) continue;
+                    var meta = string.Concat(file.FullName, ".meta");
+                    if (!File.Exists(string.Concat(file.FullName, ".meta"))) continue;
+                    var metaData = UtilsGen.Yaml.Deserialize<Hashtable>(File.ReadAllText(meta));
+
+
+                    var namespacename = "";
+                    foreach (var line in File.ReadLines(file.FullName))
+                    {
+                        if (line.StartsWith("namespace"))
+                        {
+                            namespacename = line.Replace("namespace ", "").Replace("{", "").Trim();
+                            namespacename = string.Concat(namespacename, ".");
+                            break;
+                        }
+                    }
+
+                    namespacename = string.Concat(namespacename, file.Name.Replace(file.Extension, ""));
+
+                    if (guidDic.ContainsKey(namespacename))
+                    {
+                        Debug.LogError(string.Format("Error: {0} {1} {2}", namespacename, guidDic[namespacename], metaData["guid"]));
+                    }
+                    else guidDic.Add(namespacename, metaData["guid"].ToString());
+
+                    // Console.WriteLine("{0} [ fileid : {1} ]", namespacename, metaData["guid"]);
+                }
+            }
+
+            var path = Application.dataPath.Replace("Assets", "");
+
+            var assetList = new List<string>();
+            foreach (var file in AssetDatabase.GetAllAssetPaths())
+            {
+                if (file.Contains("SRDebugger")) continue;
+                if (file.Contains("Sirenix")) continue;
+
+                var full = Path.Combine(path, file);
+                if (!File.Exists(full)) continue;
+
+                var Extension = Path.GetExtension(full).ToLower();
+                if (string.IsNullOrEmpty(Extension)) continue;
+                if (Extension.Contains("cs")) continue;
+                if (Extension.Contains("dll")) continue;
+                if (Extension.Contains("txt")) continue;
+                if (Extension.Contains("json")) continue;
+                if (Extension.Contains("lua")) continue;
+                if (Extension.Contains("bytes")) continue;
+
+                if (Extension.Contains("png")) continue;
+                if (Extension.Contains("jpg")) continue;
+                if (Extension.Contains("mat")) continue;
+                if (Extension.Contains("shader")) continue;
+                if (Extension.Contains("mp3")) continue;
+                if (Extension.Contains("fbx")) continue;
+                if (Extension.Contains("font")) continue;
+                if (Extension.Contains("otf")) continue;
+                if (Extension.Contains("ttf")) continue;
+                if (Extension.Contains("unity")) continue;
+                if (Extension.Contains("so")) continue;
+                if (Extension.Contains("asmdef")) continue;
+                if (Extension.Contains("uss")) continue;
+                if (Extension.Contains("xml")) continue;
+                if (Extension.Contains("prefs")) continue;
+
+
+                assetList.Add(full);
+            }
+
+
+            var builder = new StringBuilder();
+            foreach (var file in assetList)
+            {
+                var lines = File.ReadLines(file);
+                var changed = false;
+                builder.Clear();
+                foreach (var line in lines)
+                {
+                    if (!(line.Contains("m_Script") && line.Contains("fileID") && line.Contains("guid")))
+                    {
+                        builder.AppendLine(line);
+                        continue;
+                    }
+
+                    var arr = line.Split(':').Trim();
+                    var fileid = long.Parse(arr[2].Split(',')[0]);
+                    if (fileid == 11500000)
+                    {
+                        builder.AppendLine(line);
+                        continue;
+                    }
+
+                    var guid = arr[3].Split(',')[0];
+                    if (!md5.ContainsKey(guid))
+                    {
+                        builder.AppendLine(line);
+                        continue;
+                    }
+
+
+                    if (!fileidDic.TryGetValue(fileid, out var newguid))
+                    {
+                        builder.AppendLine(line);
+                        continue;
+                    }
+                    
+                    if (!guidDic.TryGetValue(newguid, out  newguid))
+                    {
+                        builder.AppendLine(line);
+                        continue;
+                    }
+
+                    builder.AppendLine(line.Replace(fileid.ToString(), "11500000").Replace(guid, newguid));
+                    changed = true;
+                }
+
+                if (changed)
+                {
+                    Console.WriteLine(file);
+                    File.WriteAllText(file, builder.ToString());
                 }
             }
         }
