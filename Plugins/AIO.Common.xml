@@ -8653,1137 +8653,42 @@
             maximum length of address
             </summary>
         </member>
-        <member name="T:Pool">
-            <summary>
-            对象池
-            </summary>
-        </member>
-        <member name="M:Pool.List``1">
-            <summary>
-            缓存 => 创建 <see cref="T:System.Collections.Generic.List`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-            <returns><see cref="T:System.Collections.Generic.List`1"/></returns>
-        </member>
-        <member name="M:Pool.Free``1(System.Collections.Generic.List{``0})">
-            <summary>
-            缓存 => 释放 <see cref="T:System.Collections.Generic.List`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-        </member>
-        <member name="M:Pool.HashSet``1">
-            <summary>
-            缓存 => 创建 <see cref="T:System.Collections.Generic.HashSet`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-            <returns><see cref="T:System.Collections.Generic.HashSet`1"/></returns>
-        </member>
-        <member name="M:Pool.Free``1(System.Collections.Generic.HashSet{``0})">
-            <summary>
-            缓存 => 释放 <see cref="T:System.Collections.Generic.HashSet`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-        </member>
-        <member name="M:Pool.LinkedList``1">
-            <summary>
-            缓存 => 创建 <see cref="T:System.Collections.Generic.LinkedList`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-            <returns><see cref="T:System.Collections.Generic.LinkedList`1"/></returns>
-        </member>
-        <member name="M:Pool.Free``1(System.Collections.Generic.LinkedList{``0})">
-            <summary>
-            缓存 => 释放 <see cref="T:System.Collections.Generic.LinkedList`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-        </member>
-        <member name="M:Pool.Stack``1">
-            <summary>
-            缓存 => 创建 <see cref="T:System.Collections.Generic.Stack`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-            <returns><see cref="T:System.Collections.Generic.Stack`1"/></returns>
-        </member>
-        <member name="M:Pool.Free``1(System.Collections.Generic.Stack{``0})">
-            <summary>
-            缓存 => 释放 <see cref="T:System.Collections.Generic.Stack`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-        </member>
-        <member name="M:Pool.Queue``1">
-            <summary>
-            缓存 => 创建 <see cref="T:System.Collections.Generic.Queue`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-            <returns><see cref="T:System.Collections.Generic.Queue`1"/></returns>
-        </member>
-        <member name="M:Pool.Free``1(System.Collections.Generic.Queue{``0})">
-            <summary>
-            缓存 => 释放 <see cref="T:System.Collections.Generic.Queue`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-        </member>
-        <member name="M:Pool.SortedList``2">
-            <summary>
-            缓存 => 创建 <see cref="T:System.Collections.Generic.SortedList`2"/>
-            </summary>
-            <typeparam name="K">Generic</typeparam>
-            <typeparam name="V">Generic</typeparam>
-            <returns><see cref="T:System.Collections.Generic.Dictionary`2"/></returns>
-        </member>
-        <member name="M:Pool.Free``2(System.Collections.Generic.SortedList{``0,``1})">
-            <summary>
-            缓存 => 释放 <see cref="T:System.Collections.Generic.SortedList`2"/>
-            </summary>
-            <typeparam name="K">Generic</typeparam>
-            <typeparam name="V">Generic</typeparam>
-        </member>
-        <member name="M:Pool.Dictionary``2">
-            <summary>
-            缓存 => 创建 <see cref="T:System.Collections.Generic.Dictionary`2"/>
-            </summary>
-            <typeparam name="K">Generic</typeparam>
-            <typeparam name="V">Generic</typeparam>
-            <returns><see cref="T:System.Collections.Generic.Dictionary`2"/></returns>
-        </member>
-        <member name="M:Pool.Free``2(System.Collections.Generic.Dictionary{``0,``1})">
-            <summary>
-            缓存 => 释放 <see cref="T:System.Collections.Generic.Dictionary`2"/>
-            </summary>
-            <typeparam name="K">Generic</typeparam>
-            <typeparam name="V">Generic</typeparam>
-        </member>
-        <member name="T:Pool.ADictionary`2">
-            <summary>
-            Dictionary 对象池
-            </summary>
-        </member>
-        <member name="M:Pool.ADictionary`2.New">
-            <summary>
-            创建
-            </summary>
-        </member>
-        <member name="M:Pool.ADictionary`2.Free(System.Collections.Generic.Dictionary{`0,`1})">
-            <summary>
-            释放
-            </summary>
-        </member>
-        <member name="T:Pool.Disposable`1">
-            <summary>
-            An <see cref="T:System.IDisposable"/> to allow pooled objects to be acquired and released within <c>using</c>
-            statements instead of needing to manually release everything.
-            </summary>
-        </member>
-        <member name="F:Pool.Disposable`1.Item">
-            <summary>
-            The object acquired from the <see cref="T:Pool.Disposable`1"/>.
-            </summary>
-        </member>
-        <member name="F:Pool.Disposable`1.OnRelease">
-            <summary>
-            Called by IDisposable.Dispose.
-            </summary>
-        </member>
-        <member name="M:Pool.Disposable`1.#ctor(`0,System.Action{`0})">
-            <summary>
-            释放
-            </summary>
-        </member>
-        <member name="T:Pool.Generic`1">
-            <summary>
-            通用
-            </summary>
-        </member>
-        <member name="M:Pool.Generic`1.New(System.Func{`0})">
-            <summary>
-            创建
-            </summary>
-        </member>
-        <member name="M:Pool.Generic`1.New">
-            <summary>
-            创建
-            </summary>
-        </member>
-        <member name="M:Pool.Generic`1.Free(`0)">
-            <summary>
-            释放
-            </summary>
-        </member>
-        <member name="T:Pool.AHashSet`1">
-            <summary>
-            HashSet对象池
-            </summary>
-        </member>
-        <member name="M:Pool.AHashSet`1.New">
-            <summary>
-            创建新的
-            </summary>
-        </member>
-        <member name="M:Pool.AHashSet`1.Free(System.Collections.Generic.HashSet{`0})">
-            <summary>
-            释放HashSet
-            </summary>
-        </member>
-        <member name="T:Pool.ALinkedList`1">
-            <summary>
-            List对象池
-            </summary>
-        </member>
-        <member name="M:Pool.ALinkedList`1.New">
-            <summary>
-            创建新的
-            </summary>
-        </member>
-        <member name="M:Pool.ALinkedList`1.Free(System.Collections.Generic.LinkedList{`0})">
-            <summary>
-            释放List
-            </summary>
-        </member>
-        <member name="T:Pool.AList`1">
-            <summary>
-            List对象池
-            </summary>
-        </member>
-        <member name="M:Pool.AList`1.New">
-            <summary>
-            创建新的
-            </summary>
-        </member>
-        <member name="M:Pool.AList`1.Free(System.Collections.Generic.List{`0})">
-            <summary>
-            释放List
-            </summary>
-        </member>
-        <member name="T:Pool.AQueue`1">
-            <summary>
-            Queue对象池
-            </summary>
-        </member>
-        <member name="M:Pool.AQueue`1.New">
-            <summary>
-            创建新的
-            </summary>
-        </member>
-        <member name="M:Pool.AQueue`1.Free(System.Collections.Generic.Queue{`0})">
-            <summary>
-            释放Queue
-            </summary>
-        </member>
-        <member name="T:Pool.ASortedList`2">
-            <summary>
-            Dictionary 对象池
-            </summary>
-        </member>
-        <member name="M:Pool.ASortedList`2.New">
-            <summary>
-            创建
-            </summary>
-        </member>
-        <member name="M:Pool.ASortedList`2.Free(System.Collections.Generic.SortedList{`0,`1})">
-            <summary>
-            释放
-            </summary>
-        </member>
-        <member name="T:Pool.AStack`1">
-            <summary>
-            Stack对象池
-            </summary>
-        </member>
-        <member name="M:Pool.AStack`1.New">
-            <summary>
-            创建新的
-            </summary>
-        </member>
-        <member name="M:Pool.AStack`1.Free(System.Collections.Generic.Stack{`0})">
-            <summary>
-            释放Stack
-            </summary>
-        </member>
-        <member name="M:Pool.Using``1(``0@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:Pool.Using``1(``0@,System.Action{``0})">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:Pool.Using``1(``0,System.Action{``0})">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:Pool.Using``1(System.Collections.Generic.List{``0}@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:Pool.Using``1(System.Collections.Generic.HashSet{``0}@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:Pool.Using``1(System.Collections.Generic.Stack{``0}@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:Pool.Using``1(System.Collections.Generic.Queue{``0}@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:Pool.Using``2(System.Collections.Generic.Dictionary{``0,``1}@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="T:PoolExtend">
-            <summary>
-            扩展
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToDictionaryPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为 Dictionary 并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.Free``2(System.Collections.Generic.Dictionary{``0,``1})">
-            <summary>
-            释放 Dictionary
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToHashSetPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为HashSet并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToHashSetPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为HashSet并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToHashSetPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为HashSet并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.Free``1(System.Collections.Generic.HashSet{``0})">
-            <summary>
-            释放HashSet
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToLinkedListPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为List并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToLinkedListPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为List并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToLinkedListPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为List并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.Free``1(System.Collections.Generic.LinkedList{``0})">
-            <summary>
-            释放List
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToListPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为List并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToListPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为List并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToListPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为List并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.Free``1(System.Collections.Generic.List{``0})">
-            <summary>
-            释放List
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToQueuePooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为Queue并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToQueuePooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为Queue并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToQueuePooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为Queue并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.Free``1(System.Collections.Generic.Queue{``0})">
-            <summary>
-            释放Queue
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToSortedListPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为 Dictionary 并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.Free``2(System.Collections.Generic.SortedList{``0,``1})">
-            <summary>
-            释放 Dictionary
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToStackPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为Stack并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToStackPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为Stack并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToStackPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为Stack并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.Free``1(System.Collections.Generic.Stack{``0})">
-            <summary>
-            释放Stack
-            </summary>
-        </member>
-        <member name="T:Unit">
-            <summary>
-            单位
-            </summary>
-        </member>
-        <member name="T:Unit.Char">
-            <summary>
-            只读变量
-            </summary>
-        </member>
-        <member name="F:Unit.Char.C0">
-            <summary>
-            0的字符
-            </summary>
-        </member>
-        <member name="F:Unit.Char.BEL">
-            <summary>
-            响铃
-            </summary>
-        </member>
-        <member name="F:Unit.Char.BackSpace">
-            <summary>
-            回格
-            </summary>
-        </member>
-        <member name="F:Unit.Char.TabH">
-            <summary>
-            tab(水平制表符)
-            </summary>
-        </member>
-        <member name="F:Unit.Char.NewLine">
-            <summary>
-            换行
-            </summary>
-        </member>
-        <member name="F:Unit.Char.TabV">
-            <summary>
-            tab(垂直制表符)
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Page">
-            <summary>
-            换页
-            </summary>
-        </member>
-        <member name="F:Unit.Char.EnterNewLine">
-            <summary>
-            回车 chr(13) &amp; chr(10) 回车和换行的组合
-            </summary>
-        </member>
-        <member name="F:Unit.Char.End">
-            <summary>
-            结束 End
-            </summary>
-        </member>
-        <member name="F:Unit.Char.PauseBreak">
-            <summary>
-            脱离 Pause Break
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Space">
-            <summary>
-            空格
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Exclamation">
-            <summary>
-            !
-            </summary>
-        </member>
-        <member name="F:Unit.Char.DoubleQuote">
-            <summary>
-            "
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Pound">
-            <summary>
-            #
-            </summary>
-        </member>
-        <member name="F:Unit.Char.USD">
-            <summary>
-            $
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Modulus">
-            <summary>
-            -%
-            </summary>
-        </member>
-        <member name="F:Unit.Char.AND">
-            <summary>
-            -&amp;
-            </summary>
-        </member>
-        <member name="F:Unit.Char.SingleQuote">
-            <summary>
-            -’
-            </summary>
-        </member>
-        <member name="F:Unit.Char.LeftBracket">
-            <summary>
-            -(
-            </summary>
-        </member>
-        <member name="F:Unit.Char.RightBracket">
-            <summary>
-            -)
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Asterisk">
-            <summary>
-            *
-            </summary>
-        </member>
-        <member name="F:Unit.Char.ADD">
-            <summary>
-            +
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Comma">
-            <summary>
-            ,
-            </summary>
-        </member>
-        <member name="F:Unit.Char.SUB">
-            <summary>
-            -
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Point">
-            <summary>
-            .
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Slash">
-            <summary>
-            /
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N0">
-            <summary>
-            0
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N1">
-            <summary>
-            1
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N2">
-            <summary>
-            2
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N3">
-            <summary>
-            3
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N4">
-            <summary>
-            4
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N5">
-            <summary>
-            5
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N6">
-            <summary>
-            6
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N7">
-            <summary>
-            7
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N8">
-            <summary>
-            8
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N9">
-            <summary>
-            9
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Number">
-            <summary>
-            数字
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Colon">
-            <summary>
-            :
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Semicolon">
-            <summary>
-            ;
-            </summary>
-        </member>
-        <member name="F:Unit.Char.LessThanSign">
-            <summary>
-            &lt;
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Equality">
-            <summary>
-            61 =
-            </summary>
-        </member>
-        <member name="F:Unit.Char.EA">
-            62 >　
-            63 ?
-            64 @
-            <summary>
-            65 A
-            </summary>
-        </member>
-        <member name="F:Unit.Char.EZ">
-            66 B
-            67 C
-            68 D
-            69 E
-            70 F
-            71 G
-            72 H
-            73 I
-            74 J
-            75 K
-            76 L
-            77 M
-            78 N
-            79 O
-            80 P
-            81 Q
-            82 R
-            83 S
-            84 T
-            85 U
-            86 V
-            87 W
-            88 X
-            89 Y
-            <summary>
-            90 Z
-            </summary>
-        </member>
-        <member name="F:Unit.Char.EAlphaBet">
-            <summary>
-            大写A-大写Z
-            </summary>
-        </member>
-        <member name="F:Unit.Char.UnderLine">
-            91 [
-            92 /　
-            92 /
-            93]
-            94 ^
-            <summary>
-            95 _
-            </summary>
-        </member>
-        <member name="F:Unit.Char.ea">
-            96 `
-            <summary>
-            97 a
-            </summary>
-        </member>
-        <member name="F:Unit.Char.ez">
-            98 b
-            99 c
-            100 d
-            101 e
-            102 f
-            103 g
-            104 h
-            105 i
-            106 j
-            107 k
-            108 l
-            109 m
-            110 n
-            111 o
-            112 p
-            113 q
-            114 r
-            115 s
-            116 t
-            117 u
-            118 v
-            119 w
-            120 x
-            121 y
-            <summary>
-            122 z
-            </summary>
-        </member>
-        <member name="F:Unit.Char.eAlphaBet">
-            <summary>
-            小写e-小写z
-            </summary>
-        </member>
-        <member name="T:Unit.Chinese">
-            <summary>
-            中文单位
-            </summary>
-        </member>
-        <member name="F:Unit.Chinese.CNSNum">
-            <summary>
-            数字单位:个数组
-            </summary>
-        </member>
-        <member name="F:Unit.Chinese.CNSDigit">
-            <summary>
-            数字单位:位数组
-            </summary>
-        </member>
-        <member name="F:Unit.Chinese.CNSUnits">
-            <summary>
-            数字单位:单位数组
-            </summary>
-        </member>
-        <member name="F:Unit.Chinese.NumberChar">
-            <summary>
-            数字字符串
-            </summary>
-        </member>
-        <member name="T:Unit.Color">
-            <summary>
-            颜色库
-            </summary>
-        </member>
-        <member name="F:Unit.Color.Write">
-            <summary> 白色 1 </summary>
-        </member>
-        <member name="F:Unit.Color.Red">
-            <summary> 红色 5 </summary>
-        </member>
-        <member name="F:Unit.Color.Green">
-            <summary> 绿色 3 </summary>
-        </member>
-        <member name="F:Unit.Color.Blue">
-            <summary> 蓝色 4 </summary>
-        </member>
-        <member name="F:Unit.Color.Peony">
-            <summary> 牡丹红 5 </summary>
-        </member>
-        <member name="F:Unit.Color.Cyan">
-            <summary> 青色 6 </summary>
-        </member>
-        <member name="F:Unit.Color.Yellow">
-            <summary> 黄色 7 </summary>
-        </member>
-        <member name="F:Unit.Color.Black">
-            <summary> 黑色 8 </summary>
-        </member>
-        <member name="F:Unit.Color.Gary">
-            <summary> 灰色 41 </summary>
-        </member>
-        <member name="F:Unit.Color.SeaBlue">
-            <summary> 海蓝 9 </summary>
-        </member>
-        <member name="F:Unit.Color.Orange">
-            <summary> 橙色 81 </summary>
-        </member>
-        <member name="F:Unit.Color.Chocolate">
-            <summary> 巧克力色 10 </summary>
-        </member>
-        <member name="F:Unit.Color.BluishViolet">
-            <summary> 蓝紫色 11 </summary>
-        </member>
-        <member name="F:Unit.Color.Brassiness">
-            <summary> 黄铜色 12 </summary>
-        </member>
-        <member name="F:Unit.Color.BrightGold">
-            <summary> 亮金色 13 </summary>
-        </member>
-        <member name="F:Unit.Color.Brown">
-            <summary> 棕色 14 </summary>
-        </member>
-        <member name="F:Unit.Color.Aeneous1">
-            <summary> 青铜色1 15 </summary>
-        </member>
-        <member name="F:Unit.Color.Aeneous2">
-            <summary> 青铜色2 16 </summary>
-        </member>
-        <member name="F:Unit.Color.Bluewore">
-            <summary> 士官服蓝色 17 </summary>
-        </member>
-        <member name="F:Unit.Color.Coppercold">
-            <summary> 冷铜色 18 </summary>
-        </member>
-        <member name="F:Unit.Color.Coppery">
-            <summary> 铜色 19 </summary>
-        </member>
-        <member name="F:Unit.Color.Redcoral">
-            <summary> 珊瑚红 20 </summary>
-        </member>
-        <member name="F:Unit.Color.Hyacinthine">
-            <summary> 紫蓝色 21 </summary>
-        </member>
-        <member name="F:Unit.Color.Copperdeep">
-            <summary> 深铜 22 </summary>
-        </member>
-        <member name="F:Unit.Color.Greendeep">
-            <summary> 深绿 23 </summary>
-        </member>
-        <member name="F:Unit.Color.Darkcoppergreen">
-            <summary> 深铜绿色 24 </summary>
-        </member>
-        <member name="F:Unit.Color.Darkolivegreen">
-            <summary> 深橄榄绿 25 </summary>
-        </member>
-        <member name="F:Unit.Color.Bluedeep">
-            <summary> 深蓝花色 26 </summary>
-        </member>
-        <member name="F:Unit.Color.Modena">
-            <summary> 深紫色 27 </summary>
-        </member>
-        <member name="F:Unit.Color.BlueSLATEdeep">
-            <summary> 深石板蓝 28 </summary>
-        </member>
-        <member name="F:Unit.Color.Slabsdeep">
-            <summary> 深铅灰色 29 </summary>
-        </member>
-        <member name="F:Unit.Color.Browndark">
-            <summary> 深棕褐色 30 </summary>
-        </member>
-        <member name="F:Unit.Color.Turquoisedeep">
-            <summary> 深绿松石色 32 </summary>
-        </member>
-        <member name="F:Unit.Color.Colordark">
-            <summary> 暗木色 33 </summary>
-        </member>
-        <member name="F:Unit.Color.Greylight">
-            <summary> 淡灰色 34 </summary>
-        </member>
-        <member name="F:Unit.Color.Redearthgreyrose">
-            <summary> 土灰玫瑰红色 35 </summary>
-        </member>
-        <member name="F:Unit.Color.Longstone">
-            <summary> 长石色 36 </summary>
-        </member>
-        <member name="F:Unit.Color.Firebrick">
-            <summary> 火砖色 37 </summary>
-        </member>
-        <member name="F:Unit.Color.Greenforest">
-            <summary> 森林绿 38 </summary>
-        </member>
-        <member name="F:Unit.Color.Golden">
-            <summary> 金色 39 </summary>
-        </member>
-        <member name="F:Unit.Color.Foresythia">
-            <summary> 鲜黄色 40 </summary>
-        </member>
-        <member name="F:Unit.Color.Aerugo">
-            <summary> 铜绿色 42 </summary>
-        </member>
-        <member name="F:Unit.Color.Yellowbluish">
-            <summary> 青黄色 43 </summary>
-        </member>
-        <member name="F:Unit.Color.Greenhunter">
-            <summary> 猎人绿 44 </summary>
-        </member>
-        <member name="F:Unit.Color.Redindian">
-            <summary> 印度红 45 </summary>
-        </member>
-        <member name="F:Unit.Color.Yellowearthy">
-            <summary> 土黄色 46 </summary>
-        </member>
-        <member name="F:Unit.Color.Wathet">
-            <summary> 浅蓝色 47 </summary>
-        </member>
-        <member name="F:Unit.Color.Greyfrench">
-            <summary> 浅灰色 48 </summary>
-        </member>
-        <member name="F:Unit.Color.Bluelightsteel">
-            <summary> 浅钢蓝色 49 </summary>
-        </member>
-        <member name="F:Unit.Color.Colorlight">
-            <summary> 浅木色 59 </summary>
-        </member>
-        <member name="F:Unit.Color.Greenlime">
-            <summary> 石灰绿色 60 </summary>
-        </member>
-        <member name="F:Unit.Color.Bisque">
-            <summary> 桔黄色 61 </summary>
-        </member>
-        <member name="F:Unit.Color.Maroon">
-            <summary> 褐红色 62 </summary> 62
-        </member>
-        <member name="T:Unit.Suffix">
-            <summary>
-            后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.TextureSuffix">
-            <summary>
-            图片文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.VideoSuffix">
-            <summary>
-            视频文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.SoundSuffix">
-            <summary>
-            音频文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.TextSuffix">
-            <summary>
-            文本文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.ShaderSuffix">
-            <summary>
-            shader文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.FontSuffix">
-            <summary>
-            字体后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.Animation">
-            <summary>
-            动画文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.Animator">
-            <summary>
-            控制器文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.Material">
-            <summary>
-            材质文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.PrefabSuffix">
-            <summary>
-            预制体文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.RTextureSuffix">
-            <summary>
-            渲染纹理后缀
-            </summary>
-        </member>
-        <member name="T:Unit.Time">
-            <summary>
-            时间
-            </summary>
-        </member>
-        <member name="T:Unit.Time.SencondUnit">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Unit.Time.SencondUnit.SECOND">
-            <summary> 秒 </summary>
-        </member>
-        <member name="F:Unit.Time.SencondUnit.MILLISCOND">
-            <summary> 毫秒 </summary>
-        </member>
-        <member name="F:Unit.Time.SencondUnit.MICROSECOND">
-            <summary> 微秒 </summary>
-        </member>
-        <member name="F:Unit.Time.SencondUnit.NANOSECOND">
-            <summary> 纳秒 </summary>
-        </member>
-        <member name="F:Unit.Time.SencondUnit.NANOSECOND_100">
-            <summary> 100纳秒计数单位 </summary>
-        </member>
-        <member name="M:Unit.Time.GetSencondUnit(Unit.Time.SencondUnit)">
-            <summary>
-            获取秒 计数单位 秒
-            </summary>
-        </member>
-        <member name="M:Unit.Time.GetMinUnit(Unit.Time.SencondUnit)">
-            <summary>
-            获取秒 计数单位 分
-            </summary>
-        </member>
-        <member name="M:Unit.Time.GetHourUnit(Unit.Time.SencondUnit)">
-            <summary>
-            获取秒 计数单位 时
-            </summary>
-        </member>
-        <member name="M:Unit.Time.GetDayUnit(Unit.Time.SencondUnit)">
-            <summary>
-            获取秒 计数单位 时
-            </summary>
-        </member>
-        <member name="M:Unit.Time.GetWeekUnit(Unit.Time.SencondUnit)">
-            <summary>
-            获取秒 计数单位 时
-            </summary>
-        </member>
-        <member name="T:Unit.Time.DateTimeUnit">
-            <summary>
-            时间间隔
-            </summary>
-        </member>
-        <member name="F:Unit.Time.DateTimeUnit.Day">
-            <summary> 日 </summary>
-        </member>
-        <member name="F:Unit.Time.DateTimeUnit.Week">
-            <summary> 周 </summary>
-        </member>
-        <member name="F:Unit.Time.DateTimeUnit.Month">
-            <summary> 月 </summary>
-        </member>
-        <member name="F:Unit.Time.DateTimeUnit.Season">
-            <summary> 季 </summary>
-        </member>
-        <member name="F:Unit.Time.DateTimeUnit.Year">
-            <summary> 年 </summary>
-        </member>
-        <member name="F:Unit.Time.UNIT_WEEK_DAY">
-            <summary> 一周7天 </summary>
-        </member>
-        <member name="F:Unit.Time.UNIT_DAY_HOUR">
-            <summary> 一天24时 </summary>
-        </member>
-        <member name="F:Unit.Time.UNIT_HOUR_MIN">
-            <summary> 一时60分 </summary>
-        </member>
-        <member name="F:Unit.Time.UNIT_MIN_SECOND">
-            <summary> 一分60秒 </summary>
-        </member>
-        <member name="F:Unit.Time.SECOND">
-            <summary> 秒 单位时间（秒） s </summary>
-        </member>
-        <member name="F:Unit.Time.SECOND_MIN">
-            <summary> 分 单位时间（秒） s </summary>
-        </member>
-        <member name="F:Unit.Time.SECOND_HOUR">
-            <summary> 时 单位时间（秒） s </summary>
-        </member>
-        <member name="F:Unit.Time.SECOND_DAY">
-            <summary> 日 单位时间（秒） s </summary>
-        </member>
-        <member name="F:Unit.Time.SECOND_WEEK">
-            <summary> 周 单位时间（秒） s </summary>
-        </member>
-        <member name="F:Unit.Time.MS_SECOND">
-            <summary> 秒 单位时间（毫秒） ms </summary>
-        </member>
-        <member name="F:Unit.Time.MS_MIN">
-            <summary> 分 单位时间（毫秒） ms  </summary>
-        </member>
-        <member name="F:Unit.Time.MS_HOUR">
-            <summary> 时 单位时间（毫秒） ms  </summary>
-        </member>
-        <member name="F:Unit.Time.MS_DAY">
-            <summary> 日 单位时间（毫秒） ms  </summary>
-        </member>
-        <member name="F:Unit.Time.MS_WEEK">
-            <summary> 周 单位时间（毫秒） ms  </summary>
-        </member>
-        <member name="F:Unit.Time.μS_SECOND">
-            <summary> 秒 单位时间（微秒） μs </summary>
-        </member>
-        <member name="F:Unit.Time.μS_MIN">
-            <summary> 分 单位时间（微秒） μs </summary>
-        </member>
-        <member name="F:Unit.Time.μS_HOUR">
-            <summary> 时 单位时间（微秒） μs </summary>
-        </member>
-        <member name="F:Unit.Time.μS_DAY">
-            <summary> 天 单位时间（微秒） μs </summary>
-        </member>
-        <member name="F:Unit.Time.μS_WEEK">
-            <summary> 周 单位时间（微秒） μs </summary>
-        </member>
-        <member name="F:Unit.Time.NS_SECOND">
-            <summary> 秒 单位时间（纳秒） ns </summary>
-        </member>
-        <member name="F:Unit.Time.NS_MIN">
-            <summary> 分 单位时间（纳秒） ns </summary>
-        </member>
-        <member name="F:Unit.Time.NS_HOUR">
-            <summary> 时 单位时间（纳秒） ns </summary>
-        </member>
-        <member name="F:Unit.Time.NS_DAY">
-            <summary> 天 单位时间（纳秒） ns </summary>
-        </member>
-        <member name="F:Unit.Time.NS_WEEK">
-            <summary> 周 单位时间（纳秒） ns </summary>
-        </member>
-        <member name="P:Unit.Time.Milliseconds">
-            <summary> 1毫秒 </summary>
-        </member>
-        <member name="P:Unit.Time.Second">
-            <summary> 1秒钟 </summary>
-        </member>
-        <member name="P:Unit.Time.Minute">
-            <summary> 1分钟 </summary>
-        </member>
-        <member name="P:Unit.Time.Hour">
-            <summary> 1小时 </summary>
-        </member>
-        <member name="P:Unit.Time.Day">
-            <summary> 1天 </summary>
-        </member>
-        <member name="F:Unit.Time.GREENWICH">
-            <summary> 格林威治时间UTC参照点：1970年1月1日0时0分0秒 </summary>
-        </member>
         <member name="T:UtilsGen">
             <summary>
             Utils 工具库
             </summary>
+        </member>
+        <member name="T:UtilsGen.FileID">
+            <summary>
+            Unity File ID MD4 算法
+            </summary>
+        </member>
+        <member name="M:UtilsGen.FileID.Compute``1(``0)">
+            <summary>
+            计算类型的 FileID
+            </summary>
+            <param name="v">类型</param>
+            <returns>fileid</returns>
+        </member>
+        <member name="M:UtilsGen.FileID.Compute(System.Type)">
+            <summary>
+            计算类型的 FileID
+            </summary>
+            <param name="type">类型</param>
+            <returns>fileid</returns>
+        </member>
+        <member name="M:UtilsGen.FileID.Compute``1">
+            <summary>
+            计算类型的 FileID
+            </summary>
+            <returns>fileid</returns>
+        </member>
+        <member name="T:UtilsGen.MD4">
+            <summary>
+            MD4 Hash Algorithm in C#
+            </summary>
+            Taken from http://www.superstarcoders.com/blogs/posts/md4-hash-algorithm-in-c-sharp.aspx
+            Probably not the best implementation of MD4, but it works.
         </member>
         <member name="T:UtilsGen.Base64">
             <summary>
@@ -13761,6 +12666,1133 @@
             <summary>
             获取系统启动后 经过的毫秒数
             </summary>
+        </member>
+        <member name="T:Pool">
+            <summary>
+            对象池
+            </summary>
+        </member>
+        <member name="M:Pool.List``1">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.List`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.List`1"/></returns>
+        </member>
+        <member name="M:Pool.Free``1(System.Collections.Generic.List{``0})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.List`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+        </member>
+        <member name="M:Pool.HashSet``1">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.HashSet`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.HashSet`1"/></returns>
+        </member>
+        <member name="M:Pool.Free``1(System.Collections.Generic.HashSet{``0})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.HashSet`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+        </member>
+        <member name="M:Pool.LinkedList``1">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.LinkedList`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.LinkedList`1"/></returns>
+        </member>
+        <member name="M:Pool.Free``1(System.Collections.Generic.LinkedList{``0})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.LinkedList`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+        </member>
+        <member name="M:Pool.Stack``1">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.Stack`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.Stack`1"/></returns>
+        </member>
+        <member name="M:Pool.Free``1(System.Collections.Generic.Stack{``0})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.Stack`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+        </member>
+        <member name="M:Pool.Queue``1">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.Queue`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.Queue`1"/></returns>
+        </member>
+        <member name="M:Pool.Free``1(System.Collections.Generic.Queue{``0})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.Queue`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+        </member>
+        <member name="M:Pool.SortedList``2">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.SortedList`2"/>
+            </summary>
+            <typeparam name="K">Generic</typeparam>
+            <typeparam name="V">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.Dictionary`2"/></returns>
+        </member>
+        <member name="M:Pool.Free``2(System.Collections.Generic.SortedList{``0,``1})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.SortedList`2"/>
+            </summary>
+            <typeparam name="K">Generic</typeparam>
+            <typeparam name="V">Generic</typeparam>
+        </member>
+        <member name="M:Pool.Dictionary``2">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.Dictionary`2"/>
+            </summary>
+            <typeparam name="K">Generic</typeparam>
+            <typeparam name="V">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.Dictionary`2"/></returns>
+        </member>
+        <member name="M:Pool.Free``2(System.Collections.Generic.Dictionary{``0,``1})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.Dictionary`2"/>
+            </summary>
+            <typeparam name="K">Generic</typeparam>
+            <typeparam name="V">Generic</typeparam>
+        </member>
+        <member name="T:Pool.ADictionary`2">
+            <summary>
+            Dictionary 对象池
+            </summary>
+        </member>
+        <member name="M:Pool.ADictionary`2.New">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="M:Pool.ADictionary`2.Free(System.Collections.Generic.Dictionary{`0,`1})">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="T:Pool.Disposable`1">
+            <summary>
+            An <see cref="T:System.IDisposable"/> to allow pooled objects to be acquired and released within <c>using</c>
+            statements instead of needing to manually release everything.
+            </summary>
+        </member>
+        <member name="F:Pool.Disposable`1.Item">
+            <summary>
+            The object acquired from the <see cref="T:Pool.Disposable`1"/>.
+            </summary>
+        </member>
+        <member name="F:Pool.Disposable`1.OnRelease">
+            <summary>
+            Called by IDisposable.Dispose.
+            </summary>
+        </member>
+        <member name="M:Pool.Disposable`1.#ctor(`0,System.Action{`0})">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="T:Pool.Generic`1">
+            <summary>
+            通用
+            </summary>
+        </member>
+        <member name="M:Pool.Generic`1.New(System.Func{`0})">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="M:Pool.Generic`1.New">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="M:Pool.Generic`1.Free(`0)">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="T:Pool.AHashSet`1">
+            <summary>
+            HashSet对象池
+            </summary>
+        </member>
+        <member name="M:Pool.AHashSet`1.New">
+            <summary>
+            创建新的
+            </summary>
+        </member>
+        <member name="M:Pool.AHashSet`1.Free(System.Collections.Generic.HashSet{`0})">
+            <summary>
+            释放HashSet
+            </summary>
+        </member>
+        <member name="T:Pool.ALinkedList`1">
+            <summary>
+            List对象池
+            </summary>
+        </member>
+        <member name="M:Pool.ALinkedList`1.New">
+            <summary>
+            创建新的
+            </summary>
+        </member>
+        <member name="M:Pool.ALinkedList`1.Free(System.Collections.Generic.LinkedList{`0})">
+            <summary>
+            释放List
+            </summary>
+        </member>
+        <member name="T:Pool.AList`1">
+            <summary>
+            List对象池
+            </summary>
+        </member>
+        <member name="M:Pool.AList`1.New">
+            <summary>
+            创建新的
+            </summary>
+        </member>
+        <member name="M:Pool.AList`1.Free(System.Collections.Generic.List{`0})">
+            <summary>
+            释放List
+            </summary>
+        </member>
+        <member name="T:Pool.AQueue`1">
+            <summary>
+            Queue对象池
+            </summary>
+        </member>
+        <member name="M:Pool.AQueue`1.New">
+            <summary>
+            创建新的
+            </summary>
+        </member>
+        <member name="M:Pool.AQueue`1.Free(System.Collections.Generic.Queue{`0})">
+            <summary>
+            释放Queue
+            </summary>
+        </member>
+        <member name="T:Pool.ASortedList`2">
+            <summary>
+            Dictionary 对象池
+            </summary>
+        </member>
+        <member name="M:Pool.ASortedList`2.New">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="M:Pool.ASortedList`2.Free(System.Collections.Generic.SortedList{`0,`1})">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="T:Pool.AStack`1">
+            <summary>
+            Stack对象池
+            </summary>
+        </member>
+        <member name="M:Pool.AStack`1.New">
+            <summary>
+            创建新的
+            </summary>
+        </member>
+        <member name="M:Pool.AStack`1.Free(System.Collections.Generic.Stack{`0})">
+            <summary>
+            释放Stack
+            </summary>
+        </member>
+        <member name="M:Pool.Using``1(``0@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:Pool.Using``1(``0@,System.Action{``0})">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:Pool.Using``1(``0,System.Action{``0})">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:Pool.Using``1(System.Collections.Generic.List{``0}@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:Pool.Using``1(System.Collections.Generic.HashSet{``0}@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:Pool.Using``1(System.Collections.Generic.Stack{``0}@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:Pool.Using``1(System.Collections.Generic.Queue{``0}@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:Pool.Using``2(System.Collections.Generic.Dictionary{``0,``1}@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="T:PoolExtend">
+            <summary>
+            扩展
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToDictionaryPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为 Dictionary 并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.Free``2(System.Collections.Generic.Dictionary{``0,``1})">
+            <summary>
+            释放 Dictionary
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToHashSetPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为HashSet并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToHashSetPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为HashSet并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToHashSetPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为HashSet并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.Free``1(System.Collections.Generic.HashSet{``0})">
+            <summary>
+            释放HashSet
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToLinkedListPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToLinkedListPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToLinkedListPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.Free``1(System.Collections.Generic.LinkedList{``0})">
+            <summary>
+            释放List
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToListPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToListPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToListPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.Free``1(System.Collections.Generic.List{``0})">
+            <summary>
+            释放List
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToQueuePooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToQueuePooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToQueuePooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.Free``1(System.Collections.Generic.Queue{``0})">
+            <summary>
+            释放Queue
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToSortedListPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为 Dictionary 并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.Free``2(System.Collections.Generic.SortedList{``0,``1})">
+            <summary>
+            释放 Dictionary
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToStackPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为Stack并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToStackPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Stack并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.ToStackPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Stack并存入对象池
+            </summary>
+        </member>
+        <member name="M:PoolExtend.Free``1(System.Collections.Generic.Stack{``0})">
+            <summary>
+            释放Stack
+            </summary>
+        </member>
+        <member name="T:Unit">
+            <summary>
+            单位
+            </summary>
+        </member>
+        <member name="T:Unit.Char">
+            <summary>
+            只读变量
+            </summary>
+        </member>
+        <member name="F:Unit.Char.C0">
+            <summary>
+            0的字符
+            </summary>
+        </member>
+        <member name="F:Unit.Char.BEL">
+            <summary>
+            响铃
+            </summary>
+        </member>
+        <member name="F:Unit.Char.BackSpace">
+            <summary>
+            回格
+            </summary>
+        </member>
+        <member name="F:Unit.Char.TabH">
+            <summary>
+            tab(水平制表符)
+            </summary>
+        </member>
+        <member name="F:Unit.Char.NewLine">
+            <summary>
+            换行
+            </summary>
+        </member>
+        <member name="F:Unit.Char.TabV">
+            <summary>
+            tab(垂直制表符)
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Page">
+            <summary>
+            换页
+            </summary>
+        </member>
+        <member name="F:Unit.Char.EnterNewLine">
+            <summary>
+            回车 chr(13) &amp; chr(10) 回车和换行的组合
+            </summary>
+        </member>
+        <member name="F:Unit.Char.End">
+            <summary>
+            结束 End
+            </summary>
+        </member>
+        <member name="F:Unit.Char.PauseBreak">
+            <summary>
+            脱离 Pause Break
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Space">
+            <summary>
+            空格
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Exclamation">
+            <summary>
+            !
+            </summary>
+        </member>
+        <member name="F:Unit.Char.DoubleQuote">
+            <summary>
+            "
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Pound">
+            <summary>
+            #
+            </summary>
+        </member>
+        <member name="F:Unit.Char.USD">
+            <summary>
+            $
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Modulus">
+            <summary>
+            -%
+            </summary>
+        </member>
+        <member name="F:Unit.Char.AND">
+            <summary>
+            -&amp;
+            </summary>
+        </member>
+        <member name="F:Unit.Char.SingleQuote">
+            <summary>
+            -’
+            </summary>
+        </member>
+        <member name="F:Unit.Char.LeftBracket">
+            <summary>
+            -(
+            </summary>
+        </member>
+        <member name="F:Unit.Char.RightBracket">
+            <summary>
+            -)
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Asterisk">
+            <summary>
+            *
+            </summary>
+        </member>
+        <member name="F:Unit.Char.ADD">
+            <summary>
+            +
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Comma">
+            <summary>
+            ,
+            </summary>
+        </member>
+        <member name="F:Unit.Char.SUB">
+            <summary>
+            -
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Point">
+            <summary>
+            .
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Slash">
+            <summary>
+            /
+            </summary>
+        </member>
+        <member name="F:Unit.Char.N0">
+            <summary>
+            0
+            </summary>
+        </member>
+        <member name="F:Unit.Char.N1">
+            <summary>
+            1
+            </summary>
+        </member>
+        <member name="F:Unit.Char.N2">
+            <summary>
+            2
+            </summary>
+        </member>
+        <member name="F:Unit.Char.N3">
+            <summary>
+            3
+            </summary>
+        </member>
+        <member name="F:Unit.Char.N4">
+            <summary>
+            4
+            </summary>
+        </member>
+        <member name="F:Unit.Char.N5">
+            <summary>
+            5
+            </summary>
+        </member>
+        <member name="F:Unit.Char.N6">
+            <summary>
+            6
+            </summary>
+        </member>
+        <member name="F:Unit.Char.N7">
+            <summary>
+            7
+            </summary>
+        </member>
+        <member name="F:Unit.Char.N8">
+            <summary>
+            8
+            </summary>
+        </member>
+        <member name="F:Unit.Char.N9">
+            <summary>
+            9
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Number">
+            <summary>
+            数字
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Colon">
+            <summary>
+            :
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Semicolon">
+            <summary>
+            ;
+            </summary>
+        </member>
+        <member name="F:Unit.Char.LessThanSign">
+            <summary>
+            &lt;
+            </summary>
+        </member>
+        <member name="F:Unit.Char.Equality">
+            <summary>
+            61 =
+            </summary>
+        </member>
+        <member name="F:Unit.Char.EA">
+            62 >　
+            63 ?
+            64 @
+            <summary>
+            65 A
+            </summary>
+        </member>
+        <member name="F:Unit.Char.EZ">
+            66 B
+            67 C
+            68 D
+            69 E
+            70 F
+            71 G
+            72 H
+            73 I
+            74 J
+            75 K
+            76 L
+            77 M
+            78 N
+            79 O
+            80 P
+            81 Q
+            82 R
+            83 S
+            84 T
+            85 U
+            86 V
+            87 W
+            88 X
+            89 Y
+            <summary>
+            90 Z
+            </summary>
+        </member>
+        <member name="F:Unit.Char.EAlphaBet">
+            <summary>
+            大写A-大写Z
+            </summary>
+        </member>
+        <member name="F:Unit.Char.UnderLine">
+            91 [
+            92 /　
+            92 /
+            93]
+            94 ^
+            <summary>
+            95 _
+            </summary>
+        </member>
+        <member name="F:Unit.Char.ea">
+            96 `
+            <summary>
+            97 a
+            </summary>
+        </member>
+        <member name="F:Unit.Char.ez">
+            98 b
+            99 c
+            100 d
+            101 e
+            102 f
+            103 g
+            104 h
+            105 i
+            106 j
+            107 k
+            108 l
+            109 m
+            110 n
+            111 o
+            112 p
+            113 q
+            114 r
+            115 s
+            116 t
+            117 u
+            118 v
+            119 w
+            120 x
+            121 y
+            <summary>
+            122 z
+            </summary>
+        </member>
+        <member name="F:Unit.Char.eAlphaBet">
+            <summary>
+            小写e-小写z
+            </summary>
+        </member>
+        <member name="T:Unit.Chinese">
+            <summary>
+            中文单位
+            </summary>
+        </member>
+        <member name="F:Unit.Chinese.CNSNum">
+            <summary>
+            数字单位:个数组
+            </summary>
+        </member>
+        <member name="F:Unit.Chinese.CNSDigit">
+            <summary>
+            数字单位:位数组
+            </summary>
+        </member>
+        <member name="F:Unit.Chinese.CNSUnits">
+            <summary>
+            数字单位:单位数组
+            </summary>
+        </member>
+        <member name="F:Unit.Chinese.NumberChar">
+            <summary>
+            数字字符串
+            </summary>
+        </member>
+        <member name="T:Unit.Color">
+            <summary>
+            颜色库
+            </summary>
+        </member>
+        <member name="F:Unit.Color.Write">
+            <summary> 白色 1 </summary>
+        </member>
+        <member name="F:Unit.Color.Red">
+            <summary> 红色 5 </summary>
+        </member>
+        <member name="F:Unit.Color.Green">
+            <summary> 绿色 3 </summary>
+        </member>
+        <member name="F:Unit.Color.Blue">
+            <summary> 蓝色 4 </summary>
+        </member>
+        <member name="F:Unit.Color.Peony">
+            <summary> 牡丹红 5 </summary>
+        </member>
+        <member name="F:Unit.Color.Cyan">
+            <summary> 青色 6 </summary>
+        </member>
+        <member name="F:Unit.Color.Yellow">
+            <summary> 黄色 7 </summary>
+        </member>
+        <member name="F:Unit.Color.Black">
+            <summary> 黑色 8 </summary>
+        </member>
+        <member name="F:Unit.Color.Gary">
+            <summary> 灰色 41 </summary>
+        </member>
+        <member name="F:Unit.Color.SeaBlue">
+            <summary> 海蓝 9 </summary>
+        </member>
+        <member name="F:Unit.Color.Orange">
+            <summary> 橙色 81 </summary>
+        </member>
+        <member name="F:Unit.Color.Chocolate">
+            <summary> 巧克力色 10 </summary>
+        </member>
+        <member name="F:Unit.Color.BluishViolet">
+            <summary> 蓝紫色 11 </summary>
+        </member>
+        <member name="F:Unit.Color.Brassiness">
+            <summary> 黄铜色 12 </summary>
+        </member>
+        <member name="F:Unit.Color.BrightGold">
+            <summary> 亮金色 13 </summary>
+        </member>
+        <member name="F:Unit.Color.Brown">
+            <summary> 棕色 14 </summary>
+        </member>
+        <member name="F:Unit.Color.Aeneous1">
+            <summary> 青铜色1 15 </summary>
+        </member>
+        <member name="F:Unit.Color.Aeneous2">
+            <summary> 青铜色2 16 </summary>
+        </member>
+        <member name="F:Unit.Color.Bluewore">
+            <summary> 士官服蓝色 17 </summary>
+        </member>
+        <member name="F:Unit.Color.Coppercold">
+            <summary> 冷铜色 18 </summary>
+        </member>
+        <member name="F:Unit.Color.Coppery">
+            <summary> 铜色 19 </summary>
+        </member>
+        <member name="F:Unit.Color.Redcoral">
+            <summary> 珊瑚红 20 </summary>
+        </member>
+        <member name="F:Unit.Color.Hyacinthine">
+            <summary> 紫蓝色 21 </summary>
+        </member>
+        <member name="F:Unit.Color.Copperdeep">
+            <summary> 深铜 22 </summary>
+        </member>
+        <member name="F:Unit.Color.Greendeep">
+            <summary> 深绿 23 </summary>
+        </member>
+        <member name="F:Unit.Color.Darkcoppergreen">
+            <summary> 深铜绿色 24 </summary>
+        </member>
+        <member name="F:Unit.Color.Darkolivegreen">
+            <summary> 深橄榄绿 25 </summary>
+        </member>
+        <member name="F:Unit.Color.Bluedeep">
+            <summary> 深蓝花色 26 </summary>
+        </member>
+        <member name="F:Unit.Color.Modena">
+            <summary> 深紫色 27 </summary>
+        </member>
+        <member name="F:Unit.Color.BlueSLATEdeep">
+            <summary> 深石板蓝 28 </summary>
+        </member>
+        <member name="F:Unit.Color.Slabsdeep">
+            <summary> 深铅灰色 29 </summary>
+        </member>
+        <member name="F:Unit.Color.Browndark">
+            <summary> 深棕褐色 30 </summary>
+        </member>
+        <member name="F:Unit.Color.Turquoisedeep">
+            <summary> 深绿松石色 32 </summary>
+        </member>
+        <member name="F:Unit.Color.Colordark">
+            <summary> 暗木色 33 </summary>
+        </member>
+        <member name="F:Unit.Color.Greylight">
+            <summary> 淡灰色 34 </summary>
+        </member>
+        <member name="F:Unit.Color.Redearthgreyrose">
+            <summary> 土灰玫瑰红色 35 </summary>
+        </member>
+        <member name="F:Unit.Color.Longstone">
+            <summary> 长石色 36 </summary>
+        </member>
+        <member name="F:Unit.Color.Firebrick">
+            <summary> 火砖色 37 </summary>
+        </member>
+        <member name="F:Unit.Color.Greenforest">
+            <summary> 森林绿 38 </summary>
+        </member>
+        <member name="F:Unit.Color.Golden">
+            <summary> 金色 39 </summary>
+        </member>
+        <member name="F:Unit.Color.Foresythia">
+            <summary> 鲜黄色 40 </summary>
+        </member>
+        <member name="F:Unit.Color.Aerugo">
+            <summary> 铜绿色 42 </summary>
+        </member>
+        <member name="F:Unit.Color.Yellowbluish">
+            <summary> 青黄色 43 </summary>
+        </member>
+        <member name="F:Unit.Color.Greenhunter">
+            <summary> 猎人绿 44 </summary>
+        </member>
+        <member name="F:Unit.Color.Redindian">
+            <summary> 印度红 45 </summary>
+        </member>
+        <member name="F:Unit.Color.Yellowearthy">
+            <summary> 土黄色 46 </summary>
+        </member>
+        <member name="F:Unit.Color.Wathet">
+            <summary> 浅蓝色 47 </summary>
+        </member>
+        <member name="F:Unit.Color.Greyfrench">
+            <summary> 浅灰色 48 </summary>
+        </member>
+        <member name="F:Unit.Color.Bluelightsteel">
+            <summary> 浅钢蓝色 49 </summary>
+        </member>
+        <member name="F:Unit.Color.Colorlight">
+            <summary> 浅木色 59 </summary>
+        </member>
+        <member name="F:Unit.Color.Greenlime">
+            <summary> 石灰绿色 60 </summary>
+        </member>
+        <member name="F:Unit.Color.Bisque">
+            <summary> 桔黄色 61 </summary>
+        </member>
+        <member name="F:Unit.Color.Maroon">
+            <summary> 褐红色 62 </summary> 62
+        </member>
+        <member name="T:Unit.Suffix">
+            <summary>
+            后缀
+            </summary>
+        </member>
+        <member name="F:Unit.Suffix.TextureSuffix">
+            <summary>
+            图片文件后缀
+            </summary>
+        </member>
+        <member name="F:Unit.Suffix.VideoSuffix">
+            <summary>
+            视频文件后缀
+            </summary>
+        </member>
+        <member name="F:Unit.Suffix.SoundSuffix">
+            <summary>
+            音频文件后缀
+            </summary>
+        </member>
+        <member name="F:Unit.Suffix.TextSuffix">
+            <summary>
+            文本文件后缀
+            </summary>
+        </member>
+        <member name="F:Unit.Suffix.ShaderSuffix">
+            <summary>
+            shader文件后缀
+            </summary>
+        </member>
+        <member name="F:Unit.Suffix.FontSuffix">
+            <summary>
+            字体后缀
+            </summary>
+        </member>
+        <member name="F:Unit.Suffix.Animation">
+            <summary>
+            动画文件后缀
+            </summary>
+        </member>
+        <member name="F:Unit.Suffix.Animator">
+            <summary>
+            控制器文件后缀
+            </summary>
+        </member>
+        <member name="F:Unit.Suffix.Material">
+            <summary>
+            材质文件后缀
+            </summary>
+        </member>
+        <member name="F:Unit.Suffix.PrefabSuffix">
+            <summary>
+            预制体文件后缀
+            </summary>
+        </member>
+        <member name="F:Unit.Suffix.RTextureSuffix">
+            <summary>
+            渲染纹理后缀
+            </summary>
+        </member>
+        <member name="T:Unit.Time">
+            <summary>
+            时间
+            </summary>
+        </member>
+        <member name="T:Unit.Time.SencondUnit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Unit.Time.SencondUnit.SECOND">
+            <summary> 秒 </summary>
+        </member>
+        <member name="F:Unit.Time.SencondUnit.MILLISCOND">
+            <summary> 毫秒 </summary>
+        </member>
+        <member name="F:Unit.Time.SencondUnit.MICROSECOND">
+            <summary> 微秒 </summary>
+        </member>
+        <member name="F:Unit.Time.SencondUnit.NANOSECOND">
+            <summary> 纳秒 </summary>
+        </member>
+        <member name="F:Unit.Time.SencondUnit.NANOSECOND_100">
+            <summary> 100纳秒计数单位 </summary>
+        </member>
+        <member name="M:Unit.Time.GetSencondUnit(Unit.Time.SencondUnit)">
+            <summary>
+            获取秒 计数单位 秒
+            </summary>
+        </member>
+        <member name="M:Unit.Time.GetMinUnit(Unit.Time.SencondUnit)">
+            <summary>
+            获取秒 计数单位 分
+            </summary>
+        </member>
+        <member name="M:Unit.Time.GetHourUnit(Unit.Time.SencondUnit)">
+            <summary>
+            获取秒 计数单位 时
+            </summary>
+        </member>
+        <member name="M:Unit.Time.GetDayUnit(Unit.Time.SencondUnit)">
+            <summary>
+            获取秒 计数单位 时
+            </summary>
+        </member>
+        <member name="M:Unit.Time.GetWeekUnit(Unit.Time.SencondUnit)">
+            <summary>
+            获取秒 计数单位 时
+            </summary>
+        </member>
+        <member name="T:Unit.Time.DateTimeUnit">
+            <summary>
+            时间间隔
+            </summary>
+        </member>
+        <member name="F:Unit.Time.DateTimeUnit.Day">
+            <summary> 日 </summary>
+        </member>
+        <member name="F:Unit.Time.DateTimeUnit.Week">
+            <summary> 周 </summary>
+        </member>
+        <member name="F:Unit.Time.DateTimeUnit.Month">
+            <summary> 月 </summary>
+        </member>
+        <member name="F:Unit.Time.DateTimeUnit.Season">
+            <summary> 季 </summary>
+        </member>
+        <member name="F:Unit.Time.DateTimeUnit.Year">
+            <summary> 年 </summary>
+        </member>
+        <member name="F:Unit.Time.UNIT_WEEK_DAY">
+            <summary> 一周7天 </summary>
+        </member>
+        <member name="F:Unit.Time.UNIT_DAY_HOUR">
+            <summary> 一天24时 </summary>
+        </member>
+        <member name="F:Unit.Time.UNIT_HOUR_MIN">
+            <summary> 一时60分 </summary>
+        </member>
+        <member name="F:Unit.Time.UNIT_MIN_SECOND">
+            <summary> 一分60秒 </summary>
+        </member>
+        <member name="F:Unit.Time.SECOND">
+            <summary> 秒 单位时间（秒） s </summary>
+        </member>
+        <member name="F:Unit.Time.SECOND_MIN">
+            <summary> 分 单位时间（秒） s </summary>
+        </member>
+        <member name="F:Unit.Time.SECOND_HOUR">
+            <summary> 时 单位时间（秒） s </summary>
+        </member>
+        <member name="F:Unit.Time.SECOND_DAY">
+            <summary> 日 单位时间（秒） s </summary>
+        </member>
+        <member name="F:Unit.Time.SECOND_WEEK">
+            <summary> 周 单位时间（秒） s </summary>
+        </member>
+        <member name="F:Unit.Time.MS_SECOND">
+            <summary> 秒 单位时间（毫秒） ms </summary>
+        </member>
+        <member name="F:Unit.Time.MS_MIN">
+            <summary> 分 单位时间（毫秒） ms  </summary>
+        </member>
+        <member name="F:Unit.Time.MS_HOUR">
+            <summary> 时 单位时间（毫秒） ms  </summary>
+        </member>
+        <member name="F:Unit.Time.MS_DAY">
+            <summary> 日 单位时间（毫秒） ms  </summary>
+        </member>
+        <member name="F:Unit.Time.MS_WEEK">
+            <summary> 周 单位时间（毫秒） ms  </summary>
+        </member>
+        <member name="F:Unit.Time.μS_SECOND">
+            <summary> 秒 单位时间（微秒） μs </summary>
+        </member>
+        <member name="F:Unit.Time.μS_MIN">
+            <summary> 分 单位时间（微秒） μs </summary>
+        </member>
+        <member name="F:Unit.Time.μS_HOUR">
+            <summary> 时 单位时间（微秒） μs </summary>
+        </member>
+        <member name="F:Unit.Time.μS_DAY">
+            <summary> 天 单位时间（微秒） μs </summary>
+        </member>
+        <member name="F:Unit.Time.μS_WEEK">
+            <summary> 周 单位时间（微秒） μs </summary>
+        </member>
+        <member name="F:Unit.Time.NS_SECOND">
+            <summary> 秒 单位时间（纳秒） ns </summary>
+        </member>
+        <member name="F:Unit.Time.NS_MIN">
+            <summary> 分 单位时间（纳秒） ns </summary>
+        </member>
+        <member name="F:Unit.Time.NS_HOUR">
+            <summary> 时 单位时间（纳秒） ns </summary>
+        </member>
+        <member name="F:Unit.Time.NS_DAY">
+            <summary> 天 单位时间（纳秒） ns </summary>
+        </member>
+        <member name="F:Unit.Time.NS_WEEK">
+            <summary> 周 单位时间（纳秒） ns </summary>
+        </member>
+        <member name="P:Unit.Time.Milliseconds">
+            <summary> 1毫秒 </summary>
+        </member>
+        <member name="P:Unit.Time.Second">
+            <summary> 1秒钟 </summary>
+        </member>
+        <member name="P:Unit.Time.Minute">
+            <summary> 1分钟 </summary>
+        </member>
+        <member name="P:Unit.Time.Hour">
+            <summary> 1小时 </summary>
+        </member>
+        <member name="P:Unit.Time.Day">
+            <summary> 1天 </summary>
+        </member>
+        <member name="F:Unit.Time.GREENWICH">
+            <summary> 格林威治时间UTC参照点：1970年1月1日0时0分0秒 </summary>
         </member>
     </members>
 </doc>
