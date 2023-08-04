@@ -554,13 +554,21 @@ namespace AIO.Unity.Editor
             {
                 Assembly.LoadFile(@"G:\UnityProject\G108-Win-2020\Packages\com.blz.config\DBVC\DBVC.dll"),
                 Assembly.LoadFile(@"G:\UnityProject\G108-Win-2020\Packages\com.blz.config\DBVC\ClientCore.dll"),
+                Assembly.LoadFile(@"G:\UnityProject\G201\proj\third-plugins-back\Demigiant\Source\DOTweenPro\DOTweenPro.dll"),
             };
             var dirs = new List<DirectoryInfo>
             {
                 new DirectoryInfo(@"G:\UnityProject\G201\proj\third-plugins\client-core\ClientCore"),
                 new DirectoryInfo(@"G:\UnityProject\G201\proj\third-plugins\client-core\DBVC"),
+                new DirectoryInfo(@"G:\UnityProject\G201\proj\third-plugins\Demigiant\Runtime"),
             };
-            Test2(assemblies, dirs);
+            var md5 = new Dictionary<string, string>
+            {
+                { "356a8f05a6726e645ade74e1e74b6523", "ClientCore" },
+                { "53d0d244ae5b5d343b19aced455b29ca", "DBVC" },
+                { "543bd8adf2811e447b9b5dc5b8c7feb1", "DOTweenPro" },
+            };
+            Test2(assemblies, dirs, md5);
         }
 
         private struct ScriptDataInfo
@@ -578,15 +586,12 @@ namespace AIO.Unity.Editor
 
         private static void Test2(
             ICollection<Assembly> assemblies,
-            ICollection<DirectoryInfo> dirs)
+            ICollection<DirectoryInfo> dirs,
+            IDictionary<string, string> md5)
         {
             // 
             var fileidDic = new Dictionary<long, string>();
-            var md5 = new Dictionary<string, string>()
-            {
-                { "356a8f05a6726e645ade74e1e74b6523", "ClientCore" },
-                { "53d0d244ae5b5d343b19aced455b29ca", "DBVC" },
-            };
+
 
             foreach (var assembly in assemblies)
             {
@@ -597,7 +602,7 @@ namespace AIO.Unity.Editor
 
                     var fileid = UtilsGen.FileID.Compute(type);
                     fileidDic.Add(fileid, type.FullName);
-                    // Console.WriteLine("{0} [ fileid : {1} ]", type.FullName, fileid);
+                    Console.WriteLine("{0} [ fileid : {1} ]", type.FullName, fileid);
                 }
             }
 
@@ -633,7 +638,7 @@ namespace AIO.Unity.Editor
                     }
                     else guidDic.Add(namespacename, metaData["guid"].ToString());
 
-                    // Console.WriteLine("{0} [ fileid : {1} ]", namespacename, metaData["guid"]);
+                    Console.WriteLine("{0} [ fileid : {1} ]", namespacename, metaData["guid"]);
                 }
             }
 
@@ -713,8 +718,8 @@ namespace AIO.Unity.Editor
                         builder.AppendLine(line);
                         continue;
                     }
-                    
-                    if (!guidDic.TryGetValue(newguid, out  newguid))
+
+                    if (!guidDic.TryGetValue(newguid, out newguid))
                     {
                         builder.AppendLine(line);
                         continue;
