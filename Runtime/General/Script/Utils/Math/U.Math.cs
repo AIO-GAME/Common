@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityEngine
+namespace AIO
 {
     public static partial class UtilsEngine
     {
@@ -9,7 +9,7 @@ namespace UnityEngine
         /// </summary>
         public static partial class Math
         {
-            /// <summary> 
+            /// <summary>
             /// 两点距离
             /// </summary>
             public static float Distance(Vector2 one, Vector2 two)
@@ -17,7 +17,7 @@ namespace UnityEngine
                 return System.Math.Abs(one.x - two.x) + System.Math.Abs(one.y - two.y);
             }
 
-            /// <summary> 
+            /// <summary>
             /// 矩形相交
             /// </summary>
             public static bool IsRect(in Rect one, in Rect two)

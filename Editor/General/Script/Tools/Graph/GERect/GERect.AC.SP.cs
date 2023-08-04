@@ -12,9 +12,10 @@
 ↓  History:     |*| |>"<|                         |*|╰◎═◎╯╯╚◎═══◎╝╚◎══◎╝╚◎════◎╝╚◎═◎╝╚◎════◎╝╚◎═◎╝  ↩
 ↓===================================================================================================*/
 
+using UnityEditor;
 using UnityEngine;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     public partial class GERect
     {

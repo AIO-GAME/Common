@@ -1,10 +1,11 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-30
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
+using UnityEditor;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     public abstract class GraphicRect<T> : GraphicRect where T : EditorWindow
     {
@@ -12,7 +13,7 @@ namespace UnityEditor
 
         protected GraphicRect()
         {
-            
+
         }
 
         public GraphicRect(T window)

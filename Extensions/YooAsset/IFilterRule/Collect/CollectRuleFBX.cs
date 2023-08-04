@@ -2,7 +2,7 @@
 using System.IO;
 using YooAsset.Editor;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     [DisplayName("收集 FBX资源")]
     public class CollectRuleFBX : IFilterRule

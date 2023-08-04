@@ -1,4 +1,4 @@
-﻿namespace AIO.Unity.Editor
+﻿namespace AIO.UEditor
 {
     /// <summary>
     /// 资源文件格式

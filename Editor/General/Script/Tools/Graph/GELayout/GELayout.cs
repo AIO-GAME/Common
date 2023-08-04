@@ -1,10 +1,12 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-29
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
-namespace UnityEditor
+using UnityEditor;
+
+namespace AIO.UEditor
 {
     public static partial class GELayout
     {

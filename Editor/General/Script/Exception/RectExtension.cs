@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using UnityEditor;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     /// <summary>
     /// 矩形扩展

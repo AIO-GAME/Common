@@ -1,10 +1,10 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-26
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     /// <summary>
     /// Unity 接收函数

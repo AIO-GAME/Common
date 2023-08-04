@@ -1,17 +1,13 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-29
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
-using System;
-using System.Collections.Generic;
-using UnityEditor.EditorTools;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.Internal;
-using Object = UnityEngine.Object;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     public partial class GELayout
     {

@@ -1,4 +1,4 @@
-﻿namespace AIO.Unity.Editor
+﻿namespace AIO.UEditor
 {
     using System.IO;
 

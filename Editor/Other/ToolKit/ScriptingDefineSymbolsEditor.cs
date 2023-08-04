@@ -16,7 +16,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     /// <summary> 宏定义管理器 </summary>
     public class ScriptingDefineSymbols : GraphicWindow

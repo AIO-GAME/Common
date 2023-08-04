@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-29
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
@@ -10,7 +10,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using Debug = UnityEngine.Debug;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     /// <summary>
     /// Utils Unity Editor

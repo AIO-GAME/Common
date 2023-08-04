@@ -1,18 +1,18 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-26
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
-    public partial class EmptyGraphWindow : IHasCustomMenu
+    public partial class EmptyGraphWindow : UnityEditor.IHasCustomMenu
     {
         /// <summary>
         /// 添加自定义菜单项
         /// </summary>
         /// <param name="menu">菜单信息</param>
-        public void AddItemsToMenu(GenericMenu menu)
+        public void AddItemsToMenu(UnityEditor.GenericMenu menu)
         {
             OnAddItemsToMenu(menu);
         }

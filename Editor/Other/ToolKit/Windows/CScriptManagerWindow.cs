@@ -18,7 +18,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     /// <summary>
     /// 脚本管理

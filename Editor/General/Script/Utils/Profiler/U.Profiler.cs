@@ -1,7 +1,7 @@
 /*|============|*|
-|*|Author:     |*| xinan                
-|*|Date:       |*| 2023-06-04               
-|*|E-Mail:     |*| 1398581458@qq.com     
+|*|Author:     |*| xinan
+|*|Date:       |*| 2023-06-04
+|*|E-Mail:     |*| 1398581458@qq.com
 |*|============|*/
 
 using System;
@@ -10,7 +10,7 @@ using UnityEngine;
 using System.Runtime.InteropServices;
 #endif
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
 #if UNITY_EDITOR_WIN
 

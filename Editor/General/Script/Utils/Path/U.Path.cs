@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     public static partial class UtilsEditor
     {
@@ -38,7 +38,7 @@ namespace UnityEditor
 
                 try
                 {
-                    SyncVS = typeof(Editor).Assembly.GetType("UnityEditor.SyncVS", true);
+                    SyncVS = typeof(UnityEditor.Editor).Assembly.GetType("UnityEditor.SyncVS", true);
                     SyncVS_SyncSolution = SyncVS.GetMethod("SyncSolution", BindingFlags.Static | BindingFlags.Public);
 
                     if (SyncVS_SyncSolution == null) throw new MissingMemberException(SyncVS.ToString(), "SyncSolution");

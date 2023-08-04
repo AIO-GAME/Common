@@ -1,13 +1,14 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-29
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Internal;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     public partial class GELayout
     {
@@ -126,7 +127,7 @@ namespace UnityEditor
         /// <summary> 前置标签 </summary>
         /// <param name="label">标签</param>
         /// <param name="followingStyle">后面的显示风格</param>
-        public static void LabelPrefix(GUIContent label, [DefaultValue("\"Button\"")] GUIStyle followingStyle)
+        public static void LabelPrefix(GUIContent label, [UnityEngine.Internal.DefaultValue("\"Button\"")] GUIStyle followingStyle)
         {
             EditorGUILayout.PrefixLabel(label, followingStyle);
         }
@@ -134,7 +135,7 @@ namespace UnityEditor
         /// <summary> 前置标签 </summary>
         /// <param name="label">标签</param>
         /// <param name="followingStyle">后面的显示风格</param>
-        public static void LabelPrefix(string label, [DefaultValue("\"Button\"")] GUIStyle followingStyle)
+        public static void LabelPrefix(string label, [UnityEngine.Internal.DefaultValue("\"Button\"")] GUIStyle followingStyle)
         {
             EditorGUILayout.PrefixLabel(label, followingStyle);
         }
@@ -196,6 +197,7 @@ namespace UnityEditor
         #endregion
 
         #region Label
+
         //
         // /// <summary> 标签 </summary>
         // /// <param name="image">图标</param>

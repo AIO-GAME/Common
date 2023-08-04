@@ -1,6 +1,7 @@
 ﻿using System;
+using UnityEditor;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     /// <summary>
     /// 序列化属性扩展

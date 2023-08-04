@@ -1,13 +1,14 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-29
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
+using UnityEditor;
 using UnityEngine;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     public partial class GELayout
     {
@@ -38,7 +39,7 @@ namespace UnityEditor
         /// <summary> 按钮 Button </summary>
         public static bool Button(string name, float Width, float Height)
         {
-            return GUILayout.Button(name, GUILayout.Width(Width),GUILayout.Height(Height));
+            return GUILayout.Button(name, GUILayout.Width(Width), GUILayout.Height(Height));
         }
 
         /// <summary> 按钮 Button </summary>

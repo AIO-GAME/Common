@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     /// <summary>
     /// 编辑器行为时间监听

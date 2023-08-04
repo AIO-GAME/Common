@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-07-06
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace UnityEngine
+namespace AIO
 {
     using Unitx = Unit;
 
@@ -131,7 +131,7 @@ namespace UnityEngine
                 }
             }
 
-            Print.Log(builder.ToString());
+            UnityEngine.Print.Log(builder.ToString());
         }
     }
 }

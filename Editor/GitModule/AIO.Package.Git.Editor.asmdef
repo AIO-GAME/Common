@@ -1,6 +1,0 @@
-﻿{
-  "name": "AIO.Package.Git.Editor",
-  "includePlatforms": [
-    "Editor"
-  ]
-}

@@ -1,4 +1,4 @@
-﻿namespace UnityEngine
+﻿namespace AIO
 {
     using System.Diagnostics;
     using System.Linq;
@@ -79,7 +79,7 @@
             {
                 CurrentSegment = CurrentSegment.Parent;
             }
-            
+
             Profiler.EndSample();
 
             Monitor.Exit(@lock);

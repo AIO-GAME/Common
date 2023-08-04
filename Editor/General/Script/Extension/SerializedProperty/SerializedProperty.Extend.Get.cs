@@ -1,5 +1,7 @@
-﻿namespace UnityEditor
+﻿namespace AIO.UEditor
 {
+    using UnityEditor;
+
     public partial class SerializedPropertyExtend
     {
         /// <summary>

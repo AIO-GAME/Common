@@ -13,10 +13,11 @@
 ↓===================================================================================================*/
 
 using System;
+using UnityEditor;
 using UnityEngine;
 using UDefaultValue = UnityEngine.Internal.DefaultValueAttribute;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     public static partial class GELayout
     {

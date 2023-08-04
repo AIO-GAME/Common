@@ -13,11 +13,11 @@
 ↓===================================================================================================*/
 
 using System;
-using AIO.Unity.Editor;
+using AIO.UEditor;
 using UnityEditor;
 using UnityEngine;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     public static class GraphicRectExtend
     {

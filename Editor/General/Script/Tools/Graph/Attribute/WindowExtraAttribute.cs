@@ -1,12 +1,12 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-26
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     /// <summary>
     /// 额外的窗口

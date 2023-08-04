@@ -1,14 +1,14 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-07-06
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace UnityEngine
+namespace AIO
 {
     public static partial class TimerSystem
     {

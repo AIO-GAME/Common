@@ -1,12 +1,12 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-26
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using UnityEngine;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     /// <summary>
     /// EmptyGraphWindow
@@ -196,7 +196,7 @@ namespace UnityEditor
         /// <summary>
         /// 将自定义菜单项添加到编辑器窗口。
         /// </summary>
-        protected virtual void OnAddItemsToMenu(GenericMenu menu)
+        protected virtual void OnAddItemsToMenu( UnityEditor.GenericMenu menu)
         {
         }
 

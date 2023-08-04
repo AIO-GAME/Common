@@ -9,7 +9,7 @@ using System.Globalization;
 using System.Text;
 using UnityEngine;
 
-namespace UnityEngine
+namespace AIO
 {
     public static partial class UtilsEngine
     {
@@ -100,7 +100,7 @@ namespace UnityEngine
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             public static UnityEngine.Color ParseHtmlString(string htmlString)
             {

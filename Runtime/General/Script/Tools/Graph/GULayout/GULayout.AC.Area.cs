@@ -1,10 +1,12 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-29
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
-namespace UnityEngine
+using UnityEngine;
+
+namespace AIO
 {
     public static partial class GULayout
     {

@@ -1,14 +1,14 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-26
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     public class PackageData
     {

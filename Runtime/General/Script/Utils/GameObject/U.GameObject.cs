@@ -1,6 +1,6 @@
 ﻿using UnityObject = UnityEngine.Object;
 
-namespace UnityEngine
+namespace AIO
 {
     public static partial class UtilsEngine
     {

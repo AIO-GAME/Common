@@ -10,7 +10,7 @@ using AIO;
 using UnityEditor;
 using UnityEngine;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     /// <summary>
     /// Unity 编辑器工具类

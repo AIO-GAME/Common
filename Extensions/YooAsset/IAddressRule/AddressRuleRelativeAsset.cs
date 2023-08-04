@@ -2,7 +2,7 @@
 using System.IO;
 using YooAsset.Editor;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     [DisplayName("Asset + 后缀 = 定位地址")]
     public class AddressRuleRelativeAssetWithSuffix : IAddressRule

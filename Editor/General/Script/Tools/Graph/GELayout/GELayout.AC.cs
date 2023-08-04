@@ -12,14 +12,9 @@
 ↓  History:     |*| |>"<|                         |*|╰◎═◎╯╯╚◎═══◎╝╚◎══◎╝╚◎════◎╝╚◎═◎╝╚◎════◎╝╚◎═◎╝  ↩
 ↓===================================================================================================*/
 
-using System.Collections.Generic;
-using UnityEditor.EditorTools;
-using UnityEngine;
-
-namespace UnityEditor
+namespace AIO.UEditor
 {
     public static partial class GELayout
     {
-
     }
 }

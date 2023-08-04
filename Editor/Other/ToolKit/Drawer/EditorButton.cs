@@ -4,7 +4,7 @@
 // using UnityEditor;
 // using UnityEngine;
 //
-// namespace AIO.Unity.Editor
+// namespace AIO.UEditor
 // {
 //     public static class EditorButtonExtensions
 //     {
@@ -51,7 +51,7 @@
 //             DrawDefaultInspector();
 //         }
 //     }
-//     
+//
 //     [CanEditMultipleObjects]
 //     [CustomEditor(typeof(ScriptableObjectEx), true)]
 //     public class ButtonScriptableObjectEx : UnityEditor.Editor

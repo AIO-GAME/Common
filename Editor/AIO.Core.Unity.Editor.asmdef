@@ -1,7 +1,8 @@
 {
-    "name": "AIO.Attribute.Unity.Editor",
+    "name": "AIO.Core.Unity.Editor",
+    "rootNamespace": "",
     "references": [
-        "AIO.Attribute.Unity"
+        "AIO.Core.Unity"
     ],
     "includePlatforms": [
         "Editor"
@@ -12,6 +13,12 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.tuyoogame.yooasset",
+            "expression": "",
+            "define": "SUPPORT_YOOASSET"
+        }
+    ],
     "noEngineReferences": false
 }

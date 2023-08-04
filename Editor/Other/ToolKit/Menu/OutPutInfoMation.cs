@@ -1,7 +1,7 @@
 /*|============|*|
-|*|Author:     |*| xinan                
-|*|Date:       |*| 2023-06-04               
-|*|E-Mail:     |*| 1398581458@qq.com     
+|*|Author:     |*| xinan
+|*|Date:       |*| 2023-06-04
+|*|E-Mail:     |*| 1398581458@qq.com
 |*|============|*/
 
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using UnityEditor.Compilation;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     /// <summary>
     /// 输出信息
@@ -72,7 +72,7 @@ namespace UnityEditor
                         }
                     }
                 }
-                //Get all components on the GameObject, then loop through them 
+                //Get all components on the GameObject, then loop through them
             }
 
             if (objectsWithDeadLinks.Count > 0)

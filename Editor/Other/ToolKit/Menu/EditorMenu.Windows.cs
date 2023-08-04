@@ -7,7 +7,7 @@
 using System;
 using UnityEditor;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     /// <summary>
     /// 编辑器标题

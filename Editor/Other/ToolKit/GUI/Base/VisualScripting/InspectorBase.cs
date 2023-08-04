@@ -14,7 +14,7 @@
 
 #if SUPPORT_VISUAL_EFFECT_GRAPH
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     using System;
     using UnityEngine;

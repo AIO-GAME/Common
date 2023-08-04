@@ -1,14 +1,14 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-08-02
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 #if SUPPORT_YOOASSET
 using System.IO;
 using YooAsset.Editor;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     [DisplayName("过滤 预制件")]
     public class FilterRulePrefab : IFilterRule
@@ -38,7 +38,7 @@ namespace AIO.Unity.Editor
                    Extension != ".prefab";
         }
     }
-    
+
     [DisplayName("过滤 Scene Prefab")]
     public class FilterRuleScenePrefab : IFilterRule
     {

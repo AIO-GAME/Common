@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-08-03
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
@@ -20,7 +20,7 @@ using UnityEngine;
 using UnityEngine.Profiling.Memory.Experimental;
 using YamlDotNet.Serialization;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     public class ScriptIDViewer : EditorWindow
     {
@@ -589,7 +589,7 @@ namespace AIO.Unity.Editor
             ICollection<DirectoryInfo> dirs,
             IDictionary<string, string> md5)
         {
-            // 
+            //
             var fileidDic = new Dictionary<long, string>();
 
 

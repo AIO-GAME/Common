@@ -1,12 +1,12 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-07-06
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
 
-namespace UnityEngine
+namespace AIO
 {
     public static partial class TimerSystem
     {
@@ -24,7 +24,7 @@ namespace UnityEngine
             try
             {
 #if UNITY_EDITOR
-                Debug.Log("定时器线程启动");
+                UnityEngine.Debug.Log("定时器线程启动");
 #endif
                 while (SWITCH)
                 {
@@ -94,12 +94,12 @@ namespace UnityEngine
             }
             catch (Exception e)
             {
-                Print.Exception(e);
+                UnityEngine.Print.Exception(e);
             }
             finally
             {
 #if UNITY_EDITOR
-                Debug.Log("定时器任务全部完成 线程关闭");
+                UnityEngine.Debug.Log("定时器任务全部完成 线程关闭");
 #endif
             }
         }

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using AIO.Unity.Editor;
+using AIO.UEditor;
 using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     /// <summary>
     /// 插件管理界面
@@ -26,7 +26,7 @@ namespace AIO.Unity.Editor
             Window = GetWindow<PluginsManagerWindow>("Plugins Manager", true, types);
             Window.minSize = new Vector2(500, 200);
             Window.wantsMouseMove = true;
-            Window.Show(true); //展示     
+            Window.Show(true); //展示
         }
 
         protected Vector2 Vector;

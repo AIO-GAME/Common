@@ -1,6 +1,6 @@
 ﻿using UnityEngine.Profiling;
 
-namespace UnityEngine
+namespace AIO
 {
     public static partial class UtilsEngine
     {

@@ -7,7 +7,7 @@ using System.IO;
 using AIO;
 using UnityEditor;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     /// <summary>
     /// Menu_Open
