@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-26
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
@@ -11,7 +11,7 @@ using AIO;
 using UnityEditor.Experimental.UIElements;
 using UnityEngine;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     /// <summary>
     /// 图形窗口

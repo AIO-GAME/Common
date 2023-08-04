@@ -4,7 +4,7 @@
 // using System.Reflection;
 // using System;
 //
-// namespace AIO.Unity.Editor
+// namespace AIO.UEditor
 // {
 //     [CustomPropertyDrawer(typeof(SerializableDictionaryBase), true)]
 // #if NET_4_6 || NET_STANDARD_2_0

@@ -1,4 +1,4 @@
-﻿namespace UnityEngine
+﻿namespace AIO
 {
     using UnityEngine;
 
@@ -8,17 +8,17 @@
     public class CacheableLife : MonoBehaviour
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public float Life { get; private set; } = 2.0f;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public Cacheable Cacheable { get; private set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="cacheable"></param>
         public void SetPrefab(in Cacheable cacheable)
@@ -27,7 +27,7 @@
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="life"></param>
         public void SetLife(in float life)

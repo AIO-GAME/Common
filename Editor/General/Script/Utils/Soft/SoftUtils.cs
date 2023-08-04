@@ -9,7 +9,7 @@ using Microsoft.Win32;
 #endif
 
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     public static partial class UtilsEditor
     {

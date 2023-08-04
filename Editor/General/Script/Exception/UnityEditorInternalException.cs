@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     /// <summary>
     /// 这个类表示在访问Unity内部编辑器函数时发生错误时抛出的异常。

@@ -1,4 +1,4 @@
-﻿namespace UnityEngine
+﻿namespace AIO
 {
     /// <summary>
     /// 快捷缓存

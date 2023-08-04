@@ -1,8 +1,9 @@
 ﻿using System;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using UnityEditor;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     /// <summary>
     /// 类扩展

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityEngine
+namespace AIO
 {
     /// <summary>
     /// GUI Style 扩展

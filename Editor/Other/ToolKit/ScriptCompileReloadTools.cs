@@ -6,10 +6,10 @@ using UnityEditor.Compilation;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     /// <summary>
-    /// ____DESC:   手动reload domain 工具 
+    /// ____DESC:   手动reload domain 工具
     /// </summary>
     public class ScriptCompileReloadTools
     {
@@ -24,7 +24,7 @@ namespace AIO.Unity.Editor
         const string menuRealodDomain = "Tools/Script/Unlock Reload";
 
         const string kManualReloadDomain = "ManualReloadDomain";
-        const string kFirstEnterUnity = "FirstEnterUnity"; //是否首次进入unity 
+        const string kFirstEnterUnity = "FirstEnterUnity"; //是否首次进入unity
         const string kReloadDomainTimer = "ReloadDomainTimer";//计时
 
 

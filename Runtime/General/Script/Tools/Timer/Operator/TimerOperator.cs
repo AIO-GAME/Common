@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-07-07
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
@@ -10,7 +10,7 @@ using System.Text;
 using APool = Pool;
 using Unitx = Unit;
 
-namespace UnityEngine
+namespace AIO
 {
     /// <summary>
     /// 消耗型定时器
@@ -266,7 +266,7 @@ namespace UnityEngine
             }
             catch (Exception e)
             {
-                Print.Exception(e);
+                UnityEngine.Print.Exception(e);
             }
             finally
             {

@@ -1,7 +1,7 @@
 ﻿#pragma warning disable CS0649
 using UnityEngine;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     [CreateAssetMenu(menuName = "Plugins/Info", fileName = "PluginsInfo")]
     internal class PluginsInfo : ScriptableObject
@@ -25,7 +25,7 @@ namespace AIO.Unity.Editor
         /// 宏定义
         /// </summary>
         public string MacroDefinition;
-        
+
         /// <summary>
         /// 简介
         /// </summary>

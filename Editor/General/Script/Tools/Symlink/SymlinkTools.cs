@@ -1,7 +1,7 @@
 /*|============|*|
-|*|Author:     |*| xinan                
-|*|Date:       |*| 2023-06-04               
-|*|E-Mail:     |*| 1398581458@qq.com     
+|*|Author:     |*| xinan
+|*|Date:       |*| 2023-06-04
+|*|E-Mail:     |*| 1398581458@qq.com
 |*|============|*/
 
 using System;
@@ -12,12 +12,12 @@ using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     /// <summary>
     /// 符号链接工具类
     ///	An editor utility for easily creating symlinks in your project.
-    /// Adds a Menu item under `Assets/Create/Folder (Symlink)`, and 
+    /// Adds a Menu item under `Assets/Create/Folder (Symlink)`, and
     /// draws a small indicator in the Project view for folders that are
     /// symlinks.
     /// </summary>

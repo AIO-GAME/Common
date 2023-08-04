@@ -1,16 +1,17 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-29
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
 using System.Collections.Generic;
 using UnityEditor.EditorTools;
+using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     public static class GEHelper
     {
@@ -124,7 +125,7 @@ namespace UnityEditor
         /// <param name="foldout">箭头显示的折叠状态</param>
         /// <param name="editor">自定义创建自定义检查器或编辑器</param>
         /// <returns>用户选择的折叠状态</returns>
-        public static bool InspectorTitlebar(bool foldout, Editor editor)
+        public static bool InspectorTitlebar(bool foldout, UnityEditor.Editor editor)
         {
             return EditorGUILayout.InspectorTitlebar(foldout, editor);
         }

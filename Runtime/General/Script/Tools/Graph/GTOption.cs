@@ -1,10 +1,12 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-26
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
-namespace UnityEngine
+using UnityEngine;
+
+namespace AIO
 {
     /// <summary>
     /// GUI 选项

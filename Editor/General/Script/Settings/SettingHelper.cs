@@ -1,14 +1,15 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-07-04
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using UnityEditor;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     /// <summary>
     /// Unity Settings Helper

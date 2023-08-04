@@ -13,9 +13,10 @@
 ↓===================================================================================================*/
 
 using System;
+using UnityEditor;
 using UnityEngine;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     public static partial class GERect
     {

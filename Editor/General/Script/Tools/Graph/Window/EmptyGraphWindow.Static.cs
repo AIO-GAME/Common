@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-26
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
@@ -9,9 +9,10 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
-using WindowUtil = UnityEditor.UtilsEditor.Window;
+using WindowUtil = AIO.UEditor.UtilsEditor.Window;
+using UnityEditor;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     public partial class EmptyGraphWindow
     {

@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 using APool = Pool;
 using Unitx = Unit;
 
-namespace UnityEngine
+namespace AIO
 {
     /// <summary>
     /// 定时器单位回调
@@ -136,11 +136,11 @@ namespace UnityEngine
             }
             catch (Exception e)
             {
-                Print.Exception(e);
+                UnityEngine.Print.Exception(e);
             }
             finally
             {
-                Print.Log("定时器系统已销毁");
+                UnityEngine.Print.Log("定时器系统已销毁");
             }
         }
     }

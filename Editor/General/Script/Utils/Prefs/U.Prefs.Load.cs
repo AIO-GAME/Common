@@ -1,15 +1,16 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-30
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
 using System.ComponentModel;
 using UnityEditor.TestTools;
 using UnityEngine;
+using UnityEditor;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     public partial class UtilsEditor
     {

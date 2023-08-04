@@ -9,7 +9,7 @@ using System.Diagnostics;
 using UnityEditor;
 using UnityEngine;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     internal static class UnityConsoleEditor
     {

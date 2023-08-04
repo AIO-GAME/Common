@@ -5,7 +5,7 @@ using UnityEditor.AssetImporters;
 using UnityEditor.Experimental.AssetImporters;
 #endif
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     [ScriptedImporter(0, "ico")]
     public class IcoImporter : ScriptedImporter

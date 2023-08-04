@@ -3,7 +3,7 @@ using System.IO;
 using UnityEngine;
 using YooAsset.Editor;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     [DisplayName("收集 Lua代码及其他文件")]
     public class CollectRuleLua : IFilterRule

@@ -15,7 +15,9 @@ using System;
 using System.Diagnostics;
 using System.Text;
 
-namespace UnityEngine
+using UnityEngine;
+
+namespace AIO
 {
     /// <summary>
     /// 定时任务处理器
@@ -81,7 +83,7 @@ namespace UnityEngine
             {
                 if (TimerSystem.TimerExecutors.ContainsKey(tid))
                 {
-                    Debug.LogErrorFormat("TimerSystem.PushLoop: {0} already exists", tid);
+                    UnityEngine.Debug.LogErrorFormat("TimerSystem.PushLoop: {0} already exists", tid);
                 }
                 else TimerSystem.TimerExecutors.Add(tid, this);
             }

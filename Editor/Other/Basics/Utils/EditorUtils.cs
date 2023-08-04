@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     /// <summary>
     /// 编辑器工具类
@@ -621,7 +621,7 @@ namespace AIO.Unity.Editor
 
             int startIndex = -1;
             if (firstMatch)
-                startIndex = content.IndexOf(key); //返回子字符串第一次出现位置		
+                startIndex = content.IndexOf(key); //返回子字符串第一次出现位置
             else
                 startIndex = content.LastIndexOf(key); //返回子字符串最后出现的位置
 

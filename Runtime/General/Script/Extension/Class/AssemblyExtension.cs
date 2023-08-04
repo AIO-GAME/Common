@@ -1,14 +1,15 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-27
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
 using System.IO;
 using System.Reflection;
+using UnityEngine;
 
-namespace UnityEngine
+namespace AIO
 {
     /// <summary>
     /// 程序集扩展

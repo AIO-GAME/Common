@@ -3,7 +3,7 @@ using AIO;
 using UnityEngine;
 using UnityEngine.Scripting;
 
-namespace UnityEngine
+namespace AIO
 {
     /// <summary>
     /// Unity 可持续化数据

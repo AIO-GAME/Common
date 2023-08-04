@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     public class IconsListGraphWindow : GraphicWindow
     {

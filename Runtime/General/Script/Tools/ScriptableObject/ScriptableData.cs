@@ -1,11 +1,11 @@
 ﻿using AIO;
 
-namespace UnityEngine
+namespace AIO
 {
     /// <summary>
-    /// Unity 可持续化数据 
+    /// Unity 可持续化数据
     /// 保存为二进制数据
-    /// 只保存数据 需要需要编辑重写 
+    /// 只保存数据 需要需要编辑重写
     /// 请使用Editor重写
     /// </summary>
     public class ScriptableData : ScriptableBasics

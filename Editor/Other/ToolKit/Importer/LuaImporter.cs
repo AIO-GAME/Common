@@ -9,7 +9,7 @@ using UnityEditor.AssetImporters;
 #if UNITY_2018_1_OR_NEWER && !UNITY_2020_1_OR_NEWER
 using UnityEditor.Experimental.AssetImporters;
 #endif
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     [ScriptedImporter(0, "lua")]
     public class LuaImporter : ScriptedImporter

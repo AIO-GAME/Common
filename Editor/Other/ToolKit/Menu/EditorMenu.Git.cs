@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     public partial class EditorMenu
     {

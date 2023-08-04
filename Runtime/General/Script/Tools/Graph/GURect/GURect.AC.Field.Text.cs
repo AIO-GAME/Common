@@ -1,12 +1,12 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-29
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using UnityEngine;
 
-namespace UnityEngine
+namespace AIO
 {
     public partial class GURect
     {

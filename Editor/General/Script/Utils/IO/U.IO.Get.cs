@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     public partial class UtilsEditor
     {

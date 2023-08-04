@@ -1,5 +1,6 @@
 {
-    "name": "AIO.General.Unity",
+    "name": "AIO.Core.Unity",
+    "rootNamespace": "AIO",
     "references": [
         "UniTask",
         "UniTask.Addressables",

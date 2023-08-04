@@ -2,7 +2,7 @@
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.Rendering;
 
-namespace UnityEngine
+namespace AIO
 {
     public static partial class UtilsEngine
     {
@@ -236,7 +236,7 @@ namespace UnityEngine
         /// </summary>
         public static partial class SystemInfo
         {
-            
+
 #if UNITY_2019_1_OR_NEWER
             /// <summary>
             /// 当前渲染器是否直接支持绑定常量缓冲区
@@ -247,7 +247,7 @@ namespace UnityEngine
                 return UnityEngine.SystemInfo.supportsSetConstantBuffer;
             }
 #endif
-            
+
             /// <summary>
             /// SystemInfo字符串属性返回的值，该属性在当前平台上不受支持。
             /// Value returned by UnityEngine. SystemInfo string properties which are not supported on the current platform.

@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     public static partial class EditorMenu
     {

@@ -1,13 +1,13 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-26
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using UnityEditor;
 using UnityEngine;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     /// <summary>
     /// 修改多个Inspertor物体属性

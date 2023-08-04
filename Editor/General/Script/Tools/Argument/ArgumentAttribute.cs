@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     /// <summary>
     /// 属性解析

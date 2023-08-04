@@ -1,12 +1,12 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-26
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using UnityEngine;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     public partial class GraphicRect
     {

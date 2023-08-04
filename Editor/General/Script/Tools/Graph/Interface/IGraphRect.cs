@@ -1,13 +1,13 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-26
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
 using UnityEngine;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     /// <summary>
     /// 图形范围

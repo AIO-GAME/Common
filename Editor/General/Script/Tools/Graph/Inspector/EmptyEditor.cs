@@ -1,17 +1,17 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-06-26
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using UnityEngine;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     /// <summary>
     /// Editor 基类 无预览窗口 数据类
     /// </summary>
-    public abstract partial class EmptyEditor : Editor
+    public abstract partial class EmptyEditor : UnityEditor.Editor
     {
         /// <summary>
         /// 开启预览窗口

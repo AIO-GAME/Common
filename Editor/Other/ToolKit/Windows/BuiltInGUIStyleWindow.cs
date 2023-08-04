@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     /// <summary>
     /// 获取全部 Unity GUI Style Viewer 样式

@@ -1,7 +1,7 @@
 /*|============|*|
-|*|Author:     |*| xinan                
-|*|Date:       |*| 2023-06-04               
-|*|E-Mail:     |*| 1398581458@qq.com     
+|*|Author:     |*| xinan
+|*|Date:       |*| 2023-06-04
+|*|E-Mail:     |*| 1398581458@qq.com
 |*|============|*/
 
 using System.IO;
@@ -9,7 +9,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     public partial class UtilsEditor
     {

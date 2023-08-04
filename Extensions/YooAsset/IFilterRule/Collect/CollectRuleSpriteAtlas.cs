@@ -2,7 +2,7 @@
 using System.IO;
 using YooAsset.Editor;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     [DisplayName("收集 SpriteAtlas")]
     public class CollectRuleSpriteAtlas : IFilterRule
@@ -12,6 +12,6 @@ namespace AIO.Unity.Editor
             return Path.GetExtension(data.AssetPath).ToLower() == ".spriteatlas";
         }
     }
-    
+
 }
 #endif

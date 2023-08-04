@@ -12,7 +12,7 @@
 * History:
 * * * * * * * * * * * * * * * * * * * * * * * * */
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     using UnityEditor;
 

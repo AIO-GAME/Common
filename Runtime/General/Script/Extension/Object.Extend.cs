@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Object = UnityEngine.Object;
 
-namespace UnityEngine
+namespace AIO
 {
     using UnityObject = Object;
 

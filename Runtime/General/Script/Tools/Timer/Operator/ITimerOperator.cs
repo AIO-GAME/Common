@@ -1,13 +1,13 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-07-07
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
 using System.Collections.Generic;
 
-namespace UnityEngine
+namespace AIO
 {
     public partial interface ITimerOperator : IDisposable
     {
@@ -70,7 +70,7 @@ namespace UnityEngine
 
         /// <summary>
         /// 添加任务执行器 进入缓存
-        /// </summary> 
+        /// </summary>
         void AddTimerCache(params ITimerExecutor[] executors);
 
         /// <summary>

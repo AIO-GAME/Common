@@ -15,7 +15,7 @@ using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     public class PackageManagerWindow : EditorWindow
     {
@@ -33,7 +33,7 @@ namespace AIO.Unity.Editor
 
             Window = GetWindow<PackageManagerWindow>("Package Manager Windows", true, types);
             Window.wantsMouseMove = true;
-            Window.Show(true); //展示     
+            Window.Show(true); //展示
         }
 
         protected Vector2 Vector;

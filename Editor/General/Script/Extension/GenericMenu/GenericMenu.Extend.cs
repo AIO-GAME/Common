@@ -1,8 +1,9 @@
 ﻿using System;
 using AIO;
 using UnityEngine;
+using UnityEditor;
 
-namespace UnityEditor
+namespace AIO.UEditor
 {
     /// <summary>
     /// The possible states for a function in a <see cref="GenericMenu"/>.
