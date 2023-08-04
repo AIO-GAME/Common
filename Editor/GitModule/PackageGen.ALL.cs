@@ -13,7 +13,7 @@ using UnityEditor;
 using UnityEngine;
 using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     internal static partial class PackageGen
     {
