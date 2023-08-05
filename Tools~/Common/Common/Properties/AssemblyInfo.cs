@@ -27,9 +27,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright(AssemblyInfo.Copyright)]
 [assembly: AssemblyCulture(AssemblyInfo.Culture)]
 
-[assembly: InternalsVisibleTo("AIO.Core.Unity")]
-[assembly: InternalsVisibleTo("AIO.Core.Unity.Editor")]
-
+[assembly: InternalsVisibleTo("AIO.Core.Runtime")]
+[assembly: InternalsVisibleTo("AIO.Core.Editor")]
+[assembly: InternalsVisibleTo("AIO.Unity.Runtime")]
+[assembly: InternalsVisibleTo("AIO.Unity.Editor")]
 
 /// <summary>
 /// 程序集信息
