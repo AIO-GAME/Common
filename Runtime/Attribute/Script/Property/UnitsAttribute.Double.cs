@@ -6,7 +6,10 @@
 
 using System;
 using System.Collections.Generic;
+
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace AIO
@@ -31,6 +34,8 @@ namespace AIO
             UnitIndex = unitIndex;
             DisplayConverters = suffixes;
         }
+        
+#if UNITY_EDITOR
 
         /// <summary>[Editor-Only]
         /// Draws this attribute's fields.
@@ -199,5 +204,7 @@ namespace AIO
             DoFieldGUI(area, label, ref value);
             EndProperty(area, property, ref value);
         }
+
+#endif
     }
 }

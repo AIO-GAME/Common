@@ -6,12 +6,14 @@
 
 #if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace AIO
 {
     internal partial class UnitsAttribute
     {
+#if UNITY_EDITOR
         public virtual float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             var lineCount = GetLineCount(property, label);
@@ -206,6 +208,6 @@ namespace AIO
             return value;
         }
         #endregion
+#endif
     }
 }
-#endif
