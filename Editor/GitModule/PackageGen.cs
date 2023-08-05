@@ -13,7 +13,7 @@ using UnityEditor;
 using UnityEngine;
 using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
-namespace AIO.Unity.Editor
+namespace AIO.UEditor
 {
     /// <summary>
     /// PackageGen
@@ -79,7 +79,7 @@ namespace AIO.Unity.Editor
                 index = 100;
                 str.Clear();
                 str.AppendFormat(tips, DateTime.Now.ToString("yyyy-MM-dd")).Append("\r\n\r\n");
-                str.AppendFormat("namespace {0}\r\n{1}", "AIO.Unity.Editor", "{");
+                str.AppendFormat("namespace {0}\r\n{1}", typeof(PackageGen).Namespace, "{");
                 str.AppendFormat("{0}\r\n", usings);
 
                 str.AppendFormat("    /// <summary>\r\n    /// Git Manager {0}\r\n    /// </summary>\r\n", info.displayName);
@@ -96,7 +96,7 @@ namespace AIO.Unity.Editor
                     str.Append("            Refresh();\r\n");
                     str.Append("        }\r\n");
                 }
-                
+
                 {
                     str.AppendLine();
                     str.AppendFormat("        [MenuItem(\"Git/\" + DisplayName + \"/打开 Open\", false, 0)]\r\n");
