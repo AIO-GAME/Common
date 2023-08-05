@@ -108,7 +108,7 @@ namespace AIO.UEditor
     {
         string IAddressRule.GetAssetAddress(AddressRuleData data)
         {
-            return data.AssetPath.Replace(data.CollectPath + "/", Path.GetFileName(data.UserData) + "/");
+            return data.AssetPath.Replace(data.CollectPath + "/", data.UserData + "/");
         }
     }
 
@@ -117,7 +117,7 @@ namespace AIO.UEditor
     {
         string IAddressRule.GetAssetAddress(AddressRuleData data)
         {
-            return data.AssetPath.Replace(data.CollectPath + "/", Path.GetFileName(data.UserData) + "/").ToLower();
+            return data.AssetPath.Replace(data.CollectPath + "/", data.UserData + "/").ToLower();
         }
     }
 
@@ -126,7 +126,7 @@ namespace AIO.UEditor
     {
         string IAddressRule.GetAssetAddress(AddressRuleData data)
         {
-            return data.AssetPath.Replace(data.CollectPath + "/", Path.GetFileName(data.UserData) + "/").ToUpper();
+            return data.AssetPath.Replace(data.CollectPath + "/", data.UserData + "/").ToUpper();
         }
     }
 
@@ -136,7 +136,7 @@ namespace AIO.UEditor
     {
         string IAddressRule.GetAssetAddress(AddressRuleData data)
         {
-            var path = data.AssetPath.Replace(data.CollectPath + "/", Path.GetFileName(data.UserData) + "/");
+            var path = data.AssetPath.Replace(data.CollectPath + "/", data.UserData + "/");
             return path.Replace(Path.GetExtension(path), "");
         }
     }
@@ -146,7 +146,7 @@ namespace AIO.UEditor
     {
         string IAddressRule.GetAssetAddress(AddressRuleData data)
         {
-            var path = data.AssetPath.Replace(data.CollectPath + "/", Path.GetFileName(data.UserData) + "/").ToLower();
+            var path = data.AssetPath.Replace(data.CollectPath + "/", data.UserData + "/").ToLower();
             return path.Replace(Path.GetExtension(path), "");
         }
     }
@@ -156,7 +156,7 @@ namespace AIO.UEditor
     {
         string IAddressRule.GetAssetAddress(AddressRuleData data)
         {
-            var path = data.AssetPath.Replace(data.CollectPath + "/", Path.GetFileName(data.UserData) + "/").ToUpper();
+            var path = data.AssetPath.Replace(data.CollectPath + "/", data.UserData + "/").ToUpper();
             return path.Replace(Path.GetExtension(path), "");
         }
     }

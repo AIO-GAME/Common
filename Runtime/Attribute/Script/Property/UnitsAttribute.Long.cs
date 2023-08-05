@@ -6,7 +6,9 @@
 
 using System;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace AIO
@@ -34,6 +36,8 @@ namespace AIO
         /// <summary>[Editor-Only] The unit conversion ratios.</summary>
         /// <remarks><c>valueInUnitX = valueInBaseUnits * Multipliers[x];</c></remarks>
         public IReadOnlyList<double> Multipliers { get; private set; }
+
+#if UNITY_EDITOR
 
         /// <summary>[Editor-Only]
         /// Begins a GUI property block to be ended by EndProperty
@@ -198,5 +202,6 @@ namespace AIO
                 UnitGUI.Deselect();
             }
         }
+#endif
     }
 }
