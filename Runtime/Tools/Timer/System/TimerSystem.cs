@@ -136,11 +136,11 @@ namespace AIO
             }
             catch (Exception e)
             {
-                UnityEngine.Print.Exception(e);
+                UnityEngine.Debug.LogException(e);
             }
             finally
             {
-                UnityEngine.Print.Log("定时器系统已销毁");
+                UnityEngine.Debug.Log("定时器系统已销毁");
             }
         }
     }
