@@ -131,7 +131,7 @@ namespace AIO
                 }
             }
 
-            UnityEngine.Print.Log(builder.ToString());
+            UnityEngine.Debug.Log(builder.ToString());
         }
     }
 }

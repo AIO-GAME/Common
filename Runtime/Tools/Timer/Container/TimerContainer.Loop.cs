@@ -7,7 +7,6 @@
 using System;
 using System.Collections.Generic;
 using APool = Pool;
-
 using UnityEngine;
 
 namespace AIO
@@ -103,13 +102,13 @@ namespace AIO
 
 
 #if UNITY_EDITOR
-                Print.Log($"[循环定时器:{ID}] [容器数量:{List.Count}] [状态:结束] 精度单位:{Unit} 当前时间:{Counter} 剩余任务数量:{RemainNum}");
+                UnityEngine.Debug.Log($"[循环定时器:{ID}] [容器数量:{List.Count}] [状态:结束] 精度单位:{Unit} 当前时间:{Counter} 剩余任务数量:{RemainNum}");
 #endif
             }
             catch (Exception e)
             {
 #if UNITY_EDITOR
-                Print.ErrorFormat($"[循环定时器:{ID}] [容器数量:{List.Count}] [状态:异常] 精度单位:{Unit} 当前时间:{Counter} 剩余任务数量:{RemainNum} 异常信息:{e}");
+                UnityEngine.Debug.LogErrorFormat($"[循环定时器:{ID}] [容器数量:{List.Count}] [状态:异常] 精度单位:{Unit} 当前时间:{Counter} 剩余任务数量:{RemainNum} 异常信息:{e}");
 #endif
             }
             finally

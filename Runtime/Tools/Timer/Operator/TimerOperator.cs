@@ -266,7 +266,7 @@ namespace AIO
             }
             catch (Exception e)
             {
-                UnityEngine.Print.Exception(e);
+                UnityEngine.Debug.LogException(e);
             }
             finally
             {
