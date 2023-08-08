@@ -552,15 +552,13 @@ namespace AIO.UEditor
         {
             var assemblies = new List<Assembly>
             {
-                Assembly.LoadFile(@"G:\UnityProject\G108-Win-2020\Packages\com.blz.config\DBVC\DBVC.dll"),
-                Assembly.LoadFile(@"G:\UnityProject\G108-Win-2020\Packages\com.blz.config\DBVC\ClientCore.dll"),
-                Assembly.LoadFile(@"G:\UnityProject\G201\proj\third-plugins-back\Demigiant\Source\DOTweenPro\DOTweenPro.dll"),
+                Assembly.LoadFile(@"G:\UnityProject\G201\proj\third-plugins-back\client-core\DBVC.dll"),
+                Assembly.LoadFile(@"G:\UnityProject\G201\proj\third-plugins-back\client-core\ClientCore.dll"),
             };
             var dirs = new List<DirectoryInfo>
             {
                 new DirectoryInfo(@"G:\UnityProject\G201\proj\third-plugins\client-core\ClientCore"),
                 new DirectoryInfo(@"G:\UnityProject\G201\proj\third-plugins\client-core\DBVC"),
-                new DirectoryInfo(@"G:\UnityProject\G201\proj\third-plugins\Demigiant\Runtime"),
             };
             var md5 = new Dictionary<string, string>
             {
@@ -671,7 +669,7 @@ namespace AIO.UEditor
                 if (Extension.Contains("font")) continue;
                 if (Extension.Contains("otf")) continue;
                 if (Extension.Contains("ttf")) continue;
-                if (Extension.Contains("unity")) continue;
+                // if (Extension.Contains("unity")) continue;
                 if (Extension.Contains("so")) continue;
                 if (Extension.Contains("asmdef")) continue;
                 if (Extension.Contains("uss")) continue;
