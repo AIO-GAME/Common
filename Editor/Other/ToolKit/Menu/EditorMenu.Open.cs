@@ -6,6 +6,7 @@
 using System.IO;
 using AIO;
 using UnityEditor;
+using UnityEngine;
 
 namespace AIO.UEditor
 {
@@ -14,17 +15,50 @@ namespace AIO.UEditor
     /// </summary>
     public partial class EditorMenu
     {
-        private static class Open
+        private partial class Open
         {
-            private const string Title = "Tools/Open/Unity Editor Data/";
+            [MenuItem("Tools/Open/Application/Persistent Data Path")]
+            public static async void OpenApplicationPersistentDataPath()
+            {
+                await PrPlatform.Open.Path(Application.persistentDataPath);
+            }
 
-            [MenuItem(Title + "Data")]
+            [MenuItem("Tools/Open/Application/Data Path")]
+            public static async void OpenApplicationDataPath()
+            {
+                await PrPlatform.Open.Path(Application.dataPath);
+            }
+
+            [MenuItem("Tools/Open/Application/Streaming Assets Path")]
+            public static async void OpenApplicationStreamingAssetsPath()
+            {
+                await PrPlatform.Open.Path(Application.streamingAssetsPath);
+            }
+            
+            [MenuItem("Tools/Open/Application/Console Log Path")]
+            public static async void OpenApplicationConsoleLogPath()
+            {
+                await PrPlatform.Open.Path(Application.consoleLogPath);
+            }
+            
+            [MenuItem("Tools/Open/Application/Temporary Cache Path")]
+            public static async void OpenApplicationTemporaryCachePath()
+            {
+                await PrPlatform.Open.Path(Application.temporaryCachePath);
+            }
+        }
+
+        private static partial class Open
+        {
+            private const string Title = "Tools/Open/Editor Application/";
+
+            [MenuItem(Title + "Application Contents Path")]
             public static async void OpenApplicationContentsPath()
             {
                 await PrPlatform.Open.Path(EditorApplication.applicationContentsPath);
             }
 
-            [MenuItem(Title + "Tools")]
+            [MenuItem(Title + "Application Contents Path + Tools")]
             public static async void OpenTools()
             {
                 var path = Path.Combine(EditorApplication.applicationContentsPath,
@@ -33,7 +67,7 @@ namespace AIO.UEditor
                 await PrPlatform.Open.Path(path);
             }
 
-            [MenuItem(Title + "Managed DLL")]
+            [MenuItem(Title + "Application Contents Path + Managed (DLL)")]
             public static async void OpenManagedDll()
             {
                 var path = Path.Combine(EditorApplication.applicationContentsPath,
@@ -42,7 +76,7 @@ namespace AIO.UEditor
                 await PrPlatform.Open.Path(path);
             }
 
-            [MenuItem(Title + "CG Includes")]
+            [MenuItem(Title + "Application Contents Path + CG Includes")]
             public static async void OpenCGIncludes()
             {
                 var path = Path.Combine(EditorApplication.applicationContentsPath,
@@ -53,7 +87,7 @@ namespace AIO.UEditor
 
             #region IL2CPP
 
-            [MenuItem(Title + "il2cpp/cpp")]
+            [MenuItem(Title + "Application Contents Path + il2cpp cpp")]
             public static async void Openil2cpp_cpp()
             {
                 var path = Path.Combine(EditorApplication.applicationContentsPath,
@@ -62,7 +96,7 @@ namespace AIO.UEditor
                 await PrPlatform.Open.Path(path);
             }
 
-            [MenuItem(Title + "il2cpp/mono")]
+            [MenuItem(Title + "Application Contents Path + il2cpp mono")]
             public static async void Openil2cpp_mono()
             {
                 var path = Path.Combine(EditorApplication.applicationContentsPath,
@@ -71,7 +105,7 @@ namespace AIO.UEditor
                 await PrPlatform.Open.Path(path);
             }
 
-            [MenuItem(Title + "il2cpp/build")]
+            [MenuItem(Title + "Application Contents Path + il2cpp build")]
             public static async void Openil2cpp_build()
             {
                 var path = Path.Combine(EditorApplication.applicationContentsPath,
@@ -80,7 +114,7 @@ namespace AIO.UEditor
                 await PrPlatform.Open.Path(path);
             }
 
-            [MenuItem(Title + "il2cpp/external")]
+            [MenuItem(Title + "Application Contents Path + il2cpp external")]
             public static async void Openil2cpp_external()
             {
                 var path = Path.Combine(EditorApplication.applicationContentsPath,
@@ -93,7 +127,7 @@ namespace AIO.UEditor
 
             #region Build Playback Engines
 
-            [MenuItem(Title + "Playback Engines Build/Android")]
+            [MenuItem(Title + "Application Contents Path + Playback Engines Build Android")]
             public static async void OpenApplicationPathPlaybackEnginesAndroid()
             {
                 var path = Path.Combine(EditorApplication.applicationContentsPath,
@@ -102,7 +136,7 @@ namespace AIO.UEditor
                 await PrPlatform.Open.Path(path);
             }
 
-            [MenuItem(Title + "Playback Engines Build/IOS")]
+            [MenuItem(Title + "Application Contents Path + Playback Engines Build IOS")]
             public static async void OpenApplicationPathPlaybackEnginesIOS()
             {
                 var path = Path.Combine(EditorApplication.applicationContentsPath,
@@ -111,7 +145,7 @@ namespace AIO.UEditor
                 await PrPlatform.Open.Path(path);
             }
 
-            [MenuItem(Title + "Playback Engines Build/WebGL")]
+            [MenuItem(Title + "Application Contents Path + Playback Engines Build WebGL")]
             public static async void OpenApplicationPathPlaybackEnginesWebGL()
             {
                 var path = Path.Combine(EditorApplication.applicationContentsPath,
@@ -120,7 +154,7 @@ namespace AIO.UEditor
                 await PrPlatform.Open.Path(path);
             }
 
-            [MenuItem(Title + "Playback Engines Build/Windows")]
+            [MenuItem(Title + "Application Contents Path + Playback Engines Build Windows")]
             public static async void OpenApplicationPathPlaybackEnginesWindows()
             {
                 var path = Path.Combine(EditorApplication.applicationContentsPath,
