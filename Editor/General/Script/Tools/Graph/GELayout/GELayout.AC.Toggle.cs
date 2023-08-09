@@ -15,6 +15,62 @@ namespace AIO.UEditor
         /// <param name="label">标签</param>
         /// <param name="value">值</param>
         /// <param name="options">排版格式</param>
+        public static bool Field(string label, bool value, params GUILayoutOption[] options)
+        {
+            return EditorGUILayout.Toggle(label, value, options);
+        }
+
+        /// <summary> 开关按钮 </summary>
+        /// <param name="label">标签</param>
+        /// <param name="value">值</param>
+        /// <param name="options">排版格式</param>
+        public static bool Field(GUIContent label, bool value, params GUILayoutOption[] options)
+        {
+            return EditorGUILayout.Toggle(label, value, options);
+        }
+
+        /// <summary> 开关按钮 </summary>
+        /// <param name="value">值</param>
+        /// <param name="options">排版格式</param>
+        public static bool Field(bool value, params GUILayoutOption[] options)
+        {
+            return EditorGUILayout.Toggle(value, options);
+        }
+
+        /// <summary> 开关按钮 </summary>
+        /// <param name="label">标签</param>
+        /// <param name="value">值</param>
+        /// <param name="style">显示风格</param>
+        /// <param name="options">排版格式</param>
+        public static bool Field(string label, bool value, GUIStyle style, params GUILayoutOption[] options)
+        {
+            return EditorGUILayout.Toggle(label, value, style, options);
+        }
+
+        /// <summary> 开关按钮 </summary>
+        /// <param name="label">标签</param>
+        /// <param name="value">值</param>
+        /// <param name="style">显示风格</param>
+        /// <param name="options">排版格式</param>
+        public static bool Field(GUIContent label, bool value, GUIStyle style, params GUILayoutOption[] options)
+        {
+            return EditorGUILayout.Toggle(label, value, style, options);
+        }
+
+        /// <summary> 开关按钮 </summary>
+        /// <param name="value">值</param>
+        /// <param name="style">显示风格</param>
+        /// <param name="options">排版格式</param>
+        public static bool Field(bool value, GUIStyle style, params GUILayoutOption[] options)
+        {
+            return EditorGUILayout.Toggle(value, style, options);
+        }
+
+
+        /// <summary> 开关按钮 </summary>
+        /// <param name="label">标签</param>
+        /// <param name="value">值</param>
+        /// <param name="options">排版格式</param>
         public static bool Toggle(string label, bool value, params GUILayoutOption[] options)
         {
             return EditorGUILayout.Toggle(label, value, options);
