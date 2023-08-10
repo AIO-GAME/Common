@@ -100,6 +100,28 @@ namespace AIO.UEditor
             /// 打开窗口
             /// </summary>
             /// <param name="types">类型数组</param>
+            /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
+            /// <returns><see cref="EditorWindow"/></returns>
+            public static T Open<T>(Type[] types) where T : EditorWindow
+            {
+                var title = typeof(T).Name;
+                var key = GetWindowKey<T>(title);
+                if (!WindowList.TryGetValue(key, out var value))
+                {
+                    WindowList.Add(key, (types == null || types.Length == 0)
+                        ? EditorWindow.GetWindow<T>(true)
+                        : EditorWindow.GetWindow<T>(types));
+                    value = WindowList[key];
+                    value.Show(true);
+                }
+
+                return Command(value) as T;
+            }
+
+            /// <summary>
+            /// 打开窗口
+            /// </summary>
+            /// <param name="types">类型数组</param>
             /// <param name="focus">聚焦</param>
             /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
             /// <returns><see cref="EditorWindow"/></returns>

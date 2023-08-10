@@ -44,7 +44,12 @@ namespace AIO.UEditor
         ///
         /// </summary>
         public static UGUIStyle StatusBarIcon => Get(nameof(StatusBarIcon));
-
+        
+        /// <summary>
+        ///
+        /// </summary>
+        public static UGUIStyle RLFooter => Get("RL Footer");
+    
         /// <summary>
         ///
         /// </summary>
