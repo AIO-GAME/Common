@@ -11,16 +11,16 @@ namespace AIO.UEditor
     using System.IO;
 
     /// <summary>
-    /// Git Manager AIO Package Manager
+    /// Git Manager BLZ G108
     /// </summary>
     [InitializeOnLoad]
-    internal static partial class GIT_COM_SELF_PACKAGE
+    internal static partial class GIT_COM_BLZ_G108
     {
-        internal const string URL = "Packages/com.blz.package";
-        internal const string DisplayName = "AIO Package Manager";
-        internal const string PackageName = "com.self.package";
+        internal const string URL = "Packages/client-system";
+        internal const string DisplayName = "BLZ G108";
+        internal const string PackageName = "com.blz.g108";
 
-        static GIT_COM_SELF_PACKAGE()
+        static GIT_COM_BLZ_G108()
         {
             Refresh();
         }

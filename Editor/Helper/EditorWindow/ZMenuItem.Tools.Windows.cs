@@ -30,6 +30,7 @@ namespace AIO.UEditor
             typeof(PackageManagerWindow),
             typeof(ScriptIDWindow),
             typeof(ScriptingDefineSymbols),
+            typeof(DllSwitcherWindow),
 #endif
         };
 
