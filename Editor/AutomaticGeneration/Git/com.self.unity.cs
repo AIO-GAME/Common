@@ -11,16 +11,16 @@ namespace AIO.UEditor
     using System.IO;
 
     /// <summary>
-    /// Git Manager AIO Package Manager
+    /// Git Manager AIO Unity
     /// </summary>
     [InitializeOnLoad]
-    internal static partial class GIT_COM_SELF_PACKAGE
+    internal static partial class GIT_COM_SELF_UNITY
     {
-        internal const string URL = "Packages/com.blz.package";
-        internal const string DisplayName = "AIO Package Manager";
-        internal const string PackageName = "com.self.package";
+        internal const string URL = "Packages/com.blz.unity";
+        internal const string DisplayName = "AIO Unity";
+        internal const string PackageName = "com.self.unity";
 
-        static GIT_COM_SELF_PACKAGE()
+        static GIT_COM_SELF_UNITY()
         {
             Refresh();
         }

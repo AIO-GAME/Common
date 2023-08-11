@@ -11,16 +11,16 @@ namespace AIO.UEditor
     using System.IO;
 
     /// <summary>
-    /// Git Manager AIO Package Manager
+    /// Git Manager AIO Hybrid CLR
     /// </summary>
     [InitializeOnLoad]
-    internal static partial class GIT_COM_SELF_PACKAGE
+    internal static partial class GIT_COM_SELF_HYBRIDCLR
     {
-        internal const string URL = "Packages/com.blz.package";
-        internal const string DisplayName = "AIO Package Manager";
-        internal const string PackageName = "com.self.package";
+        internal const string URL = "Packages/com.blz.hybridclr";
+        internal const string DisplayName = "AIO Hybrid CLR";
+        internal const string PackageName = "com.self.hybridclr";
 
-        static GIT_COM_SELF_PACKAGE()
+        static GIT_COM_SELF_HYBRIDCLR()
         {
             Refresh();
         }

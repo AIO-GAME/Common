@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using AIO;
+using UnityEditor;
 using UnityEditor.Experimental.UIElements;
 using UnityEngine;
 
@@ -56,16 +57,14 @@ namespace AIO.UEditor
                 {
                     foreach (var type in assembly.GetTypes())
                     {
-                        if (type.Attributes != TypeAttributes.Class) continue;
-                        foreach (var customAttribute in type.GetCustomAttributes<WindowExtraAttribute>(false))
-                        {
-                            if (Group.Equals(customAttribute.Group))
-                            {
-                                if (type == GetType()) break;
-                                GroupList.Add(type);
-                                break;
-                            }
-                        }
+                        if (!type.IsSubclassOf(typeof(EditorWindow))) continue;
+                        var extraAttribute = type.GetCustomAttribute<WindowExtraAttribute>(false);
+                        if (extraAttribute is null) continue;
+                        if (string.IsNullOrEmpty(extraAttribute.Group)) continue;
+                        if (Group != extraAttribute.Group) continue;
+                        if (type == GetType()) continue;
+                        if (GroupList.Contains(type)) continue;
+                        GroupList.Add(type);
                     }
                 }
             }
@@ -79,13 +78,6 @@ namespace AIO.UEditor
             else MinSize = minSize;
         }
 
-        /// <summary>
-        /// 初始化皮肤格式化
-        /// </summary>
-        protected virtual void OnGUIStyle()
-        {
-        }
-
         /// <inheritdoc />
         protected override void OnEnable()
         {
@@ -93,8 +85,7 @@ namespace AIO.UEditor
             if (!docked)
 #endif
             {
-                position = new Rect(
-                    new Vector2(
+                position = new Rect(new Vector2(
                         Screen.currentResolution.width * 0.5f - MinSize.x / 2,
                         Screen.currentResolution.height * 0.5f - MinSize.y / 2),
                     MinSize);
@@ -112,6 +103,13 @@ namespace AIO.UEditor
         }
 
         /// <summary>
+        /// 初始化皮肤格式化
+        /// </summary>
+        protected virtual void OnGUIStyle()
+        {
+        }
+
+        /// <summary>
         /// 脚本启用时调用
         /// </summary>
         protected virtual void OnAwake()
@@ -125,12 +123,12 @@ namespace AIO.UEditor
 #if UNITY_2019_1_OR_NEWER
         public sealed override IEnumerable<Type> GetExtraPaneTypes()
         {
-            if (string.IsNullOrEmpty(Group)) return base.GetExtraPaneTypes();
-            GroupList.Add(base.GetExtraPaneTypes());
+            if (string.IsNullOrEmpty(Group))
+                return base.GetExtraPaneTypes();
             return GroupList;
         }
 #else
-        public  IEnumerable<Type> GetExtraPaneTypes()
+        public override IEnumerable<Type> GetExtraPaneTypes()
         {
             if (string.IsNullOrEmpty(Group)) return Array.Empty<Type>();
             return GroupList;
