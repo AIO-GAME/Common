@@ -235,7 +235,7 @@ namespace AIO.UEditor
 #if UNITY_2019_1_OR_NEWER
                 CompilationPipeline.compilationFinished += compilationFinished;
 #endif
-                if (macroList.Count != 0) UtilsEditor.Symbols.AddScriptingDefine(macroList.ToArray());
+                if (macroList.Count != 0) EHelper.Symbols.AddScriptingDefine(macroList.ToArray());
 #if UNITY_2019_1_OR_NEWER
                 CompilationPipeline.RequestScriptCompilation();
 #endif
@@ -283,7 +283,7 @@ namespace AIO.UEditor
 #if UNITY_2019_1_OR_NEWER
                 CompilationPipeline.compilationFinished += compilationFinished;
 #endif
-                if (macroList.Count != 0) UtilsEditor.Symbols.DelScriptingDefine(macroList.ToArray());
+                if (macroList.Count != 0) EHelper.Symbols.DelScriptingDefine(macroList.ToArray());
 #if UNITY_2019_1_OR_NEWER
                 CompilationPipeline.RequestScriptCompilation();
 #endif
@@ -317,7 +317,7 @@ namespace AIO.UEditor
 #if UNITY_2020_1_OR_NEWER
                 AssetDatabase.RefreshSettings();
 #endif
-                if (!string.IsNullOrEmpty(info.MacroDefinition)) UtilsEditor.Symbols.AddScriptingDefine(info.MacroDefinition.Split(';'));
+                if (!string.IsNullOrEmpty(info.MacroDefinition)) EHelper.Symbols.AddScriptingDefine(info.MacroDefinition.Split(';'));
 #if UNITY_2019_1_OR_NEWER
                 CompilationPipeline.compilationFinished += compilationFinished;
                 CompilationPipeline.RequestScriptCompilation();
@@ -343,7 +343,7 @@ namespace AIO.UEditor
 #if UNITY_2020_1_OR_NEWER
                 AssetDatabase.RefreshSettings();
 #endif
-                if (!string.IsNullOrEmpty(info.MacroDefinition)) UtilsEditor.Symbols.DelScriptingDefine(info.MacroDefinition.Split(';'));
+                if (!string.IsNullOrEmpty(info.MacroDefinition)) EHelper.Symbols.DelScriptingDefine(info.MacroDefinition.Split(';'));
 #if UNITY_2019_1_OR_NEWER
                 CompilationPipeline.compilationFinished += compilationFinished;
                 CompilationPipeline.RequestScriptCompilation();

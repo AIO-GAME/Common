@@ -47,7 +47,7 @@ namespace AIO.UEditor
 
                 for (var i = 0; i < definedLayerCount; i++)
                 {
-                    dic.Add(UtilsGen.Math.Log(layerValues[i]), layerNames[i]);
+                    dic.Add(AHelper.Math.Log(layerValues[i]), layerNames[i]);
                 }
 
                 return dic;

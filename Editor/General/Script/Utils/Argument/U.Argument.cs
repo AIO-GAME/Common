@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace AIO.UEditor
 {
-    public static partial class UtilsEditor
+    public static partial class EHelper
     {
         /// <summary>
         /// 参数帮助类

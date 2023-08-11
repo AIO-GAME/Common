@@ -31,7 +31,7 @@ namespace AIO
         public void Save()
         {
             if (Count == 0) return;
-            UtilsGen.IO.Write(Path, Data, 0, Data.Length, false);
+            AHelper.IO.Write(Path, Data, 0, Data.Length, false);
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace AIO
         public void Load()
         {
             Buffer.Clear();
-            if (File.Exists(Path)) Buffer.Write(UtilsGen.IO.Read(Path));
+            if (File.Exists(Path)) Buffer.Write(AHelper.IO.Read(Path));
         }
     }
 }

@@ -6,7 +6,7 @@
 
 using System.Runtime.CompilerServices;
 
-public partial class UtilsGen
+public partial class AHelper
 {
     public partial class IO
     {

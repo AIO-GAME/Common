@@ -11,7 +11,7 @@ using Microsoft.Win32;
 
 namespace AIO.UEditor
 {
-    public static partial class UtilsEditor
+    public static partial class EHelper
     {
         /// <summary>
         /// windos软件检测

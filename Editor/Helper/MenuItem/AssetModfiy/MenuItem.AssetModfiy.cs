@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-08-10
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
@@ -77,7 +77,7 @@ namespace AIO.UEditor
                     if (type.IsAbstract) continue;
                     if (!type.IsSubclassOf(typeof(Object))) continue;
 
-                    var fileid = UtilsGen.FileID.Compute(type);
+                    var fileid = AHelper.FileID.Compute(type);
                     fileidDic.Add(fileid, type.FullName);
                     Console.WriteLine("{0} [ fileid : {1} ]", type.FullName, fileid);
                 }
@@ -93,7 +93,7 @@ namespace AIO.UEditor
                     if (!file.Extension.Contains(".cs")) continue;
                     var meta = string.Concat(file.FullName, ".meta");
                     if (!File.Exists(string.Concat(file.FullName, ".meta"))) continue;
-                    var metaData = UtilsGen.Yaml.Deserialize<Hashtable>(File.ReadAllText(meta));
+                    var metaData = AHelper.Yaml.Deserialize<Hashtable>(File.ReadAllText(meta));
 
 
                     var namespacename = "";
@@ -213,8 +213,8 @@ namespace AIO.UEditor
                 }
             }
         }
-        
-        
+
+
         [MenuItem("Tools/AssetModfiy/查询资源丢失脚本")]
         static void SelectGameObjects()
         {

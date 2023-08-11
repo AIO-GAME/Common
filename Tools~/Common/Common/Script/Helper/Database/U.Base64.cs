@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
-public partial class UtilsGen
+public partial class AHelper
 {
     /// <summary>
     /// Base64 文件 解析

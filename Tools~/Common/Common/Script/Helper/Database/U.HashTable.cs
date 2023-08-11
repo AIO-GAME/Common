@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-public partial class UtilsGen
+public partial class AHelper
 {
     /// <summary>
     /// HashTabel 工具类

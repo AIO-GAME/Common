@@ -92,7 +92,7 @@ namespace AIO.UEditor
         /// </summary>
         protected virtual bool GetBool(in string command, in string key)
         {
-            return UtilsEditor.Argument.GetBool(command, key);
+            return EHelper.Argument.GetBool(command, key);
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace AIO.UEditor
         /// </summary>
         protected virtual string GetString(in string command, in string key)
         {
-            return UtilsEditor.Argument.GetString(command, key);
+            return EHelper.Argument.GetString(command, key);
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace AIO.UEditor
         /// </summary>
         protected virtual string[] GetStringArray(in string command, in string key)
         {
-            return UtilsEditor.Argument.GetStringArray(command, key);
+            return EHelper.Argument.GetStringArray(command, key);
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace AIO.UEditor
         /// </summary>
         protected virtual object GetEnum(in string command, in Type type, in string key)
         {
-            return UtilsEditor.Argument.GetEnum(command, type, key);
+            return EHelper.Argument.GetEnum(command, type, key);
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace AIO.UEditor
         /// </summary>
         protected virtual int[] GetIntegerArray(in string command, in string key)
         {
-            return UtilsEditor.Argument.GetIntegerArray(command, key);
+            return EHelper.Argument.GetIntegerArray(command, key);
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace AIO.UEditor
         /// 如果为-1 则说明没有使用
         protected virtual int GetInteger(in string command, in string key)
         {
-            return UtilsEditor.Argument.GetInteger(command, key);
+            return EHelper.Argument.GetInteger(command, key);
         }
     }
 }

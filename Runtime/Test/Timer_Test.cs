@@ -19,6 +19,7 @@ public class Timer_Test : MonoBehaviour
 
     private void Start()
     {
+        
     }
 
     private void OnGUI()

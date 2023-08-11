@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace AIO.UEditor
 {
-    public partial class UtilsEditor
+    public partial class EHelper
     {
         /// <summary>
         /// 资源

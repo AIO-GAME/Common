@@ -134,7 +134,7 @@ namespace AIO.UEditor
 
 #endif
 
-    public static partial class UtilsEditor
+    public static partial class EHelper
     {
         /// <summary>
         /// Profiler Editor
@@ -147,7 +147,7 @@ namespace AIO.UEditor
             /// <returns>占用空间</returns>
             public static long GetStorageMemoryTexture<T>(T obj) where T : Texture
             {
-                var method = UtilsGen.Assembly.GetMethodInfo(
+                var method = AHelper.Assembly.GetMethodInfo(
                     "UnityEditor.dll",
                     "UnityEditor.TextureUtil",
                     "GetStorageMemorySize");

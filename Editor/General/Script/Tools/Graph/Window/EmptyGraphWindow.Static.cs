@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
-using WindowUtil = AIO.UEditor.UtilsEditor.Window;
+using WindowUtil = AIO.UEditor.EHelper.Window;
 using UnityEditor;
 
 namespace AIO.UEditor

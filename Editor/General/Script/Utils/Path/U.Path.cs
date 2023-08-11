@@ -9,7 +9,7 @@ using Debug = UnityEngine.Debug;
 
 namespace AIO.UEditor
 {
-    public static partial class UtilsEditor
+    public static partial class EHelper
     {
         /// <summary>
         /// 提供了一些与路径相关的实用方法。
@@ -362,7 +362,7 @@ namespace AIO.UEditor
                         return null;
                     }
 
-                    var path = UtilsGen.IO.TryPathsForFile("xbuild", environmentPaths);
+                    var path = AHelper.IO.TryPathsForFile("xbuild", environmentPaths);
 
                     return path;
                 }

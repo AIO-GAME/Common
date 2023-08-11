@@ -83,7 +83,7 @@ namespace AIO
         /// <inheritdoc/>
         public override string ToString()
         {
-            return string.Concat("Byte Buffer:{ offset = ", ReadIndex, ", top=", WriteIndex, ", data = ", UtilsGen.Hex.ToHex(ToArray()), '}');
+            return string.Concat("Byte Buffer:{ offset = ", ReadIndex, ", top=", WriteIndex, ", data = ", AHelper.Hex.ToHex(ToArray()), '}');
         }
 
         /// <summary>

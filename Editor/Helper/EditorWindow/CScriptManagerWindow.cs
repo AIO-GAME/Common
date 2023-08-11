@@ -39,7 +39,7 @@ namespace AIO.UEditor
             List = new List<Type>();
             Vector = new Vector2();
             foreach (var item in
-                     from Assembly in UtilsGen.Assembly.GetReferanceAssemblies(AppDomain.CurrentDomain)
+                     from Assembly in AHelper.Assembly.GetReferanceAssemblies(AppDomain.CurrentDomain)
                      from item in Assembly.GetTypes()
                      where item.FullName != null && item.FullName.Contains("Framework")
                      select item)

@@ -1,6 +1,6 @@
 ﻿using System;
 
-public static partial class UtilsGen
+public static partial class AHelper
 {
     /// <summary>
     /// 生成一个新的 GUID 对象。

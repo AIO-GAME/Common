@@ -118,7 +118,7 @@ namespace AIO.UEditor
         public static async void OpenBundles()
         {
             var path = Application.dataPath.Replace("Assets", "Bundles");
-            if (UtilsGen.IO.ExistsFolder(path)) await PrPlatform.Folder.Create(path);
+            if (AHelper.IO.ExistsFolder(path)) await PrPlatform.Folder.Create(path);
             await PrPlatform.Open.Path(path);
         }
 
@@ -126,7 +126,7 @@ namespace AIO.UEditor
         public static async void OpenSandbox()
         {
             var path = Application.dataPath.Replace("Assets", "Sandbox");
-            if (UtilsGen.IO.ExistsFolder(path)) await PrPlatform.Folder.Create(path);
+            if (AHelper.IO.ExistsFolder(path)) await PrPlatform.Folder.Create(path);
             await PrPlatform.Open.Path(path);
         }
 
@@ -134,7 +134,7 @@ namespace AIO.UEditor
         public static async void ClearBundles()
         {
             var path = Application.dataPath.Replace("Assets", "Bundles");
-            if (UtilsGen.IO.ExistsFolder(path))
+            if (AHelper.IO.ExistsFolder(path))
                 await PrPlatform.Folder.Del(Application.dataPath.Replace("Assets", "Bundles"));
         }
 
@@ -142,7 +142,7 @@ namespace AIO.UEditor
         public static async void ClearSandbox()
         {
             var path = Application.dataPath.Replace("Assets", "Sandbox");
-            if (UtilsGen.IO.ExistsFolder(path))
+            if (AHelper.IO.ExistsFolder(path))
                 await PrPlatform.Folder.Del(Application.dataPath.Replace("Assets", "Sandbox"));
         }
     }

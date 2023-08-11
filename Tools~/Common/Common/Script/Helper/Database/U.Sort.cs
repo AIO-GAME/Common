@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AIO;
 
-public partial class UtilsGen
+public partial class AHelper
 {
     /// <summary>
     /// 排序工具

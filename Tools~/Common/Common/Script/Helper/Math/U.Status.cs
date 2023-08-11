@@ -7,7 +7,7 @@
 
 using System;
 
-public static partial class UtilsGen
+public static partial class AHelper
 {
     /// <summary>
     /// 状态值比较

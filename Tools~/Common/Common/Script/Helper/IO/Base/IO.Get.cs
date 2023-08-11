@@ -12,7 +12,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using AIO;
 
-public partial class UtilsGen
+public partial class AHelper
 {
     public partial class IO
     {
