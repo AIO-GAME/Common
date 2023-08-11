@@ -373,7 +373,7 @@
     <Compile Include="Script\Helper\System\U.Class.cs" />
     <Compile Include="Script\Helper\System\U.GC.cs" />
     <Compile Include="Script\Helper\System\U.SystemInfo.cs" />
-    <Compile Include="Script\Helper\Utils.cs" />
+    <Compile Include="Script\Helper\AHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
