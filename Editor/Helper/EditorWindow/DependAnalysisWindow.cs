@@ -25,7 +25,7 @@ namespace AIO.UEditor
             targetObjects = Selection.GetFiltered<Object>(SelectionMode.Assets);
             targetCount = targetObjects?.Length ?? 0;
             if (targetCount == 0) return;
-            UtilsEditor.Window.Open<DependAnalysisGraphWindow>(MenuItem_Tools.DockedWindowTypes);
+            EHelper.Window.Open<DependAnalysisGraphWindow>(MenuItem_Tools.DockedWindowTypes);
         }
 
         private bool[] foldoutArr;

@@ -11,7 +11,7 @@ using System.Security.Cryptography;
 using System.Text;
 using AIO;
 
-public static partial class UtilsGen
+public static partial class AHelper
 {
     /// <summary>
     /// hash工具

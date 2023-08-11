@@ -12,7 +12,7 @@ using UnityEditor;
 
 namespace AIO.UEditor
 {
-    public partial class UtilsEditor
+    public partial class EHelper
     {
         public partial class Prefs
         {
@@ -130,7 +130,7 @@ namespace AIO.UEditor
             public static T LoadJsonData<T>(in string key, in T def = default)
             {
                 if (EditorPrefs.HasKey(string.Concat(key, "_Json"))) return def;
-                return UtilsGen.Json.Deserialize<T>(EditorPrefs.GetString(key));
+                return AHelper.Json.Deserialize<T>(EditorPrefs.GetString(key));
             }
 
             /// <summary>

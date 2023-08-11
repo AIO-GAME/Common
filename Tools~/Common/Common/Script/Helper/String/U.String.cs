@@ -11,7 +11,7 @@ using System.Security.Cryptography;
 using System.Text;
 using AIO;
 
-public partial class UtilsGen
+public partial class AHelper
 {
     /// <summary>
     /// 字符串工具库

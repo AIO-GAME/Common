@@ -11,7 +11,7 @@ using UnityEditor;
 
 namespace AIO.UEditor
 {
-    public partial class UtilsEditor
+    public partial class EHelper
     {
         public partial class Prefs
         {
@@ -207,7 +207,7 @@ namespace AIO.UEditor
             /// </summary>
             public static void SaveDictionary<K, V>(in string key, in IDictionary<K, V> values)
             {
-                EditorPrefs.SetString(string.Concat(key, "_IDictionary"), UtilsGen.Json.Serialize(values));
+                EditorPrefs.SetString(string.Concat(key, "_IDictionary"), AHelper.Json.Serialize(values));
             }
 
             /// <summary>
@@ -215,7 +215,7 @@ namespace AIO.UEditor
             /// </summary>
             public static void SaveList<V>(in string key, in IList<V> values)
             {
-                EditorPrefs.SetString(string.Concat(key, "_IList"), UtilsGen.Json.Serialize(values));
+                EditorPrefs.SetString(string.Concat(key, "_IList"), AHelper.Json.Serialize(values));
             }
 
             /// <summary>
@@ -223,7 +223,7 @@ namespace AIO.UEditor
             /// </summary>
             public static void SaveCollection<V>(in string key, in ICollection<V> values)
             {
-                EditorPrefs.SetString(string.Concat(key, "_ICollection"), UtilsGen.Json.Serialize(values));
+                EditorPrefs.SetString(string.Concat(key, "_ICollection"), AHelper.Json.Serialize(values));
             }
 
             /// <summary>
@@ -231,7 +231,7 @@ namespace AIO.UEditor
             /// </summary>
             public static void SaveJsonData<T>(in string key, in T value)
             {
-                EditorPrefs.SetString(string.Concat(key, "_Json"), UtilsGen.Json.Serialize(value));
+                EditorPrefs.SetString(string.Concat(key, "_Json"), AHelper.Json.Serialize(value));
             }
 
             /// <summary>

@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-07-24
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System.Collections;
@@ -25,7 +25,7 @@ namespace AIO.UEditor
                 .Select(PackageInfo.FindForAssetPath)
                 .GroupBy(x => x.assetPath)
                 .Select(x => x.First())
-                .Where(x => UtilsGen.IO.Exists(Path.Combine(x.resolvedPath, ".git")))
+                .Where(x => AHelper.IO.Exists(Path.Combine(x.resolvedPath, ".git")))
                 .ToList();
 
             return packageInfos;

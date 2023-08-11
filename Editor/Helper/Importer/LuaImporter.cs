@@ -69,7 +69,7 @@ namespace AIO.UEditor
 //             var hash = new Hashtable();
 //             hash.Set("instanceID", guid);
 //             if (importer != null) importer.Set("icon", hash);
-//             UtilsGen.IO.WriteUTF8(assetPath, UtilsGen.Yaml.Serialize(assetdata));
+//             AHelper.IO.WriteUTF8(assetPath, AHelper.Yaml.Serialize(assetdata));
 //         }
 //
 //         public static Hashtable GetMetaData(in string path)
@@ -79,7 +79,7 @@ namespace AIO.UEditor
 //                 info = new FileInfo(string.Concat(path, ".meta"));
 //             else info = new FileInfo(path);
 //             if (!info.Exists) return null;
-//             return UtilsGen.Yaml.Deserialize<Hashtable>(UtilsGen.IO.ReadUTF8(info.FullName));
+//             return AHelper.Yaml.Deserialize<Hashtable>(AHelper.IO.ReadUTF8(info.FullName));
 //         }
 //
 //         public static string GetGUId(in string path)

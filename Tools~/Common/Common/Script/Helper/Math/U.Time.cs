@@ -10,7 +10,7 @@ using System.Text;
 using EDateTimeUnit = Unit.Time.DateTimeUnit;
 using ESecondUnit = Unit.Time.SencondUnit;
 
-public partial class UtilsGen
+public partial class AHelper
 {
     /// <summary>
     /// 时间方法库

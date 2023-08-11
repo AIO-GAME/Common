@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> SAM
 |||✩ Date:     ||| -> 2023-08-11
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
@@ -63,7 +63,7 @@ namespace AIO.UEditor
         [MenuItem("Tools/Window/Dll Switcher")]
         public static void ShowWindow()
         {
-            UtilsEditor.Window.Open<DllSwitcherWindow>(MenuItem_Tools.DockedWindowTypes);
+            EHelper.Window.Open<DllSwitcherWindow>(MenuItem_Tools.DockedWindowTypes);
         }
 
         protected override void OnGUI()
@@ -192,18 +192,18 @@ namespace AIO.UEditor
             {
                 if (dllToSrc)
                 {
-                    if (fileIDMappingTableFromDll.ContainsKey(UtilsGen.FileID.Compute(type).ToString()))
+                    if (fileIDMappingTableFromDll.ContainsKey(AHelper.FileID.Compute(type).ToString()))
                     {
-                        Debug.LogWarning(string.Concat("Reduplicated GUID:", UtilsGen.FileID.Compute(type).ToString(), ";Script Name:", type.Name));
+                        Debug.LogWarning(string.Concat("Reduplicated GUID:", AHelper.FileID.Compute(type).ToString(), ";Script Name:", type.Name));
                     }
                     else
                     {
-                        fileIDMappingTableFromDll[UtilsGen.FileID.Compute(type).ToString()] = type.Name;
+                        fileIDMappingTableFromDll[AHelper.FileID.Compute(type).ToString()] = type.Name;
                     }
                 }
                 else
                 {
-                    fileIDMappingTableFromDll[type.Name] = UtilsGen.FileID.Compute(type).ToString();
+                    fileIDMappingTableFromDll[type.Name] = AHelper.FileID.Compute(type).ToString();
                 }
             }
 

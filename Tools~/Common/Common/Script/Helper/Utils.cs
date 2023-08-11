@@ -2,7 +2,7 @@
 /// <summary>
 /// Utils 工具库
 /// </summary>
-public partial class UtilsGen
+public partial class AHelper
 {
     // 空格	&nbsp;	&#160;
     // <	小于	&lt;	&#60;

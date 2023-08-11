@@ -55,7 +55,7 @@ namespace AIO
         /// <inheritdoc/>
         public sealed override int GetHashCode()
         {
-            return UtilsGen.Hash.GetHashCode(Data);
+            return AHelper.Hash.GetHashCode(Data);
         }
 
         /// <inheritdoc/>

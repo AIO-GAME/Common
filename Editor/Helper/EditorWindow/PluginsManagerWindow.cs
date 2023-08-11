@@ -73,7 +73,7 @@ namespace AIO.UEditor
             IntsallIndexList.Clear();
             UnIntsallIndexList.Clear();
 
-            foreach (var data in UtilsEditor.IO.GetAssetsRes<PluginsInfo>("t:PluginsInfo", "Packages"))
+            foreach (var data in EHelper.IO.GetAssetsRes<PluginsInfo>("t:PluginsInfo", "Packages"))
             {
                 var filename = data.Name;
                 if (!RootData.ContainsKey(filename))
@@ -288,7 +288,7 @@ namespace AIO.UEditor
                         {
                             if (GUILayout.Button("更新宏", GUILayout.Width(60), GUILayout.Height(20)))
                             {
-                                UtilsEditor.Symbols.AddScriptingDefine(Data.MacroDefinition.Split(';'));
+                                EHelper.Symbols.AddScriptingDefine(Data.MacroDefinition.Split(';'));
                                 AssetDatabase.Refresh();
 #if UNITY_2020_1_OR_NEWER
                                 AssetDatabase.RefreshSettings();

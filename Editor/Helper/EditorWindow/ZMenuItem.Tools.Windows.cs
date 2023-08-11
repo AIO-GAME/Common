@@ -37,25 +37,25 @@ namespace AIO.UEditor
         [MenuItem("Tools/Window/Editor Icons")]
         public static void OpenIconsListGraphWindow()
         {
-            UtilsEditor.Window.Open<IconsListGraphWindow>(DockedWindowTypes);
+            EHelper.Window.Open<IconsListGraphWindow>(DockedWindowTypes);
         }
 
         [MenuItem("Tools/Window/Script ID Viewer")]
         public static void OpenScriptIDWindow()
         {
-            UtilsEditor.Window.Open<ScriptIDWindow>(DockedWindowTypes);
+            EHelper.Window.Open<ScriptIDWindow>(DockedWindowTypes);
         }
 
         [MenuItem("Tools/Window/Package Manager")]
         public static void OpenPackageManagerWindow()
         {
-            UtilsEditor.Window.Open<PackageManagerWindow>(DockedWindowTypes);
+            EHelper.Window.Open<PackageManagerWindow>(DockedWindowTypes);
         }
 
         [MenuItem("Tools/Window/Plugins Manager")]
         public static void OpenPluginsManagerWindow()
         {
-            UtilsEditor.Window.Open<PluginsManagerWindow>(DockedWindowTypes);
+            EHelper.Window.Open<PluginsManagerWindow>(DockedWindowTypes);
         }
 
         private const string LABLE_AssestManagerWindow = "Assest Manager";
@@ -66,25 +66,25 @@ namespace AIO.UEditor
         [MenuItem("Tools/Window/" + LABLE_AssestManagerWindow, false, 101)]
         public static void OpenAssestManagerGraphWindow()
         {
-            UtilsEditor.Window.Open<AssestManagerGraphWindow>(DockedWindowTypes);
+            EHelper.Window.Open<AssestManagerGraphWindow>(DockedWindowTypes);
         }
 
         [MenuItem("Tools/Window/" + LABLE_BuiltInGUIStyleWindow, false, 102)]
         public static void OpenBuiltInGUIStyleGraphWindow()
         {
-            UtilsEditor.Window.Open<BuiltInGUIStyleGraphWindow>(DockedWindowTypes);
+            EHelper.Window.Open<BuiltInGUIStyleGraphWindow>(DockedWindowTypes);
         }
 
         [MenuItem("Tools/Window/" + LABLE_BuiltInTextureWindow, false, 103)]
         public static void OpenBuiltInTextureGraphWindow()
         {
-            UtilsEditor.Window.Open<BuiltInTextureGraphWindow>(DockedWindowTypes);
+            EHelper.Window.Open<BuiltInTextureGraphWindow>(DockedWindowTypes);
         }
 
         [MenuItem("Tools/Window/" + LABLE_ScriptingDefineSymbolsEditor, false, 104)]
         public static void OpenScriptingDefineSymbolsr()
         {
-            UtilsEditor.Window.Open<ScriptingDefineSymbols>(DockedWindowTypes);
+            EHelper.Window.Open<ScriptingDefineSymbols>(DockedWindowTypes);
         }
     }
 }

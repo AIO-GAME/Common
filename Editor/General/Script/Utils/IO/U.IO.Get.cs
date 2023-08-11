@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 
 namespace AIO.UEditor
 {
-    public partial class UtilsEditor
+    public partial class EHelper
     {
         /// <summary>
         /// Unity Editor IO Utils
@@ -181,7 +181,7 @@ namespace AIO.UEditor
                 if (!Directory.Exists(value)) return Array.Empty<string>();
                 value = System.IO.Path.GetFullPath(value);
                 if (!value.Contains(Path.Project)) return Array.Empty<string>();
-                return UtilsGen.IO.GetFilesInfo(value, pattern, option)
+                return AHelper.IO.GetFilesInfo(value, pattern, option)
                     .Select(item => item.FullName.Substring(Path.Project.Length));
             }
 
@@ -202,7 +202,7 @@ namespace AIO.UEditor
                 if (!Directory.Exists(value)) return Array.Empty<string>();
                 value = System.IO.Path.GetFullPath(value);
                 if (!value.Contains(Path.Project)) return Array.Empty<string>();
-                return UtilsGen.IO.GetFilesInfo(value, filtration, pattern, option)
+                return AHelper.IO.GetFilesInfo(value, filtration, pattern, option)
                     .Select(item => item.FullName.Substring(Path.Project.Length));
             }
 
@@ -224,7 +224,7 @@ namespace AIO.UEditor
                 value = System.IO.Path.GetFullPath(value);
                 if (!value.Contains(Path.Project)) return Array.Empty<string>();
                 return
-                    from item in UtilsGen.IO.GetFilesInfo(value, filtration, pattern, option)
+                    from item in AHelper.IO.GetFilesInfo(value, filtration, pattern, option)
                     where !item.Extension.Contains(".meta")
                     select item.FullName.Substring(Path.Project.Length);
             }
@@ -245,7 +245,7 @@ namespace AIO.UEditor
                 value = System.IO.Path.GetFullPath(value);
                 if (!value.Contains(Path.Project)) return Array.Empty<string>();
                 return
-                    from item in UtilsGen.IO.GetFilesInfo(value, pattern, option)
+                    from item in AHelper.IO.GetFilesInfo(value, pattern, option)
                     where !item.Extension.Contains(".meta")
                     select item.FullName.Substring(Path.Project.Length);
             }

@@ -15,7 +15,7 @@ namespace AIO.UEditor
     /// <summary>
     /// Utils Unity Editor
     /// </summary>
-    public static partial class UtilsEditor
+    public static partial class EHelper
     {
         /// <summary>
         /// 程序设置

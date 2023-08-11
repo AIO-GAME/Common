@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 
-public partial class UtilsGen
+public partial class AHelper
 {
     /// <summary>
     /// 计算MD5

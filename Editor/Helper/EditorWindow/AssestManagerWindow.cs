@@ -48,7 +48,7 @@ namespace AIO.UEditor
         private void OpenTexture()
         {
             if (TextureWindow == null)
-                TextureWindow = UtilsEditor.Window.Open<BuiltInTextureGraphWindow>("Texture Manager", true, true);
+                TextureWindow = EHelper.Window.Open<BuiltInTextureGraphWindow>("Texture Manager", true, true);
             TextureWindow.Show(true);
         }
 
@@ -58,7 +58,7 @@ namespace AIO.UEditor
         private void OpenCScript()
         {
             if (CScriptWindow == null)
-                CScriptWindow = UtilsEditor.Window.Open<CScriptManagerGraphWindow>("CScript Manager", true, true);
+                CScriptWindow = EHelper.Window.Open<CScriptManagerGraphWindow>("CScript Manager", true, true);
             CScriptWindow.Show(true);
         }
     }

@@ -8674,87 +8674,87 @@
             maximum length of address
             </summary>
         </member>
-        <member name="T:UtilsGen">
+        <member name="T:AHelper">
             <summary>
             Utils 工具库
             </summary>
         </member>
-        <member name="T:UtilsGen.FileID">
+        <member name="T:AHelper.FileID">
             <summary>
             Unity File ID MD4 算法
             </summary>
         </member>
-        <member name="M:UtilsGen.FileID.Compute``1(``0)">
+        <member name="M:AHelper.FileID.Compute``1(``0)">
             <summary>
             计算类型的 FileID
             </summary>
             <param name="v">类型</param>
             <returns>fileid</returns>
         </member>
-        <member name="M:UtilsGen.FileID.Compute(System.Type)">
+        <member name="M:AHelper.FileID.Compute(System.Type)">
             <summary>
             计算类型的 FileID
             </summary>
             <param name="type">类型</param>
             <returns>fileid</returns>
         </member>
-        <member name="M:UtilsGen.FileID.Compute``1">
+        <member name="M:AHelper.FileID.Compute``1">
             <summary>
             计算类型的 FileID
             </summary>
             <returns>fileid</returns>
         </member>
-        <member name="T:UtilsGen.Base64">
+        <member name="T:AHelper.Base64">
             <summary>
             Base64 文件 解析
             </summary>
         </member>
-        <member name="M:UtilsGen.Base64.Serialize``1(``0)">
+        <member name="M:AHelper.Base64.Serialize``1(``0)">
             <summary>
             序列化 未加密
             </summary>
         </member>
-        <member name="M:UtilsGen.Base64.Serialize``1(``0@)">
+        <member name="M:AHelper.Base64.Serialize``1(``0@)">
             <summary>
             序列化 未加密
             </summary>
         </member>
-        <member name="M:UtilsGen.Base64.Serialize(System.Byte[],System.Base64FormattingOptions)">
+        <member name="M:AHelper.Base64.Serialize(System.Byte[],System.Base64FormattingOptions)">
             <summary>
             序列化 未加密
             </summary>
         </member>
-        <member name="M:UtilsGen.Base64.Serialize(System.String,System.Text.Encoding)">
+        <member name="M:AHelper.Base64.Serialize(System.String,System.Text.Encoding)">
             <summary>
             序列化 未加密
             </summary>
         </member>
-        <member name="M:UtilsGen.Base64.Deserialize``1(System.String)">
+        <member name="M:AHelper.Base64.Deserialize``1(System.String)">
             <summary>
             反序列化 未加密
             </summary>
         </member>
-        <member name="T:UtilsGen.Binary">
+        <member name="T:AHelper.Binary">
             <summary>
             Binary 文件 解析
             </summary>
         </member>
-        <member name="M:UtilsGen.Binary.Serialize``1(``0@)">
+        <member name="M:AHelper.Binary.Serialize``1(``0@)">
             <summary>
             序列化 未加密
             </summary>
         </member>
-        <member name="M:UtilsGen.Binary.Deserialize``1(System.Byte[]@)">
+        <member name="M:AHelper.Binary.Deserialize``1(System.Byte[]@)">
             <summary>
             反序列化 未加密
             </summary>
         </member>
-        <member name="T:UtilsGen.DataEncrypt">
+        <member name="T:AHelper.DataEncrypt">
             <summary>
             数据加密解密
             </summary>
         </member>
-        <member name="M:UtilsGen.DataEncrypt.Encrypt(System.Byte[],System.Byte[],System.Byte[])">
+        <member name="M:AHelper.DataEncrypt.Encrypt(System.Byte[],System.Byte[],System.Byte[])">
             <summary>
             加密
             </summary>
@@ -8763,22 +8763,22 @@
             <param name="rgbIV">对称算法的初始化向量</param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.DataEncrypt.Encrypt(System.Byte[])">
+        <member name="M:AHelper.DataEncrypt.Encrypt(System.Byte[])">
             <summary>
             加密
             </summary>
         </member>
-        <member name="M:UtilsGen.DataEncrypt.Encrypt(System.String)">
+        <member name="M:AHelper.DataEncrypt.Encrypt(System.String)">
             <summary>
             加密
             </summary>
         </member>
-        <member name="M:UtilsGen.DataEncrypt.EncryptToStr(System.String)">
+        <member name="M:AHelper.DataEncrypt.EncryptToStr(System.String)">
             <summary>
             加密
             </summary>
         </member>
-        <member name="M:UtilsGen.DataEncrypt.Decrypt(System.Byte[],System.Byte[],System.Byte[])">
+        <member name="M:AHelper.DataEncrypt.Decrypt(System.Byte[],System.Byte[],System.Byte[])">
             <summary>
             解码 
             </summary>
@@ -8786,37 +8786,37 @@
             <param name="rgbKey">对称算法的密钥</param>
             <param name="rgbIV">对称算法的初始化向量</param>
         </member>
-        <member name="M:UtilsGen.DataEncrypt.Decrypt(System.Byte[])">
+        <member name="M:AHelper.DataEncrypt.Decrypt(System.Byte[])">
             <summary>
             解码 
             </summary>
         </member>
-        <member name="M:UtilsGen.DataEncrypt.DecryptToStr(System.Byte[])">
+        <member name="M:AHelper.DataEncrypt.DecryptToStr(System.Byte[])">
             <summary>
             解码 
             </summary>
         </member>
-        <member name="M:UtilsGen.DataEncrypt.Decrypt(System.String)">
+        <member name="M:AHelper.DataEncrypt.Decrypt(System.String)">
             <summary>
             解码 
             </summary>
         </member>
-        <member name="T:UtilsGen.HashTable">
+        <member name="T:AHelper.HashTable">
             <summary>
             HashTabel 工具类
             </summary>
         </member>
-        <member name="M:UtilsGen.HashTable.Create(System.Object[])">
+        <member name="M:AHelper.HashTable.Create(System.Object[])">
             <summary>
             创建
             </summary>
         </member>
-        <member name="M:UtilsGen.HashTable.Create(System.Collections.Generic.IDictionary{System.Object,System.Object})">
+        <member name="M:AHelper.HashTable.Create(System.Collections.Generic.IDictionary{System.Object,System.Object})">
             <summary>
             创建
             </summary>
         </member>
-        <member name="T:UtilsGen.Json">
+        <member name="T:AHelper.Json">
             <summary>
             Json 工具类
             </summary>
@@ -8824,329 +8824,329 @@
                 <cref>https://www.newtonsoft.com/json/help/html/N_Newtonsoft_Json.htm</cref>
             </see>
         </member>
-        <member name="P:UtilsGen.Json.JSONNormalSettings">
+        <member name="P:AHelper.Json.JSONNormalSettings">
             <summary>
             Json默认设置
             </summary>
         </member>
-        <member name="M:UtilsGen.Json.Serialize(System.Object@)">
+        <member name="M:AHelper.Json.Serialize(System.Object@)">
             <summary>
             序列化
             </summary>
         </member>
-        <member name="M:UtilsGen.Json.Serialize(System.Object@,Newtonsoft.Json.JsonSerializerSettings@)">
+        <member name="M:AHelper.Json.Serialize(System.Object@,Newtonsoft.Json.JsonSerializerSettings@)">
             <summary>
             序列化
             </summary>
         </member>
-        <member name="M:UtilsGen.Json.Serialize``1(``0@,Newtonsoft.Json.JsonSerializerSettings@)">
+        <member name="M:AHelper.Json.Serialize``1(``0@,Newtonsoft.Json.JsonSerializerSettings@)">
             <summary>
             序列化
             </summary>
         </member>
-        <member name="M:UtilsGen.Json.Serialize``1(``0@)">
+        <member name="M:AHelper.Json.Serialize``1(``0@)">
             <summary>
             序列化
             </summary>
         </member>
-        <member name="M:UtilsGen.Json.Deserialize(System.String@,Newtonsoft.Json.JsonSerializerSettings@)">
+        <member name="M:AHelper.Json.Deserialize(System.String@,Newtonsoft.Json.JsonSerializerSettings@)">
             <summary>
             反序列化
             </summary>
         </member>
-        <member name="M:UtilsGen.Json.Deserialize(System.String@)">
+        <member name="M:AHelper.Json.Deserialize(System.String@)">
             <summary>
             反序列化
             </summary>
         </member>
-        <member name="M:UtilsGen.Json.Deserialize``1(System.String@,Newtonsoft.Json.JsonSerializerSettings@)">
+        <member name="M:AHelper.Json.Deserialize``1(System.String@,Newtonsoft.Json.JsonSerializerSettings@)">
             <summary>
             反序列化
             </summary>
         </member>
-        <member name="M:UtilsGen.Json.Deserialize``1(System.String@)">
+        <member name="M:AHelper.Json.Deserialize``1(System.String@)">
             <summary>
             反序列化
             </summary>
         </member>
-        <member name="M:UtilsGen.Json.Deserialize(System.String@,System.Type@,Newtonsoft.Json.JsonSerializerSettings@)">
+        <member name="M:AHelper.Json.Deserialize(System.String@,System.Type@,Newtonsoft.Json.JsonSerializerSettings@)">
             <summary>
             反序列化
             </summary>
         </member>
-        <member name="M:UtilsGen.Json.Deserialize(System.String@,System.Type@)">
+        <member name="M:AHelper.Json.Deserialize(System.String@,System.Type@)">
             <summary>
             反序列化
             </summary>
         </member>
-        <member name="M:UtilsGen.Json.PopulateObject``1(System.String,``0,Newtonsoft.Json.JsonSerializerSettings@)">
+        <member name="M:AHelper.Json.PopulateObject``1(System.String,``0,Newtonsoft.Json.JsonSerializerSettings@)">
             <summary>
             反序列化 填充对象
             </summary>
         </member>
-        <member name="M:UtilsGen.Json.PopulateObject``1(System.String,``0)">
+        <member name="M:AHelper.Json.PopulateObject``1(System.String,``0)">
             <summary>
             反序列化 填充对象
             </summary>
         </member>
-        <member name="M:UtilsGen.Json.PopulateObject(System.String,System.Object,Newtonsoft.Json.JsonSerializerSettings@)">
+        <member name="M:AHelper.Json.PopulateObject(System.String,System.Object,Newtonsoft.Json.JsonSerializerSettings@)">
             <summary>
             反序列化 填充对象
             </summary>
         </member>
-        <member name="M:UtilsGen.Json.PopulateObject(System.String,System.Object)">
+        <member name="M:AHelper.Json.PopulateObject(System.String,System.Object)">
             <summary>
             反序列化 填充对象
             </summary>
         </member>
-        <member name="T:UtilsGen.Sort">
+        <member name="T:AHelper.Sort">
             <summary>
             排序工具
             默认排序方向 从小到大
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.AutomaticArray``1(System.Array@,``0@)">
+        <member name="M:AHelper.Sort.AutomaticArray``1(System.Array@,``0@)">
             <summary>
             自动扩容，并保存数据
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Counting(System.Collections.Generic.IList{System.Int32}@)">
+        <member name="M:AHelper.Sort.Counting(System.Collections.Generic.IList{System.Int32}@)">
             <summary>
             计数排序
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Counting(System.Collections.Generic.IList{System.Int64}@)">
+        <member name="M:AHelper.Sort.Counting(System.Collections.Generic.IList{System.Int64}@)">
             <summary>
             计数排序
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Radix(System.Collections.Generic.IList{System.Int64}@)">
+        <member name="M:AHelper.Sort.Radix(System.Collections.Generic.IList{System.Int64}@)">
             <summary>
             基数排序
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Radix(System.Collections.Generic.IList{System.Int32}@)">
+        <member name="M:AHelper.Sort.Radix(System.Collections.Generic.IList{System.Int32}@)">
             <summary>
             基数排序
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Radix(System.Collections.Generic.IList{System.Int16}@)">
+        <member name="M:AHelper.Sort.Radix(System.Collections.Generic.IList{System.Int16}@)">
             <summary>
             基数排序
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Bucket(System.Collections.Generic.IList{System.Int64}@)">
+        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Int64}@)">
             <summary>
             桶排序
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Bucket(System.Collections.Generic.IList{System.Int32}@)">
+        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Int32}@)">
             <summary>
             桶排序
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Bucket(System.Collections.Generic.IList{System.Int16}@)">
+        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Int16}@)">
             <summary>
             桶排序
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Bucket(System.Collections.Generic.IList{System.Single}@,System.Int32@)">
+        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Single}@,System.Int32@)">
             <summary>
             桶排序
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Bucket(System.Collections.Generic.IList{System.Double}@,System.Int32@)">
+        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Double}@,System.Int32@)">
             <summary>
             桶排序
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Bucket(System.Collections.Generic.IList{System.Decimal}@,System.Int32@)">
+        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Decimal}@,System.Int32@)">
             <summary>
             桶排序
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.InsertIntoLinkList``1(System.Collections.Generic.LinkedList{``0},``0)">
+        <member name="M:AHelper.Sort.InsertIntoLinkList``1(System.Collections.Generic.LinkedList{``0},``0)">
             <summary>  
             按升序插入 linklist   
             </summary>  
             <param name="linkedList"> 要排序的链表 </param>  
             <param name="num"> 要插入排序的数字 </param>  
         </member>
-        <member name="M:UtilsGen.Sort.Merge``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
+        <member name="M:AHelper.Sort.Merge``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
             <summary>
             归并排序
             数据量:1000以下适用
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Merge``1(System.Collections.Generic.IList{``0}@)">
+        <member name="M:AHelper.Sort.Merge``1(System.Collections.Generic.IList{``0}@)">
             <summary>
             归并排序
             数据量:1000以下适用
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Heap``1(System.Collections.Generic.IList{``0}@)">
+        <member name="M:AHelper.Sort.Heap``1(System.Collections.Generic.IList{``0}@)">
             <summary>
             堆排序
             数据量:1000以下适用
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.HeapSort_MaxHeaping``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@)">
+        <member name="M:AHelper.Sort.HeapSort_MaxHeaping``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@)">
             <summary>
             将指定的结点调整为堆。
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Heap``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
+        <member name="M:AHelper.Sort.Heap``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
             <summary>
             堆排序
             数据量:1000以下适用
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.HeapSort_MaxHeaping``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@,System.Func{``0,``0,System.Int32}@)">
+        <member name="M:AHelper.Sort.HeapSort_MaxHeaping``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@,System.Func{``0,``0,System.Int32}@)">
             <summary>
             将指定的结点调整为堆。
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Select``1(System.Collections.Generic.IList{``0}@)">
+        <member name="M:AHelper.Sort.Select``1(System.Collections.Generic.IList{``0}@)">
             <summary>
             选择排序 数据量:100以下适用
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Select``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
+        <member name="M:AHelper.Sort.Select``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
             <summary>
             选择排序 数据量:100以下适用
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Shell``1(System.Collections.Generic.IList{``0}@)">
+        <member name="M:AHelper.Sort.Shell``1(System.Collections.Generic.IList{``0}@)">
             <summary>
             希尔排序
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Shell``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
+        <member name="M:AHelper.Sort.Shell``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
             <summary>
             希尔排序
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Insert``1(System.Collections.Generic.IList{``0}@)">
+        <member name="M:AHelper.Sort.Insert``1(System.Collections.Generic.IList{``0}@)">
             <summary>
             插入排序
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Insert``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
+        <member name="M:AHelper.Sort.Insert``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
             <summary>
             插入排序
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Quick``1(System.Collections.Generic.IList{``0}@)">
+        <member name="M:AHelper.Sort.Quick``1(System.Collections.Generic.IList{``0}@)">
             <summary>
             快速排序
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Quick``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
+        <member name="M:AHelper.Sort.Quick``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
             <summary>
             快速排序
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Bubble``1(System.Collections.Generic.IList{``0}@)">
+        <member name="M:AHelper.Sort.Bubble``1(System.Collections.Generic.IList{``0}@)">
             <summary>
             单向冒泡排序
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.Bubble``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
+        <member name="M:AHelper.Sort.Bubble``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
             <summary>
             单向冒泡排序
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.BubbleTwoWay``1(System.Collections.Generic.IList{``0}@)">
+        <member name="M:AHelper.Sort.BubbleTwoWay``1(System.Collections.Generic.IList{``0}@)">
             <summary>
             双向冒泡排序
             </summary>
         </member>
-        <member name="M:UtilsGen.Sort.BubbleTwoWay``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
+        <member name="M:AHelper.Sort.BubbleTwoWay``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
             <summary>
             双向冒泡排序
             </summary>
         </member>
-        <member name="T:UtilsGen.Xml">
+        <member name="T:AHelper.Xml">
             <summary>
             XML 工具类
             </summary>
         </member>
-        <member name="M:UtilsGen.Xml.Serialize``1(``0@,System.String@,System.Text.Encoding@)">
+        <member name="M:AHelper.Xml.Serialize``1(``0@,System.String@,System.Text.Encoding@)">
             <summary>
             序列化
             </summary>
         </member>
-        <member name="M:UtilsGen.Xml.Deserialize``1(System.String@,System.Text.Encoding@)">
+        <member name="M:AHelper.Xml.Deserialize``1(System.String@,System.Text.Encoding@)">
             <summary>
             反序列化
             </summary>
         </member>
-        <member name="T:UtilsGen.Yaml">
+        <member name="T:AHelper.Yaml">
             <summary>
             Yaml 解析
             </summary>
         </member>
-        <member name="M:UtilsGen.Yaml.Serialize(System.Object@)">
+        <member name="M:AHelper.Yaml.Serialize(System.Object@)">
             <summary>
             序列化
             </summary>
         </member>
-        <member name="M:UtilsGen.Yaml.ToJson(System.String@)">
+        <member name="M:AHelper.Yaml.ToJson(System.String@)">
             <summary>
             序列化
             </summary>
         </member>
-        <member name="M:UtilsGen.Yaml.Deserialize``1(System.String@)">
+        <member name="M:AHelper.Yaml.Deserialize``1(System.String@)">
             <summary>
             反序列化
             </summary>
         </member>
-        <member name="T:UtilsGen.Guid">
+        <member name="T:AHelper.Guid">
             <summary>
             生成一个新的 GUID 对象。
             </summary>
             <returns>新的 GUID 对象。</returns>
         </member>
-        <member name="M:UtilsGen.Guid.New">
+        <member name="M:AHelper.Guid.New">
             <summary>
             生成一个新的 GUID 对象。
             </summary>
             <returns>新的 GUID 对象。</returns>
         </member>
-        <member name="M:UtilsGen.Guid.New(System.String@)">
+        <member name="M:AHelper.Guid.New(System.String@)">
             <summary>
             生成一个新的 GUID 字符串。
             </summary>
             <param name="format">指定 GUID 字符串的格式，默认为 "N" 格式。</param>
             <returns>新的 GUID 字符串。</returns>
         </member>
-        <member name="M:UtilsGen.Guid.NewBase64">
+        <member name="M:AHelper.Guid.NewBase64">
             <summary>
             生成一个新的 Base64 编码的 GUID 字符串。
             </summary>
             <returns>新的 Base64 编码的 GUID 字符串。</returns>
         </member>
-        <member name="T:UtilsGen.IO">
+        <member name="T:AHelper.IO">
             <summary>
             IO工具类
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.ClearFolder(System.String@)">
+        <member name="M:AHelper.IO.ClearFolder(System.String@)">
             <summary>
             清空当前文件夹
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.ClearFolder(System.IO.DirectoryInfo@)">
+        <member name="M:AHelper.IO.ClearFolder(System.IO.DirectoryInfo@)">
             <summary>
             清空当前文件夹
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.CopyChildNode(System.String@,System.String@,System.Boolean@)">
+        <member name="M:AHelper.IO.CopyChildNode(System.String@,System.String@,System.Boolean@)">
             <summary>
             拷贝子节点
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.CopyFolderPart(System.String@,System.String@,System.Boolean@)">
+        <member name="M:AHelper.IO.CopyFolderPart(System.String@,System.String@,System.Boolean@)">
             <summary>
             复制文件夹及文件 部分 根文件名不会复制 适合重命名
             </summary>
@@ -9154,7 +9154,7 @@
             <param name="destinationFilePath">目标文件路径</param>
             <param name="overwrite"></param>
         </member>
-        <member name="M:UtilsGen.IO.CopyFolderAll(System.String@,System.String@,System.Boolean@)">
+        <member name="M:AHelper.IO.CopyFolderAll(System.String@,System.String@,System.Boolean@)">
             <summary>
             复制文件夹及文件 全部
             </summary> 根文件名一起复制
@@ -9162,12 +9162,12 @@
             <param name="destinationFilePath">目标文件路径</param>
             <param name="overwrite"></param>
         </member>
-        <member name="M:UtilsGen.IO.CopyFile(System.String@,System.String@,System.Boolean@)">
+        <member name="M:AHelper.IO.CopyFile(System.String@,System.String@,System.Boolean@)">
             <summary>
             复制文件
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.CopyFile(System.String@,System.String@,System.Int32@)">
+        <member name="M:AHelper.IO.CopyFile(System.String@,System.String@,System.Int32@)">
             <summary>
             复制文件
             </summary>
@@ -9176,14 +9176,14 @@
             <param name="bufferSize">缓冲区大小，用于每次读取和写入的字节数</param>
             <returns>是否成功复制文件</returns>
         </member>
-        <member name="M:UtilsGen.IO.CreateFolder(System.String@,System.Boolean@)">
+        <member name="M:AHelper.IO.CreateFolder(System.String@,System.Boolean@)">
             <summary>
             创建文件夹
             </summary>
             <param name="folder">文件夹路径</param>
             <param name="clear">清除</param>
         </member>
-        <member name="M:UtilsGen.IO.DeleteFileAsync(System.String,System.String,System.IO.SearchOption)">
+        <member name="M:AHelper.IO.DeleteFileAsync(System.String,System.String,System.IO.SearchOption)">
             <summary>
             删除文件
             </summary>
@@ -9191,75 +9191,75 @@
             <param name="pattern">匹配模式</param>
             <param name="option">查询模式</param>
         </member>
-        <member name="M:UtilsGen.IO.DeleteFileAsync(System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:AHelper.IO.DeleteFileAsync(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
             删除文件
             </summary>
             <param name="list">文件列表</param>
         </member>
-        <member name="M:UtilsGen.IO.DeleteFileAsync(System.Collections.Generic.IEnumerable{System.IO.FileInfo})">
+        <member name="M:AHelper.IO.DeleteFileAsync(System.Collections.Generic.IEnumerable{System.IO.FileInfo})">
             <summary>
             删除文件
             </summary>
             <param name="list">文件列表</param>
         </member>
-        <member name="M:UtilsGen.IO.DeleteFolderAsync(System.String,System.IO.SearchOption,System.Boolean)">
+        <member name="M:AHelper.IO.DeleteFolderAsync(System.String,System.IO.SearchOption,System.Boolean)">
             <summary>
             删除文件夹
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.DeleteFolderAsync(System.IO.DirectoryInfo,System.IO.SearchOption,System.Boolean)">
+        <member name="M:AHelper.IO.DeleteFolderAsync(System.IO.DirectoryInfo,System.IO.SearchOption,System.Boolean)">
             <summary>
             删除文件夹
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.DeleteFolderAsync(System.Collections.Generic.IEnumerable{System.String},System.IO.SearchOption,System.Boolean)">
+        <member name="M:AHelper.IO.DeleteFolderAsync(System.Collections.Generic.IEnumerable{System.String},System.IO.SearchOption,System.Boolean)">
             <summary>
             删除文件夹
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.DeleteFolderAsync(System.Collections.Generic.IEnumerable{System.IO.DirectoryInfo},System.IO.SearchOption,System.Boolean)">
+        <member name="M:AHelper.IO.DeleteFolderAsync(System.Collections.Generic.IEnumerable{System.IO.DirectoryInfo},System.IO.SearchOption,System.Boolean)">
             <summary>
             删除文件夹
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.DeleteFile(System.String@)">
+        <member name="M:AHelper.IO.DeleteFile(System.String@)">
             <summary>
             删除文件
             </summary>
             <param name="path">文件相对路径</param>
         </member>
-        <member name="M:UtilsGen.IO.DeleteFile(System.IO.FileInfo@)">
+        <member name="M:AHelper.IO.DeleteFile(System.IO.FileInfo@)">
             <summary>
             删除文件
             </summary>
             <param name="path">文件相对路径</param>
         </member>
-        <member name="M:UtilsGen.IO.DeleteFile(System.Collections.Generic.IEnumerable{System.String}@)">
+        <member name="M:AHelper.IO.DeleteFile(System.Collections.Generic.IEnumerable{System.String}@)">
             <summary>
             删除文件
             </summary>
             <param name="list">文件相对路径</param>
         </member>
-        <member name="M:UtilsGen.IO.DeleteFile(System.Collections.Generic.IEnumerable{System.IO.FileInfo}@)">
+        <member name="M:AHelper.IO.DeleteFile(System.Collections.Generic.IEnumerable{System.IO.FileInfo}@)">
             <summary>
             删除文件
             </summary>
             <param name="list">文件相对路径</param>
         </member>
-        <member name="M:UtilsGen.IO.DeleteFile(System.IO.FileInfo[])">
+        <member name="M:AHelper.IO.DeleteFile(System.IO.FileInfo[])">
             <summary>
             删除文件
             </summary>
             <param name="list">文件相对路径</param>
         </member>
-        <member name="M:UtilsGen.IO.DeleteFile(System.String[])">
+        <member name="M:AHelper.IO.DeleteFile(System.String[])">
             <summary>
             删除文件
             </summary>
             <param name="list">文件相对路径</param>
         </member>
-        <member name="M:UtilsGen.IO.DeleteFile(System.String@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AHelper.IO.DeleteFile(System.String@,System.String@,System.IO.SearchOption@)">
             <summary>
             删除指定文件夹下 指定类型文件
             </summary>
@@ -9267,50 +9267,50 @@
             <param name="pattern">匹配模式</param>
             <param name="option">查询模式</param>
         </member>
-        <member name="M:UtilsGen.IO.DeleteFolder(System.IO.DirectoryInfo@,System.IO.SearchOption@,System.Boolean@)">
+        <member name="M:AHelper.IO.DeleteFolder(System.IO.DirectoryInfo@,System.IO.SearchOption@,System.Boolean@)">
             <summary>
             删除文件夹
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.DeleteFolder(System.String@,System.IO.SearchOption@,System.Boolean@)">
+        <member name="M:AHelper.IO.DeleteFolder(System.String@,System.IO.SearchOption@,System.Boolean@)">
             <summary>
             删除文件夹
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.DeleteFolder(System.Collections.Generic.IEnumerable{System.String}@,System.IO.SearchOption,System.Boolean)">
+        <member name="M:AHelper.IO.DeleteFolder(System.Collections.Generic.IEnumerable{System.String}@,System.IO.SearchOption,System.Boolean)">
             <summary>
             删除文件夹
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.DeleteFolder(System.Collections.Generic.IEnumerable{System.IO.DirectoryInfo}@,System.IO.SearchOption,System.Boolean)">
+        <member name="M:AHelper.IO.DeleteFolder(System.Collections.Generic.IEnumerable{System.IO.DirectoryInfo}@,System.IO.SearchOption,System.Boolean)">
             <summary>
             删除文件夹
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.EncodingBitByte(System.Byte@)">
+        <member name="M:AHelper.IO.EncodingBitByte(System.Byte@)">
             <summary>
             字节位运算加密
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.Exists(System.String)">
+        <member name="M:AHelper.IO.Exists(System.String)">
             <summary>
             判断当前路径是否存在 不管是以文件夹 还是 文件的形式存在
             </summary>
             <returns>True:存在 False:不存在</returns>
         </member>
-        <member name="M:UtilsGen.IO.ExistsFile(System.String@)">
+        <member name="M:AHelper.IO.ExistsFile(System.String@)">
             <summary>
             判断文件是否存在
             </summary>
             <returns>True:存在 False:不存在</returns>
         </member>
-        <member name="M:UtilsGen.IO.ExistsFolder(System.String@)">
+        <member name="M:AHelper.IO.ExistsFolder(System.String@)">
             <summary>
             判断目录是否存在
             </summary>
             <returns>True:存在 False:不存在</returns>
         </member>
-        <member name="M:UtilsGen.IO.FindPaths(System.String@,System.IO.SearchOption@,System.String[])">
+        <member name="M:AHelper.IO.FindPaths(System.String@,System.IO.SearchOption@,System.String[])">
             <summary>
             查询匹配 返回符合条件的路径
             </summary>
@@ -9319,7 +9319,7 @@
             <param name="searchPatterns">条件 "*value*"</param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.IO.FindPaths(System.String@,System.IO.SearchOption@,System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:AHelper.IO.FindPaths(System.String@,System.IO.SearchOption@,System.Collections.Generic.IEnumerable{System.String})">
             <summary>
             查询匹配 返回符合条件的路径
             </summary>
@@ -9328,7 +9328,7 @@
             <param name="searchPatterns">条件 "*value*"</param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.IO.TryPathsForFile(System.String,System.Collections.Generic.IEnumerable{System.String}@)">
+        <member name="M:AHelper.IO.TryPathsForFile(System.String,System.Collections.Generic.IEnumerable{System.String}@)">
             <summary>
             在给定的文件夹路径列表中查找指定文件名的文件，并返回第一个存在的文件完整路径。
             </summary>
@@ -9336,7 +9336,7 @@
             <param name="directories">包含所有可能包含该文件的文件夹路径的 IEnumerable 类型实例。</param>
             <returns>如果找到该文件，则返回完整路径，否则返回 null。</returns>
         </member>
-        <member name="M:UtilsGen.IO.TryPathsForFile(System.String@,System.String[])">
+        <member name="M:AHelper.IO.TryPathsForFile(System.String@,System.String[])">
             <summary>
             在给定的文件夹路径列表中查找指定文件名的文件，并返回第一个存在的文件完整路径。
             </summary>
@@ -9344,7 +9344,7 @@
             <param name="directories">包含所有可能包含该文件的文件夹路径的可变参数数组。</param>
             <returns>如果找到该文件，则返回完整路径，否则返回 null。</returns>
         </member>
-        <member name="M:UtilsGen.IO.GetRelativePath(System.String,System.String)">
+        <member name="M:AHelper.IO.GetRelativePath(System.String,System.String)">
             <summary>
             获取指定路径相对于给定目录的相对路径。
             </summary>
@@ -9354,7 +9354,7 @@
             <exception cref="T:System.ArgumentNullException">当 path 或 directory 为 null 时，抛出此异常。</exception>
             <exception cref="T:System.UriFormatException">使用 URI 库时，如果 path 或 directory 不是有效的 URI 字符串，则抛出此异常。</exception>
         </member>
-        <member name="M:UtilsGen.IO.GetFilesInfo(System.String@,System.Func{System.IO.FileInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AHelper.IO.GetFilesInfo(System.String@,System.Func{System.IO.FileInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
             <summary>
             获取当前所有文件夹中所有文件信息
             </summary>
@@ -9364,17 +9364,17 @@
             <param name="option">搜查模式</param>
             <returns>所有文件信息数组</returns>
         </member>
-        <member name="M:UtilsGen.IO.GetFilesInfo(System.String@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AHelper.IO.GetFilesInfo(System.String@,System.String@,System.IO.SearchOption@)">
             <summary>
             获取当前所有文件夹中所有文件信息
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.GetFilesInfo(System.IO.DirectoryInfo@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AHelper.IO.GetFilesInfo(System.IO.DirectoryInfo@,System.String@,System.IO.SearchOption@)">
             <summary>
             获取当前所有文件夹中所有文件信息
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.GetFiles(System.String@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AHelper.IO.GetFiles(System.String@,System.String@,System.IO.SearchOption@)">
             <summary>
             获取该文件夹下所有文件 绝对路径
             </summary>
@@ -9383,7 +9383,7 @@
             <param name="option">搜索模式</param>
             <returns>所有文件夹 绝对路径</returns>
         </member>
-        <member name="M:UtilsGen.IO.GetFiles(System.String@,System.Func{System.IO.FileInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AHelper.IO.GetFiles(System.String@,System.Func{System.IO.FileInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
             <summary>
             获取该文件夹下所有文件 绝对路径
             </summary>
@@ -9393,7 +9393,7 @@
             <param name="option">搜索模式</param>
             <returns>所有文件夹 绝对路径</returns>
         </member>
-        <member name="M:UtilsGen.IO.GetFilesRelative(System.String@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AHelper.IO.GetFilesRelative(System.String@,System.String@,System.IO.SearchOption@)">
             <summary>
             获取该文件夹下所有文件 相对路径
             </summary>
@@ -9402,7 +9402,7 @@
             <param name="option">搜索模式</param>
             <returns>所有文件夹 相对路径</returns>
         </member>
-        <member name="M:UtilsGen.IO.GetFilesRelative(System.String@,System.Func{System.IO.FileInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AHelper.IO.GetFilesRelative(System.String@,System.Func{System.IO.FileInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
             <summary>
             获取该文件夹下所有文件 相对路径
             </summary>
@@ -9412,7 +9412,7 @@
             <param name="option">搜索模式</param>
             <returns>所有文件夹 相对路径</returns>
         </member>
-        <member name="M:UtilsGen.IO.GetFilesName(System.String@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AHelper.IO.GetFilesName(System.String@,System.String@,System.IO.SearchOption@)">
             <summary>
             获取该文件夹下所有文件名称
             </summary>
@@ -9421,7 +9421,7 @@
             <param name="option">搜索模式</param>
             <returns>所有文件名称</returns>
         </member>
-        <member name="M:UtilsGen.IO.GetFilesName(System.String@,System.Func{System.IO.FileInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AHelper.IO.GetFilesName(System.String@,System.Func{System.IO.FileInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
             <summary>
             获取该文件夹下所有文件名称
             </summary>
@@ -9431,7 +9431,7 @@
             <param name="option">搜索模式</param>
             <returns>所有文件名称</returns>
         </member>
-        <member name="M:UtilsGen.IO.GetFoldersInfo(System.String@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AHelper.IO.GetFoldersInfo(System.String@,System.String@,System.IO.SearchOption@)">
             <summary>
             获取文件夹数组
             </summary>
@@ -9440,26 +9440,7 @@
             <param name="option">搜索模式</param>
             <returns>所有文件夹名称</returns>
         </member>
-        <member name="M:UtilsGen.IO.GetFoldersInfo(System.String@,System.Func{System.IO.DirectoryInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
-            <summary>
-            获取文件夹数组
-            </summary>
-            <param name="value">路径</param>
-            <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
-            <param name="pattern">匹配模式</param>
-            <param name="option">搜索模式</param>
-            <returns>所有文件夹名称</returns>
-        </member>
-        <member name="M:UtilsGen.IO.GetFolders(System.String@,System.String@,System.IO.SearchOption@)">
-            <summary>
-            获取文件夹数组
-            </summary>
-            <param name="value">路径</param>
-            <param name="pattern">匹配模式</param>
-            <param name="option">搜索模式</param>
-            <returns>所有文件夹名称</returns>
-        </member>
-        <member name="M:UtilsGen.IO.GetFolders(System.String@,System.Func{System.IO.DirectoryInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AHelper.IO.GetFoldersInfo(System.String@,System.Func{System.IO.DirectoryInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
             <summary>
             获取文件夹数组
             </summary>
@@ -9469,28 +9450,47 @@
             <param name="option">搜索模式</param>
             <returns>所有文件夹名称</returns>
         </member>
-        <member name="M:UtilsGen.IO.GetFoldersName(System.String@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AHelper.IO.GetFolders(System.String@,System.String@,System.IO.SearchOption@)">
+            <summary>
+            获取文件夹数组
+            </summary>
+            <param name="value">路径</param>
+            <param name="pattern">匹配模式</param>
+            <param name="option">搜索模式</param>
+            <returns>所有文件夹名称</returns>
+        </member>
+        <member name="M:AHelper.IO.GetFolders(System.String@,System.Func{System.IO.DirectoryInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
+            <summary>
+            获取文件夹数组
+            </summary>
+            <param name="value">路径</param>
+            <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
+            <param name="pattern">匹配模式</param>
+            <param name="option">搜索模式</param>
+            <returns>所有文件夹名称</returns>
+        </member>
+        <member name="M:AHelper.IO.GetFoldersName(System.String@,System.String@,System.IO.SearchOption@)">
             <summary>
             获取该文件夹下所有文件夹名 不含子文件夹 不包含自己
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.GetFoldersName(System.String@,System.Func{System.IO.DirectoryInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AHelper.IO.GetFoldersName(System.String@,System.Func{System.IO.DirectoryInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
             <summary>
             获取该文件夹下所有文件夹名 不含子文件夹 不包含自己
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.GetFileSize(System.String@,System.Single@)">
+        <member name="M:AHelper.IO.GetFileSize(System.String@,System.Single@)">
             <summary>
             返回文件大小 默认单位KB
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.GetFileLength(System.String@)">
+        <member name="M:AHelper.IO.GetFileLength(System.String@)">
             <summary>
             返回文件字节长度
             </summary>
             <param name="Path">文件相对路径</param>
         </member>
-        <member name="M:UtilsGen.IO.GetFileName(System.String,System.Boolean)">
+        <member name="M:AHelper.IO.GetFileName(System.String,System.Boolean)">
             <summary>
             返回文件名，不含路径 默认带文件名后缀
             </summary>
@@ -9498,52 +9498,52 @@
             <param name="extension">是否有后缀</param>
             <returns>文件名</returns>
         </member>
-        <member name="M:UtilsGen.IO.GetFileExtension(System.String)">
+        <member name="M:AHelper.IO.GetFileExtension(System.String)">
             <summary>
             返回文件名，不含路径 默认带文件名后缀
             </summary>
             <param name="file">文件路径</param>
             <returns>文件名</returns>
         </member>
-        <member name="M:UtilsGen.IO.GetFileInfo(System.String)">
+        <member name="M:AHelper.IO.GetFileInfo(System.String)">
             <summary>
             获取当前所有文件夹中所有文件信息
             </summary>
             <param name="value">文件夹路径</param>
         </member>
-        <member name="M:UtilsGen.IO.GetFileHash(System.String)">
+        <member name="M:AHelper.IO.GetFileHash(System.String)">
             <summary>
             获取文件的哈希值
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.GetFileMD5(System.String,System.Int64)">
+        <member name="M:AHelper.IO.GetFileMD5(System.String,System.Int64)">
             <summary>
             获取文件的MD5值
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.GetMD5ByHashAlgorithm(System.IO.Stream,System.Int64)">
+        <member name="M:AHelper.IO.GetMD5ByHashAlgorithm(System.IO.Stream,System.Int64)">
             <summary>
             通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得MD5
             实现稍微复杂，但可使用与传输文件或接收文件时同步计算MD5值
             可自定义缓冲区大小，计算速度较快
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.GetLastWriteTimeUtc(System.String)">
+        <member name="M:AHelper.IO.GetLastWriteTimeUtc(System.String)">
             <summary>
             获取最后写入时间
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.GetCreationTimeUtc(System.String)">
+        <member name="M:AHelper.IO.GetCreationTimeUtc(System.String)">
             <summary>
             获取创建文件时间
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.GetAttributes(System.String)">
+        <member name="M:AHelper.IO.GetAttributes(System.String)">
             <summary>
             获取文件属性
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.MoveFile(System.String@,System.String@,System.Boolean@)">
+        <member name="M:AHelper.IO.MoveFile(System.String@,System.String@,System.Boolean@)">
             <summary>
             移动文件
             </summary>
@@ -9551,7 +9551,7 @@
             <param name="target">目标路径</param>
             <param name="overlay">Ture:覆盖 False:不覆盖</param>
         </member>
-        <member name="M:UtilsGen.IO.MoveFolder(System.String@,System.String@,System.Boolean@)">
+        <member name="M:AHelper.IO.MoveFolder(System.String@,System.String@,System.Boolean@)">
             <summary>
             移动文件
             </summary>
@@ -9559,18 +9559,18 @@
             <param name="target">目标路径</param>
             <param name="overlay">Ture:覆盖 False:不覆盖</param>
         </member>
-        <member name="M:UtilsGen.IO.ReadByteArrayAsync(System.String)">
+        <member name="M:AHelper.IO.ReadByteArrayAsync(System.String)">
             <summary>
             异步 加载 Byte Array
             </summary>
             <param name="path">路径</param>
         </member>
-        <member name="M:UtilsGen.IO.WriteByteArrayAsync(System.String,System.Byte[],System.Boolean,System.Boolean)">
+        <member name="M:AHelper.IO.WriteByteArrayAsync(System.String,System.Byte[],System.Boolean,System.Boolean)">
             <summary>
             异步 写入数据
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteAsync(System.String,System.Byte[],System.Int32,System.Int32,System.Boolean,System.Int32)">
+        <member name="M:AHelper.IO.WriteAsync(System.String,System.Byte[],System.Int32,System.Int32,System.Boolean,System.Int32)">
             <summary>
             异步写入 将指定数据从offset开始写入length长度到文件中,是否追加到文件尾
             </summary>
@@ -9581,25 +9581,25 @@
             <param name="concat">true:拼接 | false:覆盖</param>
             <param name="bufferSize">缓冲区大小</param>
         </member>
-        <member name="M:UtilsGen.IO.ReadAsync(System.String,System.Int32)">
+        <member name="M:AHelper.IO.ReadAsync(System.String,System.Int32)">
             <summary>
             异步读取
             </summary>
             <param name="path">路径</param>
             <param name="bufferSize">缓冲区大小</param>
         </member>
-        <member name="M:UtilsGen.IO.ReadByteArray(System.String@)">
+        <member name="M:AHelper.IO.ReadByteArray(System.String@)">
             <summary>
             加载 Byte Array
             </summary>
             <param name="path">路径</param>
         </member>
-        <member name="M:UtilsGen.IO.WriteByteArray(System.String@,System.Byte[]@,System.Boolean@,System.Boolean@)">
+        <member name="M:AHelper.IO.WriteByteArray(System.String@,System.Byte[]@,System.Boolean@,System.Boolean@)">
             <summary>
             写入数据
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.Write(System.String@,System.Byte[]@,System.Int32@,System.Int32@,System.Boolean@,System.Int32@)">
+        <member name="M:AHelper.IO.Write(System.String@,System.Byte[]@,System.Int32@,System.Int32@,System.Boolean@,System.Int32@)">
             <summary>
             将指定数据从offset开始写入length长度到文件中,是否追加到文件尾
             </summary>
@@ -9610,19 +9610,19 @@
             <param name="concat">true:拼接 | false:覆盖</param>
             <param name="bufferSize">缓冲区大小</param>
         </member>
-        <member name="M:UtilsGen.IO.Read(System.String@,System.Int32@)">
+        <member name="M:AHelper.IO.Read(System.String@,System.Int32@)">
             <summary>
             异步读取
             </summary>
             <param name="path">路径</param>
             <param name="bufferSize">缓冲区大小</param>
         </member>
-        <member name="M:UtilsGen.IO.ReadFileAsync(System.String)">
+        <member name="M:AHelper.IO.ReadFileAsync(System.String)">
             <summary>
             使用异步 从文件中读取数据
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteFileAsync(System.String,System.Byte[],System.Boolean)">
+        <member name="M:AHelper.IO.WriteFileAsync(System.String,System.Byte[],System.Boolean)">
             <summary>
             将数据写入文件,是否追加到文件尾 默认覆盖文件
             </summary>
@@ -9630,12 +9630,12 @@
             <param name="Bytes">内容</param>
             <param name="Concat">true:拼接 | false:覆盖</param>
         </member>
-        <member name="M:UtilsGen.IO.ReadFile(System.String@)">
+        <member name="M:AHelper.IO.ReadFile(System.String@)">
             <summary>
             从文件中读取数据
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteFile(System.String@,System.Byte[]@,System.Boolean@)">
+        <member name="M:AHelper.IO.WriteFile(System.String@,System.Byte[]@,System.Boolean@)">
             <summary>
             将数据写入文件,是否追加到文件尾 默认覆盖文件
             </summary>
@@ -9643,7 +9643,7 @@
             <param name="Bytes">内容</param>
             <param name="Concat">true:拼接 | false:覆盖</param>
         </member>
-        <member name="M:UtilsGen.IO.CompressedZip(System.String@,System.String@,System.Action{System.Single}@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AHelper.IO.CompressedZip(System.String@,System.String@,System.Action{System.Single}@,System.String@,System.IO.SearchOption@)">
             <summary>
             压缩为ZIP包
             </summary>
@@ -9653,7 +9653,7 @@
             <param name="option">搜索模式</param>
             <param name="progressAction">进度回调</param>
         </member>
-        <member name="M:UtilsGen.IO.CompressedZip(System.String@,System.String@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AHelper.IO.CompressedZip(System.String@,System.String@,System.String@,System.IO.SearchOption@)">
             <summary>
             压缩为ZIP包
             </summary>
@@ -9662,14 +9662,14 @@
             <param name="pattern">匹配模式</param>
             <param name="option">搜索模式</param>
         </member>
-        <member name="M:UtilsGen.IO.CompressedZip(System.String@,System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}}@)">
+        <member name="M:AHelper.IO.CompressedZip(System.String@,System.Collections.Generic.IEnumerable{System.ValueTuple{System.String,System.String}}@)">
             <summary>
             压缩为ZIP包
             </summary>
             <param name="savePath">保存路径</param>
             <param name="files">1:文件路径 2:ZIP内部路径</param>
         </member>
-        <member name="M:UtilsGen.IO.CompressedZip(System.String@,System.Collections.Generic.ICollection{System.ValueTuple{System.String,System.String}}@,System.Action{System.Single}@)">
+        <member name="M:AHelper.IO.CompressedZip(System.String@,System.Collections.Generic.ICollection{System.ValueTuple{System.String,System.String}}@,System.Action{System.Single}@)">
             <summary>
             压缩为ZIP包
             </summary>
@@ -9677,14 +9677,14 @@
             <param name="files">文件信息 1:外部路径 2:ZIP内部路径</param>
             <param name="progressAction">进度回调</param>
         </member>
-        <member name="M:UtilsGen.IO.CompressedZip(System.String@,System.Collections.Generic.IEnumerable{System.ValueTuple{System.IO.FileInfo,System.String}}@)">
+        <member name="M:AHelper.IO.CompressedZip(System.String@,System.Collections.Generic.IEnumerable{System.ValueTuple{System.IO.FileInfo,System.String}}@)">
             <summary>
             压缩为ZIP包
             </summary>
             <param name="savePath">保存路径</param>
             <param name="files">1:文件路径 2:ZIP内部路径</param>
         </member>
-        <member name="M:UtilsGen.IO.CompressedZip(System.String@,System.Collections.Generic.ICollection{System.ValueTuple{System.IO.FileInfo,System.String}}@,System.Action{System.Single}@)">
+        <member name="M:AHelper.IO.CompressedZip(System.String@,System.Collections.Generic.ICollection{System.ValueTuple{System.IO.FileInfo,System.String}}@,System.Action{System.Single}@)">
             <summary>
             压缩为ZIP包
             </summary>
@@ -9692,7 +9692,7 @@
             <param name="files">文件信息 1:外部路径 2:ZIP内部路径</param>
             <param name="progressAction">进度回调</param>
         </member>
-        <member name="M:UtilsGen.IO.UncompressedZip(System.String@,System.String,System.Action{System.Single},System.Action{System.String},System.Boolean@)">
+        <member name="M:AHelper.IO.UncompressedZip(System.String@,System.String,System.Action{System.Single},System.Action{System.String},System.Boolean@)">
             <summary>
             解压
             </summary>
@@ -9702,7 +9702,7 @@
             <param name="entryAction">文件实体回调</param>
             <param name="restoreDateTime">是否恢复提取文件的日期和时间的标志</param>
         </member>
-        <member name="M:UtilsGen.IO.UncompressedZip(System.String@,System.String,System.Action{System.Single},System.Action{System.String},System.String@,System.Boolean@)">
+        <member name="M:AHelper.IO.UncompressedZip(System.String@,System.String,System.Action{System.Single},System.Action{System.String},System.String@,System.Boolean@)">
             <summary>
             解压
             </summary>
@@ -9713,7 +9713,7 @@
             <param name="fileFilter">文件过滤器</param>
             <param name="restoreDateTime">是否恢复提取文件的日期和时间的标志</param>
         </member>
-        <member name="M:UtilsGen.IO.UncompressedZip(System.String@,System.String,System.Action{System.Single},System.Action{System.String},System.String@,System.String@,System.Boolean@)">
+        <member name="M:AHelper.IO.UncompressedZip(System.String@,System.String,System.Action{System.Single},System.Action{System.String},System.String@,System.String@,System.Boolean@)">
             <summary>
             解压
             </summary>
@@ -9725,7 +9725,7 @@
             <param name="directoryFilter">文件夹过滤器</param>
             <param name="restoreDateTime">是否恢复提取文件的日期和时间的标志</param>
         </member>
-        <member name="M:UtilsGen.IO.UncompressedZip(System.String@,System.String,System.Action{System.Single},System.String@,System.Boolean@)">
+        <member name="M:AHelper.IO.UncompressedZip(System.String@,System.String,System.Action{System.Single},System.String@,System.Boolean@)">
             <summary>
             解压
             </summary>
@@ -9735,7 +9735,7 @@
             <param name="fileFilter">文件过滤器</param>
             <param name="restoreDateTime">是否恢复提取文件的日期和时间的标志</param>
         </member>
-        <member name="M:UtilsGen.IO.UncompressedZip(System.String@,System.String,System.Action{System.Single},System.Boolean@)">
+        <member name="M:AHelper.IO.UncompressedZip(System.String@,System.String,System.Action{System.Single},System.Boolean@)">
             <summary>
             解压
             </summary>
@@ -9744,7 +9744,7 @@
             <param name="progressAction">进度回调</param>
             <param name="restoreDateTime">是否恢复提取文件的日期和时间的标志</param>
         </member>
-        <member name="M:UtilsGen.IO.UncompressedZip(System.String@,System.String,System.Action{System.Single},System.String@,System.String@,System.Boolean@)">
+        <member name="M:AHelper.IO.UncompressedZip(System.String@,System.String,System.Action{System.Single},System.String@,System.String@,System.Boolean@)">
             <summary>
             解压
             </summary>
@@ -9755,7 +9755,7 @@
             <param name="directoryFilter">文件夹过滤器</param>
             <param name="restoreDateTime">是否恢复提取文件的日期和时间的标志</param>
         </member>
-        <member name="M:UtilsGen.IO.UncompressedZip(System.String@,System.String,System.Boolean@)">
+        <member name="M:AHelper.IO.UncompressedZip(System.String@,System.String,System.Boolean@)">
             <summary>
             解压
             </summary>
@@ -9763,7 +9763,7 @@
             <param name="targetDirectory">保存路径</param>
             <param name="restoreDateTime">是否恢复提取文件的日期和时间的标志</param>
         </member>
-        <member name="M:UtilsGen.IO.UncompressedZip(System.String@,System.String,System.String@,System.Boolean@)">
+        <member name="M:AHelper.IO.UncompressedZip(System.String@,System.String,System.String@,System.Boolean@)">
             <summary>
             解压
             </summary>
@@ -9772,7 +9772,7 @@
             <param name="fileFilter">文件过滤器</param>
             <param name="restoreDateTime">是否恢复提取文件的日期和时间的标志</param>
         </member>
-        <member name="M:UtilsGen.IO.UncompressedZip(System.String@,System.String,System.String@,System.String@,System.Boolean@)">
+        <member name="M:AHelper.IO.UncompressedZip(System.String@,System.String,System.String@,System.String@,System.Boolean@)">
             <summary>
             解压
             </summary>
@@ -9782,142 +9782,142 @@
             <param name="directoryFilter">文件夹过滤器</param>
             <param name="restoreDateTime">是否恢复提取文件的日期和时间的标志</param>
         </member>
-        <member name="M:UtilsGen.IO.ReadBase64Async``1(System.String,System.String)">
+        <member name="M:AHelper.IO.ReadBase64Async``1(System.String,System.String)">
             <summary>
             读取 Base64 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.ReadBase64UTF8Async``1(System.String)">
+        <member name="M:AHelper.IO.ReadBase64UTF8Async``1(System.String)">
             <summary>
             读取 Base64 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteBase64Async``1(System.String,``0,System.String)">
+        <member name="M:AHelper.IO.WriteBase64Async``1(System.String,``0,System.String)">
             <summary>
             写入 Base64 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteBase64UTF8Async``1(System.String,``0)">
+        <member name="M:AHelper.IO.WriteBase64UTF8Async``1(System.String,``0)">
             <summary>
             写入 Base64 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.ReadBase64``1(System.String@,System.String@)">
+        <member name="M:AHelper.IO.ReadBase64``1(System.String@,System.String@)">
             <summary>
             读取 Base64 文件 根据编码
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.ReadBase64UTF8``1(System.String@)">
+        <member name="M:AHelper.IO.ReadBase64UTF8``1(System.String@)">
             <summary>
             读取 Base64 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteBase64``1(System.String@,``0@,System.String@)">
+        <member name="M:AHelper.IO.WriteBase64``1(System.String@,``0@,System.String@)">
             <summary>
             写入 Base64 文件 根据编码
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteBase64UTF8``1(System.String@,``0@)">
+        <member name="M:AHelper.IO.WriteBase64UTF8``1(System.String@,``0@)">
             <summary>
             写入 Base64 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteBase64``1(System.String@,``0@,System.String)">
+        <member name="M:AHelper.IO.WriteBase64``1(System.String@,``0@,System.String)">
             <summary>
             写入 Base64 文件 根据编码
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteBase64UTF8``1(System.String@,``0)">
+        <member name="M:AHelper.IO.WriteBase64UTF8``1(System.String@,``0)">
             <summary>
             写入 Base64 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.ReadJsonAsync``1(System.String,System.String)">
+        <member name="M:AHelper.IO.ReadJsonAsync``1(System.String,System.String)">
             <summary>
             读取Json文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.ReadJsonUTF8Async``1(System.String)">
+        <member name="M:AHelper.IO.ReadJsonUTF8Async``1(System.String)">
             <summary>
             读取Json文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteJsonAsync``1(System.String,``0,System.Boolean,System.String)">
+        <member name="M:AHelper.IO.WriteJsonAsync``1(System.String,``0,System.Boolean,System.String)">
             <summary>
             写入Json文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteJsonUTF8Async``1(System.String,``0,System.Boolean)">
+        <member name="M:AHelper.IO.WriteJsonUTF8Async``1(System.String,``0,System.Boolean)">
             <summary>
             写入Json文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.ReadJson``1(System.String@,System.String@)">
+        <member name="M:AHelper.IO.ReadJson``1(System.String@,System.String@)">
             <summary>
             读取Json文件 根据编码
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.ReadJsonUTF8``1(System.String@)">
+        <member name="M:AHelper.IO.ReadJsonUTF8``1(System.String@)">
             <summary>
             读取Json文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteJson``1(System.String@,``0@,System.Boolean@,System.String@)">
+        <member name="M:AHelper.IO.WriteJson``1(System.String@,``0@,System.Boolean@,System.String@)">
             <summary>
             写入Json文件 根据编码
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteJsonUTF8``1(System.String@,``0@,System.Boolean@)">
+        <member name="M:AHelper.IO.WriteJsonUTF8``1(System.String@,``0@,System.Boolean@)">
             <summary>
             写入Json文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WritePListBinaryAsync(System.String,AIO.PList.PListRoot)">
+        <member name="M:AHelper.IO.WritePListBinaryAsync(System.String,AIO.PList.PListRoot)">
             <summary>
             写入 Plist XML
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WritePListBinaryAsync(System.String,AIO.PList.PListDict)">
+        <member name="M:AHelper.IO.WritePListBinaryAsync(System.String,AIO.PList.PListDict)">
             <summary>
             写入 Plist XML
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WritePListAsync(System.String,AIO.PList.PListRoot)">
+        <member name="M:AHelper.IO.WritePListAsync(System.String,AIO.PList.PListRoot)">
             <summary>
             写入 Plist XML
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WritePListAsync(System.String,AIO.PList.PListDict)">
+        <member name="M:AHelper.IO.WritePListAsync(System.String,AIO.PList.PListDict)">
             <summary>
             写入 Plist XML
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.ReadPList(System.String@)">
+        <member name="M:AHelper.IO.ReadPList(System.String@)">
             <summary>
             读取 Plist
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WritePList(System.String@,AIO.PList.PListRoot)">
+        <member name="M:AHelper.IO.WritePList(System.String@,AIO.PList.PListRoot)">
             <summary>
             写入 Plist XML
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WritePList(System.String@,AIO.PList.PListDict)">
+        <member name="M:AHelper.IO.WritePList(System.String@,AIO.PList.PListDict)">
             <summary>
             写入 Plist XML
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WritePListBinary(System.String@,AIO.PList.PListRoot)">
+        <member name="M:AHelper.IO.WritePListBinary(System.String@,AIO.PList.PListRoot)">
             <summary>
             写入 Plist 二进制
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WritePListBinary(System.String@,AIO.PList.PListDict)">
+        <member name="M:AHelper.IO.WritePListBinary(System.String@,AIO.PList.PListDict)">
             <summary>
             写入 Plist XML
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteTextAsync(System.String,System.String,System.String,System.Boolean)">
+        <member name="M:AHelper.IO.WriteTextAsync(System.String,System.String,System.String,System.Boolean)">
             <summary>
             异步 将字符串按照指定编码写入文件,是否追加到文件尾
             </summary>
@@ -9926,17 +9926,17 @@
             <param name="charset">保存文本格式</param>
             <param name="concat">true:拼接 | false:覆盖</param>
         </member>
-        <member name="M:UtilsGen.IO.ReadTextAsync(System.String,System.String)">
+        <member name="M:AHelper.IO.ReadTextAsync(System.String,System.String)">
             <summary>
             异步 按照指定编码读取文本文件
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.ReadText(System.String@,System.String@)">
+        <member name="M:AHelper.IO.ReadText(System.String@,System.String@)">
             <summary>
             按照指定编码读取文本文件
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteText(System.String@,System.Text.StringBuilder@,System.String@,System.Boolean@)">
+        <member name="M:AHelper.IO.WriteText(System.String@,System.Text.StringBuilder@,System.String@,System.Boolean@)">
             <summary>
             将字符串按照指定编码写入文件,是否追加到文件尾
             </summary>
@@ -9945,7 +9945,7 @@
             <param name="charset">保存文本格式</param>
             <param name="concat">true:拼接 | false:覆盖</param>
         </member>
-        <member name="M:UtilsGen.IO.WriteText(System.String@,System.String@,System.String@,System.Boolean@)">
+        <member name="M:AHelper.IO.WriteText(System.String@,System.String@,System.String@,System.Boolean@)">
             <summary>
             将字符串按照指定编码写入文件,是否追加到文件尾
             </summary>
@@ -9954,12 +9954,12 @@
             <param name="charset">保存文本格式</param>
             <param name="concat">true:拼接 | false:覆盖</param>
         </member>
-        <member name="M:UtilsGen.IO.ReadUnicodeAsync(System.String)">
+        <member name="M:AHelper.IO.ReadUnicodeAsync(System.String)">
             <summary>
             异步 按照UTF-8读取文本文件
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteUnicodeAsync(System.String,System.String,System.Boolean)">
+        <member name="M:AHelper.IO.WriteUnicodeAsync(System.String,System.String,System.Boolean)">
             <summary>
             异步 将字符串按照UTF-8写入文件,默认覆盖
             </summary>
@@ -9967,12 +9967,12 @@
             <param name="text">内容</param>
             <param name="concat">Ture:追加 False:覆盖</param>
         </member>
-        <member name="M:UtilsGen.IO.ReadUnicode(System.String@)">
+        <member name="M:AHelper.IO.ReadUnicode(System.String@)">
             <summary>
             按照UTF-8读取文本文件
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteUnicode(System.String@,System.Text.StringBuilder@,System.Boolean@)">
+        <member name="M:AHelper.IO.WriteUnicode(System.String@,System.Text.StringBuilder@,System.Boolean@)">
             <summary>
             将字符串按照UTF-8写入文件,默认覆盖
             </summary>
@@ -9980,7 +9980,7 @@
             <param name="text">内容</param>
             <param name="concat">Ture:追加 False:覆盖</param>
         </member>
-        <member name="M:UtilsGen.IO.WriteUnicode(System.String@,System.String@,System.Boolean@)">
+        <member name="M:AHelper.IO.WriteUnicode(System.String@,System.String@,System.Boolean@)">
             <summary>
             将字符串按照UTF-8写入文件,默认覆盖
             </summary>
@@ -9988,12 +9988,12 @@
             <param name="text">内容</param>
             <param name="concat">Ture:追加 False:覆盖</param>
         </member>
-        <member name="M:UtilsGen.IO.ReadUTF8Async(System.String)">
+        <member name="M:AHelper.IO.ReadUTF8Async(System.String)">
             <summary>
             异步 按照UTF-8读取文本文件
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteUTF8Async(System.String,System.String,System.Boolean)">
+        <member name="M:AHelper.IO.WriteUTF8Async(System.String,System.String,System.Boolean)">
             <summary>
             异步 将字符串按照UTF-8写入文件,默认覆盖
             </summary>
@@ -10001,7 +10001,7 @@
             <param name="text">内容</param>
             <param name="concat">Ture:追加 False:覆盖</param>
         </member>
-        <member name="M:UtilsGen.IO.WriteUTF8Async(System.String,System.Text.StringBuilder,System.Boolean)">
+        <member name="M:AHelper.IO.WriteUTF8Async(System.String,System.Text.StringBuilder,System.Boolean)">
             <summary>
             异步 将字符串按照UTF-8写入文件,默认覆盖
             </summary>
@@ -10009,7 +10009,7 @@
             <param name="text">内容</param>
             <param name="concat">Ture:追加 False:覆盖</param>
         </member>
-        <member name="M:UtilsGen.IO.WriteUTF8(System.String@,System.String@,System.Boolean@)">
+        <member name="M:AHelper.IO.WriteUTF8(System.String@,System.String@,System.Boolean@)">
             <summary>
             将字符串按照UTF-8写入文件,默认覆盖
             </summary>
@@ -10017,7 +10017,7 @@
             <param name="text">内容</param>
             <param name="concat">Ture:追加 False:覆盖</param>
         </member>
-        <member name="M:UtilsGen.IO.WriteUTF8(System.String@,System.Text.StringBuilder@,System.Boolean@)">
+        <member name="M:AHelper.IO.WriteUTF8(System.String@,System.Text.StringBuilder@,System.Boolean@)">
             <summary>
             将字符串按照UTF-8写入文件,默认覆盖
             </summary>
@@ -10025,92 +10025,92 @@
             <param name="text">内容</param>
             <param name="concat">Ture:追加 False:覆盖</param>
         </member>
-        <member name="M:UtilsGen.IO.ReadUTF8(System.String@)">
+        <member name="M:AHelper.IO.ReadUTF8(System.String@)">
             <summary>
             按照UTF-8读取文本文件
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.ReadXmlAsync``1(System.String,System.String)">
+        <member name="M:AHelper.IO.ReadXmlAsync``1(System.String,System.String)">
             <summary>
             读取 XML 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.ReadXmlUTF8Async``1(System.String)">
+        <member name="M:AHelper.IO.ReadXmlUTF8Async``1(System.String)">
             <summary>
             读取 XML 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteXmlAsync``1(System.String,``0,System.String)">
+        <member name="M:AHelper.IO.WriteXmlAsync``1(System.String,``0,System.String)">
             <summary>
             写入 XML 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteXmlUTF8Async``1(System.String,``0)">
+        <member name="M:AHelper.IO.WriteXmlUTF8Async``1(System.String,``0)">
             <summary>
             写入 XML 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.ReadXml``1(System.String@,System.String@)">
+        <member name="M:AHelper.IO.ReadXml``1(System.String@,System.String@)">
             <summary>
             读取 XML 文件 根据编码
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.ReadXmlUTF8``1(System.String@)">
+        <member name="M:AHelper.IO.ReadXmlUTF8``1(System.String@)">
             <summary>
             读取 XML 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteXml``1(System.String@,``0@,System.String@)">
+        <member name="M:AHelper.IO.WriteXml``1(System.String@,``0@,System.String@)">
             <summary>
             写入 XML 文件 根据编码
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteXmlUTF8``1(System.String@,``0@)">
+        <member name="M:AHelper.IO.WriteXmlUTF8``1(System.String@,``0@)">
             <summary>
             写入 XML 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.ReadYamlAsync``1(System.String,System.String)">
+        <member name="M:AHelper.IO.ReadYamlAsync``1(System.String,System.String)">
             <summary>
             读取 Yaml 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.ReadYamlUTF8Async``1(System.String)">
+        <member name="M:AHelper.IO.ReadYamlUTF8Async``1(System.String)">
             <summary>
             读取 Yaml 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteYamlAsync``1(System.String,``0,System.String)">
+        <member name="M:AHelper.IO.WriteYamlAsync``1(System.String,``0,System.String)">
             <summary>
             写入 Yaml 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteYamlUTF8Async``1(System.String,``0)">
+        <member name="M:AHelper.IO.WriteYamlUTF8Async``1(System.String,``0)">
             <summary>
             写入 Yaml 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.ReadYaml``1(System.String@,System.String@)">
+        <member name="M:AHelper.IO.ReadYaml``1(System.String@,System.String@)">
             <summary>
             读取 Yaml 文件 根据编码
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.ReadYamlUTF8``1(System.String@)">
+        <member name="M:AHelper.IO.ReadYamlUTF8``1(System.String@)">
             <summary>
             读取 Yaml 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteYaml``1(System.String@,``0@,System.String@)">
+        <member name="M:AHelper.IO.WriteYaml``1(System.String@,``0@,System.String@)">
             <summary>
             写入 Yaml 文件 根据编码
             </summary>
         </member>
-        <member name="M:UtilsGen.IO.WriteYamlUTF8``1(System.String@,``0@)">
+        <member name="M:AHelper.IO.WriteYamlUTF8``1(System.String@,``0@)">
             <summary>
             写入 Yaml 文件 编码utf-8
             </summary>
         </member>
-        <member name="T:UtilsGen.Hash">
+        <member name="T:AHelper.Hash">
             <summary>
             hash工具
             </summary>
@@ -10118,237 +10118,237 @@
             hash工具
             </summary>
         </member>
-        <member name="M:UtilsGen.Hash.StringSHA1(System.String@)">
+        <member name="M:AHelper.Hash.StringSHA1(System.String@)">
             <summary>
             获取字符串的Hash值
             </summary>
         </member>
-        <member name="M:UtilsGen.Hash.FileSHA1(System.String@)">
+        <member name="M:AHelper.Hash.FileSHA1(System.String@)">
             <summary>
             获取文件的Hash值
             </summary>
         </member>
-        <member name="M:UtilsGen.Hash.StreamSHA1(System.IO.Stream)">
+        <member name="M:AHelper.Hash.StreamSHA1(System.IO.Stream)">
             <summary>
             获取数据流的Hash值
             </summary>
         </member>
-        <member name="M:UtilsGen.Hash.BytesSHA1(System.Byte[])">
+        <member name="M:AHelper.Hash.BytesSHA1(System.Byte[])">
             <summary>
             获取字节数组的Hash值
             </summary>
         </member>
-        <member name="M:UtilsGen.Hash.StringMD5(System.String@)">
+        <member name="M:AHelper.Hash.StringMD5(System.String@)">
             <summary>
             获取字符串的MD5
             </summary>
         </member>
-        <member name="M:UtilsGen.Hash.FileMD5(System.String@)">
+        <member name="M:AHelper.Hash.FileMD5(System.String@)">
             <summary>
             获取文件的MD5
             </summary>
         </member>
-        <member name="M:UtilsGen.Hash.StreamMD5(System.IO.Stream)">
+        <member name="M:AHelper.Hash.StreamMD5(System.IO.Stream)">
             <summary>
             获取数据流的MD5
             </summary>
         </member>
-        <member name="M:UtilsGen.Hash.BytesMD5(System.Byte[])">
+        <member name="M:AHelper.Hash.BytesMD5(System.Byte[])">
             <summary>
             获取字节数组的MD5
             </summary>
         </member>
-        <member name="M:UtilsGen.Hash.StringCRC32(System.String)">
+        <member name="M:AHelper.Hash.StringCRC32(System.String)">
             <summary>
             获取字符串的CRC32
             </summary>
         </member>
-        <member name="M:UtilsGen.Hash.FileCRC32(System.String)">
+        <member name="M:AHelper.Hash.FileCRC32(System.String)">
             <summary>
             获取文件的CRC32
             </summary>
         </member>
-        <member name="M:UtilsGen.Hash.StreamCRC32(System.IO.Stream)">
+        <member name="M:AHelper.Hash.StreamCRC32(System.IO.Stream)">
             <summary>
             获取数据流的CRC32
             </summary>
         </member>
-        <member name="M:UtilsGen.Hash.BytesCRC32(System.Byte[])">
+        <member name="M:AHelper.Hash.BytesCRC32(System.Byte[])">
             <summary>
             获取字节数组的CRC32
             </summary>
         </member>
-        <member name="M:UtilsGen.Hash.GetHashCode``1(``0@)">
+        <member name="M:AHelper.Hash.GetHashCode``1(``0@)">
             <summary>
             获取哈希值
             </summary>
         </member>
-        <member name="M:UtilsGen.Hash.GetHashCode``2(``0@,``1@)">
+        <member name="M:AHelper.Hash.GetHashCode``2(``0@,``1@)">
             <summary>
             获取哈希值
             </summary>
         </member>
-        <member name="M:UtilsGen.Hash.GetHashCode``3(``0@,``1@,``2@)">
+        <member name="M:AHelper.Hash.GetHashCode``3(``0@,``1@,``2@)">
             <summary>
             获取哈希值
             </summary>
         </member>
-        <member name="M:UtilsGen.Hash.GetHashCode``4(``0@,``1@,``2@,``3@)">
+        <member name="M:AHelper.Hash.GetHashCode``4(``0@,``1@,``2@,``3@)">
             <summary>
             获取哈希值
             </summary>
         </member>
-        <member name="M:UtilsGen.Hash.GetHashCode``5(``0@,``1@,``2@,``3@,``4@)">
+        <member name="M:AHelper.Hash.GetHashCode``5(``0@,``1@,``2@,``3@,``4@)">
             <summary>
             获取哈希值
             </summary>
         </member>
-        <member name="M:UtilsGen.Hash.GetHashCodeAlloc(System.Object[])">
+        <member name="M:AHelper.Hash.GetHashCodeAlloc(System.Object[])">
             <summary>
             获取哈希值
             </summary>
         </member>
-        <member name="T:UtilsGen.Hex">
+        <member name="T:AHelper.Hex">
             <summary>
             16进制操作类
             </summary>
         </member>
-        <member name="F:UtilsGen.Hex.HEX_BIT">
+        <member name="F:AHelper.Hex.HEX_BIT">
             <summary>
             16进制位控制符
             </summary>
         </member>
-        <member name="F:UtilsGen.Hex.EMPTY_BYTE_ARRAY">
+        <member name="F:AHelper.Hex.EMPTY_BYTE_ARRAY">
             <summary>
             空字节数组
             </summary>
         </member>
-        <member name="F:UtilsGen.Hex.HEX_DIGIT">
+        <member name="F:AHelper.Hex.HEX_DIGIT">
             <summary>
             大写16进制数字字符
             </summary>
         </member>
-        <member name="F:UtilsGen.Hex.HEX_DIGIT_LOWER">
+        <member name="F:AHelper.Hex.HEX_DIGIT_LOWER">
             <summary>
             小写写16进制数字字符
             </summary>
         </member>
-        <member name="M:UtilsGen.Hex.ToDigit(System.Char@)">
+        <member name="M:AHelper.Hex.ToDigit(System.Char@)">
             <summary>
             将16进制字符转换为数字
             </summary>
         </member>
-        <member name="M:UtilsGen.Hex.ToHexChar(System.Int32@,System.Boolean@)">
+        <member name="M:AHelper.Hex.ToHexChar(System.Int32@,System.Boolean@)">
             <summary>
             将数字转换为16进制字符
             </summary>
         </member>
-        <member name="M:UtilsGen.Hex.ToHex(System.Char@,System.Text.StringBuilder@,System.Boolean@)">
+        <member name="M:AHelper.Hex.ToHex(System.Char@,System.Text.StringBuilder@,System.Boolean@)">
             <summary>
             将一个char转换为16进制并添加到字节缓存
             </summary>
         </member>
-        <member name="M:UtilsGen.Hex.ToHex(System.Byte@,System.Boolean@)">
+        <member name="M:AHelper.Hex.ToHex(System.Byte@,System.Boolean@)">
             <summary>
             将一个字节转换为16进制
             </summary>
         </member>
-        <member name="M:UtilsGen.Hex.ToHex(System.Byte@,System.Text.StringBuilder@,System.Boolean@)">
+        <member name="M:AHelper.Hex.ToHex(System.Byte@,System.Text.StringBuilder@,System.Boolean@)">
             <summary>
             将一个字节转换为16进制 ，并添加到字节缓存
             </summary>
         </member>
-        <member name="M:UtilsGen.Hex.ToHex(System.Int16,System.Boolean)">
+        <member name="M:AHelper.Hex.ToHex(System.Int16,System.Boolean)">
             <summary>
             转换为16进制
             </summary>
         </member>
-        <member name="M:UtilsGen.Hex.ToHex(System.Int16,System.Text.StringBuilder,System.Boolean)">
+        <member name="M:AHelper.Hex.ToHex(System.Int16,System.Text.StringBuilder,System.Boolean)">
             <summary>
             转换为16进制
             </summary>
         </member>
-        <member name="M:UtilsGen.Hex.ToHex(System.Int32,System.Boolean)">
+        <member name="M:AHelper.Hex.ToHex(System.Int32,System.Boolean)">
             <summary>
             转换为16进制
             </summary>
         </member>
-        <member name="M:UtilsGen.Hex.ToHex(System.Int32,System.Text.StringBuilder,System.Boolean)">
+        <member name="M:AHelper.Hex.ToHex(System.Int32,System.Text.StringBuilder,System.Boolean)">
             <summary>
             转换为16进制
             </summary>
         </member>
-        <member name="M:UtilsGen.Hex.ToHex(System.Int64@,System.Boolean@)">
+        <member name="M:AHelper.Hex.ToHex(System.Int64@,System.Boolean@)">
             <summary>
             转换为16进制
             </summary>
         </member>
-        <member name="M:UtilsGen.Hex.ToHex(System.Collections.Generic.IList{System.Byte}@)">
+        <member name="M:AHelper.Hex.ToHex(System.Collections.Generic.IList{System.Byte}@)">
             <summary>
             转换为16进制数据
             </summary>
         </member>
-        <member name="M:UtilsGen.Hex.ToHex(System.Collections.Generic.IList{System.Byte}@,System.Int32,System.Int32)">
+        <member name="M:AHelper.Hex.ToHex(System.Collections.Generic.IList{System.Byte}@,System.Int32,System.Int32)">
             <summary>
             转换为16进制数据
             </summary>
         </member>
-        <member name="M:UtilsGen.Hex.ToHex(System.Collections.Generic.IList{System.Byte}@,System.Boolean@)">
+        <member name="M:AHelper.Hex.ToHex(System.Collections.Generic.IList{System.Byte}@,System.Boolean@)">
             <summary>
             转换为16进制数据
             </summary>
         </member>
-        <member name="M:UtilsGen.Hex.ToHex(System.Collections.Generic.IList{System.Byte}@,System.Int32,System.Int32,System.Boolean@)">
+        <member name="M:AHelper.Hex.ToHex(System.Collections.Generic.IList{System.Byte}@,System.Int32,System.Int32,System.Boolean@)">
             <summary>
             转换为16进制数据
             </summary>
         </member>
-        <member name="M:UtilsGen.Hex.ParseByte(System.String@)">
+        <member name="M:AHelper.Hex.ParseByte(System.String@)">
             <summary>
             将指定16进制字符串转换为10进制数字
             </summary>
         </member>
-        <member name="M:UtilsGen.Hex.ParseShort(System.String)">
+        <member name="M:AHelper.Hex.ParseShort(System.String)">
             <summary>
             将指定16进制字符串转换为10进制数字
             </summary>
         </member>
-        <member name="M:UtilsGen.Hex.ParseInt(System.String)">
+        <member name="M:AHelper.Hex.ParseInt(System.String)">
             <summary>
             将指定16进制字符串转换为10进制数字
             </summary>
         </member>
-        <member name="M:UtilsGen.Hex.ParseLong(System.String@)">
+        <member name="M:AHelper.Hex.ParseLong(System.String@)">
             <summary>
             将指定16进制字符串转换为10进制数字
             </summary>
         </member>
-        <member name="M:UtilsGen.Hex.ParseLong(System.String@,System.Int32,System.Int32)">
+        <member name="M:AHelper.Hex.ParseLong(System.String@,System.Int32,System.Int32)">
             <summary>
             将指定16进制字符串转换为10进制数字
             </summary>
         </member>
-        <member name="M:UtilsGen.Hex.ParseLong(System.Collections.Generic.IList{System.Char}@,System.Int32,System.Int32)">
+        <member name="M:AHelper.Hex.ParseLong(System.Collections.Generic.IList{System.Char}@,System.Int32,System.Int32)">
             <summary>
             将指定16进制字符数组转换为10进制数字
             </summary>
         </member>
-        <member name="T:UtilsGen.Math">
+        <member name="T:AHelper.Math">
             <summary>
             数学库
             </summary>
         </member>
-        <member name="M:UtilsGen.Math.Log(System.Int32)">
+        <member name="M:AHelper.Math.Log(System.Int32)">
             <summary>
             判断当前值是2的几次幂
             </summary>
         </member>
-        <member name="M:UtilsGen.Math.Log(System.Int64)">
+        <member name="M:AHelper.Math.Log(System.Int64)">
             <summary>
             判断当前值是2的几次幂
             </summary>
         </member>
-        <member name="M:UtilsGen.Math.Clamp(System.Int32@,System.Int32@,System.Int32@)">
+        <member name="M:AHelper.Math.Clamp(System.Int32@,System.Int32@,System.Int32@)">
             <summary>
             该方法将给定的整数值限制在指定的范围内，并返回新的整数值。
             </summary>
@@ -10361,7 +10361,7 @@
             该方法使用 C# 中的 "in" 关键字，表示输入参数是只读引用类型。
             </remarks> 
         </member>
-        <member name="M:UtilsGen.Math.Clamp(System.Single@,System.Single@,System.Single@)">
+        <member name="M:AHelper.Math.Clamp(System.Single@,System.Single@,System.Single@)">
             <summary>
             该方法将给定的整数值限制在指定的范围内，并返回新的整数值。
             </summary>
@@ -10374,7 +10374,7 @@
             该方法使用 C# 中的 "in" 关键字，表示输入参数是只读引用类型。
             </remarks> 
         </member>
-        <member name="M:UtilsGen.Math.InMask(System.Int32@,System.Int32@)">
+        <member name="M:AHelper.Math.InMask(System.Int32@,System.Int32@)">
             <summary>
             判断给定的层级是否在掩码中。
             </summary>
@@ -10382,7 +10382,7 @@
             <param name="mask">掩码，用二进制表示哪些层级被包括</param>
             <returns>如果层级在掩码中，返回 true；否则返回 false。</returns>
         </member>
-        <member name="M:UtilsGen.Math.InMask(System.Int64@,System.Int64@)">
+        <member name="M:AHelper.Math.InMask(System.Int64@,System.Int64@)">
             <summary>
             判断给定的层级是否在掩码中。
             </summary>
@@ -10390,7 +10390,7 @@
             <param name="mask">掩码，用二进制表示哪些层级被包括</param>
             <returns>如果层级在掩码中，返回 true；否则返回 false。</returns>
         </member>
-        <member name="M:UtilsGen.Math.OutMask(System.Int32@,System.Int32@)">
+        <member name="M:AHelper.Math.OutMask(System.Int32@,System.Int32@)">
             <summary>
             判断给定的层级是否在掩码中。
             </summary>
@@ -10398,7 +10398,7 @@
             <param name="mask">掩码，用二进制表示哪些层级被包括</param>
             <returns>如果层级不在掩码中，返回 true；否则返回 false。</returns>
         </member>
-        <member name="M:UtilsGen.Math.OutMask(System.Int64@,System.Int64@)">
+        <member name="M:AHelper.Math.OutMask(System.Int64@,System.Int64@)">
             <summary>
             判断给定的层级是否在掩码中。
             </summary>
@@ -10406,37 +10406,37 @@
             <param name="mask">掩码，用二进制表示哪些层级被包括</param>
             <returns>如果层级不在掩码中，返回 true；否则返回 false。</returns>
         </member>
-        <member name="M:UtilsGen.Math.ArrayPerCent(System.Collections.Generic.IList{System.Int32}@)">
+        <member name="M:AHelper.Math.ArrayPerCent(System.Collections.Generic.IList{System.Int32}@)">
             <summary>
             数组百分比计算
             </summary>
         </member>
-        <member name="M:UtilsGen.Math.ArrayPerCent(System.Collections.Generic.IList{System.Int64}@)">
+        <member name="M:AHelper.Math.ArrayPerCent(System.Collections.Generic.IList{System.Int64}@)">
             <summary>
             数组百分比计算
             </summary>
         </member>
-        <member name="M:UtilsGen.Math.ArrayPerCent(System.Collections.Generic.IList{System.Single}@)">
+        <member name="M:AHelper.Math.ArrayPerCent(System.Collections.Generic.IList{System.Single}@)">
             <summary>
             数组百分比计算
             </summary>
         </member>
-        <member name="F:UtilsGen.Math.EARTH_RADIUS">
+        <member name="F:AHelper.Math.EARTH_RADIUS">
             <summary>
             单位
             </summary>
         </member>
-        <member name="F:UtilsGen.Math.Deg2Rad">
+        <member name="F:AHelper.Math.Deg2Rad">
             <summary>
             单位
             </summary>
         </member>
-        <member name="F:UtilsGen.Math.Rad2Deg">
+        <member name="F:AHelper.Math.Rad2Deg">
             <summary>
             单位
             </summary>
         </member>
-        <member name="M:UtilsGen.Math.Distance(System.Single@,System.Single@,System.Single@,System.Single@)">
+        <member name="M:AHelper.Math.Distance(System.Single@,System.Single@,System.Single@,System.Single@)">
             <summary>
             计算两个点之间的直线距离。
             </summary>
@@ -10446,77 +10446,77 @@
             <param name="y2">第二个点的 y 坐标</param>
             <returns>两个点之间的距离</returns>
         </member>
-        <member name="M:UtilsGen.Math.Sin(System.Double@)">
+        <member name="M:AHelper.Math.Sin(System.Double@)">
             <summary>
             返回给定角度的正弦值。
             </summary>
             <param name="f">给定角度，单位为弧度</param>
             <returns>角度的正弦值</returns>
         </member>
-        <member name="M:UtilsGen.Math.Asin(System.Double@)">
+        <member name="M:AHelper.Math.Asin(System.Double@)">
             <summary>
             返回给定角度的反正弦值。
             </summary>
             <param name="f">要计算反正弦值的角度，范围为 -1 到 1 之间</param>
             <returns>指定角度的反正弦值，返回值的单位为弧度</returns>
         </member>
-        <member name="M:UtilsGen.Math.Cos(System.Double@)">
+        <member name="M:AHelper.Math.Cos(System.Double@)">
             <summary>
             返回给定角度的余弦值。
             </summary>
             <param name="f">要计算余弦值的角度，单位为弧度</param>
             <returns>指定角度的余弦值</returns>
         </member>
-        <member name="M:UtilsGen.Math.Acos(System.Double@)">
+        <member name="M:AHelper.Math.Acos(System.Double@)">
             <summary>
             返回给定角度的反余弦值。
             </summary>
             <param name="f">要计算反余弦值的角度，范围为 -1 到 1 之间</param>
             <returns>指定角度的反余弦值，返回值的单位为弧度</returns>
         </member>
-        <member name="M:UtilsGen.Math.Abs(System.Double@)">
+        <member name="M:AHelper.Math.Abs(System.Double@)">
             <summary>
             返回给定值的绝对值。
             </summary>
             <param name="value">要计算绝对值的值</param>
             <returns>指定值的绝对值</returns>
         </member>
-        <member name="M:UtilsGen.Math.Abs(System.Single@)">
+        <member name="M:AHelper.Math.Abs(System.Single@)">
             <summary>
             返回给定值的绝对值。
             </summary>
             <param name="value">要计算绝对值的值</param>
             <returns>指定值的绝对值</returns>
         </member>
-        <member name="M:UtilsGen.Math.Abs(System.Int64@)">
+        <member name="M:AHelper.Math.Abs(System.Int64@)">
             <summary>
             返回给定值的绝对值。
             </summary>
             <param name="value">要计算绝对值的值</param>
             <returns>指定值的绝对值</returns>
         </member>
-        <member name="M:UtilsGen.Math.Round(System.Double@)">
+        <member name="M:AHelper.Math.Round(System.Double@)">
             <summary>
             对传入的 double 类型数值进行四舍五入操作。
             </summary>
             <param name="value">需要进行四舍五入的 double 类型数值。</param>
             <returns>返回四舍五入后的 double 类型数值。</returns>
         </member>
-        <member name="M:UtilsGen.Math.Ceil(System.Double@)">
+        <member name="M:AHelper.Math.Ceil(System.Double@)">
             <summary>
             对传入的 double 类型数值进行向上取整操作。
             </summary>
             <param name="value">需要进行向上取整的 double 类型数值。</param>
             <returns>返回向上取整后的 double 类型数值。</returns>
         </member>
-        <member name="M:UtilsGen.Math.Floor(System.Double@)">
+        <member name="M:AHelper.Math.Floor(System.Double@)">
             <summary>
             对传入的 double 类型数值进行向下取整操作。
             </summary>
             <param name="value">需要进行向下取整的 double 类型数值。</param>
             <returns>返回向下取整后的 double 类型数值。</returns>
         </member>
-        <member name="M:UtilsGen.Math.Mod(System.Int32,System.Int32@)">
+        <member name="M:AHelper.Math.Mod(System.Int32,System.Int32@)">
             <summary>
             对传入的 int 类型数值进行模运算操作，返回非负结果。
             </summary>
@@ -10524,7 +10524,7 @@
             <param name="space">模数，即取模时的除数，必须为正整数。</param>
             <returns>返回非负的模运算结果。</returns>
         </member>
-        <member name="M:UtilsGen.Math.GetGPSDistance(System.Double@,System.Double@,System.Double@,System.Double@)">
+        <member name="M:AHelper.Math.GetGPSDistance(System.Double@,System.Double@,System.Double@,System.Double@)">
             <summary>
             计算两个 GPS 坐标点之间的距离（单位：米）。
             </summary>
@@ -10534,26 +10534,26 @@
             <param name="lng2">第二个坐标点的经度。</param>
             <returns>返回两个 GPS 坐标点之间的距离（单位：米）。</returns>
         </member>
-        <member name="M:UtilsGen.Math.Rad(System.Double@)">
+        <member name="M:AHelper.Math.Rad(System.Double@)">
             <summary>
             将角度转换为弧度。
             </summary>
             <param name="d">需要转换的角度。</param>
             <returns>返回对应的弧度值。</returns>
         </member>
-        <member name="M:UtilsGen.Math.GetDistance(System.Double)">
+        <member name="M:AHelper.Math.GetDistance(System.Double)">
             <summary>
             将距离值转换为字符串，单位为米或千米。
             </summary>
             <param name="value">需要转换的距离值。</param>
             <returns>返回对应的字符串，包含单位。</returns>
         </member>
-        <member name="T:UtilsGen.MD5">
+        <member name="T:AHelper.MD5">
             <summary>
             计算MD5
             </summary>
         </member>
-        <member name="M:UtilsGen.MD5.GetMD5(System.IO.Stream,System.Int64@)">
+        <member name="M:AHelper.MD5.GetMD5(System.IO.Stream,System.Int64@)">
             <summary>
             通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得MD5
             实现稍微复杂，但可使用与传输文件或接收文件时同步计算MD5值
@@ -10563,7 +10563,7 @@
             <param name="bufferSize">自定义缓冲区大小16K</param>
             <returns>MD5Hash</returns>
         </member>
-        <member name="M:UtilsGen.MD5.GetMD5ByHashAlgorithm(System.IO.Stream,System.Int64@)">
+        <member name="M:AHelper.MD5.GetMD5ByHashAlgorithm(System.IO.Stream,System.Int64@)">
             <summary>
             通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得MD5
             实现稍微复杂，但可使用与传输文件或接收文件时同步计算MD5值
@@ -10572,27 +10572,27 @@
             <param name="stream"></param>
             <param name="bufferSize">自定义缓冲区大小16K</param>
         </member>
-        <member name="T:UtilsGen.Random">
+        <member name="T:AHelper.Random">
             <summary>
             随机数工具类
             </summary>
         </member>
-        <member name="M:UtilsGen.Random.Refresh">
+        <member name="M:AHelper.Random.Refresh">
             <summary>
             刷新随机种子
             </summary>
         </member>
-        <member name="M:UtilsGen.Random.Refresh(System.Random@)">
+        <member name="M:AHelper.Random.Refresh(System.Random@)">
             <summary>
             刷新随机种子
             </summary>
         </member>
-        <member name="M:UtilsGen.Random.Refresh(System.Int32@)">
+        <member name="M:AHelper.Random.Refresh(System.Int32@)">
             <summary>
             刷新随机种子
             </summary>
         </member>
-        <member name="M:UtilsGen.Random.RandArray``1(System.Int32,System.Collections.Generic.ICollection{``0}@)">
+        <member name="M:AHelper.Random.RandArray``1(System.Int32,System.Collections.Generic.ICollection{``0}@)">
             <summary>
             
             </summary>
@@ -10601,7 +10601,7 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandArray``1(System.Int32@,System.Collections.Generic.IList{``0}@)">
+        <member name="M:AHelper.Random.RandArray``1(System.Int32@,System.Collections.Generic.IList{``0}@)">
             <summary>
             
             </summary>
@@ -10610,13 +10610,13 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandArray``1(System.Int32,System.Collections.Generic.IList{``0},System.Int32@,System.Int32)">
+        <member name="M:AHelper.Random.RandArray``1(System.Int32,System.Collections.Generic.IList{``0},System.Int32@,System.Int32)">
             <param name="array"></param>
             <param name="lower">下限-包含</param>
             <param name="upper">上限-不包含</param>
             <param name="count"></param>
         </member>
-        <member name="M:UtilsGen.Random.RandArray``2(System.Int32@,System.Collections.Generic.IDictionary{``0,``1}@)">
+        <member name="M:AHelper.Random.RandArray``2(System.Int32@,System.Collections.Generic.IDictionary{``0,``1}@)">
             <summary>
             
             </summary>
@@ -10626,7 +10626,7 @@
             <typeparam name="T2"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandArrayValue``1(System.Collections.Generic.IList{``0}@)">
+        <member name="M:AHelper.Random.RandArrayValue``1(System.Collections.Generic.IList{``0}@)">
             <summary>
             
             </summary>
@@ -10634,7 +10634,7 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandArrayValue``1(System.Collections.Generic.ICollection{``0}@)">
+        <member name="M:AHelper.Random.RandArrayValue``1(System.Collections.Generic.ICollection{``0}@)">
             <summary>
             
             </summary>
@@ -10643,7 +10643,7 @@
             <returns></returns>
             <exception cref="T:System.SystemException"></exception>
         </member>
-        <member name="M:UtilsGen.Random.RandArrayValue``2(System.Collections.Generic.IDictionary{``0,``1}@)">
+        <member name="M:AHelper.Random.RandArrayValue``2(System.Collections.Generic.IDictionary{``0,``1}@)">
             <summary>
             
             </summary>
@@ -10653,65 +10653,65 @@
             <returns></returns>
             <exception cref="T:System.SystemException"></exception>
         </member>
-        <member name="M:UtilsGen.Random.RandArrayValue``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@)">
+        <member name="M:AHelper.Random.RandArrayValue``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@)">
             <param name="array"></param>
             <param name="lower">下限-包含</param>
             <param name="upper">上限-不包含</param>
         </member>
-        <member name="M:UtilsGen.Random.RandArrayValue``1(System.Collections.Generic.ICollection{``0}@,System.Int32@,System.Int32)">
+        <member name="M:AHelper.Random.RandArrayValue``1(System.Collections.Generic.ICollection{``0}@,System.Int32@,System.Int32)">
             <param name="array"></param>
             <param name="lower">下限-包含</param>
             <param name="upper">上限-不包含</param>
         </member>
-        <member name="M:UtilsGen.Random.RandArrayValue``2(System.Collections.Generic.IDictionary{``0,``1}@,System.Int32@,System.Int32)">
+        <member name="M:AHelper.Random.RandArrayValue``2(System.Collections.Generic.IDictionary{``0,``1}@,System.Int32@,System.Int32)">
             <param name="array"></param>
             <param name="lower">下限-包含</param>
             <param name="upper">上限-不包含</param>
         </member>
-        <member name="M:UtilsGen.Random.RandArrayWeight(System.Collections.Generic.IList{System.Single}@)">
+        <member name="M:AHelper.Random.RandArrayWeight(System.Collections.Generic.IList{System.Single}@)">
             <summary>
             随机权重 
             </summary>
             <param name="weights">传入数组的总和 应为1</param>
         </member>
-        <member name="M:UtilsGen.Random.RandArrayWeight``1(System.Collections.Generic.IList{System.Single}@,System.Collections.Generic.IList{``0}@)">
+        <member name="M:AHelper.Random.RandArrayWeight``1(System.Collections.Generic.IList{System.Single}@,System.Collections.Generic.IList{``0}@)">
             <summary>
             随机权重
             </summary>
             <param name="weights">传入数组的总和 应为1</param>
             <param name="values"></param>
         </member>
-        <member name="M:UtilsGen.Random.RandBool">
+        <member name="M:AHelper.Random.RandBool">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandBoolArray(System.Int32@)">
+        <member name="M:AHelper.Random.RandBoolArray(System.Int32@)">
             <summary>
             
             </summary>
             <param name="count"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandByte">
+        <member name="M:AHelper.Random.RandByte">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandBytes(System.Byte@,System.Int32@)">
+        <member name="M:AHelper.Random.RandBytes(System.Byte@,System.Int32@)">
             <param name="lower">下限-包含</param>
             <param name="upper">上限-不包含</param>
         </member>
-        <member name="M:UtilsGen.Random.RandByteArray(System.Int32@)">
+        <member name="M:AHelper.Random.RandByteArray(System.Int32@)">
             <summary>
             
             </summary>
             <param name="count"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandByteArray(System.Int32@,System.Int32@,System.Int32)">
+        <member name="M:AHelper.Random.RandByteArray(System.Int32@,System.Int32@,System.Int32)">
             <summary>
             
             </summary>
@@ -10721,20 +10721,20 @@
             <returns></returns>
             <exception cref="T:System.ArgumentException"></exception>
         </member>
-        <member name="M:UtilsGen.Random.RandSByte">
+        <member name="M:AHelper.Random.RandSByte">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandSByteArray(System.Int32@)">
+        <member name="M:AHelper.Random.RandSByteArray(System.Int32@)">
             <summary>
             
             </summary>
             <param name="count"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandSByteArray(System.Int32@,System.SByte@,System.SByte@)">
+        <member name="M:AHelper.Random.RandSByteArray(System.Int32@,System.SByte@,System.SByte@)">
             <summary>
             
             </summary>
@@ -10743,98 +10743,98 @@
             <param name="upper"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandUInt16">
+        <member name="M:AHelper.Random.RandUInt16">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandUInt16(System.UInt16@,System.Int32@)">
+        <member name="M:AHelper.Random.RandUInt16(System.UInt16@,System.Int32@)">
             <param name="lower">下限-包含</param>
             <param name="upper">上限-不包含</param>
         </member>
-        <member name="M:UtilsGen.Random.RandUInt16Array(System.Int32@)">
+        <member name="M:AHelper.Random.RandUInt16Array(System.Int32@)">
             <summary>
             
             </summary>
             <param name="count"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandUInt32(System.UInt32@,System.UInt32@)">
+        <member name="M:AHelper.Random.RandUInt32(System.UInt32@,System.UInt32@)">
             <param name="lower">下限-包含</param>
             <param name="upper">上限-不包含</param>
         </member>
-        <member name="M:UtilsGen.Random.RandUInt32">
+        <member name="M:AHelper.Random.RandUInt32">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandUInt32Array(System.Int32@)">
+        <member name="M:AHelper.Random.RandUInt32Array(System.Int32@)">
             <summary>
             
             </summary>
             <param name="count"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandUInt64(System.UInt64@,System.UInt64@)">
+        <member name="M:AHelper.Random.RandUInt64(System.UInt64@,System.UInt64@)">
             <param name="lower">下限-包含</param>
             <param name="upper">上限-不包含</param>
         </member>
-        <member name="M:UtilsGen.Random.RandUInt64">
+        <member name="M:AHelper.Random.RandUInt64">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandUInt64Array(System.Int32@)">
+        <member name="M:AHelper.Random.RandUInt64Array(System.Int32@)">
             <summary>
             
             </summary>
             <param name="count"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandInt16(System.Int16@,System.Int32@)">
+        <member name="M:AHelper.Random.RandInt16(System.Int16@,System.Int32@)">
             <param name="lower">下限-包含</param>
             <param name="upper">上限-不包含</param>
         </member>
-        <member name="M:UtilsGen.Random.RandInt16">
+        <member name="M:AHelper.Random.RandInt16">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandInt16Array(System.Int32@)">
+        <member name="M:AHelper.Random.RandInt16Array(System.Int32@)">
             <summary>
             
             </summary>
             <param name="count"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandInt32">
+        <member name="M:AHelper.Random.RandInt32">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandInt32(System.Int32@,System.Int32@)">
+        <member name="M:AHelper.Random.RandInt32(System.Int32@,System.Int32@)">
             <param name="lower">下限-包含</param>
             <param name="upper">上限-不包含</param>
         </member>
-        <member name="M:UtilsGen.Random.RandInt32Array(System.Int32,System.Int32,System.Int32,System.Boolean)">
+        <member name="M:AHelper.Random.RandInt32Array(System.Int32,System.Int32,System.Int32,System.Boolean)">
             <param name="count"></param>
             <param name="minValue">下限-包含</param>
             <param name="maxValue">上限-不包含</param>
             <param name="hasRepeat">是否包含重复 Ture:包含 False:不包含</param>
         </member>
-        <member name="M:UtilsGen.Random.RandInt32ArrayWeight(System.Collections.Generic.IList{System.Int32})">
+        <member name="M:AHelper.Random.RandInt32ArrayWeight(System.Collections.Generic.IList{System.Int32})">
             <summary>
             
             </summary>
             <param name="weights"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandInt32ArrayWeight(System.Collections.Generic.IList{System.Int32},System.Int32)">
+        <member name="M:AHelper.Random.RandInt32ArrayWeight(System.Collections.Generic.IList{System.Int32},System.Int32)">
             <summary>
             
             </summary>
@@ -10842,30 +10842,30 @@
             <param name="weightRandomMinVal"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandInt64">
+        <member name="M:AHelper.Random.RandInt64">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandInt64(System.Int64@,System.Int64@)">
+        <member name="M:AHelper.Random.RandInt64(System.Int64@,System.Int64@)">
             <param name="lower">下限-包含</param>
             <param name="upper">上限-不包含</param>
         </member>
-        <member name="M:UtilsGen.Random.RandInt64Array(System.Int32@)">
+        <member name="M:AHelper.Random.RandInt64Array(System.Int32@)">
             <summary>
             
             </summary>
             <param name="count"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandFloat">
+        <member name="M:AHelper.Random.RandFloat">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandFloat(System.Boolean,System.Boolean)">
+        <member name="M:AHelper.Random.RandFloat(System.Boolean,System.Boolean)">
             <summary>
             
             </summary>
@@ -10873,20 +10873,20 @@
             <param name="hasInfinity"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.RandDouble">
+        <member name="M:AHelper.Random.RandDouble">
             <summary>
             
             </summary>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Random.BreakArray``1(System.Collections.Generic.IList{``0})">
+        <member name="M:AHelper.Random.BreakArray``1(System.Collections.Generic.IList{``0})">
             <summary>
             
             </summary>
             <param name="array"></param>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="M:UtilsGen.Random.BreakArray``1(System.Collections.Generic.IList{``0},System.Int32@,System.Int32)">
+        <member name="M:AHelper.Random.BreakArray``1(System.Collections.Generic.IList{``0},System.Int32@,System.Int32)">
             <summary>
             
             </summary>
@@ -10896,7 +10896,7 @@
             <typeparam name="T"></typeparam>
             <exception cref="T:System.ArgumentException"></exception>
         </member>
-        <member name="M:UtilsGen.Random.NextLong(System.Int64,System.Int64)">
+        <member name="M:AHelper.Random.NextLong(System.Int64,System.Int64)">
             <summary>
             
             </summary>
@@ -10905,7 +10905,7 @@
             <returns></returns>
             <exception cref="T:System.ArgumentException"></exception>
         </member>
-        <member name="T:UtilsGen.Status">
+        <member name="T:AHelper.Status">
             <summary>
             状态值比较
             </summary>
@@ -10930,7 +10930,7 @@
             耗时 Convert转换  1504
             </summary>
         </member>
-        <member name="M:UtilsGen.Status.Square(System.Int32,System.Int32)">
+        <member name="M:AHelper.Status.Square(System.Int32,System.Int32)">
             <summary>
             2次幂运算 判断是否相等
             </summary>
@@ -10942,7 +10942,7 @@
             1 << 3 = 8 不相等
             -->
         </member>
-        <member name="M:UtilsGen.Status.Square(System.Int64,System.Int64)">
+        <member name="M:AHelper.Status.Square(System.Int64,System.Int64)">
             <summary>
             2次幂运算 判断是否相等
             </summary>
@@ -10950,7 +10950,7 @@
             <param name="mask">对比值 T:4,8,16,32..</param>
             <returns>Ture:相等 Flase:不相等</returns>
         </member>
-        <member name="M:UtilsGen.Status.Mix(System.Enum,System.Enum)">
+        <member name="M:AHelper.Status.Mix(System.Enum,System.Enum)">
             <summary>
             源状态和指定状态是否有交集
             </summary>
@@ -10958,7 +10958,7 @@
             <param name="status">操作状态</param>
             <returns>true有相交</returns>
         </member>
-        <member name="M:UtilsGen.Status.Mix(System.Byte@,System.Byte@)">
+        <member name="M:AHelper.Status.Mix(System.Byte@,System.Byte@)">
             <summary>
             源状态和指定状态是否有交集
             </summary>
@@ -10966,7 +10966,7 @@
             <param name="status">操作状态</param>
             <returns>true有相交</returns>
         </member>
-        <member name="M:UtilsGen.Status.Mix(System.Int16@,System.Int16@)">
+        <member name="M:AHelper.Status.Mix(System.Int16@,System.Int16@)">
             <summary>
             源状态和指定状态是否有交集
             </summary>
@@ -10974,7 +10974,7 @@
             <param name="status">操作状态</param>
             <returns>true有相交</returns>
         </member>
-        <member name="M:UtilsGen.Status.Mix(System.Int32@,System.Int32@)">
+        <member name="M:AHelper.Status.Mix(System.Int32@,System.Int32@)">
             <summary>
             源状态和指定状态是否有交集
             </summary>
@@ -10982,7 +10982,7 @@
             <param name="status">操作状态</param>
             <returns>true有相交</returns>
         </member>
-        <member name="M:UtilsGen.Status.Mix(System.Int64@,System.Int64@)">
+        <member name="M:AHelper.Status.Mix(System.Int64@,System.Int64@)">
             <summary>
             源状态和指定状态是否有交集
             </summary>
@@ -10990,7 +10990,7 @@
             <param name="status">操作状态</param>
             <returns>true有相交</returns>
         </member>
-        <member name="M:UtilsGen.Status.Set``1(``0,``0,System.Boolean@)">
+        <member name="M:AHelper.Status.Set``1(``0,``0,System.Boolean@)">
             <summary>
             设置状态 要求枚举结构顺序为 幂次序
             </summary>
@@ -10998,7 +10998,7 @@
             <param name="status">操作状态</param>
             <param name="b">Ture 状态添加 false 状态移除</param>
         </member>
-        <member name="M:UtilsGen.Status.Set(System.Int16@,System.Int16@,System.Boolean@)">
+        <member name="M:AHelper.Status.Set(System.Int16@,System.Int16@,System.Boolean@)">
             <summary>
             设置状态
             </summary>
@@ -11006,7 +11006,7 @@
             <param name="status">操作状态</param>
             <param name="b">Ture 状态添加 false 状态移除</param>
         </member>
-        <member name="M:UtilsGen.Status.Set(System.Int32@,System.Int32@,System.Boolean@)">
+        <member name="M:AHelper.Status.Set(System.Int32@,System.Int32@,System.Boolean@)">
             <summary>
             设置状态
             </summary>
@@ -11014,7 +11014,7 @@
             <param name="status">操作状态</param>
             <param name="b">Ture 状态添加 false 状态移除</param>
         </member>
-        <member name="M:UtilsGen.Status.Set(System.Int64@,System.Int64@,System.Boolean@)">
+        <member name="M:AHelper.Status.Set(System.Int64@,System.Int64@,System.Boolean@)">
             <summary>
             设置状态
             </summary>
@@ -11022,96 +11022,96 @@
             <param name="status">操作状态</param>
             <param name="b">Ture 状态添加 false 状态移除</param>
         </member>
-        <member name="M:UtilsGen.Status.Has(System.Enum@,System.Enum@)">
+        <member name="M:AHelper.Status.Has(System.Enum@,System.Enum@)">
             <summary>
             是否有指定状态（包含指定状态，但不限于指定状态）
             </summary>
         </member>
-        <member name="M:UtilsGen.Status.Has(System.Int16@,System.Int16@)">
-            <summary>
-            是否有指定状态（包含指定状态，但不限于指定状态）
-            </summary>
-            <param name="source">源状态</param>
-            <param name="status">操作状态</param>
-        </member>
-        <member name="M:UtilsGen.Status.Has(System.Int32@,System.Int32@)">
+        <member name="M:AHelper.Status.Has(System.Int16@,System.Int16@)">
             <summary>
             是否有指定状态（包含指定状态，但不限于指定状态）
             </summary>
             <param name="source">源状态</param>
             <param name="status">操作状态</param>
         </member>
-        <member name="M:UtilsGen.Status.Has(System.Int64@,System.Int64@)">
+        <member name="M:AHelper.Status.Has(System.Int32@,System.Int32@)">
             <summary>
             是否有指定状态（包含指定状态，但不限于指定状态）
             </summary>
             <param name="source">源状态</param>
             <param name="status">操作状态</param>
         </member>
-        <member name="M:UtilsGen.Status.Only``1(``0@,``0@)">
+        <member name="M:AHelper.Status.Has(System.Int64@,System.Int64@)">
+            <summary>
+            是否有指定状态（包含指定状态，但不限于指定状态）
+            </summary>
+            <param name="source">源状态</param>
+            <param name="status">操作状态</param>
+        </member>
+        <member name="M:AHelper.Status.Only``1(``0@,``0@)">
             <summary>
             是否是指定状态 仅仅是指定状态
             </summary>
             <param name="source">源状态</param>
             <param name="status">操作状态</param>
         </member>
-        <member name="M:UtilsGen.Status.Only(System.Int32@,System.Int32@)">
+        <member name="M:AHelper.Status.Only(System.Int32@,System.Int32@)">
             <summary>
             是否是指定状态 仅仅是指定状态
             </summary>
             <param name="source">源状态</param>
             <param name="status">操作状态</param>
         </member>
-        <member name="M:UtilsGen.Status.Only(System.Int64@,System.UInt32@)">
+        <member name="M:AHelper.Status.Only(System.Int64@,System.UInt32@)">
             <summary>
             是否是指定状态 仅仅是指定状态
             </summary>
             <param name="source">源状态</param>
             <param name="status">操作状态</param>
         </member>
-        <member name="M:UtilsGen.Status.Only(System.Int64@,System.Int64@)">
+        <member name="M:AHelper.Status.Only(System.Int64@,System.Int64@)">
             <summary>
             是否是指定状态 仅仅是指定状态
             </summary>
             <param name="source">源状态</param>
             <param name="status">操作状态</param>
         </member>
-        <member name="M:UtilsGen.Status.Only(System.UInt64@,System.UInt64)">
+        <member name="M:AHelper.Status.Only(System.UInt64@,System.UInt64)">
             <summary>
             是否是指定状态 仅仅是指定状态
             </summary>
             <param name="source">源状态</param>
             <param name="status">操作状态</param>
         </member>
-        <member name="M:UtilsGen.Status.Only(System.Int16@,System.Int16@)">
+        <member name="M:AHelper.Status.Only(System.Int16@,System.Int16@)">
             <summary>
             是否是指定状态 仅仅是指定状态
             </summary>
             <param name="source">源状态</param>
             <param name="status">操作状态</param>
         </member>
-        <member name="M:UtilsGen.Status.Only(System.UInt16@,System.UInt16@)">
+        <member name="M:AHelper.Status.Only(System.UInt16@,System.UInt16@)">
             <summary>
             是否是指定状态 仅仅是指定状态
             </summary>
             <param name="source">源状态</param>
             <param name="status">操作状态</param>
         </member>
-        <member name="M:UtilsGen.Status.Only(System.Byte@,System.Byte@)">
+        <member name="M:AHelper.Status.Only(System.Byte@,System.Byte@)">
             <summary>
             是否是指定状态 仅仅是指定状态
             </summary>
             <param name="source">源状态</param>
             <param name="status">操作状态</param>
         </member>
-        <member name="M:UtilsGen.Status.Only(System.Single@,System.Single@)">
+        <member name="M:AHelper.Status.Only(System.Single@,System.Single@)">
             <summary>
             是否是指定状态 仅仅是指定状态
             </summary>
             <param name="source">源状态</param>
             <param name="status">操作状态</param>
         </member>
-        <member name="M:UtilsGen.Status.Del``1(``0@,``0@)">
+        <member name="M:AHelper.Status.Del``1(``0@,``0@)">
             <summary>
             删除状态
             </summary>
@@ -11119,7 +11119,7 @@
             <param name="status">操作状态</param>
             <returns>新状态</returns>
         </member>
-        <member name="M:UtilsGen.Status.Del(System.Byte@,System.Byte@)">
+        <member name="M:AHelper.Status.Del(System.Byte@,System.Byte@)">
             <summary>
             删除状态
             </summary>
@@ -11127,7 +11127,7 @@
             <param name="status">操作状态</param>
             <returns>新状态</returns>
         </member>
-        <member name="M:UtilsGen.Status.Del(System.Int16@,System.Int16@)">
+        <member name="M:AHelper.Status.Del(System.Int16@,System.Int16@)">
             <summary>
             删除状态
             </summary>
@@ -11135,7 +11135,7 @@
             <param name="status">操作状态</param>
             <returns>新状态</returns>
         </member>
-        <member name="M:UtilsGen.Status.Del(System.Int32@,System.Int32@)">
+        <member name="M:AHelper.Status.Del(System.Int32@,System.Int32@)">
             <summary>
             删除状态
             </summary>
@@ -11143,7 +11143,7 @@
             <param name="status">操作状态</param>
             <returns>新状态</returns>
         </member>
-        <member name="M:UtilsGen.Status.Del(System.Int64@,System.Int64@)">
+        <member name="M:AHelper.Status.Del(System.Int64@,System.Int64@)">
             <summary>
             删除状态 2次幂序
             </summary>
@@ -11151,77 +11151,77 @@
             <param name="status">操作状态</param>
             <returns>新状态</returns>
         </member>
-        <member name="T:UtilsGen.Time">
+        <member name="T:AHelper.Time">
             <summary>
             时间方法库
             </summary>
         </member>
-        <member name="P:UtilsGen.Time.BeforeYesterday">
+        <member name="P:AHelper.Time.BeforeYesterday">
             <summary>
             前天开始时间 单位毫秒
             </summary>
         </member>
-        <member name="P:UtilsGen.Time.Yesterday">
+        <member name="P:AHelper.Time.Yesterday">
             <summary>
             昨天开始时间 单位毫秒
             </summary>
         </member>
-        <member name="P:UtilsGen.Time.Today">
+        <member name="P:AHelper.Time.Today">
             <summary>
             当天开始时间 单位毫秒
             </summary>
         </member>
-        <member name="P:UtilsGen.Time.TomorrowDay">
+        <member name="P:AHelper.Time.TomorrowDay">
             <summary>
             明天开始时间 单位毫秒
             </summary>
         </member>
-        <member name="P:UtilsGen.Time.AfterDay">
+        <member name="P:AHelper.Time.AfterDay">
             <summary>
             后天开始时间 单位毫秒
             </summary>
         </member>
-        <member name="M:UtilsGen.Time.GetCurrTimeStr(System.String@)">
+        <member name="M:AHelper.Time.GetCurrTimeStr(System.String@)">
             <summary>
             获取当前时间 文字格式
             </summary>
         </member>
-        <member name="M:UtilsGen.Time.GetCurrTime(Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.GetCurrTime(Unit.Time.SencondUnit@)">
             <summary>
             获取当前时间搓
             </summary>
         </member>
-        <member name="M:UtilsGen.Time.GetDateTime(System.String@,Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.GetDateTime(System.String@,Unit.Time.SencondUnit@)">
             <summary>
             获取时间搓
             </summary>
         </member>
-        <member name="M:UtilsGen.Time.Format(System.Int64@,System.String@,Unit.Time.SencondUnit)">
+        <member name="M:AHelper.Time.Format(System.Int64@,System.String@,Unit.Time.SencondUnit)">
             <summary>
             格式化时间，参数：格林威治时间，格式化格式（具体见文件末尾）
             </summary>
         </member>
-        <member name="M:UtilsGen.Time.GetDateTime(System.Int64@,Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.GetDateTime(System.Int64@,Unit.Time.SencondUnit@)">
             <summary>
             © 获取DateTime 时间磋单位支持 纳秒 微秒 毫秒 秒
             </summary>
         </member>
-        <member name="M:UtilsGen.Time.GetTimeSpan(System.Int64@,Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.GetTimeSpan(System.Int64@,Unit.Time.SencondUnit@)">
             <summary>
             © 获取TimeSpan 时间磋单位支持 纳秒 微秒 毫秒 秒
             </summary>
         </member>
-        <member name="M:UtilsGen.Time.Normalize(System.DateTime@,Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.Normalize(System.DateTime@,Unit.Time.SencondUnit@)">
             <summary>
             获取指定单位的时间搓
             </summary>
         </member>
-        <member name="M:UtilsGen.Time.GetCurrDateToDay(System.Int32@,Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.GetCurrDateToDay(System.Int32@,Unit.Time.SencondUnit@)">
             <summary>
             获取当天差距 时间信息
             </summary>
         </member>
-        <member name="M:UtilsGen.Time.GetTimeStartByType(System.Int64@,Unit.Time.DateTimeUnit@,Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.GetTimeStartByType(System.Int64@,Unit.Time.DateTimeUnit@,Unit.Time.SencondUnit@)">
             <summary>
             获取开始时间
             </summary>
@@ -11229,7 +11229,7 @@
             <param name="DateType">获取类型 年 季 月 周 日</param>
             <param name="unit">时间搓 单位 纳秒 微秒 毫秒 秒</param>
         </member>
-        <member name="M:UtilsGen.Time.GetTimeEndByType(System.Int64@,Unit.Time.DateTimeUnit@,Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.GetTimeEndByType(System.Int64@,Unit.Time.DateTimeUnit@,Unit.Time.SencondUnit@)">
             <summary>
             获取结束时间
             </summary>
@@ -11237,33 +11237,33 @@
             <param name="DateType">获取类型 年 季 月 周 日</param>
             <param name="unit">时间搓 单位 纳秒 微秒 毫秒 秒</param>
         </member>
-        <member name="M:UtilsGen.Time.GetCountDown(System.Int64@,Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.GetCountDown(System.Int64@,Unit.Time.SencondUnit@)">
             <summary>
             获取时间倒计时字符串表示(ms) 01:59:08
             </summary>
         </member>
-        <member name="M:UtilsGen.Time.GetPreHumanityTime(System.Int64,Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.GetPreHumanityTime(System.Int64,Unit.Time.SencondUnit@)">
             <summary>
             获取传入时间距离当前时间的文字描述
             </summary>
         </member>
-        <member name="M:UtilsGen.Time.CompareNowTime(System.DateTime@)">
+        <member name="M:AHelper.Time.CompareNowTime(System.DateTime@)">
             <summary>
             与当前时间比较 如果小于当前时间为Ture
             </summary>
         </member>
-        <member name="M:UtilsGen.Time.CompareNowTime(System.Int64@,Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.CompareNowTime(System.Int64@,Unit.Time.SencondUnit@)">
             <summary>
             与当前时间比较 如果小于当前时间为Ture
             </summary>
         </member>
-        <member name="M:UtilsGen.Time.DateStringFromNow(System.DateTime@)">
+        <member name="M:AHelper.Time.DateStringFromNow(System.DateTime@)">
             <summary>
             求离最近发表时间的函数
             </summary>
             <returns> 返回时间描述 </returns>
         </member>
-        <member name="M:UtilsGen.Time.CompareDateDay(System.String@,System.String@,System.Int32@)">
+        <member name="M:AHelper.Time.CompareDateDay(System.String@,System.String@,System.Int32@)">
             <summary>
             日期比较
             </summary>
@@ -11272,100 +11272,100 @@
             <param name="n">比较天数</param>
             <returns>大于天数返回true，小于返回false</returns>
         </member>
-        <member name="M:UtilsGen.Time.GetDisTime(System.DateTime@,System.DateTime@,System.String@)">
+        <member name="M:AHelper.Time.GetDisTime(System.DateTime@,System.DateTime@,System.String@)">
             <summary>
             获取两时间相差
             </summary>
         </member>
-        <member name="M:UtilsGen.Time.GetDisTime(System.Int64@,System.Int64@,System.String@)">
+        <member name="M:AHelper.Time.GetDisTime(System.Int64@,System.Int64@,System.String@)">
             <summary>
             获取两时间相差
             </summary>
         </member>
-        <member name="M:UtilsGen.Time.IsToday(System.Int64@,System.Int64@,Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.IsToday(System.Int64@,System.Int64@,Unit.Time.SencondUnit@)">
             <summary>
             判断是否同日
             </summary>
         </member>
-        <member name="T:UtilsGen.Http">
+        <member name="T:AHelper.Http">
             <summary>
             Http 工具类
             </summary>
         </member>
-        <member name="M:UtilsGen.Http.UriParamSerialize(System.Object@)">
+        <member name="M:AHelper.Http.UriParamSerialize(System.Object@)">
             <summary>
             Model对象转换为uri网址参数形式
             </summary>
             <param name="obj">Model对象</param>
         </member>
-        <member name="T:UtilsGen.IDNo">
+        <member name="T:AHelper.IDNo">
             <summary>
             身份证判断方法
             </summary>
         </member>
-        <member name="F:UtilsGen.IDNo.REGEX_ID_NO_18">
+        <member name="F:AHelper.IDNo.REGEX_ID_NO_18">
             <summary>
             18位二代身份证号码的正则表达式
             </summary>
         </member>
-        <member name="F:UtilsGen.IDNo.W">
+        <member name="F:AHelper.IDNo.W">
             <summary>
             加权因子
             </summary>
         </member>
-        <member name="F:UtilsGen.IDNo.CheckNumberArray">
+        <member name="F:AHelper.IDNo.CheckNumberArray">
             <summary>
              
             </summary>
         </member>
-        <member name="M:UtilsGen.IDNo.CheckIDNo(System.String)">
+        <member name="M:AHelper.IDNo.CheckIDNo(System.String)">
             <summary>
             判断当前字符是否符合中国身份证
             </summary>
         </member>
-        <member name="M:UtilsGen.IDNo.CheckIDNo18(System.String)">
+        <member name="M:AHelper.IDNo.CheckIDNo18(System.String)">
             <summary>
             判断当前字符是否符合中国18位身份证
             </summary>
         </member>
-        <member name="M:UtilsGen.IDNo.UpdateIDNo15to18(System.String)">
+        <member name="M:AHelper.IDNo.UpdateIDNo15to18(System.String)">
             <summary>
             15位省份证升级至18位
             </summary>
         </member>
-        <member name="M:UtilsGen.IDNo.ComputeCheckNumber(System.String)">
+        <member name="M:AHelper.IDNo.ComputeCheckNumber(System.String)">
             <summary>
             计算校验码 适用于18位的二代身份证号码
             </summary>
             <param name="masterNumber">本体码</param>
             <returns>校验码</returns>
         </member>
-        <member name="M:UtilsGen.IDNo.ValidateCheckNumber(System.String)">
+        <member name="M:AHelper.IDNo.ValidateCheckNumber(System.String)">
             <summary>
             校验身份证号码的验证码
             </summary>
         </member>
-        <member name="T:UtilsGen.MaskWord">
+        <member name="T:AHelper.MaskWord">
             <summary> 
             屏蔽字
             </summary>
         </member>
-        <member name="M:UtilsGen.MaskWord.Replace(System.String)">
+        <member name="M:AHelper.MaskWord.Replace(System.String)">
             <summary>
             替换屏蔽字为*
             </summary>
         </member>
-        <member name="M:UtilsGen.MaskWord.LoadMaskWord(System.String)">
+        <member name="M:AHelper.MaskWord.LoadMaskWord(System.String)">
             <summary>
             加载屏蔽文本
             </summary>
         </member>
-        <member name="T:UtilsGen.String">
+        <member name="T:AHelper.String">
             <summary>
             字符串工具库
             </summary>
         </member>
-        <member name="M:UtilsGen.String.Format(System.String,System.Object)">
+        <member name="M:AHelper.String.Format(System.String,System.Object)">
             <summary>
             字符串格式化
             </summary>
@@ -11374,7 +11374,7 @@
             <returns>字符串</returns>
             <exception cref="T:System.ArgumentNullException">参数异常</exception>
         </member>
-        <member name="M:UtilsGen.String.Format(System.String,System.Object,System.Object)">
+        <member name="M:AHelper.String.Format(System.String,System.Object,System.Object)">
             <summary>
             字符串格式化
             </summary>
@@ -11384,7 +11384,7 @@
             <returns>字符串</returns>
             <exception cref="T:System.ArgumentNullException">参数异常</exception>
         </member>
-        <member name="M:UtilsGen.String.Format(System.String,System.Object,System.Object,System.Object)">
+        <member name="M:AHelper.String.Format(System.String,System.Object,System.Object,System.Object)">
             <summary>
             字符串格式化
             </summary>
@@ -11395,7 +11395,7 @@
             <returns>字符串</returns>
             <exception cref="T:System.ArgumentNullException">参数异常</exception>
         </member>
-        <member name="M:UtilsGen.String.Format(System.String,System.Object[])">
+        <member name="M:AHelper.String.Format(System.String,System.Object[])">
             <summary>
             字符串格式化
             </summary>
@@ -11404,55 +11404,55 @@
             <returns>字符串</returns>
             <exception cref="T:System.ArgumentNullException">参数异常</exception>
         </member>
-        <member name="M:UtilsGen.String.RemoveFirstChar(System.String)">
+        <member name="M:AHelper.String.RemoveFirstChar(System.String)">
             <summary>
             移除第一个字符
             </summary>
             <param name="str">字符串</param>
             <returns>字符串</returns>
         </member>
-        <member name="M:UtilsGen.String.RemoveLastChar(System.String)">
+        <member name="M:AHelper.String.RemoveLastChar(System.String)">
             <summary>
             移除最后一个字符
             </summary>
             <param name="str">字符串</param>
             <returns>字符串</returns>
         </member>
-        <member name="M:UtilsGen.String.RemoveExtension(System.String)">
+        <member name="M:AHelper.String.RemoveExtension(System.String)">
             <summary>
             移除扩展名
             </summary>
             <param name="str">字符串</param>
             <returns>字符串</returns>
         </member>
-        <member name="M:UtilsGen.String.ToConvertBlock(System.String[])">
+        <member name="M:AHelper.String.ToConvertBlock(System.String[])">
             <summary>
             转化为区块
             </summary>
         </member>
-        <member name="M:UtilsGen.String.ToConvertSpace(System.String[])">
+        <member name="M:AHelper.String.ToConvertSpace(System.String[])">
             <summary>
             转化为区块
             </summary>
         </member>
-        <member name="M:UtilsGen.String.ToConvert(AIO.StringBlock@,System.String[])">
+        <member name="M:AHelper.String.ToConvert(AIO.StringBlock@,System.String[])">
             <summary>
             转化为区块
             </summary>
         </member>
-        <member name="M:UtilsGen.String.ToConvertUnitsCNS(System.String,System.Int32@)">
+        <member name="M:AHelper.String.ToConvertUnitsCNS(System.String,System.Int32@)">
             <summary>
             阿拉伯数字全部转化为中文数字 有单位 传入需全部为数字字符 简体中文
             </summary>
             <param name="num"></param>
             <param name="unitNum">单位截止下标,默认0,1:万后,2:亿后,3:万亿</param>
         </member>
-        <member name="M:UtilsGen.String.ToConvertNoUnitsCNS(System.String)">
+        <member name="M:AHelper.String.ToConvertNoUnitsCNS(System.String)">
             <summary>
             阿拉伯数字全部转化为中文数字 无单位 传入需全部为数字字符 简体中文
             </summary>
         </member>
-        <member name="M:UtilsGen.String.StringToHexView(System.Byte[]@,System.Int32)">
+        <member name="M:AHelper.String.StringToHexView(System.Byte[]@,System.Int32)">
             <summary>
             二进制转字符串
             </summary>
@@ -11460,7 +11460,7 @@
             <param name="len"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.String.StringToHex(System.Byte[]@,System.Int32)">
+        <member name="M:AHelper.String.StringToHex(System.Byte[]@,System.Int32)">
             <summary>
             
             </summary>
@@ -11468,28 +11468,28 @@
             <param name="len"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.String.HexStringToBytes(System.String@)">
+        <member name="M:AHelper.String.HexStringToBytes(System.String@)">
             <summary>
             
             </summary>
             <param name="hexStr"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.String.BtsToBase64(System.Byte[]@)">
+        <member name="M:AHelper.String.BtsToBase64(System.Byte[]@)">
             <summary>
             
             </summary>
             <param name="buff"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.String.Base64ToBts(System.String@)">
+        <member name="M:AHelper.String.Base64ToBts(System.String@)">
             <summary>
             
             </summary>
             <param name="str"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.String.GetMD5(System.String@,System.Text.Encoding@)">
+        <member name="M:AHelper.String.GetMD5(System.String@,System.Text.Encoding@)">
             <summary>
             
             </summary>
@@ -11497,7 +11497,7 @@
             <param name="encoding"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.String.GetMD5(System.Collections.Generic.ICollection{System.String}@,System.Text.Encoding@)">
+        <member name="M:AHelper.String.GetMD5(System.Collections.Generic.ICollection{System.String}@,System.Text.Encoding@)">
             <summary>
             
             </summary>
@@ -11505,148 +11505,148 @@
             <param name="encoding"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.String.IsNullOrWhiteSpace(System.String@)">
+        <member name="M:AHelper.String.IsNullOrWhiteSpace(System.String@)">
             <summary>
             是空还是空白
             </summary>
         </member>
-        <member name="M:UtilsGen.String.FallbackEmpty(System.String,System.String@)">
+        <member name="M:AHelper.String.FallbackEmpty(System.String,System.String@)">
             <summary>
             如果指示指定的字符串是 null 还是 System.String.Empty 字符串。
             则回退
             </summary>
         </member>
-        <member name="M:UtilsGen.String.FallbackWhitespace(System.String,System.String@)">
+        <member name="M:AHelper.String.FallbackWhitespace(System.String,System.String@)">
             <summary>
             如果所有字符串为空白则回退
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IsValidateMonth(System.String@)">
+        <member name="M:AHelper.String.IsValidateMonth(System.String@)">
             <summary>
             验证一年的12个月
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IsValidateChinese(System.String@)">
+        <member name="M:AHelper.String.IsValidateChinese(System.String@)">
             <summary>
             验证输入汉字
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IsValidateLength(System.String@,System.Int32)">
+        <member name="M:AHelper.String.IsValidateLength(System.String@,System.Int32)">
             <summary>
             验证输入字符串 是否满足指定个数
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IsValidateMinMaxLength(System.String@,System.Int32,System.Int32)">
+        <member name="M:AHelper.String.IsValidateMinMaxLength(System.String@,System.Int32,System.Int32)">
             <summary>
             验证当前字符串是否在指定长度范围内
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IsValidateDay(System.String@)">
+        <member name="M:AHelper.String.IsValidateDay(System.String@)">
             <summary>
             验证一个月的31天
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IsValidate2Decimal(System.String@)">
+        <member name="M:AHelper.String.IsValidate2Decimal(System.String@)">
             <summary>
             验证两位小数
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IsNullOrEmpty(System.String@)">
+        <member name="M:AHelper.String.IsNullOrEmpty(System.String@)">
             <summary> 
             判断字符是否为空 
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IsValidateNumeric(System.String@)">
+        <member name="M:AHelper.String.IsValidateNumeric(System.String@)">
             <summary>
             是否为Numeric
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IsValidateInt(System.String@)">
+        <member name="M:AHelper.String.IsValidateInt(System.String@)">
             <summary>
             是否为Int
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IsValidateBool(System.String@)">
+        <member name="M:AHelper.String.IsValidateBool(System.String@)">
             <summary>
             是否为Bool
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IsValidateNum(System.String)">
+        <member name="M:AHelper.String.IsValidateNum(System.String)">
             <summary>
             是否为整数
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IsValidateUnsign(System.String)">
+        <member name="M:AHelper.String.IsValidateUnsign(System.String)">
             <summary>
             是否为Unsign
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IsValidateDate(System.String@)">
+        <member name="M:AHelper.String.IsValidateDate(System.String@)">
             <summary>
             验证是否为 YYYY MM DD 格式 包含闰年 平年
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IsValidateDateString(System.String@)">
+        <member name="M:AHelper.String.IsValidateDateString(System.String@)">
             <summary>
             判断字符串是否是yy-mm-dd字符串
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IsValidatePhone(System.String@)">
+        <member name="M:AHelper.String.IsValidatePhone(System.String@)">
             <summary>
             验证手机号码
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IsValidateIPSect(System.String@)">
+        <member name="M:AHelper.String.IsValidateIPSect(System.String@)">
             <summary>
             是否为IP分段
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IsValidateEmail(System.String@)">
+        <member name="M:AHelper.String.IsValidateEmail(System.String@)">
             <summary>
             是否电子邮件
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IsPostalcode(System.String@)">
+        <member name="M:AHelper.String.IsPostalcode(System.String@)">
             <summary>
             验证邮编
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IsValidateIDcard(System.String@)">
+        <member name="M:AHelper.String.IsValidateIDcard(System.String@)">
             <summary>
             验证身份证号
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IsValidateIDcard18(System.String@)">
+        <member name="M:AHelper.String.IsValidateIDcard18(System.String@)">
             <summary>
             验证中国身份证号18
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IsValidateIDcard15(System.String@)">
+        <member name="M:AHelper.String.IsValidateIDcard15(System.String@)">
             <summary>
             验证身份证号15
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IDcard15To18(System.String@)">
+        <member name="M:AHelper.String.IDcard15To18(System.String@)">
             <summary>
             15位省份证号码升18位
             </summary>
         </member>
-        <member name="M:UtilsGen.String.GetHttpHost(System.String@)">
+        <member name="M:AHelper.String.GetHttpHost(System.String@)">
             <summary>
             获取Http主机名 如果有端口 包含端口
             </summary>
         </member>
-        <member name="M:UtilsGen.String.GetRegexMatches(System.String@,System.String)">
+        <member name="M:AHelper.String.GetRegexMatches(System.String@,System.String)">
             <summary>
             根据正则表达式 获取对应内容
             </summary>
         </member>
-        <member name="M:UtilsGen.String.IsValidateUrl(System.String,System.String)">
+        <member name="M:AHelper.String.IsValidateUrl(System.String,System.String)">
             <summary>
             验证URL是否有效
             </summary>
         </member>
-        <member name="T:UtilsGen.Marshal">
+        <member name="T:AHelper.Marshal">
             <summary>
             SMarshal 类
             </summary>
@@ -11657,85 +11657,85 @@
             <!--备注 SMarshal 类中定义的 static 方法对于处理非托管代码至关重要。此类中定义的大多数方法通常由需要-->
             <!--此类型的任何公共静态（Visual Basic 中的 Shared）成员都是线程安全的，但不保证所有实例成员都 是线程安全的-->
         </member>
-        <member name="P:UtilsGen.Marshal.SystemDefaultCharSize">
+        <member name="P:AHelper.Marshal.SystemDefaultCharSize">
             <summary>
             表示系统上的默认字符大小；Unicode 系统上默认值为 2，ANSI 系统上默认值为 1。 此字段为只读。
             </summary>
         </member>
-        <member name="P:UtilsGen.Marshal.SystemMaxDBCSCharSize">
+        <member name="P:AHelper.Marshal.SystemMaxDBCSCharSize">
             <summary>
             表示用于当前操作系统的双字节字符集 (DBCS) 的最大大小（以字节为单位）。 此字段为只读。
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.SizeOf``1(``0)">
+        <member name="M:AHelper.Marshal.SizeOf``1(``0)">
             <summary>
             获取 结构体实例 空间大小
             </summary>
             <param name="obj">返回对象的非托管大小 以字节为单位</param>
         </member>
-        <member name="M:UtilsGen.Marshal.SizeOf``1">
+        <member name="M:AHelper.Marshal.SizeOf``1">
             <summary>
             获取 结构体实例 空间大小
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.AllocHGlobal(System.Int32)">
+        <member name="M:AHelper.Marshal.AllocHGlobal(System.Int32)">
             <summary>
             使用指定的字节数从进程的非托管内存中分配内存。
             </summary>
             <param name="size">内存中所需的字节数</param>
             <returns>一个指向新分配内存的指针 这个内存必须使用Marshal.FreeHGlobal 来释放 </returns>
         </member>
-        <member name="M:UtilsGen.Marshal.AddRef(System.IntPtr)">
+        <member name="M:AHelper.Marshal.AddRef(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.AllocCoTaskMem(System.Int32)">
+        <member name="M:AHelper.Marshal.AllocCoTaskMem(System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.AreComObjectsAvailableForCleanup">
+        <member name="M:AHelper.Marshal.AreComObjectsAvailableForCleanup">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.BindToMoniker(System.String)">
+        <member name="M:AHelper.Marshal.BindToMoniker(System.String)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ChangeWrapperHandleStrength(System.Object,System.Boolean)">
+        <member name="M:AHelper.Marshal.ChangeWrapperHandleStrength(System.Object,System.Boolean)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.CleanupUnusedObjectsInCurrentContext">
+        <member name="M:AHelper.Marshal.CleanupUnusedObjectsInCurrentContext">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.AllocHGlobal(System.IntPtr)">
+        <member name="M:AHelper.Marshal.AllocHGlobal(System.IntPtr)">
             <summary>
             使用指定的字节数从进程的非托管内存中分配内存。
             </summary>
             <param name="ptr">内存中所需的字节数</param>
             <returns>一个指向新分配内存的指针 这个内存必须使用Marshal.FreeHGlobal 来释放 </returns>
         </member>
-        <member name="M:UtilsGen.Marshal.FreeHGlobal(System.IntPtr)">
+        <member name="M:AHelper.Marshal.FreeHGlobal(System.IntPtr)">
             <summary>
             释放内存中指针
             </summary>
             <param name="hglobal">内存中的指针</param>
         </member>
-        <member name="M:UtilsGen.Marshal.CreateAggregatedObject``1(System.IntPtr,``0)">
+        <member name="M:AHelper.Marshal.CreateAggregatedObject``1(System.IntPtr,``0)">
             <summary>
             创建聚合对象
             </summary>
             <param name="ptr">指针</param>
             <param name="obj">数据</param>
         </member>
-        <member name="M:UtilsGen.Marshal.CreateWrapperOfType``1(System.Object)">
+        <member name="M:AHelper.Marshal.CreateWrapperOfType``1(System.Object)">
             <summary>
             创建类型的包装器
             </summary>
@@ -11743,7 +11743,7 @@
             <param name="obj">数据</param>
             <returns>包装数据</returns>
         </member>
-        <member name="M:UtilsGen.Marshal.CreateWrapperOfType``2(``0)">
+        <member name="M:AHelper.Marshal.CreateWrapperOfType``2(``0)">
             <summary>
             创建类型的包装器
             </summary>
@@ -11752,307 +11752,307 @@
             <param name="obj">数据</param>
             <returns>包装器</returns>
         </member>
-        <member name="M:UtilsGen.Marshal.Copy(System.Single[],System.Int32,System.IntPtr,System.Int32)">
+        <member name="M:AHelper.Marshal.Copy(System.Single[],System.Int32,System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.Copy(System.IntPtr[],System.Int32,System.IntPtr,System.Int32)">
+        <member name="M:AHelper.Marshal.Copy(System.IntPtr[],System.Int32,System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.Copy(System.IntPtr,System.Single[],System.Int32,System.Int32)">
+        <member name="M:AHelper.Marshal.Copy(System.IntPtr,System.Single[],System.Int32,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.Copy(System.IntPtr,System.IntPtr[],System.Int32,System.Int32)">
+        <member name="M:AHelper.Marshal.Copy(System.IntPtr,System.IntPtr[],System.Int32,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.Copy(System.IntPtr,System.Int64[],System.Int32,System.Int32)">
+        <member name="M:AHelper.Marshal.Copy(System.IntPtr,System.Int64[],System.Int32,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.Copy(System.IntPtr,System.Int32[],System.Int32,System.Int32)">
+        <member name="M:AHelper.Marshal.Copy(System.IntPtr,System.Int32[],System.Int32,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.Copy(System.IntPtr,System.Double[],System.Int32,System.Int32)">
+        <member name="M:AHelper.Marshal.Copy(System.IntPtr,System.Double[],System.Int32,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.Copy(System.IntPtr,System.Int16[],System.Int32,System.Int32)">
+        <member name="M:AHelper.Marshal.Copy(System.IntPtr,System.Int16[],System.Int32,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.Copy(System.IntPtr,System.Byte[],System.Int32,System.Int32)">
+        <member name="M:AHelper.Marshal.Copy(System.IntPtr,System.Byte[],System.Int32,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.Copy(System.Int64[],System.Int32,System.IntPtr,System.Int32)">
+        <member name="M:AHelper.Marshal.Copy(System.Int64[],System.Int32,System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)">
+        <member name="M:AHelper.Marshal.Copy(System.Int32[],System.Int32,System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.Copy(System.Int16[],System.Int32,System.IntPtr,System.Int32)">
+        <member name="M:AHelper.Marshal.Copy(System.Int16[],System.Int32,System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.Copy(System.Double[],System.Int32,System.IntPtr,System.Int32)">
+        <member name="M:AHelper.Marshal.Copy(System.Double[],System.Int32,System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.Copy(System.Char[],System.Int32,System.IntPtr,System.Int32)">
+        <member name="M:AHelper.Marshal.Copy(System.Char[],System.Int32,System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.Copy(System.Byte[],System.Int32,System.IntPtr,System.Int32)">
+        <member name="M:AHelper.Marshal.Copy(System.Byte[],System.Int32,System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.Copy(System.IntPtr,System.Char[],System.Int32,System.Int32)">
+        <member name="M:AHelper.Marshal.Copy(System.IntPtr,System.Char[],System.Int32,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ReadByte(System.Object,System.Int32)">
+        <member name="M:AHelper.Marshal.ReadByte(System.Object,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ReadByte(System.IntPtr)">
+        <member name="M:AHelper.Marshal.ReadByte(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ReadByte(System.IntPtr,System.Int32)">
+        <member name="M:AHelper.Marshal.ReadByte(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ReadInt16(System.IntPtr)">
+        <member name="M:AHelper.Marshal.ReadInt16(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ReadInt16(System.IntPtr,System.Int32)">
+        <member name="M:AHelper.Marshal.ReadInt16(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ReadInt16(System.Object,System.Int32)">
+        <member name="M:AHelper.Marshal.ReadInt16(System.Object,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ReadInt32(System.IntPtr)">
+        <member name="M:AHelper.Marshal.ReadInt32(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ReadInt32(System.IntPtr,System.Int32)">
+        <member name="M:AHelper.Marshal.ReadInt32(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ReadInt32(System.Object,System.Int32)">
+        <member name="M:AHelper.Marshal.ReadInt32(System.Object,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ReadInt64(System.Object,System.Int32)">
+        <member name="M:AHelper.Marshal.ReadInt64(System.Object,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ReadInt64(System.IntPtr,System.Int32)">
+        <member name="M:AHelper.Marshal.ReadInt64(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ReadInt64(System.IntPtr)">
+        <member name="M:AHelper.Marshal.ReadInt64(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ReadIntPtr(System.IntPtr)">
+        <member name="M:AHelper.Marshal.ReadIntPtr(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ReadIntPtr(System.IntPtr,System.Int32)">
+        <member name="M:AHelper.Marshal.ReadIntPtr(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ReadIntPtr(System.Object,System.Int32)">
+        <member name="M:AHelper.Marshal.ReadIntPtr(System.Object,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.WriteByte(System.Object,System.Int32,System.Byte)">
+        <member name="M:AHelper.Marshal.WriteByte(System.Object,System.Int32,System.Byte)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.WriteByte(System.IntPtr,System.Int32,System.Byte)">
+        <member name="M:AHelper.Marshal.WriteByte(System.IntPtr,System.Int32,System.Byte)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.WriteByte(System.IntPtr,System.Byte)">
+        <member name="M:AHelper.Marshal.WriteByte(System.IntPtr,System.Byte)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.WriteInt16(System.IntPtr,System.Char)">
+        <member name="M:AHelper.Marshal.WriteInt16(System.IntPtr,System.Char)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.WriteInt16(System.IntPtr,System.Int16)">
+        <member name="M:AHelper.Marshal.WriteInt16(System.IntPtr,System.Int16)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.WriteInt16(System.IntPtr,System.Int32,System.Char)">
+        <member name="M:AHelper.Marshal.WriteInt16(System.IntPtr,System.Int32,System.Char)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.WriteInt16(System.IntPtr,System.Int32,System.Int16)">
+        <member name="M:AHelper.Marshal.WriteInt16(System.IntPtr,System.Int32,System.Int16)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.WriteInt16(System.Object,System.Int32,System.Char)">
+        <member name="M:AHelper.Marshal.WriteInt16(System.Object,System.Int32,System.Char)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.WriteInt16(System.Object,System.Int32,System.Int16)">
+        <member name="M:AHelper.Marshal.WriteInt16(System.Object,System.Int32,System.Int16)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.WriteInt32(System.IntPtr,System.Int32)">
+        <member name="M:AHelper.Marshal.WriteInt32(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.WriteInt32(System.IntPtr,System.Int32,System.Int32)">
+        <member name="M:AHelper.Marshal.WriteInt32(System.IntPtr,System.Int32,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.WriteInt32(System.Object,System.Int32,System.Int32)">
+        <member name="M:AHelper.Marshal.WriteInt32(System.Object,System.Int32,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.WriteInt64(System.Object,System.Int32,System.Int64)">
+        <member name="M:AHelper.Marshal.WriteInt64(System.Object,System.Int32,System.Int64)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.WriteInt64(System.IntPtr,System.Int32,System.Int64)">
+        <member name="M:AHelper.Marshal.WriteInt64(System.IntPtr,System.Int32,System.Int64)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.WriteInt64(System.IntPtr,System.Int64)">
+        <member name="M:AHelper.Marshal.WriteInt64(System.IntPtr,System.Int64)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.WriteIntPtr(System.IntPtr,System.Int32,System.IntPtr)">
+        <member name="M:AHelper.Marshal.WriteIntPtr(System.IntPtr,System.Int32,System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.WriteIntPtr(System.IntPtr,System.IntPtr)">
+        <member name="M:AHelper.Marshal.WriteIntPtr(System.IntPtr,System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.WriteIntPtr(System.Object,System.Int32,System.IntPtr)">
+        <member name="M:AHelper.Marshal.WriteIntPtr(System.Object,System.Int32,System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ZeroFreeBSTR(System.IntPtr)">
+        <member name="M:AHelper.Marshal.ZeroFreeBSTR(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ZeroFreeCoTaskMemAnsi(System.IntPtr)">
+        <member name="M:AHelper.Marshal.ZeroFreeCoTaskMemAnsi(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ZeroFreeCoTaskMemUnicode(System.IntPtr)">
+        <member name="M:AHelper.Marshal.ZeroFreeCoTaskMemUnicode(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ZeroFreeGlobalAllocAnsi(System.IntPtr)">
+        <member name="M:AHelper.Marshal.ZeroFreeGlobalAllocAnsi(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ZeroFreeGlobalAllocUnicode(System.IntPtr)">
+        <member name="M:AHelper.Marshal.ZeroFreeGlobalAllocUnicode(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.StructureToPtr(System.Object,System.IntPtr,System.Boolean)">
+        <member name="M:AHelper.Marshal.StructureToPtr(System.Object,System.IntPtr,System.Boolean)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.DestroyStructure(System.IntPtr,System.Type)">
+        <member name="M:AHelper.Marshal.DestroyStructure(System.IntPtr,System.Type)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.DestroyStructure``1(System.IntPtr)">
+        <member name="M:AHelper.Marshal.DestroyStructure``1(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.FinalReleaseComObject(System.Object)">
+        <member name="M:AHelper.Marshal.FinalReleaseComObject(System.Object)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.FreeBSTR(System.IntPtr)">
+        <member name="M:AHelper.Marshal.FreeBSTR(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.FreeCoTaskMem(System.IntPtr)">
+        <member name="M:AHelper.Marshal.FreeCoTaskMem(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.StructureToPtr``1(``0,System.IntPtr,System.Boolean)">
+        <member name="M:AHelper.Marshal.StructureToPtr``1(``0,System.IntPtr,System.Boolean)">
             <summary>
             将数据从托管对象封送到非托管内存块
             </summary>
@@ -12061,292 +12061,292 @@
             <param name="ptr">指向非托管内存块的指针，在调用此方法之前必须分配该内存块</param>
             <param name="fDeleteOld">在ptr参数上使用DestroyStructure方法复制数据</param>
         </member>
-        <member name="M:UtilsGen.Marshal.ThrowExceptionForHR(System.Int32)">
+        <member name="M:AHelper.Marshal.ThrowExceptionForHR(System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ThrowExceptionForHR(System.Int32,System.IntPtr)">
+        <member name="M:AHelper.Marshal.ThrowExceptionForHR(System.Int32,System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.UnsafeAddrOfPinnedArrayElement(System.Array,System.Int32)">
+        <member name="M:AHelper.Marshal.UnsafeAddrOfPinnedArrayElement(System.Array,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.UnsafeAddrOfPinnedArrayElement``1(``0[],System.Int32)">
+        <member name="M:AHelper.Marshal.UnsafeAddrOfPinnedArrayElement``1(``0[],System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.QueryInterface(System.IntPtr,System.Guid@,System.IntPtr@)">
+        <member name="M:AHelper.Marshal.QueryInterface(System.IntPtr,System.Guid@,System.IntPtr@)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.IsComObject(System.Object)">
+        <member name="M:AHelper.Marshal.IsComObject(System.Object)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.OffsetOf(System.Type,System.String)">
+        <member name="M:AHelper.Marshal.OffsetOf(System.Type,System.String)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.OffsetOf``1(System.String)">
+        <member name="M:AHelper.Marshal.OffsetOf``1(System.String)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.Prelink(System.Reflection.MethodInfo)">
+        <member name="M:AHelper.Marshal.Prelink(System.Reflection.MethodInfo)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.PrelinkAll(System.Type)">
+        <member name="M:AHelper.Marshal.PrelinkAll(System.Type)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.StringToBSTR(System.String)">
+        <member name="M:AHelper.Marshal.StringToBSTR(System.String)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.StringToCoTaskMemAnsi(System.String)">
+        <member name="M:AHelper.Marshal.StringToCoTaskMemAnsi(System.String)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.StringToCoTaskMemAuto(System.String)">
+        <member name="M:AHelper.Marshal.StringToCoTaskMemAuto(System.String)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.StringToCoTaskMemUni(System.String)">
+        <member name="M:AHelper.Marshal.StringToCoTaskMemUni(System.String)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.StringToHGlobalAnsi(System.String)">
+        <member name="M:AHelper.Marshal.StringToHGlobalAnsi(System.String)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.StringToHGlobalAuto(System.String)">
+        <member name="M:AHelper.Marshal.StringToHGlobalAuto(System.String)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.StringToHGlobalUni(System.String)">
+        <member name="M:AHelper.Marshal.StringToHGlobalUni(System.String)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.SecureStringToBSTR(System.Security.SecureString)">
+        <member name="M:AHelper.Marshal.SecureStringToBSTR(System.Security.SecureString)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.SecureStringToCoTaskMemAnsi(System.Security.SecureString)">
+        <member name="M:AHelper.Marshal.SecureStringToCoTaskMemAnsi(System.Security.SecureString)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.SecureStringToCoTaskMemUnicode(System.Security.SecureString)">
+        <member name="M:AHelper.Marshal.SecureStringToCoTaskMemUnicode(System.Security.SecureString)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.SecureStringToGlobalAllocAnsi(System.Security.SecureString)">
+        <member name="M:AHelper.Marshal.SecureStringToGlobalAllocAnsi(System.Security.SecureString)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.SecureStringToGlobalAllocUnicode(System.Security.SecureString)">
+        <member name="M:AHelper.Marshal.SecureStringToGlobalAllocUnicode(System.Security.SecureString)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ReAllocCoTaskMem(System.IntPtr,System.Int32)">
+        <member name="M:AHelper.Marshal.ReAllocCoTaskMem(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ReAllocHGlobal(System.IntPtr,System.IntPtr)">
+        <member name="M:AHelper.Marshal.ReAllocHGlobal(System.IntPtr,System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.Release(System.IntPtr)">
+        <member name="M:AHelper.Marshal.Release(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.ReleaseComObject(System.Object)">
+        <member name="M:AHelper.Marshal.ReleaseComObject(System.Object)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.PtrToStringAnsi(System.IntPtr,System.Int32)">
+        <member name="M:AHelper.Marshal.PtrToStringAnsi(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.PtrToStringAnsi(System.IntPtr)">
+        <member name="M:AHelper.Marshal.PtrToStringAnsi(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.PtrToStringAuto(System.IntPtr)">
+        <member name="M:AHelper.Marshal.PtrToStringAuto(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.PtrToStringAuto(System.IntPtr,System.Int32)">
+        <member name="M:AHelper.Marshal.PtrToStringAuto(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.PtrToStringBSTR(System.IntPtr)">
+        <member name="M:AHelper.Marshal.PtrToStringBSTR(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.PtrToStringUni(System.IntPtr)">
+        <member name="M:AHelper.Marshal.PtrToStringUni(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.PtrToStringUni(System.IntPtr,System.Int32)">
+        <member name="M:AHelper.Marshal.PtrToStringUni(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.PtrToStructure(System.IntPtr,System.Object)">
+        <member name="M:AHelper.Marshal.PtrToStructure(System.IntPtr,System.Object)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.PtrToStructure(System.IntPtr,System.Type)">
+        <member name="M:AHelper.Marshal.PtrToStructure(System.IntPtr,System.Type)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.PtrToStructure``1(System.IntPtr)">
+        <member name="M:AHelper.Marshal.PtrToStructure``1(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.PtrToStructure``1(System.IntPtr,``0)">
+        <member name="M:AHelper.Marshal.PtrToStructure``1(System.IntPtr,``0)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.GetComInterfaceForObject(System.Object,System.Type,System.Runtime.InteropServices.CustomQueryInterfaceMode)">
+        <member name="M:AHelper.Marshal.GetComInterfaceForObject(System.Object,System.Type,System.Runtime.InteropServices.CustomQueryInterfaceMode)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.GetComInterfaceForObject``2(``0)">
+        <member name="M:AHelper.Marshal.GetComInterfaceForObject``2(``0)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.GetComInterfaceForObject(System.Object,System.Type)">
+        <member name="M:AHelper.Marshal.GetComInterfaceForObject(System.Object,System.Type)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.GetDelegateForFunctionPointer(System.IntPtr,System.Type)">
+        <member name="M:AHelper.Marshal.GetDelegateForFunctionPointer(System.IntPtr,System.Type)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.GetDelegateForFunctionPointer``1(System.IntPtr)">
+        <member name="M:AHelper.Marshal.GetDelegateForFunctionPointer``1(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.GetExceptionCode">
+        <member name="M:AHelper.Marshal.GetExceptionCode">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.GetExceptionForHR(System.Int32)">
+        <member name="M:AHelper.Marshal.GetExceptionForHR(System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.GetExceptionForHR(System.Int32,System.IntPtr)">
+        <member name="M:AHelper.Marshal.GetExceptionForHR(System.Int32,System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.GetFunctionPointerForDelegate(System.Delegate)">
+        <member name="M:AHelper.Marshal.GetFunctionPointerForDelegate(System.Delegate)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.GetFunctionPointerForDelegate``1(``0)">
+        <member name="M:AHelper.Marshal.GetFunctionPointerForDelegate``1(``0)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.GetHRForException(System.Exception)">
+        <member name="M:AHelper.Marshal.GetHRForException(System.Exception)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.GetHRForLastWin32Error">
+        <member name="M:AHelper.Marshal.GetHRForLastWin32Error">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.GetIUnknownForObject(System.Object)">
+        <member name="M:AHelper.Marshal.GetIUnknownForObject(System.Object)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.GetLastWin32Error">
+        <member name="M:AHelper.Marshal.GetLastWin32Error">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.GetNativeVariantForObject(System.Object,System.IntPtr)">
+        <member name="M:AHelper.Marshal.GetNativeVariantForObject(System.Object,System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.GetNativeVariantForObject``1(``0,System.IntPtr)">
+        <member name="M:AHelper.Marshal.GetNativeVariantForObject``1(``0,System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.GetObjectForIUnknown(System.IntPtr)">
+        <member name="M:AHelper.Marshal.GetObjectForIUnknown(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.GetObjectForNativeVariant(System.IntPtr)">
+        <member name="M:AHelper.Marshal.GetObjectForNativeVariant(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.GetObjectForNativeVariant``1(System.IntPtr)">
+        <member name="M:AHelper.Marshal.GetObjectForNativeVariant``1(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.GetObjectsForNativeVariants(System.IntPtr,System.Int32)">
+        <member name="M:AHelper.Marshal.GetObjectsForNativeVariants(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.GetObjectsForNativeVariants``1(System.IntPtr,System.Int32)">
+        <member name="M:AHelper.Marshal.GetObjectsForNativeVariants``1(System.IntPtr,System.Int32)">
             <summary>
             
             </summary>
@@ -12355,83 +12355,83 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Marshal.GetStartComSlot(System.Type)">
+        <member name="M:AHelper.Marshal.GetStartComSlot(System.Type)">
             <summary>
             
             </summary>
             <param name="t"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Marshal.GetTypeFromCLSID(System.Guid)">
+        <member name="M:AHelper.Marshal.GetTypeFromCLSID(System.Guid)">
             <summary>
             
             </summary>
             <param name="clsid"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Marshal.GetTypeInfoName(System.Runtime.InteropServices.ComTypes.ITypeInfo)">
+        <member name="M:AHelper.Marshal.GetTypeInfoName(System.Runtime.InteropServices.ComTypes.ITypeInfo)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:UtilsGen.Marshal.GetUniqueObjectForIUnknown(System.IntPtr)">
+        <member name="M:AHelper.Marshal.GetUniqueObjectForIUnknown(System.IntPtr)">
             <summary>
             
             </summary>
         </member>
-        <member name="T:UtilsGen.Assembly">
+        <member name="T:AHelper.Assembly">
             <summary>
             程序集
             </summary>
         </member>
-        <member name="M:UtilsGen.Assembly.GetAllType">
+        <member name="M:AHelper.Assembly.GetAllType">
             <summary>
             获取所有的类
             </summary>
         </member>
-        <member name="M:UtilsGen.Assembly.GetAllType``1">
+        <member name="M:AHelper.Assembly.GetAllType``1">
             <summary>
             获取所有的类
             </summary>
         </member>
-        <member name="M:UtilsGen.Assembly.GetReferanceAssemblies(System.AppDomain)">
+        <member name="M:AHelper.Assembly.GetReferanceAssemblies(System.AppDomain)">
             <summary>
             获取所有程序集
             </summary>
         </member>
-        <member name="M:UtilsGen.Assembly.GetAllAssemblieHasAttributeType``1">
+        <member name="M:AHelper.Assembly.GetAllAssemblieHasAttributeType``1">
             <summary>
             获取全部程序集中 包含指定特性的类 输出 key=命名空间加类名 value=类
             </summary>
         </member>
-        <member name="M:UtilsGen.Assembly.GetMethodInfo(System.String,System.String,System.String)">
+        <member name="M:AHelper.Assembly.GetMethodInfo(System.String,System.String,System.String)">
             <summary>
             获取方法
             </summary>
         </member>
-        <member name="M:UtilsGen.Assembly.GetMethodInfo(System.Reflection.Assembly,System.String,System.String)">
+        <member name="M:AHelper.Assembly.GetMethodInfo(System.Reflection.Assembly,System.String,System.String)">
             <summary>
             获取方法
             </summary>
         </member>
-        <member name="M:UtilsGen.Assembly.GetMethodInfo``1(``0,System.String)">
+        <member name="M:AHelper.Assembly.GetMethodInfo``1(``0,System.String)">
             <summary>
             获取方法
             </summary>
         </member>
-        <member name="T:UtilsGen.Class">
+        <member name="T:AHelper.Class">
             <summary>
             类工具
             </summary>
         </member>
-        <member name="M:UtilsGen.Class.RemoveAllEvent``1(``0,System.String)">
+        <member name="M:AHelper.Class.RemoveAllEvent``1(``0,System.String)">
             <summary>
             清除事件
             </summary>
             <param name="obj"></param>
             <param name="name"></param>
         </member>
-        <member name="M:UtilsGen.Class.GetMembers(System.Object,System.Reflection.BindingFlags)">
+        <member name="M:AHelper.Class.GetMembers(System.Object,System.Reflection.BindingFlags)">
             <summary>
             
             </summary>
@@ -12439,7 +12439,7 @@
             <param name="flags"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Class.GetMethods(System.Object,System.Reflection.BindingFlags)">
+        <member name="M:AHelper.Class.GetMethods(System.Object,System.Reflection.BindingFlags)">
             <summary>
             
             </summary>
@@ -12447,12 +12447,12 @@
             <param name="flags"></param>
             <returns></returns>
         </member>
-        <member name="M:UtilsGen.Class.GetType(System.String)">
+        <member name="M:AHelper.Class.GetType(System.String)">
             <summary>
             C# Type类获取类型方法(通过字符串型的类名)
             </summary>
         </member>
-        <member name="T:UtilsGen.GC">
+        <member name="T:AHelper.GC">
             <see>
                 <cref>https://docs.microsoft.com/zh-cn/dotnet/api/system.gc?view=net-5.0</cref>
             </see>
@@ -12461,36 +12461,36 @@
             最近一代中的对象位于第0代中。 垃圾回收器的这种实现支持三代对象，第0代、第1代和第2代。
             可以检索属性的值 MaxGeneration ，以确定系统支持的最大代数。-->
         </member>
-        <member name="P:UtilsGen.GC.MaxGeneration">
+        <member name="P:AHelper.GC.MaxGeneration">
             <summary>
             获取系统当前支持的最大代数
             </summary>
         </member>
-        <member name="M:UtilsGen.GC.SuppressFinalize(System.Object)">
+        <member name="M:AHelper.GC.SuppressFinalize(System.Object)">
             <summary>
             阻止GC调用Finalize方法
             </summary>
             <!--因为Finalize方法的调用会牺牲部分性能。如果你的Dispose方法已经对委托管资源作了清理，就没必要让GC再调用对象的Finalize方法-->
         </member>
-        <member name="M:UtilsGen.GC.Collect">
+        <member name="M:AHelper.GC.Collect">
             <summary>
             强制对所有代进行即时垃圾回收
             </summary>
         </member>
-        <member name="M:UtilsGen.GC.Collect(System.Int32)">
+        <member name="M:AHelper.GC.Collect(System.Int32)">
             <summary>
             强制对 0 代到指定代进行即时垃圾回收。
             </summary>
             <param name="generation">代</param>
         </member>
-        <member name="M:UtilsGen.GC.Collect(System.Int32,System.GCCollectionMode)">
+        <member name="M:AHelper.GC.Collect(System.Int32,System.GCCollectionMode)">
             <summary>
             强制在 GCCollectionMode 值所指定的时间对 0 代到指定代进行垃圾回收。
             </summary>
             <param name="generation">代</param>
             <param name="gCCollectionMode">GC模式集合</param>
         </member>
-        <member name="M:UtilsGen.GC.Collect(System.Int32,System.GCCollectionMode,System.Boolean)">
+        <member name="M:AHelper.GC.Collect(System.Int32,System.GCCollectionMode,System.Boolean)">
             <summary>
             在由 GCCollectionMode 值指定的时间，强制对 0 代到指定代进行垃圾回收，另有数值指定回收是否应该为阻碍性。
             </summary>
@@ -12498,7 +12498,7 @@
             <param name="gCCollectionMode">GC模式集合</param>
             <param name="blocking">阻塞</param>
         </member>
-        <member name="M:UtilsGen.GC.Collect(System.Int32,System.GCCollectionMode,System.Boolean,System.Boolean)">
+        <member name="M:AHelper.GC.Collect(System.Int32,System.GCCollectionMode,System.Boolean,System.Boolean)">
             <summary>
             在由 GCCollectionMode 值指定的时间，强制对 0 代到指定代进行垃圾回收，另有数值指定回收应该为阻碍性还是压缩性。
             </summary>
@@ -12507,37 +12507,37 @@
             <param name="blocking">阻塞</param>
             <param name="compacting">压缩</param>
         </member>
-        <member name="M:UtilsGen.GC.CollectionCount(System.Int32)">
+        <member name="M:AHelper.GC.CollectionCount(System.Int32)">
             <summary>
             返回已经对对象的指定代进行的垃圾回收次数。
             </summary>
             <param name="generation">代</param>
         </member>
-        <member name="M:UtilsGen.GC.CancelFullGCNotification">
+        <member name="M:AHelper.GC.CancelFullGCNotification">
             <summary>
             取消注册垃圾回收通知。
             </summary>
         </member>
-        <member name="M:UtilsGen.GC.AddMemoryPressure(System.Int64)">
+        <member name="M:AHelper.GC.AddMemoryPressure(System.Int64)">
             <summary>
             通知运行时在安排垃圾回收时应考虑分配大量的非托管内存
             </summary>
             <param name="bytesAllocated">分配的字节数</param>
         </member>
-        <member name="M:UtilsGen.GC.RemoveMemoryPressure(System.Int64)">
+        <member name="M:AHelper.GC.RemoveMemoryPressure(System.Int64)">
             <summary>
             通知运行时已释放非托管内存，在安排垃圾回收时不需要再考虑它。
             </summary>
             <param name="bytesAllocated">分配的字节数</param>
         </member>
-        <member name="M:UtilsGen.GC.TryStartNoGCRegion(System.Int64)">
+        <member name="M:AHelper.GC.TryStartNoGCRegion(System.Int64)">
             <summary>
             如果指定数量的内存可用，则在关键路径执行期间尝试禁止垃圾回收。
             </summary>
             <param name="totalSize">总空间</param>
             <returns>是否成功</returns>
         </member>
-        <member name="M:UtilsGen.GC.TryStartNoGCRegion(System.Int64,System.Boolean)">
+        <member name="M:AHelper.GC.TryStartNoGCRegion(System.Int64,System.Boolean)">
             <summary>
             如果指定数量的内存可用，则在关键路径执行期间尝试禁止垃圾回收；
             并在初始没有足够内存可用的情况下，
@@ -12547,7 +12547,7 @@
             <param name="disallowFullBlockingGC">禁止完全阻塞GC</param>
             <returns>是否成功</returns>
         </member>
-        <member name="M:UtilsGen.GC.TryStartNoGCRegion(System.Int64,System.Int64)">
+        <member name="M:AHelper.GC.TryStartNoGCRegion(System.Int64,System.Int64)">
             <summary>
             如果指定数量的内存可用于大对象堆和小对象堆，则在关键路径执行期间尝试禁止垃圾回收。
             </summary>
@@ -12555,7 +12555,7 @@
             <param name="lohSize">大对象堆</param>
             <returns>是否成功</returns>
         </member>
-        <member name="M:UtilsGen.GC.TryStartNoGCRegion(System.Int64,System.Int64,System.Boolean)">
+        <member name="M:AHelper.GC.TryStartNoGCRegion(System.Int64,System.Int64,System.Boolean)">
             <summary>
             如果指定数量的内存可用大对象堆和小对象堆，则在关键路径执行期间尝试禁止垃圾回收；
             并在初始没有足够内存可用的情况下，控制垃圾回收器是否进行完整的阻碍性垃圾回收。
@@ -12565,118 +12565,118 @@
             <param name="disallowFullBlockingGC">禁止完全阻塞GC</param>
             <returns>是否成功</returns>
         </member>
-        <member name="M:UtilsGen.GC.EndNoGCRegion">
+        <member name="M:AHelper.GC.EndNoGCRegion">
             <summary>
             结束无 SGC 区域延迟模式
             </summary>
         </member>
-        <member name="M:UtilsGen.GC.GetGeneration(System.Object)">
+        <member name="M:AHelper.GC.GetGeneration(System.Object)">
             <summary>
             返回指定对象的当前代数。
             </summary>
             <param name="obj">数据</param>
             <returns>代</returns>
         </member>
-        <member name="M:UtilsGen.GC.GetGeneration(System.WeakReference)">
+        <member name="M:AHelper.GC.GetGeneration(System.WeakReference)">
             <summary>
             返回指定弱引用的目标的当前代数。
             </summary>
             <param name="obj">数据</param>
             <returns>代</returns>
         </member>
-        <member name="M:UtilsGen.GC.GetTotalMemory(System.Boolean)">
+        <member name="M:AHelper.GC.GetTotalMemory(System.Boolean)">
             <summary>
             检索当前认为要分配的字节数
             </summary>
             <param name="forceFullCollection">是否可以等待较短间隔再返回，以便系统回收垃圾和终结对象。</param>
             <returns>全部内存大小</returns>
         </member>
-        <member name="M:UtilsGen.GC.KeepAlive(System.Object)">
+        <member name="M:AHelper.GC.KeepAlive(System.Object)">
             <summary>
             引用指定对象，使其从当前例程开始到调用此方法的那一刻为止均不符合进行垃圾回收的条件。
             </summary>
             <param name="obj">指定对象</param>
         </member>
-        <member name="M:UtilsGen.GC.RegisterForFullGCNotification(System.Int32,System.Int32)">
+        <member name="M:AHelper.GC.RegisterForFullGCNotification(System.Int32,System.Int32)">
             <summary>
             注册完整GC通知
             </summary>
             <param name="maxGenerationThreshold">马克斯代阈值</param>
             <param name="largeObjectHeapThreshold">大对象堆阈值</param>
         </member>
-        <member name="M:UtilsGen.GC.ReRegisterForFinalize(System.Object)">
+        <member name="M:AHelper.GC.ReRegisterForFinalize(System.Object)">
             <summary>
             请求系统调用指定对象的终结器，此前已为该对象调用 SuppressFinalize(Object)。
             </summary>
             <param name="obj">数据</param>
         </member>
-        <member name="M:UtilsGen.GC.WaitForFullGCApproach">
+        <member name="M:AHelper.GC.WaitForFullGCApproach">
             <summary>
             返回已注册通知的状态，用于确定公共语言运行时是否即将引发完整、阻碍性垃圾回收。
             </summary>
             <returns>GC通知状态</returns>
         </member>
-        <member name="M:UtilsGen.GC.WaitForFullGCApproach(System.Int32)">
+        <member name="M:AHelper.GC.WaitForFullGCApproach(System.Int32)">
             <summary>
             在指定的超时期限内，返回已注册通知的状态，用于确定公共语言运行时是否即将引发完整、阻碍性垃圾回收。
             </summary>
             <param name="millisecondsTimeout">毫秒超时时间</param>
             <returns>GC通知状态</returns>
         </member>
-        <member name="M:UtilsGen.GC.WaitForFullGCComplete">
+        <member name="M:AHelper.GC.WaitForFullGCComplete">
             <summary>
             返回已注册通知的状态，用于确定公共语言运行时引发的完整、阻碍性垃圾回收是否已完成。
             </summary>
             <returns>GC通知状态</returns>
         </member>
-        <member name="M:UtilsGen.GC.WaitForFullGCComplete(System.Int32)">
+        <member name="M:AHelper.GC.WaitForFullGCComplete(System.Int32)">
             <summary>
             在指定的超时期限内，返回已注册通知的状态，用于确定公共语言运行时引发的完整、阻碍性垃圾回收是否已完成。
             </summary>
             <param name="millisecondsTimeout">毫秒超时时间</param>
             <returns>GC通知状态</returns>
         </member>
-        <member name="M:UtilsGen.GC.WaitForPendingFinalizers">
+        <member name="M:AHelper.GC.WaitForPendingFinalizers">
             <summary>
             挂起当前线程，直到处理终结器队列的线程清空该队列为止。
             </summary>
         </member>
-        <member name="T:UtilsGen.SystemInfo">
+        <member name="T:AHelper.SystemInfo">
             <summary>
             设备信息 .NET API
             </summary>
         </member>
-        <member name="M:UtilsGen.SystemInfo.GetEquipmentName">
+        <member name="M:AHelper.SystemInfo.GetEquipmentName">
             <summary>
             获取用户设备名
             </summary>
         </member>
-        <member name="M:UtilsGen.SystemInfo.GetPlatform">
+        <member name="M:AHelper.SystemInfo.GetPlatform">
             <summary>
             获取平台名称
             </summary>
         </member>
-        <member name="M:UtilsGen.SystemInfo.GetNowVersion">
+        <member name="M:AHelper.SystemInfo.GetNowVersion">
             <summary>
             获取平台版本号
             </summary>
         </member>
-        <member name="M:UtilsGen.SystemInfo.GetUserDomainName">
+        <member name="M:AHelper.SystemInfo.GetUserDomainName">
             <summary>
             获取当前设备 连接网络名称
             </summary>
         </member>
-        <member name="M:UtilsGen.SystemInfo.GetSystemDirectory">
+        <member name="M:AHelper.SystemInfo.GetSystemDirectory">
             <summary>
             获取系统跟目录
             </summary>
         </member>
-        <member name="M:UtilsGen.SystemInfo.GetNowTime">
+        <member name="M:AHelper.SystemInfo.GetNowTime">
             <summary>
             获取系统当前时间
             </summary>
         </member>
-        <member name="M:UtilsGen.SystemInfo.GetStartSystemTickCount">
+        <member name="M:AHelper.SystemInfo.GetStartSystemTickCount">
             <summary>
             获取系统启动后 经过的毫秒数
             </summary>

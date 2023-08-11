@@ -9,7 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 
-public partial class UtilsGen
+public partial class AHelper
 {
     /// <summary>
     /// 身份证判断方法

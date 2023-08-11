@@ -10,7 +10,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-public partial class UtilsGen
+public partial class AHelper
 {
     /// <summary>
     /// Unity File ID MD4 算法

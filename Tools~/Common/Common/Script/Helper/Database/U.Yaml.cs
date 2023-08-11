@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-public partial class UtilsGen
+public partial class AHelper
 {
     /// <summary>
     /// Yaml 解析

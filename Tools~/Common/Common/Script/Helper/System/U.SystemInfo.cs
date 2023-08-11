@@ -6,7 +6,7 @@
 
 using System;
 
-public partial class UtilsGen
+public partial class AHelper
 {
     /// <summary>
     /// 设备信息 .NET API
