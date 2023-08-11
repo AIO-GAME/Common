@@ -59,25 +59,25 @@
             支持的区域性
             </summary>
         </member>
-        <member name="T:MD4">
+        <member name="T:AIO.MD4">
             <summary>
             MD4 Hash Algorithm in C#
             </summary>
             Taken from http://www.superstarcoders.com/blogs/posts/md4-hash-algorithm-in-c-sharp.aspx
             Probably not the best implementation of MD4, but it works.
         </member>
-        <member name="M:MD4.#ctor">
+        <member name="M:AIO.MD4.#ctor">
             <summary>
             Creates an instance of the MD4 class.
             </summary>
         </member>
-        <member name="M:MD4.Initialize">
+        <member name="M:AIO.MD4.Initialize">
             <inheritdoc />
         </member>
-        <member name="M:MD4.HashCore(System.Byte[],System.Int32,System.Int32)">
+        <member name="M:AIO.MD4.HashCore(System.Byte[],System.Int32,System.Int32)">
             <inheritdoc />
         </member>
-        <member name="M:MD4.HashFinal">
+        <member name="M:AIO.MD4.HashFinal">
             <inheritdoc />
         </member>
         <member name="T:AIO.ActionExtend">

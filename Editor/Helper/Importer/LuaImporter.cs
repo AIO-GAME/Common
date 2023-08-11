@@ -21,17 +21,17 @@ namespace AIO.UEditor
         }
     }
 
-    [CustomEditor(typeof(LuaImporter))]
-    public class LuaImporterEditor : ScriptedImporterEditor
-    {
-#if UNITY_2019_1_OR_NEWER
-        //Let the parent class know that the Apply/Revert mechanism is skipped.
-        protected override bool needsApplyRevert => false;
-#endif
-        public override void OnInspectorGUI()
-        {
-        }
-    }
+//     [CustomEditor(typeof(LuaImporter))]
+//     public class LuaImporterEditor : ScriptedImporterEditor
+//     {
+// #if UNITY_2019_1_OR_NEWER
+//         //Let the parent class know that the Apply/Revert mechanism is skipped.
+//         protected override bool needsApplyRevert => false;
+// #endif
+//         public override void OnInspectorGUI()
+//         {
+//         }
+//     }
 }
 //     public static class ImporterUtils
 //     {

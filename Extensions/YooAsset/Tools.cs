@@ -12,13 +12,14 @@ using System.IO;
 using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
+using YooAsset;
 
 namespace AIO.UEditor
 {
     /// <summary>
     /// Unity 编辑器工具类
     /// </summary>
-    internal static class YooAssetsTools
+    public static class YooAssetsTools
     {
         [MenuItem("YooAsset/Create Config")]
         public static void CreateConfig()
@@ -139,11 +140,9 @@ namespace AIO.UEditor
         }
 
         [MenuItem("YooAsset/Clear/Sandbox")]
-        public static async void ClearSandbox()
+        public static void ClearSandbox()
         {
-            var path = Application.dataPath.Replace("Assets", "Sandbox");
-            if (AHelper.IO.ExistsFolder(path))
-                await PrPlatform.Folder.Del(Application.dataPath.Replace("Assets", "Sandbox"));
+            YooAssets.ClearSandbox();
         }
     }
 }
