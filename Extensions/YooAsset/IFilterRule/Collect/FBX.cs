@@ -2,14 +2,16 @@
 using System.IO;
 using YooAsset.Editor;
 
-namespace AIO.UEditor
+namespace AIO.UEditor.YooAsset
 {
-    [DisplayName("收集 FBX资源")]
+    [DisplayName("收集 FBX")]
     public class CollectRuleFBX : IFilterRule
     {
         public bool IsCollectAsset(FilterRuleData data)
         {
-            return Path.GetExtension(data.AssetPath).ToLower()  == ".fbx";
+            var Extension = Path.GetExtension(data.AssetPath).ToLower();
+            return
+                Extension == ".fbx";
         }
     }
 }

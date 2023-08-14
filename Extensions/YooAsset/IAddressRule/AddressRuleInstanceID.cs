@@ -7,7 +7,7 @@
 using System.IO;
 using YooAsset.Editor;
 
-namespace AIO.UEditor
+namespace AIO.UEditor.YooAsset
 {
     [DisplayName("InstanceID = 定位地址")]
     public class AddressRuleInstanceID : IAddressRule
