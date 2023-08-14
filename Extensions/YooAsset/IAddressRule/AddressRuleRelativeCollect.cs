@@ -2,7 +2,7 @@
 using System.IO;
 using YooAsset.Editor;
 
-namespace AIO.UEditor
+namespace AIO.UEditor.YooAsset
 {
     [DisplayName("Collect + 后缀 = 定位地址")]
     public class AddressRuleRelativeCollectWithSuffix : IAddressRule
@@ -76,89 +76,5 @@ namespace AIO.UEditor
         }
     }
 
-    [DisplayName("Group Collect + 后缀 = 定位地址")]
-    public class AddressRuleRelativeGroupCollectWithSuffix : IAddressRule
-    {
-        string IAddressRule.GetAssetAddress(AddressRuleData data)
-        {
-            return data.AssetPath.Replace(data.CollectPath + "/", Path.GetFileName(data.GroupName) + "/");
-        }
-    }
-
-    [DisplayName("Group Collect + 后缀 = 定位地址 (全小写)")]
-    public class AddressRuleRelativeGroupCollectWithSuffixToLower : IAddressRule
-    {
-        string IAddressRule.GetAssetAddress(AddressRuleData data)
-        {
-            return data.AssetPath.Replace(data.CollectPath + "/", Path.GetFileName(data.GroupName) + "/").ToLower();
-        }
-    }
-
-    [DisplayName("Group Collect + 后缀 = 定位地址 (全大写)")]
-    public class AddressRuleRelativeGroupCollectWithSuffixToUpper : IAddressRule
-    {
-        string IAddressRule.GetAssetAddress(AddressRuleData data)
-        {
-            return data.AssetPath.Replace(data.CollectPath + "/", Path.GetFileName(data.GroupName) + "/").ToUpper();
-        }
-    }
-
-    [DisplayName("UserData Collect + 后缀 = 定位地址")]
-    public class AddressRuleRelativeUserDataCollectWithSuffix : IAddressRule
-    {
-        string IAddressRule.GetAssetAddress(AddressRuleData data)
-        {
-            return data.AssetPath.Replace(data.CollectPath + "/", data.UserData + "/");
-        }
-    }
-
-    [DisplayName("UserData Collect + 后缀 = 定位地址 (全小写)")]
-    public class AddressRuleRelativeUserDataCollectWithSuffixToLower : IAddressRule
-    {
-        string IAddressRule.GetAssetAddress(AddressRuleData data)
-        {
-            return data.AssetPath.Replace(data.CollectPath + "/", data.UserData + "/").ToLower();
-        }
-    }
-
-    [DisplayName("UserData Collect + 后缀 = 定位地址 (全大写)")]
-    public class AddressRuleRelativeUserDataCollectWithSuffixToUpper : IAddressRule
-    {
-        string IAddressRule.GetAssetAddress(AddressRuleData data)
-        {
-            return data.AssetPath.Replace(data.CollectPath + "/", data.UserData + "/").ToUpper();
-        }
-    }
-
-
-    [DisplayName("UserData Collect = 定位地址")]
-    public class AddressRuleRelativeUserDataCollect : IAddressRule
-    {
-        string IAddressRule.GetAssetAddress(AddressRuleData data)
-        {
-            var path = data.AssetPath.Replace(data.CollectPath + "/", data.UserData + "/");
-            return path.Replace(Path.GetExtension(path), "");
-        }
-    }
-
-    [DisplayName("UserData Collect = 定位地址 (全小写)")]
-    public class AddressRuleRelativeUserDataCollectToLower : IAddressRule
-    {
-        string IAddressRule.GetAssetAddress(AddressRuleData data)
-        {
-            var path = data.AssetPath.Replace(data.CollectPath + "/", data.UserData + "/").ToLower();
-            return path.Replace(Path.GetExtension(path), "");
-        }
-    }
-
-    [DisplayName("UserData Collect = 定位地址 (全大写)")]
-    public class AddressRuleRelativeUserDataCollectToUpper : IAddressRule
-    {
-        string IAddressRule.GetAssetAddress(AddressRuleData data)
-        {
-            var path = data.AssetPath.Replace(data.CollectPath + "/", data.UserData + "/").ToUpper();
-            return path.Replace(Path.GetExtension(path), "");
-        }
-    }
 }
 #endif

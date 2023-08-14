@@ -14,7 +14,7 @@ using UnityEditor;
 using UnityEngine;
 using YooAsset;
 
-namespace AIO.UEditor
+namespace AIO.UEditor.YooAsset
 {
     /// <summary>
     /// Unity 编辑器工具类
