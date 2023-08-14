@@ -8,39 +8,54 @@ namespace YooAsset.Editor
 {
 	public class BuildBundleInfo
 	{
-		public class BuildPatchInfo
-		{
-			/// <summary>
-			/// 构建内容的哈希值
-			/// </summary>
-			public string ContentHash { set; get; }
+		#region 补丁文件的关键信息
+		/// <summary>
+		/// Unity引擎生成的哈希值（构建内容的哈希值）
+		/// </summary>
+		public string PackageUnityHash { set; get; }
 
-			/// <summary>
-			/// 文件哈希值
-			/// </summary>
-			public string PatchFileHash { set; get; }
+		/// <summary>
+		/// Unity引擎生成的CRC
+		/// </summary>
+		public uint PackageUnityCRC { set; get; }
 
-			/// <summary>
-			/// 文件哈希值
-			/// </summary>
-			public string PatchFileCRC { set; get; }
+		/// <summary>
+		/// 文件哈希值
+		/// </summary>
+		public string PackageFileHash { set; get; }
 
-			/// <summary>
-			/// 文件哈希值
-			/// </summary>
-			public long PatchFileSize { set; get; }
+		/// <summary>
+		/// 文件哈希值
+		/// </summary>
+		public string PackageFileCRC { set; get; }
 
+		/// <summary>
+		/// 文件哈希值
+		/// </summary>
+		public long PackageFileSize { set; get; }
 
-			/// <summary>
-			/// 构建输出的文件路径
-			/// </summary>
-			public string BuildOutputFilePath { set; get; }
+		/// <summary>
+		/// 构建输出的文件路径
+		/// </summary>
+		public string BuildOutputFilePath { set; get; }
 
-			/// <summary>
-			/// 补丁包输出文件路径
-			/// </summary>
-			public string PatchOutputFilePath { set; get; }
-		}
+		/// <summary>
+		/// 补丁包的源文件路径
+		/// </summary>
+		public string PackageSourceFilePath { set; get; }
+
+		/// <summary>
+		/// 补丁包的目标文件路径
+		/// </summary>
+		public string PackageDestFilePath { set; get; }
+
+		/// <summary>
+		/// 加密生成文件的路径
+		/// 注意：如果未加密该路径为空
+		/// </summary>
+		public string EncryptedFilePath { set; get; }
+		#endregion
+
 
 		/// <summary>
 		/// 资源包名称
@@ -49,25 +64,14 @@ namespace YooAsset.Editor
 
 		/// <summary>
 		/// 参与构建的资源列表
-		/// 注意：不包含零依赖资源
+		/// 注意：不包含零依赖资源和冗余资源
 		/// </summary>
-		public readonly List<BuildAssetInfo> BuildinAssets = new List<BuildAssetInfo>();
-
-		/// <summary>
-		/// 补丁文件信息
-		/// </summary>
-		public readonly BuildPatchInfo PatchInfo = new BuildPatchInfo();
+		public readonly List<BuildAssetInfo> AllMainAssets = new List<BuildAssetInfo>();
 
 		/// <summary>
 		/// Bundle文件的加载方法
 		/// </summary>
 		public EBundleLoadMethod LoadMethod { set; get; }
-
-		/// <summary>
-		/// 加密生成文件的路径
-		/// 注意：如果未加密该路径为空
-		/// </summary>
-		public string EncryptedFilePath { set; get; }
 
 		/// <summary>
 		/// 是否为原生文件
@@ -76,9 +80,9 @@ namespace YooAsset.Editor
 		{
 			get
 			{
-				foreach (var asset in BuildinAssets)
+				foreach (var assetInfo in AllMainAssets)
 				{
-					if (asset.IsRawAsset)
+					if (assetInfo.IsRawAsset)
 						return true;
 				}
 				return false;
@@ -113,7 +117,7 @@ namespace YooAsset.Editor
 			if (IsContainsAsset(assetInfo.AssetPath))
 				throw new System.Exception($"Asset is existed : {assetInfo.AssetPath}");
 
-			BuildinAssets.Add(assetInfo);
+			AllMainAssets.Add(assetInfo);
 		}
 
 		/// <summary>
@@ -121,7 +125,7 @@ namespace YooAsset.Editor
 		/// </summary>
 		public bool IsContainsAsset(string assetPath)
 		{
-			foreach (var assetInfo in BuildinAssets)
+			foreach (var assetInfo in AllMainAssets)
 			{
 				if (assetInfo.AssetPath == assetPath)
 				{
@@ -136,8 +140,8 @@ namespace YooAsset.Editor
 		/// </summary>
 		public string[] GetBundleTags()
 		{
-			List<string> result = new List<string>(BuildinAssets.Count);
-			foreach (var assetInfo in BuildinAssets)
+			List<string> result = new List<string>(AllMainAssets.Count);
+			foreach (var assetInfo in AllMainAssets)
 			{
 				foreach (var assetTag in assetInfo.BundleTags)
 				{
@@ -151,17 +155,33 @@ namespace YooAsset.Editor
 		/// <summary>
 		/// 获取构建的资源路径列表
 		/// </summary>
-		public string[] GetBuildinAssetPaths()
+		public string[] GetAllMainAssetPaths()
 		{
-			return BuildinAssets.Select(t => t.AssetPath).ToArray();
+			return AllMainAssets.Select(t => t.AssetPath).ToArray();
 		}
 
 		/// <summary>
-		/// 获取所有写入补丁清单的资源
+		/// 获取该资源包内的所有资源（包括零依赖资源和冗余资源）
 		/// </summary>
-		public BuildAssetInfo[] GetAllPatchAssetInfos()
+		public List<string> GetAllBuiltinAssetPaths()
 		{
-			return BuildinAssets.Where(t => t.CollectorType == ECollectorType.MainAssetCollector).ToArray();
+			var packAssets = GetAllMainAssetPaths();
+			List<string> result = new List<string>(packAssets);
+			foreach (var assetInfo in AllMainAssets)
+			{
+				if (assetInfo.AllDependAssetInfos == null)
+					continue;
+				foreach (var dependAssetInfo in assetInfo.AllDependAssetInfos)
+				{
+					// 注意：依赖资源里只添加零依赖资源和冗余资源
+					if (dependAssetInfo.HasBundleName() == false)
+					{
+						if (result.Contains(dependAssetInfo.AssetPath) == false)
+							result.Add(dependAssetInfo.AssetPath);
+					}
+				}
+			}
+			return result;
 		}
 
 		/// <summary>
@@ -173,24 +193,33 @@ namespace YooAsset.Editor
 			AssetBundleBuild build = new AssetBundleBuild();
 			build.assetBundleName = BundleName;
 			build.assetBundleVariant = string.Empty;
-			build.assetNames = GetBuildinAssetPaths();
+			build.assetNames = GetAllMainAssetPaths();
 			return build;
 		}
 
 		/// <summary>
-		/// 创建PatchBundle类
+		/// 获取所有写入补丁清单的资源
 		/// </summary>
-		internal PatchBundle CreatePatchBundle()
+		public BuildAssetInfo[] GetAllManifestAssetInfos()
 		{
-			PatchBundle patchBundle = new PatchBundle();
-			patchBundle.BundleName = BundleName;
-			patchBundle.FileHash = PatchInfo.PatchFileHash;
-			patchBundle.FileCRC = PatchInfo.PatchFileCRC;
-			patchBundle.FileSize = PatchInfo.PatchFileSize;
-			patchBundle.IsRawFile = IsRawFile;
-			patchBundle.LoadMethod = (byte)LoadMethod;
-			patchBundle.Tags = GetBundleTags();
-			return patchBundle;
+			return AllMainAssets.Where(t => t.CollectorType == ECollectorType.MainAssetCollector).ToArray();
+		}
+
+		/// <summary>
+		/// 创建PackageBundle类
+		/// </summary>
+		internal PackageBundle CreatePackageBundle()
+		{
+			PackageBundle packageBundle = new PackageBundle();
+			packageBundle.BundleName = BundleName;
+			packageBundle.FileHash = PackageFileHash;
+			packageBundle.FileCRC = PackageFileCRC;
+			packageBundle.FileSize = PackageFileSize;
+			packageBundle.UnityCRC = PackageUnityCRC;
+			packageBundle.IsRawFile = IsRawFile;
+			packageBundle.LoadMethod = (byte)LoadMethod;
+			packageBundle.Tags = GetBundleTags();
+			return packageBundle;
 		}
 	}
 }

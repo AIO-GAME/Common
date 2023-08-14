@@ -6,17 +6,28 @@ using UnityEngine;
 
 namespace YooAsset.Editor
 {
+	[CreateAssetMenu(fileName = "AssetBundleCollectorSetting", menuName = "YooAsset/Create AssetBundle Collector Settings")]
 	public class AssetBundleCollectorSetting : ScriptableObject
 	{
 		/// <summary>
-		/// 是否显示包裹列表视图
+		/// 显示包裹列表视图
 		/// </summary>
 		public bool ShowPackageView = false;
 
 		/// <summary>
-		/// 是否启用可寻址资源定位
+		/// 启用可寻址资源定位
 		/// </summary>
 		public bool EnableAddressable = false;
+
+		/// <summary>
+		/// 资源定位地址大小写不敏感
+		/// </summary>
+		public bool LocationToLower = false;
+
+		/// <summary>
+		/// 包含资源GUID数据
+		/// </summary>
+		public bool IncludeAssetGUID = false;
 
 		/// <summary>
 		/// 资源包名唯一化
@@ -40,7 +51,12 @@ namespace YooAsset.Editor
 		/// </summary>
 		public void ClearAll()
 		{
+			ShowPackageView = false;
 			EnableAddressable = false;
+			LocationToLower = false;
+			IncludeAssetGUID = false;
+			UniqueBundleName = false;
+			ShowEditorAlias = false;
 			Packages.Clear();
 		}
 
@@ -100,7 +116,8 @@ namespace YooAsset.Editor
 			{
 				if (package.PackageName == packageName)
 				{
-					CollectCommand command = new CollectCommand(buildMode, packageName, EnableAddressable, UniqueBundleName);
+					CollectCommand command = new CollectCommand(buildMode, packageName,
+						EnableAddressable, LocationToLower, IncludeAssetGUID, UniqueBundleName);
 					CollectResult collectResult = new CollectResult(command);
 					collectResult.SetCollectAssets(package.GetAllCollectAssets(command));
 					return collectResult;
