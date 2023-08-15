@@ -88,6 +88,18 @@ namespace AIO.UEditor.YooAsset
         }
     }
 
+    [DisplayName("过滤 Scene Prefab Asset")]
+    public class FilterRuleScenePrefabAsset : IFilterRule
+    {
+        public bool IsCollectAsset(FilterRuleData data)
+        {
+            var Extension = Path.GetExtension(data.AssetPath).ToLower();
+            return Extension != ".unity" &&
+                   Extension != ".prefab"&&
+                   Extension != ".asset";
+        }
+    }
+
     [DisplayName("过滤 Scene Prefab")]
     public class FilterRuleScenePrefab : IFilterRule
     {
