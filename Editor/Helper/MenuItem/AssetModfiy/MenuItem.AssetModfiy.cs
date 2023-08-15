@@ -31,8 +31,8 @@ namespace AIO.UEditor
         {
             var assemblies = new List<Assembly>
             {
-                Assembly.LoadFile(@"G:\UnityProject\G201\proj\third-plugins-back\client-core\DBVC.dll"),
-                Assembly.LoadFile(@"G:\UnityProject\G201\proj\third-plugins-back\client-core\ClientCore.dll"),
+                Assembly.LoadFile(@"G:\UnityProject\G201\proj\third-plugins-1.11\client-core\DBVC.dll"),
+                Assembly.LoadFile(@"G:\UnityProject\G201\proj\third-plugins-1.11\client-core\ClientCore.dll"),
             };
             var dirs = new List<DirectoryInfo>
             {
@@ -43,7 +43,7 @@ namespace AIO.UEditor
             {
                 { "356a8f05a6726e645ade74e1e74b6523", "ClientCore" },
                 { "53d0d244ae5b5d343b19aced455b29ca", "DBVC" },
-                { "543bd8adf2811e447b9b5dc5b8c7feb1", "DOTweenPro" },
+                // { "543bd8adf2811e447b9b5dc5b8c7feb1", "DOTweenPro" },
             };
             Test2(assemblies, dirs, md5);
         }
