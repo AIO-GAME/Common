@@ -44,37 +44,37 @@ namespace AIO.UEditor.YooAsset
             var BundlesInfo = new DirectoryInfo(BundlesDir);
             var versions = new List<DirectoryInfo>();
 
-            foreach (var package in BundlesInfo.GetDirectories("*", SearchOption.TopDirectoryOnly))
+            foreach (var PlatformInfo in BundlesInfo.GetDirectories("*", SearchOption.TopDirectoryOnly))
             {
-                if (package.Name.StartsWith("Version")) continue;
-                var PackageInfo = new DirectoryInfo(package.FullName);
-                foreach (var PlatformInfo in PackageInfo.GetDirectories("*", SearchOption.TopDirectoryOnly))
+                if (PlatformInfo.Name.StartsWith("Version")) continue;
+                switch (PlatformInfo.Name)
                 {
-                    switch (PlatformInfo.Name)
-                    {
-                        case nameof(BuildTarget.Android):
-                        case nameof(BuildTarget.WebGL):
-                        case nameof(BuildTarget.iOS):
-                        case nameof(BuildTarget.StandaloneWindows):
-                        case nameof(BuildTarget.StandaloneWindows64):
-                        case nameof(BuildTarget.StandaloneOSX):
-                            break;
-                        default: continue;
-                    }
+                    case nameof(BuildTarget.Android):
+                    case nameof(BuildTarget.WebGL):
+                    case nameof(BuildTarget.iOS):
+                    case nameof(BuildTarget.StandaloneWindows):
+                    case nameof(BuildTarget.StandaloneWindows64):
+                    case nameof(BuildTarget.StandaloneOSX):
+                        break;
+                    default: continue;
+                }
 
+
+                foreach (var PackageInfo in new DirectoryInfo(PlatformInfo.FullName).GetDirectories("*", SearchOption.TopDirectoryOnly))
+                {
                     versions.Clear();
-                    foreach (var version in PlatformInfo.GetDirectories("*", SearchOption.TopDirectoryOnly))
+                    foreach (var VersionInfo in PackageInfo.GetDirectories("*", SearchOption.TopDirectoryOnly))
                     {
-                        if (version.Name.StartsWith("OutputCache")) continue;
-                        if (version.Name.StartsWith("Simulate")) continue;
-                        versions.Add(version);
+                        if (VersionInfo.Name.StartsWith("OutputCache")) continue;
+                        if (VersionInfo.Name.StartsWith("Simulate")) continue;
+                        versions.Add(VersionInfo);
                     }
 
                     if (versions.Count <= 0) continue;
                     var last = GetLastWriteTimeUtc(versions);
                     if (Enum.TryParse<BuildTarget>(PlatformInfo.Name, out var enums))
-                        TabelDic[enums].Set(package.Name, last.Name);
-                    else Debug.LogWarningFormat("未知平台 : {0}", PlatformInfo.Name);
+                        TabelDic[enums].Set(PackageInfo.Name, last.Name);
+                    else Debug.LogWarningFormat("未知平台 : {0}", PackageInfo.Name);
                 }
             }
 
