@@ -2,7 +2,9 @@
     "name": "AIO.Core.Editor",
     "rootNamespace": "",
     "references": [
-        "AIO.Core.Runtime"
+        "AIO.Core.Runtime",
+        "YooAsset",
+        "YooAsset.Editor"
     ],
     "includePlatforms": [
         "Editor"
