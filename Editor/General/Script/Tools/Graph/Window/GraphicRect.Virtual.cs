@@ -158,5 +158,12 @@ namespace AIO.UEditor
         protected virtual void OnDraw()
         {
         }
+
+        /// <summary>
+        /// 保存数据
+        /// </summary>
+        public virtual void SaveData()
+        {
+        }
     }
 }

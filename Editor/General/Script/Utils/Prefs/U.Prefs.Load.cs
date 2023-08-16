@@ -76,8 +76,9 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static string LoadString(in string key, in string def = null)
             {
-                if (EditorPrefs.HasKey(string.Concat(key, "_String"))) return def;
-                return EditorPrefs.GetString(key);
+                var keyname = string.Concat(key, "_String");
+                if (!EditorPrefs.HasKey(keyname)) return def;
+                return EditorPrefs.GetString(keyname);
             }
 
             /// <summary>
@@ -88,8 +89,9 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static int LoadInt(in string key, in int def = 0)
             {
-                if (EditorPrefs.HasKey(string.Concat(key, "_Int"))) return def;
-                return EditorPrefs.GetInt(key);
+                var keyname = string.Concat(key, "_Int");
+                if (!EditorPrefs.HasKey(keyname)) return def;
+                return EditorPrefs.GetInt(keyname);
             }
 
             /// <summary>
@@ -101,8 +103,9 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static T LoadEnum<T>(in string key, in T def = default) where T : Enum
             {
-                if (EditorPrefs.HasKey(string.Concat(key, "_Enum"))) return def;
-                return (T)Enum.Parse(typeof(T), EditorPrefs.GetInt(key).ToString());
+                var keyname = string.Concat(key, "_Enum");
+                if (!EditorPrefs.HasKey(keyname)) return def;
+                return (T)Enum.Parse(typeof(T), EditorPrefs.GetInt(keyname).ToString());
             }
 
             /// <summary>
@@ -129,8 +132,9 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static T LoadJsonData<T>(in string key, in T def = default)
             {
-                if (EditorPrefs.HasKey(string.Concat(key, "_Json"))) return def;
-                return AHelper.Json.Deserialize<T>(EditorPrefs.GetString(key));
+                var keyname = string.Concat(key, "_Json");
+                if (!EditorPrefs.HasKey(keyname)) return def;
+                return AHelper.Json.Deserialize<T>(EditorPrefs.GetString(keyname));
             }
 
             /// <summary>
@@ -141,8 +145,9 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static float LoadFloat(in string key, in float def = 0)
             {
-                if (EditorPrefs.HasKey(string.Concat(key, "_Float"))) return def;
-                return EditorPrefs.GetFloat(key);
+                var keyname = string.Concat(key, "_Float");
+                if (!EditorPrefs.HasKey(keyname)) return def;
+                return EditorPrefs.GetFloat(keyname);
             }
         }
     }
