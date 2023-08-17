@@ -88,6 +88,27 @@ namespace AIO.UEditor.YooAsset
         }
     }
 
+    [DisplayName("过滤 SpriteAtlas Prefab Material AudioClip Font Asset")]
+    public class FilterRuleSpriteAtlasPrefabMaterialAudioClipFontAsset : IFilterRule
+    {
+        public bool IsCollectAsset(FilterRuleData data)
+        {
+            IFilterRule rule = new CollectRuleAudioClip();
+            if (rule.IsCollectAsset(data)) return false;
+            rule = new CollectRuleFont();
+            if (rule.IsCollectAsset(data)) return false;
+            rule = new CollectRulePrefab();
+            if (rule.IsCollectAsset(data)) return false;
+            rule = new CollectRuleSpriteAtlas();
+            if (rule.IsCollectAsset(data)) return false;
+            rule = new CollectRuleMaterial();
+            if (rule.IsCollectAsset(data)) return false;
+            rule = new CollectRuleAsset();
+            if (rule.IsCollectAsset(data)) return false;
+            return true;
+        }
+    }
+
     [DisplayName("过滤 Scene Prefab Asset")]
     public class FilterRuleScenePrefabAsset : IFilterRule
     {
