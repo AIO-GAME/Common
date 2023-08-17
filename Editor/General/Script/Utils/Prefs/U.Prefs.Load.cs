@@ -134,7 +134,9 @@ namespace AIO.UEditor
             {
                 var keyname = string.Concat(key, "_Json");
                 if (!EditorPrefs.HasKey(keyname)) return def;
-                return AHelper.Json.Deserialize<T>(EditorPrefs.GetString(keyname));
+                var content = EditorPrefs.GetString(keyname);
+                if (string.IsNullOrEmpty(content)) return def;
+                return AHelper.Json.Deserialize<T>(content);
             }
 
             /// <summary>
