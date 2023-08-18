@@ -4,7 +4,7 @@ using YooAsset.Editor;
 namespace AIO.UEditor.YooAsset
 {
     [DisplayName("收集 Prefab")]
-    public class CollectRulePrefab : IFilterRule
+    public class CollectPrefab : IFilterRule
     {
         public bool IsCollectAsset(FilterRuleData data)
         {

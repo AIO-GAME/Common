@@ -10,7 +10,7 @@ using YooAsset.Editor;
 namespace AIO.UEditor.YooAsset
 {
     [DisplayName("收集 SQL")]
-    public class CollectRuleSQL : IFilterRule
+    public class CollectSQL : IFilterRule
     {
         public bool IsCollectAsset(FilterRuleData data)
         {

@@ -10,7 +10,7 @@ using YooAsset.Editor;
 namespace AIO.UEditor.YooAsset
 {
     [DisplayName("收集 Sproto")]
-    public class CollectRuleSproto : IFilterRule
+    public class CollectSproto : IFilterRule
     {
         public bool IsCollectAsset(FilterRuleData data)
         {
