@@ -10,7 +10,7 @@ using YooAsset.Editor;
 namespace AIO.UEditor.YooAsset
 {
     [DisplayName("收集 AudioClip")]
-    public class CollectRuleAudioClip : IFilterRule
+    public class CollectAudioClip : IFilterRule
     {
         public bool IsCollectAsset(FilterRuleData data)
         {

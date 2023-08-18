@@ -5,7 +5,7 @@ using YooAsset.Editor;
 namespace AIO.UEditor.YooAsset
 {
     [DisplayName("收集 Lua")]
-    public class CollectRuleLua : IFilterRule
+    public class CollectLua : IFilterRule
     {
         public bool IsCollectAsset(FilterRuleData data)
         {

@@ -4,7 +4,7 @@ using YooAsset.Editor;
 namespace AIO.UEditor.YooAsset
 {
     [DisplayName("收集 SpriteAtlas")]
-    public class CollectRuleSpriteAtlas : IFilterRule
+    public class CollectSpriteAtlas : IFilterRule
     {
         public bool IsCollectAsset(FilterRuleData data)
         {

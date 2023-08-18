@@ -10,7 +10,7 @@ using YooAsset.Editor;
 namespace AIO.UEditor.YooAsset
 {
     [DisplayName("收集 Font")]
-    public class CollectRuleFont : IFilterRule
+    public class CollectFont : IFilterRule
     {
         public bool IsCollectAsset(FilterRuleData data)
         {

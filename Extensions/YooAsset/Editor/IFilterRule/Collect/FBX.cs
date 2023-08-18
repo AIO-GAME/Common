@@ -4,7 +4,7 @@ using YooAsset.Editor;
 namespace AIO.UEditor.YooAsset
 {
     [DisplayName("收集 FBX")]
-    public class CollectRuleFBX : IFilterRule
+    public class CollectFBX : IFilterRule
     {
         public bool IsCollectAsset(FilterRuleData data)
         {
