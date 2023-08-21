@@ -135,7 +135,7 @@ namespace YooAsset
 		/// <summary>
 		/// 释放句柄
 		/// </summary>
-		internal void ReleaseInternal()
+		public void ReleaseInternal()
 		{
 			if (IsValidWithWarning == false)
 				return;
