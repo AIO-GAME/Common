@@ -42,28 +42,18 @@ namespace AIO.UEngine
         public string URL = "";
 
         /// <summary>
-        /// 热更新资源同时最大下载数量
-        /// </summary>
-        public int DownloadingMaxNumber = 50;
-
-        /// <summary>
-        /// 热更新资源下载失败重试次数
-        /// </summary>
-        public int FailedTryAgain = 3;
-
-        /// <summary>
-        /// 热更新资源下载超时时间
-        /// </summary>
-        public int Timeout = 10;
-
-        /// <summary>
         /// 自动激活清单
         /// </summary>
-        public bool AutoSaveVersion;
+        public bool AutoSaveVersion = true;
 
         /// <summary>
         /// URL请求附加时间搓
         /// </summary>
         public bool AppendTimeTicks = true;
+
+        /// <summary>
+        /// 加载路径转小写
+        /// </summary>
+        public bool LoadPathToLower = true;
     }
 }

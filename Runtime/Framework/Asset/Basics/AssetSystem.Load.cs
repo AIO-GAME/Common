@@ -24,7 +24,7 @@ namespace AIO
         /// <param name="cb">回调</param>
         public static async void LoadSubAssets<TObject>(string location, Action<TObject[]> cb) where TObject : Object
         {
-            cb?.Invoke(await Proxy.LoadSubAssetsTask<TObject>(location));
+            cb?.Invoke(await Proxy.LoadSubAssetsTask<TObject>(Parameter.LoadPathToLower ? location.ToLower() : location));
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace AIO
         /// <param name="cb">回调</param>
         public static async void LoadSubAssets(string location, Action<Object[]> cb)
         {
-            cb?.Invoke(await Proxy.LoadSubAssetsTask<Object>(location));
+            cb?.Invoke(await Proxy.LoadSubAssetsTask<Object>(Parameter.LoadPathToLower ? location.ToLower() : location));
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace AIO
         /// <param name="cb">回调</param>
         public static async void LoadSubAssets(string location, Type type, Action<Object[]> cb)
         {
-            cb?.Invoke(await Proxy.LoadSubAssetsTask(location, type));
+            cb?.Invoke(await Proxy.LoadSubAssetsTask(Parameter.LoadPathToLower ? location.ToLower() : location, type));
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace AIO
         /// <param name="cb">回调</param>
         public static IEnumerator LoadSubAssetsCO<TObject>(string location, Action<TObject[]> cb) where TObject : Object
         {
-            return Proxy.LoadSubAssetsCO(location, cb);
+            return Proxy.LoadSubAssetsCO(Parameter.LoadPathToLower ? location.ToLower() : location, cb);
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace AIO
         /// <param name="cb">回调</param>
         public static IEnumerator LoadSubAssetsCO(string location, Type type, Action<Object[]> cb)
         {
-            return Proxy.LoadSubAssetsCO(location, type, cb);
+            return Proxy.LoadSubAssetsCO(Parameter.LoadPathToLower ? location.ToLower() : location, type, cb);
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace AIO
         /// <param name="location">资源的定位地址</param>
         public static TObject[] LoadSubAssets<TObject>(string location) where TObject : Object
         {
-            return Proxy.LoadSubAssetsSync<TObject>(location);
+            return Proxy.LoadSubAssetsSync<TObject>(Parameter.LoadPathToLower ? location.ToLower() : location);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace AIO
         /// <param name="type">子对象类型</param>
         public static Object[] LoadSubAssets(string location, Type type)
         {
-            return Proxy.LoadSubAssetsSync(location, type);
+            return Proxy.LoadSubAssetsSync(Parameter.LoadPathToLower ? location.ToLower() : location, type);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace AIO
         /// <param name="location">资源的定位地址</param>
         public static Object[] LoadSubAssets(string location)
         {
-            return Proxy.LoadSubAssetsSync(location, typeof(Object));
+            return Proxy.LoadSubAssetsSync(Parameter.LoadPathToLower ? location.ToLower() : location, typeof(Object));
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace AIO
         /// <param name="location">资源的定位地址</param>
         public static Task<TObject[]> LoadSubAssetsTask<TObject>(string location) where TObject : Object
         {
-            return Proxy.LoadSubAssetsTask<TObject>(location);
+            return Proxy.LoadSubAssetsTask<TObject>(Parameter.LoadPathToLower ? location.ToLower() : location);
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace AIO
         /// <param name="type">子对象类型</param>
         public static Task<Object[]> LoadSubAssetsTask(string location, Type type)
         {
-            return Proxy.LoadSubAssetsTask(location, type);
+            return Proxy.LoadSubAssetsTask(Parameter.LoadPathToLower ? location.ToLower() : location, type);
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace AIO
         /// <param name="location">资源的定位地址</param>
         public static Task<Object[]> LoadSubAssetsTask(string location)
         {
-            return Proxy.LoadSubAssetsTask(location, typeof(Object));
+            return Proxy.LoadSubAssetsTask(Parameter.LoadPathToLower ? location.ToLower() : location, typeof(Object));
         }
 
         #endregion
@@ -138,7 +138,7 @@ namespace AIO
         /// <param name="location">场景的定位地址</param>
         public static TextAsset LoadTextAsset(string location)
         {
-            return Proxy.LoadAssetSync<TextAsset>(location);
+            return Proxy.LoadAssetSync<TextAsset>(Parameter.LoadPathToLower ? location.ToLower() : location);
         }
 
         #endregion
@@ -153,7 +153,7 @@ namespace AIO
         /// <param name="cb">回调</param>
         public static async void LoadAsset<TObject>(string location, Action<TObject> cb) where TObject : Object
         {
-            cb?.Invoke(await Proxy.LoadAssetTask<TObject>(location));
+            cb?.Invoke(await Proxy.LoadAssetTask<TObject>(Parameter.LoadPathToLower ? location.ToLower() : location));
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace AIO
         /// <param name="cb">回调</param>
         public static async void LoadAsset(string location, Action<Object> cb)
         {
-            cb?.Invoke(await Proxy.LoadAssetTask<Object>(location));
+            cb?.Invoke(await Proxy.LoadAssetTask<Object>(Parameter.LoadPathToLower ? location.ToLower() : location));
         }
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace AIO
         /// <param name="cb">回调</param>
         public static async void LoadAsset(string location, Type type, Action<Object> cb)
         {
-            cb?.Invoke(await Proxy.LoadAssetTask(location, type));
+            cb?.Invoke(await Proxy.LoadAssetTask(Parameter.LoadPathToLower ? location.ToLower() : location, type));
         }
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace AIO
         /// <param name="cb">回调</param>
         public static IEnumerator LoadAssetCO<TObject>(string location, Action<TObject> cb) where TObject : Object
         {
-            return Proxy.LoadAssetCO(location, cb);
+            return Proxy.LoadAssetCO(Parameter.LoadPathToLower ? location.ToLower() : location, cb);
         }
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace AIO
         /// <param name="cb">回调</param>
         public static IEnumerator LoadAssetCO(string location, Action<Object> cb)
         {
-            return Proxy.LoadAssetCO(location, cb);
+            return Proxy.LoadAssetCO(Parameter.LoadPathToLower ? location.ToLower() : location, cb);
         }
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace AIO
         /// <param name="cb">回调</param>
         public static IEnumerator LoadAssetCO(string location, Type type, Action<Object> cb)
         {
-            return Proxy.LoadAssetCO(location, type, cb);
+            return Proxy.LoadAssetCO(Parameter.LoadPathToLower ? location.ToLower() : location, type, cb);
         }
 
         /// <summary>
@@ -214,9 +214,9 @@ namespace AIO
         /// </summary>
         /// <typeparam name="TObject">资源类型</typeparam>
         /// <param name="location">资源的定位地址</param>
-        public static TObject LoadAssetSync<TObject>(string location) where TObject : Object
+        public static TObject LoadAsset<TObject>(string location) where TObject : Object
         {
-            return Proxy.LoadAssetSync<TObject>(location);
+            return Proxy.LoadAssetSync<TObject>(Parameter.LoadPathToLower ? location.ToLower() : location);
         }
 
         /// <summary>
@@ -224,18 +224,18 @@ namespace AIO
         /// </summary>
         /// <param name="location">资源的定位地址</param>
         /// <param name="type">资源类型</param>
-        public static Object LoadAssetSync(string location, Type type)
+        public static Object LoadAsset(string location, Type type)
         {
-            return Proxy.LoadAssetSync(location, type);
+            return Proxy.LoadAssetSync(Parameter.LoadPathToLower ? location.ToLower() : location, type);
         }
 
         /// <summary>
         /// 同步加载资源对象
         /// </summary>
         /// <param name="location">资源的定位地址</param>
-        public static Object LoadAssetSync(string location)
+        public static Object LoadAsset(string location)
         {
-            return Proxy.LoadAssetSync(location, typeof(Object));
+            return Proxy.LoadAssetSync(Parameter.LoadPathToLower ? location.ToLower() : location, typeof(Object));
         }
 
         /// <summary>
@@ -245,7 +245,7 @@ namespace AIO
         /// <param name="location">资源的定位地址</param>
         public static Task<TObject> LoadAssetTask<TObject>(string location) where TObject : Object
         {
-            return Proxy.LoadAssetTask<TObject>(location);
+            return Proxy.LoadAssetTask<TObject>(Parameter.LoadPathToLower ? location.ToLower() : location);
         }
 
         /// <summary>
@@ -255,7 +255,7 @@ namespace AIO
         /// <param name="type">资源类型</param>
         public static Task<Object> LoadAssetTask(string location, Type type)
         {
-            return Proxy.LoadAssetTask(location, type);
+            return Proxy.LoadAssetTask(Parameter.LoadPathToLower ? location.ToLower() : location, type);
         }
 
         /// <summary>
@@ -264,7 +264,7 @@ namespace AIO
         /// <param name="location">资源的定位地址</param>
         public static Task<Object> LoadAssetTask(string location)
         {
-            return Proxy.LoadAssetTask(location, typeof(Object));
+            return Proxy.LoadAssetTask(Parameter.LoadPathToLower ? location.ToLower() : location, typeof(Object));
         }
 
         #endregion
@@ -286,7 +286,7 @@ namespace AIO
             bool suspendLoad = false,
             int priority = 100)
         {
-            cb?.Invoke(await Proxy.LoadSceneTask(location, sceneMode, suspendLoad, priority));
+            cb?.Invoke(await Proxy.LoadSceneTask(Parameter.LoadPathToLower ? location.ToLower() : location, sceneMode, suspendLoad, priority));
         }
 
         /// <summary>
@@ -304,7 +304,7 @@ namespace AIO
             bool suspendLoad = false,
             int priority = 100)
         {
-            return Proxy.LoadSceneCO(location, cb, sceneMode, suspendLoad, priority);
+            return Proxy.LoadSceneCO(Parameter.LoadPathToLower ? location.ToLower() : location, cb, sceneMode, suspendLoad, priority);
         }
 
         /// <summary>
@@ -320,7 +320,7 @@ namespace AIO
             bool suspendLoad = true,
             int priority = 100)
         {
-            return Proxy.LoadSceneTask(location, sceneMode, suspendLoad, priority);
+            return Proxy.LoadSceneTask(Parameter.LoadPathToLower ? location.ToLower() : location, sceneMode, suspendLoad, priority);
         }
 
         #endregion
@@ -333,7 +333,7 @@ namespace AIO
         /// <param name="location">资源的定位地址</param>
         public static string LoadRawFileText(string location)
         {
-            return Proxy.LoadRawFileTextSync(location);
+            return Proxy.LoadRawFileTextSync(Parameter.LoadPathToLower ? location.ToLower() : location);
         }
 
         /// <summary>
@@ -343,7 +343,7 @@ namespace AIO
         /// <param name="location">资源的定位地址</param>
         public static async void LoadRawFileText(string location, Action<string> cb)
         {
-            cb?.Invoke(await Proxy.LoadRawFileTextTask(location));
+            cb?.Invoke(await Proxy.LoadRawFileTextTask(Parameter.LoadPathToLower ? location.ToLower() : location));
         }
 
         /// <summary>
@@ -352,7 +352,7 @@ namespace AIO
         /// <param name="location">资源的定位地址</param>
         public static Task<string> LoadRawFileTextTask(string location)
         {
-            return Proxy.LoadRawFileTextTask(location);
+            return Proxy.LoadRawFileTextTask(Parameter.LoadPathToLower ? location.ToLower() : location);
         }
 
         /// <summary>
@@ -362,7 +362,7 @@ namespace AIO
         /// <param name="location">资源的定位地址</param>
         public static async void LoadRawFileData(string location, Action<byte[]> cb)
         {
-            cb?.Invoke(await Proxy.LoadRawFileDataTask(location));
+            cb?.Invoke(await Proxy.LoadRawFileDataTask(Parameter.LoadPathToLower ? location.ToLower() : location));
         }
 
         /// <summary>
@@ -371,7 +371,7 @@ namespace AIO
         /// <param name="location">资源的定位地址</param>
         public static byte[] LoadRawFileData(string location)
         {
-            return Proxy.LoadRawFileDataSync(location);
+            return Proxy.LoadRawFileDataSync(Parameter.LoadPathToLower ? location.ToLower() : location);
         }
 
         /// <summary>
@@ -380,7 +380,7 @@ namespace AIO
         /// <param name="location">资源的定位地址</param>
         public static Task<byte[]> LoadRawFileDataTask(string location)
         {
-            return Proxy.LoadRawFileDataTask(location);
+            return Proxy.LoadRawFileDataTask(Parameter.LoadPathToLower ? location.ToLower() : location);
         }
 
         /// <summary>
@@ -390,7 +390,7 @@ namespace AIO
         /// <param name="cb">回调</param>
         public static IEnumerator LoadRawFileDataCO(string location, Action<byte[]> cb)
         {
-            return Proxy.LoadRawFileDataCO(location, cb);
+            return Proxy.LoadRawFileDataCO(Parameter.LoadPathToLower ? location.ToLower() : location, cb);
         }
 
         /// <summary>
@@ -400,7 +400,7 @@ namespace AIO
         /// <param name="cb">回调</param>
         public static IEnumerator LoadRawFileTextCO(string location, Action<string> cb)
         {
-            return Proxy.LoadRawFileTextCO(location, cb);
+            return Proxy.LoadRawFileTextCO(Parameter.LoadPathToLower ? location.ToLower() : location, cb);
         }
 
         #endregion

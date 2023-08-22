@@ -43,51 +43,6 @@ namespace AIO.UEngine
 {
     internal partial class YAssetSystem
     {
-        private static bool LoadCheckNet(UnityWebRequest operation)
-        {
-            switch (operation.result)
-            {
-                case UnityWebRequest.Result.InProgress:
-                    Debug.LogError("请求正在进行中");
-                    break;
-                case UnityWebRequest.Result.ConnectionError:
-                    Debug.LogError("无法连接到服务器");
-                    break;
-                case UnityWebRequest.Result.ProtocolError:
-                    Debug.LogError("服务器返回响应错误");
-                    break;
-                case UnityWebRequest.Result.DataProcessingError:
-                    Debug.LogError("数据处理异常");
-                    break;
-                default:
-                    Debug.LogError("未知错误");
-                    break;
-                case UnityWebRequest.Result.Success:
-                    break;
-            }
-#if UNITY_2020_3_OR_NEWER
-            if (operation.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError(operation.error);
-                return false;
-            }
-#else
-        if (operation.isHttpError || operation.isNetworkError)
-        {
-            UnityEngine.Debug.LogError(operation.error);
-            return false;
-        }
-#endif
-
-            if (!operation.isDone)
-            {
-                Debug.LogError("请求未完成");
-                return false;
-            }
-
-            return true;
-        }
-
         private static async ATaskBoolean LoadCheckOPTask(OperationHandleBase operation)
         {
             if (!operation.IsValid)
