@@ -4,34 +4,7 @@
 |||✩ Document: ||| -> 
 |||✩ - - - - - |*/
 
-#if SUPPORT_UNITASK
-#define UNITASK
-#endif
-
 #if SUPPORT_YOOASSET
-#define YOOASSET
-#endif
-
-#if UNITASK
-using ATask = Cysharp.Threading.Tasks.UniTask;
-using ATaskObject = Cysharp.Threading.Tasks.UniTask<UnityEngine.Object>;
-using ATaskGameObject = Cysharp.Threading.Tasks.UniTask<UnityEngine.GameObject>;
-using ATaskObjectArray = Cysharp.Threading.Tasks.UniTask<UnityEngine.Object[]>;
-using ATaskScene = Cysharp.Threading.Tasks.UniTask<UnityEngine.SceneManagement.Scene>;
-using ATaskString = Cysharp.Threading.Tasks.UniTask<System.String>;
-using ATaskByteArray = Cysharp.Threading.Tasks.UniTask<System.Byte[]>;
-#else
-using System.Threading.Tasks;
-using ATask = System.Threading.Tasks.Task;
-using ATaskObject = System.Threading.Tasks.Task<UnityEngine.Object>;
-using ATaskGameObject = System.Threading.Tasks.Task<UnityEngine.GameObject>;
-using ATaskObjectArray = System.Threading.Tasks.Task<UnityEngine.Object[]>;
-using ATaskScene = System.Threading.Tasks.Task<UnityEngine.SceneManagement.Scene>;
-using ATaskString = System.Threading.Tasks.Task<System.String>;
-using ATaskByteArray = System.Threading.Tasks.Task<System.Byte[]>;
-#endif
-
-#if YOOASSET
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -43,7 +16,7 @@ namespace AIO.UEngine
 {
     internal partial class YAssetSystem
     {
-        public static async ATaskGameObject InstGameObjectTask(string location, Transform parent)
+        public static async Task<GameObject> InstGameObjectTask(string location, Transform parent)
         {
             var operation = GetHandle<AssetOperationHandle>(location);
             if (operation is null)
@@ -58,7 +31,7 @@ namespace AIO.UEngine
             return operation.InstantiateSync(parent);
         }
 
-        public static async ATaskGameObject InstGameObjectTask(string location)
+        public static async Task<GameObject> InstGameObjectTask(string location)
         {
             var operation = GetHandle<AssetOperationHandle>(location);
             if (operation is null)
@@ -99,7 +72,7 @@ namespace AIO.UEngine
         /// 异步加载子资源对象
         /// </summary>
         /// <param name="location">资源信息</param>
-        public static async ATaskObjectArray LoadSubAssetsTask(AssetInfo location)
+        public static async Task<Object[]> LoadSubAssetsTask(AssetInfo location)
         {
             var operation = GetHandle<SubAssetsOperationHandle>(location);
             if (operation is null)
@@ -119,7 +92,7 @@ namespace AIO.UEngine
         /// </summary>
         /// <param name="location">资源的定位地址</param>
         /// <param name="type">子对象类型</param>
-        public static async ATaskObjectArray LoadSubAssetsTask(string location, Type type)
+        public static async Task<Object[]> LoadSubAssetsTask(string location, Type type)
         {
             var operation = GetHandle<SubAssetsOperationHandle>(location);
             if (operation is null)
@@ -164,7 +137,7 @@ namespace AIO.UEngine
         /// </summary>
         /// <param name="location">资源的定位地址</param>
         /// <param name="type">资源类型</param>
-        public static async ATaskObject LoadAssetTask(string location, Type type)
+        public static async Task<Object> LoadAssetTask(string location, Type type)
         {
             var operation = GetHandle<AssetOperationHandle>(location);
             if (operation is null)
@@ -183,7 +156,7 @@ namespace AIO.UEngine
         /// 异步加载资源对象
         /// </summary>
         /// <param name="location">资源信息</param>
-        public static async ATaskObject LoadAssetTask(AssetInfo location)
+        public static async Task<Object> LoadAssetTask(AssetInfo location)
         {
             var operation = GetHandle<AssetOperationHandle>(location);
             if (operation is null)
@@ -209,7 +182,7 @@ namespace AIO.UEngine
         /// <param name="sceneMode">场景加载模式</param>
         /// <param name="suspendLoad">场景加载到90%自动挂起</param>
         /// <param name="priority">优先级</param>
-        public static async ATaskScene LoadSceneTask(
+        public static async Task<Scene> LoadSceneTask(
             string location,
             LoadSceneMode sceneMode = LoadSceneMode.Single,
             bool suspendLoad = false,
@@ -236,7 +209,7 @@ namespace AIO.UEngine
         /// <param name="sceneMode">场景加载模式</param>
         /// <param name="suspendLoad">场景加载到90%自动挂起</param>
         /// <param name="priority">优先级</param>
-        public static async ATaskScene LoadSceneTask(
+        public static async Task<Scene> LoadSceneTask(
             AssetInfo location,
             LoadSceneMode sceneMode = LoadSceneMode.Single,
             bool suspendLoad = false,
@@ -264,7 +237,7 @@ namespace AIO.UEngine
         /// 异步加载原生文件
         /// </summary>
         /// <param name="location">资源信息</param>
-        public static async ATaskByteArray LoadRawFileDataTask(AssetInfo location)
+        public static async Task<Byte[]> LoadRawFileDataTask(AssetInfo location)
         {
             var operation = GetHandle<RawFileOperationHandle>(location);
             if (operation is null)
@@ -283,7 +256,7 @@ namespace AIO.UEngine
         /// 异步加载原生文件
         /// </summary>
         /// <param name="location">资源的定位地址</param>
-        public static async ATaskByteArray LoadRawFileDataTask(string location)
+        public static async Task<Byte[]> LoadRawFileDataTask(string location)
         {
             var operation = GetHandle<RawFileOperationHandle>(location);
             if (operation is null)
@@ -302,7 +275,7 @@ namespace AIO.UEngine
         /// 异步加载原生文件
         /// </summary>
         /// <param name="location">资源信息</param>
-        public static async ATaskString LoadRawFileTextTask(AssetInfo location)
+        public static async Task<String> LoadRawFileTextTask(AssetInfo location)
         {
             var operation = GetHandle<RawFileOperationHandle>(location);
             if (operation is null)
@@ -321,7 +294,7 @@ namespace AIO.UEngine
         /// 异步加载原生文件
         /// </summary>
         /// <param name="location">资源的定位地址</param>
-        public static async ATaskString LoadRawFileTextTask(string location)
+        public static async Task<String> LoadRawFileTextTask(string location)
         {
             var operation = GetHandle<RawFileOperationHandle>(location);
             if (operation is null)

@@ -21,7 +21,7 @@ namespace AIO
         /// <returns><see cref="UnityEngine.GameObject"/></returns>
         public static GameObject InstGameObject(in string location, Transform parent)
         {
-            return Proxy.InstGameObject(location, parent);
+            return Proxy.InstGameObject(Parameter.LoadPathToLower ? location.ToLower() : location, parent);
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace AIO
         /// <returns><see cref="UnityEngine.GameObject"/></returns>
         public static GameObject InstGameObject(in string location)
         {
-            return Proxy.InstGameObject(location);
+            return Proxy.InstGameObject(Parameter.LoadPathToLower ? location.ToLower() : location);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace AIO
         /// <returns><see cref="UnityEngine.GameObject"/></returns>
         public static async void InstGameObject(string location, Transform parent, Action<GameObject> cb)
         {
-            cb?.Invoke(await Proxy.InstGameObjectTask(location, parent));
+            cb?.Invoke(await Proxy.InstGameObjectTask(Parameter.LoadPathToLower ? location.ToLower() : location, parent));
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace AIO
         /// <returns><see cref="UnityEngine.GameObject"/></returns>
         public static async void InstGameObject(string location, Action<GameObject> cb)
         {
-            cb?.Invoke(await Proxy.InstGameObjectTask(location));
+            cb?.Invoke(await Proxy.InstGameObjectTask(Parameter.LoadPathToLower ? location.ToLower() : location));
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace AIO
         /// <returns><see cref="UnityEngine.GameObject"/></returns>
         public static Task<GameObject> InstGameObjectTask(string location, Transform parent)
         {
-            return Proxy.InstGameObjectTask(location, parent);
+            return Proxy.InstGameObjectTask(Parameter.LoadPathToLower ? location.ToLower() : location, parent);
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace AIO
         /// <returns><see cref="UnityEngine.GameObject"/></returns>
         public static Task<GameObject> InstGameObjectTask(string location)
         {
-            return Proxy.InstGameObjectTask(location);
+            return Proxy.InstGameObjectTask(Parameter.LoadPathToLower ? location.ToLower() : location);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace AIO
         /// <returns><see cref="UnityEngine.GameObject"/></returns>
         public static IEnumerator InstGameObjectCO(string location, Transform parent, Action<GameObject> cb)
         {
-            return Proxy.InstGameObjectCO(location, cb, parent);
+            return Proxy.InstGameObjectCO(Parameter.LoadPathToLower ? location.ToLower() : location, cb, parent);
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace AIO
         /// <returns><see cref="UnityEngine.GameObject"/></returns>
         public static IEnumerator InstGameObjectCO(string location, Action<GameObject> cb)
         {
-            return Proxy.InstGameObjectCO(location, cb);
+            return Proxy.InstGameObjectCO(Parameter.LoadPathToLower ? location.ToLower() : location, cb);
         }
     }
 }

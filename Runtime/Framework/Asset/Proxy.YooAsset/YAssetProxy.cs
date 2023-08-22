@@ -32,7 +32,7 @@ namespace AIO.UEngine
 #if UNITY_WEBGL
                     yAssetFlow = new YAParametersWebGLMode
                     {
-                        QueryServices = GetQueryServices?.Invoke(),
+                        QueryServices = GetQueryServices == null ? new ResolverQueryServices() : GetQueryServices.Invoke(),
                         RemoteServices = GetRemoteServices?.Invoke(package.Config),
                         BuildinRootDirectory = Path.Combine(Application.streamingAssetsPath, "BuildinFiles"),
 #if UNITY_EDITOR
@@ -44,7 +44,7 @@ namespace AIO.UEngine
 #else
                     yAssetFlow = new YAssetParametersHostPlayMode
                     {
-                        QueryServices = GetQueryServices?.Invoke(),
+                        QueryServices = GetQueryServices == null ? new ResolverQueryServices() : GetQueryServices.Invoke(),
                         RemoteServices = GetRemoteServices?.Invoke(package.Config),
                         BuildinRootDirectory = Path.Combine(Application.streamingAssetsPath, "BuildinFiles"),
 #if UNITY_EDITOR
@@ -55,7 +55,7 @@ namespace AIO.UEngine
                     };
 #endif
                     break;
-                case EASMode.Editor:// 编辑器模式
+                case EASMode.Editor: // 编辑器模式
 #if UNITY_EDITOR
                     yAssetFlow = new YAssetHandleEditor();
                     break;

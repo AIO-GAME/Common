@@ -45,6 +45,9 @@ namespace AIO.UEngine
                 cb?.Invoke(package);
                 yield break;
             }
+#if UNITY_EDITOR
+            throw new SystemException(string.Format("资源查找失败 [auto : {0}]", location));
+#endif
         }
 
         private static IEnumerator GetAutoPakcageCO(string packagename, AssetInfo location, Action<YAssetPackage> cb)
@@ -104,7 +107,9 @@ namespace AIO.UEngine
 
                 return package;
             }
-
+#if UNITY_EDITOR
+            throw new SystemException(string.Format("资源查找失败 [auto : {0}]", location));
+#endif
             return null;
         }
 
@@ -162,7 +167,9 @@ namespace AIO.UEngine
 
                 return package;
             }
-
+#if UNITY_EDITOR
+            throw new SystemException(string.Format("资源查找失败 [auto : {0}]", location));
+#endif
             return null;
         }
 

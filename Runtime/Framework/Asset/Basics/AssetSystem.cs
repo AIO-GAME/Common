@@ -4,11 +4,7 @@
 |||✩ Document: ||| -> 
 |||✩ - - - - - |*/
 
-#if SUPPORT_UNITASK
-using ATask = Cysharp.Threading.Tasks.UniTask;
-#else
-using ATask = System.Threading.Tasks.Task;
-#endif
+using System.Threading.Tasks;
 using System;
 using AIO.UEngine;
 using UnityEngine;
@@ -35,7 +31,7 @@ namespace AIO
         /// <summary>
         /// 系统初始化
         /// </summary>
-        public static async ATask Initialize<T>(ASConfig config) where T : AssetProxy, new()
+        public static async Task Initialize<T>(ASConfig config) where T : AssetProxy, new()
         {
             IsInitialized = false;
             Parameter = config;
@@ -47,7 +43,7 @@ namespace AIO
         /// <summary>
         /// 系统初始化
         /// </summary>
-        public static async ATask Initialize<T>(T proxy, ASConfig config) where T : AssetProxy
+        public static async Task Initialize<T>(T proxy, ASConfig config) where T : AssetProxy
         {
             IsInitialized = false;
             Parameter = config;
@@ -59,7 +55,7 @@ namespace AIO
         /// <summary>
         /// 系统初始化
         /// </summary>
-        public static async ATask Initialize<T>(T proxy) where T : AssetProxy
+        public static async Task Initialize<T>(T proxy) where T : AssetProxy
         {
             IsInitialized = false;
             Parameter = new ASConfig();
@@ -71,17 +67,17 @@ namespace AIO
         /// <summary>
         /// 系统初始化
         /// </summary>
-        public static ATask Initialize<T>() where T : AssetProxy, new()
+        public static Task Initialize<T>() where T : AssetProxy, new()
         {
             Parameter = new ASConfig();
             Proxy = Activator.CreateInstance<T>();
             return Proxy.Initialize();
         }
 
-        public static ATask Destroy()
+        public static Task Destroy()
         {
             Proxy.Dispose();
-            return ATask.CompletedTask;
+            return Task.CompletedTask;
         }
     }
 }

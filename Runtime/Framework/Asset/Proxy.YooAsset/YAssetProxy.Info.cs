@@ -16,7 +16,10 @@ namespace AIO.UEngine
         /// <returns></returns>
         public override IASDownloader GetDownloader()
         {
-            return null;
+            var dic = new Dictionary<string, YAssetPackage>();
+            foreach (var item in GetPackages?.Invoke())
+                dic.Add(item.Name, YAssetSystem.GetPackage(item.Name));
+            return new YASDownloader(dic);
         }
 
         /// <summary>
