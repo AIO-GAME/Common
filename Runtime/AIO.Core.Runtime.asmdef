@@ -22,7 +22,9 @@
         "AIO.Common.dll",
         "YamlDotNet.dll",
         "ICSharpCode.SharpZipLib.dll",
-        "DOTween.dll"
+        "DOTween.dll",
+        "AIO.Print.dll",
+        "AIO.Print.Unity.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],
