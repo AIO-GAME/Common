@@ -15,6 +15,7 @@ namespace AIO.UEngine
 {
     internal partial class YAssetSystem
     {
+   
         public static async void InstGameObject(string location, Transform parent, Action<GameObject> cb)
         {
             var operation = GetHandle<AssetOperationHandle>(location);
@@ -73,7 +74,7 @@ namespace AIO.UEngine
         /// <typeparam name="TObject">资源类型</typeparam>
         /// <param name="location">资源的定位地址</param>
         /// <param name="cb">回调</param>
-        public static async void LoadSubAssetsAuto<TObject>(string location, Action<TObject[]> cb) where TObject : Object
+        public static async void LoadSubAssets<TObject>(string location, Action<TObject[]> cb) where TObject : Object
         {
             var operation = GetHandle<SubAssetsOperationHandle>(location);
             if (operation is null)
@@ -85,7 +86,7 @@ namespace AIO.UEngine
                     return;
                 }
 
-                operation = package.LoadSubAssetsSync<TObject>(location);
+                operation = package.LoadSubAssetsAsync<TObject>(location);
                 if (!await LoadCheckOPTask(operation))
                 {
                     cb?.Invoke(null);

@@ -239,6 +239,21 @@ namespace AIO.UEngine
             return YAssetSystem.LoadRawFileTextCO(location, cb);
         }
 
+        public override void PreLoadSubAssets<TObject>(string location)
+        {
+    
+        }
+
+        public override void PreLoadAsset<TObject>(string location)
+        {
+         
+        }
+
+        public override void PreLoadRaw(string location)
+        {
+         
+        }
+
         #endregion
     }
 }

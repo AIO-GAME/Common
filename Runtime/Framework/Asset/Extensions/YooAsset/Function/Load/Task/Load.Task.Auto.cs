@@ -60,7 +60,7 @@ namespace AIO.UEngine
             {
                 var package = await GetAutoPakcageTask(location);
                 if (package is null) return null;
-                operation = package.LoadSubAssetsSync<TObject>(location);
+                operation = package.LoadSubAssetsAsync<TObject>(location);
                 if (!await LoadCheckOPTask(operation)) return null;
                 AddHandle(location, operation);
             }
@@ -163,7 +163,7 @@ namespace AIO.UEngine
             {
                 var package = await GetAutoPakcageTask(location);
                 if (package is null) return null;
-                operation = package.LoadAssetSync(location);
+                operation = package.LoadAssetAsync(location);
                 if (!await LoadCheckOPTask(operation)) return null;
                 AddHandle(location, operation);
             }
