@@ -4,16 +4,13 @@
 |||✩ Document: ||| -> 
 |||✩ - - - - - |*/
 
-#if SUPPORT_UNITASK
-
-using System;
-using Cysharp.Threading.Tasks;
-using UnityEngine;
-using UnityEngine.Networking;
 using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
+#if SUPPORT_UNITASK
+using Cysharp.Threading.Tasks;
+#endif
 
 namespace AIO
 {
@@ -71,7 +68,7 @@ namespace AIO
         /// </summary>
         /// <param name="url">网址</param>
         /// <param name="cb">回调</param>
-        public static async void LoadTextureNet(string url, Action<Texture2D> cb)
+        public static async void NetLoadTexture(string url, Action<Texture2D> cb)
         {
             using (var uwr = UnityWebRequestTexture.GetTexture(url))
             {
@@ -90,7 +87,7 @@ namespace AIO
         /// <param name="rect">矩形</param>
         /// <param name="pivot">中心点</param>
         /// <param name="cb">回调</param>
-        public static async void LoadSpriteNet(string url, Rect rect, Vector2 pivot, Action<Sprite> cb)
+        public static async void NetLoadSprite(string url, Rect rect, Vector2 pivot, Action<Sprite> cb)
         {
             using (var uwr = UnityWebRequestTexture.GetTexture(url))
             {
@@ -107,7 +104,7 @@ namespace AIO
         /// </summary>
         /// <param name="url">网址</param>
         /// <param name="cb">回调</param>
-        public static async void LoadStringNet(string url, Action<string> cb)
+        public static async void NetLoadString(string url, Action<string> cb)
         {
             using (var uwr = UnityWebRequest.Get(url))
             {
@@ -124,7 +121,7 @@ namespace AIO
         /// </summary>
         /// <param name="url">网址</param>
         /// <param name="cb">回调</param>
-        public static async void LoadSteamNet(string url, Action<byte[]> cb)
+        public static async void NetLoadBytes(string url, Action<byte[]> cb)
         {
             using (var uwr = UnityWebRequest.Get(url))
             {
@@ -142,7 +139,7 @@ namespace AIO
         /// <param name="url">网址</param>
         /// <param name="audioType">音频类型</param>
         /// <param name="cb">回调</param>
-        public static async void LoadAudioClipNet(string url, AudioType audioType, Action<AudioClip> cb)
+        public static async void NetLoadAudioClip(string url, AudioType audioType, Action<AudioClip> cb)
         {
             using (var uwr = UnityWebRequestMultimedia.GetAudioClip(url, audioType))
             {
@@ -159,7 +156,7 @@ namespace AIO
         /// </summary>
         /// <param name="url">网址</param>
         /// <param name="cb">回调</param>
-        public static async void LoadAssetBundleNet(string url, Action<AssetBundle> cb)
+        public static async void NetLoadAssetBundle(string url, Action<AssetBundle> cb)
         {
             using (var uwr = UnityWebRequestAssetBundle.GetAssetBundle(url))
             {
@@ -180,7 +177,7 @@ namespace AIO
         /// </summary>
         /// <param name="url">网址</param>
         /// <param name="cb">回调</param>
-        public static IEnumerator LoadTextureNetCO(string url, Action<Texture2D> cb)
+        public static IEnumerator NetLoadTextureCO(string url, Action<Texture2D> cb)
         {
             using (var uwr = UnityWebRequestTexture.GetTexture(url))
             {
@@ -196,7 +193,7 @@ namespace AIO
         /// <param name="rect">矩形</param>
         /// <param name="pivot">中心点</param>
         /// <param name="cb">回调</param>
-        public static IEnumerator LoadSpriteNetCO(string url, Rect rect, Vector2 pivot, Action<Sprite> cb)
+        public static IEnumerator NetLoadSpriteCO(string url, Rect rect, Vector2 pivot, Action<Sprite> cb)
         {
             using (var uwr = UnityWebRequestTexture.GetTexture(url))
             {
@@ -214,7 +211,7 @@ namespace AIO
         /// </summary>
         /// <param name="url">网址</param>
         /// <param name="cb">回调</param>
-        public static IEnumerator LoadAssetBundleNetCO(string url, Action<AssetBundle> cb)
+        public static IEnumerator NetLoadAssetBundleCO(string url, Action<AssetBundle> cb)
         {
             using (var uwr = UnityWebRequestAssetBundle.GetAssetBundle(url))
             {
@@ -229,7 +226,7 @@ namespace AIO
         /// <param name="url">网址</param>
         /// <param name="audioType">音频类型</param>
         /// <param name="cb">回调</param>
-        public static IEnumerator LoadAudioNetCO(string url, AudioType audioType, Action<AudioClip> cb)
+        public static IEnumerator NetLoadAudioCO(string url, AudioType audioType, Action<AudioClip> cb)
         {
             using (var uwr = UnityWebRequestMultimedia.GetAudioClip(url, audioType))
             {
@@ -243,7 +240,7 @@ namespace AIO
         /// </summary>
         /// <param name="url">网址</param>
         /// <param name="cb">回调</param>
-        public static IEnumerator LoadStringNetCO(string url, Action<string> cb)
+        public static IEnumerator NetLoadStringCO(string url, Action<string> cb)
         {
             using (var uwr = UnityWebRequest.Get(url))
             {
@@ -257,7 +254,7 @@ namespace AIO
         /// </summary>
         /// <param name="url">网址</param>
         /// <param name="cb">回调</param>
-        public static IEnumerator LoadSteamNetCO(string url, Action<byte[]> cb)
+        public static IEnumerator NetLoadBytesCO(string url, Action<byte[]> cb)
         {
             using (var uwr = UnityWebRequest.Get(url))
             {
@@ -268,13 +265,16 @@ namespace AIO
 
         #endregion
 
+#if SUPPORT_UNITASK
+
+
         #region UniTask
 
         /// <summary>
         /// 网上加载图片
         /// </summary>
         /// <param name="url">网址</param>
-        internal static async UniTask<Texture2D> LoadNetTextureTask(string url)
+        internal static async UniTask<Texture2D> NetLoadTextureTask(string url)
         {
             using (var uwr = UnityWebRequestTexture.GetTexture(url))
             {
@@ -291,7 +291,7 @@ namespace AIO
         /// <param name="url">网址</param>
         /// <param name="rect">矩形</param>
         /// <param name="pivot">中心点</param>
-        public static async UniTask<Sprite> LoadNetSpriteTask(string url, Rect rect, Vector2 pivot)
+        public static async UniTask<Sprite> NetLoadSpriteTask(string url, Rect rect, Vector2 pivot)
         {
             using (var uwr = UnityWebRequestTexture.GetTexture(url))
             {
@@ -306,7 +306,7 @@ namespace AIO
         /// 网上加载文本
         /// </summary>
         /// <param name="url">网址</param>
-        public static async UniTask<string> LoadStringNetTask(string url)
+        public static async UniTask<string> NetLoadStringTask(string url)
         {
             using (var uwr = UnityWebRequest.Get(url))
             {
@@ -320,7 +320,7 @@ namespace AIO
         /// 网上加载字节
         /// </summary>
         /// <param name="url">网址</param>
-        public static async UniTask<byte[]> LoadSteamNetTask(string url)
+        public static async UniTask<byte[]> NetLoadBytesTask(string url)
         {
             using (var uwr = UnityWebRequest.Get(url))
             {
@@ -335,7 +335,7 @@ namespace AIO
         /// </summary>
         /// <param name="url">网址</param>
         /// <param name="audioType">音频类型</param>
-        public static async UniTask<AudioClip> LoadAudioClipNetTask(string url, AudioType audioType)
+        public static async UniTask<AudioClip> NetLoadAudioClipTask(string url, AudioType audioType)
         {
             using (var uwr = UnityWebRequestMultimedia.GetAudioClip(url, audioType))
             {
@@ -350,7 +350,7 @@ namespace AIO
         /// 网上加载AB包
         /// </summary>
         /// <param name="url">网址</param>
-        public static async UniTask<AssetBundle> LoadAssetBundleNetTask(string url)
+        public static async UniTask<AssetBundle> NetLoadAssetBundleTask(string url)
         {
             using (var uwr = UnityWebRequestAssetBundle.GetAssetBundle(url))
             {
@@ -361,7 +361,7 @@ namespace AIO
         }
 
         #endregion
-    }
-}
 
 #endif
+    }
+}

@@ -20,7 +20,7 @@ namespace AIO
         /// <summary>
         /// 同步加载原生文件
         /// </summary>
-        /// <param name="location">场景的定位地址</param>
+        /// <param name="location">资源的定位地址</param>
         /// <param name="cb">回调</param>
         public static async void LoadSubAssets<TObject>(string location, Action<TObject[]> cb) where TObject : Object
         {
@@ -30,7 +30,7 @@ namespace AIO
         /// <summary>
         /// 同步加载原生文件
         /// </summary>
-        /// <param name="location">场景的定位地址</param>
+        /// <param name="location">资源的定位地址</param>
         /// <param name="cb">回调</param>
         public static async void LoadSubAssets(string location, Action<Object[]> cb)
         {
@@ -41,7 +41,7 @@ namespace AIO
         /// 同步加载原生文件
         /// </summary>
         /// <param name="type">子对象类型</param>
-        /// <param name="location">场景的定位地址</param>
+        /// <param name="location">资源的定位地址</param>
         /// <param name="cb">回调</param>
         public static async void LoadSubAssets(string location, Type type, Action<Object[]> cb)
         {
@@ -130,26 +130,12 @@ namespace AIO
 
         #endregion
 
-        #region TextAsset
-
-        /// <summary>
-        /// 同步加载 <see cref="TextAsset"/>
-        /// </summary>
-        /// <param name="location">场景的定位地址</param>
-        public static TextAsset LoadTextAsset(string location)
-        {
-            return Proxy.LoadAssetSync<TextAsset>(Parameter.LoadPathToLower ? location.ToLower() : location);
-        }
-
-        #endregion
-
-
         #region 资源加载
 
         /// <summary>
         /// 同步加载原生文件
         /// </summary>
-        /// <param name="location">场景的定位地址</param>
+        /// <param name="location">资源的定位地址</param>
         /// <param name="cb">回调</param>
         public static async void LoadAsset<TObject>(string location, Action<TObject> cb) where TObject : Object
         {
@@ -159,7 +145,7 @@ namespace AIO
         /// <summary>
         /// 同步加载原生文件
         /// </summary>
-        /// <param name="location">场景的定位地址</param>
+        /// <param name="location">资源的定位地址</param>
         /// <param name="cb">回调</param>
         public static async void LoadAsset(string location, Action<Object> cb)
         {
@@ -170,7 +156,7 @@ namespace AIO
         /// 同步加载原生文件
         /// </summary>
         /// <param name="type">资源类型</param>
-        /// <param name="location">场景的定位地址</param>
+        /// <param name="location">资源的定位地址</param>
         /// <param name="cb">回调</param>
         public static async void LoadAsset(string location, Type type, Action<Object> cb)
         {
@@ -274,7 +260,7 @@ namespace AIO
         /// <summary>
         /// 同步加载原生文件
         /// </summary>
-        /// <param name="location">场景的定位地址</param>
+        /// <param name="location">资源的定位地址</param>
         /// <param name="cb">回调</param>
         /// <param name="sceneMode">场景加载模式</param>
         /// <param name="suspendLoad">场景加载到90%自动挂起</param>
@@ -292,7 +278,7 @@ namespace AIO
         /// <summary>
         /// 异步加载场景
         /// </summary>
-        /// <param name="location">场景的定位地址</param>
+        /// <param name="location">资源的定位地址</param>
         /// <param name="cb">回调</param>
         /// <param name="sceneMode">场景加载模式</param>
         /// <param name="suspendLoad">场景加载到90%自动挂起</param>
@@ -310,7 +296,7 @@ namespace AIO
         /// <summary>
         /// 异步加载场景
         /// </summary>
-        /// <param name="location">场景的定位地址</param>
+        /// <param name="location">资源的定位地址</param>
         /// <param name="sceneMode">场景加载模式</param>
         /// <param name="suspendLoad">场景加载到90%自动挂起</param>
         /// <param name="priority">优先级</param>

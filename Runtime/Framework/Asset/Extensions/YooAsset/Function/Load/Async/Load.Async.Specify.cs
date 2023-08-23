@@ -91,7 +91,7 @@ namespace AIO.UEngine
                     return;
                 }
 
-                operation = package.LoadSubAssetsSync<TObject>(location);
+                operation = package.LoadSubAssetsAsync<TObject>(location);
                 if (!await LoadCheckOPTask(operation))
                 {
                     cb?.Invoke(null);

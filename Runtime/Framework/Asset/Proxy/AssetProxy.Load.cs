@@ -46,7 +46,6 @@ namespace AIO.UEngine
         /// <param name="type">子对象类型</param>
         public abstract Object[] LoadSubAssetsSync(string location, Type type);
 
-
         /// <summary>
         /// 异步加载子资源对象
         /// </summary>
@@ -179,5 +178,25 @@ namespace AIO.UEngine
         public abstract IEnumerator LoadRawFileTextCO(string location, Action<string> cb);
 
         #endregion
+
+        /// <summary>
+        /// 预加载资源
+        /// </summary>
+        /// <param name="location">资源的定位地址</param>
+        /// <typeparam name="TObject">资源类型</typeparam>
+        public abstract void PreLoadSubAssets<TObject>(string location) where TObject : Object;
+
+        /// <summary>
+        /// 预加载资源
+        /// </summary>
+        /// <param name="location">资源的定位地址</param>
+        /// <typeparam name="TObject">资源类型</typeparam>
+        public abstract void PreLoadAsset<TObject>(string location) where TObject : Object;
+
+        /// <summary>
+        /// 预加载资源
+        /// </summary>
+        /// <param name="location">资源的定位地址</param>
+        public abstract void PreLoadRaw(string location);
     }
 }
