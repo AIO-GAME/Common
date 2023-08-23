@@ -29,7 +29,7 @@ namespace AIO.UEngine
             }
         }
 
-        public static async void PreLoadAssets<TObject>(string location) where TObject : Object
+        public static async void PreLoadAsset<TObject>(string location) where TObject : Object
         {
             var operation = GetHandle<AssetOperationHandle>(location);
             if (operation is null)
@@ -43,7 +43,7 @@ namespace AIO.UEngine
             }
         }
 
-        public static async void PreLoadRawFile(string location)
+        public static async void PreLoadRaw(string location)
         {
             var operation = GetHandle<RawFileOperationHandle>(location);
             if (operation is null)
