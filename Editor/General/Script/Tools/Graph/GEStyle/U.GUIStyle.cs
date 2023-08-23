@@ -128,6 +128,16 @@ namespace AIO.UEditor
         /// <summary>
         ///
         /// </summary>
+        public static UGUIStyle ContentToolbar => Get("ContentToolbar");
+        
+        /// <summary>
+        ///
+        /// </summary>
+        public static UGUIStyle HelpBox => Get("HelpBox");
+        
+        /// <summary>
+        ///
+        /// </summary>
         public static UGUIStyle CenteredLabel => Get("CenteredLabel");
 
         /// <summary>

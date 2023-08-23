@@ -19,11 +19,6 @@ namespace AIO.UEngine
         Remote,
 
         /// <summary>
-        /// 远端模式 + 边玩边下
-        /// </summary>
-        RemoteWithSidePlayWithDownload,
-
-        /// <summary>
         /// 本地模式
         /// </summary>
         Local,
@@ -55,5 +50,10 @@ namespace AIO.UEngine
         /// 加载路径转小写
         /// </summary>
         public bool LoadPathToLower = true;
+        
+        /// <summary>
+        /// 输出日志
+        /// </summary>
+        public bool OutputLog = true;
     }
 }

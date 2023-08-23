@@ -9328,6 +9328,20 @@
             <param name="searchPatterns">条件 "*value*"</param>
             <returns></returns>
         </member>
+        <member name="M:AHelper.IO.GetLastWriteTimeUtc(System.Collections.Generic.ICollection{System.IO.DirectoryInfo})">
+            <summary>
+            获取最新的文件夹
+            </summary>
+            <param name="directoryInfos">文件夹列表</param>
+            <returns><see cref="T:System.IO.DirectoryInfo"/>文件夹信息</returns>
+        </member>
+        <member name="M:AHelper.IO.GetLastWriteTimeUtc(System.Collections.Generic.ICollection{System.IO.FileInfo})">
+            <summary>
+            获取最新的文件
+            </summary>
+            <param name="directoryInfos">文件夹列表</param>
+            <returns><see cref="T:System.IO.FileInfo"/>文件夹信息</returns>
+        </member>
         <member name="M:AHelper.IO.TryPathsForFile(System.String,System.Collections.Generic.IEnumerable{System.String}@)">
             <summary>
             在给定的文件夹路径列表中查找指定文件名的文件，并返回第一个存在的文件完整路径。
@@ -9528,17 +9542,17 @@
             可自定义缓冲区大小，计算速度较快
             </summary>
         </member>
-        <member name="M:AHelper.IO.GetLastWriteTimeUtc(System.String)">
+        <member name="M:AHelper.IO.GetFileLastWriteTimeUtc(System.String)">
             <summary>
             获取最后写入时间
             </summary>
         </member>
-        <member name="M:AHelper.IO.GetCreationTimeUtc(System.String)">
+        <member name="M:AHelper.IO.GetFileCreationTimeUtc(System.String)">
             <summary>
             获取创建文件时间
             </summary>
         </member>
-        <member name="M:AHelper.IO.GetAttributes(System.String)">
+        <member name="M:AHelper.IO.GetFileAttributes(System.String)">
             <summary>
             获取文件属性
             </summary>

@@ -24,7 +24,9 @@ namespace AIO.UEngine
 
         private static IEnumerator GetAutoPakcageCO(string location, Action<YAssetPackage> cb)
         {
-            Print.LogFormat("Load Assets Coroutine : [auto : {0}]", location);
+#if UNITY_EDITOR
+            if (AssetSystem.Parameter.OutputLog) Print.LogFormat("Load Assets Coroutine : [auto : {0}]", location);
+#endif
             foreach (var package in Dic.Values.Where(package => package.CheckLocationValid(location)))
             {
                 if (package.IsNeedDownloadFromRemote(location))
@@ -57,8 +59,9 @@ namespace AIO.UEngine
 
         private static IEnumerator GetAutoPakcageCO(string packagename, string location, Action<YAssetPackage> cb)
         {
-            Print.LogFormat("Load Assets Coroutine : [{0} : {1}]", packagename, location);
-
+#if UNITY_EDITOR
+            if (AssetSystem.Parameter.OutputLog) Print.LogFormat("Load Assets Coroutine : [{0} : {1}]", packagename, location);
+#endif
             if (!Dic.TryGetValue(packagename, out var package))
                 throw new SystemException(string.Format("目标资源包不存在 [{0} : {1}]", packagename, location));
 
@@ -98,8 +101,9 @@ namespace AIO.UEngine
 
         private static YAssetPackage GetAutoPakcageSync(string location)
         {
-            Print.LogFormat("Load Assets Sync : [auto : {0}]", location);
-
+#if UNITY_EDITOR
+            if (AssetSystem.Parameter.OutputLog) Print.LogFormat("Load Assets Sync : [auto : {0}]", location);
+#endif
             foreach (var package in Dic.Values.Where(package => package.CheckLocationValid(location)))
             {
                 if (package.IsNeedDownloadFromRemote(location))
@@ -120,8 +124,9 @@ namespace AIO.UEngine
 
         private static YAssetPackage GetAutoPakcageSync(string packagename, string location)
         {
-            Print.LogFormat("Load Assets Sync : [{0} : {1}]", packagename, location);
-
+#if UNITY_EDITOR
+            if (AssetSystem.Parameter.OutputLog) Print.LogFormat("Load Assets Sync : [{0} : {1}]", packagename, location);
+#endif
             if (!Dic.TryGetValue(packagename, out var package))
                 throw new SystemException(string.Format("目标资源包不存在 [{0} : {1}]", packagename, location));
 
@@ -141,8 +146,9 @@ namespace AIO.UEngine
 
         private static async Task<YAssetPackage> GetAutoPakcageTask(string location)
         {
-            Print.LogFormat("Load Assets Async : [auto : {0}]", location);
-
+#if UNITY_EDITOR
+            if (AssetSystem.Parameter.OutputLog) Print.LogFormat("Load Assets Async : [auto : {0}]", location);
+#endif
             foreach (var package in Dic.Values.Where(package => package.CheckLocationValid(location)))
             {
                 if (package.IsNeedDownloadFromRemote(location))
@@ -180,8 +186,9 @@ namespace AIO.UEngine
 
         private static async Task<YAssetPackage> GetAutoPakcageTask(string packagename, string location)
         {
-            Print.LogFormat("Load Assets Async : [{0} : {1}]", packagename, location);
-
+#if UNITY_EDITOR
+            if (AssetSystem.Parameter.OutputLog) Print.LogFormat("Load Assets Async : [{0} : {1}]", packagename, location);
+#endif
             if (!Dic.TryGetValue(packagename, out var package))
                 throw new SystemException(string.Format("目标资源包不存在 [{0} : {1}]", packagename, location));
 

@@ -28,7 +28,6 @@ namespace AIO.UEngine
             switch (AssetSystem.Parameter.ASMode)
             {
                 case EASMode.Remote:
-                case EASMode.RemoteWithSidePlayWithDownload:
 #if UNITY_WEBGL
                     yAssetFlow = new YAParametersWebGLMode
                     {

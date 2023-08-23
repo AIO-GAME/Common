@@ -13,9 +13,6 @@ namespace AIO.UEngine
     {
         public bool QueryStreamingAssets(string packageName, string fileName)
         {
-#if UNITY_EDITOR
-            Console.WriteLine("-> QueryStreamingAssets: " + string.Concat(packageName, '/', fileName));
-#endif
 #if UNITY_WEBGL
             var path = Path.Combine(Application.persistentDataPath, "BuildinFiles", packageName, fileName);
 #else
@@ -23,7 +20,7 @@ namespace AIO.UEngine
 #endif
 
 #if UNITY_EDITOR
-            Debug.LogFormat("{0} -> {1}", nameof(QueryStreamingAssets), path);
+            if (AssetSystem.Parameter.OutputLog) Debug.LogFormat("{0} -> {1}", nameof(QueryStreamingAssets), path);
 #endif
             return File.Exists(path);
         }
@@ -42,7 +39,7 @@ namespace AIO.UEngine
         public DeliveryFileInfo GetDeliveryFileInfo(string packageName, string fileName)
         {
 #if UNITY_EDITOR
-            Console.WriteLine("-> GetDeliveryFileInfo: " + string.Concat(packageName, '/', fileName));
+            if (AssetSystem.Parameter.OutputLog) Debug.LogFormat("-> GetDeliveryFileInfo: " + string.Concat(packageName, '/', fileName));
 #endif
 
             return new DeliveryFileInfo

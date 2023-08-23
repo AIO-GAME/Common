@@ -17,6 +17,53 @@ public partial class AHelper
     public partial class IO
     {
         /// <summary>
+        /// 获取最新的文件夹
+        /// </summary>
+        /// <param name="directoryInfos">文件夹列表</param>
+        /// <returns><see cref="System.IO.DirectoryInfo"/>文件夹信息</returns>
+        public static DirectoryInfo GetLastWriteTimeUtc(ICollection<DirectoryInfo> directoryInfos)
+        {
+            DirectoryInfo last = null;
+            foreach (var directoryInfo in directoryInfos)
+            {
+                if (last is null)
+                {
+                    last = directoryInfo;
+                    continue;
+                }
+
+                if (last.LastWriteTimeUtc < directoryInfo.LastWriteTimeUtc)
+                    last = directoryInfo;
+            }
+
+            return last;
+        }
+
+        /// <summary>
+        /// 获取最新的文件
+        /// </summary>
+        /// <param name="directoryInfos">文件夹列表</param>
+        /// <returns><see cref="System.IO.FileInfo"/>文件夹信息</returns>
+        public static FileInfo GetLastWriteTimeUtc(ICollection<FileInfo> directoryInfos)
+        {
+            FileInfo last = null;
+            foreach (var directoryInfo in directoryInfos)
+            {
+                if (last is null)
+                {
+                    last = directoryInfo;
+                    continue;
+                }
+
+                if (last.LastWriteTimeUtc < directoryInfo.LastWriteTimeUtc)
+                    last = directoryInfo;
+            }
+
+            return last;
+        }
+
+
+        /// <summary>
         /// 在给定的文件夹路径列表中查找指定文件名的文件，并返回第一个存在的文件完整路径。
         /// </summary>
         /// <param name="fileName">要查找的文件名。</param>
@@ -426,7 +473,7 @@ public partial class AHelper
         /// <summary>
         /// 获取最后写入时间
         /// </summary>
-        public static DateTime GetLastWriteTimeUtc(string Path)
+        public static DateTime GetFileLastWriteTimeUtc(string Path)
         {
             return !ExistsFile(Path) ? DateTime.MinValue : File.GetLastWriteTimeUtc(Path);
         }
@@ -434,7 +481,7 @@ public partial class AHelper
         /// <summary>
         /// 获取创建文件时间
         /// </summary>
-        public static DateTime GetCreationTimeUtc(string Path)
+        public static DateTime GetFileCreationTimeUtc(string Path)
         {
             return !ExistsFile(Path) ? DateTime.MinValue : File.GetCreationTimeUtc(Path);
         }
@@ -442,7 +489,7 @@ public partial class AHelper
         /// <summary>
         /// 获取文件属性
         /// </summary>
-        public static FileAttributes GetAttributes(string Path)
+        public static FileAttributes GetFileAttributes(string Path)
         {
             return !ExistsFile(Path) ? 0 : File.GetAttributes(Path);
         }

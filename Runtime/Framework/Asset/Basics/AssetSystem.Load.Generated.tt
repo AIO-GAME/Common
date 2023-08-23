@@ -17,6 +17,7 @@
         ("UnityEngine.Texture2D", "Texture2D"),
         ("UnityEngine.Font", "Font"),
         ("UnityEngine.Mesh", "Mesh"),
+        ("UnityEngine.GameObject", "GameObject"),
     };
 #>
 
