@@ -437,5 +437,47 @@ namespace AIO
 
        #endregion
 
+        #region GameObject
+
+        /// <summary>
+        /// 同步加载 <see cref="UnityEngine.GameObject"/>
+        /// </summary>
+        /// <param name="location">资源的定位地址</param>
+        public static UnityEngine.GameObject LoadGameObject(string location)
+        {
+            return Proxy.LoadAssetSync<UnityEngine.GameObject>(Parameter.LoadPathToLower ? location.ToLower() : location);
+        }
+
+        /// <summary>
+        /// 异步回调加载 <see cref="UnityEngine.GameObject"/>
+        /// </summary>
+        /// <param name="location">资源的定位地址</param>
+        /// <param name="cb">回调</param>
+        public static async void LoadGameObject(string location, Action<UnityEngine.GameObject> cb)
+        {
+            cb.Invoke(await Proxy.LoadAssetTask<UnityEngine.GameObject>(Parameter.LoadPathToLower ? location.ToLower() : location));
+        }
+
+        /// <summary>
+        /// 异步加载 <see cref="UnityEngine.GameObject"/>
+        /// </summary>
+        /// <param name="location">资源的定位地址</param>
+        public static Task<UnityEngine.GameObject> LoadGameObjectTask(string location)
+        {
+            return Proxy.LoadAssetTask<UnityEngine.GameObject>(Parameter.LoadPathToLower ? location.ToLower() : location);
+        }
+
+        /// <summary>
+        /// 异步回调加载 <see cref="UnityEngine.GameObject"/>
+        /// </summary>
+        /// <param name="location">资源的定位地址</param>
+        /// <param name="cb">回调</param>
+        public static IEnumerator LoadGameObjectCO(string location, Action<UnityEngine.GameObject> cb)
+        {
+            return Proxy.LoadAssetCO(Parameter.LoadPathToLower ? location.ToLower() : location, cb);
+        }
+
+       #endregion
+
     }
 }

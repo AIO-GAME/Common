@@ -91,8 +91,7 @@ namespace AIO.UEngine
                 foreach (var name in ManifestOperations.Keys)
                 {
                     var asset = Packages[name];
-                    if (AssetSystem.Parameter.ASMode == EASMode.RemoteWithSidePlayWithDownload) continue;
-
+                    if (asset.Config.IsSidePlayWithDownload) continue;
                     var version = asset.Config.Version;
                     var operation = asset.CreateResourceDownloader(downloadingMaxNumber, failedTryAgain, timeout);
                     if (operation.TotalDownloadCount <= 0)

@@ -3,21 +3,22 @@
 |*|Date:     |*| -> 2023-06-03
 |*|==========|*/
 
+#if SUPPORT_YOOASSET
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using AIO.UEngine;
 using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 using YooAsset;
 
-namespace AIO.UEditor.YooAsset
+namespace AIO.UEditor
 {
-    /// <summary>
-    /// Unity 编辑器工具类
-    /// </summary>
-    public static class YooAssetsTools
+    public partial class MenuItem_YooAssets
+
     {
         [MenuItem("YooAsset/Create Config")]
         public static void CreateConfig()
@@ -33,13 +34,13 @@ namespace AIO.UEditor.YooAsset
             if (Directory.Exists(BundlesConfigDir)) Directory.Delete(BundlesConfigDir, true);
             Directory.CreateDirectory(BundlesConfigDir);
 
-            var TabelDic = new Dictionary<BuildTarget, Hashtable>();
-            TabelDic.Add(BuildTarget.Android, new Hashtable());
-            TabelDic.Add(BuildTarget.WebGL, new Hashtable());
-            TabelDic.Add(BuildTarget.iOS, new Hashtable());
-            TabelDic.Add(BuildTarget.StandaloneWindows, new Hashtable());
-            TabelDic.Add(BuildTarget.StandaloneWindows64, new Hashtable());
-            TabelDic.Add(BuildTarget.StandaloneOSX, new Hashtable());
+            var TabelDic = new Dictionary<BuildTarget, Dictionary<string, AssetsPackageConfig>>();
+            TabelDic.Add(BuildTarget.Android, new Dictionary<string, AssetsPackageConfig>());
+            TabelDic.Add(BuildTarget.WebGL, new Dictionary<string, AssetsPackageConfig>());
+            TabelDic.Add(BuildTarget.iOS, new Dictionary<string, AssetsPackageConfig>());
+            TabelDic.Add(BuildTarget.StandaloneWindows, new Dictionary<string, AssetsPackageConfig>());
+            TabelDic.Add(BuildTarget.StandaloneWindows64, new Dictionary<string, AssetsPackageConfig>());
+            TabelDic.Add(BuildTarget.StandaloneOSX, new Dictionary<string, AssetsPackageConfig>());
 
             var BundlesInfo = new DirectoryInfo(BundlesDir);
             var versions = new List<DirectoryInfo>();
@@ -71,9 +72,25 @@ namespace AIO.UEditor.YooAsset
                     }
 
                     if (versions.Count <= 0) continue;
-                    var last = GetLastWriteTimeUtc(versions);
+                    var last = AHelper.IO.GetLastWriteTimeUtc(versions);
                     if (Enum.TryParse<BuildTarget>(PlatformInfo.Name, out var enums))
-                        TabelDic[enums].Set(PackageInfo.Name, last.Name);
+                    {
+                        if (TabelDic[enums].ContainsKey(PackageInfo.Name))
+                        {
+                            TabelDic[enums][PackageInfo.Name].Version = last.Name;
+                            TabelDic[enums][PackageInfo.Name].Name = PackageInfo.Name;
+                        }
+                        else
+                        {
+                            TabelDic[enums].Add(PackageInfo.Name, new AssetsPackageConfig
+                            {
+                                Version = last.Name,
+                                Name = PackageInfo.Name,
+                                IsDefault = false,
+                                IsSidePlayWithDownload = false,
+                            });
+                        }
+                    }
                     else Debug.LogWarningFormat("未知平台 : {0}", PackageInfo.Name);
                 }
             }
@@ -84,33 +101,8 @@ namespace AIO.UEditor.YooAsset
                 if (hashtable.Value.Count <= 0) continue;
                 var filename = hashtable.Key.ToString();
                 var filePath = Path.Combine(BundlesConfigInfo.FullName, string.Concat(filename, ".json"));
-                File.WriteAllText(filePath, JsonConvert.SerializeObject(hashtable.Value));
+                File.WriteAllText(filePath, JsonConvert.SerializeObject(hashtable.Value.Values.ToArray()));
             }
-        }
-
-        /// <summary>
-        /// 获取最新的文件夹
-        /// </summary>
-        /// <param name="directoryInfos">文件夹列表</param>
-        /// <returns><see cref="System.IO.DirectoryInfo"/>文件夹信息</returns>
-        private static DirectoryInfo GetLastWriteTimeUtc(ICollection<DirectoryInfo> directoryInfos)
-        {
-            DirectoryInfo last = null;
-            foreach (var directoryInfo in directoryInfos)
-            {
-                if (last is null)
-                {
-                    last = directoryInfo;
-                    continue;
-                }
-
-                if (last.LastWriteTimeUtc < directoryInfo.LastWriteTimeUtc)
-                {
-                    last = directoryInfo;
-                }
-            }
-
-            return last;
         }
 
         [MenuItem("YooAsset/Open/Bundles")]
@@ -146,3 +138,4 @@ namespace AIO.UEditor.YooAsset
         }
     }
 }
+#endif

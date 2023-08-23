@@ -20,9 +20,14 @@
         /// </summary>
         public bool IsDefault;
 
+        /// <summary>
+        /// 边玩变下
+        /// </summary>
+        public bool IsSidePlayWithDownload = false;
+
         public override string ToString()
         {
-            return string.Format("Name : {0} , Version : {1} , IsDefault : {2}", Name, Version, IsDefault);
+            return string.Format("Name : {0} , Version : {1} , IsDefault : {2} , IsSidePlayWithDownload : {3}", Name, Version, IsDefault, IsSidePlayWithDownload);
         }
     }
 }
