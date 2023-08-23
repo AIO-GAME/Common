@@ -23,7 +23,7 @@ namespace AIO.UEngine
         /// <typeparam name="TObject">资源类型</typeparam>
         /// <param name="location">资源的定位地址</param>
         /// <param name="cb">回调</param>
-        public override IEnumerator LoadSubAssetsCO<TObject>(string location, Action<TObject[]> cb) 
+        public override IEnumerator LoadSubAssetsCO<TObject>(string location, Action<TObject[]> cb)
         {
             return YAssetSystem.LoadSubAssetsCO(location, cb);
         }
@@ -44,7 +44,7 @@ namespace AIO.UEngine
         /// </summary>
         /// <typeparam name="TObject">资源类型</typeparam>
         /// <param name="location">资源的定位地址</param>
-        public override TObject[] LoadSubAssetsSync<TObject>(string location) 
+        public override TObject[] LoadSubAssetsSync<TObject>(string location)
         {
             return YAssetSystem.LoadSubAssets<TObject>(location);
         }
@@ -65,7 +65,7 @@ namespace AIO.UEngine
         /// </summary>
         /// <typeparam name="TObject">资源类型</typeparam>
         /// <param name="location">资源的定位地址</param>
-        public override Task<TObject[]> LoadSubAssetsTask<TObject>(string location) 
+        public override Task<TObject[]> LoadSubAssetsTask<TObject>(string location)
         {
             return YAssetSystem.LoadSubAssetsTask<TObject>(location);
         }
@@ -131,7 +131,7 @@ namespace AIO.UEngine
         /// </summary>
         /// <typeparam name="TObject">资源类型</typeparam>
         /// <param name="location">资源的定位地址</param>
-        public override Task<TObject> LoadAssetTask<TObject>(string location) 
+        public override Task<TObject> LoadAssetTask<TObject>(string location)
         {
             return YAssetSystem.LoadAssetTask<TObject>(location);
         }
@@ -241,17 +241,17 @@ namespace AIO.UEngine
 
         public override void PreLoadSubAssets<TObject>(string location)
         {
-    
+            YAssetSystem.PreLoadSubAssets<TObject>(location);
         }
 
         public override void PreLoadAsset<TObject>(string location)
         {
-         
+            YAssetSystem.PreLoadAsset<TObject>(location);
         }
 
         public override void PreLoadRaw(string location)
         {
-         
+            YAssetSystem.PreLoadRaw(location);
         }
 
         #endregion
