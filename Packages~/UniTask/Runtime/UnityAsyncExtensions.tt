@@ -14,7 +14,7 @@
         ("UnityWebRequestAsyncOperation", "UnityWebRequest", "webRequest") // -> #if ENABLE_UNITYWEBREQUEST && (!UNITY_2019_1_OR_NEWER || UNITASK_WEBREQUEST_SUPPORT)
     };
 
-    Func<string, string> ToAudioClip = x => (x == "void") ? "UniTask" : $"UniTask<{x}>";
+    Func<string, string> ToUniTaskReturnType = x => (x == "void") ? "UniTask" : $"UniTask<{x}>";
     Func<string, string> ToIUniTaskSourceReturnType = x => (x == "void") ? "IUniTaskSource" : $"IUniTaskSource<{x}>";
     Func<(string typeName, string returnType, string returnField), bool> IsUnityWebRequest = x => x.returnType == "UnityWebRequest";
     Func<(string typeName, string returnType, string returnField), bool> IsAssetBundleModule = x => x.typeName == "AssetBundleRequest" || x.typeName == "AssetBundleCreateRequest";
