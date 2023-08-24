@@ -7,10 +7,10 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using YooAsset;
 using Object = UnityEngine.Object;
 
 #if SUPPORT_YOOASSET
+using YooAsset;
 namespace AIO.UEngine
 {
     internal partial class YAssetSystem
