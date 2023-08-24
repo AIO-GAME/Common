@@ -4,6 +4,7 @@
 |||✩ Document: ||| -> 
 |||✩ - - - - - |*/
 
+#if SUPPORT_YOOASSET
 using System.Collections.Generic;
 
 namespace AIO.UEngine
@@ -97,3 +98,4 @@ namespace AIO.UEngine
         #endregion
     }
 }
+#endif

@@ -4,6 +4,7 @@
 |||✩ Document: ||| -> 
 |||✩ - - - - - |*/
 
+#if SUPPORT_YOOASSET
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -257,3 +258,4 @@ namespace AIO.UEngine
         }
     }
 }
+#endif

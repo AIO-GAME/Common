@@ -4,6 +4,7 @@
 |||✩ Document: ||| -> 
 |||✩ - - - - - |*/
 
+#if SUPPORT_YOOASSET
 using System;
 using System.Collections;
 using System.Threading.Tasks;
@@ -257,3 +258,4 @@ namespace AIO.UEngine
         #endregion
     }
 }
+#endif
