@@ -63,6 +63,8 @@ namespace AIO
 
         #region Async
 
+#if SUPPORT_UNITASK
+
         /// <summary>
         /// 网上加载图片
         /// </summary>
@@ -168,6 +170,8 @@ namespace AIO
             }
         }
 
+#endif
+
         #endregion
 
         #region CO
@@ -265,11 +269,9 @@ namespace AIO
 
         #endregion
 
-#if SUPPORT_UNITASK
-
-
         #region UniTask
 
+#if SUPPORT_UNITASK
         /// <summary>
         /// 网上加载图片
         /// </summary>
@@ -360,8 +362,8 @@ namespace AIO
             }
         }
 
-        #endregion
-
 #endif
+
+        #endregion
     }
 }
