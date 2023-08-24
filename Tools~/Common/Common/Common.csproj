@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Script\Algorithms\LruCache.cs" />
     <Compile Include="Script\Basics\HashAlgorithm\MD4.cs" />
     <Compile Include="Script\Extension\Class\Action\Action.Extend.cs" />
     <Compile Include="Script\Extension\Class\AppDomain\AppDomainExtension.cs" />
