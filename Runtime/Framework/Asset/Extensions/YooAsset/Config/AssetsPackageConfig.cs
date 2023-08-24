@@ -21,7 +21,7 @@
         public bool IsDefault;
 
         /// <summary>
-        /// 边玩变下
+        /// 资源包动态下载加载
         /// </summary>
         public bool IsSidePlayWithDownload = false;
 
