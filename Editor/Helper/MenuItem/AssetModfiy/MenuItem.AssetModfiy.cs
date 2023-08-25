@@ -237,7 +237,6 @@ namespace AIO.UEditor
             var objectsWithDeadLinks = new List<Object>();
             foreach (var g in rootObjects)
             {
-                var root = "root";
                 var trans = g.Value.GetComponentsInChildren<Transform>();
                 foreach (var tran in trans)
                 {

@@ -122,8 +122,7 @@ namespace AIO.UEditor
         private string _dll_guid;
         private long _dll_fid;
         private Object[] _dllAssets;
-        private float _scrollValueX = 0;
-        private float _scrollValueY = 0;
+
         private Vector2 _scroll;
 
         void GetDllScriptId()

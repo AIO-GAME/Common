@@ -197,7 +197,7 @@ namespace AIO.UEditor
             EditorGUILayout.EndVertical();
         }
 
-        protected void OnDisable()
+        protected override void OnDisable()
         {
             var FilePath = Path.Combine(PackagesPath, PACKAGE_CLONE_FILE);
             File.WriteAllText(FilePath, JsonConvert.SerializeObject(Package), Encoding.UTF8);
