@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> SAM
+|||✩ Author:   ||| -> XINAN
 |||✩ Date:     ||| -> 2023-06-27
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
@@ -15,7 +15,7 @@ namespace AIO
     /// </summary>
     public static class AssemblyExtension
     {
-       
+
 
         /// <summary>
         /// 程序集目录的完整路径，没有最后的斜杠 |

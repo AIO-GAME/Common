@@ -1,5 +1,5 @@
 ﻿/*|==========|*|
-|*|Author:   |*| -> SAM
+|*|Author:   |*| -> XINAN
 |*|Date:     |*| -> 2023-06-12
 |*|==========|*/
 
@@ -115,7 +115,7 @@ public static partial class DllAutomation
     }
 
     /// <summary>
-    /// 运行  
+    /// 运行
     /// </summary>
     public static void Run()
     {

@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> SAM
+|||✩ Author:   ||| -> XINAN
 |||✩ Date:     ||| -> 2023-08-21
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 #if SUPPORT_YOOASSET
@@ -15,7 +15,7 @@ namespace AIO.UEngine
 {
     internal partial class YAssetSystem
     {
-   
+
         public static async void InstGameObject(string location, Transform parent, Action<GameObject> cb)
         {
             var operation = GetHandle<AssetOperationHandle>(location);

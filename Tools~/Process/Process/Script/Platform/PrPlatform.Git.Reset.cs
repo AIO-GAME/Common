@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> SAM
+|||✩ Author:   ||| -> XINAN
 |||✩ Date:     ||| -> 2023-07-26
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
@@ -106,7 +106,7 @@ namespace AIO
                     default: throw new NotImplementedException();
                 }
             }
-            
+
             /// <summary>
             /// <see cref="PrPlatform"/> Git Reset Soft
             /// </summary>
@@ -152,7 +152,7 @@ namespace AIO
                     default: throw new NotImplementedException();
                 }
             }
-            
+
             /// <summary>
             /// <see cref="PrPlatform"/> Git Reset Keep
             /// </summary>
@@ -198,7 +198,7 @@ namespace AIO
                     default: throw new NotImplementedException();
                 }
             }
-            
+
             /// <summary>
             /// <see cref="PrPlatform"/> Git Reset Merge
             /// </summary>
@@ -244,7 +244,7 @@ namespace AIO
                     default: throw new NotImplementedException();
                 }
             }
-            
+
             /// <summary>
             /// <see cref="PrPlatform"/> Git Reset Mixed
             /// </summary>

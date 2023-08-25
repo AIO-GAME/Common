@@ -1,5 +1,5 @@
 ﻿/*|==========|*|
-|*|Author:   |*| -> SAM
+|*|Author:   |*| -> XINAN
 |*|Date:     |*| -> 2023-06-06
 |*|==========|*/
 
@@ -18,7 +18,7 @@ namespace AIO
         private uint _currentCrc;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CRC32Algorithm"/> class. 
+        /// Initializes a new instance of the <see cref="CRC32Algorithm"/> class.
         /// </summary>
         public CRC32Algorithm()
         {

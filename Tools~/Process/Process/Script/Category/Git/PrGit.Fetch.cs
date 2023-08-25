@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> SAM
+|||✩ Author:   ||| -> XINAN
 |||✩ Date:     ||| -> 2023-07-31
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
@@ -42,8 +42,8 @@ namespace AIO
                 if (!Directory.Exists(work)) throw new DirectoryNotFoundException(work);
                 return Create(work, "fetch origin");
             }
-            
-            
+
+
             /// <summary>
             /// 同步远程库的数据到本地
             /// </summary>

@@ -1,5 +1,5 @@
 ﻿<#@ template debug="false" hostspecific="true" language="C#" linePragmas="true" visibility="public" #>
-<#@ output extension=".cs" encoding="utf-8" #> 
+<#@ output extension=".cs" encoding="utf-8" #>
 <#@ import namespace="System"#>
 <#@ import namespace="System.Collections"#>
 <#@ import namespace="System.Collections.Generic" #>
@@ -22,9 +22,9 @@
 #>
 
 /*|✩ - - - - - |||
-|||✩ Author:   ||| -> SAM
+|||✩ Author:   ||| -> XINAN
 |||✩ Date:     ||| -> Automatic Generate
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;

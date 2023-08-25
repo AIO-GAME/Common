@@ -1,5 +1,5 @@
 ﻿/*|==========|*|
-|*|Author:   |*| -> SAM
+|*|Author:   |*| -> XINAN
 |*|Date:     |*| -> 2023-06-12
 |*|==========|*/
 #if NO_UNITY
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 public partial class SystemAutomation
 {
     /// <summary>
-    /// 安装 
+    /// 安装
     /// </summary>
     /// <param name="hasTimer">输出时间</param>
     public static Task LoadAsync(bool hasTimer = false)
@@ -21,7 +21,7 @@ public partial class SystemAutomation
     }
 
     /// <summary>
-    /// 卸载 
+    /// 卸载
     /// </summary>
     /// <param name="hasTimer">输出时间</param>
     public static Task UnLoadAsync(bool hasTimer = false)

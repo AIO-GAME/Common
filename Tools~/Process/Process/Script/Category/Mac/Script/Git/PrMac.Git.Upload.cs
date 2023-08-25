@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> SAM
+|||✩ Author:   ||| -> XINAN
 |||✩ Date:     ||| -> 2023-07-26
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
@@ -16,7 +16,7 @@ namespace AIO
         public partial class Git
         {
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="target"></param>
             /// <param name="inputCommit"></param>
