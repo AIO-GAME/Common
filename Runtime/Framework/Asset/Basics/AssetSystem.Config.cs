@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> SAM
+|||✩ Author:   ||| -> XINAN
 |||✩ Date:     ||| -> 2023-08-22
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 namespace AIO.UEngine
@@ -50,7 +50,7 @@ namespace AIO.UEngine
         /// 加载路径转小写
         /// </summary>
         public bool LoadPathToLower = true;
-        
+
         /// <summary>
         /// 输出日志
         /// </summary>

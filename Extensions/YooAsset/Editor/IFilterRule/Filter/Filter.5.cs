@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> SAM
+|||✩ Author:   ||| -> XINAN
 |||✩ Date:     ||| -> 2023-08-18
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System.IO;

@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> SAM
+|||✩ Author:   ||| -> XINAN
 |||✩ Date:     ||| -> 2023-07-10
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;

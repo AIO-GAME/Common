@@ -1,10 +1,10 @@
-﻿ 
+﻿
 
 
 /*|✩ - - - - - |||
-|||✩ Author:   ||| -> SAM
+|||✩ Author:   ||| -> XINAN
 |||✩ Date:     ||| -> Automatic Generate
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;

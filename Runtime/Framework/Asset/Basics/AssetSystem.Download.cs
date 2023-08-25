@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> SAM
+|||✩ Author:   ||| -> XINAN
 |||✩ Date:     ||| -> 2023-08-22
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
@@ -110,7 +110,7 @@ namespace AIO
         Task<bool> UpdatePackageVersionTask(int timeout = 60);
 
         /// <summary>
-        /// 向网络端请求并更新补丁清单 
+        /// 向网络端请求并更新补丁清单
         /// </summary>
         /// <returns>Ture:有新版本 False:无需更新</returns>
         Task<bool> UpdatePackageManifestTask(int timeout = 60);

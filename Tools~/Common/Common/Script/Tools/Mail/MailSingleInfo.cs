@@ -1,5 +1,5 @@
 ﻿/*|==========|*|
-|*|Author:   |*| -> SAM
+|*|Author:   |*| -> XINAN
 |*|Date:     |*| -> 2023-05-19
 |*|==========|*/
 
@@ -74,7 +74,7 @@ namespace AIO
         public bool ClientUseDefaultCredentials;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="form"></param>
         /// <param name="to"></param>

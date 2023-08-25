@@ -1,5 +1,5 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> SAM
+|||✩ Author:   ||| -> XINAN
 |||✩ Date:     ||| -> 2023-06-26
 |||✩ Document: ||| ->
 |||✩ - - - - - |*/
@@ -44,12 +44,12 @@ namespace AIO.UEditor
         ///
         /// </summary>
         public static UGUIStyle StatusBarIcon => Get(nameof(StatusBarIcon));
-        
+
         /// <summary>
         ///
         /// </summary>
         public static UGUIStyle RLFooter => Get("RL Footer");
-    
+
         /// <summary>
         ///
         /// </summary>
@@ -129,12 +129,12 @@ namespace AIO.UEditor
         ///
         /// </summary>
         public static UGUIStyle ContentToolbar => Get("ContentToolbar");
-        
+
         /// <summary>
         ///
         /// </summary>
         public static UGUIStyle HelpBox => Get("HelpBox");
-        
+
         /// <summary>
         ///
         /// </summary>

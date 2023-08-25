@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> SAM
+|||✩ Author:   ||| -> XINAN
 |||✩ Date:     ||| -> 2023-07-26
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
@@ -81,7 +81,7 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="target"></param>
             /// <param name="quit"></param>
@@ -92,7 +92,7 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="target"></param>
             /// <param name="quit"></param>

@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> SAM
+|||✩ Author:   ||| -> XINAN
 |||✩ Date:     ||| -> 2023-07-28
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
@@ -34,7 +34,7 @@ namespace AIO
             UnitIndex = unitIndex;
             DisplayConverters = suffixes;
         }
-        
+
 #if UNITY_EDITOR
 
         /// <summary>[Editor-Only]

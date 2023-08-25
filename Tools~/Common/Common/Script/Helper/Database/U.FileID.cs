@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> SAM
+|||✩ Author:   ||| -> XINAN
 |||✩ Date:     ||| -> 2023-08-03
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
@@ -23,7 +23,7 @@ public partial class AHelper
         /// </summary>
         /// <param name="v">类型</param>
         /// <returns>fileid</returns>
-        public static int Compute<T>(T v) 
+        public static int Compute<T>(T v)
         {
             var type = v.GetType();
             var toBeHashed = string.Concat("s\0\0\0", type.Namespace, type.Name);

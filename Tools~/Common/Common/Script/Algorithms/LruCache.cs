@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> SAM
+|||✩ Author:   ||| -> XINAN
 |||✩ Date:     ||| -> 2023-08-24
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 namespace AIO
@@ -118,7 +118,7 @@ namespace AIO
                 node.Next.Prev = node.Prev;
             }
         }
-        
+
         private NodeInfo RemoveLast()
         {
             var temp = allNodes[tail.id];

@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> SAM
+|||✩ Author:   ||| -> XINAN
 |||✩ Date:     ||| -> 2023-07-24
-|||✩ Document: ||| -> 
+|||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
 using System;
@@ -65,7 +65,7 @@ namespace AIO
 
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="work">文件夹</param>
             /// <returns><see cref="IExecutor"/> – 执行器</returns>
@@ -77,7 +77,7 @@ namespace AIO
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="work">文件夹</param>
             /// <returns><see cref="IExecutor"/> – 执行器</returns>
