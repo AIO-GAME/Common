@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using UnityEditor;
+using UnityEditor.Build;
 using UnityEngine;
 
 namespace AIO.UEditor
@@ -38,7 +39,12 @@ namespace AIO.UEditor
 
         private static void SetIcons(string iconPrefixName, BuildTargetGroup targetGroup)
         {
+#if UNITY_2023_1_OR_NEWER
+            var nametarget = NamedBuildTarget.FromBuildTargetGroup(targetGroup);
+            var iconSizes = PlayerSettings.GetIconSizes(nametarget, IconKind.Any);
+#else
             var iconSizes = PlayerSettings.GetIconSizesForTargetGroup(targetGroup);
+#endif
             var texArray = new Texture2D[iconSizes.Length];
             for (var i = 0; i < iconSizes.Length; ++i)
             {
@@ -61,6 +67,5 @@ namespace AIO.UEditor
             AssetDatabase.SaveAssets();
             Debug.LogFormat("Set {0} Icon Complete", iconPrefixName);
         }
-
     }
 }

@@ -4,7 +4,7 @@
 |||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
-using System.IO;
+#if SUPPORT_YOOASSET
 using YooAsset.Editor;
 
 namespace AIO.UEditor.YooAsset
@@ -31,3 +31,4 @@ namespace AIO.UEditor.YooAsset
         }
     }
 }
+#endif

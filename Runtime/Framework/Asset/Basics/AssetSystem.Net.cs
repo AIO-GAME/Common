@@ -18,6 +18,7 @@ namespace AIO
     {
         private static bool LoadCheckNet(UnityWebRequest operation)
         {
+#if UNITY_2020_1_OR_NEWER
             switch (operation.result)
             {
                 case UnityWebRequest.Result.InProgress:
@@ -38,7 +39,6 @@ namespace AIO
                 case UnityWebRequest.Result.Success:
                     break;
             }
-#if UNITY_2020_3_OR_NEWER
             if (operation.result != UnityWebRequest.Result.Success)
             {
                 Debug.LogError(operation.error);

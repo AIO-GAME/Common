@@ -50,13 +50,10 @@ namespace AIO.UEditor
             if (SymbolsList.Count == 0)
             {
                 var buildTargetGroup = EditorUserBuildSettings.selectedBuildTargetGroup;
-                var str = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup).Split(';');
+                var str = EHelper.Symbols.GetScriptingDefine(buildTargetGroup);
                 foreach (var item in str)
                 {
-                    if (!SymbolsList.Contains(item))
-                    {
-                        SymbolsList.Add(item);
-                    }
+                    if (!SymbolsList.Contains(item)) SymbolsList.Add(item);
                 }
             }
         }
@@ -75,16 +72,7 @@ namespace AIO.UEditor
         /// </summary>
         public static void DelScriptingDefineSymbols(string value)
         {
-            if (string.IsNullOrEmpty(value) || value.Length == 0) return;
-            //获取当前是哪个平台
-            var buildTargetGroup = EditorUserBuildSettings.selectedBuildTargetGroup;
-            //获得当前平台已有的的宏定义
-            var str = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
-            if (!string.IsNullOrEmpty(str) && str.Length != 0 && str.Contains(value))
-            {
-                str = str.Replace(value, "");
-                PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, str);
-            }
+            EHelper.Symbols.DelScriptingDefine(value);
         }
 
         /// <summary>
@@ -92,16 +80,7 @@ namespace AIO.UEditor
         /// </summary>
         public static void AddScriptingDefineSymbols(string value)
         {
-            //获取当前是哪个平台
-            var buildTargetGroup = EditorUserBuildSettings.selectedBuildTargetGroup;
-            //获得当前平台已有的的宏定义
-            var str = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
-            if (!str.Contains(value))
-            {
-                //添加宏定义
-                str += ";" + value;
-                PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, str);
-            }
+            EHelper.Symbols.AddScriptingDefine(value);
         }
 
         protected override void OnGUI()
