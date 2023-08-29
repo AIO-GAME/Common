@@ -6,4 +6,5 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("dc29565f-e2e3-42af-b245-e38eb60914e3")]
 
-[assembly: InternalsVisibleTo("AIO.General.Unity.Editor")]
+[assembly: InternalsVisibleTo("AIO.Unity.Editor")]
+[assembly: InternalsVisibleTo("AIO.Core.Editor")]

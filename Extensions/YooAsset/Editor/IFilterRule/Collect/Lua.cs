@@ -1,6 +1,7 @@
-﻿using System.IO;
-using UnityEngine;
+﻿#if SUPPORT_YOOASSET
+using System.IO;
 using YooAsset.Editor;
+using UnityEngine;
 
 namespace AIO.UEditor.YooAsset
 {
@@ -15,3 +16,4 @@ namespace AIO.UEditor.YooAsset
         }
     }
 }
+#endif

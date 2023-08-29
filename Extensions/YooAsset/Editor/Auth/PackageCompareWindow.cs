@@ -1,8 +1,8 @@
-﻿using System.IO;
+﻿#if SUPPORT_YOOASSET
+
 using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 namespace YooAsset.Editor
 {
@@ -15,7 +15,7 @@ namespace YooAsset.Editor
 		{
 			if (_thisInstance == null)
 			{
-				_thisInstance = EditorWindow.GetWindow(typeof(PackageCompareWindow), false, "补丁包比对工具", true) as PackageCompareWindow;
+				_thisInstance = GetWindow(typeof(PackageCompareWindow), false, "补丁包比对工具", true) as PackageCompareWindow;
 				_thisInstance.minSize = new Vector2(800, 600);
 			}
 			_thisInstance.Show();
@@ -136,3 +136,5 @@ namespace YooAsset.Editor
 		}
 	}
 }
+
+#endif
