@@ -17,34 +17,22 @@ namespace AIO.UEditor
         /// <summary>
         /// 当前窗口宽度
         /// </summary>
-        public float CurrentWidth
-        {
-            get { return position.width; }
-        }
+        public float CurrentWidth => position.width;
 
         /// <summary>
         /// 当前窗口宽度一半
         /// </summary>
-        public float CurrentWidthHalf
-        {
-            get { return position.width / 2; }
-        }
+        public float CurrentWidthHalf => position.width / 2;
 
         /// <summary>
         /// 当前窗口高度
         /// </summary>
-        public float CurrentHeight
-        {
-            get { return position.height; }
-        }
+        public float CurrentHeight => position.height;
 
         /// <summary>
         /// 当前窗口高度一半
         /// </summary>
-        public float CurrentHeightHalf
-        {
-            get { return position.height / 2; }
-        }
+        public float CurrentHeightHalf => position.height / 2;
 
         /// <summary>
         /// 当前窗口中心点

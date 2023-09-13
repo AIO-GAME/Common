@@ -15,8 +15,8 @@ namespace AIO.UEditor
         /// </summary>
         public virtual bool IsShow
         {
-            get { return isShow; }
-            set { isShow = value; }
+            get => isShow;
+            set => isShow = value;
         }
 
         /// <summary>
@@ -24,8 +24,8 @@ namespace AIO.UEditor
         /// </summary>
         public virtual bool IsEvent
         {
-            get { return isEvent; }
-            set { isEvent = value; }
+            get => isEvent;
+            set => isEvent = value;
         }
 
         /// <summary>
@@ -33,8 +33,8 @@ namespace AIO.UEditor
         /// </summary>
         public virtual Rect RectData
         {
-            get { return Rect; }
-            set { Rect = value; }
+            get => Rect;
+            set => Rect = value;
         }
 
 
@@ -43,7 +43,7 @@ namespace AIO.UEditor
         /// </summary>
         public virtual Vector2 Position
         {
-            get { return Rect.position; }
+            get => Rect.position;
             set
             {
                 var rectData = Rect;
@@ -57,7 +57,7 @@ namespace AIO.UEditor
         /// </summary>
         public virtual float X
         {
-            get { return Rect.position.x; }
+            get => Rect.position.x;
             set
             {
                 var rectData = Rect;
@@ -71,7 +71,7 @@ namespace AIO.UEditor
         /// </summary>
         public virtual float Y
         {
-            get { return Rect.position.y; }
+            get => Rect.position.y;
             set
             {
                 var rectData = Rect;
@@ -85,7 +85,7 @@ namespace AIO.UEditor
         /// </summary>
         public virtual Vector2 Size
         {
-            get { return Rect.size; }
+            get => Rect.size;
             set
             {
                 var rectData = Rect;
@@ -99,7 +99,7 @@ namespace AIO.UEditor
         /// </summary>
         public virtual float Width
         {
-            get { return Rect.width; }
+            get => Rect.width;
             set
             {
                 var rectData = Rect;
@@ -113,7 +113,7 @@ namespace AIO.UEditor
         /// </summary>
         public virtual float Height
         {
-            get { return Rect.height; }
+            get => Rect.height;
             set
             {
                 var rectData = Rect;

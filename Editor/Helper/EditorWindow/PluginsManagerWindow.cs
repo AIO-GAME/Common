@@ -46,7 +46,7 @@ namespace AIO.UEditor
             IntsallIndexList = new List<string>();
         }
 
-        protected override void OnEnable()
+        protected override void OnActivation()
         {
             Root = Application.dataPath.Replace("Assets", "Packages");
             UpdateData();

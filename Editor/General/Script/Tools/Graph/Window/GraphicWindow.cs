@@ -7,9 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using AIO;
 using UnityEditor;
-using UnityEditor.Experimental.UIElements;
 using UnityEngine;
 
 namespace AIO.UEditor
@@ -50,50 +48,54 @@ namespace AIO.UEditor
         protected List<GraphicRect> GraphicItems { get; private set; }
 
         /// <inheritdoc />
-        public GraphicWindow()
+        protected GraphicWindow()
         {
             GraphicItems = Pool.List<GraphicRect>();
-            GroupList = new List<Type>();
+            GroupList = Pool.List<Type>();
             var attribute = GetType().GetCustomAttribute<GWindowAttribute>(false);
             if (attribute is null)
             {
                 Title = new GUIContent(GetType().Name.Prettify());
                 MinSize = minSize;
-                return;
+                MaxSize = maxSize;
             }
-
-            if (!string.IsNullOrEmpty(attribute.Group))
+            else
             {
-                Group = attribute.Group;
-                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                if (!string.IsNullOrEmpty(attribute.Group))
                 {
-                    foreach (var type in assembly.GetTypes())
+                    Group = attribute.Group;
+                    foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
                     {
-                        if (!type.IsSubclassOf(typeof(EditorWindow))) continue;
-                        var extraAttribute = type.GetCustomAttribute<GWindowAttribute>(false);
-                        if (extraAttribute is null) continue;
-                        if (string.IsNullOrEmpty(extraAttribute.Group)) continue;
-                        if (Group != extraAttribute.Group) continue;
-                        if (type == GetType()) continue;
-                        if (GroupList.Contains(type)) continue;
-                        GroupList.Add(type);
+                        foreach (var type in assembly.GetTypes())
+                        {
+                            if (!type.IsSubclassOf(typeof(EditorWindow))) continue;
+                            var extraAttribute = type.GetCustomAttribute<GWindowAttribute>(false);
+                            if (extraAttribute is null) continue;
+                            if (string.IsNullOrEmpty(extraAttribute.Group)) continue;
+                            if (Group != extraAttribute.Group) continue;
+                            if (type == GetType()) continue;
+                            if (GroupList.Contains(type)) continue;
+                            GroupList.Add(type);
+                        }
                     }
                 }
-            }
 
-            Title = attribute.Title;
-            if (attribute.MinSizeWidth == 0) attribute.MinSizeWidth = (uint)minSize.x;
-            if (attribute.MinSizeHeight == 0) attribute.MinSizeHeight = (uint)minSize.y;
-            
-            if (attribute.MaxSizeWidth == 0) attribute.MaxSizeWidth = (uint)minSize.x;
-            if (attribute.MaxSizeHeight == 0) attribute.MaxSizeHeight = (uint)minSize.y;
-            
-            minSize = MinSize = new Vector2(attribute.MinSizeWidth, attribute.MinSizeHeight);
-            maxSize = MaxSize = new Vector2(attribute.MaxSizeWidth, attribute.MaxSizeHeight);
+                Title = attribute.Title;
+                if (attribute.MinSizeWidth == 0) attribute.MinSizeWidth = (uint)minSize.x;
+                if (attribute.MinSizeHeight == 0) attribute.MinSizeHeight = (uint)minSize.y;
+
+                if (attribute.MaxSizeWidth == 0) attribute.MaxSizeWidth = (uint)minSize.x;
+                if (attribute.MaxSizeHeight == 0) attribute.MaxSizeHeight = (uint)minSize.y;
+
+                minSize = MinSize = new Vector2(attribute.MinSizeWidth, attribute.MinSizeHeight);
+                maxSize = MaxSize = new Vector2(attribute.MaxSizeWidth, attribute.MaxSizeHeight);
+            }
         }
 
+        #region sealed
+
         /// <inheritdoc />
-        protected override void OnEnable()
+        protected sealed override void OnEnable()
         {
 #if UNITY_2020_1_OR_NEWER
             if (!docked)
@@ -106,6 +108,7 @@ namespace AIO.UEditor
             }
 
             OnGUIStyle();
+            OnActivation();
         }
 
         /// <inheritdoc />
@@ -114,6 +117,47 @@ namespace AIO.UEditor
             titleContent = Title;
             minSize = MinSize;
             OnAwake();
+        }
+
+        /// <inheritdoc />
+        protected sealed override void Update()
+        {
+            base.Update();
+            OnUpdate();
+        }
+
+        /// <inheritdoc />
+        protected sealed override void OnDestroy()
+        {
+            GraphicItems.Free();
+            GraphicItems = null;
+            GroupList.Free();
+            GroupList = null;
+        }
+
+        /// <inheritdoc />
+#if UNITY_2019_1_OR_NEWER
+        public sealed override IEnumerable<Type> GetExtraPaneTypes()
+        {
+            return string.IsNullOrEmpty(Group) ? base.GetExtraPaneTypes() : GroupList;
+        }
+#else
+        public override IEnumerable<Type> GetExtraPaneTypes()
+        {
+            if (string.IsNullOrEmpty(Group)) return Array.Empty<Type>();
+            return GroupList;
+        }
+#endif
+
+        #endregion
+
+        #region virtual
+
+        /// <summary>
+        /// 激活
+        /// </summary>
+        protected virtual void OnActivation()
+        {
         }
 
         /// <summary>
@@ -130,34 +174,6 @@ namespace AIO.UEditor
         {
         }
 
-
-        /// <summary>
-        /// 获取与窗口关联的额外窗格。
-        /// </summary>
-#if UNITY_2019_1_OR_NEWER
-        public sealed override IEnumerable<Type> GetExtraPaneTypes()
-        {
-            if (string.IsNullOrEmpty(Group))
-                return base.GetExtraPaneTypes();
-            return GroupList;
-        }
-#else
-        public override IEnumerable<Type> GetExtraPaneTypes()
-        {
-            if (string.IsNullOrEmpty(Group)) return Array.Empty<Type>();
-            return GroupList;
-        }
-#endif
-
-        /// <summary>
-        /// 在所有可见窗口上每秒调用多次。
-        /// </summary>
-        protected sealed override void Update()
-        {
-            base.Update();
-            OnUpdate();
-        }
-
         /// <summary>
         /// 在所有可见窗口上每秒调用多次。
         /// </summary>
@@ -165,11 +181,14 @@ namespace AIO.UEditor
         {
         }
 
-        protected override void OnDestroy()
+        /// <summary>
+        /// 关闭时释放
+        /// </summary>
+        protected virtual void OnDispose()
         {
-            GroupList.Clear();
-            GroupList = null;
         }
+
+        #endregion
 
         #region Event
 
@@ -178,94 +197,92 @@ namespace AIO.UEditor
         /// </summary>
         public void OnOpenEvent()
         {
-            if (Event.current != null)
+            if (Event.current == null) return;
+            switch (Event.current.type)
             {
-                switch (Event.current.type)
-                {
-                    case EventType.ContextClick:
-                        EventContextClick(Event.current);
-                        break;
+                case EventType.ContextClick:
+                    EventContextClick(Event.current);
+                    break;
 
-                    case EventType.MouseUp:
-                        EventMouseUp(Event.current);
-                        break;
-                    case EventType.MouseDown:
-                        EventMouseDown(Event.current);
-                        break;
-                    case EventType.MouseDrag:
-                        EventMouseDrag(Event.current);
-                        break;
-                    case EventType.MouseMove:
-                        EventMouseMove(Event.current);
-                        break;
-                    case EventType.MouseEnterWindow:
-                        EventMouseEnterWindow(Event.current);
-                        break;
-                    case EventType.MouseLeaveWindow:
-                        EventMouseLeaveWindow(Event.current);
-                        break;
+                case EventType.MouseUp:
+                    EventMouseUp(Event.current);
+                    break;
+                case EventType.MouseDown:
+                    EventMouseDown(Event.current);
+                    break;
+                case EventType.MouseDrag:
+                    EventMouseDrag(Event.current);
+                    break;
+                case EventType.MouseMove:
+                    EventMouseMove(Event.current);
+                    break;
+                case EventType.MouseEnterWindow:
+                    EventMouseEnterWindow(Event.current);
+                    break;
+                case EventType.MouseLeaveWindow:
+                    EventMouseLeaveWindow(Event.current);
+                    break;
 
-                    case EventType.Used:
-                        EventUsed(Event.current);
-                        break;
-                    case EventType.Ignore:
-                        EventIgnore(Event.current);
-                        break;
-                    case EventType.Layout:
-                        EventLayout(Event.current);
-                        break;
-                    case EventType.Repaint:
-                        EventRepaint(Event.current);
-                        break;
+                case EventType.Used:
+                    EventUsed(Event.current);
+                    break;
+                case EventType.Ignore:
+                    EventIgnore(Event.current);
+                    break;
+                case EventType.Layout:
+                    EventLayout(Event.current);
+                    break;
+                case EventType.Repaint:
+                    EventRepaint(Event.current);
+                    break;
 
-                    case EventType.DragExited:
-                        EventDragExited(Event.current);
-                        break;
-                    case EventType.DragPerform:
-                        EventDragPerform(Event.current);
-                        break;
-                    case EventType.DragUpdated:
-                        EventDragUpdated(Event.current);
-                        break;
+                case EventType.DragExited:
+                    EventDragExited(Event.current);
+                    break;
+                case EventType.DragPerform:
+                    EventDragPerform(Event.current);
+                    break;
+                case EventType.DragUpdated:
+                    EventDragUpdated(Event.current);
+                    break;
 
-                    case EventType.KeyDown:
+                case EventType.KeyDown:
 
-                        EventKeyDown(Event.current, Event.current.keyCode);
-                        break;
-                    case EventType.KeyUp:
-                        EventKeyUp(Event.current, Event.current.keyCode);
-                        break;
-                    case EventType.ScrollWheel:
-                        EventScrollWheel(Event.current);
-                        break;
+                    EventKeyDown(Event.current, Event.current.keyCode);
+                    break;
+                case EventType.KeyUp:
+                    EventKeyUp(Event.current, Event.current.keyCode);
+                    break;
+                case EventType.ScrollWheel:
+                    EventScrollWheel(Event.current);
+                    break;
 
-                    case EventType.ExecuteCommand:
-                        EventExecuteCommand(Event.current);
-                        break;
-                    case EventType.ValidateCommand:
-                        EventValidateCommand(Event.current);
-                        break;
+                case EventType.ExecuteCommand:
+                    EventExecuteCommand(Event.current);
+                    break;
+                case EventType.ValidateCommand:
+                    EventValidateCommand(Event.current);
+                    break;
 #if UNITY_2020_1_OR_NEWER
-                    case EventType.TouchDown:
-                        EventTouchDown(Event.current);
-                        break;
-                    case EventType.TouchLeave:
-                        EventTouchLeave(Event.current);
-                        break;
-                    case EventType.TouchEnter:
-                        EventTouchEnter(Event.current);
-                        break;
-                    case EventType.TouchMove:
-                        EventTouchMove(Event.current);
-                        break;
-                    case EventType.TouchStationary:
-                        EventTouchStationary(Event.current);
-                        break;
-                    case EventType.TouchUp:
-                        EventTouchUp(Event.current);
-                        break;
+                case EventType.TouchDown:
+                    EventTouchDown(Event.current);
+                    break;
+                case EventType.TouchLeave:
+                    EventTouchLeave(Event.current);
+                    break;
+                case EventType.TouchEnter:
+                    EventTouchEnter(Event.current);
+                    break;
+                case EventType.TouchMove:
+                    EventTouchMove(Event.current);
+                    break;
+                case EventType.TouchStationary:
+                    EventTouchStationary(Event.current);
+                    break;
+                case EventType.TouchUp:
+                    EventTouchUp(Event.current);
+                    break;
 #endif
-                }
             }
         }
 

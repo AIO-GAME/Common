@@ -29,7 +29,7 @@ namespace AIO.UEditor
         private EditorWindow CScriptWindow;
         private EditorWindow TextureWindow;
 
-        protected override void OnEnable()
+        protected override void OnActivation()
         {
         }
 
