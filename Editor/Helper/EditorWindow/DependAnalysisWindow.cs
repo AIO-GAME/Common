@@ -33,7 +33,7 @@ namespace AIO.UEditor
         private Vector2 scrollPos;
         private string[] withoutExtensions = new string[] { ".prefab", ".unity", ".mat", ".asset", ".controller" };
 
-        protected override void OnEnable()
+        protected override void OnActivation()
         {
             beDependArr = new Object[targetCount][];
             foldoutArr = new bool[targetCount];
@@ -118,7 +118,7 @@ namespace AIO.UEditor
             return objects.ToArray();
         }
 
-        protected override void OnDestroy()
+        protected override void OnDispose()
         {
             targetObjects = null;
             beDependArr = null;

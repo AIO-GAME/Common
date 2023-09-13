@@ -155,7 +155,7 @@ namespace AIO.UEditor
             }
         }
 
-        protected override void OnEnable()
+        protected override void OnActivation()
         {
             InitIcons();
 
@@ -285,7 +285,7 @@ namespace AIO.UEditor
             }
         }
 
-        protected override void OnDestroy()
+        protected override void OnDispose()
         {
             iconNames.Clear();
             iconContentListAll.Clear();

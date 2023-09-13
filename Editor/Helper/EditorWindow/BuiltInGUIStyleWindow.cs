@@ -43,7 +43,7 @@ namespace AIO.UEditor
         private GUIStyle Content, Label;
         private string search = "";
 
-        protected override void OnEnable()
+        protected override void OnActivation()
         {
             search = "";
         }
@@ -118,10 +118,9 @@ namespace AIO.UEditor
             GTOption.Space(10);
         }
 
-        protected override void OnDestroy()
+        protected override void OnDispose()
         {
             Array.Clear();
-            base.OnDestroy();
         }
     }
 }

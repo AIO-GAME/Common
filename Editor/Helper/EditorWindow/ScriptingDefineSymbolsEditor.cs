@@ -34,7 +34,7 @@ namespace AIO.UEditor
             Vector = new Vector2();
         }
 
-        protected override void OnEnable()
+        protected override void OnActivation()
         {
             Load();
         }

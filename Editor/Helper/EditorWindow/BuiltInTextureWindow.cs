@@ -42,7 +42,7 @@ namespace AIO.UEditor
             TextureWidth = GUILayout.Width(100);
         }
 
-        protected override void OnEnable()
+        protected override void OnActivation()
         {
             m_Icons.Clear();
             foreach (var x in Resources.FindObjectsOfTypeAll<Texture2D>())

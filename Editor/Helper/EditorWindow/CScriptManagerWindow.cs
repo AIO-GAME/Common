@@ -51,7 +51,7 @@ namespace AIO.UEditor
             Width = GTOption.Width(120);
         }
 
-        protected override void OnEnable()
+        protected override void OnActivation()
         {
         }
 

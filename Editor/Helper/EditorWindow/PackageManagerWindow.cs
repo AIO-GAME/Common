@@ -59,7 +59,7 @@ namespace AIO.UEditor
 
         private string PackagesPath;
 
-        protected override void OnEnable()
+        protected override void OnActivation()
         {
             PackagesPath = Application.dataPath.Replace("Assets", "Packages");
             var FilePath = Path.Combine(PackagesPath, PACKAGE_CLONE_FILE);

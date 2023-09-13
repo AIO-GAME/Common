@@ -10,7 +10,7 @@ namespace AIO.UEditor
 {
     public static class ManageRuntime
     {
-        [MenuItem("AIO/Disable Runtime", false, 0)]
+        [MenuItem("Tools/AIO/Disable Runtime", false, 0)]
         public static void Disable()
         {
             Selection.activeObject = null;
@@ -39,7 +39,7 @@ namespace AIO.UEditor
             AssetDatabase.Refresh();
         }
 
-        [MenuItem("AIO/Enable Runtime", false, 0)]
+        [MenuItem("Tools/AIO/Enable Runtime", false, 0)]
         public static void Enable()
         {
             Selection.activeObject = null;
