@@ -45,11 +45,8 @@ namespace AIO.UEditor
             throw new Exception("packagedata not find key");
         }
     }
-    
-    [WindowExtra("Tools")]
-    [WindowTitle("Package Manager")]
-    [WindowMinSize(500, 200)]
-    [WindowMaxSize(500, 200)]
+
+    [GWindow("Package Manager", Group = "Tools", MinSizeWidth = 500, MinSizeHeight = 200)]
     public class PackageManagerWindow : GraphicWindow
     {
         public const string PACKAGE_CLONE_FILE = "AutoGitClone.ini";
@@ -80,7 +77,8 @@ namespace AIO.UEditor
         {
             EditorGUILayout.LabelField("Git安装包管理", new GUIStyle("PreLabel"));
             EditorGUILayout.Space();
-            PackageDataOnGUISwitch = EditorGUILayout.ToggleLeft("URL List", PackageDataOnGUISwitch, "FoldoutHeader", GUILayout.ExpandWidth(true));
+            PackageDataOnGUISwitch = EditorGUILayout.ToggleLeft("URL List", PackageDataOnGUISwitch, "FoldoutHeader",
+                GUILayout.ExpandWidth(true));
             if (PackageDataOnGUISwitch) PackageDataOnGUI();
             EditorGUILayout.Space();
             PackageFolderListOnGUI();

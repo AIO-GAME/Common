@@ -11,10 +11,10 @@ namespace AIO.UEditor
     /// <summary>
     /// 插件管理界面
     /// </summary>
-    [WindowExtra("Tools")]
-    [WindowTitle("插件管理界面")]
-    [WindowMinSize(500, 200)]
-    [WindowMaxSize(500, 200)]
+    [GWindow("插件管理界面", Group = "Tools",
+        MinSizeWidth = 200, MinSizeHeight = 600,
+        MaxSizeWidth = 200, MaxSizeHeight = 600
+    )]
     public class PluginsManagerWindow : GraphicWindow
     {
         protected Vector2 Vector;

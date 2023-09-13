@@ -19,10 +19,10 @@ using UnityEngine;
 namespace AIO.UEditor
 {
     /// <summary> 宏定义管理器 </summary>
-    [WindowExtra("Tools")]
-    [WindowTitle("宏定义管理器")]
-    [WindowMinSize(500, 200)]
-    [WindowMaxSize(500, 200)]
+    [GWindow("宏定义管理器", Group = "Tools",
+        MinSizeWidth = 600, MinSizeHeight = 600,
+        MaxSizeWidth = 600, MaxSizeHeight = 600
+    )]
     public class ScriptingDefineSymbols : GraphicWindow
     {
         private Vector2 Vector;

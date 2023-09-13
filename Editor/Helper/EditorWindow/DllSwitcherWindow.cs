@@ -18,10 +18,10 @@ namespace AIO.UEditor
     /// <summary>
     /// Dll Switcher Window
     /// </summary>
-    [WindowExtra("Tools")]
-    [WindowTitle("Dll Switcher Window")]
-    [WindowMinSize(600, 400)]
-    [WindowMaxSize(600, 400)]
+    [GWindow("Dll Switcher Window", Group = "Tools",
+        MinSizeWidth = 600, MinSizeHeight = 600,
+        MaxSizeWidth = 600, MaxSizeHeight = 600
+    )]
     public class DllSwitcherWindow : GraphicWindow
     {
         private enum PathType
