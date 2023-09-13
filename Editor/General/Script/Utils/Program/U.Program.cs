@@ -12,9 +12,6 @@ using Debug = UnityEngine.Debug;
 
 namespace AIO.UEditor
 {
-    /// <summary>
-    /// Utils Unity Editor
-    /// </summary>
     public static partial class EHelper
     {
         /// <summary>

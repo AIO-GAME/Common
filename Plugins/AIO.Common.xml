@@ -59,6 +59,49 @@
             支持的区域性
             </summary>
         </member>
+        <member name="T:AIO.LruCache">
+            <summary>
+            LRU 缓存淘汰算法 (Least Recently Used)
+            </summary>
+        </member>
+        <member name="T:AIO.LruCache.NodeInfo">
+            <summary>
+            节点信息
+            </summary>
+        </member>
+        <member name="F:AIO.LruCache.NodeInfo.id">
+            <summary>
+            节点ID
+            </summary>
+        </member>
+        <member name="P:AIO.LruCache.NodeInfo.Next">
+            <summary>
+            下一个节点
+            </summary>
+        </member>
+        <member name="P:AIO.LruCache.NodeInfo.Prev">
+            <summary>
+            上一个节点
+            </summary>
+        </member>
+        <member name="P:AIO.LruCache.First">
+            <summary>
+            第一个节点
+            </summary>
+        </member>
+        <member name="M:AIO.LruCache.Init(System.UInt32)">
+            <summary>
+            初始化
+            </summary>
+            <param name="count">节点数量</param>
+        </member>
+        <member name="M:AIO.LruCache.SetActive(System.Int32)">
+            <summary>
+            设置节点为最新
+            </summary>
+            <param name="id">节点ID</param>
+            <returns>是否设置成功</returns>
+        </member>
         <member name="T:AIO.MD4">
             <summary>
             MD4 Hash Algorithm in C#
@@ -5088,12 +5131,12 @@
             </summary>
         </member>
         <member name="M:AIO.MailSingleInfo.#ctor(System.String,System.String,System.String)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="form"></param>
-            <param name="to"></param>
-            <param name="passwrod"></param>
+             </summary>
+             <param name="form"></param>
+             <param name="to"></param>
+             <param name="passwrod"></param>
         </member>
         <member name="T:AIO.PList.IPListElementExten">
             <summary>
@@ -8295,7 +8338,7 @@
         </member>
         <member name="M:AIO.CRC32Algorithm.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:AIO.CRC32Algorithm"/> class. 
+            Initializes a new instance of the <see cref="T:AIO.CRC32Algorithm"/> class.
             </summary>
         </member>
         <member name="M:AIO.CRC32Algorithm.Initialize">
@@ -8704,6 +8747,46 @@
             </summary>
             <returns>fileid</returns>
         </member>
+        <member name="T:AHelper.Reflect">
+            <summary>
+            反射工具库
+            </summary>
+        </member>
+        <member name="M:AHelper.Reflect.GetEnumFilterOBS``1">
+            <summary>
+            过滤枚举过时字段
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <returns>泛型列表</returns>
+        </member>
+        <member name="M:AHelper.Reflect.GetPropertyFilterOBS``1(System.Reflection.BindingFlags)">
+            <summary>
+            过滤过时属性
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <returns>属性列表</returns>
+        </member>
+        <member name="M:AHelper.Reflect.GetFieldFilterOBS``1(System.Reflection.BindingFlags)">
+            <summary>
+            过滤过时字段
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <returns>属性列表</returns>
+        </member>
+        <member name="M:AHelper.Reflect.GetMemberFilterOBS``1(System.Reflection.BindingFlags)">
+            <summary>
+            过滤成员字段
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <returns>属性列表</returns>
+        </member>
+        <member name="M:AHelper.Reflect.GetMethodFilterOBS``1(System.Reflection.BindingFlags)">
+            <summary>
+            过滤函数字段
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <returns>属性列表</returns>
+        </member>
         <member name="T:AHelper.Base64">
             <summary>
             Base64 文件 解析
@@ -8847,6 +8930,11 @@
         <member name="M:AHelper.Json.Serialize``1(``0@)">
             <summary>
             序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.ToHashTable(System.String@)">
+            <summary>
+            反序列化 HashTable
             </summary>
         </member>
         <member name="M:AHelper.Json.Deserialize(System.String@,Newtonsoft.Json.JsonSerializerSettings@)">

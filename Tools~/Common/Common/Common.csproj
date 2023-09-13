@@ -150,6 +150,7 @@
     <Compile Include="Script\Extension\Struct\Char\Char.Extend.ToConver.cs" />
     <Compile Include="Script\Extension\Struct\Long\Long.Extend.cs" />
     <Compile Include="Script\Helper\Database\U.FileID.cs" />
+    <Compile Include="Script\Helper\Reflect\U.Reflect.cs" />
     <Compile Include="Script\Tools\Bean\GBean.cs" />
     <Compile Include="Script\Tools\Bean\GBeanRegisterAttribute.cs" />
     <Compile Include="Script\Tools\Bean\GBeanSystem.cs" />

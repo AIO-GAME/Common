@@ -141,7 +141,7 @@ namespace AIO.UEditor
 
                 {
                     str.AppendLine();
-                    str.AppendFormat("        [MenuItem(\"Git/\" + DisplayName + \"/拉取 Pull\", true)]");
+                    str.AppendFormat("        [MenuItem(\"Git/\" + DisplayName + \"/拉取 Pull\", true)]\r\n");
                     str.AppendFormat("        private static bool GetHasUpdate()\r\n").Append("        {\r\n");
                     str.AppendFormat("            return HasUpdate;\r\n").Append("        }\r\n");
                 }
