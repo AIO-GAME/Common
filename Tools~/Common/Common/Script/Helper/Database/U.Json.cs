@@ -5,6 +5,7 @@
 |*|=============================================*/
 
 using System;
+using System.Collections;
 using System.Globalization;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -18,7 +19,7 @@ public partial class AHelper
     /// <see>
     ///     <cref>https://www.newtonsoft.com/json/help/html/N_Newtonsoft_Json.htm</cref>
     /// </see>
-    public static partial class Json
+    public static class Json
     {
         static Json()
         {
@@ -60,6 +61,8 @@ public partial class AHelper
         /// </summary>
         public static JsonSerializerSettings JSONNormalSettings { get; }
 
+        #region Serialize
+
         /// <summary>
         /// 序列化
         /// </summary>
@@ -90,6 +93,18 @@ public partial class AHelper
         public static string Serialize<T>(in T data)
         {
             return JsonConvert.SerializeObject(data, typeof(T), JSONNormalSettings);
+        }
+
+        #endregion
+
+        #region 反序列化
+
+        /// <summary>
+        /// 反序列化 HashTable
+        /// </summary>
+        public static Hashtable ToHashTable(in string data)
+        {
+            return JsonConvert.DeserializeObject<Hashtable>(data, JSONNormalSettings);
         }
 
         /// <summary>
@@ -140,6 +155,10 @@ public partial class AHelper
             return JsonConvert.DeserializeObject(data, type, JSONNormalSettings);
         }
 
+        #endregion
+
+        #region Populate
+
         /// <summary>
         /// 反序列化 填充对象
         /// </summary>
@@ -171,6 +190,8 @@ public partial class AHelper
         {
             JsonConvert.PopulateObject(data, TargetObj, JSONNormalSettings);
         }
+
+        #endregion
     }
 }
 
