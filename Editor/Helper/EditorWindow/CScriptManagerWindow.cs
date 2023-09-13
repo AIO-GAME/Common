@@ -23,10 +23,10 @@ namespace AIO.UEditor
     /// <summary>
     /// 脚本管理
     /// </summary>
-    [WindowExtra("Tools")]
-    [WindowTitle("脚本管理")]
-    [WindowMinSize(600, 400)]
-    [WindowMaxSize(600, 400)]
+    [GWindow("脚本管理", Group = "Tools",
+        MinSizeWidth = 600, MinSizeHeight = 600,
+        MaxSizeWidth = 600, MaxSizeHeight = 600
+    )]
     public class CScriptManagerGraphWindow : GraphicWindow
     {
         private List<Type> List;

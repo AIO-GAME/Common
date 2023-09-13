@@ -22,10 +22,10 @@ namespace AIO.UEditor
     /// <summary>
     /// Unity内置图标
     /// </summary>
-    [WindowExtra("Tools")]
-    [WindowTitle("Built In Texture Window")]
-    [WindowMinSize(600, 400)]
-    [WindowMaxSize(600, 400)]
+    [GWindow("Built In Texture Window", Group = "Tools",
+        MinSizeWidth = 600, MinSizeHeight = 600,
+        MaxSizeWidth = 600, MaxSizeHeight = 600
+    )]
     public class BuiltInTextureGraphWindow : GraphicWindow
     {
         protected Vector2 Vector;

@@ -10,10 +10,10 @@ namespace AIO.UEditor
     /// <summary>
     /// 查询引用关系
     /// </summary>
-    [WindowExtra("Tools")]
-    [WindowTitle("Query Reference")]
-    [WindowMinSize(600, 400)]
-    [WindowMaxSize(600, 400)]
+    [GWindow("查询资源引用", Group = "Tools",
+        MinSizeWidth = 600, MinSizeHeight = 600,
+        MaxSizeWidth = 600, MaxSizeHeight = 600
+    )]
     public class DependAnalysisGraphWindow : GraphicWindow
     {
         private static Object[] targetObjects;

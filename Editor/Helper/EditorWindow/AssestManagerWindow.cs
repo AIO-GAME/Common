@@ -20,10 +20,10 @@ namespace AIO.UEditor
     /// <summary>
     /// 资源管理界面
     /// </summary>
-    [WindowExtra("Tools")]
-    [WindowTitle("资源管理器", "Assets Manager")]
-    [WindowMinSize(600, 400)]
-    [WindowMaxSize(600, 400)]
+    [GWindow("资源管理器", "Assets Manager", Group = "Tools",
+        MinSizeWidth = 600, MinSizeHeight = 600,
+        MaxSizeWidth = 600, MaxSizeHeight = 600
+    )]
     public class AssestManagerGraphWindow : GraphicWindow
     {
         private EditorWindow CScriptWindow;

@@ -20,10 +20,10 @@ namespace AIO.UEditor
     /// <summary>
     /// 获取全部 Unity GUI Style Viewer 样式
     /// </summary>
-    [WindowExtra("Tools")]
-    [WindowTitle("GUI Style Viewe")]
-    [WindowMinSize(600, 400)]
-    [WindowMaxSize(600, 400)]
+    [GWindow("GUI Style View", Group = "Tools",
+        MinSizeWidth = 600, MinSizeHeight = 600,
+        MaxSizeWidth = 600, MaxSizeHeight = 600
+    )]
     public class BuiltInGUIStyleGraphWindow : GraphicWindow
     {
         public BuiltInGUIStyleGraphWindow()

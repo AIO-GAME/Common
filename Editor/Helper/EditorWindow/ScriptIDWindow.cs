@@ -21,10 +21,10 @@ using Object = UnityEngine.Object;
 
 namespace AIO.UEditor
 {
-    [WindowExtra("Tools")]
-    [WindowTitle("Script ID Viewer")]
-    [WindowMinSize(600, 400)]
-    [WindowMaxSize(600, 400)]
+    [GWindow("Script ID Viewer", Group = "Tools",
+        MinSizeWidth = 600, MinSizeHeight = 600,
+        MaxSizeWidth = 600, MaxSizeHeight = 600
+    )]
     public class ScriptIDWindow : GraphicWindow
     {
         protected override void OnAwake()

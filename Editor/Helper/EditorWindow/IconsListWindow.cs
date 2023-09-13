@@ -7,10 +7,10 @@ using UnityEngine;
 
 namespace AIO.UEditor
 {
-    [WindowExtra("Tools")]
-    [WindowTitle("Icons Manager")]
-    [WindowMinSize(600, 400)]
-    [WindowMaxSize(600, 400)]
+    [GWindow("内置ICON管理器", Group = "Tools",
+        MinSizeWidth = 600, MinSizeHeight = 600,
+        MaxSizeWidth = 600, MaxSizeHeight = 600
+    )]
     public class IconsListGraphWindow : GraphicWindow
     {
         #region static

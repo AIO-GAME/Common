@@ -35,6 +35,11 @@ namespace AIO.UEditor
         private Vector2 MinSize { get; }
 
         /// <summary>
+        /// 最大大小
+        /// </summary>
+        private Vector2 MaxSize { get; }
+
+        /// <summary>
         /// 组列表
         /// </summary>
         private List<Type> GroupList;
@@ -49,8 +54,15 @@ namespace AIO.UEditor
         {
             GraphicItems = Pool.List<GraphicRect>();
             GroupList = new List<Type>();
-            var attribute = GetType().GetCustomAttribute<WindowExtraAttribute>(false);
-            if (attribute != null && !string.IsNullOrEmpty(attribute.Group))
+            var attribute = GetType().GetCustomAttribute<GWindowAttribute>(false);
+            if (attribute is null)
+            {
+                Title = new GUIContent(GetType().Name.Prettify());
+                MinSize = minSize;
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(attribute.Group))
             {
                 Group = attribute.Group;
                 foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
@@ -58,7 +70,7 @@ namespace AIO.UEditor
                     foreach (var type in assembly.GetTypes())
                     {
                         if (!type.IsSubclassOf(typeof(EditorWindow))) continue;
-                        var extraAttribute = type.GetCustomAttribute<WindowExtraAttribute>(false);
+                        var extraAttribute = type.GetCustomAttribute<GWindowAttribute>(false);
                         if (extraAttribute is null) continue;
                         if (string.IsNullOrEmpty(extraAttribute.Group)) continue;
                         if (Group != extraAttribute.Group) continue;
@@ -69,13 +81,15 @@ namespace AIO.UEditor
                 }
             }
 
-            var titleAttribute = GetType().GetCustomAttribute<WindowTitleAttribute>(false);
-            if (titleAttribute != null) Title = titleAttribute.Title;
-            else Title = new GUIContent(GetType().Name.Prettify());
-
-            var minSizeAttribute = GetType().GetCustomAttribute<WindowMinSizeAttribute>(false);
-            if (minSizeAttribute != null) MinSize = new Vector2(minSizeAttribute.Width, minSizeAttribute.Height);
-            else MinSize = minSize;
+            Title = attribute.Title;
+            if (attribute.MinSizeWidth == 0) attribute.MinSizeWidth = (uint)minSize.x;
+            if (attribute.MinSizeHeight == 0) attribute.MinSizeHeight = (uint)minSize.y;
+            
+            if (attribute.MaxSizeWidth == 0) attribute.MaxSizeWidth = (uint)minSize.x;
+            if (attribute.MaxSizeHeight == 0) attribute.MaxSizeHeight = (uint)minSize.y;
+            
+            minSize = MinSize = new Vector2(attribute.MinSizeWidth, attribute.MinSizeHeight);
+            maxSize = MaxSize = new Vector2(attribute.MaxSizeWidth, attribute.MaxSizeHeight);
         }
 
         /// <inheritdoc />
@@ -149,6 +163,12 @@ namespace AIO.UEditor
         /// </summary>
         protected virtual void OnUpdate()
         {
+        }
+
+        protected override void OnDestroy()
+        {
+            GroupList.Clear();
+            GroupList = null;
         }
 
         #region Event
