@@ -1,0 +1,195 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" linePragmas="true" visibility="public"#>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System"#>
+<#@ import namespace="System.Collections"#>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" encoding="utf-8" #>
+<#
+    var methods = new List<(string,string)>()
+    {
+        ("Button", "Button"),
+        ("ButtonRepeat", "RepeatButton"),
+    };
+    var types = new List<string>()
+    {
+        "string",
+        "GUIContent",
+        "Texture",
+    };
+#>
+/*|✩ - - - - - |||
+|||✩ Date:     ||| -> Automatic Generate
+|||✩ Document: ||| ->
+|||✩ - - - - - |*/
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+using System;
+using UnityEditor;
+using UnityEngine;
+
+namespace AIO.UEditor
+{
+<#
+    foreach (var (methodName, apiName) in methods)
+    {
+#>
+    public partial class GELayout // <#= methodName #> : <#= apiName #>
+    {
+
+<#
+    foreach (var typeName in types)
+    {
+#>
+        #region <#= typeName #>
+
+        /// <summary> 
+        /// 按钮 <#= methodName #> 
+        /// </summary>
+        /// <param name="name">标题</param>
+        /// <param name="options">参数</param>
+        /// <returns>Ture:点击 False:未点击</returns>
+        public static bool <#= methodName #>(<#= typeName #> name, params GUILayoutOption[] options)
+        {
+            return GUILayout.<#= apiName #>(name, options);
+        }
+
+        /// <summary> 
+        /// 按钮 <#= methodName #> 
+        /// </summary>
+        /// <param name="name">标题</param>
+        /// <param name="style">样式</param>
+        /// <param name="options">参数</param>
+        /// <returns>Ture:点击 False:未点击</returns>
+        public static bool <#= methodName #>(<#= typeName #> name, GUIStyle style, params GUILayoutOption[] options)
+        {
+            return GUILayout.<#= apiName #>(name, style, options);
+        }
+
+        /// <summary> 
+        /// 按钮 <#= methodName #> 
+        /// </summary>
+        /// <param name="name">标题</param>
+        /// <param name="width">宽度</param>
+        /// <returns>Ture:点击 False:未点击</returns>
+        public static bool <#= methodName #>(<#= typeName #> name, float width)
+        {
+            return GUILayout.<#= apiName #>(name, GUILayout.Width(width));
+        }
+
+        /// <summary> 
+        /// 按钮 <#= methodName #> 
+        /// </summary>
+        /// <param name="name">标题</param>
+        /// <param name="width">宽度</param>
+        /// <param name="height">高度</param>
+        /// <returns>Ture:点击 False:未点击</returns>
+        public static bool <#= methodName #>(<#= typeName #> name, float width, float height)
+        {
+            return GUILayout.<#= apiName #>(name, GUILayout.Width(width), GUILayout.Height(height));
+        }
+
+        /// <summary> 
+        /// 按钮 <#= methodName #> 
+        /// </summary>
+        /// <param name="name">标题</param>
+        /// <param name="width">宽度</param>
+        /// <param name="style">样式</param>
+        /// <returns>Ture:点击 False:未点击</returns>
+        public static bool <#= methodName #>(<#= typeName #> name, GUIStyle style, float width)
+        {
+            return GUILayout.<#= apiName #>(name, style, GUILayout.Width(width));
+        }
+
+        /// <summary> 
+        /// 按钮 <#= methodName #> 
+        /// </summary>
+        /// <param name="name">标题</param>
+        /// <param name="width">宽度</param>
+        /// <param name="height">高度</param>
+        /// <param name="style">样式</param>
+        /// <returns>Ture:点击 False:未点击</returns>
+        public static bool <#= methodName #>(<#= typeName #> name, GUIStyle style, float width, float height)
+        {
+            return GUILayout.<#= apiName #>(name, style, GUILayout.Width(width), GUILayout.Height(height));
+        }
+
+        /// <summary> 
+        /// 按钮 <#= methodName #> 
+        /// </summary>
+        /// <param name="name">标题</param>
+        /// <param name="action">回调</param>
+        /// <param name="options">参数</param>
+        public static void <#= methodName #>(<#= typeName #> name, Action action, params GUILayoutOption[] options)
+        {
+            if (GUILayout.<#= apiName #>(name, options)) action();
+        }
+
+        /// <summary> 
+        /// 按钮 <#= methodName #> 
+        /// </summary>
+        /// <param name="name">标题</param>
+        /// <param name="action">回调</param>
+        /// <param name="width">宽度</param>
+        /// <param name="height">高度</param>
+        public static void <#= methodName #>(<#= typeName #> name, Action action, float width, float height)
+        {
+            if (GUILayout.<#= apiName #>(name, GUILayout.Width(width), GUILayout.Height(height))) action();
+        }
+
+        /// <summary> 
+        /// 按钮 <#= methodName #> 
+        /// </summary>
+        /// <param name="name">标题</param>
+        /// <param name="action">回调</param>
+        /// <param name="width">宽度</param>
+        public static void <#= methodName #>(<#= typeName #> name, Action action, float width)
+        {
+            if (GUILayout.<#= apiName #>(name, GUILayout.Width(width))) action();
+        }
+
+        /// <summary> 
+        /// 按钮 <#= methodName #> 
+        /// </summary>
+        /// <param name="name">标题</param>
+        /// <param name="action">回调</param>
+        /// <param name="options">参数</param>
+        /// <param name="style">样式</param>
+        public static void <#= methodName #>(<#= typeName #> name, Action action, GUIStyle style, params GUILayoutOption[] options)
+        {
+            if (GUILayout.<#= apiName #>(name, style, options)) action();
+        }
+
+        /// <summary> 
+        /// 按钮 <#= methodName #> 
+        /// </summary>
+        /// <param name="name">标题</param>
+        /// <param name="action">回调</param>
+        /// <param name="width">宽度</param>
+        /// <param name="style">样式</param>
+        public static void <#= methodName #>(<#= typeName #> name, Action action, GUIStyle style, float width)
+        {
+            if (GUILayout.<#= apiName #>(name, style, GUILayout.Width(width))) action();
+        }
+
+        /// <summary> 
+        /// 按钮 <#= methodName #> 
+        /// </summary>
+        /// <param name="name">标题</param>
+        /// <param name="action">回调</param>
+        /// <param name="width">宽度</param>
+        /// <param name="height">高度</param>
+        /// <param name="style">样式</param>
+        public static void <#= methodName #>(<#= typeName #> name, Action action, GUIStyle style, float width, float height)
+        {
+            if (GUILayout.<#= apiName #>(name, style, GUILayout.Width(width), GUILayout.Height(height))) action();
+        }
+
+        #endregion
+
+<#
+    }
+#>
+    }
+<#
+    }
+#>
+}

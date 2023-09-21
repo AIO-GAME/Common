@@ -18,6 +18,25 @@ namespace AIO.UEditor
 
 #if UNITY_2019_1_OR_NEWER
         /// <summary> 折页排版内容 </summary>
+        /// <param name="foldout">开关</param>
+        /// <param name="content">标签</param>
+        /// <param name="style">显示风格</param>
+        /// <param name="menuAction">操作菜单</param>
+        /// <param name="menuIcon">菜单ICON显示风格</param>
+        public static bool FoldoutHeaderGroupBegin(bool foldout, string content,
+            GUIStyle style = null, Action<Rect> menuAction = null, GUIStyle menuIcon = null)
+        {
+            foldout = EditorGUILayout.BeginFoldoutHeaderGroup(foldout, content, style, menuAction, menuIcon);
+            EditorGUILayout.EndFoldoutHeaderGroup();
+            return foldout;
+        }
+
+        public static void FoldoutHeaderGroupEnd()
+        {
+            EditorGUILayout.EndFoldoutHeaderGroup();
+        }
+
+        /// <summary> 折页排版内容 </summary>
         /// <param name="action">方法体</param>
         /// <param name="foldout">开关</param>
         /// <param name="content">标签</param>
@@ -85,7 +104,8 @@ namespace AIO.UEditor
             /// <param name="style">显示风格</param>
             /// <param name="menuAction">操作菜单</param>
             /// <param name="menuIcon">菜单ICON显示风格</param>
-            public static bool FoldoutHeaderGroup(Action action, bool foldout, GUIContent content, [UDefaultValue("EditorStyles.foldoutHeader")] GUIStyle style = null)
+            public static bool FoldoutHeaderGroup(Action action, bool foldout, GUIContent content, [UDefaultValue("EditorStyles.foldoutHeader")] GUIStyle style
+ = null)
             {
                 if (action == null) return false;
                 Space();
@@ -122,7 +142,8 @@ namespace AIO.UEditor
         /// <param name="foldout">开关</param>
         /// <param name="content">标签</param>
         /// <param name="style">显示风格</param>
-        public static bool FoldoutHeaderToggle(Action action, bool foldout, GUIContent content, [UDefaultValue("EditorStyles.foldoutHeader")] GUIStyle style = null)
+        public static bool FoldoutHeaderToggle(Action action, bool foldout, GUIContent content,
+            [UDefaultValue("EditorStyles.foldoutHeader")] GUIStyle style = null)
         {
             if (action == null) return false;
             Space();
@@ -164,7 +185,8 @@ namespace AIO.UEditor
         /// <param name="content">显示的标签</param>
         /// <param name="style">显示风格</param>
         /// <returns>true:呈现子对象,false:隐藏</returns>
-        public static bool Foldout(GUIContent content, bool foldout, [UDefaultValue("EditorStyles.foldout")] GUIStyle style)
+        public static bool Foldout(GUIContent content, bool foldout,
+            [UDefaultValue("EditorStyles.foldout")] GUIStyle style)
         {
             return EditorGUILayout.Foldout(foldout, content, style);
         }
@@ -185,7 +207,8 @@ namespace AIO.UEditor
         /// <param name="style">显示风格</param>
         /// <param name="toggleOnLabelClick">是否在单击标签时切换折叠状态</param>
         /// <returns>true:呈现子对象,false:隐藏</returns>
-        public static bool Foldout(GUIContent content, bool foldout, bool toggleOnLabelClick, [UDefaultValue("EditorStyles.foldout")] GUIStyle style)
+        public static bool Foldout(GUIContent content, bool foldout, bool toggleOnLabelClick,
+            [UDefaultValue("EditorStyles.foldout")] GUIStyle style)
         {
             return EditorGUILayout.Foldout(foldout, content, toggleOnLabelClick, style);
         }
@@ -207,7 +230,8 @@ namespace AIO.UEditor
         /// <param name="style">显示风格</param>
         /// <param name="toggleOnLabelClick">是否在单击标签时切换折叠状态</param>
         /// <returns>true:呈现子对象,false:隐藏</returns>
-        public static bool Foldout(string content, bool foldout, bool toggleOnLabelClick, [UDefaultValue("EditorStyles.foldout")] GUIStyle style)
+        public static bool Foldout(string content, bool foldout, bool toggleOnLabelClick,
+            [UDefaultValue("EditorStyles.foldout")] GUIStyle style)
         {
             return EditorGUILayout.Foldout(foldout, content, toggleOnLabelClick, style);
         }

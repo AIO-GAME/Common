@@ -50,12 +50,12 @@ namespace AIO.UEditor
         /// <inheritdoc />
         protected GraphicWindow()
         {
-            GraphicItems = Pool.List<GraphicRect>();
-            GroupList = Pool.List<Type>();
+            GraphicItems = new List<GraphicRect>();
+            GroupList = new List<Type>();
             var attribute = GetType().GetCustomAttribute<GWindowAttribute>(false);
             if (attribute is null)
             {
-                Title = new GUIContent(GetType().Name.Prettify());
+                Title = new GUIContent(GetType().Name);
                 MinSize = minSize;
                 MaxSize = maxSize;
             }
@@ -129,9 +129,9 @@ namespace AIO.UEditor
         /// <inheritdoc />
         protected sealed override void OnDestroy()
         {
-            GraphicItems.Free();
+            GraphicItems.Clear();
             GraphicItems = null;
-            GroupList.Free();
+            GroupList.Clear();
             GroupList = null;
         }
 
