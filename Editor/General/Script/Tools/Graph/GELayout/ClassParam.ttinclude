@@ -1,0 +1,78 @@
+﻿<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#+
+    public class ClassParam
+    {
+        /// <summary>
+        /// 注释
+        /// </summary>
+        public string Comments { get; set; }
+
+        /// <summary>
+        /// 生成函数名
+        /// </summary>
+        public string FunctionName { get; set; }
+
+        /// <summary>
+        /// 调用API函数名
+        /// </summary>
+        public string APIFunction { get; set; }
+
+        /// <summary>
+        /// 输入类型
+        /// </summary>
+        public string InputType { get; set; }
+
+        /// <summary>
+        /// 泛型类型
+        /// </summary>
+        public string Generics { get; set; }
+
+        /// <summary>
+        /// 函数参数
+        /// </summary>
+        public Dictionary<string, List<FunctionParam>> FunctionParams { get; set; }
+
+        /// <summary>
+        /// 宏定义
+        /// </summary>
+        public Dictionary<string, string> MacroDefinition { get; set; }
+
+        public ClassParam()
+        {
+            FunctionParams = new Dictionary<string, List<FunctionParam>>();
+            MacroDefinition = new Dictionary<string, string>();
+        }
+
+        public string GetFunctionParams(string key)
+        {
+            if (!FunctionParams.ContainsKey(key)) return "";
+            var sb = new StringBuilder();
+            foreach (var param in FunctionParams[key])
+                sb.Append(param.Type + " " + param.Name + ", ");
+            return sb.ToString().TrimEnd(',', ' ');
+        }
+
+        public string GetFunctionValueParams(string key)
+        {
+            if (!FunctionParams.ContainsKey(key)) return "";
+            var sb = new StringBuilder();
+            foreach (var param in FunctionParams[key])
+                sb.Append(param.Name + ", ");
+            return sb.ToString().TrimEnd(' ');
+        }
+    }
+
+    public class FunctionParam
+    {
+        /// <summary>
+        /// 注释
+        /// </summary>
+        public string Type { get; set; }
+
+        /// <summary>
+        /// 注释
+        /// </summary>
+        public string Name { get; set; }
+    }
+#>

@@ -58,5 +58,16 @@ namespace AIO.UEditor
             var outlineColor = Color.red;
             Handles.DrawSolidRectangleWithOutline(corners, fillColor, outlineColor);
         }
+        
+        
+        /// <summary>
+        /// 添加Cursor
+        /// </summary>
+        /// <param name="rect">矩形</param>
+        /// <param name="cursor">鼠标样式</param>
+        public static void AddCursor(in Rect rect,MouseCursor cursor)
+        {
+            EditorGUIUtility.AddCursorRect(rect, MouseCursor.SplitResizeLeftRight);
+        }
     }
 }

@@ -60,6 +60,18 @@ namespace AIO.UEditor
             EditorGUILayout.EndHorizontal();
         }
 
+        /// <summary> 绘制横排内容 </summary>
+        public static void HorizontalBegin(params GUILayoutOption[] options)
+        {
+            EditorGUILayout.BeginHorizontal(options);
+        }
+
+        /// <summary> 绘制横排内容 </summary>
+        public static void HorizontalEnd()
+        {
+            EditorGUILayout.EndHorizontal();
+        }
+
         #endregion
 
         #region 绘制竖排内容
@@ -97,7 +109,8 @@ namespace AIO.UEditor
         /// <param name="styles_h">水平滚动条风格</param>
         /// <param name="styles_v">垂直滚动条风格</param>
         /// <param name="options">整体显示格式</param>
-        public static Vector2 ScrollView(Action action, Vector2 v, GUIStyle styles_h, GUIStyle styles_v, params GUILayoutOption[] options)
+        public static Vector2 ScrollView(Action action, Vector2 v, GUIStyle styles_h, GUIStyle styles_v,
+            params GUILayoutOption[] options)
         {
             if (action == null) return v;
             v = EditorGUILayout.BeginScrollView(v, styles_h, styles_v, options);
@@ -125,7 +138,8 @@ namespace AIO.UEditor
         /// <param name="show_h">始终显示水平滚动条</param>
         /// <param name="show_v">始终显示垂直滚动条</param>
         /// <param name="options">整体显示格式</param>
-        public static Vector2 ScrollView(Action action, Vector2 v, bool show_h, bool show_v, params GUILayoutOption[] options)
+        public static Vector2 ScrollView(Action action, Vector2 v, bool show_h, bool show_v,
+            params GUILayoutOption[] options)
         {
             if (action == null) return v;
             v = EditorGUILayout.BeginScrollView(v, show_h, show_v, options);
@@ -143,7 +157,8 @@ namespace AIO.UEditor
         /// <param name="styles_v">垂直滚动条风格</param>
         /// <param name="styles_b">底板风格</param>
         /// <param name="options">整体显示格式</param>
-        public static Vector2 ScrollView(Action action, Vector2 v, bool show_h, bool show_v, GUIStyle styles_h, GUIStyle styles_v, GUIStyle styles_b,
+        public static Vector2 ScrollView(Action action, Vector2 v, bool show_h, bool show_v, GUIStyle styles_h,
+            GUIStyle styles_v, GUIStyle styles_b,
             params GUILayoutOption[] options)
         {
             if (action == null) return v;
@@ -158,7 +173,8 @@ namespace AIO.UEditor
         /// <param name="v">二维坐标</param>
         /// <param name="styles">显示风格</param>
         /// <param name="options">整体显示格式</param>
-        public static Vector2 ScrollView(Action<Vector2> action, Vector2 v, GUIStyle styles, params GUILayoutOption[] options)
+        public static Vector2 ScrollView(Action<Vector2> action, Vector2 v, GUIStyle styles,
+            params GUILayoutOption[] options)
         {
             if (action == null) return v;
             v = EditorGUILayout.BeginScrollView(v, styles, options);

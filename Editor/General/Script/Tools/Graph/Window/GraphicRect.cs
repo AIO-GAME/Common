@@ -16,6 +16,8 @@ namespace AIO.UEditor
     [DisplayName("图形矩形")]
     public abstract partial class GraphicRect : IGraphRect
     {
+        public string Title { get; protected set; }
+
         private Rect Rect { get; set; }
 
         /// <summary>
@@ -43,7 +45,7 @@ namespace AIO.UEditor
         protected GraphicRect()
         {
             Rect = new Rect();
-            Items = Pool.List<GraphicRect>();
+            Items = new List<GraphicRect>();
             Awake();
             isShow = true;
         }
