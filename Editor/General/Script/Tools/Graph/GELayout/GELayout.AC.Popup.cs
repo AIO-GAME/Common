@@ -16,120 +16,6 @@ namespace AIO.UEditor
     {
         #region 弹出整数选择字段 Popup Int
 
-        /// <summary> 弹出整数选择字段 </summary>
-        /// <param name="label">标签</param>
-        /// <param name="selectedValue">字段显示的选项的值</param>
-        /// <param name="displayedOptions">一个具有用户可以选择的显示选项的数组</param>
-        /// <param name="optionValues">包含每个选项的值的数组</param>
-        /// <param name="options">排版格式</param>
-        public static int Popup(GUIContent label, int selectedValue, IEnumerable<GUIContent> displayedOptions, int[] optionValues, params GUILayoutOption[] options)
-        {
-            return EditorGUILayout.IntPopup(label, selectedValue, displayedOptions.ToArray(), optionValues, options);
-        }
-
-        /// <summary> 弹出整数选择字段 </summary>
-        /// <param name="label">标签</param>
-        /// <param name="selectedValue">字段显示的选项的值</param>
-        /// <param name="displayedOptions">一个具有用户可以选择的显示选项的数组</param>
-        /// <param name="optionValues">包含每个选项的值的数组</param>
-        /// <param name="options">排版格式</param>
-        public static int Popup(string label, int selectedValue, string[] displayedOptions, int[] optionValues, params GUILayoutOption[] options)
-        {
-            return EditorGUILayout.IntPopup(label, selectedValue, displayedOptions, optionValues, options);
-        }
-
-        /// <summary> 弹出整数选择字段 </summary>
-        /// <param name="label">标签</param>
-        /// <param name="selectedValue">字段显示的选项的值</param>
-        /// <param name="displayedOptions">一个具有用户可以选择的显示选项的数组</param>
-        /// <param name="optionValues">包含每个选项的值的数组</param>
-        /// <param name="options">排版格式</param>
-        public static int Popup(string label, int selectedValue, IEnumerable<string> displayedOptions, int[] optionValues, params GUILayoutOption[] options)
-        {
-            return EditorGUILayout.IntPopup(label, selectedValue, displayedOptions.ToArray(), optionValues, options);
-        }
-
-        /// <summary> 弹出整数选择字段 </summary>
-        /// <param name="label">标签</param>
-        /// <param name="selectedValue">字段显示的选项的值</param>
-        /// <param name="displayedOptions">一个具有用户可以选择的显示选项的数组</param>
-        /// <param name="optionValues">包含每个选项的值的数组</param>
-        /// <param name="options">排版格式</param>
-        public static int Popup(string label, int selectedValue, int[] displayedOptions, int[] optionValues, params GUILayoutOption[] options)
-        {
-            var vs = new string[displayedOptions.Length];
-            var index = 0;
-            foreach (var item in displayedOptions)
-                vs[index++] = item.ToString();
-            return EditorGUILayout.IntPopup(label, selectedValue, vs, optionValues, options);
-        }
-
-        /// <summary> 弹出整数选择字段 </summary>
-        /// <param name="selectedValue">字段显示的选项的值</param>
-        /// <param name="displayedOptions">一个具有用户可以选择的显示选项的数组</param>
-        /// <param name="optionValues">包含每个选项的值的数组</param>
-        /// <param name="style">显示风格</param>
-        /// <param name="options">排版格式</param>
-        public static int Popup(int selectedValue, GUIContent[] displayedOptions, int[] optionValues, GUIStyle style, params GUILayoutOption[] options)
-        {
-            return EditorGUILayout.IntPopup(selectedValue, displayedOptions, optionValues, style, options);
-        }
-
-        /// <summary> 弹出整数选择字段 </summary>
-        /// <param name="label">标签</param>
-        /// <param name="selectedValue">字段显示的选项的值</param>
-        /// <param name="displayedOptions">一个具有用户可以选择的显示选项的数组</param>
-        /// <param name="optionValues">包含每个选项的值的数组</param>
-        /// <param name="style">显示风格</param>
-        /// <param name="options">排版格式</param>
-        public static int Popup(GUIContent label, int selectedValue, GUIContent[] displayedOptions, int[] optionValues, GUIStyle style, params GUILayoutOption[] options)
-        {
-            return EditorGUILayout.IntPopup(label, selectedValue, displayedOptions, optionValues, style, options);
-        }
-
-        /// <summary> 弹出整数选择字段 </summary>
-        /// <param name="displayedOptions">一个具有用户可以选择的显示选项的数组</param>
-        /// <param name="optionValues">包含每个选项的值的数组</param>
-        /// <param name="label">标签</param>
-        /// <param name="selectedValue">字段显示的选项的值</param>
-        /// <param name="options">排版格式</param>
-        /// <param name="style">显示风格</param>
-        public static int Popup(string label, int selectedValue, string[] displayedOptions, int[] optionValues, GUIStyle style, params GUILayoutOption[] options)
-        {
-            return EditorGUILayout.IntPopup(label, selectedValue, displayedOptions, optionValues, style, options);
-        }
-
-        /// <summary> 弹出整数选择字段 </summary>
-        /// <param name="displayedOptions">一个具有用户可以选择的显示选项的数组</param>
-        /// <param name="optionValues">包含每个选项的值的数组</param>
-        /// <param name="selectedValue">字段显示的选项的值</param>
-        /// <param name="options">排版格式</param>
-        public static int Popup(int selectedValue, string[] displayedOptions, int[] optionValues, params GUILayoutOption[] options)
-        {
-            return EditorGUILayout.IntPopup(selectedValue, displayedOptions, optionValues, options);
-        }
-
-        /// <summary> 弹出整数选择字段 </summary>
-        /// <param name="displayedOptions">一个具有用户可以选择的显示选项的数组</param>
-        /// <param name="optionValues">包含每个选项的值的数组</param>
-        /// <param name="selectedValue">字段显示的选项的值</param>
-        /// <param name="options">排版格式</param>
-        /// <param name="style">显示风格</param>
-        public static int Popup(int selectedValue, string[] displayedOptions, int[] optionValues, GUIStyle style, params GUILayoutOption[] options)
-        {
-            return EditorGUILayout.IntPopup(selectedValue, displayedOptions, optionValues, style, options);
-        }
-
-        /// <summary> 弹出整数选择字段 </summary>
-        /// <param name="displayedOptions">一个具有用户可以选择的显示选项的数组</param>
-        /// <param name="optionValues">包含每个选项的值的数组</param>
-        /// <param name="selectedValue">字段显示的选项的值</param>
-        /// <param name="options">排版格式</param>
-        public static int Popup(int selectedValue, GUIContent[] displayedOptions, int[] optionValues, params GUILayoutOption[] options)
-        {
-            return EditorGUILayout.IntPopup(selectedValue, displayedOptions, optionValues, options);
-        }
-
         #endregion
 
         #region 弹窗 Popup
@@ -300,7 +186,7 @@ namespace AIO.UEditor
         /// <param name="label">标签</param>
         /// <param name="selected">枚举值</param>
         /// <param name="checkEnabled">显示每个Enum值,返回指定的方法</param>
-        /// <param name="includeObsolete">true:包含带有eteattribute的枚举值,false:排除</param>
+        /// <param name="includeObsolete">true:包含带有attribute的枚举值,false:排除</param>
         /// <param name="options">排版格式</param>
         public static T Popup<T>(GUIContent label, T selected, Func<Enum, bool> checkEnabled, bool includeObsolete, params GUILayoutOption[] options) where T : Enum
         {
@@ -311,7 +197,7 @@ namespace AIO.UEditor
         /// <param name="label">标签</param>
         /// <param name="selected">枚举值</param>
         /// <param name="checkEnabled">显示每个Enum值,返回指定的方法</param>
-        /// <param name="includeObsolete">true:包含带有eteattribute的枚举值,false:排除</param>
+        /// <param name="includeObsolete">true:包含带有attribute的枚举值,false:排除</param>
         /// <param name="style">显示风格</param>
         /// <param name="options">排版格式</param>
         public static T Popup<T>(GUIContent label, T selected, Func<Enum, bool> checkEnabled, bool includeObsolete, GUIStyle style, params GUILayoutOption[] options) where T : Enum

@@ -13,99 +13,6 @@ namespace AIO.UEditor
 {
     public partial class GELayout
     {
-        /// <summary>
-        /// 绘制字段 float
-        /// </summary>
-        /// <param name="value">值</param>
-        /// <param name="style">显示风格</param>
-        /// <param name="options">排版格式</param>
-        public static float Field(float value, GUIStyle style, params GUILayoutOption[] options)
-        {
-            return EditorGUILayout.FloatField(value, style, options);
-        }
-
-        /// <summary>
-        /// 绘制字段 Int
-        /// </summary>
-        /// <param name="value">值</param>
-        /// <param name="style">显示风格</param>
-        /// <param name="options">排版格式</param>
-        public static int Field(int value, GUIStyle style, params GUILayoutOption[] options)
-        {
-            return EditorGUILayout.IntField(value, style, options);
-        }
-
-        /// <summary>
-        /// 绘制字段 Double
-        /// </summary>
-        /// <param name="value">值</param>
-        /// <param name="options">排版格式</param>
-        /// <param name="style">显示风格</param>
-        public static double Field(double value, GUIStyle style, params GUILayoutOption[] options)
-        {
-            return EditorGUILayout.DoubleField(value, style, options);
-        }
-
-        /// <summary>
-        /// 绘制字段 FieldLong
-        /// </summary>
-        /// <param name="value">值</param>
-        /// <param name="options">排版格式</param>
-        /// <param name="style">显示风格</param>
-        public static long Field(long value, GUIStyle style, params GUILayoutOption[] options)
-        {
-            return EditorGUILayout.LongField(value, style, options);
-        }
-
-        /// <summary>  
-        /// 绘制字段 AnimationCurve
-        /// </summary>
-        /// <param name="value">值 <see cref="AnimationCurve"/> </param>
-        /// <param name="ranges">范围</param>
-        /// <param name="options">排版格式</param>
-        /// <param name="color">颜色</param>
-        public static AnimationCurve Field(AnimationCurve value, Color color, Rect ranges,
-            params GUILayoutOption[] options)
-        {
-            return EditorGUILayout.CurveField(value, color, ranges, options);
-        }
-
-
-        /// <summary> 延迟文本 string </summary>
-        /// <param name="value">值</param>
-        /// <param name="style">显示风格</param>
-        /// <param name="options">排版格式</param>
-        public static string FieldDelayed(string value, GUIStyle style, params GUILayoutOption[] options)
-        {
-            return EditorGUILayout.DelayedTextField(value, style, options);
-        }
-
-        /// <summary> 延迟文本 double </summary>
-        /// <param name="value">值</param>
-        /// <param name="style">显示风格</param>
-        /// <param name="options">排版格式</param>
-        public static double FieldDelayed(double value, GUIStyle style, params GUILayoutOption[] options)
-        {
-            return EditorGUILayout.DelayedDoubleField(value, style, options);
-        }
-
-        /// <summary> 延迟文本 float </summary>
-        /// <param name="value">值</param>
-        /// <param name="style">显示风格</param>
-        /// <param name="options">排版格式</param>
-        public static float FieldDelayed(float value, GUIStyle style, params GUILayoutOption[] options)
-        {
-            return EditorGUILayout.DelayedFloatField(value, style, options);
-        }
-
-        /// <summary> 延迟文本 int </summary>
-        /// <param name="value">值</param>
-        /// <param name="style">显示风格</param>
-        /// <param name="options">排版格式</param>
-        public static float FieldDelayed(int value, GUIStyle style, params GUILayoutOption[] options)
-        {
-            return EditorGUILayout.DelayedIntField(value, style, options);
-        }
 
         #region 物体文本框 FieldObject
 
@@ -163,19 +70,6 @@ namespace AIO.UEditor
         /// 绘制 Object 字段 T
         /// </summary>
         /// <param name="type">Object Type</param>
-        /// <param name="allowSceneObjects">允许场景对象</param>
-        /// <param name="value">值 <see cref="UnityEngine.Object"/> </param>
-        /// <param name="options">排版格式</param>
-        public static T Field<T>(T value, Type type, bool allowSceneObjects, params GUILayoutOption[] options)
-            where T : Object
-        {
-            return (T)EditorGUILayout.ObjectField(value, type, allowSceneObjects, options);
-        }
-
-        /// <summary>  
-        /// 绘制 Object 字段 T
-        /// </summary>
-        /// <param name="type">Object Type</param>
         /// <param name="value">值 <see cref="UnityEngine.Object"/> </param>
         /// <param name="options">排版格式</param>
         public static T Field<T>(T value, Type type, params GUILayoutOption[] options) where T : Object
@@ -184,17 +78,6 @@ namespace AIO.UEditor
         }
 
         #endregion
-
-        /// <summary>  
-        /// 绘制字段 string
-        /// </summary>
-        /// <param name="value">值 <see cref="string"/> </param>
-        /// <param name="options">排版格式</param>
-        /// <param name="style">风格</param>
-        public static string Field(string value, GUIStyle style, params GUILayoutOption[] options)
-        {
-            return EditorGUILayout.TextField(value, style, options);
-        }
 
 
         #region Path
@@ -258,26 +141,46 @@ namespace AIO.UEditor
 
         #endregion
 
-        /// <summary>
-        /// 绘制 密码文本框 string
-        /// </summary>
-        /// <param name="password">遮掩码</param>
+        #region 最小最大滑动条
+
+        /// <summary> 最小最大滑动条 </summary>
+        /// <param name="minValue">滑动条最左边的值</param>
+        /// <param name="maxValue">滑动条最右边的值</param>
+        /// <param name="minLimit">限制滑动条最左边的值</param>
+        /// <param name="maxLimit">限制滑动条最右边的值</param>
         /// <param name="options">排版格式</param>
-        /// <param name="style">显示风格</param>
-        public static string Password(string password, GUIStyle style, params GUILayoutOption[] options)
+        public static void Slider(ref float minValue, ref float maxValue, float minLimit, float maxLimit,
+            params GUILayoutOption[] options)
         {
-            return EditorGUILayout.PasswordField(password, style, options);
+            EditorGUILayout.MinMaxSlider(ref minValue, ref maxValue, minLimit, maxLimit, options);
         }
 
-        /// <summary>  
-        /// 绘制 Layer 字段 int
-        /// </summary>
-        /// <param name="layer">层数</param>
+        /// <summary> 最小最大滑动条 </summary>
+        /// <param name="label">标签</param>
+        /// <param name="minValue">滑动条最左边的值</param>
+        /// <param name="maxValue">滑动条最右边的值</param>
+        /// <param name="minLimit">限制滑动条最左边的值</param>
+        /// <param name="maxLimit">限制滑动条最右边的值</param>
         /// <param name="options">排版格式</param>
-        /// <param name="style">显示风格</param>
-        public static int Layer(int layer, GUIStyle style, params GUILayoutOption[] options)
+        public static void Slider(string label, ref float minValue, ref float maxValue, float minLimit,
+            float maxLimit, params GUILayoutOption[] options)
         {
-            return EditorGUILayout.LayerField(layer, style, options);
+            EditorGUILayout.MinMaxSlider(label, ref minValue, ref maxValue, minLimit, maxLimit, options);
         }
+
+        /// <summary> 最小最大滑动条 </summary>
+        /// <param name="label">标签</param>
+        /// <param name="minValue">滑动条最左边的值</param>
+        /// <param name="maxValue">滑动条最右边的值</param>
+        /// <param name="minLimit">限制滑动条最左边的值</param>
+        /// <param name="maxLimit">限制滑动条最右边的值</param>
+        /// <param name="options">排版格式</param>
+        public static void Slider(GUIContent label, ref float minValue, ref float maxValue, float minLimit,
+            float maxLimit, params GUILayoutOption[] options)
+        {
+            EditorGUILayout.MinMaxSlider(label, ref minValue, ref maxValue, minLimit, maxLimit, options);
+        }
+
+        #endregion
     }
 }

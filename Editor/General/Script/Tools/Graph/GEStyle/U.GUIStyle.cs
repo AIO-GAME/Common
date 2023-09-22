@@ -34,11 +34,16 @@ namespace AIO.UEditor
         ///
         /// </summary>
         public static UGUIStyle WhiteLargeCenterLabel => Get("WhiteLargeCenterLabel");
-
+        
         /// <summary>
         ///
         /// </summary>
         public static UGUIStyle LargeButton => Get(nameof(LargeButton));
+        
+        /// <summary>
+        ///
+        /// </summary>
+        public static UGUIStyle FoldoutHeader => Get(nameof(FoldoutHeader));
 
         /// <summary>
         ///

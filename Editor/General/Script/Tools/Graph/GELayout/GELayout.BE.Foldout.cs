@@ -148,7 +148,7 @@ namespace AIO.UEditor
             if (action == null) return false;
             Space();
 #if UNITY_2019_1_OR_NEWER
-            foldout = Toggle(content, foldout, style ?? "FoldoutHeader");
+            foldout = Toggle(content, foldout, style ?? GEStyle.FoldoutHeader);
 #else
                 foldout = Toggle(content, foldout, style ?? "GUIEditor.BreadcrumbLeft");
 #endif

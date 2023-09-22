@@ -2,197 +2,133 @@
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System"#>
 <#@ import namespace="System.Collections"#>
+<#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" encoding="utf-8" #>
-<#@ include file="ClassParam.ttinclude" #>
+<#@ include file="GELayout.AC.Field.ttinclude" #>
 <#
-    var classParams = new List<ClassParam>
+    var singleton = new ClassParamSingleton();
+    var headers = new List<FunctionParam>
     {
-        new ClassParam()
-        {
-            FunctionName = "Field",
-            InputType = "AnimationCurve",
-            APIFunction = "EditorGUILayout.CurveField",
-            FunctionParams = new Dictionary<string, List<FunctionParam>>()
-            {
-                {
-                    "1", new List<FunctionParam>()
-                    {
-                        new FunctionParam { Type = "Color", Name = "color" },
-                        new FunctionParam { Type = "Rect", Name = "ranges" },
-                    }
-                }
-            }
-        },
-        new ClassParam()
-        {
-            FunctionName = "Field",
-            InputType = "Color",
-            APIFunction = "EditorGUILayout.ColorField",
-            FunctionParams = new Dictionary<string, List<FunctionParam>>()
-            {
-                {
-                    "1", new List<FunctionParam>()
-                    {
-                        new FunctionParam { Type = "bool", Name = "showEyedropper" },
-                        new FunctionParam { Type = "bool", Name = "showAlpha" },
-                        new FunctionParam { Type = "bool", Name = "hdr" },
-                    }
-                }
-            }
-        },
-        new ClassParam()
-        {
-            Comments = "绘制渐变字段",
-            FunctionName = "Field",
-            InputType = "Gradient",
-            APIFunction = "EditorGUILayout.GradientField",
-            MacroDefinition = new Dictionary<string, string>()
-            {
-                { "0", "UNITY_2019_1_OR_NEWER" },
-                { "1", "UNITY_2019_1_OR_NEWER" },
-            },
-            FunctionParams = new Dictionary<string, List<FunctionParam>>()
-            {
-                {
-                    "1", new List<FunctionParam>()
-                    {
-                        new FunctionParam { Type = "bool", Name = "hdr" },
-                    }
-                }
-            }
-        },
-        new ClassParam()
-        {
-            FunctionName = "Field",
-            InputType = "string",
-            APIFunction = "EditorGUILayout.TextField",
-            FunctionParams = new Dictionary<string, List<FunctionParam>>()
-            {
-                {
-                    "1", new List<FunctionParam>()
-                    {
-                        new FunctionParam { Type = "GUIStyle", Name = "style" },
-                    }
-                }
-            }
-        },
-        new ClassParam()
-        {
-            Comments = "绘制 Object 字段",
-            FunctionName = "Field",
-            InputType = "T",
-            Generics = "UnityEngine.Object",
-            APIFunction = "EditorGUILayout.ObjectField",
-            FunctionParams = new Dictionary<string, List<FunctionParam>>()
-            {
-                {
-                    "1", new List<FunctionParam>()
-                    {
-                        new FunctionParam { Type = "Type", Name = "type" },
-                        new FunctionParam { Type = "bool", Name = "allowSceneObjects" },
-                    }
-                }
-            }
-        },
-        new ClassParam()
-        {
-            Comments = "绘制 Layer 字段",
-            FunctionName = "Layer",
-            InputType = "int",
-            APIFunction = "EditorGUILayout.LayerField",
-            FunctionParams = new Dictionary<string, List<FunctionParam>>()
-            {
-                {
-                    "1", new List<FunctionParam>()
-                    {
-                        new FunctionParam { Type = "GUIStyle", Name = "style" },
-                    }
-                }
-            }
-        },
-        new ClassParam()
-        {
-            Comments = "绘制 密码文本框",
-            FunctionName = "Password",
-            InputType = "string",
-            APIFunction = "EditorGUILayout.PasswordField",
-            FunctionParams = new Dictionary<string, List<FunctionParam>>()
-            {
-                {
-                    "1", new List<FunctionParam>()
-                    {
-                        new FunctionParam { Type = "GUIStyle", Name = "style" },
-                    }
-                }
-            }
-        },
+        null,
+        new FunctionParam("string", "label", "new GUIContent(label)") { Comments = "标题" },
+        new FunctionParam("GUIContent", "label", "label") { Comments = "标题" },
+        new FunctionParam("Texture", "label", "new GUIContent(label)") { Comments = "标题" },
     };
 
-    var types = new string[] { "float", "int", "double", "long" };
-    foreach (var type in types)
+    var filter_no_label = new List<string> // 在没有Label的情况下过滤直接过滤
     {
-        var param = new ClassParam()
-        {
-            FunctionName = "Field",
-            InputType = type,
-            APIFunction = $"EditorGUILayout.{char.ToUpper(type[0])}{type.Substring(1, type.Length - 1)}Field",
-            FunctionParams = new Dictionary<string, List<FunctionParam>>()
-            {
-                {
-                    "1", new List<FunctionParam>()
-                    {
-                        new FunctionParam { Type = "GUIStyle", Name = "style" },
-                    }
-                }
-            }
-        };
-        classParams.Add(param);
-    }
-    var delayedTypes = new string[] { "float", "int", "double", "text" };
-    foreach (var type in delayedTypes)
-    {
-        var param = new ClassParam()
-        {
-            Comments = "绘制延迟字段",
-            FunctionName = "FieldDelayed",
-            InputType = type == "text" ? "string" : type,
-            APIFunction = $"EditorGUILayout.Delayed{char.ToUpper(type[0])}{type.Substring(1, type.Length - 1)}Field",
-            FunctionParams = new Dictionary<string, List<FunctionParam>>()
-            {
-                {
-                    "1", new List<FunctionParam>()
-                    {
-                        new FunctionParam { Type = "GUIStyle", Name = "style" },
-                    }
-                }
-            }
-        };
-        classParams.Add(param);
-    }
-    var simpleTypes = new string[]
-    {
-        "Bounds", "BoundsInt",
-        "RectInt", "Rect",
-        "Vector2", "Vector2Int",
-        "Vector3", "Vector3Int",
-        "Vector4"
+        "Vector",
+        "ToggleLeft",
     };
-    foreach (var type in simpleTypes)
-    {
-        var param = new ClassParam()
-        {
-            FunctionName = "Field",
-            InputType = type,
-            APIFunction = $"EditorGUILayout.{char.ToUpper(type[0])}{type.Substring(1, type.Length - 1)}Field",
-        };
-        classParams.Add(param);
-    }
 
-    foreach (var classParm in classParams)
+    var filter_no_label_ext = new List<string> // 在没有Label的情况下过滤扩展字段
     {
-        if (classParm.APIFunction == "EditorGUILayout.ObjectField") continue;
-        classParm.FunctionParams.Add("0", new List<FunctionParam>());
+        "Vector",
+        "GradientField",
+        "ColorField",
+        "ToggleLeft",
+    };
+
+    var filter_header = new List<string>
+    {
+        "IntPopup",
+    };
+
+    var filter_total = new List<string>
+    {
+        "HelpBox",
+    };
+
+    var filter_no_ext_no_auto_add = new List<string> // 过滤没有扩展字段 就不自动扩增值
+    {
+        "EditorGUILayout.IntPopup",
+        "EditorGUILayout.Slider",
+        "EditorGUILayout.IntSlider",
+        "EditorGUILayout.ObjectField",
+    };
+    var ClassParams = new List<ClassParam>();
+    foreach (var classParm in singleton.ClassParams)
+    {
+        if (classParm.FunctionParams == null)
+        {
+            classParm.FunctionParams = new Dictionary<string, List<FunctionParam>>();
+        }
+
+        if (!classParm.FunctionParams.ContainsKey("-1") &&
+            !filter_no_ext_no_auto_add.Any(vale => classParm.APIFunction.Contains(vale)))
+        {
+            classParm.FunctionParams.Add("-1", new List<FunctionParam>());
+        }
+
+        var temp = new ClassParam
+        {
+            FunctionName = classParm.FunctionName ?? "Field",
+            Comments = classParm.Comments ?? "绘制字段",
+            InputType = classParm.InputType,
+            APIFunction = classParm.APIFunction ?? "[请输入API]",
+            ReturnType = classParm.ReturnType ?? "[请输入返回类型]",
+            Generics = classParm.Generics,
+            MacroDefinition = classParm.MacroDefinition,
+            FunctionParams = new Dictionary<string, List<FunctionParam>>()
+        };
+
+        foreach (var header in headers)
+        {
+            foreach (var functionParam in classParm.FunctionParams)
+            {
+                var list = new List<FunctionParam>();
+                if (filter_total.Any(vale => classParm.APIFunction.Contains(vale)))
+                {
+                    if (functionParam.Key == "-1") continue;
+                    if (temp.FunctionParams.ContainsKey(functionParam.Key)) continue;
+                    temp.FunctionParams.Add(functionParam.Key, functionParam.Value);
+                    continue;
+                }
+
+                if (filter_header.Any(vale => classParm.APIFunction.Contains(vale)))
+                {
+                    if (temp.FunctionParams.ContainsKey(functionParam.Key)) continue;
+
+                    list.AddRange(functionParam.Value);
+                    list.Add(new FunctionParam("GUILayoutOption", "options", "options")
+                    {
+                        IsParams = true,
+                        Comments = "格式参数"
+                    });
+                    temp.FunctionParams.Add(functionParam.Key, list);
+                    continue;
+                }
+
+                if (header != null)
+                {
+                    list.Add(header);
+                    list.Add(new FunctionParam(temp.InputType, "value", "value") { Comments = "值" });
+                    list.AddRange(functionParam.Value);
+                    list.Add(new FunctionParam("GUILayoutOption", "options", "options")
+                    {
+                        IsParams = true,
+                        Comments = "格式参数"
+                    });
+                }
+                else
+                {
+                    if (filter_no_label.Any(vale => classParm.APIFunction.Contains(vale))) continue;
+                    list.Add(new FunctionParam(temp.InputType, "value", "value"));
+                    if (!filter_no_label_ext.Any(vale => classParm.APIFunction.Contains(vale)))
+                        list.AddRange(functionParam.Value);
+                    list.Add(new FunctionParam("GUILayoutOption", "options", "options")
+                    {
+                        IsParams = true,
+                        Comments = "格式参数"
+                    });
+                }
+
+                temp.FunctionParams.Add(string.Concat(functionParam.Key, header?.Type), list);
+            }
+        }
+
+        ClassParams.Add(temp);
     }
 #>
 /*|✩ - - - - - |||
@@ -203,114 +139,59 @@
 using System;
 using UnityEditor;
 using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AIO.UEditor
 {
 <#
-    foreach (var classParam in classParams)
+    var headerDic = new Dictionary<string, int>();
+    foreach (var classParam in ClassParams)
     {
 #>
 
-    #region <#= classParam.InputType #> : <#= classParam.APIFunction #>
-
+    #region <#= string.IsNullOrEmpty(classParam.InputType) ? "" : classParam.InputType #> : <#= classParam.APIFunction #>
+<#
+        if (!string.IsNullOrEmpty(classParam.MacroDefinition))
+        {
+#>
+<#=
+                string.Concat("\n#if ", classParam.MacroDefinition) #>
+<#
+        }
+#>
     public partial class GELayout 
     {
 <#
         foreach (var item in classParam.FunctionParams)
         {
-            var argInput = classParam.GetFunctionParams(item.Key);
+            var header = classParam.GetFunctionHeader(item.Key, "        ");
+            if (headerDic.ContainsKey(header)) continue;
+            headerDic.Add(header, 0);
             var argOutput = classParam.GetFunctionValueParams(item.Key);
-            var argStr = string.IsNullOrEmpty(argInput) ? string.Empty : string.Concat(" ", argInput, ",");
-            var generics = string.IsNullOrEmpty(classParam.Generics)
+            var genericsCast = classParam.Generics == null || classParam.Generics.Count == 0
                 ? string.Empty
-                : string.Format("<{0}>", classParam.InputType);
-            var genericsWhere = string.IsNullOrEmpty(classParam.Generics)
-                ? string.Empty
-                : string.Format("where {0} : {1}", classParam.InputType, classParam.Generics);
-            var genericsCast = string.IsNullOrEmpty(classParam.Generics)
-                ? string.Empty
-                : string.Format("({0})", classParam.InputType);
-            if (classParam.MacroDefinition.ContainsKey(item.Key) &&
-                !string.IsNullOrEmpty(classParam.MacroDefinition[item.Key]))
-            {
+                : string.Format("({0})", classParam.ReturnType);
+            var comment = "\r\n" + classParam.GetFunctionComment(item.Key, "绘制字段", classParam.InputType, "        ");
 #>
+<#= comment #>
+<#= header #>
+        {
 <#=
-                    string.Concat("\n#if ", classParam.MacroDefinition[item.Key], "\n") #>
-<#
-            }
-#>
-<#
-            if (string.IsNullOrEmpty(argInput) && !classParam.InputType.Contains("Vector"))
-            {
-#>
-        /// <summary>  
-        /// <#=
-                    string.IsNullOrEmpty(classParam.Comments) ? "绘制字段" : classParam.Comments #> <#= classParam.InputType #>
-        /// </summary>
-        /// <param name="value">值 <see cref="<#=
-                    string.IsNullOrEmpty(generics) ? classParam.InputType : classParam.Generics #>"/> </param>
-        /// <param name="options">排版格式</param>
-        public static <#= classParam.InputType #> <#= classParam.FunctionName #><#= generics #>(<#= classParam.InputType #> value, params GUILayoutOption[] options) <#= genericsWhere #>
-        {
-            return <#= genericsCast #><#= classParam.APIFunction #>(value, options);
+                    classParam.GetFunctionContent(item.Key, "            ") #>
         }
-
-<#
-            }
-#>
-        /// <summary>  
-        /// <#=
-                string.IsNullOrEmpty(classParam.Comments) ? "绘制字段" : classParam.Comments #> <#= classParam.InputType #>
-        /// </summary>
-        /// <param name="label">标签</param>
-        /// <param name="value">值 <see cref="<#=
-                string.IsNullOrEmpty(generics) ? classParam.InputType : classParam.Generics #>"/> </param>
-        /// <param name="options">排版格式</param>
-        public static <#= classParam.InputType #> <#= classParam.FunctionName #><#= generics #>(string label, <#= classParam.InputType #> value,<#= argStr #> params GUILayoutOption[] options) <#= genericsWhere #>
-        {
-            return <#= genericsCast #><#= classParam.APIFunction #>(new GUIContent(label), value, <#= argOutput #>options);
-        }
-
-        /// <summary>  
-        /// <#=
-                string.IsNullOrEmpty(classParam.Comments) ? "绘制字段" : classParam.Comments #> <#= classParam.InputType #>
-        /// </summary>
-        /// <param name="label">标签</param>
-        /// <param name="value">值 <see cref="<#=
-                string.IsNullOrEmpty(generics) ? classParam.InputType : classParam.Generics #>"/> </param>
-        /// <param name="options">排版格式</param>
-        public static <#= classParam.InputType #> <#= classParam.FunctionName #><#= generics #>(GUIContent label, <#= classParam.InputType #> value,<#= argStr #> params GUILayoutOption[] options) <#= genericsWhere #>
-        {
-            return <#= genericsCast #><#= classParam.APIFunction #>(label, value, <#= argOutput #> options);
-        }
-
-        /// <summary>  
-        /// <#=
-                string.IsNullOrEmpty(classParam.Comments) ? "绘制字段" : classParam.Comments #> <#= classParam.InputType #>
-        /// </summary>
-        /// <param name="label">标签</param>
-        /// <param name="value">值 <see cref="<#=
-                string.IsNullOrEmpty(generics) ? classParam.InputType : classParam.Generics #>"/> </param>
-        /// <param name="options">排版格式</param>
-        public static <#= classParam.InputType #> <#= classParam.FunctionName #><#= generics #>(Texture label, <#= classParam.InputType #> value,<#= argStr #> params GUILayoutOption[] options) <#= genericsWhere #>
-        {
-            return <#= genericsCast #><#= classParam.APIFunction #>(new GUIContent(label), value, <#= argOutput #> options);
-        }
-
-<#
-            if (classParam.MacroDefinition.ContainsKey(item.Key) &&
-                !string.IsNullOrEmpty(classParam.MacroDefinition[item.Key]))
-            {
-#>
-<#= "\n#endif" #>
-<#
-            }
-#>
 <#
         }
 #>
     }
-
+<#
+        if (!string.IsNullOrEmpty(classParam.MacroDefinition))
+        {
+#>
+<#= "\n#endif" #>
+<#
+        }
+#>
     #endregion
 <#
     }
