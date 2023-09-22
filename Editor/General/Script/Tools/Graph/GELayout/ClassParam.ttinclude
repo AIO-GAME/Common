@@ -26,7 +26,22 @@
         /// <summary>
         /// 泛型类型
         /// </summary>
-        public string Generics { get; set; }
+        public Dictionary<string, string> Generics { get; set; }
+
+        /// <summary>
+        /// 返回类型
+        /// </summary>
+        public string ReturnType { get; set; } = "void";
+
+        /// <summary>
+        /// 是否静态
+        /// </summary>
+        public bool IsStatic { get; set; } = true;
+
+        /// <summary>
+        /// 可访问性 public private protected internal
+        /// </summary>
+        public string Accessibility { get; set; } = "public";
 
         /// <summary>
         /// 函数参数
@@ -36,43 +51,171 @@
         /// <summary>
         /// 宏定义
         /// </summary>
-        public Dictionary<string, string> MacroDefinition { get; set; }
+        public string MacroDefinition { get; set; }
 
         public ClassParam()
         {
             FunctionParams = new Dictionary<string, List<FunctionParam>>();
-            MacroDefinition = new Dictionary<string, string>();
         }
 
         public string GetFunctionParams(string key)
         {
-            if (!FunctionParams.ContainsKey(key)) return "";
+            if (!FunctionParams.ContainsKey(key)) return string.Empty;
             var sb = new StringBuilder();
             foreach (var param in FunctionParams[key])
-                sb.Append(param.Type + " " + param.Name + ", ");
-            return sb.ToString().TrimEnd(',', ' ');
+            {
+                sb.Append(param.IsParams
+                    ? string.Concat("params ", param.Type, "[] ", param.Name, ", ")
+                    : string.Concat(param.Type, ' ', param.Name, ", "));
+            }
+            return sb.ToString().TrimStart(' ').TrimEnd(',', ' ');
         }
 
         public string GetFunctionValueParams(string key)
         {
-            if (!FunctionParams.ContainsKey(key)) return "";
+            if (!FunctionParams.ContainsKey(key)) return string.Empty;
             var sb = new StringBuilder();
             foreach (var param in FunctionParams[key])
-                sb.Append(param.Name + ", ");
-            return sb.ToString().TrimEnd(' ');
+                sb.Append(param.Output + ", ");
+            return sb.Length == 0 ? string.Empty : sb.ToString().TrimEnd(',', ' ');
+        }
+
+        private string GetParamComment(string key, string space = "")
+        {
+            if (!FunctionParams.ContainsKey(key)) return string.Empty;
+            var sb = new StringBuilder();
+            foreach (var param in FunctionParams[key])
+                sb.AppendFormat(
+                    "{3}/// <param name=\"{0}\">{2} <see cref=\"{1}\"/></param>\r\n",
+                    param.Name,
+                    param.Type.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;"),
+                    param.Comments,
+                    space);
+            return sb.Length == 0 ? string.Empty : sb.ToString();
+        }
+
+        public string GetFunctionComment(string key, string def = "", string ext = "", string space = "")
+        {
+            if (!FunctionParams.ContainsKey(key)) return string.Empty;
+            var sb = new StringBuilder();
+            sb.AppendFormat("{0}/// <summary>\r\n", space);
+            sb.AppendFormat("{0}/// {1} {2}\r\n", space, string.IsNullOrEmpty(Comments) ? def : Comments, ext);
+            sb.AppendFormat("{0}/// </summary>\r\n", space);
+            var param = GetParamComment(key, space);
+            if (!string.IsNullOrEmpty(param)) sb.Append(param);
+            if (ReturnType != "void")
+                sb.AppendFormat("{0}/// <returns><see cref=\"{1}\"/></returns>\r\n",
+                    space,
+                    ReturnType.Replace("<", "&lt;").Replace(">", "&gt;").Replace("&", "&amp;"));
+            return sb.Length == 0 ? string.Empty : sb.ToString().TrimEnd('\r', '\n');
+        }
+
+        public string GetFunctionHeader(string key, string space = "")
+        {
+            if (!FunctionParams.ContainsKey(key)) return string.Empty;
+            var sb = new StringBuilder();
+            if (Generics is null || Generics.Count == 0)
+            {
+                sb.AppendFormat("{0}{1} {2} {3} {4}({5})\r\n", space,
+                    Accessibility,
+                    IsStatic ? "static" : string.Empty,
+                    ReturnType,
+                    FunctionName,
+                    GetFunctionParams(key));
+            }
+            else
+            {
+                var generics = new StringBuilder("where");
+                var first = new StringBuilder();
+                foreach (var item in Generics)
+                {
+                    generics.AppendFormat(" {0} : {1}", item.Key, item.Value);
+                    first.AppendFormat(" {0},", item.Key);
+                }
+
+                sb.AppendFormat("{0}{1} {2} {3} {4}<{7}>({5}) {6}\r\n", space,
+                    Accessibility,
+                    IsStatic ? " static" : string.Empty,
+                    ReturnType,
+                    FunctionName,
+                    GetFunctionParams(key),
+                    generics,
+                    first.ToString().Trim(' ', ','));
+            }
+
+            return sb.Length == 0 ? string.Empty : sb.ToString().TrimEnd('\r', '\n');
+        }
+        
+        public string GetFunctionContent(string key, string space = "")
+        {
+            if (!FunctionParams.ContainsKey(key)) return string.Empty;
+            var sb = new StringBuilder();
+            var genericsCast = Generics == null || Generics.Count == 0
+                ? string.Empty
+                : string.Format("({0})", ReturnType);
+            var argOutput = GetFunctionValueParams(key);
+            if (ReturnType == "void")
+            {
+                sb.AppendFormat("{0} {1}{2}({3});", space,
+                    genericsCast,
+                    APIFunction,
+                    argOutput);
+            }
+            else
+            {
+                sb.AppendFormat("{0}return {1}{2}({3});", space,
+                    genericsCast,
+                    APIFunction,
+                    argOutput);
+            }
+            return sb.Length == 0 ? string.Empty : sb.ToString().TrimEnd('\r', '\n');
         }
     }
 
     public class FunctionParam
     {
         /// <summary>
-        /// 注释
+        /// 参数类型
         /// </summary>
         public string Type { get; set; }
 
         /// <summary>
-        /// 注释
+        /// 是否可选参数
+        /// </summary>
+        public bool IsParams { get; set; } = false;
+
+        /// <summary>
+        /// 参数名
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// 参数输出
+        /// </summary>
+        public string Output { get; set; }
+
+        /// <summary>
+        /// 注释描述
+        /// </summary>
+        public string Comments { get; set; }
+
+        public FunctionParam()
+        {
+        }
+
+        public FunctionParam(string type, string name)
+        {
+            Type = type;
+            Name = name;
+            Output = Name;
+        }
+
+        public FunctionParam(string type, string name, string output)
+        {
+            Type = type;
+            Name = name;
+            Output = output;
+            if (string.IsNullOrEmpty(Output)) Output = Name;
+        }
     }
 #>
