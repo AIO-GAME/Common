@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace AIO.UEditor
 {
-    public static partial class GELayout
+    public partial class GELayout
     {
         public static void Field<T>(string label,
             IList<T> list,

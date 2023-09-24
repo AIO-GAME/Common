@@ -8,7 +8,7 @@ using UnityEditor;
 
 namespace AIO.UEditor
 {
-    public static partial class GELayout
+    public partial class GELayout
     {
         #region 隔行
 
@@ -49,18 +49,11 @@ namespace AIO.UEditor
         /// <summary>
         /// 隔行
         /// </summary>
-        public static void Space(float width, int num = 1)
-        {
-            for (var i = 0; i < num; i++) EditorGUILayout.Space(width, true);
-        }
-
-        /// <summary>
-        /// 隔行
-        /// </summary>
-        public static void Space(float width, bool expand, int num = 1)
+        public static void Space(int num, float width, bool expand = true)
         {
             for (var i = 0; i < num; i++) EditorGUILayout.Space(width, expand);
         }
+
 #endif
 
         #endregion

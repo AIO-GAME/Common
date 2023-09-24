@@ -143,7 +143,8 @@ namespace AIO.UEditor
         /// <param name="content">标签</param>
         /// <param name="style">显示风格</param>
         public static bool FoldoutHeaderToggle(Action action, bool foldout, GUIContent content,
-            [UDefaultValue("EditorStyles.foldoutHeader")] GUIStyle style = null)
+            [UDefaultValue("EditorStyles.foldoutHeader")]
+            GUIStyle style = null)
         {
             if (action == null) return false;
             Space();
@@ -186,7 +187,8 @@ namespace AIO.UEditor
         /// <param name="style">显示风格</param>
         /// <returns>true:呈现子对象,false:隐藏</returns>
         public static bool Foldout(GUIContent content, bool foldout,
-            [UDefaultValue("EditorStyles.foldout")] GUIStyle style)
+            [UDefaultValue("EditorStyles.foldout")]
+            GUIStyle style)
         {
             return EditorGUILayout.Foldout(foldout, content, style);
         }
@@ -208,7 +210,8 @@ namespace AIO.UEditor
         /// <param name="toggleOnLabelClick">是否在单击标签时切换折叠状态</param>
         /// <returns>true:呈现子对象,false:隐藏</returns>
         public static bool Foldout(GUIContent content, bool foldout, bool toggleOnLabelClick,
-            [UDefaultValue("EditorStyles.foldout")] GUIStyle style)
+            [UDefaultValue("EditorStyles.foldout")]
+            GUIStyle style)
         {
             return EditorGUILayout.Foldout(foldout, content, toggleOnLabelClick, style);
         }
@@ -231,7 +234,8 @@ namespace AIO.UEditor
         /// <param name="toggleOnLabelClick">是否在单击标签时切换折叠状态</param>
         /// <returns>true:呈现子对象,false:隐藏</returns>
         public static bool Foldout(string content, bool foldout, bool toggleOnLabelClick,
-            [UDefaultValue("EditorStyles.foldout")] GUIStyle style)
+            [UDefaultValue("EditorStyles.foldout")]
+            GUIStyle style)
         {
             return EditorGUILayout.Foldout(foldout, content, toggleOnLabelClick, style);
         }

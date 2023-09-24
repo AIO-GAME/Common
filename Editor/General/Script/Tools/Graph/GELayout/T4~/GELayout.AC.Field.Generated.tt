@@ -5,9 +5,10 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" encoding="utf-8" #>
-<#@ include file="GELayout.AC.Field.ttinclude" #>
+<#@ include file="GELayout.AC.Field.ttinclude" #><#@ import namespace="System.Reflection" #>
 <#
     var singleton = new ClassParamSingleton();
+
     var headers = new List<FunctionParam>
     {
         null,
@@ -18,26 +19,38 @@
 
     var filter_no_label = new List<string> // 在没有Label的情况下过滤直接过滤
     {
-        "Vector",
-        "ToggleLeft",
+        "EditorGUILayout.Vector",
+        "EditorGUILayout.ToggleLeft",
     };
 
     var filter_no_label_ext = new List<string> // 在没有Label的情况下过滤扩展字段
     {
-        "Vector",
-        "GradientField",
-        "ColorField",
-        "ToggleLeft",
+        "EditorGUILayout.Vector",
+        "EditorGUILayout.GradientField",
+        "EditorGUILayout.ColorField",
+        "EditorGUILayout.ToggleLeft",
     };
 
     var filter_header = new List<string>
     {
-        "IntPopup",
+        "EditorGUILayout.IntPopup",
     };
 
     var filter_total = new List<string>
     {
-        "HelpBox",
+        "EditorGUILayout.TextArea",
+        "EditorGUILayout.HelpBox",
+        "EditorGUILayout.LabelField",
+        "EditorGUILayout.PrefixLabel",
+        "EditorGUILayout.SelectableLabel",
+        "EditorGUILayout.MaskField",
+        "EditorGUILayout.EnumFlagsField",
+        "EditorGUILayout.EnumMaskPopup",
+        "EditorGUILayout.EnumMaskField",
+        "EditorGUILayout.Popup",
+        "EditorGUILayout.EnumPopup",
+        "EditorGUILayout.DropdownButton",
+        "EditorGUILayout.LinkButton",
     };
 
     var filter_no_ext_no_auto_add = new List<string> // 过滤没有扩展字段 就不自动扩增值
@@ -47,18 +60,18 @@
         "EditorGUILayout.IntSlider",
         "EditorGUILayout.ObjectField",
     };
+
     var ClassParams = new List<ClassParam>();
     foreach (var classParm in singleton.ClassParams)
     {
-        if (classParm.FunctionParams == null)
+        if (classParm.FunctionParams is null)
         {
-            classParm.FunctionParams = new Dictionary<string, List<FunctionParam>>();
+            classParm.FunctionParams = new List<FunctionParam[]>();
         }
 
-        if (!classParm.FunctionParams.ContainsKey("-1") &&
-            !filter_no_ext_no_auto_add.Any(vale => classParm.APIFunction.Contains(vale)))
+        if (!filter_no_ext_no_auto_add.Any(vale => classParm.APIFunction.Contains(vale)))
         {
-            classParm.FunctionParams.Add("-1", new List<FunctionParam>());
+            classParm.FunctionParams.Add(null);
         }
 
         var temp = new ClassParam
@@ -70,7 +83,7 @@
             ReturnType = classParm.ReturnType ?? "[请输入返回类型]",
             Generics = classParm.Generics,
             MacroDefinition = classParm.MacroDefinition,
-            FunctionParams = new Dictionary<string, List<FunctionParam>>()
+            FunctionParams = new List<FunctionParam[]>()
         };
 
         foreach (var header in headers)
@@ -78,25 +91,22 @@
             foreach (var functionParam in classParm.FunctionParams)
             {
                 var list = new List<FunctionParam>();
-                if (filter_total.Any(vale => classParm.APIFunction.Contains(vale)))
+                if (filter_total.Any(vale => classParm.APIFunction == vale))
                 {
-                    if (functionParam.Key == "-1") continue;
-                    if (temp.FunctionParams.ContainsKey(functionParam.Key)) continue;
-                    temp.FunctionParams.Add(functionParam.Key, functionParam.Value);
+                    if (functionParam is null) continue;
+                    temp.FunctionParams.Add(functionParam);
                     continue;
                 }
 
                 if (filter_header.Any(vale => classParm.APIFunction.Contains(vale)))
                 {
-                    if (temp.FunctionParams.ContainsKey(functionParam.Key)) continue;
-
-                    list.AddRange(functionParam.Value);
+                    if (functionParam != null) list.AddRange(functionParam);
                     list.Add(new FunctionParam("GUILayoutOption", "options", "options")
                     {
                         IsParams = true,
                         Comments = "格式参数"
                     });
-                    temp.FunctionParams.Add(functionParam.Key, list);
+                    temp.FunctionParams.Add(list.ToArray());
                     continue;
                 }
 
@@ -104,7 +114,7 @@
                 {
                     list.Add(header);
                     list.Add(new FunctionParam(temp.InputType, "value", "value") { Comments = "值" });
-                    list.AddRange(functionParam.Value);
+                    if (functionParam != null) list.AddRange(functionParam);
                     list.Add(new FunctionParam("GUILayoutOption", "options", "options")
                     {
                         IsParams = true,
@@ -116,7 +126,7 @@
                     if (filter_no_label.Any(vale => classParm.APIFunction.Contains(vale))) continue;
                     list.Add(new FunctionParam(temp.InputType, "value", "value"));
                     if (!filter_no_label_ext.Any(vale => classParm.APIFunction.Contains(vale)))
-                        list.AddRange(functionParam.Value);
+                        if (functionParam != null) list.AddRange(functionParam);
                     list.Add(new FunctionParam("GUILayoutOption", "options", "options")
                     {
                         IsParams = true,
@@ -124,7 +134,7 @@
                     });
                 }
 
-                temp.FunctionParams.Add(string.Concat(functionParam.Key, header?.Type), list);
+                temp.FunctionParams.Add(list.ToArray());
             }
         }
 
@@ -150,7 +160,8 @@ namespace AIO.UEditor
     {
 #>
 
-    #region <#= string.IsNullOrEmpty(classParam.InputType) ? "" : classParam.InputType #> : <#= classParam.APIFunction #>
+    #region <#=
+            string.IsNullOrEmpty(classParam.InputType) ? "" : classParam.InputType #> : <#= classParam.APIFunction #>
 <#
         if (!string.IsNullOrEmpty(classParam.MacroDefinition))
         {
@@ -165,20 +176,16 @@ namespace AIO.UEditor
 <#
         foreach (var item in classParam.FunctionParams)
         {
-            var header = classParam.GetFunctionHeader(item.Key, "        ");
+            var header = classParam.GetFunctionHeader(item, "        ");
             if (headerDic.ContainsKey(header)) continue;
             headerDic.Add(header, 0);
-            var argOutput = classParam.GetFunctionValueParams(item.Key);
-            var genericsCast = classParam.Generics == null || classParam.Generics.Count == 0
-                ? string.Empty
-                : string.Format("({0})", classParam.ReturnType);
-            var comment = "\r\n" + classParam.GetFunctionComment(item.Key, "绘制字段", classParam.InputType, "        ");
+            var comment = "\r\n" + classParam.GetFunctionComment(item, "绘制字段", classParam.InputType, "        ");
 #>
 <#= comment #>
 <#= header #>
         {
 <#=
-                    classParam.GetFunctionContent(item.Key, "            ") #>
+                classParam.GetFunctionContent(item, "            ") #>
         }
 <#
         }
