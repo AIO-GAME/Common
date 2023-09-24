@@ -1,6 +1,6 @@
 ﻿<#@ template debug="false" hostspecific="false" language="C#" linePragmas="true" visibility="public"#>
 <#@ output extension=".cs" encoding="utf-8" #>
-<#@ include file="GULayout.AC.Field.ttinclude" #>
+<#@ include file="GULayout.AC.ttinclude" #>
 <#
     var headerDic = new Dictionary<string, int>();
     var singleton = new ClassParamSingleton();
