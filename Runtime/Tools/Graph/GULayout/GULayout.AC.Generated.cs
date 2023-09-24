@@ -18,6 +18,112 @@ namespace AIO
     public partial class GULayout 
     {
 
+        #region Toggle
+
+        /// <summary>
+        /// 绘制 按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="value">值 <see cref="bool"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
+        /// <returns><see cref="bool"/></returns>
+        public static bool Toggle(string label, bool value, GUIStyle style, params GUILayoutOption[] options)
+        {
+            return GUILayout.Toggle(value, label, style, options);
+        }
+
+        /// <summary>
+        /// 绘制 按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="value">值 <see cref="bool"/></param>
+        /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
+        /// <returns><see cref="bool"/></returns>
+        public static bool Toggle(string label, bool value, params GUILayoutOption[] options)
+        {
+            return GUILayout.Toggle(value, label, GUI.skin.toggle, options);
+        }
+
+        /// <summary>
+        /// 绘制 按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="value">值 <see cref="bool"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
+        /// <returns><see cref="bool"/></returns>
+        public static bool Toggle(GUIContent label, bool value, GUIStyle style, params GUILayoutOption[] options)
+        {
+            return GUILayout.Toggle(value, label, style, options);
+        }
+
+        /// <summary>
+        /// 绘制 按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="value">值 <see cref="bool"/></param>
+        /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
+        /// <returns><see cref="bool"/></returns>
+        public static bool Toggle(GUIContent label, bool value, params GUILayoutOption[] options)
+        {
+            return GUILayout.Toggle(value, label, GUI.skin.toggle, options);
+        }
+
+        /// <summary>
+        /// 绘制 按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="Texture"/></param>
+        /// <param name="value">值 <see cref="bool"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
+        /// <returns><see cref="bool"/></returns>
+        public static bool Toggle(Texture label, bool value, GUIStyle style, params GUILayoutOption[] options)
+        {
+            return GUILayout.Toggle(value, label, style, options);
+        }
+
+        /// <summary>
+        /// 绘制 按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="Texture"/></param>
+        /// <param name="value">值 <see cref="bool"/></param>
+        /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
+        /// <returns><see cref="bool"/></returns>
+        public static bool Toggle(Texture label, bool value, params GUILayoutOption[] options)
+        {
+            return GUILayout.Toggle(value, label, GUI.skin.toggle, options);
+        }
+
+        #endregion
+
+        #region Area Text
+
+        /// <summary>
+        /// 绘制 文本区域 
+        /// </summary>
+        /// <param name="text">文本内容 <see cref="string"/></param>
+        /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
+        /// <returns><see cref="string"/></returns>
+        public static string Area(string text, params GUILayoutOption[] options)
+        {
+            return GUILayout.TextArea(text, options);
+        }
+
+        /// <summary>
+        /// 绘制 文本区域 
+        /// </summary>
+        /// <param name="text">文本内容 <see cref="string"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
+        /// <returns><see cref="string"/></returns>
+        public static string Area(string text, GUIStyle style, params GUILayoutOption[] options)
+        {
+            return GUILayout.TextArea(text, style, options);
+        }
+
+        #endregion
+
         #region Password
 
         /// <summary>
