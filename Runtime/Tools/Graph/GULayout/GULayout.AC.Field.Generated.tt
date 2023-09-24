@@ -1,0 +1,69 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" linePragmas="true" visibility="public"#>
+<#@ output extension=".cs" encoding="utf-8" #>
+<#@ include file="GULayout.AC.Field.ttinclude" #>
+<#
+    var headerDic = new Dictionary<string, int>();
+    var singleton = new ClassParamSingleton();
+    var classParams = singleton.ClassParams;
+#>
+/*|✩ - - - - - |||
+|||✩ Date:     ||| -> Automatic Generate
+|||✩ Document: ||| ->
+|||✩ - - - - - |*/
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+using System;
+using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace AIO
+{
+    public partial class <#= classParams.Name #> 
+    {
+<#
+    foreach (var group in classParams.FunctionGroups)
+    {
+#>
+
+        #region <#= group.Key #>
+<#
+        foreach (var Chunk in group.Value)
+        {
+            var header = Chunk.GetHeader("        ");
+            if (headerDic.ContainsKey(header)) continue;
+            headerDic.Add(header, 0);
+            var comment = string.Concat("\r\n", Chunk.GetComment("绘制字段", "", "        "));
+            var content = string.Concat("            ", Chunk.Content);
+#>
+<#
+            if (!string.IsNullOrEmpty(Chunk.MacroDefinition))
+            {
+#>
+<#=
+                    string.Concat("\n#if ", Chunk.MacroDefinition) #>
+<#
+            }
+#>
+<#= comment #>
+<#= header #>
+        {
+<#= content #>
+        }
+<#
+            if (!string.IsNullOrEmpty(Chunk.MacroDefinition))
+            {
+#>
+<#= "\n#endif" #>
+<#
+            }
+#>
+<#
+        }
+#>
+
+        #endregion
+<#
+    }
+#>
+    }
+}

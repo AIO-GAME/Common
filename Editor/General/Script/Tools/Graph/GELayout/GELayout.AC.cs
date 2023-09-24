@@ -14,7 +14,7 @@
 
 namespace AIO.UEditor
 {
-    public static partial class GELayout
+    public partial class GELayout
     {
     }
 }

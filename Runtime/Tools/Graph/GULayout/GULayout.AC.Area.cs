@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace AIO
 {
-    public static partial class GULayout
+    public partial class GULayout
     {
         #region Text Area
 

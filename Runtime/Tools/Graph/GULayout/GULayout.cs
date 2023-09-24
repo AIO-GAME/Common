@@ -8,8 +8,12 @@ using UnityEngine;
 
 namespace AIO
 {
-    public static partial class GULayout
+    public abstract partial class GULayout
     {
+        protected GULayout()
+        {
+        }
+
         #region 隔行
 
         /// <summary>

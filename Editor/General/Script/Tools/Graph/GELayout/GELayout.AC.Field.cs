@@ -11,9 +11,8 @@ using Object = UnityEngine.Object;
 
 namespace AIO.UEditor
 {
-    public partial class GELayout
+    public abstract partial class GELayout : GULayout
     {
-
         #region 物体文本框 FieldObject
 
         /// <summary>  
@@ -78,7 +77,6 @@ namespace AIO.UEditor
         }
 
         #endregion
-
 
         #region Path
 
