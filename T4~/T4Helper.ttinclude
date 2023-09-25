@@ -25,7 +25,7 @@
         private class Block
         {
             public Encoding Encoding;
-            public String Name;
+            public string Name;
             public int Start, Length;
         }
 
@@ -35,7 +35,7 @@
         private Block header = new Block();
         private ITextTemplatingEngineHost host;
         private StringBuilder template;
-        protected List<String> generatedFileNames = new List<String>();
+        protected List<string> generatedFileNames = new List<string>();
 
         public static T4Helper Create(ITextTemplatingEngineHost host, StringBuilder template)
         {
@@ -49,14 +49,14 @@
             return (host is IServiceProvider) ? new VSManager(host, template) : new T4Helper(host, template);
         }
 
-        public void StartNewFile(String name)
+        public void StartNewFile(string name)
         {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
             CurrentBlock = new Block { Name = name, Encoding = Encoding.UTF8 };
         }
 
-        public void StartNewFile(String name, Encoding encoding)
+        public void StartNewFile(string name, Encoding encoding)
         {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
@@ -103,23 +103,23 @@
             }
         }
 
-        protected virtual void CreateFile(String fileName, String content, Encoding encoding)
+        protected virtual void CreateFile(string fileName, string content, Encoding encoding)
         {
             if (IsFileContentDifferent(fileName, content))
                 File.WriteAllText(fileName, content, encoding);
         }
 
-        public virtual String GetCustomToolNamespace(String fileName)
+        public virtual string GetCustomToolNamespace(string fileName)
         {
             return null;
         }
 
-        public virtual String DefaultProjectNamespace
+        public virtual string DefaultProjectNamespace
         {
             get { return null; }
         }
 
-        protected bool IsFileContentDifferent(String fileName, String newContent)
+        protected bool IsFileContentDifferent(string fileName, string newContent)
         {
             return !(File.Exists(fileName) && File.ReadAllText(fileName) == newContent);
         }
@@ -147,15 +147,18 @@
         {
             private EnvDTE.ProjectItem templateProjectItem;
             private EnvDTE.DTE dte;
-            private Action<String> checkOutAction;
-            private Action<IEnumerable<String>> projectSyncAction;
+            private Action<string> checkOutAction;
+            private Action<IEnumerable<string>> projectSyncAction;
 
-            public override String DefaultProjectNamespace
+            public override string DefaultProjectNamespace
             {
-                get { return templateProjectItem.ContainingProject.Properties.Item("DefaultNamespace").Value.ToString(); }
+                get
+                {
+                    return templateProjectItem.ContainingProject.Properties.Item("DefaultNamespace").Value.ToString();
+                }
             }
 
-            public override String GetCustomToolNamespace(string fileName)
+            public override string GetCustomToolNamespace(string fileName)
             {
                 return dte.Solution.FindProjectItem(fileName).Properties.Item("CustomToolNamespace").Value.ToString();
             }
@@ -168,7 +171,7 @@
                 projectSyncAction.EndInvoke(projectSyncAction.BeginInvoke(generatedFileNames, null, null));
             }
 
-            protected  void CreateFile(String fileName, String content)
+            protected void CreateFile(string fileName, string content)
             {
                 if (IsFileContentDifferent(fileName, content))
                 {
@@ -187,30 +190,32 @@
                 if (dte == null)
                     throw new ArgumentNullException("Could not obtain DTE from host");
                 templateProjectItem = dte.Solution.FindProjectItem(host.TemplateFile);
-                checkOutAction = (String fileName) => dte.SourceControl.CheckOutItem(fileName);
-                projectSyncAction = (IEnumerable<String> keepFileNames) => ProjectSync(templateProjectItem, keepFileNames);
+                checkOutAction = (string fileName) => dte.SourceControl.CheckOutItem(fileName);
+                projectSyncAction =
+                    (IEnumerable<string> keepFileNames) => ProjectSync(templateProjectItem, keepFileNames);
             }
 
-            private static void ProjectSync(EnvDTE.ProjectItem templateProjectItem, IEnumerable<String> keepFileNames)
+            private static void ProjectSync(EnvDTE.ProjectItem templateProjectItem, IEnumerable<string> keepFileNames)
             {
-                var keepFileNameSet = new HashSet<String>(keepFileNames);
-                var projectFiles = new Dictionary<String, EnvDTE.ProjectItem>();
+                var keepFileNameSet = new HashSet<string>(keepFileNames);
+                var projectFiles = new Dictionary<string, EnvDTE.ProjectItem>();
                 var originalFilePrefix = Path.GetFileNameWithoutExtension(templateProjectItem.get_FileNames(0)) + ".";
                 foreach (EnvDTE.ProjectItem projectItem in templateProjectItem.ProjectItems)
                     projectFiles.Add(projectItem.get_FileNames(0), projectItem);
 
                 // Remove unused items from the project  
                 foreach (var pair in projectFiles)
-                    if (!keepFileNames.Contains(pair.Key) && !(Path.GetFileNameWithoutExtension(pair.Key) + ".").StartsWith(originalFilePrefix))
+                    if (!keepFileNames.Contains(pair.Key) &&
+                        !(Path.GetFileNameWithoutExtension(pair.Key) + ".").StartsWith(originalFilePrefix))
                         pair.Value.Delete();
 
                 // Add missing files to the project  
-                foreach (String fileName in keepFileNameSet)
+                foreach (string fileName in keepFileNameSet)
                     if (!projectFiles.ContainsKey(fileName))
                         templateProjectItem.ProjectItems.AddFromFile(fileName);
             }
 
-            private void CheckoutFileIfRequired(String fileName)
+            private void CheckoutFileIfRequired(string fileName)
             {
                 var sc = dte.SourceControl;
                 if (sc != null && sc.IsItemUnderSCC(fileName) && !sc.IsItemCheckedOut(fileName))

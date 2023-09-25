@@ -88,7 +88,7 @@ namespace AIO.UEditor
             GELayout.Horizontal(() =>
             {
                 GELayout.Label($"路径 :");
-                GTOption.Separator();
+                GELayout.Separator();
             });
 
             GELayout.Horizontal(() =>

@@ -1,81 +1,41 @@
 ﻿<#@ assembly name="System.Core"#>
-
 <#@ import namespace="System.Text" #>
-<#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.Linq"#>
-
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="FunctionParam.ttinclude" #>
+<#@ include file="ClassHelper.ttinclude" #>
+<#@ include file="TChunkState.ttinclude" #>
 <#+
-    public class ClassParam
-    {
-        /// <summary>
-        /// 注释
-        /// </summary>
-        public string Comments { get; set; }
-
-        /// <summary>
-        /// 类名
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// 泛型类型
-        /// </summary>
-        public Dictionary<string, string> Generics { get; set; }
-
-        /// <summary>
-        /// 是否静态
-        /// </summary>
-        public bool IsStatic { get; set; } = true;
-
-        /// <summary>
-        /// 可访问性 public private protected internal
-        /// </summary>
-        public string Accessibility { get; set; } = "public";
-
-        /// <summary>
-        /// 函数参数
-        /// </summary>
-        public Dictionary<string, List<FunctionChunk>> FunctionGroups { get; set; }
-
-        /// <summary>
-        /// 宏定义
-        /// </summary>
-        public string MacroDefinition { get; set; }
-
-        public ClassParam()
-        {
-            FunctionGroups = new Dictionary<string, List<FunctionChunk>>();
-        }
-    }
-
-    /// <summary>
-    /// 函数参数
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Method)]
-    public class FuncParamAttribute : Attribute
-    {
-        /// <summary>
-        /// 区块组
-        /// </summary>
-        public string Group { get; set; }
-
-        /// <summary>
-        /// 是否返回数组
-        /// </summary>
-        public bool IsArray { get; set; }
-    }
-
     public class FunctionChunk
     {
         /// <summary>
         /// 内容
         /// </summary>
-        public string Content { get; set; }
+        public string Content
+        {
+            get => ContentBuilder.ToString().TrimEnd('\n', '\r');
+            set
+            {
+                if (ContentBuilder == null) ContentBuilder = new StringBuilder();
+                ContentBuilder.Clear();
+                ContentBuilder.AppendLine(value);
+            }
+        }
+
+        /// <summary>
+        /// 内容
+        /// </summary>
+        public StringBuilder ContentBuilder { get; set; } = new StringBuilder();
 
         /// <summary>
         /// 宏定义
         /// </summary>
         public string MacroDefinition { get; set; }
+
+        /// <summary>
+        /// 判断是否有宏定义
+        /// </summary>
+        public bool HasMacroDefinition => !string.IsNullOrEmpty(MacroDefinition);
 
         /// <summary>
         /// 参数数组
@@ -93,9 +53,19 @@
         public string ReturnType { get; set; } = "void";
 
         /// <summary>
+        /// 函数状态
+        /// </summary>
+        public TChunkState State { get; set; } = TChunkState.None;
+
+        /// <summary>
         /// 是否静态
         /// </summary>
-        public bool IsStatic { get; set; } = true;
+        public bool IsVirtual { get; set; } = false;
+
+        /// <summary>
+        /// 是否静态
+        /// </summary>
+        public bool IsOverride { get; set; } = false;
 
         /// <summary>
         /// 可访问性 public private protected internal
@@ -205,7 +175,7 @@
             {
                 sb.AppendFormat("{0}{1} {2} {3} {4}({5})\r\n", space,
                     Accessibility,
-                    IsStatic ? "static" : string.Empty,
+                    ClassHelper.GetState(State),
                     ReturnType,
                     Name,
                     GetParamNames(Params));
@@ -222,7 +192,7 @@
 
                 sb.AppendFormat("{0}{1} {2} {3} {4}<{7}>({5}) {6}\r\n", space,
                     Accessibility,
-                    IsStatic ? " static" : string.Empty,
+                    ClassHelper.GetState(State),
                     ReturnType,
                     Name,
                     GetParamNames(Params),
@@ -231,52 +201,6 @@
             }
 
             return sb.Length == 0 ? string.Empty : sb.ToString().TrimEnd('\r', '\n');
-        }
-    }
-
-    public class FunctionParam
-    {
-        /// <summary>
-        /// 参数类型
-        /// </summary>
-        public string Type { get; set; }
-
-        /// <summary>
-        /// 是否可选参数
-        /// </summary>
-        public bool IsParams { get; set; } = false;
-
-        /// <summary>
-        /// 参数名
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// 参数输出
-        /// </summary>
-        public string Output { get; set; }
-
-        /// <summary>
-        /// 注释描述
-        /// </summary>
-        public string Comments { get; set; }
-
-        public FunctionParam()
-        {
-        }
-
-        public FunctionParam(string type, string name)
-        {
-            Type = type;
-            Name = name;
-            Output = Name;
-        }
-
-        public FunctionParam(string type, string name, string output)
-        {
-            Type = type;
-            Name = name;
-            Output = output;
         }
     }
 #>

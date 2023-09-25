@@ -109,20 +109,5 @@ namespace AIO
             return GUILayout.MaxHeight(value);
         }
 
-        /// <summary>
-        /// 间隙
-        /// </summary>
-        public static void Space(in float value = 0)
-        {
-            GUILayout.Space(value);
-        }
-
-        /// <summary>
-        /// 插入一个灵活的空间元素
-        /// </summary>
-        public static void Separator()
-        {
-            GUILayout.FlexibleSpace();
-        }
     }
 }

@@ -1,0 +1,14 @@
+﻿<#+
+    public enum TChunkState
+    {
+    None,
+    Static,
+    Virtual,
+    Override,
+    Abstract,
+    SealedOverride,
+    New,
+    NewStatic,
+    SealedClass,
+    }
+#>
