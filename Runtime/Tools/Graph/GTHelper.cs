@@ -30,14 +30,5 @@ namespace AIO
 
         #endregion
 
-        /// <summary>
-        /// 复制文本信息
-        /// </summary>
-        public static readonly Action<string> CopyTextAction = contents =>
-        {
-            var text = new TextEditor { text = contents };
-            text.OnFocus();
-            text.Copy();
-        };
     }
 }

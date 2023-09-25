@@ -1,0 +1,4 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" linePragmas="true" visibility="public"#>
+<#@ output extension=".cs" encoding="utf-8" #>
+<#@ include file="GULayout.ttinclude" #>
+<#= new ClassParamSingleton().ClassParams.GetAllText() #>

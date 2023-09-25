@@ -4,6 +4,7 @@
 |||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
+using System;
 using UnityEngine;
 
 namespace AIO
@@ -14,7 +15,25 @@ namespace AIO
         {
         }
 
+        /// <summary>
+        /// 复制文本信息
+        /// </summary>
+        public static readonly Action<string> CopyTextAction = contents =>
+        {
+            var text = new TextEditor { text = contents };
+            text.OnFocus();
+            text.Copy();
+        };
+
         #region 隔行
+
+        /// <summary>
+        /// 插入一个灵活的空间元素
+        /// </summary>
+        public static void Separator()
+        {
+            GUILayout.FlexibleSpace();
+        }
 
         /// <summary>
         /// 隔行

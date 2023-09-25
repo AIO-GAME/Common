@@ -60,12 +60,12 @@ namespace AIO.UEditor
             var Height = GTOption.Height(60);
             GELayout.Horizontal(() =>
             {
-                GTOption.Space(10);
+                GELayout.Space(10);
                 GELayout.Label("类名", Width);
                 GELayout.Label("命名空间", GTOption.Width(200));
                 GELayout.Label("静态类", Width);
                 GELayout.Label("属性", GTOption.Width(500));
-                GTOption.Space(10);
+                GELayout.Space(10);
             }, Content, GTOption.Height(40));
             Vector = GELayout.ScrollView(() =>
             {
@@ -76,12 +76,12 @@ namespace AIO.UEditor
 
         private void DrawItem(Type type)
         {
-            GTOption.Space(10);
+            GELayout.Space(10);
             GELayout.Label(type.Name, Width);
             GELayout.Label(type.Namespace, GTOption.Width(200));
             GELayout.Label(type.IsAbstract, Width);
             GELayout.Label(type.Attributes.ToString(), GTOption.Width(500));
-            GTOption.Space(10);
+            GELayout.Space(10);
         }
     }
 }

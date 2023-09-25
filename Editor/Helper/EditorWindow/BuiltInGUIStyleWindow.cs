@@ -103,11 +103,11 @@ namespace AIO.UEditor
 
         private void DrawItem(GUIStyle style)
         {
-            GTOption.Space(10);
+            GULayout.Space(10);
             GELayout.LabelPrefix(style.name);
-            GTOption.Separator();
+            GULayout.Separator();
             GELayout.LabelSelectable(style.name, style, Height);
-            GTOption.Separator();
+            GULayout.Separator();
             GELayout.Button("Copy", () =>
             {
                 var textEditor = new TextEditor();
@@ -115,7 +115,7 @@ namespace AIO.UEditor
                 textEditor.OnFocus();
                 textEditor.Copy();
             }, Width, Height);
-            GTOption.Space(10);
+            GULayout.Space(10);
         }
 
         protected override void OnDispose()
