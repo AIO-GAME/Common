@@ -30,9 +30,17 @@ namespace AIO
         /// <summary>
         /// 插入一个灵活的空间元素
         /// </summary>
-        public static void Separator()
+        public static void FlexibleSpace()
         {
             GUILayout.FlexibleSpace();
+        }
+
+        /// <summary>
+        /// 分隔符
+        /// </summary>
+        public static void FlexibleSpace(int num)
+        {
+            for (var i = 0; i < num; i++) GUILayout.FlexibleSpace();
         }
 
         /// <summary>

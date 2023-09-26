@@ -58,7 +58,7 @@ namespace AIO.UEditor
         protected override void OnGUI()
         {
             DrawAcrossNumber = GELayout.Slider("行ICON显示数量", DrawAcrossNumber, 2, 7);
-            Vector = GELayout.ScrollView(() =>
+            Vector = GELayout.VScrollView(() =>
             {
                 for (int i = 0; i < m_Icons.Count; i += DrawAcrossNumber)
                 {
@@ -72,7 +72,7 @@ namespace AIO.UEditor
         /// </summary>
         protected void DrawItemAcross(int i, int count)
         {
-            GELayout.Horizontal(() =>
+            GELayout.VHorizontal(() =>
             {
                 for (int j = 0, index; j < count; j++)
                 {

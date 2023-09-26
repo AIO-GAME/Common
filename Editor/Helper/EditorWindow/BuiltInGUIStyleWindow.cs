@@ -64,13 +64,13 @@ namespace AIO.UEditor
                     }
             }
 
-            GELayout.Horizontal(() =>
+            GELayout.VHorizontal(() =>
             {
                 search = GELayout.Field(search, Label);
                 if (GELayout.Button("Find", GTOption.Width(50))) FindSearchStyles();
             }, EditorStyles.helpBox, GTOption.WidthExpand(true), GTOption.Height(30));
 
-            Vector = GELayout.ScrollView(DrawContext, Vector);
+            Vector = GELayout.VScrollView(DrawContext, Vector);
         }
 
         private void FindSearchStyles()
@@ -86,18 +86,18 @@ namespace AIO.UEditor
             var Height = GTOption.Height(60);
             //if (!search.ToLower().IsNullOrEmpty() && Array.ContainsKey(search.ToLower()))
             //{
-            //    GTLayout.Horizontal(() => { DrawItem(Array[search.ToLower()]); }, Content, Height);
+            //    GTLayout.VHorizontal(() => { DrawItem(Array[search.ToLower()]); }, Content, Height);
             //}
             //else
             //{
             //    foreach (var style in Array.Values)
             //    {
-            //        GTLayout.Horizontal(() => { DrawItem(style); }, Content, Height);
+            //        GTLayout.VHorizontal(() => { DrawItem(style); }, Content, Height);
             //    }
             //}
             foreach (var style in Array.Values)
             {
-                GELayout.Horizontal(() => { DrawItem(style); }, Content, Height);
+                GELayout.VHorizontal(() => { DrawItem(style); }, Content, Height);
             }
         }
 
@@ -105,9 +105,9 @@ namespace AIO.UEditor
         {
             GULayout.Space(10);
             GELayout.LabelPrefix(style.name);
-            GULayout.Separator();
+            GELayout.Separator();
             GELayout.LabelSelectable(style.name, style, Height);
-            GULayout.Separator();
+            GELayout.Separator();
             GELayout.Button("Copy", () =>
             {
                 var textEditor = new TextEditor();

@@ -53,6 +53,11 @@
         public string ReturnType { get; set; } = "void";
 
         /// <summary>
+        /// 是否是异步函数
+        /// </summary>
+        public bool IsAsync { get; set; } = false;
+
+        /// <summary>
         /// 函数状态
         /// </summary>
         public TChunkState State { get; set; } = TChunkState.None;
@@ -88,6 +93,21 @@
         public string Name { get; set; }
 
         /// <summary>
+        /// 属性列表
+        /// </summary>
+        public List<string> Attributes { get; set; } = new List<string>();
+
+        /// <summary>
+        /// 函数属性
+        /// </summary>
+        public string GetAttribute(string space = "")
+        {
+            var sb = new StringBuilder();
+            if (Attributes.Count > 0) sb.AppendFormat("{1}[{0}]", string.Join(", ", Attributes), space);
+            return sb.ToString().TrimEnd(' ');
+        }
+
+        /// <summary>
         /// 函数参数名
         /// </summary>
         public string GetParamNames(IEnumerable<FunctionParam> value)
@@ -96,9 +116,18 @@
             var sb = new StringBuilder();
             foreach (var param in value)
             {
-                sb.Append(param.IsParams
-                    ? string.Concat("params ", param.Type, "[] ", param.Name, ", ")
-                    : string.Concat(param.Type, ' ', param.Name, ", "));
+                if (!IsAsync && ReturnType != "Task" && !param.IsParams && param.Modifier != ParamModifier.None)
+                {
+                    sb.AppendFormat("{0} {1} {2}, ", param.Modifier.ToString().ToLower(), param.Type, param.Name);
+                }
+                else if (param.IsParams)
+                {
+                    sb.AppendFormat("params {0}[] {1}, ", param.Type, param.Name);
+                }
+                else
+                {
+                    sb.AppendFormat("{0} {1}, ", param.Type, param.Name);
+                }
             }
             return sb.ToString().TrimStart(' ').TrimEnd(',', ' ');
         }
@@ -173,9 +202,10 @@
             var sb = new StringBuilder();
             if (Generics is null || Generics.Count == 0)
             {
-                sb.AppendFormat("{0}{1} {2} {3} {4}({5})\r\n", space,
+                sb.AppendFormat("{0}{1} {2} {3}{4} {5}({6})\r\n", space,
                     Accessibility,
                     ClassHelper.GetState(State),
+                    IsAsync ? "async " : string.Empty,
                     ReturnType,
                     Name,
                     GetParamNames(Params));
@@ -190,14 +220,15 @@
                     first.AppendFormat(" {0},", item.Key);
                 }
 
-                sb.AppendFormat("{0}{1} {2} {3} {4}<{7}>({5}) {6}\r\n", space,
+                sb.AppendFormat("{0}{1} {2} {8}{3} {4}<{7}>({5}) {6}\r\n", space,
                     Accessibility,
                     ClassHelper.GetState(State),
                     ReturnType,
                     Name,
                     GetParamNames(Params),
                     generics,
-                    first.ToString().Trim(' ', ','));
+                    first.ToString().Trim(' ', ','),
+                    IsAsync ? "async " : string.Empty);
             }
 
             return sb.Length == 0 ? string.Empty : sb.ToString().TrimEnd('\r', '\n');
