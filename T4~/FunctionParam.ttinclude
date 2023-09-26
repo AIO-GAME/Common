@@ -18,8 +18,21 @@
         public bool IsArray { get; set; }
     }
 
+    public enum ParamModifier
+    {
+    None,
+    Ref,
+    In,
+    Out,
+    }
+
     public class FunctionParam
     {
+        /// <summary>
+        /// 参数修饰符
+        /// </summary>
+        public ParamModifier Modifier { get; set; } = ParamModifier.None;
+
         /// <summary>
         /// 参数类型
         /// </summary>
@@ -47,6 +60,15 @@
 
         public FunctionParam()
         {
+        }
+
+        public FunctionParam(FunctionParam param)
+        {
+            Type = param.Type;
+            Name = param.Name;
+            Output = param.Output;
+            IsParams = param.IsParams;
+            Comments = param.Comments;
         }
 
         public FunctionParam(string type, string name)

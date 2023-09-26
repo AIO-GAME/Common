@@ -58,7 +58,7 @@ namespace AIO.UEditor
         protected override void OnGUI()
         {
             var Height = GTOption.Height(60);
-            GELayout.Horizontal(() =>
+            GELayout.VHorizontal(() =>
             {
                 GELayout.Space(10);
                 GELayout.Label("类名", Width);
@@ -67,10 +67,10 @@ namespace AIO.UEditor
                 GELayout.Label("属性", GTOption.Width(500));
                 GELayout.Space(10);
             }, Content, GTOption.Height(40));
-            Vector = GELayout.ScrollView(() =>
+            Vector = GELayout.VScrollView(() =>
             {
                 foreach (var item in List)
-                    GELayout.Horizontal(() => { DrawItem(item); }, Content, Height);
+                    GELayout.VHorizontal(() => { DrawItem(item); }, Content, Height);
             }, Vector);
         }
 

@@ -140,7 +140,7 @@
                 {
                     State = TChunkState.Static,
                     Comments = "绘制 文本视图",
-                    Name = "Area",
+                    Name = "AreaText",
                     Params = param,
                     ReturnType = "string",
                 };
@@ -160,7 +160,7 @@
                 {
                     State = TChunkState.Static,
                     Comments = "绘制 文本视图",
-                    Name = "Area",
+                    Name = "AreaText",
                     Params = param,
                     ReturnType = "string",
                 };
@@ -265,7 +265,7 @@
             var pos = new FunctionParam("Vector2", "pos", "new Rect(pos - size / 2, size)") { Comments = "位置" };
             var size = new FunctionParam("Vector2", "size", "") { Comments = "大小" };
             var width_float = new FunctionParam("float", "width", "GUILayout.Width(width)") { Comments = "宽度" };
-            var height_float = new FunctionParam("float", "height", "GUILayout.Width(height)") { Comments = "高度" };
+            var height_float = new FunctionParam("float", "height", "GUILayout.Height(height)") { Comments = "高度" };
             foreach (var item in new string[] { "GUIContent", "string" })
             {
                 var label = new FunctionParam(item, "label", "label") { Comments = "标签" };
@@ -372,7 +372,7 @@
             var chunks = new List<FunctionChunk>();
 
             var width_float = new FunctionParam("float", "width", "GUILayout.Width(width)") { Comments = "宽度" };
-            var height_float = new FunctionParam("float", "height", "GUILayout.Width(height)") { Comments = "高度" };
+            var height_float = new FunctionParam("float", "height", "GUILayout.Height(height)") { Comments = "高度" };
             foreach (var item in new string[] { "GUIContent", "string", })
             {
                 var label = new FunctionParam(item, "label", "label") { Comments = "标签" };
@@ -467,7 +467,7 @@
             var chunks = new List<FunctionChunk>();
             var value = new FunctionParam("Action", "action", "") { Comments = "回调函数" };
             var width_float = new FunctionParam("float", "width", "GUILayout.Width(width)") { Comments = "宽度" };
-            var height_float = new FunctionParam("float", "height", "GUILayout.Width(height)") { Comments = "高度" };
+            var height_float = new FunctionParam("float", "height", "GUILayout.Height(height)") { Comments = "高度" };
             var paramsList = new List<FunctionParam[]>()
             {
                 new FunctionParam[] { value, Options, },
@@ -534,7 +534,7 @@
         {
             var chunks = new List<FunctionChunk>();
             var width_float = new FunctionParam("float", "width", "GUILayout.Width(width)") { Comments = "宽度" };
-            var height_float = new FunctionParam("float", "height", "GUILayout.Width(height)") { Comments = "高度" };
+            var height_float = new FunctionParam("float", "height", "GUILayout.Height(height)") { Comments = "高度" };
             var value = new FunctionParam("Action", "action", "") { Comments = "回调函数" };
             var paramsList = new List<FunctionParam[]>()
             {
@@ -602,7 +602,7 @@
         {
             var chunks = new List<FunctionChunk>();
             var width_float = new FunctionParam("float", "width", "GUILayout.Width(width)") { Comments = "宽度" };
-            var height_float = new FunctionParam("float", "height", "GUILayout.Width(height)") { Comments = "高度" };
+            var height_float = new FunctionParam("float", "height", "GUILayout.Height(height)") { Comments = "高度" };
 
             var value = new FunctionParam("Action", "action", "") { Comments = "回调函数" };
             var v2 = new FunctionParam("Vector2", "v2", "v2") { Comments = "视图在X和Y方向上滚动的像素距离" };
@@ -689,7 +689,7 @@
         {
             var chunks = new List<FunctionChunk>();
             var width_float = new FunctionParam("float", "width", "GUILayout.Width(width)") { Comments = "宽度" };
-            var height_float = new FunctionParam("float", "height", "GUILayout.Width(height)") { Comments = "高度" };
+            var height_float = new FunctionParam("float", "height", "GUILayout.Height(height)") { Comments = "高度" };
 
             var value = new FunctionParam("Action", "action", "") { Comments = "回调函数" };
             var v2 = new FunctionParam("Vector2", "v2", "v2") { Comments = "视图在X和Y方向上滚动的像素距离" };

@@ -155,16 +155,23 @@
                 {
                     var header = Chunk.GetHeader(space);
                     if (headerDic.ContainsKey(header)) continue;
+                    var attr = Chunk.GetAttribute(space);
                     headerDic.Add(header, 0);
                     var comment = string.Concat("\r\n", Chunk.GetComment(def, ext, space));
                     var hasMD = Chunk.HasMacroDefinition;
-                    if (hasMD) sb.AppendLine(string.Concat("#if ", Chunk.MacroDefinition));
-                    sb.AppendLine(comment).AppendLine(header).AppendLine(left);
+                    if (hasMD) sb.AppendLine(string.Concat("\n#if ", Chunk.MacroDefinition));
+                    sb.AppendLine(comment);
+                    if (!string.IsNullOrEmpty(attr)) sb.AppendLine(attr);
+                    sb.AppendLine(header).AppendLine(left);
                     foreach (var line in Chunk.Content.Split('\n'))
-                        sb.AppendLine(string.Concat(space, "    ", line).TrimEnd('\n', '\r'));
+                    {
+                        if (string.IsNullOrEmpty(line)) continue;
+                        sb.AppendLine((line[0] == '#' ? line : string.Concat(space, "    ", line))
+                            .TrimEnd('\n', '\r'));
+                    }
                     sb.AppendLine(right);
 
-                    if (hasMD) sb.AppendLine(string.Concat("#endif "));
+                    if (hasMD) sb.AppendLine(string.Concat("\n#endif"));
                 }
                 sb.AppendLine($"\n{space}#endregion");
             }

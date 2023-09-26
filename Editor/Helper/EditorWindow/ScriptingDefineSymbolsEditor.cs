@@ -85,13 +85,13 @@ namespace AIO.UEditor
 
         protected override void OnGUI()
         {
-            GELayout.Horizontal(() =>
+            GELayout.VHorizontal(() =>
             {
                 GELayout.Label($"路径 :");
                 GELayout.Separator();
             });
 
-            GELayout.Horizontal(() =>
+            GELayout.VHorizontal(() =>
             {
                 if (GELayout.Button("Load"))
                 {
@@ -117,13 +117,13 @@ namespace AIO.UEditor
                 }
             });
 
-            Vector = GELayout.ScrollView(() =>
+            Vector = GELayout.VScrollView(() =>
             {
                 GELayout.Label($"宏定义");
                 for (var i = 0; i < SymbolsList.Count; i++)
                 {
                     var i1 = i;
-                    GELayout.Horizontal(() =>
+                    GELayout.VHorizontal(() =>
                     {
                         SymbolsList[i1] = GELayout.Field($"NO.{i1}", SymbolsList[i1]);
                         if (GELayout.Button("Enabled", GUILayout.Width(60)))

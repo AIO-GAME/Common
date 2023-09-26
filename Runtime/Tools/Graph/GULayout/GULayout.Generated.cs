@@ -111,7 +111,7 @@ namespace AIO
         /// <param name="text">文本内容 <see cref="string"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="string"/></returns>
-        public static string Area(string text, params GUILayoutOption[] options)
+        public static string AreaText(string text, params GUILayoutOption[] options)
         {
             return GUILayout.TextArea(text, options);
         }
@@ -123,7 +123,7 @@ namespace AIO
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="string"/></returns>
-        public static string Area(string text, GUIStyle style, params GUILayoutOption[] options)
+        public static string AreaText(string text, GUIStyle style, params GUILayoutOption[] options)
         {
             return GUILayout.TextArea(text, style, options);
         }
@@ -135,7 +135,7 @@ namespace AIO
         /// <param name="maxLength">输入字符串最大长度 <see cref="int"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="string"/></returns>
-        public static string Area(string text, int maxLength, params GUILayoutOption[] options)
+        public static string AreaText(string text, int maxLength, params GUILayoutOption[] options)
         {
             return GUILayout.TextArea(text, maxLength, options);
         }
@@ -148,7 +148,7 @@ namespace AIO
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="string"/></returns>
-        public static string Area(string text, int maxLength, GUIStyle style, params GUILayoutOption[] options)
+        public static string AreaText(string text, int maxLength, GUIStyle style, params GUILayoutOption[] options)
         {
             return GUILayout.TextArea(text, maxLength, style, options);
         }
@@ -159,7 +159,7 @@ namespace AIO
         /// <param name="rect">绘制区域 <see cref="Rect"/></param>
         /// <param name="text">文本内容 <see cref="string"/></param>
         /// <returns><see cref="string"/></returns>
-        public static string Area(Rect rect, string text)
+        public static string AreaText(Rect rect, string text)
         {
             return GUI.TextArea(rect, text);
         }
@@ -171,7 +171,7 @@ namespace AIO
         /// <param name="text">文本内容 <see cref="string"/></param>
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <returns><see cref="string"/></returns>
-        public static string Area(Rect rect, string text, GUIStyle style)
+        public static string AreaText(Rect rect, string text, GUIStyle style)
         {
             return GUI.TextArea(rect, text, style);
         }
@@ -183,7 +183,7 @@ namespace AIO
         /// <param name="text">文本内容 <see cref="string"/></param>
         /// <param name="maxLength">输入字符串最大长度 <see cref="int"/></param>
         /// <returns><see cref="string"/></returns>
-        public static string Area(Rect rect, string text, int maxLength)
+        public static string AreaText(Rect rect, string text, int maxLength)
         {
             return GUI.TextArea(rect, text, maxLength);
         }
@@ -196,7 +196,7 @@ namespace AIO
         /// <param name="maxLength">输入字符串最大长度 <see cref="int"/></param>
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <returns><see cref="string"/></returns>
-        public static string Area(Rect rect, string text, int maxLength, GUIStyle style)
+        public static string AreaText(Rect rect, string text, int maxLength, GUIStyle style)
         {
             return GUI.TextArea(rect, text, maxLength, style);
         }
@@ -553,7 +553,7 @@ namespace AIO
         /// <returns><see cref="bool"/></returns>
         public static bool Button(string label, float width, float height)
         {
-            return GUILayout.Button(label, GUILayout.Width(width), GUILayout.Width(height));
+            return GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height));
         }
 
         /// <summary>
