@@ -25,7 +25,7 @@ namespace AIO
                 };
                 chunk.ContentBuilder.AppendLine("if (action == null) return;");
                 chunk.ContentBuilder.AppendLine("EditorGUI.BeginChangeCheck();");
-                chunk.ContentBuilder.AppendLine("action?.Invoke();");
+                chunk.ContentBuilder.AppendLine("action.Invoke();");
                 chunk.ContentBuilder.AppendLine("EditorGUI.EndProperty();");
                 chunks.Add(chunk);
             }
@@ -39,6 +39,7 @@ namespace AIO
                 Attributes = new List<string> { "ExcludeFromDocs" },
                 Content = "EditorGUI.BeginChangeCheck();"
             });
+            
             chunks.Add(new FunctionChunk
             {
                 State = TChunkState.Static,
