@@ -116,6 +116,7 @@
             var sb = new StringBuilder();
             foreach (var param in value)
             {
+                if (param is null || string.IsNullOrEmpty(param.Name)) continue;
                 if (!IsAsync && ReturnType != "Task" && !param.IsParams && param.Modifier != ParamModifier.None)
                 {
                     sb.AppendFormat("{0} {1} {2}, ", param.Modifier.ToString().ToLower(), param.Type, param.Name);
@@ -156,7 +157,7 @@
             var sb = new StringBuilder();
             foreach (var param in Params)
             {
-                if (param is null) continue;
+                if (param is null || string.IsNullOrEmpty(param.Name)) continue;
                 var typename = param.Type?.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;");
                 if (string.IsNullOrEmpty(typename) || typename.Contains('[') || typename.Contains('"'))
                     sb.AppendFormat("{2}/// <param name=\"{0}\">{1}</param>\r\n", param.Name, param.Comments, space);
@@ -212,13 +213,15 @@
             }
             else
             {
-                var generics = new StringBuilder("where");
+                var generics = new StringBuilder();
                 var first = new StringBuilder();
                 foreach (var item in Generics)
                 {
-                    generics.AppendFormat(" {0} : {1}", item.Key, item.Value);
                     first.AppendFormat(" {0},", item.Key);
+                    if (string.IsNullOrEmpty(item.Value)) continue;
+                    generics.AppendFormat(" {0} : {1}", item.Key, item.Value);
                 }
+                if (generics.Length > 0) generics.Insert(0, "where");
 
                 sb.AppendFormat("{0}{1} {2} {8}{3} {4}<{7}>({5}) {6}\r\n", space,
                     Accessibility,

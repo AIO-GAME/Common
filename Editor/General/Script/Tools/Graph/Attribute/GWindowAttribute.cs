@@ -20,7 +20,6 @@ namespace AIO.UEditor
         /// </summary>
         public GUIContent Title { get; }
 
-
         /// <summary>
         /// 最大宽度
         /// </summary>

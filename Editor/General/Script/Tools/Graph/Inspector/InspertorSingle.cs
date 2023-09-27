@@ -41,7 +41,7 @@ namespace AIO.UEditor
         protected override void OnDisable() //脚本或对象禁用时调用
         {
             EditorUtility.SetDirty(SerObj.targetObject);
-            Undo.RecordObject(SerObj.targetObject, string.Concat(UNDO, UndoNmae));
+            Undo.RecordObject(SerObj.targetObject, string.Concat(UNDO, UndoName));
         }
 
         /// <inheritdoc />
@@ -67,7 +67,7 @@ namespace AIO.UEditor
             {
                 OnChange();
                 EditorUtility.SetDirty(SerObj.targetObject);
-                Undo.RecordObject(SerObj.targetObject, string.Concat(UNDO, UndoNmae));
+                Undo.RecordObject(SerObj.targetObject, string.Concat(UNDO, UndoName));
                 Repaint(); //重新绘制
             }
         }

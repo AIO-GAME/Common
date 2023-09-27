@@ -48,7 +48,7 @@ namespace AIO.UEditor
         /// <summary>
         /// SerializedProperty创建一个字段
         /// </summary>
-        public static bool SP(Vector4 pos, Vector4 size, SerializedProperty property, bool includeChildren = false)
+        public static bool SP(Vector2 pos, Vector2 size, SerializedProperty property, bool includeChildren = false)
         {
             return EditorGUI.PropertyField(new Rect(pos, size), property, includeChildren);
         }
