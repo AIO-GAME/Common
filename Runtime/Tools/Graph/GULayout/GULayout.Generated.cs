@@ -1,10 +1,4 @@
-﻿
-
-
-
-
-
-/*|✩ - - - - - |||
+﻿/*|✩ - - - - - |||
 |||✩ Date:     ||| -> Automatic Generate
 |||✩ Document: ||| ->
 |||✩ - - - - - |*/
@@ -411,7 +405,7 @@ namespace AIO
         /// <returns><see cref="bool"/></returns>
         public static bool Button(GUIContent label, float width, float height)
         {
-            return GUILayout.Button(label, GUILayout.Width(width), GUILayout.Width(height));
+            return GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height));
         }
 
         /// <summary>
@@ -448,7 +442,7 @@ namespace AIO
         /// <returns><see cref="bool"/></returns>
         public static bool Button(GUIContent label, GUIStyle style, float width, float height)
         {
-            return GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Width(height));
+            return GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height));
         }
 
         /// <summary>
@@ -482,7 +476,7 @@ namespace AIO
         /// <param name="height">高度 <see cref="float"/></param>
         public static void Button(GUIContent label, Action action, float width, float height)
         {
-            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Width(height))) action();
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) action();
         }
 
         /// <summary>
@@ -519,7 +513,7 @@ namespace AIO
         /// <param name="height">高度 <see cref="float"/></param>
         public static void Button(GUIContent label, Action action, GUIStyle style, float width, float height)
         {
-            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Width(height))) action();
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) action();
         }
 
         /// <summary>
@@ -590,7 +584,7 @@ namespace AIO
         /// <returns><see cref="bool"/></returns>
         public static bool Button(string label, GUIStyle style, float width, float height)
         {
-            return GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Width(height));
+            return GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height));
         }
 
         /// <summary>
@@ -624,7 +618,7 @@ namespace AIO
         /// <param name="height">高度 <see cref="float"/></param>
         public static void Button(string label, Action action, float width, float height)
         {
-            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Width(height))) action();
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) action();
         }
 
         /// <summary>
@@ -661,7 +655,7 @@ namespace AIO
         /// <param name="height">高度 <see cref="float"/></param>
         public static void Button(string label, Action action, GUIStyle style, float width, float height)
         {
-            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Width(height))) action();
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) action();
         }
 
         /// <summary>
@@ -999,7 +993,7 @@ namespace AIO
         /// <returns><see cref="bool"/></returns>
         public static bool ButtonRepeat(GUIContent label, float width, float height)
         {
-            return GUILayout.RepeatButton(label, GUILayout.Width(width), GUILayout.Width(height));
+            return GUILayout.RepeatButton(label, GUILayout.Width(width), GUILayout.Height(height));
         }
 
         /// <summary>
@@ -1036,7 +1030,7 @@ namespace AIO
         /// <returns><see cref="bool"/></returns>
         public static bool ButtonRepeat(GUIContent label, GUIStyle style, float width, float height)
         {
-            return GUILayout.RepeatButton(label, style, GUILayout.Width(width), GUILayout.Width(height));
+            return GUILayout.RepeatButton(label, style, GUILayout.Width(width), GUILayout.Height(height));
         }
 
         /// <summary>
@@ -1070,7 +1064,7 @@ namespace AIO
         /// <returns><see cref="bool"/></returns>
         public static bool ButtonRepeat(string label, float width, float height)
         {
-            return GUILayout.RepeatButton(label, GUILayout.Width(width), GUILayout.Width(height));
+            return GUILayout.RepeatButton(label, GUILayout.Width(width), GUILayout.Height(height));
         }
 
         /// <summary>
@@ -1107,7 +1101,7 @@ namespace AIO
         /// <returns><see cref="bool"/></returns>
         public static bool ButtonRepeat(string label, GUIStyle style, float width, float height)
         {
-            return GUILayout.RepeatButton(label, style, GUILayout.Width(width), GUILayout.Width(height));
+            return GUILayout.RepeatButton(label, style, GUILayout.Width(width), GUILayout.Height(height));
         }
 
         /// <summary>
@@ -1141,7 +1135,7 @@ namespace AIO
         /// <param name="height">高度 <see cref="float"/></param>
         public static void ButtonRepeat(GUIContent label, Action action, float width, float height)
         {
-            if (GUILayout.RepeatButton(label, GUILayout.Width(width), GUILayout.Width(height))) action();
+            if (GUILayout.RepeatButton(label, GUILayout.Width(width), GUILayout.Height(height))) action();
         }
 
         /// <summary>
@@ -1178,7 +1172,7 @@ namespace AIO
         /// <param name="height">高度 <see cref="float"/></param>
         public static void ButtonRepeat(GUIContent label, Action action, GUIStyle style, float width, float height)
         {
-            if (GUILayout.RepeatButton(label, style, GUILayout.Width(width), GUILayout.Width(height))) action();
+            if (GUILayout.RepeatButton(label, style, GUILayout.Width(width), GUILayout.Height(height))) action();
         }
 
         /// <summary>
@@ -1212,7 +1206,7 @@ namespace AIO
         /// <param name="height">高度 <see cref="float"/></param>
         public static void ButtonRepeat(string label, Action action, float width, float height)
         {
-            if (GUILayout.RepeatButton(label, GUILayout.Width(width), GUILayout.Width(height))) action();
+            if (GUILayout.RepeatButton(label, GUILayout.Width(width), GUILayout.Height(height))) action();
         }
 
         /// <summary>
@@ -1249,7 +1243,7 @@ namespace AIO
         /// <param name="height">高度 <see cref="float"/></param>
         public static void ButtonRepeat(string label, Action action, GUIStyle style, float width, float height)
         {
-            if (GUILayout.RepeatButton(label, style, GUILayout.Width(width), GUILayout.Width(height))) action();
+            if (GUILayout.RepeatButton(label, style, GUILayout.Width(width), GUILayout.Height(height))) action();
         }
 
         /// <summary>
@@ -1283,7 +1277,7 @@ namespace AIO
         /// <param name="height">高度 <see cref="float"/></param>
         public static void ButtonRepeat(Texture label, Action action, float width, float height)
         {
-            if (GUILayout.RepeatButton(new GUIContent(label), GUILayout.Width(width), GUILayout.Width(height))) action();
+            if (GUILayout.RepeatButton(new GUIContent(label), GUILayout.Width(width), GUILayout.Height(height))) action();
         }
 
         /// <summary>
@@ -1320,7 +1314,7 @@ namespace AIO
         /// <param name="height">高度 <see cref="float"/></param>
         public static void ButtonRepeat(Texture label, Action action, GUIStyle style, float width, float height)
         {
-            if (GUILayout.RepeatButton(new GUIContent(label), style, GUILayout.Width(width), GUILayout.Width(height))) action();
+            if (GUILayout.RepeatButton(new GUIContent(label), style, GUILayout.Width(width), GUILayout.Height(height))) action();
         }
 
         #endregion
@@ -1414,7 +1408,7 @@ namespace AIO
         public static void VHorizontal(Action action, float width, float height)
         {
             if (action == null) return;
-            GUILayout.BeginHorizontal(GUILayout.Width(width), GUILayout.Width(height));
+            GUILayout.BeginHorizontal(GUILayout.Width(width), GUILayout.Height(height));
             action();
             GUILayout.EndHorizontal();
         }
@@ -1457,7 +1451,7 @@ namespace AIO
         public static void VHorizontal(Action action, GUIStyle style, float width, float height)
         {
             if (action == null) return;
-            GUILayout.BeginHorizontal(style, GUILayout.Width(width), GUILayout.Width(height));
+            GUILayout.BeginHorizontal(style, GUILayout.Width(width), GUILayout.Height(height));
             action();
             GUILayout.EndHorizontal();
         }
@@ -1478,7 +1472,7 @@ namespace AIO
         /// <param name="height">高度 <see cref="float"/></param>
         public static void BeginHorizontal(float width, float height)
         {
-            GUILayout.BeginHorizontal(GUILayout.Width(width), GUILayout.Width(height));
+            GUILayout.BeginHorizontal(GUILayout.Width(width), GUILayout.Height(height));
         }
 
         /// <summary>
@@ -1518,7 +1512,7 @@ namespace AIO
         /// <param name="height">高度 <see cref="float"/></param>
         public static void BeginHorizontal(GUIStyle style, float width, float height)
         {
-            GUILayout.BeginHorizontal(style, GUILayout.Width(width), GUILayout.Width(height));
+            GUILayout.BeginHorizontal(style, GUILayout.Width(width), GUILayout.Height(height));
         }
 
         /// <summary>
@@ -1568,7 +1562,7 @@ namespace AIO
         public static void Vertical(Action action, float width, float height)
         {
             if (action == null) return;
-            GUILayout.BeginVertical(GUILayout.Width(width), GUILayout.Width(height));
+            GUILayout.BeginVertical(GUILayout.Width(width), GUILayout.Height(height));
             action();
             GUILayout.EndVertical();
         }
@@ -1611,7 +1605,7 @@ namespace AIO
         public static void Vertical(Action action, GUIStyle style, float width, float height)
         {
             if (action == null) return;
-            GUILayout.BeginVertical(style, GUILayout.Width(width), GUILayout.Width(height));
+            GUILayout.BeginVertical(style, GUILayout.Width(width), GUILayout.Height(height));
             action();
             GUILayout.EndVertical();
         }
@@ -1632,7 +1626,7 @@ namespace AIO
         /// <param name="height">高度 <see cref="float"/></param>
         public static void BeginVertical(float width, float height)
         {
-            GUILayout.BeginVertical(GUILayout.Width(width), GUILayout.Width(height));
+            GUILayout.BeginVertical(GUILayout.Width(width), GUILayout.Height(height));
         }
 
         /// <summary>
@@ -1672,7 +1666,7 @@ namespace AIO
         /// <param name="height">高度 <see cref="float"/></param>
         public static void BeginVertical(GUIStyle style, float width, float height)
         {
-            GUILayout.BeginVertical(style, GUILayout.Width(width), GUILayout.Width(height));
+            GUILayout.BeginVertical(style, GUILayout.Width(width), GUILayout.Height(height));
         }
 
         /// <summary>
@@ -1730,7 +1724,7 @@ namespace AIO
         public static Vector2 VScrollView(Action action, Vector2 v2, float width, float height)
         {
             if (action == null) return v2;
-            v2 = GUILayout.BeginScrollView(v2, GUILayout.Width(width), GUILayout.Width(height));
+            v2 = GUILayout.BeginScrollView(v2, GUILayout.Width(width), GUILayout.Height(height));
             action();
             GUILayout.EndScrollView();
             return v2;
@@ -1824,7 +1818,7 @@ namespace AIO
         /// <returns><see cref="Vector2"/></returns>
         public static Vector2 BeginScrollView(Vector2 v2, float width, float height)
         {
-            return GUILayout.BeginScrollView(v2, GUILayout.Width(width), GUILayout.Width(height));
+            return GUILayout.BeginScrollView(v2, GUILayout.Width(width), GUILayout.Height(height));
         }
 
         /// <summary>

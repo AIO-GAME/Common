@@ -1,4 +1,5 @@
 ﻿<#@ template debug="false" hostspecific="false" language="C#" linePragmas="true" visibility="public"#>
 <#@ output extension=".cs" encoding="utf-8" #>
-<#@ include file="GULayout.ttinclude" #>
-<#= new ClassParamSingleton().ClassParams.GetAllText() #>
+<#@ assembly name="$(SolutionDir)Packages\com.self.package\Plugins\Editor\AIO.PrCourse.dll" #>
+<#@ import namespace="AIO"#>
+<#= new GULayoutSingleton().GetAllText() #>

@@ -44,7 +44,7 @@ namespace AIO.UEditor
             {
                 if (obj == null) continue;
                 EditorUtility.SetDirty(obj);
-                Undo.RecordObject(obj, string.Concat(UNDO, UndoNmae));
+                Undo.RecordObject(obj, string.Concat(UNDO, UndoName));
             }
         }
 
@@ -74,7 +74,7 @@ namespace AIO.UEditor
                 {
                     if (obj == null) continue;
                     EditorUtility.SetDirty(obj);
-                    Undo.RecordObject(obj, string.Concat(UNDO, UndoNmae));
+                    Undo.RecordObject(obj, string.Concat(UNDO, UndoName));
                 }
 
                 Repaint(); //重新绘制
