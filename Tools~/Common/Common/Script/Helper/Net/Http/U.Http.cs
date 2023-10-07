@@ -14,7 +14,6 @@ public partial class AHelper
         /// Model对象转换为uri网址参数形式
         /// </summary>
         /// <param name="obj">Model对象</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string UriParamSerialize(in object obj)
         {
             var properties = obj.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);

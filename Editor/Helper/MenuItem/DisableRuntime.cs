@@ -33,7 +33,11 @@ namespace AIO.UEditor
                 hashtable["includePlatforms"] = new List<string> { "Editor" };
                 hashtable["excludePlatforms"] = new List<string>();
                 AHelper.IO.WriteJson(item, hashtable);
+#if !UNITY_2020_1_OR_NEWER
+                AssetDatabase.SaveAssets();
+#else
                 AssetDatabase.SaveAssetIfDirty(AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>(assetPath));
+#endif
             }
 
             AssetDatabase.Refresh();
@@ -62,7 +66,11 @@ namespace AIO.UEditor
                 hashtable["includePlatforms"] = new List<string>();
                 hashtable["excludePlatforms"] = new List<string>();
                 AHelper.IO.WriteJson(item, hashtable);
+#if !UNITY_2020_1_OR_NEWER
+                AssetDatabase.SaveAssets();
+#else
                 AssetDatabase.SaveAssetIfDirty(AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>(assetPath));
+#endif
             }
 
             AssetDatabase.Refresh();

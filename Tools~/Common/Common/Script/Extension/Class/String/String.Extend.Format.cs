@@ -29,7 +29,6 @@ namespace AIO
             return string.Format(format, formattingArgs.Select(a => a as object).ToArray());
         }
 
-
         /// <summary>
         /// 格式化
         /// </summary>

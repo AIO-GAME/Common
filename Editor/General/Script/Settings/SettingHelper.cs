@@ -6,8 +6,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using UnityEditor;
+using UnityEngine;
 
 namespace AIO.UEditor
 {
@@ -27,15 +29,32 @@ namespace AIO.UEditor
                 Type type = null;
                 foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
                 {
+#if UNITY_2020_1_OR_NEWER
                     if (assembly.GetName().Name.StartsWith("UnityEditor.CoreModule"))
+#else
+                    if (assembly.GetName().Name.StartsWith("UnityEditor"))
+#endif
                     {
                         type = assembly.GetType("UnityEditor.TagManager");
-                        break;
+                        if (type != null) break;
                     }
                 }
 
+                if (type == null) return new Dictionary<int, string>();
                 var GetDefinedLayerCount = type.GetMethod("GetDefinedLayerCount", BindingFlags.Static | BindingFlags.NonPublic);
+                if (GetDefinedLayerCount is null)
+                {
+                    Debug.LogError("GetDefinedLayerCount is null");
+                    return new Dictionary<int, string>();
+                }
+
                 var GetDefinedLayers = type.GetMethod("Internal_GetDefinedLayers", BindingFlags.Static | BindingFlags.NonPublic);
+                if (GetDefinedLayers is null)
+                {
+                    Debug.LogError("GetDefinedLayers is null");
+                    return new Dictionary<int, string>();
+                }
+
                 var definedLayerCount = (int)GetDefinedLayerCount.Invoke(null, null);
                 var layerNames = new string[definedLayerCount];
                 var layerValues = new int[definedLayerCount];
@@ -60,18 +79,17 @@ namespace AIO.UEditor
             /// <param name="namevalue">层级名</param>
             public static void Set(byte layerindex, string namevalue)
             {
-                if (layerindex < 0 || layerindex >= 31) return;
-
+#if !UNITY_2020_1_OR_NEWER
+                return;
+#else
+                if (layerindex >= 31) return;
                 var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>("ProjectSettings/TagManager.asset");
                 var objects = new SerializedObject(asset);
                 var layers = objects.FindProperty("layers");
                 layers.GetArrayElementAtIndex(layerindex).stringValue = namevalue;
                 objects.UpdateIfRequiredOrScript();
                 objects.ApplyModifiedProperties();
-#if UNITY_2020_1_OR_NEWER
                 AssetDatabase.SaveAssetIfDirty(asset);
-#else
-                AssetDatabase.SaveAssets();
 #endif
             }
 
@@ -92,6 +110,9 @@ namespace AIO.UEditor
             /// <param name="order">Ture:从头开始 False:从尾开始</param>
             public static void Add(IList<string> agrs, bool order = true)
             {
+#if !UNITY_2020_1_OR_NEWER
+                return;
+#else
                 if (agrs.Count <= 0) return;
                 var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>("ProjectSettings/TagManager.asset");
                 var objects = new SerializedObject(asset);
@@ -116,10 +137,7 @@ namespace AIO.UEditor
 
                 objects.UpdateIfRequiredOrScript();
                 objects.ApplyModifiedProperties();
-#if UNITY_2020_1_OR_NEWER
                 AssetDatabase.SaveAssetIfDirty(asset);
-#else
-                AssetDatabase.SaveAssets();
 #endif
             }
 
@@ -136,12 +154,7 @@ namespace AIO.UEditor
             /// </summary>
             public static bool Has(string value)
             {
-                foreach (var item in GetInfo())
-                {
-                    if (value == item.Value) return true;
-                }
-
-                return false;
+                return GetInfo().Any(item => value == item.Value);
             }
         }
     }

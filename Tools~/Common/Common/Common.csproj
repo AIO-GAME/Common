@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <LangVersion>8</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -240,6 +241,18 @@
     <Compile Include="Script\Tools\Mail\MailSingleHandle.cs" />
     <Compile Include="Script\Tools\Mail\MailSingleInfo.cs" />
     <Compile Include="Script\Tools\NetWork\BytesSerializable.cs" />
+    <Compile Include="Script\Tools\NetWork\DownloadInfo.cs" />
+    <Compile Include="Script\Tools\NetWork\HTTP\HTTPNetwork.cs" />
+    <Compile Include="Script\Tools\NetWork\HTTP\IHTTPRequest.cs" />
+    <Compile Include="Script\Tools\NetWork\HTTP\HTTPRequest.cs" />
+    <Compile Include="Script\Tools\NetWork\HTTP\HTTPResponse.cs" />
+    <Compile Include="Script\Tools\NetWork\Interface\INetCryptography.cs" />
+    <Compile Include="Script\Tools\NetWork\Interface\INetGuard.cs" />
+    <Compile Include="Script\Tools\NetWork\Interface\INetRequest.cs" />
+    <Compile Include="Script\Tools\NetWork\Interface\INetResponse.cs" />
+    <Compile Include="Script\Tools\NetWork\Interface\INetSerialization.cs" />
+    <Compile Include="Script\Tools\NetWork\Interface\INetwork.cs" />
+    <Compile Include="Script\Tools\NetWork\Network.cs" />
     <Compile Include="Script\Tools\PList\IPListElement.cs" />
     <Compile Include="Script\Tools\PList\PListBinaryReader.cs" />
     <Compile Include="Script\Tools\PList\PListBinaryWriter.cs" />
@@ -284,6 +297,7 @@
     <Compile Include="Script\Tools\Storage\Storage.cs" />
     <Compile Include="Script\Tools\Storage\Storage.List.cs" />
     <Compile Include="Script\Tools\Storage\StorageFile.cs" />
+    <Compile Include="Script\Tools\Version.cs" />
     <Compile Include="Script\Unit\ScriptType.cs" />
     <Compile Include="Script\Unit\Unit.Char.cs" />
     <Compile Include="Script\Unit\Unit.Chinese.cs" />
@@ -360,9 +374,9 @@
     <Compile Include="Script\Helper\Math\U.Random.cs" />
     <Compile Include="Script\Helper\Math\U.Status.cs" />
     <Compile Include="Script\Helper\Math\U.Time.cs" />
-    <Compile Include="Script\Helper\Net\Http\HttpDownload.cs" />
-    <Compile Include="Script\Helper\Net\Http\HttpDownloadInfo.cs" />
-    <Compile Include="Script\Helper\Net\Http\U.Http.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\HttpDownload.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\HttpDownloadInfo.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.cs" />
     <Compile Include="Script\Helper\String\StringBlock.cs" />
     <Compile Include="Script\Helper\String\U.IDNo.cs" />
     <Compile Include="Script\Helper\String\U.MaskWord.cs" />
@@ -398,12 +412,19 @@
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Script\Tools\NetWork\TCP" />
+    <Folder Include="Script\Tools\NetWork\Websocket" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>@set CUR_DLL=$(ProjectDir)$(OutDir)
 @cd /d $(SolutionDir)
 @cd ..
 @set cur=%25cd%25\Plugins\
+@if not exist %cur% (
+@exit
+)
 @set dllname=HtmlAgilityPack
 @copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll
 )

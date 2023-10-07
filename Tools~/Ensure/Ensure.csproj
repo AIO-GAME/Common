@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <LangVersion>8</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -72,7 +73,9 @@
 @cd /d $(SolutionDir)
 @cd ..
 @set cur=%25cd%25\Plugins\
-
+@if not exist %cur% (
+@exit
+)
 @set dllname=$(TargetName)
 @if exist %25CUR_DLL%25%25dllname%25.dll (
 @copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll
