@@ -10,7 +10,6 @@ public partial class AHelper
         /// </summary>
         /// <param name="folder">文件夹路径</param>
         /// <param name="clear">清除</param>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void CreateFolder(in string folder, in bool clear = false)
         {
             var info = new DirectoryInfo(folder);
