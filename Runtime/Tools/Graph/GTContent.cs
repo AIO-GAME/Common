@@ -189,16 +189,16 @@ namespace AIO
         public static implicit operator GTContent(GUILayoutOption[] content) =>
             new GTContent(content);
 
-        public static implicit operator GUILayoutOption[](GTContent gtContent) =>
-            gtContent.Options.ToArray();
+        public static implicit operator GUILayoutOption[](GTContent content) =>
+            content.Options.ToArray();
 
-        public static implicit operator List<GUILayoutOption>(GTContent gtContent) =>
-            gtContent.Options;
+        public static implicit operator List<GUILayoutOption>(GTContent content) =>
+            content.Options;
 
-        public static implicit operator GUIContent(GTContent gtContent) =>
-            gtContent.Content;
+        public static implicit operator GUIContent(GTContent content) =>
+            content.Content;
 
-        public static implicit operator GUIStyle(GTContent gtContent) =>
-            gtContent.Style;
+        public static implicit operator GUIStyle(GTContent content) =>
+            content.Style;
     }
 }

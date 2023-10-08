@@ -6,6 +6,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using AIO.UEngine;
 using UnityEditor.EditorTools;
 using UnityEditor;
 using UnityEngine;
@@ -154,20 +156,184 @@ namespace AIO.UEditor
         /// <summary>
         /// 按钮
         /// </summary>
-        public static float Knob(Vector2 knobSize, float value, float minValue, float maxValue, string unit, Color backgroundColor, Color activeColor, bool showValue, params GUILayoutOption[] options)
+        public static float Knob(Vector2 knobSize, float value, float minValue, float maxValue, string unit, Color backgroundColor, Color activeColor, bool showValue,
+            params GUILayoutOption[] options)
         {
             return EditorGUILayout.Knob(knobSize, value, minValue, maxValue, unit, backgroundColor, activeColor, showValue, options);
+        }
+
+        #region CopyAction
+
+        /// <summary>
+        /// 复制文本信息
+        /// </summary>
+        public static void CopyAction(string contents)
+        {
+            var textEditor = new TextEditor { text = contents };
+            textEditor.OnFocus();
+            textEditor.Copy();
         }
 
         /// <summary>
         /// 复制文本信息
         /// </summary>
-        public static Action<string> CopyTextAction = contents =>
+        public static void CopyAction(long contents)
         {
-            var textEditor = new TextEditor();
-            textEditor.text = contents;
+            var textEditor = new TextEditor { text = contents.ToString(CultureInfo.CurrentCulture) };
             textEditor.OnFocus();
             textEditor.Copy();
-        };
+        }
+
+        /// <summary>
+        /// 复制文本信息
+        /// </summary>
+        public static void CopyAction(double contents)
+        {
+            var textEditor = new TextEditor { text = contents.ToString(CultureInfo.CurrentCulture) };
+            textEditor.OnFocus();
+            textEditor.Copy();
+        }
+
+        /// <summary>
+        /// 复制文本信息
+        /// </summary>
+        public static void CopyAction(Color contents)
+        {
+            var textEditor = new TextEditor { text = contents.ToConverHtmlSting() };
+            textEditor.OnFocus();
+            textEditor.Copy();
+        }
+
+        /// <summary>
+        /// 复制文本信息
+        /// </summary>
+        public static void CopyAction(Color32 contents)
+        {
+            var textEditor = new TextEditor { text = contents.ToConverHtmlSting() };
+            textEditor.OnFocus();
+            textEditor.Copy();
+        }
+
+        /// <summary>
+        /// 复制文本信息
+        /// </summary>
+        public static void CopyAction<T>(T contents)
+        {
+            var textEditor = new TextEditor { text = AHelper.Json.Serialize(contents) };
+            textEditor.OnFocus();
+            textEditor.Copy();
+        }
+
+        #endregion
+
+        #region PasteAction
+
+        /// <summary>
+        /// 粘贴信息
+        /// </summary>
+        public static T PasteAction<T>()
+        {
+            var textEditor = new TextEditor();
+            textEditor.OnFocus();
+            textEditor.Paste();
+            try
+            {
+                return AHelper.Json.Deserialize<T>(textEditor.text);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                return default;
+            }
+        }
+
+        /// <summary>
+        /// 粘贴信息
+        /// </summary>
+        public static Color PasteActionColor()
+        {
+            var textEditor = new TextEditor();
+            textEditor.OnFocus();
+            textEditor.Paste();
+            try
+            {
+                return RHelper.Color.HexToColor(textEditor.text);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                return default;
+            }
+        }
+
+        /// <summary>
+        /// 粘贴信息
+        /// </summary>
+        public static Color32 PasteActionColor32()
+        {
+            var textEditor = new TextEditor();
+            textEditor.OnFocus();
+            textEditor.Paste();
+            try
+            {
+                return RHelper.Color.HexToColor32(textEditor.text);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                return default;
+            }
+        }
+
+        /// <summary>
+        /// 粘贴信息
+        /// </summary>
+        public static string PasteActionString()
+        {
+            var textEditor = new TextEditor();
+            textEditor.OnFocus();
+            textEditor.Paste();
+            return textEditor.text;
+        }
+
+        /// <summary>
+        /// 粘贴信息
+        /// </summary>
+        public static long PasteActionLong()
+        {
+            var textEditor = new TextEditor();
+            textEditor.OnFocus();
+            textEditor.Paste();
+            try
+            {
+                return long.Parse(textEditor.text);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                return default;
+            }
+        }
+
+        /// <summary>
+        /// 粘贴信息
+        /// </summary>
+        public static double PasteActionDouble()
+        {
+            var textEditor = new TextEditor();
+            textEditor.OnFocus();
+            textEditor.Paste();
+            try
+            {
+                return double.Parse(textEditor.text);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                return default;
+            }
+        }
+
+        #endregion
     }
 }
