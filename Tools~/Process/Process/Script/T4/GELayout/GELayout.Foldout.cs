@@ -81,9 +81,9 @@ namespace AIO
 
             var value = new FunctionParam("Action", "action", "") { Comments = "回调函数" };
             var foldout = new FunctionParam("bool", "foldout", "foldout") { Comments = "显示的折叠状态" };
-            var style = new FunctionParam("GUIStyle", "style = null", "style") { Comments = "显示风格" };
-            var menuAction = new FunctionParam("Action<Rect>", "menuAction = null", "menuAction") { Comments = "操作菜单" };
-            var menuIcon = new FunctionParam("GUIStyle", "menuIcon = null", "menuIcon") { Comments = "菜单ICON显示风格" };
+            var style = new FunctionParam("GUIStyle", "style", "style") { Comments = "显示风格", Default = "null" };
+            var menuAction = new FunctionParam("Action<Rect>", "menuAction", "menuAction") { Comments = "操作菜单", Default = "null" };
+            var menuIcon = new FunctionParam("GUIStyle", "menuIcon", "menuIcon") { Comments = "菜单ICON显示风格", Default = "null" };
 
             foreach (var item in new string[] { "string", "GUIContent" })
             {
@@ -148,7 +148,7 @@ namespace AIO
 
             var value = new FunctionParam("Action", "action", "") { Comments = "回调函数" };
             var foldout = new FunctionParam("bool", "foldout", "foldout") { Comments = "显示的折叠状态" };
-            var style = new FunctionParam("GUIStyle", "style = null", "style") { Comments = "显示风格" };
+            var style = new FunctionParam("GUIStyle", "style", "style") { Comments = "显示风格", Default = "null" };
 
             foreach (var item in new string[] { "string", "GUIContent" })
             {

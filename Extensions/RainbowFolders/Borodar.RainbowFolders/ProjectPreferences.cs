@@ -209,7 +209,7 @@ namespace Borodar.RainbowFolders
 		[SettingsProvider]
 		public static SettingsProvider CreateSettingProvider()
 		{
-			return new SettingsProvider("Borodar/RainbowFolders", SettingsScope.Project)
+			return new SettingsProvider("AIO/Borda Rainbow Folders", SettingsScope.Project)
 			{
 				label = "Rainbow Folders",
 				guiHandler = delegate

@@ -27,11 +27,9 @@ namespace AIO
             foreach (var showFunc in new FunctionParam[]
                      {
                          new FunctionParam { Type = "Action<T>", Output = "index => showFunc.Invoke(array[index])" },
-                         new FunctionParam
-                             { Type = "Action<int, T>", Output = "index => showFunc.Invoke(index, array[index])" },
+                         new FunctionParam { Type = "Action<int, T>", Output = "index => showFunc.Invoke(index, array[index])" },
                          new FunctionParam { Type = "Func<T, T>", Output = "index => showFunc.Invoke(array[index])" },
-                         new FunctionParam
-                             { Type = "Func<int, T, T>", Output = "index => showFunc.Invoke(index, array[index])" },
+                         new FunctionParam { Type = "Func<int, T, T>", Output = "index => showFunc.Invoke(index, array[index])" },
                      })
             {
                 showFunc.Name = "showFunc";
@@ -42,8 +40,7 @@ namespace AIO
                     new FunctionParam[] { label, array, tips, showFunc, addFunc, lbStyle, bgStyle_null, },
                     new FunctionParam[] { label, array, tips, showFunc, addFunc, lbStyle_null, bgStyle_null, },
                     new FunctionParam[] { label, array, tips, showFunc, addFunc_null, lbStyle_null, bgStyle_null, },
-                    new FunctionParam[]
-                        { label, array, tips_null, showFunc, addFunc_null, lbStyle_null, bgStyle_null, },
+                    new FunctionParam[] { label, array, tips_null, showFunc, addFunc_null, lbStyle_null, bgStyle_null, },
                 };
                 foreach (var param in paramsList)
                 {
@@ -64,10 +61,8 @@ namespace AIO
                     new FunctionParam[] { label, array, foldout, tips, showFunc, addFunc, lbStyle, bgStyle, },
                     new FunctionParam[] { label, array, foldout, tips, showFunc, addFunc, lbStyle, bgStyle_null, },
                     new FunctionParam[] { label, array, foldout, tips, showFunc, addFunc, lbStyle_null, bgStyle_null, },
-                    new FunctionParam[]
-                        { label, array, foldout, tips, showFunc, addFunc_null, lbStyle_null, bgStyle_null, },
-                    new FunctionParam[]
-                        { label, array, foldout, tips_null, showFunc, addFunc_null, lbStyle_null, bgStyle_null, },
+                    new FunctionParam[] { label, array, foldout, tips, showFunc, addFunc_null, lbStyle_null, bgStyle_null, },
+                    new FunctionParam[] { label, array, foldout, tips_null, showFunc, addFunc_null, lbStyle_null, bgStyle_null, },
                 };
                 foreach (var param in paramsList)
                 {

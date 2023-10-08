@@ -192,12 +192,14 @@
     <Compile Include="Script\T4\FuncParamAttribute.cs" />
     <Compile Include="Script\T4\FunctionChunk.cs" />
     <Compile Include="Script\T4\FunctionParam.cs" />
+    <Compile Include="Script\T4\GELayout.Rect\GERLayout.Area.cs" />
     <Compile Include="Script\T4\GELayout.Rect\GERLayout.Field.cs" />
     <Compile Include="Script\T4\GELayout.Rect\GERLayout.Disabled.cs" />
     <Compile Include="Script\T4\GELayout.Rect\GERLayout.Button.cs" />
     <Compile Include="Script\T4\GELayout.Rect\GERLayout.Check.cs" />
     <Compile Include="Script\T4\GELayout.Rect\GERLayout.Foldout.cs" />
     <Compile Include="Script\T4\GELayout.Rect\GERLayout.Property.cs" />
+    <Compile Include="Script\T4\GELayout.Rect\GERLayout.SP.cs" />
     <Compile Include="Script\T4\GELayout\GELayout.Enum.cs" />
     <Compile Include="Script\T4\GELayout\GELayout.Foldout.cs" />
     <Compile Include="Script\T4\GELayout\GELayout.Button.cs" />

@@ -12,9 +12,7 @@ namespace AIO
         {
             var chunks = new List<FunctionChunk>();
             var action = new FunctionParam("Action", "action", "") { Comments = "回调" };
-            var rect = new FunctionParam("Rect", "rect", "rect") { Comments = "绘制区域" };
-            var pos = new FunctionParam("Vector2", "pos", "new Rect(pos - size / 2, size)") { Comments = "位置" };
-            var size = new FunctionParam("Vector2", "size", "") { Comments = "大小" };
+       
             var width_float = new FunctionParam("float", "width", "GUILayout.Width(width)") { Comments = "宽度" };
             var height_float = new FunctionParam("float", "height", "GUILayout.Height(height)") { Comments = "高度" };
             foreach (var item in new string[] { "GUIContent", "string" })
@@ -64,53 +62,6 @@ namespace AIO
                         ReturnType = "void",
                     };
                     chunk.Content = $"if (GUILayout.Button({chunk.GetParamValues()})) action();";
-                    chunks.Add(chunk);
-                }
-            }
-
-            foreach (var item in new string[] { "GUIContent", "string", "Texture" })
-            {
-                var label = new FunctionParam(item, "label", "label") { Comments = "标签" };
-                var paramsList = new List<FunctionParam[]>()
-                {
-                    new FunctionParam[] { rect, label, },
-                    new FunctionParam[] { rect, label, Style, },
-                    new FunctionParam[] { pos, size, label, },
-                    new FunctionParam[] { pos, size, label, Style, },
-                };
-                foreach (var param in paramsList)
-                {
-                    var chunk = new FunctionChunk
-                    {
-                        State = TChunkState.NewStatic,
-                        Comments = "绘制 按钮",
-                        Name = "Button",
-                        Params = param,
-                        ReturnType = "bool",
-                    };
-                    chunk.Content = $"return GUI.Button({chunk.GetParamValues()});";
-                    chunks.Add(chunk);
-                }
-
-                paramsList = new List<FunctionParam[]>()
-                {
-                    new FunctionParam[] { rect, label, action, },
-                    new FunctionParam[] { rect, label, action, Style, },
-                    new FunctionParam[] { pos, size, label, action, },
-                    new FunctionParam[] { pos, size, label, action, Style, },
-                };
-                foreach (var param in paramsList)
-                {
-                    var chunk = new FunctionChunk
-                    {
-                        State = TChunkState.NewStatic,
-                        Comments = "绘制 按钮",
-                        Name = "Button",
-                        Params = param,
-                        ReturnType = "void",
-                    };
-                    chunk.ContentBuilder.AppendLine("if (action is null) return;");
-                    chunk.ContentBuilder.AppendLine($"if (GUI.Button({chunk.GetParamValues()})) action();");
                     chunks.Add(chunk);
                 }
             }

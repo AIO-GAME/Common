@@ -4,6 +4,7 @@
 |||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
+using UnityEditor;
 using UnityEngine;
 
 namespace AIO.UEditor
@@ -11,7 +12,7 @@ namespace AIO.UEditor
     /// <summary>
     /// Editor 基类 无预览窗口 数据类
     /// </summary>
-    public abstract partial class EmptyEditor : UnityEditor.Editor
+    public abstract partial class EmptyEditor : Editor
     {
         /// <summary>
         /// 开启预览窗口
