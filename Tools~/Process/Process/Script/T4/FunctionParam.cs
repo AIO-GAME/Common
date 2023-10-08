@@ -34,6 +34,11 @@ namespace AIO
         /// </summary>
         public string Comments { get; set; }
 
+        /// <summary>
+        /// 默认值
+        /// </summary>
+        public string Default { get; set; }
+        
         public FunctionParam()
         {
         }

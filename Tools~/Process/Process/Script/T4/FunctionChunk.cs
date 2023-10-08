@@ -120,7 +120,10 @@ namespace AIO
                 if (param is null || string.IsNullOrEmpty(param.Name)) continue;
                 if (!IsAsync && ReturnType != "Task" && !param.IsParams && param.Modifier != ParamModifier.None)
                 {
-                    sb.AppendFormat("{0} {1} {2}, ", param.Modifier.ToString().ToLower(), param.Type, param.Name);
+                    if (string.IsNullOrEmpty(param.Default))
+                        sb.AppendFormat("{0} {1} {2}, ", param.Modifier.ToString().ToLower(), param.Type, param.Name);
+                    else
+                        sb.AppendFormat("{0} {1} {2} = {3}, ", param.Modifier.ToString().ToLower(), param.Output, param.Name, param.Default);
                 }
                 else if (param.IsParams)
                 {
@@ -128,7 +131,10 @@ namespace AIO
                 }
                 else
                 {
-                    sb.AppendFormat("{0} {1}, ", param.Type, param.Name);
+                    if (string.IsNullOrEmpty(param.Default))
+                        sb.AppendFormat("{0} {1}, ", param.Type, param.Name);
+                    else
+                        sb.AppendFormat("{0} {1} = {2}, ", param.Type, param.Name, param.Default);
                 }
             }
 

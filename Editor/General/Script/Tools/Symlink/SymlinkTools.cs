@@ -30,15 +30,22 @@ namespace AIO.UEditor
         // Style used to draw the symlink indicator in the project view.
         private static GUIStyle _SymlinkMarkerStyle;
 
-        private static GUIStyle SymlinkMarkerStyle =>
-            _SymlinkMarkerStyle ?? (_SymlinkMarkerStyle = new GUIStyle(EditorStyles.label)
+        private static GUIStyle SymlinkMarkerStyle
+        {
+            get
             {
-                normal =
+                if (_SymlinkMarkerStyle is null)
                 {
-                    textColor = new Color(.2f, .8f, .2f, .8f)
-                },
-                alignment = TextAnchor.MiddleRight
-            });
+                    _SymlinkMarkerStyle = new GUIStyle(EditorStyles.label)
+                    {
+                        normal = { textColor = new Color(.2f, .8f, .2f, .8f) },
+                        alignment = TextAnchor.MiddleRight
+                    };
+                }
+
+                return _SymlinkMarkerStyle;
+            }
+        }
 
         /// <summary>
         /// Static constructor subscribes to projectWindowItemOnGUI delegate.
@@ -161,7 +168,7 @@ namespace AIO.UEditor
                     break;
             }
 
-            //UnityEngine.Debug.Log(string.Format("Created symlink: {0} <=> {1}", targetPath, sourceFolderPath));
+            Debug.Log(string.Format("Created symlink: {0} <=> {1}", targetPath, sourceFolderPath));
             AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
         }
 

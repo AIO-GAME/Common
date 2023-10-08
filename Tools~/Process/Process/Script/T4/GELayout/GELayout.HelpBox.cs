@@ -14,10 +14,10 @@ namespace AIO
         {
             var chunks = new List<FunctionChunk>();
 
-            var type = new FunctionParam("MessageType", "type = MessageType.None", "type") { Comments = "消息类型" };
-            var wide = new FunctionParam("bool", "wide = true", "wide")
+            var type = new FunctionParam("MessageType", "type", "type") { Comments = "消息类型", Default = "MessageType.None", };
+            var wide = new FunctionParam("bool", "wide", "wide")
             {
-                Comments = "true:帮助框覆盖整个窗口宽度;false:只覆盖控制部分"
+                Comments = "true:帮助框覆盖整个窗口宽度;false:只覆盖控制部分", Default = "true",
             };
             foreach (var item in new string[] { "string", "GUIContent", "Texture" })
             {
@@ -59,15 +59,9 @@ namespace AIO
         {
             var chunks = new List<FunctionChunk>();
             var rect = new FunctionParam("Rect", "rect", "rect") { Comments = "矩形" };
-            var type = new FunctionParam("MessageType", "type = MessageType.None", "type") { Comments = "消息类型" };
-            var pos = new FunctionParam("Vector2", "pos", "new Rect(pos + size / 2, size)")
-            {
-                Comments = "位置信息"
-            };
-            var size = new FunctionParam("Vector2", "size", "")
-            {
-                Comments = "大小信息"
-            };
+            var type = new FunctionParam("MessageType", "type", "type") { Comments = "消息类型", Default = "MessageType.None", };
+            var pos = new FunctionParam("Vector2", "pos", "new Rect(pos + size / 2, size)") { Comments = "位置信息" };
+            var size = new FunctionParam("Vector2", "size", "") { Comments = "大小信息" };
             foreach (var item in new string[] { "string", })
             {
                 var message = new FunctionParam(item, "message", "message") { Comments = "消息" };

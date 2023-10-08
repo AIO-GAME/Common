@@ -416,6 +416,12 @@
     <Folder Include="Script\Tools\NetWork\TCP" />
     <Folder Include="Script\Tools\NetWork\Websocket" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Script\Tools\Tuple\Tuple.Generated.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Tuple.Generated.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>@set CUR_DLL=$(ProjectDir)$(OutDir)
