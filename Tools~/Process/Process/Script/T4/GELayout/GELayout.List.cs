@@ -28,8 +28,8 @@ namespace AIO
                      {
                          new FunctionParam { Type = "Action<T>", Output = "index => showFunc.Invoke(array[index])" },
                          new FunctionParam { Type = "Action<int, T>", Output = "index => showFunc.Invoke(index, array[index])" },
-                         new FunctionParam { Type = "Func<T, T>", Output = "index => showFunc.Invoke(array[index])" },
-                         new FunctionParam { Type = "Func<int, T, T>", Output = "index => showFunc.Invoke(index, array[index])" },
+                         new FunctionParam { Type = "Func<T, T>", Output = "index => array[index] = showFunc.Invoke(array[index])" },
+                         new FunctionParam { Type = "Func<int, T, T>", Output = "index => array[index] = showFunc.Invoke(index, array[index])" },
                      })
             {
                 showFunc.Name = "showFunc";

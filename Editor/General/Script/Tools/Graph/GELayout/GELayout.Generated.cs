@@ -895,9 +895,9 @@ namespace AIO.UEditor
         /// <param name="action">回调函数 <see cref="Action"/></param>
         /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="foldout">显示的折叠状态 <see cref="bool"/></param>
-        /// <param name="style = null">显示风格 <see cref="GUIStyle"/></param>
-        /// <param name="menuAction = null">操作菜单 <see cref="Action&lt;Rect&gt;"/></param>
-        /// <param name="menuIcon = null">菜单ICON显示风格 <see cref="GUIStyle"/></param>
+        /// <param name="style">显示风格 <see cref="GUIStyle"/></param>
+        /// <param name="menuAction">操作菜单 <see cref="Action&lt;Rect&gt;"/></param>
+        /// <param name="menuIcon">菜单ICON显示风格 <see cref="GUIStyle"/></param>
         /// <returns>true:呈现子对象,false:隐藏<see cref="bool"/></returns>
         [ExcludeFromDocs]
         public new static bool VFoldoutHeader(Action action, string label, bool foldout, GUIStyle style = null, Action<Rect> menuAction = null, GUIStyle menuIcon = null)
@@ -917,9 +917,9 @@ namespace AIO.UEditor
         /// </summary>
         /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="foldout">显示的折叠状态 <see cref="bool"/></param>
-        /// <param name="style = null">显示风格 <see cref="GUIStyle"/></param>
-        /// <param name="menuAction = null">操作菜单 <see cref="Action&lt;Rect&gt;"/></param>
-        /// <param name="menuIcon = null">菜单ICON显示风格 <see cref="GUIStyle"/></param>
+        /// <param name="style">显示风格 <see cref="GUIStyle"/></param>
+        /// <param name="menuAction">操作菜单 <see cref="Action&lt;Rect&gt;"/></param>
+        /// <param name="menuIcon">菜单ICON显示风格 <see cref="GUIStyle"/></param>
         /// <returns>true:呈现子对象,false:隐藏<see cref="bool"/></returns>
         [ExcludeFromDocs]
         public new static bool BeginFoldoutHeader(string label, bool foldout, GUIStyle style = null, Action<Rect> menuAction = null, GUIStyle menuIcon = null)
@@ -937,9 +937,9 @@ namespace AIO.UEditor
         /// <param name="action">回调函数 <see cref="Action"/></param>
         /// <param name="label">标签 <see cref="GUIContent"/></param>
         /// <param name="foldout">显示的折叠状态 <see cref="bool"/></param>
-        /// <param name="style = null">显示风格 <see cref="GUIStyle"/></param>
-        /// <param name="menuAction = null">操作菜单 <see cref="Action&lt;Rect&gt;"/></param>
-        /// <param name="menuIcon = null">菜单ICON显示风格 <see cref="GUIStyle"/></param>
+        /// <param name="style">显示风格 <see cref="GUIStyle"/></param>
+        /// <param name="menuAction">操作菜单 <see cref="Action&lt;Rect&gt;"/></param>
+        /// <param name="menuIcon">菜单ICON显示风格 <see cref="GUIStyle"/></param>
         /// <returns>true:呈现子对象,false:隐藏<see cref="bool"/></returns>
         [ExcludeFromDocs]
         public new static bool VFoldoutHeader(Action action, GUIContent label, bool foldout, GUIStyle style = null, Action<Rect> menuAction = null, GUIStyle menuIcon = null)
@@ -959,9 +959,9 @@ namespace AIO.UEditor
         /// </summary>
         /// <param name="label">标签 <see cref="GUIContent"/></param>
         /// <param name="foldout">显示的折叠状态 <see cref="bool"/></param>
-        /// <param name="style = null">显示风格 <see cref="GUIStyle"/></param>
-        /// <param name="menuAction = null">操作菜单 <see cref="Action&lt;Rect&gt;"/></param>
-        /// <param name="menuIcon = null">菜单ICON显示风格 <see cref="GUIStyle"/></param>
+        /// <param name="style">显示风格 <see cref="GUIStyle"/></param>
+        /// <param name="menuAction">操作菜单 <see cref="Action&lt;Rect&gt;"/></param>
+        /// <param name="menuIcon">菜单ICON显示风格 <see cref="GUIStyle"/></param>
         /// <returns>true:呈现子对象,false:隐藏<see cref="bool"/></returns>
         [ExcludeFromDocs]
         public new static bool BeginFoldoutHeader(GUIContent label, bool foldout, GUIStyle style = null, Action<Rect> menuAction = null, GUIStyle menuIcon = null)
@@ -992,7 +992,7 @@ namespace AIO.UEditor
         /// <param name="action">回调函数 <see cref="Action"/></param>
         /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="foldout">显示的折叠状态 <see cref="bool"/></param>
-        /// <param name="style = null">显示风格 <see cref="GUIStyle"/></param>
+        /// <param name="style">显示风格 <see cref="GUIStyle"/></param>
         /// <returns>true:呈现子对象,false:隐藏<see cref="bool"/></returns>
         [ExcludeFromDocs]
         public new static bool VFoldoutHeaderGroup(Action action, string label, bool foldout, GUIStyle style = null)
@@ -1017,7 +1017,7 @@ namespace AIO.UEditor
         /// <param name="action">回调函数 <see cref="Action"/></param>
         /// <param name="label">标签 <see cref="GUIContent"/></param>
         /// <param name="foldout">显示的折叠状态 <see cref="bool"/></param>
-        /// <param name="style = null">显示风格 <see cref="GUIStyle"/></param>
+        /// <param name="style">显示风格 <see cref="GUIStyle"/></param>
         /// <returns>true:呈现子对象,false:隐藏<see cref="bool"/></returns>
         [ExcludeFromDocs]
         public new static bool VFoldoutHeaderGroup(Action action, GUIContent label, bool foldout, GUIStyle style = null)
@@ -1044,7 +1044,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="GUIContent"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool Button(GUIContent label, params GUILayoutOption[] options)
+        public static bool Button(GUIContent label, params GUILayoutOption[] options)
         {
             return GUILayout.Button(label, options);
         }
@@ -1055,7 +1055,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="GUIContent"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool Button(GUIContent label, float width)
+        public static bool Button(GUIContent label, float width)
         {
             return GUILayout.Button(label, GUILayout.Width(width));
         }
@@ -1067,7 +1067,7 @@ namespace AIO.UEditor
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <param name="height">高度 <see cref="float"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool Button(GUIContent label, float width, float height)
+        public static bool Button(GUIContent label, float width, float height)
         {
             return GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height));
         }
@@ -1079,7 +1079,7 @@ namespace AIO.UEditor
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool Button(GUIContent label, GUIStyle style, params GUILayoutOption[] options)
+        public static bool Button(GUIContent label, GUIStyle style, params GUILayoutOption[] options)
         {
             return GUILayout.Button(label, style, options);
         }
@@ -1091,7 +1091,7 @@ namespace AIO.UEditor
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool Button(GUIContent label, GUIStyle style, float width)
+        public static bool Button(GUIContent label, GUIStyle style, float width)
         {
             return GUILayout.Button(label, style, GUILayout.Width(width));
         }
@@ -1104,7 +1104,7 @@ namespace AIO.UEditor
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <param name="height">高度 <see cref="float"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool Button(GUIContent label, GUIStyle style, float width, float height)
+        public static bool Button(GUIContent label, GUIStyle style, float width, float height)
         {
             return GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height));
         }
@@ -1115,7 +1115,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="GUIContent"/></param>
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
-        public new static void Button(GUIContent label, Action action, params GUILayoutOption[] options)
+        public static void Button(GUIContent label, Action action, params GUILayoutOption[] options)
         {
             if (GUILayout.Button(label, options)) action();
         }
@@ -1126,7 +1126,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="GUIContent"/></param>
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
-        public new static void Button(GUIContent label, Action action, float width)
+        public static void Button(GUIContent label, Action action, float width)
         {
             if (GUILayout.Button(label, GUILayout.Width(width))) action();
         }
@@ -1138,7 +1138,7 @@ namespace AIO.UEditor
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <param name="height">高度 <see cref="float"/></param>
-        public new static void Button(GUIContent label, Action action, float width, float height)
+        public static void Button(GUIContent label, Action action, float width, float height)
         {
             if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) action();
         }
@@ -1150,7 +1150,7 @@ namespace AIO.UEditor
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
-        public new static void Button(GUIContent label, Action action, GUIStyle style, params GUILayoutOption[] options)
+        public static void Button(GUIContent label, Action action, GUIStyle style, params GUILayoutOption[] options)
         {
             if (GUILayout.Button(label, style, options)) action();
         }
@@ -1162,7 +1162,7 @@ namespace AIO.UEditor
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
-        public new static void Button(GUIContent label, Action action, GUIStyle style, float width)
+        public static void Button(GUIContent label, Action action, GUIStyle style, float width)
         {
             if (GUILayout.Button(label, style, GUILayout.Width(width))) action();
         }
@@ -1175,7 +1175,7 @@ namespace AIO.UEditor
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <param name="height">高度 <see cref="float"/></param>
-        public new static void Button(GUIContent label, Action action, GUIStyle style, float width, float height)
+        public static void Button(GUIContent label, Action action, GUIStyle style, float width, float height)
         {
             if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) action();
         }
@@ -1186,7 +1186,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool Button(string label, params GUILayoutOption[] options)
+        public static bool Button(string label, params GUILayoutOption[] options)
         {
             return GUILayout.Button(label, options);
         }
@@ -1197,7 +1197,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool Button(string label, float width)
+        public static bool Button(string label, float width)
         {
             return GUILayout.Button(label, GUILayout.Width(width));
         }
@@ -1209,7 +1209,7 @@ namespace AIO.UEditor
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <param name="height">高度 <see cref="float"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool Button(string label, float width, float height)
+        public static bool Button(string label, float width, float height)
         {
             return GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height));
         }
@@ -1221,7 +1221,7 @@ namespace AIO.UEditor
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool Button(string label, GUIStyle style, params GUILayoutOption[] options)
+        public static bool Button(string label, GUIStyle style, params GUILayoutOption[] options)
         {
             return GUILayout.Button(label, style, options);
         }
@@ -1233,7 +1233,7 @@ namespace AIO.UEditor
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool Button(string label, GUIStyle style, float width)
+        public static bool Button(string label, GUIStyle style, float width)
         {
             return GUILayout.Button(label, style, GUILayout.Width(width));
         }
@@ -1246,7 +1246,7 @@ namespace AIO.UEditor
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <param name="height">高度 <see cref="float"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool Button(string label, GUIStyle style, float width, float height)
+        public static bool Button(string label, GUIStyle style, float width, float height)
         {
             return GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height));
         }
@@ -1257,7 +1257,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
-        public new static void Button(string label, Action action, params GUILayoutOption[] options)
+        public static void Button(string label, Action action, params GUILayoutOption[] options)
         {
             if (GUILayout.Button(label, options)) action();
         }
@@ -1268,7 +1268,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
-        public new static void Button(string label, Action action, float width)
+        public static void Button(string label, Action action, float width)
         {
             if (GUILayout.Button(label, GUILayout.Width(width))) action();
         }
@@ -1280,7 +1280,7 @@ namespace AIO.UEditor
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <param name="height">高度 <see cref="float"/></param>
-        public new static void Button(string label, Action action, float width, float height)
+        public static void Button(string label, Action action, float width, float height)
         {
             if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) action();
         }
@@ -1292,7 +1292,7 @@ namespace AIO.UEditor
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
-        public new static void Button(string label, Action action, GUIStyle style, params GUILayoutOption[] options)
+        public static void Button(string label, Action action, GUIStyle style, params GUILayoutOption[] options)
         {
             if (GUILayout.Button(label, style, options)) action();
         }
@@ -1304,7 +1304,7 @@ namespace AIO.UEditor
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
-        public new static void Button(string label, Action action, GUIStyle style, float width)
+        public static void Button(string label, Action action, GUIStyle style, float width)
         {
             if (GUILayout.Button(label, style, GUILayout.Width(width))) action();
         }
@@ -1317,7 +1317,7 @@ namespace AIO.UEditor
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <param name="height">高度 <see cref="float"/></param>
-        public new static void Button(string label, Action action, GUIStyle style, float width, float height)
+        public static void Button(string label, Action action, GUIStyle style, float width, float height)
         {
             if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) action();
         }
@@ -1328,7 +1328,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="GUIContent"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonDropdown(GUIContent label, params GUILayoutOption[] options)
+        public static bool ButtonDropdown(GUIContent label, params GUILayoutOption[] options)
         {
             return EditorGUILayout.DropdownButton(label, FocusType.Passive, options);
         }
@@ -1340,7 +1340,7 @@ namespace AIO.UEditor
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonDropdown(GUIContent label, GUIStyle style, params GUILayoutOption[] options)
+        public static bool ButtonDropdown(GUIContent label, GUIStyle style, params GUILayoutOption[] options)
         {
             return EditorGUILayout.DropdownButton(label, FocusType.Passive, style, options);
         }
@@ -1351,7 +1351,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonDropdown(string label, params GUILayoutOption[] options)
+        public static bool ButtonDropdown(string label, params GUILayoutOption[] options)
         {
             return EditorGUILayout.DropdownButton(new GUIContent(label), FocusType.Passive, options);
         }
@@ -1363,7 +1363,7 @@ namespace AIO.UEditor
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonDropdown(string label, GUIStyle style, params GUILayoutOption[] options)
+        public static bool ButtonDropdown(string label, GUIStyle style, params GUILayoutOption[] options)
         {
             return EditorGUILayout.DropdownButton(new GUIContent(label), FocusType.Passive, style, options);
         }
@@ -1374,7 +1374,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="Texture"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonDropdown(Texture label, params GUILayoutOption[] options)
+        public static bool ButtonDropdown(Texture label, params GUILayoutOption[] options)
         {
             return EditorGUILayout.DropdownButton(new GUIContent(label), FocusType.Passive, options);
         }
@@ -1386,7 +1386,7 @@ namespace AIO.UEditor
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonDropdown(Texture label, GUIStyle style, params GUILayoutOption[] options)
+        public static bool ButtonDropdown(Texture label, GUIStyle style, params GUILayoutOption[] options)
         {
             return EditorGUILayout.DropdownButton(new GUIContent(label), FocusType.Passive, style, options);
         }
@@ -1397,7 +1397,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="GTContent"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonDropdown(GTContent label, params GUILayoutOption[] options)
+        public static bool ButtonDropdown(GTContent label, params GUILayoutOption[] options)
         {
             return EditorGUILayout.DropdownButton(new GUIContent(label), FocusType.Passive, options);
         }
@@ -1409,7 +1409,7 @@ namespace AIO.UEditor
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonDropdown(GTContent label, GUIStyle style, params GUILayoutOption[] options)
+        public static bool ButtonDropdown(GTContent label, GUIStyle style, params GUILayoutOption[] options)
         {
             return EditorGUILayout.DropdownButton(new GUIContent(label), FocusType.Passive, style, options);
         }
@@ -1422,7 +1422,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="GUIContent"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonLink(GUIContent label, params GUILayoutOption[] options)
+        public static bool ButtonLink(GUIContent label, params GUILayoutOption[] options)
         {
             return EditorGUILayout.LinkButton(label, options);
         }
@@ -1437,7 +1437,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonLink(string label, params GUILayoutOption[] options)
+        public static bool ButtonLink(string label, params GUILayoutOption[] options)
         {
             return EditorGUILayout.LinkButton(label, options);
         }
@@ -1452,7 +1452,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="Texture"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonLink(Texture label, params GUILayoutOption[] options)
+        public static bool ButtonLink(Texture label, params GUILayoutOption[] options)
         {
             return EditorGUILayout.LinkButton(new GUIContent(label), options);
         }
@@ -1467,12 +1467,1053 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="GTContent"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonLink(GTContent label, params GUILayoutOption[] options)
+        public static bool ButtonLink(GTContent label, params GUILayoutOption[] options)
         {
             return EditorGUILayout.LinkButton(label, options);
         }
 
 #endif
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="T"/></param>
+        public static void ButtonCopy<T>(string label, T content) 
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="T"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy<T>(string label, T content, GUIStyle style) 
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="T"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        public static void ButtonCopy<T>(string label, T content, float width) 
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="T"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy<T>(string label, T content, float width, GUIStyle style) 
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="T"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        public static void ButtonCopy<T>(string label, T content, float width, float height) 
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="T"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy<T>(string label, T content, float width, float height, GUIStyle style) 
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="string"/></param>
+        public static void ButtonCopy(string label, string content)
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="string"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(string label, string content, GUIStyle style)
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="string"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        public static void ButtonCopy(string label, string content, float width)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="string"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(string label, string content, float width, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="string"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        public static void ButtonCopy(string label, string content, float width, float height)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="string"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(string label, string content, float width, float height, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="long"/></param>
+        public static void ButtonCopy(string label, long content)
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="long"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(string label, long content, GUIStyle style)
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="long"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        public static void ButtonCopy(string label, long content, float width)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="long"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(string label, long content, float width, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="long"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        public static void ButtonCopy(string label, long content, float width, float height)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="long"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(string label, long content, float width, float height, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="double"/></param>
+        public static void ButtonCopy(string label, double content)
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="double"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(string label, double content, GUIStyle style)
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="double"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        public static void ButtonCopy(string label, double content, float width)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="double"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(string label, double content, float width, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="double"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        public static void ButtonCopy(string label, double content, float width, float height)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="double"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(string label, double content, float width, float height, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color"/></param>
+        public static void ButtonCopy(string label, Color content)
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(string label, Color content, GUIStyle style)
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        public static void ButtonCopy(string label, Color content, float width)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(string label, Color content, float width, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        public static void ButtonCopy(string label, Color content, float width, float height)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(string label, Color content, float width, float height, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color32"/></param>
+        public static void ButtonCopy(string label, Color32 content)
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color32"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(string label, Color32 content, GUIStyle style)
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color32"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        public static void ButtonCopy(string label, Color32 content, float width)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color32"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(string label, Color32 content, float width, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color32"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        public static void ButtonCopy(string label, Color32 content, float width, float height)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color32"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(string label, Color32 content, float width, float height, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="T"/></param>
+        public static void ButtonPaste<T>(string label, ref T content) 
+        {
+            if (GUILayout.Button(label)) content = GEHelper.PasteAction<T>();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="T"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonPaste<T>(string label, ref T content, GUIStyle style) 
+        {
+            if (GUILayout.Button(label)) content = GEHelper.PasteAction<T>();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="T"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        public static void ButtonPaste<T>(string label, ref T content, float width) 
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width))) content = GEHelper.PasteAction<T>();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="T"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonPaste<T>(string label, ref T content, float width, GUIStyle style) 
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width))) content = GEHelper.PasteAction<T>();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="T"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        public static void ButtonPaste<T>(string label, ref T content, float width, float height) 
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) content = GEHelper.PasteAction<T>();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="T"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonPaste<T>(string label, ref T content, float width, float height, GUIStyle style) 
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) content = GEHelper.PasteAction<T>();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="string"/></param>
+        public static void ButtonPaste(string label, ref string content)
+        {
+            if (GUILayout.Button(label)) content = GEHelper.PasteActionString();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="string"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonPaste(string label, ref string content, GUIStyle style)
+        {
+            if (GUILayout.Button(label)) content = GEHelper.PasteActionString();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="string"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        public static void ButtonPaste(string label, ref string content, float width)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width))) content = GEHelper.PasteActionString();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="string"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonPaste(string label, ref string content, float width, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width))) content = GEHelper.PasteActionString();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="string"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        public static void ButtonPaste(string label, ref string content, float width, float height)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) content = GEHelper.PasteActionString();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="string"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonPaste(string label, ref string content, float width, float height, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) content = GEHelper.PasteActionString();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="long"/></param>
+        public static void ButtonPaste(string label, ref long content)
+        {
+            if (GUILayout.Button(label)) content = GEHelper.PasteActionLong();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="long"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonPaste(string label, ref long content, GUIStyle style)
+        {
+            if (GUILayout.Button(label)) content = GEHelper.PasteActionLong();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="long"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        public static void ButtonPaste(string label, ref long content, float width)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width))) content = GEHelper.PasteActionLong();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="long"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonPaste(string label, ref long content, float width, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width))) content = GEHelper.PasteActionLong();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="long"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        public static void ButtonPaste(string label, ref long content, float width, float height)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) content = GEHelper.PasteActionLong();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="long"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonPaste(string label, ref long content, float width, float height, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) content = GEHelper.PasteActionLong();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="double"/></param>
+        public static void ButtonPaste(string label, ref double content)
+        {
+            if (GUILayout.Button(label)) content = GEHelper.PasteActionDouble();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="double"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonPaste(string label, ref double content, GUIStyle style)
+        {
+            if (GUILayout.Button(label)) content = GEHelper.PasteActionDouble();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="double"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        public static void ButtonPaste(string label, ref double content, float width)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width))) content = GEHelper.PasteActionDouble();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="double"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonPaste(string label, ref double content, float width, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width))) content = GEHelper.PasteActionDouble();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="double"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        public static void ButtonPaste(string label, ref double content, float width, float height)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) content = GEHelper.PasteActionDouble();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="double"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonPaste(string label, ref double content, float width, float height, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) content = GEHelper.PasteActionDouble();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color"/></param>
+        public static void ButtonPaste(string label, ref Color content)
+        {
+            if (GUILayout.Button(label)) content = GEHelper.PasteActionColor();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonPaste(string label, ref Color content, GUIStyle style)
+        {
+            if (GUILayout.Button(label)) content = GEHelper.PasteActionColor();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        public static void ButtonPaste(string label, ref Color content, float width)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width))) content = GEHelper.PasteActionColor();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonPaste(string label, ref Color content, float width, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width))) content = GEHelper.PasteActionColor();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        public static void ButtonPaste(string label, ref Color content, float width, float height)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) content = GEHelper.PasteActionColor();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonPaste(string label, ref Color content, float width, float height, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) content = GEHelper.PasteActionColor();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color32"/></param>
+        public static void ButtonPaste(string label, ref Color32 content)
+        {
+            if (GUILayout.Button(label)) content = GEHelper.PasteActionColor32();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color32"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonPaste(string label, ref Color32 content, GUIStyle style)
+        {
+            if (GUILayout.Button(label)) content = GEHelper.PasteActionColor32();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color32"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        public static void ButtonPaste(string label, ref Color32 content, float width)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width))) content = GEHelper.PasteActionColor32();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color32"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonPaste(string label, ref Color32 content, float width, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width))) content = GEHelper.PasteActionColor32();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color32"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        public static void ButtonPaste(string label, ref Color32 content, float width, float height)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) content = GEHelper.PasteActionColor32();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">复制值 <see cref="Color32"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonPaste(string label, ref Color32 content, float width, float height, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) content = GEHelper.PasteActionColor32();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">值 <see cref="ICollection&lt;T&gt;"/></param>
+        public static void ButtonClear<T>(string label, ICollection<T> content) 
+        {
+            if (GUILayout.Button(label)) content.Clear();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">值 <see cref="ICollection&lt;T&gt;"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonClear<T>(string label, ICollection<T> content, GUIStyle style) 
+        {
+            if (GUILayout.Button(label)) content.Clear();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">值 <see cref="ICollection&lt;T&gt;"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        public static void ButtonClear<T>(string label, ICollection<T> content, float width) 
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width))) content.Clear();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">值 <see cref="ICollection&lt;T&gt;"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonClear<T>(string label, ICollection<T> content, float width, GUIStyle style) 
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width))) content.Clear();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">值 <see cref="ICollection&lt;T&gt;"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        public static void ButtonClear<T>(string label, ICollection<T> content, float width, float height) 
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) content.Clear();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">值 <see cref="ICollection&lt;T&gt;"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonClear<T>(string label, ICollection<T> content, float width, float height, GUIStyle style) 
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) content.Clear();
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">值 <see cref="ICollection&lt;T&gt;"/></param>
+        public static void ButtonAdd<T>(string label, ICollection<T> content) 
+        {
+            if (GUILayout.Button(label)) content.Add(default);
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">值 <see cref="ICollection&lt;T&gt;"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonAdd<T>(string label, ICollection<T> content, GUIStyle style) 
+        {
+            if (GUILayout.Button(label)) content.Add(default);
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">值 <see cref="ICollection&lt;T&gt;"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        public static void ButtonAdd<T>(string label, ICollection<T> content, float width) 
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width))) content.Add(default);
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">值 <see cref="ICollection&lt;T&gt;"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonAdd<T>(string label, ICollection<T> content, float width, GUIStyle style) 
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width))) content.Add(default);
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">值 <see cref="ICollection&lt;T&gt;"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        public static void ButtonAdd<T>(string label, ICollection<T> content, float width, float height) 
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) content.Add(default);
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">值 <see cref="ICollection&lt;T&gt;"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonAdd<T>(string label, ICollection<T> content, float width, float height, GUIStyle style) 
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) content.Add(default);
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">值 <see cref="ICollection&lt;T&gt;"/></param>
+        /// <param name="func">添加值回调 <see cref="Func&lt;T&gt;"/></param>
+        public static void ButtonAdd<T>(string label, ICollection<T> content, Func<T> func) 
+        {
+            if (GUILayout.Button(label)) content.Add(func());
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">值 <see cref="ICollection&lt;T&gt;"/></param>
+        /// <param name="func">添加值回调 <see cref="Func&lt;T&gt;"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonAdd<T>(string label, ICollection<T> content, Func<T> func, GUIStyle style) 
+        {
+            if (GUILayout.Button(label)) content.Add(func());
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">值 <see cref="ICollection&lt;T&gt;"/></param>
+        /// <param name="func">添加值回调 <see cref="Func&lt;T&gt;"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        public static void ButtonAdd<T>(string label, ICollection<T> content, Func<T> func, float width) 
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width))) content.Add(func());
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">值 <see cref="ICollection&lt;T&gt;"/></param>
+        /// <param name="func">添加值回调 <see cref="Func&lt;T&gt;"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonAdd<T>(string label, ICollection<T> content, Func<T> func, float width, GUIStyle style) 
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width))) content.Add(func());
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">值 <see cref="ICollection&lt;T&gt;"/></param>
+        /// <param name="func">添加值回调 <see cref="Func&lt;T&gt;"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        public static void ButtonAdd<T>(string label, ICollection<T> content, Func<T> func, float width, float height) 
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) content.Add(func());
+        }
+
+        /// <summary>
+        /// 绘制 粘贴按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="content">值 <see cref="ICollection&lt;T&gt;"/></param>
+        /// <param name="func">添加值回调 <see cref="Func&lt;T&gt;"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonAdd<T>(string label, ICollection<T> content, Func<T> func, float width, float height, GUIStyle style) 
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) content.Add(func());
+        }
 
         #endregion
 
@@ -1484,7 +2525,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="GUIContent"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonRepeat(GUIContent label, params GUILayoutOption[] options)
+        public static bool ButtonRepeat(GUIContent label, params GUILayoutOption[] options)
         {
             return GUILayout.RepeatButton(label, options);
         }
@@ -1495,7 +2536,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="GUIContent"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonRepeat(GUIContent label, float width)
+        public static bool ButtonRepeat(GUIContent label, float width)
         {
             return GUILayout.RepeatButton(label, GUILayout.Width(width));
         }
@@ -1507,7 +2548,7 @@ namespace AIO.UEditor
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <param name="height">高度 <see cref="float"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonRepeat(GUIContent label, float width, float height)
+        public static bool ButtonRepeat(GUIContent label, float width, float height)
         {
             return GUILayout.RepeatButton(label, GUILayout.Width(width), GUILayout.Height(height));
         }
@@ -1519,7 +2560,7 @@ namespace AIO.UEditor
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonRepeat(GUIContent label, GUIStyle style, params GUILayoutOption[] options)
+        public static bool ButtonRepeat(GUIContent label, GUIStyle style, params GUILayoutOption[] options)
         {
             return GUILayout.RepeatButton(label, style, options);
         }
@@ -1531,7 +2572,7 @@ namespace AIO.UEditor
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonRepeat(GUIContent label, GUIStyle style, float width)
+        public static bool ButtonRepeat(GUIContent label, GUIStyle style, float width)
         {
             return GUILayout.RepeatButton(label, style, GUILayout.Width(width));
         }
@@ -1544,7 +2585,7 @@ namespace AIO.UEditor
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <param name="height">高度 <see cref="float"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonRepeat(GUIContent label, GUIStyle style, float width, float height)
+        public static bool ButtonRepeat(GUIContent label, GUIStyle style, float width, float height)
         {
             return GUILayout.RepeatButton(label, style, GUILayout.Width(width), GUILayout.Height(height));
         }
@@ -1555,7 +2596,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonRepeat(string label, params GUILayoutOption[] options)
+        public static bool ButtonRepeat(string label, params GUILayoutOption[] options)
         {
             return GUILayout.RepeatButton(label, options);
         }
@@ -1566,7 +2607,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonRepeat(string label, float width)
+        public static bool ButtonRepeat(string label, float width)
         {
             return GUILayout.RepeatButton(label, GUILayout.Width(width));
         }
@@ -1578,7 +2619,7 @@ namespace AIO.UEditor
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <param name="height">高度 <see cref="float"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonRepeat(string label, float width, float height)
+        public static bool ButtonRepeat(string label, float width, float height)
         {
             return GUILayout.RepeatButton(label, GUILayout.Width(width), GUILayout.Height(height));
         }
@@ -1590,7 +2631,7 @@ namespace AIO.UEditor
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonRepeat(string label, GUIStyle style, params GUILayoutOption[] options)
+        public static bool ButtonRepeat(string label, GUIStyle style, params GUILayoutOption[] options)
         {
             return GUILayout.RepeatButton(label, style, options);
         }
@@ -1602,7 +2643,7 @@ namespace AIO.UEditor
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonRepeat(string label, GUIStyle style, float width)
+        public static bool ButtonRepeat(string label, GUIStyle style, float width)
         {
             return GUILayout.RepeatButton(label, style, GUILayout.Width(width));
         }
@@ -1615,7 +2656,7 @@ namespace AIO.UEditor
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <param name="height">高度 <see cref="float"/></param>
         /// <returns><see cref="bool"/></returns>
-        public new static bool ButtonRepeat(string label, GUIStyle style, float width, float height)
+        public static bool ButtonRepeat(string label, GUIStyle style, float width, float height)
         {
             return GUILayout.RepeatButton(label, style, GUILayout.Width(width), GUILayout.Height(height));
         }
@@ -1626,7 +2667,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="GUIContent"/></param>
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
-        public new static void ButtonRepeat(GUIContent label, Action action, params GUILayoutOption[] options)
+        public static void ButtonRepeat(GUIContent label, Action action, params GUILayoutOption[] options)
         {
             if (GUILayout.RepeatButton(label, options)) action();
         }
@@ -1637,7 +2678,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="GUIContent"/></param>
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
-        public new static void ButtonRepeat(GUIContent label, Action action, float width)
+        public static void ButtonRepeat(GUIContent label, Action action, float width)
         {
             if (GUILayout.RepeatButton(label, GUILayout.Width(width))) action();
         }
@@ -1649,7 +2690,7 @@ namespace AIO.UEditor
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <param name="height">高度 <see cref="float"/></param>
-        public new static void ButtonRepeat(GUIContent label, Action action, float width, float height)
+        public static void ButtonRepeat(GUIContent label, Action action, float width, float height)
         {
             if (GUILayout.RepeatButton(label, GUILayout.Width(width), GUILayout.Height(height))) action();
         }
@@ -1661,7 +2702,7 @@ namespace AIO.UEditor
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
-        public new static void ButtonRepeat(GUIContent label, Action action, GUIStyle style, params GUILayoutOption[] options)
+        public static void ButtonRepeat(GUIContent label, Action action, GUIStyle style, params GUILayoutOption[] options)
         {
             if (GUILayout.RepeatButton(label, style, options)) action();
         }
@@ -1673,7 +2714,7 @@ namespace AIO.UEditor
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
-        public new static void ButtonRepeat(GUIContent label, Action action, GUIStyle style, float width)
+        public static void ButtonRepeat(GUIContent label, Action action, GUIStyle style, float width)
         {
             if (GUILayout.RepeatButton(label, style, GUILayout.Width(width))) action();
         }
@@ -1686,7 +2727,7 @@ namespace AIO.UEditor
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <param name="height">高度 <see cref="float"/></param>
-        public new static void ButtonRepeat(GUIContent label, Action action, GUIStyle style, float width, float height)
+        public static void ButtonRepeat(GUIContent label, Action action, GUIStyle style, float width, float height)
         {
             if (GUILayout.RepeatButton(label, style, GUILayout.Width(width), GUILayout.Height(height))) action();
         }
@@ -1697,7 +2738,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
-        public new static void ButtonRepeat(string label, Action action, params GUILayoutOption[] options)
+        public static void ButtonRepeat(string label, Action action, params GUILayoutOption[] options)
         {
             if (GUILayout.RepeatButton(label, options)) action();
         }
@@ -1708,7 +2749,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
-        public new static void ButtonRepeat(string label, Action action, float width)
+        public static void ButtonRepeat(string label, Action action, float width)
         {
             if (GUILayout.RepeatButton(label, GUILayout.Width(width))) action();
         }
@@ -1720,7 +2761,7 @@ namespace AIO.UEditor
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <param name="height">高度 <see cref="float"/></param>
-        public new static void ButtonRepeat(string label, Action action, float width, float height)
+        public static void ButtonRepeat(string label, Action action, float width, float height)
         {
             if (GUILayout.RepeatButton(label, GUILayout.Width(width), GUILayout.Height(height))) action();
         }
@@ -1732,7 +2773,7 @@ namespace AIO.UEditor
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
-        public new static void ButtonRepeat(string label, Action action, GUIStyle style, params GUILayoutOption[] options)
+        public static void ButtonRepeat(string label, Action action, GUIStyle style, params GUILayoutOption[] options)
         {
             if (GUILayout.RepeatButton(label, style, options)) action();
         }
@@ -1744,7 +2785,7 @@ namespace AIO.UEditor
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
-        public new static void ButtonRepeat(string label, Action action, GUIStyle style, float width)
+        public static void ButtonRepeat(string label, Action action, GUIStyle style, float width)
         {
             if (GUILayout.RepeatButton(label, style, GUILayout.Width(width))) action();
         }
@@ -1757,7 +2798,7 @@ namespace AIO.UEditor
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <param name="height">高度 <see cref="float"/></param>
-        public new static void ButtonRepeat(string label, Action action, GUIStyle style, float width, float height)
+        public static void ButtonRepeat(string label, Action action, GUIStyle style, float width, float height)
         {
             if (GUILayout.RepeatButton(label, style, GUILayout.Width(width), GUILayout.Height(height))) action();
         }
@@ -1768,7 +2809,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="Texture"/></param>
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
-        public new static void ButtonRepeat(Texture label, Action action, params GUILayoutOption[] options)
+        public static void ButtonRepeat(Texture label, Action action, params GUILayoutOption[] options)
         {
             if (GUILayout.RepeatButton(new GUIContent(label), options)) action();
         }
@@ -1779,7 +2820,7 @@ namespace AIO.UEditor
         /// <param name="label">标签 <see cref="Texture"/></param>
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
-        public new static void ButtonRepeat(Texture label, Action action, float width)
+        public static void ButtonRepeat(Texture label, Action action, float width)
         {
             if (GUILayout.RepeatButton(new GUIContent(label), GUILayout.Width(width))) action();
         }
@@ -1791,7 +2832,7 @@ namespace AIO.UEditor
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <param name="height">高度 <see cref="float"/></param>
-        public new static void ButtonRepeat(Texture label, Action action, float width, float height)
+        public static void ButtonRepeat(Texture label, Action action, float width, float height)
         {
             if (GUILayout.RepeatButton(new GUIContent(label), GUILayout.Width(width), GUILayout.Height(height))) action();
         }
@@ -1803,7 +2844,7 @@ namespace AIO.UEditor
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
-        public new static void ButtonRepeat(Texture label, Action action, GUIStyle style, params GUILayoutOption[] options)
+        public static void ButtonRepeat(Texture label, Action action, GUIStyle style, params GUILayoutOption[] options)
         {
             if (GUILayout.RepeatButton(new GUIContent(label), style, options)) action();
         }
@@ -1815,7 +2856,7 @@ namespace AIO.UEditor
         /// <param name="action">回调 <see cref="Action"/></param>
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
-        public new static void ButtonRepeat(Texture label, Action action, GUIStyle style, float width)
+        public static void ButtonRepeat(Texture label, Action action, GUIStyle style, float width)
         {
             if (GUILayout.RepeatButton(new GUIContent(label), style, GUILayout.Width(width))) action();
         }
@@ -1828,7 +2869,7 @@ namespace AIO.UEditor
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         /// <param name="width">宽度 <see cref="float"/></param>
         /// <param name="height">高度 <see cref="float"/></param>
-        public new static void ButtonRepeat(Texture label, Action action, GUIStyle style, float width, float height)
+        public static void ButtonRepeat(Texture label, Action action, GUIStyle style, float width, float height)
         {
             if (GUILayout.RepeatButton(new GUIContent(label), style, GUILayout.Width(width), GUILayout.Height(height))) action();
         }
@@ -2129,7 +3170,7 @@ namespace AIO.UEditor
         /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle"/></param>
         public new static void List<T>(GTContent label, IList<T> array, Action tips, Func<T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
         {
-            FieldList(label, array, tips, index => showFunc.Invoke(array[index]), addFunc, labelStyle, bgStyle);
+            FieldList(label, array, tips, index => array[index] = showFunc.Invoke(array[index]), addFunc, labelStyle, bgStyle);
         }
 
         /// <summary>
@@ -2143,7 +3184,7 @@ namespace AIO.UEditor
         /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
         public new static void List<T>(GTContent label, IList<T> array, Action tips, Func<T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
         {
-            FieldList(label, array, tips, index => showFunc.Invoke(array[index]), addFunc, labelStyle, GEStyle.DDHeaderStyle);
+            FieldList(label, array, tips, index => array[index] = showFunc.Invoke(array[index]), addFunc, labelStyle, GEStyle.DDHeaderStyle);
         }
 
         /// <summary>
@@ -2156,7 +3197,7 @@ namespace AIO.UEditor
         /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
         public new static void List<T>(GTContent label, IList<T> array, Action tips, Func<T, T> showFunc, Func<T> addFunc) 
         {
-            FieldList(label, array, tips, index => showFunc.Invoke(array[index]), addFunc, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            FieldList(label, array, tips, index => array[index] = showFunc.Invoke(array[index]), addFunc, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
         }
 
         /// <summary>
@@ -2168,7 +3209,7 @@ namespace AIO.UEditor
         /// <param name="showFunc">显示回调函数 <see cref="Func&lt;T, T&gt;"/></param>
         public new static void List<T>(GTContent label, IList<T> array, Action tips, Func<T, T> showFunc) 
         {
-            FieldList(label, array, tips, index => showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            FieldList(label, array, tips, index => array[index] = showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
         }
 
         /// <summary>
@@ -2179,7 +3220,7 @@ namespace AIO.UEditor
         /// <param name="showFunc">显示回调函数 <see cref="Func&lt;T, T&gt;"/></param>
         public new static void List<T>(GTContent label, IList<T> array, Func<T, T> showFunc) 
         {
-            FieldList(label, array, null, index => showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            FieldList(label, array, null, index => array[index] = showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
         }
 
         /// <summary>
@@ -2196,7 +3237,7 @@ namespace AIO.UEditor
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
         public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Func<T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
         {
-            return FieldList(label, array, foldout, tips, index => showFunc.Invoke(array[index]), addFunc, labelStyle, bgStyle);
+            return FieldList(label, array, foldout, tips, index => array[index] = showFunc.Invoke(array[index]), addFunc, labelStyle, bgStyle);
         }
 
         /// <summary>
@@ -2212,7 +3253,7 @@ namespace AIO.UEditor
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
         public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Func<T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
         {
-            return FieldList(label, array, foldout, tips, index => showFunc.Invoke(array[index]), addFunc, labelStyle, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, tips, index => array[index] = showFunc.Invoke(array[index]), addFunc, labelStyle, GEStyle.DDHeaderStyle);
         }
 
         /// <summary>
@@ -2227,7 +3268,7 @@ namespace AIO.UEditor
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
         public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Func<T, T> showFunc, Func<T> addFunc) 
         {
-            return FieldList(label, array, foldout, tips, index => showFunc.Invoke(array[index]), addFunc, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, tips, index => array[index] = showFunc.Invoke(array[index]), addFunc, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
         }
 
         /// <summary>
@@ -2241,7 +3282,7 @@ namespace AIO.UEditor
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
         public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Func<T, T> showFunc) 
         {
-            return FieldList(label, array, foldout, tips, index => showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, tips, index => array[index] = showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
         }
 
         /// <summary>
@@ -2254,7 +3295,7 @@ namespace AIO.UEditor
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
         public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Func<T, T> showFunc) 
         {
-            return FieldList(label, array, foldout, null, index => showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, null, index => array[index] = showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
         }
 
         /// <summary>
@@ -2269,7 +3310,7 @@ namespace AIO.UEditor
         /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle"/></param>
         public new static void List<T>(GTContent label, IList<T> array, Action tips, Func<int, T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
         {
-            FieldList(label, array, tips, index => showFunc.Invoke(index, array[index]), addFunc, labelStyle, bgStyle);
+            FieldList(label, array, tips, index => array[index] = showFunc.Invoke(index, array[index]), addFunc, labelStyle, bgStyle);
         }
 
         /// <summary>
@@ -2283,7 +3324,7 @@ namespace AIO.UEditor
         /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
         public new static void List<T>(GTContent label, IList<T> array, Action tips, Func<int, T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
         {
-            FieldList(label, array, tips, index => showFunc.Invoke(index, array[index]), addFunc, labelStyle, GEStyle.DDHeaderStyle);
+            FieldList(label, array, tips, index => array[index] = showFunc.Invoke(index, array[index]), addFunc, labelStyle, GEStyle.DDHeaderStyle);
         }
 
         /// <summary>
@@ -2296,7 +3337,7 @@ namespace AIO.UEditor
         /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
         public new static void List<T>(GTContent label, IList<T> array, Action tips, Func<int, T, T> showFunc, Func<T> addFunc) 
         {
-            FieldList(label, array, tips, index => showFunc.Invoke(index, array[index]), addFunc, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            FieldList(label, array, tips, index => array[index] = showFunc.Invoke(index, array[index]), addFunc, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
         }
 
         /// <summary>
@@ -2308,7 +3349,7 @@ namespace AIO.UEditor
         /// <param name="showFunc">显示回调函数 <see cref="Func&lt;int, T, T&gt;"/></param>
         public new static void List<T>(GTContent label, IList<T> array, Action tips, Func<int, T, T> showFunc) 
         {
-            FieldList(label, array, tips, index => showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            FieldList(label, array, tips, index => array[index] = showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
         }
 
         /// <summary>
@@ -2319,7 +3360,7 @@ namespace AIO.UEditor
         /// <param name="showFunc">显示回调函数 <see cref="Func&lt;int, T, T&gt;"/></param>
         public new static void List<T>(GTContent label, IList<T> array, Func<int, T, T> showFunc) 
         {
-            FieldList(label, array, null, index => showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            FieldList(label, array, null, index => array[index] = showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
         }
 
         /// <summary>
@@ -2336,7 +3377,7 @@ namespace AIO.UEditor
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
         public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Func<int, T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
         {
-            return FieldList(label, array, foldout, tips, index => showFunc.Invoke(index, array[index]), addFunc, labelStyle, bgStyle);
+            return FieldList(label, array, foldout, tips, index => array[index] = showFunc.Invoke(index, array[index]), addFunc, labelStyle, bgStyle);
         }
 
         /// <summary>
@@ -2352,7 +3393,7 @@ namespace AIO.UEditor
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
         public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Func<int, T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
         {
-            return FieldList(label, array, foldout, tips, index => showFunc.Invoke(index, array[index]), addFunc, labelStyle, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, tips, index => array[index] = showFunc.Invoke(index, array[index]), addFunc, labelStyle, GEStyle.DDHeaderStyle);
         }
 
         /// <summary>
@@ -2367,7 +3408,7 @@ namespace AIO.UEditor
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
         public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Func<int, T, T> showFunc, Func<T> addFunc) 
         {
-            return FieldList(label, array, foldout, tips, index => showFunc.Invoke(index, array[index]), addFunc, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, tips, index => array[index] = showFunc.Invoke(index, array[index]), addFunc, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
         }
 
         /// <summary>
@@ -2381,7 +3422,7 @@ namespace AIO.UEditor
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
         public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Func<int, T, T> showFunc) 
         {
-            return FieldList(label, array, foldout, tips, index => showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, tips, index => array[index] = showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
         }
 
         /// <summary>
@@ -2394,7 +3435,7 @@ namespace AIO.UEditor
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
         public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Func<int, T, T> showFunc) 
         {
-            return FieldList(label, array, foldout, null, index => showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, null, index => array[index] = showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
         }
 
         #endregion
@@ -2405,8 +3446,8 @@ namespace AIO.UEditor
         /// 绘制 帮助框 字段 
         /// </summary>
         /// <param name="message">消息 <see cref="string"/></param>
-        /// <param name="type = MessageType.None">消息类型 <see cref="MessageType"/></param>
-        /// <param name="wide = true">true:帮助框覆盖整个窗口宽度;false:只覆盖控制部分 <see cref="bool"/></param>
+        /// <param name="type">消息类型 <see cref="MessageType"/></param>
+        /// <param name="wide">true:帮助框覆盖整个窗口宽度;false:只覆盖控制部分 <see cref="bool"/></param>
         public new static void HelpBox(string message, MessageType type = MessageType.None, bool wide = true)
         {
             EditorGUILayout.HelpBox(message, type, wide);
@@ -2416,7 +3457,7 @@ namespace AIO.UEditor
         /// 绘制 帮助框 字段 
         /// </summary>
         /// <param name="message">消息 <see cref="GUIContent"/></param>
-        /// <param name="wide = true">true:帮助框覆盖整个窗口宽度;false:只覆盖控制部分 <see cref="bool"/></param>
+        /// <param name="wide">true:帮助框覆盖整个窗口宽度;false:只覆盖控制部分 <see cref="bool"/></param>
         public new static void HelpBox(GUIContent message, bool wide = true)
         {
             EditorGUILayout.HelpBox(message, wide);
@@ -2426,7 +3467,7 @@ namespace AIO.UEditor
         /// 绘制 帮助框 字段 
         /// </summary>
         /// <param name="message">消息 <see cref="Texture"/></param>
-        /// <param name="wide = true">true:帮助框覆盖整个窗口宽度;false:只覆盖控制部分 <see cref="bool"/></param>
+        /// <param name="wide">true:帮助框覆盖整个窗口宽度;false:只覆盖控制部分 <see cref="bool"/></param>
         public new static void HelpBox(Texture message, bool wide = true)
         {
             EditorGUILayout.HelpBox(new GUIContent(message), wide);
@@ -2437,7 +3478,7 @@ namespace AIO.UEditor
         /// </summary>
         /// <param name="rect">矩形 <see cref="Rect"/></param>
         /// <param name="message">消息 <see cref="string"/></param>
-        /// <param name="type = MessageType.None">消息类型 <see cref="MessageType"/></param>
+        /// <param name="type">消息类型 <see cref="MessageType"/></param>
         public new static void HelpBox(Rect rect, string message, MessageType type = MessageType.None)
         {
             EditorGUI.HelpBox(rect, message, type);
@@ -2449,7 +3490,7 @@ namespace AIO.UEditor
         /// <param name="pos">位置信息 <see cref="Vector2"/></param>
         /// <param name="size">大小信息 <see cref="Vector2"/></param>
         /// <param name="message">消息 <see cref="string"/></param>
-        /// <param name="type = MessageType.None">消息类型 <see cref="MessageType"/></param>
+        /// <param name="type">消息类型 <see cref="MessageType"/></param>
         public new static void HelpBox(Vector2 pos, Vector2 size, string message, MessageType type = MessageType.None)
         {
             EditorGUI.HelpBox(new Rect(pos + size / 2, size), message, type);
