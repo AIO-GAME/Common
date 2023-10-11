@@ -22,7 +22,11 @@ namespace AIO.UEditor
     /// symlinks.
     /// </summary>
     [InitializeOnLoad]
-    internal static class SymlinkTools
+    [GWindow("符号链接", "Symlink Window", Group = "Tools",
+        MinSizeWidth = 600, MinSizeHeight = 600,
+        MaxSizeWidth = 600, MaxSizeHeight = 600
+    )]
+    internal class SymlinkWindow : GraphicWindow
     {
         // FileAttributes that match a junction folder.
         private const FileAttributes FOLDER_SYMLINK_ATTRIBS = FileAttributes.Directory | FileAttributes.ReparsePoint;
@@ -47,13 +51,58 @@ namespace AIO.UEditor
             }
         }
 
+        protected  SettingsProvider RegisterSettingsProvider()
+        {
+            var provider = new SettingsProvider("AIO/Symlink", SettingsScope.Project)
+            {
+                label = "Symlink",
+                guiHandler = delegate
+                {
+                    GELayout.Label("General", EditorStyles.boldLabel);
+                    GELayout.BeginVertical();
+                    GELayout.Space();
+                    GELayout.BeginHorizontal();
+                    if (ShowSymlink)
+                    {
+                        if (GELayout.Button("Hide Symlink"))
+                        {
+                            ShowSymlink = _ShowSymlink = false;
+                        }
+                    }
+                    else
+                    {
+                        if (GELayout.Button("Show Symlink"))
+                        {
+                            ShowSymlink = _ShowSymlink = true;
+                        }
+                    }
+
+                    GELayout.EndHorizontal();
+                    GELayout.Space();
+                    GELayout.EndVertical();
+                }
+            };
+            return provider;
+        }
+
         /// <summary>
         /// Static constructor subscribes to projectWindowItemOnGUI delegate.
         /// </summary>
-        static SymlinkTools()
+        static SymlinkWindow()
         {
             EditorApplication.projectWindowItemOnGUI += OnProjectWindowItemGUI;
         }
+
+        /// <summary>
+        /// 显示符号链接
+        /// </summary>
+        private static bool _ShowSymlink
+        {
+            get => EditorPrefs.GetBool("AIO.Symlink.ShowSymlink", true);
+            set => EditorPrefs.SetBool("AIO.Symlink.ShowSymlink", value);
+        }
+
+        private static bool ShowSymlink = _ShowSymlink;
 
         /// <summary>
         /// Draw a little indicator if folder is a symlink
@@ -62,6 +111,7 @@ namespace AIO.UEditor
         /// <param name="r"></param>
         private static void OnProjectWindowItemGUI(string guid, Rect r)
         {
+            if (!ShowSymlink) return;
             try
             {
                 var path = AssetDatabase.GUIDToAssetPath(guid);
@@ -118,9 +168,9 @@ namespace AIO.UEditor
                 return;
             }
 
-            var uobject = Selection.activeObject;
+            var activeObject = Selection.activeObject;
 
-            var targetPath = uobject != null ? AssetDatabase.GetAssetPath(uobject) : null;
+            var targetPath = activeObject != null ? AssetDatabase.GetAssetPath(activeObject) : null;
 
             if (string.IsNullOrEmpty(targetPath)) targetPath = "Assets";
 
@@ -136,7 +186,8 @@ namespace AIO.UEditor
 
             if (Directory.Exists(targetPath))
             {
-                Debug.LogWarning($"A folder already exists at this location, aborting link.\n{sourceFolderPath} -> {targetPath}");
+                Debug.LogWarning(
+                    $"A folder already exists at this location, aborting link.\n{sourceFolderPath} -> {targetPath}");
                 return;
             }
 
@@ -179,8 +230,10 @@ namespace AIO.UEditor
             if (sourcePath == null)
                 sourcePath = string.Empty;
 
-            var splitOutput = outputPath.Split(new char[] { Path.PathSeparator }, StringSplitOptions.RemoveEmptyEntries);
-            var splitSource = sourcePath.Split(new char[] { Path.PathSeparator }, StringSplitOptions.RemoveEmptyEntries);
+            var splitOutput =
+                outputPath.Split(new char[] { Path.PathSeparator }, StringSplitOptions.RemoveEmptyEntries);
+            var splitSource =
+                sourcePath.Split(new char[] { Path.PathSeparator }, StringSplitOptions.RemoveEmptyEntries);
 
             var max = Mathf.Min(splitOutput.Length, splitSource.Length);
             var i = 0;

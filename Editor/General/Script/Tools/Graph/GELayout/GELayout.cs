@@ -11,9 +11,8 @@ using UnityEngine;
 
 namespace AIO.UEditor
 {
-    public partial class GELayout
+    public static partial class GELayout
     {
-      
         #region List
 
         /// <summary>

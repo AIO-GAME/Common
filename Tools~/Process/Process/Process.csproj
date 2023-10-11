@@ -187,49 +187,7 @@
     <Compile Include="Script\Category\Win\PrWin.cs" />
     <Compile Include="Script\Category\Win\PrWin.Const.cs" />
     <Compile Include="Script\Platform\PrPlatform.Git.Upload.cs" />
-    <Compile Include="Script\T4\ClassHelper.cs" />
-    <Compile Include="Script\T4\ClassParam.cs" />
-    <Compile Include="Script\T4\FuncParamAttribute.cs" />
-    <Compile Include="Script\T4\FunctionChunk.cs" />
-    <Compile Include="Script\T4\FunctionParam.cs" />
-    <Compile Include="Script\T4\GELayout.Rect\GERLayout.Area.cs" />
-    <Compile Include="Script\T4\GELayout.Rect\GERLayout.Field.cs" />
-    <Compile Include="Script\T4\GELayout.Rect\GERLayout.Disabled.cs" />
-    <Compile Include="Script\T4\GELayout.Rect\GERLayout.Button.cs" />
-    <Compile Include="Script\T4\GELayout.Rect\GERLayout.Check.cs" />
-    <Compile Include="Script\T4\GELayout.Rect\GERLayout.Foldout.cs" />
-    <Compile Include="Script\T4\GELayout.Rect\GERLayout.Property.cs" />
-    <Compile Include="Script\T4\GELayout.Rect\GERLayout.SP.cs" />
-    <Compile Include="Script\T4\GELayout\GELayout.Enum.cs" />
-    <Compile Include="Script\T4\GELayout\GELayout.Foldout.cs" />
-    <Compile Include="Script\T4\GELayout\GELayout.Button.cs" />
-    <Compile Include="Script\T4\GELayout\GELayout.cs" />
-    <Compile Include="Script\T4\GELayout\GELayout.List.cs" />
-    <Compile Include="Script\T4\GELayout\GELayout.HelpBox.cs" />
-    <Compile Include="Script\T4\GELayout\GELayout.Label.cs" />
-    <Compile Include="Script\T4\GELayout\GELayout.Popup.cs" />
-    <Compile Include="Script\T4\GELayout\GELayout.Scope.cs" />
-    <Compile Include="Script\T4\GELayout\GELayout.Slider.cs" />
-    <Compile Include="Script\T4\GELayout\GELayout.Tag.cs" />
-    <Compile Include="Script\T4\GELayout\GELayout.TextArea.cs" />
-    <Compile Include="Script\T4\GELayout\GELayout.Toggle.cs" />
-    <Compile Include="Script\T4\GELayout.Rect\GERLayout.cs" />
-    <Compile Include="Script\T4\GELayout\GELayout.Field.cs" />
-    <Compile Include="Script\T4\GULayout\GULayout.Field.cs" />
-    <Compile Include="Script\T4\GULayout\GULayout.Button.cs" />
-    <Compile Include="Script\T4\GULayout\GULayout.cs" />
-    <Compile Include="Script\T4\GULayout\GULayout.Enum.cs" />
-    <Compile Include="Script\T4\GULayout\GULayout.Toggle.cs" />
-    <Compile Include="Script\T4\GULayout\GULayout.Label.cs" />
-    <Compile Include="Script\T4\GULayout\GULayout.Password.cs" />
-    <Compile Include="Script\T4\GULayout\GULayout.Scope.cs" />
-    <Compile Include="Script\T4\GULayout\GULayout.TextArea.cs" />
-    <Compile Include="Script\T4\ParamModifier.cs" />
-    <Compile Include="Script\T4\TChunkState.cs" />
     <Compile Include="Script\Utils\NetUtils.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Script\T4\T4Helper.ttinclude" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
