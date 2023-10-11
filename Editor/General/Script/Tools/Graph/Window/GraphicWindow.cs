@@ -489,5 +489,16 @@ namespace AIO.UEditor
         }
 
         #endregion
+
+        // protected virtual SettingsProvider RegisterSettingsProvider()
+        // {
+        //     return null;
+        // }
+        //
+        // [SettingsProvider]
+        // private static SettingsProvider SettingsProvider()
+        // {
+        //     return RegisterSettingsProvider();
+        // }
     }
 }

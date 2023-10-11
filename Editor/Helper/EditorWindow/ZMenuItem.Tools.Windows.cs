@@ -20,7 +20,7 @@ namespace AIO.UEditor
         public static readonly Type[] DockedWindowTypes =
         {
 #if UNITY_2019_4_OR_NEWER
-            typeof(AssestManagerGraphWindow),
+            typeof(AssetManagerGraphWindow),
             typeof(BuiltInGUIStyleGraphWindow),
             typeof(BuiltInTextureGraphWindow),
             typeof(CScriptManagerGraphWindow),
@@ -66,7 +66,7 @@ namespace AIO.UEditor
         [MenuItem("Tools/Window/" + LABLE_AssestManagerWindow, false, 101)]
         public static void OpenAssestManagerGraphWindow()
         {
-            EHelper.Window.Open<AssestManagerGraphWindow>(DockedWindowTypes);
+            EHelper.Window.Open<AssetManagerGraphWindow>(DockedWindowTypes);
         }
 
         [MenuItem("Tools/Window/" + LABLE_BuiltInGUIStyleWindow, false, 102)]

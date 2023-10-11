@@ -24,7 +24,7 @@ namespace AIO.UEditor
         MinSizeWidth = 600, MinSizeHeight = 600,
         MaxSizeWidth = 600, MaxSizeHeight = 600
     )]
-    public class AssestManagerGraphWindow : GraphicWindow
+    public class AssetManagerGraphWindow : GraphicWindow
     {
         private EditorWindow CScriptWindow;
         private EditorWindow TextureWindow;
