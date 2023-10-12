@@ -20,12 +20,13 @@ public static class ATuple
 <#
     for (var i = 2; i < maxcount; i++)
     {
-        var index = i + 1;
+        var index = i;
         var types = string.Join(", ", Enumerable.Range(1, index).Select(x => string.Concat("T", x)));
         var createArgs = string.Join(", ", Enumerable.Range(1, index).Select(x => string.Concat("T", x, " item", x)));
         var createContent = string.Join(", ", Enumerable.Range(1, index).Select(x => string.Concat("item", x)));
         var unpackArgs = string.Join(", ", Enumerable.Range(1, index).Select(x => string.Concat("out T", x, " ref", x)));
-        var unpackContent = string.Join("\n", Enumerable.Range(1, index).Select(x => string.Concat("        ref", x, " = tuple.Item", x, ";")));
+        var unpackContent = string.Join("\n",
+            Enumerable.Range(1, index).Select(x => string.Concat("        ref", x, " = tuple.Item", x, ";")));
 #>
 	#region Tuple<<#= types #>>
 
@@ -49,13 +50,15 @@ public static class ATuple
 <#
     for (var i = 2; i < maxcount; i++)
     {
-        var index = i + 1;
+        var index = i;
         var types = string.Join(", ", Enumerable.Range(1, index).Select(x => string.Concat("T", x)));
         var args = string.Join(", ", Enumerable.Range(1, index).Select(x => string.Concat("T", x, " item", x)));
         var toStringContent = string.Join(", ", Enumerable.Range(1, index).Select(x => string.Concat("{Item", x, "}")));
-        var itemProperty = string.Join("\n", Enumerable.Range(1, index).Select(x => string.Concat("    public T", x, " Item", x, " { get; }\n")));
+        var itemProperty = string.Join("\n",
+            Enumerable.Range(1, index).Select(x => string.Concat("    public T", x, " Item", x, " { get; }\n")));
         var itemContent = string.Join(", ", Enumerable.Range(1, index).Select(x => string.Concat("Item", x)));
-        var constructorContent = string.Join("\n", Enumerable.Range(1, index).Select(x => string.Concat("        Item", x, " = item", x, ";")));
+        var constructorContent = string.Join("\n",
+            Enumerable.Range(1, index).Select(x => string.Concat("        Item", x, " = item", x, ";")));
 #>
 public sealed class ATuple<<#= types #>> : IComparable
 {
@@ -85,7 +88,7 @@ public sealed class ATuple<<#= types #>> : IComparable
         for (var j = 1; j <= i; j++)
         {
 #>
-				case <#= j-1 #>: return Item<#= j #>;
+				case <#= j - 1 #>: return Item<#= j #>;
 <#
         }
 #>

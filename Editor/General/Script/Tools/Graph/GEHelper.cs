@@ -7,9 +7,8 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using AIO.UEngine;
-using UnityEditor.EditorTools;
 using UnityEditor;
+using UnityEditor.EditorTools;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -127,7 +126,7 @@ namespace AIO.UEditor
         /// <param name="foldout">箭头显示的折叠状态</param>
         /// <param name="editor">自定义创建自定义检查器或编辑器</param>
         /// <returns>用户选择的折叠状态</returns>
-        public static bool InspectorTitlebar(bool foldout, UnityEditor.Editor editor)
+        public static bool InspectorTitlebar(bool foldout, Editor editor)
         {
             return EditorGUILayout.InspectorTitlebar(foldout, editor);
         }
@@ -156,10 +155,12 @@ namespace AIO.UEditor
         /// <summary>
         /// 按钮
         /// </summary>
-        public static float Knob(Vector2 knobSize, float value, float minValue, float maxValue, string unit, Color backgroundColor, Color activeColor, bool showValue,
+        public static float Knob(Vector2 knobSize, float value, float minValue, float maxValue, string unit,
+            Color backgroundColor, Color activeColor, bool showValue,
             params GUILayoutOption[] options)
         {
-            return EditorGUILayout.Knob(knobSize, value, minValue, maxValue, unit, backgroundColor, activeColor, showValue, options);
+            return EditorGUILayout.Knob(knobSize, value, minValue, maxValue, unit, backgroundColor, activeColor,
+                showValue, options);
         }
 
         #region CopyAction
