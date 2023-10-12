@@ -63,6 +63,11 @@ namespace AIO.UEditor
         /// </summary>
         public int Order;
 
+        /// <summary>
+        /// 运行时 窗口类型
+        /// </summary>
+        public Type RuntimeType;
+
         /// <inheritdoc />
         public GWindowAttribute(string title)
         {
@@ -99,13 +104,11 @@ namespace AIO.UEditor
             Title = title;
         }
 
-
-        private static Dictionary<string, Type> windowTypes;
-        private static List<string> windowTypeKeys;
+        private static Dictionary<string, GWindowAttribute> windowTypes;
 
         private static SettingsProvider provider;
 
-        private static List<Type> windowDock = new List<Type>();
+        private static Dictionary<string, List<Type>> windowDock;
 
         /// <summary>
         /// 创建设置提供者
@@ -114,13 +117,9 @@ namespace AIO.UEditor
         private static SettingsProvider CreateSettingsProvider()
         {
             if (provider != null) return provider;
-            if (windowTypes == null) windowTypes = new Dictionary<string, Type>();
-            if (windowTypeKeys == null) windowTypeKeys = new List<string>();
+            if (windowTypes == null) windowTypes = new Dictionary<string, GWindowAttribute>();
+            if (windowDock == null) windowDock = new Dictionary<string, List<Type>> { { "Default", new List<Type>() } };
 
-            // var PreferenceSettingsWindowType = Assembly.GetAssembly(typeof(EditorWindow))
-            //     .GetType("UnityEditor.PreferenceSettingsWindow");
-            // windowTypeKeys
-            // 获取当前程序集中所有带有GWindowAttribute特性的窗口类型
             var graphicType = typeof(GraphicWindow);
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
@@ -128,20 +127,22 @@ namespace AIO.UEditor
                 {
                     if (!type.IsSubclassOf(graphicType)) continue;
                     var attribute = type.GetCustomAttribute<GWindowAttribute>(false);
-                    if (attribute is null)
-                    {
-                        windowDock.Add(type);
-                    }
+                    if (attribute is null) windowDock["Default"].Add(type);
                     else
                     {
-                        var key = string.Format("{0}\n{1}", attribute.Title, type.FullName);
+                        var key = string.Format("{0}{1}", attribute.Title, type.FullName);
                         if (windowTypes.ContainsKey(key)) continue;
-                        windowTypes.Add(key, type);
-                        windowTypeKeys.Add(key);
-                        windowDock.Add(type);
+                        attribute.RuntimeType = type;
+                        windowTypes.Add(key, attribute);
+                        if (!windowDock.ContainsKey(attribute.Group)) windowDock[attribute.Group] = new List<Type>();
+                        windowDock[attribute.Group].Add(type);
                     }
                 }
             }
+            //
+            // var containerWindowType = Assembly.GetAssembly(typeof(EditorWindow))
+            //     .GetType("UnityEditor.PreferenceSettingsWindow");
+            // foreach (var item in windowDock) item.Value.Add(containerWindowType);
 
             provider = new GraphicSettingsProvider("AIO/Windows", SettingsScope.User);
             provider.label = "Windows Header";
@@ -150,26 +151,44 @@ namespace AIO.UEditor
                 GELayout.BeginVertical();
                 GELayout.Space();
 
-                for (var i = 0; i < windowTypeKeys.Count; i++)
+                GELayout.BeginHorizontal(GEStyle.HelpBox);
+                GELayout.Label("Group", GEStyle.CenteredLabel, GTOption.Width(50));
+                GELayout.Label("Order", GEStyle.CenteredLabel, GTOption.Width(50));
+                GELayout.Label("Class", GEStyle.CenteredLabel, GTOption.WidthExpand(true));
+                GELayout.Label("Title", GEStyle.CenteredLabel, GTOption.Width(200));
+                GELayout.Label("Status", GEStyle.CenteredLabel, GTOption.Width(50));
+                GELayout.EndHorizontal();
+
+                foreach (var window in windowTypes)
                 {
-                    if (i >= windowTypeKeys.Count) continue;
                     GELayout.BeginHorizontal(GEStyle.HelpBox);
-                    var label = windowTypeKeys[i].Split('\n');
-                    GELayout.Label(label[1], GTOption.WidthExpand(true));
-                    GELayout.Label(label[0], GEStyle.CenteredLabel);
+                    GELayout.Label(window.Value.Group, GEStyle.CenteredLabel, GTOption.Width(50));
+                    GELayout.Label(window.Value.Order, GEStyle.CenteredLabel, GTOption.Width(50));
+                    GELayout.Label(window.Value.RuntimeType.FullName, GTOption.WidthExpand(true));
+                    GELayout.Label(window.Value.Title, GEStyle.CenteredLabel, GTOption.Width(200));
                     if (GELayout.Button("Open", 50))
-                        EHelper.Window.Open(windowTypes[windowTypeKeys[i]], label[0], windowDock);
+                        EHelper.Window.Open(window.Value.RuntimeType, window.Value.Title,
+                            windowDock[window.Value.Group]);
                     GELayout.EndHorizontal();
                 }
-
 
                 GELayout.Space();
                 GELayout.EndVertical();
             };
-            provider.keywords = new HashSet<string>(windowTypeKeys);
             return provider;
         }
 
-        private static Dictionary<string, Type> _WindowTypes;
+        // internal static GUIContent GetLocalizedTitleContentFromType(System.Type t)
+        // {
+        //     EditorWindowTitleAttribute windowTitleAttribute = EditorWindow.GetEditorWindowTitleAttribute(t);
+        //     if (windowTitleAttribute == null)
+        //         return new GUIContent(t.Name);
+        //     string str = "";
+        //     if (!string.IsNullOrEmpty(windowTitleAttribute.icon))
+        //         str = windowTitleAttribute.icon;
+        //     else if (windowTitleAttribute.useTypeNameAsIconName)
+        //         str = t.ToString();
+        //     return !string.IsNullOrEmpty(str) && (bool) (UnityEngine.Object) EditorGUIUtility.LoadIcon(str) ? EditorGUIUtility.TrTextContentWithIcon(windowTitleAttribute.title, str) : EditorGUIUtility.TrTextContent(windowTitleAttribute.title);
+        // }
     }
 }

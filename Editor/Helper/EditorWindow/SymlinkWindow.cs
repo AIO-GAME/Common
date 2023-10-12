@@ -61,9 +61,9 @@ namespace AIO.UEditor
                 GELayout.Label("General", EditorStyles.boldLabel);
                 GELayout.BeginVertical();
                 GELayout.Space();
-                if (GELayout.Button(ShowSymlink ? "Hide Symlink" : "Show Symlink"))
+                if (GELayout.Button(GetShowSymlink() ? "Hide Symlink" : "Show Symlink"))
                 {
-                    ShowSymlink = _ShowSymlink = !_ShowSymlink;
+                    SetShowSymlink(!GetShowSymlink());
                 }
 
                 GELayout.Space();
@@ -83,13 +83,16 @@ namespace AIO.UEditor
         /// <summary>
         /// 显示符号链接
         /// </summary>
-        private static bool _ShowSymlink
-        {
-            get => EditorPrefs.GetBool("AIO.Symlink.ShowSymlink", true);
-            set => EditorPrefs.SetBool("AIO.Symlink.ShowSymlink", value);
-        }
+        private static bool GetShowSymlink() => EditorPrefs.GetBool("AIO.Symlink.ShowSymlink", true);
 
-        private static bool ShowSymlink = _ShowSymlink;
+        /// <summary>
+        /// 显示符号链接
+        /// </summary>
+        private static void SetShowSymlink(bool value) => EditorPrefs.SetBool("AIO.Symlink.ShowSymlink", value);
+
+        protected override void OnAwake()
+        {
+        }
 
         /// <summary>
         /// Draw a little indicator if folder is a symlink
@@ -98,7 +101,7 @@ namespace AIO.UEditor
         /// <param name="r"></param>
         private static void OnProjectWindowItemGUI(string guid, Rect r)
         {
-            if (!ShowSymlink) return;
+            if (!GetShowSymlink()) return;
             try
             {
                 var path = AssetDatabase.GUIDToAssetPath(guid);
