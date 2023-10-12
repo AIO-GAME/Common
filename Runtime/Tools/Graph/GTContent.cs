@@ -14,7 +14,52 @@ namespace AIO
 {
     public partial struct GTContent
     {
+        public bool Equals(GTContent other)
+        {
+            return Equals(Style, other.Style) && Equals(Content, other.Content) && Equals(Options, other.Options);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is GTContent other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Style, Content, Options);
+        }
+
+        public static readonly GTContent Empty = new GTContent()
+        {
+            Content = GUIContent.none,
+            Options = null,
+            Style = null
+        };
+
+        public static bool IsNullOrEmpty(GTContent content)
+        {
+            return content == Empty;
+        }
+
+        public static bool operator ==(GTContent a, GTContent b)
+        {
+            if (a.Content != b.Content) return false;
+            if (a.Options != b.Options) return false;
+            if (a.Style != b.Style) return false;
+            return true;
+        }
+
+        public static bool operator !=(GTContent a, GTContent b)
+        {
+            return !(a == b);
+        }
+
         #region Temp
+
+        public static GUIContent Temp(string content)
+        {
+            return new GUIContent(content);
+        }
 
         public static GUIContent[] Temp(IEnumerable<GUIContent> collection)
         {
@@ -49,7 +94,8 @@ namespace AIO
         {
             var guiContentArray = new GUIContent[collection.Count];
             var index = 0;
-            foreach (var item in collection) guiContentArray[index++] = new GUIContent(item.ToString(CultureInfo.InvariantCulture));
+            foreach (var item in collection)
+                guiContentArray[index++] = new GUIContent(item.ToString(CultureInfo.InvariantCulture));
             return guiContentArray;
         }
 
@@ -57,7 +103,8 @@ namespace AIO
         {
             var guiContentArray = new GUIContent[collection.Count];
             var index = 0;
-            foreach (var item in collection) guiContentArray[index++] = new GUIContent(item.ToString(CultureInfo.InvariantCulture));
+            foreach (var item in collection)
+                guiContentArray[index++] = new GUIContent(item.ToString(CultureInfo.InvariantCulture));
             return guiContentArray;
         }
 
@@ -74,7 +121,7 @@ namespace AIO
         /// <summary>
         /// 内容
         /// </summary>
-        public GUIContent Content { get; private set; }
+        public GUIContent Content { get; set; }
 
         /// <summary>
         /// 选项
@@ -96,7 +143,7 @@ namespace AIO
         /// <summary>
         /// 选项
         /// </summary>
-        public GUIStyle Style;
+        public GUIStyle Style { get; set; }
 
         #region content options
 

@@ -129,10 +129,12 @@ namespace AIO.UEditor
         /// <inheritdoc />
         protected sealed override void OnDestroy()
         {
-            GraphicItems.Clear();
+            OnDispose();
+            GraphicItems?.Clear();
             GraphicItems = null;
-            GroupList.Clear();
+            GroupList?.Clear();
             GroupList = null;
+            EHelper.Window.Free(this);
         }
 
         /// <inheritdoc />
