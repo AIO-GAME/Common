@@ -183,6 +183,7 @@
     <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.UInt32.cs" />
     <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.UInt64.cs" />
     <Compile Include="Script\Tools\Buffer\Ring\BufferRing.cs" />
+    <Compile Include="Script\Tools\HashCode\HashCode.cs" />
     <Compile Include="Script\Tools\Interface\ILoad.cs" />
     <Compile Include="Script\Tools\Interface\ISave.cs" />
     <Compile Include="Script\Tools\Interface\Read\IReadBool.cs" />

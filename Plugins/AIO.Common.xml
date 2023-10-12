@@ -3896,6 +3896,11 @@
             写入数据
             </summary>
         </member>
+        <member name="T:AIO.HashCode">
+            <summary>
+            HashCode is designed to quickly compute hash codes of arbitrary objects.
+            </summary>
+        </member>
         <member name="T:AIO.ILoad">
             <summary>
             加载文件等等
@@ -5137,6 +5142,649 @@
              <param name="form"></param>
              <param name="to"></param>
              <param name="passwrod"></param>
+        </member>
+        <member name="T:AIO.DownloadInfo">
+            <summary>
+            下载信息
+            </summary>
+        </member>
+        <member name="F:AIO.DownloadInfo.Remote">
+            <summary>
+            远端请求地址
+            </summary>
+        </member>
+        <member name="F:AIO.DownloadInfo.Name">
+            <summary>
+            文件名
+            </summary>
+        </member>
+        <member name="F:AIO.DownloadInfo.Directory">
+            <summary>
+            文件目录
+            </summary>
+        </member>
+        <member name="F:AIO.DownloadInfo.Extension">
+            <summary>
+            文件扩展名
+            </summary>
+        </member>
+        <member name="F:AIO.DownloadInfo.Alias">
+            <summary>
+            别名
+            </summary>
+        </member>
+        <member name="T:AIO.HTTPNetwork">
+            <summary>
+            HTTP
+            </summary>
+        </member>
+        <member name="F:AIO.HTTPNetwork.requestQueue">
+            <summary>
+            请求队列
+            </summary>
+        </member>
+        <member name="F:AIO.HTTPNetwork.waitingNoLoadingReqs">
+            <summary>
+            无需遮罩的请求队列
+            </summary>
+        </member>
+        <member name="F:AIO.HTTPNetwork.waitingRepeatReqs">
+            <summary>
+            重复请求队列
+            </summary>
+        </member>
+        <member name="F:AIO.HTTPNetwork.response">
+            <summary>
+            响应
+            </summary>
+        </member>
+        <member name="P:AIO.HTTPNetwork.Token">
+            <summary>
+            令牌
+            </summary>
+        </member>
+        <member name="M:AIO.HTTPNetwork.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.HTTPNetwork.OnConnect">
+            <summary>
+            连接
+            </summary>
+        </member>
+        <member name="M:AIO.HTTPNetwork.OnDisconnect">
+            <summary>
+            关闭连接
+            </summary>
+        </member>
+        <member name="M:AIO.HTTPNetwork.OnDispose">
+            <summary>
+            执行与释放或重置非托管资源关联的应用程序定义的任务
+            </summary>
+        </member>
+        <member name="F:AIO.HTTPNetwork.POSTFinish">
+            <summary>
+            POST 完成 
+            </summary>
+        </member>
+        <member name="M:AIO.HTTPNetwork.Send(AIO.INetRequest)">
+            <summary>
+            发送
+            </summary>
+            <param name="request"></param>
+        </member>
+        <member name="T:AIO.IHTTPRequest">
+            <summary>
+            Net Http Request
+            </summary>
+        </member>
+        <member name="P:AIO.IHTTPRequest.Url">
+            <summary>
+            请求地址
+            </summary>
+        </member>
+        <member name="P:AIO.IHTTPRequest.Method">
+            <summary>
+            请求方法
+            </summary>
+        </member>
+        <member name="P:AIO.IHTTPRequest.Headers">
+            <summary>
+            请求Header
+            </summary>
+        </member>
+        <member name="T:AIO.HTTPMethod">
+            <summary>
+            HTTP Method
+            </summary>
+        </member>
+        <member name="F:AIO.HTTPMethod.GET">
+            <summary>
+            GET
+            </summary>
+        </member>
+        <member name="F:AIO.HTTPMethod.POST">
+            <summary>
+            POST
+            </summary>
+        </member>
+        <member name="F:AIO.HTTPMethod.PUT">
+            <summary>
+            PUT
+            </summary>
+        </member>
+        <member name="F:AIO.HTTPMethod.DELETE">
+            <summary>
+            DELETE
+            </summary>
+        </member>
+        <member name="F:AIO.HTTPMethod.HEAD">
+            <summary>
+            HEAD
+            </summary>
+        </member>
+        <member name="F:AIO.HTTPMethod.OPTIONS">
+            <summary>
+            OPTIONS
+            </summary>
+        </member>
+        <member name="F:AIO.HTTPMethod.TRACE">
+            <summary>
+            TRACE
+            </summary>
+        </member>
+        <member name="F:AIO.HTTPMethod.CONNECT">
+            <summary>
+            CONNECT
+            </summary>
+        </member>
+        <member name="F:AIO.HTTPMethod.PATCH">
+            <summary>
+            PATCH
+            </summary>
+        </member>
+        <member name="T:AIO.HTTPRequest">
+            <summary>
+            Net Http Request
+            </summary>
+        </member>
+        <member name="M:AIO.HTTPRequest.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:AIO.HTTPRequest.Protocol">
+            <summary>
+            协议号
+            </summary>
+        </member>
+        <member name="P:AIO.HTTPRequest.Data">
+            <summary>
+            原始数据
+            </summary>
+        </member>
+        <member name="P:AIO.HTTPRequest.Url">
+            <summary>
+            请求地址
+            </summary>
+        </member>
+        <member name="P:AIO.HTTPRequest.Method">
+            <summary>
+            请求方法
+            </summary>
+        </member>
+        <member name="P:AIO.HTTPRequest.Headers">
+            <summary>
+            请求Header
+            </summary>
+        </member>
+        <member name="P:AIO.HTTPRequest.UserAgent">
+            <summary>
+            UserAgent
+            </summary>
+        </member>
+        <member name="P:AIO.HTTPRequest.ContentType">
+            <summary>
+            请求体
+            </summary>
+        </member>
+        <member name="P:AIO.HTTPRequest.Cookie">
+            <summary>
+            Cookie
+            </summary>
+        </member>
+        <member name="M:AIO.HTTPRequest.SendAsync">
+            <summary>
+            发送
+            </summary>
+        </member>
+        <member name="M:AIO.HTTPRequest.Send(System.Action{AIO.INetResponse})">
+            <summary>
+            发送
+            </summary>
+        </member>
+        <member name="M:AIO.HTTPRequest.GetAsync">
+            <summary>
+            GET
+            </summary>
+        </member>
+        <member name="M:AIO.HTTPRequest.Get(System.Action{System.Net.Http.HttpContent})">
+            <summary>
+            GET
+            </summary>
+        </member>
+        <member name="M:AIO.HTTPRequest.PostAsync``1(``0)">
+            <summary>
+            Post
+            </summary>
+        </member>
+        <member name="M:AIO.HTTPRequest.Post``1(``0,System.Action{System.Net.Http.HttpContent})">
+            <summary>
+            Post
+            </summary>
+        </member>
+        <member name="T:AIO.HTTPResponse">
+            <summary>
+            NetHttpResponse
+            /// </summary>
+        </member>
+        <member name="P:AIO.HTTPResponse.Protocol">
+            <summary>
+            协议号
+            </summary>
+        </member>
+        <member name="P:AIO.HTTPResponse.ResponseCode">
+            <summary>
+            响应码
+            </summary>
+        </member>
+        <member name="P:AIO.HTTPResponse.Body">
+            <summary>
+            响应体
+            </summary>
+        </member>
+        <member name="P:AIO.HTTPResponse.Request">
+            <summary>
+            请求
+            </summary>
+        </member>
+        <member name="T:AIO.INetCryptography">
+            <summary>
+            Net 数据加密解密
+            </summary>
+        </member>
+        <member name="M:AIO.INetCryptography.Encrypt(System.Byte[])">
+            <summary>
+            加密
+            </summary>
+        </member>
+        <member name="M:AIO.INetCryptography.Decrypt(System.Byte[])">
+            <summary>
+            解密
+            </summary>
+        </member>
+        <member name="T:AIO.INetGuard">
+            <summary>
+            Net Guard
+            </summary>
+        </member>
+        <member name="M:AIO.INetGuard.OnSend(AIO.INetRequest)">
+            <summary>
+            开始发送
+            </summary>
+            <param name="request"><see cref="T:AIO.INetRequest"/>请求</param>
+        </member>
+        <member name="M:AIO.INetGuard.OnFinish(AIO.INetRequest)">
+            <summary>
+            本次处理完毕
+            </summary>
+            <param name="request"><see cref="T:AIO.INetRequest"/>请求</param>
+        </member>
+        <member name="M:AIO.INetGuard.OnError(AIO.INetResponse)">
+            <summary>
+            发送错误
+            </summary>
+            <param name="response"><see cref="T:AIO.INetResponse"/>响应</param>
+        </member>
+        <member name="M:AIO.INetGuard.OnReceive(AIO.INetResponse)">
+            <summary>
+            接收数据
+            </summary>
+            <param name="response"><see cref="T:AIO.INetResponse"/>响应</param>
+        </member>
+        <member name="T:AIO.INetRequest">
+            <summary>
+            Net 请求
+            </summary>
+        </member>
+        <member name="P:AIO.INetRequest.Protocol">
+            <summary>
+            协议号
+            </summary>
+        </member>
+        <member name="P:AIO.INetRequest.Data">
+            <summary>
+            原始数据
+            </summary>
+        </member>
+        <member name="M:AIO.INetRequest.SendAsync">
+            <summary> 
+            发送
+            </summary>
+        </member>
+        <member name="M:AIO.INetRequest.Send(System.Action{AIO.INetResponse})">
+            <summary>
+            发送
+            </summary>
+        </member>
+        <member name="T:AIO.INetResponse">
+            <summary>
+            Net 响应
+            </summary>
+        </member>
+        <member name="P:AIO.INetResponse.Protocol">
+            <summary>
+            协议号
+            </summary>
+        </member>
+        <member name="P:AIO.INetResponse.ResponseCode">
+            <summary>
+            响应码
+            </summary>
+        </member>
+        <member name="P:AIO.INetResponse.Body">
+            <summary>
+            响应体
+            </summary>
+        </member>
+        <member name="P:AIO.INetResponse.Request">
+            <summary>
+            请求
+            </summary>
+        </member>
+        <member name="M:AIO.INetResponse.GetAsync``1(``0)">
+            <summary>
+            获取数据
+            </summary>
+        </member>
+        <member name="M:AIO.INetResponse.GetStringAsync">
+            <summary>
+            获取字符串
+            </summary>
+        </member>
+        <member name="M:AIO.INetResponse.GetStreamAsync">
+            <summary>
+            获取流数据
+            </summary>
+        </member>
+        <member name="M:AIO.INetResponse.GetBytesAsync">
+            <summary>
+            获取字节数组
+            </summary>
+        </member>
+        <member name="T:AIO.INetSerialization">
+            <summary>
+            请求对象序列化
+            </summary>
+        </member>
+        <member name="M:AIO.INetSerialization.Serialize``1(System.Int32,``0)">
+            <summary>
+            序列化
+            </summary>
+            <param name="protocol">协议号</param>
+            <param name="data">元数据</param>
+            <returns>数据</returns>
+        </member>
+        <member name="M:AIO.INetSerialization.Deserialize``1(System.Int32,System.Byte[])">
+            <summary>
+            反序列化
+            </summary>
+            <param name="protocol">协议号</param>
+            <param name="data">元数据</param>
+            <returns>对象</returns>
+        </member>
+        <member name="T:AIO.INetwork">
+            <summary>
+            INetwork
+            </summary>
+        </member>
+        <member name="P:AIO.INetwork.Cryptography">
+            <summary>
+            加密解密
+            </summary>
+        </member>
+        <member name="P:AIO.INetwork.ReqSerialization">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="P:AIO.INetwork.Guard">
+            <summary>
+            流程控制
+            </summary>
+        </member>
+        <member name="P:AIO.INetwork.Host">
+            <summary>
+            主机地址
+            </summary>
+        </member>
+        <member name="P:AIO.INetwork.Port">
+            <summary>
+            端口号
+            </summary>
+        </member>
+        <member name="P:AIO.INetwork.SSL">
+            <summary>
+            是否使用SSL
+            </summary>
+        </member>
+        <member name="P:AIO.INetwork.Encrypt">
+            <summary>
+            是否加密
+            </summary>
+        </member>
+        <member name="P:AIO.INetwork.MaxRetryCount">
+            <summary>
+            最大重试次数
+            </summary>
+        </member>
+        <member name="P:AIO.INetwork.IsConnected">
+            <summary>
+            是否已连接
+            </summary>
+        </member>
+        <member name="M:AIO.INetwork.Connect(System.String,System.Int32,System.Boolean)">
+            <summary>
+            连接
+            </summary>
+            <param name="host">地址</param>
+            <param name="port">端口</param>
+            <param name="ssl">是否使用SSL</param>
+        </member>
+        <member name="M:AIO.INetwork.Disconnect">
+            <summary>
+            关闭连接
+            </summary>
+        </member>
+        <member name="T:AIO.Network">
+            <summary>
+            Net work
+            </summary>
+        </member>
+        <member name="P:AIO.Network.Cryptography">
+            <summary>
+            加密解密
+            /// </summary>
+        </member>
+        <member name="P:AIO.Network.ReqSerialization">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="P:AIO.Network.Guard">
+            <summary>
+            流程控制
+            </summary>
+        </member>
+        <member name="P:AIO.Network.Host">
+            <summary>
+            主机地址
+            </summary>
+        </member>
+        <member name="P:AIO.Network.Encrypt">
+            <summary>
+            是否加密
+            </summary>
+        </member>
+        <member name="P:AIO.Network.Port">
+            <summary>
+            端口号
+            </summary>
+        </member>
+        <member name="P:AIO.Network.SSL">
+            <summary>
+            是否使用SSL
+            </summary>
+        </member>
+        <member name="P:AIO.Network.IsConnected">
+            <summary>
+            是否已连接
+            </summary>
+        </member>
+        <member name="P:AIO.Network.MaxRetryCount">
+            <summary>
+            最大重试次数
+            </summary>
+        </member>
+        <member name="P:AIO.Network.EncryptTime">
+            <summary>
+            解密时间
+            </summary>
+        </member>
+        <member name="P:AIO.Network.decryptMutex">
+            <summary>
+            互斥锁
+            </summary>
+        </member>
+        <member name="P:AIO.Network.UriBuilder">
+            <summary>
+            Uri构造器
+            </summary>
+        </member>
+        <member name="M:AIO.Network.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.Network.OnConnect">
+            <summary>
+            连接
+            </summary>
+        </member>
+        <member name="M:AIO.Network.OnDisconnect">
+            <summary>
+            关闭连接
+            </summary>
+        </member>
+        <member name="M:AIO.Network.OnDispose">
+            <summary>
+            执行与释放或重置非托管资源关联的应用程序定义的任务
+            </summary>
+        </member>
+        <member name="M:AIO.Network.Connect(System.String,System.Int32,System.Boolean)">
+            <summary>
+            连接
+            </summary>
+            <param name="host">地址</param>
+            <param name="port">端口</param>
+            <param name="ssl">是否使用SSL</param>
+        </member>
+        <member name="M:AIO.Network.Disconnect">
+            <summary>
+            关闭连接
+            </summary>
+        </member>
+        <member name="M:AIO.Network.Dispose">
+            <summary>
+            执行与释放或重置非托管资源关联的应用程序定义的任务
+            </summary>
+        </member>
+        <member name="M:AIO.Network.Equals(System.Object)">
+            <summary>确定指定的对象是否等于当前对象。</summary>
+            <param name="obj">要与当前对象进行比较的对象。</param>
+            <returns>
+              如果指定的对象等于当前对象，则为 <see langword="true" />，否则为 <see langword="false" />。
+            </returns>
+        </member>
+        <member name="M:AIO.Network.ToString">
+            <summary>返回表示当前对象的字符串。</summary>
+            <returns>表示当前对象的字符串。</returns>
+        </member>
+        <member name="M:AIO.Network.GetHashCode">
+            <summary>作为默认哈希函数。</summary>
+            <returns>当前对象的哈希代码。</returns>
+        </member>
+        <member name="P:AIO.Network.Log">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="P:AIO.Network.Error">
+            <summary>
+            错误
+            </summary>
+        </member>
+        <member name="P:AIO.Network.Exception">
+            <summary>
+            异常
+            </summary>
+        </member>
+        <member name="P:AIO.Network.Warning">
+            <summary>
+            警告
+            </summary>
+        </member>
+        <member name="P:AIO.Network.PrintNetworkDetailLog">
+            <summary>
+            是否打印网络详细日志
+            </summary>
+        </member>
+        <member name="M:AIO.Network.OpenDetailLog(System.Action{System.String},System.Action{System.String},System.Action{System.Exception},System.Action{System.String})">
+            <summary>
+            打开网络详细日志
+            </summary>
+            <param name="log"></param>
+            <param name="error"></param>
+            <param name="exception"></param>
+            <param name="warning"></param>
+        </member>
+        <member name="F:AIO.Network.FilterBlock">
+            <summary>
+            白名单请求协议号
+            </summary>
+        </member>
+        <member name="M:AIO.Network.LogTimeStamp(System.String,System.Int32,System.Int32)">
+            <summary>
+            日志时间戳
+            </summary>
+        </member>
+        <member name="M:AIO.Network.LogTimeStamp(System.String,System.Int32)">
+            <summary>
+            日志时间戳
+            </summary>
+        </member>
+        <member name="M:AIO.Network.CurrentTimeStamp(System.Boolean)">
+            <summary>
+            获取当前时间戳
+            </summary>
+            <param name="isMinseconds">Ture:毫秒 False:秒</param>
+            <returns>时间磋</returns>
+        </member>
+        <member name="M:AIO.Network.RefreshEncryptTime">
+            <summary>
+            刷新加密时间
+            </summary>
         </member>
         <member name="T:AIO.PList.IPListElementExten">
             <summary>
@@ -7484,6 +8132,123 @@
             <summary>
             加载
             </summary>
+        </member>
+        <member name="T:AIO.Version">
+            <summary>
+            Version
+            </summary>
+        </member>
+        <member name="M:AIO.Version.CompareTo(System.Object,System.Boolean)">
+            <summary>
+            比较版本号
+            </summary>
+            <param name="version">版本</param>
+            <param name="ignoreBuildNumber">忽略构件号</param>
+            <returns>0:相等 1:大于目标版本 -1:小余目标版本</returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="P:AIO.Version.major">
+            <summary>
+            主版本号
+            </summary>
+        </member>
+        <member name="P:AIO.Version.minor">
+            <summary>
+            小版本号
+            </summary>
+        </member>
+        <member name="P:AIO.Version.revision">
+            <summary>
+            补丁修正号
+            </summary>
+        </member>
+        <member name="P:AIO.Version.build">
+            <summary>
+            构建号,可选
+            </summary>
+        </member>
+        <member name="M:AIO.Version.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.Version.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="major">主版本号</param>
+            <param name="minor">小版本号</param>
+            <param name="revision">补丁修正号</param>
+        </member>
+        <member name="M:AIO.Version.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="major">主版本号</param>
+            <param name="minor">小版本号</param>
+            <param name="revision">补丁修正号</param>
+            <param name="build">构建号,可选</param>
+        </member>
+        <member name="M:AIO.Version.ToString">
+            <summary>
+            转换为字符串
+            </summary>
+        </member>
+        <member name="M:AIO.Version.ToStringWithoutBuildNumber">
+            <summary>
+            转换为字符串 不包含构建号
+            </summary>
+        </member>
+        <member name="M:AIO.Version.GetHashCode">
+            <summary>
+            获取哈希值
+            </summary>
+        </member>
+        <member name="M:AIO.Version.Equals(System.Object)">
+            <summary>
+            比较版本号
+            </summary>
+        </member>
+        <member name="M:AIO.Version.op_Equality(AIO.Version,AIO.Version)">
+            <summary>
+            ==
+            </summary>
+            <param name="v1"><see cref="T:AIO.Version"/></param>
+            <param name="v2"><see cref="T:AIO.Version"/></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.Version.op_Inequality(AIO.Version,AIO.Version)">
+            <summary>
+            !=
+            </summary>
+            <param name="v1"><see cref="T:AIO.Version"/></param>
+            <param name="v2"><see cref="T:AIO.Version"/></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:AIO.Version.op_LessThan(AIO.Version,AIO.Version)" -->
+        <member name="M:AIO.Version.op_LessThanOrEqual(AIO.Version,AIO.Version)">
+            <summary>
+            &lt;=
+            </summary>
+            <param name="v1"><see cref="T:AIO.Version"/></param>
+            <param name="v2"><see cref="T:AIO.Version"/></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.Version.op_GreaterThan(AIO.Version,AIO.Version)">
+            <summary>
+            >
+            </summary>
+            <param name="v1"><see cref="T:AIO.Version"/></param>
+            <param name="v2"><see cref="T:AIO.Version"/></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.Version.op_GreaterThanOrEqual(AIO.Version,AIO.Version)">
+            <summary>
+            >=
+            </summary>
+            <param name="v1"><see cref="T:AIO.Version"/></param>
+            <param name="v2"><see cref="T:AIO.Version"/></param>
+            <returns></returns>
         </member>
         <member name="T:AIO.ScriptType">
             <summary>

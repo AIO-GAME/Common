@@ -455,9 +455,9 @@ namespace AIO.UEditor
 
                 var containerWindowType = assembly.GetType("UnityEditor.ContainerWindow");
 
-                if (containerWindowType.GetProperty("windows",
+                if (!(containerWindowType.GetProperty("windows",
                             BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty)
-                        ?.GetValue(null, null) is not Array windowsObj) return false;
+                        ?.GetValue(null, null) is Array windowsObj)) return false;
                 var containerWindowRootView = containerWindowType.GetProperty("rootView", PROPERTY_BIND);
 
                 var dockAreaType = assembly.GetType("UnityEditor.DockArea");
@@ -484,15 +484,14 @@ namespace AIO.UEditor
                             if (window.Equals(instance)) continue;
                             var v1 = containerWindowRootView.GetValue(window, null);
                             if (v1 is null) continue;
-                            if (viewAllChildren.GetValue(v1, null) is not Array v2) continue;
-
+                            if (!(viewAllChildren.GetValue(v1, null) is Array v2)) continue;
                             foreach (var allChild in v2)
                             {
                                 if (allChild is null) continue;
                                 if (!dockAreaType.IsInstanceOfType(allChild)) continue;
-                                if (dockAreaType.GetField("m_Panes",
+                                if (!(dockAreaType.GetField("m_Panes",
                                             BindingFlags.NonPublic | BindingFlags.Instance)
-                                        ?.GetValue(allChild) is not List<EditorWindow> mPanes) continue;
+                                        ?.GetValue(allChild) is List<EditorWindow> mPanes)) continue;
                                 foreach (var item in mPanes)
                                 {
                                     if (item is null) continue;
