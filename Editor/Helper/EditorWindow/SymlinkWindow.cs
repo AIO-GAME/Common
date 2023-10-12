@@ -51,36 +51,23 @@ namespace AIO.UEditor
             }
         }
 
-        protected  SettingsProvider RegisterSettingsProvider()
+        [SettingsProvider]
+        protected static SettingsProvider SettingsProvider()
         {
-            var provider = new SettingsProvider("AIO/Symlink", SettingsScope.Project)
+            var provider = CreateSettingsProvider("Symlink");
+            provider.label = "Symlink Tool";
+            provider.guiHandler = delegate
             {
-                label = "Symlink",
-                guiHandler = delegate
+                GELayout.Label("General", EditorStyles.boldLabel);
+                GELayout.BeginVertical();
+                GELayout.Space();
+                if (GELayout.Button(ShowSymlink ? "Hide Symlink" : "Show Symlink"))
                 {
-                    GELayout.Label("General", EditorStyles.boldLabel);
-                    GELayout.BeginVertical();
-                    GELayout.Space();
-                    GELayout.BeginHorizontal();
-                    if (ShowSymlink)
-                    {
-                        if (GELayout.Button("Hide Symlink"))
-                        {
-                            ShowSymlink = _ShowSymlink = false;
-                        }
-                    }
-                    else
-                    {
-                        if (GELayout.Button("Show Symlink"))
-                        {
-                            ShowSymlink = _ShowSymlink = true;
-                        }
-                    }
-
-                    GELayout.EndHorizontal();
-                    GELayout.Space();
-                    GELayout.EndVertical();
+                    ShowSymlink = _ShowSymlink = !_ShowSymlink;
                 }
+
+                GELayout.Space();
+                GELayout.EndVertical();
             };
             return provider;
         }

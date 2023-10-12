@@ -41,6 +41,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,28 +50,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Script\Assembly\DllAutomation\DllAutomation.Async.cs" />
-    <Compile Include="Script\Assembly\DllAutomation\DllAutomation.cs" />
-    <Compile Include="Script\Assembly\DllAutomation\DllAutomation.Sync.cs" />
-    <Compile Include="Script\Assembly\DllAutomation\DllAutomationAttribute.cs" />
-    <Compile Include="Script\Assembly\DllAutomation\IDllAutomation.cs" />
-    <Compile Include="Script\Class\SystemAutomation\ISystemAutomation.cs" />
-    <Compile Include="Script\Class\SystemAutomation\SystemAutomation.Async.cs" />
-    <Compile Include="Script\Class\SystemAutomation\SystemAutomation.cs" />
-    <Compile Include="Script\Class\SystemAutomation\SystemAttribute.cs" />
-    <Compile Include="Script\Class\SystemAutomation\SystemAutomation.Sync.cs" />
+    <Compile Include="Script\Common\VisibleToOtherModulesAttribute.cs" />
+    <Compile Include="Script\DllAutomation\DllAutomation.Async.cs" />
+    <Compile Include="Script\DllAutomation\DllAutomation.cs" />
+    <Compile Include="Script\DllAutomation\DllAutomation.Sync.cs" />
+    <Compile Include="Script\DllAutomation\DllAutomationAttribute.cs" />
+    <Compile Include="Script\DllAutomation\IDllAutomation.cs" />
+    <Compile Include="Script\SettingsProvider\DefaultProvider.cs" />
+    <Compile Include="Script\SettingsProvider\PortableSettingsProvider.cs" />
+    <Compile Include="Script\SettingsProvider\Settings.cs" />
+    <Compile Include="Script\SettingsProvider\TestSettingsProvider.cs" />
+    <Compile Include="Script\SystemAutomation\ISystemAutomation.cs" />
+    <Compile Include="Script\SystemAutomation\SystemAutomation.Async.cs" />
+    <Compile Include="Script\SystemAutomation\SystemAutomation.cs" />
+    <Compile Include="Script\SystemAutomation\SystemAttribute.cs" />
+    <Compile Include="Script\SystemAutomation\SystemAutomation.Sync.cs" />
     <Compile Include="Script\Enum\ERuntimePlatform.cs" />
-    <Compile Include="Script\Method\Comman\Exception\GCommandDuplicationKeyException.cs" />
-    <Compile Include="Script\Method\Comman\Exception\GCommandException.cs" />
-    <Compile Include="Script\Method\Comman\Exception\GCommandInvokeException.cs" />
-    <Compile Include="Script\Method\Comman\Exception\GCommandNotFoundException.cs" />
-    <Compile Include="Script\Method\Comman\Exception\GCommandNotSupportedException.cs" />
-    <Compile Include="Script\Method\Comman\Exception\GCommandParameterException.cs" />
-    <Compile Include="Script\Method\Comman\Exception\GCommandResolverException.cs" />
-    <Compile Include="Script\Method\Comman\Exception\GCommandVerifyException.cs" />
-    <Compile Include="Script\Method\Comman\GCommandSearchDatabase.cs" />
-    <Compile Include="Script\Method\Comman\GCommandAttribute.cs" />
-    <Compile Include="Script\Method\Comman\GCommandSystem.cs" />
+    <Compile Include="Script\GCommand\Exception\GCommandDuplicationKeyException.cs" />
+    <Compile Include="Script\GCommand\Exception\GCommandException.cs" />
+    <Compile Include="Script\GCommand\Exception\GCommandInvokeException.cs" />
+    <Compile Include="Script\GCommand\Exception\GCommandNotFoundException.cs" />
+    <Compile Include="Script\GCommand\Exception\GCommandNotSupportedException.cs" />
+    <Compile Include="Script\GCommand\Exception\GCommandParameterException.cs" />
+    <Compile Include="Script\GCommand\Exception\GCommandResolverException.cs" />
+    <Compile Include="Script\GCommand\Exception\GCommandVerifyException.cs" />
+    <Compile Include="Script\GCommand\GCommandSearchDatabase.cs" />
+    <Compile Include="Script\GCommand\GCommandAttribute.cs" />
+    <Compile Include="Script\GCommand\GCommandSystem.cs" />
     <Compile Include="Setting\Strings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

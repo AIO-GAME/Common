@@ -8076,5 +8076,171 @@ namespace AIO.UEditor
 
         #endregion
 
+        #region Selection Grid
+
+        /// <summary>
+        /// Make a Selection Grid 
+        /// </summary>
+        /// <param name="selected">The index of the selected button. <see cref="int"/></param>
+        /// <param name="content">An array of text, image and tooltips for the button.</param>
+        /// <param name="xCount">How many elements to fit in the horizontal direction. The elements will be scaled to fit unless the style defines a fixedWidth to use. The height of the control will be determined from the number of elements. <see cref="int"/></param>
+        /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
+        /// <returns><see cref="int"/></returns>
+        public static int Selection(int selected, GUIContent[] content, int xCount, params GUILayoutOption[] options)
+        {
+            return GUILayout.SelectionGrid(selected, content, xCount, options);
+        }
+
+        /// <summary>
+        /// Make a Selection Grid 
+        /// </summary>
+        /// <param name="selected">The index of the selected button. <see cref="int"/></param>
+        /// <param name="content">An array of text, image and tooltips for the button.</param>
+        /// <param name="xCount">How many elements to fit in the horizontal direction. The elements will be scaled to fit unless the style defines a fixedWidth to use. The height of the control will be determined from the number of elements. <see cref="int"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
+        /// <returns><see cref="int"/></returns>
+        public static int Selection(int selected, GUIContent[] content, int xCount, GUIStyle style, params GUILayoutOption[] options)
+        {
+            return GUILayout.SelectionGrid(selected, content, xCount, style, options);
+        }
+
+        /// <summary>
+        /// Make a Selection Grid 
+        /// </summary>
+        /// <param name="selected">The index of the selected button. <see cref="int"/></param>
+        /// <param name="content">An array of text, image and tooltips for the button. <see cref="IEnumerable&lt;GUIContent&gt;"/></param>
+        /// <param name="xCount">How many elements to fit in the horizontal direction. The elements will be scaled to fit unless the style defines a fixedWidth to use. The height of the control will be determined from the number of elements. <see cref="int"/></param>
+        /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
+        /// <returns><see cref="int"/></returns>
+        public static int Selection(int selected, IEnumerable<GUIContent> content, int xCount, params GUILayoutOption[] options)
+        {
+            return GUILayout.SelectionGrid(selected, GTContent.Temp(content), xCount, options);
+        }
+
+        /// <summary>
+        /// Make a Selection Grid 
+        /// </summary>
+        /// <param name="selected">The index of the selected button. <see cref="int"/></param>
+        /// <param name="content">An array of text, image and tooltips for the button. <see cref="IEnumerable&lt;GUIContent&gt;"/></param>
+        /// <param name="xCount">How many elements to fit in the horizontal direction. The elements will be scaled to fit unless the style defines a fixedWidth to use. The height of the control will be determined from the number of elements. <see cref="int"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
+        /// <returns><see cref="int"/></returns>
+        public static int Selection(int selected, IEnumerable<GUIContent> content, int xCount, GUIStyle style, params GUILayoutOption[] options)
+        {
+            return GUILayout.SelectionGrid(selected, GTContent.Temp(content), xCount, style, options);
+        }
+
+        /// <summary>
+        /// Make a Selection Grid 
+        /// </summary>
+        /// <param name="selected">The index of the selected button. <see cref="int"/></param>
+        /// <param name="content">An array of text, image and tooltips for the button.</param>
+        /// <param name="xCount">How many elements to fit in the horizontal direction. The elements will be scaled to fit unless the style defines a fixedWidth to use. The height of the control will be determined from the number of elements. <see cref="int"/></param>
+        /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
+        /// <returns><see cref="int"/></returns>
+        public static int Selection(int selected, string[] content, int xCount, params GUILayoutOption[] options)
+        {
+            return GUILayout.SelectionGrid(selected, content, xCount, options);
+        }
+
+        /// <summary>
+        /// Make a Selection Grid 
+        /// </summary>
+        /// <param name="selected">The index of the selected button. <see cref="int"/></param>
+        /// <param name="content">An array of text, image and tooltips for the button.</param>
+        /// <param name="xCount">How many elements to fit in the horizontal direction. The elements will be scaled to fit unless the style defines a fixedWidth to use. The height of the control will be determined from the number of elements. <see cref="int"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
+        /// <returns><see cref="int"/></returns>
+        public static int Selection(int selected, string[] content, int xCount, GUIStyle style, params GUILayoutOption[] options)
+        {
+            return GUILayout.SelectionGrid(selected, content, xCount, style, options);
+        }
+
+        /// <summary>
+        /// Make a Selection Grid 
+        /// </summary>
+        /// <param name="selected">The index of the selected button. <see cref="int"/></param>
+        /// <param name="content">An array of text, image and tooltips for the button. <see cref="ICollection&lt;string&gt;"/></param>
+        /// <param name="xCount">How many elements to fit in the horizontal direction. The elements will be scaled to fit unless the style defines a fixedWidth to use. The height of the control will be determined from the number of elements. <see cref="int"/></param>
+        /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
+        /// <returns><see cref="int"/></returns>
+        public static int Selection(int selected, ICollection<string> content, int xCount, params GUILayoutOption[] options)
+        {
+            return GUILayout.SelectionGrid(selected, GTContent.Temp(content), xCount, options);
+        }
+
+        /// <summary>
+        /// Make a Selection Grid 
+        /// </summary>
+        /// <param name="selected">The index of the selected button. <see cref="int"/></param>
+        /// <param name="content">An array of text, image and tooltips for the button. <see cref="ICollection&lt;string&gt;"/></param>
+        /// <param name="xCount">How many elements to fit in the horizontal direction. The elements will be scaled to fit unless the style defines a fixedWidth to use. The height of the control will be determined from the number of elements. <see cref="int"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
+        /// <returns><see cref="int"/></returns>
+        public static int Selection(int selected, ICollection<string> content, int xCount, GUIStyle style, params GUILayoutOption[] options)
+        {
+            return GUILayout.SelectionGrid(selected, GTContent.Temp(content), xCount, style, options);
+        }
+
+        /// <summary>
+        /// Make a Selection Grid 
+        /// </summary>
+        /// <param name="selected">The index of the selected button. <see cref="int"/></param>
+        /// <param name="content">An array of text, image and tooltips for the button.</param>
+        /// <param name="xCount">How many elements to fit in the horizontal direction. The elements will be scaled to fit unless the style defines a fixedWidth to use. The height of the control will be determined from the number of elements. <see cref="int"/></param>
+        /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
+        /// <returns><see cref="int"/></returns>
+        public static int Selection(int selected, Texture[] content, int xCount, params GUILayoutOption[] options)
+        {
+            return GUILayout.SelectionGrid(selected, GTContent.Temp(content), xCount, options);
+        }
+
+        /// <summary>
+        /// Make a Selection Grid 
+        /// </summary>
+        /// <param name="selected">The index of the selected button. <see cref="int"/></param>
+        /// <param name="content">An array of text, image and tooltips for the button.</param>
+        /// <param name="xCount">How many elements to fit in the horizontal direction. The elements will be scaled to fit unless the style defines a fixedWidth to use. The height of the control will be determined from the number of elements. <see cref="int"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
+        /// <returns><see cref="int"/></returns>
+        public static int Selection(int selected, Texture[] content, int xCount, GUIStyle style, params GUILayoutOption[] options)
+        {
+            return GUILayout.SelectionGrid(selected, GTContent.Temp(content), xCount, style, options);
+        }
+
+        /// <summary>
+        /// Make a Selection Grid 
+        /// </summary>
+        /// <param name="selected">The index of the selected button. <see cref="int"/></param>
+        /// <param name="content">An array of text, image and tooltips for the button. <see cref="ICollection&lt;Texture&gt;"/></param>
+        /// <param name="xCount">How many elements to fit in the horizontal direction. The elements will be scaled to fit unless the style defines a fixedWidth to use. The height of the control will be determined from the number of elements. <see cref="int"/></param>
+        /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
+        /// <returns><see cref="int"/></returns>
+        public static int Selection(int selected, ICollection<Texture> content, int xCount, params GUILayoutOption[] options)
+        {
+            return GUILayout.SelectionGrid(selected, GTContent.Temp(content), xCount, options);
+        }
+
+        /// <summary>
+        /// Make a Selection Grid 
+        /// </summary>
+        /// <param name="selected">The index of the selected button. <see cref="int"/></param>
+        /// <param name="content">An array of text, image and tooltips for the button. <see cref="ICollection&lt;Texture&gt;"/></param>
+        /// <param name="xCount">How many elements to fit in the horizontal direction. The elements will be scaled to fit unless the style defines a fixedWidth to use. The height of the control will be determined from the number of elements. <see cref="int"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        /// <param name="options">排版格式 <see cref="GUILayoutOption"/></param>
+        /// <returns><see cref="int"/></returns>
+        public static int Selection(int selected, ICollection<Texture> content, int xCount, GUIStyle style, params GUILayoutOption[] options)
+        {
+            return GUILayout.SelectionGrid(selected, GTContent.Temp(content), xCount, style, options);
+        }
+
+        #endregion
+
     }
 }

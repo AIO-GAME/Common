@@ -83,6 +83,7 @@
     <Compile Include="Script\GELayout\GELayout.Tag.cs" />
     <Compile Include="Script\GELayout\GELayout.TextArea.cs" />
     <Compile Include="Script\GELayout\GELayout.Toggle.cs" />
+    <Compile Include="Script\GELayout\GELayout.SelectionGrid.cs" />
     <Compile Include="Script\GULayout\GULayout.Button.cs" />
     <Compile Include="Script\GULayout\GULayout.cs" />
     <Compile Include="Script\GULayout\GULayout.Enum.cs" />
