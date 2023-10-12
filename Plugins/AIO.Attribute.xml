@@ -59,6 +59,11 @@
             支持的区域性
             </summary>
         </member>
+        <member name="T:AIO.DefaultProvider">
+            <summary>
+            选择提供者
+            </summary>
+        </member>
         <member name="T:AIO.ERuntimePlatform">
             <summary>
             The platform application is running. Returned by Application.platform.

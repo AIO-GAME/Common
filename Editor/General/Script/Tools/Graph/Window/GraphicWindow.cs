@@ -490,15 +490,16 @@ namespace AIO.UEditor
 
         #endregion
 
-        // protected virtual SettingsProvider RegisterSettingsProvider()
-        // {
-        //     return null;
-        // }
-        //
-        // [SettingsProvider]
-        // private static SettingsProvider SettingsProvider()
-        // {
-        //     return RegisterSettingsProvider();
-        // }
+        /// <summary>
+        /// 创建设置提供者
+        /// </summary>
+        /// <param name="path">路径</param>
+        /// <param name="scope">面板类型</param>
+        /// <returns><see cref="SettingsProvider"/></returns>
+        protected static GraphicSettingsProvider CreateSettingsProvider(string path,
+            SettingsScope scope = SettingsScope.User)
+        {
+            return new GraphicSettingsProvider($"AIO/{path}", scope);
+        }
     }
 }

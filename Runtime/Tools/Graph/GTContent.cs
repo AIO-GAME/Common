@@ -7,12 +7,70 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using UnityEngine;
 
 namespace AIO
 {
     public partial struct GTContent
     {
+        #region Temp
+
+        public static GUIContent[] Temp(IEnumerable<GUIContent> collection)
+        {
+            return collection.ToArray();
+        }
+
+        public static GUIContent[] Temp(ICollection<Texture> collection)
+        {
+            var guiContentArray = new GUIContent[collection.Count];
+            var index = 0;
+            foreach (var item in collection) guiContentArray[index++] = new GUIContent(item);
+            return guiContentArray;
+        }
+
+        public static GUIContent[] Temp(ICollection<int> collection)
+        {
+            var guiContentArray = new GUIContent[collection.Count];
+            var index = 0;
+            foreach (var item in collection) guiContentArray[index++] = new GUIContent(item.ToString());
+            return guiContentArray;
+        }
+
+        public static GUIContent[] Temp(ICollection<long> collection)
+        {
+            var guiContentArray = new GUIContent[collection.Count];
+            var index = 0;
+            foreach (var item in collection) guiContentArray[index++] = new GUIContent(item.ToString());
+            return guiContentArray;
+        }
+
+        public static GUIContent[] Temp(ICollection<double> collection)
+        {
+            var guiContentArray = new GUIContent[collection.Count];
+            var index = 0;
+            foreach (var item in collection) guiContentArray[index++] = new GUIContent(item.ToString(CultureInfo.InvariantCulture));
+            return guiContentArray;
+        }
+
+        public static GUIContent[] Temp(ICollection<float> collection)
+        {
+            var guiContentArray = new GUIContent[collection.Count];
+            var index = 0;
+            foreach (var item in collection) guiContentArray[index++] = new GUIContent(item.ToString(CultureInfo.InvariantCulture));
+            return guiContentArray;
+        }
+
+        public static GUIContent[] Temp(ICollection<string> collection)
+        {
+            var guiContentArray = new GUIContent[collection.Count];
+            var index = 0;
+            foreach (var item in collection) guiContentArray[index++] = new GUIContent(item);
+            return guiContentArray;
+        }
+
+        #endregion
+
         /// <summary>
         /// 内容
         /// </summary>

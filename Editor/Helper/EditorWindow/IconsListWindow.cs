@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace AIO.UEditor
 {
+    [HelpURL("https://blog.csdn.net/CJB_King/article/details/89356652")]
     [GWindow("内置ICON管理器", Group = "Tools",
         MinSizeWidth = 600, MinSizeHeight = 600,
         MaxSizeWidth = 600, MaxSizeHeight = 600
@@ -17,16 +18,16 @@ namespace AIO.UEditor
 
         static IconsListGraphWindow()
         {
-            iconNames = new List<string>();
+            iconNames = new Dictionary<string, string>();
             iconContentListSmall = new List<GUIContent>();
             iconContentListBig = new List<GUIContent>();
             iconContentListAll = new List<GUIContent>();
         }
 
-        private static List<GUIContent> iconContentListAll;
-        private static List<GUIContent> iconContentListSmall;
-        private static List<GUIContent> iconContentListBig;
-        private static List<string> iconNames;
+        private static readonly List<GUIContent> iconContentListAll;
+        private static readonly List<GUIContent> iconContentListSmall;
+        private static readonly List<GUIContent> iconContentListBig;
+        private static readonly Dictionary<string, string> iconNames;
 
         private static GUIContent GetIcon(string icon_name)
         {
@@ -75,22 +76,20 @@ namespace AIO.UEditor
             {
                 var path = EditorUtility.SaveFilePanel("Save icon", "", icon_name, "png");
 
-                if (path != null)
+                if (path == null) return;
+                try
                 {
-                    try
-                    {
-#if UNITY_2018
-                        var outTex = new Texture2D(tex.width, tex.height, tex.format, true);
+#if UNITY_2019_1_OR_NEWER
+                    var outTex = new Texture2D(tex.width, tex.height, tex.format, tex.mipmapCount, true);
 #else
-                        var outTex = new Texture2D(tex.width, tex.height, tex.format, tex.mipmapCount, true);
+                    var outTex = new Texture2D(tex.width, tex.height, tex.format, true);
 #endif
-                        Graphics.CopyTexture(tex, outTex);
-                        File.WriteAllBytes(path, outTex.EncodeToPNG());
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.LogError("Cannot save the icon : " + e.Message);
-                    }
+                    Graphics.CopyTexture(tex, outTex);
+                    File.WriteAllBytes(path, outTex.EncodeToPNG());
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError("Cannot save the icon : " + e.Message);
                 }
             }
             else
@@ -101,20 +100,20 @@ namespace AIO.UEditor
 
         private static void InitIcons()
         {
-            if (iconNames != null && iconNames.Count > 0) return;
+            if (iconNames.Count > 0) return;
             foreach (var x in Resources.FindObjectsOfTypeAll<Texture2D>())
             {
                 Debug.unityLogger.logEnabled = false;
                 var gc = EditorGUIUtility.IconContent(x.name);
                 Debug.unityLogger.logEnabled = true;
-                if (gc != null && gc.image != null)
-                {
-                    iconNames.Add(x.name);
-                    gc.tooltip = x.name;
-                    iconContentListAll.Add(gc);
-                    if (!(gc.image.width <= 36 || gc.image.height <= 36)) iconContentListBig.Add(gc);
-                    else iconContentListSmall.Add(gc);
-                }
+                if (gc == null || gc.image == null) continue;
+                if (iconNames.ContainsKey(x.name)) continue;
+
+                iconNames.Add(x.name, x.name);
+                gc.tooltip = x.name;
+                iconContentListAll.Add(gc);
+                if (!(gc.image.width <= 36 || gc.image.height <= 36)) iconContentListBig.Add(gc);
+                else iconContentListSmall.Add(gc);
             }
 
             Resources.UnloadUnusedAssets();
@@ -130,12 +129,13 @@ namespace AIO.UEditor
         private GUIContent SearchGUIContent;
         private GUIContent iconSelected;
 
-        private GUIStyle iconButtonStyle = null;
-        private GUIStyle iconPreviewBlack = null;
-        private GUIStyle iconPreviewWhite = null;
+        private GUIStyle iconButtonStyle;
+        private GUIStyle iconPreviewBlack;
+        private GUIStyle iconPreviewWhite;
+
+        private static bool isWide => Screen.width > 550;
 
         private bool doSearch => !string.IsNullOrWhiteSpace(search) && search != "";
-        private bool isWide => Screen.width > 550;
         private bool viewBigIcons = true;
         private bool darkPreview = true;
 
@@ -161,9 +161,11 @@ namespace AIO.UEditor
 
             if (iconButtonStyle == null)
             {
-                iconButtonStyle = new GUIStyle(EditorStyles.miniButton);
-                iconButtonStyle.margin = new RectOffset(0, 0, 0, 0);
-                iconButtonStyle.fixedHeight = 0;
+                iconButtonStyle = new GUIStyle(EditorStyles.miniButton)
+                {
+                    margin = new RectOffset(0, 0, 0, 0),
+                    fixedHeight = 0
+                };
             }
 
             if (iconPreviewBlack == null)
@@ -180,7 +182,11 @@ namespace AIO.UEditor
 
             if (SearchGUIContent == null)
             {
-                SearchGUIContent = EditorGUIUtility.IconContent("winbtn_mac_close_h");
+#if UNITY_2023_1_OR_NEWER
+                SearchGUIContent = EditorGUIUtility.TrIconContent("d_clear");
+#else
+                SearchGUIContent = EditorGUIUtility.TrIconContent("winbtn_mac_close_h");
+#endif
             }
         }
 
@@ -209,12 +215,13 @@ namespace AIO.UEditor
                 buttonSize = viewBigIcons ? 70 : 40;
 
                 // scrollbar_width = ~ 12.5
-                var render_width = (Screen.width / ppp - 13f);
+                var render_width = Screen.width / ppp - 13f;
                 var gridW = Mathf.FloorToInt(render_width / buttonSize);
                 var margin_left = (render_width - buttonSize * gridW) / 2;
 
                 List<GUIContent> iconList;
-                if (doSearch) iconList = iconContentListAll.Where(x => x.tooltip.ToLower().Contains(search.ToLower())).ToList();
+                if (doSearch)
+                    iconList = iconContentListAll.Where(x => x.tooltip.ToLower().Contains(search.ToLower())).ToList();
                 else iconList = viewBigIcons ? iconContentListBig : iconContentListSmall;
 
                 int row = 0, index = 0;
@@ -227,7 +234,8 @@ namespace AIO.UEditor
                         {
                             var k = i + row * gridW;
                             var icon = iconList[k];
-                            if (GUILayout.Button(icon, iconButtonStyle, GUILayout.Width(buttonSize), GUILayout.Height(buttonSize)))
+                            if (GUILayout.Button(icon, iconButtonStyle, GUILayout.Width(buttonSize),
+                                    GUILayout.Height(buttonSize)))
                             {
                                 EditorGUI.FocusTextInControl("");
                                 iconSelected = icon;
@@ -252,7 +260,8 @@ namespace AIO.UEditor
                 using (new GUILayout.VerticalScope(GUILayout.Width(130)))
                 {
                     GUILayout.Space(2);
-                    GUILayout.Button(iconSelected, darkPreview ? iconPreviewBlack : iconPreviewWhite, GUILayout.Width(128), GUILayout.Height(viewBigIcons ? 128 : 40));
+                    GUILayout.Button(iconSelected, darkPreview ? iconPreviewBlack : iconPreviewWhite,
+                        GUILayout.Width(128), GUILayout.Height(viewBigIcons ? 128 : 40));
                     GUILayout.Space(5);
 
                     darkPreview = GUILayout.SelectionGrid(
@@ -267,7 +276,8 @@ namespace AIO.UEditor
                 using (new GUILayout.VerticalScope())
                 {
                     var s = $"Size: {iconSelected.image.width}x{iconSelected.image.height}";
-                    s += "\nIs Pro Skin Icon: " + (iconSelected.tooltip.IndexOf("d_", StringComparison.CurrentCulture) == 0 ? "Yes" : "No");
+                    s += "\nIs Pro Skin Icon: " +
+                         (iconSelected.tooltip.IndexOf("d_", StringComparison.CurrentCulture) == 0 ? "Yes" : "No");
                     s += $"\nTotal {iconContentListAll.Count} icons";
                     GUILayout.Space(5);
                     EditorGUILayout.HelpBox(s, MessageType.None);

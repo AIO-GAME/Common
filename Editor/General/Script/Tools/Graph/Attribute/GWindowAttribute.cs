@@ -5,6 +5,9 @@
 |||✩ - - - - - |*/
 
 using System;
+using System.Collections.Generic;
+using System.Reflection;
+using UnityEditor;
 using UnityEngine;
 
 namespace AIO.UEditor
@@ -95,5 +98,78 @@ namespace AIO.UEditor
         {
             Title = title;
         }
+
+
+        private static Dictionary<string, Type> windowTypes;
+        private static List<string> windowTypeKeys;
+
+        private static SettingsProvider provider;
+
+        private static List<Type> windowDock = new List<Type>();
+
+        /// <summary>
+        /// 创建设置提供者
+        /// </summary>
+        [SettingsProvider]
+        private static SettingsProvider CreateSettingsProvider()
+        {
+            if (provider != null) return provider;
+            if (windowTypes == null) windowTypes = new Dictionary<string, Type>();
+            if (windowTypeKeys == null) windowTypeKeys = new List<string>();
+
+            // var PreferenceSettingsWindowType = Assembly.GetAssembly(typeof(EditorWindow))
+            //     .GetType("UnityEditor.PreferenceSettingsWindow");
+            // windowTypeKeys
+            // 获取当前程序集中所有带有GWindowAttribute特性的窗口类型
+            var graphicType = typeof(GraphicWindow);
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                foreach (var type in assembly.GetTypes())
+                {
+                    if (!type.IsSubclassOf(graphicType)) continue;
+                    var attribute = type.GetCustomAttribute<GWindowAttribute>(false);
+                    if (attribute is null)
+                    {
+                        windowDock.Add(type);
+                    }
+                    else
+                    {
+                        var key = string.Format("{0}\n{1}", attribute.Title, type.FullName);
+                        if (windowTypes.ContainsKey(key)) continue;
+                        windowTypes.Add(key, type);
+                        windowTypeKeys.Add(key);
+                        windowDock.Add(type);
+                    }
+                }
+            }
+
+            provider = new GraphicSettingsProvider("AIO/Windows", SettingsScope.User);
+            provider.label = "Windows Header";
+            provider.guiHandler = delegate
+            {
+                GELayout.BeginVertical();
+                GELayout.Space();
+
+                for (var i = 0; i < windowTypeKeys.Count; i++)
+                {
+                    if (i >= windowTypeKeys.Count) continue;
+                    GELayout.BeginHorizontal(GEStyle.HelpBox);
+                    var label = windowTypeKeys[i].Split('\n');
+                    GELayout.Label(label[1], GTOption.WidthExpand(true));
+                    GELayout.Label(label[0], GEStyle.CenteredLabel);
+                    if (GELayout.Button("Open", 50))
+                        EHelper.Window.Open(windowTypes[windowTypeKeys[i]], label[0], windowDock);
+                    GELayout.EndHorizontal();
+                }
+
+
+                GELayout.Space();
+                GELayout.EndVertical();
+            };
+            provider.keywords = new HashSet<string>(windowTypeKeys);
+            return provider;
+        }
+
+        private static Dictionary<string, Type> _WindowTypes;
     }
 }

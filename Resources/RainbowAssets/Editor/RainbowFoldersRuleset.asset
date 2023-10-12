@@ -53,7 +53,7 @@ MonoBehaviour:
     Key: Editor
     Ordinal: 3
     Priority: 0
-    IconType: 1040
+    IconType: 2030
     SmallIcon: {fileID: 0}
     LargeIcon: {fileID: 0}
     IsIconRecursive: 1
@@ -468,4 +468,76 @@ MonoBehaviour:
     BackgroundType: 50
     BackgroundTexture: {fileID: 0}
     IsBackgroundRecursive: 1
+    IsHidden: 0
+  - Type: 1
+    Key: Packages/com.self.build
+    Ordinal: 38
+    Priority: 0
+    IconType: 2120
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 140
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
+  - Type: 1
+    Key: Packages/com.self.config
+    Ordinal: 39
+    Priority: 0
+    IconType: 2120
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 140
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
+  - Type: 1
+    Key: Packages/com.self.package
+    Ordinal: 40
+    Priority: 0
+    IconType: 2120
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 140
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
+  - Type: 1
+    Key: Packages/com.self.unity
+    Ordinal: 41
+    Priority: 0
+    IconType: 2120
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 140
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
+  - Type: 1
+    Key: Packages/com.self.fgui
+    Ordinal: 42
+    Priority: 0
+    IconType: 2120
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 140
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
+  - Type: 1
+    Key: Packages/com.self.core
+    Ordinal: 43
+    Priority: 0
+    IconType: 2120
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 0}
+    IsIconRecursive: 0
+    BackgroundType: 140
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
     IsHidden: 0
