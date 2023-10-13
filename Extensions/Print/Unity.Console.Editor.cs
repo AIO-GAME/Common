@@ -5,7 +5,6 @@
 |*|=============================================*/
 
 
-using System.Diagnostics;
 using UnityEditor;
 using UnityEngine;
 
@@ -15,12 +14,12 @@ namespace AIO.UEditor
     {
         private static bool IS_EDITOR_SWITCH_LOG => EditorPrefs.GetInt(MENU_EDITOR_SWITCH_LOG, -1) == 1;
         private static bool IS_EDITOR_SWITCH_ERROR => EditorPrefs.GetInt(MENU_EDITOR_SWITCH_ERROR, -1) == 1;
-        private static bool IS_DEVELOPERMODE => EditorPrefs.GetInt(MENU_DEVELOPERMODE, -1) == 1;
+        private static bool IS_DEVELOPER_MODE => EditorPrefs.GetInt(MENU_DEVELOPER_MODE, -1) == 1;
 
         /// <summary>
         /// 输出日志
         /// </summary>
-        private const string MENU_DEVELOPERMODE = "Tools/Debug/Developer Mode";
+        private const string MENU_DEVELOPER_MODE = "Tools/Debug/Developer Mode";
 
         /// <summary>
         /// 错误日志
@@ -60,7 +59,7 @@ namespace AIO.UEditor
         {
             Menu.SetChecked(MENU_EDITOR_SWITCH_ERROR, IS_EDITOR_SWITCH_ERROR);
             Menu.SetChecked(MENU_EDITOR_SWITCH_LOG, IS_EDITOR_SWITCH_LOG);
-            Menu.SetChecked(MENU_DEVELOPERMODE, IS_DEVELOPERMODE);
+            Menu.SetChecked(MENU_DEVELOPER_MODE, IS_DEVELOPER_MODE);
         }
 
         [InitializeOnLoadMethod]
@@ -78,11 +77,11 @@ namespace AIO.UEditor
         /// <summary>
         /// 打开开发者模式
         /// </summary>
-        [MenuItem(MENU_DEVELOPERMODE, false, 0)]
+        [MenuItem(MENU_DEVELOPER_MODE, false, 0)]
         private static void OpenDeveloperMode()
         {
-            EditorPrefs.SetBool("DeveloperMode", !IS_DEVELOPERMODE);
-            EditorPrefs.SetInt(MENU_DEVELOPERMODE, !IS_DEVELOPERMODE ? 1 : -1);
+            EditorPrefs.SetBool("DeveloperMode", !IS_DEVELOPER_MODE);
+            EditorPrefs.SetInt(MENU_DEVELOPER_MODE, !IS_DEVELOPER_MODE ? 1 : -1);
             MenuRefresh();
         }
     }
