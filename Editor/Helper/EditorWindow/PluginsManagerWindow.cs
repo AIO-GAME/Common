@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using AIO.UEditor;
 using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
@@ -27,23 +25,23 @@ namespace AIO.UEditor
         /// <summary>
         /// 安装列表
         /// </summary>
-        internal List<string> IntsallIndexList;
+        internal List<string> InstallIndexList;
 
         /// <summary>
         /// 卸载列表
         /// </summary>
-        internal List<string> UnIntsallIndexList;
+        internal List<string> UnInstallIndexList;
 
         internal string Root;
 
         public PluginsManagerWindow()
         {
             DetailDic = new Dictionary<string, bool>();
-            UnInsallIsSelectDic = new Dictionary<string, bool>();
-            InsallIsSelectDic = new Dictionary<string, bool>();
+            UnInstallIsSelectDic = new Dictionary<string, bool>();
+            InstallIsSelectDic = new Dictionary<string, bool>();
             RootData = new Dictionary<string, PluginsInfo>();
-            UnIntsallIndexList = new List<string>();
-            IntsallIndexList = new List<string>();
+            UnInstallIndexList = new List<string>();
+            InstallIndexList = new List<string>();
         }
 
         protected override void OnActivation()
@@ -70,8 +68,8 @@ namespace AIO.UEditor
         {
             RootData.Clear();
             DetailDic.Clear();
-            IntsallIndexList.Clear();
-            UnIntsallIndexList.Clear();
+            InstallIndexList.Clear();
+            UnInstallIndexList.Clear();
 
             foreach (var data in EHelper.IO.GetAssetsRes<PluginsInfo>("t:PluginsInfo", "Packages"))
             {
@@ -81,8 +79,8 @@ namespace AIO.UEditor
                     DetailDic.Add(filename, false);
                     RootData.Add(filename, data);
                     if (PluginsInfoEditor.GetValidDir(Root, data.TargetRelativePath).Exists)
-                        UnIntsallIndexList.Add(filename);
-                    else IntsallIndexList.Add(filename);
+                        UnInstallIndexList.Add(filename);
+                    else InstallIndexList.Add(filename);
                 }
             }
         }
@@ -92,9 +90,9 @@ namespace AIO.UEditor
             EditorGUILayout.LabelField("插件安装管理", new GUIStyle("PreLabel"));
             HeaderView();
             Vector = EditorGUILayout.BeginScrollView(Vector);
-            InsallView();
+            InstallView();
             EditorGUILayout.Space();
-            UnInsallView();
+            UnInstallView();
             EditorGUILayout.EndScrollView();
         }
 
@@ -102,33 +100,33 @@ namespace AIO.UEditor
         {
         }
 
-        private bool InsallIsSelect = false;
+        private bool InstallIsSelect = false;
 
-        private Dictionary<string, bool> InsallIsSelectDic;
+        private Dictionary<string, bool> InstallIsSelectDic;
         private Dictionary<string, bool> DetailDic;
 
-        private void InsallView()
+        private void InstallView()
         {
-            if (IntsallIndexList.Count == 0) return;
+            if (InstallIndexList.Count == 0) return;
 
             EditorGUILayout.BeginVertical(new GUIStyle("ChannelStripBg"));
             EditorGUILayout.BeginHorizontal();
 
-            if (GUILayout.Button(InsallIsSelect ? "取消" : "选择", GUILayout.Width(60)))
+            if (GUILayout.Button(InstallIsSelect ? "取消" : "选择", GUILayout.Width(60)))
             {
-                InsallIsSelect = !InsallIsSelect;
-                InsallIsSelectDic.Clear();
-                foreach (var item in IntsallIndexList) InsallIsSelectDic.Add(item, false);
+                InstallIsSelect = !InstallIsSelect;
+                InstallIsSelectDic.Clear();
+                foreach (var item in InstallIndexList) InstallIsSelectDic.Add(item, false);
             }
 
-            if (InsallIsSelect)
+            if (InstallIsSelect)
             {
                 if (GUILayout.Button("执行", GUILayout.Width(60)))
                 {
-                    InsallIsSelect = false;
-                    if (InsallIsSelectDic.Count == 0) return;
+                    InstallIsSelect = false;
+                    if (InstallIsSelectDic.Count == 0) return;
                     var temp = new List<PluginsInfo>();
-                    foreach (var item in IntsallIndexList.Where(V => InsallIsSelectDic[V]))
+                    foreach (var item in InstallIndexList.Where(V => InstallIsSelectDic[V]))
                         temp.Add(RootData[item]);
 #if UNITY_2019_1_OR_NEWER
                     CompilationPipeline.compilationStarted += compilationStarted;
@@ -142,7 +140,7 @@ namespace AIO.UEditor
 
             EditorGUILayout.LabelField("安装列表", new GUIStyle("PreLabel"));
 
-            if (!InsallIsSelect)
+            if (!InstallIsSelect)
                 if (GUILayout.Button("安装全部", GUILayout.Width(60)))
                 {
 #if UNITY_2019_1_OR_NEWER
@@ -150,23 +148,26 @@ namespace AIO.UEditor
 #else
                     CompilationPipeline.assemblyCompilationStarted += compilationStarted;
 #endif
-                    _ = PluginsInfoEditor.Initialize(RootData.Values.Where(plugin => IntsallIndexList.Contains(plugin.Name)));
+                    _ = PluginsInfoEditor.Initialize(RootData.Values.Where(plugin =>
+                        InstallIndexList.Contains(plugin.Name)));
                     return;
                 }
 
             EditorGUILayout.EndHorizontal();
 
-            foreach (var Data in IntsallIndexList.Select(Name => RootData[Name]))
+            foreach (var Data in InstallIndexList.Select(Name => RootData[Name]))
             {
                 EditorGUILayout.BeginVertical("IN ThumbnailShadow");
 
                 {
                     EditorGUILayout.BeginHorizontal(GUILayout.Height(25));
-                    if (InsallIsSelect)
-                        InsallIsSelectDic[Data.Name] = EditorGUILayout.Toggle("", InsallIsSelectDic[Data.Name], GUILayout.Width(20));
+                    if (InstallIsSelect)
+                        InstallIsSelectDic[Data.Name] =
+                            EditorGUILayout.Toggle("", InstallIsSelectDic[Data.Name], GUILayout.Width(20));
                     if (GUILayout.Button("详", GUILayout.Width(25), GUILayout.Height(20)))
                     {
                         DetailDic[Data.Name] = !DetailDic[Data.Name];
+                        if (DetailDic[Data.Name]) Selection.activeObject = Data;
                     }
 
                     EditorGUILayout.PrefixLabel(Data.Name);
@@ -174,7 +175,7 @@ namespace AIO.UEditor
                     EditorGUILayout.LabelField(Data.Introduction, GUILayout.Width(150));
                     EditorGUILayout.Separator();
 
-                    if (!InsallIsSelect)
+                    if (!InstallIsSelect)
                     {
                         if (GUILayout.Button("安装", GUILayout.Width(60), GUILayout.Height(20)))
                         {
@@ -214,31 +215,31 @@ namespace AIO.UEditor
             EditorGUILayout.EndVertical();
         }
 
-        private bool UnInsallIsSelect = false;
+        private bool UnInstallIsSelect = false;
 
-        private Dictionary<string, bool> UnInsallIsSelectDic;
+        private Dictionary<string, bool> UnInstallIsSelectDic;
 
-        private void UnInsallView()
+        private void UnInstallView()
         {
-            if (UnIntsallIndexList.Count == 0) return;
+            if (UnInstallIndexList.Count == 0) return;
             EditorGUILayout.BeginVertical(new GUIStyle("ChannelStripBg"));
 
             EditorGUILayout.BeginHorizontal();
 
-            if (GUILayout.Button(UnInsallIsSelect ? "取消" : "选择", GUILayout.Width(60)))
+            if (GUILayout.Button(UnInstallIsSelect ? "取消" : "选择", GUILayout.Width(60)))
             {
-                UnInsallIsSelect = !UnInsallIsSelect;
-                UnInsallIsSelectDic.Clear();
-                foreach (var item in UnIntsallIndexList) UnInsallIsSelectDic.Add(item, false);
+                UnInstallIsSelect = !UnInstallIsSelect;
+                UnInstallIsSelectDic.Clear();
+                foreach (var item in UnInstallIndexList) UnInstallIsSelectDic.Add(item, false);
             }
 
-            if (UnInsallIsSelect)
+            if (UnInstallIsSelect)
             {
                 if (GUILayout.Button("执行", GUILayout.Width(60)))
                 {
-                    UnInsallIsSelect = false;
+                    UnInstallIsSelect = false;
                     var temp = new List<PluginsInfo>();
-                    foreach (var item in UnIntsallIndexList.Where(V => UnInsallIsSelectDic[V]))
+                    foreach (var item in UnInstallIndexList.Where(V => UnInstallIsSelectDic[V]))
                         temp.Add(RootData[item]);
 
                     if (temp.Count == 0) return;
@@ -253,7 +254,7 @@ namespace AIO.UEditor
             }
 
             EditorGUILayout.LabelField("卸载列表", new GUIStyle("PreLabel"));
-            if (!UnInsallIsSelect)
+            if (!UnInstallIsSelect)
                 if (GUILayout.Button("卸载全部", GUILayout.Width(60)))
                 {
 #if UNITY_2019_1_OR_NEWER
@@ -261,28 +262,31 @@ namespace AIO.UEditor
 #else
                     CompilationPipeline.assemblyCompilationStarted += compilationStarted;
 #endif
-                    _ = PluginsInfoEditor.UnInitialize(RootData.Values.Where(plugin => UnIntsallIndexList.Contains(plugin.Name)));
+                    _ = PluginsInfoEditor.UnInitialize(RootData.Values.Where(plugin =>
+                        UnInstallIndexList.Contains(plugin.Name)));
                     return;
                 }
 
             EditorGUILayout.EndHorizontal();
 
-            foreach (var Data in UnIntsallIndexList.Select(Name => RootData[Name]))
+            foreach (var Data in UnInstallIndexList.Select(Name => RootData[Name]))
             {
                 EditorGUILayout.BeginVertical("IN ThumbnailShadow");
                 {
                     EditorGUILayout.BeginHorizontal(GUILayout.Height(25));
 
-                    if (UnInsallIsSelect)
-                        UnInsallIsSelectDic[Data.Name] = EditorGUILayout.Toggle("", UnInsallIsSelectDic[Data.Name], GUILayout.Width(20));
-                    if (GUILayout.Button("详", GUILayout.Width(25), GUILayout.Height(20))) DetailDic[Data.Name] = !DetailDic[Data.Name];
+                    if (UnInstallIsSelect)
+                        UnInstallIsSelectDic[Data.Name] =
+                            EditorGUILayout.Toggle("", UnInstallIsSelectDic[Data.Name], GUILayout.Width(20));
+                    if (GUILayout.Button("详", GUILayout.Width(25), GUILayout.Height(20)))
+                        DetailDic[Data.Name] = !DetailDic[Data.Name];
 
                     EditorGUILayout.PrefixLabel(Data.Name);
                     EditorGUILayout.Separator();
                     EditorGUILayout.LabelField(Data.Introduction, GUILayout.Width(150));
                     EditorGUILayout.Separator();
 
-                    if (!UnInsallIsSelect)
+                    if (!UnInstallIsSelect)
                     {
                         if (!string.IsNullOrEmpty(Data.MacroDefinition))
                         {

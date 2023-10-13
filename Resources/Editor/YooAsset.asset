@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SourceRelativePath: Packages\\com.*.package\\Packages~\\YooAsset
   Name: Yoo Asset
-  TargetRelativePath: Packages\YooAsset
+  TargetRelativePath: Packages\com.tuyoogame.yooasset
   MacroDefinition: 
   Introduction: "\u8D44\u6E90\u7BA1\u7406"
