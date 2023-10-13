@@ -6,7 +6,7 @@
 
 # AIO Unity Package
 
-点击[[此处]](https://git.code.tencent.com/UnityLibs/com.self.package/)切换到**简体中文**仓库首页。
+点击[[此处]](https://git.code.tencent.com/UnityLibs/com.self.package)切换到**简体中文**仓库首页。
 
 ![GitHub](https://git.code.tencent.com/UnityLibs/com.self.package)
 ![Nuget](https://img.shields.io/nuget/v/NetDimension.NanUI)
