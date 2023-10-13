@@ -8,6 +8,7 @@
 
 点击[[此处]](https://git.code.tencent.com/UnityLibs/com.self.package)切换到**简体中文**仓库首页。
 
+![TencentGit](https://git.code.tencent.com/UnityLibs/com.self.package)
 ![GitHub](https://git.code.tencent.com/UnityLibs/com.self.package)
 ![Nuget](https://img.shields.io/nuget/v/NetDimension.NanUI)
 ![Nuget](https://img.shields.io/nuget/dt/NetDimension.NanUI)
