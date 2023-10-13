@@ -1,7 +1,7 @@
 <p align="center">
     <img src="./Documentation~/WinFormiumLogo.png" width="144" />
 </p>
-<h1 align="center">AIO Unity Package<br />(A.K.A. NanUI)</h1>
+<h1 align="center">AIO Unity<br />(Package Core)</h1>
 <p align="center"><strong>Easily build powerful WinForm applications with HTML, CSS and JavaScript.</strong></p>
 
 # AIO Unity Package
