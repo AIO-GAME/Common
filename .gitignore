@@ -9,6 +9,7 @@
 !*.asmdef.meta
 !*.cs.meta
 
+.git/
 .vs/
 .idea/
 .gradle/
