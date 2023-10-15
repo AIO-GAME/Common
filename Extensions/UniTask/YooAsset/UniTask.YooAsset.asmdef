@@ -1,27 +1,27 @@
 {
-    "name": "UniTask.YooAsset",
-    "references": [
-        "UniTask",
-        "YooAsset"
-    ],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [
-        {
-            "name": "com.tuyoogame.yooasset",
-            "expression": "",
-            "define": "UNITASK_YOOASSET_SUPPORT"
-        },
-        {
-            "name": "com.cysharp.unitask",
-            "expression": "",
-            "define": "UNITASK_SUPPORT"
-        }
-    ],
-    "noEngineReferences": false
+  "includePlatforms": [],
+  "noEngineReferences": false,
+  "autoReferenced": true,
+  "versionDefines": [
+    {
+      "name": "com.tuyoogame.yooasset",
+      "expression": "",
+      "define": "UNITASK_YOOASSET_SUPPORT"
+    },
+    {
+      "name": "com.cysharp.unitask",
+      "expression": "",
+      "define": "UNITASK_SUPPORT"
+    }
+  ],
+  "defineConstraints": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "references": [
+    "UniTask",
+    "YooAsset"
+  ],
+  "name": "UniTask.YooAsset",
+  "excludePlatforms": [],
+  "precompiledReferences": []
 }

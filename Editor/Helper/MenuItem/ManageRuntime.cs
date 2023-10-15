@@ -14,15 +14,68 @@ namespace AIO.UEditor
     {
         #region MyRegion
 
-        private const string KEY = nameof(AIO) + "." + nameof(UEditor) + "." + nameof(ManageRuntime) + "." + nameof(Setting);
-
-        public static bool IsEnableRuntime => EHelper.Prefs.LoadBoolean(KEY);
+        public const string KEY = nameof(AIO) + "." + nameof(UEditor) + "." + nameof(ManageRuntime) + "." +
+                                  nameof(Setting);
 
         [InitializeOnLoadMethod]
         [RuntimeInitializeOnLoadMethod]
         private static void MenuRefresh()
         {
-            Menu.SetChecked("Tools/AIO/Runtime Export", EHelper.Prefs.LoadBoolean(KEY));
+            var check = Menu.GetChecked("Tools/AIO/Runtime Export");
+            var set = EHelper.Prefs.LoadBoolean(KEY);
+            Menu.SetChecked("Tools/AIO/Runtime Export", set);
+            if (check == set) return;
+            if (set)
+            {
+                var list = new Dictionary<string, Assembly>();
+                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    if (list.ContainsKey(assembly.FullName)) continue;
+                    var name = assembly.GetName().Name;
+                    if (name.Contains("Editor")) continue;
+                    if (name.Contains("editor")) continue;
+                    if (name.StartsWith("AIO.T4")) continue;
+                    if (name.StartsWith("AIO.PrCourse")) continue;
+                    switch (name)
+                    {
+                        case "HtmlAgilityPack":
+                            list.Add(assembly.FullName, assembly);
+                            continue;
+                        case "ICSharpCode.SharpZipLib":
+                            list.Add(assembly.FullName, assembly);
+                            continue;
+                        case "YamlDotNet":
+                            list.Add(assembly.FullName, assembly);
+                            continue;
+                    }
+
+                    if (!name.StartsWith("AIO")) continue;
+                    list.Add(assembly.FullName, assembly);
+                }
+
+                EditorUtility.DisplayProgressBar("DLL", "正在开启 AIO Package", 0.99f);
+                Enable(GetInfo(list.Values));
+                EditorUtility.ClearProgressBar();
+            }
+            else
+            {
+                var list = new Dictionary<string, Assembly>();
+                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    if (list.ContainsKey(assembly.FullName)) continue;
+                    var name = assembly.GetName().Name;
+                    if (name.Contains("Editor")) continue;
+                    if (name.Contains("editor")) continue;
+                    if (name.StartsWith("AIO.T4")) continue;
+                    if (name.StartsWith("AIO.PrCourse")) continue;
+                    if (!name.StartsWith("AIO")) continue;
+                    list.Add(assembly.FullName, assembly);
+                }
+
+                EditorUtility.DisplayProgressBar("DLL", "正在关闭 AIO Package", 0.99f);
+                Disable(GetInfo(list.Values));
+                EditorUtility.ClearProgressBar();
+            }
         }
 
         [MenuItem("Tools/AIO/Runtime Export", false, 0)]
@@ -30,49 +83,6 @@ namespace AIO.UEditor
         {
             EHelper.Prefs.ReverseBoolean(KEY);
             MenuRefresh();
-        }
-
-        public static void Disable()
-        {
-            var list = new List<Assembly>();
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                var name = assembly.GetName().Name;
-                if (name.Contains("Editor")) continue;
-                if (name.Contains("AIO.T4")) continue;
-                if (name.Contains("AIO.PrCourse")) continue;
-                if (name.Contains("AIO")) Assemblies.Add(assembly.FullName, assembly);
-            }
-
-            Disable(GetInfo(list));
-        }
-
-        public static void Enable()
-        {
-            var list = new List<Assembly>();
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                var name = assembly.GetName().Name;
-                if (name.Contains("Editor")) continue;
-                if (name.Contains("AIO.T4")) continue;
-                if (name.Contains("AIO.PrCourse")) continue;
-                switch (name)
-                {
-                    case "HtmlAgilityPack":
-                        Assemblies.Add(assembly.FullName, assembly);
-                        continue;
-                    case "ICSharpCode.SharpZipLib":
-                        Assemblies.Add(assembly.FullName, assembly);
-                        continue;
-                    case "YamlDotNet":
-                        Assemblies.Add(assembly.FullName, assembly);
-                        continue;
-                }
-
-                if (name.Contains("AIO")) Assemblies.Add(assembly.FullName, assembly);
-            }
-
-            Enable(GetInfo(list));
         }
 
         private static Dictionary<string, EAssembliesType> GetInfo(Assembly assembly, params Assembly[] assemblies)
@@ -84,40 +94,49 @@ namespace AIO.UEditor
         {
             var dictionary = new Dictionary<string, EAssembliesType>();
             if (assemblies is null) return dictionary;
+            var project = Application.dataPath.Replace("Assets", "").Replace('/', '\\');
             foreach (var assembly in assemblies)
             {
                 var assemblyName = assembly.GetName().Name;
-                var packageInfo = PackageInfo.FindForAssembly(assembly);
-                var project = Application.dataPath.Replace("Assets", "").Replace('/', '\\');
-                var runtimePath = Path.Combine(project, packageInfo.resolvedPath);
-                foreach (var item in new DirectoryInfo(runtimePath).GetFiles("*", SearchOption.AllDirectories)
-                             .Where(f => f.Extension == ".dll" || f.Extension == ".asmdef"))
+                try
                 {
-                    if (assemblyName != item.Name.Replace(item.Extension, "")) continue;
-                    var type = item.Extension.Contains("dll") ? EAssembliesType.DLL : EAssembliesType.ADF;
-                    dictionary.Add(item.FullName, type);
-                    break;
+                    var packageInfo = PackageInfo.FindForAssembly(assembly);
+                    var runtimePath = Path.Combine(project, packageInfo.resolvedPath);
+                    foreach (var item in new DirectoryInfo(runtimePath).GetFiles("*", SearchOption.AllDirectories)
+                                 .Where(f => f.Extension == ".dll" || f.Extension == ".asmdef"))
+                    {
+                        if (assemblyName != item.Name.Replace(item.Extension, "")) continue;
+                        var type = item.Extension.Contains("dll") ? EAssembliesType.DLL : EAssembliesType.ADF;
+                        dictionary.Add(item.FullName, type);
+                        break;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("{0}:{1}", assemblyName, e);
                 }
             }
 
             return dictionary;
         }
 
-        private enum EAssembliesType
+        public enum EAssembliesType
         {
             ADF,
             DLL,
         }
 
-        private static void Enable(IDictionary<string, EAssembliesType> dictionary)
+        public static void Enable(IDictionary<string, EAssembliesType> dictionary)
         {
             if (dictionary is null || dictionary.Count == 0) return;
             Selection.activeObject = null;
+            EHelper.Prefs.SaveJsonData(KEY + nameof(Enable), dictionary);
             var project = Application.dataPath.Replace("Assets", "").Replace('/', '\\');
             foreach (var item in dictionary)
             {
                 if (!AHelper.IO.ExistsFile(item.Key)) continue;
                 var assetPath = item.Key.Replace(project, "");
+                if (assetPath.Contains("/Editor")) continue;
                 switch (item.Value)
                 {
                     case EAssembliesType.ADF:
@@ -144,9 +163,10 @@ namespace AIO.UEditor
             AssetDatabase.Refresh();
         }
 
-        private static void Disable(IDictionary<string, EAssembliesType> dictionary)
+        public static void Disable(IDictionary<string, EAssembliesType> dictionary)
         {
             if (dictionary is null || dictionary.Count == 0) return;
+            EHelper.Prefs.SaveJsonData(KEY + nameof(Disable), dictionary);
             Selection.activeObject = null;
             var project = Application.dataPath.Replace("Assets", "").Replace('/', '\\');
             foreach (var item in dictionary)
@@ -161,7 +181,7 @@ namespace AIO.UEditor
                         hashtable["excludePlatforms"] = new List<string>();
                         AHelper.IO.WriteJson(item.Key, hashtable);
 #if !UNITY_2020_1_OR_NEWER
-                        AssetDatabase.SaveAssets();
+                            AssetDatabase.SaveAssets();
 #else
                         AssetDatabase.SaveAssetIfDirty(
                             AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>(assetPath));
@@ -169,6 +189,7 @@ namespace AIO.UEditor
                         break;
                     case EAssembliesType.DLL:
                         var importer = (PluginImporter)AssetImporter.GetAtPath(assetPath);
+                        if (importer is null) break;
                         importer.SetCompatibleWithAnyPlatform(false);
                         importer.SetCompatibleWithEditor(true);
                         importer.SaveAndReimport();
@@ -200,6 +221,7 @@ namespace AIO.UEditor
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
                 var name = assembly.GetName().Name;
+                if (name.Contains("editor")) continue;
                 if (name.Contains("Editor")) continue;
                 if (name.Contains("AIO.T4")) continue;
                 if (name.Contains("AIO.PrCourse")) continue;
@@ -221,7 +243,7 @@ namespace AIO.UEditor
                     continue;
                 }
 
-                if (name.Contains("AIO"))
+                if (name.StartsWith("AIO"))
                 {
                     Assemblies.Add(assembly.FullName, assembly);
                 }

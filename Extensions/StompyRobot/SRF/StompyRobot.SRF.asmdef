@@ -1,13 +1,13 @@
 {
-    "name": "StompyRobot.SRF",
-    "references": [],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "noEngineReferences": false,
+  "autoReferenced": true,
+  "versionDefines": [],
+  "overrideReferences": false,
+  "defineConstraints": [],
+  "allowUnsafeCode": false,
+  "includePlatforms": [],
+  "references": [],
+  "name": "StompyRobot.SRF",
+  "excludePlatforms": [],
+  "precompiledReferences": []
 }

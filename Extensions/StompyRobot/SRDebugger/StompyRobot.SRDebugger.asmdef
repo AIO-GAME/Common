@@ -1,18 +1,18 @@
 {
-    "name": "StompyRobot.SRDebugger",
-    "references": [
-        "StompyRobot.SRF",
-        "Unity.InputSystem"
-    ],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [
-        "!DISABLE_SRDEBUGGER"
-    ],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "includePlatforms": [],
+  "noEngineReferences": false,
+  "autoReferenced": true,
+  "versionDefines": [],
+  "defineConstraints": [
+    "!DISABLE_SRDEBUGGER"
+  ],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "references": [
+    "StompyRobot.SRF",
+    "Unity.InputSystem"
+  ],
+  "name": "StompyRobot.SRDebugger",
+  "excludePlatforms": [],
+  "precompiledReferences": []
 }
