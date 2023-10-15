@@ -35,16 +35,8 @@
   "allowUnsafeCode": true,
   "autoReferenced": true,
   "rootNamespace": "AIO",
+  "excludePlatforms": [],
   "noEngineReferences": false,
-  "precompiledReferences": [
-    "AIO.Attribute.dll",
-    "AIO.Common.dll",
-    "YamlDotNet.dll",
-    "ICSharpCode.SharpZipLib.dll",
-    "DOTween.dll",
-    "AIO.Print.dll",
-    "AIO.Print.Unity.dll"
-  ],
   "references": [
     "UniTask",
     "UniTask.Addressables",
@@ -58,9 +50,15 @@
     "AIO.Hybridclr.Runtime"
   ],
   "overrideReferences": true,
-  "includePlatforms": [
-    "Editor"
-  ],
+  "includePlatforms": [],
   "name": "AIO.Core.Runtime",
-  "excludePlatforms": []
+  "precompiledReferences": [
+    "AIO.Attribute.dll",
+    "AIO.Common.dll",
+    "YamlDotNet.dll",
+    "ICSharpCode.SharpZipLib.dll",
+    "DOTween.dll",
+    "AIO.Print.dll",
+    "AIO.Print.Unity.dll"
+  ]
 }
