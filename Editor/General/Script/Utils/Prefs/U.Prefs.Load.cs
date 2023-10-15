@@ -108,7 +108,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static T LoadJsonData<T>(in string key, in T def = default)
             {
-                var keyname = string.Concat(key, "_Json");
+                var keyname = string.Concat(key.GetHashCode(), "_Json".GetHashCode());
                 if (!EditorPrefs.HasKey(keyname)) return def;
                 var content = EditorPrefs.GetString(keyname);
                 if (string.IsNullOrEmpty(content)) return def;

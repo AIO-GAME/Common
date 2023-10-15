@@ -1,13 +1,13 @@
 {
-    "name": "YooAsset",
-    "references": [],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "noEngineReferences": false,
+  "autoReferenced": true,
+  "versionDefines": [],
+  "excludePlatforms": [],
+  "defineConstraints": [],
+  "allowUnsafeCode": false,
+  "includePlatforms": [],
+  "references": [],
+  "name": "YooAsset",
+  "overrideReferences": false,
+  "precompiledReferences": []
 }

@@ -62,7 +62,8 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static bool LoadBoolean(in string field, in bool def = false)
             {
-                return EditorPrefs.GetInt(string.Concat(field.GetHashCode(), "_Boolean".GetHashCode()), def ? 1 : 0) == 1;
+                return EditorPrefs.GetInt(string.Concat(field.GetHashCode(), "_Boolean".GetHashCode()), def ? 1 : 0) ==
+                       1;
             }
 
             /// <summary>
@@ -76,7 +77,9 @@ namespace AIO.UEditor
             {
                 var fullName = typeof(T).FullName;
                 if (string.IsNullOrEmpty(fullName)) return false;
-                return EditorPrefs.GetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode(), "_Boolean".GetHashCode()), def ? 1 : 0) == 1;
+                return EditorPrefs.GetInt(
+                    string.Concat(fullName.GetHashCode(), field.GetHashCode(), "_Boolean".GetHashCode()),
+                    def ? 1 : 0) == 1;
             }
 
 
@@ -93,7 +96,9 @@ namespace AIO.UEditor
                 if (data is null) throw new ArgumentNullException(nameof(data));
                 var fullName = typeof(T).FullName;
                 if (string.IsNullOrEmpty(fullName)) return false;
-                return EditorPrefs.GetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode(), "_Boolean".GetHashCode()), def ? 1 : 0) == 1;
+                return EditorPrefs.GetInt(
+                    string.Concat(fullName.GetHashCode(), field.GetHashCode(), "_Boolean".GetHashCode()),
+                    def ? 1 : 0) == 1;
             }
 
             /// <summary>
@@ -125,7 +130,9 @@ namespace AIO.UEditor
                 var fullName = typeof(T).FullName;
                 if (!string.IsNullOrEmpty(fullName))
                 {
-                    EditorPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode(), "_Boolean".GetHashCode()), value ? 1 : 0);
+                    EditorPrefs.SetInt(
+                        string.Concat(fullName.GetHashCode(), field.GetHashCode(), "_Boolean".GetHashCode()),
+                        value ? 1 : 0);
                 }
             }
 
@@ -283,7 +290,8 @@ namespace AIO.UEditor
             /// </summary>
             public static void SaveJsonData<T>(in string key, in T value)
             {
-                EditorPrefs.SetString(string.Concat(key, "_Json"), AHelper.Json.Serialize(value));
+                EditorPrefs.SetString(string.Concat(key.GetHashCode(), "_Json".GetHashCode()),
+                    AHelper.Json.Serialize(value));
             }
 
             /// <summary>

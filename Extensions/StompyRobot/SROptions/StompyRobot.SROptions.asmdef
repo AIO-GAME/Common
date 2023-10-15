@@ -1,16 +1,16 @@
 {
-    "name": "StompyRobot.SROptions",
-    "references": [
-        "StompyRobot.SRF",
-        "StompyRobot.SRDebugger"
-    ],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "includePlatforms": [],
+  "noEngineReferences": false,
+  "autoReferenced": true,
+  "versionDefines": [],
+  "defineConstraints": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "references": [
+    "StompyRobot.SRF",
+    "StompyRobot.SRDebugger"
+  ],
+  "name": "StompyRobot.SROptions",
+  "excludePlatforms": [],
+  "precompiledReferences": []
 }
