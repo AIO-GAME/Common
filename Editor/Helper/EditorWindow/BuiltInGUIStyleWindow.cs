@@ -21,8 +21,7 @@ namespace AIO.UEditor
     /// 获取全部 Unity GUI Style Viewer 样式
     /// </summary>
     [GWindow("GUI Style View", Group = "Tools",
-        MinSizeWidth = 600, MinSizeHeight = 600,
-        MaxSizeWidth = 600, MaxSizeHeight = 600
+        MinSizeWidth = 600, MinSizeHeight = 600
     )]
     public class BuiltInGUIStyleGraphWindow : GraphicWindow
     {
@@ -64,11 +63,11 @@ namespace AIO.UEditor
                     }
             }
 
-            GELayout.VHorizontal(() =>
+            using (GELayout.VHorizontal(EditorStyles.helpBox, GTOption.WidthExpand(true), GTOption.Height(30)))
             {
                 search = GELayout.Field(search, Label);
                 if (GELayout.Button("Find", GTOption.Width(50))) FindSearchStyles();
-            }, EditorStyles.helpBox, GTOption.WidthExpand(true), GTOption.Height(30));
+            }
 
             Vector = GELayout.VScrollView(DrawContext, Vector);
         }

@@ -45,30 +45,6 @@ namespace AIO.UEditor
             }
 
             /// <summary>
-            /// 加载Bool
-            /// </summary>
-            /// <param name="field">字段名称</param>
-            /// <returns>返回值</returns>
-            public static bool LoadBool(in string field)
-            {
-                return EditorPrefs.GetInt(string.Concat(field, "_Boolean")) == 1;
-            }
-
-            /// <summary>
-            /// 加载Bool
-            /// </summary>
-            /// <param name="key">类型</param>
-            /// <param name="field">字段名称</param>
-            /// <typeparam name="T">泛型类型</typeparam>
-            /// <returns>返回值</returns>
-            public static bool LoadBool<T>(in T key, in string field)
-            {
-                var fullName = key.GetType().FullName;
-                if (string.IsNullOrEmpty(fullName)) return false;
-                return EditorPrefs.GetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode())) == 1;
-            }
-
-            /// <summary>
             /// 加载String
             /// </summary>
             /// <param name="key">key</param>

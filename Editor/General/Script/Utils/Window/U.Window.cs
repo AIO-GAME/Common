@@ -302,25 +302,37 @@ namespace AIO.UEditor
             /// <param name="focus">聚焦</param>
             public static EditorWindow Open(Type type, GTContent title, bool utility, bool focus)
             {
+                return Open(type, title.Content, utility, focus);
+            }
+
+            /// <summary>
+            /// 打开窗口
+            /// </summary>
+            /// <param name="type"><see cref="EditorWindow"/></param>
+            /// <param name="utility">边框</param>
+            /// <param name="title">标题</param>
+            /// <param name="focus">聚焦</param>
+            public static EditorWindow Open(Type type, GUIContent title, bool utility, bool focus)
+            {
                 if (!type.IsSubclassOf(typeof(EditorWindow)))
                 {
                     Debug.LogError("Type is not EditorWindow");
                     return null;
                 }
 
-                if (string.IsNullOrEmpty(title.Content.text))
+                if (string.IsNullOrEmpty(title.text))
                 {
                     var attribute = type.GetCustomAttribute<GWindowAttribute>(false);
-                    if (attribute != null) title.Content = attribute.Title;
+                    if (attribute != null) title = attribute.Title;
                 }
 
-                if (string.IsNullOrEmpty(title.Content.text)) title.Content.text = type.Name;
+                if (string.IsNullOrEmpty(title.text)) title.text = type.Name;
 
-                var key = GetWindowKey(type, title.Content.text);
+                var key = GetWindowKey(type, title.text);
                 if (!WindowList.ContainsKey(key) || WindowList[key] is null)
                 {
                     WindowList[key] = ScriptableObject.CreateInstance(type) as EditorWindow;
-                    WindowList[key].titleContent = new GUIContent(title.Content);
+                    WindowList[key].titleContent = title;
                     if (utility) WindowList[key].ShowUtility();
                     else WindowList[key].Show();
                 }
@@ -374,7 +386,29 @@ namespace AIO.UEditor
             /// <param name="title">标题</param>
             /// <param name="type"><see cref="EditorWindow"/></param>
             /// <param name="desiredDockNextTo">组</param>
+            public static EditorWindow Open(Type type, GUIContent title, ICollection<Type> desiredDockNextTo)
+            {
+                return Open(type, title, true, desiredDockNextTo);
+            }
+
+            /// <summary>
+            /// 打开窗口
+            /// </summary>
+            /// <param name="title">标题</param>
+            /// <param name="type"><see cref="EditorWindow"/></param>
+            /// <param name="desiredDockNextTo">组</param>
             public static EditorWindow Open(Type type, GTContent title, params Type[] desiredDockNextTo)
+            {
+                return Open(type, title, true, desiredDockNextTo);
+            }
+
+            /// <summary>
+            /// 打开窗口
+            /// </summary>
+            /// <param name="title">标题</param>
+            /// <param name="type"><see cref="EditorWindow"/></param>
+            /// <param name="desiredDockNextTo">组</param>
+            public static EditorWindow Open(Type type, GUIContent title, params Type[] desiredDockNextTo)
             {
                 return Open(type, title, true, desiredDockNextTo);
             }
@@ -410,25 +444,37 @@ namespace AIO.UEditor
             /// <param name="desiredDockNextTo">组</param>
             public static EditorWindow Open(Type type, GTContent title, bool focus, ICollection<Type> desiredDockNextTo)
             {
+                return Open(type, title.Content, focus, desiredDockNextTo);
+            }
+
+            /// <summary>
+            /// 打开窗口
+            /// </summary>
+            /// <param name="title">标题</param>
+            /// <param name="focus">聚焦</param>
+            /// <param name="type"><see cref="EditorWindow"/></param>
+            /// <param name="desiredDockNextTo">组</param>
+            public static EditorWindow Open(Type type, GUIContent title, bool focus, ICollection<Type> desiredDockNextTo)
+            {
                 if (!type.IsSubclassOf(typeof(EditorWindow)))
                 {
                     Debug.LogError("Type is not EditorWindow");
                     return null;
                 }
 
-                if (string.IsNullOrEmpty(title.Content.text))
+                if (string.IsNullOrEmpty(title.text))
                 {
                     var attribute = type.GetCustomAttribute<GWindowAttribute>(false);
-                    if (attribute != null) title.Content = attribute.Title;
+                    if (attribute != null) title = attribute.Title;
                 }
 
-                if (string.IsNullOrEmpty(title.Content.text)) title.Content.text = type.Name;
+                if (string.IsNullOrEmpty(title.text)) title.text = type.Name;
 
-                var key = GetWindowKey(type, title.Content.text);
+                var key = GetWindowKey(type, title.text);
                 if (!WindowList.ContainsKey(key) || WindowList[key] == null)
                 {
                     WindowList[key] = ScriptableObject.CreateInstance(type) as EditorWindow;
-                    WindowList[key].titleContent = new GUIContent(title.Content.text);
+                    WindowList[key].titleContent = title;
                     if (AddDock(WindowList[key], desiredDockNextTo)) return WindowList[key];
                 }
 
@@ -455,51 +501,46 @@ namespace AIO.UEditor
 
                 var containerWindowType = assembly.GetType("UnityEditor.ContainerWindow");
 
-                if (!(containerWindowType.GetProperty("windows",
+                if (!(containerWindowType?.GetProperty("windows",
                             BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty)
                         ?.GetValue(null, null) is Array windowsObj)) return false;
                 var containerWindowRootView = containerWindowType.GetProperty("rootView", PROPERTY_BIND);
-
+                if (containerWindowRootView is null) return false;
+            
                 var dockAreaType = assembly.GetType("UnityEditor.DockArea");
-                var dockAreaMethods = dockAreaType.GetMethods(BindingFlags.Public | BindingFlags.Instance);
-                MethodInfo dockAreaMethodAddTab = null;
-                foreach (var dockAreaMethod in dockAreaMethods)
-                {
-                    if (dockAreaMethod.Name != "AddTab") continue;
-                    if (dockAreaMethod.GetParameters().Length != 2) continue;
-                    dockAreaMethodAddTab = dockAreaMethod;
-                }
+                var dockAreaMethods = dockAreaType?.GetMethods(BindingFlags.Public | BindingFlags.Instance);
+                var dockAreaMethodAddTab = dockAreaMethods?
+                    .Where(dockAreaMethod => dockAreaMethod.Name == "AddTab")
+                    .FirstOrDefault(dockAreaMethod => dockAreaMethod.GetParameters().Length == 2);
+                if (dockAreaMethodAddTab is null) return false;
 
                 var viewType = assembly.GetType("UnityEditor.View");
-                var viewAllChildren = viewType.GetProperty("allChildren", PROPERTY_BIND);
-                if (dockAreaMethodAddTab != null && containerWindowRootView != null && viewAllChildren != null)
+                var viewAllChildren = viewType?.GetProperty("allChildren", PROPERTY_BIND);
+                if (viewAllChildren is null) return false;
+                foreach (var desired in desiredDockNextTo)
                 {
-                    foreach (var desired in desiredDockNextTo)
+                    if (desired is null) continue;
+                    if (desired == instance.GetType()) continue;
+                    foreach (var window in windowsObj)
                     {
-                        if (desired is null) continue;
-                        if (desired == instance.GetType()) continue;
-                        foreach (var window in windowsObj)
+                        if (window is null) continue;
+                        if (window.Equals(instance)) continue;
+                        var v1 = containerWindowRootView.GetValue(window, null);
+                        if (v1 is null) continue;
+                        if (!(viewAllChildren.GetValue(v1, null) is Array v2)) continue;
+                        foreach (var allChild in v2)
                         {
-                            if (window is null) continue;
-                            if (window.Equals(instance)) continue;
-                            var v1 = containerWindowRootView.GetValue(window, null);
-                            if (v1 is null) continue;
-                            if (!(viewAllChildren.GetValue(v1, null) is Array v2)) continue;
-                            foreach (var allChild in v2)
+                            if (allChild is null) continue;
+                            if (!dockAreaType.IsInstanceOfType(allChild)) continue;
+                            var m_Panes = dockAreaType.GetField("m_Panes", BindingFlags.NonPublic | BindingFlags.Instance);
+                            if (!(m_Panes?.GetValue(allChild) is List<EditorWindow> mPanes)) continue;
+                            foreach (var item in mPanes)
                             {
-                                if (allChild is null) continue;
-                                if (!dockAreaType.IsInstanceOfType(allChild)) continue;
-                                if (!(dockAreaType.GetField("m_Panes",
-                                            BindingFlags.NonPublic | BindingFlags.Instance)
-                                        ?.GetValue(allChild) is List<EditorWindow> mPanes)) continue;
-                                foreach (var item in mPanes)
-                                {
-                                    if (item is null) continue;
-                                    if (item == instance) continue;
-                                    if (item.GetType() == desired) continue;
-                                    dockAreaMethodAddTab.Invoke(allChild, new object[] { instance, false });
-                                    return true;
-                                }
+                                if (item is null) continue;
+                                if (item == instance) continue;
+                                if (item.GetType() != desired) continue;
+                                dockAreaMethodAddTab.Invoke(allChild, new object[] { instance, false });
+                                return true;
                             }
                         }
                     }

@@ -19,8 +19,7 @@ namespace AIO.UEditor
     /// Dll Switcher Window
     /// </summary>
     [GWindow("Dll Switcher Window", Group = "Tools",
-        MinSizeWidth = 600, MinSizeHeight = 600,
-        MaxSizeWidth = 600, MaxSizeHeight = 600
+        MinSizeWidth = 600, MinSizeHeight = 600
     )]
     public class DllSwitcherWindow : GraphicWindow
     {

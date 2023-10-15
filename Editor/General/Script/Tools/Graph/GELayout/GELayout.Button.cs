@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace AIO.UEditor
@@ -26,7 +27,14 @@ namespace AIO.UEditor
             {
                 foreach (var content in contents)
                 {
-                    if (GUILayout.Button(content.Key, selected.Equals(content.Value) ? GEStyle.PreLabel : GEStyle.INEditColliderButton, GUILayout.Width(width)))
+                    if (GUILayout.Button(content.Key, selected.Equals(content.Value)
+                                ? GEStyle.PreLabel
+#if UNITY_2020_1_OR_NEWER
+                                : GEStyle.StatusBarIcon,
+#else
+                                : GEStyle.INEditColliderButton,
+#endif
+                            GUILayout.Width(width)))
                     {
                         selected = content.Value;
                         cb(selected);
@@ -37,6 +45,7 @@ namespace AIO.UEditor
 
             return selected;
         }
+
         /// <summary>
         /// Make a Selection Grid 
         /// </summary>
@@ -51,7 +60,14 @@ namespace AIO.UEditor
             {
                 foreach (var content in contents)
                 {
-                    if (GUILayout.Button(content.Key, selected.Equals(content.Value) ? GEStyle.PreLabel : GEStyle.INEditColliderButton, GUILayout.Width(width)))
+                    if (GUILayout.Button(content.Key, selected.Equals(content.Value)
+                                ? GEStyle.PreLabel
+#if UNITY_2020_1_OR_NEWER
+                                : GEStyle.StatusBarIcon,
+#else
+                                : GEStyle.INEditColliderButton,
+#endif
+                            GUILayout.Width(width)))
                     {
                         selected = content.Value;
                         cb(selected);
@@ -61,6 +77,18 @@ namespace AIO.UEditor
             }
 
             return selected;
+        }
+
+
+        /// <summary>
+        /// 绘制 空间视图 
+        /// </summary>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <returns><see cref="EditorGUILayout.HorizontalScope"/></returns>
+        public static EditorGUILayout.ScrollViewScope VScrollView(Vector2 v2)
+        {
+            return new EditorGUILayout.ScrollViewScope(v2);
         }
     }
 }

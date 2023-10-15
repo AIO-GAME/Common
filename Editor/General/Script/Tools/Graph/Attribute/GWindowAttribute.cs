@@ -103,22 +103,23 @@ namespace AIO.UEditor
         {
             Title = title;
         }
+    }
 
-        private static Dictionary<string, GWindowAttribute> windowTypes;
+    public partial class GraphicWindow
+    {
+        private static Dictionary<string, GWindowAttribute> WindowTypes { get; }
 
         private static SettingsProvider provider;
 
-        private static Dictionary<string, List<Type>> windowDock;
-
         /// <summary>
-        /// 创建设置提供者
+        /// 组列表
         /// </summary>
-        [SettingsProvider]
-        private static SettingsProvider CreateSettingsProvider()
+        private static Dictionary<string, List<Type>> GroupTabel { get; }
+
+        static GraphicWindow()
         {
-            if (provider != null) return provider;
-            if (windowTypes == null) windowTypes = new Dictionary<string, GWindowAttribute>();
-            if (windowDock == null) windowDock = new Dictionary<string, List<Type>> { { "Default", new List<Type>() } };
+            GroupTabel = new Dictionary<string, List<Type>> { { "Default", new List<Type>() } };
+            WindowTypes = new Dictionary<string, GWindowAttribute>();
 
             var graphicType = typeof(GraphicWindow);
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
@@ -127,68 +128,83 @@ namespace AIO.UEditor
                 {
                     if (!type.IsSubclassOf(graphicType)) continue;
                     var attribute = type.GetCustomAttribute<GWindowAttribute>(false);
-                    if (attribute is null) windowDock["Default"].Add(type);
+                    if (attribute is null) GroupTabel["Default"].Add(type);
                     else
                     {
                         var key = string.Format("{0}{1}", attribute.Title, type.FullName);
-                        if (windowTypes.ContainsKey(key)) continue;
+                        if (WindowTypes.ContainsKey(key)) continue;
                         attribute.RuntimeType = type;
-                        windowTypes.Add(key, attribute);
-                        if (!windowDock.ContainsKey(attribute.Group)) windowDock[attribute.Group] = new List<Type>();
-                        windowDock[attribute.Group].Add(type);
+                        WindowTypes.Add(key, attribute);
+                        if (!GroupTabel.ContainsKey(attribute.Group)) GroupTabel[attribute.Group] = new List<Type>();
+                        GroupTabel[attribute.Group].Add(type);
                     }
                 }
             }
-            //
-            // var containerWindowType = Assembly.GetAssembly(typeof(EditorWindow))
-            //     .GetType("UnityEditor.PreferenceSettingsWindow");
-            // foreach (var item in windowDock) item.Value.Add(containerWindowType);
 
-            provider = new GraphicSettingsProvider("AIO/Windows", SettingsScope.User);
+            var containerWindowType = Assembly.GetAssembly(typeof(EditorWindow))
+                .GetType("UnityEditor.PreferenceSettingsWindow");
+            foreach (var item in GroupTabel)
+                item.Value.Add(containerWindowType);
+        }
+
+        /// <summary>
+        /// 创建设置提供者
+        /// </summary>
+        [SettingsProvider]
+        private static SettingsProvider CreateSettingsProvider()
+        {
+            if (provider != null) return provider;
+
+            provider = new GraphicSettingsProvider(string.Format("{0}/{1}", nameof(AIO), nameof(GWindowAttribute).Replace(nameof(Attribute), "")), SettingsScope.User);
             provider.label = "Windows Header";
+            provider.hasSearchInterestHandler = (value) =>
+            {
+                if (value.Contains("Window")) return true;
+                if (value.Contains("Header")) return true;
+                if (value.Contains("GUI")) return true;
+                if (value.Contains("AIO")) return true;
+                return false;
+            };
+            provider.keywords = new HashSet<string>(new[] { "Window", "Header", "GUI", "AIO" });
             provider.guiHandler = delegate
             {
-                GELayout.BeginVertical();
-                GELayout.Space();
+                EditorGUILayout.BeginVertical();
+                EditorGUILayout.Space();
 
-                GELayout.BeginHorizontal(GEStyle.HelpBox);
-                GELayout.Label("Group", GEStyle.CenteredLabel, GTOption.Width(50));
-                GELayout.Label("Order", GEStyle.CenteredLabel, GTOption.Width(50));
-                GELayout.Label("Class", GEStyle.CenteredLabel, GTOption.WidthExpand(true));
-                GELayout.Label("Title", GEStyle.CenteredLabel, GTOption.Width(200));
-                GELayout.Label("Status", GEStyle.CenteredLabel, GTOption.Width(50));
-                GELayout.EndHorizontal();
-
-                foreach (var window in windowTypes)
+                using (new EditorGUILayout.HorizontalScope(GEStyle.HelpBox))
                 {
-                    GELayout.BeginHorizontal(GEStyle.HelpBox);
-                    GELayout.Label(window.Value.Group, GEStyle.CenteredLabel, GTOption.Width(50));
-                    GELayout.Label(window.Value.Order, GEStyle.CenteredLabel, GTOption.Width(50));
-                    GELayout.Label(window.Value.RuntimeType.FullName, GTOption.WidthExpand(true));
-                    GELayout.Label(window.Value.Title, GEStyle.CenteredLabel, GTOption.Width(200));
-                    if (GELayout.Button("Open", 50))
-                        EHelper.Window.Open(window.Value.RuntimeType, window.Value.Title,
-                            windowDock[window.Value.Group]);
-                    GELayout.EndHorizontal();
+                    EditorGUILayout.LabelField("Group", GEStyle.CenteredLabel, GUILayout.Width(50));
+                    EditorGUILayout.LabelField("|", GUILayout.Width(10));
+                    EditorGUILayout.LabelField("Order", GEStyle.CenteredLabel, GUILayout.Width(50));
+                    EditorGUILayout.LabelField("|", GUILayout.Width(10));
+                    EditorGUILayout.LabelField("Title", GEStyle.CenteredLabel, GUILayout.Width(200));
+                    EditorGUILayout.LabelField("|", GUILayout.Width(10));
+                    EditorGUILayout.LabelField("Status", GEStyle.CenteredLabel, GUILayout.Width(50));
+                    EditorGUILayout.LabelField("|", GUILayout.Width(10));
+                    EditorGUILayout.LabelField("Class", GEStyle.CenteredLabel, GUILayout.ExpandWidth(true));
                 }
 
-                GELayout.Space();
-                GELayout.EndVertical();
+                foreach (var window in WindowTypes)
+                {
+                    using (new EditorGUILayout.HorizontalScope(GEStyle.HelpBox))
+                    {
+                        EditorGUILayout.LabelField(window.Value.Group, GEStyle.CenteredLabel, GUILayout.Width(50));
+                        EditorGUILayout.LabelField("|", GUILayout.Width(10));
+                        EditorGUILayout.LabelField(window.Value.Order.ToString(), GEStyle.CenteredLabel, GUILayout.Width(50));
+                        EditorGUILayout.LabelField("|", GUILayout.Width(10));
+                        EditorGUILayout.LabelField(window.Value.Title, GEStyle.CenteredLabel, GUILayout.Width(200));
+                        EditorGUILayout.LabelField("|", GUILayout.Width(10));
+                        if (GUILayout.Button("Open", GUILayout.Width(50)))
+                            EHelper.Window.Open(window.Value.RuntimeType, window.Value.Title, GroupTabel[window.Value.Group]);
+                        EditorGUILayout.LabelField("|", GUILayout.Width(10));
+                        EditorGUILayout.LabelField(window.Value.RuntimeType.FullName, GUILayout.ExpandWidth(true));
+                    }
+                }
+
+                EditorGUILayout.Space();
+                EditorGUILayout.EndVertical();
             };
             return provider;
         }
-
-        // internal static GUIContent GetLocalizedTitleContentFromType(System.Type t)
-        // {
-        //     EditorWindowTitleAttribute windowTitleAttribute = EditorWindow.GetEditorWindowTitleAttribute(t);
-        //     if (windowTitleAttribute == null)
-        //         return new GUIContent(t.Name);
-        //     string str = "";
-        //     if (!string.IsNullOrEmpty(windowTitleAttribute.icon))
-        //         str = windowTitleAttribute.icon;
-        //     else if (windowTitleAttribute.useTypeNameAsIconName)
-        //         str = t.ToString();
-        //     return !string.IsNullOrEmpty(str) && (bool) (UnityEngine.Object) EditorGUIUtility.LoadIcon(str) ? EditorGUIUtility.TrTextContentWithIcon(windowTitleAttribute.title, str) : EditorGUIUtility.TrTextContent(windowTitleAttribute.title);
-        // }
     }
 }

@@ -15,7 +15,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 namespace AIO.UEditor
@@ -23,16 +22,11 @@ namespace AIO.UEditor
     /// <summary>
     /// 脚本管理
     /// </summary>
-    [GWindow("脚本管理", Group = "Tools",
-        MinSizeWidth = 600, MinSizeHeight = 600,
-        MaxSizeWidth = 600, MaxSizeHeight = 600
-    )]
+    [GWindow("脚本管理", Group = "Tools", MinSizeWidth = 600, MinSizeHeight = 600)]
     public class CScriptManagerGraphWindow : GraphicWindow
     {
         private List<Type> List;
         private Vector2 Vector;
-        private GUILayoutOption Width;
-        private GUIStyle Content;
 
         public CScriptManagerGraphWindow()
         {
@@ -46,9 +40,6 @@ namespace AIO.UEditor
             {
                 List.Add(item);
             }
-
-            Content = "DD HeaderStyle";
-            Width = GTOption.Width(120);
         }
 
         protected override void OnActivation()
@@ -57,31 +48,41 @@ namespace AIO.UEditor
 
         protected override void OnGUI()
         {
-            var Height = GTOption.Height(60);
-            GELayout.VHorizontal(() =>
+            using (GELayout.VHorizontal(GEStyle.HelpBox, GTOption.Width(true)))
             {
-                GELayout.Space(10);
-                GELayout.Label("类名", Width);
+                GELayout.Space(5);
+                GELayout.Label("类名");
                 GELayout.Label("命名空间", GTOption.Width(200));
-                GELayout.Label("静态类", Width);
+                GELayout.Label("静态类", GEStyle.CenteredLabel, GTOption.Width(100));
                 GELayout.Label("属性", GTOption.Width(500));
                 GELayout.Space(10);
-            }, Content, GTOption.Height(40));
-            Vector = GELayout.VScrollView(() =>
+            }
+
+            using (var scope = GELayout.VScrollView(Vector))
             {
-                foreach (var item in List)
-                    GELayout.VHorizontal(() => { DrawItem(item); }, Content, Height);
-            }, Vector);
+                Vector = scope.scrollPosition;
+                foreach (var type in List)
+                {
+                    using (GELayout.VHorizontal(GEStyle.HelpBox, GTOption.Width(true), GTOption.Height(60)))
+                    {
+                        GELayout.Space(10);
+                        GELayout.Label(type.Name);
+                        GELayout.Label(type.Namespace, GTOption.Width(200));
+                        GELayout.Label(type.IsAbstract, GEStyle.CenteredLabel, GTOption.Width(100));
+                        GELayout.Label(type.Attributes.ToString(), GTOption.Width(500));
+                        GELayout.Space(10);
+                    }
+                }
+            }
         }
 
-        private void DrawItem(Type type)
+        /// <summary>
+        /// 当可脚本化对象超出作用域时调用此函数。
+        /// </summary>
+        protected override void OnDisable()
         {
-            GELayout.Space(10);
-            GELayout.Label(type.Name, Width);
-            GELayout.Label(type.Namespace, GTOption.Width(200));
-            GELayout.Label(type.IsAbstract, Width);
-            GELayout.Label(type.Attributes.ToString(), GTOption.Width(500));
-            GELayout.Space(10);
+            List.Clear();
+            List = null;
         }
     }
 }

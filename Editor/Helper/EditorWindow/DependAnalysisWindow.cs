@@ -11,8 +11,7 @@ namespace AIO.UEditor
     /// 查询引用关系
     /// </summary>
     [GWindow("查询资源引用", Group = "Tools",
-        MinSizeWidth = 600, MinSizeHeight = 600,
-        MaxSizeWidth = 600, MaxSizeHeight = 600
+        MinSizeWidth = 600, MinSizeHeight = 600
     )]
     public class DependAnalysisGraphWindow : GraphicWindow
     {

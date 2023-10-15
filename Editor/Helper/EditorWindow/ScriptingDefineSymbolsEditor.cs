@@ -20,8 +20,7 @@ namespace AIO.UEditor
 {
     /// <summary> 宏定义管理器 </summary>
     [GWindow("宏定义管理器", Group = "Tools",
-        MinSizeWidth = 600, MinSizeHeight = 600,
-        MaxSizeWidth = 600, MaxSizeHeight = 600
+        MinSizeWidth = 600, MinSizeHeight = 600
     )]
     public class ScriptingDefineSymbols : GraphicWindow
     {

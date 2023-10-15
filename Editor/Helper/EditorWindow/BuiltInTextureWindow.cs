@@ -23,8 +23,7 @@ namespace AIO.UEditor
     /// Unity内置图标
     /// </summary>
     [GWindow("Built In Texture Window", Group = "Tools",
-        MinSizeWidth = 600, MinSizeHeight = 600,
-        MaxSizeWidth = 600, MaxSizeHeight = 600
+        MinSizeWidth = 600, MinSizeHeight = 600
     )]
     public class BuiltInTextureGraphWindow : GraphicWindow
     {

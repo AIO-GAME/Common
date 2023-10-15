@@ -21,8 +21,7 @@ namespace AIO.UEditor
     /// 资源管理界面
     /// </summary>
     [GWindow("资源管理器", "Assets Manager", Group = "Tools",
-        MinSizeWidth = 600, MinSizeHeight = 600,
-        MaxSizeWidth = 600, MaxSizeHeight = 600
+        MinSizeWidth = 600, MinSizeHeight = 600
     )]
     public class AssetManagerGraphWindow : GraphicWindow
     {
