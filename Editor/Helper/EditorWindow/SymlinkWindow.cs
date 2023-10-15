@@ -27,8 +27,7 @@ namespace AIO.UEditor
     /// </summary>
     [InitializeOnLoad]
     [GWindow("符号链接", "Symlink Window", Group = "Tools",
-        MinSizeWidth = 600, MinSizeHeight = 600,
-        MaxSizeWidth = 600, MaxSizeHeight = 600
+        MinSizeWidth = 600, MinSizeHeight = 600
     )]
     internal class SymlinkWindow : GraphicWindow
     {

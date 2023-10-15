@@ -22,8 +22,7 @@ using Object = UnityEngine.Object;
 namespace AIO.UEditor
 {
     [GWindow("Script ID Viewer", Group = "Tools",
-        MinSizeWidth = 600, MinSizeHeight = 600,
-        MaxSizeWidth = 600, MaxSizeHeight = 600
+        MinSizeWidth = 600, MinSizeHeight = 600
     )]
     public class ScriptIDWindow : GraphicWindow
     {

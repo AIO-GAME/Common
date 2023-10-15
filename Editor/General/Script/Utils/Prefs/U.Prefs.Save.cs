@@ -55,24 +55,53 @@ namespace AIO.UEditor
             #region Boolean
 
             /// <summary>
-            /// 保存为Bool
+            /// 加载Bool
             /// </summary>
-            public static void SaveBoolean(in string key, in bool value)
+            /// <param name="field">字段名称</param>
+            /// <param name="def">默认值</param>
+            /// <returns>返回值</returns>
+            public static bool LoadBoolean(in string field, in bool def = false)
             {
-                EditorPrefs.SetInt(string.Concat(key, "_Boolean"), value ? 1 : 0);
+                return EditorPrefs.GetInt(string.Concat(field.GetHashCode(), "_Boolean".GetHashCode()), def ? 1 : 0) == 1;
+            }
+
+            /// <summary>
+            /// 加载Bool
+            /// </summary>
+            /// <param name="field">字段名称</param>
+            /// <param name="def"></param>
+            /// <typeparam name="T">泛型类型</typeparam>
+            /// <returns>返回值</returns>
+            public static bool LoadBoolean<T>(in string field, in bool def = false)
+            {
+                var fullName = typeof(T).FullName;
+                if (string.IsNullOrEmpty(fullName)) return false;
+                return EditorPrefs.GetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode(), "_Boolean".GetHashCode()), def ? 1 : 0) == 1;
+            }
+
+
+            /// <summary>
+            /// 加载Bool
+            /// </summary>
+            /// <param name="data">值类型</param>
+            /// <param name="field">字段名称</param>
+            /// <param name="def"></param>
+            /// <typeparam name="T">泛型类型</typeparam>
+            /// <returns>返回值</returns>
+            public static bool LoadBoolean<T>(in T data, in string field, in bool def = false)
+            {
+                if (data is null) throw new ArgumentNullException(nameof(data));
+                var fullName = typeof(T).FullName;
+                if (string.IsNullOrEmpty(fullName)) return false;
+                return EditorPrefs.GetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode(), "_Boolean".GetHashCode()), def ? 1 : 0) == 1;
             }
 
             /// <summary>
             /// 保存为Bool
             /// </summary>
-            public static void SaveBoolean<T>(in T clazz, in string field, in bool value)
+            public static void SaveBoolean(in string key, in bool value)
             {
-                if (clazz == null) throw new ArgumentNullException(nameof(clazz));
-                var fullName = typeof(T).FullName;
-                if (!string.IsNullOrEmpty(fullName))
-                {
-                    EditorPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value ? 1 : 0);
-                }
+                EditorPrefs.SetInt(string.Concat(key.GetHashCode(), "_Boolean".GetHashCode()), value ? 1 : 0);
             }
 
             /// <summary>
@@ -81,10 +110,33 @@ namespace AIO.UEditor
             public static void SaveBoolean<T>(in string field, in bool value)
             {
                 var fullName = typeof(T).FullName;
+                EditorPrefs.SetInt(
+                    !string.IsNullOrEmpty(fullName)
+                        ? string.Concat(fullName.GetHashCode(), field.GetHashCode(), "_Boolean".GetHashCode())
+                        : string.Concat(field.GetHashCode(), "_Boolean".GetHashCode()), value ? 1 : 0);
+            }
+
+            /// <summary>
+            /// 保存为Bool
+            /// </summary>
+            public static void SaveBoolean<T>(T data, in string field, in bool value)
+            {
+                if (data is null) throw new ArgumentNullException(nameof(data));
+                var fullName = typeof(T).FullName;
                 if (!string.IsNullOrEmpty(fullName))
                 {
-                    EditorPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value ? 1 : 0);
+                    EditorPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode(), "_Boolean".GetHashCode()), value ? 1 : 0);
                 }
+            }
+
+            /// <summary>
+            /// 反转bool值
+            /// </summary>
+            public static void ReverseBoolean(in string key)
+            {
+                var code = string.Concat(key.GetHashCode(), "_Boolean".GetHashCode());
+                var v = EditorPrefs.GetInt(code, 0);
+                EditorPrefs.SetInt(code, v == 0 ? 1 : 0);
             }
 
             #endregion

@@ -6,7 +6,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using PlasticGui;
 using UnityEditor;
 using UnityEngine;
 
@@ -15,32 +17,26 @@ namespace AIO.UEditor
     /// <summary>
     /// 图形窗口
     /// </summary>
-    public abstract class GraphicWindow : EmptyGraphWindow, IGraphEvent
+    public abstract partial class GraphicWindow : EmptyGraphWindow, IGraphEvent
     {
         /// <summary>
         /// 组名 编写额外的窗口
         /// </summary>
         public string Group { get; }
 
-        /// <summary>
-        /// 标题名
-        /// </summary>
-        private GUIContent Title { get; }
+        private static void AddGroup(string key, Type type)
+        {
+            if (!GroupTabel.ContainsKey(key)) GroupTabel.Add(key, new List<Type>());
+            if (GroupTabel[key].Contains(type)) return;
+            GroupTabel[key].Add(type);
+        }
 
-        /// <summary>
-        /// 最小大小
-        /// </summary>
-        private Vector2 MinSize { get; }
-
-        /// <summary>
-        /// 最大大小
-        /// </summary>
-        private Vector2 MaxSize { get; }
-
-        /// <summary>
-        /// 组列表
-        /// </summary>
-        private List<Type> GroupList;
+        private static IEnumerable<Type> GetGroup<T>(string key, T type) where T : EditorWindow
+        {
+            if (type is null) return Array.Empty<Type>();
+            if (!GroupTabel.ContainsKey(key)) return Array.Empty<Type>();
+            return GroupTabel[key].Where(item => item != typeof(T)).ToArray();
+        }
 
         /// <summary>
         /// 视图元素
@@ -51,14 +47,8 @@ namespace AIO.UEditor
         protected GraphicWindow()
         {
             GraphicItems = new List<GraphicRect>();
-            GroupList = new List<Type>();
             var attribute = GetType().GetCustomAttribute<GWindowAttribute>(false);
-            if (attribute is null)
-            {
-                Title = new GUIContent(GetType().Name);
-                MinSize = minSize;
-                MaxSize = maxSize;
-            }
+            if (attribute is null) titleContent = new GUIContent(GetType().Name);
             else
             {
                 if (!string.IsNullOrEmpty(attribute.Group))
@@ -74,21 +64,27 @@ namespace AIO.UEditor
                             if (string.IsNullOrEmpty(extraAttribute.Group)) continue;
                             if (Group != extraAttribute.Group) continue;
                             if (type == GetType()) continue;
-                            if (GroupList.Contains(type)) continue;
-                            GroupList.Add(type);
+                            AddGroup(Group, type);
                         }
                     }
                 }
 
-                Title = attribute.Title;
-                if (attribute.MinSizeWidth == 0) attribute.MinSizeWidth = (uint)minSize.x;
-                if (attribute.MinSizeHeight == 0) attribute.MinSizeHeight = (uint)minSize.y;
+                titleContent = attribute.Title;
+                var temp = new Vector2
+                {
+                    x = attribute.MinSizeWidth == 0 ? minSize.x : attribute.MinSizeWidth,
+                    y = attribute.MinSizeHeight == 0 ? minSize.y : attribute.MinSizeHeight
+                };
 
-                if (attribute.MaxSizeWidth == 0) attribute.MaxSizeWidth = (uint)minSize.x;
-                if (attribute.MaxSizeHeight == 0) attribute.MaxSizeHeight = (uint)minSize.y;
+                minSize = temp;
 
-                minSize = MinSize = new Vector2(attribute.MinSizeWidth, attribute.MinSizeHeight);
-                maxSize = MaxSize = new Vector2(attribute.MaxSizeWidth, attribute.MaxSizeHeight);
+                temp = new Vector2
+                {
+                    x = attribute.MaxSizeWidth == 0 ? maxSize.x : attribute.MaxSizeWidth,
+                    y = attribute.MaxSizeHeight == 0 ? maxSize.y : attribute.MaxSizeHeight
+                };
+
+                maxSize = temp;
             }
         }
 
@@ -102,9 +98,9 @@ namespace AIO.UEditor
 #endif
             {
                 position = new Rect(new Vector2(
-                        Screen.currentResolution.width * 0.5f - MinSize.x / 2,
-                        Screen.currentResolution.height * 0.5f - MinSize.y / 2),
-                    MinSize);
+                        Screen.currentResolution.width * 0.5f - minSize.x / 2,
+                        Screen.currentResolution.height * 0.5f - minSize.y / 2),
+                    minSize);
             }
 
             OnGUIStyle();
@@ -114,8 +110,6 @@ namespace AIO.UEditor
         /// <inheritdoc />
         protected sealed override void Awake()
         {
-            titleContent = Title;
-            minSize = MinSize;
             OnAwake();
         }
 
@@ -129,11 +123,10 @@ namespace AIO.UEditor
         /// <inheritdoc />
         protected sealed override void OnDestroy()
         {
+            OnDisable();
             OnDispose();
             GraphicItems?.Clear();
             GraphicItems = null;
-            GroupList?.Clear();
-            GroupList = null;
             EHelper.Window.Free(this);
         }
 
@@ -141,7 +134,7 @@ namespace AIO.UEditor
 #if UNITY_2019_1_OR_NEWER
         public sealed override IEnumerable<Type> GetExtraPaneTypes()
         {
-            return string.IsNullOrEmpty(Group) ? base.GetExtraPaneTypes() : GroupList;
+            return string.IsNullOrEmpty(Group) ? base.GetExtraPaneTypes() : GetGroup(Group, this);
         }
 #else
         public override IEnumerable<Type> GetExtraPaneTypes()
@@ -184,7 +177,7 @@ namespace AIO.UEditor
         }
 
         /// <summary>
-        /// 关闭时释放
+        /// 关闭时释放 销毁对象
         /// </summary>
         protected virtual void OnDispose()
         {

@@ -14,16 +14,65 @@ namespace AIO.UEditor
     {
         #region MyRegion
 
-        [MenuItem("Tools/AIO/Disable Runtime", false, 0)]
-        public static void Disable()
+        private const string KEY = nameof(AIO) + "." + nameof(UEditor) + "." + nameof(ManageRuntime) + "." + nameof(Setting);
+
+        public static bool IsEnableRuntime => EHelper.Prefs.LoadBoolean(KEY);
+
+        [InitializeOnLoadMethod]
+        [RuntimeInitializeOnLoadMethod]
+        private static void MenuRefresh()
         {
-            Disable(GetInfo(Assembly.GetExecutingAssembly()));
+            Menu.SetChecked("Tools/AIO/Runtime Export", EHelper.Prefs.LoadBoolean(KEY));
         }
 
-        [MenuItem("Tools/AIO/Enable Runtime", false, 0)]
+        [MenuItem("Tools/AIO/Runtime Export", false, 0)]
+        private static void Setting()
+        {
+            EHelper.Prefs.ReverseBoolean(KEY);
+            MenuRefresh();
+        }
+
+        public static void Disable()
+        {
+            var list = new List<Assembly>();
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                var name = assembly.GetName().Name;
+                if (name.Contains("Editor")) continue;
+                if (name.Contains("AIO.T4")) continue;
+                if (name.Contains("AIO.PrCourse")) continue;
+                if (name.Contains("AIO")) Assemblies.Add(assembly.FullName, assembly);
+            }
+
+            Disable(GetInfo(list));
+        }
+
         public static void Enable()
         {
-            Enable(GetInfo(Assembly.GetExecutingAssembly()));
+            var list = new List<Assembly>();
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                var name = assembly.GetName().Name;
+                if (name.Contains("Editor")) continue;
+                if (name.Contains("AIO.T4")) continue;
+                if (name.Contains("AIO.PrCourse")) continue;
+                switch (name)
+                {
+                    case "HtmlAgilityPack":
+                        Assemblies.Add(assembly.FullName, assembly);
+                        continue;
+                    case "ICSharpCode.SharpZipLib":
+                        Assemblies.Add(assembly.FullName, assembly);
+                        continue;
+                    case "YamlDotNet":
+                        Assemblies.Add(assembly.FullName, assembly);
+                        continue;
+                }
+
+                if (name.Contains("AIO")) Assemblies.Add(assembly.FullName, assembly);
+            }
+
+            Enable(GetInfo(list));
         }
 
         private static Dictionary<string, EAssembliesType> GetInfo(Assembly assembly, params Assembly[] assemblies)
@@ -44,9 +93,8 @@ namespace AIO.UEditor
                 foreach (var item in new DirectoryInfo(runtimePath).GetFiles("*", SearchOption.AllDirectories)
                              .Where(f => f.Extension == ".dll" || f.Extension == ".asmdef"))
                 {
-                    Debug.Log(item.Name);
-                    if (assemblyName != item.Name) continue;
-                    var type = item.Extension == "dll" ? EAssembliesType.DLL : EAssembliesType.ADF;
+                    if (assemblyName != item.Name.Replace(item.Extension, "")) continue;
+                    var type = item.Extension.Contains("dll") ? EAssembliesType.DLL : EAssembliesType.ADF;
                     dictionary.Add(item.FullName, type);
                     break;
                 }
@@ -179,66 +227,72 @@ namespace AIO.UEditor
                 }
             }
 
-            provider = new GraphicSettingsProvider("AIO/ADF DLL Manager", SettingsScope.User);
-            provider.label = "Manager";
+            provider = new GraphicSettingsProvider("AIO/ADF-DLL-Manager", SettingsScope.User);
+            provider.label = "ADF DLL Manager";
             provider.guiHandler = delegate
             {
                 GELayout.BeginVertical();
                 GELayout.Space();
 
-                GELayout.BeginHorizontal(GEStyle.HelpBox);
-
-                GELayout.Label("Label", GTOption.WidthExpand(true));
-                GELayout.Label("Change", GEStyle.CenteredLabel, GTOption.Width(120));
-                GELayout.EndHorizontal();
+                using (GELayout.VHorizontal(GEStyle.HelpBox))
+                {
+                    GELayout.Label("Label", GEStyle.CenteredLabel, GTOption.WidthExpand(true));
+                    GELayout.Label("Change", GEStyle.CenteredLabel, GTOption.Width(120));
+                }
 
                 foreach (var assembly in Assemblies)
                 {
                     if (AssembliesCache.ContainsKey(assembly.Key)) continue;
-                    GELayout.BeginHorizontal(GEStyle.HelpBox);
-                    GELayout.Label(assembly.Key);
-
-
-                    if (GELayout.Button("Runtime", 60))
+                    using (GELayout.VHorizontal(GEStyle.HelpBox))
                     {
-                    }
+                        GELayout.Label(assembly.Key);
 
-                    if (GELayout.Button("Editor", 60))
-                    {
-                    }
 
-                    if (GELayout.Button("+", 20))
-                    {
-                        AssembliesCache.Add(assembly.Key, assembly.Value);
-                        return;
-                    }
+                        if (GELayout.Button("Runtime", 60))
+                        {
+                        }
 
-                    GELayout.EndHorizontal();
+                        if (GELayout.Button("Editor", 60))
+                        {
+                        }
+
+                        if (GELayout.Button("+", 20))
+                        {
+                            AssembliesCache.Add(assembly.Key, assembly.Value);
+                            return;
+                        }
+                    }
                 }
 
                 GELayout.Space();
                 GELayout.EndVertical();
 
-                GELayout.BeginHorizontal();
-                if (GELayout.Button("Runtime Run"))
+                using (GELayout.VHorizontal())
                 {
-                    Enable(GetInfo(AssembliesCache.Values));
-                    return;
-                }
+                    if (GELayout.Button("Runtime Run"))
+                    {
+                        Enable(GetInfo(AssembliesCache.Values));
+                        return;
+                    }
 
-                if (GELayout.Button("Editor Run"))
-                {
-                    Disable(GetInfo(AssembliesCache.Values));
-                    return;
-                }
+                    if (GELayout.Button("Editor Run"))
+                    {
+                        Disable(GetInfo(AssembliesCache.Values));
+                        return;
+                    }
 
-                if (GELayout.Button("Clear", 60))
-                {
-                    AssembliesCache.Clear();
-                    return;
-                }
+                    if (GELayout.Button("Add ALL", 60))
+                    {
+                        AssembliesCache = new Dictionary<string, Assembly>(Assemblies);
+                        return;
+                    }
 
-                GELayout.EndHorizontal();
+                    if (GELayout.Button("Clear", 60))
+                    {
+                        AssembliesCache.Clear();
+                        return;
+                    }
+                }
 
                 GELayout.BeginVertical();
                 foreach (var assembly in AssembliesCache.Keys)

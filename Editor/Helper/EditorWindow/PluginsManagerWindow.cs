@@ -10,8 +10,7 @@ namespace AIO.UEditor
     /// 插件管理界面
     /// </summary>
     [GWindow("插件管理界面", Group = "Tools",
-        MinSizeWidth = 200, MinSizeHeight = 600,
-        MaxSizeWidth = 200, MaxSizeHeight = 600
+        MinSizeWidth = 200, MinSizeHeight = 600
     )]
     public class PluginsManagerWindow : GraphicWindow
     {

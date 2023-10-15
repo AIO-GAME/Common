@@ -2,43 +2,86 @@
 #pragma warning disable CS0109 // 
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AIO
 {
     public partial class GELayoutSingleton
     {
+        private static FunctionChunk GetFunctionChunkAction(string Name, FunctionParam[] param)
+        {
+            var chunk = new FunctionChunk
+            {
+                State = TChunkState.Static,
+                Comments = "绘制 空间视图",
+                Name = $"V{Name.TrimStart('V')}",
+                Params = param,
+                ReturnType = "void",
+            };
+            chunk.ContentBuilder.AppendLine("if (action == null) return;");
+            chunk.ContentBuilder.AppendLine($"EditorGUILayout.Begin{Name}({chunk.GetParamValues()});");
+            chunk.ContentBuilder.AppendLine("action?.Invoke();");
+            chunk.ContentBuilder.AppendLine($"EditorGUILayout.End{Name}();");
+            return chunk;
+        }
+
+        private static FunctionChunk GetFunctionChunkScope(string Name, FunctionParam[] param)
+        {
+            var chunk = new FunctionChunk
+            {
+                State = TChunkState.Static,
+                Comments = "绘制 空间视图",
+                Name = $"V{Name.TrimStart('V')}",
+                Params = param,
+                ReturnType = $"EditorGUILayout.{Name}Scope",
+            };
+            chunk.Content = $"return new {chunk.ReturnType}({chunk.GetParamValues()});";
+            return chunk;
+        }
+
+        private static FunctionChunk GetFunctionChunkVoid(string Name, FunctionParam[] param)
+        {
+            var chunk = new FunctionChunk
+            {
+                State = TChunkState.Static,
+                Comments = "开始绘制 空间视图",
+                Name = $"Begin{Name}",
+                Params = param,
+                ReturnType = "void",
+            };
+            chunk.Content = $"EditorGUILayout.Begin{Name}({chunk.GetParamValues()});";
+            return chunk;
+        }
+
         [FuncParam(Group = "Scope Horizontal", IsArray = true)]
         private static List<FunctionChunk> Horizontal()
         {
+            const string Name = nameof(Horizontal);
             var chunks = new List<FunctionChunk>();
-            var value = new FunctionParam("Action", "action", "") { Comments = "回调函数" };
+            var action = new FunctionParam("Action", "action", "") { Comments = "回调函数" };
             var width_float = new FunctionParam("float", "width", "GUILayout.Width(width)") { Comments = "宽度" };
             var height_float = new FunctionParam("float", "height", "GUILayout.Width(height)") { Comments = "高度" };
             var paramsList = new List<FunctionParam[]>()
             {
-                new FunctionParam[] { value, Options, },
-                new FunctionParam[] { value, width_float, },
-                new FunctionParam[] { value, width_float, height_float },
-                new FunctionParam[] { value, Style, Options, },
-                new FunctionParam[] { value, Style, width_float, },
-                new FunctionParam[] { value, Style, width_float, height_float },
+                new FunctionParam[] { action, Options, },
+                new FunctionParam[] { action, width_float, },
+                new FunctionParam[] { action, width_float, height_float },
+                new FunctionParam[] { action, Style, Options, },
+                new FunctionParam[] { action, Style, width_float, },
+                new FunctionParam[] { action, Style, width_float, height_float },
             };
-            foreach (var param in paramsList)
+            chunks.AddRange(paramsList.Select(param => GetFunctionChunkAction(Name, param)));
+
+            paramsList = new List<FunctionParam[]>()
             {
-                var chunk = new FunctionChunk
-                {
-                    State = TChunkState.NewStatic,
-                    Comments = "绘制 横排视图",
-                    Name = "VHorizontal",
-                    Params = param,
-                    ReturnType = "void",
-                };
-                chunk.ContentBuilder.AppendLine("if (action == null) return;");
-                chunk.ContentBuilder.AppendLine($"EditorGUILayout.BeginHorizontal({chunk.GetParamValues()});");
-                chunk.ContentBuilder.AppendLine("action?.Invoke();");
-                chunk.ContentBuilder.AppendLine("EditorGUILayout.EndHorizontal();");
-                chunks.Add(chunk);
-            }
+                new FunctionParam[] { Options, },
+                new FunctionParam[] { width_float, },
+                new FunctionParam[] { width_float, height_float },
+                new FunctionParam[] { Style, Options, },
+                new FunctionParam[] { Style, width_float, },
+                new FunctionParam[] { Style, width_float, height_float },
+            };
+            chunks.AddRange(paramsList.Select(param => GetFunctionChunkScope(Name, param)));
 
             paramsList = new List<FunctionParam[]>()
             {
@@ -49,37 +92,23 @@ namespace AIO
                 new FunctionParam[] { Style, width_float, },
                 new FunctionParam[] { Style, width_float, height_float, },
             };
-            foreach (var param in paramsList)
-            {
-                var chunk = new FunctionChunk
-                {
-                    State = TChunkState.NewStatic,
-                    Comments = "绘制 横排视图",
-                    Name = "BeginHorizontal",
-                    Params = param,
-                    ReturnType = "void",
-                };
-                chunk.Content = $"EditorGUILayout.BeginHorizontal({chunk.GetParamValues()});";
-                chunks.Add(chunk);
-            }
 
+            chunks.AddRange(paramsList.Select(param => GetFunctionChunkVoid(Name, param)));
+            chunks.Add(new FunctionChunk
             {
-                var chunk = new FunctionChunk
-                {
-                    State = TChunkState.NewStatic,
-                    Comments = "绘制 横排视图",
-                    Name = "EndHorizontal",
-                    ReturnType = "void",
-                    Content = "EditorGUILayout.EndHorizontal();"
-                };
-                chunks.Add(chunk);
-            }
+                State = TChunkState.Static,
+                Comments = "结束绘制 空间视图",
+                Name = $"End{Name}",
+                ReturnType = "void",
+                Content = $"EditorGUILayout.End{Name}();"
+            });
             return chunks;
         }
 
         [FuncParam(Group = "Scope Vertical", IsArray = true)]
         private static List<FunctionChunk> Vertical()
         {
+            const string Name = nameof(Vertical);
             var chunks = new List<FunctionChunk>();
             var value = new FunctionParam("Action", "action", "") { Comments = "回调函数" };
             var width_float = new FunctionParam("float", "width", "GUILayout.Width(width)") { Comments = "宽度" };
@@ -93,22 +122,18 @@ namespace AIO
                 new FunctionParam[] { value, Style, width_float, },
                 new FunctionParam[] { value, Style, width_float, height_float },
             };
-            foreach (var param in paramsList)
+            chunks.AddRange(paramsList.Select(param => GetFunctionChunkAction(Name, param)));
+
+            paramsList = new List<FunctionParam[]>()
             {
-                var chunk = new FunctionChunk
-                {
-                    State = TChunkState.NewStatic,
-                    Comments = "绘制 竖排视图",
-                    Name = "Vertical",
-                    Params = param,
-                    ReturnType = "void",
-                };
-                chunk.ContentBuilder.AppendLine("if (action == null) return;");
-                chunk.ContentBuilder.AppendLine($"EditorGUILayout.BeginVertical({chunk.GetParamValues()});");
-                chunk.ContentBuilder.AppendLine("action?.Invoke();");
-                chunk.ContentBuilder.AppendLine("EditorGUILayout.EndVertical();");
-                chunks.Add(chunk);
-            }
+                new FunctionParam[] { Options, },
+                new FunctionParam[] { width_float, },
+                new FunctionParam[] { width_float, height_float },
+                new FunctionParam[] { Style, Options, },
+                new FunctionParam[] { Style, width_float, },
+                new FunctionParam[] { Style, width_float, height_float },
+            };
+            chunks.AddRange(paramsList.Select(param => GetFunctionChunkScope(Name, param)));
 
             paramsList = new List<FunctionParam[]>()
             {
@@ -119,37 +144,22 @@ namespace AIO
                 new FunctionParam[] { Style, width_float, },
                 new FunctionParam[] { Style, width_float, height_float, },
             };
-            foreach (var param in paramsList)
+            chunks.AddRange(paramsList.Select(param => GetFunctionChunkVoid(Name, param)));
+            chunks.Add(new FunctionChunk
             {
-                var chunk = new FunctionChunk
-                {
-                    State = TChunkState.NewStatic,
-                    Comments = "绘制 竖排视图",
-                    Name = "BeginVertical",
-                    Params = param,
-                    ReturnType = "void",
-                };
-                chunk.Content = $"EditorGUILayout.BeginVertical({chunk.GetParamValues()});";
-                chunks.Add(chunk);
-            }
-
-            {
-                var chunk = new FunctionChunk
-                {
-                    State = TChunkState.NewStatic,
-                    Comments = "绘制 竖排视图",
-                    Name = "EndVertical",
-                    ReturnType = "void",
-                    Content = "EditorGUILayout.EndVertical();"
-                };
-                chunks.Add(chunk);
-            }
+                State = TChunkState.Static,
+                Comments = "结束绘制 空间视图",
+                Name = $"End{Name}",
+                ReturnType = "void",
+                Content = $"EditorGUILayout.End{Name}();"
+            });
             return chunks;
         }
 
         [FuncParam(Group = "Scope ScrollView", IsArray = true)]
-        private static List<FunctionChunk> VScrollView()
+        private static List<FunctionChunk> ScrollView()
         {
+            const string Name = nameof(ScrollView);
             var chunks = new List<FunctionChunk>();
             var width_float = new FunctionParam("float", "width", "GUILayout.Width(width)") { Comments = "宽度" };
             var height_float = new FunctionParam("float", "height", "GUILayout.Width(height)") { Comments = "高度" };
@@ -179,9 +189,9 @@ namespace AIO
             {
                 var chunk = new FunctionChunk
                 {
-                    State = TChunkState.NewStatic,
+                    State = TChunkState.Static,
                     Comments = "绘制 滚动视图",
-                    Name = "VScrollView",
+                    Name = $"V{Name}",
                     Params = param,
                     ReturnType = "Vector2",
                 };
@@ -209,9 +219,9 @@ namespace AIO
             {
                 var chunk = new FunctionChunk
                 {
-                    State = TChunkState.NewStatic,
+                    State = TChunkState.Static,
                     Comments = "绘制 滚动视图",
-                    Name = "BeginScrollView",
+                    Name = $"Begin{Name}",
                     Params = param,
                     ReturnType = "Vector2",
                 };
@@ -222,9 +232,9 @@ namespace AIO
             {
                 var chunk = new FunctionChunk
                 {
-                    State = TChunkState.NewStatic,
+                    State = TChunkState.Static,
                     Comments = "绘制 滚动视图",
-                    Name = "EndScrollView",
+                    Name = $"End{Name}",
                     ReturnType = "void",
                     Content = "EditorGUILayout.EndScrollView();"
                 };
@@ -236,8 +246,9 @@ namespace AIO
         }
 
         [FuncParam(Group = "Scope Group", IsArray = true)]
-        private static List<FunctionChunk> VGroup()
+        private static List<FunctionChunk> Group()
         {
+            const string Name = nameof(Group);
             var chunks = new List<FunctionChunk>();
 
             var value = new FunctionParam("Action", "action", "") { Comments = "回调函数" };
@@ -253,9 +264,9 @@ namespace AIO
                 {
                     var chunk = new FunctionChunk
                     {
-                        State = TChunkState.NewStatic,
+                        State = TChunkState.Static,
                         Comments = "绘制 组视图",
-                        Name = "VGroup",
+                        Name = $"A{Name}",
                         Params = param,
                         ReturnType = "bool",
                     };
@@ -275,9 +286,9 @@ namespace AIO
                 {
                     var chunk = new FunctionChunk
                     {
-                        State = TChunkState.NewStatic,
+                        State = TChunkState.Static,
                         Comments = "开始绘制 组视图",
-                        Name = "BeginGroup",
+                        Name = $"Begin{Name}",
                         Params = param,
                         ReturnType = "bool",
                     };
@@ -289,9 +300,9 @@ namespace AIO
             {
                 var chunk = new FunctionChunk
                 {
-                    State = TChunkState.NewStatic,
+                    State = TChunkState.Static,
                     Comments = "结束绘制 组视图",
-                    Name = "EndGroup",
+                    Name = $"End{Name}",
                     ReturnType = "void",
                     Content = "EditorGUILayout.EndToggleGroup();"
                 };
@@ -303,8 +314,9 @@ namespace AIO
         }
 
         [FuncParam(Group = "Scope Group", IsArray = true)]
-        private static List<FunctionChunk> VGroupDisabled()
+        private static List<FunctionChunk> GroupDisabled()
         {
+            const string Name = nameof(GroupDisabled);
             var chunks = new List<FunctionChunk>();
 
             var value = new FunctionParam("Action", "action", "") { Comments = "回调函数" };
@@ -312,9 +324,9 @@ namespace AIO
             {
                 var chunk = new FunctionChunk
                 {
-                    State = TChunkState.NewStatic,
+                    State = TChunkState.Static,
                     Comments = "绘制 禁用组视图",
-                    Name = "VGroupDisabled",
+                    Name = $"A{Name}",
                     Params = new FunctionParam[] { value, toggle, },
                 };
                 chunk.ContentBuilder.AppendLine($"EditorGUI.BeginDisabledGroup({chunk.GetParamValues()});");
@@ -326,9 +338,9 @@ namespace AIO
             {
                 var chunk = new FunctionChunk
                 {
-                    State = TChunkState.NewStatic,
+                    State = TChunkState.Static,
                     Comments = "开始绘制 禁用组视图",
-                    Name = "BeginGroupDisabled",
+                    Name = $"Begin{Name}",
                     Params = new FunctionParam[] { toggle, },
                 };
                 chunk.Content = $"EditorGUI.BeginDisabledGroup({chunk.GetParamValues()});";
@@ -338,9 +350,9 @@ namespace AIO
             {
                 var chunk = new FunctionChunk
                 {
-                    State = TChunkState.NewStatic,
+                    State = TChunkState.Static,
                     Comments = "结束绘制 禁用组视图",
-                    Name = "EndGroupDisabled",
+                    Name = $"End{Name}",
                     ReturnType = "void",
                     Content = "EditorGUI.EndDisabledGroup();"
                 };
@@ -352,17 +364,18 @@ namespace AIO
         }
 
         [FuncParam(Group = "Scope Group", IsArray = true)]
-        private static List<FunctionChunk> VGroupBuildTargetSelection()
+        private static List<FunctionChunk> GroupBuildTargetSelection()
         {
+            const string Name = nameof(GroupBuildTargetSelection);
             var chunks = new List<FunctionChunk>();
 
             var value = new FunctionParam("Action<BuildTargetGroup>", "action", "") { Comments = "回调函数" };
             {
                 var chunk = new FunctionChunk
                 {
-                    State = TChunkState.NewStatic,
+                    State = TChunkState.Static,
                     Comments = "绘制 开始构建目标分组",
-                    Name = "VGroupBuildTargetSelection",
+                    Name = $"A{Name}",
                     Params = new FunctionParam[] { value, },
                     MacroDefinition = "UNITY_2019_1_OR_NEWER",
                 };
@@ -374,9 +387,9 @@ namespace AIO
             {
                 var chunk = new FunctionChunk
                 {
-                    State = TChunkState.NewStatic,
+                    State = TChunkState.Static,
                     Comments = "绘制 开始构建目标分组",
-                    Name = "VGroupBuildTargetSelection",
+                    Name = $"A{Name}",
                     Params = new FunctionParam[] { value, new FunctionParam("BuildTargetGroup", "value") },
                     MacroDefinition = "UNITY_2019_1_OR_NEWER",
                     ReturnType = "BuildTargetGroup",
@@ -391,9 +404,9 @@ namespace AIO
                 var chunk = new FunctionChunk
                 {
                     MacroDefinition = "UNITY_2019_1_OR_NEWER",
-                    State = TChunkState.NewStatic,
+                    State = TChunkState.Static,
                     Comments = "开始绘制 目标分组视图",
-                    Name = "BeginGroupBuildTargetSelection",
+                    Name = $"Begin{Name}",
                     Params = new FunctionParam[] { },
                     ReturnType = "BuildTargetGroup",
                     Content = $"return EditorGUILayout.BeginBuildTargetSelectionGrouping();"
@@ -405,9 +418,9 @@ namespace AIO
                 var chunk = new FunctionChunk
                 {
                     MacroDefinition = "UNITY_2019_1_OR_NEWER",
-                    State = TChunkState.NewStatic,
+                    State = TChunkState.Static,
                     Comments = "结束绘制 目标分组视图",
-                    Name = "EndGroupBuildTargetSelection",
+                    Name = $"End{Name}",
                     ReturnType = "void",
                     Content = "EditorGUILayout.EndBuildTargetSelectionGrouping();"
                 };
@@ -419,8 +432,9 @@ namespace AIO
         }
 
         [FuncParam(Group = "Scope Group", IsArray = true)]
-        private static List<FunctionChunk> VGroupFade()
+        private static List<FunctionChunk> GroupFade()
         {
+            const string Name = nameof(GroupFade);
             var chunks = new List<FunctionChunk>();
 
             var value = new FunctionParam("Action", "action", "") { Comments = "回调函数" };
@@ -428,9 +442,9 @@ namespace AIO
             {
                 var chunk = new FunctionChunk
                 {
-                    State = TChunkState.NewStatic,
+                    State = TChunkState.Static,
                     Comments = "绘制 隐藏显示分组视图",
-                    Name = "VGroupFade",
+                    Name = $"A{Name}",
                     Params = new FunctionParam[] { value, alpha },
                 };
                 chunk.ContentBuilder.AppendLine($"if (action == null) return;");
@@ -441,9 +455,9 @@ namespace AIO
             {
                 var chunk = new FunctionChunk
                 {
-                    State = TChunkState.NewStatic,
+                    State = TChunkState.Static,
                     Comments = "绘制 隐藏显示分组视图",
-                    Name = "VGroupFade",
+                    Name = $"A{Name}",
                     Params = new FunctionParam[]
                     {
                         new FunctionParam(value) { Type = "Action<bool>" },
@@ -461,9 +475,9 @@ namespace AIO
             {
                 var chunk = new FunctionChunk
                 {
-                    State = TChunkState.NewStatic,
+                    State = TChunkState.Static,
                     Comments = "开始绘制 隐藏显示分组视图",
-                    Name = "BeginGroupFade",
+                    Name = $"Begin{Name}",
                     Params = new FunctionParam[] { alpha },
                     ReturnType = "bool",
                     Content = $"return EditorGUILayout.BeginFadeGroup(alpha);"
@@ -474,9 +488,9 @@ namespace AIO
             {
                 var chunk = new FunctionChunk
                 {
-                    State = TChunkState.NewStatic,
+                    State = TChunkState.Static,
                     Comments = "结束绘制 隐藏显示分组视图",
-                    Name = "EndGroupFade",
+                    Name = $"End{Name}",
                     ReturnType = "void",
                     Content = "EditorGUILayout.EndFadeGroup();"
                 };
