@@ -17,65 +17,75 @@ namespace AIO.UEditor
         public const string KEY = nameof(AIO) + "." + nameof(UEditor) + "." + nameof(ManageRuntime) + "." +
                                   nameof(Setting);
 
+        private static IDictionary<string, EAssembliesType> GetEnable()
+        {
+            var list = new Dictionary<string, Assembly>();
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                if (list.ContainsKey(assembly.FullName)) continue;
+                var name = assembly.GetName().Name;
+                if (name.Contains("Editor")) continue;
+                if (name.Contains("editor")) continue;
+                if (name.StartsWith("AIO.T4")) continue;
+                if (name.StartsWith("AIO.PrCourse")) continue;
+                switch (name)
+                {
+                    case "HtmlAgilityPack":
+                        list.Add(assembly.FullName, assembly);
+                        continue;
+                    case "ICSharpCode.SharpZipLib":
+                        list.Add(assembly.FullName, assembly);
+                        continue;
+                    case "YamlDotNet":
+                        list.Add(assembly.FullName, assembly);
+                        continue;
+                }
+
+                if (!name.StartsWith("AIO")) continue;
+                list.Add(assembly.FullName, assembly);
+            }
+
+            return GetInfo(list.Values);
+        }
+
+        private static IDictionary<string, EAssembliesType> GetDisable()
+        {
+            var list = new Dictionary<string, Assembly>();
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                if (list.ContainsKey(assembly.FullName)) continue;
+                var name = assembly.GetName().Name;
+                if (name.Contains("Editor")) continue;
+                if (name.Contains("editor")) continue;
+                if (name.StartsWith("AIO.T4")) continue;
+                if (name.StartsWith("AIO.PrCourse")) continue;
+                if (!name.StartsWith("AIO")) continue;
+                list.Add(assembly.FullName, assembly);
+            }
+
+            return GetInfo(list.Values);
+        }
+
         [InitializeOnLoadMethod]
         [RuntimeInitializeOnLoadMethod]
         private static void MenuRefresh()
         {
             var check = Menu.GetChecked("Tools/AIO/Runtime Export");
             var set = EHelper.Prefs.LoadBoolean(KEY);
-            Menu.SetChecked("Tools/AIO/Runtime Export", set);
             if (check == set) return;
-            if (set)
-            {
-                var list = new Dictionary<string, Assembly>();
-                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-                {
-                    if (list.ContainsKey(assembly.FullName)) continue;
-                    var name = assembly.GetName().Name;
-                    if (name.Contains("Editor")) continue;
-                    if (name.Contains("editor")) continue;
-                    if (name.StartsWith("AIO.T4")) continue;
-                    if (name.StartsWith("AIO.PrCourse")) continue;
-                    switch (name)
-                    {
-                        case "HtmlAgilityPack":
-                            list.Add(assembly.FullName, assembly);
-                            continue;
-                        case "ICSharpCode.SharpZipLib":
-                            list.Add(assembly.FullName, assembly);
-                            continue;
-                        case "YamlDotNet":
-                            list.Add(assembly.FullName, assembly);
-                            continue;
-                    }
-
-                    if (!name.StartsWith("AIO")) continue;
-                    list.Add(assembly.FullName, assembly);
-                }
-
-                EditorUtility.DisplayProgressBar("DLL", "正在开启 AIO Package", 0.99f);
-                Enable(GetInfo(list.Values));
-                EditorUtility.ClearProgressBar();
-            }
-            else
-            {
-                var list = new Dictionary<string, Assembly>();
-                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-                {
-                    if (list.ContainsKey(assembly.FullName)) continue;
-                    var name = assembly.GetName().Name;
-                    if (name.Contains("Editor")) continue;
-                    if (name.Contains("editor")) continue;
-                    if (name.StartsWith("AIO.T4")) continue;
-                    if (name.StartsWith("AIO.PrCourse")) continue;
-                    if (!name.StartsWith("AIO")) continue;
-                    list.Add(assembly.FullName, assembly);
-                }
-
-                EditorUtility.DisplayProgressBar("DLL", "正在关闭 AIO Package", 0.99f);
-                Disable(GetInfo(list.Values));
-                EditorUtility.ClearProgressBar();
-            }
+            Menu.SetChecked("Tools/AIO/Runtime Export", set);
+            // if (set)
+            // {
+            //     EditorUtility.DisplayProgressBar("DLL", "正在开启 AIO Package", 0.99f);
+            //     Enable(GetEnable());
+            //     EditorUtility.ClearProgressBar();
+            // }
+            // else
+            // {
+            //     EditorUtility.DisplayProgressBar("DLL", "正在关闭 AIO Package", 0.99f);
+            //     Disable(GetDisable());
+            //     EditorUtility.ClearProgressBar();
+            // }
         }
 
         [MenuItem("Tools/AIO/Runtime Export", false, 0)]
@@ -126,11 +136,20 @@ namespace AIO.UEditor
             DLL,
         }
 
-        public static void Enable(IDictionary<string, EAssembliesType> dictionary)
+        public static void Enable()
+        {
+            Enable(GetEnable());
+        }
+
+        public static void Disable()
+        {
+            Disable(GetDisable());
+        }
+
+        private static void Enable(IDictionary<string, EAssembliesType> dictionary)
         {
             if (dictionary is null || dictionary.Count == 0) return;
             Selection.activeObject = null;
-            EHelper.Prefs.SaveJsonData(KEY + nameof(Enable), dictionary);
             var project = Application.dataPath.Replace("Assets", "").Replace('/', '\\');
             foreach (var item in dictionary)
             {
@@ -163,10 +182,9 @@ namespace AIO.UEditor
             AssetDatabase.Refresh();
         }
 
-        public static void Disable(IDictionary<string, EAssembliesType> dictionary)
+        private static void Disable(IDictionary<string, EAssembliesType> dictionary)
         {
             if (dictionary is null || dictionary.Count == 0) return;
-            EHelper.Prefs.SaveJsonData(KEY + nameof(Disable), dictionary);
             Selection.activeObject = null;
             var project = Application.dataPath.Replace("Assets", "").Replace('/', '\\');
             foreach (var item in dictionary)
