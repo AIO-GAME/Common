@@ -18,7 +18,7 @@
 
 ## 📖 Documentation
 
-For more info please see - [Documentation](docs/README.md) or [Wiki](https://git.code.tencent.com/UnityLibs/com.self.package/wiki)
+For more info please see - [Documentation](./README.md) or [Wiki](https://git.code.tencent.com/UnityLibs/com.self.package/wiki)
 
 ## 🤖 Demos
 
