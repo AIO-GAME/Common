@@ -2327,6 +2327,13 @@
             执行文件
             </summary>
         </member>
+        <member name="M:AIO.PrMac.Git.PullBranch(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            拉取
+            </summary>
+            <param name="targets">文件路径列表</param>
+            <param name="quit">静默退出</param>
+        </member>
         <member name="M:AIO.PrMac.Git.Pull(System.Collections.Generic.ICollection{System.String},System.Boolean)">
             <summary>
             拉取
@@ -5063,6 +5070,15 @@
             <see cref="T:AIO.PrPlatform"/> Git Commit
             </summary>
             <param name="target">目标路径</param>
+            <param name="quit">静默退出</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Git.PullBranch(System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            <see cref="T:AIO.PrPlatform"/> Git Pull
+            </summary>
+            <param name="targets">目标路径</param>
             <param name="quit">静默退出</param>
             <exception cref="T:System.NotImplementedException">未实现</exception>
             <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
