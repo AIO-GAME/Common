@@ -16,7 +16,7 @@ namespace AIO
         /// <summary>
         /// 16进制 转换为 #FFFFFF
         /// </summary>
-        public static string ToConverHtmlSting(this UnityEngine.Color color)
+        public static string ToConvertHtmlString(this UnityEngine.Color color)
         {
             return ColorUtility.ToHtmlStringRGB(color);
         }
@@ -24,7 +24,7 @@ namespace AIO
         /// <summary>
         /// 16进制 转换为 #FFFFFF
         /// </summary>
-        public static string ToConverHtmlSting(this Color32 color)
+        public static string ToConvertHtmlString(this Color32 color)
         {
             return ColorUtility.ToHtmlStringRGBA(color);
         }

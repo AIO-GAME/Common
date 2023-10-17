@@ -38,27 +38,30 @@ namespace AIO.UEditor
             }
 
             if (array is null) array = new List<T>();
-            foldout = EditorGUILayout.BeginFoldoutHeaderGroup(foldout, label, bgStyle);
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField(label, labelStyle);
-            if (GUILayout.Button("+", GUILayout.Width(20))) array.Add(addFunc.Invoke());
-            EditorGUILayout.EndHorizontal();
-
-            if (tips != null)
+            foldout = EditorGUILayout.BeginFoldoutHeaderGroup(foldout, label.Content, bgStyle);
+            if (foldout)
             {
                 EditorGUILayout.BeginHorizontal();
-                tips.Invoke();
+                EditorGUILayout.LabelField(label.Content, labelStyle);
+                if (GUILayout.Button("+", GUILayout.Width(20))) array.Add(addFunc.Invoke());
                 EditorGUILayout.EndHorizontal();
-            }
 
-            for (var i = array.Count - 1; i >= 0; i--)
-            {
-                var i1 = array.Count - 1 - i;
-                EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField((i1 + 1).ToString("00"), GUILayout.Width(20));
-                showFunc.Invoke(i1);
-                if (GUILayout.Button("-", GUILayout.Width(20))) array.RemoveAt(i1);
-                EditorGUILayout.EndHorizontal();
+                if (tips != null)
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    tips.Invoke();
+                    EditorGUILayout.EndHorizontal();
+                }
+
+                for (var i = array.Count - 1; i >= 0; i--)
+                {
+                    var i1 = array.Count - 1 - i;
+                    EditorGUILayout.BeginHorizontal();
+                    EditorGUILayout.LabelField((i1 + 1).ToString("00"), GUILayout.Width(20));
+                    showFunc.Invoke(i1);
+                    if (GUILayout.Button("-", GUILayout.Width(20))) array.RemoveAt(i1);
+                    EditorGUILayout.EndHorizontal();
+                }
             }
 
             EditorGUILayout.EndFoldoutHeaderGroup();

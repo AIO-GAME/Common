@@ -4801,7 +4801,7 @@ namespace AIO.UEditor
         /// <param name="type">消息类型 <see cref="MessageType"/></param>
         public new static void HelpBox(Vector2 pos, Vector2 size, string message, MessageType type = MessageType.None)
         {
-            EditorGUI.HelpBox(new Rect(pos + size / 2, size), message, type);
+            EditorGUI.HelpBox(new Rect(pos - size / 2, size), message, type);
         }
 
         #endregion
@@ -5107,14 +5107,14 @@ namespace AIO.UEditor
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Action&lt;T&gt;"/></param>
         /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
         /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
         /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle"/></param>
-        public new static void List<T>(GTContent label, IList<T> array, Action tips, Action<T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
+        public static void List<T>(string label, IList<T> array, Action tips, Action<T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
         {
             FieldList(label, array, tips, index => showFunc.Invoke(array[index]), addFunc, labelStyle, bgStyle);
         }
@@ -5122,57 +5122,96 @@ namespace AIO.UEditor
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Action&lt;T&gt;"/></param>
         /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
         /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
-        public new static void List<T>(GTContent label, IList<T> array, Action tips, Action<T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
+        public static void List<T>(string label, IList<T> array, Action tips, Action<T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
         {
-            FieldList(label, array, tips, index => showFunc.Invoke(array[index]), addFunc, labelStyle, GEStyle.DDHeaderStyle);
+            FieldList(label, array, tips, index => showFunc.Invoke(array[index]), addFunc, labelStyle, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Action&lt;T&gt;"/></param>
         /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
-        public new static void List<T>(GTContent label, IList<T> array, Action tips, Action<T> showFunc, Func<T> addFunc) 
+        public static void List<T>(string label, IList<T> array, Action tips, Action<T> showFunc, Func<T> addFunc) 
         {
-            FieldList(label, array, tips, index => showFunc.Invoke(array[index]), addFunc, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            FieldList(label, array, tips, index => showFunc.Invoke(array[index]), addFunc, GEStyle.CenteredLabel, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Action&lt;T&gt;"/></param>
-        public new static void List<T>(GTContent label, IList<T> array, Action tips, Action<T> showFunc) 
+        public static void List<T>(string label, IList<T> array, Action tips, Action<T> showFunc) 
         {
-            FieldList(label, array, tips, index => showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            FieldList(label, array, tips, index => showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Action&lt;T&gt;"/></param>
-        public new static void List<T>(GTContent label, IList<T> array, Action<T> showFunc) 
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
+        /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle"/></param>
+        public static void List<T>(string label, IList<T> array, Action<T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
         {
-            FieldList(label, array, null, index => showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            FieldList(label, array, null, index => showFunc.Invoke(array[index]), addFunc, labelStyle, bgStyle);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Action&lt;T&gt;"/></param>
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
+        public static void List<T>(string label, IList<T> array, Action<T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
+        {
+            FieldList(label, array, null, index => showFunc.Invoke(array[index]), addFunc, labelStyle, null);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Action&lt;T&gt;"/></param>
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        public static void List<T>(string label, IList<T> array, Action<T> showFunc, Func<T> addFunc) 
+        {
+            FieldList(label, array, null, index => showFunc.Invoke(array[index]), addFunc, GEStyle.CenteredLabel, null);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Action&lt;T&gt;"/></param>
+        public static void List<T>(string label, IList<T> array, Action<T> showFunc) 
+        {
+            FieldList(label, array, null, index => showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, null);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
@@ -5181,7 +5220,7 @@ namespace AIO.UEditor
         /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
         /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle"/></param>
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
-        public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Action<T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action tips, Action<T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
         {
             return FieldList(label, array, foldout, tips, index => showFunc.Invoke(array[index]), addFunc, labelStyle, bgStyle);
         }
@@ -5189,7 +5228,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
@@ -5197,64 +5236,109 @@ namespace AIO.UEditor
         /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
         /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
-        public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Action<T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action tips, Action<T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
         {
-            return FieldList(label, array, foldout, tips, index => showFunc.Invoke(array[index]), addFunc, labelStyle, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, tips, index => showFunc.Invoke(array[index]), addFunc, labelStyle, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Action&lt;T&gt;"/></param>
         /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
-        public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Action<T> showFunc, Func<T> addFunc) 
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action tips, Action<T> showFunc, Func<T> addFunc) 
         {
-            return FieldList(label, array, foldout, tips, index => showFunc.Invoke(array[index]), addFunc, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, tips, index => showFunc.Invoke(array[index]), addFunc, GEStyle.CenteredLabel, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Action&lt;T&gt;"/></param>
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
-        public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Action<T> showFunc) 
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action tips, Action<T> showFunc) 
         {
-            return FieldList(label, array, foldout, tips, index => showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, tips, index => showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Action&lt;T&gt;"/></param>
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
+        /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle"/></param>
+        /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action<T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
+        {
+            return FieldList(label, array, foldout, null, index => showFunc.Invoke(array[index]), addFunc, labelStyle, bgStyle);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Action&lt;T&gt;"/></param>
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
+        /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action<T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
+        {
+            return FieldList(label, array, foldout, null, index => showFunc.Invoke(array[index]), addFunc, labelStyle, null);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Action&lt;T&gt;"/></param>
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action<T> showFunc, Func<T> addFunc) 
+        {
+            return FieldList(label, array, foldout, null, index => showFunc.Invoke(array[index]), addFunc, GEStyle.CenteredLabel, null);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Action&lt;T&gt;"/></param>
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
-        public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action<T> showFunc) 
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action<T> showFunc) 
         {
-            return FieldList(label, array, foldout, null, index => showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, null, index => showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Action&lt;int, T&gt;"/></param>
         /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
         /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
         /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle"/></param>
-        public new static void List<T>(GTContent label, IList<T> array, Action tips, Action<int, T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
+        public static void List<T>(string label, IList<T> array, Action tips, Action<int, T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
         {
             FieldList(label, array, tips, index => showFunc.Invoke(index, array[index]), addFunc, labelStyle, bgStyle);
         }
@@ -5262,57 +5346,96 @@ namespace AIO.UEditor
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Action&lt;int, T&gt;"/></param>
         /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
         /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
-        public new static void List<T>(GTContent label, IList<T> array, Action tips, Action<int, T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
+        public static void List<T>(string label, IList<T> array, Action tips, Action<int, T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
         {
-            FieldList(label, array, tips, index => showFunc.Invoke(index, array[index]), addFunc, labelStyle, GEStyle.DDHeaderStyle);
+            FieldList(label, array, tips, index => showFunc.Invoke(index, array[index]), addFunc, labelStyle, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Action&lt;int, T&gt;"/></param>
         /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
-        public new static void List<T>(GTContent label, IList<T> array, Action tips, Action<int, T> showFunc, Func<T> addFunc) 
+        public static void List<T>(string label, IList<T> array, Action tips, Action<int, T> showFunc, Func<T> addFunc) 
         {
-            FieldList(label, array, tips, index => showFunc.Invoke(index, array[index]), addFunc, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            FieldList(label, array, tips, index => showFunc.Invoke(index, array[index]), addFunc, GEStyle.CenteredLabel, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Action&lt;int, T&gt;"/></param>
-        public new static void List<T>(GTContent label, IList<T> array, Action tips, Action<int, T> showFunc) 
+        public static void List<T>(string label, IList<T> array, Action tips, Action<int, T> showFunc) 
         {
-            FieldList(label, array, tips, index => showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            FieldList(label, array, tips, index => showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Action&lt;int, T&gt;"/></param>
-        public new static void List<T>(GTContent label, IList<T> array, Action<int, T> showFunc) 
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
+        /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle"/></param>
+        public static void List<T>(string label, IList<T> array, Action<int, T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
         {
-            FieldList(label, array, null, index => showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            FieldList(label, array, null, index => showFunc.Invoke(index, array[index]), addFunc, labelStyle, bgStyle);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Action&lt;int, T&gt;"/></param>
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
+        public static void List<T>(string label, IList<T> array, Action<int, T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
+        {
+            FieldList(label, array, null, index => showFunc.Invoke(index, array[index]), addFunc, labelStyle, null);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Action&lt;int, T&gt;"/></param>
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        public static void List<T>(string label, IList<T> array, Action<int, T> showFunc, Func<T> addFunc) 
+        {
+            FieldList(label, array, null, index => showFunc.Invoke(index, array[index]), addFunc, GEStyle.CenteredLabel, null);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Action&lt;int, T&gt;"/></param>
+        public static void List<T>(string label, IList<T> array, Action<int, T> showFunc) 
+        {
+            FieldList(label, array, null, index => showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, null);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
@@ -5321,7 +5444,7 @@ namespace AIO.UEditor
         /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
         /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle"/></param>
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
-        public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Action<int, T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action tips, Action<int, T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
         {
             return FieldList(label, array, foldout, tips, index => showFunc.Invoke(index, array[index]), addFunc, labelStyle, bgStyle);
         }
@@ -5329,7 +5452,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
@@ -5337,64 +5460,109 @@ namespace AIO.UEditor
         /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
         /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
-        public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Action<int, T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action tips, Action<int, T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
         {
-            return FieldList(label, array, foldout, tips, index => showFunc.Invoke(index, array[index]), addFunc, labelStyle, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, tips, index => showFunc.Invoke(index, array[index]), addFunc, labelStyle, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Action&lt;int, T&gt;"/></param>
         /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
-        public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Action<int, T> showFunc, Func<T> addFunc) 
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action tips, Action<int, T> showFunc, Func<T> addFunc) 
         {
-            return FieldList(label, array, foldout, tips, index => showFunc.Invoke(index, array[index]), addFunc, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, tips, index => showFunc.Invoke(index, array[index]), addFunc, GEStyle.CenteredLabel, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Action&lt;int, T&gt;"/></param>
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
-        public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Action<int, T> showFunc) 
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action tips, Action<int, T> showFunc) 
         {
-            return FieldList(label, array, foldout, tips, index => showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, tips, index => showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Action&lt;int, T&gt;"/></param>
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
+        /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle"/></param>
+        /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action<int, T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
+        {
+            return FieldList(label, array, foldout, null, index => showFunc.Invoke(index, array[index]), addFunc, labelStyle, bgStyle);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Action&lt;int, T&gt;"/></param>
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
+        /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action<int, T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
+        {
+            return FieldList(label, array, foldout, null, index => showFunc.Invoke(index, array[index]), addFunc, labelStyle, null);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Action&lt;int, T&gt;"/></param>
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action<int, T> showFunc, Func<T> addFunc) 
+        {
+            return FieldList(label, array, foldout, null, index => showFunc.Invoke(index, array[index]), addFunc, GEStyle.CenteredLabel, null);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Action&lt;int, T&gt;"/></param>
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
-        public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action<int, T> showFunc) 
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action<int, T> showFunc) 
         {
-            return FieldList(label, array, foldout, null, index => showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, null, index => showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Func&lt;T, T&gt;"/></param>
         /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
         /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
         /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle"/></param>
-        public new static void List<T>(GTContent label, IList<T> array, Action tips, Func<T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
+        public static void List<T>(string label, IList<T> array, Action tips, Func<T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
         {
             FieldList(label, array, tips, index => array[index] = showFunc.Invoke(array[index]), addFunc, labelStyle, bgStyle);
         }
@@ -5402,57 +5570,96 @@ namespace AIO.UEditor
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Func&lt;T, T&gt;"/></param>
         /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
         /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
-        public new static void List<T>(GTContent label, IList<T> array, Action tips, Func<T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
+        public static void List<T>(string label, IList<T> array, Action tips, Func<T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
         {
-            FieldList(label, array, tips, index => array[index] = showFunc.Invoke(array[index]), addFunc, labelStyle, GEStyle.DDHeaderStyle);
+            FieldList(label, array, tips, index => array[index] = showFunc.Invoke(array[index]), addFunc, labelStyle, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Func&lt;T, T&gt;"/></param>
         /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
-        public new static void List<T>(GTContent label, IList<T> array, Action tips, Func<T, T> showFunc, Func<T> addFunc) 
+        public static void List<T>(string label, IList<T> array, Action tips, Func<T, T> showFunc, Func<T> addFunc) 
         {
-            FieldList(label, array, tips, index => array[index] = showFunc.Invoke(array[index]), addFunc, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            FieldList(label, array, tips, index => array[index] = showFunc.Invoke(array[index]), addFunc, GEStyle.CenteredLabel, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Func&lt;T, T&gt;"/></param>
-        public new static void List<T>(GTContent label, IList<T> array, Action tips, Func<T, T> showFunc) 
+        public static void List<T>(string label, IList<T> array, Action tips, Func<T, T> showFunc) 
         {
-            FieldList(label, array, tips, index => array[index] = showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            FieldList(label, array, tips, index => array[index] = showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Func&lt;T, T&gt;"/></param>
-        public new static void List<T>(GTContent label, IList<T> array, Func<T, T> showFunc) 
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
+        /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle"/></param>
+        public static void List<T>(string label, IList<T> array, Func<T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
         {
-            FieldList(label, array, null, index => array[index] = showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            FieldList(label, array, null, index => array[index] = showFunc.Invoke(array[index]), addFunc, labelStyle, bgStyle);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Func&lt;T, T&gt;"/></param>
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
+        public static void List<T>(string label, IList<T> array, Func<T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
+        {
+            FieldList(label, array, null, index => array[index] = showFunc.Invoke(array[index]), addFunc, labelStyle, null);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Func&lt;T, T&gt;"/></param>
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        public static void List<T>(string label, IList<T> array, Func<T, T> showFunc, Func<T> addFunc) 
+        {
+            FieldList(label, array, null, index => array[index] = showFunc.Invoke(array[index]), addFunc, GEStyle.CenteredLabel, null);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Func&lt;T, T&gt;"/></param>
+        public static void List<T>(string label, IList<T> array, Func<T, T> showFunc) 
+        {
+            FieldList(label, array, null, index => array[index] = showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, null);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
@@ -5461,7 +5668,7 @@ namespace AIO.UEditor
         /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
         /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle"/></param>
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
-        public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Func<T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action tips, Func<T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
         {
             return FieldList(label, array, foldout, tips, index => array[index] = showFunc.Invoke(array[index]), addFunc, labelStyle, bgStyle);
         }
@@ -5469,7 +5676,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
@@ -5477,64 +5684,109 @@ namespace AIO.UEditor
         /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
         /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
-        public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Func<T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action tips, Func<T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
         {
-            return FieldList(label, array, foldout, tips, index => array[index] = showFunc.Invoke(array[index]), addFunc, labelStyle, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, tips, index => array[index] = showFunc.Invoke(array[index]), addFunc, labelStyle, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Func&lt;T, T&gt;"/></param>
         /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
-        public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Func<T, T> showFunc, Func<T> addFunc) 
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action tips, Func<T, T> showFunc, Func<T> addFunc) 
         {
-            return FieldList(label, array, foldout, tips, index => array[index] = showFunc.Invoke(array[index]), addFunc, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, tips, index => array[index] = showFunc.Invoke(array[index]), addFunc, GEStyle.CenteredLabel, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Func&lt;T, T&gt;"/></param>
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
-        public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Func<T, T> showFunc) 
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action tips, Func<T, T> showFunc) 
         {
-            return FieldList(label, array, foldout, tips, index => array[index] = showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, tips, index => array[index] = showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Func&lt;T, T&gt;"/></param>
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
+        /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle"/></param>
+        /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
+        public static bool List<T>(string label, IList<T> array, bool foldout, Func<T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
+        {
+            return FieldList(label, array, foldout, null, index => array[index] = showFunc.Invoke(array[index]), addFunc, labelStyle, bgStyle);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Func&lt;T, T&gt;"/></param>
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
+        /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
+        public static bool List<T>(string label, IList<T> array, bool foldout, Func<T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
+        {
+            return FieldList(label, array, foldout, null, index => array[index] = showFunc.Invoke(array[index]), addFunc, labelStyle, null);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Func&lt;T, T&gt;"/></param>
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
+        public static bool List<T>(string label, IList<T> array, bool foldout, Func<T, T> showFunc, Func<T> addFunc) 
+        {
+            return FieldList(label, array, foldout, null, index => array[index] = showFunc.Invoke(array[index]), addFunc, GEStyle.CenteredLabel, null);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Func&lt;T, T&gt;"/></param>
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
-        public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Func<T, T> showFunc) 
+        public static bool List<T>(string label, IList<T> array, bool foldout, Func<T, T> showFunc) 
         {
-            return FieldList(label, array, foldout, null, index => array[index] = showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, null, index => array[index] = showFunc.Invoke(array[index]), () => default, GEStyle.CenteredLabel, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Func&lt;int, T, T&gt;"/></param>
         /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
         /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
         /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle"/></param>
-        public new static void List<T>(GTContent label, IList<T> array, Action tips, Func<int, T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
+        public static void List<T>(string label, IList<T> array, Action tips, Func<int, T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
         {
             FieldList(label, array, tips, index => array[index] = showFunc.Invoke(index, array[index]), addFunc, labelStyle, bgStyle);
         }
@@ -5542,57 +5794,96 @@ namespace AIO.UEditor
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Func&lt;int, T, T&gt;"/></param>
         /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
         /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
-        public new static void List<T>(GTContent label, IList<T> array, Action tips, Func<int, T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
+        public static void List<T>(string label, IList<T> array, Action tips, Func<int, T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
         {
-            FieldList(label, array, tips, index => array[index] = showFunc.Invoke(index, array[index]), addFunc, labelStyle, GEStyle.DDHeaderStyle);
+            FieldList(label, array, tips, index => array[index] = showFunc.Invoke(index, array[index]), addFunc, labelStyle, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Func&lt;int, T, T&gt;"/></param>
         /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
-        public new static void List<T>(GTContent label, IList<T> array, Action tips, Func<int, T, T> showFunc, Func<T> addFunc) 
+        public static void List<T>(string label, IList<T> array, Action tips, Func<int, T, T> showFunc, Func<T> addFunc) 
         {
-            FieldList(label, array, tips, index => array[index] = showFunc.Invoke(index, array[index]), addFunc, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            FieldList(label, array, tips, index => array[index] = showFunc.Invoke(index, array[index]), addFunc, GEStyle.CenteredLabel, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Func&lt;int, T, T&gt;"/></param>
-        public new static void List<T>(GTContent label, IList<T> array, Action tips, Func<int, T, T> showFunc) 
+        public static void List<T>(string label, IList<T> array, Action tips, Func<int, T, T> showFunc) 
         {
-            FieldList(label, array, tips, index => array[index] = showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            FieldList(label, array, tips, index => array[index] = showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Func&lt;int, T, T&gt;"/></param>
-        public new static void List<T>(GTContent label, IList<T> array, Func<int, T, T> showFunc) 
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
+        /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle"/></param>
+        public static void List<T>(string label, IList<T> array, Func<int, T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
         {
-            FieldList(label, array, null, index => array[index] = showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            FieldList(label, array, null, index => array[index] = showFunc.Invoke(index, array[index]), addFunc, labelStyle, bgStyle);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Func&lt;int, T, T&gt;"/></param>
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
+        public static void List<T>(string label, IList<T> array, Func<int, T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
+        {
+            FieldList(label, array, null, index => array[index] = showFunc.Invoke(index, array[index]), addFunc, labelStyle, null);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Func&lt;int, T, T&gt;"/></param>
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        public static void List<T>(string label, IList<T> array, Func<int, T, T> showFunc, Func<T> addFunc) 
+        {
+            FieldList(label, array, null, index => array[index] = showFunc.Invoke(index, array[index]), addFunc, GEStyle.CenteredLabel, null);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Func&lt;int, T, T&gt;"/></param>
+        public static void List<T>(string label, IList<T> array, Func<int, T, T> showFunc) 
+        {
+            FieldList(label, array, null, index => array[index] = showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, null);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
@@ -5601,7 +5892,7 @@ namespace AIO.UEditor
         /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
         /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle"/></param>
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
-        public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Func<int, T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action tips, Func<int, T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
         {
             return FieldList(label, array, foldout, tips, index => array[index] = showFunc.Invoke(index, array[index]), addFunc, labelStyle, bgStyle);
         }
@@ -5609,7 +5900,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
@@ -5617,51 +5908,96 @@ namespace AIO.UEditor
         /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
         /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
-        public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Func<int, T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action tips, Func<int, T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
         {
-            return FieldList(label, array, foldout, tips, index => array[index] = showFunc.Invoke(index, array[index]), addFunc, labelStyle, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, tips, index => array[index] = showFunc.Invoke(index, array[index]), addFunc, labelStyle, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Func&lt;int, T, T&gt;"/></param>
         /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
-        public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Func<int, T, T> showFunc, Func<T> addFunc) 
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action tips, Func<int, T, T> showFunc, Func<T> addFunc) 
         {
-            return FieldList(label, array, foldout, tips, index => array[index] = showFunc.Invoke(index, array[index]), addFunc, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, tips, index => array[index] = showFunc.Invoke(index, array[index]), addFunc, GEStyle.CenteredLabel, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
         /// <param name="tips">提示信息回调函数 <see cref="Action"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Func&lt;int, T, T&gt;"/></param>
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
-        public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Action tips, Func<int, T, T> showFunc) 
+        public static bool List<T>(string label, IList<T> array, bool foldout, Action tips, Func<int, T, T> showFunc) 
         {
-            return FieldList(label, array, foldout, tips, index => array[index] = showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, tips, index => array[index] = showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, null);
         }
 
         /// <summary>
         /// 绘制 List 列表 
         /// </summary>
-        /// <param name="label">标签 <see cref="GTContent"/></param>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Func&lt;int, T, T&gt;"/></param>
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
+        /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle"/></param>
+        /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
+        public static bool List<T>(string label, IList<T> array, bool foldout, Func<int, T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle, GUIStyle bgStyle) 
+        {
+            return FieldList(label, array, foldout, null, index => array[index] = showFunc.Invoke(index, array[index]), addFunc, labelStyle, bgStyle);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Func&lt;int, T, T&gt;"/></param>
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
+        /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
+        public static bool List<T>(string label, IList<T> array, bool foldout, Func<int, T, T> showFunc, Func<T> addFunc, GUIStyle labelStyle) 
+        {
+            return FieldList(label, array, foldout, null, index => array[index] = showFunc.Invoke(index, array[index]), addFunc, labelStyle, null);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
+        /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
+        /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Func&lt;int, T, T&gt;"/></param>
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
+        /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
+        public static bool List<T>(string label, IList<T> array, bool foldout, Func<int, T, T> showFunc, Func<T> addFunc) 
+        {
+            return FieldList(label, array, foldout, null, index => array[index] = showFunc.Invoke(index, array[index]), addFunc, GEStyle.CenteredLabel, null);
+        }
+
+        /// <summary>
+        /// 绘制 List 列表 
+        /// </summary>
+        /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">列表数据 <see cref="IList&lt;T&gt;"/></param>
         /// <param name="foldout">是否展开列表 <see cref="bool"/></param>
         /// <param name="showFunc">显示回调函数 <see cref="Func&lt;int, T, T&gt;"/></param>
         /// <returns>Ture: 打开列表, False: 关闭列表<see cref="bool"/></returns>
-        public new static bool List<T>(GTContent label, IList<T> array, bool foldout, Func<int, T, T> showFunc) 
+        public static bool List<T>(string label, IList<T> array, bool foldout, Func<int, T, T> showFunc) 
         {
-            return FieldList(label, array, foldout, null, index => array[index] = showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, GEStyle.DDHeaderStyle);
+            return FieldList(label, array, foldout, null, index => array[index] = showFunc.Invoke(index, array[index]), () => default, GEStyle.CenteredLabel, null);
         }
 
         #endregion

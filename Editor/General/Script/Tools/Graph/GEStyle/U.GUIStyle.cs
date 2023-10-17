@@ -24,11 +24,16 @@ namespace AIO.UEditor
             if (!StylesDic.ContainsKey(name)) StylesDic.Add(name, new UGUIStyle(name));
             return StylesDic[name];
         }
-
+        
         /// <summary>
         ///
         /// </summary>
         public static UGUIStyle PRInsertion => Get("PR Insertion");
+        
+        /// <summary>
+        ///
+        /// </summary>
+        public static UGUIStyle ToggleMixed => Get("ToggleMixed");
 
         /// <summary>
         ///

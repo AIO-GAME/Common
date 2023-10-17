@@ -60,7 +60,7 @@ namespace AIO
             var chunks = new List<FunctionChunk>();
             var rect = new FunctionParam("Rect", "rect", "rect") { Comments = "矩形" };
             var type = new FunctionParam("MessageType", "type", "type") { Comments = "消息类型", Default = "MessageType.None", };
-            var pos = new FunctionParam("Vector2", "pos", "new Rect(pos + size / 2, size)") { Comments = "位置信息" };
+            var pos = new FunctionParam("Vector2", "pos", "new Rect(pos - size / 2, size)") { Comments = "位置信息" };
             var size = new FunctionParam("Vector2", "size", "") { Comments = "大小信息" };
             foreach (var item in new string[] { "string", })
             {
