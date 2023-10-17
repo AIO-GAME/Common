@@ -75,18 +75,18 @@ namespace AIO.UEditor
             /// <summary>
             /// 设置层级信息
             /// </summary>
-            /// <param name="layerindex">0-31</param>
-            /// <param name="namevalue">层级名</param>
-            public static void Set(byte layerindex, string namevalue)
+            /// <param name="layerIndex">0-31</param>
+            /// <param name="nameValue">层级名</param>
+            public static void Set(byte layerIndex, string nameValue)
             {
 #if !UNITY_2020_1_OR_NEWER
                 return;
 #else
-                if (layerindex >= 31) return;
+                if (layerIndex >= 31) return;
                 var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>("ProjectSettings/TagManager.asset");
                 var objects = new SerializedObject(asset);
                 var layers = objects.FindProperty("layers");
-                layers.GetArrayElementAtIndex(layerindex).stringValue = namevalue;
+                layers.GetArrayElementAtIndex(layerIndex).stringValue = nameValue;
                 objects.UpdateIfRequiredOrScript();
                 objects.ApplyModifiedProperties();
                 AssetDatabase.SaveAssetIfDirty(asset);
@@ -96,42 +96,42 @@ namespace AIO.UEditor
             /// <summary>
             /// 添加层级信息
             /// </summary>
-            /// <param name="agrs">层级信息</param>
+            /// <param name="agr">层级信息</param>
             /// <param name="order">Ture:从头开始 False:从尾开始</param>
-            public static void Add(string agrs, bool order = true)
+            public static void Add(string agr, bool order = true)
             {
-                Add(new string[] { agrs }, order);
+                Add(new string[] { agr }, order);
             }
 
             /// <summary>
             /// 添加层级信息
             /// </summary>
-            /// <param name="agrs">层级信息</param>
+            /// <param name="agrList">层级信息</param>
             /// <param name="order">Ture:从头开始 False:从尾开始</param>
-            public static void Add(IList<string> agrs, bool order = true)
+            public static void Add(IList<string> agrList, bool order = true)
             {
 #if !UNITY_2020_1_OR_NEWER
                 return;
 #else
-                if (agrs.Count <= 0) return;
+                if (agrList.Count <= 0) return;
                 var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>("ProjectSettings/TagManager.asset");
                 var objects = new SerializedObject(asset);
                 var layers = objects.FindProperty("layers");
                 var index = 0;
                 if (order)
                 {
-                    for (var i = 4; i < layers.arraySize && index < agrs.Count; i++)
+                    for (var i = 4; i < layers.arraySize && index < agrList.Count; i++)
                     {
                         if (!string.IsNullOrEmpty(layers.GetArrayElementAtIndex(i).stringValue)) continue;
-                        layers.GetArrayElementAtIndex(i).stringValue = agrs[index++];
+                        layers.GetArrayElementAtIndex(i).stringValue = agrList[index++];
                     }
                 }
                 else
                 {
-                    for (var i = layers.arraySize - 1; i > 4 && index < agrs.Count; i--)
+                    for (var i = layers.arraySize - 1; i > 4 && index < agrList.Count; i--)
                     {
                         if (!string.IsNullOrEmpty(layers.GetArrayElementAtIndex(i).stringValue)) continue;
-                        layers.GetArrayElementAtIndex(i).stringValue = agrs[index++];
+                        layers.GetArrayElementAtIndex(i).stringValue = agrList[index++];
                     }
                 }
 
