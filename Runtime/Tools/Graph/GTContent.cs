@@ -200,21 +200,21 @@ namespace AIO
         public GTContent(string content, params GUILayoutOption[] options)
         {
             Content = new GUIContent(content);
-            Options = new List<GUILayoutOption> { options };
+            Options = new List<GUILayoutOption>(options);
             Style = null;
         }
 
         public GTContent(GUIContent content, params GUILayoutOption[] options)
         {
             Content = content;
-            Options = new List<GUILayoutOption> { options };
+            Options = new List<GUILayoutOption>(options);
             Style = null;
         }
 
         public GTContent(Texture content, params GUILayoutOption[] options)
         {
             Content = new GUIContent(content);
-            Options = new List<GUILayoutOption> { options };
+            Options = new List<GUILayoutOption>(options);
             Style = null;
         }
 
@@ -248,7 +248,7 @@ namespace AIO
         private GTContent(IEnumerable<GUILayoutOption> options)
         {
             Content = GUIContent.none;
-            Options = new List<GUILayoutOption> { options };
+            Options = new List<GUILayoutOption>(options);
             Style = null;
         }
 

@@ -200,7 +200,7 @@ namespace AIO.UEditor
         /// </summary>
         public static void CopyAction(Color contents)
         {
-            var textEditor = new TextEditor { text = contents.ToConverHtmlSting() };
+            var textEditor = new TextEditor { text = contents.ToConvertHtmlString() };
             textEditor.OnFocus();
             textEditor.Copy();
         }
@@ -210,7 +210,7 @@ namespace AIO.UEditor
         /// </summary>
         public static void CopyAction(Color32 contents)
         {
-            var textEditor = new TextEditor { text = contents.ToConverHtmlSting() };
+            var textEditor = new TextEditor { text = contents.ToConvertHtmlString() };
             textEditor.OnFocus();
             textEditor.Copy();
         }
