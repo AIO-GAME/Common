@@ -241,8 +241,8 @@ namespace AIO.UEditor
                 var name = assembly.GetName().Name;
                 if (name.Contains("editor")) continue;
                 if (name.Contains("Editor")) continue;
-                if (name.Contains("AIO.T4")) continue;
-                if (name.Contains("AIO.PrCourse")) continue;
+                if (name.StartsWith("AIO.T4")) continue;
+                if (name.StartsWith("AIO.PrCourse")) continue;
                 if (name == "HtmlAgilityPack")
                 {
                     Assemblies.Add(assembly.FullName, assembly);
@@ -271,32 +271,36 @@ namespace AIO.UEditor
             provider.label = "ADF DLL Manager";
             provider.guiHandler = delegate
             {
-                GELayout.BeginVertical();
-                GELayout.Space();
+                GUILayout.BeginVertical();
+                GUILayout.Space(10);
 
-                using (GELayout.VHorizontal(GEStyle.HelpBox))
+                using (new GUILayout.HorizontalScope(GEStyle.HelpBox))
                 {
-                    GELayout.Label("Label", GEStyle.CenteredLabel, GTOption.WidthExpand(true));
-                    GELayout.Label("Change", GEStyle.CenteredLabel, GTOption.Width(120));
+                    GUILayout.Label("Label", GEStyle.CenteredLabel, GUILayout.ExpandWidth(true));
+                    GUILayout.Label("Change", GEStyle.CenteredLabel, GUILayout.Width(120));
                 }
 
                 foreach (var assembly in Assemblies)
                 {
                     if (AssembliesCache.ContainsKey(assembly.Key)) continue;
-                    using (GELayout.VHorizontal(GEStyle.HelpBox))
+                    using (new GUILayout.HorizontalScope(GEStyle.HelpBox))
                     {
-                        GELayout.Label(assembly.Key);
+                        GUILayout.Label(assembly.Key);
 
 
-                        if (GELayout.Button("Runtime", 60))
+                        if (GUILayout.Button("Runtime", GUILayout.Width(60)))
                         {
+                            Enable(GetInfo(assembly.Value));
+                            return;
                         }
 
-                        if (GELayout.Button("Editor", 60))
+                        if (GUILayout.Button("Editor", GUILayout.Width(60)))
                         {
+                            Disable(GetInfo(assembly.Value));
+                            return;
                         }
 
-                        if (GELayout.Button("+", 20))
+                        if (GUILayout.Button("+", GUILayout.Width(20)))
                         {
                             AssembliesCache.Add(assembly.Key, assembly.Value);
                             return;
@@ -304,51 +308,51 @@ namespace AIO.UEditor
                     }
                 }
 
-                GELayout.Space();
-                GELayout.EndVertical();
+                GUILayout.Space(10);
+                GUILayout.EndVertical();
 
-                using (GELayout.VHorizontal())
+                using (new GUILayout.HorizontalScope())
                 {
-                    if (GELayout.Button("Runtime Run"))
+                    if (GUILayout.Button("Runtime Run"))
                     {
                         Enable(GetInfo(AssembliesCache.Values));
                         return;
                     }
 
-                    if (GELayout.Button("Editor Run"))
+                    if (GUILayout.Button("Editor Run"))
                     {
                         Disable(GetInfo(AssembliesCache.Values));
                         return;
                     }
 
-                    if (GELayout.Button("Add ALL", 60))
+                    if (GUILayout.Button("Add ALL", GUILayout.Width(60)))
                     {
                         AssembliesCache = new Dictionary<string, Assembly>(Assemblies);
                         return;
                     }
 
-                    if (GELayout.Button("Clear", 60))
+                    if (GUILayout.Button("Clear", GUILayout.Width(60)))
                     {
                         AssembliesCache.Clear();
                         return;
                     }
                 }
 
-                GELayout.BeginVertical();
+                GUILayout.BeginVertical();
                 foreach (var assembly in AssembliesCache.Keys)
                 {
-                    GELayout.BeginHorizontal(GEStyle.HelpBox);
-                    GELayout.Label(assembly);
-                    if (GELayout.Button("-", 20))
+                    GUILayout.BeginHorizontal(GEStyle.HelpBox);
+                    GUILayout.Label(assembly);
+                    if (GUILayout.Button("-", GUILayout.Width(20)))
                     {
                         AssembliesCache.Remove(assembly);
                         return;
                     }
 
-                    GELayout.EndHorizontal();
+                    GUILayout.EndHorizontal();
                 }
 
-                GELayout.EndVertical();
+                GUILayout.EndVertical();
             };
             return provider;
         }

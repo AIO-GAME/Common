@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Compilation;
@@ -9,9 +10,7 @@ namespace AIO.UEditor
     /// <summary>
     /// 插件管理界面
     /// </summary>
-    [GWindow("插件管理界面", Group = "Tools",
-        MinSizeWidth = 200, MinSizeHeight = 600
-    )]
+    [GWindow("插件管理界面", Group = "Tools", MinSizeWidth = 200, MinSizeHeight = 600)]
     public class PluginsManagerWindow : GraphicWindow
     {
         protected Vector2 Vector;
@@ -31,6 +30,16 @@ namespace AIO.UEditor
         /// </summary>
         internal List<string> UnInstallIndexList;
 
+        private bool InstallIsSelect = false;
+
+        private Dictionary<string, bool> InstallIsSelectDic;
+
+        private Dictionary<string, bool> DetailDic;
+
+        private bool UnInstallIsSelect = false;
+
+        private Dictionary<string, bool> UnInstallIsSelectDic;
+
         internal string Root;
 
         public PluginsManagerWindow()
@@ -43,9 +52,27 @@ namespace AIO.UEditor
             InstallIndexList = new List<string>();
         }
 
+        ~PluginsManagerWindow()
+        {
+            UnInstallIsSelectDic.Clear();
+            InstallIsSelectDic.Clear();
+            RootData.Clear();
+            DetailDic.Clear();
+            InstallIndexList.Clear();
+            UnInstallIndexList.Clear();
+            RootData = null;
+            DetailDic = null;
+            InstallIndexList = null;
+            UnInstallIndexList = null;
+            InstallIsSelectDic = null;
+            UnInstallIsSelectDic = null;
+        }
+
         protected override void OnActivation()
         {
-            Root = Application.dataPath.Replace("Assets", "Packages");
+            var root = Directory.GetParent(Application.dataPath);
+            if (root is null) throw new DirectoryNotFoundException("未找到 Application.dataPath 根目录");
+            Root = Path.Combine(root.FullName, "Packages");
             UpdateData();
         }
 
@@ -97,19 +124,7 @@ namespace AIO.UEditor
 
         private void HeaderView()
         {
-        }
-
-        private bool InstallIsSelect = false;
-
-        private Dictionary<string, bool> InstallIsSelectDic;
-        private Dictionary<string, bool> DetailDic;
-
-        private void InstallView()
-        {
-            if (InstallIndexList.Count == 0) return;
-
-            EditorGUILayout.BeginVertical(new GUIStyle("ChannelStripBg"));
-            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.BeginHorizontal("HeaderButton");
 
             if (GUILayout.Button(InstallIsSelect ? "取消" : "选择", GUILayout.Width(60)))
             {
@@ -153,191 +168,180 @@ namespace AIO.UEditor
                 }
 
             EditorGUILayout.EndHorizontal();
+        }
 
-            foreach (var Data in InstallIndexList.Select(Name => RootData[Name]))
+        private void InstallView()
+        {
+            if (InstallIndexList.Count == 0) return;
+            using (new EditorGUILayout.VerticalScope())
             {
-                EditorGUILayout.BeginVertical("IN ThumbnailShadow");
-
+                foreach (var Data in InstallIndexList.Select(Name => RootData[Name]))
                 {
-                    EditorGUILayout.BeginHorizontal(GUILayout.Height(25));
-                    if (InstallIsSelect)
-                        InstallIsSelectDic[Data.Name] =
-                            EditorGUILayout.Toggle("", InstallIsSelectDic[Data.Name], GUILayout.Width(20));
-                    if (GUILayout.Button("详", GUILayout.Width(25), GUILayout.Height(20)))
+                    using (new EditorGUILayout.VerticalScope("HelpBox"))
                     {
-                        DetailDic[Data.Name] = !DetailDic[Data.Name];
-                        if (DetailDic[Data.Name]) Selection.activeObject = Data;
-                    }
-
-                    EditorGUILayout.PrefixLabel(Data.Name);
-                    EditorGUILayout.Separator();
-                    EditorGUILayout.LabelField(Data.Introduction, GUILayout.Width(150));
-                    EditorGUILayout.Separator();
-
-                    if (!InstallIsSelect)
-                    {
-                        if (GUILayout.Button("安装", GUILayout.Width(60), GUILayout.Height(20)))
+                        using (new EditorGUILayout.HorizontalScope(GUILayout.Height(25)))
                         {
+                            if (InstallIsSelect)
+                                InstallIsSelectDic[Data.Name] =
+                                    EditorGUILayout.Toggle("", InstallIsSelectDic[Data.Name], GUILayout.Width(20));
+                            if (GUILayout.Button("详", GUILayout.Width(25), GUILayout.Height(20)))
+                            {
+                                DetailDic[Data.Name] = !DetailDic[Data.Name];
+                                if (DetailDic[Data.Name]) Selection.activeObject = Data;
+                            }
+
+                            EditorGUILayout.PrefixLabel(Data.Name);
+                            EditorGUILayout.Separator();
+                            EditorGUILayout.LabelField(Data.Introduction, GUILayout.Width(150));
+                            EditorGUILayout.Separator();
+
+                            if (!InstallIsSelect)
+                            {
+                                if (GUILayout.Button("安装", GUILayout.Width(60), GUILayout.Height(20)))
+                                {
 #if UNITY_2019_1_OR_NEWER
-                            CompilationPipeline.compilationStarted += compilationStarted;
+                                    CompilationPipeline.compilationStarted += compilationStarted;
 #else
                             CompilationPipeline.assemblyCompilationStarted += compilationStarted;
 #endif
-                            _ = PluginsInfoEditor.Initialize(Data);
-                            return;
+                                    _ = PluginsInfoEditor.Initialize(Data);
+                                    return;
+                                }
+                            }
+                        }
+
+                        if (DetailDic[Data.Name])
+                        {
+                            EditorGUILayout.LabelField("源文件路径 ->" + Data.SourceRelativePath);
+                            EditorGUILayout.LabelField("安装路径ㅤ ->" + Data.TargetRelativePath);
+                            if (!string.IsNullOrEmpty(Data.MacroDefinition))
+                            {
+                                EditorGUILayout.LabelField("宏定义ㅤㅤ ->" + Data.MacroDefinition);
+                            }
+
+                            if (!string.IsNullOrEmpty(Data.Introduction))
+                            {
+                                EditorGUILayout.LabelField("简介ㅤㅤㅤ ->" + Data.Introduction);
+                            }
                         }
                     }
 
-                    EditorGUILayout.EndHorizontal();
+                    EditorGUILayout.Space();
                 }
-
-                {
-                    if (DetailDic[Data.Name])
-                    {
-                        EditorGUILayout.LabelField("源文件路径 ->" + Data.SourceRelativePath);
-                        EditorGUILayout.LabelField("安装路径ㅤ ->" + Data.TargetRelativePath);
-                        if (!string.IsNullOrEmpty(Data.MacroDefinition))
-                        {
-                            EditorGUILayout.LabelField("宏定义ㅤㅤ ->" + Data.MacroDefinition);
-                        }
-
-                        if (!string.IsNullOrEmpty(Data.Introduction))
-                        {
-                            EditorGUILayout.LabelField("简介ㅤㅤㅤ ->" + Data.Introduction);
-                        }
-                    }
-                }
-                EditorGUILayout.EndVertical();
-                EditorGUILayout.Space();
             }
-
-            EditorGUILayout.EndVertical();
         }
-
-        private bool UnInstallIsSelect = false;
-
-        private Dictionary<string, bool> UnInstallIsSelectDic;
 
         private void UnInstallView()
         {
             if (UnInstallIndexList.Count == 0) return;
-            EditorGUILayout.BeginVertical(new GUIStyle("ChannelStripBg"));
-
-            EditorGUILayout.BeginHorizontal();
-
-            if (GUILayout.Button(UnInstallIsSelect ? "取消" : "选择", GUILayout.Width(60)))
+            using (new EditorGUILayout.VerticalScope("ChannelStripBg"))
             {
-                UnInstallIsSelect = !UnInstallIsSelect;
-                UnInstallIsSelectDic.Clear();
-                foreach (var item in UnInstallIndexList) UnInstallIsSelectDic.Add(item, false);
-            }
-
-            if (UnInstallIsSelect)
-            {
-                if (GUILayout.Button("执行", GUILayout.Width(60)))
+                using (new EditorGUILayout.HorizontalScope())
                 {
-                    UnInstallIsSelect = false;
-                    var temp = new List<PluginsInfo>();
-                    foreach (var item in UnInstallIndexList.Where(V => UnInstallIsSelectDic[V]))
-                        temp.Add(RootData[item]);
-
-                    if (temp.Count == 0) return;
-#if UNITY_2019_1_OR_NEWER
-                    CompilationPipeline.compilationStarted += compilationStarted;
-#else
-                    CompilationPipeline.assemblyCompilationStarted += compilationStarted;
-#endif
-                    _ = PluginsInfoEditor.UnInitialize(temp);
-                    return;
-                }
-            }
-
-            EditorGUILayout.LabelField("卸载列表", new GUIStyle("PreLabel"));
-            if (!UnInstallIsSelect)
-                if (GUILayout.Button("卸载全部", GUILayout.Width(60)))
-                {
-#if UNITY_2019_1_OR_NEWER
-                    CompilationPipeline.compilationStarted += compilationStarted;
-#else
-                    CompilationPipeline.assemblyCompilationStarted += compilationStarted;
-#endif
-                    _ = PluginsInfoEditor.UnInitialize(RootData.Values.Where(plugin =>
-                        UnInstallIndexList.Contains(plugin.Name)));
-                    return;
-                }
-
-            EditorGUILayout.EndHorizontal();
-
-            foreach (var Data in UnInstallIndexList.Select(Name => RootData[Name]))
-            {
-                EditorGUILayout.BeginVertical("IN ThumbnailShadow");
-                {
-                    EditorGUILayout.BeginHorizontal(GUILayout.Height(25));
+                    if (GUILayout.Button(UnInstallIsSelect ? "取消" : "选择", GUILayout.Width(60)))
+                    {
+                        UnInstallIsSelect = !UnInstallIsSelect;
+                        UnInstallIsSelectDic.Clear();
+                        foreach (var item in UnInstallIndexList) UnInstallIsSelectDic.Add(item, false);
+                    }
 
                     if (UnInstallIsSelect)
-                        UnInstallIsSelectDic[Data.Name] =
-                            EditorGUILayout.Toggle("", UnInstallIsSelectDic[Data.Name], GUILayout.Width(20));
-                    if (GUILayout.Button("详", GUILayout.Width(25), GUILayout.Height(20)))
-                        DetailDic[Data.Name] = !DetailDic[Data.Name];
-
-                    EditorGUILayout.PrefixLabel(Data.Name);
-                    EditorGUILayout.Separator();
-                    EditorGUILayout.LabelField(Data.Introduction, GUILayout.Width(150));
-                    EditorGUILayout.Separator();
-
-                    if (!UnInstallIsSelect)
                     {
-                        if (!string.IsNullOrEmpty(Data.MacroDefinition))
+                        if (GUILayout.Button("执行", GUILayout.Width(60)))
                         {
-                            if (GUILayout.Button("更新宏", GUILayout.Width(60), GUILayout.Height(20)))
-                            {
-                                EHelper.Symbols.AddScriptingDefine(Data.MacroDefinition.Split(';'));
-                                AssetDatabase.Refresh();
-#if UNITY_2020_1_OR_NEWER
-                                AssetDatabase.RefreshSettings();
-#endif
-#if UNITY_2019_1_OR_NEWER
-                                CompilationPipeline.RequestScriptCompilation();
-#endif
-                                return;
-                            }
-                        }
+                            UnInstallIsSelect = false;
+                            var temp = new List<PluginsInfo>();
+                            foreach (var item in UnInstallIndexList.Where(V => UnInstallIsSelectDic[V]))
+                                temp.Add(RootData[item]);
 
-                        if (GUILayout.Button("卸载", GUILayout.Width(60), GUILayout.Height(20)))
+                            if (temp.Count == 0) return;
+#if UNITY_2019_1_OR_NEWER
+                            CompilationPipeline.compilationStarted += compilationStarted;
+#else
+                    CompilationPipeline.assemblyCompilationStarted += compilationStarted;
+#endif
+                            _ = PluginsInfoEditor.UnInitialize(temp);
+                            return;
+                        }
+                    }
+
+                    EditorGUILayout.LabelField("卸载列表", new GUIStyle("PreLabel"));
+                    if (!UnInstallIsSelect)
+                        if (GUILayout.Button("卸载全部", GUILayout.Width(60)))
                         {
 #if UNITY_2019_1_OR_NEWER
                             CompilationPipeline.compilationStarted += compilationStarted;
 #else
                             CompilationPipeline.assemblyCompilationStarted += compilationStarted;
 #endif
-                            _ = PluginsInfoEditor.UnInitialize(Data);
+                            _ = PluginsInfoEditor.UnInitialize(RootData.Values.Where(plugin =>
+                                UnInstallIndexList.Contains(plugin.Name)));
                             return;
                         }
-                    }
-
-                    EditorGUILayout.EndHorizontal();
                 }
+
+                foreach (var Data in UnInstallIndexList.Select(Name => RootData[Name]))
                 {
-                    if (DetailDic[Data.Name])
+                    using (new EditorGUILayout.VerticalScope("HelpBox"))
                     {
-                        EditorGUILayout.LabelField("源文件路径 ->" + Data.SourceRelativePath);
-                        EditorGUILayout.LabelField("安装路径ㅤ ->" + Data.TargetRelativePath);
-                        if (!string.IsNullOrEmpty(Data.MacroDefinition))
+                        using (new EditorGUILayout.HorizontalScope(GUILayout.Height(25)))
                         {
-                            EditorGUILayout.LabelField("宏定义ㅤㅤ ->" + Data.MacroDefinition);
+                            if (UnInstallIsSelect)
+                                UnInstallIsSelectDic[Data.Name] =
+                                    EditorGUILayout.Toggle("", UnInstallIsSelectDic[Data.Name], GUILayout.Width(20));
+                            if (GUILayout.Button("详", GUILayout.Width(25), GUILayout.Height(20)))
+                                DetailDic[Data.Name] = !DetailDic[Data.Name];
+
+                            EditorGUILayout.PrefixLabel(Data.Name);
+                            EditorGUILayout.Separator();
+                            EditorGUILayout.LabelField(Data.Introduction, GUILayout.Width(150));
+                            EditorGUILayout.Separator();
+
+                            if (!UnInstallIsSelect)
+                            {
+                                if (!string.IsNullOrEmpty(Data.MacroDefinition))
+                                {
+                                    if (GUILayout.Button("更新宏", GUILayout.Width(60), GUILayout.Height(20)))
+                                    {
+                                        EHelper.Symbols.AddScriptingDefine(Data.MacroDefinition.Split(';'));
+                                        AssetDatabase.Refresh();
+#if UNITY_2020_1_OR_NEWER
+                                        AssetDatabase.RefreshSettings();
+#endif
+#if UNITY_2019_1_OR_NEWER
+                                        CompilationPipeline.RequestScriptCompilation();
+#endif
+                                        return;
+                                    }
+                                }
+
+                                if (GUILayout.Button("卸载", GUILayout.Width(60), GUILayout.Height(20)))
+                                {
+#if UNITY_2019_1_OR_NEWER
+                                    CompilationPipeline.compilationStarted += compilationStarted;
+#else
+                            CompilationPipeline.assemblyCompilationStarted += compilationStarted;
+#endif
+                                    _ = PluginsInfoEditor.UnInitialize(Data);
+                                    return;
+                                }
+                            }
                         }
 
-                        if (!string.IsNullOrEmpty(Data.Introduction))
+                        if (DetailDic[Data.Name])
                         {
-                            EditorGUILayout.LabelField("简介ㅤㅤㅤ ->" + Data.Introduction);
+                            EditorGUILayout.LabelField("源文件路径 ->" + Data.SourceRelativePath);
+                            EditorGUILayout.LabelField("安装路径ㅤ ->" + Data.TargetRelativePath);
+                            if (!string.IsNullOrEmpty(Data.MacroDefinition))
+                                EditorGUILayout.LabelField("宏定义ㅤㅤ ->" + Data.MacroDefinition);
+                            if (!string.IsNullOrEmpty(Data.Introduction))
+                                EditorGUILayout.LabelField("简介ㅤㅤㅤ ->" + Data.Introduction);
                         }
                     }
-                }
-                EditorGUILayout.EndVertical();
-                EditorGUILayout.Space();
-            }
 
-            EditorGUILayout.EndVertical();
+                    EditorGUILayout.Space();
+                }
+            }
         }
     }
 }
