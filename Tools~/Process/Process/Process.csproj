@@ -64,6 +64,11 @@
     <Compile Include="Script\Abstract\Interface\IExecutor.cs" />
     <Compile Include="Script\Abstract\Interface\IPrCourse.cs" />
     <Compile Include="Script\Abstract\Interface\IResult.cs" />
+    <Compile Include="Script\Argument\Argument.cs" />
+    <Compile Include="Script\Argument\ArgumentAttribute.cs" />
+    <Compile Include="Script\Argument\ArgumentCustom.cs" />
+    <Compile Include="Script\Argument\EArgLabel.cs" />
+    <Compile Include="Script\Argument\UnityArgsCommand.cs" />
     <Compile Include="Script\Category\Git\PrGit.Add.cs" />
     <Compile Include="Script\Category\Git\PrGit.CheckOut.cs" />
     <Compile Include="Script\Category\Git\PrGit.Clean.cs" />

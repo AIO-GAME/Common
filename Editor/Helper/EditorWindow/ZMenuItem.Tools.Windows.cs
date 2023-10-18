@@ -52,7 +52,7 @@ namespace AIO.UEditor
             EHelper.Window.Open<PackageManagerWindow>(DockedWindowTypes);
         }
 
-        [MenuItem("Tools/Window/Plugins Manager")]
+        [MenuItem("Tools/Window/Plugins Manager #_F12")]
         public static void OpenPluginsManagerWindow()
         {
             EHelper.Window.Open<PluginsManagerWindow>(DockedWindowTypes);

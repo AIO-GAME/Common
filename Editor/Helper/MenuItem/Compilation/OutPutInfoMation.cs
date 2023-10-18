@@ -4,12 +4,9 @@
 |*|E-Mail:     |*| 1398581458@qq.com
 |*|============|*/
 
-using System.Collections.Generic;
-using System.IO;
 using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace AIO.UEditor
 {

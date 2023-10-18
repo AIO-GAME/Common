@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnityEditor;
@@ -24,6 +25,12 @@ namespace AIO.UEditor
         private PluginsInfoEditor()
         {
             InstallList = new Dictionary<string, bool>();
+        }
+
+        ~PluginsInfoEditor()
+        {
+            InstallList.Clear();
+            InstallList = null;
         }
 
         private void OnEnable()
@@ -163,18 +170,19 @@ namespace AIO.UEditor
             serializedObject.Dispose();
         }
 
-        internal static DirectoryInfo GetValidDir(string rootdir, string value)
+        internal static DirectoryInfo GetValidDir(string rootDir, string value)
         {
             if (string.IsNullOrEmpty(value)) return null;
-            var dirinfo = new DirectoryInfo(value);
-            if (dirinfo.Exists) return dirinfo;
-            var root = new DirectoryInfo(Path.Combine(rootdir, Path.GetPathRoot(value)));
+            var dirInfo = new DirectoryInfo(value);
+            if (dirInfo.Exists) return dirInfo;
+            var root = new DirectoryInfo(Path.Combine(rootDir, Path.GetPathRoot(value)));
 
-            var name = dirinfo.Name;
+            var name = dirInfo.Name;
             try
             {
                 var regex = new Regex(value);
-                foreach (var directory in root.GetDirectories("*.*", value.Contains("*") ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
+                foreach (var directory in root.GetDirectories("*.*",
+                             value.Contains("*") ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
                 {
                     if (directory.Name == name && regex.Match(directory.FullName).Success)
                         return directory;
@@ -185,12 +193,12 @@ namespace AIO.UEditor
                 // ignored
             }
 
-            return dirinfo;
+            return dirInfo;
         }
 
         internal static async Task Initialize(IEnumerable<PluginsInfo> infos)
         {
-            var dataPath = Directory.GetParent(Application.dataPath).FullName;
+            var dataPath = Directory.GetParent(Application.dataPath)?.FullName;
             var list = new List<Task>();
             var macroList = new List<string>();
             foreach (var info in infos)
@@ -229,22 +237,41 @@ namespace AIO.UEditor
             {
                 await Task.WhenAll(list);
                 AssetDatabase.Refresh();
-#if UNITY_2020_1_OR_NEWER
-                AssetDatabase.RefreshSettings();
-#endif
-#if UNITY_2019_1_OR_NEWER
-                CompilationPipeline.compilationFinished += compilationFinished;
-#endif
+
+                var refreshSettingsMethodInfo = typeof(AssetDatabase).GetMethod("RefreshSettings",
+                    BindingFlags.Static | BindingFlags.Public);
+                if (refreshSettingsMethodInfo != null) refreshSettingsMethodInfo.Invoke(null, null);
+
+                // 使用反射方式调用事件 CompilationPipeline.compilationFinished 
+
+                var compilationFinishedEventInfo = typeof(CompilationPipeline).GetEvent("compilationFinished",
+                    BindingFlags.Static | BindingFlags.Public);
+                var methodInfo = typeof(PluginsInfoEditor).GetMethod("compilationFinished",
+                    BindingFlags.Static | BindingFlags.NonPublic);
+                if (compilationFinishedEventInfo != null && methodInfo != null)
+                {
+                    compilationFinishedEventInfo.AddEventHandler(null,
+                        Delegate.CreateDelegate(compilationFinishedEventInfo.EventHandlerType, null, methodInfo));
+                }
+
+// #if UNITY_2019_1_OR_NEWER
+//                 CompilationPipeline.compilationFinished += compilationFinished;
+// #endif
                 if (macroList.Count != 0) EHelper.Symbols.AddScriptingDefine(macroList.ToArray());
-#if UNITY_2019_1_OR_NEWER
-                CompilationPipeline.RequestScriptCompilation();
-#endif
+                
+                var requestScriptCompilationMethodInfo = typeof(CompilationPipeline).GetMethod("RequestScriptCompilation",
+                    BindingFlags.Static | BindingFlags.Public);
+                if (requestScriptCompilationMethodInfo != null) requestScriptCompilationMethodInfo.Invoke(null, null);
+//
+// #if UNITY_2019_1_OR_NEWER
+//                 CompilationPipeline.RequestScriptCompilation();
+// #endif
             }
         }
 
         internal static async Task UnInitialize(IEnumerable<PluginsInfo> infos)
         {
-            var dataPath = Directory.GetParent(Application.dataPath).FullName;
+            var dataPath = Directory.GetParent(Application.dataPath)?.FullName;
             var list = new List<Task>();
             var macroList = new List<string>();
             foreach (var info in infos)
@@ -266,7 +293,7 @@ namespace AIO.UEditor
                 }
 
                 var parent = Directory.GetParent(target.FullName);
-                if (!parent.Exists) parent.Create();
+                if (parent != null && !parent.Exists) parent.Create();
 
                 var a = PrPlatform.File.Del(target.FullName + ".meta").Link(PrPlatform.Folder.Del(target.FullName));
                 list.Add(a.Async());
@@ -290,72 +317,31 @@ namespace AIO.UEditor
             }
         }
 
-        internal static async Task Initialize(PluginsInfo info)
+        internal static Task Initialize(PluginsInfo info)
         {
-            var dataPath = Directory.GetParent(Application.dataPath).FullName;
-            var source = GetValidDir(dataPath, info.SourceRelativePath);
-            if (!source.Exists)
-            {
-                Debug.LogErrorFormat("插件位置不存在:{0}", source.FullName);
-                return;
-            }
-
-            var target = GetValidDir(dataPath, info.TargetRelativePath);
-            if (target.Exists)
-            {
-                Debug.LogErrorFormat("目标链接位已存在:{0}", target.FullName);
-                return;
-            }
-
-            var parent = Directory.GetParent(target.FullName);
-            if (!parent.Exists) parent.Create();
-            var Result = await PrPlatform.Folder.Symbolic(target.FullName, source.FullName);
-            if (Result.ExitCode == 0)
-            {
-                Debug.LogFormat("链接成功 {0} : {1}", info.Name, target.FullName);
-                AssetDatabase.Refresh();
-#if UNITY_2020_1_OR_NEWER
-                AssetDatabase.RefreshSettings();
-#endif
-                if (!string.IsNullOrEmpty(info.MacroDefinition)) EHelper.Symbols.AddScriptingDefine(info.MacroDefinition.Split(';'));
-#if UNITY_2019_1_OR_NEWER
-                CompilationPipeline.compilationFinished += compilationFinished;
-                CompilationPipeline.RequestScriptCompilation();
-#endif
-            }
-            else Debug.LogErrorFormat("链接失败 {0} : {1} => {2}", info.Name, target.FullName, Result.StdALL);
+            return Initialize(new[] { info });
         }
 
-        internal static async Task UnInitialize(PluginsInfo info)
+        internal static Task UnInitialize(PluginsInfo info)
         {
-            var target = GetValidDir(Application.dataPath, info.TargetRelativePath);
-            if (!target.Exists)
-            {
-                Debug.LogErrorFormat("目标链接不存在:{0}", target.FullName);
-                return;
-            }
-
-            var Result = await PrPlatform.File.Del(target.FullName + ".meta").Link(PrPlatform.Folder.Del(target.FullName));
-            if (Result.ExitCode == 0)
-            {
-                Debug.LogFormat("移除成功 {0} : {1}", info.Name, target.FullName);
-                AssetDatabase.Refresh();
-#if UNITY_2020_1_OR_NEWER
-                AssetDatabase.RefreshSettings();
-#endif
-                if (!string.IsNullOrEmpty(info.MacroDefinition)) EHelper.Symbols.DelScriptingDefine(info.MacroDefinition.Split(';'));
-#if UNITY_2019_1_OR_NEWER
-                CompilationPipeline.compilationFinished += compilationFinished;
-                CompilationPipeline.RequestScriptCompilation();
-#endif
-            }
-            else Debug.LogErrorFormat("移除失败 {0} : {1} \n {2}", info.Name, target.FullName, Result.StdALL);
+            return UnInitialize(new[] { info });
         }
 
         private static void compilationFinished(object o)
         {
             EditorUtility.ClearProgressBar();
             EditorUtility.DisplayDialog("插件", "命令执行完毕", "OK");
+
+
+            var compilationFinishedEventInfo = typeof(CompilationPipeline).GetEvent("compilationFinished",
+                BindingFlags.Static | BindingFlags.Public);
+            var methodInfo = typeof(PluginsInfoEditor).GetMethod("compilationFinished",
+                BindingFlags.Static | BindingFlags.NonPublic);
+            if (compilationFinishedEventInfo != null && methodInfo != null)
+            {
+                compilationFinishedEventInfo.RemoveEventHandler(null,
+                    Delegate.CreateDelegate(compilationFinishedEventInfo.EventHandlerType, null, methodInfo));
+            }
 #if UNITY_2019_1_OR_NEWER
             CompilationPipeline.compilationFinished -= compilationFinished;
 #endif
