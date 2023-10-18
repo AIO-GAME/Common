@@ -58,12 +58,19 @@
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\Resources\Plugins\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>..\..\..\..\..\..\..\..\Tenncent\Script\com.self.package\Tools~\Resources\Plugins\UnityEngine.IMGUIModule.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Script\MenuItem\MenuItem.Git.ALL.cs" />
     <Compile Include="Script\MenuItem\MenuItem.Git.cs" />
     <Compile Include="Script\MenuItem\MenuItem.Tools.Open.cs" />
+    <Compile Include="Script\PluginsInfo\Plugins.cs" />
+    <Compile Include="Script\PluginsInfo\PluginsInfo.Helper.cs" />
+    <Compile Include="Script\PluginsInfo\PluginsInfoEditor.cs" />
+    <Compile Include="Script\PluginsInfo\PluginsInfoWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Process\Process.csproj">
