@@ -74,5 +74,89 @@
             生成
             </summary>
         </member>
+        <member name="T:AIO.PluginData">
+            <summary>
+            插件信息
+            </summary>
+        </member>
+        <member name="F:AIO.PluginData.SourceRelativePath">
+            <summary>
+            插件相对路径
+            </summary>
+        </member>
+        <member name="F:AIO.PluginData.Name">
+            <summary>
+            插件名
+            </summary>
+        </member>
+        <member name="F:AIO.PluginData.TargetRelativePath">
+            <summary>
+            目标位置
+            </summary>
+        </member>
+        <member name="F:AIO.PluginData.MacroDefinition">
+            <summary>
+            宏定义
+            </summary>
+        </member>
+        <member name="F:AIO.PluginData.Introduction">
+            <summary>
+            简介
+            </summary>
+        </member>
+        <member name="M:AIO.Plugins.Helper.GetAssetsRes``1(System.String@,System.String[])">
+            <summary>
+            获取指定文件夹下的预制件
+            </summary>
+            <param name="pattern">匹配模式</param>
+            <param name="folder">文件夹</param>
+            <returns>预制件数组</returns>
+        </member>
+        <member name="M:AIO.Plugins.Helper.RemoveRepeat``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            移除重复元素
+            </summary>
+        </member>
+        <member name="M:AIO.Plugins.Helper.AddScriptingDefine(UnityEditor.BuildTargetGroup,System.Collections.Generic.ICollection{System.String})">
+            <summary>
+            添加传入的宏定义
+            </summary>
+        </member>
+        <member name="M:AIO.Plugins.Helper.DelScriptingDefine(UnityEditor.BuildTargetGroup,System.Collections.Generic.ICollection{System.String})">
+            <summary>
+            禁止传入的宏定义
+            </summary>
+        </member>
+        <member name="T:AIO.Plugins.PluginDataEditor">
+            <summary>
+            插件管理
+            </summary>
+        </member>
+        <member name="T:AIO.Plugins.PluginDataWindow">
+            <summary>
+            插件管理界面
+            </summary>
+        </member>
+        <member name="F:AIO.Plugins.PluginDataWindow.RootData">
+            <summary>
+            根节点
+            </summary>
+        </member>
+        <member name="F:AIO.Plugins.PluginDataWindow.InstallIndexList">
+            <summary>
+            安装列表
+            </summary>
+        </member>
+        <member name="F:AIO.Plugins.PluginDataWindow.UnInstallIndexList">
+            <summary>
+            卸载列表
+            </summary>
+        </member>
+        <member name="M:AIO.Plugins.PluginDataWindow.OnEnable">
+            <summary>
+            
+            </summary>
+            <exception cref="T:System.IO.DirectoryNotFoundException"></exception>
+        </member>
     </members>
 </doc>
