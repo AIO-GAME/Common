@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -235,37 +236,54 @@ namespace AIO.UEditor
 
             if (list.Count > 0)
             {
-                await Task.WhenAll(list);
-                AssetDatabase.Refresh();
-
-                var refreshSettingsMethodInfo = typeof(AssetDatabase).GetMethod("RefreshSettings",
-                    BindingFlags.Static | BindingFlags.Public);
-                if (refreshSettingsMethodInfo != null) refreshSettingsMethodInfo.Invoke(null, null);
-
-                // 使用反射方式调用事件 CompilationPipeline.compilationFinished 
-
-                var compilationFinishedEventInfo = typeof(CompilationPipeline).GetEvent("compilationFinished",
-                    BindingFlags.Static | BindingFlags.Public);
-                var methodInfo = typeof(PluginsInfoEditor).GetMethod("compilationFinished",
-                    BindingFlags.Static | BindingFlags.NonPublic);
-                if (compilationFinishedEventInfo != null && methodInfo != null)
+                Helper.AddScriptingDefine(EditorUserBuildSettings.selectedBuildTargetGroup, macroList);
+                try
                 {
-                    compilationFinishedEventInfo.AddEventHandler(null,
-                        Delegate.CreateDelegate(compilationFinishedEventInfo.EventHandlerType, null, methodInfo));
+                    EditorUtility.DisplayProgressBar("插件", "正在安装插件", 0);
+                    await Task.WhenAll(list);
+                    EditorUtility.ClearProgressBar();
+                    AssetDatabase.Refresh();
+                    Helper.RefreshSettings();
+                    Helper.CompilationPipelineCompilationStartedBegin();
+                    Helper.CompilationPipelineRequestScriptCompilation();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException(e);
                 }
 
-// #if UNITY_2019_1_OR_NEWER
-//                 CompilationPipeline.compilationFinished += compilationFinished;
-// #endif
-                if (macroList.Count != 0) EHelper.Symbols.AddScriptingDefine(macroList.ToArray());
-                
-                var requestScriptCompilationMethodInfo = typeof(CompilationPipeline).GetMethod("RequestScriptCompilation",
-                    BindingFlags.Static | BindingFlags.Public);
-                if (requestScriptCompilationMethodInfo != null) requestScriptCompilationMethodInfo.Invoke(null, null);
+//                 await Task.WhenAll(list);
+//                 AssetDatabase.Refresh();
 //
-// #if UNITY_2019_1_OR_NEWER
-//                 CompilationPipeline.RequestScriptCompilation();
-// #endif
+//                 var refreshSettingsMethodInfo = typeof(AssetDatabase).GetMethod("RefreshSettings",
+//                     BindingFlags.Static | BindingFlags.Public);
+//                 if (refreshSettingsMethodInfo != null) refreshSettingsMethodInfo.Invoke(null, null);
+//
+//                 // 使用反射方式调用事件 CompilationPipeline.compilationFinished 
+//
+//                 var compilationFinishedEventInfo = typeof(CompilationPipeline).GetEvent("compilationFinished",
+//                     BindingFlags.Static | BindingFlags.Public);
+//                 var methodInfo = typeof(PluginsInfoEditor).GetMethod("compilationFinished",
+//                     BindingFlags.Static | BindingFlags.NonPublic);
+//                 if (compilationFinishedEventInfo != null && methodInfo != null)
+//                 {
+//                     compilationFinishedEventInfo.AddEventHandler(null,
+//                         Delegate.CreateDelegate(compilationFinishedEventInfo.EventHandlerType, null, methodInfo));
+//                 }
+//
+// // #if UNITY_2019_1_OR_NEWER
+// //                 CompilationPipeline.compilationFinished += compilationFinished;
+// // #endif
+//                 if (macroList.Count != 0) EHelper.Symbols.AddScriptingDefine(macroList.ToArray());
+//
+//                 var requestScriptCompilationMethodInfo = typeof(CompilationPipeline).GetMethod(
+//                     "RequestScriptCompilation",
+//                     BindingFlags.Static | BindingFlags.Public);
+//                 if (requestScriptCompilationMethodInfo != null) requestScriptCompilationMethodInfo.Invoke(null, null);
+// //
+// // #if UNITY_2019_1_OR_NEWER
+// //                 CompilationPipeline.RequestScriptCompilation();
+// // #endif
             }
         }
 
@@ -301,19 +319,36 @@ namespace AIO.UEditor
 
             if (list.Count > 0)
             {
-                await Task.WhenAll(list);
+//                 await Task.WhenAll(list);
+//
+//                 AssetDatabase.Refresh();
+// #if UNITY_2020_1_OR_NEWER
+//                 AssetDatabase.RefreshSettings();
+// #endif
+// #if UNITY_2019_1_OR_NEWER
+//                 CompilationPipeline.compilationFinished += compilationFinished;
+// #endif
+//                 if (macroList.Count != 0) EHelper.Symbols.DelScriptingDefine(macroList.ToArray());
+// #if UNITY_2019_1_OR_NEWER
+//                 CompilationPipeline.RequestScriptCompilation();
+// #endif
 
-                AssetDatabase.Refresh();
-#if UNITY_2020_1_OR_NEWER
-                AssetDatabase.RefreshSettings();
-#endif
-#if UNITY_2019_1_OR_NEWER
-                CompilationPipeline.compilationFinished += compilationFinished;
-#endif
-                if (macroList.Count != 0) EHelper.Symbols.DelScriptingDefine(macroList.ToArray());
-#if UNITY_2019_1_OR_NEWER
-                CompilationPipeline.RequestScriptCompilation();
-#endif
+                try
+                {
+                    Helper.DelScriptingDefine(EditorUserBuildSettings.selectedBuildTargetGroup, macroList);
+                    EditorUtility.DisplayProgressBar("插件", "正在卸载插件", 0);
+                    await Task.WhenAll(list);
+                    EditorUtility.ClearProgressBar();
+
+                    AssetDatabase.Refresh();
+                    Helper.RefreshSettings();
+                    Helper.CompilationPipelineCompilationStartedBegin();
+                    Helper.CompilationPipelineRequestScriptCompilation();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException(e);
+                }
             }
         }
 
@@ -345,6 +380,255 @@ namespace AIO.UEditor
 #if UNITY_2019_1_OR_NEWER
             CompilationPipeline.compilationFinished -= compilationFinished;
 #endif
+        }
+
+        internal static class Helper
+        {
+            public static T GetOrDefault<T>(IDictionary dic, in object key, in T defaultValue)
+            {
+                if (dic == null)
+                    throw new ArgumentNullException(nameof(dic));
+                if (key == null)
+                    throw new ArgumentNullException(nameof(key));
+                return dic.Contains(key) && dic[key] is T obj ? obj : defaultValue;
+            }
+
+            /// <summary>
+            /// 移除重复元素
+            /// </summary>
+            private static IList<T> RemoveRepeat<T>(IList<T> array)
+            {
+                if (array is null) return Array.Empty<T>();
+                if (array.Count <= 1) return array;
+                var hashSet = new HashSet<T>();
+                for (var i = 0; i < array.Count; i++)
+                {
+                    var num = array[i];
+                    if (hashSet.Count == 0 || !hashSet.Contains(num))
+                    {
+                        hashSet.Add(num);
+                    }
+                    else if (array is List<T> list)
+                    {
+                        list.RemoveAll(x => Equals(x, num));
+                    }
+                    else
+                    {
+                        array.RemoveAt(i--);
+                    }
+                }
+
+                return array;
+            }
+
+            private static ICollection<string> GetScriptingDefineSymbolsForGroup(BuildTargetGroup buildTargetGroup)
+            {
+                //获得当前平台已有的的宏定义
+                var GetScriptingDefineSymbols = typeof(PlayerSettings).GetMethod("GetScriptingDefineSymbolsInternal",
+                    BindingFlags.Static | BindingFlags.NonPublic);
+                string str = null;
+                if (GetScriptingDefineSymbols != null)
+                {
+                    foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                    {
+                        if (!assembly.GetName().Name.StartsWith("UnityEditor.Build")) continue;
+                        var namedBuildTargetType = assembly.GetType("UnityEditor.Build.NamedBuildTarget");
+                        var FromBuildTargetGroupMethod = namedBuildTargetType?.GetMethod("FromBuildTargetGroup",
+                            BindingFlags.Static | BindingFlags.Public);
+                        if (FromBuildTargetGroupMethod is null) continue;
+                        var symbols = FromBuildTargetGroupMethod.Invoke(null, new object[] { buildTargetGroup });
+                        str = GetScriptingDefineSymbols.Invoke(null, new object[] { symbols }) as string;
+                        break;
+                    }
+                }
+                else str = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
+
+                Debug.Log($"Plugins Data Editor : GetScriptingDefineSymbolsForGroup -> {buildTargetGroup} : {str}");
+                return string.IsNullOrEmpty(str) ? Array.Empty<string>() : str.Split(';');
+            }
+
+            private static void SetScriptingDefineSymbolsForGroup(BuildTargetGroup buildTargetGroup,
+                IEnumerable<string> verify)
+            {
+                //获得当前平台已有的的宏定义
+                var SetScriptingDefineSymbols = typeof(PlayerSettings).GetMethod(
+                    "SetScriptingDefineSymbols",
+                    2,
+                    BindingFlags.Static | BindingFlags.Public,
+                    null,
+                    new Type[] { typeof(string), typeof(string) },
+                    null
+                );
+                var str = string.Join(";", verify);
+                if (SetScriptingDefineSymbols != null)
+                {
+                    foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                    {
+                        if (!assembly.GetName().Name.StartsWith("UnityEditor.Build")) continue;
+                        var namedBuildTargetType = assembly.GetType("UnityEditor.Build.NamedBuildTarget");
+                        var FromBuildTargetGroupMethod = namedBuildTargetType?.GetMethod("FromBuildTargetGroup",
+                            BindingFlags.Static | BindingFlags.Public);
+                        if (FromBuildTargetGroupMethod is null) continue;
+                        var Symbols = FromBuildTargetGroupMethod.Invoke(null, new object[] { buildTargetGroup });
+                        SetScriptingDefineSymbols.Invoke(null, new object[] { Symbols, str });
+
+                        break;
+                    }
+                }
+                else PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, str);
+
+                Debug.Log($"Plugins Data Editor : SetScriptingDefineSymbolsForGroup -> {buildTargetGroup} : {str}");
+            }
+
+            /// <summary>
+            /// 添加传入的宏定义
+            /// </summary>
+            public static void AddScriptingDefine(BuildTargetGroup buildTargetGroup, ICollection<string> value)
+            {
+                if (value is null || value.Count == 0) return;
+                Debug.Log($"Plugins Data Editor : AddScriptingDefine -> {buildTargetGroup}");
+                var verify = new List<string>(GetScriptingDefineSymbolsForGroup(buildTargetGroup));
+                foreach (var v in value)
+                {
+                    if (string.IsNullOrEmpty(v) || verify.Contains(v)) continue;
+                    verify.Add(v);
+                }
+
+                SetScriptingDefineSymbolsForGroup(buildTargetGroup, RemoveRepeat(verify));
+            }
+
+
+            /// <summary>
+            /// 禁止传入的宏定义
+            /// </summary>
+            public static void DelScriptingDefine(BuildTargetGroup buildTargetGroup, ICollection<string> value)
+            {
+                if (value is null || value.Count == 0) return;
+                Debug.Log($"Plugins Data Editor : DelScriptingDefine -> {buildTargetGroup}");
+                var str = GetScriptingDefineSymbolsForGroup(buildTargetGroup);
+                if (str.Count == 0) return;
+                IList<string> verify = new List<string>(str);
+                verify = RemoveRepeat(verify);
+                foreach (var item in value) verify.Remove(item);
+                SetScriptingDefineSymbolsForGroup(buildTargetGroup, verify);
+            }
+
+            /// <summary>
+            /// 刷新设置
+            /// </summary>
+            public static void RefreshSettings()
+            {
+                var refreshSettingsMethodInfo = typeof(AssetDatabase).GetMethod("RefreshSettings",
+                    BindingFlags.Static | BindingFlags.Public);
+                if (refreshSettingsMethodInfo != null)
+                {
+                    Debug.Log("Plugins Data Editor : AssetDatabase RefreshSettings Start");
+                    refreshSettingsMethodInfo.Invoke(null, null);
+                }
+            }
+
+            /// <summary>
+            /// 编译程序集
+            /// </summary>
+            public static void CompilationPipelineRequestScriptCompilation()
+            {
+                Debug.Log("Plugins Data Editor : CompilationPipelineRequestScriptCompilation");
+                var requestScriptCompilationMethodInfo = typeof(CompilationPipeline).GetMethod(
+                    "RequestScriptCompilation", BindingFlags.Static | BindingFlags.Public);
+                if (requestScriptCompilationMethodInfo != null)
+                {
+                    Debug.Log("Plugins Data Editor : CompilationPipeline RequestScriptCompilation Start");
+                    requestScriptCompilationMethodInfo.Invoke(null, null);
+                }
+            }
+
+            private static Delegate CompilationPipelineCompilationStarted;
+
+            private static Delegate CompilationPipelineCompilationFinished;
+
+            public static void CompilationPipelineCompilationStartedBegin()
+            {
+                Debug.Log("Plugins Data Editor : CompilationPipelineCompilationStartedBegin");
+                var compilationFinishedEventInfo = typeof(CompilationPipeline).GetEvent("compilationStarted",
+                    BindingFlags.Static | BindingFlags.Public);
+                var methodInfo = typeof(PluginsInfoEditor).GetMethod(nameof(CompilationPipelineCompilationStartedEnd),
+                    BindingFlags.Static | BindingFlags.NonPublic);
+                if (compilationFinishedEventInfo != null && methodInfo != null)
+                {
+                    if (CompilationPipelineCompilationStarted is null)
+                        CompilationPipelineCompilationStarted =
+                            Delegate.CreateDelegate(compilationFinishedEventInfo.EventHandlerType, null, methodInfo);
+                    compilationFinishedEventInfo.AddEventHandler(null, CompilationPipelineCompilationStarted);
+                }
+            }
+
+            private static void CompilationPipelineCompilationStartedEnd(object o)
+            {
+                Debug.Log("Plugins Data Editor : CompilationPipelineCompilationStartedEnd");
+                EditorUtility.DisplayProgressBar("插件", "正在编译", 0);
+                {
+                    var compilationFinishedEventInfo = typeof(CompilationPipeline).GetEvent("compilationStarted",
+                        BindingFlags.Static | BindingFlags.Public);
+                    var methodInfo = typeof(PluginsInfoEditor).GetMethod(
+                        nameof(CompilationPipelineCompilationStartedEnd),
+                        BindingFlags.Static | BindingFlags.NonPublic);
+                    if (compilationFinishedEventInfo != null && methodInfo != null)
+                    {
+                        if (CompilationPipelineCompilationStarted is null)
+                            CompilationPipelineCompilationStarted =
+                                Delegate.CreateDelegate(compilationFinishedEventInfo.EventHandlerType, null,
+                                    methodInfo);
+                        compilationFinishedEventInfo.RemoveEventHandler(null, CompilationPipelineCompilationStarted);
+                    }
+                }
+
+                {
+                    var compilationFinishedEventInfo = typeof(CompilationPipeline).GetEvent("compilationFinished",
+                        BindingFlags.Static | BindingFlags.Public);
+                    var methodInfo = typeof(PluginsInfoEditor).GetMethod(
+                        nameof(CompilationPipelineCompilationFinishedEnd),
+                        BindingFlags.Static | BindingFlags.NonPublic);
+                    if (compilationFinishedEventInfo != null && methodInfo != null)
+                    {
+                        if (CompilationPipelineCompilationFinished is null)
+                            CompilationPipelineCompilationFinished =
+                                Delegate.CreateDelegate(compilationFinishedEventInfo.EventHandlerType, null,
+                                    methodInfo);
+                        compilationFinishedEventInfo.AddEventHandler(null, CompilationPipelineCompilationFinished);
+                    }
+                }
+            }
+
+            private static void CompilationPipelineCompilationFinishedEnd(object o)
+            {
+                Debug.Log("Plugins Data Editor : CompilationPipelineCompilationFinishedEnd");
+                var compilationFinishedEventInfo = typeof(CompilationPipeline).GetEvent("compilationFinished",
+                    BindingFlags.Static | BindingFlags.Public);
+                var methodInfo = typeof(PluginsInfoEditor).GetMethod(nameof(CompilationPipelineCompilationFinishedEnd),
+                    BindingFlags.Static | BindingFlags.NonPublic);
+                if (compilationFinishedEventInfo != null && methodInfo != null)
+                {
+                    if (CompilationPipelineCompilationFinished is null)
+                        CompilationPipelineCompilationFinished =
+                            Delegate.CreateDelegate(compilationFinishedEventInfo.EventHandlerType, null,
+                                methodInfo);
+                    compilationFinishedEventInfo.RemoveEventHandler(null, CompilationPipelineCompilationFinished);
+                }
+
+                EditorUtility.ClearProgressBar();
+                if (EditorUtility.DisplayDialog("插件", "命令执行完毕", "OK"))
+                {
+                    AssetDatabase.Refresh(
+                        ImportAssetOptions.ForceSynchronousImport |
+                        ImportAssetOptions.ForceUpdate |
+                        ImportAssetOptions.ImportRecursive |
+                        ImportAssetOptions.DontDownloadFromCacheServer |
+                        ImportAssetOptions.ForceUncompressedImport |
+                        ImportAssetOptions.Default
+                    );
+                    CompilationPipelineRequestScriptCompilation();
+                }
+            }
         }
     }
 }

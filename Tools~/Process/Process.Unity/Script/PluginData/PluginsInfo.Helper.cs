@@ -64,7 +64,7 @@ namespace AIO
             /// </summary>
             private static IList<T> RemoveRepeat<T>(IList<T> array)
             {
-                if (array is null) throw new ArgumentNullException(nameof(array));
+                if (array is null) return Array.Empty<T>();
                 if (array.Count <= 1) return array;
                 var hashSet = new HashSet<T>();
                 for (var i = 0; i < array.Count; i++)
@@ -102,13 +102,14 @@ namespace AIO
                         var FromBuildTargetGroupMethod = namedBuildTargetType?.GetMethod("FromBuildTargetGroup",
                             BindingFlags.Static | BindingFlags.Public);
                         if (FromBuildTargetGroupMethod is null) continue;
-                        var Symbols = FromBuildTargetGroupMethod.Invoke(null, new object[] { buildTargetGroup });
-                        str = GetScriptingDefineSymbols.Invoke(null, new object[] { Symbols }) as string;
+                        var symbols = FromBuildTargetGroupMethod.Invoke(null, new object[] { buildTargetGroup });
+                        str = GetScriptingDefineSymbols.Invoke(null, new object[] { symbols }) as string;
                         break;
                     }
                 }
                 else str = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
 
+                Debug.Log($"Plugins Data Editor : GetScriptingDefineSymbolsForGroup -> {buildTargetGroup} : {str}");
                 return string.IsNullOrEmpty(str) ? Array.Empty<string>() : str.Split(';');
             }
 
@@ -118,6 +119,7 @@ namespace AIO
                 //获得当前平台已有的的宏定义
                 var SetScriptingDefineSymbols = typeof(PlayerSettings).GetMethod("SetScriptingDefineSymbols",
                     BindingFlags.Static | BindingFlags.Public);
+                var str = string.Join(";", verify);
                 if (SetScriptingDefineSymbols != null)
                 {
                     foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
@@ -128,11 +130,13 @@ namespace AIO
                             BindingFlags.Static | BindingFlags.Public);
                         if (FromBuildTargetGroupMethod is null) continue;
                         var Symbols = FromBuildTargetGroupMethod.Invoke(null, new object[] { buildTargetGroup });
-                        SetScriptingDefineSymbols.Invoke(null, new object[] { Symbols, string.Join(";", verify) });
+                        SetScriptingDefineSymbols.Invoke(null, new object[] { Symbols, str });
+
                         break;
                     }
                 }
-                else PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, string.Join(";", verify));
+                else PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, str);
+                Debug.Log($"Plugins Data Editor : SetScriptingDefineSymbolsForGroup -> {buildTargetGroup} : {str}");
             }
 
             /// <summary>
@@ -141,10 +145,8 @@ namespace AIO
             public static void AddScriptingDefine(BuildTargetGroup buildTargetGroup, ICollection<string> value)
             {
                 if (value is null || value.Count == 0) return;
-
-                var str = GetScriptingDefineSymbolsForGroup(buildTargetGroup);
-
-                var verify = new List<string>(str);
+                Debug.Log($"Plugins Data Editor : AddScriptingDefine -> {buildTargetGroup}");
+                var verify = new List<string>(GetScriptingDefineSymbolsForGroup(buildTargetGroup));
                 foreach (var v in value)
                 {
                     if (string.IsNullOrEmpty(v) || verify.Contains(v)) continue;
@@ -161,8 +163,8 @@ namespace AIO
             public static void DelScriptingDefine(BuildTargetGroup buildTargetGroup, ICollection<string> value)
             {
                 if (value is null || value.Count == 0) return;
+                Debug.Log($"Plugins Data Editor : DelScriptingDefine -> {buildTargetGroup}");
                 var str = GetScriptingDefineSymbolsForGroup(buildTargetGroup);
-
                 if (str.Count == 0) return;
                 IList<string> verify = new List<string>(str);
                 verify = RemoveRepeat(verify);
@@ -177,7 +179,11 @@ namespace AIO
             {
                 var refreshSettingsMethodInfo = typeof(AssetDatabase).GetMethod("RefreshSettings",
                     BindingFlags.Static | BindingFlags.Public);
-                if (refreshSettingsMethodInfo != null) refreshSettingsMethodInfo.Invoke(null, null);
+                if (refreshSettingsMethodInfo != null)
+                {
+                    Debug.Log("Plugins Data Editor : AssetDatabase RefreshSettings Start");
+                    refreshSettingsMethodInfo.Invoke(null, null);
+                }
             }
 
             /// <summary>
@@ -185,12 +191,15 @@ namespace AIO
             /// </summary>
             public static void CompilationPipelineRequestScriptCompilation()
             {
+                Debug.Log("Plugins Data Editor : CompilationPipelineRequestScriptCompilation");
                 var requestScriptCompilationMethodInfo = typeof(CompilationPipeline).GetMethod(
                     "RequestScriptCompilation", BindingFlags.Static | BindingFlags.Public);
                 if (requestScriptCompilationMethodInfo != null)
+                {
+                    Debug.Log("Plugins Data Editor : CompilationPipeline RequestScriptCompilation Start");
                     requestScriptCompilationMethodInfo.Invoke(null, null);
+                }
             }
-
 
             private static Delegate CompilationPipelineCompilationStarted;
 
@@ -198,6 +207,7 @@ namespace AIO
 
             public static void CompilationPipelineCompilationStartedBegin()
             {
+                Debug.Log("Plugins Data Editor : CompilationPipelineCompilationStartedBegin");
                 var compilationFinishedEventInfo = typeof(CompilationPipeline).GetEvent("compilationStarted",
                     BindingFlags.Static | BindingFlags.Public);
                 var methodInfo = typeof(PluginDataEditor).GetMethod(nameof(CompilationPipelineCompilationStartedEnd),
@@ -213,6 +223,7 @@ namespace AIO
 
             private static void CompilationPipelineCompilationStartedEnd(object o)
             {
+                Debug.Log("Plugins Data Editor : CompilationPipelineCompilationStartedEnd");
                 EditorUtility.DisplayProgressBar("插件", "正在编译", 0);
                 {
                     var compilationFinishedEventInfo = typeof(CompilationPipeline).GetEvent("compilationStarted",
@@ -249,6 +260,7 @@ namespace AIO
 
             private static void CompilationPipelineCompilationFinishedEnd(object o)
             {
+                Debug.Log("Plugins Data Editor : CompilationPipelineCompilationFinishedEnd");
                 var compilationFinishedEventInfo = typeof(CompilationPipeline).GetEvent("compilationFinished",
                     BindingFlags.Static | BindingFlags.Public);
                 var methodInfo = typeof(PluginDataEditor).GetMethod(nameof(CompilationPipelineCompilationFinishedEnd),
@@ -263,7 +275,6 @@ namespace AIO
                 }
 
                 EditorUtility.ClearProgressBar();
-
                 if (EditorUtility.DisplayDialog("插件", "命令执行完毕", "OK"))
                 {
                     AssetDatabase.Refresh(

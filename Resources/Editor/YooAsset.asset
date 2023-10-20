@@ -15,5 +15,5 @@ MonoBehaviour:
   SourceRelativePath: Packages\\com.*.package\\Packages~\\YooAsset
   Name: Yoo Asset
   TargetRelativePath: Packages\com.tuyoogame.yooasset
-  MacroDefinition: 
+  MacroDefinition: Test_111
   Introduction: "\u8D44\u6E90\u7BA1\u7406"
