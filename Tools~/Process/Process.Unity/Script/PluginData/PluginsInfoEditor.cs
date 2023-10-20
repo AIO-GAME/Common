@@ -232,9 +232,7 @@ namespace AIO
 
                     var parent = Directory.GetParent(target.FullName);
                     if (parent != null && !parent.Exists) parent.Create();
-
-                    var a = PrPlatform.Folder.Symbolic(target.FullName, source.FullName);
-                    list.Add(a.Async());
+                    list.Add(PrPlatform.Folder.Symbolic(target.FullName, source.FullName).Async());
                 }
 
                 if (list.Count > 0)
@@ -242,10 +240,10 @@ namespace AIO
                     EditorUtility.DisplayProgressBar("插件", "正在安装插件", 0);
                     await Task.WhenAll(list);
                     EditorUtility.ClearProgressBar();
+                    Helper.AddScriptingDefine(EditorUserBuildSettings.selectedBuildTargetGroup, macroList);
                     AssetDatabase.Refresh();
                     Helper.RefreshSettings();
                     Helper.CompilationPipelineCompilationStartedBegin();
-                    Helper.AddScriptingDefine(EditorUserBuildSettings.selectedBuildTargetGroup, macroList);
                     Helper.CompilationPipelineRequestScriptCompilation();
                 }
             }
@@ -285,11 +283,11 @@ namespace AIO
                     EditorUtility.DisplayProgressBar("插件", "正在卸载插件", 0);
                     await Task.WhenAll(list);
                     EditorUtility.ClearProgressBar();
-                    
+
+                    Helper.DelScriptingDefine(EditorUserBuildSettings.selectedBuildTargetGroup, macroList);
                     AssetDatabase.Refresh();
                     Helper.RefreshSettings();
                     Helper.CompilationPipelineCompilationStartedBegin();
-                    Helper.DelScriptingDefine(EditorUserBuildSettings.selectedBuildTargetGroup, macroList);
                     Helper.CompilationPipelineRequestScriptCompilation();
                 }
             }

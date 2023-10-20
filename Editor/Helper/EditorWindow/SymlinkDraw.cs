@@ -11,10 +11,13 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using Microsoft.Win32.SafeHandles;
 using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
+
+#if UNITY_EDITOR_WIN
+using Microsoft.Win32.SafeHandles;
+#endif
 
 namespace AIO.UEditor
 {
@@ -26,10 +29,7 @@ namespace AIO.UEditor
     /// symlinks.
     /// </summary>
     [InitializeOnLoad]
-    [GWindow("符号链接", "Symlink Window", Group = "Tools",
-        MinSizeWidth = 600, MinSizeHeight = 600
-    )]
-    internal class SymlinkWindow : GraphicWindow
+    internal class SymlinkDraw
     {
         // FileAttributes that match a junction folder.
         private const FileAttributes FOLDER_SYMLINK_ATTRIBS = FileAttributes.Directory | FileAttributes.ReparsePoint;
@@ -54,24 +54,46 @@ namespace AIO.UEditor
             }
         }
 
+        // Style used to draw the symlink indicator in the project view.
+        private static GUIStyle _SymlinkErrorStyle;
+
+        private static GUIStyle SymlinkErrorStyle
+        {
+            get
+            {
+                if (_SymlinkErrorStyle is null)
+                {
+                    _SymlinkErrorStyle = new GUIStyle(EditorStyles.label)
+                    {
+                        normal = { textColor = new Color(0.7f, 0.3f, 0.4f, 0.7f) },
+                        alignment = TextAnchor.MiddleRight
+                    };
+                }
+
+                return _SymlinkErrorStyle;
+            }
+        }
+
         [SettingsProvider]
         protected static SettingsProvider SettingsProvider()
         {
-            var provider = CreateSettingsProvider("Symlink");
-            provider.label = "Symlink Tool";
-            provider.guiHandler = delegate
+            var provider = new GraphicSettingsProvider($"AIO/Symlink", SettingsScope.User)
             {
-                GELayout.Label("General", EditorStyles.boldLabel);
-                GELayout.BeginVertical();
-                GELayout.Space();
-                if (GELayout.Button(GetShowSymlink() ? "Hide Symlink" : "Show Symlink"))
+                label = "Symlink Tool",
+                guiHandler = delegate
                 {
-                    SetShowSymlink(!GetShowSymlink());
-                    _ShowSymlink = !_ShowSymlink;
-                }
+                    GUILayout.Label("General", EditorStyles.boldLabel);
+                    GUILayout.BeginVertical();
+                    GUILayout.Space(10);
+                    if (GUILayout.Button(GetShowSymlink() ? "Hide Symlink" : "Show Symlink"))
+                    {
+                        SetShowSymlink(!GetShowSymlink());
+                        _ShowSymlink = !_ShowSymlink;
+                    }
 
-                GELayout.Space();
-                GELayout.EndVertical();
+                    GUILayout.Space(10);
+                    GUILayout.EndVertical();
+                }
             };
             return provider;
         }
@@ -81,7 +103,7 @@ namespace AIO.UEditor
         /// <summary>
         /// Static constructor subscribes to projectWindowItemOnGUI delegate.
         /// </summary>
-        static SymlinkWindow()
+        static SymlinkDraw()
         {
             _ShowSymlink = GetShowSymlink();
             EditorApplication.projectWindowItemOnGUI += OnProjectWindowItemGUI;
@@ -90,16 +112,12 @@ namespace AIO.UEditor
         /// <summary>
         /// 显示符号链接
         /// </summary>
-        private static bool GetShowSymlink() => EditorPrefs.GetBool("AIO.Symlink.ShowSymlink", true);
+        private static bool GetShowSymlink() => EditorPrefs.GetBool(typeof(SymlinkDraw).FullName, true);
 
         /// <summary>
         /// 显示符号链接
         /// </summary>
-        private static void SetShowSymlink(bool value) => EditorPrefs.SetBool("AIO.Symlink.ShowSymlink", value);
-
-        protected override void OnAwake()
-        {
-        }
+        private static void SetShowSymlink(bool value) => EditorPrefs.SetBool(typeof(SymlinkDraw).FullName, value);
 
         /// <summary>
         /// Draw a little indicator if folder is a symlink
@@ -284,6 +302,8 @@ namespace AIO.UEditor
             }
         }
 
+#if UNITY_EDITOR_WIN
+
         [DllImport("kernel32.dll", EntryPoint = "CreateFileW", CharSet = CharSet.Unicode, SetLastError = true)]
         private static extern SafeFileHandle CreateFile(string lpFileName, int dwDesiredAccess, int dwShareMode,
             IntPtr securityAttributes, int dwCreationDisposition, int dwFlagsAndAttributes, IntPtr hTemplateFile);
@@ -296,25 +316,34 @@ namespace AIO.UEditor
         private const int CREATION_DISPOSITION_OPEN_EXISTING = 3;
         private const int FILE_FLAG_BACKUP_SEMANTICS = 0x02000000;
 
+#endif
+
         public static string GetRealPath(string path)
         {
             if (!Directory.Exists(path) && !File.Exists(path))
             {
-                throw new IOException("Path not found");
+                Console.WriteLine(new IOException("Path not found"));
+                return path;
             }
 
-            var directoryHandle = CreateFile(path, 0, 2, IntPtr.Zero, CREATION_DISPOSITION_OPEN_EXISTING,
-                FILE_FLAG_BACKUP_SEMANTICS, IntPtr.Zero); //Handle file / folder
+#if UNITY_EDITOR_WIN
+            var directoryHandle = CreateFile(path, 0, 2, IntPtr.Zero,
+                CREATION_DISPOSITION_OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, IntPtr.Zero); //Handle file / folder
 
             if (directoryHandle.IsInvalid)
             {
-                throw new Win32Exception(Marshal.GetLastWin32Error());
+                Console.WriteLine(new Win32Exception(Marshal.GetLastWin32Error()));
+                return path;
             }
 
             var result = new StringBuilder(512);
             var mResult = GetFinalPathNameByHandle(directoryHandle, result, result.Capacity, 0);
 
-            if (mResult < 0) throw new Win32Exception(Marshal.GetLastWin32Error());
+            if (mResult < 0)
+            {
+                Console.WriteLine(new Win32Exception(Marshal.GetLastWin32Error()));
+                return path;
+            }
 
             if (result.Length >= 4 && result[0] == '\\' && result[1] == '\\' && result[2] == '?' && result[3] == '\\')
             {
@@ -322,6 +351,12 @@ namespace AIO.UEditor
             }
 
             return result.ToString();
+
+#elif UNITY_EDITOR_OSX
+            // 在OSX上获取符号链接的真实路径
+#else
+            return path;
+#endif
         }
     }
 }

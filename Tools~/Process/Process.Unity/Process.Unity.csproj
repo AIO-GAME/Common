@@ -67,10 +67,10 @@
     <Compile Include="Script\MenuItem\MenuItem.Git.ALL.cs" />
     <Compile Include="Script\MenuItem\MenuItem.Git.cs" />
     <Compile Include="Script\MenuItem\MenuItem.Tools.Open.cs" />
-    <Compile Include="Script\PluginsInfo\Plugins.cs" />
-    <Compile Include="Script\PluginsInfo\PluginsInfo.Helper.cs" />
-    <Compile Include="Script\PluginsInfo\PluginsInfoEditor.cs" />
-    <Compile Include="Script\PluginsInfo\PluginsInfoWindow.cs" />
+    <Compile Include="Script\PluginData\Plugins.cs" />
+    <Compile Include="Script\PluginData\PluginsInfo.Helper.cs" />
+    <Compile Include="Script\PluginData\PluginsInfoEditor.cs" />
+    <Compile Include="Script\PluginData\PluginsInfoWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Process\Process.csproj">
