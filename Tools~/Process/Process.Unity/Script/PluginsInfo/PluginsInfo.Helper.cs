@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
+using UnityEditor.Compilation;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -167,6 +168,114 @@ namespace AIO
                 verify = RemoveRepeat(verify);
                 foreach (var item in value) verify.Remove(item);
                 SetScriptingDefineSymbolsForGroup(buildTargetGroup, verify);
+            }
+
+            /// <summary>
+            /// 刷新设置
+            /// </summary>
+            public static void RefreshSettings()
+            {
+                var refreshSettingsMethodInfo = typeof(AssetDatabase).GetMethod("RefreshSettings",
+                    BindingFlags.Static | BindingFlags.Public);
+                if (refreshSettingsMethodInfo != null) refreshSettingsMethodInfo.Invoke(null, null);
+            }
+
+            /// <summary>
+            /// 编译程序集
+            /// </summary>
+            public static void CompilationPipelineRequestScriptCompilation()
+            {
+                var requestScriptCompilationMethodInfo = typeof(CompilationPipeline).GetMethod(
+                    "RequestScriptCompilation", BindingFlags.Static | BindingFlags.Public);
+                if (requestScriptCompilationMethodInfo != null)
+                    requestScriptCompilationMethodInfo.Invoke(null, null);
+            }
+
+
+            private static Delegate CompilationPipelineCompilationStarted;
+
+            private static Delegate CompilationPipelineCompilationFinished;
+
+            public static void CompilationPipelineCompilationStartedBegin()
+            {
+                var compilationFinishedEventInfo = typeof(CompilationPipeline).GetEvent("compilationStarted",
+                    BindingFlags.Static | BindingFlags.Public);
+                var methodInfo = typeof(PluginDataEditor).GetMethod(nameof(CompilationPipelineCompilationStartedEnd),
+                    BindingFlags.Static | BindingFlags.NonPublic);
+                if (compilationFinishedEventInfo != null && methodInfo != null)
+                {
+                    if (CompilationPipelineCompilationStarted is null)
+                        CompilationPipelineCompilationStarted =
+                            Delegate.CreateDelegate(compilationFinishedEventInfo.EventHandlerType, null, methodInfo);
+                    compilationFinishedEventInfo.AddEventHandler(null, CompilationPipelineCompilationStarted);
+                }
+            }
+
+            private static void CompilationPipelineCompilationStartedEnd(object o)
+            {
+                EditorUtility.DisplayProgressBar("插件", "正在编译", 0);
+                {
+                    var compilationFinishedEventInfo = typeof(CompilationPipeline).GetEvent("compilationStarted",
+                        BindingFlags.Static | BindingFlags.Public);
+                    var methodInfo = typeof(PluginDataEditor).GetMethod(
+                        nameof(CompilationPipelineCompilationStartedEnd),
+                        BindingFlags.Static | BindingFlags.NonPublic);
+                    if (compilationFinishedEventInfo != null && methodInfo != null)
+                    {
+                        if (CompilationPipelineCompilationStarted is null)
+                            CompilationPipelineCompilationStarted =
+                                Delegate.CreateDelegate(compilationFinishedEventInfo.EventHandlerType, null,
+                                    methodInfo);
+                        compilationFinishedEventInfo.RemoveEventHandler(null, CompilationPipelineCompilationStarted);
+                    }
+                }
+
+                {
+                    var compilationFinishedEventInfo = typeof(CompilationPipeline).GetEvent("compilationFinished",
+                        BindingFlags.Static | BindingFlags.Public);
+                    var methodInfo = typeof(PluginDataEditor).GetMethod(
+                        nameof(CompilationPipelineCompilationFinishedEnd),
+                        BindingFlags.Static | BindingFlags.NonPublic);
+                    if (compilationFinishedEventInfo != null && methodInfo != null)
+                    {
+                        if (CompilationPipelineCompilationFinished is null)
+                            CompilationPipelineCompilationFinished =
+                                Delegate.CreateDelegate(compilationFinishedEventInfo.EventHandlerType, null,
+                                    methodInfo);
+                        compilationFinishedEventInfo.AddEventHandler(null, CompilationPipelineCompilationFinished);
+                    }
+                }
+            }
+
+            private static void CompilationPipelineCompilationFinishedEnd(object o)
+            {
+                var compilationFinishedEventInfo = typeof(CompilationPipeline).GetEvent("compilationFinished",
+                    BindingFlags.Static | BindingFlags.Public);
+                var methodInfo = typeof(PluginDataEditor).GetMethod(nameof(CompilationPipelineCompilationFinishedEnd),
+                    BindingFlags.Static | BindingFlags.NonPublic);
+                if (compilationFinishedEventInfo != null && methodInfo != null)
+                {
+                    if (CompilationPipelineCompilationFinished is null)
+                        CompilationPipelineCompilationFinished =
+                            Delegate.CreateDelegate(compilationFinishedEventInfo.EventHandlerType, null,
+                                methodInfo);
+                    compilationFinishedEventInfo.RemoveEventHandler(null, CompilationPipelineCompilationFinished);
+                }
+
+                EditorUtility.ClearProgressBar();
+
+                if (EditorUtility.DisplayDialog("插件", "命令执行完毕", "OK"))
+                {
+                    AssetDatabase.Refresh(
+                        ImportAssetOptions.ForceSynchronousImport |
+                        ImportAssetOptions.ForceUpdate |
+                        ImportAssetOptions.ImportRecursive |
+                        ImportAssetOptions.DontDownloadFromCacheServer |
+                        ImportAssetOptions.ForceUncompressedImport |
+                        ImportAssetOptions.Default
+                    );
+                    CompilationPipelineRequestScriptCompilation();
+                }
             }
         }
     }
