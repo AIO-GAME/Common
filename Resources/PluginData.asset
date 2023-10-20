@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 1146298806, guid: d6a73fd01763dc74986b8acf577ee60b, type: 3}
   m_Name: PluginData
   m_EditorClassIdentifier: 
-  SourceRelativePath: 
-  Name: 
-  TargetRelativePath: 
-  MacroDefinition: 
+  SourceRelativePath: Packages\\com.*.package\\Packages~\\YooAsset
+  Name: Yoo Assets
+  TargetRelativePath: Packages\com.tuyoogame.yooasset
+  MacroDefinition: Test_111
   Introduction: 

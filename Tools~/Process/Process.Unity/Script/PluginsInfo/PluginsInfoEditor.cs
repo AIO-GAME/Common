@@ -239,36 +239,14 @@ namespace AIO
 
                 if (list.Count > 0)
                 {
+                    EditorUtility.DisplayProgressBar("插件", "正在安装插件", 0);
                     await Task.WhenAll(list);
+                    EditorUtility.ClearProgressBar();
                     AssetDatabase.Refresh();
-
-                    var refreshSettingsMethodInfo = typeof(AssetDatabase).GetMethod("RefreshSettings",
-                        BindingFlags.Static | BindingFlags.Public);
-                    if (refreshSettingsMethodInfo != null) refreshSettingsMethodInfo.Invoke(null, null);
-
-                    // 使用反射方式调用事件 CompilationPipeline.compilationFinished 
-
-                    var compilationFinishedEventInfo = typeof(CompilationPipeline).GetEvent("compilationFinished",
-                        BindingFlags.Static | BindingFlags.Public);
-                    var methodInfo = typeof(PluginDataEditor).GetMethod("compilationFinished",
-                        BindingFlags.Static | BindingFlags.NonPublic);
-                    if (compilationFinishedEventInfo != null && methodInfo != null)
-                    {
-                        compilationFinishedEventInfo.AddEventHandler(null,
-                            Delegate.CreateDelegate(compilationFinishedEventInfo.EventHandlerType, null, methodInfo));
-                    }
-
-//                 CompilationPipeline.compilationFinished += compilationFinished;
-
-                    if (macroList.Count != 0)
-                        Helper.AddScriptingDefine(EditorUserBuildSettings.selectedBuildTargetGroup,
-                            macroList.ToArray());
-
-                    var requestScriptCompilationMethodInfo = typeof(CompilationPipeline).GetMethod(
-                        "RequestScriptCompilation", BindingFlags.Static | BindingFlags.Public);
-                    if (requestScriptCompilationMethodInfo != null)
-                        requestScriptCompilationMethodInfo.Invoke(null, null);
-//                 CompilationPipeline.RequestScriptCompilation();
+                    Helper.RefreshSettings();
+                    Helper.CompilationPipelineCompilationStartedBegin();
+                    Helper.AddScriptingDefine(EditorUserBuildSettings.selectedBuildTargetGroup, macroList);
+                    Helper.CompilationPipelineRequestScriptCompilation();
                 }
             }
 
@@ -304,33 +282,15 @@ namespace AIO
 
                 if (list.Count > 0)
                 {
+                    EditorUtility.DisplayProgressBar("插件", "正在卸载插件", 0);
                     await Task.WhenAll(list);
-
-                    AssetDatabase.Refresh();
-
-                    var refreshSettingsMethodInfo = typeof(AssetDatabase).GetMethod("RefreshSettings",
-                        BindingFlags.Static | BindingFlags.Public);
-                    if (refreshSettingsMethodInfo != null) refreshSettingsMethodInfo.Invoke(null, null);
-
-                    var compilationFinishedEventInfo = typeof(CompilationPipeline).GetEvent("compilationFinished",
-                        BindingFlags.Static | BindingFlags.Public);
-                    var methodInfo = typeof(PluginDataEditor).GetMethod("compilationFinished",
-                        BindingFlags.Static | BindingFlags.NonPublic);
-                    if (compilationFinishedEventInfo != null && methodInfo != null)
-                    {
-                        compilationFinishedEventInfo.AddEventHandler(null,
-                            Delegate.CreateDelegate(compilationFinishedEventInfo.EventHandlerType, null, methodInfo));
-                    }
-
-                    if (macroList.Count != 0)
-                        Helper.DelScriptingDefine(EditorUserBuildSettings.selectedBuildTargetGroup,
-                            macroList.ToArray());
-                    var requestScriptCompilationMethodInfo = typeof(CompilationPipeline).GetMethod(
-                        "RequestScriptCompilation", BindingFlags.Static | BindingFlags.Public);
-                    if (requestScriptCompilationMethodInfo != null)
-                        requestScriptCompilationMethodInfo.Invoke(null, null);
+                    EditorUtility.ClearProgressBar();
                     
-                    // CompilationPipeline.RequestScriptCompilation();
+                    AssetDatabase.Refresh();
+                    Helper.RefreshSettings();
+                    Helper.CompilationPipelineCompilationStartedBegin();
+                    Helper.DelScriptingDefine(EditorUserBuildSettings.selectedBuildTargetGroup, macroList);
+                    Helper.CompilationPipelineRequestScriptCompilation();
                 }
             }
 
@@ -342,26 +302,6 @@ namespace AIO
             internal static Task UnInitialize(PluginData info)
             {
                 return UnInitialize(new[] { info });
-            }
-
-            private static void compilationFinished(object o)
-            {
-                EditorUtility.ClearProgressBar();
-                EditorUtility.DisplayDialog("插件", "命令执行完毕", "OK");
-
-
-                var compilationFinishedEventInfo = typeof(CompilationPipeline).GetEvent("compilationFinished",
-                    BindingFlags.Static | BindingFlags.Public);
-                var methodInfo = typeof(PluginDataEditor).GetMethod("compilationFinished",
-                    BindingFlags.Static | BindingFlags.NonPublic);
-                if (compilationFinishedEventInfo != null && methodInfo != null)
-                {
-                    compilationFinishedEventInfo.RemoveEventHandler(null,
-                        Delegate.CreateDelegate(compilationFinishedEventInfo.EventHandlerType, null, methodInfo));
-                }
-#if UNITY_2019_1_OR_NEWER
-            CompilationPipeline.compilationFinished -= compilationFinished;
-#endif
             }
         }
     }

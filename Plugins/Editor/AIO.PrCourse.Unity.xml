@@ -127,6 +127,16 @@
             禁止传入的宏定义
             </summary>
         </member>
+        <member name="M:AIO.Plugins.Helper.RefreshSettings">
+            <summary>
+            刷新设置
+            </summary>
+        </member>
+        <member name="M:AIO.Plugins.Helper.CompilationPipelineRequestScriptCompilation">
+            <summary>
+            编译程序集
+            </summary>
+        </member>
         <member name="T:AIO.Plugins.PluginDataEditor">
             <summary>
             插件管理
