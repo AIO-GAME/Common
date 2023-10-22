@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
@@ -83,20 +85,6 @@ namespace AIO
                 UpdateData();
             }
 
-#if UNITY_2019_1_OR_NEWER
-            private void compilationStarted(object o)
-            {
-                CompilationPipeline.compilationStarted -= compilationStarted;
-                UpdateData();
-            }
-#else
-            private void compilationStarted(string o)
-            {
-                CompilationPipeline.assemblyCompilationStarted -= compilationStarted;
-                UpdateData();
-            }
-#endif
-
             private void UpdateData()
             {
                 RootData.Clear();
@@ -146,15 +134,13 @@ namespace AIO
                     {
                         InstallIsSelect = false;
                         if (InstallIsSelectDic.Count == 0) return;
-                        var temp = new List<PluginData>();
-                        foreach (var item in InstallIndexList.Where(V => InstallIsSelectDic[V]))
-                            temp.Add(RootData[item]);
-#if UNITY_2019_1_OR_NEWER
-                    CompilationPipeline.compilationStarted += compilationStarted;
-#else
-                        CompilationPipeline.assemblyCompilationStarted += compilationStarted;
-#endif
+                        var temp = InstallIndexList
+                            .Where(V => InstallIsSelectDic[V])
+                            .Select(item => RootData[item]).ToList();
+
+                        Helper.CB = UpdateData;
                         _ = PluginDataEditor.Initialize(temp);
+
                         return;
                     }
                 }
@@ -164,13 +150,8 @@ namespace AIO
                 if (!InstallIsSelect)
                     if (GUILayout.Button("安装全部", GUILayout.Width(60)))
                     {
-#if UNITY_2019_1_OR_NEWER
-                    CompilationPipeline.compilationStarted += compilationStarted;
-#else
-                        CompilationPipeline.assemblyCompilationStarted += compilationStarted;
-#endif
-                        _ = PluginDataEditor.Initialize(RootData.Values.Where(plugin =>
-                            InstallIndexList.Contains(plugin.Name)));
+                        Helper.CB = UpdateData;
+                        _ = PluginDataEditor.Initialize(RootData.Values.Where(plugin => InstallIndexList.Contains(plugin.Name)));
                         return;
                     }
 
@@ -206,12 +187,8 @@ namespace AIO
                                 {
                                     if (GUILayout.Button("安装", GUILayout.Width(60), GUILayout.Height(20)))
                                     {
-#if UNITY_2019_1_OR_NEWER
-                                    CompilationPipeline.compilationStarted += compilationStarted;
-#else
-                                        CompilationPipeline.assemblyCompilationStarted += compilationStarted;
-#endif
                                         _ = PluginDataEditor.Initialize(Data);
+                                        UpdateData();
                                         return;
                                     }
                                 }
@@ -257,16 +234,14 @@ namespace AIO
                             if (GUILayout.Button("执行", GUILayout.Width(60)))
                             {
                                 UnInstallIsSelect = false;
-                                var temp = new List<PluginData>();
-                                foreach (var item in UnInstallIndexList.Where(V => UnInstallIsSelectDic[V]))
-                                    temp.Add(RootData[item]);
+                                var temp = UnInstallIndexList
+                                    .Where(V => UnInstallIsSelectDic[V])
+                                    .Select(item => RootData[item])
+                                    .ToList();
 
                                 if (temp.Count == 0) return;
-#if UNITY_2019_1_OR_NEWER
-                            CompilationPipeline.compilationStarted += compilationStarted;
-#else
-                                CompilationPipeline.assemblyCompilationStarted += compilationStarted;
-#endif
+
+                                Helper.CB = UpdateData;
                                 _ = PluginDataEditor.UnInitialize(temp);
                                 return;
                             }
@@ -276,13 +251,8 @@ namespace AIO
                         if (!UnInstallIsSelect)
                             if (GUILayout.Button("卸载全部", GUILayout.Width(60)))
                             {
-#if UNITY_2019_1_OR_NEWER
-                            CompilationPipeline.compilationStarted += compilationStarted;
-#else
-                                CompilationPipeline.assemblyCompilationStarted += compilationStarted;
-#endif
-                                _ = PluginDataEditor.UnInitialize(RootData.Values.Where(plugin =>
-                                    UnInstallIndexList.Contains(plugin.Name)));
+                                Helper.CB = UpdateData;
+                                _ = PluginDataEditor.UnInitialize(RootData.Values.Where(plugin => UnInstallIndexList.Contains(plugin.Name)));
                                 return;
                             }
                     }
@@ -314,23 +284,15 @@ namespace AIO
                                             Helper.AddScriptingDefine(EditorUserBuildSettings.selectedBuildTargetGroup,
                                                 Data.MacroDefinition.Split(';'));
                                             AssetDatabase.Refresh();
-#if UNITY_2020_1_OR_NEWER
-                                        AssetDatabase.RefreshSettings();
-#endif
-#if UNITY_2019_1_OR_NEWER
-                                        CompilationPipeline.RequestScriptCompilation();
-#endif
+                                            Helper.RefreshSettings();
+                                            Helper.CompilationPipelineRequestScriptCompilation();
                                             return;
                                         }
                                     }
 
                                     if (GUILayout.Button("卸载", GUILayout.Width(60), GUILayout.Height(20)))
                                     {
-#if UNITY_2019_1_OR_NEWER
-                                    CompilationPipeline.compilationStarted += compilationStarted;
-#else
-                                        CompilationPipeline.assemblyCompilationStarted += compilationStarted;
-#endif
+                                        Helper.CB = UpdateData;
                                         _ = PluginDataEditor.UnInitialize(Data);
                                         return;
                                     }
@@ -351,6 +313,11 @@ namespace AIO
                         EditorGUILayout.Space();
                     }
                 }
+            }
+
+            private void OnDestroy()
+            {
+                Helper.Close();
             }
         }
     }

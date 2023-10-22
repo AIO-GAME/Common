@@ -59,7 +59,7 @@
       <HintPath>..\..\Resources\Plugins\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>..\..\..\..\..\..\..\..\Tenncent\Script\com.self.package\Tools~\Resources\Plugins\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>..\..\Resources\Plugins\UnityEngine.IMGUIModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
