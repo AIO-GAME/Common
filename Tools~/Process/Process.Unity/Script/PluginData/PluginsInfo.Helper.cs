@@ -8,6 +8,7 @@ using UnityEditor.Compilation;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
+
 #pragma warning disable CS1591
 namespace AIO
 {
@@ -15,13 +16,29 @@ namespace AIO
     {
         internal static class Helper
         {
-            public static T GetOrDefault<T>(IDictionary dic, in object key, in T defaultValue)
+            internal static Action CB;
+
+            private static PluginDataWindow Window;
+
+            [MenuItem("Tools/Window/Plugin Data Manager #_F12")]
+            public static void Open()
             {
-                if (dic == null)
-                    throw new ArgumentNullException(nameof(dic));
-                if (key == null)
-                    throw new ArgumentNullException(nameof(key));
-                return dic.Contains(key) && dic[key] is T obj ? obj : defaultValue;
+                if (Window is null)
+                {
+                    Window = ScriptableObject.CreateInstance<PluginDataWindow>();
+                    Window.titleContent = new GUIContent("插件管理界面", "Plugin Data Manager");
+                    Window.minSize = new Vector2(200, 600);
+                }
+
+                Window.Show(true);
+                Window.Focus();
+                Window.Repaint();
+            }
+
+            public static void Close()
+            {
+                if (Window != null) Window.Close();
+                Window = null;
             }
 
             /// <summary>
@@ -41,23 +58,14 @@ namespace AIO
                     .Where(value => value != null);
             }
 
-            private static PluginDataWindow Window;
-
-            [MenuItem("Tools/Window/Plugin Data Manager #_F12")]
-            public static void Open()
+            public static T GetOrDefault<T>(IDictionary dic, in object key, in T defaultValue)
             {
-                if (Window is null)
-                {
-                    Window = ScriptableObject.CreateInstance<PluginDataWindow>();
-                    Window.titleContent = new GUIContent("插件管理界面", "Plugin Data Manager");
-                    Window.minSize = new Vector2(200, 600);
-                }
-
-                Window.Show(true);
-                Window.Focus();
-                Window.Repaint();
+                if (dic == null)
+                    throw new ArgumentNullException(nameof(dic));
+                if (key == null)
+                    throw new ArgumentNullException(nameof(key));
+                return dic.Contains(key) && dic[key] is T obj ? obj : defaultValue;
             }
-
 
             /// <summary>
             /// 移除重复元素
@@ -90,8 +98,8 @@ namespace AIO
             private static ICollection<string> GetScriptingDefineSymbolsForGroup(BuildTargetGroup buildTargetGroup)
             {
                 //获得当前平台已有的的宏定义
-                var GetScriptingDefineSymbols = typeof(PlayerSettings).GetMethod("GetScriptingDefineSymbols",
-                    BindingFlags.Static | BindingFlags.Public);
+                var GetScriptingDefineSymbols = typeof(PlayerSettings).GetMethod("GetScriptingDefineSymbolsInternal",
+                    BindingFlags.Static | BindingFlags.NonPublic);
                 string str = null;
                 if (GetScriptingDefineSymbols != null)
                 {
@@ -109,7 +117,6 @@ namespace AIO
                 }
                 else str = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
 
-                Debug.Log($"Plugins Data Editor : GetScriptingDefineSymbolsForGroup -> {buildTargetGroup} : {str}");
                 return string.IsNullOrEmpty(str) ? Array.Empty<string>() : str.Split(';');
             }
 
@@ -117,8 +124,17 @@ namespace AIO
                 IEnumerable<string> verify)
             {
                 //获得当前平台已有的的宏定义
-                var SetScriptingDefineSymbols = typeof(PlayerSettings).GetMethod("SetScriptingDefineSymbols",
-                    BindingFlags.Static | BindingFlags.Public);
+                MethodInfo SetScriptingDefineSymbols = null;
+                foreach (var methodInfo in typeof(PlayerSettings).GetMethods(BindingFlags.Static | BindingFlags.Public))
+                {
+                    if (methodInfo.Name != "SetScriptingDefineSymbols") continue;
+                    var parameters = methodInfo.GetParameters();
+                    if (parameters.Length != 2) continue;
+                    if (parameters[0].ParameterType != typeof(string)) continue;
+                    if (parameters[1].ParameterType != typeof(string)) continue;
+                    SetScriptingDefineSymbols = methodInfo;
+                }
+
                 var str = string.Join(";", verify);
                 if (SetScriptingDefineSymbols != null)
                 {
@@ -136,7 +152,6 @@ namespace AIO
                     }
                 }
                 else PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, str);
-                Debug.Log($"Plugins Data Editor : SetScriptingDefineSymbolsForGroup -> {buildTargetGroup} : {str}");
             }
 
             /// <summary>
@@ -191,9 +206,10 @@ namespace AIO
             /// </summary>
             public static void CompilationPipelineRequestScriptCompilation()
             {
-                Debug.Log("Plugins Data Editor : CompilationPipelineRequestScriptCompilation");
-                var requestScriptCompilationMethodInfo = typeof(CompilationPipeline).GetMethod(
-                    "RequestScriptCompilation", BindingFlags.Static | BindingFlags.Public);
+                var requestScriptCompilationMethodInfo = typeof(CompilationPipeline)
+                    .GetMethods(BindingFlags.Static | BindingFlags.Public)
+                    .Where(method => method.Name == "RequestScriptCompilation")
+                    .FirstOrDefault(method => method.GetParameters().Length <= 0);
                 if (requestScriptCompilationMethodInfo != null)
                 {
                     Debug.Log("Plugins Data Editor : CompilationPipeline RequestScriptCompilation Start");
@@ -201,92 +217,65 @@ namespace AIO
                 }
             }
 
-            private static Delegate CompilationPipelineCompilationStarted;
-
-            private static Delegate CompilationPipelineCompilationFinished;
-
             public static void CompilationPipelineCompilationStartedBegin()
             {
-                Debug.Log("Plugins Data Editor : CompilationPipelineCompilationStartedBegin");
-                var compilationFinishedEventInfo = typeof(CompilationPipeline).GetEvent("compilationStarted",
-                    BindingFlags.Static | BindingFlags.Public);
-                var methodInfo = typeof(PluginDataEditor).GetMethod(nameof(CompilationPipelineCompilationStartedEnd),
-                    BindingFlags.Static | BindingFlags.NonPublic);
-                if (compilationFinishedEventInfo != null && methodInfo != null)
+                var compilationStarted = typeof(CompilationPipeline).GetEvent("compilationStarted", BindingFlags.Static | BindingFlags.Public);
+                if (compilationStarted != null)
                 {
-                    if (CompilationPipelineCompilationStarted is null)
-                        CompilationPipelineCompilationStarted =
-                            Delegate.CreateDelegate(compilationFinishedEventInfo.EventHandlerType, null, methodInfo);
-                    compilationFinishedEventInfo.AddEventHandler(null, CompilationPipelineCompilationStarted);
+                    var methodInfo = typeof(Helper).GetMethod(nameof(CompilationPipelineCompilationStartedEnd), BindingFlags.Static | BindingFlags.NonPublic);
+                    var Events = Delegate.CreateDelegate(compilationStarted.EventHandlerType, null, methodInfo);
+                    Debug.Log("Plugins Data Editor : CompilationPipelineCompilationStartedBegin");
+                    compilationStarted.AddEventHandler(null, Events);
                 }
             }
 
             private static void CompilationPipelineCompilationStartedEnd(object o)
             {
-                Debug.Log("Plugins Data Editor : CompilationPipelineCompilationStartedEnd");
                 EditorUtility.DisplayProgressBar("插件", "正在编译", 0);
+                var compilationStarted = typeof(CompilationPipeline).GetEvent("compilationStarted", BindingFlags.Static | BindingFlags.Public);
+                if (compilationStarted != null)
                 {
-                    var compilationFinishedEventInfo = typeof(CompilationPipeline).GetEvent("compilationStarted",
-                        BindingFlags.Static | BindingFlags.Public);
-                    var methodInfo = typeof(PluginDataEditor).GetMethod(
-                        nameof(CompilationPipelineCompilationStartedEnd),
-                        BindingFlags.Static | BindingFlags.NonPublic);
-                    if (compilationFinishedEventInfo != null && methodInfo != null)
-                    {
-                        if (CompilationPipelineCompilationStarted is null)
-                            CompilationPipelineCompilationStarted =
-                                Delegate.CreateDelegate(compilationFinishedEventInfo.EventHandlerType, null,
-                                    methodInfo);
-                        compilationFinishedEventInfo.RemoveEventHandler(null, CompilationPipelineCompilationStarted);
-                    }
+                    var methodInfo = typeof(Helper).GetMethod(nameof(CompilationPipelineCompilationStartedEnd), BindingFlags.Static | BindingFlags.NonPublic);
+                    var Events = Delegate.CreateDelegate(compilationStarted.EventHandlerType, null, methodInfo);
+                    Debug.Log("Plugins Data Editor : CompilationPipelineCompilationStartedEnd");
+                    compilationStarted.RemoveEventHandler(null, Events);
                 }
 
+                var compilationFinished = typeof(CompilationPipeline).GetEvent("compilationFinished", BindingFlags.Static | BindingFlags.Public);
+                if (compilationFinished != null)
                 {
-                    var compilationFinishedEventInfo = typeof(CompilationPipeline).GetEvent("compilationFinished",
-                        BindingFlags.Static | BindingFlags.Public);
-                    var methodInfo = typeof(PluginDataEditor).GetMethod(
-                        nameof(CompilationPipelineCompilationFinishedEnd),
-                        BindingFlags.Static | BindingFlags.NonPublic);
-                    if (compilationFinishedEventInfo != null && methodInfo != null)
-                    {
-                        if (CompilationPipelineCompilationFinished is null)
-                            CompilationPipelineCompilationFinished =
-                                Delegate.CreateDelegate(compilationFinishedEventInfo.EventHandlerType, null,
-                                    methodInfo);
-                        compilationFinishedEventInfo.AddEventHandler(null, CompilationPipelineCompilationFinished);
-                    }
+                    var methodInfo = typeof(Helper).GetMethod(nameof(CompilationPipelineCompilationFinishedEnd), BindingFlags.Static | BindingFlags.NonPublic);
+                    var Events = Delegate.CreateDelegate(compilationFinished.EventHandlerType, null, methodInfo);
+                    compilationFinished.AddEventHandler(null, Events);
                 }
             }
 
             private static void CompilationPipelineCompilationFinishedEnd(object o)
             {
-                Debug.Log("Plugins Data Editor : CompilationPipelineCompilationFinishedEnd");
-                var compilationFinishedEventInfo = typeof(CompilationPipeline).GetEvent("compilationFinished",
-                    BindingFlags.Static | BindingFlags.Public);
-                var methodInfo = typeof(PluginDataEditor).GetMethod(nameof(CompilationPipelineCompilationFinishedEnd),
-                    BindingFlags.Static | BindingFlags.NonPublic);
-                if (compilationFinishedEventInfo != null && methodInfo != null)
+                var compilationFinished = typeof(CompilationPipeline).GetEvent("compilationFinished", BindingFlags.Static | BindingFlags.Public);
+                if (compilationFinished != null)
                 {
-                    if (CompilationPipelineCompilationFinished is null)
-                        CompilationPipelineCompilationFinished =
-                            Delegate.CreateDelegate(compilationFinishedEventInfo.EventHandlerType, null,
-                                methodInfo);
-                    compilationFinishedEventInfo.RemoveEventHandler(null, CompilationPipelineCompilationFinished);
+                    var methodInfo = typeof(Helper).GetMethod(nameof(CompilationPipelineCompilationFinishedEnd), BindingFlags.Static | BindingFlags.NonPublic);
+                    var Events = Delegate.CreateDelegate(compilationFinished.EventHandlerType, null, methodInfo);
+                    Debug.Log("Plugins Data Editor : CompilationPipelineCompilationFinishedEnd");
+                    compilationFinished.RemoveEventHandler(null, Events);
                 }
 
+                //
+                // Client.Resolve();
                 EditorUtility.ClearProgressBar();
-                if (EditorUtility.DisplayDialog("插件", "命令执行完毕", "OK"))
-                {
-                    AssetDatabase.Refresh(
-                        ImportAssetOptions.ForceSynchronousImport |
-                        ImportAssetOptions.ForceUpdate |
-                        ImportAssetOptions.ImportRecursive |
-                        ImportAssetOptions.DontDownloadFromCacheServer |
-                        ImportAssetOptions.ForceUncompressedImport |
-                        ImportAssetOptions.Default
-                    );
-                    CompilationPipelineRequestScriptCompilation();
-                }
+                EditorUtility.DisplayDialog("插件", "命令执行完毕", "OK");
+                AssetDatabase.Refresh(
+                    ImportAssetOptions.ForceSynchronousImport |
+                    ImportAssetOptions.ForceUpdate |
+                    ImportAssetOptions.ImportRecursive |
+                    ImportAssetOptions.DontDownloadFromCacheServer |
+                    ImportAssetOptions.ForceUncompressedImport
+                );
+
+                CompilationPipelineRequestScriptCompilation();
+                CB?.Invoke();
+                CB = null;
             }
         }
     }

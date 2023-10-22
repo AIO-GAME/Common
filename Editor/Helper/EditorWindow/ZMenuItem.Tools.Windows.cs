@@ -26,7 +26,6 @@ namespace AIO.UEditor
             typeof(CScriptManagerGraphWindow),
             typeof(DependAnalysisGraphWindow),
             typeof(IconsListGraphWindow),
-            typeof(PluginsManagerWindow),
             typeof(PackageManagerWindow),
             typeof(ScriptIDWindow),
             typeof(ScriptingDefineSymbols),
@@ -50,12 +49,6 @@ namespace AIO.UEditor
         public static void OpenPackageManagerWindow()
         {
             EHelper.Window.Open<PackageManagerWindow>(DockedWindowTypes);
-        }
-
-        [MenuItem("Tools/Window/Plugins Manager #_F12")]
-        public static void OpenPluginsManagerWindow()
-        {
-            EHelper.Window.Open<PluginsManagerWindow>(DockedWindowTypes);
         }
 
         private const string LABLE_AssestManagerWindow = "Assest Manager";
