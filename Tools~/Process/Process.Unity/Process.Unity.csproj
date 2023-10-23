@@ -73,10 +73,10 @@
     <Compile Include="Script\MenuItem\MenuItem.Git.ALL.cs" />
     <Compile Include="Script\MenuItem\MenuItem.Git.cs" />
     <Compile Include="Script\MenuItem\MenuItem.Tools.Open.cs" />
-    <Compile Include="Script\PluginData\Plugins.cs" />
-    <Compile Include="Script\PluginData\PluginsInfo.Helper.cs" />
-    <Compile Include="Script\PluginData\PluginsInfoEditor.cs" />
-    <Compile Include="Script\PluginData\PluginsInfoWindow.cs" />
+    <Compile Include="Script\PluginData\PluginData.cs" />
+    <Compile Include="Script\PluginData\PluginData.Helper.cs" />
+    <Compile Include="Script\PluginData\PluginData.Editor.cs" />
+    <Compile Include="Script\PluginData\PluginData.Window.cs" />
     <Compile Include="Script\RainbowFolders\Borodar.RainbowCore.RList.Editor\ReorderableDrawer.cs" />
     <Compile Include="Script\RainbowFolders\Borodar.RainbowCore.RList.Editor\ReorderableList.cs" />
     <Compile Include="Script\RainbowFolders\Borodar.RainbowCore.RList\ReorderableArray.cs" />

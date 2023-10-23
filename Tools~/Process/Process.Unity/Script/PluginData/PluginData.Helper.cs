@@ -14,7 +14,7 @@ namespace AIO
 {
     internal partial class Plugins
     {
-        internal static class Helper
+        private static class Helper
         {
             internal static Action CB;
 
@@ -170,7 +170,6 @@ namespace AIO
 
                 SetScriptingDefineSymbolsForGroup(buildTargetGroup, RemoveRepeat(verify));
             }
-
 
             /// <summary>
             /// 禁止传入的宏定义

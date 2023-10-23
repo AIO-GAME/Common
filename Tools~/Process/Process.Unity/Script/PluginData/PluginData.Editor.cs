@@ -20,7 +20,7 @@ namespace AIO
         /// </summary>
         [CanEditMultipleObjects]
         [CustomEditor(typeof(PluginData))]
-        internal class PluginDataEditor : Editor
+        private class PluginDataEditor : Editor
         {
             private Dictionary<string, bool> InstallList;
 
