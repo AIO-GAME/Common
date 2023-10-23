@@ -23,7 +23,8 @@ namespace AIO.UEditor
                 .Select(PackageInfo.FindForAssetPath)
                 .GroupBy(x => x.assetPath)
                 .Select(x => x.First())
-                .Where(x => File.Exists(Path.Combine(x.resolvedPath, ".git")) || Directory.Exists(Path.Combine(x.resolvedPath, ".git")))
+                .Where(x => File.Exists(Path.Combine(x.resolvedPath, ".git")) ||
+                            Directory.Exists(Path.Combine(x.resolvedPath, ".git")))
                 .ToList();
             return packageInfos;
         }
@@ -46,6 +47,7 @@ namespace AIO.UEditor
                 .Select(x => x.resolvedPath)
                 .ToList();
             await PrPlatform.Git.Pull(list, false);
+            AssetDatabase.Refresh();
         }
 
         [MenuItem(CMD_GIT + "/All/拉取分支 Pull Branch", false, 2)]
@@ -91,6 +93,7 @@ namespace AIO.UEditor
                 .Select(x => x.resolvedPath)
                 .ToList();
             await PrPlatform.Git.Clean(list, "-fdx", false);
+            AssetDatabase.Refresh();
         }
 
         [MenuItem(CMD_GIT + "/All/清理 Clean/-FD 强制清理文件夹", false, 6)]
@@ -100,6 +103,7 @@ namespace AIO.UEditor
                 .Select(x => x.resolvedPath)
                 .ToList();
             await PrPlatform.Git.Clean(list, "-fd", false);
+            AssetDatabase.Refresh();
         }
 
         [MenuItem(CMD_GIT + "/All/重置 Reset/--Hard 重置 [分支 暂存区 工作区]", false, 6)]
@@ -109,6 +113,7 @@ namespace AIO.UEditor
                 .Select(x => x.resolvedPath)
                 .ToList();
             await PrPlatform.Git.ResetHard(list, false);
+            AssetDatabase.Refresh();
         }
 
         [MenuItem(CMD_GIT + "/All/重置 Reset/--Keep 重置 [索引] 如果提交和HEAD之间的文件与HEAD不同，则重置将中止", false, 6)]
@@ -118,6 +123,7 @@ namespace AIO.UEditor
                 .Select(x => x.resolvedPath)
                 .ToList();
             await PrPlatform.Git.ResetKeep(list, false);
+            AssetDatabase.Refresh();
         }
 
         [MenuItem(CMD_GIT + "/All/重置 Reset/--Merge 重置 [索引 暂存区] 更改和索引产生 重置将被终止", false, 6)]
@@ -127,6 +133,7 @@ namespace AIO.UEditor
                 .Select(x => x.resolvedPath)
                 .ToList();
             await PrPlatform.Git.ResetMerge(list, false);
+            AssetDatabase.Refresh();
         }
 
         [MenuItem(CMD_GIT + "/All/重置 Reset/--Mixed 重置 [分支 暂存区]", false, 6)]
@@ -136,6 +143,7 @@ namespace AIO.UEditor
                 .Select(x => x.resolvedPath)
                 .ToList();
             await PrPlatform.Git.ResetMixed(list, false);
+            AssetDatabase.Refresh();
         }
 
         [MenuItem(CMD_GIT + "/All/重置 Reset/--Soft 重置 [分支]", false, 6)]
@@ -145,6 +153,7 @@ namespace AIO.UEditor
                 .Select(x => x.resolvedPath)
                 .ToList();
             await PrPlatform.Git.ResetSoft(list, false);
+            AssetDatabase.Refresh();
         }
 
         #endregion
