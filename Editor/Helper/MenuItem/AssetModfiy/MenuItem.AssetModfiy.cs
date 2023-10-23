@@ -24,9 +24,9 @@ namespace AIO.UEditor
     /// <summary>
     /// MenuItem_Assets
     /// </summary>
-    public class MenuItem_AssetModfiy
+    public static class MenuItem_AssetModify
     {
-        [MenuItem("Tools/AssetModfiy/修复脚本GUID")]
+        [MenuItem("Tools/AssetModify/修复脚本GUID")]
         public static void Test()
         {
             var assemblies = new List<Assembly>
@@ -215,7 +215,7 @@ namespace AIO.UEditor
         }
 
 
-        [MenuItem("Tools/AssetModfiy/查询资源丢失脚本")]
+        [MenuItem("Tools/AssetModify/查询资源丢失脚本")]
         static void SelectGameObjects()
         {
             //Get the current scene and all top-level GameObjects in the scene hierarchy

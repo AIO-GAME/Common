@@ -58,8 +58,14 @@
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\Resources\Plugins\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>..\..\..\..\..\..\..\..\Tenncent\Script\com.self.package\Tools~\Resources\Plugins\UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
       <HintPath>..\..\Resources\Plugins\UnityEngine.IMGUIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\..\..\..\..\..\..\..\Tenncent\Script\com.self.package\Tools~\Resources\Plugins\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -71,6 +77,36 @@
     <Compile Include="Script\PluginData\PluginsInfo.Helper.cs" />
     <Compile Include="Script\PluginData\PluginsInfoEditor.cs" />
     <Compile Include="Script\PluginData\PluginsInfoWindow.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowCore.RList.Editor\ReorderableDrawer.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowCore.RList.Editor\ReorderableList.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowCore.RList\ReorderableArray.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowCore.RList\ReorderableAttribute.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowCore\CoreBackground.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowCore\CoreBackgroundsStorage.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowCore\CoreDraggablePopupWindow.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowCore\CoreEditorTexture.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowCore\CoreEditorTexturesStorage.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowCore\CoreEditorUtility.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowCore\CoreTexturesStorageHelper.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowCore\Tuple.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowFolders.Settings\ProjectRule.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowFolders.Settings\ProjectRuleDrawer.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowFolders.Settings\ProjectRuleset.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowFolders.Settings\ProjectRulesetEditor.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowFolders\AssetInfo.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowFolders\ProjectEditorTexture.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowFolders\ProjectEditorTexturesStorage.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowFolders\ProjectEditorUtility.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowFolders\ProjectIcon.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowFolders\ProjectIconsStorage.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowFolders\ProjectPreferences.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowFolders\ProjectWindowAdapter.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowFolders\RainbowFoldersBackgroundsMenu.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowFolders\RainbowFoldersContextMenu.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowFolders\RainbowFoldersGUI.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowFolders\RainbowFoldersIconsMenu.cs" />
+    <Compile Include="Script\RainbowFolders\Borodar.RainbowFolders\RainbowFoldersPopup.cs" />
+    <Compile Include="Script\UnityConsole\UnityConsoleEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Process\Process.csproj">

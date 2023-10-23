@@ -12,7 +12,7 @@ namespace AIO.UEditor
 {
     public static class ManageRuntime
     {
-        #region MyRegion
+        #region Runtime
 
         public const string KEY = nameof(AIO) + "." + nameof(UEditor) + "." + nameof(ManageRuntime) + "." +
                                   nameof(Setting);
@@ -74,18 +74,6 @@ namespace AIO.UEditor
             var set = EHelper.Prefs.LoadBoolean(KEY);
             if (check == set) return;
             Menu.SetChecked("Tools/AIO/Runtime Export", set);
-            // if (set)
-            // {
-            //     EditorUtility.DisplayProgressBar("DLL", "正在开启 AIO Package", 0.99f);
-            //     Enable(GetEnable());
-            //     EditorUtility.ClearProgressBar();
-            // }
-            // else
-            // {
-            //     EditorUtility.DisplayProgressBar("DLL", "正在关闭 AIO Package", 0.99f);
-            //     Disable(GetDisable());
-            //     EditorUtility.ClearProgressBar();
-            // }
         }
 
         [MenuItem("Tools/AIO/Runtime Export", false, 0)]
