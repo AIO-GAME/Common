@@ -5,11 +5,11 @@
   "license": "MIT",
   "description": "AIO Unity Package Manager",
   "category": "Runtime",
-  "documentationUrl": "https://git.code.tencent.com/UnityLibs/com.self.package",
-  "changelogUrl": "https://git.code.tencent.com/UnityLibs/com.self.package/commits/master",
-  "licensesUrl": "https://git.code.tencent.com/UnityLibs/com.self.package/blob/master/LICENSE",
+  "documentationUrl": "https://gitee.com/Xinansky/com.self.package",
+  "changelogUrl": "https://gitee.com/Xinansky/com.self.package/commits/main",
+  "licensesUrl": "https://gitee.com/Xinansky/com.self.package/blob/main/LICENSE",
   "author": {
-    "name": "XiNan",
+    "name": "xinan",
     "email": "1398581458@qq.com",
     "url": "https://xinansky.com"
   },
@@ -17,7 +17,8 @@
   "type": "library",
   "repository": {
     "type": "git",
-    "url": "https://git.code.tencent.com/UnityLibs/com.self.package.git"
+    "url": "https://gitee.com/Xinansky/com.self.package",
+    "version": "0.1.2"
   },
   "dependencies": {
     "com.unity.nuget.newtonsoft-json": "3.0.2"

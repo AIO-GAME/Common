@@ -73,7 +73,7 @@ namespace AIO.UEditor
         {
             // 	var package = PackageInfo.FindForAssembly(typeof(PackageGen).Assembly);
             // 	if (package is null || string.IsNullOrEmpty(package.resolvedPath))
-            return Path.Combine(Application.dataPath, "Editor/Gen/Git");
+            return Path.Combine(Application.dataPath, "Editor\\Gen\\Git");
             // return Path.Combine(package.resolvedPath, "Editor/Gen/Git");
         }
 
