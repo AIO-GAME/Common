@@ -74,6 +74,26 @@
             生成
             </summary>
         </member>
+        <member name="F:AIO.UEditor.UnityConsoleEditor.MENU_DEVELOPER_MODE">
+            <summary>
+            输出日志
+            </summary>
+        </member>
+        <member name="F:AIO.UEditor.UnityConsoleEditor.MENU_EDITOR_SWITCH_LOG">
+            <summary>
+            错误日志
+            </summary>
+        </member>
+        <member name="F:AIO.UEditor.UnityConsoleEditor.MENU_EDITOR_SWITCH_ERROR">
+            <summary>
+            开发者模式
+            </summary>
+        </member>
+        <member name="M:AIO.UEditor.UnityConsoleEditor.OpenDeveloperMode">
+            <summary>
+            打开开发者模式
+            </summary>
+        </member>
         <member name="T:AIO.PluginData">
             <summary>
             插件信息
@@ -167,6 +187,26 @@
             
             </summary>
             <exception cref="T:System.IO.DirectoryNotFoundException"></exception>
+        </member>
+        <member name="F:AIO.RainbowFolders.AssetInfo.STORE_ID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.RainbowFolders.AssetInfo.NAME">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.RainbowFolders.AssetInfo.VERSION">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.RainbowFolders.AssetInfo.HELP_URL">
+            <summary>
+            
+            </summary>
         </member>
     </members>
 </doc>
