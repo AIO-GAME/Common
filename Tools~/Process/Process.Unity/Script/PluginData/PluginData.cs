@@ -7,7 +7,7 @@ namespace AIO
     /// 插件信息
     /// </summary>
     [CreateAssetMenu(menuName = "Plugins/AIO Data", fileName = nameof(PluginData))]
-    internal class PluginData : ScriptableObject
+    public class PluginData : ScriptableObject
     {
         /// <summary>
         /// 插件相对路径

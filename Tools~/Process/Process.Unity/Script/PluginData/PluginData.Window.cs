@@ -16,7 +16,7 @@ namespace AIO
         /// <summary>
         /// 插件管理界面
         /// </summary>
-        public class PluginDataWindow : EditorWindow
+        private class PluginDataWindow : EditorWindow
         {
             protected Vector2 Vector;
 

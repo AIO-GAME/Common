@@ -138,7 +138,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 隔行
         /// </summary>
-        public new static void Space(float width)
+        public static void Space(float width)
         {
             EditorGUILayout.Space(width);
         }
