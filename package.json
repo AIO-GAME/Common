@@ -1,9 +1,9 @@
 {
-  "name": "com.self.package",
-  "displayName": "AIO Package Manager",
+  "name": "com.aio.package",
+  "displayName": "AIO Common",
   "version": "1.0.1",
   "license": "MIT",
-  "description": "AIO Unity Package Manager",
+  "description": "AIO Unity Common",
   "category": "Runtime",
   "documentationUrl": "https://github.com/AIO-GAME/Common",
   "changelogUrl": "https://github.com/AIO-GAME/Common/commits/main",
