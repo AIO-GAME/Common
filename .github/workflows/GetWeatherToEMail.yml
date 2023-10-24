@@ -1,0 +1,28 @@
+name: GitHub Actions Weather Bot
+
+# 触发条件：在 push 到 main 分支后
+on:
+  push:
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout codes'
+        uses: actions/checkout@v1
+
+      - name: 'Get weather report'
+        run: bash ./weather.sh
+
+      - name: 'Send mail'
+        uses: dawidd6/action-send-mail@master
+        with:
+          serveraddress: smtp.qq.com
+          serverport: 465
+          username: ${{ secrets.MAILUSERNAME }}
+          password: ${{ secrets.MAILPASSWORD }}
+          subject: Shenzhen Weather Report
+          body: file://result.html
+          to: op-31@lllcn.com
+          from: GitHub Actions
+          content_type: text/html
