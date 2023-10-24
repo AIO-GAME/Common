@@ -23,6 +23,6 @@ jobs:
           password: ${{ secrets.MAILPASSWORD }}
           subject: Shenzhen Weather Report
           body: file://result.html
-          to: op-31@lllcn.com
+          to: XiNanskyhailun@foxmail.com
           from: GitHub Actions
           content_type: text/html
