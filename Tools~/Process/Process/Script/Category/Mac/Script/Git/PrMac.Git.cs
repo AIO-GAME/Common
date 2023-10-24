@@ -29,7 +29,33 @@ namespace AIO
                     Brew.Install(CMD_Git).Sync();
                 }
 
-                GITPATH = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, string.Concat(AppDomain.CurrentDomain.BaseDirectory.GetHashCode(), ".sh"));
+                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    if (!assembly.GetName().Name.StartsWith("UnityEngine")) continue;
+                    var type = assembly.GetType("UnityEngine.Application");
+                    if (type is null) continue;
+                    var dataPath = type.GetProperty("dataPath",
+                        System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public);
+                    if (dataPath is null) continue;
+                    GITPATH = dataPath.GetValue(null, null) as string;
+                    if (string.IsNullOrEmpty(GITPATH)) continue;
+                    var Root = Directory.GetParent(GITPATH);
+                    if (Root is null)
+                    {
+                        GITPATH = string.Empty;
+                        continue;
+                    }
+
+                    GITPATH = Path.Combine(Root.FullName,
+                        string.Concat(AppDomain.CurrentDomain.BaseDirectory.GetHashCode(), ".sh"));
+                    break;
+                }
+
+                if (string.IsNullOrEmpty(GITPATH))
+                {
+                    GITPATH = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                        string.Concat(AppDomain.CurrentDomain.BaseDirectory.GetHashCode(), ".sh"));
+                }
             }
 
             /// <summary>
@@ -49,7 +75,8 @@ namespace AIO
                     str.AppendLine(LINE_TOP);
                     if (!Directory.Exists(target))
                     {
-                        str.AppendFormat("\n echo $\"Error:{0}$\" \n", new FileNotFoundException(nameof(target), target).Message);
+                        str.AppendFormat("\n echo $\"Error:{0}$\" \n",
+                            new FileNotFoundException(nameof(target), target).Message);
                     }
                     else
                     {
@@ -77,7 +104,8 @@ namespace AIO
                 str.AppendLine(LINE_TOP);
                 if (!Directory.Exists(target))
                 {
-                    str.AppendFormat("\n echo $\"Error:{0}$\" \n", new FileNotFoundException(nameof(target), target).Message);
+                    str.AppendFormat("\n echo $\"Error:{0}$\" \n",
+                        new FileNotFoundException(nameof(target), target).Message);
                 }
                 else
                 {
@@ -104,8 +132,6 @@ namespace AIO
                 str.AppendLine("PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin");
                 str.AppendLine("export PATH");
                 str.AppendLine("echo $\"┌───────────────────────────────────┐\"");
-                str.AppendLine("echo $\"|Author      :XINAN                 |\"");
-                str.AppendLine("echo $\"|E-MAIL      :1398581458@qq.com     |\"");
                 str.AppendLine("echo $\"|Description :Automatic Generation  |\"");
                 str.AppendLine("echo $\"└───────────────────────────────────┘\"");
                 str.AppendLine("echo");

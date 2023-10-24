@@ -10,7 +10,7 @@
   "licensesUrl": "https://github.com/AIO-GAME/Common/blob/main/LICENSE",
   "author": {
     "name": "xinan",
-    "email": "xinansky99@foxmail.com",
+    "email": "xinansky99@foxmail.com"
   },
   "type": "library",
   "dependencies": {
