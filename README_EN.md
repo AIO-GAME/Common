@@ -11,6 +11,7 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/AIO-Game/Common?label=size)
 ![GitHub issues](https://img.shields.io/github/issues/AIO-GAME/Common)
 [![Open Source Helpers](https://www.codetriage.com/aio-game/common/badges/users.svg)](https://www.codetriage.com/aio-game/common)
+[![openupm](https://img.shields.io/npm/v/com.aio.package?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.aio.package/)
 
 # 
 

@@ -11,8 +11,50 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/AIO-Game/Common?label=size)
 ![GitHub issues](https://img.shields.io/github/issues/AIO-GAME/Common)
 [![Open Source Helpers](https://www.codetriage.com/aio-game/common/badges/users.svg)](https://www.codetriage.com/aio-game/common)
+[![openupm](https://img.shields.io/npm/v/com.aio.package?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.aio.package/)
 
-#     
+## ⚙ Install
+<details>
+<summary>
+<span style="color: deepskyblue; "><b>通过Packages清单安装</b></span>
+</summary>
+
+````json
+{
+    "dependencies": {
+        "com.aio.package": "1.0.0-preview"
+    },
+    "scopedRegistries": [
+        {
+          "name": "package.openupm.cn",
+          "url": "https://package.openupm.cn",
+          "scopes": [
+            "com.aio.package"
+          ]
+        }
+    ]
+}
+````
+</details>
+&ensp;
+<details>
+<summary>
+<span style="color: deepskyblue; "><b>通过PackageManager安装</b></span>
+</summary>
+
+~~~
+// 输入以下内容（中国版）
+Name: package.openupm.cn
+URL: https://package.openupm.cn
+Scope(s): com.aio.package
+
+// 输入以下内容（国际版）
+Name: package.openupm.com
+URL: https://package.openupm.com
+Scope(s): com.aio.package
+~~~
+</details>
+
 
 ## 📢 Thanks
 
