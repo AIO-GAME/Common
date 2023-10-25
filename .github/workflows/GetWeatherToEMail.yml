@@ -12,6 +12,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: 'Make the script files executable'
+        shell: bash
+        working-directory: ./.github/workflows
         run: chmod +x weather.sh
 
       - name: 'Get weather report'
