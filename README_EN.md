@@ -24,7 +24,7 @@
 ````json
 {
   "dependencies": {
-    "com.aio.package": "1.0.0-preview"
+    "com.aio.package": "x.x.x"
   },
   "scopedRegistries": [
     {
