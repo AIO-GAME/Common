@@ -5,6 +5,13 @@
 <p align="center"><strong>Easily match frame components</strong></p>
 <p align="center">English | <a href="README.md">简体中文</a></p>
 
+[![GitHub version](https://badge.fury.io/gh/AIO-GAME%2FCommon.svg)](https://badge.fury.io/gh/AIO-GAME%2FCommon)
+![GitHub Repo stars](https://img.shields.io/github/stars/AIO-GAME/Common?label=Star&link=https%3A%2F%2Fgithub.com%2FAIO-GAME%2FCommon)
+![GitHub](https://img.shields.io/github/license/AIO-Game/Common)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/AIO-Game/Common?label=size)
+![GitHub issues](https://img.shields.io/github/issues/AIO-GAME/Common)
+[![Open Source Helpers](https://www.codetriage.com/aio-game/common/badges/users.svg)](https://www.codetriage.com/aio-game/common)
+
 # 
 
 ## 📢 Thanks
