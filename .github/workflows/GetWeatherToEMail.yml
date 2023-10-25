@@ -23,6 +23,10 @@ jobs:
           password: ${{ secrets.MAILPASSWORD }}
           subject: Shenzhen Weather Report
           body: file://result.html
-          to: XiNanskyhailun@foxmail.com
-          from: GitHub Actions
+          to: XiNanskyhailun@foxmail.com,1962833199@qq.com
+          from: XiNan GitHub Actions
           content_type: text/html
+          # Optional carbon copy recipients:
+          # cc: kyloren@example.com,leia@example.com
+          # Optional blind carbon copy recipients:
+          # bcc: r2d2@example.com,hansolo@example.com
