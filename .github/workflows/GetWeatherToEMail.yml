@@ -34,7 +34,6 @@ jobs:
           to: XiNanskyhailun@foxmail.com,1962833199@qq.com
           subject: Shenzhen Weather Report
           html_body: file://./.github/workflows/result.html
-          content_type: text/html
           # Optional carbon copy recipients:
           # cc: kyloren@example.com,leia@example.com
           # Optional blind carbon copy recipients:
