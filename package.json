@@ -1,7 +1,7 @@
 {
   "name": "com.aio.package",
   "displayName": "AIO Unity Common",
-  "version": "1.0.1",
+  "version": "1.0.0-preview",
   "license": "MIT",
   "description": "AIO Unity Common",
   "category": "Runtime",
