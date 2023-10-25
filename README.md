@@ -1,7 +1,7 @@
 <p align="center">
     <img src="./Documentation~/Logo.svg" width="144"  alt="https://github.com/AIO-GAME/Common"/>
 </p>
-<h1 align="center">AIO Unity Common<br />(C# Basic universal library)</h1>
+<h1 align="center">AIO Unity Common<br/>C# Basic universal library</h1>
 <p align="center"><strong>Easily match frame components</strong></p>
 <p align="center"><a href="README_EN.md">English</a> | 简体中文</p>
 
