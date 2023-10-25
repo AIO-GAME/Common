@@ -30,3 +30,5 @@ jobs:
           # cc: kyloren@example.com,leia@example.com
           # Optional blind carbon copy recipients:
           # bcc: r2d2@example.com,hansolo@example.com
+          # Optional priority: 'high', 'normal' (default) or 'low'
+          # priority: low
