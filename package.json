@@ -1,6 +1,6 @@
 {
   "name": "com.aio.package",
-  "displayName": "AIO Common",
+  "displayName": "AIO Unity Common",
   "version": "1.0.1",
   "license": "MIT",
   "description": "AIO Unity Common",
@@ -9,7 +9,7 @@
   "changelogUrl": "https://github.com/AIO-GAME/Common/commits/main",
   "licensesUrl": "https://github.com/AIO-GAME/Common/blob/main/LICENSE",
   "author": {
-    "name": "xinan",
+    "name": "aio",
     "email": "xinansky99@foxmail.com"
   },
   "type": "library",
