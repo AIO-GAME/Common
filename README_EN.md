@@ -3,7 +3,7 @@
 </p>
 <h1 align="center">AIO Unity Common<br />(C# Basic universal library)</h1>
 <p align="center"><strong>Easily match frame components</strong></p>
-<p align="center"><a href="README_EN.md">English</a> | 简体中文</p>
+<p align="center">English | <a href="README.md">简体中文</a></p>
 
 # 
 
