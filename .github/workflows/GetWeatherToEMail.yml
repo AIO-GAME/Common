@@ -24,14 +24,14 @@ jobs:
       - name: 'Send mail'
         uses: dawidd6/action-send-mail@master
         with:
-          serveraddress: smtp.qq.com
-          serverport: 25
+          server_address: smtp.qq.com
+          server_port: 25
           username: ${{ secrets.MAILUSERNAME }}
           password: ${{ secrets.MAILPASSWORD }}
-          subject: Shenzhen Weather Report
-          body: file://result.html
-          to: XiNanskyhailun@foxmail.com,1962833199@qq.com
           from: XiNan GitHub Actions
+          to: XiNanskyhailun@foxmail.com,1962833199@qq.com
+          subject: Shenzhen Weather Report
+          html_body: file://result.html
           content_type: text/html
           # Optional carbon copy recipients:
           # cc: kyloren@example.com,leia@example.com
