@@ -23,6 +23,7 @@ jobs:
           ./weather.sh
       - name: 'Send mail'
         uses: dawidd6/action-send-mail@master
+        working-directory: ./.github/workflows
         with:
           server_address: smtp.qq.com
           server_port: 25
