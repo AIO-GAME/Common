@@ -8,11 +8,17 @@ jobs:
   bot:
     runs-on: ubuntu-latest
     steps:
-      - name: 'Checkout Codes'
+      - name: 'Check out the repository to the runner'
         uses: actions/checkout@v4
 
+      - name: 'Make the script files executable'
+        run: chmod +x weather.sh
+
       - name: 'Get weather report'
-        run: bash curl -H "Accept-Language: zh-CN" -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36" -o result.html https://wttr.in/Shenzhen
+        working-directory: ./.github/workflows
+        shell: bash
+        run: |
+          ./weather.sh
 
       - name: 'Send mail'
         uses: dawidd6/action-send-mail@master
