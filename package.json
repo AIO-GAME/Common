@@ -2,7 +2,7 @@
   "name": "com.aio.package",
   "displayName": "AIO Unity Common",
   "description": "AIO Unity Common",
-  "version": "1.0.2-preview",
+  "version": "1.0.3-preview",
   "unity": "2019.1",
   "unityRelease": "0f1",
   "dependencies": {
@@ -17,11 +17,6 @@
     "Unity",
     "Common Function"
   ],
-  "repository": {
-    "url": "https://github.com/AIO-GAME/Common.git",
-    "type": "git",
-    "revision": "b6cef54e1b46b4311dd91fdd33053cdd5a8650a2"
-  },
   "author": {
     "name": "AIO-GAME",
     "email": "xinansky99@foxmail.com",
