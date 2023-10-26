@@ -18,7 +18,7 @@
 
 <details>
 <summary>
-<span style="color: deepskyblue; "><b>通过Packages清单安装</b></span>
+<span style="color: deepskyblue; "><b>通过 Packages 清单安装</b></span>
 </summary>
 
 ````json
@@ -42,7 +42,7 @@
 
 <details>
 <summary>
-<span style="color: deepskyblue; "><b>通过PackageManager安装</b></span>
+<span style="color: deepskyblue; "><b>通过 PackageManager 安装</b></span>
 </summary>
 
 ~~~
