@@ -1,20 +1,30 @@
 {
   "name": "com.aio.package",
   "displayName": "AIO Unity Common",
-  "version": "1.0.1-preview",
-  "license": "MIT",
   "description": "AIO Unity Common",
-  "category": "Runtime",
-  "documentationUrl": "https://github.com/AIO-GAME/Common.wiki.git",
-  "changelogUrl": "https://github.com/AIO-GAME/Common/commits/main",
-  "licensesUrl": "https://github.com/AIO-GAME/Common/blob/main/LICENSE",
-  "author": {
-    "name": "aio",
-    "email": "xinansky99@foxmail.com"
-  },
-  "type": "library",
+  "version": "1.0.1-preview",
+  "unity": "2019.1",
+  "unityRelease": "0f1",
   "dependencies": {
     "com.unity.nuget.newtonsoft-json": "3.0.2"
   },
-  "unity": "2019.4"
+  "hideInEditor": true,
+  "license": "MIT",
+  "documentationUrl": "https://github.com/AIO-GAME/Common.wiki.git",
+  "changelogUrl": "https://github.com/AIO-GAME/Common/commits/main",
+  "licensesUrl": "https://github.com/AIO-GAME/Common/blob/main/LICENSE.md",
+  "keywords": [
+    "Unity",
+    "Common Function"
+  ],
+  "repository": {
+    "url": "https://github.com/AIO-GAME/Common.git",
+    "type": "git",
+    "revision": "b6cef54e1b46b4311dd91fdd33053cdd5a8650a2"
+  },
+  "author": {
+    "name": "AIO-GAME",
+    "email": "xinansky99@foxmail.com",
+    "url": "https://github.com/AIO-GAME"
+  }
 }
