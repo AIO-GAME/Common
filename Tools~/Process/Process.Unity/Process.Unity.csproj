@@ -59,13 +59,13 @@
       <HintPath>..\..\Resources\Plugins\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ImageConversionModule">
-      <HintPath>..\..\..\..\..\..\..\..\Tenncent\Script\com.self.package\Tools~\Resources\Plugins\UnityEngine.ImageConversionModule.dll</HintPath>
+      <HintPath>..\..\Resources\Plugins\UnityEngine.ImageConversionModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
       <HintPath>..\..\Resources\Plugins\UnityEngine.IMGUIModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>..\..\..\..\..\..\..\..\Tenncent\Script\com.self.package\Tools~\Resources\Plugins\UnityEngine.TextRenderingModule.dll</HintPath>
+      <HintPath>..\..\Resources\Plugins\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

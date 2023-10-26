@@ -182,12 +182,6 @@
             卸载列表
             </summary>
         </member>
-        <member name="M:AIO.Plugins.PluginDataWindow.OnEnable">
-            <summary>
-            
-            </summary>
-            <exception cref="T:System.IO.DirectoryNotFoundException"></exception>
-        </member>
         <member name="F:AIO.RainbowFolders.AssetInfo.STORE_ID">
             <summary>
             

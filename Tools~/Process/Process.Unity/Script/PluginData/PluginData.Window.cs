@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using UnityEditor;
-using UnityEditor.Compilation;
 using UnityEngine;
 
 #pragma warning disable CS1591
@@ -18,22 +16,22 @@ namespace AIO
         /// </summary>
         private class PluginDataWindow : EditorWindow
         {
-            protected Vector2 Vector;
+            private Vector2 Vector;
 
             /// <summary>
             /// 根节点
             /// </summary>
-            internal Dictionary<string, PluginData> RootData;
+            private Dictionary<string, PluginData> RootData;
 
             /// <summary>
             /// 安装列表
             /// </summary>
-            internal List<string> InstallIndexList;
+            private List<string> InstallIndexList;
 
             /// <summary>
             /// 卸载列表
             /// </summary>
-            internal List<string> UnInstallIndexList;
+            private List<string> UnInstallIndexList;
 
             private bool InstallIsSelect = false;
 
@@ -45,7 +43,7 @@ namespace AIO
 
             private Dictionary<string, bool> UnInstallIsSelectDic;
 
-            internal string Root;
+            private string Root;
 
             public PluginDataWindow()
             {
@@ -73,18 +71,6 @@ namespace AIO
                 UnInstallIsSelectDic = null;
             }
 
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <exception cref="DirectoryNotFoundException"></exception>
-            protected void OnEnable()
-            {
-                var root = Directory.GetParent(Application.dataPath);
-                if (root is null) throw new DirectoryNotFoundException("未找到 Application.dataPath 根目录");
-                Root = Path.Combine(root.FullName, "Packages");
-                UpdateData();
-            }
-
             private void UpdateData()
             {
                 RootData.Clear();
@@ -92,7 +78,7 @@ namespace AIO
                 InstallIndexList.Clear();
                 UnInstallIndexList.Clear();
 
-                foreach (var data in Helper.GetAssetsRes<PluginData>($"t:{nameof(PluginData)}", "Packages"))
+                foreach (var data in Helper.GetAssetsRes<PluginData>($"t:{nameof(PluginData)}", "Packages", "Assets"))
                 {
                     var filename = data.Name;
                     if (!RootData.ContainsKey(filename))
@@ -106,56 +92,49 @@ namespace AIO
                 }
             }
 
-            protected void OnGUI()
-            {
-                EditorGUILayout.LabelField("插件安装管理", new GUIStyle("PreLabel"));
-                HeaderView();
-                Vector = EditorGUILayout.BeginScrollView(Vector);
-                InstallView();
-                EditorGUILayout.Space();
-                UnInstallView();
-                EditorGUILayout.EndScrollView();
-            }
-
             private void HeaderView()
             {
-                EditorGUILayout.BeginHorizontal("HeaderButton");
+                if (InstallIndexList is null || InstallIndexList.Count == 0) return;
 
-                if (GUILayout.Button(InstallIsSelect ? "取消" : "选择", GUILayout.Width(60)))
+                using (new EditorGUILayout.HorizontalScope("HeaderButton"))
                 {
-                    InstallIsSelect = !InstallIsSelect;
-                    InstallIsSelectDic.Clear();
-                    foreach (var item in InstallIndexList) InstallIsSelectDic.Add(item, false);
-                }
-
-                if (InstallIsSelect)
-                {
-                    if (GUILayout.Button("执行", GUILayout.Width(60)))
+                    if (GUILayout.Button(InstallIsSelect ? "取消" : "选择", GUILayout.Width(60)))
                     {
-                        InstallIsSelect = false;
-                        if (InstallIsSelectDic.Count == 0) return;
-                        var temp = InstallIndexList
-                            .Where(V => InstallIsSelectDic[V])
-                            .Select(item => RootData[item]).ToList();
-
-                        Helper.CB = UpdateData;
-                        _ = PluginDataEditor.Initialize(temp);
-
-                        return;
-                    }
-                }
-
-                EditorGUILayout.LabelField("安装列表", new GUIStyle("PreLabel"));
-
-                if (!InstallIsSelect)
-                    if (GUILayout.Button("安装全部", GUILayout.Width(60)))
-                    {
-                        Helper.CB = UpdateData;
-                        _ = PluginDataEditor.Initialize(RootData.Values.Where(plugin => InstallIndexList.Contains(plugin.Name)));
+                        InstallIsSelect = !InstallIsSelect;
+                        InstallIsSelectDic.Clear();
+                        foreach (var item in InstallIndexList) InstallIsSelectDic.Add(item, false);
                         return;
                     }
 
-                EditorGUILayout.EndHorizontal();
+                    if (InstallIsSelect)
+                    {
+                        if (GUILayout.Button("执行", GUILayout.Width(60)))
+                        {
+                            InstallIsSelect = false;
+                            if (InstallIsSelectDic.Count == 0) return;
+                            var temp = InstallIndexList
+                                .Where(V => InstallIsSelectDic[V])
+                                .Select(item => RootData[item]).ToList();
+
+                            Helper.CB = UpdateData;
+                            _ = PluginDataEditor.Initialize(temp);
+
+                            return;
+                        }
+                    }
+
+                    EditorGUILayout.LabelField("安装列表", new GUIStyle("PreLabel"));
+
+                    if (!InstallIsSelect)
+                    {
+                        if (GUILayout.Button("安装全部", GUILayout.Width(60)))
+                        {
+                            Helper.CB = UpdateData;
+                            _ = PluginDataEditor.Initialize(RootData.Values.Where(plugin => InstallIndexList.Contains(plugin.Name)));
+                            return;
+                        }
+                    }
+                }
             }
 
             private void InstallView()
@@ -313,6 +292,25 @@ namespace AIO
                         EditorGUILayout.Space();
                     }
                 }
+            }
+
+            protected void OnEnable()
+            {
+                var root = Directory.GetParent(Application.dataPath);
+                if (root is null) throw new DirectoryNotFoundException("未找到 Application.dataPath 根目录");
+                Root = Path.Combine(root.FullName, "Packages");
+                UpdateData();
+            }
+
+            protected void OnGUI()
+            {
+                EditorGUILayout.LabelField("插件安装管理", new GUIStyle("PreLabel"));
+                HeaderView();
+                Vector = EditorGUILayout.BeginScrollView(Vector);
+                InstallView();
+                EditorGUILayout.Space();
+                UnInstallView();
+                EditorGUILayout.EndScrollView();
             }
 
             private void OnDestroy()

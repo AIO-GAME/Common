@@ -37,7 +37,6 @@ namespace AIO
 
             public static void Close()
             {
-                if (Window != null) Window.Close();
                 Window = null;
             }
 
@@ -160,7 +159,6 @@ namespace AIO
             public static void AddScriptingDefine(BuildTargetGroup buildTargetGroup, ICollection<string> value)
             {
                 if (value is null || value.Count == 0) return;
-                Debug.Log($"Plugins Data Editor : AddScriptingDefine -> {buildTargetGroup}");
                 var verify = new List<string>(GetScriptingDefineSymbolsForGroup(buildTargetGroup));
                 foreach (var v in value)
                 {
@@ -177,7 +175,6 @@ namespace AIO
             public static void DelScriptingDefine(BuildTargetGroup buildTargetGroup, ICollection<string> value)
             {
                 if (value is null || value.Count == 0) return;
-                Debug.Log($"Plugins Data Editor : DelScriptingDefine -> {buildTargetGroup}");
                 var str = GetScriptingDefineSymbolsForGroup(buildTargetGroup);
                 if (str.Count == 0) return;
                 IList<string> verify = new List<string>(str);
@@ -193,11 +190,7 @@ namespace AIO
             {
                 var refreshSettingsMethodInfo = typeof(AssetDatabase).GetMethod("RefreshSettings",
                     BindingFlags.Static | BindingFlags.Public);
-                if (refreshSettingsMethodInfo != null)
-                {
-                    Debug.Log("Plugins Data Editor : AssetDatabase RefreshSettings Start");
-                    refreshSettingsMethodInfo.Invoke(null, null);
-                }
+                refreshSettingsMethodInfo?.Invoke(null, null);
             }
 
             /// <summary>
@@ -209,23 +202,19 @@ namespace AIO
                     .GetMethods(BindingFlags.Static | BindingFlags.Public)
                     .Where(method => method.Name == "RequestScriptCompilation")
                     .FirstOrDefault(method => method.GetParameters().Length <= 0);
-                if (requestScriptCompilationMethodInfo != null)
-                {
-                    Debug.Log("Plugins Data Editor : CompilationPipeline RequestScriptCompilation Start");
-                    requestScriptCompilationMethodInfo.Invoke(null, null);
-                }
+                requestScriptCompilationMethodInfo?.Invoke(null, null);
             }
 
             public static void CompilationPipelineCompilationStartedBegin()
             {
                 var compilationStarted = typeof(CompilationPipeline).GetEvent("compilationStarted", BindingFlags.Static | BindingFlags.Public);
-                if (compilationStarted != null)
-                {
-                    var methodInfo = typeof(Helper).GetMethod(nameof(CompilationPipelineCompilationStartedEnd), BindingFlags.Static | BindingFlags.NonPublic);
-                    var Events = Delegate.CreateDelegate(compilationStarted.EventHandlerType, null, methodInfo);
-                    Debug.Log("Plugins Data Editor : CompilationPipelineCompilationStartedBegin");
-                    compilationStarted.AddEventHandler(null, Events);
-                }
+                if (compilationStarted is null) return;
+
+                var methodInfo = typeof(Helper).GetMethod(nameof(CompilationPipelineCompilationStartedEnd), BindingFlags.Static | BindingFlags.NonPublic);
+                if (methodInfo is null) return;
+
+                var Events = Delegate.CreateDelegate(compilationStarted.EventHandlerType, null, methodInfo);
+                compilationStarted.AddEventHandler(null, Events);
             }
 
             private static void CompilationPipelineCompilationStartedEnd(object o)
@@ -235,8 +224,8 @@ namespace AIO
                 if (compilationStarted != null)
                 {
                     var methodInfo = typeof(Helper).GetMethod(nameof(CompilationPipelineCompilationStartedEnd), BindingFlags.Static | BindingFlags.NonPublic);
+                    if (methodInfo is null) return;
                     var Events = Delegate.CreateDelegate(compilationStarted.EventHandlerType, null, methodInfo);
-                    Debug.Log("Plugins Data Editor : CompilationPipelineCompilationStartedEnd");
                     compilationStarted.RemoveEventHandler(null, Events);
                 }
 
@@ -244,6 +233,7 @@ namespace AIO
                 if (compilationFinished != null)
                 {
                     var methodInfo = typeof(Helper).GetMethod(nameof(CompilationPipelineCompilationFinishedEnd), BindingFlags.Static | BindingFlags.NonPublic);
+                    if (methodInfo is null) return;
                     var Events = Delegate.CreateDelegate(compilationFinished.EventHandlerType, null, methodInfo);
                     compilationFinished.AddEventHandler(null, Events);
                 }
@@ -255,13 +245,11 @@ namespace AIO
                 if (compilationFinished != null)
                 {
                     var methodInfo = typeof(Helper).GetMethod(nameof(CompilationPipelineCompilationFinishedEnd), BindingFlags.Static | BindingFlags.NonPublic);
+                    if (methodInfo is null) return;
                     var Events = Delegate.CreateDelegate(compilationFinished.EventHandlerType, null, methodInfo);
-                    Debug.Log("Plugins Data Editor : CompilationPipelineCompilationFinishedEnd");
                     compilationFinished.RemoveEventHandler(null, Events);
                 }
 
-                //
-                // Client.Resolve();
                 EditorUtility.ClearProgressBar();
                 EditorUtility.DisplayDialog("插件", "命令执行完毕", "OK");
                 AssetDatabase.Refresh(
