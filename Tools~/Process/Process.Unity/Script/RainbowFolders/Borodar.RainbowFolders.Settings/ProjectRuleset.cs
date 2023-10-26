@@ -41,34 +41,62 @@ namespace AIO.RainbowFolders.Settings
             {
                 if (_instance is null)
                 {
-                    if (paths is null)
+                    try
                     {
-                        paths = new List<string>();
-                        foreach (var guid in AssetDatabase.FindAssets($"t:{nameof(ProjectRuleset)}",
-                                     new string[] { "Packages", "Assets" }))
+                        if (paths is null)
                         {
-                            paths.Add(AssetDatabase.GUIDToAssetPath(guid));
+                            paths = new List<string>();
+                            foreach (var guid in AssetDatabase.FindAssets($"t:{nameof(ProjectRuleset)}",
+                                         new string[] { "Packages", "Assets" }))
+                            {
+                                paths.Add(AssetDatabase.GUIDToAssetPath(guid));
+                            }
+                        }
+
+                        foreach (var expr in paths)
+                        {
+                            _instance = AssetDatabase.LoadAssetAtPath<ProjectRuleset>(expr);
+                            if (_instance is null) continue;
+                            _instance.UpdateOrdinals();
+                            OnRulesetChange =
+                                (Action)Delegate.Combine(OnRulesetChange, new Action(_instance.UpdateOrdinals));
+                            _instance.UpdateDictionaries();
+                            OnRulesetChange =
+                                (Action)Delegate.Combine(OnRulesetChange, new Action(_instance.UpdateDictionaries));
+                            return _instance;
                         }
                     }
-
-                    foreach (var expr in paths)
+                    catch (Exception e)
                     {
-                        _instance = AssetDatabase.LoadAssetAtPath<ProjectRuleset>(expr);
-                        if (_instance is null) continue;
-                        _instance.UpdateOrdinals();
-                        OnRulesetChange =
-                            (Action)Delegate.Combine(OnRulesetChange, new Action(_instance.UpdateOrdinals));
-                        _instance.UpdateDictionaries();
-                        OnRulesetChange =
-                            (Action)Delegate.Combine(OnRulesetChange, new Action(_instance.UpdateDictionaries));
-                        return _instance;
+                        // ignored
+                    }
+                }
+
+                if (_instance is null)
+                {
+                    try
+                    {
+                        _instance = Resources.Load<ProjectRuleset>(
+                            $"Editor/RainbowFoldersRuleset/{nameof(ProjectRuleset)}");
+                    }
+                    catch (Exception e)
+                    {
+                        // ignored
                     }
                 }
 
                 if (_instance is null)
                 {
                     _instance = CreateInstance<ProjectRuleset>();
-                    AssetDatabase.CreateAsset(_instance, $"Assets/Editor/Gen/Settings/{nameof(ProjectRuleset)}.asset");
+                    try
+                    {
+                        AssetDatabase.CreateAsset(_instance,
+                            $"Assets/Editor/Gen/Settings/{nameof(ProjectRuleset)}.asset");
+                    }
+                    catch (Exception e)
+                    {
+                        // ignored
+                    }
                 }
 
                 return _instance;
