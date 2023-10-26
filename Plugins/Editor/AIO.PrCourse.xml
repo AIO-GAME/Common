@@ -1318,24 +1318,53 @@
             <see cref="T:AIO.PrGit"/> <see cref="T:AIO.PrGit.Clone"/> 克隆
             </summary>
         </member>
-        <member name="M:AIO.PrGit.Clone.Branch(System.String@,System.String@,System.String@)">
+        <member name="M:AIO.PrGit.Clone.Branch(System.String,System.String,System.String)">
             <summary>
             克隆指定分支
             </summary>
-            <param name="wrok">目标文件夹</param>
+            <param name="work">目标文件夹</param>
             <param name="url">clone列表</param>
             <param name="branch">分支</param>
             <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
-        <member name="M:AIO.PrGit.Clone.Default(System.String@,System.String@)">
+        <member name="M:AIO.PrGit.Clone.Branch(System.String,System.String,System.String,System.String)">
+            <summary>
+            克隆指定分支
+            </summary>
+            <param name="work">目标文件夹</param>
+            <param name="url">clone列表</param>
+            <param name="branch">分支</param>
+            <param name="alias">别名</param>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Clone.Tag(System.String,System.String,System.String,System.String)">
+            <summary>
+            克隆指定 Tag
+            </summary>
+            <param name="work">目标文件夹</param>
+            <param name="url">clone列表</param>
+            <param name="tag">标签</param>
+            <param name="alias">别名</param>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Clone.Tag(System.String,System.String,System.String)">
+            <summary>
+            克隆指定 Tag
+            </summary>
+            <param name="work">目标文件夹</param>
+            <param name="url">clone列表</param>
+            <param name="tag">标签</param>
+            <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
+        </member>
+        <member name="M:AIO.PrGit.Clone.Default(System.String,System.String)">
             <summary>
             克隆默认分支
             </summary>
-            <param name="wrok">目标文件夹</param>
+            <param name="work">目标文件夹</param>
             <param name="url">clone列表</param>
             <returns><see cref="T:AIO.IExecutor"/> – 执行器</returns>
         </member>
-        <member name="M:AIO.PrGit.Clone.Execute(System.String@,System.String@)">
+        <member name="M:AIO.PrGit.Clone.Execute(System.String,System.String)">
             <summary>
             执行
             </summary>
@@ -4891,7 +4920,7 @@
             复制文件夹
             </summary>
         </member>
-        <member name="M:AIO.PrWin.XCopy.Execute(System.String@,System.String@,System.String@)">
+        <member name="M:AIO.PrWin.XCopy.Execute(System.String,System.String,System.String)">
             <summary>
             复制文件夹
             </summary>
@@ -4899,7 +4928,7 @@
             <param name="target">目标路径</param>
             <param name="args">启动参数</param>
         </member>
-        <member name="M:AIO.PrWin.XCopy.Directory(System.String@,System.String@,System.Boolean)">
+        <member name="M:AIO.PrWin.XCopy.Directory(System.String,System.String,System.Boolean)">
             <summary>
             复制文件夹 包括空目录
             </summary>
@@ -4907,7 +4936,7 @@
             <param name="target">目标路径</param>
             <param name="isAll">Ture:包含空目录</param>
         </member>
-        <member name="M:AIO.PrWin.XCopy.NetDirectory(System.String@,System.String@,System.Boolean)">
+        <member name="M:AIO.PrWin.XCopy.NetDirectory(System.String,System.String,System.Boolean)">
             <summary>
             网络 复制文件夹 包括空目录
             </summary>
@@ -4915,7 +4944,7 @@
             <param name="target">目标路径</param>
             <param name="isAll">Ture:包含空目录</param>
         </member>
-        <member name="M:AIO.PrWin.XCopy.BigFile(System.String@,System.String@,System.Boolean)">
+        <member name="M:AIO.PrWin.XCopy.BigFile(System.String,System.String,System.Boolean)">
             <summary>
             复制大文件夹 包括空目录
             </summary>
@@ -4923,7 +4952,7 @@
             <param name="target">目标路径</param>
             <param name="isAll">Ture:包含空目录</param>
         </member>
-        <member name="M:AIO.PrWin.XCopy.DirectoryTree(System.String@,System.String@,System.Boolean)">
+        <member name="M:AIO.PrWin.XCopy.DirectoryTree(System.String,System.String,System.Boolean)">
             <summary>
             复制文件夹结构 不包含文件
             </summary>
@@ -4931,7 +4960,7 @@
             <param name="target">目标路径</param>
             <param name="isAll">Ture:包含空目录</param>
         </member>
-        <member name="M:AIO.PrWin.XCopy.NetDirectoryTree(System.String@,System.String@,System.Boolean)">
+        <member name="M:AIO.PrWin.XCopy.NetDirectoryTree(System.String,System.String,System.Boolean)">
             <summary>
             复制文件夹结构 不包含文件
             </summary>
@@ -5239,6 +5268,9 @@
             <summary>
             链接文件夹
             </summary>
+            <param name="target">目标路径</param>
+            <param name="source">源路径</param>
+            <param name="args">参数</param>
             <exception cref="T:System.NotImplementedException">未实现</exception>
             <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
         </member>
@@ -5246,6 +5278,8 @@
             <summary>
             软链接文件夹
             </summary>
+            <param name="target">目标路径</param>
+            <param name="source">源路径</param>
             <exception cref="T:System.NotImplementedException">未实现</exception>
             <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
         </member>
@@ -5253,6 +5287,8 @@
             <summary>
             硬链接文件夹
             </summary>
+            <param name="target">目标路径</param>
+            <param name="source">源路径</param>
             <exception cref="T:System.NotImplementedException">未实现</exception>
             <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
         </member>
@@ -5260,6 +5296,7 @@
             <summary>
             删除文件夹
             </summary>
+            <param name="target">目标路径</param>
             <exception cref="T:System.NotImplementedException">未实现</exception>
             <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
         </member>
@@ -5267,6 +5304,25 @@
             <summary>
             创建文件夹
             </summary>
+            <param name="target">目标路径</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Folder.Move(System.String,System.String)">
+            <summary>
+            移动文件夹
+            </summary>
+            <param name="target">目标路径</param>
+            <param name="source">源路径</param>
+            <exception cref="T:System.NotImplementedException">未实现</exception>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrPlatform.Folder.Copy(System.String,System.String)">
+            <summary>
+            移动文件夹
+            </summary>
+            <param name="target">目标路径</param>
+            <param name="source">源路径</param>
             <exception cref="T:System.NotImplementedException">未实现</exception>
             <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
         </member>

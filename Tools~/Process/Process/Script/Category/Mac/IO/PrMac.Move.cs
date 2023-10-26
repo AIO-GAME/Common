@@ -12,9 +12,10 @@ namespace AIO
             /// <summary>
             /// 改变文件名 或 所在目录
             /// </summary>
-            public static IExecutor Execute(string source, string target)
+            public static IExecutor Execute(string target, string source)
             {
-                if (!System.IO.File.Exists(source)) throw new FileNotFoundException($"[PrMac Error] The Current File Does Not Exist : {target}");
+                if (!System.IO.File.Exists(source))
+                    throw new FileNotFoundException($"[PrMac Error] The Current File Does Not Exist : {target}");
                 var cmd = string.Format("'{0}' '{1}'", source.Replace('\\', '/'), target.Replace('\\', '/'));
                 return Chmod.Set777(target).Link(Create(CMD_Mv, cmd));
             }
@@ -22,10 +23,12 @@ namespace AIO
             /// <summary>
             /// 改变文件名 或 所在目录
             /// </summary>
-            public static IExecutor Execute(string source, string target, string command)
+            public static IExecutor Execute(string target, string source, string command)
             {
-                if (!System.IO.File.Exists(source)) throw new FileNotFoundException($"[PrMac Error] The Current File Does Not Exist : {target}");
-                var cmd = string.Format("{0} '{1}' '{2}'", command, source.Replace('\\', '/'), target.Replace('\\', '/'));
+                if (!System.IO.File.Exists(source))
+                    throw new FileNotFoundException($"[PrMac Error] The Current File Does Not Exist : {target}");
+                var cmd = string.Format("{0} '{1}' '{2}'", command, source.Replace('\\', '/'),
+                    target.Replace('\\', '/'));
                 return Chmod.Set777(target).Link(Create(CMD_Mv, cmd));
             }
 

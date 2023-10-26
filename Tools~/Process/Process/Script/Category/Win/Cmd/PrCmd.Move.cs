@@ -1,4 +1,6 @@
-﻿namespace AIO
+﻿using System.IO;
+
+namespace AIO
 {
     public partial class PrCmd
     {
@@ -13,9 +15,13 @@
             /// <param name="source">源路径</param>
             /// <param name="target">目标路径</param>
             /// <returns>执行器</returns>
-            public static IExecutor Execute(in string source, in string target)
+            public static IExecutor Execute(in string target, in string source)
             {
-                return Create().Input(string.Format("{0} /y \"{1}\" \"{2}\"", CMD_Move, source.Replace('/', '\\'), target.Replace('/', '\\')));
+                return Create().Input(string.Format(
+                    "{0} /y \"{1}\" \"{2}\"",
+                    CMD_Move,
+                    source.Replace('/', Path.PathSeparator),
+                    target.Replace('/', Path.PathSeparator)));
             }
         }
     }

@@ -13,9 +13,10 @@
             /// <param name="source">源路径</param>
             /// <param name="target">目标路径</param>
             /// <param name="args">启动参数</param>
-            public static IExecutor Execute(in string source, in string target, in string args)
+            public static IExecutor Execute(string target, string source, string args)
             {
-                return Create(CMD_Xcopy, "\"{0}\" {2} \"{1}\"", source.Replace('/', '\\'), target.Replace('/', '\\'), args);
+                return Create(CMD_Xcopy, "\"{0}\" {2} \"{1}\"", source.Replace('/', '\\'), target.Replace('/', '\\'),
+                    args);
             }
 
             /// <summary>
@@ -24,7 +25,7 @@
             /// <param name="source">源路径</param>
             /// <param name="target">目标路径</param>
             /// <param name="isAll">Ture:包含空目录</param>
-            public static IExecutor Directory(in string source, in string target, bool isAll = true)
+            public static IExecutor Directory(string target, string source, bool isAll = true)
             {
                 return Create(CMD_Xcopy, "\"{0}\" {2} {3} \"{1}\"",
                     source.Replace('/', '\\'), target.Replace('/', '\\'),
@@ -37,7 +38,7 @@
             /// <param name="source">源路径</param>
             /// <param name="target">目标路径</param>
             /// <param name="isAll">Ture:包含空目录</param>
-            public static IExecutor NetDirectory(in string source, in string target, bool isAll = true)
+            public static IExecutor NetDirectory(string target, string source, bool isAll = true)
             {
                 return Create(CMD_Xcopy, "\"{0}\" {2} {3} \"{1}\"",
                     source.Replace('/', '\\'), target.Replace('/', '\\'),
@@ -50,7 +51,7 @@
             /// <param name="source">源路径</param>
             /// <param name="target">目标路径</param>
             /// <param name="isAll">Ture:包含空目录</param>
-            public static IExecutor BigFile(in string source, in string target, bool isAll = true)
+            public static IExecutor BigFile(string target, string source, bool isAll = true)
             {
                 return Create(CMD_Xcopy, "\"{0}\" {2} {3} \"{1}\"",
                     source.Replace('/', '\\'), target.Replace('/', '\\'),
@@ -63,7 +64,7 @@
             /// <param name="source">源路径</param>
             /// <param name="target">目标路径</param>
             /// <param name="isAll">Ture:包含空目录</param>
-            public static IExecutor DirectoryTree(in string source, in string target, bool isAll = true)
+            public static IExecutor DirectoryTree(string target, string source, bool isAll = true)
             {
                 return Create(CMD_Xcopy, "\"{0}\" {2} {3} \"{1}\"",
                     source.Replace('/', '\\'),
@@ -76,7 +77,7 @@
             /// <param name="source">源路径</param>
             /// <param name="target">目标路径</param>
             /// <param name="isAll">Ture:包含空目录</param>
-            public static IExecutor NetDirectoryTree(in string source, in string target, bool isAll = true)
+            public static IExecutor NetDirectoryTree(string target, string source, bool isAll = true)
             {
                 return Create(CMD_Xcopy, "\"{0}\" {2} {3} \"{1}\"",
                     source.Replace('/', '\\'),
