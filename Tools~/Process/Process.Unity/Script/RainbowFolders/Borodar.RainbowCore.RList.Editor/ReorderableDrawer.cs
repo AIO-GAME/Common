@@ -55,13 +55,10 @@ namespace AIO.RainbowCore.RList.Editor
 
 		public static int GetListId(SerializedProperty property)
 		{
-			if (property != null)
-			{
-				int hashCode = property.serializedObject.targetObject.GetHashCode();
-				int hashCode2 = property.propertyPath.GetHashCode();
-				return ((hashCode << 5) + hashCode) ^ hashCode2;
-			}
-			return 0;
+			if (property == null) return 0;
+			var hashCode = property.serializedObject.targetObject.GetHashCode();
+			var hashCode2 = property.propertyPath.GetHashCode();
+			return ((hashCode << 5) + hashCode) ^ hashCode2;
 		}
 
 		public static ReorderableList GetList(SerializedProperty property, string arrayPropertyName)

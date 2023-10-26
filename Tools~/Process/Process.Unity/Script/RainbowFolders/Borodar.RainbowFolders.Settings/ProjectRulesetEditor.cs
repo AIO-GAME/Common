@@ -59,15 +59,21 @@ namespace AIO.RainbowFolders.Settings
                 pageSize = 10
             };
             _reorderableList.onChangedCallback += delegate { OnRulesetChange(); };
-            Undo.undoRedoPerformed = (Undo.UndoRedoCallback)Delegate.Remove(Undo.undoRedoPerformed, new Undo.UndoRedoCallback(OnRulesetChange));
-            Undo.undoRedoPerformed = (Undo.UndoRedoCallback)Delegate.Combine(Undo.undoRedoPerformed, new Undo.UndoRedoCallback(OnRulesetChange));
+            Undo.undoRedoPerformed =
+                (Undo.UndoRedoCallback)Delegate.Remove(Undo.undoRedoPerformed,
+                    new Undo.UndoRedoCallback(OnRulesetChange));
+            Undo.undoRedoPerformed =
+                (Undo.UndoRedoCallback)Delegate.Combine(Undo.undoRedoPerformed,
+                    new Undo.UndoRedoCallback(OnRulesetChange));
         }
 
         protected void OnDisable()
         {
             EDITORS.Remove(this);
             ClearHiddenFlags();
-            Undo.undoRedoPerformed = (Undo.UndoRedoCallback)Delegate.Remove(Undo.undoRedoPerformed, new Undo.UndoRedoCallback(OnRulesetChange));
+            Undo.undoRedoPerformed =
+                (Undo.UndoRedoCallback)Delegate.Remove(Undo.undoRedoPerformed,
+                    new Undo.UndoRedoCallback(OnRulesetChange));
         }
 
         public override void OnInspectorGUI()
@@ -87,7 +93,7 @@ namespace AIO.RainbowFolders.Settings
                     DrawSearchByKeyPanel(ForceUpdate);
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException("SearchTab", SearchTab, null);
+                    throw new ArgumentOutOfRangeException($"SearchTab", SearchTab, null);
             }
 
             if (!string.IsNullOrEmpty(_warningMessage))
@@ -110,53 +116,49 @@ namespace AIO.RainbowFolders.Settings
 
         private void DrawSearchByFolderPanel(bool forceUpdate)
         {
-            DefaultAsset asset = Asset;
+            var asset = Asset;
             Asset = (DefaultAsset)EditorGUILayout.ObjectField(Asset, typeof(DefaultAsset), false);
-            if (forceUpdate || !(Asset == asset))
+            if (!forceUpdate && Asset == asset) return;
+            if (Asset is null)
             {
-                if (Asset == null)
-                {
-                    ClearHiddenFlags();
-                }
-                else
-                {
-                    ApplyHiddenFlagsByAsset();
-                }
+                ClearHiddenFlags();
+            }
+            else
+            {
+                ApplyHiddenFlagsByAsset();
             }
         }
 
         private void DrawSearchByKeyPanel(bool forceUpdate)
         {
             EditorGUILayout.BeginHorizontal();
-            bool flag = CoreEditorUtility.SearchField(ref _query, ref _filter, Filter.All);
+            var flag = CoreEditorUtility.SearchField(ref _query, ref _filter, Filter.All);
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.BeginHorizontal();
-            if (!object.Equals(_filter, Filter.All))
+            if (!Equals(_filter, Filter.All))
             {
-                Rect rect = GUILayoutUtility.GetRect(GUIContent.none, "MiniLabel");
+                var rect = GUILayoutUtility.GetRect(GUIContent.none, "MiniLabel");
                 rect.y += 1f;
                 rect.width = 55f;
                 GUI.Label(rect, $"➔ {_filter}", "MiniLabel");
             }
 
             GUILayout.FlexibleSpace();
-            bool matchCase = _matchCase;
+            var matchCase = _matchCase;
             _matchCase = EditorGUILayout.ToggleLeft("Match case", _matchCase, "MiniLabel", GUILayout.Width(83f));
-            bool flag2 = _matchCase != matchCase;
-            bool useRegex = _useRegex;
+            var flag2 = _matchCase != matchCase;
+            var useRegex = _useRegex;
             _useRegex = EditorGUILayout.ToggleLeft("Regex", _useRegex, "MiniLabel", GUILayout.Width(58f));
-            bool flag3 = _useRegex != useRegex;
+            var flag3 = _useRegex != useRegex;
             EditorGUILayout.EndHorizontal();
-            if (forceUpdate || flag || flag2 || flag3)
-            {
-                _warningMessage = string.Empty;
-                ApplyFilters();
-            }
+            if (!forceUpdate && !flag && !flag2 && !flag3) return;
+            _warningMessage = string.Empty;
+            ApplyFilters();
         }
 
         private void ApplyFilters()
         {
-            bool flag = object.Equals(Filter.All, _filter);
+            var flag = Equals(Filter.All, _filter);
             if (string.IsNullOrEmpty(_query) && flag)
             {
                 ClearHiddenFlags();
@@ -169,34 +171,34 @@ namespace AIO.RainbowFolders.Settings
 
         private void ClearHiddenFlags()
         {
-            if (_foldersProperty != null)
+            if (_foldersProperty is null) return;
+            for (var i = 0; i < _foldersProperty.arraySize; i++)
             {
-                for (int i = 0; i < _foldersProperty.arraySize; i++)
-                {
-                    _foldersProperty.GetArrayElementAtIndex(i).FindPropertyRelative("IsHidden").boolValue = false;
-                }
-
-                _foldersProperty.serializedObject.ApplyModifiedProperties();
-                _reorderableList.canAdd = true;
-                _reorderableList.headerHeight = 4f;
-                _reorderableList.paginate = true;
+                _foldersProperty.GetArrayElementAtIndex(i).FindPropertyRelative("IsHidden").boolValue = false;
             }
+
+            _foldersProperty.serializedObject.ApplyModifiedProperties();
+            _reorderableList.canAdd = true;
+            _reorderableList.headerHeight = 4f;
+            _reorderableList.paginate = true;
         }
 
         private void ApplyHiddenFlagsByAsset()
         {
-            string assetPath = AssetDatabase.GetAssetPath(Asset);
-            string fileName = Path.GetFileName(assetPath);
-            foreach (ProjectRule rule in ((ProjectRuleset)base.target).Rules)
+            var assetPath = AssetDatabase.GetAssetPath(Asset);
+            var fileName = Path.GetFileName(assetPath);
+            foreach (var rule in ((ProjectRuleset)target).Rules)
             {
                 bool flag;
                 switch (rule.Type)
                 {
                     case ProjectRule.KeyType.Name:
-                        flag = rule.Key.Equals(fileName) || (rule.IsRecursive() && assetPath.Contains(string.Concat("/", rule.Key, "/")));
+                        flag = rule.Key.Equals(fileName) ||
+                               (rule.IsRecursive() && assetPath.Contains(string.Concat("/", rule.Key, "/")));
                         break;
                     case ProjectRule.KeyType.Path:
-                        flag = rule.Key.Equals(assetPath) || (rule.IsRecursive() && assetPath.StartsWith(string.Concat(rule.Key, "/")));
+                        flag = rule.Key.Equals(assetPath) ||
+                               (rule.IsRecursive() && assetPath.StartsWith(string.Concat(rule.Key, "/")));
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -212,29 +214,32 @@ namespace AIO.RainbowFolders.Settings
 
         private void ApplyHiddenFlagsByKey()
         {
-            Regex regex = (_useRegex ? MakeRegexFromQuery() : null);
-            for (int i = 0; i < _foldersProperty.arraySize; i++)
+            var regex = _useRegex ? MakeRegexFromQuery() : null;
+            for (var i = 0; i < _foldersProperty.arraySize; i++)
             {
-                SerializedProperty arrayElementAtIndex = _foldersProperty.GetArrayElementAtIndex(i);
-                SerializedProperty serializedProperty = arrayElementAtIndex.FindPropertyRelative("IsHidden");
-                Enum filter = _filter;
-                if (filter is Filter)
+                var arrayElementAtIndex = _foldersProperty.GetArrayElementAtIndex(i);
+                var serializedProperty = arrayElementAtIndex.FindPropertyRelative("IsHidden");
+                if (_filter is Filter filter)
                 {
-                    switch ((Filter)(object)filter)
+                    switch (filter)
                     {
                         case Filter.All:
                             serializedProperty.boolValue = !KeyContainsQuery(arrayElementAtIndex, regex);
                             continue;
                         case Filter.Name:
-                            serializedProperty.boolValue = !KeyHasSameType(arrayElementAtIndex, ProjectRule.KeyType.Name) || !KeyContainsQuery(arrayElementAtIndex, regex);
+                            serializedProperty.boolValue =
+                                !KeyHasSameType(arrayElementAtIndex, ProjectRule.KeyType.Name) ||
+                                !KeyContainsQuery(arrayElementAtIndex, regex);
                             continue;
                         case Filter.Path:
-                            serializedProperty.boolValue = !KeyHasSameType(arrayElementAtIndex, ProjectRule.KeyType.Path) || !KeyContainsQuery(arrayElementAtIndex, regex);
+                            serializedProperty.boolValue =
+                                !KeyHasSameType(arrayElementAtIndex, ProjectRule.KeyType.Path) ||
+                                !KeyContainsQuery(arrayElementAtIndex, regex);
                             continue;
                     }
                 }
 
-                throw new ArgumentOutOfRangeException("_filter", _filter, null);
+                throw new ArgumentOutOfRangeException($"_filter", _filter, null);
             }
 
             _foldersProperty.serializedObject.ApplyModifiedProperties();
@@ -245,7 +250,7 @@ namespace AIO.RainbowFolders.Settings
 
         private Regex MakeRegexFromQuery()
         {
-            RegexOptions options = ((!_matchCase) ? RegexOptions.IgnoreCase : RegexOptions.None);
+            var options = !_matchCase ? RegexOptions.IgnoreCase : RegexOptions.None;
             try
             {
                 return new Regex(_query, options);
@@ -264,13 +269,13 @@ namespace AIO.RainbowFolders.Settings
 
         private bool KeyContainsQuery(SerializedProperty item, Regex regex)
         {
-            string stringValue = item.FindPropertyRelative("Key").stringValue;
+            var stringValue = item.FindPropertyRelative("Key").stringValue;
             if (_useRegex)
             {
                 return regex.Match(stringValue).Success;
             }
 
-            StringComparison comparisonType = (_matchCase ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
+            var comparisonType = _matchCase ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase;
             return stringValue.IndexOf(_query, comparisonType) >= 0;
         }
 
@@ -278,11 +283,9 @@ namespace AIO.RainbowFolders.Settings
         {
             EditorGUI.BeginChangeCheck();
             _reorderableList.DoLayoutList();
-            if (EditorGUI.EndChangeCheck())
-            {
-                ProjectRuleset.OnRulesetChange();
-                serializedObject.ApplyModifiedProperties();
-            }
+            if (!EditorGUI.EndChangeCheck()) return;
+            ProjectRuleset.OnRulesetChange();
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using AIO.RainbowCore;
 using UnityEditor;
@@ -39,37 +40,29 @@ namespace AIO.RainbowFolders.Settings
         {
             get
             {
-                if (_instance is null)
+                if (!(_instance is null)) return _instance;
+                try
                 {
-                    try
+                    if (paths is null)
                     {
-                        if (paths is null)
+                        paths = new List<string>();
+                        foreach (var guid in AssetDatabase.FindAssets($"t:{nameof(ProjectRuleset)}",
+                                     new string[] { "Packages", "Assets" }))
                         {
-                            paths = new List<string>();
-                            foreach (var guid in AssetDatabase.FindAssets($"t:{nameof(ProjectRuleset)}",
-                                         new string[] { "Packages", "Assets" }))
-                            {
-                                paths.Add(AssetDatabase.GUIDToAssetPath(guid));
-                            }
+                            paths.Add(AssetDatabase.GUIDToAssetPath(guid));
                         }
+                    }
 
-                        foreach (var expr in paths)
-                        {
-                            _instance = AssetDatabase.LoadAssetAtPath<ProjectRuleset>(expr);
-                            if (_instance is null) continue;
-                            _instance.UpdateOrdinals();
-                            OnRulesetChange =
-                                (Action)Delegate.Combine(OnRulesetChange, new Action(_instance.UpdateOrdinals));
-                            _instance.UpdateDictionaries();
-                            OnRulesetChange =
-                                (Action)Delegate.Combine(OnRulesetChange, new Action(_instance.UpdateDictionaries));
-                            return _instance;
-                        }
-                    }
-                    catch (Exception e)
+                    foreach (var expr in paths)
                     {
-                        // ignored
+                        _instance = AssetDatabase.LoadAssetAtPath<ProjectRuleset>(expr);
+                        if (_instance is null) continue;
+                        break;
                     }
+                }
+                catch (Exception)
+                {
+                    // ignored
                 }
 
                 if (_instance is null)
@@ -79,7 +72,7 @@ namespace AIO.RainbowFolders.Settings
                         _instance = Resources.Load<ProjectRuleset>(
                             $"Editor/RainbowFoldersRuleset/{nameof(ProjectRuleset)}");
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         // ignored
                     }
@@ -87,18 +80,30 @@ namespace AIO.RainbowFolders.Settings
 
                 if (_instance is null)
                 {
-                    _instance = CreateInstance<ProjectRuleset>();
                     try
                     {
+                        _instance = CreateInstance<ProjectRuleset>();
+                        var path = Path.Combine(Application.dataPath, "Editor", "Gen", "Settings");
+                        if (!Directory.Exists(path)) Directory.CreateDirectory(path);
                         AssetDatabase.CreateAsset(_instance,
                             $"Assets/Editor/Gen/Settings/{nameof(ProjectRuleset)}.asset");
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         // ignored
                     }
                 }
 
+                if (_instance is null)
+                    throw new NullReferenceException(
+                        $"Can't find {nameof(ProjectRuleset)} in project. Please try to reimport Rainbow Folders package.");
+
+                _instance.UpdateOrdinals();
+                OnRulesetChange =
+                    (Action)Delegate.Combine(OnRulesetChange, new Action(_instance.UpdateOrdinals));
+                _instance.UpdateDictionaries();
+                OnRulesetChange =
+                    (Action)Delegate.Combine(OnRulesetChange, new Action(_instance.UpdateDictionaries));
                 return _instance;
             }
         }
@@ -261,7 +266,7 @@ namespace AIO.RainbowFolders.Settings
 
         private void UpdateOrdinals()
         {
-            for (int i = 0; i < Rules.Count; i++)
+            for (var i = 0; i < Rules.Count; i++)
             {
                 Rules[i].Ordinal = i;
             }

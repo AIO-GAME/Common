@@ -1,7 +1,6 @@
 using System;
 using AIO.RainbowCore;
 using UnityEditor;
-
 using UnityEngine;
 
 namespace AIO.RainbowFolders.Settings
@@ -77,19 +76,14 @@ namespace AIO.RainbowFolders.Settings
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            if (!property.FindPropertyRelative("IsHidden").boolValue)
-            {
-                Rect originalPosition = position;
-                SerializedItemWrapper item = new SerializedItemWrapper(property);
-                EditorGUI.BeginChangeCheck();
-                DrawLabels(ref position, item);
-                DrawValues(ref position, originalPosition, item);
-                DrawPreview(ref position, originalPosition, item);
-                if (EditorGUI.EndChangeCheck())
-                {
-                    property.serializedObject.ApplyModifiedProperties();
-                }
-            }
+            if (property.FindPropertyRelative("IsHidden").boolValue) return;
+            var originalPosition = position;
+            var item = new SerializedItemWrapper(property);
+            EditorGUI.BeginChangeCheck();
+            DrawLabels(ref position, item);
+            DrawValues(ref position, originalPosition, item);
+            DrawPreview(ref position, originalPosition, item);
+            if (EditorGUI.EndChangeCheck()) property.serializedObject.ApplyModifiedProperties();
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
@@ -98,6 +92,7 @@ namespace AIO.RainbowFolders.Settings
             {
                 return 0f;
             }
+
             SerializedProperty serializedProperty = property.FindPropertyRelative("IconType");
             SerializedProperty serializedProperty2 = property.FindPropertyRelative("BackgroundType");
             bool num = serializedProperty.intValue == 1;
@@ -107,10 +102,12 @@ namespace AIO.RainbowFolders.Settings
             {
                 num2 += 32f;
             }
+
             if (flag)
             {
                 num2 += 16f;
             }
+
             return num2;
         }
 
@@ -119,8 +116,10 @@ namespace AIO.RainbowFolders.Settings
             position.y += 8f;
             position.width = 92f;
             position.height = 16f;
-            ProjectRule.KeyType keyType = (ProjectRule.KeyType)Enum.GetValues(typeof(ProjectRule.KeyType)).GetValue(item.FolderKeyType.enumValueIndex);
-            item.FolderKeyType.enumValueIndex = (int)(ProjectRule.KeyType)(object)EditorGUI.EnumPopup(position, keyType);
+            ProjectRule.KeyType keyType = (ProjectRule.KeyType)Enum.GetValues(typeof(ProjectRule.KeyType))
+                .GetValue(item.FolderKeyType.enumValueIndex);
+            item.FolderKeyType.enumValueIndex =
+                (int)(ProjectRule.KeyType)(object)EditorGUI.EnumPopup(position, keyType);
             position.y += 20f;
             EditorGUI.LabelField(position, "Priority");
             position.y += 20f;
@@ -132,6 +131,7 @@ namespace AIO.RainbowFolders.Settings
                 position.y += 17f;
                 EditorGUI.LabelField(position, "x64");
             }
+
             position.y += 17f;
             EditorGUI.LabelField(position, "Recursive");
             position.y += 20f;
@@ -141,6 +141,7 @@ namespace AIO.RainbowFolders.Settings
                 position.y += 17f;
                 EditorGUI.LabelField(position, "x16");
             }
+
             position.y += 17f;
             EditorGUI.LabelField(position, "Recursive");
         }
@@ -163,6 +164,7 @@ namespace AIO.RainbowFolders.Settings
                 position.y += 17f;
                 EditorGUI.PropertyField(position, item.LargeIcon, GUIContent.none);
             }
+
             position.y += 16f + (EditorGUIUtility.isProSkin ? 0f : 1f);
             EditorGUI.PropertyField(position, item.IconRecursive, GUIContent.none);
             position.y += 20f;
@@ -172,6 +174,7 @@ namespace AIO.RainbowFolders.Settings
                 position.y += 17f;
                 EditorGUI.PropertyField(position, item.Background, GUIContent.none);
             }
+
             position.y += 16f + (EditorGUIUtility.isProSkin ? 0f : 1f);
             EditorGUI.PropertyField(position, item.BackgroundRecursive, GUIContent.none);
         }
@@ -197,17 +200,20 @@ namespace AIO.RainbowFolders.Settings
                     }
                 }
             }
-            if (texture2D == null)
+
+            if (texture2D is null)
             {
                 texture2D = ProjectEditorUtility.GetDefaultFolderIcon();
             }
-            if (texture2D2 == null)
+
+            if (texture2D2 is null)
             {
                 texture2D2 = ProjectEditorUtility.GetDefaultFolderIcon();
             }
+
             position.x += position.width + 8f;
             position.y = originalPosition.y + 32f + 1f + 8f;
-            float num3 = (position.width = (position.height = 64f));
+            var num3 = position.width = position.height = 64f;
             GUI.DrawTexture(position, texture2D2);
             position.y += 44f;
             num3 = (position.width = (position.height = 16f));
@@ -216,12 +222,15 @@ namespace AIO.RainbowFolders.Settings
             position.width = 64f;
             if (item.HasBackground)
             {
-                Texture2D texture2D3 = (item.HasCustomBackground ? ((Texture2D)item.Background.objectReferenceValue) : CoreBackgroundsStorage.GetBackground(item.BackgroundType.intValue));
+                Texture2D texture2D3 = (item.HasCustomBackground
+                    ? ((Texture2D)item.Background.objectReferenceValue)
+                    : CoreBackgroundsStorage.GetBackground(item.BackgroundType.intValue));
                 if (texture2D3 != null)
                 {
                     GUI.DrawTexture(position, texture2D3);
                 }
             }
+
             position.x += 13f;
             EditorGUI.LabelField(position, "Folder");
         }
@@ -238,6 +247,7 @@ namespace AIO.RainbowFolders.Settings
             {
                 obj = "Custom";
             }
+
             string text = (string)obj;
             if (GUI.Button(rect, new GUIContent(text), "MiniPopup"))
             {
@@ -245,7 +255,8 @@ namespace AIO.RainbowFolders.Settings
             }
         }
 
-        private static void DrawBackgroundPopupMenu(Rect rect, SerializedProperty property, bool hasCustomBackground, int backgroundType)
+        private static void DrawBackgroundPopupMenu(Rect rect, SerializedProperty property, bool hasCustomBackground,
+            int backgroundType)
         {
             object obj;
             if (!hasCustomBackground)
@@ -257,6 +268,7 @@ namespace AIO.RainbowFolders.Settings
             {
                 obj = "Custom";
             }
+
             string text = (string)obj;
             if (GUI.Button(rect, new GUIContent(text), "MiniPopup"))
             {
