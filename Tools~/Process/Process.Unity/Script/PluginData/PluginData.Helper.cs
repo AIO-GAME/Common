@@ -20,7 +20,7 @@ namespace AIO
 
             private static PluginDataWindow Window;
 
-            [MenuItem("Tools/Window/Plugin Data Manager #_F12")]
+            [MenuItem("AIO/Window/Plugin Data Manager #_F12")]
             public static void Open()
             {
                 if (Window is null)

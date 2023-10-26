@@ -15,7 +15,7 @@ namespace AIO.UEditor
     /// </summary>
     internal static partial class OutPutInfoMation
     {
-        [MenuItem("Tools/Compilation/输出 Player 编译程序集")]
+        [MenuItem("AIO/Tools/Compilation/输出 Player 编译程序集")]
         public static void PrintAssemblyNamesPlayer()
         {
             var playerAssemblies = CompilationPipeline.GetAssemblies(AssembliesType.Player);
@@ -25,7 +25,7 @@ namespace AIO.UEditor
             }
         }
 
-        [MenuItem("Tools/Compilation/输出 Editor 编译程序集")]
+        [MenuItem("AIO/Tools/Compilation/输出 Editor 编译程序集")]
         public static void PrintAssemblyNamesEditor()
         {
             var playerAssemblies = CompilationPipeline.GetAssemblies(AssembliesType.Editor);
@@ -35,7 +35,7 @@ namespace AIO.UEditor
             }
         }
 
-        [MenuItem("Tools/Compilation/输出 Player 和 Test 编译程序集")]
+        [MenuItem("AIO/Tools/Compilation/输出 Player 和 Test 编译程序集")]
         public static void PrintAssemblyNamesPlayerWithoutTestAssemblies()
         {
             var playerAssemblies = CompilationPipeline.GetAssemblies(AssembliesType.PlayerWithoutTestAssemblies);

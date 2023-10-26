@@ -76,7 +76,7 @@ namespace AIO.UEditor
             Menu.SetChecked("Tools/AIO/Runtime Export", set);
         }
 
-        [MenuItem("Tools/AIO/Runtime Export", false, 0)]
+        [MenuItem("AIO/Runtime Export DLL", false, 9999)]
         private static void Setting()
         {
             EHelper.Prefs.ReverseBoolean(KEY);

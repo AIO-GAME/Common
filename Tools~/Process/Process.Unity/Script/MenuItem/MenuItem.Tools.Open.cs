@@ -11,37 +11,37 @@ namespace AIO.UEditor
 {
     internal static class MenuItem_Tools
     {
-        [MenuItem("Tools/Open/Application/Persistent Data Path")]
+        [MenuItem("AIO/Tools/Open/Application/Persistent Data Path")]
         public static async void OpenApplicationPersistentDataPath()
         {
             await PrPlatform.Open.Path(Application.persistentDataPath);
         }
 
-        [MenuItem("Tools/Open/Application/Data Path")]
+        [MenuItem("AIO/Tools/Open/Application/Data Path")]
         public static async void OpenApplicationDataPath()
         {
             await PrPlatform.Open.Path(Application.dataPath);
         }
 
-        [MenuItem("Tools/Open/Application/Streaming Assets Path")]
+        [MenuItem("AIO/Tools/Open/Application/Streaming Assets Path")]
         public static async void OpenApplicationStreamingAssetsPath()
         {
             await PrPlatform.Open.Path(Application.streamingAssetsPath);
         }
 
-        [MenuItem("Tools/Open/Application/Console Log Path")]
+        [MenuItem("AIO/Tools/Open/Application/Console Log Path")]
         public static async void OpenApplicationConsoleLogPath()
         {
             await PrPlatform.Open.Path(Application.consoleLogPath);
         }
 
-        [MenuItem("Tools/Open/Application/Temporary Cache Path")]
+        [MenuItem("AIO/Tools/Open/Application/Temporary Cache Path")]
         public static async void OpenApplicationTemporaryCachePath()
         {
             await PrPlatform.Open.Path(Application.temporaryCachePath);
         }
 
-        private const string Title = "Tools/Open/Editor Application/";
+        private const string Title = "AIO/Tools/Open/Editor Application/";
 
         [MenuItem(Title + "Application Contents Path")]
         public static async void OpenApplicationContentsPath()

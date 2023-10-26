@@ -19,9 +19,9 @@ namespace AIO.UEditor
          * 如果不小心LockReloadAssemblies3次 但是只UnlockReloadAssemblies了一次 那么还是不会重载 必须也要但是只UnlockReloadAssemblies3次
          */
 
-        const string menuEnableManualReload = "Tools/Script/Manual Reload Domain Open";
-        const string menuDisenableManualReload = "Tools/Script/Manual Reload Domain Close";
-        const string menuRealodDomain = "Tools/Script/Unlock Reload";
+        const string menuEnableManualReload = "AIO/Tools/Script/Manual Reload Domain Open";
+        const string menuDisenableManualReload = "AIO/Tools/Script/Manual Reload Domain Close";
+        const string menuRealodDomain = "AIO/Tools/Script/Unlock Reload";
 
         const string kManualReloadDomain = "ManualReloadDomain";
         const string kFirstEnterUnity = "FirstEnterUnity"; //是否首次进入unity

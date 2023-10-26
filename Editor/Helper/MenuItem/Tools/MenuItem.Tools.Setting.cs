@@ -11,13 +11,13 @@ namespace AIO.UEditor
         //必须和存放Icon的文件夹路径一直，否则获得的Texture2D将会为空
         private const string Icon_Path = @"Assets\Arts\Icons\{0}\{1}.png";
 
-        [MenuItem("Tools/Setting/Icon/App/Active Build Target")]
+        [MenuItem("AIO/Tools/Setting/Icon/App/Active Build Target")]
         public static void SetAppIconsActiveBuildTarget()
         {
             SetIcons("APP", EditorUserBuildSettings.selectedBuildTargetGroup);
         }
 
-        [MenuItem("Tools/Setting/Icon/App/Android")]
+        [MenuItem("AIO/Tools/Setting/Icon/App/Android")]
         public static void SetAppIconsAndroid()
         {
 #if UNITY_ANDROID
@@ -25,13 +25,13 @@ namespace AIO.UEditor
 #endif
         }
 
-        [MenuItem("Tools/Setting/Icon/App/WebGL")]
+        [MenuItem("AIO/Tools/Setting/Icon/App/WebGL")]
         public static void SetAppIconsWebGL()
         {
             SetIcons("APP", BuildTargetGroup.WebGL);
         }
 
-        [MenuItem("Tools/Setting/Icon/App/IOS")]
+        [MenuItem("AIO/Tools/Setting/Icon/App/IOS")]
         public static void SetAppIconsiOS()
         {
             SetIcons("APP", BuildTargetGroup.iOS);

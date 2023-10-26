@@ -494,7 +494,7 @@ MonoBehaviour:
     IsBackgroundRecursive: 0
     IsHidden: 0
   - Type: 1
-    Key: Packages/com.self.package
+    Key: Packages/com.aio.package
     Ordinal: 40
     Priority: 0
     IconType: 2120
@@ -506,7 +506,7 @@ MonoBehaviour:
     IsBackgroundRecursive: 0
     IsHidden: 0
   - Type: 1
-    Key: Packages/com.self.unity
+    Key: Packages/com.aio.unity
     Ordinal: 41
     Priority: 0
     IconType: 2120
@@ -518,7 +518,7 @@ MonoBehaviour:
     IsBackgroundRecursive: 0
     IsHidden: 0
   - Type: 1
-    Key: Packages/com.self.fgui
+    Key: Packages/com.aio.fgui
     Ordinal: 42
     Priority: 0
     IconType: 2120
@@ -530,7 +530,7 @@ MonoBehaviour:
     IsBackgroundRecursive: 0
     IsHidden: 0
   - Type: 1
-    Key: Packages/com.self.core
+    Key: Packages/com.aio.core
     Ordinal: 43
     Priority: 0
     IconType: 2120
@@ -554,7 +554,7 @@ MonoBehaviour:
     IsBackgroundRecursive: 0
     IsHidden: 0
   - Type: 1
-    Key: Packages/com.self.fixpoint
+    Key: Packages/com.aio.fixpoint
     Ordinal: 45
     Priority: 0
     IconType: 2120
@@ -566,7 +566,7 @@ MonoBehaviour:
     IsBackgroundRecursive: 0
     IsHidden: 0
   - Type: 1
-    Key: Packages/com.self.hybridclr
+    Key: Packages/com.aio.hybridclr
     Ordinal: 46
     Priority: 0
     IconType: 2120
@@ -578,7 +578,7 @@ MonoBehaviour:
     IsBackgroundRecursive: 0
     IsHidden: 0
   - Type: 1
-    Key: Packages/com.self.plugins
+    Key: Packages/com.aio.plugins
     Ordinal: 47
     Priority: 0
     IconType: 2120
@@ -590,7 +590,7 @@ MonoBehaviour:
     IsBackgroundRecursive: 0
     IsHidden: 0
   - Type: 1
-    Key: Packages/com.aio.asset
+    Key: Packages/com.aio.cli.asset
     Ordinal: 48
     Priority: 0
     IconType: 2120

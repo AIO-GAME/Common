@@ -22,17 +22,17 @@ namespace AIO.UEditor
         /// <summary>
         /// 输出日志
         /// </summary>
-        private const string MENU_DEVELOPER_MODE = "Tools/Debug/Developer Mode";
+        private const string MENU_DEVELOPER_MODE = "AIO/Debug/Developer Mode";
 
         /// <summary>
         /// 错误日志
         /// </summary>
-        private const string MENU_EDITOR_SWITCH_LOG = "Tools/Debug/Console Log";
+        private const string MENU_EDITOR_SWITCH_LOG = "AIO/Debug/Console Log";
 
         /// <summary>
         /// 开发者模式
         /// </summary>
-        private const string MENU_EDITOR_SWITCH_ERROR = "Tools/Debug/Console Error";
+        private const string MENU_EDITOR_SWITCH_ERROR = "AIO/Debug/Console Error";
 
         [MenuItem(MENU_EDITOR_SWITCH_LOG)]
         private static void EditorSwitchLOG()

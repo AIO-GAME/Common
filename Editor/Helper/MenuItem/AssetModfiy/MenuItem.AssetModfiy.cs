@@ -26,7 +26,7 @@ namespace AIO.UEditor
     /// </summary>
     public static class MenuItem_AssetModify
     {
-        [MenuItem("Tools/AssetModify/修复脚本GUID")]
+        [MenuItem("AIO/Tools/AssetModify/修复脚本GUID")]
         public static void Test()
         {
             var assemblies = new List<Assembly>

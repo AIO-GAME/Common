@@ -20,19 +20,14 @@ namespace AIO.UEditor
     /// <summary>
     /// PackageGen
     /// </summary>
-    [InitializeOnLoad]
     internal static partial class PackageGen
     {
         private const string CMD_GIT = nameof(PrPlatform.Git);
 
-        static PackageGen()
-        {
-            Generate();
-        }
-
         /// <summary>
         /// 生成
         /// </summary>
+        [InitializeOnLoadMethod]
         [MenuItem("Git/~~~ Generate ~~~", false, 9999)]
         internal static void Generate()
         {
@@ -57,10 +52,13 @@ namespace AIO.UEditor
         internal static void Clean()
         {
             var OutPath = GetOutPath();
-            if (!Directory.Exists(OutPath)) return;
+            if (!AssetDatabase.DeleteAsset(OutPath))
+            {
+                if (!Directory.Exists(OutPath)) return;
+                Directory.Delete(OutPath, true);
+            }
 
-            Directory.Delete(OutPath, true);
-            AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+            AssetDatabase.Refresh();
 
             var RefreshSettings = typeof(AssetDatabase).GetMethod("RefreshSettings",
                 BindingFlags.Static | BindingFlags.Public);
@@ -71,15 +69,13 @@ namespace AIO.UEditor
 
         private static string GetOutPath()
         {
-            // 	var package = PackageInfo.FindForAssembly(typeof(PackageGen).Assembly);
-            // 	if (package is null || string.IsNullOrEmpty(package.resolvedPath))
-            return Path.Combine(Application.dataPath, "Editor\\Gen\\Git");
-            // return Path.Combine(package.resolvedPath, "Editor/Gen/Git");
+            return Path.Combine(Application.dataPath, "Editor", "Gen", "Git");
         }
 
         public static void CreateTemplate(IEnumerable<PackageInfo> infos)
         {
-            var ProjectPath = new DirectoryInfo(Application.dataPath).Parent?.FullName.Replace('\\', '/')
+            var ProjectPath = new DirectoryInfo(Application.dataPath).Parent?.FullName
+                .Replace('\\', '/')
                 .Trim('\\', '/');
             if (string.IsNullOrEmpty(ProjectPath))
             {
@@ -328,18 +324,13 @@ namespace AIO.UEditor
                         var old = File.ReadAllText(file.FullName, Encoding.UTF8);
                         var now = savaDir[file.Name];
                         if (old == now)
-                            savaDir.Remove(file.Name);
-                        else
                         {
-                            change = true;
-                            file.Delete();
+                            savaDir.Remove(file.Name);
+                            continue;
                         }
                     }
-                    else
-                    {
-                        change = true;
-                        file.Delete();
-                    }
+
+                    change = true;
                 }
             }
             else
@@ -352,7 +343,9 @@ namespace AIO.UEditor
             {
                 change = true;
                 foreach (var item in savaDir)
+                {
                     File.WriteAllText(Path.Combine(OutPath, item.Key), item.Value, Encoding.UTF8);
+                }
             }
 
             if (change)
