@@ -109,7 +109,7 @@ namespace AIO.UEditor
         {
             str.AppendLine();
             str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false, {2})]\r\n",
-                nameof(PrPlatform.Git), "推送 Push", ++index);
+                nameof(PrPlatform.Git), "推送 Push", index);
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
                 nameof(PrPlatform.Git.Push), "        {\r\n");
             str.AppendFormat(
@@ -121,7 +121,7 @@ namespace AIO.UEditor
         {
             str.AppendLine();
             str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false, {2})]\r\n",
-                nameof(PrPlatform.Git), "提交 Commit", ++index);
+                nameof(PrPlatform.Git), "提交 Commit", index);
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
                 nameof(PrPlatform.Git.Commit), "        {\r\n");
             str.AppendFormat(
@@ -133,7 +133,7 @@ namespace AIO.UEditor
         {
             str.AppendLine();
             str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false, {2})]\r\n",
-                nameof(PrPlatform.Git), "上传 Upload", ++index);
+                nameof(PrPlatform.Git), "上传 Upload", index);
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
                 nameof(PrPlatform.Git.Upload), "        {\r\n");
             str.AppendFormat(
@@ -145,7 +145,7 @@ namespace AIO.UEditor
         {
             str.AppendLine();
             str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false, {2})]\r\n",
-                nameof(PrPlatform.Git), "清理 Clean", ++index);
+                nameof(PrPlatform.Git), "清理 Clean", index);
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
                 nameof(PrPlatform.Git.Clean), "        {\r\n");
             str.AppendFormat("            await PrPlatform.Git.{0}(\r\n                {1}, \"-fd -x" +
@@ -291,6 +291,7 @@ namespace AIO.UEditor
                 foreach (var file in bakDir.GetFiles("*.cs", SearchOption.TopDirectoryOnly))
                 {
                     if (file.Name.Contains(".meta")) continue;
+                    if (file.Name.StartsWith("GitUnityProject")) continue;
                     if (savaDir.ContainsKey(file.Name))
                     {
                         // 判断文件是否有变化
