@@ -34,36 +34,52 @@ namespace AIO.RainbowFolders.Settings
 
         private static ProjectRuleset _instance;
 
-        private static ICollection<string> paths;
-
         public static ProjectRuleset Instance
         {
             get
             {
-                if (!(_instance is null)) return _instance;
-                try
+                if (_instance is null)
                 {
-                    if (paths is null)
+                    try
                     {
-                        paths = new List<string>();
-                        foreach (var guid in AssetDatabase.FindAssets($"t:{nameof(ProjectRuleset)}",
-                                     new string[] { "Packages", "Assets" }))
+                        var paths = AssetDatabase.FindAssets($"t:{nameof(ProjectRuleset)}", new string[] { "Assets" })
+                            .Select(AssetDatabase.GUIDToAssetPath)
+                            .ToList();
+
+                        foreach (var expr in paths)
                         {
-                            paths.Add(AssetDatabase.GUIDToAssetPath(guid));
+                            _instance = AssetDatabase.LoadAssetAtPath<ProjectRuleset>(expr);
+                            if (_instance is null) continue;
+                            break;
                         }
                     }
-
-                    foreach (var expr in paths)
+                    catch (Exception)
                     {
-                        _instance = AssetDatabase.LoadAssetAtPath<ProjectRuleset>(expr);
-                        if (_instance is null) continue;
-                        break;
+                        // ignored
                     }
                 }
-                catch (Exception)
+
+                if (_instance is null)
                 {
-                    // ignored
+                    try
+                    {
+                        var paths = AssetDatabase.FindAssets($"t:{nameof(ProjectRuleset)}", new string[] { "Packages" })
+                            .Select(AssetDatabase.GUIDToAssetPath)
+                            .ToList();
+
+                        foreach (var expr in paths)
+                        {
+                            _instance = AssetDatabase.LoadAssetAtPath<ProjectRuleset>(expr);
+                            if (_instance is null) continue;
+                            break;
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // ignored
+                    }
                 }
+
 
                 if (_instance is null)
                 {
