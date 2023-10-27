@@ -72,6 +72,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Script\MenuItem\MenuItem.Git.ALL.cs" />
     <Compile Include="Script\MenuItem\MenuItem.Git.cs" />
+    <Compile Include="Script\MenuItem\MenuItem.Git.Templeta.cs" />
     <Compile Include="Script\MenuItem\MenuItem.Tools.Open.cs" />
     <Compile Include="Script\PluginData\PluginData.cs" />
     <Compile Include="Script\PluginData\PluginData.Helper.cs" />
