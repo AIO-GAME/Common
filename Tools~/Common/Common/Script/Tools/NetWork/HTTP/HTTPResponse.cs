@@ -38,6 +38,7 @@ namespace AIO
         /// </summary>
         public INetRequest Request { get; internal set; }
 
+        /// <inheritdoc />
         public async Task<T> GetAsync<T>(T defaultValue = default)
         {
             if (Body is HttpContent content)
@@ -49,18 +50,21 @@ namespace AIO
             return defaultValue;
         }
 
+        /// <inheritdoc />
         public Task<string> GetStringAsync()
         {
             if (Body is HttpContent content) return content.ReadAsStringAsync();
             return null;
         }
 
+        /// <inheritdoc />
         public Task<Stream> GetStreamAsync()
         {
             if (Body is HttpContent content) return content.ReadAsStreamAsync();
             return null;
         }
 
+        /// <inheritdoc />
         public Task<byte[]> GetBytesAsync()
         {
             if (Body is HttpContent content) return content.ReadAsByteArrayAsync();

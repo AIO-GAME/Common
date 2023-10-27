@@ -1,56 +1,55 @@
 ﻿using System.Text;
-using Newtonsoft.Json;
 
 namespace AIO
 {
     public partial class BufferByte
     {
         /// <inheritdoc/> 
-        public T ReadJson<T>(JsonSerializerSettings settings = null, Encoding encoding = null, bool reverse = false)
+        public T ReadJson<T>(Encoding encoding = null, bool reverse = false)
         {
-            return AHelper.Json.Deserialize<T>(ReadString(encoding, reverse), settings);
+            return AHelper.Json.Deserialize<T>(ReadString(encoding, reverse));
         }
 
         /// <inheritdoc/> 
-        public T ReadJsonUTF8<T>(JsonSerializerSettings settings = null, bool reverse = false)
+        public T ReadJsonUTF8<T>(bool reverse = false)
         {
-            return AHelper.Json.Deserialize<T>(ReadString(Encoding.UTF8, reverse), settings);
+            return AHelper.Json.Deserialize<T>(ReadString(Encoding.UTF8, reverse));
         }
 
         /// <inheritdoc/> 
-        public T ReadJsonASCII<T>(JsonSerializerSettings settings = null, bool reverse = false)
+        public T ReadJsonASCII<T>(bool reverse = false)
         {
-            return AHelper.Json.Deserialize<T>(ReadString(Encoding.ASCII, reverse), settings);
+            return AHelper.Json.Deserialize<T>(ReadString(Encoding.ASCII, reverse));
         }
 
         /// <inheritdoc/> 
-        public T ReadJsonUnicode<T>(JsonSerializerSettings settings = null, bool reverse = false)
+        public T ReadJsonUnicode<T>(bool reverse = false)
         {
-            return AHelper.Json.Deserialize<T>(ReadString(Encoding.Unicode, reverse), settings);
+            return AHelper.Json.Deserialize<T>(ReadString(Encoding.Unicode, reverse));
         }
 
         /// <inheritdoc/> 
-        public void WriteJson<T>(T value, JsonSerializerSettings settings = null, Encoding encoding = null, bool reverse = false)
+        public void WriteJson<T>(T value, Encoding encoding = null, bool reverse = false)
         {
-            WriteString(AHelper.Json.Serialize(value, settings), encoding, reverse);
+            WriteString(AHelper.Json.Serialize(value), encoding, reverse);
         }
 
         /// <inheritdoc/> 
-        public void WriteJsonUTF8<T>(T value, JsonSerializerSettings settings = null, bool reverse = false)
+        public void WriteJsonUTF8<T>(T value, bool reverse = false)
         {
-            WriteString(AHelper.Json.Serialize(value, settings), Encoding.UTF8, reverse);
+            WriteString(AHelper.Json.Serialize(value), Encoding.UTF8, reverse);
         }
 
         /// <inheritdoc/> 
-        public void WriteJsonASCII<T>(T value, JsonSerializerSettings settings = null, bool reverse = false)
+        public void WriteJsonASCII<T>(T value, bool reverse = false)
         {
-            WriteString(AHelper.Json.Serialize(value, settings), Encoding.ASCII, reverse);
+            WriteString(AHelper.Json.Serialize(value), Encoding.ASCII, reverse);
         }
 
         /// <inheritdoc/> 
-        public void WriteJsonUnicode<T>(T value, JsonSerializerSettings settings = null, bool reverse = false)
+        public void WriteJsonUnicode<T>(T value, bool reverse = false)
         {
-            WriteString(AHelper.Json.Serialize(value, settings), Encoding.Unicode, reverse);
+            WriteString(AHelper.Json.Serialize(value), Encoding.Unicode, reverse);
         }
     }
 }

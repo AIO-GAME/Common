@@ -182,7 +182,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// <
+        /// &lt;
         /// </summary>
         /// <param name="v1"><see cref="Version"/></param>
         /// <param name="v2"><see cref="Version"/></param>

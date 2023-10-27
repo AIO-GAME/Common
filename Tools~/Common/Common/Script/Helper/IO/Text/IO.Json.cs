@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using System.Text;
 
 public partial class AHelper
 {
@@ -10,7 +11,7 @@ public partial class AHelper
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T ReadJson<T>(
             in string path,
-            in string charset = "utf-8")
+            Encoding charset = null)
         {
             return Json.Deserialize<T>(ReadText(path, charset));
         }
@@ -32,7 +33,7 @@ public partial class AHelper
             in string path,
             in T value,
             in bool concat = false,
-            in string charset = "utf-8")
+            Encoding charset = null)
         {
             if (value == null) return;
             WriteText(path, Json.Serialize(value), charset, concat);

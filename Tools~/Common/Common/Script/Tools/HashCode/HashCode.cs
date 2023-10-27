@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+#pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
 namespace AIO
 {
     /// <summary>
@@ -116,7 +116,7 @@ namespace AIO
         }
 
         [Obsolete("HashCode is a mutable struct and should not be compared with other HashCodes.", true)]
-        public override bool Equals(object obj)
+        public sealed override bool Equals(object obj)
         {
             return obj is HashCode other && Equals(other);
         }
@@ -124,7 +124,7 @@ namespace AIO
         [Obsolete(
             "HashCode is a mutable struct and should not be compared with other HashCodes. Use ToHashCode to retrieve the computed hash code.",
             true)]
-        public override int GetHashCode()
+        public sealed override int GetHashCode()
         {
             return _dummyPrimitive;
         }

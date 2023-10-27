@@ -17,7 +17,7 @@ public partial class AHelper
             in string text,
             in bool concat = false)
         {
-            return WriteText(path, text, "utf-8", concat);
+            return WriteText(path, text, Encoding.UTF8, concat);
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ public partial class AHelper
             in StringBuilder text,
             in bool concat = false)
         {
-            return WriteText(path, text.ToString(), "utf-8", concat);
+            return WriteText(path, text.ToString(), Encoding.UTF8, concat);
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ public partial class AHelper
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ReadUTF8(in string path)
         {
-            return ReadText(path, "utf-8");
+            return ReadText(path, Encoding.UTF8);
         }
     }
 }

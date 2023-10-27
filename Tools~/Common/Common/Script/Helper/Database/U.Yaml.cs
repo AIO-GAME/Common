@@ -5,7 +5,6 @@
 |*|=============================================*/
 
 using System.IO;
-using System.Runtime.CompilerServices;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 

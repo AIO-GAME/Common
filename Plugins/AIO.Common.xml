@@ -4,60 +4,43 @@
         <name>AIO.Common</name>
     </assembly>
     <members>
-        <member name="T:AssemblyInfo">
+        <member name="F:AIO.MiniJSON.lastErrorIndex">
             <summary>
-            程序集信息
+            On decoding, this value holds the position at which the parse failed (-1 = no error).
             </summary>
         </member>
-        <member name="F:AssemblyInfo.KEY">
+        <member name="M:AIO.MiniJSON.Decode(System.String)">
             <summary>
-            密钥信息
+            Parses the string json into a value
             </summary>
+            <param name="json">A JSON string.</param>
+            <returns>An ArrayList, a Hashtable, a double, a string, null, true, or false</returns>
         </member>
-        <member name="F:AssemblyInfo.PublicKey">
+        <member name="M:AIO.MiniJSON.Encode(System.Object)">
             <summary>
-            公钥
+            Converts a Hashtable / ArrayList / Dictionary(string,string) object into a JSON string
             </summary>
+            <param name="json">A Hashtable / ArrayList</param>
+            <returns>A JSON encoded string, or null if object 'json' is not serializable</returns>
         </member>
-        <member name="F:AssemblyInfo.Token">
+        <member name="M:AIO.MiniJSON.LastDecodeSuccessful">
             <summary>
-            公钥Token
+            On decoding, this function returns the position at which the parse failed (-1 = no error).
             </summary>
+            <returns></returns>
         </member>
-        <member name="F:AssemblyInfo.Version">
+        <member name="M:AIO.MiniJSON.GetLastErrorIndex">
             <summary>
-            版本
+            On decoding, this function returns the position at which the parse failed (-1 = no error).
             </summary>
+            <returns></returns>
         </member>
-        <member name="F:AssemblyInfo.FileVersion">
+        <member name="M:AIO.MiniJSON.GetLastErrorSnippet">
             <summary>
-            指示编译器使用 Win32 文件版本资源的特定版本号。 Win32 文件版本不需要与程序集的版本号相同。
+            If a decoding error occurred, this function returns a piece of the JSON string
+            at which the error took place. To ease debugging.
             </summary>
-        </member>
-        <member name="F:AssemblyInfo.KeyFile">
-            <summary>
-            密钥位置
-            </summary>
-        </member>
-        <member name="F:AssemblyInfo.KeyName">
-            <summary>
-            密钥位置
-            </summary>
-        </member>
-        <member name="F:AssemblyInfo.Company">
-            <summary>
-            作者
-            </summary>
-        </member>
-        <member name="F:AssemblyInfo.Copyright">
-            <summary>
-            程序集属性
-            </summary>
-        </member>
-        <member name="F:AssemblyInfo.Culture">
-            <summary>
-            支持的区域性
-            </summary>
+            <returns></returns>
         </member>
         <member name="T:AIO.LruCache">
             <summary>
@@ -3646,28 +3629,28 @@
         <member name="M:AIO.BufferByte.WriteInt64(System.Int64,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadJson``1(Newtonsoft.Json.JsonSerializerSettings,System.Text.Encoding,System.Boolean)">
+        <member name="M:AIO.BufferByte.ReadJson``1(System.Text.Encoding,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadJsonUTF8``1(Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
+        <member name="M:AIO.BufferByte.ReadJsonUTF8``1(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadJsonASCII``1(Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
+        <member name="M:AIO.BufferByte.ReadJsonASCII``1(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.ReadJsonUnicode``1(Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
+        <member name="M:AIO.BufferByte.ReadJsonUnicode``1(System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteJson``1(``0,Newtonsoft.Json.JsonSerializerSettings,System.Text.Encoding,System.Boolean)">
+        <member name="M:AIO.BufferByte.WriteJson``1(``0,System.Text.Encoding,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteJsonUTF8``1(``0,Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
+        <member name="M:AIO.BufferByte.WriteJsonUTF8``1(``0,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteJsonASCII``1(``0,Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
+        <member name="M:AIO.BufferByte.WriteJsonASCII``1(``0,System.Boolean)">
             <inheritdoc/> 
         </member>
-        <member name="M:AIO.BufferByte.WriteJsonUnicode``1(``0,Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
+        <member name="M:AIO.BufferByte.WriteJsonUnicode``1(``0,System.Boolean)">
             <inheritdoc/> 
         </member>
         <member name="M:AIO.BufferByte.ReadLen">
@@ -4184,39 +4167,35 @@
             读取数据
             </summary>
         </member>
-        <member name="M:AIO.IReadJson.ReadJson``1(Newtonsoft.Json.JsonSerializerSettings,System.Text.Encoding,System.Boolean)">
+        <member name="M:AIO.IReadJson.ReadJson``1(System.Text.Encoding,System.Boolean)">
             <summary>
             读取Json数据
             </summary>
-            <param name="settings">反序列化设置</param>
             <param name="encoding">字符串编码</param>
             <param name="reverse">反转</param>
             <typeparam name="T">数据泛型</typeparam>
             <returns>数据值</returns>
         </member>
-        <member name="M:AIO.IReadJson.ReadJsonUTF8``1(Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
+        <member name="M:AIO.IReadJson.ReadJsonUTF8``1(System.Boolean)">
             <summary>
             读取Json数据
             </summary>
-            <param name="settings">反序列化设置</param>
             <param name="reverse">反转</param>
             <typeparam name="T">数据泛型</typeparam>
             <returns>数据值</returns>
         </member>
-        <member name="M:AIO.IReadJson.ReadJsonASCII``1(Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
+        <member name="M:AIO.IReadJson.ReadJsonASCII``1(System.Boolean)">
             <summary>
             读取Json数据
             </summary>
-            <param name="settings">反序列化设置</param>
             <param name="reverse">反转</param>
             <typeparam name="T">数据泛型</typeparam>
             <returns>数据值</returns>
         </member>
-        <member name="M:AIO.IReadJson.ReadJsonUnicode``1(Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
+        <member name="M:AIO.IReadJson.ReadJsonUnicode``1(System.Boolean)">
             <summary>
             读取Json数据
             </summary>
-            <param name="settings">反序列化设置</param>
             <param name="reverse">反转</param>
             <typeparam name="T">数据泛型</typeparam>
             <returns>数据值</returns>
@@ -4623,40 +4602,36 @@
             写入指定数据类型
             </summary>
         </member>
-        <member name="M:AIO.IWriteJson.WriteJson``1(``0,Newtonsoft.Json.JsonSerializerSettings,System.Text.Encoding,System.Boolean)">
+        <member name="M:AIO.IWriteJson.WriteJson``1(``0,System.Text.Encoding,System.Boolean)">
             <summary>
             写入Json数据
             </summary>
             <param name="value">输入源</param>
-            <param name="settings">json压缩设置</param>
             <param name="encoding">编码</param>
             <param name="reverse">反转</param>
             <typeparam name="T">泛型</typeparam>
         </member>
-        <member name="M:AIO.IWriteJson.WriteJsonUTF8``1(``0,Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
+        <member name="M:AIO.IWriteJson.WriteJsonUTF8``1(``0,System.Boolean)">
             <summary>
             写入Json数据
             </summary>
             <param name="value">输入源</param>
-            <param name="settings">json压缩设置</param>
             <param name="reverse">反转</param>
             <typeparam name="T">泛型</typeparam>
         </member>
-        <member name="M:AIO.IWriteJson.WriteJsonASCII``1(``0,Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
+        <member name="M:AIO.IWriteJson.WriteJsonASCII``1(``0,System.Boolean)">
             <summary>
             写入Json数据
             </summary>
             <param name="value">输入源</param>
-            <param name="settings">json压缩设置</param>
             <param name="reverse">反转</param>
             <typeparam name="T">泛型</typeparam>
         </member>
-        <member name="M:AIO.IWriteJson.WriteJsonUnicode``1(``0,Newtonsoft.Json.JsonSerializerSettings,System.Boolean)">
+        <member name="M:AIO.IWriteJson.WriteJsonUnicode``1(``0,System.Boolean)">
             <summary>
             写入Json数据
             </summary>
             <param name="value">输入源</param>
-            <param name="settings">json压缩设置</param>
             <param name="reverse">反转</param>
             <typeparam name="T">泛型</typeparam>
         </member>
@@ -5234,6 +5209,17 @@
             </summary>
             <param name="request"></param>
         </member>
+        <member name="M:AIO.HTTPNetwork.AsyncSend">
+            <summary>
+            
+            </summary>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:AIO.HTTPNetwork.OnSend">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:AIO.IHTTPRequest">
             <summary>
             Net Http Request
@@ -5408,6 +5394,18 @@
             <summary>
             请求
             </summary>
+        </member>
+        <member name="M:AIO.HTTPResponse.GetAsync``1(``0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.HTTPResponse.GetStringAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.HTTPResponse.GetStreamAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.HTTPResponse.GetBytesAsync">
+            <inheritdoc />
         </member>
         <member name="T:AIO.INetCryptography">
             <summary>
@@ -8225,7 +8223,14 @@
             <param name="v2"><see cref="T:AIO.Version"/></param>
             <returns></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:AIO.Version.op_LessThan(AIO.Version,AIO.Version)" -->
+        <member name="M:AIO.Version.op_LessThan(AIO.Version,AIO.Version)">
+            <summary>
+            &lt;
+            </summary>
+            <param name="v1"><see cref="T:AIO.Version"/></param>
+            <param name="v2"><see cref="T:AIO.Version"/></param>
+            <returns></returns>
+        </member>
         <member name="M:AIO.Version.op_LessThanOrEqual(AIO.Version,AIO.Version)">
             <summary>
             &lt;=
@@ -9482,6 +9487,61 @@
             maximum length of address
             </summary>
         </member>
+        <member name="T:AssemblyInfo">
+            <summary>
+            程序集信息
+            </summary>
+        </member>
+        <member name="F:AssemblyInfo.KEY">
+            <summary>
+            密钥信息
+            </summary>
+        </member>
+        <member name="F:AssemblyInfo.PublicKey">
+            <summary>
+            公钥
+            </summary>
+        </member>
+        <member name="F:AssemblyInfo.Token">
+            <summary>
+            公钥Token
+            </summary>
+        </member>
+        <member name="F:AssemblyInfo.Version">
+            <summary>
+            版本
+            </summary>
+        </member>
+        <member name="F:AssemblyInfo.FileVersion">
+            <summary>
+            指示编译器使用 Win32 文件版本资源的特定版本号。 Win32 文件版本不需要与程序集的版本号相同。
+            </summary>
+        </member>
+        <member name="F:AssemblyInfo.KeyFile">
+            <summary>
+            密钥位置
+            </summary>
+        </member>
+        <member name="F:AssemblyInfo.KeyName">
+            <summary>
+            密钥位置
+            </summary>
+        </member>
+        <member name="F:AssemblyInfo.Company">
+            <summary>
+            作者
+            </summary>
+        </member>
+        <member name="F:AssemblyInfo.Copyright">
+            <summary>
+            程序集属性
+            </summary>
+        </member>
+        <member name="F:AssemblyInfo.Culture">
+            <summary>
+            支持的区域性
+            </summary>
+        </member>
         <member name="T:AHelper">
             <summary>
             Utils 工具库
@@ -9511,6 +9571,39 @@
             计算类型的 FileID
             </summary>
             <returns>fileid</returns>
+        </member>
+        <member name="T:AHelper.Json">
+            <summary>
+            Json 工具类
+            </summary>
+            <see>
+                <cref>https://www.newtonsoft.com/json/help/html/N_Newtonsoft_Json.htm</cref>
+            </see>
+        </member>
+        <member name="M:AHelper.Json.Serialize(System.Object@)">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Serialize``1(``0@)">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.ToHashTable(System.String@)">
+            <summary>
+            反序列化 HashTable
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Deserialize(System.String@)">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Deserialize``1(System.String@)">
+            <summary>
+            反序列化
+            </summary>
         </member>
         <member name="T:AHelper.Reflect">
             <summary>
@@ -9662,94 +9755,6 @@
         <member name="M:AHelper.HashTable.Create(System.Collections.Generic.IDictionary{System.Object,System.Object})">
             <summary>
             创建
-            </summary>
-        </member>
-        <member name="T:AHelper.Json">
-            <summary>
-            Json 工具类
-            </summary>
-            <see>
-                <cref>https://www.newtonsoft.com/json/help/html/N_Newtonsoft_Json.htm</cref>
-            </see>
-        </member>
-        <member name="P:AHelper.Json.JSONNormalSettings">
-            <summary>
-            Json默认设置
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Serialize(System.Object@)">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Serialize(System.Object@,Newtonsoft.Json.JsonSerializerSettings@)">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Serialize``1(``0@,Newtonsoft.Json.JsonSerializerSettings@)">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Serialize``1(``0@)">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.ToHashTable(System.String@)">
-            <summary>
-            反序列化 HashTable
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Deserialize(System.String@,Newtonsoft.Json.JsonSerializerSettings@)">
-            <summary>
-            反序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Deserialize(System.String@)">
-            <summary>
-            反序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Deserialize``1(System.String@,Newtonsoft.Json.JsonSerializerSettings@)">
-            <summary>
-            反序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Deserialize``1(System.String@)">
-            <summary>
-            反序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Deserialize(System.String@,System.Type@,Newtonsoft.Json.JsonSerializerSettings@)">
-            <summary>
-            反序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Deserialize(System.String@,System.Type@)">
-            <summary>
-            反序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.PopulateObject``1(System.String,``0,Newtonsoft.Json.JsonSerializerSettings@)">
-            <summary>
-            反序列化 填充对象
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.PopulateObject``1(System.String,``0)">
-            <summary>
-            反序列化 填充对象
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.PopulateObject(System.String,System.Object,Newtonsoft.Json.JsonSerializerSettings@)">
-            <summary>
-            反序列化 填充对象
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.PopulateObject(System.String,System.Object)">
-            <summary>
-            反序列化 填充对象
             </summary>
         </member>
         <member name="T:AHelper.Sort">
@@ -10669,7 +10674,7 @@
             写入 Base64 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:AHelper.IO.ReadBase64``1(System.String@,System.String@)">
+        <member name="M:AHelper.IO.ReadBase64``1(System.String@,System.Text.Encoding)">
             <summary>
             读取 Base64 文件 根据编码
             </summary>
@@ -10679,7 +10684,7 @@
             读取 Base64 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:AHelper.IO.WriteBase64``1(System.String@,``0@,System.String@)">
+        <member name="M:AHelper.IO.WriteBase64``1(System.String@,``0@,System.Text.Encoding)">
             <summary>
             写入 Base64 文件 根据编码
             </summary>
@@ -10687,11 +10692,6 @@
         <member name="M:AHelper.IO.WriteBase64UTF8``1(System.String@,``0@)">
             <summary>
             写入 Base64 文件 编码utf-8
-            </summary>
-        </member>
-        <member name="M:AHelper.IO.WriteBase64``1(System.String@,``0@,System.String)">
-            <summary>
-            写入 Base64 文件 根据编码
             </summary>
         </member>
         <member name="M:AHelper.IO.WriteBase64UTF8``1(System.String@,``0)">
@@ -10719,7 +10719,7 @@
             写入Json文件 编码utf-8
             </summary>
         </member>
-        <member name="M:AHelper.IO.ReadJson``1(System.String@,System.String@)">
+        <member name="M:AHelper.IO.ReadJson``1(System.String@,System.Text.Encoding)">
             <summary>
             读取Json文件 根据编码
             </summary>
@@ -10729,7 +10729,7 @@
             读取Json文件 编码utf-8
             </summary>
         </member>
-        <member name="M:AHelper.IO.WriteJson``1(System.String@,``0@,System.Boolean@,System.String@)">
+        <member name="M:AHelper.IO.WriteJson``1(System.String@,``0@,System.Boolean@,System.Text.Encoding)">
             <summary>
             写入Json文件 根据编码
             </summary>
@@ -10798,12 +10798,12 @@
             异步 按照指定编码读取文本文件
             </summary>
         </member>
-        <member name="M:AHelper.IO.ReadText(System.String@,System.String@)">
+        <member name="M:AHelper.IO.ReadText(System.String@,System.Text.Encoding)">
             <summary>
             按照指定编码读取文本文件
             </summary>
         </member>
-        <member name="M:AHelper.IO.WriteText(System.String@,System.Text.StringBuilder@,System.String@,System.Boolean@)">
+        <member name="M:AHelper.IO.WriteText(System.String,System.Text.StringBuilder,System.Text.Encoding,System.Boolean@)">
             <summary>
             将字符串按照指定编码写入文件,是否追加到文件尾
             </summary>
@@ -10812,7 +10812,7 @@
             <param name="charset">保存文本格式</param>
             <param name="concat">true:拼接 | false:覆盖</param>
         </member>
-        <member name="M:AHelper.IO.WriteText(System.String@,System.String@,System.String@,System.Boolean@)">
+        <member name="M:AHelper.IO.WriteText(System.String@,System.String@,System.Text.Encoding,System.Boolean@)">
             <summary>
             将字符串按照指定编码写入文件,是否追加到文件尾
             </summary>
@@ -10917,7 +10917,7 @@
             写入 XML 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:AHelper.IO.ReadXml``1(System.String@,System.String@)">
+        <member name="M:AHelper.IO.ReadXml``1(System.String@,System.Text.Encoding)">
             <summary>
             读取 XML 文件 根据编码
             </summary>
@@ -10927,7 +10927,7 @@
             读取 XML 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:AHelper.IO.WriteXml``1(System.String@,``0@,System.String@)">
+        <member name="M:AHelper.IO.WriteXml``1(System.String@,``0@,System.Text.Encoding)">
             <summary>
             写入 XML 文件 根据编码
             </summary>
@@ -10957,7 +10957,7 @@
             写入 Yaml 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:AHelper.IO.ReadYaml``1(System.String@,System.String@)">
+        <member name="M:AHelper.IO.ReadYaml``1(System.String@,System.Text.Encoding)">
             <summary>
             读取 Yaml 文件 根据编码
             </summary>
@@ -10967,7 +10967,7 @@
             读取 Yaml 文件 编码utf-8
             </summary>
         </member>
-        <member name="M:AHelper.IO.WriteYaml``1(System.String@,``0@,System.String@)">
+        <member name="M:AHelper.IO.WriteYaml``1(System.String@,``0@,System.Text.Encoding)">
             <summary>
             写入 Yaml 文件 根据编码
             </summary>

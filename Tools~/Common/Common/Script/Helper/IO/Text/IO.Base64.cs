@@ -1,3 +1,5 @@
+using System.Text;
+
 public partial class AHelper
 {
     public partial class IO
@@ -7,7 +9,7 @@ public partial class AHelper
         /// </summary>
         public static T ReadBase64<T>(
             in string path,
-            in string charset = "utf-8")
+            Encoding charset = null)
         {
             return Base64.Deserialize<T>(ReadText(path, charset));
         }
@@ -27,7 +29,7 @@ public partial class AHelper
         public static void WriteBase64<T>(
             in string path,
             in T value,
-            in string charset = "utf-8") where T : struct
+            Encoding charset = null) where T : struct
         {
             WriteText(path, Base64.Serialize(value), charset);
         }
@@ -40,18 +42,6 @@ public partial class AHelper
             in T value) where T : struct
         {
             WriteUTF8(path, Base64.Serialize(value));
-        }
-
-        /// <summary>
-        /// 写入 Base64 文件 根据编码
-        /// </summary>
-        public static void WriteBase64<T>(
-            in string path,
-            in T value,
-            string charset = "utf-8") where T : class
-        {
-            if (value == null) return;
-            WriteText(path, Base64.Serialize(value), charset);
         }
 
         /// <summary>

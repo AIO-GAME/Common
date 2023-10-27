@@ -8,9 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 
@@ -49,7 +47,7 @@ namespace AIO.UEditor
     [GWindow("Package Manager", Group = "Tools", MinSizeWidth = 500, MinSizeHeight = 200)]
     public class PackageManagerWindow : GraphicWindow
     {
-        public const string PACKAGE_CLONE_FILE = "AutoGitClone.ini";
+        public const string PACKAGE_CLONE_FILE = "AutoGit.ini";
 
         protected Vector2 Vector;
 
@@ -65,7 +63,7 @@ namespace AIO.UEditor
             var FilePath = Path.Combine(PackagesPath, PACKAGE_CLONE_FILE);
             if (File.Exists(FilePath))
             {
-                Package = JsonConvert.DeserializeObject<PackageData>(File.ReadAllText(FilePath));
+                Package = AHelper.IO.ReadJsonUTF8<PackageData>(FilePath);
                 if (Package.URL == null) Package.URL = new List<string>();
             }
             else Package = new PackageData { URL = new List<string>() };
@@ -197,8 +195,7 @@ namespace AIO.UEditor
 
         protected override void OnDisable()
         {
-            var FilePath = Path.Combine(PackagesPath, PACKAGE_CLONE_FILE);
-            File.WriteAllText(FilePath, JsonConvert.SerializeObject(Package), Encoding.UTF8);
+            AHelper.IO.WriteJsonUTF8(Path.Combine(PackagesPath, PACKAGE_CLONE_FILE), Package);
         }
     }
 }

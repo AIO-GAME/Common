@@ -13,7 +13,7 @@ public partial class AHelper
             in string path
         )
         {
-            return ReadText(path, "unicode");
+            return ReadText(path, Encoding.Unicode);
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ public partial class AHelper
             in StringBuilder text,
             in bool concat = false)
         {
-            return WriteText(path, text.ToString(), "unicode", concat);
+            return WriteText(path, text.ToString(), Encoding.Unicode, concat);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ public partial class AHelper
             in string text,
             in bool concat = false)
         {
-            return WriteText(path, text, "unicode", concat);
+            return WriteText(path, text, Encoding.Unicode, concat);
         }
     }
 }

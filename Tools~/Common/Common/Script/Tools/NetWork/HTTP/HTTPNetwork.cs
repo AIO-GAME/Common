@@ -155,6 +155,10 @@ namespace AIO
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <exception cref="Exception"></exception>
         public async Task AsyncSend()
         {
             while (GetQueueCount() > 0)
@@ -226,6 +230,9 @@ namespace AIO
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected virtual void OnSend()
         {
         }

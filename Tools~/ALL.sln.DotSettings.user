@@ -4,4 +4,5 @@
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CTenncent_005CScript_005Ccom_002Eself_002Epackage_005CTools_007E_005CResources_005CPlugins_005CUnityEngine_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CTenncent_005CScript_005Ccom_002Eself_002Epackage_005CTools_007E_005CResources_005CPlugins_005CUnityEngine_002EImageConversionModule_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CTenncent_005CScript_005Ccom_002Eself_002Epackage_005CTools_007E_005CResources_005CPlugins_005CUnityEngine_002EIMGUIModule_002Edll/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CTenncent_005CScript_005Ccom_002Eself_002Epackage_005CTools_007E_005CResources_005CPlugins_005CUnityEngine_002ETextRenderingModule_002Edll/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
+	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CTenncent_005CScript_005Ccom_002Eself_002Epackage_005CTools_007E_005CResources_005CPlugins_005CUnityEngine_002ETextRenderingModule_002Edll/@EntryIndexedValue">True</s:Boolean>
+	</wpf:ResourceDictionary>

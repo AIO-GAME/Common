@@ -43,16 +43,6 @@
     <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HtmlAgilityPack, Version=1.11.46.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a">
-      <HintPath>..\..\Resources\Nuget\htmlagilitypack\1.11.46\lib\Net45\HtmlAgilityPack.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=1.0.7.0, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
-      <HintPath>..\..\Resources\Nuget\sharpziplib.netstandard\1.0.7\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-      <HintPath>..\..\Resources\Nuget\newtonsoft.json\13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
@@ -60,12 +50,380 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="YamlDotNet, Version=13.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e">
-      <HintPath>..\..\Resources\Nuget\yamldotnet\13.1.0\lib\net47\YamlDotNet.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.BZip2\BZip2.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.BZip2\BZip2Constants.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.BZip2\BZip2Exception.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.BZip2\BZip2InputStream.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.BZip2\BZip2OutputStream.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Checks\Adler32.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Checks\BZip2Crc.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Checks\Crc32.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Checks\IChecksum.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\CompletedFileHandler.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\DirectoryEventArgs.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\DirectoryFailureHandler.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\ExtendedPathFilter.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\FileFailureHandler.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\FileSystemScanner.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\INameTransform.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\IScanFilter.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\NameAndSizeFilter.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\NameFilter.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\PathFilter.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\ProcessFileHandler.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\ProgressEventArgs.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\ProgressHandler.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\ScanEventArgs.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\ScanFailureEventArgs.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\StreamUtils.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\WindowsPathUtils.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Encryp\PkzipClassic.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Encryp\PkzipClassicCryptoBase.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Encryp\PkzipClassicDecryptCryptoTrans.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Encryp\PkzipClassicEncryptCryptoTrans.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Encryp\PkzipClassicManaged.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Encryp\ZipAESStream.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Encryp\ZipAESTransform.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.GZip\GZip.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.GZip\GZipConstants.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.GZip\GZipException.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.GZip\GZipInputStream.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.GZip\GZipOutputStream.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Lzw\LzwConstants.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Lzw\LzwException.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Lzw\LzwInputStream.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\InvalidHeaderException.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\ProgressMessageHandler.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\TarArchive.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\TarBuffer.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\TarEntry.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\TarException.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\TarHeader.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\TarInputStream.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\TarOutputStream.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\Deflater.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\DeflaterConstants.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\DeflaterEngine.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\DeflaterHuffman.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\DeflaterOutputStream.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\DeflaterPending.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\DeflateStrategy.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\Inflater.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\InflaterDynHeader.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\InflaterHuffmanTree.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\InflaterInputBuffer.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\InflaterInputStream.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\OutputWindow.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\PendingBuffer.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\StreamManipulator.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\BaseArchiveStorage.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\CompressionMethod.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\DescriptorData.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\DiskArchiveStorage.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\DynamicDiskDataSource.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\EncryptionAlgorithm.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\EntryPatchData.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ExtendedUnixData.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\FastZip.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\FastZipEvents.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\FileUpdateMode.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\GeneralBitFlags.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\HostSystemID.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\IArchiveStorage.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\IDynamicDataSource.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\IEntryFactory.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\IStaticDataSource.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ITaggedData.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ITaggedDataFactory.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\KeysRequiredEventArgs.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\MemoryArchiveStorage.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\NTTaggedData.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\RawTaggedData.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\StaticDiskDataSource.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\TestOperation.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\TestStatus.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\TestStrategy.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\UseZip64.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\WindowsNameTransform.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipConstants.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipEntry.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipEntryFactory.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipException.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipExtraData.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipFile.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipHelperStream.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipInputStream.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipNameTransform.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipOutputStream.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipTestResultHandler.cs" />
+    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib\SharpZipBaseException.cs" />
+    <Compile Include="Plugins\MiniJSON\MiniJSON.cs" />
+    <Compile Include="Plugins\YamlDotNet\Microsoft.CodeAnalysis\EmbeddedAttribute.cs" />
+    <Compile Include="Plugins\YamlDotNet\System.Collections.Generic\DeconstructionExtensions.cs" />
+    <Compile Include="Plugins\YamlDotNet\System.Diagnostics.CodeAnalysi\AllowNullAttribute.cs" />
+    <Compile Include="Plugins\YamlDotNet\System.Diagnostics.CodeAnalysi\DisallowNullAttribute.cs" />
+    <Compile Include="Plugins\YamlDotNet\System.Diagnostics.CodeAnalysi\DoesNotReturnAttribute.cs" />
+    <Compile Include="Plugins\YamlDotNet\System.Diagnostics.CodeAnalysi\DoesNotReturnIfAttribute.cs" />
+    <Compile Include="Plugins\YamlDotNet\System.Diagnostics.CodeAnalysi\MaybeNullAttribute.cs" />
+    <Compile Include="Plugins\YamlDotNet\System.Diagnostics.CodeAnalysi\MaybeNullWhenAttribute.cs" />
+    <Compile Include="Plugins\YamlDotNet\System.Diagnostics.CodeAnalysi\MemberNotNullAttribute.cs" />
+    <Compile Include="Plugins\YamlDotNet\System.Diagnostics.CodeAnalysi\MemberNotNullWhenAttribute.cs" />
+    <Compile Include="Plugins\YamlDotNet\System.Diagnostics.CodeAnalysi\NotNullAttribute.cs" />
+    <Compile Include="Plugins\YamlDotNet\System.Diagnostics.CodeAnalysi\NotNullIfNotNullAttribute.cs" />
+    <Compile Include="Plugins\YamlDotNet\System.Diagnostics.CodeAnalysi\NotNullWhenAttribute.cs" />
+    <Compile Include="Plugins\YamlDotNet\System.Runtime.CompilerService\IsReadOnlyAttribute.cs" />
+    <Compile Include="Plugins\YamlDotNet\System.Runtime.CompilerService\NullableAttribute.cs" />
+    <Compile Include="Plugins\YamlDotNet\System.Runtime.CompilerService\NullableContextAttribute.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\AnchorAlias.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\Comment.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\DocumentEnd.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\DocumentStart.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\EventType.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\IParsingEventVisitor.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\MappingEnd.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\MappingStart.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\MappingStyle.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\NodeEvent.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\ParsingEvent.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\Scalar.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\SequenceEnd.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\SequenceStart.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\SequenceStyle.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\StreamEnd.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\StreamStart.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Anchor.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\AnchorAlias.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\BlockEnd.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\BlockEntry.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\BlockMappingStart.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\BlockSequenceStart.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Comment.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\DocumentEnd.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\DocumentStart.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Error.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\FlowEntry.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\FlowMappingEnd.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\FlowMappingStart.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\FlowSequenceEnd.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\FlowSequenceStart.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Key.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Scalar.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\StreamEnd.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\StreamStart.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Tag.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\TagDirective.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Token.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Value.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\VersionDirective.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\AnchorName.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\AnchorNotFoundException.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\CharacterAnalyzer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\Constants.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\Cursor.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\Emitter.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\EmitterSettings.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\EmitterState.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\ForwardAnchorNotSupportedExcep.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\HashCode.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\IEmitter.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\ILookAheadBuffer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\InsertionQueue.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\IParser.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\IScanner.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\LookAheadBuffer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\Mark.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\MaximumRecursionLevelReachedEx.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\MergingParser.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\Parser.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\ParserExtensions.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\ParserState.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\RecursionLevel.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\ScalarStyle.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\Scanner.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\SemanticErrorException.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\SimpleKey.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\StringLookAheadBuffer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\SyntaxErrorException.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\TagDirectiveCollection.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\TagName.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\Version.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\YamlException.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\ConcurrentObjectPool.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\ExpressionExtensions.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\GenericCollectionToNonGenericA.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\GenericDictionaryToNonGenericA.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\IOrderedDictionary.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\Lazy.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\NumberExtensions.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\OrderedDictionary.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\ReadOnlyCollectionExtensions.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\StringBuilderPool.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\ThrowHelper.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\DocumentLoadingState.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\EmitterState.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\IYamlVisitor.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\LibYamlEventStream.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlAliasNode.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlDocument.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlMappingNode.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlNode.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlNodeIdentityEqualityCompar.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlNodeType.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlScalarNode.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlSequenceNode.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlStream.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlVisitor.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlVisitorBase.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Buffe\ITypeDiscriminatingNodeDeseria.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Buffe\ITypeDiscriminator.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Buffe\KeyValueTypeDiscriminator.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Buffe\ParserBuffer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Buffe\TypeDiscriminatingNodeDeserial.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Buffe\UniqueKeyTypeDiscriminator.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Conve\DateTimeConverter.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Conve\GuidConverter.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Conve\SystemTypeConverter.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Event\ChainedEventEmitter.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Event\JsonEventEmitter.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Event\TypeAssigningEventEmitter.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Event\WriterEventEmitter.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Namin\CamelCaseNamingConvention.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Namin\HyphenatedNamingConvention.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Namin\LowerCaseNamingConvention.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Namin\NullNamingConvention.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Namin\PascalCaseNamingConvention.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Namin\UnderscoredNamingConvention.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\ArrayNodeDeserializer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\CollectionDeserializer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\CollectionNodeDeserializer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\DictionaryDeserializer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\DictionaryNodeDeserializer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\EnumerableNodeDeserializer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\NullNodeDeserializer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\ObjectNodeDeserializer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\ScalarNodeDeserializer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\StaticArrayNodeDeserializer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\StaticCollectionNodeDeserializ.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\StaticDictionaryNodeDeserializ.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\TypeConverterNodeDeserializer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\YamlConvertibleNodeDeserialize.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\YamlSerializableNodeDeserializ.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeT\DefaultContainersNodeTypeResol.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeT\MappingNodeTypeResolver.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeT\PreventUnknownTagsNodeTypeReso.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeT\TagNodeTypeResolver.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeT\TypeNameInTagNodeTypeResolver.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeT\YamlConvertibleTypeResolver.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeT\YamlSerializableTypeResolver.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\AnchorAssigner.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\AnchorAssigningObjectGraphVisi.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\ChainedObjectGraphVisitor.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\CommentsObjectGraphVisitor.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\CustomSerializationObjectGraph.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\DefaultExclusiveObjectGraphVis.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\DefaultObjectFactory.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\DefaultValuesObjectGraphVisito.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\EmittingObjectGraphVisitor.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\FullObjectGraphTraversalStrate.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\LambdaObjectFactory.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\ObjectFactoryBase.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\PreProcessingPhaseObjectGraphV.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\RoundtripObjectGraphTraversalS.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\StaticObjectFactory.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Schem\CoreSchema.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Schem\DefaultSchema.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Schem\FailsafeSchema.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Schem\JsonSchema.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\CachedTypeInspector.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\CompositeTypeInspector.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\NamingConventionTypeInspector.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\ReadableAndWritablePropertiesT.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\ReadableFieldsTypeInspector.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\ReadablePropertiesTypeInspecto.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\TypeInspectorSkeleton.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\WritablePropertiesTypeInspecto.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeR\DynamicTypeResolver.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeR\StaticTypeResolver.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\IPostDeserializationCallback.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\ITypeConverter.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\NullTypeConverter.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\ObjectAnchorCollection.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\ReflectionTypeConverter.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\ReflectionUtility.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\SerializerState.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\StringExtensions.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\TypeConverter.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Value\AliasValueDeserializer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Value\NodeValueDeserializer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\AliasEventInfo.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\BuilderSkeleton.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\DefaultValuesHandling.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\Deserializer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\DeserializerBuilder.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\EmissionPhaseObjectGraphVisito.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\EventInfo.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IAliasProvider.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IDeserializer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IEventEmitter.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\INamingConvention.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\INodeDeserializer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\INodeTypeResolver.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IObjectAccessor.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IObjectDescriptor.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IObjectFactory.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IObjectGraphTraversalStrategy.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IObjectGraphVisitor.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IPropertyDescriptor.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IRegistrationLocationSelection.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ISerializer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ITrackingRegistrationLocationS.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ITypeInspector.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ITypeResolver.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IValueDeserializer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IValuePromise.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IValueSerializer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IYamlConvertible.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IYamlSerializable.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IYamlTypeConverter.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\LazyComponentRegistrationList.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\LazyComponentRegistrationListE.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\MappingEndEventInfo.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\MappingStartEventInfo.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\Nothing.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ObjectDescriptor.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ObjectDescriptorExtensions.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ObjectDeserializer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ObjectEventInfo.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ObjectGraphTraversalStrategyFa.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ObjectSerializer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\PropertyDescriptor.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ScalarEventInfo.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\SequenceEndEventInfo.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\SequenceStartEventInfo.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\Serializer.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\SerializerBuilder.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\Settings.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\StaticBuilderSkeleton.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\StaticContext.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\StaticDeserializerBuilder.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\StaticSerializerBuilder.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\StreamFragment.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\TagMappings.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\WrapperFactory.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlAttributeOverrides.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlAttributeOverridesInspecto.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlAttributesTypeInspector.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlFormatter.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlIgnoreAttribute.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlMemberAttribute.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlSerializableAttribute.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlStaticContextAttribute.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet\CultureInfoAdapter.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet\PropertyInfoExtensions.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet\ReflectionExtensions.cs" />
+    <Compile Include="Plugins\YamlDotNet\YamlDotNet\StandardRegexOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Script\Algorithms\LruCache.cs" />
     <Compile Include="Script\Basics\HashAlgorithm\MD4.cs" />
@@ -151,6 +509,7 @@
     <Compile Include="Script\Extension\Struct\Char\Char.Extend.ToConver.cs" />
     <Compile Include="Script\Extension\Struct\Long\Long.Extend.cs" />
     <Compile Include="Script\Helper\Database\U.FileID.cs" />
+    <Compile Include="Script\Helper\Database\U.Json.MINIJSON.cs" />
     <Compile Include="Script\Helper\Reflect\U.Reflect.cs" />
     <Compile Include="Script\Tools\Bean\GBean.cs" />
     <Compile Include="Script\Tools\Bean\GBeanRegisterAttribute.cs" />
@@ -309,7 +668,7 @@
     <Compile Include="Script\Helper\Database\U.Binary.cs" />
     <Compile Include="Script\Helper\Database\U.DataEncrypt.cs" />
     <Compile Include="Script\Helper\Database\U.HashTable.cs" />
-    <Compile Include="Script\Helper\Database\U.Json.cs" />
+    <Compile Include="Script\Helper\Database\U.Json.NewtonSoft.cs" />
     <Compile Include="Script\Helper\Database\U.Sort.cs" />
     <Compile Include="Script\Helper\Database\U.Xml.cs" />
     <Compile Include="Script\Helper\Database\U.Yaml.cs" />
@@ -396,10 +755,6 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.46" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="SharpZipLib.NETStandard" Version="1.0.7" />
-    <PackageReference Include="YamlDotNet" Version="13.1.0" />
     <PackageReference Include="System.Buffers" Version="4.5.1" />
     <PackageReference Include="System.Memory" Version="4.5.4" />
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
@@ -432,26 +787,6 @@
 @if not exist %cur% (
 @exit
 )
-@set dllname=HtmlAgilityPack
-@copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll
-)
-@if exist %25CUR_DLL%25%25dllname%25.xml (
-@copy /y /v %25CUR_DLL%25%25dllname%25.xml %25cur%25%25dllname%25.xml
-)
-
-@set dllname=ICSharpCode.SharpZipLib
-@copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll
-)
-@if exist %25CUR_DLL%25%25dllname%25.xml (
-@copy /y /v %25CUR_DLL%25%25dllname%25.xml %25cur%25%25dllname%25.xml
-)
-
-@set dllname=YamlDotNet
-@copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll
-)
-@if exist %25CUR_DLL%25%25dllname%25.xml (
-@copy /y /v %25CUR_DLL%25%25dllname%25.xml %25cur%25%25dllname%25.xml
-)
 
 @set dllname=$(TargetName)
 @if exist %25CUR_DLL%25%25dllname%25.dll (
@@ -477,21 +812,6 @@
 @if exist %25cur%25%25dllname%25.xml (
 @del /s /q %25cur%25%25dllname%25.xml
 )
-
-@set dllname=YamlDotNet
-@if exist %25cur%25%25dllname%25.dll (
-@del /s /q %25cur%25%25dllname%25.dll
-)
-@if exist %25cur%25%25dllname%25.xml (
-@del /s /q %25cur%25%25dllname%25.xml
-)
-
-@set dllname=ICSharpCode.SharpZipLib
-@if exist %25cur%25%25dllname%25.dll (
-@del /s /q %25cur%25%25dllname%25.dll
-)
-@if exist %25cur%25%25dllname%25.xml (
-@del /s /q %25cur%25%25dllname%25.xml
-)</PreBuildEvent>
+</PreBuildEvent>
   </PropertyGroup>
 </Project>

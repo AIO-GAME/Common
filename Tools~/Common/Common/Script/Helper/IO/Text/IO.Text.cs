@@ -18,9 +18,9 @@ public partial class AHelper
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ReadText(
             in string path,
-            in string charset)
+            Encoding charset = null)
         {
-            return (Encoding.GetEncoding(charset) ?? Encoding.UTF8).GetString(ReadFile(path));
+            return (charset ?? Encoding.UTF8).GetString(ReadFile(path));
         }
 
         /// <summary>
@@ -32,13 +32,12 @@ public partial class AHelper
         /// <param name="concat">true:拼接 | false:覆盖</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool WriteText(
-            in string path,
-            in StringBuilder text,
-            in string charset,
+            string path,
+            StringBuilder text,
+            Encoding charset = null,
             in bool concat = false)
         {
-            var e = Encoding.GetEncoding(string.IsNullOrEmpty(charset) ? "utf-8" : charset);
-            var b = (e ?? Encoding.UTF8).GetBytes(text.ToString());
+            var b = (charset ?? Encoding.UTF8).GetBytes(text.ToString());
             return Write(path, b, 0, b.Length, concat);
         }
 
@@ -53,11 +52,10 @@ public partial class AHelper
         public static bool WriteText(
             in string path,
             in string text,
-            in string charset,
+            Encoding charset = null,
             in bool concat = false)
         {
-            var e = Encoding.GetEncoding(string.IsNullOrEmpty(charset) ? "utf-8" : charset);
-            var b = (e ?? Encoding.UTF8).GetBytes(text.ToString());
+            var b = (charset ?? Encoding.UTF8).GetBytes(text);
             return Write(path, b, 0, b.Length, concat);
         }
     }
