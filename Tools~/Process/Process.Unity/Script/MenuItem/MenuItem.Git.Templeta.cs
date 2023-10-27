@@ -393,6 +393,7 @@ namespace AIO.UEditor
                 if (old == str.ToString()) return false;
             }
 
+            if (!Directory.Exists(OutPath)) Directory.CreateDirectory(OutPath);
             File.WriteAllText(outfile, str.ToString(), Encoding.UTF8);
             return true;
         }
