@@ -1,9 +1,9 @@
 using System;
 using System.IO;
 using System.Security.Cryptography;
-using ICSharpCode.SharpZipLib.Encryption;
+using AIO.ICSharpCode.SharpZipLib.Encryption;
 
-namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
+namespace AIO.ICSharpCode.SharpZipLib.Zip.Compression.Streams
 {
 	internal class DeflaterOutputStream : Stream
 	{

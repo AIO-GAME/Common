@@ -14,7 +14,6 @@ using System.Text;
 using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
-
 #if UNITY_EDITOR_WIN
 using Microsoft.Win32.SafeHandles;
 #endif

@@ -25,7 +25,7 @@ namespace AIO.UEditor
 
         const string kManualReloadDomain = "ManualReloadDomain";
         const string kFirstEnterUnity = "FirstEnterUnity"; //是否首次进入unity
-        const string kReloadDomainTimer = "ReloadDomainTimer";//计时
+        const string kReloadDomainTimer = "ReloadDomainTimer"; //计时
 
 
         /**************************************************/
@@ -33,15 +33,18 @@ namespace AIO.UEditor
         /// 编译时间
         /// </summary>
         static Stopwatch compileSW = new Stopwatch();
+
         /// <summary>
         /// 是否手动reload
         /// </summary>
         static bool IsManualReload => PlayerPrefs.GetInt(kManualReloadDomain, -1) == 1;
+
         //缓存数据 域重载之后数据会变成false 如果不是false 那么就要重载
         static bool tempData = false;
 
         //https://github.com/INeatFreak/unity-background-recompiler 来自这个库 反射获取是否锁住
         static MethodInfo CanReloadAssembliesMethod;
+
         static bool IsLocked
         {
             get
@@ -49,10 +52,12 @@ namespace AIO.UEditor
                 if (CanReloadAssembliesMethod == null)
                 {
                     // source: https://github.com/Unity-Technologies/UnityCsReference/blob/master/Editor/Mono/EditorApplication.bindings.cs#L154
-                    CanReloadAssembliesMethod = typeof(EditorApplication).GetMethod("CanReloadAssemblies", BindingFlags.NonPublic | BindingFlags.Static);
+                    CanReloadAssembliesMethod = typeof(EditorApplication).GetMethod("CanReloadAssemblies",
+                        BindingFlags.NonPublic | BindingFlags.Static);
                     if (CanReloadAssembliesMethod == null)
                         Debug.LogError("Can't find CanReloadAssemblies method. It might have been renamed or removed.");
                 }
+
                 return !(bool)CanReloadAssembliesMethod.Invoke(null, null);
             }
         }
@@ -107,6 +112,7 @@ namespace AIO.UEditor
                     UnlockReloadDomain();
                     LockRealodDomain();
                 }
+
                 Debug.Log($"<color=lime>当前ReloadDomain状态,是否手动: {IsManualReload}</color>");
             }
         }
@@ -127,6 +133,7 @@ namespace AIO.UEditor
                         EditorUtility.RequestScriptReload();
 #endif
                     }
+
                     break;
                 case PlayModeStateChange.EnteredPlayMode:
                     tempData = true;
@@ -166,14 +173,15 @@ namespace AIO.UEditor
                 //记录时间
                 SessionState.SetInt(kReloadDomainTimer, (int)(EditorApplication.timeSinceStartup * 1000));
             }
-
         }
+
         //结束reload domain
         private static void OnAfterAssemblyReload()
         {
             if (IsManualReload)
             {
-                var timeMS = (int)(EditorApplication.timeSinceStartup * 1000) - SessionState.GetInt(kReloadDomainTimer, 0);
+                var timeMS = (int)(EditorApplication.timeSinceStartup * 1000) -
+                             SessionState.GetInt(kReloadDomainTimer, 0);
                 Debug.Log($"<color=yellow>End Reload Domain 耗时:{timeMS} ms</color>");
                 LockRealodDomain();
             }

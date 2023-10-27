@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 
-namespace YamlDotNet.Serialization
+namespace AIO.YamlDotNet.Serialization
 {
 	internal static class YamlFormatter
 	{

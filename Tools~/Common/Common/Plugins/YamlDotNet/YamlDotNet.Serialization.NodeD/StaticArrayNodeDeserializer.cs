@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
-using YamlDotNet.Core;
-using YamlDotNet.Serialization.ObjectFactories;
+using AIO.YamlDotNet.Core;
+using AIO.YamlDotNet.Serialization.ObjectFactories;
+
 #nullable enable
-namespace YamlDotNet.Serialization.NodeDeserializers
+namespace AIO.YamlDotNet.Serialization.NodeDeserializers
 {
 	internal sealed class StaticArrayNodeDeserializer : INodeDeserializer
 	{

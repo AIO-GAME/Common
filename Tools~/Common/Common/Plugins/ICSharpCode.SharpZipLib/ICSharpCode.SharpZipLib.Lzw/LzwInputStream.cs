@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace ICSharpCode.SharpZipLib.Lzw
+namespace AIO.ICSharpCode.SharpZipLib.Lzw
 {
 	internal class LzwInputStream : Stream
 	{

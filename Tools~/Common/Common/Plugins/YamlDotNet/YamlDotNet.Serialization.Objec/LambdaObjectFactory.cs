@@ -1,6 +1,6 @@
 using System;
 
-namespace YamlDotNet.Serialization.ObjectFactories
+namespace AIO.YamlDotNet.Serialization.ObjectFactories
 {
 	internal sealed class LambdaObjectFactory : ObjectFactoryBase
 	{

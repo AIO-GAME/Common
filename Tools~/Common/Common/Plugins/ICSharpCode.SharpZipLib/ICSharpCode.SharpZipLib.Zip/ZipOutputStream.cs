@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using ICSharpCode.SharpZipLib.Checksum;
-using ICSharpCode.SharpZipLib.Zip.Compression;
-using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
+using AIO.ICSharpCode.SharpZipLib.Checksum;
+using AIO.ICSharpCode.SharpZipLib.Zip.Compression;
+using AIO.ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 
-namespace ICSharpCode.SharpZipLib.Zip
+namespace AIO.ICSharpCode.SharpZipLib.Zip
 {
 	internal class ZipOutputStream : DeflaterOutputStream
 	{

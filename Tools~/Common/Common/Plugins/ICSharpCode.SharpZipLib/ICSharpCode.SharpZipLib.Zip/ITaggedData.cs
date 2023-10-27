@@ -1,4 +1,4 @@
-namespace ICSharpCode.SharpZipLib.Zip
+namespace AIO.ICSharpCode.SharpZipLib.Zip
 {
 	internal interface ITaggedData
 	{

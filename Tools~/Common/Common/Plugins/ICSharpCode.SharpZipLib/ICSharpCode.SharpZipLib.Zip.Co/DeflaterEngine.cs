@@ -1,7 +1,7 @@
 using System;
-using ICSharpCode.SharpZipLib.Checksum;
+using AIO.ICSharpCode.SharpZipLib.Checksum;
 
-namespace ICSharpCode.SharpZipLib.Zip.Compression
+namespace AIO.ICSharpCode.SharpZipLib.Zip.Compression
 {
 	internal class DeflaterEngine
 	{

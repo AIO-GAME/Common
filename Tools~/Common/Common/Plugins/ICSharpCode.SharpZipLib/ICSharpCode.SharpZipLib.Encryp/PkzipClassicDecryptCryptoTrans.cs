@@ -1,7 +1,7 @@
 using System;
 using System.Security.Cryptography;
 
-namespace ICSharpCode.SharpZipLib.Encryption
+namespace AIO.ICSharpCode.SharpZipLib.Encryption
 {
 	internal class PkzipClassicDecryptCryptoTransform : PkzipClassicCryptoBase, ICryptoTransform, IDisposable
 	{

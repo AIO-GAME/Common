@@ -1,7 +1,7 @@
 using System;
-using YamlDotNet.Core;
+using AIO.YamlDotNet.Core;
 
-namespace YamlDotNet.Serialization.EventEmitters
+namespace AIO.YamlDotNet.Serialization.EventEmitters
 {
 	internal abstract class ChainedEventEmitter : IEventEmitter
 	{

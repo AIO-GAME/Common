@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 #nullable enable
-namespace YamlDotNet
+namespace AIO.YamlDotNet
 {
 	internal static class StandardRegexOptions
 	{

@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace ICSharpCode.SharpZipLib.Core
+namespace AIO.ICSharpCode.SharpZipLib.Core
 {
 	internal class FileSystemScanner
 	{

@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using YamlDotNet.Core;
-using YamlDotNet.Core.Events;
-using YamlDotNet.Serialization.Utilities;
+using AIO.YamlDotNet.Core;
+using AIO.YamlDotNet.Core.Events;
+using AIO.YamlDotNet.Serialization.Utilities;
+
 #nullable enable
-namespace YamlDotNet.Serialization.NodeDeserializers
+namespace AIO.YamlDotNet.Serialization.NodeDeserializers
 {
 	internal sealed class ObjectNodeDeserializer : INodeDeserializer
 	{

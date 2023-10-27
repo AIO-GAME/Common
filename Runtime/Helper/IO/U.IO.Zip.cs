@@ -7,7 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using ICSharpCode.SharpZipLib.Checksum;
+using ICSharpCode.SharpZipLib.Checksums;
 using ICSharpCode.SharpZipLib.Zip;
 
 namespace AIO

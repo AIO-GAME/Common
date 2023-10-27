@@ -2,7 +2,7 @@
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 using System;
 
-namespace YamlDotNet.Serialization.TypeResolvers
+namespace AIO.YamlDotNet.Serialization.TypeResolvers
 {
 	internal sealed class DynamicTypeResolver : ITypeResolver
 	{

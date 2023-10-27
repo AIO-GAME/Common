@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace YamlDotNet.Serialization.Utilities
+namespace AIO.YamlDotNet.Serialization.Utilities
 {
 	internal sealed class SerializerState : IDisposable
 	{

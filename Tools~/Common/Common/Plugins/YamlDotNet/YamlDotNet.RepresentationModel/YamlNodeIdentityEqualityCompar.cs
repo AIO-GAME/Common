@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace YamlDotNet.RepresentationModel
+namespace AIO.YamlDotNet.RepresentationModel
 {
 	internal sealed class YamlNodeIdentityEqualityComparer : IEqualityComparer<YamlNode>
 	{

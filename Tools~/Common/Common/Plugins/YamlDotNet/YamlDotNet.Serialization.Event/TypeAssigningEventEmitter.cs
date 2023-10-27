@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using YamlDotNet.Core;
-using YamlDotNet.Serialization.Schemas;
+using AIO.YamlDotNet.Core;
+using AIO.YamlDotNet.Serialization.Schemas;
 
-namespace YamlDotNet.Serialization.EventEmitters
+namespace AIO.YamlDotNet.Serialization.EventEmitters
 {
 	internal sealed class TypeAssigningEventEmitter : ChainedEventEmitter
 	{

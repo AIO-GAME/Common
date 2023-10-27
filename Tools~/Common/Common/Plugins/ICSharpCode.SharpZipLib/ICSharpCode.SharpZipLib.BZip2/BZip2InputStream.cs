@@ -1,8 +1,8 @@
 using System;
 using System.IO;
-using ICSharpCode.SharpZipLib.Checksum;
+using AIO.ICSharpCode.SharpZipLib.Checksum;
 
-namespace ICSharpCode.SharpZipLib.BZip2
+namespace AIO.ICSharpCode.SharpZipLib.BZip2
 {
 	internal class BZip2InputStream : Stream
 	{

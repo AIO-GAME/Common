@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 
-namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
+namespace AIO.ICSharpCode.SharpZipLib.Zip.Compression.Streams
 {
 	internal class InflaterInputBuffer
 	{

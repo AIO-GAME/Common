@@ -1,8 +1,8 @@
 using System;
 using System.IO;
-using ICSharpCode.SharpZipLib.Core;
+using AIO.ICSharpCode.SharpZipLib.Core;
 
-namespace ICSharpCode.SharpZipLib.BZip2
+namespace AIO.ICSharpCode.SharpZipLib.BZip2
 {
 	internal static class BZip2
 	{

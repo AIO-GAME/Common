@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
-using YamlDotNet.Core;
-using YamlDotNet.Serialization.Converters;
-using YamlDotNet.Serialization.EventEmitters;
-using YamlDotNet.Serialization.NamingConventions;
-using YamlDotNet.Serialization.ObjectFactories;
-using YamlDotNet.Serialization.ObjectGraphTraversalStrategies;
-using YamlDotNet.Serialization.ObjectGraphVisitors;
-using YamlDotNet.Serialization.TypeInspectors;
-using YamlDotNet.Serialization.TypeResolvers;
+using AIO.YamlDotNet.Core;
+using AIO.YamlDotNet.Serialization.Converters;
+using AIO.YamlDotNet.Serialization.EventEmitters;
+using AIO.YamlDotNet.Serialization.NamingConventions;
+using AIO.YamlDotNet.Serialization.ObjectFactories;
+using AIO.YamlDotNet.Serialization.ObjectGraphTraversalStrategies;
+using AIO.YamlDotNet.Serialization.ObjectGraphVisitors;
+using AIO.YamlDotNet.Serialization.TypeInspectors;
+using AIO.YamlDotNet.Serialization.TypeResolvers;
 
-namespace YamlDotNet.Serialization
+namespace AIO.YamlDotNet.Serialization
 {
 	internal sealed class SerializerBuilder : BuilderSkeleton<SerializerBuilder>
 	{

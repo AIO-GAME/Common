@@ -1,6 +1,6 @@
-using ICSharpCode.SharpZipLib.Core;
+using AIO.ICSharpCode.SharpZipLib.Core;
 
-namespace ICSharpCode.SharpZipLib.Zip
+namespace AIO.ICSharpCode.SharpZipLib.Zip
 {
 	internal interface IEntryFactory
 	{

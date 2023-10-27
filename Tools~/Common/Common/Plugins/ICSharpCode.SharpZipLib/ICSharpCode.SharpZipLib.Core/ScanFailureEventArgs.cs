@@ -1,6 +1,6 @@
 using System;
 
-namespace ICSharpCode.SharpZipLib.Core
+namespace AIO.ICSharpCode.SharpZipLib.Core
 {
 	internal class ScanFailureEventArgs : EventArgs
 	{

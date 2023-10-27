@@ -17,7 +17,9 @@ namespace AIO.UEditor
         public static async void OpenDllProjectWIN()
         {
             var info = PackageInfo.FindForAssembly(typeof(EditorMenu_Assets).Assembly);
-            var executor = PrCmd.Create().Input($"start \"AIO DLL Project\" {Path.Combine(info.resolvedPath, "Tools~", "ALL.sln")} /B /Max /HIGH");
+            var executor = PrCmd.Create()
+                .Input(
+                    $"start \"AIO DLL Project\" {Path.Combine(info.resolvedPath, "Tools~", "ALL.sln")} /B /Max /HIGH");
             (await executor.Async()).Debug();
         }
 #endif

@@ -1,4 +1,4 @@
-namespace YamlDotNet.RepresentationModel
+namespace AIO.YamlDotNet.RepresentationModel
 {
 	internal enum YamlNodeType
 	{

@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace YamlDotNet.Serialization
+namespace AIO.YamlDotNet.Serialization
 {
 	[StructLayout(LayoutKind.Sequential, Size = 1)]
 	internal struct Nothing

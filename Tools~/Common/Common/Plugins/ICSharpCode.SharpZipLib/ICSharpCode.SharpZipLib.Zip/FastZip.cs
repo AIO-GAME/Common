@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 using System.IO;
-using ICSharpCode.SharpZipLib.Core;
-using ICSharpCode.SharpZipLib.Zip.Compression;
+using AIO.ICSharpCode.SharpZipLib.Core;
+using AIO.ICSharpCode.SharpZipLib.Zip.Compression;
 
-namespace ICSharpCode.SharpZipLib.Zip
+namespace AIO.ICSharpCode.SharpZipLib.Zip
 {
 	internal class FastZip
 	{

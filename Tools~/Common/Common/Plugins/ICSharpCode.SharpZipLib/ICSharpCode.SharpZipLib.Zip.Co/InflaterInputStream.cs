@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
+namespace AIO.ICSharpCode.SharpZipLib.Zip.Compression.Streams
 {
 	internal class InflaterInputStream : Stream
 	{

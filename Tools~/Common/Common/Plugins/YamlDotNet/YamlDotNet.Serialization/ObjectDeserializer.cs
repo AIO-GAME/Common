@@ -1,6 +1,6 @@
 using System;
 
-namespace YamlDotNet.Serialization
+namespace AIO.YamlDotNet.Serialization
 {
 	internal delegate object? ObjectDeserializer(Type type);
 }

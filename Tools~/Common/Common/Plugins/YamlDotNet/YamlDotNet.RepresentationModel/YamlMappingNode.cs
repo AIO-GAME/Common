@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-using YamlDotNet.Core;
-using YamlDotNet.Core.Events;
-using YamlDotNet.Helpers;
-using YamlDotNet.Serialization;
+using AIO.YamlDotNet.Core;
+using AIO.YamlDotNet.Core.Events;
+using AIO.YamlDotNet.Helpers;
+using AIO.YamlDotNet.Serialization;
 
-namespace YamlDotNet.RepresentationModel
+namespace AIO.YamlDotNet.RepresentationModel
 {
 	internal sealed class YamlMappingNode : YamlNode, IEnumerable<KeyValuePair<YamlNode, YamlNode>>, IEnumerable, IYamlConvertible
 	{
@@ -189,8 +189,8 @@ namespace YamlDotNet.RepresentationModel
 			int num = base.GetHashCode();
 			foreach (KeyValuePair<YamlNode, YamlNode> child in children)
 			{
-				num = HashCode.CombineHashCodes(num, child.Key);
-				num = HashCode.CombineHashCodes(num, child.Value);
+				num = Core.HashCode.CombineHashCodes(num, child.Key);
+				num = Core.HashCode.CombineHashCodes(num, child.Value);
 			}
 			return num;
 		}

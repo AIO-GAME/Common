@@ -1,6 +1,7 @@
-using YamlDotNet.Core.Tokens;
+using AIO.YamlDotNet.Core.Tokens;
+
 #nullable enable
-namespace YamlDotNet.Core.Events
+namespace AIO.YamlDotNet.Core.Events
 {
 	internal sealed class DocumentStart : ParsingEvent
 	{

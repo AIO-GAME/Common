@@ -4,10 +4,10 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using YamlDotNet.Core;
-using YamlDotNet.Helpers;
+using AIO.YamlDotNet.Core;
+using AIO.YamlDotNet.Helpers;
 
-namespace YamlDotNet.Serialization
+namespace AIO.YamlDotNet.Serialization
 {
 	internal sealed class YamlAttributeOverrides
 	{
@@ -34,7 +34,7 @@ namespace YamlDotNet.Serialization
 
 			public override int GetHashCode()
 			{
-				return HashCode.CombineHashCodes(AttributeType.GetHashCode(), PropertyName.GetHashCode());
+				return Core.HashCode.CombineHashCodes(AttributeType.GetHashCode(), PropertyName.GetHashCode());
 			}
 		}
 
@@ -61,7 +61,7 @@ namespace YamlDotNet.Serialization
 
 			public override int GetHashCode()
 			{
-				return HashCode.CombineHashCodes(RegisteredType.GetHashCode(), Attribute.GetHashCode());
+				return Core.HashCode.CombineHashCodes(RegisteredType.GetHashCode(), Attribute.GetHashCode());
 			}
 
 			public int Matches(Type matchType)

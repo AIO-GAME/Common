@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
-using YamlDotNet.Core;
-using YamlDotNet.Core.Events;
-using YamlDotNet.Helpers;
-using YamlDotNet.Serialization;
+using AIO.YamlDotNet.Core;
+using AIO.YamlDotNet.Core.Events;
+using AIO.YamlDotNet.Helpers;
+using AIO.YamlDotNet.Serialization;
 
-namespace YamlDotNet.RepresentationModel
+namespace AIO.YamlDotNet.RepresentationModel
 {
 	[DebuggerDisplay("Count = {children.Count}")]
 	internal sealed class YamlSequenceNode : YamlNode, IEnumerable<YamlNode>, IEnumerable, IYamlConvertible
@@ -119,9 +119,9 @@ namespace YamlDotNet.RepresentationModel
 			int h = 0;
 			foreach (YamlNode child in children)
 			{
-				h = HashCode.CombineHashCodes(h, child);
+				h = Core.HashCode.CombineHashCodes(h, child);
 			}
-			return HashCode.CombineHashCodes(h, base.Tag);
+			return Core.HashCode.CombineHashCodes(h, base.Tag);
 		}
 
 		internal override IEnumerable<YamlNode> SafeAllNodes(RecursionLevel level)

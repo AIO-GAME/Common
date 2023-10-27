@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace YamlDotNet.Helpers
+namespace AIO.YamlDotNet.Helpers
 {
 	internal static class ExpressionExtensions
 	{

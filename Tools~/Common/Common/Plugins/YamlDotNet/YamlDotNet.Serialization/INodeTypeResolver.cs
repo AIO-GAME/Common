@@ -1,7 +1,7 @@
 using System;
-using YamlDotNet.Core.Events;
+using AIO.YamlDotNet.Core.Events;
 
-namespace YamlDotNet.Serialization
+namespace AIO.YamlDotNet.Serialization
 {
 	internal interface INodeTypeResolver
 	{

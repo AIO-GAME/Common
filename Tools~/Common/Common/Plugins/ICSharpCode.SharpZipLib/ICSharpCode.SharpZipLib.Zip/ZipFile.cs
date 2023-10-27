@@ -5,13 +5,13 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
-using ICSharpCode.SharpZipLib.Checksum;
-using ICSharpCode.SharpZipLib.Core;
-using ICSharpCode.SharpZipLib.Encryption;
-using ICSharpCode.SharpZipLib.Zip.Compression;
-using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
+using AIO.ICSharpCode.SharpZipLib.Checksum;
+using AIO.ICSharpCode.SharpZipLib.Core;
+using AIO.ICSharpCode.SharpZipLib.Encryption;
+using AIO.ICSharpCode.SharpZipLib.Zip.Compression;
+using AIO.ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 
-namespace ICSharpCode.SharpZipLib.Zip
+namespace AIO.ICSharpCode.SharpZipLib.Zip
 {
 	internal class ZipFile : IEnumerable, IDisposable
 	{

@@ -1,6 +1,6 @@
 using System;
 
-namespace ICSharpCode.SharpZipLib.Zip.Compression.Streams
+namespace AIO.ICSharpCode.SharpZipLib.Zip.Compression.Streams
 {
 	internal class StreamManipulator
 	{

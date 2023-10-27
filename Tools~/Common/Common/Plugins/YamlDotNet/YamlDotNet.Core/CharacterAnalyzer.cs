@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 
-namespace YamlDotNet.Core
+namespace AIO.YamlDotNet.Core
 {
 	[DebuggerStepThrough]
 	internal sealed class CharacterAnalyzer<TBuffer> where TBuffer : class, ILookAheadBuffer

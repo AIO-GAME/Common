@@ -1,7 +1,7 @@
 using System;
-using YamlDotNet.Core;
+using AIO.YamlDotNet.Core;
 
-namespace YamlDotNet.Serialization
+namespace AIO.YamlDotNet.Serialization
 {
 	[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
 	internal sealed class YamlMemberAttribute : Attribute

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using YamlDotNet.Core;
+using AIO.YamlDotNet.Core;
 
-namespace YamlDotNet.Serialization.ObjectGraphVisitors
+namespace AIO.YamlDotNet.Serialization.ObjectGraphVisitors
 {
 	internal sealed class AnchorAssigner : PreProcessingPhaseObjectGraphVisitorSkeleton, IAliasProvider
 	{

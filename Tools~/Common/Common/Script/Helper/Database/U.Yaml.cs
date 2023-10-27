@@ -5,8 +5,8 @@
 |*|=============================================*/
 
 using System.IO;
-using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
+using AIO.YamlDotNet.Serialization;
+using AIO.YamlDotNet.Serialization.NamingConventions;
 
 public partial class AHelper
 {

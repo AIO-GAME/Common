@@ -1,8 +1,8 @@
 using System;
-using YamlDotNet.Core;
-using YamlDotNet.Serialization.Utilities;
+using AIO.YamlDotNet.Core;
+using AIO.YamlDotNet.Serialization.Utilities;
 
-namespace YamlDotNet.Serialization
+namespace AIO.YamlDotNet.Serialization
 {
 	internal interface IValueDeserializer
 	{

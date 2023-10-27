@@ -1,6 +1,6 @@
 using System;
 
-namespace ICSharpCode.SharpZipLib.Zip
+namespace AIO.ICSharpCode.SharpZipLib.Zip
 {
 	internal class KeysRequiredEventArgs : EventArgs
 	{

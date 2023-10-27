@@ -1,4 +1,4 @@
-namespace ICSharpCode.SharpZipLib.Core
+namespace AIO.ICSharpCode.SharpZipLib.Core
 {
 	internal interface IScanFilter
 	{

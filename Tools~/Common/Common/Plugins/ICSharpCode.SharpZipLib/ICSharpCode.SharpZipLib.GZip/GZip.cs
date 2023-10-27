@@ -1,8 +1,8 @@
 using System;
 using System.IO;
-using ICSharpCode.SharpZipLib.Core;
+using AIO.ICSharpCode.SharpZipLib.Core;
 
-namespace ICSharpCode.SharpZipLib.GZip
+namespace AIO.ICSharpCode.SharpZipLib.GZip
 {
 	internal static class GZip
 	{

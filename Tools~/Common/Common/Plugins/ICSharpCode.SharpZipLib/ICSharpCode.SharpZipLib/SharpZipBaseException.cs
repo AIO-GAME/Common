@@ -1,6 +1,6 @@
 using System;
 
-namespace ICSharpCode.SharpZipLib
+namespace AIO.ICSharpCode.SharpZipLib
 {
 	internal class SharpZipBaseException : Exception
 	{

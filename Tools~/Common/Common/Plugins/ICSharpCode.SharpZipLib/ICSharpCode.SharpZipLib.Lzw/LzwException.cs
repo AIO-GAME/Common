@@ -1,6 +1,6 @@
 using System;
 
-namespace ICSharpCode.SharpZipLib.Lzw
+namespace AIO.ICSharpCode.SharpZipLib.Lzw
 {
 	internal class LzwException : SharpZipBaseException
 	{

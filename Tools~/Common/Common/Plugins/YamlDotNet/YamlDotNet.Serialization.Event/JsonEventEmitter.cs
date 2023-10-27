@@ -1,8 +1,8 @@
 using System;
-using YamlDotNet.Core;
-using YamlDotNet.Core.Events;
+using AIO.YamlDotNet.Core;
+using AIO.YamlDotNet.Core.Events;
 
-namespace YamlDotNet.Serialization.EventEmitters
+namespace AIO.YamlDotNet.Serialization.EventEmitters
 {
 	internal sealed class JsonEventEmitter : ChainedEventEmitter
 	{

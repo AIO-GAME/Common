@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace YamlDotNet.Serialization
+namespace AIO.YamlDotNet.Serialization
 {
 	internal sealed class TagMappings
 	{

@@ -1,4 +1,4 @@
-namespace YamlDotNet.Serialization
+namespace AIO.YamlDotNet.Serialization
 {
 	internal class Settings
 	{

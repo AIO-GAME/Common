@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.Serialization;
 
-namespace YamlDotNet.Serialization.TypeInspectors
+namespace AIO.YamlDotNet.Serialization.TypeInspectors
 {
 	internal abstract class TypeInspectorSkeleton : ITypeInspector
 	{

@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 #nullable enable
-namespace YamlDotNet.Serialization
+namespace AIO.YamlDotNet.Serialization
 {
 	internal interface IObjectFactory
 	{

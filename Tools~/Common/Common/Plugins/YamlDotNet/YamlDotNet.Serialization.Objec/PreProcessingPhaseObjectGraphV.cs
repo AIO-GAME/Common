@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace YamlDotNet.Serialization.ObjectGraphVisitors
+namespace AIO.YamlDotNet.Serialization.ObjectGraphVisitors
 {
 	internal abstract class PreProcessingPhaseObjectGraphVisitorSkeleton : IObjectGraphVisitor<Nothing>
 	{

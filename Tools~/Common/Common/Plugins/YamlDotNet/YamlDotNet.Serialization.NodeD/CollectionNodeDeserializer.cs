@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using YamlDotNet.Core;
-using YamlDotNet.Core.Events;
-using YamlDotNet.Helpers;
-using YamlDotNet.Serialization.Utilities;
+using AIO.YamlDotNet.Core;
+using AIO.YamlDotNet.Core.Events;
+using AIO.YamlDotNet.Helpers;
+using AIO.YamlDotNet.Serialization.Utilities;
 
-namespace YamlDotNet.Serialization.NodeDeserializers
+namespace AIO.YamlDotNet.Serialization.NodeDeserializers
 {
 	internal sealed class CollectionNodeDeserializer : INodeDeserializer
 	{

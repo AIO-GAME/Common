@@ -1,7 +1,7 @@
 #nullable enable
 using System.Reflection;
 
-namespace YamlDotNet
+namespace AIO.YamlDotNet
 {
 	internal static class PropertyInfoExtensions
 	{

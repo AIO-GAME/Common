@@ -1,9 +1,9 @@
 using System;
 using System.IO;
-using YamlDotNet.Core;
-using YamlDotNet.Core.Events;
+using AIO.YamlDotNet.Core;
+using AIO.YamlDotNet.Core.Events;
 
-namespace YamlDotNet.Serialization
+namespace AIO.YamlDotNet.Serialization
 {
 	internal sealed class Serializer : ISerializer
 	{

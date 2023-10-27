@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using YamlDotNet.Core;
-using YamlDotNet.Core.Events;
+using AIO.YamlDotNet.Core;
+using AIO.YamlDotNet.Core.Events;
 
-namespace YamlDotNet.RepresentationModel
+namespace AIO.YamlDotNet.RepresentationModel
 {
 	internal abstract class YamlNode
 	{

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace YamlDotNet.Serialization.ObjectGraphTraversalStrategies
+namespace AIO.YamlDotNet.Serialization.ObjectGraphTraversalStrategies
 {
 	internal class RoundtripObjectGraphTraversalStrategy : FullObjectGraphTraversalStrategy
 	{

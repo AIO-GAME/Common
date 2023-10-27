@@ -3,11 +3,11 @@
 
 using System;
 using System.Collections.Generic;
-using YamlDotNet.Core;
-using YamlDotNet.Core.Events;
-using YamlDotNet.Serialization.Utilities;
+using AIO.YamlDotNet.Core;
+using AIO.YamlDotNet.Core.Events;
+using AIO.YamlDotNet.Serialization.Utilities;
 
-namespace YamlDotNet.Serialization.ValueDeserializers
+namespace AIO.YamlDotNet.Serialization.ValueDeserializers
 {
     internal sealed class NodeValueDeserializer : IValueDeserializer
     {

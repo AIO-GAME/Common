@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace ICSharpCode.SharpZipLib.Core
+namespace AIO.ICSharpCode.SharpZipLib.Core
 {
 	internal class NameFilter : IScanFilter
 	{

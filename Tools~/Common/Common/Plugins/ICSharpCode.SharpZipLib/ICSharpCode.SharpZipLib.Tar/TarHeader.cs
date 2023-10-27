@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace ICSharpCode.SharpZipLib.Tar
+namespace AIO.ICSharpCode.SharpZipLib.Tar
 {
 	internal class TarHeader
 	{

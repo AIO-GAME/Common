@@ -1,6 +1,6 @@
 using System;
 
-namespace YamlDotNet.Helpers
+namespace AIO.YamlDotNet.Helpers
 {
 	internal static class Lazy
 	{

@@ -3,7 +3,7 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace YamlDotNet.Serialization.Utilities
+namespace AIO.YamlDotNet.Serialization.Utilities
 {
 	internal static class StringExtensions
 	{

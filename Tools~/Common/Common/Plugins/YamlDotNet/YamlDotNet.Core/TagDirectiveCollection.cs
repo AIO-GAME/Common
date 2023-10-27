@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using YamlDotNet.Core.Tokens;
+using AIO.YamlDotNet.Core.Tokens;
 
-namespace YamlDotNet.Core
+namespace AIO.YamlDotNet.Core
 {
 	internal sealed class TagDirectiveCollection : KeyedCollection<string, TagDirective>
 	{

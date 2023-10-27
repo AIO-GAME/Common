@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace YamlDotNet.Serialization.Utilities
+namespace AIO.YamlDotNet.Serialization.Utilities
 {
 	internal static class TypeConverter
 	{

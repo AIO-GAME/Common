@@ -1,4 +1,4 @@
-namespace ICSharpCode.SharpZipLib.Checksum
+namespace AIO.ICSharpCode.SharpZipLib.Checksum
 {
 	internal interface IChecksum
 	{

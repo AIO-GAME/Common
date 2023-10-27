@@ -1,7 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace YamlDotNet.Core.Tokens
+namespace AIO.YamlDotNet.Core.Tokens
 {
 	internal class TagDirective : Token
 	{

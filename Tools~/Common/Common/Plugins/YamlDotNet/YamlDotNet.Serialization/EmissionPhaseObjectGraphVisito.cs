@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using YamlDotNet.Core;
+using AIO.YamlDotNet.Core;
 
-namespace YamlDotNet.Serialization
+namespace AIO.YamlDotNet.Serialization
 {
 	internal sealed class EmissionPhaseObjectGraphVisitorArgs
 	{

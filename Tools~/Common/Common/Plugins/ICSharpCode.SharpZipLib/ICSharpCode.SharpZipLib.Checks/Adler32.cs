@@ -1,6 +1,6 @@
 using System;
 
-namespace ICSharpCode.SharpZipLib.Checksum
+namespace AIO.ICSharpCode.SharpZipLib.Checksum
 {
 	internal sealed class Adler32 : IChecksum
 	{

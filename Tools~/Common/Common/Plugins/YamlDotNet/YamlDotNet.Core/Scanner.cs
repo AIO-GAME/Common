@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using YamlDotNet.Core.Tokens;
-using YamlDotNet.Helpers;
+using AIO.YamlDotNet.Core.Tokens;
+using AIO.YamlDotNet.Helpers;
 
-namespace YamlDotNet.Core
+namespace AIO.YamlDotNet.Core
 {
 	internal class Scanner : IScanner
 	{

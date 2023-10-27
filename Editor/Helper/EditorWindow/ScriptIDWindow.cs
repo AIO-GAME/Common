@@ -4,20 +4,8 @@
 |||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
-using System;
-using System.Collections;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
-using YamlDotNet.Serialization;
-using Object = UnityEngine.Object;
 
 namespace AIO.UEditor
 {
@@ -149,7 +137,8 @@ namespace AIO.UEditor
                     GUILayout.TextField(_dllAssets[i].name);
                     if (GUILayout.Button("view", GUILayout.Width(100)))
                     {
-                        var s = AssetDatabase.TryGetGUIDAndLocalFileIdentifier(_dllAssets[i], out _dll_guid, out _dll_fid);
+                        var s = AssetDatabase.TryGetGUIDAndLocalFileIdentifier(_dllAssets[i], out _dll_guid,
+                            out _dll_fid);
                     }
 
                     EditorGUILayout.EndHorizontal();
@@ -182,5 +171,4 @@ namespace AIO.UEditor
             }
         }
     }
-
 }

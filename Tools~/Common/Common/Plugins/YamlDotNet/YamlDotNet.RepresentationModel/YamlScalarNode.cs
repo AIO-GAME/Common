@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using YamlDotNet.Core;
-using YamlDotNet.Core.Events;
-using YamlDotNet.Serialization;
+using AIO.YamlDotNet.Core;
+using AIO.YamlDotNet.Core.Events;
+using AIO.YamlDotNet.Serialization;
+
 #nullable enable
-namespace YamlDotNet.RepresentationModel
+namespace AIO.YamlDotNet.RepresentationModel
 {
 	[DebuggerDisplay("{Value}")]
 	internal sealed class YamlScalarNode : YamlNode, IYamlConvertible
@@ -64,7 +65,7 @@ namespace YamlDotNet.RepresentationModel
 
 		public override int GetHashCode()
 		{
-			return HashCode.CombineHashCodes(base.Tag.GetHashCode(), Value);
+			return Core.HashCode.CombineHashCodes(base.Tag.GetHashCode(), Value);
 		}
 
 		public static explicit operator string?(YamlScalarNode value)

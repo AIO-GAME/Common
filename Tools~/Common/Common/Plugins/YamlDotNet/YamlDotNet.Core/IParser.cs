@@ -1,6 +1,6 @@
-using YamlDotNet.Core.Events;
+using AIO.YamlDotNet.Core.Events;
 
-namespace YamlDotNet.Core
+namespace AIO.YamlDotNet.Core
 {
 	internal interface IParser
 	{

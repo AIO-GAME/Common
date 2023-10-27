@@ -1,10 +1,10 @@
 using System;
 using System.IO;
-using ICSharpCode.SharpZipLib.Checksum;
-using ICSharpCode.SharpZipLib.Zip.Compression;
-using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
+using AIO.ICSharpCode.SharpZipLib.Checksum;
+using AIO.ICSharpCode.SharpZipLib.Zip.Compression;
+using AIO.ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 
-namespace ICSharpCode.SharpZipLib.GZip
+namespace AIO.ICSharpCode.SharpZipLib.GZip
 {
 	internal class GZipInputStream : InflaterInputStream
 	{
