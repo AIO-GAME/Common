@@ -37,15 +37,13 @@
   ]
 }
 ````
-
-或者
-
+Git
 ````json
   "dependencies": {
     "com.aio.package": "https://github.com/AIO-GAME/Common.git#main",
   }
 ````
-
+Openupm CMD
 ```
 openupm add com.aio.package
 ```
