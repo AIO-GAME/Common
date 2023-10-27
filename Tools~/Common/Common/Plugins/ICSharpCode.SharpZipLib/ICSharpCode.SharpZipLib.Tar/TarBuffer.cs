@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace ICSharpCode.SharpZipLib.Tar
+namespace AIO.ICSharpCode.SharpZipLib.Tar
 {
 	internal class TarBuffer
 	{

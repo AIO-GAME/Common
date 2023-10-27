@@ -1,6 +1,6 @@
 using System;
 
-namespace YamlDotNet.Serialization
+namespace AIO.YamlDotNet.Serialization
 {
 	internal sealed class YamlStaticContextAttribute : Attribute
 	{

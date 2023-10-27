@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
-using YamlDotNet.Core;
-using YamlDotNet.Core.Events;
-using YamlDotNet.Serialization.ObjectFactories;
+using AIO.YamlDotNet.Core;
+using AIO.YamlDotNet.Core.Events;
+using AIO.YamlDotNet.Serialization.ObjectFactories;
 
-namespace YamlDotNet.Serialization.NodeDeserializers
+namespace AIO.YamlDotNet.Serialization.NodeDeserializers
 {
 	internal sealed class StaticCollectionNodeDeserializer : INodeDeserializer
 	{

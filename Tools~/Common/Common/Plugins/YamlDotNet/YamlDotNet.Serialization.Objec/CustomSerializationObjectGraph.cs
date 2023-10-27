@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using YamlDotNet.Core;
+using AIO.YamlDotNet.Core;
 
-namespace YamlDotNet.Serialization.ObjectGraphVisitors
+namespace AIO.YamlDotNet.Serialization.ObjectGraphVisitors
 {
 	internal sealed class CustomSerializationObjectGraphVisitor : ChainedObjectGraphVisitor
 	{

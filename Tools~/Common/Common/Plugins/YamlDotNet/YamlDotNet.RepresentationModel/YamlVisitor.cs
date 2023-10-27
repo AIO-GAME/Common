@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace YamlDotNet.RepresentationModel
+namespace AIO.YamlDotNet.RepresentationModel
 {
 	[Obsolete("Use YamlVisitorBase")]
 	internal abstract class YamlVisitor : IYamlVisitor

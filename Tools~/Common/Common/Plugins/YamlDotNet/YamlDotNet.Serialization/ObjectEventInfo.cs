@@ -1,6 +1,6 @@
-using YamlDotNet.Core;
+using AIO.YamlDotNet.Core;
 
-namespace YamlDotNet.Serialization
+namespace AIO.YamlDotNet.Serialization
 {
 	internal class ObjectEventInfo : EventInfo
 	{

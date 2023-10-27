@@ -4,11 +4,11 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
-using YamlDotNet.Core.Events;
-using YamlDotNet.Core.Tokens;
-using YamlDotNet.Helpers;
+using AIO.YamlDotNet.Core.Events;
+using AIO.YamlDotNet.Core.Tokens;
+using AIO.YamlDotNet.Helpers;
 
-namespace YamlDotNet.Core
+namespace AIO.YamlDotNet.Core
 {
 	internal class Emitter : IEmitter
 	{

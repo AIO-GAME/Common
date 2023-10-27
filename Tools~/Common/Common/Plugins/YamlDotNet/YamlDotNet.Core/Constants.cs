@@ -1,6 +1,6 @@
-using YamlDotNet.Core.Tokens;
+using AIO.YamlDotNet.Core.Tokens;
 
-namespace YamlDotNet.Core
+namespace AIO.YamlDotNet.Core
 {
 	internal static class Constants
 	{

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using YamlDotNet.Core;
+using AIO.YamlDotNet.Core;
 
-namespace YamlDotNet.RepresentationModel
+namespace AIO.YamlDotNet.RepresentationModel
 {
 	internal class EmitterState
 	{

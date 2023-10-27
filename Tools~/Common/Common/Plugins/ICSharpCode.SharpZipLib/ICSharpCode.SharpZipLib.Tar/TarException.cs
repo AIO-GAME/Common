@@ -1,6 +1,6 @@
 using System;
 
-namespace ICSharpCode.SharpZipLib.Tar
+namespace AIO.ICSharpCode.SharpZipLib.Tar
 {
 	internal class TarException : SharpZipBaseException
 	{

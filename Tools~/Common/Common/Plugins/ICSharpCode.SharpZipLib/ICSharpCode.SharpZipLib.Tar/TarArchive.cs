@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace ICSharpCode.SharpZipLib.Tar
+namespace AIO.ICSharpCode.SharpZipLib.Tar
 {
 	internal class TarArchive : IDisposable
 	{

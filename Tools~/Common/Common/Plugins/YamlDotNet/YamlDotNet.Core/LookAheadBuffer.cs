@@ -1,9 +1,9 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using YamlDotNet.Helpers;
+using AIO.YamlDotNet.Helpers;
 
-namespace YamlDotNet.Core
+namespace AIO.YamlDotNet.Core
 {
 	[DebuggerStepThrough]
 	internal sealed class LookAheadBuffer : ILookAheadBuffer

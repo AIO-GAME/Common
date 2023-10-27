@@ -1,8 +1,8 @@
 using System;
 using System.Security.Cryptography;
-using ICSharpCode.SharpZipLib.Checksum;
+using AIO.ICSharpCode.SharpZipLib.Checksum;
 
-namespace ICSharpCode.SharpZipLib.Encryption
+namespace AIO.ICSharpCode.SharpZipLib.Encryption
 {
 	internal abstract class PkzipClassic : SymmetricAlgorithm
 	{

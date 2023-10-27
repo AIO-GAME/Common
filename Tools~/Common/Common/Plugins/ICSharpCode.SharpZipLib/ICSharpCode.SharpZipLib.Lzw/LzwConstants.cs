@@ -1,4 +1,4 @@
-namespace ICSharpCode.SharpZipLib.Lzw
+namespace AIO.ICSharpCode.SharpZipLib.Lzw
 {
 	internal sealed class LzwConstants
 	{

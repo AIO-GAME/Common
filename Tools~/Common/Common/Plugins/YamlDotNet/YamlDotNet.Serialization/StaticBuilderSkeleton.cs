@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using YamlDotNet.Core;
-using YamlDotNet.Serialization.Converters;
-using YamlDotNet.Serialization.NamingConventions;
+using AIO.YamlDotNet.Core;
+using AIO.YamlDotNet.Serialization.Converters;
+using AIO.YamlDotNet.Serialization.NamingConventions;
 
-namespace YamlDotNet.Serialization
+namespace AIO.YamlDotNet.Serialization
 {
 	internal abstract class StaticBuilderSkeleton<TBuilder> where TBuilder : StaticBuilderSkeleton<TBuilder>
 	{

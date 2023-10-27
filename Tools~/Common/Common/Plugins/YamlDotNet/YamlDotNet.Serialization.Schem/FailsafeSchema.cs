@@ -1,6 +1,6 @@
-using YamlDotNet.Core;
+using AIO.YamlDotNet.Core;
 
-namespace YamlDotNet.Serialization.Schemas
+namespace AIO.YamlDotNet.Serialization.Schemas
 {
 	internal sealed class FailsafeSchema
 	{

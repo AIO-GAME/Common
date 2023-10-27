@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using YamlDotNet.Core.Events;
+using AIO.YamlDotNet.Core.Events;
 
-namespace YamlDotNet.Core
+namespace AIO.YamlDotNet.Core
 {
 	internal sealed class MergingParser : IParser
 	{

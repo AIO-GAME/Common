@@ -1,6 +1,6 @@
 using System;
 
-namespace YamlDotNet.Serialization.NamingConventions
+namespace AIO.YamlDotNet.Serialization.NamingConventions
 {
 	internal sealed class NullNamingConvention : INamingConvention
 	{

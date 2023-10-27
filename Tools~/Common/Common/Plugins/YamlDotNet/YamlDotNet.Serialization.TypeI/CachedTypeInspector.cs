@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace YamlDotNet.Serialization.TypeInspectors
+namespace AIO.YamlDotNet.Serialization.TypeInspectors
 {
 	internal sealed class CachedTypeInspector : TypeInspectorSkeleton
 	{

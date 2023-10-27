@@ -1,6 +1,6 @@
-using YamlDotNet.Serialization.Utilities;
+using AIO.YamlDotNet.Serialization.Utilities;
 
-namespace YamlDotNet.Serialization.NamingConventions
+namespace AIO.YamlDotNet.Serialization.NamingConventions
 {
 	internal sealed class LowerCaseNamingConvention : INamingConvention
 	{

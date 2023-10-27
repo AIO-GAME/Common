@@ -107,6 +107,7 @@ namespace AIO.UEditor
             {
                 replaceDir = EditorGUILayout.ObjectField(replaceDir, typeof(Object), false);
             }
+
             EditorGUILayout.Space();
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button("Replace From Dll To Src"))
@@ -193,7 +194,8 @@ namespace AIO.UEditor
                 {
                     if (fileIDMappingTableFromDll.ContainsKey(AHelper.FileID.Compute(type).ToString()))
                     {
-                        Debug.LogWarning(string.Concat("Reduplicated GUID:", AHelper.FileID.Compute(type).ToString(), ";Script Name:", type.Name));
+                        Debug.LogWarning(string.Concat("Reduplicated GUID:", AHelper.FileID.Compute(type).ToString(),
+                            ";Script Name:", type.Name));
                     }
                     else
                     {
@@ -215,7 +217,9 @@ namespace AIO.UEditor
         private Assembly CurrentDomain_ReflectionOnlyAssemblyResolve(object sender, ResolveEventArgs args)
         {
             Debug.LogWarning(string.Concat("Need Loading:", args.Name));
-            return Assembly.ReflectionOnlyLoad(string.Concat(dllFilePath.Substring(0, dllFilePath.LastIndexOf("\\", StringComparison.CurrentCulture)), "\\", args.Name));
+            return Assembly.ReflectionOnlyLoad(string.Concat(
+                dllFilePath.Substring(0, dllFilePath.LastIndexOf("\\", StringComparison.CurrentCulture)), "\\",
+                args.Name));
         }
 
         private void InitGuidMappingTable(bool dllToSrc)
@@ -278,7 +282,9 @@ namespace AIO.UEditor
                         i++;
                     } while (!array[i].TrimStart().StartsWith("m_Script:"));
 
-                    flag = ((!dllToSrc) ? (flag | replaceGUIDAnfFileIDFromSrcToDll(ref array[i])) : (flag | replaceGUIDAnfFileIDFromDllToSrc(ref array[i])));
+                    flag = ((!dllToSrc)
+                        ? (flag | replaceGUIDAnfFileIDFromSrcToDll(ref array[i]))
+                        : (flag | replaceGUIDAnfFileIDFromDllToSrc(ref array[i])));
                 }
             }
 

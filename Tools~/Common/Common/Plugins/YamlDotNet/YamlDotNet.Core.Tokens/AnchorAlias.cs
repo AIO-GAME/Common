@@ -1,6 +1,6 @@
 using System;
 
-namespace YamlDotNet.Core.Tokens
+namespace AIO.YamlDotNet.Core.Tokens
 {
 	internal sealed class AnchorAlias : Token
 	{

@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using YamlDotNet.Helpers;
-using YamlDotNet.Serialization.Utilities;
+using AIO.YamlDotNet.Helpers;
+using AIO.YamlDotNet.Serialization.Utilities;
 
-namespace YamlDotNet.Serialization.ObjectFactories
+namespace AIO.YamlDotNet.Serialization.ObjectFactories
 {
 	internal abstract class ObjectFactoryBase : IObjectFactory
 	{

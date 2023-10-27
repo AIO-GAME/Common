@@ -1,7 +1,7 @@
 using System;
-using YamlDotNet.Core;
+using AIO.YamlDotNet.Core;
 
-namespace YamlDotNet.Serialization.BufferedDeserialization.TypeDiscriminators
+namespace AIO.YamlDotNet.Serialization.BufferedDeserialization.TypeDiscriminators
 {
 	internal interface ITypeDiscriminator
 	{

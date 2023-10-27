@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace YamlDotNet.Core
+namespace AIO.YamlDotNet.Core
 {
 	[DebuggerStepThrough]
 	internal sealed class Cursor

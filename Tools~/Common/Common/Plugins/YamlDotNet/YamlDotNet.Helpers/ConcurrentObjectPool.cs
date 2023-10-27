@@ -3,7 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 
-namespace YamlDotNet.Helpers
+namespace AIO.YamlDotNet.Helpers
 {
 	[DebuggerStepThrough]
 	internal sealed class ConcurrentObjectPool<T> where T : class

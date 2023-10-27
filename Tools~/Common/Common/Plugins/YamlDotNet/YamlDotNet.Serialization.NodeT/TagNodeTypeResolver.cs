@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using YamlDotNet.Core;
-using YamlDotNet.Core.Events;
+using AIO.YamlDotNet.Core;
+using AIO.YamlDotNet.Core.Events;
 
-namespace YamlDotNet.Serialization.NodeTypeResolvers
+namespace AIO.YamlDotNet.Serialization.NodeTypeResolvers
 {
 	internal sealed class TagNodeTypeResolver : INodeTypeResolver
 	{

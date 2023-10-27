@@ -2,9 +2,9 @@
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using YamlDotNet.Core;
+using AIO.YamlDotNet.Core;
 
-namespace YamlDotNet.Serialization.Utilities
+namespace AIO.YamlDotNet.Serialization.Utilities
 {
 	internal sealed class ObjectAnchorCollection
 	{

@@ -2,10 +2,11 @@
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 using System;
 using System.Collections.Generic;
-using YamlDotNet.Core;
-using YamlDotNet.Core.Events;
-using YamlDotNet.Serialization.Utilities;
-namespace YamlDotNet.Serialization.ValueDeserializers
+using AIO.YamlDotNet.Core;
+using AIO.YamlDotNet.Core.Events;
+using AIO.YamlDotNet.Serialization.Utilities;
+
+namespace AIO.YamlDotNet.Serialization.ValueDeserializers
 {
 	internal sealed class AliasValueDeserializer : IValueDeserializer
 	{

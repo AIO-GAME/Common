@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using YamlDotNet.Core;
+using AIO.YamlDotNet.Core;
 
-namespace YamlDotNet.Serialization.ObjectGraphTraversalStrategies
+namespace AIO.YamlDotNet.Serialization.ObjectGraphTraversalStrategies
 {
 	internal class FullObjectGraphTraversalStrategy : IObjectGraphTraversalStrategy
 	{

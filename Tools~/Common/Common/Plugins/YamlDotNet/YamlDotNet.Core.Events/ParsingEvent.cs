@@ -1,4 +1,4 @@
-namespace YamlDotNet.Core.Events
+namespace AIO.YamlDotNet.Core.Events
 {
 	internal abstract class ParsingEvent
 	{

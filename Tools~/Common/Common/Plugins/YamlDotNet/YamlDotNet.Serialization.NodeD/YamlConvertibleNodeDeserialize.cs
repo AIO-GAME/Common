@@ -1,7 +1,7 @@
 using System;
-using YamlDotNet.Core;
+using AIO.YamlDotNet.Core;
 
-namespace YamlDotNet.Serialization.NodeDeserializers
+namespace AIO.YamlDotNet.Serialization.NodeDeserializers
 {
 	internal sealed class YamlConvertibleNodeDeserializer : INodeDeserializer
 	{

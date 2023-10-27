@@ -1,4 +1,4 @@
-namespace YamlDotNet.Serialization.Schemas
+namespace AIO.YamlDotNet.Serialization.Schemas
 {
 	internal sealed class CoreSchema
 	{

@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace ICSharpCode.SharpZipLib.Zip
+namespace AIO.ICSharpCode.SharpZipLib.Zip
 {
 	internal interface IStaticDataSource
 	{

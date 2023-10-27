@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 
-namespace YamlDotNet.Serialization.ObjectFactories
+namespace AIO.YamlDotNet.Serialization.ObjectFactories
 {
 	internal abstract class StaticObjectFactory : IObjectFactory
 	{

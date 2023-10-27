@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using YamlDotNet.Helpers;
+using AIO.YamlDotNet.Helpers;
 
-namespace YamlDotNet.Core
+namespace AIO.YamlDotNet.Core
 {
 	internal sealed class InsertionQueue<T> : IEnumerable<T>, IEnumerable
 	{

@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Text;
 
-namespace YamlDotNet.Helpers
+namespace AIO.YamlDotNet.Helpers
 {
 	[DebuggerStepThrough]
 	internal static class StringBuilderPool

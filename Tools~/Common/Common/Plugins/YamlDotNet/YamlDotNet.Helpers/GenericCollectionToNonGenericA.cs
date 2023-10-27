@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 #nullable enable
-namespace YamlDotNet.Helpers
+namespace AIO.YamlDotNet.Helpers
 {
 	internal sealed class GenericCollectionToNonGenericAdapter<T> : IList, ICollection, IEnumerable
 	{

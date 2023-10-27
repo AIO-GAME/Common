@@ -1,7 +1,7 @@
 using System;
-using ICSharpCode.SharpZipLib.Checksum;
+using AIO.ICSharpCode.SharpZipLib.Checksum;
 
-namespace ICSharpCode.SharpZipLib.Encryption
+namespace AIO.ICSharpCode.SharpZipLib.Encryption
 {
 	internal class PkzipClassicCryptoBase
 	{

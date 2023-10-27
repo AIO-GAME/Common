@@ -159,23 +159,23 @@
     <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipOutputStream.cs" />
     <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipTestResultHandler.cs" />
     <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib\SharpZipBaseException.cs" />
+    <Compile Include="Plugins\Microsoft\Microsoft.CodeAnalysis\EmbeddedAttribute.cs" />
+    <Compile Include="Plugins\Microsoft\System.Collections.Generic\DeconstructionExtensions.cs" />
+    <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\AllowNullAttribute.cs" />
+    <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\DisallowNullAttribute.cs" />
+    <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\DoesNotReturnAttribute.cs" />
+    <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\DoesNotReturnIfAttribute.cs" />
+    <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\MaybeNullAttribute.cs" />
+    <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\MaybeNullWhenAttribute.cs" />
+    <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\MemberNotNullAttribute.cs" />
+    <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\MemberNotNullWhenAttribute.cs" />
+    <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\NotNullAttribute.cs" />
+    <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\NotNullIfNotNullAttribute.cs" />
+    <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\NotNullWhenAttribute.cs" />
+    <Compile Include="Plugins\Microsoft\System.Runtime.CompilerService\IsReadOnlyAttribute.cs" />
+    <Compile Include="Plugins\Microsoft\System.Runtime.CompilerService\NullableAttribute.cs" />
+    <Compile Include="Plugins\Microsoft\System.Runtime.CompilerService\NullableContextAttribute.cs" />
     <Compile Include="Plugins\MiniJSON\MiniJSON.cs" />
-    <Compile Include="Plugins\YamlDotNet\Microsoft.CodeAnalysis\EmbeddedAttribute.cs" />
-    <Compile Include="Plugins\YamlDotNet\System.Collections.Generic\DeconstructionExtensions.cs" />
-    <Compile Include="Plugins\YamlDotNet\System.Diagnostics.CodeAnalysi\AllowNullAttribute.cs" />
-    <Compile Include="Plugins\YamlDotNet\System.Diagnostics.CodeAnalysi\DisallowNullAttribute.cs" />
-    <Compile Include="Plugins\YamlDotNet\System.Diagnostics.CodeAnalysi\DoesNotReturnAttribute.cs" />
-    <Compile Include="Plugins\YamlDotNet\System.Diagnostics.CodeAnalysi\DoesNotReturnIfAttribute.cs" />
-    <Compile Include="Plugins\YamlDotNet\System.Diagnostics.CodeAnalysi\MaybeNullAttribute.cs" />
-    <Compile Include="Plugins\YamlDotNet\System.Diagnostics.CodeAnalysi\MaybeNullWhenAttribute.cs" />
-    <Compile Include="Plugins\YamlDotNet\System.Diagnostics.CodeAnalysi\MemberNotNullAttribute.cs" />
-    <Compile Include="Plugins\YamlDotNet\System.Diagnostics.CodeAnalysi\MemberNotNullWhenAttribute.cs" />
-    <Compile Include="Plugins\YamlDotNet\System.Diagnostics.CodeAnalysi\NotNullAttribute.cs" />
-    <Compile Include="Plugins\YamlDotNet\System.Diagnostics.CodeAnalysi\NotNullIfNotNullAttribute.cs" />
-    <Compile Include="Plugins\YamlDotNet\System.Diagnostics.CodeAnalysi\NotNullWhenAttribute.cs" />
-    <Compile Include="Plugins\YamlDotNet\System.Runtime.CompilerService\IsReadOnlyAttribute.cs" />
-    <Compile Include="Plugins\YamlDotNet\System.Runtime.CompilerService\NullableAttribute.cs" />
-    <Compile Include="Plugins\YamlDotNet\System.Runtime.CompilerService\NullableContextAttribute.cs" />
     <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\AnchorAlias.cs" />
     <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\Comment.cs" />
     <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\DocumentEnd.cs" />
@@ -769,6 +769,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Plugins\Microsoft" />
     <Folder Include="Script\Tools\NetWork\TCP" />
     <Folder Include="Script\Tools\NetWork\Websocket" />
   </ItemGroup>

@@ -1,6 +1,6 @@
 using System;
 
-namespace YamlDotNet.Core
+namespace AIO.YamlDotNet.Core
 {
 	internal readonly struct TagName : IEquatable<TagName>
 	{

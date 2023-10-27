@@ -1,7 +1,7 @@
 using System;
-using YamlDotNet.Core.Events;
+using AIO.YamlDotNet.Core.Events;
 
-namespace YamlDotNet.Serialization.NodeTypeResolvers
+namespace AIO.YamlDotNet.Serialization.NodeTypeResolvers
 {
 	internal sealed class YamlConvertibleTypeResolver : INodeTypeResolver
 	{

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using YamlDotNet.Core;
-using YamlDotNet.Core.Events;
+using AIO.YamlDotNet.Core;
+using AIO.YamlDotNet.Core.Events;
 
-namespace YamlDotNet.Serialization.BufferedDeserialization
+namespace AIO.YamlDotNet.Serialization.BufferedDeserialization
 {
 	internal class ParserBuffer : IParser
 	{

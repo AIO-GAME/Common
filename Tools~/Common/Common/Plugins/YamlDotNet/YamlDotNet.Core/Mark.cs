@@ -1,7 +1,7 @@
 using System;
-using YamlDotNet.Helpers;
+using AIO.YamlDotNet.Helpers;
 
-namespace YamlDotNet.Core
+namespace AIO.YamlDotNet.Core
 {
 	internal readonly struct Mark : IEquatable<Mark>, IComparable<Mark>, IComparable
 	{

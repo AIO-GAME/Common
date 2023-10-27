@@ -1,4 +1,4 @@
-namespace YamlDotNet.Core
+namespace AIO.YamlDotNet.Core
 {
 	internal sealed class SimpleKey
 	{

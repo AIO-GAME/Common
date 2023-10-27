@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using YamlDotNet.Core;
+using AIO.YamlDotNet.Core;
 
-namespace YamlDotNet.Serialization.TypeInspectors
+namespace AIO.YamlDotNet.Serialization.TypeInspectors
 {
     internal sealed class ReadablePropertiesTypeInspector : TypeInspectorSkeleton
     {

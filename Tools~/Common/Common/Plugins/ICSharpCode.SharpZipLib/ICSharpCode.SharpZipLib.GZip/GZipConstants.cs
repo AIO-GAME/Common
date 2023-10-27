@@ -1,4 +1,4 @@
-namespace ICSharpCode.SharpZipLib.GZip
+namespace AIO.ICSharpCode.SharpZipLib.GZip
 {
 	internal sealed class GZipConstants
 	{

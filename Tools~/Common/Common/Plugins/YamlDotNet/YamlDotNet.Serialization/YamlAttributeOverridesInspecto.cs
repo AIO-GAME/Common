@@ -2,10 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using YamlDotNet.Core;
-using YamlDotNet.Serialization.TypeInspectors;
+using AIO.YamlDotNet.Core;
+using AIO.YamlDotNet.Serialization.TypeInspectors;
 
-namespace YamlDotNet.Serialization
+namespace AIO.YamlDotNet.Serialization
 {
 	internal sealed class YamlAttributeOverridesInspector : TypeInspectorSkeleton
 	{

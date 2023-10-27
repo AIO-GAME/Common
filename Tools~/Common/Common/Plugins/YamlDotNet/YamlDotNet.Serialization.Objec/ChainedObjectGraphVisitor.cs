@@ -1,7 +1,7 @@
 using System;
-using YamlDotNet.Core;
+using AIO.YamlDotNet.Core;
 
-namespace YamlDotNet.Serialization.ObjectGraphVisitors
+namespace AIO.YamlDotNet.Serialization.ObjectGraphVisitors
 {
 	internal abstract class ChainedObjectGraphVisitor : IObjectGraphVisitor<IEmitter>
 	{

@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace ICSharpCode.SharpZipLib.Zip
+namespace AIO.ICSharpCode.SharpZipLib.Zip
 {
 	internal sealed class ZipConstants
 	{

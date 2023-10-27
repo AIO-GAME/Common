@@ -1,8 +1,8 @@
 using System;
 using System.IO;
-using YamlDotNet.Core;
+using AIO.YamlDotNet.Core;
 
-namespace YamlDotNet.Serialization
+namespace AIO.YamlDotNet.Serialization
 {
 	internal interface IDeserializer
 	{

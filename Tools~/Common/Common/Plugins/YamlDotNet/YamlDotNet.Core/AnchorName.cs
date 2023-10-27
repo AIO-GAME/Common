@@ -1,7 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 #nullable enable
-namespace YamlDotNet.Core
+namespace AIO.YamlDotNet.Core
 {
 	internal struct AnchorName : IEquatable<AnchorName>
 	{

@@ -1,9 +1,9 @@
 using System;
 using System.IO;
 using System.Text;
-using ICSharpCode.SharpZipLib.Core;
+using AIO.ICSharpCode.SharpZipLib.Core;
 
-namespace ICSharpCode.SharpZipLib.Zip
+namespace AIO.ICSharpCode.SharpZipLib.Zip
 {
 	internal class ZipNameTransform : INameTransform
 	{

@@ -1,18 +1,18 @@
 using System;
 using System.Collections.Generic;
-using YamlDotNet.Core;
-using YamlDotNet.Serialization.BufferedDeserialization;
-using YamlDotNet.Serialization.NamingConventions;
-using YamlDotNet.Serialization.NodeDeserializers;
-using YamlDotNet.Serialization.NodeTypeResolvers;
-using YamlDotNet.Serialization.ObjectFactories;
-using YamlDotNet.Serialization.Schemas;
-using YamlDotNet.Serialization.TypeInspectors;
-using YamlDotNet.Serialization.TypeResolvers;
-using YamlDotNet.Serialization.Utilities;
-using YamlDotNet.Serialization.ValueDeserializers;
+using AIO.YamlDotNet.Core;
+using AIO.YamlDotNet.Serialization.BufferedDeserialization;
+using AIO.YamlDotNet.Serialization.NamingConventions;
+using AIO.YamlDotNet.Serialization.NodeDeserializers;
+using AIO.YamlDotNet.Serialization.NodeTypeResolvers;
+using AIO.YamlDotNet.Serialization.ObjectFactories;
+using AIO.YamlDotNet.Serialization.Schemas;
+using AIO.YamlDotNet.Serialization.TypeInspectors;
+using AIO.YamlDotNet.Serialization.TypeResolvers;
+using AIO.YamlDotNet.Serialization.Utilities;
+using AIO.YamlDotNet.Serialization.ValueDeserializers;
 
-namespace YamlDotNet.Serialization
+namespace AIO.YamlDotNet.Serialization
 {
 	internal sealed class StaticDeserializerBuilder : StaticBuilderSkeleton<StaticDeserializerBuilder>
 	{

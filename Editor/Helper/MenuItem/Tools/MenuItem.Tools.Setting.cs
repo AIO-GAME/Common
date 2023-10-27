@@ -1,7 +1,6 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using UnityEditor;
-using UnityEditor.Build;
+using UnityEditor.Android;
 using UnityEngine;
 
 namespace AIO.UEditor
@@ -57,7 +56,7 @@ namespace AIO.UEditor
             //kind有3种，分别对应PlayerSettings的Legacy，Round，Adaptive
             if (targetGroup == BuildTargetGroup.Android)
             {
-                var kind = UnityEditor.Android.AndroidPlatformIconKind.Round;
+                var kind = AndroidPlatformIconKind.Round;
                 var icons = PlayerSettings.GetPlatformIcons(targetGroup, kind);
                 //将转换后获得的Texture2D数组，逐个赋值给icons
                 for (int i = 0, length = icons.Length; i < length; ++i) icons[i].SetTexture(texArray[i]);

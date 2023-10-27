@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
-using YamlDotNet.Core;
-using YamlDotNet.Serialization.ObjectFactories;
+using AIO.YamlDotNet.Core;
+using AIO.YamlDotNet.Serialization.ObjectFactories;
 
-namespace YamlDotNet.Serialization.NodeDeserializers
+namespace AIO.YamlDotNet.Serialization.NodeDeserializers
 {
 	internal class StaticDictionaryNodeDeserializer : DictionaryDeserializer, INodeDeserializer
 	{

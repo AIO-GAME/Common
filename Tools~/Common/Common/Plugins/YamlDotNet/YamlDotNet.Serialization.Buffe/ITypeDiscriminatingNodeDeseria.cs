@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using YamlDotNet.Serialization.BufferedDeserialization.TypeDiscriminators;
+using AIO.YamlDotNet.Serialization.BufferedDeserialization.TypeDiscriminators;
 
-namespace YamlDotNet.Serialization.BufferedDeserialization
+namespace AIO.YamlDotNet.Serialization.BufferedDeserialization
 {
 	internal interface ITypeDiscriminatingNodeDeserializerOptions
 	{

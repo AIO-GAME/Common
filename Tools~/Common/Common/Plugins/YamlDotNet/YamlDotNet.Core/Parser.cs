@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using YamlDotNet.Core.Events;
-using YamlDotNet.Core.Tokens;
+using AIO.YamlDotNet.Core.Events;
+using AIO.YamlDotNet.Core.Tokens;
 
-namespace YamlDotNet.Core
+namespace AIO.YamlDotNet.Core
 {
 	internal class Parser : IParser
 	{

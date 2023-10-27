@@ -1,4 +1,4 @@
-namespace YamlDotNet.Core.Tokens
+namespace AIO.YamlDotNet.Core.Tokens
 {
 	internal sealed class FlowSequenceEnd : Token
 	{

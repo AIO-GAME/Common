@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace YamlDotNet.Serialization.ObjectFactories
+namespace AIO.YamlDotNet.Serialization.ObjectFactories
 {
 	internal sealed class DefaultObjectFactory : ObjectFactoryBase
 	{

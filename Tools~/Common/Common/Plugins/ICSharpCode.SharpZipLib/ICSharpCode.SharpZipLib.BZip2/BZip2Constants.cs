@@ -1,4 +1,4 @@
-namespace ICSharpCode.SharpZipLib.BZip2
+namespace AIO.ICSharpCode.SharpZipLib.BZip2
 {
 	internal sealed class BZip2Constants
 	{
