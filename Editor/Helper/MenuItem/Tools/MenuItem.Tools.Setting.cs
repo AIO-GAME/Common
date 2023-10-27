@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using UnityEditor;
-using UnityEditor.Android;
 using UnityEngine;
 
 namespace AIO.UEditor
@@ -39,7 +38,7 @@ namespace AIO.UEditor
         private static void SetIcons(string iconPrefixName, BuildTargetGroup targetGroup)
         {
 #if UNITY_2023_1_OR_NEWER
-            var nametarget = NamedBuildTarget.FromBuildTargetGroup(targetGroup);
+            var nametarget = UnityEditor.Build.NamedBuildTarget.FromBuildTargetGroup(targetGroup);
             var iconSizes = PlayerSettings.GetIconSizes(nametarget, IconKind.Any);
 #else
             var iconSizes = PlayerSettings.GetIconSizesForTargetGroup(targetGroup);
@@ -51,16 +50,23 @@ namespace AIO.UEditor
                 texArray[i] = AssetDatabase.LoadAssetAtPath<Texture2D>(path);
             }
 
-#if UNITY_ANDROID
+#if !UNITY_ANDROID
             //此处为新API
             //kind有3种，分别对应PlayerSettings的Legacy，Round，Adaptive
             if (targetGroup == BuildTargetGroup.Android)
             {
-                var kind = AndroidPlatformIconKind.Round;
+                var kind = UnityEditor.Android.AndroidPlatformIconKind.Round;
+#if UNITY_2023_1_OR_NEWER
+                var icons = PlayerSettings.GetPlatformIcons(UnityEditor.Build.NamedBuildTarget.FromBuildTargetGroup(targetGroup), kind);
+                //将转换后获得的Texture2D数组，逐个赋值给icons
+                for (int i = 0, length = icons.Length; i < length; ++i) icons[i].SetTexture(texArray[i]);
+                PlayerSettings.SetPlatformIcons(UnityEditor.Build.NamedBuildTarget.FromBuildTargetGroup(targetGroup), kind, icons);
+#else
                 var icons = PlayerSettings.GetPlatformIcons(targetGroup, kind);
                 //将转换后获得的Texture2D数组，逐个赋值给icons
                 for (int i = 0, length = icons.Length; i < length; ++i) icons[i].SetTexture(texArray[i]);
                 PlayerSettings.SetPlatformIcons(targetGroup, kind, icons);
+#endif
             }
 #endif
             AssetDatabase.SaveAssets();
