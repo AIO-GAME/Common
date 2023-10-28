@@ -125,7 +125,7 @@ namespace AIO
                         Comments = $"绘制 枚举菜单",
                         Name = "EnumPopupMask",
                         Params = param,
-                        MacroDefinition = "!UNITY_2020_1_OR_NEWER",
+                        MacroDefinition = "!UNITY_2019_1_OR_NEWER",
                         Generics = new Dictionary<string, string> { { "T", "Enum" } },
                         ReturnType = "T",
                     };
