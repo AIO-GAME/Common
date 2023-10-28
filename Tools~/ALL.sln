@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.NUnit", "Test\Test.NUn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T4", "T4\T4.csproj", "{DAE98AF0-7556-4CD9-86D9-3859586EE956}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Process.Unity", "Process\Process.Unity\Process.Unity.csproj", "{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Editor.CLI", "Process\Unity.Editor.CLI\Unity.Editor.CLI.csproj", "{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

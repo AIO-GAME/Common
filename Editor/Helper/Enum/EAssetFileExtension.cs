@@ -6,8 +6,8 @@
     public enum EAssetFileExtension
     {
         prefab,
-        unity,
-        fbx,
+        UnityPackage,
+        FBX,
         anim,
         controller,
         png,
