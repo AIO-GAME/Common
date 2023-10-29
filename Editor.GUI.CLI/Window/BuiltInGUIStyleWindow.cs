@@ -20,7 +20,7 @@ namespace AIO.UEditor
     /// <summary>
     /// 获取全部 Unity GUI Style Viewer 样式
     /// </summary>
-    [GWindow("GUI Style View", Group = "Tools",
+    [GWindow("Built In GUI Style View", Group = "Tools",
         MinSizeWidth = 600, MinSizeHeight = 600
     )]
     public class BuiltInGUIStyleGraphWindow : GraphicWindow
@@ -47,10 +47,11 @@ namespace AIO.UEditor
             search = "";
         }
 
+
         protected override void OnGUI()
         {
-            if (Label == null) Label = "SearchTextField";
-            if (Content == null) Content = "DD HeaderStyle";
+            if (Label == null) Label = new GUIStyle("SearchTextField");
+            if (Content == null) Content = new GUIStyle("DD HeaderStyle");
 
             if (Array.Count == 0)
             {
@@ -63,10 +64,11 @@ namespace AIO.UEditor
                     }
             }
 
-            using (GELayout.VHorizontal(EditorStyles.helpBox, GTOption.WidthExpand(true), GTOption.Height(30)))
+            using (new GUILayout.HorizontalScope(EditorStyles.helpBox, GUILayout.ExpandWidth(true), GUILayout.Height(30)))
             {
-                search = GELayout.Field(search, Label);
-                if (GELayout.Button("Find", GTOption.Width(50))) FindSearchStyles();
+                search = EditorGUILayout.TextField(search, Label);
+                if (GUILayout.Button("Find", GUILayout.Width(50))) FindSearchStyles();
+                if (GUILayout.Button("Gen", GUILayout.Width(50))) GEStyle.Gen();
             }
 
             Vector = GELayout.VScrollView(DrawContext, Vector);
@@ -82,7 +84,6 @@ namespace AIO.UEditor
 
         private void DrawContext()
         {
-            var Height = GTOption.Height(60);
             //if (!search.ToLower().IsNullOrEmpty() && Array.ContainsKey(search.ToLower()))
             //{
             //    GTLayout.VHorizontal(() => { DrawItem(Array[search.ToLower()]); }, Content, Height);
@@ -96,24 +97,28 @@ namespace AIO.UEditor
             //}
             foreach (var style in Array.Values)
             {
-                GELayout.VHorizontal(() => { DrawItem(style); }, Content, Height);
+                using (new GUILayout.HorizontalScope(Content, GTOption.Height(60)))
+                {
+                    DrawItem(style);
+                }
             }
         }
 
         private void DrawItem(GUIStyle style)
         {
             GULayout.Space(10);
-            GELayout.LabelPrefix(style.name);
-            GELayout.Separator();
-            GELayout.LabelSelectable(style.name, style, Height);
-            GELayout.Separator();
-            GELayout.Button("Copy", () =>
+            EditorGUILayout.PrefixLabel(style.name);
+            EditorGUILayout.Separator();
+            EditorGUILayout.SelectableLabel(style.name, style, Height);
+            EditorGUILayout.Separator();
+
+            if (GULayout.Button("Copy", Width, Height))
             {
-                var textEditor = new TextEditor();
-                textEditor.text = style.name;
+                var textEditor = new TextEditor { text = style.name };
                 textEditor.OnFocus();
                 textEditor.Copy();
-            }, Width, Height);
+            }
+
             GULayout.Space(10);
         }
 

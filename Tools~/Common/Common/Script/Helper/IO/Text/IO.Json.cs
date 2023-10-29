@@ -11,7 +11,7 @@ public partial class AHelper
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T ReadJson<T>(
             in string path,
-            Encoding charset = null)
+            Encoding charset = null) 
         {
             return Json.Deserialize<T>(ReadText(path, charset));
         }
@@ -20,7 +20,7 @@ public partial class AHelper
         /// 读取Json文件 编码utf-8
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T ReadJsonUTF8<T>(in string path)
+        public static T ReadJsonUTF8<T>(in string path) 
         {
             return Json.Deserialize<T>(ReadUTF8(path));
         }

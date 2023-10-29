@@ -264,16 +264,16 @@ namespace AIO.UEditor
                 GUILayout.BeginVertical();
                 GUILayout.Space(10);
 
-                using (new GUILayout.HorizontalScope(GEStyle.HelpBox))
+                using (new GUILayout.HorizontalScope(new GUIStyle("HelpBox")))
                 {
-                    GUILayout.Label("Label", GEStyle.CenteredLabel, GUILayout.ExpandWidth(true));
-                    GUILayout.Label("Change", GEStyle.CenteredLabel, GUILayout.Width(120));
+                    GUILayout.Label("Label", new GUIStyle("CenteredLabel"), GUILayout.ExpandWidth(true));
+                    GUILayout.Label("Change", new GUIStyle("CenteredLabel"), GUILayout.Width(120));
                 }
 
                 foreach (var assembly in Assemblies)
                 {
                     if (AssembliesCache.ContainsKey(assembly.Key)) continue;
-                    using (new GUILayout.HorizontalScope(GEStyle.HelpBox))
+                    using (new GUILayout.HorizontalScope(new GUIStyle("HelpBox")))
                     {
                         GUILayout.Label(assembly.Key);
 
@@ -331,7 +331,7 @@ namespace AIO.UEditor
                 GUILayout.BeginVertical();
                 foreach (var assembly in AssembliesCache.Keys)
                 {
-                    GUILayout.BeginHorizontal(GEStyle.HelpBox);
+                    GUILayout.BeginHorizontal(new GUIStyle("HelpBox"));
                     GUILayout.Label(assembly);
                     if (GUILayout.Button("-", GUILayout.Width(20)))
                     {
@@ -343,7 +343,7 @@ namespace AIO.UEditor
                 }
 
                 GUILayout.EndVertical();
-                
+
                 GUILayout.FlexibleSpace();
                 EditorGUILayout.LabelField("Version 1.0.1-preview", EditorStyles.centeredGreyMiniLabel);
             };

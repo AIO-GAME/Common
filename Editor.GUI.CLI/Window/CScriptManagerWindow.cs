@@ -48,12 +48,12 @@ namespace AIO.UEditor
 
         protected override void OnGUI()
         {
-            using (GELayout.VHorizontal(GEStyle.HelpBox, GTOption.Width(true)))
+            using (GELayout.VHorizontal(new GUIStyle("HelpBox"), GTOption.Width(true)))
             {
                 GELayout.Space(5);
                 GELayout.Label("类名");
                 GELayout.Label("命名空间", GTOption.Width(200));
-                GELayout.Label("静态类", GEStyle.CenteredLabel, GTOption.Width(100));
+                GELayout.Label("静态类", new GUIStyle("CenteredLabel"), GTOption.Width(100));
                 GELayout.Label("属性", GTOption.Width(500));
                 GELayout.Space(10);
             }
@@ -63,12 +63,12 @@ namespace AIO.UEditor
                 Vector = scope.scrollPosition;
                 foreach (var type in List)
                 {
-                    using (GELayout.VHorizontal(GEStyle.HelpBox, GTOption.Width(true), GTOption.Height(60)))
+                    using (GELayout.VHorizontal(new GUIStyle("HelpBox"), GTOption.Width(true), GTOption.Height(60)))
                     {
                         GELayout.Space(10);
                         GELayout.Label(type.Name);
                         GELayout.Label(type.Namespace, GTOption.Width(200));
-                        GELayout.Label(type.IsAbstract, GEStyle.CenteredLabel, GTOption.Width(100));
+                        GELayout.Label(type.IsAbstract, new GUIStyle("CenteredLabel"), GTOption.Width(100));
                         GELayout.Label(type.Attributes.ToString(), GTOption.Width(500));
                         GELayout.Space(10);
                     }
