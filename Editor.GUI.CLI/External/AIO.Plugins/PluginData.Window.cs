@@ -10,10 +10,17 @@ namespace AIO
 {
     internal partial class Plugins
     {
+        [MenuItem("AIO/Window/Plugin Data Manager")]
+        public static void Open()
+        {
+            EHelper.Window.Open<PluginDataWindow>();
+        }
+
         /// <summary>
         /// 插件管理界面
         /// </summary>
-        private class PluginDataWindow : EditorWindow
+        [GWindow("插件管理界面", "Plugin Data Manager", MinSizeHeight = 600, MinSizeWidth = 400)]
+        private class PluginDataWindow : GraphicWindow
         {
             private Vector2 Vector;
 
@@ -77,7 +84,8 @@ namespace AIO
                 InstallIndexList.Clear();
                 UnInstallIndexList.Clear();
 
-                foreach (var data in EHelper.IO.GetAssetsRes<PluginData>($"t:{nameof(PluginData)}", "Packages", "Assets"))
+                foreach (var data in EHelper.IO.GetAssetsRes<PluginData>($"t:{nameof(PluginData)}", "Packages",
+                             "Assets"))
                 {
                     var filename = data.Name;
                     if (!RootData.ContainsKey(filename))
@@ -129,7 +137,8 @@ namespace AIO
                         if (GUILayout.Button("安装全部", GUILayout.Width(60)))
                         {
                             CompilationPipeline.compilationFinished += compilationFinished;
-                            _ = PluginDataEditor.Initialize(RootData.Values.Where(plugin => InstallIndexList.Contains(plugin.Name)));
+                            _ = PluginDataEditor.Initialize(RootData.Values.Where(plugin =>
+                                InstallIndexList.Contains(plugin.Name)));
                         }
                     }
                 }
@@ -229,7 +238,8 @@ namespace AIO
                             if (GUILayout.Button("卸载全部", GUILayout.Width(60)))
                             {
                                 CompilationPipeline.compilationFinished += compilationFinished;
-                                _ = PluginDataEditor.UnInitialize(RootData.Values.Where(plugin => UnInstallIndexList.Contains(plugin.Name)));
+                                _ = PluginDataEditor.UnInitialize(RootData.Values.Where(plugin =>
+                                    UnInstallIndexList.Contains(plugin.Name)));
                                 return;
                             }
                     }
@@ -258,7 +268,9 @@ namespace AIO
                                     {
                                         if (GUILayout.Button("更新宏", GUILayout.Width(60), GUILayout.Height(20)))
                                         {
-                                            EHelper.Symbols.AddScriptingDefine(EditorUserBuildSettings.selectedBuildTargetGroup, Data.MacroDefinition.Split(';'));
+                                            EHelper.Symbols.AddScriptingDefine(
+                                                EditorUserBuildSettings.selectedBuildTargetGroup,
+                                                Data.MacroDefinition.Split(';'));
                                             AssetDatabase.Refresh();
 #if UNITY_2020_1_OR_NEWER
                                             AssetDatabase.RefreshSettings();
@@ -293,7 +305,7 @@ namespace AIO
                 }
             }
 
-            protected void OnEnable()
+            protected override void OnActivation()
             {
                 var root = Directory.GetParent(Application.dataPath);
                 if (root is null) throw new DirectoryNotFoundException("未找到 Application.dataPath 根目录");
@@ -301,7 +313,7 @@ namespace AIO
                 UpdateData();
             }
 
-            protected void OnGUI()
+            protected override void OnGUI()
             {
                 EditorGUILayout.LabelField(new GUIContent("插件安装管理"), "PreLabel");
                 HeaderView();
@@ -310,11 +322,6 @@ namespace AIO
                 EditorGUILayout.Space();
                 UnInstallView();
                 EditorGUILayout.EndScrollView();
-            }
-
-            private void OnDestroy()
-            {
-                Close();
             }
 
             private void compilationFinished(object o)

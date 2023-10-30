@@ -2,7 +2,7 @@
   "name": "com.aio.package",
   "displayName": "AIO Unity Common",
   "description": "AIO Unity Common",
-  "version": "1.0.10-preview",
+  "version": "1.0.11-preview",
   "unity": "2019.1",
   "unityRelease": "0f1",
   "dependencies": {},

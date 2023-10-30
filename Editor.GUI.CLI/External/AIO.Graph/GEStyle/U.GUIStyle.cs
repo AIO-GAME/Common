@@ -38,7 +38,9 @@ namespace AIO.UEditor
             var sb = new StringBuilder();
             var unityVersion = Application.unityVersion.Split('.')[0];
             foreach (var style in GUI.skin.customStyles) sb.AppendLine(style.name);
-            AHelper.IO.WriteUTF8(PackageInfo.FindForAssembly(typeof(GEStyle).Assembly).resolvedPath + $"/Resources/Editor/Graph/Style/{unityVersion}.txt", sb.ToString());
+            AHelper.IO.WriteUTF8(
+                PackageInfo.FindForAssembly(typeof(GEStyle).Assembly).resolvedPath +
+                $"/Resources/Editor/Graph/Style/{unityVersion}.txt", sb.ToString());
             AssetDatabase.Refresh();
 #if UNITY_2020_1_OR_NEWER
             AssetDatabase.RefreshSettings();
@@ -48,13 +50,12 @@ namespace AIO.UEditor
         private static StringBuilder GenContent(IEnumerable<string> styleNames, string version = null)
         {
             var sb = new StringBuilder();
-            var unityVersion = Application.unityVersion.Split('.')[0];
             sb.AppendLine("/*|✩ - - - - - |||");
             sb.AppendLine($"|||✩ Date:     ||| -> {DateTime.Now:yyyy-MM-dd}");
-            sb.AppendLine($"|||✩ Document: ||| -> Automatic Generation Unity {unityVersion}");
+            sb.AppendLine($"|||✩ Document: ||| -> Automatic Generation Unity {version}");
             sb.AppendLine("|||✩ - - - - - |*/");
             sb.AppendLine();
-            if (!string.IsNullOrEmpty(version)) sb.AppendLine($"#if UNITY_{unityVersion}");
+            if (!string.IsNullOrEmpty(version)) sb.AppendLine($"#if UNITY_{version}");
             sb.AppendLine("using UGUIStyle = UnityEngine.GUIStyle;");
             sb.AppendLine();
             sb.AppendLine("namespace AIO.UEditor");
@@ -79,7 +80,10 @@ namespace AIO.UEditor
         {
             var dict = new Dictionary<string, int>();
             var versionList = new Dictionary<string, IList<string>>();
-            var formatPath = PackageInfo.FindForAssembly(typeof(GEStyle).Assembly).resolvedPath + "/Editor.GUI.CLI/External/AIO.Graph/GEStyle/U.GUIStyle.{0}.cs";
+            var formatPathCS = PackageInfo.FindForAssembly(typeof(GEStyle).Assembly).resolvedPath +
+                               "/Editor.GUI.CLI/External/AIO.Graph/GEStyle/U.GUIStyle.{0}.cs";
+            var formatPath = PackageInfo.FindForAssembly(typeof(GEStyle).Assembly).resolvedPath +
+                             "/Resources/Editor/Graph/Style/{0}.txt";
             var versions = new string[] { "2019", "2020", "2021", "2022", "2023", "2024", "2025" };
             var validVersionNum = 0;
             foreach (var version in versions)
@@ -92,34 +96,36 @@ namespace AIO.UEditor
             }
 
             var common = new Dictionary<string, int>();
-            var CommonPath = string.Format(formatPath, "Common");
-            if (File.Exists(CommonPath))
+            var sb = new StringBuilder();
+            foreach (var item in dict
+                         .Where(item => item.Value >= validVersionNum)
+                         .Where(item => !common.ContainsKey(item.Key)))
             {
-                CalcNumber(dict, File.ReadAllLines(CommonPath), out var list);
-                foreach (var item in list)
-                {
-                    common[item] = validVersionNum;
-                }
+                common.Add(item.Key, item.Value);
+                sb.AppendLine(item.Key);
             }
 
-            foreach (var item in dict
-                         .Where(item => item.Value == validVersionNum)
-                         .Where(item => !common.ContainsKey(item.Key))
-                    ) common.Add(item.Key, item.Value);
+            File.WriteAllText(string.Format(formatPath, "Common"), sb.ToString());
+            File.WriteAllText(string.Format(formatPathCS, "Common"), GenContent(common.Keys).ToString());
 
-            File.WriteAllText(string.Format(formatPath, "Common"), GenContent(common.Keys).ToString());
-
-            foreach (var item in versionList)
+            foreach (var version in versions)
             {
-                for (var i = item.Value.Count - 1; i >= 0; i--)
+                if (!versionList.ContainsKey(version)) continue;
+                var list = versionList[version];
+                for (var i = list.Count - 1; i >= 0; i--)
                 {
-                    if (common.ContainsKey(item.Value[i]))
+                    if (common.ContainsKey(list[i]))
                     {
-                        item.Value.RemoveAt(i);
+                        list.RemoveAt(i);
                     }
                 }
 
-                File.WriteAllText(string.Format(formatPath, item.Key), GenContent(item.Value, item.Key).ToString());
+                if (list.Count == 0) continue;
+                var content = GenContent(list, version).ToString();
+                if (string.IsNullOrEmpty(content)) continue;
+
+
+                File.WriteAllText(string.Format(formatPathCS, version), content);
             }
 
             AssetDatabase.Refresh();
@@ -129,13 +135,14 @@ namespace AIO.UEditor
             CompilationPipeline.RequestScriptCompilation();
         }
 
-        private static void CalcNumber(IDictionary<string, int> dictionary, IEnumerable<string> liens, out IList<string> list)
+        private static void CalcNumber(
+            IDictionary<string, int> dictionary,
+            IEnumerable<string> liens,
+            out IList<string> list)
         {
             list = new List<string>();
-            foreach (var line in liens)
+            foreach (var name in liens)
             {
-                if (!line.TrimStart(' ').StartsWith("public static UGUIStyle ")) continue;
-                var name = line.Split('"')[1].Split('"')[0];
                 if (!dictionary.ContainsKey(name)) dictionary.Add(name, 0);
                 dictionary[name]++;
                 list.Add(name);

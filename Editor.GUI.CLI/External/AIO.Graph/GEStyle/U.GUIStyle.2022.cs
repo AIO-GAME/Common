@@ -1,9 +1,9 @@
 /*|✩ - - - - - |||
-|||✩ Date:     ||| -> 2023-10-29
-|||✩ Document: ||| -> Automatic Generation Unity 2019
+|||✩ Date:     ||| -> 2023-10-30
+|||✩ Document: ||| -> Automatic Generation Unity 2022
 |||✩ - - - - - |*/
 
-#if UNITY_2019
+#if UNITY_2022
 using UGUIStyle = UnityEngine.GUIStyle;
 
 namespace AIO.UEditor
@@ -29,6 +29,13 @@ namespace AIO.UEditor
         public static UGUIStyle ToolbarSearchTextFieldWithJumpPopupSynced => Get("ToolbarSearchTextFieldWithJumpPopupSynced");
         public static UGUIStyle ToolbarSearchTextFieldWithJumpSynced => Get("ToolbarSearchTextFieldWithJumpSynced");
         public static UGUIStyle TVInsertionRelativeToSibling => Get("TV InsertionRelativeToSibling");
+        public static UGUIStyle WinBtnClose => Get("WinBtnClose");
+        public static UGUIStyle WinBtnCloseMac => Get("WinBtnCloseMac");
+        public static UGUIStyle WinBtnMax => Get("WinBtnMax");
+        public static UGUIStyle WinBtnMaxMac => Get("WinBtnMaxMac");
+        public static UGUIStyle WinBtnMinMac => Get("WinBtnMinMac");
+        public static UGUIStyle WinBtnRestore => Get("WinBtnRestore");
+        public static UGUIStyle WinBtnRestoreMac => Get("WinBtnRestoreMac");
     }
 }
 #endif

@@ -133,6 +133,7 @@ namespace AIO.UEditor
                     {
                         var key = string.Format("{0}{1}", attribute.Title, type.FullName);
                         if (WindowTypes.ContainsKey(key)) continue;
+                        if (string.IsNullOrEmpty(attribute.Group)) attribute.Group = "Default";
                         attribute.RuntimeType = type;
                         WindowTypes.Add(key, attribute);
                         if (!GroupTabel.ContainsKey(attribute.Group)) GroupTabel[attribute.Group] = new List<Type>();
@@ -155,7 +156,9 @@ namespace AIO.UEditor
         {
             if (provider != null) return provider;
 
-            provider = new GraphicSettingsProvider(string.Format("{0}/{1}", nameof(AIO), nameof(GWindowAttribute).Replace(nameof(Attribute), "")), SettingsScope.User);
+            provider = new GraphicSettingsProvider(
+                string.Format("{0}/{1}", nameof(AIO), nameof(GWindowAttribute).Replace(nameof(Attribute), "")),
+                SettingsScope.User);
             provider.label = "Windows Header";
             provider.hasSearchInterestHandler = (value) =>
             {
@@ -171,7 +174,7 @@ namespace AIO.UEditor
                 EditorGUILayout.BeginVertical();
                 EditorGUILayout.Space();
 
-                using (new EditorGUILayout.HorizontalScope(new GUIStyle("HelpBox")))
+                using (new EditorGUILayout.HorizontalScope(EditorStyles.helpBox))
                 {
                     EditorGUILayout.LabelField("Group", new GUIStyle("CenteredLabel"), GUILayout.Width(50));
                     EditorGUILayout.LabelField("|", GUILayout.Width(10));
@@ -186,16 +189,20 @@ namespace AIO.UEditor
 
                 foreach (var window in WindowTypes)
                 {
-                    using (new EditorGUILayout.HorizontalScope(new GUIStyle("HelpBox")))
+                    using (new EditorGUILayout.HorizontalScope(EditorStyles.helpBox))
                     {
-                        EditorGUILayout.LabelField(window.Value.Group, new GUIStyle("CenteredLabel"), GUILayout.Width(50));
+                        EditorGUILayout.LabelField(window.Value.Group, new GUIStyle("CenteredLabel"),
+                            GUILayout.Width(50));
                         EditorGUILayout.LabelField("|", GUILayout.Width(10));
-                        EditorGUILayout.LabelField(window.Value.Order.ToString(), new GUIStyle("CenteredLabel"), GUILayout.Width(50));
+                        EditorGUILayout.LabelField(window.Value.Order.ToString(), new GUIStyle("CenteredLabel"),
+                            GUILayout.Width(50));
                         EditorGUILayout.LabelField("|", GUILayout.Width(10));
-                        EditorGUILayout.LabelField(window.Value.Title, new GUIStyle("CenteredLabel"), GUILayout.Width(200));
+                        EditorGUILayout.LabelField(window.Value.Title, new GUIStyle("CenteredLabel"),
+                            GUILayout.Width(200));
                         EditorGUILayout.LabelField("|", GUILayout.Width(10));
                         if (GUILayout.Button("Open", GUILayout.Width(50)))
-                            EHelper.Window.Open(window.Value.RuntimeType, window.Value.Title, GroupTabel[window.Value.Group]);
+                            EHelper.Window.Open(window.Value.RuntimeType, window.Value.Title,
+                                GroupTabel[window.Value.Group]);
                         EditorGUILayout.LabelField("|", GUILayout.Width(10));
                         EditorGUILayout.LabelField(window.Value.RuntimeType.FullName, GUILayout.ExpandWidth(true));
                     }

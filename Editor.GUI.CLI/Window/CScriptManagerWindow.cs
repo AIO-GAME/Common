@@ -15,6 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 namespace AIO.UEditor
@@ -48,7 +49,7 @@ namespace AIO.UEditor
 
         protected override void OnGUI()
         {
-            using (GELayout.VHorizontal(new GUIStyle("HelpBox"), GTOption.Width(true)))
+            using (GELayout.VHorizontal(EditorStyles.helpBox, GTOption.Width(true)))
             {
                 GELayout.Space(5);
                 GELayout.Label("类名");
@@ -63,7 +64,7 @@ namespace AIO.UEditor
                 Vector = scope.scrollPosition;
                 foreach (var type in List)
                 {
-                    using (GELayout.VHorizontal(new GUIStyle("HelpBox"), GTOption.Width(true), GTOption.Height(60)))
+                    using (GELayout.VHorizontal(EditorStyles.helpBox, GTOption.Width(true), GTOption.Height(60)))
                     {
                         GELayout.Space(10);
                         GELayout.Label(type.Name);

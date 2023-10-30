@@ -264,7 +264,7 @@ namespace AIO.UEditor
                 GUILayout.BeginVertical();
                 GUILayout.Space(10);
 
-                using (new GUILayout.HorizontalScope(new GUIStyle("HelpBox")))
+                using (new GUILayout.HorizontalScope(EditorStyles.helpBox))
                 {
                     GUILayout.Label("Label", new GUIStyle("CenteredLabel"), GUILayout.ExpandWidth(true));
                     GUILayout.Label("Change", new GUIStyle("CenteredLabel"), GUILayout.Width(120));
@@ -273,7 +273,7 @@ namespace AIO.UEditor
                 foreach (var assembly in Assemblies)
                 {
                     if (AssembliesCache.ContainsKey(assembly.Key)) continue;
-                    using (new GUILayout.HorizontalScope(new GUIStyle("HelpBox")))
+                    using (new GUILayout.HorizontalScope(EditorStyles.helpBox))
                     {
                         GUILayout.Label(assembly.Key);
 
@@ -331,7 +331,7 @@ namespace AIO.UEditor
                 GUILayout.BeginVertical();
                 foreach (var assembly in AssembliesCache.Keys)
                 {
-                    GUILayout.BeginHorizontal(new GUIStyle("HelpBox"));
+                    GUILayout.BeginHorizontal(EditorStyles.helpBox);
                     GUILayout.Label(assembly);
                     if (GUILayout.Button("-", GUILayout.Width(20)))
                     {
