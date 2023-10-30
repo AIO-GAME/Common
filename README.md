@@ -5,12 +5,12 @@
 <p align="center"><strong>Easily match frame components</strong></p>
 <p align="center"><a href="README_EN.md">English</a> | 简体中文</p>
 <p align="center">
-<a href="https://badge.fury.io/gh/AIO-GAME%2FCommon"><img src="https://badge.fury.io/gh/AIO-GAME%2FCommon.svg" /></a>
 <a href="https://github.com/AIO-Game/Common"><img src="https://img.shields.io/github/stars/AIO-GAME/Common?label=Star&link=https%3A%2F%2Fgithub.com%2FAIO-GAME%2FCommon" /></a>
 <a href="https://github.com/AIO-Game/Common"><img src="https://img.shields.io/github/license/AIO-Game/Common" /></a>
 <a href="https://github.com/AIO-Game/Common"><img src="https://img.shields.io/github/languages/code-size/AIO-Game/Common?label=size" /></a>
 <a href="https://github.com/AIO-Game/Common"><img src="https://img.shields.io/github/issues/AIO-GAME/Common" /></a>
 <a href="https://www.codetriage.com/aio-game/common"><img src="https://www.codetriage.com/aio-game/common/badges/users.svg" /></a>
+<a href="https://github.com/AIO-GAME/Common/tags"><img alt="" src="https://img.shields.io/github/package-json/version/AIO-GAME/Common"></a>
 <a href="https://openupm.com/packages/com.aio.package/"><img src="https://img.shields.io/npm/v/com.aio.package?label=openupm&amp;registry_uri=https://package.openupm.com" /></a>
 </p>
 
@@ -18,43 +18,25 @@
 
 <details>
 <summary>
-<span style="color: deepskyblue; "><b>通过 Packages 清单安装</b></span>
+<span style="color: deepskyblue; "><b>openupm-cli</b></span>
 </summary>
 
-````json
-{
-  "dependencies": {
+Packages Manifest
+~~~
+"dependencies": {
     "com.aio.package": "x.x.x",
-  },
-  "scopedRegistries": [
+},
+"scopedRegistries": [
     {
-      "name": "package.openupm.cn",
-      "url": "https://package.openupm.cn",
-      "scopes": [
-        "com.aio.package"
-      ]
+        "name": "package.openupm.cn",
+        "url": "https://package.openupm.cn",
+        "scopes": [
+            "com.aio.package"
+        ]
     }
-  ]
-}
-````
-Git
-````json
-  "dependencies": {
-    "com.aio.package": "https://github.com/AIO-GAME/Common.git#main",
-  }
-````
-Openupm CMD
-```
-openupm add com.aio.package
-```
-
-</details>
-
-<details>
-<summary>
-<span style="color: deepskyblue; "><b>通过 PackageManager 安装</b></span>
-</summary>
-
+]
+~~~
+Unity PackageManager
 ~~~
 // 输入以下内容（中国版）
 Name: package.openupm.cn
@@ -65,6 +47,24 @@ Scope(s): com.aio.package
 Name: package.openupm.com
 URL: https://package.openupm.com
 Scope(s): com.aio.package
+~~~
+Command Line
+~~~
+openupm add com.aio.package
+~~~
+
+</details>
+
+<details>
+<summary>
+<span style="color: deepskyblue; "><b>Git</b></span>
+</summary>
+
+Packages Manifest
+~~~
+"dependencies" : {
+    "com.aio.package": "https://github.com/AIO-GAME/Common.git#main",
+}
 ~~~
 
 </details>
