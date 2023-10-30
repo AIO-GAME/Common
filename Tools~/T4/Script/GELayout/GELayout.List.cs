@@ -19,7 +19,7 @@ namespace AIO
             var addFunc = new FunctionParam("Func<T>", "addFunc", "addFunc") { Comments = "添加回调函数" };
             var addFunc_null = new FunctionParam("", "", "() => default") { Comments = "添加回调函数" };
             var lbStyle = new FunctionParam("GUIStyle", "labelStyle", "labelStyle") { Comments = "标签显示风格" };
-            var lbStyle_null = new FunctionParam("", "", "GEStyle.CenteredLabel") { Comments = "标签显示风格" };
+            var lbStyle_null = new FunctionParam("", "", "new GUIStyle(\"CenteredLabel\")") { Comments = "标签显示风格" };
             var bgStyle = new FunctionParam("GUIStyle", "bgStyle", "bgStyle") { Comments = "背景显示风格" };
             var bgStyle_null = new FunctionParam("", "", "null") { Comments = "背景显示风格" };
             foreach (var showFunc in new FunctionParam[]

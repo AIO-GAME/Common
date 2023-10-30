@@ -20,9 +20,9 @@ namespace AIO.UEditor
         public static readonly Type[] DockedWindowTypes =
         {
 #if UNITY_2019_4_OR_NEWER
-            typeof(AssetManagerGraphWindow),
+            // typeof(AssetManagerGraphWindow),
             typeof(BuiltInGUIStyleGraphWindow),
-            typeof(BuiltInTextureGraphWindow),
+            // typeof(BuiltInTextureGraphWindow),
             typeof(CScriptManagerGraphWindow),
             typeof(DependAnalysisGraphWindow),
             typeof(IconsListGraphWindow),
@@ -70,11 +70,11 @@ namespace AIO.UEditor
         private const string LABLE_BuiltInTextureWindow = "Built In Texture Window";
         private const string LABLE_ScriptingDefineSymbolsEditor = "Scripting Define Symbols Editor";
 
-        [MenuItem("AIO/Window/" + LABLE_AssestManagerWindow, false, 101)]
-        public static void OpenAssestManagerGraphWindow()
-        {
-            EHelper.Window.Open<AssetManagerGraphWindow>(DockedWindowTypes);
-        }
+        // [MenuItem("AIO/Window/" + LABLE_AssestManagerWindow, false, 101)]
+        // public static void OpenAssestManagerGraphWindow()
+        // {
+        //     EHelper.Window.Open<AssetManagerGraphWindow>(DockedWindowTypes);
+        // }
 
         [MenuItem("AIO/Window/" + LABLE_BuiltInGUIStyleWindow, false, 102)]
         public static void OpenBuiltInGUIStyleGraphWindow()
@@ -82,11 +82,11 @@ namespace AIO.UEditor
             EHelper.Window.Open<BuiltInGUIStyleGraphWindow>(DockedWindowTypes);
         }
 
-        [MenuItem("AIO/Window/" + LABLE_BuiltInTextureWindow, false, 103)]
-        public static void OpenBuiltInTextureGraphWindow()
-        {
-            EHelper.Window.Open<BuiltInTextureGraphWindow>(DockedWindowTypes);
-        }
+        // [MenuItem("AIO/Window/" + LABLE_BuiltInTextureWindow, false, 103)]
+        // public static void OpenBuiltInTextureGraphWindow()
+        // {
+        //     EHelper.Window.Open<BuiltInTextureGraphWindow>(DockedWindowTypes);
+        // }
 
         [MenuItem("AIO/Window/" + LABLE_ScriptingDefineSymbolsEditor, false, 104)]
         public static void OpenScriptingDefineSymbolsr()

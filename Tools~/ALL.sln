@@ -31,8 +31,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.NUnit", "Test\Test.NUn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T4", "T4\T4.csproj", "{DAE98AF0-7556-4CD9-86D9-3859586EE956}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Editor.CLI", "Process\Unity.Editor.CLI\Unity.Editor.CLI.csproj", "{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -327,26 +325,6 @@ Global
 		{DAE98AF0-7556-4CD9-86D9-3859586EE956}.Release|x64.Build.0 = Release|x64
 		{DAE98AF0-7556-4CD9-86D9-3859586EE956}.Release|x86.ActiveCfg = Release|x86
 		{DAE98AF0-7556-4CD9-86D9-3859586EE956}.Release|x86.Build.0 = Release|x86
-		{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}.Debug|Any CPU.ActiveCfg = Release|Any CPU
-		{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}.Debug|Any CPU.Build.0 = Release|Any CPU
-		{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}.Debug|ARM.Build.0 = Debug|Any CPU
-		{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}.Debug|ARM64.ActiveCfg = Debug|Any CPU
-		{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}.Debug|ARM64.Build.0 = Debug|Any CPU
-		{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}.Debug|x64.Build.0 = Debug|Any CPU
-		{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}.Debug|x86.Build.0 = Debug|Any CPU
-		{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}.Release|ARM.ActiveCfg = Release|Any CPU
-		{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}.Release|ARM.Build.0 = Release|Any CPU
-		{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}.Release|ARM64.ActiveCfg = Release|Any CPU
-		{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}.Release|ARM64.Build.0 = Release|Any CPU
-		{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}.Release|x64.ActiveCfg = Release|Any CPU
-		{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}.Release|x64.Build.0 = Release|Any CPU
-		{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}.Release|x86.ActiveCfg = Release|Any CPU
-		{DF95C54A-0870-4DDD-ADF5-3AA1ABDC00FF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

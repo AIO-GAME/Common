@@ -58,7 +58,7 @@ public partial class AHelper
         /// <summary>
         /// 反序列化
         /// </summary>
-        public static T Deserialize<T>(in string data)
+        public static T Deserialize<T>(in string data) 
         {
             return MiniJSON.Decode<T>(data);
         }

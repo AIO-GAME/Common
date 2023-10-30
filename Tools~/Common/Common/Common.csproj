@@ -175,6 +175,7 @@
     <Compile Include="Plugins\Microsoft\System.Runtime.CompilerService\IsReadOnlyAttribute.cs" />
     <Compile Include="Plugins\Microsoft\System.Runtime.CompilerService\NullableAttribute.cs" />
     <Compile Include="Plugins\Microsoft\System.Runtime.CompilerService\NullableContextAttribute.cs" />
+    <Compile Include="Plugins\MiniJSON\Json.cs" />
     <Compile Include="Plugins\MiniJSON\MiniJSON.cs" />
     <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\AnchorAlias.cs" />
     <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\Comment.cs" />

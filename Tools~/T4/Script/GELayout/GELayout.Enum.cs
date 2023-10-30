@@ -138,7 +138,7 @@ namespace AIO
         }
 
         [FuncParam(Group = "Enum", IsArray = true)]
-        private static IEnumerable<FunctionChunk> GetEnumMaskField2020_OR_LOWER()
+        private static IEnumerable<FunctionChunk> GetEnumMaskField2019_OR_LOWER()
         {
             var chunks = new List<FunctionChunk>();
             var value = new FunctionParam("T", "value", "value") { Comments = "枚举值" };
@@ -160,7 +160,7 @@ namespace AIO
                         Comments = $"绘制 枚举菜单",
                         Name = "EnumMask",
                         Params = param,
-                        MacroDefinition = "!UNITY_2020_1_OR_NEWER",
+                        MacroDefinition = "!UNITY_2019_1_OR_NEWER",
                         Generics = new Dictionary<string, string> { { "T", "Enum" } },
                         ReturnType = "T",
                     };
