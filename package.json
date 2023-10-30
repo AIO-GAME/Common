@@ -2,7 +2,7 @@
   "name": "com.aio.package",
   "displayName": "AIO Unity Common",
   "description": "AIO Unity Common",
-  "version": "1.0.12-preview",
+  "version": "1.0.13-preview",
   "unity": "2019.1",
   "unityRelease": "0f1",
   "dependencies": {},
@@ -19,5 +19,8 @@
     "name": "AIO-GAME",
     "email": "xinansky99@foxmail.com",
     "url": "https://github.com/AIO-GAME"
+  },
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.0.2"
   }
 }
