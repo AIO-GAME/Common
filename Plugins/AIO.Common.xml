@@ -4,44 +4,6 @@
         <name>AIO.Common</name>
     </assembly>
     <members>
-        <member name="F:AIO.MiniJSON.lastErrorIndex">
-            <summary>
-            On decoding, this value holds the position at which the parse failed (-1 = no error).
-            </summary>
-        </member>
-        <member name="M:AIO.MiniJSON.Decode(System.String)">
-            <summary>
-            Parses the string json into a value
-            </summary>
-            <param name="json">A JSON string.</param>
-            <returns>An ArrayList, a Hashtable, a double, a string, null, true, or false</returns>
-        </member>
-        <member name="M:AIO.MiniJSON.Encode(System.Object)">
-            <summary>
-            Converts a Hashtable / ArrayList / Dictionary(string,string) object into a JSON string
-            </summary>
-            <param name="json">A Hashtable / ArrayList</param>
-            <returns>A JSON encoded string, or null if object 'json' is not serializable</returns>
-        </member>
-        <member name="M:AIO.MiniJSON.LastDecodeSuccessful">
-            <summary>
-            On decoding, this function returns the position at which the parse failed (-1 = no error).
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.MiniJSON.GetLastErrorIndex">
-            <summary>
-            On decoding, this function returns the position at which the parse failed (-1 = no error).
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.MiniJSON.GetLastErrorSnippet">
-            <summary>
-            If a decoding error occurred, this function returns a piece of the JSON string
-            at which the error took place. To ease debugging.
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:AIO.LruCache">
             <summary>
             LRU 缓存淘汰算法 (Least Recently Used)
@@ -9572,39 +9534,6 @@
             </summary>
             <returns>fileid</returns>
         </member>
-        <member name="T:AHelper.Json">
-            <summary>
-            Json 工具类
-            </summary>
-            <see>
-                <cref>https://www.newtonsoft.com/json/help/html/N_Newtonsoft_Json.htm</cref>
-            </see>
-        </member>
-        <member name="M:AHelper.Json.Serialize(System.Object@)">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Serialize``1(``0@)">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.ToHashTable(System.String@)">
-            <summary>
-            反序列化 HashTable
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Deserialize(System.String@)">
-            <summary>
-            反序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Deserialize``1(System.String@)">
-            <summary>
-            反序列化
-            </summary>
-        </member>
         <member name="T:AHelper.Reflect">
             <summary>
             反射工具库
@@ -9755,6 +9684,91 @@
         <member name="M:AHelper.HashTable.Create(System.Collections.Generic.IDictionary{System.Object,System.Object})">
             <summary>
             创建
+            </summary>
+        </member>
+        <member name="T:AHelper.Json">
+            <summary>
+            Json 工具类
+            </summary>
+        </member>
+        <member name="P:AHelper.Json.JSONNormalSettings">
+            <summary>
+            Json默认设置
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Serialize(System.Object@)">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Serialize(System.Object@,Newtonsoft.Json.JsonSerializerSettings@)">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Serialize``1(``0@,Newtonsoft.Json.JsonSerializerSettings@)">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Serialize``1(``0@)">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.ToHashTable(System.String@)">
+            <summary>
+            反序列化 HashTable
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Deserialize(System.String@,Newtonsoft.Json.JsonSerializerSettings@)">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Deserialize(System.String@)">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Deserialize``1(System.String@,Newtonsoft.Json.JsonSerializerSettings@)">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Deserialize``1(System.String@)">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Deserialize(System.String@,System.Type@,Newtonsoft.Json.JsonSerializerSettings@)">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Deserialize(System.String@,System.Type@)">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.PopulateObject``1(System.String,``0,Newtonsoft.Json.JsonSerializerSettings@)">
+            <summary>
+            反序列化 填充对象
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.PopulateObject``1(System.String,``0)">
+            <summary>
+            反序列化 填充对象
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.PopulateObject(System.String,System.Object,Newtonsoft.Json.JsonSerializerSettings@)">
+            <summary>
+            反序列化 填充对象
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.PopulateObject(System.String,System.Object)">
+            <summary>
+            反序列化 填充对象
             </summary>
         </member>
         <member name="T:AHelper.Sort">

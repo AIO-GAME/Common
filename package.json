@@ -19,5 +19,8 @@
     "name": "AIO-GAME",
     "email": "xinansky99@foxmail.com",
     "url": "https://github.com/AIO-GAME"
+  },
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.0.2"
   }
 }
