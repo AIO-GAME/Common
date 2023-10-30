@@ -369,6 +369,7 @@ namespace AIO.UEditor
 
 #elif UNITY_EDITOR_OSX
             // 在OSX上获取符号链接的真实路径
+            return path;
 #else
             return path;
 #endif
