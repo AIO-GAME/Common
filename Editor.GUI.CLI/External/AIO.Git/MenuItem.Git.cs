@@ -69,14 +69,16 @@ namespace AIO.UEditor
                 Directory.Delete(OutPath, true);
             }
 
-            Helper.AssetDatabase.Refresh();
-            Helper.AssetDatabase.RefreshSettings();
+            AssetDatabase.Refresh();
+#if UNITY_2020_1_OR_NEWER
+            AssetDatabase.RefreshSettings();
+#endif
 
             var RefreshSettings = typeof(AssetDatabase).GetMethod("RefreshSettings",
                 BindingFlags.Static | BindingFlags.Public);
             if (RefreshSettings != null) RefreshSettings.Invoke(null, null);
 
-            Helper.CompilationPipeline.RequestScriptCompilation();
+            CompilationPipeline.RequestScriptCompilation();
         }
 
         private static string GetOutPath()
