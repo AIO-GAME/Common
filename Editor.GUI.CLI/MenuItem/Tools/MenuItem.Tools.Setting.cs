@@ -30,7 +30,7 @@ namespace AIO.UEditor
         }
 
         [MenuItem("AIO/Tools/Setting/Icon/App/IOS")]
-        public static void SetAppIconsiOS()
+        public static void SetAppIconiOS()
         {
             SetIcons("APP", BuildTargetGroup.iOS);
         }

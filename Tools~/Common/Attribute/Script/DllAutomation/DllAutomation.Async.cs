@@ -1,5 +1,5 @@
 ﻿
-#if NO_UNITY
+#if !NO_UNITY
 
 
 using System;
