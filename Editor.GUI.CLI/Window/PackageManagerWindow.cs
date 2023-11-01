@@ -71,7 +71,7 @@ namespace AIO.UEditor
             Package.Names = new List<string>();
         }
 
-        protected override void OnGUI()
+        protected override void OnDraw()
         {
             EditorGUILayout.LabelField("Git安装包管理", new GUIStyle("PreLabel"));
             EditorGUILayout.Space();

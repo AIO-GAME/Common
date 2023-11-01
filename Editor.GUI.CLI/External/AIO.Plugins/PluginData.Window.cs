@@ -313,7 +313,7 @@ namespace AIO
                 UpdateData();
             }
 
-            protected override void OnGUI()
+            protected override void OnDraw()
             {
                 EditorGUILayout.LabelField(new GUIContent("插件安装管理"), "PreLabel");
                 HeaderView();

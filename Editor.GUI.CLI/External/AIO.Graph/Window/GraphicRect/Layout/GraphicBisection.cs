@@ -20,6 +20,10 @@ namespace AIO.UEditor
 
         private Rect SplitRect;
 
+        public GUIStyle RightStyle { get; set; }
+
+        public GUIStyle LeftStyle { get; set; }
+
         public uint RightMinWidth { get; set; }
         public uint LeftMinWidth { get; set; }
         public uint SplitWidth { get; set; } = 20;
@@ -49,14 +53,14 @@ namespace AIO.UEditor
             RightRect.x = SplitRect.x + SplitWidth;
             RightRect.width = RectData.width - RightRect.x - 10;
 
-            using (new GUILayout.AreaScope(RectData, ""))
+            using (new GUILayout.AreaScope(RectData))
             {
-                using (new GUILayout.AreaScope(LeftRect, "", GEStyle.TEBoxBackground))
+                using (new GUILayout.AreaScope(LeftRect, "", RightStyle ?? GEStyle.TEBoxBackground))
                 {
                     LeftPosition = GELayout.VScrollView(() => { OnDrawLeft(LeftRect); }, LeftPosition, false, false);
                 }
 
-                using (new GUILayout.AreaScope(RightRect, "", GEStyle.TEBoxBackground))
+                using (new GUILayout.AreaScope(RightRect, "", LeftStyle ?? GEStyle.TEBoxBackground))
                 {
                     RightPosition =
                         GELayout.VScrollView(() => { OnDrawRight(RightRect); }, RightPosition, false, false);

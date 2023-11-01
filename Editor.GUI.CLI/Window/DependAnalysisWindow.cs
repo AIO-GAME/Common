@@ -26,15 +26,16 @@ namespace AIO.UEditor
             targetObjects = Selection.GetFiltered<Object>(SelectionMode.Assets);
             targetCount = targetObjects?.Length ?? 0;
             if (targetCount == 0) return;
-            
+
             beDependArr = new Object[targetCount][];
             foldoutArr = new bool[targetCount];
             for (var i = 0; i < targetCount; i++) beDependArr[i] = GetBeDepend(targetObjects[i]);
             EditorStyles.foldout.richText = true;
         }
 
-        protected override void OnGUI()
+        protected override void OnDraw()
         {
+            if (beDependArr == null) return;
             if (beDependArr.Length != targetCount) return;
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
             for (int i = 0, count = 0; i < targetCount; i++)
@@ -82,7 +83,8 @@ namespace AIO.UEditor
             if (string.IsNullOrEmpty(path)) return null;
             var guid = AssetDatabase.AssetPathToGUID(path);
             var files = Directory.GetFiles(Application.dataPath, "*",
-                SearchOption.AllDirectories).Where(s => withoutExtensions.Contains(Path.GetExtension(s).ToLower())).ToArray();
+                    SearchOption.AllDirectories).Where(s => withoutExtensions.Contains(Path.GetExtension(s).ToLower()))
+                .ToArray();
             var objects = new List<Object>();
             foreach (var file in files)
             {

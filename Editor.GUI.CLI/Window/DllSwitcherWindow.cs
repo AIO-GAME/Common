@@ -57,7 +57,7 @@ namespace AIO.UEditor
 
         private DirectoryType resDirectory;
 
-        protected override void OnGUI()
+        protected override void OnDraw()
         {
             //IL_0006: Unknown result type (might be due to invalid IL or missing references)
             //IL_00b2: Unknown result type (might be due to invalid IL or missing references)

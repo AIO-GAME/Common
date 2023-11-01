@@ -82,7 +82,7 @@ namespace AIO.UEditor
             EHelper.Symbols.AddScriptingDefine(value);
         }
 
-        protected override void OnGUI()
+        protected override void OnDraw()
         {
             GELayout.VHorizontal(() =>
             {

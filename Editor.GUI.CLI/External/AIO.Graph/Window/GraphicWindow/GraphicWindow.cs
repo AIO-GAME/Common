@@ -16,7 +16,7 @@ namespace AIO.UEditor
     /// <summary>
     /// 图形窗口
     /// </summary>
-    public abstract partial class GraphicWindow : EmptyGraphWindow, IGraphEvent
+    public abstract partial class GraphicWindow : EmptyGraphWindow, IGraphRect
     {
         /// <summary>
         /// 组名 编写额外的窗口
@@ -89,6 +89,11 @@ namespace AIO.UEditor
 
         #region sealed
 
+        protected sealed override void OnGUI()
+        {
+            Draw();
+        }
+
         /// <inheritdoc />
         protected sealed override void OnEnable()
         {
@@ -97,8 +102,8 @@ namespace AIO.UEditor
 #endif
             {
                 position = new Rect(new Vector2(
-                        Screen.currentResolution.width * 0.5f - minSize.x / 2,
-                        Screen.currentResolution.height * 0.5f - minSize.y / 2),
+                        (Screen.currentResolution.width - minSize.x) / 2,
+                        (Screen.currentResolution.height - minSize.y) / 2),
                     minSize);
             }
 
@@ -159,6 +164,28 @@ namespace AIO.UEditor
         /// </summary>
         protected virtual void OnGUIStyle()
         {
+        }
+
+        public Rect RectData => position;
+
+        public Rect Center => new Rect(position.size / 2, position.size);
+
+        public void Draw()
+        {
+            OnDraw();
+        }
+
+        protected virtual void OnDraw()
+        {
+        }
+
+        public void Clear()
+        {
+        }
+
+        void IGraphRect.OnAwake()
+        {
+            OnAwake();
         }
 
         /// <summary>
@@ -494,6 +521,11 @@ namespace AIO.UEditor
             SettingsScope scope = SettingsScope.User)
         {
             return new GraphicSettingsProvider($"AIO/{path}", scope);
+        }
+
+        public void Dispose()
+        {
+            OnDispose();
         }
     }
 }

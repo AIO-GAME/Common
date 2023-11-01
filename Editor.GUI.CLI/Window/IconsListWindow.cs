@@ -189,7 +189,7 @@ namespace AIO.UEditor
             }
         }
 
-        protected override void OnGUI()
+        protected override void OnDraw()
         {
             var ppp = EditorGUIUtility.pixelsPerPoint;
             if (!isWide) SearchGUI();

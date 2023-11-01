@@ -52,7 +52,7 @@ namespace AIO.UEditor
         }
 
 
-        protected override void OnGUI()
+        protected override void OnDraw()
         {
             if (Label == null) Label = new GUIStyle("SearchTextField");
             if (Content == null) Content = new GUIStyle("DD HeaderStyle");
