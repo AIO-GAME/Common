@@ -14,7 +14,7 @@ public partial class AHelper
     /// <summary>
     /// 16进制操作类
     /// </summary>
-    public static class Hex
+    public class Hex
     {
         /// <summary>
         /// 16进制位控制符
@@ -31,7 +31,7 @@ public partial class AHelper
         /// </summary>
         public static readonly char[] HEX_DIGIT =
         {
-                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
         };
 
         /// <summary>
@@ -39,7 +39,7 @@ public partial class AHelper
         /// </summary>
         public static readonly char[] HEX_DIGIT_LOWER =
         {
-                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
         };
 
         /// <summary>

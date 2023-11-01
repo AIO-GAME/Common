@@ -8292,6 +8292,722 @@
             Unity Shader
             </summary>
         </member>
+        <member name="T:AIO.Unit">
+            <summary>
+            单位
+            </summary>
+        </member>
+        <member name="T:AIO.Unit.Char">
+            <summary>
+            只读变量
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.C0">
+            <summary>
+            0的字符
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.BEL">
+            <summary>
+            响铃
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.BackSpace">
+            <summary>
+            回格
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.TabH">
+            <summary>
+            tab(水平制表符)
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.NewLine">
+            <summary>
+            换行
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.TabV">
+            <summary>
+            tab(垂直制表符)
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.Page">
+            <summary>
+            换页
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.EnterNewLine">
+            <summary>
+            回车 chr(13) &amp; chr(10) 回车和换行的组合
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.End">
+            <summary>
+            结束 End
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.PauseBreak">
+            <summary>
+            脱离 Pause Break
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.Space">
+            <summary>
+            空格
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.Exclamation">
+            <summary>
+            !
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.DoubleQuote">
+            <summary>
+            "
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.Pound">
+            <summary>
+            #
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.USD">
+            <summary>
+            $
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.Modulus">
+            <summary>
+            -%
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.AND">
+            <summary>
+            -&amp;
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.SingleQuote">
+            <summary>
+            -’
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.LeftBracket">
+            <summary>
+            -(
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.RightBracket">
+            <summary>
+            -)
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.Asterisk">
+            <summary>
+            *
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.ADD">
+            <summary>
+            +
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.Comma">
+            <summary>
+            ,
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.SUB">
+            <summary>
+            -
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.Point">
+            <summary>
+            .
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.Slash">
+            <summary>
+            /
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.N0">
+            <summary>
+            0
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.N1">
+            <summary>
+            1
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.N2">
+            <summary>
+            2
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.N3">
+            <summary>
+            3
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.N4">
+            <summary>
+            4
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.N5">
+            <summary>
+            5
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.N6">
+            <summary>
+            6
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.N7">
+            <summary>
+            7
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.N8">
+            <summary>
+            8
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.N9">
+            <summary>
+            9
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.Number">
+            <summary>
+            数字
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.Colon">
+            <summary>
+            :
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.Semicolon">
+            <summary>
+            ;
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.LessThanSign">
+            <summary>
+            &lt;
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.Equality">
+            <summary>
+            61 =
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.EA">
+            62 >　
+            63 ?
+            64 @
+            <summary>
+            65 A
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.EZ">
+            66 B
+            67 C
+            68 D
+            69 E
+            70 F
+            71 G
+            72 H
+            73 I
+            74 J
+            75 K
+            76 L
+            77 M
+            78 N
+            79 O
+            80 P
+            81 Q
+            82 R
+            83 S
+            84 T
+            85 U
+            86 V
+            87 W
+            88 X
+            89 Y
+            <summary>
+            90 Z
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.EAlphaBet">
+            <summary>
+            大写A-大写Z
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.UnderLine">
+            91 [
+            92 /　
+            92 /
+            93]
+            94 ^
+            <summary>
+            95 _
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.ea">
+            96 `
+            <summary>
+            97 a
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.ez">
+            98 b
+            99 c
+            100 d
+            101 e
+            102 f
+            103 g
+            104 h
+            105 i
+            106 j
+            107 k
+            108 l
+            109 m
+            110 n
+            111 o
+            112 p
+            113 q
+            114 r
+            115 s
+            116 t
+            117 u
+            118 v
+            119 w
+            120 x
+            121 y
+            <summary>
+            122 z
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Char.eAlphaBet">
+            <summary>
+            小写e-小写z
+            </summary>
+        </member>
+        <member name="T:AIO.Unit.Chinese">
+            <summary>
+            中文单位
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Chinese.CNSNum">
+            <summary>
+            数字单位:个数组
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Chinese.CNSDigit">
+            <summary>
+            数字单位:位数组
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Chinese.CNSUnits">
+            <summary>
+            数字单位:单位数组
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Chinese.NumberChar">
+            <summary>
+            数字字符串
+            </summary>
+        </member>
+        <member name="T:AIO.Unit.Color">
+            <summary>
+            颜色库
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Write">
+            <summary> 白色 1 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Red">
+            <summary> 红色 5 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Green">
+            <summary> 绿色 3 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Blue">
+            <summary> 蓝色 4 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Peony">
+            <summary> 牡丹红 5 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Cyan">
+            <summary> 青色 6 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Yellow">
+            <summary> 黄色 7 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Black">
+            <summary> 黑色 8 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Gary">
+            <summary> 灰色 41 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.SeaBlue">
+            <summary> 海蓝 9 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Orange">
+            <summary> 橙色 81 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Chocolate">
+            <summary> 巧克力色 10 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.BluishViolet">
+            <summary> 蓝紫色 11 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Brassiness">
+            <summary> 黄铜色 12 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.BrightGold">
+            <summary> 亮金色 13 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Brown">
+            <summary> 棕色 14 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Aeneous1">
+            <summary> 青铜色1 15 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Aeneous2">
+            <summary> 青铜色2 16 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Bluewore">
+            <summary> 士官服蓝色 17 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Coppercold">
+            <summary> 冷铜色 18 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Coppery">
+            <summary> 铜色 19 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Redcoral">
+            <summary> 珊瑚红 20 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Hyacinthine">
+            <summary> 紫蓝色 21 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Copperdeep">
+            <summary> 深铜 22 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Greendeep">
+            <summary> 深绿 23 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Darkcoppergreen">
+            <summary> 深铜绿色 24 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Darkolivegreen">
+            <summary> 深橄榄绿 25 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Bluedeep">
+            <summary> 深蓝花色 26 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Modena">
+            <summary> 深紫色 27 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.BlueSLATEdeep">
+            <summary> 深石板蓝 28 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Slabsdeep">
+            <summary> 深铅灰色 29 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Browndark">
+            <summary> 深棕褐色 30 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Turquoisedeep">
+            <summary> 深绿松石色 32 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Colordark">
+            <summary> 暗木色 33 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Greylight">
+            <summary> 淡灰色 34 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Redearthgreyrose">
+            <summary> 土灰玫瑰红色 35 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Longstone">
+            <summary> 长石色 36 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Firebrick">
+            <summary> 火砖色 37 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Greenforest">
+            <summary> 森林绿 38 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Golden">
+            <summary> 金色 39 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Foresythia">
+            <summary> 鲜黄色 40 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Aerugo">
+            <summary> 铜绿色 42 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Yellowbluish">
+            <summary> 青黄色 43 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Greenhunter">
+            <summary> 猎人绿 44 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Redindian">
+            <summary> 印度红 45 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Yellowearthy">
+            <summary> 土黄色 46 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Wathet">
+            <summary> 浅蓝色 47 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Greyfrench">
+            <summary> 浅灰色 48 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Bluelightsteel">
+            <summary> 浅钢蓝色 49 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Colorlight">
+            <summary> 浅木色 59 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Greenlime">
+            <summary> 石灰绿色 60 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Bisque">
+            <summary> 桔黄色 61 </summary>
+        </member>
+        <member name="F:AIO.Unit.Color.Maroon">
+            <summary> 褐红色 62 </summary> 62
+        </member>
+        <member name="T:AIO.Unit.Suffix">
+            <summary>
+            后缀
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Suffix.TextureSuffix">
+            <summary>
+            图片文件后缀
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Suffix.VideoSuffix">
+            <summary>
+            视频文件后缀
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Suffix.SoundSuffix">
+            <summary>
+            音频文件后缀
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Suffix.TextSuffix">
+            <summary>
+            文本文件后缀
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Suffix.ShaderSuffix">
+            <summary>
+            shader文件后缀
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Suffix.FontSuffix">
+            <summary>
+            字体后缀
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Suffix.Animation">
+            <summary>
+            动画文件后缀
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Suffix.Animator">
+            <summary>
+            控制器文件后缀
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Suffix.Material">
+            <summary>
+            材质文件后缀
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Suffix.PrefabSuffix">
+            <summary>
+            预制体文件后缀
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Suffix.RTextureSuffix">
+            <summary>
+            渲染纹理后缀
+            </summary>
+        </member>
+        <member name="T:AIO.Unit.Time">
+            <summary>
+            时间
+            </summary>
+        </member>
+        <member name="T:AIO.Unit.Time.SencondUnit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.SencondUnit.SECOND">
+            <summary> 秒 </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.SencondUnit.MILLISCOND">
+            <summary> 毫秒 </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.SencondUnit.MICROSECOND">
+            <summary> 微秒 </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.SencondUnit.NANOSECOND">
+            <summary> 纳秒 </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.SencondUnit.NANOSECOND_100">
+            <summary> 100纳秒计数单位 </summary>
+        </member>
+        <member name="M:AIO.Unit.Time.GetSencondUnit(AIO.Unit.Time.SencondUnit)">
+            <summary>
+            获取秒 计数单位 秒
+            </summary>
+        </member>
+        <member name="M:AIO.Unit.Time.GetMinUnit(AIO.Unit.Time.SencondUnit)">
+            <summary>
+            获取秒 计数单位 分
+            </summary>
+        </member>
+        <member name="M:AIO.Unit.Time.GetHourUnit(AIO.Unit.Time.SencondUnit)">
+            <summary>
+            获取秒 计数单位 时
+            </summary>
+        </member>
+        <member name="M:AIO.Unit.Time.GetDayUnit(AIO.Unit.Time.SencondUnit)">
+            <summary>
+            获取秒 计数单位 时
+            </summary>
+        </member>
+        <member name="M:AIO.Unit.Time.GetWeekUnit(AIO.Unit.Time.SencondUnit)">
+            <summary>
+            获取秒 计数单位 时
+            </summary>
+        </member>
+        <member name="T:AIO.Unit.Time.DateTimeUnit">
+            <summary>
+            时间间隔
+            </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.DateTimeUnit.Day">
+            <summary> 日 </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.DateTimeUnit.Week">
+            <summary> 周 </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.DateTimeUnit.Month">
+            <summary> 月 </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.DateTimeUnit.Season">
+            <summary> 季 </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.DateTimeUnit.Year">
+            <summary> 年 </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.UNIT_WEEK_DAY">
+            <summary> 一周7天 </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.UNIT_DAY_HOUR">
+            <summary> 一天24时 </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.UNIT_HOUR_MIN">
+            <summary> 一时60分 </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.UNIT_MIN_SECOND">
+            <summary> 一分60秒 </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.SECOND">
+            <summary> 秒 单位时间（秒） s </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.SECOND_MIN">
+            <summary> 分 单位时间（秒） s </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.SECOND_HOUR">
+            <summary> 时 单位时间（秒） s </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.SECOND_DAY">
+            <summary> 日 单位时间（秒） s </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.SECOND_WEEK">
+            <summary> 周 单位时间（秒） s </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.MS_SECOND">
+            <summary> 秒 单位时间（毫秒） ms </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.MS_MIN">
+            <summary> 分 单位时间（毫秒） ms  </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.MS_HOUR">
+            <summary> 时 单位时间（毫秒） ms  </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.MS_DAY">
+            <summary> 日 单位时间（毫秒） ms  </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.MS_WEEK">
+            <summary> 周 单位时间（毫秒） ms  </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.μS_SECOND">
+            <summary> 秒 单位时间（微秒） μs </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.μS_MIN">
+            <summary> 分 单位时间（微秒） μs </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.μS_HOUR">
+            <summary> 时 单位时间（微秒） μs </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.μS_DAY">
+            <summary> 天 单位时间（微秒） μs </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.μS_WEEK">
+            <summary> 周 单位时间（微秒） μs </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.NS_SECOND">
+            <summary> 秒 单位时间（纳秒） ns </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.NS_MIN">
+            <summary> 分 单位时间（纳秒） ns </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.NS_HOUR">
+            <summary> 时 单位时间（纳秒） ns </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.NS_DAY">
+            <summary> 天 单位时间（纳秒） ns </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.NS_WEEK">
+            <summary> 周 单位时间（纳秒） ns </summary>
+        </member>
+        <member name="P:AIO.Unit.Time.Milliseconds">
+            <summary> 1毫秒 </summary>
+        </member>
+        <member name="P:AIO.Unit.Time.Second">
+            <summary> 1秒钟 </summary>
+        </member>
+        <member name="P:AIO.Unit.Time.Minute">
+            <summary> 1分钟 </summary>
+        </member>
+        <member name="P:AIO.Unit.Time.Hour">
+            <summary> 1小时 </summary>
+        </member>
+        <member name="P:AIO.Unit.Time.Day">
+            <summary> 1天 </summary>
+        </member>
+        <member name="F:AIO.Unit.Time.GREENWICH">
+            <summary> 格林威治时间UTC参照点：1970年1月1日0时0分0秒 </summary>
+        </member>
         <member name="T:AIO.AmbiguousOperatorException">
             <summary>
             模棱两可的运算符
@@ -9504,6 +10220,236 @@
             支持的区域性
             </summary>
         </member>
+        <member name="T:AHandle">
+            <summary>
+            处理器帮助类
+            </summary>
+        </member>
+        <member name="T:AHandle.IProgress">
+            <summary>
+            进度处理器
+            </summary>
+        </member>
+        <member name="P:AHandle.IProgress.OnProgress">
+            <summary>
+            进度回调
+            </summary>
+        </member>
+        <member name="P:AHandle.IProgress.OnComplete">
+            <summary>
+            完成回调
+            </summary>
+        </member>
+        <member name="P:AHandle.IProgress.OnError">
+            <summary>
+            错误回调
+            </summary>
+        </member>
+        <member name="T:AHandle.Progress">
+            <summary>
+            进度处理器
+            </summary>
+        </member>
+        <member name="P:AHandle.Progress.Current">
+            <summary>
+            当前值
+            </summary>
+        </member>
+        <member name="P:AHandle.Progress.Total">
+            <summary>
+            总值
+            </summary>
+        </member>
+        <member name="P:AHandle.Progress.OnProgress">
+            <summary>
+            进度回调
+            </summary>
+        </member>
+        <member name="P:AHandle.Progress.OnComplete">
+            <summary>
+            完成回调
+            </summary>
+        </member>
+        <member name="P:AHandle.Progress.OnError">
+            <summary>
+            错误回调
+            </summary>
+        </member>
+        <member name="M:AHandle.Progress.#ctor(System.Action{System.Single},System.Action)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="onProgress">进度回调</param>
+            <param name="onComplete">完成回调</param>
+        </member>
+        <member name="M:AHandle.Progress.#ctor(AHandle.IProgress)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AHandle.Progress.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AHandle.Progress.Report(System.Single)">
+            <summary>
+            报告进度
+            </summary>
+            <param name="value">当前值</param>
+        </member>
+        <member name="T:AHandle.FTP">
+            <summary>
+            FTP处理器
+            </summary>
+        </member>
+        <member name="T:AHandle.FTP.ListType">
+            <summary>
+            获取列表类型
+            </summary>
+        </member>
+        <member name="F:AHandle.FTP.ListType.File">
+            <summary>
+            文件
+            </summary>
+        </member>
+        <member name="F:AHandle.FTP.ListType.Folder">
+            <summary>
+            文件夹
+            </summary>
+        </member>
+        <member name="F:AHandle.FTP.ListType.ALL">
+            <summary>
+            文件和文件夹
+            </summary>
+        </member>
+        <member name="P:AHandle.FTP.URI">
+            <summary>
+            指定FTP连接成功后的当前目录, 如果不指定即默认为根目录
+            </summary>
+        </member>
+        <member name="P:AHandle.FTP.ServerIP">
+            <summary>
+            FTP服务器IP地址
+            </summary>
+        </member>
+        <member name="P:AHandle.FTP.UserName">
+            <summary>
+            FTP用户名
+            </summary>
+        </member>
+        <member name="P:AHandle.FTP.Password">
+            <summary>
+            FTP密码
+            </summary>
+        </member>
+        <member name="P:AHandle.FTP.RemotePath">
+            <summary>
+            FTP服务器上的目录
+            </summary>
+        </member>
+        <member name="P:AHandle.FTP.TimeOut">
+            <summary>
+            超时时间
+            </summary>
+        </member>
+        <member name="P:AHandle.FTP.BufferSize">
+            <summary>
+            缓存大小
+            </summary>
+        </member>
+        <member name="M:AHandle.FTP.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="serverIP">服务器IP</param>
+            <param name="userName">用户名</param>
+            <param name="password">密码</param>
+            <param name="remotePath">远端默认跟文件夹</param>
+        </member>
+        <member name="M:AHandle.FTP.Move(System.String,System.String)">
+            <summary>
+            移动文件
+            </summary>
+            <param name="currentRemotePath">当前远端路径</param>
+            <param name="newRemoteName">新远端路径</param>
+        </member>
+        <member name="M:AHandle.FTP.DeleteFile(System.String)">
+            <summary>
+            删除文件
+            </summary>
+            <param name="remoteFilePath">远端文件路径</param>
+        </member>
+        <member name="M:AHandle.FTP.DeleteFolder(System.String)">
+            <summary>
+            删除文件夹
+            </summary>
+            <param name="remoteDirPath">远端文件夹路径</param>
+        </member>
+        <member name="M:AHandle.FTP.CreateFolder(System.String)">
+            <summary>
+            创建文件夹
+            </summary>
+            <param name="remoteDirPath">远端文件夹路径</param>
+        </member>
+        <member name="M:AHandle.FTP.UploadFile(System.String,System.String,AHandle.IProgress)">
+            <summary>
+            上传文件
+            </summary>
+            <param name="localPath">本地文件</param>
+            <param name="remotePath">远端路径</param>
+            <param name="progress">回调</param>
+        </member>
+        <member name="M:AHandle.FTP.UploadFolder(System.String,System.String,AHandle.IProgress,System.IO.SearchOption,System.String)">
+            <summary>
+            上传文件
+            </summary>
+            <param name="localPath">本地文件</param>
+            <param name="remotePath">远端路径</param>
+            <param name="progress">回调</param>
+            <param name="searchPattern">搜索字段</param>
+            <param name="searchOption">搜索模式</param>
+        </member>
+        <member name="M:AHandle.FTP.DownloadFile(System.String,System.String,AHandle.IProgress,System.Boolean)">
+            <summary>
+            下载文件
+            </summary>
+            <param name="localPath">本地文件</param>
+            <param name="remotePath">远端路径</param>
+            <param name="progress">回调</param>
+            <param name="isOverWrite">是否重写</param>
+        </member>
+        <member name="M:AHandle.FTP.DownloadFolder(System.String,System.String,AHandle.IProgress,AHandle.FTP.ListType,System.String,System.Boolean)">
+            <summary>
+            下载文件
+            </summary>
+            <param name="localPath">本地文件</param>
+            <param name="remotePath">远端路径</param>
+            <param name="progress">回调</param>
+            <param name="searchPattern">搜索字段</param>
+            <param name="searchOption">搜索模式</param>
+            <param name="isOverWrite">是否重写</param>
+        </member>
+        <member name="M:AHandle.FTP.GetFileSize(System.String)">
+            <summary>
+            获取文件大小
+            </summary>
+            <param name="remotePath"></param>
+            <returns>文件大小</returns>
+        </member>
+        <member name="M:AHandle.FTP.GetList(AHandle.FTP.ListType,System.Boolean,System.String)">
+            <summary>
+            获取文件或文件夹列表
+            </summary>
+            <param name="type">获取列表类型</param>
+            <param name="detail">是否获取详细信息</param>
+            <param name="keyword">获取指定文件夹 空时获取全部 当获取类型为全部时 则不生效</param>
+            <returns>文件列表</returns>
+        </member>
+        <member name="M:AHandle.FTP.Check">
+            <summary>
+            获取文件或文件夹列表
+            </summary>
+            <returns>Ture:有效 False:无效</returns>
+        </member>
         <member name="T:AHelper">
             <summary>
             Utils 工具库
@@ -9533,6 +10479,188 @@
             计算类型的 FileID
             </summary>
             <returns>fileid</returns>
+        </member>
+        <member name="T:AHelper.Net">
+            <summary>
+            网络 工具类
+            </summary>
+            <summary>
+            Http 工具类
+            </summary>
+        </member>
+        <member name="M:AHelper.Net.FTPCheck(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            判断FTP连接
+            </summary>
+            <param name="uri">路径</param>
+            <param name="username">用户名</param>
+            <param name="password">密码</param>
+            <param name="timeout">超时</param>
+            <returns>Ture:有效 False:无效</returns>
+        </member>
+        <member name="M:AHelper.Net.FTPCheckAsync(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            判断FTP连接
+            </summary>
+            <param name="uri">路径</param>
+            <param name="username">用户名</param>
+            <param name="password">密码</param>
+            <param name="timeout">超时</param>
+            <returns>Ture:有效 False:无效</returns>
+        </member>
+        <member name="M:AHelper.Net.FTPCreateDir(System.String,System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            创建文件夹
+            </summary>
+            <param name="uri">路径</param>
+            <param name="username">用户名</param>
+            <param name="password">密码</param>
+            <param name="timeout">超时</param>
+            <param name="dirName">文件夹路径</param>
+        </member>
+        <member name="M:AHelper.Net.Move(System.String,System.String,System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            移动文件
+            </summary>
+            <param name="uri">路径</param>
+            <param name="username">用户名</param>
+            <param name="password">密码</param>
+            <param name="currentName">当前名称</param>
+            <param name="newName">新名称</param>
+            <param name="timeout">超时</param>
+        </member>
+        <member name="M:AHelper.Net.FTPReName(System.String,System.String,System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            重命名文件夹
+            </summary>
+            <param name="uri">路径</param>
+            <param name="username">用户名</param>
+            <param name="password">密码</param>
+            <param name="currentName">当前名称</param>
+            <param name="newName">新名称</param>
+        </member>
+        <member name="M:AHelper.Net.FTPDeleteFile(System.String,System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            FTP指定删除文件
+            </summary>
+            <param name="uri">网址</param>
+            <param name="username">账号</param>
+            <param name="password">密码</param>
+            <param name="filePath">文件路径</param>
+            <param name="timeout">超时</param>
+            <exception cref="T:System.Exception">异常信息</exception>
+            <returns>删除返回信息</returns>
+        </member>
+        <member name="M:AHelper.Net.FTPRemoveFolder(System.String,System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            FTP指定删除文件
+            </summary>
+            <param name="uri">网址</param>
+            <param name="username">账号</param>
+            <param name="password">密码</param>
+            <param name="dirPath">文件夹路径</param>
+            <param name="timeout">超时</param>
+            <exception cref="T:System.Exception">异常信息</exception>
+            <returns>删除返回信息</returns>
+        </member>
+        <member name="M:AHelper.Net.FTPDownloadFile(System.String,System.String,System.String,System.String,System.String,AHandle.IProgress,System.Boolean,System.UInt16,System.Int32)">
+            <summary>
+            FTP下载文件
+            </summary>
+            <param name="uri">路径</param>
+            <param name="username">用户名</param>
+            <param name="password">密码</param>
+            <param name="localPath">本地文件路径</param>
+            <param name="remotePath">上传路径</param>
+            <param name="iprogress">回调</param>
+            <param name="isOverWrite">是否覆盖</param>
+            <param name="timeout">超时</param>
+            <param name="bufferSize">下载缓存大小</param>
+        </member>
+        <member name="M:AHelper.Net.FTPDownloadFolder(System.String,System.String,System.String,System.String,System.String,AHandle.IProgress,AHandle.FTP.ListType,System.String,System.Boolean,System.UInt16,System.Int32)">
+            <summary>
+            FTP下载文件夹
+            </summary>
+            <param name="uri">路径</param>
+            <param name="username">用户名</param>
+            <param name="password">密码</param>
+            <param name="localPath">本地文件路径</param>
+            <param name="remotePath">上传路径</param>
+            <param name="iprogress">回调</param>
+            <param name="searchPattern">搜索过滤</param>
+            <param name="searchOption">搜索模式</param>
+            <param name="isOverWrite">是否覆盖</param>
+            <param name="timeout">超时</param>
+            <param name="bufferSize">下载缓存大小</param>
+        </member>
+        <member name="M:AHelper.Net.FTPGetFileSize(System.String,System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            获取FTP文件大小
+            </summary>
+            <param name="uri">路径</param>
+            <param name="username">用户名</param>
+            <param name="password">密码</param>
+            <param name="remotePath">目标文件路径</param>
+            <param name="timeout">超时</param>
+            <returns>大小</returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:AHelper.Net.FTPGetRemoteList(System.String,System.String,System.String,AHandle.FTP.ListType,System.Boolean,System.String,System.UInt16)">
+            <summary>
+            获取文件或文件夹列表
+            </summary>
+            <param name="uri">路径</param>
+            <param name="username">用户名</param>
+            <param name="password">密码</param>
+            <param name="type">
+            1:获取文件列表
+            2:获取文件夹列表
+            3:获取文件和文件夹列表
+            </param>
+            <param name="detail">
+            获取文件或文件夹详细信息
+            </param>
+            <param name="keyword">
+            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
+            若listType=FileAndFolder，则该参数无效
+            </param>
+            <param name="timeout">超时</param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:AHelper.Net.FTPUploadFile(System.String,System.String,System.String,System.String,System.String,AHandle.IProgress,System.UInt16,System.Int32)">
+            <summary>
+            FTP上传文件
+            </summary>
+            <param name="uri">路径</param>
+            <param name="username">用户名</param>
+            <param name="password">密码</param>
+            <param name="localPath">本地文件路径</param>
+            <param name="remotePath">上传路径</param>
+            <param name="iprogress">回调</param>
+            <param name="timeout">超时</param>
+            <param name="buffSize">缓存大小</param>
+        </member>
+        <member name="M:AHelper.Net.FTPUploadFolder(System.String,System.String,System.String,System.String,System.String,AHandle.IProgress,System.IO.SearchOption,System.String,System.UInt16,System.Int32)">
+            <summary>
+            FTP上传文件夹
+            </summary>
+            <param name="uri">路径</param>
+            <param name="username">用户名</param>
+            <param name="password">密码</param>
+            <param name="localPath">本地文件路径</param>
+            <param name="remotePath">上传路径</param>
+            <param name="searchOption">搜索模式</param>
+            <param name="iprogress">进度回调</param>
+            <param name="searchPattern">匹配模式</param>
+            <param name="timeout">超时</param>
+            <param name="buffSize">缓存大小</param>
+        </member>
+        <member name="M:AHelper.Net.UriParamSerialize(System.Object@)">
+            <summary>
+            Model对象转换为uri网址参数形式
+            </summary>
+            <param name="obj">Model对象</param>
         </member>
         <member name="T:AHelper.Reflect">
             <summary>
@@ -12067,42 +13195,42 @@
             获取当前时间 文字格式
             </summary>
         </member>
-        <member name="M:AHelper.Time.GetCurrTime(Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.GetCurrTime(AIO.Unit.Time.SencondUnit@)">
             <summary>
             获取当前时间搓
             </summary>
         </member>
-        <member name="M:AHelper.Time.GetDateTime(System.String@,Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.GetDateTime(System.String@,AIO.Unit.Time.SencondUnit@)">
             <summary>
             获取时间搓
             </summary>
         </member>
-        <member name="M:AHelper.Time.Format(System.Int64@,System.String@,Unit.Time.SencondUnit)">
+        <member name="M:AHelper.Time.Format(System.Int64@,System.String@,AIO.Unit.Time.SencondUnit)">
             <summary>
             格式化时间，参数：格林威治时间，格式化格式（具体见文件末尾）
             </summary>
         </member>
-        <member name="M:AHelper.Time.GetDateTime(System.Int64@,Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.GetDateTime(System.Int64@,AIO.Unit.Time.SencondUnit@)">
             <summary>
             © 获取DateTime 时间磋单位支持 纳秒 微秒 毫秒 秒
             </summary>
         </member>
-        <member name="M:AHelper.Time.GetTimeSpan(System.Int64@,Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.GetTimeSpan(System.Int64@,AIO.Unit.Time.SencondUnit@)">
             <summary>
             © 获取TimeSpan 时间磋单位支持 纳秒 微秒 毫秒 秒
             </summary>
         </member>
-        <member name="M:AHelper.Time.Normalize(System.DateTime@,Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.Normalize(System.DateTime@,AIO.Unit.Time.SencondUnit@)">
             <summary>
             获取指定单位的时间搓
             </summary>
         </member>
-        <member name="M:AHelper.Time.GetCurrDateToDay(System.Int32@,Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.GetCurrDateToDay(System.Int32@,AIO.Unit.Time.SencondUnit@)">
             <summary>
             获取当天差距 时间信息
             </summary>
         </member>
-        <member name="M:AHelper.Time.GetTimeStartByType(System.Int64@,Unit.Time.DateTimeUnit@,Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.GetTimeStartByType(System.Int64@,AIO.Unit.Time.DateTimeUnit@,AIO.Unit.Time.SencondUnit@)">
             <summary>
             获取开始时间
             </summary>
@@ -12110,7 +13238,7 @@
             <param name="DateType">获取类型 年 季 月 周 日</param>
             <param name="unit">时间搓 单位 纳秒 微秒 毫秒 秒</param>
         </member>
-        <member name="M:AHelper.Time.GetTimeEndByType(System.Int64@,Unit.Time.DateTimeUnit@,Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.GetTimeEndByType(System.Int64@,AIO.Unit.Time.DateTimeUnit@,AIO.Unit.Time.SencondUnit@)">
             <summary>
             获取结束时间
             </summary>
@@ -12118,12 +13246,12 @@
             <param name="DateType">获取类型 年 季 月 周 日</param>
             <param name="unit">时间搓 单位 纳秒 微秒 毫秒 秒</param>
         </member>
-        <member name="M:AHelper.Time.GetCountDown(System.Int64@,Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.GetCountDown(System.Int64@,AIO.Unit.Time.SencondUnit@)">
             <summary>
             获取时间倒计时字符串表示(ms) 01:59:08
             </summary>
         </member>
-        <member name="M:AHelper.Time.GetPreHumanityTime(System.Int64,Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.GetPreHumanityTime(System.Int64,AIO.Unit.Time.SencondUnit@)">
             <summary>
             获取传入时间距离当前时间的文字描述
             </summary>
@@ -12133,7 +13261,7 @@
             与当前时间比较 如果小于当前时间为Ture
             </summary>
         </member>
-        <member name="M:AHelper.Time.CompareNowTime(System.Int64@,Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.CompareNowTime(System.Int64@,AIO.Unit.Time.SencondUnit@)">
             <summary>
             与当前时间比较 如果小于当前时间为Ture
             </summary>
@@ -12163,21 +13291,10 @@
             获取两时间相差
             </summary>
         </member>
-        <member name="M:AHelper.Time.IsToday(System.Int64@,System.Int64@,Unit.Time.SencondUnit@)">
+        <member name="M:AHelper.Time.IsToday(System.Int64@,System.Int64@,AIO.Unit.Time.SencondUnit@)">
             <summary>
             判断是否同日
             </summary>
-        </member>
-        <member name="T:AHelper.Http">
-            <summary>
-            Http 工具类
-            </summary>
-        </member>
-        <member name="M:AHelper.Http.UriParamSerialize(System.Object@)">
-            <summary>
-            Model对象转换为uri网址参数形式
-            </summary>
-            <param name="obj">Model对象</param>
         </member>
         <member name="T:AHelper.IDNo">
             <summary>
@@ -13275,12 +14392,12 @@
             获取所有的类
             </summary>
         </member>
-        <member name="M:AHelper.Assembly.GetReferanceAssemblies(System.AppDomain)">
+        <member name="M:AHelper.Assembly.GetReferenceAssemblies(System.AppDomain)">
             <summary>
             获取所有程序集
             </summary>
         </member>
-        <member name="M:AHelper.Assembly.GetAllAssemblieHasAttributeType``1">
+        <member name="M:AHelper.Assembly.GetAllAssembliesHasAttributeType``1">
             <summary>
             获取全部程序集中 包含指定特性的类 输出 key=命名空间加类名 value=类
             </summary>
@@ -13972,722 +15089,6 @@
             <summary>
             释放Stack
             </summary>
-        </member>
-        <member name="T:Unit">
-            <summary>
-            单位
-            </summary>
-        </member>
-        <member name="T:Unit.Char">
-            <summary>
-            只读变量
-            </summary>
-        </member>
-        <member name="F:Unit.Char.C0">
-            <summary>
-            0的字符
-            </summary>
-        </member>
-        <member name="F:Unit.Char.BEL">
-            <summary>
-            响铃
-            </summary>
-        </member>
-        <member name="F:Unit.Char.BackSpace">
-            <summary>
-            回格
-            </summary>
-        </member>
-        <member name="F:Unit.Char.TabH">
-            <summary>
-            tab(水平制表符)
-            </summary>
-        </member>
-        <member name="F:Unit.Char.NewLine">
-            <summary>
-            换行
-            </summary>
-        </member>
-        <member name="F:Unit.Char.TabV">
-            <summary>
-            tab(垂直制表符)
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Page">
-            <summary>
-            换页
-            </summary>
-        </member>
-        <member name="F:Unit.Char.EnterNewLine">
-            <summary>
-            回车 chr(13) &amp; chr(10) 回车和换行的组合
-            </summary>
-        </member>
-        <member name="F:Unit.Char.End">
-            <summary>
-            结束 End
-            </summary>
-        </member>
-        <member name="F:Unit.Char.PauseBreak">
-            <summary>
-            脱离 Pause Break
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Space">
-            <summary>
-            空格
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Exclamation">
-            <summary>
-            !
-            </summary>
-        </member>
-        <member name="F:Unit.Char.DoubleQuote">
-            <summary>
-            "
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Pound">
-            <summary>
-            #
-            </summary>
-        </member>
-        <member name="F:Unit.Char.USD">
-            <summary>
-            $
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Modulus">
-            <summary>
-            -%
-            </summary>
-        </member>
-        <member name="F:Unit.Char.AND">
-            <summary>
-            -&amp;
-            </summary>
-        </member>
-        <member name="F:Unit.Char.SingleQuote">
-            <summary>
-            -’
-            </summary>
-        </member>
-        <member name="F:Unit.Char.LeftBracket">
-            <summary>
-            -(
-            </summary>
-        </member>
-        <member name="F:Unit.Char.RightBracket">
-            <summary>
-            -)
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Asterisk">
-            <summary>
-            *
-            </summary>
-        </member>
-        <member name="F:Unit.Char.ADD">
-            <summary>
-            +
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Comma">
-            <summary>
-            ,
-            </summary>
-        </member>
-        <member name="F:Unit.Char.SUB">
-            <summary>
-            -
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Point">
-            <summary>
-            .
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Slash">
-            <summary>
-            /
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N0">
-            <summary>
-            0
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N1">
-            <summary>
-            1
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N2">
-            <summary>
-            2
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N3">
-            <summary>
-            3
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N4">
-            <summary>
-            4
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N5">
-            <summary>
-            5
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N6">
-            <summary>
-            6
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N7">
-            <summary>
-            7
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N8">
-            <summary>
-            8
-            </summary>
-        </member>
-        <member name="F:Unit.Char.N9">
-            <summary>
-            9
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Number">
-            <summary>
-            数字
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Colon">
-            <summary>
-            :
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Semicolon">
-            <summary>
-            ;
-            </summary>
-        </member>
-        <member name="F:Unit.Char.LessThanSign">
-            <summary>
-            &lt;
-            </summary>
-        </member>
-        <member name="F:Unit.Char.Equality">
-            <summary>
-            61 =
-            </summary>
-        </member>
-        <member name="F:Unit.Char.EA">
-            62 >　
-            63 ?
-            64 @
-            <summary>
-            65 A
-            </summary>
-        </member>
-        <member name="F:Unit.Char.EZ">
-            66 B
-            67 C
-            68 D
-            69 E
-            70 F
-            71 G
-            72 H
-            73 I
-            74 J
-            75 K
-            76 L
-            77 M
-            78 N
-            79 O
-            80 P
-            81 Q
-            82 R
-            83 S
-            84 T
-            85 U
-            86 V
-            87 W
-            88 X
-            89 Y
-            <summary>
-            90 Z
-            </summary>
-        </member>
-        <member name="F:Unit.Char.EAlphaBet">
-            <summary>
-            大写A-大写Z
-            </summary>
-        </member>
-        <member name="F:Unit.Char.UnderLine">
-            91 [
-            92 /　
-            92 /
-            93]
-            94 ^
-            <summary>
-            95 _
-            </summary>
-        </member>
-        <member name="F:Unit.Char.ea">
-            96 `
-            <summary>
-            97 a
-            </summary>
-        </member>
-        <member name="F:Unit.Char.ez">
-            98 b
-            99 c
-            100 d
-            101 e
-            102 f
-            103 g
-            104 h
-            105 i
-            106 j
-            107 k
-            108 l
-            109 m
-            110 n
-            111 o
-            112 p
-            113 q
-            114 r
-            115 s
-            116 t
-            117 u
-            118 v
-            119 w
-            120 x
-            121 y
-            <summary>
-            122 z
-            </summary>
-        </member>
-        <member name="F:Unit.Char.eAlphaBet">
-            <summary>
-            小写e-小写z
-            </summary>
-        </member>
-        <member name="T:Unit.Chinese">
-            <summary>
-            中文单位
-            </summary>
-        </member>
-        <member name="F:Unit.Chinese.CNSNum">
-            <summary>
-            数字单位:个数组
-            </summary>
-        </member>
-        <member name="F:Unit.Chinese.CNSDigit">
-            <summary>
-            数字单位:位数组
-            </summary>
-        </member>
-        <member name="F:Unit.Chinese.CNSUnits">
-            <summary>
-            数字单位:单位数组
-            </summary>
-        </member>
-        <member name="F:Unit.Chinese.NumberChar">
-            <summary>
-            数字字符串
-            </summary>
-        </member>
-        <member name="T:Unit.Color">
-            <summary>
-            颜色库
-            </summary>
-        </member>
-        <member name="F:Unit.Color.Write">
-            <summary> 白色 1 </summary>
-        </member>
-        <member name="F:Unit.Color.Red">
-            <summary> 红色 5 </summary>
-        </member>
-        <member name="F:Unit.Color.Green">
-            <summary> 绿色 3 </summary>
-        </member>
-        <member name="F:Unit.Color.Blue">
-            <summary> 蓝色 4 </summary>
-        </member>
-        <member name="F:Unit.Color.Peony">
-            <summary> 牡丹红 5 </summary>
-        </member>
-        <member name="F:Unit.Color.Cyan">
-            <summary> 青色 6 </summary>
-        </member>
-        <member name="F:Unit.Color.Yellow">
-            <summary> 黄色 7 </summary>
-        </member>
-        <member name="F:Unit.Color.Black">
-            <summary> 黑色 8 </summary>
-        </member>
-        <member name="F:Unit.Color.Gary">
-            <summary> 灰色 41 </summary>
-        </member>
-        <member name="F:Unit.Color.SeaBlue">
-            <summary> 海蓝 9 </summary>
-        </member>
-        <member name="F:Unit.Color.Orange">
-            <summary> 橙色 81 </summary>
-        </member>
-        <member name="F:Unit.Color.Chocolate">
-            <summary> 巧克力色 10 </summary>
-        </member>
-        <member name="F:Unit.Color.BluishViolet">
-            <summary> 蓝紫色 11 </summary>
-        </member>
-        <member name="F:Unit.Color.Brassiness">
-            <summary> 黄铜色 12 </summary>
-        </member>
-        <member name="F:Unit.Color.BrightGold">
-            <summary> 亮金色 13 </summary>
-        </member>
-        <member name="F:Unit.Color.Brown">
-            <summary> 棕色 14 </summary>
-        </member>
-        <member name="F:Unit.Color.Aeneous1">
-            <summary> 青铜色1 15 </summary>
-        </member>
-        <member name="F:Unit.Color.Aeneous2">
-            <summary> 青铜色2 16 </summary>
-        </member>
-        <member name="F:Unit.Color.Bluewore">
-            <summary> 士官服蓝色 17 </summary>
-        </member>
-        <member name="F:Unit.Color.Coppercold">
-            <summary> 冷铜色 18 </summary>
-        </member>
-        <member name="F:Unit.Color.Coppery">
-            <summary> 铜色 19 </summary>
-        </member>
-        <member name="F:Unit.Color.Redcoral">
-            <summary> 珊瑚红 20 </summary>
-        </member>
-        <member name="F:Unit.Color.Hyacinthine">
-            <summary> 紫蓝色 21 </summary>
-        </member>
-        <member name="F:Unit.Color.Copperdeep">
-            <summary> 深铜 22 </summary>
-        </member>
-        <member name="F:Unit.Color.Greendeep">
-            <summary> 深绿 23 </summary>
-        </member>
-        <member name="F:Unit.Color.Darkcoppergreen">
-            <summary> 深铜绿色 24 </summary>
-        </member>
-        <member name="F:Unit.Color.Darkolivegreen">
-            <summary> 深橄榄绿 25 </summary>
-        </member>
-        <member name="F:Unit.Color.Bluedeep">
-            <summary> 深蓝花色 26 </summary>
-        </member>
-        <member name="F:Unit.Color.Modena">
-            <summary> 深紫色 27 </summary>
-        </member>
-        <member name="F:Unit.Color.BlueSLATEdeep">
-            <summary> 深石板蓝 28 </summary>
-        </member>
-        <member name="F:Unit.Color.Slabsdeep">
-            <summary> 深铅灰色 29 </summary>
-        </member>
-        <member name="F:Unit.Color.Browndark">
-            <summary> 深棕褐色 30 </summary>
-        </member>
-        <member name="F:Unit.Color.Turquoisedeep">
-            <summary> 深绿松石色 32 </summary>
-        </member>
-        <member name="F:Unit.Color.Colordark">
-            <summary> 暗木色 33 </summary>
-        </member>
-        <member name="F:Unit.Color.Greylight">
-            <summary> 淡灰色 34 </summary>
-        </member>
-        <member name="F:Unit.Color.Redearthgreyrose">
-            <summary> 土灰玫瑰红色 35 </summary>
-        </member>
-        <member name="F:Unit.Color.Longstone">
-            <summary> 长石色 36 </summary>
-        </member>
-        <member name="F:Unit.Color.Firebrick">
-            <summary> 火砖色 37 </summary>
-        </member>
-        <member name="F:Unit.Color.Greenforest">
-            <summary> 森林绿 38 </summary>
-        </member>
-        <member name="F:Unit.Color.Golden">
-            <summary> 金色 39 </summary>
-        </member>
-        <member name="F:Unit.Color.Foresythia">
-            <summary> 鲜黄色 40 </summary>
-        </member>
-        <member name="F:Unit.Color.Aerugo">
-            <summary> 铜绿色 42 </summary>
-        </member>
-        <member name="F:Unit.Color.Yellowbluish">
-            <summary> 青黄色 43 </summary>
-        </member>
-        <member name="F:Unit.Color.Greenhunter">
-            <summary> 猎人绿 44 </summary>
-        </member>
-        <member name="F:Unit.Color.Redindian">
-            <summary> 印度红 45 </summary>
-        </member>
-        <member name="F:Unit.Color.Yellowearthy">
-            <summary> 土黄色 46 </summary>
-        </member>
-        <member name="F:Unit.Color.Wathet">
-            <summary> 浅蓝色 47 </summary>
-        </member>
-        <member name="F:Unit.Color.Greyfrench">
-            <summary> 浅灰色 48 </summary>
-        </member>
-        <member name="F:Unit.Color.Bluelightsteel">
-            <summary> 浅钢蓝色 49 </summary>
-        </member>
-        <member name="F:Unit.Color.Colorlight">
-            <summary> 浅木色 59 </summary>
-        </member>
-        <member name="F:Unit.Color.Greenlime">
-            <summary> 石灰绿色 60 </summary>
-        </member>
-        <member name="F:Unit.Color.Bisque">
-            <summary> 桔黄色 61 </summary>
-        </member>
-        <member name="F:Unit.Color.Maroon">
-            <summary> 褐红色 62 </summary> 62
-        </member>
-        <member name="T:Unit.Suffix">
-            <summary>
-            后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.TextureSuffix">
-            <summary>
-            图片文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.VideoSuffix">
-            <summary>
-            视频文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.SoundSuffix">
-            <summary>
-            音频文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.TextSuffix">
-            <summary>
-            文本文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.ShaderSuffix">
-            <summary>
-            shader文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.FontSuffix">
-            <summary>
-            字体后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.Animation">
-            <summary>
-            动画文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.Animator">
-            <summary>
-            控制器文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.Material">
-            <summary>
-            材质文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.PrefabSuffix">
-            <summary>
-            预制体文件后缀
-            </summary>
-        </member>
-        <member name="F:Unit.Suffix.RTextureSuffix">
-            <summary>
-            渲染纹理后缀
-            </summary>
-        </member>
-        <member name="T:Unit.Time">
-            <summary>
-            时间
-            </summary>
-        </member>
-        <member name="T:Unit.Time.SencondUnit">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Unit.Time.SencondUnit.SECOND">
-            <summary> 秒 </summary>
-        </member>
-        <member name="F:Unit.Time.SencondUnit.MILLISCOND">
-            <summary> 毫秒 </summary>
-        </member>
-        <member name="F:Unit.Time.SencondUnit.MICROSECOND">
-            <summary> 微秒 </summary>
-        </member>
-        <member name="F:Unit.Time.SencondUnit.NANOSECOND">
-            <summary> 纳秒 </summary>
-        </member>
-        <member name="F:Unit.Time.SencondUnit.NANOSECOND_100">
-            <summary> 100纳秒计数单位 </summary>
-        </member>
-        <member name="M:Unit.Time.GetSencondUnit(Unit.Time.SencondUnit)">
-            <summary>
-            获取秒 计数单位 秒
-            </summary>
-        </member>
-        <member name="M:Unit.Time.GetMinUnit(Unit.Time.SencondUnit)">
-            <summary>
-            获取秒 计数单位 分
-            </summary>
-        </member>
-        <member name="M:Unit.Time.GetHourUnit(Unit.Time.SencondUnit)">
-            <summary>
-            获取秒 计数单位 时
-            </summary>
-        </member>
-        <member name="M:Unit.Time.GetDayUnit(Unit.Time.SencondUnit)">
-            <summary>
-            获取秒 计数单位 时
-            </summary>
-        </member>
-        <member name="M:Unit.Time.GetWeekUnit(Unit.Time.SencondUnit)">
-            <summary>
-            获取秒 计数单位 时
-            </summary>
-        </member>
-        <member name="T:Unit.Time.DateTimeUnit">
-            <summary>
-            时间间隔
-            </summary>
-        </member>
-        <member name="F:Unit.Time.DateTimeUnit.Day">
-            <summary> 日 </summary>
-        </member>
-        <member name="F:Unit.Time.DateTimeUnit.Week">
-            <summary> 周 </summary>
-        </member>
-        <member name="F:Unit.Time.DateTimeUnit.Month">
-            <summary> 月 </summary>
-        </member>
-        <member name="F:Unit.Time.DateTimeUnit.Season">
-            <summary> 季 </summary>
-        </member>
-        <member name="F:Unit.Time.DateTimeUnit.Year">
-            <summary> 年 </summary>
-        </member>
-        <member name="F:Unit.Time.UNIT_WEEK_DAY">
-            <summary> 一周7天 </summary>
-        </member>
-        <member name="F:Unit.Time.UNIT_DAY_HOUR">
-            <summary> 一天24时 </summary>
-        </member>
-        <member name="F:Unit.Time.UNIT_HOUR_MIN">
-            <summary> 一时60分 </summary>
-        </member>
-        <member name="F:Unit.Time.UNIT_MIN_SECOND">
-            <summary> 一分60秒 </summary>
-        </member>
-        <member name="F:Unit.Time.SECOND">
-            <summary> 秒 单位时间（秒） s </summary>
-        </member>
-        <member name="F:Unit.Time.SECOND_MIN">
-            <summary> 分 单位时间（秒） s </summary>
-        </member>
-        <member name="F:Unit.Time.SECOND_HOUR">
-            <summary> 时 单位时间（秒） s </summary>
-        </member>
-        <member name="F:Unit.Time.SECOND_DAY">
-            <summary> 日 单位时间（秒） s </summary>
-        </member>
-        <member name="F:Unit.Time.SECOND_WEEK">
-            <summary> 周 单位时间（秒） s </summary>
-        </member>
-        <member name="F:Unit.Time.MS_SECOND">
-            <summary> 秒 单位时间（毫秒） ms </summary>
-        </member>
-        <member name="F:Unit.Time.MS_MIN">
-            <summary> 分 单位时间（毫秒） ms  </summary>
-        </member>
-        <member name="F:Unit.Time.MS_HOUR">
-            <summary> 时 单位时间（毫秒） ms  </summary>
-        </member>
-        <member name="F:Unit.Time.MS_DAY">
-            <summary> 日 单位时间（毫秒） ms  </summary>
-        </member>
-        <member name="F:Unit.Time.MS_WEEK">
-            <summary> 周 单位时间（毫秒） ms  </summary>
-        </member>
-        <member name="F:Unit.Time.μS_SECOND">
-            <summary> 秒 单位时间（微秒） μs </summary>
-        </member>
-        <member name="F:Unit.Time.μS_MIN">
-            <summary> 分 单位时间（微秒） μs </summary>
-        </member>
-        <member name="F:Unit.Time.μS_HOUR">
-            <summary> 时 单位时间（微秒） μs </summary>
-        </member>
-        <member name="F:Unit.Time.μS_DAY">
-            <summary> 天 单位时间（微秒） μs </summary>
-        </member>
-        <member name="F:Unit.Time.μS_WEEK">
-            <summary> 周 单位时间（微秒） μs </summary>
-        </member>
-        <member name="F:Unit.Time.NS_SECOND">
-            <summary> 秒 单位时间（纳秒） ns </summary>
-        </member>
-        <member name="F:Unit.Time.NS_MIN">
-            <summary> 分 单位时间（纳秒） ns </summary>
-        </member>
-        <member name="F:Unit.Time.NS_HOUR">
-            <summary> 时 单位时间（纳秒） ns </summary>
-        </member>
-        <member name="F:Unit.Time.NS_DAY">
-            <summary> 天 单位时间（纳秒） ns </summary>
-        </member>
-        <member name="F:Unit.Time.NS_WEEK">
-            <summary> 周 单位时间（纳秒） ns </summary>
-        </member>
-        <member name="P:Unit.Time.Milliseconds">
-            <summary> 1毫秒 </summary>
-        </member>
-        <member name="P:Unit.Time.Second">
-            <summary> 1秒钟 </summary>
-        </member>
-        <member name="P:Unit.Time.Minute">
-            <summary> 1分钟 </summary>
-        </member>
-        <member name="P:Unit.Time.Hour">
-            <summary> 1小时 </summary>
-        </member>
-        <member name="P:Unit.Time.Day">
-            <summary> 1天 </summary>
-        </member>
-        <member name="F:Unit.Time.GREENWICH">
-            <summary> 格林威治时间UTC参照点：1970年1月1日0时0分0秒 </summary>
         </member>
     </members>
 </doc>

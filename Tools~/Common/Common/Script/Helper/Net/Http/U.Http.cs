@@ -8,7 +8,7 @@ public partial class AHelper
     /// <summary>
     /// Http 工具类
     /// </summary>
-    public static class Http
+    public  partial class Net
     {
         /// <summary>
         /// Model对象转换为uri网址参数形式

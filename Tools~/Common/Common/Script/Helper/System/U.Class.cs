@@ -15,7 +15,7 @@ public partial class AHelper
     /// <summary>
     /// 类工具
     /// </summary>
-    public static class Class
+    public class Class
     {
         /// <summary>
         /// 清除事件

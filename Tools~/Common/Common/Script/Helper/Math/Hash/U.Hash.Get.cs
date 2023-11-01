@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 
-public static partial class AHelper
+public partial class AHelper
 {
     /// <summary>
     /// hash工具
     /// </summary>
-    public static partial class Hash
+    public partial class Hash
     {
         /// <summary>
         /// 获取哈希值

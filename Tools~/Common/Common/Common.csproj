@@ -509,8 +509,16 @@
     <Compile Include="Script\Extension\Struct\Char\Char.Extend.Judge.cs" />
     <Compile Include="Script\Extension\Struct\Char\Char.Extend.ToConver.cs" />
     <Compile Include="Script\Extension\Struct\Long\Long.Extend.cs" />
+    <Compile Include="Script\Handle\AHandle.cs" />
+    <Compile Include="Script\Handle\Net\FTP\Handle.FTP.cs" />
     <Compile Include="Script\Helper\Database\U.FileID.cs" />
     <Compile Include="Script\Helper\Database\U.Json.MINIJSON.cs" />
+    <Compile Include="Script\Helper\Net\FTP\U.FTP.Check.cs" />
+    <Compile Include="Script\Helper\Net\FTP\U.FTP.Create.cs" />
+    <Compile Include="Script\Helper\Net\FTP\U.FTP.Delete.cs" />
+    <Compile Include="Script\Helper\Net\FTP\U.FTP.Download.cs" />
+    <Compile Include="Script\Helper\Net\FTP\U.FTP.Get.cs" />
+    <Compile Include="Script\Helper\Net\FTP\U.FTP.Upload.cs" />
     <Compile Include="Script\Helper\Reflect\U.Reflect.cs" />
     <Compile Include="Script\Tools\Bean\GBean.cs" />
     <Compile Include="Script\Tools\Bean\GBeanRegisterAttribute.cs" />

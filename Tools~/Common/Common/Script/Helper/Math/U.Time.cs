@@ -7,15 +7,22 @@
 
 using System;
 using System.Text;
-using EDateTimeUnit = Unit.Time.DateTimeUnit;
-using ESecondUnit = Unit.Time.SencondUnit;
+using AIO;
+using EDateTimeUnit = AIO.Unit.Time.DateTimeUnit;
+using ESecondUnit = AIO.Unit.Time.SencondUnit;
 
 public partial class AHelper
 {
+    private AHelper()
+    {
+    }
+
+    private static AHelper Instance { get; } = new AHelper();
+
     /// <summary>
     /// 时间方法库
     /// </summary>
-    public static partial class Time
+    public partial class Time
     {
         /// <summary>
         /// 前天开始时间 单位毫秒

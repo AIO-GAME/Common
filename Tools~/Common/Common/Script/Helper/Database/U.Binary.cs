@@ -8,7 +8,7 @@ public partial class AHelper
     /// <summary>
     /// Binary 文件 解析
     /// </summary>
-    public static partial class Binary
+    public partial class Binary
     {
         /// <summary>
         /// 序列化 未加密

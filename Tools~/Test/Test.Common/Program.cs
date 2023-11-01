@@ -36,16 +36,6 @@ class Program
         }
 
 
-
-
-
-
-
-
-
-
-
-
         System.Console.Read();
     }
 }

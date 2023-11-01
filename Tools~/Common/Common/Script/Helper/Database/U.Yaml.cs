@@ -13,7 +13,7 @@ public partial class AHelper
     /// <summary>
     /// Yaml 解析
     /// </summary>
-    public static partial class Yaml
+    public partial class Yaml
     {
         /// <summary>
         /// 序列化

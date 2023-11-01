@@ -5,6 +5,7 @@
 |*|=============================================*/
 
 using System;
+using System.Diagnostics;
 
 namespace AIO
 {
@@ -18,6 +19,7 @@ namespace AIO
         /// </summary>
         /// <param name="ret">执行结果</param>
         /// <exception cref="Exception">异常信息</exception>
+        [DebuggerHidden, DebuggerNonUserCode]
         public static void Debug(this IResult ret)
         {
             if (!PrCourse.IsLog || ret == null) return;

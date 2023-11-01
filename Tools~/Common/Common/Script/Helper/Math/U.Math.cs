@@ -13,7 +13,7 @@ public partial class AHelper
     /// <summary>
     /// 数学库
     /// </summary>
-    public static class Math
+    public class Math
     {
         /// <summary>
         /// 判断当前值是2的几次幂
@@ -30,7 +30,7 @@ public partial class AHelper
 
             return count;
         }
-        
+
         /// <summary>
         /// 判断当前值是2的几次幂
         /// </summary>

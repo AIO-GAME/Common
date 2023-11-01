@@ -14,7 +14,7 @@ public partial class AHelper
     /// <summary>
     /// 随机数工具类
     /// </summary>
-    public static partial class Random
+    public partial class Random
     {
         private static System.Random random;
 

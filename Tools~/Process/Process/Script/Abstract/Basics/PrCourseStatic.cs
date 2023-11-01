@@ -31,9 +31,12 @@ namespace AIO
         /// <param name="format">Format:NoNull</param>
         /// <param name="args">格式化参数</param>
         /// <returns>结果执行器</returns>
-        protected static IExecutor Create<T>(in (string, string) cmd_work, in string format, params object[] args) where T : class, IPrCourse, new()
+        [DebuggerHidden, DebuggerNonUserCode]
+        protected static IExecutor Create<T>(in (string, string) cmd_work, in string format, params object[] args)
+            where T : class, IPrCourse, new()
         {
-            return Activator.CreateInstance<T>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2).SetInArgs(format, args).Execute();
+            return Activator.CreateInstance<T>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2)
+                .SetInArgs(format, args).Execute();
         }
 
         /// <summary>
@@ -43,9 +46,12 @@ namespace AIO
         /// <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
         /// <param name="args">参数</param>
         /// <returns>结果执行器</returns>
-        protected static IExecutor Create<T>(in (string, string) cmd_work, in StringBuilder args) where T : class, IPrCourse, new()
+        [DebuggerHidden, DebuggerNonUserCode]
+        protected static IExecutor Create<T>(in (string, string) cmd_work, in StringBuilder args)
+            where T : class, IPrCourse, new()
         {
-            return Activator.CreateInstance<T>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2).SetInArgs(args.ToString()).Execute();
+            return Activator.CreateInstance<T>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2)
+                .SetInArgs(args.ToString()).Execute();
         }
 
         /// <summary>
@@ -55,9 +61,12 @@ namespace AIO
         /// <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
         /// <param name="args">参数</param>
         /// <returns>结果执行器</returns>
-        protected static IExecutor Create<T>(in (string, string) cmd_work, in string args) where T : class, IPrCourse, new()
+        [DebuggerHidden, DebuggerNonUserCode]
+        protected static IExecutor Create<T>(in (string, string) cmd_work, in string args)
+            where T : class, IPrCourse, new()
         {
-            return Activator.CreateInstance<T>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2).SetInArgs(args).Execute();
+            return Activator.CreateInstance<T>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2)
+                .SetInArgs(args).Execute();
         }
 
         /// <summary>
@@ -67,9 +76,12 @@ namespace AIO
         /// <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>                      
         /// <param name="args">参数</param>
         /// <returns>结果执行器</returns>
-        protected static IExecutor Create<T>(in (string, string) cmd_work, in ICollection<string> args) where T : class, IPrCourse, new()
+        [DebuggerHidden, DebuggerNonUserCode]
+        protected static IExecutor Create<T>(in (string, string) cmd_work, in ICollection<string> args)
+            where T : class, IPrCourse, new()
         {
-            return Activator.CreateInstance<T>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2).SetInArgs(args).Execute();
+            return Activator.CreateInstance<T>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2)
+                .SetInArgs(args).Execute();
         }
 
         /// <summary>
@@ -78,10 +90,12 @@ namespace AIO
         /// <typeparam name="T">执行器类型</typeparam>
         /// <param name="cmd_work">[Item1=CMD路径:NoNull][Item2=工作路径:NoNull]</param>        
         /// <returns>结果执行器</returns>
+        [DebuggerHidden, DebuggerNonUserCode]
         protected static IExecutor Create<T>(in (string, string) cmd_work) where T : class, IPrCourse, new()
         {
             return Activator.CreateInstance<T>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2).Execute();
         }
+
 
         /// <summary>
         /// 创建
@@ -91,7 +105,9 @@ namespace AIO
         /// <param name="format">Format:NoNull</param>
         /// <param name="args">格式化参数</param>
         /// <returns>结果执行器</returns>
-        protected static IExecutor Create<T>(in string cmd, in string format, params object[] args) where T : class, IPrCourse, new()
+        [DebuggerHidden, DebuggerNonUserCode]
+        protected static IExecutor Create<T>(in string cmd, in string format, params object[] args)
+            where T : class, IPrCourse, new()
         {
             return Activator.CreateInstance<T>().SetFileName(cmd).SetInArgs(format, args).Execute();
         }
@@ -103,7 +119,9 @@ namespace AIO
         /// <param name="cmd">CMD路径:NoNull</param>
         /// <param name="args">格式化参数</param>
         /// <returns>结果执行器</returns>
-        protected static IExecutor Create<T>(in string cmd, in ICollection<string> args) where T : class, IPrCourse, new()
+        [DebuggerHidden, DebuggerNonUserCode]
+        protected static IExecutor Create<T>(in string cmd, in ICollection<string> args)
+            where T : class, IPrCourse, new()
         {
             return Activator.CreateInstance<T>().SetFileName(cmd).SetInArgs(args).Execute();
         }
@@ -115,6 +133,7 @@ namespace AIO
         /// <param name="cmd">CMD路径:NoNull</param>
         /// <param name="args">格式化参数</param>
         /// <returns>结果执行器</returns>
+        [DebuggerHidden, DebuggerNonUserCode]
         public static IExecutor Create<T>(in string cmd, in string args) where T : class, IPrCourse, new()
         {
             return Activator.CreateInstance<T>().SetFileName(cmd).SetInArgs(args).Execute();
@@ -127,6 +146,7 @@ namespace AIO
         /// <param name="cmd">CMD路径:NoNull</param>
         /// <param name="args">格式化参数</param>
         /// <returns>结果执行器</returns>
+        [DebuggerHidden, DebuggerNonUserCode]
         protected static IExecutor Create<T>(in string cmd, in StringBuilder args) where T : class, IPrCourse, new()
         {
             return Activator.CreateInstance<T>().SetFileName(cmd).SetInArgs(args.ToString()).Execute();
@@ -139,6 +159,7 @@ namespace AIO
         /// <param name="cmd">CMD路径:NoNull</param>
         /// <param name="verb">管理员权限</param>
         /// <returns>结果执行器</returns>
+        [DebuggerHidden, DebuggerNonUserCode]
         protected static IExecutor Create<T>(in string cmd, in EPrVerb verb) where T : class, IPrCourse, new()
         {
             return Activator.CreateInstance<T>().SetInVers(verb).SetFileName(cmd).Execute();
@@ -150,6 +171,7 @@ namespace AIO
         /// <typeparam name="T">执行器类型</typeparam>
         /// <param name="cmd">CMD路径:NoNull</param>
         /// <returns>结果执行器</returns>
+        [DebuggerHidden, DebuggerNonUserCode]
         protected static IExecutor Create<T>(in string cmd) where T : class, IPrCourse, new()
         {
             return Activator.CreateInstance<T>().SetFileName(cmd).Execute();

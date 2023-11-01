@@ -60,9 +60,9 @@ namespace AIO
         }
 
         /// <inheritdoc/>
-        public IPrCourse SetInEncoding(Encoding encoding)
+        public IPrCourse SetInEncoding(Encoding defEncoding)
         {
-            this.encoding = encoding;
+            encoding = defEncoding;
             return this;
         }
 

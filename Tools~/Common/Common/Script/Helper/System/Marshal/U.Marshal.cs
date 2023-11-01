@@ -23,7 +23,7 @@ public partial class AHelper
     /// <!--提供了一个方法集，这些方法用于分配非托管内存、复制非托管内存块、将托管类型转换为非托管类型 此外还提供了在与非托管代码交互时使用的其他杂项方法-->
     /// <!--备注 SMarshal 类中定义的 static 方法对于处理非托管代码至关重要。此类中定义的大多数方法通常由需要-->
     /// <!--此类型的任何公共静态（Visual Basic 中的 Shared）成员都是线程安全的，但不保证所有实例成员都 是线程安全的-->
-    public static class Marshal
+    public class Marshal
     {
         /// <summary>
         /// 表示系统上的默认字符大小；Unicode 系统上默认值为 2，ANSI 系统上默认值为 1。 此字段为只读。
@@ -409,7 +409,8 @@ public partial class AHelper
         /// <summary>
         /// 
         /// </summary>
-        [SuppressUnmanagedCodeSecurity, SecurityCritical, ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        [SuppressUnmanagedCodeSecurity, SecurityCritical,
+         ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static int ReadInt32(object ptr, int ofs)
         {
             return SMarshal.ReadInt32(ptr, ofs);
@@ -422,7 +423,8 @@ public partial class AHelper
         /// <summary>
         /// 
         /// </summary>
-        [SuppressUnmanagedCodeSecurity, SecurityCritical, ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        [SuppressUnmanagedCodeSecurity, SecurityCritical,
+         ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static long ReadInt64(object ptr, int ofs)
         {
             return SMarshal.ReadInt64(ptr, ofs);

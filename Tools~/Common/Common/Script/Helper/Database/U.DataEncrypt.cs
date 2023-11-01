@@ -8,7 +8,7 @@ public partial class AHelper
     /// <summary>
     /// 数据加密解密
     /// </summary>
-    public static class DataEncrypt
+    public class DataEncrypt
     {
         internal static readonly byte[] RGBKey =
         {
