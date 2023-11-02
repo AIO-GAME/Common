@@ -9,7 +9,7 @@ using AIO.YamlDotNet.Serialization.ObjectGraphTraversalStrategies;
 using AIO.YamlDotNet.Serialization.ObjectGraphVisitors;
 using AIO.YamlDotNet.Serialization.TypeInspectors;
 using AIO.YamlDotNet.Serialization.TypeResolvers;
-
+#nullable enable
 namespace AIO.YamlDotNet.Serialization
 {
 	internal sealed class SerializerBuilder : BuilderSkeleton<SerializerBuilder>

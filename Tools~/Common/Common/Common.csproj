@@ -24,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>bin\Debug\AIO.Common.xml</DocumentationFile>
+    <NoWarn>CS8600;</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,6 +36,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>bin\Release\AIO.Common.xml</DocumentationFile>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <NoWarn>CS8600;CS0809;CS8632;CS8603;CS0649;</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -508,9 +510,10 @@
     <Compile Include="Script\Extension\Struct\Char\Char.Extend.IS.cs" />
     <Compile Include="Script\Extension\Struct\Char\Char.Extend.Judge.cs" />
     <Compile Include="Script\Extension\Struct\Char\Char.Extend.ToConver.cs" />
-    <Compile Include="Script\Extension\Struct\Long\Long.Extend.cs" />
+    <Compile Include="Script\Extension\Struct\Long\LongExtened.Extend.cs" />
     <Compile Include="Script\Handle\AHandle.cs" />
     <Compile Include="Script\Handle\Net\FTP\Handle.FTP.cs" />
+    <Compile Include="Script\Handle\Net\HTTP\Handle.HTTP.cs" />
     <Compile Include="Script\Helper\Database\U.FileID.cs" />
     <Compile Include="Script\Helper\Database\U.Json.MINIJSON.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Check.cs" />
@@ -519,6 +522,10 @@
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Download.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Get.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Upload.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.Download.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.Downloads.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.GetMD5.cs" />
+    <Compile Include="Script\Helper\Net\U.Net.cs" />
     <Compile Include="Script\Helper\Reflect\U.Reflect.cs" />
     <Compile Include="Script\Tools\Bean\GBean.cs" />
     <Compile Include="Script\Tools\Bean\GBeanRegisterAttribute.cs" />
@@ -745,7 +752,6 @@
     <Compile Include="Script\Helper\Math\U.Time.cs" />
     <Compile Include="Script\Helper\Net\HTTP\HttpDownload.cs" />
     <Compile Include="Script\Helper\Net\HTTP\HttpDownloadInfo.cs" />
-    <Compile Include="Script\Helper\Net\HTTP\U.Http.cs" />
     <Compile Include="Script\Helper\String\StringBlock.cs" />
     <Compile Include="Script\Helper\String\U.IDNo.cs" />
     <Compile Include="Script\Helper\String\U.MaskWord.cs" />

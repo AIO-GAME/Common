@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 using AIO.YamlDotNet.Core;
 using AIO.YamlDotNet.Core.Events;
 using AIO.YamlDotNet.Serialization.Utilities;
-
+#pragma warning disable CS8600
 #nullable enable
 namespace AIO.YamlDotNet.Serialization.NodeDeserializers
 {
@@ -59,6 +59,7 @@ namespace AIO.YamlDotNet.Serialization.NodeDeserializers
 						parser.SkipThisAndNestedEvents();
 						continue;
 					}
+
 					object obj = nestedObjectDeserializer(parser, property.Type);
 					if (obj is IValuePromise valuePromise)
 					{

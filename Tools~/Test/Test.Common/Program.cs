@@ -1,44 +1,39 @@
-﻿
-using AIO;
+﻿using System;
+using System.Threading.Tasks;
 
 class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
-        var buffer = new BufferByte();
+        const string url1 = "http://127.0.0.1/HOT/com.google.play.review";
+        const string url2 = "http://127.0.0.1/HOT/com.google.play.review1";
+        const string savePath = @"E:\WWW\";
+        using (var handle = AHandle.HTTP.Create("http://127.0.0.1/HOT"))
         {
-            buffer.WriteUInt32(1);
-            var value = buffer.ReadUInt32();
-        }
-
-        {
-            buffer.WriteLen(10);
-            var value = buffer.ReadLen();
-        }
-
-        {
-            buffer.WriteStringUTF8("asdasdasd");
-            var value = buffer.ReadStringUTF8();
-            System.Console.WriteLine(value);
-            System.Console.WriteLine(9 | 0x80);
-            try
+            var arg = new ProgressArgs
             {
-                unchecked
+                OnProgress = info =>
                 {
-                    System.Console.WriteLine((sbyte)(9 | 0x80));
-                    System.Console.WriteLine((sbyte)(-119 & 0x7F));
-                }
-            }
-            catch (System.Exception ex)
-            {
-                System.Console.WriteLine(ex);
-            }
+                    Console.WriteLine("下载进度: {0}% [ {1} / {2} ] -> {3}",
+                        info.Progress, info.CurrentSize, info.TotalSize, info.CurrentName
+                    );
+                },
+                OnComplete = () => { Console.WriteLine("下载完成"); },
+                OnError = exception => { Console.WriteLine("下载异常:" + exception); }
+            };
+            await handle.DownloadAsync(savePath, new string[]
+                {
+                    "com.google.play.review",
+                    "com.google.play.review1",
+                    "com.google.play.review3"
+                },
+                arg, true);
         }
 
-
-        System.Console.Read();
+        Console.Read();
     }
 }
+
 // using System;
 // using System.Collections.Generic;
 // using System.IO;

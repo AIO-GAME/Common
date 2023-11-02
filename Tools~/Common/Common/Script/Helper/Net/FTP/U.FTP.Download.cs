@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 
 public partial class AHelper
@@ -17,22 +19,21 @@ public partial class AHelper
         /// <param name="password">密码</param>
         /// <param name="localPath">本地文件路径</param>
         /// <param name="remotePath">上传路径</param>
-        /// <param name="iprogress">回调</param>
+        /// <param name="progress">回调</param>
         /// <param name="isOverWrite">是否覆盖</param>
         /// <param name="timeout">超时</param>
         /// <param name="bufferSize">下载缓存大小</param>
-        public static void FTPDownloadFile(string uri, string username, string password, string localPath,
-            string remotePath,
-            AHandle.IProgress iprogress = null, bool isOverWrite = false, ushort timeout = 3000, int bufferSize = 2048)
+        public static void FTPDownloadFile(string uri, string username, string password,
+            string localPath, string remotePath,
+            ProgressArgs progress = default, bool isOverWrite = false, ushort timeout = TIMEOUT,
+            int bufferSize = BUFFER_SIZE)
         {
             var fileSize = FTPGetFileSize(uri, username, password, remotePath);
             if (fileSize <= 0) return;
 
-            var progress = new AHandle.Progress(iprogress);
-            progress.Total = fileSize;
-            var currentValue = 0;
             try
             {
+                progress.Total = fileSize;
                 var outputStream = new FileStream(localPath, isOverWrite ? FileMode.CreateNew : FileMode.Create);
                 var request = (FtpWebRequest)WebRequest.Create(new Uri(Path.Combine(uri, remotePath)));
                 request.Credentials = new NetworkCredential(username, password);
@@ -48,12 +49,11 @@ public partial class AHelper
                 while (readCount > 0)
                 {
                     outputStream.Write(buffer, 0, readCount);
-                    currentValue += readCount;
-                    progress.Report(currentValue);
+                    progress.Current += readCount;
                     readCount = responseStream.Read(buffer, 0, bufferSize);
                 }
 
-                progress.Complete();
+                progress.OnComplete?.Invoke();
                 responseStream.Close();
                 outputStream.Close();
                 response.Close();
@@ -61,7 +61,7 @@ public partial class AHelper
             catch (Exception ex)
             {
                 File.Delete(localPath);
-                throw new Exception(ex.Message);
+                progress.OnError?.Invoke(ex);
             }
         }
 
@@ -74,7 +74,7 @@ public partial class AHelper
         /// <param name="password">密码</param>
         /// <param name="localPath">本地文件路径</param>
         /// <param name="remotePath">上传路径</param>
-        /// <param name="iprogress">回调</param>
+        /// <param name="progress">回调</param>
         /// <param name="searchPattern">搜索过滤</param>
         /// <param name="searchOption">搜索模式</param>
         /// <param name="isOverWrite">是否覆盖</param>
@@ -83,31 +83,27 @@ public partial class AHelper
         public static void FTPDownloadFolder(string uri, string username, string password,
             string localPath,
             string remotePath,
-            AHandle.IProgress iprogress = null,
+            ProgressArgs progress = default,
             AHandle.FTP.ListType searchOption = AHandle.FTP.ListType.ALL,
             string searchPattern = "*",
             bool isOverWrite = false,
-            ushort timeout = 3000,
-            int bufferSize = 2048
+            ushort timeout = TIMEOUT,
+            int bufferSize = BUFFER_SIZE
         )
         {
             var remoteList = FTPGetRemoteList(Path.Combine(uri, remotePath), username, password,
                 searchOption, false, searchPattern, timeout);
 
-            var progress = new AHandle.Progress(iprogress);
-            var dict = new System.Collections.Generic.Dictionary<string, long>();
+            var dict = new Dictionary<string, long>();
             foreach (var remote in remoteList)
             {
                 var fileSize = FTPGetFileSize(uri, username, password, remote);
-                progress.Total = fileSize;
+                progress.Total += fileSize;
                 dict.Add(remote, fileSize);
             }
 
-            foreach (var item in dict)
+            foreach (var item in dict.Where(item => item.Value > 0))
             {
-                if (item.Value <= 0) continue;
-
-                var currentValue = 0;
                 try
                 {
                     var outputStream = new FileStream(Path.Combine(localPath, item.Key),
@@ -126,12 +122,11 @@ public partial class AHelper
                     while (readCount > 0)
                     {
                         outputStream.Write(buffer, 0, readCount);
-                        currentValue += readCount;
-                        progress.Report(currentValue);
+                        progress.Current += readCount;
                         readCount = responseStream.Read(buffer, 0, bufferSize);
                     }
 
-                    progress.Complete();
+                    progress.OnComplete?.Invoke();
                     responseStream.Close();
                     outputStream.Close();
                     response.Close();
@@ -139,7 +134,7 @@ public partial class AHelper
                 catch (Exception ex)
                 {
                     File.Delete(localPath);
-                    throw new Exception(ex.Message);
+                    progress.OnError?.Invoke(ex);
                 }
             }
         }

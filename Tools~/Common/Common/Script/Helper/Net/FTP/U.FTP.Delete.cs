@@ -17,7 +17,7 @@ public partial class AHelper
         /// <param name="timeout">超时</param>
         /// <exception cref="Exception">异常信息</exception>
         /// <returns>删除返回信息</returns>
-        public static string FTPDeleteFile(string uri, string username, string password, string filePath, ushort timeout = 3000)
+        public static string FTPDeleteFile(string uri, string username, string password, string filePath, ushort timeout = TIMEOUT)
         {
             try
             {
@@ -52,7 +52,7 @@ public partial class AHelper
         /// <param name="timeout">超时</param>
         /// <exception cref="Exception">异常信息</exception>
         /// <returns>删除返回信息</returns>
-        public static string FTPRemoveFolder(string uri, string username, string password, string dirPath, ushort timeout = 3000)
+        public static string FTPRemoveFolder(string uri, string username, string password, string dirPath, ushort timeout = TIMEOUT)
         {
             try
             {

@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 public partial class AHandle
 {
     /// <summary>
-    /// FTP处理器
+    /// FTP 处理器
     /// </summary>
-    public sealed class FTP
+    public sealed class FTP : IDisposable
     {
         /// <summary>
         /// 获取列表类型
@@ -57,12 +58,12 @@ public partial class AHandle
         /// <summary>
         /// 超时时间
         /// </summary>
-        public ushort TimeOut { get; set; } = 3000;
+        public ushort TimeOut { get; set; } = AHelper.Net.TIMEOUT;
 
         /// <summary>
         /// 缓存大小
         /// </summary>
-        public int BufferSize { get; set; } = 2048;
+        public int BufferSize { get; set; } = AHelper.BUFFER_SIZE;
 
         /// <summary>
         /// 构造函数
@@ -123,7 +124,7 @@ public partial class AHandle
         /// <param name="localPath">本地文件</param>
         /// <param name="remotePath">远端路径</param>
         /// <param name="progress">回调</param>
-        public void UploadFile(string localPath, string remotePath, IProgress progress = null)
+        public void UploadFile(string localPath, string remotePath, ProgressArgs progress = default)
         {
             AHelper.Net.FTPUploadFile(URI, UserName, Password, localPath, remotePath, progress, TimeOut, BufferSize);
         }
@@ -136,7 +137,7 @@ public partial class AHandle
         /// <param name="progress">回调</param>
         /// <param name="searchPattern">搜索字段</param>
         /// <param name="searchOption">搜索模式</param>
-        public void UploadFolder(string localPath, string remotePath, IProgress progress = null,
+        public void UploadFolder(string localPath, string remotePath, ProgressArgs progress = default,
             SearchOption searchOption = SearchOption.TopDirectoryOnly,
             string searchPattern = "*")
         {
@@ -151,7 +152,7 @@ public partial class AHandle
         /// <param name="remotePath">远端路径</param>
         /// <param name="progress">回调</param>
         /// <param name="isOverWrite">是否重写</param>
-        public void DownloadFile(string localPath, string remotePath, IProgress progress = null,
+        public void DownloadFile(string localPath, string remotePath, ProgressArgs progress = default,
             bool isOverWrite = false)
         {
             AHelper.Net.FTPDownloadFile(URI, UserName, Password,
@@ -171,7 +172,7 @@ public partial class AHandle
         public void DownloadFolder(
             string localPath,
             string remotePath,
-            IProgress progress = null,
+            ProgressArgs progress = default,
             ListType searchOption = ListType.ALL,
             string searchPattern = "*",
             bool isOverWrite = false)
@@ -211,6 +212,18 @@ public partial class AHandle
         public bool Check()
         {
             return AHelper.Net.FTPCheck(URI, UserName, Password, TimeOut);
+        }
+
+        /// <summary>
+        /// 释放
+        /// </summary>
+        public void Dispose()
+        {
+            ServerIP = null;
+            UserName = null;
+            Password = null;
+            RemotePath = null;
+            URI = null;
         }
     }
 }

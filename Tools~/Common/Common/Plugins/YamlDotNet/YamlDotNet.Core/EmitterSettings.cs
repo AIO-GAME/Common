@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 
 namespace AIO.YamlDotNet.Core

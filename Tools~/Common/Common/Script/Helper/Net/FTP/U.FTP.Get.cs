@@ -18,7 +18,7 @@ public partial class AHelper
         /// <returns>大小</returns>
         /// <exception cref="Exception"></exception>
         public static long FTPGetFileSize(string uri, string username, string password, string remotePath,
-            ushort timeout = 3000)
+            ushort timeout = TIMEOUT)
         {
             long fileSize = 0;
             try
@@ -69,7 +69,7 @@ public partial class AHelper
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
         public static List<string> FTPGetRemoteList(string uri, string username, string password,
-            AHandle.FTP.ListType type, bool detail, string keyword, ushort timeout = 3000
+            AHandle.FTP.ListType type, bool detail, string keyword, ushort timeout = TIMEOUT
         )
         {
             var infos = new List<string>();

@@ -16,7 +16,7 @@ public partial class AHelper
         /// <param name="timeout">超时</param>
         /// <param name="dirName">文件夹路径</param>
         public static void FTPCreateDir(string uri, string username, string password, string dirName,
-            ushort timeout = 3000)
+            ushort timeout = TIMEOUT)
         {
             try
             {
@@ -45,7 +45,7 @@ public partial class AHelper
         /// <param name="newName">新名称</param>
         /// <param name="timeout">超时</param>
         public static void Move(string uri, string username, string password, string currentName, string newName,
-            ushort timeout = 3000)
+            ushort timeout = TIMEOUT)
         {
             FTPReName(uri, username, password, currentName, newName);
         }
@@ -58,8 +58,9 @@ public partial class AHelper
         /// <param name="password">密码</param>
         /// <param name="currentName">当前名称</param>
         /// <param name="newName">新名称</param>
+        /// <param name="timeout">超时</param>
         public static void FTPReName(string uri, string username, string password, string currentName, string newName,
-            ushort timeout = 3000)
+            ushort timeout = TIMEOUT)
         {
             try
             {

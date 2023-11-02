@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using AIO.YamlDotNet.Core;
 using AIO.YamlDotNet.Core.Events;
-
+#nullable enable
 namespace AIO.YamlDotNet.Serialization.BufferedDeserialization.TypeDiscriminators
 {
 	internal class UniqueKeyTypeDiscriminator : ITypeDiscriminator

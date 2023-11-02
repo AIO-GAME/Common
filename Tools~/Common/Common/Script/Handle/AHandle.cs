@@ -1,113 +1,108 @@
 ﻿using System;
+using AIO;
+
+/// <summary>
+/// 进度信息
+/// </summary>
+public readonly struct ProgressInfo
+{
+    /// <summary>
+    /// 当前大小
+    /// </summary>
+    public string CurrentSize => Current.ToConverseStringFileSize();
+
+    /// <summary>
+    /// 总大小
+    /// </summary>
+    public string TotalSize => Total.ToConverseStringFileSize();
+
+    /// <summary>
+    /// 总值
+    /// </summary>
+    public long Total { get; }
+
+    /// <summary>
+    /// 当前值
+    /// </summary>
+    public long Current { get; }
+
+    /// <summary>
+    /// 进度
+    /// </summary>
+    public int Progress => (int)(Current / (double)Total * 100);
+
+    /// <summary>
+    /// 当前名称
+    /// </summary>
+    public string CurrentName { get; }
+
+    internal ProgressInfo(long total, long current, string currentName = null)
+    {
+        Total = total;
+        Current = current;
+        CurrentName = currentName;
+    }
+}
+
+/// <summary>
+/// 进度参数
+/// </summary>
+public struct ProgressArgs : IDisposable
+{
+    /// <summary>
+    /// 总值
+    /// </summary>
+    internal long Total { get; set; }
+
+    private long _Current;
+
+    /// <summary>
+    /// 当前值
+    /// </summary>
+    internal long Current
+    {
+        get => _Current;
+        set
+        {
+            _Current = value;
+            OnProgress?.Invoke(new ProgressInfo(Total, _Current, CurrentName));
+        }
+    }
+
+    /// <summary>
+    /// 当前名称
+    /// </summary>
+    internal string CurrentName { get; set; }
+
+    /// <summary>
+    /// 进度回调
+    /// </summary>
+    public Action<ProgressInfo> OnProgress { get; set; }
+
+    /// <summary>
+    /// 完成回调
+    /// </summary>
+    public Action OnComplete { get; set; }
+
+    /// <summary>
+    /// 错误回调
+    /// </summary>
+    public Action<Exception> OnError { get; set; }
+
+    /// <summary>
+    /// 析构函数
+    /// </summary>
+    public void Dispose()
+    {
+        OnProgress = null;
+        OnComplete = null;
+        OnError = null;
+    }
+}
 
 /// <summary>
 /// 处理器帮助类
 /// </summary>
 public static partial class AHandle
 {
-    /// <summary>
-    /// 进度处理器
-    /// </summary>
-    public interface IProgress : IDisposable, IProgress<float>
-    {
-        /// <summary>
-        /// 进度回调
-        /// </summary>
-        Action<float> OnProgress { get; set; }
-
-        /// <summary>
-        /// 完成回调
-        /// </summary>
-        Action OnComplete { get; set; }
-
-        /// <summary>
-        /// 错误回调
-        /// </summary>
-        Action<Exception> OnError { get; set; }
-    }
-
-    /// <summary>
-    /// 进度处理器
-    /// </summary>
-    internal sealed class Progress : IProgress
-    {
-        /// <summary>
-        /// 当前值
-        /// </summary>
-        private float Current { get; set; }
-
-        /// <summary>
-        /// 总值
-        /// </summary>
-        internal float Total { get; set; }
-
-        /// <summary>
-        /// 进度回调
-        /// </summary>
-        public Action<float> OnProgress { get; set; }
-
-        /// <summary>
-        /// 完成回调
-        /// </summary>
-        public Action OnComplete { get; set; }
-
-        /// <summary>
-        /// 错误回调
-        /// </summary>
-        public Action<Exception> OnError { get; set; }
-
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        /// <param name="onProgress">进度回调</param>
-        /// <param name="onComplete">完成回调</param>
-        public Progress(Action<float> onProgress, Action onComplete)
-        {
-            OnProgress = onProgress;
-            OnComplete = onComplete;
-            Current = 0;
-            Total = 0;
-        }
-
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        public Progress(IProgress data)
-        {
-            OnProgress = data.OnProgress;
-            OnComplete = data.OnComplete;
-            Current = 0;
-            Total = 0;
-        }
-
-        /// <inheritdoc />
-        public void Dispose()
-        {
-            OnProgress = null;
-            OnComplete = null;
-        }
-
-        /// <summary>
-        /// 报告进度
-        /// </summary>
-        /// <param name="value">当前值</param>
-        public void Report(float value)
-        {
-            if (OnProgress == null) return;
-            Current = value;
-            var progress = value / Total;
-            OnProgress.Invoke(progress);
-        }
-
-        internal void Complete()
-        {
-            OnComplete?.Invoke();
-            Dispose();
-        }
-
-        internal void Error(Exception error)
-        {
-            OnError?.Invoke(error);
-        }
-    }
 }

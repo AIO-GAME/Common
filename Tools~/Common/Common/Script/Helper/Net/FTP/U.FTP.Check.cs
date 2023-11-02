@@ -16,7 +16,7 @@ public partial class AHelper
         /// <param name="password">密码</param>
         /// <param name="timeout">超时</param>
         /// <returns>Ture:有效 False:无效</returns>
-        public static bool FTPCheck(string uri, string username, string password, ushort timeout = 3000)
+        public static bool FTPCheck(string uri, string username, string password, ushort timeout = TIMEOUT)
         {
             try
             {
@@ -29,7 +29,7 @@ public partial class AHelper
                 ftpResponse.Close();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -44,7 +44,7 @@ public partial class AHelper
         /// <param name="timeout">超时</param>
         /// <returns>Ture:有效 False:无效</returns>
         public static async Task<bool> FTPCheckAsync(string uri, string username, string password,
-            ushort timeout = 3000)
+            ushort timeout = TIMEOUT)
         {
             try
             {
@@ -57,7 +57,7 @@ public partial class AHelper
                 ftpResponse.Close();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

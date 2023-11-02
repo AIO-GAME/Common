@@ -4,7 +4,7 @@ using System.Linq;
 using AIO.YamlDotNet.Core;
 using AIO.YamlDotNet.Core.Events;
 using AIO.YamlDotNet.Serialization.BufferedDeserialization.TypeDiscriminators;
-
+#nullable enable
 namespace AIO.YamlDotNet.Serialization.BufferedDeserialization
 {
 	internal class TypeDiscriminatingNodeDeserializer : INodeDeserializer
