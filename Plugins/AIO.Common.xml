@@ -3048,6 +3048,17 @@
             转换为格式:00,000,000
             </summary>
         </member>
+        <member name="T:AIO.NetGetResponseStream">
+            <summary>
+            nameof(NetHttpGetResponseStream)
+            </summary>
+        </member>
+        <member name="M:AIO.NetGetResponseStream.#ctor(System.String@,System.Net.WebResponse@)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.NetGetResponseStream.#ctor(System.String@)">
+            <inheritdoc />
+        </member>
         <member name="T:AIO.GBean">
             <summary>
             游戏数据
@@ -10305,6 +10316,16 @@
             FTP 处理器
             </summary>
         </member>
+        <member name="M:AHandle.FTP.Create(System.String,System.String,System.String,System.String)">
+            <summary>
+            创建HTTP处理器
+            </summary>
+            <param name="serverIP">服务器IP</param>
+            <param name="userName">用户名</param>
+            <param name="password">密码</param>
+            <param name="remotePath">远端默认跟文件夹</param>
+            <returns>处理器</returns>
+        </member>
         <member name="T:AHandle.FTP.ListType">
             <summary>
             获取列表类型
@@ -10486,11 +10507,62 @@
             缓存大小
             </summary>
         </member>
+        <member name="P:AHandle.HTTP.Cookie">
+            <summary>
+            Cookie
+            </summary>
+        </member>
         <member name="M:AHandle.HTTP.#ctor(System.String)">
             <summary>
             构造函数
             </summary>
             <param name="remoteURL">远端跟路径</param>
+        </member>
+        <member name="M:AHandle.HTTP.Delete(System.String)">
+            <summary>
+            请求删除指定的资源
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.Delete(System.String,System.Byte[])">
+            <summary>
+            请求删除指定的资源
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.Delete(System.String,System.String)">
+            <summary>
+            请求删除指定的资源
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.DeleteAsync(System.String)">
+            <summary>
+            请求删除指定的资源
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.DeleteAsync(System.String,System.Byte[])">
+            <summary>
+            请求删除指定的资源
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.DeleteAsync(System.String,System.String)">
+            <summary>
+            请求删除指定的资源
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
         </member>
         <member name="M:AHandle.HTTP.Download(System.String,System.String,ProgressArgs,System.Boolean)">
             <summary>
@@ -10527,6 +10599,366 @@
             <param name="remotePath">远端需要下载文件路径</param>
             <param name="progress">进度回调</param>
             <param name="isOverWrite">是否覆盖</param>
+        </member>
+        <member name="M:AHandle.HTTP.Put(System.String,System.Byte[])">
+            <summary>
+            向指定资源位置上传其最新内容
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.Put(System.String,System.String)">
+            <summary>
+            向指定资源位置上传其最新内容
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.PutAsync(System.String,System.Byte[])">
+            <summary>
+            向指定资源位置上传其最新内容
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.PutAsync(System.String,System.String)">
+            <summary>
+            向指定资源位置上传其最新内容
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.Trace(System.String)">
+            <summary>
+            回显服务器收到的请求
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.Trace(System.String,System.Byte[])">
+            <summary>
+            回显服务器收到的请求
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.Trace(System.String,System.String)">
+            <summary>
+            回显服务器收到的请求
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.TraceAsync(System.String)">
+            <summary>
+            回显服务器收到的请求
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.TraceAsync(System.String,System.Byte[])">
+            <summary>
+            回显服务器收到的请求
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.TraceAsync(System.String,System.String)">
+            <summary>
+            回显服务器收到的请求
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.Options(System.String)">
+            <summary>
+            返回服务器正对特定资源所支持的HTTP请求方法
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.Options(System.String,System.Byte[])">
+            <summary>
+            返回服务器正对特定资源所支持的HTTP请求方法
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.Options(System.String,System.String)">
+            <summary>
+            返回服务器正对特定资源所支持的HTTP请求方法
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.OptionsAsync(System.String)">
+            <summary>
+            返回服务器正对特定资源所支持的HTTP请求方法
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.OptionsAsync(System.String,System.Byte[])">
+            <summary>
+            返回服务器正对特定资源所支持的HTTP请求方法
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.OptionsAsync(System.String,System.String)">
+            <summary>
+            返回服务器正对特定资源所支持的HTTP请求方法
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.Head(System.String)">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.Head(System.String,System.Byte[])">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.Head(System.String,System.String)">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.HeadAsync(System.String)">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.HeadAsync(System.String,System.Byte[])">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.HeadAsync(System.String,System.String)">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.Connect(System.String)">
+            <summary>
+            预留给能够将连接改为管道方式的代理服务器
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.Connect(System.String,System.Byte[])">
+            <summary>
+            预留给能够将连接改为管道方式的代理服务器
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.Connect(System.String,System.String)">
+            <summary>
+            预留给能够将连接改为管道方式的代理服务器
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.ConnectAsync(System.String)">
+            <summary>
+            预留给能够将连接改为管道方式的代理服务器
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.ConnectAsync(System.String,System.Byte[])">
+            <summary>
+            预留给能够将连接改为管道方式的代理服务器
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.ConnectAsync(System.String,System.String)">
+            <summary>
+            预留给能够将连接改为管道方式的代理服务器
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.Get">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.GetStream">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.Get(System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.GetStream(System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.GetAsync">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.GetStreamAsync">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.GetAsync(System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.GetStreamAsync(System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.Post(System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.Post(System.String,System.Byte[])">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.Post(System.String,System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.PostAsync(System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.PostAsync(System.String,System.Byte[])">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.PostAsync(System.String,System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.PostStream(System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.PostStream(System.String,System.Byte[])">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.PostStream(System.String,System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.PostStreamAsync(System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.PostStreamAsync(System.String,System.Byte[])">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
+        </member>
+        <member name="M:AHandle.HTTP.PostStreamAsync(System.String,System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteRelativePath">远端相对路径</param>
+            <param name="data">数据</param>
+            <returns>服务器返回内容</returns>
         </member>
         <member name="M:AHandle.HTTP.Dispose">
             <summary>
@@ -10568,10 +11000,18 @@
             网络 工具类
             </summary>
             <summary>
-            Http 工具类
+            网络 工具类
+            </summary>
+            <summary>
+            网络 工具类
             </summary>
         </member>
-        <member name="M:AHelper.Net.FTPCheck(System.String,System.String,System.String,System.UInt16)">
+        <member name="T:AHelper.Net.FTP">
+            <summary>
+            FTP
+            </summary>
+        </member>
+        <member name="M:AHelper.Net.FTP.Check(System.String,System.String,System.String,System.UInt16)">
             <summary>
             判断FTP连接
             </summary>
@@ -10581,7 +11021,7 @@
             <param name="timeout">超时</param>
             <returns>Ture:有效 False:无效</returns>
         </member>
-        <member name="M:AHelper.Net.FTPCheckAsync(System.String,System.String,System.String,System.UInt16)">
+        <member name="M:AHelper.Net.FTP.CheckAsync(System.String,System.String,System.String,System.UInt16)">
             <summary>
             判断FTP连接
             </summary>
@@ -10591,7 +11031,7 @@
             <param name="timeout">超时</param>
             <returns>Ture:有效 False:无效</returns>
         </member>
-        <member name="M:AHelper.Net.FTPCreateDir(System.String,System.String,System.String,System.String,System.UInt16)">
+        <member name="M:AHelper.Net.FTP.CreateDir(System.String,System.String,System.String,System.String,System.UInt16)">
             <summary>
             创建文件夹
             </summary>
@@ -10601,7 +11041,7 @@
             <param name="timeout">超时</param>
             <param name="dirName">文件夹路径</param>
         </member>
-        <member name="M:AHelper.Net.Move(System.String,System.String,System.String,System.String,System.String,System.UInt16)">
+        <member name="M:AHelper.Net.FTP.Move(System.String,System.String,System.String,System.String,System.String,System.UInt16)">
             <summary>
             移动文件
             </summary>
@@ -10612,7 +11052,7 @@
             <param name="newName">新名称</param>
             <param name="timeout">超时</param>
         </member>
-        <member name="M:AHelper.Net.FTPReName(System.String,System.String,System.String,System.String,System.String,System.UInt16)">
+        <member name="M:AHelper.Net.FTP.ReName(System.String,System.String,System.String,System.String,System.String,System.UInt16)">
             <summary>
             重命名文件夹
             </summary>
@@ -10623,7 +11063,7 @@
             <param name="newName">新名称</param>
             <param name="timeout">超时</param>
         </member>
-        <member name="M:AHelper.Net.FTPDeleteFile(System.String,System.String,System.String,System.String,System.UInt16)">
+        <member name="M:AHelper.Net.FTP.DeleteFile(System.String,System.String,System.String,System.String,System.UInt16)">
             <summary>
             FTP指定删除文件
             </summary>
@@ -10635,7 +11075,7 @@
             <exception cref="T:System.Exception">异常信息</exception>
             <returns>删除返回信息</returns>
         </member>
-        <member name="M:AHelper.Net.FTPRemoveFolder(System.String,System.String,System.String,System.String,System.UInt16)">
+        <member name="M:AHelper.Net.FTP.RemoveFolder(System.String,System.String,System.String,System.String,System.UInt16)">
             <summary>
             FTP指定删除文件
             </summary>
@@ -10647,7 +11087,7 @@
             <exception cref="T:System.Exception">异常信息</exception>
             <returns>删除返回信息</returns>
         </member>
-        <member name="M:AHelper.Net.FTPDownloadFile(System.String,System.String,System.String,System.String,System.String,ProgressArgs,System.Boolean,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.FTP.DownloadFile(System.String,System.String,System.String,System.String,System.String,ProgressArgs,System.Boolean,System.UInt16,System.Int32)">
             <summary>
             FTP下载文件
             </summary>
@@ -10661,7 +11101,7 @@
             <param name="timeout">超时</param>
             <param name="bufferSize">下载缓存大小</param>
         </member>
-        <member name="M:AHelper.Net.FTPDownloadFolder(System.String,System.String,System.String,System.String,System.String,ProgressArgs,AHandle.FTP.ListType,System.String,System.Boolean,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.FTP.DownloadFolder(System.String,System.String,System.String,System.String,System.String,ProgressArgs,AHandle.FTP.ListType,System.String,System.Boolean,System.UInt16,System.Int32)">
             <summary>
             FTP下载文件夹
             </summary>
@@ -10677,7 +11117,7 @@
             <param name="timeout">超时</param>
             <param name="bufferSize">下载缓存大小</param>
         </member>
-        <member name="M:AHelper.Net.FTPGetFileSize(System.String,System.String,System.String,System.String,System.UInt16)">
+        <member name="M:AHelper.Net.FTP.GetFileSize(System.String,System.String,System.String,System.String,System.UInt16)">
             <summary>
             获取FTP文件大小
             </summary>
@@ -10689,7 +11129,7 @@
             <returns>大小</returns>
             <exception cref="T:System.Exception"></exception>
         </member>
-        <member name="M:AHelper.Net.FTPGetRemoteList(System.String,System.String,System.String,AHandle.FTP.ListType,System.Boolean,System.String,System.UInt16)">
+        <member name="M:AHelper.Net.FTP.GetRemoteList(System.String,System.String,System.String,AHandle.FTP.ListType,System.Boolean,System.String,System.UInt16)">
             <summary>
             获取文件或文件夹列表
             </summary>
@@ -10712,7 +11152,7 @@
             <returns></returns>
             <exception cref="T:System.Exception"></exception>
         </member>
-        <member name="M:AHelper.Net.FTPUploadFile(System.String,System.String,System.String,System.String,System.String,ProgressArgs,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.FTP.UploadFile(System.String,System.String,System.String,System.String,System.String,ProgressArgs,System.UInt16,System.Int32)">
             <summary>
             FTP上传文件
             </summary>
@@ -10725,7 +11165,7 @@
             <param name="timeout">超时</param>
             <param name="bufferSize">缓存大小</param>
         </member>
-        <member name="M:AHelper.Net.FTPUploadFolder(System.String,System.String,System.String,System.String,System.String,ProgressArgs,System.IO.SearchOption,System.String,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.FTP.UploadFolder(System.String,System.String,System.String,System.String,System.String,ProgressArgs,System.IO.SearchOption,System.String,System.UInt16,System.Int32)">
             <summary>
             FTP上传文件夹
             </summary>
@@ -10740,11 +11180,156 @@
             <param name="timeout">超时</param>
             <param name="bufferSize">缓存大小</param>
         </member>
-        <member name="M:AHelper.Net.HTTPDownload(System.String,System.String,ProgressArgs,System.Boolean,System.UInt16,System.Int32)">
+        <member name="T:AHelper.Net.HTTP">
+            <summary>
+            HTTP
+            </summary>
+        </member>
+        <member name="M:AHelper.Net.HTTP.Connect(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            预留给能够将连接改为管道方式的代理服务器
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.Connect(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            预留给能够将连接改为管道方式的代理服务器
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.Connect(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            预留给能够将连接改为管道方式的代理服务器
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.ConnectAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            预留给能够将连接改为管道方式的代理服务器
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.ConnectAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            预留给能够将连接改为管道方式的代理服务器
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.ConnectAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            预留给能够将连接改为管道方式的代理服务器
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.Delete(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求删除指定的资源
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.Delete(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求删除指定的资源
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.Delete(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求删除指定的资源
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.DeleteAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求删除指定的资源
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.DeleteAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求删除指定的资源
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.DeleteAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求删除指定的资源
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.Download(System.String,System.String,ProgressArgs,System.Boolean,System.UInt16,System.Int32)">
             <summary>
             HTTP 下载文件
             </summary>
-            <param name="remotePath">远端路径</param>
+            <param name="remoteUrl">远端路径</param>
             <param name="localPath">保存路径</param>
             <param name="progress">回调</param>
             <param name="isOverWrite">覆盖</param>
@@ -10752,11 +11337,11 @@
             <param name="bufferSize">容量</param>
             <exception cref="T:System.Exception">异常</exception>
         </member>
-        <member name="M:AHelper.Net.HTTPDownloadAsync(System.String,System.String,ProgressArgs,System.Boolean,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.HTTP.DownloadAsync(System.String,System.String,ProgressArgs,System.Boolean,System.UInt16,System.Int32)">
             <summary>
             HTTP 下载文件
             </summary>
-            <param name="remotePath">远端路径</param>
+            <param name="remoteUrl">远端路径</param>
             <param name="localPath">保存路径</param>
             <param name="progress">回调</param>
             <param name="isOverWrite">覆盖</param>
@@ -10764,11 +11349,11 @@
             <param name="bufferSize">容量</param>
             <exception cref="T:System.Exception">异常</exception>
         </member>
-        <member name="M:AHelper.Net.HTTPDownloadAsync(System.Collections.Generic.IEnumerable{System.String},System.String,ProgressArgs,System.Boolean,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.HTTP.DownloadAsync(System.Collections.Generic.IEnumerable{System.String},System.String,ProgressArgs,System.Boolean,System.UInt16,System.Int32)">
             <summary>
             HTTP 下载文件
             </summary>
-            <param name="remotePaths">远端路径</param>
+            <param name="remoteUrls">远端路径</param>
             <param name="localPath">保存根路径</param>
             <param name="progress">回调</param>
             <param name="isOverWrite">覆盖</param>
@@ -10776,11 +11361,11 @@
             <param name="bufferSize">容量</param>
             <exception cref="T:System.Exception">异常</exception>
         </member>
-        <member name="M:AHelper.Net.HTTPDownload(System.Collections.Generic.IEnumerable{System.String},System.String,ProgressArgs,System.Boolean,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.HTTP.Download(System.Collections.Generic.IEnumerable{System.String},System.String,ProgressArgs,System.Boolean,System.UInt16,System.Int32)">
             <summary>
             HTTP 下载文件
             </summary>
-            <param name="remotePaths">远端路径</param>
+            <param name="remoteUrls">远端路径</param>
             <param name="localPath">保存根路径</param>
             <param name="progress">回调</param>
             <param name="isOverWrite">覆盖</param>
@@ -10788,21 +11373,426 @@
             <param name="bufferSize">容量</param>
             <exception cref="T:System.Exception">异常</exception>
         </member>
-        <member name="M:AHelper.Net.HTTPGetMD5(System.String,System.UInt16)">
+        <member name="M:AHelper.Net.HTTP.Get(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteUrl">路径</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.Net.HTTP.GetAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteUrl">路径</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.Net.HTTP.GetStream(System.String,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteUrl">路径</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.Net.HTTP.GetStreamAsync(System.String,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteUrl">路径</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.Net.HTTP.GetMD5(System.String,System.UInt16)">
             <summary>
             HTTP 下载文件
             </summary>
-            <param name="remotePath">远端路径</param>
+            <param name="remoteUrl">远端路径</param>
             <param name="timeout">超时</param>
             <exception cref="T:System.Exception">异常</exception>
         </member>
-        <member name="M:AHelper.Net.HTTPGetMD5Async(System.String,System.UInt16)">
+        <member name="M:AHelper.Net.HTTP.GetMD5Async(System.String,System.UInt16)">
             <summary>
             HTTP 下载文件
             </summary>
-            <param name="remotePath">远端路径</param>
+            <param name="remoteUrl">远端路径</param>
             <param name="timeout">超时</param>
             <exception cref="T:System.Exception">异常</exception>
+        </member>
+        <member name="M:AHelper.Net.HTTP.Head(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.Head(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.Head(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.HeadAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.HeadAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.HeadAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.Options(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            返回服务器正对特定资源所支持的HTTP请求方法
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.Options(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            返回服务器正对特定资源所支持的HTTP请求方法
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.Options(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            返回服务器正对特定资源所支持的HTTP请求方法
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.OptionsAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            返回服务器正对特定资源所支持的HTTP请求方法
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.OptionsAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            返回服务器正对特定资源所支持的HTTP请求方法
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.OptionsAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            返回服务器正对特定资源所支持的HTTP请求方法
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.Post(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="data">上传数据</param>
+            <param name="encoding">编码:默认UTF-8</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.Net.HTTP.Post(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="encoding">编码:默认UTF-8</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.Net.HTTP.Post(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="data">上传数据</param>
+            <param name="encoding">编码:默认UTF-8</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.Net.HTTP.PostStream(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="data">上传数据</param>
+            <param name="timeout">超时时间</param>
+            <param name="encoding">编码:默认UTF-8</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.Net.HTTP.PostStream(System.String,System.UInt16,System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.Net.HTTP.PostStream(System.String,System.Byte[],System.UInt16,System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="data">上传数据</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.Net.HTTP.PostAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="data">上传数据</param>
+            <param name="encoding">编码:默认UTF-8</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.Net.HTTP.PostAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="encoding">编码:默认UTF-8</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.Net.HTTP.PostAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <param name="data">上传数据</param>
+            <param name="encoding">编码:默认UTF-8</param>
+            <returns>返回内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.PostStreamAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="data">上传数据</param>
+            <param name="timeout">超时时间</param>
+            <param name="encoding">编码:默认UTF-8</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.Net.HTTP.PostStreamAsync(System.String,System.UInt16,System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.Net.HTTP.PostStreamAsync(System.String,System.Byte[],System.UInt16,System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <param name="data">上传数据</param>
+            <returns>返回内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.Put(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            向指定资源位置上传其最新内容
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.Put(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            向指定资源位置上传其最新内容
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.PutAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            向指定资源位置上传其最新内容
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.PutAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            向指定资源位置上传其最新内容
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.Trace(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            回显服务器收到的请求
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.Trace(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            回显服务器收到的请求
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.Trace(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            回显服务器收到的请求
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.TraceAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            回显服务器收到的请求
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.TraceAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            回显服务器收到的请求
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.Net.HTTP.TraceAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            回显服务器收到的请求
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
         </member>
         <member name="M:AHelper.Net.UriParamSerialize(System.Object@)">
             <summary>

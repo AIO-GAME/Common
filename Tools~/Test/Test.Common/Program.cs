@@ -5,8 +5,6 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        const string url1 = "http://127.0.0.1/HOT/com.google.play.review";
-        const string url2 = "http://127.0.0.1/HOT/com.google.play.review1";
         const string savePath = @"E:\WWW\";
         using (var handle = AHandle.HTTP.Create("http://127.0.0.1/HOT"))
         {
@@ -21,13 +19,19 @@ class Program
                 OnComplete = () => { Console.WriteLine("下载完成"); },
                 OnError = exception => { Console.WriteLine("下载异常:" + exception); }
             };
-            await handle.DownloadAsync(savePath, new string[]
-                {
-                    "com.google.play.review",
-                    "com.google.play.review1",
-                    "com.google.play.review3"
-                },
-                arg, true);
+            // await handle.DownloadAsync(savePath, new string[]
+            //     {
+            //         "com.google.play.review",
+            //         "com.google.play.review1",
+            //         "com.google.play.review2"
+            //     },
+            //     arg, true);
+
+            //Console.WriteLine(await handle.PostAsync("", "com.google.play.review"));
+            // Console.WriteLine(await handle.GetAsync());
+            // Console.WriteLine(await handle.GetAsync("com.google.play.review"));
+
+            Console.WriteLine(await handle.PostAsync("com.google.play.review", "com.google.play.review"));
         }
 
         Console.Read();

@@ -10,6 +10,19 @@ public partial class AHandle
     public sealed class FTP : IDisposable
     {
         /// <summary>
+        /// 创建HTTP处理器
+        /// </summary>
+        /// <param name="serverIP">服务器IP</param>
+        /// <param name="userName">用户名</param>
+        /// <param name="password">密码</param>
+        /// <param name="remotePath">远端默认跟文件夹</param>
+        /// <returns>处理器</returns>
+        public static FTP Create(string userName, string serverIP, string password, string remotePath)
+        {
+            return new FTP(userName, serverIP, password, remotePath);
+        }
+
+        /// <summary>
         /// 获取列表类型
         /// </summary>
         public enum ListType
@@ -72,7 +85,7 @@ public partial class AHandle
         /// <param name="userName">用户名</param>
         /// <param name="password">密码</param>
         /// <param name="remotePath">远端默认跟文件夹</param>
-        public FTP(string userName, string serverIP, string password, string remotePath)
+        private FTP(string userName, string serverIP, string password, string remotePath)
         {
             ServerIP = serverIP;
             UserName = userName;
@@ -88,7 +101,7 @@ public partial class AHandle
         /// <param name="newRemoteName">新远端路径</param>
         public void Move(string currentRemotePath, string newRemoteName)
         {
-            AHelper.Net.FTPReName(URI, UserName, Password, currentRemotePath, newRemoteName);
+            AHelper.Net.FTP.ReName(URI, UserName, Password, currentRemotePath, newRemoteName);
         }
 
         /// <summary>
@@ -97,7 +110,7 @@ public partial class AHandle
         /// <param name="remoteFilePath">远端文件路径</param>
         public void DeleteFile(string remoteFilePath)
         {
-            AHelper.Net.FTPDeleteFile(URI, UserName, Password, remoteFilePath);
+            AHelper.Net.FTP.DeleteFile(URI, UserName, Password, remoteFilePath);
         }
 
         /// <summary>
@@ -106,7 +119,7 @@ public partial class AHandle
         /// <param name="remoteDirPath">远端文件夹路径</param>
         public void DeleteFolder(string remoteDirPath)
         {
-            AHelper.Net.FTPRemoveFolder(URI, UserName, Password, remoteDirPath);
+            AHelper.Net.FTP.RemoveFolder(URI, UserName, Password, remoteDirPath);
         }
 
         /// <summary>
@@ -115,7 +128,7 @@ public partial class AHandle
         /// <param name="remoteDirPath">远端文件夹路径</param>
         public void CreateFolder(string remoteDirPath)
         {
-            AHelper.Net.FTPCreateDir(URI, UserName, Password, remoteDirPath);
+            AHelper.Net.FTP.CreateDir(URI, UserName, Password, remoteDirPath);
         }
 
         /// <summary>
@@ -126,7 +139,7 @@ public partial class AHandle
         /// <param name="progress">回调</param>
         public void UploadFile(string localPath, string remotePath, ProgressArgs progress = default)
         {
-            AHelper.Net.FTPUploadFile(URI, UserName, Password, localPath, remotePath, progress, TimeOut, BufferSize);
+            AHelper.Net.FTP.UploadFile(URI, UserName, Password, localPath, remotePath, progress, TimeOut, BufferSize);
         }
 
         /// <summary>
@@ -141,7 +154,7 @@ public partial class AHandle
             SearchOption searchOption = SearchOption.TopDirectoryOnly,
             string searchPattern = "*")
         {
-            AHelper.Net.FTPUploadFolder(URI, UserName, Password, localPath, remotePath, progress, searchOption,
+            AHelper.Net.FTP.UploadFolder(URI, UserName, Password, localPath, remotePath, progress, searchOption,
                 searchPattern, TimeOut, BufferSize);
         }
 
@@ -155,7 +168,7 @@ public partial class AHandle
         public void DownloadFile(string localPath, string remotePath, ProgressArgs progress = default,
             bool isOverWrite = false)
         {
-            AHelper.Net.FTPDownloadFile(URI, UserName, Password,
+            AHelper.Net.FTP.DownloadFile(URI, UserName, Password,
                 localPath, remotePath, progress, isOverWrite,
                 TimeOut, BufferSize);
         }
@@ -177,7 +190,7 @@ public partial class AHandle
             string searchPattern = "*",
             bool isOverWrite = false)
         {
-            AHelper.Net.FTPDownloadFolder(URI, UserName, Password,
+            AHelper.Net.FTP.DownloadFolder(URI, UserName, Password,
                 localPath, remotePath, progress, searchOption, searchPattern, isOverWrite,
                 TimeOut, BufferSize);
         }
@@ -190,7 +203,7 @@ public partial class AHandle
         /// <returns>文件大小</returns>
         public long GetFileSize(string remotePath)
         {
-            return AHelper.Net.FTPGetFileSize(URI, UserName, Password, remotePath);
+            return AHelper.Net.FTP.GetFileSize(URI, UserName, Password, remotePath);
         }
 
         /// <summary>
@@ -202,7 +215,7 @@ public partial class AHandle
         /// <returns>文件列表</returns>
         public List<string> GetList(ListType type, bool detail = false, string keyword = "")
         {
-            return AHelper.Net.FTPGetRemoteList(URI, UserName, Password, type, detail, keyword);
+            return AHelper.Net.FTP.GetRemoteList(URI, UserName, Password, type, detail, keyword);
         }
 
         /// <summary>
@@ -211,7 +224,7 @@ public partial class AHandle
         /// <returns>Ture:有效 False:无效</returns>
         public bool Check()
         {
-            return AHelper.Net.FTPCheck(URI, UserName, Password, TimeOut);
+            return AHelper.Net.FTP.Check(URI, UserName, Password, TimeOut);
         }
 
         /// <summary>

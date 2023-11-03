@@ -516,16 +516,26 @@
     <Compile Include="Script\Handle\Net\HTTP\Handle.HTTP.cs" />
     <Compile Include="Script\Helper\Database\U.FileID.cs" />
     <Compile Include="Script\Helper\Database\U.Json.MINIJSON.cs" />
+    <Compile Include="Script\Helper\Exception\NetGetResponseStream.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Check.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Create.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Delete.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Download.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Get.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Upload.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.Connect.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.Delete.cs" />
     <Compile Include="Script\Helper\Net\HTTP\U.Http.Download.cs" />
     <Compile Include="Script\Helper\Net\HTTP\U.Http.Downloads.cs" />
-    <Compile Include="Script\Helper\Net\HTTP\U.Http.GetMD5.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.Get.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.Head.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.Helper.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.Options.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.Post.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.Put.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.Trace.cs" />
     <Compile Include="Script\Helper\Net\U.Net.cs" />
+    <Compile Include="Script\Helper\Net\U.Net.Helper.cs" />
     <Compile Include="Script\Helper\Reflect\U.Reflect.cs" />
     <Compile Include="Script\Tools\Bean\GBean.cs" />
     <Compile Include="Script\Tools\Bean\GBeanRegisterAttribute.cs" />
@@ -786,10 +796,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Plugins\Microsoft" />
+    <Folder Include="Script\Handle\Net\TCP" />
+    <Folder Include="Script\Helper\Net\TCP" />
     <Folder Include="Script\Tools\NetWork\TCP" />
     <Folder Include="Script\Tools\NetWork\Websocket" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Script\Helper\Net\Http\Note.md" />
     <Content Include="Script\Tools\Tuple\Tuple.Generated.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Tuple.Generated.cs</LastGenOutput>
