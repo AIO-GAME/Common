@@ -1723,21 +1723,14 @@
             IList扩展
             </summary>
         </member>
-        <member name="M:AIO.IListExtend.ToConverHex16X(System.Collections.Generic.IList{System.Byte},System.Int32,System.Int32)">
+        <member name="M:AIO.IListExtend.ToConverseHex16X(System.Collections.Generic.IList{System.Byte},System.Int32,System.Int32,System.Boolean)">
             <summary>
             从指定字节数组中 获取多个字节转化为大写16进制字符串
             </summary>
-            <param name="bytes"></param>
+            <param name="bytes">数组源</param>
             <param name="offset">开始位置</param>
             <param name="count">获取长度</param>
-        </member>
-        <member name="M:AIO.IListExtend.ToConverHex16x(System.Collections.Generic.IList{System.Byte},System.Int32,System.Int32)">
-            <summary>
-            从指定字节数组中 获取多个字节转化为大写16进制字符串
-            </summary>
-            <param name="bytes"></param>
-            <param name="offset">开始位置</param>
-            <param name="count">获取长度</param>
+            <param name="isLower">是否小写</param>
         </member>
         <member name="M:AIO.IListExtend.GetCharArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean)">
             <summary>
@@ -3059,6 +3052,1146 @@
         <member name="M:AIO.NetGetResponseStream.#ctor(System.String@)">
             <inheritdoc />
         </member>
+        <member name="T:AIO.Net.Buffer">
+            <summary>
+            Dynamic byte buffer
+            </summary>
+        </member>
+        <member name="P:AIO.Net.Buffer.IsEmpty">
+            <summary>
+            Is the buffer empty?
+            </summary>
+        </member>
+        <member name="P:AIO.Net.Buffer.Data">
+            <summary>
+            Bytes memory buffer
+            </summary>
+        </member>
+        <member name="P:AIO.Net.Buffer.Capacity">
+            <summary>
+            Bytes memory buffer capacity
+            </summary>
+        </member>
+        <member name="P:AIO.Net.Buffer.Size">
+            <summary>
+            Bytes memory buffer size
+            </summary>
+        </member>
+        <member name="P:AIO.Net.Buffer.Offset">
+            <summary>
+            Bytes memory buffer offset
+            </summary>
+        </member>
+        <member name="P:AIO.Net.Buffer.Item(System.Int64)">
+            <summary>
+            Buffer indexer operator
+            </summary>
+        </member>
+        <member name="M:AIO.Net.Buffer.#ctor">
+            <summary>
+            Initialize a new expandable buffer with zero capacity
+            </summary>
+        </member>
+        <member name="M:AIO.Net.Buffer.#ctor(System.Int64)">
+            <summary>
+            Initialize a new expandable buffer with the given capacity
+            </summary>
+        </member>
+        <member name="M:AIO.Net.Buffer.#ctor(System.Byte[])">
+            <summary>
+            Initialize a new expandable buffer with the given data
+            </summary>
+        </member>
+        <member name="M:AIO.Net.Buffer.ToString">
+            <summary>
+            Get a string from the current buffer
+            </summary>
+        </member>
+        <member name="M:AIO.Net.Buffer.ExtractString(System.Int64,System.Int64)">
+            <summary>
+            Extract the string from buffer of the given offset and size
+            </summary>
+        </member>
+        <member name="M:AIO.Net.Buffer.Remove(System.Int64,System.Int64)">
+            <summary>
+            Remove the buffer of the given offset and size
+            </summary>
+        </member>
+        <member name="M:AIO.Net.Buffer.Reserve(System.Int64)">
+            <summary>
+            Reserve the buffer of the given capacity
+            </summary>
+        </member>
+        <member name="M:AIO.Net.Buffer.Append(System.Byte)">
+            <summary>
+            Append the single byte
+            </summary>
+            <param name="value">Byte value to append</param>
+            <returns>Count of append bytes</returns>
+        </member>
+        <member name="M:AIO.Net.Buffer.Append(System.Byte[])">
+            <summary>
+            Append the given buffer
+            </summary>
+            <param name="buffer">Buffer to append</param>
+            <returns>Count of append bytes</returns>
+        </member>
+        <member name="M:AIO.Net.Buffer.Append(System.Byte[],System.Int64,System.Int64)">
+            <summary>
+            Append the given buffer fragment
+            </summary>
+            <param name="buffer">Buffer to append</param>
+            <param name="offset">Buffer offset</param>
+            <param name="size">Buffer size</param>
+            <returns>Count of append bytes</returns>
+        </member>
+        <member name="M:AIO.Net.Buffer.Append(System.Collections.Generic.ICollection{System.Byte})">
+            <summary>
+            Append the given span of bytes
+            </summary>
+            <param name="buffer">Buffer to append as a span of bytes</param>
+            <returns>Count of append bytes</returns>
+        </member>
+        <member name="M:AIO.Net.Buffer.Append(AIO.Net.Buffer)">
+            <summary>
+            Append the given buffer
+            </summary>
+            <param name="buffer">Buffer to append</param>
+            <returns>Count of append bytes</returns>
+        </member>
+        <member name="M:AIO.Net.Buffer.Append(System.String)">
+            <summary>
+            Append the given text in UTF-8 encoding
+            </summary>
+            <param name="text">Text to append</param>
+            <returns>Count of append bytes</returns>
+        </member>
+        <member name="M:AIO.Net.Buffer.Append(System.Collections.Generic.ICollection{System.Char})">
+            <summary>
+            Append the given text in UTF-8 encoding
+            </summary>
+            <param name="text">Text to append as a span of characters</param>
+            <returns>Count of append bytes</returns>
+        </member>
+        <member name="T:AIO.Net.HTTPClient">
+            <summary>
+            HTTP client is used to communicate with HTTP Web server. It allows to send GET, POST, PUT, DELETE requests and receive HTTP result.
+            </summary>
+            <remarks>Thread-safe.</remarks>
+        </member>
+        <member name="M:AIO.Net.HTTPClient.#ctor(System.Net.IPAddress,System.Int32)">
+            <summary>
+            Initialize HTTP client with a given IP address and port number
+            </summary>
+            <param name="address">IP address</param>
+            <param name="port">Port number</param>
+        </member>
+        <member name="M:AIO.Net.HTTPClient.#ctor(System.String,System.Int32)">
+            <summary>
+            Initialize HTTP client with a given IP address and port number
+            </summary>
+            <param name="address">IP address</param>
+            <param name="port">Port number</param>
+        </member>
+        <member name="M:AIO.Net.HTTPClient.#ctor(System.Net.DnsEndPoint)">
+            <summary>
+            Initialize HTTP client with a given DNS endpoint
+            </summary>
+            <param name="endpoint">DNS endpoint</param>
+        </member>
+        <member name="M:AIO.Net.HTTPClient.#ctor(System.Net.IPEndPoint)">
+            <summary>
+            Initialize HTTP client with a given IP endpoint
+            </summary>
+            <param name="endpoint">IP endpoint</param>
+        </member>
+        <member name="P:AIO.Net.HTTPClient.Request">
+            <summary>
+            Get the HTTP request
+            </summary>
+        </member>
+        <member name="P:AIO.Net.HTTPClient.Response">
+            <summary>
+            Get the HTTP response
+            </summary>
+        </member>
+        <member name="M:AIO.Net.HTTPClient.SendRequest">
+            <summary>
+            Send the current HTTP request (synchronous)
+            </summary>
+            <returns>Size of sent data</returns>
+        </member>
+        <member name="M:AIO.Net.HTTPClient.SendRequest(AIO.Net.HttpRequest)">
+            <summary>
+            Send the HTTP request (synchronous)
+            </summary>
+            <param name="request">HTTP request</param>
+            <returns>Size of sent data</returns>
+        </member>
+        <member name="M:AIO.Net.HTTPClient.SendRequestBody(System.String)">
+            <summary>
+            Send the HTTP request body (synchronous)
+            </summary>
+            <param name="body">HTTP request body</param>
+            <returns>Size of sent data</returns>
+        </member>
+        <member name="M:AIO.Net.HTTPClient.SendRequestBody(System.Collections.Generic.ICollection{System.Char})">
+            <summary>
+            Send the HTTP request body (synchronous)
+            </summary>
+            <param name="body">HTTP request body as a span of characters</param>
+            <returns>Size of sent data</returns>
+        </member>
+        <member name="M:AIO.Net.HTTPClient.SendRequestBody(System.Byte[])">
+            <summary>
+            Send the HTTP request body (synchronous)
+            </summary>
+            <param name="buffer">HTTP request body buffer</param>
+            <returns>Size of sent data</returns>
+        </member>
+        <member name="M:AIO.Net.HTTPClient.SendRequestBody(System.Byte[],System.Int64,System.Int64)">
+            <summary>
+            Send the HTTP request body (synchronous)
+            </summary>
+            <param name="buffer">HTTP request body buffer</param>
+            <param name="offset">HTTP request body buffer offset</param>
+            <param name="size">HTTP request body size</param>
+            <returns>Size of sent data</returns>
+        </member>
+        <member name="M:AIO.Net.HTTPClient.SendRequestAsync">
+            <summary>
+            Send the current HTTP request (asynchronous)
+            </summary>
+            <returns>'true' if the current HTTP request was successfully sent, 'false' if the session is not connected</returns>
+        </member>
+        <member name="M:AIO.Net.HTTPClient.SendRequestAsync(AIO.Net.HttpRequest)">
+            <summary>
+            Send the HTTP request (asynchronous)
+            </summary>
+            <param name="request">HTTP request</param>
+            <returns>'true' if the current HTTP request was successfully sent, 'false' if the session is not connected</returns>
+        </member>
+        <member name="M:AIO.Net.HTTPClient.SendRequestBodyAsync(System.String)">
+            <summary>
+            Send the HTTP request body (asynchronous)
+            </summary>
+            <param name="body">HTTP request body</param>
+            <returns>'true' if the HTTP request body was successfully sent, 'false' if the session is not connected</returns>
+        </member>
+        <member name="M:AIO.Net.HTTPClient.SendRequestBodyAsync(System.Collections.Generic.ICollection{System.Char})">
+            <summary>
+            Send the HTTP request body (asynchronous)
+            </summary>
+            <param name="body">HTTP request body as a span of characters</param>
+            <returns>'true' if the HTTP request body was successfully sent, 'false' if the session is not connected</returns>
+        </member>
+        <member name="M:AIO.Net.HTTPClient.SendRequestBodyAsync(System.Byte[])">
+            <summary>
+            Send the HTTP request body (asynchronous)
+            </summary>
+            <param name="buffer">HTTP request body buffer</param>
+            <returns>'true' if the HTTP request body was successfully sent, 'false' if the session is not connected</returns>
+        </member>
+        <member name="M:AIO.Net.HTTPClient.SendRequestBodyAsync(System.Byte[],System.Int64,System.Int64)">
+            <summary>
+            Send the HTTP request body (asynchronous)
+            </summary>
+            <param name="buffer">HTTP request body buffer</param>
+            <param name="offset">HTTP request body buffer offset</param>
+            <param name="size">HTTP request body size</param>
+            <returns>'true' if the HTTP request body was successfully sent, 'false' if the session is not connected</returns>
+        </member>
+        <member name="M:AIO.Net.HTTPClient.SendRequestBodyAsync(System.Collections.Generic.ICollection{System.Byte})">
+            <summary>
+            Send the HTTP request body (asynchronous)
+            </summary>
+            <param name="buffer">HTTP request body buffer as a span of bytes</param>
+            <returns>'true' if the HTTP request body was successfully sent, 'false' if the session is not connected</returns>
+        </member>
+        <member name="M:AIO.Net.HTTPClient.OnReceivedResponseHeader(AIO.Net.HttpResponse)">
+            <summary>
+            Handle HTTP response header received notification
+            </summary>
+            <remarks>Notification is called when HTTP response header was received from the server.</remarks>
+            <param name="response">HTTP request</param>
+        </member>
+        <member name="M:AIO.Net.HTTPClient.OnReceivedResponse(AIO.Net.HttpResponse)">
+            <summary>
+            Handle HTTP response received notification
+            </summary>
+            <remarks>Notification is called when HTTP response was received from the server.</remarks>
+            <param name="response">HTTP response</param>
+        </member>
+        <member name="M:AIO.Net.HTTPClient.OnReceivedResponseError(AIO.Net.HttpResponse,System.String)">
+            <summary>
+            Handle HTTP response error notification
+            </summary>
+            <remarks>Notification is called when HTTP response error was received from the server.</remarks>
+            <param name="response">HTTP response</param>
+            <param name="error">HTTP response error</param>
+        </member>
+        <member name="T:AIO.Net.HttpRequest">
+            <summary>
+            HTTP request is used to create or process parameters of HTTP protocol request(method, URL, headers, etc).
+            </summary>
+            <remarks>Not thread-safe.</remarks>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.#ctor">
+            <summary>
+            Initialize an empty HTTP request
+            </summary>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initialize a new HTTP request with a given method, URL and protocol
+            </summary>
+            <param name="method">HTTP method</param>
+            <param name="url">Requested URL</param>
+            <param name="protocol">Protocol version (default is "HTTP/1.1")</param>
+        </member>
+        <member name="P:AIO.Net.HttpRequest.IsEmpty">
+            <summary>
+            Is the HTTP request empty?
+            </summary>
+        </member>
+        <member name="P:AIO.Net.HttpRequest.IsErrorSet">
+            <summary>
+            Is the HTTP request error flag set?
+            </summary>
+        </member>
+        <member name="P:AIO.Net.HttpRequest.Method">
+            <summary>
+            Get the HTTP request method
+            </summary>
+        </member>
+        <member name="P:AIO.Net.HttpRequest.Url">
+            <summary>
+            Get the HTTP request URL
+            </summary>
+        </member>
+        <member name="P:AIO.Net.HttpRequest.Protocol">
+            <summary>
+            Get the HTTP request protocol version
+            </summary>
+        </member>
+        <member name="P:AIO.Net.HttpRequest.Headers">
+            <summary>
+            Get the HTTP request headers count
+            </summary>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.Header(System.Int32)">
+            <summary>
+            Get the HTTP request header by index
+            </summary>
+        </member>
+        <member name="P:AIO.Net.HttpRequest.Cookies">
+            <summary>
+            Get the HTTP request cookies count
+            </summary>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.Cookie(System.Int32)">
+            <summary>
+            Get the HTTP request cookie by index
+            </summary>
+        </member>
+        <member name="P:AIO.Net.HttpRequest.Body">
+            <summary>
+            Get the HTTP request body as string
+            </summary>
+        </member>
+        <member name="P:AIO.Net.HttpRequest.BodyBytes">
+            <summary>
+            Get the HTTP request body as byte array
+            </summary>
+        </member>
+        <member name="P:AIO.Net.HttpRequest.BodyLength">
+            <summary>
+            Get the HTTP request body length
+            </summary>
+        </member>
+        <member name="P:AIO.Net.HttpRequest.Cache">
+            <summary>
+            Get the HTTP request cache content
+            </summary>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.ToString">
+            <summary>
+            Get string from the current HTTP request
+            </summary>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.Clear">
+            <summary>
+            Clear the HTTP request cache
+            </summary>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.SetBegin(System.String,System.String,System.String)">
+            <summary>
+            Set the HTTP request begin with a given method, URL and protocol
+            </summary>
+            <param name="method">HTTP method</param>
+            <param name="url">Requested URL</param>
+            <param name="protocol">Protocol version (default is "HTTP/1.1")</param>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.SetHeader(System.String,System.String)">
+            <summary>
+            Set the HTTP request header
+            </summary>
+            <param name="key">Header key</param>
+            <param name="value">Header value</param>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.SetCookie(System.String,System.String)">
+            <summary>
+            Set the HTTP request cookie
+            </summary>
+            <param name="name">Cookie name</param>
+            <param name="value">Cookie value</param>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.AddCookie(System.String,System.String)">
+            <summary>
+            Add the HTTP request cookie
+            </summary>
+            <param name="name">Cookie name</param>
+            <param name="value">Cookie value</param>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.SetBody(System.Collections.Generic.ICollection{System.Char})">
+            <summary>
+            Set the HTTP request body
+            </summary>
+            <param name="body">Body string content as a span of characters</param>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.SetBody">
+            <summary>
+            Set the HTTP request body
+            </summary>
+            <param name="body">Body string content as a span of characters</param>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.SetBody(System.Collections.Generic.ICollection{System.Byte})">
+            <summary>
+            Set the HTTP request body
+            </summary>
+            <param name="body">Body binary content as a span of bytes</param>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.SetBodyLength(System.Int32)">
+            <summary>
+            Set the HTTP request body length
+            </summary>
+            <param name="length">Body length</param>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.MakeHeadRequest(System.String)">
+            <summary>
+            Make HEAD request
+            </summary>
+            <param name="url">URL to request</param>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.MakeGetRequest(System.String)">
+            <summary>
+            Make GET request
+            </summary>
+            <param name="url">URL to request</param>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.MakePostRequest(System.String,System.String,System.String)">
+            <summary>
+            Make POST request
+            </summary>
+            <param name="url">URL to request</param>
+            <param name="content">String content</param>
+            <param name="contentType">Content type (default is "text/plain; charset=UTF-8")</param>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.MakePostRequest(System.String,System.Collections.Generic.ICollection{System.Char},System.String)">
+            <summary>
+            Make POST request
+            </summary>
+            <param name="url">URL to request</param>
+            <param name="content">String content as a span of characters</param>
+            <param name="contentType">Content type (default is "text/plain; charset=UTF-8")</param>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.MakePostRequest(System.String,System.Collections.Generic.ICollection{System.Byte},System.String)">
+            <summary>
+            Make POST request
+            </summary>
+            <param name="url">URL to request</param>
+            <param name="content">Binary content as a span of bytes</param>
+            <param name="contentType">Content type (default is "")</param>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.MakePutRequest(System.String,System.String,System.String)">
+            <summary>
+            Make PUT request
+            </summary>
+            <param name="url">URL to request</param>
+            <param name="content">String content</param>
+            <param name="contentType">Content type (default is "text/plain; charset=UTF-8")</param>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.MakePutRequest(System.String,System.Collections.Generic.ICollection{System.Char},System.String)">
+            <summary>
+            Make PUT request
+            </summary>
+            <param name="url">URL to request</param>
+            <param name="content">String content as a span of characters</param>
+            <param name="contentType">Content type (default is "text/plain; charset=UTF-8")</param>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.MakePutRequest(System.String,System.Collections.Generic.ICollection{System.Byte},System.String)">
+            <summary>
+            Make PUT request
+            </summary>
+            <param name="url">URL to request</param>
+            <param name="content">Binary content as a span of bytes</param>
+            <param name="contentType">Content type (default is "")</param>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.MakeDeleteRequest(System.String)">
+            <summary>
+            Make DELETE request
+            </summary>
+            <param name="url">URL to request</param>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.MakeOptionsRequest(System.String)">
+            <summary>
+            Make OPTIONS request
+            </summary>
+            <param name="url">URL to request</param>
+        </member>
+        <member name="M:AIO.Net.HttpRequest.MakeTraceRequest(System.String)">
+            <summary>
+            Make TRACE request
+            </summary>
+            <param name="url">URL to request</param>
+        </member>
+        <member name="T:AIO.Net.HttpResponse">
+            <summary>
+            HTTP response is used to create or process parameters of HTTP protocol response(status, headers, etc).
+            </summary>
+            <remarks>Not thread-safe.</remarks>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.#ctor">
+            <summary>
+            Initialize an empty HTTP response
+            </summary>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.#ctor(System.Int32,System.String)">
+            <summary>
+            Initialize a new HTTP response with a given status and protocol
+            </summary>
+            <param name="status">HTTP status</param>
+            <param name="protocol">Protocol version (default is "HTTP/1.1")</param>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.#ctor(System.Int32,System.String,System.String)">
+            <summary>
+            Initialize a new HTTP response with a given status, status phrase and protocol
+            </summary>
+            <param name="status">HTTP status</param>
+            <param name="statusPhrase">HTTP status phrase</param>
+            <param name="protocol">Protocol version</param>
+        </member>
+        <member name="P:AIO.Net.HttpResponse.IsEmpty">
+            <summary>
+            Is the HTTP response empty?
+            </summary>
+        </member>
+        <member name="P:AIO.Net.HttpResponse.IsErrorSet">
+            <summary>
+            Is the HTTP response error flag set?
+            </summary>
+        </member>
+        <member name="P:AIO.Net.HttpResponse.Status">
+            <summary>
+            Get the HTTP response status
+            </summary>
+        </member>
+        <member name="P:AIO.Net.HttpResponse.StatusPhrase">
+            <summary>
+            Get the HTTP response status phrase
+            </summary>
+        </member>
+        <member name="P:AIO.Net.HttpResponse.Protocol">
+            <summary>
+            Get the HTTP response protocol version
+            </summary>
+        </member>
+        <member name="P:AIO.Net.HttpResponse.Headers">
+            <summary>
+            Get the HTTP response headers count
+            </summary>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.Header(System.Int32)">
+            <summary>
+            Get the HTTP response header by index
+            </summary>
+        </member>
+        <member name="P:AIO.Net.HttpResponse.Body">
+            <summary>
+            Get the HTTP response body as string
+            </summary>
+        </member>
+        <member name="P:AIO.Net.HttpResponse.BodyBytes">
+            <summary>
+            Get the HTTP request body as byte array
+            </summary>
+        </member>
+        <member name="P:AIO.Net.HttpResponse.BodyLength">
+            <summary>
+            Get the HTTP response body length
+            </summary>
+        </member>
+        <member name="P:AIO.Net.HttpResponse.Cache">
+            <summary>
+            Get the HTTP response cache content
+            </summary>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.ToString">
+            <summary>
+            Get string from the current HTTP response
+            </summary>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.Clear">
+            <summary>
+            Clear the HTTP response cache
+            </summary>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.SetBegin(System.Int32,System.String)">
+            <summary>
+            Set the HTTP response begin with a given status and protocol
+            </summary>
+            <param name="status">HTTP status</param>
+            <param name="protocol">Protocol version (default is "HTTP/1.1")</param>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.SetBegin(System.Int32,System.String,System.String)">
+            <summary>
+            Set the HTTP response begin with a given status, status phrase and protocol
+            </summary>
+            <param name="status">HTTP status</param>
+            <param name="statusPhrase"> HTTP status phrase</param>
+            <param name="protocol">Protocol version</param>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.SetContentType(System.String)">
+            <summary>
+            Set the HTTP response content type
+            </summary>
+            <param name="extension">Content extension</param>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.SetHeader(System.String,System.String)">
+            <summary>
+            Set the HTTP response header
+            </summary>
+            <param name="key">Header key</param>
+            <param name="value">Header value</param>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.SetCookie(System.String,System.String,System.Int32,System.String,System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Set the HTTP response cookie
+            </summary>
+            <param name="name">Cookie name</param>
+            <param name="value">Cookie value</param>
+            <param name="maxAge">Cookie age in seconds until it expires (default is 86400)</param>
+            <param name="path">Cookie path (default is "")</param>
+            <param name="domain">Cookie domain (default is "")</param>
+            <param name="secure">Cookie secure flag (default is true)</param>
+            <param name="strict">Cookie strict flag (default is true)</param>
+            <param name="httpOnly">Cookie HTTP-only flag (default is true)</param>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.SetBody(System.String)">
+            <summary>
+            Set the HTTP response body
+            </summary>
+            <param name="body">Body binary content as a span of bytes</param>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.SetBody">
+            <summary>
+            Set the HTTP response body
+            </summary>
+            <param name="body">Body binary content as a span of bytes</param>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.SetBody(System.Collections.Generic.ICollection{System.Byte})">
+            <summary>
+            Set the HTTP response body
+            </summary>
+            <param name="body">Body binary content as a span of bytes</param>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.SetBody(System.Collections.Generic.ICollection{System.Char})">
+            <summary>
+            Set the HTTP response body
+            </summary>
+            <param name="body">Body binary content as a span of bytes</param>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.SetBodyLength(System.Int32)">
+            <summary>
+            Set the HTTP response body length
+            </summary>
+            <param name="length">Body length</param>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.MakeOkResponse(System.Int32)">
+            <summary>
+            Make OK response
+            </summary>
+            <param name="status">OK status (default is 200 (OK))</param>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.MakeErrorResponse(System.String,System.String)">
+            <summary>
+            Make ERROR response
+            </summary>
+            <param name="content">Error content (default is "")</param>
+            <param name="contentType">Error content type (default is "text/plain; charset=UTF-8")</param>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.MakeErrorResponse(System.Int32,System.String,System.String)">
+            <summary>
+            Make ERROR response
+            </summary>
+            <param name="status">Error status</param>
+            <param name="content">Error content (default is "")</param>
+            <param name="contentType">Error content type (default is "text/plain; charset=UTF-8")</param>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.MakeHeadResponse">
+            <summary>
+            Make HEAD response
+            </summary>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.MakeGetResponse(System.String,System.String)">
+            <summary>
+            Make GET response
+            </summary>
+            <param name="content">String content (default is "")</param>
+            <param name="contentType">Content type (default is "text/plain; charset=UTF-8")</param>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.MakeGetResponse(System.Collections.Generic.ICollection{System.Char},System.String)">
+            <summary>
+            Make GET response
+            </summary>
+            <param name="content">String content as a span of characters</param>
+            <param name="contentType">Content type (default is "text/plain; charset=UTF-8")</param>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.MakeGetResponse(System.Collections.Generic.ICollection{System.Byte},System.String)">
+            <summary>
+            Make GET response
+            </summary>
+            <param name="content">Binary content as a span of bytes</param>
+            <param name="contentType">Content type (default is "")</param>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.MakeOptionsResponse(System.String)">
+            <summary>
+            Make OPTIONS response
+            </summary>
+            <param name="allow">Allow methods (default is "HEAD,GET,POST,PUT,DELETE,OPTIONS,TRACE")</param>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.MakeTraceResponse(System.Collections.Generic.ICollection{System.Char})">
+            <summary>
+            Make TRACE response
+            </summary>
+            <param name="content">String content as a span of characters</param>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.MakeTraceResponse(System.Collections.Generic.ICollection{System.Byte})">
+            <summary>
+            Make TRACE response
+            </summary>
+            <param name="content">Binary content as a span of bytes</param>
+        </member>
+        <member name="M:AIO.Net.HttpResponse.MakeTraceResponse(AIO.Net.HttpRequest)">
+            <summary>
+            Make TRACE response
+            </summary>
+            <param name="request">HTTP request</param>
+        </member>
+        <member name="T:AIO.Net.TCPClient">
+            <summary>
+            TCP客户端用于向连接的TCP服务器读写数据
+            </summary>
+            <remarks>Thread-safe</remarks>
+        </member>
+        <member name="M:AIO.Net.TCPClient.#ctor(System.Net.IPAddress,System.Int32)">
+            <summary>
+            Initialize TCP client with a given server IP address and port number
+            </summary>
+            <param name="address">IP address</param>
+            <param name="port">Port number</param>
+        </member>
+        <member name="M:AIO.Net.TCPClient.#ctor(System.String,System.Int32)">
+            <summary>
+            Initialize TCP client with a given server IP address and port number
+            </summary>
+            <param name="address">IP address</param>
+            <param name="port">Port number</param>
+        </member>
+        <member name="M:AIO.Net.TCPClient.#ctor(System.Net.DnsEndPoint)">
+            <summary>
+            Initialize TCP client with a given DNS endpoint
+            </summary>
+            <param name="endpoint">DNS endpoint</param>
+        </member>
+        <member name="M:AIO.Net.TCPClient.#ctor(System.Net.IPEndPoint)">
+            <summary>
+            Initialize TCP client with a given IP endpoint
+            </summary>
+            <param name="endpoint">IP endpoint</param>
+        </member>
+        <member name="M:AIO.Net.TCPClient.#ctor(System.Net.EndPoint,System.String,System.Int32)">
+            <summary>
+            Initialize TCP client with a given endpoint, address and port
+            </summary>
+            <param name="endpoint">Endpoint</param>
+            <param name="address">Server address</param>
+            <param name="port">Server port</param>
+        </member>
+        <member name="P:AIO.Net.TCPClient.Id">
+            <summary>
+            Client Id
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TCPClient.Address">
+            <summary>
+            TCP server address
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TCPClient.Port">
+            <summary>
+            TCP server port
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TCPClient.Endpoint">
+            <summary>
+            Endpoint
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TCPClient.Socket">
+            <summary>
+            Socket
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TCPClient.BytesPending">
+            <summary>
+            Number of bytes pending sent by the client
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TCPClient.BytesSending">
+            <summary>
+            Number of bytes sending by the client
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TCPClient.BytesSent">
+            <summary>
+            Number of bytes sent by the client
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TCPClient.BytesReceived">
+            <summary>
+            Number of bytes received by the client
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TCPClient.OptionDualMode">
+            <summary>
+            Option: dual mode socket
+            </summary>
+            <remarks>
+            Specifies whether the Socket is a dual-mode socket used for both IPv4 and IPv6.
+            Will work only if socket is bound on IPv6 address.
+            </remarks>
+        </member>
+        <member name="P:AIO.Net.TCPClient.OptionKeepAlive">
+            <summary>
+            Option: keep alive
+            </summary>
+            <remarks>
+            This option will setup SO_KEEPALIVE if the OS support this feature
+            </remarks>
+        </member>
+        <member name="P:AIO.Net.TCPClient.OptionTcpKeepAliveTime">
+            <summary>
+            Option: TCP keep alive time
+            </summary>
+            <remarks>
+            The number of seconds a TCP connection will remain alive/idle before keepalive probes are sent to the remote
+            </remarks>
+        </member>
+        <member name="P:AIO.Net.TCPClient.OptionTcpKeepAliveInterval">
+            <summary>
+            Option: TCP keep alive interval
+            </summary>
+            <remarks>
+            The number of seconds a TCP connection will wait for a keepalive response before sending another keepalive probe
+            </remarks>
+        </member>
+        <member name="P:AIO.Net.TCPClient.OptionTcpKeepAliveRetryCount">
+            <summary>
+            Option: TCP keep alive retry count
+            </summary>
+            <remarks>
+            The number of TCP keep alive probes that will be sent before the connection is terminated
+            </remarks>
+        </member>
+        <member name="P:AIO.Net.TCPClient.OptionNoDelay">
+            <summary>
+            Option: no delay
+            </summary>
+            <remarks>
+            This option will enable/disable Nagle's algorithm for TCP protocol
+            </remarks>
+        </member>
+        <member name="P:AIO.Net.TCPClient.OptionReceiveBufferLimit">
+            <summary>
+            Option: receive buffer limit
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TCPClient.OptionReceiveBufferSize">
+            <summary>
+            Option: receive buffer size
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TCPClient.OptionSendBufferLimit">
+            <summary>
+            Option: send buffer limit
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TCPClient.OptionSendBufferSize">
+            <summary>
+            Option: send buffer size
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TCPClient.IsConnecting">
+            <summary>
+            Is the client connecting?
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TCPClient.IsConnected">
+            <summary>
+            Is the client connected?
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TCPClient.CreateSocket">
+            <summary>
+            Create a new socket object
+            </summary>
+            <remarks>
+            Method may be override if you need to prepare some specific socket object in your implementation.
+            </remarks>
+            <returns>Socket object</returns>
+        </member>
+        <member name="M:AIO.Net.TCPClient.Connect">
+            <summary>
+            Connect the client (synchronous)
+            </summary>
+            <remarks>
+            Please note that synchronous connect will not receive data automatically!
+            You should use Receive() or ReceiveAsync() method manually after successful connection.
+            </remarks>
+            <returns>'true' if the client was successfully connected, 'false' if the client failed to connect</returns>
+        </member>
+        <member name="M:AIO.Net.TCPClient.Disconnect">
+            <summary>
+            Disconnect the client (synchronous)
+            </summary>
+            <returns>'true' if the client was successfully disconnected, 'false' if the client is already disconnected</returns>
+        </member>
+        <member name="M:AIO.Net.TCPClient.Reconnect">
+            <summary>
+            Reconnect the client (synchronous)
+            </summary>
+            <returns>'true' if the client was successfully reconnected, 'false' if the client is already reconnected</returns>
+        </member>
+        <member name="M:AIO.Net.TCPClient.ConnectAsync">
+            <summary>
+            Connect the client (asynchronous)
+            </summary>
+            <returns>'true' if the client was successfully connected, 'false' if the client failed to connect</returns>
+        </member>
+        <member name="M:AIO.Net.TCPClient.DisconnectAsync">
+            <summary>
+            Disconnect the client (asynchronous)
+            </summary>
+            <returns>'true' if the client was successfully disconnected, 'false' if the client is already disconnected</returns>
+        </member>
+        <member name="M:AIO.Net.TCPClient.ReconnectAsync">
+            <summary>
+            Reconnect the client (asynchronous)
+            </summary>
+            <returns>'true' if the client was successfully reconnected, 'false' if the client is already reconnected</returns>
+        </member>
+        <member name="M:AIO.Net.TCPClient.Send(System.Byte[])">
+            <summary>
+            Send data to the server (synchronous)
+            </summary>
+            <param name="buffer">Buffer to send</param>
+            <returns>Size of sent data</returns>
+        </member>
+        <member name="M:AIO.Net.TCPClient.Send(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Send data to the server (synchronous)
+            </summary>
+            <param name="buffer">Buffer to send</param>
+            <param name="offset">Buffer offset</param>
+            <param name="size">Buffer size</param>
+            <returns>Size of sent data</returns>
+        </member>
+        <member name="M:AIO.Net.TCPClient.Send(System.Collections.Generic.ICollection{System.Char})">
+            <summary>
+            Send text to the server (synchronous)
+            </summary>
+            <param name="text">Text to send as a span of characters</param>
+            <returns>Size of sent text</returns>
+        </member>
+        <member name="M:AIO.Net.TCPClient.SendAsync(System.Collections.Generic.ICollection{System.Byte})">
+            <summary>
+            Send data to the server (asynchronous)
+            </summary>
+            <param name="buffer">Buffer to send</param>
+            <returns>'true' if the data was successfully sent, 'false' if the client is not connected</returns>
+        </member>
+        <member name="M:AIO.Net.TCPClient.SendAsync(System.Collections.Generic.ICollection{System.Byte},System.Int64,System.Int64)">
+            <summary>
+            Send data to the server (asynchronous)
+            </summary>
+            <param name="buffer">Buffer to send</param>
+            <param name="offset">Buffer offset</param>
+            <param name="size">Buffer size</param>
+            <returns>'true' if the data was successfully sent, 'false' if the client is not connected</returns>
+        </member>
+        <member name="M:AIO.Net.TCPClient.SendAsync(System.Collections.Generic.IEnumerable{System.Char})">
+            <summary>
+            Send text to the server (asynchronous)
+            </summary>
+            <param name="text">Text to send as a span of characters</param>
+            <returns>'true' if the text was successfully sent, 'false' if the client is not connected</returns>
+        </member>
+        <member name="M:AIO.Net.TCPClient.Receive(System.Byte[])">
+            <summary>
+            Receive data from the server (synchronous)
+            </summary>
+            <param name="buffer">Buffer to receive</param>
+            <returns>Size of received data</returns>
+        </member>
+        <member name="M:AIO.Net.TCPClient.Receive(System.Byte[],System.Int64,System.Int64)">
+            <summary>
+            Receive data from the server (synchronous)
+            </summary>
+            <param name="buffer">Buffer to receive</param>
+            <param name="offset">Buffer offset</param>
+            <param name="size">Buffer size</param>
+            <returns>Size of received data</returns>
+        </member>
+        <member name="M:AIO.Net.TCPClient.Receive(System.Int64)">
+            <summary>
+            Receive text from the server (synchronous)
+            </summary>
+            <param name="size">Text size to receive</param>
+            <returns>Received text</returns>
+        </member>
+        <member name="M:AIO.Net.TCPClient.ReceiveAsync">
+            <summary>
+            Receive data from the server (asynchronous)
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TCPClient.TryReceive">
+            <summary>
+            Try to receive new data
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TCPClient.TrySend">
+            <summary>
+            Try to send pending data
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TCPClient.ClearBuffers">
+            <summary>
+            Clear send/receive buffers
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TCPClient.OnAsyncCompleted(System.Object,System.Net.Sockets.SocketAsyncEventArgs)">
+            <summary>
+            This method is called whenever a receive or send operation is completed on a socket
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TCPClient.ProcessConnect(System.Net.Sockets.SocketAsyncEventArgs)">
+            <summary>
+            This method is invoked when an asynchronous connect operation completes
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TCPClient.ProcessReceive(System.Net.Sockets.SocketAsyncEventArgs)">
+            <summary>
+            This method is invoked when an asynchronous receive operation completes
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TCPClient.ProcessSend(System.Net.Sockets.SocketAsyncEventArgs)">
+            <summary>
+            This method is invoked when an asynchronous send operation completes
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TCPClient.OnConnecting">
+            <summary>
+            Handle client connecting notification
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TCPClient.OnConnected">
+            <summary>
+            Handle client connected notification
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TCPClient.OnDisconnecting">
+            <summary>
+            Handle client disconnecting notification
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TCPClient.OnDisconnected">
+            <summary>
+            Handle client disconnected notification
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TCPClient.OnReceived(System.Byte[],System.Int64,System.Int64)">
+            <summary>
+            Handle buffer received notification
+            </summary>
+            <param name="buffer">Received buffer</param>
+            <param name="offset">Received buffer offset</param>
+            <param name="size">Received buffer size</param>
+            <remarks>
+            Notification is called when another chunk of buffer was received from the server
+            </remarks>
+        </member>
+        <member name="M:AIO.Net.TCPClient.OnSent(System.Int64,System.Int64)">
+            <summary>
+            Handle buffer sent notification
+            </summary>
+            <param name="sent">Size of sent buffer</param>
+            <param name="pending">Size of pending buffer</param>
+            <remarks>
+            Notification is called when another chunk of buffer was sent to the server.
+            This handler could be used to send another buffer to the server for instance when the pending size is zero.
+            </remarks>
+        </member>
+        <member name="M:AIO.Net.TCPClient.OnEmpty">
+            <summary>
+            Handle empty send buffer notification
+            </summary>
+            <remarks>
+            Notification is called when the send buffer is empty and ready for a new data to send.
+            This handler could be used to send another buffer to the server.
+            </remarks>
+        </member>
+        <member name="M:AIO.Net.TCPClient.OnError(System.Net.Sockets.SocketError)">
+            <summary>
+            Handle error notification
+            </summary>
+            <param name="error">Socket error code</param>
+        </member>
+        <member name="M:AIO.Net.TCPClient.SendError(System.Net.Sockets.SocketError)">
+            <summary>
+            Send error notification
+            </summary>
+            <param name="error">Socket error code</param>
+        </member>
+        <member name="P:AIO.Net.TCPClient.IsDisposed">
+            <summary>
+            Disposed flag
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TCPClient.IsSocketDisposed">
+            <summary>
+            Client socket disposed flag
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TCPClient.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.Net.TCPClient.Dispose(System.Boolean)">
+            <summary>
+            Dispose client resources
+            </summary>
+            <param name="disposingManagedResources"></param>
+        </member>
         <member name="T:AIO.GBean">
             <summary>
             游戏数据
@@ -3284,9 +4417,20 @@
             构建一个指定数据的ByteBuffer
             </summary>
         </member>
+        <member name="M:AIO.Buffer`1.Reserve(System.Int64)">
+            <summary>
+            CN:保留给定容量的缓冲区
+            </summary>
+            <remarks>Reserve the buffer of the given capacity</remarks>
+        </member>
         <member name="P:AIO.Buffer`1.Capacity">
             <summary> 
             数据缓存:容量
+            </summary>
+        </member>
+        <member name="P:AIO.Buffer`1.IsEmpty">
+            <summary>
+            Is the buffer empty?
             </summary>
         </member>
         <member name="M:AIO.Buffer`1.ToArray">

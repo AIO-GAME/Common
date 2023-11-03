@@ -47,6 +47,22 @@ namespace AIO
             ReadIndex = 0;
         }
 
+        /// <summary>
+        /// CN:保留给定容量的缓冲区
+        /// </summary>
+        /// <remarks>Reserve the buffer of the given capacity</remarks>
+        public void Reserve(long capacity)
+        {
+            System.Diagnostics.Debug.Assert((capacity >= 0), "Invalid reserve capacity!");
+            if (capacity < 0)
+                throw new ArgumentException("Invalid reserve capacity!", nameof(capacity));
+
+            if (capacity <= Capacity) return;
+            var data = new T[Math.Max(capacity, 2 * Capacity)];
+            Array.Copy(Arrays, 0, data, 0, Arrays.Length);
+            Arrays = data;
+        }
+
         /// <summary> 
         /// 数据缓存:容量
         /// </summary>
@@ -67,6 +83,11 @@ namespace AIO
             }
         }
 
+        /// <summary>
+        /// Is the buffer empty?
+        /// </summary>
+        public bool IsEmpty => Arrays is null || WriteIndex == ReadIndex;
+        
         /// <summary> 
         /// 获取有效字节数组
         /// </summary>

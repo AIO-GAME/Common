@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace AIO
 {
@@ -83,7 +84,8 @@ namespace AIO
         /// <inheritdoc/>
         public override string ToString()
         {
-            return string.Concat("Byte Buffer:{ offset = ", ReadIndex, ", top=", WriteIndex, ", data = ", AHelper.Hex.ToHex(ToArray()), '}');
+            return string.Concat("Byte Buffer:{ offset = ", ReadIndex, ", top=", WriteIndex, ", data = ",
+                AHelper.Hex.ToHex(ToArray()), '}');
         }
 
         /// <summary>

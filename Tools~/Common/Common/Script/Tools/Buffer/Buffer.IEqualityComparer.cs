@@ -7,11 +7,12 @@ namespace AIO
         /// <inheritdoc/>
         public bool Equals(Buffer<T> x, Buffer<T> y)
         {
+            if (x is null) return y == null;
+            if (y is null) return false;
             if (x.ReadIndex != y.ReadIndex) return false;
             if (x.WriteIndex != y.WriteIndex) return false;
             if (x.Capacity != y.Capacity) return false;
-            if (x.Arrays != y.Arrays) return false;
-            return true;
+            return x.Arrays == y.Arrays;
         }
 
         /// <inheritdoc/>

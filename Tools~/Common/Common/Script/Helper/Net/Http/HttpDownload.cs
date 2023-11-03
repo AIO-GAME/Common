@@ -9,9 +9,12 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
+using HTTPClient11 = System.Net.Http.HttpClient;
 
 namespace AIO
 {
+
+
     /// <summary>
     /// Http下载
     /// </summary>
@@ -32,12 +35,12 @@ namespace AIO
         /// <summary>
         /// Http客户端
         /// </summary>
-        public HttpClient Client { get; private set; }
+        public HTTPClient11 Client { get; private set; }
 
         /// <summary>
         /// Http客户端
         /// </summary>
-        private HttpClient MD5Client { get; set; }
+        private HTTPClient11 MD5Client { get; set; }
 
         /// <summary>
         /// 最大下载数量
@@ -117,12 +120,12 @@ namespace AIO
         {
             if (!Directory.Exists(SavePath)) Directory.CreateDirectory(SavePath);
 
-            Client = new HttpClient(ClientHandler);
+            Client = new HTTPClient11(ClientHandler);
             Client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
             Client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate"));
             Client.Timeout = TimeSpan.FromSeconds(timeout);
 
-            MD5Client = new HttpClient(ClientHandler);
+            MD5Client = new HTTPClient11(ClientHandler);
             MD5Client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
             MD5Client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate"));
             MD5Client.Timeout = TimeSpan.FromSeconds(timeout);

@@ -6,11 +6,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Net.Http;
 using System.Threading.Tasks;
+using AIO.Net;
 
 namespace AIO
 {
@@ -222,7 +222,8 @@ namespace AIO
                     }
                     else
                     {
-                        Error($"网络请求失败，准备第{i + 2}次重试！\nprotocal:{httpReq.Protocol}|error:{message.StatusCode}|responseCode:{message.StatusCode}");
+                        Error(
+                            $"网络请求失败，准备第{i + 2}次重试！\nprotocal:{httpReq.Protocol}|error:{message.StatusCode}|responseCode:{message.StatusCode}");
                     }
 
                     //set content type default
