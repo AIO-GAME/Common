@@ -123,10 +123,7 @@ namespace AIO.Net
         /// <summary>
         /// Is the HTTP response empty?
         /// </summary>
-        public bool IsEmpty
-        {
-            get { return (_cache.Size > 0); }
-        }
+        public bool IsEmpty => _cache.Size > 0;
 
         /// <summary>
         /// Is the HTTP response error flag set?
@@ -141,26 +138,17 @@ namespace AIO.Net
         /// <summary>
         /// Get the HTTP response status phrase
         /// </summary>
-        public string StatusPhrase
-        {
-            get { return _statusPhrase; }
-        }
+        public string StatusPhrase => _statusPhrase;
 
         /// <summary>
         /// Get the HTTP response protocol version
         /// </summary>
-        public string Protocol
-        {
-            get { return _protocol; }
-        }
+        public string Protocol => _protocol;
 
         /// <summary>
         /// Get the HTTP response headers count
         /// </summary>
-        public long Headers
-        {
-            get { return _headers.Count; }
-        }
+        public long Headers => _headers.Count;
 
         /// <summary>
         /// Get the HTTP response header by index
@@ -614,7 +602,6 @@ namespace AIO.Net
         /// <summary>
         /// Set the HTTP response body
         /// </summary>
-        /// <param name="body">Body binary content as a span of bytes</param>
         public HttpResponse SetBody()
         {
             // Append content length header
@@ -622,7 +609,7 @@ namespace AIO.Net
 
             _cache.Append("\r\n");
 
-            int index = (int)_cache.Size;
+            var index = (int)_cache.Size;
 
             // Append the HTTP response body
             _bodyIndex = index;
@@ -687,7 +674,7 @@ namespace AIO.Net
 
             _cache.Append("\r\n");
 
-            int index = (int)_cache.Size;
+            var index = (int)_cache.Size;
 
             // Clear the HTTP response body
             _bodyIndex = index;

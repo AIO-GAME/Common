@@ -304,11 +304,6 @@
             <param name="format">格式化</param>
             <param name="args">可变参数</param>
         </member>
-        <member name="T:AIO.StringExtend">
-            <summary>
-            字符工具类
-            </summary>
-        </member>
         <member name="M:AIO.StringExtend.AppendToFrontChar(System.String,System.Char@,System.Int32@)">
             <summary>
             在最前添加指定字符到指定长度
@@ -391,80 +386,6 @@
             是否包含指定字符
             </summary>
             <returns>Ture:符合 False:不符合</returns>
-        </member>
-        <member name="M:AIO.StringExtend.PartsAround(System.String,System.Char@,System.String@,System.String@)">
-            <summary>
-            获取字符串中某个字符左右两侧的部分。
-            </summary>
-            <param name="str">指定的字符串。</param>
-            <param name="c">要查找的字符。</param>
-            <param name="before">输出参数，表示 c 左侧的字符串。</param>
-            <param name="after">输出参数，表示 c 右侧的字符串。</param>
-            <remarks>
-            如果字符串中不包含指定的字符，则 before 为整个字符串，after 为 null。
-            </remarks>
-        </member>
-        <member name="M:AIO.StringExtend.PartAfter(System.String,System.Char@)">
-            <summary>
-            获取字符串中某个字符右侧的部分。
-            </summary>
-            <param name="str">指定的字符串。</param>
-            <param name="c">要查找的字符。</param>
-            <returns>包含 c 右侧内容的字符串；如果字符串中不包含指定的字符，则返回整个字符串。</returns>
-        </member>
-        <member name="M:AIO.StringExtend.ReplaceMultiple(System.String,System.Collections.Generic.HashSet{System.Char}@,System.Char@)">
-            <summary>
-            将字符串中多个指定字符替换为另一个字符。
-            </summary>
-            <param name="str">指定的字符串。</param>
-            <param name="haystacks">要替换的字符集合。</param>
-            <param name="replacement">替换为此字符。</param>
-            <returns>替换后的字符串。</returns>
-        </member>
-        <member name="M:AIO.StringExtend.XToLower(System.String)">
-            <summary>
-            转化为小写
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.XToUpper(System.String)">
-            <summary>
-            转化为大写
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.XToLower(System.String,System.Int32@)">
-            <summary>
-            转化为小写
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.XToUpper(System.String,System.Int32@)">
-            <summary>
-            转化为大写
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.Repeat(System.String,System.Int32@)">
-            <summary>
-            重复
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.EqualsNull(System.String)">
-            <summary>
-            比较Null值
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.Reverse(System.String)">
-            <summary>
-            字符串反转
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.Clone(System.String,System.UInt32@)">
-            <summary>
-            重复N此 复制传入数据
-            </summary>
-        </member>
-        <member name="M:AIO.StringExtend.Clone(System.Char,System.UInt32@)">
-            <summary>
-            重复N此 复制传入数据
-            </summary>
         </member>
         <member name="M:AIO.StringExtend.Filter(System.String,System.Boolean@,System.Boolean@,System.Boolean@,System.Boolean@,System.Boolean@)">
             <summary>
@@ -965,6 +886,85 @@
             <param name="source">要进行操作的字符串。</param>
             <param name="value">要移除的字符串。</param>
             <returns>移除指定字符串后的新字符串，或者如果当前字符串不是以指定字符串结尾，则返回原始字符串。</returns>
+        </member>
+        <member name="T:AIO.StringExtendExtend">
+            <summary>
+            字符工具类
+            </summary>
+        </member>
+        <member name="M:AIO.StringExtendExtend.PartsAround(System.String,System.Char@,System.String@,System.String@)">
+            <summary>
+            获取字符串中某个字符左右两侧的部分。
+            </summary>
+            <param name="str">指定的字符串。</param>
+            <param name="c">要查找的字符。</param>
+            <param name="before">输出参数，表示 c 左侧的字符串。</param>
+            <param name="after">输出参数，表示 c 右侧的字符串。</param>
+            <remarks>
+            如果字符串中不包含指定的字符，则 before 为整个字符串，after 为 null。
+            </remarks>
+        </member>
+        <member name="M:AIO.StringExtendExtend.PartAfter(System.String,System.Char@)">
+            <summary>
+            获取字符串中某个字符右侧的部分。
+            </summary>
+            <param name="str">指定的字符串。</param>
+            <param name="c">要查找的字符。</param>
+            <returns>包含 c 右侧内容的字符串；如果字符串中不包含指定的字符，则返回整个字符串。</returns>
+        </member>
+        <member name="M:AIO.StringExtendExtend.ReplaceMultiple(System.String,System.Collections.Generic.HashSet{System.Char}@,System.Char@)">
+            <summary>
+            将字符串中多个指定字符替换为另一个字符。
+            </summary>
+            <param name="str">指定的字符串。</param>
+            <param name="haystacks">要替换的字符集合。</param>
+            <param name="replacement">替换为此字符。</param>
+            <returns>替换后的字符串。</returns>
+        </member>
+        <member name="M:AIO.StringExtendExtend.XToLower(System.String)">
+            <summary>
+            转化为小写
+            </summary>
+        </member>
+        <member name="M:AIO.StringExtendExtend.XToUpper(System.String)">
+            <summary>
+            转化为大写
+            </summary>
+        </member>
+        <member name="M:AIO.StringExtendExtend.XToLower(System.String,System.Int32@)">
+            <summary>
+            转化为小写
+            </summary>
+        </member>
+        <member name="M:AIO.StringExtendExtend.XToUpper(System.String,System.Int32@)">
+            <summary>
+            转化为大写
+            </summary>
+        </member>
+        <member name="M:AIO.StringExtendExtend.Repeat(System.String,System.Int32@)">
+            <summary>
+            重复
+            </summary>
+        </member>
+        <member name="M:AIO.StringExtendExtend.EqualsNull(System.String)">
+            <summary>
+            比较Null值
+            </summary>
+        </member>
+        <member name="M:AIO.StringExtendExtend.Reverse(System.String)">
+            <summary>
+            字符串反转
+            </summary>
+        </member>
+        <member name="M:AIO.StringExtendExtend.Clone(System.String,System.UInt32@)">
+            <summary>
+            重复N此 复制传入数据
+            </summary>
+        </member>
+        <member name="M:AIO.StringExtendExtend.Clone(System.Char,System.UInt32@)">
+            <summary>
+            重复N此 复制传入数据
+            </summary>
         </member>
         <member name="T:AIO.TypeExtend">
             <summary>
@@ -3034,12 +3034,22 @@
         <member name="M:AIO.LongExtend.ToConverseStringFileSize(System.Int64)">
             <summary>
             将文件大小(字节)转换为最适合的显示方式
+            Generate data size string. Will return a pretty string of bytes, KiB, MiB, GiB, TiB based on the given bytes.
             </summary>
+            <param name="size">Data size in bytes</param>
+            <returns>String with data size representation</returns>
         </member>
         <member name="M:AIO.LongExtend.ToConverseStringMoney(System.Int64)">
             <summary>
             转换为格式:00,000,000
             </summary>
+        </member>
+        <member name="M:AIO.LongExtend.ToConverseTimePeriod(System.Int64)">
+            <summary>
+            Generate time period string. Will return a pretty string of ns, mcs, ms, s, m, h based on the given nanoseconds.
+            </summary>
+            <param name="ms">Milliseconds</param>
+            <returns>String with time period representation</returns>
         </member>
         <member name="T:AIO.NetGetResponseStream">
             <summary>
@@ -3112,7 +3122,7 @@
             Extract the string from buffer of the given offset and size
             </summary>
         </member>
-        <member name="M:AIO.Net.Buffer.Remove(System.Int64,System.Int64)">
+        <member name="M:AIO.Net.Buffer.Remove(System.Int32,System.Int32)">
             <summary>
             Remove the buffer of the given offset and size
             </summary>
@@ -3136,7 +3146,7 @@
             <param name="buffer">Buffer to append</param>
             <returns>Count of append bytes</returns>
         </member>
-        <member name="M:AIO.Net.Buffer.Append(System.Byte[],System.Int64,System.Int64)">
+        <member name="M:AIO.Net.Buffer.Append(System.Byte[],System.Int32,System.Int32)">
             <summary>
             Append the given buffer fragment
             </summary>
@@ -3172,163 +3182,6 @@
             </summary>
             <param name="text">Text to append as a span of characters</param>
             <returns>Count of append bytes</returns>
-        </member>
-        <member name="T:AIO.Net.HTTPClient">
-            <summary>
-            HTTP client is used to communicate with HTTP Web server. It allows to send GET, POST, PUT, DELETE requests and receive HTTP result.
-            </summary>
-            <remarks>Thread-safe.</remarks>
-        </member>
-        <member name="M:AIO.Net.HTTPClient.#ctor(System.Net.IPAddress,System.Int32)">
-            <summary>
-            Initialize HTTP client with a given IP address and port number
-            </summary>
-            <param name="address">IP address</param>
-            <param name="port">Port number</param>
-        </member>
-        <member name="M:AIO.Net.HTTPClient.#ctor(System.String,System.Int32)">
-            <summary>
-            Initialize HTTP client with a given IP address and port number
-            </summary>
-            <param name="address">IP address</param>
-            <param name="port">Port number</param>
-        </member>
-        <member name="M:AIO.Net.HTTPClient.#ctor(System.Net.DnsEndPoint)">
-            <summary>
-            Initialize HTTP client with a given DNS endpoint
-            </summary>
-            <param name="endpoint">DNS endpoint</param>
-        </member>
-        <member name="M:AIO.Net.HTTPClient.#ctor(System.Net.IPEndPoint)">
-            <summary>
-            Initialize HTTP client with a given IP endpoint
-            </summary>
-            <param name="endpoint">IP endpoint</param>
-        </member>
-        <member name="P:AIO.Net.HTTPClient.Request">
-            <summary>
-            Get the HTTP request
-            </summary>
-        </member>
-        <member name="P:AIO.Net.HTTPClient.Response">
-            <summary>
-            Get the HTTP response
-            </summary>
-        </member>
-        <member name="M:AIO.Net.HTTPClient.SendRequest">
-            <summary>
-            Send the current HTTP request (synchronous)
-            </summary>
-            <returns>Size of sent data</returns>
-        </member>
-        <member name="M:AIO.Net.HTTPClient.SendRequest(AIO.Net.HttpRequest)">
-            <summary>
-            Send the HTTP request (synchronous)
-            </summary>
-            <param name="request">HTTP request</param>
-            <returns>Size of sent data</returns>
-        </member>
-        <member name="M:AIO.Net.HTTPClient.SendRequestBody(System.String)">
-            <summary>
-            Send the HTTP request body (synchronous)
-            </summary>
-            <param name="body">HTTP request body</param>
-            <returns>Size of sent data</returns>
-        </member>
-        <member name="M:AIO.Net.HTTPClient.SendRequestBody(System.Collections.Generic.ICollection{System.Char})">
-            <summary>
-            Send the HTTP request body (synchronous)
-            </summary>
-            <param name="body">HTTP request body as a span of characters</param>
-            <returns>Size of sent data</returns>
-        </member>
-        <member name="M:AIO.Net.HTTPClient.SendRequestBody(System.Byte[])">
-            <summary>
-            Send the HTTP request body (synchronous)
-            </summary>
-            <param name="buffer">HTTP request body buffer</param>
-            <returns>Size of sent data</returns>
-        </member>
-        <member name="M:AIO.Net.HTTPClient.SendRequestBody(System.Byte[],System.Int64,System.Int64)">
-            <summary>
-            Send the HTTP request body (synchronous)
-            </summary>
-            <param name="buffer">HTTP request body buffer</param>
-            <param name="offset">HTTP request body buffer offset</param>
-            <param name="size">HTTP request body size</param>
-            <returns>Size of sent data</returns>
-        </member>
-        <member name="M:AIO.Net.HTTPClient.SendRequestAsync">
-            <summary>
-            Send the current HTTP request (asynchronous)
-            </summary>
-            <returns>'true' if the current HTTP request was successfully sent, 'false' if the session is not connected</returns>
-        </member>
-        <member name="M:AIO.Net.HTTPClient.SendRequestAsync(AIO.Net.HttpRequest)">
-            <summary>
-            Send the HTTP request (asynchronous)
-            </summary>
-            <param name="request">HTTP request</param>
-            <returns>'true' if the current HTTP request was successfully sent, 'false' if the session is not connected</returns>
-        </member>
-        <member name="M:AIO.Net.HTTPClient.SendRequestBodyAsync(System.String)">
-            <summary>
-            Send the HTTP request body (asynchronous)
-            </summary>
-            <param name="body">HTTP request body</param>
-            <returns>'true' if the HTTP request body was successfully sent, 'false' if the session is not connected</returns>
-        </member>
-        <member name="M:AIO.Net.HTTPClient.SendRequestBodyAsync(System.Collections.Generic.ICollection{System.Char})">
-            <summary>
-            Send the HTTP request body (asynchronous)
-            </summary>
-            <param name="body">HTTP request body as a span of characters</param>
-            <returns>'true' if the HTTP request body was successfully sent, 'false' if the session is not connected</returns>
-        </member>
-        <member name="M:AIO.Net.HTTPClient.SendRequestBodyAsync(System.Byte[])">
-            <summary>
-            Send the HTTP request body (asynchronous)
-            </summary>
-            <param name="buffer">HTTP request body buffer</param>
-            <returns>'true' if the HTTP request body was successfully sent, 'false' if the session is not connected</returns>
-        </member>
-        <member name="M:AIO.Net.HTTPClient.SendRequestBodyAsync(System.Byte[],System.Int64,System.Int64)">
-            <summary>
-            Send the HTTP request body (asynchronous)
-            </summary>
-            <param name="buffer">HTTP request body buffer</param>
-            <param name="offset">HTTP request body buffer offset</param>
-            <param name="size">HTTP request body size</param>
-            <returns>'true' if the HTTP request body was successfully sent, 'false' if the session is not connected</returns>
-        </member>
-        <member name="M:AIO.Net.HTTPClient.SendRequestBodyAsync(System.Collections.Generic.ICollection{System.Byte})">
-            <summary>
-            Send the HTTP request body (asynchronous)
-            </summary>
-            <param name="buffer">HTTP request body buffer as a span of bytes</param>
-            <returns>'true' if the HTTP request body was successfully sent, 'false' if the session is not connected</returns>
-        </member>
-        <member name="M:AIO.Net.HTTPClient.OnReceivedResponseHeader(AIO.Net.HttpResponse)">
-            <summary>
-            Handle HTTP response header received notification
-            </summary>
-            <remarks>Notification is called when HTTP response header was received from the server.</remarks>
-            <param name="response">HTTP request</param>
-        </member>
-        <member name="M:AIO.Net.HTTPClient.OnReceivedResponse(AIO.Net.HttpResponse)">
-            <summary>
-            Handle HTTP response received notification
-            </summary>
-            <remarks>Notification is called when HTTP response was received from the server.</remarks>
-            <param name="response">HTTP response</param>
-        </member>
-        <member name="M:AIO.Net.HTTPClient.OnReceivedResponseError(AIO.Net.HttpResponse,System.String)">
-            <summary>
-            Handle HTTP response error notification
-            </summary>
-            <remarks>Notification is called when HTTP response error was received from the server.</remarks>
-            <param name="response">HTTP response</param>
-            <param name="error">HTTP response error</param>
         </member>
         <member name="T:AIO.Net.HttpRequest">
             <summary>
@@ -3697,7 +3550,6 @@
             <summary>
             Set the HTTP response body
             </summary>
-            <param name="body">Body binary content as a span of bytes</param>
         </member>
         <member name="M:AIO.Net.HttpResponse.SetBody(System.Collections.Generic.ICollection{System.Byte})">
             <summary>
@@ -3788,39 +3640,39 @@
             </summary>
             <param name="request">HTTP request</param>
         </member>
-        <member name="T:AIO.Net.TCPClient">
+        <member name="T:AIO.Net.TcpClient">
             <summary>
             TCP客户端用于向连接的TCP服务器读写数据
             </summary>
             <remarks>Thread-safe</remarks>
         </member>
-        <member name="M:AIO.Net.TCPClient.#ctor(System.Net.IPAddress,System.Int32)">
+        <member name="M:AIO.Net.TcpClient.#ctor(System.Net.IPAddress,System.Int32)">
             <summary>
             Initialize TCP client with a given server IP address and port number
             </summary>
             <param name="address">IP address</param>
             <param name="port">Port number</param>
         </member>
-        <member name="M:AIO.Net.TCPClient.#ctor(System.String,System.Int32)">
+        <member name="M:AIO.Net.TcpClient.#ctor(System.String,System.Int32)">
             <summary>
             Initialize TCP client with a given server IP address and port number
             </summary>
             <param name="address">IP address</param>
             <param name="port">Port number</param>
         </member>
-        <member name="M:AIO.Net.TCPClient.#ctor(System.Net.DnsEndPoint)">
+        <member name="M:AIO.Net.TcpClient.#ctor(System.Net.DnsEndPoint)">
             <summary>
             Initialize TCP client with a given DNS endpoint
             </summary>
             <param name="endpoint">DNS endpoint</param>
         </member>
-        <member name="M:AIO.Net.TCPClient.#ctor(System.Net.IPEndPoint)">
+        <member name="M:AIO.Net.TcpClient.#ctor(System.Net.IPEndPoint)">
             <summary>
             Initialize TCP client with a given IP endpoint
             </summary>
             <param name="endpoint">IP endpoint</param>
         </member>
-        <member name="M:AIO.Net.TCPClient.#ctor(System.Net.EndPoint,System.String,System.Int32)">
+        <member name="M:AIO.Net.TcpClient.#ctor(System.Net.EndPoint,System.String,System.Int32)">
             <summary>
             Initialize TCP client with a given endpoint, address and port
             </summary>
@@ -3828,52 +3680,52 @@
             <param name="address">Server address</param>
             <param name="port">Server port</param>
         </member>
-        <member name="P:AIO.Net.TCPClient.Id">
+        <member name="P:AIO.Net.TcpClient.Id">
             <summary>
             Client Id
             </summary>
         </member>
-        <member name="P:AIO.Net.TCPClient.Address">
+        <member name="P:AIO.Net.TcpClient.Address">
             <summary>
             TCP server address
             </summary>
         </member>
-        <member name="P:AIO.Net.TCPClient.Port">
+        <member name="P:AIO.Net.TcpClient.Port">
             <summary>
             TCP server port
             </summary>
         </member>
-        <member name="P:AIO.Net.TCPClient.Endpoint">
+        <member name="P:AIO.Net.TcpClient.Endpoint">
             <summary>
             Endpoint
             </summary>
         </member>
-        <member name="P:AIO.Net.TCPClient.Socket">
+        <member name="P:AIO.Net.TcpClient.Socket">
             <summary>
             Socket
             </summary>
         </member>
-        <member name="P:AIO.Net.TCPClient.BytesPending">
+        <member name="P:AIO.Net.TcpClient.BytesPending">
             <summary>
             Number of bytes pending sent by the client
             </summary>
         </member>
-        <member name="P:AIO.Net.TCPClient.BytesSending">
+        <member name="P:AIO.Net.TcpClient.BytesSending">
             <summary>
             Number of bytes sending by the client
             </summary>
         </member>
-        <member name="P:AIO.Net.TCPClient.BytesSent">
+        <member name="P:AIO.Net.TcpClient.BytesSent">
             <summary>
             Number of bytes sent by the client
             </summary>
         </member>
-        <member name="P:AIO.Net.TCPClient.BytesReceived">
+        <member name="P:AIO.Net.TcpClient.BytesReceived">
             <summary>
             Number of bytes received by the client
             </summary>
         </member>
-        <member name="P:AIO.Net.TCPClient.OptionDualMode">
+        <member name="P:AIO.Net.TcpClient.OptionDualMode">
             <summary>
             Option: dual mode socket
             </summary>
@@ -3882,7 +3734,7 @@
             Will work only if socket is bound on IPv6 address.
             </remarks>
         </member>
-        <member name="P:AIO.Net.TCPClient.OptionKeepAlive">
+        <member name="P:AIO.Net.TcpClient.OptionKeepAlive">
             <summary>
             Option: keep alive
             </summary>
@@ -3890,7 +3742,7 @@
             This option will setup SO_KEEPALIVE if the OS support this feature
             </remarks>
         </member>
-        <member name="P:AIO.Net.TCPClient.OptionTcpKeepAliveTime">
+        <member name="P:AIO.Net.TcpClient.OptionTcpKeepAliveTime">
             <summary>
             Option: TCP keep alive time
             </summary>
@@ -3898,7 +3750,7 @@
             The number of seconds a TCP connection will remain alive/idle before keepalive probes are sent to the remote
             </remarks>
         </member>
-        <member name="P:AIO.Net.TCPClient.OptionTcpKeepAliveInterval">
+        <member name="P:AIO.Net.TcpClient.OptionTcpKeepAliveInterval">
             <summary>
             Option: TCP keep alive interval
             </summary>
@@ -3906,7 +3758,7 @@
             The number of seconds a TCP connection will wait for a keepalive response before sending another keepalive probe
             </remarks>
         </member>
-        <member name="P:AIO.Net.TCPClient.OptionTcpKeepAliveRetryCount">
+        <member name="P:AIO.Net.TcpClient.OptionTcpKeepAliveRetryCount">
             <summary>
             Option: TCP keep alive retry count
             </summary>
@@ -3914,7 +3766,7 @@
             The number of TCP keep alive probes that will be sent before the connection is terminated
             </remarks>
         </member>
-        <member name="P:AIO.Net.TCPClient.OptionNoDelay">
+        <member name="P:AIO.Net.TcpClient.OptionNoDelay">
             <summary>
             Option: no delay
             </summary>
@@ -3922,215 +3774,57 @@
             This option will enable/disable Nagle's algorithm for TCP protocol
             </remarks>
         </member>
-        <member name="P:AIO.Net.TCPClient.OptionReceiveBufferLimit">
+        <member name="P:AIO.Net.TcpClient.OptionReceiveBufferLimit">
             <summary>
             Option: receive buffer limit
             </summary>
         </member>
-        <member name="P:AIO.Net.TCPClient.OptionReceiveBufferSize">
+        <member name="P:AIO.Net.TcpClient.OptionReceiveBufferSize">
             <summary>
             Option: receive buffer size
             </summary>
         </member>
-        <member name="P:AIO.Net.TCPClient.OptionSendBufferLimit">
+        <member name="P:AIO.Net.TcpClient.OptionSendBufferLimit">
             <summary>
             Option: send buffer limit
             </summary>
         </member>
-        <member name="P:AIO.Net.TCPClient.OptionSendBufferSize">
+        <member name="P:AIO.Net.TcpClient.OptionSendBufferSize">
             <summary>
             Option: send buffer size
             </summary>
         </member>
-        <member name="P:AIO.Net.TCPClient.IsConnecting">
-            <summary>
-            Is the client connecting?
-            </summary>
-        </member>
-        <member name="P:AIO.Net.TCPClient.IsConnected">
-            <summary>
-            Is the client connected?
-            </summary>
-        </member>
-        <member name="M:AIO.Net.TCPClient.CreateSocket">
-            <summary>
-            Create a new socket object
-            </summary>
-            <remarks>
-            Method may be override if you need to prepare some specific socket object in your implementation.
-            </remarks>
-            <returns>Socket object</returns>
-        </member>
-        <member name="M:AIO.Net.TCPClient.Connect">
-            <summary>
-            Connect the client (synchronous)
-            </summary>
-            <remarks>
-            Please note that synchronous connect will not receive data automatically!
-            You should use Receive() or ReceiveAsync() method manually after successful connection.
-            </remarks>
-            <returns>'true' if the client was successfully connected, 'false' if the client failed to connect</returns>
-        </member>
-        <member name="M:AIO.Net.TCPClient.Disconnect">
-            <summary>
-            Disconnect the client (synchronous)
-            </summary>
-            <returns>'true' if the client was successfully disconnected, 'false' if the client is already disconnected</returns>
-        </member>
-        <member name="M:AIO.Net.TCPClient.Reconnect">
-            <summary>
-            Reconnect the client (synchronous)
-            </summary>
-            <returns>'true' if the client was successfully reconnected, 'false' if the client is already reconnected</returns>
-        </member>
-        <member name="M:AIO.Net.TCPClient.ConnectAsync">
-            <summary>
-            Connect the client (asynchronous)
-            </summary>
-            <returns>'true' if the client was successfully connected, 'false' if the client failed to connect</returns>
-        </member>
-        <member name="M:AIO.Net.TCPClient.DisconnectAsync">
-            <summary>
-            Disconnect the client (asynchronous)
-            </summary>
-            <returns>'true' if the client was successfully disconnected, 'false' if the client is already disconnected</returns>
-        </member>
-        <member name="M:AIO.Net.TCPClient.ReconnectAsync">
-            <summary>
-            Reconnect the client (asynchronous)
-            </summary>
-            <returns>'true' if the client was successfully reconnected, 'false' if the client is already reconnected</returns>
-        </member>
-        <member name="M:AIO.Net.TCPClient.Send(System.Byte[])">
-            <summary>
-            Send data to the server (synchronous)
-            </summary>
-            <param name="buffer">Buffer to send</param>
-            <returns>Size of sent data</returns>
-        </member>
-        <member name="M:AIO.Net.TCPClient.Send(System.Byte[],System.Int32,System.Int32)">
-            <summary>
-            Send data to the server (synchronous)
-            </summary>
-            <param name="buffer">Buffer to send</param>
-            <param name="offset">Buffer offset</param>
-            <param name="size">Buffer size</param>
-            <returns>Size of sent data</returns>
-        </member>
-        <member name="M:AIO.Net.TCPClient.Send(System.Collections.Generic.ICollection{System.Char})">
-            <summary>
-            Send text to the server (synchronous)
-            </summary>
-            <param name="text">Text to send as a span of characters</param>
-            <returns>Size of sent text</returns>
-        </member>
-        <member name="M:AIO.Net.TCPClient.SendAsync(System.Collections.Generic.ICollection{System.Byte})">
-            <summary>
-            Send data to the server (asynchronous)
-            </summary>
-            <param name="buffer">Buffer to send</param>
-            <returns>'true' if the data was successfully sent, 'false' if the client is not connected</returns>
-        </member>
-        <member name="M:AIO.Net.TCPClient.SendAsync(System.Collections.Generic.ICollection{System.Byte},System.Int64,System.Int64)">
-            <summary>
-            Send data to the server (asynchronous)
-            </summary>
-            <param name="buffer">Buffer to send</param>
-            <param name="offset">Buffer offset</param>
-            <param name="size">Buffer size</param>
-            <returns>'true' if the data was successfully sent, 'false' if the client is not connected</returns>
-        </member>
-        <member name="M:AIO.Net.TCPClient.SendAsync(System.Collections.Generic.IEnumerable{System.Char})">
-            <summary>
-            Send text to the server (asynchronous)
-            </summary>
-            <param name="text">Text to send as a span of characters</param>
-            <returns>'true' if the text was successfully sent, 'false' if the client is not connected</returns>
-        </member>
-        <member name="M:AIO.Net.TCPClient.Receive(System.Byte[])">
-            <summary>
-            Receive data from the server (synchronous)
-            </summary>
-            <param name="buffer">Buffer to receive</param>
-            <returns>Size of received data</returns>
-        </member>
-        <member name="M:AIO.Net.TCPClient.Receive(System.Byte[],System.Int64,System.Int64)">
-            <summary>
-            Receive data from the server (synchronous)
-            </summary>
-            <param name="buffer">Buffer to receive</param>
-            <param name="offset">Buffer offset</param>
-            <param name="size">Buffer size</param>
-            <returns>Size of received data</returns>
-        </member>
-        <member name="M:AIO.Net.TCPClient.Receive(System.Int64)">
-            <summary>
-            Receive text from the server (synchronous)
-            </summary>
-            <param name="size">Text size to receive</param>
-            <returns>Received text</returns>
-        </member>
-        <member name="M:AIO.Net.TCPClient.ReceiveAsync">
-            <summary>
-            Receive data from the server (asynchronous)
-            </summary>
-        </member>
-        <member name="M:AIO.Net.TCPClient.TryReceive">
-            <summary>
-            Try to receive new data
-            </summary>
-        </member>
-        <member name="M:AIO.Net.TCPClient.TrySend">
-            <summary>
-            Try to send pending data
-            </summary>
-        </member>
-        <member name="M:AIO.Net.TCPClient.ClearBuffers">
+        <member name="M:AIO.Net.TcpClient.ClearBuffers">
             <summary>
             Clear send/receive buffers
             </summary>
         </member>
-        <member name="M:AIO.Net.TCPClient.OnAsyncCompleted(System.Object,System.Net.Sockets.SocketAsyncEventArgs)">
+        <member name="M:AIO.Net.TcpClient.OnAsyncCompleted(System.Object,System.Net.Sockets.SocketAsyncEventArgs)">
             <summary>
             This method is called whenever a receive or send operation is completed on a socket
             </summary>
         </member>
-        <member name="M:AIO.Net.TCPClient.ProcessConnect(System.Net.Sockets.SocketAsyncEventArgs)">
-            <summary>
-            This method is invoked when an asynchronous connect operation completes
-            </summary>
-        </member>
-        <member name="M:AIO.Net.TCPClient.ProcessReceive(System.Net.Sockets.SocketAsyncEventArgs)">
-            <summary>
-            This method is invoked when an asynchronous receive operation completes
-            </summary>
-        </member>
-        <member name="M:AIO.Net.TCPClient.ProcessSend(System.Net.Sockets.SocketAsyncEventArgs)">
-            <summary>
-            This method is invoked when an asynchronous send operation completes
-            </summary>
-        </member>
-        <member name="M:AIO.Net.TCPClient.OnConnecting">
+        <member name="M:AIO.Net.TcpClient.OnConnecting">
             <summary>
             Handle client connecting notification
             </summary>
         </member>
-        <member name="M:AIO.Net.TCPClient.OnConnected">
+        <member name="M:AIO.Net.TcpClient.OnConnected">
             <summary>
             Handle client connected notification
             </summary>
         </member>
-        <member name="M:AIO.Net.TCPClient.OnDisconnecting">
+        <member name="M:AIO.Net.TcpClient.OnDisconnecting">
             <summary>
             Handle client disconnecting notification
             </summary>
         </member>
-        <member name="M:AIO.Net.TCPClient.OnDisconnected">
+        <member name="M:AIO.Net.TcpClient.OnDisconnected">
             <summary>
             Handle client disconnected notification
             </summary>
         </member>
-        <member name="M:AIO.Net.TCPClient.OnReceived(System.Byte[],System.Int64,System.Int64)">
+        <member name="M:AIO.Net.TcpClient.OnReceived(System.Byte[],System.Int32,System.Int32)">
             <summary>
             Handle buffer received notification
             </summary>
@@ -4141,7 +3835,7 @@
             Notification is called when another chunk of buffer was received from the server
             </remarks>
         </member>
-        <member name="M:AIO.Net.TCPClient.OnSent(System.Int64,System.Int64)">
+        <member name="M:AIO.Net.TcpClient.OnSent(System.Int64,System.Int64)">
             <summary>
             Handle buffer sent notification
             </summary>
@@ -4152,7 +3846,7 @@
             This handler could be used to send another buffer to the server for instance when the pending size is zero.
             </remarks>
         </member>
-        <member name="M:AIO.Net.TCPClient.OnEmpty">
+        <member name="M:AIO.Net.TcpClient.OnEmpty">
             <summary>
             Handle empty send buffer notification
             </summary>
@@ -4161,844 +3855,842 @@
             This handler could be used to send another buffer to the server.
             </remarks>
         </member>
-        <member name="M:AIO.Net.TCPClient.OnError(System.Net.Sockets.SocketError)">
+        <member name="M:AIO.Net.TcpClient.OnError(System.Net.Sockets.SocketError)">
             <summary>
             Handle error notification
             </summary>
             <param name="error">Socket error code</param>
         </member>
-        <member name="M:AIO.Net.TCPClient.SendError(System.Net.Sockets.SocketError)">
+        <member name="M:AIO.Net.TcpClient.SendError(System.Net.Sockets.SocketError)">
             <summary>
             Send error notification
             </summary>
             <param name="error">Socket error code</param>
         </member>
-        <member name="P:AIO.Net.TCPClient.IsDisposed">
+        <member name="P:AIO.Net.TcpClient.IsDisposed">
             <summary>
             Disposed flag
             </summary>
         </member>
-        <member name="P:AIO.Net.TCPClient.IsSocketDisposed">
+        <member name="P:AIO.Net.TcpClient.IsSocketDisposed">
             <summary>
             Client socket disposed flag
             </summary>
         </member>
-        <member name="M:AIO.Net.TCPClient.Dispose">
+        <member name="M:AIO.Net.TcpClient.Dispose">
             <inheritdoc />
         </member>
-        <member name="M:AIO.Net.TCPClient.Dispose(System.Boolean)">
+        <member name="M:AIO.Net.TcpClient.Dispose(System.Boolean)">
             <summary>
             Dispose client resources
             </summary>
             <param name="disposingManagedResources"></param>
         </member>
-        <member name="T:AIO.GBean">
+        <member name="M:AIO.Net.TcpClient.Receive(System.Byte[])">
             <summary>
-            游戏数据
+            Receive data from the server (synchronous)
             </summary>
+            <param name="buffer">Buffer to receive</param>
+            <returns>Size of received data</returns>
         </member>
-        <member name="M:AIO.GBean.Deserialize(AIO.IReadData)">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.GBean.Serialize(AIO.IWriteData)">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.GBean.Initialize">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.GBean.Dispose">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.GBean.Frist">
+        <member name="M:AIO.Net.TcpClient.Receive(System.Byte[],System.Int32,System.Int32)">
             <summary>
-            首次数据存放
+            Receive data from the server (synchronous)
             </summary>
+            <param name="buffer">Buffer to receive</param>
+            <param name="offset">Buffer offset</param>
+            <param name="size">Buffer size</param>
+            <returns>Size of received data</returns>
         </member>
-        <member name="M:AIO.GBean.Clean">
+        <member name="M:AIO.Net.TcpClient.Receive(System.Int64)">
             <summary>
-            清空数据
+            Receive text from the server (synchronous)
             </summary>
+            <param name="size">Text size to receive</param>
+            <returns>Received text</returns>
         </member>
-        <member name="M:AIO.GBean.Reset">
+        <member name="M:AIO.Net.TcpClient.ReceiveAsync">
             <summary>
-            重置
+            Receive data from the server (asynchronous)
             </summary>
         </member>
-        <member name="T:AIO.GBeanRegisterAttribute">
+        <member name="M:AIO.Net.TcpClient.TryReceive">
             <summary>
-            游戏数据注册
+            Try to receive new data
             </summary>
         </member>
-        <member name="P:AIO.GBeanRegisterAttribute.ID">
+        <member name="M:AIO.Net.TcpClient.ProcessReceive(System.Net.Sockets.SocketAsyncEventArgs)">
             <summary>
-            唯一ID
+            This method is invoked when an asynchronous receive operation completes
             </summary>
         </member>
-        <member name="M:AIO.GBeanRegisterAttribute.#ctor(System.Int32)">
+        <member name="M:AIO.Net.TcpClient.Send(System.Byte[],System.Int32,System.Int32)">
             <summary>
-            游戏数据注册
+            Send data to the server (synchronous)
             </summary>
-            <param name="id">唯一ID</param>
+            <param name="buffer">Buffer to send</param>
+            <param name="offset">Buffer offset</param>
+            <param name="size">Buffer size</param>
+            <returns>Size of sent data</returns>
         </member>
-        <member name="T:AIO.GBeanSystem">
+        <member name="M:AIO.Net.TcpClient.Send(System.Byte[])">
             <summary>
-            游戏数据储存管理
+            Send data to the server (synchronous)
             </summary>
+            <param name="buffer">Buffer to send</param>
+            <returns>Size of sent data</returns>
         </member>
-        <member name="F:AIO.GBeanSystem.Data">
+        <member name="M:AIO.Net.TcpClient.Send(System.String)">
             <summary>
-            数据
+            Send text to the server (synchronous)
             </summary>
+            <param name="text">Text to send as a span of characters</param>
+            <returns>Size of sent text</returns>
         </member>
-        <member name="F:AIO.GBeanSystem.Bean">
+        <member name="M:AIO.Net.TcpClient.SendAsync(System.Byte[])">
             <summary>
-            源数据
+            Send data to the server (asynchronous)
             </summary>
+            <param name="buffer">Buffer to send</param>
+            <returns>'true' if the data was successfully sent, 'false' if the client is not connected</returns>
         </member>
-        <member name="P:AIO.GBeanSystem.Progress">
+        <member name="M:AIO.Net.TcpClient.SendAsync(System.Byte[],System.Int32,System.Int32)">
             <summary>
-            进度回调
+            Send data to the server (asynchronous)
             </summary>
+            <param name="buffer">Buffer to send</param>
+            <param name="offset">Buffer offset</param>
+            <param name="size">Buffer size</param>
+            <returns>'true' if the data was successfully sent, 'false' if the client is not connected</returns>
         </member>
-        <member name="F:AIO.GBeanSystem.TargetPath">
+        <member name="M:AIO.Net.TcpClient.SendAsync(System.String)">
             <summary>
-            目标存储读取路径
+            Send text to the server (asynchronous)
             </summary>
+            <param name="text">Text to send as a span of characters</param>
+            <returns>'true' if the text was successfully sent, 'false' if the client is not connected</returns>
         </member>
-        <member name="M:AIO.GBeanSystem.GetMD5(System.Byte[]@)">
+        <member name="M:AIO.Net.TcpClient.TrySend">
             <summary>
-            获取二进制MD5码
+            Try to send pending data
             </summary>
         </member>
-        <member name="M:AIO.GBeanSystem.Initialize(System.String@)">
+        <member name="M:AIO.Net.TcpClient.ProcessSend(System.Net.Sockets.SocketAsyncEventArgs)">
             <summary>
-            初始化数据
+            This method is invoked when an asynchronous send operation completes
             </summary>
         </member>
-        <member name="M:AIO.GBeanSystem.Load">
+        <member name="P:AIO.Net.TcpClient.IsConnecting">
             <summary>
-            加载数据
+            Is the client connecting?
             </summary>
         </member>
-        <member name="M:AIO.GBeanSystem.Save">
+        <member name="P:AIO.Net.TcpClient.IsConnected">
             <summary>
-            保存数据
+            Is the client connected?
             </summary>
         </member>
-        <member name="M:AIO.GBeanSystem.Clean">
+        <member name="M:AIO.Net.TcpClient.CreateSocket">
             <summary>
-            清空数据
+            Create a new socket object
             </summary>
+            <remarks>
+            Method may be override if you need to prepare some specific socket object in your implementation.
+            </remarks>
+            <returns>Socket object</returns>
         </member>
-        <member name="M:AIO.GBeanSystem.Reset">
+        <member name="M:AIO.Net.TcpClient.Connect">
             <summary>
-            重置数据
+            Connect the client (synchronous)
             </summary>
+            <remarks>
+            Please note that synchronous connect will not receive data automatically!
+            You should use Receive() or ReceiveAsync() method manually after successful connection.
+            </remarks>
+            <returns>'true' if the client was successfully connected, 'false' if the client failed to connect</returns>
         </member>
-        <member name="T:AIO.Buffer">
+        <member name="M:AIO.Net.TcpClient.Disconnect">
             <summary>
-            数据缓存留
+            Disconnect the client (synchronous)
             </summary>
+            <returns>'true' if the client was successfully disconnected, 'false' if the client is already disconnected</returns>
         </member>
-        <member name="F:AIO.Buffer.CAPACITY">
+        <member name="M:AIO.Net.TcpClient.Reconnect">
             <summary>
-            默认容量:32B = 256bit
+            Reconnect the client (synchronous)
             </summary>
+            <returns>'true' if the client was successfully reconnected, 'false' if the client is already reconnected</returns>
         </member>
-        <member name="F:AIO.Buffer.MAX_CAPACITY">
+        <member name="M:AIO.Net.TcpClient.ConnectAsync">
             <summary>
-            最大缓存:4M
+            Connect the client (asynchronous)
             </summary>
+            <returns>'true' if the client was successfully connected, 'false' if the client failed to connect</returns>
         </member>
-        <member name="F:AIO.Buffer.WriteIndex">
+        <member name="M:AIO.Net.TcpClient.DisconnectAsync">
             <summary>
-            当前写入位置
+            Disconnect the client (asynchronous)
             </summary>
+            <returns>'true' if the client was successfully disconnected, 'false' if the client is already disconnected</returns>
         </member>
-        <member name="F:AIO.Buffer.ReadIndex">
+        <member name="M:AIO.Net.TcpClient.ReconnectAsync">
             <summary>
-            当前读取位置
+            Reconnect the client (asynchronous)
             </summary>
+            <returns>'true' if the client was successfully reconnected, 'false' if the client is already reconnected</returns>
         </member>
-        <member name="M:AIO.Buffer.#ctor">
+        <member name="M:AIO.Net.TcpClient.ProcessConnect(System.Net.Sockets.SocketAsyncEventArgs)">
             <summary>
-            初始化
+            This method is invoked when an asynchronous connect operation completes
             </summary>
         </member>
-        <member name="M:AIO.Buffer.Clear">
-            <summary> 
-            清空
-            </summary>
-        </member>
-        <member name="P:AIO.Buffer.WriteOffset">
+        <member name="T:AIO.Net.TcpServer">
             <summary>
-            缓存写入进度: 当前首位
+            TCP server is used to connect, disconnect and manage TCP sessions
             </summary>
+            <remarks>Thread-safe</remarks>
         </member>
-        <member name="P:AIO.Buffer.ReadOffset">
+        <member name="M:AIO.Net.TcpServer.#ctor(System.Net.IPAddress,System.Int32)">
             <summary>
-            缓存写入进度: 当前读取游标下标
+            Initialize TCP server with a given IP address and port number
             </summary>
+            <param name="address">IP address</param>
+            <param name="port">Port number</param>
         </member>
-        <member name="P:AIO.Buffer.Count">
-            <summary> 
-            返回数据可读取长度
-            </summary>
-        </member>
-        <member name="P:AIO.Buffer.Capacity">
-            <summary> 
-            数据缓存:容量
-            </summary>
-        </member>
-        <member name="M:AIO.Buffer.Skip(System.Int32)">
+        <member name="M:AIO.Net.TcpServer.#ctor(System.String,System.Int32)">
             <summary>
-            跳过
+            Initialize TCP server with a given IP address and port number
             </summary>
+            <param name="address">IP address</param>
+            <param name="port">Port number</param>
         </member>
-        <member name="M:AIO.Buffer.CheckSize(System.Int32)">
+        <member name="M:AIO.Net.TcpServer.#ctor(System.Net.DnsEndPoint)">
             <summary>
-            检查剩余数量 
-            Flase:不满足
-            Ture:满足
+            Initialize TCP server with a given DNS endpoint
             </summary>
+            <param name="endpoint">DNS endpoint</param>
         </member>
-        <member name="T:AIO.Buffer`1">
+        <member name="M:AIO.Net.TcpServer.#ctor(System.Net.IPEndPoint)">
             <summary>
-            缓冲流
+            Initialize TCP server with a given IP endpoint
             </summary>
+            <param name="endpoint">IP endpoint</param>
         </member>
-        <member name="M:AIO.Buffer`1.op_Addition(AIO.Buffer{`0},AIO.Buffer{`0}@)">
+        <member name="M:AIO.Net.TcpServer.#ctor(System.Net.EndPoint,System.String,System.Int32)">
             <summary>
-            增加
+            Initialize TCP server with a given endpoint, address and port
             </summary>
+            <param name="endpoint">Endpoint</param>
+            <param name="address">Server address</param>
+            <param name="port">Server port</param>
         </member>
-        <member name="M:AIO.Buffer`1.op_Addition(AIO.Buffer{`0},`0[]@)">
+        <member name="P:AIO.Net.TcpServer.Id">
             <summary>
-            增加
+            Server Id
             </summary>
         </member>
-        <member name="M:AIO.Buffer`1.op_Addition(AIO.Buffer{`0},System.Collections.Generic.HashSet{`0}@)">
+        <member name="P:AIO.Net.TcpServer.Address">
             <summary>
-            增加
+            TCP server address
             </summary>
         </member>
-        <member name="M:AIO.Buffer`1.op_Addition(AIO.Buffer{`0},System.Collections.Generic.ICollection{`0}@)">
+        <member name="P:AIO.Net.TcpServer.Port">
             <summary>
-            增加
+            TCP server port
             </summary>
         </member>
-        <member name="M:AIO.Buffer`1.op_Implicit(AIO.Buffer{`0}@)~`0[]">
+        <member name="P:AIO.Net.TcpServer.Endpoint">
             <summary>
-            隐式转化为数组
+            Endpoint
             </summary>
         </member>
-        <member name="M:AIO.Buffer`1.op_Implicit(AIO.Buffer{`0}@)~System.Collections.Generic.HashSet{`0}">
+        <member name="P:AIO.Net.TcpServer.ConnectedSessions">
             <summary>
-            隐式转化为数组
+            Number of sessions connected to the server
             </summary>
         </member>
-        <member name="M:AIO.Buffer`1.op_Implicit(AIO.Buffer{`0}@)~System.Collections.Generic.List{`0}">
+        <member name="P:AIO.Net.TcpServer.BytesPending">
             <summary>
-            隐式转化为List
+            Number of bytes pending sent by the server
             </summary>
         </member>
-        <member name="M:AIO.Buffer`1.#ctor(System.Int32)">
+        <member name="P:AIO.Net.TcpServer.BytesSent">
             <summary>
-            构建一个指定容量的Buffer
+            Number of bytes sent by the server
             </summary>
         </member>
-        <member name="P:AIO.Buffer`1.Arrays">
+        <member name="P:AIO.Net.TcpServer.BytesReceived">
             <summary>
-            数据缓存
+            Number of bytes received by the server
             </summary>
         </member>
-        <member name="M:AIO.Buffer`1.#ctor(`0[])">
+        <member name="P:AIO.Net.TcpServer.OptionAcceptorBacklog">
             <summary>
-            构建一个指定数据的ByteBuffer
+            Option: acceptor backlog size
             </summary>
+            <remarks>
+            This option will set the listening socket's backlog size
+            </remarks>
         </member>
-        <member name="M:AIO.Buffer`1.Reserve(System.Int64)">
+        <member name="P:AIO.Net.TcpServer.OptionDualMode">
             <summary>
-            CN:保留给定容量的缓冲区
+            Option: dual mode socket
             </summary>
-            <remarks>Reserve the buffer of the given capacity</remarks>
+            <remarks>
+            Specifies whether the Socket is a dual-mode socket used for both IPv4 and IPv6.
+            Will work only if socket is bound on IPv6 address.
+            </remarks>
         </member>
-        <member name="P:AIO.Buffer`1.Capacity">
-            <summary> 
-            数据缓存:容量
-            </summary>
-        </member>
-        <member name="P:AIO.Buffer`1.IsEmpty">
+        <member name="P:AIO.Net.TcpServer.OptionKeepAlive">
             <summary>
-            Is the buffer empty?
+            Option: keep alive
             </summary>
+            <remarks>
+            This option will setup SO_KEEPALIVE if the OS support this feature
+            </remarks>
         </member>
-        <member name="M:AIO.Buffer`1.ToArray">
-            <summary> 
-            获取有效字节数组
-            </summary>
-        </member>
-        <member name="M:AIO.Buffer`1.Write(AIO.Buffer{`0})">
-            <summary> 
-            将指定字节缓冲区数据写入当前缓存区
-            </summary>
-        </member>
-        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.ICollection{`0})">
-            <summary> 
-            将指定字节缓冲区数据写入当前缓存区
-            </summary>
-        </member>
-        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.IList{`0},System.Int32,System.Int32)">
+        <member name="P:AIO.Net.TcpServer.OptionTcpKeepAliveTime">
             <summary>
-            写入byte数组(从position开始写入len个)
+            Option: TCP keep alive time
             </summary>
+            <remarks>
+            The number of seconds a TCP connection will remain alive/idle before keepalive probes are sent to the remote
+            </remarks>
         </member>
-        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.ICollection{`0},System.Int32,System.Int32)">
+        <member name="P:AIO.Net.TcpServer.OptionTcpKeepAliveInterval">
             <summary>
-            写入byte数组(从position开始写入len个)
+            Option: TCP keep alive interval
             </summary>
+            <remarks>
+            The number of seconds a TCP connection will wait for a keepalive response before sending another keepalive probe
+            </remarks>
         </member>
-        <member name="M:AIO.Buffer`1.Clone">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.Buffer`1.Equals(AIO.Buffer{`0},AIO.Buffer{`0})">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.Buffer`1.GetHashCode(AIO.Buffer{`0})">
-            <inheritdoc/>
-        </member>
-        <member name="P:AIO.Buffer`1.IsReadOnly">
+        <member name="P:AIO.Net.TcpServer.OptionTcpKeepAliveRetryCount">
             <summary>
-            是否为只读
+            Option: TCP keep alive retry count
             </summary>
+            <remarks>
+            The number of TCP keep alive probes that will be sent before the connection is terminated
+            </remarks>
         </member>
-        <member name="P:AIO.Buffer`1.Item(System.Int32)">
+        <member name="P:AIO.Net.TcpServer.OptionNoDelay">
             <summary>
-            获取指定元素
+            Option: no delay
             </summary>
-            <param name="index">下标</param>
+            <remarks>
+            This option will enable/disable Nagle's algorithm for TCP protocol
+            </remarks>
         </member>
-        <member name="M:AIO.Buffer`1.IndexOf(`0)">
+        <member name="P:AIO.Net.TcpServer.OptionReuseAddress">
             <summary>
-            判断元素所在下标
+            Option: reuse address
             </summary>
-            <param name="item">元素</param>
-            <returns>-1未找到指定下标</returns>
+            <remarks>
+            This option will enable/disable SO_REUSEADDR if the OS support this feature
+            </remarks>
         </member>
-        <member name="M:AIO.Buffer`1.Insert(System.Int32,`0)">
+        <member name="P:AIO.Net.TcpServer.OptionExclusiveAddressUse">
             <summary>
-            在指定位置插入元素
+            Option: enables a socket to be bound for exclusive access
             </summary>
-            <param name="index">下标</param>
-            <param name="item">元素</param>
-            <exception cref="T:System.IndexOutOfRangeException">数组越界</exception>
+            <remarks>
+            This option will enable/disable SO_EXCLUSIVEADDRUSE if the OS support this feature
+            </remarks>
         </member>
-        <member name="M:AIO.Buffer`1.RemoveAt(System.Int32)">
+        <member name="P:AIO.Net.TcpServer.OptionReceiveBufferSize">
             <summary>
-            移除指定下标元素
+            Option: receive buffer size
             </summary>
-            <param name="index">下标</param>
-            <exception cref="T:System.IndexOutOfRangeException">数组越界</exception>
         </member>
-        <member name="M:AIO.Buffer`1.Add(`0)">
+        <member name="P:AIO.Net.TcpServer.OptionSendBufferSize">
             <summary>
-            添加指定元素
+            Option: send buffer size
             </summary>
-            <param name="item">元素</param>
         </member>
-        <member name="M:AIO.Buffer`1.Contains(`0)">
+        <member name="P:AIO.Net.TcpServer.IsStarted">
             <summary>
-            确定序列是否包含指定的元素使用的默认相等比较器。
+            Is the server started?
             </summary>
-            <param name="item">要在其中定位某个值的序列。</param>
-            <returns>true 如果源序列包含具有指定的值; 的元素否则为 false。</returns>
         </member>
-        <member name="M:AIO.Buffer`1.CopyTo(`0[],System.Int32)">
+        <member name="P:AIO.Net.TcpServer.IsAccepting">
             <summary>
-            复制
+            Is the server accepting new clients?
             </summary>
-            <param name="array">目标数组</param>
-            <param name="arrayIndex">数组下标</param>
         </member>
-        <member name="M:AIO.Buffer`1.Remove(`0)">
+        <member name="M:AIO.Net.TcpServer.CreateSocket">
             <summary>
-            移除指定元素
+            Create a new socket object
             </summary>
-            <param name="item">元素</param>
-            <returns>true 移除成功 false 集合不包含该元素</returns>
+            <remarks>
+            Method may be override if you need to prepare some specific socket object in your implementation.
+            </remarks>
+            <returns>Socket object</returns>
         </member>
-        <member name="M:AIO.Buffer`1.GetEnumerator">
+        <member name="M:AIO.Net.TcpServer.Start">
             <summary>
-            获取迭代器
+            Start the server
             </summary>
-            <returns>返回指定元素</returns>
+            <returns>'true' if the server was successfully started, 'false' if the server failed to start</returns>
         </member>
-        <member name="M:AIO.Buffer`1.Dispose">
+        <member name="M:AIO.Net.TcpServer.Stop">
             <summary>
-            释放
+            Stop the server
             </summary>
+            <returns>'true' if the server was successfully stopped, 'false' if the server is already stopped</returns>
         </member>
-        <member name="T:AIO.BufferByte">
+        <member name="M:AIO.Net.TcpServer.Restart">
             <summary>
-            字节缓存类
+            Restart the server
             </summary>
-            提供 write, read, set, get 方法
-            write  :  将写入字节缓存,改变写入进度
-            read   :  从字节缓存中读取,改变读取进度
-            set    :  需要传入索引,在字节缓存的指定索引处写入一个,不影响缓存读写进度
-            get    :  需要传入索引,在字节缓存的指定索引处读取一个,不影响缓存读写进度
-            method_:  为倒序写入 倒序读取
+            <returns>'true' if the server was successfully restarted, 'false' if the server failed to restart</returns>
         </member>
-        <member name="M:AIO.BufferByte.ReadBool">
-            <inheritdoc/> 
+        <member name="M:AIO.Net.TcpServer.StartAccept(System.Net.Sockets.SocketAsyncEventArgs)">
+            <summary>
+            Start accept a new client connection
+            </summary>
         </member>
-        <member name="M:AIO.BufferByte.ReadBoolArray(System.Boolean)">
-            <inheritdoc/> 
+        <member name="M:AIO.Net.TcpServer.ProcessAccept(System.Net.Sockets.SocketAsyncEventArgs)">
+            <summary>
+            Process accepted client connection
+            </summary>
         </member>
-        <member name="M:AIO.BufferByte.WriteBool(System.Boolean)">
-            <inheritdoc/> 
+        <member name="M:AIO.Net.TcpServer.OnAsyncCompleted(System.Object,System.Net.Sockets.SocketAsyncEventArgs)">
+            <summary>
+            This method is the callback method associated with Socket.AcceptAsync()
+            operations and is invoked when an accept operation is complete
+            </summary>
         </member>
-        <member name="M:AIO.BufferByte.WriteBoolArray(System.Collections.Generic.ICollection{System.Boolean},System.Boolean)">
-            <inheritdoc/> 
+        <member name="M:AIO.Net.TcpServer.CreateSession">
+            <summary>
+            Create TCP session factory method
+            </summary>
+            <returns>TCP session</returns>
         </member>
-        <member name="M:AIO.BufferByte.ReadByte">
-            <inheritdoc/> 
+        <member name="F:AIO.Net.TcpServer.Sessions">
+            <summary>
+            Server sessions
+            </summary>
         </member>
-        <member name="M:AIO.BufferByte.ReadByteArray(System.Boolean)">
-            <inheritdoc/> 
+        <member name="M:AIO.Net.TcpServer.DisconnectAll">
+            <summary>
+            Disconnect all connected sessions
+            </summary>
+            <returns>'true' if all sessions were successfully disconnected, 'false' if the server is not started</returns>
         </member>
-        <member name="M:AIO.BufferByte.WriteByte(System.Byte)">
-            <inheritdoc/> 
+        <member name="M:AIO.Net.TcpServer.FindSession(System.Guid)">
+            <summary>
+            Find a session with a given Id
+            </summary>
+            <param name="id">Session Id</param>
+            <returns>Session with a given Id or null if the session it not connected</returns>
         </member>
-        <member name="M:AIO.BufferByte.WriteByteArray(System.Collections.Generic.ICollection{System.Byte},System.Boolean)">
-            <inheritdoc/> 
+        <member name="M:AIO.Net.TcpServer.RegisterSession(AIO.Net.TcpSession)">
+            <summary>
+            Register a new session
+            </summary>
+            <param name="session">Session to register</param>
         </member>
-        <member name="M:AIO.BufferByte.ReadChar(System.Boolean)">
-            <inheritdoc/> 
+        <member name="M:AIO.Net.TcpServer.UnregisterSession(System.Guid)">
+            <summary>
+            Unregister session by Id
+            </summary>
+            <param name="id">Session Id</param>
         </member>
-        <member name="M:AIO.BufferByte.ReadCharArray(System.Boolean)">
-            <inheritdoc/> 
+        <member name="M:AIO.Net.TcpServer.Multicast(AIO.BufferByte)">
+            <summary>
+            Multicast data to all connected clients
+            </summary>
+            <param name="buffer">Buffer to send as a span of bytes</param>
+            <returns>'true' if the data was successfully multicasted, 'false' if the data was not multicasted</returns>
         </member>
-        <member name="M:AIO.BufferByte.WriteChar(System.Char,System.Boolean)">
-            <inheritdoc/> 
+        <member name="M:AIO.Net.TcpServer.Multicast(System.String)">
+            <summary>
+            Multicast text to all connected clients
+            </summary>
+            <param name="text">Text string to multicast</param>
+            <returns>'true' if the text was successfully multicasted, 'false' if the text was not multicasted</returns>
         </member>
-        <member name="M:AIO.BufferByte.WriteCharArray(System.Collections.Generic.ICollection{System.Char},System.Boolean)">
-            <inheritdoc/> 
+        <member name="M:AIO.Net.TcpServer.OnStarting">
+            <summary>
+            Handle server starting notification
+            </summary>
         </member>
-        <member name="M:AIO.BufferByte.#ctor">
-            <inheritdoc/>
+        <member name="M:AIO.Net.TcpServer.OnStarted">
+            <summary>
+            Handle server started notification
+            </summary>
         </member>
-        <member name="M:AIO.BufferByte.#ctor(System.Byte[])">
-            <inheritdoc/>
+        <member name="M:AIO.Net.TcpServer.OnStopping">
+            <summary>
+            Handle server stopping notification
+            </summary>
         </member>
-        <member name="M:AIO.BufferByte.#ctor(System.Int32)">
-            <inheritdoc/>
+        <member name="M:AIO.Net.TcpServer.OnStopped">
+            <summary>
+            Handle server stopped notification
+            </summary>
         </member>
-        <member name="M:AIO.BufferByte.Write(AIO.Buffer{System.Byte})">
+        <member name="M:AIO.Net.TcpServer.OnConnecting(AIO.Net.TcpSession)">
+            <summary>
+            Handle session connecting notification
+            </summary>
+            <param name="session">Connecting session</param>
+        </member>
+        <member name="M:AIO.Net.TcpServer.OnConnected(AIO.Net.TcpSession)">
+            <summary>
+            Handle session connected notification
+            </summary>
+            <param name="session">Connected session</param>
+        </member>
+        <member name="M:AIO.Net.TcpServer.OnDisconnecting(AIO.Net.TcpSession)">
+            <summary>
+            Handle session disconnecting notification
+            </summary>
+            <param name="session">Disconnecting session</param>
+        </member>
+        <member name="M:AIO.Net.TcpServer.OnDisconnected(AIO.Net.TcpSession)">
+            <summary>
+            Handle session disconnected notification
+            </summary>
+            <param name="session">Disconnected session</param>
+        </member>
+        <member name="M:AIO.Net.TcpServer.OnError(System.Net.Sockets.SocketError)">
+            <summary>
+            Handle error notification
+            </summary>
+            <param name="error">Socket error code</param>
+        </member>
+        <member name="M:AIO.Net.TcpServer.SendError(System.Net.Sockets.SocketError)">
+            <summary>
+            Send error notification
+            </summary>
+            <param name="error">Socket error code</param>
+        </member>
+        <member name="P:AIO.Net.TcpServer.IsDisposed">
+            <summary>
+            Disposed flag
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TcpServer.IsSocketDisposed">
+            <summary>
+            Acceptor socket disposed flag
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TcpServer.Dispose">
             <inheritdoc />
         </member>
-        <member name="M:AIO.BufferByte.Read(System.Int32,System.Int32)">
+        <member name="M:AIO.Net.TcpServer.Dispose(System.Boolean)">
             <summary>
-            读取数据
+            
             </summary>
-            <param name="start">开始下标</param>
-            <param name="count">长度</param>
-            <returns>返回数组</returns>
+            <param name="disposingManagedResources"></param>
         </member>
-        <member name="M:AIO.BufferByte.Write(System.Collections.Generic.IList{System.Byte},System.Int32,System.Int32)">
+        <member name="T:AIO.Net.TcpSession">
+            <summary>
+            TCP session is used to read and write data from the connected TCP client
+            </summary>
+            <remarks>Thread-safe</remarks>
+        </member>
+        <member name="M:AIO.Net.TcpSession.#ctor(AIO.Net.TcpServer)">
+            <summary>
+            Initialize the session with a given server
+            </summary>
+            <param name="server">TCP server</param>
+        </member>
+        <member name="P:AIO.Net.TcpSession.Id">
+            <summary>
+            Session Id
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TcpSession.Server">
+            <summary>
+            Server
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TcpSession.Socket">
+            <summary>
+            Socket
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TcpSession.BytesPending">
+            <summary>
+            Number of bytes pending sent by the session
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TcpSession.BytesSending">
+            <summary>
+            Number of bytes sending by the session
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TcpSession.BytesSent">
+            <summary>
+            Number of bytes sent by the session
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TcpSession.BytesReceived">
+            <summary>
+            Number of bytes received by the session
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TcpSession.OptionReceiveBufferLimit">
+            <summary>
+            Option: receive buffer limit
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TcpSession.OptionReceiveBufferSize">
+            <summary>
+            Option: receive buffer size
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TcpSession.OptionSendBufferLimit">
+            <summary>
+            Option: send buffer limit
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TcpSession.OptionSendBufferSize">
+            <summary>
+            Option: send buffer size
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TcpSession.IsConnected">
+            <summary>
+            Is the session connected?
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TcpSession.Connect(System.Net.Sockets.Socket)">
+            <summary>
+            Connect the session
+            </summary>
+            <param name="socket">Session socket</param>
+        </member>
+        <member name="M:AIO.Net.TcpSession.Disconnect">
+            <summary>
+            Disconnect the session
+            </summary>
+            <returns>'true' if the section was successfully disconnected, 'false' if the section is already disconnected</returns>
+        </member>
+        <member name="M:AIO.Net.TcpSession.ClearBuffers">
+            <summary>
+            Clear send/receive buffers
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TcpSession.OnAsyncCompleted(System.Object,System.Net.Sockets.SocketAsyncEventArgs)">
+            <summary>
+            This method is called whenever a receive or send operation is completed on a socket
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TcpSession.ProcessSend(System.Net.Sockets.SocketAsyncEventArgs)">
+            <summary>
+            This method is invoked when an asynchronous send operation completes
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TcpSession.OnConnecting">
+            <summary>
+            Handle client connecting notification
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TcpSession.OnConnected">
+            <summary>
+            Handle client connected notification
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TcpSession.OnDisconnecting">
+            <summary>
+            Handle client disconnecting notification
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TcpSession.OnDisconnected">
+            <summary>
+            Handle client disconnected notification
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TcpSession.OnReceived(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Handle buffer received notification
+            </summary>
+            <param name="buffer">Received buffer</param>
+            <param name="offset">Received buffer offset</param>
+            <param name="size">Received buffer size</param>
+            <remarks>
+            Notification is called when another chunk of buffer was received from the client
+            </remarks>
+        </member>
+        <member name="M:AIO.Net.TcpSession.OnSent(System.Int64,System.Int64)">
+            <summary>
+            Handle buffer sent notification
+            </summary>
+            <param name="sent">Size of sent buffer</param>
+            <param name="pending">Size of pending buffer</param>
+            <remarks>
+            Notification is called when another chunk of buffer was sent to the client.
+            This handler could be used to send another buffer to the client for instance when the pending size is zero.
+            </remarks>
+        </member>
+        <member name="M:AIO.Net.TcpSession.OnEmpty">
+            <summary>
+            Handle empty send buffer notification
+            </summary>
+            <remarks>
+            Notification is called when the send buffer is empty and ready for a new data to send.
+            This handler could be used to send another buffer to the client.
+            </remarks>
+        </member>
+        <member name="M:AIO.Net.TcpSession.OnError(System.Net.Sockets.SocketError)">
+            <summary>
+            Handle error notification
+            </summary>
+            <param name="error">Socket error code</param>
+        </member>
+        <member name="M:AIO.Net.TcpSession.SendError(System.Net.Sockets.SocketError)">
+            <summary>
+            Send error notification
+            </summary>
+            <param name="error">Socket error code</param>
+        </member>
+        <member name="P:AIO.Net.TcpSession.IsDisposed">
+            <summary>
+            Disposed flag
+            </summary>
+        </member>
+        <member name="P:AIO.Net.TcpSession.IsSocketDisposed">
+            <summary>
+            Session socket disposed flag
+            </summary>
+        </member>
+        <member name="M:AIO.Net.TcpSession.Dispose">
             <inheritdoc />
         </member>
-        <member name="M:AIO.BufferByte.Write(System.Collections.Generic.ICollection{System.Byte},System.Int32,System.Int32)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BufferByte.ToString">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.BufferByte.ReadData``1">
+        <member name="M:AIO.Net.TcpSession.Dispose(System.Boolean)">
             <summary>
-            读取数据
+            
             </summary>
-            <typeparam name="T">泛型</typeparam>
-            <returns>值</returns>
+            <param name="disposingManagedResources"></param>
         </member>
-        <member name="M:AIO.BufferByte.ReadDataArray``1(System.Collections.Generic.ICollection{``0})">
+        <member name="M:AIO.Net.TcpSession.Receive(System.Byte[])">
             <summary>
-            读取数据
+            Receive data from the client (synchronous)
             </summary>
-            <typeparam name="T">泛型</typeparam>
-            <returns>值</returns>
+            <param name="buffer">Buffer to receive</param>
+            <returns>Size of received data</returns>
         </member>
-        <member name="M:AIO.BufferByte.WriteData``1(``0)">
+        <member name="M:AIO.Net.TcpSession.Receive(System.Byte[],System.Int32,System.Int32)">
             <summary>
-            写入二进制数据
+            Receive data from the client (synchronous)
             </summary>
-            <param name="buffer">数据</param>
+            <param name="buffer">Buffer to receive</param>
+            <param name="offset">Buffer offset</param>
+            <param name="size">Buffer size</param>
+            <returns>Size of received data</returns>
         </member>
-        <member name="M:AIO.BufferByte.WriteDataArray``1(System.Collections.Generic.ICollection{``0})">
+        <member name="M:AIO.Net.TcpSession.ReceiveAsync">
             <summary>
-            读取数据
-            </summary>
-            <typeparam name="T">泛型</typeparam>
-            <returns>值</returns>
-        </member>
-        <member name="M:AIO.BufferByte.Dispose">
-            <inheritdoc/>
-        </member>
-        <member name="M:AIO.BufferByte.ReadDecimal(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadDecimalArray(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteDecimal(System.Decimal,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteDecimalArray(System.Collections.Generic.ICollection{System.Decimal},System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadDouble(System.Boolean,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadDoubleArray(System.Boolean,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteDouble(System.Double,System.Boolean,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteDoubleArray(System.Collections.Generic.ICollection{System.Double},System.Boolean,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadEnum``1">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadEnumArray``1">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteEnum``1(``0)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteEnumArray``1(System.Collections.Generic.ICollection{``0})">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadFloat(System.Boolean,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadFloatArray(System.Boolean,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteFloat(System.Single,System.Boolean,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteFloatArray(System.Collections.Generic.ICollection{System.Single},System.Boolean,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteCollection``1(System.Collections.Generic.ICollection{``0})">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BufferByte.ReadCollection``1(System.Collections.Generic.ICollection{``0})">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BufferByte.WriteDictionary``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BufferByte.ReadDictionary``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BufferByte.WriteList``1(System.Collections.Generic.IList{``0})">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BufferByte.ReadList``1(System.Collections.Generic.IList{``0})">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BufferByte.ReadInt16(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadInt16Array(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteInt16(System.Int16,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteInt16Array(System.Collections.Generic.ICollection{System.Int16},System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadInt32(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadInt32Array(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteInt32(System.Int32,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteInt32Array(System.Collections.Generic.ICollection{System.Int32},System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadInt64(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadInt64Array(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteInt64Array(System.Collections.Generic.ICollection{System.Int64},System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteInt64(System.Int64,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadJson``1(System.Text.Encoding,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadJsonUTF8``1(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadJsonASCII``1(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadJsonUnicode``1(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteJson``1(``0,System.Text.Encoding,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteJsonUTF8``1(``0,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteJsonASCII``1(``0,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteJsonUnicode``1(``0,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadLen">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadLenArray">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteLen(System.Int32)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteLen(System.UInt16)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteLen(System.Int16)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteLen(System.Byte)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteLen(System.SByte)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteLenArray(System.Collections.Generic.ICollection{System.Int32})">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadSByte">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadSByteArray(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteSByte(System.SByte)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteSByteArray(System.Collections.Generic.ICollection{System.SByte},System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadString(System.Text.Encoding,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadStringUTF8(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadStringASCII(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadStringUnicode(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteString(System.String,System.Text.Encoding,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteString(System.Text.StringBuilder,System.Text.Encoding,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteStringUTF8(System.String,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteStringUTF8(System.Text.StringBuilder,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteStringASCII(System.String,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteStringASCII(System.Text.StringBuilder,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteStringUnicode(System.String,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteStringUnicode(System.Text.StringBuilder,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadUInt16(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteUInt16(System.UInt16,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadUInt16Array(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteUInt16Array(System.Collections.Generic.ICollection{System.UInt16},System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadUInt32(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadUInt32Array(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteUInt32(System.UInt32,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteUInt32Array(System.Collections.Generic.ICollection{System.UInt32},System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadUInt64Array(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteUInt64Array(System.Collections.Generic.ICollection{System.UInt64},System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.ReadUInt64(System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="M:AIO.BufferByte.WriteUInt64(System.UInt64,System.Boolean)">
-            <inheritdoc/> 
-        </member>
-        <member name="T:AIO.BufferRing`1">
-            <summary>
-            闭环数据流
-            </summary>
-            参考链接
-            <see>
-                <cref>https://ifeve.com/dissecting-disruptor-whats-so-special/</cref>
-            </see>
-        </member>
-        <member name="F:AIO.BufferRing`1.FreedDic">
-            <summary>
-            存储队列 该队列专门存储数据作为对象池
+            Receive data from the client (asynchronous)
             </summary>
         </member>
-        <member name="F:AIO.BufferRing`1.UsedDic">
+        <member name="M:AIO.Net.TcpSession.TryReceive">
             <summary>
-            读写队列 该队列专门处理数据读写
+            Try to receive new data
             </summary>
         </member>
-        <member name="P:AIO.BufferRing`1.Capacity">
+        <member name="M:AIO.Net.TcpSession.ProcessReceive(System.Net.Sockets.SocketAsyncEventArgs)">
             <summary>
-            容量
+            This method is invoked when an asynchronous receive operation completes
             </summary>
         </member>
-        <member name="P:AIO.BufferRing`1.First">
+        <member name="M:AIO.Net.TcpSession.Send(System.Byte[])">
             <summary>
-            第一个读取的数组长度 队列最上面的数据数组
+            Send data to the client (synchronous)
+            </summary>
+            <param name="buffer">Buffer to send as a span of bytes</param>
+            <returns>Size of sent data</returns>
+        </member>
+        <member name="M:AIO.Net.TcpSession.Send(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Send text to the client (synchronous)
+            </summary>
+            <param name="buffer">Buffer to send</param>
+            <param name="offset">Buffer offset</param>
+            <param name="size">Buffer size</param>
+            <returns>Size of sent data</returns>
+        </member>
+        <member name="M:AIO.Net.TcpSession.Send(System.String)">
+            <summary>
+            Send text to the client (synchronous)
+            </summary>
+            <param name="text">Text string to send</param>
+            <returns>Size of sent data</returns>
+        </member>
+        <member name="M:AIO.Net.TcpSession.SendAsync(System.Byte[])">
+            <summary>
+            Send data to the client (asynchronous)
+            </summary>
+            <param name="buffer">Buffer to send</param>
+            <returns>'true' if the data was successfully sent, 'false' if the session is not connected</returns>
+        </member>
+        <member name="M:AIO.Net.TcpSession.SendAsync(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Send data to the client (asynchronous)
+            </summary>
+            <param name="buffer">Buffer to send</param>
+            <param name="offset">Buffer offset</param>
+            <param name="size">Buffer size</param>
+            <returns>'true' if the data was successfully sent, 'false' if the session is not connected</returns>
+        </member>
+        <member name="M:AIO.Net.TcpSession.SendAsync(System.String)">
+            <summary>
+            Send text to the client (asynchronous)
+            </summary>
+            <param name="text">Text string to send</param>
+            <returns>'true' if the text was successfully sent, 'false' if the session is not connected</returns>
+        </member>
+        <member name="M:AIO.Net.TcpSession.TrySend">
+            <summary>
+            Try to send pending data
             </summary>
         </member>
-        <member name="P:AIO.BufferRing`1.Last">
+        <member name="T:AIO.LockDisposable">
             <summary>
-            最后读取的数组长度 队列最下面的数据数组
+            Disposable lock class performs exit action on dispose operation.
             </summary>
         </member>
-        <member name="P:AIO.BufferRing`1.Count">
-            <summary>
-            当前可读取数据长度
-            </summary>
-        </member>
-        <member name="P:AIO.BufferRing`1.WriteOffset">
-            <summary>
-            缓存写入进度: 当前首位
-            </summary>
-        </member>
-        <member name="M:AIO.BufferRing`1.ToArray">
-            <summary> 返回:有效字节数组 </summary>
-        </member>
-        <member name="M:AIO.BufferRing`1.#ctor(System.Int32)">
+        <member name="M:AIO.LockDisposable.#ctor(System.Action)">
             <summary>
             构造函数
             </summary>
+            <param name="exitLock">退出锁定函数</param>
         </member>
-        <member name="M:AIO.BufferRing`1.#ctor(System.Collections.Generic.IList{`0},System.Int32)">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="M:AIO.BufferRing`1.AddLast">
-            <summary>
-            添加 读写数据数组 进入 读写队列
-            </summary>
-        </member>
-        <member name="M:AIO.BufferRing`1.RemoveFirst">
-            <summary>
-            移除最上层的数据 添加进入到对象池
-            </summary>
-        </member>
-        <member name="M:AIO.BufferRing`1.Read(`0[])">
-            <summary>
-            读取
-            </summary>
-        </member>
-        <member name="M:AIO.BufferRing`1.Read(System.Int32)">
-            <summary>
-            读取
-            </summary>
-        </member>
-        <member name="M:AIO.BufferRing`1.Read(`0[],System.Int32,System.Int32)">
-            <summary>
-            读取
-            </summary>
-            <param name="Buffer">字节数组</param>
-            <param name="Offset">开始值 偏移量</param>
-            <param name="count">读取长度</param>
-            <returns>实际读取长度</returns>
-        </member>
-        <member name="M:AIO.BufferRing`1.Write(System.Collections.Generic.ICollection{`0})">
+        <member name="M:AIO.LockDisposable.Dispose">
             <inheritdoc />
         </member>
-        <member name="M:AIO.BufferRing`1.Write(System.Collections.Generic.IList{`0},System.Int32,System.Int32)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BufferRing`1.Clear">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.BufferRing`1.IsLastFull">
+        <member name="T:AIO.LockRead">
             <summary>
-            判断Last数组是否满
+            Read lock class enters read lock on construction and performs exit read lock on dispose.
             </summary>
         </member>
-        <member name="M:AIO.BufferRing`1.Dispose">
+        <member name="M:AIO.LockRead.#ctor(System.Threading.ReaderWriterLockSlim)">
             <inheritdoc />
         </member>
-        <member name="T:AIO.RingBufferExtend">
+        <member name="T:AIO.LockWrite">
+            <summary>
+            Write lock class enters write lock on construction and performs exit write lock on dispose.
+            </summary>
+        </member>
+        <member name="M:AIO.LockWrite.#ctor(System.Threading.ReaderWriterLockSlim)">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.ReaderWriterLockSlimExtend">
             <summary>
             扩展
             </summary>
         </member>
-        <member name="M:AIO.RingBufferExtend.Read(AIO.BufferRing{System.Byte},System.IO.Stream,System.Int32@)">
+        <member name="M:AIO.ReaderWriterLockSlimExtend.LockWrite(System.Threading.ReaderWriterLockSlim)">
             <summary>
-            读取数据流
+            Write lock class enters write lock on construction and performs exit write lock on dispose.
             </summary>
         </member>
-        <member name="M:AIO.RingBufferExtend.Write(AIO.BufferRing{System.Byte},System.IO.Stream)">
+        <member name="M:AIO.ReaderWriterLockSlimExtend.LockRead(System.Threading.ReaderWriterLockSlim)">
             <summary>
-            写入数据
-            </summary>
-        </member>
-        <member name="T:AIO.HashCode">
-            <summary>
-            HashCode is designed to quickly compute hash codes of arbitrary objects.
+            Read lock class enters read lock on construction and performs exit read lock on dispose.
             </summary>
         </member>
         <member name="T:AIO.ILoad">
@@ -5922,6 +5614,927 @@
         <member name="M:AIO.IWriteUInt64.WriteUInt64Array(System.Collections.Generic.ICollection{System.UInt64},System.Boolean)">
             <summary>
             写入指定数据类型
+            </summary>
+        </member>
+        <member name="T:AIO.GBean">
+            <summary>
+            游戏数据
+            </summary>
+        </member>
+        <member name="M:AIO.GBean.Deserialize(AIO.IReadData)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.GBean.Serialize(AIO.IWriteData)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.GBean.Initialize">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.GBean.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.GBean.Frist">
+            <summary>
+            首次数据存放
+            </summary>
+        </member>
+        <member name="M:AIO.GBean.Clean">
+            <summary>
+            清空数据
+            </summary>
+        </member>
+        <member name="M:AIO.GBean.Reset">
+            <summary>
+            重置
+            </summary>
+        </member>
+        <member name="T:AIO.GBeanRegisterAttribute">
+            <summary>
+            游戏数据注册
+            </summary>
+        </member>
+        <member name="P:AIO.GBeanRegisterAttribute.ID">
+            <summary>
+            唯一ID
+            </summary>
+        </member>
+        <member name="M:AIO.GBeanRegisterAttribute.#ctor(System.Int32)">
+            <summary>
+            游戏数据注册
+            </summary>
+            <param name="id">唯一ID</param>
+        </member>
+        <member name="T:AIO.GBeanSystem">
+            <summary>
+            游戏数据储存管理
+            </summary>
+        </member>
+        <member name="F:AIO.GBeanSystem.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="F:AIO.GBeanSystem.Bean">
+            <summary>
+            源数据
+            </summary>
+        </member>
+        <member name="P:AIO.GBeanSystem.Progress">
+            <summary>
+            进度回调
+            </summary>
+        </member>
+        <member name="F:AIO.GBeanSystem.TargetPath">
+            <summary>
+            目标存储读取路径
+            </summary>
+        </member>
+        <member name="M:AIO.GBeanSystem.GetMD5(System.Byte[]@)">
+            <summary>
+            获取二进制MD5码
+            </summary>
+        </member>
+        <member name="M:AIO.GBeanSystem.Initialize(System.String@)">
+            <summary>
+            初始化数据
+            </summary>
+        </member>
+        <member name="M:AIO.GBeanSystem.Load">
+            <summary>
+            加载数据
+            </summary>
+        </member>
+        <member name="M:AIO.GBeanSystem.Save">
+            <summary>
+            保存数据
+            </summary>
+        </member>
+        <member name="M:AIO.GBeanSystem.Clean">
+            <summary>
+            清空数据
+            </summary>
+        </member>
+        <member name="M:AIO.GBeanSystem.Reset">
+            <summary>
+            重置数据
+            </summary>
+        </member>
+        <member name="T:AIO.Buffer">
+            <summary>
+            数据缓存留
+            </summary>
+        </member>
+        <member name="F:AIO.Buffer.CAPACITY">
+            <summary>
+            默认容量:32B = 256bit
+            </summary>
+        </member>
+        <member name="F:AIO.Buffer.MAX_CAPACITY">
+            <summary>
+            最大缓存:4M
+            </summary>
+        </member>
+        <member name="F:AIO.Buffer.WriteIndex">
+            <summary>
+            当前写入位置
+            </summary>
+        </member>
+        <member name="F:AIO.Buffer.ReadIndex">
+            <summary>
+            当前读取位置
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer.#ctor">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer.Clear">
+            <summary> 
+            清空
+            </summary>
+        </member>
+        <member name="P:AIO.Buffer.WriteOffset">
+            <summary>
+            缓存写入进度: 当前首位
+            </summary>
+        </member>
+        <member name="P:AIO.Buffer.ReadOffset">
+            <summary>
+            缓存写入进度: 当前读取游标下标
+            </summary>
+        </member>
+        <member name="P:AIO.Buffer.Count">
+            <summary> 
+            返回数据可读取长度
+            </summary>
+        </member>
+        <member name="P:AIO.Buffer.Capacity">
+            <summary> 
+            数据缓存:容量
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer.Skip(System.Int32)">
+            <summary>
+            跳过
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer.CheckSize(System.Int32)">
+            <summary>
+            检查剩余数量 
+            Flase:不满足
+            Ture:满足
+            </summary>
+        </member>
+        <member name="T:AIO.Buffer`1">
+            <summary>
+            缓冲流
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.op_Addition(AIO.Buffer{`0},AIO.Buffer{`0}@)">
+            <summary>
+            增加
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.op_Addition(AIO.Buffer{`0},`0[]@)">
+            <summary>
+            增加
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.op_Addition(AIO.Buffer{`0},System.Collections.Generic.HashSet{`0}@)">
+            <summary>
+            增加
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.op_Addition(AIO.Buffer{`0},System.Collections.Generic.ICollection{`0}@)">
+            <summary>
+            增加
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.op_Implicit(AIO.Buffer{`0}@)~`0[]">
+            <summary>
+            隐式转化为数组
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.op_Implicit(AIO.Buffer{`0}@)~System.Collections.Generic.HashSet{`0}">
+            <summary>
+            隐式转化为数组
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.op_Implicit(AIO.Buffer{`0}@)~System.Collections.Generic.List{`0}">
+            <summary>
+            隐式转化为List
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.#ctor(System.Int32)">
+            <summary>
+            构建一个指定容量的Buffer
+            </summary>
+        </member>
+        <member name="P:AIO.Buffer`1.Arrays">
+            <summary>
+            数据缓存
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.#ctor(`0[],System.Int32,System.Int32)">
+            <summary>
+            构建一个指定数据的ByteBuffer
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.Reserve">
+            <summary>
+            自动扩容一杯
+            </summary>
+            <remarks>Reserve the buffer of the given capacity</remarks>
+        </member>
+        <member name="M:AIO.Buffer`1.Reserve(System.Int32)">
+            <summary>
+            自动扩容
+            </summary>
+            <remarks>Reserve the buffer of the given capacity</remarks>
+        </member>
+        <member name="P:AIO.Buffer`1.Capacity">
+            <summary> 
+            数据缓存:容量
+            </summary>
+        </member>
+        <member name="P:AIO.Buffer`1.IsEmpty">
+            <summary>
+            Is the buffer empty?
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.ToArray">
+            <summary> 
+            获取有效字节数组
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.Write(AIO.Buffer{`0})">
+            <summary> 
+            将指定字节缓冲区数据写入当前缓存区
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.ICollection{`0})">
+            <summary> 
+            将指定字节缓冲区数据写入当前缓存区
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.IList{`0},System.Int32,System.Int32)">
+            <summary>
+            写入byte数组(从position开始写入len个)
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.Write(System.Collections.Generic.ICollection{`0},System.Int32,System.Int32)">
+            <summary>
+            写入byte数组(从position开始写入len个)
+            </summary>
+        </member>
+        <member name="M:AIO.Buffer`1.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Buffer`1.Equals(AIO.Buffer{`0},AIO.Buffer{`0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.Buffer`1.GetHashCode(AIO.Buffer{`0})">
+            <inheritdoc/>
+        </member>
+        <member name="P:AIO.Buffer`1.IsReadOnly">
+            <summary>
+            是否为只读
+            </summary>
+        </member>
+        <member name="P:AIO.Buffer`1.Item(System.Int32)">
+            <summary>
+            获取指定元素
+            </summary>
+            <param name="index">下标</param>
+        </member>
+        <member name="M:AIO.Buffer`1.IndexOf(`0)">
+            <summary>
+            判断元素所在下标
+            </summary>
+            <param name="item">元素</param>
+            <returns>-1未找到指定下标</returns>
+        </member>
+        <member name="M:AIO.Buffer`1.Insert(System.Int32,`0)">
+            <summary>
+            在指定位置插入元素
+            </summary>
+            <param name="index">下标</param>
+            <param name="item">元素</param>
+            <exception cref="T:System.IndexOutOfRangeException">数组越界</exception>
+        </member>
+        <member name="M:AIO.Buffer`1.RemoveAt(System.Int32)">
+            <summary>
+            移除指定下标元素
+            </summary>
+            <param name="index">下标</param>
+            <exception cref="T:System.IndexOutOfRangeException">数组越界</exception>
+        </member>
+        <member name="M:AIO.Buffer`1.Add(`0)">
+            <summary>
+            添加指定元素
+            </summary>
+            <param name="item">元素</param>
+        </member>
+        <member name="M:AIO.Buffer`1.Contains(`0)">
+            <summary>
+            确定序列是否包含指定的元素使用的默认相等比较器。
+            </summary>
+            <param name="item">要在其中定位某个值的序列。</param>
+            <returns>true 如果源序列包含具有指定的值; 的元素否则为 false。</returns>
+        </member>
+        <member name="M:AIO.Buffer`1.CopyTo(`0[],System.Int32)">
+            <summary>
+            复制
+            </summary>
+            <param name="array">目标数组</param>
+            <param name="arrayIndex">数组下标</param>
+        </member>
+        <member name="M:AIO.Buffer`1.Remove(`0)">
+            <summary>
+            移除指定元素
+            </summary>
+            <param name="item">元素</param>
+            <returns>true 移除成功 false 集合不包含该元素</returns>
+        </member>
+        <member name="M:AIO.Buffer`1.GetEnumerator">
+            <summary>
+            获取迭代器
+            </summary>
+            <returns>返回指定元素</returns>
+        </member>
+        <member name="M:AIO.Buffer`1.Dispose">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="T:AIO.BufferByte">
+            <summary>
+            字节缓存类
+            </summary>
+            提供 write, read, set, get 方法
+            write  :  将写入字节缓存,改变写入进度
+            read   :  从字节缓存中读取,改变读取进度
+            set    :  需要传入索引,在字节缓存的指定索引处写入一个,不影响缓存读写进度
+            get    :  需要传入索引,在字节缓存的指定索引处读取一个,不影响缓存读写进度
+            method_:  为倒序写入 倒序读取
+        </member>
+        <member name="M:AIO.BufferByte.ReadBool">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadBoolArray(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteBool(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteBoolArray(System.Collections.Generic.ICollection{System.Boolean},System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadByte">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadByteArray(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteByte(System.Byte)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteByteArray(System.Collections.Generic.ICollection{System.Byte},System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadChar(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadCharArray(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteChar(System.Char,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteCharArray(System.Collections.Generic.ICollection{System.Char},System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.BufferByte.#ctor(System.Byte[],System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.BufferByte.#ctor(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.BufferByte.Write(AIO.Buffer{System.Byte})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BufferByte.Read(System.Int32,System.Int32)">
+            <summary>
+            读取数据
+            </summary>
+            <param name="start">开始下标</param>
+            <param name="count">长度</param>
+            <returns>返回数组</returns>
+        </member>
+        <member name="M:AIO.BufferByte.Write(System.Collections.Generic.IList{System.Byte},System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BufferByte.Write(System.Collections.Generic.ICollection{System.Byte},System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BufferByte.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.BufferByte.ReadData``1">
+            <summary>
+            读取数据
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <returns>值</returns>
+        </member>
+        <member name="M:AIO.BufferByte.ReadDataArray``1(System.Collections.Generic.ICollection{``0})">
+            <summary>
+            读取数据
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <returns>值</returns>
+        </member>
+        <member name="M:AIO.BufferByte.WriteData``1(``0)">
+            <summary>
+            写入二进制数据
+            </summary>
+            <param name="buffer">数据</param>
+        </member>
+        <member name="M:AIO.BufferByte.WriteDataArray``1(System.Collections.Generic.ICollection{``0})">
+            <summary>
+            读取数据
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <returns>值</returns>
+        </member>
+        <member name="M:AIO.BufferByte.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:AIO.BufferByte.ReadDecimal(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadDecimalArray(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteDecimal(System.Decimal,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteDecimalArray(System.Collections.Generic.ICollection{System.Decimal},System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadDouble(System.Boolean,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadDoubleArray(System.Boolean,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteDouble(System.Double,System.Boolean,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteDoubleArray(System.Collections.Generic.ICollection{System.Double},System.Boolean,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadEnum``1">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadEnumArray``1">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteEnum``1(``0)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteEnumArray``1(System.Collections.Generic.ICollection{``0})">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadFloat(System.Boolean,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadFloatArray(System.Boolean,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteFloat(System.Single,System.Boolean,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteFloatArray(System.Collections.Generic.ICollection{System.Single},System.Boolean,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteCollection``1(System.Collections.Generic.ICollection{``0})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BufferByte.ReadCollection``1(System.Collections.Generic.ICollection{``0})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BufferByte.WriteDictionary``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BufferByte.ReadDictionary``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BufferByte.WriteList``1(System.Collections.Generic.IList{``0})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BufferByte.ReadList``1(System.Collections.Generic.IList{``0})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BufferByte.ReadInt16(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadInt16Array(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteInt16(System.Int16,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteInt16Array(System.Collections.Generic.ICollection{System.Int16},System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadInt32(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadInt32Array(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteInt32(System.Int32,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteInt32Array(System.Collections.Generic.ICollection{System.Int32},System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadInt64(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadInt64Array(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteInt64Array(System.Collections.Generic.ICollection{System.Int64},System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteInt64(System.Int64,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadJson``1(System.Text.Encoding,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadJsonUTF8``1(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadJsonASCII``1(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadJsonUnicode``1(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteJson``1(``0,System.Text.Encoding,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteJsonUTF8``1(``0,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteJsonASCII``1(``0,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteJsonUnicode``1(``0,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadLen">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadLenArray">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteLen(System.Int32)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteLen(System.UInt16)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteLen(System.Int16)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteLen(System.Byte)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteLen(System.SByte)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteLenArray(System.Collections.Generic.ICollection{System.Int32})">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadSByte">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadSByteArray(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteSByte(System.SByte)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteSByteArray(System.Collections.Generic.ICollection{System.SByte},System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadString(System.Text.Encoding,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadStringUTF8(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadStringASCII(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadStringUnicode(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteString(System.String,System.Text.Encoding,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteString(System.Text.StringBuilder,System.Text.Encoding,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteStringUTF8(System.String,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteStringUTF8(System.Text.StringBuilder,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteStringASCII(System.String,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteStringASCII(System.Text.StringBuilder,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteStringUnicode(System.String,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteStringUnicode(System.Text.StringBuilder,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadUInt16(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteUInt16(System.UInt16,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadUInt16Array(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteUInt16Array(System.Collections.Generic.ICollection{System.UInt16},System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadUInt32(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadUInt32Array(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteUInt32(System.UInt32,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteUInt32Array(System.Collections.Generic.ICollection{System.UInt32},System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadUInt64Array(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteUInt64Array(System.Collections.Generic.ICollection{System.UInt64},System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.ReadUInt64(System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="M:AIO.BufferByte.WriteUInt64(System.UInt64,System.Boolean)">
+            <inheritdoc/> 
+        </member>
+        <member name="T:AIO.BufferRing`1">
+            <summary>
+            闭环数据流
+            </summary>
+            参考链接
+            <see>
+                <cref>https://ifeve.com/dissecting-disruptor-whats-so-special/</cref>
+            </see>
+        </member>
+        <member name="F:AIO.BufferRing`1.FreedDic">
+            <summary>
+            存储队列 该队列专门存储数据作为对象池
+            </summary>
+        </member>
+        <member name="F:AIO.BufferRing`1.UsedDic">
+            <summary>
+            读写队列 该队列专门处理数据读写
+            </summary>
+        </member>
+        <member name="P:AIO.BufferRing`1.Capacity">
+            <summary>
+            容量
+            </summary>
+        </member>
+        <member name="P:AIO.BufferRing`1.First">
+            <summary>
+            第一个读取的数组长度 队列最上面的数据数组
+            </summary>
+        </member>
+        <member name="P:AIO.BufferRing`1.Last">
+            <summary>
+            最后读取的数组长度 队列最下面的数据数组
+            </summary>
+        </member>
+        <member name="P:AIO.BufferRing`1.Count">
+            <summary>
+            当前可读取数据长度
+            </summary>
+        </member>
+        <member name="P:AIO.BufferRing`1.WriteOffset">
+            <summary>
+            缓存写入进度: 当前首位
+            </summary>
+        </member>
+        <member name="M:AIO.BufferRing`1.ToArray">
+            <summary> 返回:有效字节数组 </summary>
+        </member>
+        <member name="M:AIO.BufferRing`1.#ctor(System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.BufferRing`1.#ctor(System.Collections.Generic.IList{`0},System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.BufferRing`1.AddLast">
+            <summary>
+            添加 读写数据数组 进入 读写队列
+            </summary>
+        </member>
+        <member name="M:AIO.BufferRing`1.RemoveFirst">
+            <summary>
+            移除最上层的数据 添加进入到对象池
+            </summary>
+        </member>
+        <member name="M:AIO.BufferRing`1.Read(`0[])">
+            <summary>
+            读取
+            </summary>
+        </member>
+        <member name="M:AIO.BufferRing`1.Read(System.Int32)">
+            <summary>
+            读取
+            </summary>
+        </member>
+        <member name="M:AIO.BufferRing`1.Read(`0[],System.Int32,System.Int32)">
+            <summary>
+            读取
+            </summary>
+            <param name="Buffer">字节数组</param>
+            <param name="Offset">开始值 偏移量</param>
+            <param name="count">读取长度</param>
+            <returns>实际读取长度</returns>
+        </member>
+        <member name="M:AIO.BufferRing`1.Write(System.Collections.Generic.ICollection{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BufferRing`1.Write(System.Collections.Generic.IList{`0},System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BufferRing`1.Clear">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.BufferRing`1.IsLastFull">
+            <summary>
+            判断Last数组是否满
+            </summary>
+        </member>
+        <member name="M:AIO.BufferRing`1.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.RingBufferExtend">
+            <summary>
+            扩展
+            </summary>
+        </member>
+        <member name="M:AIO.RingBufferExtend.Read(AIO.BufferRing{System.Byte},System.IO.Stream,System.Int32@)">
+            <summary>
+            读取数据流
+            </summary>
+        </member>
+        <member name="M:AIO.RingBufferExtend.Write(AIO.BufferRing{System.Byte},System.IO.Stream)">
+            <summary>
+            写入数据
+            </summary>
+        </member>
+        <member name="T:AIO.FileCache">
+            <summary>
+            File cache is used to cache files in memory with optional timeouts.
+            FileSystemWatcher is used to monitor file system changes in cached
+            directories.
+            </summary>
+            <remarks>Thread-safe.</remarks>
+        </member>
+        <member name="T:AIO.FileCache.InsertHandler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AIO.FileCache.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AIO.FileCache.Empty">
+            <summary>
+            Is the file cache empty?
+            </summary>
+        </member>
+        <member name="P:AIO.FileCache.Size">
+            <summary>
+            Get the file cache size
+            </summary>
+        </member>
+        <member name="M:AIO.FileCache.Add(System.String,System.Byte[],System.TimeSpan)">
+            <summary>
+            Add a new cache value with the given timeout into the file cache
+            </summary>
+            <param name="key">Key to add</param>
+            <param name="value">Value to add</param>
+            <param name="timeout">Cache timeout (default is 0 - no timeout)</param>
+            <returns>'true' if the cache value was added, 'false' if the given key was not added</returns>
+        </member>
+        <member name="M:AIO.FileCache.Add``1(System.String,``0,System.TimeSpan)">
+            <summary>
+            Add a new cache value with the given timeout into the file cache
+            </summary>
+            <param name="key">Key to add</param>
+            <param name="value">Value to add</param>
+            <param name="timeout">Cache timeout (default is 0 - no timeout)</param>
+            <returns>'true' if the cache value was added, 'false' if the given key was not added</returns>
+        </member>
+        <member name="M:AIO.FileCache.Get(System.String)">
+            <summary>
+            Try to find the cache value by the given key
+            </summary>
+            <param name="key">Key to find</param>
+            <returns>'true' and cache value if the cache value was found, 'false' if the given key was not found</returns>
+        </member>
+        <member name="M:AIO.FileCache.Get``1(System.String)">
+            <summary>
+            Try to find the cache value by the given key
+            </summary>
+            <param name="key">Key to find</param>
+            <returns>'true' and cache value if the cache value was found, 'false' if the given key was not found</returns>
+        </member>
+        <member name="M:AIO.FileCache.Remove(System.String)">
+            <summary>
+            Remove the cache value with the given key from the file cache
+            </summary>
+            <param name="key">Key to remove</param>
+            <returns>'true' if the cache value was removed, 'false' if the given key was not found</returns>
+        </member>
+        <member name="M:AIO.FileCache.InsertPath(System.String,System.String,System.String,System.TimeSpan,AIO.FileCache.InsertHandler)">
+            <summary>
+            Insert a new cache path with the given timeout into the file cache
+            </summary>
+            <param name="path">Path to insert</param>
+            <param name="prefix">Cache prefix (default is "/")</param>
+            <param name="filter">Cache filter (default is "*.*")</param>
+            <param name="timeout">Cache timeout (default is 0 - no timeout)</param>
+            <param name="handler">Cache insert handler (default is 'return cache.Add(key, value, timeout)')</param>
+            <returns>'true' if the cache path was setup, 'false' if failed to setup the cache path</returns>
+        </member>
+        <member name="M:AIO.FileCache.ContainPath(System.String)">
+            <summary>
+            Try to find the cache path
+            </summary>
+            <param name="path">Path to find</param>
+            <returns>'true' if the cache path was found, 'false' if the given path was not found</returns>
+        </member>
+        <member name="M:AIO.FileCache.RemovePath(System.String)">
+            <summary>
+            Remove the cache path from the file cache
+            </summary>
+            <param name="path">Path to remove</param>
+            <returns>'true' if the cache path was removed, 'false' if the given path was not found</returns>
+        </member>
+        <member name="M:AIO.FileCache.Clear">
+            <summary>
+            Clear the memory cache
+            </summary>
+        </member>
+        <member name="M:AIO.FileCache.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.FileCache.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposingManagedResources"></param>
+        </member>
+        <member name="T:AIO.HashCode">
+            <summary>
+            HashCode is designed to quickly compute hash codes of arbitrary objects.
             </summary>
         </member>
         <member name="T:AIO.MailHandle">

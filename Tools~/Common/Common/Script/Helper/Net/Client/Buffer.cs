@@ -12,8 +12,8 @@ namespace AIO.Net
     public class Buffer
     {
         private byte[] _data;
-        private long _size;
-        private long _offset;
+        private int _size;
+        private int _offset;
 
         /// <summary>
         /// Is the buffer empty?
@@ -28,17 +28,17 @@ namespace AIO.Net
         /// <summary>
         /// Bytes memory buffer capacity
         /// </summary>
-        public long Capacity => _data.Length;
+        public int Capacity => _data.Length;
 
         /// <summary>
         /// Bytes memory buffer size
         /// </summary>
-        public long Size => _size;
+        public int Size => _size;
 
         /// <summary>
         /// Bytes memory buffer offset
         /// </summary>
-        public long Offset => _offset;
+        public int Offset => _offset;
 
         /// <summary>
         /// Buffer indexer operator
@@ -107,7 +107,7 @@ namespace AIO.Net
         /// <summary>
         /// Remove the buffer of the given offset and size
         /// </summary>
-        public void Remove(long offset, long size)
+        public void Remove(int offset, int size)
         {
             Debug.Assert(((offset + size) <= Size), "Invalid offset & size!");
             if ((offset + size) > Size)
@@ -143,7 +143,7 @@ namespace AIO.Net
         }
 
         // Resize the current buffer
-        public void Resize(long size)
+        public void Resize(int size)
         {
             Reserve(size);
             _size = size;
@@ -152,13 +152,13 @@ namespace AIO.Net
         }
 
         // Shift the current buffer offset
-        public void Shift(long offset)
+        public void Shift(int offset)
         {
             _offset += offset;
         }
 
         // Unshift the current buffer offset
-        public void Unshift(long offset)
+        public void Unshift(int offset)
         {
             _offset -= offset;
         }
@@ -200,7 +200,7 @@ namespace AIO.Net
         /// <param name="offset">Buffer offset</param>
         /// <param name="size">Buffer size</param>
         /// <returns>Count of append bytes</returns>
-        public long Append(byte[] buffer, long offset, long size)
+        public long Append(byte[] buffer, int offset, int size)
         {
             Reserve(_size + size);
             Array.Copy(buffer, offset, _data, _size, size);
@@ -237,7 +237,7 @@ namespace AIO.Net
         {
             int length = Encoding.UTF8.GetMaxByteCount(text.Length);
             Reserve(_size + length);
-            long result = Encoding.UTF8.GetBytes(text, 0, text.Length, _data, (int)_size);
+            int result = Encoding.UTF8.GetBytes(text, 0, text.Length, _data, (int)_size);
             _size += result;
             return result;
         }
@@ -251,7 +251,7 @@ namespace AIO.Net
         {
             int length = Encoding.UTF8.GetMaxByteCount(text.Count);
             Reserve(_size + length);
-            long result = Encoding.UTF8.GetBytes(text.ToArray(), 0, text.Count, _data, (int)_size);
+            int result = Encoding.UTF8.GetBytes(text.ToArray(), 0, text.Count, _data, (int)_size);
             _size += result;
             return result;
         }

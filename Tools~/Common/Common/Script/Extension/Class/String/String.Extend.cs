@@ -34,7 +34,7 @@ namespace AIO
     /// <summary>
     /// 字符工具类
     /// </summary>
-    public static partial class StringExtend
+    public static partial class StringExtendExtend
     {
         /// <summary>
         /// 获取字符串中某个字符左右两侧的部分。

@@ -27,9 +27,10 @@ namespace AIO
         }
 
         /// <inheritdoc/>
-        public BufferByte(byte[] bytes) : base(bytes)
+        public BufferByte(byte[] bytes, int index = 0, int count = 0) : base(bytes, index, count)
         {
         }
+
 
         /// <inheritdoc/>
         public BufferByte(int capacity) : base(capacity)

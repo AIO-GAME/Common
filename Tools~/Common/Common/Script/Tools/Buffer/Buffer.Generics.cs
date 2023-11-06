@@ -25,12 +25,32 @@ namespace AIO
         /// <summary>
         /// 数据缓存
         /// </summary>
-        protected T[] Arrays { get; set; }
+        internal T[] Arrays { get; set; }
+        //
+        // /// <summary>
+        // /// 构建一个指定数据的ByteBuffer
+        // /// </summary>
+        // protected Buffer(T[] bytes)
+        // {
+        //     if (bytes == null || bytes.Length == 0)
+        //     {
+        //         Arrays = new T[CAPACITY];
+        //         WriteIndex = 0;
+        //     }
+        //     else
+        //     {
+        //         WriteIndex = bytes.Length;
+        //         Arrays = new T[WriteIndex];
+        //         Array.ConstrainedCopy(bytes, 0, Arrays, 0, WriteIndex);
+        //     }
+        //
+        //     ReadIndex = 0;
+        // }
 
         /// <summary>
         /// 构建一个指定数据的ByteBuffer
         /// </summary>
-        protected Buffer(T[] bytes)
+        public Buffer(T[] bytes, int index = 0, int count = 0)
         {
             if (bytes == null || bytes.Length == 0)
             {
@@ -39,28 +59,31 @@ namespace AIO
             }
             else
             {
-                WriteIndex = bytes.Length;
+                if (count == 0) count = bytes.Length;
+                WriteIndex = count - index;
                 Arrays = new T[WriteIndex];
-                Array.ConstrainedCopy(bytes, 0, Arrays, 0, WriteIndex);
+                Array.ConstrainedCopy(bytes, index, Arrays, 0, WriteIndex);
             }
 
             ReadIndex = 0;
         }
 
         /// <summary>
-        /// CN:保留给定容量的缓冲区
+        /// 自动扩容一杯
         /// </summary>
         /// <remarks>Reserve the buffer of the given capacity</remarks>
-        public void Reserve(long capacity)
+        public void Reserve()
         {
-            System.Diagnostics.Debug.Assert((capacity >= 0), "Invalid reserve capacity!");
-            if (capacity < 0)
-                throw new ArgumentException("Invalid reserve capacity!", nameof(capacity));
+            Capacity = Arrays.Length << 1 + 1;
+        }
 
-            if (capacity <= Capacity) return;
-            var data = new T[Math.Max(capacity, 2 * Capacity)];
-            Array.Copy(Arrays, 0, data, 0, Arrays.Length);
-            Arrays = data;
+        /// <summary>
+        /// 自动扩容
+        /// </summary>
+        /// <remarks>Reserve the buffer of the given capacity</remarks>
+        public void Reserve(int capacity)
+        {
+            Capacity = capacity;
         }
 
         /// <summary> 
@@ -86,8 +109,8 @@ namespace AIO
         /// <summary>
         /// Is the buffer empty?
         /// </summary>
-        public bool IsEmpty => Arrays is null || WriteIndex == ReadIndex;
-        
+        public bool IsEmpty => Arrays is null || (WriteIndex == ReadIndex && ReadIndex == 0);
+
         /// <summary> 
         /// 获取有效字节数组
         /// </summary>
