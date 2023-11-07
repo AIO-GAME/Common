@@ -65,93 +65,108 @@ namespace AIO.Net
         }
 
         /// <summary>
-        /// Client Id
+        /// Client Id/标识ID
         /// </summary>
         public Guid Id { get; }
 
         /// <summary>
-        /// TCP server address
+        /// TCP server address/地址
         /// </summary>
         public string Address { get; }
 
         /// <summary>
-        /// TCP server port
+        /// TCP server port/端口
         /// </summary>
         public int Port { get; }
 
         /// <summary>
-        /// Endpoint
+        /// Endpoint/端点
         /// </summary>
         public EndPoint Endpoint { get; private set; }
 
         /// <summary>
-        /// Socket
+        /// Socket/套接字
         /// </summary>
         public Socket Socket { get; private set; }
 
         /// <summary>
-        /// Number of bytes pending sent by the client
+        /// Number of bytes pending sent by the client/客户端待发送的字节数
         /// </summary>
         public long BytesPending { get; private set; }
 
         /// <summary>
-        /// Number of bytes sending by the client
+        /// Number of bytes sending by the client/客户端正在发送的字节数
         /// </summary>
         public long BytesSending { get; private set; }
 
         /// <summary>
-        /// Number of bytes sent by the client
+        /// Number of bytes sent by the client/客户端已发送的字节数
         /// </summary>
         public long BytesSent { get; private set; }
 
         /// <summary>
-        /// Number of bytes received by the client
+        /// Number of bytes received by the client/客户端已接收的字节数
         /// </summary>
         public long BytesReceived { get; private set; }
 
         /// <summary>
-        /// Option: dual mode socket
+        /// Option: dual mode socket/双模式套接字
         /// </summary>
         /// <remarks>
         /// Specifies whether the Socket is a dual-mode socket used for both IPv4 and IPv6.
         /// Will work only if socket is bound on IPv6 address.
         /// </remarks>
+        /// <remarks>
+        /// 指定套接字是否为用于IPv4和IPv6的双模式套接字。
+        /// </remarks>
         public bool OptionDualMode { get; set; }
 
         /// <summary>
-        /// Option: keep alive
+        /// Option: keep alive/保持活动
         /// </summary>
         /// <remarks>
         /// This option will setup SO_KEEPALIVE if the OS support this feature
         /// </remarks>
+        /// <remarks>
+        /// 此选项将设置SO_KEEPALIVE，如果操作系统支持此功能
+        /// </remarks>
         public bool OptionKeepAlive { get; set; }
 
         /// <summary>
-        /// Option: TCP keep alive time
+        /// Option: TCP keep alive time/选项：TCP保持活动时间
         /// </summary>
         /// <remarks>
         /// The number of seconds a TCP connection will remain alive/idle before keepalive probes are sent to the remote
         /// </remarks>
+        /// <remarks>
+        /// 在发送保持活动探测到远程之前，TCP连接将保持活动/空闲的秒数
+        /// </remarks>
         public int OptionTcpKeepAliveTime { get; set; } = -1;
 
         /// <summary>
-        /// Option: TCP keep alive interval
+        /// Option: TCP keep alive interval/选项：TCP保持活动间隔
         /// </summary>
         /// <remarks>
         /// The number of seconds a TCP connection will wait for a keepalive response before sending another keepalive probe
         /// </remarks>
+        /// <remarks>
+        /// 在发送另一个保持活动探测之前，TCP连接将等待保持活动响应的秒数
+        /// </remarks>
         public int OptionTcpKeepAliveInterval { get; set; } = -1;
 
         /// <summary>
-        /// Option: TCP keep alive retry count
+        /// Option: TCP keep alive retry count/选项：TCP保持活动重试计数
         /// </summary>
         /// <remarks>
         /// The number of TCP keep alive probes that will be sent before the connection is terminated
         /// </remarks>
+        /// <remarks>
+        /// 在连接终止之前将发送的TCP保持活动探测次数
+        /// </remarks>
         public int OptionTcpKeepAliveRetryCount { get; set; } = -1;
 
         /// <summary>
-        /// Option: no delay
+        /// Option: no delay/
         /// </summary>
         /// <remarks>
         /// This option will enable/disable Nagle's algorithm for TCP protocol
