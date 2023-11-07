@@ -166,7 +166,7 @@ namespace AIO.Net
         public int OptionTcpKeepAliveRetryCount { get; set; } = -1;
 
         /// <summary>
-        /// Option: no delay/
+        /// Option: no delay/选项：无延迟
         /// </summary>
         /// <remarks>
         /// This option will enable/disable Nagle's algorithm for TCP protocol
@@ -174,27 +174,27 @@ namespace AIO.Net
         public bool OptionNoDelay { get; set; }
 
         /// <summary>
-        /// Option: receive buffer limit
+        /// Option: receive buffer limit/选项：接收缓冲区限制
         /// </summary>
         public int OptionReceiveBufferLimit { get; set; } = 0;
 
         /// <summary>
-        /// Option: receive buffer size
+        /// Option: receive buffer size/选项：接收缓冲区大小
         /// </summary>
         public int OptionReceiveBufferSize { get; set; } = 8192;
 
         /// <summary>
-        /// Option: send buffer limit
+        /// Option: send buffer limit/选项：发送缓冲区限制
         /// </summary>
         public int OptionSendBufferLimit { get; set; } = 0;
 
         /// <summary>
-        /// Option: send buffer size
+        /// Option: send buffer size/选项：发送缓冲区大小
         /// </summary>
         public int OptionSendBufferSize { get; set; } = 8192;
 
         /// <summary>
-        /// Clear send/receive buffers
+        /// Clear send/receive buffers /清除发送/接收缓冲区
         /// </summary>
         private void ClearBuffers()
         {
@@ -212,7 +212,7 @@ namespace AIO.Net
         }
 
         /// <summary>
-        /// This method is called whenever a receive or send operation is completed on a socket
+        /// This method is called whenever a receive or send operation is completed on a socket/每当套接字上的接收或发送操作完成时，都会调用此方法
         /// </summary>
         private void OnAsyncCompleted(object sender, SocketAsyncEventArgs e)
         {
@@ -240,35 +240,35 @@ namespace AIO.Net
         #region Session handlers
 
         /// <summary>
-        /// Handle client connecting notification
+        /// Handle client connecting notification/处理客户端连接通知
         /// </summary>
         protected virtual void OnConnecting()
         {
         }
 
         /// <summary>
-        /// Handle client connected notification
+        /// Handle client connected notification/处理客户端连接通知
         /// </summary>
         protected virtual void OnConnected()
         {
         }
 
         /// <summary>
-        /// Handle client disconnecting notification
+        /// Handle client disconnecting notification/处理客户端断开连接通知
         /// </summary>
         protected virtual void OnDisconnecting()
         {
         }
 
         /// <summary>
-        /// Handle client disconnected notification
+        /// Handle client disconnected notification/处理客户端断开连接通知
         /// </summary>
         protected virtual void OnDisconnected()
         {
         }
 
         /// <summary>
-        /// Handle buffer received notification
+        /// Handle buffer received notification/处理缓冲区接收通知
         /// </summary>
         /// <param name="buffer">Received buffer</param>
         /// <param name="offset">Received buffer offset</param>
@@ -281,7 +281,7 @@ namespace AIO.Net
         }
 
         /// <summary>
-        /// Handle buffer sent notification
+        /// Handle buffer sent notification/处理缓冲区发送通知
         /// </summary>
         /// <param name="sent">Size of sent buffer</param>
         /// <param name="pending">Size of pending buffer</param>
@@ -294,7 +294,7 @@ namespace AIO.Net
         }
 
         /// <summary>
-        /// Handle empty send buffer notification
+        /// Handle empty send buffer notification/处理空发送缓冲区通知
         /// </summary>
         /// <remarks>
         /// Notification is called when the send buffer is empty and ready for a new data to send.
@@ -305,7 +305,7 @@ namespace AIO.Net
         }
 
         /// <summary>
-        /// Handle error notification
+        /// Handle error notification/处理错误通知
         /// </summary>
         /// <param name="error">Socket error code</param>
         protected virtual void OnError(SocketError error)
@@ -318,7 +318,7 @@ namespace AIO.Net
         #region Error handling
 
         /// <summary>
-        /// Send error notification
+        /// Send error notification/发送错误通知
         /// </summary>
         /// <param name="error">Socket error code</param>
         private void SendError(SocketError error)
@@ -339,12 +339,12 @@ namespace AIO.Net
         #region IDisposable implementation
 
         /// <summary>
-        /// Disposed flag
+        /// Disposed flag/已处理标志
         /// </summary>
         public bool IsDisposed { get; private set; }
 
         /// <summary>
-        /// Client socket disposed flag
+        /// Client socket disposed flag/客户端套接字已处理标志
         /// </summary>
         public bool IsSocketDisposed { get; private set; } = true;
 
@@ -357,7 +357,7 @@ namespace AIO.Net
         }
 
         /// <summary>
-        /// Dispose client resources
+        /// Dispose client resources/处理客户端资源
         /// </summary>
         /// <param name="disposingManagedResources"></param>
         protected virtual void Dispose(bool disposingManagedResources)
