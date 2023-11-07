@@ -7,68 +7,68 @@ using AIO.Net;
 
 partial class Program
 {
-    // static async Task Main(string[] args)
-    // {
-    //     const string savePath = @"E:\WWW\";
-    //     // using (var handle = AHandle.HTTP.Create("http://127.0.0.1/HOT"))
-    //     // {
-    //     //     var arg = new ProgressArgs
-    //     //     {
-    //     //         OnProgress = info =>
-    //     //         {
-    //     //             Console.WriteLine("下载进度: {0}% [ {1} / {2} ] -> {3}",
-    //     //                 info.Progress, info.CurrentSize, info.TotalSize, info.CurrentName
-    //     //             );
-    //     //         },
-    //     //         OnComplete = () => { Console.WriteLine("下载完成"); },
-    //     //         OnError = exception => { Console.WriteLine("下载异常:" + exception); }
-    //     //     };
-    //     //     // await handle.DownloadAsync(savePath, new string[]
-    //     //     //     {
-    //     //     //         "com.google.play.review",
-    //     //     //         "com.google.play.review1",
-    //     //     //         "com.google.play.review2"
-    //     //     //     },
-    //     //     //     arg, true);
-    //     //
-    //     //     //Console.WriteLine(await handle.PostAsync("", "com.google.play.review"));
-    //     //     // Console.WriteLine(await handle.GetAsync());
-    //     //     // Console.WriteLine(await handle.GetAsync("com.google.play.review"));
-    //     //
-    //     //     Console.WriteLine(await handle.PostAsync("com.google.play.review", "com.google.play.review"));
-    //     // }
-    //     var timeout = TimeSpan.FromHours(1);
-    //
-    //     bool Handler(FileCache cache, string key, byte[] value, TimeSpan timespan)
-    //     {
-    //         var response = new HttpResponse();
-    //         response.SetBegin(200);
-    //         response.SetContentType(Path.GetExtension(key));
-    //         response.SetHeader("Cache-Control", $"max-age={timespan.Seconds}");
-    //         response.SetBody(value);
-    //         return cache.Add(key, response.Cache.Data, timespan);
-    //     }
-    //
-    //     var handle = new FileCache();
-    //     handle.InsertPath(@"E:\WWW");
-    //     handle.Add("add", "asdasd");
-    //
-    //     Console.WriteLine(handle.Get<string>("add"));
-    //     Console.WriteLine(handle.ContainPath(@"E:\WWW/com.google.play.review"));
-    //     Console.WriteLine(handle.ContainPath(@"\com.google.play.review"));
-    //     Console.WriteLine(handle.ContainPath(@"/com.google.play.review"));
-    //     var rTuple = handle.Get("com.google.play.review");
-    //     if (rTuple.Item1)
-    //     {
-    //         Console.WriteLine(Encoding.UTF8.GetString(rTuple.Item2));
-    //     }
-    //     rTuple = handle.Get(@"/com.google.play.review");
-    //     if (rTuple.Item1)
-    //     {
-    //         Console.WriteLine(Encoding.UTF8.GetString(rTuple.Item2));
-    //     }
-    //     Console.Read();
-    // }
+    static async Task Main(string[] args)
+    {
+        const string savePath = @"E:\WWW\";
+        // using (var handle = AHandle.HTTP.Create("http://127.0.0.1/HOT"))
+        // {
+        //     var arg = new ProgressArgs
+        //     {
+        //         OnProgress = info =>
+        //         {
+        //             Console.WriteLine("下载进度: {0}% [ {1} / {2} ] -> {3}",
+        //                 info.Progress, info.CurrentSize, info.TotalSize, info.CurrentName
+        //             );
+        //         },
+        //         OnComplete = () => { Console.WriteLine("下载完成"); },
+        //         OnError = exception => { Console.WriteLine("下载异常:" + exception); }
+        //     };
+        //     // await handle.DownloadAsync(savePath, new string[]
+        //     //     {
+        //     //         "com.google.play.review",
+        //     //         "com.google.play.review1",
+        //     //         "com.google.play.review2"
+        //     //     },
+        //     //     arg, true);
+        //
+        //     //Console.WriteLine(await handle.PostAsync("", "com.google.play.review"));
+        //     // Console.WriteLine(await handle.GetAsync());
+        //     // Console.WriteLine(await handle.GetAsync("com.google.play.review"));
+        //
+        //     Console.WriteLine(await handle.PostAsync("com.google.play.review", "com.google.play.review"));
+        // }
+        var timeout = TimeSpan.FromHours(1);
+    
+        // bool Handler(FileCache cache, string key, byte[] value, TimeSpan timespan)
+        // {
+        //     var response = new HttpResponse();
+        //     response.SetBegin(200);
+        //     response.SetContentType(Path.GetExtension(key));
+        //     response.SetHeader("Cache-Control", $"max-age={timespan.Seconds}");
+        //     response.SetBody(value);
+        //     return cache.Add(key, response.Cache.Data, timespan);
+        // }
+    
+        var handle = new FileCache();
+        handle.InsertPath(@"E:\WWW");
+        handle.Add("add", "asdasd");
+    
+        Console.WriteLine(handle.Get<string>("add"));
+        Console.WriteLine(handle.ContainPath(@"E:\WWW/com.google.play.review"));
+        Console.WriteLine(handle.ContainPath(@"\com.google.play.review"));
+        Console.WriteLine(handle.ContainPath(@"/com.google.play.review"));
+        var rTuple = handle.Get("com.google.play.review");
+        if (rTuple.Item1)
+        {
+            Console.WriteLine(Encoding.UTF8.GetString(rTuple.Item2));
+        }
+        rTuple = handle.Get(@"/com.google.play.review");
+        if (rTuple.Item1)
+        {
+            Console.WriteLine(Encoding.UTF8.GetString(rTuple.Item2));
+        }
+        Console.Read();
+    }
 }
 
 // using System;

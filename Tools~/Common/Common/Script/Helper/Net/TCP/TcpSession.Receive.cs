@@ -13,17 +13,17 @@ namespace AIO.Net
     public partial class TcpSession
     {
         // Receive buffer
-        private bool _receiving;
-        private Buffer _receiveBuffer;
+        private bool Receiving;
+        private Buffer ReceiveBuffer;
 
-        private SocketAsyncEventArgs _receiveEventArg;
+        private SocketAsyncEventArgs ReceiveEventArg;
 
         /// <summary>
         /// Receive data from the client (synchronous)
         /// </summary>
         /// <param name="buffer">Buffer to receive</param>
         /// <returns>Size of received data</returns>
-        public virtual long Receive(byte[] buffer)
+        public long Receive(byte[] buffer)
         {
             return Receive(buffer, 0, buffer.Length);
         }
@@ -37,11 +37,9 @@ namespace AIO.Net
         /// <returns>Size of received data</returns>
         public virtual long Receive(byte[] buffer, int offset, int size)
         {
-            if (!IsConnected)
-                return 0;
+            if (!IsConnected) return 0;
 
-            if (size == 0)
-                return 0;
+            if (size == 0) return 0;
 
             // Receive data from the client
             var received = Socket.Receive(buffer, offset, size, SocketFlags.None, out var ec);
@@ -79,7 +77,7 @@ namespace AIO.Net
         /// </summary>
         private void TryReceive()
         {
-            if (_receiving) return;
+            if (Receiving) return;
             if (!IsConnected) return;
 
             var process = true;
@@ -90,10 +88,10 @@ namespace AIO.Net
                 try
                 {
                     // Async receive with the receive handler
-                    _receiving = true;
-                    _receiveEventArg.SetBuffer(_receiveBuffer.Data, 0, _receiveBuffer.Capacity);
-                    if (!Socket.ReceiveAsync(_receiveEventArg))
-                        process = ProcessReceive(_receiveEventArg);
+                    Receiving = true;
+                    ReceiveEventArg.SetBuffer(ReceiveBuffer.Arrays, 0, ReceiveBuffer.Capacity);
+                    if (Socket.ReceiveAsync(ReceiveEventArg)) continue;
+                    process = ProcessReceive(ReceiveEventArg);
                 }
                 catch (ObjectDisposedException)
                 {
@@ -110,19 +108,17 @@ namespace AIO.Net
             if (!IsConnected) return false;
 
             var size = e.BytesTransferred;
-
-            // Received some data from the client
-            if (size > 0)
+            if (size > 0) // Received some data from the client
             {
                 // Update statistic
                 BytesReceived += size;
                 Interlocked.Add(ref Server._bytesReceived, size);
 
                 // Call the buffer received handler
-                OnReceived(_receiveBuffer.Data, 0, size);
+                OnReceived(ReceiveBuffer.Arrays, 0, ReceiveBuffer.Capacity);
 
                 // If the receive buffer is full increase its size
-                if (_receiveBuffer.Capacity == size)
+                if (ReceiveBuffer.Capacity == size)
                 {
                     // Check the receive buffer limit
                     if (2 * size > OptionReceiveBufferLimit && OptionReceiveBufferLimit > 0)
@@ -132,20 +128,18 @@ namespace AIO.Net
                         return false;
                     }
 
-                    _receiveBuffer.Reserve(2 * size);
+                    ReceiveBuffer.Reserve(2 * size);
                 }
             }
 
-            _receiving = false;
+            Receiving = false;
 
             // Try to receive again if the session is valid
             if (e.SocketError == SocketError.Success)
             {
                 // If zero is returned from a read operation, the remote end has closed the connection
-                if (size > 0)
-                    return true;
-                else
-                    Disconnect();
+                if (size > 0) return true;
+                Disconnect();
             }
             else
             {

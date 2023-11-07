@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 
 namespace AIO.Net
@@ -12,10 +11,10 @@ namespace AIO.Net
     /// TCP server is used to connect, disconnect and manage TCP sessions
     /// </summary>
     /// <remarks>Thread-safe</remarks>
-    public class TcpServer : IDisposable
+    public partial class TcpServer : IDisposable
     {
         /// <summary>
-        /// Initialize TCP server with a given IP address and port number
+        /// Initialize TCP server with a given IP address and port number / 使用给定的IP地址和端口号初始化TCP服务器
         /// </summary>
         /// <param name="address">IP address</param>
         /// <param name="port">Port number</param>
@@ -24,7 +23,7 @@ namespace AIO.Net
         }
 
         /// <summary>
-        /// Initialize TCP server with a given IP address and port number
+        /// Initialize TCP server with a given IP address and port number / 使用给定的IP地址和端口号初始化TCP服务器
         /// </summary>
         /// <param name="address">IP address</param>
         /// <param name="port">Port number</param>
@@ -33,23 +32,23 @@ namespace AIO.Net
         }
 
         /// <summary>
-        /// Initialize TCP server with a given DNS endpoint
+        /// Initialize TCP server with a given DNS endpoint / 使用给定的DNS端点初始化TCP服务器
         /// </summary>
         /// <param name="endpoint">DNS endpoint</param>
-        public TcpServer(DnsEndPoint endpoint) : this(endpoint as EndPoint, endpoint.Host, endpoint.Port)
+        public TcpServer(DnsEndPoint endpoint) : this(endpoint, endpoint.Host, endpoint.Port)
         {
         }
 
         /// <summary>
-        /// Initialize TCP server with a given IP endpoint
+        /// Initialize TCP server with a given IP endpoint / 使用给定的IP端点初始化TCP服务器
         /// </summary>
         /// <param name="endpoint">IP endpoint</param>
-        public TcpServer(IPEndPoint endpoint) : this(endpoint as EndPoint, endpoint.Address.ToString(), endpoint.Port)
+        public TcpServer(IPEndPoint endpoint) : this(endpoint, endpoint.Address.ToString(), endpoint.Port)
         {
         }
 
         /// <summary>
-        /// Initialize TCP server with a given endpoint, address and port
+        /// Initialize TCP server with a given endpoint, address and port / 使用给定的端点，地址和端口初始化TCP服务器
         /// </summary>
         /// <param name="endpoint">Endpoint</param>
         /// <param name="address">Server address</param>
@@ -63,137 +62,70 @@ namespace AIO.Net
         }
 
         /// <summary>
-        /// Server Id
+        /// Server Id / 服务器ID
         /// </summary>
         public Guid Id { get; }
 
         /// <summary>
-        /// TCP server address
+        /// TCP server address / TCP服务器地址
         /// </summary>
         public string Address { get; }
 
         /// <summary>
-        /// TCP server port
+        /// TCP server port / TCP服务器端口
         /// </summary>
         public int Port { get; }
 
         /// <summary>
-        /// Endpoint
+        /// Endpoint / 端点
         /// </summary>
         public EndPoint Endpoint { get; private set; }
 
         /// <summary>
-        /// Number of sessions connected to the server
+        /// Number of sessions connected to the server / 连接到服务器的会话数
         /// </summary>
         public long ConnectedSessions => Sessions.Count;
 
         /// <summary>
-        /// Number of bytes pending sent by the server
+        /// Number of bytes pending sent by the server / 服务器待发送的字节数
         /// </summary>
         public long BytesPending => _bytesPending;
 
         /// <summary>
-        /// Number of bytes sent by the server
+        /// Number of bytes sent by the server / 服务器发送的字节数
         /// </summary>
         public long BytesSent => _bytesSent;
 
         /// <summary>
-        /// Number of bytes received by the server
+        /// Number of bytes received by the server / 服务器接收的字节数
         /// </summary>
         public long BytesReceived => _bytesReceived;
 
         /// <summary>
-        /// Option: acceptor backlog size
+        /// Server option / 服务器选项
         /// </summary>
-        /// <remarks>
-        /// This option will set the listening socket's backlog size
-        /// </remarks>
-        public int OptionAcceptorBacklog { get; set; } = 1024;
-
-        /// <summary>
-        /// Option: dual mode socket
-        /// </summary>
-        /// <remarks>
-        /// Specifies whether the Socket is a dual-mode socket used for both IPv4 and IPv6.
-        /// Will work only if socket is bound on IPv6 address.
-        /// </remarks>
-        public bool OptionDualMode { get; set; }
-
-        /// <summary>
-        /// Option: keep alive
-        /// </summary>
-        /// <remarks>
-        /// This option will setup SO_KEEPALIVE if the OS support this feature
-        /// </remarks>
-        public bool OptionKeepAlive { get; set; }
-
-        /// <summary>
-        /// Option: TCP keep alive time
-        /// </summary>
-        /// <remarks>
-        /// The number of seconds a TCP connection will remain alive/idle before keepalive probes are sent to the remote
-        /// </remarks>
-        public int OptionTcpKeepAliveTime { get; set; } = -1;
-
-        /// <summary>
-        /// Option: TCP keep alive interval
-        /// </summary>
-        /// <remarks>
-        /// The number of seconds a TCP connection will wait for a keepalive response before sending another keepalive probe
-        /// </remarks>
-        public int OptionTcpKeepAliveInterval { get; set; } = -1;
-
-        /// <summary>
-        /// Option: TCP keep alive retry count
-        /// </summary>
-        /// <remarks>
-        /// The number of TCP keep alive probes that will be sent before the connection is terminated
-        /// </remarks>
-        public int OptionTcpKeepAliveRetryCount { get; set; } = -1;
-
-        /// <summary>
-        /// Option: no delay
-        /// </summary>
-        /// <remarks>
-        /// This option will enable/disable Nagle's algorithm for TCP protocol
-        /// </remarks>
-        public bool OptionNoDelay { get; set; }
-
-        /// <summary>
-        /// Option: reuse address
-        /// </summary>
-        /// <remarks>
-        /// This option will enable/disable SO_REUSEADDR if the OS support this feature
-        /// </remarks>
-        public bool OptionReuseAddress { get; set; }
-
-        /// <summary>
-        /// Option: enables a socket to be bound for exclusive access
-        /// </summary>
-        /// <remarks>
-        /// This option will enable/disable SO_EXCLUSIVEADDRUSE if the OS support this feature
-        /// </remarks>
-        public bool OptionExclusiveAddressUse { get; set; }
-
-        /// <summary>
-        /// Option: receive buffer size
-        /// </summary>
-        public int OptionReceiveBufferSize { get; set; } = 8192;
-
-        /// <summary>
-        /// Option: send buffer size
-        /// </summary>
-        public int OptionSendBufferSize { get; set; } = 8192;
+        public TcpSettingServer Option { get; } = new TcpSettingServer();
 
         #region Start/Stop server
 
         // Server acceptor
-        private Socket _acceptorSocket;
-        private SocketAsyncEventArgs _acceptorEventArg;
+        private Socket _AcceptorSocket;
+        private SocketAsyncEventArgs _AcceptorEventArg;
 
         // Server statistic
+        /// <summary>
+        /// Number of bytes pending sent by the server / 服务器待发送的字节数
+        /// </summary>
         internal long _bytesPending;
+
+        /// <summary>
+        /// Number of bytes sent by the server / 服务器发送的字节数
+        /// </summary>
         internal long _bytesSent;
+
+        /// <summary>
+        /// Number of bytes received by the server / 服务器接收的字节数
+        /// </summary>
         internal long _bytesReceived;
 
         /// <summary>
@@ -229,35 +161,35 @@ namespace AIO.Net
                 return false;
 
             // Setup acceptor event arg
-            _acceptorEventArg = new SocketAsyncEventArgs();
-            _acceptorEventArg.Completed += OnAsyncCompleted;
+            _AcceptorEventArg = new SocketAsyncEventArgs();
+            _AcceptorEventArg.Completed += OnAsyncCompleted;
 
             // Create a new acceptor socket
-            _acceptorSocket = CreateSocket();
+            _AcceptorSocket = CreateSocket();
 
             // Update the acceptor socket disposed flag
             IsSocketDisposed = false;
 
             // Apply the option: reuse address
-            _acceptorSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress,
-                OptionReuseAddress);
+            _AcceptorSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress,
+                Option.ReuseAddress);
             // Apply the option: exclusive address use
-            _acceptorSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ExclusiveAddressUse,
-                OptionExclusiveAddressUse);
+            _AcceptorSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ExclusiveAddressUse,
+                Option.ExclusiveAddressUse);
             // Apply the option: dual mode (this option must be applied before listening)
-            if (_acceptorSocket.AddressFamily == AddressFamily.InterNetworkV6)
-                _acceptorSocket.DualMode = OptionDualMode;
+            if (_AcceptorSocket.AddressFamily == AddressFamily.InterNetworkV6)
+                _AcceptorSocket.DualMode = Option.DualMode;
 
             // Bind the acceptor socket to the endpoint
-            _acceptorSocket.Bind(Endpoint);
+            _AcceptorSocket.Bind(Endpoint);
             // Refresh the endpoint property based on the actual endpoint created
-            Endpoint = _acceptorSocket.LocalEndPoint;
+            Endpoint = _AcceptorSocket.LocalEndPoint;
 
             // Call the server starting handler
             OnStarting();
 
             // Start listen to the acceptor socket with the given accepting backlog size
-            _acceptorSocket.Listen(OptionAcceptorBacklog);
+            _AcceptorSocket.Listen(Option.AcceptorBacklog);
 
             // Reset statistic
             _bytesPending = 0;
@@ -272,7 +204,7 @@ namespace AIO.Net
 
             // Perform the first server accept
             IsAccepting = true;
-            StartAccept(_acceptorEventArg);
+            StartAccept(_AcceptorEventArg);
 
             return true;
         }
@@ -291,7 +223,7 @@ namespace AIO.Net
             IsAccepting = false;
 
             // Reset acceptor event arg
-            _acceptorEventArg.Completed -= OnAsyncCompleted;
+            _AcceptorEventArg.Completed -= OnAsyncCompleted;
 
             // Call the server stopping handler
             OnStopping();
@@ -299,13 +231,13 @@ namespace AIO.Net
             try
             {
                 // Close the acceptor socket
-                _acceptorSocket.Close();
+                _AcceptorSocket.Close();
 
                 // Dispose the acceptor socket
-                _acceptorSocket.Dispose();
+                _AcceptorSocket.Dispose();
 
                 // Dispose event arguments
-                _acceptorEventArg.Dispose();
+                _AcceptorEventArg.Dispose();
 
                 // Update the acceptor socket disposed flag
                 IsSocketDisposed = true;
@@ -354,7 +286,7 @@ namespace AIO.Net
             e.AcceptSocket = null;
 
             // Async accept a new client connection
-            if (!_acceptorSocket.AcceptAsync(e))
+            if (!_AcceptorSocket.AcceptAsync(e))
                 ProcessAccept(e);
         }
 
@@ -603,13 +535,12 @@ namespace AIO.Net
         private void SendError(SocketError error)
         {
             // Skip disconnect errors
-            if ((error == SocketError.ConnectionAborted) ||
-                (error == SocketError.ConnectionRefused) ||
-                (error == SocketError.ConnectionReset) ||
-                (error == SocketError.OperationAborted) ||
-                (error == SocketError.Shutdown))
-                return;
-
+            if (error == SocketError.ConnectionAborted ||
+                error == SocketError.ConnectionRefused ||
+                error == SocketError.ConnectionReset ||
+                error == SocketError.OperationAborted ||
+                error == SocketError.Shutdown
+               ) return;
             OnError(error);
         }
 
@@ -653,21 +584,20 @@ namespace AIO.Net
             // refer to reference type fields because those objects may
             // have already been finalized."
 
-            if (!IsDisposed)
+            if (IsDisposed) return;
+
+            if (disposingManagedResources)
             {
-                if (disposingManagedResources)
-                {
-                    // Dispose managed resources here...
-                    Stop();
-                }
-
-                // Dispose unmanaged resources here...
-
-                // Set large fields to null here...
-
-                // Mark as disposed.
-                IsDisposed = true;
+                // Dispose managed resources here...
+                Stop();
             }
+
+            // Dispose unmanaged resources here...
+
+            // Set large fields to null here...
+
+            // Mark as disposed.
+            IsDisposed = true;
         }
 
         #endregion

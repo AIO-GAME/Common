@@ -18,8 +18,8 @@ namespace AIO.Net
         {
             Id = Guid.NewGuid();
             Server = server;
-            OptionReceiveBufferSize = server.OptionReceiveBufferSize;
-            OptionSendBufferSize = server.OptionSendBufferSize;
+            OptionReceiveBufferSize = server.Option.ReceiveBufferSize;
+            OptionSendBufferSize = server.Option.SendBufferSize;
         }
 
         /// <summary>
@@ -38,22 +38,22 @@ namespace AIO.Net
         public Socket Socket { get; private set; }
 
         /// <summary>
-        /// Number of bytes pending sent by the session
+        /// Number of bytes pending sent by the session // 会话发送的待处理字节数
         /// </summary>
         public long BytesPending { get; private set; }
 
         /// <summary>
-        /// Number of bytes sending by the session
+        /// Number of bytes sending by the session // 会话发送的字节数
         /// </summary>
         public long BytesSending { get; private set; }
 
         /// <summary>
-        /// Number of bytes sent by the session
+        /// Number of bytes sent by the session // 会话发送的字节数
         /// </summary>
         public long BytesSent { get; private set; }
 
         /// <summary>
-        /// Number of bytes received by the session
+        /// Number of bytes received by the session // 会话接收的字节数
         /// </summary>
         public long BytesReceived { get; private set; }
 
@@ -96,18 +96,18 @@ namespace AIO.Net
             IsSocketDisposed = false;
 
             // Setup buffers
-            _receiveBuffer = new Buffer();
-            _sendBufferMain = new Buffer();
-            _sendBufferFlush = new Buffer();
+            ReceiveBuffer = new Buffer();
+            SendBufferMain = new Buffer();
+            SendBufferFlush = new Buffer();
 
             // Setup event args
-            _receiveEventArg = new SocketAsyncEventArgs();
-            _receiveEventArg.Completed += OnAsyncCompleted;
-            _sendEventArg = new SocketAsyncEventArgs();
-            _sendEventArg.Completed += OnAsyncCompleted;
+            ReceiveEventArg = new SocketAsyncEventArgs();
+            ReceiveEventArg.Completed += OnAsyncCompleted;
+            SendEventArg = new SocketAsyncEventArgs();
+            SendEventArg.Completed += OnAsyncCompleted;
 
             // Apply the option: keep alive
-            if (Server.OptionKeepAlive)
+            if (Server.Option.KeepAlive)
                 Socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
             // if (Server.OptionTcpKeepAliveTime >= 0)
             //     Socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveTime, Server.OptionTcpKeepAliveTime);
@@ -116,13 +116,13 @@ namespace AIO.Net
             // if (Server.OptionTcpKeepAliveRetryCount >= 0)
             //     Socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveRetryCount, Server.OptionTcpKeepAliveRetryCount);
             // Apply the option: no delay
-            if (Server.OptionNoDelay)
+            if (Server.Option.NoDelay)
                 Socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.NoDelay, true);
 
             // Prepare receive & send buffers
-            _receiveBuffer.Reserve(OptionReceiveBufferSize);
-            _sendBufferMain.Reserve(OptionSendBufferSize);
-            _sendBufferFlush.Reserve(OptionSendBufferSize);
+            ReceiveBuffer.Reserve(OptionReceiveBufferSize);
+            SendBufferMain.Reserve(OptionSendBufferSize);
+            SendBufferFlush.Reserve(OptionSendBufferSize);
 
             // Reset statistic
             BytesPending = 0;
@@ -152,7 +152,7 @@ namespace AIO.Net
             Server.OnConnectedInternal(this);
 
             // Call the empty send buffer handler
-            if (_sendBufferMain.IsEmpty)
+            if (SendBufferMain.IsEmpty)
                 OnEmpty();
         }
 
@@ -166,8 +166,8 @@ namespace AIO.Net
                 return false;
 
             // Reset event args
-            _receiveEventArg.Completed -= OnAsyncCompleted;
-            _sendEventArg.Completed -= OnAsyncCompleted;
+            ReceiveEventArg.Completed -= OnAsyncCompleted;
+            SendEventArg.Completed -= OnAsyncCompleted;
 
             // Call the session disconnecting handler
             OnDisconnecting();
@@ -193,8 +193,8 @@ namespace AIO.Net
                 Socket.Dispose();
 
                 // Dispose event arguments
-                _receiveEventArg.Dispose();
-                _sendEventArg.Dispose();
+                ReceiveEventArg.Dispose();
+                SendEventArg.Dispose();
 
                 // Update the session socket disposed flag
                 IsSocketDisposed = true;
@@ -207,8 +207,8 @@ namespace AIO.Net
             IsConnected = false;
 
             // Update sending/receiving flags
-            _receiving = false;
-            _sending = false;
+            Receiving = false;
+            Sending = false;
 
             // Clear send/receive buffers
             ClearBuffers();
@@ -234,12 +234,12 @@ namespace AIO.Net
         /// </summary>
         private void ClearBuffers()
         {
-            lock (_sendLock)
+            lock (SendLock)
             {
                 // Clear send buffers
-                _sendBufferMain.Clear();
-                _sendBufferFlush.Clear();
-                _sendBufferFlushOffset = 0;
+                SendBufferMain.Clear();
+                SendBufferFlush.Clear();
+                SendBufferFlushOffset = 0;
 
                 // Update statistic
                 BytesPending = 0;
@@ -294,14 +294,14 @@ namespace AIO.Net
                 Interlocked.Add(ref Server._bytesSent, size);
 
                 // Increase the flush buffer offset
-                _sendBufferFlushOffset += size;
+                SendBufferFlushOffset += size;
 
                 // Successfully send the whole flush buffer
-                if (_sendBufferFlushOffset == _sendBufferFlush.Size)
+                if (SendBufferFlushOffset == SendBufferFlush.Count)
                 {
                     // Clear the flush buffer
-                    _sendBufferFlush.Clear();
-                    _sendBufferFlushOffset = 0;
+                    SendBufferFlush.Clear();
+                    SendBufferFlushOffset = 0;
                 }
 
                 // Call the buffer sent handler
@@ -360,7 +360,9 @@ namespace AIO.Net
         /// <remarks>
         /// Notification is called when another chunk of buffer was received from the client
         /// </remarks>
-        protected virtual void OnReceived(byte[] buffer, int offset, int size) {}
+        protected virtual void OnReceived(byte[] buffer, int offset, int size)
+        {
+        }
 
         /// <summary>
         /// Handle buffer sent notification
@@ -405,12 +407,12 @@ namespace AIO.Net
         private void SendError(SocketError error)
         {
             // Skip disconnect errors
-            if ((error == SocketError.ConnectionAborted) ||
-                (error == SocketError.ConnectionRefused) ||
-                (error == SocketError.ConnectionReset) ||
-                (error == SocketError.OperationAborted) ||
-                (error == SocketError.Shutdown))
-                return;
+            if (error == SocketError.ConnectionAborted ||
+                error == SocketError.ConnectionRefused ||
+                error == SocketError.ConnectionReset ||
+                error == SocketError.OperationAborted ||
+                error == SocketError.Shutdown
+               ) return;
 
             OnError(error);
         }
@@ -455,21 +457,17 @@ namespace AIO.Net
             // refer to reference type fields because those objects may
             // have already been finalized."
 
-            if (!IsDisposed)
-            {
-                if (disposingManagedResources)
-                {
-                    // Dispose managed resources here...
-                    Disconnect();
-                }
+            if (IsDisposed) return;
 
-                // Dispose unmanaged resources here...
+            // Dispose managed resources here...
+            if (disposingManagedResources) Disconnect();
 
-                // Set large fields to null here...
+            // Dispose unmanaged resources here...
 
-                // Mark as disposed.
-                IsDisposed = true;
-            }
+            // Set large fields to null here...
+
+            // Mark as disposed.
+            IsDisposed = true;
         }
 
         #endregion

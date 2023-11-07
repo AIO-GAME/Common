@@ -12,7 +12,10 @@ namespace AIO.Net
 {
     public partial class TcpClient
     {
-        private SocketAsyncEventArgs _connectEventArg;
+        /// <summary>
+        /// Connect Event Arg
+        /// </summary>
+        private SocketAsyncEventArgs ConnectEventArg;
 
         /// <summary>
         /// Is the client connecting?
@@ -46,22 +49,23 @@ namespace AIO.Net
         /// <returns>'true' if the client was successfully connected, 'false' if the client failed to connect</returns>
         public virtual bool Connect()
         {
-            if (IsConnected || IsConnecting)
-                return false;
+            if (IsConnected || IsConnecting) return false;
 
             // Setup buffers
-            _receiveBuffer = new Buffer();
-            _sendBufferMain = new Buffer();
-            _sendBufferFlush = new Buffer();
+            ReceiveBuffer = new Buffer();
+            SendBufferMain = new Buffer();
+            SendBufferFlush = new Buffer();
 
             // Setup event args
-            _connectEventArg = new SocketAsyncEventArgs();
-            _connectEventArg.RemoteEndPoint = Endpoint;
-            _connectEventArg.Completed += OnAsyncCompleted;
-            _receiveEventArg = new SocketAsyncEventArgs();
-            _receiveEventArg.Completed += OnAsyncCompleted;
-            _sendEventArg = new SocketAsyncEventArgs();
-            _sendEventArg.Completed += OnAsyncCompleted;
+            ConnectEventArg = new SocketAsyncEventArgs();
+            ConnectEventArg.RemoteEndPoint = Endpoint;
+            ConnectEventArg.Completed += OnAsyncCompleted;
+
+            ReceiveEventArg = new SocketAsyncEventArgs();
+            ReceiveEventArg.Completed += OnAsyncCompleted;
+
+            SendEventArg = new SocketAsyncEventArgs();
+            SendEventArg.Completed += OnAsyncCompleted;
 
             // Create a new client socket
             Socket = CreateSocket();
@@ -70,8 +74,7 @@ namespace AIO.Net
             IsSocketDisposed = false;
 
             // Apply the option: dual mode (this option must be applied before connecting)
-            if (Socket.AddressFamily == AddressFamily.InterNetworkV6)
-                Socket.DualMode = OptionDualMode;
+            if (Socket.AddressFamily == AddressFamily.InterNetworkV6) Socket.DualMode = Option.DualMode;
 
             // Call the client connecting handler
             OnConnecting();
@@ -87,9 +90,9 @@ namespace AIO.Net
                 SendError(ex.SocketErrorCode);
 
                 // Reset event args
-                _connectEventArg.Completed -= OnAsyncCompleted;
-                _receiveEventArg.Completed -= OnAsyncCompleted;
-                _sendEventArg.Completed -= OnAsyncCompleted;
+                ConnectEventArg.Completed -= OnAsyncCompleted;
+                ReceiveEventArg.Completed -= OnAsyncCompleted;
+                SendEventArg.Completed -= OnAsyncCompleted;
 
                 // Call the client disconnecting handler
                 OnDisconnecting();
@@ -101,9 +104,9 @@ namespace AIO.Net
                 Socket.Dispose();
 
                 // Dispose event arguments
-                _connectEventArg.Dispose();
-                _receiveEventArg.Dispose();
-                _sendEventArg.Dispose();
+                ConnectEventArg.Dispose();
+                ReceiveEventArg.Dispose();
+                SendEventArg.Dispose();
 
                 // Call the client disconnected handler
                 OnDisconnected();
@@ -112,7 +115,7 @@ namespace AIO.Net
             }
 
             // Apply the option: keep alive
-            if (OptionKeepAlive)
+            if (Option.KeepAlive)
                 Socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
             // if (OptionTcpKeepAliveTime >= 0)
             //     Socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveTime,
@@ -124,13 +127,13 @@ namespace AIO.Net
             //     Socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveRetryCount,
             //         OptionTcpKeepAliveRetryCount);
             // Apply the option: no delay
-            if (OptionNoDelay)
+            if (Option.NoDelay)
                 Socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.NoDelay, true);
 
             // Prepare receive & send buffers
-            _receiveBuffer.Reserve(OptionSendBufferSize);
-            _sendBufferMain.Reserve(OptionSendBufferSize);
-            _sendBufferFlush.Reserve(OptionSendBufferSize);
+            ReceiveBuffer.Reserve(Option.SendBufferSize);
+            SendBufferMain.Reserve(Option.SendBufferSize);
+            SendBufferFlush.Reserve(Option.SendBufferSize);
 
             // Reset statistic
             BytesPending = 0;
@@ -144,7 +147,7 @@ namespace AIO.Net
             // Call the client connected handler
             OnConnected();
             // Call the empty send buffer handler
-            if (_sendBufferMain.IsEmpty)
+            if (SendBufferMain.IsEmpty)
                 OnEmpty();
 
             return true;
@@ -156,62 +159,60 @@ namespace AIO.Net
         /// <returns>'true' if the client was successfully disconnected, 'false' if the client is already disconnected</returns>
         public virtual bool Disconnect()
         {
-            // if (!IsConnected && !IsConnecting)
-            //     return false;
-            //
-            // // Cancel connecting operation
-            // if (IsConnecting)
-            //     Socket.CancelConnectAsync(_connectEventArg);
-            //
-            // // Reset event args
-            // _connectEventArg.Completed -= OnAsyncCompleted;
-            // _receiveEventArg.Completed -= OnAsyncCompleted;
-            // _sendEventArg.Completed -= OnAsyncCompleted;
-            //
-            // // Call the client disconnecting handler
-            // OnDisconnecting();
-            //
-            // try
-            // {
-            //     try
-            //     {
-            //         // Shutdown the socket associated with the client
-            //         Socket.Shutdown(SocketShutdown.Both);
-            //     }
-            //     catch (SocketException)
-            //     {
-            //     }
-            //
-            //     // Close the client socket
-            //     Socket.Close();
-            //
-            //     // Dispose the client socket
-            //     Socket.Dispose();
-            //
-            //     // Dispose event arguments
-            //     _connectEventArg.Dispose();
-            //     _receiveEventArg.Dispose();
-            //     _sendEventArg.Dispose();
-            //
-            //     // Update the client socket disposed flag
-            //     IsSocketDisposed = true;
-            // }
-            // catch (ObjectDisposedException)
-            // {
-            // }
-            //
-            // // Update the connected flag
-            // IsConnected = false;
-            //
-            // // Update sending/receiving flags
-            // _receiving = false;
-            // _sending = false;
-            //
-            // // Clear send/receive buffers
-            // ClearBuffers();
-            //
-            // // Call the client disconnected handler
-            // OnDisconnected();
+            if (!IsConnected && !IsConnecting) return false;
+
+            // Cancel connecting operation
+            if (IsConnecting) Socket.CancelConnectAsync(ConnectEventArg);
+
+            // Reset event args
+            ConnectEventArg.Completed -= OnAsyncCompleted;
+            ReceiveEventArg.Completed -= OnAsyncCompleted;
+            SendEventArg.Completed -= OnAsyncCompleted;
+
+            // Call the client disconnecting handler
+            OnDisconnecting();
+
+            try
+            {
+                try
+                {
+                    // Shutdown the socket associated with the client
+                    Socket.Shutdown(SocketShutdown.Both);
+                }
+                catch (SocketException)
+                {
+                }
+
+                // Close the client socket
+                Socket.Close();
+
+                // Dispose the client socket
+                Socket.Dispose();
+
+                // Dispose event arguments
+                ConnectEventArg.Dispose();
+                ReceiveEventArg.Dispose();
+                SendEventArg.Dispose();
+
+                // Update the client socket disposed flag
+                IsSocketDisposed = true;
+            }
+            catch (ObjectDisposedException)
+            {
+            }
+
+            // Update the connected flag
+            IsConnected = false;
+
+            // Update sending/receiving flags
+            Receiving = false;
+            Sending = false;
+
+            // Clear send/receive buffers
+            ClearBuffers();
+
+            // Call the client disconnected handler
+            OnDisconnected();
 
             return true;
         }
@@ -222,10 +223,7 @@ namespace AIO.Net
         /// <returns>'true' if the client was successfully reconnected, 'false' if the client is already reconnected</returns>
         public virtual bool Reconnect()
         {
-            if (!Disconnect())
-                return false;
-
-            return Connect();
+            return Disconnect() && Connect();
         }
 
         /// <summary>
@@ -238,18 +236,18 @@ namespace AIO.Net
                 return false;
 
             // Setup buffers
-            _receiveBuffer = new Buffer();
-            _sendBufferMain = new Buffer();
-            _sendBufferFlush = new Buffer();
+            ReceiveBuffer = new Buffer();
+            SendBufferMain = new Buffer();
+            SendBufferFlush = new Buffer();
 
             // Setup event args
-            _connectEventArg = new SocketAsyncEventArgs();
-            _connectEventArg.RemoteEndPoint = Endpoint;
-            _connectEventArg.Completed += OnAsyncCompleted;
-            _receiveEventArg = new SocketAsyncEventArgs();
-            _receiveEventArg.Completed += OnAsyncCompleted;
-            _sendEventArg = new SocketAsyncEventArgs();
-            _sendEventArg.Completed += OnAsyncCompleted;
+            ConnectEventArg = new SocketAsyncEventArgs();
+            ConnectEventArg.RemoteEndPoint = Endpoint;
+            ConnectEventArg.Completed += OnAsyncCompleted;
+            ReceiveEventArg = new SocketAsyncEventArgs();
+            ReceiveEventArg.Completed += OnAsyncCompleted;
+            SendEventArg = new SocketAsyncEventArgs();
+            SendEventArg.Completed += OnAsyncCompleted;
 
             // Create a new client socket
             Socket = CreateSocket();
@@ -259,7 +257,7 @@ namespace AIO.Net
 
             // Apply the option: dual mode (this option must be applied before connecting)
             if (Socket.AddressFamily == AddressFamily.InterNetworkV6)
-                Socket.DualMode = OptionDualMode;
+                Socket.DualMode = Option.DualMode;
 
             // Update the connecting flag
             IsConnecting = true;
@@ -268,8 +266,8 @@ namespace AIO.Net
             OnConnecting();
 
             // Async connect to the server
-            if (!Socket.ConnectAsync(_connectEventArg))
-                ProcessConnect(_connectEventArg);
+            if (!Socket.ConnectAsync(ConnectEventArg))
+                ProcessConnect(ConnectEventArg);
 
             return true;
         }
@@ -305,7 +303,7 @@ namespace AIO.Net
             if (e.SocketError == SocketError.Success)
             {
                 // Apply the option: keep alive
-                if (OptionKeepAlive)
+                if (Option.KeepAlive)
                     Socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
                 // if (OptionTcpKeepAliveTime >= 0)
                 //     Socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveTime,
@@ -317,13 +315,13 @@ namespace AIO.Net
                 //     Socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveRetryCount,
                 //         OptionTcpKeepAliveRetryCount);
                 // Apply the option: no delay
-                if (OptionNoDelay)
+                if (Option.NoDelay)
                     Socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.NoDelay, true);
 
                 // Prepare receive & send buffers
-                _receiveBuffer.Reserve(OptionReceiveBufferSize);
-                _sendBufferMain.Reserve(OptionSendBufferSize);
-                _sendBufferFlush.Reserve(OptionSendBufferSize);
+                ReceiveBuffer.Reserve(Option.ReceiveBufferSize);
+                SendBufferMain.Reserve(Option.SendBufferSize);
+                SendBufferFlush.Reserve(Option.SendBufferSize);
 
                 // Reset statistic
                 BytesPending = 0;
@@ -345,7 +343,7 @@ namespace AIO.Net
                 OnConnected();
 
                 // Call the empty send buffer handler
-                if (_sendBufferMain.IsEmpty)
+                if (SendBufferMain.IsEmpty)
                     OnEmpty();
             }
             else

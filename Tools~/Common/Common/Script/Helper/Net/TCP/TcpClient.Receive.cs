@@ -6,24 +6,32 @@
 
 using System;
 using System.Net.Sockets;
-using System.Text;
 
 namespace AIO.Net
 {
     public partial class TcpClient
     {
-        // Receive buffer
-        private bool _receiving;
-        private Buffer _receiveBuffer;
+        /// <summary>
+        /// Receiving flag
+        /// </summary>
+        private bool Receiving;
 
-        private SocketAsyncEventArgs _receiveEventArg;
+        /// <summary>
+        /// Receive buffer
+        /// </summary>
+        private Buffer ReceiveBuffer;
+
+        /// <summary>
+        /// Receive event args
+        /// </summary>
+        private SocketAsyncEventArgs ReceiveEventArg;
 
         /// <summary>
         /// Receive data from the server (synchronous)
         /// </summary>
         /// <param name="buffer">Buffer to receive</param>
         /// <returns>Size of received data</returns>
-        public long Receive(byte[] buffer)
+        public int Receive(byte[] buffer)
         {
             return Receive(buffer, 0, buffer.Length);
         }
@@ -35,7 +43,7 @@ namespace AIO.Net
         /// <param name="offset">Buffer offset</param>
         /// <param name="size">Buffer size</param>
         /// <returns>Size of received data</returns>
-        public virtual long Receive(byte[] buffer, int offset, int size)
+        public virtual int Receive(byte[] buffer, int offset, int size)
         {
             if (!IsConnected)
                 return 0;
@@ -63,18 +71,6 @@ namespace AIO.Net
         }
 
         /// <summary>
-        /// Receive text from the server (synchronous)
-        /// </summary>
-        /// <param name="size">Text size to receive</param>
-        /// <returns>Received text</returns>
-        public string Receive(long size)
-        {
-            var buffer = new byte[size];
-            var length = Receive(buffer);
-            return Encoding.UTF8.GetString(buffer, 0, (int)length);
-        }
-
-        /// <summary>
         /// Receive data from the server (asynchronous)
         /// </summary>
         public virtual void ReceiveAsync()
@@ -88,27 +84,20 @@ namespace AIO.Net
         /// </summary>
         private void TryReceive()
         {
-            if (_receiving)
-                return;
-
-            if (!IsConnected)
-                return;
+            if (Receiving) return;
+            if (!IsConnected) return;
 
             var process = true;
-
             while (process)
             {
                 process = false;
 
-                try
+                try // Async receive with the receive handler
                 {
-                    // Async receive with the receive handler
-                    _receiving = true;
-                    _receiveEventArg.SetBuffer(_receiveBuffer.Data, 0,
-                        _receiveBuffer.Capacity);
-
-                    if (!Socket.ReceiveAsync(_receiveEventArg))
-                        process = ProcessReceive(_receiveEventArg);
+                    Receiving = true;
+                    ReceiveEventArg.SetBuffer(ReceiveBuffer.Arrays, 0, ReceiveBuffer.Capacity);
+                    if (Socket.ReceiveAsync(ReceiveEventArg)) continue;
+                    process = ProcessReceive(ReceiveEventArg);
                 }
                 catch (ObjectDisposedException)
                 {
@@ -121,34 +110,33 @@ namespace AIO.Net
         /// </summary>
         private bool ProcessReceive(SocketAsyncEventArgs e)
         {
-            if (!IsConnected)
-                return false;
+            if (!IsConnected) return false;
 
             var size = e.BytesTransferred;
-            // Received some data from the server
-            if (size > 0)
+            if (size > 0) // Received some data from the server
             {
                 // Update statistic
                 BytesReceived += size;
 
                 // Call the buffer received handler
-                OnReceived(_receiveBuffer.Data, 0, size);
+                OnReceived(ReceiveBuffer.Arrays, 0, ReceiveBuffer.Capacity);
+                // OnReceived(ReceiveBuffer.Arrays, 0, size);
                 // If the receive buffer is full increase its size
-                if (_receiveBuffer.Capacity == size)
+                if (ReceiveBuffer.Capacity == size)
                 {
                     // Check the receive buffer limit
-                    if (2 * size > OptionReceiveBufferLimit && OptionReceiveBufferLimit > 0)
+                    if (2 * size > Option.ReceiveBufferLimit && Option.ReceiveBufferLimit > 0)
                     {
                         SendError(SocketError.NoBufferSpaceAvailable);
                         DisconnectAsync();
                         return false;
                     }
 
-                    _receiveBuffer.Reserve(2 * size);
+                    ReceiveBuffer.Reserve(2 * size);
                 }
             }
 
-            _receiving = false;
+            Receiving = false;
 
             // Try to receive again if the client is valid
             if (e.SocketError == SocketError.Success)

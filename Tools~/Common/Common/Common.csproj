@@ -518,15 +518,15 @@
     <Compile Include="Script\Helper\Database\U.Json.MINIJSON.cs" />
     <Compile Include="Script\Helper\Exception\NetGetResponseStream.cs" />
     <Compile Include="Script\Helper\Net\Client\Buffer.cs" />
-    <Compile Include="Script\Helper\Net\Client\HTTPClient.cs" />
-    <Compile Include="Script\Helper\Net\Client\HttpRequest.cs" />
-    <Compile Include="Script\Helper\Net\Client\HttpResponse.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Check.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Create.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Delete.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Download.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Get.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Upload.cs" />
+    <Compile Include="Script\Helper\Net\Http\HTTPClient.cs" />
+    <Compile Include="Script\Helper\Net\Http\HttpRequest.cs" />
+    <Compile Include="Script\Helper\Net\Http\HttpResponse.cs" />
     <Compile Include="Script\Helper\Net\HTTP\U.Http.Connect.cs" />
     <Compile Include="Script\Helper\Net\HTTP\U.Http.Delete.cs" />
     <Compile Include="Script\Helper\Net\HTTP\U.Http.Download.cs" />
@@ -543,9 +543,12 @@
     <Compile Include="Script\Helper\Net\TCP\TcpClient.Send.cs" />
     <Compile Include="Script\Helper\Net\TCP\TcpClient.Connect.cs" />
     <Compile Include="Script\Helper\Net\TCP\TcpServer.cs" />
+    <Compile Include="Script\Helper\Net\TCP\TcpSetting.Client.cs" />
+    <Compile Include="Script\Helper\Net\TCP\TcpSetting.cs" />
     <Compile Include="Script\Helper\Net\TCP\TcpSession.cs" />
     <Compile Include="Script\Helper\Net\TCP\TcpSession.Receive.cs" />
     <Compile Include="Script\Helper\Net\TCP\TcpSession.Send.cs" />
+    <Compile Include="Script\Helper\Net\TCP\TcpSetting.Server.cs" />
     <Compile Include="Script\Helper\Net\U.Net.cs" />
     <Compile Include="Script\Helper\Net\U.Net.Helper.cs" />
     <Compile Include="Script\Helper\Reflect\U.Reflect.cs" />
@@ -810,7 +813,6 @@
   <ItemGroup>
     <Folder Include="Plugins\Microsoft" />
     <Folder Include="Script\Handle\Net\TCP" />
-    <Folder Include="Script\Helper\Net\Server" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Script\Helper\Net\Http\HTTP.md" />
