@@ -10,7 +10,7 @@ namespace AIO
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    public partial class CharExtend
+    public partial class ExtendChar
     {
         /// <summary>
         /// 判断当前字符是否为单字节

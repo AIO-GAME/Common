@@ -12,7 +12,7 @@ namespace AIO
     /// <summary>
     /// App Domain 扩展
     /// </summary>
-    public static class AppDomainExtension
+    public static class ExtendAppDomain
     {
         /// <summary>
         /// 获取属性

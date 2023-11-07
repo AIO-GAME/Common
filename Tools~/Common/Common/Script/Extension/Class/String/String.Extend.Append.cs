@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AIO
 {
-    public static partial class StringExtend
+    public static partial class ExtendString
     {
         /// <summary>
         /// 在最前添加指定字符到指定长度

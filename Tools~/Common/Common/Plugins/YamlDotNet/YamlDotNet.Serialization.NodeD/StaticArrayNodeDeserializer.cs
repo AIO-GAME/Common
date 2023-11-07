@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using AIO.YamlDotNet.Core;
 using AIO.YamlDotNet.Serialization.ObjectFactories;
-
+#pragma warning disable
 #nullable enable
 namespace AIO.YamlDotNet.Serialization.NodeDeserializers
 {

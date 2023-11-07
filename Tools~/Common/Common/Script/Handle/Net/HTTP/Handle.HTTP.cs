@@ -48,6 +48,9 @@ public partial class AHandle
         /// </summary>
         public string Cookie { get; set; }
 
+        /// <summary>
+        /// 编码
+        /// </summary>
         public Encoding Encoding { get; set; } = Encoding.UTF8;
 
         /// <summary>

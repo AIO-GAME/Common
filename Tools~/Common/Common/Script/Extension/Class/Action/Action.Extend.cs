@@ -13,7 +13,7 @@ namespace AIO
     /// <summary>
     /// 函数扩展
     /// </summary>
-    public static partial class ActionExtend
+    public static partial class ExtendAction
     {
         /// <summary>
         /// 获取当前函数执行总时间

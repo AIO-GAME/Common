@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+#pragma warning disable
 namespace AIO.YamlDotNet.Serialization.ObjectGraphVisitors
 {
 	internal abstract class PreProcessingPhaseObjectGraphVisitorSkeleton : IObjectGraphVisitor<Nothing>

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AIO.YamlDotNet.Core.Events;
+#pragma warning disable
 #nullable enable
 namespace AIO.YamlDotNet.Core
 {

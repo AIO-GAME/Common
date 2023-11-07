@@ -27,7 +27,7 @@ namespace AIO
     /// <summary>
     /// 数组方法
     /// </summary>
-    public static partial class ISpanExtend
+    public static partial class ExtendISpan
     {
         /// <summary>
         /// 自动扩容

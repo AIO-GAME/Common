@@ -2,7 +2,7 @@
 
 namespace AIO
 {
-    public partial class StringExtend
+    public partial class ExtendString
     {
         /// <summary>
         /// 从字符串中过滤出指定类型的字符，并返回过滤后的字符串

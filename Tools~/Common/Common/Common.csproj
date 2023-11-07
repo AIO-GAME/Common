@@ -36,7 +36,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>bin\Release\AIO.Common.xml</DocumentationFile>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
-    <NoWarn>CS8600;CS0809;CS8632;CS8603;CS0649;</NoWarn>
+    <NoWarn>CS8600;CS0809;CS8632;CS8603;CS0649;CS0809;CS8632;</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -431,8 +431,8 @@
     <Compile Include="Script\Algorithms\LruCache.cs" />
     <Compile Include="Script\Basics\HashAlgorithm\MD4.cs" />
     <Compile Include="Script\Extension\Class\Action\Action.Extend.cs" />
-    <Compile Include="Script\Extension\Class\AppDomain\AppDomainExtension.cs" />
-    <Compile Include="Script\Extension\Class\Assembly\AssemblyExtension.cs" />
+    <Compile Include="Script\Extension\Class\AppDomain\Extend.AppDomain.cs" />
+    <Compile Include="Script\Extension\Class\Assembly\Extend.Assembly.cs" />
     <Compile Include="Script\Extension\Class\FieldInfo\FieldInfo.Extend.IS.cs" />
     <Compile Include="Script\Extension\Class\IntPtr\IntPtr.Extend.cs" />
     <Compile Include="Script\Extension\Class\IntPtr\IntPtr.Extend.ToConver.cs" />
@@ -464,7 +464,7 @@
     <Compile Include="Script\Extension\Class\Type\Type.Extend.IS.cs" />
     <Compile Include="Script\Extension\Class\Type\Type.Extend.Reset.cs" />
     <Compile Include="Script\Extension\Class\Type\Type.Extend.To.cs" />
-    <Compile Include="Script\Extension\Enum\EnumExtend.cs" />
+    <Compile Include="Script\Extension\Enum\ExtendEnum.cs" />
     <Compile Include="Script\Extension\Exception\GenericClosingException.cs" />
     <Compile Include="Script\Extension\Interface\Empty.cs" />
     <Compile Include="Script\Extension\Interface\ICollection\ICollection.Extend.Find.cs" />
@@ -524,9 +524,6 @@
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Download.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Get.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Upload.cs" />
-    <Compile Include="Script\Helper\Net\Http\HTTPClient.cs" />
-    <Compile Include="Script\Helper\Net\Http\HttpRequest.cs" />
-    <Compile Include="Script\Helper\Net\Http\HttpResponse.cs" />
     <Compile Include="Script\Helper\Net\HTTP\U.Http.Connect.cs" />
     <Compile Include="Script\Helper\Net\HTTP\U.Http.Delete.cs" />
     <Compile Include="Script\Helper\Net\HTTP\U.Http.Download.cs" />
@@ -538,17 +535,6 @@
     <Compile Include="Script\Helper\Net\HTTP\U.Http.Post.cs" />
     <Compile Include="Script\Helper\Net\HTTP\U.Http.Put.cs" />
     <Compile Include="Script\Helper\Net\HTTP\U.Http.Trace.cs" />
-    <Compile Include="Script\Helper\Net\TCP\TcpClient.cs" />
-    <Compile Include="Script\Helper\Net\TCP\TcpClient.Receive.cs" />
-    <Compile Include="Script\Helper\Net\TCP\TcpClient.Send.cs" />
-    <Compile Include="Script\Helper\Net\TCP\TcpClient.Connect.cs" />
-    <Compile Include="Script\Helper\Net\TCP\TcpServer.cs" />
-    <Compile Include="Script\Helper\Net\TCP\TcpSetting.Client.cs" />
-    <Compile Include="Script\Helper\Net\TCP\TcpSetting.cs" />
-    <Compile Include="Script\Helper\Net\TCP\TcpSession.cs" />
-    <Compile Include="Script\Helper\Net\TCP\TcpSession.Receive.cs" />
-    <Compile Include="Script\Helper\Net\TCP\TcpSession.Send.cs" />
-    <Compile Include="Script\Helper\Net\TCP\TcpSetting.Server.cs" />
     <Compile Include="Script\Helper\Net\U.Net.cs" />
     <Compile Include="Script\Helper\Net\U.Net.Helper.cs" />
     <Compile Include="Script\Helper\Reflect\U.Reflect.cs" />
@@ -643,19 +629,37 @@
     <Compile Include="Script\Tools\Mail\MailMultipleHandle.cs" />
     <Compile Include="Script\Tools\Mail\MailSingleHandle.cs" />
     <Compile Include="Script\Tools\Mail\MailSingleInfo.cs" />
-    <Compile Include="Script\Tools\NetWork\BytesSerializable.cs" />
-    <Compile Include="Script\Tools\NetWork\DownloadInfo.cs" />
-    <Compile Include="Script\Tools\NetWork\HTTP\HTTPNetwork.cs" />
-    <Compile Include="Script\Tools\NetWork\HTTP\IHTTPRequest.cs" />
-    <Compile Include="Script\Tools\NetWork\HTTP\HTTPRequest.cs" />
-    <Compile Include="Script\Tools\NetWork\HTTP\HTTPResponse.cs" />
-    <Compile Include="Script\Tools\NetWork\Interface\INetCryptography.cs" />
-    <Compile Include="Script\Tools\NetWork\Interface\INetGuard.cs" />
-    <Compile Include="Script\Tools\NetWork\Interface\INetRequest.cs" />
-    <Compile Include="Script\Tools\NetWork\Interface\INetResponse.cs" />
-    <Compile Include="Script\Tools\NetWork\Interface\INetSerialization.cs" />
-    <Compile Include="Script\Tools\NetWork\Interface\INetwork.cs" />
-    <Compile Include="Script\Tools\NetWork\Network.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\BytesSerializable.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\DownloadInfo.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\HTTPNetwork.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\HTTPRequest.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\HTTPResponse.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\IHTTPRequest.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\INetCryptography.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\INetGuard.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\INetRequest.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\INetResponse.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\INetSerialization.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\INetwork.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\Network.cs" />
+    <Compile Include="Script\Tools\NetWork\HTTP\HttpClient.cs" />
+    <Compile Include="Script\Tools\NetWork\HTTP\HttpRequest.cs" />
+    <Compile Include="Script\Tools\NetWork\HTTP\HttpResponse.cs" />
+    <Compile Include="Script\Tools\NetWork\HTTP\HttpServer.cs" />
+    <Compile Include="Script\Tools\NetWork\HTTP\HttpSession.cs" />
+    <Compile Include="Script\Tools\NetWork\Interface\IWebSocket.cs" />
+    <Compile Include="Script\Tools\NetWork\TCP\TcpClient.Connect.cs" />
+    <Compile Include="Script\Tools\NetWork\TCP\TcpClient.cs" />
+    <Compile Include="Script\Tools\NetWork\TCP\TcpClient.Receive.cs" />
+    <Compile Include="Script\Tools\NetWork\TCP\TcpClient.Send.cs" />
+    <Compile Include="Script\Tools\NetWork\TCP\TcpServer.cs" />
+    <Compile Include="Script\Tools\NetWork\TCP\TcpSession.cs" />
+    <Compile Include="Script\Tools\NetWork\TCP\TcpSession.Receive.cs" />
+    <Compile Include="Script\Tools\NetWork\TCP\TcpSession.Send.cs" />
+    <Compile Include="Script\Tools\NetWork\TCP\TcpSetting.Client.cs" />
+    <Compile Include="Script\Tools\NetWork\TCP\TcpSetting.cs" />
+    <Compile Include="Script\Tools\NetWork\TCP\TcpSetting.Server.cs" />
+    <Compile Include="Script\Tools\NetWork\UDP\UdpClient.cs" />
     <Compile Include="Script\Tools\PList\IPListElement.cs" />
     <Compile Include="Script\Tools\PList\PListBinaryReader.cs" />
     <Compile Include="Script\Tools\PList\PListBinaryWriter.cs" />
@@ -802,13 +806,6 @@
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.3" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.2" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Ensure\Ensure.csproj">
-      <Project>{3e725c5e-8dd9-4ab3-8042-96effab382b4}</Project>
-      <Name>Ensure</Name>
-      <Private>False</Private>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Plugins\Microsoft" />

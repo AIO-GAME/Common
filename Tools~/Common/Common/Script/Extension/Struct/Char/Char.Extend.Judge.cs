@@ -12,7 +12,7 @@ namespace AIO
     /// <summary>
     /// 字符扩展
     /// </summary>
-    public static partial class CharExtend
+    public static partial class ExtendChar
     {
         /// <summary>
         /// 判断当前字符是否为单字节

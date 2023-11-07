@@ -68,7 +68,7 @@ namespace AIO
       Split(String, String)         在由 Regex 构造函数指定的正则表达式模式所定义的位置，拆分指定的输入字符串。
     */
 
-    public static partial class StringExtend
+    public static partial class ExtendString
     {
         /// <summary>
         /// 是否为单词开始

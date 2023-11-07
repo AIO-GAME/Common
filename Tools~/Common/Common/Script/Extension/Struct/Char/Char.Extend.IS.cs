@@ -2,7 +2,7 @@
 
 namespace AIO
 {
-    public partial class CharExtend
+    public partial class ExtendChar
     {
         /// <summary>
         /// 检查字符是否是单词分隔符，包括空格、符号和标点符号

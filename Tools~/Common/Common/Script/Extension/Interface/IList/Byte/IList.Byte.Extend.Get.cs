@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AIO
 {
-    public static partial class IListExtend
+    public static partial class ExtendIList
     {
         private static T[] GetLenArrayEmtpy<T>(this IList<byte> array, ref int index)
         {

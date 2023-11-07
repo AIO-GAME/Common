@@ -13,10 +13,8 @@ namespace AIO
     /// <summary>
     /// 程序集扩展
     /// </summary>
-    public static class AssemblyExtension
+    public static partial class ExtendAssembly
     {
-
-
         /// <summary>
         /// 程序集目录的完整路径，没有最后的斜杠 |
         /// Full path to the assembly directory, without final slash

@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace AIO
 {
-    public partial class ISpanExtend
+    public partial class ExtendISpan
     {
         /// <summary>
         /// 移除

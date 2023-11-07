@@ -9,14 +9,14 @@
     /// <summary>
     /// 类型扩展
     /// </summary>
-    public static partial class ITypeExtend
+    public static partial class ExtendIType
     {
         /// <summary>
         /// 获取申明的全部构造函数
         /// </summary>
         public static ConstructorInfo[] GetDeclaredConstructors(this _Type type)
         {
-            return type.GetConstructors(IReflectExtend.DeclaredFlags & ~BindingFlags.Static); // LUDIQ: 排除静态构造函数
+            return type.GetConstructors(ExtendIReflect.DeclaredFlags & ~BindingFlags.Static); // LUDIQ: 排除静态构造函数
         }
 
         /// <summary>

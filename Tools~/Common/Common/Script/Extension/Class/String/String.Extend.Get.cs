@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AIO
 {
-    public static partial class StringExtend
+    public static partial class ExtendString
     {
         /// <summary>
         /// 获取字节长度

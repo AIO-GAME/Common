@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AIO
 {
-    public partial class ISpanExtend
+    public partial class ExtendISpan
     {
         /// <summary>
         /// 复制

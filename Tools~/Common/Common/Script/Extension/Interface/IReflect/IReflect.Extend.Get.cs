@@ -6,7 +6,7 @@ namespace AIO
     /// <summary>
     /// 扩展
     /// </summary>
-    public static partial class IReflectExtend
+    public static partial class ExtendIReflect
     {
         /// <summary>
         /// 申明

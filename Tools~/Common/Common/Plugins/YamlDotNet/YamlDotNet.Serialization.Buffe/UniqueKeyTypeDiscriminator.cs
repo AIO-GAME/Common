@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using AIO.YamlDotNet.Core;
 using AIO.YamlDotNet.Core.Events;
 #nullable enable
+#pragma warning disable
 namespace AIO.YamlDotNet.Serialization.BufferedDeserialization.TypeDiscriminators
 {
 	internal class UniqueKeyTypeDiscriminator : ITypeDiscriminator

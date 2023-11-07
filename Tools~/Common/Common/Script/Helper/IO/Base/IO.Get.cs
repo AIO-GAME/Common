@@ -95,8 +95,8 @@ public partial class AHelper
         /// <exception cref="UriFormatException">使用 URI 库时，如果 path 或 directory 不是有效的 URI 字符串，则抛出此异常。</exception>
         public static string GetRelativePath(string path, string directory)
         {
-            Ensure.That(nameof(path)).IsNotNull(path);
-            Ensure.That(nameof(directory)).IsNotNull(directory);
+            if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
+            if (string.IsNullOrEmpty(directory)) throw new ArgumentNullException(nameof(directory));
 
             if (!directory.EndsWith(Path.DirectorySeparatorChar.ToString()))
             {
@@ -124,7 +124,8 @@ public partial class AHelper
             }
             catch (UriFormatException ufex)
             {
-                throw new UriFormatException($"Failed to get relative path.\nPath: {path}\nDirectory:{directory}\n{ufex}");
+                throw new UriFormatException(
+                    $"Failed to get relative path.\nPath: {path}\nDirectory:{directory}\n{ufex}");
             }
         }
 

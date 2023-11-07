@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace AIO
 {
-    public static partial class IListExtend
+    public static partial class ExtendIList
     {
         /// <summary>
         /// 移除第一个元素

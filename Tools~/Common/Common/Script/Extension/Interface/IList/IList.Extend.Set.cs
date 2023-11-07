@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace AIO
 {
-    public static partial class IListExtend
+    public static partial class ExtendIList
     {
         /// <summary>
         /// 设置指定下标元素

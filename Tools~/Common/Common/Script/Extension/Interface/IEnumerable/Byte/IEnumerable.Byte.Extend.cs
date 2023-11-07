@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AIO
 {
-    public static partial class IEnumerableExtend
+    public static partial class ExtendIEnumerable
     {
         /// <summary>
         /// 转化为字符串 UTF8格式

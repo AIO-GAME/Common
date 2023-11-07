@@ -8,7 +8,7 @@ namespace AIO
     /// <summary>
     /// 函数扩展
     /// </summary>
-    public static partial class MethodBaseExtend
+    public static partial class ExtendMethodBase
     {
         /// <summary>
         /// 获取一个方法的参数信息，但不包括扩展方法中的第一个“this”参数。

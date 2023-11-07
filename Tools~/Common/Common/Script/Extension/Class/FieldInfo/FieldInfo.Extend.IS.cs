@@ -6,7 +6,7 @@ namespace AIO
     /// <summary>
     /// 字段信息扩展
     /// </summary>
-    public static partial class FieldInfoExtend
+    public static partial class ExtendFieldInfo
     {
         /// <summary>
         /// 是否能写入

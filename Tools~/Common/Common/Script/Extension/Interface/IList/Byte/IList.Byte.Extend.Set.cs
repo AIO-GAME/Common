@@ -16,7 +16,7 @@ namespace AIO
     /// <summary>
     /// 字节数组扩展 写入
     /// </summary>
-    public static partial class ByteExtend
+    public static partial class ExtendByte
     {
         #region Array
 

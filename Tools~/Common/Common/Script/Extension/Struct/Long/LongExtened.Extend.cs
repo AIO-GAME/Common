@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace AIO
@@ -7,7 +6,7 @@ namespace AIO
     /// <summary>
     /// Long 扩展
     /// </summary>
-    public static class LongExtend
+    public static class ExtendLong
     {
         /// <summary>
         /// 将文件大小(字节)转换为最适合的显示方式
@@ -94,13 +93,22 @@ namespace AIO
             return str;
         }
 
-
         /// <summary>
         /// Generate time period string. Will return a pretty string of ns, mcs, ms, s, m, h based on the given nanoseconds.
         /// </summary>
         /// <param name="ms">Milliseconds</param>
         /// <returns>String with time period representation</returns>
         public static string ToConverseTimePeriod(this long ms)
+        {
+            return ToConverseTimePeriod((double)ms);
+        }
+
+        /// <summary>
+        /// Generate time period string. Will return a pretty string of ns, mcs, ms, s, m, h based on the given nanoseconds.
+        /// </summary>
+        /// <param name="ms">Milliseconds</param>
+        /// <returns>String with time period representation</returns>
+        public static string ToConverseTimePeriod(this double ms)
         {
             var sb = new StringBuilder();
 

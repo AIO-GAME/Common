@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "..\..\..\..\..\..\Tenncent\Script\Common\Tools~\Common\Common\Common.csproj", "{B0D5708A-7C94-4BCB-805D-A718034E5724}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.HttpClient", "..\..\..\..\..\..\Tenncent\Script\Common\Tools~\Test\Test.HttpClient\Test.HttpClient.csproj", "{75BF246F-B281-441C-A42A-8073450CCBF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.HttpServer", "..\..\..\..\..\..\Tenncent\Script\Common\Tools~\Test\Test.HttpServer\Test.HttpServer.csproj", "{496E3825-0F58-42EB-BC2C-FE56353B1D7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.TcpClient", "..\..\..\..\..\..\Tenncent\Script\Common\Tools~\Test\Test.TcpClient\Test.TcpClient.csproj", "{F8F43616-FCC4-41B7-AE2C-121432BA2D74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.TcpServer", "..\..\..\..\..\..\Tenncent\Script\Common\Tools~\Test\Test.TcpServer\Test.TcpServer.csproj", "{EE395AF9-32DC-4BCE-823A-0F552E4C8176}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B0D5708A-7C94-4BCB-805D-A718034E5724}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0D5708A-7C94-4BCB-805D-A718034E5724}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0D5708A-7C94-4BCB-805D-A718034E5724}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{B0D5708A-7C94-4BCB-805D-A718034E5724}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{75BF246F-B281-441C-A42A-8073450CCBF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75BF246F-B281-441C-A42A-8073450CCBF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75BF246F-B281-441C-A42A-8073450CCBF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75BF246F-B281-441C-A42A-8073450CCBF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{496E3825-0F58-42EB-BC2C-FE56353B1D7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{496E3825-0F58-42EB-BC2C-FE56353B1D7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{496E3825-0F58-42EB-BC2C-FE56353B1D7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{496E3825-0F58-42EB-BC2C-FE56353B1D7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8F43616-FCC4-41B7-AE2C-121432BA2D74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8F43616-FCC4-41B7-AE2C-121432BA2D74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8F43616-FCC4-41B7-AE2C-121432BA2D74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8F43616-FCC4-41B7-AE2C-121432BA2D74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE395AF9-32DC-4BCE-823A-0F552E4C8176}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE395AF9-32DC-4BCE-823A-0F552E4C8176}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE395AF9-32DC-4BCE-823A-0F552E4C8176}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE395AF9-32DC-4BCE-823A-0F552E4C8176}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

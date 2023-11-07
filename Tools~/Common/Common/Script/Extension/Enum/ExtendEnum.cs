@@ -18,7 +18,7 @@ namespace AIO
     /// <summary>
     /// 枚举扩展
     /// </summary>
-    public static partial class EnumExtend
+    public static partial class ExtendEnum
     {
         /// <summary>
         /// 获取属性值

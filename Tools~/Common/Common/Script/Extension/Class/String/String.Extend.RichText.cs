@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace AIO
 {
-    public static partial class StringExtend
+    public static partial class ExtendString
     {
         /// <summary>
         /// 富文本 字号

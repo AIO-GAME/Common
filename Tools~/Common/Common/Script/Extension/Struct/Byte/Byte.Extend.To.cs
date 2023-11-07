@@ -18,7 +18,7 @@ namespace AIO
     /// <summary>
     /// 字节扩展 包含类型 byte byte[]
     /// </summary>
-    public static partial class ByteExtend
+    public static partial class ExtendByte
     {
         /// <summary>
         /// 字节 转小写16进制字符

@@ -5,7 +5,7 @@ namespace AIO
     using System;
     using System.Collections.Generic;
 
-    public partial class StringExtend
+    public partial class ExtendString
     {
         /// <summary>
         /// 在字符串中查找所有出现指定子字符串的位置，忽略大小写

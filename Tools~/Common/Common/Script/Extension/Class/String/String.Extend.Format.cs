@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace AIO
 {
-    public static partial class StringExtend
+    public static partial class ExtendString
     {
         /// <summary>
         /// 格式化
