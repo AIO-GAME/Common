@@ -660,6 +660,7 @@
     <Compile Include="Script\Tools\NetWork\TCP\TcpSetting.cs" />
     <Compile Include="Script\Tools\NetWork\TCP\TcpSetting.Server.cs" />
     <Compile Include="Script\Tools\NetWork\UDP\UdpClient.cs" />
+    <Compile Include="Script\Tools\NetWork\UDP\UdpServer.cs" />
     <Compile Include="Script\Tools\PList\IPListElement.cs" />
     <Compile Include="Script\Tools\PList\PListBinaryReader.cs" />
     <Compile Include="Script\Tools\PList\PListBinaryWriter.cs" />

@@ -5582,6 +5582,462 @@
             </summary>
             <param name="disposingManagedResources"></param>
         </member>
+        <member name="T:AIO.Net.UdpServer">
+            <summary>
+            UDP server is used to send or multicast datagrams to UDP endpoints
+            </summary>
+            <remarks>Thread-safe</remarks>
+        </member>
+        <member name="M:AIO.Net.UdpServer.#ctor(System.Net.IPAddress,System.Int32)">
+            <summary>
+            Initialize UDP server with a given IP address and port number
+            </summary>
+            <param name="address">IP address</param>
+            <param name="port">Port number</param>
+        </member>
+        <member name="M:AIO.Net.UdpServer.#ctor(System.String,System.Int32)">
+            <summary>
+            Initialize UDP server with a given IP address and port number
+            </summary>
+            <param name="address">IP address</param>
+            <param name="port">Port number</param>
+        </member>
+        <member name="M:AIO.Net.UdpServer.#ctor(System.Net.DnsEndPoint)">
+            <summary>
+            Initialize UDP server with a given DNS endpoint
+            </summary>
+            <param name="endpoint">DNS endpoint</param>
+        </member>
+        <member name="M:AIO.Net.UdpServer.#ctor(System.Net.IPEndPoint)">
+            <summary>
+            Initialize UDP server with a given IP endpoint
+            </summary>
+            <param name="endpoint">IP endpoint</param>
+        </member>
+        <member name="M:AIO.Net.UdpServer.#ctor(System.Net.EndPoint,System.String,System.Int32)">
+            <summary>
+            Initialize UDP server with a given endpoint, address and port
+            </summary>
+            <param name="endpoint">Endpoint</param>
+            <param name="address">Server address</param>
+            <param name="port">Server port</param>
+        </member>
+        <member name="P:AIO.Net.UdpServer.Id">
+            <summary>
+            Server Id
+            </summary>
+        </member>
+        <member name="P:AIO.Net.UdpServer.Address">
+            <summary>
+            UDP server address
+            </summary>
+        </member>
+        <member name="P:AIO.Net.UdpServer.Port">
+            <summary>
+            UDP server port
+            </summary>
+        </member>
+        <member name="P:AIO.Net.UdpServer.Endpoint">
+            <summary>
+            Endpoint
+            </summary>
+        </member>
+        <member name="P:AIO.Net.UdpServer.MulticastEndpoint">
+            <summary>
+            Multicast endpoint
+            </summary>
+        </member>
+        <member name="P:AIO.Net.UdpServer.Socket">
+            <summary>
+            Socket
+            </summary>
+        </member>
+        <member name="P:AIO.Net.UdpServer.BytesPending">
+            <summary>
+            Number of bytes pending sent by the server
+            </summary>
+        </member>
+        <member name="P:AIO.Net.UdpServer.BytesSending">
+            <summary>
+            Number of bytes sending by the server
+            </summary>
+        </member>
+        <member name="P:AIO.Net.UdpServer.BytesSent">
+            <summary>
+            Number of bytes sent by the server
+            </summary>
+        </member>
+        <member name="P:AIO.Net.UdpServer.BytesReceived">
+            <summary>
+            Number of bytes received by the server
+            </summary>
+        </member>
+        <member name="P:AIO.Net.UdpServer.DatagramsSent">
+            <summary>
+            Number of datagrams sent by the server
+            </summary>
+        </member>
+        <member name="P:AIO.Net.UdpServer.DatagramsReceived">
+            <summary>
+            Number of datagrams received by the server
+            </summary>
+        </member>
+        <member name="P:AIO.Net.UdpServer.OptionDualMode">
+            <summary>
+            Option: dual mode socket
+            </summary>
+            <remarks>
+            Specifies whether the Socket is a dual-mode socket used for both IPv4 and IPv6.
+            Will work only if socket is bound on IPv6 address.
+            </remarks>
+        </member>
+        <member name="P:AIO.Net.UdpServer.OptionReuseAddress">
+            <summary>
+            Option: reuse address
+            </summary>
+            <remarks>
+            This option will enable/disable SO_REUSEADDR if the OS support this feature
+            </remarks>
+        </member>
+        <member name="P:AIO.Net.UdpServer.OptionExclusiveAddressUse">
+            <summary>
+            Option: enables a socket to be bound for exclusive access
+            </summary>
+            <remarks>
+            This option will enable/disable SO_EXCLUSIVEADDRUSE if the OS support this feature
+            </remarks>
+        </member>
+        <member name="P:AIO.Net.UdpServer.OptionReceiveBufferLimit">
+            <summary>
+            Option: receive buffer limit
+            </summary>
+        </member>
+        <member name="P:AIO.Net.UdpServer.OptionReceiveBufferSize">
+            <summary>
+            Option: receive buffer size
+            </summary>
+        </member>
+        <member name="P:AIO.Net.UdpServer.OptionSendBufferLimit">
+            <summary>
+            Option: send buffer limit
+            </summary>
+        </member>
+        <member name="P:AIO.Net.UdpServer.OptionSendBufferSize">
+            <summary>
+            Option: send buffer size
+            </summary>
+        </member>
+        <member name="P:AIO.Net.UdpServer.IsStarted">
+            <summary>
+            Is the server started?
+            </summary>
+        </member>
+        <member name="M:AIO.Net.UdpServer.CreateSocket">
+            <summary>
+            Create a new socket object
+            </summary>
+            <remarks>
+            Method may be override if you need to prepare some specific socket object in your implementation.
+            </remarks>
+            <returns>Socket object</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.Start">
+            <summary>
+            Start the server (synchronous)
+            </summary>
+            <returns>'true' if the server was successfully started, 'false' if the server failed to start</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.Start(System.Net.IPAddress,System.Int32)">
+            <summary>
+            Start the server with a given multicast IP address and port number (synchronous)
+            </summary>
+            <param name="multicastAddress">Multicast IP address</param>
+            <param name="multicastPort">Multicast port number</param>
+            <returns>'true' if the server was successfully started, 'false' if the server failed to start</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.Start(System.String,System.Int32)">
+            <summary>
+            Start the server with a given multicast IP address and port number (synchronous)
+            </summary>
+            <param name="multicastAddress">Multicast IP address</param>
+            <param name="multicastPort">Multicast port number</param>
+            <returns>'true' if the server was successfully started, 'false' if the server failed to start</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.Start(System.Net.EndPoint)">
+            <summary>
+            Start the server with a given multicast endpoint (synchronous)
+            </summary>
+            <param name="multicastEndpoint">Multicast endpoint</param>
+            <returns>'true' if the server was successfully started, 'false' if the server failed to start</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.Stop">
+            <summary>
+            Stop the server (synchronous)
+            </summary>
+            <returns>'true' if the server was successfully stopped, 'false' if the server is already stopped</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.Restart">
+            <summary>
+            Restart the server (synchronous)
+            </summary>
+            <returns>'true' if the server was successfully restarted, 'false' if the server failed to restart</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.Multicast(System.Byte[])">
+            <summary>
+            Multicast datagram to the prepared multicast endpoint (synchronous)
+            </summary>
+            <param name="buffer">Datagram buffer to multicast</param>
+            <returns>Size of multicasted datagram</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.Multicast(System.Byte[],System.Int64,System.Int64)">
+            <summary>
+            Multicast datagram to the prepared multicast endpoint (synchronous)
+            </summary>
+            <param name="buffer">Datagram buffer to multicast</param>
+            <param name="offset">Datagram buffer offset</param>
+            <param name="size">Datagram buffer size</param>
+            <returns>Size of multicasted datagram</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.Multicast(System.String)">
+            <summary>
+            Multicast text to the prepared multicast endpoint (synchronous)
+            </summary>
+            <param name="text">Text string to multicast</param>
+            <returns>Size of multicasted datagram</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.MulticastAsync(System.Byte[])">
+            <summary>
+            Multicast datagram to the prepared multicast endpoint (asynchronous)
+            </summary>
+            <param name="buffer">Datagram buffer to multicast</param>
+            <returns>'true' if the datagram was successfully multicasted, 'false' if the datagram was not multicasted</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.MulticastAsync(System.Byte[],System.Int64,System.Int64)">
+            <summary>
+            Multicast datagram to the prepared multicast endpoint (asynchronous)
+            </summary>
+            <param name="buffer">Datagram buffer to multicast</param>
+            <param name="offset">Datagram buffer offset</param>
+            <param name="size">Datagram buffer size</param>
+            <returns>'true' if the datagram was successfully multicasted, 'false' if the datagram was not multicasted</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.MulticastAsync(System.String)">
+            <summary>
+            Multicast text to the prepared multicast endpoint (asynchronous)
+            </summary>
+            <param name="text">Text string to multicast</param>
+            <returns>'true' if the text was successfully multicasted, 'false' if the text was not multicasted</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.Send(System.Byte[],System.Int64,System.Int64)">
+            <summary>
+            Send datagram to the connected server (synchronous)
+            </summary>
+            <param name="buffer">Datagram buffer to send</param>
+            <param name="offset">Datagram buffer offset</param>
+            <param name="size">Datagram buffer size</param>
+            <returns>Size of sent datagram</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.Send(System.Byte[])">
+            <summary>
+            Send datagram to the connected server (synchronous)
+            </summary>
+            <param name="buffer">Datagram buffer to send as a span of bytes</param>
+            <returns>Size of sent datagram</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.Send(System.String)">
+            <summary>
+            Send text to the connected server (synchronous)
+            </summary>
+            <param name="text">Text string to send</param>
+            <returns>Size of sent datagram</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.Send(System.Net.EndPoint,System.Byte[],System.Int64,System.Int64)">
+            <summary>
+            Send datagram to the given endpoint (synchronous)
+            </summary>
+            <param name="endpoint">Endpoint to send</param>
+            <param name="buffer">Datagram buffer to send</param>
+            <param name="offset">Datagram buffer offset</param>
+            <param name="size">Datagram buffer size</param>
+            <returns>Size of sent datagram</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.Send(System.Net.EndPoint,System.Byte[])">
+            <summary>
+            Send datagram to the given endpoint (synchronous)
+            </summary>
+            <param name="endpoint">Endpoint to send</param>
+            <param name="buffer">Datagram buffer to send as a span of bytes</param>
+            <returns>Size of sent datagram</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.Send(System.Net.EndPoint,System.String)">
+            <summary>
+            Send text to the given endpoint (synchronous)
+            </summary>
+            <param name="endpoint">Endpoint to send</param>
+            <param name="text">Text string to send</param>
+            <returns>Size of sent datagram</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.SendAsync(System.Net.EndPoint,System.Byte[],System.Int64,System.Int64)">
+            <summary>
+            Send datagram to the given endpoint (asynchronous)
+            </summary>
+            <param name="endpoint">Endpoint to send</param>
+            <param name="buffer">Datagram buffer to send</param>
+            <param name="offset">Datagram buffer offset</param>
+            <param name="size">Datagram buffer size</param>
+            <returns>'true' if the datagram was successfully sent, 'false' if the datagram was not sent</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.SendAsync(System.Net.EndPoint,System.Byte[])">
+            <summary>
+            Send datagram to the given endpoint (asynchronous)
+            </summary>
+            <param name="endpoint">Endpoint to send</param>
+            <param name="buffer">Datagram buffer to send as a span of bytes</param>
+            <returns>'true' if the datagram was successfully sent, 'false' if the datagram was not sent</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.SendAsync(System.Net.EndPoint,System.String)">
+            <summary>
+            Send text to the given endpoint (asynchronous)
+            </summary>
+            <param name="endpoint">Endpoint to send</param>
+            <param name="text">Text string to send</param>
+            <returns>'true' if the text was successfully sent, 'false' if the text was not sent</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.Receive(System.Net.EndPoint@,System.Byte[])">
+            <summary>
+            Receive a new datagram from the given endpoint (synchronous)
+            </summary>
+            <param name="endpoint">Endpoint to receive from</param>
+            <param name="buffer">Datagram buffer to receive</param>
+            <returns>Size of received datagram</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.Receive(System.Net.EndPoint@,System.Byte[],System.Int64,System.Int64)">
+            <summary>
+            Receive a new datagram from the given endpoint (synchronous)
+            </summary>
+            <param name="endpoint">Endpoint to receive from</param>
+            <param name="buffer">Datagram buffer to receive</param>
+            <param name="offset">Datagram buffer offset</param>
+            <param name="size">Datagram buffer size</param>
+            <returns>Size of received datagram</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.Receive(System.Net.EndPoint@,System.Int64)">
+            <summary>
+            Receive text from the given endpoint (synchronous)
+            </summary>
+            <param name="endpoint">Endpoint to receive from</param>
+            <param name="size">Text size to receive</param>
+            <returns>Received text</returns>
+        </member>
+        <member name="M:AIO.Net.UdpServer.ReceiveAsync">
+            <summary>
+            Receive datagram from the client (asynchronous)
+            </summary>
+        </member>
+        <member name="M:AIO.Net.UdpServer.TryReceive">
+            <summary>
+            Try to receive new data
+            </summary>
+        </member>
+        <member name="M:AIO.Net.UdpServer.TrySend">
+            <summary>
+            Try to send pending data
+            </summary>
+        </member>
+        <member name="M:AIO.Net.UdpServer.ClearBuffers">
+            <summary>
+            Clear send/receive buffers
+            </summary>
+        </member>
+        <member name="M:AIO.Net.UdpServer.OnAsyncCompleted(System.Object,System.Net.Sockets.SocketAsyncEventArgs)">
+            <summary>
+            This method is called whenever a receive or send operation is completed on a socket
+            </summary>
+        </member>
+        <member name="M:AIO.Net.UdpServer.ProcessReceiveFrom(System.Net.Sockets.SocketAsyncEventArgs)">
+            <summary>
+            This method is invoked when an asynchronous receive from operation completes
+            </summary>
+        </member>
+        <member name="M:AIO.Net.UdpServer.ProcessSendTo(System.Net.Sockets.SocketAsyncEventArgs)">
+            <summary>
+            This method is invoked when an asynchronous send to operation completes
+            </summary>
+        </member>
+        <member name="M:AIO.Net.UdpServer.OnStarting">
+            <summary>
+            Handle server starting notification
+            </summary>
+        </member>
+        <member name="M:AIO.Net.UdpServer.OnStarted">
+            <summary>
+            Handle server started notification
+            </summary>
+        </member>
+        <member name="M:AIO.Net.UdpServer.OnStopping">
+            <summary>
+            Handle server stopping notification
+            </summary>
+        </member>
+        <member name="M:AIO.Net.UdpServer.OnStopped">
+            <summary>
+            Handle server stopped notification
+            </summary>
+        </member>
+        <member name="M:AIO.Net.UdpServer.OnReceived(System.Net.EndPoint,System.Byte[],System.Int64,System.Int64)">
+            <summary>
+            Handle datagram received notification
+            </summary>
+            <param name="endpoint">Received endpoint</param>
+            <param name="buffer">Received datagram buffer</param>
+            <param name="offset">Received datagram buffer offset</param>
+            <param name="size">Received datagram buffer size</param>
+            <remarks>
+            Notification is called when another datagram was received from some endpoint
+            </remarks>
+        </member>
+        <member name="M:AIO.Net.UdpServer.OnSent(System.Net.EndPoint,System.Int64)">
+            <summary>
+            Handle datagram sent notification
+            </summary>
+            <param name="endpoint">Endpoint of sent datagram</param>
+            <param name="sent">Size of sent datagram buffer</param>
+            <remarks>
+            Notification is called when a datagram was sent to the client.
+            This handler could be used to send another datagram to the client for instance when the pending size is zero.
+            </remarks>
+        </member>
+        <member name="M:AIO.Net.UdpServer.OnError(System.Net.Sockets.SocketError)">
+            <summary>
+            Handle error notification
+            </summary>
+            <param name="error">Socket error code</param>
+        </member>
+        <member name="M:AIO.Net.UdpServer.SendError(System.Net.Sockets.SocketError)">
+            <summary>
+            Send error notification
+            </summary>
+            <param name="error">Socket error code</param>
+        </member>
+        <member name="P:AIO.Net.UdpServer.IsDisposed">
+            <summary>
+            Disposed flag
+            </summary>
+        </member>
+        <member name="P:AIO.Net.UdpServer.IsSocketDisposed">
+            <summary>
+            Server socket disposed flag
+            </summary>
+        </member>
+        <member name="M:AIO.Net.UdpServer.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.Net.UdpServer.Dispose(System.Boolean)">
+            <summary>
+            Dispose the server
+            </summary>
+            <param name="disposingManagedResources"></param>
+        </member>
         <member name="T:AIO.LockDisposable">
             <summary>
             Disposable lock class performs exit action on dispose operation.

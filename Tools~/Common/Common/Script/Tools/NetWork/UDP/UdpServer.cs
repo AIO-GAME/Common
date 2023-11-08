@@ -1,10 +1,11 @@
 ﻿/*|============|*|
 |*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-07
+|*|Date:       |*| 2023-11-08
 |*|E-Mail:     |*| xinansky99@foxmail.com
 |*|============|*/
 
 using System;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -12,52 +13,52 @@ using System.Text;
 namespace AIO.Net
 {
     /// <summary>
-    /// UDP client is used to read/write data from/into the connected UDP server
+    /// UDP server is used to send or multicast datagrams to UDP endpoints
     /// </summary>
     /// <remarks>Thread-safe</remarks>
-    public class UdpClient : IDisposable
+    public class UdpServer : IDisposable
     {
         /// <summary>
-        /// Initialize UDP client with a given server IP address and port number
+        /// Initialize UDP server with a given IP address and port number
         /// </summary>
         /// <param name="address">IP address</param>
         /// <param name="port">Port number</param>
-        public UdpClient(IPAddress address, int port) : this(new IPEndPoint(address, port))
+        public UdpServer(IPAddress address, int port) : this(new IPEndPoint(address, port))
         {
         }
 
         /// <summary>
-        /// Initialize UDP client with a given server IP address and port number
+        /// Initialize UDP server with a given IP address and port number
         /// </summary>
         /// <param name="address">IP address</param>
         /// <param name="port">Port number</param>
-        public UdpClient(string address, int port) : this(new IPEndPoint(IPAddress.Parse(address), port))
+        public UdpServer(string address, int port) : this(new IPEndPoint(IPAddress.Parse(address), port))
         {
         }
 
         /// <summary>
-        /// Initialize UDP client with a given DNS endpoint
+        /// Initialize UDP server with a given DNS endpoint
         /// </summary>
         /// <param name="endpoint">DNS endpoint</param>
-        public UdpClient(DnsEndPoint endpoint) : this(endpoint, endpoint.Host, endpoint.Port)
+        public UdpServer(DnsEndPoint endpoint) : this(endpoint, endpoint.Host, endpoint.Port)
         {
         }
 
         /// <summary>
-        /// Initialize UDP client with a given IP endpoint
+        /// Initialize UDP server with a given IP endpoint
         /// </summary>
         /// <param name="endpoint">IP endpoint</param>
-        public UdpClient(IPEndPoint endpoint) : this(endpoint, endpoint.Address.ToString(), endpoint.Port)
+        public UdpServer(IPEndPoint endpoint) : this(endpoint, endpoint.Address.ToString(), endpoint.Port)
         {
         }
 
         /// <summary>
-        /// Initialize UDP client with a given endpoint, address and port
+        /// Initialize UDP server with a given endpoint, address and port
         /// </summary>
         /// <param name="endpoint">Endpoint</param>
         /// <param name="address">Server address</param>
         /// <param name="port">Server port</param>
-        private UdpClient(EndPoint endpoint, string address, int port)
+        private UdpServer(EndPoint endpoint, string address, int port)
         {
             Id = Guid.NewGuid();
             Address = address;
@@ -66,7 +67,7 @@ namespace AIO.Net
         }
 
         /// <summary>
-        /// Client Id
+        /// Server Id
         /// </summary>
         public Guid Id { get; }
 
@@ -86,37 +87,42 @@ namespace AIO.Net
         public EndPoint Endpoint { get; private set; }
 
         /// <summary>
+        /// Multicast endpoint
+        /// </summary>
+        public EndPoint MulticastEndpoint { get; private set; }
+
+        /// <summary>
         /// Socket
         /// </summary>
         public Socket Socket { get; private set; }
 
         /// <summary>
-        /// Number of bytes pending sent by the client
+        /// Number of bytes pending sent by the server
         /// </summary>
         public long BytesPending { get; private set; }
 
         /// <summary>
-        /// Number of bytes sending by the client
+        /// Number of bytes sending by the server
         /// </summary>
         public long BytesSending { get; private set; }
 
         /// <summary>
-        /// Number of bytes sent by the client
+        /// Number of bytes sent by the server
         /// </summary>
         public long BytesSent { get; private set; }
 
         /// <summary>
-        /// Number of bytes received by the client
+        /// Number of bytes received by the server
         /// </summary>
         public long BytesReceived { get; private set; }
 
         /// <summary>
-        /// Number of datagrams sent by the client
+        /// Number of datagrams sent by the server
         /// </summary>
         public long DatagramsSent { get; private set; }
 
         /// <summary>
-        /// Number of datagrams received by the client
+        /// Number of datagrams received by the server
         /// </summary>
         public long DatagramsReceived { get; private set; }
 
@@ -141,14 +147,9 @@ namespace AIO.Net
         /// Option: enables a socket to be bound for exclusive access
         /// </summary>
         /// <remarks>
-        /// This option will enable/disable SO_EXCLUSIVENESS if the OS support this feature
+        /// This option will enable/disable SO_EXCLUSIVEADDRUSE if the OS support this feature
         /// </remarks>
         public bool OptionExclusiveAddressUse { get; set; }
-
-        /// <summary>
-        /// Option: bind the socket to the multicast UDP server
-        /// </summary>
-        public bool OptionMulticast { get; set; }
 
         /// <summary>
         /// Option: receive buffer limit
@@ -173,9 +174,9 @@ namespace AIO.Net
         #region Connect/Disconnect client
 
         /// <summary>
-        /// Is the client connected?
+        /// Is the server started?
         /// </summary>
-        public bool IsConnected { get; private set; }
+        public bool IsStarted { get; private set; }
 
         /// <summary>
         /// Create a new socket object
@@ -190,12 +191,13 @@ namespace AIO.Net
         }
 
         /// <summary>
-        /// Connect the client (synchronous)
+        /// Start the server (synchronous)
         /// </summary>
-        /// <returns>'true' if the client was successfully connected, 'false' if the client failed to connect</returns>
-        public virtual bool Connect()
+        /// <returns>'true' if the server was successfully started, 'false' if the server failed to start</returns>
+        public virtual bool Start()
         {
-            if (IsConnected)
+            Debug.Assert(!IsStarted, "UDP server is already started!");
+            if (IsStarted)
                 return false;
 
             // Setup buffers
@@ -208,10 +210,10 @@ namespace AIO.Net
             _sendEventArg = new SocketAsyncEventArgs();
             _sendEventArg.Completed += OnAsyncCompleted;
 
-            // Create a new client socket
+            // Create a new server socket
             Socket = CreateSocket();
 
-            // Update the client socket disposed flag
+            // Update the server socket disposed flag
             IsSocketDisposed = false;
 
             // Apply the option: reuse address
@@ -219,55 +221,17 @@ namespace AIO.Net
             // Apply the option: exclusive address use
             Socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ExclusiveAddressUse,
                 OptionExclusiveAddressUse);
-            // Apply the option: dual mode (this option must be applied before receiving/sending)
+            // Apply the option: dual mode (this option must be applied before recieving)
             if (Socket.AddressFamily == AddressFamily.InterNetworkV6)
                 Socket.DualMode = OptionDualMode;
 
-            // Call the client connecting handler
-            OnConnecting();
+            // Bind the server socket to the endpoint
+            Socket.Bind(Endpoint);
+            // Refresh the endpoint property based on the actual endpoint created
+            Endpoint = Socket.LocalEndPoint;
 
-            try
-            {
-                // Bind the acceptor socket to the endpoint
-                if (OptionMulticast)
-                    Socket.Bind(Endpoint);
-                else
-                {
-                    var endpoint =
-                        new IPEndPoint(
-                            (Endpoint.AddressFamily == AddressFamily.InterNetworkV6)
-                                ? IPAddress.IPv6Any
-                                : IPAddress.Any, 0);
-                    Socket.Bind(endpoint);
-                }
-            }
-            catch (SocketException ex)
-            {
-                // Call the client error handler
-                SendError(ex.SocketErrorCode);
-
-                // Reset event args
-                _receiveEventArg.Completed -= OnAsyncCompleted;
-                _sendEventArg.Completed -= OnAsyncCompleted;
-
-                // Call the client disconnecting handler
-                OnDisconnecting();
-
-                // Close the client socket
-                Socket.Close();
-
-                // Dispose the client socket
-                Socket.Dispose();
-
-                // Dispose event arguments
-                _receiveEventArg.Dispose();
-                _sendEventArg.Dispose();
-
-                // Call the client disconnected handler
-                OnDisconnected();
-
-                return false;
-            }
+            // Call the server starting handler
+            OnStarting();
 
             // Prepare receive endpoint
             _receiveEndpoint =
@@ -285,52 +249,82 @@ namespace AIO.Net
             DatagramsSent = 0;
             DatagramsReceived = 0;
 
-            // Update the connected flag
-            IsConnected = true;
+            // Update the started flag
+            IsStarted = true;
 
-            // Call the client connected handler
-            OnConnected();
+            // Call the server started handler
+            OnStarted();
 
             return true;
         }
 
         /// <summary>
-        /// Disconnect the client (synchronous)
+        /// Start the server with a given multicast IP address and port number (synchronous)
         /// </summary>
-        /// <returns>'true' if the client was successfully disconnected, 'false' if the client is already disconnected</returns>
-        public virtual bool Disconnect()
+        /// <param name="multicastAddress">Multicast IP address</param>
+        /// <param name="multicastPort">Multicast port number</param>
+        /// <returns>'true' if the server was successfully started, 'false' if the server failed to start</returns>
+        public virtual bool Start(IPAddress multicastAddress, int multicastPort) =>
+            Start(new IPEndPoint(multicastAddress, multicastPort));
+
+        /// <summary>
+        /// Start the server with a given multicast IP address and port number (synchronous)
+        /// </summary>
+        /// <param name="multicastAddress">Multicast IP address</param>
+        /// <param name="multicastPort">Multicast port number</param>
+        /// <returns>'true' if the server was successfully started, 'false' if the server failed to start</returns>
+        public virtual bool Start(string multicastAddress, int multicastPort) =>
+            Start(new IPEndPoint(IPAddress.Parse(multicastAddress), multicastPort));
+
+        /// <summary>
+        /// Start the server with a given multicast endpoint (synchronous)
+        /// </summary>
+        /// <param name="multicastEndpoint">Multicast endpoint</param>
+        /// <returns>'true' if the server was successfully started, 'false' if the server failed to start</returns>
+        public virtual bool Start(EndPoint multicastEndpoint)
         {
-            if (!IsConnected)
+            MulticastEndpoint = multicastEndpoint;
+            return Start();
+        }
+
+        /// <summary>
+        /// Stop the server (synchronous)
+        /// </summary>
+        /// <returns>'true' if the server was successfully stopped, 'false' if the server is already stopped</returns>
+        public virtual bool Stop()
+        {
+            Debug.Assert(IsStarted, "UDP server is not started!");
+            if (!IsStarted)
                 return false;
 
             // Reset event args
             _receiveEventArg.Completed -= OnAsyncCompleted;
             _sendEventArg.Completed -= OnAsyncCompleted;
 
-            // Call the client disconnecting handler
-            OnDisconnecting();
+            // Call the server stopping handler
+            OnStopping();
 
             try
             {
-                // Close the client socket
+                // Close the server socket
                 Socket.Close();
 
-                // Dispose the client socket
+                // Dispose the server socket
                 Socket.Dispose();
 
                 // Dispose event arguments
                 _receiveEventArg.Dispose();
                 _sendEventArg.Dispose();
 
-                // Update the client socket disposed flag
+                // Update the server socket disposed flag
                 IsSocketDisposed = true;
             }
             catch (ObjectDisposedException)
             {
             }
 
-            // Update the connected flag
-            IsConnected = false;
+            // Update the started flag
+            IsStarted = false;
 
             // Update sending/receiving flags
             _receiving = false;
@@ -339,85 +333,22 @@ namespace AIO.Net
             // Clear send/receive buffers
             ClearBuffers();
 
-            // Call the client disconnected handler
-            OnDisconnected();
+            // Call the server stopped handler
+            OnStopped();
 
             return true;
         }
 
         /// <summary>
-        /// Reconnect the client (synchronous)
+        /// Restart the server (synchronous)
         /// </summary>
-        /// <returns>'true' if the client was successfully reconnected, 'false' if the client is already reconnected</returns>
-        public virtual bool Reconnect()
+        /// <returns>'true' if the server was successfully restarted, 'false' if the server failed to restart</returns>
+        public virtual bool Restart()
         {
-            return Disconnect() && Connect();
-        }
+            if (!Stop())
+                return false;
 
-        #endregion
-
-        #region Multicast group
-
-        /// <summary>
-        /// Setup multicast: bind the socket to the multicast UDP server
-        /// </summary>
-        /// <param name="enable">Enable/disable multicast</param>
-        public virtual void SetupMulticast(bool enable)
-        {
-            OptionReuseAddress = enable;
-            OptionMulticast = enable;
-        }
-
-        /// <summary>
-        /// Join multicast group with a given IP address (synchronous)
-        /// </summary>
-        /// <param name="address">IP address</param>
-        public virtual void JoinMulticastGroup(IPAddress address)
-        {
-            if (Endpoint.AddressFamily == AddressFamily.InterNetworkV6)
-                Socket.SetSocketOption(SocketOptionLevel.IPv6, SocketOptionName.AddMembership,
-                    new IPv6MulticastOption(address));
-            else
-                Socket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.AddMembership,
-                    new MulticastOption(address));
-
-            // Call the client joined multicast group notification
-            OnJoinedMulticastGroup(address);
-        }
-
-        /// <summary>
-        /// Join multicast group with a given IP address (synchronous)
-        /// </summary>
-        /// <param name="address">IP address</param>
-        public virtual void JoinMulticastGroup(string address)
-        {
-            JoinMulticastGroup(IPAddress.Parse(address));
-        }
-
-        /// <summary>
-        /// Leave multicast group with a given IP address (synchronous)
-        /// </summary>
-        /// <param name="address">IP address</param>
-        public virtual void LeaveMulticastGroup(IPAddress address)
-        {
-            if (Endpoint.AddressFamily == AddressFamily.InterNetworkV6)
-                Socket.SetSocketOption(SocketOptionLevel.IPv6, SocketOptionName.DropMembership,
-                    new IPv6MulticastOption(address));
-            else
-                Socket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.DropMembership,
-                    new MulticastOption(address));
-
-            // Call the client left multicast group notification
-            OnLeftMulticastGroup(address);
-        }
-
-        /// <summary>
-        /// Leave multicast group with a given IP address (synchronous)
-        /// </summary>
-        /// <param name="address">IP address</param>
-        public virtual void LeaveMulticastGroup(string address)
-        {
-            LeaveMulticastGroup(IPAddress.Parse(address));
+            return Start();
         }
 
         #endregion
@@ -441,13 +372,80 @@ namespace AIO.Net
         private SocketAsyncEventArgs _sendEventArg;
 
         /// <summary>
+        /// Multicast datagram to the prepared multicast endpoint (synchronous)
+        /// </summary>
+        /// <param name="buffer">Datagram buffer to multicast</param>
+        /// <returns>Size of multicasted datagram</returns>
+        public virtual long Multicast(byte[] buffer)
+        {
+            return Send(MulticastEndpoint, buffer);
+        }
+
+        /// <summary>
+        /// Multicast datagram to the prepared multicast endpoint (synchronous)
+        /// </summary>
+        /// <param name="buffer">Datagram buffer to multicast</param>
+        /// <param name="offset">Datagram buffer offset</param>
+        /// <param name="size">Datagram buffer size</param>
+        /// <returns>Size of multicasted datagram</returns>
+        public virtual long Multicast(byte[] buffer, long offset, long size)
+        {
+            var data = new byte[size];
+            Array.Copy(buffer, offset, data, 0, size);
+            return Send(MulticastEndpoint, data);
+        }
+
+        /// <summary>
+        /// Multicast text to the prepared multicast endpoint (synchronous)
+        /// </summary>
+        /// <param name="text">Text string to multicast</param>
+        /// <returns>Size of multicasted datagram</returns>
+        public virtual long Multicast(string text)
+        {
+            return Send(MulticastEndpoint, Encoding.UTF8.GetBytes(text));
+        }
+
+        /// <summary>
+        /// Multicast datagram to the prepared multicast endpoint (asynchronous)
+        /// </summary>
+        /// <param name="buffer">Datagram buffer to multicast</param>
+        /// <returns>'true' if the datagram was successfully multicasted, 'false' if the datagram was not multicasted</returns>
+        public virtual bool MulticastAsync(byte[] buffer) => SendAsync(MulticastEndpoint, buffer);
+
+        /// <summary>
+        /// Multicast datagram to the prepared multicast endpoint (asynchronous)
+        /// </summary>
+        /// <param name="buffer">Datagram buffer to multicast</param>
+        /// <param name="offset">Datagram buffer offset</param>
+        /// <param name="size">Datagram buffer size</param>
+        /// <returns>'true' if the datagram was successfully multicasted, 'false' if the datagram was not multicasted</returns>
+        public virtual bool MulticastAsync(byte[] buffer, long offset, long size)
+        {
+            var data = new byte[size];
+            Array.Copy(buffer, offset, data, 0, size);
+            return SendAsync(MulticastEndpoint, data);
+        }
+
+        /// <summary>
+        /// Multicast text to the prepared multicast endpoint (asynchronous)
+        /// </summary>
+        /// <param name="text">Text string to multicast</param>
+        /// <returns>'true' if the text was successfully multicasted, 'false' if the text was not multicasted</returns>
+        public virtual bool MulticastAsync(string text) => SendAsync(MulticastEndpoint, Encoding.UTF8.GetBytes(text));
+
+        /// <summary>
         /// Send datagram to the connected server (synchronous)
         /// </summary>
         /// <param name="buffer">Datagram buffer to send</param>
         /// <param name="offset">Datagram buffer offset</param>
         /// <param name="size">Datagram buffer size</param>
         /// <returns>Size of sent datagram</returns>
-        public virtual long Send(byte[] buffer, int offset, int size) => Send(Endpoint, buffer, offset, size);
+        public virtual long Send(byte[] buffer, long offset, long size)
+        {
+            var data = new byte[size];
+            Array.Copy(buffer, offset, data, 0, size);
+            return Send(Endpoint, data);
+        }
 
         /// <summary>
         /// Send datagram to the connected server (synchronous)
@@ -461,7 +459,7 @@ namespace AIO.Net
         /// </summary>
         /// <param name="text">Text string to send</param>
         /// <returns>Size of sent datagram</returns>
-        public virtual long Send(string text) => Send(Encoding.UTF8.GetBytes(text));
+        public virtual long Send(string text) => Send(Endpoint, Encoding.UTF8.GetBytes(text));
 
         /// <summary>
         /// Send datagram to the given endpoint (synchronous)
@@ -471,7 +469,7 @@ namespace AIO.Net
         /// <param name="offset">Datagram buffer offset</param>
         /// <param name="size">Datagram buffer size</param>
         /// <returns>Size of sent datagram</returns>
-        public virtual long Send(EndPoint endpoint, byte[] buffer, int offset, int size)
+        public virtual long Send(EndPoint endpoint, byte[] buffer, long offset, long size)
         {
             var data = new byte[size];
             Array.Copy(buffer, offset, data, 0, size);
@@ -486,7 +484,7 @@ namespace AIO.Net
         /// <returns>Size of sent datagram</returns>
         public virtual long Send(EndPoint endpoint, byte[] buffer)
         {
-            if (!IsConnected)
+            if (!IsStarted)
                 return 0;
 
             if (buffer is null || buffer.Length == 0)
@@ -494,7 +492,7 @@ namespace AIO.Net
 
             try
             {
-                // Sent datagram to the server
+                // Sent datagram to the client
                 long sent = Socket.SendTo(buffer, SocketFlags.None, endpoint);
                 if (sent > 0)
                 {
@@ -515,7 +513,6 @@ namespace AIO.Net
             catch (SocketException ex)
             {
                 SendError(ex.SocketErrorCode);
-                Disconnect();
                 return 0;
             }
         }
@@ -529,29 +526,6 @@ namespace AIO.Net
         public virtual long Send(EndPoint endpoint, string text) => Send(endpoint, Encoding.UTF8.GetBytes(text));
 
         /// <summary>
-        /// Send datagram to the connected server (asynchronous)
-        /// </summary>
-        /// <param name="buffer">Datagram buffer to send</param>
-        /// <param name="offset">Datagram buffer offset</param>
-        /// <param name="size">Datagram buffer size</param>
-        /// <returns>'true' if the datagram was successfully sent, 'false' if the datagram was not sent</returns>
-        public virtual bool SendAsync(byte[] buffer, int offset, int size) => SendAsync(Endpoint, buffer, offset, size);
-
-        /// <summary>
-        /// Send datagram to the connected server (asynchronous)
-        /// </summary>
-        /// <param name="buffer">Datagram buffer to send as a span of bytes</param>
-        /// <returns>'true' if the datagram was successfully sent, 'false' if the datagram was not sent</returns>
-        public virtual bool SendAsync(byte[] buffer) => SendAsync(Endpoint, buffer);
-
-        /// <summary>
-        /// Send text to the connected server (asynchronous)
-        /// </summary>
-        /// <param name="text">Text string to send</param>
-        /// <returns>'true' if the text was successfully sent, 'false' if the text was not sent</returns>
-        public virtual bool SendAsync(string text) => SendAsync(Encoding.UTF8.GetBytes(text));
-
-        /// <summary>
         /// Send datagram to the given endpoint (asynchronous)
         /// </summary>
         /// <param name="endpoint">Endpoint to send</param>
@@ -559,7 +533,7 @@ namespace AIO.Net
         /// <param name="offset">Datagram buffer offset</param>
         /// <param name="size">Datagram buffer size</param>
         /// <returns>'true' if the datagram was successfully sent, 'false' if the datagram was not sent</returns>
-        public virtual bool SendAsync(EndPoint endpoint, byte[] buffer, int offset, int size)
+        public virtual bool SendAsync(EndPoint endpoint, byte[] buffer, long offset, long size)
         {
             var data = new byte[size];
             Array.Copy(buffer, offset, data, 0, size);
@@ -577,7 +551,7 @@ namespace AIO.Net
             if (_sending)
                 return false;
 
-            if (!IsConnected)
+            if (!IsStarted)
                 return false;
 
             if (buffer is null || buffer.Length == 0)
@@ -635,7 +609,7 @@ namespace AIO.Net
         /// <returns>Size of received datagram</returns>
         public virtual long Receive(ref EndPoint endpoint, byte[] buffer, long offset, long size)
         {
-            if (!IsConnected)
+            if (!IsStarted)
                 return 0;
 
             if (size == 0)
@@ -643,7 +617,7 @@ namespace AIO.Net
 
             try
             {
-                // Receive datagram from the server
+                // Receive datagram from the client
                 long received = Socket.ReceiveFrom(buffer, (int)offset, (int)size, SocketFlags.None, ref endpoint);
 
                 // Update statistic
@@ -662,7 +636,6 @@ namespace AIO.Net
             catch (SocketException ex)
             {
                 SendError(ex.SocketErrorCode);
-                Disconnect();
                 return 0;
             }
         }
@@ -681,7 +654,7 @@ namespace AIO.Net
         }
 
         /// <summary>
-        /// Receive datagram from the server (asynchronous)
+        /// Receive datagram from the client (asynchronous)
         /// </summary>
         public virtual void ReceiveAsync()
         {
@@ -697,7 +670,7 @@ namespace AIO.Net
             if (_receiving)
                 return;
 
-            if (!IsConnected)
+            if (!IsStarted)
                 return;
 
             try
@@ -722,7 +695,7 @@ namespace AIO.Net
             if (_sending)
                 return;
 
-            if (!IsConnected)
+            if (!IsStarted)
                 return;
 
             try
@@ -785,18 +758,21 @@ namespace AIO.Net
         {
             _receiving = false;
 
-            if (!IsConnected)
+            if (!IsStarted)
                 return;
 
-            // Disconnect on error
+            // Check for error
             if (e.SocketError != SocketError.Success)
             {
                 SendError(e.SocketError);
-                Disconnect();
+
+                // Call the datagram received zero handler
+                OnReceived(e.RemoteEndPoint, _receiveBuffer.Arrays, 0, 0);
+
                 return;
             }
 
-            // Received some data from the server
+            // Received some data from the client
             long size = e.BytesTransferred;
 
             // Update statistic
@@ -813,7 +789,10 @@ namespace AIO.Net
                 if (((2 * size) > OptionReceiveBufferLimit) && (OptionReceiveBufferLimit > 0))
                 {
                     SendError(SocketError.NoBufferSpaceAvailable);
-                    Disconnect();
+
+                    // Call the datagram received zero handler
+                    OnReceived(e.RemoteEndPoint, _receiveBuffer.Arrays, 0, 0);
+
                     return;
                 }
 
@@ -828,20 +807,23 @@ namespace AIO.Net
         {
             _sending = false;
 
-            if (!IsConnected)
+            if (!IsStarted)
                 return;
 
-            // Disconnect on error
+            // Check for error
             if (e.SocketError != SocketError.Success)
             {
                 SendError(e.SocketError);
-                Disconnect();
+
+                // Call the buffer sent zero handler
+                OnSent(_sendEndpoint, 0);
+
                 return;
             }
 
             long sent = e.BytesTransferred;
 
-            // Send some data to the server
+            // Send some data to the client
             if (sent > 0)
             {
                 // Update statistic
@@ -858,49 +840,33 @@ namespace AIO.Net
 
         #endregion
 
-        #region Session handlers
+        #region Datagram handlers
 
         /// <summary>
-        /// Handle client connecting notification
+        /// Handle server starting notification
         /// </summary>
-        protected virtual void OnConnecting()
+        protected virtual void OnStarting()
         {
         }
 
         /// <summary>
-        /// Handle client connected notification
+        /// Handle server started notification
         /// </summary>
-        protected virtual void OnConnected()
+        protected virtual void OnStarted()
         {
         }
 
         /// <summary>
-        /// Handle client disconnecting notification
+        /// Handle server stopping notification
         /// </summary>
-        protected virtual void OnDisconnecting()
+        protected virtual void OnStopping()
         {
         }
 
         /// <summary>
-        /// Handle client disconnected notification
+        /// Handle server stopped notification
         /// </summary>
-        protected virtual void OnDisconnected()
-        {
-        }
-
-        /// <summary>
-        /// Handle client joined multicast group notification
-        /// </summary>
-        /// <param name="address">IP address</param>
-        protected virtual void OnJoinedMulticastGroup(IPAddress address)
-        {
-        }
-
-        /// <summary>
-        /// Handle client left multicast group notification
-        /// </summary>
-        /// <param name="address">IP address</param>
-        protected virtual void OnLeftMulticastGroup(IPAddress address)
+        protected virtual void OnStopped()
         {
         }
 
@@ -924,8 +890,8 @@ namespace AIO.Net
         /// <param name="endpoint">Endpoint of sent datagram</param>
         /// <param name="sent">Size of sent datagram buffer</param>
         /// <remarks>
-        /// Notification is called when a datagram was sent to the server.
-        /// This handler could be used to send another datagram to the server for instance when the pending size is zero.
+        /// Notification is called when a datagram was sent to the client.
+        /// This handler could be used to send another datagram to the client for instance when the pending size is zero.
         /// </remarks>
         protected virtual void OnSent(EndPoint endpoint, long sent)
         {
@@ -970,7 +936,7 @@ namespace AIO.Net
         public bool IsDisposed { get; private set; }
 
         /// <summary>
-        /// Client socket disposed flag
+        /// Server socket disposed flag
         /// </summary>
         public bool IsSocketDisposed { get; private set; } = true;
 
@@ -983,7 +949,7 @@ namespace AIO.Net
         }
 
         /// <summary>
-        /// Dispose client resources
+        /// Dispose the server
         /// </summary>
         /// <param name="disposingManagedResources"></param>
         protected virtual void Dispose(bool disposingManagedResources)
@@ -1000,16 +966,21 @@ namespace AIO.Net
             // refer to reference type fields because those objects may
             // have already been finalized."
 
-            if (IsDisposed) return;
-            // Dispose managed resources here...
-            if (disposingManagedResources) Disconnect();
+            if (!IsDisposed)
+            {
+                if (disposingManagedResources)
+                {
+                    // Dispose managed resources here...
+                    Stop();
+                }
 
-            // Dispose unmanaged resources here...
+                // Dispose unmanaged resources here...
 
-            // Set large fields to null here...
+                // Set large fields to null here...
 
-            // Mark as disposed.
-            IsDisposed = true;
+                // Mark as disposed.
+                IsDisposed = true;
+            }
         }
 
         #endregion

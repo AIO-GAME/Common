@@ -10,6 +10,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.TcpClient", "..\..\..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.TcpServer", "..\..\..\..\..\..\Tenncent\Script\Common\Tools~\Test\Test.TcpServer\Test.TcpServer.csproj", "{EE395AF9-32DC-4BCE-823A-0F552E4C8176}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.UdpClient", "..\..\..\..\..\..\Tenncent\Script\Common\Tools~\Test\Test.UdpClient\Test.UdpClient.csproj", "{C5610064-CC28-409C-BE7A-DDC7003C8F28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.UdpServer", "..\..\..\..\..\..\Tenncent\Script\Common\Tools~\Test\Test.UdpServer\Test.UdpServer.csproj", "{702596D1-6F14-485F-AE61-1CAC7B4B799D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,13 @@ Global
 		{EE395AF9-32DC-4BCE-823A-0F552E4C8176}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE395AF9-32DC-4BCE-823A-0F552E4C8176}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE395AF9-32DC-4BCE-823A-0F552E4C8176}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5610064-CC28-409C-BE7A-DDC7003C8F28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5610064-CC28-409C-BE7A-DDC7003C8F28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5610064-CC28-409C-BE7A-DDC7003C8F28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5610064-CC28-409C-BE7A-DDC7003C8F28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{702596D1-6F14-485F-AE61-1CAC7B4B799D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{702596D1-6F14-485F-AE61-1CAC7B4B799D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{702596D1-6F14-485F-AE61-1CAC7B4B799D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{702596D1-6F14-485F-AE61-1CAC7B4B799D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
