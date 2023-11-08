@@ -12,8 +12,8 @@ namespace AIO.Net
 {
     public partial class TcpSession
     {
-        // Receive buffer
         private bool Receiving;
+
         private Buffer ReceiveBuffer;
 
         private SocketAsyncEventArgs ReceiveEventArg;
@@ -22,20 +22,10 @@ namespace AIO.Net
         /// Receive data from the client (synchronous)
         /// </summary>
         /// <param name="buffer">Buffer to receive</param>
-        /// <returns>Size of received data</returns>
-        public long Receive(byte[] buffer)
-        {
-            return Receive(buffer, 0, buffer.Length);
-        }
-
-        /// <summary>
-        /// Receive data from the client (synchronous)
-        /// </summary>
-        /// <param name="buffer">Buffer to receive</param>
         /// <param name="offset">Buffer offset</param>
         /// <param name="size">Buffer size</param>
         /// <returns>Size of received data</returns>
-        public virtual long Receive(byte[] buffer, int offset, int size)
+        public virtual int Receive(byte[] buffer, int offset, int size)
         {
             if (!IsConnected) return 0;
 
@@ -68,15 +58,6 @@ namespace AIO.Net
         /// </summary>
         public virtual void ReceiveAsync()
         {
-            // Try to receive data from the client
-            TryReceive();
-        }
-
-        /// <summary>
-        /// Try to receive new data
-        /// </summary>
-        private void TryReceive()
-        {
             if (Receiving) return;
             if (!IsConnected) return;
 
@@ -98,7 +79,6 @@ namespace AIO.Net
                 }
             }
         }
-
 
         /// <summary>
         /// This method is invoked when an asynchronous receive operation completes

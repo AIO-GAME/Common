@@ -112,7 +112,7 @@ namespace AIO.Net
         /// <summary>
         /// Client option / 客户端选项
         /// </summary>
-        public TcpSettingClient Option { get; } = new TcpSettingClient();
+        public NetSettingClient Option { get; } = new NetSettingClient();
 
         /// <summary>
         /// Clear send/receive buffers / 清除发送/接收缓冲区

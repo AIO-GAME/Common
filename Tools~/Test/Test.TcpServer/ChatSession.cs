@@ -22,7 +22,7 @@ internal class ChatSession : TcpSession
 
         // Send invite message
         const string message = "Hello from TCP chat! Please send a message or '!' to disconnect the client!";
-        SendAsync(message);
+        this.SendAsync(message);
     }
 
     protected override void OnDisconnected()

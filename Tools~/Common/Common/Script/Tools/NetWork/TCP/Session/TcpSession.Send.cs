@@ -14,10 +14,15 @@ namespace AIO.Net
     {
         // Send buffer
         private readonly object SendLock = new object();
-        private bool Sending;
+
         private Buffer SendBufferMain;
+
         private Buffer SendBufferFlush;
+
+        private bool Sending;
+
         private SocketAsyncEventArgs SendEventArg;
+
         private long SendBufferFlushOffset;
 
         /// <summary>
@@ -56,42 +61,6 @@ namespace AIO.Net
         }
 
         /// <summary>
-        /// Send text to the client (synchronous)
-        /// </summary>
-        /// <param name="buffer">Buffer to send</param>
-        /// <param name="offset">Buffer offset</param>
-        /// <param name="size">Buffer size</param>
-        /// <returns>Size of sent data</returns>
-        public int Send(byte[] buffer, int offset, int size)
-        {
-            var target = new byte[size - offset];
-            Array.ConstrainedCopy(buffer, offset, target, 0, size);
-            return Send(target);
-        }
-
-        /// <summary>
-        /// Send text to the client (synchronous)
-        /// </summary>
-        /// <param name="text">Text string to send</param>
-        /// <returns>Size of sent data</returns>
-        public int Send(string text)
-        {
-            var buffer = new BufferByte();
-            buffer.WriteStringUTF8(text);
-            return Send(buffer.ToArray());
-        }
-
-        /// <summary>
-        /// Send text to the client (synchronous)
-        /// </summary>
-        /// <param name="buffer">Buffer to send</param>
-        /// <returns>Size of sent data</returns>
-        public int Send(BufferByte buffer)
-        {
-            return Send(buffer.ToArray());
-        }
-
-        /// <summary>
         /// Send data to the client (asynchronous)
         /// </summary>
         /// <param name="buffer">Buffer to send</param>
@@ -126,42 +95,6 @@ namespace AIO.Net
             }
 
             return true;
-        }
-
-        /// <summary>
-        /// Send data to the client (asynchronous)
-        /// </summary>
-        /// <param name="buffer">Buffer to send</param>
-        /// <param name="offset">Buffer offset</param>
-        /// <param name="size">Buffer size</param>
-        /// <returns>'true' if the data was successfully sent, 'false' if the session is not connected</returns>
-        public bool SendAsync(byte[] buffer, int offset, int size)
-        {
-            var target = new byte[size - offset];
-            Array.ConstrainedCopy(buffer, offset, target, 0, size);
-            return SendAsync(target);
-        }
-
-        /// <summary>
-        /// Send text to the client (asynchronous)
-        /// </summary>
-        /// <param name="text">Text string to send</param>
-        /// <returns>'true' if the text was successfully sent, 'false' if the session is not connected</returns>
-        public bool SendAsync(string text)
-        {
-            var buffer = new BufferByte();
-            buffer.WriteStringUTF8(text);
-            return SendAsync(buffer.ToArray());
-        }
-
-        /// <summary>
-        /// Send text to the client (asynchronous)
-        /// </summary>
-        /// <param name="buffer">Buffer to send</param>
-        /// <returns>'true' if the text was successfully sent, 'false' if the session is not connected</returns>
-        public bool SendAsync(BufferByte buffer)
-        {
-            return SendAsync(buffer.ToArray());
         }
 
         /// <summary>
@@ -223,6 +156,51 @@ namespace AIO.Net
                 catch (ObjectDisposedException)
                 {
                 }
+            }
+        }
+
+
+        /// <summary>
+        /// This method is invoked when an asynchronous send operation completes
+        /// </summary>
+        private bool ProcessSend(SocketAsyncEventArgs e)
+        {
+            if (!IsConnected)
+                return false;
+
+            long size = e.BytesTransferred;
+
+            // Send some data to the client
+            if (size > 0)
+            {
+                // Update statistic
+                BytesSending -= size;
+                BytesSent += size;
+                Interlocked.Add(ref Server._bytesSent, size);
+
+                // Increase the flush buffer offset
+                SendBufferFlushOffset += size;
+
+                // Successfully send the whole flush buffer
+                if (SendBufferFlushOffset == SendBufferFlush.Count)
+                {
+                    // Clear the flush buffer
+                    SendBufferFlush.Clear();
+                    SendBufferFlushOffset = 0;
+                }
+
+                // Call the buffer sent handler
+                OnSent(size, BytesPending + BytesSending);
+            }
+
+            // Try to send again if the session is valid
+            if (e.SocketError == SocketError.Success)
+                return true;
+            else
+            {
+                SendError(e.SocketError);
+                Disconnect();
+                return false;
             }
         }
     }

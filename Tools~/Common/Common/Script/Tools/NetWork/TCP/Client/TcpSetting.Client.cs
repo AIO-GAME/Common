@@ -9,7 +9,7 @@ namespace AIO.Net
     /// <summary>
     /// TCP client setting 
     /// </summary>
-    public class TcpSettingClient : TcpSetting
+    public class NetSettingClient : NetSetting
     {
         /// <summary>
         /// Option: receive buffer limit/选项：接收缓冲区限制

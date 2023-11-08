@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.Sockets;
-using System.Threading;
 
 namespace AIO.Net
 {
@@ -8,7 +7,7 @@ namespace AIO.Net
     /// TCP session is used to read and write data from the connected TCP client
     /// </summary>
     /// <remarks>Thread-safe</remarks>
-    public partial class TcpSession : IDisposable
+    public partial class TcpSession : INetSession
     {
         /// <summary>
         /// Initialize the session with a given server
@@ -140,7 +139,7 @@ namespace AIO.Net
             IsConnected = true;
 
             // Try to receive something from the client
-            TryReceive();
+            ReceiveAsync();
 
             // Check the socket disposed state: in some rare cases it might be disconnected while receiving!
             if (IsSocketDisposed) return;
@@ -264,7 +263,7 @@ namespace AIO.Net
             {
                 case SocketAsyncOperation.Receive:
                     if (ProcessReceive(e))
-                        TryReceive();
+                        ReceiveAsync();
                     break;
                 case SocketAsyncOperation.Send:
                     if (ProcessSend(e))
@@ -272,50 +271,6 @@ namespace AIO.Net
                     break;
                 default:
                     throw new ArgumentException("The last operation completed on the socket was not a receive or send");
-            }
-        }
-
-        /// <summary>
-        /// This method is invoked when an asynchronous send operation completes
-        /// </summary>
-        private bool ProcessSend(SocketAsyncEventArgs e)
-        {
-            if (!IsConnected)
-                return false;
-
-            long size = e.BytesTransferred;
-
-            // Send some data to the client
-            if (size > 0)
-            {
-                // Update statistic
-                BytesSending -= size;
-                BytesSent += size;
-                Interlocked.Add(ref Server._bytesSent, size);
-
-                // Increase the flush buffer offset
-                SendBufferFlushOffset += size;
-
-                // Successfully send the whole flush buffer
-                if (SendBufferFlushOffset == SendBufferFlush.Count)
-                {
-                    // Clear the flush buffer
-                    SendBufferFlush.Clear();
-                    SendBufferFlushOffset = 0;
-                }
-
-                // Call the buffer sent handler
-                OnSent(size, BytesPending + BytesSending);
-            }
-
-            // Try to send again if the session is valid
-            if (e.SocketError == SocketError.Success)
-                return true;
-            else
-            {
-                SendError(e.SocketError);
-                Disconnect();
-                return false;
             }
         }
 
@@ -431,7 +386,6 @@ namespace AIO.Net
         /// </summary>
         public bool IsSocketDisposed { get; private set; } = true;
 
-        // Implement IDisposable.
         /// <inheritdoc />
         public void Dispose()
         {

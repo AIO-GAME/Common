@@ -51,14 +51,14 @@ namespace AIO.Net
         /// <param name="response">HTTP response</param>
         /// <returns>Size of sent data</returns>
         public long SendResponse(HttpResponse response) =>
-            Send(response.Cache.Arrays, response.Cache.Offset, response.Cache.Count);
+            this.Send(response.Cache.Arrays, response.Cache.Offset, response.Cache.Count);
 
         /// <summary>
         /// Send the HTTP response body (synchronous)
         /// </summary>
         /// <param name="body">HTTP response body</param>
         /// <returns>Size of sent data</returns>
-        public long SendResponseBody(string body) => Send(body);
+        public long SendResponseBody(string body) => this.Send(body);
 
         /// <summary>
         /// Send the HTTP response body (synchronous)
@@ -74,7 +74,7 @@ namespace AIO.Net
         /// <param name="offset">HTTP response body buffer offset</param>
         /// <param name="size">HTTP response body size</param>
         /// <returns>Size of sent data</returns>
-        public long SendResponseBody(byte[] buffer, int offset, int size) => Send(buffer, offset, size);
+        public long SendResponseBody(byte[] buffer, int offset, int size) => this.Send(buffer, offset, size);
 
         /// <summary>
         /// Send the current HTTP response (asynchronous)
@@ -88,14 +88,14 @@ namespace AIO.Net
         /// <param name="response">HTTP response</param>
         /// <returns>'true' if the current HTTP response was successfully sent, 'false' if the session is not connected</returns>
         public bool SendResponseAsync(HttpResponse response) =>
-            SendAsync(response.Cache.Arrays, response.Cache.Offset, response.Cache.Count);
+            this.SendAsync(response.Cache.Arrays, response.Cache.Offset, response.Cache.Count);
 
         /// <summary>
         /// Send the HTTP response body (asynchronous)
         /// </summary>
         /// <param name="body">HTTP response body</param>
         /// <returns>'true' if the HTTP response body was successfully sent, 'false' if the session is not connected</returns>
-        public bool SendResponseBodyAsync(string body) => SendAsync(body);
+        public bool SendResponseBodyAsync(string body) => this.SendAsync(body);
 
         /// <summary>
         /// Send the HTTP response body (asynchronous)
@@ -111,7 +111,7 @@ namespace AIO.Net
         /// <param name="offset">HTTP response body buffer offset</param>
         /// <param name="size">HTTP response body size</param>
         /// <returns>'true' if the HTTP response body was successfully sent, 'false' if the session is not connected</returns>
-        public bool SendResponseBodyAsync(byte[] buffer, int offset, int size) => SendAsync(buffer, offset, size);
+        public bool SendResponseBodyAsync(byte[] buffer, int offset, int size) => this.SendAsync(buffer, offset, size);
 
         #endregion
 

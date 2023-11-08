@@ -9,7 +9,7 @@ namespace AIO.Net
     /// <summary>
     /// TCP server/client setting 
     /// </summary>
-    public class TcpSetting
+    public class NetSetting
     {
         /// <summary>
         /// Option: dual mode socket/双模式套接字

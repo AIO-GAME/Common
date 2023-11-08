@@ -9,7 +9,7 @@ namespace AIO.Net
     /// <summary>
     /// TCP server setting 
     /// </summary>
-    public class TcpSettingServer : TcpSetting
+    public class NetSettingServer : NetSetting
     {
         /// <summary>
         /// Option: reuse address
