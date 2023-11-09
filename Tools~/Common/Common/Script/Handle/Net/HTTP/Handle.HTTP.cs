@@ -49,6 +49,11 @@ public partial class AHandle
         public string Cookie { get; set; }
 
         /// <summary>
+        /// 内容类型
+        /// </summary>
+        public string ContentType { get; set; } = "application/json";
+
+        /// <summary>
         /// 编码
         /// </summary>
         public Encoding Encoding { get; set; } = Encoding.UTF8;
@@ -642,7 +647,18 @@ public partial class AHandle
         public string Post(string remoteRelativePath)
         {
             var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-            return AHelper.Net.HTTP.Post(sourcePath, Encoding, TimeOut, Cookie);
+            return AHelper.Net.HTTP.Post(sourcePath, GetOption());
+        }
+
+        private AHelper.Net.HTTP.Option GetOption()
+        {
+            return new AHelper.Net.HTTP.Option
+            {
+                Encoding = Encoding,
+                Timeout = TimeOut,
+                Cookie = Cookie,
+                ContentType = ContentType
+            };
         }
 
         /// <summary>
@@ -654,7 +670,7 @@ public partial class AHandle
         public string Post(string remoteRelativePath, byte[] data)
         {
             var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-            return AHelper.Net.HTTP.Post(sourcePath, data, Encoding, TimeOut, Cookie);
+            return AHelper.Net.HTTP.Post(sourcePath, data, GetOption());
         }
 
         /// <summary>
@@ -666,7 +682,7 @@ public partial class AHandle
         public string Post(string remoteRelativePath, string data)
         {
             var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-            return AHelper.Net.HTTP.Post(sourcePath, data, Encoding, TimeOut, Cookie);
+            return AHelper.Net.HTTP.Post(sourcePath, data, GetOption());
         }
 
         /// <summary>
@@ -677,7 +693,7 @@ public partial class AHandle
         public Task<string> PostAsync(string remoteRelativePath)
         {
             var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-            return AHelper.Net.HTTP.PostAsync(sourcePath, Encoding, TimeOut, Cookie);
+            return AHelper.Net.HTTP.PostAsync(sourcePath, GetOption());
         }
 
         /// <summary>
@@ -689,7 +705,7 @@ public partial class AHandle
         public Task<string> PostAsync(string remoteRelativePath, byte[] data)
         {
             var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-            return AHelper.Net.HTTP.PostAsync(sourcePath, data, Encoding, TimeOut, Cookie);
+            return AHelper.Net.HTTP.PostAsync(sourcePath, data, GetOption());
         }
 
         /// <summary>
@@ -701,7 +717,7 @@ public partial class AHandle
         public Task<string> PostAsync(string remoteRelativePath, string data)
         {
             var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-            return AHelper.Net.HTTP.PostAsync(sourcePath, data, Encoding, TimeOut, Cookie);
+            return AHelper.Net.HTTP.PostAsync(sourcePath, data, GetOption());
         }
 
         /// <summary>
@@ -712,7 +728,7 @@ public partial class AHandle
         public Stream PostStream(string remoteRelativePath)
         {
             var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-            return AHelper.Net.HTTP.PostStream(sourcePath, TimeOut, Cookie);
+            return AHelper.Net.HTTP.PostStream(sourcePath, GetOption());
         }
 
         /// <summary>
@@ -724,7 +740,7 @@ public partial class AHandle
         public Stream PostStream(string remoteRelativePath, byte[] data)
         {
             var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-            return AHelper.Net.HTTP.PostStream(sourcePath, data, TimeOut, Cookie);
+            return AHelper.Net.HTTP.PostStream(sourcePath, data, GetOption());
         }
 
         /// <summary>
@@ -736,7 +752,7 @@ public partial class AHandle
         public Stream PostStream(string remoteRelativePath, string data)
         {
             var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-            return AHelper.Net.HTTP.PostStream(sourcePath, data, Encoding, TimeOut, Cookie);
+            return AHelper.Net.HTTP.PostStream(sourcePath, data, GetOption());
         }
 
         /// <summary>
@@ -747,7 +763,7 @@ public partial class AHandle
         public Task<Stream> PostStreamAsync(string remoteRelativePath)
         {
             var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-            return AHelper.Net.HTTP.PostStreamAsync(sourcePath, TimeOut, Cookie);
+            return AHelper.Net.HTTP.PostStreamAsync(sourcePath, GetOption());
         }
 
         /// <summary>
@@ -759,7 +775,7 @@ public partial class AHandle
         public Task<Stream> PostStreamAsync(string remoteRelativePath, byte[] data)
         {
             var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-            return AHelper.Net.HTTP.PostStreamAsync(sourcePath, data, TimeOut, Cookie);
+            return AHelper.Net.HTTP.PostStreamAsync(sourcePath, data, GetOption());
         }
 
         /// <summary>
@@ -771,7 +787,7 @@ public partial class AHandle
         public Task<Stream> PostStreamAsync(string remoteRelativePath, string data)
         {
             var sourcePath = Path.Combine(RemoteURL, remoteRelativePath);
-            return AHelper.Net.HTTP.PostStreamAsync(sourcePath, data, Encoding, TimeOut, Cookie);
+            return AHelper.Net.HTTP.PostStreamAsync(sourcePath, data, GetOption());
         }
 
         #endregion

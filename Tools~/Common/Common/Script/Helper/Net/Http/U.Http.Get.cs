@@ -12,6 +12,62 @@ public partial class AHelper
         public partial class HTTP
         {
             /// <summary>
+            /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            /// </summary>
+            public sealed class Option
+            {
+                /// <summary>
+                /// 超时时间
+                /// </summary>
+                public ushort Timeout;
+
+                /// <summary>
+                /// cookie
+                /// </summary>
+                public string Cookie;
+
+                /// <summary>
+                /// 编码:默认UTF-8
+                /// </summary>
+                public Encoding Encoding;
+
+                /// <summary>
+                /// 默认:application/x-www-form-urlencoded
+                /// </summary>
+                public string ContentType;
+
+                /// <summary>
+                /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+                /// </summary>
+                public Option()
+                {
+                    Timeout = TIMEOUT;
+                    Cookie = string.Empty;
+                    Encoding = Encoding.UTF8;
+                    ContentType = "application/json";
+                }
+
+                /// <summary>
+                /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+                /// </summary>
+                /// <param name="encoding">编码:默认UTF-8</param>
+                /// <param name="timeout">超时时间</param>
+                /// <param name="cookie">cookie</param>
+                /// <param name="contentType"></param>
+                public Option(
+                    ushort timeout,
+                    string cookie,
+                    Encoding encoding,
+                    string contentType)
+                {
+                    Timeout = timeout;
+                    Cookie = cookie;
+                    Encoding = encoding ?? Encoding.UTF8;
+                    ContentType = contentType;
+                }
+            }
+
+            /// <summary>
             /// 请求获取特定的内容
             /// </summary>
             /// <param name="remoteUrl">路径</param>

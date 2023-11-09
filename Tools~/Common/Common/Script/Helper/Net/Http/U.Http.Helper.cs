@@ -232,7 +232,7 @@ public partial class AHelper
             {
                 var remote = remoteUrl.Replace("\\", "/");
                 var request = (HttpWebRequest)WebRequest.Create(remote);
-
+                request.Date = DateTime.Now;
                 request.Timeout = timeout;
                 request.AllowAutoRedirect = true;
                 request.MaximumAutomaticRedirections = 1;

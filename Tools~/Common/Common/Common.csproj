@@ -514,6 +514,7 @@
     <Compile Include="Script\Handle\AHandle.cs" />
     <Compile Include="Script\Handle\Net\FTP\Handle.FTP.cs" />
     <Compile Include="Script\Handle\Net\HTTP\Handle.HTTP.cs" />
+    <Compile Include="Script\Helper\Database\Encrypt.cs" />
     <Compile Include="Script\Helper\Database\U.FileID.cs" />
     <Compile Include="Script\Helper\Database\U.Json.MINIJSON.cs" />
     <Compile Include="Script\Helper\Exception\NetGetResponseStream.cs" />
@@ -538,6 +539,7 @@
     <Compile Include="Script\Helper\Net\U.Net.cs" />
     <Compile Include="Script\Helper\Net\U.Net.Helper.cs" />
     <Compile Include="Script\Helper\Reflect\U.Reflect.cs" />
+    <Compile Include="Script\Helper\Time\UTimeStamp.cs" />
     <Compile Include="Script\Interface\Disposable\LockDisposable.cs" />
     <Compile Include="Script\Interface\ILoad.cs" />
     <Compile Include="Script\Interface\ISave.cs" />

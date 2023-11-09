@@ -20,7 +20,7 @@ public partial class AHelper
         /// <summary>
         /// 序列化 未加密
         /// </summary>
-        public static string Serialize<T>(T data)
+        public static string SerializeData<T>(T data)
         {
             using (var stream = new MemoryStream())
             {
@@ -33,7 +33,7 @@ public partial class AHelper
         /// <summary>
         /// 序列化 未加密
         /// </summary>
-        public static string Serialize<T>(in T data) where T : struct
+        public static string SerializeData<T>(in T data) where T : struct
         {
             using (var stream = new MemoryStream())
             {
