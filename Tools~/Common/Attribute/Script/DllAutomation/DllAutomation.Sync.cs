@@ -3,7 +3,7 @@
 |*|Date:     |*| -> 2023-06-12
 |*|==========|*/
 
-#if NO_UNITY
+#if !NO_UNITY
 
 using System.Collections;
 using System;

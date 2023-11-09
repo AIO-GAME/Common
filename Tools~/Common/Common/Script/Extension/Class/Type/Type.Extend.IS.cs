@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace AIO
 {
-    public partial class TypeExtend
+    public partial class ExtendType
     {
         private static readonly HashSet<Type> numericTypes = new HashSet<Type>
         {

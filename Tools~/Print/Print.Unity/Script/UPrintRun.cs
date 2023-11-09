@@ -1,5 +1,4 @@
 ﻿using AIO;
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,14 +20,15 @@ namespace UnityEngine
             public override void Finish(string format = "g")
             {
                 stopWatch.Stop();
-                Log(string.Format("{0} {1} {2}", $"[<color=#E47833><b>{stopWatch.Elapsed.ToString(format)}</b></color>]".PadRight(30), "->", Title));
+                Log(string.Format("{0} {1} {2}",
+                    $"[<color=#E47833><b>{stopWatch.Elapsed.ToString(format)}</b></color>]".PadRight(30), "->", Title));
             }
         }
 
         /// <summary>
         /// 输出详细执行时间
         /// </summary>
-        [Conditional(MACRO_DEFINITION)]
+        [Conditional(MACRO_DEFINITION), DebuggerHidden, DebuggerNonUserCode]
         public static void Run<T>(
             in string title,
             in T actions,
@@ -53,7 +53,7 @@ namespace UnityEngine
         /// <summary>
         /// 输出详细执行时间
         /// </summary>
-        [Conditional(MACRO_DEFINITION)]
+        [Conditional(MACRO_DEFINITION), DebuggerHidden, DebuggerNonUserCode]
         public static void Run(
             in string title,
             in Action action,
@@ -70,7 +70,7 @@ namespace UnityEngine
         /// <summary>
         /// 输出详细执行时间
         /// </summary>
-        [Conditional(MACRO_DEFINITION)]
+        [Conditional(MACRO_DEFINITION), DebuggerHidden, DebuggerNonUserCode]
         public static void Run(
             in string title,
             in Action action0,
@@ -89,7 +89,7 @@ namespace UnityEngine
         /// <summary>
         /// 输出详细执行时间
         /// </summary>
-        [Conditional(MACRO_DEFINITION)]
+        [Conditional(MACRO_DEFINITION), DebuggerHidden, DebuggerNonUserCode]
         public static void Run(
             in string title,
             in Action action0,
@@ -110,7 +110,7 @@ namespace UnityEngine
         /// <summary>
         /// 输出详细执行时间
         /// </summary>
-        [Conditional(MACRO_DEFINITION)]
+        [Conditional(MACRO_DEFINITION), DebuggerHidden, DebuggerNonUserCode]
         public static void Run(
             in string title,
             in Action action0,
@@ -133,7 +133,7 @@ namespace UnityEngine
         /// <summary>
         /// 输出详细执行时间
         /// </summary>
-        [Conditional(MACRO_DEFINITION)]
+        [Conditional(MACRO_DEFINITION), DebuggerHidden, DebuggerNonUserCode]
         public static void Run<T>(
             in string title,
             in Action<T> action,
@@ -151,7 +151,7 @@ namespace UnityEngine
         /// <summary>
         /// 输出详细执行时间
         /// </summary>
-        [Conditional(MACRO_DEFINITION)]
+        [Conditional(MACRO_DEFINITION), DebuggerHidden, DebuggerNonUserCode]
         public static void Run<T, V>(
             in string title,
             in Action<T, V> action,
@@ -170,7 +170,7 @@ namespace UnityEngine
         /// <summary>
         /// 输出详细执行时间
         /// </summary>
-        [Conditional(MACRO_DEFINITION)]
+        [Conditional(MACRO_DEFINITION), DebuggerHidden, DebuggerNonUserCode]
         public static void Run<T, V, W>(
             in string title,
             in Action<T, V, W> action,
@@ -190,7 +190,7 @@ namespace UnityEngine
         /// <summary>
         /// 输出详细执行时间
         /// </summary>
-        [Conditional(MACRO_DEFINITION)]
+        [Conditional(MACRO_DEFINITION), DebuggerHidden, DebuggerNonUserCode]
         public static void Run<T, V, W, Z>(
             in string title,
             in Action<T, V, W, Z> action,

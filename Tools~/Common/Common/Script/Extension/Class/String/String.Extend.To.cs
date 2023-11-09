@@ -2,7 +2,7 @@
 
 namespace AIO
 {
-    public static partial class StringExtend
+    public static partial class ExtendString
     {
         /// <summary>
         /// 将整数类型的值转换为指定长度的二进制字符串。如果二进制字符串长度小于指定长度，则在左侧使用字符 '0' 进行填充。

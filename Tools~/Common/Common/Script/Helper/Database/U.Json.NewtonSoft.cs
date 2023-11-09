@@ -18,7 +18,7 @@ public partial class AHelper
     /// Json 工具类
     /// </summary>
     [Description("https://www.newtonsoft.com/json/help/html/N_Newtonsoft_Json.htm")]
-    public static partial class Json
+    public partial class Json
     {
         static Json()
         {

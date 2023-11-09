@@ -14,7 +14,6 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
-using UnityEditor.Graphs;
 using UnityEngine;
 using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
@@ -23,9 +22,7 @@ namespace AIO.UEditor
     /// <summary>
     /// 获取全部 Unity GUI Style Viewer 样式
     /// </summary>
-    [GWindow("Built In GUI Style View", Group = "Tools",
-        MinSizeWidth = 600, MinSizeHeight = 600
-    )]
+    [GWindow("Built In GUI Style View", Group = "Tools", MinSizeWidth = 600, MinSizeHeight = 600)]
     public class BuiltInGUIStyleGraphWindow : GraphicWindow
     {
         public BuiltInGUIStyleGraphWindow()
@@ -52,7 +49,7 @@ namespace AIO.UEditor
         }
 
 
-        protected override void OnGUI()
+        protected override void OnDraw()
         {
             if (Label == null) Label = new GUIStyle("SearchTextField");
             if (Content == null) Content = new GUIStyle("DD HeaderStyle");

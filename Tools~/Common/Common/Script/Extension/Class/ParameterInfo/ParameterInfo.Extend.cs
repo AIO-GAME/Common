@@ -7,7 +7,7 @@ namespace AIO
     /// <summary>
     /// 参数信息扩展
     /// </summary>
-    public static partial class ParameterInfoExtend
+    public static partial class ExtendParameterInfo
     {
         /// <summary>
         /// 是否为Out

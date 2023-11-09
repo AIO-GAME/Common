@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace AIO
 {
@@ -26,9 +27,10 @@ namespace AIO
         }
 
         /// <inheritdoc/>
-        public BufferByte(byte[] bytes) : base(bytes)
+        public BufferByte(byte[] bytes, int index = 0, int count = 0) : base(bytes, index, count)
         {
         }
+
 
         /// <inheritdoc/>
         public BufferByte(int capacity) : base(capacity)
@@ -83,7 +85,8 @@ namespace AIO
         /// <inheritdoc/>
         public override string ToString()
         {
-            return string.Concat("Byte Buffer:{ offset = ", ReadIndex, ", top=", WriteIndex, ", data = ", AHelper.Hex.ToHex(ToArray()), '}');
+            return string.Concat("Byte Buffer:{ offset = ", ReadIndex, ", top=", WriteIndex, ", data = ",
+                AHelper.Hex.ToHex(ToArray()), '}');
         }
 
         /// <summary>

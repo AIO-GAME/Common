@@ -7,7 +7,7 @@ public partial class AHelper
     /// <summary>
     /// 计算MD5
     /// </summary>
-    public static partial class MD5
+    public partial class MD5
     {
         /// <summary>
         /// 通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得MD5

@@ -10,7 +10,7 @@ namespace AIO
     /// <summary>
     /// 句柄
     /// </summary>
-    public static partial class IntPtrExtend
+    public static partial class ExtendIntPtr
     {
 
     }

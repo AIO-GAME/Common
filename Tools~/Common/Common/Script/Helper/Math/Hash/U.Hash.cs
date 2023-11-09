@@ -11,18 +11,16 @@ using System.Security.Cryptography;
 using System.Text;
 using AIO;
 
-public static partial class AHelper
+public partial class AHelper
 {
     /// <summary>
     /// hash工具
     /// </summary>
-    public static partial class Hash
+    public partial class Hash
     {
         private static string ToString(byte[] hashBytes)
         {
-            var result = BitConverter.ToString(hashBytes);
-            result = result.Replace("-", "");
-            return result.ToLower();
+            return BitConverter.ToString(hashBytes).ToLower().Replace("-", "");
         }
 
         #region SHA1

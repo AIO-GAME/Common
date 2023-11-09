@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using AIO.YamlDotNet.Core;
 using AIO.YamlDotNet.Serialization.ObjectFactories;
-
+#nullable enable
 namespace AIO.YamlDotNet.Serialization.NodeDeserializers
 {
 	internal class StaticDictionaryNodeDeserializer : DictionaryDeserializer, INodeDeserializer

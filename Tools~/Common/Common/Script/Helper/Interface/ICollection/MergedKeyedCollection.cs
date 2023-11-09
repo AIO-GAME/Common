@@ -44,7 +44,8 @@ namespace AIO
             {
                 if (key == null) throw new ArgumentNullException(nameof(key));
 
-                foreach (var collectionByType in collections.Where(collectionByType => collectionByType.Value.Contains(key)))
+                foreach (var collectionByType in collections.Where(collectionByType =>
+                             collectionByType.Value.Contains(key)))
                 {
                     return collectionByType.Value[key];
                 }
@@ -81,7 +82,8 @@ namespace AIO
         /// <returns></returns>
         public IKeyedCollection<TKey, TSubItem> ForType<TSubItem>() where TSubItem : TItem
         {
-            return ((VariantKeyedCollection<TItem, TSubItem, TKey>)GetCollectionForType(typeof(TSubItem))).implementation;
+            return ((VariantKeyedCollection<TItem, TSubItem, TKey>)GetCollectionForType(typeof(TSubItem)))
+                .implementation;
         }
 
         /// <summary>
@@ -104,8 +106,7 @@ namespace AIO
         /// <returns></returns>
         protected IKeyedCollection<TKey, TItem> GetCollectionForItem(TItem item)
         {
-            Ensure.That(nameof(item)).IsNotNull(item);
-
+            if (item is null) throw new ArgumentNullException(nameof(item));
             return GetCollectionForType(item.GetType());
         }
 
@@ -118,14 +119,14 @@ namespace AIO
         /// <exception cref="InvalidOperationException"></exception>
         protected IKeyedCollection<TKey, TItem> GetCollectionForType(Type type, bool throwOnFail = true)
         {
-            Ensure.That(nameof(type)).IsNotNull(type);
-
+            if (type is null) throw new ArgumentNullException(nameof(type));
             if (collectionsLookup.TryGetValue(type, out var collection))
             {
                 return collection;
             }
 
-            foreach (var collectionByType in collections.Where(collectionByType => collectionByType.Key.IsAssignableFrom(type)))
+            foreach (var collectionByType in collections.Where(collectionByType =>
+                         collectionByType.Key.IsAssignableFrom(type)))
             {
                 collection = collectionByType.Value;
                 collectionsLookup.Add(type, collection);
@@ -154,7 +155,8 @@ namespace AIO
             // Optim: avoid boxing here.
             // Ensure.That(nameof(key)).IsNotNull(key);
 
-            foreach (var collectionsByType in collections.Where(collectionsByType => collectionsByType.Value.Contains(key)))
+            foreach (var collectionsByType in collections.Where(collectionsByType =>
+                         collectionsByType.Value.Contains(key)))
             {
                 return collectionsByType.Value;
             }

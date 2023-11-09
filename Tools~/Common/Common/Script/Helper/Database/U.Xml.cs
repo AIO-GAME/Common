@@ -16,7 +16,7 @@ public partial class AHelper
     /// <summary>
     /// XML 工具类
     /// </summary>
-    public static partial class Xml
+    public partial class Xml
     {
         /// <summary>
         /// 序列化

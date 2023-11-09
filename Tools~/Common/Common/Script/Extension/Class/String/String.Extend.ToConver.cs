@@ -11,7 +11,7 @@ using System.Text;
 
 namespace AIO
 {
-    public static partial class StringExtend
+    public static partial class ExtendString
     {
         /// <summary>
         /// 解析字符串为 ulong

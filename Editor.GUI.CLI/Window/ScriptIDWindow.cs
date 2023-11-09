@@ -20,7 +20,7 @@ namespace AIO.UEditor
             m_material.hideFlags = HideFlags.HideAndDontSave;
         }
 
-        protected override void OnGUI()
+        protected override void OnDraw()
         {
             EditorGUILayout.BeginVertical();
             EditorGUILayout.Space();

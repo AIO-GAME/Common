@@ -6,7 +6,7 @@
     /// <summary>
     /// 字符扩展
     /// </summary>
-    public static partial class CharExtend
+    public static partial class ExtendChar
     {
         /// <summary>
         /// 重复字符

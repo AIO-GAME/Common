@@ -1,6 +1,6 @@
 using System;
 using AIO.YamlDotNet.Serialization.Utilities;
-
+#pragma warning disable
 namespace AIO.YamlDotNet.Serialization.NamingConventions
 {
 	internal sealed class UnderscoredNamingConvention : INamingConvention

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace AIO
 {
-    public partial class TypeExtend
+    public partial class ExtendType
     {
         /// <summary>
         /// 获取指定类型及其基类和接口实现的列表。

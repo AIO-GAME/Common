@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace AIO
 {
-    public static partial class IDictionaryExtend
+    public static partial class ExtendIDictionary
     {
         /// <summary>
         /// 添加相同元素

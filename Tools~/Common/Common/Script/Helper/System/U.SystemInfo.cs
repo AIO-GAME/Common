@@ -11,7 +11,7 @@ public partial class AHelper
     /// <summary>
     /// 设备信息 .NET API
     /// </summary>
-    public static partial class SystemInfo
+    public partial class SystemInfo
     {
         /// <summary>
         /// 获取用户设备名

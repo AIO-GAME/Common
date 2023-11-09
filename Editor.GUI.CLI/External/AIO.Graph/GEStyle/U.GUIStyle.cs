@@ -27,10 +27,32 @@ namespace AIO.UEditor
         /// <summary>
         /// 获取皮肤
         /// </summary>
-        public static UGUIStyle Get(in string name)
+        public static UGUIStyle Get(in string styleName)
         {
-            if (!StylesDic.ContainsKey(name)) StylesDic.Add(name, new UGUIStyle(name));
-            return StylesDic[name];
+            if (StylesDic.ContainsKey(styleName)) return StylesDic[styleName];
+
+            var s = GUI.skin.FindStyle(styleName);
+            if (s == null) s = EditorGUIUtility.GetBuiltinSkin(EditorSkin.Inspector).FindStyle(styleName);
+            if (s == null)
+            {
+                try
+                {
+                    s = new GUIStyle(styleName);
+                }
+                catch (Exception)
+                {
+                    // ignored
+                }
+            }
+
+            if (s == null)
+            {
+                Debug.LogError("Missing built-in guistyle " + styleName);
+                s = new GUIStyle();
+            }
+
+            StylesDic.Add(styleName, s);
+            return StylesDic[styleName];
         }
 
         public static void Gen()

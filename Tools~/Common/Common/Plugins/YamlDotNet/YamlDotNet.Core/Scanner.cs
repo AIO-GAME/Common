@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using AIO.YamlDotNet.Core.Tokens;
 using AIO.YamlDotNet.Helpers;
-
+#nullable enable
 namespace AIO.YamlDotNet.Core
 {
 	internal class Scanner : IScanner

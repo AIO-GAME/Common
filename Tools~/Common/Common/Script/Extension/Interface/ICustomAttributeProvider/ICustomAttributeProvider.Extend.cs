@@ -6,7 +6,7 @@
     /// <summary>
     /// 为支持自定义属性的反映对象提供自定义属性。扩展
     /// </summary>
-    public static class ICustomAttributeProviderExtend
+    public static class ExtendICustomAttributeProvider
     {
         /// <summary>
         /// 获取自定义属性

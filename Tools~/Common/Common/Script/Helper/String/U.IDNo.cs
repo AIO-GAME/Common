@@ -6,7 +6,6 @@
 
 
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 
 public partial class AHelper
@@ -14,7 +13,7 @@ public partial class AHelper
     /// <summary>
     /// 身份证判断方法
     /// </summary>
-    public static class IDNo
+    public class IDNo
     {
         /// <summary>
         /// 18位二代身份证号码的正则表达式

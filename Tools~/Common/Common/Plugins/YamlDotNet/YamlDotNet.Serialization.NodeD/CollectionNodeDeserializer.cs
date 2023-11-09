@@ -5,7 +5,8 @@ using AIO.YamlDotNet.Core;
 using AIO.YamlDotNet.Core.Events;
 using AIO.YamlDotNet.Helpers;
 using AIO.YamlDotNet.Serialization.Utilities;
-
+#nullable enable
+#pragma warning disable CS8600
 namespace AIO.YamlDotNet.Serialization.NodeDeserializers
 {
 	internal sealed class CollectionNodeDeserializer : INodeDeserializer

@@ -1,6 +1,6 @@
 using System;
 using System.IO;
-
+#pragma warning disable
 namespace AIO.ICSharpCode.SharpZipLib.Zip
 {
     internal class DiskArchiveStorage : BaseArchiveStorage

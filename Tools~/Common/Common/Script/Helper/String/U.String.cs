@@ -16,7 +16,7 @@ public partial class AHelper
     /// <summary>
     /// 字符串工具库
     /// </summary>
-    public static partial class String
+    public partial class String
     {
         private static readonly StringBlock BlockTemplate;
         private static readonly StringBlock SpaceTemplate;
@@ -47,7 +47,7 @@ public partial class AHelper
         /// <summary>
         /// 转化为区块
         /// </summary>
-        public static string ToConvert(in StringBlock Unicode, params string[] context)
+        internal static string ToConvert(in StringBlock Unicode, params string[] context)
         {
             return (Unicode ?? SpaceTemplate).Convert(context);
         }

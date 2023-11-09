@@ -156,5 +156,32 @@ namespace AIO.UEditor
 #endif
 
         #endregion
+
+        private static Color HeaderBorderColor
+        {
+            get
+            {
+                var shade = EditorGUIUtility.isProSkin ? 0.12f : 0.6f;
+                return new Color(shade, shade, shade, 1);
+            }
+        }
+
+        private static Color HeaderNormalColor
+        {
+            get
+            {
+                var shade = EditorGUIUtility.isProSkin ? 62f / 255f : 205f / 255f;
+                return new Color(shade, shade, shade, 1);
+            }
+        }
+
+        private static Color HeaderHoverColor
+        {
+            get
+            {
+                var shade = EditorGUIUtility.isProSkin ? 70f / 255f : 215f / 255f;
+                return new Color(shade, shade, shade, 1);
+            }
+        }
     }
 }

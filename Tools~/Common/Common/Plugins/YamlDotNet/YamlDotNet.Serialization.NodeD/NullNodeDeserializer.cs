@@ -1,7 +1,7 @@
 using System;
 using AIO.YamlDotNet.Core;
 using AIO.YamlDotNet.Core.Events;
-
+#nullable enable
 namespace AIO.YamlDotNet.Serialization.NodeDeserializers
 {
 	internal sealed class NullNodeDeserializer : INodeDeserializer

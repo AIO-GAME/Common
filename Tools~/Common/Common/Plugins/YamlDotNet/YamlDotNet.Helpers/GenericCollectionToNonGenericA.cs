@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+#pragma warning disable
 #nullable enable
 namespace AIO.YamlDotNet.Helpers
 {

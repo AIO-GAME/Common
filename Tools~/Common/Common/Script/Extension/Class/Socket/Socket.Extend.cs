@@ -15,13 +15,13 @@ namespace AIO
     /// <summary>
     /// Socket 扩展
     /// </summary>
-    public static partial class SocketExtend
+    public static partial class ExtendSocket
     {
         /// <summary>
         /// 转化为IP地址
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string ToConverIP(this Socket socket)
+        public static string ToConverseIP(this Socket socket)
         {
             if (!(socket.RemoteEndPoint is IPEndPoint endPoint))
                 throw new ArgumentException("The socket is not connected to a remote endpoint.");

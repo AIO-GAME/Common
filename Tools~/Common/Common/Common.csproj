@@ -24,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>bin\Debug\AIO.Common.xml</DocumentationFile>
+    <NoWarn>CS8600;</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,6 +36,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>bin\Release\AIO.Common.xml</DocumentationFile>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <NoWarn>CS8600;CS0809;CS8632;CS8603;CS0649;CS0809;CS8632;</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -429,8 +431,8 @@
     <Compile Include="Script\Algorithms\LruCache.cs" />
     <Compile Include="Script\Basics\HashAlgorithm\MD4.cs" />
     <Compile Include="Script\Extension\Class\Action\Action.Extend.cs" />
-    <Compile Include="Script\Extension\Class\AppDomain\AppDomainExtension.cs" />
-    <Compile Include="Script\Extension\Class\Assembly\AssemblyExtension.cs" />
+    <Compile Include="Script\Extension\Class\AppDomain\Extend.AppDomain.cs" />
+    <Compile Include="Script\Extension\Class\Assembly\Extend.Assembly.cs" />
     <Compile Include="Script\Extension\Class\FieldInfo\FieldInfo.Extend.IS.cs" />
     <Compile Include="Script\Extension\Class\IntPtr\IntPtr.Extend.cs" />
     <Compile Include="Script\Extension\Class\IntPtr\IntPtr.Extend.ToConver.cs" />
@@ -462,7 +464,7 @@
     <Compile Include="Script\Extension\Class\Type\Type.Extend.IS.cs" />
     <Compile Include="Script\Extension\Class\Type\Type.Extend.Reset.cs" />
     <Compile Include="Script\Extension\Class\Type\Type.Extend.To.cs" />
-    <Compile Include="Script\Extension\Enum\EnumExtend.cs" />
+    <Compile Include="Script\Extension\Enum\ExtendEnum.cs" />
     <Compile Include="Script\Extension\Exception\GenericClosingException.cs" />
     <Compile Include="Script\Extension\Interface\Empty.cs" />
     <Compile Include="Script\Extension\Interface\ICollection\ICollection.Extend.Find.cs" />
@@ -508,10 +510,86 @@
     <Compile Include="Script\Extension\Struct\Char\Char.Extend.IS.cs" />
     <Compile Include="Script\Extension\Struct\Char\Char.Extend.Judge.cs" />
     <Compile Include="Script\Extension\Struct\Char\Char.Extend.ToConver.cs" />
-    <Compile Include="Script\Extension\Struct\Long\Long.Extend.cs" />
+    <Compile Include="Script\Extension\Struct\Long\LongExtened.Extend.cs" />
+    <Compile Include="Script\Handle\AHandle.cs" />
+    <Compile Include="Script\Handle\Net\FTP\Handle.FTP.cs" />
+    <Compile Include="Script\Handle\Net\HTTP\Handle.HTTP.cs" />
     <Compile Include="Script\Helper\Database\U.FileID.cs" />
     <Compile Include="Script\Helper\Database\U.Json.MINIJSON.cs" />
+    <Compile Include="Script\Helper\Exception\NetGetResponseStream.cs" />
+    <Compile Include="Script\Helper\Net\Client\Buffer.cs" />
+    <Compile Include="Script\Helper\Net\FTP\U.FTP.Check.cs" />
+    <Compile Include="Script\Helper\Net\FTP\U.FTP.Create.cs" />
+    <Compile Include="Script\Helper\Net\FTP\U.FTP.Delete.cs" />
+    <Compile Include="Script\Helper\Net\FTP\U.FTP.Download.cs" />
+    <Compile Include="Script\Helper\Net\FTP\U.FTP.Get.cs" />
+    <Compile Include="Script\Helper\Net\FTP\U.FTP.Upload.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.Connect.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.Delete.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.Download.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.Downloads.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.Get.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.Head.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.Helper.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.Options.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.Post.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.Put.cs" />
+    <Compile Include="Script\Helper\Net\HTTP\U.Http.Trace.cs" />
+    <Compile Include="Script\Helper\Net\U.Net.cs" />
+    <Compile Include="Script\Helper\Net\U.Net.Helper.cs" />
     <Compile Include="Script\Helper\Reflect\U.Reflect.cs" />
+    <Compile Include="Script\Interface\Disposable\LockDisposable.cs" />
+    <Compile Include="Script\Interface\ILoad.cs" />
+    <Compile Include="Script\Interface\ISave.cs" />
+    <Compile Include="Script\Interface\Read\IReadBool.cs" />
+    <Compile Include="Script\Interface\Read\IReadByte.cs" />
+    <Compile Include="Script\Interface\Read\IReadChar.cs" />
+    <Compile Include="Script\Interface\Read\IReadData.cs" />
+    <Compile Include="Script\Interface\Read\IReadDecimal.cs" />
+    <Compile Include="Script\Interface\Read\IReadDouble.cs" />
+    <Compile Include="Script\Interface\Read\IReadEnum.cs" />
+    <Compile Include="Script\Interface\Read\IReadFloat.cs" />
+    <Compile Include="Script\Interface\Read\IReadICollection.cs" />
+    <Compile Include="Script\Interface\Read\IReadIDictionary.cs" />
+    <Compile Include="Script\Interface\Read\IReadIList.cs" />
+    <Compile Include="Script\Interface\Read\IReadInt16.cs" />
+    <Compile Include="Script\Interface\Read\IReadInt32.cs" />
+    <Compile Include="Script\Interface\Read\IReadInt64.cs" />
+    <Compile Include="Script\Interface\Read\IReadJson.cs" />
+    <Compile Include="Script\Interface\Read\IReadLength.cs" />
+    <Compile Include="Script\Interface\Read\IReadSByte.cs" />
+    <Compile Include="Script\Interface\Read\IReadString.cs" />
+    <Compile Include="Script\Interface\Read\IReadUInt16.cs" />
+    <Compile Include="Script\Interface\Read\IReadUInt32.cs" />
+    <Compile Include="Script\Interface\Read\IReadUInt64.cs" />
+    <Compile Include="Script\Interface\Storage\IBinData.cs" />
+    <Compile Include="Script\Interface\Storage\IBinDeserialize.cs" />
+    <Compile Include="Script\Interface\Storage\IBinSerialize.cs" />
+    <Compile Include="Script\Interface\Storage\IBinStorage.cs" />
+    <Compile Include="Script\Interface\Storage\IDeserialize.cs" />
+    <Compile Include="Script\Interface\Storage\IReset.cs" />
+    <Compile Include="Script\Interface\Storage\ISerialize.cs" />
+    <Compile Include="Script\Interface\Write\IWriteBool.cs" />
+    <Compile Include="Script\Interface\Write\IWriteByte.cs" />
+    <Compile Include="Script\Interface\Write\IWriteChar.cs" />
+    <Compile Include="Script\Interface\Write\IWriteData.cs" />
+    <Compile Include="Script\Interface\Write\IWriteDecimal.cs" />
+    <Compile Include="Script\Interface\Write\IWriteDouble.cs" />
+    <Compile Include="Script\Interface\Write\IWriteEnum.cs" />
+    <Compile Include="Script\Interface\Write\IWriteFloat.cs" />
+    <Compile Include="Script\Interface\Write\IWriteICollection.cs" />
+    <Compile Include="Script\Interface\Write\IWriteIDictionary.cs" />
+    <Compile Include="Script\Interface\Write\IWriteIList.cs" />
+    <Compile Include="Script\Interface\Write\IWriteInt16.cs" />
+    <Compile Include="Script\Interface\Write\IWriteInt32.cs" />
+    <Compile Include="Script\Interface\Write\IWriteInt64.cs" />
+    <Compile Include="Script\Interface\Write\IWriteJson.cs" />
+    <Compile Include="Script\Interface\Write\IWriteLength.cs" />
+    <Compile Include="Script\Interface\Write\IWriteSByte.cs" />
+    <Compile Include="Script\Interface\Write\IWriteString.cs" />
+    <Compile Include="Script\Interface\Write\IWriteUInt16.cs" />
+    <Compile Include="Script\Interface\Write\IWriteUInt32.cs" />
+    <Compile Include="Script\Interface\Write\IWriteUInt64.cs" />
     <Compile Include="Script\Tools\Bean\GBean.cs" />
     <Compile Include="Script\Tools\Bean\GBeanRegisterAttribute.cs" />
     <Compile Include="Script\Tools\Bean\GBeanSystem.cs" />
@@ -543,77 +621,59 @@
     <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.UInt32.cs" />
     <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.UInt64.cs" />
     <Compile Include="Script\Tools\Buffer\Ring\BufferRing.cs" />
+    <Compile Include="Script\Tools\FileCache.cs" />
     <Compile Include="Script\Tools\HashCode\HashCode.cs" />
-    <Compile Include="Script\Tools\Interface\ILoad.cs" />
-    <Compile Include="Script\Tools\Interface\ISave.cs" />
-    <Compile Include="Script\Tools\Interface\Read\IReadBool.cs" />
-    <Compile Include="Script\Tools\Interface\Read\IReadByte.cs" />
-    <Compile Include="Script\Tools\Interface\Read\IReadChar.cs" />
-    <Compile Include="Script\Tools\Interface\Read\IReadData.cs" />
-    <Compile Include="Script\Tools\Interface\Read\IReadDecimal.cs" />
-    <Compile Include="Script\Tools\Interface\Read\IReadDouble.cs" />
-    <Compile Include="Script\Tools\Interface\Read\IReadEnum.cs" />
-    <Compile Include="Script\Tools\Interface\Read\IReadFloat.cs" />
-    <Compile Include="Script\Tools\Interface\Read\IReadICollection.cs" />
-    <Compile Include="Script\Tools\Interface\Read\IReadIDictionary.cs" />
-    <Compile Include="Script\Tools\Interface\Read\IReadIList.cs" />
-    <Compile Include="Script\Tools\Interface\Read\IReadInt16.cs" />
-    <Compile Include="Script\Tools\Interface\Read\IReadInt32.cs" />
-    <Compile Include="Script\Tools\Interface\Read\IReadInt64.cs" />
-    <Compile Include="Script\Tools\Interface\Read\IReadJson.cs" />
-    <Compile Include="Script\Tools\Interface\Read\IReadLength.cs" />
-    <Compile Include="Script\Tools\Interface\Read\IReadSByte.cs" />
-    <Compile Include="Script\Tools\Interface\Read\IReadString.cs" />
-    <Compile Include="Script\Tools\Interface\Read\IReadUInt16.cs" />
-    <Compile Include="Script\Tools\Interface\Read\IReadUInt32.cs" />
-    <Compile Include="Script\Tools\Interface\Read\IReadUInt64.cs" />
-    <Compile Include="Script\Tools\Interface\Storage\IBinData.cs" />
-    <Compile Include="Script\Tools\Interface\Storage\IBinDeserialize.cs" />
-    <Compile Include="Script\Tools\Interface\Storage\IBinSerialize.cs" />
-    <Compile Include="Script\Tools\Interface\Storage\IBinStorage.cs" />
-    <Compile Include="Script\Tools\Interface\Storage\IDeserialize.cs" />
-    <Compile Include="Script\Tools\Interface\Storage\IReset.cs" />
-    <Compile Include="Script\Tools\Interface\Storage\ISerialize.cs" />
-    <Compile Include="Script\Tools\Interface\Write\IWriteBool.cs" />
-    <Compile Include="Script\Tools\Interface\Write\IWriteByte.cs" />
-    <Compile Include="Script\Tools\Interface\Write\IWriteChar.cs" />
-    <Compile Include="Script\Tools\Interface\Write\IWriteData.cs" />
-    <Compile Include="Script\Tools\Interface\Write\IWriteDecimal.cs" />
-    <Compile Include="Script\Tools\Interface\Write\IWriteDouble.cs" />
-    <Compile Include="Script\Tools\Interface\Write\IWriteEnum.cs" />
-    <Compile Include="Script\Tools\Interface\Write\IWriteFloat.cs" />
-    <Compile Include="Script\Tools\Interface\Write\IWriteICollection.cs" />
-    <Compile Include="Script\Tools\Interface\Write\IWriteIDictionary.cs" />
-    <Compile Include="Script\Tools\Interface\Write\IWriteIList.cs" />
-    <Compile Include="Script\Tools\Interface\Write\IWriteInt16.cs" />
-    <Compile Include="Script\Tools\Interface\Write\IWriteInt32.cs" />
-    <Compile Include="Script\Tools\Interface\Write\IWriteInt64.cs" />
-    <Compile Include="Script\Tools\Interface\Write\IWriteJson.cs" />
-    <Compile Include="Script\Tools\Interface\Write\IWriteLength.cs" />
-    <Compile Include="Script\Tools\Interface\Write\IWriteSByte.cs" />
-    <Compile Include="Script\Tools\Interface\Write\IWriteString.cs" />
-    <Compile Include="Script\Tools\Interface\Write\IWriteUInt16.cs" />
-    <Compile Include="Script\Tools\Interface\Write\IWriteUInt32.cs" />
-    <Compile Include="Script\Tools\Interface\Write\IWriteUInt64.cs" />
     <Compile Include="Script\Tools\Mail\Mail.Usage.cs" />
     <Compile Include="Script\Tools\Mail\MailHandle.cs" />
     <Compile Include="Script\Tools\Mail\MailMultipInfo.cs" />
     <Compile Include="Script\Tools\Mail\MailMultipleHandle.cs" />
     <Compile Include="Script\Tools\Mail\MailSingleHandle.cs" />
     <Compile Include="Script\Tools\Mail\MailSingleInfo.cs" />
-    <Compile Include="Script\Tools\NetWork\BytesSerializable.cs" />
-    <Compile Include="Script\Tools\NetWork\DownloadInfo.cs" />
-    <Compile Include="Script\Tools\NetWork\HTTP\HTTPNetwork.cs" />
-    <Compile Include="Script\Tools\NetWork\HTTP\IHTTPRequest.cs" />
-    <Compile Include="Script\Tools\NetWork\HTTP\HTTPRequest.cs" />
-    <Compile Include="Script\Tools\NetWork\HTTP\HTTPResponse.cs" />
-    <Compile Include="Script\Tools\NetWork\Interface\INetCryptography.cs" />
-    <Compile Include="Script\Tools\NetWork\Interface\INetGuard.cs" />
-    <Compile Include="Script\Tools\NetWork\Interface\INetRequest.cs" />
-    <Compile Include="Script\Tools\NetWork\Interface\INetResponse.cs" />
-    <Compile Include="Script\Tools\NetWork\Interface\INetSerialization.cs" />
-    <Compile Include="Script\Tools\NetWork\Interface\INetwork.cs" />
-    <Compile Include="Script\Tools\NetWork\Network.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\BytesSerializable.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\DownloadInfo.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\HTTPNetwork.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\HTTPRequest.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\HTTPResponse.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\IHTTPRequest.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\INetCryptography.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\INetGuard.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\INetRequest.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\INetResponse.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\INetSerialization.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\INetwork.cs" />
+    <Compile Include="Script\Tools\NetWork\Backup\Network.cs" />
+    <Compile Include="Script\Tools\NetWork\HTTP\HttpClient.cs" />
+    <Compile Include="Script\Tools\NetWork\HTTP\HttpRequest.cs" />
+    <Compile Include="Script\Tools\NetWork\HTTP\HttpResponse.cs" />
+    <Compile Include="Script\Tools\NetWork\HTTP\HttpServer.cs" />
+    <Compile Include="Script\Tools\NetWork\HTTP\HttpSession.cs" />
+    <Compile Include="Script\Tools\NetWork\Interface\INet.cs" />
+    <Compile Include="Script\Tools\NetWork\Interface\INetClient.cs" />
+    <Compile Include="Script\Tools\NetWork\Interface\INetServer.cs" />
+    <Compile Include="Script\Tools\NetWork\Interface\INetSession.cs" />
+    <Compile Include="Script\Tools\NetWork\Interface\IWebSocket.cs" />
+    <Compile Include="Script\Tools\NetWork\NetClient.cs" />
+    <Compile Include="Script\Tools\NetWork\NetServer.cs" />
+    <Compile Include="Script\Tools\NetWork\NetSetting.cs" />
+    <Compile Include="Script\Tools\NetWork\TCP\Client\TcpClient.Connect.cs" />
+    <Compile Include="Script\Tools\NetWork\TCP\Client\TcpClient.cs" />
+    <Compile Include="Script\Tools\NetWork\TCP\Client\TcpClient.Receive.cs" />
+    <Compile Include="Script\Tools\NetWork\TCP\Client\TcpClient.Send.cs" />
+    <Compile Include="Script\Tools\NetWork\TCP\Client\TcpSetting.Client.cs" />
+    <Compile Include="Script\Tools\NetWork\TCP\Server\TcpServer.cs" />
+    <Compile Include="Script\Tools\NetWork\TCP\Server\TcpSetting.Server.cs" />
+    <Compile Include="Script\Tools\NetWork\TCP\Session\TcpSession.cs" />
+    <Compile Include="Script\Tools\NetWork\TCP\Session\TcpSession.Receive.cs" />
+    <Compile Include="Script\Tools\NetWork\TCP\Session\TcpSession.Send.cs" />
+    <Compile Include="Script\Tools\NetWork\UDP\Client\UdpClient.Connect.cs" />
+    <Compile Include="Script\Tools\NetWork\UDP\Client\UdpClient.cs" />
+    <Compile Include="Script\Tools\NetWork\UDP\Client\UdpClient.Receive.cs" />
+    <Compile Include="Script\Tools\NetWork\UDP\Client\UdpClient.Send.cs" />
+    <Compile Include="Script\Tools\NetWork\UDP\Client\UdpSetting.Client.cs" />
+    <Compile Include="Script\Tools\NetWork\UDP\Server\UdpServer.cs" />
+    <Compile Include="Script\Tools\NetWork\UDP\Server\UdpServer.Receive.cs" />
+    <Compile Include="Script\Tools\NetWork\UDP\Server\UdpServer.Send.cs" />
+    <Compile Include="Script\Tools\NetWork\UDP\Server\UdpSetting.Server.cs" />
     <Compile Include="Script\Tools\PList\IPListElement.cs" />
     <Compile Include="Script\Tools\PList\PListBinaryReader.cs" />
     <Compile Include="Script\Tools\PList\PListBinaryWriter.cs" />
@@ -737,7 +797,6 @@
     <Compile Include="Script\Helper\Math\U.Time.cs" />
     <Compile Include="Script\Helper\Net\HTTP\HttpDownload.cs" />
     <Compile Include="Script\Helper\Net\HTTP\HttpDownloadInfo.cs" />
-    <Compile Include="Script\Helper\Net\HTTP\U.Http.cs" />
     <Compile Include="Script\Helper\String\StringBlock.cs" />
     <Compile Include="Script\Helper\String\U.IDNo.cs" />
     <Compile Include="Script\Helper\String\U.MaskWord.cs" />
@@ -758,24 +817,16 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Buffers" Version="4.5.1" />
-    <PackageReference Include="System.Memory" Version="4.5.4" />
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.3" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Ensure\Ensure.csproj">
-      <Project>{3e725c5e-8dd9-4ab3-8042-96effab382b4}</Project>
-      <Name>Ensure</Name>
-      <Private>False</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Plugins\Microsoft" />
-    <Folder Include="Script\Tools\NetWork\TCP" />
-    <Folder Include="Script\Tools\NetWork\Websocket" />
+    <Folder Include="Script\Handle\Net\TCP" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Script\Helper\Net\Http\HTTP.md" />
     <Content Include="Script\Tools\Tuple\Tuple.Generated.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Tuple.Generated.cs</LastGenOutput>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AIO
 {
-    public static partial class IListExtend
+    public static partial class ExtendIList
     {
         /// <summary>
         /// 查询存在相同元素的下标

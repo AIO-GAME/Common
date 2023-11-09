@@ -15,7 +15,7 @@ public partial class AHelper
     /// 排序工具
     /// 默认排序方向 从小到大
     /// </summary>
-    public static partial class Sort
+    public partial class Sort
     {
         /// <summary>
         /// 自动扩容，并保存数据

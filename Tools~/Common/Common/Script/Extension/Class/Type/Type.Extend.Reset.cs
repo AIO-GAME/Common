@@ -17,7 +17,7 @@ namespace AIO
     /// <see>
     ///     <cref>https://docs.microsoft.com/en-us/dotnet/api/system.type?view=net-5.0</cref>
     /// </see>
-    public static partial class TypeExtend
+    public static partial class ExtendType
     {
         private const BindingFlags Flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy;
 

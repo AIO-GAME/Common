@@ -1,12 +1,12 @@
 ﻿using System;
 
-public static partial class AHelper
+public partial class AHelper
 {
     /// <summary>
     /// 生成一个新的 GUID 对象。
     /// </summary>
     /// <returns>新的 GUID 对象。</returns>
-    public static class Guid
+    public class Guid
     {
         /// <summary>
         /// 生成一个新的 GUID 对象。

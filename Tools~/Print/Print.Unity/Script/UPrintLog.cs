@@ -9,7 +9,7 @@ namespace UnityEngine
         /// <summary>
         /// 日志
         /// </summary>
-        [Conditional(MACRO_DEFINITION)]
+        [Conditional(MACRO_DEFINITION), DebuggerHidden, DebuggerNonUserCode]
         public static void Log<T>(in T obj, in EFormat format)
         {
             if (IsNotOut || NoStatus(LOG)) return;
@@ -36,7 +36,7 @@ namespace UnityEngine
         /// <summary>
         /// 日志
         /// </summary>
-        [Conditional(MACRO_DEFINITION)]
+        [Conditional(MACRO_DEFINITION), DebuggerHidden, DebuggerNonUserCode]
         public static void Log(in string obj)
         {
             if (IsNotOut || NoStatus(LOG)) return;
@@ -46,7 +46,7 @@ namespace UnityEngine
         /// <summary>
         /// 日志
         /// </summary>
-        [Conditional(MACRO_DEFINITION)]
+        [Conditional(MACRO_DEFINITION), DebuggerHidden, DebuggerNonUserCode]
         public static void Log(in object objs)
         {
             if (IsNotOut || NoStatus(LOG)) return;
@@ -56,7 +56,7 @@ namespace UnityEngine
         /// <summary>
         /// 日志
         /// </summary>
-        [Conditional(MACRO_DEFINITION)]
+        [Conditional(MACRO_DEFINITION), DebuggerHidden, DebuggerNonUserCode]
         public static void Log<T>(in T objs) where T : IEnumerable
         {
             if (IsNotOut || NoStatus(LOG)) return;
@@ -86,7 +86,7 @@ namespace UnityEngine
         /// <summary>
         /// 日志
         /// </summary>
-        [Conditional(MACRO_DEFINITION)]
+        [Conditional(MACRO_DEFINITION), DebuggerHidden, DebuggerNonUserCode]
         public static void LogFormat(in string format, params object[] objs)
         {
             if (IsNotOut || NoStatus(LOG)) return;

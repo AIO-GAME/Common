@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 #nullable enable
+#pragma warning disable
 namespace AIO.YamlDotNet.Helpers
 {
 	internal sealed class GenericDictionaryToNonGenericAdapter<TKey, TValue> : IDictionary, ICollection, IEnumerable where TKey : notnull

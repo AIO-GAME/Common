@@ -7,12 +7,12 @@
 
 using System;
 
-public static partial class AHelper
+public partial class AHelper
 {
     /// <summary>
     /// 状态值比较
     /// </summary>
-    public static partial class Status
+    public partial class Status
     {
         /// <summary>
         /// 2次幂运算 判断是否相等
@@ -44,7 +44,7 @@ public static partial class AHelper
     /// <summary>
     /// 状态值比较类
     /// </summary>
-    public static partial class Status
+    public partial class Status
     {
         /// <summary>
         /// 源状态和指定状态是否有交集
@@ -106,7 +106,7 @@ public static partial class AHelper
     /// <summary>
     /// 状态值比较类
     /// </summary>
-    public static partial class Status
+    public partial class Status
     {
         /// <summary>
         /// 设置状态 要求枚举结构顺序为 幂次序
@@ -160,7 +160,7 @@ public static partial class AHelper
     /// <summary>
     /// 状态值比较类
     /// </summary>
-    public static partial class Status
+    public partial class Status
     {
         /// <summary>
         /// 是否有指定状态（包含指定状态，但不限于指定状态）
@@ -211,7 +211,7 @@ public static partial class AHelper
     /// <summary>
     /// 状态值比较类
     /// </summary>
-    public static partial class Status
+    public partial class Status
     {
         /// <summary>
         /// 是否是指定状态 仅仅是指定状态
@@ -314,7 +314,7 @@ public static partial class AHelper
     /// 耗时 long转换  4
     /// 耗时 Convert转换  1504
     /// </summary>
-    public static partial class Status
+    public partial class Status
     {
         /// <summary>
         /// 删除状态

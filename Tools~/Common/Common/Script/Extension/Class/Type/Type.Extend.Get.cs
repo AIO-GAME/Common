@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace AIO
 {
-    public partial class TypeExtend
+    public partial class ExtendType
     {
         /// <summary>
         /// 获取指定类型的所有成员信息，并包括扩展方法。
@@ -43,7 +43,7 @@ namespace AIO
             internal readonly MethodInfo[] Cache;
         }
 
-        static TypeExtend()
+        static ExtendType()
         {
             ExtensionMethodsCache = new Lazy<ExtensionMethodCache>(() => new ExtensionMethodCache(), true);
             InheritedExtensionMethodsCache = new Lazy<Dictionary<Type, MethodInfo[]>>(() => new Dictionary<Type, MethodInfo[]>(), true);

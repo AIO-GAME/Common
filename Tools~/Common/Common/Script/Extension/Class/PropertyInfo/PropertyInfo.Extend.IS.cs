@@ -6,7 +6,7 @@ namespace AIO
     /// <summary>
     /// 属性信息扩展
     /// </summary>
-    public static partial class PropertyInfoExtend
+    public static partial class ExtendPropertyInfo
     {
         /// <summary>
         /// 是否为静态

@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace AIO
 {
-    public static partial class StringExtend
+    public static partial class ExtendString
     {
         /// <summary>
         /// 获取文件名 HasExtension = false 没有扩展名

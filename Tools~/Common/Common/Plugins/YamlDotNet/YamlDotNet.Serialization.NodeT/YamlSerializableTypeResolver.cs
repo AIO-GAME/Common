@@ -1,6 +1,6 @@
 using System;
 using AIO.YamlDotNet.Core.Events;
-
+#pragma warning disable
 namespace AIO.YamlDotNet.Serialization.NodeTypeResolvers
 {
 	internal sealed class YamlSerializableTypeResolver : INodeTypeResolver

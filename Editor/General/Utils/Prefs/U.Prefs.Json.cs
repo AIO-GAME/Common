@@ -15,7 +15,7 @@ namespace AIO.UEditor
         {
             private const int JsonHashCode = -198387194;
 
-            private static T CommonLoadJson<T>(in string key, in T def)
+            private static T CommonLoadJson<T>(in string key, in T def = default)
             {
                 if (!EditorPrefs.HasKey(key)) return def;
                 var content = EditorPrefs.GetString(key);
@@ -35,8 +35,9 @@ namespace AIO.UEditor
             /// </summary>
             /// <param name="field">字段名称</param>
             /// <param name="def">默认值</param>
+            /// <typeparam name="T">泛型类型</typeparam>
             /// <returns>返回值</returns>
-            public static float LoadJson(in string field, in float def = 0)
+            public static T LoadJson<T>(in string field, in T def = default)
             {
                 var key = string.Concat(field.GetHashCode(), JsonHashCode);
                 return CommonLoadJson(key, def);
@@ -47,7 +48,8 @@ namespace AIO.UEditor
             /// </summary>
             /// <param name="field">字段名称</param>
             /// <param name="value">值</param>
-            public static void SaveJson(in string field, in float value)
+            /// <typeparam name="T">泛型类型</typeparam>
+            public static void SaveJson<T>(in string field, in T value)
             {
                 var key = string.Concat(field.GetHashCode(), JsonHashCode);
                 CommonSaveJson(key, value);
@@ -63,8 +65,9 @@ namespace AIO.UEditor
             /// <param name="field">字段名称</param>
             /// <param name="def">默认值</param>
             /// <typeparam name="T">泛型类型</typeparam>
+            /// <typeparam name="T1">泛型类型</typeparam>
             /// <returns>返回值</returns>
-            public static float LoadJson<T>(in string field, in float def = 0)
+            public static T1 LoadJson<T, T1>(in string field, in T1 def = default)
             {
                 var key = string.Concat(typeof(T).FullName, field.GetHashCode(), JsonHashCode);
                 return CommonLoadJson(key, def);
@@ -76,7 +79,8 @@ namespace AIO.UEditor
             /// <param name="field">字段名称</param>
             /// <param name="value">值</param>
             /// <typeparam name="T">泛型类型</typeparam>
-            public static void SaveJson<T>(in string field, in float value)
+            /// <typeparam name="T1">泛型类型</typeparam>
+            public static void SaveJson<T, T1>(in string field, in T1 value)
             {
                 var key = string.Concat(typeof(T).FullName, field.GetHashCode(), JsonHashCode);
                 CommonSaveJson(key, value);
@@ -93,8 +97,9 @@ namespace AIO.UEditor
             /// <param name="field">字段名称</param>
             /// <param name="def">默认值</param>
             /// <typeparam name="T">泛型类型</typeparam>
+            /// <typeparam name="T1">泛型类型</typeparam>
             /// <returns>返回值</returns>
-            public static float LoadJson<T>(in T data, in string field, in float def = 0)
+            public static T1 LoadJson<T, T1>(in T data, in string field, in T1 def = default)
             {
                 var key = string.Concat(data.GetType().FullName, field.GetHashCode(), JsonHashCode);
                 return CommonLoadJson(key, def);
@@ -107,7 +112,8 @@ namespace AIO.UEditor
             /// <param name="field">字段名称</param>
             /// <param name="value">值</param>
             /// <typeparam name="T">泛型类型</typeparam>
-            public static void SaveJson<T>(in T data, in string field, in float value)
+            /// <typeparam name="T1">泛型类型</typeparam>
+            public static void SaveJson<T, T1>(in T data, in string field, in T1 value)
             {
                 var key = string.Concat(data.GetType().FullName, field.GetHashCode(), JsonHashCode);
                 CommonSaveJson(key, value);

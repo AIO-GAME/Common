@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AIO.YamlDotNet.Core;
-
+#pragma warning disable
 namespace AIO.YamlDotNet.Serialization.ObjectGraphVisitors
 {
 	internal sealed class CustomSerializationObjectGraphVisitor : ChainedObjectGraphVisitor

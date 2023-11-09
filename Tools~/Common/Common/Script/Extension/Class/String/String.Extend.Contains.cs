@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace AIO
 {
-    public partial class StringExtend
+    public partial class ExtendString
     {
         /// <summary>
         /// 判断集合中 是否有重复

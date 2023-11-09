@@ -14,6 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common\Common.csproj" />
     <ProjectReference Include="..\..\Print\Print.Console\Print.Console.csproj" />
     <ProjectReference Include="..\..\Print\Print.Unity\Print.Unity.csproj" />
     <ProjectReference Include="..\..\Print\Print\Print.csproj" />

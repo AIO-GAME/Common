@@ -9,7 +9,7 @@ namespace AIO
     /// <summary>
     /// 函数信息扩展
     /// </summary>
-    public static partial class MethodInfoExtend
+    public static partial class ExtendMethodInfo
     {
         /// <summary>
         /// 使用给定的类型构造泛型方法，返回一个 MethodInfo 对象。

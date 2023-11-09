@@ -1,5 +1,5 @@
 using System;
-
+#pragma warning disable
 namespace AIO.YamlDotNet.Serialization.NamingConventions
 {
 	internal sealed class NullNamingConvention : INamingConvention

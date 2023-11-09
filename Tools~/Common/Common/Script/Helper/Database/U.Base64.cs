@@ -15,12 +15,12 @@ public partial class AHelper
     /// <summary>
     /// Base64 文件 解析
     /// </summary>
-    public static partial class Base64
+    public partial class Base64
     {
         /// <summary>
         /// 序列化 未加密
         /// </summary>
-        public static string Serialize<T>(T data) 
+        public static string Serialize<T>(T data)
         {
             using (var stream = new MemoryStream())
             {

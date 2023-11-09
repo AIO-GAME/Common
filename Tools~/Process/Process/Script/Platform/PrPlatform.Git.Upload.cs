@@ -17,8 +17,8 @@ namespace AIO
             /// <see cref="PrPlatform"/> Git Upload
             /// </summary>
             /// <param name="target">目标路径</param>
-            /// <param name="inputCommit"></param>
-            /// <param name="inputOrigin"></param>
+            /// <param name="inputCommit">输入提交信息</param>
+            /// <param name="inputOrigin">输入上传分支</param>
             /// <param name="quit">静默退出</param>
             /// <exception cref="NotImplementedException">未实现</exception>
             /// <returns><see cref="IExecutor"/>执行器</returns>
@@ -43,8 +43,8 @@ namespace AIO
             /// <see cref="PrPlatform"/> Git Upload
             /// </summary>
             /// <param name="target">目标路径</param>
-            /// <param name="inputCommit"></param>
-            /// <param name="inputOrigin"></param>
+            /// <param name="inputCommit">输入提交信息</param>
+            /// <param name="inputOrigin">输入上传分支</param>
             /// <param name="quit">静默退出</param>
             /// <exception cref="NotImplementedException">未实现</exception>
             /// <returns><see cref="IExecutor"/>执行器</returns>

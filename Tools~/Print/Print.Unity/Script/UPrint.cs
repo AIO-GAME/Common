@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-
 using APrint = AIO.Internal.Print;
 
 namespace UnityEngine
@@ -77,7 +76,7 @@ namespace UnityEngine
         /// <summary>
         /// 输出异常
         /// </summary>
-        [Conditional(MACRO_DEFINITION)]
+        [Conditional(MACRO_DEFINITION), DebuggerHidden, DebuggerNonUserCode]
         public static void Exception<E, T>(in E exception, in T obj) where E : Exception where T : Object
         {
             if (IsNotOut || NoStatus(EXCEPTION)) return;
@@ -87,7 +86,7 @@ namespace UnityEngine
         /// <summary>
         /// 输出异常
         /// </summary>
-        [Conditional(MACRO_DEFINITION)]
+        [Conditional(MACRO_DEFINITION), DebuggerHidden, DebuggerNonUserCode]
         public static void Exception<E>(in E exception) where E : Exception
         {
             if (IsNotOut || NoStatus(EXCEPTION)) return;

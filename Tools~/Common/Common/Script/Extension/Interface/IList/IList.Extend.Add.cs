@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AIO
 {
-    public static partial class IListExtend
+    public static partial class ExtendIList
     {
         /// <summary>
         /// 添加相同元素
@@ -54,28 +54,28 @@ namespace AIO
         /// <summary>
         /// 添加
         /// </summary>
-        public static void Add<T>(this IList<T> array, IEnumerable<T> arrys)
+        public static void Add<T>(this IList<T> array, IEnumerable<T> arr)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
-            foreach (var item in arrys) array.Add(item);
+            foreach (var item in arr) array.Add(item);
         }
 
         /// <summary>
         /// 添加
         /// </summary>
-        public static void AddDicValue<T>(this IList<T> array, IDictionary<object, T> arrys)
+        public static void AddDicValue<T>(this IList<T> array, IDictionary<object, T> arr)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
-            foreach (var item in arrys) array.Add(item.Value);
+            foreach (var item in arr) array.Add(item.Value);
         }
 
         /// <summary>
         /// 添加
         /// </summary>
-        public static void AddDicKey<T>(this IList<T> array, IDictionary<T, object> arrys)
+        public static void AddDicKey<T>(this IList<T> array, IDictionary<T, object> arr)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
-            foreach (var item in arrys) array.Add(item.Key);
+            foreach (var item in arr) array.Add(item.Key);
         }
 
         /// <summary>

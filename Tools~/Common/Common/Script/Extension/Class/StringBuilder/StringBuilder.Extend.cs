@@ -6,7 +6,7 @@ namespace AIO
     /// <summary>
     /// 可变字符串扩展
     /// </summary>
-    public static class StringBuilderExtend
+    public static class ExtendStringBuilder
     {
         /// <summary>
         /// 添加

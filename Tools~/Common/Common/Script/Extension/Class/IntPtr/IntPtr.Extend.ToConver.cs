@@ -11,13 +11,13 @@ using System.Runtime.InteropServices;
 
 namespace AIO
 {
-    public static partial class IntPtrExtend
+    public static partial class ExtendIntPtr
     {
         /// <summary>
         /// 转化为引用地址
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string ToConverMemory(this IntPtr intPtr)
+        public static string ToConverseMemory(this IntPtr intPtr)
         {
             return $"0x{intPtr.ToString("X")}";
         }
@@ -26,7 +26,7 @@ namespace AIO
         /// 转化为int数组
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int[] ToConverInts(this IntPtr intPtr)
+        public static int[] TooConverseInts(this IntPtr intPtr)
         {
             var handle = GCHandle.FromIntPtr(intPtr);
             if (!(handle.Target is int[] ints))
@@ -41,7 +41,7 @@ namespace AIO
         /// 转化为 object
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static object ToConverObject(this IntPtr intPtr)
+        public static object TooConverseObject(this IntPtr intPtr)
         {
             return GCHandle.FromIntPtr(intPtr).Target;
         }

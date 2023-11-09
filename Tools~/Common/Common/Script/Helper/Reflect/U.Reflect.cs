@@ -14,7 +14,7 @@ public partial class AHelper
     /// <summary>
     /// 反射工具库
     /// </summary>
-    public static class Reflect
+    public class Reflect
     {
         /// <summary>
         /// 过滤枚举过时字段

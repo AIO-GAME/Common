@@ -69,7 +69,7 @@ namespace AIO
                             str.AppendLine("@echo please input push origin target && @set /p originArg=");
                             str.AppendLine("@git push -u origin \"!originArg!\"");
                         }
-                        else str.AppendLine("@git push --all");
+                        else str.AppendLine("@git push");
                     }
 
                     str.AppendLine(LINE_BOTTOM);

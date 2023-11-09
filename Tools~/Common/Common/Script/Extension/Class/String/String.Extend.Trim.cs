@@ -2,7 +2,7 @@
 
 namespace AIO
 {
-    public partial class StringExtend
+    public partial class ExtendString
     {
         /// <summary>
         /// 从当前字符串的开头移除指定字符串。如果当前字符串不是以指定字符串开头，则返回原始字符串。

@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace AIO
 {
-    public partial class MethodInfoExtend
+    public partial class ExtendMethodInfo
     {
         /// <summary>
         /// 检查给定方法是否为用户定义的转换运算符。

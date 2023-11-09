@@ -7,7 +7,7 @@ namespace AIO
     /// <summary>
     /// 集合
     /// </summary>
-    public static partial class ICollectionExtend
+    public static partial class ExtendICollection
     {
         /// <summary>
         /// 查找 -1:未找到

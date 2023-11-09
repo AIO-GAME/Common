@@ -14,7 +14,7 @@ namespace AIO
     /// <summary>
     /// 字符扩展
     /// </summary>
-    public static partial class CharExtend
+    public static partial class ExtendChar
     {
         /// <summary>
         /// 转化为字节

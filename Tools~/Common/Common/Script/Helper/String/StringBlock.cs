@@ -7,7 +7,7 @@ namespace AIO
     /// <summary>
     /// 字符串区块 字符单位
     /// </summary>
-    public class StringBlock
+    internal class StringBlock
     {
         private IList<char> Units { get; }
 
@@ -56,7 +56,8 @@ namespace AIO
         /// <param name="units"></param>
         /// <param name="width"></param>
         /// <param name="ignoreChinese"></param>
-        public StringBlock(string units, int width = 200, bool ignoreChinese = false) : this(units.ToCharArray(), width, ignoreChinese)
+        public StringBlock(string units, int width = 200, bool ignoreChinese = false) : this(units.ToCharArray(), width,
+            ignoreChinese)
         {
         }
 

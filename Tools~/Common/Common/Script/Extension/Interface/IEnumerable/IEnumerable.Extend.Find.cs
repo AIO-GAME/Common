@@ -9,7 +9,7 @@ namespace AIO
     /// <summary>
     /// 迭代器扩展
     /// </summary>
-    public static partial class IEnumerableExtend
+    public static partial class ExtendIEnumerable
     {
         /// <summary>
         /// 查找 -1:未找到

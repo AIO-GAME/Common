@@ -13,7 +13,7 @@ public partial class AHelper
     /// <summary> 
     /// 屏蔽字
     /// </summary>
-    public static class MaskWord
+    public class MaskWord
     {
         private static string[] words = Array.Empty<string>();
 

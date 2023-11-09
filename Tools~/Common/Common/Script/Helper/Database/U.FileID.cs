@@ -16,7 +16,7 @@ public partial class AHelper
     /// <summary>
     /// Unity File ID MD4 算法
     /// </summary>
-    public static partial class FileID
+    public partial class FileID
     {
         /// <summary>
         /// 计算类型的 FileID

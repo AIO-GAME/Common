@@ -1,6 +1,6 @@
 ﻿namespace AIO
 {
-    public static partial class TypeExtend
+    public static partial class ExtendType
     {
 
     }

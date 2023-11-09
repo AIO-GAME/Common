@@ -14,22 +14,12 @@ namespace AIO.UEditor
     {
         private const string TITLE = "Assets/Open C# Project AIO DLL";
 
-        [InitializeOnLoadMethod]
-        public static void Initialize()
-        {
-            var info = PackageInfo.FindForAssembly(typeof(EditorMenu_Assets).Assembly);
-            var path = Path.Combine(info.resolvedPath, "Tools~", "ALL.sln");
-            var exist = Directory.Exists(path);
-            Menu.SetChecked(TITLE, exist);
-        }
-
         [MenuItem(TITLE, true, 1000)]
         public static bool OpenDllProject()
         {
             var info = PackageInfo.FindForAssembly(typeof(EditorMenu_Assets).Assembly);
             var path = Path.Combine(info.resolvedPath, "Tools~", "ALL.sln");
-            var exist = Directory.Exists(path);
-            return exist;
+            return File.Exists(path);
         }
 
 #if UNITY_EDITOR_WIN

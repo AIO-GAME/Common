@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+
+// ReSharper disable NonReadonlyMemberInGetHashCode
+
 #pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
 namespace AIO
 {
@@ -114,7 +117,7 @@ namespace AIO
                    EqualityComparer<T7>.Default.GetHashCode(value7) * num +
                    EqualityComparer<T8>.Default.GetHashCode(value8);
         }
-
+        
         [Obsolete("HashCode is a mutable struct and should not be compared with other HashCodes.", true)]
         public sealed override bool Equals(object obj)
         {

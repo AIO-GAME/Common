@@ -6,7 +6,7 @@ public partial class AHelper
     /// <summary>
     /// HashTabel 工具类
     /// </summary>
-    public static class HashTable
+    public class HashTable
     {
         /// <summary>
         /// 创建
@@ -22,6 +22,7 @@ public partial class AHelper
                     i += 2;
                 }
             }
+
             return inst;
         }
 
@@ -38,6 +39,7 @@ public partial class AHelper
                     inst.Add(item.Key, inst.Values);
                 }
             }
+
             return inst;
         }
     }
