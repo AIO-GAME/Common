@@ -1358,7 +1358,7 @@
             命令 钉钉API
             </summary>
         </member>
-        <member name="M:AIO.PrDingding.CreateMSG(AIO.PrDingding.MsgType)">
+        <member name="M:AIO.PrDingding.CreateData">
             <summary>
             消息
             </summary>
@@ -1380,13 +1380,30 @@
         </member>
         <member name="F:AIO.PrDingding.Msg.TBAt">
             <summary>
-            At类型
+            At 类型
             </summary>
         </member>
         <member name="F:AIO.PrDingding.Msg.TBLink">
             <summary>
-            At类型
+            link 类型
             </summary>
+        </member>
+        <member name="F:AIO.PrDingding.Msg.TBActionCard">
+            <summary>
+            actionCard 类型
+            </summary>
+        </member>
+        <member name="F:AIO.PrDingding.Msg.TBFeedCard">
+            <summary>
+            feedCard 类型
+            </summary>
+        </member>
+        <member name="M:AIO.PrDingding.Msg.op_Implicit(AIO.PrDingding.Msg)~System.String">
+            <summary>
+            转换为Json
+            </summary>
+            <param name="msg">钉钉 msg</param>
+            <returns>json string</returns>
         </member>
         <member name="M:AIO.PrDingding.Msg.SetAtMobile(System.String[])">
             <summary>
@@ -1428,6 +1445,34 @@
             <param name="title">标题</param>
             <param name="content">内容</param>
         </member>
+        <member name="M:AIO.PrDingding.Msg.ToActionCard(System.String,System.String,System.String,System.String)">
+            <summary>
+            消息类型，此时固定为：actionCard
+            </summary>
+            <param name="title">首屏会话透出的展示内容</param>
+            <param name="content">markdown格式的消息</param>
+            <param name="singleTitle">单个按钮的标题</param>
+            <param name="singleURL">点击消息跳转的URL</param>
+        </member>
+        <member name="M:AIO.PrDingding.Msg.ToActionCard(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Int32)">
+            <summary>
+            消息类型，此时固定为：actionCard
+            </summary>
+            <param name="title">首屏会话透出的展示内容</param>
+            <param name="content">markdown格式的消息</param>
+            <param name="buttons">按钮 ket:按钮标题 value:点击按钮触发的URL</param>
+            <param name="btnOrientation">0：按钮竖直排列 other：按钮横向排列</param>
+        </member>
+        <member name="M:AIO.PrDingding.Msg.ToFeedCard(System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String,System.String}})">
+            <summary>
+            消息类型，此时固定为：feedCard
+            </summary>
+            <param name="links">
+            item1[title]:单条信息文本
+            item1[messageURL]:点击单条信息到跳转链接
+            item1[picURL]:单条信息后面图片的URL
+            </param>
+        </member>
         <member name="T:AIO.PrDingding.MsgType">
             <summary>
             消息类型
@@ -1453,6 +1498,16 @@
             markdown
             </summary>
         </member>
+        <member name="F:AIO.PrDingding.MsgType.actionCard">
+            <summary>
+            actionCard
+            </summary>
+        </member>
+        <member name="F:AIO.PrDingding.MsgType.feedCard">
+            <summary>
+            feedCard
+            </summary>
+        </member>
         <member name="M:AIO.PrDingding.GetSign(System.String,System.String)">
             <summary>
             获取签名后路径
@@ -1461,23 +1516,90 @@
             <param name="secret">签名</param>
             <returns>签名后路径</returns>
         </member>
-        <member name="M:AIO.PrDingding.SendData(System.String,AIO.PrDingding.Msg,System.String)">
+        <member name="M:AIO.PrDingding.SendText(System.String,System.String,System.String)">
+            <summary>
+            发送消息
+            </summary>
+            <param name="remote">远端地址</param>
+            <param name="secret">签名密钥</param>
+            <param name="content">内容</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrDingding.SendLink(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            发送 Link 消息
+            </summary>
+            <param name="remote">远端地址</param>
+            <param name="secret">签名密钥</param>
+            <param name="title">标题</param>
+            <param name="content">内容</param>
+            <param name="messageUrl">图片地址</param>
+            <param name="picUrl">消息链接</param>
+        </member>
+        <member name="M:AIO.PrDingding.SendMarkdown(System.String,System.String,System.String,System.String)">
+            <summary>
+            发送 Markdown 消息
+            </summary>
+            <param name="remote">远端地址</param>
+            <param name="secret">签名密钥</param>
+            <param name="title">标题</param>
+            <param name="content">内容</param>
+        </member>
+        <member name="M:AIO.PrDingding.SendActionCard(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            发送 ActionCard 消息
+            </summary>
+            <param name="remote">远端地址</param>
+            <param name="secret">签名密钥</param>
+            <param name="title">首屏会话透出的展示内容</param>
+            <param name="content">markdown格式的消息</param>
+            <param name="singleTitle">单个按钮的标题</param>
+            <param name="singleURL">点击消息跳转的URL</param>
+        </member>
+        <member name="M:AIO.PrDingding.SendActionCard(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Int32,System.String,System.String)">
+            <summary>
+            发送 ActionCard 消息
+            </summary>
+            <param name="remote">远端地址</param>
+            <param name="secret">签名密钥</param>
+            <param name="title">首屏会话透出的展示内容</param>
+            <param name="content">markdown格式的消息</param>
+            <param name="buttons">按钮 ket:按钮标题 value:点击按钮触发的URL</param>
+            <param name="btnOrientation">0：按钮竖直排列 other：按钮横向排列</param>
+        </member>
+        <member name="M:AIO.PrDingding.SendFeedCard(System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String,System.String}},System.String,System.String)">
+            <summary>
+            发送 ActionCard 消息
+            </summary>
+            <param name="remote">远端地址</param>
+            <param name="secret">签名密钥</param>
+            <param name="links">
+            item1[title]:单条信息文本
+            item1[messageURL]:点击单条信息到跳转链接
+            item1[picURL]:单条信息后面图片的URL
+            </param>
+        </member>
+        <member name="M:AIO.PrDingding.SendData(AIO.PrDingding.Msg,System.String,System.String)">
             <summary>
             发送消息
             </summary>
             <param name="remote">远端地址</param>
             <param name="data">数据</param>
             <param name="secret">签名密钥</param>
-            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
-        </member>
-        <member name="M:AIO.PrDingding.SendText(System.String,System.String,System.String)">
-            <summary>
-            发送消息
-            </summary>
-            <param name="remote">远端地址</param>
-            <param name="content">内容</param>
-            <param name="secret">签名密钥</param>
-            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+            <returns><see cref="T:AIO.IExecutor"/>
+            执行器
+            错误码(error-code)   错误码描述(errmsg)   解决方案(solution)
+            400013              群已被解散           请向其他群发消息
+            400102              access-token不存在  请确认access-token拼写是否正确
+            400103              机器人已停用         请联系管理员启用机器人
+            400106              不支持的消息类型      请使用文档中支持的消息类型
+            400107              机器人不存在         请确认机器人是否在群中
+            410101              发送速度太快而限流    请降低发送速度
+            430102              含有不安全的外链      请确认发送的内容合法
+            430103              含有不合适的文本      请确认发送的内容合法
+            430104              含有不合适的图片      请确认发送的内容合法
+            430105              含有不合适的内容      请确认发送的内容合法
+            </returns>
         </member>
         <member name="T:AIO.PrGit">
             <summary>
