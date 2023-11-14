@@ -88,14 +88,15 @@ Packages Manifest
 For more info please see | [Documentation](./README.md)
 or [Wiki](https://github.com/AIO-GAME/Common/wiki)
 
-| Doc                                                                       | Description                                  |
-|:--------------------------------------------------------------------------|:---------------------------------------------|
-| [🪞️ -> **_AHelper_**](https://github.com/AIO-GAME/Common/wiki/AHelper)   | <i>C# .net core General Basis Function</i>   |
-| [🪞 -> **_EHelper_**](https://github.com/AIO-GAME/Common/wiki/EHepler)    | <i>Unity Editor General Basis Function</i>   |
-| [🪞 -> **_RHelper_**](https://github.com/AIO-GAME/Common/wiki/RHelper)    | <i>Unity Runtime General Basis Function</i>  |
-| [🪞 -> **_Print_**](https://github.com/AIO-GAME/Common/wiki/Print)        | <i>.net core or Unity Output Log</i>         |
-| [🪞 -> **_Ensure_**](https://github.com/AIO-GAME/Common/wiki/Ensure)      | <i>All Platform Check Exception</i>          |
-| [🪞️ -> **_PrCourse_**](https://github.com/AIO-GAME/Common/wiki/PrCourse) | <i>All Platform Process Execution</i>        |
+| Doc                                                                       | Description                                 |
+|:--------------------------------------------------------------------------|:--------------------------------------------|
+| [🪞️ -> **_AHelper_**](https://github.com/AIO-GAME/Common/wiki/AHelper)   | <i>C# .net core General Basis Function</i>  |
+| [🪞 -> **_EHelper_**](https://github.com/AIO-GAME/Common/wiki/EHepler)    | <i>Unity Editor General Basis Function</i>  |
+| [🪞 -> **_RHelper_**](https://github.com/AIO-GAME/Common/wiki/RHelper)    | <i>Unity Runtime General Basis Function</i> |
+| [🪞 -> **_Print_**](https://github.com/AIO-GAME/Common/wiki/Print)        | <i>.net core or Unity Output Log</i>        |
+| [🪞 -> **_Ensure_**](https://github.com/AIO-GAME/Common/wiki/Ensure)      | <i>All Platform Check Exception</i>         |
+| [🪞️ -> **_PrCourse_**](https://github.com/AIO-GAME/Common/wiki/PrCourse) | <i>All Platform Process Execution</i>       |
+| [🪞️ -> **_PrDingding_**](./Documentation~/Usage/Process/PrDingding.md)   | <i>钉钉机器人</i>                                |
 
 ## 🤖 Demos
 

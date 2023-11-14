@@ -31,7 +31,7 @@ public partial class AHelper
             in T value,
             Encoding charset = null) where T : struct
         {
-            WriteText(path, Base64.Serialize(value), charset);
+            WriteText(path, Base64.SerializeData(value), charset);
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ public partial class AHelper
             in string path,
             in T value) where T : struct
         {
-            WriteUTF8(path, Base64.Serialize(value));
+            WriteUTF8(path, Base64.SerializeData(value));
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ public partial class AHelper
             T value) where T : class
         {
             if (value == null) return;
-            WriteUTF8(path, Base64.Serialize(value));
+            WriteUTF8(path, Base64.SerializeData(value));
         }
     }
 }

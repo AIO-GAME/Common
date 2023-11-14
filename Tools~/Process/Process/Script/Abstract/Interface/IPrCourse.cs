@@ -81,6 +81,14 @@ namespace AIO
         /// <summary>
         /// 设置参数
         /// </summary>
+        /// <param name="args"></param>
+        /// <returns>构造器</returns>
+        [DebuggerHidden, DebuggerNonUserCode]
+        IPrCourse SetInArgs(in StringBuilder args);
+
+        /// <summary>
+        /// 设置参数
+        /// </summary>
         /// <returns>构造器</returns>
         [DebuggerHidden, DebuggerNonUserCode]
         IPrCourse SetInArgs(in string format, params object[] args);

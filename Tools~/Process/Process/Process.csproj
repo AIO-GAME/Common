@@ -43,6 +43,9 @@
     </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -69,6 +72,14 @@
     <Compile Include="Script\Argument\ArgumentCustom.cs" />
     <Compile Include="Script\Argument\EArgLabel.cs" />
     <Compile Include="Script\Argument\UnityArgsCommand.cs" />
+    <Compile Include="Script\Category\Curl\PrCurl.cs" />
+    <Compile Include="Script\Category\Curl\PrCurl.Help.cs" />
+    <Compile Include="Script\Category\Curl\PrCurl.Post.cs" />
+    <Compile Include="Script\Category\Curl\PrCurl.Remote.cs" />
+    <Compile Include="Script\Category\Curl\PrCurl.UploadFile.cs" />
+    <Compile Include="Script\Category\Curl\PrCurl.Version.cs" />
+    <Compile Include="Script\Category\Dingding\PrDingding.cs" />
+    <Compile Include="Script\Category\Dingding\PrDingding.Send.cs" />
     <Compile Include="Script\Category\Git\PrGit.Add.cs" />
     <Compile Include="Script\Category\Git\PrGit.CheckOut.cs" />
     <Compile Include="Script\Category\Git\PrGit.Clean.cs" />
@@ -194,6 +205,15 @@
     <Compile Include="Script\Category\Win\PrWin.Const.cs" />
     <Compile Include="Script\Platform\PrPlatform.Git.Upload.cs" />
     <Compile Include="Script\Utils\NetUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common\Common.csproj">
+      <Project>{b0d5708a-7c94-4bcb-805d-a718034e5724}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

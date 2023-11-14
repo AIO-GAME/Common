@@ -200,6 +200,9 @@
         <member name="M:AIO.PrCourse.SetInArgs(System.String@)">
             <inheritdoc/>
         </member>
+        <member name="M:AIO.PrCourse.SetInArgs(System.Text.StringBuilder@)">
+            <inheritdoc/>
+        </member>
         <member name="M:AIO.PrCourse.SetInDomain(System.String@)">
             <inheritdoc/>
         </member>
@@ -592,6 +595,13 @@
             <returns>构造器</returns>
         </member>
         <member name="M:AIO.IPrCourse.SetInArgs(System.String@)">
+            <summary>
+            设置参数
+            </summary>
+            <param name="args"></param>
+            <returns>构造器</returns>
+        </member>
+        <member name="M:AIO.IPrCourse.SetInArgs(System.Text.StringBuilder@)">
             <summary>
             设置参数
             </summary>
@@ -1113,6 +1123,483 @@
             <summary>
             在导入纹理或构建项目之前，将默认纹理压缩设置为所需的格式。这样就不必再使用所需的格式导入纹理。可用的格式为 dxt、pvrtc、atc、etc、etc2 和 astc。
             </summary>
+        </member>
+        <member name="T:AIO.PrCurl">
+            <summary>
+            Curl[WIN][MAC][LINUX]
+            </summary>
+            <remarks>
+            当前命令为Windows版，Linux版和Mac版命令参数可能有所不同
+            </remarks>
+        </member>
+        <member name="F:AIO.PrCurl.CMD">
+            <summary>
+            命令
+            </summary>
+        </member>
+        <member name="T:AIO.PrCurl.Usage">
+            <summary>
+            用法
+            </summary>
+        </member>
+        <member name="F:AIO.PrCurl.Usage.Data">
+            <summary>
+            HTTP POST data        
+            </summary>
+        </member>
+        <member name="F:AIO.PrCurl.Usage.Fail">
+            <summary>
+            Fail fast with no output on HTTP errors        
+            </summary>
+        </member>
+        <member name="F:AIO.PrCurl.Usage.Help">
+            <summary>
+            Get help for commands                  
+            </summary>
+        </member>
+        <member name="F:AIO.PrCurl.Usage.Include">
+            <summary>
+            Include protocol response headers in the output
+            </summary>
+        </member>
+        <member name="F:AIO.PrCurl.Usage.Output">
+            <summary>
+            Write to file instead of stdout                
+            </summary>
+        </member>
+        <member name="F:AIO.PrCurl.Usage.RemoteName">
+            <summary>
+            Write output to a file named as the remote file
+            </summary>
+        </member>
+        <member name="F:AIO.PrCurl.Usage.Silent">
+            <summary>
+            Silent mode                          
+            </summary>
+        </member>
+        <member name="F:AIO.PrCurl.Usage.UploadFile">
+            <summary>
+            --upload-file &lt;file>   Transfer local FILE to destination             
+            </summary>
+        </member>
+        <member name="F:AIO.PrCurl.Usage.User">
+            <summary>
+            --user &lt;user:password> Server user and password                
+            </summary>
+        </member>
+        <member name="F:AIO.PrCurl.Usage.UserAgent">
+            <summary>
+            Send User-Agent &lt;name> to server        
+            </summary>    
+        </member>
+        <member name="F:AIO.PrCurl.Usage.Verbose">
+            <summary>
+            Make the operation more talkative           
+            </summary>   
+        </member>
+        <member name="F:AIO.PrCurl.Usage.Version">
+            <summary>
+            Show version number and quit     
+            </summary>
+        </member>
+        <member name="F:AIO.PrCurl.Usage.XPost">
+            <summary>
+            HTTP POST data
+            </summary>
+        </member>
+        <member name="F:AIO.PrCurl.Usage.Header">
+            <summary>
+            HTTP POST data
+            </summary>
+        </member>
+        <member name="M:AIO.PrCurl.Execute">
+            <summary>
+            运行
+            </summary>
+            <returns><see cref="T:AIO.IExecutor"/></returns>
+        </member>
+        <member name="M:AIO.PrCurl.Create(System.String)">
+            <summary>
+            Create a new instance of PrCurl
+            </summary>
+            <param name="args">参数</param>
+            <returns><see cref="T:AIO.PrCurl"/></returns>
+        </member>
+        <member name="M:AIO.PrCurl.Help(System.String,System.Boolean)">
+            <summary>
+            Get help for commands
+            </summary>
+            <param name="category">用法类型</param>
+            <param name="silent">静默模式</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="T:AIO.PrCurl.Option">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+        </member>
+        <member name="P:AIO.PrCurl.Option.userAndPassword">
+            <summary>
+            用户名和密码
+            </summary>
+        </member>
+        <member name="P:AIO.PrCurl.Option.userAgent">
+            <summary>
+            用户代理
+            </summary>
+        </member>
+        <member name="P:AIO.PrCurl.Option.output">
+            <summary>
+            输出路径
+            </summary>
+        </member>
+        <member name="P:AIO.PrCurl.Option.include">
+            <summary>
+            在输出中是否包含协议头
+            </summary>
+        </member>
+        <member name="P:AIO.PrCurl.Option.verbose">
+            <summary>
+            显示更详细
+            </summary>
+        </member>
+        <member name="P:AIO.PrCurl.Option.fail">
+            <summary>
+            快速失败，HTTP错误没有输出
+            </summary>
+        </member>
+        <member name="P:AIO.PrCurl.Option.silent">
+            <summary>
+            静默模式
+            </summary>
+        </member>
+        <member name="P:AIO.PrCurl.Option.Header">
+            <summary>
+            头部信息
+            </summary>
+        </member>
+        <member name="M:AIO.PrCurl.Option.#ctor">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+        </member>
+        <member name="M:AIO.PrCurl.Option.Append(System.Text.StringBuilder)">
+            <summary>
+            添加参数信息
+            </summary>
+            <param name="str">容器</param>
+        </member>
+        <member name="M:AIO.PrCurl.Option.AddContentType(System.String)">
+            <summary>
+            添加头部信息
+            </summary>
+        </member>
+        <member name="M:AIO.PrCurl.Option.AddCharset(System.String)">
+            <summary>
+            添加头部信息
+            </summary>
+        </member>
+        <member name="M:AIO.PrCurl.Option.AddAuthorization(System.String)">
+            <summary>
+            添加头部信息
+            </summary>
+        </member>
+        <member name="M:AIO.PrCurl.Option.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PrCurl.Post(System.String,System.String,AIO.PrCurl.Option)">
+            <summary>
+            HTTP POST data
+            </summary>
+            <param name="data">上传数据</param>
+            <param name="remote">远端地址</param>
+            <param name="option">可选参数</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrCurl.Remote(System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            远端连接
+            </summary>
+            <param name="userAndPassword">用户名和密码</param>
+            <param name="userAgent">Send User-Agent &lt;name> to server</param>
+            <param name="output">输出路径</param>
+            <param name="include">在输出中是否包含协议头</param>
+            <param name="verbose">显示更详细</param>
+            <param name="remote">远端地址</param>
+            <param name="fail">快速失败，HTTP错误没有输出</param>
+            <param name="silent">静默模式</param> 
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrCurl.UploadFile(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Transfer local FILE to destination
+            </summary>
+            <param name="userAndPassword">用户名和密码</param>
+            <param name="userAgent">Send User-Agent &lt;name> to server</param>
+            <param name="localPath">本地文件路径</param>
+            <param name="output">输出路径</param>
+            <param name="include">在输出中是否包含协议头</param>
+            <param name="verbose">显示更详细</param>
+            <param name="remote">远端地址</param>
+            <param name="fail">快速失败，HTTP错误没有输出</param>
+            <param name="silent">静默模式</param> 
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrCurl.Version(System.String,System.Boolean)">
+            <summary>
+            Show version number and quit
+            </summary>
+            <param name="remote">远端地址</param>
+            <param name="silent">静默模式</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="T:AIO.PrDingding">
+            <summary>
+            命令 钉钉API
+            </summary>
+        </member>
+        <member name="M:AIO.PrDingding.CreateData">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="T:AIO.PrDingding.Msg">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="F:AIO.PrDingding.Msg.Type">
+            <summary>
+            消息类型
+            </summary>
+        </member>
+        <member name="F:AIO.PrDingding.Msg.TBText">
+            <summary>
+            文本类型
+            </summary>
+        </member>
+        <member name="F:AIO.PrDingding.Msg.TBAt">
+            <summary>
+            At 类型
+            </summary>
+        </member>
+        <member name="F:AIO.PrDingding.Msg.TBLink">
+            <summary>
+            link 类型
+            </summary>
+        </member>
+        <member name="F:AIO.PrDingding.Msg.TBActionCard">
+            <summary>
+            actionCard 类型
+            </summary>
+        </member>
+        <member name="F:AIO.PrDingding.Msg.TBFeedCard">
+            <summary>
+            feedCard 类型
+            </summary>
+        </member>
+        <member name="M:AIO.PrDingding.Msg.op_Implicit(AIO.PrDingding.Msg)~System.String">
+            <summary>
+            转换为Json
+            </summary>
+            <param name="msg">钉钉 msg</param>
+            <returns>json string</returns>
+        </member>
+        <member name="M:AIO.PrDingding.Msg.SetAtMobile(System.String[])">
+            <summary>
+            设置 被@人的手机号。
+            </summary>
+            <param name="array">列表</param>
+        </member>
+        <member name="M:AIO.PrDingding.Msg.SetAtUserId(System.String[])">
+            <summary>
+            设置 被@人的用户userid。
+            </summary>
+            <param name="array">列表</param>
+        </member>
+        <member name="M:AIO.PrDingding.Msg.SetAtAll(System.Boolean)">
+            <summary>
+            设置 是否@所有人。
+            </summary>
+            <param name="atAll">是否@所有人。</param>
+        </member>
+        <member name="M:AIO.PrDingding.Msg.ToText(System.String)">
+            <summary>
+            设置 Text类型
+            </summary>
+            <param name="content">内容</param>
+        </member>
+        <member name="M:AIO.PrDingding.Msg.ToLink(System.String,System.String,System.String,System.String)">
+            <summary>
+            设置 Link类型
+            </summary>
+            <param name="title">标题</param>
+            <param name="content">内容</param>
+            <param name="messageUrl">图片地址</param>
+            <param name="picUrl">消息链接</param>
+        </member>
+        <member name="M:AIO.PrDingding.Msg.ToMarkdown(System.String,System.String)">
+            <summary>
+            设置 Markdown类型
+            </summary>
+            <param name="title">标题</param>
+            <param name="content">内容</param>
+        </member>
+        <member name="M:AIO.PrDingding.Msg.ToActionCard(System.String,System.String,System.String,System.String)">
+            <summary>
+            消息类型，此时固定为：actionCard
+            </summary>
+            <param name="title">首屏会话透出的展示内容</param>
+            <param name="content">markdown格式的消息</param>
+            <param name="singleTitle">单个按钮的标题</param>
+            <param name="singleURL">点击消息跳转的URL</param>
+        </member>
+        <member name="M:AIO.PrDingding.Msg.ToActionCard(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Int32)">
+            <summary>
+            消息类型，此时固定为：actionCard
+            </summary>
+            <param name="title">首屏会话透出的展示内容</param>
+            <param name="content">markdown格式的消息</param>
+            <param name="buttons">按钮 ket:按钮标题 value:点击按钮触发的URL</param>
+            <param name="btnOrientation">0：按钮竖直排列 other：按钮横向排列</param>
+        </member>
+        <member name="M:AIO.PrDingding.Msg.ToFeedCard(System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String,System.String}})">
+            <summary>
+            消息类型，此时固定为：feedCard
+            </summary>
+            <param name="links">
+            item1[title]:单条信息文本
+            item1[messageURL]:点击单条信息到跳转链接
+            item1[picURL]:单条信息后面图片的URL
+            </param>
+        </member>
+        <member name="T:AIO.PrDingding.MsgType">
+            <summary>
+            消息类型
+            </summary>
+        </member>
+        <member name="F:AIO.PrDingding.MsgType.empty">
+            <summary>
+            空
+            </summary>
+        </member>
+        <member name="F:AIO.PrDingding.MsgType.text">
+            <summary>
+            文本
+            </summary>
+        </member>
+        <member name="F:AIO.PrDingding.MsgType.link">
+            <summary>
+            链接
+            </summary>
+        </member>
+        <member name="F:AIO.PrDingding.MsgType.markdown">
+            <summary>
+            markdown
+            </summary>
+        </member>
+        <member name="F:AIO.PrDingding.MsgType.actionCard">
+            <summary>
+            actionCard
+            </summary>
+        </member>
+        <member name="F:AIO.PrDingding.MsgType.feedCard">
+            <summary>
+            feedCard
+            </summary>
+        </member>
+        <member name="M:AIO.PrDingding.GetSign(System.String,System.String)">
+            <summary>
+            获取签名后路径
+            </summary>
+            <param name="remote">远端地址</param>
+            <param name="secret">签名</param>
+            <returns>签名后路径</returns>
+        </member>
+        <member name="M:AIO.PrDingding.SendText(System.String,System.String,System.String)">
+            <summary>
+            发送消息
+            </summary>
+            <param name="remote">远端地址</param>
+            <param name="secret">签名密钥</param>
+            <param name="content">内容</param>
+            <returns><see cref="T:AIO.IExecutor"/>执行器</returns>
+        </member>
+        <member name="M:AIO.PrDingding.SendLink(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            发送 Link 消息
+            </summary>
+            <param name="remote">远端地址</param>
+            <param name="secret">签名密钥</param>
+            <param name="title">标题</param>
+            <param name="content">内容</param>
+            <param name="messageUrl">图片地址</param>
+            <param name="picUrl">消息链接</param>
+        </member>
+        <member name="M:AIO.PrDingding.SendMarkdown(System.String,System.String,System.String,System.String)">
+            <summary>
+            发送 Markdown 消息
+            </summary>
+            <param name="remote">远端地址</param>
+            <param name="secret">签名密钥</param>
+            <param name="title">标题</param>
+            <param name="content">内容</param>
+        </member>
+        <member name="M:AIO.PrDingding.SendActionCard(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            发送 ActionCard 消息
+            </summary>
+            <param name="remote">远端地址</param>
+            <param name="secret">签名密钥</param>
+            <param name="title">首屏会话透出的展示内容</param>
+            <param name="content">markdown格式的消息</param>
+            <param name="singleTitle">单个按钮的标题</param>
+            <param name="singleURL">点击消息跳转的URL</param>
+        </member>
+        <member name="M:AIO.PrDingding.SendActionCard(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Int32,System.String,System.String)">
+            <summary>
+            发送 ActionCard 消息
+            </summary>
+            <param name="remote">远端地址</param>
+            <param name="secret">签名密钥</param>
+            <param name="title">首屏会话透出的展示内容</param>
+            <param name="content">markdown格式的消息</param>
+            <param name="buttons">按钮 ket:按钮标题 value:点击按钮触发的URL</param>
+            <param name="btnOrientation">0：按钮竖直排列 other：按钮横向排列</param>
+        </member>
+        <member name="M:AIO.PrDingding.SendFeedCard(System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String,System.String}},System.String,System.String)">
+            <summary>
+            发送 ActionCard 消息
+            </summary>
+            <param name="remote">远端地址</param>
+            <param name="secret">签名密钥</param>
+            <param name="links">
+            item1[title]:单条信息文本
+            item1[messageURL]:点击单条信息到跳转链接
+            item1[picURL]:单条信息后面图片的URL
+            </param>
+        </member>
+        <member name="M:AIO.PrDingding.SendData(AIO.PrDingding.Msg,System.String,System.String)">
+            <summary>
+            发送消息
+            </summary>
+            <param name="remote">远端地址</param>
+            <param name="data">数据</param>
+            <param name="secret">签名密钥</param>
+            <returns><see cref="T:AIO.IExecutor"/>
+            执行器
+            错误码(error-code)   错误码描述(errmsg)   解决方案(solution)
+            400013              群已被解散           请向其他群发消息
+            400102              access-token不存在  请确认access-token拼写是否正确
+            400103              机器人已停用         请联系管理员启用机器人
+            400106              不支持的消息类型      请使用文档中支持的消息类型
+            400107              机器人不存在         请确认机器人是否在群中
+            410101              发送速度太快而限流    请降低发送速度
+            430102              含有不安全的外链      请确认发送的内容合法
+            430103              含有不合适的文本      请确认发送的内容合法
+            430104              含有不合适的图片      请确认发送的内容合法
+            430105              含有不合适的内容      请确认发送的内容合法
+            </returns>
         </member>
         <member name="T:AIO.PrGit">
             <summary>

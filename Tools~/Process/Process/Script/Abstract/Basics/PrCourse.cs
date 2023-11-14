@@ -123,7 +123,7 @@ namespace AIO
         public IPrCourse SetInArgs(in string format, params object[] args)
         {
             if (string.IsNullOrEmpty(format)) return this;
-            Info.Arguments = string.Format(format, args);
+            Info.Arguments = string.Format(format, args).Trim();
             return this;
         }
 
@@ -131,7 +131,15 @@ namespace AIO
         public IPrCourse SetInArgs(in string args)
         {
             if (string.IsNullOrEmpty(args)) return this;
-            Info.Arguments = args;
+            Info.Arguments = args.Trim();
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public IPrCourse SetInArgs(in StringBuilder args)
+        {
+            if (args is null || args.Length == 0) return this;
+            Info.Arguments = args.ToString().Trim();
             return this;
         }
 

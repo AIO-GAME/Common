@@ -32,7 +32,7 @@ public partial class AHelper
         public static async Task<bool> WriteBase64Async<T>(string path, T value, string charset = "utf-8")
         {
             if (value == null) return false;
-            return await WriteTextAsync(path, Base64.Serialize(value), charset);
+            return await WriteTextAsync(path, Base64.SerializeData(value), charset);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ public partial class AHelper
         public static async Task<bool> WriteBase64UTF8Async<T>(string path, T text)
         {
             if (text == null) return false;
-            return await WriteUTF8Async(path, Base64.Serialize(text));
+            return await WriteUTF8Async(path, Base64.SerializeData(text));
         }
     }
 }
