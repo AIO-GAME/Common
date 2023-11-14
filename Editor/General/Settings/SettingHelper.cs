@@ -5,11 +5,14 @@
 |||✩ - - - - - |*/
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace AIO.UEditor
 {
@@ -41,14 +44,16 @@ namespace AIO.UEditor
                 }
 
                 if (type == null) return new Dictionary<int, string>();
-                var GetDefinedLayerCount = type.GetMethod("GetDefinedLayerCount", BindingFlags.Static | BindingFlags.NonPublic);
+                var GetDefinedLayerCount =
+                    type.GetMethod("GetDefinedLayerCount", BindingFlags.Static | BindingFlags.NonPublic);
                 if (GetDefinedLayerCount is null)
                 {
                     Debug.LogError("GetDefinedLayerCount is null");
                     return new Dictionary<int, string>();
                 }
 
-                var GetDefinedLayers = type.GetMethod("Internal_GetDefinedLayers", BindingFlags.Static | BindingFlags.NonPublic);
+                var GetDefinedLayers = type.GetMethod("Internal_GetDefinedLayers",
+                    BindingFlags.Static | BindingFlags.NonPublic);
                 if (GetDefinedLayers is null)
                 {
                     Debug.LogError("GetDefinedLayers is null");
@@ -79,10 +84,8 @@ namespace AIO.UEditor
             /// <param name="nameValue">层级名</param>
             public static void Set(byte layerIndex, string nameValue)
             {
-#if !UNITY_2020_1_OR_NEWER
-                return;
-#else
                 if (layerIndex >= 31) return;
+#if UNITY_2020_1_OR_NEWER
                 var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>("ProjectSettings/TagManager.asset");
                 var objects = new SerializedObject(asset);
                 var layers = objects.FindProperty("layers");
@@ -90,6 +93,22 @@ namespace AIO.UEditor
                 objects.UpdateIfRequiredOrScript();
                 objects.ApplyModifiedProperties();
                 AssetDatabase.SaveAssetIfDirty(asset);
+#else
+                var str = AHelper.IO.ReadUTF8("ProjectSettings/TagManager.asset");
+                var headerIndex = str.IndexOf("TagManager:", StringComparison.CurrentCulture);
+                var header = str.Substring(0, headerIndex);
+                var sb = new StringBuilder(str.Substring(headerIndex));
+                var asset = AHelper.Yaml.Deserialize<Hashtable>(sb.ToString());
+                var TagManager = (Dictionary<object, object>)asset["TagManager"];
+                var layers = (List<object>)TagManager["layers"];
+                layers[layerIndex] = nameValue;
+                TagManager["layers"] = layers;
+                sb.Clear();
+                sb.Append(header);
+                sb.Append(AHelper.Yaml.Serialize(asset));
+                Console.WriteLine(sb);
+                AHelper.IO.WriteUTF8("ProjectSettings/TagManager.asset", sb);
+                AssetDatabase.Refresh();
 #endif
             }
 
@@ -110,34 +129,72 @@ namespace AIO.UEditor
             /// <param name="order">Ture:从头开始 False:从尾开始</param>
             public static void Add(IList<string> agrList, bool order = true)
             {
-#if !UNITY_2020_1_OR_NEWER
-                return;
-#else
                 if (agrList.Count <= 0) return;
+#if UNITY_2020_1_OR_NEWER
                 var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>("ProjectSettings/TagManager.asset");
                 var objects = new SerializedObject(asset);
                 var layers = objects.FindProperty("layers");
                 var index = 0;
                 if (order)
                 {
-                    for (var i = 4; i < layers.arraySize && index < agrList.Count; i++)
+                    for (var i = 0; i < 32; i++)
                     {
+                        if (layers.arraySize <= i) layers.InsertArrayElementAtIndex(i);
                         if (!string.IsNullOrEmpty(layers.GetArrayElementAtIndex(i).stringValue)) continue;
-                        layers.GetArrayElementAtIndex(i).stringValue = agrList[index++];
+                        if (i <= 7) continue;
+                        if (index < agrList.Count) layers.GetArrayElementAtIndex(i).stringValue = agrList[index++];
                     }
                 }
                 else
                 {
-                    for (var i = layers.arraySize - 1; i > 4 && index < agrList.Count; i--)
+                    for (var i = 31; i >= 0; i--)
                     {
+                        if (layers.arraySize <= i) layers.InsertArrayElementAtIndex(i);
                         if (!string.IsNullOrEmpty(layers.GetArrayElementAtIndex(i).stringValue)) continue;
-                        layers.GetArrayElementAtIndex(i).stringValue = agrList[index++];
+                        if (i <= 7) continue;
+                        if (index < agrList.Count) layers.GetArrayElementAtIndex(i).stringValue = agrList[index++];
                     }
                 }
 
                 objects.UpdateIfRequiredOrScript();
                 objects.ApplyModifiedProperties();
                 AssetDatabase.SaveAssetIfDirty(asset);
+#else
+
+                var str = AHelper.IO.ReadUTF8("ProjectSettings/TagManager.asset");
+                var headerIndex = str.IndexOf("TagManager:", StringComparison.CurrentCulture);
+                var header = str.Substring(0, headerIndex);
+                var sb = new StringBuilder(str.Substring(headerIndex));
+                var asset = AHelper.Yaml.Deserialize<Hashtable>(sb.ToString());
+                var TagManager = (Dictionary<object, object>)asset["TagManager"];
+                var layers = (List<object>)TagManager["layers"];
+                var index = 0;
+                if (order)
+                {
+                    for (var i = 0; i < 32; i++)
+                    {
+                        if (layers.Count <= i) layers.Add(null);
+                        if (layers[i] != null) continue;
+                        if (i <= 7) continue;
+                        if (index < agrList.Count) layers[i] = agrList[index++];
+                    }
+                }
+                else
+                {
+                    for (var i = 31; i >= 0; i--)
+                    {
+                        if (layers.Count <= i) layers.Add(null);
+                        if (layers[i] != null) continue;
+                        if (i <= 7) continue;
+                        if (index < agrList.Count) layers[i] = agrList[index++];
+                    }
+                }
+
+                TagManager["layers"] = layers;
+                sb.Clear();
+                sb.Append(header);
+                sb.Append(AHelper.Yaml.Serialize(asset));
+                AHelper.IO.WriteUTF8("ProjectSettings/TagManager.asset", sb);
 #endif
             }
 
