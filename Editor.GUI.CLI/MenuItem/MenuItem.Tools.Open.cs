@@ -11,7 +11,7 @@ namespace AIO.UEditor
 {
     public static partial class MenuItem_Tools
     {
-        [MenuItem("AIO/Page Home", false, -100)]
+        [MenuItem("AIO/Home Page", false, -100)]
         public static void OpenHome()
         {
             Application.OpenURL("https://github.com/AIO-GAME");

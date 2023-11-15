@@ -85,15 +85,6 @@ namespace AIO.UEditor
             public static void Set(byte layerIndex, string nameValue)
             {
                 if (layerIndex >= 31) return;
-#if UNITY_2020_1_OR_NEWER
-                var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>("ProjectSettings/TagManager.asset");
-                var objects = new SerializedObject(asset);
-                var layers = objects.FindProperty("layers");
-                layers.GetArrayElementAtIndex(layerIndex).stringValue = nameValue;
-                objects.UpdateIfRequiredOrScript();
-                objects.ApplyModifiedProperties();
-                AssetDatabase.SaveAssetIfDirty(asset);
-#else
                 var str = AHelper.IO.ReadUTF8("ProjectSettings/TagManager.asset");
                 var headerIndex = str.IndexOf("TagManager:", StringComparison.CurrentCulture);
                 var header = str.Substring(0, headerIndex);
@@ -106,10 +97,7 @@ namespace AIO.UEditor
                 sb.Clear();
                 sb.Append(header);
                 sb.Append(AHelper.Yaml.Serialize(asset));
-                Console.WriteLine(sb);
                 AHelper.IO.WriteUTF8("ProjectSettings/TagManager.asset", sb);
-                AssetDatabase.Refresh();
-#endif
             }
 
             /// <summary>
@@ -130,37 +118,6 @@ namespace AIO.UEditor
             public static void Add(IList<string> agrList, bool order = true)
             {
                 if (agrList.Count <= 0) return;
-#if UNITY_2020_1_OR_NEWER
-                var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>("ProjectSettings/TagManager.asset");
-                var objects = new SerializedObject(asset);
-                var layers = objects.FindProperty("layers");
-                var index = 0;
-                if (order)
-                {
-                    for (var i = 0; i < 32; i++)
-                    {
-                        if (layers.arraySize <= i) layers.InsertArrayElementAtIndex(i);
-                        if (!string.IsNullOrEmpty(layers.GetArrayElementAtIndex(i).stringValue)) continue;
-                        if (i <= 7) continue;
-                        if (index < agrList.Count) layers.GetArrayElementAtIndex(i).stringValue = agrList[index++];
-                    }
-                }
-                else
-                {
-                    for (var i = 31; i >= 0; i--)
-                    {
-                        if (layers.arraySize <= i) layers.InsertArrayElementAtIndex(i);
-                        if (!string.IsNullOrEmpty(layers.GetArrayElementAtIndex(i).stringValue)) continue;
-                        if (i <= 7) continue;
-                        if (index < agrList.Count) layers.GetArrayElementAtIndex(i).stringValue = agrList[index++];
-                    }
-                }
-
-                objects.UpdateIfRequiredOrScript();
-                objects.ApplyModifiedProperties();
-                AssetDatabase.SaveAssetIfDirty(asset);
-#else
-
                 var str = AHelper.IO.ReadUTF8("ProjectSettings/TagManager.asset");
                 var headerIndex = str.IndexOf("TagManager:", StringComparison.CurrentCulture);
                 var header = str.Substring(0, headerIndex);
@@ -195,7 +152,6 @@ namespace AIO.UEditor
                 sb.Append(header);
                 sb.Append(AHelper.Yaml.Serialize(asset));
                 AHelper.IO.WriteUTF8("ProjectSettings/TagManager.asset", sb);
-#endif
             }
 
             /// <summary>
@@ -212,6 +168,15 @@ namespace AIO.UEditor
             public static bool Has(string value)
             {
                 return GetInfo().Any(item => value == item.Value);
+            }
+
+            /// <summary>
+            /// 判断是否有该层级
+            /// </summary>
+            public static bool Has(int index, string value)
+            {
+                var info = GetInfo();
+                return info.ContainsKey(index) && info[index] == value;
             }
         }
     }

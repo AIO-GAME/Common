@@ -59,7 +59,7 @@ namespace AIO.UEditor
         }
 
         [MenuItem("AIO/Window/Query Reference", false, 19)]
-        [MenuItem("Assets/Query Reference", false, 19)]
+        // [MenuItem("Assets/Query Reference", false, 19)]
         private static void FindReferences()
         {
             EHelper.Window.Open<DependAnalysisGraphWindow>(DockedWindowTypes);

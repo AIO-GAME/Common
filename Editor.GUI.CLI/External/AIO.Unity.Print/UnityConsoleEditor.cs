@@ -73,8 +73,6 @@ namespace AIO.UEditor
         [RuntimeInitializeOnLoadMethod]
         private static void Initialize()
         {
-            MenuRefresh();
-
             if (IS_EDITOR_SWITCH_ERROR)
             {
                 if (EnabledError is null)
@@ -144,6 +142,8 @@ namespace AIO.UEditor
 
                 DisableLog?.Invoke(null, null);
             }
+
+            MenuRefresh();
         }
 
         /// <summary>
