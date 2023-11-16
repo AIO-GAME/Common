@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text.Encodings.Web;
-using System.Threading;
-using NDesk.Options;
-using AIO;
 
 public class Program
 {
@@ -13,8 +8,25 @@ public class Program
     public static long TotalBytes;
     public static long TotalMessages;
 
+    static async void Test()
+    {
+        const string serverIp = @"ftpshare-hot.ingcreations.com";
+        const string user = "ftpshare-hot";
+        const string pass = "ingcreations2023";
+        using var handle = AHandle.FTP.Create(serverIp, user, pass, "Bundles");
+        await handle.InitAsync();
+        Console.WriteLine("开始上传");
+        var progress = new ProgressArgs();
+        progress.OnProgress += sender => { Console.WriteLine(sender); };
+        await handle.UploadFolderAsync(
+            @"E:\Project\AIO\20190440f1\Bundles",
+            "",
+            progress);
+    }
+
     static void Main(string[] args)
     {
+        Test();
         // bool help = false;
         // string address = "127.0.0.1";
         // int port = 8080;
@@ -117,11 +129,8 @@ public class Program
         //     "https://oapi.dingtalk.com/robot/send?access_token=ef2a15e5f980819007e3933b6ce0d701dfc772cfff6b8f40918a1d14294e6084";
         // var data = "{\"msgtype\":\"text\",\"text\":{\"content\":\"text\"}}";
         // var msg = AHelper.Net.HTTP.Post(remote, data);
-        
-        var remote = @"http://127.0.0.1/G101/Version/StandaloneWindows64.json";
-        var msg = AHelper.Net.HTTP.Get(remote);
-        Console.WriteLine(string.IsNullOrEmpty(msg));
-        Console.WriteLine(msg);
+
+
         Console.Read();
     }
 }

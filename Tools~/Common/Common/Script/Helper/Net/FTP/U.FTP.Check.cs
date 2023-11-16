@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -22,12 +23,69 @@ public partial class AHelper
             {
                 try
                 {
-                    // ftp用户名和密码
                     var request = (FtpWebRequest)WebRequest.Create(new Uri(uri));
                     request.Credentials = new NetworkCredential(username, password);
                     request.Method = WebRequestMethods.Ftp.ListDirectory;
                     request.Timeout = timeout;
                     var ftpResponse = (FtpWebResponse)request.GetResponse();
+                    ftpResponse.Close();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+
+            /// <summary>
+            /// 判断FTP连接
+            /// </summary>
+            /// <param name="uri">路径</param>
+            /// <param name="username">用户名</param>
+            /// <param name="password">密码</param>
+            /// <param name="dirname">文件夹目录</param>
+            /// <param name="timeout">超时</param>
+            /// <returns>Ture:有效 False:无效</returns>
+            public static bool Check(string uri, string username, string password, string dirname = null,
+                ushort timeout = TIMEOUT)
+            {
+                try
+                {
+                    var remote = string.IsNullOrEmpty(dirname) ? uri : string.Concat(uri, '/', dirname);
+                    var request = (FtpWebRequest)WebRequest.Create(new Uri(remote));
+                    request.Credentials = new NetworkCredential(username, password);
+                    request.Method = WebRequestMethods.Ftp.ListDirectory;
+                    request.Timeout = timeout;
+                    request.GetResponse().Close();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+
+            /// <summary>
+            /// 判断FTP连接
+            /// </summary>
+            /// <param name="uri">路径</param>
+            /// <param name="username">用户名</param>
+            /// <param name="password">密码</param>
+            /// <param name="dirname">文件夹目录</param>
+            /// <param name="timeout">超时</param>
+            /// <returns>Ture:有效 False:无效</returns>
+            public static async Task<bool> CheckAsync(string uri, string username, string password,
+                string dirname = null,
+                ushort timeout = TIMEOUT)
+            {
+                try
+                {
+                    var remote = string.IsNullOrEmpty(dirname) ? uri : string.Concat(uri, '/', dirname);
+                    var request = (FtpWebRequest)WebRequest.Create(new Uri(remote));
+                    request.Credentials = new NetworkCredential(username, password);
+                    request.Method = WebRequestMethods.Ftp.ListDirectory;
+                    request.Timeout = timeout;
+                    var ftpResponse = (FtpWebResponse)await request.GetResponseAsync();
                     ftpResponse.Close();
                     return true;
                 }
@@ -50,7 +108,6 @@ public partial class AHelper
             {
                 try
                 {
-                    // ftp用户名和密码
                     var request = (FtpWebRequest)WebRequest.Create(new Uri(uri));
                     request.Credentials = new NetworkCredential(username, password);
                     request.Method = WebRequestMethods.Ftp.ListDirectory;

@@ -27,7 +27,7 @@ public partial class AHelper
             /// <param name="bufferSize">下载缓存大小</param>
             public static void DownloadFile(string uri, string username, string password,
                 string localPath, string remotePath,
-                ProgressArgs progress = default, bool isOverWrite = false, ushort timeout = TIMEOUT,
+                bool isOverWrite = false, ProgressArgs progress = default, ushort timeout = TIMEOUT,
                 int bufferSize = BUFFER_SIZE)
             {
                 var fileSize = GetFileSize(uri, username, password, remotePath);
@@ -37,7 +37,8 @@ public partial class AHelper
                 {
                     progress.Total = fileSize;
                     var outputStream = new FileStream(localPath, isOverWrite ? FileMode.CreateNew : FileMode.Create);
-                    var request = (FtpWebRequest)WebRequest.Create(new Uri(Path.Combine(uri, remotePath)));
+                    var remote = string.Concat(uri, '/', remotePath);
+                    var request = (FtpWebRequest)WebRequest.Create(new Uri(remote));
                     request.Credentials = new NetworkCredential(username, password);
                     request.Method = WebRequestMethods.Ftp.DownloadFile;
                     request.UseBinary = true;
@@ -85,15 +86,15 @@ public partial class AHelper
             public static void DownloadFolder(string uri, string username, string password,
                 string localPath,
                 string remotePath,
-                ProgressArgs progress = default,
                 AHandle.FTP.ListType searchOption = AHandle.FTP.ListType.ALL,
                 string searchPattern = "*",
                 bool isOverWrite = false,
+                ProgressArgs progress = default,
                 ushort timeout = TIMEOUT,
                 int bufferSize = BUFFER_SIZE
             )
             {
-                var remoteList = GetRemoteList(Path.Combine(uri, remotePath), username, password,
+                var remoteList = GetRemoteList(uri, username, password, remotePath,
                     searchOption, false, searchPattern, timeout);
 
                 var dict = new Dictionary<string, long>();

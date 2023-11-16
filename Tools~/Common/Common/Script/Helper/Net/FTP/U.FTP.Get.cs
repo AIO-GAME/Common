@@ -25,11 +25,11 @@ public partial class AHelper
                 long fileSize = 0;
                 try
                 {
-                    var reqFTP = (FtpWebRequest)WebRequest.Create(new Uri(string.Concat(uri, remotePath)));
-                    reqFTP.Credentials = new NetworkCredential(username, password);
-                    reqFTP.Method = WebRequestMethods.Ftp.GetFileSize;
-                    reqFTP.UseBinary = true;
-                    using var response = (FtpWebResponse)reqFTP.GetResponse();
+                    var remote = string.Concat(uri, '/', remotePath);
+                    var ftp = (FtpWebRequest)WebRequest.Create(new Uri(remote));
+                    ftp.Credentials = new NetworkCredential(username, password);
+                    ftp.Method = WebRequestMethods.Ftp.GetFileSize;
+                    using var response = (FtpWebResponse)ftp.GetResponse();
                     using (var ftpStream = response.GetResponseStream())
                     {
                         if (ftpStream != null)
@@ -55,6 +55,7 @@ public partial class AHelper
             /// <param name="uri">路径</param>
             /// <param name="username">用户名</param>
             /// <param name="password">密码</param>
+            /// <param name="remotePath">远端文件夹名</param>
             /// <param name="type">
             /// 1:获取文件列表
             /// 2:获取文件夹列表
@@ -71,20 +72,23 @@ public partial class AHelper
             /// <returns></returns>
             /// <exception cref="Exception"></exception>
             public static List<string> GetRemoteList(string uri, string username, string password,
-                AHandle.FTP.ListType type, bool detail, string keyword, ushort timeout = TIMEOUT
+                string remotePath = null,
+                AHandle.FTP.ListType type = AHandle.FTP.ListType.ALL, bool detail = false, string keyword = null,
+                ushort timeout = TIMEOUT
             )
             {
                 var infos = new List<string>();
                 try
                 {
-                    var reqFTP = (FtpWebRequest)WebRequest.Create(new Uri(uri));
-                    reqFTP.Credentials = new NetworkCredential(username, password);
-                    reqFTP.Method = detail
+                    var remote = string.Concat(uri, '/', remotePath);
+                    var ftp = (FtpWebRequest)WebRequest.Create(new Uri(remote));
+                    ftp.Credentials = new NetworkCredential(username, password);
+                    ftp.Method = detail
                         ? WebRequestMethods.Ftp.ListDirectoryDetails
                         : WebRequestMethods.Ftp.ListDirectory;
-                    reqFTP.Timeout = timeout;
+                    ftp.Timeout = timeout;
 
-                    var response = reqFTP.GetResponse();
+                    var response = ftp.GetResponse();
                     var stream = response.GetResponseStream();
                     if (stream is null) throw new Exception("FTP Stream is Null");
                     var reader = new StreamReader(stream); //中文文件名

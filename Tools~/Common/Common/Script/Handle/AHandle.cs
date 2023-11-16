@@ -42,6 +42,12 @@ public readonly struct ProgressInfo
         Current = current;
         CurrentName = currentName;
     }
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+        return $"[{CurrentSize}/{TotalSize}] {Progress}%";
+    }
 }
 
 /// <summary>
