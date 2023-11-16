@@ -134,6 +134,7 @@ namespace AIO.UEditor
         /// </summary>
         public virtual void Dispose()
         {
+            SaveData();
             foreach (var item in Items) item.Dispose();
             Items.Clear();
         }

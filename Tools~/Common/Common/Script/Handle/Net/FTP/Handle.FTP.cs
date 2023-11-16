@@ -17,9 +17,9 @@ public partial class AHandle
         /// <param name="password">密码</param>
         /// <param name="remotePath">远端默认跟文件夹</param>
         /// <returns>处理器</returns>
-        public static FTP Create(string userName, string serverIP, string password, string remotePath)
+        public static FTP Create(string serverIP, string userName, string password, string remotePath = null)
         {
-            return new FTP(userName, serverIP, password, remotePath);
+            return new FTP(serverIP, userName, password, remotePath);
         }
 
         /// <summary>
@@ -85,13 +85,20 @@ public partial class AHandle
         /// <param name="userName">用户名</param>
         /// <param name="password">密码</param>
         /// <param name="remotePath">远端默认跟文件夹</param>
-        private FTP(string userName, string serverIP, string password, string remotePath)
+        private FTP(string serverIP, string userName, string password, string remotePath)
         {
             ServerIP = serverIP;
             UserName = userName;
             Password = password;
-            RemotePath = remotePath;
-            URI = string.Concat("ftp://", serverIP + '/', remotePath + '/');
+            if (string.IsNullOrEmpty(remotePath))
+            {
+                URI = string.Concat("ftp://", serverIP + '/');
+            }
+            else
+            {
+                RemotePath = remotePath;
+                URI = string.Concat("ftp://", serverIP + '/', remotePath + '/');
+            }
         }
 
         /// <summary>

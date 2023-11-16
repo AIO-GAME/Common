@@ -101,10 +101,17 @@ namespace AIO.UEditor
             if (!docked)
 #endif
             {
-                position = new Rect(new Vector2(
-                        (Screen.currentResolution.width - minSize.x) / 2,
-                        (Screen.currentResolution.height - minSize.y) / 2),
-                    minSize);
+                try
+                {
+                    position = new Rect(new Vector2(
+                            (Screen.currentResolution.width - minSize.x) / 2,
+                            (Screen.currentResolution.height - minSize.y) / 2),
+                        minSize);
+                }
+                catch
+                {
+                    // ignored
+                }
             }
 
             OnGUIStyle();

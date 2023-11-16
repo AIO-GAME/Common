@@ -176,9 +176,16 @@ namespace UnityEngine
                         break;
                     case UnityConsoleType.Log:
                     default:
+                        if (FilterLog(message)) break;
                         Debug.Log(string.Concat(TAG_LOG, message));
                         break;
                 }
+            }
+
+            private static bool FilterLog(string message)
+            {
+                if (message.Contains("Library/")) return true;
+                return false;
             }
 
             private void FlushNoLock()

@@ -230,7 +230,7 @@ public partial class AHelper
             private static HttpWebRequest CreateHttpWebRequest(string remoteUrl,
                 ushort timeout = TIMEOUT, string cookie = null)
             {
-                var remote = remoteUrl.Replace("\\", "/");
+                var remote = remoteUrl.Replace('\\', Path.DirectorySeparatorChar);
                 var request = (HttpWebRequest)WebRequest.Create(remote);
                 request.Date = DateTime.Now;
                 request.Timeout = timeout;

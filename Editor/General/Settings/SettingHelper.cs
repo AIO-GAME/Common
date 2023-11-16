@@ -179,5 +179,79 @@ namespace AIO.UEditor
                 return info.ContainsKey(index) && info[index] == value;
             }
         }
+
+        /// <summary>
+        /// 加载相关的配置文件
+        /// </summary>
+        public static TSetting LoadSetting<TSetting>() where TSetting : ScriptableObject
+        {
+            var settingType = typeof(TSetting);
+            var guids = AssetDatabase.FindAssets($"t:{settingType.Name}");
+            if (guids.Length == 0)
+            {
+                Debug.LogWarning($"Create new {settingType.Name}.asset");
+                var setting = ScriptableObject.CreateInstance<TSetting>();
+                var filePath = $"Assets/{settingType.Name}.asset";
+                AssetDatabase.CreateAsset(setting, filePath);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+                return setting;
+            }
+            else
+            {
+                if (guids.Length != 1)
+                {
+                    foreach (var guid in guids)
+                    {
+                        var path = AssetDatabase.GUIDToAssetPath(guid);
+                        Debug.LogWarning($"Found multiple file : {path}");
+                    }
+
+                    throw new System.Exception($"Found multiple {settingType.Name} files !");
+                }
+
+                var filePath = AssetDatabase.GUIDToAssetPath(guids[0]);
+                var setting = AssetDatabase.LoadAssetAtPath<TSetting>(filePath);
+                return setting;
+            }
+        }
+
+        /// <summary>
+        /// 加载相关的配置文件
+        /// </summary>
+        public static ScriptableObject LoadSetting(Type settingType)
+        {
+            if (settingType is null || !settingType.IsSubclassOf(typeof(ScriptableObject)))
+                throw new ArgumentNullException(nameof(settingType));
+            
+            var guids = AssetDatabase.FindAssets($"t:{settingType.Name}");
+            if (guids.Length == 0)
+            {
+                Debug.LogWarning($"Create new {settingType.Name}.asset");
+                var setting = ScriptableObject.CreateInstance(settingType);
+                var filePath = $"Assets/{settingType.Name}.asset";
+                AssetDatabase.CreateAsset(setting, filePath);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+                return setting;
+            }
+            else
+            {
+                if (guids.Length != 1)
+                {
+                    foreach (var guid in guids)
+                    {
+                        var path = AssetDatabase.GUIDToAssetPath(guid);
+                        Debug.LogWarning($"Found multiple file : {path}");
+                    }
+
+                    throw new System.Exception($"Found multiple {settingType.Name} files !");
+                }
+
+                var filePath = AssetDatabase.GUIDToAssetPath(guids[0]);
+                var setting = AssetDatabase.LoadAssetAtPath(filePath, settingType);
+                return (ScriptableObject)setting;
+            }
+        }
     }
 }

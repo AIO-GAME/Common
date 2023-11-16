@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Encodings.Web;
 using System.Threading;
 using NDesk.Options;
 using AIO;
@@ -112,10 +113,14 @@ public class Program
         //         $"Message throughput: {(long)(TotalMessages / (TimestampStop - TimestampStart).TotalSeconds)} msg/s");
         // }
 
-        var remote =
-            "https://oapi.dingtalk.com/robot/send?access_token=ef2a15e5f980819007e3933b6ce0d701dfc772cfff6b8f40918a1d14294e6084";
-        var data = "{\"msgtype\":\"text\",\"text\":{\"content\":\"text\"}}";
-        var msg = AHelper.Net.HTTP.Post(remote, data);
+        // var remote =
+        //     "https://oapi.dingtalk.com/robot/send?access_token=ef2a15e5f980819007e3933b6ce0d701dfc772cfff6b8f40918a1d14294e6084";
+        // var data = "{\"msgtype\":\"text\",\"text\":{\"content\":\"text\"}}";
+        // var msg = AHelper.Net.HTTP.Post(remote, data);
+        
+        var remote = @"http://127.0.0.1/G101/Version/StandaloneWindows64.json";
+        var msg = AHelper.Net.HTTP.Get(remote);
+        Console.WriteLine(string.IsNullOrEmpty(msg));
         Console.WriteLine(msg);
         Console.Read();
     }
