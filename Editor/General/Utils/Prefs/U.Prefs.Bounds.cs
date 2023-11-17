@@ -13,14 +13,14 @@ namespace AIO.UEditor
     {
         public partial class Prefs
         {
-            private const int BoundsHashCode = -198387193;
-            private const int BoundsCenterXHashCode = -198387193;
-            private const int BoundsCenterYHashCode = -198387193;
-            private const int BoundsCenterZHashCode = -198387193;
+            private const int BoundsHashCode = -727533002;
+            private const int BoundsCenterXHashCode = 2080814867;
+            private const int BoundsCenterYHashCode = -1823740566;
+            private const int BoundsCenterZHashCode = -55975405;
 
-            private const int BoundsExtentsXHashCode = -198387193;
-            private const int BoundsExtentsYHashCode = -198387193;
-            private const int BoundsExtentsZHashCode = -198387193;
+            private const int BoundsExtentsXHashCode = -32596992;
+            private const int BoundsExtentsYHashCode = 700006681;
+            private const int BoundsExtentsZHashCode = -583549368;
 
             private static Bounds CommonLoadBounds(in string key, in Bounds def)
             {

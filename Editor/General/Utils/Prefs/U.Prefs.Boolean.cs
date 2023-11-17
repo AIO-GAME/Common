@@ -12,7 +12,7 @@ namespace AIO.UEditor
     {
         public partial class Prefs
         {
-            private const int BooleanHashCode = -198387193;
+            private const int BooleanHashCode = 2010873062;
 
             #region 1
 

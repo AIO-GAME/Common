@@ -15,13 +15,17 @@ public class Program
         const string pass = "ingcreations2023";
         using var handle = AHandle.FTP.Create(serverIp, user, pass, "Bundles");
         await handle.InitAsync();
-        Console.WriteLine("开始上传");
         var progress = new ProgressArgs();
-        progress.OnProgress += sender => { Console.WriteLine(sender); };
+        progress.OnProgress += sender => Console.WriteLine(sender);
+        progress.OnError += Console.WriteLine;
         await handle.UploadFolderAsync(
             @"E:\Project\AIO\20190440f1\Bundles",
-            "",
             progress);
+    }
+
+    public static void P(string name)
+    {
+        Console.WriteLine("_{0} {1}", name, $"_{name}".GetHashCode());
     }
 
     static void Main(string[] args)

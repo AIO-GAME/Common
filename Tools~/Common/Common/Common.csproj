@@ -524,6 +524,7 @@
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Delete.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Download.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Get.cs" />
+    <Compile Include="Script\Helper\Net\FTP\U.FTP.Helper.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Upload.cs" />
     <Compile Include="Script\Helper\Net\HTTP\U.Http.Connect.cs" />
     <Compile Include="Script\Helper\Net\HTTP\U.Http.Delete.cs" />

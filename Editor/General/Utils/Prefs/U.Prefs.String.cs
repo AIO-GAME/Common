@@ -4,6 +4,7 @@
 |*|E-Mail:     |*| 1398581458@qq.com     
 |*|============|*/
 
+using System;
 using UnityEditor;
 
 namespace AIO.UEditor
@@ -12,7 +13,7 @@ namespace AIO.UEditor
     {
         public partial class Prefs
         {
-            private const int StringHashCode = -198387194;
+            private const int StringHashCode = 1186655223;
 
             #region 1
 

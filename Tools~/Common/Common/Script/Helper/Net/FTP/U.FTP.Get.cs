@@ -15,33 +15,21 @@ public partial class AHelper
             /// <param name="uri">路径</param>
             /// <param name="username">用户名</param>
             /// <param name="password">密码</param>
-            /// <param name="remotePath">目标文件路径</param>
             /// <param name="timeout">超时</param>
             /// <returns>大小</returns>
             /// <exception cref="Exception"></exception>
-            public static long GetFileSize(string uri, string username, string password, string remotePath,
+            public static long GetFileSize(string uri, string username, string password,
                 ushort timeout = TIMEOUT)
             {
-                long fileSize = 0;
+                long fileSize;
                 try
                 {
-                    var remote = string.Concat(uri, '/', remotePath);
-                    var ftp = (FtpWebRequest)WebRequest.Create(new Uri(remote));
-                    ftp.Credentials = new NetworkCredential(username, password);
-                    ftp.Method = WebRequestMethods.Ftp.GetFileSize;
-                    using var response = (FtpWebResponse)ftp.GetResponse();
-                    using (var ftpStream = response.GetResponseStream())
-                    {
-                        if (ftpStream != null)
-                        {
-                            fileSize = response.ContentLength;
-                            ftpStream.Close();
-                        }
-                    }
-
+                    var ftp = CreateRequest(uri, username, password, "SIZE", timeout);
+                    using var response = ftp.GetResponse();
+                    fileSize = response.ContentLength;
                     response.Close();
                 }
-                catch (Exception ex)
+                catch (WebException ex)
                 {
                     throw new Exception(ex.Message);
                 }
@@ -71,8 +59,37 @@ public partial class AHelper
             /// <param name="timeout">超时</param>
             /// <returns></returns>
             /// <exception cref="Exception"></exception>
+            public static List<string> GetRemoteList(string uri, string username, string password, string remotePath,
+                AHandle.FTP.ListType type = AHandle.FTP.ListType.ALL, bool detail = false, string keyword = null,
+                ushort timeout = TIMEOUT
+            )
+            {
+                return GetRemoteList(string.Concat(uri, '/', remotePath),
+                    username, password, type, detail, keyword, timeout);
+            }
+
+            /// <summary>
+            /// 获取文件或文件夹列表
+            /// </summary>
+            /// <param name="uri">路径</param>
+            /// <param name="username">用户名</param>
+            /// <param name="password">密码</param>
+            /// <param name="type">
+            /// 1:获取文件列表
+            /// 2:获取文件夹列表
+            /// 3:获取文件和文件夹列表
+            /// </param>
+            /// <param name="detail">
+            /// 获取文件或文件夹详细信息
+            /// </param>
+            /// <param name="keyword">
+            /// 获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
+            /// 若listType=FileAndFolder，则该参数无效
+            /// </param>
+            /// <param name="timeout">超时</param>
+            /// <returns></returns>
+            /// <exception cref="Exception"></exception>
             public static List<string> GetRemoteList(string uri, string username, string password,
-                string remotePath = null,
                 AHandle.FTP.ListType type = AHandle.FTP.ListType.ALL, bool detail = false, string keyword = null,
                 ushort timeout = TIMEOUT
             )
@@ -80,18 +97,11 @@ public partial class AHelper
                 var infos = new List<string>();
                 try
                 {
-                    var remote = string.Concat(uri, '/', remotePath);
-                    var ftp = (FtpWebRequest)WebRequest.Create(new Uri(remote));
-                    ftp.Credentials = new NetworkCredential(username, password);
-                    ftp.Method = detail
-                        ? WebRequestMethods.Ftp.ListDirectoryDetails
-                        : WebRequestMethods.Ftp.ListDirectory;
-                    ftp.Timeout = timeout;
-
-                    var response = ftp.GetResponse();
-                    var stream = response.GetResponseStream();
+                    var ftp = CreateRequest(uri, username, password, detail ? "LIST" : "NLST", timeout);
+                    using var response = ftp.GetResponse();
+                    using var stream = response.GetResponseStream();
                     if (stream is null) throw new Exception("FTP Stream is Null");
-                    var reader = new StreamReader(stream); //中文文件名
+                    using var reader = new StreamReader(stream); //中文文件名
                     var line = reader.ReadLine();
                     while (line != null)
                     {
@@ -99,8 +109,7 @@ public partial class AHelper
                         {
                             case AHandle.FTP.ListType.File:
                             {
-                                if (!line.Contains(".")) break;
-
+                                if (!line.Contains(".") || string.IsNullOrEmpty(keyword)) break;
                                 if (keyword.Trim() == "*.*" || keyword.Trim() == "")
                                     infos.Add(line);
                                 else if (line.IndexOf(keyword.Trim(), StringComparison.CurrentCulture) > -1)
@@ -109,8 +118,7 @@ public partial class AHelper
                             }
                             case AHandle.FTP.ListType.Folder:
                             {
-                                if (line.Contains(".")) break;
-
+                                if (line.Contains(".") || string.IsNullOrEmpty(keyword)) break;
                                 if (keyword.Trim() == "*" || keyword.Trim() == "")
                                     infos.Add(line);
                                 else if (line.IndexOf(keyword.Trim(), StringComparison.CurrentCulture) > -1)
@@ -131,7 +139,7 @@ public partial class AHelper
                     response.Close();
                     return infos;
                 }
-                catch (Exception ex)
+                catch (WebException ex)
                 {
                     throw new Exception(ex.Message);
                 }

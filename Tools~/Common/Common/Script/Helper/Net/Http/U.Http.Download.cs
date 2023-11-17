@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 public partial class AHelper
 {
-    internal const int BUFFER_SIZE = 2048;
+    internal const int BUFFER_SIZE = 4096;
 
     public partial class Net
     {

@@ -12,7 +12,7 @@ namespace AIO.UEditor
     {
         public partial class Prefs
         {
-            private const int LongHashCode = -198387194;
+            private const int LongHashCode = 576184436;
 
             private static long CommonLoadLong(in string key, in long def)
             {

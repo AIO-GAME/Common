@@ -13,7 +13,7 @@ namespace AIO.UEditor
     {
         public partial class Prefs
         {
-            private const int FloatHashCode = -198387194;
+            private const int FloatHashCode = -1247861489;
 
             private static float CommonLoadFloat(in string key, in float def)
             {

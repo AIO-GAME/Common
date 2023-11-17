@@ -13,7 +13,7 @@ namespace AIO.UEditor
     {
         public partial class Prefs
         {
-            private const int JsonHashCode = -198387194;
+            private const int JsonHashCode = -1107827892;
 
             private static T CommonLoadJson<T>(in string key, in T def = default)
             {

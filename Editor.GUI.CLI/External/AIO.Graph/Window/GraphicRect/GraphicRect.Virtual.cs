@@ -132,11 +132,12 @@ namespace AIO.UEditor
         /// <summary>
         /// 释放
         /// </summary>
-        public virtual void Dispose()
+        public void Dispose()
         {
             SaveData();
             foreach (var item in Items) item.Dispose();
             Items.Clear();
+            OnDispose();
         }
 
         /// <summary>
@@ -157,6 +158,13 @@ namespace AIO.UEditor
         /// 进入绘制
         /// </summary>
         protected virtual void OnDraw()
+        {
+        }
+
+        /// <summary>
+        /// 释放
+        /// </summary>
+        protected virtual void OnDispose()
         {
         }
 

@@ -107,9 +107,7 @@ public partial class AHandle
         /// </summary>
         public async Task<bool> InitAsync()
         {
-            var result = true;
-            if (!await CheckAsync()) result = await AHelper.Net.FTP.CreateDirAsync(URI, UserName, Password, "");
-            return result;
+            return await AHelper.Net.FTP.CreateDirAsync(URI, UserName, Password, TimeOut);
         }
 
         /// <summary>
@@ -117,14 +115,14 @@ public partial class AHandle
         /// </summary>
         public bool Init()
         {
-            var result = true;
-            if (!Check()) result = AHelper.Net.FTP.CreateDir(URI, UserName, Password, "");
-            return result;
+            return AHelper.Net.FTP.CreateDir(URI, UserName, Password, TimeOut);
         }
 
+        /// <inheritdoc />
         public sealed override string ToString()
         {
-            return base.ToString();
+            return string.Concat("ServerIP: ", ServerIP, " UserName: ", UserName, " Password: ", Password,
+                " RemotePath: ", RemotePath);
         }
 
         /// <summary>
@@ -159,9 +157,9 @@ public partial class AHandle
         /// 创建文件夹
         /// </summary>
         /// <param name="remotePath">远端文件夹路径</param>
-        public void CreateFolder(string remotePath)
+        public void CreateFolder(string remotePath = null)
         {
-            AHelper.Net.FTP.CreateDir(URI, UserName, Password, remotePath);
+            AHelper.Net.FTP.CreateDir(string.Concat(URI, '/', remotePath), UserName, Password);
         }
 
         /// <summary>
@@ -172,7 +170,20 @@ public partial class AHandle
         /// <param name="progress">回调</param>
         public void UploadFile(string localPath, string remotePath, ProgressArgs progress = default)
         {
-            AHelper.Net.FTP.UploadFile(URI, UserName, Password, localPath, remotePath, progress, TimeOut, BufferSize);
+            AHelper.Net.FTP.UploadFile(string.Concat(URI, '/', remotePath), UserName, Password, localPath, progress,
+                TimeOut, BufferSize);
+        }
+
+        /// <summary>
+        /// 上传文件
+        /// </summary>
+        /// <param name="localPath">本地文件</param>
+        /// <param name="progress">回调</param>
+        public void UploadFile(string localPath, ProgressArgs progress = default)
+        {
+            AHelper.Net.FTP.UploadFile(URI, UserName, Password,
+                localPath, progress,
+                TimeOut, BufferSize);
         }
 
         /// <summary>
@@ -183,12 +194,12 @@ public partial class AHandle
         /// <param name="progress">回调</param>
         /// <param name="searchPattern">搜索字段</param>
         /// <param name="searchOption">搜索模式</param>
-        public bool UploadFolder(string localPath, string remotePath = null,
+        public bool UploadFolder(string localPath, string remotePath,
             SearchOption searchOption = SearchOption.AllDirectories,
             string searchPattern = "*", ProgressArgs progress = default)
         {
-            return AHelper.Net.FTP.UploadFolder(URI, UserName, Password, localPath, remotePath, searchOption,
-                searchPattern, progress, TimeOut, BufferSize);
+            return AHelper.Net.FTP.UploadFolder(string.Concat(URI, '/', remotePath), UserName, Password,
+                localPath, searchOption, searchPattern, progress, TimeOut, BufferSize);
         }
 
         /// <summary>
@@ -199,9 +210,19 @@ public partial class AHandle
         /// <param name="progress">回调</param>
         public bool UploadFolder(string localPath, string remotePath, ProgressArgs progress)
         {
-            return AHelper.Net.FTP.UploadFolder(URI, UserName, Password, localPath, remotePath,
-                SearchOption.AllDirectories,
-                "*", progress, TimeOut, BufferSize);
+            return AHelper.Net.FTP.UploadFolder(string.Concat(URI, '/', remotePath), UserName, Password,
+                localPath, SearchOption.AllDirectories, "*", progress, TimeOut, BufferSize);
+        }
+
+        /// <summary>
+        /// 上传文件
+        /// </summary>
+        /// <param name="localPath">本地文件</param>
+        /// <param name="progress">回调</param>
+        public bool UploadFolder(string localPath, ProgressArgs progress)
+        {
+            return AHelper.Net.FTP.UploadFolder(URI, UserName, Password,
+                localPath, SearchOption.AllDirectories, "*", progress, TimeOut, BufferSize);
         }
 
         /// <summary>
@@ -212,7 +233,18 @@ public partial class AHandle
         /// <param name="progress">回调</param>
         public Task<bool> UploadFolderAsync(string localPath, string remotePath, ProgressArgs progress)
         {
-            return AHelper.Net.FTP.UploadFolderAsync(URI, UserName, Password, localPath, remotePath,
+            return AHelper.Net.FTP.UploadFolderAsync(string.Concat(URI, '/', remotePath), UserName, Password, localPath,
+                SearchOption.AllDirectories, "*", progress, TimeOut, BufferSize);
+        }
+
+        /// <summary>
+        /// 上传文件
+        /// </summary>
+        /// <param name="localPath">本地文件</param>
+        /// <param name="progress">回调</param>
+        public Task<bool> UploadFolderAsync(string localPath, ProgressArgs progress)
+        {
+            return AHelper.Net.FTP.UploadFolderAsync(URI, UserName, Password, localPath,
                 SearchOption.AllDirectories,
                 "*", progress, TimeOut, BufferSize);
         }
@@ -227,8 +259,8 @@ public partial class AHandle
         public void DownloadFile(string localPath, string remotePath,
             bool isOverWrite = false, ProgressArgs progress = default)
         {
-            AHelper.Net.FTP.DownloadFile(URI, UserName, Password,
-                localPath, remotePath, isOverWrite, progress,
+            AHelper.Net.FTP.DownloadFile(string.Concat(URI, '/', remotePath), UserName, Password,
+                localPath, isOverWrite, progress,
                 TimeOut, BufferSize);
         }
 
@@ -249,11 +281,30 @@ public partial class AHandle
             string searchPattern = "*",
             bool isOverWrite = false)
         {
-            AHelper.Net.FTP.DownloadFolder(URI, UserName, Password,
-                localPath, remotePath, searchOption, searchPattern, isOverWrite,
+            AHelper.Net.FTP.DownloadFolder(string.Concat(URI, '/', remotePath), UserName, Password,
+                localPath, searchOption, searchPattern, isOverWrite,
                 progress, TimeOut, BufferSize);
         }
 
+        /// <summary>
+        /// 下载文件
+        /// </summary>
+        /// <param name="localPath">本地文件</param>
+        /// <param name="progress">回调</param>
+        /// <param name="searchPattern">搜索字段</param>
+        /// <param name="searchOption">搜索模式</param>
+        /// <param name="isOverWrite">是否重写</param>
+        public void DownloadFolder(
+            string localPath,
+            ProgressArgs progress = default,
+            ListType searchOption = ListType.ALL,
+            string searchPattern = "*",
+            bool isOverWrite = false)
+        {
+            AHelper.Net.FTP.DownloadFolder(URI, UserName, Password,
+                localPath, searchOption, searchPattern, isOverWrite,
+                progress, TimeOut, BufferSize);
+        }
 
         /// <summary>
         /// 获取文件大小
@@ -262,7 +313,7 @@ public partial class AHandle
         /// <returns>文件大小</returns>
         public long GetFileSize(string remotePath)
         {
-            return AHelper.Net.FTP.GetFileSize(URI, UserName, Password, remotePath);
+            return AHelper.Net.FTP.GetFileSize(string.Concat(URI, '/', remotePath), UserName, Password);
         }
 
         /// <summary>
@@ -315,7 +366,7 @@ public partial class AHandle
         /// <returns>Ture:有效 False:无效</returns>
         public bool Check(string remotePath)
         {
-            return AHelper.Net.FTP.Check(URI, UserName, Password, remotePath, TimeOut);
+            return AHelper.Net.FTP.Check(string.Concat(URI, '/', remotePath), UserName, Password, TimeOut);
         }
 
         /// <summary>
@@ -324,7 +375,7 @@ public partial class AHandle
         /// <returns>Ture:有效 False:无效</returns>
         public Task<bool> CheckAsync(string remotePath)
         {
-            return AHelper.Net.FTP.CheckAsync(URI, UserName, Password, remotePath, TimeOut);
+            return AHelper.Net.FTP.CheckAsync(string.Concat(URI, '/', remotePath), UserName, Password, TimeOut);
         }
 
         /// <summary>

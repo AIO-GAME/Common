@@ -40,7 +40,7 @@ public partial class AHelper
                     response.Close();
                     return result;
                 }
-                catch (Exception ex)
+                catch (WebException ex)
                 {
                     throw new Exception(ex.Message);
                 }
@@ -77,7 +77,7 @@ public partial class AHelper
                     response.Close();
                     return result;
                 }
-                catch (Exception ex)
+                catch (WebException ex)
                 {
                     throw new Exception(ex.Message);
                 }

@@ -96,6 +96,25 @@ public struct ProgressArgs : IDisposable
     public Action<Exception> OnError { get; set; }
 
     /// <summary>
+    /// 是否取消
+    /// </summary>
+    internal bool IsCancel { get; set; }
+    
+    /// <summary>
+    /// 取消回调
+    /// </summary>
+    internal Action OnCancel { get; set; }
+    
+    /// <summary>
+    /// 取消
+    /// </summary>
+    public void Cancel()
+    {
+        OnCancel?.Invoke();
+        IsCancel = true;
+    }
+    
+    /// <summary>
     /// 析构函数
     /// </summary>
     public void Dispose()
