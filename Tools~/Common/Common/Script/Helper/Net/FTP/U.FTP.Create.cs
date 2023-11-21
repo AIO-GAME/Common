@@ -21,7 +21,7 @@ public partial class AHelper
                 if (Check(uri, user, pass, timeout)) return true;
                 try
                 {
-                    var request = CreateRequestDir(uri, user, pass, "MKD", timeout);
+                    var request = CreateRequestFile(uri, user, pass, "MKD", timeout);
                     using var response = (FtpWebResponse)request.GetResponse();
                     var status = response.StatusCode == FtpStatusCode.PathnameCreated;
                     request.Abort();
@@ -49,7 +49,7 @@ public partial class AHelper
             {
                 try
                 {
-                    var request = CreateRequestDir(remote, user, pass, "MKD", timeout);
+                    var request = CreateRequestFile(remote, user, pass, "MKD", timeout);
                     using var response = (FtpWebResponse)await request.GetResponseAsync();
                     var status = response.StatusCode == FtpStatusCode.PathnameCreated;
                     request.Abort();

@@ -13,7 +13,7 @@ namespace AIO.UEditor
     /// 修改单个Inspertor物体属性
     /// </summary>
     //[CustomEditor(typeof(Class))]
-    public abstract class InspertorSingle : EmptyEditor
+    public abstract class InspectorSingle<T> : EmptyEditor where T : Object
     {
         /// <summary>
         /// 常量 撤销标识码
@@ -25,23 +25,31 @@ namespace AIO.UEditor
         /// </summary>
         protected SerializedObject SerObj;
 
+        protected T Target;
+
         /// <inheritdoc />
         protected override void Awake()
         {
-            SerObj = new SerializedObject(target);
             Vector = new Vector2();
         }
 
         /// <inheritdoc />
-        protected override void OnEnable()
+        protected sealed override void OnEnable()
+        {
+            if (SerObj is null) SerObj = new SerializedObject(target);
+            Target = (T)target;
+            OnActivation();
+        }
+
+        protected virtual void OnActivation()
         {
         }
 
         /// <inheritdoc />
         protected override void OnDisable() //脚本或对象禁用时调用
         {
-            EditorUtility.SetDirty(SerObj.targetObject);
-            Undo.RecordObject(SerObj.targetObject, string.Concat(UNDO, UndoName));
+            EditorUtility.SetDirty(SerObj?.targetObject);
+            Undo.RecordObject(SerObj?.targetObject, string.Concat(UNDO, UndoName));
         }
 
         /// <inheritdoc />
@@ -55,19 +63,19 @@ namespace AIO.UEditor
         public override void OnInspectorGUI() //首次进入 执行7次  相当于updata
         {
             // 更新序列化对象的表示，仅当对象自上次调用Update后被修改或它是一个脚本时。
-            SerObj.UpdateIfRequiredOrScript();
+            SerObj?.UpdateIfRequiredOrScript();
             // 显示并修改自定义面板
             OnGUI();
             // 应用属性修改而不注册撤消操作。
-            SerObj.ApplyModifiedPropertiesWithoutUndo();
+            SerObj?.ApplyModifiedPropertiesWithoutUndo();
             // 在下一次调用Update()时更新hasMultipleDifferentValues缓存。
-            SerObj.SetIsDifferentCacheDirty();
+            SerObj?.SetIsDifferentCacheDirty();
             // 执行自定义面板操作
             if (GUI.changed)
             {
                 OnChange();
-                EditorUtility.SetDirty(SerObj.targetObject);
-                Undo.RecordObject(SerObj.targetObject, string.Concat(UNDO, UndoName));
+                EditorUtility.SetDirty(SerObj?.targetObject);
+                Undo.RecordObject(SerObj?.targetObject, string.Concat(UNDO, UndoName));
                 Repaint(); //重新绘制
             }
         }
@@ -80,6 +88,8 @@ namespace AIO.UEditor
         /// <summary>
         /// Inspertor 发生改动时调用
         /// </summary>
-        protected abstract void OnChange();
+        protected virtual void OnChange()
+        {
+        }
     }
 }
