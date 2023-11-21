@@ -35,10 +35,7 @@ namespace AIO
         /// </summary>
         public static string AppendToFront(this string str, params char[] chars)
         {
-            var totalLength = str.Length + chars.Length;
-            var builder = new StringBuilder(totalLength);
-            foreach (var item in chars) builder.Append(item);
-            return builder.Append(str).ToString();
+            return new StringBuilder().Append(chars).Append(str).ToString();
         }
 
         /// <summary>
@@ -59,8 +56,7 @@ namespace AIO
         /// </summary>
         public static string AppendToLast(this string str, params string[] strings)
         {
-            var totalLength = str.Length + strings.Sum(s => s.Length);
-            var builder = new StringBuilder(totalLength).Append(str);
+            var builder = new StringBuilder().Append(str);
             foreach (var item in strings) builder.Append(item);
             return builder.ToString();
         }
@@ -70,10 +66,7 @@ namespace AIO
         /// </summary>
         public static string AppendToLast(this string str, params char[] chars)
         {
-            var totalLength = str.Length + chars.Length;
-            var builder = new StringBuilder(totalLength).Append(str);
-            foreach (var item in chars) builder.Append(item);
-            return builder.ToString();
+            return new StringBuilder().Append(str).Append(chars).ToString();
         }
     }
 }

@@ -5,11 +5,14 @@
 |||✩ - - - - - |*/
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace AIO.UEditor
 {
@@ -41,14 +44,16 @@ namespace AIO.UEditor
                 }
 
                 if (type == null) return new Dictionary<int, string>();
-                var GetDefinedLayerCount = type.GetMethod("GetDefinedLayerCount", BindingFlags.Static | BindingFlags.NonPublic);
+                var GetDefinedLayerCount =
+                    type.GetMethod("GetDefinedLayerCount", BindingFlags.Static | BindingFlags.NonPublic);
                 if (GetDefinedLayerCount is null)
                 {
                     Debug.LogError("GetDefinedLayerCount is null");
                     return new Dictionary<int, string>();
                 }
 
-                var GetDefinedLayers = type.GetMethod("Internal_GetDefinedLayers", BindingFlags.Static | BindingFlags.NonPublic);
+                var GetDefinedLayers = type.GetMethod("Internal_GetDefinedLayers",
+                    BindingFlags.Static | BindingFlags.NonPublic);
                 if (GetDefinedLayers is null)
                 {
                     Debug.LogError("GetDefinedLayers is null");
@@ -79,18 +84,20 @@ namespace AIO.UEditor
             /// <param name="nameValue">层级名</param>
             public static void Set(byte layerIndex, string nameValue)
             {
-#if !UNITY_2020_1_OR_NEWER
-                return;
-#else
                 if (layerIndex >= 31) return;
-                var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>("ProjectSettings/TagManager.asset");
-                var objects = new SerializedObject(asset);
-                var layers = objects.FindProperty("layers");
-                layers.GetArrayElementAtIndex(layerIndex).stringValue = nameValue;
-                objects.UpdateIfRequiredOrScript();
-                objects.ApplyModifiedProperties();
-                AssetDatabase.SaveAssetIfDirty(asset);
-#endif
+                var str = AHelper.IO.ReadUTF8("ProjectSettings/TagManager.asset");
+                var headerIndex = str.IndexOf("TagManager:", StringComparison.CurrentCulture);
+                var header = str.Substring(0, headerIndex);
+                var sb = new StringBuilder(str.Substring(headerIndex));
+                var asset = AHelper.Yaml.Deserialize<Hashtable>(sb.ToString());
+                var TagManager = (Dictionary<object, object>)asset["TagManager"];
+                var layers = (List<object>)TagManager["layers"];
+                layers[layerIndex] = nameValue;
+                TagManager["layers"] = layers;
+                sb.Clear();
+                sb.Append(header);
+                sb.Append(AHelper.Yaml.Serialize(asset));
+                AHelper.IO.WriteUTF8("ProjectSettings/TagManager.asset", sb);
             }
 
             /// <summary>
@@ -110,35 +117,41 @@ namespace AIO.UEditor
             /// <param name="order">Ture:从头开始 False:从尾开始</param>
             public static void Add(IList<string> agrList, bool order = true)
             {
-#if !UNITY_2020_1_OR_NEWER
-                return;
-#else
                 if (agrList.Count <= 0) return;
-                var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>("ProjectSettings/TagManager.asset");
-                var objects = new SerializedObject(asset);
-                var layers = objects.FindProperty("layers");
+                var str = AHelper.IO.ReadUTF8("ProjectSettings/TagManager.asset");
+                var headerIndex = str.IndexOf("TagManager:", StringComparison.CurrentCulture);
+                var header = str.Substring(0, headerIndex);
+                var sb = new StringBuilder(str.Substring(headerIndex));
+                var asset = AHelper.Yaml.Deserialize<Hashtable>(sb.ToString());
+                var TagManager = (Dictionary<object, object>)asset["TagManager"];
+                var layers = (List<object>)TagManager["layers"];
                 var index = 0;
                 if (order)
                 {
-                    for (var i = 4; i < layers.arraySize && index < agrList.Count; i++)
+                    for (var i = 0; i < 32; i++)
                     {
-                        if (!string.IsNullOrEmpty(layers.GetArrayElementAtIndex(i).stringValue)) continue;
-                        layers.GetArrayElementAtIndex(i).stringValue = agrList[index++];
+                        if (layers.Count <= i) layers.Add(null);
+                        if (layers[i] != null) continue;
+                        if (i <= 7) continue;
+                        if (index < agrList.Count) layers[i] = agrList[index++];
                     }
                 }
                 else
                 {
-                    for (var i = layers.arraySize - 1; i > 4 && index < agrList.Count; i--)
+                    for (var i = 31; i >= 0; i--)
                     {
-                        if (!string.IsNullOrEmpty(layers.GetArrayElementAtIndex(i).stringValue)) continue;
-                        layers.GetArrayElementAtIndex(i).stringValue = agrList[index++];
+                        if (layers.Count <= i) layers.Add(null);
+                        if (layers[i] != null) continue;
+                        if (i <= 7) continue;
+                        if (index < agrList.Count) layers[i] = agrList[index++];
                     }
                 }
 
-                objects.UpdateIfRequiredOrScript();
-                objects.ApplyModifiedProperties();
-                AssetDatabase.SaveAssetIfDirty(asset);
-#endif
+                TagManager["layers"] = layers;
+                sb.Clear();
+                sb.Append(header);
+                sb.Append(AHelper.Yaml.Serialize(asset));
+                AHelper.IO.WriteUTF8("ProjectSettings/TagManager.asset", sb);
             }
 
             /// <summary>
@@ -155,6 +168,89 @@ namespace AIO.UEditor
             public static bool Has(string value)
             {
                 return GetInfo().Any(item => value == item.Value);
+            }
+
+            /// <summary>
+            /// 判断是否有该层级
+            /// </summary>
+            public static bool Has(int index, string value)
+            {
+                var info = GetInfo();
+                return info.ContainsKey(index) && info[index] == value;
+            }
+        }
+
+        /// <summary>
+        /// 加载相关的配置文件
+        /// </summary>
+        public static TSetting LoadSetting<TSetting>() where TSetting : ScriptableObject
+        {
+            var settingType = typeof(TSetting);
+            var guids = AssetDatabase.FindAssets($"t:{settingType.Name}");
+            if (guids.Length == 0)
+            {
+                Debug.LogWarning($"Create new {settingType.Name}.asset");
+                var setting = ScriptableObject.CreateInstance<TSetting>();
+                var filePath = $"Assets/{settingType.Name}.asset";
+                AssetDatabase.CreateAsset(setting, filePath);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+                return setting;
+            }
+            else
+            {
+                if (guids.Length != 1)
+                {
+                    foreach (var guid in guids)
+                    {
+                        var path = AssetDatabase.GUIDToAssetPath(guid);
+                        Debug.LogWarning($"Found multiple file : {path}");
+                    }
+
+                    throw new System.Exception($"Found multiple {settingType.Name} files !");
+                }
+
+                var filePath = AssetDatabase.GUIDToAssetPath(guids[0]);
+                var setting = AssetDatabase.LoadAssetAtPath<TSetting>(filePath);
+                return setting;
+            }
+        }
+
+        /// <summary>
+        /// 加载相关的配置文件
+        /// </summary>
+        public static ScriptableObject LoadSetting(Type settingType)
+        {
+            if (settingType is null || !settingType.IsSubclassOf(typeof(ScriptableObject)))
+                throw new ArgumentNullException(nameof(settingType));
+            
+            var guids = AssetDatabase.FindAssets($"t:{settingType.Name}");
+            if (guids.Length == 0)
+            {
+                Debug.LogWarning($"Create new {settingType.Name}.asset");
+                var setting = ScriptableObject.CreateInstance(settingType);
+                var filePath = $"Assets/{settingType.Name}.asset";
+                AssetDatabase.CreateAsset(setting, filePath);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+                return setting;
+            }
+            else
+            {
+                if (guids.Length != 1)
+                {
+                    foreach (var guid in guids)
+                    {
+                        var path = AssetDatabase.GUIDToAssetPath(guid);
+                        Debug.LogWarning($"Found multiple file : {path}");
+                    }
+
+                    throw new System.Exception($"Found multiple {settingType.Name} files !");
+                }
+
+                var filePath = AssetDatabase.GUIDToAssetPath(guids[0]);
+                var setting = AssetDatabase.LoadAssetAtPath(filePath, settingType);
+                return (ScriptableObject)setting;
             }
         }
     }

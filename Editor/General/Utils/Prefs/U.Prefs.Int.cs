@@ -12,7 +12,7 @@ namespace AIO.UEditor
     {
         public partial class Prefs
         {
-            private const int IntHashCode = -198387194;
+            private const int IntHashCode = 469892617;
 
             #region 1
 

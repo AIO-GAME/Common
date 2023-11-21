@@ -14,11 +14,11 @@ namespace AIO.UEditor
     {
         public partial class Prefs
         {
-            private const int VectorHashCode = -198387193;
-            private const int VectorXHashCode = -198387193;
-            private const int VectorYHashCode = -198387193;
-            private const int VectorZHashCode = -198387193;
-            private const int VectorWHashCode = -198387193;
+            private const int VectorHashCode = -702003490;
+            private const int VectorXHashCode = -1068145401;
+            private const int VectorYHashCode = -952238499;
+            private const int VectorZHashCode = 369083993;
+            private const int VectorWHashCode = 1040733742;
 
             private static Vector2 CommonLoadVector2(in string key, in Vector2 def)
             {

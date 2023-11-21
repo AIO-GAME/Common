@@ -14,11 +14,11 @@ namespace AIO.UEditor
     {
         public partial class Prefs
         {
-            private const int QuaternionHashCode = -198387193;
-            private const int QuaternionXHashCode = -198387193;
-            private const int QuaternionYHashCode = -198387193;
-            private const int QuaternionZHashCode = -198387193;
-            private const int QuaternionWHashCode = -198387193;
+            private const int QuaternionHashCode = -1869243822;
+            private const int QuaternionXHashCode = 2016409937;
+            private const int QuaternionYHashCode = 426061899;
+            private const int QuaternionZHashCode = 684522924;
+            private const int QuaternionWHashCode = 1247521960;
             
             private static Quaternion CommonLoadQuaternion(in string key, in Quaternion def)
             {

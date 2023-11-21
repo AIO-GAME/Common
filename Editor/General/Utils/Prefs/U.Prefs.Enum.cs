@@ -13,7 +13,7 @@ namespace AIO.UEditor
     {
         public partial class Prefs
         {
-            private const int EnumHashCode = -198387193;
+            private const int EnumHashCode = -683644873;
 
             private static TEnum CommonLoadEnum<TEnum>(in string key, in TEnum def) where TEnum : struct, Enum
             {

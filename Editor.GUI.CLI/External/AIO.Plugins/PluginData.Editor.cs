@@ -166,12 +166,8 @@ namespace AIO
 
             private void OnDisable()
             {
+                if (serializedObject.targetObject is null) return;
                 serializedObject.ApplyModifiedPropertiesWithoutUndo();
-            }
-
-            private void OnDestroy()
-            {
-                serializedObject.Dispose();
             }
 
             internal static DirectoryInfo GetValidDir(string rootDir, string value)

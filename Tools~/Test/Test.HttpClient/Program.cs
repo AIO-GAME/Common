@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using NDesk.Options;
-using AIO;
+using System.IO;
 
 public class Program
 {
@@ -12,8 +9,40 @@ public class Program
     public static long TotalBytes;
     public static long TotalMessages;
 
+    static async void Test()
+    {
+        const string serverIp = @"ftpshare-hot.ingcreations.com";
+        const string user = "ftpshare-hot";
+        const string pass = "ingcreations2023";
+        using var handle = AHandle.FTP.Create(serverIp, user, pass, "Bundles");
+        await handle.InitAsync();
+        var progress = new ProgressArgs();
+        progress.OnProgress += sender => Console.WriteLine(sender);
+        progress.OnError += Console.WriteLine;
+        // await handle.UploadDirAsync(@"E:\Project\AIO\20190440f1\Bundles", progress);
+        await handle.UploadFileAsync(@"E:\WWW\G101\Version\StandaloneWindows64.json", "StandaloneWindows64.json", progress);
+        Console.WriteLine("Upload done!");
+       
+        Console.WriteLine(await handle.CheckFileAsync("Version/StandaloneWindows64.json"));
+        Console.WriteLine(await handle.CheckDirAsync("Version"));
+
+        Console.WriteLine(await handle.CheckFileAsync("Version"));
+        Console.WriteLine(await handle.CheckDirAsync("Version/StandaloneWindows64.json"));
+
+        Console.WriteLine(await handle.CheckAsync("Version1"));
+        Console.WriteLine(await handle.CheckAsync("Version"));
+        Console.WriteLine(await handle.CheckAsync("Version/StandaloneWindows64.json"));
+        Console.WriteLine();
+    }
+
+    public static void P(string name)
+    {
+        Console.WriteLine("_{0} {1}", name, $"_{name}".GetHashCode());
+    }
+
     static void Main(string[] args)
     {
+        Test();
         // bool help = false;
         // string address = "127.0.0.1";
         // int port = 8080;
@@ -112,11 +141,12 @@ public class Program
         //         $"Message throughput: {(long)(TotalMessages / (TimestampStop - TimestampStart).TotalSeconds)} msg/s");
         // }
 
-        var remote =
-            "https://oapi.dingtalk.com/robot/send?access_token=ef2a15e5f980819007e3933b6ce0d701dfc772cfff6b8f40918a1d14294e6084";
-        var data = "{\"msgtype\":\"text\",\"text\":{\"content\":\"text\"}}";
-        var msg = AHelper.Net.HTTP.Post(remote, data);
-        Console.WriteLine(msg);
+        // var remote =
+        //     "https://oapi.dingtalk.com/robot/send?access_token=ef2a15e5f980819007e3933b6ce0d701dfc772cfff6b8f40918a1d14294e6084";
+        // var data = "{\"msgtype\":\"text\",\"text\":{\"content\":\"text\"}}";
+        // var msg = AHelper.Net.HTTP.Post(remote, data);
+
+
         Console.Read();
     }
 }

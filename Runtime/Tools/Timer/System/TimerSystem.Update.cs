@@ -19,7 +19,6 @@ namespace AIO
         /// </summary>
         static partial void Update()
         {
-            long nowMilliseconds;
             TaskHandleToken.ThrowIfCancellationRequested();
             try
             {
@@ -28,12 +27,12 @@ namespace AIO
 #endif
                 while (SWITCH)
                 {
-                    nowMilliseconds = Watch.ElapsedMilliseconds;
-                    if (nowMilliseconds >= Unit) //更新间隔
+                    var updateCacheTime = Watch.ElapsedMilliseconds;
+                    if (updateCacheTime >= Unit) //更新间隔
                     {
                         Watch.Restart();
-                        Counter += nowMilliseconds;
-                        UpdateCacheTime += nowMilliseconds;
+                        Counter += updateCacheTime;
+                        UpdateCacheTime += updateCacheTime;
 
                         if (UpdateCacheTime > UPDATELISTTIME)
                         {
