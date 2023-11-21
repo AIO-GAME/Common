@@ -12,19 +12,18 @@ public partial class AHelper
             /// 创建文件夹
             /// </summary>
             /// <param name="uri">路径</param>
-            /// <param name="username">用户名</param>
-            /// <param name="password">密码</param>
+            /// <param name="user">用户名</param>
+            /// <param name="pass">密码</param>
             /// <param name="timeout">超时</param>
-            public static bool CreateDir(string uri, string username, string password,
+            public static bool CreateDir(string uri, string user, string pass,
                 ushort timeout = TIMEOUT)
             {
-                if (Check(uri, username, password, timeout)) return true;
+                if (Check(uri, user, pass, timeout)) return true;
                 try
                 {
-                    var request = CreateRequest(uri, username, password, WebRequestMethods.Ftp.MakeDirectory, timeout);
+                    var request = CreateRequestDir(uri, user, pass, "MKD", timeout);
                     using var response = (FtpWebResponse)request.GetResponse();
                     var status = response.StatusCode == FtpStatusCode.PathnameCreated;
-                    response.Close();
                     request.Abort();
                     return status;
                 }
@@ -32,7 +31,7 @@ public partial class AHelper
                 {
 #if DEBUG
                     Console.WriteLine("{0} {2}:{3}@{1} ->\n {4}",
-                        nameof(CreateDir), ex.Response.ResponseUri, username, password, ex.Message);
+                        nameof(CreateDir), ex.Response.ResponseUri, user, pass, ex.Message);
 #endif
                     return false;
                 }
@@ -42,19 +41,17 @@ public partial class AHelper
             /// 创建文件夹
             /// </summary>
             /// <param name="remote">路径</param>
-            /// <param name="username">用户名</param>
-            /// <param name="password">密码</param>
+            /// <param name="user">用户名</param>
+            /// <param name="pass">密码</param>
             /// <param name="timeout">超时</param>
-            public static async Task<bool> CreateDirAsync(string remote, string username, string password,
+            public static async Task<bool> CreateDirAsync(string remote, string user, string pass,
                 ushort timeout = TIMEOUT)
             {
-                if (await CheckAsync(remote, username, password, timeout)) return true;
                 try
                 {
-                    var request = CreateRequest(remote, username, password, "MKD", timeout);
+                    var request = CreateRequestDir(remote, user, pass, "MKD", timeout);
                     using var response = (FtpWebResponse)await request.GetResponseAsync();
                     var status = response.StatusCode == FtpStatusCode.PathnameCreated;
-                    response.Close();
                     request.Abort();
                     return status;
                 }
@@ -62,7 +59,7 @@ public partial class AHelper
                 {
 #if DEBUG
                     Console.WriteLine("{0} {2}:{3}@{1} ->\n {4}",
-                        nameof(CreateDirAsync), ex.Response.ResponseUri, username, password, ex.Message);
+                        nameof(CreateDirAsync), ex.Response.ResponseUri, user, pass, ex.Message);
 #endif
                     return false;
                 }
@@ -72,29 +69,29 @@ public partial class AHelper
             /// 重命名文件夹
             /// </summary>
             /// <param name="uri">路径</param>
-            /// <param name="username">用户名</param>
-            /// <param name="password">密码</param>
+            /// <param name="user">用户名</param>
+            /// <param name="pass">密码</param>
             /// <param name="currentName">当前名称</param>
             /// <param name="newName">新名称</param>
             /// <param name="timeout">超时</param>
-            public static bool ReName(string uri, string username, string password, string currentName,
+            public static bool ReName(string uri, string user, string pass, string currentName,
                 string newName, ushort timeout = TIMEOUT)
             {
                 try
                 {
-                    var remote = string.IsNullOrEmpty(currentName) ? uri : string.Concat(uri, '/', currentName);
-                    var request = CreateRequest(remote, username, password, "RENAME", timeout);
+                    var remote = string.Concat(uri, '/', currentName);
+                    var request = CreateRequestFile(remote, user, pass, "RENAME", timeout);
                     request.RenameTo = newName;
                     var response = (FtpWebResponse)request.GetResponse();
                     var status = response.StatusCode == FtpStatusCode.PathnameCreated;
-                    response.Close();
+                    request.Abort();
                     return status;
                 }
                 catch (WebException ex)
                 {
 #if DEBUG
                     Console.WriteLine("{0} {2}:{3}@{1} ->\n {4}",
-                        nameof(ReName), ex.Response.ResponseUri, username, password, ex.Message);
+                        nameof(ReName), ex.Response.ResponseUri, user, pass, ex.Message);
 #endif
                     return false;
                 }
@@ -104,22 +101,21 @@ public partial class AHelper
             /// 重命名文件夹
             /// </summary>
             /// <param name="uri">路径</param>
-            /// <param name="username">用户名</param>
-            /// <param name="password">密码</param>
+            /// <param name="user">用户名</param>
+            /// <param name="pass">密码</param>
             /// <param name="currentName">当前名称</param>
             /// <param name="newName">新名称</param>
             /// <param name="timeout">超时</param>
-            public static async Task<bool> ReNameAsync(string uri, string username, string password, string currentName,
+            public static async Task<bool> ReNameAsync(string uri, string user, string pass, string currentName,
                 string newName, ushort timeout = TIMEOUT)
             {
                 try
                 {
-                    var remote = string.IsNullOrEmpty(currentName) ? uri : string.Concat(uri, '/', currentName);
-                    var request = CreateRequest(remote, username, password, "RENAME", timeout);
+                    var remote = string.Concat(uri, '/', currentName);
+                    var request = CreateRequestFile(remote, user, pass, "RENAME", timeout);
                     request.RenameTo = newName;
                     using var response = (FtpWebResponse)await request.GetResponseAsync();
                     var status = response.StatusCode == FtpStatusCode.PathnameCreated;
-                    response.Close();
                     request.Abort();
                     return status;
                 }
@@ -127,7 +123,7 @@ public partial class AHelper
                 {
 #if DEBUG
                     Console.WriteLine("{0} {2}:{3}@{1} ->\n {4}",
-                        nameof(ReNameAsync), ex.Response.ResponseUri, username, password, ex.Message);
+                        nameof(ReNameAsync), ex.Response.ResponseUri, user, pass, ex.Message);
 #endif
                     return false;
                 }
@@ -138,30 +134,30 @@ public partial class AHelper
             /// 移动文件
             /// </summary>
             /// <param name="uri">路径</param>
-            /// <param name="username">用户名</param>
-            /// <param name="password">密码</param>
+            /// <param name="user">用户名</param>
+            /// <param name="pass">密码</param>
             /// <param name="currentName">当前名称</param>
             /// <param name="newName">新名称</param>
             /// <param name="timeout">超时</param>
-            public static bool Move(string uri, string username, string password, string currentName, string newName,
+            public static bool Move(string uri, string user, string pass, string currentName, string newName,
                 ushort timeout = TIMEOUT)
             {
-                return ReName(uri, username, password, currentName, newName, timeout);
+                return ReName(uri, user, pass, currentName, newName, timeout);
             }
 
             /// <summary>
             /// 移动文件
             /// </summary>
             /// <param name="uri">路径</param>
-            /// <param name="username">用户名</param>
-            /// <param name="password">密码</param>
+            /// <param name="user">用户名</param>
+            /// <param name="pass">密码</param>
             /// <param name="currentName">当前名称</param>
             /// <param name="newName">新名称</param>
             /// <param name="timeout">超时</param>
-            public static Task<bool> MoveAsync(string uri, string username, string password, string currentName,
+            public static Task<bool> MoveAsync(string uri, string user, string pass, string currentName,
                 string newName, ushort timeout = TIMEOUT)
             {
-                return ReNameAsync(uri, username, password, currentName, newName, timeout);
+                return ReNameAsync(uri, user, pass, currentName, newName, timeout);
             }
         }
     }

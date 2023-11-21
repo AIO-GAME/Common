@@ -5,6 +5,8 @@ using System.IO;
 using UnityEngine;
 #if UNITY_2018_1_OR_NEWER && !UNITY_2020_1_OR_NEWER
 using UnityEditor.Experimental.AssetImporters;
+#else
+using UnityEditor.AssetImporters;
 #endif
 
 namespace AIO.UEditor

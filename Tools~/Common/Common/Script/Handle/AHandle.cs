@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Net;
+using System.Threading;
 using AIO;
 
 /// <summary>
 /// 进度信息
 /// </summary>
-public readonly struct ProgressInfo
+public struct ProgressInfo
 {
     /// <summary>
     /// 当前大小
@@ -19,12 +21,12 @@ public readonly struct ProgressInfo
     /// <summary>
     /// 总值
     /// </summary>
-    public long Total { get; }
+    public long Total { get; internal set; }
 
     /// <summary>
     /// 当前值
     /// </summary>
-    public long Current { get; }
+    public long Current { get; internal set; }
 
     /// <summary>
     /// 进度
@@ -34,19 +36,19 @@ public readonly struct ProgressInfo
     /// <summary>
     /// 当前名称
     /// </summary>
-    public string CurrentName { get; }
+    public string CurrentInfo { get; internal set; }
 
-    internal ProgressInfo(long total, long current, string currentName = null)
+    internal ProgressInfo(long total, long current, string currentInfo = null)
     {
         Total = total;
         Current = current;
-        CurrentName = currentName;
+        CurrentInfo = currentInfo;
     }
 
     /// <inheritdoc />
     public override string ToString()
     {
-        return $"[{CurrentSize}/{TotalSize}] {Progress}%";
+        return $"{Progress}% [{CurrentSize}/{TotalSize}] {CurrentInfo}";
     }
 }
 
@@ -56,29 +58,50 @@ public readonly struct ProgressInfo
 public struct ProgressArgs : IDisposable
 {
     /// <summary>
+    /// 是否取消
+    /// </summary>
+    public bool IsCancel;
+
+    internal ProgressInfo Info;
+
+    internal Action OnCancel;
+
+    /// <summary>
+    /// 取消令牌
+    /// </summary>
+    public CancellationToken CancellationToken;
+
+    /// <summary>
     /// 总值
     /// </summary>
-    internal long Total { get; set; }
-
-    private long _Current;
+    internal long Total
+    {
+        get => Info.Total;
+        set => Info.Total = value;
+    }
 
     /// <summary>
     /// 当前值
     /// </summary>
     internal long Current
     {
-        get => _Current;
+        get => Info.Current;
         set
         {
-            _Current = value;
-            OnProgress?.Invoke(new ProgressInfo(Total, _Current, CurrentName));
+            if (IsCancel) return;
+            Info.Current = value;
+            OnProgress?.Invoke(Info);
         }
     }
 
     /// <summary>
     /// 当前名称
     /// </summary>
-    internal string CurrentName { get; set; }
+    internal string CurrentInfo
+    {
+        get => Info.CurrentInfo;
+        set => Info.CurrentInfo = value;
+    }
 
     /// <summary>
     /// 进度回调
@@ -96,29 +119,23 @@ public struct ProgressArgs : IDisposable
     public Action<Exception> OnError { get; set; }
 
     /// <summary>
-    /// 是否取消
-    /// </summary>
-    internal bool IsCancel { get; set; }
-    
-    /// <summary>
-    /// 取消回调
-    /// </summary>
-    internal Action OnCancel { get; set; }
-    
-    /// <summary>
     /// 取消
     /// </summary>
     public void Cancel()
     {
-        OnCancel?.Invoke();
         IsCancel = true;
+        if (!CancellationToken.CanBeCanceled) return;
+
+        CancellationToken.ThrowIfCancellationRequested();
+        if (OnCancel != null) CancellationToken.Register(OnCancel);
     }
-    
+
     /// <summary>
     /// 析构函数
     /// </summary>
     public void Dispose()
     {
+        IsCancel = false;
         OnProgress = null;
         OnComplete = null;
         OnError = null;

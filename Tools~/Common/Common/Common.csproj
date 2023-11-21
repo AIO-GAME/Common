@@ -829,6 +829,7 @@
     <Folder Include="Script\Handle\Net\TCP" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Script\Helper\Net\FTP\FTP.md" />
     <Content Include="Script\Helper\Net\Http\HTTP.md" />
     <Content Include="Script\Tools\Tuple\Tuple.Generated.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -55,7 +55,7 @@ public partial class AHelper
                         response = (HttpWebResponse)await request.GetResponseAsync();
                         progress.Total += response.ContentLength;
                     }
-                    catch (Exception e)
+                    catch (WebException e)
                     {
                         progress.OnError?.Invoke(e);
                         continue;
@@ -67,7 +67,7 @@ public partial class AHelper
 
                 foreach (var item in httpWebResponses.Keys)
                 {
-                    progress.CurrentName = item;
+                    progress.CurrentInfo = item;
                     progress.Current += fileStreams[item].Position - CODE.Length;
                     var responseStream = httpWebResponses[item].GetResponseStream();
                     if (responseStream is null) throw new AIO.NetGetResponseStream("HTTP", httpWebResponses[item]);
@@ -130,7 +130,7 @@ public partial class AHelper
                         response = (HttpWebResponse)request.GetResponse();
                         progress.Total += response.ContentLength;
                     }
-                    catch (Exception e)
+                    catch (WebException e)
                     {
                         progress.OnError?.Invoke(e);
                         continue;
@@ -143,7 +143,7 @@ public partial class AHelper
 
                 foreach (var item in httpWebResponses.Keys)
                 {
-                    progress.CurrentName = item;
+                    progress.CurrentInfo = item;
                     progress.Current += fileStreams[item].Position - CODE.Length;
                     var responseStream = httpWebResponses[item].GetResponseStream();
                     if (responseStream is null) throw new AIO.NetGetResponseStream("HTTP", httpWebResponses[item]);

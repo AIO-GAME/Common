@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 public class Program
 {
@@ -18,9 +19,20 @@ public class Program
         var progress = new ProgressArgs();
         progress.OnProgress += sender => Console.WriteLine(sender);
         progress.OnError += Console.WriteLine;
-        await handle.UploadFolderAsync(
-            @"E:\Project\AIO\20190440f1\Bundles",
-            progress);
+        // await handle.UploadDirAsync(@"E:\Project\AIO\20190440f1\Bundles", progress);
+        await handle.UploadFileAsync(@"E:\WWW\G101\Version\StandaloneWindows64.json", "StandaloneWindows64.json", progress);
+        Console.WriteLine("Upload done!");
+       
+        Console.WriteLine(await handle.CheckFileAsync("Version/StandaloneWindows64.json"));
+        Console.WriteLine(await handle.CheckDirAsync("Version"));
+
+        Console.WriteLine(await handle.CheckFileAsync("Version"));
+        Console.WriteLine(await handle.CheckDirAsync("Version/StandaloneWindows64.json"));
+
+        Console.WriteLine(await handle.CheckAsync("Version1"));
+        Console.WriteLine(await handle.CheckAsync("Version"));
+        Console.WriteLine(await handle.CheckAsync("Version/StandaloneWindows64.json"));
+        Console.WriteLine();
     }
 
     public static void P(string name)

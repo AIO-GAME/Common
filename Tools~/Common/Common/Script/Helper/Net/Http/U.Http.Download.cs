@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 
 public partial class AHelper
 {
-    internal const int BUFFER_SIZE = 4096;
+    /// <summary>
+    /// 容量缓存 : 1M
+    /// </summary>
+    internal const int BUFFER_SIZE = 1024 * 1024;
 
     public partial class Net
     {
@@ -46,7 +49,7 @@ public partial class AHelper
                     response = (HttpWebResponse)request.GetResponse();
                     progress.Total += response.ContentLength;
                     progress.Current += outputStream.Position - CODE.Length;
-                    progress.CurrentName = remote;
+                    progress.CurrentInfo = remote;
                     responseStream = response.GetResponseStream();
                     if (responseStream is null) throw new AIO.NetGetResponseStream("HTTP", response);
 
@@ -65,7 +68,7 @@ public partial class AHelper
                     response.Close();
                     progress.OnComplete?.Invoke();
                 }
-                catch (Exception ex)
+                catch (WebException ex)
                 {
                     responseStream?.Close();
                     outputStream.Close();
@@ -108,7 +111,7 @@ public partial class AHelper
                     response = (HttpWebResponse)await request.GetResponseAsync();
                     progress.Total = response.ContentLength;
                     progress.Current += outputStream.Position - CODE.Length;
-                    progress.CurrentName = remote;
+                    progress.CurrentInfo = remote;
                     responseStream = response.GetResponseStream();
                     if (responseStream is null) throw new AIO.NetGetResponseStream("HTTP", response);
 
@@ -128,7 +131,7 @@ public partial class AHelper
                     response.Close();
                     progress.OnComplete?.Invoke();
                 }
-                catch (Exception ex)
+                catch (WebException ex)
                 {
                     responseStream?.Close();
                     outputStream.Close();

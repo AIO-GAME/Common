@@ -12808,7 +12808,7 @@
             进度
             </summary>
         </member>
-        <member name="P:ProgressInfo.CurrentName">
+        <member name="P:ProgressInfo.CurrentInfo">
             <summary>
             当前名称
             </summary>
@@ -12821,6 +12821,16 @@
             进度参数
             </summary>
         </member>
+        <member name="F:ProgressArgs.IsCancel">
+            <summary>
+            是否取消
+            </summary>
+        </member>
+        <member name="F:ProgressArgs.CancellationToken">
+            <summary>
+            取消令牌
+            </summary>
+        </member>
         <member name="P:ProgressArgs.Total">
             <summary>
             总值
@@ -12831,7 +12841,7 @@
             当前值
             </summary>
         </member>
-        <member name="P:ProgressArgs.CurrentName">
+        <member name="P:ProgressArgs.CurrentInfo">
             <summary>
             当前名称
             </summary>
@@ -12849,16 +12859,6 @@
         <member name="P:ProgressArgs.OnError">
             <summary>
             错误回调
-            </summary>
-        </member>
-        <member name="P:ProgressArgs.IsCancel">
-            <summary>
-            是否取消
-            </summary>
-        </member>
-        <member name="P:ProgressArgs.OnCancel">
-            <summary>
-            取消回调
             </summary>
         </member>
         <member name="M:ProgressArgs.Cancel">
@@ -12901,7 +12901,7 @@
             文件
             </summary>
         </member>
-        <member name="F:AHandle.FTP.ListType.Folder">
+        <member name="F:AHandle.FTP.ListType.Directory">
             <summary>
             文件夹
             </summary>
@@ -12975,19 +12975,44 @@
             <param name="currentRemotePath">当前远端路径</param>
             <param name="newRemoteName">新远端路径</param>
         </member>
+        <member name="M:AHandle.FTP.MoveAsync(System.String,System.String)">
+            <summary>
+            移动文件
+            </summary>
+            <param name="currentRemotePath">当前远端路径</param>
+            <param name="newRemoteName">新远端路径</param>
+        </member>
         <member name="M:AHandle.FTP.DeleteFile(System.String)">
             <summary>
             删除文件
             </summary>
-            <param name="remoteFilePath">远端文件路径</param>
+            <param name="remotePath">远端文件路径</param>
         </member>
-        <member name="M:AHandle.FTP.DeleteFolder(System.String)">
+        <member name="M:AHandle.FTP.DeleteFileAsync(System.String)">
+            <summary>
+            删除文件
+            </summary>
+            <param name="remotePath">远端文件路径</param>
+        </member>
+        <member name="M:AHandle.FTP.DeleteDir(System.String)">
             <summary>
             删除文件夹
             </summary>
-            <param name="remoteDirPath">远端文件夹路径</param>
+            <param name="remotePath">远端文件夹路径</param>
         </member>
-        <member name="M:AHandle.FTP.CreateFolder(System.String)">
+        <member name="M:AHandle.FTP.DeleteDirAsync(System.String)">
+            <summary>
+            删除文件夹
+            </summary>
+            <param name="remotePath">远端文件夹路径</param>
+        </member>
+        <member name="M:AHandle.FTP.CreateDir(System.String)">
+            <summary>
+            创建文件夹
+            </summary>
+            <param name="remotePath">远端文件夹路径</param>
+        </member>
+        <member name="M:AHandle.FTP.CreateDirAsync(System.String)">
             <summary>
             创建文件夹
             </summary>
@@ -13008,7 +13033,22 @@
             <param name="localPath">本地文件</param>
             <param name="progress">回调</param>
         </member>
-        <member name="M:AHandle.FTP.UploadFolder(System.String,System.String,System.IO.SearchOption,System.String,ProgressArgs)">
+        <member name="M:AHandle.FTP.UploadFileAsync(System.String,System.String,ProgressArgs)">
+            <summary>
+            上传文件
+            </summary>
+            <param name="localPath">本地文件</param>
+            <param name="remotePath">远端路径</param>
+            <param name="progress">回调</param>
+        </member>
+        <member name="M:AHandle.FTP.UploadFileAsync(System.String,ProgressArgs)">
+            <summary>
+            上传文件
+            </summary>
+            <param name="localPath">本地文件</param>
+            <param name="progress">回调</param>
+        </member>
+        <member name="M:AHandle.FTP.UploadDir(System.String,System.String,ProgressArgs,System.IO.SearchOption,System.String)">
             <summary>
             上传文件
             </summary>
@@ -13018,37 +13058,35 @@
             <param name="searchPattern">搜索字段</param>
             <param name="searchOption">搜索模式</param>
         </member>
-        <member name="M:AHandle.FTP.UploadFolder(System.String,System.String,ProgressArgs)">
+        <member name="M:AHandle.FTP.UploadDir(System.String,ProgressArgs,System.IO.SearchOption,System.String)">
+            <summary>
+            上传文件
+            </summary>
+            <param name="localPath">本地文件</param>
+            <param name="progress">回调</param>
+            <param name="searchPattern">搜索字段</param>
+            <param name="searchOption">搜索模式</param>
+        </member>
+        <member name="M:AHandle.FTP.UploadDirAsync(System.String,System.String,ProgressArgs,System.IO.SearchOption,System.String)">
             <summary>
             上传文件
             </summary>
             <param name="localPath">本地文件</param>
             <param name="remotePath">远端路径</param>
             <param name="progress">回调</param>
+            <param name="searchPattern">搜索字段</param>
+            <param name="searchOption">搜索模式</param>
         </member>
-        <member name="M:AHandle.FTP.UploadFolder(System.String,ProgressArgs)">
+        <member name="M:AHandle.FTP.UploadDirAsync(System.String,ProgressArgs,System.IO.SearchOption,System.String)">
             <summary>
             上传文件
             </summary>
             <param name="localPath">本地文件</param>
             <param name="progress">回调</param>
+            <param name="searchPattern">搜索字段</param>
+            <param name="searchOption">搜索模式</param>
         </member>
-        <member name="M:AHandle.FTP.UploadFolderAsync(System.String,System.String,ProgressArgs)">
-            <summary>
-            上传文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="remotePath">远端路径</param>
-            <param name="progress">回调</param>
-        </member>
-        <member name="M:AHandle.FTP.UploadFolderAsync(System.String,ProgressArgs)">
-            <summary>
-            上传文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="progress">回调</param>
-        </member>
-        <member name="M:AHandle.FTP.DownloadFile(System.String,System.String,System.Boolean,ProgressArgs)">
+        <member name="M:AHandle.FTP.DownloadFile(System.String,System.String,ProgressArgs,System.Boolean)">
             <summary>
             下载文件
             </summary>
@@ -13057,7 +13095,16 @@
             <param name="progress">回调</param>
             <param name="isOverWrite">是否重写</param>
         </member>
-        <member name="M:AHandle.FTP.DownloadFolder(System.String,System.String,ProgressArgs,AHandle.FTP.ListType,System.String,System.Boolean)">
+        <member name="M:AHandle.FTP.DownloadFileAsync(System.String,System.String,ProgressArgs,System.Boolean)">
+            <summary>
+            下载文件
+            </summary>
+            <param name="localPath">本地文件</param>
+            <param name="remotePath">远端路径</param>
+            <param name="progress">回调</param>
+            <param name="isOverWrite">是否重写</param>
+        </member>
+        <member name="M:AHandle.FTP.DownloadDir(System.String,System.String,ProgressArgs,System.IO.SearchOption,System.String,System.Boolean)">
             <summary>
             下载文件
             </summary>
@@ -13068,7 +13115,28 @@
             <param name="searchOption">搜索模式</param>
             <param name="isOverWrite">是否重写</param>
         </member>
-        <member name="M:AHandle.FTP.DownloadFolder(System.String,ProgressArgs,AHandle.FTP.ListType,System.String,System.Boolean)">
+        <member name="M:AHandle.FTP.DownloadDirAsync(System.String,System.String,ProgressArgs,System.IO.SearchOption,System.String,System.Boolean)">
+            <summary>
+            下载文件
+            </summary>
+            <param name="localPath">本地文件</param>
+            <param name="remotePath">远端路径</param>
+            <param name="progress">回调</param>
+            <param name="searchPattern">搜索字段</param>
+            <param name="searchOption">搜索模式</param>
+            <param name="isOverWrite">是否重写</param>
+        </member>
+        <member name="M:AHandle.FTP.DownloadDir(System.String,ProgressArgs,System.IO.SearchOption,System.String,System.Boolean)">
+            <summary>
+            下载文件
+            </summary>
+            <param name="localPath">本地文件</param>
+            <param name="progress">回调</param>
+            <param name="searchPattern">搜索字段</param>
+            <param name="searchOption">搜索模式</param>
+            <param name="isOverWrite">是否重写</param>
+        </member>
+        <member name="M:AHandle.FTP.DownloadDirAsync(System.String,ProgressArgs,System.IO.SearchOption,System.String,System.Boolean)">
             <summary>
             下载文件
             </summary>
@@ -13082,39 +13150,63 @@
             <summary>
             获取文件大小
             </summary>
-            <param name="remotePath"></param>
+            <param name="remotePath">远端路径</param>
             <returns>文件大小</returns>
         </member>
-        <member name="M:AHandle.FTP.GetList(AHandle.FTP.ListType,System.Boolean,System.String)">
+        <member name="M:AHandle.FTP.GetFileSizeAsync(System.String)">
+            <summary>
+            获取文件大小
+            </summary>
+            <param name="remotePath">远端路径</param>
+            <returns>文件大小</returns>
+        </member>
+        <member name="M:AHandle.FTP.GetList(System.String,System.String)">
             <summary>
             获取文件或文件夹列表
             </summary>
-            <param name="type">获取列表类型</param>
-            <param name="detail">是否获取详细信息</param>
+            <param name="remotePath">远端路径</param>
             <param name="keyword">获取指定文件夹 空时获取全部 当获取类型为全部时 则不生效</param>
             <returns>文件列表</returns>
         </member>
-        <member name="M:AHandle.FTP.GetList(System.String,AHandle.FTP.ListType,System.Boolean,System.String)">
+        <member name="M:AHandle.FTP.GetListAsync(System.String,System.String)">
             <summary>
-            获取文件或文件夹列表
+            获取文件夹列表
             </summary>
-            <param name="remoteDir">远端路径</param>
-            <param name="type">获取列表类型</param>
-            <param name="detail">是否获取详细信息</param>
+            <param name="remotePath">远端路径</param>
             <param name="keyword">获取指定文件夹 空时获取全部 当获取类型为全部时 则不生效</param>
             <returns>文件列表</returns>
         </member>
-        <member name="M:AHandle.FTP.Check">
+        <member name="M:AHandle.FTP.GetListFile(System.String,System.String)">
             <summary>
-            检查FTP是否有效
+            获取文件列表
             </summary>
-            <returns>Ture:有效 False:无效</returns>
+            <param name="remotePath">远端路径</param>
+            <param name="keyword">获取指定文件夹 空时获取全部 当获取类型为全部时 则不生效</param>
+            <returns>文件列表</returns>
         </member>
-        <member name="M:AHandle.FTP.CheckAsync">
+        <member name="M:AHandle.FTP.GetListFileAsync(System.String,System.String)">
             <summary>
-            检查FTP是否有效
+            获取目录列表
             </summary>
-            <returns>Ture:有效 False:无效</returns>
+            <param name="remotePath">远端路径</param>
+            <param name="keyword">获取指定文件夹 空时获取全部 当获取类型为全部时 则不生效</param>
+            <returns>文件列表</returns>
+        </member>
+        <member name="M:AHandle.FTP.GetListDir(System.String,System.String)">
+            <summary>
+            获取文件列表
+            </summary>
+            <param name="remotePath">远端路径</param>
+            <param name="keyword">获取指定文件夹 空时获取全部 当获取类型为全部时 则不生效</param>
+            <returns>文件列表</returns>
+        </member>
+        <member name="M:AHandle.FTP.GetListDirAsync(System.String,System.String)">
+            <summary>
+            获取文件夹列表
+            </summary>
+            <param name="remotePath">远端路径</param>
+            <param name="keyword">获取指定文件夹 空时获取全部 当获取类型为全部时 则不生效</param>
+            <returns>文件列表</returns>
         </member>
         <member name="M:AHandle.FTP.Check(System.String)">
             <summary>
@@ -13125,6 +13217,30 @@
         <member name="M:AHandle.FTP.CheckAsync(System.String)">
             <summary>
             检查FTP是否有效
+            </summary>
+            <returns>Ture:有效 False:无效</returns>
+        </member>
+        <member name="M:AHandle.FTP.CheckFile(System.String)">
+            <summary>
+            检查文件是否有效
+            </summary>
+            <returns>Ture:有效 False:无效</returns>
+        </member>
+        <member name="M:AHandle.FTP.CheckFileAsync(System.String)">
+            <summary>
+            检查文件是否有效
+            </summary>
+            <returns>Ture:有效 False:无效</returns>
+        </member>
+        <member name="M:AHandle.FTP.CheckDir(System.String)">
+            <summary>
+            检查文件夹是否有效
+            </summary>
+            <returns>Ture:有效 False:无效</returns>
+        </member>
+        <member name="M:AHandle.FTP.CheckDirAsync(System.String)">
+            <summary>
+            检查文件夹是否有效
             </summary>
             <returns>Ture:有效 False:无效</returns>
         </member>
@@ -13702,8 +13818,8 @@
             判断FTP连接
             </summary>
             <param name="uri">路径</param>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
             <param name="timeout">超时</param>
             <returns>Ture:有效 False:无效</returns>
         </member>
@@ -13712,18 +13828,58 @@
             判断FTP连接
             </summary>
             <param name="uri">路径</param>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
             <param name="timeout">超时</param>
             <returns>Ture:有效 False:无效</returns>
+        </member>
+        <member name="M:AHelper.Net.FTP.CheckFile(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            判断FTP路径是否为文件
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <returns>Ture:是 False:不是</returns>
+        </member>
+        <member name="M:AHelper.Net.FTP.CheckFileAsync(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            判断FTP路径是否为文件
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <returns>Ture:是 False:不是</returns>
+        </member>
+        <member name="M:AHelper.Net.FTP.CheckDir(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            判断FTP路径是否为文件夹
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <returns>Ture:是 False:不是</returns>
+        </member>
+        <member name="M:AHelper.Net.FTP.CheckDirAsync(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            判断FTP路径是否为文件夹
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <returns>Ture:是 False:不是</returns>
         </member>
         <member name="M:AHelper.Net.FTP.CreateDir(System.String,System.String,System.String,System.UInt16)">
             <summary>
             创建文件夹
             </summary>
             <param name="uri">路径</param>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
             <param name="timeout">超时</param>
         </member>
         <member name="M:AHelper.Net.FTP.CreateDirAsync(System.String,System.String,System.String,System.UInt16)">
@@ -13731,8 +13887,8 @@
             创建文件夹
             </summary>
             <param name="remote">路径</param>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
             <param name="timeout">超时</param>
         </member>
         <member name="M:AHelper.Net.FTP.ReName(System.String,System.String,System.String,System.String,System.String,System.UInt16)">
@@ -13740,8 +13896,8 @@
             重命名文件夹
             </summary>
             <param name="uri">路径</param>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
             <param name="currentName">当前名称</param>
             <param name="newName">新名称</param>
             <param name="timeout">超时</param>
@@ -13751,8 +13907,8 @@
             重命名文件夹
             </summary>
             <param name="uri">路径</param>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
             <param name="currentName">当前名称</param>
             <param name="newName">新名称</param>
             <param name="timeout">超时</param>
@@ -13762,8 +13918,8 @@
             移动文件
             </summary>
             <param name="uri">路径</param>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
             <param name="currentName">当前名称</param>
             <param name="newName">新名称</param>
             <param name="timeout">超时</param>
@@ -13773,37 +13929,57 @@
             移动文件
             </summary>
             <param name="uri">路径</param>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
             <param name="currentName">当前名称</param>
             <param name="newName">新名称</param>
             <param name="timeout">超时</param>
         </member>
-        <member name="M:AHelper.Net.FTP.DeleteFile(System.String,System.String,System.String,System.String,System.UInt16)">
+        <member name="M:AHelper.Net.FTP.DeleteFile(System.String,System.String,System.String,System.UInt16)">
             <summary>
             FTP指定删除文件
             </summary>
-            <param name="uri">网址</param>
-            <param name="username">账号</param>
-            <param name="password">密码</param>
-            <param name="filePath">文件路径</param>
+            <param name="remote">网址</param>
+            <param name="user">账号</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <exception cref="T:System.Net.WebException">异常信息</exception>
+            <returns>删除返回信息</returns>
+        </member>
+        <member name="M:AHelper.Net.FTP.DeleteFileAsync(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            FTP指定删除文件
+            </summary>
+            <param name="remote">网址</param>
+            <param name="user">账号</param>
+            <param name="pass">密码</param>
             <param name="timeout">超时</param>
             <exception cref="T:System.Exception">异常信息</exception>
             <returns>删除返回信息</returns>
         </member>
-        <member name="M:AHelper.Net.FTP.RemoveFolder(System.String,System.String,System.String,System.String,System.UInt16)">
+        <member name="M:AHelper.Net.FTP.DeleteDir(System.String,System.String,System.String,System.UInt16)">
             <summary>
-            FTP指定删除文件
+            FTP指定删除文件夹
             </summary>
-            <param name="uri">网址</param>
-            <param name="username">账号</param>
-            <param name="password">密码</param>
-            <param name="dirPath">文件夹路径</param>
+            <param name="remote">网址</param>
+            <param name="user">账号</param>
+            <param name="pass">密码</param>
             <param name="timeout">超时</param>
-            <exception cref="T:System.Exception">异常信息</exception>
-            <returns>删除返回信息</returns>
+            <exception cref="T:System.Net.WebException">异常信息</exception>
+            <returns>删除状态</returns>
         </member>
-        <member name="M:AHelper.Net.FTP.DownloadFile(System.String,System.String,System.String,System.String,System.Boolean,ProgressArgs,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.FTP.DeleteDirAsync(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            FTP指定删除文件夹
+            </summary>
+            <param name="remote">网址</param>
+            <param name="user">账号</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <exception cref="T:System.Net.WebException">异常信息</exception>
+            <returns>删除状态</returns>
+        </member>
+        <member name="M:AHelper.Net.FTP.DownloadFile(System.String,System.String,System.String,System.String,ProgressArgs,System.Boolean,System.UInt16,System.Int32)">
             <summary>
             FTP下载文件
             </summary>
@@ -13816,7 +13992,20 @@
             <param name="timeout">超时</param>
             <param name="bufferSize">下载缓存大小</param>
         </member>
-        <member name="M:AHelper.Net.FTP.DownloadFolder(System.String,System.String,System.String,System.String,AHandle.FTP.ListType,System.String,System.Boolean,ProgressArgs,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.FTP.DownloadFileAsync(System.String,System.String,System.String,System.String,ProgressArgs,System.Boolean,System.UInt16,System.Int32)">
+            <summary>
+            FTP下载文件
+            </summary>
+            <param name="uri">路径</param>
+            <param name="username">用户名</param>
+            <param name="password">密码</param>
+            <param name="localPath">本地文件路径</param>
+            <param name="progress">回调</param>
+            <param name="overwrite">是否覆盖</param>
+            <param name="timeout">超时</param>
+            <param name="bufferSize">下载缓存大小</param>
+        </member>
+        <member name="M:AHelper.Net.FTP.DownloadDir(System.String,System.String,System.String,System.String,ProgressArgs,System.IO.SearchOption,System.String,System.Boolean,System.UInt16,System.Int32)">
             <summary>
             FTP下载文件夹
             </summary>
@@ -13825,39 +14014,66 @@
             <param name="password">密码</param>
             <param name="localPath">本地文件路径</param>
             <param name="progress">回调</param>
-            <param name="searchPattern">搜索过滤</param>
-            <param name="searchOption">搜索模式</param>
-            <param name="isOverWrite">是否覆盖</param>
+            <param name="pattern">搜索过滤</param>
+            <param name="option">搜索模式</param>
+            <param name="overwrite">是否覆盖</param>
             <param name="timeout">超时</param>
             <param name="bufferSize">下载缓存大小</param>
+        </member>
+        <member name="M:AHelper.Net.FTP.DownloadDirAsync(System.String,System.String,System.String,System.String,ProgressArgs,System.IO.SearchOption,System.String,System.Boolean,System.UInt16,System.Int32)">
+            <summary>
+            FTP下载文件夹
+            </summary>
+            <param name="uri">路径</param>
+            <param name="username">用户名</param>
+            <param name="password">密码</param>
+            <param name="localPath">本地文件路径</param>
+            <param name="progress">回调</param>
+            <param name="pattern">搜索过滤</param>
+            <param name="option">搜索模式</param>
+            <param name="overwrite">是否覆盖</param>
+            <param name="timeout">超时</param>
+            <param name="bufferSize">下载缓存大小</param>
+        </member>
+        <member name="M:AHelper.Net.FTP.GetDownloadList(System.String,System.String,System.String,System.IO.SearchOption,System.String,System.UInt16,System.String)">
+            <summary>
+            获取文件下载列表
+            </summary>
+        </member>
+        <member name="M:AHelper.Net.FTP.GetDownloadListAsync(System.String,System.String,System.String,System.IO.SearchOption,System.String,System.UInt16,System.String)">
+            <summary>
+            获取文件下载列表
+            </summary>
         </member>
         <member name="M:AHelper.Net.FTP.GetFileSize(System.String,System.String,System.String,System.UInt16)">
             <summary>
             获取FTP文件大小
             </summary>
             <param name="uri">路径</param>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
             <param name="timeout">超时</param>
             <returns>大小</returns>
             <exception cref="T:System.Exception"></exception>
         </member>
-        <member name="M:AHelper.Net.FTP.GetRemoteList(System.String,System.String,System.String,System.String,AHandle.FTP.ListType,System.Boolean,System.String,System.UInt16)">
+        <member name="M:AHelper.Net.FTP.GetFileSizeAsync(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            获取FTP文件大小
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <returns>大小</returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:AHelper.Net.FTP.GetRemoteListFile(System.String,System.String,System.String,System.String,System.UInt16)">
             <summary>
             获取文件或文件夹列表
             </summary>
             <param name="uri">路径</param>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
-            <param name="remotePath">远端文件夹名</param>
-            <param name="type">
-            1:获取文件列表
-            2:获取文件夹列表
-            3:获取文件和文件夹列表
-            </param>
-            <param name="detail">
-            获取文件或文件夹详细信息
-            </param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
             <param name="keyword">
             获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
             若listType=FileAndFolder，则该参数无效
@@ -13866,21 +14082,13 @@
             <returns></returns>
             <exception cref="T:System.Exception"></exception>
         </member>
-        <member name="M:AHelper.Net.FTP.GetRemoteList(System.String,System.String,System.String,AHandle.FTP.ListType,System.Boolean,System.String,System.UInt16)">
+        <member name="M:AHelper.Net.FTP.GetRemoteListDir(System.String,System.String,System.String,System.String,System.UInt16)">
             <summary>
             获取文件或文件夹列表
             </summary>
             <param name="uri">路径</param>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
-            <param name="type">
-            1:获取文件列表
-            2:获取文件夹列表
-            3:获取文件和文件夹列表
-            </param>
-            <param name="detail">
-            获取文件或文件夹详细信息
-            </param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
             <param name="keyword">
             获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
             若listType=FileAndFolder，则该参数无效
@@ -13888,14 +14096,136 @@
             <param name="timeout">超时</param>
             <returns></returns>
             <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:AHelper.Net.FTP.GetRemoteList(System.String,System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            获取文件或文件夹列表
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="keyword">
+            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
+            若listType=FileAndFolder，则该参数无效
+            </param>
+            <param name="timeout">超时</param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:AHelper.Net.FTP.GetRemoteList(System.String,System.String,System.String,AHandle.FTP.ListType,System.String,System.UInt16)">
+            <summary>
+            获取文件或文件夹列表
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="type">
+            1:获取文件列表
+            2:获取文件夹列表
+            3:获取文件和文件夹列表
+            </param>
+            <param name="keyword">
+            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
+            若listType=FileAndFolder，则该参数无效
+            </param>
+            <param name="timeout">超时</param>
+            <returns></returns>
+            <exception cref="T:System.Net.WebException"></exception>
+        </member>
+        <member name="M:AHelper.Net.FTP.GetRemoteListFileAsync(System.String,System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            获取文件或文件夹列表
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="keyword">
+            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
+            若listType=FileAndFolder，则该参数无效
+            </param>
+            <param name="timeout">超时</param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:AHelper.Net.FTP.GetRemoteListDirAsync(System.String,System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            获取文件或文件夹列表
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="keyword">
+            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
+            若listType=FileAndFolder，则该参数无效
+            </param>
+            <param name="timeout">超时</param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:AHelper.Net.FTP.GetRemoteListAsync(System.String,System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            获取文件或文件夹列表
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="keyword">
+            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
+            若listType=FileAndFolder，则该参数无效
+            </param>
+            <param name="timeout">超时</param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:AHelper.Net.FTP.GetRemoteListAsync(System.String,System.String,System.String,AHandle.FTP.ListType,System.String,System.UInt16)">
+            <summary>
+            获取文件或文件夹列表
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="type">
+            1:获取文件列表
+            2:获取文件夹列表
+            3:获取文件和文件夹列表
+            </param>
+            <param name="keyword">
+            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
+            若listType=FileAndFolder，则该参数无效
+            </param>
+            <param name="timeout">超时</param>
+            <returns></returns>
+            <exception cref="T:System.Net.WebException"></exception>
+        </member>
+        <member name="M:AHelper.Net.FTP.CreateRequestFile(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            创建一个FTP请求
+            </summary>
+            <param name="remote">远程地址，格式为ftp://xxx</param>
+            <param name="user">FTP登录用户名</param>
+            <param name="pass">FTP登录密码</param>
+            <param name="method">请求的方法，可以是"GET"、"PUT"、"POST"等</param>
+            <param name="timeout">请求的超时时间，单位为秒，默认超时时间为TIMEOUT</param>
+            <returns>创建的FTP请求</returns>
+        </member>
+        <member name="M:AHelper.Net.FTP.CreateRequestDir(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            创建一个FTP请求
+            </summary>
+            <param name="remote">远程地址，格式为ftp://xxx</param>
+            <param name="user">FTP登录用户名</param>
+            <param name="pass">FTP登录密码</param>
+            <param name="method">请求的方法，可以是"GET"、"PUT"、"POST"等</param>
+            <param name="timeout">请求的超时时间，单位为秒，默认超时时间为TIMEOUT</param>
+            <returns>创建的FTP请求</returns>
         </member>
         <member name="M:AHelper.Net.FTP.UploadFile(System.String,System.String,System.String,System.String,ProgressArgs,System.UInt16,System.Int32)">
             <summary>
             FTP上传文件
             </summary>
             <param name="uri">路径</param>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
             <param name="localPath">本地文件路径</param>
             <param name="progress">回调</param>
             <param name="timeout">超时</param>
@@ -13906,8 +14236,8 @@
             FTP上传文件
             </summary>
             <param name="uri">路径</param>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
             <param name="localPath">本地文件路径</param>
             <param name="progress">回调</param>
             <param name="timeout">超时</param>
@@ -13918,12 +14248,12 @@
             FTP上传文件夹
             </summary>
             <param name="uri">路径</param>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
             <param name="localPath">本地文件路径</param>
-            <param name="searchOption">搜索模式</param>
+            <param name="option">搜索模式</param>
             <param name="progress">进度回调</param>
-            <param name="searchPattern">匹配模式</param>
+            <param name="pattern">匹配模式</param>
             <param name="timeout">超时</param>
             <param name="bufferSize">缓存大小</param>
         </member>
@@ -13932,12 +14262,12 @@
             FTP上传文件夹
             </summary>
             <param name="uri">路径</param>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
             <param name="localPath">本地文件路径</param>
-            <param name="searchOption">搜索模式</param>
+            <param name="option">搜索模式</param>
             <param name="progress">进度回调</param>
-            <param name="searchPattern">匹配模式</param>
+            <param name="pattern">匹配模式</param>
             <param name="timeout">超时</param>
             <param name="bufferSize">缓存大小</param>
         </member>
