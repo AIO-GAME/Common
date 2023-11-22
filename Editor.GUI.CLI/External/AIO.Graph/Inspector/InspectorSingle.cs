@@ -1,16 +1,16 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> XINAN
+|||✩ Author:   ||| -> xi nan
 |||✩ Date:     ||| -> 2023-06-26
 |||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
+using UnityEditor;
+using UnityEngine;
+
 namespace AIO.UEditor
 {
-    using UnityEditor;
-    using UnityEngine;
-
     /// <summary>
-    /// 修改单个Inspertor物体属性
+    /// 修改单个 Inspector 物体属性
     /// </summary>
     //[CustomEditor(typeof(Class))]
     public abstract class InspectorSingle<T> : EmptyEditor where T : Object
@@ -23,7 +23,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 目标对象
         /// </summary>
-        protected SerializedObject SerObj;
+        private SerializedObject SerObj;
 
         protected T Target;
 
@@ -48,8 +48,17 @@ namespace AIO.UEditor
         /// <inheritdoc />
         protected override void OnDisable() //脚本或对象禁用时调用
         {
-            EditorUtility.SetDirty(SerObj?.targetObject);
-            Undo.RecordObject(SerObj?.targetObject, string.Concat(UNDO, UndoName));
+            if (target is null) return;
+
+            EditorUtility.SetDirty(target);
+            Undo.RecordObject(target, string.Concat(UNDO, UndoName));
+
+            SerObj?.SetIsDifferentCacheDirty();
+            SerObj?.ApplyModifiedProperties();
+            SerObj?.Update();
+            SerObj = null;
+
+            AssetDatabase.SaveAssets();
         }
 
         /// <inheritdoc />
@@ -60,7 +69,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 执行这一个函数来一个自定义检视面板
         /// </summary>
-        public override void OnInspectorGUI() //首次进入 执行7次  相当于updata
+        public override void OnInspectorGUI() //首次进入 执行7次  相当于update
         {
             // 更新序列化对象的表示，仅当对象自上次调用Update后被修改或它是一个脚本时。
             SerObj?.UpdateIfRequiredOrScript();
@@ -74,19 +83,18 @@ namespace AIO.UEditor
             if (GUI.changed)
             {
                 OnChange();
-                EditorUtility.SetDirty(SerObj?.targetObject);
-                Undo.RecordObject(SerObj?.targetObject, string.Concat(UNDO, UndoName));
+                OnDisable();
                 Repaint(); //重新绘制
             }
         }
 
         /// <summary>
-        /// 绘制 Inspertor 面板
+        /// 绘制 Inspector 面板
         /// </summary>
         protected abstract void OnGUI();
 
         /// <summary>
-        /// Inspertor 发生改动时调用
+        /// Inspector 发生改动时调用
         /// </summary>
         protected virtual void OnChange()
         {

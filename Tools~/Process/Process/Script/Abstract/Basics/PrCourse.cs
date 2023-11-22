@@ -27,12 +27,12 @@ namespace AIO
         /// <summary>
         /// 开启日志
         /// </summary>
-        public static bool IsLog = true;
+        public static bool IsLog { get; set; } = true;
 
         /// <summary>
         /// 是否捕获异常
         /// </summary>
-        public static bool IsCache = false;
+        public static bool IsCache { get; set; } = false;
 
         /// <summary>
         /// 编码

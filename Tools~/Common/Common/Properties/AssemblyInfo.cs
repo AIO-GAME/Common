@@ -31,6 +31,7 @@ using System.Runtime.InteropServices;
 [assembly: InternalsVisibleTo("AIO.Core.Editor")]
 [assembly: InternalsVisibleTo("AIO.Unity.Runtime")]
 [assembly: InternalsVisibleTo("AIO.Unity.Editor")]
+[assembly: InternalsVisibleTo("AIO.Asset.Runtime")]
 
 /// <summary>
 /// 程序集信息
