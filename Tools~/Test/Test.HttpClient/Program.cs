@@ -19,7 +19,7 @@ public class Program
         var progress = new ProgressArgs();
         progress.OnProgress += sender => Console.WriteLine(sender);
         progress.OnError += Console.WriteLine;
-        // await handle.UploadDirAsync(@"E:\Project\AIO\20190440f1\Bundles", progress);
+        await handle.UploadDirAsync(@"E:\Project\AIO\20190440f1\Bundles", progress);
         await handle.UploadFileAsync(@"E:\WWW\G101\Version\StandaloneWindows64.json", "StandaloneWindows64.json", progress);
         Console.WriteLine("Upload done!");
        

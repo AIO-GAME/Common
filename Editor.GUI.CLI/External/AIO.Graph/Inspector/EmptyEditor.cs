@@ -27,7 +27,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 撤销操作名字
         /// </summary>
-        protected string UndoName;
+        protected virtual string UndoName => GetType().FullName;
 
         /// <summary>
         /// 鼠标点击进入调用

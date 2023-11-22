@@ -4,6 +4,7 @@
 |||✩ Document: ||| ->
 |||✩ - - - - - |*/
 
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ namespace AIO.UEditor
     /// 修改多个Inspertor物体属性
     /// </summary>
     [CanEditMultipleObjects]
-    public abstract partial class InspertorMultiple : EmptyEditor
+    public abstract partial class InspectorMultiple<T> : EmptyEditor where T : Object
     {
         /// <summary>
         /// 常量 撤销标识码
@@ -25,15 +26,23 @@ namespace AIO.UEditor
         /// </summary>
         protected SerializedObject SerObj;
 
+        protected T[] Targets;
+
         /// <inheritdoc />
         protected override void Awake()
         {
-            SerObj = new SerializedObject(targets);
             Vector = new Vector2();
         }
 
         /// <inheritdoc />
-        protected override void OnEnable()
+        protected sealed override void OnEnable()
+        {
+            if (SerObj is null) SerObj = new SerializedObject(targets);
+            Targets = (T[])SerObj.targetObjects;
+            OnActivation();
+        }
+
+        protected virtual void OnActivation()
         {
         }
 
@@ -56,20 +65,20 @@ namespace AIO.UEditor
         /// <summary>
         /// 执行这一个函数来一个自定义检视面板
         /// </summary>
-        public override void OnInspectorGUI() //首次进入 执行7次  相当于updata
+        public override void OnInspectorGUI() //首次进入 执行7次  相当于 update
         {
             // 更新序列化对象的表示，仅当对象自上次调用Update后被修改或它是一个脚本时。
-            SerObj.UpdateIfRequiredOrScript();
+            SerObj?.UpdateIfRequiredOrScript();
             // 显示并修改自定义面板
             OnGUI();
             // 应用属性修改而不注册撤消操作。
-            SerObj.ApplyModifiedPropertiesWithoutUndo();
+            SerObj?.ApplyModifiedPropertiesWithoutUndo();
             // 在下一次调用Update()时更新hasMultipleDifferentValues缓存。
-            SerObj.SetIsDifferentCacheDirty();
+            SerObj?.SetIsDifferentCacheDirty();
             // 执行自定义面板操作
-            if (GUI.changed)
-            {
-                OnChange();
+            if (!GUI.changed) return;
+            OnChange();
+            if (SerObj?.targetObjects != null)
                 foreach (var obj in SerObj.targetObjects)
                 {
                     if (obj == null) continue;
@@ -77,8 +86,7 @@ namespace AIO.UEditor
                     Undo.RecordObject(obj, string.Concat(UNDO, UndoName));
                 }
 
-                Repaint(); //重新绘制
-            }
+            Repaint(); //重新绘制
         }
 
         /// <summary>
@@ -89,6 +97,8 @@ namespace AIO.UEditor
         /// <summary>
         /// Inspertor 发生改动时调用
         /// </summary>
-        protected abstract void OnChange();
+        protected virtual void OnChange()
+        {
+        }
     }
 }

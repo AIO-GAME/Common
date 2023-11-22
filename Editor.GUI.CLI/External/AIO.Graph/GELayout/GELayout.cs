@@ -79,10 +79,10 @@ namespace AIO.UEditor
             }
 
             if (array is null) array = new List<T>();
-            EditorGUILayout.BeginVertical(bgStyle);
+            EditorGUILayout.BeginVertical(bgStyle ?? GUIStyle.none);
 
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField(label, labelStyle);
+            EditorGUILayout.LabelField(label, labelStyle ?? GUIStyle.none);
             if (GUILayout.Button("+", GUILayout.Width(20))) array.Add(addFunc.Invoke());
             EditorGUILayout.EndHorizontal();
 

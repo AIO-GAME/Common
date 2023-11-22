@@ -14924,6 +14924,11 @@
             <param name="stream">文件流</param>
             <param name="bufferSize">容量大小</param>
         </member>
+        <member name="F:AHelper.BUFFER_SIZE">
+            <summary>
+            容量缓存 : 1M
+            </summary>
+        </member>
         <member name="T:AHelper.Reflect">
             <summary>
             反射工具库
