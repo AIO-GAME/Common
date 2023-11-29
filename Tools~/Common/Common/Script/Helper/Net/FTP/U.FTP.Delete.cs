@@ -36,7 +36,6 @@ public partial class AHelper
                 }
             }
 
-
             /// <summary>
             /// FTP指定删除文件
             /// </summary>

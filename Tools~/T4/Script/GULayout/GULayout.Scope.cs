@@ -1,9 +1,7 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #pragma warning disable CS0109 // 
 
-using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace AIO
 {
@@ -35,10 +33,10 @@ namespace AIO
                     Params = param,
                     ReturnType = "void",
                 };
-                chunk.ContentBuilder.AppendLine("if (action == null) return;");
-                chunk.ContentBuilder.AppendLine($"GUILayout.BeginHorizontal({chunk.GetParamValues()});");
-                chunk.ContentBuilder.AppendLine("action();");
-                chunk.ContentBuilder.AppendLine("GUILayout.EndHorizontal();");
+                chunk.ContentBuilder.AppendLine($"using (new GUILayout.HorizontalScope({chunk.GetParamValues()})");
+                chunk.ContentBuilder.AppendLine("{");
+                chunk.ContentBuilder.AppendLine("    action?.Invoke();");
+                chunk.ContentBuilder.AppendLine("}");
                 chunks.Add(chunk);
             }
 
@@ -106,9 +104,10 @@ namespace AIO
                     ReturnType = "void",
                 };
                 chunk.ContentBuilder.AppendLine("if (action == null) return;");
-                chunk.ContentBuilder.AppendLine($"GUILayout.BeginVertical({chunk.GetParamValues()});");
-                chunk.ContentBuilder.AppendLine("action();");
-                chunk.ContentBuilder.AppendLine("GUILayout.EndVertical();");
+                chunk.ContentBuilder.AppendLine($"using (new GUILayout.VerticalScope({chunk.GetParamValues()}))");
+                chunk.ContentBuilder.AppendLine("{");
+                chunk.ContentBuilder.AppendLine("    action?.Invoke();");
+                chunk.ContentBuilder.AppendLine("}");
                 chunks.Add(chunk);
             }
 

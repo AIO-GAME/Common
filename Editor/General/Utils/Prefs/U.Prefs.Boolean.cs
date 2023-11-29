@@ -24,7 +24,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static bool LoadBoolean(in string field, in bool def = false)
             {
-                var key = string.Concat(field.GetHashCode(), BooleanHashCode);
+                var key = CombineKey(field, BooleanHashCode);
                 return EditorPrefs.GetInt(key, def ? 1 : 0) == 1;
             }
 
@@ -35,7 +35,7 @@ namespace AIO.UEditor
             /// <param name="value">值</param>
             public static void SaveBoolean(in string field, in bool value)
             {
-                var key = string.Concat(field.GetHashCode(), BooleanHashCode);
+                var key = CombineKey(field, BooleanHashCode);
                 EditorPrefs.SetInt(key, value ? 1 : 0);
             }
 
@@ -45,7 +45,7 @@ namespace AIO.UEditor
             /// <param name="field">字段名称</param>
             public static void ReverseBoolean(in string field)
             {
-                var key = string.Concat(field.GetHashCode(), BooleanHashCode);
+                var key = CombineKey(field, BooleanHashCode);
                 var value = EditorPrefs.GetInt(key, 0);
                 EditorPrefs.SetInt(key, value == 0 ? 1 : 0);
             }
@@ -63,7 +63,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static bool LoadBoolean<T>(in string field, in bool def = false)
             {
-                var key = string.Concat(typeof(T).FullName, field.GetHashCode(), BooleanHashCode);
+                var key = CombineKey<T>(field, BooleanHashCode);
                 return EditorPrefs.GetInt(key, def ? 1 : 0) == 1;
             }
 
@@ -75,7 +75,7 @@ namespace AIO.UEditor
             /// <typeparam name="T">泛型类型</typeparam>
             public static void SaveBoolean<T>(in string field, in bool value)
             {
-                var key = string.Concat(typeof(T).FullName, field.GetHashCode(), BooleanHashCode);
+                var key = CombineKey<T>(field, BooleanHashCode);
                 EditorPrefs.SetInt(key, value ? 1 : 0);
             }
 
@@ -85,7 +85,7 @@ namespace AIO.UEditor
             /// <param name="field">字段名称</param>
             public static void ReverseBoolean<T>(in string field)
             {
-                var key = string.Concat(typeof(T).FullName, field.GetHashCode(), BooleanHashCode);
+                var key = CombineKey<T>(field, BooleanHashCode);
                 var value = EditorPrefs.GetInt(key, 0);
                 EditorPrefs.SetInt(key, value == 0 ? 1 : 0);
             }

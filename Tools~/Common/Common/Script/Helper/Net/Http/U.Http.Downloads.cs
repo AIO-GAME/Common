@@ -21,13 +21,13 @@ public partial class AHelper
             /// </summary>
             /// <param name="remoteUrls">远端路径</param>
             /// <param name="localPath">保存根路径</param>
-            /// <param name="progress">回调</param>
+            /// <param name="iEvent">回调</param>
             /// <param name="isOverWrite">覆盖</param>
             /// <param name="timeout">超时</param>
             /// <param name="bufferSize">容量</param>
             /// <exception cref="Exception">异常</exception>
             public static async Task DownloadAsync(IEnumerable<string> remoteUrls, string localPath,
-                ProgressArgs progress = default,
+                IProgressEvent iEvent = null,
                 bool isOverWrite = false,
                 ushort timeout = TIMEOUT,
                 int bufferSize = BUFFER_SIZE
@@ -35,6 +35,7 @@ public partial class AHelper
             {
                 var httpWebResponses = new Dictionary<string, HttpWebResponse>();
                 var fileStreams = new Dictionary<string, FileStream>();
+                var progress = new AProgress(iEvent);
                 foreach (var remoteUrl in remoteUrls)
                 {
                     var remote = remoteUrl.Replace("\\", "/");
@@ -96,13 +97,13 @@ public partial class AHelper
             /// </summary>
             /// <param name="remoteUrls">远端路径</param>
             /// <param name="localPath">保存根路径</param>
-            /// <param name="progress">回调</param>
+            /// <param name="iEvent">回调</param>
             /// <param name="isOverWrite">覆盖</param>
             /// <param name="timeout">超时</param>
             /// <param name="bufferSize">容量</param>
             /// <exception cref="Exception">异常</exception>
             public static void Download(IEnumerable<string> remoteUrls, string localPath,
-                ProgressArgs progress = default,
+                IProgressEvent iEvent = null,
                 bool isOverWrite = false,
                 ushort timeout = TIMEOUT,
                 int bufferSize = BUFFER_SIZE
@@ -110,6 +111,7 @@ public partial class AHelper
             {
                 var httpWebResponses = new Dictionary<string, HttpWebResponse>();
                 var fileStreams = new Dictionary<string, FileStream>();
+                var progress = new AProgress(iEvent);
                 foreach (var remoteUrl in remoteUrls)
                 {
                     var remote = remoteUrl.Replace("\\", "/");

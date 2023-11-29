@@ -39,7 +39,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static T LoadJson<T>(in string field, in T def = default)
             {
-                var key = string.Concat(field.GetHashCode(), JsonHashCode);
+                var key = CombineKey(field, JsonHashCode);
                 return CommonLoadJson(key, def);
             }
 
@@ -51,7 +51,7 @@ namespace AIO.UEditor
             /// <typeparam name="T">泛型类型</typeparam>
             public static void SaveJson<T>(in string field, in T value)
             {
-                var key = string.Concat(field.GetHashCode(), JsonHashCode);
+                var key = CombineKey(field, JsonHashCode);
                 CommonSaveJson(key, value);
             }
 
@@ -69,7 +69,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static T1 LoadJson<T, T1>(in string field, in T1 def = default)
             {
-                var key = string.Concat(typeof(T).FullName, field.GetHashCode(), JsonHashCode);
+                var key = CombineKey<T>(field, JsonHashCode);
                 return CommonLoadJson(key, def);
             }
 
@@ -82,7 +82,7 @@ namespace AIO.UEditor
             /// <typeparam name="T1">泛型类型</typeparam>
             public static void SaveJson<T, T1>(in string field, in T1 value)
             {
-                var key = string.Concat(typeof(T).FullName, field.GetHashCode(), JsonHashCode);
+                var key = CombineKey<T>(field, JsonHashCode);
                 CommonSaveJson(key, value);
             }
 
@@ -101,7 +101,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static T1 LoadJson<T, T1>(in T data, in string field, in T1 def = default)
             {
-                var key = string.Concat(data.GetType().FullName, field.GetHashCode(), JsonHashCode);
+                var key = CombineKey<T>(field, JsonHashCode);
                 return CommonLoadJson(key, def);
             }
 
@@ -115,7 +115,7 @@ namespace AIO.UEditor
             /// <typeparam name="T1">泛型类型</typeparam>
             public static void SaveJson<T, T1>(in T data, in string field, in T1 value)
             {
-                var key = string.Concat(data.GetType().FullName, field.GetHashCode(), JsonHashCode);
+                var key = CombineKey<T>(field, JsonHashCode);
                 CommonSaveJson(key, value);
             }
 

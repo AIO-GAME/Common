@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -16,12 +15,12 @@ public partial class AHelper
             /// <param name="user">用户名</param>
             /// <param name="pass">密码</param>
             /// <param name="localPath">本地文件路径</param>
-            /// <param name="progress">回调</param>
+            /// <param name="iEvent">回调</param>
             /// <param name="timeout">超时</param>
             /// <param name="bufferSize">缓存大小</param>
             public static bool UploadFile(string uri, string user, string pass,
                 string localPath,
-                ProgressArgs progress = default,
+                IProgressEvent iEvent = default,
                 ushort timeout = TIMEOUT,
                 int bufferSize = BUFFER_SIZE
             )
@@ -29,7 +28,7 @@ public partial class AHelper
                 var fileInfo = new FileInfo(localPath);
                 if (fileInfo.Exists == false)
                     throw new FileNotFoundException($"ftp upload : target file not found {localPath}");
-
+                var progress = new AProgress(iEvent);
                 try
                 {
                     var startIndex = uri.LastIndexOf('/') + 1;
@@ -81,12 +80,12 @@ public partial class AHelper
             /// <param name="user">用户名</param>
             /// <param name="pass">密码</param>
             /// <param name="localPath">本地文件路径</param>
-            /// <param name="progress">回调</param>
+            /// <param name="iEvent">回调</param>
             /// <param name="timeout">超时</param>
             /// <param name="bufferSize">缓存大小</param>
             public static async Task<bool> UploadFileAsync(string uri, string user, string pass,
                 string localPath,
-                ProgressArgs progress = default,
+                IProgressEvent iEvent = default,
                 ushort timeout = TIMEOUT,
                 int bufferSize = BUFFER_SIZE
             )
@@ -94,7 +93,7 @@ public partial class AHelper
                 var fileInfo = new FileInfo(localPath);
                 if (fileInfo.Exists == false)
                     throw new FileNotFoundException($"FTP Upload : Target File Not Found {localPath}");
-
+                var progress = new AProgress(iEvent);
                 try
                 {
                     var startIndex = uri.LastIndexOf('/') + 1;
@@ -145,7 +144,7 @@ public partial class AHelper
             /// <param name="pass">密码</param>
             /// <param name="localPath">本地文件路径</param>
             /// <param name="option">搜索模式</param>
-            /// <param name="progress">进度回调</param>
+            /// <param name="iEvent">回调</param>
             /// <param name="pattern">匹配模式</param>
             /// <param name="timeout">超时</param>
             /// <param name="bufferSize">缓存大小</param>
@@ -153,7 +152,7 @@ public partial class AHelper
                 string localPath,
                 SearchOption option = SearchOption.AllDirectories,
                 string pattern = "*",
-                ProgressArgs progress = default,
+                IProgressEvent iEvent = default,
                 ushort timeout = TIMEOUT,
                 int bufferSize = BUFFER_SIZE
             )
@@ -161,7 +160,7 @@ public partial class AHelper
                 var info = new DirectoryInfo(localPath);
                 if (info.Exists == false)
                     throw new DirectoryNotFoundException($"ftp upload folder : target file not found {localPath}");
-
+                var progress = new AProgress(iEvent);
                 foreach (var dicInfo in info.GetDirectories(pattern, option))
                 {
                     if (progress.IsCancel) throw new WebException($"FTP Upload Folder Cancel -> {uri}");
@@ -226,7 +225,7 @@ public partial class AHelper
             /// <param name="pass">密码</param>
             /// <param name="localPath">本地文件路径</param>
             /// <param name="option">搜索模式</param>
-            /// <param name="progress">进度回调</param>
+            /// <param name="iEvent">回调</param>
             /// <param name="pattern">匹配模式</param>
             /// <param name="timeout">超时</param>
             /// <param name="bufferSize">缓存大小</param>
@@ -234,7 +233,7 @@ public partial class AHelper
                 string localPath,
                 SearchOption option = SearchOption.AllDirectories,
                 string pattern = "*",
-                ProgressArgs progress = default,
+                IProgressEvent iEvent = default,
                 ushort timeout = TIMEOUT,
                 int bufferSize = BUFFER_SIZE
             )
@@ -242,7 +241,7 @@ public partial class AHelper
                 var info = new DirectoryInfo(localPath);
                 if (info.Exists == false)
                     throw new DirectoryNotFoundException($"ftp upload folder : target file not found {localPath}");
-
+                var progress = new AProgress(iEvent);
                 foreach (var dicInfo in info.GetDirectories(pattern, option))
                 {
                     if (progress.IsCancel) throw new WebException($"FTP Upload Folder Cancel -> {uri}");
@@ -275,7 +274,8 @@ public partial class AHelper
                                 var contentLen = 0L;
                                 while (fileStream.Position < fileStream.Length)
                                 {
-                                    await fileStream.CopyToAsync(requestStream, bufferSize, progress.CancellationToken);
+                                    await fileStream.CopyToAsync(requestStream, bufferSize,
+                                        progress.CancellationToken);
                                     contentLen = fileStream.Position - contentLen;
                                     progress.Current += contentLen;
                                 }

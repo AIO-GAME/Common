@@ -47,7 +47,8 @@
     "YooAsset",
     "Unity.TextMeshPro",
     "DOTween.Modules",
-    "AIO.Hybridclr.Runtime"
+    "AIO.Hybridclr.Runtime",
+    "AIO.Asset.Runtime"
   ],
   "overrideReferences": true,
   "includePlatforms": [],

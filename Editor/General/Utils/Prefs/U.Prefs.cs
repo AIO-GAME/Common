@@ -6,6 +6,7 @@
 
 using System;
 using UnityEditor;
+using UnityEngine;
 
 
 namespace AIO.UEditor
@@ -39,6 +40,28 @@ namespace AIO.UEditor
             public static void DeleteKey(in string key)
             {
                 EditorPrefs.DeleteKey(key);
+            }
+
+            private static int CODE = Application.dataPath.GetHashCode();
+
+            private static string CombineKey(in string field)
+            {
+                return string.Concat(CODE, field.GetHashCode());
+            }
+
+            private static string CombineKey(in string field, string code)
+            {
+                return string.Concat(CODE, field.GetHashCode(), code);
+            }
+
+            private static string CombineKey(in string field, int code)
+            {
+                return string.Concat(CODE, field.GetHashCode(), code);
+            }
+
+            private static string CombineKey<T>(in string field, int code)
+            {
+                return string.Concat(CODE, typeof(T).FullName, field.GetHashCode(), code);
             }
         }
     }

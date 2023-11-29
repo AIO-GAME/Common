@@ -514,6 +514,8 @@
     <Compile Include="Script\Handle\AHandle.cs" />
     <Compile Include="Script\Handle\Net\FTP\Handle.FTP.cs" />
     <Compile Include="Script\Handle\Net\HTTP\Handle.HTTP.cs" />
+    <Compile Include="Script\Handle\ProgressArgs.cs" />
+    <Compile Include="Script\Handle\ProgressInfo.cs" />
     <Compile Include="Script\Helper\Database\Encrypt.cs" />
     <Compile Include="Script\Helper\Database\U.FileID.cs" />
     <Compile Include="Script\Helper\Database\U.Json.MINIJSON.cs" />

@@ -19,9 +19,8 @@ namespace AIO
                 ReturnType = "void",
             };
             chunk.ContentBuilder.AppendLine("if (action == null) return;");
-            chunk.ContentBuilder.AppendLine($"EditorGUILayout.Begin{Name}({chunk.GetParamValues()});");
-            chunk.ContentBuilder.AppendLine("action?.Invoke();");
-            chunk.ContentBuilder.AppendLine($"EditorGUILayout.End{Name}();");
+            chunk.ContentBuilder.AppendLine($"using (new GUILayout.{Name}Scope({chunk.GetParamValues()}))");
+            chunk.ContentBuilder.AppendLine("{\n    action?.Invoke();\n}");
             return chunk;
         }
 

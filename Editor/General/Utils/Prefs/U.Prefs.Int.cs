@@ -24,7 +24,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static int LoadInt(in string field, in int def = 0)
             {
-                var key = string.Concat(field.GetHashCode(), IntHashCode);
+                var key = CombineKey(field, IntHashCode);
                 return EditorPrefs.GetInt(key, def);
             }
 
@@ -35,7 +35,7 @@ namespace AIO.UEditor
             /// <param name="value">值</param>
             public static void SaveInt(in string field, in int value)
             {
-                var key = string.Concat(field.GetHashCode(), IntHashCode);
+                var key = CombineKey(field, IntHashCode);
                 EditorPrefs.SetInt(key, value);
             }
 
@@ -52,7 +52,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static int LoadInt<T>(in string field, in int def = 0)
             {
-                var key = string.Concat(typeof(T).FullName, field.GetHashCode(), IntHashCode);
+                var key = CombineKey<T>(field, IntHashCode);
                 return EditorPrefs.GetInt(key, def);
             }
 
@@ -64,7 +64,7 @@ namespace AIO.UEditor
             /// <typeparam name="T">泛型类型</typeparam>
             public static void SaveInt<T>(in string field, in int value)
             {
-                var key = string.Concat(typeof(T).FullName, field.GetHashCode(), IntHashCode);
+                var key = CombineKey<T>(field, IntHashCode);
                 EditorPrefs.SetInt(key, value);
             }
 
@@ -82,7 +82,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static int LoadInt<T>(in T data, in string field, in int def = 0)
             {
-                var key = string.Concat(data.GetType().FullName, field.GetHashCode(), IntHashCode);
+                var key = CombineKey<T>(field, IntHashCode);
                 return EditorPrefs.GetInt(key, def);
             }
 
@@ -95,7 +95,7 @@ namespace AIO.UEditor
             /// <typeparam name="T">泛型类型</typeparam>
             public static void SaveInt<T>(in T data, in string field, in int value)
             {
-                var key = string.Concat(data.GetType().FullName, field.GetHashCode(), IntHashCode);
+                var key = CombineKey<T>(field, IntHashCode);
                 EditorPrefs.SetInt(key, value);
             }
 

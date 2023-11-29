@@ -12778,99 +12778,6 @@
             支持的区域性
             </summary>
         </member>
-        <member name="T:ProgressInfo">
-            <summary>
-            进度信息
-            </summary>
-        </member>
-        <member name="P:ProgressInfo.CurrentSize">
-            <summary>
-            当前大小
-            </summary>
-        </member>
-        <member name="P:ProgressInfo.TotalSize">
-            <summary>
-            总大小
-            </summary>
-        </member>
-        <member name="P:ProgressInfo.Total">
-            <summary>
-            总值
-            </summary>
-        </member>
-        <member name="P:ProgressInfo.Current">
-            <summary>
-            当前值
-            </summary>
-        </member>
-        <member name="P:ProgressInfo.Progress">
-            <summary>
-            进度
-            </summary>
-        </member>
-        <member name="P:ProgressInfo.CurrentInfo">
-            <summary>
-            当前名称
-            </summary>
-        </member>
-        <member name="M:ProgressInfo.ToString">
-            <inheritdoc />
-        </member>
-        <member name="T:ProgressArgs">
-            <summary>
-            进度参数
-            </summary>
-        </member>
-        <member name="F:ProgressArgs.IsCancel">
-            <summary>
-            是否取消
-            </summary>
-        </member>
-        <member name="F:ProgressArgs.CancellationToken">
-            <summary>
-            取消令牌
-            </summary>
-        </member>
-        <member name="P:ProgressArgs.Total">
-            <summary>
-            总值
-            </summary>
-        </member>
-        <member name="P:ProgressArgs.Current">
-            <summary>
-            当前值
-            </summary>
-        </member>
-        <member name="P:ProgressArgs.CurrentInfo">
-            <summary>
-            当前名称
-            </summary>
-        </member>
-        <member name="P:ProgressArgs.OnProgress">
-            <summary>
-            进度回调
-            </summary>
-        </member>
-        <member name="P:ProgressArgs.OnComplete">
-            <summary>
-            完成回调
-            </summary>
-        </member>
-        <member name="P:ProgressArgs.OnError">
-            <summary>
-            错误回调
-            </summary>
-        </member>
-        <member name="M:ProgressArgs.Cancel">
-            <summary>
-            取消
-            </summary>
-        </member>
-        <member name="M:ProgressArgs.Dispose">
-            <summary>
-            析构函数
-            </summary>
-        </member>
         <member name="T:AHandle">
             <summary>
             处理器帮助类
@@ -13018,130 +12925,130 @@
             </summary>
             <param name="remotePath">远端文件夹路径</param>
         </member>
-        <member name="M:AHandle.FTP.UploadFile(System.String,System.String,ProgressArgs)">
+        <member name="M:AHandle.FTP.UploadFile(System.String,System.String,IProgressEvent)">
             <summary>
             上传文件
             </summary>
             <param name="localPath">本地文件</param>
             <param name="remotePath">远端路径</param>
-            <param name="progress">回调</param>
+            <param name="iEvent">回调</param>
         </member>
-        <member name="M:AHandle.FTP.UploadFile(System.String,ProgressArgs)">
+        <member name="M:AHandle.FTP.UploadFile(System.String,IProgressEvent)">
             <summary>
             上传文件
             </summary>
             <param name="localPath">本地文件</param>
-            <param name="progress">回调</param>
+            <param name="iEvent">回调</param>
         </member>
-        <member name="M:AHandle.FTP.UploadFileAsync(System.String,System.String,ProgressArgs)">
-            <summary>
-            上传文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="remotePath">远端路径</param>
-            <param name="progress">回调</param>
-        </member>
-        <member name="M:AHandle.FTP.UploadFileAsync(System.String,ProgressArgs)">
-            <summary>
-            上传文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="progress">回调</param>
-        </member>
-        <member name="M:AHandle.FTP.UploadDir(System.String,System.String,ProgressArgs,System.IO.SearchOption,System.String)">
+        <member name="M:AHandle.FTP.UploadFileAsync(System.String,System.String,IProgressEvent)">
             <summary>
             上传文件
             </summary>
             <param name="localPath">本地文件</param>
             <param name="remotePath">远端路径</param>
-            <param name="progress">回调</param>
-            <param name="searchPattern">搜索字段</param>
-            <param name="searchOption">搜索模式</param>
+            <param name="iEvent">回调</param>
         </member>
-        <member name="M:AHandle.FTP.UploadDir(System.String,ProgressArgs,System.IO.SearchOption,System.String)">
+        <member name="M:AHandle.FTP.UploadFileAsync(System.String,IProgressEvent)">
             <summary>
             上传文件
             </summary>
             <param name="localPath">本地文件</param>
-            <param name="progress">回调</param>
-            <param name="searchPattern">搜索字段</param>
-            <param name="searchOption">搜索模式</param>
+            <param name="iEvent">回调</param>
         </member>
-        <member name="M:AHandle.FTP.UploadDirAsync(System.String,System.String,ProgressArgs,System.IO.SearchOption,System.String)">
+        <member name="M:AHandle.FTP.UploadDir(System.String,System.String,IProgressEvent,System.IO.SearchOption,System.String)">
             <summary>
             上传文件
             </summary>
             <param name="localPath">本地文件</param>
             <param name="remotePath">远端路径</param>
-            <param name="progress">回调</param>
+            <param name="iEvent">回调</param>
             <param name="searchPattern">搜索字段</param>
             <param name="searchOption">搜索模式</param>
         </member>
-        <member name="M:AHandle.FTP.UploadDirAsync(System.String,ProgressArgs,System.IO.SearchOption,System.String)">
+        <member name="M:AHandle.FTP.UploadDir(System.String,IProgressEvent,System.IO.SearchOption,System.String)">
             <summary>
             上传文件
             </summary>
             <param name="localPath">本地文件</param>
-            <param name="progress">回调</param>
+            <param name="iEvent">回调</param>
             <param name="searchPattern">搜索字段</param>
             <param name="searchOption">搜索模式</param>
         </member>
-        <member name="M:AHandle.FTP.DownloadFile(System.String,System.String,ProgressArgs,System.Boolean)">
+        <member name="M:AHandle.FTP.UploadDirAsync(System.String,System.String,IProgressEvent,System.IO.SearchOption,System.String)">
+            <summary>
+            上传文件
+            </summary>
+            <param name="localPath">本地文件</param>
+            <param name="remotePath">远端路径</param>
+            <param name="iEvent">回调</param>
+            <param name="searchPattern">搜索字段</param>
+            <param name="searchOption">搜索模式</param>
+        </member>
+        <member name="M:AHandle.FTP.UploadDirAsync(System.String,IProgressEvent,System.IO.SearchOption,System.String)">
+            <summary>
+            上传文件
+            </summary>
+            <param name="localPath">本地文件</param>
+            <param name="iEvent">回调</param>
+            <param name="searchPattern">搜索字段</param>
+            <param name="searchOption">搜索模式</param>
+        </member>
+        <member name="M:AHandle.FTP.DownloadFile(System.String,System.String,IProgressEvent,System.Boolean)">
             <summary>
             下载文件
             </summary>
             <param name="localPath">本地文件</param>
             <param name="remotePath">远端路径</param>
-            <param name="progress">回调</param>
+            <param name="iEvent">回调</param>
             <param name="isOverWrite">是否重写</param>
         </member>
-        <member name="M:AHandle.FTP.DownloadFileAsync(System.String,System.String,ProgressArgs,System.Boolean)">
+        <member name="M:AHandle.FTP.DownloadFileAsync(System.String,System.String,IProgressEvent,System.Boolean)">
             <summary>
             下载文件
             </summary>
             <param name="localPath">本地文件</param>
             <param name="remotePath">远端路径</param>
-            <param name="progress">回调</param>
+            <param name="iEvent">回调</param>
             <param name="isOverWrite">是否重写</param>
         </member>
-        <member name="M:AHandle.FTP.DownloadDir(System.String,System.String,ProgressArgs,System.IO.SearchOption,System.String,System.Boolean)">
+        <member name="M:AHandle.FTP.DownloadDir(System.String,System.String,IProgressEvent,System.IO.SearchOption,System.String,System.Boolean)">
             <summary>
             下载文件
             </summary>
             <param name="localPath">本地文件</param>
             <param name="remotePath">远端路径</param>
-            <param name="progress">回调</param>
-            <param name="searchPattern">搜索字段</param>
-            <param name="searchOption">搜索模式</param>
-            <param name="isOverWrite">是否重写</param>
-        </member>
-        <member name="M:AHandle.FTP.DownloadDirAsync(System.String,System.String,ProgressArgs,System.IO.SearchOption,System.String,System.Boolean)">
-            <summary>
-            下载文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="remotePath">远端路径</param>
-            <param name="progress">回调</param>
+            <param name="iEvent">回调</param>
             <param name="searchPattern">搜索字段</param>
             <param name="searchOption">搜索模式</param>
             <param name="isOverWrite">是否重写</param>
         </member>
-        <member name="M:AHandle.FTP.DownloadDir(System.String,ProgressArgs,System.IO.SearchOption,System.String,System.Boolean)">
+        <member name="M:AHandle.FTP.DownloadDirAsync(System.String,System.String,IProgressEvent,System.IO.SearchOption,System.String,System.Boolean)">
             <summary>
             下载文件
             </summary>
             <param name="localPath">本地文件</param>
-            <param name="progress">回调</param>
+            <param name="remotePath">远端路径</param>
+            <param name="iEvent">回调</param>
             <param name="searchPattern">搜索字段</param>
             <param name="searchOption">搜索模式</param>
             <param name="isOverWrite">是否重写</param>
         </member>
-        <member name="M:AHandle.FTP.DownloadDirAsync(System.String,ProgressArgs,System.IO.SearchOption,System.String,System.Boolean)">
+        <member name="M:AHandle.FTP.DownloadDir(System.String,IProgressEvent,System.IO.SearchOption,System.String,System.Boolean)">
             <summary>
             下载文件
             </summary>
             <param name="localPath">本地文件</param>
-            <param name="progress">回调</param>
+            <param name="iEvent">回调</param>
+            <param name="searchPattern">搜索字段</param>
+            <param name="searchOption">搜索模式</param>
+            <param name="isOverWrite">是否重写</param>
+        </member>
+        <member name="M:AHandle.FTP.DownloadDirAsync(System.String,IProgressEvent,System.IO.SearchOption,System.String,System.Boolean)">
+            <summary>
+            下载文件
+            </summary>
+            <param name="localPath">本地文件</param>
+            <param name="iEvent">回调</param>
             <param name="searchPattern">搜索字段</param>
             <param name="searchOption">搜索模式</param>
             <param name="isOverWrite">是否重写</param>
@@ -13343,40 +13250,40 @@
             <param name="data">数据</param>
             <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AHandle.HTTP.Download(System.String,System.String,ProgressArgs,System.Boolean)">
+        <member name="M:AHandle.HTTP.Download(System.String,System.String,AProgress,System.Boolean)">
             <summary>
             下载文件
             </summary>
             <param name="savePath">保存文件夹路径</param>
             <param name="remotePath">远端需要下载文件路径</param>
-            <param name="progress">进度回调</param>
+            <param name="aProgress">进度回调</param>
             <param name="isOverWrite">是否覆盖</param>
         </member>
-        <member name="M:AHandle.HTTP.Download(System.String,System.Collections.Generic.IEnumerable{System.String},ProgressArgs,System.Boolean)">
+        <member name="M:AHandle.HTTP.Download(System.String,System.Collections.Generic.IEnumerable{System.String},AProgress,System.Boolean)">
             <summary>
             下载文件
             </summary>
             <param name="savePath">保存文件夹路径</param>
             <param name="remotePath">远端需要下载文件路径</param>
-            <param name="progress">进度回调</param>
+            <param name="aProgress">进度回调</param>
             <param name="isOverWrite">是否覆盖</param>
         </member>
-        <member name="M:AHandle.HTTP.DownloadAsync(System.String,System.String,ProgressArgs,System.Boolean)">
+        <member name="M:AHandle.HTTP.DownloadAsync(System.String,System.String,AProgress,System.Boolean)">
             <summary>
             下载文件
             </summary>
             <param name="savePath">保存文件夹路径</param>
             <param name="remotePath">远端需要下载文件路径</param>
-            <param name="progress">进度回调</param>
+            <param name="aProgress">进度回调</param>
             <param name="isOverWrite">是否覆盖</param>
         </member>
-        <member name="M:AHandle.HTTP.DownloadAsync(System.String,System.Collections.Generic.IEnumerable{System.String},ProgressArgs,System.Boolean)">
+        <member name="M:AHandle.HTTP.DownloadAsync(System.String,System.Collections.Generic.IEnumerable{System.String},AProgress,System.Boolean)">
             <summary>
             下载文件
             </summary>
             <param name="savePath">保存文件夹路径</param>
             <param name="remotePath">远端需要下载文件路径</param>
-            <param name="progress">进度回调</param>
+            <param name="aProgress">进度回调</param>
             <param name="isOverWrite">是否覆盖</param>
         </member>
         <member name="M:AHandle.HTTP.Put(System.String,System.Byte[])">
@@ -13744,6 +13651,203 @@
             释放
             </summary>
         </member>
+        <member name="T:IProgressEvent">
+            <summary>
+            进度回调参数
+            </summary>
+        </member>
+        <member name="P:IProgressEvent.OnProgress">
+            <summary>
+            进度回调
+            </summary>
+        </member>
+        <member name="P:IProgressEvent.OnComplete">
+            <summary>
+            完成回调
+            </summary>
+        </member>
+        <member name="P:IProgressEvent.OnError">
+            <summary>
+            错误回调
+            </summary>
+        </member>
+        <member name="T:AProgressEvent">
+            <summary>
+            进度回调参数
+            </summary>
+        </member>
+        <member name="P:AProgressEvent.OnProgress">
+            <inheritdoc />
+        </member>
+        <member name="P:AProgressEvent.OnComplete">
+            <inheritdoc />
+        </member>
+        <member name="P:AProgressEvent.OnError">
+            <inheritdoc />
+        </member>
+        <member name="T:IProgressArg">
+            <summary>
+            进度参数
+            </summary>
+        </member>
+        <member name="P:IProgressArg.Total">
+            <summary>
+            总值
+            </summary>
+        </member>
+        <member name="P:IProgressArg.Current">
+            <summary>
+            当前值
+            </summary>
+        </member>
+        <member name="P:IProgressArg.CurrentInfo">
+            <summary>
+            当前信息
+            </summary>
+        </member>
+        <member name="T:IProgressHandle">
+            <summary>
+            进度参数
+            </summary>
+        </member>
+        <member name="T:AProgress">
+            <summary>
+            进度参数
+            </summary>
+        </member>
+        <member name="F:AProgress.IsCancel">
+            <summary>
+            是否取消
+            </summary>
+        </member>
+        <member name="M:AProgress.#ctor(IProgressEvent)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="F:AProgress.CancellationToken">
+            <summary>
+            取消令牌
+            </summary>
+        </member>
+        <member name="P:AProgress.Total">
+            <summary>
+            总值
+            </summary>
+        </member>
+        <member name="P:AProgress.Current">
+            <summary>
+            当前值
+            </summary>
+        </member>
+        <member name="P:AProgress.CurrentInfo">
+            <summary>
+            当前信息
+            </summary>
+        </member>
+        <member name="P:AProgress.OnProgress">
+            <summary>
+            进度回调
+            </summary>
+        </member>
+        <member name="P:AProgress.OnComplete">
+            <summary>
+            完成回调
+            </summary>
+        </member>
+        <member name="P:AProgress.OnError">
+            <summary>
+            错误回调
+            </summary>
+        </member>
+        <member name="M:AProgress.Cancel">
+            <summary>
+            取消
+            </summary>
+        </member>
+        <member name="M:AProgress.Dispose">
+            <summary>
+            析构函数
+            </summary>
+        </member>
+        <member name="T:IProgressInfo">
+            <summary>
+            进度信息
+            </summary>
+        </member>
+        <member name="P:IProgressInfo.CurrentStr">
+            <summary>
+            当前大小
+            </summary>
+        </member>
+        <member name="P:IProgressInfo.TotalStr">
+            <summary>
+            总大小
+            </summary>
+        </member>
+        <member name="P:IProgressInfo.Total">
+            <summary>
+            总值
+            </summary>
+        </member>
+        <member name="P:IProgressInfo.Current">
+            <summary>
+            当前值
+            </summary>
+        </member>
+        <member name="P:IProgressInfo.Progress">
+            <summary>
+            进度
+            </summary>
+        </member>
+        <member name="P:IProgressInfo.CurrentInfo">
+            <summary>
+            当前名称
+            </summary>
+        </member>
+        <member name="M:IProgressInfo.ToString">
+            <summary>
+            转换为字符串
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ProgressInfo">
+            <summary>
+            进度信息
+            </summary>
+        </member>
+        <member name="P:ProgressInfo.CurrentStr">
+            <inheritdoc />
+        </member>
+        <member name="P:ProgressInfo.TotalStr">
+            <inheritdoc />
+        </member>
+        <member name="P:ProgressInfo.Total">
+            <summary>
+            总值
+            </summary>
+        </member>
+        <member name="P:ProgressInfo.Current">
+            <summary>
+            当前值
+            </summary>
+        </member>
+        <member name="P:ProgressInfo.Progress">
+            <summary>
+            进度
+            </summary>
+        </member>
+        <member name="P:ProgressInfo.CurrentInfo">
+            <summary>
+            当前名称
+            </summary>
+        </member>
+        <member name="M:ProgressInfo.IProgressInfo#ToString">
+            <inheritdoc />
+        </member>
+        <member name="M:ProgressInfo.ToString">
+            <inheritdoc />
+        </member>
         <member name="T:AHelper">
             <summary>
             Utils 工具库
@@ -13979,7 +14083,7 @@
             <exception cref="T:System.Net.WebException">异常信息</exception>
             <returns>删除状态</returns>
         </member>
-        <member name="M:AHelper.Net.FTP.DownloadFile(System.String,System.String,System.String,System.String,ProgressArgs,System.Boolean,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.FTP.DownloadFile(System.String,System.String,System.String,System.String,IProgressEvent,System.Boolean,System.UInt16,System.Int32)">
             <summary>
             FTP下载文件
             </summary>
@@ -13987,12 +14091,12 @@
             <param name="username">用户名</param>
             <param name="password">密码</param>
             <param name="localPath">本地文件路径</param>
-            <param name="progress">回调</param>
+            <param name="iEvent">回调</param>
             <param name="overwrite">是否覆盖</param>
             <param name="timeout">超时</param>
             <param name="bufferSize">下载缓存大小</param>
         </member>
-        <member name="M:AHelper.Net.FTP.DownloadFileAsync(System.String,System.String,System.String,System.String,ProgressArgs,System.Boolean,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.FTP.DownloadFileAsync(System.String,System.String,System.String,System.String,IProgressEvent,System.Boolean,System.UInt16,System.Int32)">
             <summary>
             FTP下载文件
             </summary>
@@ -14000,12 +14104,12 @@
             <param name="username">用户名</param>
             <param name="password">密码</param>
             <param name="localPath">本地文件路径</param>
-            <param name="progress">回调</param>
+            <param name="iEvent">回调</param>
             <param name="overwrite">是否覆盖</param>
             <param name="timeout">超时</param>
             <param name="bufferSize">下载缓存大小</param>
         </member>
-        <member name="M:AHelper.Net.FTP.DownloadDir(System.String,System.String,System.String,System.String,ProgressArgs,System.IO.SearchOption,System.String,System.Boolean,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.FTP.DownloadDir(System.String,System.String,System.String,System.String,IProgressEvent,System.IO.SearchOption,System.String,System.Boolean,System.UInt16,System.Int32)">
             <summary>
             FTP下载文件夹
             </summary>
@@ -14013,14 +14117,14 @@
             <param name="username">用户名</param>
             <param name="password">密码</param>
             <param name="localPath">本地文件路径</param>
-            <param name="progress">回调</param>
+            <param name="iEvent">回调</param>
             <param name="pattern">搜索过滤</param>
             <param name="option">搜索模式</param>
             <param name="overwrite">是否覆盖</param>
             <param name="timeout">超时</param>
             <param name="bufferSize">下载缓存大小</param>
         </member>
-        <member name="M:AHelper.Net.FTP.DownloadDirAsync(System.String,System.String,System.String,System.String,ProgressArgs,System.IO.SearchOption,System.String,System.Boolean,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.FTP.DownloadDirAsync(System.String,System.String,System.String,System.String,IProgressEvent,System.IO.SearchOption,System.String,System.Boolean,System.UInt16,System.Int32)">
             <summary>
             FTP下载文件夹
             </summary>
@@ -14028,7 +14132,7 @@
             <param name="username">用户名</param>
             <param name="password">密码</param>
             <param name="localPath">本地文件路径</param>
-            <param name="progress">回调</param>
+            <param name="iEvent">回调</param>
             <param name="pattern">搜索过滤</param>
             <param name="option">搜索模式</param>
             <param name="overwrite">是否覆盖</param>
@@ -14219,7 +14323,7 @@
             <param name="timeout">请求的超时时间，单位为秒，默认超时时间为TIMEOUT</param>
             <returns>创建的FTP请求</returns>
         </member>
-        <member name="M:AHelper.Net.FTP.UploadFile(System.String,System.String,System.String,System.String,ProgressArgs,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.FTP.UploadFile(System.String,System.String,System.String,System.String,IProgressEvent,System.UInt16,System.Int32)">
             <summary>
             FTP上传文件
             </summary>
@@ -14227,11 +14331,11 @@
             <param name="user">用户名</param>
             <param name="pass">密码</param>
             <param name="localPath">本地文件路径</param>
-            <param name="progress">回调</param>
+            <param name="iEvent">回调</param>
             <param name="timeout">超时</param>
             <param name="bufferSize">缓存大小</param>
         </member>
-        <member name="M:AHelper.Net.FTP.UploadFileAsync(System.String,System.String,System.String,System.String,ProgressArgs,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.FTP.UploadFileAsync(System.String,System.String,System.String,System.String,IProgressEvent,System.UInt16,System.Int32)">
             <summary>
             FTP上传文件
             </summary>
@@ -14239,11 +14343,11 @@
             <param name="user">用户名</param>
             <param name="pass">密码</param>
             <param name="localPath">本地文件路径</param>
-            <param name="progress">回调</param>
+            <param name="iEvent">回调</param>
             <param name="timeout">超时</param>
             <param name="bufferSize">缓存大小</param>
         </member>
-        <member name="M:AHelper.Net.FTP.UploadFolder(System.String,System.String,System.String,System.String,System.IO.SearchOption,System.String,ProgressArgs,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.FTP.UploadFolder(System.String,System.String,System.String,System.String,System.IO.SearchOption,System.String,IProgressEvent,System.UInt16,System.Int32)">
             <summary>
             FTP上传文件夹
             </summary>
@@ -14252,12 +14356,12 @@
             <param name="pass">密码</param>
             <param name="localPath">本地文件路径</param>
             <param name="option">搜索模式</param>
-            <param name="progress">进度回调</param>
+            <param name="iEvent">回调</param>
             <param name="pattern">匹配模式</param>
             <param name="timeout">超时</param>
             <param name="bufferSize">缓存大小</param>
         </member>
-        <member name="M:AHelper.Net.FTP.UploadFolderAsync(System.String,System.String,System.String,System.String,System.IO.SearchOption,System.String,ProgressArgs,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.FTP.UploadFolderAsync(System.String,System.String,System.String,System.String,System.IO.SearchOption,System.String,IProgressEvent,System.UInt16,System.Int32)">
             <summary>
             FTP上传文件夹
             </summary>
@@ -14266,7 +14370,7 @@
             <param name="pass">密码</param>
             <param name="localPath">本地文件路径</param>
             <param name="option">搜索模式</param>
-            <param name="progress">进度回调</param>
+            <param name="iEvent">回调</param>
             <param name="pattern">匹配模式</param>
             <param name="timeout">超时</param>
             <param name="bufferSize">缓存大小</param>
@@ -14416,49 +14520,49 @@
             <exception cref="T:AIO.NetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AHelper.Net.HTTP.Download(System.String,System.String,ProgressArgs,System.Boolean,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.HTTP.Download(System.String,System.String,IProgressEvent,System.Boolean,System.UInt16,System.Int32)">
             <summary>
             HTTP 下载文件
             </summary>
             <param name="remoteUrl">远端路径</param>
             <param name="localPath">保存路径</param>
-            <param name="progress">回调</param>
+            <param name="iEvent">回调</param>
             <param name="isOverWrite">覆盖</param>
             <param name="timeout">超时</param>
             <param name="bufferSize">容量</param>
             <exception cref="T:System.Exception">异常</exception>
         </member>
-        <member name="M:AHelper.Net.HTTP.DownloadAsync(System.String,System.String,ProgressArgs,System.Boolean,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.HTTP.DownloadAsync(System.String,System.String,IProgressEvent,System.Boolean,System.UInt16,System.Int32)">
             <summary>
             HTTP 下载文件
             </summary>
             <param name="remoteUrl">远端路径</param>
             <param name="localPath">保存路径</param>
-            <param name="progress">回调</param>
+            <param name="iEvent">回调</param>
             <param name="isOverWrite">覆盖</param>
             <param name="timeout">超时</param>
             <param name="bufferSize">容量</param>
             <exception cref="T:System.Exception">异常</exception>
         </member>
-        <member name="M:AHelper.Net.HTTP.DownloadAsync(System.Collections.Generic.IEnumerable{System.String},System.String,ProgressArgs,System.Boolean,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.HTTP.DownloadAsync(System.Collections.Generic.IEnumerable{System.String},System.String,IProgressEvent,System.Boolean,System.UInt16,System.Int32)">
             <summary>
             HTTP 下载文件
             </summary>
             <param name="remoteUrls">远端路径</param>
             <param name="localPath">保存根路径</param>
-            <param name="progress">回调</param>
+            <param name="iEvent">回调</param>
             <param name="isOverWrite">覆盖</param>
             <param name="timeout">超时</param>
             <param name="bufferSize">容量</param>
             <exception cref="T:System.Exception">异常</exception>
         </member>
-        <member name="M:AHelper.Net.HTTP.Download(System.Collections.Generic.IEnumerable{System.String},System.String,ProgressArgs,System.Boolean,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.HTTP.Download(System.Collections.Generic.IEnumerable{System.String},System.String,IProgressEvent,System.Boolean,System.UInt16,System.Int32)">
             <summary>
             HTTP 下载文件
             </summary>
             <param name="remoteUrls">远端路径</param>
             <param name="localPath">保存根路径</param>
-            <param name="progress">回调</param>
+            <param name="iEvent">回调</param>
             <param name="isOverWrite">覆盖</param>
             <param name="timeout">超时</param>
             <param name="bufferSize">容量</param>
@@ -14552,6 +14656,60 @@
             <param name="remoteUrl">远端路径</param>
             <param name="timeout">超时</param>
             <exception cref="T:System.Exception">异常</exception>
+        </member>
+        <member name="M:AHelper.Net.HTTP.GetJson``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteUrl">路径</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.Net.HTTP.GetJsonAsync``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteUrl">路径</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.Net.HTTP.GetXml``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteUrl">路径</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.Net.HTTP.GetXmlAsync``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteUrl">路径</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.Net.HTTP.GetYaml``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteUrl">路径</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.Net.HTTP.GetYamlAsync``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteUrl">路径</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
         </member>
         <member name="M:AHelper.Net.HTTP.Head(System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
