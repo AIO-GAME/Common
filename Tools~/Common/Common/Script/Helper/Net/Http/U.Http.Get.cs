@@ -203,6 +203,90 @@ public partial class AHelper
                 var expectedMd5Bytes = md5.ComputeHash(stream);
                 return BitConverter.ToString(expectedMd5Bytes).Replace("-", "").ToLower();
             }
+
+            /// <summary>
+            /// 请求获取特定的内容
+            /// </summary>
+            /// <param name="remoteUrl">路径</param>
+            /// <param name="encoding">编码</param>
+            /// <param name="timeout">超时时间</param>
+            /// <param name="cookie">cookie</param>
+            public static T GetJson<T>(string remoteUrl,
+                Encoding encoding = null, ushort timeout = TIMEOUT, string cookie = null)
+            {
+                var data = Get(remoteUrl, encoding, timeout, cookie);
+                return Json.Deserialize<T>(data);
+            }
+
+            /// <summary>
+            /// 请求获取特定的内容
+            /// </summary>
+            /// <param name="remoteUrl">路径</param>
+            /// <param name="encoding">编码</param>
+            /// <param name="timeout">超时时间</param>
+            /// <param name="cookie">cookie</param>
+            public static async Task<T> GetJsonAsync<T>(string remoteUrl,
+                Encoding encoding = null, ushort timeout = TIMEOUT, string cookie = null)
+            {
+                var data = await GetAsync(remoteUrl, encoding, timeout, cookie);
+                return Json.Deserialize<T>(data);
+            }
+
+            /// <summary>
+            /// 请求获取特定的内容
+            /// </summary>
+            /// <param name="remoteUrl">路径</param>
+            /// <param name="encoding">编码</param>
+            /// <param name="timeout">超时时间</param>
+            /// <param name="cookie">cookie</param>
+            public static T GetXml<T>(string remoteUrl,
+                Encoding encoding = null, ushort timeout = TIMEOUT, string cookie = null)
+            {
+                var data = Get(remoteUrl, encoding, timeout, cookie);
+                return Xml.Deserialize<T>(data);
+            }
+
+            /// <summary>
+            /// 请求获取特定的内容
+            /// </summary>
+            /// <param name="remoteUrl">路径</param>
+            /// <param name="encoding">编码</param>
+            /// <param name="timeout">超时时间</param>
+            /// <param name="cookie">cookie</param>
+            public static async Task<T> GetXmlAsync<T>(string remoteUrl,
+                Encoding encoding = null, ushort timeout = TIMEOUT, string cookie = null)
+            {
+                var data = await GetAsync(remoteUrl, encoding, timeout, cookie);
+                return Xml.Deserialize<T>(data);
+            }
+
+            /// <summary>
+            /// 请求获取特定的内容
+            /// </summary>
+            /// <param name="remoteUrl">路径</param>
+            /// <param name="encoding">编码</param>
+            /// <param name="timeout">超时时间</param>
+            /// <param name="cookie">cookie</param>
+            public static T GetYaml<T>(string remoteUrl,
+                Encoding encoding = null, ushort timeout = TIMEOUT, string cookie = null)
+            {
+                var data = Get(remoteUrl, encoding, timeout, cookie);
+                return Yaml.Deserialize<T>(data);
+            }
+
+            /// <summary>
+            /// 请求获取特定的内容
+            /// </summary>
+            /// <param name="remoteUrl">路径</param>
+            /// <param name="encoding">编码</param>
+            /// <param name="timeout">超时时间</param>
+            /// <param name="cookie">cookie</param>
+            public static async Task<T> GetYamlAsync<T>(string remoteUrl,
+                Encoding encoding = null, ushort timeout = TIMEOUT, string cookie = null)
+            {
+                var data = await GetAsync(remoteUrl, encoding, timeout, cookie);
+                return Yaml.Deserialize<T>(data);
+            }
         }
     }
 }

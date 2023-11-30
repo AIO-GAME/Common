@@ -63,7 +63,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static BoundsInt LoadBoundsInt(in string field, in BoundsInt def)
             {
-                var key = string.Concat(field.GetHashCode(), BoundsIntHashCode);
+                var key = CombineKey(field, BoundsIntHashCode);
                 return CommonLoadBoundsInt(key, def);
             }
 
@@ -74,7 +74,7 @@ namespace AIO.UEditor
             /// <param name="value">值</param>
             public static void SaveBoundsInt(in string field, in BoundsInt value)
             {
-                var key = string.Concat(field.GetHashCode(), BoundsIntHashCode);
+                var key = CombineKey(field, BoundsIntHashCode);
                 CommonSaveBoundsInt(key, value);
             }
 
@@ -91,7 +91,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static BoundsInt LoadBoundsInt<TData>(in string field, in BoundsInt def = default)
             {
-                var key = string.Concat(typeof(TData).FullName, field.GetHashCode(), BoundsIntHashCode);
+                var key = CombineKey<TData>(field, BoundsIntHashCode);
                 return CommonLoadBoundsInt(key, def);
             }
 
@@ -103,7 +103,7 @@ namespace AIO.UEditor
             /// <typeparam name="TData">泛型类型</typeparam>
             public static void SaveBoundsInt<TData>(in string field, in BoundsInt value)
             {
-                var key = string.Concat(typeof(TData).FullName, field.GetHashCode(), BoundsIntHashCode);
+                var key = CombineKey<TData>(field, BoundsIntHashCode);
                 CommonSaveBoundsInt(key, value);
             }
 
@@ -121,7 +121,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static BoundsInt LoadBoundsInt<TData>(in TData data, in string field, in BoundsInt def = default)
             {
-                var key = string.Concat(data.GetType().FullName, field.GetHashCode(), BoundsIntHashCode);
+                var key = CombineKey<TData>(field, BoundsIntHashCode);
                 return CommonLoadBoundsInt(key, def);
             }
 
@@ -133,7 +133,7 @@ namespace AIO.UEditor
             /// <param name="value">值</param>
             public static void SaveBoundsInt<TData>(TData data, in string field, in BoundsInt value)
             {
-                var key = string.Concat(data.GetType().FullName, field.GetHashCode(), BoundsIntHashCode);
+                var key = CombineKey<TData>(field, BoundsIntHashCode);
                 CommonSaveBoundsInt(key, value);
             }
 

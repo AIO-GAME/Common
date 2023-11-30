@@ -42,7 +42,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static Vector3Int LoadVector3Int(in string field, in Vector3Int def)
             {
-                var key = string.Concat(field.GetHashCode(), VectorIntHashCode);
+                var key = CombineKey(field, VectorIntHashCode);
                 return CommonLoadVector3Int(key, def);
             }
 
@@ -53,7 +53,7 @@ namespace AIO.UEditor
             /// <param name="value">值</param>
             public static void SaveVector3Int(in string field, in Vector3Int value)
             {
-                var key = string.Concat(field.GetHashCode(), VectorIntHashCode);
+                var key = CombineKey(field, VectorIntHashCode);
                 CommonSaveVector3Int(key, value);
             }
 
@@ -70,7 +70,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static Vector3Int LoadVector3Int<TData>(in string field, in Vector3Int def = default)
             {
-                var key = string.Concat(typeof(TData).FullName, field.GetHashCode(), VectorIntHashCode);
+                var key = CombineKey<TData>(field, VectorIntHashCode);
                 return CommonLoadVector3Int(key, def);
             }
 
@@ -82,7 +82,7 @@ namespace AIO.UEditor
             /// <typeparam name="TData">泛型类型</typeparam>
             public static void SaveVector3Int<TData>(in string field, in Vector3Int value)
             {
-                var key = string.Concat(typeof(TData).FullName, field.GetHashCode(), VectorIntHashCode);
+                var key = CombineKey<TData>(field, VectorIntHashCode);
                 CommonSaveVector3Int(key, value);
             }
 
@@ -100,7 +100,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static Vector3Int LoadVector3Int<TData>(in TData data, in string field, in Vector3Int def = default)
             {
-                var key = string.Concat(data.GetType().FullName, field.GetHashCode(), VectorIntHashCode);
+                var key = CombineKey<TData>(field, VectorIntHashCode);
                 return CommonLoadVector3Int(key, def);
             }
 
@@ -112,7 +112,7 @@ namespace AIO.UEditor
             /// <param name="value">值</param>
             public static void SaveVector3Int<TData>(TData data, in string field, in Vector3Int value)
             {
-                var key = string.Concat(data.GetType().FullName, field.GetHashCode(), VectorIntHashCode);
+                var key = CombineKey<TData>(field, VectorIntHashCode);
                 CommonSaveVector3Int(key, value);
             }
 

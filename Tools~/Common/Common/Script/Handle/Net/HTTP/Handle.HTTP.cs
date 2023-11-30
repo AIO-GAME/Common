@@ -148,14 +148,14 @@ public partial class AHandle
         /// </summary>
         /// <param name="savePath">保存文件夹路径</param>
         /// <param name="remotePath">远端需要下载文件路径</param>
-        /// <param name="progress">进度回调</param>
+        /// <param name="aProgress">进度回调</param>
         /// <param name="isOverWrite">是否覆盖</param>
         public void Download(string savePath, string remotePath,
-            ProgressArgs progress = default, bool isOverWrite = false)
+            AProgress aProgress = default, bool isOverWrite = false)
         {
             var sourcePath = Path.Combine(RemoteURL, remotePath);
             var targetPath = Path.Combine(savePath, Path.GetFileName(remotePath));
-            AHelper.Net.HTTP.Download(sourcePath, targetPath, progress, isOverWrite, TimeOut,
+            AHelper.Net.HTTP.Download(sourcePath, targetPath, aProgress, isOverWrite, TimeOut,
                 BufferSize);
         }
 
@@ -164,13 +164,13 @@ public partial class AHandle
         /// </summary>
         /// <param name="savePath">保存文件夹路径</param>
         /// <param name="remotePath">远端需要下载文件路径</param>
-        /// <param name="progress">进度回调</param>
+        /// <param name="aProgress">进度回调</param>
         /// <param name="isOverWrite">是否覆盖</param>
         public void Download(string savePath, IEnumerable<string> remotePath,
-            ProgressArgs progress = default, bool isOverWrite = false)
+            AProgress aProgress = default, bool isOverWrite = false)
         {
             var sourcePath = remotePath.Select(path => Path.Combine(RemoteURL, path)).ToArray();
-            AHelper.Net.HTTP.Download(sourcePath, savePath, progress, isOverWrite, TimeOut, BufferSize);
+            AHelper.Net.HTTP.Download(sourcePath, savePath, aProgress, isOverWrite, TimeOut, BufferSize);
         }
 
         /// <summary>
@@ -178,14 +178,14 @@ public partial class AHandle
         /// </summary>
         /// <param name="savePath">保存文件夹路径</param>
         /// <param name="remotePath">远端需要下载文件路径</param>
-        /// <param name="progress">进度回调</param>
+        /// <param name="aProgress">进度回调</param>
         /// <param name="isOverWrite">是否覆盖</param>
         public Task DownloadAsync(string savePath, string remotePath,
-            ProgressArgs progress = default, bool isOverWrite = false)
+            AProgress aProgress = default, bool isOverWrite = false)
         {
             var sourcePath = Path.Combine(RemoteURL, remotePath);
             var targetPath = Path.Combine(savePath, Path.GetFileName(remotePath));
-            return AHelper.Net.HTTP.DownloadAsync(sourcePath, targetPath, progress, isOverWrite, TimeOut,
+            return AHelper.Net.HTTP.DownloadAsync(sourcePath, targetPath, aProgress, isOverWrite, TimeOut,
                 BufferSize);
         }
 
@@ -194,13 +194,13 @@ public partial class AHandle
         /// </summary>
         /// <param name="savePath">保存文件夹路径</param>
         /// <param name="remotePath">远端需要下载文件路径</param>
-        /// <param name="progress">进度回调</param>
+        /// <param name="aProgress">进度回调</param>
         /// <param name="isOverWrite">是否覆盖</param>
         public Task DownloadAsync(string savePath, IEnumerable<string> remotePath,
-            ProgressArgs progress = default, bool isOverWrite = false)
+            AProgress aProgress = default, bool isOverWrite = false)
         {
             var sourcePath = remotePath.Select(remote => Path.Combine(RemoteURL, Path.GetFileName(remote))).ToArray();
-            return AHelper.Net.HTTP.DownloadAsync(sourcePath, savePath, progress, isOverWrite, TimeOut, BufferSize);
+            return AHelper.Net.HTTP.DownloadAsync(sourcePath, savePath, aProgress, isOverWrite, TimeOut, BufferSize);
         }
 
         #endregion

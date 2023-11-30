@@ -16,22 +16,14 @@ public class Program
         const string pass = "ingcreations2023";
         using var handle = AHandle.FTP.Create(serverIp, user, pass, "Bundles");
         await handle.InitAsync();
-        var progress = new ProgressArgs();
-        progress.OnProgress += sender => Console.WriteLine(sender);
+        var progress = new AProgressEvent();
+        progress.OnProgress += Console.WriteLine;
         progress.OnError += Console.WriteLine;
         await handle.UploadDirAsync(@"E:\Project\AIO\20190440f1\Bundles", progress);
-        await handle.UploadFileAsync(@"E:\WWW\G101\Version\StandaloneWindows64.json", "StandaloneWindows64.json", progress);
+        await handle.UploadFileAsync(@"E:\WWW\G101\Version\StandaloneWindows64.json", "StandaloneWindows64.json",
+            progress);
         Console.WriteLine("Upload done!");
-       
-        Console.WriteLine(await handle.CheckFileAsync("Version/StandaloneWindows64.json"));
-        Console.WriteLine(await handle.CheckDirAsync("Version"));
 
-        Console.WriteLine(await handle.CheckFileAsync("Version"));
-        Console.WriteLine(await handle.CheckDirAsync("Version/StandaloneWindows64.json"));
-
-        Console.WriteLine(await handle.CheckAsync("Version1"));
-        Console.WriteLine(await handle.CheckAsync("Version"));
-        Console.WriteLine(await handle.CheckAsync("Version/StandaloneWindows64.json"));
         Console.WriteLine();
     }
 

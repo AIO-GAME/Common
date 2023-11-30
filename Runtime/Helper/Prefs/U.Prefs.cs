@@ -32,6 +32,23 @@ namespace AIO
             {
                 PlayerPrefs.DeleteKey(key);
             }
+
+            /// <summary>
+            /// 判断游戏是否第一次初始化
+            /// </summary>
+            public static bool FirstOpen()
+            {
+#if UNITY_EDITOR
+                var key = string.Concat(Application.dataPath, "FirstInit");
+                if (UnityEditor.EditorPrefs.HasKey(key)) return false;
+                UnityEditor.EditorPrefs.SetInt(key, 1);
+#else
+                if (PlayerPrefs.HasKey("FirstInit")) return false;
+                PlayerPrefs.SetInt("FirstInit", 1);
+                PlayerPrefs.Save();
+#endif
+                return true;
+            }
         }
     }
 }

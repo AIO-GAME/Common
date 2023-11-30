@@ -37,7 +37,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static TEnum LoadEnum<TEnum>(in string field, in TEnum def) where TEnum : struct, Enum
             {
-                var key = string.Concat(field.GetHashCode(), EnumHashCode);
+                var key = CombineKey(field, EnumHashCode);
                 return CommonLoadEnum(key, def);
             }
 
@@ -48,7 +48,7 @@ namespace AIO.UEditor
             /// <param name="value">值</param>
             public static void SaveEnum<TEnum>(in string field, in TEnum value) where TEnum : struct, Enum
             {
-                var key = string.Concat(field.GetHashCode(), EnumHashCode);
+                var key = CombineKey(field, EnumHashCode);
                 CommonSaveEnum(key, value);
             }
 
@@ -66,7 +66,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static TEnum LoadEnum<TData, TEnum>(in string field, in TEnum def = default) where TEnum : struct, Enum
             {
-                var key = string.Concat(typeof(TData).FullName, field.GetHashCode(), EnumHashCode);
+                var key = CombineKey<TData>(field, EnumHashCode);
                 return CommonLoadEnum(key, def);
             }
 
@@ -79,7 +79,7 @@ namespace AIO.UEditor
             /// <typeparam name="TEnum">泛型类型</typeparam>
             public static void SaveEnum<TData, TEnum>(in string field, in TEnum value) where TEnum : struct, Enum
             {
-                var key = string.Concat(typeof(TData).FullName, field.GetHashCode(), EnumHashCode);
+                var key = CombineKey<TData>(field, EnumHashCode);
                 CommonSaveEnum(key, value);
             }
 
@@ -98,7 +98,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static TEnum LoadEnum<TData, TEnum>(in TData data, in string field, in TEnum def = default) where TEnum : struct, Enum
             {
-                var key = string.Concat(data.GetType().FullName, field.GetHashCode(), EnumHashCode);
+                var key = CombineKey<TData>(field, EnumHashCode);
                 return CommonLoadEnum(key, def);
             }
 
@@ -112,7 +112,7 @@ namespace AIO.UEditor
             /// <typeparam name="TEnum">泛型类型</typeparam>
             public static void SaveEnum<TData, TEnum>(TData data, in string field, in TEnum value) where TEnum : struct, Enum
             {
-                var key = string.Concat(data.GetType().FullName, field.GetHashCode(), EnumHashCode);
+                var key = CombineKey<TData>(field, EnumHashCode);
                 CommonSaveEnum(key, value);
             }
 

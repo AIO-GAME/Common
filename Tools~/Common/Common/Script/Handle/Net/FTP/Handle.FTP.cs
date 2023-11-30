@@ -121,7 +121,7 @@ public partial class AHandle
         }
 
         /// <inheritdoc />
-        public sealed override string ToString()
+        public override string ToString()
         {
             return string.Concat("ServerIP: ", ServerIP, " UserName: ", UserName, " Password: ", Password,
                 " RemotePath: ", RemotePath);
@@ -206,21 +206,21 @@ public partial class AHandle
         /// </summary>
         /// <param name="localPath">本地文件</param>
         /// <param name="remotePath">远端路径</param>
-        /// <param name="progress">回调</param>
-        public bool UploadFile(string localPath, string remotePath, ProgressArgs progress = default)
+        /// <param name="iEvent">回调</param>
+        public bool UploadFile(string localPath, string remotePath, IProgressEvent iEvent = null)
         {
             var remote = string.Concat(URI, '/', remotePath);
-            return AHelper.Net.FTP.UploadFile(remote, UserName, Password, localPath, progress, TimeOut, BufferSize);
+            return AHelper.Net.FTP.UploadFile(remote, UserName, Password, localPath, iEvent, TimeOut, BufferSize);
         }
 
         /// <summary>
         /// 上传文件
         /// </summary>
         /// <param name="localPath">本地文件</param>
-        /// <param name="progress">回调</param>
-        public bool UploadFile(string localPath, ProgressArgs progress = default)
+        /// <param name="iEvent">回调</param>
+        public bool UploadFile(string localPath, IProgressEvent iEvent = null)
         {
-            return AHelper.Net.FTP.UploadFile(URI, UserName, Password, localPath, progress, TimeOut, BufferSize);
+            return AHelper.Net.FTP.UploadFile(URI, UserName, Password, localPath, iEvent, TimeOut, BufferSize);
         }
 
         /// <summary>
@@ -228,11 +228,11 @@ public partial class AHandle
         /// </summary>
         /// <param name="localPath">本地文件</param>
         /// <param name="remotePath">远端路径</param>
-        /// <param name="progress">回调</param>
-        public Task<bool> UploadFileAsync(string localPath, string remotePath, ProgressArgs progress = default)
+        /// <param name="iEvent">回调</param>
+        public Task<bool> UploadFileAsync(string localPath, string remotePath, IProgressEvent iEvent = null)
         {
             var remote = string.Concat(URI, '/', remotePath);
-            return AHelper.Net.FTP.UploadFileAsync(remote, UserName, Password, localPath, progress, TimeOut,
+            return AHelper.Net.FTP.UploadFileAsync(remote, UserName, Password, localPath, iEvent, TimeOut,
                 BufferSize);
         }
 
@@ -240,10 +240,10 @@ public partial class AHandle
         /// 上传文件
         /// </summary>
         /// <param name="localPath">本地文件</param>
-        /// <param name="progress">回调</param>
-        public Task<bool> UploadFileAsync(string localPath, ProgressArgs progress = default)
+        /// <param name="iEvent">回调</param>
+        public Task<bool> UploadFileAsync(string localPath, IProgressEvent iEvent = null)
         {
-            return AHelper.Net.FTP.UploadFileAsync(URI, UserName, Password, localPath, progress, TimeOut, BufferSize);
+            return AHelper.Net.FTP.UploadFileAsync(URI, UserName, Password, localPath, iEvent, TimeOut, BufferSize);
         }
 
         /// <summary>
@@ -251,33 +251,33 @@ public partial class AHandle
         /// </summary>
         /// <param name="localPath">本地文件</param>
         /// <param name="remotePath">远端路径</param>
-        /// <param name="progress">回调</param>
+        /// <param name="iEvent">回调</param>
         /// <param name="searchPattern">搜索字段</param>
         /// <param name="searchOption">搜索模式</param>
         public bool UploadDir(string localPath, string remotePath,
-            ProgressArgs progress = default,
+            IProgressEvent iEvent = null,
             SearchOption searchOption = SearchOption.AllDirectories,
             string searchPattern = "*")
         {
             var remote = string.Concat(URI, '/', remotePath);
             return AHelper.Net.FTP.UploadFolder(remote, UserName, Password,
-                localPath, searchOption, searchPattern, progress, TimeOut, BufferSize);
+                localPath, searchOption, searchPattern, iEvent, TimeOut, BufferSize);
         }
 
         /// <summary>
         /// 上传文件
         /// </summary>
         /// <param name="localPath">本地文件</param>
-        /// <param name="progress">回调</param>
+        /// <param name="iEvent">回调</param>
         /// <param name="searchPattern">搜索字段</param>
         /// <param name="searchOption">搜索模式</param>
         public bool UploadDir(string localPath,
-            ProgressArgs progress = default,
+            IProgressEvent iEvent = null,
             SearchOption searchOption = SearchOption.AllDirectories,
             string searchPattern = "*")
         {
             return AHelper.Net.FTP.UploadFolder(URI, UserName, Password,
-                localPath, searchOption, searchPattern, progress, TimeOut, BufferSize);
+                localPath, searchOption, searchPattern, iEvent, TimeOut, BufferSize);
         }
 
         /// <summary>
@@ -285,31 +285,31 @@ public partial class AHandle
         /// </summary>
         /// <param name="localPath">本地文件</param>
         /// <param name="remotePath">远端路径</param>
-        /// <param name="progress">回调</param>
+        /// <param name="iEvent">回调</param>
         /// <param name="searchPattern">搜索字段</param>
         /// <param name="searchOption">搜索模式</param>
-        public Task<bool> UploadDirAsync(string localPath, string remotePath, ProgressArgs progress,
+        public Task<bool> UploadDirAsync(string localPath, string remotePath, IProgressEvent iEvent,
             SearchOption searchOption = SearchOption.AllDirectories,
             string searchPattern = "*")
         {
             var remote = string.Concat(URI, '/', remotePath);
             return AHelper.Net.FTP.UploadFolderAsync(remote, UserName, Password, localPath,
-                searchOption, searchPattern, progress, TimeOut, BufferSize);
+                searchOption, searchPattern, iEvent, TimeOut, BufferSize);
         }
 
         /// <summary>
         /// 上传文件
         /// </summary>
         /// <param name="localPath">本地文件</param>
-        /// <param name="progress">回调</param>
+        /// <param name="iEvent">回调</param>
         /// <param name="searchPattern">搜索字段</param>
         /// <param name="searchOption">搜索模式</param>
-        public Task<bool> UploadDirAsync(string localPath, ProgressArgs progress,
+        public Task<bool> UploadDirAsync(string localPath, IProgressEvent iEvent,
             SearchOption searchOption = SearchOption.AllDirectories,
             string searchPattern = "*")
         {
             return AHelper.Net.FTP.UploadFolderAsync(URI, UserName, Password, localPath,
-                searchOption, searchPattern, progress, TimeOut, BufferSize);
+                searchOption, searchPattern, iEvent, TimeOut, BufferSize);
         }
 
         /// <summary>
@@ -317,13 +317,13 @@ public partial class AHandle
         /// </summary>
         /// <param name="localPath">本地文件</param>
         /// <param name="remotePath">远端路径</param>
-        /// <param name="progress">回调</param>
+        /// <param name="iEvent">回调</param>
         /// <param name="isOverWrite">是否重写</param>
-        public bool DownloadFile(string localPath, string remotePath, ProgressArgs progress = default,
+        public bool DownloadFile(string localPath, string remotePath, IProgressEvent iEvent = null,
             bool isOverWrite = false)
         {
             return AHelper.Net.FTP.DownloadFile(string.Concat(URI, '/', remotePath), UserName, Password,
-                localPath, progress, isOverWrite,
+                localPath, iEvent, isOverWrite,
                 TimeOut, BufferSize);
         }
 
@@ -332,13 +332,13 @@ public partial class AHandle
         /// </summary>
         /// <param name="localPath">本地文件</param>
         /// <param name="remotePath">远端路径</param>
-        /// <param name="progress">回调</param>
+        /// <param name="iEvent">回调</param>
         /// <param name="isOverWrite">是否重写</param>
-        public Task<bool> DownloadFileAsync(string localPath, string remotePath, ProgressArgs progress = default,
+        public Task<bool> DownloadFileAsync(string localPath, string remotePath, IProgressEvent iEvent = null,
             bool isOverWrite = false)
         {
             return AHelper.Net.FTP.DownloadFileAsync(string.Concat(URI, '/', remotePath), UserName, Password,
-                localPath, progress, isOverWrite,
+                localPath, iEvent, isOverWrite,
                 TimeOut, BufferSize);
         }
 
@@ -347,20 +347,20 @@ public partial class AHandle
         /// </summary>
         /// <param name="localPath">本地文件</param>
         /// <param name="remotePath">远端路径</param>
-        /// <param name="progress">回调</param>
+        /// <param name="iEvent">回调</param>
         /// <param name="searchPattern">搜索字段</param>
         /// <param name="searchOption">搜索模式</param>
         /// <param name="isOverWrite">是否重写</param>
         public bool DownloadDir(
             string localPath,
             string remotePath,
-            ProgressArgs progress = default,
+            IProgressEvent iEvent = null,
             SearchOption searchOption = SearchOption.AllDirectories,
             string searchPattern = "*",
             bool isOverWrite = false)
         {
             return AHelper.Net.FTP.DownloadDir(string.Concat(URI, '/', remotePath), UserName, Password,
-                localPath, progress, searchOption, searchPattern, isOverWrite,
+                localPath, iEvent, searchOption, searchPattern, isOverWrite,
                 TimeOut, BufferSize);
         }
 
@@ -369,20 +369,20 @@ public partial class AHandle
         /// </summary>
         /// <param name="localPath">本地文件</param>
         /// <param name="remotePath">远端路径</param>
-        /// <param name="progress">回调</param>
+        /// <param name="iEvent">回调</param>
         /// <param name="searchPattern">搜索字段</param>
         /// <param name="searchOption">搜索模式</param>
         /// <param name="isOverWrite">是否重写</param>
         public Task<bool> DownloadDirAsync(
             string localPath,
             string remotePath,
-            ProgressArgs progress = default,
+            IProgressEvent iEvent = null,
             SearchOption searchOption = SearchOption.AllDirectories,
             string searchPattern = "*",
             bool isOverWrite = false)
         {
             return AHelper.Net.FTP.DownloadDirAsync(string.Concat(URI, '/', remotePath), UserName, Password,
-                localPath, progress, searchOption, searchPattern, isOverWrite,
+                localPath, iEvent, searchOption, searchPattern, isOverWrite,
                 TimeOut, BufferSize);
         }
 
@@ -390,19 +390,19 @@ public partial class AHandle
         /// 下载文件
         /// </summary>
         /// <param name="localPath">本地文件</param>
-        /// <param name="progress">回调</param>
+        /// <param name="iEvent">回调</param>
         /// <param name="searchPattern">搜索字段</param>
         /// <param name="searchOption">搜索模式</param>
         /// <param name="isOverWrite">是否重写</param>
         public bool DownloadDir(
             string localPath,
-            ProgressArgs progress = default,
+            IProgressEvent iEvent = null,
             SearchOption searchOption = SearchOption.AllDirectories,
             string searchPattern = "*",
             bool isOverWrite = false)
         {
             return AHelper.Net.FTP.DownloadDir(URI, UserName, Password,
-                localPath, progress, searchOption, searchPattern, isOverWrite,
+                localPath, iEvent, searchOption, searchPattern, isOverWrite,
                 TimeOut, BufferSize);
         }
 
@@ -410,19 +410,19 @@ public partial class AHandle
         /// 下载文件
         /// </summary>
         /// <param name="localPath">本地文件</param>
-        /// <param name="progress">回调</param>
+        /// <param name="iEvent">回调</param>
         /// <param name="searchPattern">搜索字段</param>
         /// <param name="searchOption">搜索模式</param>
         /// <param name="isOverWrite">是否重写</param>
         public Task<bool> DownloadDirAsync(
             string localPath,
-            ProgressArgs progress = default,
+            IProgressEvent iEvent = null,
             SearchOption searchOption = SearchOption.AllDirectories,
             string searchPattern = "*",
             bool isOverWrite = false)
         {
             return AHelper.Net.FTP.DownloadDirAsync(URI, UserName, Password,
-                localPath, progress, searchOption, searchPattern, isOverWrite,
+                localPath, iEvent, searchOption, searchPattern, isOverWrite,
                 TimeOut, BufferSize);
         }
 

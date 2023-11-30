@@ -83,7 +83,12 @@ namespace AIO.UEditor
             if (GUI.changed)
             {
                 OnChange();
-                OnDisable();
+                if (target is null) return;
+                EditorUtility.SetDirty(target);
+                Undo.RecordObject(target, string.Concat(UNDO, UndoName));
+                SerObj?.SetIsDifferentCacheDirty();
+                SerObj?.ApplyModifiedProperties();
+                SerObj?.Update();
                 Repaint(); //重新绘制
             }
         }

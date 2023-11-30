@@ -4,8 +4,8 @@
 |*|E-Mail:     |*| 1398581458@qq.com     
 |*|============|*/
 
-using System;
 using UnityEditor;
+using UnityEngine;
 
 namespace AIO.UEditor
 {
@@ -24,7 +24,7 @@ namespace AIO.UEditor
             /// <param name="value">值</param>
             public static void SaveString(in string field, in string value)
             {
-                var key = string.Concat(field.GetHashCode(), StringHashCode);
+                var key = CombineKey(field, StringHashCode);
                 EditorPrefs.SetString(key, value);
             }
 
@@ -36,7 +36,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static string LoadString(in string field, in string def = null)
             {
-                var key = string.Concat(field.GetHashCode(), StringHashCode);
+                var key = CombineKey(field, StringHashCode);
                 return EditorPrefs.GetString(key, def);
             }
 
@@ -52,7 +52,7 @@ namespace AIO.UEditor
             /// <typeparam name="T">泛型类型</typeparam>
             public static void SaveString<T>(in string field, in string value)
             {
-                var key = string.Concat(typeof(T).FullName, field.GetHashCode(), StringHashCode);
+                var key = CombineKey<T>(field, StringHashCode);
                 EditorPrefs.SetString(key, value);
             }
 
@@ -65,7 +65,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static string LoadString<T>(in string field, in string def = null)
             {
-                var key = string.Concat(typeof(T).FullName, field.GetHashCode(), StringHashCode);
+                var key = CombineKey<T>(field, StringHashCode);
                 return EditorPrefs.GetString(key, def);
             }
 
@@ -83,7 +83,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static string LoadString<T>(in T data, in string field, in string def)
             {
-                var key = string.Concat(data.GetType().FullName, field.GetHashCode(), StringHashCode);
+                var key = CombineKey<T>(field, StringHashCode);
                 return EditorPrefs.GetString(key, def);
             }
 
@@ -96,7 +96,7 @@ namespace AIO.UEditor
             /// <typeparam name="T">泛型类型</typeparam>
             public static void SaveString<T>(in T data, in string field, in string value)
             {
-                var key = string.Concat(data.GetType().FullName, field.GetHashCode(), StringHashCode);
+                var key = CombineKey<T>(field, StringHashCode);
                 EditorPrefs.SetString(key, value);
             }
 

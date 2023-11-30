@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
+using AIO;
 
 public partial class AHelper
 {
@@ -19,7 +20,7 @@ public partial class AHelper
             /// </summary>
             /// <param name="remoteUrl">远端路径</param>
             /// <param name="localPath">保存路径</param>
-            /// <param name="progress">回调</param>
+            /// <param name="iEvent">回调</param>
             /// <param name="isOverWrite">覆盖</param>
             /// <param name="timeout">超时</param>
             /// <param name="bufferSize">容量</param>
@@ -27,7 +28,7 @@ public partial class AHelper
             public static void Download(
                 string remoteUrl,
                 string localPath,
-                ProgressArgs progress = default,
+                IProgressEvent iEvent = null,
                 bool isOverWrite = false,
                 ushort timeout = TIMEOUT,
                 int bufferSize = BUFFER_SIZE
@@ -44,6 +45,7 @@ public partial class AHelper
 
                 HttpWebResponse response = null;
                 Stream responseStream = null;
+                var progress = new AProgress(iEvent);
                 try
                 {
                     response = (HttpWebResponse)request.GetResponse();
@@ -83,13 +85,13 @@ public partial class AHelper
             /// </summary>
             /// <param name="remoteUrl">远端路径</param>
             /// <param name="localPath">保存路径</param>
-            /// <param name="progress">回调</param>
+            /// <param name="iEvent">回调</param>
             /// <param name="isOverWrite">覆盖</param>
             /// <param name="timeout">超时</param>
             /// <param name="bufferSize">容量</param>
             /// <exception cref="Exception">异常</exception>
             public static async Task DownloadAsync(string remoteUrl, string localPath,
-                ProgressArgs progress = default,
+                IProgressEvent iEvent = null,
                 bool isOverWrite = false,
                 ushort timeout = TIMEOUT,
                 int bufferSize = BUFFER_SIZE
@@ -103,7 +105,7 @@ public partial class AHelper
                 if (outputStream is null) return;
                 var temp = outputStream.Position - CODE.Length;
                 if (temp > 0) request.AddRange(temp);
-
+                var progress = new AProgress(iEvent);
                 HttpWebResponse response = null;
                 Stream responseStream = null;
                 try

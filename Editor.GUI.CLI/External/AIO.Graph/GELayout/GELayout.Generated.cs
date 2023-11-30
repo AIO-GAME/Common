@@ -7171,9 +7171,10 @@ namespace AIO.UEditor
         public static void VHorizontal(Action action, params GUILayoutOption[] options)
         {
             if (action == null) return;
-            EditorGUILayout.BeginHorizontal(options);
-            action?.Invoke();
-            EditorGUILayout.EndHorizontal();
+            using (new GUILayout.HorizontalScope(options))
+            {
+                action?.Invoke();
+            }
         }
 
         /// <summary>
@@ -7184,9 +7185,10 @@ namespace AIO.UEditor
         public static void VHorizontal(Action action, float width)
         {
             if (action == null) return;
-            EditorGUILayout.BeginHorizontal(GUILayout.Width(width));
-            action?.Invoke();
-            EditorGUILayout.EndHorizontal();
+            using (new GUILayout.HorizontalScope(GUILayout.Width(width)))
+            {
+                action?.Invoke();
+            }
         }
 
         /// <summary>
@@ -7198,9 +7200,10 @@ namespace AIO.UEditor
         public static void VHorizontal(Action action, float width, float height)
         {
             if (action == null) return;
-            EditorGUILayout.BeginHorizontal(GUILayout.Width(width), GUILayout.Width(height));
-            action?.Invoke();
-            EditorGUILayout.EndHorizontal();
+            using (new GUILayout.HorizontalScope(GUILayout.Width(width), GUILayout.Width(height)))
+            {
+                action?.Invoke();
+            }
         }
 
         /// <summary>
@@ -7212,9 +7215,10 @@ namespace AIO.UEditor
         public static void VHorizontal(Action action, GUIStyle style, params GUILayoutOption[] options)
         {
             if (action == null) return;
-            EditorGUILayout.BeginHorizontal(style, options);
-            action?.Invoke();
-            EditorGUILayout.EndHorizontal();
+            using (new GUILayout.HorizontalScope(style, options))
+            {
+                action?.Invoke();
+            }
         }
 
         /// <summary>
@@ -7226,9 +7230,10 @@ namespace AIO.UEditor
         public static void VHorizontal(Action action, GUIStyle style, float width)
         {
             if (action == null) return;
-            EditorGUILayout.BeginHorizontal(style, GUILayout.Width(width));
-            action?.Invoke();
-            EditorGUILayout.EndHorizontal();
+            using (new GUILayout.HorizontalScope(style, GUILayout.Width(width)))
+            {
+                action?.Invoke();
+            }
         }
 
         /// <summary>
@@ -7241,9 +7246,10 @@ namespace AIO.UEditor
         public static void VHorizontal(Action action, GUIStyle style, float width, float height)
         {
             if (action == null) return;
-            EditorGUILayout.BeginHorizontal(style, GUILayout.Width(width), GUILayout.Width(height));
-            action?.Invoke();
-            EditorGUILayout.EndHorizontal();
+            using (new GUILayout.HorizontalScope(style, GUILayout.Width(width), GUILayout.Width(height)))
+            {
+                action?.Invoke();
+            }
         }
 
         /// <summary>
@@ -7390,9 +7396,10 @@ namespace AIO.UEditor
         public static void Vertical(Action action, params GUILayoutOption[] options)
         {
             if (action == null) return;
-            EditorGUILayout.BeginVertical(options);
-            action?.Invoke();
-            EditorGUILayout.EndVertical();
+            using (new GUILayout.VerticalScope(options))
+            {
+                action?.Invoke();
+            }
         }
 
         /// <summary>
@@ -7403,9 +7410,10 @@ namespace AIO.UEditor
         public static void Vertical(Action action, float width)
         {
             if (action == null) return;
-            EditorGUILayout.BeginVertical(GUILayout.Width(width));
-            action?.Invoke();
-            EditorGUILayout.EndVertical();
+            using (new GUILayout.VerticalScope(GUILayout.Width(width)))
+            {
+                action?.Invoke();
+            }
         }
 
         /// <summary>
@@ -7417,9 +7425,10 @@ namespace AIO.UEditor
         public static void Vertical(Action action, float width, float height)
         {
             if (action == null) return;
-            EditorGUILayout.BeginVertical(GUILayout.Width(width), GUILayout.Width(height));
-            action?.Invoke();
-            EditorGUILayout.EndVertical();
+            using (new GUILayout.VerticalScope(GUILayout.Width(width), GUILayout.Width(height)))
+            {
+                action?.Invoke();
+            }
         }
 
         /// <summary>
@@ -7431,9 +7440,10 @@ namespace AIO.UEditor
         public static void Vertical(Action action, GUIStyle style, params GUILayoutOption[] options)
         {
             if (action == null) return;
-            EditorGUILayout.BeginVertical(style, options);
-            action?.Invoke();
-            EditorGUILayout.EndVertical();
+            using (new GUILayout.VerticalScope(style, options))
+            {
+                action?.Invoke();
+            }
         }
 
         /// <summary>
@@ -7445,9 +7455,10 @@ namespace AIO.UEditor
         public static void Vertical(Action action, GUIStyle style, float width)
         {
             if (action == null) return;
-            EditorGUILayout.BeginVertical(style, GUILayout.Width(width));
-            action?.Invoke();
-            EditorGUILayout.EndVertical();
+            using (new GUILayout.VerticalScope(style, GUILayout.Width(width)))
+            {
+                action?.Invoke();
+            }
         }
 
         /// <summary>
@@ -7460,9 +7471,10 @@ namespace AIO.UEditor
         public static void Vertical(Action action, GUIStyle style, float width, float height)
         {
             if (action == null) return;
-            EditorGUILayout.BeginVertical(style, GUILayout.Width(width), GUILayout.Width(height));
-            action?.Invoke();
-            EditorGUILayout.EndVertical();
+            using (new GUILayout.VerticalScope(style, GUILayout.Width(width), GUILayout.Width(height)))
+            {
+                action?.Invoke();
+            }
         }
 
         /// <summary>

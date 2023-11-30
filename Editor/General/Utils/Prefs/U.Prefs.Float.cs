@@ -17,8 +17,7 @@ namespace AIO.UEditor
 
             private static float CommonLoadFloat(in string key, in float def)
             {
-                if (!EditorPrefs.HasKey(key)) return def;
-                return EditorPrefs.GetFloat(key);
+                return !EditorPrefs.HasKey(key) ? def : EditorPrefs.GetFloat(key);
             }
 
             private static void CommonSaveFloat(in string key, in float value)
@@ -36,7 +35,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static float LoadFloat(in string field, in float def = 0)
             {
-                var key = string.Concat(field.GetHashCode(), FloatHashCode);
+                var key = CombineKey(field, FloatHashCode);
                 return CommonLoadFloat(key, def);
             }
 
@@ -47,7 +46,7 @@ namespace AIO.UEditor
             /// <param name="value">值</param>
             public static void SaveFloat(in string field, in float value)
             {
-                var key = string.Concat(field.GetHashCode(), FloatHashCode);
+                var key = CombineKey(field, FloatHashCode);
                 CommonSaveFloat(key, value);
             }
 
@@ -64,7 +63,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static float LoadFloat<T>(in string field, in float def = 0)
             {
-                var key = string.Concat(typeof(T).FullName, field.GetHashCode(), FloatHashCode);
+                var key = CombineKey<T>(field, FloatHashCode);
                 return CommonLoadFloat(key, def);
             }
 
@@ -76,7 +75,7 @@ namespace AIO.UEditor
             /// <typeparam name="T">泛型类型</typeparam>
             public static void SaveFloat<T>(in string field, in float value)
             {
-                var key = string.Concat(typeof(T).FullName, field.GetHashCode(), FloatHashCode);
+                var key = CombineKey<T>(field, FloatHashCode);
                 CommonSaveFloat(key, value);
             }
 
@@ -94,7 +93,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static float LoadFloat<T>(in T data, in string field, in float def = 0)
             {
-                var key = string.Concat(data.GetType().FullName, field.GetHashCode(), FloatHashCode);
+                var key = CombineKey<T>(field, FloatHashCode);
                 return CommonLoadFloat(key, def);
             }
 
@@ -107,7 +106,7 @@ namespace AIO.UEditor
             /// <typeparam name="T">泛型类型</typeparam>
             public static void SaveFloat<T>(in T data, in string field, in float value)
             {
-                var key = string.Concat(data.GetType().FullName, field.GetHashCode(), FloatHashCode);
+                var key = CombineKey<T>(field, FloatHashCode);
                 CommonSaveFloat(key, value);
             }
 

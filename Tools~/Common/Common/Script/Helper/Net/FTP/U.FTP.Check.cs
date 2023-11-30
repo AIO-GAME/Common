@@ -94,7 +94,6 @@ public partial class AHelper
 
             #endregion
 
-
             /// <summary>
             /// 判断FTP路径是否为文件
             /// </summary>
@@ -131,7 +130,6 @@ public partial class AHelper
                     return false;
                 }
             }
-
 
             /// <summary>
             /// 判断FTP路径是否为文件

@@ -21,18 +21,21 @@ public partial class AHelper
             /// <param name="username">用户名</param>
             /// <param name="password">密码</param>
             /// <param name="localPath">本地文件路径</param>
-            /// <param name="progress">回调</param>
+            /// <param name="iEvent">回调</param>
             /// <param name="overwrite">是否覆盖</param>
             /// <param name="timeout">超时</param>
             /// <param name="bufferSize">下载缓存大小</param>
             public static bool DownloadFile(string uri, string username, string password,
-                string localPath, ProgressArgs progress = default, bool overwrite = false, ushort timeout = TIMEOUT,
+                string localPath,
+                IProgressEvent iEvent = null,
+                bool overwrite = false,
+                ushort timeout = TIMEOUT,
                 int bufferSize = BUFFER_SIZE)
             {
                 var fileSize = GetFileSize(uri, username, password);
                 if (fileSize <= 0) return false;
                 if (File.Exists(localPath) && !overwrite) return true;
-
+                var progress = new AProgress(iEvent);
                 try
                 {
                     var request = CreateRequestFile(uri, username, password, "RETR", timeout);
@@ -78,18 +81,21 @@ public partial class AHelper
             /// <param name="username">用户名</param>
             /// <param name="password">密码</param>
             /// <param name="localPath">本地文件路径</param>
-            /// <param name="progress">回调</param>
+            /// <param name="iEvent">回调</param>
             /// <param name="overwrite">是否覆盖</param>
             /// <param name="timeout">超时</param>
             /// <param name="bufferSize">下载缓存大小</param>
             public static async Task<bool> DownloadFileAsync(string uri, string username, string password,
-                string localPath, ProgressArgs progress = default, bool overwrite = false, ushort timeout = TIMEOUT,
+                string localPath,
+                IProgressEvent iEvent = null,
+                bool overwrite = false,
+                ushort timeout = TIMEOUT,
                 int bufferSize = BUFFER_SIZE)
             {
                 var fileSize = await GetFileSizeAsync(uri, username, password);
                 if (fileSize <= 0) return false;
                 if (File.Exists(localPath) && !overwrite) return true;
-
+                var progress = new AProgress(iEvent);
                 try
                 {
                     var request = CreateRequestFile(uri, username, password, "RETR", timeout);
@@ -132,7 +138,7 @@ public partial class AHelper
             /// <param name="username">用户名</param>
             /// <param name="password">密码</param>
             /// <param name="localPath">本地文件路径</param>
-            /// <param name="progress">回调</param>
+            /// <param name="iEvent">回调</param>
             /// <param name="pattern">搜索过滤</param>
             /// <param name="option">搜索模式</param>
             /// <param name="overwrite">是否覆盖</param>
@@ -140,7 +146,7 @@ public partial class AHelper
             /// <param name="bufferSize">下载缓存大小</param>
             public static bool DownloadDir(string uri, string username, string password,
                 string localPath,
-                ProgressArgs progress = default,
+                IProgressEvent iEvent = null,
                 SearchOption option = SearchOption.AllDirectories,
                 string pattern = "*",
                 bool overwrite = false,
@@ -150,6 +156,7 @@ public partial class AHelper
             {
                 var remoteList = GetDownloadList(uri, username, password, option, pattern, timeout);
                 var dict = new Dictionary<string, long>();
+                var progress = new AProgress(iEvent);
                 foreach (var remoteAbs in remoteList)
                 {
                     if (progress.IsCancel)
@@ -227,7 +234,7 @@ public partial class AHelper
             /// <param name="username">用户名</param>
             /// <param name="password">密码</param>
             /// <param name="localPath">本地文件路径</param>
-            /// <param name="progress">回调</param>
+            /// <param name="iEvent">回调</param>
             /// <param name="pattern">搜索过滤</param>
             /// <param name="option">搜索模式</param>
             /// <param name="overwrite">是否覆盖</param>
@@ -235,7 +242,7 @@ public partial class AHelper
             /// <param name="bufferSize">下载缓存大小</param>
             public static async Task<bool> DownloadDirAsync(string uri, string username, string password,
                 string localPath,
-                ProgressArgs progress = default,
+                IProgressEvent iEvent = default,
                 SearchOption option = SearchOption.AllDirectories,
                 string pattern = "*",
                 bool overwrite = false,
@@ -246,6 +253,7 @@ public partial class AHelper
                 var remoteList =
                     await GetDownloadListAsync(uri, username, password, option, pattern, timeout);
                 var dict = new Dictionary<string, long>();
+                var progress = new AProgress(iEvent);
                 foreach (var remoteAbs in remoteList)
                 {
                     if (progress.IsCancel)

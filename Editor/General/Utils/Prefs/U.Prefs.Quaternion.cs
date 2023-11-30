@@ -50,7 +50,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static Quaternion LoadQuaternion(in string field, in Quaternion def)
             {
-                var key = string.Concat(field.GetHashCode(), QuaternionHashCode);
+                var key = CombineKey(field, QuaternionHashCode);
                 return CommonLoadQuaternion(key, def);
             }
 
@@ -61,7 +61,7 @@ namespace AIO.UEditor
             /// <param name="value">值</param>
             public static void SaveQuaternion(in string field, in Quaternion value)
             {
-                var key = string.Concat(field.GetHashCode(), QuaternionHashCode);
+                var key = CombineKey(field, QuaternionHashCode);
                 CommonSaveQuaternion(key, value);
             }
 
@@ -78,7 +78,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static Quaternion LoadQuaternion<TData>(in string field, in Quaternion def = default)
             {
-                var key = string.Concat(typeof(TData).FullName, field.GetHashCode(), QuaternionHashCode);
+                var key = CombineKey<TData>(field, QuaternionHashCode);
                 return CommonLoadQuaternion(key, def);
             }
 
@@ -90,7 +90,7 @@ namespace AIO.UEditor
             /// <typeparam name="TData">泛型类型</typeparam>
             public static void SaveQuaternion<TData>(in string field, in Quaternion value)
             {
-                var key = string.Concat(typeof(TData).FullName, field.GetHashCode(), QuaternionHashCode);
+                var key = CombineKey<TData>(field, QuaternionHashCode);
                 CommonSaveQuaternion(key, value);
             }
 
@@ -108,7 +108,7 @@ namespace AIO.UEditor
             /// <returns>返回值</returns>
             public static Quaternion LoadQuaternion<TData>(in TData data, in string field, in Quaternion def = default)
             {
-                var key = string.Concat(data.GetType().FullName, field.GetHashCode(), QuaternionHashCode);
+                var key = CombineKey<TData>(field, QuaternionHashCode);
                 return CommonLoadQuaternion(key, def);
             }
 
@@ -120,7 +120,7 @@ namespace AIO.UEditor
             /// <param name="value">值</param>
             public static void SaveQuaternion<TData>(TData data, in string field, in Quaternion value)
             {
-                var key = string.Concat(data.GetType().FullName, field.GetHashCode(), QuaternionHashCode);
+                var key = CombineKey<TData>(field, QuaternionHashCode);
                 CommonSaveQuaternion(key, value);
             }
 
