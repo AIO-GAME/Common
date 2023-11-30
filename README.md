@@ -10,6 +10,8 @@
 <a href="https://github.com/AIO-Game/Common"><img src="https://img.shields.io/github/languages/code-size/AIO-Game/Common?label=size" /></a>
 <a href="https://github.com/AIO-Game/Common"><img src="https://img.shields.io/github/issues/AIO-GAME/Common" /></a>
 <a href="https://www.codetriage.com/aio-game/common"><img src="https://www.codetriage.com/aio-game/common/badges/users.svg" /></a>
+</p>
+<p align="center">
 <a href="https://github.com/AIO-GAME/Common/tags"><img alt="" src="https://img.shields.io/github/package-json/version/AIO-GAME/Common"></a>
 <a href="https://openupm.com/packages/com.aio.package/"><img src="https://img.shields.io/npm/v/com.aio.package?label=openupm&amp;registry_uri=https://package.openupm.com" /></a>
 </p>
@@ -18,41 +20,57 @@
 
 <details>
 <summary>
-<span style="color: deepskyblue; "><b>openupm-cli</b></span>
+<span style="color: deepskyblue; "><b>Packages Manifest</b></span>
 </summary>
 
-Packages Manifest
-
-~~~
-"dependencies": {
-    "com.aio.package": "x.x.x",
-},
-"scopedRegistries": [
+````json
+{
+  "dependencies": {
+    "com.aio.package": "x.x.x"
+  },
+  "scopedRegistries": [
     {
-        "name": "package.openupm.cn",
-        "url": "https://package.openupm.cn",
-        "scopes": [
-            "com.aio.package"
-        ]
+      "name": "package.openupm.com",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.aio.package"
+      ]
     }
-]
-~~~
+  ]
+}
+````
 
-Unity PackageManager
+</details>
+
+<details>
+<summary>
+<span style="color: deepskyblue; "><b>Unity PackageManager</b></span>
+</summary>
+
+openupm 中国版
 
 ~~~
-// 输入以下内容（中国版）
 Name: package.openupm.cn
 URL: https://package.openupm.cn
 Scope(s): com.aio.package
+~~~
 
-// 输入以下内容（国际版）
+openupm 国际版
+
+~~~
 Name: package.openupm.com
 URL: https://package.openupm.com
 Scope(s): com.aio.package
 ~~~
 
-Command Line
+</details>
+
+<details>
+<summary>
+<span style="color: deepskyblue; "><b>Command Line</b></span>
+</summary>
+
+openupm-cli
 
 ~~~
 openupm add com.aio.package
@@ -60,28 +78,24 @@ openupm add com.aio.package
 
 </details>
 
-<details>
-<summary>
-<span style="color: deepskyblue; "><b>Git</b></span>
-</summary>
-
-Packages Manifest
-
-~~~
-"dependencies" : {
-    "com.aio.package": "https://github.com/AIO-GAME/Common.git#main",
-}
-~~~
-
-</details>
-
 ## 📢 Thanks
+
+Thank you for choosing our package. If this package helps you, please consider showing your support by adding a ⭐ to the
+repo.
 
 ## ⭐ About
 
+This is a command line interface (CLI) package for Unity. It provides a set of commands and tools to enhance the
+efficiency of Unity development.
+
 ## 🖥️ Requirements
 
+- Unity 2019.1 or later
+- .NET 6.0 or later
+
 ## 🧰 Getting Started
+
+Please refer to the wiki for a step-by-step guide on how to get started with this package.
 
 ## 📖 Documentation
 
@@ -98,15 +112,9 @@ or [Wiki](https://github.com/AIO-GAME/Common/wiki)
 | [🪞️ -> **_PrCourse_**](https://github.com/AIO-GAME/Common/wiki/PrCourse) | <i>All Platform Process Execution</i>       |
 | [🪞️ -> **_PrDingding_**](./Documentation~/Usage/Process/PrDingding.md)   | <i>钉钉机器人</i>                                |
 
-## 🤖 Demos
-
-## 🙏 Credits & Thanks
-
 ## 🔗 Third-Party References & Tools
 
 | Doc                                                                 | Description                                 |
 |:--------------------------------------------------------------------|:--------------------------------------------|
 | [RainbowFolders](https://bitbucket.org/chromiumembedded/cef)        ||
 | [MirrorNetworking](https://github.com/MirrorNetworking/Mirror)      ||
-
-## 💫 Recommendation Library
