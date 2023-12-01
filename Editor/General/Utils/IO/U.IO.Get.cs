@@ -16,26 +16,39 @@ namespace AIO.UEditor
         public static partial class IO
         {
             /// <summary>
-            /// 获取指定文件夹下的预制件
+            /// 获取指定文件夹下的ScriptableObject
+            /// </summary>
+            /// <param name="folder">文件夹</param>
+            public static T[] GetScriptableObjects<T>(params string[] folder) where T : ScriptableObject
+            {
+                var pattern = $"t:{typeof(T).Name}";
+                if (folder is null || folder.Length == 0) folder = new string[] { "Assets" };
+                return AssetDatabase.FindAssets(pattern, folder)
+                    .Select(AssetDatabase.GUIDToAssetPath)
+                    .Select(AssetDatabase.LoadAssetAtPath<T>)
+                    .Where(value => value != null).ToArray();
+            }
+
+            /// <summary>
+            /// 获取指定文件夹下的资源
             /// </summary>
             /// <param name="pattern">匹配模式</param>
             /// <param name="folder">文件夹</param>
             /// <returns>预制件数组</returns>
-            public static IEnumerable<T> GetAssetsRes<T>(
-                in string pattern,
+            public static T[] GetAssetsRes<T>(
+                string pattern,
                 params string[] folder
             ) where T : Object
             {
-                if (string.IsNullOrEmpty(pattern)) return Array.Empty<T>();
-
+                if (string.IsNullOrEmpty(pattern)) pattern = $"t:{typeof(T).Name}";
                 return AssetDatabase.FindAssets(pattern, folder)
                     .Select(AssetDatabase.GUIDToAssetPath)
                     .Select(AssetDatabase.LoadAssetAtPath<T>)
-                    .Where(value => value != null);
+                    .Where(value => value != null).ToArray();
             }
 
             /// <summary>
-            /// 获取指定文件夹下的预制件
+            /// 获取指定文件夹下的资源
             /// </summary>
             /// <param name="folder">文件夹</param>
             /// <param name="pattern"></param>

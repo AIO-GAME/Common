@@ -34,6 +34,21 @@ namespace AIO.UEditor
         public uint MaxSizeHeight = 0;
 
         /// <summary>
+        /// 菜单路径
+        /// </summary>
+        public string Menu;
+
+        /// <summary>
+        /// 菜单顺序
+        /// </summary>
+        public int MenuPriority;
+
+        /// <summary>
+        /// 菜单验证函数 返回值为bool
+        /// </summary>
+        public MethodInfo MenuValidate;
+        
+        /// <summary>
         /// 最大宽高
         /// </summary>
         public Vector2 MaxSize => new Vector2(MaxSizeWidth, MaxSizeHeight);

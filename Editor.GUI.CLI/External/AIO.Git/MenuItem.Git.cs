@@ -28,7 +28,8 @@ namespace AIO.UEditor
         [InitializeOnLoadMethod]
         internal static void Generate()
         {
-            var dataPath = Application.dataPath.Replace("Assets", "");
+            // dataPath 获取的是 Assets 的上一级目录
+            var dataPath = Application.dataPath.Substring(0, Application.dataPath.Length - 6);
 
             var packageInfos = AssetDatabase.FindAssets("package", new string[] { "Packages" })
                 .Select(AssetDatabase.GUIDToAssetPath)
