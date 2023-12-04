@@ -7072,6 +7072,283 @@
             写入指定数据类型
             </summary>
         </member>
+        <member name="T:AIO.DisplayList`1">
+            <summary>
+            显示列表
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+        </member>
+        <member name="P:AIO.DisplayList`1.Keys">
+            <summary>
+            键值
+            </summary>
+        </member>
+        <member name="P:AIO.DisplayList`1.Displays">
+            <summary>
+            显示
+            </summary>
+        </member>
+        <member name="P:AIO.DisplayList`1.Values">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="P:AIO.DisplayList`1.PageSize">
+            <summary>
+            页大小
+            </summary>
+        </member>
+        <member name="P:AIO.DisplayList`1.PageIndex">
+            <summary>
+            当前页
+            </summary>
+        </member>
+        <member name="P:AIO.DisplayList`1.PageCount">
+            <summary>
+            总页数
+            </summary>
+        </member>
+        <member name="P:AIO.DisplayList`1.CurrentPageValues">
+            <summary>
+            当前页内容
+            </summary>
+        </member>
+        <member name="M:AIO.DisplayList`1.GetPage(System.Int32)">
+            <summary>
+            获取页内容
+            </summary>
+        </member>
+        <member name="M:AIO.DisplayList`1.Remove(System.Collections.Generic.KeyValuePair{System.String,`0})">
+            <summary>
+            移除
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="P:AIO.DisplayList`1.Count">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.DisplayList`1.IsReadOnly">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.DisplayList`1.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.DisplayList`1.Add(System.String,System.String,`0)">
+            <summary>
+            添加
+            </summary>
+            <param name="key">键值</param>
+            <param name="display">显示值</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:AIO.DisplayList`1.ContainsKey(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.DisplayList`1.Add(System.String,`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.DisplayList`1.Remove(System.String)">
+            <summary>
+            移除
+            </summary>
+            <param name="key">键值</param>
+            <returns>Ture:成功 False:失败</returns>
+        </member>
+        <member name="M:AIO.DisplayList`1.TryGetValue(System.String,`0@)">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.DisplayList`1.Item(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.DisplayList`1.RemoveAt(System.Int32)">
+            <summary>
+            移除
+            </summary>
+            <param name="index">指定下标</param>
+            <returns>Ture:成功 False:失败</returns>
+        </member>
+        <member name="M:AIO.DisplayList`1.GetValue(System.String)">
+            <summary>
+            获取值
+            </summary>
+        </member>
+        <member name="M:AIO.DisplayList`1.GetValue(System.Int32)">
+            <summary>
+            获取值
+            </summary>
+        </member>
+        <member name="M:AIO.DisplayList`1.GetDisplay(System.String)">
+            <summary>
+            获取显示值
+            </summary>
+        </member>
+        <member name="M:AIO.DisplayList`1.Add(System.Collections.Generic.KeyValuePair{System.String,`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.DisplayList`1.Clear">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.DisplayList`1.Contains(System.Collections.Generic.KeyValuePair{System.String,`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.DisplayList`1.CopyTo(System.Collections.Generic.KeyValuePair{System.String,`0}[],System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.DisplayList`1.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.DisplayList`1.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.PageDictionary`2">
+            <summary>
+            分页字典
+            </summary>
+        </member>
+        <member name="P:AIO.PageDictionary`2.Keys">
+            <summary>
+            键值
+            </summary>
+        </member>
+        <member name="P:AIO.PageDictionary`2.Values">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="P:AIO.PageDictionary`2.PageSize">
+            <summary>
+            页大小
+            </summary>
+        </member>
+        <member name="P:AIO.PageDictionary`2.PageIndex">
+            <summary>
+            当前页
+            </summary>
+        </member>
+        <member name="P:AIO.PageDictionary`2.PageCount">
+            <summary>
+            总页数
+            </summary>
+        </member>
+        <member name="P:AIO.PageDictionary`2.CurrentPageCount">
+            <summary>
+            当前页内容数量
+            </summary>
+        </member>
+        <member name="P:AIO.PageDictionary`2.CurrentPageValues">
+            <summary>
+            当前页内容
+            </summary>
+        </member>
+        <member name="P:AIO.PageDictionary`2.CurrentPageKeys">
+            <summary>
+            当前页键值
+            </summary>
+        </member>
+        <member name="P:AIO.PageDictionary`2.CurrentPage">
+            <summary>
+            当前页内容
+            </summary>
+        </member>
+        <member name="F:AIO.PageDictionary`2._CurrentPageValues">
+            <summary>
+            当前页内容
+            </summary>
+        </member>
+        <member name="F:AIO.PageDictionary`2._CurrentPageKeys">
+            <summary>
+            当前页键值
+            </summary>
+        </member>
+        <member name="F:AIO.PageDictionary`2._CurrentPage">
+            <summary>
+            当前页内容
+            </summary>
+        </member>
+        <member name="M:AIO.PageDictionary`2.GetPage(System.Int32)">
+            <summary>
+            获取页内容
+            </summary>
+        </member>
+        <member name="M:AIO.PageDictionary`2.Remove(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <summary>
+            移除
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="P:AIO.PageDictionary`2.Count">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.PageDictionary`2.IsReadOnly">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PageDictionary`2.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.PageDictionary`2.Add(`0,`1)">
+            <summary>
+            添加
+            </summary>
+            <param name="key">键值</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:AIO.PageDictionary`2.ContainsKey(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PageDictionary`2.Remove(`0)">
+            <summary>
+            移除
+            </summary>
+            <param name="key">键值</param>
+            <returns>Ture:成功 False:失败</returns>
+        </member>
+        <member name="M:AIO.PageDictionary`2.TryGetValue(`0,`1@)">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.PageDictionary`2.Item(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PageDictionary`2.RemoveAt(System.Int32)">
+            <summary>
+            移除
+            </summary>
+            <param name="index">指定下标</param>
+            <returns>Ture:成功 False:失败</returns>
+        </member>
+        <member name="M:AIO.PageDictionary`2.GetValue(`0)">
+            <summary>
+            获取值
+            </summary>
+        </member>
+        <member name="M:AIO.PageDictionary`2.GetValue(System.Int32)">
+            <summary>
+            获取值
+            </summary>
+        </member>
+        <member name="M:AIO.PageDictionary`2.Add(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PageDictionary`2.Clear">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PageDictionary`2.Contains(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PageDictionary`2.CopyTo(System.Collections.Generic.KeyValuePair{`0,`1}[],System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PageDictionary`2.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PageDictionary`2.GetEnumerator">
+            <inheritdoc />
+        </member>
         <member name="T:AIO.GBean">
             <summary>
             游戏数据

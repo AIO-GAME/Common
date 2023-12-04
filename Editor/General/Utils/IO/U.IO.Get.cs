@@ -195,7 +195,7 @@ namespace AIO.UEditor
                 value = System.IO.Path.GetFullPath(value);
                 if (!value.Contains(Path.Project)) return Array.Empty<string>();
                 return AHelper.IO.GetFilesInfo(value, pattern, option)
-                    .Select(item => item.FullName.Substring(Path.Project.Length));
+                    .Select(item => item.FullName.Substring(Path.Project.Length + 1));
             }
 
             /// <summary>
@@ -216,7 +216,7 @@ namespace AIO.UEditor
                 value = System.IO.Path.GetFullPath(value);
                 if (!value.Contains(Path.Project)) return Array.Empty<string>();
                 return AHelper.IO.GetFilesInfo(value, filtration, pattern, option)
-                    .Select(item => item.FullName.Substring(Path.Project.Length));
+                    .Select(item => item.FullName.Substring(Path.Project.Length + 1));
             }
 
             /// <summary>
@@ -239,7 +239,7 @@ namespace AIO.UEditor
                 return
                     from item in AHelper.IO.GetFilesInfo(value, filtration, pattern, option)
                     where !item.Extension.Contains(".meta")
-                    select item.FullName.Substring(Path.Project.Length);
+                    select item.FullName.Substring(Path.Project.Length + 1);
             }
 
             /// <summary>
@@ -251,8 +251,8 @@ namespace AIO.UEditor
             /// <returns>以Assets路径为节点的路径数组</returns>
             public static IEnumerable<string> GetFilesRelativeAssetNoMeta(
                 string value,
-                in string pattern = "*",
-                in SearchOption option = SearchOption.TopDirectoryOnly)
+                in SearchOption option = SearchOption.TopDirectoryOnly,
+                in string pattern = "*")
             {
                 if (!Directory.Exists(value)) return Array.Empty<string>();
                 value = System.IO.Path.GetFullPath(value);
@@ -260,7 +260,7 @@ namespace AIO.UEditor
                 return
                     from item in AHelper.IO.GetFilesInfo(value, pattern, option)
                     where !item.Extension.Contains(".meta")
-                    select item.FullName.Substring(Path.Project.Length);
+                    select item.FullName.Substring(Path.Project.Length + 1);
             }
         }
     }
