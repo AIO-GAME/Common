@@ -95,10 +95,12 @@ namespace AIO.UEditor
         /// <param name="content">标题</param>
         /// <param name="isActive">激活状态</param>
         /// <param name="helpAction">帮助回调</param>
+        /// <param name="helpContent">帮助信息</param>
         /// <returns>激活状态</returns>
-        public static bool VFoldoutWithHelp(string content, bool isActive, Action helpAction = null)
+        public static bool VFoldoutWithHelp(string content, bool isActive, Action helpAction = null,
+            GUIContent helpContent = null)
         {
-            return VFoldoutWithHelp(new GUIContent(content), isActive, helpAction);
+            return VFoldoutWithHelp(new GUIContent(content), isActive, helpAction, helpContent);
         }
 
         /// <summary>
@@ -107,8 +109,10 @@ namespace AIO.UEditor
         /// <param name="content">标题</param>
         /// <param name="isActive">激活状态</param>
         /// <param name="helpAction">帮助回调</param>
+        /// <param name="helpContent">帮助信息</param>
         /// <returns>激活状态</returns>
-        public static bool VFoldoutWithHelp(GUIContent content, bool isActive, Action helpAction = null)
+        public static bool VFoldoutWithHelp(GUIContent content, bool isActive, Action helpAction = null,
+            GUIContent helpContent = null)
         {
             var controlRect = EditorGUILayout.GetControlRect();
             var iconStyle = GUI.skin.FindStyle("IconButton") ??
@@ -118,7 +122,7 @@ namespace AIO.UEditor
                 var helpRect = controlRect;
                 helpRect.x = controlRect.x + controlRect.width - helpRect.height;
                 helpRect.width = helpRect.height;
-                if (GUI.Button(helpRect, EditorGUIUtility.IconContent("_Help"), iconStyle))
+                if (GUI.Button(helpRect, helpContent ?? EditorGUIUtility.IconContent("_Help"), iconStyle))
                     helpAction.Invoke();
             }
 
@@ -150,10 +154,12 @@ namespace AIO.UEditor
             bool isActive,
             Action helpAction = null,
             int indent = 0,
-            Action<Rect> menuAction = null
+            Action<Rect> menuAction = null,
+            GUIContent helpContent = null
         )
         {
-            return VFoldoutHeaderGroupWithHelp(new GUIContent(content), isActive, helpAction, indent, menuAction);
+            return VFoldoutHeaderGroupWithHelp(new GUIContent(content), isActive, helpAction, indent, menuAction,
+                helpContent);
         }
 
         /// <summary>
@@ -164,13 +170,15 @@ namespace AIO.UEditor
         /// <param name="helpAction">帮助回调</param>
         /// <param name="indent">缩进</param>
         /// <param name="menuAction">菜单操作</param>
+        /// <param name="helpContent">帮助信息</param>
         /// <returns>激活状态</returns>
         public static bool VFoldoutHeaderGroupWithHelp(
             GUIContent content,
             bool isActive,
             Action helpAction = null,
             int indent = 0,
-            Action<Rect> menuAction = null
+            Action<Rect> menuAction = null,
+            GUIContent helpContent = null
         )
         {
             var headerRect = EditorGUILayout.GetControlRect();
@@ -216,7 +224,7 @@ namespace AIO.UEditor
                 if (menuAction != null)
                     helpRect.x -= helpRect.height;
                 helpRect.width = helpRect.height;
-                if (GUI.Button(helpRect, EditorGUIUtility.IconContent("_Help"), iconStyle))
+                if (GUI.Button(helpRect, helpContent ?? EditorGUIUtility.IconContent("_Help"), iconStyle))
                     helpAction.Invoke();
             }
 
@@ -243,17 +251,19 @@ namespace AIO.UEditor
         /// <param name="helpAction">帮助回调</param>
         /// <param name="indent">缩进</param>
         /// <param name="menuAction">菜单操作</param>
+        /// <param name="helpContent">帮助信息</param>
         /// <returns>激活状态</returns>
         public static bool VFoldoutHeaderGroupWithHelp(Action action,
             string content,
             bool isActive,
             Action helpAction = null,
             int indent = 0,
-            Action<Rect> menuAction = null
+            Action<Rect> menuAction = null,
+            GUIContent helpContent = null
         )
         {
             return VFoldoutHeaderGroupWithHelp(action, new GUIContent(content), isActive, helpAction, indent,
-                menuAction);
+                menuAction, helpContent);
         }
 
         /// <summary>
@@ -265,13 +275,15 @@ namespace AIO.UEditor
         /// <param name="helpAction">帮助回调</param>
         /// <param name="indent">缩进</param>
         /// <param name="menuAction">菜单操作</param>
+        /// <param name="helpContent">帮助信息</param>
         /// <returns>激活状态</returns>
         public static bool VFoldoutHeaderGroupWithHelp(Action action,
             GUIContent content,
             bool isActive,
             Action helpAction = null,
             int indent = 0,
-            Action<Rect> menuAction = null
+            Action<Rect> menuAction = null,
+            GUIContent helpContent = null
         )
         {
             var headerRect = EditorGUILayout.GetControlRect();
@@ -317,7 +329,7 @@ namespace AIO.UEditor
                 if (menuAction != null)
                     helpRect.x -= helpRect.height;
                 helpRect.width = helpRect.height;
-                if (GUI.Button(helpRect, EditorGUIUtility.IconContent("_Help"), iconStyle))
+                if (GUI.Button(helpRect, helpContent ?? EditorGUIUtility.IconContent("_Help"), iconStyle))
                     helpAction.Invoke();
             }
 
