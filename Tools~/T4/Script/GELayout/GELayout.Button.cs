@@ -207,6 +207,7 @@ namespace AIO
             var width_float = new FunctionParam("float", "width", "GUILayout.Width(width)") { Comments = "宽度" };
             var height_float = new FunctionParam("float", "height", "GUILayout.Height(height)") { Comments = "高度" };
             var label = new FunctionParam("string", "label", "label") { Comments = "标签" };
+            var GUIContentLabel = new FunctionParam("GUIContent", "label", "label") { Comments = "标签" };
             foreach (var content in new FunctionParam[]
                      {
                          new FunctionParam("T", "content", ""),
@@ -226,6 +227,12 @@ namespace AIO
                     new FunctionParam[] { label, content, width_float, Style, },
                     new FunctionParam[] { label, content, width_float, height_float, },
                     new FunctionParam[] { label, content, width_float, height_float, Style, },
+                    new FunctionParam[] { GUIContentLabel, content, },
+                    new FunctionParam[] { GUIContentLabel, content, Style, },
+                    new FunctionParam[] { GUIContentLabel, content, width_float, },
+                    new FunctionParam[] { GUIContentLabel, content, width_float, Style, },
+                    new FunctionParam[] { GUIContentLabel, content, width_float, height_float, },
+                    new FunctionParam[] { GUIContentLabel, content, width_float, height_float, Style, },
                 };
                 foreach (var param in paramsList)
                 {

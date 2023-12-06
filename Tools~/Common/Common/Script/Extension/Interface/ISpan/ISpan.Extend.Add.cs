@@ -7,11 +7,9 @@ namespace AIO
 {
     public partial class ExtendISpan
     {
-
         /// <summary>
         /// 添加
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T[] Add<T>(this T[] array, in T item)
         {
             var oldLength = array.Length;
@@ -24,7 +22,6 @@ namespace AIO
         /// <summary>
         /// 添加
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T[] Add<T>(this T[] array, params T[] items)
         {
             if (array == null) throw new ArgumentNullException(nameof(array));
@@ -39,7 +36,6 @@ namespace AIO
         /// <summary>
         /// 添加
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T[] Add<T>(this T[] array, in ICollection<T> items)
         {
             if (array == null) throw new ArgumentNullException(nameof(array));

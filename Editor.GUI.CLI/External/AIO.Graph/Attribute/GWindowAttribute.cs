@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
@@ -16,7 +17,7 @@ namespace AIO.UEditor
     /// 窗口信息
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    public class GWindowAttribute : Attribute
+    public class GWindowAttribute : DisplayNameAttribute
     {
         /// <summary>
         /// 标题
@@ -32,6 +33,21 @@ namespace AIO.UEditor
         /// 最大高度
         /// </summary>
         public uint MaxSizeHeight = 0;
+
+        /// <summary>
+        /// 菜单路径
+        /// </summary>
+        public string Menu;
+
+        /// <summary>
+        /// 菜单顺序
+        /// </summary>
+        public int MenuPriority;
+
+        /// <summary>
+        /// 菜单验证函数 返回值为bool
+        /// </summary>
+        public MethodInfo MenuValidate;
 
         /// <summary>
         /// 最大宽高
@@ -69,37 +85,37 @@ namespace AIO.UEditor
         public Type RuntimeType;
 
         /// <inheritdoc />
-        public GWindowAttribute(string title)
+        public GWindowAttribute(string title) : base(title)
         {
             Title = new GUIContent(title);
         }
 
         /// <inheritdoc />
-        public GWindowAttribute(string title, Texture texture)
+        public GWindowAttribute(string title, Texture texture) : base(title)
         {
             Title = new GUIContent(title, texture);
         }
 
         /// <inheritdoc />
-        public GWindowAttribute(string title, Texture image, string tooltip)
+        public GWindowAttribute(string title, Texture image, string tooltip) : base(title)
         {
             Title = new GUIContent(title, image, tooltip);
         }
 
         /// <inheritdoc />
-        public GWindowAttribute(Texture texture, string tooltip)
+        public GWindowAttribute(Texture texture, string tooltip) : base(tooltip)
         {
             Title = new GUIContent(texture, tooltip);
         }
 
         /// <inheritdoc />
-        public GWindowAttribute(string title, string tooltip)
+        public GWindowAttribute(string title, string tooltip) : base(title)
         {
             Title = new GUIContent(title, tooltip);
         }
 
         /// <inheritdoc />
-        public GWindowAttribute(GUIContent title)
+        public GWindowAttribute(GUIContent title) : base(title.text)
         {
             Title = title;
         }

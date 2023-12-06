@@ -531,6 +531,75 @@ namespace AIO.UEditor
         /// <summary>
         /// 绘制 复制按钮 
         /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="T"/></param>
+        public static void ButtonCopy<T>(GUIContent label, T content) 
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="T"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy<T>(GUIContent label, T content, GUIStyle style) 
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="T"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        public static void ButtonCopy<T>(GUIContent label, T content, float width) 
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="T"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy<T>(GUIContent label, T content, float width, GUIStyle style) 
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="T"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        public static void ButtonCopy<T>(GUIContent label, T content, float width, float height) 
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="T"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy<T>(GUIContent label, T content, float width, float height, GUIStyle style) 
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
         /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="content">复制值 <see cref="string"/></param>
         public static void ButtonCopy(string label, string content)
@@ -593,6 +662,75 @@ namespace AIO.UEditor
         /// <param name="height">高度 <see cref="float"/></param>
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         public static void ButtonCopy(string label, string content, float width, float height, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="string"/></param>
+        public static void ButtonCopy(GUIContent label, string content)
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="string"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(GUIContent label, string content, GUIStyle style)
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="string"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        public static void ButtonCopy(GUIContent label, string content, float width)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="string"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(GUIContent label, string content, float width, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="string"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        public static void ButtonCopy(GUIContent label, string content, float width, float height)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="string"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(GUIContent label, string content, float width, float height, GUIStyle style)
         {
             if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
         }
@@ -669,6 +807,75 @@ namespace AIO.UEditor
         /// <summary>
         /// 绘制 复制按钮 
         /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="long"/></param>
+        public static void ButtonCopy(GUIContent label, long content)
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="long"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(GUIContent label, long content, GUIStyle style)
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="long"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        public static void ButtonCopy(GUIContent label, long content, float width)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="long"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(GUIContent label, long content, float width, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="long"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        public static void ButtonCopy(GUIContent label, long content, float width, float height)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="long"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(GUIContent label, long content, float width, float height, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
         /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="content">复制值 <see cref="double"/></param>
         public static void ButtonCopy(string label, double content)
@@ -731,6 +938,75 @@ namespace AIO.UEditor
         /// <param name="height">高度 <see cref="float"/></param>
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         public static void ButtonCopy(string label, double content, float width, float height, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="double"/></param>
+        public static void ButtonCopy(GUIContent label, double content)
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="double"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(GUIContent label, double content, GUIStyle style)
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="double"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        public static void ButtonCopy(GUIContent label, double content, float width)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="double"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(GUIContent label, double content, float width, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="double"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        public static void ButtonCopy(GUIContent label, double content, float width, float height)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="double"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(GUIContent label, double content, float width, float height, GUIStyle style)
         {
             if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
         }
@@ -807,6 +1083,75 @@ namespace AIO.UEditor
         /// <summary>
         /// 绘制 复制按钮 
         /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="Color"/></param>
+        public static void ButtonCopy(GUIContent label, Color content)
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="Color"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(GUIContent label, Color content, GUIStyle style)
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="Color"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        public static void ButtonCopy(GUIContent label, Color content, float width)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="Color"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(GUIContent label, Color content, float width, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="Color"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        public static void ButtonCopy(GUIContent label, Color content, float width, float height)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="Color"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(GUIContent label, Color content, float width, float height, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
         /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="content">复制值 <see cref="Color32"/></param>
         public static void ButtonCopy(string label, Color32 content)
@@ -869,6 +1214,75 @@ namespace AIO.UEditor
         /// <param name="height">高度 <see cref="float"/></param>
         /// <param name="style">样式 <see cref="GUIStyle"/></param>
         public static void ButtonCopy(string label, Color32 content, float width, float height, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="Color32"/></param>
+        public static void ButtonCopy(GUIContent label, Color32 content)
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="Color32"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(GUIContent label, Color32 content, GUIStyle style)
+        {
+            if (GUILayout.Button(label)) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="Color32"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        public static void ButtonCopy(GUIContent label, Color32 content, float width)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="Color32"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(GUIContent label, Color32 content, float width, GUIStyle style)
+        {
+            if (GUILayout.Button(label, style, GUILayout.Width(width))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="Color32"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        public static void ButtonCopy(GUIContent label, Color32 content, float width, float height)
+        {
+            if (GUILayout.Button(label, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
+        }
+
+        /// <summary>
+        /// 绘制 复制按钮 
+        /// </summary>
+        /// <param name="label">标签 <see cref="GUIContent"/></param>
+        /// <param name="content">复制值 <see cref="Color32"/></param>
+        /// <param name="width">宽度 <see cref="float"/></param>
+        /// <param name="height">高度 <see cref="float"/></param>
+        /// <param name="style">样式 <see cref="GUIStyle"/></param>
+        public static void ButtonCopy(GUIContent label, Color32 content, float width, float height, GUIStyle style)
         {
             if (GUILayout.Button(label, style, GUILayout.Width(width), GUILayout.Height(height))) GEHelper.CopyAction(content);
         }
