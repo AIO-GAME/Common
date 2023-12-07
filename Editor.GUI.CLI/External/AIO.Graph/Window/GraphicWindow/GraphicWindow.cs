@@ -42,17 +42,19 @@ namespace AIO.UEditor
         /// </summary>
         protected List<GraphicRect> GraphicItems { get; private set; }
 
+        private static GWindowAttribute Aattribute { get; set; }
+
         /// <inheritdoc />
         protected GraphicWindow()
         {
             GraphicItems = new List<GraphicRect>();
-            var attribute = GetType().GetCustomAttribute<GWindowAttribute>(false);
-            if (attribute is null) titleContent = new GUIContent(GetType().Name);
+            Aattribute = GetType().GetCustomAttribute<GWindowAttribute>(false);
+            if (Aattribute is null) titleContent = new GUIContent(GetType().Name);
             else
             {
-                if (!string.IsNullOrEmpty(attribute.Group))
+                if (!string.IsNullOrEmpty(Aattribute.Group))
                 {
-                    Group = attribute.Group;
+                    Group = Aattribute.Group;
                     foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
                     {
                         foreach (var type in assembly.GetTypes())
@@ -68,19 +70,19 @@ namespace AIO.UEditor
                     }
                 }
 
-                titleContent = attribute.Title;
+                titleContent = Aattribute.Title;
                 var temp = new Vector2
                 {
-                    x = attribute.MinSizeWidth == 0 ? minSize.x : attribute.MinSizeWidth,
-                    y = attribute.MinSizeHeight == 0 ? minSize.y : attribute.MinSizeHeight
+                    x = Aattribute.MinSizeWidth == 0 ? minSize.x : Aattribute.MinSizeWidth,
+                    y = Aattribute.MinSizeHeight == 0 ? minSize.y : Aattribute.MinSizeHeight
                 };
 
                 minSize = temp;
 
                 temp = new Vector2
                 {
-                    x = attribute.MaxSizeWidth == 0 ? maxSize.x : attribute.MaxSizeWidth,
-                    y = attribute.MaxSizeHeight == 0 ? maxSize.y : attribute.MaxSizeHeight
+                    x = Aattribute.MaxSizeWidth == 0 ? maxSize.x : Aattribute.MaxSizeWidth,
+                    y = Aattribute.MaxSizeHeight == 0 ? maxSize.y : Aattribute.MaxSizeHeight
                 };
 
                 maxSize = temp;

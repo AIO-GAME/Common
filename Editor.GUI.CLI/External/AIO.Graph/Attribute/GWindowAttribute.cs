@@ -40,6 +40,11 @@ namespace AIO.UEditor
         public string Menu;
 
         /// <summary>
+        /// 菜单图标
+        /// </summary>
+        public string Icon;
+
+        /// <summary>
         /// 菜单顺序
         /// </summary>
         public int MenuPriority;
@@ -91,33 +96,9 @@ namespace AIO.UEditor
         }
 
         /// <inheritdoc />
-        public GWindowAttribute(string title, Texture texture) : base(title)
-        {
-            Title = new GUIContent(title, texture);
-        }
-
-        /// <inheritdoc />
-        public GWindowAttribute(string title, Texture image, string tooltip) : base(title)
-        {
-            Title = new GUIContent(title, image, tooltip);
-        }
-
-        /// <inheritdoc />
-        public GWindowAttribute(Texture texture, string tooltip) : base(tooltip)
-        {
-            Title = new GUIContent(texture, tooltip);
-        }
-
-        /// <inheritdoc />
         public GWindowAttribute(string title, string tooltip) : base(title)
         {
             Title = new GUIContent(title, tooltip);
-        }
-
-        /// <inheritdoc />
-        public GWindowAttribute(GUIContent title) : base(title.text)
-        {
-            Title = title;
         }
     }
 

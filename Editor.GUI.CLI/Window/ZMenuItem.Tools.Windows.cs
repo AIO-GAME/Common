@@ -33,12 +33,6 @@ namespace AIO.UEditor
 #endif
         };
 
-        [MenuItem("AIO/Window/Editor Icons")]
-        public static void OpenIconsListGraphWindow()
-        {
-            EHelper.Window.Open<IconsListGraphWindow>(DockedWindowTypes);
-        }
-
         [MenuItem("AIO/Window/Script ID Viewer")]
         public static void OpenScriptIDWindow()
         {

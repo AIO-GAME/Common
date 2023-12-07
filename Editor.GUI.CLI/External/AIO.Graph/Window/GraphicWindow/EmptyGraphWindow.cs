@@ -5,6 +5,7 @@
 |||✩ - - - - - |*/
 
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 namespace AIO.UEditor
@@ -65,6 +66,26 @@ namespace AIO.UEditor
         private void ModifierKeysChanged()
         {
             OnModifierKeysChanged();
+        }
+
+
+        /// <summary>
+        /// 标记目标已改变
+        /// </summary>
+        /// <param name="target">目标</param>
+        protected static void HasChanged(Object target)
+        {
+            if (target == null) return;
+            EditorUtility.SetDirty(target);
+            if (EditorApplication.isPlaying) return;
+
+            var gameObject = target as GameObject;
+            if (gameObject != null && gameObject.scene.IsValid())
+                EditorSceneManager.MarkSceneDirty(gameObject.scene);
+
+            var component = target as Component;
+            if (component != null && component.gameObject.scene.IsValid())
+                EditorSceneManager.MarkSceneDirty(component.gameObject.scene);
         }
     }
 }

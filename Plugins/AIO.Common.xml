@@ -1124,6 +1124,30 @@
             <param name="assembly">要获取类型列表的程序集。</param>
             <returns>包含程序集中定义的所有已成功加载类型的 <see cref="T:System.Type"/> 枚举。</returns>
         </member>
+        <member name="M:AIO.ExtendType.GetFields(System.Type,System.Func{System.Reflection.FieldInfo,System.Boolean})">
+            <summary>
+            从当前类型中获取所有字段
+            </summary>
+            <param name="type">类型</param>
+            <param name="filter">字段筛选器</param>
+            <returns>所有字段集合</returns>
+        </member>
+        <member name="M:AIO.ExtendType.GetProperties(System.Type,System.Func{System.Reflection.PropertyInfo,System.Boolean})">
+            <summary>
+            从当前类型中获取所有属性
+            </summary>
+            <param name="type">类型</param>
+            <param name="filter">属性筛选器</param>
+            <returns>所有属性集合</returns>
+        </member>
+        <member name="M:AIO.ExtendType.GetMethods(System.Type,System.Func{System.Reflection.MethodInfo,System.Boolean})">
+            <summary>
+            从当前类型中获取所有方法
+            </summary>
+            <param name="type">类型</param>
+            <param name="filter">方法筛选器</param>
+            <returns>所有方法集合</returns>
+        </member>
         <member name="M:AIO.ExtendType.IsUpcast(System.Type,System.Type@)">
             <summary>
             确定给定的源 Type 是否可以向上转换为指定的目标 Type。
@@ -1330,6 +1354,14 @@
             <param name="obj">要重置的对象</param>
             <param name="propNames">要重置的属性名称</param>
             <param name="resetReadOnly">是否重置只读属性（默认为false）</param>
+        </member>
+        <member name="M:AIO.ExtendType.To``1(System.Object)">
+            <summary>
+            使用 as 强转目标
+            </summary>
+            <typeparam name="T">强转的类型</typeparam>
+            <param name="target">强转的对象</param>
+            <returns>转换后的对象</returns>
         </member>
         <member name="T:AIO.ExtendEnum">
             <summary>
@@ -15403,6 +15435,26 @@
             </summary>
             <typeparam name="T">泛型</typeparam>
             <returns>属性列表</returns>
+        </member>
+        <member name="M:AHelper.Reflect.GetTypesInRunTimeAssemblies(System.Func{System.Type,System.Boolean})">
+            <summary>
+            从当前程序域的运行时程序集中获取所有类型
+            </summary>
+            <param name="filter">类型筛选器</param>
+            <returns>所有类型集合</returns>
+        </member>
+        <member name="M:AHelper.Reflect.GetTypesInAllAssemblies">
+            <summary>
+            从当前程序域的所有程序集中获取所有类型
+            </summary>
+            <returns>所有类型集合</returns>
+        </member>
+        <member name="M:AHelper.Reflect.GetTypesInAllAssemblies(System.Func{System.Type,System.Boolean})">
+            <summary>
+            从当前程序域的所有程序集中获取所有类型
+            </summary>
+            <param name="filter">类型筛选器</param>
+            <returns>所有类型集合</returns>
         </member>
         <member name="T:AHelper.TimeStamp">
             <summary>

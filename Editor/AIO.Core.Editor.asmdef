@@ -1,6 +1,5 @@
 {
     "name": "AIO.Core.Editor",
-    "rootNamespace": "AIO",
     "references": [
         "AIO.Core.Runtime",
         "YooAsset",
@@ -10,7 +9,7 @@
         "Editor"
     ],
     "excludePlatforms": [],
-    "allowUnsafeCode": false,
+    "allowUnsafeCode": true,
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,

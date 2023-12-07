@@ -9,6 +9,7 @@ namespace AIO.UEditor
 {
     [HelpURL("https://blog.csdn.net/CJB_King/article/details/89356652")]
     [GWindow("内置ICON管理器", Group = "Tools",
+        Menu = "AIO/Window/Editor Icons",
         MinSizeWidth = 600, MinSizeHeight = 600
     )]
     public class IconsListGraphWindow : GraphicWindow
