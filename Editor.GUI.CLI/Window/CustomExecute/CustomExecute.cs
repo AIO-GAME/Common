@@ -11,7 +11,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using DG.Tweening;
 using Microsoft.CSharp;
 using UnityEditor;
 using UnityEngine;
@@ -133,7 +132,6 @@ namespace AIO.UEditor
 
             _assemblies.Add(typeof(Type).Assembly.Location);
             _assemblies.Add(typeof(Button).Assembly.Location);
-            _assemblies.Add(typeof(DOTween).Assembly.Location);
             _assemblies.Add(typeof(Editor).Assembly.Location);
             _assemblies.Add(typeof(GameObject).Assembly.Location);
             _assemblies.Add(string.Concat(ProjectPath, "Library/ScriptAssemblies/Assembly-CSharp.dll"));
