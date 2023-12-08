@@ -102,7 +102,6 @@ namespace AIO.UEditor
             SerObj?.Update();
             SerObj = null;
 
-            AssetDatabase.SaveAssets();
             OnInhibition();
         }
 
