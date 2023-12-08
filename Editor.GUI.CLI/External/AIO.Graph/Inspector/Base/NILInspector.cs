@@ -93,7 +93,7 @@ namespace AIO.UEditor
         protected sealed override void OnDisable() //脚本或对象禁用时调用
         {
             if (target is null) return;
-
+            if (target.Equals(null)) return;
             EditorUtility.SetDirty(target);
             Undo.RecordObject(target, string.Concat(UNDO, UndoName));
 
