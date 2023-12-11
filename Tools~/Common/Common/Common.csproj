@@ -597,6 +597,7 @@
     <Compile Include="Script\Interface\Write\IWriteUInt64.cs" />
     <Compile Include="Script\Tools\Array\DisplayList.cs" />
     <Compile Include="Script\Tools\Array\PageDictionary.cs" />
+    <Compile Include="Script\Tools\Array\PageList.cs" />
     <Compile Include="Script\Tools\Bean\GBean.cs" />
     <Compile Include="Script\Tools\Bean\GBeanRegisterAttribute.cs" />
     <Compile Include="Script\Tools\Bean\GBeanSystem.cs" />

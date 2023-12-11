@@ -14,7 +14,7 @@ public partial class AHelper
     /// <summary>
     /// 反射工具库
     /// </summary>
-    public class Reflect
+    public static class Reflect
     {
         /// <summary>
         /// 过滤枚举过时字段
@@ -89,6 +89,42 @@ public partial class AHelper
                     where attribute == null
                     select info
                 ).ToArray();
+        }
+
+        /// <summary>
+        /// 从当前程序域的运行时程序集中获取所有类型
+        /// </summary>
+        /// <param name="filter">类型筛选器</param>
+        /// <returns>所有类型集合</returns>
+        public static Type[] GetTypesInRunTimeAssemblies(Func<Type, bool> filter)
+        {
+            return AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(assembly => assembly.GetTypes().Where(filter))
+                .ToArray();
+        }
+
+        /// <summary>
+        /// 从当前程序域的所有程序集中获取所有类型
+        /// </summary>
+        /// <returns>所有类型集合</returns>
+        public static Type[] GetTypesInAllAssemblies()
+        {
+            return AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(assembly => assembly.GetTypes())
+                .ToArray();
+        }
+
+        /// <summary>
+        /// 从当前程序域的所有程序集中获取所有类型
+        /// </summary>
+        /// <param name="filter">类型筛选器</param>
+        /// <returns>所有类型集合</returns>
+        public static Type[] GetTypesInAllAssemblies(Func<Type, bool> filter)
+        {
+            return (from t1 in AppDomain.CurrentDomain.GetAssemblies()
+                from t in t1.GetTypes()
+                where filter(t)
+                select t).ToArray();
         }
     }
 }

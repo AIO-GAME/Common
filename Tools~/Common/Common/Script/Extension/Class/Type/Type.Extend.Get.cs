@@ -46,7 +46,8 @@ namespace AIO
         static ExtendType()
         {
             ExtensionMethodsCache = new Lazy<ExtensionMethodCache>(() => new ExtensionMethodCache(), true);
-            InheritedExtensionMethodsCache = new Lazy<Dictionary<Type, MethodInfo[]>>(() => new Dictionary<Type, MethodInfo[]>(), true);
+            InheritedExtensionMethodsCache =
+                new Lazy<Dictionary<Type, MethodInfo[]>>(() => new Dictionary<Type, MethodInfo[]>(), true);
             GenericExtensionMethods = new Lazy<HashSet<MethodInfo>>(() => new HashSet<MethodInfo>(), true);
         }
 
@@ -55,15 +56,18 @@ namespace AIO
             var methodInfos = ExtensionMethodsCache.Value.Cache;
             foreach (var extensionMethod in methodInfos)
             {
-                var compatibleThis = extensionMethod.GetParameters()[0].ParameterType.IsMakeGenericTypeVia(thisArgumentType);
+                var compatibleThis = extensionMethod.GetParameters()[0].ParameterType
+                    .IsMakeGenericTypeVia(thisArgumentType);
 
                 if (compatibleThis)
                 {
                     if (extensionMethod.ContainsGenericParameters)
                     {
-                        var closedConstructedParameterTypes = thisArgumentType.Yield().Concat(extensionMethod.GetParametersWithoutThis().Select(p => p.ParameterType));
+                        var closedConstructedParameterTypes = thisArgumentType.Yield()
+                            .Concat(extensionMethod.GetParametersWithoutThis().Select(p => p.ParameterType));
 
-                        var closedConstructedMethod = extensionMethod.MakeGenericMethodVia(closedConstructedParameterTypes.ToArray());
+                        var closedConstructedMethod =
+                            extensionMethod.MakeGenericMethodVia(closedConstructedParameterTypes.ToArray());
 
                         GenericExtensionMethods.Value.Add(closedConstructedMethod);
 
@@ -89,7 +93,8 @@ namespace AIO
             {
                 lock (InheritedExtensionMethodsCache)
                 {
-                    if (!InheritedExtensionMethodsCache.Value.TryGetValue(thisArgumentType, out var inheritedExtensionMethods))
+                    if (!InheritedExtensionMethodsCache.Value.TryGetValue(thisArgumentType,
+                            out var inheritedExtensionMethods))
                     {
                         inheritedExtensionMethods = GetInheritedExtensionMethods(thisArgumentType).ToArray();
                         InheritedExtensionMethodsCache.Value.Add(thisArgumentType, inheritedExtensionMethods);
@@ -313,7 +318,8 @@ namespace AIO
         /// <param name="genericArgumentIndex">指定要获取的泛型参数的索引。</param>
         /// <returns>字典类型的键或值类型，如果无法确定键或值类型，则返回 null（或 <see cref="System.Object"/>）。</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Type GetDictionaryItemType(Type dictionaryType, in bool allowNonGeneric, in int genericArgumentIndex)
+        public static Type GetDictionaryItemType(Type dictionaryType, in bool allowNonGeneric,
+            in int genericArgumentIndex)
         {
             if (dictionaryType == null) throw new ArgumentNullException(nameof(dictionaryType));
 
@@ -390,6 +396,57 @@ namespace AIO
                 if (type == typeof(void)) continue;
                 yield return type;
             }
+        }
+
+        /// <summary>
+        /// 从当前类型中获取所有字段
+        /// </summary>
+        /// <param name="type">类型</param>
+        /// <param name="filter">字段筛选器</param>
+        /// <returns>所有字段集合</returns>
+        public static FieldInfo[] GetFields(this Type type, Func<FieldInfo, bool> filter)
+        {
+            return type.GetFields(
+                    BindingFlags.Instance |
+                    BindingFlags.Static |
+                    BindingFlags.NonPublic |
+                    BindingFlags.Public)
+                .Where(filter)
+                .ToArray();
+        }
+
+        /// <summary>
+        /// 从当前类型中获取所有属性
+        /// </summary>
+        /// <param name="type">类型</param>
+        /// <param name="filter">属性筛选器</param>
+        /// <returns>所有属性集合</returns>
+        public static PropertyInfo[] GetProperties(this Type type, Func<PropertyInfo, bool> filter)
+        {
+            return type.GetProperties(
+                    BindingFlags.Instance |
+                    BindingFlags.Static |
+                    BindingFlags.NonPublic |
+                    BindingFlags.Public)
+                .Where(filter)
+                .ToArray();
+        }
+
+        /// <summary>
+        /// 从当前类型中获取所有方法
+        /// </summary>
+        /// <param name="type">类型</param>
+        /// <param name="filter">方法筛选器</param>
+        /// <returns>所有方法集合</returns>
+        public static MethodInfo[] GetMethods(this Type type, Func<MethodInfo, bool> filter)
+        {
+            return type.GetMethods(
+                    BindingFlags.Instance |
+                    BindingFlags.Static |
+                    BindingFlags.NonPublic |
+                    BindingFlags.Public)
+                .Where(filter)
+                .ToArray();
         }
     }
 }
