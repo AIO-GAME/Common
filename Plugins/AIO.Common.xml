@@ -7157,11 +7157,14 @@
             <param name="item"></param>
             <returns></returns>
         </member>
-        <member name="P:AIO.DisplayList`1.Count">
+        <member name="M:AIO.DisplayList`1.Remove(`0)">
             <inheritdoc />
         </member>
+        <member name="P:AIO.DisplayList`1.Count">
+            <inheritdoc cref="T:System.Collections.Generic.List`1"/>
+        </member>
         <member name="P:AIO.DisplayList`1.IsReadOnly">
-            <inheritdoc />
+            <inheritdoc cref="T:System.Collections.Generic.List`1"/>
         </member>
         <member name="M:AIO.DisplayList`1.#ctor">
             <summary>
@@ -7195,6 +7198,15 @@
         <member name="P:AIO.DisplayList`1.Item(System.String)">
             <inheritdoc />
         </member>
+        <member name="M:AIO.DisplayList`1.IndexOf(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.DisplayList`1.Insert(System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.DisplayList`1.Item(System.Int32)">
+            <inheritdoc />
+        </member>
         <member name="M:AIO.DisplayList`1.RemoveAt(System.Int32)">
             <summary>
             移除
@@ -7220,7 +7232,16 @@
         <member name="M:AIO.DisplayList`1.Add(System.Collections.Generic.KeyValuePair{System.String,`0})">
             <inheritdoc />
         </member>
+        <member name="M:AIO.DisplayList`1.Add(`0)">
+            <inheritdoc />
+        </member>
         <member name="M:AIO.DisplayList`1.Clear">
+            <inheritdoc cref="T:System.Collections.Generic.List`1"/>
+        </member>
+        <member name="M:AIO.DisplayList`1.Contains(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.DisplayList`1.CopyTo(`0[],System.Int32)">
             <inheritdoc />
         </member>
         <member name="M:AIO.DisplayList`1.Contains(System.Collections.Generic.KeyValuePair{System.String,`0})">
@@ -7380,6 +7401,125 @@
         </member>
         <member name="M:AIO.PageDictionary`2.GetEnumerator">
             <inheritdoc />
+        </member>
+        <member name="T:AIO.IPageArray`1">
+            <summary>
+            分页
+            </summary>
+        </member>
+        <member name="P:AIO.IPageArray`1.PageSize">
+            <summary>
+            页大小
+            </summary>
+        </member>
+        <member name="P:AIO.IPageArray`1.PageIndex">
+            <summary>
+            当前页
+            </summary>
+        </member>
+        <member name="P:AIO.IPageArray`1.PageCount">
+            <summary>
+            总页数
+            </summary>
+        </member>
+        <member name="P:AIO.IPageArray`1.CurrentPageValues">
+            <summary>
+            当前页内容
+            </summary>
+        </member>
+        <member name="T:AIO.PageList`1">
+            <summary>
+            分页列表
+            </summary>
+        </member>
+        <member name="P:AIO.PageList`1.PageSize">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.PageList`1.PageIndex">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.PageList`1.PageCount">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.PageList`1.CurrentPageValues">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PageList`1.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.PageList`1.GetPage(System.Int32)">
+            <summary>
+            获取页内容
+            </summary>
+        </member>
+        <member name="P:AIO.PageList`1.Values">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="P:AIO.PageList`1.Count">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.PageList`1.IsReadOnly">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PageList`1.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PageList`1.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PageList`1.Add(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PageList`1.Clear">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PageList`1.Contains(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PageList`1.CopyTo(`0[],System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PageList`1.Remove(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PageList`1.IndexOf(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PageList`1.Insert(System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PageList`1.RemoveAt(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.PageList`1.Item(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PageList`1.Compare(`0,`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PageList`1.Sort(System.Comparison{`0})">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="M:AIO.PageList`1.Sort">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="M:AIO.PageList`1.Sort(System.Collections.Generic.IComparer{`0})">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="M:AIO.PageList`1.Sort(System.Int32,System.Int32,System.Collections.Generic.IComparer{`0})">
+            <summary>
+            排序
+            </summary>
         </member>
         <member name="T:AIO.GBean">
             <summary>

@@ -15,7 +15,7 @@ namespace AIO
     /// 显示列表
     /// </summary>
     /// <typeparam name="T">泛型</typeparam>
-    public class DisplayList<T> : IDisposable, IDictionary<string, T>
+    public class DisplayList<T> : IDisposable, IDictionary<string, T>, IList<T>
     {
         ICollection<T> IDictionary<string, T>.Values => Values;
 
@@ -93,9 +93,20 @@ namespace AIO
         }
 
         /// <inheritdoc />
+        public bool Remove(T item)
+        {
+            if (!Values.Contains(item)) return false;
+            var index = Values.IndexOf(item);
+            Keys.RemoveAt(index);
+            Displays.RemoveAt(index);
+            Values.RemoveAt(index);
+            return true;
+        }
+
+        /// <inheritdoc cref="List{T}"/>
         public int Count => Keys.Capacity;
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="List{T}"/>
         public bool IsReadOnly => false;
 
         /// <summary>
@@ -179,6 +190,33 @@ namespace AIO
             set => Add(key, key, value);
         }
 
+        /// <inheritdoc />
+        public int IndexOf(T item)
+        {
+            return Values.IndexOf(item);
+        }
+
+        /// <inheritdoc />
+        public void Insert(int index, T item)
+        {
+            if (item is null) return;
+            Keys.Insert(index, item.GetHashCode().ToString());
+            Displays.Insert(index, item.ToString());
+            Values.Insert(index, item);
+        }
+
+        void IList<T>.RemoveAt(int index)
+        {
+            RemoveAt(index);
+        }
+
+        /// <inheritdoc />
+        public T this[int index]
+        {
+            get => Values[index];
+            set => Values[index] = value;
+        }
+
         /// <summary>
         /// 移除
         /// </summary>
@@ -229,11 +267,39 @@ namespace AIO
         }
 
         /// <inheritdoc />
+        public void Add(T item)
+        {
+            if (item is null) return;
+            Add(item.GetHashCode().ToString(), item.ToString(), item);
+        }
+
+        /// <inheritdoc cref="List{T}"/>
         public void Clear()
         {
             Keys.Clear();
             Displays.Clear();
             Values.Clear();
+        }
+
+        /// <inheritdoc />
+        public bool Contains(T item)
+        {
+            return Values.Contains(item);
+        }
+
+        /// <inheritdoc />
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            if (array == null) throw new ArgumentNullException(nameof(array));
+            if (arrayIndex < 0) throw new ArgumentOutOfRangeException(nameof(arrayIndex));
+            if (array.Length - arrayIndex < Count)
+                throw new ArgumentException(
+                    "The number of elements in the source ICollection<T> is greater than the available space from arrayIndex to the end of the destination array.");
+
+            for (var i = 0; i < Count; i++)
+            {
+                array[i + arrayIndex] = Values[i];
+            }
         }
 
         /// <inheritdoc />
@@ -263,6 +329,11 @@ namespace AIO
             Keys = null;
             Displays = null;
             Values = null;
+        }
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            return ((IEnumerable<T>)Values).GetEnumerator();
         }
 
         /// <inheritdoc />
