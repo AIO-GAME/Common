@@ -62,7 +62,7 @@ namespace AIO
             }
         }
 
-        public int _PageSize = 30;
+        private int _PageSize = 30;
 
         /// <inheritdoc />
         public int PageIndex
@@ -96,17 +96,12 @@ namespace AIO
         /// </summary>
         private T[] GetPage(int index)
         {
-            if (index < 0 || index >= PageCount) return null;
+            if (index < 0 || index >= PageCount) return Array.Empty<T>();
             var start = index * PageSize;
             var end = start + PageSize;
             if (end > Count) end = Count;
             var array = new T[end - start];
-            for (var i = start; i < end; i++)
-            {
-                array[i - start] = Values[i];
-            }
-
-            CurrentPageValues = array;
+            for (var i = start; i < end; i++) array[i - start] = Values[i];
             return array;
         }
 
