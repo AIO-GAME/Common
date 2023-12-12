@@ -150,12 +150,12 @@
         <member name="P:AIO.PrCourse.EnableOutput">
             <inheritdoc/>
         </member>
-        <member name="F:AIO.PrCourse.IsLog">
+        <member name="P:AIO.PrCourse.IsLog">
             <summary>
             开启日志
             </summary>
         </member>
-        <member name="F:AIO.PrCourse.IsCache">
+        <member name="P:AIO.PrCourse.IsCache">
             <summary>
             是否捕获异常
             </summary>
