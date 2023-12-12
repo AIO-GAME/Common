@@ -59,6 +59,125 @@
             支持的区域性
             </summary>
         </member>
+        <member name="T:DllAutomation">
+            <summary>
+            DLL自动化处理
+            </summary>
+        </member>
+        <member name="M:DllAutomation.LoadAsync(System.Boolean)">
+            <summary>
+            安装 dll
+            </summary>
+            <param name="hasTimer">输出时间</param>
+        </member>
+        <member name="M:DllAutomation.UnLoadAsync(System.Boolean)">
+            <summary>
+            卸载 dll
+            </summary>
+            <param name="hasTimer">输出时间</param>
+        </member>
+        <member name="F:DllAutomation.Order">
+            <summary>
+            存储 Dic 列表 从小到达排序
+            </summary>
+        </member>
+        <member name="F:DllAutomation.InterfaceName">
+            <summary>
+            接口名
+            </summary>
+        </member>
+        <member name="M:DllAutomation.Initialize(System.Reflection.Assembly@)">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:DllAutomation.Initialize(System.Collections.Generic.IEnumerable{System.Reflection.Assembly}@)">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:DllAutomation.OutPut">
+            <summary>
+            输出信息
+            </summary>
+        </member>
+        <member name="M:DllAutomation.Run">
+            <summary>
+            运行
+            </summary>
+        </member>
+        <member name="M:DllAutomation.LoadSync(System.Boolean)">
+            <summary>
+            安装 dll
+            </summary>
+            <param name="hasTimer">输出时间</param>
+        </member>
+        <member name="M:DllAutomation.UnLoadSync(System.Boolean)">
+            <summary>
+            卸载 dll
+            </summary>
+            <param name="hasTimer">输出时间</param>
+        </member>
+        <member name="T:DllAutomationAttribute">
+            <summary>
+            DLL 注入属性
+            </summary>
+        </member>
+        <member name="P:DllAutomationAttribute.Priority">
+            <summary>
+            优先级
+            </summary>
+        </member>
+        <member name="P:DllAutomationAttribute.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:DllAutomationAttribute.SystemType">
+            <summary>
+            系统类型
+            </summary>
+        </member>
+        <member name="M:DllAutomationAttribute.#ctor(System.Type,System.String,System.Int32)">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:DllAutomationAttribute.#ctor(System.Type,System.Int32)">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="T:IDllAutomation">
+            <summary>
+            DLL自动化处理
+            </summary>
+        </member>
+        <member name="M:IDllAutomation.InstallAsync">
+            <summary>
+            异步 初始化
+            </summary>
+        </member>
+        <member name="M:IDllAutomation.UnInstallAsync">
+            <summary>
+            异步 卸载
+            </summary>
+        </member>
+        <member name="M:IDllAutomation.InstallSync">
+            <summary>
+            同步 初始化
+            </summary>
+        </member>
+        <member name="M:IDllAutomation.UnInstallSync">
+            <summary>
+            同步 卸载
+            </summary>
+        </member>
+        <member name="M:IDllAutomation.Run">
+            <summary>
+            运行
+            </summary>
+        </member>
         <member name="T:AIO.DefaultProvider">
             <summary>
             选择提供者
