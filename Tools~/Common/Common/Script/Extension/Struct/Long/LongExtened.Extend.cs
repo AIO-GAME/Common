@@ -16,9 +16,10 @@ namespace AIO
         /// <returns>String with data size representation</returns>
         public static string ToConverseStringFileSize(this long size)
         {
+            if (size < 0) return "Unknown";
             var sb = new StringBuilder();
             var bytes = size;
-            var absBytes = Math.Abs(bytes);
+            var absBytes = bytes;
 
             if (absBytes >= 1024L * 1024L * 1024L * 1024L)
             {
