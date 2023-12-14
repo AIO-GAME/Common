@@ -378,6 +378,16 @@ public partial class AHelper
         }
 
         /// <summary>
+        /// 返回文件夹字节长度
+        /// </summary>
+        /// <param name="Path">文件相对路径</param>
+        public static long GetFolderLength(in string Path)
+        {
+            if (!ExistsFolder(Path)) return 0;
+            return new DirectoryInfo(Path).GetFiles("*", SearchOption.AllDirectories).Sum(file => file.Length);
+        }
+
+        /// <summary>
         /// 返回文件名，不含路径 默认带文件名后缀
         /// </summary>
         /// <param name="file">文件路径</param>
@@ -477,6 +487,22 @@ public partial class AHelper
         public static DateTime GetFileLastWriteTimeUtc(string Path)
         {
             return !ExistsFile(Path) ? DateTime.MinValue : File.GetLastWriteTimeUtc(Path);
+        }
+
+        /// <summary>
+        /// 获取最后写入时间
+        /// </summary>
+        public static DateTime GetFolderLastWriteTimeUtc(string Path)
+        {
+            return !ExistsFolder(Path) ? DateTime.MinValue : Directory.GetLastWriteTimeUtc(Path);
+        }
+
+        /// <summary>
+        /// 获取创建文件夹时间
+        /// </summary>
+        public static DateTime GetFolderCreationTimeUtc(string Path)
+        {
+            return !ExistsFolder(Path) ? DateTime.MinValue : Directory.GetCreationTimeUtc(Path);
         }
 
         /// <summary>
