@@ -13237,870 +13237,87 @@
             处理器帮助类
             </summary>
         </member>
-        <member name="T:AHandle.FTP">
+        <member name="T:AOperation">
             <summary>
-            FTP 处理器
+            操作接口
             </summary>
         </member>
-        <member name="M:AHandle.FTP.Create(System.String,System.String,System.String,System.String)">
-            <summary>
-            创建HTTP处理器
-            </summary>
-            <param name="serverIP">服务器IP</param>
-            <param name="userName">用户名</param>
-            <param name="password">密码</param>
-            <param name="remotePath">远端默认跟文件夹</param>
-            <returns>处理器</returns>
-        </member>
-        <member name="T:AHandle.FTP.ListType">
-            <summary>
-            获取列表类型
-            </summary>
-        </member>
-        <member name="F:AHandle.FTP.ListType.File">
-            <summary>
-            文件
-            </summary>
-        </member>
-        <member name="F:AHandle.FTP.ListType.Directory">
-            <summary>
-            文件夹
-            </summary>
-        </member>
-        <member name="F:AHandle.FTP.ListType.ALL">
-            <summary>
-            文件和文件夹
-            </summary>
-        </member>
-        <member name="P:AHandle.FTP.URI">
-            <summary>
-            指定FTP连接成功后的当前目录, 如果不指定即默认为根目录
-            </summary>
-        </member>
-        <member name="P:AHandle.FTP.ServerIP">
-            <summary>
-            FTP服务器IP地址
-            </summary>
-        </member>
-        <member name="P:AHandle.FTP.UserName">
-            <summary>
-            FTP用户名
-            </summary>
-        </member>
-        <member name="P:AHandle.FTP.Password">
-            <summary>
-            FTP密码
-            </summary>
-        </member>
-        <member name="P:AHandle.FTP.RemotePath">
-            <summary>
-            FTP服务器上的目录
-            </summary>
-        </member>
-        <member name="P:AHandle.FTP.TimeOut">
-            <summary>
-            超时时间
-            </summary>
-        </member>
-        <member name="P:AHandle.FTP.BufferSize">
-            <summary>
-            缓存大小
-            </summary>
-        </member>
-        <member name="M:AHandle.FTP.#ctor(System.String,System.String,System.String,System.String)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="serverIP">服务器IP</param>
-            <param name="userName">用户名</param>
-            <param name="password">密码</param>
-            <param name="remotePath">远端默认跟文件夹</param>
-        </member>
-        <member name="M:AHandle.FTP.InitAsync">
-            <summary>
-            初始化
-            </summary>
-        </member>
-        <member name="M:AHandle.FTP.Init">
-            <summary>
-            初始化
-            </summary>
-        </member>
-        <member name="M:AHandle.FTP.ToString">
+        <member name="P:AOperation.State">
             <inheritdoc />
         </member>
-        <member name="M:AHandle.FTP.Move(System.String,System.String)">
+        <member name="F:AOperation.progress">
             <summary>
-            移动文件
-            </summary>
-            <param name="currentRemotePath">当前远端路径</param>
-            <param name="newRemoteName">新远端路径</param>
-        </member>
-        <member name="M:AHandle.FTP.MoveAsync(System.String,System.String)">
-            <summary>
-            移动文件
-            </summary>
-            <param name="currentRemotePath">当前远端路径</param>
-            <param name="newRemoteName">新远端路径</param>
-        </member>
-        <member name="M:AHandle.FTP.DeleteFile(System.String)">
-            <summary>
-            删除文件
-            </summary>
-            <param name="remotePath">远端文件路径</param>
-        </member>
-        <member name="M:AHandle.FTP.DeleteFileAsync(System.String)">
-            <summary>
-            删除文件
-            </summary>
-            <param name="remotePath">远端文件路径</param>
-        </member>
-        <member name="M:AHandle.FTP.DeleteDir(System.String)">
-            <summary>
-            删除文件夹
-            </summary>
-            <param name="remotePath">远端文件夹路径</param>
-        </member>
-        <member name="M:AHandle.FTP.DeleteDirAsync(System.String)">
-            <summary>
-            删除文件夹
-            </summary>
-            <param name="remotePath">远端文件夹路径</param>
-        </member>
-        <member name="M:AHandle.FTP.CreateDir(System.String)">
-            <summary>
-            创建文件夹
-            </summary>
-            <param name="remotePath">远端文件夹路径</param>
-        </member>
-        <member name="M:AHandle.FTP.CreateDirAsync(System.String)">
-            <summary>
-            创建文件夹
-            </summary>
-            <param name="remotePath">远端文件夹路径</param>
-        </member>
-        <member name="M:AHandle.FTP.UploadFile(System.String,System.String,IProgressEvent)">
-            <summary>
-            上传文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="remotePath">远端路径</param>
-            <param name="iEvent">回调</param>
-        </member>
-        <member name="M:AHandle.FTP.UploadFile(System.String,IProgressEvent)">
-            <summary>
-            上传文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="iEvent">回调</param>
-        </member>
-        <member name="M:AHandle.FTP.UploadFileAsync(System.String,System.String,IProgressEvent)">
-            <summary>
-            上传文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="remotePath">远端路径</param>
-            <param name="iEvent">回调</param>
-        </member>
-        <member name="M:AHandle.FTP.UploadFileAsync(System.String,IProgressEvent)">
-            <summary>
-            上传文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="iEvent">回调</param>
-        </member>
-        <member name="M:AHandle.FTP.UploadDir(System.String,System.String,IProgressEvent,System.IO.SearchOption,System.String)">
-            <summary>
-            上传文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="remotePath">远端路径</param>
-            <param name="iEvent">回调</param>
-            <param name="searchPattern">搜索字段</param>
-            <param name="searchOption">搜索模式</param>
-        </member>
-        <member name="M:AHandle.FTP.UploadDir(System.String,IProgressEvent,System.IO.SearchOption,System.String)">
-            <summary>
-            上传文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="iEvent">回调</param>
-            <param name="searchPattern">搜索字段</param>
-            <param name="searchOption">搜索模式</param>
-        </member>
-        <member name="M:AHandle.FTP.UploadDirAsync(System.String,System.String,IProgressEvent,System.IO.SearchOption,System.String)">
-            <summary>
-            上传文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="remotePath">远端路径</param>
-            <param name="iEvent">回调</param>
-            <param name="searchPattern">搜索字段</param>
-            <param name="searchOption">搜索模式</param>
-        </member>
-        <member name="M:AHandle.FTP.UploadDirAsync(System.String,IProgressEvent,System.IO.SearchOption,System.String)">
-            <summary>
-            上传文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="iEvent">回调</param>
-            <param name="searchPattern">搜索字段</param>
-            <param name="searchOption">搜索模式</param>
-        </member>
-        <member name="M:AHandle.FTP.DownloadFile(System.String,System.String,IProgressEvent,System.Boolean)">
-            <summary>
-            下载文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="remotePath">远端路径</param>
-            <param name="iEvent">回调</param>
-            <param name="isOverWrite">是否重写</param>
-        </member>
-        <member name="M:AHandle.FTP.DownloadFileAsync(System.String,System.String,IProgressEvent,System.Boolean)">
-            <summary>
-            下载文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="remotePath">远端路径</param>
-            <param name="iEvent">回调</param>
-            <param name="isOverWrite">是否重写</param>
-        </member>
-        <member name="M:AHandle.FTP.DownloadDir(System.String,System.String,IProgressEvent,System.IO.SearchOption,System.String,System.Boolean)">
-            <summary>
-            下载文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="remotePath">远端路径</param>
-            <param name="iEvent">回调</param>
-            <param name="searchPattern">搜索字段</param>
-            <param name="searchOption">搜索模式</param>
-            <param name="isOverWrite">是否重写</param>
-        </member>
-        <member name="M:AHandle.FTP.DownloadDirAsync(System.String,System.String,IProgressEvent,System.IO.SearchOption,System.String,System.Boolean)">
-            <summary>
-            下载文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="remotePath">远端路径</param>
-            <param name="iEvent">回调</param>
-            <param name="searchPattern">搜索字段</param>
-            <param name="searchOption">搜索模式</param>
-            <param name="isOverWrite">是否重写</param>
-        </member>
-        <member name="M:AHandle.FTP.DownloadDir(System.String,IProgressEvent,System.IO.SearchOption,System.String,System.Boolean)">
-            <summary>
-            下载文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="iEvent">回调</param>
-            <param name="searchPattern">搜索字段</param>
-            <param name="searchOption">搜索模式</param>
-            <param name="isOverWrite">是否重写</param>
-        </member>
-        <member name="M:AHandle.FTP.DownloadDirAsync(System.String,IProgressEvent,System.IO.SearchOption,System.String,System.Boolean)">
-            <summary>
-            下载文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="iEvent">回调</param>
-            <param name="searchPattern">搜索字段</param>
-            <param name="searchOption">搜索模式</param>
-            <param name="isOverWrite">是否重写</param>
-        </member>
-        <member name="M:AHandle.FTP.GetFileSize(System.String)">
-            <summary>
-            获取文件大小
-            </summary>
-            <param name="remotePath">远端路径</param>
-            <returns>文件大小</returns>
-        </member>
-        <member name="M:AHandle.FTP.GetFileSizeAsync(System.String)">
-            <summary>
-            获取文件大小
-            </summary>
-            <param name="remotePath">远端路径</param>
-            <returns>文件大小</returns>
-        </member>
-        <member name="M:AHandle.FTP.GetList(System.String,System.String)">
-            <summary>
-            获取文件或文件夹列表
-            </summary>
-            <param name="remotePath">远端路径</param>
-            <param name="keyword">获取指定文件夹 空时获取全部 当获取类型为全部时 则不生效</param>
-            <returns>文件列表</returns>
-        </member>
-        <member name="M:AHandle.FTP.GetListAsync(System.String,System.String)">
-            <summary>
-            获取文件夹列表
-            </summary>
-            <param name="remotePath">远端路径</param>
-            <param name="keyword">获取指定文件夹 空时获取全部 当获取类型为全部时 则不生效</param>
-            <returns>文件列表</returns>
-        </member>
-        <member name="M:AHandle.FTP.GetListFile(System.String,System.String)">
-            <summary>
-            获取文件列表
-            </summary>
-            <param name="remotePath">远端路径</param>
-            <param name="keyword">获取指定文件夹 空时获取全部 当获取类型为全部时 则不生效</param>
-            <returns>文件列表</returns>
-        </member>
-        <member name="M:AHandle.FTP.GetListFileAsync(System.String,System.String)">
-            <summary>
-            获取目录列表
-            </summary>
-            <param name="remotePath">远端路径</param>
-            <param name="keyword">获取指定文件夹 空时获取全部 当获取类型为全部时 则不生效</param>
-            <returns>文件列表</returns>
-        </member>
-        <member name="M:AHandle.FTP.GetListDir(System.String,System.String)">
-            <summary>
-            获取文件列表
-            </summary>
-            <param name="remotePath">远端路径</param>
-            <param name="keyword">获取指定文件夹 空时获取全部 当获取类型为全部时 则不生效</param>
-            <returns>文件列表</returns>
-        </member>
-        <member name="M:AHandle.FTP.GetListDirAsync(System.String,System.String)">
-            <summary>
-            获取文件夹列表
-            </summary>
-            <param name="remotePath">远端路径</param>
-            <param name="keyword">获取指定文件夹 空时获取全部 当获取类型为全部时 则不生效</param>
-            <returns>文件列表</returns>
-        </member>
-        <member name="M:AHandle.FTP.Check(System.String)">
-            <summary>
-            检查FTP是否有效
-            </summary>
-            <returns>Ture:有效 False:无效</returns>
-        </member>
-        <member name="M:AHandle.FTP.CheckAsync(System.String)">
-            <summary>
-            检查FTP是否有效
-            </summary>
-            <returns>Ture:有效 False:无效</returns>
-        </member>
-        <member name="M:AHandle.FTP.CheckFile(System.String)">
-            <summary>
-            检查文件是否有效
-            </summary>
-            <returns>Ture:有效 False:无效</returns>
-        </member>
-        <member name="M:AHandle.FTP.CheckFileAsync(System.String)">
-            <summary>
-            检查文件是否有效
-            </summary>
-            <returns>Ture:有效 False:无效</returns>
-        </member>
-        <member name="M:AHandle.FTP.CheckDir(System.String)">
-            <summary>
-            检查文件夹是否有效
-            </summary>
-            <returns>Ture:有效 False:无效</returns>
-        </member>
-        <member name="M:AHandle.FTP.CheckDirAsync(System.String)">
-            <summary>
-            检查文件夹是否有效
-            </summary>
-            <returns>Ture:有效 False:无效</returns>
-        </member>
-        <member name="M:AHandle.FTP.Dispose">
-            <summary>
-            释放
+            进度回调参数
             </summary>
         </member>
-        <member name="T:AHandle.HTTP">
-            <summary>
-            HTTP 处理器
-            </summary>
+        <member name="P:AOperation.Event">
+            <inheritdoc />
         </member>
-        <member name="M:AHandle.HTTP.Create(System.String)">
-            <summary>
-            创建HTTP处理器
-            </summary>
-            <param name="remoteURL">远端路径</param>
-            <returns>处理器</returns>
-        </member>
-        <member name="P:AHandle.HTTP.RemoteURL">
-            <summary>
-            远端路径
-            </summary>
-        </member>
-        <member name="P:AHandle.HTTP.TimeOut">
-            <summary>
-            超时时间
-            </summary>
-        </member>
-        <member name="P:AHandle.HTTP.BufferSize">
-            <summary>
-            缓存大小
-            </summary>
-        </member>
-        <member name="P:AHandle.HTTP.Cookie">
-            <summary>
-            Cookie
-            </summary>
-        </member>
-        <member name="P:AHandle.HTTP.ContentType">
-            <summary>
-            内容类型
-            </summary>
-        </member>
-        <member name="P:AHandle.HTTP.Encoding">
-            <summary>
-            编码
-            </summary>
-        </member>
-        <member name="M:AHandle.HTTP.#ctor(System.String)">
+        <member name="M:AOperation.#ctor">
             <summary>
             构造函数
             </summary>
-            <param name="remoteURL">远端跟路径</param>
         </member>
-        <member name="M:AHandle.HTTP.Delete(System.String)">
+        <member name="M:AOperation.Begin">
+            <inheritdoc />
+        </member>
+        <member name="M:AOperation.Cancel">
+            <inheritdoc />
+        </member>
+        <member name="M:AOperation.Pause">
+            <inheritdoc />
+        </member>
+        <member name="M:AOperation.Resume">
+            <inheritdoc />
+        </member>
+        <member name="M:AOperation.WaitCo">
+            <inheritdoc />
+        </member>
+        <member name="M:AOperation.OnWaitCo">
             <summary>
-            请求删除指定的资源
+            迭代器等待
             </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AHandle.HTTP.Delete(System.String,System.Byte[])">
+        <member name="M:AOperation.WaitAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:AOperation.OnWaitAsync">
             <summary>
-            请求删除指定的资源
+            异步等待
             </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AHandle.HTTP.Delete(System.String,System.String)">
+        <member name="M:AOperation.Wait">
+            <inheritdoc />
+        </member>
+        <member name="M:AOperation.OnBegin">
             <summary>
-            请求删除指定的资源
+            开始
             </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AHandle.HTTP.DeleteAsync(System.String)">
+        <member name="M:AOperation.OnCancel">
             <summary>
-            请求删除指定的资源
+            取消
             </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AHandle.HTTP.DeleteAsync(System.String,System.Byte[])">
+        <member name="M:AOperation.OnPause">
             <summary>
-            请求删除指定的资源
+            暂停
             </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AHandle.HTTP.DeleteAsync(System.String,System.String)">
+        <member name="M:AOperation.OnResume">
             <summary>
-            请求删除指定的资源
+            恢复
             </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
         </member>
-        <member name="M:AHandle.HTTP.Download(System.String,System.String,AProgress,System.Boolean)">
+        <member name="M:AOperation.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AOperation.OnWait">
             <summary>
-            下载文件
+            等待
             </summary>
-            <param name="savePath">保存文件夹路径</param>
-            <param name="remotePath">远端需要下载文件路径</param>
-            <param name="aProgress">进度回调</param>
-            <param name="isOverWrite">是否覆盖</param>
         </member>
-        <member name="M:AHandle.HTTP.Download(System.String,System.Collections.Generic.IEnumerable{System.String},AProgress,System.Boolean)">
-            <summary>
-            下载文件
-            </summary>
-            <param name="savePath">保存文件夹路径</param>
-            <param name="remotePath">远端需要下载文件路径</param>
-            <param name="aProgress">进度回调</param>
-            <param name="isOverWrite">是否覆盖</param>
-        </member>
-        <member name="M:AHandle.HTTP.DownloadAsync(System.String,System.String,AProgress,System.Boolean)">
-            <summary>
-            下载文件
-            </summary>
-            <param name="savePath">保存文件夹路径</param>
-            <param name="remotePath">远端需要下载文件路径</param>
-            <param name="aProgress">进度回调</param>
-            <param name="isOverWrite">是否覆盖</param>
-        </member>
-        <member name="M:AHandle.HTTP.DownloadAsync(System.String,System.Collections.Generic.IEnumerable{System.String},AProgress,System.Boolean)">
-            <summary>
-            下载文件
-            </summary>
-            <param name="savePath">保存文件夹路径</param>
-            <param name="remotePath">远端需要下载文件路径</param>
-            <param name="aProgress">进度回调</param>
-            <param name="isOverWrite">是否覆盖</param>
-        </member>
-        <member name="M:AHandle.HTTP.Put(System.String,System.Byte[])">
-            <summary>
-            向指定资源位置上传其最新内容
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.Put(System.String,System.String)">
-            <summary>
-            向指定资源位置上传其最新内容
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.PutAsync(System.String,System.Byte[])">
-            <summary>
-            向指定资源位置上传其最新内容
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.PutAsync(System.String,System.String)">
-            <summary>
-            向指定资源位置上传其最新内容
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.Trace(System.String)">
-            <summary>
-            回显服务器收到的请求
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.Trace(System.String,System.Byte[])">
-            <summary>
-            回显服务器收到的请求
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.Trace(System.String,System.String)">
-            <summary>
-            回显服务器收到的请求
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.TraceAsync(System.String)">
-            <summary>
-            回显服务器收到的请求
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.TraceAsync(System.String,System.Byte[])">
-            <summary>
-            回显服务器收到的请求
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.TraceAsync(System.String,System.String)">
-            <summary>
-            回显服务器收到的请求
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.Options(System.String)">
-            <summary>
-            返回服务器正对特定资源所支持的HTTP请求方法
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.Options(System.String,System.Byte[])">
-            <summary>
-            返回服务器正对特定资源所支持的HTTP请求方法
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.Options(System.String,System.String)">
-            <summary>
-            返回服务器正对特定资源所支持的HTTP请求方法
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.OptionsAsync(System.String)">
-            <summary>
-            返回服务器正对特定资源所支持的HTTP请求方法
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.OptionsAsync(System.String,System.Byte[])">
-            <summary>
-            返回服务器正对特定资源所支持的HTTP请求方法
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.OptionsAsync(System.String,System.String)">
-            <summary>
-            返回服务器正对特定资源所支持的HTTP请求方法
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.Head(System.String)">
-            <summary>
-            请求获取特定的资源的响应消息报告
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.Head(System.String,System.Byte[])">
-            <summary>
-            请求获取特定的资源的响应消息报告
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.Head(System.String,System.String)">
-            <summary>
-            请求获取特定的资源的响应消息报告
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.HeadAsync(System.String)">
-            <summary>
-            请求获取特定的资源的响应消息报告
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.HeadAsync(System.String,System.Byte[])">
-            <summary>
-            请求获取特定的资源的响应消息报告
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.HeadAsync(System.String,System.String)">
-            <summary>
-            请求获取特定的资源的响应消息报告
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.Connect(System.String)">
-            <summary>
-            预留给能够将连接改为管道方式的代理服务器
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.Connect(System.String,System.Byte[])">
-            <summary>
-            预留给能够将连接改为管道方式的代理服务器
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.Connect(System.String,System.String)">
-            <summary>
-            预留给能够将连接改为管道方式的代理服务器
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.ConnectAsync(System.String)">
-            <summary>
-            预留给能够将连接改为管道方式的代理服务器
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.ConnectAsync(System.String,System.Byte[])">
-            <summary>
-            预留给能够将连接改为管道方式的代理服务器
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.ConnectAsync(System.String,System.String)">
-            <summary>
-            预留给能够将连接改为管道方式的代理服务器
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.Get">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.GetStream">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.Get(System.String)">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.GetStream(System.String)">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.GetAsync">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.GetStreamAsync">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.GetAsync(System.String)">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.GetStreamAsync(System.String)">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.Post(System.String)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.Post(System.String,System.Byte[])">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.Post(System.String,System.String)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.PostAsync(System.String)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.PostAsync(System.String,System.Byte[])">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.PostAsync(System.String,System.String)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.PostStream(System.String)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.PostStream(System.String,System.Byte[])">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.PostStream(System.String,System.String)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.PostStreamAsync(System.String)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.PostStreamAsync(System.String,System.Byte[])">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.PostStreamAsync(System.String,System.String)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-            <param name="remoteRelativePath">远端相对路径</param>
-            <param name="data">数据</param>
-            <returns>服务器返回内容</returns>
-        </member>
-        <member name="M:AHandle.HTTP.Dispose">
+        <member name="M:AOperation.OnDispose">
             <summary>
             释放
             </summary>
@@ -14115,6 +13332,11 @@
             进度回调
             </summary>
         </member>
+        <member name="P:IProgressEvent.OnBegin">
+            <summary>
+            开始回调
+            </summary>
+        </member>
         <member name="P:IProgressEvent.OnComplete">
             <summary>
             完成回调
@@ -14125,6 +13347,21 @@
             错误回调
             </summary>
         </member>
+        <member name="P:IProgressEvent.OnResume">
+            <summary>
+            恢复
+            </summary>
+        </member>
+        <member name="P:IProgressEvent.OnPause">
+            <summary>
+            暂停
+            </summary>
+        </member>
+        <member name="P:IProgressEvent.OnCancel">
+            <summary>
+            取消
+            </summary>
+        </member>
         <member name="T:AProgressEvent">
             <summary>
             进度回调参数
@@ -14133,10 +13370,22 @@
         <member name="P:AProgressEvent.OnProgress">
             <inheritdoc />
         </member>
+        <member name="P:AProgressEvent.OnBegin">
+            <inheritdoc />
+        </member>
         <member name="P:AProgressEvent.OnComplete">
             <inheritdoc />
         </member>
         <member name="P:AProgressEvent.OnError">
+            <inheritdoc />
+        </member>
+        <member name="P:AProgressEvent.OnResume">
+            <inheritdoc />
+        </member>
+        <member name="P:AProgressEvent.OnPause">
+            <inheritdoc />
+        </member>
+        <member name="P:AProgressEvent.OnCancel">
             <inheritdoc />
         </member>
         <member name="T:IProgressArg">
@@ -14159,9 +13408,90 @@
             当前信息
             </summary>
         </member>
-        <member name="T:IProgressHandle">
+        <member name="T:ProgressState">
+            <summary>
+            进度状态
+            </summary>
+        </member>
+        <member name="F:ProgressState.Ready">
+            <summary>
+            准备
+            </summary>
+        </member>
+        <member name="F:ProgressState.Running">
+            <summary>
+            运行
+            </summary>
+        </member>
+        <member name="F:ProgressState.Cancel">
+            <summary>
+            取消
+            </summary>
+        </member>
+        <member name="F:ProgressState.Pause">
+            <summary>
+            暂停
+            </summary>
+        </member>
+        <member name="F:ProgressState.Finish">
+            <summary>
+            完成
+            </summary>
+        </member>
+        <member name="F:ProgressState.Fail">
+            <summary>
+            失败
+            </summary>
+        </member>
+        <member name="T:IProgressOperation">
+            <summary>
+            进度操作
+            </summary>
+        </member>
+        <member name="P:IProgressOperation.State">
+            <summary>
+            进度状态
+            </summary>
+        </member>
+        <member name="P:IProgressOperation.Event">
             <summary>
             进度参数
+            </summary>
+        </member>
+        <member name="M:IProgressOperation.Begin">
+            <summary>
+            开始
+            </summary>
+        </member>
+        <member name="M:IProgressOperation.Cancel">
+            <summary>
+            取消
+            </summary>
+        </member>
+        <member name="M:IProgressOperation.Pause">
+            <summary>
+            暂停
+            </summary>
+        </member>
+        <member name="M:IProgressOperation.Resume">
+            <summary>
+            恢复
+            </summary>
+        </member>
+        <member name="M:IProgressOperation.WaitCo">
+            <summary>
+            迭代器等待
+            </summary>
+        </member>
+        <member name="M:IProgressOperation.WaitAsync">
+            <summary>
+            异步等待
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:IProgressOperation.Wait">
+            <summary>
+            同步等待
             </summary>
         </member>
         <member name="T:AProgress">
@@ -14169,60 +13499,41 @@
             进度参数
             </summary>
         </member>
-        <member name="F:AProgress.IsCancel">
-            <summary>
-            是否取消
-            </summary>
-        </member>
-        <member name="M:AProgress.#ctor(IProgressEvent)">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="F:AProgress.CancellationToken">
-            <summary>
-            取消令牌
-            </summary>
+        <member name="M:AProgress.ToString">
+            <inheritdoc />
         </member>
         <member name="P:AProgress.Total">
-            <summary>
-            总值
-            </summary>
+            <inheritdoc />
         </member>
         <member name="P:AProgress.Current">
-            <summary>
-            当前值
-            </summary>
+            <inheritdoc />
         </member>
         <member name="P:AProgress.CurrentInfo">
-            <summary>
-            当前信息
-            </summary>
-        </member>
-        <member name="P:AProgress.OnProgress">
-            <summary>
-            进度回调
-            </summary>
-        </member>
-        <member name="P:AProgress.OnComplete">
-            <summary>
-            完成回调
-            </summary>
-        </member>
-        <member name="P:AProgress.OnError">
-            <summary>
-            错误回调
-            </summary>
-        </member>
-        <member name="M:AProgress.Cancel">
-            <summary>
-            取消
-            </summary>
+            <inheritdoc />
         </member>
         <member name="M:AProgress.Dispose">
-            <summary>
-            析构函数
-            </summary>
+            <inheritdoc />
+        </member>
+        <member name="P:AProgress.OnProgress">
+            <inheritdoc />
+        </member>
+        <member name="P:AProgress.OnBegin">
+            <inheritdoc />
+        </member>
+        <member name="P:AProgress.OnComplete">
+            <inheritdoc />
+        </member>
+        <member name="P:AProgress.OnError">
+            <inheritdoc />
+        </member>
+        <member name="P:AProgress.OnResume">
+            <inheritdoc />
+        </member>
+        <member name="P:AProgress.OnPause">
+            <inheritdoc />
+        </member>
+        <member name="P:AProgress.OnCancel">
+            <inheritdoc />
         </member>
         <member name="T:IProgressInfo">
             <summary>
@@ -14362,9 +13673,6 @@
             <summary>
             网络 工具类
             </summary>
-            <summary>
-            网络 工具类
-            </summary>
         </member>
         <member name="T:AHelper.Net.FTP">
             <summary>
@@ -14493,268 +13801,6 @@
             <param name="newName">新名称</param>
             <param name="timeout">超时</param>
         </member>
-        <member name="M:AHelper.Net.FTP.DeleteFile(System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            FTP指定删除文件
-            </summary>
-            <param name="remote">网址</param>
-            <param name="user">账号</param>
-            <param name="pass">密码</param>
-            <param name="timeout">超时</param>
-            <exception cref="T:System.Net.WebException">异常信息</exception>
-            <returns>删除返回信息</returns>
-        </member>
-        <member name="M:AHelper.Net.FTP.DeleteFileAsync(System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            FTP指定删除文件
-            </summary>
-            <param name="remote">网址</param>
-            <param name="user">账号</param>
-            <param name="pass">密码</param>
-            <param name="timeout">超时</param>
-            <exception cref="T:System.Exception">异常信息</exception>
-            <returns>删除返回信息</returns>
-        </member>
-        <member name="M:AHelper.Net.FTP.DeleteDir(System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            FTP指定删除文件夹
-            </summary>
-            <param name="remote">网址</param>
-            <param name="user">账号</param>
-            <param name="pass">密码</param>
-            <param name="timeout">超时</param>
-            <exception cref="T:System.Net.WebException">异常信息</exception>
-            <returns>删除状态</returns>
-        </member>
-        <member name="M:AHelper.Net.FTP.DeleteDirAsync(System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            FTP指定删除文件夹
-            </summary>
-            <param name="remote">网址</param>
-            <param name="user">账号</param>
-            <param name="pass">密码</param>
-            <param name="timeout">超时</param>
-            <exception cref="T:System.Net.WebException">异常信息</exception>
-            <returns>删除状态</returns>
-        </member>
-        <member name="M:AHelper.Net.FTP.DownloadFile(System.String,System.String,System.String,System.String,IProgressEvent,System.Boolean,System.UInt16,System.Int32)">
-            <summary>
-            FTP下载文件
-            </summary>
-            <param name="uri">路径</param>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
-            <param name="localPath">本地文件路径</param>
-            <param name="iEvent">回调</param>
-            <param name="overwrite">是否覆盖</param>
-            <param name="timeout">超时</param>
-            <param name="bufferSize">下载缓存大小</param>
-        </member>
-        <member name="M:AHelper.Net.FTP.DownloadFileAsync(System.String,System.String,System.String,System.String,IProgressEvent,System.Boolean,System.UInt16,System.Int32)">
-            <summary>
-            FTP下载文件
-            </summary>
-            <param name="uri">路径</param>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
-            <param name="localPath">本地文件路径</param>
-            <param name="iEvent">回调</param>
-            <param name="overwrite">是否覆盖</param>
-            <param name="timeout">超时</param>
-            <param name="bufferSize">下载缓存大小</param>
-        </member>
-        <member name="M:AHelper.Net.FTP.DownloadDir(System.String,System.String,System.String,System.String,IProgressEvent,System.IO.SearchOption,System.String,System.Boolean,System.UInt16,System.Int32)">
-            <summary>
-            FTP下载文件夹
-            </summary>
-            <param name="uri">路径</param>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
-            <param name="localPath">本地文件路径</param>
-            <param name="iEvent">回调</param>
-            <param name="pattern">搜索过滤</param>
-            <param name="option">搜索模式</param>
-            <param name="overwrite">是否覆盖</param>
-            <param name="timeout">超时</param>
-            <param name="bufferSize">下载缓存大小</param>
-        </member>
-        <member name="M:AHelper.Net.FTP.DownloadDirAsync(System.String,System.String,System.String,System.String,IProgressEvent,System.IO.SearchOption,System.String,System.Boolean,System.UInt16,System.Int32)">
-            <summary>
-            FTP下载文件夹
-            </summary>
-            <param name="uri">路径</param>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
-            <param name="localPath">本地文件路径</param>
-            <param name="iEvent">回调</param>
-            <param name="pattern">搜索过滤</param>
-            <param name="option">搜索模式</param>
-            <param name="overwrite">是否覆盖</param>
-            <param name="timeout">超时</param>
-            <param name="bufferSize">下载缓存大小</param>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetDownloadList(System.String,System.String,System.String,System.IO.SearchOption,System.String,System.UInt16,System.String)">
-            <summary>
-            获取文件下载列表
-            </summary>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetDownloadListAsync(System.String,System.String,System.String,System.IO.SearchOption,System.String,System.UInt16,System.String)">
-            <summary>
-            获取文件下载列表
-            </summary>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetFileSize(System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            获取FTP文件大小
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="timeout">超时</param>
-            <returns>大小</returns>
-            <exception cref="T:System.Exception"></exception>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetFileSizeAsync(System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            获取FTP文件大小
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="timeout">超时</param>
-            <returns>大小</returns>
-            <exception cref="T:System.Exception"></exception>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetRemoteListFile(System.String,System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            获取文件或文件夹列表
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="keyword">
-            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
-            若listType=FileAndFolder，则该参数无效
-            </param>
-            <param name="timeout">超时</param>
-            <returns></returns>
-            <exception cref="T:System.Exception"></exception>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetRemoteListDir(System.String,System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            获取文件或文件夹列表
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="keyword">
-            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
-            若listType=FileAndFolder，则该参数无效
-            </param>
-            <param name="timeout">超时</param>
-            <returns></returns>
-            <exception cref="T:System.Exception"></exception>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetRemoteList(System.String,System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            获取文件或文件夹列表
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="keyword">
-            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
-            若listType=FileAndFolder，则该参数无效
-            </param>
-            <param name="timeout">超时</param>
-            <returns></returns>
-            <exception cref="T:System.Exception"></exception>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetRemoteList(System.String,System.String,System.String,AHandle.FTP.ListType,System.String,System.UInt16)">
-            <summary>
-            获取文件或文件夹列表
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="type">
-            1:获取文件列表
-            2:获取文件夹列表
-            3:获取文件和文件夹列表
-            </param>
-            <param name="keyword">
-            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
-            若listType=FileAndFolder，则该参数无效
-            </param>
-            <param name="timeout">超时</param>
-            <returns></returns>
-            <exception cref="T:System.Net.WebException"></exception>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetRemoteListFileAsync(System.String,System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            获取文件或文件夹列表
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="keyword">
-            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
-            若listType=FileAndFolder，则该参数无效
-            </param>
-            <param name="timeout">超时</param>
-            <returns></returns>
-            <exception cref="T:System.Exception"></exception>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetRemoteListDirAsync(System.String,System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            获取文件或文件夹列表
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="keyword">
-            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
-            若listType=FileAndFolder，则该参数无效
-            </param>
-            <param name="timeout">超时</param>
-            <returns></returns>
-            <exception cref="T:System.Exception"></exception>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetRemoteListAsync(System.String,System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            获取文件或文件夹列表
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="keyword">
-            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
-            若listType=FileAndFolder，则该参数无效
-            </param>
-            <param name="timeout">超时</param>
-            <returns></returns>
-            <exception cref="T:System.Exception"></exception>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetRemoteListAsync(System.String,System.String,System.String,AHandle.FTP.ListType,System.String,System.UInt16)">
-            <summary>
-            获取文件或文件夹列表
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="type">
-            1:获取文件列表
-            2:获取文件夹列表
-            3:获取文件和文件夹列表
-            </param>
-            <param name="keyword">
-            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
-            若listType=FileAndFolder，则该参数无效
-            </param>
-            <param name="timeout">超时</param>
-            <returns></returns>
-            <exception cref="T:System.Net.WebException"></exception>
-        </member>
         <member name="M:AHelper.Net.FTP.CreateRequestFile(System.String,System.String,System.String,System.String,System.Int32)">
             <summary>
             创建一个FTP请求
@@ -14776,58 +13822,6 @@
             <param name="method">请求的方法，可以是"GET"、"PUT"、"POST"等</param>
             <param name="timeout">请求的超时时间，单位为秒，默认超时时间为TIMEOUT</param>
             <returns>创建的FTP请求</returns>
-        </member>
-        <member name="M:AHelper.Net.FTP.UploadFile(System.String,System.String,System.String,System.String,IProgressEvent,System.UInt16,System.Int32)">
-            <summary>
-            FTP上传文件
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="localPath">本地文件路径</param>
-            <param name="iEvent">回调</param>
-            <param name="timeout">超时</param>
-            <param name="bufferSize">缓存大小</param>
-        </member>
-        <member name="M:AHelper.Net.FTP.UploadFileAsync(System.String,System.String,System.String,System.String,IProgressEvent,System.UInt16,System.Int32)">
-            <summary>
-            FTP上传文件
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="localPath">本地文件路径</param>
-            <param name="iEvent">回调</param>
-            <param name="timeout">超时</param>
-            <param name="bufferSize">缓存大小</param>
-        </member>
-        <member name="M:AHelper.Net.FTP.UploadFolder(System.String,System.String,System.String,System.String,System.IO.SearchOption,System.String,IProgressEvent,System.UInt16,System.Int32)">
-            <summary>
-            FTP上传文件夹
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="localPath">本地文件路径</param>
-            <param name="option">搜索模式</param>
-            <param name="iEvent">回调</param>
-            <param name="pattern">匹配模式</param>
-            <param name="timeout">超时</param>
-            <param name="bufferSize">缓存大小</param>
-        </member>
-        <member name="M:AHelper.Net.FTP.UploadFolderAsync(System.String,System.String,System.String,System.String,System.IO.SearchOption,System.String,IProgressEvent,System.UInt16,System.Int32)">
-            <summary>
-            FTP上传文件夹
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="localPath">本地文件路径</param>
-            <param name="option">搜索模式</param>
-            <param name="iEvent">回调</param>
-            <param name="pattern">匹配模式</param>
-            <param name="timeout">超时</param>
-            <param name="bufferSize">缓存大小</param>
         </member>
         <member name="T:AHelper.Net.HTTP">
             <summary>
@@ -14974,49 +13968,23 @@
             <exception cref="T:AIO.NetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
-        <member name="M:AHelper.Net.HTTP.Download(System.String,System.String,IProgressEvent,System.Boolean,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.HTTP.Download(System.String,System.String,System.Boolean,System.UInt16,System.Int32)">
             <summary>
             HTTP 下载文件
             </summary>
             <param name="remoteUrl">远端路径</param>
             <param name="localPath">保存路径</param>
-            <param name="iEvent">回调</param>
             <param name="isOverWrite">覆盖</param>
             <param name="timeout">超时</param>
             <param name="bufferSize">容量</param>
             <exception cref="T:System.Exception">异常</exception>
         </member>
-        <member name="M:AHelper.Net.HTTP.DownloadAsync(System.String,System.String,IProgressEvent,System.Boolean,System.UInt16,System.Int32)">
-            <summary>
-            HTTP 下载文件
-            </summary>
-            <param name="remoteUrl">远端路径</param>
-            <param name="localPath">保存路径</param>
-            <param name="iEvent">回调</param>
-            <param name="isOverWrite">覆盖</param>
-            <param name="timeout">超时</param>
-            <param name="bufferSize">容量</param>
-            <exception cref="T:System.Exception">异常</exception>
-        </member>
-        <member name="M:AHelper.Net.HTTP.DownloadAsync(System.Collections.Generic.IEnumerable{System.String},System.String,IProgressEvent,System.Boolean,System.UInt16,System.Int32)">
+        <member name="M:AHelper.Net.HTTP.Download(System.Collections.Generic.IEnumerable{System.String},System.String,System.Boolean,System.UInt16,System.Int32)">
             <summary>
             HTTP 下载文件
             </summary>
             <param name="remoteUrls">远端路径</param>
             <param name="localPath">保存根路径</param>
-            <param name="iEvent">回调</param>
-            <param name="isOverWrite">覆盖</param>
-            <param name="timeout">超时</param>
-            <param name="bufferSize">容量</param>
-            <exception cref="T:System.Exception">异常</exception>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Download(System.Collections.Generic.IEnumerable{System.String},System.String,IProgressEvent,System.Boolean,System.UInt16,System.Int32)">
-            <summary>
-            HTTP 下载文件
-            </summary>
-            <param name="remoteUrls">远端路径</param>
-            <param name="localPath">保存根路径</param>
-            <param name="iEvent">回调</param>
             <param name="isOverWrite">覆盖</param>
             <param name="timeout">超时</param>
             <param name="bufferSize">容量</param>
@@ -15529,12 +14497,13 @@
             <param name="stream">文件流</param>
             <param name="bufferSize">容量大小</param>
         </member>
-        <member name="M:AHelper.Net.RemoveFileHeaderAsync(System.IO.Stream,System.Int32)">
+        <member name="M:AHelper.Net.RemoveFileHeaderAsync(System.IO.Stream,System.Int32,System.Threading.CancellationToken)">
             <summary>
             移除文件头
             </summary>
             <param name="stream">文件流</param>
             <param name="bufferSize">容量大小</param>
+            <param name="cancellationToken">取消令牌</param>
         </member>
         <member name="F:AHelper.BUFFER_SIZE">
             <summary>

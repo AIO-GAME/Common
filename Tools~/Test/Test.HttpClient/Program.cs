@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 
 public class Program
 {
@@ -11,20 +12,53 @@ public class Program
 
     static async void Test()
     {
-        const string serverIp = @"ftpshare-hot.ingcreations.com";
-        const string user = "ftpshare-hot";
-        const string pass = "ingcreations2023";
-        using var handle = AHandle.FTP.Create(serverIp, user, pass, "Bundles");
-        await handle.InitAsync();
         var progress = new AProgressEvent();
         progress.OnProgress += Console.WriteLine;
         progress.OnError += Console.WriteLine;
-        await handle.UploadDirAsync(@"E:\Project\AIO\20190440f1\Bundles", progress);
-        await handle.UploadFileAsync(@"E:\WWW\G101\Version\StandaloneWindows64.json", "StandaloneWindows64.json",
-            progress);
-        Console.WriteLine("Upload done!");
+        progress.OnComplete += () => Console.WriteLine("Download done!");
+        progress.OnBegin += () => Console.WriteLine("Download begin!");
+        progress.OnPause += () => Console.WriteLine("Download pause!");
+        progress.OnResume += () => Console.WriteLine("Download resume!");
+        progress.OnCancel += () => Console.WriteLine("Download cancel!");
 
-        Console.WriteLine();
+        const string serverIp = @"ftpshare-hot.ingcreations.com";
+        const string user = "ftpshare-hot";
+        const string pass = "ingcreations2023";
+        // using var handle = AHandle.FTP.Create(serverIp, user, pass, "Bundles");
+        // await handle.InitAsync();
+
+
+        // await handle.UploadDirAsync(@"E:\Project\AIO\20190440f1\Bundles", progress);
+        // await handle.UploadFileAsync(@"E:\WWW\G101\Version\StandaloneWindows64.json", "StandaloneWindows64.json",
+        //     progress);
+        // Console.WriteLine("Upload done!");
+        //
+        // Console.WriteLine();
+
+        var handle = AHelper.Net.HTTP.Download(
+            new[]
+            {
+                "https://ftpshare-hot.ingcreations.com/Bundles/android-ndk-r16b-windows-x86_64.zip",
+                "https://ftpshare-hot.ingcreations.com/Bundles/Version/StandaloneWindows64.json"
+            },
+            @"E:\WWW\Test");
+
+        handle.Event = progress;
+        handle.Begin();
+        Task.Factory.StartNew(async () =>
+        {
+            while (handle.State != ProgressState.Finish && handle.State != ProgressState.Fail)
+            {
+                await Task.Delay(1000);
+                handle.Pause();
+                await Task.Delay(1000);
+                handle.Resume();
+            }
+
+            handle.Dispose();
+        });
+
+        await handle.WaitAsync();
     }
 
     public static void P(string name)

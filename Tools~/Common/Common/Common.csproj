@@ -512,6 +512,7 @@
     <Compile Include="Script\Extension\Struct\Char\Char.Extend.ToConver.cs" />
     <Compile Include="Script\Extension\Struct\Long\LongExtened.Extend.cs" />
     <Compile Include="Script\Handle\AHandle.cs" />
+    <Compile Include="Script\Handle\AOperation.cs" />
     <Compile Include="Script\Handle\Net\FTP\Handle.FTP.cs" />
     <Compile Include="Script\Handle\Net\HTTP\Handle.HTTP.cs" />
     <Compile Include="Script\Handle\ProgressArgs.cs" />

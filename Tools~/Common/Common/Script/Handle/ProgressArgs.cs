@@ -5,7 +5,8 @@
 |*|============|*/
 
 using System;
-using System.Threading;
+using System.Collections;
+using System.Threading.Tasks;
 
 /// <summary>
 /// 进度回调参数
@@ -18,6 +19,11 @@ public interface IProgressEvent
     Action<IProgressInfo> OnProgress { get; set; }
 
     /// <summary>
+    /// 开始回调
+    /// </summary>
+    Action OnBegin { get; set; }
+
+    /// <summary>
     /// 完成回调
     /// </summary>
     Action OnComplete { get; set; }
@@ -26,6 +32,21 @@ public interface IProgressEvent
     /// 错误回调
     /// </summary>
     Action<Exception> OnError { get; set; }
+
+    /// <summary>
+    /// 恢复
+    /// </summary>
+    Action OnResume { get; set; }
+
+    /// <summary>
+    /// 暂停
+    /// </summary>
+    Action OnPause { get; set; }
+
+    /// <summary>
+    /// 取消
+    /// </summary>
+    Action OnCancel { get; set; }
 }
 
 /// <summary>
@@ -37,10 +58,22 @@ public struct AProgressEvent : IProgressEvent
     public Action<IProgressInfo> OnProgress { get; set; }
 
     /// <inheritdoc />
+    public Action OnBegin { get; set; }
+
+    /// <inheritdoc />
     public Action OnComplete { get; set; }
 
     /// <inheritdoc />
     public Action<Exception> OnError { get; set; }
+
+    /// <inheritdoc />
+    public Action OnResume { get; set; }
+
+    /// <inheritdoc />
+    public Action OnPause { get; set; }
+
+    /// <inheritdoc />
+    public Action OnCancel { get; set; }
 }
 
 /// <summary>
@@ -65,121 +98,161 @@ public interface IProgressArg : IDisposable
 }
 
 /// <summary>
-/// 进度参数
+/// 进度状态
 /// </summary>
-public interface IProgressHandle : IProgressEvent, IProgressArg
+public enum ProgressState : byte
 {
+    /// <summary>
+    /// 准备
+    /// </summary>
+    Ready = 0,
+
+    /// <summary>
+    /// 运行
+    /// </summary>
+    Running,
+
+    /// <summary>
+    /// 取消
+    /// </summary>
+    Cancel,
+
+    /// <summary>
+    /// 暂停
+    /// </summary>
+    Pause,
+
+    /// <summary>
+    /// 完成
+    /// </summary>
+    Finish,
+    
+    /// <summary>
+    /// 失败
+    /// </summary>
+    Fail,
+}
+
+/// <summary>
+/// 进度操作
+/// </summary>
+public interface IProgressOperation : IDisposable
+{
+    /// <summary>
+    /// 进度状态
+    /// </summary>
+    ProgressState State { get; }
+
+    /// <summary>
+    /// 进度参数
+    /// </summary>
+    IProgressEvent Event { get; set; }
+
+    /// <summary>
+    /// 开始
+    /// </summary>
+    void Begin();
+
+    /// <summary>
+    /// 取消
+    /// </summary>
+    void Cancel();
+
+    /// <summary>
+    /// 暂停
+    /// </summary>
+    void Pause();
+
+    /// <summary>
+    /// 恢复
+    /// </summary>
+    void Resume();
+
+    /// <summary>
+    /// 迭代器等待
+    /// </summary>
+    IEnumerator WaitCo();
+
+    /// <summary>
+    /// 异步等待
+    /// </summary>
+    /// <returns></returns>
+    Task WaitAsync();
+
+    /// <summary>
+    /// 同步等待
+    /// </summary>
+    void Wait();
 }
 
 /// <summary>
 /// 进度参数
 /// </summary>
-public struct AProgress : IProgressHandle
+public struct AProgress : IProgressArg, IProgressEvent
 {
-    /// <summary>
-    /// 是否取消
-    /// </summary>
-    public bool IsCancel;
+    private ProgressInfo Info;
 
-    internal ProgressInfo Info;
-
-    internal Action OnCancel;
-
-    /// <summary>
-    /// 构造函数
-    /// </summary>
-    public AProgress(IProgressEvent @event)
+    /// <inheritdoc />
+    public override string ToString()
     {
-        IsCancel = false;
-        Info = new ProgressInfo();
-        OnCancel = null;
-
-        if (@event is null)
-        {
-            OnProgress = null;
-            OnComplete = null;
-            OnError = null;
-        }
-        else
-        {
-            OnProgress = @event.OnProgress;
-            OnComplete = @event.OnComplete;
-            OnError = @event.OnError;
-        }
+        return Info.ToString();
     }
 
-    /// <summary>
-    /// 取消令牌
-    /// </summary>
-    public CancellationToken CancellationToken;
-
-    /// <summary>
-    /// 总值
-    /// </summary>
+    /// <inheritdoc />
     public long Total
     {
         set => Info.Total = value;
         get => Info.Total;
     }
 
-    /// <summary>
-    /// 当前值
-    /// </summary>
+    /// <inheritdoc />
     public long Current
     {
         get => Info.Current;
         set
         {
-            if (IsCancel) return;
             Info.Current = value;
             OnProgress?.Invoke(Info);
         }
     }
 
-    /// <summary>
-    /// 当前信息
-    /// </summary>
+    /// <inheritdoc />
     public string CurrentInfo
     {
         get => Info.CurrentInfo;
         set => Info.CurrentInfo = value;
     }
 
-    /// <summary>
-    /// 进度回调
-    /// </summary>
-    public Action<IProgressInfo> OnProgress { get; set; }
-
-    /// <summary>
-    /// 完成回调
-    /// </summary>
-    public Action OnComplete { get; set; }
-
-    /// <summary>
-    /// 错误回调
-    /// </summary>
-    public Action<Exception> OnError { get; set; }
-
-    /// <summary>
-    /// 取消
-    /// </summary>
-    public void Cancel()
-    {
-        IsCancel = true;
-        if (!CancellationToken.CanBeCanceled) return;
-
-        CancellationToken.ThrowIfCancellationRequested();
-        if (OnCancel != null) CancellationToken.Register(OnCancel);
-    }
-
-    /// <summary>
-    /// 析构函数
-    /// </summary>
+    /// <inheritdoc />
     public void Dispose()
     {
-        IsCancel = false;
         OnProgress = null;
+        OnBegin = null;
         OnComplete = null;
         OnError = null;
+        OnResume = null;
+        OnPause = null;
+        OnCancel = null;
     }
+
+    /// <inheritdoc />
+    public Action<IProgressInfo> OnProgress { get; set; }
+
+    /// <inheritdoc />
+    public Action OnBegin { get; set; }
+
+    /// <inheritdoc />
+    public Action OnComplete { get; set; }
+
+    /// <inheritdoc />
+    public Action<Exception> OnError { get; set; }
+
+    /// <inheritdoc />
+    public Action OnResume { get; set; }
+
+    /// <inheritdoc />
+    public Action OnPause { get; set; }
+
+    /// <inheritdoc />
+    public Action OnCancel { get; set; }
 }

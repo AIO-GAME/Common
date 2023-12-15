@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 public partial class AHelper
@@ -76,25 +77,28 @@ public partial class AHelper
         /// </summary>
         /// <param name="stream">文件流</param>
         /// <param name="bufferSize">容量大小</param>
-        internal static async Task RemoveFileHeaderAsync(Stream stream, int bufferSize = BUFFER_SIZE)
+        /// <param name="cancellationToken">取消令牌</param>
+        internal static async Task RemoveFileHeaderAsync(Stream stream, int bufferSize = BUFFER_SIZE,
+            CancellationToken cancellationToken = default)
         {
+            if (cancellationToken == default) cancellationToken = CancellationToken.None;
             var headerSize = CODE.Length;
 
             var buffer = new byte[bufferSize];
             stream.Seek(headerSize, SeekOrigin.Begin);
-            var size = await stream.ReadAsync(buffer, 0, buffer.Length);
+            var size = await stream.ReadAsync(buffer, 0, buffer.Length, cancellationToken);
             var offset = 0;
             while (size > 0)
             {
                 stream.Seek(offset, SeekOrigin.Begin);
-                await stream.WriteAsync(buffer, 0, size);
+                await stream.WriteAsync(buffer, 0, size, cancellationToken);
                 offset += size;
                 stream.Seek(offset + headerSize, SeekOrigin.Begin);
-                size = await stream.ReadAsync(buffer, 0, buffer.Length);
+                size = await stream.ReadAsync(buffer, 0, buffer.Length, cancellationToken);
             }
 
             stream.SetLength(offset);
-            await stream.FlushAsync();
+            await stream.FlushAsync(cancellationToken);
         }
 
         internal static FileStream AddFileHeader(string localPath, string remotePath, bool isOverWrite = false)
@@ -139,14 +143,19 @@ public partial class AHelper
         internal static async Task<FileStream> AddFileHeaderAsync(
             string localPath,
             string remotePath,
-            bool isOverWrite = false)
+            bool isOverWrite = false, CancellationToken cancellationToken = default)
         {
+            if (cancellationToken == default) cancellationToken = CancellationToken.None;
+
+            var parent = localPath.Substring(0, localPath.LastIndexOf('\\'));
+            if (!Directory.Exists(parent)) Directory.CreateDirectory(parent);
+
             FileStream outputStream;
             if (File.Exists(localPath))
             {
                 outputStream = new FileStream(localPath, FileMode.Open);
                 var header = new byte[CODE.Length];
-                _ = await outputStream.ReadAsync(header, 0, header.Length);
+                _ = await outputStream.ReadAsync(header, 0, header.Length, cancellationToken);
                 var resume = !CODE.Where((t, i) => t != header[i]).Any();
                 if (resume) return outputStream;
 
@@ -164,7 +173,7 @@ public partial class AHelper
                 if (isOverWrite)
                 {
                     outputStream.Seek(0, SeekOrigin.Begin); // 清空数据 准备覆盖
-                    await outputStream.WriteAsync(CODE, 0, CODE.Length);
+                    await outputStream.WriteAsync(CODE, 0, CODE.Length, cancellationToken);
                 }
                 else // 保留数据
                 {
@@ -176,7 +185,7 @@ public partial class AHelper
             else
             {
                 outputStream = new FileStream(localPath, FileMode.Create);
-                await outputStream.WriteAsync(CODE, 0, CODE.Length);
+                await outputStream.WriteAsync(CODE, 0, CODE.Length, cancellationToken);
             }
 
             return outputStream;

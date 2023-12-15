@@ -5,6 +5,7 @@
 |*|============|*/
 
 using System;
+using System.Diagnostics;
 using AIO;
 
 /// <summary>
@@ -66,26 +67,59 @@ public struct ProgressInfo : IProgressInfo
     public long Total { get; internal set; }
 
     /// <summary>
+    /// 精度器
+    /// </summary>
+    private Stopwatch stopwatch;
+
+    /// <summary>
     /// 当前值
     /// </summary>
-    public long Current { get; internal set; }
+    public long Current
+    {
+        get
+        {
+            if (stopwatch.Elapsed.TotalSeconds > 1)
+            {
+                stopwatch.Restart();
+                Speed = (long)(_Current - _CatchCurrent / stopwatch.Elapsed.TotalSeconds);
+                _CatchCurrent = _Current;
+            }
+
+            return _Current;
+        }
+    }
+
+    /// <summary>
+    /// 当前值
+    /// </summary>
+    private long _Current;
+
+    /// <summary>
+    /// 缓存当前值
+    /// </summary>
+    private long _CatchCurrent;
+
+    /// <summary>
+    /// 每秒下载速度
+    /// </summary>
+    public long Speed;
 
     /// <summary>
     /// 进度
     /// </summary>
-    public int Progress => (int)(Current / (double)Total * 100);
+    public int Progress
+    {
+        get
+        {
+            if (Total == 0) return 0;
+            return (int)(Current / (double)Total * 100);
+        }
+    }
 
     /// <summary>
     /// 当前名称
     /// </summary>
     public string CurrentInfo { get; internal set; }
-
-    internal ProgressInfo(long total, long current, string currentInfo = null)
-    {
-        Total = total;
-        Current = current;
-        CurrentInfo = currentInfo;
-    }
 
     /// <inheritdoc />
     string IProgressInfo.ToString()
