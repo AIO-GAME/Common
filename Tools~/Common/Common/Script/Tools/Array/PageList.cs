@@ -116,6 +116,15 @@ namespace AIO
         /// <inheritdoc />
         public bool IsReadOnly => false;
 
+        /// <summary>
+        /// 反转
+        /// </summary>
+        public void Reverse()
+        {
+            Values.Reverse();
+            CurrentPageValues = GetPage(PageIndex);
+        }
+
         /// <inheritdoc />
         public IEnumerator<T> GetEnumerator()
         {
