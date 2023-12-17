@@ -5,12 +5,16 @@
 |*|============|*/
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using AIO;
 
 public partial class AHelper
 {
@@ -68,7 +72,7 @@ public partial class AHelper
                 size = stream.Read(buffer, 0, buffer.Length);
             }
 
-            stream.SetLength(offset);
+            stream.SetLength(stream.Length - headerSize);
             stream.Flush();
         }
 
@@ -78,7 +82,8 @@ public partial class AHelper
         /// <param name="stream">文件流</param>
         /// <param name="bufferSize">容量大小</param>
         /// <param name="cancellationToken">取消令牌</param>
-        internal static async Task RemoveFileHeaderAsync(Stream stream, int bufferSize = BUFFER_SIZE,
+        internal static async Task RemoveFileHeaderAsync(Stream stream,
+            int bufferSize = BUFFER_SIZE,
             CancellationToken cancellationToken = default)
         {
             if (cancellationToken == default) cancellationToken = CancellationToken.None;
@@ -86,23 +91,26 @@ public partial class AHelper
 
             var buffer = new byte[bufferSize];
             stream.Seek(headerSize, SeekOrigin.Begin);
-            var size = await stream.ReadAsync(buffer, 0, buffer.Length, cancellationToken);
             var offset = 0;
+            var size = await stream.ReadAsync(buffer, 0, bufferSize, cancellationToken);
             while (size > 0)
             {
                 stream.Seek(offset, SeekOrigin.Begin);
                 await stream.WriteAsync(buffer, 0, size, cancellationToken);
                 offset += size;
                 stream.Seek(offset + headerSize, SeekOrigin.Begin);
-                size = await stream.ReadAsync(buffer, 0, buffer.Length, cancellationToken);
+                size = await stream.ReadAsync(buffer, 0, bufferSize, cancellationToken);
             }
 
-            stream.SetLength(offset);
+            stream.SetLength(stream.Length - headerSize);
             await stream.FlushAsync(cancellationToken);
         }
 
-        internal static FileStream AddFileHeader(string localPath, string remotePath, bool isOverWrite = false)
+        internal static FileStream AddFileHeader(string localPath, string remoteMD5, bool isOverWrite = false)
         {
+            var parent = localPath.Substring(0, localPath.LastIndexOf('\\'));
+            if (!Directory.Exists(parent)) Directory.CreateDirectory(parent);
+
             FileStream outputStream;
             if (File.Exists(localPath))
             {
@@ -110,20 +118,26 @@ public partial class AHelper
                 var header = new byte[CODE.Length];
                 _ = outputStream.Read(header, 0, header.Length);
                 var resume = !CODE.Where((t, i) => t != header[i]).Any();
-                if (resume) return outputStream; // 断点续传
+                if (resume)
+                {
+                    outputStream.Seek(outputStream.Length, SeekOrigin.Begin);
+                    return outputStream; // 断点续传
+                }
 
                 outputStream.Seek(0, SeekOrigin.Begin);
-                using var md5 = System.Security.Cryptography.MD5.Create(); // 判断MD5 是否一致
-                var localMD5 = BitConverter.ToString(md5.ComputeHash(outputStream));
-                var remoteMD5 = HTTP.GetMD5(remotePath);
-
+                var localMD5 = outputStream.GetMD5(); // 判断MD5 是否一致
+                Console.WriteLine($"Local MD5 : {localMD5} Remote MD5 : {remoteMD5}");
                 if (localMD5 == remoteMD5)
                 {
                     outputStream.Close();
                     return null;
                 }
 
-                if (isOverWrite) outputStream.Write(CODE, 0, CODE.Length); // 清空数据 准备覆盖
+                if (isOverWrite)
+                {
+                    outputStream.Seek(0, SeekOrigin.Begin);
+                    outputStream.Write(CODE, 0, CODE.Length); // 清空数据 准备覆盖
+                }
                 else // 保留数据
                 {
                     outputStream.Close();
@@ -157,13 +171,18 @@ public partial class AHelper
                 var header = new byte[CODE.Length];
                 _ = await outputStream.ReadAsync(header, 0, header.Length, cancellationToken);
                 var resume = !CODE.Where((t, i) => t != header[i]).Any();
-                if (resume) return outputStream;
+                if (resume)
+                {
+                    outputStream.Seek(outputStream.Length, SeekOrigin.Begin);
+                    return outputStream; // 断点续传
+                }
 
-                using var md5 = System.Security.Cryptography.MD5.Create(); // 判断MD5 是否一致
                 outputStream.Seek(0, SeekOrigin.Begin);
-                var localMD5 = BitConverter.ToString(md5.ComputeHash(outputStream)).Replace("-", "").ToLower();
+                var localMD5 = outputStream.GetMD5();
                 var remoteMD5 = await HTTP.GetMD5Async(remotePath);
 
+                outputStream.Seek(0, SeekOrigin.Begin);
+                Console.WriteLine($"Local MD5 : {localMD5} Remote MD5 : {remoteMD5}");
                 if (localMD5 == remoteMD5)
                 {
                     outputStream.Close();
@@ -172,7 +191,6 @@ public partial class AHelper
 
                 if (isOverWrite)
                 {
-                    outputStream.Seek(0, SeekOrigin.Begin); // 清空数据 准备覆盖
                     await outputStream.WriteAsync(CODE, 0, CODE.Length, cancellationToken);
                 }
                 else // 保留数据
@@ -189,6 +207,68 @@ public partial class AHelper
             }
 
             return outputStream;
+        }
+
+        internal static IEnumerable AddFileHeaderCo(
+            string localPath,
+            string remotePath,
+            Action<FileStream> callback,
+            bool isOverWrite = false, CancellationToken cancellationToken = default)
+        {
+            if (cancellationToken == default) cancellationToken = CancellationToken.None;
+
+            var parent = localPath.Substring(0, localPath.LastIndexOf('\\'));
+            if (!Directory.Exists(parent)) Directory.CreateDirectory(parent);
+
+            FileStream outputStream;
+            if (File.Exists(localPath))
+            {
+                outputStream = new FileStream(localPath, FileMode.Open);
+                var header = new byte[CODE.Length];
+                yield return outputStream.ReadAsync(header, 0, header.Length, cancellationToken);
+                var resume = !CODE.Where((t, i) => t != header[i]).Any();
+                if (resume)
+                {
+                    outputStream.Seek(outputStream.Length, SeekOrigin.Begin);
+                    callback?.Invoke(outputStream);
+                    yield break;
+                }
+
+                var request = WebRequest.Create(remotePath.Replace("\\", "/"));
+                request.Method = WebRequestMethods.Http.Get;
+                request.Timeout = 3000;
+                using var response = request.GetResponse();
+                using var stream = response.GetResponseStream();
+                if (stream is null) throw new NetGetResponseStream("HTTP", response);
+
+                var remoteMD5 = stream.GetMD5();
+                outputStream.Seek(0, SeekOrigin.Begin);
+                var localMD5 = outputStream.GetMD5();
+
+                outputStream.Seek(0, SeekOrigin.Begin);
+                if (localMD5 == remoteMD5)
+                {
+                    outputStream.Close();
+                    callback?.Invoke(null);
+                }
+                else if (isOverWrite)
+                {
+                    yield return outputStream.WriteAsync(CODE, 0, CODE.Length, cancellationToken);
+                    callback?.Invoke(outputStream);
+                }
+                else // 保留数据
+                {
+                    outputStream.Close();
+                    Console.WriteLine($"HTTP Download : Target File Already Exists {localPath}");
+                    callback?.Invoke(null);
+                }
+            }
+            else
+            {
+                outputStream = new FileStream(localPath, FileMode.Create);
+                yield return outputStream.WriteAsync(CODE, 0, CODE.Length, cancellationToken);
+                callback?.Invoke(outputStream);
+            }
         }
     }
 }

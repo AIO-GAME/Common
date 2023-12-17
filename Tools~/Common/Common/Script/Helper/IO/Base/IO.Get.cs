@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
-using AIO;
 
 public partial class AHelper
 {
@@ -519,6 +518,26 @@ public partial class AHelper
         public static FileAttributes GetFileAttributes(string Path)
         {
             return !ExistsFile(Path) ? 0 : File.GetAttributes(Path);
+        }
+
+        /// <summary>
+        /// 获取文件SHA1
+        /// </summary>
+        /// <param name="filePath">文件路径</param>
+        /// <returns></returns>
+        /// <exception cref="FileNotFoundException">
+        ///    <paramref name="filePath" /> 不存在
+        /// </exception>
+        public static string GetFileSHA1(string filePath)
+        {
+            if (!ExistsFile(filePath)) throw new FileNotFoundException($"获取文件的哈希值 参数错误 <{filePath}>, 不存在");
+            using (var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            {
+                using var crypt = SHA1.Create(); // 判断MD5 是否一致
+                {
+                    return BitConverter.ToString(crypt.ComputeHash(fileStream)).Replace("-", "").ToLower();
+                }
+            }
         }
     }
 }

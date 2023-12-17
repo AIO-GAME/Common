@@ -173,15 +173,13 @@ public partial class AHelper
             public static string GetMD5(string remoteUrl, ushort timeout = TIMEOUT)
             {
                 var remote = remoteUrl.Replace("\\", "/");
-                var request = (HttpWebRequest)WebRequest.Create(remote);
+                var request = WebRequest.Create(remote);
                 request.Method = WebRequestMethods.Http.Get;
                 request.Timeout = timeout;
                 using var response = request.GetResponse();
                 using var stream = response.GetResponseStream();
                 if (stream is null) throw new NetGetResponseStream("HTTP", response);
-                using var md5 = System.Security.Cryptography.MD5.Create();
-                var expectedMd5Bytes = md5.ComputeHash(stream);
-                return BitConverter.ToString(expectedMd5Bytes).Replace("-", "").ToLower();
+                return stream.GetMD5();
             }
 
             /// <summary>
@@ -193,15 +191,13 @@ public partial class AHelper
             public static async Task<string> GetMD5Async(string remoteUrl, ushort timeout = TIMEOUT)
             {
                 var remote = remoteUrl.Replace("\\", "/");
-                var request = (HttpWebRequest)WebRequest.Create(remote);
+                var request = WebRequest.Create(remote);
                 request.Method = WebRequestMethods.Http.Get;
                 request.Timeout = timeout;
                 using var response = await request.GetResponseAsync();
                 using var stream = response.GetResponseStream();
                 if (stream is null) throw new NetGetResponseStream("HTTP", response);
-                using var md5 = System.Security.Cryptography.MD5.Create();
-                var expectedMd5Bytes = md5.ComputeHash(stream);
-                return BitConverter.ToString(expectedMd5Bytes).Replace("-", "").ToLower();
+                return stream.GetMD5();
             }
 
             /// <summary>

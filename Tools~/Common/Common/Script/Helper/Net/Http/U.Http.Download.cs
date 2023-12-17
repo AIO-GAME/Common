@@ -25,9 +25,9 @@ public partial class AHelper
                 private ushort Timeout { get; }
                 private int BufferSize { get; }
                 private CancellationTokenSource cancellationTokenSource { get; }
+                private CancellationToken cancellationToken;
                 private FileStream outputStream;
                 private HttpWebRequest request;
-                private CancellationToken cancellationToken;
 
                 public HttpDownloadOperation(
                     string remoteUrl,
@@ -41,7 +41,6 @@ public partial class AHelper
                     IsOverWrite = isOverWrite;
                     Timeout = timeout;
                     BufferSize = bufferSize;
-                    // 创建一个取消令牌，用于取消下载操作
                     cancellationTokenSource = new CancellationTokenSource();
                     cancellationToken = cancellationTokenSource.Token;
                 }
@@ -75,8 +74,7 @@ public partial class AHelper
                     outputStream = await AddFileHeaderAsync(LocalPath, Remote, IsOverWrite, cancellationToken);
                     if (outputStream is null)
                     {
-                        State = ProgressState.Finish;
-                        progress.OnComplete?.Invoke();
+                        State = EProgressState.Finish;
                         return;
                     }
 
@@ -88,17 +86,20 @@ public partial class AHelper
                     try
                     {
                         response = (HttpWebResponse)await request.GetResponseAsync();
-                        while (State == ProgressState.Pause) await Task.Delay(100, cancellationToken);
-                        progress.Total = response.ContentLength;
+                        while (State == EProgressState.Pause) await Task.Delay(100, cancellationToken);
+
+                        progress.Total += response.ContentLength;
                         progress.CurrentInfo = Remote;
-                        if (temp > 0) progress.Current += temp;
+                        progress.StartValue += temp;
+
                         responseStream = response.GetResponseStream();
                         if (responseStream is null) throw new NetGetResponseStream("HTTP", response);
+
                         var buffer = new byte[BufferSize];
                         var readCount = await responseStream.ReadAsync(buffer, 0, BufferSize, cancellationToken);
                         while (readCount > 0)
                         {
-                            if (State == ProgressState.Running)
+                            if (State == EProgressState.Running)
                             {
                                 await outputStream.WriteAsync(buffer, 0, readCount, cancellationToken);
                                 progress.Current += readCount;
@@ -115,27 +116,25 @@ public partial class AHelper
                         responseStream.Close();
                         outputStream.Close();
                         response.Close();
-                        State = ProgressState.Finish;
-                        progress.OnComplete?.Invoke();
+                        State = EProgressState.Finish;
                     }
                     catch (WebException ex)
                     {
                         responseStream?.Close();
                         outputStream.Close();
                         response?.Close();
-                        State = ProgressState.Fail;
+                        State = EProgressState.Fail;
                         progress.OnError?.Invoke(ex);
                     }
                 }
 
                 protected override void OnWait()
                 {
-                    if (State != ProgressState.Running) return;
-                    outputStream = AddFileHeader(LocalPath, Remote, IsOverWrite);
+                    if (State != EProgressState.Running) return;
+                    outputStream = AddFileHeader(LocalPath, GetMD5(Remote), IsOverWrite);
                     if (outputStream is null)
                     {
-                        State = ProgressState.Finish;
-                        progress.OnComplete?.Invoke();
+                        State = EProgressState.Finish;
                         return;
                     }
 
@@ -147,18 +146,20 @@ public partial class AHelper
                     try
                     {
                         response = (HttpWebResponse)request.GetResponse();
-                        while (State == ProgressState.Pause) Thread.Sleep(100);
+                        while (State == EProgressState.Pause) Thread.Sleep(100);
                         progress.Total = response.ContentLength;
                         progress.CurrentInfo = Remote;
-                        if (temp > 0) progress.Current += temp;
-                        
+
                         responseStream = response.GetResponseStream();
+                        progress.StartValue += temp;
+
                         if (responseStream is null) throw new NetGetResponseStream("HTTP", response);
                         var buffer = new byte[BufferSize];
+
                         var readCount = responseStream.Read(buffer, 0, BufferSize);
                         while (readCount > 0)
                         {
-                            if (State == ProgressState.Running)
+                            if (State == EProgressState.Running)
                             {
                                 outputStream.Write(buffer, 0, readCount);
                                 progress.Current += readCount;
@@ -169,17 +170,17 @@ public partial class AHelper
 
                         RemoveFileHeader(outputStream);
                         responseStream.Close();
+                        outputStream.Flush(true);
                         outputStream.Close();
                         response.Close();
-                        State = ProgressState.Finish;
-                        progress.OnComplete?.Invoke();
+                        State = EProgressState.Finish;
                     }
                     catch (WebException ex)
                     {
                         responseStream?.Close();
                         outputStream.Close();
                         response?.Close();
-                        State = ProgressState.Fail;
+                        State = EProgressState.Fail;
                         progress.OnError?.Invoke(ex);
                     }
                 }

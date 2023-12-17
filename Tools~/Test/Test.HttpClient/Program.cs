@@ -15,7 +15,7 @@ public class Program
         var progress = new AProgressEvent();
         progress.OnProgress += Console.WriteLine;
         progress.OnError += Console.WriteLine;
-        progress.OnComplete += () => Console.WriteLine("Download done!");
+        progress.OnComplete += Console.WriteLine;
         progress.OnBegin += () => Console.WriteLine("Download begin!");
         progress.OnPause += () => Console.WriteLine("Download pause!");
         progress.OnResume += () => Console.WriteLine("Download resume!");
@@ -24,41 +24,62 @@ public class Program
         const string serverIp = @"ftpshare-hot.ingcreations.com";
         const string user = "ftpshare-hot";
         const string pass = "ingcreations2023";
-        // using var handle = AHandle.FTP.Create(serverIp, user, pass, "Bundles");
-        // await handle.InitAsync();
-
-
-        // await handle.UploadDirAsync(@"E:\Project\AIO\20190440f1\Bundles", progress);
-        // await handle.UploadFileAsync(@"E:\WWW\G101\Version\StandaloneWindows64.json", "StandaloneWindows64.json",
-        //     progress);
-        // Console.WriteLine("Upload done!");
-        //
-        // Console.WriteLine();
-
-        var handle = AHelper.Net.HTTP.Download(
-            new[]
-            {
-                "https://ftpshare-hot.ingcreations.com/Bundles/android-ndk-r16b-windows-x86_64.zip",
-                "https://ftpshare-hot.ingcreations.com/Bundles/Version/StandaloneWindows64.json"
-            },
-            @"E:\WWW\Test");
-
+        const string remote = "ftp://ftpshare-hot.ingcreations.com/Test/android-ndk-r16b-windows-x86_64.zip";
+        var handle = AHelper.Net.FTP.DownloadFile(remote, user, pass, @"E:\WWW\Test\android-ndk-r16b-windows-x86_64.zip");
         handle.Event = progress;
         handle.Begin();
+
+        var index = 0;
         Task.Factory.StartNew(async () =>
         {
-            while (handle.State != ProgressState.Finish && handle.State != ProgressState.Fail)
+            while (handle.Report.State != EProgressState.Finish &&
+                   handle.Report.State != EProgressState.Fail &&
+                   handle.Report.State != EProgressState.Cancel)
             {
                 await Task.Delay(1000);
                 handle.Pause();
                 await Task.Delay(1000);
                 handle.Resume();
+
+                // if (index++ == 3)
+                // {
+                //     handle.Cancel();
+                // }
             }
 
             handle.Dispose();
         });
-
         await handle.WaitAsync();
+        // await handle.UploadFileAsync(@"E:\WWW\G101\Version\StandaloneWindows64.json", "StandaloneWindows64.json",
+        //     progress);
+
+
+        // var handle = AHelper.Net.HTTP.Download(
+        //     //"https://googledownloads.cn/android/repository/android-ndk-r26b-windows.zip",
+        //     // "https://ftpshare-hot.ingcreations.com/Bundles/android-ndk-r16b-windows-x86_64.zip",
+        //     new[]
+        //     {
+        //         "https://ftpshare-hot.ingcreations.com/Bundles/android-ndk-r16b-windows-x86_64.zip",
+        //         "https://ftpshare-hot.ingcreations.com/Bundles/Version/StandaloneWindows64.json"
+        //     },
+        //     @"E:\WWW\Test", true);
+        //
+        // handle.Event = progress;
+        // handle.Begin();
+        // Task.Factory.StartNew(async () =>
+        // {
+        //     while (handle.Report.State != EProgressState.Finish && handle.Report.State != EProgressState.Fail)
+        //     {
+        //         await Task.Delay(1000);
+        //         handle.Pause();
+        //         await Task.Delay(1000);
+        //         handle.Resume();
+        //     }
+        //
+        //     handle.Dispose();
+        // });
+        //
+        // await handle.WaitAsync();
     }
 
     public static void P(string name)

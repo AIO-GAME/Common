@@ -4,6 +4,7 @@
 |*|E-Mail:     |*| xinansky99@foxmail.com
 |*|============|*/
 
+using System;
 using System.Collections;
 using System.Threading.Tasks;
 
@@ -12,14 +13,22 @@ using System.Threading.Tasks;
 /// </summary>
 public class AOperation : IProgressOperation
 {
-    /// <inheritdoc />
-    public ProgressState State { get; protected set; }
-
-
     /// <summary>
     /// 进度回调参数
     /// </summary>
-    protected AProgress progress;
+    protected readonly AProgress progress;
+
+    /// <summary>
+    /// 状态
+    /// </summary>
+    protected EProgressState State
+    {
+        get => progress.State;
+        set => progress.State = value;
+    }
+
+    /// <inheritdoc />
+    public IProgressReport Report => progress;
 
     /// <inheritdoc />
     public IProgressEvent Event
@@ -43,14 +52,14 @@ public class AOperation : IProgressOperation
     public AOperation()
     {
         progress = new AProgress();
-        State = ProgressState.Ready;
     }
 
     /// <inheritdoc />
     public void Begin()
     {
-        if (State != ProgressState.Ready) return;
-        State = ProgressState.Running;
+        if (State != EProgressState.Ready) return;
+        State = EProgressState.Running;
+        progress.Begin();
         OnBegin();
         progress.OnBegin?.Invoke();
     }
@@ -61,14 +70,15 @@ public class AOperation : IProgressOperation
         switch (State)
         {
             default:
-            case ProgressState.Fail:
-            case ProgressState.Cancel:
-            case ProgressState.Finish:
+            case EProgressState.Fail:
+            case EProgressState.Cancel:
+            case EProgressState.Finish:
                 return;
-            case ProgressState.Pause:
-            case ProgressState.Ready:
-            case ProgressState.Running:
-                State = ProgressState.Cancel;
+            case EProgressState.Pause:
+            case EProgressState.Ready:
+            case EProgressState.Running:
+                State = EProgressState.Cancel;
+                progress.Cancel();
                 OnCancel();
                 progress.OnCancel?.Invoke();
                 break;
@@ -81,14 +91,15 @@ public class AOperation : IProgressOperation
         switch (State)
         {
             default:
-            case ProgressState.Fail:
-            case ProgressState.Ready:
-            case ProgressState.Cancel:
-            case ProgressState.Finish:
-            case ProgressState.Pause:
+            case EProgressState.Fail:
+            case EProgressState.Ready:
+            case EProgressState.Cancel:
+            case EProgressState.Finish:
+            case EProgressState.Pause:
                 return;
-            case ProgressState.Running:
-                State = ProgressState.Pause;
+            case EProgressState.Running:
+                State = EProgressState.Pause;
+                progress.Pause();
                 OnPause();
                 progress.OnPause?.Invoke();
                 break;
@@ -101,14 +112,15 @@ public class AOperation : IProgressOperation
         switch (State)
         {
             default:
-            case ProgressState.Fail:
-            case ProgressState.Ready:
-            case ProgressState.Cancel:
-            case ProgressState.Finish:
-            case ProgressState.Running:
+            case EProgressState.Fail:
+            case EProgressState.Ready:
+            case EProgressState.Cancel:
+            case EProgressState.Finish:
+            case EProgressState.Running:
                 return;
-            case ProgressState.Pause:
-                State = ProgressState.Running;
+            case EProgressState.Pause:
+                State = EProgressState.Running;
+                progress.Resume();
                 OnResume();
                 progress.OnResume?.Invoke();
                 break;
@@ -118,8 +130,9 @@ public class AOperation : IProgressOperation
     /// <inheritdoc />
     public IEnumerator WaitCo()
     {
-        if (State != ProgressState.Running) yield break;
+        if (State != EProgressState.Running) yield break;
         yield return OnWaitCo();
+        Finish();
     }
 
     /// <summary>
@@ -127,14 +140,21 @@ public class AOperation : IProgressOperation
     /// </summary>
     protected virtual IEnumerator OnWaitCo()
     {
-        yield break;
+        yield return null;
     }
 
     /// <inheritdoc />
-    public Task WaitAsync()
+    public async Task WaitAsync()
     {
-        if (State != ProgressState.Running) throw new TaskCanceledException();
-        return OnWaitAsync();
+        if (State != EProgressState.Running) return;
+        await OnWaitAsync();
+        Finish();
+    }
+
+    private void Finish()
+    {
+        progress.Complete();
+        progress.OnComplete?.Invoke(progress);
     }
 
     /// <summary>
@@ -148,8 +168,9 @@ public class AOperation : IProgressOperation
     /// <inheritdoc />
     public void Wait()
     {
-        if (State != ProgressState.Running) return;
+        if (State != EProgressState.Running) return;
         OnWait();
+        Finish();
     }
 
     /// <summary>
@@ -198,5 +219,23 @@ public class AOperation : IProgressOperation
     /// </summary>
     protected virtual void OnDispose()
     {
+    }
+
+    /// <inheritdoc />
+    public sealed override string ToString()
+    {
+        return Report.ToString();
+    }
+
+    /// <inheritdoc />
+    public sealed override int GetHashCode()
+    {
+        return 0;
+    }
+
+    /// <inheritdoc />
+    public sealed override bool Equals(object obj)
+    {
+        return false;
     }
 }
