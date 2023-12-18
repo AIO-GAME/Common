@@ -1,4 +1,4 @@
-﻿#if NO_UNITY
+﻿#if !UNITY
 using System.Collections;
 using System.Threading.Tasks;
 

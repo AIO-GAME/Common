@@ -36,7 +36,7 @@ public partial class AProgress : IProgressEvent
 public partial class AProgress : IProgressInfo
 {
     /// <inheritdoc />
-    public long Total
+    public long TotalValue
     {
         get => _Total + _StartValue;
         set => _Total = value;
@@ -51,18 +51,18 @@ public partial class AProgress : IProgressInfo
     public string CurrentInfo { get; internal set; }
 
     /// <inheritdoc />
-    public string CurrentStr => Current.ToConverseStringFileSize();
+    public string CurrentStr => CurrentValue.ToConverseStringFileSize();
 
     /// <inheritdoc />
-    public string TotalStr => Total.ToConverseStringFileSize();
+    public string TotalStr => TotalValue.ToConverseStringFileSize();
 
     /// <inheritdoc />
-    public long Current
+    public long CurrentValue
     {
-        get => _Current;
+        get => _CurrentValue;
         set
         {
-            _Current = value;
+            _CurrentValue = value;
             Update();
             OnProgress?.Invoke(this);
         }
@@ -73,8 +73,8 @@ public partial class AProgress : IProgressInfo
     {
         get
         {
-            if (Total == 0) return 0;
-            return (int)(_Current / (double)Total * 100);
+            if (TotalValue <= 0) return 0;
+            return (int)(_CurrentValue / (double)TotalValue * 100);
         }
     }
 
@@ -103,7 +103,7 @@ public partial class AProgress : IDisposable
     /// <summary>
     /// 当前值
     /// </summary>
-    private long _Current;
+    private long _CurrentValue;
 
     /// <summary>
     /// 缓存当前值
@@ -123,15 +123,15 @@ public partial class AProgress : IDisposable
     /// <summary>
     /// 更新
     /// </summary>
-    public void Update()
+    private void Update()
     {
         var tempSecond = Watch.Elapsed.TotalSeconds;
         if (tempSecond < 1) return;
         Watch.Stop();
-        _IntervalQuantity = _Current - _CatchCurrent;
+        _IntervalQuantity = _CurrentValue - _CatchCurrent;
         if (_IntervalQuantity > 0) Speed = (long)(_IntervalQuantity / tempSecond);
         else Speed = 0;
-        _CatchCurrent = _Current;
+        _CatchCurrent = _CurrentValue;
         Watch.Restart();
     }
 
@@ -141,7 +141,7 @@ public partial class AProgress : IDisposable
     public AProgress()
     {
         State = EProgressState.Ready;
-        _StartValue = _Current = _CatchCurrent = Total = Speed = 0;
+        _StartValue = _CurrentValue = _CatchCurrent = TotalValue = Speed = 0;
         Watch = new Stopwatch();
     }
 
@@ -151,7 +151,7 @@ public partial class AProgress : IDisposable
     public void Begin()
     {
         RecordTime = StartTime = DateTime.UtcNow;
-        _CatchCurrent = _Current;
+        _CatchCurrent = _CurrentValue = _StartValue;
         StartProgress = Progress;
         Watch.Start();
     }
@@ -166,7 +166,7 @@ public partial class AProgress : IDisposable
         RemainingTime += DateTime.UtcNow - RecordTime;
         EndTime = DateTime.UtcNow;
         LastProgress = Progress;
-        EndValue = _Current;
+        EndValue = _CurrentValue;
     }
 
     /// <summary>
@@ -175,7 +175,7 @@ public partial class AProgress : IDisposable
     public void Resume()
     {
         RecordTime = DateTime.UtcNow;
-        _CatchCurrent = _Current;
+        _CatchCurrent = _CurrentValue;
         Watch.Start();
     }
 
@@ -271,7 +271,7 @@ public partial class AProgress : IProgressReport
         set
         {
             if (value <= 0) return;
-            EndValue = _CatchCurrent = _Current = _StartValue = value;
+            EndValue = _CatchCurrent = _CurrentValue = _StartValue = value;
             StartProgress = Progress;
         }
     }

@@ -514,6 +514,7 @@
     <Compile Include="Script\Extension\Struct\Long\LongExtened.Extend.cs" />
     <Compile Include="Script\Handle\AHandle.cs" />
     <Compile Include="Script\Handle\Net\FTP\Handle.FTP.cs" />
+    <Compile Include="Script\Handle\Net\FTP\Handle.FTP.Task.cs" />
     <Compile Include="Script\Handle\Net\HTTP\Handle.HTTP.cs" />
     <Compile Include="Script\Handle\Progress\AOperation.cs" />
     <Compile Include="Script\Handle\Progress\AProgress.cs" />
@@ -527,6 +528,8 @@
     <Compile Include="Script\Helper\Database\U.FileID.cs" />
     <Compile Include="Script\Helper\Database\U.Json.MINIJSON.cs" />
     <Compile Include="Script\Helper\Exception\NetGetResponseStream.cs" />
+    <Compile Include="Script\Helper\IO\Base\IO.GetDir.cs" />
+    <Compile Include="Script\Helper\IO\Base\IO.GetFile.cs" />
     <Compile Include="Script\Helper\Net\Client\Buffer.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Check.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Create.cs" />
@@ -548,6 +551,8 @@
     <Compile Include="Script\Helper\Net\HTTP\U.Http.Post.cs" />
     <Compile Include="Script\Helper\Net\HTTP\U.Http.Put.cs" />
     <Compile Include="Script\Helper\Net\HTTP\U.Http.Trace.cs" />
+    <Compile Include="Script\Helper\Net\U.FTP.cs" />
+    <Compile Include="Script\Helper\Net\U.HTTP.cs" />
     <Compile Include="Script\Helper\Net\U.Net.cs" />
     <Compile Include="Script\Helper\Net\U.Net.Helper.cs" />
     <Compile Include="Script\Helper\Reflect\U.Reflect.cs" />

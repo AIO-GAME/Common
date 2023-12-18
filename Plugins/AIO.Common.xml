@@ -296,40 +296,101 @@
             nameof(StreamExtend)
             </summary>
         </member>
-        <member name="M:AIO.StreamExtend.GetMD5(System.IO.Stream)">
+        <member name="F:AIO.StreamExtend.BUFFER_SIZE">
+            <summary>
+            缓冲区大小
+            </summary>
+        </member>
+        <member name="M:AIO.StreamExtend.GetMD5(System.IO.Stream,System.Int64)">
             <summary>
             获取MD5
             </summary>
+            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得MD5
+            实现稍微复杂，但可使用与传输文件或接收文件时同步计算MD5值
+            可自定义缓冲区大小，计算速度较快
             <param name="stream">流数据</param>
+            <param name="bufferSize">容器大小</param>
             <returns>MD5</returns>
         </member>
-        <member name="M:AIO.StreamExtend.GetSHA1(System.IO.Stream)">
+        <member name="M:AIO.StreamExtend.GetMD5Async(System.IO.Stream,System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            获取MD5
+            </summary>
+            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得MD5
+            实现稍微复杂，但可使用与传输文件或接收文件时同步计算MD5值
+            可自定义缓冲区大小，计算速度较快
+            <param name="stream">流数据</param>
+            <param name="bufferSize">容器大小</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns>MD5</returns>
+        </member>
+        <member name="M:AIO.StreamExtend.GetSHA1Async(System.IO.Stream,System.Int64,System.Threading.CancellationToken)">
             <summary>
             获取SHA1
             </summary>
             <param name="stream">流数据</param>
+            <param name="bufferSize">容器大小</param>
+            <param name="cancellationToken">取消令牌</param>
             <returns>SHA1</returns>
         </member>
-        <member name="M:AIO.StreamExtend.GetSHA256(System.IO.Stream)">
+        <member name="M:AIO.StreamExtend.GetSHA1(System.IO.Stream,System.Int64)">
+            <summary>
+            获取SHA1
+            </summary>
+            <param name="bufferSize">容器大小</param>
+            <param name="stream">流数据</param>
+            <returns>SHA1</returns>
+        </member>
+        <member name="M:AIO.StreamExtend.GetSHA256Async(System.IO.Stream,System.Int64,System.Threading.CancellationToken)">
             <summary>
             获取SHA256
             </summary>
             <param name="stream">流数据</param>
-            <returns>SHA256</returns>
+            <param name="bufferSize">容器大小</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns>SHA1</returns>
         </member>
-        <member name="M:AIO.StreamExtend.GetSHA512(System.IO.Stream)">
+        <member name="M:AIO.StreamExtend.GetSHA256(System.IO.Stream,System.Int64)">
             <summary>
-            获取SHA512
+            获取SHA256
             </summary>
+            <param name="bufferSize">容器大小</param>
             <param name="stream">流数据</param>
-            <returns>SHA512</returns>
+            <returns>SHA1</returns>
         </member>
-        <member name="M:AIO.StreamExtend.GetSHA384(System.IO.Stream)">
+        <member name="M:AIO.StreamExtend.GetSHA384Async(System.IO.Stream,System.Int64,System.Threading.CancellationToken)">
             <summary>
             获取SHA384
             </summary>
             <param name="stream">流数据</param>
-            <returns>SHA384</returns>
+            <param name="bufferSize">容器大小</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns>SHA1</returns>
+        </member>
+        <member name="M:AIO.StreamExtend.GetSHA384(System.IO.Stream,System.Int64)">
+            <summary>
+            获取SHA384
+            </summary>
+            <param name="bufferSize">容器大小</param>
+            <param name="stream">流数据</param>
+            <returns>SHA1</returns>
+        </member>
+        <member name="M:AIO.StreamExtend.GetSHA512Async(System.IO.Stream,System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            获取SHA512
+            </summary>
+            <param name="stream">流数据</param>
+            <param name="bufferSize">容器大小</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns>SHA1</returns>
+        </member>
+        <member name="M:AIO.StreamExtend.GetSHA512(System.IO.Stream,System.Int64)">
+            <summary>
+            获取SHA512
+            </summary>
+            <param name="bufferSize">容器大小</param>
+            <param name="stream">流数据</param>
+            <returns>SHA1</returns>
         </member>
         <member name="T:AIO.ExtendStringBuilder">
             <summary>
@@ -13281,6 +13342,9 @@
             <summary>
             FTP 处理器
             </summary>
+            <summary>
+            FTP 处理器
+            </summary>
         </member>
         <member name="M:AHandle.FTP.Create(System.String,System.String,System.String,System.String)">
             <summary>
@@ -13356,11 +13420,6 @@
             <param name="password">密码</param>
             <param name="remotePath">远端默认跟文件夹</param>
         </member>
-        <member name="M:AHandle.FTP.InitAsync">
-            <summary>
-            初始化
-            </summary>
-        </member>
         <member name="M:AHandle.FTP.Init">
             <summary>
             初始化
@@ -13376,20 +13435,7 @@
             <param name="currentRemotePath">当前远端路径</param>
             <param name="newRemoteName">新远端路径</param>
         </member>
-        <member name="M:AHandle.FTP.MoveAsync(System.String,System.String)">
-            <summary>
-            移动文件
-            </summary>
-            <param name="currentRemotePath">当前远端路径</param>
-            <param name="newRemoteName">新远端路径</param>
-        </member>
         <member name="M:AHandle.FTP.DeleteFile(System.String)">
-            <summary>
-            删除文件
-            </summary>
-            <param name="remotePath">远端文件路径</param>
-        </member>
-        <member name="M:AHandle.FTP.DeleteFileAsync(System.String)">
             <summary>
             删除文件
             </summary>
@@ -13401,19 +13447,7 @@
             </summary>
             <param name="remotePath">远端文件夹路径</param>
         </member>
-        <member name="M:AHandle.FTP.DeleteDirAsync(System.String)">
-            <summary>
-            删除文件夹
-            </summary>
-            <param name="remotePath">远端文件夹路径</param>
-        </member>
         <member name="M:AHandle.FTP.CreateDir(System.String)">
-            <summary>
-            创建文件夹
-            </summary>
-            <param name="remotePath">远端文件夹路径</param>
-        </member>
-        <member name="M:AHandle.FTP.CreateDirAsync(System.String)">
             <summary>
             创建文件夹
             </summary>
@@ -13428,21 +13462,6 @@
             <param name="iEvent">回调</param>
         </member>
         <member name="M:AHandle.FTP.UploadFile(System.String,IProgressEvent)">
-            <summary>
-            上传文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="iEvent">回调</param>
-        </member>
-        <member name="M:AHandle.FTP.UploadFileAsync(System.String,System.String,IProgressEvent)">
-            <summary>
-            上传文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="remotePath">远端路径</param>
-            <param name="iEvent">回调</param>
-        </member>
-        <member name="M:AHandle.FTP.UploadFileAsync(System.String,IProgressEvent)">
             <summary>
             上传文件
             </summary>
@@ -13468,25 +13487,6 @@
             <param name="searchPattern">搜索字段</param>
             <param name="searchOption">搜索模式</param>
         </member>
-        <member name="M:AHandle.FTP.UploadDirAsync(System.String,System.String,IProgressEvent,System.IO.SearchOption,System.String)">
-            <summary>
-            上传文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="remotePath">远端路径</param>
-            <param name="iEvent">回调</param>
-            <param name="searchPattern">搜索字段</param>
-            <param name="searchOption">搜索模式</param>
-        </member>
-        <member name="M:AHandle.FTP.UploadDirAsync(System.String,IProgressEvent,System.IO.SearchOption,System.String)">
-            <summary>
-            上传文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="iEvent">回调</param>
-            <param name="searchPattern">搜索字段</param>
-            <param name="searchOption">搜索模式</param>
-        </member>
         <member name="M:AHandle.FTP.DownloadFile(System.String,System.String,IProgressEvent,System.Boolean)">
             <summary>
             下载文件
@@ -13496,27 +13496,7 @@
             <param name="iEvent">回调</param>
             <param name="isOverWrite">是否重写</param>
         </member>
-        <member name="M:AHandle.FTP.DownloadFileAsync(System.String,System.String,IProgressEvent,System.Boolean)">
-            <summary>
-            下载文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="remotePath">远端路径</param>
-            <param name="iEvent">回调</param>
-            <param name="isOverWrite">是否重写</param>
-        </member>
         <member name="M:AHandle.FTP.DownloadDir(System.String,System.String,IProgressEvent,System.IO.SearchOption,System.String,System.Boolean)">
-            <summary>
-            下载文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="remotePath">远端路径</param>
-            <param name="iEvent">回调</param>
-            <param name="searchPattern">搜索字段</param>
-            <param name="searchOption">搜索模式</param>
-            <param name="isOverWrite">是否重写</param>
-        </member>
-        <member name="M:AHandle.FTP.DownloadDirAsync(System.String,System.String,IProgressEvent,System.IO.SearchOption,System.String,System.Boolean)">
             <summary>
             下载文件
             </summary>
@@ -13537,24 +13517,7 @@
             <param name="searchOption">搜索模式</param>
             <param name="isOverWrite">是否重写</param>
         </member>
-        <member name="M:AHandle.FTP.DownloadDirAsync(System.String,IProgressEvent,System.IO.SearchOption,System.String,System.Boolean)">
-            <summary>
-            下载文件
-            </summary>
-            <param name="localPath">本地文件</param>
-            <param name="iEvent">回调</param>
-            <param name="searchPattern">搜索字段</param>
-            <param name="searchOption">搜索模式</param>
-            <param name="isOverWrite">是否重写</param>
-        </member>
         <member name="M:AHandle.FTP.GetFileSize(System.String)">
-            <summary>
-            获取文件大小
-            </summary>
-            <param name="remotePath">远端路径</param>
-            <returns>文件大小</returns>
-        </member>
-        <member name="M:AHandle.FTP.GetFileSizeAsync(System.String)">
             <summary>
             获取文件大小
             </summary>
@@ -13569,17 +13532,89 @@
             <param name="keyword">获取指定文件夹 空时获取全部 当获取类型为全部时 则不生效</param>
             <returns>文件列表</returns>
         </member>
-        <member name="M:AHandle.FTP.GetListAsync(System.String,System.String)">
+        <member name="M:AHandle.FTP.GetListFile(System.String,System.String)">
             <summary>
-            获取文件夹列表
+            获取文件列表
             </summary>
             <param name="remotePath">远端路径</param>
             <param name="keyword">获取指定文件夹 空时获取全部 当获取类型为全部时 则不生效</param>
             <returns>文件列表</returns>
         </member>
-        <member name="M:AHandle.FTP.GetListFile(System.String,System.String)">
+        <member name="M:AHandle.FTP.Check(System.String)">
             <summary>
-            获取文件列表
+            检查FTP是否有效
+            </summary>
+            <returns>Ture:有效 False:无效</returns>
+        </member>
+        <member name="M:AHandle.FTP.CheckFile(System.String)">
+            <summary>
+            检查文件是否有效
+            </summary>
+            <returns>Ture:有效 False:无效</returns>
+        </member>
+        <member name="M:AHandle.FTP.CheckDir(System.String)">
+            <summary>
+            检查文件夹是否有效
+            </summary>
+            <returns>Ture:有效 False:无效</returns>
+        </member>
+        <member name="M:AHandle.FTP.Dispose">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="M:AHandle.FTP.InitAsync">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:AHandle.FTP.MoveAsync(System.String,System.String)">
+            <summary>
+            移动文件
+            </summary>
+            <param name="currentRemotePath">当前远端路径</param>
+            <param name="newRemoteName">新远端路径</param>
+        </member>
+        <member name="M:AHandle.FTP.DeleteFileAsync(System.String)">
+            <summary>
+            删除文件
+            </summary>
+            <param name="remotePath">远端文件路径</param>
+        </member>
+        <member name="M:AHandle.FTP.DeleteDirAsync(System.String)">
+            <summary>
+            删除文件夹
+            </summary>
+            <param name="remotePath">远端文件夹路径</param>
+        </member>
+        <member name="M:AHandle.FTP.CreateDirAsync(System.String)">
+            <summary>
+            创建文件夹
+            </summary>
+            <param name="remotePath">远端文件夹路径</param>
+        </member>
+        <member name="M:AHandle.FTP.UploadDirAsync(System.String,System.String,IProgressEvent,System.IO.SearchOption,System.String)">
+            <summary>
+            上传文件
+            </summary>
+            <param name="localPath">本地文件</param>
+            <param name="remotePath">远端路径</param>
+            <param name="iEvent">回调</param>
+            <param name="searchPattern">搜索字段</param>
+            <param name="searchOption">搜索模式</param>
+        </member>
+        <member name="M:AHandle.FTP.DownloadFileAsync(System.String,System.String,IProgressEvent,System.Boolean)">
+            <summary>
+            下载文件
+            </summary>
+            <param name="localPath">本地文件</param>
+            <param name="remotePath">远端路径</param>
+            <param name="iEvent">回调</param>
+            <param name="isOverWrite">是否重写</param>
+        </member>
+        <member name="M:AHandle.FTP.GetListAsync(System.String,System.String)">
+            <summary>
+            获取文件夹列表
             </summary>
             <param name="remotePath">远端路径</param>
             <param name="keyword">获取指定文件夹 空时获取全部 当获取类型为全部时 则不生效</param>
@@ -13592,6 +13627,24 @@
             <param name="remotePath">远端路径</param>
             <param name="keyword">获取指定文件夹 空时获取全部 当获取类型为全部时 则不生效</param>
             <returns>文件列表</returns>
+        </member>
+        <member name="M:AHandle.FTP.CheckAsync(System.String)">
+            <summary>
+            检查FTP是否有效
+            </summary>
+            <returns>Ture:有效 False:无效</returns>
+        </member>
+        <member name="M:AHandle.FTP.CheckFileAsync(System.String)">
+            <summary>
+            检查文件是否有效
+            </summary>
+            <returns>Ture:有效 False:无效</returns>
+        </member>
+        <member name="M:AHandle.FTP.CheckDirAsync(System.String)">
+            <summary>
+            检查文件夹是否有效
+            </summary>
+            <returns>Ture:有效 False:无效</returns>
         </member>
         <member name="M:AHandle.FTP.GetListDir(System.String,System.String)">
             <summary>
@@ -13609,46 +13662,57 @@
             <param name="keyword">获取指定文件夹 空时获取全部 当获取类型为全部时 则不生效</param>
             <returns>文件列表</returns>
         </member>
-        <member name="M:AHandle.FTP.Check(System.String)">
+        <member name="M:AHandle.FTP.DownloadDirAsync(System.String,IProgressEvent,System.IO.SearchOption,System.String,System.Boolean)">
             <summary>
-            检查FTP是否有效
+            下载文件
             </summary>
-            <returns>Ture:有效 False:无效</returns>
+            <param name="localPath">本地文件</param>
+            <param name="iEvent">回调</param>
+            <param name="searchPattern">搜索字段</param>
+            <param name="searchOption">搜索模式</param>
+            <param name="isOverWrite">是否重写</param>
         </member>
-        <member name="M:AHandle.FTP.CheckAsync(System.String)">
+        <member name="M:AHandle.FTP.GetFileSizeAsync(System.String)">
             <summary>
-            检查FTP是否有效
+            获取文件大小
             </summary>
-            <returns>Ture:有效 False:无效</returns>
+            <param name="remotePath">远端路径</param>
+            <returns>文件大小</returns>
         </member>
-        <member name="M:AHandle.FTP.CheckFile(System.String)">
+        <member name="M:AHandle.FTP.DownloadDirAsync(System.String,System.String,IProgressEvent,System.IO.SearchOption,System.String,System.Boolean)">
             <summary>
-            检查文件是否有效
+            下载文件
             </summary>
-            <returns>Ture:有效 False:无效</returns>
+            <param name="localPath">本地文件</param>
+            <param name="remotePath">远端路径</param>
+            <param name="iEvent">回调</param>
+            <param name="searchPattern">搜索字段</param>
+            <param name="searchOption">搜索模式</param>
+            <param name="isOverWrite">是否重写</param>
         </member>
-        <member name="M:AHandle.FTP.CheckFileAsync(System.String)">
+        <member name="M:AHandle.FTP.UploadDirAsync(System.String,IProgressEvent,System.IO.SearchOption,System.String)">
             <summary>
-            检查文件是否有效
+            上传文件
             </summary>
-            <returns>Ture:有效 False:无效</returns>
+            <param name="localPath">本地文件</param>
+            <param name="iEvent">回调</param>
+            <param name="searchPattern">搜索字段</param>
+            <param name="searchOption">搜索模式</param>
         </member>
-        <member name="M:AHandle.FTP.CheckDir(System.String)">
+        <member name="M:AHandle.FTP.UploadFileAsync(System.String,System.String,IProgressEvent)">
             <summary>
-            检查文件夹是否有效
+            上传文件
             </summary>
-            <returns>Ture:有效 False:无效</returns>
+            <param name="localPath">本地文件</param>
+            <param name="remotePath">远端路径</param>
+            <param name="iEvent">回调</param>
         </member>
-        <member name="M:AHandle.FTP.CheckDirAsync(System.String)">
+        <member name="M:AHandle.FTP.UploadFileAsync(System.String,IProgressEvent)">
             <summary>
-            检查文件夹是否有效
+            上传文件
             </summary>
-            <returns>Ture:有效 False:无效</returns>
-        </member>
-        <member name="M:AHandle.FTP.Dispose">
-            <summary>
-            释放
-            </summary>
+            <param name="localPath">本地文件</param>
+            <param name="iEvent">回调</param>
         </member>
         <member name="T:AOperation">
             <summary>
@@ -13660,9 +13724,14 @@
             进度回调参数
             </summary>
         </member>
-        <member name="P:AOperation.State">
+        <member name="P:AOperation.cancellationTokenSource">
             <summary>
-            状态
+            取消令牌
+            </summary>
+        </member>
+        <member name="P:AOperation.cancellationToken">
+            <summary>
+            取消令牌
             </summary>
         </member>
         <member name="P:AOperation.Report">
@@ -13670,6 +13739,31 @@
         </member>
         <member name="P:AOperation.Event">
             <inheritdoc />
+        </member>
+        <member name="P:AOperation.State">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:AOperation.CurrentInfo">
+            <summary>
+            当前信息
+            </summary>
+        </member>
+        <member name="P:AOperation.StartValue">
+            <summary>
+            开始值
+            </summary>
+        </member>
+        <member name="P:AOperation.TotalValue">
+            <summary>
+            总进度
+            </summary>
+        </member>
+        <member name="P:AOperation.CurrentValue">
+            <summary>
+            当前进度
+            </summary>
         </member>
         <member name="M:AOperation.#ctor">
             <summary>
@@ -13688,15 +13782,10 @@
         <member name="M:AOperation.Resume">
             <inheritdoc />
         </member>
-        <member name="M:AOperation.WaitCo">
+        <member name="M:AOperation.WaitAsync">
             <inheritdoc />
         </member>
-        <member name="M:AOperation.OnWaitCo">
-            <summary>
-            迭代器等待
-            </summary>
-        </member>
-        <member name="M:AOperation.WaitAsync">
+        <member name="M:AOperation.WaitAsyncCallBack">
             <inheritdoc />
         </member>
         <member name="M:AOperation.OnWaitAsync">
@@ -13775,7 +13864,7 @@
         <member name="P:AProgress.OnCancel">
             <inheritdoc />
         </member>
-        <member name="P:AProgress.Total">
+        <member name="P:AProgress.TotalValue">
             <inheritdoc />
         </member>
         <member name="P:AProgress.Speed">
@@ -13790,7 +13879,7 @@
         <member name="P:AProgress.TotalStr">
             <inheritdoc />
         </member>
-        <member name="P:AProgress.Current">
+        <member name="P:AProgress.CurrentValue">
             <inheritdoc />
         </member>
         <member name="P:AProgress.Progress">
@@ -13809,7 +13898,7 @@
             间隔数量
             </summary>
         </member>
-        <member name="F:AProgress._Current">
+        <member name="F:AProgress._CurrentValue">
             <summary>
             当前值
             </summary>
@@ -14028,12 +14117,12 @@
             总大小
             </summary>
         </member>
-        <member name="P:IProgressInfo.Total">
+        <member name="P:IProgressInfo.TotalValue">
             <summary>
             总值
             </summary>
         </member>
-        <member name="P:IProgressInfo.Current">
+        <member name="P:IProgressInfo.CurrentValue">
             <summary>
             当前值
             </summary>
@@ -14094,11 +14183,6 @@
             恢复
             </summary>
         </member>
-        <member name="M:IProgressOperation.WaitCo">
-            <summary>
-            迭代器等待
-            </summary>
-        </member>
         <member name="M:IProgressOperation.WaitAsync">
             <summary>
             异步等待
@@ -14108,6 +14192,11 @@
         <member name="M:IProgressOperation.Wait">
             <summary>
             同步等待
+            </summary>
+        </member>
+        <member name="M:IProgressOperation.WaitAsyncCallBack">
+            <summary>
+            异步回调
             </summary>
         </member>
         <member name="T:IProgressReport">
@@ -14231,1687 +14320,322 @@
             </summary>
             <returns>fileid</returns>
         </member>
-        <member name="T:AHelper.Net">
-            <summary>
-            网络 工具类
-            </summary>
-            <summary>
-            网络 工具类
-            </summary>
-            <summary>
-            网络 工具类
-            </summary>
-            <summary>
-            网络 工具类
-            </summary>
-        </member>
-        <member name="T:AHelper.Net.FTP">
-            <summary>
-            FTP
-            </summary>
-        </member>
-        <member name="M:AHelper.Net.FTP.Check(System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            判断FTP连接
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="timeout">超时</param>
-            <returns>Ture:有效 False:无效</returns>
-        </member>
-        <member name="M:AHelper.Net.FTP.CheckAsync(System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            判断FTP连接
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="timeout">超时</param>
-            <returns>Ture:有效 False:无效</returns>
-        </member>
-        <member name="M:AHelper.Net.FTP.CheckFile(System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            判断FTP路径是否为文件
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="timeout">超时</param>
-            <returns>Ture:是 False:不是</returns>
-        </member>
-        <member name="M:AHelper.Net.FTP.CheckFileAsync(System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            判断FTP路径是否为文件
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="timeout">超时</param>
-            <returns>Ture:是 False:不是</returns>
-        </member>
-        <member name="M:AHelper.Net.FTP.CheckDir(System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            判断FTP路径是否为文件夹
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="timeout">超时</param>
-            <returns>Ture:是 False:不是</returns>
-        </member>
-        <member name="M:AHelper.Net.FTP.CheckDirAsync(System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            判断FTP路径是否为文件夹
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="timeout">超时</param>
-            <returns>Ture:是 False:不是</returns>
-        </member>
-        <member name="M:AHelper.Net.FTP.CreateDir(System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            创建文件夹
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="timeout">超时</param>
-        </member>
-        <member name="M:AHelper.Net.FTP.CreateDirAsync(System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            创建文件夹
-            </summary>
-            <param name="remote">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="timeout">超时</param>
-        </member>
-        <member name="M:AHelper.Net.FTP.ReName(System.String,System.String,System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            重命名文件夹
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="currentName">当前名称</param>
-            <param name="newName">新名称</param>
-            <param name="timeout">超时</param>
-        </member>
-        <member name="M:AHelper.Net.FTP.ReNameAsync(System.String,System.String,System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            重命名文件夹
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="currentName">当前名称</param>
-            <param name="newName">新名称</param>
-            <param name="timeout">超时</param>
-        </member>
-        <member name="M:AHelper.Net.FTP.Move(System.String,System.String,System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            移动文件
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="currentName">当前名称</param>
-            <param name="newName">新名称</param>
-            <param name="timeout">超时</param>
-        </member>
-        <member name="M:AHelper.Net.FTP.MoveAsync(System.String,System.String,System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            移动文件
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="currentName">当前名称</param>
-            <param name="newName">新名称</param>
-            <param name="timeout">超时</param>
-        </member>
-        <member name="M:AHelper.Net.FTP.DeleteFile(System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            FTP指定删除文件
-            </summary>
-            <param name="remote">网址</param>
-            <param name="user">账号</param>
-            <param name="pass">密码</param>
-            <param name="timeout">超时</param>
-            <exception cref="T:System.Net.WebException">异常信息</exception>
-            <returns>删除返回信息</returns>
-        </member>
-        <member name="M:AHelper.Net.FTP.DeleteFileAsync(System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            FTP指定删除文件
-            </summary>
-            <param name="remote">网址</param>
-            <param name="user">账号</param>
-            <param name="pass">密码</param>
-            <param name="timeout">超时</param>
-            <exception cref="T:System.Exception">异常信息</exception>
-            <returns>删除返回信息</returns>
-        </member>
-        <member name="M:AHelper.Net.FTP.DeleteDir(System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            FTP指定删除文件夹
-            </summary>
-            <param name="remote">网址</param>
-            <param name="user">账号</param>
-            <param name="pass">密码</param>
-            <param name="timeout">超时</param>
-            <exception cref="T:System.Net.WebException">异常信息</exception>
-            <returns>删除状态</returns>
-        </member>
-        <member name="M:AHelper.Net.FTP.DeleteDirAsync(System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            FTP指定删除文件夹
-            </summary>
-            <param name="remote">网址</param>
-            <param name="user">账号</param>
-            <param name="pass">密码</param>
-            <param name="timeout">超时</param>
-            <exception cref="T:System.Net.WebException">异常信息</exception>
-            <returns>删除状态</returns>
-        </member>
-        <member name="M:AHelper.Net.FTP.DownloadFile(System.String,System.String,System.String,System.String,System.Boolean,System.UInt16,System.Int32)">
-            <summary>
-            FTP下载文件
-            </summary>
-            <param name="uri">路径</param>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
-            <param name="localPath">本地文件路径</param>
-            <param name="overwrite">是否覆盖</param>
-            <param name="timeout">超时</param>
-            <param name="bufferSize">下载缓存大小</param>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetDownloadList(System.String,System.String,System.String,System.IO.SearchOption,System.String,System.UInt16,System.String)">
-            <summary>
-            获取文件下载列表
-            </summary>
-        </member>
-        <member name="M:AHelper.Net.FTP.FTPDownloadDirOperation.#ctor(System.String,System.String,System.String,System.String,System.IO.SearchOption,System.String,System.Boolean,System.UInt16,System.Int32)">
-            <param name="uri">路径</param>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
-            <param name="localPath">本地文件路径</param>
-            <param name="pattern">搜索过滤</param>
-            <param name="option">搜索模式</param>
-            <param name="overwrite">是否覆盖</param>
-            <param name="timeout">超时</param>
-            <param name="bufferSize">下载缓存大小</param>
-        </member>
-        <member name="M:AHelper.Net.FTP.DownloadDir(System.String,System.String,System.String,System.String,System.IO.SearchOption,System.String,System.Boolean,System.UInt16,System.Int32)">
-            <summary>
-            FTP下载文件夹
-            </summary>
-            <param name="uri">路径</param>
-            <param name="username">用户名</param>
-            <param name="password">密码</param>
-            <param name="localPath">本地文件路径</param>
-            <param name="pattern">搜索过滤</param>
-            <param name="option">搜索模式</param>
-            <param name="overwrite">是否覆盖</param>
-            <param name="timeout">超时</param>
-            <param name="bufferSize">下载缓存大小</param>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetDownloadListAsync(System.String,System.String,System.String,System.IO.SearchOption,System.String,System.UInt16,System.String)">
-            <summary>
-            获取文件下载列表
-            </summary>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetMD5(System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            FTP操作
-            </summary>
-            <param name="uri"></param>
-            <param name="user"></param>
-            <param name="pass"></param>
-            <param name="timeout"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetMD5Async(System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            FTP操作
-            </summary>
-            <param name="uri"></param>
-            <param name="user"></param>
-            <param name="pass"></param>
-            <param name="timeout"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetFileSize(System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            获取FTP文件大小
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="timeout">超时</param>
-            <returns>大小</returns>
-            <exception cref="T:System.Exception"></exception>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetFileSizeAsync(System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            获取FTP文件大小
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="timeout">超时</param>
-            <returns>大小</returns>
-            <exception cref="T:System.Exception"></exception>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetRemoteListFile(System.String,System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            获取文件或文件夹列表
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="keyword">
-            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
-            若listType=FileAndFolder，则该参数无效
-            </param>
-            <param name="timeout">超时</param>
-            <returns></returns>
-            <exception cref="T:System.Exception"></exception>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetRemoteListDir(System.String,System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            获取文件或文件夹列表
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="keyword">
-            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
-            若listType=FileAndFolder，则该参数无效
-            </param>
-            <param name="timeout">超时</param>
-            <returns></returns>
-            <exception cref="T:System.Exception"></exception>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetRemoteList(System.String,System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            获取文件或文件夹列表
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="keyword">
-            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
-            若listType=FileAndFolder，则该参数无效
-            </param>
-            <param name="timeout">超时</param>
-            <returns></returns>
-            <exception cref="T:System.Exception"></exception>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetRemoteList(System.String,System.String,System.String,AHandle.FTP.ListType,System.String,System.UInt16)">
-            <summary>
-            获取文件或文件夹列表
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="type">
-            1:获取文件列表
-            2:获取文件夹列表
-            3:获取文件和文件夹列表
-            </param>
-            <param name="keyword">
-            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
-            若listType=FileAndFolder，则该参数无效
-            </param>
-            <param name="timeout">超时</param>
-            <returns></returns>
-            <exception cref="T:System.Net.WebException"></exception>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetRemoteListFileAsync(System.String,System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            获取文件或文件夹列表
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="keyword">
-            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
-            若listType=FileAndFolder，则该参数无效
-            </param>
-            <param name="timeout">超时</param>
-            <returns></returns>
-            <exception cref="T:System.Exception"></exception>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetRemoteListDirAsync(System.String,System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            获取文件或文件夹列表
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="keyword">
-            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
-            若listType=FileAndFolder，则该参数无效
-            </param>
-            <param name="timeout">超时</param>
-            <returns></returns>
-            <exception cref="T:System.Exception"></exception>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetRemoteListAsync(System.String,System.String,System.String,System.String,System.UInt16)">
-            <summary>
-            获取文件或文件夹列表
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="keyword">
-            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
-            若listType=FileAndFolder，则该参数无效
-            </param>
-            <param name="timeout">超时</param>
-            <returns></returns>
-            <exception cref="T:System.Exception"></exception>
-        </member>
-        <member name="M:AHelper.Net.FTP.GetRemoteListAsync(System.String,System.String,System.String,AHandle.FTP.ListType,System.String,System.UInt16)">
-            <summary>
-            获取文件或文件夹列表
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="type">
-            1:获取文件列表
-            2:获取文件夹列表
-            3:获取文件和文件夹列表
-            </param>
-            <param name="keyword">
-            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
-            若listType=FileAndFolder，则该参数无效
-            </param>
-            <param name="timeout">超时</param>
-            <returns></returns>
-            <exception cref="T:System.Net.WebException"></exception>
-        </member>
-        <member name="M:AHelper.Net.FTP.CreateRequestFile(System.String,System.String,System.String,System.String,System.Int32)">
-            <summary>
-            创建一个FTP请求
-            </summary>
-            <param name="remote">远程地址，格式为ftp://xxx</param>
-            <param name="user">FTP登录用户名</param>
-            <param name="pass">FTP登录密码</param>
-            <param name="method">请求的方法，可以是"GET"、"PUT"、"POST"等</param>
-            <param name="timeout">请求的超时时间，单位为秒，默认超时时间为TIMEOUT</param>
-            <returns>创建的FTP请求</returns>
-        </member>
-        <member name="M:AHelper.Net.FTP.CreateRequestDir(System.String,System.String,System.String,System.String,System.Int32)">
-            <summary>
-            创建一个FTP请求
-            </summary>
-            <param name="remote">远程地址，格式为ftp://xxx</param>
-            <param name="user">FTP登录用户名</param>
-            <param name="pass">FTP登录密码</param>
-            <param name="method">请求的方法，可以是"GET"、"PUT"、"POST"等</param>
-            <param name="timeout">请求的超时时间，单位为秒，默认超时时间为TIMEOUT</param>
-            <returns>创建的FTP请求</returns>
-        </member>
-        <member name="M:AHelper.Net.FTP.FTPUploadDirOperation.#ctor(System.String,System.String,System.String,System.String,System.IO.SearchOption,System.String,System.UInt16,System.Int32)">
-            <summary>
-            FTP上传文件夹
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="localPath">本地文件路径</param>
-            <param name="option">搜索模式</param>
-            <param name="pattern">匹配模式</param>
-            <param name="timeout">超时</param>
-            <param name="bufferSize">缓存大小</param>
-        </member>
-        <member name="M:AHelper.Net.FTP.UploadDir(System.String,System.String,System.String,System.String,System.IO.SearchOption,System.String,System.UInt16,System.Int32)">
-            <summary>
-            FTP上传文件夹
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="localPath">本地文件路径</param>
-            <param name="option">搜索模式</param>
-            <param name="pattern">匹配模式</param>
-            <param name="timeout">超时</param>
-            <param name="bufferSize">缓存大小</param>
-        </member>
-        <member name="M:AHelper.Net.FTP.FTPUploadFileOperation.#ctor(System.String,System.String,System.String,System.String,System.UInt16,System.Int32)">
-            <summary>
-            FTP上传文件
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="localPath">本地文件路径</param>
-            <param name="timeout">超时</param>
-            <param name="bufferSize">缓存大小</param>
-        </member>
-        <member name="M:AHelper.Net.FTP.UploadFile(System.String,System.String,System.String,System.String,System.UInt16,System.Int32)">
-            <summary>
-            FTP上传文件
-            </summary>
-            <param name="uri">路径</param>
-            <param name="user">用户名</param>
-            <param name="pass">密码</param>
-            <param name="localPath">本地文件路径</param>
-            <param name="timeout">超时</param>
-            <param name="bufferSize">缓存大小</param>
-        </member>
-        <member name="T:AHelper.Net.HTTP">
-            <summary>
-            HTTP
-            </summary>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Connect(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            预留给能够将连接改为管道方式的代理服务器
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Connect(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            预留给能够将连接改为管道方式的代理服务器
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Connect(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            预留给能够将连接改为管道方式的代理服务器
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.ConnectAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            预留给能够将连接改为管道方式的代理服务器
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.ConnectAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            预留给能够将连接改为管道方式的代理服务器
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.ConnectAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            预留给能够将连接改为管道方式的代理服务器
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Delete(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求删除指定的资源
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Delete(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求删除指定的资源
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Delete(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求删除指定的资源
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.DeleteAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求删除指定的资源
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.DeleteAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求删除指定的资源
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.DeleteAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求删除指定的资源
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Download(System.String,System.String,System.Boolean,System.UInt16,System.Int32)">
-            <summary>
-            HTTP 下载文件
-            </summary>
-            <param name="remoteUrl">远端路径</param>
-            <param name="localPath">保存路径</param>
-            <param name="isOverWrite">覆盖</param>
-            <param name="timeout">超时</param>
-            <param name="bufferSize">容量</param>
-            <exception cref="T:System.Exception">异常</exception>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Download(System.Collections.Generic.IEnumerable{System.String},System.String,System.Boolean,System.UInt16,System.Int32)">
-            <summary>
-            HTTP 下载文件
-            </summary>
-            <param name="remoteUrls">远端路径</param>
-            <param name="localPath">保存根路径</param>
-            <param name="isOverWrite">覆盖</param>
-            <param name="timeout">超时</param>
-            <param name="bufferSize">容量</param>
-            <exception cref="T:System.Exception">异常</exception>
-        </member>
-        <member name="T:AHelper.Net.HTTP.Option">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-        </member>
-        <member name="F:AHelper.Net.HTTP.Option.Timeout">
-            <summary>
-            超时时间
-            </summary>
-        </member>
-        <member name="F:AHelper.Net.HTTP.Option.Cookie">
-            <summary>
-            cookie
-            </summary>
-        </member>
-        <member name="F:AHelper.Net.HTTP.Option.Encoding">
-            <summary>
-            编码:默认UTF-8
-            </summary>
-        </member>
-        <member name="F:AHelper.Net.HTTP.Option.ContentType">
-            <summary>
-            默认:application/x-www-form-urlencoded
-            </summary>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Option.#ctor">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Option.#ctor(System.UInt16,System.String,System.Text.Encoding,System.String)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-            <param name="encoding">编码:默认UTF-8</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <param name="contentType"></param>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Get(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <param name="remoteUrl">路径</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-        </member>
-        <member name="M:AHelper.Net.HTTP.GetAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <param name="remoteUrl">路径</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-        </member>
-        <member name="M:AHelper.Net.HTTP.GetStream(System.String,System.UInt16,System.String)">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <param name="remoteUrl">路径</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-        </member>
-        <member name="M:AHelper.Net.HTTP.GetStreamAsync(System.String,System.UInt16,System.String)">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <param name="remoteUrl">路径</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-        </member>
-        <member name="M:AHelper.Net.HTTP.GetMD5(System.String,System.UInt16)">
-            <summary>
-            HTTP 下载文件
-            </summary>
-            <param name="remoteUrl">远端路径</param>
-            <param name="timeout">超时</param>
-            <exception cref="T:System.Exception">异常</exception>
-        </member>
-        <member name="M:AHelper.Net.HTTP.GetMD5Async(System.String,System.UInt16)">
-            <summary>
-            HTTP 下载文件
-            </summary>
-            <param name="remoteUrl">远端路径</param>
-            <param name="timeout">超时</param>
-            <exception cref="T:System.Exception">异常</exception>
-        </member>
-        <member name="M:AHelper.Net.HTTP.GetJson``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <param name="remoteUrl">路径</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-        </member>
-        <member name="M:AHelper.Net.HTTP.GetJsonAsync``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <param name="remoteUrl">路径</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-        </member>
-        <member name="M:AHelper.Net.HTTP.GetXml``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <param name="remoteUrl">路径</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-        </member>
-        <member name="M:AHelper.Net.HTTP.GetXmlAsync``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <param name="remoteUrl">路径</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-        </member>
-        <member name="M:AHelper.Net.HTTP.GetYaml``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <param name="remoteUrl">路径</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-        </member>
-        <member name="M:AHelper.Net.HTTP.GetYamlAsync``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <param name="remoteUrl">路径</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Head(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求获取特定的资源的响应消息报告
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Head(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求获取特定的资源的响应消息报告
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Head(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求获取特定的资源的响应消息报告
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.HeadAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求获取特定的资源的响应消息报告
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.HeadAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求获取特定的资源的响应消息报告
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.HeadAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求获取特定的资源的响应消息报告
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Options(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            返回服务器正对特定资源所支持的HTTP请求方法
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Options(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            返回服务器正对特定资源所支持的HTTP请求方法
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Options(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            返回服务器正对特定资源所支持的HTTP请求方法
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.OptionsAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            返回服务器正对特定资源所支持的HTTP请求方法
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.OptionsAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            返回服务器正对特定资源所支持的HTTP请求方法
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.OptionsAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            返回服务器正对特定资源所支持的HTTP请求方法
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Post(System.String,System.String,AHelper.Net.HTTP.Option)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
-            </summary>
-            <param name="remoteUrl">远端路径</param>
-            <param name="data">上传数据</param>
-            <param name="options">选项参数</param>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Post(System.String,AHelper.Net.HTTP.Option)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
-            </summary>
-            <param name="remoteUrl">远端路径</param>
-            <param name="options">选项参数</param>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Post(System.String,System.Byte[],AHelper.Net.HTTP.Option)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-            <param name="remoteUrl">远端路径</param>
-            <param name="data">上传数据</param>
-            <param name="options">选项参数</param>
-        </member>
-        <member name="M:AHelper.Net.HTTP.PostStream(System.String,System.String,AHelper.Net.HTTP.Option)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
-            </summary>
-            <param name="remoteUrl">远端路径</param>
-            <param name="data">上传数据</param>
-            <param name="options">选项参数</param>
-        </member>
-        <member name="M:AHelper.Net.HTTP.PostStream(System.String,AHelper.Net.HTTP.Option)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
-            </summary>
-            <param name="remoteUrl">远端路径</param>
-            <param name="options">选项参数</param>
-        </member>
-        <member name="M:AHelper.Net.HTTP.PostStream(System.String,System.Byte[],AHelper.Net.HTTP.Option)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-            <param name="remoteUrl">远端路径</param>
-            <param name="data">上传数据</param>
-            <param name="options">选项参数</param>
-        </member>
-        <member name="M:AHelper.Net.HTTP.PostAsync(System.String,System.String,AHelper.Net.HTTP.Option)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
-            </summary>
-            <param name="remoteUrl">远端路径</param>
-            <param name="data">上传数据</param>
-            <param name="options">选项参数</param>
-        </member>
-        <member name="M:AHelper.Net.HTTP.PostAsync(System.String,AHelper.Net.HTTP.Option)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
-            </summary>
-            <param name="remoteUrl">远端路径</param>
-            <param name="options">选项参数</param>
-        </member>
-        <member name="M:AHelper.Net.HTTP.PostAsync(System.String,System.Byte[],AHelper.Net.HTTP.Option)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-            <param name="remoteUrl">远端路径</param>
-            <param name="data">上传数据</param>
-            <param name="options">选项参数</param>
-            <returns>返回内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.PostStreamAsync(System.String,System.String,AHelper.Net.HTTP.Option)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
-            </summary>
-            <param name="remoteUrl">远端路径</param>
-            <param name="data">上传数据</param>
-            <param name="options">选项参数</param>
-        </member>
-        <member name="M:AHelper.Net.HTTP.PostStreamAsync(System.String,AHelper.Net.HTTP.Option)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
-            </summary>
-            <param name="remoteUrl">远端路径</param>
-            <param name="options">选项参数</param>
-        </member>
-        <member name="M:AHelper.Net.HTTP.PostStreamAsync(System.String,System.Byte[],AHelper.Net.HTTP.Option)">
-            <summary>
-            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            </summary>
-            <param name="remoteUrl">远端路径</param>
-            <param name="data">上传数据</param>
-            <param name="options">选项参数</param>
-            <returns>返回内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Put(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            向指定资源位置上传其最新内容
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Put(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            向指定资源位置上传其最新内容
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.PutAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            向指定资源位置上传其最新内容
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.PutAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            向指定资源位置上传其最新内容
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Trace(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            回显服务器收到的请求
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Trace(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            回显服务器收到的请求
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.Trace(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            回显服务器收到的请求
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.TraceAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            回显服务器收到的请求
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.TraceAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            回显服务器收到的请求
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.HTTP.TraceAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            回显服务器收到的请求
-            </summary>
-            <param name="remoteUrl">远端地址</param>
-            <param name="data">数据</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
-            <returns>内容</returns>
-        </member>
-        <member name="M:AHelper.Net.UriParamSerialize(System.Object@)">
-            <summary>
-            Model对象转换为uri网址参数形式
-            </summary>
-            <param name="obj">Model对象</param>
-        </member>
-        <member name="M:AHelper.Net.RemoveFileHeader(System.IO.Stream,System.Int32)">
-            <summary>
-            移除文件头
-            </summary>
-            <param name="stream">文件流</param>
-            <param name="bufferSize">容量大小</param>
-        </member>
-        <member name="M:AHelper.Net.RemoveFileHeaderAsync(System.IO.Stream,System.Int32,System.Threading.CancellationToken)">
-            <summary>
-            移除文件头
-            </summary>
-            <param name="stream">文件流</param>
-            <param name="bufferSize">容量大小</param>
-            <param name="cancellationToken">取消令牌</param>
-        </member>
-        <member name="F:AHelper.BUFFER_SIZE">
-            <summary>
-            容量缓存 : 1M
-            </summary>
-        </member>
-        <member name="T:AHelper.Reflect">
-            <summary>
-            反射工具库
-            </summary>
-        </member>
-        <member name="M:AHelper.Reflect.GetEnumFilterOBS``1">
-            <summary>
-            过滤枚举过时字段
-            </summary>
-            <typeparam name="T">泛型</typeparam>
-            <returns>泛型列表</returns>
-        </member>
-        <member name="M:AHelper.Reflect.GetPropertyFilterOBS``1(System.Reflection.BindingFlags)">
-            <summary>
-            过滤过时属性
-            </summary>
-            <typeparam name="T">泛型</typeparam>
-            <returns>属性列表</returns>
-        </member>
-        <member name="M:AHelper.Reflect.GetFieldFilterOBS``1(System.Reflection.BindingFlags)">
-            <summary>
-            过滤过时字段
-            </summary>
-            <typeparam name="T">泛型</typeparam>
-            <returns>属性列表</returns>
-        </member>
-        <member name="M:AHelper.Reflect.GetMemberFilterOBS``1(System.Reflection.BindingFlags)">
-            <summary>
-            过滤成员字段
-            </summary>
-            <typeparam name="T">泛型</typeparam>
-            <returns>属性列表</returns>
-        </member>
-        <member name="M:AHelper.Reflect.GetMethodFilterOBS``1(System.Reflection.BindingFlags)">
-            <summary>
-            过滤函数字段
-            </summary>
-            <typeparam name="T">泛型</typeparam>
-            <returns>属性列表</returns>
-        </member>
-        <member name="M:AHelper.Reflect.GetTypesInRunTimeAssemblies(System.Func{System.Type,System.Boolean})">
-            <summary>
-            从当前程序域的运行时程序集中获取所有类型
-            </summary>
-            <param name="filter">类型筛选器</param>
-            <returns>所有类型集合</returns>
-        </member>
-        <member name="M:AHelper.Reflect.GetTypesInAllAssemblies">
-            <summary>
-            从当前程序域的所有程序集中获取所有类型
-            </summary>
-            <returns>所有类型集合</returns>
-        </member>
-        <member name="M:AHelper.Reflect.GetTypesInAllAssemblies(System.Func{System.Type,System.Boolean})">
-            <summary>
-            从当前程序域的所有程序集中获取所有类型
-            </summary>
-            <param name="filter">类型筛选器</param>
-            <returns>所有类型集合</returns>
-        </member>
-        <member name="T:AHelper.TimeStamp">
-            <summary>
-            TimeStamp 时间戳
-            </summary>
-        </member>
-        <member name="P:AHelper.TimeStamp.NowMillisecond">
-            <summary>
-            Get current timestamp / 当前时间戳，单位是毫秒
-            </summary>
-        </member>
-        <member name="P:AHelper.TimeStamp.NowSecond">
-            <summary>
-            Get current timestamp / 当前时间戳，单位是秒
-            </summary>
-        </member>
-        <member name="M:AHelper.TimeStamp.MillisecondToDateTime(System.Int64)">
-            <summary>
-            毫秒级时间戳转为时间
-            </summary>
-            <param name="timestamp">毫秒级时间磋</param>
-        </member>
-        <member name="M:AHelper.TimeStamp.SecondToDateTime(System.Int64)">
-            <summary>
-            秒级时间戳转为时间
-            </summary>
-            <param name="timestamp">秒级时间磋</param>
-        </member>
-        <member name="M:AHelper.TimeStamp.ConvertDateTime(System.DateTime)">
-            <summary>
-             DateTime时间格式转换为Unix时间戳格式
-            </summary>
-        </member>
-        <member name="T:AHelper.Base64">
-            <summary>
-            Base64 文件 解析
-            </summary>
-        </member>
-        <member name="M:AHelper.Base64.SerializeData``1(``0)">
-            <summary>
-            序列化 未加密
-            </summary>
-        </member>
-        <member name="M:AHelper.Base64.SerializeData``1(``0@)">
-            <summary>
-            序列化 未加密
-            </summary>
-        </member>
-        <member name="M:AHelper.Base64.Serialize(System.Byte[],System.Base64FormattingOptions)">
-            <summary>
-            序列化 未加密
-            </summary>
-        </member>
-        <member name="M:AHelper.Base64.Serialize(System.String,System.Text.Encoding)">
-            <summary>
-            序列化 未加密
-            </summary>
-        </member>
-        <member name="M:AHelper.Base64.Deserialize``1(System.String)">
-            <summary>
-            反序列化 未加密
-            </summary>
-        </member>
-        <member name="T:AHelper.Binary">
-            <summary>
-            Binary 文件 解析
-            </summary>
-        </member>
-        <member name="M:AHelper.Binary.Serialize``1(``0@)">
-            <summary>
-            序列化 未加密
-            </summary>
-        </member>
-        <member name="M:AHelper.Binary.Deserialize``1(System.Byte[]@)">
-            <summary>
-            反序列化 未加密
-            </summary>
-        </member>
-        <member name="T:AHelper.DataEncrypt">
-            <summary>
-            数据加密解密
-            </summary>
-        </member>
-        <member name="M:AHelper.DataEncrypt.Encrypt(System.Byte[],System.Byte[],System.Byte[])">
-            <summary>
-            加密
-            </summary>
-            <param name="data">数据源</param>
-            <param name="rgbKey">对称算法的密钥</param>
-            <param name="rgbIV">对称算法的初始化向量</param>
-            <returns></returns>
-        </member>
-        <member name="M:AHelper.DataEncrypt.Encrypt(System.Byte[])">
-            <summary>
-            加密
-            </summary>
-        </member>
-        <member name="M:AHelper.DataEncrypt.Encrypt(System.String)">
-            <summary>
-            加密
-            </summary>
-        </member>
-        <member name="M:AHelper.DataEncrypt.EncryptToStr(System.String)">
-            <summary>
-            加密
-            </summary>
-        </member>
-        <member name="M:AHelper.DataEncrypt.Decrypt(System.Byte[],System.Byte[],System.Byte[])">
-            <summary>
-            解码 
-            </summary>
-            <param name="data">数据源</param>
-            <param name="rgbKey">对称算法的密钥</param>
-            <param name="rgbIV">对称算法的初始化向量</param>
-        </member>
-        <member name="M:AHelper.DataEncrypt.Decrypt(System.Byte[])">
-            <summary>
-            解码 
-            </summary>
-        </member>
-        <member name="M:AHelper.DataEncrypt.DecryptToStr(System.Byte[])">
-            <summary>
-            解码 
-            </summary>
-        </member>
-        <member name="M:AHelper.DataEncrypt.Decrypt(System.String)">
-            <summary>
-            解码 
-            </summary>
-        </member>
-        <member name="T:AHelper.HashTable">
-            <summary>
-            HashTabel 工具类
-            </summary>
-        </member>
-        <member name="M:AHelper.HashTable.Create(System.Object[])">
-            <summary>
-            创建
-            </summary>
-        </member>
-        <member name="M:AHelper.HashTable.Create(System.Collections.Generic.IDictionary{System.Object,System.Object})">
-            <summary>
-            创建
-            </summary>
-        </member>
-        <member name="T:AHelper.Json">
-            <summary>
-            Json 工具类
-            </summary>
-        </member>
-        <member name="P:AHelper.Json.JSONNormalSettings">
-            <summary>
-            Json默认设置
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Serialize(System.Object@)">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Serialize(System.Object@,Newtonsoft.Json.JsonSerializerSettings@)">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Serialize``1(``0@,Newtonsoft.Json.JsonSerializerSettings@)">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Serialize``1(``0@)">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.ToHashTable(System.String@)">
-            <summary>
-            反序列化 HashTable
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Deserialize(System.String@,Newtonsoft.Json.JsonSerializerSettings@)">
-            <summary>
-            反序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Deserialize(System.String@)">
-            <summary>
-            反序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Deserialize``1(System.String@,Newtonsoft.Json.JsonSerializerSettings@)">
-            <summary>
-            反序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Deserialize``1(System.String@)">
-            <summary>
-            反序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Deserialize(System.String@,System.Type@,Newtonsoft.Json.JsonSerializerSettings@)">
-            <summary>
-            反序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.Deserialize(System.String@,System.Type@)">
-            <summary>
-            反序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.PopulateObject``1(System.String,``0,Newtonsoft.Json.JsonSerializerSettings@)">
-            <summary>
-            反序列化 填充对象
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.PopulateObject``1(System.String,``0)">
-            <summary>
-            反序列化 填充对象
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.PopulateObject(System.String,System.Object,Newtonsoft.Json.JsonSerializerSettings@)">
-            <summary>
-            反序列化 填充对象
-            </summary>
-        </member>
-        <member name="M:AHelper.Json.PopulateObject(System.String,System.Object)">
-            <summary>
-            反序列化 填充对象
-            </summary>
-        </member>
-        <member name="T:AHelper.Sort">
-            <summary>
-            排序工具
-            默认排序方向 从小到大
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.AutomaticArray``1(System.Array@,``0@)">
-            <summary>
-            自动扩容，并保存数据
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Counting(System.Collections.Generic.IList{System.Int32}@)">
-            <summary>
-            计数排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Counting(System.Collections.Generic.IList{System.Int64}@)">
-            <summary>
-            计数排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Radix(System.Collections.Generic.IList{System.Int64}@)">
-            <summary>
-            基数排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Radix(System.Collections.Generic.IList{System.Int32}@)">
-            <summary>
-            基数排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Radix(System.Collections.Generic.IList{System.Int16}@)">
-            <summary>
-            基数排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Int64}@)">
-            <summary>
-            桶排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Int32}@)">
-            <summary>
-            桶排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Int16}@)">
-            <summary>
-            桶排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Single}@,System.Int32@)">
-            <summary>
-            桶排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Double}@,System.Int32@)">
-            <summary>
-            桶排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Decimal}@,System.Int32@)">
-            <summary>
-            桶排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.InsertIntoLinkList``1(System.Collections.Generic.LinkedList{``0},``0)">
-            <summary>  
-            按升序插入 linklist   
-            </summary>  
-            <param name="linkedList"> 要排序的链表 </param>  
-            <param name="num"> 要插入排序的数字 </param>  
-        </member>
-        <member name="M:AHelper.Sort.Merge``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
-            <summary>
-            归并排序
-            数据量:1000以下适用
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Merge``1(System.Collections.Generic.IList{``0}@)">
-            <summary>
-            归并排序
-            数据量:1000以下适用
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Heap``1(System.Collections.Generic.IList{``0}@)">
-            <summary>
-            堆排序
-            数据量:1000以下适用
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.HeapSort_MaxHeaping``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@)">
-            <summary>
-            将指定的结点调整为堆。
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Heap``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
-            <summary>
-            堆排序
-            数据量:1000以下适用
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.HeapSort_MaxHeaping``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@,System.Func{``0,``0,System.Int32}@)">
-            <summary>
-            将指定的结点调整为堆。
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Select``1(System.Collections.Generic.IList{``0}@)">
-            <summary>
-            选择排序 数据量:100以下适用
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Select``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
-            <summary>
-            选择排序 数据量:100以下适用
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Shell``1(System.Collections.Generic.IList{``0}@)">
-            <summary>
-            希尔排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Shell``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
-            <summary>
-            希尔排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Insert``1(System.Collections.Generic.IList{``0}@)">
-            <summary>
-            插入排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Insert``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
-            <summary>
-            插入排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Quick``1(System.Collections.Generic.IList{``0}@)">
-            <summary>
-            快速排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Quick``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
-            <summary>
-            快速排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Bubble``1(System.Collections.Generic.IList{``0}@)">
-            <summary>
-            单向冒泡排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Bubble``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
-            <summary>
-            单向冒泡排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.BubbleTwoWay``1(System.Collections.Generic.IList{``0}@)">
-            <summary>
-            双向冒泡排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.BubbleTwoWay``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
-            <summary>
-            双向冒泡排序
-            </summary>
-        </member>
-        <member name="T:AHelper.Xml">
-            <summary>
-            XML 工具类
-            </summary>
-        </member>
-        <member name="M:AHelper.Xml.Serialize``1(``0@,System.String@,System.Text.Encoding@)">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Xml.Deserialize``1(System.String@,System.Text.Encoding@)">
-            <summary>
-            反序列化
-            </summary>
-        </member>
-        <member name="T:AHelper.Yaml">
-            <summary>
-            Yaml 解析
-            </summary>
-        </member>
-        <member name="M:AHelper.Yaml.Serialize(System.Object@)">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Yaml.ToJson(System.String@)">
-            <summary>
-            序列化
-            </summary>
-        </member>
-        <member name="M:AHelper.Yaml.Deserialize``1(System.String@)">
-            <summary>
-            反序列化
-            </summary>
-        </member>
-        <member name="T:AHelper.Guid">
-            <summary>
-            生成一个新的 GUID 对象。
-            </summary>
-            <returns>新的 GUID 对象。</returns>
-        </member>
-        <member name="M:AHelper.Guid.New">
-            <summary>
-            生成一个新的 GUID 对象。
-            </summary>
-            <returns>新的 GUID 对象。</returns>
-        </member>
-        <member name="M:AHelper.Guid.New(System.String@)">
-            <summary>
-            生成一个新的 GUID 字符串。
-            </summary>
-            <param name="format">指定 GUID 字符串的格式，默认为 "N" 格式。</param>
-            <returns>新的 GUID 字符串。</returns>
-        </member>
-        <member name="M:AHelper.Guid.NewBase64">
-            <summary>
-            生成一个新的 Base64 编码的 GUID 字符串。
-            </summary>
-            <returns>新的 Base64 编码的 GUID 字符串。</returns>
-        </member>
         <member name="T:AHelper.IO">
             <summary>
             IO工具类
             </summary>
+        </member>
+        <member name="M:AHelper.IO.GetLastWriteTimeUtc(System.Collections.Generic.ICollection{System.IO.DirectoryInfo})">
+            <summary>
+            获取最新的文件夹
+            </summary>
+            <param name="directoryInfos">文件夹列表</param>
+            <returns><see cref="T:System.IO.DirectoryInfo"/>文件夹信息</returns>
+        </member>
+        <member name="M:AHelper.IO.GetFoldersInfo(System.String@,System.String@,System.IO.SearchOption@)">
+            <summary>
+            获取文件夹数组
+            </summary>
+            <param name="value">路径</param>
+            <param name="pattern">匹配模式</param>
+            <param name="option">搜索模式</param>
+            <returns>所有文件夹名称</returns>
+        </member>
+        <member name="M:AHelper.IO.GetFoldersInfo(System.String@,System.Func{System.IO.DirectoryInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
+            <summary>
+            获取文件夹数组
+            </summary>
+            <param name="value">路径</param>
+            <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
+            <param name="pattern">匹配模式</param>
+            <param name="option">搜索模式</param>
+            <returns>所有文件夹名称</returns>
+        </member>
+        <member name="M:AHelper.IO.GetFolders(System.String@,System.String@,System.IO.SearchOption@)">
+            <summary>
+            获取文件夹数组
+            </summary>
+            <param name="value">路径</param>
+            <param name="pattern">匹配模式</param>
+            <param name="option">搜索模式</param>
+            <returns>所有文件夹名称</returns>
+        </member>
+        <member name="M:AHelper.IO.GetFolders(System.String@,System.Func{System.IO.DirectoryInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
+            <summary>
+            获取文件夹数组
+            </summary>
+            <param name="value">路径</param>
+            <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
+            <param name="pattern">匹配模式</param>
+            <param name="option">搜索模式</param>
+            <returns>所有文件夹名称</returns>
+        </member>
+        <member name="M:AHelper.IO.GetFoldersName(System.String@,System.String@,System.IO.SearchOption@)">
+            <summary>
+            获取该文件夹下所有文件夹名 不含子文件夹 不包含自己
+            </summary>
+        </member>
+        <member name="M:AHelper.IO.GetFoldersName(System.String@,System.Func{System.IO.DirectoryInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
+            <summary>
+            获取该文件夹下所有文件夹名 不含子文件夹 不包含自己
+            </summary>
+        </member>
+        <member name="M:AHelper.IO.GetFolderLength(System.String@)">
+            <summary>
+            返回文件夹字节长度
+            </summary>
+            <param name="Path">文件相对路径</param>
+        </member>
+        <member name="M:AHelper.IO.GetFolderLastWriteTimeUtc(System.String)">
+            <summary>
+            获取最后写入时间
+            </summary>
+        </member>
+        <member name="M:AHelper.IO.GetFolderCreationTimeUtc(System.String)">
+            <summary>
+            获取创建文件夹时间
+            </summary>
+        </member>
+        <member name="M:AHelper.IO.GetLastWriteTimeUtc(System.Collections.Generic.IEnumerable{System.IO.FileInfo})">
+            <summary>
+            获取最新的文件
+            </summary>
+            <param name="directoryInfos">文件夹列表</param>
+            <returns><see cref="T:System.IO.FileInfo"/>文件夹信息</returns>
+        </member>
+        <member name="M:AHelper.IO.TryPathsForFile(System.String,System.Collections.Generic.IEnumerable{System.String}@)">
+            <summary>
+            在给定的文件夹路径列表中查找指定文件名的文件，并返回第一个存在的文件完整路径。
+            </summary>
+            <param name="fileName">要查找的文件名。</param>
+            <param name="directories">包含所有可能包含该文件的文件夹路径的 IEnumerable 类型实例。</param>
+            <returns>如果找到该文件，则返回完整路径，否则返回 null。</returns>
+        </member>
+        <member name="M:AHelper.IO.TryPathsForFile(System.String@,System.String[])">
+            <summary>
+            在给定的文件夹路径列表中查找指定文件名的文件，并返回第一个存在的文件完整路径。
+            </summary>
+            <param name="fileName">要查找的文件名。</param>
+            <param name="directories">包含所有可能包含该文件的文件夹路径的可变参数数组。</param>
+            <returns>如果找到该文件，则返回完整路径，否则返回 null。</returns>
+        </member>
+        <member name="M:AHelper.IO.GetFilesInfo(System.String@,System.Func{System.IO.FileInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
+            <summary>
+            获取当前所有文件夹中所有文件信息
+            </summary>
+            <param name="value">路径</param>
+            <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
+            <param name="pattern">匹配模式</param>
+            <param name="option">搜查模式</param>
+            <returns>所有文件信息数组</returns>
+        </member>
+        <member name="M:AHelper.IO.GetFilesInfo(System.String@,System.String@,System.IO.SearchOption@)">
+            <summary>
+            获取当前所有文件夹中所有文件信息
+            </summary>
+        </member>
+        <member name="M:AHelper.IO.GetFilesInfo(System.IO.DirectoryInfo@,System.String@,System.IO.SearchOption@)">
+            <summary>
+            获取当前所有文件夹中所有文件信息
+            </summary>
+        </member>
+        <member name="M:AHelper.IO.GetFiles(System.String@,System.String@,System.IO.SearchOption@)">
+            <summary>
+            获取该文件夹下所有文件 绝对路径
+            </summary>
+            <param name="value">路径</param>
+            <param name="pattern">匹配模式</param>
+            <param name="option">搜索模式</param>
+            <returns>所有文件夹 绝对路径</returns>
+        </member>
+        <member name="M:AHelper.IO.GetFiles(System.String@,System.Func{System.IO.FileInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
+            <summary>
+            获取该文件夹下所有文件 绝对路径
+            </summary>
+            <param name="value">路径</param>
+            <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
+            <param name="pattern">匹配模式</param>
+            <param name="option">搜索模式</param>
+            <returns>所有文件夹 绝对路径</returns>
+        </member>
+        <member name="M:AHelper.IO.GetFilesRelative(System.String@,System.String@,System.IO.SearchOption@)">
+            <summary>
+            获取该文件夹下所有文件 相对路径
+            </summary>
+            <param name="value">路径</param>
+            <param name="pattern">匹配模式</param>
+            <param name="option">搜索模式</param>
+            <returns>所有文件夹 相对路径</returns>
+        </member>
+        <member name="M:AHelper.IO.GetFilesRelative(System.String@,System.Func{System.IO.FileInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
+            <summary>
+            获取该文件夹下所有文件 相对路径
+            </summary>
+            <param name="value">路径</param>
+            <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
+            <param name="pattern">匹配模式</param>
+            <param name="option">搜索模式</param>
+            <returns>所有文件夹 相对路径</returns>
+        </member>
+        <member name="M:AHelper.IO.GetFilesName(System.String@,System.String@,System.IO.SearchOption@)">
+            <summary>
+            获取该文件夹下所有文件名称
+            </summary>
+            <param name="value">路径</param>
+            <param name="pattern">匹配模式</param>
+            <param name="option">搜索模式</param>
+            <returns>所有文件名称</returns>
+        </member>
+        <member name="M:AHelper.IO.GetFilesName(System.String@,System.Func{System.IO.FileInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
+            <summary>
+            获取该文件夹下所有文件名称
+            </summary>
+            <param name="value">路径</param>
+            <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
+            <param name="pattern">匹配模式</param>
+            <param name="option">搜索模式</param>
+            <returns>所有文件名称</returns>
+        </member>
+        <member name="M:AHelper.IO.GetFileSize(System.String@,System.Single@)">
+            <summary>
+            返回文件大小 默认单位KB
+            </summary>
+        </member>
+        <member name="M:AHelper.IO.GetFileLength(System.String@)">
+            <summary>
+            返回文件字节长度
+            </summary>
+            <param name="Path">文件相对路径</param>
+        </member>
+        <member name="M:AHelper.IO.GetFileName(System.String,System.Boolean)">
+            <summary>
+            返回文件名，不含路径 默认带文件名后缀
+            </summary>
+            <param name="file">文件路径</param>
+            <param name="extension">是否有后缀</param>
+            <returns>文件名</returns>
+        </member>
+        <member name="M:AHelper.IO.GetFileExtension(System.String)">
+            <summary>
+            返回文件名，不含路径 默认带文件名后缀
+            </summary>
+            <param name="file">文件路径</param>
+            <returns>文件名</returns>
+        </member>
+        <member name="M:AHelper.IO.GetFileInfo(System.String)">
+            <summary>
+            获取当前所有文件夹中所有文件信息
+            </summary>
+            <param name="value">文件夹路径</param>
+        </member>
+        <member name="M:AHelper.IO.GetFileLastWriteTimeUtc(System.String)">
+            <summary>
+            获取最后写入时间
+            </summary>
+        </member>
+        <member name="M:AHelper.IO.GetFileCreationTimeUtc(System.String)">
+            <summary>
+            获取创建文件时间
+            </summary>
+        </member>
+        <member name="M:AHelper.IO.GetFileAttributes(System.String)">
+            <summary>
+            获取文件属性
+            </summary>
+        </member>
+        <member name="M:AHelper.IO.GetFileMD5(System.String,System.Int64)">
+            <summary>
+            获取文件的MD5值
+            </summary>
+        </member>
+        <member name="M:AHelper.IO.GetFileMD5Async(System.String,System.Int64)">
+            <summary>
+            获取文件的MD5值
+            </summary>
+        </member>
+        <member name="M:AHelper.IO.GetFileSHA1(System.String)">
+            <summary>
+            获取文件SHA1
+            </summary>
+            <param name="path">文件路径</param>
+            <returns></returns>
+            <exception cref="T:System.IO.FileNotFoundException">
+               <paramref name="path" /> 不存在
+            </exception>
+        </member>
+        <member name="M:AHelper.IO.GetFileSHA1Async(System.String,System.Int64)">
+            <summary>
+            获取文件SHA1
+            </summary>
+            <param name="path">文件路径</param>
+            <param name="bufferSize">容器大小</param>
+            <returns></returns>
+            <exception cref="T:System.IO.FileNotFoundException">
+               <paramref name="path" /> 不存在
+            </exception>
+        </member>
+        <member name="M:AHelper.IO.GetFileSHA256(System.String)">
+            <summary>
+            获取文件SHA256
+            </summary>
+            <param name="path">文件路径</param>
+            <returns></returns>
+            <exception cref="T:System.IO.FileNotFoundException">
+               <paramref name="path" /> 不存在
+            </exception>
+        </member>
+        <member name="M:AHelper.IO.GetFileSHA256Async(System.String,System.Int64)">
+            <summary>
+            获取文件SHA256
+            </summary>
+            <param name="path">文件路径</param>
+            <param name="bufferSize">容器大小</param>
+            <returns></returns>
+            <exception cref="T:System.IO.FileNotFoundException">
+               <paramref name="path" /> 不存在
+            </exception>
+        </member>
+        <member name="M:AHelper.IO.GetFileSHA384(System.String)">
+            <summary>
+            获取文件SHA384
+            </summary>
+            <param name="path">文件路径</param>
+            <returns></returns>
+            <exception cref="T:System.IO.FileNotFoundException">
+               <paramref name="path" /> 不存在
+            </exception>
+        </member>
+        <member name="M:AHelper.IO.GetFileSHA384Async(System.String,System.Int64)">
+            <summary>
+            获取文件SHA384
+            </summary>
+            <param name="path">文件路径</param>
+            <param name="bufferSize">容器大小</param>
+            <returns></returns>
+            <exception cref="T:System.IO.FileNotFoundException">
+               <paramref name="path" /> 不存在
+            </exception>
+        </member>
+        <member name="M:AHelper.IO.GetFileSHA512(System.String)">
+            <summary>
+            获取文件SHA512
+            </summary>
+            <param name="path">文件路径</param>
+            <returns></returns>
+            <exception cref="T:System.IO.FileNotFoundException">
+               <paramref name="path" /> 不存在
+            </exception>
+        </member>
+        <member name="M:AHelper.IO.GetFileSHA512Async(System.String,System.Int64)">
+            <summary>
+            获取文件SHA512
+            </summary>
+            <param name="path">文件路径</param>
+            <param name="bufferSize">容器大小</param>
+            <returns></returns>
+            <exception cref="T:System.IO.FileNotFoundException">
+               <paramref name="path" /> 不存在
+            </exception>
         </member>
         <member name="M:AHelper.IO.ClearFolder(System.String@)">
             <summary>
@@ -16110,36 +14834,6 @@
             <param name="searchPatterns">条件 "*value*"</param>
             <returns></returns>
         </member>
-        <member name="M:AHelper.IO.GetLastWriteTimeUtc(System.Collections.Generic.ICollection{System.IO.DirectoryInfo})">
-            <summary>
-            获取最新的文件夹
-            </summary>
-            <param name="directoryInfos">文件夹列表</param>
-            <returns><see cref="T:System.IO.DirectoryInfo"/>文件夹信息</returns>
-        </member>
-        <member name="M:AHelper.IO.GetLastWriteTimeUtc(System.Collections.Generic.ICollection{System.IO.FileInfo})">
-            <summary>
-            获取最新的文件
-            </summary>
-            <param name="directoryInfos">文件夹列表</param>
-            <returns><see cref="T:System.IO.FileInfo"/>文件夹信息</returns>
-        </member>
-        <member name="M:AHelper.IO.TryPathsForFile(System.String,System.Collections.Generic.IEnumerable{System.String}@)">
-            <summary>
-            在给定的文件夹路径列表中查找指定文件名的文件，并返回第一个存在的文件完整路径。
-            </summary>
-            <param name="fileName">要查找的文件名。</param>
-            <param name="directories">包含所有可能包含该文件的文件夹路径的 IEnumerable 类型实例。</param>
-            <returns>如果找到该文件，则返回完整路径，否则返回 null。</returns>
-        </member>
-        <member name="M:AHelper.IO.TryPathsForFile(System.String@,System.String[])">
-            <summary>
-            在给定的文件夹路径列表中查找指定文件名的文件，并返回第一个存在的文件完整路径。
-            </summary>
-            <param name="fileName">要查找的文件名。</param>
-            <param name="directories">包含所有可能包含该文件的文件夹路径的可变参数数组。</param>
-            <returns>如果找到该文件，则返回完整路径，否则返回 null。</returns>
-        </member>
         <member name="M:AHelper.IO.GetRelativePath(System.String,System.String)">
             <summary>
             获取指定路径相对于给定目录的相对路径。
@@ -16150,220 +14844,12 @@
             <exception cref="T:System.ArgumentNullException">当 path 或 directory 为 null 时，抛出此异常。</exception>
             <exception cref="T:System.UriFormatException">使用 URI 库时，如果 path 或 directory 不是有效的 URI 字符串，则抛出此异常。</exception>
         </member>
-        <member name="M:AHelper.IO.GetFilesInfo(System.String@,System.Func{System.IO.FileInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
-            <summary>
-            获取当前所有文件夹中所有文件信息
-            </summary>
-            <param name="value">路径</param>
-            <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
-            <param name="pattern">匹配模式</param>
-            <param name="option">搜查模式</param>
-            <returns>所有文件信息数组</returns>
-        </member>
-        <member name="M:AHelper.IO.GetFilesInfo(System.String@,System.String@,System.IO.SearchOption@)">
-            <summary>
-            获取当前所有文件夹中所有文件信息
-            </summary>
-        </member>
-        <member name="M:AHelper.IO.GetFilesInfo(System.IO.DirectoryInfo@,System.String@,System.IO.SearchOption@)">
-            <summary>
-            获取当前所有文件夹中所有文件信息
-            </summary>
-        </member>
-        <member name="M:AHelper.IO.GetFiles(System.String@,System.String@,System.IO.SearchOption@)">
-            <summary>
-            获取该文件夹下所有文件 绝对路径
-            </summary>
-            <param name="value">路径</param>
-            <param name="pattern">匹配模式</param>
-            <param name="option">搜索模式</param>
-            <returns>所有文件夹 绝对路径</returns>
-        </member>
-        <member name="M:AHelper.IO.GetFiles(System.String@,System.Func{System.IO.FileInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
-            <summary>
-            获取该文件夹下所有文件 绝对路径
-            </summary>
-            <param name="value">路径</param>
-            <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
-            <param name="pattern">匹配模式</param>
-            <param name="option">搜索模式</param>
-            <returns>所有文件夹 绝对路径</returns>
-        </member>
-        <member name="M:AHelper.IO.GetFilesRelative(System.String@,System.String@,System.IO.SearchOption@)">
-            <summary>
-            获取该文件夹下所有文件 相对路径
-            </summary>
-            <param name="value">路径</param>
-            <param name="pattern">匹配模式</param>
-            <param name="option">搜索模式</param>
-            <returns>所有文件夹 相对路径</returns>
-        </member>
-        <member name="M:AHelper.IO.GetFilesRelative(System.String@,System.Func{System.IO.FileInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
-            <summary>
-            获取该文件夹下所有文件 相对路径
-            </summary>
-            <param name="value">路径</param>
-            <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
-            <param name="pattern">匹配模式</param>
-            <param name="option">搜索模式</param>
-            <returns>所有文件夹 相对路径</returns>
-        </member>
-        <member name="M:AHelper.IO.GetFilesName(System.String@,System.String@,System.IO.SearchOption@)">
-            <summary>
-            获取该文件夹下所有文件名称
-            </summary>
-            <param name="value">路径</param>
-            <param name="pattern">匹配模式</param>
-            <param name="option">搜索模式</param>
-            <returns>所有文件名称</returns>
-        </member>
-        <member name="M:AHelper.IO.GetFilesName(System.String@,System.Func{System.IO.FileInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
-            <summary>
-            获取该文件夹下所有文件名称
-            </summary>
-            <param name="value">路径</param>
-            <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
-            <param name="pattern">匹配模式</param>
-            <param name="option">搜索模式</param>
-            <returns>所有文件名称</returns>
-        </member>
-        <member name="M:AHelper.IO.GetFoldersInfo(System.String@,System.String@,System.IO.SearchOption@)">
-            <summary>
-            获取文件夹数组
-            </summary>
-            <param name="value">路径</param>
-            <param name="pattern">匹配模式</param>
-            <param name="option">搜索模式</param>
-            <returns>所有文件夹名称</returns>
-        </member>
-        <member name="M:AHelper.IO.GetFoldersInfo(System.String@,System.Func{System.IO.DirectoryInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
-            <summary>
-            获取文件夹数组
-            </summary>
-            <param name="value">路径</param>
-            <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
-            <param name="pattern">匹配模式</param>
-            <param name="option">搜索模式</param>
-            <returns>所有文件夹名称</returns>
-        </member>
-        <member name="M:AHelper.IO.GetFolders(System.String@,System.String@,System.IO.SearchOption@)">
-            <summary>
-            获取文件夹数组
-            </summary>
-            <param name="value">路径</param>
-            <param name="pattern">匹配模式</param>
-            <param name="option">搜索模式</param>
-            <returns>所有文件夹名称</returns>
-        </member>
-        <member name="M:AHelper.IO.GetFolders(System.String@,System.Func{System.IO.DirectoryInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
-            <summary>
-            获取文件夹数组
-            </summary>
-            <param name="value">路径</param>
-            <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
-            <param name="pattern">匹配模式</param>
-            <param name="option">搜索模式</param>
-            <returns>所有文件夹名称</returns>
-        </member>
-        <member name="M:AHelper.IO.GetFoldersName(System.String@,System.String@,System.IO.SearchOption@)">
-            <summary>
-            获取该文件夹下所有文件夹名 不含子文件夹 不包含自己
-            </summary>
-        </member>
-        <member name="M:AHelper.IO.GetFoldersName(System.String@,System.Func{System.IO.DirectoryInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
-            <summary>
-            获取该文件夹下所有文件夹名 不含子文件夹 不包含自己
-            </summary>
-        </member>
-        <member name="M:AHelper.IO.GetFileSize(System.String@,System.Single@)">
-            <summary>
-            返回文件大小 默认单位KB
-            </summary>
-        </member>
-        <member name="M:AHelper.IO.GetFileLength(System.String@)">
-            <summary>
-            返回文件字节长度
-            </summary>
-            <param name="Path">文件相对路径</param>
-        </member>
-        <member name="M:AHelper.IO.GetFolderLength(System.String@)">
-            <summary>
-            返回文件夹字节长度
-            </summary>
-            <param name="Path">文件相对路径</param>
-        </member>
-        <member name="M:AHelper.IO.GetFileName(System.String,System.Boolean)">
-            <summary>
-            返回文件名，不含路径 默认带文件名后缀
-            </summary>
-            <param name="file">文件路径</param>
-            <param name="extension">是否有后缀</param>
-            <returns>文件名</returns>
-        </member>
-        <member name="M:AHelper.IO.GetFileExtension(System.String)">
-            <summary>
-            返回文件名，不含路径 默认带文件名后缀
-            </summary>
-            <param name="file">文件路径</param>
-            <returns>文件名</returns>
-        </member>
-        <member name="M:AHelper.IO.GetFileInfo(System.String)">
-            <summary>
-            获取当前所有文件夹中所有文件信息
-            </summary>
-            <param name="value">文件夹路径</param>
-        </member>
-        <member name="M:AHelper.IO.GetFileHash(System.String)">
-            <summary>
-            获取文件的哈希值
-            </summary>
-        </member>
-        <member name="M:AHelper.IO.GetFileMD5(System.String,System.Int64)">
-            <summary>
-            获取文件的MD5值
-            </summary>
-        </member>
         <member name="M:AHelper.IO.GetMD5ByHashAlgorithm(System.IO.Stream,System.Int64)">
             <summary>
             通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得MD5
             实现稍微复杂，但可使用与传输文件或接收文件时同步计算MD5值
             可自定义缓冲区大小，计算速度较快
             </summary>
-        </member>
-        <member name="M:AHelper.IO.GetFileLastWriteTimeUtc(System.String)">
-            <summary>
-            获取最后写入时间
-            </summary>
-        </member>
-        <member name="M:AHelper.IO.GetFolderLastWriteTimeUtc(System.String)">
-            <summary>
-            获取最后写入时间
-            </summary>
-        </member>
-        <member name="M:AHelper.IO.GetFolderCreationTimeUtc(System.String)">
-            <summary>
-            获取创建文件夹时间
-            </summary>
-        </member>
-        <member name="M:AHelper.IO.GetFileCreationTimeUtc(System.String)">
-            <summary>
-            获取创建文件时间
-            </summary>
-        </member>
-        <member name="M:AHelper.IO.GetFileAttributes(System.String)">
-            <summary>
-            获取文件属性
-            </summary>
-        </member>
-        <member name="M:AHelper.IO.GetFileSHA1(System.String)">
-            <summary>
-            获取文件SHA1
-            </summary>
-            <param name="filePath">文件路径</param>
-            <returns></returns>
-            <exception cref="T:System.IO.FileNotFoundException">
-               <paramref name="filePath" /> 不存在
-            </exception>
         </member>
         <member name="M:AHelper.IO.MoveFile(System.String@,System.String@,System.Boolean@)">
             <summary>
@@ -16926,6 +15412,1686 @@
             <summary>
             写入 Yaml 文件 编码utf-8
             </summary>
+        </member>
+        <member name="T:AHelper.FTP">
+            <summary>
+            FTP
+            </summary>
+        </member>
+        <member name="M:AHelper.FTP.Check(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            判断FTP连接
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <returns>Ture:有效 False:无效</returns>
+        </member>
+        <member name="M:AHelper.FTP.CheckAsync(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            判断FTP连接
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <returns>Ture:有效 False:无效</returns>
+        </member>
+        <member name="M:AHelper.FTP.CheckFile(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            判断FTP路径是否为文件
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <returns>Ture:是 False:不是</returns>
+        </member>
+        <member name="M:AHelper.FTP.CheckFileAsync(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            判断FTP路径是否为文件
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <returns>Ture:是 False:不是</returns>
+        </member>
+        <member name="M:AHelper.FTP.CheckDir(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            判断FTP路径是否为文件夹
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <returns>Ture:是 False:不是</returns>
+        </member>
+        <member name="M:AHelper.FTP.CheckDirAsync(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            判断FTP路径是否为文件夹
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <returns>Ture:是 False:不是</returns>
+        </member>
+        <member name="M:AHelper.FTP.CreateDir(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            创建文件夹
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+        </member>
+        <member name="M:AHelper.FTP.CreateDirAsync(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            创建文件夹
+            </summary>
+            <param name="remote">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+        </member>
+        <member name="M:AHelper.FTP.ReName(System.String,System.String,System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            重命名文件夹
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="currentName">当前名称</param>
+            <param name="newName">新名称</param>
+            <param name="timeout">超时</param>
+        </member>
+        <member name="M:AHelper.FTP.ReNameAsync(System.String,System.String,System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            重命名文件夹
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="currentName">当前名称</param>
+            <param name="newName">新名称</param>
+            <param name="timeout">超时</param>
+        </member>
+        <member name="M:AHelper.FTP.Move(System.String,System.String,System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            移动文件
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="currentName">当前名称</param>
+            <param name="newName">新名称</param>
+            <param name="timeout">超时</param>
+        </member>
+        <member name="M:AHelper.FTP.MoveAsync(System.String,System.String,System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            移动文件
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="currentName">当前名称</param>
+            <param name="newName">新名称</param>
+            <param name="timeout">超时</param>
+        </member>
+        <member name="M:AHelper.FTP.DeleteFile(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            FTP指定删除文件
+            </summary>
+            <param name="remote">网址</param>
+            <param name="user">账号</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <exception cref="T:System.Net.WebException">异常信息</exception>
+            <returns>删除返回信息</returns>
+        </member>
+        <member name="M:AHelper.FTP.DeleteFileAsync(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            FTP指定删除文件
+            </summary>
+            <param name="remote">网址</param>
+            <param name="user">账号</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <exception cref="T:System.Exception">异常信息</exception>
+            <returns>删除返回信息</returns>
+        </member>
+        <member name="M:AHelper.FTP.DeleteDir(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            FTP指定删除文件夹
+            </summary>
+            <param name="remote">网址</param>
+            <param name="user">账号</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <exception cref="T:System.Net.WebException">异常信息</exception>
+            <returns>删除状态</returns>
+        </member>
+        <member name="M:AHelper.FTP.DeleteDirAsync(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            FTP指定删除文件夹
+            </summary>
+            <param name="remote">网址</param>
+            <param name="user">账号</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <exception cref="T:System.Net.WebException">异常信息</exception>
+            <returns>删除状态</returns>
+        </member>
+        <member name="M:AHelper.FTP.DownloadFile(System.String,System.String,System.String,System.String,System.Boolean,System.UInt16,System.Int32)">
+            <summary>
+            FTP下载文件
+            </summary>
+            <param name="uri">路径</param>
+            <param name="username">用户名</param>
+            <param name="password">密码</param>
+            <param name="localPath">本地文件路径</param>
+            <param name="overwrite">是否覆盖</param>
+            <param name="timeout">超时</param>
+            <param name="bufferSize">下载缓存大小</param>
+        </member>
+        <member name="M:AHelper.FTP.GetDownloadList(System.String,System.String,System.String,System.IO.SearchOption,System.String,System.UInt16,System.String)">
+            <summary>
+            获取文件下载列表
+            </summary>
+        </member>
+        <member name="M:AHelper.FTP.FTPDownloadDirOperation.#ctor(System.String,System.String,System.String,System.String,System.IO.SearchOption,System.String,System.Boolean,System.UInt16,System.Int32)">
+            <param name="uri">路径</param>
+            <param name="username">用户名</param>
+            <param name="password">密码</param>
+            <param name="localPath">本地文件路径</param>
+            <param name="pattern">搜索过滤</param>
+            <param name="option">搜索模式</param>
+            <param name="overwrite">是否覆盖</param>
+            <param name="timeout">超时</param>
+            <param name="bufferSize">下载缓存大小</param>
+        </member>
+        <member name="M:AHelper.FTP.DownloadDir(System.String,System.String,System.String,System.String,System.IO.SearchOption,System.String,System.Boolean,System.UInt16,System.Int32)">
+            <summary>
+            FTP下载文件夹
+            </summary>
+            <param name="uri">路径</param>
+            <param name="username">用户名</param>
+            <param name="password">密码</param>
+            <param name="localPath">本地文件路径</param>
+            <param name="pattern">搜索过滤</param>
+            <param name="option">搜索模式</param>
+            <param name="overwrite">是否覆盖</param>
+            <param name="timeout">超时</param>
+            <param name="bufferSize">下载缓存大小</param>
+        </member>
+        <member name="M:AHelper.FTP.GetMD5(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            获取FTP文件MD5
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <returns>MD5</returns>
+        </member>
+        <member name="M:AHelper.FTP.GetMD5Async(System.String,System.String,System.String,System.UInt16,System.Threading.CancellationToken)">
+            <summary>
+            获取FTP文件MD5
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns>MD5</returns>
+        </member>
+        <member name="M:AHelper.FTP.GetFileSize(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            获取FTP文件大小
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <returns>大小</returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:AHelper.FTP.GetFileSizeAsync(System.String,System.String,System.String,System.UInt16,System.Threading.CancellationToken)">
+            <summary>
+            获取FTP文件大小
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns>大小</returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:AHelper.FTP.GetRemoteListFile(System.String,System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            获取文件或文件夹列表
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="keyword">
+            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
+            若listType=FileAndFolder，则该参数无效
+            </param>
+            <param name="timeout">超时</param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:AHelper.FTP.GetRemoteListDir(System.String,System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            获取文件或文件夹列表
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="keyword">
+            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
+            若listType=FileAndFolder，则该参数无效
+            </param>
+            <param name="timeout">超时</param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:AHelper.FTP.GetRemoteList(System.String,System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            获取文件或文件夹列表
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="keyword">
+            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
+            若listType=FileAndFolder，则该参数无效
+            </param>
+            <param name="timeout">超时</param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:AHelper.FTP.GetRemoteList(System.String,System.String,System.String,AHandle.FTP.ListType,System.String,System.UInt16)">
+            <summary>
+            获取文件或文件夹列表
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="type">
+            1:获取文件列表
+            2:获取文件夹列表
+            3:获取文件和文件夹列表
+            </param>
+            <param name="keyword">
+            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
+            若listType=FileAndFolder，则该参数无效
+            </param>
+            <param name="timeout">超时</param>
+            <returns></returns>
+            <exception cref="T:System.Net.WebException"></exception>
+        </member>
+        <member name="M:AHelper.FTP.GetRemoteListFileAsync(System.String,System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            获取文件或文件夹列表
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="keyword">
+            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
+            若listType=FileAndFolder，则该参数无效
+            </param>
+            <param name="timeout">超时</param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:AHelper.FTP.GetRemoteListDirAsync(System.String,System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            获取文件或文件夹列表
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="keyword">
+            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
+            若listType=FileAndFolder，则该参数无效
+            </param>
+            <param name="timeout">超时</param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:AHelper.FTP.GetRemoteListAsync(System.String,System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            获取文件或文件夹列表
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="keyword">
+            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
+            若listType=FileAndFolder，则该参数无效
+            </param>
+            <param name="timeout">超时</param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:AHelper.FTP.GetDownloadListAsync(System.String,System.String,System.String,System.IO.SearchOption,System.String,System.UInt16,System.String,System.Threading.CancellationToken)">
+            <summary>
+            获取文件下载列表
+            </summary>
+        </member>
+        <member name="M:AHelper.FTP.GetRemoteListAsync(System.String,System.String,System.String,AHandle.FTP.ListType,System.String,System.UInt16,System.Threading.CancellationToken)">
+            <summary>
+            获取文件或文件夹列表
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="type">
+            1:获取文件列表
+            2:获取文件夹列表
+            3:获取文件和文件夹列表
+            </param>
+            <param name="keyword">
+            获取包含Keyword的文件或文件夹，若要list所有文件或文件夹，则该参数为空
+            若listType=FileAndFolder，则该参数无效
+            </param>
+            <param name="timeout">超时</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+            <exception cref="T:System.Net.WebException"></exception>
+        </member>
+        <member name="M:AHelper.FTP.CreateRequestFile(System.String,System.String,System.String,System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            创建一个FTP请求
+            </summary>
+            <param name="remote">远程地址，格式为ftp://xxx</param>
+            <param name="user">FTP登录用户名</param>
+            <param name="pass">FTP登录密码</param>
+            <param name="method">请求的方法，可以是"GET"、"PUT"、"POST"等</param>
+            <param name="timeout">请求的超时时间，单位为秒，默认超时时间为TIMEOUT</param>
+            <param name="cancellationToken">
+            用于取消请求的令牌，如果请求被取消，则会抛出<see cref="T:System.OperationCanceledException"/>
+            </param>
+            <returns>创建的FTP请求</returns>
+        </member>
+        <member name="M:AHelper.FTP.CreateRequestDir(System.String,System.String,System.String,System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            创建一个FTP请求
+            </summary>
+            <param name="remote">远程地址，格式为ftp://xxx</param>
+            <param name="user">FTP登录用户名</param>
+            <param name="pass">FTP登录密码</param>
+            <param name="method">请求的方法，可以是"GET"、"PUT"、"POST"等</param>
+            <param name="timeout">请求的超时时间，单位为秒，默认超时时间为TIMEOUT</param>
+            <param name="cancellationToken">
+            用于取消请求的令牌，如果请求被取消，则会抛出<see cref="T:System.OperationCanceledException"/>
+            </param>
+            <returns>创建的FTP请求</returns>
+        </member>
+        <member name="M:AHelper.FTP.FTPUploadDirOperation.#ctor(System.String,System.String,System.String,System.String,System.IO.SearchOption,System.String,System.UInt16,System.Int32)">
+            <summary>
+            FTP上传文件夹
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="localPath">本地文件路径</param>
+            <param name="option">搜索模式</param>
+            <param name="pattern">匹配模式</param>
+            <param name="timeout">超时</param>
+            <param name="bufferSize">缓存大小</param>
+        </member>
+        <member name="M:AHelper.FTP.UploadDir(System.String,System.String,System.String,System.String,System.IO.SearchOption,System.String,System.UInt16,System.Int32)">
+            <summary>
+            FTP上传文件夹
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="localPath">本地文件路径</param>
+            <param name="option">搜索模式</param>
+            <param name="pattern">匹配模式</param>
+            <param name="timeout">超时</param>
+            <param name="bufferSize">缓存大小</param>
+        </member>
+        <member name="M:AHelper.FTP.FTPUploadFileOperation.#ctor(System.String,System.String,System.String,System.String,System.UInt16,System.Int32)">
+            <summary>
+            FTP上传文件
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="localPath">本地文件路径</param>
+            <param name="timeout">超时</param>
+            <param name="bufferSize">缓存大小</param>
+        </member>
+        <member name="M:AHelper.FTP.UploadFile(System.String,System.String,System.String,System.String,System.UInt16,System.Int32)">
+            <summary>
+            FTP上传文件
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="localPath">本地文件路径</param>
+            <param name="timeout">超时</param>
+            <param name="bufferSize">缓存大小</param>
+        </member>
+        <member name="T:AHelper.HTTP">
+            <summary>
+            HTTP
+            </summary>
+        </member>
+        <member name="M:AHelper.HTTP.Connect(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            预留给能够将连接改为管道方式的代理服务器
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.Connect(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            预留给能够将连接改为管道方式的代理服务器
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.Connect(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            预留给能够将连接改为管道方式的代理服务器
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.ConnectAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            预留给能够将连接改为管道方式的代理服务器
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.ConnectAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            预留给能够将连接改为管道方式的代理服务器
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.ConnectAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            预留给能够将连接改为管道方式的代理服务器
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.Delete(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求删除指定的资源
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.Delete(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求删除指定的资源
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.Delete(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求删除指定的资源
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.DeleteAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求删除指定的资源
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.DeleteAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求删除指定的资源
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.DeleteAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求删除指定的资源
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.Download(System.String,System.String,System.Boolean,System.UInt16,System.Int32)">
+            <summary>
+            HTTP 下载文件
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="localPath">保存路径</param>
+            <param name="isOverWrite">覆盖</param>
+            <param name="timeout">超时</param>
+            <param name="bufferSize">容量</param>
+            <exception cref="T:System.Exception">异常</exception>
+        </member>
+        <member name="M:AHelper.HTTP.Download(System.Collections.Generic.IEnumerable{System.String},System.String,System.Boolean,System.UInt16,System.Int32)">
+            <summary>
+            HTTP 下载文件
+            </summary>
+            <param name="remoteUrls">远端路径</param>
+            <param name="localPath">保存根路径</param>
+            <param name="isOverWrite">覆盖</param>
+            <param name="timeout">超时</param>
+            <param name="bufferSize">容量</param>
+            <exception cref="T:System.Exception">异常</exception>
+        </member>
+        <member name="T:AHelper.HTTP.Option">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+        </member>
+        <member name="F:AHelper.HTTP.Option.Timeout">
+            <summary>
+            超时时间
+            </summary>
+        </member>
+        <member name="F:AHelper.HTTP.Option.Cookie">
+            <summary>
+            cookie
+            </summary>
+        </member>
+        <member name="F:AHelper.HTTP.Option.Encoding">
+            <summary>
+            编码:默认UTF-8
+            </summary>
+        </member>
+        <member name="F:AHelper.HTTP.Option.ContentType">
+            <summary>
+            默认:application/x-www-form-urlencoded
+            </summary>
+        </member>
+        <member name="M:AHelper.HTTP.Option.#ctor">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+        </member>
+        <member name="M:AHelper.HTTP.Option.#ctor(System.UInt16,System.String,System.Text.Encoding,System.String)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="encoding">编码:默认UTF-8</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <param name="contentType"></param>
+        </member>
+        <member name="M:AHelper.HTTP.Get(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteUrl">路径</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.HTTP.GetAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteUrl">路径</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.HTTP.GetStream(System.String,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteUrl">路径</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.HTTP.GetStreamAsync(System.String,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteUrl">路径</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.HTTP.GetMD5(System.String,System.UInt16)">
+            <summary>
+            HTTP 下载文件
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="timeout">超时</param>
+            <exception cref="T:System.Exception">异常</exception>
+        </member>
+        <member name="M:AHelper.HTTP.GetMD5Async(System.String,System.UInt16)">
+            <summary>
+            HTTP 下载文件
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="timeout">超时</param>
+            <exception cref="T:System.Exception">异常</exception>
+        </member>
+        <member name="M:AHelper.HTTP.GetJson``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteUrl">路径</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.HTTP.GetJsonAsync``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteUrl">路径</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.HTTP.GetXml``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteUrl">路径</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.HTTP.GetXmlAsync``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteUrl">路径</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.HTTP.GetYaml``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteUrl">路径</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.HTTP.GetYamlAsync``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteUrl">路径</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AHelper.HTTP.Head(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.Head(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.Head(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.HeadAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.HeadAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.HeadAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的资源的响应消息报告
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.Options(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            返回服务器正对特定资源所支持的HTTP请求方法
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.Options(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            返回服务器正对特定资源所支持的HTTP请求方法
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.Options(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            返回服务器正对特定资源所支持的HTTP请求方法
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.OptionsAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            返回服务器正对特定资源所支持的HTTP请求方法
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.OptionsAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            返回服务器正对特定资源所支持的HTTP请求方法
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.OptionsAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            返回服务器正对特定资源所支持的HTTP请求方法
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.Post(System.String,System.String,AHelper.HTTP.Option)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="data">上传数据</param>
+            <param name="options">选项参数</param>
+        </member>
+        <member name="M:AHelper.HTTP.Post(System.String,AHelper.HTTP.Option)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="options">选项参数</param>
+        </member>
+        <member name="M:AHelper.HTTP.Post(System.String,System.Byte[],AHelper.HTTP.Option)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="data">上传数据</param>
+            <param name="options">选项参数</param>
+        </member>
+        <member name="M:AHelper.HTTP.PostStream(System.String,System.String,AHelper.HTTP.Option)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="data">上传数据</param>
+            <param name="options">选项参数</param>
+        </member>
+        <member name="M:AHelper.HTTP.PostStream(System.String,AHelper.HTTP.Option)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="options">选项参数</param>
+        </member>
+        <member name="M:AHelper.HTTP.PostStream(System.String,System.Byte[],AHelper.HTTP.Option)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="data">上传数据</param>
+            <param name="options">选项参数</param>
+        </member>
+        <member name="M:AHelper.HTTP.PostAsync(System.String,System.String,AHelper.HTTP.Option)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="data">上传数据</param>
+            <param name="options">选项参数</param>
+        </member>
+        <member name="M:AHelper.HTTP.PostAsync(System.String,AHelper.HTTP.Option)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="options">选项参数</param>
+        </member>
+        <member name="M:AHelper.HTTP.PostAsync(System.String,System.Byte[],AHelper.HTTP.Option)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="data">上传数据</param>
+            <param name="options">选项参数</param>
+            <returns>返回内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.PostStreamAsync(System.String,System.String,AHelper.HTTP.Option)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="data">上传数据</param>
+            <param name="options">选项参数</param>
+        </member>
+        <member name="M:AHelper.HTTP.PostStreamAsync(System.String,AHelper.HTTP.Option)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="options">选项参数</param>
+        </member>
+        <member name="M:AHelper.HTTP.PostStreamAsync(System.String,System.Byte[],AHelper.HTTP.Option)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="data">上传数据</param>
+            <param name="options">选项参数</param>
+            <returns>返回内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.Put(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            向指定资源位置上传其最新内容
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.Put(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            向指定资源位置上传其最新内容
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.PutAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            向指定资源位置上传其最新内容
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.PutAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            向指定资源位置上传其最新内容
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.Trace(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            回显服务器收到的请求
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.Trace(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            回显服务器收到的请求
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.Trace(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            回显服务器收到的请求
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.TraceAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            回显服务器收到的请求
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.TraceAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            回显服务器收到的请求
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AHelper.HTTP.TraceAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            回显服务器收到的请求
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.NetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="T:AHelper.Net">
+            <summary>
+            网络 工具类
+            </summary>
+            <summary>
+            网络 工具类
+            </summary>
+        </member>
+        <member name="F:AHelper.Net.BUFFER_SIZE">
+            <summary>
+            容量缓存 : 1M
+            </summary>
+        </member>
+        <member name="M:AHelper.Net.UriParamSerialize(System.Object@)">
+            <summary>
+            Model对象转换为uri网址参数形式
+            </summary>
+            <param name="obj">Model对象</param>
+        </member>
+        <member name="M:AHelper.Net.RemoveFileHeader(System.IO.Stream,System.Int32)">
+            <summary>
+            移除文件头
+            </summary>
+            <param name="stream">文件流</param>
+            <param name="bufferSize">容量大小</param>
+        </member>
+        <member name="M:AHelper.Net.RemoveFileHeaderAsync(System.IO.Stream,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            移除文件头
+            </summary>
+            <param name="stream">文件流</param>
+            <param name="bufferSize">容量大小</param>
+            <param name="cancellationToken">取消令牌</param>
+        </member>
+        <member name="T:AHelper.Reflect">
+            <summary>
+            反射工具库
+            </summary>
+        </member>
+        <member name="M:AHelper.Reflect.GetEnumFilterOBS``1">
+            <summary>
+            过滤枚举过时字段
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <returns>泛型列表</returns>
+        </member>
+        <member name="M:AHelper.Reflect.GetPropertyFilterOBS``1(System.Reflection.BindingFlags)">
+            <summary>
+            过滤过时属性
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <returns>属性列表</returns>
+        </member>
+        <member name="M:AHelper.Reflect.GetFieldFilterOBS``1(System.Reflection.BindingFlags)">
+            <summary>
+            过滤过时字段
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <returns>属性列表</returns>
+        </member>
+        <member name="M:AHelper.Reflect.GetMemberFilterOBS``1(System.Reflection.BindingFlags)">
+            <summary>
+            过滤成员字段
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <returns>属性列表</returns>
+        </member>
+        <member name="M:AHelper.Reflect.GetMethodFilterOBS``1(System.Reflection.BindingFlags)">
+            <summary>
+            过滤函数字段
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <returns>属性列表</returns>
+        </member>
+        <member name="M:AHelper.Reflect.GetTypesInRunTimeAssemblies(System.Func{System.Type,System.Boolean})">
+            <summary>
+            从当前程序域的运行时程序集中获取所有类型
+            </summary>
+            <param name="filter">类型筛选器</param>
+            <returns>所有类型集合</returns>
+        </member>
+        <member name="M:AHelper.Reflect.GetTypesInAllAssemblies">
+            <summary>
+            从当前程序域的所有程序集中获取所有类型
+            </summary>
+            <returns>所有类型集合</returns>
+        </member>
+        <member name="M:AHelper.Reflect.GetTypesInAllAssemblies(System.Func{System.Type,System.Boolean})">
+            <summary>
+            从当前程序域的所有程序集中获取所有类型
+            </summary>
+            <param name="filter">类型筛选器</param>
+            <returns>所有类型集合</returns>
+        </member>
+        <member name="T:AHelper.TimeStamp">
+            <summary>
+            TimeStamp 时间戳
+            </summary>
+        </member>
+        <member name="P:AHelper.TimeStamp.NowMillisecond">
+            <summary>
+            Get current timestamp / 当前时间戳，单位是毫秒
+            </summary>
+        </member>
+        <member name="P:AHelper.TimeStamp.NowSecond">
+            <summary>
+            Get current timestamp / 当前时间戳，单位是秒
+            </summary>
+        </member>
+        <member name="M:AHelper.TimeStamp.MillisecondToDateTime(System.Int64)">
+            <summary>
+            毫秒级时间戳转为时间
+            </summary>
+            <param name="timestamp">毫秒级时间磋</param>
+        </member>
+        <member name="M:AHelper.TimeStamp.SecondToDateTime(System.Int64)">
+            <summary>
+            秒级时间戳转为时间
+            </summary>
+            <param name="timestamp">秒级时间磋</param>
+        </member>
+        <member name="M:AHelper.TimeStamp.ConvertDateTime(System.DateTime)">
+            <summary>
+             DateTime时间格式转换为Unix时间戳格式
+            </summary>
+        </member>
+        <member name="T:AHelper.Base64">
+            <summary>
+            Base64 文件 解析
+            </summary>
+        </member>
+        <member name="M:AHelper.Base64.SerializeData``1(``0)">
+            <summary>
+            序列化 未加密
+            </summary>
+        </member>
+        <member name="M:AHelper.Base64.SerializeData``1(``0@)">
+            <summary>
+            序列化 未加密
+            </summary>
+        </member>
+        <member name="M:AHelper.Base64.Serialize(System.Byte[],System.Base64FormattingOptions)">
+            <summary>
+            序列化 未加密
+            </summary>
+        </member>
+        <member name="M:AHelper.Base64.Serialize(System.String,System.Text.Encoding)">
+            <summary>
+            序列化 未加密
+            </summary>
+        </member>
+        <member name="M:AHelper.Base64.Deserialize``1(System.String)">
+            <summary>
+            反序列化 未加密
+            </summary>
+        </member>
+        <member name="T:AHelper.Binary">
+            <summary>
+            Binary 文件 解析
+            </summary>
+        </member>
+        <member name="M:AHelper.Binary.Serialize``1(``0@)">
+            <summary>
+            序列化 未加密
+            </summary>
+        </member>
+        <member name="M:AHelper.Binary.Deserialize``1(System.Byte[]@)">
+            <summary>
+            反序列化 未加密
+            </summary>
+        </member>
+        <member name="T:AHelper.DataEncrypt">
+            <summary>
+            数据加密解密
+            </summary>
+        </member>
+        <member name="M:AHelper.DataEncrypt.Encrypt(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            加密
+            </summary>
+            <param name="data">数据源</param>
+            <param name="rgbKey">对称算法的密钥</param>
+            <param name="rgbIV">对称算法的初始化向量</param>
+            <returns></returns>
+        </member>
+        <member name="M:AHelper.DataEncrypt.Encrypt(System.Byte[])">
+            <summary>
+            加密
+            </summary>
+        </member>
+        <member name="M:AHelper.DataEncrypt.Encrypt(System.String)">
+            <summary>
+            加密
+            </summary>
+        </member>
+        <member name="M:AHelper.DataEncrypt.EncryptToStr(System.String)">
+            <summary>
+            加密
+            </summary>
+        </member>
+        <member name="M:AHelper.DataEncrypt.Decrypt(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            解码 
+            </summary>
+            <param name="data">数据源</param>
+            <param name="rgbKey">对称算法的密钥</param>
+            <param name="rgbIV">对称算法的初始化向量</param>
+        </member>
+        <member name="M:AHelper.DataEncrypt.Decrypt(System.Byte[])">
+            <summary>
+            解码 
+            </summary>
+        </member>
+        <member name="M:AHelper.DataEncrypt.DecryptToStr(System.Byte[])">
+            <summary>
+            解码 
+            </summary>
+        </member>
+        <member name="M:AHelper.DataEncrypt.Decrypt(System.String)">
+            <summary>
+            解码 
+            </summary>
+        </member>
+        <member name="T:AHelper.HashTable">
+            <summary>
+            HashTabel 工具类
+            </summary>
+        </member>
+        <member name="M:AHelper.HashTable.Create(System.Object[])">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="M:AHelper.HashTable.Create(System.Collections.Generic.IDictionary{System.Object,System.Object})">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="T:AHelper.Json">
+            <summary>
+            Json 工具类
+            </summary>
+        </member>
+        <member name="P:AHelper.Json.JSONNormalSettings">
+            <summary>
+            Json默认设置
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Serialize(System.Object@)">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Serialize(System.Object@,Newtonsoft.Json.JsonSerializerSettings@)">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Serialize``1(``0@,Newtonsoft.Json.JsonSerializerSettings@)">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Serialize``1(``0@)">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.ToHashTable(System.String@)">
+            <summary>
+            反序列化 HashTable
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Deserialize(System.String@,Newtonsoft.Json.JsonSerializerSettings@)">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Deserialize(System.String@)">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Deserialize``1(System.String@,Newtonsoft.Json.JsonSerializerSettings@)">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Deserialize``1(System.String@)">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Deserialize(System.String@,System.Type@,Newtonsoft.Json.JsonSerializerSettings@)">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.Deserialize(System.String@,System.Type@)">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.PopulateObject``1(System.String,``0,Newtonsoft.Json.JsonSerializerSettings@)">
+            <summary>
+            反序列化 填充对象
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.PopulateObject``1(System.String,``0)">
+            <summary>
+            反序列化 填充对象
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.PopulateObject(System.String,System.Object,Newtonsoft.Json.JsonSerializerSettings@)">
+            <summary>
+            反序列化 填充对象
+            </summary>
+        </member>
+        <member name="M:AHelper.Json.PopulateObject(System.String,System.Object)">
+            <summary>
+            反序列化 填充对象
+            </summary>
+        </member>
+        <member name="T:AHelper.Sort">
+            <summary>
+            排序工具
+            默认排序方向 从小到大
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.AutomaticArray``1(System.Array@,``0@)">
+            <summary>
+            自动扩容，并保存数据
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Counting(System.Collections.Generic.IList{System.Int32}@)">
+            <summary>
+            计数排序
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Counting(System.Collections.Generic.IList{System.Int64}@)">
+            <summary>
+            计数排序
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Radix(System.Collections.Generic.IList{System.Int64}@)">
+            <summary>
+            基数排序
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Radix(System.Collections.Generic.IList{System.Int32}@)">
+            <summary>
+            基数排序
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Radix(System.Collections.Generic.IList{System.Int16}@)">
+            <summary>
+            基数排序
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Int64}@)">
+            <summary>
+            桶排序
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Int32}@)">
+            <summary>
+            桶排序
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Int16}@)">
+            <summary>
+            桶排序
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Single}@,System.Int32@)">
+            <summary>
+            桶排序
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Double}@,System.Int32@)">
+            <summary>
+            桶排序
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Decimal}@,System.Int32@)">
+            <summary>
+            桶排序
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.InsertIntoLinkList``1(System.Collections.Generic.LinkedList{``0},``0)">
+            <summary>  
+            按升序插入 linklist   
+            </summary>  
+            <param name="linkedList"> 要排序的链表 </param>  
+            <param name="num"> 要插入排序的数字 </param>  
+        </member>
+        <member name="M:AHelper.Sort.Merge``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
+            <summary>
+            归并排序
+            数据量:1000以下适用
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Merge``1(System.Collections.Generic.IList{``0}@)">
+            <summary>
+            归并排序
+            数据量:1000以下适用
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Heap``1(System.Collections.Generic.IList{``0}@)">
+            <summary>
+            堆排序
+            数据量:1000以下适用
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.HeapSort_MaxHeaping``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@)">
+            <summary>
+            将指定的结点调整为堆。
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Heap``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
+            <summary>
+            堆排序
+            数据量:1000以下适用
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.HeapSort_MaxHeaping``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@,System.Func{``0,``0,System.Int32}@)">
+            <summary>
+            将指定的结点调整为堆。
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Select``1(System.Collections.Generic.IList{``0}@)">
+            <summary>
+            选择排序 数据量:100以下适用
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Select``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
+            <summary>
+            选择排序 数据量:100以下适用
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Shell``1(System.Collections.Generic.IList{``0}@)">
+            <summary>
+            希尔排序
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Shell``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
+            <summary>
+            希尔排序
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Insert``1(System.Collections.Generic.IList{``0}@)">
+            <summary>
+            插入排序
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Insert``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
+            <summary>
+            插入排序
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Quick``1(System.Collections.Generic.IList{``0}@)">
+            <summary>
+            快速排序
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Quick``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
+            <summary>
+            快速排序
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Bubble``1(System.Collections.Generic.IList{``0}@)">
+            <summary>
+            单向冒泡排序
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.Bubble``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
+            <summary>
+            单向冒泡排序
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.BubbleTwoWay``1(System.Collections.Generic.IList{``0}@)">
+            <summary>
+            双向冒泡排序
+            </summary>
+        </member>
+        <member name="M:AHelper.Sort.BubbleTwoWay``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
+            <summary>
+            双向冒泡排序
+            </summary>
+        </member>
+        <member name="T:AHelper.Xml">
+            <summary>
+            XML 工具类
+            </summary>
+        </member>
+        <member name="M:AHelper.Xml.Serialize``1(``0@,System.String@,System.Text.Encoding@)">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Xml.Deserialize``1(System.String@,System.Text.Encoding@)">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="T:AHelper.Yaml">
+            <summary>
+            Yaml 解析
+            </summary>
+        </member>
+        <member name="M:AHelper.Yaml.Serialize(System.Object@)">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Yaml.ToJson(System.String@)">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:AHelper.Yaml.Deserialize``1(System.String@)">
+            <summary>
+            反序列化
+            </summary>
+        </member>
+        <member name="T:AHelper.Guid">
+            <summary>
+            生成一个新的 GUID 对象。
+            </summary>
+            <returns>新的 GUID 对象。</returns>
+        </member>
+        <member name="M:AHelper.Guid.New">
+            <summary>
+            生成一个新的 GUID 对象。
+            </summary>
+            <returns>新的 GUID 对象。</returns>
+        </member>
+        <member name="M:AHelper.Guid.New(System.String@)">
+            <summary>
+            生成一个新的 GUID 字符串。
+            </summary>
+            <param name="format">指定 GUID 字符串的格式，默认为 "N" 格式。</param>
+            <returns>新的 GUID 字符串。</returns>
+        </member>
+        <member name="M:AHelper.Guid.NewBase64">
+            <summary>
+            生成一个新的 Base64 编码的 GUID 字符串。
+            </summary>
+            <returns>新的 Base64 编码的 GUID 字符串。</returns>
         </member>
         <member name="T:AHelper.Hash">
             <summary>

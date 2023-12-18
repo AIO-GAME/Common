@@ -22,12 +22,12 @@ public interface IProgressInfo
     /// <summary>
     /// 总值
     /// </summary>
-    long Total { get; }
+    long TotalValue { get; }
 
     /// <summary>
     /// 当前值
     /// </summary>
-    long Current { get; }
+    long CurrentValue { get; }
 
     /// <summary>
     /// 每秒下载速度

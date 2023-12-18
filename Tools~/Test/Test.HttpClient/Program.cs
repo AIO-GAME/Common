@@ -24,32 +24,33 @@ public class Program
         const string serverIp = @"ftpshare-hot.ingcreations.com";
         const string user = "ftpshare-hot";
         const string pass = "ingcreations2023";
-        const string remote = "ftp://ftpshare-hot.ingcreations.com/Test/android-ndk-r16b-windows-x86_64.zip";
-        var handle = AHelper.Net.FTP.DownloadFile(remote, user, pass, @"E:\WWW\Test\android-ndk-r16b-windows-x86_64.zip");
+        const string remote = "ftp://ftpshare-hot.ingcreations.com/Test/";
+        var handle = AHelper.FTP.DownloadDir(remote, user, pass, @"E:\WWW\Test\", overwrite: true);
         handle.Event = progress;
         handle.Begin();
 
-        var index = 0;
-        Task.Factory.StartNew(async () =>
-        {
-            while (handle.Report.State != EProgressState.Finish &&
-                   handle.Report.State != EProgressState.Fail &&
-                   handle.Report.State != EProgressState.Cancel)
-            {
-                await Task.Delay(1000);
-                handle.Pause();
-                await Task.Delay(1000);
-                handle.Resume();
-
-                // if (index++ == 3)
-                // {
-                //     handle.Cancel();
-                // }
-            }
-
-            handle.Dispose();
-        });
+        // var index = 0;
+        // Task.Factory.StartNew(async () =>
+        // {
+        //     while (handle.Report.State != EProgressState.Finish &&
+        //            handle.Report.State != EProgressState.Fail &&
+        //            handle.Report.State != EProgressState.Cancel)
+        //     {
+        //         await Task.Delay(1000);
+        //         handle.Pause();
+        //         await Task.Delay(1000);
+        //         handle.Resume();
+        //
+        //         // if (index++ == 3)
+        //         // {
+        //         //     handle.Cancel();
+        //         // }
+        //     }
+        //
+        //     handle.Dispose();
+        // });
         await handle.WaitAsync();
+        Console.WriteLine(await AHelper.IO.GetFileMD5Async(@"E:\WWW\Test\android-ndk-r16b-windows-x86_64.zip"));
         // await handle.UploadFileAsync(@"E:\WWW\G101\Version\StandaloneWindows64.json", "StandaloneWindows64.json",
         //     progress);
 

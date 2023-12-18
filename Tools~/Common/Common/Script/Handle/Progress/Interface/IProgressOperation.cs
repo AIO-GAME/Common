@@ -6,7 +6,6 @@
 
 
 using System;
-using System.Collections;
 using System.Threading.Tasks;
 
 /// <summary>
@@ -44,10 +43,13 @@ public interface IProgressOperation : IDisposable
     /// </summary>
     void Resume();
 
+#if NET_5_0_OR_GREATER || NETCOREAPP3_0_OR_GREATER
     /// <summary>
     /// 迭代器等待
     /// </summary>
+    [Obsolete("net framework 5 or net core 3.0 or later version support this", true)]
     IEnumerator WaitCo();
+#endif
 
     /// <summary>
     /// 异步等待
@@ -59,4 +61,9 @@ public interface IProgressOperation : IDisposable
     /// 同步等待
     /// </summary>
     void Wait();
+
+    /// <summary>
+    /// 异步回调
+    /// </summary>
+    void WaitAsyncCallBack();
 }
