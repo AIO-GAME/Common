@@ -13740,6 +13740,9 @@
         <member name="P:AOperation.Event">
             <inheritdoc />
         </member>
+        <member name="P:AOperation.Progress">
+            <inheritdoc />
+        </member>
         <member name="P:AOperation.State">
             <summary>
             状态
@@ -14161,6 +14164,11 @@
         <member name="P:IProgressOperation.Event">
             <summary>
             进度参数
+            </summary>
+        </member>
+        <member name="P:IProgressOperation.Progress">
+            <summary>
+            进度信息
             </summary>
         </member>
         <member name="M:IProgressOperation.Begin">

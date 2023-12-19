@@ -22,7 +22,12 @@ public interface IProgressOperation : IDisposable
     /// 进度参数
     /// </summary>
     IProgressEvent Event { get; set; }
-
+    
+    /// <summary>
+    /// 进度信息
+    /// </summary>
+    public IProgressInfo Progress { get; }
+    
     /// <summary>
     /// 开始
     /// </summary>

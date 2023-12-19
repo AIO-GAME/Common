@@ -46,6 +46,9 @@ public class AOperation : IProgressOperation
         }
     }
 
+    /// <inheritdoc />
+    public IProgressInfo Progress => progress;
+    
     /// <summary>
     /// 状态
     /// </summary>
@@ -209,7 +212,7 @@ public class AOperation : IProgressOperation
         Finish();
     }
 
-    private void Finish()
+    protected void Finish()
     {
         progress.Complete();
         progress.OnComplete?.Invoke(progress);
