@@ -1,4 +1,4 @@
-﻿#if NO_UNITY
+﻿#if !UNITY
 using System;
 using System.Collections.Generic;
 using System.Reflection;

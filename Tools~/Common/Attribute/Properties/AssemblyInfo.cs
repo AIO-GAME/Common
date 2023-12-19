@@ -31,8 +31,6 @@ using System.Runtime.InteropServices;
 [assembly: InternalsVisibleTo("AIO.Unity.Runtime")]
 [assembly: InternalsVisibleTo("AIO.Unity.Editor")]
 
-[assembly: DllAutomation(typeof(AssemblyInfo), "",1)]
-
 /// <summary>
 /// 程序集信息
 /// </summary>

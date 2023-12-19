@@ -21,7 +21,7 @@ namespace AIO.UEditor
             Content = new GUIContent
             {
                 tooltip = "CSDN",
-                image = Resources.Load<Texture>("Texture/CSDN"),
+                image = GEContent.NewApp("CSDN").image
             };
         }
 

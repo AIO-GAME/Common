@@ -8,7 +8,7 @@ using UnityEngine;
 namespace AIO.UEditor
 {
     [HelpURL("https://blog.csdn.net/CJB_King/article/details/89356652")]
-    [GWindow("内置ICON管理器", Group = "Tools",
+    [GWindow("ICON Manager", Group = "Tools",
         Menu = "AIO/Window/Editor Icons",
         MinSizeWidth = 600, MinSizeHeight = 600
     )]
@@ -22,11 +22,13 @@ namespace AIO.UEditor
             iconContentListSmall = new List<GUIContent>();
             iconContentListBig = new List<GUIContent>();
             iconContentListAll = new List<GUIContent>();
+            iconContentListAIO = new List<GUIContent>();
         }
 
         private static readonly List<GUIContent> iconContentListAll;
         private static readonly List<GUIContent> iconContentListSmall;
         private static readonly List<GUIContent> iconContentListBig;
+        private static readonly List<GUIContent> iconContentListAIO;
         private static readonly Dictionary<string, string> iconNames;
 
         private static GUIContent GetIcon(string icon_name)
@@ -68,13 +70,11 @@ namespace AIO.UEditor
             return t;
         }
 
-        private static void SaveIcon(string icon_name)
+        private static void SaveIcon(Texture2D tex)
         {
-            var tex = EditorGUIUtility.IconContent(icon_name).image as Texture2D;
-
             if (tex != null)
             {
-                var path = EditorUtility.SaveFilePanel("Save icon", "", icon_name, "png");
+                var path = EditorUtility.SaveFilePanel("Save icon", "", tex.name, "png");
 
                 if (path == null) return;
                 try
@@ -116,6 +116,24 @@ namespace AIO.UEditor
                 else iconContentListSmall.Add(gc);
             }
 
+            GEContent.LoadSetting();
+            GEContent.LoadApp();
+            foreach (var gc in GEContent.GCSetting
+                         .Select(item => new GUIContent(item.Value.image, string.Concat("Setting|", item.Key))))
+            {
+                iconContentListAIO.Add(gc);
+                iconContentListAll.Add(gc);
+                iconNames.Add(gc.tooltip, gc.tooltip);
+            }
+
+            foreach (var gc in GEContent.GCApp
+                         .Select(item => new GUIContent(item.Value.image, string.Concat("App|", item.Key))))
+            {
+                iconContentListAIO.Add(gc);
+                iconContentListAll.Add(gc);
+                iconNames.Add(gc.tooltip, gc.tooltip);
+            }
+
             Resources.UnloadUnusedAssets();
             GC.Collect();
         }
@@ -136,7 +154,7 @@ namespace AIO.UEditor
         private static bool isWide => Screen.width > 550;
 
         private bool doSearch => !string.IsNullOrWhiteSpace(search) && search != "";
-        private bool viewBigIcons = true;
+        private int viewBigIcons = 0;
         private bool darkPreview = true;
 
         private void SearchGUI()
@@ -198,9 +216,9 @@ namespace AIO.UEditor
             {
                 GUILayout.Label($"Select what icons to show [count:{iconNames.Count}]", GUILayout.Width(250));
                 viewBigIcons = GUILayout.SelectionGrid(
-                    viewBigIcons ? 1 : 0,
-                    new string[] { "Small", "Big" },
-                    2, EditorStyles.toolbarButton) == 1;
+                    viewBigIcons,
+                    new string[] { "Small", "Big", "AIO" },
+                    3, EditorStyles.toolbarButton);
 
                 if (isWide) SearchGUI();
             }
@@ -212,7 +230,7 @@ namespace AIO.UEditor
 
                 scroll = scope.scrollPosition;
 
-                buttonSize = viewBigIcons ? 70 : 40;
+                buttonSize = viewBigIcons == 1 ? 70 : 40;
 
                 // scrollbar_width = ~ 12.5
                 var render_width = Screen.width / ppp - 13f;
@@ -222,7 +240,24 @@ namespace AIO.UEditor
                 List<GUIContent> iconList;
                 if (doSearch)
                     iconList = iconContentListAll.Where(x => x.tooltip.ToLower().Contains(search.ToLower())).ToList();
-                else iconList = viewBigIcons ? iconContentListBig : iconContentListSmall;
+                else
+                {
+                    switch (viewBigIcons)
+                    {
+                        case 0:
+                            iconList = iconContentListSmall;
+                            break;
+                        case 2:
+                            iconList = iconContentListAIO;
+                            break;
+                        case 1:
+                            iconList = iconContentListBig;
+                            break;
+                        default:
+                            iconList = iconContentListAll;
+                            break;
+                    }
+                }
 
                 int row = 0, index = 0;
                 while (index < iconList.Count)
@@ -255,13 +290,14 @@ namespace AIO.UEditor
             if (iconSelected == null || iconSelected.image == null) return;
 
             GUILayout.FlexibleSpace();
-            using (new GUILayout.HorizontalScope(EditorStyles.helpBox, GUILayout.MaxHeight(viewBigIcons ? 140 : 120)))
+            using (new GUILayout.HorizontalScope(EditorStyles.helpBox,
+                       GUILayout.MaxHeight(viewBigIcons == 1 ? 140 : 120)))
             {
                 using (new GUILayout.VerticalScope(GUILayout.Width(130)))
                 {
                     GUILayout.Space(2);
                     GUILayout.Button(iconSelected, darkPreview ? iconPreviewBlack : iconPreviewWhite,
-                        GUILayout.Width(128), GUILayout.Height(viewBigIcons ? 128 : 40));
+                        GUILayout.Width(128), GUILayout.Height(viewBigIcons == 1 ? 128 : 40));
                     GUILayout.Space(5);
 
                     darkPreview = GUILayout.SelectionGrid(
@@ -282,12 +318,32 @@ namespace AIO.UEditor
                     GUILayout.Space(5);
                     EditorGUILayout.HelpBox(s, MessageType.None);
                     GUILayout.Space(5);
-                    EditorGUILayout.TextField("EditorGUIUtility.IconContent(\"" + iconSelected.tooltip + "\")");
+
+                    using (new GUILayout.HorizontalScope())
+                    {
+                        if (viewBigIcons == 2 && iconSelected.tooltip.Contains("|"))
+                        {
+                            var key = iconSelected.tooltip.Split('|');
+                            EditorGUILayout.TextField($"GEContent.Get{key[0]}(\"" + key[1] + "\")");
+                            if (GUILayout.Button("Copy", EditorStyles.miniButton, GUILayout.Width(50)))
+                                EditorGUIUtility.systemCopyBuffer = $"GEContent.Get{key[0]}(\"" + key[1] + "\")";
+                        }
+                        else
+                        {
+                            EditorGUILayout.TextField("EditorGUIUtility.IconContent(\"" + iconSelected.tooltip + "\")");
+                            if (GUILayout.Button("Copy", EditorStyles.miniButton, GUILayout.Width(50)))
+                                EditorGUIUtility.systemCopyBuffer = iconSelected.tooltip;
+                        }
+                    }
+
                     GUILayout.Space(5);
-                    if (GUILayout.Button("Copy to clipboard", EditorStyles.miniButton))
-                        EditorGUIUtility.systemCopyBuffer = iconSelected.tooltip;
-                    if (GUILayout.Button("Save icon to file ...", EditorStyles.miniButton))
-                        SaveIcon(iconSelected.tooltip);
+                    using (new GUILayout.HorizontalScope())
+                    {
+                        if (GUILayout.Button("Save icon to file ...", EditorStyles.miniButton))
+                        {
+                            SaveIcon(iconSelected.image as Texture2D);
+                        }
+                    }
                 }
 
                 GUILayout.Space(10);
@@ -301,6 +357,7 @@ namespace AIO.UEditor
             iconContentListAll.Clear();
             iconContentListSmall.Clear();
             iconContentListBig.Clear();
+            iconContentListAIO.Clear();
         }
     }
 }

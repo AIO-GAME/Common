@@ -8,165 +8,268 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
+using AIO;
 
 public partial class AHelper
 {
-    public partial class Net
+    public partial class HTTP
     {
-        public partial class HTTP
+        private class HttpDownloadsOperation : AOperation
         {
-            /// <summary>
-            /// HTTP 下载文件
-            /// </summary>
-            /// <param name="remoteUrls">远端路径</param>
-            /// <param name="localPath">保存根路径</param>
-            /// <param name="iEvent">回调</param>
-            /// <param name="isOverWrite">覆盖</param>
-            /// <param name="timeout">超时</param>
-            /// <param name="bufferSize">容量</param>
-            /// <exception cref="Exception">异常</exception>
-            public static async Task DownloadAsync(IEnumerable<string> remoteUrls, string localPath,
-                IProgressEvent iEvent = null,
+            private List<string> Remote { get; }
+            private string LocalPath { get; }
+            private bool IsOverWrite { get; }
+            private ushort Timeout { get; }
+            private int BufferSize { get; }
+            private Dictionary<string, HttpWebResponse> httpWebResponses { get; }
+            private Dictionary<string, HttpWebRequest> httpWebRequest { get; }
+            private Dictionary<string, FileStream> fileStreams { get; }
+
+            public HttpDownloadsOperation(
+                IEnumerable<string> remoteUrls,
+                string localPath,
                 bool isOverWrite = false,
-                ushort timeout = TIMEOUT,
-                int bufferSize = BUFFER_SIZE
-            )
+                ushort timeout = Net.TIMEOUT,
+                int bufferSize = Net.BUFFER_SIZE)
             {
-                var httpWebResponses = new Dictionary<string, HttpWebResponse>();
-                var fileStreams = new Dictionary<string, FileStream>();
-                var progress = new AProgress(iEvent);
+                Remote = new List<string>();
+                LocalPath = localPath;
+                IsOverWrite = isOverWrite;
+                Timeout = timeout;
+                BufferSize = bufferSize;
+                httpWebResponses = new Dictionary<string, HttpWebResponse>();
+                httpWebRequest = new Dictionary<string, HttpWebRequest>();
+                fileStreams = new Dictionary<string, FileStream>();
                 foreach (var remoteUrl in remoteUrls)
                 {
-                    var remote = remoteUrl.Replace("\\", "/");
-                    FileStream outputStream;
-                    HttpWebResponse response;
-                    try
+                    if (string.IsNullOrEmpty(remoteUrl))
                     {
-                        var request = (HttpWebRequest)WebRequest.Create(new Uri(remote));
-                        request.Timeout = timeout;
-
-                        var local = Path.Combine(localPath, Path.GetFileName(remote));
-                        outputStream = await AddFileHeaderAsync(local, remote, isOverWrite);
-                        if (outputStream is null) continue;
-
-                        var temp = outputStream.Position - CODE.Length;
-                        if (temp > 0) request.AddRange(temp);
-
-                        response = (HttpWebResponse)await request.GetResponseAsync();
-                        progress.Total += response.ContentLength;
-                    }
-                    catch (WebException e)
-                    {
-                        progress.OnError?.Invoke(e);
+                        Event.OnError?.Invoke(new WebException("RemoteUrl is null or empty"));
                         continue;
                     }
 
-                    fileStreams.Add(remote, outputStream);
-                    httpWebResponses.Add(remote, response);
+                    Remote.Add(remoteUrl.Replace("\\", "/"));
                 }
-
-                foreach (var item in httpWebResponses.Keys)
-                {
-                    progress.CurrentInfo = item;
-                    progress.Current += fileStreams[item].Position - CODE.Length;
-                    var responseStream = httpWebResponses[item].GetResponseStream();
-                    if (responseStream is null) throw new AIO.NetGetResponseStream("HTTP", httpWebResponses[item]);
-
-                    var buffer = new byte[bufferSize];
-                    var readCount = await responseStream.ReadAsync(buffer, 0, bufferSize);
-                    while (readCount > 0)
-                    {
-                        await fileStreams[item].WriteAsync(buffer, 0, readCount);
-                        progress.Current += readCount;
-                        readCount = await responseStream.ReadAsync(buffer, 0, bufferSize);
-                    }
-
-                    responseStream.Close();
-                    httpWebResponses[item].Close();
-                    await RemoveFileHeaderAsync(fileStreams[item]);
-                    fileStreams[item].Close();
-                }
-
-
-                progress.OnComplete?.Invoke();
             }
 
-            /// <summary>
-            /// HTTP 下载文件
-            /// </summary>
-            /// <param name="remoteUrls">远端路径</param>
-            /// <param name="localPath">保存根路径</param>
-            /// <param name="iEvent">回调</param>
-            /// <param name="isOverWrite">覆盖</param>
-            /// <param name="timeout">超时</param>
-            /// <param name="bufferSize">容量</param>
-            /// <exception cref="Exception">异常</exception>
-            public static void Download(IEnumerable<string> remoteUrls, string localPath,
-                IProgressEvent iEvent = null,
-                bool isOverWrite = false,
-                ushort timeout = TIMEOUT,
-                int bufferSize = BUFFER_SIZE
-            )
+            protected override void OnBegin()
             {
-                var httpWebResponses = new Dictionary<string, HttpWebResponse>();
-                var fileStreams = new Dictionary<string, FileStream>();
-                var progress = new AProgress(iEvent);
-                foreach (var remoteUrl in remoteUrls)
+                foreach (var remote in Remote)
                 {
-                    var remote = remoteUrl.Replace("\\", "/");
+                    var request = (HttpWebRequest)WebRequest.Create(new Uri(remote));
+                    request.Timeout = Timeout;
+                    httpWebRequest[remote] = request;
+                }
+            }
 
-                    FileStream outputStream;
-                    HttpWebResponse response;
+            protected override void OnWait()
+            {
+                for (var index = Remote.Count - 1; index >= 0; index--)
+                {
+                    var remote = Remote[index];
+                    if (fileStreams.ContainsKey(remote)) continue;
+                    while (State == EProgressState.Pause) Thread.Sleep(100);
                     try
                     {
-                        var request = (HttpWebRequest)WebRequest.Create(new Uri(remote));
-                        request.Timeout = timeout;
-                        outputStream = AddFileHeader(Path.Combine(localPath, Path.GetFileName(remote)), remote,
-                            isOverWrite);
+                        var local = Path.Combine(LocalPath, Path.GetFileName(remote));
+                        var outputStream = Net.AddFileHeader(local, () => GetMD5(remote), IsOverWrite);
+                        if (outputStream is null)
+                        {
+                            Remote.RemoveAt(index);
+                            continue;
+                        }
 
-                        if (outputStream is null) continue;
-                        var temp = outputStream.Position - CODE.Length;
-                        if (temp > 0) request.AddRange(temp);
+                        if (!outputStream.CanWrite)
+                        {
+                            StartValue += IO.GetFileLength(local);
+                            Remote.RemoveAt(index);
+                            return;
+                        }
 
-                        response = (HttpWebResponse)request.GetResponse();
-                        progress.Total += response.ContentLength;
+                        fileStreams[remote] = outputStream;
+                        var temp = outputStream.Position - Net.CODE.Length;
+                        if (temp > 0) httpWebRequest[remote].AddRange(temp);
+                        while (State == EProgressState.Pause) Thread.Sleep(100);
+                        httpWebResponses[remote] = (HttpWebResponse)httpWebRequest[remote].GetResponse();
+                        TotalValue += httpWebResponses[remote].ContentLength;
+                        CurrentInfo = remote;
+                        StartValue += temp;
                     }
                     catch (WebException e)
                     {
-                        progress.OnError?.Invoke(e);
+                        Event.OnError?.Invoke(e);
+                        Remote.RemoveAt(index);
+                    }
+                }
+
+                foreach (var remote in Remote)
+                {
+                    CurrentInfo = remote;
+                    var responseStream = httpWebResponses[remote].GetResponseStream();
+                    if (responseStream is null)
+                    {
+                        Event.OnError?.Invoke(new NetGetResponseStream("HTTP", httpWebResponses[remote]));
                         continue;
                     }
 
+                    try
+                    {
+                        var buffer = new byte[BufferSize];
+                        while (State == EProgressState.Pause) Thread.Sleep(100);
+                        var readCount = responseStream.Read(buffer, 0, BufferSize);
 
-                    fileStreams.Add(remote, outputStream);
-                    httpWebResponses.Add(remote, response);
+                        while (readCount > 0)
+                        {
+                            if (State == EProgressState.Running)
+                            {
+                                fileStreams[remote].Write(buffer, 0, readCount);
+                                CurrentValue += readCount;
+                                readCount = responseStream.Read(buffer, 0, BufferSize);
+                            }
+                            else Thread.Sleep(100);
+                        }
+
+                        responseStream.Close();
+                        httpWebResponses[remote].Close();
+                        Net.RemoveFileHeader(fileStreams[remote]);
+                        fileStreams[remote].Close();
+                    }
+                    catch (Exception e)
+                    {
+                        State = EProgressState.Fail;
+                        responseStream.Close();
+                        httpWebResponses[remote].Close();
+                        fileStreams[remote].Close();
+                        Event.OnError?.Invoke(e);
+                        return;
+                    }
                 }
 
-                foreach (var item in httpWebResponses.Keys)
-                {
-                    progress.CurrentInfo = item;
-                    progress.Current += fileStreams[item].Position - CODE.Length;
-                    var responseStream = httpWebResponses[item].GetResponseStream();
-                    if (responseStream is null) throw new AIO.NetGetResponseStream("HTTP", httpWebResponses[item]);
+                State = EProgressState.Finish;
+            }
 
-                    var buffer = new byte[bufferSize];
-                    var readCount = responseStream.Read(buffer, 0, bufferSize);
-                    while (readCount > 0)
+            protected override void OnDispose()
+            {
+                foreach (var remote in Remote)
+                {
+                    httpWebRequest[remote].Abort();
+                    httpWebResponses[remote].Close();
+                    fileStreams[remote].Close();
+                }
+
+                httpWebRequest.Clear();
+                httpWebResponses.Clear();
+                fileStreams.Clear();
+            }
+
+            protected override async Task OnWaitAsync()
+            {
+                for (var index = Remote.Count - 1; index >= 0; index--)
+                {
+                    while (State == EProgressState.Pause) await Task.Delay(100, cancellationToken);
+                    var remote = Remote[index];
+                    if (fileStreams.ContainsKey(remote)) continue;
+                    try
                     {
-                        fileStreams[item].Write(buffer, 0, readCount);
-                        progress.Current += readCount;
-                        readCount = responseStream.Read(buffer, 0, bufferSize);
+                        var local = Path.Combine(LocalPath, Path.GetFileName(remote));
+                        var outputStream = await Net.AddFileHeaderAsync(local, () => GetMD5Async(remote), IsOverWrite,
+                            cancellationToken);
+                        if (outputStream is null)
+                        {
+                            Remote.RemoveAt(index);
+                            continue;
+                        }
+
+                        if (!outputStream.CanWrite)
+                        {
+                            StartValue += IO.GetFileLength(local);
+                            Remote.RemoveAt(index);
+                            return;
+                        }
+
+                        fileStreams[remote] = outputStream;
+                        var temp = outputStream.Position - Net.CODE.Length;
+                        if (temp > 0) httpWebRequest[remote].AddRange(temp);
+                        while (State == EProgressState.Pause) await Task.Delay(100, cancellationToken);
+                        httpWebResponses[remote] = (HttpWebResponse)await httpWebRequest[remote].GetResponseAsync();
+                        TotalValue += httpWebResponses[remote].ContentLength;
+                        CurrentInfo = remote;
+                        StartValue += temp;
+                    }
+                    catch (WebException e)
+                    {
+                        Event.OnError?.Invoke(e);
+                        Remote.RemoveAt(index);
+                    }
+                }
+
+                var buffer = new byte[BufferSize];
+                foreach (var remote in Remote)
+                {
+                    CurrentInfo = remote;
+                    var responseStream = httpWebResponses[remote].GetResponseStream();
+                    if (responseStream is null)
+                    {
+                        Event.OnError?.Invoke(new NetGetResponseStream("HTTP", httpWebResponses[remote]));
+                        continue;
                     }
 
-                    responseStream.Close();
-                    httpWebResponses[item].Close();
-                    RemoveFileHeader(fileStreams[item]);
-                    fileStreams[item].Close();
+                    try
+                    {
+                        var readCount = await responseStream.ReadAsync(buffer, 0, BufferSize, cancellationToken);
+                        while (readCount > 0)
+                        {
+                            if (State == EProgressState.Running)
+                            {
+                                await fileStreams[remote].WriteAsync(buffer, 0, readCount, cancellationToken);
+                                CurrentValue += readCount;
+                                readCount = await responseStream.ReadAsync(buffer, 0, BufferSize,
+                                    cancellationToken);
+                            }
+                            else
+                            {
+                                await Task.Delay(100, cancellationToken);
+                            }
+                        }
+
+                        responseStream.Close();
+                        httpWebResponses[remote].Close();
+                        await Net.RemoveFileHeaderAsync(fileStreams[remote], cancellationToken: cancellationToken);
+                        fileStreams[remote].Close();
+                    }
+                    catch (Exception e)
+                    {
+                        responseStream.Close();
+                        httpWebResponses[remote].Close();
+                        fileStreams[remote].Close();
+                        State = EProgressState.Fail;
+                        Event.OnError?.Invoke(e);
+                        return;
+                    }
                 }
 
-                progress.OnComplete?.Invoke();
+                State = EProgressState.Finish;
             }
+        }
+
+        /// <summary>
+        /// HTTP 下载文件
+        /// </summary>
+        /// <param name="remoteUrls">远端路径</param>
+        /// <param name="localPath">保存根路径</param>
+        /// <param name="isOverWrite">覆盖</param>
+        /// <param name="timeout">超时</param>
+        /// <param name="bufferSize">容量</param>
+        /// <exception cref="Exception">异常</exception>
+        public static IProgressOperation Download(IEnumerable<string> remoteUrls, string localPath,
+            bool isOverWrite = false,
+            ushort timeout = Net.TIMEOUT,
+            int bufferSize = Net.BUFFER_SIZE
+        )
+        {
+            return new HttpDownloadsOperation(remoteUrls, localPath, isOverWrite, timeout, bufferSize);
         }
     }
 }

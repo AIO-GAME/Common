@@ -20,7 +20,7 @@ namespace AIO.UEditor
             Content = new GUIContent
             {
                 tooltip = "Github",
-                image = Resources.Load<Texture>("Texture/github-mark-white"),
+                image = GEContent.NewApp("Github-mark-white").image
             };
         }
 

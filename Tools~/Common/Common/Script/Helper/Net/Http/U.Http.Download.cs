@@ -1,146 +1,207 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using AIO;
 
 public partial class AHelper
 {
-    /// <summary>
-    /// 容量缓存 : 1M
-    /// </summary>
-    internal const int BUFFER_SIZE = 1024 * 1024;
-
-    public partial class Net
+    public partial class HTTP
     {
-        public partial class HTTP
+        private class HttpDownloadOperation : AOperation
         {
-            /// <summary>
-            /// HTTP 下载文件
-            /// </summary>
-            /// <param name="remoteUrl">远端路径</param>
-            /// <param name="localPath">保存路径</param>
-            /// <param name="iEvent">回调</param>
-            /// <param name="isOverWrite">覆盖</param>
-            /// <param name="timeout">超时</param>
-            /// <param name="bufferSize">容量</param>
-            /// <exception cref="Exception">异常</exception>
-            public static void Download(
+            private string Remote { get; }
+            private string LocalPath { get; }
+            private bool IsOverWrite { get; }
+            private ushort Timeout { get; }
+            private int BufferSize { get; }
+            private FileStream outputStream;
+            private HttpWebRequest request;
+
+            public HttpDownloadOperation(
                 string remoteUrl,
                 string localPath,
-                IProgressEvent iEvent = null,
                 bool isOverWrite = false,
-                ushort timeout = TIMEOUT,
-                int bufferSize = BUFFER_SIZE
-            )
+                ushort timeout = Net.TIMEOUT,
+                int bufferSize = Net.BUFFER_SIZE)
             {
-                var remote = remoteUrl.Replace("\\", "/");
-                var request = (HttpWebRequest)WebRequest.Create(new Uri(remote));
-                request.Timeout = timeout;
-
-                var outputStream = AddFileHeader(localPath, remote, isOverWrite);
-                if (outputStream is null) return;
-                var temp = outputStream.Position - CODE.Length;
-                if (temp > 0) request.AddRange(temp);
-
-                HttpWebResponse response = null;
-                Stream responseStream = null;
-                var progress = new AProgress(iEvent);
-                try
-                {
-                    response = (HttpWebResponse)request.GetResponse();
-                    progress.Total += response.ContentLength;
-                    progress.Current += outputStream.Position - CODE.Length;
-                    progress.CurrentInfo = remote;
-                    responseStream = response.GetResponseStream();
-                    if (responseStream is null) throw new AIO.NetGetResponseStream("HTTP", response);
-
-                    var buffer = new byte[bufferSize];
-                    var readCount = responseStream.Read(buffer, 0, bufferSize);
-                    while (readCount > 0)
-                    {
-                        outputStream.Write(buffer, 0, readCount);
-                        progress.Current += readCount;
-                        readCount = responseStream.Read(buffer, 0, bufferSize);
-                    }
-
-                    RemoveFileHeader(outputStream);
-                    responseStream.Close();
-                    outputStream.Close();
-                    response.Close();
-                    progress.OnComplete?.Invoke();
-                }
-                catch (WebException ex)
-                {
-                    responseStream?.Close();
-                    outputStream.Close();
-                    response?.Close();
-                    progress.OnError?.Invoke(ex);
-                }
+                Remote = remoteUrl.Replace("\\", "/");
+                LocalPath = localPath;
+                IsOverWrite = isOverWrite;
+                Timeout = timeout;
+                BufferSize = bufferSize;
             }
 
-
-            /// <summary>
-            /// HTTP 下载文件
-            /// </summary>
-            /// <param name="remoteUrl">远端路径</param>
-            /// <param name="localPath">保存路径</param>
-            /// <param name="iEvent">回调</param>
-            /// <param name="isOverWrite">覆盖</param>
-            /// <param name="timeout">超时</param>
-            /// <param name="bufferSize">容量</param>
-            /// <exception cref="Exception">异常</exception>
-            public static async Task DownloadAsync(string remoteUrl, string localPath,
-                IProgressEvent iEvent = null,
-                bool isOverWrite = false,
-                ushort timeout = TIMEOUT,
-                int bufferSize = BUFFER_SIZE
-            )
+            protected override void OnBegin()
             {
-                var remote = remoteUrl.Replace("\\", "/");
-                var request = WebRequest.CreateHttp(new Uri(remote));
-                request.Timeout = timeout;
+                request = (HttpWebRequest)WebRequest.Create(new Uri(Remote));
+                request.Timeout = Timeout;
+            }
 
-                var outputStream = await AddFileHeaderAsync(localPath, remote, isOverWrite);
-                if (outputStream is null) return;
-                var temp = outputStream.Position - CODE.Length;
+            protected override void OnPause()
+            {
+            }
+
+            protected override void OnResume()
+            {
+            }
+
+            protected override async Task OnWaitAsync()
+            {
+                outputStream = await Net.AddFileHeaderAsync(LocalPath, () => GetMD5Async(Remote), IsOverWrite,
+                    cancellationToken);
+                if (outputStream is null)
+                {
+                    State = EProgressState.Finish;
+                    return;
+                }
+
+                if (!outputStream.CanWrite)
+                {
+                    State = EProgressState.Finish;
+                    StartValue += IO.GetFileLength(LocalPath);
+                    return;
+                }
+
+                var temp = outputStream.Position - Net.CODE.Length;
                 if (temp > 0) request.AddRange(temp);
-                var progress = new AProgress(iEvent);
+
                 HttpWebResponse response = null;
                 Stream responseStream = null;
                 try
                 {
                     response = (HttpWebResponse)await request.GetResponseAsync();
-                    progress.Total = response.ContentLength;
-                    progress.Current += outputStream.Position - CODE.Length;
-                    progress.CurrentInfo = remote;
-                    responseStream = response.GetResponseStream();
-                    if (responseStream is null) throw new AIO.NetGetResponseStream("HTTP", response);
+                    while (State == EProgressState.Pause) await Task.Delay(100, cancellationToken);
 
-                    var buffer = new byte[bufferSize];
-                    var readCount = await responseStream.ReadAsync(buffer, 0, bufferSize);
+                    TotalValue += response.ContentLength;
+                    CurrentInfo = Remote;
+                    StartValue += temp;
+
+                    responseStream = response.GetResponseStream();
+                    if (responseStream is null) throw new NetGetResponseStream("HTTP", response);
+
+                    var buffer = new byte[BufferSize];
+                    var readCount = await responseStream.ReadAsync(buffer, 0, BufferSize, cancellationToken);
                     while (readCount > 0)
                     {
-                        await outputStream.WriteAsync(buffer, 0, readCount);
-                        progress.Current += readCount;
-
-                        readCount = await responseStream.ReadAsync(buffer, 0, bufferSize);
+                        if (State == EProgressState.Running)
+                        {
+                            await outputStream.WriteAsync(buffer, 0, readCount, cancellationToken);
+                            CurrentValue += readCount;
+                            readCount = await responseStream.ReadAsync(buffer, 0, BufferSize,
+                                cancellationToken);
+                        }
+                        else
+                        {
+                            await Task.Delay(100, cancellationToken);
+                        }
                     }
 
-                    await RemoveFileHeaderAsync(outputStream);
+                    await Net.RemoveFileHeaderAsync(outputStream, cancellationToken: cancellationToken);
                     responseStream.Close();
                     outputStream.Close();
                     response.Close();
-                    progress.OnComplete?.Invoke();
+                    State = EProgressState.Finish;
                 }
                 catch (WebException ex)
                 {
                     responseStream?.Close();
                     outputStream.Close();
                     response?.Close();
-                    progress.OnError?.Invoke(ex);
+                    State = EProgressState.Fail;
+                    Event.OnError?.Invoke(ex);
                 }
             }
+
+            protected override void OnWait()
+            {
+                if (State != EProgressState.Running) return;
+                outputStream = Net.AddFileHeader(LocalPath, () => GetMD5(Remote), IsOverWrite);
+                if (outputStream is null)
+                {
+                    State = EProgressState.Finish;
+                    return;
+                }
+
+                if (!outputStream.CanWrite)
+                {
+                    State = EProgressState.Finish;
+                    StartValue += IO.GetFileLength(LocalPath);
+                    return;
+                }
+
+                var temp = outputStream.Position - Net.CODE.Length;
+                if (temp > 0) request.AddRange(temp);
+
+                HttpWebResponse response = null;
+                Stream responseStream = null;
+                try
+                {
+                    response = (HttpWebResponse)request.GetResponse();
+                    while (State == EProgressState.Pause) Thread.Sleep(100);
+                    TotalValue = response.ContentLength;
+                    CurrentInfo = Remote;
+
+                    responseStream = response.GetResponseStream();
+                    StartValue += temp;
+
+                    if (responseStream is null) throw new NetGetResponseStream("HTTP", response);
+                    var buffer = new byte[BufferSize];
+
+                    var readCount = responseStream.Read(buffer, 0, BufferSize);
+                    while (readCount > 0)
+                    {
+                        if (State == EProgressState.Running)
+                        {
+                            outputStream.Write(buffer, 0, readCount);
+                            CurrentValue += readCount;
+                            readCount = responseStream.Read(buffer, 0, BufferSize);
+                        }
+                        else Thread.Sleep(100);
+                    }
+
+                    Net.RemoveFileHeader(outputStream);
+                    responseStream.Close();
+                    outputStream.Flush(true);
+                    outputStream.Close();
+                    response.Close();
+                    State = EProgressState.Finish;
+                }
+                catch (WebException ex)
+                {
+                    responseStream?.Close();
+                    outputStream.Close();
+                    response?.Close();
+                    State = EProgressState.Fail;
+                    Event.OnError?.Invoke(ex);
+                }
+            }
+
+            protected override void OnDispose()
+            {
+                request.Abort();
+            }
+        }
+
+        /// <summary>
+        /// HTTP 下载文件
+        /// </summary>
+        /// <param name="remoteUrl">远端路径</param>
+        /// <param name="localPath">保存路径</param>
+        /// <param name="isOverWrite">覆盖</param>
+        /// <param name="timeout">超时</param>
+        /// <param name="bufferSize">容量</param>
+        /// <exception cref="Exception">异常</exception>
+        public static IProgressOperation Download(
+            string remoteUrl,
+            string localPath,
+            bool isOverWrite = false,
+            ushort timeout = Net.TIMEOUT,
+            int bufferSize = Net.BUFFER_SIZE
+        )
+        {
+            return new HttpDownloadOperation(remoteUrl, localPath, isOverWrite, timeout, bufferSize);
         }
     }
 }

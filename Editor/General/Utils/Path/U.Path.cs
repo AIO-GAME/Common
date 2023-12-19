@@ -15,6 +15,7 @@ namespace AIO.UEditor
         /// 提供了一些与路径相关的实用方法。
         /// 包含与程序集有关的实用方法和属性的静态类
         /// </summary>
+        [InitializeOnLoad]
         public static class Path
         {
             static Path()
@@ -41,7 +42,8 @@ namespace AIO.UEditor
                     SyncVS = typeof(UnityEditor.Editor).Assembly.GetType("UnityEditor.SyncVS", true);
                     SyncVS_SyncSolution = SyncVS.GetMethod("SyncSolution", BindingFlags.Static | BindingFlags.Public);
 
-                    if (SyncVS_SyncSolution == null) throw new MissingMemberException(SyncVS.ToString(), "SyncSolution");
+                    if (SyncVS_SyncSolution == null)
+                        throw new MissingMemberException(SyncVS.ToString(), "SyncSolution");
                 }
                 catch (Exception ex)
                 {
@@ -112,7 +114,8 @@ namespace AIO.UEditor
             /// <summary>
             /// 获取当前项目名称。
             /// </summary>
-            public static string ProjectName => System.IO.Path.GetFileName(Project.TrimEnd(System.IO.Path.DirectorySeparatorChar, System.IO.Path.AltDirectorySeparatorChar));
+            public static string ProjectName => System.IO.Path.GetFileName(
+                Project.TrimEnd(System.IO.Path.DirectorySeparatorChar, System.IO.Path.AltDirectorySeparatorChar));
 
             #region Assembly Projects
 
@@ -299,7 +302,8 @@ namespace AIO.UEditor
             {
                 get
                 {
-                    if (IntPtr.Size == 8 || !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432")))
+                    if (IntPtr.Size == 8 ||
+                        !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432")))
                     {
                         return Environment.GetEnvironmentVariable("ProgramFiles(x86)");
                     }
@@ -324,8 +328,10 @@ namespace AIO.UEditor
                     {
                         var startInfo = new ProcessStartInfo
                         {
-                            FileName = System.IO.Path.Combine(ProgramFilesx86, @"Microsoft Visual Studio\Installer\vswhere.exe"),
-                            Arguments = @"-latest -prerelease -products * -requires Microsoft.Component.MSBuild -find **\Bin\MSBuild.exe",
+                            FileName = System.IO.Path.Combine(ProgramFilesx86,
+                                @"Microsoft Visual Studio\Installer\vswhere.exe"),
+                            Arguments =
+                                @"-latest -prerelease -products * -requires Microsoft.Component.MSBuild -find **\Bin\MSBuild.exe",
                             UseShellExecute = false,
                             RedirectStandardOutput = true,
                             CreateNoWindow = true
@@ -371,12 +377,15 @@ namespace AIO.UEditor
             /// <summary>
             /// Roslyn编译器csc.exe的完整路径
             /// </summary>
-            public static string RoslynCompiler => System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Editor) ?? string.Empty, "Data/tools/Roslyn/csc.exe");
+            public static string RoslynCompiler =>
+                System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Editor) ?? string.Empty,
+                    "Data/tools/Roslyn/csc.exe");
 
             /// <summary>
             /// 项目构建工具的完整路径
             /// </summary>
-            public static string ProjectBuilder => Application.platform == RuntimePlatform.WindowsEditor ? MSBuild : XBuild;
+            public static string ProjectBuilder =>
+                Application.platform == RuntimePlatform.WindowsEditor ? MSBuild : XBuild;
 
             #endregion
         }
