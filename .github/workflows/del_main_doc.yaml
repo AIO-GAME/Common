@@ -13,7 +13,7 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v2
 
-    - name: Delete Subdirectory README on main branch
+    - name: Delete Doc on main branch
       run: |
         if [ "${{ github.event_name }}" == "pull_request" ]; then
           PR_BRANCH=$(git log -1 --pretty=format:'%s' | grep -oP 'Merge pull request #\K[0-9]+')
