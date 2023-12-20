@@ -62,15 +62,13 @@ namespace AIO.UEditor
         {
             str.AppendLine();
             str.AppendFormat("        private static bool HasUpdate = false;\r\n\r\n");
-            str.AppendFormat("        [MenuItem(\"Git/\" + DisplayName + \"/刷新 Refresh\", false, 1)]\r\n");
+            str.AppendFormat("        [MenuItem(\"Git/\" + DisplayName + \"/刷新 Refresh\", false, 1), IgnoreConsoleJump]\r\n");
             str.AppendFormat("        internal static async void Refresh()\r\n").Append("        {\r\n");
             str.AppendFormat(
                 "            var ret = await PrGit.Helper.GetBehind(FullPath);\r\n");
             str.AppendFormat("            HasUpdate = ret > 0;\r\n");
-            str.AppendFormat("            if (ret < 0)\r\n").Append("            {\r\n");
-            str.Append(
-                "                Debug.LogWarning($\"Refresh : 本地Git库版本 提交数超过 远程库版本 : {Math.Abs(ret)}\");\r\n");
-            str.AppendFormat("                return;\r\n").Append("            }\r\n        }\r\n");
+            str.Append("            if (ret < 0) Console.WriteLine($\"Git Refresh : 本地Git库版本 提交数超过 远程库版本 : {Math.Abs(ret)}\");");
+            str.Append("\r\n        }\r\n");
         }
 
         private static void FuncGetHasUpdate(StringBuilder str)

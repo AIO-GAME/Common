@@ -86,12 +86,7 @@ namespace AIO.UEditor
 
             var rect = Rect.zero;
             var x = sceneView.position.width - 45;
-            var y =
-#if UNITY_2021_1_OR_NEWER
-                sceneView.in2DMode ? 25 : sceneView.position.height / 2 - Height / 2;
-#else
-                sceneView.in2DMode ? 5 : sceneView.position.height / 2 - Height / 2;
-#endif
+            var y = sceneView.in2DMode ? 25 : sceneView.position.height / 2 - Height / 2;
 
             rect.Set(sceneView.position.width - 10, y, 10, 20);
             if (GUI.Button(rect, Thumbnail ? Content_Thumbnail : Content_Restore, "InvisibleButton"))
