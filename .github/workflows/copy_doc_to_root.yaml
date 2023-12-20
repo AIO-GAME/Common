@@ -30,6 +30,7 @@ jobs:
         cp ./Documentation~/README.md README.md
         cp ./Documentation~/README_EN.md README_EN.md
         cp ./Documentation~/SECURITY.md SECURITY.md
+        git pull
         git add CHANGELOG.md
         git add CODE_OF_CONDUCT.md
         git add CODINGSTANDARD.md
