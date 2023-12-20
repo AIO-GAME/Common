@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it as below.
+title: My Research Project
+authors:
+  - name: John Doe
+    orcid: 0000-0002-1234-5678
+version: 1.0.0
+doi: 10.1234/abcd
+url: https://github.com/myproject
+abstract: This project aims to investigate...
+license: MIT
