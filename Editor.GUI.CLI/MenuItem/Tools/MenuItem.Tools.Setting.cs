@@ -76,7 +76,7 @@ namespace AIO.UEditor
         }
 
 
-        [MenuItem("Tool/Clean AssetBundle Name")]
+        [MenuItem("AIO/Tools/Clean AssetBundle Name")]
         public static void Text()
         {
             var dirTempInfo = new DirectoryInfo(Application.dataPath);

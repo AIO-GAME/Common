@@ -1,0 +1,35 @@
+name: Copy README to Root
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  copy-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Copy Documentation To Home
+      run: |
+        cp Documentation~/CHANGELOG.md CHANGELOG.md
+        cp Documentation~/CODE_OF_CONDUCT.md CODE_OF_CONDUCT.md
+        cp Documentation~/CODINGSTANDARD.md CODINGSTANDARD.md
+        cp Documentation~/CONTRIBUTING.md CONTRIBUTING.md
+        cp Documentation~/LICENSE.md LICENSE.md
+        cp Documentation~/README.md README.md
+        cp Documentation~/README_EN.md README_EN.md
+        cp Documentation~/SECURITY.md SECURITY.md
+        git add CHANGELOG.md
+        git add CODE_OF_CONDUCT.md
+        git add CODINGSTANDARD.md
+        git add CONTRIBUTING.md
+        git add LICENSE.md
+        git add README.md
+        git add README_EN.md
+        git add SECURITY.md
+        git commit -m "Copy Documentation To Home" || true
+        git push
