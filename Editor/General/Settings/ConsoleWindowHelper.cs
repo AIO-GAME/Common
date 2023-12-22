@@ -15,24 +15,94 @@ using UnityEngine;
 
 namespace AIO.UEditor
 {
+    [Serializable]
+    public class ConsoleWindowConfig : ScriptableObject
+    {
+        /// <summary>
+        /// 白名单
+        /// </summary>
+        public string[] Assemblies;
+
+        /// <summary>
+        /// 黑名单
+        /// </summary>
+        public string[] BlackList;
+
+        private static ConsoleWindowConfig _instance;
+
+        /// <summary>
+        /// 获取本地资源包地址
+        /// </summary>
+        public static ConsoleWindowConfig GetOrCreate()
+        {
+            if (_instance != null) return _instance;
+            var objects = EHelper.IO.GetScriptableObjects<ConsoleWindowConfig>();
+            if (objects != null && objects.Length > 0)
+            {
+                foreach (var asset in objects)
+                {
+                    if (asset is null) continue;
+                    _instance = asset;
+                    return _instance;
+                }
+            }
+
+            if (_instance is null)
+            {
+                _instance = CreateInstance<ConsoleWindowConfig>();
+                _instance.Assemblies = new string[]
+                {
+                    "AIO.Core.Editor",
+                    "AIO.Core.Runtime",
+                    "AIO.Asset.Editor",
+                    "AIO.Asset.Runtime",
+                    "AIO.FGUI.Editor",
+                    "AIO.FGUI.Runtime",
+                    "AIO.Hybridclr.Editor",
+                    "AIO.Hybridclr.Runtime",
+                    "Assembly-CSharp-Editor",
+                    "Assembly-CSharp-Editor-firstpass",
+                    "Assembly-CSharp-firstpass",
+                    "Assembly-CSharp",
+                };
+                _instance.BlackList = new string[]
+                {
+                };
+                AssetDatabase.CreateAsset(_instance, $"Assets/Editor/{nameof(ConsoleWindowConfig)}.asset");
+                AssetDatabase.SaveAssets();
+            }
+
+            return _instance;
+        }
+
+        public void Save()
+        {
+            EditorUtility.SetDirty(this);
+        }
+    }
+
     /// <summary>
     /// Debug.Log 跳转 忽略指定文件 指定函数
     /// </summary>
-    internal static partial class ConsoleWindowHelper
+    public static partial class ConsoleWindowHelper
     {
+        private static ConsoleWindowConfig config;
+
         private static Type m_ConsoleWindow;
+
+        private static bool isInit = false;
 
         private static Dictionary<string, bool> IgnoreClass { get; } = new Dictionary<string, bool>();
 
         private static Dictionary<string, bool> IgnoreMethod { get; } = new Dictionary<string, bool>();
 
-        private static Dictionary<string, bool> IgnoreList { get; } = new Dictionary<string, bool>();
-      
-
-        static ConsoleWindowHelper()
+        private static void Init()
         {
+            config = ConsoleWindowConfig.GetOrCreate();
+
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
+                if (!config.Assemblies.Contains(assembly.GetName().Name)) continue;
                 foreach (var type in assembly.GetTypes())
                 {
                     var attr = type.GetCustomAttribute<IgnoreConsoleJumpAttribute>();
@@ -41,50 +111,112 @@ namespace AIO.UEditor
                     if (string.IsNullOrEmpty(fullName)) continue;
                     if (attr != null)
                     {
-                        IgnoreClass[fullName] = attr.Ignore;
-                        IgnoreList[attr.FilePath] = attr.Ignore;
-                        Debug.Log(attr);
-                        continue;
+                        if (IgnoreClass.ContainsKey(fullName))
+                        {
+                            if (!IgnoreClass[fullName] && attr.Ignore)
+                            {
+                                IgnoreClass[fullName] = true;
+                            }
+                        }
+                        else IgnoreClass[fullName] = attr.Ignore;
                     }
-                    //
-                    // foreach (var method in type.GetMethods(BindingFlags.Instance |
-                    //                                        BindingFlags.Static |
-                    //                                        BindingFlags.Public |
-                    //                                        BindingFlags.NonPublic))
-                    // {
-                    //     var methodAttr = method.GetCustomAttribute<IgnoreConsoleJumpAttribute>();
-                    //     if (methodAttr is null) continue;
-                    //     Debug.Log("ConsoleWindowHelper methodAttr");
-                    //     string key;
-                    //
-                    //     var IsAsync = method.GetCustomAttribute<AsyncStateMachineAttribute>() != null;
-                    //     if (IsAsync)
-                    //     {
-                    //         key = $"{fullName}/<{method.Name}>";
-                    //     }
-                    //     else
-                    //     {
-                    //         var parameterInfo = string.Join(",",
-                    //             method.GetParameters().Select(param => param.ParameterType.FullName));
-                    //         key = $"{fullName}:{method.Name} ({parameterInfo})";
-                    //     }
-                    //
-                    //     Debug.Log(IgnoreConsoleJumpAttribute.GetCodeFileName(type));
-                    //     if (string.IsNullOrEmpty(key)) continue;
-                    //     IgnoreMethod[key] = methodAttr.Ignore;
-                    // }
+
+                    foreach (var method in type.GetMethods(
+                                 BindingFlags.Instance
+                                 | BindingFlags.Static |
+                                 BindingFlags.DeclaredOnly |
+                                 BindingFlags.Public |
+                                 BindingFlags.NonPublic |
+                                 BindingFlags.FlattenHierarchy
+                             ))
+                    {
+                        if (!method.HasAttribute<IgnoreConsoleJumpAttribute>()) continue;
+                        var methodAttr = method.GetCustomAttribute<IgnoreConsoleJumpAttribute>();
+                        if (methodAttr is null) continue;
+                        if (!IgnoreClass.ContainsKey(fullName)) IgnoreClass[fullName] = false;
+                        string key;
+                        var IsAsync = method.GetCustomAttribute<AsyncStateMachineAttribute>() != null;
+                        if (IsAsync) key = $"{fullName}/<{method.Name}>";
+                        else
+                        {
+                            // 获取泛型
+                            if (method.IsGenericMethod)
+                            {
+                                var methodDefinition = method.GetGenericMethodDefinition();
+
+                                var gList = methodDefinition.GetGenericArguments()
+                                    .SelectMany(param => param.GetGenericParameterConstraints()).ToArray();
+
+                                var genericArgumentsStr = string.Join(",", gList.Select(param => param.FullName));
+
+                                var parameterInfo = string.Join(",", methodDefinition.GetParameters().Select(param =>
+                                        {
+                                            if (string.IsNullOrEmpty(param.ParameterType.FullName))
+                                            {
+                                                return gList[param.ParameterType.GenericParameterPosition].FullName;
+                                            }
+
+                                            return param.ParameterType.FullName;
+                                        }))
+                                        .Replace("System.Object", "object")
+                                        .Replace("System.String", "string")
+                                        .Replace("System.Single", "float")
+                                        .Replace("System.Boolean", "bool")
+                                        .Replace("System.Double", "double")
+                                        .Replace("System.Byte", "byte")
+                                        .Replace("System.Int16", "short")
+                                        .Replace("System.Int32", "int")
+                                        .Replace("System.Int64", "long")
+                                        .Replace("System.UInt32", "uint")
+                                        .Replace("System.UInt64", "ulong")
+                                        .Replace("System.UInt16", "ushort")
+                                        .Replace("System.SByte", "sbyte")
+                                        .Replace("System.Char", "char")
+                                        .Replace("System.Decimal", "decimal")
+                                    ;
+
+                                key = string.IsNullOrEmpty(genericArgumentsStr)
+                                    ? $"{fullName}:{method.Name} ({parameterInfo})"
+                                    : $"{fullName}:{method.Name}<{genericArgumentsStr}> ({parameterInfo})";
+                            }
+                            else
+                            {
+                                var parameterInfo = string.Join(",",
+                                        method.GetParameters().Select(param => param.ParameterType.FullName))
+                                    .Replace("System.Object", "object")
+                                    .Replace("System.String", "string")
+                                    .Replace("System.Single", "float")
+                                    .Replace("System.Boolean", "bool")
+                                    .Replace("System.Double", "double")
+                                    .Replace("System.Byte", "byte")
+                                    .Replace("System.Int16", "short")
+                                    .Replace("System.Int32", "int")
+                                    .Replace("System.Int64", "long")
+                                    .Replace("System.UInt32", "uint")
+                                    .Replace("System.UInt64", "ulong")
+                                    .Replace("System.UInt16", "ushort")
+                                    .Replace("System.SByte", "sbyte")
+                                    .Replace("System.Char", "char")
+                                    .Replace("System.Decimal", "decimal");
+                                key = $"{fullName}:{method.Name} ({parameterInfo})";
+                            }
+                        }
+
+                        if (string.IsNullOrEmpty(key)) continue;
+                        IgnoreMethod[key] = methodAttr.Ignore;
+                    }
                 }
             }
+
+            isInit = true;
         }
 
         [OnOpenAsset(0)] //1 : 使用OnOpenAsset属性 接管当有资源打开时的操作
         private static bool OnOpenAssetLog(int instanceID, int line, int column)
         {
-            var asset = AssetDatabase.GetAssetPath(instanceID);
-            if (!IgnoreList.ContainsKey(asset)) return false;
+            if (!isInit) Init();
 
             if (m_ConsoleWindow == null) m_ConsoleWindow = Type.GetType("UnityEditor.ConsoleWindow,UnityEditor");
-
             if (EditorWindow.focusedWindow.GetType() != m_ConsoleWindow) return false;
 
             var activeText = //m_ActiveText包含了当前Log的全部信息
@@ -96,9 +228,10 @@ namespace AIO.UEditor
             var consoleWindowInstance = consoleWindowFiledInfo?.GetValue(null); //从对象字段中得到这个对象
             var str = activeText?.GetValue(consoleWindowInstance).ToString(); //得到Log信息,用于后面解析
 
-            var (path, lineIndex) = GetSubStringInStackStr(str, line); //解析出对应的.cs文件全路径 和 行号 
-            if (lineIndex != -1)
-                InternalEditorUtility.OpenFileAtLineExternal(path, lineIndex); //跳转到正确行号
+            var (path, lineIndex) = GetSubStringInStackStr(str); //解析出对应的.cs文件全路径 和 行号 
+            if (lineIndex == -1) return false;
+
+            InternalEditorUtility.OpenFileAtLineExternal(path, lineIndex); //跳转到正确行号
             return true;
         }
 
@@ -107,36 +240,13 @@ namespace AIO.UEditor
         /// <summary>
         /// 这个方法主要是参考 unity源码ConsoleWindow中的StacktraceWithHyperlinks函数 
         /// </summary>
-        /// <param name="stackStr"></param>
-        /// <param name="needIndex"></param>
-        /// <returns></returns>
-        private static (string, int) GetSubStringInStackStr(string stackStr, int needIndex)
+        private static (string, int) GetSubStringInStackStr(string stackStr)
         {
             var lines = stackStr.Split(new string[] { "\n" }, StringSplitOptions.None);
 
-            var tempIndex = 0;
             var count = lines.Length;
             for (var i = 0; i < count; i++)
             {
-                var isContinue = false;
-                foreach (var ignore in IgnoreClass
-                             .Where(ignore => lines[i].StartsWith(ignore.Key)))
-                {
-                    if (ignore.Value) return (string.Empty, -1);
-                    isContinue = true;
-                    break;
-                }
-
-                foreach (var ignore in IgnoreMethod
-                             .Where(ignore => lines[i].StartsWith(ignore.Key)))
-                {
-                    if (ignore.Value) return (string.Empty, -1);
-                    isContinue = true;
-                    break;
-                }
-
-                if (isContinue) continue;
-
                 var filePathIndex = lines[i].IndexOf(textBeforeFilePath, StringComparison.Ordinal);
                 if (filePathIndex <= 0) continue;
 
@@ -152,7 +262,27 @@ namespace AIO.UEditor
 
                 var lineString = filePathPart.Substring(lineIndex + 1, endLineIndex - (lineIndex + 1));
                 var filePath = filePathPart.Substring(0, lineIndex);
-                if (tempIndex++ < needIndex) continue;
+
+                if (config.BlackList.Any(black => lines[i].StartsWith(black))) continue;
+                var isContinue = false;
+                var temp = lines[i];
+                foreach (var ignore in IgnoreClass)
+                {
+                    if (!temp.StartsWith(ignore.Key)) continue;
+                    if (ignore.Value) return (string.Empty, -1);
+                    isContinue = true;
+                    break;
+                }
+
+                foreach (var ignore in IgnoreMethod)
+                {
+                    if (!temp.StartsWith(ignore.Key)) continue;
+                    if (ignore.Value) return (string.Empty, -1);
+                    isContinue = true;
+                    break;
+                }
+
+                if (isContinue) continue;
 
                 return (filePath, int.Parse(lineString));
             }

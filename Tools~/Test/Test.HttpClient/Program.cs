@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -22,12 +23,12 @@ public class Program
         progress.OnCancel += () => Console.WriteLine("Download cancel!");
 
         const string serverIp = @"ftpshare-hot.ingcreations.com";
+        const int port = 21;
         const string user = "ftpshare-hot";
         const string pass = "ingcreations2023";
-        const string remote = "ftp://ftpshare-hot.ingcreations.com/Test/";
-        var handle = AHelper.FTP.DownloadDir(remote, user, pass, @"E:\WWW\Test\", overwrite: true);
-        handle.Event = progress;
-        handle.Begin();
+        const string remote = "QC/Android/Build";
+        var handle = AHandle.FTP.Create(serverIp, port, user, pass, remote);
+        Console.WriteLine(await handle.InitAsync());
 
         // var index = 0;
         // Task.Factory.StartNew(async () =>
@@ -49,8 +50,8 @@ public class Program
         //
         //     handle.Dispose();
         // });
-        await handle.WaitAsync();
-        Console.WriteLine(await AHelper.IO.GetFileMD5Async(@"E:\WWW\Test\android-ndk-r16b-windows-x86_64.zip"));
+        // await handle.WaitAsync();
+        // Console.WriteLine(await AHelper.IO.GetFileMD5Async(@"E:\WWW\Test\android-ndk-r16b-windows-x86_64.zip"));
         // await handle.UploadFileAsync(@"E:\WWW\G101\Version\StandaloneWindows64.json", "StandaloneWindows64.json",
         //     progress);
 
@@ -88,9 +89,15 @@ public class Program
         Console.WriteLine("_{0} {1}", name, $"_{name}".GetHashCode());
     }
 
+    static async void AAA()
+    {
+   
+    }
+
     static void Main(string[] args)
     {
-        Test();
+        AAA();
+        // Test();
         // bool help = false;
         // string address = "127.0.0.1";
         // int port = 8080;

@@ -185,7 +185,6 @@ public partial class AHelper
                 var dirname = remote.Substring(startIndex, remote.Length - startIndex).Trim(' ', '/', '\\');
                 var parent = remote.Substring(0, startIndex);
                 var request = CreateRequestDir(parent, user, pass, "LIST", timeout);
-
                 using var response = (FtpWebResponse)request.GetResponse();
                 using var stream = response.GetResponseStream();
                 if (stream is null) return false;
@@ -222,7 +221,6 @@ public partial class AHelper
                 var dirname = remote.Substring(startIndex, remote.Length - startIndex).Trim(' ', '/', '\\');
                 var parent = remote.Substring(0, startIndex);
                 var request = CreateRequestDir(parent, user, pass, "LIST", timeout);
-
                 using var response = (FtpWebResponse)await request.GetResponseAsync();
                 using var stream = response.GetResponseStream();
                 if (stream is null) return false;

@@ -13,7 +13,7 @@ public partial class AHelper
 {
     public partial class FTP
     {
-        private static string FixShortcuts(string remote)
+        private static string FixShortcuts(string remote) 
         {
             // 修复远程地址中的短划线和协议前缀
             return remote

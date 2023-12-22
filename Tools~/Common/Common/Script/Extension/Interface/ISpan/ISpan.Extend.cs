@@ -32,7 +32,6 @@ namespace AIO
         /// <summary>
         /// 自动扩容
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T[] AutoMaticExpansion<T>(this T[] arrays, in int offset, in int count)
         {
             var currentCapacity = arrays.Length;

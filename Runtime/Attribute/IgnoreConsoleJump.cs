@@ -7,11 +7,19 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using UnityEngine;
 
 namespace AIO
 {
     [Conditional("UNITY_EDITOR")]
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Struct)]
+    [AttributeUsage(
+        AttributeTargets.Method |
+        AttributeTargets.Class |
+        AttributeTargets.Struct |
+        AttributeTargets.Constructor |
+        AttributeTargets.Property |
+        AttributeTargets.Interface, Inherited = false, AllowMultiple = false
+    )]
     public class IgnoreConsoleJumpAttribute : Attribute
     {
         /// <summary>
@@ -36,13 +44,19 @@ namespace AIO
         /// </summary>
         public int LineNumber { get; set; }
 
-        public IgnoreConsoleJumpAttribute(
+        private static string Project;
+
+        public IgnoreConsoleJumpAttribute(bool ignore = false,
             [CallerFilePath] string filePath = "",
             [CallerMemberName] string memberName = "",
             [CallerLineNumber] int lineNumber = 0
         )
         {
-            FilePath = filePath;
+            Ignore = ignore;
+            if (string.IsNullOrEmpty(Project))
+                Project = Application.dataPath.Substring(0,
+                    Application.dataPath.LastIndexOf("/", StringComparison.CurrentCulture) + 1);
+            FilePath = filePath.Replace('\\', '/').Replace(Project, "");
             MemberName = memberName;
             LineNumber = lineNumber;
         }

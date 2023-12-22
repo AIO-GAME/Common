@@ -30,6 +30,7 @@ namespace AIO
     /// <summary>
     /// 定时器 时间调度器
     /// </summary>
+    [IgnoreConsoleJump]
     public static partial class TimerSystem
     {
         public static void Initialize(long updatelisttime = 10, int capacity = 1024 * 8)

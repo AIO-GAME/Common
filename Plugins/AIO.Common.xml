@@ -13346,13 +13346,43 @@
             FTP 处理器
             </summary>
         </member>
+        <member name="M:AHandle.FTP.Create(System.String,System.String,System.String)">
+            <summary>
+            创建HTTP处理器
+            </summary>
+            <param name="serverIP">服务器IP</param>
+            <param name="userName">用户名</param>
+            <param name="pass">密码</param>
+            <returns>处理器</returns>
+        </member>
         <member name="M:AHandle.FTP.Create(System.String,System.String,System.String,System.String)">
             <summary>
             创建HTTP处理器
             </summary>
             <param name="serverIP">服务器IP</param>
             <param name="userName">用户名</param>
-            <param name="password">密码</param>
+            <param name="pass">密码</param>
+            <param name="remotePath">远端默认跟文件夹</param>
+            <returns>处理器</returns>
+        </member>
+        <member name="M:AHandle.FTP.Create(System.String,System.Int32,System.String,System.String)">
+            <summary>
+            创建HTTP处理器
+            </summary>
+            <param name="serverIP">服务器IP</param>
+            <param name="port">端口</param>
+            <param name="userName">用户名</param>
+            <param name="pass">密码</param>
+            <returns>处理器</returns>
+        </member>
+        <member name="M:AHandle.FTP.Create(System.String,System.Int32,System.String,System.String,System.String)">
+            <summary>
+            创建HTTP处理器
+            </summary>
+            <param name="serverIP">服务器IP</param>
+            <param name="port">端口</param>
+            <param name="userName">用户名</param>
+            <param name="pass">密码</param>
             <param name="remotePath">远端默认跟文件夹</param>
             <returns>处理器</returns>
         </member>
@@ -13381,22 +13411,27 @@
             指定FTP连接成功后的当前目录, 如果不指定即默认为根目录
             </summary>
         </member>
-        <member name="P:AHandle.FTP.ServerIP">
+        <member name="P:AHandle.FTP.Server">
             <summary>
             FTP服务器IP地址
             </summary>
         </member>
-        <member name="P:AHandle.FTP.UserName">
+        <member name="P:AHandle.FTP.Port">
+            <summary>
+            FTP服务器端口
+            </summary>
+        </member>
+        <member name="P:AHandle.FTP.User">
             <summary>
             FTP用户名
             </summary>
         </member>
-        <member name="P:AHandle.FTP.Password">
+        <member name="P:AHandle.FTP.Pass">
             <summary>
             FTP密码
             </summary>
         </member>
-        <member name="P:AHandle.FTP.RemotePath">
+        <member name="P:AHandle.FTP.Absolute">
             <summary>
             FTP服务器上的目录
             </summary>
@@ -13411,14 +13446,15 @@
             缓存大小
             </summary>
         </member>
-        <member name="M:AHandle.FTP.#ctor(System.String,System.String,System.String,System.String)">
+        <member name="M:AHandle.FTP.#ctor(System.String,System.String,System.String,System.String,System.Int32)">
             <summary>
             构造函数
             </summary>
-            <param name="serverIP">服务器IP</param>
-            <param name="userName">用户名</param>
-            <param name="password">密码</param>
-            <param name="remotePath">远端默认跟文件夹</param>
+            <param name="server">服务器IP</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="absolute">远端默认跟文件夹</param>
+            <param name="port">端口</param>
         </member>
         <member name="M:AHandle.FTP.Init">
             <summary>

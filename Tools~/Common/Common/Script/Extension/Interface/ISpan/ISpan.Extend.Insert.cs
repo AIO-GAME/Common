@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace AIO
@@ -48,12 +49,14 @@ namespace AIO
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T[] Insert<T>(this T[] arrays, in int index, in T values)
         {
-            var copy = new T[arrays.Length - index];
-            arrays = AutoMaticExpansion(arrays, index, 1);
-            Array.ConstrainedCopy(arrays, index, copy, 0, copy.Length);
-            arrays[index] = values;
-            Array.ConstrainedCopy(copy, 0, arrays, index + 1, copy.Length);
-            return arrays;
+            // 将数组转换为 List<T>
+            var list = arrays.ToList();
+
+            // 插入元素
+            list.Insert(index, values);
+
+            // 将 List<T> 转换回数组
+            return list.ToArray();
         }
 
         /// <summary>
