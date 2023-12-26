@@ -157,7 +157,7 @@ namespace AIO
         {
             if (IsRunning) throw new Exception("Call before the Run function executes");
             if (string.IsNullOrEmpty(message)) return this;
-            inputs.AppendLine(message);
+            inputs.AppendLine(message.TrimEnd());
             return this;
         }
 
@@ -166,7 +166,12 @@ namespace AIO
         {
             if (IsRunning) throw new Exception("Call before the Run function executes");
             if (messages == null || messages.Count == 0) return this;
-            foreach (var item in messages) inputs.AppendLine(item);
+            foreach (var item in messages)
+            {
+                if (string.IsNullOrEmpty(item)) continue;
+                inputs.AppendLine(item.TrimEnd());
+            }
+
             return this;
         }
 
@@ -175,7 +180,12 @@ namespace AIO
         {
             if (IsRunning) throw new Exception("Call before the Run function executes");
             if (messages == null || messages.Length == 0) return this;
-            foreach (var item in messages) inputs.AppendLine(item);
+            foreach (var item in messages)
+            {
+                if (string.IsNullOrEmpty(item)) continue;
+                inputs.AppendLine(item.TrimEnd());
+            }
+
             return this;
         }
 

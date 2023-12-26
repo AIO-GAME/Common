@@ -13827,6 +13827,11 @@
         <member name="M:AOperation.WaitAsyncCallBack">
             <inheritdoc />
         </member>
+        <member name="M:AOperation.Finish">
+            <summary>
+            完成
+            </summary>
+        </member>
         <member name="M:AOperation.OnWaitAsync">
             <summary>
             异步等待
@@ -15670,6 +15675,29 @@
             <param name="timeout">超时</param>
             <param name="bufferSize">下载缓存大小</param>
         </member>
+        <member name="M:AHelper.FTP.GetText(System.String,System.String,System.String,System.UInt16)">
+            <summary>
+            获取FTP文本内容
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:AHelper.FTP.GetTextAsync(System.String,System.String,System.String,System.UInt16,System.Threading.CancellationToken)">
+            <summary>
+            获取FTP文本内容
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="timeout">超时</param>
+            <param name="cancellationToken">取消令牌</param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
         <member name="M:AHelper.FTP.GetMD5(System.String,System.String,System.String,System.UInt16)">
             <summary>
             获取FTP文件MD5
@@ -15904,14 +15932,14 @@
             <param name="timeout">超时</param>
             <param name="bufferSize">缓存大小</param>
         </member>
-        <member name="M:AHelper.FTP.FTPUploadFileOperation.#ctor(System.String,System.String,System.String,System.String,System.UInt16,System.Int32)">
+        <member name="M:AHelper.FTP.FTPUploadFileOperation.#ctor(System.String,System.String,System.String,System.IO.Stream,System.UInt16,System.Int32)">
             <summary>
             FTP上传文件
             </summary>
             <param name="uri">路径</param>
             <param name="user">用户名</param>
             <param name="pass">密码</param>
-            <param name="localPath">本地文件路径</param>
+            <param name="stream">数据流</param>
             <param name="timeout">超时</param>
             <param name="bufferSize">缓存大小</param>
         </member>
@@ -15923,6 +15951,28 @@
             <param name="user">用户名</param>
             <param name="pass">密码</param>
             <param name="localPath">本地文件路径</param>
+            <param name="timeout">超时</param>
+            <param name="bufferSize">缓存大小</param>
+        </member>
+        <member name="M:AHelper.FTP.UploadFile(System.String,System.String,System.String,System.Byte[],System.UInt16,System.Int32)">
+            <summary>
+            FTP上传文件
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="stream">数据流</param>
+            <param name="timeout">超时</param>
+            <param name="bufferSize">缓存大小</param>
+        </member>
+        <member name="M:AHelper.FTP.UploadFile(System.String,System.String,System.String,System.IO.Stream,System.UInt16,System.Int32)">
+            <summary>
+            FTP上传文件
+            </summary>
+            <param name="uri">路径</param>
+            <param name="user">用户名</param>
+            <param name="pass">密码</param>
+            <param name="stream">数据流</param>
             <param name="timeout">超时</param>
             <param name="bufferSize">缓存大小</param>
         </member>

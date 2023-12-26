@@ -80,6 +80,9 @@
     <Compile Include="Script\Category\Curl\PrCurl.Version.cs" />
     <Compile Include="Script\Category\Dingding\PrDingding.cs" />
     <Compile Include="Script\Category\Dingding\PrDingding.Send.cs" />
+    <Compile Include="Script\Category\GCloud\PrGCloud.Help.cs" />
+    <Compile Include="Script\Category\GCloud\PrGCloud.cs" />
+    <Compile Include="Script\Category\GCloud\PrGCloud.Storage.cs" />
     <Compile Include="Script\Category\Git\PrGit.Add.cs" />
     <Compile Include="Script\Category\Git\PrGit.CheckOut.cs" />
     <Compile Include="Script\Category\Git\PrGit.Clean.cs" />

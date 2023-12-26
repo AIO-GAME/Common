@@ -212,6 +212,9 @@ public class AOperation : IProgressOperation
         Finish();
     }
 
+    /// <summary>
+    /// 完成
+    /// </summary>
     protected void Finish()
     {
         progress.Complete();

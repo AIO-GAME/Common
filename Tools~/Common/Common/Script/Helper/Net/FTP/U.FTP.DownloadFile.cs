@@ -30,7 +30,7 @@ public partial class AHelper
                 ushort timeout,
                 int bufferSize)
             {
-                this.uri = uri;
+                this.uri = uri.Replace('\\', '/');
                 this.username = username;
                 this.password = password;
                 this.localPath = localPath;

@@ -43,7 +43,7 @@ public partial class AHelper
         {
             // 如果远程地址没有以"ftp://"开头，则在前面添加上
             if (!remote.StartsWith("ftp://")) remote = string.Concat("ftp://", remote);
-
+         
             // 创建一个FTP请求
             var request = (FtpWebRequest)WebRequest.Create(new Uri(FixShortcuts(remote)));
 

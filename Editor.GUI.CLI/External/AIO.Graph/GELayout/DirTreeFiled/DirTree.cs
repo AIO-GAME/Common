@@ -68,7 +68,7 @@ namespace AIO.UEditor
                 foreach (var item in Root)
                 {
                     if (i++ != index) continue;
-                    return item.Paths[item.SelectIndex];
+                    return item.Paths[item.SelectIndex].Replace("\\", "");
                 }
 
                 return string.Empty;
@@ -81,6 +81,8 @@ namespace AIO.UEditor
         public string DirPath;
 
         public DirTreeItem Root;
+
+        public int Count => Root.MaxDepth;
 
         public DirTree()
         {
@@ -112,7 +114,16 @@ namespace AIO.UEditor
         /// </summary>
         public string GetFullPath()
         {
+            if (string.IsNullOrEmpty(DirPath)) return string.Empty;
             var builder = new StringBuilder(DirPath).Append('/');
+            foreach (var item in Root) builder.Append(item.Paths[item.SelectIndex]);
+            return builder.ToString().Replace("\\", "/");
+        }
+
+        public string GetAbsolutePath()
+        {
+            if (string.IsNullOrEmpty(DirPath)) return string.Empty;
+            var builder = new StringBuilder();
             foreach (var item in Root) builder.Append(item.Paths[item.SelectIndex]);
             return builder.ToString().Replace("\\", "/");
         }

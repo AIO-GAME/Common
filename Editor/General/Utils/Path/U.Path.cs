@@ -28,6 +28,7 @@ namespace AIO.UEditor
                 Project = Directory.GetParent(Assets)?.FullName;
                 if (Project != null)
                 {
+                    Temp = System.IO.Path.Combine(Project, "Temp");
                     Logs = System.IO.Path.Combine(Project, "Logs");
                     Packages = System.IO.Path.Combine(Project, "Packages");
                     UserSettings = System.IO.Path.Combine(Project, "UserSettings");
@@ -95,6 +96,11 @@ namespace AIO.UEditor
             /// 获取当前项目 Assets 文件夹的完整路径。
             /// </summary>
             public static string Assets { get; }
+
+            /// <summary>
+            /// 获取当前项目 Temp 文件夹的完整路径。
+            /// </summary>
+            public static string Temp { get; }
 
             /// <summary>
             /// 获取 Unity 编辑器的可执行文件的完整路径。

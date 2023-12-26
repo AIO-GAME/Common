@@ -20,9 +20,9 @@ namespace AIO.UEditor
         /// </summary>
         public bool OptionFolded;
 
-        private GUIContent GC_FOLDOUT;
-        private GUIContent GC_FOLDOUT_ON;
-        private GUIContent GC_REFRESH;
+        private static GUIContent GC_FOLDOUT;
+        private static GUIContent GC_FOLDOUT_ON;
+        private static GUIContent GC_REFRESH;
 
         /// <summary>
         /// 目录最大深度
@@ -76,7 +76,7 @@ namespace AIO.UEditor
                     OptionFolded = !OptionFolded;
                 }
 
-                if (GUILayout.Button(OptionFolded ? DirPath : GetFullPath(),
+                if (GUILayout.Button(DirPath,
                         GEStyle.toolbarbutton, GUILayout.ExpandWidth(true)))
                 {
                     GUI.FocusControl(null);
@@ -84,6 +84,12 @@ namespace AIO.UEditor
                         DirPath ?? Application.dataPath, string.Empty);
                     if (string.IsNullOrEmpty(DirPath)) return;
                     CreateTree(DirPath, OptionDirDepth);
+                }
+
+                if (!OptionFolded)
+                {
+                    GUILayout.Label(GetAbsolutePath(), GEStyle.toolbarbutton,
+                        GUILayout.MinWidth(50 * Root.MaxDepth), GUILayout.MaxWidth(100 * Root.MaxDepth));
                 }
 
                 if (OptionDirMaxDepth > 0)
