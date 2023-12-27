@@ -7,18 +7,16 @@ namespace AIO
     {
         private static void Main(string[] args)
         {
-            const string remote = "https://oapi.dingtalk.com/robot/send?access_token=xxx";
-            const string secret = "xxx";
-
-            var data = PrDingding.CreateData();
-            PrDingding.SendMarkdown("title", "content", remote, secret).Sync();
-            PrDingding.SendLink("title", "content", "messageUrl", "picUrl", remote, secret).Sync();
-            PrDingding.SendText("content", remote, secret).Sync();
-            PrDingding.SendActionCard("title", "content", "singleTitle", "singleURL", remote, secret).Sync();
-            PrDingding.SendActionCard("title", "content", new Dictionary<string, string>(), 1, remote, secret).Sync();
-            PrDingding.SendFeedCard(new List<Tuple<string, string, string>>(), remote, secret).Sync();
-            PrDingding.SendData(data, remote, secret).Sync();
+            Test();
             Console.Read();
+        }
+
+        static async void Test()
+        {
+            await PrGCloud.Storage.UploadFile(
+                string.Concat("rol-files/Test", '/', "Android", '/', "DefaultPackage", '/', "2023-12-11-081221"),
+                @"E:\WWW\Test\Android\DefaultPackage\2023-12-11-081221\defaultpackage_scenearena_405b792877fc496df867d19016bc9d4f.bundle",
+                "--cache-control=no-cache");
         }
     }
 }

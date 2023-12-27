@@ -13,7 +13,7 @@ public partial class AHelper
 {
     public partial class FTP
     {
-        private static string FixShortcuts(string remote)
+        private static string FixShortcuts(string remote) 
         {
             // 修复远程地址中的短划线和协议前缀
             return remote
@@ -43,7 +43,7 @@ public partial class AHelper
         {
             // 如果远程地址没有以"ftp://"开头，则在前面添加上
             if (!remote.StartsWith("ftp://")) remote = string.Concat("ftp://", remote);
-
+         
             // 创建一个FTP请求
             var request = (FtpWebRequest)WebRequest.Create(new Uri(FixShortcuts(remote)));
 

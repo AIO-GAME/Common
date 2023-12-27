@@ -22,7 +22,7 @@ namespace AIO
         public ProcessStartInfo Info { get; }
 
         /// <inheritdoc/>
-        public bool EnableOutput { get; set; } = true;
+        public bool EnableOutput { get; set; }
 
         /// <summary>
         /// 执行的进程
@@ -104,7 +104,12 @@ namespace AIO
                 if (Pr.StartInfo.RedirectStandardInput)
                 {
                     Pr.StandardInput.AutoFlush = true; // 自动重定向
-                    Pr.StandardInput.WriteLine(inputs.ToString());
+                    foreach (var input in inputs.ToString().Split('\n'))
+                    {
+                        ReceiveProgress(null, input);
+                        Pr.StandardInput.WriteLine(input.TrimEnd());
+                    }
+
                     Pr.StandardInput.Flush();
                 }
 
@@ -133,9 +138,9 @@ namespace AIO
             }
 
             result.Finish(inputs.ToString());
-            if (CallBack != null) CallBack.Invoke(result);
+            CallBack?.Invoke(result);
             if (EnableOutput) result.Debug();
-            if (Next != null) return result.Link(Next.Sync());
+            if (Next != null) result.Link(Next.Sync());
             return result;
         }
 
@@ -166,7 +171,12 @@ namespace AIO
         {
             if (IsRunning) throw new Exception("Call before the Run function executes");
             if (messages == null || messages.Count == 0) return this;
-            foreach (var item in messages) inputs.AppendLine(item);
+            foreach (var item in messages)
+            {
+                if (string.IsNullOrEmpty(item)) continue;
+                inputs.AppendLine(item);
+            }
+
             return this;
         }
 
@@ -175,19 +185,24 @@ namespace AIO
         {
             if (IsRunning) throw new Exception("Call before the Run function executes");
             if (messages == null || messages.Length == 0) return this;
-            foreach (var item in messages) inputs.AppendLine(item);
+            foreach (var item in messages)
+            {
+                if (string.IsNullOrEmpty(item)) continue;
+                inputs.AppendLine(item.TrimEnd());
+            }
+
             return this;
         }
 
         /// <summary>
         /// 回调
         /// </summary>
-        private Action<IResult> CallBack;
+        protected Action<IResult> CallBack { get;private set; }
 
         /// <summary>
         /// 回调
         /// </summary>
-        private Action<object, DataReceivedEventArgs> Progress;
+        private Action<object, string> Progress;
 
         /// <inheritdoc/>
         public IExecutor OnComplete(in Action<IResult> action)
@@ -197,7 +212,7 @@ namespace AIO
         }
 
         /// <inheritdoc/>
-        public IExecutor OnProgress(in Action<object, DataReceivedEventArgs> action)
+        public IExecutor OnProgress(in Action<object, string> action)
         {
             Progress = action;
             return this;
@@ -208,7 +223,15 @@ namespace AIO
         /// </summary>
         protected void ReceiveProgress(object sender, DataReceivedEventArgs e)
         {
-            Progress(sender, e);
+            Progress?.Invoke(sender, e.Data);
+        }
+
+        /// <summary>
+        /// 回调
+        /// </summary>
+        protected void ReceiveProgress(object sender, string e)
+        {
+            Progress?.Invoke(sender, e);
         }
     }
 }

@@ -12,49 +12,49 @@ namespace AIO
             /// <summary>
             /// 执行
             /// </summary>
-            public static IExecutor Execute(in string traget, in string command)
+            public static IExecutor Execute(in string target, in string command)
             {
-                return Create().Input(string.Format("{0} \"{1}\" {2}", CMD_Del, traget.Replace('/', '\\'), command));
+                return Create().Input(string.Format("{0} \"{1}\" {2}", CMD_Del, target.Replace('/', '\\'), command));
             }
 
             /// <summary>
             /// 删除 只读文件
             /// </summary>
-            public static IExecutor ReadOnly(in string traget)
+            public static IExecutor ReadOnly(in string target)
             {
-                return Create().Input(string.Format("{0} \"{1}\" /f /q", CMD_Del, traget.Replace('/', '\\')));
+                return Create().Input(string.Format("{0} \"{1}\" /f /q", CMD_Del, target.Replace('/', '\\')));
             }
 
             /// <summary>
             /// 删除 子目录下所有文件
             /// </summary>
-            public static IExecutor ALL(in string traget)
+            public static IExecutor ALL(in string target)
             {
-                return Create().Input(string.Format("{0} \"{1}\" /f /q /s", CMD_Del, traget.Replace('/', '\\')));
+                return Create().Input(string.Format("{0} \"{1}\" /f /q /s", CMD_Del, target.Replace('/', '\\')));
             }
 
             /// <summary>
             /// 删除 子目录下所有文件
             /// </summary>
-            public static IExecutor ALL(in ICollection<string> traget)
+            public static IExecutor ALL(in ICollection<string> target)
             {
-                return Create().Input(string.Format("{0} \"{1}\" /f /q /s", CMD_Del, string.Join(" ", traget)));
+                return Create().Input(string.Format("{0} \"{1}\" /f /q /s", CMD_Del, string.Join(" ", target)));
             }
 
             /// <summary>
             /// 删除 子目录下所有文件
             /// </summary>
-            public static IExecutor ALL(params string[] traget)
+            public static IExecutor ALL(params string[] target)
             {
-                return Create().Input(string.Format("{0} \"{1}\" /f /q /s", CMD_Del, string.Join(" ", traget)));
+                return Create().Input(string.Format("{0} \"{1}\" /f /q /s", CMD_Del, string.Join(" ", target)));
             }
 
             /// <summary>
             /// 删除 指定属性文件
             /// </summary>
-            public static IExecutor Attributes(in string traget, in string attributes)
+            public static IExecutor Attributes(in string target, in string attributes)
             {
-                return Create().Input(string.Format("{0} \"{1}\" /f /q /a {2}", CMD_Del, traget.Replace('/', '\\'), attributes));
+                return Create().Input(string.Format("{0} \"{1}\" /f /q /a {2}", CMD_Del, target.Replace('/', '\\'), attributes));
             }
         }
     }

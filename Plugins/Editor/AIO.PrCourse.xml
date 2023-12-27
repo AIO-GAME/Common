@@ -118,7 +118,7 @@
         <member name="M:AIO.Executor.Input(System.String[])">
             <inheritdoc/>
         </member>
-        <member name="F:AIO.Executor.CallBack">
+        <member name="P:AIO.Executor.CallBack">
             <summary>
             回调
             </summary>
@@ -131,10 +131,15 @@
         <member name="M:AIO.Executor.OnComplete(System.Action{AIO.IResult}@)">
             <inheritdoc/>
         </member>
-        <member name="M:AIO.Executor.OnProgress(System.Action{System.Object,System.Diagnostics.DataReceivedEventArgs}@)">
+        <member name="M:AIO.Executor.OnProgress(System.Action{System.Object,System.String}@)">
             <inheritdoc/>
         </member>
         <member name="M:AIO.Executor.ReceiveProgress(System.Object,System.Diagnostics.DataReceivedEventArgs)">
+            <summary>
+            回调
+            </summary>
+        </member>
+        <member name="M:AIO.Executor.ReceiveProgress(System.Object,System.String)">
             <summary>
             回调
             </summary>
@@ -457,12 +462,12 @@
             User身份运行
             </summary>
         </member>
-        <member name="T:AIO.Extend">
+        <member name="T:AIO.ResultExtend">
             <summary>
             扩展
             </summary>
         </member>
-        <member name="M:AIO.Extend.Debug(AIO.IResult)">
+        <member name="M:AIO.ResultExtend.Debug(AIO.IResult)">
             <summary>
             输出日志
             </summary>
@@ -538,7 +543,7 @@
             </summary>
             <param name="action">回调</param>
         </member>
-        <member name="M:AIO.IExecutor.OnProgress(System.Action{System.Object,System.Diagnostics.DataReceivedEventArgs}@)">
+        <member name="M:AIO.IExecutor.OnProgress(System.Action{System.Object,System.String}@)">
             <summary>
             进度执行回调
             </summary>
@@ -1600,6 +1605,132 @@
             430104              含有不合适的图片      请确认发送的内容合法
             430105              含有不合适的内容      请确认发送的内容合法
             </returns>
+        </member>
+        <member name="T:AIO.PrGCloud">
+            <summary>
+            Google Cloud Platform
+            </summary>
+        </member>
+        <member name="M:AIO.PrGCloud.Help">
+            <summary>
+            Get help for commands
+            </summary>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="F:AIO.PrGCloud.CMD">
+            <summary>
+            命令
+            </summary>
+        </member>
+        <member name="T:AIO.PrGCloud.Usage">
+            <summary>
+            用法
+            </summary>
+        </member>
+        <member name="F:AIO.PrGCloud.Usage.Storage">
+            <summary>
+            存储
+            </summary>
+        </member>
+        <member name="F:AIO.PrGCloud.Usage.Help">
+            <summary>
+            帮助
+            </summary>
+        </member>
+        <member name="M:AIO.PrGCloud.Execute">
+            <summary>
+            运行
+            </summary>
+            <returns><see cref="T:AIO.IExecutor"/></returns>
+        </member>
+        <member name="M:AIO.PrGCloud.Create(System.String)">
+            <summary>
+            Create a new instance of PrGCloud
+            </summary>
+            <param name="args">参数</param>
+            <returns><see cref="T:AIO.PrGCloud"/></returns>
+        </member>
+        <member name="M:AIO.PrGCloud.Create(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Create a new instance of PrGCloud
+            </summary>
+            <param name="args">参数</param>
+            <returns><see cref="T:AIO.PrGCloud"/></returns>
+        </member>
+        <member name="M:AIO.PrGCloud.Create(System.String[])">
+            <summary>
+            Create a new instance of PrGCloud
+            </summary>
+            <param name="args">参数</param>
+            <returns><see cref="T:AIO.PrGCloud"/></returns>
+        </member>
+        <member name="T:AIO.PrGCloud.Storage">
+            <summary>
+            Get Storage for commands
+            </summary>
+        </member>
+        <member name="M:AIO.PrGCloud.Storage.DownloadFile(System.String,System.String,System.Boolean)">
+            <summary>
+            上传文件到存储桶
+            </summary>
+            <param name="BUCKET_PATH">下载的对象的存储桶路径</param>
+            <param name="SAVE_TO_LOCATION">保存对象的本地路径</param>
+            <param name="overwrite">覆盖</param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrGCloud.Storage.UploadFile(System.String,System.String,System.String)">
+            <summary>
+            上传文件到存储桶
+            </summary>
+            <param name="BUCKET_PATH">是对象要上传到的存储桶的名称，例如 my-bucket</param>
+            <param name="OBJECT_LOCATION">是对象的本地路径。例如 Desktop/dog.png。</param>
+            <param name="METADATA_FLAG">是要修改的元数据的标志。
+            例如
+            --content-type=image/png
+            --cache-control=public,max-age=3600
+            --content-language=unset
+            --content-encoding=unset
+            --content-disposition=disposition
+            </param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrGCloud.Storage.UploadDir(System.String,System.String,System.String)">
+            <summary>
+            上传文件夹到存储桶
+            </summary>
+            <param name="BUCKET_PATH">是对象要上传到的存储桶的名称，例如 my-bucket</param>
+            <param name="OBJECT_LOCATION">是对象的本地路径。例如 Desktop/dog.png。</param>
+            <param name="METADATA_FLAG">是要修改的元数据的标志。
+            例如
+            --content-type=image/png
+            --cache-control=public,max-age=3600
+            --content-language=unset
+            --content-encoding=unset
+            --content-disposition=disposition
+            </param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrGCloud.Storage.MetadataUpdate(System.String,System.String)">
+            <summary>
+            更新元数据
+            </summary>
+            <param name="BUCKET_PATH">是对象要上传到的存储桶的路径，例如 my-bucket/data/text.png</param>
+            <param name="METADATA_FLAG">是要修改的元数据的标志。
+            例如
+            --content-type=image/png
+            --cache-control=public,max-age=3600
+            --content-language=unset
+            --content-encoding=unset
+            --content-disposition=disposition
+            </param>
+            <returns>结果执行器</returns>
+        </member>
+        <member name="M:AIO.PrGCloud.Storage.MetadataLook(System.String)">
+            <summary>
+            更新元数据
+            </summary>
+            <param name="BUCKET_PATH">是对象要上传到的存储桶的路径，例如 my-bucket/data/text.png</param>
+            <returns>结果执行器</returns>
         </member>
         <member name="T:AIO.PrGit">
             <summary>
@@ -4561,6 +4692,16 @@
         <member name="T:AIO.PrEmpty">
             <summary>
             进程构造器(空)
+            </summary>
+        </member>
+        <member name="P:AIO.PrEmpty.Instance">
+            <summary>
+            进程构造器(空)
+            </summary>
+        </member>
+        <member name="P:AIO.PrEmpty.Executor">
+            <summary>
+            进程执行器(空)
             </summary>
         </member>
         <member name="M:AIO.PrEmpty.Dispose">

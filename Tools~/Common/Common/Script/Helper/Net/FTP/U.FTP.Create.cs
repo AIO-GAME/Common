@@ -16,10 +16,11 @@ public partial class AHelper
         public static bool CreateDir(string uri, string user, string pass,
             ushort timeout = Net.TIMEOUT)
         {
-            if (Check(uri, user, pass, timeout)) return true;
             try
             {
                 var request = CreateRequestFile(uri, user, pass, "MKD", timeout);
+                if (string.IsNullOrEmpty(request.RequestUri.AbsolutePath) ||
+                    request.RequestUri.AbsolutePath == "/") return true;
                 using var response = (FtpWebResponse)request.GetResponse();
                 var status = response.StatusCode == FtpStatusCode.PathnameCreated;
                 request.Abort();
@@ -48,6 +49,9 @@ public partial class AHelper
             try
             {
                 var request = CreateRequestFile(remote, user, pass, "MKD", timeout);
+                if (string.IsNullOrEmpty(request.RequestUri.AbsolutePath) ||
+                    request.RequestUri.AbsolutePath == "/") return true;
+                
                 using var response = (FtpWebResponse)await request.GetResponseAsync();
                 var status = response.StatusCode == FtpStatusCode.PathnameCreated;
                 request.Abort();

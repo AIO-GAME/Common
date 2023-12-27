@@ -50,7 +50,7 @@ public partial class AHelper
                 ushort timeout = Net.TIMEOUT,
                 int bufferSize = Net.BUFFER_SIZE)
             {
-                this.uri = uri;
+                this.uri = uri.Replace('\\', '/');
                 this.user = user;
                 this.pass = pass;
                 this.localPath = localPath;

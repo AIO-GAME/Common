@@ -14,12 +14,51 @@ public partial class AHandle
         /// </summary>
         /// <param name="serverIP">服务器IP</param>
         /// <param name="userName">用户名</param>
-        /// <param name="password">密码</param>
+        /// <param name="pass">密码</param>
+        /// <returns>处理器</returns>
+        public static FTP Create(string serverIP, string userName, string pass)
+        {
+            return new FTP(serverIP, userName, pass, string.Empty);
+        }
+
+        /// <summary>
+        /// 创建HTTP处理器
+        /// </summary>
+        /// <param name="serverIP">服务器IP</param>
+        /// <param name="userName">用户名</param>
+        /// <param name="pass">密码</param>
         /// <param name="remotePath">远端默认跟文件夹</param>
         /// <returns>处理器</returns>
-        public static FTP Create(string serverIP, string userName, string password, string remotePath = null)
+        public static FTP Create(string serverIP, string userName, string pass, string remotePath)
         {
-            return new FTP(serverIP, userName, password, remotePath);
+            return new FTP(serverIP, userName, pass, remotePath);
+        }
+
+        /// <summary>
+        /// 创建HTTP处理器
+        /// </summary>
+        /// <param name="serverIP">服务器IP</param>
+        /// <param name="port">端口</param>
+        /// <param name="userName">用户名</param>
+        /// <param name="pass">密码</param>
+        /// <returns>处理器</returns>
+        public static FTP Create(string serverIP, int port, string userName, string pass)
+        {
+            return new FTP(serverIP, userName, pass, string.Empty, port);
+        }
+
+        /// <summary>
+        /// 创建HTTP处理器
+        /// </summary>
+        /// <param name="serverIP">服务器IP</param>
+        /// <param name="port">端口</param>
+        /// <param name="userName">用户名</param>
+        /// <param name="pass">密码</param>
+        /// <param name="remotePath">远端默认跟文件夹</param>
+        /// <returns>处理器</returns>
+        public static FTP Create(string serverIP, int port, string userName, string pass, string remotePath)
+        {
+            return new FTP(serverIP, userName, pass, remotePath, port);
         }
 
         /// <summary>
@@ -51,22 +90,27 @@ public partial class AHandle
         /// <summary>
         /// FTP服务器IP地址
         /// </summary>
-        public string ServerIP { get; private set; }
+        public string Server { get; private set; }
+
+        /// <summary>
+        /// FTP服务器端口
+        /// </summary>
+        public int Port { get; private set; }
 
         /// <summary>
         /// FTP用户名
         /// </summary>
-        public string UserName { get; private set; }
+        public string User { get; private set; }
 
         /// <summary>
         /// FTP密码
         /// </summary>
-        public string Password { get; private set; }
+        public string Pass { get; private set; }
 
         /// <summary>
         /// FTP服务器上的目录
         /// </summary>
-        public string RemotePath { get; private set; }
+        public string Absolute { get; private set; }
 
         /// <summary>
         /// 超时时间
@@ -81,23 +125,25 @@ public partial class AHandle
         /// <summary>
         /// 构造函数
         /// </summary>
-        /// <param name="serverIP">服务器IP</param>
-        /// <param name="userName">用户名</param>
-        /// <param name="password">密码</param>
-        /// <param name="remotePath">远端默认跟文件夹</param>
-        public FTP(string serverIP, string userName, string password, string remotePath)
+        /// <param name="server">服务器IP</param>
+        /// <param name="user">用户名</param>
+        /// <param name="pass">密码</param>
+        /// <param name="absolute">远端默认跟文件夹</param>
+        /// <param name="port">端口</param>
+        public FTP(string server, string user, string pass, string absolute, int port = 21)
         {
-            ServerIP = serverIP;
-            UserName = userName;
-            Password = password;
-            if (string.IsNullOrEmpty(remotePath))
+            Server = server;
+            User = user;
+            Pass = pass;
+            Port = port;
+            if (string.IsNullOrEmpty(absolute))
             {
-                URI = string.Concat("ftp://", serverIP);
+                URI = string.Concat("ftp://", Server, ':', Port);
             }
             else
             {
-                RemotePath = remotePath;
-                URI = string.Concat("ftp://", serverIP, '/', remotePath);
+                Absolute = absolute.Replace('\\', '/').Trim('/', '\\');
+                URI = string.Concat("ftp://", Server, ':', Port, '/', Absolute);
             }
         }
 
@@ -106,15 +152,27 @@ public partial class AHandle
         /// </summary>
         public bool Init()
         {
-            return AHelper.FTP.CheckDir(URI, UserName, Password, TimeOut) ||
-                   AHelper.FTP.CreateDir(URI, UserName, Password, TimeOut);
+            var remote = string.Concat(Server, ':', Port);
+            if (string.IsNullOrEmpty(Absolute))
+                return AHelper.FTP.CheckDir(remote, User, Pass, TimeOut) ||
+                       AHelper.FTP.CreateDir(remote, User, Pass, TimeOut);
+
+            foreach (var item in Absolute.Split('/'))
+            {
+                remote = string.Concat(remote, '/', item);
+                if (AHelper.FTP.CheckDir(remote, User, Pass, TimeOut)) continue;
+                if (AHelper.FTP.CreateDir(remote, User, Pass, TimeOut)) continue;
+                return false;
+            }
+
+            return true;
         }
 
         /// <inheritdoc />
         public override string ToString()
         {
-            return string.Concat("ServerIP: ", ServerIP, " UserName: ", UserName, " Password: ", Password,
-                " RemotePath: ", RemotePath);
+            return string.Concat("ServerIP: ", Server, " UserName: ", User, " Password: ", Pass,
+                " RemotePath: ", Absolute);
         }
 
         /// <summary>
@@ -124,7 +182,7 @@ public partial class AHandle
         /// <param name="newRemoteName">新远端路径</param>
         public bool Move(string currentRemotePath, string newRemoteName)
         {
-            return AHelper.FTP.ReName(URI, UserName, Password, currentRemotePath, newRemoteName);
+            return AHelper.FTP.ReName(URI, User, Pass, currentRemotePath, newRemoteName);
         }
 
         /// <summary>
@@ -133,7 +191,7 @@ public partial class AHandle
         /// <param name="remotePath">远端文件路径</param>
         public bool DeleteFile(string remotePath)
         {
-            return AHelper.FTP.DeleteFile(string.Concat(URI, '/', remotePath), UserName, Password);
+            return AHelper.FTP.DeleteFile(string.Concat(URI, '/', remotePath), User, Pass);
         }
 
         /// <summary>
@@ -142,7 +200,7 @@ public partial class AHandle
         /// <param name="remotePath">远端文件夹路径</param>
         public bool DeleteDir(string remotePath = null)
         {
-            return AHelper.FTP.DeleteDir(string.Concat(URI, '/', remotePath), UserName, Password);
+            return AHelper.FTP.DeleteDir(string.Concat(URI, '/', remotePath), User, Pass);
         }
 
         /// <summary>
@@ -151,7 +209,7 @@ public partial class AHandle
         /// <param name="remotePath">远端文件夹路径</param>
         public bool CreateDir(string remotePath = null)
         {
-            return AHelper.FTP.CreateDir(string.Concat(URI, '/', remotePath), UserName, Password);
+            return AHelper.FTP.CreateDir(string.Concat(URI, '/', remotePath), User, Pass);
         }
 
         /// <summary>
@@ -163,7 +221,7 @@ public partial class AHandle
         public bool UploadFile(string localPath, string remotePath, IProgressEvent iEvent = null)
         {
             var remote = string.Concat(URI, '/', remotePath);
-            var handler = AHelper.FTP.UploadFile(remote, UserName, Password, localPath, TimeOut, BufferSize);
+            var handler = AHelper.FTP.UploadFile(remote, User, Pass, localPath, TimeOut, BufferSize);
             handler.Event = iEvent;
             handler.Begin();
             handler.Wait();
@@ -177,7 +235,7 @@ public partial class AHandle
         /// <param name="iEvent">回调</param>
         public bool UploadFile(string localPath, IProgressEvent iEvent = null)
         {
-            var handler = AHelper.FTP.UploadFile(URI, UserName, Password, localPath, TimeOut, BufferSize);
+            var handler = AHelper.FTP.UploadFile(URI, User, Pass, localPath, TimeOut, BufferSize);
             handler.Event = iEvent;
             handler.Begin();
             handler.Wait();
@@ -198,7 +256,7 @@ public partial class AHandle
             string searchPattern = "*")
         {
             var remote = string.Concat(URI, '/', remotePath);
-            var handler = AHelper.FTP.UploadDir(remote, UserName, Password,
+            var handler = AHelper.FTP.UploadDir(remote, User, Pass,
                 localPath, searchOption, searchPattern, TimeOut, BufferSize);
             handler.Event = iEvent;
             handler.Begin();
@@ -218,7 +276,7 @@ public partial class AHandle
             SearchOption searchOption = SearchOption.AllDirectories,
             string searchPattern = "*")
         {
-            var handler = AHelper.FTP.UploadDir(URI, UserName, Password,
+            var handler = AHelper.FTP.UploadDir(URI, User, Pass,
                 localPath, searchOption, searchPattern, TimeOut, BufferSize);
             handler.Event = iEvent;
             handler.Begin();
@@ -236,7 +294,7 @@ public partial class AHandle
         public bool DownloadFile(string localPath, string remotePath, IProgressEvent iEvent = null,
             bool isOverWrite = false)
         {
-            var handler = AHelper.FTP.DownloadFile(string.Concat(URI, '/', remotePath), UserName, Password,
+            var handler = AHelper.FTP.DownloadFile(string.Concat(URI, '/', remotePath), User, Pass,
                 localPath, isOverWrite,
                 TimeOut, BufferSize);
             handler.Event = iEvent;
@@ -262,7 +320,7 @@ public partial class AHandle
             string searchPattern = "*",
             bool isOverWrite = false)
         {
-            var handler = AHelper.FTP.DownloadDir(string.Concat(URI, '/', remotePath), UserName, Password,
+            var handler = AHelper.FTP.DownloadDir(string.Concat(URI, '/', remotePath), User, Pass,
                 localPath, searchOption, searchPattern, isOverWrite,
                 TimeOut, BufferSize);
             handler.Event = iEvent;
@@ -286,7 +344,7 @@ public partial class AHandle
             string searchPattern = "*",
             bool isOverWrite = false)
         {
-            var handler = AHelper.FTP.DownloadDir(URI, UserName, Password,
+            var handler = AHelper.FTP.DownloadDir(URI, User, Pass,
                 localPath, searchOption, searchPattern, isOverWrite,
                 TimeOut, BufferSize);
             handler.Event = iEvent;
@@ -302,7 +360,7 @@ public partial class AHandle
         /// <returns>文件大小</returns>
         public long GetFileSize(string remotePath)
         {
-            return AHelper.FTP.GetFileSize(string.Concat(URI, '/', remotePath), UserName, Password);
+            return AHelper.FTP.GetFileSize(string.Concat(URI, '/', remotePath), User, Pass);
         }
 
         /// <summary>
@@ -313,7 +371,7 @@ public partial class AHandle
         /// <returns>文件列表</returns>
         public List<string> GetList(string remotePath = null, string keyword = null)
         {
-            return AHelper.FTP.GetRemoteList(string.Concat(URI, '/', remotePath), UserName, Password,
+            return AHelper.FTP.GetRemoteList(string.Concat(URI, '/', remotePath), User, Pass,
                 keyword, TimeOut);
         }
 
@@ -325,7 +383,7 @@ public partial class AHandle
         /// <returns>文件列表</returns>
         public List<string> GetListFile(string remotePath = null, string keyword = null)
         {
-            return AHelper.FTP.GetRemoteListFile(string.Concat(URI, '/', remotePath), UserName, Password,
+            return AHelper.FTP.GetRemoteListFile(string.Concat(URI, '/', remotePath), User, Pass,
                 keyword, TimeOut);
         }
 
@@ -335,7 +393,7 @@ public partial class AHandle
         /// <returns>Ture:有效 False:无效</returns>
         public bool Check(string remotePath = null)
         {
-            return AHelper.FTP.Check(string.Concat(URI, '/', remotePath), UserName, Password, TimeOut);
+            return AHelper.FTP.Check(string.Concat(URI, '/', remotePath), User, Pass, TimeOut);
         }
 
         /// <summary>
@@ -344,7 +402,7 @@ public partial class AHandle
         /// <returns>Ture:有效 False:无效</returns>
         public bool CheckFile(string remotePath = null)
         {
-            return AHelper.FTP.CheckFile(string.Concat(URI, '/', remotePath), UserName, Password, TimeOut);
+            return AHelper.FTP.CheckFile(string.Concat(URI, '/', remotePath), User, Pass, TimeOut);
         }
 
         /// <summary>
@@ -353,7 +411,7 @@ public partial class AHandle
         /// <returns>Ture:有效 False:无效</returns>
         public bool CheckDir(string remotePath = null)
         {
-            return AHelper.FTP.CheckDir(string.Concat(URI, '/', remotePath), UserName, Password, TimeOut);
+            return AHelper.FTP.CheckDir(string.Concat(URI, '/', remotePath), User, Pass, TimeOut);
         }
 
         /// <summary>
@@ -361,10 +419,10 @@ public partial class AHandle
         /// </summary>
         public void Dispose()
         {
-            ServerIP = null;
-            UserName = null;
-            Password = null;
-            RemotePath = null;
+            Server = null;
+            User = null;
+            Pass = null;
+            Absolute = null;
             URI = null;
         }
     }

@@ -13,6 +13,65 @@ public partial class AHelper
     public partial class FTP
     {
         /// <summary>
+        /// 获取FTP文本内容
+        /// </summary>
+        /// <param name="uri">路径</param>
+        /// <param name="user">用户名</param>
+        /// <param name="pass">密码</param>
+        /// <param name="timeout">超时</param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static string GetText(string uri, string user, string pass, ushort timeout = Net.TIMEOUT)
+        {
+            try
+            {
+                var request = CreateRequestFile(uri, user, pass, "RETR", timeout);
+                using var response = request.GetResponse();
+                using var stream = response.GetResponseStream();
+                if (stream is null) throw new Exception("FTP Stream is Null");
+                using var reader = new StreamReader(stream);
+                var text = reader.ReadToEnd();
+                request.Abort();
+                return text;
+            }
+            catch (WebException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// 获取FTP文本内容
+        /// </summary>
+        /// <param name="uri">路径</param>
+        /// <param name="user">用户名</param>
+        /// <param name="pass">密码</param>
+        /// <param name="timeout">超时</param>
+        /// <param name="cancellationToken">取消令牌</param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static async Task<string> GetTextAsync(string uri, string user, string pass,
+            ushort timeout = Net.TIMEOUT,
+            CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var request = CreateRequestFile(uri, user, pass, "RETR", timeout, cancellationToken);
+                using var response = await request.GetResponseAsync();
+                using var stream = response.GetResponseStream();
+                if (stream is null) throw new Exception("FTP Stream is Null");
+                using var reader = new StreamReader(stream);
+                var text = await reader.ReadToEndAsync();
+                request.Abort();
+                return text;
+            }
+            catch (WebException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        /// <summary>
         /// 获取FTP文件MD5
         /// </summary>
         /// <param name="uri">路径</param>

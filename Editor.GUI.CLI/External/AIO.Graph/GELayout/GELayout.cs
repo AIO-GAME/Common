@@ -11,6 +11,7 @@ using UnityEngine;
 
 namespace AIO.UEditor
 {
+    [IgnoreConsoleJump]
     public static partial class GELayout
     {
         #region List

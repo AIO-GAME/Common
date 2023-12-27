@@ -12,10 +12,10 @@ public partial class AHelper
             private string uri { get; }
             private string user { get; }
             private string pass { get; }
-            private string localPath { get; }
             private ushort timeout { get; }
             private int bufferSize { get; }
-            private FileInfo info;
+
+            private Stream stream;
 
             /// <summary>
             /// FTP上传文件
@@ -23,32 +23,36 @@ public partial class AHelper
             /// <param name="uri">路径</param>
             /// <param name="user">用户名</param>
             /// <param name="pass">密码</param>
-            /// <param name="localPath">本地文件路径</param>
+            /// <param name="stream">数据流</param>
             /// <param name="timeout">超时</param>
             /// <param name="bufferSize">缓存大小</param>
             public FTPUploadFileOperation(
                 string uri,
                 string user,
                 string pass,
-                string localPath,
+                Stream stream,
                 ushort timeout = Net.TIMEOUT,
                 int bufferSize = Net.BUFFER_SIZE)
             {
-                this.uri = uri;
+                this.uri = uri.Replace('\\', '/');
                 this.user = user;
                 this.pass = pass;
-                this.localPath = localPath;
+                this.stream = stream;
                 this.timeout = timeout;
                 this.bufferSize = bufferSize;
             }
 
             protected override void OnBegin()
             {
-                info = new FileInfo(localPath);
-                if (info.Exists) return;
-                State = EProgressState.Fail;
-                Event.OnError?.Invoke(
-                    new FileNotFoundException($"FTP Upload : Target File Not Found {localPath}"));
+                if (stream is null)
+                {
+                    State = EProgressState.Fail;
+                    Event.OnError?.Invoke(
+                        new FileNotFoundException($"FTP Upload : input stream is null!"));
+                    return;
+                }
+
+                State = EProgressState.Running;
             }
 
             protected override void OnWait()
@@ -69,33 +73,30 @@ public partial class AHelper
                     }
 
                     var request = CreateRequestFile(uri, user, pass, "STOR", timeout);
-                    request.ContentLength = info.Length;
-                    TotalValue = info.Length;
-                    CurrentInfo = info.FullName;
+                    request.ContentLength = stream.Length;
+                    TotalValue = stream.Length;
+                    CurrentInfo = uri;
 
                     using (var requestStream = request.GetRequestStream())
                     {
-                        using (var fileStream = info.OpenRead())
+                        var memoryBuff = new byte[bufferSize];
+                        var contentLen = stream.Read(memoryBuff, 0, bufferSize);
+                        while (contentLen > 0)
                         {
-                            var memoryBuff = new byte[bufferSize];
-                            var contentLen = fileStream.Read(memoryBuff, 0, bufferSize);
-                            while (contentLen > 0)
+                            switch (State)
                             {
-                                switch (State)
-                                {
-                                    case EProgressState.Cancel:
-                                        DeleteFile(uri, user, pass, timeout);
-                                        Event.OnError?.Invoke(new TaskCanceledException());
-                                        return;
-                                    case EProgressState.Running:
-                                        CurrentValue += contentLen;
-                                        requestStream.Write(memoryBuff, 0, contentLen);
-                                        contentLen = fileStream.Read(memoryBuff, 0, bufferSize);
-                                        break;
-                                    default:
-                                        Thread.Sleep(100);
-                                        break;
-                                }
+                                case EProgressState.Cancel:
+                                    DeleteFile(uri, user, pass, timeout);
+                                    Event.OnError?.Invoke(new TaskCanceledException());
+                                    return;
+                                case EProgressState.Running:
+                                    CurrentValue += contentLen;
+                                    requestStream.Write(memoryBuff, 0, contentLen);
+                                    contentLen = stream.Read(memoryBuff, 0, bufferSize);
+                                    break;
+                                default:
+                                    Thread.Sleep(100);
+                                    break;
                             }
                         }
 
@@ -130,35 +131,32 @@ public partial class AHelper
                     }
 
                     var request = CreateRequestFile(uri, user, pass, "STOR", timeout);
-                    request.ContentLength = info.Length;
-                    TotalValue = info.Length;
-                    CurrentInfo = info.FullName;
+                    request.ContentLength = stream.Length;
+                    TotalValue = stream.Length;
+                    CurrentInfo = uri;
                     using (var requestStream = await request.GetRequestStreamAsync())
                     {
-                        using (var fileStream = info.OpenRead())
+                        var memoryBuff = new byte[bufferSize];
+                        var contentLen =
+                            await stream.ReadAsync(memoryBuff, 0, bufferSize, cancellationToken);
+                        while (contentLen > 0)
                         {
-                            var memoryBuff = new byte[bufferSize];
-                            var contentLen =
-                                await fileStream.ReadAsync(memoryBuff, 0, bufferSize, cancellationToken);
-                            while (contentLen > 0)
+                            switch (State)
                             {
-                                switch (State)
-                                {
-                                    case EProgressState.Cancel:
-                                        await DeleteFileAsync(uri, user, pass, timeout);
-                                        Event.OnError?.Invoke(new TaskCanceledException());
-                                        return;
-                                    case EProgressState.Running:
-                                        CurrentValue += contentLen;
-                                        await requestStream.WriteAsync(memoryBuff, 0, contentLen,
-                                            cancellationToken);
-                                        contentLen = await fileStream.ReadAsync(memoryBuff, 0, bufferSize,
-                                            cancellationToken);
-                                        break;
-                                    default:
-                                        await Task.Delay(100, cancellationToken);
-                                        break;
-                                }
+                                case EProgressState.Cancel:
+                                    await DeleteFileAsync(uri, user, pass, timeout);
+                                    Event.OnError?.Invoke(new TaskCanceledException());
+                                    return;
+                                case EProgressState.Running:
+                                    CurrentValue += contentLen;
+                                    await requestStream.WriteAsync(memoryBuff, 0, contentLen,
+                                        cancellationToken);
+                                    contentLen = await stream.ReadAsync(memoryBuff, 0, bufferSize,
+                                        cancellationToken);
+                                    break;
+                                default:
+                                    await Task.Delay(100, cancellationToken);
+                                    break;
                             }
                         }
 
@@ -178,7 +176,7 @@ public partial class AHelper
 
             protected override void OnDispose()
             {
-                info = null;
+                stream = null;
             }
         }
 
@@ -200,7 +198,52 @@ public partial class AHelper
             int bufferSize = Net.BUFFER_SIZE
         )
         {
-            return new FTPUploadFileOperation(uri, user, pass, localPath, timeout, bufferSize);
+            return new FTPUploadFileOperation(uri, user, pass, File.OpenRead(localPath), timeout, bufferSize);
+        }
+
+
+        /// <summary>
+        /// FTP上传文件
+        /// </summary>
+        /// <param name="uri">路径</param>
+        /// <param name="user">用户名</param>
+        /// <param name="pass">密码</param>
+        /// <param name="stream">数据流</param>
+        /// <param name="timeout">超时</param>
+        /// <param name="bufferSize">缓存大小</param>
+        public static IProgressOperation UploadFile(
+            string uri,
+            string user,
+            string pass,
+            byte[] stream,
+            ushort timeout = Net.TIMEOUT,
+            int bufferSize = Net.BUFFER_SIZE
+        )
+        {
+            var data = new MemoryStream(stream);
+            data.Seek(0, SeekOrigin.Begin);
+            return new FTPUploadFileOperation(uri, user, pass, data, timeout, bufferSize);
+        }
+
+        /// <summary>
+        /// FTP上传文件
+        /// </summary>
+        /// <param name="uri">路径</param>
+        /// <param name="user">用户名</param>
+        /// <param name="pass">密码</param>
+        /// <param name="stream">数据流</param>
+        /// <param name="timeout">超时</param>
+        /// <param name="bufferSize">缓存大小</param>
+        public static IProgressOperation UploadFile(
+            string uri,
+            string user,
+            string pass,
+            Stream stream,
+            ushort timeout = Net.TIMEOUT,
+            int bufferSize = Net.BUFFER_SIZE
+        )
+        {
+            return new FTPUploadFileOperation(uri, user, pass, stream, timeout, bufferSize);
         }
     }
 }
