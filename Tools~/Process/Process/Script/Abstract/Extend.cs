@@ -12,7 +12,7 @@ namespace AIO
     /// <summary>
     /// 扩展
     /// </summary>
-    public static class Extend
+    public static class ResultExtend
     {
         /// <summary>
         /// 输出日志
@@ -25,15 +25,13 @@ namespace AIO
             if (!PrCourse.IsLog || ret == null) return;
             if (ret is ResultEmpty)
             {
-                if (ret.Next != null) Debug(ret.Next);
+                Console.WriteLine(ret.StdALL);
                 return;
             }
 
             if (PrCourse.IsCache && !string.IsNullOrEmpty(ret.StdError.ToString()))
                 throw new Exception(ret.StdError.ToString());
             Console.WriteLine(ret.StdALL);
-
-            if (ret.Next != null) Debug(ret.Next);
         }
     }
 }

@@ -132,6 +132,16 @@ namespace AIO
     /// </summary>
     public sealed partial class PrEmpty : PrCourse
     {
+        /// <summary>
+        /// 进程构造器(空)
+        /// </summary>
+        public static PrEmpty Instance { get; } = new PrEmpty();
+        
+        /// <summary>
+        /// 进程执行器(空)
+        /// </summary>
+        public static IExecutor Executor { get; } = new ExecutorEmpty();
+        
         /// <inheritdoc/>
         public override void Dispose()
         {

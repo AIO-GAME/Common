@@ -155,7 +155,7 @@ namespace AIO
         /// <inheritdoc/>
         public void ReceivedError(object sender, DataReceivedEventArgs e)
         {
-            if (e != null) StdError.AppendLine(e.Data);
+            if (e != null) StdOut.AppendLine(e.Data);
         }
 
         /// <inheritdoc/>

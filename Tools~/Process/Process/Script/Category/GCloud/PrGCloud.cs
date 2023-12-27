@@ -121,18 +121,7 @@ namespace AIO
         /// <returns><see cref="PrGCloud"/></returns>
         public static IExecutor Create(IEnumerable<string> args)
         {
-            switch (Environment.OSVersion.Platform)
-            {
-                case PlatformID.Win32NT:
-                case PlatformID.Win32S:
-                case PlatformID.Win32Windows:
-                case PlatformID.WinCE:
-                    return PrCmd.Create().Input($"{CMD} {string.Join(" ", args)}".Trim());
-                case PlatformID.MacOSX:
-                case PlatformID.Unix:
-                    return new PrMac().Execute().Input($"{CMD} {string.Join(" ", args)}".Trim());
-                default: throw new NotImplementedException();
-            }
+            return Create(string.Join(" ", args));
         }
 
         /// <summary>
@@ -142,18 +131,7 @@ namespace AIO
         /// <returns><see cref="PrGCloud"/></returns>
         public static IExecutor Create(params string[] args)
         {
-            switch (Environment.OSVersion.Platform)
-            {
-                case PlatformID.Win32NT:
-                case PlatformID.Win32S:
-                case PlatformID.Win32Windows:
-                case PlatformID.WinCE:
-                    return PrCmd.Create().Input($"{CMD} {string.Join(" ", args)}".Trim());
-                case PlatformID.MacOSX:
-                case PlatformID.Unix:
-                    return new PrMac().Execute().Input($"{CMD} {string.Join(" ", args)}".Trim());
-                default: throw new NotImplementedException();
-            }
+            return Create(string.Join(" ", args));
         }
     }
 }

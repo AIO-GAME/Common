@@ -100,6 +100,6 @@ namespace AIO
         /// 进度执行回调
         /// </summary>
         [DebuggerHidden, DebuggerNonUserCode]
-        IExecutor OnProgress(in Action<object, DataReceivedEventArgs> action);
+        IExecutor OnProgress(in Action<object, string> action);
     }
 }
