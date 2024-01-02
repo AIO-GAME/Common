@@ -38,6 +38,10 @@ namespace AIO.UEditor
         {
         }
 
+        public DirTreeFiled(string directoryPath, int optionDirDepth = 1) : base(directoryPath, optionDirDepth)
+        {
+        }
+
         public void OnDraw()
         {
             if (GC_FOLDOUT is null)
