@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 
@@ -123,6 +124,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 分隔符
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Separator()
         {
             EditorGUILayout.Separator();
@@ -131,6 +133,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 分隔符
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Separator(int num)
         {
             for (var i = 0; i < num; i++) EditorGUILayout.Separator();
@@ -139,6 +142,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 隔行
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Space()
         {
             EditorGUILayout.Space();
@@ -147,6 +151,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 隔行
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Space(float width)
         {
             EditorGUILayout.Space(width);
@@ -157,6 +162,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 隔行
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Space(int num, float width, bool expand = true)
         {
             for (var i = 0; i < num; i++) EditorGUILayout.Space(width, expand);
