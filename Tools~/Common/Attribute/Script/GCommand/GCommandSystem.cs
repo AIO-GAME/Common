@@ -120,7 +120,6 @@ public static class GCommandSystem
                 CommandSearchs[label].Add(new List<string>(labels), attribute);
             }
             else CommandSearchs[label].Add(attribute);
-
         }
         else throw new GCommandDuplicationKeyException(attribute.ID, attribute.FullName, CommandKeyName[attribute.ID]);
     }
@@ -146,6 +145,7 @@ public static class GCommandSystem
         {
             str.Append(item.Value.ToString());
         }
+
         var dicroot = Path.GetDirectoryName(path);
         if (!Directory.Exists(dicroot)) Directory.CreateDirectory(dicroot);
         File.WriteAllText(path, str.ToString(), Encoding.UTF8);
@@ -179,13 +179,13 @@ public static class GCommandSystem
                         objs[i] = args[i].Trim('\"');
                     }
                 }
+
                 Invoke(id, objs);
                 return;
             }
-
         }
-        throw new GCommandResolverException(cmd);
 
+        throw new GCommandResolverException(cmd);
     }
 
     /// <summary>
@@ -203,8 +203,10 @@ public static class GCommandSystem
                     return;
                 }
             }
+
             throw new GCommandParameterNoMatchException(cmd, obj);
         }
+
         throw new GCommandNotFoundException(cmd);
     }
 
@@ -223,8 +225,10 @@ public static class GCommandSystem
                     return;
                 }
             }
+
             throw new GCommandParameterNoMatchException(cmd);
         }
+
         throw new GCommandNotFoundException(cmd);
     }
 
@@ -233,6 +237,5 @@ public static class GCommandSystem
     /// </summary>
     public static void UnRegister()
     {
-
     }
 }

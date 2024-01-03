@@ -1,7 +1,7 @@
 #if ENABLE_HOOK_TEST_CASE
 #if UNITY_EDITOR
 /*
- * ²âÊÔĞŞ¸ÄSceneViewÉãÏñ»ú¼ÓËÙÒÆ¶¯º¯ÊıµÄÊµÏÖ£¨Ä¬ÈÏÊÇ Mathf.Pow(1.8f, deltaTime)£©
+ * æµ‹è¯•ä¿®æ”¹SceneViewæ‘„åƒæœºåŠ é€Ÿç§»åŠ¨å‡½æ•°çš„å®ç°ï¼ˆé»˜è®¤æ˜¯ Mathf.Pow(1.8f, deltaTime)ï¼‰
  */
 using System;
 using System.Collections;
@@ -14,10 +14,10 @@ using System.Runtime.CompilerServices;
 
 namespace MonoHook.Test
 {
-    //[InitializeOnLoad] // È¡Ïû´ËĞĞ×¢ÊÍ¼´ÉúĞ§£¨½¨ÒéÊ¹ÓÃunity2020, ÒòÎªÓĞ¼¸¸ö±äÁ¿Ãû³ÆÓëunity2019²»Ò»ÖÂ£¬´Ë´úÂëÎ´×ö¼æÈİ£©
+    //[InitializeOnLoad] // å–æ¶ˆæ­¤è¡Œæ³¨é‡Šå³ç”Ÿæ•ˆï¼ˆå»ºè®®ä½¿ç”¨unity2020, å› ä¸ºæœ‰å‡ ä¸ªå˜é‡åç§°ä¸unity2019ä¸ä¸€è‡´ï¼Œæ­¤ä»£ç æœªåšå…¼å®¹ï¼‰
     public static class SceneViewMoveFunc_HookTest
     {
-        #region ·´Éä¶¨ÒåÔ­ÓĞ×Ö¶Î
+        #region åå°„å®šä¹‰åŸæœ‰å­—æ®µ
         private static Vector3 s_Motion
         {
             get => (Vector3)_fi_s_Motion.GetValue(null);
@@ -37,7 +37,7 @@ namespace MonoHook.Test
         }
 
         /// <summary>
-        /// ´ËÊôĞÔÃ¿Ö¡Ö»ÄÜµ÷ÓÃÒ»´Î£¨ÒòÎªÄÚ²¿ÊÇµ÷ÓÃµÄTimeer.Update£©
+        /// æ­¤å±æ€§æ¯å¸§åªèƒ½è°ƒç”¨ä¸€æ¬¡ï¼ˆå› ä¸ºå†…éƒ¨æ˜¯è°ƒç”¨çš„Timeer.Updateï¼‰
         /// </summary>
         private static float s_deltaTime
         {
@@ -46,12 +46,12 @@ namespace MonoHook.Test
 
         private static SceneView s_CurrentSceneView
         {
-            // ´Ë±äÁ¿Óëµ±Ç°contextÓĞ¹Ø£¬Òò´ËÃ¿´ÎÊ¹ÓÃ¶¼±ØĞë¼´Ê±»ñÈ¡
+            // æ­¤å˜é‡ä¸å½“å‰contextæœ‰å…³ï¼Œå› æ­¤æ¯æ¬¡ä½¿ç”¨éƒ½å¿…é¡»å³æ—¶è·å–
             get => _fi_s_CurrentSceneView.GetValue(null) as SceneView;
         }
 
         private static Type _sceneViewMotionType;
-        // Õâ¼¸¸ö×Ö¶ÎÊÇÖµÀàĞÍ£¬ÒòÎª²»ÄÜÖ±½Ó»ñÈ¡¶ÔÏóÒıÓÃ£¬Ã¿´Î¶¼ĞèÒªÊ¹ÓÃ·´Éä¶ÁÈ¡»òÕßÉèÖÃ
+        // è¿™å‡ ä¸ªå­—æ®µæ˜¯å€¼ç±»å‹ï¼Œå› ä¸ºä¸èƒ½ç›´æ¥è·å–å¯¹è±¡å¼•ç”¨ï¼Œæ¯æ¬¡éƒ½éœ€è¦ä½¿ç”¨åå°„è¯»å–æˆ–è€…è®¾ç½®
         private static FieldInfo _fi_s_Motion;
         private static FieldInfo _fi_s_Moving;
         private static FieldInfo _fi_s_FlySpeedTarget;
@@ -67,13 +67,14 @@ namespace MonoHook.Test
         private static MethodHook _hook;
 
         /// <summary>
-        /// ×Ô¶¨ÒåSceneView¼ÓËÙÒÆ¶¯º¯Êı
+        /// è‡ªå®šä¹‰SceneViewåŠ é€Ÿç§»åŠ¨å‡½æ•°
         /// </summary>
         /// <returns></returns>
         private static float CustomAccMoveFunction(float deltaTime)
         {
             float FlySpeedTarget = s_FlySpeedTarget;
-            float speed = (FlySpeedTarget < Mathf.Epsilon) ? k_FlySpeed : (FlySpeedTarget * Mathf.Pow(k_FlySpeedAcceleration, deltaTime));
+            float speed =
+ (FlySpeedTarget < Mathf.Epsilon) ? k_FlySpeed : (FlySpeedTarget * Mathf.Pow(k_FlySpeedAcceleration, deltaTime));
 
             return speed;
         }
@@ -84,21 +85,27 @@ namespace MonoHook.Test
             {
                 _sceneViewMotionType = typeof(BuildPipeline).Assembly.GetType("UnityEditor.SceneViewMotion");
 
-                // ·´ÉäÔ­ÓĞ×Ö¶ÎºÍÊôĞÔ
+                // åå°„åŸæœ‰å­—æ®µå’Œå±æ€§
                 {
-                    _fi_s_Motion = _sceneViewMotionType.GetField("s_Motion", BindingFlags.Static | BindingFlags.NonPublic);
-                    _fi_s_Moving = _sceneViewMotionType.GetField("s_Moving", BindingFlags.Static | BindingFlags.NonPublic);
-                    _fi_s_FlySpeedTarget = _sceneViewMotionType.GetField("s_FlySpeedTarget", BindingFlags.Static | BindingFlags.NonPublic);
-                    _fi_s_CurrentSceneView = _sceneViewMotionType.GetField("s_CurrentSceneView", BindingFlags.Static | BindingFlags.NonPublic);
+                    _fi_s_Motion =
+ _sceneViewMotionType.GetField("s_Motion", BindingFlags.Static | BindingFlags.NonPublic);
+                    _fi_s_Moving =
+ _sceneViewMotionType.GetField("s_Moving", BindingFlags.Static | BindingFlags.NonPublic);
+                    _fi_s_FlySpeedTarget =
+ _sceneViewMotionType.GetField("s_FlySpeedTarget", BindingFlags.Static | BindingFlags.NonPublic);
+                    _fi_s_CurrentSceneView =
+ _sceneViewMotionType.GetField("s_CurrentSceneView", BindingFlags.Static | BindingFlags.NonPublic);
 
-                    s_FlySpeed = _sceneViewMotionType.GetField("s_FlySpeed", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null) as AnimVector3;
+                    s_FlySpeed =
+ _sceneViewMotionType.GetField("s_FlySpeed", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null) as AnimVector3;
 
                     _mi_deltaTime = typeof(BuildPipeline).Assembly.GetType("UnityEditor.CameraFlyModeContext")
                         .GetProperty("deltaTime", BindingFlags.Static | BindingFlags.Public).GetGetMethod();
                 }
 
 
-                MethodInfo miTarget = _sceneViewMotionType.GetMethod("GetMovementDirection", BindingFlags.Static | BindingFlags.NonPublic);
+                MethodInfo miTarget =
+ _sceneViewMotionType.GetMethod("GetMovementDirection", BindingFlags.Static | BindingFlags.NonPublic);
 
                 MethodInfo miReplacement = new Func<Vector3>(GetMovementDirectionNew).Method;
                 MethodInfo miProxy = new Func<Vector3>(GetMovementDirectionProxy).Method;
@@ -106,12 +113,12 @@ namespace MonoHook.Test
                 _hook = new MethodHook(miTarget, miReplacement, miProxy);
                 _hook.Install();
 
-                Debug.Log("ÒÑÖØ¶¨ÒåSceneViewÉãÏñ»úÒÆ¶¯ËÙ¶È");
+                Debug.Log("å·²é‡å®šä¹‰SceneViewæ‘„åƒæœºç§»åŠ¨é€Ÿåº¦");
             }
         }
 
         /// <summary>
-        /// ÖØĞ´Ô­ÓĞµÄÍêÕûµÄÒÆ¶¯Âß¼­(´Ë·½·¨Ò²¿ÉÒÔ±»ÍêÈ«ĞŞ¸Ä)
+        /// é‡å†™åŸæœ‰çš„å®Œæ•´çš„ç§»åŠ¨é€»è¾‘(æ­¤æ–¹æ³•ä¹Ÿå¯ä»¥è¢«å®Œå…¨ä¿®æ”¹)
         /// </summary>
         /// <returns></returns>
         private static Vector3 GetMovementDirectionNew()
@@ -119,9 +126,9 @@ namespace MonoHook.Test
             //return GetMovementDirectionProxy();
 
             s_Moving = s_Motion.sqrMagnitude > 0f;
-            var _CurrentSceneView = s_CurrentSceneView; // »º´æ±äÁ¿ÒÔ±ÜÃâ¶à´Î·´Éäµ÷ÓÃ
+            var _CurrentSceneView = s_CurrentSceneView; // ç¼“å­˜å˜é‡ä»¥é¿å…å¤šæ¬¡åå°„è°ƒç”¨
             float speed = _CurrentSceneView.cameraSettings.speed;
-            float deltaTime = s_deltaTime;              // s_deltaTime ²»¿É±»¶à´Î·ÃÎÊ
+            float deltaTime = s_deltaTime;              // s_deltaTime ä¸å¯è¢«å¤šæ¬¡è®¿é—®
             if (Event.current.shift)
             {
                 speed *= 5f;
@@ -130,7 +137,7 @@ namespace MonoHook.Test
             {
                 if (_CurrentSceneView.cameraSettings.accelerationEnabled)
                 {
-                    s_FlySpeedTarget = CustomAccMoveFunction(deltaTime); // ×Ô¶¨Òå¼ÓËÙÒÆ¶¯º¯Êı
+                    s_FlySpeedTarget = CustomAccMoveFunction(deltaTime); // è‡ªå®šä¹‰åŠ é€Ÿç§»åŠ¨å‡½æ•°
                 }
                 else
                 {

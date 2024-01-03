@@ -534,14 +534,16 @@ namespace AIO.Net
             Cache.Write(buffer, offset, Count);
 
             // Try to seek for HTTP header separator
-            for (int i = _cacheSize; i < Cache.Count; i++)
+            for (var i = _cacheSize; i < Cache.Count; i++)
             {
                 // Check for the request cache out of bounds
                 if ((i + 3) >= Cache.Count)
                     break;
 
                 // Check for the header separator
-                if ((Cache[i + 0] == '\r') && (Cache[i + 1] == '\n') && (Cache[i + 2] == '\r') &&
+                if ((Cache[i + 0] == '\r') && 
+                    (Cache[i + 1] == '\n') && 
+                    (Cache[i + 2] == '\r') &&
                     (Cache[i + 3] == '\n'))
                 {
                     int index = 0;

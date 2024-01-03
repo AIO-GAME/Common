@@ -291,6 +291,172 @@
             转化为IP地址
             </summary>
         </member>
+        <member name="T:AIO.ExtendSort">
+            <summary>
+            Sort 扩展
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortBucket(System.Collections.Generic.IList{System.Decimal},System.Int32@)">
+            <summary>
+            桶排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortBucket(System.Collections.Generic.IList{System.Double},System.Int32@)">
+            <summary>
+            桶排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.AutomaticArray``1(System.Array@,``0@)">
+            <summary>
+            自动扩容，并保存数据
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.InsertIntoLinkList``1(System.Collections.Generic.LinkedList{``0},``0)">
+            <summary>  
+            按升序插入 linklist   
+            </summary>  
+            <param name="linkedList"> 要排序的链表 </param>  
+            <param name="num"> 要插入排序的数字 </param>  
+        </member>
+        <member name="M:AIO.ExtendSort.SortShell``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            希尔排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortShell``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Int32}@)">
+            <summary>
+            希尔排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortSelect``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            选择排序 数据量:100以下适用
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortSelect``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Int32}@)">
+            <summary>
+            选择排序 数据量:100以下适用
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortHeap``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            堆排序
+            数据量:1000以下适用
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.HeapSort_MaxHeaping``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@)">
+            <summary>
+            将指定的结点调整为堆。
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortHeap``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
+            <summary>
+            堆排序
+            数据量:1000以下适用
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.HeapSort_MaxHeaping``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@,System.Func{``0,``0,System.Int32}@)">
+            <summary>
+            将指定的结点调整为堆。
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortMerge``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            归并排序
+            数据量:1000以下适用
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortMerge``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Int32}@)">
+            <summary>
+            归并排序
+            数据量:1000以下适用
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortInsert``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            插入排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortInsert``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Int32}@)">
+            <summary>
+            插入排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortQuick``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            快速排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortQuick``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Int32}@)">
+            <summary>
+            快速排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortBubble``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            单向冒泡排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortBubble``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Int32}@)">
+            <summary>
+            单向冒泡排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortBubbleTwoWay``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            双向冒泡排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortBubbleTwoWay``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Int32}@)">
+            <summary>
+            双向冒泡排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortBucket(System.Collections.Generic.IList{System.Single},System.Int32@)">
+            <summary>
+            桶排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.Bucket(System.Collections.Generic.IList{System.Int16}@)">
+            <summary>
+            桶排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.Radix(System.Collections.Generic.IList{System.Int16}@)">
+            <summary>
+            基数排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortBucket(System.Collections.Generic.IList{System.Int32})">
+            <summary>
+            桶排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortRadix(System.Collections.Generic.IList{System.Int32})">
+            <summary>
+            基数排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortCounting(System.Collections.Generic.IList{System.Int32})">
+            <summary>
+            计数排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortCounting(System.Collections.Generic.IList{System.Int64})">
+            <summary>
+            计数排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortRadix(System.Collections.Generic.IList{System.Int64})">
+            <summary>
+            基数排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortBucket(System.Collections.Generic.IList{System.Int64})">
+            <summary>
+            桶排序
+            </summary>
+        </member>
         <member name="T:AIO.StreamExtend">
             <summary>
             nameof(StreamExtend)
@@ -7644,7 +7810,7 @@
         <member name="M:AIO.GBean.Dispose">
             <inheritdoc/>
         </member>
-        <member name="M:AIO.GBean.Frist">
+        <member name="M:AIO.GBean.First">
             <summary>
             首次数据存放
             </summary>
@@ -16960,173 +17126,6 @@
             反序列化 填充对象
             </summary>
         </member>
-        <member name="T:AHelper.Sort">
-            <summary>
-            排序工具
-            默认排序方向 从小到大
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.AutomaticArray``1(System.Array@,``0@)">
-            <summary>
-            自动扩容，并保存数据
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Counting(System.Collections.Generic.IList{System.Int32}@)">
-            <summary>
-            计数排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Counting(System.Collections.Generic.IList{System.Int64}@)">
-            <summary>
-            计数排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Radix(System.Collections.Generic.IList{System.Int64}@)">
-            <summary>
-            基数排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Radix(System.Collections.Generic.IList{System.Int32}@)">
-            <summary>
-            基数排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Radix(System.Collections.Generic.IList{System.Int16}@)">
-            <summary>
-            基数排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Int64}@)">
-            <summary>
-            桶排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Int32}@)">
-            <summary>
-            桶排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Int16}@)">
-            <summary>
-            桶排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Single}@,System.Int32@)">
-            <summary>
-            桶排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Double}@,System.Int32@)">
-            <summary>
-            桶排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Bucket(System.Collections.Generic.IList{System.Decimal}@,System.Int32@)">
-            <summary>
-            桶排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.InsertIntoLinkList``1(System.Collections.Generic.LinkedList{``0},``0)">
-            <summary>  
-            按升序插入 linklist   
-            </summary>  
-            <param name="linkedList"> 要排序的链表 </param>  
-            <param name="num"> 要插入排序的数字 </param>  
-        </member>
-        <member name="M:AHelper.Sort.Merge``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
-            <summary>
-            归并排序
-            数据量:1000以下适用
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Merge``1(System.Collections.Generic.IList{``0}@)">
-            <summary>
-            归并排序
-            数据量:1000以下适用
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Heap``1(System.Collections.Generic.IList{``0}@)">
-            <summary>
-            堆排序
-            数据量:1000以下适用
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.HeapSort_MaxHeaping``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@)">
-            <summary>
-            将指定的结点调整为堆。
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Heap``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
-            <summary>
-            堆排序
-            数据量:1000以下适用
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.HeapSort_MaxHeaping``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@,System.Func{``0,``0,System.Int32}@)">
-            <summary>
-            将指定的结点调整为堆。
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Select``1(System.Collections.Generic.IList{``0}@)">
-            <summary>
-            选择排序 数据量:100以下适用
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Select``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
-            <summary>
-            选择排序 数据量:100以下适用
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Shell``1(System.Collections.Generic.IList{``0}@)">
-            <summary>
-            希尔排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Shell``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
-            <summary>
-            希尔排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Insert``1(System.Collections.Generic.IList{``0}@)">
-            <summary>
-            插入排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Insert``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
-            <summary>
-            插入排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Quick``1(System.Collections.Generic.IList{``0}@)">
-            <summary>
-            快速排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Quick``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
-            <summary>
-            快速排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Bubble``1(System.Collections.Generic.IList{``0}@)">
-            <summary>
-            单向冒泡排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.Bubble``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
-            <summary>
-            单向冒泡排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.BubbleTwoWay``1(System.Collections.Generic.IList{``0}@)">
-            <summary>
-            双向冒泡排序
-            </summary>
-        </member>
-        <member name="M:AHelper.Sort.BubbleTwoWay``1(System.Collections.Generic.IList{``0}@,System.Func{``0,``0,System.Int32}@)">
-            <summary>
-            双向冒泡排序
-            </summary>
-        </member>
         <member name="T:AHelper.Xml">
             <summary>
             XML 工具类
@@ -18733,17 +18732,6 @@
             表示用于当前操作系统的双字节字符集 (DBCS) 的最大大小（以字节为单位）。 此字段为只读。
             </summary>
         </member>
-        <member name="M:AHelper.Marshal.SizeOf``1(``0)">
-            <summary>
-            获取 结构体实例 空间大小
-            </summary>
-            <param name="obj">返回对象的非托管大小 以字节为单位</param>
-        </member>
-        <member name="M:AHelper.Marshal.SizeOf``1">
-            <summary>
-            获取 结构体实例 空间大小
-            </summary>
-        </member>
         <member name="M:AHelper.Marshal.AllocHGlobal(System.Int32)">
             <summary>
             使用指定的字节数从进程的非托管内存中分配内存。
@@ -18780,19 +18768,6 @@
             <summary>
             
             </summary>
-        </member>
-        <member name="M:AHelper.Marshal.AllocHGlobal(System.IntPtr)">
-            <summary>
-            使用指定的字节数从进程的非托管内存中分配内存。
-            </summary>
-            <param name="ptr">内存中所需的字节数</param>
-            <returns>一个指向新分配内存的指针 这个内存必须使用Marshal.FreeHGlobal 来释放 </returns>
-        </member>
-        <member name="M:AHelper.Marshal.FreeHGlobal(System.IntPtr)">
-            <summary>
-            释放内存中指针
-            </summary>
-            <param name="hglobal">内存中的指针</param>
         </member>
         <member name="M:AHelper.Marshal.CreateAggregatedObject``1(System.IntPtr,``0)">
             <summary>
@@ -19167,12 +19142,12 @@
             
             </summary>
         </member>
-        <member name="M:AHelper.Marshal.Prelink(System.Reflection.MethodInfo)">
+        <member name="M:AHelper.Marshal.PreLink(System.Reflection.MethodInfo)">
             <summary>
             
             </summary>
         </member>
-        <member name="M:AHelper.Marshal.PrelinkAll(System.Type)">
+        <member name="M:AHelper.Marshal.PreLinkAll(System.Type)">
             <summary>
             
             </summary>
@@ -20157,6 +20132,30 @@
             <summary>
             释放Stack
             </summary>
+        </member>
+        <member name="T:MarshalExtend">
+            <summary>
+            SMarshal 类扩展
+            </summary>
+        </member>
+        <member name="M:MarshalExtend.SizeOf``1(``0)">
+            <summary>
+            获取 结构体实例 空间大小
+            </summary>
+            <param name="obj">返回对象的非托管大小 以字节为单位</param>
+        </member>
+        <member name="M:MarshalExtend.AllocHGlobal(System.IntPtr)">
+            <summary>
+            使用指定的字节数从进程的非托管内存中分配内存。
+            </summary>
+            <param name="ptr">内存中所需的字节数</param>
+            <returns>一个指向新分配内存的指针 这个内存必须使用Marshal.FreeHGlobal 来释放 </returns>
+        </member>
+        <member name="M:MarshalExtend.FreeHGlobal(System.IntPtr)">
+            <summary>
+            释放内存中指针
+            </summary>
+            <param name="hglobal">内存中的指针</param>
         </member>
     </members>
 </doc>

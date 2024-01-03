@@ -5,6 +5,9 @@
     using System.Collections.Generic;
     using System.Text;
 
+    /// <summary>
+    /// Mini Json
+    /// </summary>
     internal partial class MiniJSON
     {
         private const int TOKEN_NONE = 0;
@@ -25,6 +28,7 @@
         /// On decoding, this value holds the position at which the parse failed (-1 = no error).
         /// </summary>
         protected static int lastErrorIndex = -1;
+
         protected static string lastDecode = "";
 
 
@@ -311,7 +315,8 @@
                             char[] unicodeCharArray = new char[4];
                             Array.Copy(json, index, unicodeCharArray, 0, 4);
 
-                            uint codePoint = UInt32.Parse(new string(unicodeCharArray), System.Globalization.NumberStyles.HexNumber);
+                            uint codePoint = UInt32.Parse(new string(unicodeCharArray),
+                                System.Globalization.NumberStyles.HexNumber);
 
                             // convert the integer codepoint to a unicode char and add to string
                             s += Char.ConvertFromUtf32((int)codePoint);
@@ -329,7 +334,6 @@
                 {
                     s += c;
                 }
-
             }
 
             if (!complete)
@@ -361,6 +365,7 @@
                 {
                     break;
                 }
+
             return lastIndex - 1;
         }
 
@@ -422,6 +427,7 @@
                 case ':':
                     return MiniJSON.TOKEN_COLON;
             }
+
             index--;
 
             int remainingLength = json.Length - index;
@@ -689,7 +695,6 @@
         }
 
         #endregion
-
     }
 
     #region Extension methods

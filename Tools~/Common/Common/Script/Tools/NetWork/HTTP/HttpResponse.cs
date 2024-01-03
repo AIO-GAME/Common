@@ -539,7 +539,7 @@ namespace AIO.Net
             Cache.Write(": ");
 
             // Append the HTTP response header's value
-            int valueIndex = (int)Cache.Count;
+            int valueIndex = Cache.Count;
 
             // Append cookie
             Cache.Write(name);
@@ -566,9 +566,9 @@ namespace AIO.Net
             if (httpOnly)
                 Cache.Write("; HttpOnly");
 
-            int valueSize = (int)Cache.Count - valueIndex;
+            var valueSize = Cache.Count - valueIndex;
 
-            string cookie = Cache.ExtractString(valueIndex, valueSize);
+            var cookie = Cache.ExtractString(valueIndex, valueSize);
 
             Cache.Write("\r\n");
 
@@ -588,7 +588,7 @@ namespace AIO.Net
 
             Cache.Write("\r\n");
 
-            int index = (int)Cache.Count;
+            int index = Cache.Count;
 
             // Append the HTTP response body
             Cache.Write(body);
@@ -609,7 +609,7 @@ namespace AIO.Net
 
             Cache.Write("\r\n");
 
-            var index = (int)Cache.Count;
+            var index = Cache.Count;
 
             // Append the HTTP response body
             _bodyIndex = index;
@@ -630,7 +630,7 @@ namespace AIO.Net
 
             Cache.Write("\r\n");
 
-            int index = (int)Cache.Count;
+            int index = Cache.Count;
 
             // Append the HTTP response body
             Cache.Write(body);
@@ -652,7 +652,7 @@ namespace AIO.Net
 
             Cache.Write("\r\n");
 
-            int index = (int)Cache.Count;
+            int index = Cache.Count;
 
             // Append the HTTP response body
             Cache.Write(body);
@@ -674,7 +674,7 @@ namespace AIO.Net
 
             Cache.Write("\r\n");
 
-            var index = (int)Cache.Count;
+            var index = Cache.Count;
 
             // Clear the HTTP response body
             _bodyIndex = index;
@@ -855,10 +855,10 @@ namespace AIO.Net
             Cache.Write(buffer, offset, size);
 
             // Try to seek for HTTP header separator
-            for (int i = _cacheSize; i < (int)Cache.Count; i++)
+            for (int i = _cacheSize; i < Cache.Count; i++)
             {
                 // Check for the request cache out of bounds
-                if ((i + 3) >= (int)Cache.Count)
+                if ((i + 3) >= Cache.Count)
                     break;
 
                 // Check for the header separator
@@ -877,12 +877,12 @@ namespace AIO.Net
                     {
                         protocolSize++;
                         index++;
-                        if (index >= (int)Cache.Count)
+                        if (index >= Cache.Count)
                             return false;
                     }
 
                     index++;
-                    if ((index >= (int)Cache.Count))
+                    if ((index >= Cache.Count))
                         return false;
                     Protocol = Cache.ExtractString(protocolIndex, protocolSize);
 
@@ -895,7 +895,7 @@ namespace AIO.Net
                             return false;
                         statusSize++;
                         index++;
-                        if (index >= (int)Cache.Count)
+                        if (index >= Cache.Count)
                             return false;
                     }
 
@@ -907,7 +907,7 @@ namespace AIO.Net
                     }
 
                     index++;
-                    if (index >= (int)Cache.Count)
+                    if (index >= Cache.Count)
                         return false;
 
                     // Parse status phrase
@@ -917,20 +917,20 @@ namespace AIO.Net
                     {
                         statusPhraseSize++;
                         index++;
-                        if (index >= (int)Cache.Count)
+                        if (index >= Cache.Count)
                             return false;
                     }
 
                     index++;
-                    if ((index >= (int)Cache.Count) || (Cache[index] != '\n'))
+                    if ((index >= Cache.Count) || (Cache[index] != '\n'))
                         return false;
                     index++;
-                    if (index >= (int)Cache.Count)
+                    if (index >= Cache.Count)
                         return false;
                     StatusPhrase = Cache.ExtractString(statusPhraseIndex, statusPhraseSize);
 
                     // Parse headers
-                    while ((index < (int)Cache.Count) && (index < i))
+                    while ((index < Cache.Count) && (index < i))
                     {
                         // Parse header name
                         int headerNameIndex = index;
@@ -941,14 +941,14 @@ namespace AIO.Net
                             index++;
                             if (index >= i)
                                 break;
-                            if (index >= (int)Cache.Count)
+                            if (index >= Cache.Count)
                                 return false;
                         }
 
                         index++;
                         if (index >= i)
                             break;
-                        if (index >= (int)Cache.Count)
+                        if (index >= Cache.Count)
                             return false;
 
                         // Skip all prefix space characters
@@ -957,7 +957,7 @@ namespace AIO.Net
                             index++;
                             if (index >= i)
                                 break;
-                            if (index >= (int)Cache.Count)
+                            if (index >= Cache.Count)
                                 return false;
                         }
 
@@ -970,15 +970,15 @@ namespace AIO.Net
                             index++;
                             if (index >= i)
                                 break;
-                            if (index >= (int)Cache.Count)
+                            if (index >= Cache.Count)
                                 return false;
                         }
 
                         index++;
-                        if ((index >= (int)Cache.Count) || (Cache[index] != '\n'))
+                        if ((index >= Cache.Count) || (Cache[index] != '\n'))
                             return false;
                         index++;
-                        if (index >= (int)Cache.Count)
+                        if (index >= Cache.Count)
                             return false;
 
                         // Validate header name and value (sometimes value can be empty)
@@ -1010,17 +1010,17 @@ namespace AIO.Net
 
                     // Update the body index and size
                     _bodyIndex = i + 4;
-                    _bodySize = (int)Cache.Count - i - 4;
+                    _bodySize = Cache.Count - i - 4;
 
                     // Update the parsed cache size
-                    _cacheSize = (int)Cache.Count;
+                    _cacheSize = Cache.Count;
 
                     return true;
                 }
             }
 
             // Update the parsed cache size
-            _cacheSize = ((int)Cache.Count >= 3) ? ((int)Cache.Count - 3) : 0;
+            _cacheSize = (Cache.Count >= 3) ? (Cache.Count - 3) : 0;
 
             return false;
         }
@@ -1031,7 +1031,7 @@ namespace AIO.Net
             Cache.Write(buffer, offset, size);
 
             // Update the parsed cache size
-            _cacheSize = (int)Cache.Count;
+            _cacheSize = Cache.Count;
 
             // Update body size
             _bodySize += size;

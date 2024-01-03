@@ -53,13 +53,13 @@ namespace AIO.UEditor
             /// </summary>
             private static IntPtr myWindowHandle;
 
+#if UNITY_EDITOR_WIN
             static Program()
             {
-#if UNITY_EDITOR_WIN
                 var handle = (IntPtr)Process.GetCurrentProcess().Id; //获取进程ID
                 EnumWindows(EnumWindCallback, handle); //枚举查找本窗口
-#endif
             }
+#endif
 
             /// <summary>
             /// 改变窗口标题

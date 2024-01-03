@@ -56,13 +56,19 @@ namespace AIO.PList
         /// Gets the Xml tag of this element.
         /// </summary>
         /// <value>The Xml tag of this element.</value>
-        public String Tag { get { return "dict"; } }
+        public String Tag
+        {
+            get { return "dict"; }
+        }
 
         /// <summary>
         /// Gets the binary typecode of this element.
         /// </summary>
         /// <value>The binary typecode of this element.</value>
-        public Byte TypeCode { get { return 0x0D; } }
+        public Byte TypeCode
+        {
+            get { return 0x0D; }
+        }
 
         /// <summary>
         /// Gets a value indicating whether this instance is written only once in binary mode.
@@ -70,7 +76,10 @@ namespace AIO.PList
         /// <value>
         /// 	<c>true</c> this instance is written only once in binary mode; otherwise, <c>false</c>.
         /// </value>
-        public bool IsBinaryUnique { get { return false; } }
+        public bool IsBinaryUnique
+        {
+            get { return false; }
+        }
 
         /// <summary>
         /// Reads this element binary from the reader.
@@ -89,14 +98,16 @@ namespace AIO.PList
 
             for (int i = 0; i < reader.CurrentElementLength; i++)
             {
-                IPListElement plKey = reader.ReadInternal(reader.ElementIdxSize == 1 ?
-                    bufKeys[i] : IPAddress.NetworkToHostOrder(BitConverter.ToInt16(bufKeys, 2 * i)));
+                IPListElement plKey = reader.ReadInternal(reader.ElementIdxSize == 1
+                    ? bufKeys[i]
+                    : IPAddress.NetworkToHostOrder(BitConverter.ToInt16(bufKeys, 2 * i)));
 
                 if (!(plKey is PListString))
                     throw new PListFormatException("Key is no String");
 
-                IPListElement plVal = reader.ReadInternal(reader.ElementIdxSize == 1 ?
-                    bufVals[i] : IPAddress.NetworkToHostOrder(BitConverter.ToInt16(bufVals, 2 * i)));
+                IPListElement plVal = reader.ReadInternal(reader.ElementIdxSize == 1
+                    ? bufVals[i]
+                    : IPAddress.NetworkToHostOrder(BitConverter.ToInt16(bufVals, 2 * i)));
 
                 Add((PListString)plKey, plVal);
             }
@@ -126,6 +137,7 @@ namespace AIO.PList
             {
                 count += item.GetPListElementCount();
             }
+
             count += this.Keys.Count;
             return count;
         }
@@ -150,6 +162,7 @@ namespace AIO.PList
                 int elementIdx = writer.WriteInternal(PListElementFactory.Instance.CreateKeyElement(elems[i].Key));
                 writer.FormatIdx(elementIdx).CopyTo(keys, writer.ElementIdxSize * i);
             }
+
             for (int i = 0; i < Count; i++)
             {
                 int elementIdx = writer.WriteInternal(elems[i].Value);
@@ -161,6 +174,7 @@ namespace AIO.PList
             writer.BaseStream.Write(values, 0, values.Length);
             writer.BaseStream.Seek(0, SeekOrigin.End);
         }
+
         #endregion
 
         #region IXmlSerializable Members
@@ -171,7 +185,10 @@ namespace AIO.PList
         /// <returns>
         /// An <see cref="T:System.Xml.Schema.XmlSchema"/> that describes the XML representation of the object that is produced by the <see cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)"/> method and consumed by the <see cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)"/> method.
         /// </returns>
-        public XmlSchema GetSchema() { return null; }
+        public XmlSchema GetSchema()
+        {
+            return null;
+        }
 
         /// <summary>
         /// Generates an object from its XML representation.
@@ -179,8 +196,7 @@ namespace AIO.PList
         /// <param name="reader">The <see cref="T:System.Xml.XmlReader"/> stream from which the object is deserialized.</param>
         public void ReadXml(XmlReader reader)
         {
-
-            bool wasEmpty = reader.IsEmptyElement;
+            var wasEmpty = reader.IsEmptyElement;
             reader.Read();
             if (wasEmpty)
                 return;
@@ -218,6 +234,7 @@ namespace AIO.PList
 
                 this[key].WriteXml(writer);
             }
+
             writer.WriteEndElement();
         }
 

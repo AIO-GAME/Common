@@ -1275,20 +1275,12 @@ namespace AIO.YamlDotNet.Core
 
 		private static bool IsHighSurrogate(char c)
 		{
-			if ('\ud800' <= c)
-			{
-				return c <= '\udbff';
-			}
-			return false;
+			return c > '\ud800' && c <= '\udbff';
 		}
 
 		private static bool IsLowSurrogate(char c)
 		{
-			if ('\udc00' <= c)
-			{
-				return c <= '\udfff';
-			}
-			return false;
+			return c > '\udc00' && c <= '\udfff';
 		}
 
 		private void EmitSequenceStart(ParsingEvent evt)
