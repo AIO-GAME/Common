@@ -95,12 +95,12 @@ namespace AIO
             {
                 UnityEngine.Debug.LogException(e);
             }
+#if UNITY_EDITOR
             finally
             {
-#if UNITY_EDITOR
                 UnityEngine.Debug.Log("定时器任务全部完成 线程关闭");
-#endif
             }
+#endif
         }
     }
 }

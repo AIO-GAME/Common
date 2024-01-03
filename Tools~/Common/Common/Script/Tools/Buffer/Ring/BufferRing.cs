@@ -4,13 +4,12 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+
 namespace AIO
 {
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.IO;
-
     /// <summary>
     /// 闭环数据流
     /// </summary>
@@ -23,7 +22,8 @@ namespace AIO
         /// <summary>
         /// 存储队列 该队列专门存储数据作为对象池
         /// </summary>
-        private static readonly Dictionary<int, ConcurrentQueue<T[]>> FreedDic = new Dictionary<int, ConcurrentQueue<T[]>>();
+        private static readonly Dictionary<int, ConcurrentQueue<T[]>> FreedDic =
+            new Dictionary<int, ConcurrentQueue<T[]>>();
 
         /// <summary>
         /// 读写队列 该队列专门处理数据读写
@@ -275,67 +275,6 @@ namespace AIO
         {
             while (UsedDic.Count > 0)
                 RemoveFirst();
-        }
-    }
-
-    /// <summary>
-    /// 扩展
-    /// </summary>
-    public static class RingBufferExtend
-    {
-        /// <summary>
-        /// 读取数据流
-        /// </summary>
-        public static void Read(this BufferRing<byte> buffer, Stream stream, in int count)
-        {
-            if (count > buffer.Count) Console.WriteLine($"bufferList length < count, {buffer.Count} {count}");
-            var alreadyCopyCount = 0;
-            while (alreadyCopyCount < count)
-            {
-                var n = count - alreadyCopyCount;
-                if (buffer.Capacity - buffer.ReadOffset > n) //实现方法同上类似
-                {
-                    stream.Write(buffer.First, buffer.ReadOffset, n);
-                    buffer.ReadOffset += n;
-                    alreadyCopyCount += n;
-                }
-                else
-                {
-                    stream.Write(buffer.First, buffer.ReadOffset, buffer.Capacity - buffer.ReadOffset);
-                    alreadyCopyCount += buffer.Capacity - buffer.ReadOffset;
-                    buffer.RemoveFirst();
-                }
-            }
-        }
-
-        /// <summary>
-        /// 写入数据
-        /// </summary>
-        public static void Write(this BufferRing<byte> buffer, Stream stream)
-        {
-            var count = (int)(stream.Length - stream.Position);
-            var alreadyCopyCount = 0;
-            while (alreadyCopyCount < count)
-            {
-                if (buffer.WriteOffset == buffer.Capacity)
-                {
-                    buffer.AddLast();
-                }
-
-                var n = count - alreadyCopyCount;
-                if (buffer.Capacity - buffer.WriteOffset > n)
-                {
-                    _ = stream.Read(buffer, buffer.WriteOffset, n);
-                    buffer.WriteOffset += count - alreadyCopyCount;
-                    alreadyCopyCount += n;
-                }
-                else
-                {
-                    _ = stream.Read(buffer, buffer.WriteOffset, buffer.Capacity - buffer.WriteOffset);
-                    alreadyCopyCount += buffer.Capacity - buffer.WriteOffset;
-                    buffer.WriteOffset = buffer.Capacity;
-                }
-            }
         }
     }
 }

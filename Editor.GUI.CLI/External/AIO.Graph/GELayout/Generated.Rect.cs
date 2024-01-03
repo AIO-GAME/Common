@@ -20,7 +20,6 @@ namespace AIO.UEditor
     /// </summary>
     public partial class GELayout
     {
-
         #region TextArea
 
         /// <summary>
@@ -1218,7 +1217,6 @@ namespace AIO.UEditor
         #region Foldout Header Group
 
 #if UNITY_2020_1_OR_NEWER
-
         /// <summary>
         /// 绘制 折页排版 
         /// </summary>
@@ -1239,7 +1237,6 @@ namespace AIO.UEditor
 #endif
 
 #if UNITY_2020_1_OR_NEWER
-
         /// <summary>
         /// 绘制 折页排版 
         /// </summary>
@@ -1261,7 +1258,6 @@ namespace AIO.UEditor
 #endif
 
 #if UNITY_2020_1_OR_NEWER
-
         /// <summary>
         /// 绘制 折页排版 
         /// </summary>
@@ -1284,7 +1280,6 @@ namespace AIO.UEditor
 #endif
 
 #if UNITY_2020_1_OR_NEWER
-
         /// <summary>
         /// 绘制 折页排版 
         /// </summary>
@@ -1308,7 +1303,6 @@ namespace AIO.UEditor
 #endif
 
 #if UNITY_2020_1_OR_NEWER
-
         /// <summary>
         /// 开始绘制 折页排版 
         /// </summary>
@@ -1325,7 +1319,6 @@ namespace AIO.UEditor
 #endif
 
 #if UNITY_2020_1_OR_NEWER
-
         /// <summary>
         /// 开始绘制 折页排版 
         /// </summary>
@@ -1343,7 +1336,6 @@ namespace AIO.UEditor
 #endif
 
 #if UNITY_2020_1_OR_NEWER
-
         /// <summary>
         /// 开始绘制 折页排版 
         /// </summary>
@@ -1362,7 +1354,6 @@ namespace AIO.UEditor
 #endif
 
 #if UNITY_2020_1_OR_NEWER
-
         /// <summary>
         /// 开始绘制 折页排版 
         /// </summary>
@@ -1382,7 +1373,6 @@ namespace AIO.UEditor
 #endif
 
 #if UNITY_2020_1_OR_NEWER
-
         /// <summary>
         /// 结束绘制 折页排版 
         /// </summary>
@@ -1472,9 +1462,11 @@ namespace AIO.UEditor
         /// <param name="label">标题 <see cref="string"/></param>
         /// <param name="includeChildren">是否包含子属性 <see cref="bool"/></param>
         /// <returns><see cref="bool"/></returns>
-        public static bool SP(Vector2 pos, Vector2 size, SerializedProperty property, string label, bool includeChildren = false)
+        public static bool SP(Vector2 pos, Vector2 size, SerializedProperty property, string label,
+            bool includeChildren = false)
         {
-            return EditorGUI.PropertyField(new Rect(pos - size / 2, size), property, new GUIContent(label), includeChildren);
+            return EditorGUI.PropertyField(new Rect(pos - size / 2, size), property, new GUIContent(label),
+                includeChildren);
         }
 
         /// <summary>
@@ -1499,12 +1491,12 @@ namespace AIO.UEditor
         /// <param name="label">标题 <see cref="GUIContent"/></param>
         /// <param name="includeChildren">是否包含子属性 <see cref="bool"/></param>
         /// <returns><see cref="bool"/></returns>
-        public static bool SP(Vector2 pos, Vector2 size, SerializedProperty property, GUIContent label, bool includeChildren = false)
+        public static bool SP(Vector2 pos, Vector2 size, SerializedProperty property, GUIContent label,
+            bool includeChildren = false)
         {
             return EditorGUI.PropertyField(new Rect(pos - size / 2, size), property, label, includeChildren);
         }
 
         #endregion
-
     }
 }

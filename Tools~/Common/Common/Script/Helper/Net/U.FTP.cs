@@ -11,6 +11,5 @@ public partial class AHelper
     /// </summary>
     public partial class FTP
     {
-        
     }
 }

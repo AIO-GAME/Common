@@ -32,9 +32,8 @@ namespace AIO
         /// <summary>
         /// 首次数据存放
         /// </summary>
-        public virtual void Frist()
+        public virtual void First()
         {
-
         }
 
         /// <summary>

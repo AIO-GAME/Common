@@ -1,13 +1,13 @@
-﻿namespace AIO
-{
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Reflection;
-    using System.Security.Cryptography;
-    using System.Text;
-    using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
 
+namespace AIO
+{
     /// <summary>
     /// 游戏数据储存管理
     /// </summary>
@@ -80,10 +80,11 @@
                                 Data.Add(gBean.ID, (GBean)Activator.CreateInstance(type));
                                 Data[gBean.ID].Initialize();
                             }
-                            else throw new Exception(string.Format(
-                                "GBean 出现重复 ID !!! 请检查 Info => ID : {0} | Current Type Name : {1} | Exist Type Name : {2}",
-                                gBean.ID, type.FullName, Data[gBean.ID].GetType().FullName
-                           ));
+                            else
+                                throw new Exception(string.Format(
+                                    "GBean 出现重复 ID !!! 请检查 Info => ID : {0} | Current Type Name : {1} | Exist Type Name : {2}",
+                                    gBean.ID, type.FullName, Data[gBean.ID].GetType().FullName
+                                ));
                         }
                     }
                 }
@@ -97,9 +98,10 @@
         {
             if (!File.Exists(TargetPath))
             {
-                foreach (var item in Data) item.Value.Frist();
+                foreach (var item in Data) item.Value.First();
                 return Task.CompletedTask;
             }
+
             Bean = new BufferByte(File.ReadAllBytes(TargetPath));
 
             var task = new List<Task>();
@@ -122,13 +124,15 @@
                         {
                             Data[id].Deserialize(buffer);
                             Console.WriteLine("数据块ID: {0} -> 写入下标: {1} -> 数据长度: {2} -> MD5: {3}",
-                            id, startIndex, bufferCount, md5);
+                                id, startIndex, bufferCount, md5);
                         }
-                        else Console.WriteLine("数据块ID: {0} -> 写入下标: {1} -> 数据长度: {2} -> MD5: {3} != {4} => 数据MD5验证失败",
-                        id, startIndex, bufferCount, md5, GetMD5(buffer.ToArray()));
+                        else
+                            Console.WriteLine("数据块ID: {0} -> 写入下标: {1} -> 数据长度: {2} -> MD5: {3} != {4} => 数据MD5验证失败",
+                                id, startIndex, bufferCount, md5, GetMD5(buffer.ToArray()));
                     }
-                    else Console.WriteLine("数据块ID: {0} -> 写入下标: {1} -> 数据长度: {2} -> MD5: {3} =>  未查询到指定数据ID",
-                    id, startIndex, bufferCount, md5);
+                    else
+                        Console.WriteLine("数据块ID: {0} -> 写入下标: {1} -> 数据长度: {2} -> MD5: {3} =>  未查询到指定数据ID",
+                            id, startIndex, bufferCount, md5);
 
                     Bean.Skip(bufferCount);
                 }
@@ -143,6 +147,7 @@
                         Progress.Invoke(Bean.ReadOffset / (float)Bean.WriteOffset);
                         Task.Delay(1000);
                     }
+
                     Progress.Invoke(1);
                 }));
             }
@@ -174,6 +179,7 @@
                 Console.WriteLine("数据块ID: {0} -> 写入下标: {1} -> 数据长度: {2} -> MD5: {3}",
                     item.Key, startindex, bytes.Count, md5);
             }
+
             Console.WriteLine("Save 总数据长度: {0} -> IDS: {1}", root.Count, Data.Count);
             File.WriteAllBytes(TargetPath, root);
         }

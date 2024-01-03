@@ -363,8 +363,7 @@ namespace AIO.UEditor
                 if (p is null) return URL;
                 return p.FullName;
             }
-        }
-        ");
+        }");
 
             FuncStatic(str, classname);
             FuncOpen(str);

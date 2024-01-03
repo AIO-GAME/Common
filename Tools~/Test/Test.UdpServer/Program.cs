@@ -40,7 +40,6 @@ public partial class Program
                 server.Restart();
                 Console.WriteLine("Done!");
             }
-
             else server.MulticastAsync(line);
         }
 

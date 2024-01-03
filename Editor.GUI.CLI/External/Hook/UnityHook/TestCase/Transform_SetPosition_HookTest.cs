@@ -1,6 +1,6 @@
 #if ENABLE_HOOK_TEST_CASE || true
 /*
- * ¶Ô Transform.SetPosition ½øÐÐhookµÄ²âÊÔÓÃÀý
+ * å¯¹ Transform.SetPosition è¿›è¡Œhookçš„æµ‹è¯•ç”¨ä¾‹
  */
 using System;
 using System.Collections;
@@ -27,10 +27,13 @@ namespace MonoHook.Test
             if (_hook == null)
             {
                 Type type = typeof(Transform);
-                MethodInfo miTarget = type.GetMethod("set_position_Injected", BindingFlags.Instance | BindingFlags.NonPublic);
+                MethodInfo miTarget = type.GetMethod("set_position_Injected",
+                    BindingFlags.Instance | BindingFlags.NonPublic);
 
-                MethodInfo miReplacement = typeof(Transform_SetPosition_HookTest).GetMethod("SetPositionNew", BindingFlags.Static | BindingFlags.NonPublic);
-                MethodInfo miProxy = typeof(Transform_SetPosition_HookTest).GetMethod("SetPositionProxy", BindingFlags.Static | BindingFlags.NonPublic);
+                MethodInfo miReplacement = typeof(Transform_SetPosition_HookTest).GetMethod("SetPositionNew",
+                    BindingFlags.Static | BindingFlags.NonPublic);
+                MethodInfo miProxy = typeof(Transform_SetPosition_HookTest).GetMethod("SetPositionProxy",
+                    BindingFlags.Static | BindingFlags.NonPublic);
 
                 _hook = new MethodHook(miTarget, miReplacement, miProxy);
                 _hook.Install();

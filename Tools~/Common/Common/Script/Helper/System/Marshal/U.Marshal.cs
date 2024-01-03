@@ -12,6 +12,43 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Security;
 using SMarshal = System.Runtime.InteropServices.Marshal;
 
+/// <summary>
+/// SMarshal 类扩展
+/// </summary>
+public static class MarshalExtend
+{
+    /// <summary>
+    /// 获取 结构体实例 空间大小
+    /// </summary>
+    /// <param name="obj">返回对象的非托管大小 以字节为单位</param>
+    [SecurityCritical]
+    public static int SizeOf<T>(this T obj)
+    {
+        return SMarshal.SizeOf(obj);
+    }
+
+    /// <summary>
+    /// 使用指定的字节数从进程的非托管内存中分配内存。
+    /// </summary>
+    /// <param name="ptr">内存中所需的字节数</param>
+    /// <returns>一个指向新分配内存的指针 这个内存必须使用Marshal.FreeHGlobal 来释放 </returns>
+    [SecurityCritical, ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
+    public static IntPtr AllocHGlobal(this IntPtr ptr)
+    {
+        return SMarshal.AllocHGlobal(ptr);
+    }
+
+    /// <summary>
+    /// 释放内存中指针
+    /// </summary>
+    /// <param name="hglobal">内存中的指针</param>
+    [SecurityCritical, ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+    public static void FreeHGlobal(this IntPtr hglobal)
+    {
+        SMarshal.FreeHGlobal(hglobal);
+    }
+}
+
 public partial class AHelper
 {
     /// <summary>
@@ -23,7 +60,7 @@ public partial class AHelper
     /// <!--提供了一个方法集，这些方法用于分配非托管内存、复制非托管内存块、将托管类型转换为非托管类型 此外还提供了在与非托管代码交互时使用的其他杂项方法-->
     /// <!--备注 SMarshal 类中定义的 static 方法对于处理非托管代码至关重要。此类中定义的大多数方法通常由需要-->
     /// <!--此类型的任何公共静态（Visual Basic 中的 Shared）成员都是线程安全的，但不保证所有实例成员都 是线程安全的-->
-    public class Marshal
+    public static class Marshal
     {
         /// <summary>
         /// 表示系统上的默认字符大小；Unicode 系统上默认值为 2，ANSI 系统上默认值为 1。 此字段为只读。
@@ -34,25 +71,6 @@ public partial class AHelper
         /// 表示用于当前操作系统的双字节字符集 (DBCS) 的最大大小（以字节为单位）。 此字段为只读。
         /// </summary>
         public static int SystemMaxDBCSCharSize => SMarshal.SystemMaxDBCSCharSize;
-
-        /// <summary>
-        /// 获取 结构体实例 空间大小
-        /// </summary>
-        /// <param name="obj">返回对象的非托管大小 以字节为单位</param>
-        [SecurityCritical]
-        public static int SizeOf<T>(T obj)
-        {
-            return SMarshal.SizeOf(obj);
-        }
-
-        /// <summary>
-        /// 获取 结构体实例 空间大小
-        /// </summary>
-        [SecurityCritical]
-        public static int SizeOf<T>()
-        {
-            return SMarshal.SizeOf<T>();
-        }
 
         /// <summary>
         /// 使用指定的字节数从进程的非托管内存中分配内存。
@@ -116,27 +134,6 @@ public partial class AHelper
         public static void CleanupUnusedObjectsInCurrentContext()
         {
             SMarshal.CleanupUnusedObjectsInCurrentContext();
-        }
-
-        /// <summary>
-        /// 使用指定的字节数从进程的非托管内存中分配内存。
-        /// </summary>
-        /// <param name="ptr">内存中所需的字节数</param>
-        /// <returns>一个指向新分配内存的指针 这个内存必须使用Marshal.FreeHGlobal 来释放 </returns>
-        [SecurityCritical, ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-        public static IntPtr AllocHGlobal(IntPtr ptr)
-        {
-            return SMarshal.AllocHGlobal(ptr);
-        }
-
-        /// <summary>
-        /// 释放内存中指针
-        /// </summary>
-        /// <param name="hglobal">内存中的指针</param>
-        [SecurityCritical, ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        public static void FreeHGlobal(IntPtr hglobal)
-        {
-            SMarshal.FreeHGlobal(hglobal);
         }
 
         /// <summary>
@@ -860,7 +857,7 @@ public partial class AHelper
         /// 
         /// </summary>
         [SecurityCritical]
-        public static void Prelink(MethodInfo m)
+        public static void PreLink(MethodInfo m)
         {
             SMarshal.Prelink(m);
         }
@@ -869,7 +866,7 @@ public partial class AHelper
         /// 
         /// </summary>
         [SecurityCritical]
-        public static void PrelinkAll(Type c)
+        public static void PreLinkAll(Type c)
         {
             SMarshal.PrelinkAll(c);
         }
@@ -1180,10 +1177,6 @@ public partial class AHelper
             return SMarshal.GetDelegateForFunctionPointer<TDelegate>(ptr);
         }
 
-#if UNITY_2021_1_OR_NEWER
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        [Obsolete("GetExceptionCode() may be unavailable in future releases.")]
-#endif
         /// <summary>
         /// 
         /// </summary>
@@ -1265,10 +1258,6 @@ public partial class AHelper
             return SMarshal.GetLastWin32Error();
         }
 
-#if UNITY_2021_1_OR_NEWER
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        [Obsolete("GetNativeVariantForObject(Object, IntPtr) may be unavailable in future releases.")]
-#endif
         /// <summary>
         /// 
         /// </summary>
@@ -1278,10 +1267,6 @@ public partial class AHelper
             SMarshal.GetNativeVariantForObject(obj, pDstNativeVariant);
         }
 
-#if UNITY_2021_1_OR_NEWER
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        [Obsolete("GetNativeVariantForObject<T>(T, IntPtr) may be unavailable in future releases.")]
-#endif
         /// <summary>
         /// 
         /// </summary>
@@ -1309,10 +1294,6 @@ public partial class AHelper
             return SMarshal.GetObjectForIUnknown(pSrcNativeVariant);
         }
 
-#if UNITY_2021_1_OR_NEWER
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        [Obsolete("GetObjectForNativeVariant<T>(IntPtr) may be unavailable in future releases.")]
-#endif
         /// <summary>
         /// 
         /// </summary>
@@ -1321,11 +1302,6 @@ public partial class AHelper
         {
             return SMarshal.GetObjectForNativeVariant<T>(pSrcNativeVariant);
         }
-
-#if UNITY_2021_1_OR_NEWER
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        [Obsolete("GetObjectsForNativeVariants(IntPtr, Int32) may be unavailable in future releases.")]
-#endif
 
         /// <summary>
         /// 
@@ -1336,10 +1312,6 @@ public partial class AHelper
             return SMarshal.GetObjectsForNativeVariants(aSrcNativeVariant, cVars);
         }
 
-#if UNITY_2021_1_OR_NEWER
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
-        [Obsolete("GetObjectsForNativeVariants<T>(IntPtr, Int32) may be unavailable in future releases.")]
-#endif
         /// <summary>
         /// 
         /// </summary>

@@ -739,7 +739,7 @@ namespace AIO.ICSharpCode.SharpZipLib.BZip2
 
 		private void SetDecompressStructureSizes(int newSize100k)
 		{
-			if (0 > newSize100k || newSize100k > 9 || 0 > blockSize100k || blockSize100k > 9)
+			if (newSize100k < 0 || newSize100k > 9 || blockSize100k < 0 || blockSize100k > 9)
 			{
 				throw new BZip2Exception("Invalid block size");
 			}

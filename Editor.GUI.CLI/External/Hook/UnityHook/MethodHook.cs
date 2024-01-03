@@ -4,17 +4,14 @@
  Github: https://github.com/Misaka-Mikoto-Tech/MonoHook
  */
 
-using DotNetDetour;
 using System;
-using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using Unity.Collections.LowLevel.Unsafe;
+using DotNetDetour;
+using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using UnityEngine;
-using System.Runtime.CompilerServices;
 
 
 /*
@@ -75,11 +72,11 @@ namespace MonoHook
         public bool isHooked { get; private set; }
         public bool isPlayModeHook { get; private set; }
 
-        public MethodBase targetMethod { get; private set; }       // 需要被hook的目标方法
-        public MethodBase replacementMethod { get; private set; }  // 被hook后的替代方法
-        public MethodBase proxyMethod { get; private set; }        // 目标方法的代理方法(可以通过此方法调用被hook后的原方法)
+        public MethodBase targetMethod { get; private set; } // 需要被hook的目标方法
+        public MethodBase replacementMethod { get; private set; } // 被hook后的替代方法
+        public MethodBase proxyMethod { get; private set; } // 目标方法的代理方法(可以通过此方法调用被hook后的原方法)
 
-        private IntPtr _targetPtr;          // 目标方法被 jit 后的地址指针
+        private IntPtr _targetPtr; // 目标方法被 jit 后的地址指针
         private IntPtr _replacementPtr;
         private IntPtr _proxyPtr;
 
@@ -93,14 +90,12 @@ namespace MonoHook
         /// so we should wait until `GUISKin.current` has a valid value
         /// </summary>
         private static FieldInfo s_fi_GUISkin_current;
-#endif
 
         static MethodHook()
         {
-#if UNITY_EDITOR && !UNITY_2020_3_OR_NEWER
             s_fi_GUISkin_current = typeof(GUISkin).GetField("current", BindingFlags.Static | BindingFlags.NonPublic);
-#endif
         }
+#endif
 
         /// <summary>
         /// 创建一个 Hook
@@ -108,11 +103,13 @@ namespace MonoHook
         /// <param name="targetMethod">需要替换的目标方法</param>
         /// <param name="replacementMethod">准备好的替换方法</param>
         /// <param name="proxyMethod">如果还需要调用原始目标方法，可以通过此参数的方法调用，如果不需要可以填 null</param>
-        public MethodHook(MethodBase targetMethod, MethodBase replacementMethod, MethodBase proxyMethod, string data = "")
+        /// <param name="data"></param>
+        public MethodHook(MethodBase targetMethod, MethodBase replacementMethod, MethodBase proxyMethod,
+            string data = "")
         {
-            this.targetMethod       = targetMethod;
-            this.replacementMethod  = replacementMethod;
-            this.proxyMethod        = proxyMethod;
+            this.targetMethod = targetMethod;
+            this.replacementMethod = replacementMethod;
+            this.proxyMethod = proxyMethod;
             this.tag = data;
 
             CheckMethod();
@@ -149,6 +146,7 @@ namespace MonoHook
         }
 
         #region private
+
         private void DoInstall()
         {
             if (targetMethod == null || replacementMethod == null)
@@ -168,7 +166,7 @@ namespace MonoHook
 #endif
 
                     CreateCodePatcher();
-                    _codePatcher.ApplyPatch();
+                    _codePatcher?.ApplyPatch();
 
 #if ENABLE_HOOK_DEBUG
                     UnityEngine.Debug.Log($"New [{targetMethod.DeclaringType.Name}.{targetMethod.Name}]: {HookUtils.HexToString(_targetPtr.ToPointer(), 64, -16)}");
@@ -187,31 +185,37 @@ namespace MonoHook
             if (targetMethod == null || replacementMethod == null)
                 throw new Exception("MethodHook:targetMethod and replacementMethod and proxyMethod can not be null");
 
-            string methodName = $"{targetMethod.DeclaringType.Name}.{targetMethod.Name}";
+            var methodName = $"{targetMethod.DeclaringType?.Name}.{targetMethod.Name}";
             if (targetMethod.IsAbstract)
                 throw new Exception($"WRANING: you can not hook abstract method [{methodName}]");
 
 #if UNITY_EDITOR
-            int minMethodBodySize = 10;
+            var minMethodBodySize = 10;
 
             {
-                if ((targetMethod.MethodImplementationFlags & MethodImplAttributes.InternalCall) != MethodImplAttributes.InternalCall)
+                if ((targetMethod.MethodImplementationFlags & MethodImplAttributes.InternalCall) !=
+                    MethodImplAttributes.InternalCall)
                 {
-                    int codeSize = targetMethod.GetMethodBody().GetILAsByteArray().Length; // GetMethodBody can not call on il2cpp
+                    var codeSize =
+                        targetMethod.GetMethodBody().GetILAsByteArray().Length; // GetMethodBody can not call on il2cpp
                     if (codeSize < minMethodBodySize)
-                        UnityEngine.Debug.LogWarning($"WRANING: you can not hook method [{methodName}], cause its method body is too short({codeSize}), will random crash on IL2CPP release mode");
+                        Debug.LogWarning(
+                            $"WRANING: you can not hook method [{methodName}], cause its method body is too short({codeSize}), will random crash on IL2CPP release mode");
                 }
             }
 
-            if(proxyMethod != null)
+            if (proxyMethod != null)
             {
-                methodName = $"{proxyMethod.DeclaringType.Name}.{proxyMethod.Name}";
-                int codeSize = proxyMethod.GetMethodBody().GetILAsByteArray().Length;
+                methodName = $"{proxyMethod.DeclaringType?.Name}.{proxyMethod.Name}";
+                var codeSize = proxyMethod.GetMethodBody().GetILAsByteArray().Length;
                 if (codeSize < minMethodBodySize)
-                    UnityEngine.Debug.LogWarning($"WRANING: size of method body[{methodName}] is too short({codeSize}), will random crash on IL2CPP release mode, please fill some dummy code inside");
+                    Debug.LogWarning(
+                        $"WRANING: size of method body[{methodName}] is too short({codeSize}), will random crash on IL2CPP release mode, please fill some dummy code inside");
 
-                if ((proxyMethod.MethodImplementationFlags & MethodImplAttributes.NoOptimization) != MethodImplAttributes.NoOptimization)
-                    throw new Exception($"WRANING: method [{methodName}] must has a Attribute `MethodImpl(MethodImplOptions.NoOptimization)` to prevent code call to this optimized by compiler(pass args by shared stack)");
+                if ((proxyMethod.MethodImplementationFlags & MethodImplAttributes.NoOptimization) !=
+                    MethodImplAttributes.NoOptimization)
+                    throw new Exception(
+                        $"WRANING: method [{methodName}] must has a Attribute `MethodImpl(MethodImplOptions.NoOptimization)` to prevent code call to this optimized by compiler(pass args by shared stack)");
             }
 #endif
         }
@@ -219,8 +223,8 @@ namespace MonoHook
         private void CreateCodePatcher()
         {
             long addrOffset = Math.Abs(_targetPtr.ToInt64() - _proxyPtr.ToInt64());
-            
-            if(_proxyPtr != IntPtr.Zero)
+
+            if (_proxyPtr != IntPtr.Zero)
                 addrOffset = Math.Max(addrOffset, Math.Abs(_targetPtr.ToInt64() - _proxyPtr.ToInt64()));
 
             if (LDasm.IsARM())
@@ -238,7 +242,7 @@ namespace MonoHook
             {
                 if (IntPtr.Size == 8)
                 {
-                    if(addrOffset < 0x7fffffff) // 2G
+                    if (addrOffset < 0x7fffffff) // 2G
                         _codePatcher = new CodePatcher_x64_near(_targetPtr, _replacementPtr, _proxyPtr);
                     else
                         _codePatcher = new CodePatcher_x64_far(_targetPtr, _replacementPtr, _proxyPtr);
@@ -263,9 +267,10 @@ namespace MonoHook
             if (proxyMethod != null && _proxyPtr == null)
                 return false;
 
-            if(_replacementPtr == _targetPtr)
+            if (_replacementPtr == _targetPtr)
             {
-                throw new Exception($"the addresses of target method {targetMethod.Name} and replacement method {replacementMethod.Name} can not be same");
+                throw new Exception(
+                    $"the addresses of target method {targetMethod.Name} and replacement method {replacementMethod.Name} can not be same");
             }
 
             if (LDasm.IsThumb(_targetPtr) || LDasm.IsThumb(_replacementPtr))
@@ -283,6 +288,7 @@ namespace MonoHook
             public long __dummy;
             public MethodBase method;
         }
+
         /// <summary>
         /// 获取方法指令地址
         /// </summary>
@@ -330,16 +336,18 @@ namespace MonoHook
                 }
                  */
 
-                __ForCopy __forCopy = new __ForCopy() { method = method };
+                var __forCopy = new __ForCopy() { method = method };
 
-                long* ptr = &__forCopy.__dummy;
+                var ptr = &__forCopy.__dummy;
                 ptr++; // addr of _forCopy.method
 
-                IntPtr methodAddr = IntPtr.Zero;
+                IntPtr methodAddr;
                 if (sizeof(IntPtr) == 8)
                 {
-                    long methodDataAddr = *(long*)ptr;
-                    byte* ptrData = (byte*)methodDataAddr + sizeof(IntPtr) * 2; // offset of Il2CppReflectionMethod::const MethodInfo *method;
+                    var methodDataAddr = *ptr;
+                    var ptrData =
+                        (byte*)methodDataAddr +
+                        sizeof(IntPtr) * 2; // offset of Il2CppReflectionMethod::const MethodInfo *method;
 
                     long methodPtr = 0;
                     methodPtr = *(long*)ptrData;
@@ -347,13 +355,15 @@ namespace MonoHook
                 }
                 else
                 {
-                    int methodDataAddr = *(int*)ptr;
-                    byte* ptrData = (byte*)methodDataAddr + sizeof(IntPtr) * 2; // offset of Il2CppReflectionMethod::const MethodInfo *method;
+                    var methodDataAddr = *(int*)ptr;
+                    var ptrData =
+                        (byte*)methodDataAddr +
+                        sizeof(IntPtr) * 2; // offset of Il2CppReflectionMethod::const MethodInfo *method;
 
-                    int methodPtr = 0;
-                    methodPtr = *(int*)ptrData;
+                    var methodPtr = *(int*)ptrData;
                     methodAddr = new IntPtr(*(int*)methodPtr);
                 }
+
                 return methodAddr;
             }
         }
@@ -361,21 +371,19 @@ namespace MonoHook
 #if UNITY_EDITOR && !UNITY_2020_3_OR_NEWER
         private void OnEditorUpdate()
         {
-            if (s_fi_GUISkin_current.GetValue(null) != null)
+            if (s_fi_GUISkin_current.GetValue(null) == null) return;
+
+            try
             {
-                try
-                {
-                    DoInstall();
-                }
-                finally
-                {
-                    EditorApplication.update -= OnEditorUpdate;
-                }
+                DoInstall();
+            }
+            finally
+            {
+                EditorApplication.update -= OnEditorUpdate;
             }
         }
 #endif
 
         #endregion
     }
-
 }

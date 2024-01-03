@@ -236,7 +236,6 @@ namespace AIO
         /// </summary>
         public static partial class SystemInfo
         {
-
 #if UNITY_2019_1_OR_NEWER
             /// <summary>
             /// 当前渲染器是否直接支持绑定常量缓冲区

@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 
@@ -32,7 +33,7 @@ namespace AIO.UEditor
             IList<T> array, bool foldout, Action tips, Action<int> showFunc, Func<T> addFunc,
             GUIStyle labelStyle, GUIStyle bgStyle)
         {
-            if (showFunc is null || addFunc is null)
+            if (showFunc is null)
             {
                 EditorGUILayout.HelpBox("(call back / add func) action is null", MessageType.Error, true);
                 return false;
@@ -44,7 +45,11 @@ namespace AIO.UEditor
             {
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField(label.Content, labelStyle);
-                if (GUILayout.Button("+", GUILayout.Width(20))) array.Add(addFunc.Invoke());
+                if (addFunc != null)
+                {
+                    if (GUILayout.Button("+", GUILayout.Width(20))) array.Add(addFunc.Invoke());
+                }
+
                 EditorGUILayout.EndHorizontal();
 
                 if (tips != null)
@@ -73,7 +78,7 @@ namespace AIO.UEditor
             IList<T> array, Action tips, Action<int> showFunc, Func<T> addFunc,
             GUIStyle labelStyle, GUIStyle bgStyle)
         {
-            if (addFunc is null)
+            if (showFunc is null)
             {
                 EditorGUILayout.HelpBox("(call back / add func) action is null", MessageType.Error, true);
                 return;
@@ -84,7 +89,11 @@ namespace AIO.UEditor
 
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField(label, labelStyle ?? GUIStyle.none);
-            if (GUILayout.Button("+", GUILayout.Width(20))) array.Add(addFunc.Invoke());
+            if (addFunc != null)
+            {
+                if (GUILayout.Button("+", GUILayout.Width(20))) array.Add(addFunc.Invoke());
+            }
+
             EditorGUILayout.EndHorizontal();
 
             if (tips != null)
@@ -115,6 +124,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 分隔符
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Separator()
         {
             EditorGUILayout.Separator();
@@ -123,6 +133,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 分隔符
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Separator(int num)
         {
             for (var i = 0; i < num; i++) EditorGUILayout.Separator();
@@ -131,6 +142,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 隔行
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Space()
         {
             EditorGUILayout.Space();
@@ -139,6 +151,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 隔行
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Space(float width)
         {
             EditorGUILayout.Space(width);
@@ -149,6 +162,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 隔行
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Space(int num, float width, bool expand = true)
         {
             for (var i = 0; i < num; i++) EditorGUILayout.Space(width, expand);

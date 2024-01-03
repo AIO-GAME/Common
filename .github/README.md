@@ -78,24 +78,12 @@ openupm add com.aio.package
 
 </details>
 
-## 📢 Thanks
-
-Thank you for choosing our package. If this package helps you, please consider showing your support by adding a ⭐ to the
-repo.
-
 ## ⭐ About
 
-This is a command line interface (CLI) package for Unity. It provides a set of commands and tools to enhance the
-efficiency of Unity development.
-
-## 🖥️ Requirements
-
-- Unity 2019.1 or later
-- .NET 4.0 or later
-
-## 🧰 Getting Started
-
-Please refer to the wiki for a step-by-step guide on how to get started with this package.
+- **这是 Unity 通用API 工具函数调用包。它提供了一套函数调用工具来帮助开发者快速搭建项目**
+- ✅ **支持 Unity 2019.1 及以上版本**
+- ✅ **支持 Android/iOS/Windows/Mac/WebGL**
+- ✅ **支持 .NET 4.0 or later**
 
 ## 📖 Documentation
 
@@ -118,3 +106,9 @@ or [Wiki](https://github.com/AIO-GAME/Common/wiki)
 |:--------------------------------------------------------------------|:--------------------------------------------|
 | [RainbowFolders](https://bitbucket.org/chromiumembedded/cef)        ||
 | [MirrorNetworking](https://github.com/MirrorNetworking/Mirror)      ||
+
+## 📢 Thanks
+
+- **谢谢您选择我们的扩展包。**
+- **如果此软件包对您有所帮助。**
+- **请考虑通过添加⭐来表示支持。**

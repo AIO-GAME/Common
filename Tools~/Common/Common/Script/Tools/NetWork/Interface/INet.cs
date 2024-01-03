@@ -11,6 +11,5 @@ namespace AIO.Net
     /// </summary>
     public interface INet
     {
-        
     }
 }
