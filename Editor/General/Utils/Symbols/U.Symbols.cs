@@ -1,5 +1,5 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> XINAN
+|||✩ Author:   ||| -> xi nan 
 |||✩ Date:     ||| -> 2023-06-26
 |||✩ Document: ||| ->
 |||✩ - - - - - |*/
@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
-using UnityEditor.Build;
 
 namespace AIO.UEditor
 {
@@ -29,7 +28,8 @@ namespace AIO.UEditor
                 var buildTargetGroup = EditorUserBuildSettings.selectedBuildTargetGroup;
                 //获得当前平台已有的的宏定义
 #if UNITY_2023_1_OR_NEWER
-                var str = PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.FromBuildTargetGroup(buildTargetGroup)).Split(';');
+                var str =
+ PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.FromBuildTargetGroup(buildTargetGroup)).Split(';');
 #else
                 var str = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup).Split(';');
 #endif
@@ -46,7 +46,8 @@ namespace AIO.UEditor
             {
                 //获得当前平台已有的的宏定义
 #if UNITY_2023_1_OR_NEWER
-                var str = PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.FromBuildTargetGroup(buildTargetGroup)).Split(';');
+                var str =
+ PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.FromBuildTargetGroup(buildTargetGroup)).Split(';');
 #else
                 var str = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup).Split(';');
 #endif
@@ -113,9 +114,10 @@ namespace AIO.UEditor
                 if (value is null || value.Count == 0) return;
                 //获得当前平台已有的的宏定义
 #if UNITY_2023_1_OR_NEWER
-                var str = PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.FromBuildTargetGroup(buildTargetGroup)).Split(';');
+                var str =
+ PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.FromBuildTargetGroup(buildTargetGroup)).Split(';');
 #else
-                      var str = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup).Split(';');
+                var str = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup).Split(';');
 #endif
 
                 if (str.Length == 0) return;
@@ -190,7 +192,8 @@ namespace AIO.UEditor
                 if (value is null || value.Count == 0) return;
                 //获得当前平台已有的的宏定义
 #if UNITY_2023_1_OR_NEWER
-                var str = PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.FromBuildTargetGroup(buildTargetGroup)).Split(';');
+                var str =
+ PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.FromBuildTargetGroup(buildTargetGroup)).Split(';');
 #else
                 var str = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup).Split(';');
 #endif

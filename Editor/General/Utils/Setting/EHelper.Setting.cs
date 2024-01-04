@@ -1,5 +1,5 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> XINAN
+|||✩ Author:   ||| -> xi nan
 |||✩ Date:     ||| -> 2023-06-26
 |||✩ Document: ||| ->
 |||✩ - - - - - |*/
@@ -7,8 +7,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.Build;
-using UnityEngine;
 
 namespace AIO.UEditor
 {
@@ -40,7 +38,7 @@ namespace AIO.UEditor
                 PlayerSettings.SetScriptingDefineSymbols(
                     NamedBuildTarget.FromBuildTargetGroup(buildTargetGroup), str);
 #else
-                    PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, str);
+                PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, str);
 #endif
             }
 

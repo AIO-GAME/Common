@@ -1,5 +1,5 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> XINAN
+|||✩ Author:   ||| -> xi nan
 |||✩ Date:     ||| -> 2023-06-26
 |||✩ Document: ||| ->
 |||✩ - - - - - |*/
@@ -454,7 +454,8 @@ namespace AIO.UEditor
             /// <param name="focus">聚焦</param>
             /// <param name="type"><see cref="EditorWindow"/></param>
             /// <param name="desiredDockNextTo">组</param>
-            public static EditorWindow Open(Type type, GUIContent title, bool focus, ICollection<Type> desiredDockNextTo)
+            public static EditorWindow Open(Type type, GUIContent title, bool focus,
+                ICollection<Type> desiredDockNextTo)
             {
                 if (!type.IsSubclassOf(typeof(EditorWindow)))
                 {
@@ -506,7 +507,7 @@ namespace AIO.UEditor
                         ?.GetValue(null, null) is Array windowsObj)) return false;
                 var containerWindowRootView = containerWindowType.GetProperty("rootView", PROPERTY_BIND);
                 if (containerWindowRootView is null) return false;
-            
+
                 var dockAreaType = assembly.GetType("UnityEditor.DockArea");
                 var dockAreaMethods = dockAreaType?.GetMethods(BindingFlags.Public | BindingFlags.Instance);
                 var dockAreaMethodAddTab = dockAreaMethods?
@@ -532,7 +533,8 @@ namespace AIO.UEditor
                         {
                             if (allChild is null) continue;
                             if (!dockAreaType.IsInstanceOfType(allChild)) continue;
-                            var m_Panes = dockAreaType.GetField("m_Panes", BindingFlags.NonPublic | BindingFlags.Instance);
+                            var m_Panes = dockAreaType.GetField("m_Panes",
+                                BindingFlags.NonPublic | BindingFlags.Instance);
                             if (!(m_Panes?.GetValue(allChild) is List<EditorWindow> mPanes)) continue;
                             foreach (var item in mPanes)
                             {
@@ -566,10 +568,8 @@ namespace AIO.UEditor
                 if (string.IsNullOrEmpty(title)) title = typeof(T).Name;
                 var key = GetWindowKey<T>(title);
                 if (WindowList.TryGetValue(key, out var value)) return (T)Command(value);
-                WindowList.Add(key, EditorWindow.GetWindowWithRect<T>(rect, utility, title, focus));
-                value = WindowList[key];
+                WindowList[key] = EditorWindow.GetWindowWithRect<T>(rect, utility, title, focus);
                 WindowList[key].Show(true);
-
                 return (T)Command(key);
             }
 
@@ -586,8 +586,7 @@ namespace AIO.UEditor
                 if (string.IsNullOrEmpty(title)) title = type.Name;
                 var key = GetWindowKey(type, title);
                 if (WindowList.TryGetValue(key, out var value)) return Command(value);
-                WindowList.Add(key, EditorWindow.GetWindowWithRect(type, rect, utility, title));
-                value = WindowList[key];
+                WindowList[key] = EditorWindow.GetWindowWithRect(type, rect, utility, title);
                 WindowList[key].Show(true);
                 return Command(key);
             }
