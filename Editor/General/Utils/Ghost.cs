@@ -4,10 +4,12 @@
 |*|E-Mail:     |*| xinansky99@gmail.com
 |*|============|*/
 
+using System;
 using System.Collections;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using UnityEditor;
+using UnityEditor.Experimental;
 
 namespace AIO.UEditor
 {
@@ -46,9 +48,8 @@ namespace AIO.UEditor
                 }
 
                 var path = System.IO.Path.Combine(Path.Packages, "manifest.json");
-                var manifest = await AHelper.IO.ReadJsonUTF8Async<Hashtable>(path);
-                manifest["dependencies"].To<JObject>()[scopes] = version;
-
+                var manifest = await AHelper.IO.ReadJsonUTF8Async<JObject>(path);
+                if (manifest.Value<JObject>("dependencies") is JObject dependencies) dependencies[scopes] = version;
                 if (manifest["scopedRegistries"] is JArray scopedRegistries)
                 {
                     foreach (var table in scopedRegistries.Where(entry => entry.Value<string>("name") == name))
@@ -70,7 +71,7 @@ namespace AIO.UEditor
                 {
                     manifest["scopedRegistries"] = new JArray
                     {
-                        new Hashtable
+                        new JObject
                         {
                             ["name"] = name,
                             ["url"] = url,
@@ -81,9 +82,10 @@ namespace AIO.UEditor
 
                 save: ;
                 await AHelper.IO.WriteJsonUTF8Async(path, manifest);
-                AssetDatabase.Refresh();
+                // 判断是否允许自动刷新
+                if (EditorPrefs.GetBool("AllowAutoRefresh"))
+                    AssetDatabase.Refresh();
             }
-
 
             /// <summary>
             /// Openupm 安装
@@ -95,9 +97,9 @@ namespace AIO.UEditor
                 AssetDatabase.SaveAssets();
                 var name = isCN ? ScopeName_OpenupmCN : ScopeName_Openupm;
                 var path = System.IO.Path.Combine(Path.Packages, "manifest.json");
-                var manifest = await AHelper.IO.ReadJsonUTF8Async<Hashtable>(path);
-                manifest["dependencies"].To<JObject>().Remove(scopes);
-                if (manifest["scopedRegistries"] is JArray scopedRegistries)
+                var manifest = await AHelper.IO.ReadJsonUTF8Async<JObject>(path);
+                manifest.Value<JObject>("dependencies")?.Remove(scopes);
+                if (manifest.Value<JArray>("scopedRegistries") is JArray scopedRegistries)
                 {
                     for (var index = scopedRegistries.Count - 1; index >= 0; index--)
                     {
