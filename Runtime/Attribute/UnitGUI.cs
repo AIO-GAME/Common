@@ -3,7 +3,10 @@ using UnityEngine;
 
 namespace AIO
 {
-    /// <summary>[Editor-Only] Various GUI utilities used throughout Animancer.</summary>
+    /// <summary>
+    /// [Editor-Only]
+    /// Various GUI utilities used throughout Animancer.
+    /// </summary>
     internal static partial class UnitGUI
     {
         // The "g" format gives a lower case 'e' for exponentials instead of upper case 'E'.
