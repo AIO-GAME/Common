@@ -190,7 +190,7 @@ namespace AIO.Net
         /// <summary>
         /// Get the HTTP response cache content
         /// </summary>
-        internal Buffer Cache { get; } = new Buffer();
+        internal NetBuffer Cache { get; } = new NetBuffer();
 
         /// <summary>
         /// Get string from the current HTTP response

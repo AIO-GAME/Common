@@ -95,9 +95,9 @@ namespace AIO.Net
             IsSocketDisposed = false;
 
             // Setup buffers
-            ReceiveBuffer = new Buffer();
-            SendBufferMain = new Buffer();
-            SendBufferFlush = new Buffer();
+            _receiveNetBuffer = new NetBuffer();
+            _sendNetBufferMain = new NetBuffer();
+            _sendNetBufferFlush = new NetBuffer();
 
             // Setup event args
             ReceiveEventArg = new SocketAsyncEventArgs();
@@ -119,9 +119,9 @@ namespace AIO.Net
                 Socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.NoDelay, true);
 
             // Prepare receive & send buffers
-            ReceiveBuffer.Reserve(OptionReceiveBufferSize);
-            SendBufferMain.Reserve(OptionSendBufferSize);
-            SendBufferFlush.Reserve(OptionSendBufferSize);
+            _receiveNetBuffer.Reserve(OptionReceiveBufferSize);
+            _sendNetBufferMain.Reserve(OptionSendBufferSize);
+            _sendNetBufferFlush.Reserve(OptionSendBufferSize);
 
             // Reset statistic
             BytesPending = 0;
@@ -151,7 +151,7 @@ namespace AIO.Net
             Server.OnConnectedInternal(this);
 
             // Call the empty send buffer handler
-            if (SendBufferMain.IsEmpty)
+            if (_sendNetBufferMain.IsEmpty)
                 OnEmpty();
         }
 
@@ -236,8 +236,8 @@ namespace AIO.Net
             lock (SendLock)
             {
                 // Clear send buffers
-                SendBufferMain.Clear();
-                SendBufferFlush.Clear();
+                _sendNetBufferMain.Clear();
+                _sendNetBufferFlush.Clear();
                 SendBufferFlushOffset = 0;
 
                 // Update statistic

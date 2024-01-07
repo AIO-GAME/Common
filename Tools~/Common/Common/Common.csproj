@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AIO</RootNamespace>
     <AssemblyName>AIO.Common</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <LangVersion>8</LangVersion>
@@ -45,6 +45,9 @@
     <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
@@ -177,8 +180,6 @@
     <Compile Include="Plugins\Microsoft\System.Runtime.CompilerService\IsReadOnlyAttribute.cs" />
     <Compile Include="Plugins\Microsoft\System.Runtime.CompilerService\NullableAttribute.cs" />
     <Compile Include="Plugins\Microsoft\System.Runtime.CompilerService\NullableContextAttribute.cs" />
-    <Compile Include="Plugins\MiniJSON\Json.cs" />
-    <Compile Include="Plugins\MiniJSON\MiniJSON.cs" />
     <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\AnchorAlias.cs" />
     <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\Comment.cs" />
     <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\DocumentEnd.cs" />
@@ -533,11 +534,10 @@
     <Compile Include="Script\Handle\Progress\Interface\IProgressReport.cs" />
     <Compile Include="Script\Helper\Database\Encrypt.cs" />
     <Compile Include="Script\Helper\Database\U.FileID.cs" />
-    <Compile Include="Script\Helper\Database\U.Json.MINIJSON.cs" />
-    <Compile Include="Script\Helper\Exception\NetGetResponseStream.cs" />
+    <Compile Include="Script\Helper\Exception\AExpNetGetResponseStream.cs" />
     <Compile Include="Script\Helper\IO\Base\IO.GetDir.cs" />
     <Compile Include="Script\Helper\IO\Base\IO.GetFile.cs" />
-    <Compile Include="Script\Helper\Net\Client\Buffer.cs" />
+    <Compile Include="Script\Helper\Net\Client\NetBuffer.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Check.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Create.cs" />
     <Compile Include="Script\Helper\Net\FTP\U.FTP.Delete.cs" />
@@ -762,11 +762,11 @@
     <Compile Include="Script\Helper\Database\U.Json.NewtonSoft.cs" />
     <Compile Include="Script\Helper\Database\U.Xml.cs" />
     <Compile Include="Script\Helper\Database\U.Yaml.cs" />
-    <Compile Include="Script\Helper\Exception\AmbiguousOperatorException.cs" />
-    <Compile Include="Script\Helper\Exception\InvalidConversionException.cs" />
-    <Compile Include="Script\Helper\Exception\InvalidOperatorException.cs" />
-    <Compile Include="Script\Helper\Exception\OperatorException.cs" />
-    <Compile Include="Script\Helper\Exception\UnexpectedEnumValueException.cs" />
+    <Compile Include="Script\Helper\Exception\AExpAmbiguousAExpOperator.cs" />
+    <Compile Include="Script\Helper\Exception\AExpInvalidConversion.cs" />
+    <Compile Include="Script\Helper\Exception\AexpInvalidAExpOperator.cs" />
+    <Compile Include="Script\Helper\Exception\AExpOperator.cs" />
+    <Compile Include="Script\Helper\Exception\AexpUnexpectedEnumValue.cs" />
     <Compile Include="Script\Helper\Guid\U.Guid.cs" />
     <Compile Include="Script\Helper\Interface\ICollection\IKeyedCollection.cs" />
     <Compile Include="Script\Helper\Interface\ICollection\IMergedCollection.cs" />
@@ -844,7 +844,8 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3">
+    </PackageReference>
     <PackageReference Include="System.Buffers" Version="4.5.1" />
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.3" />
@@ -852,7 +853,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Plugins\Microsoft" />
-    <Folder Include="Script\Handle\Net\TCP" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Script\Helper\Net\FTP\FTP.md" />

@@ -11,79 +11,82 @@ using System.Security.Cryptography;
 using System.Text;
 using AIO;
 
-public partial class AHelper
+namespace AIO
 {
-    /// <summary>
-    /// Unity File ID MD4 算法
-    /// </summary>
-    public partial class FileID
+    public partial class AHelper
     {
         /// <summary>
-        /// 计算类型的 FileID
+        /// Unity File ID MD4 算法
         /// </summary>
-        /// <param name="v">类型</param>
-        /// <returns>fileid</returns>
-        public static int Compute<T>(T v)
+        public partial class FileID
         {
-            var type = v.GetType();
-            var toBeHashed = string.Concat("s\0\0\0", type.Namespace, type.Name);
-            using (var hash = new MD4())
+            /// <summary>
+            /// 计算类型的 FileID
+            /// </summary>
+            /// <param name="v">类型</param>
+            /// <returns>fileid</returns>
+            public static int Compute<T>(T v)
             {
-                var hashed = hash.ComputeHash(Encoding.UTF8.GetBytes(toBeHashed));
-                var result = 0;
-                for (var i = 3; i >= 0; --i)
+                var type = v.GetType();
+                var toBeHashed = string.Concat("s\0\0\0", type.Namespace, type.Name);
+                using (var hash = new MD4())
                 {
-                    result <<= 8;
-                    result |= hashed[i];
-                }
+                    var hashed = hash.ComputeHash(Encoding.UTF8.GetBytes(toBeHashed));
+                    var result = 0;
+                    for (var i = 3; i >= 0; --i)
+                    {
+                        result <<= 8;
+                        result |= hashed[i];
+                    }
 
-                return result;
+                    return result;
+                }
             }
-        }
 
-        /// <summary>
-        /// 计算类型的 FileID
-        /// </summary>
-        /// <param name="type">类型</param>
-        /// <returns>fileid</returns>
-        public static int Compute(Type type)
-        {
-            var toBeHashed = string.Concat("s\0\0\0", type.Namespace, type.Name);
-            using (var hash = new MD4())
+            /// <summary>
+            /// 计算类型的 FileID
+            /// </summary>
+            /// <param name="type">类型</param>
+            /// <returns>fileid</returns>
+            public static int Compute(Type type)
             {
-                var hashed = hash.ComputeHash(Encoding.UTF8.GetBytes(toBeHashed));
-                var result = 0;
-                for (var i = 3; i >= 0; --i)
+                var toBeHashed = string.Concat("s\0\0\0", type.Namespace, type.Name);
+                using (var hash = new MD4())
                 {
-                    result <<= 8;
-                    result |= hashed[i];
-                }
+                    var hashed = hash.ComputeHash(Encoding.UTF8.GetBytes(toBeHashed));
+                    var result = 0;
+                    for (var i = 3; i >= 0; --i)
+                    {
+                        result <<= 8;
+                        result |= hashed[i];
+                    }
 
-                return result;
+                    return result;
+                }
             }
-        }
 
 
-        /// <summary>
-        /// 计算类型的 FileID
-        /// </summary>
-        /// <returns>fileid</returns>
-        public static int Compute<T>()
-        {
-            var type = typeof(T);
-            var toBeHashed = string.Concat("s\0\0\0", type.Namespace, type.Name);
-            using (HashAlgorithm hash = new MD4())
+            /// <summary>
+            /// 计算类型的 FileID
+            /// </summary>
+            /// <returns>fileid</returns>
+            public static int Compute<T>()
             {
-                hash.Initialize();
-                var hashed = hash.ComputeHash(Encoding.UTF8.GetBytes(toBeHashed));
-                var result = 0;
-                for (var i = 3; i >= 0; --i)
+                var type = typeof(T);
+                var toBeHashed = string.Concat("s\0\0\0", type.Namespace, type.Name);
+                using (HashAlgorithm hash = new MD4())
                 {
-                    result <<= 8;
-                    result |= hashed[i];
-                }
+                    hash.Initialize();
+                    var hashed = hash.ComputeHash(Encoding.UTF8.GetBytes(toBeHashed));
+                    var result = 0;
+                    for (var i = 3; i >= 0; --i)
+                    {
+                        result <<= 8;
+                        result |= hashed[i];
+                    }
 
-                return result;
+                    return result;
+                }
             }
         }
     }

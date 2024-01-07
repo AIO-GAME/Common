@@ -1,59 +1,63 @@
 using System.IO;
 
-public partial class AHelper
+namespace AIO
 {
-    /// <summary>
-    /// IO工具类
-    /// </summary>
-    public partial class IO
+    public partial class AHelper
     {
         /// <summary>
-        /// 移动文件
+        /// IO工具类
         /// </summary>
-        /// <param name="source">源路径</param>
-        /// <param name="target">目标路径</param>
-        /// <param name="overlay">Ture:覆盖 False:不覆盖</param>
-        public static void MoveFile(
-            in string source,
-            in string target,
-            in bool overlay = false
-        )
+        public partial class IO
         {
-            if (!File.Exists(source)) return;
-            if (File.Exists(target))
+            /// <summary>
+            /// 移动文件
+            /// </summary>
+            /// <param name="source">源路径</param>
+            /// <param name="target">目标路径</param>
+            /// <param name="overlay">Ture:覆盖 False:不覆盖</param>
+            public static void MoveFile(
+                in string source,
+                in string target,
+                in bool overlay = false
+            )
             {
-                if (overlay) File.Delete(target);
-                else return;
+                if (!File.Exists(source)) return;
+
+                if (File.Exists(target))
+                {
+                    if (overlay) File.Delete(target);
+                    else return;
+                }
+                else
+                {
+                    var dir = Path.GetDirectoryName(target);
+                    if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) Directory.CreateDirectory(dir);
+                }
+
+                File.Move(source, target);
             }
 
-            if (!Directory.GetParent(target).Exists)
+            /// <summary>
+            /// 移动文件夹
+            /// </summary>
+            /// <param name="source">源路径</param>
+            /// <param name="target">目标路径</param>
+            /// <param name="overlay">Ture:覆盖 False:不覆盖</param>
+            public static void MoveFolder(
+                in string source,
+                in string target,
+                in bool overlay = false
+            )
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(target));
+                if (!Directory.Exists(source)) return;
+                if (Directory.Exists(target))
+                {
+                    if (overlay) Directory.Delete(target);
+                    else return;
+                }
+
+                Directory.Move(source, target);
             }
-
-            File.Move(source, target);
-        }
-
-        /// <summary>
-        /// 移动文件
-        /// </summary>
-        /// <param name="source">源路径</param>
-        /// <param name="target">目标路径</param>
-        /// <param name="overlay">Ture:覆盖 False:不覆盖</param>
-        public static void MoveFolder(
-            in string source,
-            in string target,
-            in bool overlay = false
-        )
-        {
-            if (!Directory.Exists(source)) return;
-            if (Directory.Exists(target))
-            {
-                if (overlay) Directory.Delete(target);
-                else return;
-            }
-
-            Directory.Move(source, target);
         }
     }
 }

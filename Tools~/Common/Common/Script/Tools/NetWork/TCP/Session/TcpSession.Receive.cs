@@ -14,7 +14,7 @@ namespace AIO.Net
     {
         private bool Receiving;
 
-        private Buffer ReceiveBuffer;
+        private NetBuffer _receiveNetBuffer;
 
         private SocketAsyncEventArgs ReceiveEventArg;
 
@@ -70,7 +70,7 @@ namespace AIO.Net
                 {
                     // Async receive with the receive handler
                     Receiving = true;
-                    ReceiveEventArg.SetBuffer(ReceiveBuffer.Arrays, 0, ReceiveBuffer.Capacity);
+                    ReceiveEventArg.SetBuffer(_receiveNetBuffer.Arrays, 0, _receiveNetBuffer.Capacity);
                     if (Socket.ReceiveAsync(ReceiveEventArg)) continue;
                     process = ProcessReceive(ReceiveEventArg);
                 }
@@ -95,10 +95,10 @@ namespace AIO.Net
                 Interlocked.Add(ref Server._bytesReceived, size);
 
                 // Call the buffer received handler
-                OnReceived(ReceiveBuffer.Arrays, 0, ReceiveBuffer.Capacity);
+                OnReceived(_receiveNetBuffer.Arrays, 0, _receiveNetBuffer.Capacity);
 
                 // If the receive buffer is full increase its size
-                if (ReceiveBuffer.Capacity == size)
+                if (_receiveNetBuffer.Capacity == size)
                 {
                     // Check the receive buffer limit
                     if (2 * size > OptionReceiveBufferLimit && OptionReceiveBufferLimit > 0)
@@ -108,7 +108,7 @@ namespace AIO.Net
                         return false;
                     }
 
-                    ReceiveBuffer.Reserve(2 * size);
+                    _receiveNetBuffer.Reserve(2 * size);
                 }
             }
 

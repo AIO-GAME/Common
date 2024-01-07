@@ -1,26 +1,29 @@
 using System.IO;
 using System.Runtime.CompilerServices;
 
-public partial class AHelper
+namespace AIO
 {
-    public partial class IO
+    public partial class AHelper
     {
-        /// <summary>
-        /// 创建文件夹
-        /// </summary>
-        /// <param name="folder">文件夹路径</param>
-        /// <param name="clear">清除</param>
-        public static void CreateFolder(in string folder, in bool clear = false)
+        public partial class IO
         {
-            var info = new DirectoryInfo(folder);
-            // 判断文件夹是否存在 判断是否需要清空文件夹
-            if (info.Exists)
+            /// <summary>
+            /// 创建文件夹
+            /// </summary>
+            /// <param name="folder">文件夹路径</param>
+            /// <param name="clear">清除</param>
+            public static void CreateFolder(in string folder, in bool clear = false)
             {
-                if (!clear) return;
-                info.Delete(true);
-                info.Create();
+                var info = new DirectoryInfo(folder);
+                // 判断文件夹是否存在 判断是否需要清空文件夹
+                if (info.Exists)
+                {
+                    if (!clear) return;
+                    info.Delete(true);
+                    info.Create();
+                }
+                else info.Create();
             }
-            else info.Create();
         }
     }
 }

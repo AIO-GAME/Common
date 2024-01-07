@@ -122,8 +122,8 @@ namespace AIO.Net
             lock (SendLock)
             {
                 // Clear send buffers
-                SendBufferMain.Clear();
-                SendBufferFlush.Clear();
+                _sendNetBufferMain.Clear();
+                _sendNetBufferFlush.Clear();
                 SendBufferFlushOffset = 0;
 
                 // Update statistic

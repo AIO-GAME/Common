@@ -11,299 +11,302 @@ using System.Security.Cryptography;
 using System.Text;
 using AIO;
 
-public partial class AHelper
+namespace AIO
 {
-    /// <summary>
-    /// 字符串工具库
-    /// </summary>
-    public partial class String
+    public partial class AHelper
     {
-        private static readonly StringBlock BlockTemplate;
-        private static readonly StringBlock SpaceTemplate;
-
-        static String()
-        {
-            BlockTemplate = new StringBlock("╔╗║╚╝══║", 75);
-            SpaceTemplate = new StringBlock("        ", 75);
-            CacheBuilder = new StringBuilder(1024);
-        }
-
         /// <summary>
-        /// 转化为区块
+        /// 字符串工具库
         /// </summary>
-        public static string ToConvertBlock(params string[] context)
+        public partial class String
         {
-            return BlockTemplate.Convert(context);
-        }
+            private static readonly StringBlock BlockTemplate;
+            private static readonly StringBlock SpaceTemplate;
 
-        /// <summary>
-        /// 转化为区块
-        /// </summary>
-        public static string ToConvertSpace(params string[] context)
-        {
-            return SpaceTemplate.Convert(context);
-        }
-
-        /// <summary>
-        /// 转化为区块
-        /// </summary>
-        internal static string ToConvert(in StringBlock Unicode, params string[] context)
-        {
-            return (Unicode ?? SpaceTemplate).Convert(context);
-        }
-
-        /// <summary>
-        /// 阿拉伯数字全部转化为中文数字 有单位 传入需全部为数字字符 简体中文
-        /// </summary>
-        /// <param name="num"></param>
-        /// <param name="unitNum">单位截止下标,默认0,1:万后,2:亿后,3:万亿</param>
-        public static string ToConvertUnitsCNS(string num, in int unitNum = 0)
-        {
-            if (num.Length == 0) return num;
-            var str = new StringBuilder();
-            var index = 0; //下标
-            var intM = num.Length % 4;
-            var intK = intM > 0 ? num.Length / 4 + 1 : num.Length / 4;
-
-            for (var i = intK; i > unitNum; i--)
+            static String()
             {
-                var intL = (i == intK && intM != 0) ? intM : 4;
-                var four = num.Substring(index, intL); //得到一组四位数
-                for (var j = 0; j < four.Length; j++) //内层循环在该组中的每一位数上循环
+                BlockTemplate = new StringBlock("╔╗║╚╝══║", 75);
+                SpaceTemplate = new StringBlock("        ", 75);
+                CacheBuilder = new StringBuilder(1024);
+            }
+
+            /// <summary>
+            /// 转化为区块
+            /// </summary>
+            public static string ToConvertBlock(params string[] context)
+            {
+                return BlockTemplate.Convert(context);
+            }
+
+            /// <summary>
+            /// 转化为区块
+            /// </summary>
+            public static string ToConvertSpace(params string[] context)
+            {
+                return SpaceTemplate.Convert(context);
+            }
+
+            /// <summary>
+            /// 转化为区块
+            /// </summary>
+            internal static string ToConvert(in StringBlock Unicode, params string[] context)
+            {
+                return (Unicode ?? SpaceTemplate).Convert(context);
+            }
+
+            /// <summary>
+            /// 阿拉伯数字全部转化为中文数字 有单位 传入需全部为数字字符 简体中文
+            /// </summary>
+            /// <param name="num"></param>
+            /// <param name="unitNum">单位截止下标,默认0,1:万后,2:亿后,3:万亿</param>
+            public static string ToConvertUnitsCNS(string num, in int unitNum = 0)
+            {
+                if (num.Length == 0) return num;
+                var str = new StringBuilder();
+                var index = 0; //下标
+                var intM = num.Length % 4;
+                var intK = intM > 0 ? num.Length / 4 + 1 : num.Length / 4;
+
+                for (var i = intK; i > unitNum; i--)
                 {
-                    var n = Convert.ToInt32(four.Substring(j, 1));
-                    if (n == 0)
+                    var intL = (i == intK && intM != 0) ? intM : 4;
+                    var four = num.Substring(index, intL); //得到一组四位数
+                    for (var j = 0; j < four.Length; j++) //内层循环在该组中的每一位数上循环
                     {
-                        if (j < four.Length - 1
-                            && Convert.ToInt32(four.Substring(j + 1, 1)) > 0
-                            && !str.ToString().EndsWith(Unit.Chinese.CNSNum[n]))
-                            str.Append(Unit.Chinese.CNSNum[n]);
+                        var n = Convert.ToInt32(four.Substring(j, 1));
+                        if (n == 0)
+                        {
+                            if (j < four.Length - 1
+                                && Convert.ToInt32(four.Substring(j + 1, 1)) > 0
+                                && !str.ToString().EndsWith(Unit.Chinese.CNSNum[n]))
+                                str.Append(Unit.Chinese.CNSNum[n]);
+                        }
+                        else
+                        {
+                            if (!(n == 1
+                                  && (str.ToString().EndsWith(Unit.Chinese.CNSNum[0]) | str.Length == 0)
+                                  && j == four.Length - 2))
+                                str.Append(Unit.Chinese.CNSNum[n]);
+                            str.Append(Unit.Chinese.CNSDigit[four.Length - j - 1]);
+                        }
                     }
-                    else
+
+                    index += intL;
+                    if (i < intK) //如果不是最高位的一组,每组最后加上一个单位:",万,",",亿," 等
                     {
-                        if (!(n == 1
-                              && (str.ToString().EndsWith(Unit.Chinese.CNSNum[0]) | str.Length == 0)
-                              && j == four.Length - 2))
-                            str.Append(Unit.Chinese.CNSNum[n]);
-                        str.Append(Unit.Chinese.CNSDigit[four.Length - j - 1]);
+                        if (Convert.ToInt32(four) != 0)
+                            str.Append(Unit.Chinese.CNSUnits[i - 1]); //如果所有4位不全是0则加上单位",万,",",亿,"等
                     }
+                    else str.Append(Unit.Chinese.CNSUnits[i - 1]); //处理最高位的一组,最后必须加上单位
                 }
 
-                index += intL;
-                if (i < intK) //如果不是最高位的一组,每组最后加上一个单位:",万,",",亿," 等
-                {
-                    if (Convert.ToInt32(four) != 0)
-                        str.Append(Unit.Chinese.CNSUnits[i - 1]); //如果所有4位不全是0则加上单位",万,",",亿,"等
-                }
-                else str.Append(Unit.Chinese.CNSUnits[i - 1]); //处理最高位的一组,最后必须加上单位
+                return str.ToString();
             }
 
-            return str.ToString();
-        }
-
-        /// <summary>
-        /// 阿拉伯数字全部转化为中文数字 无单位 传入需全部为数字字符 简体中文
-        /// </summary>
-        public static string ToConvertNoUnitsCNS(string num)
-        {
-            if (num.Length == 0) return num;
-            var str = new StringBuilder();
-            var index = 0; //下标
-            var intM = num.Length % 4;
-            var intK = intM > 0 ? num.Length / 4 + 1 : num.Length / 4;
-
-            for (var i = intK; i > 0; i--)
+            /// <summary>
+            /// 阿拉伯数字全部转化为中文数字 无单位 传入需全部为数字字符 简体中文
+            /// </summary>
+            public static string ToConvertNoUnitsCNS(string num)
             {
-                var intL = (i == intK && intM != 0) ? intM : 4;
-                var four = num.Substring(index, intL); //得到一组四位数
-                for (var j = 0; j < four.Length; j++) //内层循环在该组中的每一位数上循环
+                if (num.Length == 0) return num;
+                var str = new StringBuilder();
+                var index = 0; //下标
+                var intM = num.Length % 4;
+                var intK = intM > 0 ? num.Length / 4 + 1 : num.Length / 4;
+
+                for (var i = intK; i > 0; i--)
                 {
-                    var n = Convert.ToInt32(four.Substring(j, 1)); //处理组中的每一位数加上所在的位
-                    if (n == 0)
+                    var intL = (i == intK && intM != 0) ? intM : 4;
+                    var four = num.Substring(index, intL); //得到一组四位数
+                    for (var j = 0; j < four.Length; j++) //内层循环在该组中的每一位数上循环
                     {
-                        if (j < four.Length - 1
-                            && Convert.ToInt32(four.Substring(j + 1, 1)) > 0
-                            && !str.ToString().EndsWith(Unit.Chinese.CNSNum[n]))
-                            str.Append(Unit.Chinese.CNSNum[n]);
+                        var n = Convert.ToInt32(four.Substring(j, 1)); //处理组中的每一位数加上所在的位
+                        if (n == 0)
+                        {
+                            if (j < four.Length - 1
+                                && Convert.ToInt32(four.Substring(j + 1, 1)) > 0
+                                && !str.ToString().EndsWith(Unit.Chinese.CNSNum[n]))
+                                str.Append(Unit.Chinese.CNSNum[n]);
+                        }
+                        else
+                        {
+                            if (!(n == 1
+                                  && (str.ToString().EndsWith(Unit.Chinese.CNSNum[0]) | str.Length == 0)
+                                  && j == four.Length - 2))
+                                str.Append(Unit.Chinese.CNSNum[n]);
+                            str.Append(Unit.Chinese.CNSDigit[four.Length - j - 1]);
+                        }
                     }
-                    else
-                    {
-                        if (!(n == 1
-                              && (str.ToString().EndsWith(Unit.Chinese.CNSNum[0]) | str.Length == 0)
-                              && j == four.Length - 2))
-                            str.Append(Unit.Chinese.CNSNum[n]);
-                        str.Append(Unit.Chinese.CNSDigit[four.Length - j - 1]);
-                    }
+
+                    index += intL;
                 }
 
-                index += intL;
+                return str.ToString();
             }
 
-            return str.ToString();
-        }
+            private static readonly char[] gHex =
+                { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 
-        private static readonly char[] gHex =
-            { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+            private static char[] gChars;
+            private const int gLen = 1 * 1024 * 3;
 
-        private static char[] gChars;
-        private const int gLen = 1 * 1024 * 3;
-
-        /// <summary>
-        /// 二进制转字符串
-        /// </summary>
-        /// <param name="buff"></param>
-        /// <param name="len"></param>
-        /// <returns></returns>
-        public static string StringToHexView(in byte[] buff, int len)
-        {
-            if (len * 3 > gLen) len = gLen / 3;
-
-            if (gChars == null)
+            /// <summary>
+            /// 二进制转字符串
+            /// </summary>
+            /// <param name="buff"></param>
+            /// <param name="len"></param>
+            /// <returns></returns>
+            public static string StringToHexView(in byte[] buff, int len)
             {
-                gChars = new char[gLen];
+                if (len * 3 > gLen) len = gLen / 3;
+
+                if (gChars == null)
+                {
+                    gChars = new char[gLen];
+                }
+
+                gChars[len * 3 - 1] = ' ';
+                for (var i = 0; i < len; ++i)
+                {
+                    var b = buff[i];
+                    gChars[i * 3] = gHex[b >> 4];
+                    gChars[i * 3 + 1] = gHex[b & 0xF];
+                    gChars[i * 3 + 2] = (i + 1) % 10 == 0 ? '\n' : ' ';
+                }
+
+                return new string(gChars, 0, len * 3);
             }
 
-            gChars[len * 3 - 1] = ' ';
-            for (var i = 0; i < len; ++i)
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="buff"></param>
+            /// <param name="len"></param>
+            /// <returns></returns>
+            public static string StringToHex(in byte[] buff, int len = 0)
             {
-                var b = buff[i];
-                gChars[i * 3] = gHex[b >> 4];
-                gChars[i * 3 + 1] = gHex[b & 0xF];
-                gChars[i * 3 + 2] = (i + 1) % 10 == 0 ? '\n' : ' ';
+                len = len <= 0 ? buff.Length : len;
+                var r = new char[len * 2];
+                for (var i = 0; i < len; ++i)
+                {
+                    var b = buff[i];
+                    r[i * 2] = gHex[b >> 4];
+                    r[i * 2 + 1] = gHex[b & 0xF];
+                }
+
+                return new string(r);
             }
 
-            return new string(gChars, 0, len * 3);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="buff"></param>
-        /// <param name="len"></param>
-        /// <returns></returns>
-        public static string StringToHex(in byte[] buff, int len = 0)
-        {
-            len = len <= 0 ? buff.Length : len;
-            var r = new char[len * 2];
-            for (var i = 0; i < len; ++i)
+            private static byte CharToByte(in char c)
             {
-                var b = buff[i];
-                r[i * 2] = gHex[b >> 4];
-                r[i * 2 + 1] = gHex[b & 0xF];
+                return (byte)(c >= 0x41 ? c - 0x41 : c - 0x30);
             }
 
-            return new string(r);
-        }
-
-        private static byte CharToByte(in char c)
-        {
-            return (byte)(c >= 0x41 ? c - 0x41 : c - 0x30);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="hexStr"></param>
-        /// <returns></returns>
-        public static byte[] HexStringToBytes(in string hexStr)
-        {
-            var r = new byte[hexStr.Length / 2];
-            for (var i = 0; i < r.Length; ++i)
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="hexStr"></param>
+            /// <returns></returns>
+            public static byte[] HexStringToBytes(in string hexStr)
             {
-                r[i] = (byte)(CharToByte(hexStr[i * 2]) << 4 | CharToByte(hexStr[i * 2 + 1]));
+                var r = new byte[hexStr.Length / 2];
+                for (var i = 0; i < r.Length; ++i)
+                {
+                    r[i] = (byte)(CharToByte(hexStr[i * 2]) << 4 | CharToByte(hexStr[i * 2 + 1]));
+                }
+
+                return r;
             }
 
-            return r;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="buff"></param>
-        /// <returns></returns>
-        public static string BtsToBase64(in byte[] buff)
-        {
-            return Convert.ToBase64String(buff);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="str"></param>
-        /// <returns></returns>
-        public static byte[] Base64ToBts(in string str)
-        {
-            return Convert.FromBase64String(str);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sDataIn"></param>
-        /// <param name="encoding"></param>
-        /// <returns></returns>
-        public static string GetMD5(in string sDataIn, in Encoding encoding = null)
-        {
-            var str = "";
-            var data = (encoding ?? Encoding.UTF8).GetBytes(sDataIn);
-            var md5 = new MD5CryptoServiceProvider();
-            var bytes = md5.ComputeHash(data);
-            foreach (var t in bytes) str = string.Concat(str, t.ToString("x2"));
-            return str;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sDataIn"></param>
-        /// <param name="encoding"></param>
-        /// <returns></returns>
-        public static string[] GetMD5(in ICollection<string> sDataIn, in Encoding encoding = null)
-        {
-            var md5str = new string[sDataIn.Count];
-            var builder = new StringBuilder();
-            var index = 0;
-            var md5 = new MD5CryptoServiceProvider();
-            foreach (var item in sDataIn)
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="buff"></param>
+            /// <returns></returns>
+            public static string BtsToBase64(in byte[] buff)
             {
-                if (string.IsNullOrEmpty(item)) continue;
-                builder.Clear();
+                return Convert.ToBase64String(buff);
+            }
 
-                var data = (encoding ?? Encoding.UTF8).GetBytes(item);
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="str"></param>
+            /// <returns></returns>
+            public static byte[] Base64ToBts(in string str)
+            {
+                return Convert.FromBase64String(str);
+            }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sDataIn"></param>
+            /// <param name="encoding"></param>
+            /// <returns></returns>
+            public static string GetMD5(in string sDataIn, in Encoding encoding = null)
+            {
+                var str = "";
+                var data = (encoding ?? Encoding.UTF8).GetBytes(sDataIn);
+                var md5 = new MD5CryptoServiceProvider();
                 var bytes = md5.ComputeHash(data);
-
-                foreach (var t in bytes) builder.Append(t.ToString("x2"));
-                md5str[index++] = builder.ToString();
+                foreach (var t in bytes) str = string.Concat(str, t.ToString("x2"));
+                return str;
             }
 
-            return md5str;
-        }
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="sDataIn"></param>
+            /// <param name="encoding"></param>
+            /// <returns></returns>
+            public static string[] GetMD5(in ICollection<string> sDataIn, in Encoding encoding = null)
+            {
+                var md5str = new string[sDataIn.Count];
+                var builder = new StringBuilder();
+                var index = 0;
+                var md5 = new MD5CryptoServiceProvider();
+                foreach (var item in sDataIn)
+                {
+                    if (string.IsNullOrEmpty(item)) continue;
+                    builder.Clear();
 
-        /// <summary>
-        /// 是空还是空白
-        /// </summary>
-        public static bool IsNullOrWhiteSpace(in string s)
-        {
-            return s == null || s.Trim() == string.Empty;
-        }
+                    var data = (encoding ?? Encoding.UTF8).GetBytes(item);
+                    var bytes = md5.ComputeHash(data);
 
-        /// <summary>
-        /// 如果指示指定的字符串是 null 还是 System.String.Empty 字符串。
-        /// 则回退
-        /// </summary>
-        public static string FallbackEmpty(string s, in string fallback)
-        {
-            if (string.IsNullOrEmpty(s)) s = fallback;
-            return s;
-        }
+                    foreach (var t in bytes) builder.Append(t.ToString("x2"));
+                    md5str[index++] = builder.ToString();
+                }
 
-        /// <summary>
-        /// 如果所有字符串为空白则回退
-        /// </summary>
-        public static string FallbackWhitespace(string s, in string fallback)
-        {
-            if (IsNullOrWhiteSpace(s)) s = fallback;
-            return s;
+                return md5str;
+            }
+
+            /// <summary>
+            /// 是空还是空白
+            /// </summary>
+            public static bool IsNullOrWhiteSpace(in string s)
+            {
+                return s == null || s.Trim() == string.Empty;
+            }
+
+            /// <summary>
+            /// 如果指示指定的字符串是 null 还是 System.String.Empty 字符串。
+            /// 则回退
+            /// </summary>
+            public static string FallbackEmpty(string s, in string fallback)
+            {
+                if (string.IsNullOrEmpty(s)) s = fallback;
+                return s;
+            }
+
+            /// <summary>
+            /// 如果所有字符串为空白则回退
+            /// </summary>
+            public static string FallbackWhitespace(string s, in string fallback)
+            {
+                if (IsNullOrWhiteSpace(s)) s = fallback;
+                return s;
+            }
         }
     }
 }

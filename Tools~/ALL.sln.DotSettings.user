@@ -5,4 +5,14 @@
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CTenncent_005CScript_005Ccom_002Eself_002Epackage_005CTools_007E_005CResources_005CPlugins_005CUnityEngine_002EImageConversionModule_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CTenncent_005CScript_005Ccom_002Eself_002Epackage_005CTools_007E_005CResources_005CPlugins_005CUnityEngine_002EIMGUIModule_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CTenncent_005CScript_005Ccom_002Eself_002Epackage_005CTools_007E_005CResources_005CPlugins_005CUnityEngine_002ETextRenderingModule_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
+  &lt;PhysicalFolder Path="C:\Program Files\dotnet\sdk\NuGetFallbackFolder\newtonsoft.json\10.0.1" Loaded="True" /&gt;&#xD;
+  &lt;PhysicalFolder Path="C:\Program Files\dotnet\sdk\NuGetFallbackFolder\newtonsoft.json\11.0.2" Loaded="True" /&gt;&#xD;
+  &lt;PhysicalFolder Path="C:\Program Files\dotnet\sdk\NuGetFallbackFolder\newtonsoft.json\9.0.1" Loaded="True" /&gt;&#xD;
+  &lt;PhysicalFolder Path="H:\Microsoft\nuget\packages\newtonsoft.json\13.0.1" Loaded="True" /&gt;&#xD;
+  &lt;PhysicalFolder Path="H:\Microsoft\nuget\packages\newtonsoft.json\13.0.2" Loaded="True" /&gt;&#xD;
+  &lt;PhysicalFolder Path="H:\Microsoft\nuget\packages\newtonsoft.json\13.0.3" Loaded="True" /&gt;&#xD;
+  &lt;PhysicalFolder Path="H:\Microsoft\nuget\packages\newtonsoft.json\6.0.4" Loaded="True" /&gt;&#xD;
+  &lt;PhysicalFolder Path="F:\Unity\AIO2019-04-40\Packages\com.aio.package\Tools~\packages\Newtonsoft.Json.13.0.3" Loaded="True" /&gt;&#xD;
+&lt;/AssemblyExplorer&gt;</s:String>
 	</wpf:ResourceDictionary>

@@ -23,7 +23,7 @@ namespace AIO.Net
                 // Async write with the write handler
                 Sending = true;
                 SendEventArg.RemoteEndPoint = SendEndpoint;
-                SendEventArg.SetBuffer(SendBuffer.Arrays, 0, SendBuffer.Count);
+                SendEventArg.SetBuffer(SendNetBuffer.Arrays, 0, SendNetBuffer.Count);
                 if (!Socket.SendToAsync(SendEventArg))
                     ProcessSendTo(SendEventArg);
             }
@@ -74,17 +74,17 @@ namespace AIO.Net
             if (buffer is null || buffer.Length == 0) return true;
 
             // Check the send buffer limit
-            if (SendBuffer.Count + buffer.Length > Option.SendBufferLimit && Option.SendBufferLimit > 0)
+            if (SendNetBuffer.Count + buffer.Length > Option.SendBufferLimit && Option.SendBufferLimit > 0)
             {
                 SendError(SocketError.NoBufferSpaceAvailable);
                 return false;
             }
 
             // Fill the main send buffer
-            SendBuffer.Write(buffer);
+            SendNetBuffer.Write(buffer);
 
             // Update statistic
-            BytesSending = SendBuffer.Count;
+            BytesSending = SendNetBuffer.Count;
 
             // Update send endpoint
             SendEndpoint = endpoint;

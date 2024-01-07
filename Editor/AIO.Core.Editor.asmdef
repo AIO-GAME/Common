@@ -25,11 +25,6 @@
             "define": "SUPPORT_WEBGL_WX"
         },
         {
-            "name": "com.tuyoogame.yooasset",
-            "expression": "",
-            "define": "SUPPORT_YOOASSET"
-        },
-        {
             "name": "com.cysharp.unitask",
             "expression": "",
             "define": "SUPPORT_UNITASK"
@@ -48,6 +43,11 @@
             "name": "com.self.fgui",
             "expression": "",
             "define": "SUPPORT_FGUI"
+        },
+        {
+            "name": "com.aio.package",
+            "expression": "[1.0.0,2.0.0)",
+            "define": "AIO_1X_OR_NEWER"
         }
     ],
     "noEngineReferences": false

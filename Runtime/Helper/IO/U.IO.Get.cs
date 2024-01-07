@@ -27,7 +27,7 @@ namespace AIO
                 if (!SDirectory.Exists(value)) return Array.Empty<string>();
                 value = SPath.GetFullPath(value);
                 if (!value.Contains(Path.Project)) return Array.Empty<string>();
-                return global::AHelper.IO.GetFilesInfo(value, pattern, option)
+                return AHelper.IO.GetFilesInfo(value, pattern, option)
                     .Select(item => item.FullName.Substring(Path.Project.Length));
             }
 
@@ -48,7 +48,7 @@ namespace AIO
                 if (!SDirectory.Exists(value)) return Array.Empty<string>();
                 value = SPath.GetFullPath(value);
                 if (!value.Contains(Path.Project)) return Array.Empty<string>();
-                return global::AHelper.IO.GetFilesInfo(value, filtration, pattern, option)
+                return AHelper.IO.GetFilesInfo(value, filtration, pattern, option)
                     .Select(item => item.FullName.Substring(Path.Project.Length));
             }
 
@@ -70,7 +70,7 @@ namespace AIO
                 value = SPath.GetFullPath(value);
                 if (!value.Contains(Path.Project)) return Array.Empty<string>();
                 return
-                    from item in global::AHelper.IO.GetFilesInfo(value, filtration, pattern, option)
+                    from item in AHelper.IO.GetFilesInfo(value, filtration, pattern, option)
                     where !item.Extension.Contains(".meta")
                     select item.FullName.Substring(Path.Project.Length);
             }
@@ -91,7 +91,7 @@ namespace AIO
                 value = SPath.GetFullPath(value);
                 if (!value.Contains(Path.Project)) return Array.Empty<string>();
                 return
-                    from item in global::AHelper.IO.GetFilesInfo(value, pattern, option)
+                    from item in AHelper.IO.GetFilesInfo(value, pattern, option)
                     where !item.Extension.Contains(".meta")
                     select item.FullName.Substring(Path.Project.Length);
             }

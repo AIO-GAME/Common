@@ -4,12 +4,15 @@
 |*|E-Mail:     |*| xinansky99@foxmail.com
 |*|============|*/
 
-public partial class AHelper
+namespace AIO
 {
-    /// <summary>
-    /// FTP
-    /// </summary>
-    public partial class FTP
+    public partial class AHelper
     {
+        /// <summary>
+        /// FTP
+        /// </summary>
+        public partial class FTP
+        {
+        }
     }
 }

@@ -100,8 +100,8 @@ namespace AIO.Net
             if (IsStarted) return false;
 
             // Setup buffers
-            ReceiveBuffer = new Buffer();
-            SendBuffer = new Buffer();
+            _receiveNetBuffer = new NetBuffer();
+            _sendNetBuffer = new NetBuffer();
 
             // Setup event args
             ReceiveEventArg = new SocketAsyncEventArgs();
@@ -138,7 +138,7 @@ namespace AIO.Net
                     Endpoint.AddressFamily == AddressFamily.InterNetworkV6 ? IPAddress.IPv6Any : IPAddress.Any, 0);
 
             // Prepare receive & send buffers
-            ReceiveBuffer.Reserve(Option.ReceiveBufferSize);
+            _receiveNetBuffer.Reserve(Option.ReceiveBufferSize);
 
             // Reset statistic
             BytesPending = 0;
@@ -245,7 +245,7 @@ namespace AIO.Net
         protected override void ClearBuffers()
         {
             // Clear send buffers
-            SendBuffer.Clear();
+            _sendNetBuffer.Clear();
 
             // Update statistic
             BytesPending = 0;
