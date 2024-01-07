@@ -47,14 +47,11 @@ namespace AIO.UEditor
                 _instance = CreateInstance<ConsoleWindowConfig>();
                 _instance.Assemblies = new string[]
                 {
-                    "AIO.Core.Editor",
                     "AIO.Core.Runtime",
-                    "AIO.Asset.Editor",
                     "AIO.Asset.Runtime",
-                    "AIO.FGUI.Editor",
                     "AIO.FGUI.Runtime",
-                    "AIO.Hybridclr.Editor",
                     "AIO.Hybridclr.Runtime",
+                    "AIO.CLI.YooAsset.Runtime",
                     "Assembly-CSharp-Editor",
                     "Assembly-CSharp-Editor-firstpass",
                     "Assembly-CSharp-firstpass",

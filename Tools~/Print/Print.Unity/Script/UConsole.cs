@@ -142,8 +142,8 @@ namespace UnityEngine
         {
             #region :: FIELDS
 
-            private const string TAG_LOG = "<color=#E47833><b>[LOG]</b></color> ";
-            private const string TAG_ERROR = "<color=#E47833><b>[ERROR]</b></color> ";
+            private const string TAG_LOG = "<color=#B3E5FC><b>[LOG]</b></color> ";
+            private const string TAG_ERROR = "<color=#E91E63><b>[ERROR]</b></color> ";
             private bool IsPrint;
             private StringBuilder Buffer { get; }
             private UnityConsoleType Type { get; }
