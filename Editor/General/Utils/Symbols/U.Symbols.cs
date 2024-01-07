@@ -8,6 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+#if UNITY_2023_1_OR_NEWER
+using UnityEditor.Build;
+#endif
 
 namespace AIO.UEditor
 {
@@ -29,7 +32,7 @@ namespace AIO.UEditor
                 //获得当前平台已有的的宏定义
 #if UNITY_2023_1_OR_NEWER
                 var str =
- PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.FromBuildTargetGroup(buildTargetGroup)).Split(';');
+                    PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.FromBuildTargetGroup(buildTargetGroup)).Split(';');
 #else
                 var str = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup).Split(';');
 #endif
@@ -47,7 +50,7 @@ namespace AIO.UEditor
                 //获得当前平台已有的的宏定义
 #if UNITY_2023_1_OR_NEWER
                 var str =
- PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.FromBuildTargetGroup(buildTargetGroup)).Split(';');
+                    PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.FromBuildTargetGroup(buildTargetGroup)).Split(';');
 #else
                 var str = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup).Split(';');
 #endif
@@ -115,7 +118,7 @@ namespace AIO.UEditor
                 //获得当前平台已有的的宏定义
 #if UNITY_2023_1_OR_NEWER
                 var str =
- PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.FromBuildTargetGroup(buildTargetGroup)).Split(';');
+                    PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.FromBuildTargetGroup(buildTargetGroup)).Split(';');
 #else
                 var str = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup).Split(';');
 #endif
@@ -193,7 +196,7 @@ namespace AIO.UEditor
                 //获得当前平台已有的的宏定义
 #if UNITY_2023_1_OR_NEWER
                 var str =
- PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.FromBuildTargetGroup(buildTargetGroup)).Split(';');
+                    PlayerSettings.GetScriptingDefineSymbols(NamedBuildTarget.FromBuildTargetGroup(buildTargetGroup)).Split(';');
 #else
                 var str = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup).Split(';');
 #endif

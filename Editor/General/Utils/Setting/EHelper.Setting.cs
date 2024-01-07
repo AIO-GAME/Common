@@ -7,6 +7,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEditor;
+#if UNITY_2023_1_OR_NEWER
+using UnityEditor.Build;
+#endif
 
 namespace AIO.UEditor
 {
