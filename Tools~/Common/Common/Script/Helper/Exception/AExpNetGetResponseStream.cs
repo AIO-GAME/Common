@@ -10,19 +10,19 @@ using System.Net;
 namespace AIO
 {
     /// <summary>
-    /// nameof(NetHttpGetResponseStream)
+    /// nameof(AExpNetGetResponseStream)
     /// </summary>
-    public class NetGetResponseStream : WebException
+    public class AExpNetGetResponseStream : WebException
     {
         /// <inheritdoc />
-        public NetGetResponseStream(
+        public AExpNetGetResponseStream(
             in string message, in WebResponse response) :
             base(message, new Exception("GetResponseStream is Null"), WebExceptionStatus.ReceiveFailure, response)
         {
         }
        
         /// <inheritdoc />
-        public NetGetResponseStream(
+        public AExpNetGetResponseStream(
             in string message) :
             base(message, new Exception("GetResponseStream is Null"), WebExceptionStatus.ReceiveFailure, null)
         {

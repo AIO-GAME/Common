@@ -14,8 +14,8 @@ namespace AIO.Net
     {
         private readonly object SendLock = new object();
         private bool Sending;
-        private Buffer SendBufferMain;
-        private Buffer SendBufferFlush;
+        private NetBuffer _sendNetBufferMain;
+        private NetBuffer _sendNetBufferFlush;
         private SocketAsyncEventArgs SendEventArg;
         private long SendBufferFlushOffset;
 
@@ -109,7 +109,7 @@ namespace AIO.Net
             lock (SendLock)
             {
                 // Check the send buffer limit
-                if (SendBufferMain.Count + buffer.Length > Option.SendBufferLimit && Option.SendBufferLimit > 0)
+                if (_sendNetBufferMain.Count + buffer.Length > Option.SendBufferLimit && Option.SendBufferLimit > 0)
                 {
                     SendError(SocketError.NoBufferSpaceAvailable);
                     return false;
@@ -117,10 +117,10 @@ namespace AIO.Net
 
                 // Fill the main send buffer
                 // SendBufferMain.Append(buffer);
-                SendBufferMain.Write(buffer);
+                _sendNetBufferMain.Write(buffer);
 
                 // Update statistic
-                BytesPending = SendBufferMain.Count;
+                BytesPending = _sendNetBufferMain.Count;
 
                 // Avoid multiple send handlers
                 if (Sending) return true;
@@ -190,18 +190,18 @@ namespace AIO.Net
                 lock (SendLock)
                 {
                     // Is previous socket send in progress?
-                    if (SendBufferFlush.IsEmpty)
+                    if (_sendNetBufferFlush.IsEmpty)
                     {
                         // Swap flush and main buffers
-                        SendBufferFlush = Interlocked.Exchange(ref SendBufferMain, SendBufferFlush);
+                        _sendNetBufferFlush = Interlocked.Exchange(ref _sendNetBufferMain, _sendNetBufferFlush);
                         SendBufferFlushOffset = 0;
 
                         // Update statistic
                         BytesPending = 0;
-                        BytesSending += SendBufferFlush.Count;
+                        BytesSending += _sendNetBufferFlush.Count;
 
                         // Check if the flush buffer is empty
-                        if (SendBufferFlush.IsEmpty)
+                        if (_sendNetBufferFlush.IsEmpty)
                         {
                             // Need to call empty send buffer handler
                             empty = true;
@@ -224,8 +224,8 @@ namespace AIO.Net
                 try
                 {
                     // Async write with the write handler
-                    SendEventArg.SetBuffer(SendBufferFlush.Arrays, (int)SendBufferFlushOffset,
-                        (int)(SendBufferFlush.Count - SendBufferFlushOffset));
+                    SendEventArg.SetBuffer(_sendNetBufferFlush.Arrays, (int)SendBufferFlushOffset,
+                        (int)(_sendNetBufferFlush.Count - SendBufferFlushOffset));
                     if (!Socket.SendAsync(SendEventArg))
                         process = ProcessSend(SendEventArg);
                 }
@@ -255,10 +255,10 @@ namespace AIO.Net
                 SendBufferFlushOffset += size;
 
                 // Successfully send the whole flush buffer
-                if (SendBufferFlushOffset == SendBufferFlush.Count)
+                if (SendBufferFlushOffset == _sendNetBufferFlush.Count)
                 {
                     // Clear the flush buffer
-                    SendBufferFlush.Clear();
+                    _sendNetBufferFlush.Clear();
                     SendBufferFlushOffset = 0;
                 }
 

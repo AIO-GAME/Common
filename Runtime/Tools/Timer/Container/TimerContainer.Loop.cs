@@ -107,7 +107,11 @@ namespace AIO
                     $"[循环定时器:{ID}] [容器数量:{List.Count}] [状态:结束] 精度单位:{Unit} 当前时间:{Counter} 剩余任务数量:{RemainNum}");
 #endif
             }
+#if UNITY_EDITOR
             catch (Exception e)
+#else
+            catch (Exception)
+#endif
             {
 #if UNITY_EDITOR
                 UnityEngine.Debug.LogErrorFormat(

@@ -59,7 +59,7 @@ namespace AIO.Net
                 // Async receive with the receive handler
                 Receiving = true;
                 ReceiveEventArg.RemoteEndPoint = ReceiveEndpoint;
-                ReceiveEventArg.SetBuffer(ReceiveBuffer.Arrays, 0, ReceiveBuffer.Capacity);
+                ReceiveEventArg.SetBuffer(ReceiveNetBuffer.Arrays, 0, ReceiveNetBuffer.Capacity);
                 if (!Socket.ReceiveFromAsync(ReceiveEventArg))
                     ProcessReceiveFrom(ReceiveEventArg);
             }

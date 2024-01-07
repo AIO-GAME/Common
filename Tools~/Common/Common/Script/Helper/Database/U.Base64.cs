@@ -10,68 +10,71 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
-public partial class AHelper
+namespace AIO
 {
-    /// <summary>
-    /// Base64 文件 解析
-    /// </summary>
-    public partial class Base64
+    public partial class AHelper
     {
         /// <summary>
-        /// 序列化 未加密
+        /// Base64 文件 解析
         /// </summary>
-        public static string SerializeData<T>(T data)
+        public partial class Base64
         {
-            using (var stream = new MemoryStream())
+            /// <summary>
+            /// 序列化 未加密
+            /// </summary>
+            public static string SerializeData<T>(T data)
             {
-                new BinaryFormatter().Serialize(stream, data); //将数据序列化
-                stream.Flush();
-                return Convert.ToBase64String(stream.ToArray());
+                using (var stream = new MemoryStream())
+                {
+                    new BinaryFormatter().Serialize(stream, data); //将数据序列化
+                    stream.Flush();
+                    return Convert.ToBase64String(stream.ToArray());
+                }
             }
-        }
 
-        /// <summary>
-        /// 序列化 未加密
-        /// </summary>
-        public static string SerializeData<T>(in T data) where T : struct
-        {
-            using (var stream = new MemoryStream())
+            /// <summary>
+            /// 序列化 未加密
+            /// </summary>
+            public static string SerializeData<T>(in T data) where T : struct
             {
-                new BinaryFormatter().Serialize(stream, data); //将数据序列化
-                stream.Flush();
-                return Convert.ToBase64String(stream.ToArray());
+                using (var stream = new MemoryStream())
+                {
+                    new BinaryFormatter().Serialize(stream, data); //将数据序列化
+                    stream.Flush();
+                    return Convert.ToBase64String(stream.ToArray());
+                }
             }
-        }
 
-        /// <summary>
-        /// 序列化 未加密
-        /// </summary>
-        public static string Serialize(byte[] data, Base64FormattingOptions options = Base64FormattingOptions.None)
-        {
-            return Convert.ToBase64String(data, options);
-        }
-
-        /// <summary>
-        /// 序列化 未加密
-        /// </summary>
-        public static string Serialize(string data, Encoding encoding = null)
-        {
-            return Convert.ToBase64String((encoding ?? Encoding.UTF8).GetBytes(data));
-        }
-
-
-        /// <summary>
-        /// 反序列化 未加密
-        /// </summary>
-        public static T Deserialize<T>(string data)
-        {
-            using (var stream = new MemoryStream())
+            /// <summary>
+            /// 序列化 未加密
+            /// </summary>
+            public static string Serialize(byte[] data, Base64FormattingOptions options = Base64FormattingOptions.None)
             {
-                var bytes = Convert.FromBase64String(data);
-                stream.Write(bytes, 0, bytes.Length);
-                stream.Flush();
-                stream.Seek(0, SeekOrigin.Begin);
-                return (T)new BinaryFormatter().Deserialize(stream); //反序列化回原来的数据格式；
+                return Convert.ToBase64String(data, options);
+            }
+
+            /// <summary>
+            /// 序列化 未加密
+            /// </summary>
+            public static string Serialize(string data, Encoding encoding = null)
+            {
+                return Convert.ToBase64String((encoding ?? Encoding.UTF8).GetBytes(data));
+            }
+
+
+            /// <summary>
+            /// 反序列化 未加密
+            /// </summary>
+            public static T Deserialize<T>(string data)
+            {
+                using (var stream = new MemoryStream())
+                {
+                    var bytes = Convert.FromBase64String(data);
+                    stream.Write(bytes, 0, bytes.Length);
+                    stream.Flush();
+                    stream.Seek(0, SeekOrigin.Begin);
+                    return (T)new BinaryFormatter().Deserialize(stream); //反序列化回原来的数据格式；
+                }
             }
         }
     }

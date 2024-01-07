@@ -97,14 +97,14 @@ namespace AIO
         /// </summary>
         /// <param name="key">Key to find</param>
         /// <returns>'true' and cache value if the cache value was found, 'false' if the given key was not found</returns>
-        public (bool, byte[]) Get(string key)
+        public Tuple<bool, byte[]> Get(string key)
         {
             using (new LockRead(_lockEx))
             {
                 // Try to find the given key
                 return !EntriesByKey.TryGetValue(key, out var cacheValue)
-                    ? (false, Array.Empty<byte>())
-                    : (true, cacheValue.Value);
+                    ? Tuple.Create(false, Array.Empty<byte>())
+                    : Tuple.Create(true, cacheValue.Value);
             }
         }
 
@@ -113,14 +113,14 @@ namespace AIO
         /// </summary>
         /// <param name="key">Key to find</param>
         /// <returns>'true' and cache value if the cache value was found, 'false' if the given key was not found</returns>
-        public (bool, T) Get<T>(string key)
+        public Tuple<bool, T> Get<T>(string key)
         {
             using (new LockRead(_lockEx))
             {
                 // Try to find the given key
                 return !EntriesByKey.TryGetValue(key, out var cacheValue)
-                    ? (false, default)
-                    : (true, AHelper.Binary.Deserialize<T>(cacheValue.Value));
+                    ? Tuple.Create(false, default(T))
+                    : Tuple.Create(true, AHelper.Binary.Deserialize<T>(cacheValue.Value));
             }
         }
 

@@ -8,43 +8,46 @@ using System.IO;
 using AIO.YamlDotNet.Serialization;
 using AIO.YamlDotNet.Serialization.NamingConventions;
 
-public partial class AHelper
+namespace AIO
 {
-    /// <summary>
-    /// Yaml 解析
-    /// </summary>
-    public partial class Yaml
+    public partial class AHelper
     {
         /// <summary>
-        /// 序列化
+        /// Yaml 解析
         /// </summary>
-        public static string Serialize(in object data)
+        public partial class Yaml
         {
-            var serializer = new SerializerBuilder().WithIndentedSequences()
-                .WithNamingConvention(CamelCaseNamingConvention.Instance).Build();
-            return serializer.Serialize(data);
-        }
+            /// <summary>
+            /// 序列化
+            /// </summary>
+            public static string Serialize(in object data)
+            {
+                var serializer = new SerializerBuilder().WithIndentedSequences()
+                    .WithNamingConvention(CamelCaseNamingConvention.Instance).Build();
+                return serializer.Serialize(data);
+            }
 
-        /// <summary>
-        /// 序列化
-        /// </summary>
-        public static string ToJson(in string data)
-        {
-            var deserializer = new DeserializerBuilder().Build();
-            var yamlObject = deserializer.Deserialize(new StringReader(data));
-            var serializer = new SerializerBuilder().JsonCompatible().Build();
-            return serializer.Serialize(yamlObject);
-        }
+            /// <summary>
+            /// 序列化
+            /// </summary>
+            public static string ToJson(in string data)
+            {
+                var deserializer = new DeserializerBuilder().Build();
+                var yamlObject = deserializer.Deserialize(new StringReader(data));
+                var serializer = new SerializerBuilder().JsonCompatible().Build();
+                return serializer.Serialize(yamlObject);
+            }
 
-        /// <summary>
-        /// 反序列化
-        /// </summary>
-        public static T Deserialize<T>(in string data)
-        {
-            return new DeserializerBuilder()
-                .WithNamingConvention(UnderscoredNamingConvention.Instance)
-                .Build()
-                .Deserialize<T>(data);
+            /// <summary>
+            /// 反序列化
+            /// </summary>
+            public static T Deserialize<T>(in string data)
+            {
+                return new DeserializerBuilder()
+                    .WithNamingConvention(UnderscoredNamingConvention.Instance)
+                    .Build()
+                    .Deserialize<T>(data);
+            }
         }
     }
 }

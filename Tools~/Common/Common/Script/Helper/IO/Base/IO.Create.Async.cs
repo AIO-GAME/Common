@@ -1,6 +1,9 @@
-public partial class AHelper
+namespace AIO
 {
-    public partial class IO
+    public partial class AHelper
     {
+        public partial class IO
+        {
+        }
     }
 }

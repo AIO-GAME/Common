@@ -139,6 +139,11 @@
             日志 警告 错误 异常
             </summary>
         </member>
+        <member name="T:AIO.Internal.MiniJSON">
+            <summary>
+            Mini Json
+            </summary>
+        </member>
         <member name="F:AIO.Internal.MiniJSON.lastErrorIndex">
             <summary>
             On decoding, this value holds the position at which the parse failed (-1 = no error).

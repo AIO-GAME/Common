@@ -117,7 +117,11 @@ namespace AIO
                 UnityEngine.Debug.Log($"[辅助定时器:{ID}] [容器数量:{List.Count}] [状态:结束] 精度单位:{Unit} 当前时间:{Counter} 任务总数量:{TotalNum} 完成任务数量:{TotalNum - RemainNum} 剩余任务数量:{RemainNum}");
 #endif
             }
+#if UNITY_EDITOR
             catch (Exception e)
+#else
+            catch (Exception)
+#endif
             {
 #if UNITY_EDITOR
                 UnityEngine.Debug.LogErrorFormat($"[辅助定时器:{ID}] [容器数量:{List.Count}] [状态:异常] 精度单位:{Unit} 当前时间:{Counter} 任务总数量:{TotalNum} 完成任务数量:{TotalNum - RemainNum} 异常信息:{e}");

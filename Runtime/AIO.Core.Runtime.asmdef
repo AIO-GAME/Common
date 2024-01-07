@@ -6,7 +6,9 @@
         "UniTask.Linq",
         "Unity.TextMeshPro",
         "UniTask.TextMeshPro",
-        "DOTween.Modules"
+        "DOTween.Modules",
+        "UnityEditor.UI",
+        "UnityEngine.UI"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

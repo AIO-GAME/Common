@@ -99,7 +99,7 @@ namespace AIO.Net
         protected override void ClearBuffers()
         {
             // Clear send buffers
-            SendBuffer.Clear();
+            SendNetBuffer.Clear();
 
             // Update statistic
             BytesPending = 0;
@@ -158,10 +158,10 @@ namespace AIO.Net
             BytesReceived += size;
 
             // Call the datagram received handler
-            OnReceived(e.RemoteEndPoint, ReceiveBuffer.Arrays, 0, size);
+            OnReceived(e.RemoteEndPoint, ReceiveNetBuffer.Arrays, 0, size);
 
             // If the receive buffer is full increase its size
-            if (ReceiveBuffer.Capacity == size)
+            if (ReceiveNetBuffer.Capacity == size)
             {
                 // Check the receive buffer limit
                 if (((2 * size) > Option.ReceiveBufferLimit) && (Option.ReceiveBufferLimit > 0))
@@ -171,7 +171,7 @@ namespace AIO.Net
                     return;
                 }
 
-                ReceiveBuffer.Reserve(2 * size);
+                ReceiveNetBuffer.Reserve(2 * size);
             }
         }
 
@@ -203,7 +203,7 @@ namespace AIO.Net
                 BytesSent += sent;
 
                 // Clear the send buffer
-                SendBuffer.Clear();
+                SendNetBuffer.Clear();
 
                 // Call the buffer sent handler
                 OnSent(SendEndpoint, sent);

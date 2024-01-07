@@ -12,7 +12,6 @@ namespace AIO
         /// <summary>
         /// 查询存在相同元素的下标
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static List<(int, T)> IndexOf<T>(this IList<T> list, in IEnumerable<T> items)
         {
             if (list is null) throw new ArgumentNullException(nameof(list));
@@ -31,7 +30,6 @@ namespace AIO
         /// <summary>
         /// 查询存在相同元素的下标
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static List<(int, T)> IndexOf<T>(this IList<T> list, in IList<T> items)
         {
             if (list is null) throw new ArgumentNullException(nameof(list));
@@ -49,7 +47,6 @@ namespace AIO
         /// <summary>
         /// 查询存在相同元素的下标
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static List<(int, T)> IndexOfParallel<T>(this IList<T> list, in IEnumerable<T> items)
         {
             if (list is null) throw new ArgumentNullException(nameof(list));

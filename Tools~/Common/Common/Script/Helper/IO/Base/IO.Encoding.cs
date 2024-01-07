@@ -6,28 +6,30 @@
 
 using System.Runtime.CompilerServices;
 
-public partial class AHelper
+namespace AIO
 {
-    public partial class IO
+    public partial class AHelper
     {
-        /// <summary>
-        /// 字节位运算加密
-        /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static byte EncodingBitByte(in byte num)
+        public partial class IO
         {
-            var state = num & 0xFF;
-            var n = 2;
-            for (var i = 0; i < 8; i++)
+            /// <summary>
+            /// 字节位运算加密
+            /// </summary>
+            private static byte EncodingBitByte(in byte num)
             {
-                if (n == 64) continue;
-                if ((state & n) == n)
-                    state &= (~n);
-                else state |= n;
-                n *= 2;
-            }
+                var state = num & 0xFF;
+                var n = 2;
+                for (var i = 0; i < 8; i++)
+                {
+                    if (n == 64) continue;
+                    if ((state & n) == n)
+                        state &= (~n);
+                    else state |= n;
+                    n *= 2;
+                }
 
-            return (byte)state;
+                return (byte)state;
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ namespace AIO.Net
 
         private bool Receiving;
 
-        private Buffer ReceiveBuffer;
+        private NetBuffer _receiveNetBuffer;
 
         private SocketAsyncEventArgs ReceiveEventArg;
 
@@ -36,7 +36,7 @@ namespace AIO.Net
                 SendError(e.SocketError);
 
                 // Call the datagram received zero handler
-                OnReceived(e.RemoteEndPoint, ReceiveBuffer.Arrays, 0, 0);
+                OnReceived(e.RemoteEndPoint, _receiveNetBuffer.Arrays, 0, 0);
 
                 return;
             }
@@ -49,10 +49,10 @@ namespace AIO.Net
             BytesReceived += size;
 
             // Call the datagram received handler
-            OnReceived(e.RemoteEndPoint, ReceiveBuffer.Arrays, 0, size);
+            OnReceived(e.RemoteEndPoint, _receiveNetBuffer.Arrays, 0, size);
 
             // If the receive buffer is full increase its size
-            if (ReceiveBuffer.Capacity == size)
+            if (_receiveNetBuffer.Capacity == size)
             {
                 // Check the receive buffer limit
                 if (2 * size > Option.ReceiveBufferLimit && (Option.ReceiveBufferLimit > 0))
@@ -60,12 +60,12 @@ namespace AIO.Net
                     SendError(SocketError.NoBufferSpaceAvailable);
 
                     // Call the datagram received zero handler
-                    OnReceived(e.RemoteEndPoint, ReceiveBuffer.Arrays, 0, 0);
+                    OnReceived(e.RemoteEndPoint, _receiveNetBuffer.Arrays, 0, 0);
 
                     return;
                 }
 
-                ReceiveBuffer.Reserve(2 * size);
+                _receiveNetBuffer.Reserve(2 * size);
             }
         }
 
@@ -80,7 +80,7 @@ namespace AIO.Net
                 // Async receive with the receive handler
                 Receiving = true;
                 ReceiveEventArg.RemoteEndPoint = ReceiveEndpoint;
-                ReceiveEventArg.SetBuffer(ReceiveBuffer.Arrays, 0, ReceiveBuffer.Capacity);
+                ReceiveEventArg.SetBuffer(_receiveNetBuffer.Arrays, 0, _receiveNetBuffer.Capacity);
                 if (!Socket.ReceiveFromAsync(ReceiveEventArg))
                     ProcessReceiveFrom(ReceiveEventArg);
             }

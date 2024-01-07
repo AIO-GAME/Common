@@ -254,7 +254,7 @@ namespace AIO.Net
         /// <summary>
         /// Receive buffer
         /// </summary>
-        internal Buffer ReceiveBuffer;
+        internal NetBuffer ReceiveNetBuffer;
 
         /// <summary>
         /// Receive a new datagram from the given endpoint (synchronous)
@@ -324,7 +324,7 @@ namespace AIO.Net
         /// <summary>
         /// Send buffer
         /// </summary>
-        internal Buffer SendBuffer;
+        internal NetBuffer SendNetBuffer;
 
         /// <summary>
         /// Try to send pending data

@@ -52,9 +52,9 @@ namespace AIO.Net
             if (IsConnected || IsConnecting) return false;
 
             // Setup buffers
-            ReceiveBuffer = new Buffer();
-            SendBufferMain = new Buffer();
-            SendBufferFlush = new Buffer();
+            _receiveNetBuffer = new NetBuffer();
+            _sendNetBufferMain = new NetBuffer();
+            _sendNetBufferFlush = new NetBuffer();
 
             // Setup event args
             ConnectEventArg = new SocketAsyncEventArgs();
@@ -131,9 +131,9 @@ namespace AIO.Net
                 Socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.NoDelay, true);
 
             // Prepare receive & send buffers
-            ReceiveBuffer.Reserve(Option.SendBufferSize);
-            SendBufferMain.Reserve(Option.SendBufferSize);
-            SendBufferFlush.Reserve(Option.SendBufferSize);
+            _receiveNetBuffer.Reserve(Option.SendBufferSize);
+            _sendNetBufferMain.Reserve(Option.SendBufferSize);
+            _sendNetBufferFlush.Reserve(Option.SendBufferSize);
 
             // Reset statistic
             BytesPending = 0;
@@ -147,7 +147,7 @@ namespace AIO.Net
             // Call the client connected handler
             OnConnected();
             // Call the empty send buffer handler
-            if (SendBufferMain.IsEmpty)
+            if (_sendNetBufferMain.IsEmpty)
                 OnEmpty();
 
             return true;
@@ -236,9 +236,9 @@ namespace AIO.Net
                 return false;
 
             // Setup buffers
-            ReceiveBuffer = new Buffer();
-            SendBufferMain = new Buffer();
-            SendBufferFlush = new Buffer();
+            _receiveNetBuffer = new NetBuffer();
+            _sendNetBufferMain = new NetBuffer();
+            _sendNetBufferFlush = new NetBuffer();
 
             // Setup event args
             ConnectEventArg = new SocketAsyncEventArgs();
@@ -319,9 +319,9 @@ namespace AIO.Net
                     Socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.NoDelay, true);
 
                 // Prepare receive & send buffers
-                ReceiveBuffer.Reserve(Option.ReceiveBufferSize);
-                SendBufferMain.Reserve(Option.SendBufferSize);
-                SendBufferFlush.Reserve(Option.SendBufferSize);
+                _receiveNetBuffer.Reserve(Option.ReceiveBufferSize);
+                _sendNetBufferMain.Reserve(Option.SendBufferSize);
+                _sendNetBufferFlush.Reserve(Option.SendBufferSize);
 
                 // Reset statistic
                 BytesPending = 0;
@@ -343,7 +343,7 @@ namespace AIO.Net
                 OnConnected();
 
                 // Call the empty send buffer handler
-                if (SendBufferMain.IsEmpty)
+                if (_sendNetBufferMain.IsEmpty)
                     OnEmpty();
             }
             else

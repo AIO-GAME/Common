@@ -19,8 +19,8 @@ namespace AIO.Net
                 return false;
 
             // Setup buffers
-            ReceiveBuffer = new Buffer();
-            SendBuffer = new Buffer();
+            ReceiveNetBuffer = new NetBuffer();
+            SendNetBuffer = new NetBuffer();
 
             // Setup event args
             ReceiveEventArg = new SocketAsyncEventArgs();
@@ -95,7 +95,7 @@ namespace AIO.Net
                     Endpoint.AddressFamily == AddressFamily.InterNetworkV6 ? IPAddress.IPv6Any : IPAddress.Any, 0);
 
             // Prepare receive & send buffers
-            ReceiveBuffer.Reserve(Option.ReceiveBufferSize);
+            ReceiveNetBuffer.Reserve(Option.ReceiveBufferSize);
 
             // Reset statistic
             BytesPending = 0;

@@ -11,369 +11,372 @@ using AIO;
 using EDateTimeUnit = AIO.Unit.Time.DateTimeUnit;
 using ESecondUnit = AIO.Unit.Time.SencondUnit;
 
-public partial class AHelper
+namespace AIO
 {
-    private AHelper()
+    public partial class AHelper
     {
-    }
-
-    private static AHelper Instance { get; } = new AHelper();
-
-    /// <summary>
-    /// 时间方法库
-    /// </summary>
-    public partial class Time
-    {
-        /// <summary>
-        /// 前天开始时间 单位毫秒
-        /// </summary>
-        public static long BeforeYesterday => GetCurrDateToDay(-2);
-
-        /// <summary>
-        /// 昨天开始时间 单位毫秒
-        /// </summary>
-        public static long Yesterday => GetCurrDateToDay(-1);
-
-        /// <summary>
-        /// 当天开始时间 单位毫秒
-        /// </summary>
-        public static long Today => GetCurrDateToDay();
-
-        /// <summary>
-        /// 明天开始时间 单位毫秒
-        /// </summary>
-        public static long TomorrowDay => GetCurrDateToDay(1);
-
-        /// <summary>
-        /// 后天开始时间 单位毫秒
-        /// </summary>
-        public static long AfterDay => GetCurrDateToDay(2);
-
-        /// <summary>
-        /// 获取当前时间 文字格式
-        /// </summary>
-        public static string GetCurrTimeStr(in string format = "yyyy-MM-dd HH:mm:ss")
+        private AHelper()
         {
-            return DateTime.Now.ToString(format);
         }
 
-        /// <summary>
-        /// 获取当前时间搓
-        /// </summary>
-        public static long GetCurrTime(in ESecondUnit unit = ESecondUnit.MILLISCOND)
-        {
-            return Normalize(DateTime.Now, unit);
-        }
+        private static AHelper Instance { get; } = new AHelper();
 
         /// <summary>
-        /// 获取时间搓
+        /// 时间方法库
         /// </summary>
-        public static long GetDateTime(in string format, in ESecondUnit unit = ESecondUnit.MILLISCOND)
+        public partial class Time
         {
-            return Normalize(Convert.ToDateTime(format), unit);
-        }
+            /// <summary>
+            /// 前天开始时间 单位毫秒
+            /// </summary>
+            public static long BeforeYesterday => GetCurrDateToDay(-2);
 
-        /// <summary>
-        /// 格式化时间，参数：格林威治时间，格式化格式（具体见文件末尾）
-        /// </summary>
-        public static string Format(in long time, in string format = "yyyy-MM-dd 00:00:00",
-            ESecondUnit unit = ESecondUnit.MILLISCOND)
-        {
-            return TimeZoneInfo.ConvertTimeToUtc(GetDateTime(time, unit)).ToString(format);
-        }
+            /// <summary>
+            /// 昨天开始时间 单位毫秒
+            /// </summary>
+            public static long Yesterday => GetCurrDateToDay(-1);
 
-        /// <summary>
-        /// © 获取DateTime 时间磋单位支持 纳秒 微秒 毫秒 秒
-        /// </summary>
-        public static DateTime GetDateTime(in long time, in ESecondUnit unit = ESecondUnit.MILLISCOND)
-        {
-            long Ticks;
-            switch (unit)
+            /// <summary>
+            /// 当天开始时间 单位毫秒
+            /// </summary>
+            public static long Today => GetCurrDateToDay();
+
+            /// <summary>
+            /// 明天开始时间 单位毫秒
+            /// </summary>
+            public static long TomorrowDay => GetCurrDateToDay(1);
+
+            /// <summary>
+            /// 后天开始时间 单位毫秒
+            /// </summary>
+            public static long AfterDay => GetCurrDateToDay(2);
+
+            /// <summary>
+            /// 获取当前时间 文字格式
+            /// </summary>
+            public static string GetCurrTimeStr(in string format = "yyyy-MM-dd HH:mm:ss")
             {
-                case ESecondUnit.SECOND:
-                    Ticks = Unit.Time.NS_SECOND / 100;
-                    break;
-                case ESecondUnit.MILLISCOND:
-                    Ticks = Unit.Time.μS_SECOND / 100;
-                    break;
-                case ESecondUnit.MICROSECOND:
-                    Ticks = Unit.Time.MS_SECOND / 100;
-                    break;
-                case ESecondUnit.NANOSECOND:
-                    Ticks = Unit.Time.SECOND / 100;
-                    break;
-                case ESecondUnit.NANOSECOND_100:
-                default: return new DateTime(time);
+                return DateTime.Now.ToString(format);
             }
 
-            return new DateTime(time * Ticks, DateTimeKind.Utc);
-        }
-
-        /// <summary>
-        /// © 获取TimeSpan 时间磋单位支持 纳秒 微秒 毫秒 秒
-        /// </summary>
-        public static TimeSpan GetTimeSpan(in long time, in ESecondUnit unit = ESecondUnit.MILLISCOND)
-        {
-            switch (unit)
+            /// <summary>
+            /// 获取当前时间搓
+            /// </summary>
+            public static long GetCurrTime(in ESecondUnit unit = ESecondUnit.MILLISCOND)
             {
-                case ESecondUnit.SECOND:
-                    return new TimeSpan(time * Unit.Time.NS_SECOND / 100);
-                case ESecondUnit.MILLISCOND:
-                    return new TimeSpan(time * Unit.Time.μS_SECOND / 100);
-                case ESecondUnit.MICROSECOND:
-                    return new TimeSpan(time * Unit.Time.MS_SECOND / 100);
-                case ESecondUnit.NANOSECOND:
-                    return new TimeSpan(time * Unit.Time.SECOND / 100);
-                case ESecondUnit.NANOSECOND_100:
-                default: return new TimeSpan(time);
-            }
-        }
-
-        /// <summary>
-        /// 获取指定单位的时间搓
-        /// </summary>
-        public static long Normalize(in DateTime date, in ESecondUnit unit = ESecondUnit.MILLISCOND)
-        {
-            switch (unit)
-            {
-                case ESecondUnit.SECOND: return date.Ticks / 10000000;
-                case ESecondUnit.MILLISCOND: return date.Ticks / 10000;
-                case ESecondUnit.MICROSECOND: return date.Ticks / 10;
-                case ESecondUnit.NANOSECOND: return date.Ticks * 100;
-                case ESecondUnit.NANOSECOND_100:
-                default: return date.Ticks;
-            }
-        }
-
-        /// <summary>
-        /// 获取当天差距 时间信息
-        /// </summary>
-        public static long GetCurrDateToDay(in int space = 0, in ESecondUnit unit = ESecondUnit.MILLISCOND)
-        {
-            return Normalize(DateTime.Today.AddDays(space), unit);
-        }
-
-        /// <summary>
-        /// 获取开始时间
-        /// </summary>
-        /// <param name="time">时间搓</param>
-        /// <param name="DateType">获取类型 年 季 月 周 日</param>
-        /// <param name="unit">时间搓 单位 纳秒 微秒 毫秒 秒</param>
-        public static long GetTimeStartByType(
-            in long time,
-            in EDateTimeUnit DateType,
-            in ESecondUnit unit = ESecondUnit.MILLISCOND)
-        {
-            var T = GetDateTime(time, unit);
-            switch (DateType)
-            {
-                case EDateTimeUnit.Day:
-                    T = T.AddDays(0);
-                    break;
-                case EDateTimeUnit.Week:
-                    T = T.AddDays(-Convert.ToInt16(T.DayOfWeek) + 1);
-                    break;
-                case EDateTimeUnit.Month:
-                    T = T.AddDays(-T.Day + 1);
-                    break;
-                case EDateTimeUnit.Season:
-                    var time1 = T.AddMonths(0 - ((T.Month - 1) % 3));
-                    T = time1.AddDays(-time1.Day + 1);
-                    break;
-                case EDateTimeUnit.Year:
-                    T = T.AddDays(-T.DayOfYear + 1);
-                    break;
+                return Normalize(DateTime.Now, unit);
             }
 
-            return Normalize(T, unit);
-        }
-
-        /// <summary>
-        /// 获取结束时间
-        /// </summary>
-        /// <param name="time">时间搓</param>
-        /// <param name="DateType">获取类型 年 季 月 周 日</param>
-        /// <param name="unit">时间搓 单位 纳秒 微秒 毫秒 秒</param>
-        public static long GetTimeEndByType(
-            in long time,
-            in EDateTimeUnit DateType,
-            in ESecondUnit unit = ESecondUnit.MILLISCOND)
-        {
-            var T = GetDateTime(time, unit);
-            switch (DateType)
+            /// <summary>
+            /// 获取时间搓
+            /// </summary>
+            public static long GetDateTime(in string format, in ESecondUnit unit = ESecondUnit.MILLISCOND)
             {
-                case EDateTimeUnit.Day:
-                    T = T.AddDays(0);
-                    break;
-                case EDateTimeUnit.Week:
-                    T = T.AddDays(7 - Convert.ToInt16(T.DayOfWeek));
-                    break;
-                case EDateTimeUnit.Month:
-                    T = T.AddDays(DateTime.DaysInMonth(T.Year, T.Month) - T.Day);
-                    break;
-                case EDateTimeUnit.Season:
-                    T = T.AddMonths(2 - ((T.Month - 1) % 3));
-                    T = T.AddDays(DateTime.DaysInMonth(T.Year, T.Month) - T.Day);
-                    break;
-                case EDateTimeUnit.Year:
-                    T = T.AddYears(1);
-                    T = T.AddDays(-T.DayOfYear);
-                    break;
+                return Normalize(Convert.ToDateTime(format), unit);
             }
 
-            return Normalize(T.Add(new TimeSpan(23 - T.Hour, 59 - T.Minute, 59 - T.Second)), unit);
-        }
+            /// <summary>
+            /// 格式化时间，参数：格林威治时间，格式化格式（具体见文件末尾）
+            /// </summary>
+            public static string Format(in long time, in string format = "yyyy-MM-dd 00:00:00",
+                ESecondUnit unit = ESecondUnit.MILLISCOND)
+            {
+                return TimeZoneInfo.ConvertTimeToUtc(GetDateTime(time, unit)).ToString(format);
+            }
 
-        /// <summary>
-        /// 获取时间倒计时字符串表示(ms) 01:59:08
-        /// </summary>
-        public static string GetCountDown(
-            in long time,
-            in ESecondUnit unit = ESecondUnit.MILLISCOND)
-        {
-            var buff = new StringBuilder();
-            var Times = GetTimeSpan(time, unit);
+            /// <summary>
+            /// © 获取DateTime 时间磋单位支持 纳秒 微秒 毫秒 秒
+            /// </summary>
+            public static DateTime GetDateTime(in long time, in ESecondUnit unit = ESecondUnit.MILLISCOND)
+            {
+                long Ticks;
+                switch (unit)
+                {
+                    case ESecondUnit.SECOND:
+                        Ticks = Unit.Time.NS_SECOND / 100;
+                        break;
+                    case ESecondUnit.MILLISCOND:
+                        Ticks = Unit.Time.μS_SECOND / 100;
+                        break;
+                    case ESecondUnit.MICROSECOND:
+                        Ticks = Unit.Time.MS_SECOND / 100;
+                        break;
+                    case ESecondUnit.NANOSECOND:
+                        Ticks = Unit.Time.SECOND / 100;
+                        break;
+                    case ESecondUnit.NANOSECOND_100:
+                    default: return new DateTime(time);
+                }
 
-            if (Times.Days < 10) buff.Append('0');
-            buff.Append(Times.Days).Append('天');
+                return new DateTime(time * Ticks, DateTimeKind.Utc);
+            }
 
-            if (Times.Hours < 10) buff.Append('0');
-            buff.Append(Times.Hours).Append('时');
+            /// <summary>
+            /// © 获取TimeSpan 时间磋单位支持 纳秒 微秒 毫秒 秒
+            /// </summary>
+            public static TimeSpan GetTimeSpan(in long time, in ESecondUnit unit = ESecondUnit.MILLISCOND)
+            {
+                switch (unit)
+                {
+                    case ESecondUnit.SECOND:
+                        return new TimeSpan(time * Unit.Time.NS_SECOND / 100);
+                    case ESecondUnit.MILLISCOND:
+                        return new TimeSpan(time * Unit.Time.μS_SECOND / 100);
+                    case ESecondUnit.MICROSECOND:
+                        return new TimeSpan(time * Unit.Time.MS_SECOND / 100);
+                    case ESecondUnit.NANOSECOND:
+                        return new TimeSpan(time * Unit.Time.SECOND / 100);
+                    case ESecondUnit.NANOSECOND_100:
+                    default: return new TimeSpan(time);
+                }
+            }
 
-            if (Times.Minutes < 10) buff.Append('0');
-            buff.Append(Times.Minutes).Append('分');
+            /// <summary>
+            /// 获取指定单位的时间搓
+            /// </summary>
+            public static long Normalize(in DateTime date, in ESecondUnit unit = ESecondUnit.MILLISCOND)
+            {
+                switch (unit)
+                {
+                    case ESecondUnit.SECOND: return date.Ticks / 10000000;
+                    case ESecondUnit.MILLISCOND: return date.Ticks / 10000;
+                    case ESecondUnit.MICROSECOND: return date.Ticks / 10;
+                    case ESecondUnit.NANOSECOND: return date.Ticks * 100;
+                    case ESecondUnit.NANOSECOND_100:
+                    default: return date.Ticks;
+                }
+            }
 
-            if (Times.Seconds < 10) buff.Append('0');
-            buff.Append(Times.Seconds).Append('秒');
+            /// <summary>
+            /// 获取当天差距 时间信息
+            /// </summary>
+            public static long GetCurrDateToDay(in int space = 0, in ESecondUnit unit = ESecondUnit.MILLISCOND)
+            {
+                return Normalize(DateTime.Today.AddDays(space), unit);
+            }
 
-            return buff.ToString();
-        }
+            /// <summary>
+            /// 获取开始时间
+            /// </summary>
+            /// <param name="time">时间搓</param>
+            /// <param name="DateType">获取类型 年 季 月 周 日</param>
+            /// <param name="unit">时间搓 单位 纳秒 微秒 毫秒 秒</param>
+            public static long GetTimeStartByType(
+                in long time,
+                in EDateTimeUnit DateType,
+                in ESecondUnit unit = ESecondUnit.MILLISCOND)
+            {
+                var T = GetDateTime(time, unit);
+                switch (DateType)
+                {
+                    case EDateTimeUnit.Day:
+                        T = T.AddDays(0);
+                        break;
+                    case EDateTimeUnit.Week:
+                        T = T.AddDays(-Convert.ToInt16(T.DayOfWeek) + 1);
+                        break;
+                    case EDateTimeUnit.Month:
+                        T = T.AddDays(-T.Day + 1);
+                        break;
+                    case EDateTimeUnit.Season:
+                        var time1 = T.AddMonths(0 - ((T.Month - 1) % 3));
+                        T = time1.AddDays(-time1.Day + 1);
+                        break;
+                    case EDateTimeUnit.Year:
+                        T = T.AddDays(-T.DayOfYear + 1);
+                        break;
+                }
 
-        /// <summary>
-        /// 获取传入时间距离当前时间的文字描述
-        /// </summary>
-        public static string GetPreHumanityTime(
-            long time,
-            in ESecondUnit unit = ESecondUnit.MILLISCOND)
-        {
-            if (time <= 0) return "传入值错误";
+                return Normalize(T, unit);
+            }
 
-            time = (GetCurrTime(unit) - time) / Unit.Time.GetSencondUnit(unit); //单位归一化
+            /// <summary>
+            /// 获取结束时间
+            /// </summary>
+            /// <param name="time">时间搓</param>
+            /// <param name="DateType">获取类型 年 季 月 周 日</param>
+            /// <param name="unit">时间搓 单位 纳秒 微秒 毫秒 秒</param>
+            public static long GetTimeEndByType(
+                in long time,
+                in EDateTimeUnit DateType,
+                in ESecondUnit unit = ESecondUnit.MILLISCOND)
+            {
+                var T = GetDateTime(time, unit);
+                switch (DateType)
+                {
+                    case EDateTimeUnit.Day:
+                        T = T.AddDays(0);
+                        break;
+                    case EDateTimeUnit.Week:
+                        T = T.AddDays(7 - Convert.ToInt16(T.DayOfWeek));
+                        break;
+                    case EDateTimeUnit.Month:
+                        T = T.AddDays(DateTime.DaysInMonth(T.Year, T.Month) - T.Day);
+                        break;
+                    case EDateTimeUnit.Season:
+                        T = T.AddMonths(2 - ((T.Month - 1) % 3));
+                        T = T.AddDays(DateTime.DaysInMonth(T.Year, T.Month) - T.Day);
+                        break;
+                    case EDateTimeUnit.Year:
+                        T = T.AddYears(1);
+                        T = T.AddDays(-T.DayOfYear);
+                        break;
+                }
 
-            var dayUnit = Unit.Time.GetDayUnit(unit);
-            var day = time / dayUnit;
-            time %= dayUnit;
+                return Normalize(T.Add(new TimeSpan(23 - T.Hour, 59 - T.Minute, 59 - T.Second)), unit);
+            }
 
-            var hourUnit = Unit.Time.GetHourUnit(unit);
-            var hour = time / hourUnit;
-            time %= hourUnit;
+            /// <summary>
+            /// 获取时间倒计时字符串表示(ms) 01:59:08
+            /// </summary>
+            public static string GetCountDown(
+                in long time,
+                in ESecondUnit unit = ESecondUnit.MILLISCOND)
+            {
+                var buff = new StringBuilder();
+                var Times = GetTimeSpan(time, unit);
 
-            var minUnit = Unit.Time.GetMinUnit(unit);
-            var min = time / minUnit;
-            time %= minUnit; //秒
+                if (Times.Days < 10) buff.Append('0');
+                buff.Append(Times.Days).Append('天');
 
-            var buff = new StringBuilder();
+                if (Times.Hours < 10) buff.Append('0');
+                buff.Append(Times.Hours).Append('时');
 
-            if (day > 0)
-                buff.Append(day).Append("天");
-            if (day > 0 || hour > 0)
-                buff.Append(hour).Append("小时");
-            if (day > 0 || hour > 0 || min > 0)
-                buff.Append(min).Append("分");
-            if (day > 0 || hour > 0 || min > 0 || time > 0)
-                buff.Append(time).Append("秒前");
+                if (Times.Minutes < 10) buff.Append('0');
+                buff.Append(Times.Minutes).Append('分');
 
-            return buff.ToString();
-        }
+                if (Times.Seconds < 10) buff.Append('0');
+                buff.Append(Times.Seconds).Append('秒');
 
-        #region 时间比较
+                return buff.ToString();
+            }
 
-        /// <summary>
-        /// 与当前时间比较 如果小于当前时间为Ture
-        /// </summary>
-        public static bool CompareNowTime(in DateTime dateTime)
-        {
-            return DateTime.Now > dateTime;
-        }
+            /// <summary>
+            /// 获取传入时间距离当前时间的文字描述
+            /// </summary>
+            public static string GetPreHumanityTime(
+                long time,
+                in ESecondUnit unit = ESecondUnit.MILLISCOND)
+            {
+                if (time <= 0) return "传入值错误";
 
-        /// <summary>
-        /// 与当前时间比较 如果小于当前时间为Ture
-        /// </summary>
-        public static bool CompareNowTime(
-            in long time,
-            in ESecondUnit unit = ESecondUnit.MILLISCOND)
-        {
-            return GetCurrTime(unit) > time;
-        }
+                time = (GetCurrTime(unit) - time) / Unit.Time.GetSencondUnit(unit); //单位归一化
 
-        #endregion
+                var dayUnit = Unit.Time.GetDayUnit(unit);
+                var day = time / dayUnit;
+                time %= dayUnit;
 
-        /// <summary>
-        /// 求离最近发表时间的函数
-        /// </summary>
-        /// <returns> 返回时间描述 </returns>
-        public static string DateStringFromNow(in DateTime dt)
-        {
-            var span = DateTime.Now - dt;
-            if (span.TotalDays > 30) return $"{span.TotalDays % 30}个月前";
-            if (span.TotalDays > 7) return $"{span.TotalDays % 7}周前";
-            if (span.TotalDays > 1) return $"{(int)Math.Floor(span.TotalDays)}天前";
-            if (span.TotalHours > 1) return $"{(int)Math.Floor(span.TotalHours)}小时前";
-            if (span.TotalMinutes > 1) return $"{(int)Math.Floor(span.TotalMinutes)}分钟前";
-            if (span.TotalSeconds >= 1) return $"{(int)Math.Floor(span.TotalSeconds)}秒前";
-            return "1秒前";
-        }
+                var hourUnit = Unit.Time.GetHourUnit(unit);
+                var hour = time / hourUnit;
+                time %= hourUnit;
 
-        /// <summary>
-        /// 日期比较
-        /// </summary>
-        /// <param name="today">当前日期</param>
-        /// <param name="writeDate">输入日期</param>
-        /// <param name="n">比较天数</param>
-        /// <returns>大于天数返回true，小于返回false</returns>
-        public static bool CompareDateDay(
-            in string today,
-            in string writeDate,
-            in int n)
-        {
-            var dateTime = Convert.ToDateTime(today);
-            var WriteDate = Convert.ToDateTime(writeDate).AddDays(n);
-            return dateTime < WriteDate;
-        }
+                var minUnit = Unit.Time.GetMinUnit(unit);
+                var min = time / minUnit;
+                time %= minUnit; //秒
 
-        /// <summary>
-        /// 获取两时间相差
-        /// </summary>
-        public static string GetDisTime(
-            in DateTime dateBegin,
-            in DateTime dateEnd,
-            in string format = "HH:mm:ss")
-        {
-            return GetDisTime(dateBegin.Ticks, dateEnd.Ticks, format);
-        }
+                var buff = new StringBuilder();
 
-        /// <summary>
-        /// 获取两时间相差
-        /// </summary>
-        public static string GetDisTime(
-            in long dateBegin,
-            in long dateEnd,
-            in string format = "HH:mm:ss")
-        {
-            return (new TimeSpan(dateEnd) - new TimeSpan(dateBegin)).ToString(format);
-        }
+                if (day > 0)
+                    buff.Append(day).Append("天");
+                if (day > 0 || hour > 0)
+                    buff.Append(hour).Append("小时");
+                if (day > 0 || hour > 0 || min > 0)
+                    buff.Append(min).Append("分");
+                if (day > 0 || hour > 0 || min > 0 || time > 0)
+                    buff.Append(time).Append("秒前");
 
-        /// <summary>
-        /// 判断是否同日
-        /// </summary>
-        public static bool IsToday(
-            in long time1,
-            in long time2,
-            in ESecondUnit unit = ESecondUnit.MILLISCOND)
-        {
-            var dt1 = GetDateTime(time1, unit);
-            var dt2 = GetDateTime(time2, unit);
-            return (dt1.Day == dt2.Day);
+                return buff.ToString();
+            }
+
+            #region 时间比较
+
+            /// <summary>
+            /// 与当前时间比较 如果小于当前时间为Ture
+            /// </summary>
+            public static bool CompareNowTime(in DateTime dateTime)
+            {
+                return DateTime.Now > dateTime;
+            }
+
+            /// <summary>
+            /// 与当前时间比较 如果小于当前时间为Ture
+            /// </summary>
+            public static bool CompareNowTime(
+                in long time,
+                in ESecondUnit unit = ESecondUnit.MILLISCOND)
+            {
+                return GetCurrTime(unit) > time;
+            }
+
+            #endregion
+
+            /// <summary>
+            /// 求离最近发表时间的函数
+            /// </summary>
+            /// <returns> 返回时间描述 </returns>
+            public static string DateStringFromNow(in DateTime dt)
+            {
+                var span = DateTime.Now - dt;
+                if (span.TotalDays > 30) return $"{span.TotalDays % 30}个月前";
+                if (span.TotalDays > 7) return $"{span.TotalDays % 7}周前";
+                if (span.TotalDays > 1) return $"{(int)Math.Floor(span.TotalDays)}天前";
+                if (span.TotalHours > 1) return $"{(int)Math.Floor(span.TotalHours)}小时前";
+                if (span.TotalMinutes > 1) return $"{(int)Math.Floor(span.TotalMinutes)}分钟前";
+                if (span.TotalSeconds >= 1) return $"{(int)Math.Floor(span.TotalSeconds)}秒前";
+                return "1秒前";
+            }
+
+            /// <summary>
+            /// 日期比较
+            /// </summary>
+            /// <param name="today">当前日期</param>
+            /// <param name="writeDate">输入日期</param>
+            /// <param name="n">比较天数</param>
+            /// <returns>大于天数返回true，小于返回false</returns>
+            public static bool CompareDateDay(
+                in string today,
+                in string writeDate,
+                in int n)
+            {
+                var dateTime = Convert.ToDateTime(today);
+                var WriteDate = Convert.ToDateTime(writeDate).AddDays(n);
+                return dateTime < WriteDate;
+            }
+
+            /// <summary>
+            /// 获取两时间相差
+            /// </summary>
+            public static string GetDisTime(
+                in DateTime dateBegin,
+                in DateTime dateEnd,
+                in string format = "HH:mm:ss")
+            {
+                return GetDisTime(dateBegin.Ticks, dateEnd.Ticks, format);
+            }
+
+            /// <summary>
+            /// 获取两时间相差
+            /// </summary>
+            public static string GetDisTime(
+                in long dateBegin,
+                in long dateEnd,
+                in string format = "HH:mm:ss")
+            {
+                return (new TimeSpan(dateEnd) - new TimeSpan(dateBegin)).ToString(format);
+            }
+
+            /// <summary>
+            /// 判断是否同日
+            /// </summary>
+            public static bool IsToday(
+                in long time1,
+                in long time2,
+                in ESecondUnit unit = ESecondUnit.MILLISCOND)
+            {
+                var dt1 = GetDateTime(time1, unit);
+                var dt2 = GetDateTime(time2, unit);
+                return (dt1.Day == dt2.Day);
+            }
         }
     }
 }

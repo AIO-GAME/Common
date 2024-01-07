@@ -4,12 +4,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace AIO.Net
+namespace AIO
 {
     /// <summary>
     /// Dynamic byte buffer
     /// </summary>
-    internal class Buffer
+    internal class NetBuffer
     {
         private byte[] _arrays;
         private int _count;
@@ -48,7 +48,7 @@ namespace AIO.Net
         /// <summary>
         /// Initialize a new expandable buffer with zero capacity
         /// </summary>
-        public Buffer()
+        public NetBuffer()
         {
             _arrays = Array.Empty<byte>();
             _count = 0;
@@ -58,7 +58,7 @@ namespace AIO.Net
         /// <summary>
         /// Initialize a new expandable buffer with the given capacity
         /// </summary>
-        public Buffer(long capacity)
+        public NetBuffer(long capacity)
         {
             _arrays = new byte[capacity];
             _count = 0;
@@ -68,7 +68,7 @@ namespace AIO.Net
         /// <summary>
         /// Initialize a new expandable buffer with the given data
         /// </summary>
-        public Buffer(byte[] arrays)
+        public NetBuffer(byte[] arrays)
         {
             _arrays = arrays;
             _count = arrays.Length;
@@ -224,9 +224,9 @@ namespace AIO.Net
         /// <summary>
         /// Append the given buffer
         /// </summary>
-        /// <param name="buffer">Buffer to append</param>
+        /// <param name="netBuffer">Buffer to append</param>
         /// <returns>Count of append bytes</returns>
-        public long Write(Buffer buffer) => Write(buffer.Arrays);
+        public long Write(NetBuffer netBuffer) => Write(netBuffer.Arrays);
 
         /// <summary>
         /// Append the given text in UTF-8 encoding
