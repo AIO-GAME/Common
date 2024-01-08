@@ -16,44 +16,72 @@ namespace AIO.UEditor
 {
     internal static partial class LnkToolsHelper
     {
-        [Overlay(typeof(SceneView), "Lnk Tool", "Lnk Tool", "Lnk Tool")]
+        [Overlay(typeof(SceneView), "Lnk Tool")]
         public class LnkToolOverlay : ToolbarOverlay, ITransientOverlay
         {
-            public bool visible => temp?.visible ?? false;
+            public bool visible => Root?.visible ?? false;
 
-            private VisualElement temp;
-            private Toolbar m_Toolbar;
+            private IMGUIContainer Root;
 
             public override VisualElement CreatePanelContent()
             {
-                temp = new VisualElement()
-                {
-                    name = "toolbar-overlay"
-                };
-                m_Toolbar = new Toolbar();
-                // m_Toolbar.name = "LnkToolOverlay";
-                m_Toolbar.style.flexDirection = FlexDirection.Row;
-                m_Toolbar.style.unityBackgroundScaleMode = ScaleMode.ScaleToFit;
-                m_Toolbar.pickingMode = PickingMode.Position;
-                OnDraw(m_Toolbar);
-                temp.style.flexDirection = FlexDirection.Row;
-                temp.pickingMode = PickingMode.Position;
-                temp.Add(m_Toolbar);
-                containerWindow.rootVisualElement.Add(temp);
-                Console.WriteLine(m_Toolbar.name);
-                if (collapsed)
-                {
-                    // unity-toolbar-overlay
-                    // var button = temp
-                    //     .Q<VisualElement>("overlay-collapsed-content")
-                    //     .Q<VisualElement>("overlay-content")
-                    //     .Q<Button>(null, "unity-content")
-                    //     .Q<Label>(null, "unity-label");
-                    // button.text = "";
-                    // button.style.backgroundImage = Resources.Load<Texture2D>("Setting/icon_option_button");
-                }
+                var root = new IMGUIContainer();
+                root.name = "toolbar-overlay";
+                root.style.flexGrow = 2;
+                root.style.flexDirection = FlexDirection.Row;
+                root.tooltip = "Lnk Tool";
+                root.onGUIHandler = OnDraw;
+#if UNITY_2022_1_OR_NEWER
+                var toolbar = CreateContent(Layout.HorizontalToolbar);
+#else
+                var toolbar = new ToolbarButton();
+#endif
+                toolbar.style.backgroundImage = Resources.Load<Texture2D>("Setting/icon_option_button");
+                toolbar.name = "";
+                toolbar.style.flexDirection = FlexDirection.Row;
+#if !UNITY_2022_1_OR_NEWER
+                toolbar.style.unityBackgroundScaleMode = ScaleMode.ScaleToFit;
+#endif
+                toolbar.pickingMode = PickingMode.Position;
+                root.Add(toolbar);
+                OnDraw(root);
+                return root;
+            }
 
-                return m_Toolbar;
+            private void OnDraw()
+            {
+                foreach (var lnk in LnkToolList)
+                {
+                    if (GUILayout.Button(lnk.Content, EditorStyles.toolbarButton))
+                    {
+                        lnk.Method?.Invoke(null, null);
+                    }
+                }
+            }
+
+            private void OnDraw(VisualElement element)
+            {
+                element.Clear();
+                foreach (var lnk in LnkToolList)
+                {
+                    var toolbar = new ToolbarButton
+                    {
+                        name = lnk.Content.text,
+                        tooltip = lnk.Content.tooltip,
+                        style =
+                        {
+#if !UNITY_2022_1_OR_NEWER
+                            unityBackgroundScaleMode = ScaleMode.ScaleToFit,
+#endif
+                            backgroundImage = lnk.Content.image as Texture2D,
+                            width = 35,
+                            height = 20
+                        }
+                    };
+                    toolbar.clickable.clicked += () => { lnk.Method?.Invoke(null, null); };
+                    element.AddToClassList(ToolbarButton.ussClassName);
+                    element.Add(toolbar);
+                }
             }
 
             public LnkToolOverlay()
@@ -63,11 +91,11 @@ namespace AIO.UEditor
 
             public override void OnCreated()
             {
+                Root = (IMGUIContainer)CreatePanelContent();
                 layoutChanged += OnLayoutChanged;
                 floatingChanged += OnFloatingChanged;
                 collapsedChanged += OnCollapsedChanged;
                 displayedChanged += OnDisplayedChanged;
-                OnLayoutChanged(layout);
             }
 
             public override void OnWillBeDestroyed()
@@ -80,44 +108,36 @@ namespace AIO.UEditor
 
             private void OnDisplayedChanged(bool ADisplayed)
             {
+                Root.MarkDirtyRepaint();
                 Console.WriteLine($"{nameof(OnDisplayedChanged)} : {ADisplayed.ToString()}");
             }
 
             private void OnCollapsedChanged(bool ACollapsed)
             {
-                m_Toolbar.style.display = ACollapsed ? DisplayStyle.None : DisplayStyle.Flex;
+                if (ACollapsed)
+                {
+                    // var temp = Resources.Load<Texture2D>("Setting/icon_option_button");
+                    // Root.style.backgroundImage = temp;
+                }
+                else
+                {
+                    // button1.style.unityBackgroundScaleMode = ScaleMode.ScaleToFit;
+                    // button1.style.backgroundImage = null;
+                }
 
+                Root.MarkDirtyRepaint();
                 Console.WriteLine($"{nameof(OnCollapsedChanged)} : {ACollapsed.ToString()}");
             }
 
             private void OnFloatingChanged(bool AFloating)
             {
+                Root.MarkDirtyRepaint();
                 Console.WriteLine($"{nameof(OnFloatingChanged)} : {AFloating.ToString()}");
-            }
-
-            private void OnDraw(VisualElement element)
-            {
-                element.Clear();
-                foreach (var lnk in LnkToolList)
-                {
-                    var toolbar = new Button
-                    {
-                        tooltip = lnk.Content.tooltip,
-                        style =
-                        {
-                            unityBackgroundScaleMode = ScaleMode.ScaleToFit,
-                            backgroundImage = lnk.Content.image as Texture2D,
-                            width = 35,
-                            height = 20
-                        }
-                    };
-                    toolbar.clickable.clicked += () => { lnk.Method?.Invoke(null, null); };
-                    element.contentContainer.Add(toolbar);
-                }
             }
 
             private void OnLayoutChanged(Layout ALayout)
             {
+                Root.MarkDirtyRepaint();
                 Console.WriteLine($"{nameof(OnLayoutChanged)} : {ALayout.ToString()}");
             }
         }
