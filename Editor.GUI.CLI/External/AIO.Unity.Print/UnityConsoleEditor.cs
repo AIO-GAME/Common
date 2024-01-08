@@ -15,7 +15,7 @@ namespace AIO.UEditor
     [Description("Unity Console Editor : 日志输出开关")]
     internal static class UnityConsoleEditor
     {
-        private static bool IS_EDITOR_SWITCH_LOG => EditorPrefs.GetInt(MENU_EDITOR_SWITCH_LOG, -1) == 1;
+        private static bool IS_EDITOR_SWITCH_LOG => EditorPrefs.GetInt(MENU_EDITOR_SWITCH_LOG, 1) == 1;
         private static bool IS_EDITOR_SWITCH_ERROR => EditorPrefs.GetInt(MENU_EDITOR_SWITCH_ERROR, -1) == 1;
         private static bool IS_DEVELOPER_MODE => EditorPrefs.GetInt(MENU_DEVELOPER_MODE, -1) == 1;
 
@@ -69,80 +69,86 @@ namespace AIO.UEditor
         private static MethodInfo EnabledLog;
         private static MethodInfo DisableLog;
 
+        private static void ErrorEnabled()
+        {
+            if (EnabledError is null)
+            {
+                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    if (!assembly.GetName().Name.StartsWith("AIO.Print.Unity")) continue;
+                    var type = assembly.GetType("UnityEngine.UnityConsole");
+                    if (type is null) continue;
+                    EnabledError = type.GetMethod(nameof(EnabledError),
+                        BindingFlags.Static | BindingFlags.NonPublic);
+                    if (EnabledError != null) break;
+                }
+            }
+
+            EnabledError?.Invoke(null, null);
+        }
+
+        private static void ErrorDisabled()
+        {
+            if (DisableError is null)
+            {
+                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    if (!assembly.GetName().Name.StartsWith("AIO.Print.Unity")) continue;
+                    var type = assembly.GetType("UnityEngine.UnityConsole");
+                    if (type is null) continue;
+                    DisableError = type.GetMethod(nameof(DisableError),
+                        BindingFlags.Static | BindingFlags.NonPublic);
+                    if (DisableError != null) break;
+                }
+            }
+
+            DisableError?.Invoke(null, null);
+        }
+
+        private static void LogEnabled()
+        {
+            if (EnabledLog is null)
+            {
+                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    if (!assembly.GetName().Name.StartsWith("AIO.Print.Unity")) continue;
+                    var type = assembly.GetType("UnityEngine.UnityConsole");
+                    if (type is null) continue;
+                    EnabledLog = type.GetMethod(nameof(EnabledLog),
+                        BindingFlags.Static | BindingFlags.NonPublic);
+                    if (EnabledLog != null) break;
+                }
+            }
+
+            EnabledLog?.Invoke(null, null);
+        }
+
+        private static void LogDisabled()
+        {
+            if (DisableLog is null)
+            {
+                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    if (!assembly.GetName().Name.StartsWith("AIO.Print.Unity")) continue;
+                    var type = assembly.GetType("UnityEngine.UnityConsole");
+                    if (type is null) continue;
+                    DisableLog = type.GetMethod(nameof(DisableLog),
+                        BindingFlags.Static | BindingFlags.NonPublic);
+                    if (DisableLog != null) break;
+                }
+            }
+
+            DisableLog?.Invoke(null, null);
+        }
+
         [InitializeOnLoadMethod]
         [RuntimeInitializeOnLoadMethod]
         private static void Initialize()
         {
-            if (IS_EDITOR_SWITCH_ERROR)
-            {
-                if (EnabledError is null)
-                {
-                    foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-                    {
-                        if (!assembly.GetName().Name.StartsWith("AIO.Print.Unity")) continue;
-                        var type = assembly.GetType("UnityEngine.UnityConsole");
-                        if (type is null) continue;
-                        EnabledError = type.GetMethod(nameof(EnabledError),
-                            BindingFlags.Static | BindingFlags.NonPublic);
-                        if (EnabledError != null) break;
-                    }
-                }
-
-                EnabledError?.Invoke(null, null);
-            }
-            else
-            {
-                if (DisableError is null)
-                {
-                    foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-                    {
-                        if (!assembly.GetName().Name.StartsWith("AIO.Print.Unity")) continue;
-                        var type = assembly.GetType("UnityEngine.UnityConsole");
-                        if (type is null) continue;
-                        DisableError = type.GetMethod(nameof(DisableError),
-                            BindingFlags.Static | BindingFlags.NonPublic);
-                        if (DisableError != null) break;
-                    }
-                }
-
-                DisableError?.Invoke(null, null);
-            }
-
-            if (IS_EDITOR_SWITCH_LOG)
-            {
-                if (EnabledLog is null)
-                {
-                    foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-                    {
-                        if (!assembly.GetName().Name.StartsWith("AIO.Print.Unity")) continue;
-                        var type = assembly.GetType("UnityEngine.UnityConsole");
-                        if (type is null) continue;
-                        EnabledLog = type.GetMethod(nameof(EnabledLog),
-                            BindingFlags.Static | BindingFlags.NonPublic);
-                        if (EnabledLog != null) break;
-                    }
-                }
-
-                EnabledLog?.Invoke(null, null);
-            }
-            else
-            {
-                if (DisableLog is null)
-                {
-                    foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-                    {
-                        if (!assembly.GetName().Name.StartsWith("AIO.Print.Unity")) continue;
-                        var type = assembly.GetType("UnityEngine.UnityConsole");
-                        if (type is null) continue;
-                        DisableLog = type.GetMethod(nameof(DisableLog),
-                            BindingFlags.Static | BindingFlags.NonPublic);
-                        if (DisableLog != null) break;
-                    }
-                }
-
-                DisableLog?.Invoke(null, null);
-            }
-
+            if (IS_EDITOR_SWITCH_ERROR) ErrorEnabled();
+            else ErrorDisabled();
+            if (IS_EDITOR_SWITCH_LOG) LogEnabled();
+            else LogDisabled();
             MenuRefresh();
         }
 

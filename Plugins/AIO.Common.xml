@@ -3330,12 +3330,27 @@
             Long 扩展
             </summary>
         </member>
-        <member name="M:AIO.ExtendLong.ToConverseStringFileSize(System.Int64)">
+        <member name="F:AIO.ExtendLong.unitStr">
+            <summary>
+            单位
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendLong.ToConverseStringFileSize(System.Int64,System.UInt32)">
             <summary>
             将文件大小(字节)转换为最适合的显示方式
             Generate data size string. Will return a pretty string of bytes, KiB, MiB, GiB, TiB based on the given bytes.
             </summary>
             <param name="size">Data size in bytes</param>
+            <param name="retain">保留小数点后几位</param>
+            <returns>String with data size representation</returns>
+        </member>
+        <member name="M:AIO.ExtendLong.ToConverseStringFileSize(System.UInt64,System.UInt32)">
+            <summary>
+            将文件大小(字节)转换为最适合的显示方式
+            Generate data size string. Will return a pretty string of bytes, KiB, MiB, GiB, TiB based on the given bytes.
+            </summary>
+            <param name="size">Data size in bytes</param>
+            <param name="retain">保留小数点后几位</param>
             <returns>String with data size representation</returns>
         </member>
         <member name="M:AIO.ExtendLong.ToConverseStringMoney(System.Int64)">
@@ -4566,6 +4581,9 @@
         <member name="P:AIO.AProgress.EndValue">
             <inheritdoc />
         </member>
+        <member name="P:AIO.AProgress.RemainValue">
+            <inheritdoc />
+        </member>
         <member name="P:AIO.AProgress.StartValue">
             <inheritdoc />
         </member>
@@ -4838,6 +4856,11 @@
         <member name="P:AIO.IProgressReport.VirtualProgress">
             <summary>
             有效进度
+            </summary>
+        </member>
+        <member name="P:AIO.IProgressReport.RemainValue">
+            <summary>
+            剩余值
             </summary>
         </member>
         <member name="M:AIO.IProgressReport.ToString">

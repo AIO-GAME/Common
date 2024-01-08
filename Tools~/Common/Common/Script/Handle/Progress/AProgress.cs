@@ -81,7 +81,6 @@ namespace AIO
             Watch.Start();
         }
 
-
         /// <summary>
         /// 完成
         /// </summary>
@@ -265,7 +264,10 @@ namespace AIO
         /// <inheritdoc />
         public long EndValue { get; set; }
 
-        /// <inheritdoc />
+	    /// <inheritdoc />
+	    public long RemainValue => TotalValue - CurrentValue;
+
+	    /// <inheritdoc />
         public long StartValue
         {
             get => _StartValue;

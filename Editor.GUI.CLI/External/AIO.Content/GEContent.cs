@@ -21,7 +21,7 @@ namespace AIO.UEditor
 
         public static GUIContent GetSetting(string name)
         {
-            if (GCSetting.ContainsKey(name)) return GCSetting[name];
+            if (GCSetting.TryGetValue(name, out var setting)) return setting;
             GCSetting[name] = new GUIContent(Resources.Load<Texture>(name));
             return GCSetting[name];
         }
@@ -35,7 +35,7 @@ namespace AIO.UEditor
 
         public static GUIContent GetBuiltin(string name)
         {
-            if (GCBuiltin.ContainsKey(name)) return GCBuiltin[name];
+            if (GCBuiltin.TryGetValue(name, out var builtin)) return builtin;
             GCBuiltin[name] = EditorGUIUtility.IconContent(name);
             return GCBuiltin[name];
         }
@@ -43,28 +43,28 @@ namespace AIO.UEditor
         public static GUIContent NewSetting(string name, string tooltip)
         {
             if (!GCSetting.ContainsKey(name))
-                GCSetting[name] = new GUIContent(Resources.Load<Texture>(string.Format("Icon/Setting/{0}", name)));
+                GCSetting[name] = new GUIContent(Resources.Load<Texture>($"Icon/Setting/{name}"));
             return new GUIContent(GCSetting[name].image, tooltip);
         }
 
         public static GUIContent NewSetting(string name)
         {
             if (!GCSetting.ContainsKey(name))
-                GCSetting[name] = new GUIContent(Resources.Load<Texture>(string.Format("Icon/Setting/{0}", name)));
+                GCSetting[name] = new GUIContent(Resources.Load<Texture>($"Icon/Setting/{name}"));
             return new GUIContent(GCSetting[name].image);
         }
 
         public static GUIContent NewApp(string name)
         {
             if (!GCApp.ContainsKey(name))
-                GCApp[name] = new GUIContent(Resources.Load<Texture>(string.Format("Icon/App/{0}", name)));
+                GCApp[name] = new GUIContent(Resources.Load<Texture>($"Icon/App/{name}"));
             return new GUIContent(GCApp[name].image);
         }
 
         public static GUIContent NewApp(string name, string tooltip)
         {
             if (!GCApp.ContainsKey(name))
-                GCApp[name] = new GUIContent(Resources.Load<Texture>(string.Format("Icon/App/{0}", name)));
+                GCApp[name] = new GUIContent(Resources.Load<Texture>($"Icon/App/{name}"));
             return new GUIContent(GCApp[name].image, tooltip);
         }
 

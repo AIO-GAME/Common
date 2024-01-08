@@ -26,7 +26,7 @@
 ````json
 {
   "dependencies": {
-    "com.aio.package": "x.x.x"
+    "com.aio.package": "latest"
   },
   "scopedRegistries": [
     {
@@ -81,9 +81,9 @@ openupm add com.aio.package
 ## ⭐ About
 
 - **这是 Unity 通用API 工具函数调用包。它提供了一套函数调用工具来帮助开发者快速搭建项目**
-- ✅ **支持 Unity 2019.1 及以上版本**
+- ✅ **支持 Unity 2019.4 及以上版本**
 - ✅ **支持 Android/iOS/Windows/Mac/WebGL**
-- ✅ **支持 .NET 4.0 or later**
+- ✅ **支持 .NET 4.x**
 
 ## 📖 Documentation
 

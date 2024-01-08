@@ -9,69 +9,45 @@ namespace AIO
     public static class ExtendLong
     {
         /// <summary>
+        /// 单位
+        /// </summary>
+        private static readonly string[] unitStr = { "B", "KB", "MB", "GB", "TB", "PB", "EB" };
+
+        /// <summary>
         /// 将文件大小(字节)转换为最适合的显示方式
         /// Generate data size string. Will return a pretty string of bytes, KiB, MiB, GiB, TiB based on the given bytes.
         /// </summary>
         /// <param name="size">Data size in bytes</param>
+        /// <param name="retain">保留小数点后几位</param>
         /// <returns>String with data size representation</returns>
-        public static string ToConverseStringFileSize(this long size)
+        public static string ToConverseStringFileSize(this long size, uint retain = 2)
         {
             if (size < 0) return "Unknown";
-            var sb = new StringBuilder();
-            var bytes = size;
-            var absBytes = bytes;
+            if (size == 0) return "0 B";
 
-            if (absBytes >= 1024L * 1024L * 1024L * 1024L)
-            {
-                var tb = bytes / (1024L * 1024L * 1024L * 1024L);
-                var gb = bytes % (1024L * 1024L * 1024L * 1024L) / (1024 * 1024 * 1024);
-                sb.Append(tb);
-                sb.Append('.');
-                sb.Append((gb < 100) ? "0" : "");
-                sb.Append((gb < 10) ? "0" : "");
-                sb.Append(gb);
-                sb.Append(" TB");
-            }
-            else if (absBytes >= 1024 * 1024 * 1024)
-            {
-                var gb = bytes / (1024 * 1024 * 1024);
-                var mb = bytes % (1024 * 1024 * 1024) / (1024 * 1024);
-                sb.Append(gb);
-                sb.Append('.');
-                sb.Append((mb < 100) ? "0" : "");
-                sb.Append((mb < 10) ? "0" : "");
-                sb.Append(mb);
-                sb.Append(" GB");
-            }
-            else if (absBytes >= (1024 * 1024))
-            {
-                var mb = bytes / (1024 * 1024);
-                var kb = bytes % (1024 * 1024) / 1024;
-                sb.Append(mb);
-                sb.Append('.');
-                sb.Append((kb < 100) ? "0" : "");
-                sb.Append((kb < 10) ? "0" : "");
-                sb.Append(kb);
-                sb.Append(" MB");
-            }
-            else if (absBytes >= 1024)
-            {
-                var kb = bytes / 1024;
-                bytes %= 1024;
-                sb.Append(kb);
-                sb.Append('.');
-                sb.Append(bytes < 100 ? "0" : "");
-                sb.Append(bytes < 10 ? "0" : "");
-                sb.Append(bytes);
-                sb.Append(" KB");
-            }
-            else
-            {
-                sb.Append(bytes);
-                sb.Append(" bytes");
-            }
+            double bytes = size;
+            ushort suffixIndex = 0;
+            var limit = unitStr.Length - 1;
+            while (bytes >= 1024 && suffixIndex++ < limit) bytes /= 1024;
+            return $"{bytes.ToString($"N{retain}").TrimEnd('0', '.')} {unitStr[suffixIndex]}";
+        }
 
-            return sb.ToString();
+        /// <summary>
+        /// 将文件大小(字节)转换为最适合的显示方式
+        /// Generate data size string. Will return a pretty string of bytes, KiB, MiB, GiB, TiB based on the given bytes.
+        /// </summary>
+        /// <param name="size">Data size in bytes</param>
+        /// <param name="retain">保留小数点后几位</param>
+        /// <returns>String with data size representation</returns>
+        public static string ToConverseStringFileSize(this ulong size, uint retain = 2)
+        {
+            if (size == 0) return "0 B";
+
+            double bytes = size;
+            ushort suffixIndex = 0;
+            var limit = unitStr.Length - 1;
+            while (bytes >= 1024 && suffixIndex++ < limit) bytes /= 1024;
+            return $"{bytes.ToString($"N{retain}").TrimEnd('0', '.')} {unitStr[suffixIndex]}";
         }
 
         /// <summary>

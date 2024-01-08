@@ -189,7 +189,6 @@ namespace AIO
             Finish();
         }
 
-
         /// <summary>
         /// 迭代器等待
         /// </summary>
@@ -197,7 +196,6 @@ namespace AIO
         {
             throw new System.NotImplementedException();
         }
-
 
         /// <inheritdoc />
         public async Task WaitAsync()

@@ -11,13 +11,9 @@ using UnityEngine.Serialization;
 namespace AIO.RainbowFolders.Settings
 {
     [CreateAssetMenu(menuName = "Plugins/Project Ruleset", fileName = nameof(ProjectRuleset))]
-    [HelpURL("http://www.borodar.com/stuff/rainbowfolders/docs/quickstart_v2.1.0.pdf")]
+    [HelpURL("https://www.borodar.com/stuff/rainbowfolders/docs/quickstart_v2.1.0.pdf")]
     internal class ProjectRuleset : ScriptableObject
     {
-        private const string RELATIVE_PATH = "Editor/Data/RainbowFoldersRuleset.asset";
-
-        private const string DEVEL_PATH = "Assets/Devel/Editor/Data/RainbowFoldersRuleset.asset";
-
         private static readonly ProjectRule RECURSIVE_RULE = new ProjectRule(ProjectRule.KeyType.Name, string.Empty);
 
         [FormerlySerializedAs("Folders")] public List<ProjectRule> Rules;
@@ -38,74 +34,52 @@ namespace AIO.RainbowFolders.Settings
         {
             get
             {
-                if (_instance is null)
+                try
                 {
-                    try
+                    if (_instance is null)
                     {
-                        var paths = AssetDatabase.FindAssets($"t:{nameof(ProjectRuleset)}", new string[] { "Assets" })
-                            .Select(AssetDatabase.GUIDToAssetPath);
-                
-                        foreach (var expr in paths)
+                        foreach (var ruleset in AssetDatabase
+                                     .FindAssets($"t:{nameof(ProjectRuleset)}", new string[] { "Assets" })
+                                     .Select(AssetDatabase.GUIDToAssetPath)
+                                     .Select(AssetDatabase.LoadAssetAtPath<ProjectRuleset>))
                         {
-                            _instance = AssetDatabase.LoadAssetAtPath<ProjectRuleset>(expr);
-                            if (_instance is null) continue;
+                            if (ruleset is null) continue;
+                            _instance = ruleset;
                             break;
                         }
                     }
-                    catch (Exception)
-                    {
-                        // ignored
-                    }
-                }
 
-                if (_instance is null)
-                {
-                    try
+                    if (_instance is null)
                     {
-                        var paths = AssetDatabase.FindAssets($"t:{nameof(ProjectRuleset)}", new string[] { "Packages" })
-                            .Select(AssetDatabase.GUIDToAssetPath);
-
-                        foreach (var expr in paths)
+                        foreach (var ruleset in AssetDatabase
+                                     .FindAssets($"t:{nameof(ProjectRuleset)}", new string[] { "Packages" })
+                                     .Select(AssetDatabase.GUIDToAssetPath)
+                                     .Select(AssetDatabase.LoadAssetAtPath<ProjectRuleset>))
                         {
-                            _instance = AssetDatabase.LoadAssetAtPath<ProjectRuleset>(expr);
-                            if (_instance is null) continue;
+                            if (ruleset is null) continue;
+                            _instance = ruleset;
                             break;
                         }
                     }
-                    catch (Exception)
+
+                    if (_instance is null)
                     {
-                        // ignored
+                        var ruleset = Resources.Load<ProjectRuleset>($"Editor/RainbowAssets/{nameof(ProjectRuleset)}");
+                        if (ruleset != null) _instance = ruleset;
                     }
                 }
-
+                catch (Exception)
+                {
+                    // ignored
+                }
 
                 if (_instance is null)
                 {
-                    try
-                    {
-                        _instance = Resources.Load<ProjectRuleset>(
-                            $"Editor/RainbowFoldersRuleset/{nameof(ProjectRuleset)}");
-                    }
-                    catch (Exception)
-                    {
-                        // ignored
-                    }
-                }
-                
-                if (_instance is null)
-                {
-                    try
-                    {
-                        _instance = CreateInstance<ProjectRuleset>();
-                        var path = Path.Combine(Application.dataPath, "Editor", "Gen", "Settings");
-                        if (!Directory.Exists(path)) Directory.CreateDirectory(path);
-                        AssetDatabase.CreateAsset(_instance,
-                            $"Assets/Editor/Gen/Settings/{nameof(ProjectRuleset)}.asset");
-                    }
-                    catch (Exception)
-                    {
-                        // ignored
-                    }
+                    var path = Path.Combine(Application.dataPath, "Editor", "Gen", "Settings");
+                    if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+                    _instance = CreateInstance<ProjectRuleset>();
+                    AssetDatabase.CreateAsset(_instance,
+                        $"Assets/Editor/Gen/Settings/{nameof(ProjectRuleset)}.asset");
                 }
 
                 if (_instance is null)
@@ -329,8 +303,6 @@ namespace AIO.RainbowFolders.Settings
 
                         break;
                     }
-                    default:
-                        throw new ArgumentOutOfRangeException();
                 }
             }
         }
