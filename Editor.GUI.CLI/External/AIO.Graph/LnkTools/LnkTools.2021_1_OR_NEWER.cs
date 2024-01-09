@@ -5,6 +5,7 @@
 |*|============|*/
 
 #if UNITY_2021_1_OR_NEWER
+using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using MonoHook;
@@ -15,6 +16,7 @@ using UnityEditor.Toolbars;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Object = UnityEngine.Object;
 
 namespace AIO.UEditor
 {
@@ -107,50 +109,6 @@ namespace AIO.UEditor
                     ?.Invoke(m_Editor, null);
             }
 
-            private void CreateEditorContent()
-            {
-                m_Content?.RemoveFromHierarchy();
-                m_Content = null;
-                if (m_Editor is null) return;
-
-                if (isInToolbar)
-                {
-                    
-                }
-                if (layout == Layout.VerticalToolbar && isInToolbar)
-                {
-                    if (GetVerticalToolbarContent() is VisualElement visualElement)
-                    {
-                        content.Add(visualElement);
-                        goto ok;
-                    }
-                }
-
-                if (layout == Layout.VerticalToolbar && !collapsed)
-                {
-                    if (GetVerticalToolbarContent() is VisualElement visualElement)
-                    {
-                        content.Add(visualElement);
-                        goto ok;
-                    }
-                }
-
-                if (layout == Layout.HorizontalToolbar
-                    || (layout == Layout.VerticalToolbar && collapsed))
-                {
-                    if (GetHorizontalToolbarContent() is VisualElement visualElement)
-                    {
-                        content.Add(visualElement);
-                        goto ok;
-                    }
-                }
-
-                content.Add(m_Editor.CreateInspectorGUI() ?? new IMGUIContainer(m_Editor.OnInspectorGUI));
-
-                ok:
-                OnDraw(content);
-            }
-
             private VisualElement GetBool(LnkTools lnk)
             {
                 var toolbar = new EditorToolbarToggle(lnk.Content.image as Texture2D, lnk.Content.image as Texture2D)
@@ -220,7 +178,7 @@ namespace AIO.UEditor
                 }
             }
 
-            private void OnDraw(VisualElement element)
+            private void OnDraw(VisualElement element, FlexDirection flexDirection)
             {
                 element.Clear();
                 for (var index = 0; index < LnkToolList.Count; index++)
@@ -243,24 +201,87 @@ namespace AIO.UEditor
                 element.style.borderTopLeftRadius = 2f;
                 element.style.borderTopRightRadius = 2f;
                 element.style.unityBackgroundImageTintColor = Color.white;
+
                 if (layout == Layout.VerticalToolbar && !collapsed)
                 {
-                    element.style.flexDirection = collapsed ? FlexDirection.Row : FlexDirection.Column;
                     element.style.alignItems = Align.FlexStart;
                     element.style.alignSelf = Align.FlexStart;
                     element.style.alignContent = Align.FlexStart;
                 }
-                else
-                {
-                    element.style.flexDirection = FlexDirection.Row;
-                }
 
+                element.style.flexDirection = flexDirection;
                 element.style.justifyContent = Justify.SpaceBetween;
             }
 
             public override VisualElement CreatePanelContent()
             {
-                CreateEditorContent();
+                m_Content?.RemoveFromHierarchy();
+                m_Content = null;
+                if (m_Editor is null) return content;
+                var flexDirection = FlexDirection.Row;
+                if (isInToolbar)
+                {
+                    content.parent.
+                    var snap = GetType().GetProperty("floatingSnapCorner", ToolBarBindNon | BindingFlags.GetProperty)?.GetValue(this, null) ?? 0;
+                    Console.WriteLine(snap);
+
+                    switch ((int)snap)
+                    {
+                        case 0: // 上 下
+                        case 2:
+                            if (GetHorizontalToolbarContent() is VisualElement visualElement)
+                            {
+                                content.Add(visualElement);
+                                goto ok;
+                            }
+
+                            break;
+                        default:
+                            if (GetVerticalToolbarContent() is VisualElement visualElement2)
+                            {
+                                content.Add(visualElement2);
+                                flexDirection = FlexDirection.Column;
+                                goto ok;
+                            }
+
+                            break;
+                    }
+                }
+
+                if (layout == Layout.VerticalToolbar)
+                {
+                    if (!collapsed)
+                    {
+                        if (GetVerticalToolbarContent() is VisualElement visualElement)
+                        {
+                            content.Add(visualElement);
+                            flexDirection = FlexDirection.Column;
+                            goto ok;
+                        }
+                    }
+                    else
+                    {
+                        if (GetHorizontalToolbarContent() is VisualElement visualElement)
+                        {
+                            content.Add(visualElement);
+                            goto ok;
+                        }
+                    }
+                }
+
+                if (layout == Layout.HorizontalToolbar)
+                {
+                    if (GetHorizontalToolbarContent() is VisualElement visualElement)
+                    {
+                        content.Add(visualElement);
+                        goto ok;
+                    }
+                }
+
+                content.Add(m_Editor.CreateInspectorGUI() ?? new IMGUIContainer(m_Editor.OnInspectorGUI));
+
+                ok:
+                OnDraw(content, flexDirection);
                 return content;
             }
 
@@ -310,8 +331,15 @@ namespace AIO.UEditor
                 m_Editor = Editor.CreateEditor(activeTool?.GetValue(null) as Object);
             }
 
+            private void OnFloatingPositionChanged(Vector3 vector3)
+            {
+                floatingPosition = vector3;
+                GetType().GetMethod("RebuildContent", ToolBarBindNon)?.Invoke(this, null);
+            }
+
             public override void OnCreated()
             {
+                floatingPositionChanged += OnFloatingPositionChanged;
                 Undock();
             }
 
