@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace AIO
 {
-    public partial class PrDingding
+    public partial class PrDingTalk
     {
         private static PrCurl.Option GetOption()
         {

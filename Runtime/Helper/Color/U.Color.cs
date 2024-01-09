@@ -103,6 +103,7 @@ namespace AIO
             /// </summary>
             public static UnityEngine.Color HexToColor(string hex)
             {
+                hex = hex.TrimStart('#');
                 if (string.IsNullOrEmpty(hex) || hex.Length < 6) return UnityEngine.Color.white;
                 var br = byte.Parse(hex.Substring(0, 2), NumberStyles.HexNumber);
                 var bg = byte.Parse(hex.Substring(2, 2), NumberStyles.HexNumber);
@@ -118,6 +119,7 @@ namespace AIO
             /// </summary>
             public static Color32 HexToColor32(string hex)
             {
+                hex = hex.TrimStart('#');
                 if (string.IsNullOrEmpty(hex) || hex.Length < 8) return UnityEngine.Color.white;
                 var br = byte.Parse(hex.Substring(0, 2), NumberStyles.HexNumber);
                 var bg = byte.Parse(hex.Substring(2, 2), NumberStyles.HexNumber);

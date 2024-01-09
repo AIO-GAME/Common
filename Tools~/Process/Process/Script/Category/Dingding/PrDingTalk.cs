@@ -18,11 +18,11 @@ namespace AIO
     /// <summary>
     /// 命令 钉钉API
     /// </summary>
-    public partial class PrDingding
+    public partial class PrDingTalk
     {
-        private static PrDingding CreateInstance()
+        private static PrDingTalk CreateInstance()
         {
-            return new PrDingding();
+            return new PrDingTalk();
         }
 
         /// <summary>

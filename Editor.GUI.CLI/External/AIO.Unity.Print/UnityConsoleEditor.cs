@@ -29,6 +29,16 @@ namespace AIO.UEditor
         /// </summary>
         private const string MENU_EDITOR_SWITCH_LOG = "AIO/Debug/Console Log";
 
+        [LnkTools(
+            BackgroundColor = "#616161",
+            Tooltip = "Output Log",
+            IconResource = "Setting/icon_message")]
+        private static bool EditorSwitchLog()
+        {
+            EditorSwitchLOG();
+            return IS_EDITOR_SWITCH_LOG;
+        }
+
         /// <summary>
         /// 开发者模式
         /// </summary>

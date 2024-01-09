@@ -13,13 +13,23 @@ namespace AIO.UEditor
     /// </summary>
     internal static partial class LnkToolsHelper
     {
-        [LnkTools("Save Scene", "#00BFFF", "SaveAs", LnkToolsMode.OnlyEditor, -5)]
+        [LnkTools(
+            LnkToolsMode.OnlyEditor,
+            Priority = -5,
+            BackgroundColor = "#616161",
+            Tooltip = "Save Scene",
+            IconBuiltin = "SaveAs")]
         private static void SaveScene()
         {
             EditorApplication.ExecuteMenuItem("File/Save");
         }
-
-        [LnkTools("Save Project", "#00BFFF", "SaveAs", LnkToolsMode.OnlyEditor, -4)]
+        
+        [LnkTools(
+            LnkToolsMode.OnlyEditor,
+            Priority = -4,
+            Tooltip = "Save Project",
+            BackgroundColor = "#616161",
+            IconBuiltin = "SaveAs")]
         private static void SaveProject()
         {
             EditorApplication.ExecuteMenuItem("File/Save Project");

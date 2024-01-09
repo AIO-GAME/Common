@@ -10,7 +10,6 @@ using System.Runtime.InteropServices;
 using DotNetDetour;
 using UnityEngine;
 #if UNITY_EDITOR
-using UnityEditor;
 #endif
 
 
@@ -66,7 +65,7 @@ namespace MonoHook
     /// <summary>
     /// Hook 类，用来 Hook 某个 C# 方法
     /// </summary>
-    public unsafe class MethodHook
+    public unsafe class MethodHook:IDisposable
     {
         public string tag;
         public bool isHooked { get; private set; }
@@ -104,7 +103,7 @@ namespace MonoHook
         /// <param name="replacementMethod">准备好的替换方法</param>
         /// <param name="proxyMethod">如果还需要调用原始目标方法，可以通过此参数的方法调用，如果不需要可以填 null</param>
         /// <param name="data"></param>
-        public MethodHook(MethodBase targetMethod, MethodBase replacementMethod, MethodBase proxyMethod,
+        public MethodHook(MethodBase targetMethod, MethodBase replacementMethod, MethodBase proxyMethod = null,
             string data = "")
         {
             this.targetMethod = targetMethod;
@@ -385,5 +384,10 @@ namespace MonoHook
 #endif
 
         #endregion
+
+        public void Dispose()
+        {
+            Uninstall();
+        }
     }
 }
