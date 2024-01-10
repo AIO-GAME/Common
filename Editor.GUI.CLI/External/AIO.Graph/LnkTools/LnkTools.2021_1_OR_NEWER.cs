@@ -4,11 +4,15 @@
 |*|E-Mail:     |*| xinansky99@gmail.com
 |*|============|*/
 
+
 #if UNITY_2021_1_OR_NEWER
-using System;
-using System.Reflection;
+#if !UNITY_2023_1_OR_NEWER
 using System.Runtime.CompilerServices;
 using MonoHook;
+using System;
+#endif
+
+using System.Reflection;
 using UnityEditor;
 using UnityEditor.EditorTools;
 using UnityEditor.Overlays;
@@ -20,12 +24,57 @@ using Object = UnityEngine.Object;
 namespace AIO.UEditor
 {
     [Overlay(typeof(SceneView), "Lnk", true)]
-    [Icon("Packages/com.aio.cli.asset/Resources/Setting/icon_option_button.png")]
+    [Icon("Packages/com.aio.package/Resources/Editor/Icon/Setting/icon_option_button.png")]
     public class LnkToolOverlay : ToolbarOverlay, ITransientOverlay
+#if UNITY_2023_1_OR_NEWER
+        , ICreateHorizontalToolbar, ICreateVerticalToolbar
+#endif
     {
-        private const BindingFlags ToolBarBind = BindingFlags.Instance | BindingFlags.Public;
-        private const BindingFlags ToolBarBindNon = BindingFlags.Instance | BindingFlags.NonPublic;
-        public const string k_Id = "unity-lnk-toolbar";
+#if UNITY_2023_1_OR_NEWER
+        /// <summary>
+        /// 创建竖排工具栏
+        /// </summary>
+        public new OverlayToolbar CreateVerticalToolbarContent()
+        {
+            var toolbar = new OverlayToolbar();
+            OnDraw(toolbar, true);
+            return toolbar;
+        }
+
+        /// <summary>
+        /// 创建横排工具栏
+        /// </summary>
+        public new OverlayToolbar CreateHorizontalToolbarContent()
+        {
+            var toolbar = new OverlayToolbar();
+            OnDraw(toolbar, false);
+            return toolbar;
+        }
+#else
+        [MethodImpl(MethodImplOptions.NoOptimization)]
+        public virtual VisualElement OnCreateHorizontalToolbarContent()
+        {
+            var isLnk = GetType().Name != nameof(LnkToolOverlay);
+            if (!isLnk) return CreatePanelContent();
+            var type = typeof(ToolbarOverlay);
+            var method = type.GetMethod("CreateToolbarContent", ToolBarBindNon);
+            if (method is null) return CreatePanelContent();
+            var invoke = method.Invoke(this, null) as VisualElement;
+            return invoke ?? CreatePanelContent();
+        }
+
+        [MethodImpl(MethodImplOptions.NoOptimization)]
+        public virtual VisualElement OnCreateVerticalToolbarContent()
+        {
+            var isLnk = GetType().Name != nameof(LnkToolOverlay);
+            if (!isLnk) return CreatePanelContent();
+            var type = typeof(ToolbarOverlay);
+            var method = type.GetMethod("CreateToolbarContent", ToolBarBindNon);
+            if (method is null) return CreatePanelContent();
+            var invoke = method.Invoke(this, null) as VisualElement;
+            return invoke ?? CreatePanelContent();
+        }
+
         private static readonly MethodHook _hook1;
         private static readonly MethodHook _hook2;
 
@@ -43,26 +92,6 @@ namespace AIO.UEditor
             var Replacement = type.GetMethod("OnCreateVerticalToolbarContent", ToolBarBind);
             _hook2 = new MethodHook(Target, Replacement);
             _hook2.Install();
-        }
-
-        public bool visible => content?.visible ?? false;
-        private Editor m_Editor;
-        private VisualElement m_Content;
-
-        private VisualElement content
-        {
-            get
-            {
-                if (m_Content == null)
-                {
-                    m_Content = new VisualElement
-                    {
-                        name = "toolbar-overlay"
-                    };
-                }
-
-                return m_Content;
-            }
         }
 
         protected override Layout supportedLayouts
@@ -96,6 +125,34 @@ namespace AIO.UEditor
         {
             if (m_Editor is null) return null;
             return m_Editor.GetType().GetMethod("CreateHorizontalToolbarContent", ToolBarBind)?.Invoke(m_Editor, null);
+        }
+
+#endif
+
+
+        private const BindingFlags ToolBarBind = BindingFlags.Instance | BindingFlags.Public;
+        private const BindingFlags ToolBarBindNon = BindingFlags.Instance | BindingFlags.NonPublic;
+        public const string k_Id = "unity-lnk-toolbar";
+
+
+        public bool visible => content?.visible ?? false;
+        private Editor m_Editor;
+        private VisualElement m_Content;
+
+        private VisualElement content
+        {
+            get
+            {
+                if (m_Content == null)
+                {
+                    m_Content = new VisualElement
+                    {
+                        name = "toolbar-overlay"
+                    };
+                }
+
+                return m_Content;
+            }
         }
 
         /// <summary>
@@ -328,36 +385,16 @@ namespace AIO.UEditor
             };
             if (m_Editor is null) return m_Content;
             var isVertical = IsVertical();
+#if UNITY_2023_1_OR_NEWER
+            m_Content.Add(CreateContent(isVertical ? Layout.VerticalToolbar : Layout.HorizontalToolbar));
+#else
             if ((isVertical
                     ? GetVerticalToolbarContent()
                     : GetHorizontalToolbarContent()) is VisualElement visualElement) m_Content.Add(visualElement);
             else m_Content.Add(m_Editor.CreateInspectorGUI() ?? new IMGUIContainer(m_Editor.OnInspectorGUI));
+#endif
             OnDraw(m_Content, isVertical);
             return m_Content;
-        }
-
-        [MethodImpl(MethodImplOptions.NoOptimization)]
-        public virtual VisualElement OnCreateHorizontalToolbarContent()
-        {
-            var isLnk = GetType().Name != nameof(LnkToolOverlay);
-            if (!isLnk) return CreatePanelContent();
-            var type = typeof(ToolbarOverlay);
-            var method = type.GetMethod("CreateToolbarContent", ToolBarBindNon);
-            if (method is null) return CreatePanelContent();
-            var invoke = method.Invoke(this, null) as VisualElement;
-            return invoke ?? CreatePanelContent();
-        }
-
-        [MethodImpl(MethodImplOptions.NoOptimization)]
-        public virtual VisualElement OnCreateVerticalToolbarContent()
-        {
-            var isLnk = GetType().Name != nameof(LnkToolOverlay);
-            if (!isLnk) return CreatePanelContent();
-            var type = typeof(ToolbarOverlay);
-            var method = type.GetMethod("CreateToolbarContent", ToolBarBindNon);
-            if (method is null) return CreatePanelContent();
-            var invoke = method.Invoke(this, null) as VisualElement;
-            return invoke ?? CreatePanelContent();
         }
 
         public LnkToolOverlay()
