@@ -88,14 +88,14 @@ namespace AIO.UEditor
 
         private object GetVerticalToolbarContent()
         {
-            return m_Editor.GetType().GetMethod("CreateVerticalToolbarContent", ToolBarBind)
-                ?.Invoke(m_Editor, null);
+            if (m_Editor is null) return null;
+            return m_Editor.GetType().GetMethod("CreateVerticalToolbarContent", ToolBarBind)?.Invoke(m_Editor, null);
         }
 
         private object GetHorizontalToolbarContent()
         {
-            return m_Editor.GetType().GetMethod("CreateHorizontalToolbarContent", ToolBarBind)
-                ?.Invoke(m_Editor, null);
+            if (m_Editor is null) return null;
+            return m_Editor.GetType().GetMethod("CreateHorizontalToolbarContent", ToolBarBind)?.Invoke(m_Editor, null);
         }
 
         /// <summary>
@@ -112,7 +112,17 @@ namespace AIO.UEditor
             if (lnk.Content.image is Texture2D image)
             {
                 toolbar.style.backgroundImage = image;
+#if UNITY_2022_1_OR_NEWER
+                toolbar.style.backgroundRepeat =
+                    new StyleBackgroundRepeat(new BackgroundRepeat(Repeat.NoRepeat, Repeat.NoRepeat));
+                toolbar.style.backgroundPositionX =
+                    new StyleBackgroundPosition(new BackgroundPosition(BackgroundPositionKeyword.Center));
+                toolbar.style.backgroundPositionY =
+                    new StyleBackgroundPosition(new BackgroundPosition(BackgroundPositionKeyword.Center));
+                toolbar.style.backgroundSize = new StyleBackgroundSize(new BackgroundSize(BackgroundSizeType.Contain));
+#else
                 toolbar.style.unityBackgroundScaleMode = ScaleMode.ScaleToFit;
+#endif
             }
             else toolbar.text = lnk.Content.text;
 
@@ -141,7 +151,17 @@ namespace AIO.UEditor
             if (lnk.Content.image is Texture2D image)
             {
                 toolbar.style.backgroundImage = image;
+#if UNITY_2022_1_OR_NEWER
+                toolbar.style.backgroundRepeat =
+                    new StyleBackgroundRepeat(new BackgroundRepeat(Repeat.NoRepeat, Repeat.NoRepeat));
+                toolbar.style.backgroundPositionX =
+                    new StyleBackgroundPosition(new BackgroundPosition(BackgroundPositionKeyword.Center));
+                toolbar.style.backgroundPositionY =
+                    new StyleBackgroundPosition(new BackgroundPosition(BackgroundPositionKeyword.Center));
+                toolbar.style.backgroundSize = new StyleBackgroundSize(new BackgroundSize(BackgroundSizeType.Contain));
+#else
                 toolbar.style.unityBackgroundScaleMode = ScaleMode.ScaleToFit;
+#endif
             }
             else toolbar.text = lnk.Content.text;
 
@@ -319,19 +339,25 @@ namespace AIO.UEditor
         [MethodImpl(MethodImplOptions.NoOptimization)]
         public virtual VisualElement OnCreateHorizontalToolbarContent()
         {
-            return GetType().Name != nameof(LnkToolOverlay)
-                ? typeof(ToolbarOverlay).GetMethod("CreateToolbarContent",
-                    ToolBarBindNon)?.Invoke(this, null) as VisualElement
-                : CreatePanelContent();
+            var isLnk = GetType().Name != nameof(LnkToolOverlay);
+            if (!isLnk) return CreatePanelContent();
+            var type = typeof(ToolbarOverlay);
+            var method = type.GetMethod("CreateToolbarContent", ToolBarBindNon);
+            if (method is null) return CreatePanelContent();
+            var invoke = method.Invoke(this, null) as VisualElement;
+            return invoke ?? CreatePanelContent();
         }
 
         [MethodImpl(MethodImplOptions.NoOptimization)]
         public virtual VisualElement OnCreateVerticalToolbarContent()
         {
-            return GetType().Name != nameof(LnkToolOverlay)
-                ? typeof(ToolbarOverlay).GetMethod("CreateToolbarContent", ToolBarBindNon)
-                    ?.Invoke(this, null) as VisualElement
-                : CreatePanelContent();
+            var isLnk = GetType().Name != nameof(LnkToolOverlay);
+            if (!isLnk) return CreatePanelContent();
+            var type = typeof(ToolbarOverlay);
+            var method = type.GetMethod("CreateToolbarContent", ToolBarBindNon);
+            if (method is null) return CreatePanelContent();
+            var invoke = method.Invoke(this, null) as VisualElement;
+            return invoke ?? CreatePanelContent();
         }
 
         public LnkToolOverlay()

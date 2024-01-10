@@ -31,8 +31,8 @@ namespace AIO.UEditor
 
         [LnkTools(
             BackgroundColor = "#616161",
-            Tooltip = "Output Log",
-            IconResource = "Setting/icon_message")]
+            Tooltip = "支持读取 Console.WriteLine 日志",
+            IconResource = "Editor/Icon/Color/-message")]
         private static bool EditorSwitchLog()
         {
             EditorSwitchLOG();
