@@ -23,7 +23,11 @@ using Object = UnityEngine.Object;
 
 namespace AIO.UEditor
 {
-    [Overlay(typeof(SceneView), "Lnk", true)]
+    [Overlay(typeof(SceneView), "Lnk", true
+#if UNITY_2023_1_OR_NEWER
+        , defaultLayout = Layout.VerticalToolbar
+#endif
+    )]
     [Icon("Packages/com.aio.package/Resources/Editor/Icon/Setting/icon_option_button.png")]
     public class LnkToolOverlay : ToolbarOverlay, ITransientOverlay
 #if UNITY_2023_1_OR_NEWER

@@ -10,7 +10,6 @@ using System.Runtime.InteropServices;
 using DotNetDetour;
 using UnityEngine;
 #if UNITY_EDITOR
-using UnityEditor;
 #endif
 
 
