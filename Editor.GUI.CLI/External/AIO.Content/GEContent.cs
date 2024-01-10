@@ -46,6 +46,13 @@ namespace AIO.UEditor
                 GCSetting[name] = new GUIContent(Resources.Load<Texture>($"Editor/Icon/Setting/{name}"));
             return new GUIContent(GCSetting[name].image, tooltip);
         }
+        
+        public static GUIContent NewSettingCustom(string path, string tooltip)
+        {
+            if (!GCSetting.ContainsKey(path))
+                GCSetting[path] = new GUIContent(Resources.Load<Texture>(path));
+            return new GUIContent(GCSetting[path].image, tooltip);
+        }
 
         public static GUIContent NewSetting(string name)
         {

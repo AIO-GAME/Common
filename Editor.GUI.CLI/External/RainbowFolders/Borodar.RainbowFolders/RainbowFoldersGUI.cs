@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using AIO.RainbowCore;
@@ -64,14 +63,10 @@ namespace AIO.RainbowFolders
                 if (ProjectRuleset.Instance is null) return;
                 if (!AssetFolderCache.TryGetValue(guid, out var path)) return;
                 var ruleByPath = ProjectRuleset.Instance.GetRuleByPath(path, true);
-                if (ruleByPath != null)
-                {
-                    if (ProjectPreferences.DrawCustomBackground)
-                        DrawCustomBackground(rect, ruleByPath, isSmall);
+                if (ruleByPath is null) return;
 
-                    if (ProjectPreferences.ReplaceFolderIcons)
-                        ReplaceIcon(assetId, ruleByPath, isSmall);
-                }
+                if (ProjectPreferences.DrawCustomBackground) DrawCustomBackground(rect, ruleByPath, isSmall);
+                if (ProjectPreferences.ReplaceFolderIcons) ReplaceIcon(assetId, ruleByPath, isSmall);
             }
         }
 
