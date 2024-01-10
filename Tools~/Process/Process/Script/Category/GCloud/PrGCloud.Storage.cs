@@ -31,7 +31,7 @@ namespace AIO
                 SAVE_TO_LOCATION = SAVE_TO_LOCATION.Replace("\\", "/").TrimEnd('/');
                 if (File.Exists(SAVE_TO_LOCATION) && !overwrite) return PrEmpty.Executor;
                 BUCKET_PATH = BUCKET_PATH.Replace("\\", "/").TrimEnd('/');
-                return Create().Input($"{CMD} {Usage.Storage} cp gs://{BUCKET_PATH} {SAVE_TO_LOCATION}");
+                return Create($"{Usage.Storage} cp gs://{BUCKET_PATH} {SAVE_TO_LOCATION}");
             }
 
             /// <summary>
@@ -54,10 +54,10 @@ namespace AIO
                 OBJECT_LOCATION = OBJECT_LOCATION.Replace("\\", "/").TrimEnd('/');
                 if (!File.Exists(OBJECT_LOCATION)) return PrEmpty.Executor;
                 BUCKET_PATH = BUCKET_PATH.Replace("\\", "/").TrimEnd('/');
-                var ExecutorUpload = Create().Input($"{CMD} {Usage.Storage} cp {OBJECT_LOCATION} gs://{BUCKET_PATH}");
+                var ExecutorUpload = Create($"{Usage.Storage} cp {OBJECT_LOCATION} gs://{BUCKET_PATH}");
                 if (string.IsNullOrEmpty(METADATA_FLAG)) return ExecutorUpload;
 
-                var ExecutorUpdate = Create().Input($"{CMD} storage objects update gs://{BUCKET_PATH} {METADATA_FLAG}");
+                var ExecutorUpdate = Create($"storage objects update gs://{BUCKET_PATH} {METADATA_FLAG}");
                 return ExecutorUpload.Link(ExecutorUpdate);
             }
 
@@ -82,16 +82,16 @@ namespace AIO
                 if (!Directory.Exists(OBJECT_LOCATION)) return PrEmpty.Executor;
 
                 BUCKET_PATH = BUCKET_PATH.Replace("\\", "/").TrimEnd('/');
-                var ExeUpload = Create()
-                    .Input($"{CMD} {Usage.Storage} cp {OBJECT_LOCATION} gs://{BUCKET_PATH} --recursive");
+                var ExeUpload = Create($"{Usage.Storage} cp {OBJECT_LOCATION} gs://{BUCKET_PATH} --recursive");
                 if (string.IsNullOrEmpty(METADATA_FLAG)) return ExeUpload;
 
-                var ExeUpdate = Create();
+                var ExeUpdate = PrEmpty.Executor;
                 var index = OBJECT_LOCATION.Length + 1;
                 foreach (var file in Directory.GetFiles(OBJECT_LOCATION, "*.*", SearchOption.AllDirectories))
                 {
                     var temp = $"{BUCKET_PATH}/{file.Substring(index).Replace("\\", "/")}";
-                    ExeUpdate.Input($"{CMD} {Usage.Storage} objects update gs://{temp} {METADATA_FLAG}");
+                    var te = Create($"{Usage.Storage} objects update gs://{temp} {METADATA_FLAG}");
+                    ExeUpdate = ExeUpload.Link(te);
                 }
 
                 return ExeUpload.Link(ExeUpdate);
@@ -114,7 +114,7 @@ namespace AIO
             {
                 if (string.IsNullOrEmpty(METADATA_FLAG)) throw new Exception("METADATA_FLAG is null");
                 BUCKET_PATH = BUCKET_PATH.Replace("\\", "/").TrimEnd('/');
-                return Create().Input($"{CMD} {Usage.Storage} objects update gs://{BUCKET_PATH} {METADATA_FLAG}");
+                return Create($"{Usage.Storage} objects update gs://{BUCKET_PATH} {METADATA_FLAG}");
             }
 
             /// <summary>
@@ -125,7 +125,7 @@ namespace AIO
             public static IExecutor MetadataLook(string BUCKET_PATH)
             {
                 BUCKET_PATH = BUCKET_PATH.Replace("\\", "/").TrimEnd('/');
-                return Create(Usage.Storage, $"objects describe gs://{BUCKET_PATH}");
+                return Create($"{Usage.Storage} objects describe gs://{BUCKET_PATH}");
             }
         }
     }

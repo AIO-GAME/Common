@@ -14,13 +14,8 @@ namespace AIO
     /// <summary>
     /// Google Cloud Platform
     /// </summary>
-    public sealed partial class PrGCloud : PrCourse
+    public sealed partial class PrGCloud
     {
-        [DebuggerHidden, DebuggerNonUserCode]
-        private PrGCloud()
-        {
-        }
-
         /// <summary>
         /// 命令
         /// </summary>
@@ -42,41 +37,6 @@ namespace AIO
             public const string Help = "help";
         }
 
-        /// <summary>
-        /// 运行
-        /// </summary>
-        /// <returns><see cref="IExecutor"/></returns>
-        [DebuggerHidden, DebuggerNonUserCode]
-        public override IExecutor Execute()
-        {
-            try
-            {
-                SetFileName("cmd");
-                SetInCreateNoWindow(true);
-                SetInUseShellExecute(false);
-                SetRedirectError(true);
-                SetRedirectOutput(true);
-
-                if (string.IsNullOrEmpty(Info.WorkingDirectory))
-                    Info.WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory;
-
-                encoding = encoding ?? Encoding.UTF8;
-
-#if (NETCOREAPP1_0 || NETCOREAPP1_1 || NETCOREAPP2_0 || NETCOREAPP2_1 || NETCOREAPP3_0 || NETCOREAPP3_1)
-                if (p.StartInfo.RedirectStandardInput) p.StartInfo.StandardInputEncoding = encoding;
-#endif
-
-                if (Info.RedirectStandardOutput) Info.StandardOutputEncoding = encoding;
-                if (Info.RedirectStandardError) Info.StandardErrorEncoding = encoding;
-            }
-            catch (Exception ex)
-            {
-                return new ExecutorException(Info, ex);
-            }
-
-            return new Executor(Info, EnableOutput);
-        }
-
         private static IExecutor Create()
         {
             switch (Environment.OSVersion.Platform)
@@ -88,7 +48,7 @@ namespace AIO
                     return PrCmd.Create();
                 case PlatformID.MacOSX:
                 case PlatformID.Unix:
-                    return new PrMac().Execute();
+                    return PrMac.Create(CMD);
                 default: throw new NotImplementedException();
             }
         }
@@ -109,7 +69,7 @@ namespace AIO
                     return PrCmd.Create().Input($"{CMD} {args}");
                 case PlatformID.MacOSX:
                 case PlatformID.Unix:
-                    return new PrMac().Execute().Input($"{CMD} {args}");
+                    return PrMac.Create(CMD, args);
                 default: throw new NotImplementedException();
             }
         }

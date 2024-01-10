@@ -43,28 +43,28 @@ namespace AIO.UEditor
         public static GUIContent NewSetting(string name, string tooltip)
         {
             if (!GCSetting.ContainsKey(name))
-                GCSetting[name] = new GUIContent(Resources.Load<Texture>($"Icon/Setting/{name}"));
+                GCSetting[name] = new GUIContent(Resources.Load<Texture>($"Editor/Icon/Setting/{name}"));
             return new GUIContent(GCSetting[name].image, tooltip);
         }
 
         public static GUIContent NewSetting(string name)
         {
             if (!GCSetting.ContainsKey(name))
-                GCSetting[name] = new GUIContent(Resources.Load<Texture>($"Icon/Setting/{name}"));
+                GCSetting[name] = new GUIContent(Resources.Load<Texture>($"Editor/Icon/Setting/{name}"));
             return new GUIContent(GCSetting[name].image);
         }
 
         public static GUIContent NewApp(string name)
         {
             if (!GCApp.ContainsKey(name))
-                GCApp[name] = new GUIContent(Resources.Load<Texture>($"Icon/App/{name}"));
+                GCApp[name] = new GUIContent(Resources.Load<Texture>($"Editor/Icon/App/{name}"));
             return new GUIContent(GCApp[name].image);
         }
 
         public static GUIContent NewApp(string name, string tooltip)
         {
             if (!GCApp.ContainsKey(name))
-                GCApp[name] = new GUIContent(Resources.Load<Texture>($"Icon/App/{name}"));
+                GCApp[name] = new GUIContent(Resources.Load<Texture>($"Editor/Icon/App/{name}"));
             return new GUIContent(GCApp[name].image, tooltip);
         }
 
@@ -85,7 +85,7 @@ namespace AIO.UEditor
         public static void LoadSetting()
         {
             GCSetting.Clear();
-            foreach (var texture in Resources.LoadAll<Texture2D>("Icon/Setting"))
+            foreach (var texture in Resources.LoadAll<Texture2D>("Editor/Icon/Setting"))
             {
                 GCSetting[texture.name] = new GUIContent(texture);
             }
@@ -94,7 +94,7 @@ namespace AIO.UEditor
         public static void LoadApp()
         {
             GCApp.Clear();
-            foreach (var texture in Resources.LoadAll<Texture2D>("Icon/App"))
+            foreach (var texture in Resources.LoadAll<Texture2D>("Editor/Icon/App"))
             {
                 GCApp[texture.name] = new GUIContent(texture);
             }

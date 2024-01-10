@@ -1637,12 +1637,6 @@
             帮助
             </summary>
         </member>
-        <member name="M:AIO.PrGCloud.Execute">
-            <summary>
-            运行
-            </summary>
-            <returns><see cref="T:AIO.IExecutor"/></returns>
-        </member>
         <member name="M:AIO.PrGCloud.Create(System.String)">
             <summary>
             Create a new instance of PrGCloud

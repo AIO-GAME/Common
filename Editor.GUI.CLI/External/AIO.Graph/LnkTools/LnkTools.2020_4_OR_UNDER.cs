@@ -5,12 +5,12 @@
 |*|============|*/
 
 #if !UNITY_2021_1_OR_NEWER
+using System;
 using UnityEditor;
 using UnityEngine;
 
 namespace AIO.UEditor
 {
-    [InitializeOnLoad]
     internal static partial class LnkToolsHelper
     {
         private static bool IsEnableLnkTools;
@@ -23,14 +23,10 @@ namespace AIO.UEditor
         /// </summary>
         private static bool Thumbnail;
 
-        static LnkToolsHelper()
-        {
-            OnInitLnkTools();
-        }
-
         /// <summary>
         /// 初始化快捷工具箱
         /// </summary>
+        [InitializeOnLoadMethod]
         private static void OnInitLnkTools()
         {
             Content_Thumbnail = EditorGUIUtility.IconContent("ArrowNavigationLeft");
@@ -41,9 +37,7 @@ namespace AIO.UEditor
             Thumbnail = EditorPrefs.GetBool("Thumbnail", false);
             IsEnableLnkTools = EditorPrefs.GetBool(EditorPrefsTable.LnkTools_Enable, true);
             if (!IsEnableLnkTools) return;
-            GetLnkTools();
-
-            Height = (LnkToolList.Count + 1) * 22 + 3;
+            Height = Data.Count * 22 - 2;
             SceneView.duringSceneGui += OnLnkToolsGUI;
         }
 
@@ -52,23 +46,26 @@ namespace AIO.UEditor
         /// </summary>
         private static void OnLnkToolsGUI(SceneView sceneView)
         {
+            var rect = new Rect(
+                sceneView.position.width - 10,
+                sceneView.in2DMode ? 2 : sceneView.position.height / 2 - 10,
+                10,
+                20);
             Handles.BeginGUI();
-            var rect = Rect.zero;
-            var x = sceneView.position.width - 45;
-            var y = sceneView.in2DMode ? 25 : sceneView.position.height / 2 - Height / 2;
-
-            rect.Set(sceneView.position.width - 10, y, 10, 20);
             if (GUI.Button(rect, Thumbnail ? Content_Thumbnail : Content_Restore, "InvisibleButton"))
             {
                 Thumbnail = !Thumbnail;
                 EditorPrefs.SetBool("Thumbnail", Thumbnail);
             }
 
-
             if (!Thumbnail)
             {
-                var height = 22 + 3 - Height / 2;
-                foreach (var lnk in LnkToolList)
+                rect.Set(
+                    sceneView.position.width - 45,
+                    sceneView.in2DMode ? rect.y : rect.y + 10 - Height / 2,
+                    30,
+                    20);
+                foreach (var lnk in Data)
                 {
                     switch (lnk.Mode)
                     {
@@ -78,25 +75,17 @@ namespace AIO.UEditor
                         case LnkToolsMode.OnlyEditor:
                             GUI.enabled = !EditorApplication.isPlaying;
                             break;
-                        default:
-                            GUI.enabled = true;
-                            break;
                     }
 
-                    rect.Set(x, y + height, 30, 20);
-                    height += 22;
 
-                    GUI.backgroundColor = lnk.BGColor;
-                    if (GUI.Button(rect, lnk.Content))
-                    {
-                        lnk.Method.Invoke(null, null);
-                    }
-
-                    GUI.backgroundColor = Color.white;
+                    GUI.backgroundColor = lnk.BackgroundColor;
+                    GELayout.Button(rect, lnk.Content, lnk.Invoke);
+                    rect.y += 22;
+                    if (!GUI.enabled) GUI.enabled = true;
                 }
-            }
 
-            GUI.enabled = true;
+                GUI.backgroundColor = Color.white;
+            }
 
             Handles.EndGUI();
         }
