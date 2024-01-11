@@ -1,8 +1,17 @@
 namespace AIO.YamlDotNet.Core
 {
-	internal enum ScalarStyle
+	/// <summary>
+	/// Defines the style of a scalar.
+	/// </summary>
+	public enum ScalarStyle
 	{
+		/// <summary>
+		/// Any scalar style.
+		/// </summary>
 		Any,
+		/// <summary>
+		/// The plain scalar style.
+		/// </summary>
 		Plain,
 		SingleQuoted,
 		DoubleQuoted,

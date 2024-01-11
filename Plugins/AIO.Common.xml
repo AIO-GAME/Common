@@ -4,6 +4,21 @@
         <name>AIO.Common</name>
     </assembly>
     <members>
+        <member name="T:AIO.YamlDotNet.Core.ScalarStyle">
+            <summary>
+            Defines the style of a scalar.
+            </summary>
+        </member>
+        <member name="F:AIO.YamlDotNet.Core.ScalarStyle.Any">
+            <summary>
+            Any scalar style.
+            </summary>
+        </member>
+        <member name="F:AIO.YamlDotNet.Core.ScalarStyle.Plain">
+            <summary>
+            The plain scalar style.
+            </summary>
+        </member>
         <member name="T:AIO.LruCache">
             <summary>
             LRU 缓存淘汰算法 (Least Recently Used)

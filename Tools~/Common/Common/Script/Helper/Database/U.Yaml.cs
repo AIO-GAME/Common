@@ -22,6 +22,7 @@ namespace AIO
             /// </summary>
             public static string Serialize(in object data)
             {
+                // 创建Yaml序列化器
                 var serializer = new SerializerBuilder().WithIndentedSequences()
                     .WithNamingConvention(CamelCaseNamingConvention.Instance).Build();
                 return serializer.Serialize(data);

@@ -44,7 +44,18 @@ namespace AIO
         /// </summary>
         public int LineNumber { get; set; }
 
-        private static string Project;
+        private static string Project
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_project))
+                    _project = Application.dataPath.Substring(0,
+                        Application.dataPath.LastIndexOf("/", StringComparison.CurrentCulture) + 1);
+                return _project;
+            }
+        }
+
+        private static string _project;
 
         public IgnoreConsoleJumpAttribute(bool ignore = false,
             [CallerFilePath] string filePath = "",
@@ -53,9 +64,6 @@ namespace AIO
         )
         {
             Ignore = ignore;
-            if (string.IsNullOrEmpty(Project))
-                Project = Application.dataPath.Substring(0,
-                    Application.dataPath.LastIndexOf("/", StringComparison.CurrentCulture) + 1);
             FilePath = filePath.Replace('\\', '/').Replace(Project, "");
             MemberName = memberName;
             LineNumber = lineNumber;
