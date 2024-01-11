@@ -116,6 +116,7 @@ namespace AIO.UEditor
                 {
                     image = Resources.Load<Texture2D>(attribute.IconResource)
                 };
+
             if (Temp?.image is null)
             {
                 Temp = new GUIContent
@@ -125,6 +126,7 @@ namespace AIO.UEditor
                 };
             }
             else Temp.tooltip = attribute.Tooltip;
+
             return Temp;
         }
 
@@ -142,7 +144,7 @@ namespace AIO.UEditor
                 : Color.white;
             BackgroundColor = ColorUtility.TryParseHtmlString(attribute.BackgroundColor, out var color2)
                 ? color2
-                : Color.white;
+                : new Color(0.3592f, 0.3592f, 0.3592f); //#616161
             Mode = attribute.Mode;
             Priority = attribute.Priority;
             Method = method;

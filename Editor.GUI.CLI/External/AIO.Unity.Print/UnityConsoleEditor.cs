@@ -6,12 +6,15 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
 namespace AIO.UEditor
 {
+    [DebuggerNonUserCode]
+    [IgnoreConsoleJump]
     [Description("Unity Console Editor : 日志输出开关")]
     internal static class UnityConsoleEditor
     {
@@ -30,7 +33,6 @@ namespace AIO.UEditor
         private const string MENU_EDITOR_SWITCH_LOG = "AIO/Debug/Console Log";
 
         [LnkTools(
-            BackgroundColor = "#616161",
             Tooltip = "支持读取 Console.WriteLine 日志",
             IconResource = "Editor/Icon/Color/-message")]
         private static bool EditorSwitchLog()
@@ -79,6 +81,7 @@ namespace AIO.UEditor
         private static MethodInfo EnabledLog;
         private static MethodInfo DisableLog;
 
+        [IgnoreConsoleJump]
         private static void ErrorEnabled()
         {
             if (EnabledError is null)
@@ -97,6 +100,7 @@ namespace AIO.UEditor
             EnabledError?.Invoke(null, null);
         }
 
+        [IgnoreConsoleJump]
         private static void ErrorDisabled()
         {
             if (DisableError is null)
@@ -115,6 +119,8 @@ namespace AIO.UEditor
             DisableError?.Invoke(null, null);
         }
 
+
+        [IgnoreConsoleJump]
         private static void LogEnabled()
         {
             if (EnabledLog is null)
@@ -133,6 +139,7 @@ namespace AIO.UEditor
             EnabledLog?.Invoke(null, null);
         }
 
+        [IgnoreConsoleJump]
         private static void LogDisabled()
         {
             if (DisableLog is null)
