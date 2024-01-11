@@ -9,6 +9,17 @@ namespace AIO
         public partial class IO
         {
             /// <summary>
+            /// 异步 按照指定编码读取文本文件
+            /// </summary>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static async Task<string> ReadTextAsync(
+                string path,
+                string charset)
+            {
+                return Encoding.GetEncoding(charset).GetString(await ReadFileAsync(path));
+            }
+
+            /// <summary>
             /// 异步 将字符串按照指定编码写入文件,是否追加到文件尾
             /// </summary>
             /// <param name="path">路径</param>
@@ -24,17 +35,6 @@ namespace AIO
             {
                 var b = Encoding.GetEncoding(charset).GetBytes(text);
                 return await WriteAsync(path, b, 0, b.Length, concat);
-            }
-
-            /// <summary>
-            /// 异步 按照指定编码读取文本文件
-            /// </summary>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static async Task<string> ReadTextAsync(
-                string path,
-                string charset)
-            {
-                return Encoding.GetEncoding(charset).GetString(await ReadFileAsync(path));
             }
         }
     }

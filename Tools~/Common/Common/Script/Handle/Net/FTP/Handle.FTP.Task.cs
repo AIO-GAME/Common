@@ -34,6 +34,25 @@ namespace AIO
             }
 
             /// <summary>
+            /// 获取文件内容
+            /// </summary>
+            /// <param name="remotePath">远端文件夹路径</param>
+            public Task<string> GetTextAsync(string remotePath = null)
+            {
+                return AHelper.FTP.GetTextAsync(string.Concat(URI, '/', remotePath), User, Pass);
+            }
+
+            /// <summary>
+            /// 获取文件MD5
+            /// </summary>
+            /// <param name="remotePath">远端文件夹路径</param>
+            /// <returns>MD5</returns>
+            public Task<string> GetMD5Async(string remotePath = null)
+            {
+                return AHelper.FTP.GetMD5Async(string.Concat(URI, '/', remotePath), User, Pass);
+            }
+
+            /// <summary>
             /// 移动文件
             /// </summary>
             /// <param name="currentRemotePath">当前远端路径</param>
@@ -269,6 +288,23 @@ namespace AIO
             /// <param name="remotePath">远端路径</param>
             /// <param name="iEvent">回调</param>
             public async Task<bool> UploadFileAsync(string localPath, string remotePath, IProgressEvent iEvent = null)
+            {
+                var remote = string.Concat(URI, '/', remotePath);
+                var handler = AHelper.FTP.UploadFile(remote, User, Pass, localPath, TimeOut,
+                    BufferSize);
+                handler.Event = iEvent;
+                handler.Begin();
+                await handler.WaitAsync();
+                return handler.Report.State == EProgressState.Finish;
+            }
+
+            /// <summary>
+            /// 上传文件
+            /// </summary>
+            /// <param name="localPath">本地文件</param>
+            /// <param name="remotePath">远端路径</param>
+            /// <param name="iEvent">回调</param>
+            public async Task<bool> UploadFileAsync(Stream localPath, string remotePath, IProgressEvent iEvent = null)
             {
                 var remote = string.Concat(URI, '/', remotePath);
                 var handler = AHelper.FTP.UploadFile(remote, User, Pass, localPath, TimeOut,

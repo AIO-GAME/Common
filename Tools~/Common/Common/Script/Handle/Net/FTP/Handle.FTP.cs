@@ -215,6 +215,25 @@ namespace AIO
             }
 
             /// <summary>
+            /// 获取文件内容
+            /// </summary>
+            /// <param name="remotePath">远端文件夹路径</param>
+            public string GetText(string remotePath = null)
+            {
+                return AHelper.FTP.GetText(string.Concat(URI, '/', remotePath), User, Pass);
+            }
+
+            /// <summary>
+            /// 获取文件MD5
+            /// </summary>
+            /// <param name="remotePath">远端文件夹路径</param>
+            /// <returns>MD5</returns>
+            public string GetMD5(string remotePath = null)
+            {
+                return AHelper.FTP.GetMD5(string.Concat(URI, '/', remotePath), User, Pass);
+            }
+
+            /// <summary>
             /// 上传文件
             /// </summary>
             /// <param name="localPath">本地文件</param>
@@ -260,6 +279,23 @@ namespace AIO
                 var remote = string.Concat(URI, '/', remotePath);
                 var handler = AHelper.FTP.UploadDir(remote, User, Pass,
                     localPath, searchOption, searchPattern, TimeOut, BufferSize);
+                handler.Event = iEvent;
+                handler.Begin();
+                handler.Wait();
+                return handler.Report.State == EProgressState.Finish;
+            }
+
+            /// <summary>
+            /// 上传文件
+            /// </summary>
+            /// <param name="localPath">本地文件</param>
+            /// <param name="remotePath">远端路径</param>
+            /// <param name="iEvent">回调</param>
+            public bool UploadFile(Stream localPath, string remotePath, IProgressEvent iEvent = null)
+            {
+                var remote = string.Concat(URI, '/', remotePath);
+                var handler = AHelper.FTP.UploadFile(remote, User, Pass, localPath, TimeOut,
+                    BufferSize);
                 handler.Event = iEvent;
                 handler.Begin();
                 handler.Wait();

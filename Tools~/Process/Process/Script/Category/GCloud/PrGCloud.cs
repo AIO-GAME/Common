@@ -1,43 +1,29 @@
-﻿/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-11-23                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+﻿/*|============|*|
+|*|Author:     |*| USER
+|*|Date:       |*| 2024-01-11
+|*|E-Mail:     |*| xinansky99@gmail.com
+|*|============|*/
 
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
+using System.ComponentModel;
+using System.Runtime.Remoting.Activation;
 
 namespace AIO
 {
     /// <summary>
-    /// Google Cloud Platform
+    /// Google PrGsutil PrGCloud Platform
     /// </summary>
-    public sealed partial class PrGCloud
+    [Url("https://github.com/AIO-GAME/Common/blob/main/Tools~/Process/Process/Script/Category/GCloud/PrGCloud.cs")]
+    [Description("Google PrGsutil PrGCloud Platform")]
+    public static partial class PrGCloud
     {
         /// <summary>
-        /// 命令
+        /// Create a new instance of PrGCloud
         /// </summary>
-        public const string CMD = "gcloud";
-
-        /// <summary>
-        /// 用法
-        /// </summary>
-        public static class Usage
-        {
-            /// <summary>
-            /// 存储
-            /// </summary>
-            public const string Storage = "storage";
-
-            /// <summary>
-            /// 帮助
-            /// </summary>
-            public const string Help = "help";
-        }
-
-        private static IExecutor Create()
+        /// <param name="cmd">工具</param>
+        /// <param name="args">参数</param>
+        /// <returns><see cref="PrGCloud"/></returns>
+        private static IExecutor Create(string cmd, string args)
         {
             switch (Environment.OSVersion.Platform)
             {
@@ -45,53 +31,12 @@ namespace AIO
                 case PlatformID.Win32S:
                 case PlatformID.Win32Windows:
                 case PlatformID.WinCE:
-                    return PrCmd.Create();
+                    return PrCmd.Create().Input($"{cmd} {args}");
                 case PlatformID.MacOSX:
                 case PlatformID.Unix:
-                    return PrMac.Create(CMD);
+                    return PrMac.Create(cmd, args);
                 default: throw new NotImplementedException();
             }
-        }
-
-        /// <summary>
-        /// Create a new instance of PrGCloud
-        /// </summary>
-        /// <param name="args">参数</param>
-        /// <returns><see cref="PrGCloud"/></returns>
-        public static IExecutor Create(string args)
-        {
-            switch (Environment.OSVersion.Platform)
-            {
-                case PlatformID.Win32NT:
-                case PlatformID.Win32S:
-                case PlatformID.Win32Windows:
-                case PlatformID.WinCE:
-                    return PrCmd.Create().Input($"{CMD} {args}");
-                case PlatformID.MacOSX:
-                case PlatformID.Unix:
-                    return PrMac.Create(CMD, args);
-                default: throw new NotImplementedException();
-            }
-        }
-
-        /// <summary>
-        /// Create a new instance of PrGCloud
-        /// </summary>
-        /// <param name="args">参数</param>
-        /// <returns><see cref="PrGCloud"/></returns>
-        public static IExecutor Create(IEnumerable<string> args)
-        {
-            return Create(string.Join(" ", args));
-        }
-
-        /// <summary>
-        /// Create a new instance of PrGCloud
-        /// </summary>
-        /// <param name="args">参数</param>
-        /// <returns><see cref="PrGCloud"/></returns>
-        public static IExecutor Create(params string[] args)
-        {
-            return Create(string.Join(" ", args));
         }
     }
 }
