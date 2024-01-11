@@ -151,7 +151,7 @@ namespace AIO
                 in string pattern = "*",
                 in SearchOption option = SearchOption.TopDirectoryOnly)
             {
-                var len = value.Length;
+                var len = value.Length + 1;
                 return GetFilesInfo(value, pattern, option).Select(item => item.FullName.Substring(len));
             }
 
@@ -169,7 +169,7 @@ namespace AIO
                 in string pattern = "*",
                 in SearchOption option = SearchOption.TopDirectoryOnly)
             {
-                var len = value.Length;
+                var len = value.Length + 1;
                 return GetFilesInfo(value, filtration, pattern, option).Select(item => item.FullName.Substring(len));
             }
 

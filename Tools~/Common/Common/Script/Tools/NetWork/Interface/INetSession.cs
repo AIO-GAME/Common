@@ -7,6 +7,7 @@
 using System;
 using System.Net;
 
+#pragma warning disable CS1591
 namespace AIO.Net
 {
     public static class ExtendNetSession

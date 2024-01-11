@@ -252,6 +252,8 @@ namespace AIO.UEditor
 
                 str.AppendFormat("    /// <summary>\r\n    /// Git Manager {0}\r\n    /// </summary>\r\n",
                     info.displayName);
+                
+                str.AppendFormat("    [ScriptIcon(IconResource = \"Editor/Icon/App/Git/git-tag-style-1\")]\r\n");
                 str.AppendFormat("    [InitializeOnLoad]\r\n");
                 str.AppendFormat("    internal static partial class {0}\r\n", classname).Append("    {\r\n");
                 str.AppendFormat("        internal const string URL = \"{0}\";\r\n",

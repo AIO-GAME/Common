@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AIO</RootNamespace>
     <AssemblyName>AIO.PrCourse</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -78,11 +78,16 @@
     <Compile Include="Script\Category\Curl\PrCurl.Remote.cs" />
     <Compile Include="Script\Category\Curl\PrCurl.UploadFile.cs" />
     <Compile Include="Script\Category\Curl\PrCurl.Version.cs" />
-    <Compile Include="Script\Category\Dingding\PrDingding.cs" />
+    <Compile Include="Script\Category\Dingding\PrDingTalk.cs" />
     <Compile Include="Script\Category\Dingding\PrDingding.Send.cs" />
-    <Compile Include="Script\Category\GCloud\PrGCloud.Help.cs" />
     <Compile Include="Script\Category\GCloud\PrGCloud.cs" />
-    <Compile Include="Script\Category\GCloud\PrGCloud.Storage.cs" />
+    <Compile Include="Script\Category\GCloud\PrGCloud.Delete.cs" />
+    <Compile Include="Script\Category\GCloud\PrGCloud.Download.cs" />
+    <Compile Include="Script\Category\GCloud\PrGCloud.Exists.cs" />
+    <Compile Include="Script\Category\GCloud\PrGCloud.Get.cs" />
+    <Compile Include="Script\Category\GCloud\PrGCloud.Metadata.cs" />
+    <Compile Include="Script\Category\GCloud\PrGCloud.Read.cs" />
+    <Compile Include="Script\Category\GCloud\PrGCloud.Upload.cs" />
     <Compile Include="Script\Category\Git\PrGit.Add.cs" />
     <Compile Include="Script\Category\Git\PrGit.CheckOut.cs" />
     <Compile Include="Script\Category\Git\PrGit.Clean.cs" />
@@ -210,13 +215,13 @@
     <Compile Include="Script\Utils\NetUtils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\Common\Common\Common.csproj">
       <Project>{b0d5708a-7c94-4bcb-805d-a718034e5724}</Project>
       <Name>Common</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

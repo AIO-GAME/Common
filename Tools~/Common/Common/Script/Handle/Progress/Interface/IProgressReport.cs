@@ -69,6 +69,11 @@ namespace AIO
         long VirtualProgress { get; }
 
         /// <summary>
+        /// 剩余值
+        /// </summary>
+        long RemainValue { get; }
+        
+        /// <summary>
         /// 转化为字符串
         /// </summary>
         /// <returns>

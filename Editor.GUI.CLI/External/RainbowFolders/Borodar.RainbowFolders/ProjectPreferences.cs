@@ -202,10 +202,7 @@ namespace AIO.RainbowFolders
                 label7, true, v =>
                 {
                     Enable = v;
-                    if (Enable)
-                    {
-                        RainbowFoldersGUI.Initialize();
-                    }
+                    if (Enable) RainbowFoldersGUI.Initialize();
                 });
         }
 

@@ -16,145 +16,162 @@ namespace AIO.UEditor
     /// <summary>
     /// 快捷工具箱
     /// </summary>
-    [InitializeOnLoad]
     internal static partial class LnkToolsHelper
     {
-        private static bool IsEnableLnkTools;
-        private static List<LnkTools> LnkToolList;
-        private static float Height;
-        private static GUIContent Content_Thumbnail;
-        private static GUIContent Content_Restore;
-
-        /// <summary>
-        /// 缩略图
-        /// </summary>
-        private static bool Thumbnail;
-
-        static LnkToolsHelper()
+        public static List<LnkTools> Data
         {
-            OnInitLnkTools();
+            get
+            {
+                if (LnkToolList is null) GetLnkTools();
+                return LnkToolList;
+            }
         }
 
-        /// <summary>
-        /// 初始化快捷工具箱
-        /// </summary>
-        private static void OnInitLnkTools()
+        private static List<LnkTools> LnkToolList { get; set; }
+
+        private static void GetLnkTools()
         {
-            Content_Thumbnail = EditorGUIUtility.IconContent("ArrowNavigationLeft");
-            Content_Thumbnail.tooltip = "Thumbnail";
-            Content_Restore = EditorGUIUtility.IconContent("ArrowNavigationRight");
-            Content_Restore.tooltip = "Restore";
-
-            LnkToolList = new List<LnkTools>();
-            Thumbnail = EditorPrefs.GetBool("Thumbnail", false);
-            IsEnableLnkTools = EditorPrefs.GetBool(EditorPrefsTable.LnkTools_Enable, true);
-            if (!IsEnableLnkTools) return;
-
-            LnkToolList.Clear();
+            if (LnkToolList == null) LnkToolList = Pool.List<LnkTools>();
+            else LnkToolList.Clear();
             var types = new List<Type>();
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
                 if (!assembly.GetName().Name.Contains("Editor")) continue;
-                types.AddRange(assembly.GetTypes());
+                types.AddRange(assembly.GetTypes()
+                    .Where(type => !type.IsEnum)
+                    .Where(type => !type.IsInterface));
             }
 
-            foreach (var method in
-                     from type in types
-                     select type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
-                     into methods
-                     from method in methods
-                     where method.IsDefined(typeof(LnkToolsAttribute), false)
-                     select method) LnkToolList.Add(new LnkTools(method));
+            try
+            {
+                foreach (var method in
+                         from type in types
+                         // 过滤构造函数
+                         select type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
+                         into methods
+                         from method in methods
+                         where !method.IsConstructor
+                         where method.IsDefined(typeof(LnkToolsAttribute), false)
+                         where method.ReturnType == typeof(bool) || method.ReturnType == typeof(void)
+                         select method) LnkToolList.Add(new LnkTools(method));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
 
             LnkToolList.Sort((x, y) =>
             {
                 if (x.Priority < y.Priority) return -1;
                 return x.Priority == y.Priority ? 0 : 1;
             });
+        }
+    }
 
-            Height = (LnkToolList.Count + 1) * 22 + 3;
+    internal class LnkTools
+    {
+        public GUIContent Content { get; }
 
-            SceneView.duringSceneGui += OnLnkToolsGUI;
+        /// <summary>
+        /// 背景色
+        /// </summary>
+        public Color BackgroundColor { get; }
+
+        /// <summary>
+        /// 前景色
+        /// </summary>
+        public Color ForegroundColor { get; }
+
+        /// <summary>
+        /// 快捷工具触发模式
+        /// </summary>
+        public LnkToolsMode Mode { get; }
+
+        /// <summary>
+        /// 优先级
+        /// </summary>
+        public int Priority { get; }
+
+        /// <summary>
+        /// 方法
+        /// </summary>
+        private MethodInfo Method { get; }
+
+        private static GUIContent SetContent(LnkToolsAttribute attribute, MethodInfo method)
+        {
+            GUIContent Temp = null;
+            if (!string.IsNullOrEmpty(attribute.IconBuiltin))
+            {
+                Temp = EditorGUIUtility.IconContent(attribute.IconBuiltin);
+                Temp.text = string.Empty;
+            }
+            else if (!string.IsNullOrEmpty(attribute.IconRelative))
+                Temp = new GUIContent
+                {
+                    image = AssetDatabase.LoadAssetAtPath<Texture2D>(attribute.IconRelative)
+                };
+            else if (!string.IsNullOrEmpty(attribute.IconResource))
+                Temp = new GUIContent
+                {
+                    image = Resources.Load<Texture2D>(attribute.IconResource)
+                };
+
+            if (Temp?.image is null)
+            {
+                Temp = new GUIContent
+                {
+                    text = string.IsNullOrEmpty(attribute.Text) ? method.Name : attribute.Text,
+                    tooltip = attribute.Tooltip
+                };
+            }
+            else Temp.tooltip = attribute.Tooltip;
+
+            return Temp;
+        }
+
+        public bool hasIcon => Content.image != null;
+
+        public bool hasReturn => Method.ReturnType == typeof(bool);
+
+        public LnkTools(MethodInfo method)
+        {
+            var attribute = method.GetCustomAttribute<LnkToolsAttribute>();
+
+            Content = SetContent(attribute, method);
+            ForegroundColor = ColorUtility.TryParseHtmlString(attribute.ForegroundColor, out var color1)
+                ? color1
+                : Color.white;
+            BackgroundColor = ColorUtility.TryParseHtmlString(attribute.BackgroundColor, out var color2)
+                ? color2
+                : new Color(0.3592f, 0.3592f, 0.3592f); //#616161
+            Mode = attribute.Mode;
+            Priority = attribute.Priority;
+            Method = method;
+            if (Method is null) throw new NullReferenceException(nameof(Method));
         }
 
         /// <summary>
-        /// 快捷工具箱界面
+        /// 是否被选中
         /// </summary>
-        private static void OnLnkToolsGUI(SceneView sceneView)
+        public bool Status { get; private set; }
+
+        public void Invoke(object obj, object[] parameters)
         {
-            Handles.BeginGUI();
-
-            var rect = Rect.zero;
-            var x = sceneView.position.width - 45;
-            var y = sceneView.in2DMode ? 25 : sceneView.position.height / 2 - Height / 2;
-
-            rect.Set(sceneView.position.width - 10, y, 10, 20);
-            if (GUI.Button(rect, Thumbnail ? Content_Thumbnail : Content_Restore, "InvisibleButton"))
+            if (hasReturn)
             {
-                Thumbnail = !Thumbnail;
-                EditorPrefs.SetBool("Thumbnail", Thumbnail);
+                Status = (bool)Method.Invoke(obj, parameters);
             }
-
-
-            if (!Thumbnail)
-            {
-                var height = 22 + 3 - Height / 2;
-                foreach (var lnk in LnkToolList)
-                {
-                    switch (lnk.Mode)
-                    {
-                        case LnkToolsMode.OnlyRuntime:
-                            GUI.enabled = EditorApplication.isPlaying;
-                            break;
-                        case LnkToolsMode.OnlyEditor:
-                            GUI.enabled = !EditorApplication.isPlaying;
-                            break;
-                        case LnkToolsMode.AllMode:
-                        default:
-                            GUI.enabled = true;
-                            break;
-                    }
-
-                    rect.Set(x, y + height, 30, 20);
-                    height += 22;
-
-                    GUI.backgroundColor = lnk.BGColor;
-                    if (GUI.Button(rect, lnk.Content))
-                    {
-                        lnk.Method.Invoke(null, null);
-                    }
-
-                    GUI.backgroundColor = Color.white;
-                }
-            }
-
-            GUI.enabled = true;
-
-            Handles.EndGUI();
+            else Method.Invoke(obj, parameters);
         }
 
-        private class LnkTools
+        public void Invoke()
         {
-            public GUIContent Content { get; set; }
-            public Color BGColor { get; set; }
-            public LnkToolsMode Mode { get; set; }
-            public int Priority { get; set; }
-            public MethodInfo Method { get; set; }
-
-            public LnkTools(MethodInfo method)
+            if (hasReturn)
             {
-                var attribute = method.GetCustomAttribute<LnkToolsAttribute>();
-                var icon = EditorGUIUtility.IconContent(attribute.BuiltinIcon);
-                Content = new GUIContent
-                {
-                    image = icon?.image,
-                    tooltip = attribute.Tooltip
-                };
-                BGColor = new Color(attribute.R, attribute.G, attribute.B, attribute.A);
-                Mode = attribute.Mode;
-                Priority = attribute.Priority;
-                Method = method;
+                Status = (bool)Method.Invoke(null, null);
             }
+            else Method.Invoke(null, null);
         }
     }
 }

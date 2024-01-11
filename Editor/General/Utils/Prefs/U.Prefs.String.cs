@@ -81,7 +81,7 @@ namespace AIO.UEditor
             /// <param name="def">默认值</param>
             /// <typeparam name="T">泛型类型</typeparam>
             /// <returns>返回值</returns>
-            public static string LoadString<T>(in T data, in string field, in string def)
+            public static string LoadString<T>(in T data, in string field, in string def = null)
             {
                 var key = CombineKey<T>(field, StringHashCode);
                 return EditorPrefs.GetString(key, def);

@@ -4,6 +4,21 @@
         <name>AIO.Common</name>
     </assembly>
     <members>
+        <member name="T:AIO.YamlDotNet.Core.ScalarStyle">
+            <summary>
+            Defines the style of a scalar.
+            </summary>
+        </member>
+        <member name="F:AIO.YamlDotNet.Core.ScalarStyle.Any">
+            <summary>
+            Any scalar style.
+            </summary>
+        </member>
+        <member name="F:AIO.YamlDotNet.Core.ScalarStyle.Plain">
+            <summary>
+            The plain scalar style.
+            </summary>
+        </member>
         <member name="T:AIO.LruCache">
             <summary>
             LRU 缓存淘汰算法 (Least Recently Used)
@@ -1803,6 +1818,11 @@
             添加相同元素
             </summary>
         </member>
+        <member name="M:AIO.ExtendIDictionary.Sort``1(System.Collections.Generic.IDictionary{System.String,``0})">
+            <summary>
+            字符串字典排序
+            </summary>
+        </member>
         <member name="M:AIO.ExtendIDictionary.Get``2(System.Collections.Generic.IDictionary{``0,``1},``0@)">
             <summary>
             获取
@@ -3330,12 +3350,27 @@
             Long 扩展
             </summary>
         </member>
-        <member name="M:AIO.ExtendLong.ToConverseStringFileSize(System.Int64)">
+        <member name="F:AIO.ExtendLong.unitStr">
+            <summary>
+            单位
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendLong.ToConverseStringFileSize(System.Int64,System.UInt32)">
             <summary>
             将文件大小(字节)转换为最适合的显示方式
             Generate data size string. Will return a pretty string of bytes, KiB, MiB, GiB, TiB based on the given bytes.
             </summary>
             <param name="size">Data size in bytes</param>
+            <param name="retain">保留小数点后几位</param>
+            <returns>String with data size representation</returns>
+        </member>
+        <member name="M:AIO.ExtendLong.ToConverseStringFileSize(System.UInt64,System.UInt32)">
+            <summary>
+            将文件大小(字节)转换为最适合的显示方式
+            Generate data size string. Will return a pretty string of bytes, KiB, MiB, GiB, TiB based on the given bytes.
+            </summary>
+            <param name="size">Data size in bytes</param>
+            <param name="retain">保留小数点后几位</param>
             <returns>String with data size representation</returns>
         </member>
         <member name="M:AIO.ExtendLong.ToConverseStringMoney(System.Int64)">
@@ -3513,6 +3548,19 @@
             </summary>
             <param name="remotePath">远端文件夹路径</param>
         </member>
+        <member name="M:AIO.AHandle.FTP.GetText(System.String)">
+            <summary>
+            获取文件内容
+            </summary>
+            <param name="remotePath">远端文件夹路径</param>
+        </member>
+        <member name="M:AIO.AHandle.FTP.GetMD5(System.String)">
+            <summary>
+            获取文件MD5
+            </summary>
+            <param name="remotePath">远端文件夹路径</param>
+            <returns>MD5</returns>
+        </member>
         <member name="M:AIO.AHandle.FTP.UploadFile(System.String,System.String,AIO.IProgressEvent)">
             <summary>
             上传文件
@@ -3537,6 +3585,14 @@
             <param name="iEvent">回调</param>
             <param name="searchPattern">搜索字段</param>
             <param name="searchOption">搜索模式</param>
+        </member>
+        <member name="M:AIO.AHandle.FTP.UploadFile(System.IO.Stream,System.String,AIO.IProgressEvent)">
+            <summary>
+            上传文件
+            </summary>
+            <param name="localPath">本地文件</param>
+            <param name="remotePath">远端路径</param>
+            <param name="iEvent">回调</param>
         </member>
         <member name="M:AIO.AHandle.FTP.UploadDir(System.String,AIO.IProgressEvent,System.IO.SearchOption,System.String)">
             <summary>
@@ -3627,6 +3683,19 @@
             <summary>
             初始化
             </summary>
+        </member>
+        <member name="M:AIO.AHandle.FTP.GetTextAsync(System.String)">
+            <summary>
+            获取文件内容
+            </summary>
+            <param name="remotePath">远端文件夹路径</param>
+        </member>
+        <member name="M:AIO.AHandle.FTP.GetMD5Async(System.String)">
+            <summary>
+            获取文件MD5
+            </summary>
+            <param name="remotePath">远端文件夹路径</param>
+            <returns>MD5</returns>
         </member>
         <member name="M:AIO.AHandle.FTP.MoveAsync(System.String,System.String)">
             <summary>
@@ -3760,6 +3829,14 @@
             <param name="searchOption">搜索模式</param>
         </member>
         <member name="M:AIO.AHandle.FTP.UploadFileAsync(System.String,System.String,AIO.IProgressEvent)">
+            <summary>
+            上传文件
+            </summary>
+            <param name="localPath">本地文件</param>
+            <param name="remotePath">远端路径</param>
+            <param name="iEvent">回调</param>
+        </member>
+        <member name="M:AIO.AHandle.FTP.UploadFileAsync(System.IO.Stream,System.String,AIO.IProgressEvent)">
             <summary>
             上传文件
             </summary>
@@ -4566,6 +4643,9 @@
         <member name="P:AIO.AProgress.EndValue">
             <inheritdoc />
         </member>
+        <member name="P:AIO.AProgress.RemainValue">
+            <inheritdoc />
+        </member>
         <member name="P:AIO.AProgress.StartValue">
             <inheritdoc />
         </member>
@@ -4838,6 +4918,11 @@
         <member name="P:AIO.IProgressReport.VirtualProgress">
             <summary>
             有效进度
+            </summary>
+        </member>
+        <member name="P:AIO.IProgressReport.RemainValue">
+            <summary>
+            剩余值
             </summary>
         </member>
         <member name="M:AIO.IProgressReport.ToString">
@@ -5807,6 +5892,11 @@
             写入 Plist XML
             </summary>
         </member>
+        <member name="M:AIO.AHelper.IO.ReadTextAsync(System.String,System.String)">
+            <summary>
+            异步 按照指定编码读取文本文件
+            </summary>
+        </member>
         <member name="M:AIO.AHelper.IO.WriteTextAsync(System.String,System.String,System.String,System.Boolean)">
             <summary>
             异步 将字符串按照指定编码写入文件,是否追加到文件尾
@@ -5815,11 +5905,6 @@
             <param name="text">内容</param>
             <param name="charset">保存文本格式</param>
             <param name="concat">true:拼接 | false:覆盖</param>
-        </member>
-        <member name="M:AIO.AHelper.IO.ReadTextAsync(System.String,System.String)">
-            <summary>
-            异步 按照指定编码读取文本文件
-            </summary>
         </member>
         <member name="M:AIO.AHelper.IO.ReadText(System.String@,System.Text.Encoding)">
             <summary>
