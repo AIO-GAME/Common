@@ -22,7 +22,7 @@ namespace AIO
         {
             if (remote == null) throw new ArgumentNullException(nameof(remote));
             remote = remote.Replace("\\", "/");
-            var result = Create("gsutil", $"hash -m \"gs://{remote}\"").Sync();
+            var result = Create(Gsutil, $"hash -m \"gs://{remote}\"").Sync();
             if (result.ExitCode != 0) return string.Empty;
             var content = result.StdOut.ToString();
             var hash = content.Split('\n')[1].Split(' ')[1].Replace("(md5):", "").Trim();
@@ -38,7 +38,7 @@ namespace AIO
         {
             if (remote == null) throw new ArgumentNullException(nameof(remote));
             remote = remote.Replace("\\", "/");
-            var result = await Create("gsutil", $"hash -m \"gs://{remote}\"");
+            var result = await Create(Gsutil, $"hash -m \"gs://{remote}\"");
             if (result.ExitCode != 0) return string.Empty;
             var content = result.StdOut.ToString();
             var hash = content.Split('\n')[1].Split(' ')[1].Replace("(md5):", "").Trim();
@@ -55,7 +55,7 @@ namespace AIO
         {
             if (remote == null) throw new ArgumentNullException(nameof(remote));
             remote = remote.Replace("\\", "/");
-            var result = Create("gsutil", $"hash -m \"gs://{remote}\"").Sync();
+            var result = Create(Gsutil, $"hash -m \"gs://{remote}\"").Sync();
             if (result.ExitCode != 0) return string.Empty;
             var content = result.StdOut.ToString();
             return content.Split('\n')[1].Split(' ')[1].Replace("(md5):", "").Trim();
@@ -70,7 +70,7 @@ namespace AIO
         {
             if (remote == null) throw new ArgumentNullException(nameof(remote));
             remote = remote.Replace("\\", "/");
-            var result = await Create("gsutil", $"hash -m \"gs://{remote}\"");
+            var result = await Create(Gsutil, $"hash -m \"gs://{remote}\"");
             if (result.ExitCode != 0) return string.Empty;
             var content = result.StdOut.ToString();
             return content.Split('\n')[1].Split(' ')[1].Replace("(md5):", "").Trim();
@@ -85,7 +85,7 @@ namespace AIO
         {
             if (remote == null) throw new ArgumentNullException(nameof(remote));
             remote = remote.Replace("\\", "/");
-            var result = Create("gsutil", $"hash -m \"gs://{remote}\"").Sync();
+            var result = Create(Gsutil, $"hash -m \"gs://{remote}\"").Sync();
             if (result.ExitCode != 0) return string.Empty;
             var content = result.StdOut.ToString();
             return content.Split('\n')[2].Split(' ')[1].Replace("(crc32c):", "").Trim();
@@ -100,7 +100,7 @@ namespace AIO
         {
             if (remote == null) throw new ArgumentNullException(nameof(remote));
             remote = remote.Replace("\\", "/");
-            var result = await Create("gsutil", $"hash -m \"gs://{remote}\"");
+            var result = await Create(Gsutil, $"hash -m \"gs://{remote}\"");
             if (result.ExitCode != 0) return string.Empty;
             var content = result.StdOut.ToString();
             return content.Split('\n')[2].Split(' ')[1].Replace("(crc32c):", "").Trim();

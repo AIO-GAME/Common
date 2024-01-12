@@ -18,6 +18,23 @@ namespace AIO
     public static partial class PrGCloud
     {
         /// <summary>
+        /// gsutil 工具路径 
+        /// </summary>
+        /// <remarks>
+        /// 如果找不到 请设置自定义路径
+        /// </remarks>
+        public static string Gsutil = "gsutil";
+
+
+        /// <summary>
+        /// gcloud 工具路径
+        /// </summary>
+        /// <remarks>
+        /// 如果找不到 请设置自定义路径
+        /// </remarks>
+        public static string Gcloud = "gcloud";
+
+        /// <summary>
         /// Create a new instance of PrGCloud
         /// </summary>
         /// <param name="cmd">工具</param>

@@ -34,10 +34,10 @@ namespace AIO
             location = location.Replace("\\", "/").TrimEnd('/');
             if (!File.Exists(location)) return false;
             remote = remote.Replace("\\", "/").TrimEnd('/');
-            var ExecutorUpload = Create("gcloud", $"storage cp \"{location}\" \"gs://{remote}\"").Sync();
+            var ExecutorUpload = Create(Gcloud, $"storage cp \"{location}\" \"gs://{remote}\"").Sync();
             if (string.IsNullOrEmpty(metadata)) return ExecutorUpload.ExitCode == 0;
 
-            var ExecutorUpdate = Create("gcloud", $"storage objects update \"gs://{remote}\" \"{metadata}\"")
+            var ExecutorUpdate = Create(Gcloud, $"storage objects update \"gs://{remote}\" \"{metadata}\"")
                 .Sync();
             return ExecutorUpdate.ExitCode == 0;
         }
@@ -63,10 +63,10 @@ namespace AIO
             location = location.Replace("\\", "/").TrimEnd('/');
             if (!File.Exists(location)) return false;
             remote = remote.Replace("\\", "/").TrimEnd('/');
-            var ExecutorUpload = await Create("gcloud", $"storage cp \"{location}\" \"gs://{remote}\"");
+            var ExecutorUpload = await Create(Gcloud, $"storage cp \"{location}\" \"gs://{remote}\"");
             if (string.IsNullOrEmpty(metadata)) return ExecutorUpload.ExitCode == 0;
 
-            var ExecutorUpdate = await Create("gcloud", $"storage objects update \"gs://{remote}\" \"{metadata}\"");
+            var ExecutorUpdate = await Create(Gcloud, $"storage objects update \"gs://{remote}\" \"{metadata}\"");
             return ExecutorUpdate.ExitCode == 0;
         }
 
@@ -94,7 +94,7 @@ namespace AIO
 
             remote = remote.Replace("\\", "/").TrimEnd('/');
 
-            var ExeUpload = Create("gcloud", $"storage cp \"{location}\" \"gs://{remote}\" --recursive")
+            var ExeUpload = Create(Gcloud, $"storage cp \"{location}\" \"gs://{remote}\" --recursive")
                 .OnProgress((o, s) => { onProgress?.Invoke($"Uploading {s}"); }).Sync();
             if (ExeUpload.ExitCode != 0) return false;
             if (string.IsNullOrEmpty(metadata)) return true;
@@ -104,7 +104,7 @@ namespace AIO
             foreach (var file in Directory.GetFiles(location, "*.*", SearchOption.AllDirectories))
             {
                 var temp = $"{remote}/{file.Substring(index).Replace("\\", "/")}";
-                var te = Create("gcloud", $"storage objects update \"gs://{temp}\" \"{metadata}\"").Sync();
+                var te = Create(Gcloud, $"storage objects update \"gs://{temp}\" \"{metadata}\"").Sync();
                 if (result) result = te.ExitCode == 0;
                 onProgress?.Invoke($"Update Metadata ：{temp} {(te.ExitCode == 0 ? "成功" : "失败")}");
             }
@@ -136,7 +136,7 @@ namespace AIO
 
             remote = remote.Replace("\\", "/").TrimEnd('/');
 
-            var ExeUpload = await Create("gcloud", $"storage cp \"{location}\" \"gs://{remote}\" --recursive")
+            var ExeUpload = await Create(Gcloud, $"storage cp \"{location}\" \"gs://{remote}\" --recursive")
                 .OnProgress((o, s) => { onProgress?.Invoke($"Uploading {s}"); });
             if (ExeUpload.ExitCode != 0) return false;
             if (string.IsNullOrEmpty(metadata)) return true;
@@ -146,7 +146,7 @@ namespace AIO
             foreach (var file in Directory.GetFiles(location, "*.*", SearchOption.AllDirectories))
             {
                 var temp = $"{remote}/{file.Substring(index).Replace("\\", "/")}";
-                var te = await Create("gcloud", $"storage objects update \"gs://{temp}\" \"{metadata}\"");
+                var te = await Create(Gcloud, $"storage objects update \"gs://{temp}\" \"{metadata}\"");
                 if (result) result = te.ExitCode == 0;
                 onProgress?.Invoke($"Update Metadata ：{temp} {(te.ExitCode == 0 ? "成功" : "失败")}");
             }

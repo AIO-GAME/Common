@@ -22,7 +22,7 @@ namespace AIO
         {
             if (remote == null) throw new ArgumentNullException(nameof(remote));
             remote = remote.Replace("\\", "/");
-            var result = Create("gsutil", $"rm \"gs://{remote}\"").Sync();
+            var result = Create(Gsutil, $"rm \"gs://{remote}\"").Sync();
             return result.ExitCode == 0;
         }
 
@@ -36,7 +36,7 @@ namespace AIO
         {
             if (remote == null) throw new ArgumentNullException(nameof(remote));
             remote = remote.Replace("\\", "/");
-            var result = await Create("gsutil", $"rm \"gs://{remote}\"");
+            var result = await Create(Gsutil, $"rm \"gs://{remote}\"");
             return result.ExitCode == 0;
         }
 
@@ -51,7 +51,7 @@ namespace AIO
         {
             if (remote == null) throw new ArgumentNullException(nameof(remote));
             remote = remote.Replace("\\", "/");
-            var result = await Create("gsutil", $"-m rm -r \"gs://{remote}\"").OnProgress((o, s) =>
+            var result = await Create(Gsutil, $"-m rm -r \"gs://{remote}\"").OnProgress((o, s) =>
             {
                 onProgress?.Invoke($"Delete file : {s}");
             });
@@ -69,7 +69,7 @@ namespace AIO
         {
             if (remote == null) throw new ArgumentNullException(nameof(remote));
             remote = remote.Replace("\\", "/");
-            var result = Create("gsutil", $"-m rm -r \"gs://{remote}\"").OnProgress((o, s) =>
+            var result = Create(Gsutil, $"-m rm -r \"gs://{remote}\"").OnProgress((o, s) =>
             {
                 onProgress?.Invoke($"Delete file : {s}");
             }).Sync();
