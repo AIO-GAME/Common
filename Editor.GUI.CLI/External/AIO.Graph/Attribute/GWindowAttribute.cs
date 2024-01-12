@@ -95,18 +95,8 @@ namespace AIO.UEditor
         /// </summary>
         public Type RuntimeType;
 
-        private static int Project
-        {
-            get
-            {
-                if (_project == 0)
-                    _project = Application.dataPath.LastIndexOf("/", StringComparison.CurrentCulture) + 1;
-                return _project;
-            }
-        }
-
-        private static int _project;
-
+        private static int Project => EHelper.Path.Project.Length + 1;
+        
         public string FilePath { get; private set; }
 
         public GUIContent GetTitle()
@@ -119,6 +109,7 @@ namespace AIO.UEditor
             {
                 Title.image = Resources.Load<Texture2D>(IconResource);
             }
+
             return Title;
         }
 
