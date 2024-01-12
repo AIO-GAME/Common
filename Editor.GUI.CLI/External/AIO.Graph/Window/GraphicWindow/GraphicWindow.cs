@@ -42,50 +42,50 @@ namespace AIO.UEditor
         /// </summary>
         protected List<GraphicRect> GraphicItems { get; private set; }
 
-        private static GWindowAttribute Aattribute { get; set; }
-
         /// <inheritdoc />
         protected GraphicWindow()
         {
             GraphicItems = new List<GraphicRect>();
-            Aattribute = GetType().GetCustomAttribute<GWindowAttribute>(false);
-            if (Aattribute is null) titleContent = new GUIContent(GetType().Name);
-            else
+
+            var attribute = GetType().GetCustomAttribute<GWindowAttribute>(false);
+            if (attribute != null)
             {
-                if (!string.IsNullOrEmpty(Aattribute.Group))
+                minSize = new Vector2
                 {
-                    Group = Aattribute.Group;
-                    foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                    x = attribute.MinSizeWidth == 0 ? minSize.x : attribute.MinSizeWidth,
+                    y = attribute.MinSizeHeight == 0 ? minSize.y : attribute.MinSizeHeight
+                };
+
+                maxSize = new Vector2
+                {
+                    x = attribute.MaxSizeWidth == 0 ? maxSize.x : attribute.MaxSizeWidth,
+                    y = attribute.MaxSizeHeight == 0 ? maxSize.y : attribute.MaxSizeHeight
+                };
+                if (string.IsNullOrEmpty(attribute.Group)) return;
+                Group = attribute.Group;
+            }
+
+            if (string.IsNullOrEmpty(Group)) Group = "Default";
+            RefreshGroup();
+        }
+
+        private void RefreshGroup()
+        {
+            var subtype = typeof(EditorWindow);
+            var attribute = typeof(GWindowAttribute);
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                if (!assembly.FullName.Contains("Editor")) continue;
+                foreach (var type in assembly.GetTypes())
+                {
+                    if (type == GetType() || !type.IsSubclassOf(subtype)) continue;
+                    if (type.GetCustomAttribute(attribute, false) is GWindowAttribute extraAttribute)
                     {
-                        foreach (var type in assembly.GetTypes())
-                        {
-                            if (!type.IsSubclassOf(typeof(EditorWindow))) continue;
-                            var extraAttribute = type.GetCustomAttribute<GWindowAttribute>(false);
-                            if (extraAttribute is null) continue;
-                            if (string.IsNullOrEmpty(extraAttribute.Group)) continue;
-                            if (Group != extraAttribute.Group) continue;
-                            if (type == GetType()) continue;
-                            AddGroup(Group, type);
-                        }
+                        if (string.IsNullOrEmpty(extraAttribute.Group)) continue;
+                        if (Group != extraAttribute.Group) continue;
+                        AddGroup(Group, type);
                     }
                 }
-
-                titleContent = Aattribute.Title;
-                var temp = new Vector2
-                {
-                    x = Aattribute.MinSizeWidth == 0 ? minSize.x : Aattribute.MinSizeWidth,
-                    y = Aattribute.MinSizeHeight == 0 ? minSize.y : Aattribute.MinSizeHeight
-                };
-
-                minSize = temp;
-
-                temp = new Vector2
-                {
-                    x = Aattribute.MaxSizeWidth == 0 ? maxSize.x : Aattribute.MaxSizeWidth,
-                    y = Aattribute.MaxSizeHeight == 0 ? maxSize.y : Aattribute.MaxSizeHeight
-                };
-
-                maxSize = temp;
             }
         }
 

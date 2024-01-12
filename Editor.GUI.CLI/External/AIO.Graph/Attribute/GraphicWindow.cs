@@ -33,12 +33,12 @@ namespace AIO.UEditor
             {
                 foreach (var type in assembly.GetTypes())
                 {
-                    if (!type.IsSubclassOf(graphicType)) continue;
+                    if (!type.IsClass || type.IsAbstract || !type.IsSubclassOf(graphicType)) continue;
                     var attribute = type.GetCustomAttribute<GWindowAttribute>(false);
                     if (attribute is null) GroupTabel["Default"].Add(type);
                     else
                     {
-                        var key = string.Format("{0}{1}", attribute.Title, type.FullName);
+                        var key = $"{attribute.Title.text}{type.FullName}";
                         if (WindowTypes.ContainsKey(key)) continue;
                         if (string.IsNullOrEmpty(attribute.Group)) attribute.Group = "Default";
                         attribute.RuntimeType = type;
@@ -64,7 +64,7 @@ namespace AIO.UEditor
             if (provider != null) return provider;
 
             provider = new GraphicSettingsProvider(
-                string.Format("{0}/{1}", nameof(AIO), nameof(GWindowAttribute).Replace(nameof(Attribute), "")),
+                $"{nameof(AIO)}/{nameof(GWindowAttribute).Replace(nameof(Attribute), "")}",
                 SettingsScope.User);
             provider.label = "Windows Header";
             provider.hasSearchInterestHandler = (value) =>

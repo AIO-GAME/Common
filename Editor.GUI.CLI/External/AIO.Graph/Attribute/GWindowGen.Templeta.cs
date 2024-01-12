@@ -5,6 +5,7 @@ using System.Text;
 
 namespace AIO.UEditor
 {
+    [ScriptIcon(IconResource = "Editor/Icon/Color/general")]
     internal static partial class GWindowGen
     {
         private const string INFO_TIP = @"/*|============================================|*|
@@ -16,6 +17,7 @@ namespace AIO.UEditor
     using System;
     using UnityEditor;
     using UnityEngine;
+    using AIO;
     using System.IO;
 ";
 
@@ -29,6 +31,7 @@ namespace AIO.UEditor
             str.AppendFormat("{0}\r\n", INFO_USING);
 
             str.AppendFormat("    /// <summary>\r\n    /// GWindow Manager\r\n    /// </summary>\r\n");
+            str.AppendFormat("    [ScriptIcon(IconResource = \"Editor/Icon/Color/general\")]\r\n");
             str.AppendFormat("    internal static partial class {0}\r\n", classname).Append("    {\r\n");
 
             foreach (var pair in dictionary)
