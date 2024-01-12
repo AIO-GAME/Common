@@ -235,10 +235,17 @@ namespace AIO.UEditor
                 EditorGUIUtility.AddCursorRect(RectDragHorizontal, MouseCursor.ResizeHorizontal);
             }
 
-            if (style is null) GUILayout.BeginArea(rect);
-            else GUILayout.BeginArea(rect, style);
-            onDraw?.Invoke();
-            GUILayout.EndArea();
+            try
+            {
+                if (style is null) GUILayout.BeginArea(rect);
+                else GUILayout.BeginArea(rect, style);
+                onDraw?.Invoke();
+                GUILayout.EndArea();
+            }
+            catch (Exception)
+            {
+                //  ignored
+            }
         }
     }
 }

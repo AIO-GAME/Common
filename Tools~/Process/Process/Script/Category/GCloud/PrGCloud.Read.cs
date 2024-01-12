@@ -24,7 +24,7 @@ namespace AIO
             if (remote == null) throw new ArgumentNullException(nameof(remote));
             remote = remote.Replace("\\", "/");
             var temp = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
-            Create("gsutil", $"cp \"gs://{remote}\" \"{temp}\"").Sync();
+            Create(Gsutil, $"cp \"gs://{remote}\" \"{temp}\"").Sync();
             var data = AHelper.IO.ReadFile(temp);
             AHelper.IO.DeleteFile(temp);
             return data;
@@ -41,7 +41,7 @@ namespace AIO
             if (remote == null) throw new ArgumentNullException(nameof(remote));
             remote = remote.Replace("\\", "/");
             var temp = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
-            Create("gsutil", $"cp \"gs://{remote}\" \"{temp}\"").Sync();
+            Create(Gsutil, $"cp \"gs://{remote}\" \"{temp}\"").Sync();
             var data = AHelper.IO.ReadText(temp, encoding);
             AHelper.IO.DeleteFile(temp);
             return data;
@@ -57,7 +57,7 @@ namespace AIO
             if (remote == null) throw new ArgumentNullException(nameof(remote));
             remote = remote.Replace("\\", "/");
             var temp = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
-            await Create("gsutil", $"cp \"gs://{remote}\" \"{temp}\"");
+            await Create(Gsutil, $"cp \"gs://{remote}\" \"{temp}\"");
             var data = AHelper.IO.ReadFile(temp);
             AHelper.IO.DeleteFile(temp);
             return data;
@@ -74,7 +74,7 @@ namespace AIO
             if (remote == null) throw new ArgumentNullException(nameof(remote));
             remote = remote.Replace("\\", "/");
             var temp = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
-            var result = await Create("gsutil", $"cp \"gs://{remote}\" \"{temp}\"");
+            var result = await Create(Gsutil, $"cp \"gs://{remote}\" \"{temp}\"");
             if (result.ExitCode != 0)
             {
                 if (AHelper.IO.ExistsFile(temp)) AHelper.IO.DeleteFile(temp);

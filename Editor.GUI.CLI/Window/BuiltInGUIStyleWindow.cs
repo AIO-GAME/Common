@@ -163,7 +163,7 @@ namespace AIO.UEditor
             }
         }
 
-        protected override void OnDispose()
+        protected override void OnDisable()
         {
             Array.Clear();
             versionFolds.Clear();

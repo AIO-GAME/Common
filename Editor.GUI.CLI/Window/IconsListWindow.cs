@@ -351,7 +351,7 @@ namespace AIO.UEditor
             }
         }
 
-        protected override void OnDispose()
+        protected override void OnDisable()
         {
             iconNames.Clear();
             iconContentListAll.Clear();

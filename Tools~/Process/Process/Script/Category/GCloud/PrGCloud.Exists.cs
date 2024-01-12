@@ -22,7 +22,7 @@ namespace AIO
         public static bool Exists(string remote)
         {
             remote = remote.Replace("\\", "/");
-            var result = Create("gsutil", $"ls \"gs://{remote}\"").Sync();
+            var result = Create(Gsutil, $"ls \"gs://{remote}\"").Sync();
             var content = result.StdOut.ToString();
             return !string.IsNullOrEmpty(content) && content.TrimStart("gs://")
                 .Split(new[] { "gs://" }, StringSplitOptions.RemoveEmptyEntries)
@@ -38,7 +38,7 @@ namespace AIO
         public static async Task<bool> ExistsAsync(string remote)
         {
             remote = remote.Replace("\\", "/");
-            var result = await Create("gsutil", $"ls \"gs://{remote}\"");
+            var result = await Create(Gsutil, $"ls \"gs://{remote}\"");
             var content = result.StdOut.ToString();
             return !string.IsNullOrEmpty(content) && content.TrimStart("gs://")
                 .Split(new[] { "gs://" }, StringSplitOptions.RemoveEmptyEntries)

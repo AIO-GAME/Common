@@ -1611,6 +1611,22 @@
             Google PrGsutil PrGCloud Platform
             </summary>
         </member>
+        <member name="F:AIO.PrGCloud.Gsutil">
+            <summary>
+            gsutil 工具路径 
+            </summary>
+            <remarks>
+            如果找不到 请设置自定义路径
+            </remarks>
+        </member>
+        <member name="F:AIO.PrGCloud.Gcloud">
+            <summary>
+            gcloud 工具路径
+            </summary>
+            <remarks>
+            如果找不到 请设置自定义路径
+            </remarks>
+        </member>
         <member name="M:AIO.PrGCloud.Create(System.String,System.String)">
             <summary>
             Create a new instance of PrGCloud

@@ -80,7 +80,7 @@ namespace AIO
                     }
                     else
                     {
-                        str.AppendLine(string.Format("path=\"{0}\"", target.Replace('\\', '/')));
+                        str.AppendLine($"path=\"{target.Replace('\\', '/')}\"");
                         str.AppendLine("echo $\"${path}\" && chmod 777 ${path} && cd ${path}");
                         str.AppendLine($"git {args}");
                     }
@@ -109,7 +109,7 @@ namespace AIO
                 }
                 else
                 {
-                    str.AppendLine(string.Format("path=\"{0}\"", target.Replace('\\', '/')));
+                    str.AppendLine($"path=\"{target.Replace('\\', '/')}\"");
                     str.AppendLine("echo $\"${path}\" && chmod 777 ${path} && cd ${path}");
                     str.AppendLine($"git {args}");
                 }

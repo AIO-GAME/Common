@@ -15,7 +15,7 @@
             /// <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
             public static IExecutor Set(in string target, int args)
             {
-                return Create(CMD_Chmod, string.Format("{0} \"{1}\"", args, target.Replace('\\', '/')));
+                return Create(CMD_Chmod, $"{args} \"{target.Replace('\\', '/')}\"");
             }
 
             /// <summary>
@@ -26,7 +26,7 @@
             /// <returns>一个实现了 IExecutor 接口的对象，表示设置权限的执行器</returns>
             public static IExecutor Set(in string target, string args)
             {
-                return Create(CMD_Chmod, string.Format("{0} \"{1}\"", args, target.Replace('\\', '/')));
+                return Create(CMD_Chmod, $"{args} \"{target.Replace('\\', '/')}\"");
             }
 
             /// <summary>

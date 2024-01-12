@@ -7,6 +7,8 @@
 using System;
 using System.ComponentModel;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using UnityEditor;
 using UnityEngine;
 
 namespace AIO.UEditor
@@ -14,13 +16,14 @@ namespace AIO.UEditor
     /// <summary>
     /// 窗口信息
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    public class GWindowAttribute : DisplayNameAttribute
+    // [ScriptIcon(IconResource = "Editor/Icon/Color/general")]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+    public sealed class GWindowAttribute : DisplayNameAttribute
     {
         /// <summary>
         /// 标题
         /// </summary>
-        public GUIContent Title { get; }
+        public GUIContent Title { get; private set; }
 
         /// <summary>
         /// 最大宽度
@@ -38,9 +41,14 @@ namespace AIO.UEditor
         public string Menu;
 
         /// <summary>
-        /// 菜单图标
+        /// 相对路径图标 使用 AssetDatabase.LoadAssetAtPath 加载
         /// </summary>
-        public string Icon;
+        public string IconRelative { get; set; }
+
+        /// <summary>
+        /// 资源路径图标 使用 Resources.Load 加载
+        /// </summary>
+        public string IconResource { get; set; }
 
         /// <summary>
         /// 菜单顺序
@@ -87,16 +95,40 @@ namespace AIO.UEditor
         /// </summary>
         public Type RuntimeType;
 
-        /// <inheritdoc />
-        public GWindowAttribute(string title) : base(title)
+        private static int Project => EHelper.Path.Project.Length + 1;
+        
+        public string FilePath { get; private set; }
+
+        public GUIContent GetTitle()
         {
-            Title = new GUIContent(title);
+            if (!string.IsNullOrEmpty(IconRelative))
+            {
+                Title.image = AssetDatabase.LoadAssetAtPath<Texture2D>(IconRelative);
+            }
+            else if (!string.IsNullOrEmpty(IconResource))
+            {
+                Title.image = Resources.Load<Texture2D>(IconResource);
+            }
+
+            return Title;
+        }
+
+        public Texture2D GetTexture2D()
+        {
+            if (!string.IsNullOrEmpty(IconRelative)) return AssetDatabase.LoadAssetAtPath<Texture2D>(IconRelative);
+            return !string.IsNullOrEmpty(IconResource) ? Resources.Load<Texture2D>(IconResource) : null;
         }
 
         /// <inheritdoc />
-        public GWindowAttribute(string title, string tooltip) : base(title)
+        public GWindowAttribute(string title, string tooltip = "", [CallerFilePath] string filePath = "") : base(title)
         {
-            Title = new GUIContent(title, tooltip);
+            Title = new GUIContent
+            {
+                text = title,
+                tooltip = tooltip
+            };
+            if (filePath.StartsWith(".\\Packages\\")) FilePath = filePath.Substring(2);
+            else FilePath = filePath.Replace('\\', '/').Substring(Project);
         }
     }
 }

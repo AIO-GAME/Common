@@ -33,7 +33,7 @@ namespace AIO
             if (string.IsNullOrEmpty(metadata))
                 throw new ArgumentNullException(nameof(metadata));
             remote = remote.Replace("\\", "/").TrimEnd('/');
-            return Create("gcloud", $"storage objects update \"gs://{remote}\" \"{metadata}\"").Sync()
+            return Create(Gcloud, $"storage objects update \"gs://{remote}\" \"{metadata}\"").Sync()
                 .ExitCode == 0;
         }
 
@@ -56,7 +56,7 @@ namespace AIO
         {
             if (string.IsNullOrEmpty(metadata)) throw new ArgumentNullException(nameof(metadata));
             remote = remote.Replace("\\", "/").TrimEnd('/');
-            var result = await Create("gcloud", $"storage objects update \"gs://{remote}\" \"{metadata}\"");
+            var result = await Create(Gcloud, $"storage objects update \"gs://{remote}\" \"{metadata}\"");
             return result.ExitCode == 0;
         }
 
@@ -69,7 +69,7 @@ namespace AIO
         public static bool MetadataLook(string remote)
         {
             remote = remote.Replace("\\", "/").TrimEnd('/');
-            return Create("gcloud", $"storage objects describe \"gs://{remote}\"").Sync().ExitCode == 0;
+            return Create(Gcloud, $"storage objects describe \"gs://{remote}\"").Sync().ExitCode == 0;
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace AIO
         public static async Task<bool> MetadataLookAsync(string remote)
         {
             remote = remote.Replace("\\", "/").TrimEnd('/');
-            var result = await Create("gcloud", $"storage objects describe \"gs://{remote}\"");
+            var result = await Create(Gcloud, $"storage objects describe \"gs://{remote}\"");
             return result.ExitCode == 0;
         }
     }

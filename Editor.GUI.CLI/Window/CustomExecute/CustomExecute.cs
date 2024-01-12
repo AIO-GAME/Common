@@ -21,7 +21,7 @@ namespace AIO.UEditor
 {
     [HelpURL("https://wanderer.blog.csdn.net/article/details/102971712")]
     [GWindow("自定义执行器", "执行器",
-        Icon = "LightProbeProxyVolume Icon",
+        IconResource = "Editor/Icon/App/AIO",
         Group = "Tools",
         Menu = "AIO/Window/Custom Execute",
         MinSizeWidth = 600, MinSizeHeight = 600
@@ -163,8 +163,7 @@ namespace AIO
             Initialization();
         }
 
-
-        protected override void OnDispose()
+        protected override void OnDisable()
         {
             if (_csharpCodeProvider == null) return;
             _csharpCodeProvider.Dispose();

@@ -30,11 +30,11 @@ namespace AIO.UEditor
     )]
     [Icon("Packages/com.aio.package/Resources/Editor/Icon/Setting/icon_option_button.png")]
     public class LnkToolOverlay : ToolbarOverlay, ITransientOverlay
-#if UNITY_2023_1_OR_NEWER
+#if UNITY_2022_1_OR_NEWER
         , ICreateHorizontalToolbar, ICreateVerticalToolbar
 #endif
     {
-#if UNITY_2023_1_OR_NEWER
+#if UNITY_2022_1_OR_NEWER
         /// <summary>
         /// 创建竖排工具栏
         /// </summary>
@@ -389,7 +389,7 @@ namespace AIO.UEditor
             };
             if (m_Editor is null) return m_Content;
             var isVertical = IsVertical();
-#if UNITY_2023_1_OR_NEWER
+#if UNITY_2022_1_OR_NEWER
             m_Content.Add(CreateContent(isVertical ? Layout.VerticalToolbar : Layout.HorizontalToolbar));
 #else
             if ((isVertical

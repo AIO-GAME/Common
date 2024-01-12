@@ -93,7 +93,7 @@ namespace AIO.UEditor
         {
             using (new GUILayout.AreaScope(new Rect(0, position.height - 20, position.width, 20)))
             {
-                EditorGUILayout.LabelField($"Version {version}", EditorStyles.centeredGreyMiniLabel);
+                GUILayout.Label($"Version {version}", EditorStyles.centeredGreyMiniLabel);
             }
         }
     }

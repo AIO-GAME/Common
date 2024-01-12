@@ -31,7 +31,7 @@ namespace AIO
             }
 
             remote = remote.Replace("\\", "/").TrimEnd('/');
-            var result = Create("gcloud", $"storage cp \"gs://{remote}\" \"{location}\"").Sync();
+            var result = Create(Gcloud, $"storage cp \"gs://{remote}\" \"{location}\"").Sync();
             return result.ExitCode == 0;
         }
 
@@ -53,7 +53,7 @@ namespace AIO
             }
 
             remote = remote.Replace("\\", "/").TrimEnd('/');
-            var result = await Create("gcloud", $"storage cp \"gs://{remote}\" \"{location}\"");
+            var result = await Create(Gcloud, $"storage cp \"gs://{remote}\" \"{location}\"");
             return result.ExitCode == 0;
         }
 
@@ -78,7 +78,7 @@ namespace AIO
 
             Directory.CreateDirectory(location);
             remote = remote.Replace("\\", "/").TrimEnd('/');
-            var result = Create("gsutil", $"-m cp -r \"gs://{remote}/*\" \"{location}\"").OnProgress((o, s) =>
+            var result = Create(Gsutil, $"-m cp -r \"gs://{remote}/*\" \"{location}\"").OnProgress((o, s) =>
             {
                 onProgress?.Invoke($"Downloading : {s}");
             }).Sync();
@@ -106,7 +106,7 @@ namespace AIO
 
             Directory.CreateDirectory(location);
             remote = remote.Replace("\\", "/").TrimEnd('/');
-            var result = await Create("gsutil", $"-m cp -r \"gs://{remote}/*\" \"{location}\"").OnProgress((o, s) =>
+            var result = await Create(Gsutil, $"-m cp -r \"gs://{remote}/*\" \"{location}\"").OnProgress((o, s) =>
             {
                 onProgress?.Invoke($"Downloading : {s}");
             });

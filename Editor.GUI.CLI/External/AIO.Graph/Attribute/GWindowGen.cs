@@ -14,6 +14,7 @@ using UnityEngine;
 
 namespace AIO.UEditor
 {
+    [ScriptIcon(IconResource = "Editor/Icon/Color/general")]
     internal static partial class GWindowGen
     {
         private static string GetOutPath()
@@ -29,26 +30,19 @@ namespace AIO.UEditor
             {
                 foreach (var type in assembly.GetTypes())
                 {
-                    if (type.IsAbstract) continue;
-                    if (!type.IsSubclassOf(typeof(EditorWindow))) continue; // 必须是 EditorWindow 的子类
+                    if (type.IsAbstract || !type.IsClass || !type.IsSubclassOf(typeof(EditorWindow))) continue;
                     var attribute = type.GetCustomAttribute<GWindowAttribute>();
                     if (attribute is null) continue;
+                    ScriptIconAttribute.SetIcon(attribute.FilePath, attribute.GetTexture2D());
                     if (string.IsNullOrEmpty(attribute.Menu)) continue;
                     dic.Add(type, attribute);
                 }
             }
 
             var change = CreateProject(dic);
-            if (change)
-            {
-                AssetDatabase.Refresh();
-
-                var RefreshSettings = typeof(AssetDatabase).GetMethod("RefreshSettings",
-                    BindingFlags.Static | BindingFlags.Public);
-                if (RefreshSettings != null) RefreshSettings.Invoke(null, null);
-
-                CompilationPipeline.RequestScriptCompilation();
-            }
+            if (!change) return;
+            AssetDatabase.Refresh();
+            CompilationPipeline.RequestScriptCompilation();
         }
     }
 }

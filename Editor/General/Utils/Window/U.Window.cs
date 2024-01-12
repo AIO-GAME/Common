@@ -466,7 +466,7 @@ namespace AIO.UEditor
                 if (string.IsNullOrEmpty(title.text))
                 {
                     var attribute = type.GetCustomAttribute<GWindowAttribute>(false);
-                    if (attribute != null) title = attribute.Title;
+                    if (attribute != null) title = attribute.GetTitle();
                 }
 
                 if (string.IsNullOrEmpty(title.text)) title.text = type.Name;
