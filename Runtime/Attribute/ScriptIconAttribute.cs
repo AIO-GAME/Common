@@ -172,6 +172,6 @@ namespace AIO
                 AHelper.IO.WriteUTF8(ScriptMeta, AHelper.Yaml.Serialize(ydata).Replace($"'{icon}'", icon));
             }
         }
-    }
 #endif
+    }
 }
