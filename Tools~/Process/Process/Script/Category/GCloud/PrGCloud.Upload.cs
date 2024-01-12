@@ -93,7 +93,8 @@ namespace AIO
             if (!Directory.Exists(location)) return false;
 
             remote = remote.Replace("\\", "/").TrimEnd('/');
-            var ExeUpload = Create("gcloud", $"storage cp \"{location}\" \"gs://{remote}/*\" --recursive")
+
+            var ExeUpload = Create("gcloud", $"storage cp \"{location}\" \"gs://{remote}\" --recursive")
                 .OnProgress((o, s) => { onProgress?.Invoke($"Uploading {s}"); }).Sync();
             if (ExeUpload.ExitCode != 0) return false;
             if (string.IsNullOrEmpty(metadata)) return true;
@@ -134,7 +135,8 @@ namespace AIO
             if (!Directory.Exists(location)) return false;
 
             remote = remote.Replace("\\", "/").TrimEnd('/');
-            var ExeUpload = await Create("gcloud", $"storage cp \"{location}\" \"gs://{remote}/*\" --recursive")
+
+            var ExeUpload = await Create("gcloud", $"storage cp \"{location}\" \"gs://{remote}\" --recursive")
                 .OnProgress((o, s) => { onProgress?.Invoke($"Uploading {s}"); });
             if (ExeUpload.ExitCode != 0) return false;
             if (string.IsNullOrEmpty(metadata)) return true;

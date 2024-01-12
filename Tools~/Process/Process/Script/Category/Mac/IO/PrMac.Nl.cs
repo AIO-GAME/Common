@@ -15,7 +15,7 @@ namespace AIO
             public static IExecutor Execute(string source, string target)
             {
                 if (!File.Exists(source)) throw new FileNotFoundException($"[PrMac Error] The Current File Does Not Exist : {target}");
-                var cmd = string.Format("'{0}' {1} '{2}'", source.Replace('\\', '/'), ">", target.Replace('\\', '/'));
+                var cmd = $"'{source.Replace('\\', '/')}' {">"} '{target.Replace('\\', '/')}'";
                 return Chmod.Set777(target).Link(Create(CMD_Nl, cmd));
             }
         }
