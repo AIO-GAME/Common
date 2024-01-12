@@ -21,7 +21,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 组名 编写额外的窗口
         /// </summary>
-        public string Group { get; }
+        public string Group { get; private set; }
 
         private static void AddGroup(string key, Type type)
         {
@@ -46,27 +46,6 @@ namespace AIO.UEditor
         protected GraphicWindow()
         {
             GraphicItems = new List<GraphicRect>();
-
-            var attribute = GetType().GetCustomAttribute<GWindowAttribute>(false);
-            if (attribute != null)
-            {
-                minSize = new Vector2
-                {
-                    x = attribute.MinSizeWidth == 0 ? minSize.x : attribute.MinSizeWidth,
-                    y = attribute.MinSizeHeight == 0 ? minSize.y : attribute.MinSizeHeight
-                };
-
-                maxSize = new Vector2
-                {
-                    x = attribute.MaxSizeWidth == 0 ? maxSize.x : attribute.MaxSizeWidth,
-                    y = attribute.MaxSizeHeight == 0 ? maxSize.y : attribute.MaxSizeHeight
-                };
-                if (string.IsNullOrEmpty(attribute.Group)) return;
-                Group = attribute.Group;
-            }
-
-            if (string.IsNullOrEmpty(Group)) Group = "Default";
-            RefreshGroup();
         }
 
         private void RefreshGroup()
@@ -99,6 +78,26 @@ namespace AIO.UEditor
         /// <inheritdoc />
         protected sealed override void OnEnable()
         {
+            var attribute = GetType().GetCustomAttribute<GWindowAttribute>(false);
+            if (attribute != null)
+            {
+                minSize = new Vector2
+                {
+                    x = attribute.MinSizeWidth == 0 ? minSize.x : attribute.MinSizeWidth,
+                    y = attribute.MinSizeHeight == 0 ? minSize.y : attribute.MinSizeHeight
+                };
+
+                maxSize = new Vector2
+                {
+                    x = attribute.MaxSizeWidth == 0 ? maxSize.x : attribute.MaxSizeWidth,
+                    y = attribute.MaxSizeHeight == 0 ? maxSize.y : attribute.MaxSizeHeight
+                };
+                if (string.IsNullOrEmpty(attribute.Group)) return;
+                Group = attribute.Group;
+            }
+
+            if (string.IsNullOrEmpty(Group)) Group = "Default";
+            RefreshGroup();
 #if UNITY_2020_1_OR_NEWER
             if (!docked)
 #endif
