@@ -112,7 +112,7 @@ namespace AIO.UEditor
             return objects.ToArray();
         }
 
-        protected override void OnDispose()
+        protected override void OnDisable()
         {
             targetObjects = null;
             beDependArr = null;

@@ -163,8 +163,7 @@ namespace AIO
             Initialization();
         }
 
-
-        protected override void OnDispose()
+        protected override void OnDisable()
         {
             if (_csharpCodeProvider == null) return;
             _csharpCodeProvider.Dispose();

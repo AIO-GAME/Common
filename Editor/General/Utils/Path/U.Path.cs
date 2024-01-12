@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -20,12 +21,26 @@ namespace AIO.UEditor
         {
             static Path()
             {
-                Assets = Application.dataPath;
-                Editor = EditorApplication.applicationPath;
-                EditorContents = EditorApplication.applicationContentsPath;
-                StreamingAssets = Application.streamingAssetsPath;
-                PersistentData = Application.persistentDataPath;
-                Project = Directory.GetParent(Assets)?.FullName;
+                Init();
+            }
+
+            private static void Init([CallerFilePath] string filePath = "")
+            {
+                Debug.Log(AppDomain.CurrentDomain.BaseDirectory);
+                Debug.Log(AppDomain.CurrentDomain.RelativeSearchPath);
+                try
+                {
+                    Project = Application.dataPath.Substring(0, Application.dataPath.LastIndexOf('/'));
+                }
+                catch (Exception e)
+                {
+                    var index = filePath.Replace('\\', '/')
+                        .IndexOf("/Packages/com.aio.package/", StringComparison.CurrentCulture);
+                    Project = filePath.Substring(0, index);
+                }
+
+                Assets = System.IO.Path.Combine(Project, "Assets");
+                StreamingAssets = System.IO.Path.Combine(Assets, "Assets", "StreamingAssets");
                 if (Project != null)
                 {
                     Temp = System.IO.Path.Combine(Project, "Temp");
@@ -40,7 +55,7 @@ namespace AIO.UEditor
 
                 try
                 {
-                    SyncVS = typeof(UnityEditor.Editor).Assembly.GetType("UnityEditor.SyncVS", true);
+                    SyncVS = typeof(Editor).Assembly.GetType("UnityEditor.SyncVS", true);
                     SyncVS_SyncSolution = SyncVS.GetMethod("SyncSolution", BindingFlags.Static | BindingFlags.Public);
 
                     if (SyncVS_SyncSolution == null)
@@ -55,67 +70,96 @@ namespace AIO.UEditor
             /// <summary>
             /// 获取当前项目的 ProjectSettings 文件夹的完整路径。
             /// </summary>
-            public static string ProjectSettings { get; }
+            public static string ProjectSettings { get; private set; }
 
             /// <summary>
             /// 获取当前项目的 Editor Default Resources 文件夹的完整路径。
             /// </summary>
-            public static string EditorDefaultResources { get; }
+            public static string EditorDefaultResources { get; private set; }
 
             /// <summary>
             /// 获取当前项目的 Backups 文件夹的完整路径。
             /// </summary>
-            public static string Backups { get; }
+            public static string Backups { get; private set; }
 
             /// <summary>
             /// 用户自定义设置
             /// </summary>
-            public static string UserSettings { get; }
+            public static string UserSettings { get; private set; }
 
             /// <summary>
             /// 项目日志文件夹路径
             /// </summary>
-            public static string Packages { get; }
+            public static string Packages { get; private set; }
 
             /// <summary>
             /// 项目日志文件夹路径
             /// </summary>
-            public static string Logs { get; }
+            public static string Logs { get; private set; }
 
             /// <summary>
             /// 获取当前项目 Streaming Assets 文件夹的完整路径。
             /// </summary>
-            public static string StreamingAssets { get; }
+            public static string StreamingAssets { get; private set; }
 
             /// <summary>
             /// 获取当前项目 Persistent Assets 文件夹的完整路径。
             /// </summary>
-            public static string PersistentData { get; }
+            public static string PersistentData
+            {
+                get
+                {
+                    if (string.IsNullOrEmpty(_PersistentData))
+                        _PersistentData = Application.persistentDataPath;
+                    return _PersistentData;
+                }
+            }
+
+            private static string _PersistentData { get; set; }
 
             /// <summary>
             /// 获取当前项目 Assets 文件夹的完整路径。
             /// </summary>
-            public static string Assets { get; }
+            public static string Assets { get; private set; }
 
             /// <summary>
             /// 获取当前项目 Temp 文件夹的完整路径。
             /// </summary>
-            public static string Temp { get; }
+            public static string Temp { get; private set; }
 
             /// <summary>
             /// 获取 Unity 编辑器的可执行文件的完整路径。
             /// </summary>
-            public static string Editor { get; }
+            public static string Editor
+            {
+                get
+                {
+                    if (string.IsNullOrEmpty(_Editor)) _Editor = EditorApplication.applicationPath;
+                    return _Editor;
+                }
+            }
+
+            private static string _Editor { get; set; }
 
             /// <summary>
             /// 获取 Unity 编辑器的安装目录的完整路径。
             /// </summary>
-            public static string EditorContents { get; }
+            public static string EditorContents
+            {
+                get
+                {
+                    if (string.IsNullOrEmpty(_EditorContents))
+                        _EditorContents = EditorApplication.applicationContentsPath;
+                    return _EditorContents;
+                }
+            }
+
+            private static string _EditorContents { get; set; }
 
             /// <summary>
             /// 获取当前项目所在文件夹的完整路径。
             /// </summary>
-            public static string Project { get; }
+            public static string Project { get; private set; }
 
             /// <summary>
             /// 获取当前项目名称。

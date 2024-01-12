@@ -149,7 +149,6 @@ namespace AIO.UEditor
         protected override void OnDisable()
         {
             Save();
-            base.OnDisable();
         }
     }
 }

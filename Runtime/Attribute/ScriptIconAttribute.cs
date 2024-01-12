@@ -10,7 +10,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -97,7 +96,7 @@ namespace AIO
                             SetIconResource(attribute.FilePath, attribute.IconResource);
                             continue;
                         }
-
+            
                         if (!string.IsNullOrEmpty(attribute.IconRelative))
                         {
                             SetIconRelative(attribute.FilePath, attribute.IconRelative);

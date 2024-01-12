@@ -45,7 +45,26 @@ namespace AIO.UEditor
         /// <inheritdoc />
         protected GraphicWindow()
         {
-            GraphicItems = new List<GraphicRect>();
+            var attribute = GetType().GetCustomAttribute<GWindowAttribute>(false);
+            if (attribute != null)
+            {
+                minSize = new Vector2
+                {
+                    x = attribute.MinSizeWidth == 0 ? minSize.x : attribute.MinSizeWidth,
+                    y = attribute.MinSizeHeight == 0 ? minSize.y : attribute.MinSizeHeight
+                };
+
+                maxSize = new Vector2
+                {
+                    x = attribute.MaxSizeWidth == 0 ? maxSize.x : attribute.MaxSizeWidth,
+                    y = attribute.MaxSizeHeight == 0 ? maxSize.y : attribute.MaxSizeHeight
+                };
+                if (string.IsNullOrEmpty(attribute.Group)) return;
+                Group = attribute.Group;
+            }
+
+            if (string.IsNullOrEmpty(Group)) Group = "Default";
+            RefreshGroup();
         }
 
         private void RefreshGroup()
@@ -70,34 +89,10 @@ namespace AIO.UEditor
 
         #region sealed
 
-        protected sealed override void OnGUI()
-        {
-            Draw();
-        }
-
         /// <inheritdoc />
         protected sealed override void OnEnable()
         {
-            var attribute = GetType().GetCustomAttribute<GWindowAttribute>(false);
-            if (attribute != null)
-            {
-                minSize = new Vector2
-                {
-                    x = attribute.MinSizeWidth == 0 ? minSize.x : attribute.MinSizeWidth,
-                    y = attribute.MinSizeHeight == 0 ? minSize.y : attribute.MinSizeHeight
-                };
-
-                maxSize = new Vector2
-                {
-                    x = attribute.MaxSizeWidth == 0 ? maxSize.x : attribute.MaxSizeWidth,
-                    y = attribute.MaxSizeHeight == 0 ? maxSize.y : attribute.MaxSizeHeight
-                };
-                if (string.IsNullOrEmpty(attribute.Group)) return;
-                Group = attribute.Group;
-            }
-
-            if (string.IsNullOrEmpty(Group)) Group = "Default";
-            RefreshGroup();
+            GraphicItems = new List<GraphicRect>();
 #if UNITY_2020_1_OR_NEWER
             if (!docked)
 #endif
@@ -120,6 +115,12 @@ namespace AIO.UEditor
         }
 
         /// <inheritdoc />
+        protected sealed override void OnGUI()
+        {
+            Draw();
+        }
+
+        /// <inheritdoc />
         protected sealed override void Awake()
         {
             OnAwake();
@@ -131,15 +132,17 @@ namespace AIO.UEditor
             base.Update();
             OnUpdate();
         }
-
+        
         /// <inheritdoc />
         protected sealed override void OnDestroy()
         {
             OnDisable();
-            OnDispose();
             GraphicItems?.Clear();
-            GraphicItems = null;
             EHelper.Window.Free(this);
+#if UNITY_2021_1_OR_NEWER || !UNITY_2020_1_OR_NEWER
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+#endif
         }
 
         /// <inheritdoc />
@@ -158,6 +161,29 @@ namespace AIO.UEditor
 
         #endregion
 
+        public Rect RectData => position;
+
+        public Rect Center => new Rect(position.size / 2, position.size);
+
+        public void Draw()
+        {
+            OnDraw();
+        }
+
+        public void Clear()
+        {
+            OnClear();
+        }
+
+        void IGraphRect.OnAwake()
+        {
+            OnAwake();
+        }
+
+        void IDisposable.Dispose()
+        {
+        }
+
         #region virtual
 
         /// <summary>
@@ -174,26 +200,15 @@ namespace AIO.UEditor
         {
         }
 
-        public Rect RectData => position;
-
-        public Rect Center => new Rect(position.size / 2, position.size);
-
-        public void Draw()
-        {
-            OnDraw();
-        }
-
         protected virtual void OnDraw()
         {
         }
 
-        public void Clear()
+        /// <summary>
+        /// 清除
+        /// </summary>
+        protected virtual void OnClear()
         {
-        }
-
-        void IGraphRect.OnAwake()
-        {
-            OnAwake();
         }
 
         /// <summary>
@@ -210,16 +225,9 @@ namespace AIO.UEditor
         {
         }
 
-        /// <summary>
-        /// 关闭时释放 销毁对象
-        /// </summary>
-        protected virtual void OnDispose()
-        {
-        }
-
         #endregion
 
-        #region Event
+        #region event
 
         /// <summary>
         /// 开启输入事件监听
@@ -529,11 +537,6 @@ namespace AIO.UEditor
             SettingsScope scope = SettingsScope.User)
         {
             return new GraphicSettingsProvider($"AIO/{path}", scope);
-        }
-
-        public void Dispose()
-        {
-            OnDispose();
         }
     }
 }
