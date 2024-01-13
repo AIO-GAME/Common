@@ -127,7 +127,6 @@ namespace AIO.UEditor
             };
             if (filePath.StartsWith(".\\Packages\\")) FilePath = filePath.Substring(2);
             else FilePath = filePath.Replace('\\', '/');
-            Debug.Log(FilePath);
         }
     }
 }
