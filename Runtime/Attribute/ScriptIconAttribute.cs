@@ -159,10 +159,11 @@ namespace AIO
                     { "defaultReferences", Array.Empty<object>() },
                     { "executionOrder", 0 },
                     { "icon", icon },
-                    { "userData", "" },
-                    { "assetBundleName", "" },
-                    { "assetBundleVariant", "" }
+                    { "userData", null },
+                    { "assetBundleName", null },
+                    { "assetBundleVariant", null }
                 };
+                if (ydata.ContainsKey("timeCreated")) ydata.Remove("timeCreated");
                 AHelper.IO.WriteUTF8(ScriptMeta, AHelper.Yaml.Serialize(ydata).Replace($"'{icon}'", icon));
             }
             else if (ydata["MonoImporter"] is Dictionary<object, object> MonoImporter)
