@@ -4998,7 +4998,7 @@
             <param name="directoryInfos">文件夹列表</param>
             <returns><see cref="T:System.IO.DirectoryInfo"/>文件夹信息</returns>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFoldersInfo(System.String@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AIO.AHelper.IO.GetDirsInfo(System.String@,System.String@,System.IO.SearchOption@)">
             <summary>
             获取文件夹数组
             </summary>
@@ -5007,26 +5007,7 @@
             <param name="option">搜索模式</param>
             <returns>所有文件夹名称</returns>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFoldersInfo(System.String@,System.Func{System.IO.DirectoryInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
-            <summary>
-            获取文件夹数组
-            </summary>
-            <param name="value">路径</param>
-            <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
-            <param name="pattern">匹配模式</param>
-            <param name="option">搜索模式</param>
-            <returns>所有文件夹名称</returns>
-        </member>
-        <member name="M:AIO.AHelper.IO.GetFolders(System.String@,System.String@,System.IO.SearchOption@)">
-            <summary>
-            获取文件夹数组
-            </summary>
-            <param name="value">路径</param>
-            <param name="pattern">匹配模式</param>
-            <param name="option">搜索模式</param>
-            <returns>所有文件夹名称</returns>
-        </member>
-        <member name="M:AIO.AHelper.IO.GetFolders(System.String@,System.Func{System.IO.DirectoryInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AIO.AHelper.IO.GetDirsInfo(System.String@,System.Func{System.IO.DirectoryInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
             <summary>
             获取文件夹数组
             </summary>
@@ -5036,28 +5017,47 @@
             <param name="option">搜索模式</param>
             <returns>所有文件夹名称</returns>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFoldersName(System.String@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AIO.AHelper.IO.GetDirs(System.String@,System.String@,System.IO.SearchOption@)">
+            <summary>
+            获取文件夹数组
+            </summary>
+            <param name="value">路径</param>
+            <param name="pattern">匹配模式</param>
+            <param name="option">搜索模式</param>
+            <returns>所有文件夹名称</returns>
+        </member>
+        <member name="M:AIO.AHelper.IO.GetDirs(System.String@,System.Func{System.IO.DirectoryInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
+            <summary>
+            获取文件夹数组
+            </summary>
+            <param name="value">路径</param>
+            <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
+            <param name="pattern">匹配模式</param>
+            <param name="option">搜索模式</param>
+            <returns>所有文件夹名称</returns>
+        </member>
+        <member name="M:AIO.AHelper.IO.GetDirsName(System.String@,System.String@,System.IO.SearchOption@)">
             <summary>
             获取该文件夹下所有文件夹名 不含子文件夹 不包含自己
             </summary>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFoldersName(System.String@,System.Func{System.IO.DirectoryInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AIO.AHelper.IO.GetDirsName(System.String@,System.Func{System.IO.DirectoryInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
             <summary>
             获取该文件夹下所有文件夹名 不含子文件夹 不包含自己
             </summary>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFolderLength(System.String@)">
+        <member name="M:AIO.AHelper.IO.GetDirLength(System.String@)">
             <summary>
             返回文件夹字节长度
             </summary>
             <param name="Path">文件相对路径</param>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFolderLastWriteTimeUtc(System.String)">
+        <member name="M:AIO.AHelper.IO.GetDirLastWriteTimeUtc(System.String)">
             <summary>
             获取最后写入时间
             </summary>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFolderCreationTimeUtc(System.String)">
+        <member name="M:AIO.AHelper.IO.GetDirCreationTimeUtc(System.String)">
             <summary>
             获取创建文件夹时间
             </summary>
@@ -5303,12 +5303,68 @@
                <paramref name="path" /> 不存在
             </exception>
         </member>
-        <member name="M:AIO.AHelper.IO.ClearFolder(System.String@)">
+        <member name="M:AIO.AHelper.IO.TryDeleteFile(System.String@)">
+            <summary>
+            删除文件
+            </summary>
+            <param name="path">文件相对路径</param>
+        </member>
+        <member name="M:AIO.AHelper.IO.TryDeleteFile(System.IO.FileInfo@)">
+            <summary>
+            删除文件
+            </summary>
+            <param name="path">文件相对路径</param>
+        </member>
+        <member name="M:AIO.AHelper.IO.TryDeleteFile(System.Collections.Generic.IEnumerable{System.String}@)">
+            <summary>
+            删除文件
+            </summary>
+            <param name="list">文件相对路径</param>
+        </member>
+        <member name="M:AIO.AHelper.IO.TryDeleteFile(System.Collections.Generic.IEnumerable{System.IO.FileInfo}@)">
+            <summary>
+            删除文件
+            </summary>
+            <param name="list">文件相对路径</param>
+        </member>
+        <member name="M:AIO.AHelper.IO.TryDeleteFile(System.IO.FileInfo,System.IO.FileInfo[])">
+            <summary>
+            删除文件
+            </summary>
+            <param name="fileInfo">文件路径</param>
+            <param name="list">文件相对路径</param>
+        </member>
+        <member name="M:AIO.AHelper.IO.TryDeleteFile(System.String,System.String[])">
+            <summary>
+            删除文件
+            </summary>
+            <param name="fileInfo">文件路径</param>
+            <param name="list">文件相对路径</param>
+        </member>
+        <member name="M:AIO.AHelper.IO.TryDeleteFile(System.String@,System.String@,System.IO.SearchOption@)">
+            <summary>
+            删除指定文件夹下 指定类型文件
+            </summary>
+            <param name="folder">文件夹路径</param>
+            <param name="pattern">匹配模式</param>
+            <param name="option">查询模式</param>
+        </member>
+        <member name="M:AIO.AHelper.IO.TryDeleteDir(System.IO.DirectoryInfo@,System.IO.SearchOption@,System.Boolean@)">
+            <summary>
+            删除文件夹
+            </summary>
+        </member>
+        <member name="M:AIO.AHelper.IO.TryDeleteDir(System.String@,System.IO.SearchOption@,System.Boolean@)">
+            <summary>
+            删除文件夹
+            </summary>
+        </member>
+        <member name="M:AIO.AHelper.IO.ClearDir(System.String@)">
             <summary>
             清空当前文件夹
             </summary>
         </member>
-        <member name="M:AIO.AHelper.IO.ClearFolder(System.IO.DirectoryInfo@)">
+        <member name="M:AIO.AHelper.IO.ClearDir(System.IO.DirectoryInfo@)">
             <summary>
             清空当前文件夹
             </summary>
@@ -5318,7 +5374,7 @@
             拷贝子节点
             </summary>
         </member>
-        <member name="M:AIO.AHelper.IO.CopyFolderPart(System.String@,System.String@,System.Boolean@)">
+        <member name="M:AIO.AHelper.IO.CopyDirPart(System.String@,System.String@,System.Boolean@)">
             <summary>
             复制文件夹及文件 部分 根文件名不会复制 适合重命名
             </summary>
@@ -5326,7 +5382,7 @@
             <param name="destinationFilePath">目标文件路径</param>
             <param name="overwrite"></param>
         </member>
-        <member name="M:AIO.AHelper.IO.CopyFolderAll(System.String@,System.String@,System.Boolean@)">
+        <member name="M:AIO.AHelper.IO.CopyDirAll(System.String@,System.String@,System.Boolean@)">
             <summary>
             复制文件夹及文件 全部
             </summary> 根文件名一起复制
@@ -5348,11 +5404,11 @@
             <param name="bufferSize">缓冲区大小，用于每次读取和写入的字节数</param>
             <returns>是否成功复制文件</returns>
         </member>
-        <member name="M:AIO.AHelper.IO.CreateFolder(System.String@,System.Boolean@)">
+        <member name="M:AIO.AHelper.IO.CreateDir(System.String@,System.Boolean@)">
             <summary>
             创建文件夹
             </summary>
-            <param name="folder">文件夹路径</param>
+            <param name="directory">文件夹路径</param>
             <param name="clear">清除</param>
         </member>
         <member name="M:AIO.AHelper.IO.DeleteFileAsync(System.String,System.String,System.IO.SearchOption)">
@@ -5375,22 +5431,22 @@
             </summary>
             <param name="list">文件列表</param>
         </member>
-        <member name="M:AIO.AHelper.IO.DeleteFolderAsync(System.String,System.IO.SearchOption,System.Boolean)">
+        <member name="M:AIO.AHelper.IO.DeleteDirAsync(System.String,System.IO.SearchOption,System.Boolean)">
             <summary>
             删除文件夹
             </summary>
         </member>
-        <member name="M:AIO.AHelper.IO.DeleteFolderAsync(System.IO.DirectoryInfo,System.IO.SearchOption,System.Boolean)">
+        <member name="M:AIO.AHelper.IO.DeleteDirAsync(System.IO.DirectoryInfo,System.IO.SearchOption,System.Boolean)">
             <summary>
             删除文件夹
             </summary>
         </member>
-        <member name="M:AIO.AHelper.IO.DeleteFolderAsync(System.Collections.Generic.IEnumerable{System.String},System.IO.SearchOption,System.Boolean)">
+        <member name="M:AIO.AHelper.IO.DeleteDirAsync(System.Collections.Generic.IEnumerable{System.String},System.IO.SearchOption,System.Boolean)">
             <summary>
             删除文件夹
             </summary>
         </member>
-        <member name="M:AIO.AHelper.IO.DeleteFolderAsync(System.Collections.Generic.IEnumerable{System.IO.DirectoryInfo},System.IO.SearchOption,System.Boolean)">
+        <member name="M:AIO.AHelper.IO.DeleteDirAsync(System.Collections.Generic.IEnumerable{System.IO.DirectoryInfo},System.IO.SearchOption,System.Boolean)">
             <summary>
             删除文件夹
             </summary>
@@ -5439,22 +5495,22 @@
             <param name="pattern">匹配模式</param>
             <param name="option">查询模式</param>
         </member>
-        <member name="M:AIO.AHelper.IO.DeleteFolder(System.IO.DirectoryInfo@,System.IO.SearchOption@,System.Boolean@)">
+        <member name="M:AIO.AHelper.IO.DeleteDir(System.IO.DirectoryInfo@,System.IO.SearchOption@,System.Boolean@)">
             <summary>
             删除文件夹
             </summary>
         </member>
-        <member name="M:AIO.AHelper.IO.DeleteFolder(System.String@,System.IO.SearchOption@,System.Boolean@)">
+        <member name="M:AIO.AHelper.IO.DeleteDir(System.String@,System.IO.SearchOption@,System.Boolean@)">
             <summary>
             删除文件夹
             </summary>
         </member>
-        <member name="M:AIO.AHelper.IO.DeleteFolder(System.Collections.Generic.IEnumerable{System.String}@,System.IO.SearchOption,System.Boolean)">
+        <member name="M:AIO.AHelper.IO.DeleteDir(System.Collections.Generic.IEnumerable{System.String}@,System.IO.SearchOption,System.Boolean)">
             <summary>
             删除文件夹
             </summary>
         </member>
-        <member name="M:AIO.AHelper.IO.DeleteFolder(System.Collections.Generic.IEnumerable{System.IO.DirectoryInfo}@,System.IO.SearchOption,System.Boolean)">
+        <member name="M:AIO.AHelper.IO.DeleteDir(System.Collections.Generic.IEnumerable{System.IO.DirectoryInfo}@,System.IO.SearchOption,System.Boolean)">
             <summary>
             删除文件夹
             </summary>
@@ -5482,7 +5538,7 @@
             </summary>
             <returns>True:存在 False:不存在</returns>
         </member>
-        <member name="M:AIO.AHelper.IO.ExistsFolder(System.String@)">
+        <member name="M:AIO.AHelper.IO.ExistsDir(System.String@)">
             <summary>
             判断目录是否存在
             </summary>
@@ -5505,6 +5561,12 @@
             <param name="op">匹配模式</param>
             <param name="searchPatterns">条件 "*value*"</param>
             <returns></returns>
+        </member>
+        <member name="M:AIO.AHelper.IO.GetTempPath(System.String)">
+            <summary>
+            获取临时文件夹路径
+            </summary>
+            <param name="fileName">文件名</param>
         </member>
         <member name="M:AIO.AHelper.IO.GetRelativePath(System.String,System.String)">
             <summary>
@@ -5531,7 +5593,7 @@
             <param name="target">目标路径</param>
             <param name="overlay">Ture:覆盖 False:不覆盖</param>
         </member>
-        <member name="M:AIO.AHelper.IO.MoveFolder(System.String@,System.String@,System.Boolean@)">
+        <member name="M:AIO.AHelper.IO.MoveDir(System.String@,System.String@,System.Boolean@)">
             <summary>
             移动文件夹
             </summary>
@@ -17366,6 +17428,417 @@
             回收所有正在使用的对象
             </summary>
         </member>
+        <member name="T:AIO.Pool">
+            <summary>
+            对象池
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.List``1">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.List`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.List`1"/></returns>
+        </member>
+        <member name="M:AIO.Pool.HashSet``1">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.HashSet`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.HashSet`1"/></returns>
+        </member>
+        <member name="M:AIO.Pool.LinkedList``1">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.LinkedList`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.LinkedList`1"/></returns>
+        </member>
+        <member name="M:AIO.Pool.Stack``1">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.Stack`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.Stack`1"/></returns>
+        </member>
+        <member name="M:AIO.Pool.Free``1(System.Collections.Generic.Stack{``0})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.Stack`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+        </member>
+        <member name="M:AIO.Pool.Queue``1">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.Queue`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.Queue`1"/></returns>
+        </member>
+        <member name="M:AIO.Pool.SortedList``2">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.SortedList`2"/>
+            </summary>
+            <typeparam name="K">Generic</typeparam>
+            <typeparam name="V">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.Dictionary`2"/></returns>
+        </member>
+        <member name="M:AIO.Pool.Dictionary``2">
+            <summary>
+            缓存 => 创建 <see cref="T:System.Collections.Generic.Dictionary`2"/>
+            </summary>
+            <typeparam name="K">Generic</typeparam>
+            <typeparam name="V">Generic</typeparam>
+            <returns><see cref="T:System.Collections.Generic.Dictionary`2"/></returns>
+        </member>
+        <member name="M:AIO.Pool.Free``1(System.Collections.Generic.List{``0})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.List`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+        </member>
+        <member name="M:AIO.Pool.Free``1(System.Collections.Generic.HashSet{``0})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.HashSet`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+        </member>
+        <member name="M:AIO.Pool.Free``1(System.Collections.Generic.Queue{``0})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.Queue`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+        </member>
+        <member name="M:AIO.Pool.Free``2(System.Collections.Generic.SortedList{``0,``1})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.SortedList`2"/>
+            </summary>
+            <typeparam name="K">Generic</typeparam>
+            <typeparam name="V">Generic</typeparam>
+        </member>
+        <member name="M:AIO.Pool.Free``2(System.Collections.Generic.Dictionary{``0,``1})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.Dictionary`2"/>
+            </summary>
+            <typeparam name="K">Generic</typeparam>
+            <typeparam name="V">Generic</typeparam>
+        </member>
+        <member name="M:AIO.Pool.Free``1(System.Collections.Generic.LinkedList{``0})">
+            <summary>
+            缓存 => 释放 <see cref="T:System.Collections.Generic.LinkedList`1"/>
+            </summary>
+            <typeparam name="T">Generic</typeparam>
+        </member>
+        <member name="T:AIO.Pool.ADictionary`2">
+            <summary>
+            Dictionary 对象池
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.ADictionary`2.New">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.ADictionary`2.Free(System.Collections.Generic.Dictionary{`0,`1})">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="T:AIO.Pool.Disposable`1">
+            <summary>
+            An <see cref="T:System.IDisposable"/> to allow pooled objects to be acquired and released within <c>using</c>
+            statements instead of needing to manually release everything.
+            </summary>
+        </member>
+        <member name="F:AIO.Pool.Disposable`1.Item">
+            <summary>
+            The object acquired from the <see cref="T:AIO.Pool.Disposable`1"/>.
+            </summary>
+        </member>
+        <member name="F:AIO.Pool.Disposable`1.OnRelease">
+            <summary>
+            Called by IDisposable.Dispose.
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.Disposable`1.#ctor(`0,System.Action{`0})">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="T:AIO.Pool.Generic`1">
+            <summary>
+            通用
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.Generic`1.New(System.Func{`0})">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.Generic`1.New">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.Generic`1.Free(`0)">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="T:AIO.Pool.AHashSet`1">
+            <summary>
+            HashSet对象池
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.AHashSet`1.New">
+            <summary>
+            创建新的
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.AHashSet`1.Free(System.Collections.Generic.HashSet{`0})">
+            <summary>
+            释放HashSet
+            </summary>
+        </member>
+        <member name="T:AIO.Pool.ALinkedList`1">
+            <summary>
+            List对象池
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.ALinkedList`1.New">
+            <summary>
+            创建新的
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.ALinkedList`1.Free(System.Collections.Generic.LinkedList{`0})">
+            <summary>
+            释放List
+            </summary>
+        </member>
+        <member name="T:AIO.Pool.AList`1">
+            <summary>
+            List对象池
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.AList`1.New">
+            <summary>
+            创建新的
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.AList`1.Free(System.Collections.Generic.List{`0})">
+            <summary>
+            释放List
+            </summary>
+        </member>
+        <member name="T:AIO.Pool.AQueue`1">
+            <summary>
+            Queue对象池
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.AQueue`1.New">
+            <summary>
+            创建新的
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.AQueue`1.Free(System.Collections.Generic.Queue{`0})">
+            <summary>
+            释放Queue
+            </summary>
+        </member>
+        <member name="T:AIO.Pool.ASortedList`2">
+            <summary>
+            Dictionary 对象池
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.ASortedList`2.New">
+            <summary>
+            创建
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.ASortedList`2.Free(System.Collections.Generic.SortedList{`0,`1})">
+            <summary>
+            释放
+            </summary>
+        </member>
+        <member name="T:AIO.Pool.AStack`1">
+            <summary>
+            Stack对象池
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.AStack`1.New">
+            <summary>
+            创建新的
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.AStack`1.Free(System.Collections.Generic.Stack{`0})">
+            <summary>
+            释放Stack
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.Using``1(``0@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.Using``1(``0@,System.Action{``0})">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.Using``1(``0,System.Action{``0})">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.Using``1(System.Collections.Generic.List{``0}@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.Using``1(System.Collections.Generic.HashSet{``0}@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.Using``1(System.Collections.Generic.Stack{``0}@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.Using``1(System.Collections.Generic.Queue{``0}@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="M:AIO.Pool.Using``2(System.Collections.Generic.Dictionary{``0,``1}@)">
+            <summary>
+            引用释放
+            </summary>
+        </member>
+        <member name="T:AIO.PoolExtend">
+            <summary>
+            扩展
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToDictionaryPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为 Dictionary 并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.Free``2(System.Collections.Generic.Dictionary{``0,``1})">
+            <summary>
+            释放 Dictionary
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToHashSetPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为HashSet并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToHashSetPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为HashSet并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToHashSetPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为HashSet并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.Free``1(System.Collections.Generic.HashSet{``0})">
+            <summary>
+            释放HashSet
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToLinkedListPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToLinkedListPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToLinkedListPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.Free``1(System.Collections.Generic.LinkedList{``0})">
+            <summary>
+            释放List
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToListPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToListPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToListPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为List并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.Free``1(System.Collections.Generic.List{``0})">
+            <summary>
+            释放List
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToQueuePooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToQueuePooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToQueuePooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Queue并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.Free``1(System.Collections.Generic.Queue{``0})">
+            <summary>
+            释放Queue
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToSortedListPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为 Dictionary 并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.Free``2(System.Collections.Generic.SortedList{``0,``1})">
+            <summary>
+            释放 Dictionary
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToStackPooled``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            转化为Stack并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToStackPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Stack并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.ToStackPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            转化为Stack并存入对象池
+            </summary>
+        </member>
+        <member name="M:AIO.PoolExtend.Free``1(System.Collections.Generic.Stack{``0})">
+            <summary>
+            释放Stack
+            </summary>
+        </member>
         <member name="T:AIO.Singleton`1">
             <summary>
             单例模式
@@ -20343,417 +20816,6 @@
         <member name="F:AssemblyInfo.Culture">
             <summary>
             支持的区域性
-            </summary>
-        </member>
-        <member name="T:Pool">
-            <summary>
-            对象池
-            </summary>
-        </member>
-        <member name="M:Pool.List``1">
-            <summary>
-            缓存 => 创建 <see cref="T:System.Collections.Generic.List`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-            <returns><see cref="T:System.Collections.Generic.List`1"/></returns>
-        </member>
-        <member name="M:Pool.Free``1(System.Collections.Generic.List{``0})">
-            <summary>
-            缓存 => 释放 <see cref="T:System.Collections.Generic.List`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-        </member>
-        <member name="M:Pool.HashSet``1">
-            <summary>
-            缓存 => 创建 <see cref="T:System.Collections.Generic.HashSet`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-            <returns><see cref="T:System.Collections.Generic.HashSet`1"/></returns>
-        </member>
-        <member name="M:Pool.Free``1(System.Collections.Generic.HashSet{``0})">
-            <summary>
-            缓存 => 释放 <see cref="T:System.Collections.Generic.HashSet`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-        </member>
-        <member name="M:Pool.LinkedList``1">
-            <summary>
-            缓存 => 创建 <see cref="T:System.Collections.Generic.LinkedList`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-            <returns><see cref="T:System.Collections.Generic.LinkedList`1"/></returns>
-        </member>
-        <member name="M:Pool.Free``1(System.Collections.Generic.LinkedList{``0})">
-            <summary>
-            缓存 => 释放 <see cref="T:System.Collections.Generic.LinkedList`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-        </member>
-        <member name="M:Pool.Stack``1">
-            <summary>
-            缓存 => 创建 <see cref="T:System.Collections.Generic.Stack`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-            <returns><see cref="T:System.Collections.Generic.Stack`1"/></returns>
-        </member>
-        <member name="M:Pool.Free``1(System.Collections.Generic.Stack{``0})">
-            <summary>
-            缓存 => 释放 <see cref="T:System.Collections.Generic.Stack`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-        </member>
-        <member name="M:Pool.Queue``1">
-            <summary>
-            缓存 => 创建 <see cref="T:System.Collections.Generic.Queue`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-            <returns><see cref="T:System.Collections.Generic.Queue`1"/></returns>
-        </member>
-        <member name="M:Pool.Free``1(System.Collections.Generic.Queue{``0})">
-            <summary>
-            缓存 => 释放 <see cref="T:System.Collections.Generic.Queue`1"/>
-            </summary>
-            <typeparam name="T">Generic</typeparam>
-        </member>
-        <member name="M:Pool.SortedList``2">
-            <summary>
-            缓存 => 创建 <see cref="T:System.Collections.Generic.SortedList`2"/>
-            </summary>
-            <typeparam name="K">Generic</typeparam>
-            <typeparam name="V">Generic</typeparam>
-            <returns><see cref="T:System.Collections.Generic.Dictionary`2"/></returns>
-        </member>
-        <member name="M:Pool.Free``2(System.Collections.Generic.SortedList{``0,``1})">
-            <summary>
-            缓存 => 释放 <see cref="T:System.Collections.Generic.SortedList`2"/>
-            </summary>
-            <typeparam name="K">Generic</typeparam>
-            <typeparam name="V">Generic</typeparam>
-        </member>
-        <member name="M:Pool.Dictionary``2">
-            <summary>
-            缓存 => 创建 <see cref="T:System.Collections.Generic.Dictionary`2"/>
-            </summary>
-            <typeparam name="K">Generic</typeparam>
-            <typeparam name="V">Generic</typeparam>
-            <returns><see cref="T:System.Collections.Generic.Dictionary`2"/></returns>
-        </member>
-        <member name="M:Pool.Free``2(System.Collections.Generic.Dictionary{``0,``1})">
-            <summary>
-            缓存 => 释放 <see cref="T:System.Collections.Generic.Dictionary`2"/>
-            </summary>
-            <typeparam name="K">Generic</typeparam>
-            <typeparam name="V">Generic</typeparam>
-        </member>
-        <member name="T:Pool.ADictionary`2">
-            <summary>
-            Dictionary 对象池
-            </summary>
-        </member>
-        <member name="M:Pool.ADictionary`2.New">
-            <summary>
-            创建
-            </summary>
-        </member>
-        <member name="M:Pool.ADictionary`2.Free(System.Collections.Generic.Dictionary{`0,`1})">
-            <summary>
-            释放
-            </summary>
-        </member>
-        <member name="T:Pool.Disposable`1">
-            <summary>
-            An <see cref="T:System.IDisposable"/> to allow pooled objects to be acquired and released within <c>using</c>
-            statements instead of needing to manually release everything.
-            </summary>
-        </member>
-        <member name="F:Pool.Disposable`1.Item">
-            <summary>
-            The object acquired from the <see cref="T:Pool.Disposable`1"/>.
-            </summary>
-        </member>
-        <member name="F:Pool.Disposable`1.OnRelease">
-            <summary>
-            Called by IDisposable.Dispose.
-            </summary>
-        </member>
-        <member name="M:Pool.Disposable`1.#ctor(`0,System.Action{`0})">
-            <summary>
-            释放
-            </summary>
-        </member>
-        <member name="T:Pool.Generic`1">
-            <summary>
-            通用
-            </summary>
-        </member>
-        <member name="M:Pool.Generic`1.New(System.Func{`0})">
-            <summary>
-            创建
-            </summary>
-        </member>
-        <member name="M:Pool.Generic`1.New">
-            <summary>
-            创建
-            </summary>
-        </member>
-        <member name="M:Pool.Generic`1.Free(`0)">
-            <summary>
-            释放
-            </summary>
-        </member>
-        <member name="T:Pool.AHashSet`1">
-            <summary>
-            HashSet对象池
-            </summary>
-        </member>
-        <member name="M:Pool.AHashSet`1.New">
-            <summary>
-            创建新的
-            </summary>
-        </member>
-        <member name="M:Pool.AHashSet`1.Free(System.Collections.Generic.HashSet{`0})">
-            <summary>
-            释放HashSet
-            </summary>
-        </member>
-        <member name="T:Pool.ALinkedList`1">
-            <summary>
-            List对象池
-            </summary>
-        </member>
-        <member name="M:Pool.ALinkedList`1.New">
-            <summary>
-            创建新的
-            </summary>
-        </member>
-        <member name="M:Pool.ALinkedList`1.Free(System.Collections.Generic.LinkedList{`0})">
-            <summary>
-            释放List
-            </summary>
-        </member>
-        <member name="T:Pool.AList`1">
-            <summary>
-            List对象池
-            </summary>
-        </member>
-        <member name="M:Pool.AList`1.New">
-            <summary>
-            创建新的
-            </summary>
-        </member>
-        <member name="M:Pool.AList`1.Free(System.Collections.Generic.List{`0})">
-            <summary>
-            释放List
-            </summary>
-        </member>
-        <member name="T:Pool.AQueue`1">
-            <summary>
-            Queue对象池
-            </summary>
-        </member>
-        <member name="M:Pool.AQueue`1.New">
-            <summary>
-            创建新的
-            </summary>
-        </member>
-        <member name="M:Pool.AQueue`1.Free(System.Collections.Generic.Queue{`0})">
-            <summary>
-            释放Queue
-            </summary>
-        </member>
-        <member name="T:Pool.ASortedList`2">
-            <summary>
-            Dictionary 对象池
-            </summary>
-        </member>
-        <member name="M:Pool.ASortedList`2.New">
-            <summary>
-            创建
-            </summary>
-        </member>
-        <member name="M:Pool.ASortedList`2.Free(System.Collections.Generic.SortedList{`0,`1})">
-            <summary>
-            释放
-            </summary>
-        </member>
-        <member name="T:Pool.AStack`1">
-            <summary>
-            Stack对象池
-            </summary>
-        </member>
-        <member name="M:Pool.AStack`1.New">
-            <summary>
-            创建新的
-            </summary>
-        </member>
-        <member name="M:Pool.AStack`1.Free(System.Collections.Generic.Stack{`0})">
-            <summary>
-            释放Stack
-            </summary>
-        </member>
-        <member name="M:Pool.Using``1(``0@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:Pool.Using``1(``0@,System.Action{``0})">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:Pool.Using``1(``0,System.Action{``0})">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:Pool.Using``1(System.Collections.Generic.List{``0}@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:Pool.Using``1(System.Collections.Generic.HashSet{``0}@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:Pool.Using``1(System.Collections.Generic.Stack{``0}@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:Pool.Using``1(System.Collections.Generic.Queue{``0}@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="M:Pool.Using``2(System.Collections.Generic.Dictionary{``0,``1}@)">
-            <summary>
-            引用释放
-            </summary>
-        </member>
-        <member name="T:PoolExtend">
-            <summary>
-            扩展
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToDictionaryPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为 Dictionary 并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.Free``2(System.Collections.Generic.Dictionary{``0,``1})">
-            <summary>
-            释放 Dictionary
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToHashSetPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为HashSet并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToHashSetPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为HashSet并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToHashSetPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为HashSet并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.Free``1(System.Collections.Generic.HashSet{``0})">
-            <summary>
-            释放HashSet
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToLinkedListPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为List并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToLinkedListPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为List并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToLinkedListPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为List并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.Free``1(System.Collections.Generic.LinkedList{``0})">
-            <summary>
-            释放List
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToListPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为List并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToListPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为List并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToListPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为List并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.Free``1(System.Collections.Generic.List{``0})">
-            <summary>
-            释放List
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToQueuePooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为Queue并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToQueuePooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为Queue并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToQueuePooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为Queue并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.Free``1(System.Collections.Generic.Queue{``0})">
-            <summary>
-            释放Queue
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToSortedListPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为 Dictionary 并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.Free``2(System.Collections.Generic.SortedList{``0,``1})">
-            <summary>
-            释放 Dictionary
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToStackPooled``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            转化为Stack并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToStackPooledKey``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为Stack并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.ToStackPooledValue``2(System.Collections.Generic.IDictionary{``0,``1})">
-            <summary>
-            转化为Stack并存入对象池
-            </summary>
-        </member>
-        <member name="M:PoolExtend.Free``1(System.Collections.Generic.Stack{``0})">
-            <summary>
-            释放Stack
             </summary>
         </member>
     </members>

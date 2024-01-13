@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 
 namespace AIO
 {
@@ -46,13 +45,14 @@ namespace AIO
             /// <param name="pattern">匹配模式</param>
             /// <param name="option">搜索模式</param>
             /// <returns>所有文件夹名称</returns>
-            public static IEnumerable<DirectoryInfo> GetFoldersInfo(
+            public static IEnumerable<DirectoryInfo> GetDirsInfo(
                 in string value,
                 in string pattern = "*",
                 in SearchOption option = SearchOption.TopDirectoryOnly)
             {
-                if (!Directory.Exists(value)) return Array.Empty<DirectoryInfo>();
-                return new DirectoryInfo(value).GetDirectories(pattern, option);
+                return !Directory.Exists(value)
+                    ? Array.Empty<DirectoryInfo>()
+                    : new DirectoryInfo(value).GetDirectories(pattern, option);
             }
 
             /// <summary>
@@ -63,14 +63,15 @@ namespace AIO
             /// <param name="pattern">匹配模式</param>
             /// <param name="option">搜索模式</param>
             /// <returns>所有文件夹名称</returns>
-            public static IEnumerable<DirectoryInfo> GetFoldersInfo(
+            public static IEnumerable<DirectoryInfo> GetDirsInfo(
                 in string value,
                 in Func<DirectoryInfo, bool> filtration,
                 in string pattern = "*",
                 in SearchOption option = SearchOption.TopDirectoryOnly)
             {
-                if (!Directory.Exists(value)) return Array.Empty<DirectoryInfo>();
-                return new DirectoryInfo(value).GetDirectories(pattern, option).Where(filtration);
+                return !Directory.Exists(value)
+                    ? Array.Empty<DirectoryInfo>()
+                    : new DirectoryInfo(value).GetDirectories(pattern, option).Where(filtration);
             }
 
             /// <summary>
@@ -80,12 +81,12 @@ namespace AIO
             /// <param name="pattern">匹配模式</param>
             /// <param name="option">搜索模式</param>
             /// <returns>所有文件夹名称</returns>
-            public static IEnumerable<string> GetFolders(
+            public static IEnumerable<string> GetDirs(
                 in string value,
                 in string pattern = "*",
                 in SearchOption option = SearchOption.TopDirectoryOnly)
             {
-                return GetFoldersInfo(value, pattern, option).Select(item => item.FullName);
+                return GetDirsInfo(value, pattern, option).Select(item => item.FullName);
             }
 
             /// <summary>
@@ -96,45 +97,45 @@ namespace AIO
             /// <param name="pattern">匹配模式</param>
             /// <param name="option">搜索模式</param>
             /// <returns>所有文件夹名称</returns>
-            public static IEnumerable<string> GetFolders(
+            public static IEnumerable<string> GetDirs(
                 in string value,
                 in Func<DirectoryInfo, bool> filtration,
                 in string pattern = "*",
                 in SearchOption option = SearchOption.TopDirectoryOnly)
             {
-                return GetFoldersInfo(value, filtration, pattern, option).Select(item => item.FullName);
+                return GetDirsInfo(value, filtration, pattern, option).Select(item => item.FullName);
             }
 
             /// <summary>
             /// 获取该文件夹下所有文件夹名 不含子文件夹 不包含自己
             /// </summary>
-            public static IEnumerable<string> GetFoldersName(
+            public static IEnumerable<string> GetDirsName(
                 in string value,
                 in string pattern = "*",
                 in SearchOption option = SearchOption.TopDirectoryOnly)
             {
-                return GetFoldersInfo(value, pattern, option).Select(item => item.Name);
+                return GetDirsInfo(value, pattern, option).Select(item => item.Name);
             }
 
             /// <summary>
             /// 获取该文件夹下所有文件夹名 不含子文件夹 不包含自己
             /// </summary>
-            public static IEnumerable<string> GetFoldersName(
+            public static IEnumerable<string> GetDirsName(
                 in string value,
                 in Func<DirectoryInfo, bool> filtration,
                 in string pattern = "*",
                 in SearchOption option = SearchOption.TopDirectoryOnly)
             {
-                return GetFoldersInfo(value, filtration, pattern, option).Select(item => item.Name);
+                return GetDirsInfo(value, filtration, pattern, option).Select(item => item.Name);
             }
 
             /// <summary>
             /// 返回文件夹字节长度
             /// </summary>
             /// <param name="Path">文件相对路径</param>
-            public static long GetFolderLength(in string Path)
+            public static long GetDirLength(in string Path)
             {
-                return !ExistsFolder(Path)
+                return !ExistsDir(Path)
                     ? 0
                     : new DirectoryInfo(Path).GetFiles("*", SearchOption.AllDirectories).Sum(file => file.Length);
             }
@@ -142,17 +143,17 @@ namespace AIO
             /// <summary>
             /// 获取最后写入时间
             /// </summary>
-            public static DateTime GetFolderLastWriteTimeUtc(string Path)
+            public static DateTime GetDirLastWriteTimeUtc(string Path)
             {
-                return !ExistsFolder(Path) ? DateTime.MinValue : Directory.GetLastWriteTimeUtc(Path);
+                return !ExistsDir(Path) ? DateTime.MinValue : Directory.GetLastWriteTimeUtc(Path);
             }
 
             /// <summary>
             /// 获取创建文件夹时间
             /// </summary>
-            public static DateTime GetFolderCreationTimeUtc(string Path)
+            public static DateTime GetDirCreationTimeUtc(string Path)
             {
-                return !ExistsFolder(Path) ? DateTime.MinValue : Directory.GetCreationTimeUtc(Path);
+                return !ExistsDir(Path) ? DateTime.MinValue : Directory.GetCreationTimeUtc(Path);
             }
         }
     }

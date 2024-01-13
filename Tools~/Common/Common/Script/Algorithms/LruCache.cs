@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> XINAN
+|||✩ Author:   ||| -> xi nan
 |||✩ Date:     ||| -> 2023-08-24
-|||✩ Document: ||| ->
+
 |||✩ - - - - - |*/
 
 namespace AIO

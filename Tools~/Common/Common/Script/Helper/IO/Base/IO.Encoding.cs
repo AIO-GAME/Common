@@ -18,12 +18,10 @@ namespace AIO
             private static byte EncodingBitByte(in byte num)
             {
                 var state = num & 0xFF;
-                var n = 2;
-                for (var i = 0; i < 8; i++)
+                for (int i = 0, n = 2; i < 8; i++)
                 {
                     if (n == 64) continue;
-                    if ((state & n) == n)
-                        state &= (~n);
+                    if ((state & n) == n) state &= ~n;
                     else state |= n;
                     n *= 2;
                 }

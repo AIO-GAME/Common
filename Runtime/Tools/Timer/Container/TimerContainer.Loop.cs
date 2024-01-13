@@ -1,12 +1,11 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> XINAN
+|||✩ Author:   ||| -> xi nan
 |||✩ Date:     ||| -> 2023-07-07
-|||✩ Document: ||| ->
+
 |||✩ - - - - - |*/
 
 using System;
 using System.Collections.Generic;
-using APool = Pool;
 using UnityEngine;
 
 namespace AIO
@@ -53,7 +52,7 @@ namespace AIO
                         if (UpdateCacheTime > TimerSystem.UPDATELISTTIME)
                         {
                             UpdateCacheTime = 0; // 重置缓存更新时间
-                            for (var i = 0; i < List.Count; i++) List[i].TimersUpdate();
+                            foreach (var item in List) item.TimersUpdate();
                         }
 
                         List[0].SlotUpdate(Unit);
@@ -103,7 +102,7 @@ namespace AIO
 
 
 #if UNITY_EDITOR
-                UnityEngine.Debug.Log(
+                Debug.Log(
                     $"[循环定时器:{ID}] [容器数量:{List.Count}] [状态:结束] 精度单位:{Unit} 当前时间:{Counter} 剩余任务数量:{RemainNum}");
 #endif
             }
@@ -114,7 +113,7 @@ namespace AIO
 #endif
             {
 #if UNITY_EDITOR
-                UnityEngine.Debug.LogErrorFormat(
+                Debug.LogErrorFormat(
                     $"[循环定时器:{ID}] [容器数量:{List.Count}] [状态:异常] 精度单位:{Unit} 当前时间:{Counter} 剩余任务数量:{RemainNum} 异常信息:{e}");
 #endif
             }
@@ -128,11 +127,7 @@ namespace AIO
         {
             UnityAsync.RunTask(() =>
             {
-                for (var i = 0; i < list.Count; i++)
-                {
-                    list[i].Execute();
-                }
-
+                foreach (var item in list) item.Execute();
                 list.Free();
             });
         }

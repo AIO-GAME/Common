@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> XINAN
+|||✩ Author:   ||| -> xi nan
 |||✩ Date:     ||| -> 2023-06-26
-|||✩ Document: ||| ->
+
 |||✩ - - - - - |*/
 
 using UnityEngine;
@@ -58,8 +58,8 @@ namespace AIO.UEditor
             var outlineColor = Color.red;
             Handles.DrawSolidRectangleWithOutline(corners, fillColor, outlineColor);
         }
-        
-        
+
+
         /// <summary>
         /// 添加Cursor
         /// </summary>

@@ -1,15 +1,8 @@
-// /***************************************************
-// * Copyright(C) 2019 by XiNansky                    *
-// * All Rights Reserved By Author lihongliu.         *
-// * Author:            XiNan                         *
-// * Email:             1398581458@qq.com             *
-// * Version:           0.1                           *
-// * UnityVersion:      2019.3.13f1                   *
-// * Date:              2019-05-16                    *
-// * Nowtime:           19:38:52                      *
-// * Description:                                     *
-// * History:                                         *
-// ***************************************************/
+/*|✩ - - - - - |||
+|||✩ Author:   ||| -> xi nan
+|||✩ Date:     ||| -> 2022-03-08
+|||✩ - - - - - |*/
+
 //
 // using System.Text.RegularExpressions;
 // using AIO.Unity.Runtime;

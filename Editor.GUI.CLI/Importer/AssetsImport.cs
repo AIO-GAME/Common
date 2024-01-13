@@ -1,16 +1,8 @@
-﻿// /*=================================================================================================|*|
-// ↓  Copyright(C) 2022 by DefaultCompany            |*| ╭╩╮╮╮╔════╗╔═══════╗╔════╗╔═══════╗╔═══════╗  ↩
-// ↓  All Rights Reserved By Author lihongliu.       |*|╭╯L ╭╠╣ No ╠╣ Pains ╠╣ No ╠╣ Gains ╠╣ XNSKY ╟  ↩
-// ↓  Author:      |*| XiNan                         |*|╰◎═◎╯╯╚◎══◎╝╚◎═════◎╝╚◎══◎╝╚◎═════◎╝╚◎═════◎╝  ↩
-// ↓  Email:       |*| 1398581458@qq.com                                                               ↩
-// ↓  Version:     |*| 1.0                           |*| ╭╩╮╮╮╔════╗╔═══╗╔═══╗╔═══════╗╔════╗╔══════╗  ↩
-// ↓  UnityVersion:|*| 2021.2.13f1c1                 |*|╭╯H ╭╠╣Only╠╣You╠╣Can╠╣Cantrol╠╣Your╠╣Future╟  ↩
-// ↓  Date:        |*| 2022-03-08                    |*|╰◎═◎╯╯╚◎══◎╝╚◎═◎╝╚◎═◎╝╚◎═════◎╝╚◎══◎╝╚◎════◎╝  ↩
-// ↓  URL:         |*| www.XiNansky.com                                                                ↩
-// ↓  Nowtime:     |*| 15:15:40                      |*| ╭╩╮╮╮╔═════╗╔════╗╔══════╗╔═══╗╔══════╗╔═══╗  ↩
-// ↓  Description: |*| |U_U|                         |*|╭╯L ╭╠╣There╠╣ Is ╠╣Always╠╣ A ╠╣Better╠╣Way╟  ↩
-// ↓  History:     |*| |>"<|                         |*|╰◎═◎╯╯╚◎═══◎╝╚◎══◎╝╚◎════◎╝╚◎═◎╝╚◎════◎╝╚◎═◎╝  ↩
-// ↓===================================================================================================*/
+﻿/*|✩ - - - - - |||
+|||✩ Author:   ||| -> xi nan
+|||✩ Date:     ||| -> 2022-03-08
+|||✩ - - - - - |*/
+
 //
 // using UnityEditor;
 // using UnityEngine;
@@ -30,7 +22,7 @@
 //             importer.maxTextureSize = 512;
 //             importer.mipmapEnabled = false;
 //         }
-//         
+//
 //         /// <summary>
 //         /// 在导入纹理贴图之后调用
 //         /// </summary>
@@ -38,7 +30,7 @@
 //         {
 //             Debug.Log("OnPostprocessTexture:" + assetPath);
 //         }
-//         
+//
 //         /// <summary>
 //         /// 在导入模型之前调用
 //         /// </summary>
@@ -46,7 +38,7 @@
 //         {
 //             Debug.Log("OnPreprocessModel:" + assetPath);
 //         }
-//         
+//
 //         /// <summary>
 //         /// 在导入音频之前调用
 //         /// </summary>
@@ -54,7 +46,7 @@
 //         {
 //             Debug.Log("OnPreprocessAudio:" + assetPath);
 //         }
-//         
+//
 //         /// <summary>
 //         /// 在导入模型之后调用
 //         /// </summary>
@@ -63,7 +55,7 @@
 //         {
 //             Debug.Log("OnPostprocessModel:" + assetPath);
 //         }
-//         
+//
 //         /// <summary>
 //         /// 在导入音频之后调用
 //         /// </summary>
@@ -72,7 +64,7 @@
 //         {
 //             Debug.Log("OnPostprocessAudio:" + assetPath);
 //         }
-//         
+//
 //         /// <summary>
 //         /// 所有资源的导入，删除，移动操作都会调用该方法
 //         /// </summary>

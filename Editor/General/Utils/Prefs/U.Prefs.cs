@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> XINAN
+|||✩ Author:   ||| -> xi nan
 |||✩ Date:     ||| -> 2023-06-30
-|||✩ Document: ||| ->
+
 |||✩ - - - - - |*/
 
 using System;
@@ -42,7 +42,26 @@ namespace AIO.UEditor
                 EditorPrefs.DeleteKey(key);
             }
 
-            private static int CODE = Application.dataPath.GetHashCode();
+            private static int CODE
+            {
+                get
+                {
+                    if (_CODE != 0) return _CODE;
+                    var key = string.Concat(typeof(Prefs).FullName, "CODE");
+                    if (EditorPrefs.HasKey(key)) _CODE = EditorPrefs.GetInt(key);
+                    else
+                    {
+                        _CODE = System.IO.Path.Combine(System.IO.Path.GetTempPath(),
+                                System.IO.Path.GetTempFileName())
+                            .GetHashCode();
+                        EditorPrefs.SetInt(key, _CODE);
+                    }
+
+                    return _CODE;
+                }
+            }
+
+            private static int _CODE;
 
             private static string CombineKey(in string field)
             {

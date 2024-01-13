@@ -43,7 +43,7 @@ namespace AIO
             /// <param name="source">源路径</param>
             /// <param name="target">目标路径</param>
             /// <param name="overlay">Ture:覆盖 False:不覆盖</param>
-            public static void MoveFolder(
+            public static void MoveDir(
                 in string source,
                 in string target,
                 in bool overlay = false

@@ -1,4 +1,4 @@
-﻿// /*|✩ - - - - - |||
+// /*|✩ - - - - - |||
 // |||✩ Author:   ||| -> xi nan
 // |||✩ Date:     ||| -> 2023-08-07
 // |||✩ - - - - - |*/
@@ -14,8 +14,8 @@
 // #endif
 // namespace AIO.UEditor
 // {
-//     [ScriptedImporter(0, "sql")]
-//     public class SqlImporter : ScriptedImporter
+//     [ScriptedImporter(0, "sproto")]
+//     public class SprotoImporter : ScriptedImporter
 //     {
 //         public override void OnImportAsset(AssetImportContext ctx)
 //         {

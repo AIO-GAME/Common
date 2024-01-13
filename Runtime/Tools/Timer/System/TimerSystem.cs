@@ -1,26 +1,18 @@
 ﻿/***************************************************
-* Copyright(C) 2021 by DefaultCompany              *
-* All Rights Reserved By Author lihongliu.         *
-* Author:            XiNan                         *
-* Email:             1398581458@qq.com             *
-* Version:           1.0                           *
-* UnityVersion:      2020.3.12f1c1                 *
-* Date:              2021-11-28                    *
-* Nowtime:           00:02:04                      *
-* Description:                                     *
-* History:                                         *
-***************************************************/
+ * Author:            Xi Nan                        *
+ * Version:           1.0                           *
+ * Date:              2021-11-28                    *
+ ***************************************************/
 
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using APool = Pool;
 
 namespace AIO
 {
-    using Unitx = Unit;
+    using UnitEx = Unit;
 
     /// <summary>
     /// 定时器单位回调
@@ -33,32 +25,37 @@ namespace AIO
     [IgnoreConsoleJump]
     public static partial class TimerSystem
     {
-        public static void Initialize(long updatelisttime = 10, int capacity = 1024 * 8)
+        /// <summary>
+        /// 定时器单位回调
+        /// </summary>
+        /// <param name="updateLimit">更新限制</param>
+        /// <param name="capacity">容量</param>
+        public static void Initialize(long updateLimit = 10, int capacity = 1024 * 8)
         {
             Watch = Stopwatch.StartNew();
 
             //保持当前计算单位是毫秒 因为当前时间单位计算底层是纳秒
-            Unit = Unitx.Time.SECOND * 2;
+            Unit = UnitEx.Time.SECOND * 2;
 
-            TaskList = APool.List<ITimerContainer>();
-            MainList = APool.List<ITimerOperator>();
-            TimingUnits = APool.List<(long, long, long)>();
-            TimerExecutors = APool.Dictionary<long, ITimerExecutor>();
+            TaskList = Pool.List<ITimerContainer>();
+            MainList = Pool.List<ITimerOperator>();
+            TimingUnits = Pool.List<(long, long, long)>();
+            TimerExecutors = Pool.Dictionary<long, ITimerExecutor>();
 
             if (TimingUnitsEvent is null)
             {
-                TimingUnits.Add((Unitx.Time.MS_SECOND, Unit, Unitx.Time.MS_SECOND / Unit));
-                TimingUnits.Add((Unitx.Time.MS_MIN, Unitx.Time.MS_SECOND, 60));
-                TimingUnits.Add((Unitx.Time.MS_HOUR, Unitx.Time.MS_MIN, 60));
-                TimingUnits.Add((Unitx.Time.MS_DAY, Unitx.Time.MS_HOUR, 24));
-                TimingUnits.Add((Unitx.Time.MS_WEEK, Unitx.Time.MS_DAY, 7));
+                TimingUnits.Add((UnitEx.Time.MS_SECOND, Unit, UnitEx.Time.MS_SECOND / Unit));
+                TimingUnits.Add((UnitEx.Time.MS_MIN, UnitEx.Time.MS_SECOND, 60));
+                TimingUnits.Add((UnitEx.Time.MS_HOUR, UnitEx.Time.MS_MIN, 60));
+                TimingUnits.Add((UnitEx.Time.MS_DAY, UnitEx.Time.MS_HOUR, 24));
+                TimingUnits.Add((UnitEx.Time.MS_WEEK, UnitEx.Time.MS_DAY, 7));
             }
             else TimingUnitsEvent.Invoke(TimingUnits);
 
             RemainNum = 0;
             UpdateCacheTime = 0;
             Capacity = capacity;
-            UPDATELISTTIME = updatelisttime;
+            UPDATELISTTIME = updateLimit;
 
             RegisterList();
 
@@ -116,14 +113,15 @@ namespace AIO
 
                 lock (TaskList)
                 {
-                    for (var i = 0; i < TaskList.Count; i++) TaskList[i].Cancel();
+                    foreach (var item in TaskList) item.Cancel();
                     TaskList.Clear();
                     TaskList = null;
                 }
 
                 lock (MainList)
                 {
-                    for (var i = 0; i < MainList.Count; i++) MainList[i].Dispose();
+                    foreach (var item in MainList) item.Dispose();
+
                     MainList.Clear();
                     MainList = null;
                 }

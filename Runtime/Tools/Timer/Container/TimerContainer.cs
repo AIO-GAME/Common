@@ -1,17 +1,15 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> XINAN
+|||✩ Author:   ||| -> xi nan
 |||✩ Date:     ||| -> 2023-07-07
-|||✩ Document: ||| ->
+
 |||✩ - - - - - |*/
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using APool = Pool;
-using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace AIO
 {
@@ -19,10 +17,7 @@ namespace AIO
     {
         private static int NUM;
 
-        public ITimerOperator this[int index]
-        {
-            get => List[index];
-        }
+        public ITimerOperator this[int index] => List[index];
 
         public Stopwatch Watch { get; }
 
@@ -47,7 +42,7 @@ namespace AIO
         protected TimerContainer()
         {
             Watch = Stopwatch.StartNew();
-            List = APool.List<ITimerOperator>();
+            List = Pool.List<ITimerOperator>();
             ID = NUM++;
             Unit = 0;
             UpdateCacheTime = 0;
@@ -58,7 +53,8 @@ namespace AIO
         {
             if (List.Count <= 0)
             {
-                UnityEngine.Debug.LogErrorFormat("TimerContainer.Start() -> 容器中没有操作器, 无法启动! [ID:{0}] [TYPE:{1}]", ID, GetType().FullName);
+                Debug.LogErrorFormat("TimerContainer.Start() -> 容器中没有操作器, 无法启动! [ID:{0}] [TYPE:{1}]", ID,
+                    GetType().FullName);
                 return;
             }
 
@@ -91,7 +87,7 @@ namespace AIO
             }
 
             if (List is null) return;
-            for (var i = 0; i < List.Count; i++) List[i]?.Dispose();
+            foreach (var item in List) item?.Dispose();
             List.Free();
         }
 
@@ -99,7 +95,8 @@ namespace AIO
         public override string ToString()
         {
             var builder = new StringBuilder();
-            builder.AppendLine($"[{GetType().Name} ID:{ID}] [容器数量:{List.Count}] 精度单位:{Unit} 当前时间:{Counter} 剩余任务数量:{RemainNum}");
+            builder.AppendLine(
+                $"[{GetType().Name} ID:{ID}] [容器数量:{List.Count}] 精度单位:{Unit} 当前时间:{Counter} 剩余任务数量:{RemainNum}");
             foreach (var item in List) builder.AppendLine(item.ToString()).AppendLine();
             return builder.ToString();
         }
@@ -144,16 +141,6 @@ namespace AIO
             }
 
             timer.Free();
-        }
-
-        public sealed override bool Equals(object obj)
-        {
-            return base.Equals(obj);
-        }
-
-        public sealed override int GetHashCode()
-        {
-            return base.GetHashCode();
         }
     }
 }

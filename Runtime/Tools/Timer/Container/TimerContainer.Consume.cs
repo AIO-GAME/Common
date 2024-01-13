@@ -1,25 +1,11 @@
-/***************************************************
-* Copyright(C) 2021 by DefaultCompany              *
-* All Rights Reserved By Author lihongliu.         *
-* Author:            XiNan                         *
-* Email:             1398581458@qq.com             *
-* Version:           1.0                           *
-* UnityVersion:      2020.3.12f1c1                 *
-* Date:              2021-12-02                    *
-* Nowtime:           15:08:30                      *
-* Description:                                     *
-* History:                                         *
-***************************************************/
+/*|✩ - - - - - |||
+|||✩ Author:   ||| -> xi nan
+|||✩ Date:     ||| -> 2022-03-08
+|||✩ - - - - - |*/
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using APool = Pool;
-
 using UnityEngine;
 
 namespace AIO
@@ -85,7 +71,7 @@ namespace AIO
                         if (UpdateCacheTime > TimerSystem.UPDATELISTTIME)
                         {
                             UpdateCacheTime = 0; // 重置缓存更新时间
-                            for (var i = 0; i < List.Count; i++) List[i].TimersUpdate();
+                            foreach (var item in List) item.TimersUpdate();
                         }
 
                         List[0].SlotUpdate(Unit);
@@ -114,7 +100,8 @@ namespace AIO
                     }
                 }
 #if UNITY_EDITOR
-                UnityEngine.Debug.Log($"[辅助定时器:{ID}] [容器数量:{List.Count}] [状态:结束] 精度单位:{Unit} 当前时间:{Counter} 任务总数量:{TotalNum} 完成任务数量:{TotalNum - RemainNum} 剩余任务数量:{RemainNum}");
+                Debug.Log(
+                    $"[辅助定时器:{ID}] [容器数量:{List.Count}] [状态:结束] 精度单位:{Unit} 当前时间:{Counter} 任务总数量:{TotalNum} 完成任务数量:{TotalNum - RemainNum} 剩余任务数量:{RemainNum}");
 #endif
             }
 #if UNITY_EDITOR
@@ -124,7 +111,8 @@ namespace AIO
 #endif
             {
 #if UNITY_EDITOR
-                UnityEngine.Debug.LogErrorFormat($"[辅助定时器:{ID}] [容器数量:{List.Count}] [状态:异常] 精度单位:{Unit} 当前时间:{Counter} 任务总数量:{TotalNum} 完成任务数量:{TotalNum - RemainNum} 异常信息:{e}");
+                Debug.LogErrorFormat(
+                    $"[辅助定时器:{ID}] [容器数量:{List.Count}] [状态:异常] 精度单位:{Unit} 当前时间:{Counter} 任务总数量:{TotalNum} 完成任务数量:{TotalNum - RemainNum} 异常信息:{e}");
 #endif
             }
             finally
@@ -139,10 +127,7 @@ namespace AIO
             {
                 lock (list)
                 {
-                    for (var i = 0; i < list.Count; i++)
-                    {
-                        list[i].Execute();
-                    }
+                    foreach (var item in list) item.Execute();
                 }
 
                 list.Free();
@@ -189,7 +174,8 @@ namespace AIO
         public override string ToString()
         {
             var builder = new StringBuilder();
-            builder.AppendLine($"[{GetType().Name} ID:{ID}] [容器数量:{List.Count}] 精度单位:{Unit} 当前时间:{Counter} 任务总数量:{TotalNum} 完成任务数量:{TotalNum - RemainNum} 剩余任务数量:{RemainNum}");
+            builder.AppendLine(
+                $"[{GetType().Name} ID:{ID}] [容器数量:{List.Count}] 精度单位:{Unit} 当前时间:{Counter} 任务总数量:{TotalNum} 完成任务数量:{TotalNum - RemainNum} 剩余任务数量:{RemainNum}");
             foreach (var item in List) builder.AppendLine(item.ToString()).AppendLine();
             return builder.ToString();
         }

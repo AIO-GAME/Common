@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> XINAN
+|||✩ Author:   ||| -> xi nan
 |||✩ Date:     ||| -> 2023-08-10
-|||✩ Document: ||| ->
+
 |||✩ - - - - - |*/
 
 using System.IO;
@@ -59,7 +59,7 @@ namespace AIO.UEditor
             var executor = PrMac.Open.Path(Path.Combine(info.resolvedPath, "Tools~", "ALL.sln"));
             (await executor.Async()).Debug();
         }
-        
+
         [MenuItem(AIO_NET_TITLE)]
         public static async void OpenNetProjectWIN()
         {

@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using AIO;
-using APool = Pool;
 
 namespace AIO
 {
@@ -80,7 +78,8 @@ namespace AIO
             {
                 if (arrayIndex >= array.Length)
                 {
-                    throw new ArgumentException("The length of array is less than the number of elements in the collection.");
+                    throw new ArgumentException(
+                        "The length of array is less than the number of elements in the collection.");
                 }
 
                 array[arrayIndex++] = item;
@@ -143,7 +142,7 @@ namespace AIO
         /// <inheritdoc/>
         protected sealed override void OnDeserialize()
         {
-            Collection = APool.List<V>();
+            Collection = Pool.List<V>();
             if (Data == null || Data.Length == 0) return;
             ToDeserialize(new BufferByte(Data));
         }
@@ -151,7 +150,7 @@ namespace AIO
         /// <inheritdoc/>
         protected sealed override void OnSerialize()
         {
-            if (Collection == null) Collection = APool.List<V>();
+            if (Collection == null) Collection = Pool.List<V>();
             var buffer = new BufferByte();
             ToSerialize(buffer);
             Data = buffer.ToArray();
@@ -161,7 +160,7 @@ namespace AIO
         public sealed override void Dispose()
         {
             Serialize();
-            APool.Free(Collection);
+            Pool.Free(Collection);
         }
     }
 }

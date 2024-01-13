@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> XINAN
+|||✩ Author:   ||| -> xi nan
 |||✩ Date:     ||| -> 2023-07-24
-|||✩ Document: ||| ->
+
 |||✩ - - - - - |*/
 
 using System.Collections.Generic;
