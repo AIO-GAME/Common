@@ -24,19 +24,17 @@ namespace AIO.UEditor
                 Init();
             }
 
-            private static void Init([CallerFilePath] string filePath = "")
+            private static void Init()
             {
-                Debug.Log(AppDomain.CurrentDomain.BaseDirectory);
-                Debug.Log(AppDomain.CurrentDomain.RelativeSearchPath);
                 try
                 {
                     Project = Application.dataPath.Substring(0, Application.dataPath.LastIndexOf('/'));
+                    Project = Project.Replace('/', System.IO.Path.DirectorySeparatorChar);
+                    Prefs.SaveString("ProjectPath", Project);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
-                    var index = filePath.Replace('\\', '/')
-                        .IndexOf("/Packages/com.aio.package/", StringComparison.CurrentCulture);
-                    Project = filePath.Substring(0, index);
+                    Project = Prefs.LoadString("ProjectPath", null);
                 }
 
                 Assets = System.IO.Path.Combine(Project, "Assets");

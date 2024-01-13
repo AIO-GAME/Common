@@ -256,10 +256,10 @@ namespace AIO.UEditor
             {
                 if (!Directory.Exists(value)) return Array.Empty<string>();
                 value = System.IO.Path.GetFullPath(value);
-                if (!value.Contains(Path.Project)) return Array.Empty<string>();
+                if (!value.StartsWith(Path.Project)) return Array.Empty<string>();
                 return
                     from item in AHelper.IO.GetFilesInfo(value, pattern, option)
-                    where !item.Extension.Contains(".meta")
+                    where !item.Extension.StartsWith(".meta")
                     select item.FullName.Substring(Path.Project.Length + 1);
             }
         }
