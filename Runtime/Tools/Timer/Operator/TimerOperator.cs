@@ -1,13 +1,13 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> XINAN
+|||✩ Author:   ||| -> xi nan
 |||✩ Date:     ||| -> 2023-07-07
-|||✩ Document: ||| ->
+
 |||✩ - - - - - |*/
 
 using System;
 using System.Collections.Generic;
 using System.Text;
-using APool = Pool;
+using UnityEngine;
 
 namespace AIO
 {
@@ -23,8 +23,8 @@ namespace AIO
         /// </summary>
         internal static ICollection<T> NewTimerOperator<T>() where T : TimerOperator, new()
         {
-            var List = APool.List<T>();
-            foreach (var (AllSlot, Uint, Slot) in TimerSystem.TimingUnits)
+            var List = Pool.List<T>();
+            foreach (var (allSlot, Uint, Slot) in TimerSystem.TimingUnits)
             {
                 var operators = Activator.CreateInstance<T>();
                 operators.Index = List.Count;
@@ -65,16 +65,16 @@ namespace AIO
 
         protected TimerOperator()
         {
-            TimersCache = APool.List<ITimerExecutor>();
-            Timers = APool.LinkedList<ITimerExecutor>();
+            TimersCache = Pool.List<ITimerExecutor>();
+            Timers = Pool.LinkedList<ITimerExecutor>();
             Slot = 0;
             MaxCount = 2048;
         }
 
         public TimerOperator(int index, long unit, long slotUnit, int maxCount = 2048)
         {
-            TimersCache = APool.List<ITimerExecutor>();
-            Timers = APool.LinkedList<ITimerExecutor>();
+            TimersCache = Pool.List<ITimerExecutor>();
+            Timers = Pool.LinkedList<ITimerExecutor>();
             Slot = 0;
             MaxCount = maxCount;
 
@@ -140,7 +140,7 @@ namespace AIO
                 {
                     //如果里当前数量接近容量值 则立马添加到Timers中
                     TimersUpdate(TimersCache);
-                    TimersCache = APool.List<ITimerExecutor>();
+                    TimersCache = Pool.List<ITimerExecutor>();
                 }
             }
 
@@ -156,7 +156,7 @@ namespace AIO
                 if (TimersCache.Count >= MaxCount)
                 {
                     TimersUpdate(TimersCache);
-                    TimersCache = APool.List<ITimerExecutor>();
+                    TimersCache = Pool.List<ITimerExecutor>();
                 }
             }
 
@@ -192,7 +192,7 @@ namespace AIO
             lock (TimersCache)
             {
                 TimersUpdate(TimersCache);
-                TimersCache = APool.List<ITimerExecutor>();
+                TimersCache = Pool.List<ITimerExecutor>();
             }
         }
 
@@ -267,7 +267,7 @@ namespace AIO
             }
             catch (Exception e)
             {
-                UnityEngine.Debug.LogException(e);
+                Debug.LogException(e);
             }
             finally
             {

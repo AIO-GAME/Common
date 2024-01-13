@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> XINAN
+|||✩ Author:   ||| -> xi nan
 |||✩ Date:     ||| -> 2023-06-27
-|||✩ Document: ||| ->
+
 |||✩ - - - - - |*/
 
 using System;

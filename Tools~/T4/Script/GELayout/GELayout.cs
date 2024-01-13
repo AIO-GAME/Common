@@ -1,5 +1,5 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-#pragma warning disable CS0109 // 
+#pragma warning disable CS0109 //
 
 using System;
 using System.Collections.Generic;
@@ -76,7 +76,6 @@ namespace AIO
             Comments = "Layout";
             Header.AppendLine("/*|✩ - - - - - |||");
             Header.AppendLine("|||✩ Date:     ||| -> Automatic Generate");
-            Header.AppendLine("|||✩ Document: ||| ->");
             Header.AppendLine("|||✩ - - - - - |*/");
             Pragma.Add("warning disable CS1591 // Missing XML comment for publicly visible type or member");
             Pragma.Add("warning disable CS0109 // ");

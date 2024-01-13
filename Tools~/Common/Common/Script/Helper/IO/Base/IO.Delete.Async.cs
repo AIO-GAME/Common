@@ -52,57 +52,57 @@ namespace AIO
             /// 删除文件夹
             /// </summary>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static async Task DeleteFolderAsync(
-                string folder,
+            public static async Task DeleteDirAsync(
+                string directory,
                 SearchOption option = SearchOption.AllDirectories,
                 bool isAll = false)
             {
-                await DeleteFolderAsync(new DirectoryInfo(folder), option, isAll);
+                await DeleteDirAsync(new DirectoryInfo(directory), option, isAll);
             }
 
             /// <summary>
             /// 删除文件夹
             /// </summary>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static async Task DeleteFolderAsync(
-                DirectoryInfo folder,
+            public static async Task DeleteDirAsync(
+                DirectoryInfo director,
                 SearchOption option = SearchOption.AllDirectories,
                 bool isAll = false)
             {
-                if (!folder.Exists) return;
+                if (!director.Exists) return;
                 if (isAll)
                 {
                     await Task.Run(() =>
-                        Parallel.ForEach(folder.GetFiles("*", option), file => { DeleteFile(file); }));
+                        Parallel.ForEach(director.GetFiles("*", option), file => { DeleteFile(file); }));
                 }
 
-                folder.Delete(isAll);
+                director.Delete(isAll);
             }
 
             /// <summary>
             /// 删除文件夹
             /// </summary>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static async Task DeleteFolderAsync(
-                IEnumerable<string> folders,
+            public static async Task DeleteDirAsync(
+                IEnumerable<string> directors,
                 SearchOption option = SearchOption.AllDirectories,
                 bool isAll = false)
             {
                 await Task.Run(() =>
-                    Parallel.ForEach(folders, folder => { DeleteFolder(new DirectoryInfo(folder), option, isAll); }));
+                    Parallel.ForEach(directors, folder => { DeleteDir(new DirectoryInfo(folder), option, isAll); }));
             }
 
             /// <summary>
             /// 删除文件夹
             /// </summary>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static async Task DeleteFolderAsync(
-                IEnumerable<DirectoryInfo> folders,
+            public static async Task DeleteDirAsync(
+                IEnumerable<DirectoryInfo> directors,
                 SearchOption option = SearchOption.AllDirectories,
                 bool isAll = false)
             {
                 await Task.Run(() =>
-                    Parallel.ForEach(folders, folder => { DeleteFolder(folder, option, isAll); }));
+                    Parallel.ForEach(directors, folder => { DeleteDir(folder, option, isAll); }));
             }
         }
     }

@@ -8,7 +8,7 @@ namespace AIO
     {
         public partial class IO
         {
-            #region DeleteFile
+            #region Delete File
 
             /// <summary>
             /// 删除文件
@@ -83,47 +83,47 @@ namespace AIO
             /// <summary>
             /// 删除文件夹
             /// </summary>
-            public static void DeleteFolder(
-                in DirectoryInfo folder,
+            public static void DeleteDir(
+                in DirectoryInfo directory,
                 in SearchOption option = SearchOption.AllDirectories,
                 in bool isAll = false)
             {
-                if (!folder.Exists) return;
-                if (isAll) Parallel.ForEach(folder.GetFiles("*", option), file => { DeleteFile(file); });
-                folder.Delete(isAll);
+                if (!directory.Exists) return;
+                if (isAll) Parallel.ForEach(directory.GetFiles("*", option), file => { DeleteFile(file); });
+                directory.Delete(isAll);
             }
 
             /// <summary>
             /// 删除文件夹
             /// </summary>
-            public static void DeleteFolder(
-                in string folder,
+            public static void DeleteDir(
+                in string director,
                 in SearchOption option = SearchOption.AllDirectories,
                 in bool isAll = false)
             {
-                DeleteFolder(new DirectoryInfo(folder), option, isAll);
+                DeleteDir(new DirectoryInfo(director), option, isAll);
             }
 
             /// <summary>
             /// 删除文件夹
             /// </summary>
-            public static void DeleteFolder(
-                in IEnumerable<string> folders,
+            public static void DeleteDir(
+                in IEnumerable<string> directors,
                 SearchOption option = SearchOption.AllDirectories,
                 bool isAll = false)
             {
-                Parallel.ForEach(folders, folder => { DeleteFolder(new DirectoryInfo(folder), option, isAll); });
+                Parallel.ForEach(directors, folder => { DeleteDir(new DirectoryInfo(folder), option, isAll); });
             }
 
             /// <summary>
             /// 删除文件夹
             /// </summary>
-            public static void DeleteFolder(
-                in IEnumerable<DirectoryInfo> folders,
+            public static void DeleteDir(
+                in IEnumerable<DirectoryInfo> directors,
                 SearchOption option = SearchOption.AllDirectories,
                 bool isAll = false)
             {
-                Parallel.ForEach(folders, folder => { DeleteFolder(folder, option, isAll); });
+                Parallel.ForEach(directors, folder => { DeleteDir(folder, option, isAll); });
             }
         }
     }

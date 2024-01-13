@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> XINAN
+|||✩ Author:   ||| -> xi nan
 |||✩ Date:     ||| -> 2023-06-29
-|||✩ Document: ||| ->
+
 |||✩ - - - - - |*/
 
 using System;
@@ -18,7 +18,7 @@ namespace AIO.UEditor
         #region List
 
         /// <summary>
-        /// 绘制 List 列表 
+        /// 绘制 List 列表
         /// </summary>
         /// <param name="label">标签 <see cref="string"/></param>
         /// <param name="array">显示的折叠状态 <see cref="IList&lt;T&gt;"/></param>

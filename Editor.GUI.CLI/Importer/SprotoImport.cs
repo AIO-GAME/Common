@@ -1,7 +1,6 @@
 ﻿// /*|✩ - - - - - |||
-// |||✩ Author:   ||| -> XINAN
+// |||✩ Author:   ||| -> xi nan
 // |||✩ Date:     ||| -> 2023-08-07
-// |||✩ Document: ||| ->
 // |||✩ - - - - - |*/
 //
 // using System.IO;

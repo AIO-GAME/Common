@@ -1,21 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> XINAN
-|||✩ Date:     ||| -> 2023-07-06
-|||✩ Document: ||| ->
+|||✩ Author:   ||| -> xi nan
+|||✩ Date:     ||| -> 2021-11-02
 |||✩ - - - - - |*/
-
-/***************************************************
-* Copyright(C) 2021 by DefaultCompany              *
-* All Rights Reserved By Author lihongliu.         *
-* Author:            XiNan                         *
-* Email:             1398581458@qq.com             *
-* Version:           1.0                           *
-* UnityVersion:      2020.3.12f1c1                 *
-* Date:              2021-12-02                    *
-* Nowtime:           15:06:36                      *
-* Description:                                     *
-* History:                                         *
-***************************************************/
 
 using System;
 using System.Collections;

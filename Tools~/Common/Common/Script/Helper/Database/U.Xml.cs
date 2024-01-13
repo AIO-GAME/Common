@@ -6,7 +6,6 @@
 
 using System;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
@@ -18,7 +17,7 @@ namespace AIO
         /// <summary>
         /// XML 工具类
         /// </summary>
-        public partial class Xml
+        public class Xml
         {
             /// <summary>
             /// 序列化

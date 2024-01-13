@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
 |||✩ Author:   ||| -> star fire
 |||✩ Date:     ||| -> 2023-06-26
-|||✩ Document: ||| ->
+
 |||✩ - - - - - |*/
 
 using System;
@@ -95,8 +95,6 @@ namespace AIO.UEditor
         /// </summary>
         public Type RuntimeType;
 
-        private static int Project => EHelper.Path.Project.Length + 1;
-        
         public string FilePath { get; private set; }
 
         public GUIContent GetTitle()
@@ -128,7 +126,8 @@ namespace AIO.UEditor
                 tooltip = tooltip
             };
             if (filePath.StartsWith(".\\Packages\\")) FilePath = filePath.Substring(2);
-            else FilePath = filePath.Replace('\\', '/').Substring(Project);
+            else FilePath = filePath.Replace('\\', '/');
+            Debug.Log(FilePath);
         }
     }
 }

@@ -50,7 +50,7 @@ namespace AIO
                 int bufferSize = 4096)
             {
                 var dir = Path.GetDirectoryName(path);
-                if (!string.IsNullOrEmpty(dir) && !ExistsFolder(dir))
+                if (!string.IsNullOrEmpty(dir) && !ExistsDir(dir))
                     Directory.CreateDirectory(dir);
 
                 var mode = concat ? FileMode.Append : FileMode.Create;

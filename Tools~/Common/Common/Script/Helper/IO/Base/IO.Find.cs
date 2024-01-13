@@ -5,6 +5,7 @@
 |*|=============================================*/
 
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -28,12 +29,12 @@ namespace AIO
                 params string[] searchPatterns)
             {
                 // 检查文件夹是否存在
-                if (!Directory.Exists(dir)) return null;
+                if (!Directory.Exists(dir)) return Pool.List<string>();
 
                 // 设置默认搜索条件
                 if (searchPatterns == null || searchPatterns.Length == 0) searchPatterns = new[] { "*" };
 
-                var result = new List<string>();
+                var result = Pool.List<string>();
 
                 // 对每种文件类型进行筛选
                 foreach (var pattern in searchPatterns)

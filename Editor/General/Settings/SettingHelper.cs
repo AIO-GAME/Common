@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> XINAN
+|||✩ Author:   ||| -> xi nan
 |||✩ Date:     ||| -> 2023-07-04
-|||✩ Document: ||| ->
+
 |||✩ - - - - - |*/
 
 using System;
@@ -223,7 +223,7 @@ namespace AIO.UEditor
         {
             if (settingType is null || !settingType.IsSubclassOf(typeof(ScriptableObject)))
                 throw new ArgumentNullException(nameof(settingType));
-            
+
             var guids = AssetDatabase.FindAssets($"t:{settingType.Name}");
             if (guids.Length == 0)
             {

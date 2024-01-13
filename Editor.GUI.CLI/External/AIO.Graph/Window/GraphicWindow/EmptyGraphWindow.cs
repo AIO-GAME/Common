@@ -1,7 +1,7 @@
 ﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> XINAN
+|||✩ Author:   ||| -> xi nan
 |||✩ Date:     ||| -> 2020-05-20
-|||✩ Document: ||| ->
+
 |||✩ - - - - - |*/
 
 using UnityEditor;

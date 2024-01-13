@@ -1,58 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
-using AIO;
 
-public static partial class Pool
+namespace AIO
 {
-    /// <summary>
-    /// 通用
-    /// </summary>
-    public static class Generic<T> where T : class, IPoolable, new()
+    public static partial class Pool
     {
-        private static readonly Stack<T>
-            free = new Stack<T>();
-
-        private static readonly HashSet<T>
-            busy = new HashSet<T>(ReferenceEqualityComparer<T>.Instance);
-
         /// <summary>
-        /// 创建
+        /// 通用
         /// </summary>
-        public static T New(Func<T> constructor)
+        public static class Generic<T> where T : class, IPoolable, new()
         {
-            lock (@lock)
+            private static readonly Stack<T>
+                free = new Stack<T>();
+
+            private static readonly HashSet<T>
+                busy = new HashSet<T>(ReferenceEqualityComparer<T>.Instance);
+
+            /// <summary>
+            /// 创建
+            /// </summary>
+            public static T New(Func<T> constructor)
             {
-                var item = constructor();
-                item.New();
-                busy.Add(item);
-                return item;
+                lock (@lock)
+                {
+                    var item = constructor();
+                    item.New();
+                    busy.Add(item);
+                    return item;
+                }
             }
-        }
 
-        /// <summary>
-        /// 创建
-        /// </summary>
-        public static T New()
-        {
-            lock (@lock)
+            /// <summary>
+            /// 创建
+            /// </summary>
+            public static T New()
             {
-                var item = Activator.CreateInstance<T>();
-                item.New();
-                busy.Add(item);
-                return item;
+                lock (@lock)
+                {
+                    var item = Activator.CreateInstance<T>();
+                    item.New();
+                    busy.Add(item);
+                    return item;
+                }
             }
-        }
 
-        /// <summary>
-        /// 释放
-        /// </summary>
-        public static void Free(T item)
-        {
-            lock (@lock)
+            /// <summary>
+            /// 释放
+            /// </summary>
+            public static void Free(T item)
             {
-                if (busy.Contains(item)) busy.Remove(item);
-                item.Free();
-                free.Push(item);
+                lock (@lock)
+                {
+                    if (busy.Contains(item)) busy.Remove(item);
+                    item.Free();
+                    free.Push(item);
+                }
             }
         }
     }

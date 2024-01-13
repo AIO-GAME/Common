@@ -20,9 +20,9 @@ namespace AIO
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool Exists(string path)
             {
-                return ExistsFile(path) || ExistsFolder(path);
+                return ExistsFile(path) || ExistsDir(path);
             }
-            
+
             /// <summary>
             /// 判断当前路径是否存在 文件夹和文件都存在才返回True
             /// </summary>
@@ -30,7 +30,7 @@ namespace AIO
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool ExistsBoth(string path)
             {
-                return ExistsFile(path) && ExistsFolder(path);
+                return ExistsFile(path) && ExistsDir(path);
             }
 
             /// <summary>
@@ -48,7 +48,7 @@ namespace AIO
             /// </summary>
             /// <returns>True:存在 False:不存在</returns>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static bool ExistsFolder(in string path)
+            public static bool ExistsDir(in string path)
             {
                 return Directory.Exists(path);
             }

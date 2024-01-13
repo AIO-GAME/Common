@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using APool = Pool;
 
 namespace AIO
 {
@@ -22,18 +21,12 @@ namespace AIO
         /// <summary>
         /// 大小
         /// </summary>
-        public virtual int Count
-        {
-            get { return Collection.Count; }
-        }
+        public virtual int Count => Collection.Count;
 
         /// <summary>
         /// 只读
         /// </summary>
-        public bool IsReadOnly
-        {
-            get { return true; }
-        }
+        public bool IsReadOnly => true;
 
 
         /// <summary>
@@ -41,8 +34,8 @@ namespace AIO
         /// </summary>
         public virtual V this[K key]
         {
-            get { return (V)Collection.GetOrDefault(key, null); }
-            set { Collection.Set(key, value); }
+            get => Collection.GetOrDefault<V>(key);
+            set => Collection.Set(key, value);
         }
 
         /// <summary>
@@ -109,7 +102,8 @@ namespace AIO
             {
                 if (arrayIndex >= array.Length)
                 {
-                    throw new ArgumentException("The length of array is less than the number of elements in the collection.");
+                    throw new ArgumentException(
+                        "The length of array is less than the number of elements in the collection.");
                 }
 
                 array[arrayIndex++] = item;
@@ -146,18 +140,12 @@ namespace AIO
         /// <summary>
         /// 键集合
         /// </summary>
-        public ICollection<K> Keys
-        {
-            get { return Collection.Keys; }
-        }
+        public ICollection<K> Keys => Collection.Keys;
 
         /// <summary>
         /// 值集合
         /// </summary>
-        public ICollection<V> Values
-        {
-            get { return Collection.Values; }
-        }
+        public ICollection<V> Values => Collection.Values;
 
         /// <summary>
         /// 获取迭代器
@@ -175,7 +163,7 @@ namespace AIO
         /// <inheritdoc/>
         protected sealed override void OnDeserialize()
         {
-            Collection = APool.Dictionary<K, V>();
+            Collection = Pool.Dictionary<K, V>();
             if (Data == null || Data.Length == 0) return;
             ToDeserialize(new BufferByte(Data));
         }
@@ -183,7 +171,7 @@ namespace AIO
         /// <inheritdoc/>
         protected sealed override void OnSerialize()
         {
-            if (Collection == null) Collection = APool.Dictionary<K, V>();
+            if (Collection == null) Collection = Pool.Dictionary<K, V>();
             var buffer = new BufferByte();
             ToSerialize(buffer);
             Data = buffer.ToArray();
@@ -193,7 +181,7 @@ namespace AIO
         public sealed override void Dispose()
         {
             Serialize();
-            APool.Free(Collection);
+            Pool.Free(Collection);
         }
     }
 }

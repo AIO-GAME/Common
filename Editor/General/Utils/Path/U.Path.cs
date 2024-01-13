@@ -29,12 +29,12 @@ namespace AIO.UEditor
                 try
                 {
                     Project = Application.dataPath.Substring(0, Application.dataPath.LastIndexOf('/'));
-                    Project = Project.Replace('/', System.IO.Path.DirectorySeparatorChar);
+                    Project = Project.Replace('/', '\\');
                     Prefs.SaveString("ProjectPath", Project);
                 }
                 catch (Exception)
                 {
-                    Project = Prefs.LoadString("ProjectPath", null);
+                    Project = Prefs.LoadString("ProjectPath");
                 }
 
                 Assets = System.IO.Path.Combine(Project, "Assets");
@@ -162,8 +162,7 @@ namespace AIO.UEditor
             /// <summary>
             /// 获取当前项目名称。
             /// </summary>
-            public static string ProjectName => System.IO.Path.GetFileName(
-                Project.TrimEnd(System.IO.Path.DirectorySeparatorChar, System.IO.Path.AltDirectorySeparatorChar));
+            public static string ProjectName => System.IO.Path.GetFileName(Project.TrimEnd('/', '\\'));
 
             #region Assembly Projects
 

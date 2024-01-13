@@ -4,7 +4,6 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
-
 using System;
 using System.IO;
 using System.Security.Cryptography;
@@ -15,6 +14,17 @@ namespace AIO
     {
         public partial class IO
         {
+            /// <summary>
+            /// 获取临时文件夹路径
+            /// </summary>
+            /// <param name="fileName">文件名</param>
+            public static string GetTempPath(string fileName = null)
+            {
+                var temp = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+                if (fileName != null) temp = Path.Combine(temp, fileName);
+                return temp;
+            }
+
             /// <summary>
             /// 获取指定路径相对于给定目录的相对路径。
             /// </summary>
@@ -52,10 +62,10 @@ namespace AIO
                     return Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString()
                         .Replace('/', Path.DirectorySeparatorChar));
                 }
-                catch (UriFormatException ufex)
+                catch (UriFormatException uriFormatException)
                 {
                     throw new UriFormatException(
-                        $"Failed to get relative path.\nPath: {path}\nDirectory:{directory}\n{ufex}");
+                        $"Failed to get relative path.\nPath: {path}\nDirectory:{directory}\n{uriFormatException}");
                 }
             }
 
@@ -66,13 +76,13 @@ namespace AIO
             /// </summary>
             internal static string GetMD5ByHashAlgorithm(Stream stream, long bufferSize = 1024 * 16)
             {
-                var buffer = new byte[bufferSize];
                 using (var inputStream = stream)
                 {
                     using var hashAlgorithm = new MD5CryptoServiceProvider();
                     {
                         int readLength; //每次读取长度
                         var output = new byte[bufferSize]; //计算MD5
+                        var buffer = new byte[bufferSize];
                         while ((readLength = inputStream.Read(buffer, 0, buffer.Length)) > 0)
                         {
                             hashAlgorithm.TransformBlock(buffer, 0, readLength, output, 0);

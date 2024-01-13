@@ -21,11 +21,11 @@ namespace AIO
                 in string destinationFilePath,
                 in bool overwrite = false)
             {
-                if (!ExistsFolder(sourceFilePath)) return;
+                if (!ExistsDir(sourceFilePath)) return;
                 foreach (var SFile in Directory.GetFileSystemEntries(sourceFilePath)) //遍历所有的文件和目录
                 {
                     //如果是文件夹 则继续拷贝
-                    if (ExistsFolder(SFile)) CopyFolderPart(SFile, destinationFilePath, overwrite);
+                    if (ExistsDir(SFile)) CopyDirPart(SFile, destinationFilePath, overwrite);
                     //如果是文件 则直接放入当前文件夹下
                     else CopyFile(SFile, Path.Combine(destinationFilePath, GetFileName(SFile)), overwrite);
                 }
@@ -37,25 +37,25 @@ namespace AIO
             /// <param name="sourceFilePath">原文件路径</param>
             /// <param name="destinationFilePath">目标文件路径</param>
             /// <param name="overwrite"></param>
-            public static void CopyFolderPart(
+            public static void CopyDirPart(
                 in string sourceFilePath,
                 in string destinationFilePath,
                 in bool overwrite = false)
             {
-                if (!ExistsFolder(sourceFilePath)) return;
+                if (!ExistsDir(sourceFilePath)) return;
                 var DestDir = Path.Combine(destinationFilePath, GetFileName(sourceFilePath));
                 foreach (var SFile in Directory.GetFileSystemEntries(sourceFilePath)) //遍历所有的文件和目录
                 {
-                    if (ExistsFolder(SFile))
+                    if (ExistsDir(SFile))
                     {
                         var current = Path.Combine(DestDir, GetFileName(SFile));
-                        if (!ExistsFolder(current)) CreateFolder(current);
-                        CopyFolderPart(SFile, DestDir, overwrite);
+                        if (!ExistsDir(current)) CreateDir(current);
+                        CopyDirPart(SFile, DestDir, overwrite);
                     }
                     else
                     {
                         var scaleName = Path.Combine(DestDir, GetFileName(SFile));
-                        if (!ExistsFolder(DestDir)) CreateFolder(DestDir);
+                        if (!ExistsDir(DestDir)) CreateDir(DestDir);
                         CopyFile(SFile, scaleName, overwrite);
                     }
                 }
@@ -67,13 +67,13 @@ namespace AIO
             /// <param name="sourceFilePath">原文件路径</param>
             /// <param name="destinationFilePath">目标文件路径</param>
             /// <param name="overwrite"></param>
-            public static void CopyFolderAll(
+            public static void CopyDirAll(
                 in string sourceFilePath,
                 in string destinationFilePath,
                 in bool overwrite = false)
             {
                 //如果目标路径不存在,则创建目标路径
-                if (!ExistsFolder(destinationFilePath)) CreateFolder(destinationFilePath);
+                if (!ExistsDir(destinationFilePath)) CreateDir(destinationFilePath);
                 foreach (var file in GetFiles(sourceFilePath))
                 {
                     //得到原文件根目录下的所有文件
@@ -81,11 +81,11 @@ namespace AIO
                     CopyFile(file, dest, overwrite); //复制文件
                 }
 
-                foreach (var folder in GetFolders(sourceFilePath))
+                foreach (var folder in GetDirs(sourceFilePath))
                 {
                     //得到原文件根目录下的所有文件夹
                     var dest = Path.Combine(destinationFilePath, GetFileName(folder));
-                    CopyFolderAll(folder, dest, overwrite); //构建目标路径,递归复制文件
+                    CopyDirAll(folder, dest, overwrite); //构建目标路径,递归复制文件
                 }
             }
 
@@ -99,7 +99,7 @@ namespace AIO
             {
                 if (!ExistsFile(fromPath)) return false; //源文件路径 不存在
                 var dir = Path.GetDirectoryName(toPath);
-                if (!string.IsNullOrEmpty(dir) && !ExistsFolder(dir))
+                if (!string.IsNullOrEmpty(dir) && !ExistsDir(dir))
                     Directory.CreateDirectory(dir);
                 File.Copy(fromPath, toPath, overwrite);
                 return true;
@@ -123,7 +123,7 @@ namespace AIO
 
                 // 获取目标目录路径，并创建目标目录
                 var destinationFolder = Path.GetDirectoryName(destinationFilePath);
-                if (!string.IsNullOrEmpty(destinationFolder) && !ExistsFolder(destinationFolder))
+                if (!string.IsNullOrEmpty(destinationFolder) && !ExistsDir(destinationFolder))
                     Directory.CreateDirectory(destinationFolder);
 
                 // 打开源文件和目标文件的文件流

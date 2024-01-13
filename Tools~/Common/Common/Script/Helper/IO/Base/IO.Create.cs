@@ -10,11 +10,11 @@ namespace AIO
             /// <summary>
             /// 创建文件夹
             /// </summary>
-            /// <param name="folder">文件夹路径</param>
+            /// <param name="directory">文件夹路径</param>
             /// <param name="clear">清除</param>
-            public static void CreateFolder(in string folder, in bool clear = false)
+            public static void CreateDir(in string directory, in bool clear = false)
             {
-                var info = new DirectoryInfo(folder);
+                var info = new DirectoryInfo(directory);
                 // 判断文件夹是否存在 判断是否需要清空文件夹
                 if (info.Exists)
                 {
