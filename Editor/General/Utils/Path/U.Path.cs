@@ -29,12 +29,12 @@ namespace AIO.UEditor
                 try
                 {
                     Project = Application.dataPath.Substring(0, Application.dataPath.LastIndexOf('/'));
-                    Project = Project.Replace('/', '\\');
                     Prefs.SaveString("ProjectPath", Project);
                 }
                 catch (Exception)
                 {
                     Project = Prefs.LoadString("ProjectPath");
+                    Debug.LogWarning("Failed to get project path from Unity API. Using saved path instead.");
                 }
 
                 Assets = System.IO.Path.Combine(Project, "Assets");
