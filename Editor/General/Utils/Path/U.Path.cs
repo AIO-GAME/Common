@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -29,26 +28,26 @@ namespace AIO.UEditor
                 try
                 {
                     Project = Application.dataPath.Substring(0, Application.dataPath.LastIndexOf('/'));
-                    Project = Project.Replace('/', '\\');
                     Prefs.SaveString("ProjectPath", Project);
                 }
                 catch (Exception)
                 {
                     Project = Prefs.LoadString("ProjectPath");
+                    Debug.LogWarning("Failed to get project path from Unity API. Using saved path instead.");
                 }
 
-                Assets = System.IO.Path.Combine(Project, "Assets");
-                StreamingAssets = System.IO.Path.Combine(Assets, "Assets", "StreamingAssets");
+                Assets = string.Concat(Project, "/Assets");
+                StreamingAssets = string.Concat(Assets, "/StreamingAssets");
                 if (Project != null)
                 {
-                    Temp = System.IO.Path.Combine(Project, "Temp");
-                    Logs = System.IO.Path.Combine(Project, "Logs");
-                    Packages = System.IO.Path.Combine(Project, "Packages");
-                    UserSettings = System.IO.Path.Combine(Project, "UserSettings");
+                    Temp = string.Concat(Project, "/Temp");
+                    Logs = string.Concat(Project, "/Logs");
+                    Packages = string.Concat(Project, "/Packages");
+                    UserSettings = string.Concat(Project, "/UserSettings");
 
-                    ProjectSettings = System.IO.Path.Combine(Project, "ProjectSettings");
-                    Backups = System.IO.Path.Combine(Project, "Editor Default Resources");
-                    EditorDefaultResources = System.IO.Path.Combine(Project, "Backups");
+                    ProjectSettings = string.Concat(Project, "/ProjectSettings");
+                    Backups = string.Concat(Project, "/Backups");
+                    EditorDefaultResources = string.Concat(Project, "/Editor Default Resources");
                 }
 
                 try
@@ -155,7 +154,7 @@ namespace AIO.UEditor
             private static string _EditorContents { get; set; }
 
             /// <summary>
-            /// 获取当前项目所在文件夹的完整路径。
+            /// 获取当前项目所在文件夹的完整路径。 文件分隔符为 '/' 正斜杠。
             /// </summary>
             public static string Project { get; private set; }
 
@@ -340,12 +339,12 @@ namespace AIO.UEditor
                 }
             }
 
-            // ProgramFilesx86 is not available until .NET 4
+            // Program Files x86 is not available until .NET 4
             // https://stackoverflow.com/questions/194157/
             /// <summary>
             /// 获取x86程序文件夹路径，兼容32位和64位操作系统
             /// </summary>
-            private static string ProgramFilesx86
+            private static string ProgramFiles_X86
             {
                 get
                 {
@@ -375,7 +374,7 @@ namespace AIO.UEditor
                     {
                         var startInfo = new ProcessStartInfo
                         {
-                            FileName = System.IO.Path.Combine(ProgramFilesx86,
+                            FileName = System.IO.Path.Combine(ProgramFiles_X86,
                                 @"Microsoft Visual Studio\Installer\vswhere.exe"),
                             Arguments =
                                 @"-latest -prerelease -products * -requires Microsoft.Component.MSBuild -find **\Bin\MSBuild.exe",

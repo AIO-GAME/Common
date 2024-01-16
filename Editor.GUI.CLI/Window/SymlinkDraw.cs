@@ -99,7 +99,7 @@ namespace AIO.UEditor
 
                     GUILayout.Space(10);
                     GUILayout.EndVertical();
-                    
+
                     GUILayout.FlexibleSpace();
                     EditorGUILayout.LabelField("Version 1.0.1-preview", EditorStyles.centeredGreyMiniLabel);
                 }
@@ -137,7 +137,7 @@ namespace AIO.UEditor
         /// </summary>
         /// <param name="guid"></param>
         /// <param name="r"></param>
-        private static void OnProjectWindowItemGUI(string guid, Rect r)
+        private static async void OnProjectWindowItemGUI(string guid, Rect r)
         {
             var path = AssetDatabase.GUIDToAssetPath(guid);
             if (string.IsNullOrEmpty(path)) return;
@@ -148,13 +148,15 @@ namespace AIO.UEditor
                 r.width = 30;
                 if (GUI.Button(r, "<->", SymlinkMarkerStyle))
                 {
+                    var realPath = GetRealPath(path).Replace('\\', '/');
                     try
                     {
-                        PrPlatform.Open.Path(GetRealPath(path)).Async();
+                        var result = await PrPlatform.Open.Path(realPath).Async();
+                        if (result.ExitCode != 0) EditorUtility.RevealInFinder(realPath);
                     }
                     catch
                     {
-                        // ignored
+                        EditorUtility.RevealInFinder(realPath);
                     }
                 }
             }

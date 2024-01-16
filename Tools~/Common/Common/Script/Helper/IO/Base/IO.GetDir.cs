@@ -20,7 +20,7 @@ namespace AIO
             /// </summary>
             /// <param name="directoryInfos">文件夹列表</param>
             /// <returns><see cref="System.IO.DirectoryInfo"/>文件夹信息</returns>
-            public static DirectoryInfo GetLastWriteTimeUtc(ICollection<DirectoryInfo> directoryInfos)
+            public static DirectoryInfo GetLastWriteTimeUtc(IEnumerable<DirectoryInfo> directoryInfos)
             {
                 DirectoryInfo last = null;
                 foreach (var directoryInfo in directoryInfos)
@@ -41,119 +41,124 @@ namespace AIO
             /// <summary>
             /// 获取文件夹数组
             /// </summary>
-            /// <param name="value">路径</param>
+            /// <param name="path">路径</param>
             /// <param name="pattern">匹配模式</param>
             /// <param name="option">搜索模式</param>
             /// <returns>所有文件夹名称</returns>
             public static IEnumerable<DirectoryInfo> GetDirsInfo(
-                in string value,
-                in string pattern = "*",
-                in SearchOption option = SearchOption.TopDirectoryOnly)
+                string path,
+                string pattern = "*",
+                SearchOption option = SearchOption.TopDirectoryOnly)
             {
-                return !Directory.Exists(value)
+                path = path.Replace('\\', Path.AltDirectorySeparatorChar);
+                return !Directory.Exists(path)
                     ? Array.Empty<DirectoryInfo>()
-                    : new DirectoryInfo(value).GetDirectories(pattern, option);
+                    : new DirectoryInfo(path).GetDirectories(pattern, option);
             }
 
             /// <summary>
             /// 获取文件夹数组
             /// </summary>
-            /// <param name="value">路径</param>
+            /// <param name="path">路径</param>
             /// <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
             /// <param name="pattern">匹配模式</param>
             /// <param name="option">搜索模式</param>
             /// <returns>所有文件夹名称</returns>
             public static IEnumerable<DirectoryInfo> GetDirsInfo(
-                in string value,
-                in Func<DirectoryInfo, bool> filtration,
-                in string pattern = "*",
-                in SearchOption option = SearchOption.TopDirectoryOnly)
+                string path,
+                Func<DirectoryInfo, bool> filtration,
+                string pattern = "*",
+                SearchOption option = SearchOption.TopDirectoryOnly)
             {
-                return !Directory.Exists(value)
+                path = path.Replace('\\', Path.AltDirectorySeparatorChar);
+                return !Directory.Exists(path)
                     ? Array.Empty<DirectoryInfo>()
-                    : new DirectoryInfo(value).GetDirectories(pattern, option).Where(filtration);
+                    : new DirectoryInfo(path).GetDirectories(pattern, option).Where(filtration);
             }
 
             /// <summary>
             /// 获取文件夹数组
             /// </summary>
-            /// <param name="value">路径</param>
+            /// <param name="path">路径</param>
             /// <param name="pattern">匹配模式</param>
             /// <param name="option">搜索模式</param>
             /// <returns>所有文件夹名称</returns>
             public static IEnumerable<string> GetDirs(
-                in string value,
-                in string pattern = "*",
-                in SearchOption option = SearchOption.TopDirectoryOnly)
+                string path,
+                string pattern = "*",
+                SearchOption option = SearchOption.TopDirectoryOnly)
             {
-                return GetDirsInfo(value, pattern, option).Select(item => item.FullName);
+                return GetDirsInfo(path, pattern, option).Select(item => item.FullName.Replace('\\', '/'));
             }
 
             /// <summary>
             /// 获取文件夹数组
             /// </summary>
-            /// <param name="value">路径</param>
+            /// <param name="path">路径</param>
             /// <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
             /// <param name="pattern">匹配模式</param>
             /// <param name="option">搜索模式</param>
             /// <returns>所有文件夹名称</returns>
             public static IEnumerable<string> GetDirs(
-                in string value,
+                in string path,
                 in Func<DirectoryInfo, bool> filtration,
                 in string pattern = "*",
                 in SearchOption option = SearchOption.TopDirectoryOnly)
             {
-                return GetDirsInfo(value, filtration, pattern, option).Select(item => item.FullName);
+                return GetDirsInfo(path, filtration, pattern, option).Select(item => item.FullName.Replace('\\', '/'));
             }
 
             /// <summary>
             /// 获取该文件夹下所有文件夹名 不含子文件夹 不包含自己
             /// </summary>
             public static IEnumerable<string> GetDirsName(
-                in string value,
+                in string path,
                 in string pattern = "*",
                 in SearchOption option = SearchOption.TopDirectoryOnly)
             {
-                return GetDirsInfo(value, pattern, option).Select(item => item.Name);
+                return GetDirsInfo(path, pattern, option).Select(item => item.Name);
             }
 
             /// <summary>
             /// 获取该文件夹下所有文件夹名 不含子文件夹 不包含自己
             /// </summary>
             public static IEnumerable<string> GetDirsName(
-                in string value,
+                in string path,
                 in Func<DirectoryInfo, bool> filtration,
                 in string pattern = "*",
                 in SearchOption option = SearchOption.TopDirectoryOnly)
             {
-                return GetDirsInfo(value, filtration, pattern, option).Select(item => item.Name);
+                return GetDirsInfo(path, filtration, pattern, option).Select(item => item.Name);
             }
 
             /// <summary>
             /// 返回文件夹字节长度
             /// </summary>
-            /// <param name="Path">文件相对路径</param>
-            public static long GetDirLength(in string Path)
+            /// <param name="path">文件相对路径</param>
+            public static long GetDirLength(string path)
             {
-                return !ExistsDir(Path)
+                path = path.Replace('\\', Path.AltDirectorySeparatorChar);
+                return !ExistsDir(path)
                     ? 0
-                    : new DirectoryInfo(Path).GetFiles("*", SearchOption.AllDirectories).Sum(file => file.Length);
+                    : new DirectoryInfo(path).GetFiles("*", SearchOption.AllDirectories).Sum(file => file.Length);
             }
 
             /// <summary>
             /// 获取最后写入时间
             /// </summary>
-            public static DateTime GetDirLastWriteTimeUtc(string Path)
+            public static DateTime GetDirLastWriteTimeUtc(string path)
             {
-                return !ExistsDir(Path) ? DateTime.MinValue : Directory.GetLastWriteTimeUtc(Path);
+                path = path.Replace('\\', Path.AltDirectorySeparatorChar);
+                return !ExistsDir(path) ? DateTime.MinValue : Directory.GetLastWriteTimeUtc(path);
             }
 
             /// <summary>
             /// 获取创建文件夹时间
             /// </summary>
-            public static DateTime GetDirCreationTimeUtc(string Path)
+            public static DateTime GetDirCreationTimeUtc(string path)
             {
-                return !ExistsDir(Path) ? DateTime.MinValue : Directory.GetCreationTimeUtc(Path);
+                path = path.Replace('\\', Path.AltDirectorySeparatorChar);
+                return !ExistsDir(path) ? DateTime.MinValue : Directory.GetCreationTimeUtc(path);
             }
         }
     }

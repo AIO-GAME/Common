@@ -4991,37 +4991,37 @@
             IO工具类
             </summary>
         </member>
-        <member name="M:AIO.AHelper.IO.GetLastWriteTimeUtc(System.Collections.Generic.ICollection{System.IO.DirectoryInfo})">
+        <member name="M:AIO.AHelper.IO.GetLastWriteTimeUtc(System.Collections.Generic.IEnumerable{System.IO.DirectoryInfo})">
             <summary>
             获取最新的文件夹
             </summary>
             <param name="directoryInfos">文件夹列表</param>
             <returns><see cref="T:System.IO.DirectoryInfo"/>文件夹信息</returns>
         </member>
-        <member name="M:AIO.AHelper.IO.GetDirsInfo(System.String@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AIO.AHelper.IO.GetDirsInfo(System.String,System.String,System.IO.SearchOption)">
             <summary>
             获取文件夹数组
             </summary>
-            <param name="value">路径</param>
+            <param name="path">路径</param>
             <param name="pattern">匹配模式</param>
             <param name="option">搜索模式</param>
             <returns>所有文件夹名称</returns>
         </member>
-        <member name="M:AIO.AHelper.IO.GetDirsInfo(System.String@,System.Func{System.IO.DirectoryInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AIO.AHelper.IO.GetDirsInfo(System.String,System.Func{System.IO.DirectoryInfo,System.Boolean},System.String,System.IO.SearchOption)">
             <summary>
             获取文件夹数组
             </summary>
-            <param name="value">路径</param>
+            <param name="path">路径</param>
             <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
             <param name="pattern">匹配模式</param>
             <param name="option">搜索模式</param>
             <returns>所有文件夹名称</returns>
         </member>
-        <member name="M:AIO.AHelper.IO.GetDirs(System.String@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AIO.AHelper.IO.GetDirs(System.String,System.String,System.IO.SearchOption)">
             <summary>
             获取文件夹数组
             </summary>
-            <param name="value">路径</param>
+            <param name="path">路径</param>
             <param name="pattern">匹配模式</param>
             <param name="option">搜索模式</param>
             <returns>所有文件夹名称</returns>
@@ -5030,7 +5030,7 @@
             <summary>
             获取文件夹数组
             </summary>
-            <param name="value">路径</param>
+            <param name="path">路径</param>
             <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
             <param name="pattern">匹配模式</param>
             <param name="option">搜索模式</param>
@@ -5046,11 +5046,11 @@
             获取该文件夹下所有文件夹名 不含子文件夹 不包含自己
             </summary>
         </member>
-        <member name="M:AIO.AHelper.IO.GetDirLength(System.String@)">
+        <member name="M:AIO.AHelper.IO.GetDirLength(System.String)">
             <summary>
             返回文件夹字节长度
             </summary>
-            <param name="Path">文件相对路径</param>
+            <param name="path">文件相对路径</param>
         </member>
         <member name="M:AIO.AHelper.IO.GetDirLastWriteTimeUtc(System.String)">
             <summary>
@@ -5085,17 +5085,17 @@
             <param name="directories">包含所有可能包含该文件的文件夹路径的可变参数数组。</param>
             <returns>如果找到该文件，则返回完整路径，否则返回 null。</returns>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFilesInfo(System.String@,System.Func{System.IO.FileInfo,System.Boolean}@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AIO.AHelper.IO.GetFilesInfo(System.String,System.Func{System.IO.FileInfo,System.Boolean},System.String,System.IO.SearchOption)">
             <summary>
             获取当前所有文件夹中所有文件信息
             </summary>
-            <param name="value">路径</param>
+            <param name="path">路径</param>
             <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
             <param name="pattern">匹配模式</param>
             <param name="option">搜查模式</param>
             <returns>所有文件信息数组</returns>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFilesInfo(System.String@,System.String@,System.IO.SearchOption@)">
+        <member name="M:AIO.AHelper.IO.GetFilesInfo(System.String,System.String,System.IO.SearchOption)">
             <summary>
             获取当前所有文件夹中所有文件信息
             </summary>
@@ -5109,7 +5109,7 @@
             <summary>
             获取该文件夹下所有文件 绝对路径
             </summary>
-            <param name="value">路径</param>
+            <param name="path">路径</param>
             <param name="pattern">匹配模式</param>
             <param name="option">搜索模式</param>
             <returns>所有文件夹 绝对路径</returns>
@@ -5118,7 +5118,7 @@
             <summary>
             获取该文件夹下所有文件 绝对路径
             </summary>
-            <param name="value">路径</param>
+            <param name="path">路径</param>
             <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
             <param name="pattern">匹配模式</param>
             <param name="option">搜索模式</param>
@@ -5128,7 +5128,7 @@
             <summary>
             获取该文件夹下所有文件 相对路径
             </summary>
-            <param name="value">路径</param>
+            <param name="path">路径</param>
             <param name="pattern">匹配模式</param>
             <param name="option">搜索模式</param>
             <returns>所有文件夹 相对路径</returns>
@@ -5137,7 +5137,7 @@
             <summary>
             获取该文件夹下所有文件 相对路径
             </summary>
-            <param name="value">路径</param>
+            <param name="path">路径</param>
             <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
             <param name="pattern">匹配模式</param>
             <param name="option">搜索模式</param>
@@ -5147,7 +5147,7 @@
             <summary>
             获取该文件夹下所有文件名称
             </summary>
-            <param name="value">路径</param>
+            <param name="path">路径</param>
             <param name="pattern">匹配模式</param>
             <param name="option">搜索模式</param>
             <returns>所有文件名称</returns>
@@ -5156,18 +5156,18 @@
             <summary>
             获取该文件夹下所有文件名称
             </summary>
-            <param name="value">路径</param>
+            <param name="path">路径</param>
             <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
             <param name="pattern">匹配模式</param>
             <param name="option">搜索模式</param>
             <returns>所有文件名称</returns>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFileSize(System.String@,System.Single@)">
+        <member name="M:AIO.AHelper.IO.GetFileSize(System.String,System.Single@)">
             <summary>
             返回文件大小 默认单位KB
             </summary>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFileLength(System.String@)">
+        <member name="M:AIO.AHelper.IO.GetFileLength(System.String)">
             <summary>
             返回文件字节长度
             </summary>
@@ -5177,7 +5177,7 @@
             <summary>
             返回文件名，不含路径 默认带文件名后缀
             </summary>
-            <param name="file">文件路径</param>
+            <param name="path">文件路径</param>
             <param name="extension">是否有后缀</param>
             <returns>文件名</returns>
         </member>
@@ -5522,29 +5522,53 @@
         </member>
         <member name="M:AIO.AHelper.IO.Exists(System.String)">
             <summary>
-            判断当前路径是否存在 不管是以文件夹 还是 文件的形式存在
+            判断当前路径是否存在 不管是以文件夹 还是 文件的形式存在 不会自动对路径转义 请自行转义
             </summary>
             <returns>True:存在 False:不存在</returns>
         </member>
         <member name="M:AIO.AHelper.IO.ExistsBoth(System.String)">
             <summary>
-            判断当前路径是否存在 文件夹和文件都存在才返回True
+            判断当前路径是否存在 文件夹和文件都存在才返回True 不会自动对路径转义 请自行转义
             </summary>
             <returns>True:存在 False:不存在</returns>
         </member>
         <member name="M:AIO.AHelper.IO.ExistsFile(System.String@)">
             <summary>
-            判断文件是否存在
+            判断文件是否存在 不会自动对路径转义 请自行转义
             </summary>
             <returns>True:存在 False:不存在</returns>
         </member>
         <member name="M:AIO.AHelper.IO.ExistsDir(System.String@)">
             <summary>
-            判断目录是否存在
+            判断目录是否存在 不会自动对路径转义 请自行转义
             </summary>
             <returns>True:存在 False:不存在</returns>
         </member>
-        <member name="M:AIO.AHelper.IO.FindPaths(System.String@,System.IO.SearchOption@,System.String[])">
+        <member name="M:AIO.AHelper.IO.ExistsDirEx(System.String@)">
+            <summary>
+            判断目录是否存在 会自动对路径转义 标准正斜杠
+            </summary>
+            <returns>True:存在 False:不存在</returns>
+        </member>
+        <member name="M:AIO.AHelper.IO.ExistsFileEx(System.String@)">
+            <summary>
+            判断文件是否存在 会自动对路径转义 标准正斜杠
+            </summary>
+            <returns>True:存在 False:不存在</returns>
+        </member>
+        <member name="M:AIO.AHelper.IO.ExistsEx(System.String)">
+            <summary>
+            判断当前路径是否存在 不管是以文件夹 还是 文件的形式存在 会自动对路径转义 标准正斜杠
+            </summary>
+            <returns>True:存在 False:不存在</returns>
+        </member>
+        <member name="M:AIO.AHelper.IO.ExistsBothEx(System.String)">
+            <summary>
+            判断当前路径是否存在 文件夹和文件都存在才返回True 会自动对路径转义 标准正斜杠
+            </summary>
+            <returns>True:存在 False:不存在</returns>
+        </member>
+        <member name="M:AIO.AHelper.IO.FindPaths(System.String,System.IO.SearchOption,System.String[])">
             <summary>
             查询匹配 返回符合条件的路径
             </summary>
@@ -5553,7 +5577,7 @@
             <param name="searchPatterns">条件 "*value*"</param>
             <returns></returns>
         </member>
-        <member name="M:AIO.AHelper.IO.FindPaths(System.String@,System.IO.SearchOption@,System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:AIO.AHelper.IO.FindPaths(System.String,System.IO.SearchOption,System.Collections.Generic.ICollection{System.String})">
             <summary>
             查询匹配 返回符合条件的路径
             </summary>
@@ -5585,7 +5609,7 @@
             可自定义缓冲区大小，计算速度较快
             </summary>
         </member>
-        <member name="M:AIO.AHelper.IO.MoveFile(System.String@,System.String@,System.Boolean@)">
+        <member name="M:AIO.AHelper.IO.MoveFile(System.String,System.String,System.Boolean)">
             <summary>
             移动文件
             </summary>
@@ -5593,7 +5617,7 @@
             <param name="target">目标路径</param>
             <param name="overlay">Ture:覆盖 False:不覆盖</param>
         </member>
-        <member name="M:AIO.AHelper.IO.MoveDir(System.String@,System.String@,System.Boolean@)">
+        <member name="M:AIO.AHelper.IO.MoveDir(System.String,System.String,System.Boolean)">
             <summary>
             移动文件夹
             </summary>
@@ -5630,18 +5654,18 @@
             <param name="path">路径</param>
             <param name="bufferSize">缓冲区大小</param>
         </member>
-        <member name="M:AIO.AHelper.IO.ReadByteArray(System.String@)">
+        <member name="M:AIO.AHelper.IO.ReadByteArray(System.String)">
             <summary>
             加载 Byte Array
             </summary>
             <param name="path">路径</param>
         </member>
-        <member name="M:AIO.AHelper.IO.WriteByteArray(System.String@,System.Byte[]@,System.Boolean@,System.Boolean@)">
+        <member name="M:AIO.AHelper.IO.WriteByteArray(System.String,System.Byte[]@,System.Boolean@,System.Boolean@)">
             <summary>
             写入数据
             </summary>
         </member>
-        <member name="M:AIO.AHelper.IO.Write(System.String@,System.Byte[]@,System.Int32@,System.Int32@,System.Boolean@,System.Int32@)">
+        <member name="M:AIO.AHelper.IO.Write(System.String,System.Byte[]@,System.Int32@,System.Int32@,System.Boolean@,System.Int32@)">
             <summary>
             将指定数据从offset开始写入length长度到文件中,是否追加到文件尾
             </summary>
@@ -5652,7 +5676,7 @@
             <param name="concat">true:拼接 | false:覆盖</param>
             <param name="bufferSize">缓冲区大小</param>
         </member>
-        <member name="M:AIO.AHelper.IO.Read(System.String@,System.Int32@)">
+        <member name="M:AIO.AHelper.IO.Read(System.String,System.Int32@)">
             <summary>
             异步读取
             </summary>

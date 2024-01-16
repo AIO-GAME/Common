@@ -96,7 +96,7 @@ namespace AIO.UEditor
                 if (string.IsNullOrEmpty(pattern)) return Array.Empty<string>();
                 return AssetDatabase.FindAssets(pattern, folders)
                     .Select(AssetDatabase.GUIDToAssetPath)
-                    .Where(value => !filtration(value)).ToArray();
+                    .Where(value => !filtration.Invoke(value)).ToArray();
             }
 
             /// <summary>
@@ -192,10 +192,12 @@ namespace AIO.UEditor
                 in SearchOption option = SearchOption.TopDirectoryOnly)
             {
                 if (!Directory.Exists(value)) return Array.Empty<string>();
-                value = System.IO.Path.GetFullPath(value);
+                value = System.IO.Path.GetFullPath(value).Replace('\\', System.IO.Path.AltDirectorySeparatorChar);
                 if (!value.Contains(Path.Project)) return Array.Empty<string>();
-                return AHelper.IO.GetFilesInfo(value, pattern, option)
-                    .Select(item => item.FullName.Substring(Path.Project.Length + 1));
+                var len = Path.Project.Length + 1;
+                return AHelper.IO
+                    .GetFilesInfo(value, pattern, option)
+                    .Select(item => item.FullName.Substring(len).Replace('\\', '/'));
             }
 
             /// <summary>
@@ -213,10 +215,12 @@ namespace AIO.UEditor
                 in SearchOption option = SearchOption.TopDirectoryOnly)
             {
                 if (!Directory.Exists(value)) return Array.Empty<string>();
-                value = System.IO.Path.GetFullPath(value);
+                value = System.IO.Path.GetFullPath(value).Replace('\\', System.IO.Path.AltDirectorySeparatorChar);
                 if (!value.Contains(Path.Project)) return Array.Empty<string>();
-                return AHelper.IO.GetFilesInfo(value, filtration, pattern, option)
-                    .Select(item => item.FullName.Substring(Path.Project.Length + 1));
+                var len = Path.Project.Length + 1;
+                return AHelper.IO
+                    .GetFilesInfo(value, filtration, pattern, option)
+                    .Select(item => item.FullName.Substring(len).Replace('\\', '/'));
             }
 
             /// <summary>
@@ -234,12 +238,12 @@ namespace AIO.UEditor
                 SearchOption option = SearchOption.TopDirectoryOnly)
             {
                 if (!Directory.Exists(value)) return Array.Empty<string>();
-                value = System.IO.Path.GetFullPath(value);
+                value = System.IO.Path.GetFullPath(value).Replace('\\', System.IO.Path.AltDirectorySeparatorChar);
                 if (!value.Contains(Path.Project)) return Array.Empty<string>();
-                return
-                    from item in AHelper.IO.GetFilesInfo(value, filtration, pattern, option)
+                var len = Path.Project.Length + 1;
+                return from item in AHelper.IO.GetFilesInfo(value, filtration, pattern, option)
                     where !item.Extension.Contains(".meta")
-                    select item.FullName.Substring(Path.Project.Length + 1);
+                    select item.FullName.Substring(len).Replace('\\', '/');
             }
 
             /// <summary>
@@ -255,12 +259,12 @@ namespace AIO.UEditor
                 in string pattern = "*")
             {
                 if (!Directory.Exists(value)) return Array.Empty<string>();
-                value = System.IO.Path.GetFullPath(value);
+                value = System.IO.Path.GetFullPath(value).Replace('\\', System.IO.Path.AltDirectorySeparatorChar);
                 if (!value.StartsWith(Path.Project)) return Array.Empty<string>();
-                return
-                    from item in AHelper.IO.GetFilesInfo(value, pattern, option)
-                    where !item.Extension.StartsWith(".meta")
-                    select item.FullName.Substring(Path.Project.Length + 1);
+                var len = Path.Project.Length + 1;
+                return from item in AHelper.IO.GetFilesInfo(value, pattern, option)
+                    where !item.Extension.Contains(".meta")
+                    select item.FullName.Substring(len).Replace('\\', '/');
             }
         }
     }

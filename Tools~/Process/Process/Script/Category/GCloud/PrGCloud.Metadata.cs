@@ -16,7 +16,8 @@ namespace AIO
         /// 更新元数据
         /// </summary>
         /// <param name="remote">是对象要上传到的存储桶的路径，例如 my-bucket/data/text.png</param>
-        /// <param name="metadata">是要修改的元数据的标志。 </param>
+        /// <param name="key">元数据key</param>
+        /// <param name="value">元数据value</param>
         /// <remarks>
         /// --cache-control=no-cache
         /// --content-type=image/png
@@ -28,12 +29,12 @@ namespace AIO
         /// <exception cref="ArgumentNullException">传入值为NULL</exception>
         /// <returns> Ture:成功 False: 失败 </returns>
         [DebuggerHidden, DebuggerNonUserCode]
-        public static bool MetadataUpdate(string remote, string metadata)
+        public static bool MetadataUpdate(string remote, string key, string value)
         {
-            if (string.IsNullOrEmpty(metadata))
-                throw new ArgumentNullException(nameof(metadata));
+            if (string.IsNullOrEmpty(key)) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrEmpty(value)) throw new ArgumentNullException(nameof(value));
             remote = remote.Replace("\\", "/").TrimEnd('/');
-            return Create(Gcloud, $"storage objects update \"gs://{remote}\" \"{metadata}\"").Sync()
+            return Create(Gsutil, $"-m setmeta -h \"{key}:{value}\" -r gs://{remote}\"").Sync()
                 .ExitCode == 0;
         }
 
@@ -41,7 +42,8 @@ namespace AIO
         /// 更新元数据
         /// </summary>
         /// <param name="remote">是对象要上传到的存储桶的路径，例如 my-bucket/data/text.png</param>
-        /// <param name="metadata">是要修改的元数据的标志。 </param>
+        /// <param name="key">元数据key</param>
+        /// <param name="value">元数据value</param>
         /// <remarks>
         /// --content-type=image/png
         /// --cache-control=public,max-age=3600
@@ -52,11 +54,12 @@ namespace AIO
         /// <exception cref="ArgumentNullException">传入值为NULL</exception>
         /// <returns> Ture:成功 False: 失败 </returns>
         [DebuggerHidden, DebuggerNonUserCode]
-        public static async Task<bool> MetadataUpdateAsync(string remote, string metadata)
+        public static async Task<bool> MetadataUpdateAsync(string remote, string key, string value)
         {
-            if (string.IsNullOrEmpty(metadata)) throw new ArgumentNullException(nameof(metadata));
+            if (string.IsNullOrEmpty(key)) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrEmpty(value)) throw new ArgumentNullException(nameof(value));
             remote = remote.Replace("\\", "/").TrimEnd('/');
-            var result = await Create(Gcloud, $"storage objects update \"gs://{remote}\" \"{metadata}\"");
+            var result = await Create(Gsutil, $"-m setmeta -h \"{key}:{value}\" -r gs://{remote}\"");
             return result.ExitCode == 0;
         }
 

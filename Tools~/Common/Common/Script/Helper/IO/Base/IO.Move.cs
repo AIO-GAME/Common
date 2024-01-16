@@ -16,11 +16,13 @@ namespace AIO
             /// <param name="target">目标路径</param>
             /// <param name="overlay">Ture:覆盖 False:不覆盖</param>
             public static void MoveFile(
-                in string source,
-                in string target,
-                in bool overlay = false
+                string source,
+                string target,
+                bool overlay = false
             )
             {
+                source = source.Replace('\\', Path.AltDirectorySeparatorChar);
+                target = target.Replace('\\', Path.AltDirectorySeparatorChar);
                 if (!File.Exists(source)) return;
 
                 if (File.Exists(target))
@@ -44,11 +46,13 @@ namespace AIO
             /// <param name="target">目标路径</param>
             /// <param name="overlay">Ture:覆盖 False:不覆盖</param>
             public static void MoveDir(
-                in string source,
-                in string target,
-                in bool overlay = false
+                string source,
+                string target,
+                bool overlay = false
             )
             {
+                source = source.Replace('\\', Path.AltDirectorySeparatorChar);
+                target = target.Replace('\\', Path.AltDirectorySeparatorChar);
                 if (!Directory.Exists(source)) return;
                 if (Directory.Exists(target))
                 {

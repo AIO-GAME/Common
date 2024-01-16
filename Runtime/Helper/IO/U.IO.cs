@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using SPath = System.IO.Path;
 using SDirectory = System.IO.Directory;
 using SFile = System.IO.File;
@@ -58,7 +57,8 @@ namespace AIO
             public static void DeleteDirectoryIfExists(in string path)
             {
                 if (SDirectory.Exists(path)) SDirectory.Delete(path, true);
-                var metaFilePath = SPath.Combine(SPath.GetDirectoryName(path) ?? string.Empty, SPath.GetFileName(path) + ".meta");
+                var metaFilePath = SPath.Combine(SPath.GetDirectoryName(path) ?? string.Empty,
+                    SPath.GetFileName(path) + ".meta");
                 if (SFile.Exists(metaFilePath)) SFile.Delete(metaFilePath);
             }
 

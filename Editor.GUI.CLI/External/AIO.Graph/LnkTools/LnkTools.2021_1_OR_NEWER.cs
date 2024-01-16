@@ -85,7 +85,7 @@ namespace AIO.UEditor
         static LnkToolOverlay()
         {
             var type = typeof(LnkToolOverlay);
-
+            Debug.unityLogger.logEnabled = false;
             var miTarget = type.GetMethod("CreateHorizontalToolbarContent", ToolBarBind);
             var miReplacement = type.GetMethod("OnCreateHorizontalToolbarContent", ToolBarBind);
 
@@ -96,6 +96,7 @@ namespace AIO.UEditor
             var Replacement = type.GetMethod("OnCreateVerticalToolbarContent", ToolBarBind);
             _hook2 = new MethodHook(Target, Replacement);
             _hook2.Install();
+            Debug.unityLogger.logEnabled = true;
         }
 
         protected override Layout supportedLayouts
