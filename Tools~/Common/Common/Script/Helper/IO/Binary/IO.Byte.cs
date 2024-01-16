@@ -17,7 +17,7 @@ namespace AIO
             /// 加载 Byte Array
             /// </summary>
             /// <param name="path">路径</param>
-            public static byte[] ReadByteArray(in string path)
+            public static byte[] ReadByteArray(string path)
             {
                 return Read(path);
             }
@@ -26,11 +26,12 @@ namespace AIO
             /// 写入数据
             /// </summary>
             public static bool WriteByteArray(
-                in string path,
+                string path,
                 in byte[] bytes,
                 in bool coded = false,
                 in bool concat = false)
             {
+                path = path.Replace('\\', Path.AltDirectorySeparatorChar);
                 if (!coded) return Write(path, bytes, 0, bytes.Length, concat);
                 for (var i = 0; i < bytes.Length; i++)
                     bytes[i] = EncodingBitByte(bytes[i]);
@@ -47,13 +48,14 @@ namespace AIO
             /// <param name="concat">true:拼接 | false:覆盖</param>
             /// <param name="bufferSize">缓冲区大小</param>
             public static bool Write(
-                in string path,
+                string path,
                 in byte[] bytes,
                 in int offset,
                 in int length,
                 in bool concat,
                 in int bufferSize = 4096)
             {
+                path = path.Replace('\\', Path.AltDirectorySeparatorChar);
                 var dir = Path.GetDirectoryName(path);
                 if (!string.IsNullOrEmpty(dir) && !ExistsDir(dir))
                     Directory.CreateDirectory(dir);
@@ -72,9 +74,10 @@ namespace AIO
             /// <param name="path">路径</param>
             /// <param name="bufferSize">缓冲区大小</param>
             public static byte[] Read(
-                in string path,
+                string path,
                 in int bufferSize = 4096)
             {
+                path = path.Replace('\\', Path.AltDirectorySeparatorChar);
                 if (!ExistsFile(path)) return Array.Empty<byte>();
                 try
                 {

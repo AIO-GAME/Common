@@ -14,7 +14,7 @@ namespace AIO
             static Path()
             {
                 Assets = Application.dataPath;
-                Project = Directory.GetParent(Assets)?.FullName;
+                Project = Directory.GetParent(Assets)?.FullName.Replace('\\', System.IO.Path.AltDirectorySeparatorChar);
                 StreamingAssetsPath = Application.streamingAssetsPath;
                 PersistentDataPath = Application.persistentDataPath;
             }

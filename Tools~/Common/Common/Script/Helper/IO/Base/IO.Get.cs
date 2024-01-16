@@ -22,7 +22,7 @@ namespace AIO
             {
                 var temp = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
                 if (fileName != null) temp = Path.Combine(temp, fileName);
-                return temp;
+                return temp.Replace('\\', Path.AltDirectorySeparatorChar);
             }
 
             /// <summary>
@@ -38,29 +38,25 @@ namespace AIO
                 if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
                 if (string.IsNullOrEmpty(directory)) throw new ArgumentNullException(nameof(directory));
 
-                if (!directory.EndsWith(Path.DirectorySeparatorChar.ToString()))
+                if (!directory.EndsWith(Path.AltDirectorySeparatorChar.ToString()))
                 {
-                    directory += Path.DirectorySeparatorChar;
+                    directory += Path.AltDirectorySeparatorChar;
                 }
 
                 try
                 {
                     // Optimization: Try a simple substring if possible
-                    path = path.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
-                    directory = directory.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
+                    path = path.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+                    directory = directory.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
 
-                    if (path.StartsWith(directory, StringComparison.Ordinal))
-                    {
-                        return path.Substring(directory.Length);
-                    }
-
+                    if (path.StartsWith(directory, StringComparison.Ordinal)) return path.Substring(directory.Length);
                     // Otherwise, use the URI library
 
                     var pathUri = new Uri(path);
                     var folderUri = new Uri(directory);
 
                     return Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString()
-                        .Replace('/', Path.DirectorySeparatorChar));
+                        .Replace('\\', Path.AltDirectorySeparatorChar));
                 }
                 catch (UriFormatException uriFormatException)
                 {
