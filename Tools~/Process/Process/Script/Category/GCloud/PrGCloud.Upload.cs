@@ -18,8 +18,8 @@ namespace AIO
         /// </summary>
         /// <param name="remote">是对象要上传到的存储桶的名称，例如 my-bucket</param>
         /// <param name="location">是对象的本地路径。例如 Desktop/dog.png。</param>
-        /// <param name="metadata">是要修改的元数据的标志。
-        /// </param>
+        /// <param name="key">元数据key</param>
+        /// <param name="value">元数据value</param>
         /// <remarks>
         /// --content-type=image/png
         /// --cache-control=public,max-age=3600
@@ -29,15 +29,15 @@ namespace AIO
         /// </remarks>
         /// <returns> Ture:成功 False: 失败 </returns>
         [DebuggerHidden, DebuggerNonUserCode]
-        public static bool UploadFile(string remote, string location, string metadata = "")
+        public static bool UploadFile(string remote, string location, string key = "", string value = "")
         {
             location = location.Replace("\\", "/").TrimEnd('/');
             if (!File.Exists(location)) return false;
             remote = remote.Replace("\\", "/").TrimEnd('/');
             var ExecutorUpload = Create(Gcloud, $"storage cp \"{location}\" \"gs://{remote}\"").Sync();
-            if (string.IsNullOrEmpty(metadata)) return ExecutorUpload.ExitCode == 0;
+            if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(value)) return ExecutorUpload.ExitCode == 0;
 
-            var ExecutorUpdate = Create(Gcloud, $"storage objects update \"gs://{remote}\" \"{metadata}\"")
+            var ExecutorUpdate = Create(Gcloud, $"storage objects update \"gs://{remote}\" \"--{key}={value}\"")
                 .Sync();
             return ExecutorUpdate.ExitCode == 0;
         }
@@ -47,8 +47,8 @@ namespace AIO
         /// </summary>
         /// <param name="remote">是对象要上传到的存储桶的名称，例如 my-bucket</param>
         /// <param name="location">是对象的本地路径。例如 Desktop/dog.png。</param>
-        /// <param name="metadata">是要修改的元数据的标志。
-        /// </param>
+        /// <param name="key">元数据key</param>
+        /// <param name="value">元数据value</param>
         /// <remarks>
         /// --content-type=image/png
         /// --cache-control=public,max-age=3600
@@ -58,15 +58,16 @@ namespace AIO
         /// </remarks>
         /// <returns> Ture:成功 False: 失败 </returns>
         [DebuggerHidden, DebuggerNonUserCode]
-        public static async Task<bool> UploadFileAsync(string remote, string location, string metadata = "")
+        public static async Task<bool> UploadFileAsync(string remote, string location, string key = "",
+            string value = "")
         {
             location = location.Replace("\\", "/").TrimEnd('/');
             if (!File.Exists(location)) return false;
             remote = remote.Replace("\\", "/").TrimEnd('/');
             var ExecutorUpload = await Create(Gcloud, $"storage cp \"{location}\" \"gs://{remote}\"");
-            if (string.IsNullOrEmpty(metadata)) return ExecutorUpload.ExitCode == 0;
+            if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(value)) return ExecutorUpload.ExitCode == 0;
 
-            var ExecutorUpdate = await Create(Gcloud, $"storage objects update \"gs://{remote}\" \"{metadata}\"");
+            var ExecutorUpdate = await Create(Gcloud, $"storage objects update \"gs://{remote}\" \"--{key}={value}\"");
             return ExecutorUpdate.ExitCode == 0;
         }
 
@@ -76,17 +77,20 @@ namespace AIO
         /// <param name="remote">是对象要上传到的存储桶的名称，例如 my-bucket</param>
         /// <param name="location">是对象的本地路径。例如 Desktop/dog.png。</param>
         /// <param name="onProgress">进度回调</param>
-        /// <param name="metadata">是要修改的元数据的标志。
-        /// 例如
+        /// <param name="key">元数据key</param>
+        /// <param name="value">元数据value</param>
+        /// <remarks>
         /// --content-type=image/png
         /// --cache-control=public,max-age=3600
         /// --content-language=unset
         /// --content-encoding=unset
         /// --content-disposition=disposition
-        /// </param>
+        /// </remarks>
         /// <returns> Ture:成功 False: 失败 </returns>
         [DebuggerHidden, DebuggerNonUserCode]
-        public static bool UploadDir(string remote, string location, string metadata = "",
+        public static bool UploadDir(string remote, string location,
+            string key = "",
+            string value = "",
             Action<string> onProgress = null)
         {
             location = location.Replace("\\", "/").TrimEnd('/');
@@ -97,19 +101,11 @@ namespace AIO
             var ExeUpload = Create(Gcloud, $"storage cp \"{location}\" \"gs://{remote}\" --recursive")
                 .OnProgress((o, s) => { onProgress?.Invoke($"Uploading {s}"); }).Sync();
             if (ExeUpload.ExitCode != 0) return false;
-            if (string.IsNullOrEmpty(metadata)) return true;
 
-            var index = location.Length + 1;
-            var result = ExeUpload.ExitCode == 0;
-            foreach (var file in Directory.GetFiles(location, "*.*", SearchOption.AllDirectories))
-            {
-                var temp = $"{remote}/{file.Substring(index).Replace("\\", "/")}";
-                var te = Create(Gcloud, $"storage objects update \"gs://{temp}\" \"{metadata}\"").Sync();
-                if (result) result = te.ExitCode == 0;
-                onProgress?.Invoke($"Update Metadata ：{temp} {(te.ExitCode == 0 ? "成功" : "失败")}");
-            }
-
-            return result;
+            if (string.IsNullOrEmpty(key)) return true;
+            if (string.IsNullOrEmpty(value)) return true;
+            onProgress?.Invoke($"Update Metadata ：{remote}");
+            return MetadataUpdate(remote, key, value);
         }
 
         /// <summary>
@@ -118,17 +114,20 @@ namespace AIO
         /// <param name="remote">是对象要上传到的存储桶的名称，例如 my-bucket</param>
         /// <param name="location">是对象的本地路径。例如 Desktop/dog.png。</param>
         /// <param name="onProgress">进度回调</param>
-        /// <param name="metadata">是要修改的元数据的标志。
-        /// 例如
+        /// <param name="key">元数据key</param>
+        /// <param name="value">元数据value</param>
+        /// <remarks>
         /// --content-type=image/png
         /// --cache-control=public,max-age=3600
         /// --content-language=unset
         /// --content-encoding=unset
         /// --content-disposition=disposition
-        /// </param>
+        /// </remarks>
         /// <returns> Ture:成功 False: 失败 </returns>
         [DebuggerHidden, DebuggerNonUserCode]
-        public static async Task<bool> UploadDirAsync(string remote, string location, string metadata = "",
+        public static async Task<bool> UploadDirAsync(string remote, string location,
+            string key = "",
+            string value = "",
             Action<string> onProgress = null)
         {
             location = location.Replace("\\", "/").TrimEnd('/');
@@ -139,19 +138,10 @@ namespace AIO
             var ExeUpload = await Create(Gcloud, $"storage cp \"{location}\" \"gs://{remote}\" --recursive")
                 .OnProgress((o, s) => { onProgress?.Invoke($"Uploading {s}"); });
             if (ExeUpload.ExitCode != 0) return false;
-            if (string.IsNullOrEmpty(metadata)) return true;
-
-            var index = location.Length + 1;
-            var result = ExeUpload.ExitCode == 0;
-            foreach (var file in Directory.GetFiles(location, "*.*", SearchOption.AllDirectories))
-            {
-                var temp = $"{remote}/{file.Substring(index).Replace("\\", "/")}";
-                var te = await Create(Gcloud, $"storage objects update \"gs://{temp}\" \"{metadata}\"");
-                if (result) result = te.ExitCode == 0;
-                onProgress?.Invoke($"Update Metadata ：{temp} {(te.ExitCode == 0 ? "成功" : "失败")}");
-            }
-
-            return result;
+            if (string.IsNullOrEmpty(key)) return true;
+            if (string.IsNullOrEmpty(value)) return true;
+            onProgress?.Invoke($"Update Metadata ：{remote}");
+            return await MetadataUpdateAsync(remote, key, value);
         }
     }
 }

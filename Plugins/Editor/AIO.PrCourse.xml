@@ -1759,12 +1759,13 @@
             <param name="remote">远端地址</param>
             <returns>获取指定文件MD5</returns>
         </member>
-        <member name="M:AIO.PrGCloud.MetadataUpdate(System.String,System.String)">
+        <member name="M:AIO.PrGCloud.MetadataUpdate(System.String,System.String,System.String)">
             <summary>
             更新元数据
             </summary>
             <param name="remote">是对象要上传到的存储桶的路径，例如 my-bucket/data/text.png</param>
-            <param name="metadata">是要修改的元数据的标志。 </param>
+            <param name="key">元数据key</param>
+            <param name="value">元数据value</param>
             <remarks>
             --cache-control=no-cache
             --content-type=image/png
@@ -1776,12 +1777,13 @@
             <exception cref="T:System.ArgumentNullException">传入值为NULL</exception>
             <returns> Ture:成功 False: 失败 </returns>
         </member>
-        <member name="M:AIO.PrGCloud.MetadataUpdateAsync(System.String,System.String)">
+        <member name="M:AIO.PrGCloud.MetadataUpdateAsync(System.String,System.String,System.String)">
             <summary>
             更新元数据
             </summary>
             <param name="remote">是对象要上传到的存储桶的路径，例如 my-bucket/data/text.png</param>
-            <param name="metadata">是要修改的元数据的标志。 </param>
+            <param name="key">元数据key</param>
+            <param name="value">元数据value</param>
             <remarks>
             --content-type=image/png
             --cache-control=public,max-age=3600
@@ -1832,14 +1834,14 @@
             <param name="remote">存储桶的路径，例如 my-bucket/data/text.png</param>
             <param name="encoding">编码</param>
         </member>
-        <member name="M:AIO.PrGCloud.UploadFile(System.String,System.String,System.String)">
+        <member name="M:AIO.PrGCloud.UploadFile(System.String,System.String,System.String,System.String)">
             <summary>
             上传文件到存储桶
             </summary>
             <param name="remote">是对象要上传到的存储桶的名称，例如 my-bucket</param>
             <param name="location">是对象的本地路径。例如 Desktop/dog.png。</param>
-            <param name="metadata">是要修改的元数据的标志。
-            </param>
+            <param name="key">元数据key</param>
+            <param name="value">元数据value</param>
             <remarks>
             --content-type=image/png
             --cache-control=public,max-age=3600
@@ -1849,14 +1851,14 @@
             </remarks>
             <returns> Ture:成功 False: 失败 </returns>
         </member>
-        <member name="M:AIO.PrGCloud.UploadFileAsync(System.String,System.String,System.String)">
+        <member name="M:AIO.PrGCloud.UploadFileAsync(System.String,System.String,System.String,System.String)">
             <summary>
             上传文件到存储桶
             </summary>
             <param name="remote">是对象要上传到的存储桶的名称，例如 my-bucket</param>
             <param name="location">是对象的本地路径。例如 Desktop/dog.png。</param>
-            <param name="metadata">是要修改的元数据的标志。
-            </param>
+            <param name="key">元数据key</param>
+            <param name="value">元数据value</param>
             <remarks>
             --content-type=image/png
             --cache-control=public,max-age=3600
@@ -1866,38 +1868,40 @@
             </remarks>
             <returns> Ture:成功 False: 失败 </returns>
         </member>
-        <member name="M:AIO.PrGCloud.UploadDir(System.String,System.String,System.String,System.Action{System.String})">
+        <member name="M:AIO.PrGCloud.UploadDir(System.String,System.String,System.String,System.String,System.Action{System.String})">
             <summary>
             上传文件夹到存储桶
             </summary>
             <param name="remote">是对象要上传到的存储桶的名称，例如 my-bucket</param>
             <param name="location">是对象的本地路径。例如 Desktop/dog.png。</param>
             <param name="onProgress">进度回调</param>
-            <param name="metadata">是要修改的元数据的标志。
-            例如
+            <param name="key">元数据key</param>
+            <param name="value">元数据value</param>
+            <remarks>
             --content-type=image/png
             --cache-control=public,max-age=3600
             --content-language=unset
             --content-encoding=unset
             --content-disposition=disposition
-            </param>
+            </remarks>
             <returns> Ture:成功 False: 失败 </returns>
         </member>
-        <member name="M:AIO.PrGCloud.UploadDirAsync(System.String,System.String,System.String,System.Action{System.String})">
+        <member name="M:AIO.PrGCloud.UploadDirAsync(System.String,System.String,System.String,System.String,System.Action{System.String})">
             <summary>
             上传文件夹到存储桶
             </summary>
             <param name="remote">是对象要上传到的存储桶的名称，例如 my-bucket</param>
             <param name="location">是对象的本地路径。例如 Desktop/dog.png。</param>
             <param name="onProgress">进度回调</param>
-            <param name="metadata">是要修改的元数据的标志。
-            例如
+            <param name="key">元数据key</param>
+            <param name="value">元数据value</param>
+            <remarks>
             --content-type=image/png
             --cache-control=public,max-age=3600
             --content-language=unset
             --content-encoding=unset
             --content-disposition=disposition
-            </param>
+            </remarks>
             <returns> Ture:成功 False: 失败 </returns>
         </member>
         <member name="T:AIO.PrGit">
