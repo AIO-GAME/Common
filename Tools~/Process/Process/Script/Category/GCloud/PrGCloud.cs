@@ -13,6 +13,13 @@ namespace AIO
     /// <summary>
     /// Google PrGsutil PrGCloud Platform
     /// </summary>
+    /// <remarks>
+    /// --cache-control=public,max-age=3600
+    /// --content-type=image/png
+    /// --content-language=unset
+    /// --content-encoding=unset
+    /// --content-disposition=disposition
+    /// </remarks>
     [Url("https://github.com/AIO-GAME/Common/blob/main/Tools~/Process/Process/Script/Category/GCloud/PrGCloud.cs")]
     [Description("Google PrGsutil PrGCloud Platform")]
     public static partial class PrGCloud
