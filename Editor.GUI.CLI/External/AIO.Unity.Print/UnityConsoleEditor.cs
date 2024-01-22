@@ -70,9 +70,14 @@ namespace AIO.UEditor
 
         private static void MenuRefresh()
         {
-            Menu.SetChecked(MENU_EDITOR_SWITCH_ERROR, IS_EDITOR_SWITCH_ERROR);
-            Menu.SetChecked(MENU_EDITOR_SWITCH_LOG, IS_EDITOR_SWITCH_LOG);
-            Menu.SetChecked(MENU_DEVELOPER_MODE, IS_DEVELOPER_MODE);
+            if (Menu.GetChecked(MENU_EDITOR_SWITCH_ERROR))
+                Menu.SetChecked(MENU_EDITOR_SWITCH_ERROR, IS_EDITOR_SWITCH_ERROR);
+
+            if (Menu.GetChecked(MENU_EDITOR_SWITCH_LOG))
+                Menu.SetChecked(MENU_EDITOR_SWITCH_LOG, IS_EDITOR_SWITCH_LOG);
+
+            if (Menu.GetChecked(MENU_DEVELOPER_MODE))
+                Menu.SetChecked(MENU_DEVELOPER_MODE, IS_DEVELOPER_MODE);
         }
 
         private static MethodInfo EnabledError;

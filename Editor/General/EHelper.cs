@@ -28,6 +28,17 @@ namespace AIO.UEditor
             return SystemInfo.graphicsDeviceType == GraphicsDeviceType.Null;
         }
 
+        private const string kFirstEnterUnity = "FirstEnterUnity"; //是否首次进入unity
+
+        public static bool FirstEnterUnity {
+            get
+            {
+                if (!SessionState.GetBool(kFirstEnterUnity, true)) return true;
+                SessionState.SetBool(kFirstEnterUnity, false);
+                return false;
+            }
+        }
+
         public static void DisplayProgressBar(string title, string info, float progress)
         {
             if (IsCMD()) Console.WriteLine($"[{title}/{progress * 100:00}] {info}");
