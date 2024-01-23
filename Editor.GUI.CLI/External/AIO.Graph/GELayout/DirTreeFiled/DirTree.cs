@@ -7,6 +7,7 @@
 using System;
 using System.IO;
 using System.Text;
+using UnityEngine;
 
 namespace AIO.UEditor
 {
@@ -80,6 +81,7 @@ namespace AIO.UEditor
         /// </summary>
         public string DirPath;
 
+        [SerializeField]
         public DirTreeItem Root;
 
         public int Count => Root.MaxDepth;
