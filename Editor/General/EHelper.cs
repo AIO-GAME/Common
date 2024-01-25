@@ -25,12 +25,17 @@ namespace AIO.UEditor
         /// </returns>
         public static bool IsCMD()
         {
+#if UNITY_2019_4_OR_NEWER
+            return Application.isBatchMode;
+#else
             return SystemInfo.graphicsDeviceType == GraphicsDeviceType.Null;
+#endif
         }
 
         private const string kFirstEnterUnity = "FirstEnterUnity"; //是否首次进入unity
 
-        public static bool FirstEnterUnity {
+        public static bool FirstEnterUnity
+        {
             get
             {
                 if (!SessionState.GetBool(kFirstEnterUnity, true)) return true;
