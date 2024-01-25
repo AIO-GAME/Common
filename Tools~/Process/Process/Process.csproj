@@ -81,13 +81,15 @@
     <Compile Include="Script\Category\Dingding\PrDingTalk.cs" />
     <Compile Include="Script\Category\Dingding\PrDingding.Send.cs" />
     <Compile Include="Script\Category\GCloud\PrGCloud.cs" />
-    <Compile Include="Script\Category\GCloud\PrGCloud.Delete.cs" />
+    <Compile Include="Script\Category\GCloud\PrGCloud.DeleteDir.cs" />
+    <Compile Include="Script\Category\GCloud\PrGCloud.DeleteFile.cs" />
     <Compile Include="Script\Category\GCloud\PrGCloud.Download.cs" />
     <Compile Include="Script\Category\GCloud\PrGCloud.Exists.cs" />
     <Compile Include="Script\Category\GCloud\PrGCloud.Get.cs" />
     <Compile Include="Script\Category\GCloud\PrGCloud.Metadata.cs" />
     <Compile Include="Script\Category\GCloud\PrGCloud.Read.cs" />
-    <Compile Include="Script\Category\GCloud\PrGCloud.Upload.cs" />
+    <Compile Include="Script\Category\GCloud\PrGCloud.UploadDir.cs" />
+    <Compile Include="Script\Category\GCloud\PrGCloud.UploadFile.cs" />
     <Compile Include="Script\Category\Git\PrGit.Add.cs" />
     <Compile Include="Script\Category\Git\PrGit.CheckOut.cs" />
     <Compile Include="Script\Category\Git\PrGit.Clean.cs" />

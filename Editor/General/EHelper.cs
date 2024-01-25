@@ -4,6 +4,8 @@
 |*|E-Mail:     |*| 1398581458@qq.com
 |*|============|*/
 
+using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -23,7 +25,39 @@ namespace AIO.UEditor
         /// </returns>
         public static bool IsCMD()
         {
+#if UNITY_2019_4_OR_NEWER
+            return Application.isBatchMode;
+#else
             return SystemInfo.graphicsDeviceType == GraphicsDeviceType.Null;
+#endif
+        }
+
+        private const string kFirstEnterUnity = "FirstEnterUnity"; //是否首次进入unity
+
+        public static bool FirstEnterUnity
+        {
+            get
+            {
+                if (!SessionState.GetBool(kFirstEnterUnity, true)) return true;
+                SessionState.SetBool(kFirstEnterUnity, false);
+                return false;
+            }
+        }
+
+        public static void DisplayProgressBar(string title, string info, float progress)
+        {
+            if (IsCMD()) Console.WriteLine($"[{title}/{progress * 100:00}] {info}");
+            else EditorUtility.DisplayProgressBar(title, info, progress);
+        }
+
+        public static void DisplayDialog(string title, string info, string ok)
+        {
+            if (IsCMD()) Console.WriteLine($"[{title}] {info}");
+            else
+            {
+                EditorUtility.ClearProgressBar();
+                EditorUtility.DisplayDialog(title, info, ok);
+            }
         }
     }
 }
