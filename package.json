@@ -2,13 +2,13 @@
   "name": "com.aio.package",
   "displayName": "AIO Unity Common",
   "description": "AIO Unity Common",
-  "version": "1.0.31-preview",
+  "version": "1.0.32-preview",
   "unity": "2019.4",
   "unityRelease": "0f1",
   "hideInEditor": true,
   "license": "MIT",
-  "documentationUrl": "https://github.com/AIO-GAME/Common#readme",
-  "changelogUrl": "https://github.com/AIO-GAME/Common/commits/main",
+  "documentationUrl": "https://github.com/AIO-GAME/Common/blob/main/.github/README.md",
+  "changelogUrl": "https://github.com/AIO-GAME/Common/blob/main/.github/CHANGELOG.md",
   "licensesUrl": "https://github.com/AIO-GAME/Common/blob/main/LICENSE.md",
   "keywords": [
     "Unity",
@@ -17,7 +17,7 @@
   "author": {
     "name": "AIO-GAME",
     "email": "xinansky99@foxmail.com",
-    "url": "https://github.com/AIO-GAME"
+    "url": "https://github.com/AIO-GAME/Common"
   },
   "dependencies": {
     "com.unity.nuget.newtonsoft-json": "3.0.2"
