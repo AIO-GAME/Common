@@ -330,9 +330,11 @@ namespace AIO.UEditor
                 element.style.justifyContent = Justify.FlexStart;
             }
 
-            for (var index = 0; index < LnkToolsHelper.Data.Count; index++)
+            var index = 0;
+            foreach(var lnk in LnkToolsHelper.Data)
             {
-                var lnk = LnkToolsHelper.Data[index];
+                if (lnk.ShowMode != ELnkShowMode.SceneView) continue;
+                index++;
                 var toolbar = lnk.hasReturn ? GetBool(lnk) : GetVoid(lnk);
 
                 toolbar.tooltip = lnk.Content.tooltip;
@@ -342,10 +344,10 @@ namespace AIO.UEditor
 
                 switch (lnk.Mode)
                 {
-                    case LnkToolsMode.OnlyRuntime: // 禁用元素点击
+                    case ELnkToolsMode.OnlyRuntime: // 禁用元素点击
                         toolbar.SetEnabled(EditorApplication.isPlaying);
                         break;
-                    case LnkToolsMode.OnlyEditor:
+                    case ELnkToolsMode.OnlyEditor:
                         toolbar.SetEnabled(!EditorApplication.isPlaying);
                         break;
                     default:

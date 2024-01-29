@@ -67,12 +67,13 @@ namespace AIO.UEditor
                     20);
                 foreach (var lnk in Data)
                 {
+                    if (lnk.ShowMode != ELnkShowMode.SceneView) continue;
                     switch (lnk.Mode)
                     {
-                        case LnkToolsMode.OnlyRuntime:
+                        case ELnkToolsMode.OnlyRuntime:
                             GUI.enabled = EditorApplication.isPlaying;
                             break;
-                        case LnkToolsMode.OnlyEditor:
+                        case ELnkToolsMode.OnlyEditor:
                             GUI.enabled = !EditorApplication.isPlaying;
                             break;
                     }

@@ -43,7 +43,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 快捷工具触发类型
         /// </summary>
-        public LnkToolsMode Mode { get; set; }
+        public ELnkToolsMode Mode { get; set; }
 
         /// <summary>
         /// 工具优先级（越小越靠前）
@@ -59,9 +59,14 @@ namespace AIO.UEditor
         /// 前景色
         /// </summary>
         public string ForegroundColor { get; set; }
-        
+
+        /// <summary>
+        /// 显示模式
+        /// </summary>
+        public ELnkShowMode ShowMode { get; set; } = ELnkShowMode.SceneView;
+
         public LnkToolsAttribute(
-            LnkToolsMode mode = LnkToolsMode.AllMode,
+            ELnkToolsMode mode = ELnkToolsMode.AllMode,
             int priority = int.MaxValue)
         {
             Mode = mode;
@@ -69,7 +74,7 @@ namespace AIO.UEditor
         }
 
         public LnkToolsAttribute(string text,
-            LnkToolsMode mode = LnkToolsMode.AllMode,
+            ELnkToolsMode mode = ELnkToolsMode.AllMode,
             int priority = int.MaxValue)
         {
             Text = text;
@@ -78,7 +83,7 @@ namespace AIO.UEditor
         }
 
         public LnkToolsAttribute(string text, string tooltip,
-            LnkToolsMode mode = LnkToolsMode.AllMode,
+            ELnkToolsMode mode = ELnkToolsMode.AllMode,
             int priority = int.MaxValue)
         {
             Text = text;
@@ -88,10 +93,17 @@ namespace AIO.UEditor
         }
     }
 
+    public enum ELnkShowMode
+    {
+        [InspectorName("Editor bar")] Toolbar,
+        [InspectorName("Scene 窗口")] SceneView,
+        // GameView,
+    }
+
     /// <summary>
     /// 快捷工具触发类型
     /// </summary>
-    public enum LnkToolsMode
+    public enum ELnkToolsMode
     {
         /// <summary>
         /// 所有模式

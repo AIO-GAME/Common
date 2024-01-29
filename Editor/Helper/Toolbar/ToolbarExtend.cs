@@ -119,12 +119,25 @@ namespace AIO.UEditor
 
         private static void OnGUI()
         {
-            var rect = new Rect(400, 5, 40, 25);
+            var rect = new Rect(0, 5, 40, 24);
+#if UNITY_2023_1_OR_NEWER
+            rect.x = Screen.width / 2f - 88;
+#elif UNITY_2022_1_OR_NEWER
+            rect.x = Screen.width / 2f - 84;
+            rect.height = 18;
+            rect.width = 36;
+#elif UNITY_2021_1_OR_NEWER
+            rect.x = Screen.width / 2f - 88;
+#elif UNITY_2020_1_OR_NEWER
+            rect.x = Screen.width / 2f - 110;
+#else
+            rect.x = Screen.width / 2f - 110;
+#endif
             if (Application.isEditor)
             {
                 foreach (var lnk in from lnk in LnkToolsHelper.Data
-                         let temp = lnk.Mode == LnkToolsMode.OnlyEditor || lnk.Mode == LnkToolsMode.AllMode
-                         where temp
+                         where lnk.ShowMode == ELnkShowMode.Toolbar
+                         where lnk.Mode == ELnkToolsMode.OnlyEditor || lnk.Mode == ELnkToolsMode.AllMode
                          select lnk)
                 {
                     if (GUI.Button(rect, lnk.Content, GEStyle.TEtoolbarbutton))
@@ -132,14 +145,14 @@ namespace AIO.UEditor
                         lnk.Invoke();
                     }
 
-                    rect.x += rect.width + 1;
+                    rect.x -= rect.width + 1;
                 }
             }
             else if (Application.isPlaying)
             {
                 foreach (var lnk in from lnk in LnkToolsHelper.Data
-                         let temp = lnk.Mode == LnkToolsMode.OnlyRuntime || lnk.Mode == LnkToolsMode.AllMode
-                         where temp
+                         where lnk.ShowMode == ELnkShowMode.Toolbar
+                         where lnk.Mode == ELnkToolsMode.OnlyRuntime || lnk.Mode == ELnkToolsMode.AllMode
                          select lnk)
                 {
                     if (GUI.Button(rect, lnk.Content, GEStyle.TEtoolbarbutton))
@@ -147,7 +160,7 @@ namespace AIO.UEditor
                         lnk.Invoke();
                     }
 
-                    rect.x += rect.width +  1;
+                    rect.x -= rect.width + 1;
                 }
             }
         }
