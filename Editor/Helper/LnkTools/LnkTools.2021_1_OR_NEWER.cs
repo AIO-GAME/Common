@@ -16,6 +16,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEditor.EditorTools;
 using UnityEditor.Overlays;
+using UnityEditor.Toolbars;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -165,7 +166,7 @@ namespace AIO.UEditor
         /// </summary>
         /// <param name="lnk">lnk数据</param>
         /// <returns>元素展示</returns>
-        private static VisualElement GetBool(LnkTools lnk)
+        internal static VisualElement GetBool(LnkTools lnk)
         {
             var toolbar = new ToolbarToggle
             {
@@ -204,9 +205,9 @@ namespace AIO.UEditor
         /// </summary>
         /// <param name="lnk">lnk数据</param>
         /// <returns>元素展示</returns>
-        private static VisualElement GetVoid(LnkTools lnk)
+        internal static VisualElement GetVoid(LnkTools lnk)
         {
-            var toolbar = new ToolbarButton(lnk.Invoke)
+            var toolbar = new EditorToolbarButton(lnk.Invoke)
             {
                 tooltip = lnk.Content.tooltip,
             };
@@ -227,6 +228,7 @@ namespace AIO.UEditor
             }
             else toolbar.text = lnk.Content.text;
 
+            toolbar.name = lnk.Content.text;
             return toolbar;
         }
 
@@ -330,9 +332,11 @@ namespace AIO.UEditor
                 element.style.justifyContent = Justify.FlexStart;
             }
 
-            for (var index = 0; index < LnkToolsHelper.Data.Count; index++)
+            var index = 0;
+            foreach (var lnk in LnkToolsHelper.Data)
             {
-                var lnk = LnkToolsHelper.Data[index];
+                if (lnk.ShowMode != ELnkShowMode.SceneView) continue;
+                index++;
                 var toolbar = lnk.hasReturn ? GetBool(lnk) : GetVoid(lnk);
 
                 toolbar.tooltip = lnk.Content.tooltip;
@@ -342,10 +346,10 @@ namespace AIO.UEditor
 
                 switch (lnk.Mode)
                 {
-                    case LnkToolsMode.OnlyRuntime: // 禁用元素点击
+                    case ELnkToolsMode.OnlyRuntime: // 禁用元素点击
                         toolbar.SetEnabled(EditorApplication.isPlaying);
                         break;
-                    case LnkToolsMode.OnlyEditor:
+                    case ELnkToolsMode.OnlyEditor:
                         toolbar.SetEnabled(!EditorApplication.isPlaying);
                         break;
                     default:

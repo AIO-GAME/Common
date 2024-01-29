@@ -9,7 +9,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Reflection;
 using UnityEditor;
-using UnityEngine;
 
 namespace AIO.UEditor
 {
@@ -163,8 +162,7 @@ namespace AIO.UEditor
             DisableLog?.Invoke(null, null);
         }
 
-        [InitializeOnLoadMethod]
-        [RuntimeInitializeOnLoadMethod]
+        [AInit(mode: EInitAttrMode.Both, int.MaxValue)]
         private static void Initialize()
         {
             if (IS_EDITOR_SWITCH_ERROR) ErrorEnabled();

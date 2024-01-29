@@ -41,10 +41,10 @@ namespace AIO.UEditor
 
         private static void FuncStatic(StringBuilder str, string classname)
         {
-            str.AppendLine();
-            str.AppendFormat("        static {0}()\r\n", classname).Append("        {\r\n");
-            str.Append("            Refresh();\r\n");
-            str.Append("        }\r\n");
+            // str.AppendLine();
+            // str.AppendFormat("        static {0}()\r\n", classname).Append("        {\r\n");
+            // str.Append("            Refresh();\r\n");
+            // str.Append("        }\r\n");
         }
 
         private static void FuncOpen(StringBuilder str)
@@ -62,7 +62,7 @@ namespace AIO.UEditor
         {
             str.AppendLine();
             str.AppendFormat("        private static bool HasUpdate = false;\r\n\r\n");
-            str.AppendFormat("        [MenuItem(\"Git/\" + DisplayName + \"/刷新 Refresh\", false, 1), IgnoreConsoleJump]\r\n");
+            str.AppendFormat("        [MenuItem(\"Git/\" + DisplayName + \"/刷新 Refresh\", false, 1), IgnoreConsoleJump, AInit(EInitAttrMode.Editor, -1)]\r\n");
             str.AppendFormat("        internal static async void Refresh()\r\n").Append("        {\r\n");
             str.AppendFormat(
                 "            var ret = await PrGit.Helper.GetBehind(FullPath);\r\n");
@@ -254,7 +254,6 @@ namespace AIO.UEditor
                     info.displayName);
                 
                 str.AppendFormat("    [ScriptIcon(IconResource = \"Editor/Icon/App/Git/git-tag-style-1\")]\r\n");
-                str.AppendFormat("    [InitializeOnLoad]\r\n");
                 str.AppendFormat("    internal static partial class {0}\r\n", classname).Append("    {\r\n");
                 str.AppendFormat("        internal const string URL = \"{0}\";\r\n",
                     info.resolvedPath.Replace('\\', '/').Replace(ProjectPath, "").Trim('\\', '/'));
@@ -351,7 +350,6 @@ namespace AIO.UEditor
             str.AppendFormat("{0}\r\n", INFO_USING);
 
             str.AppendFormat("    /// <summary>\r\n    /// Git Manager Project\r\n    /// </summary>\r\n");
-            str.AppendFormat("    [InitializeOnLoad]\r\n");
             str.AppendFormat("    internal static partial class {0}\r\n", classname).Append("    {\r\n");
             str.AppendFormat("        internal const string URL = \"{0}\";\r\n", "./");
             str.AppendFormat("        internal const string DisplayName = \"Project\";\r\n");

@@ -25,11 +25,10 @@ namespace AIO.UEditor
         /// 生成
         /// </summary>
         [MenuItem("Git/~~~ Generate ~~~", false, 9999)]
-        [InitializeOnLoadMethod]
+        [AInit(mode: EInitAttrMode.Editor, int.MaxValue - 1)]
         internal static void Generate()
         {
-            // dataPath 获取的是 Assets 的上一级目录
-            var dataPath = Application.dataPath.Substring(0, Application.dataPath.Length - 6);
+            Debug.Log($"<b><color=#5DADE2>[GIT]</color></b> {CMD_GIT} Generate");
 
             var packageInfos = AssetDatabase.FindAssets("package", new string[] { "Packages" })
                 .Select(AssetDatabase.GUIDToAssetPath)
@@ -37,24 +36,21 @@ namespace AIO.UEditor
                 .Select(PackageInfo.FindForAssetPath)
                 .GroupBy(x => x.assetPath)
                 .Select(x => x.First())
-                .Where(x => File.Exists(Path.Combine(dataPath, x.resolvedPath, ".git")) ||
-                            Directory.Exists(Path.Combine(dataPath, x.resolvedPath, ".git")))
+                .Where(x =>
+                    File.Exists(Path.Combine(EHelper.Path.Project, x.resolvedPath, ".git")) ||
+                    Directory.Exists(Path.Combine(EHelper.Path.Project, x.resolvedPath, ".git"))
+                )
                 .ToList();
 
             var change = CreateProject();
-
             if (CreateTemplate(packageInfos)) change = true;
+            if (!change) return;
 
-            if (change)
-            {
-                AssetDatabase.Refresh();
-
-                var RefreshSettings = typeof(AssetDatabase).GetMethod("RefreshSettings",
-                    BindingFlags.Static | BindingFlags.Public);
-                if (RefreshSettings != null) RefreshSettings.Invoke(null, null);
-
-                CompilationPipeline.RequestScriptCompilation();
-            }
+            AssetDatabase.Refresh();
+            var RefreshSettings = typeof(AssetDatabase)
+                .GetMethod("RefreshSettings", BindingFlags.Static | BindingFlags.Public);
+            if (RefreshSettings != null) RefreshSettings.Invoke(null, null);
+            CompilationPipeline.RequestScriptCompilation();
         }
 
         /// <summary>
@@ -71,6 +67,7 @@ namespace AIO.UEditor
             }
 
             AssetDatabase.Refresh();
+
 #if UNITY_2020_1_OR_NEWER
             AssetDatabase.RefreshSettings();
 #endif
@@ -84,7 +81,7 @@ namespace AIO.UEditor
 
         private static string GetOutPath()
         {
-            return Path.Combine(Application.dataPath, "Editor", "Gen", "Git");
+            return Path.Combine(EHelper.Path.Assets, "Editor", "Gen", "Git");
         }
     }
 }

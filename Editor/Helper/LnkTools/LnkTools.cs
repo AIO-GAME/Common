@@ -86,7 +86,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 快捷工具触发模式
         /// </summary>
-        public LnkToolsMode Mode { get; }
+        public ELnkToolsMode Mode { get; }
 
         /// <summary>
         /// 优先级
@@ -97,6 +97,11 @@ namespace AIO.UEditor
         /// 方法
         /// </summary>
         private MethodInfo Method { get; }
+
+        /// <summary>
+        /// 显示模式
+        /// </summary>
+        public ELnkShowMode ShowMode { get; set; } = ELnkShowMode.SceneView;
 
         private static GUIContent SetContent(LnkToolsAttribute attribute, MethodInfo method)
         {
@@ -148,6 +153,7 @@ namespace AIO.UEditor
             Mode = attribute.Mode;
             Priority = attribute.Priority;
             Method = method;
+            ShowMode = attribute.ShowMode;
             if (Method is null) throw new NullReferenceException(nameof(Method));
         }
 
