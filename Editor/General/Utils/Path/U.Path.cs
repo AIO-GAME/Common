@@ -15,14 +15,9 @@ namespace AIO.UEditor
         /// 提供了一些与路径相关的实用方法。
         /// 包含与程序集有关的实用方法和属性的静态类
         /// </summary>
-        [InitializeOnLoad]
         public static class Path
         {
-            static Path()
-            {
-                Init();
-            }
-
+            [AInit(mode: EInitAttrMode.Both, int.MaxValue)]
             private static void Init()
             {
                 try

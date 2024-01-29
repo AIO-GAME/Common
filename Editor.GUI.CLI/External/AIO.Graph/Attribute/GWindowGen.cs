@@ -22,7 +22,7 @@ namespace AIO.UEditor
             return Path.Combine(Application.dataPath, "Editor", "Gen", "GWindow");
         }
 
-        [InitializeOnLoadMethod]
+        [AInit(mode: EInitAttrMode.Editor, int.MaxValue - 2)]
         internal static void Generate()
         {
             var dic = new Dictionary<Type, GWindowAttribute>();
@@ -33,7 +33,7 @@ namespace AIO.UEditor
                     if (type.IsAbstract || !type.IsClass || !type.IsSubclassOf(typeof(EditorWindow))) continue;
                     var attribute = type.GetCustomAttribute<GWindowAttribute>();
                     if (attribute is null) continue;
-                    ScriptIconAttribute.SetIcon(attribute.FilePath, attribute.GetTexture2D());
+                    ScriptIcon.SetIcon(attribute.FilePath, attribute.GetTexture2D());
                     if (string.IsNullOrEmpty(attribute.Menu)) continue;
                     dic.Add(type, attribute);
                 }
