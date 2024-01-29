@@ -24,6 +24,6 @@ namespace AIO.UEditor
 
         public EInitAttrMode Mode { get; set; } = EInitAttrMode.Editor;
 
-        public int Order { get; }
+        public int Order { get; set; }
     }
 }

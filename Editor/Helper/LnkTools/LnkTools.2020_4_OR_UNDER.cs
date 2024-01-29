@@ -5,7 +5,6 @@
 |*|============|*/
 
 #if !UNITY_2021_1_OR_NEWER
-using System;
 using UnityEditor;
 using UnityEngine;
 

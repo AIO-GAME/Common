@@ -16,6 +16,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEditor.EditorTools;
 using UnityEditor.Overlays;
+using UnityEditor.Toolbars;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -165,7 +166,7 @@ namespace AIO.UEditor
         /// </summary>
         /// <param name="lnk">lnk数据</param>
         /// <returns>元素展示</returns>
-        private static VisualElement GetBool(LnkTools lnk)
+        internal static VisualElement GetBool(LnkTools lnk)
         {
             var toolbar = new ToolbarToggle
             {
@@ -204,9 +205,9 @@ namespace AIO.UEditor
         /// </summary>
         /// <param name="lnk">lnk数据</param>
         /// <returns>元素展示</returns>
-        private static VisualElement GetVoid(LnkTools lnk)
+        internal static VisualElement GetVoid(LnkTools lnk)
         {
-            var toolbar = new ToolbarButton(lnk.Invoke)
+            var toolbar = new EditorToolbarButton(lnk.Invoke)
             {
                 tooltip = lnk.Content.tooltip,
             };
@@ -227,6 +228,7 @@ namespace AIO.UEditor
             }
             else toolbar.text = lnk.Content.text;
 
+            toolbar.name = lnk.Content.text;
             return toolbar;
         }
 
@@ -331,7 +333,7 @@ namespace AIO.UEditor
             }
 
             var index = 0;
-            foreach(var lnk in LnkToolsHelper.Data)
+            foreach (var lnk in LnkToolsHelper.Data)
             {
                 if (lnk.ShowMode != ELnkShowMode.SceneView) continue;
                 index++;
