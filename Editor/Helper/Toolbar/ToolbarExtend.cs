@@ -53,7 +53,6 @@ namespace AIO.UEditor
 
 #endif
 
-
         [AInit(Mode = EInitAttrMode.Both, Order = -1)]
         private static async void Init()
         {
