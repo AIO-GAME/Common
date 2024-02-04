@@ -10,12 +10,11 @@ using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
 namespace AIO.UEditor
 {
-    public static class ManageRuntime
+    internal static class ManageRuntime
     {
         #region Runtime
 
-        public const string KEY = nameof(AIO) + "." + nameof(UEditor) + "." + nameof(ManageRuntime) + "." +
-                                  nameof(Setting);
+        private const string KEY = nameof(AIO) + "." + nameof(UEditor) + "." + nameof(ManageRuntime) + ".Setting";
 
         private static IDictionary<string, EAssembliesType> GetEnable()
         {
@@ -67,23 +66,23 @@ namespace AIO.UEditor
         }
 
         private const string MENU = "AIO/Runtime Export";
-
-        [InitializeOnLoadMethod]
-        [RuntimeInitializeOnLoadMethod]
-        private static void MenuRefresh()
-        {
-            var check = Menu.GetChecked(MENU);
-            var set = EHelper.Prefs.LoadBoolean(KEY);
-            if (check == set) return;
-            Menu.SetChecked(MENU, set);
-        }
-
-        [MenuItem(MENU, false, 9999)]
-        private static void Setting()
-        {
-            EHelper.Prefs.ReverseBoolean(KEY);
-            MenuRefresh();
-        }
+        //
+        // [InitializeOnLoadMethod]
+        // [RuntimeInitializeOnLoadMethod]
+        // private static void MenuRefresh()
+        // {
+        //     var check = Menu.GetChecked(MENU);
+        //     var set = EHelper.Prefs.LoadBoolean(KEY);
+        //     if (check == set) return;
+        //     Menu.SetChecked(MENU, set);
+        // }
+        //
+        // [MenuItem(MENU, false, 9999)]
+        // private static void Setting()
+        // {
+        //     EHelper.Prefs.ReverseBoolean(KEY);
+        //     MenuRefresh();
+        // }
 
         private static Dictionary<string, EAssembliesType> GetInfo(Assembly assembly, params Assembly[] assemblies)
         {
@@ -343,9 +342,8 @@ namespace AIO.UEditor
                 }
 
                 GUILayout.EndVertical();
-
                 GUILayout.FlexibleSpace();
-                EditorGUILayout.LabelField("Version 1.0.1-preview", EditorStyles.centeredGreyMiniLabel);
+                EditorGUILayout.LabelField($"Version {Setting.Version}", EditorStyles.centeredGreyMiniLabel);
             };
             return provider;
         }
