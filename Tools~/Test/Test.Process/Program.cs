@@ -14,11 +14,9 @@ namespace AIO
 
         static async void Test()
         {
-            var succeed1 = await PrGCloud.UploadDirAsync(
-                "rol-files/AIO",
-                "E:\\Project\\HOT\\HOT_DEV_35\\Bundles\\Android\\HOT\\Simulate",
-                "--cache-control",
-                "no-cache");
+            var succeed1 =
+               await PrGCloud.MetadataUpdateAsync($"rol-files/qc/Version/Android.json",
+                    "cache-control", "no-cache");
             Console.WriteLine(succeed1);
         }
     }
