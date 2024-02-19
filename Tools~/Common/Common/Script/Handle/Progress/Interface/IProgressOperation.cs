@@ -51,6 +51,11 @@ namespace AIO
         void Resume();
 
         /// <summary>
+        /// 重新开始
+        /// </summary>
+        void Again();
+
+        /// <summary>
         /// 迭代器等待
         /// </summary>
 #if NET_5_0_OR_GREATER || NETCOREAPP3_0_OR_GREATER

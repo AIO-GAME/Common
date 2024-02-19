@@ -4408,6 +4408,9 @@
         <member name="M:AIO.AOperation.Begin">
             <inheritdoc />
         </member>
+        <member name="M:AIO.AOperation.Again">
+            <inheritdoc />
+        </member>
         <member name="M:AIO.AOperation.Cancel">
             <inheritdoc />
         </member>
@@ -4839,6 +4842,11 @@
             恢复
             </summary>
         </member>
+        <member name="M:AIO.IProgressOperation.Again">
+            <summary>
+            重新开始
+            </summary>
+        </member>
         <member name="M:AIO.IProgressOperation.WaitCo">
             <summary>
             迭代器等待
@@ -5171,7 +5179,7 @@
             <summary>
             返回文件字节长度
             </summary>
-            <param name="Path">文件相对路径</param>
+            <param name="path">文件相对路径</param>
         </member>
         <member name="M:AIO.AHelper.IO.GetFileName(System.String,System.Boolean)">
             <summary>
