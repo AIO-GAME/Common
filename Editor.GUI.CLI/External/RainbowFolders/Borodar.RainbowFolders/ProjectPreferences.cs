@@ -1,4 +1,5 @@
 using System;
+using AIO.UEditor;
 using UnityEditor;
 using UnityEngine;
 
@@ -251,7 +252,7 @@ namespace AIO.RainbowFolders
                     GUILayoutUtility.GetRect(0f, 0f);
 
                     GUILayout.FlexibleSpace();
-                    EditorGUILayout.LabelField("Version 2.1.0", EditorStyles.centeredGreyMiniLabel);
+                    EditorGUILayout.LabelField($"Version {Setting.Version}", EditorStyles.centeredGreyMiniLabel);
                 }
             };
         }

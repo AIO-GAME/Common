@@ -1,3 +1,4 @@
+#pragma warning disable CS1591
 namespace AIO.YamlDotNet.Core
 {
 	/// <summary>
@@ -19,3 +20,4 @@ namespace AIO.YamlDotNet.Core
 		Folded
 	}
 }
+#pragma warning restore CS1591

@@ -5,6 +5,7 @@
 |*|============|*/
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
@@ -53,6 +54,8 @@ namespace AIO.UEditor
 
 #endif
 
+        private static Dictionary<GUIContent, VisualElement> toolbarElements =
+            new Dictionary<GUIContent, VisualElement>();
 
         [AInit(Mode = EInitAttrMode.Both, Order = -1)]
         private static async void Init()
@@ -89,7 +92,12 @@ namespace AIO.UEditor
                              where lnk.Mode == ELnkToolsMode.OnlyEditor || lnk.Mode == ELnkToolsMode.AllMode
                              select lnk)
                     {
-                        temp.Add(LnkToolOverlay.GetVoid(lnk));
+                        if (toolbarElements.TryGetValue(lnk.Content, out var value))
+                            if (value != null)
+                                continue;
+
+                        toolbarElements[lnk.Content] = LnkToolOverlay.GetVoid(lnk);
+                        temp.Add(toolbarElements[lnk.Content]);
                     }
                 }
                 else if (Application.isPlaying)
@@ -99,7 +107,12 @@ namespace AIO.UEditor
                              where lnk.Mode == ELnkToolsMode.OnlyRuntime || lnk.Mode == ELnkToolsMode.AllMode
                              select lnk)
                     {
-                        temp.Add(LnkToolOverlay.GetVoid(lnk));
+                        if (toolbarElements.TryGetValue(lnk.Content, out var value))
+                            if (value != null)
+                                continue;
+
+                        toolbarElements[lnk.Content] = LnkToolOverlay.GetVoid(lnk);
+                        temp.Add(toolbarElements[lnk.Content]);
                     }
                 }
 

@@ -4,6 +4,7 @@
 |*|E-Mail:     |*| xinansky99@foxmail.com
 |*|============|*/
 
+using System;
 using System.Collections;
 using System.Threading;
 using System.Threading.Tasks;
@@ -110,11 +111,20 @@ namespace AIO
         /// <inheritdoc />
         public void Begin()
         {
+            if (State == EProgressState.Finish) return;
             if (State != EProgressState.Ready) return;
-            State = EProgressState.Running;
             progress.Begin();
             OnBegin();
             progress.OnBegin?.Invoke();
+            State = EProgressState.Running;
+        }
+
+        /// <inheritdoc />
+        public void Again()
+        {
+            progress.Begin();
+            progress.OnBegin?.Invoke();
+            State = EProgressState.Running;
         }
 
         /// <inheritdoc />
@@ -184,6 +194,7 @@ namespace AIO
         /// <inheritdoc />
         public IEnumerator WaitCo()
         {
+            if (State == EProgressState.Finish) yield break;
             if (State != EProgressState.Running) yield break;
             yield return OnWaitCo();
             Finish();
@@ -200,6 +211,7 @@ namespace AIO
         /// <inheritdoc />
         public async Task WaitAsync()
         {
+            if (State == EProgressState.Finish) return;
             if (State != EProgressState.Running) return;
             await OnWaitAsync();
             Finish();
@@ -208,6 +220,7 @@ namespace AIO
         /// <inheritdoc />
         public async void WaitAsyncCallBack()
         {
+            if (State == EProgressState.Finish) return;
             if (State != EProgressState.Running) return;
             await OnWaitAsync();
             Finish();

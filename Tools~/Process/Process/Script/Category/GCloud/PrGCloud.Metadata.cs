@@ -34,7 +34,7 @@ namespace AIO
             if (string.IsNullOrEmpty(key)) throw new ArgumentNullException(nameof(key));
             if (string.IsNullOrEmpty(value)) throw new ArgumentNullException(nameof(value));
             remote = remote.Replace("\\", "/").TrimEnd('/');
-            return Create(Gsutil, $"-m setmeta -h \"{key}:{value}\" -r gs://{remote}\"").Sync().ExitCode == 0;
+            return Create(Gsutil, $"-m setmeta -h \"{key}:{value}\" -r \"gs://{remote}\"").Sync().ExitCode == 0;
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace AIO
             if (string.IsNullOrEmpty(key)) throw new ArgumentNullException(nameof(key));
             if (string.IsNullOrEmpty(value)) throw new ArgumentNullException(nameof(value));
             remote = remote.Replace("\\", "/").TrimEnd('/');
-            var result = await Create(Gsutil, $"-m setmeta -h \"{key.Trim('-')}:{value}\" -r gs://{remote}\"");
+            var result = await Create(Gsutil, $"-m setmeta -h \"{key.Trim('-')}:{value}\" -r \"gs://{remote}\"");
             return result.ExitCode == 0;
         }
 

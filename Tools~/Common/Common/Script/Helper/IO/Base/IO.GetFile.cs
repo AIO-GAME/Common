@@ -224,7 +224,7 @@ namespace AIO
             /// <summary>
             /// 返回文件字节长度
             /// </summary>
-            /// <param name="Path">文件相对路径</param>
+            /// <param name="path">文件相对路径</param>
             public static long GetFileLength(string path)
             {
                 path = path.Replace('\\', Path.AltDirectorySeparatorChar);
