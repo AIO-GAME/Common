@@ -14,7 +14,7 @@ namespace AIO.UEditor
     {
         #region Runtime
 
-        private const string KEY = nameof(AIO) + "." + nameof(UEditor) + "." + nameof(ManageRuntime) + ".Setting";
+        internal const string KEY = nameof(AIO) + "." + nameof(UEditor) + "." + nameof(ManageRuntime) + ".Setting";
 
         private static IDictionary<string, EAssembliesType> GetEnable()
         {
