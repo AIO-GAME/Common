@@ -3,8 +3,8 @@ using System.Runtime.InteropServices;
 using Newtonsoft.Json.Linq;
 using UnityEditor.PackageManager;
 
-[assembly: ComVisible(false)]
 [assembly: InternalsVisibleTo("AIO.Unity.Editor")]
+[assembly: InternalsVisibleTo("AIO.Build.Editor")]
 
 namespace AIO.UEditor
 {
