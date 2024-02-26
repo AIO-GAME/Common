@@ -23,18 +23,51 @@ namespace AIO.UEditor
         /// </summary>
         public string Group { get; private set; }
 
+        /// <summary>
+        /// 组列表
+        /// </summary>
+        /// <param name="key">键值</param>
+        /// <param name="type">类型</param>
         private static void AddGroup(string key, Type type)
         {
-            if (!GroupTabel.ContainsKey(key)) GroupTabel.Add(key, new List<Type>());
-            if (GroupTabel[key].Contains(type)) return;
-            GroupTabel[key].Add(type);
+            if (!GroupTable.ContainsKey(key)) GroupTable.Add(key, new List<Type>());
+            if (GroupTable[key].Contains(type)) return;
+            GroupTable[key].Add(type);
         }
 
-        private static IEnumerable<Type> GetGroup<T>(string key, T type) where T : EditorWindow
+        /// <summary>
+        /// 组列表
+        /// </summary>
+        /// <param name="key">键值</param>
+        /// <typeparam name="T">类型</typeparam>
+        private static void AddGroup<T>(string key) where T : EditorWindow
+        {
+            var type = typeof(T);
+            if (!GroupTable.ContainsKey(key)) GroupTable.Add(key, new List<Type>());
+            if (GroupTable[key].Contains(type)) return;
+            GroupTable[key].Add(type);
+        }
+
+        /// <summary>
+        /// 组列表
+        /// </summary>
+        /// <param name="key">键值</param>
+        /// <param name="type">类型</param>
+        private static IEnumerable<Type> GetGroup(string key, Type type)
         {
             if (type is null) return Array.Empty<Type>();
-            if (!GroupTabel.ContainsKey(key)) return Array.Empty<Type>();
-            return GroupTabel[key].Where(item => item != typeof(T)).ToArray();
+            if (!GroupTable.ContainsKey(key)) return Array.Empty<Type>();
+            return GroupTable[key].Where(item => item != type).ToArray();
+        }
+
+        /// <summary>
+        /// 组列表
+        /// </summary>
+        /// <param name="key">键值</param>
+        /// <typeparam name="T">类型</typeparam>
+        private static IEnumerable<Type> GetGroup<T>(string key) where T : EditorWindow
+        {
+            return GetGroup(key, typeof(T));
         }
 
         /// <summary>
@@ -67,23 +100,42 @@ namespace AIO.UEditor
             RefreshGroup();
         }
 
+        /// <summary>
+        /// 有效程序集
+        /// </summary>
+        protected static Assembly[] Assemblies { get; private set; }
+
         private void RefreshGroup()
         {
             var subtype = typeof(EditorWindow);
-            var attribute = typeof(GWindowAttribute);
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            if (Assemblies is null)
             {
-                if (!assembly.FullName.Contains("Editor")) continue;
-                foreach (var type in assembly.GetTypes())
+                var list = new List<Assembly>();
+                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
                 {
-                    if (type == GetType() || !type.IsSubclassOf(subtype)) continue;
-                    if (type.GetCustomAttribute(attribute, false) is GWindowAttribute extraAttribute)
+                    if (!assembly.FullName.Contains("Editor")) continue;
+                    list.Add(assembly);
+                    foreach (var type in assembly.GetTypes())
                     {
-                        if (string.IsNullOrEmpty(extraAttribute.Group)) continue;
-                        if (Group != extraAttribute.Group) continue;
+                        if (type == GetType() || !type.IsSubclassOf(subtype)) continue;
+                        var attribute = type.GetCustomAttribute<GWindowAttribute>(false);
+                        if (string.IsNullOrEmpty(attribute?.Group)) continue;
+                        if (!Group.Equals(attribute.Group)) continue;
                         AddGroup(Group, type);
                     }
                 }
+
+                Assemblies = list.ToArray();
+            }
+            else
+            {
+                foreach (var type in from assembly in Assemblies
+                         from type in assembly.GetTypes()
+                         where type != GetType() && type.IsSubclassOf(subtype)
+                         let attribute = type.GetCustomAttribute<GWindowAttribute>(false)
+                         where !string.IsNullOrEmpty(attribute?.Group)
+                         where Group.Equals(attribute.Group)
+                         select type) AddGroup(Group, type);
             }
         }
 
@@ -149,7 +201,7 @@ namespace AIO.UEditor
 #if UNITY_2019_1_OR_NEWER
         public sealed override IEnumerable<Type> GetExtraPaneTypes()
         {
-            return string.IsNullOrEmpty(Group) ? base.GetExtraPaneTypes() : GetGroup(Group, this);
+            return string.IsNullOrEmpty(Group) ? base.GetExtraPaneTypes() : GetGroup(Group, GetType());
         }
 #else
         public override IEnumerable<Type> GetExtraPaneTypes()
@@ -163,7 +215,7 @@ namespace AIO.UEditor
 
         public Rect RectData => position;
 
-        public Rect Center => new Rect(position.size / 2, position.size);
+        public Rect RectCenter => new Rect(position.size / 2, position.size);
 
         public void Draw()
         {
