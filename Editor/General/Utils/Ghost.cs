@@ -1,6 +1,6 @@
 /*|============|*|
-|*|Author:     |*| xinan                
-|*|Date:       |*| 2024-01-06               
+|*|Author:     |*| xinan
+|*|Date:       |*| 2024-01-06
 |*|E-Mail:     |*| xinansky99@gmail.com
 |*|============|*/
 
@@ -17,31 +17,31 @@ namespace AIO.UEditor
         /// </summary>
         public static class Ghost
         {
-            private const string ScopeName_OpenupmCN = "package.openupm.cn";
-            private const string ScopeName_Openupm = "package.openupm.com";
-            private const string ScopeUrl_OpenupmCN = "https://package.openupm.cn";
-            private const string ScopeUrl_Openupm = "https://package.openupm.com";
+            private const string ScopeName_OpenUpmCN = "package.openupm.cn";
+            private const string ScopeName_OpenUpm = "package.openupm.com";
+            private const string ScopeUrl_OpenUpmCN = "https://package.openupm.cn";
+            private const string ScopeUrl_OpenUpm = "https://package.openupm.com";
 
             /// <summary>
-            /// Openupm 安装
+            /// OpenUpm 安装
             /// </summary>
             /// <param name="scopes">Scopes</param>
             /// <param name="version">版本</param>
             /// <param name="isCN">是否为国区</param>
-            public static async void OpenupmInstall(string scopes, string version, bool isCN = false)
+            public static async void InstallOpenUpm(string scopes, string version, bool isCN = false)
             {
                 AssetDatabase.SaveAssets();
                 string name;
                 string url;
                 if (isCN)
                 {
-                    name = ScopeName_OpenupmCN;
-                    url = ScopeUrl_OpenupmCN;
+                    name = ScopeName_OpenUpmCN;
+                    url = ScopeUrl_OpenUpmCN;
                 }
                 else
                 {
-                    name = ScopeName_Openupm;
-                    url = ScopeUrl_Openupm;
+                    name = ScopeName_OpenUpm;
+                    url = ScopeUrl_OpenUpm;
                 }
 
                 var path = System.IO.Path.Combine(Path.Packages, "manifest.json");
@@ -85,14 +85,14 @@ namespace AIO.UEditor
             }
 
             /// <summary>
-            /// Openupm 安装
+            /// OpenUpm 安装
             /// </summary>
             /// <param name="scopes">Scopes</param>
             /// <param name="isCN">是否为国区</param>
-            public static async void OpenupmUnInstall(string scopes, bool isCN = false)
+            public static async void UnInstallOpenUpm(string scopes, bool isCN = false)
             {
                 AssetDatabase.SaveAssets();
-                var name = isCN ? ScopeName_OpenupmCN : ScopeName_Openupm;
+                var name = isCN ? ScopeName_OpenUpmCN : ScopeName_OpenUpm;
                 var path = System.IO.Path.Combine(Path.Packages, "manifest.json");
                 var manifest = await AHelper.IO.ReadJsonUTF8Async<JObject>(path);
                 manifest.Value<JObject>("dependencies")?.Remove(scopes);

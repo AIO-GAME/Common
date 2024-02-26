@@ -66,7 +66,7 @@ namespace AIO
         /// </summary>
         public static GUILayoutOption WidthMax(in float value)
         {
-            return GUILayout.MaxHeight(value);
+            return GUILayout.MaxWidth(value);
         }
 
         /// <summary>
