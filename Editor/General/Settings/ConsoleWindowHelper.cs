@@ -11,6 +11,7 @@ using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEditorInternal;
+using UnityEngine;
 
 namespace AIO.UEditor
 {
@@ -144,7 +145,7 @@ namespace AIO.UEditor
             isInit = true;
         }
 
-        [OnOpenAsset(0)] //1 : 使用OnOpenAsset属性 接管当有资源打开时的操作
+        // [OnOpenAsset(0)] //1 : 使用OnOpenAsset属性 接管当有资源打开时的操作
         private static bool OnOpenAssetLog(int instanceID, int line, int column)
         {
             if (!isInit) Init();
@@ -164,6 +165,7 @@ namespace AIO.UEditor
             var (path, lineIndex) = GetSubStringInStackStr(str); //解析出对应的.cs文件全路径 和 行号 
             if (lineIndex == -1) return false;
 
+            Debug.Log($"{path}:{lineIndex}");
             InternalEditorUtility.OpenFileAtLineExternal(path, lineIndex); //跳转到正确行号
             return true;
         }
@@ -175,7 +177,7 @@ namespace AIO.UEditor
         /// </summary>
         private static (string, int) GetSubStringInStackStr(string stackStr)
         {
-            var lines = stackStr.Split(new string[] { "\n" }, StringSplitOptions.None);
+            var lines = stackStr.Split(new string[] { "\n", "\r", "\t" }, StringSplitOptions.RemoveEmptyEntries);
 
             var count = lines.Length;
             for (var i = 0; i < count; i++)

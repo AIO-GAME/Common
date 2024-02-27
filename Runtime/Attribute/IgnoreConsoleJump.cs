@@ -57,6 +57,13 @@ namespace AIO
 
         private static string _project;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ignore">是否忽略 (默认:false) Ture : 全部不跳转 False: 自动索引到下一个 at 文件信息</param>
+        /// <param name="filePath"></param>
+        /// <param name="memberName"></param>
+        /// <param name="lineNumber"></param>
         public IgnoreConsoleJumpAttribute(bool ignore = false,
             [CallerFilePath] string filePath = "",
             [CallerMemberName] string memberName = "",
