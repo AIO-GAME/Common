@@ -23,7 +23,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 中心点
         /// </summary>
-        public Rect Center => new Rect(Rect.size / 2, Rect.size);
+        public Rect RectCenter => new Rect(Rect.size / 2, Rect.size);
 
         /// <summary>
         /// 中心点

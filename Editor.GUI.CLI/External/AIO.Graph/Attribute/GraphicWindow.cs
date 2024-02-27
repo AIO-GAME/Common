@@ -16,16 +16,14 @@ namespace AIO.UEditor
     {
         private static Dictionary<string, GWindowAttribute> WindowTypes { get; }
 
-        private static SettingsProvider provider;
-
         /// <summary>
         /// 组列表
         /// </summary>
-        private static Dictionary<string, List<Type>> GroupTabel { get; }
+        private static Dictionary<string, List<Type>> GroupTable { get; }
 
         static GraphicWindow()
         {
-            GroupTabel = new Dictionary<string, List<Type>> { { "Default", new List<Type>() } };
+            GroupTable = new Dictionary<string, List<Type>> { { "Default", new List<Type>() } };
             WindowTypes = new Dictionary<string, GWindowAttribute>();
 
             var graphicType = typeof(GraphicWindow);
@@ -35,7 +33,7 @@ namespace AIO.UEditor
                 {
                     if (!type.IsClass || type.IsAbstract || !type.IsSubclassOf(graphicType)) continue;
                     var attribute = type.GetCustomAttribute<GWindowAttribute>(false);
-                    if (attribute is null) GroupTabel["Default"].Add(type);
+                    if (attribute is null) GroupTable["Default"].Add(type);
                     else
                     {
                         var key = $"{attribute.Title.text}{type.FullName}";
@@ -43,17 +41,19 @@ namespace AIO.UEditor
                         if (string.IsNullOrEmpty(attribute.Group)) attribute.Group = "Default";
                         attribute.RuntimeType = type;
                         WindowTypes.Add(key, attribute);
-                        if (!GroupTabel.ContainsKey(attribute.Group)) GroupTabel[attribute.Group] = new List<Type>();
-                        GroupTabel[attribute.Group].Add(type);
+                        if (!GroupTable.ContainsKey(attribute.Group)) GroupTable[attribute.Group] = new List<Type>();
+                        GroupTable[attribute.Group].Add(type);
                     }
                 }
             }
 
             var containerWindowType = Assembly.GetAssembly(typeof(EditorWindow))
                 .GetType("UnityEditor.PreferenceSettingsWindow");
-            foreach (var item in GroupTabel)
+            foreach (var item in GroupTable)
                 item.Value.Add(containerWindowType);
         }
+
+        private static SettingsProvider provider;
 
         /// <summary>
         /// 创建设置提供者
@@ -78,45 +78,46 @@ namespace AIO.UEditor
             provider.keywords = new HashSet<string>(new[] { "Window", "Header", "GUI", "AIO" });
             provider.guiHandler = delegate
             {
-                EditorGUILayout.BeginVertical();
-                EditorGUILayout.Space();
-
-                using (new EditorGUILayout.HorizontalScope(EditorStyles.helpBox))
+                using (var scope = new EditorGUILayout.VerticalScope())
                 {
-                    EditorGUILayout.LabelField("Group", new GUIStyle("CenteredLabel"), GUILayout.Width(50));
-                    EditorGUILayout.LabelField("|", GUILayout.Width(10));
-                    EditorGUILayout.LabelField("Order", new GUIStyle("CenteredLabel"), GUILayout.Width(50));
-                    EditorGUILayout.LabelField("|", GUILayout.Width(10));
-                    EditorGUILayout.LabelField("Title", new GUIStyle("CenteredLabel"), GUILayout.Width(200));
-                    EditorGUILayout.LabelField("|", GUILayout.Width(10));
-                    EditorGUILayout.LabelField("Status", new GUIStyle("CenteredLabel"), GUILayout.Width(50));
-                    EditorGUILayout.LabelField("|", GUILayout.Width(10));
-                    EditorGUILayout.LabelField("Class", new GUIStyle("CenteredLabel"), GUILayout.ExpandWidth(true));
-                }
+                    EditorGUILayout.Space();
 
-                foreach (var window in WindowTypes)
-                {
                     using (new EditorGUILayout.HorizontalScope(EditorStyles.helpBox))
                     {
-                        EditorGUILayout.LabelField(window.Value.Group, new GUIStyle("CenteredLabel"),
-                            GUILayout.Width(50));
+                        EditorGUILayout.LabelField("Group", new GUIStyle("CenteredLabel"), GUILayout.Width(50));
                         EditorGUILayout.LabelField("|", GUILayout.Width(10));
-                        EditorGUILayout.LabelField(window.Value.Order.ToString(), new GUIStyle("CenteredLabel"),
-                            GUILayout.Width(50));
+                        EditorGUILayout.LabelField("Order", new GUIStyle("CenteredLabel"), GUILayout.Width(50));
                         EditorGUILayout.LabelField("|", GUILayout.Width(10));
-                        EditorGUILayout.LabelField(window.Value.Title, new GUIStyle("CenteredLabel"),
-                            GUILayout.Width(200));
+                        EditorGUILayout.LabelField("Title", new GUIStyle("CenteredLabel"), GUILayout.Width(200));
                         EditorGUILayout.LabelField("|", GUILayout.Width(10));
-                        if (GUILayout.Button("Open", GUILayout.Width(50)))
-                            EHelper.Window.Open(window.Value.RuntimeType, window.Value.Title,
-                                GroupTabel[window.Value.Group]);
+                        EditorGUILayout.LabelField("Status", new GUIStyle("CenteredLabel"), GUILayout.Width(50));
                         EditorGUILayout.LabelField("|", GUILayout.Width(10));
-                        EditorGUILayout.LabelField(window.Value.RuntimeType.FullName, GUILayout.ExpandWidth(true));
+                        EditorGUILayout.LabelField("Class", new GUIStyle("CenteredLabel"), GUILayout.ExpandWidth(true));
                     }
-                }
 
-                EditorGUILayout.Space();
-                EditorGUILayout.EndVertical();
+                    foreach (var window in WindowTypes)
+                    {
+                        using (new EditorGUILayout.HorizontalScope(EditorStyles.helpBox))
+                        {
+                            EditorGUILayout.LabelField(window.Value.Group, new GUIStyle("CenteredLabel"),
+                                GUILayout.Width(50));
+                            EditorGUILayout.LabelField("|", GUILayout.Width(10));
+                            EditorGUILayout.LabelField(window.Value.Order.ToString(), new GUIStyle("CenteredLabel"),
+                                GUILayout.Width(50));
+                            EditorGUILayout.LabelField("|", GUILayout.Width(10));
+                            EditorGUILayout.LabelField(window.Value.Title, new GUIStyle("CenteredLabel"),
+                                GUILayout.Width(200));
+                            EditorGUILayout.LabelField("|", GUILayout.Width(10));
+                            if (GUILayout.Button("Open", GUILayout.Width(50)))
+                                EHelper.Window.Open(window.Value.RuntimeType, window.Value.Title,
+                                    GroupTable[window.Value.Group]);
+                            EditorGUILayout.LabelField("|", GUILayout.Width(10));
+                            EditorGUILayout.LabelField(window.Value.RuntimeType.FullName, GUILayout.ExpandWidth(true));
+                        }
+                    }
+
+                    EditorGUILayout.Space();
+                }
 
                 GUILayout.FlexibleSpace();
                 EditorGUILayout.LabelField($"Version {Setting.Version}", EditorStyles.centeredGreyMiniLabel);

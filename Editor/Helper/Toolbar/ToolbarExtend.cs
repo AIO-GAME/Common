@@ -47,9 +47,9 @@ namespace AIO.UEditor
 
 #else
         private static readonly Type GUIVIEW_TYPE = typeof(Editor).Assembly.GetType("UnityEditor.GUIView");
-        
+
         private static readonly PropertyInfo VISUALTREE_PROPERTYINFO = GUIVIEW_TYPE.GetProperty("visualTree",
-           BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 #endif
 
 #endif
@@ -58,7 +58,11 @@ namespace AIO.UEditor
             new Dictionary<GUIContent, VisualElement>();
 
         [AInit(Mode = EInitAttrMode.Both, Order = -1)]
+#if UNITY_2021_1_OR_NEWER
         private static async void Init()
+#else
+        private static void Init()
+#endif
         {
 #if UNITY_2021_1_OR_NEWER
             var toolbars = Resources.FindObjectsOfTypeAll(TOOLBAR_TYPE);

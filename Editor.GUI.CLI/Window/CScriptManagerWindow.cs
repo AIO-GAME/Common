@@ -34,10 +34,6 @@ namespace AIO.UEditor
             }
         }
 
-        protected override void OnActivation()
-        {
-        }
-
         protected override void OnDraw()
         {
             using (GELayout.VHorizontal(EditorStyles.helpBox, GTOption.Width(true)))

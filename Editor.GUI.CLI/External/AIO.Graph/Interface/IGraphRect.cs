@@ -22,7 +22,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 中心点
         /// </summary>
-        Rect Center { get; }
+        Rect RectCenter { get; }
 
         /// <summary>
         /// 绘制
