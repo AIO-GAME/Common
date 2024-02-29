@@ -9,6 +9,10 @@ using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
 namespace AIO.UEditor
 {
+#if UNITY_2020_1_OR_NEWER
+    using UnityEditorInternal;
+#endif
+    
     internal static class ManageRuntime
     {
         #region Runtime
