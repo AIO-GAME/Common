@@ -1,10 +1,4 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-07-28
-
-|||✩ - - - - - |*/
-
-#if UNITY_EDITOR
+﻿#if UNITY_EDITOR
 using UnityEditor;
 #endif
 using UnityEngine;
@@ -17,20 +11,23 @@ namespace AIO
         public virtual float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             var lineCount = GetLineCount(property, label);
-            return EditorGUIUtility.singleLineHeight * lineCount + EditorGUIUtility.standardVerticalSpacing * (lineCount - 1);
+            return EditorGUIUtility.singleLineHeight * lineCount +
+                   EditorGUIUtility.standardVerticalSpacing * (lineCount - 1);
         }
 
         /// <summary> [Editor-Only]
         /// Determines how many lines tall the `property` should be.
         /// </summary>
-        protected virtual int GetLineCount(SerializedProperty property, GUIContent label) => EditorGUIUtility.wideMode ? 1 : 2;
+        protected virtual int GetLineCount(SerializedProperty property, GUIContent label) =>
+            EditorGUIUtility.wideMode ? 1 : 2;
 
         /// <summary>[Editor-Only]
         /// Draws this attribute's fields for the `property`.
         /// </summary>
         public abstract void OnGUI(Rect area, SerializedProperty property, GUIContent label);
 
-        protected void DoOptionalBeforeGUI(bool isOptional, Rect area, out Rect toggleArea, out bool guiWasEnabled, out float previousLabelWidth)
+        protected void DoOptionalBeforeGUI(bool isOptional, Rect area, out Rect toggleArea, out bool guiWasEnabled,
+            out float previousLabelWidth)
         {
             toggleArea = area;
             guiWasEnabled = GUI.enabled;
@@ -72,7 +69,8 @@ namespace AIO
         /// This method treats most <see cref="EventType"/>s normally, but for <see cref="EventType.Repaint"/> it
         /// instead draws a text field with the converted string.
         /// </remarks>
-        protected static double DoSpecialField(Rect area, GUIContent label, double value, CompactUnitConversionCache toString)
+        protected static double DoSpecialField(Rect area, GUIContent label, double value,
+            CompactUnitConversionCache toString)
         {
             if (label != null && !string.IsNullOrEmpty(label.text))
             {
@@ -180,7 +178,8 @@ namespace AIO
         /// This method treats most <see cref="EventType"/>s normally, but for <see cref="EventType.Repaint"/> it
         /// instead draws a text field with the converted string.
         /// </remarks>
-        public static float DoSpecialField(Rect area, GUIContent label, float value, CompactUnitConversionCache toString)
+        public static float DoSpecialField(Rect area, GUIContent label, float value,
+            CompactUnitConversionCache toString)
         {
             if (label != null && !string.IsNullOrEmpty(label.text))
             {
@@ -207,7 +206,9 @@ namespace AIO
 
             return value;
         }
+
         #endregion
+
 #endif
     }
 }

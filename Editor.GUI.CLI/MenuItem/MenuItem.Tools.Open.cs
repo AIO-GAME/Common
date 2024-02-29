@@ -1,9 +1,4 @@
-﻿/*|==========|*|
-|*|Author:   |*| -> XINAN
-|*|Date:     |*| -> 2023-05-31
-|*|==========|*/
-
-using System.IO;
+﻿using System.IO;
 using UnityEditor;
 using UnityEngine;
 

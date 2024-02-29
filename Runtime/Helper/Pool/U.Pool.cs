@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+
 namespace AIO
 {
-    public static partial class RHelper
+    partial class RHelper
     {
         /// <summary>
         /// 对象池
@@ -12,7 +13,8 @@ namespace AIO
             /// <summary>
             /// 缓存列表
             /// </summary>
-            private static readonly Dictionary<Cacheable, Stack<Cacheable>> Cache = new Dictionary<Cacheable, Stack<Cacheable>>();
+            private static readonly Dictionary<Cacheable, Stack<Cacheable>> Cache =
+                new Dictionary<Cacheable, Stack<Cacheable>>();
 
             /// <summary>
             /// 检出
@@ -91,7 +93,7 @@ namespace AIO
                 return (T)r;
             }
 
-            internal static void CheckIn(in Cacheable inst, in bool toRoot, in bool toDeactive)
+            internal static void CheckIn(in Cacheable inst, in bool toRoot, in bool toActivate)
             {
                 if (inst.Prefab == null) return;
 
@@ -101,7 +103,7 @@ namespace AIO
                     cache.Push(inst);
 
                     if (toRoot) inst.transform.SetParent(null, false);
-                    if (toDeactive) inst.gameObject.SetActive(false);
+                    if (toActivate) inst.gameObject.SetActive(false);
                 }
                 else
                 {

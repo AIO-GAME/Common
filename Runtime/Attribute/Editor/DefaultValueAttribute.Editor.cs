@@ -1,13 +1,5 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-07-28
+﻿#if UNITY_EDITOR
 
-|||✩ - - - - - |*/
-
-#if UNITY_EDITOR
-
-using System;
-using System.Diagnostics;
 using System.Reflection;
 using UnityEditor;
 

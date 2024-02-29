@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace AIO
 {
-    public static partial class ExtendIList
+    partial class ExtendIList
     {
         /// <summary>
         /// 字符串通过在此实例中的字符左侧填充空格来达到指定的总长度，从而实现右对齐。

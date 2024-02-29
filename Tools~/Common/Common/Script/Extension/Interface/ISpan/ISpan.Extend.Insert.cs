@@ -12,7 +12,7 @@ using System.Runtime.CompilerServices;
 
 namespace AIO
 {
-    public partial class ExtendISpan
+    partial class ExtendISpan
     {
         /// <summary>
         /// 插入

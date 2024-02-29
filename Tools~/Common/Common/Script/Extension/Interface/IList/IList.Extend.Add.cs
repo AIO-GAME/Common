@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AIO
 {
-    public static partial class ExtendIList
+    partial class ExtendIList
     {
         /// <summary>
         /// 添加相同元素

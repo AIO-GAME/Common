@@ -1,10 +1,4 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-07-28
-
-|||✩ - - - - - |*/
-
-#if UNITY_EDITOR
+﻿#if UNITY_EDITOR
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -112,7 +106,8 @@ namespace AIO
                     nameStartIndex < propertyPath.Length - 7 &&
                     string.Compare(propertyPath, nameStartIndex - 6, ArrayDataPrefix, 0, 12) == 0)
                 {
-                    var index = int.Parse(propertyPath.Substring(nameStartIndex + 6, propertyPath.Length - nameStartIndex - 7));
+                    var index = int.Parse(propertyPath.Substring(nameStartIndex + 6,
+                        propertyPath.Length - nameStartIndex - 7));
 
                     var nameEndIndex = nameStartIndex - 6;
                     nameStartIndex = propertyPath.LastIndexOf('.', nameEndIndex - 1);
@@ -173,7 +168,8 @@ namespace AIO
 
         /// <summary>Returns a field with the specified `name` in the `declaringType` or any of its base types.</summary>
         /// <remarks>Uses the <see cref="InstanceBindings"/>.</remarks>
-        internal static FieldInfo GetField(PropertyAccessor accessor, SerializedProperty property, Type declaringType, string name)
+        internal static FieldInfo GetField(PropertyAccessor accessor, SerializedProperty property, Type declaringType,
+            string name)
         {
             declaringType = accessor?.GetFieldElementType(property) ?? declaringType;
             return GetField(declaringType, name);

@@ -45,15 +45,15 @@ namespace AIO.UEditor
                 return;
             }
 
-            var datas = GetDatas(fieldInfo.GetValue(target));
-            if (datas.Count <= 0)
+            var dataList = GetDatas(fieldInfo.GetValue(target));
+            if (dataList.Count <= 0)
             {
                 Debug.LogWarning($"通用表格绘制器：{target.GetType().FullName} 的字段 {fieldName} 长度为0，或不是数组、集合类型！");
                 Close();
                 return;
             }
 
-            var columns = GetColumns(datas[0].GetType());
+            var columns = GetColumns(dataList[0].GetType());
             if (columns.Count <= 0)
             {
                 Debug.LogWarning($"通用表格绘制器：{target.GetType().FullName} 的字段 {fieldName} 不是复杂类型，或类型中不含有可序列化字段！");
@@ -61,7 +61,7 @@ namespace AIO.UEditor
                 return;
             }
 
-            _tableView = new TableView<object>(datas, columns)
+            _tableView = new TableView<object>(dataList, columns)
             {
                 IsEnableContextClick = false
             };

@@ -1,17 +1,11 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-06-26
-
-|||✩ - - - - - |*/
-
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace AIO.UEditor
 {
     /// <summary>
     /// EmptyGraphWindow
     /// </summary>
-    public partial class EmptyGraphWindow
+    partial class EmptyGraphWindow
     {
         /// <summary>
         /// 脚本启用时调用
@@ -196,7 +190,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 将自定义菜单项添加到编辑器窗口。
         /// </summary>
-        protected virtual void OnAddItemsToMenu( UnityEditor.GenericMenu menu)
+        protected virtual void OnAddItemsToMenu(UnityEditor.GenericMenu menu)
         {
         }
 

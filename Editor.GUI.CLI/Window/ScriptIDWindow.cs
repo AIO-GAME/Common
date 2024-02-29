@@ -1,10 +1,4 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-08-03
-
-|||✩ - - - - - |*/
-
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 namespace AIO.UEditor
@@ -16,8 +10,10 @@ namespace AIO.UEditor
     {
         protected override void OnAwake()
         {
-            m_material = new Material(Shader.Find("Hidden/Internal-Colored"));
-            m_material.hideFlags = HideFlags.HideAndDontSave;
+            m_material = new Material(Shader.Find("Hidden/Internal-Colored"))
+            {
+                hideFlags = HideFlags.HideAndDontSave
+            };
         }
 
         protected override void OnDraw()

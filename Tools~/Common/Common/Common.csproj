@@ -488,12 +488,15 @@
     <Compile Include="Script\Extension\Interface\IEnumerable\Byte\IEnumerable.Byte.Extend.cs" />
     <Compile Include="Script\Extension\Interface\IEnumerable\Char\IEnumerable.Char.Extend.Contains.cs" />
     <Compile Include="Script\Extension\Interface\IEnumerable\IEnumerable.Extend.Contains.cs" />
+    <Compile Include="Script\Extension\Interface\IEnumerable\IEnumerable.Extend.cs" />
     <Compile Include="Script\Extension\Interface\IEnumerable\IEnumerable.Extend.Find.cs" />
     <Compile Include="Script\Extension\Interface\IEnumerable\IEnumerable.Extend.To.cs" />
     <Compile Include="Script\Extension\Interface\IList\Byte\IList.Byte.Extend.cs" />
     <Compile Include="Script\Extension\Interface\IList\Byte\IList.Byte.Extend.Get.cs" />
     <Compile Include="Script\Extension\Interface\IList\Byte\IList.Byte.Extend.Set.cs" />
+    <Compile Include="Script\Extension\Interface\IList\IList.Extend.cs" />
     <Compile Include="Script\Extension\Interface\IList\IList.Extend.Add.cs" />
+    <Compile Include="Script\Extension\Interface\IList\IList.Extend.Disrupt.cs" />
     <Compile Include="Script\Extension\Interface\IList\IList.Extend.Exist.cs" />
     <Compile Include="Script\Extension\Interface\IList\IList.Extend.Get.cs" />
     <Compile Include="Script\Extension\Interface\IList\IList.Extend.IndexOf.cs" />
@@ -510,6 +513,7 @@
     <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Add.cs" />
     <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Copy.cs" />
     <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Disrupt.cs" />
     <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Insert.cs" />
     <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Remove.cs" />
     <Compile Include="Script\Extension\Interface\IType\IType.Extend.cs" />

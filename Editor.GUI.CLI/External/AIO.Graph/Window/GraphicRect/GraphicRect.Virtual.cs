@@ -1,15 +1,8 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-06-26
-
-|||✩ - - - - - |*/
-
-using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace AIO.UEditor
 {
-    public partial class GraphicRect
+    partial class GraphicRect
     {
         /// <summary>
         /// 是否显示该矩形

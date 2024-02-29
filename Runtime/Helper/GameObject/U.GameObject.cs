@@ -1,8 +1,8 @@
-﻿using UnityObject = UnityEngine.Object;
+﻿using UObject = UnityEngine.Object;
 
 namespace AIO
 {
-    public static partial class RHelper
+    partial class RHelper
     {
         /// <summary>
         /// GameObject 工具
@@ -12,11 +12,10 @@ namespace AIO
             /// <summary>
             /// 真正的相等
             /// </summary>
-            public static bool TrulyEqual(in UnityObject a, in UnityObject b)
+            public static bool TryEqual(in UObject a, in UObject b)
             {
                 if (a != b) return false;
-                if ((a == null) != (b == null)) return false;
-                return true;
+                return a == null == (b == null);
             }
         }
     }

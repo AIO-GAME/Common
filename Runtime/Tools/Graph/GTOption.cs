@@ -1,10 +1,4 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-06-26
-
-|||✩ - - - - - |*/
-
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace AIO
 {
@@ -108,6 +102,5 @@ namespace AIO
         {
             return GUILayout.MaxHeight(value);
         }
-
     }
 }

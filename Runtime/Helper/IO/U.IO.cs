@@ -5,7 +5,7 @@ using SFile = System.IO.File;
 
 namespace AIO
 {
-    public static partial class RHelper
+    partial class RHelper
     {
         /// <summary>
         /// IO 工具类

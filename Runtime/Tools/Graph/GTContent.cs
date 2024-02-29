@@ -1,10 +1,4 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> SAM
-|||✩ Date:     ||| -> 2023-06-29
-
-|||✩ - - - - - |*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -12,7 +6,7 @@ using UnityEngine;
 
 namespace AIO
 {
-    public partial struct GTContent
+    public struct GTContent
     {
         public bool Equals(GTContent other)
         {

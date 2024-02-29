@@ -1,10 +1,4 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-07-28
-
-|||✩ - - - - - |*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 #if UNITY_EDITOR
@@ -28,7 +22,8 @@ namespace AIO
         public double DefaultValue { get; set; }
 
         /// <summary>Creates a new <see cref="UnitsAttribute"/>.</summary>
-        public UnitsDoubleAttribute(IReadOnlyList<double> multipliers, IList<CompactUnitConversionCache> suffixes, int unitIndex = 0)
+        public UnitsDoubleAttribute(IReadOnlyList<double> multipliers, IList<CompactUnitConversionCache> suffixes,
+            int unitIndex = 0)
         {
             Multipliers = multipliers;
             UnitIndex = unitIndex;
@@ -45,7 +40,8 @@ namespace AIO
             var isMultiLine = area.height >= EditorGUIUtility.singleLineHeight * 2;
             area.height = EditorGUIUtility.singleLineHeight;
 
-            DoOptionalBeforeGUI(IsOptional, area, out var toggleArea, out var guiWasEnabled, out var previousLabelWidth);
+            DoOptionalBeforeGUI(IsOptional, area, out var toggleArea, out var guiWasEnabled,
+                out var previousLabelWidth);
 
             var hasLabel = label != null && !string.IsNullOrEmpty(label.text);
             Rect allFieldArea;
@@ -123,7 +119,8 @@ namespace AIO
 
                 EditorGUI.BeginChangeCheck();
 
-                MultipliersDic[Multipliers[i]] = DoSpecialField(fieldArea, label, MultipliersDic[Multipliers[i]], DisplayConverters[i]);
+                MultipliersDic[Multipliers[i]] = DoSpecialField(fieldArea, label, MultipliersDic[Multipliers[i]],
+                    DisplayConverters[i]);
 
                 if (EditorGUI.EndChangeCheck())
                 {
@@ -145,7 +142,8 @@ namespace AIO
             Validate.ValueRule(ref value, Rule);
         }
 
-        private void DoOptionalAfterGUI(bool isOptional, Rect area, ref double value, double defaultValue, bool guiWasEnabled, float previousLabelWidth)
+        private void DoOptionalAfterGUI(bool isOptional, Rect area, ref double value, double defaultValue,
+            bool guiWasEnabled, float previousLabelWidth)
         {
             GUI.enabled = guiWasEnabled;
             EditorGUIUtility.labelWidth = previousLabelWidth;
@@ -177,7 +175,8 @@ namespace AIO
         /// <summary>[Editor-Only]
         /// Begins a GUI property block to be ended by EndProperty
         /// </summary>
-        protected static void BeginProperty(Rect area, SerializedProperty property, ref GUIContent label, out double value)
+        protected static void BeginProperty(Rect area, SerializedProperty property, ref GUIContent label,
+            out double value)
         {
             label = EditorGUI.BeginProperty(area, label, property);
             EditorGUI.BeginChangeCheck();

@@ -1,18 +1,4 @@
-﻿/* * * * * * * * * * * * * * * * * * * * * * * *
-* Copyright(C) 2021 by Tianyou Games
-* All rights reserved.
-* FileName:         Framework.ToolWindow
-* Author:           XiNan
-* Version:          0.4
-* UnityVersion:     2019.4.10f1
-* Date:             2021-07-06
-* Time:             15:22:03
-* E-Mail:           1398581458@qq.com
-* Description:
-* History:
-* * * * * * * * * * * * * * * * * * * * * * * * */
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 

@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace AIO
 {
-    public partial class ExtendIEnumerable
+    partial class ExtendIEnumerable
     {
         /// <summary>
         /// 转化为HashSet

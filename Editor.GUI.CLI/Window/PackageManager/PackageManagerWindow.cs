@@ -1,11 +1,4 @@
-﻿/*|=============================================↩|
-|*|Author:          |XINAN                     |↩|
-|*|Date:            |2022-11-23                |↩|
-|*|Time:            |16:42:47                  |↩|
-|*|E-Mail:          |1398581458@qq.com         |↩|
-|*|=============================================*/
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using UnityEditor;

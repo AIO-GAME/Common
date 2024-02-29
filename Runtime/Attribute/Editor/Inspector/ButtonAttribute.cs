@@ -1,10 +1,4 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2024-01-03
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
-
-using System;
+﻿using System;
 using System.Diagnostics;
 
 namespace AIO.UEditor
@@ -12,7 +6,7 @@ namespace AIO.UEditor
     /// <summary>
     /// 按钮检视器
     /// </summary>
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Method)]
     [Conditional("UNITY_EDITOR")]
     public sealed class ButtonAttribute : InspectorAttribute
     {

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AIO
 {
-    public partial class ExtendISpan
+    partial class ExtendISpan
     {
         /// <summary>
         /// 转化为字符串

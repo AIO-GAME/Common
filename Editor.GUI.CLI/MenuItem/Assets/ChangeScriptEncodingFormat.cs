@@ -1,9 +1,3 @@
-/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2024-02-27
-|*|E-Mail:     |*| xinansky99@gmail.com
-|*|============|*/
-
 using System.IO;
 using System.Text;
 using UnityEditor;
@@ -11,14 +5,13 @@ using UnityEngine;
 
 namespace AIO.UEditor
 {
-//中文
     public class ChangeScriptEncodingFormat
     {
         // 添加一个右键菜单。
         // % 按下ctrl时显示菜单。（Windows: control, macOS: command）
         // & 按下alt时显示菜单。(Windows/Linux: alt, macOS: option)
         // _ 按下shift时显示菜单。(Windows/Linux/macOS: shift)
-        [MenuItem("Assets/脚本改格式：GB2312->UTF8无BOM", false, 100)]
+        [MenuItem("Assets/TextAsset/GB2312->UTF8 No BOM", false, 100)]
         private static void CustomMenu()
         {
             // 例如: 获取Project视图中选定的对象
@@ -40,14 +33,14 @@ namespace AIO.UEditor
                           ", 绝对路径: " + absoluteAssetPath +
                           ", 文件名: " + fileName);
 
-                //判断是否是CSharp文件
-                if (IsCSharpFile(fileName))
+                //判断是否是文本文件
+                if (IsTextTypeFile(fileName))
                 {
                     ChangeFormat(absoluteAssetPath);
                 }
                 else
                 {
-                    Debug.Log("不是csharp文件");
+                    Debug.Log("不是文本文件");
                 }
             }
             else
@@ -68,10 +61,25 @@ namespace AIO.UEditor
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        private static bool IsCSharpFile(string fileName)
+        private static bool IsTextTypeFile(string fileName)
         {
             // 将扩展名转换为小写并与 ".cs" 进行比较
-            return Path.GetExtension(fileName).ToLower() == ".cs";
+            var ext = Path.GetExtension(fileName).ToLower();
+            return ext == ".cs" ||
+                   ext == ".txt" ||
+                   ext == ".json" ||
+                   ext == ".xml" ||
+                   ext == ".lua" ||
+                   ext == ".shader" ||
+                   ext == ".html" ||
+                   ext == ".htm" ||
+                   ext == ".js" ||
+                   ext == ".css" ||
+                   ext == ".md" ||
+                   ext == ".yml" ||
+                   ext == ".yaml" ||
+                   ext == ".py"
+                ;
         }
 
         /// <summary>

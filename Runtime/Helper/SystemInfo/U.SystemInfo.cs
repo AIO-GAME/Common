@@ -4,7 +4,7 @@ using UnityEngine.Rendering;
 
 namespace AIO
 {
-    public static partial class RHelper
+    partial class RHelper
     {
         /// <summary>
         /// 设备信息 Unity API 2019_or_new

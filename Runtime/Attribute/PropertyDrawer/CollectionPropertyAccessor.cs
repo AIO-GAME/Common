@@ -23,7 +23,8 @@ namespace AIO
         }
 
         /// <inheritdoc/>
-        public override Type GetFieldElementType(object obj) => FieldElementType ?? GetElementType(GetField(ref obj)?.FieldType);
+        public override Type GetFieldElementType(object obj) =>
+            FieldElementType ?? GetElementType(GetField(ref obj)?.FieldType);
 
         /// <summary>Returns the type of elements in the array.</summary>
         public static Type GetElementType(Type fieldType)
@@ -37,7 +38,8 @@ namespace AIO
             if (fieldType.IsGenericType)
                 return fieldType.GetGenericArguments()[0];
 
-            Debug.LogWarning($"{nameof(AIO)}.{nameof(CollectionPropertyAccessor)}: unable to determine element type for {fieldType}");
+            Debug.LogWarning(
+                $"{nameof(AIO)}.{nameof(CollectionPropertyAccessor)}: unable to determine element type for {fieldType}");
             return fieldType;
         }
 
@@ -87,7 +89,9 @@ namespace AIO
                         list[ElementIndex] = value;
                     return;
                 }
-                default: throw new InvalidOperationException($"{nameof(SetValue)} failed: field doesn't implement {nameof(IList)}.");
+                default:
+                    throw new InvalidOperationException(
+                        $"{nameof(SetValue)} failed: field doesn't implement {nameof(IList)}.");
             }
         }
 

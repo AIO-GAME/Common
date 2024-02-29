@@ -1,13 +1,5 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2021-11-02
-|||✩ - - - - - |*/
-
-using System;
+﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 
 namespace AIO
 {
@@ -23,7 +15,8 @@ namespace AIO
         /// <param name="loop">循环次数</param>
         /// <param name="createTime">创建时间</param>
         /// <param name="delegateValue">委托函数</param>
-        internal TimerExecutorEnumerator(long duration, int loop, long createTime, Func<IEnumerator> delegateValue) : base(duration, loop, createTime)
+        internal TimerExecutorEnumerator(long duration, int loop, long createTime, Func<IEnumerator> delegateValue) :
+            base(duration, loop, createTime)
         {
             Delegates = delegateValue;
         }
@@ -36,14 +29,15 @@ namespace AIO
         /// <param name="loop">循环次数</param>
         /// <param name="createTime">创建时间</param>
         /// <param name="delegateValue">委托函数</param>
-        internal TimerExecutorEnumerator(long tid, long duration, int loop, long createTime, Func<IEnumerator> delegateValue) : base(duration, loop, createTime, tid)
+        internal TimerExecutorEnumerator(long tid, long duration, int loop, long createTime,
+            Func<IEnumerator> delegateValue) : base(duration, loop, createTime, tid)
         {
             Delegates = delegateValue;
         }
 
         protected override void xExecute()
         {
-            UnityAsync.StartCoroutine(Delegates);
+            Runner.StartCoroutine(Delegates);
         }
     }
 }

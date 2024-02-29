@@ -1,15 +1,13 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-08-10
-
-|||✩ - - - - - |*/
-
+﻿#if AIO_USERADMIN
 using System.IO;
 using UnityEditor;
 using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
 namespace AIO.UEditor
 {
+
+    
+
     public static partial class EditorMenu_Assets
     {
         private const string AIO_DLL_TITLE = "Assets/Open C# Project AIO DLL";
@@ -70,3 +68,4 @@ namespace AIO.UEditor
 #endif
     }
 }
+#endif

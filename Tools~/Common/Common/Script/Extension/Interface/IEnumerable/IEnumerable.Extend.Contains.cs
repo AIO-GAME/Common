@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace AIO
 {
-    public partial class ExtendIEnumerable
+    partial class ExtendIEnumerable
     {
         /// <summary>
         /// 判断集合中 是否有重复
@@ -17,6 +16,5 @@ namespace AIO
             if (chars == null || targetChars == null) return false;
             return chars.Intersect(targetChars).Any();
         }
-        
     }
 }

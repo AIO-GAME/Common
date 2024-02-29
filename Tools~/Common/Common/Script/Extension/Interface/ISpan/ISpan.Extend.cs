@@ -5,6 +5,8 @@
 |*|=============================================*/
 
 
+using System;
+
 namespace AIO
 {
     // float    类型:System.Single    说明:32位单精度浮点数    位数:7
@@ -20,10 +22,6 @@ namespace AIO
     //  long    表示有符号的64位整数     -9223372036854775808~9223372036854775807
     //  ulong   表示无符号的64位整数     0~18446744073709551615
     //  char    表示无符号的16位整数     0~65535
-
-    using System;
-    using System.Runtime.CompilerServices;
-
     /// <summary>
     /// 数组方法
     /// </summary>

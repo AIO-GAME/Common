@@ -1964,22 +1964,22 @@
             迭代器扩展
             </summary>
         </member>
-        <member name="M:AIO.ExtendIEnumerable.ToConverStringUTF8(System.Collections.Generic.IEnumerable{System.Byte})">
+        <member name="M:AIO.ExtendIEnumerable.ToConvertStringUTF8(System.Collections.Generic.IEnumerable{System.Byte})">
             <summary>
             转化为字符串 UTF8格式
             </summary>
         </member>
-        <member name="M:AIO.ExtendIEnumerable.ToConverStringUTF8(System.Collections.Generic.IEnumerable{System.Byte},System.Int32@,System.Int32@)">
+        <member name="M:AIO.ExtendIEnumerable.ToConvertStringUTF8(System.Collections.Generic.IEnumerable{System.Byte},System.Int32@,System.Int32@)">
             <summary>
             获取指定字节数组转化为字符串 UTF8格式
             </summary>
         </member>
-        <member name="M:AIO.ExtendIEnumerable.ToConverHex16x(System.Collections.Generic.IEnumerable{System.Byte})">
+        <member name="M:AIO.ExtendIEnumerable.ToConvertHex16x(System.Collections.Generic.IEnumerable{System.Byte})">
             <summary>
             字节数组 转小写16进制字符
             </summary>
         </member>
-        <member name="M:AIO.ExtendIEnumerable.ToConverHex16X(System.Collections.Generic.IEnumerable{System.Byte})">
+        <member name="M:AIO.ExtendIEnumerable.ToConvertHex16X(System.Collections.Generic.IEnumerable{System.Byte})">
             <summary>
             字节数组 转大写16进制字符
             </summary>
@@ -2306,6 +2306,416 @@
             <param name="reverse"></param>
             <returns></returns>
         </member>
+        <member name="M:AIO.ExtendIList.SetCharArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Char}@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetByteArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Byte}@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetSByteArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.SByte}@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetBoolArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Boolean}@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetInt16Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Int16}@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetInt32Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Int32}@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetInt64Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Int64}@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetUInt16Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.UInt16}@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetUInt32Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.UInt32}@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetUInt64Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.UInt64}@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetLenArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Int32}@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetFloatArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Single}@,System.Boolean,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="all"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetDoubleArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Double}@,System.Boolean,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="all"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetDecimalArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Decimal}@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetStringArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.String}@,System.Text.Encoding,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="encoding"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetStringArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Text.StringBuilder}@,System.Text.Encoding,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="encoding"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetStringUTF8Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.String}@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetStringUTF8ASCII(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.String}@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetStringUTF8Unicode(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.String}@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetStringUTF8Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Text.StringBuilder}@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetStringUTF8ASCII(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Text.StringBuilder}@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetStringUTF8Unicode(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Text.StringBuilder}@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetBool(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetChar(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Char@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetLen(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Int32@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <exception cref="T:System.SystemException"></exception>
+        </member>
+        <member name="M:AIO.ExtendIList.SetEnum``1(System.Collections.Generic.IList{System.Byte},``0@,System.Int32@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="value"></param>
+            <param name="index"></param>
+            <param name="reverse"></param>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:AIO.ExtendIList.SetByte(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Byte@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetSByte(System.Collections.Generic.IList{System.Byte},System.Int32@,System.SByte@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetInt16(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Int16@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetInt32(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Int32@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetInt64(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Int64@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetUInt16(System.Collections.Generic.IList{System.Byte},System.Int32@,System.UInt16@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetUInt32(System.Collections.Generic.IList{System.Byte},System.Int32@,System.UInt32@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetUInt64(System.Collections.Generic.IList{System.Byte},System.Int32@,System.UInt64@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetFloat(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Single@,System.Boolean@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="all"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetDouble(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Double@,System.Boolean@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="all"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetDecimal(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Decimal@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetString(System.Collections.Generic.IList{System.Byte},System.Int32@,System.String@,System.Text.Encoding@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="encoding"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetString(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Text.StringBuilder@,System.Text.Encoding@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="encoding"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetStringUTF8(System.Collections.Generic.IList{System.Byte},System.Int32@,System.String@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetStringASCII(System.Collections.Generic.IList{System.Byte},System.Int32@,System.String@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetStringUnicode(System.Collections.Generic.IList{System.Byte},System.Int32@,System.String@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetStringUTF8(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Text.StringBuilder@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetStringASCII(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Text.StringBuilder@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
+        <member name="M:AIO.ExtendIList.SetStringUnicode(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Text.StringBuilder@,System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="reverse"></param>
+        </member>
         <member name="M:AIO.ExtendIList.AddUnion``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IEnumerable{``0}@)">
             <summary>
             添加相同元素
@@ -2345,6 +2755,13 @@
             <summary>
             添加
             </summary>
+        </member>
+        <member name="M:AIO.ExtendIList.Disrupt``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            随机打乱集合
+            </summary>
+            <typeparam name="T">集合类型</typeparam>
+            <param name="array">集合</param>
         </member>
         <member name="M:AIO.ExtendIList.ExistRepeat``1(System.Collections.Generic.IList{``0})">
             <summary>
@@ -2592,434 +3009,6 @@
             移除数组中指定的一组字符的所有前导匹配项。
             </summary>
         </member>
-        <member name="T:AIO.ExtendByte">
-            <summary>
-            字节数组扩展 写入
-            </summary>
-            <summary>
-            字节扩展 包含类型 byte byte[]
-            </summary>
-        </member>
-        <member name="M:AIO.ExtendByte.SetCharArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Char}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetByteArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Byte}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetSByteArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.SByte}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetBoolArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Boolean}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetInt16Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Int16}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetInt32Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Int32}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetInt64Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Int64}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetUInt16Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.UInt16}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetUInt32Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.UInt32}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetUInt64Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.UInt64}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetLenArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Int32}@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetFloatArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Single}@,System.Boolean,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="all"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetDoubleArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Double}@,System.Boolean,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="all"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetDecimalArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Decimal}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetStringArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.String}@,System.Text.Encoding,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="encoding"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetStringArray(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Text.StringBuilder}@,System.Text.Encoding,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="encoding"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetStringUTF8Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.String}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetStringUTF8ASCII(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.String}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetStringUTF8Unicode(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.String}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetStringUTF8Array(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Text.StringBuilder}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetStringUTF8ASCII(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Text.StringBuilder}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetStringUTF8Unicode(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Collections.Generic.ICollection{System.Text.StringBuilder}@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetBool(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetChar(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Char@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetLen(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Int32@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <exception cref="T:System.SystemException"></exception>
-        </member>
-        <member name="M:AIO.ExtendByte.SetEnum``1(System.Collections.Generic.IList{System.Byte},``0@,System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="value"></param>
-            <param name="index"></param>
-            <param name="reverse"></param>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:AIO.ExtendByte.SetByte(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Byte@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetSByte(System.Collections.Generic.IList{System.Byte},System.Int32@,System.SByte@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetInt16(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Int16@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetInt32(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Int32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetInt64(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Int64@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetUInt16(System.Collections.Generic.IList{System.Byte},System.Int32@,System.UInt16@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetUInt32(System.Collections.Generic.IList{System.Byte},System.Int32@,System.UInt32@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetUInt64(System.Collections.Generic.IList{System.Byte},System.Int32@,System.UInt64@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetFloat(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Single@,System.Boolean@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="all"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetDouble(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Double@,System.Boolean@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="all"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetDecimal(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Decimal@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetString(System.Collections.Generic.IList{System.Byte},System.Int32@,System.String@,System.Text.Encoding@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="encoding"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetString(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Text.StringBuilder@,System.Text.Encoding@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="encoding"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetStringUTF8(System.Collections.Generic.IList{System.Byte},System.Int32@,System.String@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetStringASCII(System.Collections.Generic.IList{System.Byte},System.Int32@,System.String@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetStringUnicode(System.Collections.Generic.IList{System.Byte},System.Int32@,System.String@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetStringUTF8(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Text.StringBuilder@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetStringASCII(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Text.StringBuilder@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.SetStringUnicode(System.Collections.Generic.IList{System.Byte},System.Int32@,System.Text.StringBuilder@,System.Boolean@)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="index"></param>
-            <param name="value"></param>
-            <param name="reverse"></param>
-        </member>
-        <member name="M:AIO.ExtendByte.ToConvertHex16x(System.Byte)">
-            <summary>
-            字节 转小写16进制字符
-            </summary>
-        </member>
-        <member name="M:AIO.ExtendByte.ToConvertHex16X(System.Byte)">
-            <summary>
-            字节 转大写16进制字符
-            </summary>
-        </member>
         <member name="T:AIO.ExtendIReflect">
             <summary>
             扩展
@@ -3120,6 +3109,13 @@
             自动扩容
             </summary>
         </member>
+        <member name="M:AIO.ExtendISpan.Disrupt``1(``0[])">
+            <summary>
+            随机打乱数组
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <param name="array">数组</param>
+        </member>
         <member name="M:AIO.ExtendISpan.Insert``1(``0[],System.Int32@,``0[])">
             <summary>
             插入
@@ -3179,6 +3175,21 @@
         <member name="M:AIO.ExtendIType.AppendNameAndGenericArguments(System.Text.StringBuilder,System.Type,System.Boolean@,System.Int32)">
             <summary>
             Appends the generic arguments of `type` (after skipping the specified number).
+            </summary>
+        </member>
+        <member name="T:AIO.ExtendByte">
+            <summary>
+            字节扩展 包含类型 byte byte[]
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendByte.ToConvertHex16x(System.Byte)">
+            <summary>
+            字节 转小写16进制字符
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendByte.ToConvertHex16X(System.Byte)">
+            <summary>
+            字节 转大写16进制字符
             </summary>
         </member>
         <member name="T:AIO.ExtendChar">

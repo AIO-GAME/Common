@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace AIO
 {
-    public static partial class ExtendIDictionary
+    partial class ExtendIDictionary
     {
         /// <summary>
         /// 设置

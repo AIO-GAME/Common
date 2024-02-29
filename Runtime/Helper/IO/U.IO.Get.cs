@@ -4,13 +4,12 @@ using System.IO;
 using System.Linq;
 using SPath = System.IO.Path;
 using SDirectory = System.IO.Directory;
-using SFile = System.IO.File;
 
 namespace AIO
 {
-    public partial class RHelper
+    partial class RHelper
     {
-        public partial class IO
+        partial class IO
         {
             /// <summary>
             /// 获取资源文件夹下

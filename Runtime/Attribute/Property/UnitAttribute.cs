@@ -1,10 +1,4 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-07-28
-
-|||✩ - - - - - |*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
@@ -42,7 +36,8 @@ namespace AIO
         /// </summary>
         public UnitAttribute(string suffix)
         {
-            SetUnits(new double[] { 1 }, new CompactUnitConversionCache[] { new CompactUnitConversionCache(suffix) }, 0);
+            SetUnits(new double[] { 1 }, new CompactUnitConversionCache[] { new CompactUnitConversionCache(suffix) },
+                0);
         }
 
         /// <summary>Creates a new <see cref="UnitAttribute"/>.</summary>
@@ -71,7 +66,8 @@ namespace AIO
         }
 
         /// <summary>[Editor-Only] Sets the unit details.</summary>
-        protected void SetUnits(IReadOnlyList<double> multipliers, IList<CompactUnitConversionCache> displayConverters, int unitIndex = 0)
+        protected void SetUnits(IReadOnlyList<double> multipliers, IList<CompactUnitConversionCache> displayConverters,
+            int unitIndex = 0)
         {
             if (multipliers.Count != displayConverters.Count)
                 throw new ArgumentException(
@@ -117,7 +113,8 @@ namespace AIO
             Check(property.type);
             if (_unitsAttribute is null)
             {
-                EditorGUI.LabelField(area, label.text, $"[Error] Unit {property.type} is not supported", EditorStyles.helpBox);
+                EditorGUI.LabelField(area, label.text, $"[Error] Unit {property.type} is not supported",
+                    EditorStyles.helpBox);
             }
             else _unitsAttribute.OnGUI(area, property, label);
         }
@@ -133,7 +130,8 @@ namespace AIO
             if (_unitsAttribute is null)
             {
                 var lineCount = GetLineCount(property, label);
-                return EditorGUIUtility.singleLineHeight * lineCount + EditorGUIUtility.standardVerticalSpacing * (lineCount - 1);
+                return EditorGUIUtility.singleLineHeight * lineCount +
+                       EditorGUIUtility.standardVerticalSpacing * (lineCount - 1);
             }
 
             return _unitsAttribute.GetPropertyHeight(property, label);

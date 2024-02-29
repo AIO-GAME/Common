@@ -1,15 +1,9 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-07-09
-
-|||✩ - - - - - |*/
-
-using System;
+﻿using System;
 using System.Collections;
 
 namespace AIO
 {
-    public partial class TimerSystem
+    partial class TimerSystem
     {
         #region Timer Executor Enumerator
 

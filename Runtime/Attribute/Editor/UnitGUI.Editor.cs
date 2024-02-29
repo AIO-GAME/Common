@@ -1,9 +1,4 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-07-28
-
-|||✩ - - - - - |*/
-
+﻿
 #if UNITY_EDITOR
 using System;
 using System.Collections;

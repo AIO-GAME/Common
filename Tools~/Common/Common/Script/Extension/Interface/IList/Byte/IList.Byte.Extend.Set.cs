@@ -13,10 +13,7 @@ using System.Text;
 
 namespace AIO
 {
-    /// <summary>
-    /// 字节数组扩展 写入
-    /// </summary>
-    public static partial class ExtendByte
+    partial class ExtendIList
     {
         #region Array
 

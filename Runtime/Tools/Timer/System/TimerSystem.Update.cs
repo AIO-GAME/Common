@@ -1,14 +1,9 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-07-06
-
-|||✩ - - - - - |*/
-
-using System;
+﻿using System;
+using UnityEngine;
 
 namespace AIO
 {
-    public static partial class TimerSystem
+    partial class TimerSystem
     {
         /// <summary>
         /// 自旋 周期执行函数
@@ -23,7 +18,7 @@ namespace AIO
             try
             {
 #if UNITY_EDITOR
-                UnityEngine.Debug.Log("定时器线程启动");
+                Debug.Log("定时器线程启动");
 #endif
                 while (SWITCH)
                 {
@@ -50,13 +45,13 @@ namespace AIO
                                 MainList[0].SlotUpdate(Unit);
                                 if (MainList[0].Slot >= MainList[0].SlotUnit)
                                 {
-                                    MainList[0].SlotResest();
+                                    MainList[0].SlotReset();
                                     for (var i = 1; i < MainList.Count; i++)
                                     {
                                         MainList[i].SlotUpdate(MainList[i - 1].Unit);
                                         if (MainList[i].Slot >= MainList[i].SlotUnit)
                                         {
-                                            MainList[i].SlotResest();
+                                            MainList[i].SlotReset();
                                         }
                                         else break;
                                     }
@@ -74,14 +69,14 @@ namespace AIO
 
                                 if (MainList[0].Slot >= MainList[0].SlotUnit)
                                 {
-                                    MainList[0].SlotResest();
+                                    MainList[0].SlotReset();
                                     for (var i = 1; i < MainList.Count; i++)
                                     {
                                         MainList[i].SlotUpdate(MainList[i - 1].Unit);
                                         if (MainList[i].Slot >= MainList[i].SlotUnit)
                                         {
                                             MainList[i].OtherUpdate(Counter);
-                                            MainList[i].SlotResest();
+                                            MainList[i].SlotReset();
                                         }
                                         else break;
                                     }
@@ -93,12 +88,12 @@ namespace AIO
             }
             catch (Exception e)
             {
-                UnityEngine.Debug.LogException(e);
+                Debug.LogException(e);
             }
 #if UNITY_EDITOR
             finally
             {
-                UnityEngine.Debug.Log("定时器任务全部完成 线程关闭");
+                Debug.Log("定时器任务全部完成 线程关闭");
             }
 #endif
         }

@@ -3,7 +3,7 @@ using System.Text;
 
 namespace AIO
 {
-    public partial class ExtendIList
+     partial class ExtendIList
     {
         /// <summary>
         /// 从指定字节数组中 获取多个字节转化为大写16进制字符串

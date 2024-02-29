@@ -1,6 +1,6 @@
 ﻿namespace AIO
 {
-    public static partial class RHelper
+    partial class RHelper
     {
         /// <summary>
         /// 平台工具类
