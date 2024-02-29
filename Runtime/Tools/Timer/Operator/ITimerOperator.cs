@@ -1,10 +1,4 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-07-07
-
-|||✩ - - - - - |*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace AIO
@@ -96,7 +90,7 @@ namespace AIO
         /// <summary>
         /// 更新格子数 时间更新
         /// </summary>
-        void SlotResest();
+        void SlotReset();
 
         /// <summary>
         /// 数据推送

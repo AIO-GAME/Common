@@ -1,10 +1,4 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-06-29
-
-|||✩ - - - - - |*/
-
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace AIO

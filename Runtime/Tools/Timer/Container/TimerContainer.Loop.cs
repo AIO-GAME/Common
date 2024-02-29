@@ -1,10 +1,4 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-07-07
-
-|||✩ - - - - - |*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -60,14 +54,14 @@ namespace AIO
                         {
                             if (List[0].Slot >= List[0].SlotUnit)
                             {
-                                List[0].SlotResest();
+                                List[0].SlotReset();
                                 for (var i = 1; i < List.Count; i++)
                                 {
                                     List[i].SlotUpdate(List[i - 1].Unit);
                                     if (List[i].Slot >= List[i].SlotUnit)
                                     {
                                         List[i].OtherUpdate(Counter);
-                                        List[i].SlotResest();
+                                        List[i].SlotReset();
                                     }
                                     else break;
                                 }
@@ -84,14 +78,14 @@ namespace AIO
 
                             if (List[0].Slot >= List[0].SlotUnit)
                             {
-                                List[0].SlotResest();
+                                List[0].SlotReset();
                                 for (var i = 1; i < List.Count; i++)
                                 {
                                     List[i].SlotUpdate(List[i - 1].Unit);
                                     if (List[i].Slot >= List[i].SlotUnit)
                                     {
                                         List[i].OtherUpdate(Counter);
-                                        List[i].SlotResest();
+                                        List[i].SlotReset();
                                     }
                                     else break;
                                 }
@@ -125,7 +119,7 @@ namespace AIO
 
         private void DoneCallBack(List<ITimerExecutor> list)
         {
-            UnityAsync.RunTask(() =>
+            Runner.StartTask(() =>
             {
                 foreach (var item in list) item.Execute();
                 list.Free();

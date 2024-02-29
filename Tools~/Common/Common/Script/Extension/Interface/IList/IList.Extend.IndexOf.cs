@@ -2,12 +2,11 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace AIO
 {
-    public static partial class ExtendIList
+    partial class ExtendIList
     {
         /// <summary>
         /// 查询存在相同元素的下标
@@ -16,15 +15,15 @@ namespace AIO
         {
             if (list is null) throw new ArgumentNullException(nameof(list));
             if (items is null) throw new ArgumentNullException(nameof(items));
-            var indexlist = new List<(int, T)>();
+            var tuples = new List<(int, T)>();
             var index = 0;
             foreach (var item in items)
             {
-                if (list.Contains(item)) indexlist.Add((index, item));
+                if (list.Contains(item)) tuples.Add((index, item));
                 index++;
             }
 
-            return indexlist;
+            return tuples;
         }
 
         /// <summary>
@@ -34,14 +33,14 @@ namespace AIO
         {
             if (list is null) throw new ArgumentNullException(nameof(list));
             if (items is null) throw new ArgumentNullException(nameof(items));
-            var indexlist = new List<(int, T)>();
+            var tuples = new List<(int, T)>();
             for (var i = 0; i < items.Count; i++)
             {
                 if (list.Contains(items[i]))
-                    indexlist.Add((i, items[i]));
+                    tuples.Add((i, items[i]));
             }
 
-            return indexlist;
+            return tuples;
         }
 
         /// <summary>
@@ -52,14 +51,14 @@ namespace AIO
             if (list is null) throw new ArgumentNullException(nameof(list));
             if (items is null) throw new ArgumentNullException(nameof(items));
             var hashset = new HashSet<T>(list);
-            var indexlist = new ConcurrentBag<(int, T)>();
+            var tuples = new ConcurrentBag<(int, T)>();
 
             Parallel.ForEach(items, (item, state, index) =>
             {
-                if (hashset.Contains(item)) indexlist.Add(((int)index, item));
+                if (hashset.Contains(item)) tuples.Add(((int)index, item));
             });
 
-            return indexlist.ToList();
+            return tuples.ToList();
         }
     }
 }

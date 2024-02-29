@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace AIO
 {
-    internal partial class Plugins
+    partial class Plugins
     {
         [MenuItem("AIO/Window/Plugin Data Manager")]
         public static void Open()

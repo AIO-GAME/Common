@@ -1,9 +1,4 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-07-07
-|||✩ - - - - - |*/
-
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace AIO
 {

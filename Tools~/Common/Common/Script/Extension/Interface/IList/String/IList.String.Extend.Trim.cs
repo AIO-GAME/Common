@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace AIO
 {
-    public static partial class ExtendIList
+    partial class ExtendIList
     {
         /// <summary>
         /// 移除所有前导空白字符和尾部空白字符。

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AIO
 {
-    public static partial class RHelper
+    partial class RHelper
     {
         /// <summary>
         /// 提供了一些与路径相关的实用方法。

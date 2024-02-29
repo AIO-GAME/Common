@@ -64,8 +64,8 @@ namespace AIO
         /// 回收
         /// </summary>
         /// <param name="toRoot">放置到根节点</param>
-        /// <param name="toDeactive"></param>
-        public void Recycle(in bool toRoot = true, in bool toDeactive = true)
+        /// <param name="toActivate"></param>
+        public void Recycle(in bool toRoot = true, in bool toActivate = true)
         {
             if (this == null || gameObject == null) return;
 
@@ -95,7 +95,7 @@ namespace AIO
             CancelInvoke();
             StopAllCoroutines();
             OnCheckIn();
-            RHelper.Pool.CheckIn(this, toRoot, toDeactive);
+            RHelper.Pool.CheckIn(this, toRoot, toActivate);
         }
 
         internal void CheckOut()

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
 
 namespace AIO
 {
-    public partial class ExtendISpan
+    partial class ExtendISpan
     {
         /// <summary>
         /// 添加

@@ -1,18 +1,7 @@
-/*|============|*|
-|*|Author:     |*| xinan
-|*|Date:       |*| 2024-01-11
-|*|E-Mail:     |*| xinansky99@gmail.com
-|*|============|*/
-
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Runtime.CompilerServices;
 using UnityEngine;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 namespace AIO
 {

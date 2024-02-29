@@ -1,17 +1,10 @@
-﻿/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2020-05-04                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
-
-using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text;
 using UnityEngine;
 
 namespace AIO
 {
-    public static partial class RHelper
+    partial class RHelper
     {
         /// <summary>
         /// 16进制 转换为 #FFFFFF

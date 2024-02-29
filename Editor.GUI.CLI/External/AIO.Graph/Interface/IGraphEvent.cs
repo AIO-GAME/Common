@@ -1,14 +1,8 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-06-26
-
-|||✩ - - - - - |*/
-
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace AIO.UEditor
 {
-  /// <summary>
+    /// <summary>
     /// 图像事件触发
     /// </summary>
     public interface IGraphEvent

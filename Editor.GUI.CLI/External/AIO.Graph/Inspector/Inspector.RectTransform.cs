@@ -1,19 +1,12 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-12-07
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
-
-using System;
+﻿using System;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
 namespace AIO.UEditor
 {
-    [GithubURL("https://github.com/AIO-GAME/Common#readme")]
     [CustomEditor(typeof(RectTransform))]
-    internal sealed class RectTransformNilInspector : NILInspector<RectTransform>
+    internal sealed class RectTransformAfInspector : AFInspector<RectTransform>
     {
         private static bool _copyQuaternion = false;
 

@@ -1,22 +1,21 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-12-07
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
-
-using System;
+﻿using System;
 using System.Reflection;
+using AIO.UEngine;
 using UnityEditor;
 using UnityEngine;
 
 namespace AIO.UEditor
 {
-    [GithubURL("https://github.com/AIO-GAME/Common#readme")]
     [CanEditMultipleObjects]
     [CustomEditor(typeof(Transform))]
-    internal sealed class TransformNilInspector : NILInspector<Transform>
+    internal sealed class TransformAfInspector : AFInspector<Transform>
     {
         private static bool _copyQuaternion = false;
+
+        /// <summary>
+        /// 复制、粘贴按钮的GUIContent
+        /// </summary>
+        private GUIContent CopyPasteGC;
 
         [MenuItem("CONTEXT/Transform/Copy/Location")]
         public static void CopyLocation(MenuCommand cmd)
@@ -58,6 +57,11 @@ namespace AIO.UEditor
             _pagePainter.AddPage("Property", EditorGUIUtility.IconContent("ToolHandleLocal").image, PropertyGUI);
             _pagePainter.AddPage("Hierarchy", EditorGUIUtility.IconContent("ToolHandlePivot").image, HierarchyGUI);
             _pagePainter.AddPage("Copy", EditorGUIUtility.IconContent("ToolHandleCenter").image, CopyGUI);
+
+            CopyPasteGC = new GUIContent();
+            CopyPasteGC.image = EditorGUIUtility.IconContent("d_editicon.sml").image;
+            CopyPasteGC.tooltip = "Copy or Paste";
+
             if (_rotationGUI == null)
             {
                 var type = Type.GetType("UnityEditor.TransformRotationGUI,UnityEditor");
@@ -115,9 +119,9 @@ namespace AIO.UEditor
                 GUI.enabled = false;
                 EditorGUILayout.Vector3Field("", Target.position);
                 GUI.enabled = true;
-                if (GUILayout.Button(GCCopyPaste, "InvisibleButton", GUILayout.Width(20), GUILayout.Height(20)))
+                if (GUILayout.Button(CopyPasteGC, "InvisibleButton", GUILayout.Width(20), GUILayout.Height(20)))
                 {
-                    var gm = new GenericMenu();
+                    GenericMenu gm = new GenericMenu();
                     gm.AddItem(new GUIContent("Copy"), false,
                         () => { GUIUtility.systemCopyBuffer = Target.position.ToCopyString("F4"); });
                     gm.AddDisabledItem(new GUIContent("Paste"));
@@ -131,9 +135,9 @@ namespace AIO.UEditor
                 GUI.enabled = false;
                 EditorGUILayout.Vector3Field("", Target.rotation.eulerAngles);
                 GUI.enabled = true;
-                if (GUILayout.Button(GCCopyPaste, "InvisibleButton", GUILayout.Width(20), GUILayout.Height(20)))
+                if (GUILayout.Button(CopyPasteGC, "InvisibleButton", GUILayout.Width(20), GUILayout.Height(20)))
                 {
-                    var gm = new GenericMenu();
+                    GenericMenu gm = new GenericMenu();
                     gm.AddItem(new GUIContent("Copy"), false, () =>
                     {
                         if (_copyQuaternion)
@@ -142,11 +146,10 @@ namespace AIO.UEditor
                         }
                         else
                         {
-                            var temp = Target.rotation.eulerAngles;
-                            var x = ClampAngle(temp.x);
-                            var y = ClampAngle(temp.y);
-                            var z = ClampAngle(temp.z);
-                            var angle = new Vector3(x, y, z);
+                            float x = ClampAngle(Target.rotation.eulerAngles.x);
+                            float y = ClampAngle(Target.rotation.eulerAngles.y);
+                            float z = ClampAngle(Target.rotation.eulerAngles.z);
+                            Vector3 angle = new Vector3(x, y, z);
                             GUIUtility.systemCopyBuffer = angle.ToCopyString("F1");
                         }
                     });
@@ -161,14 +164,11 @@ namespace AIO.UEditor
                 GUI.enabled = false;
                 EditorGUILayout.Vector3Field("", Target.lossyScale);
                 GUI.enabled = true;
-                if (GUILayout.Button(GCCopyPaste, "InvisibleButton", GUILayout.Width(20), GUILayout.Height(20)))
+                if (GUILayout.Button(CopyPasteGC, "InvisibleButton", GUILayout.Width(20), GUILayout.Height(20)))
                 {
-                    var gm = new GenericMenu();
-                    gm.AddItem(
-                        new GUIContent("Copy"),
-                        false,
-                        () => { GUIUtility.systemCopyBuffer = Target.lossyScale.ToCopyString("F4"); }
-                    );
+                    GenericMenu gm = new GenericMenu();
+                    gm.AddItem(new GUIContent("Copy"), false,
+                        () => { GUIUtility.systemCopyBuffer = Target.lossyScale.ToCopyString("F4"); });
                     gm.AddDisabledItem(new GUIContent("Paste"));
                     gm.ShowAsContext();
                 }
@@ -183,17 +183,17 @@ namespace AIO.UEditor
             {
                 if (Targets.Length == 1)
                 {
-                    var gm = new GenericMenu();
+                    GenericMenu gm = new GenericMenu();
                     gm.AddItem(new GUIContent("Reset LocalPosition But Ignore Child"), false, () =>
                     {
                         Undo.RecordObject(Target, "Reset LocalPosition But Ignore Child");
-                        var dir = Vector3.zero - Target.localPosition;
+                        Vector3 dir = Vector3.zero - Target.localPosition;
                         Target.localPosition = Vector3.zero;
                         HasChanged();
 
-                        for (var i = 0; i < Target.childCount; i++)
+                        for (int i = 0; i < Target.childCount; i++)
                         {
-                            var child = Target.GetChild(i);
+                            Transform child = Target.GetChild(i);
                             Undo.RecordObject(child, "Reset LocalPosition But Ignore Child");
                             child.position -= dir;
                             EditorUtility.SetDirty(child);
@@ -213,12 +213,12 @@ namespace AIO.UEditor
             {
                 if (Targets.Length == 1)
                 {
-                    var gm = new GenericMenu();
+                    GenericMenu gm = new GenericMenu();
                     gm.AddItem(new GUIContent("Reset LocalRotation But Ignore Child"), false, () =>
                     {
-                        var pos = new Vector3[Target.childCount];
-                        var rot = new Quaternion[pos.Length];
-                        for (var i = 0; i < Target.childCount; i++)
+                        Vector3[] pos = new Vector3[Target.childCount];
+                        Quaternion[] rot = new Quaternion[Target.childCount];
+                        for (int i = 0; i < Target.childCount; i++)
                         {
                             pos[i] = Target.GetChild(i).position;
                             rot[i] = Target.GetChild(i).rotation;
@@ -228,9 +228,9 @@ namespace AIO.UEditor
                         Target.localRotation = Quaternion.identity;
                         HasChanged();
 
-                        for (var i = 0; i < Target.childCount; i++)
+                        for (int i = 0; i < Target.childCount; i++)
                         {
-                            var child = Target.GetChild(i);
+                            Transform child = Target.GetChild(i);
                             Undo.RecordObject(child, "Reset LocalRotation But Ignore Child");
                             child.position = pos[i];
                             child.rotation = rot[i];
@@ -242,7 +242,7 @@ namespace AIO.UEditor
             }
 
             _rotationField.Invoke(_rotationGUI, null);
-            if (GUILayout.Button(GCCopyPaste, "InvisibleButton", GUILayout.Width(20), GUILayout.Height(20)))
+            if (GUILayout.Button(CopyPasteGC, "InvisibleButton", GUILayout.Width(20), GUILayout.Height(20)))
             {
                 GenericMenu gm = new GenericMenu();
                 if (Targets.Length == 1)
@@ -255,11 +255,10 @@ namespace AIO.UEditor
                         }
                         else
                         {
-                            var temp = Target.localRotation.eulerAngles;
-                            var x = ClampAngle(temp.x);
-                            var y = ClampAngle(temp.y);
-                            var z = ClampAngle(temp.z);
-                            var angle = new Vector3(x, y, z);
+                            float x = ClampAngle(Target.localRotation.eulerAngles.x);
+                            float y = ClampAngle(Target.localRotation.eulerAngles.y);
+                            float z = ClampAngle(Target.localRotation.eulerAngles.z);
+                            Vector3 angle = new Vector3(x, y, z);
                             GUIUtility.systemCopyBuffer = angle.ToCopyString("F1");
                         }
                     });
@@ -302,12 +301,12 @@ namespace AIO.UEditor
             {
                 if (Targets.Length == 1)
                 {
-                    var gm = new GenericMenu();
+                    GenericMenu gm = new GenericMenu();
                     gm.AddItem(new GUIContent("Reset LocalScale But Ignore Child"), false, () =>
                     {
-                        var pos = new Vector3[Target.childCount];
-                        var scale = new Vector3[pos.Length];
-                        for (var i = 0; i < Target.childCount; i++)
+                        Vector3[] pos = new Vector3[Target.childCount];
+                        Vector3[] scale = new Vector3[Target.childCount];
+                        for (int i = 0; i < Target.childCount; i++)
                         {
                             pos[i] = Target.GetChild(i).position;
                             scale[i] = Target.GetChild(i).lossyScale;
@@ -317,9 +316,9 @@ namespace AIO.UEditor
                         Target.localScale = Vector3.one;
                         HasChanged();
 
-                        for (var i = 0; i < Target.childCount; i++)
+                        for (int i = 0; i < Target.childCount; i++)
                         {
-                            var child = Target.GetChild(i);
+                            Transform child = Target.GetChild(i);
                             Undo.RecordObject(child, "Reset LocalScale But Ignore Child");
                             child.position = pos[i];
                             child.localScale = scale[i];
@@ -418,14 +417,14 @@ namespace AIO.UEditor
             GUI.backgroundColor = Color.yellow;
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("  Name  ", EditorStyles.miniButtonLeft))
+            if (GUILayout.Button("Copy Name", EditorStyles.miniButtonLeft))
             {
                 GUIUtility.systemCopyBuffer = Target.name;
             }
 
-            if (GUILayout.Button("FullName", EditorStyles.miniButtonRight))
+            if (GUILayout.Button("Copy FullName", EditorStyles.miniButtonRight))
             {
-                GUIUtility.systemCopyBuffer = Target.GetType().FullName;
+                GUIUtility.systemCopyBuffer = Target.FullName();
             }
 
             GUILayout.EndHorizontal();
@@ -433,12 +432,15 @@ namespace AIO.UEditor
             GUI.backgroundColor = Color.green;
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button(" Public Field", EditorStyles.miniButtonLeft))
+            if (GUILayout.Button("Copy To C# Public Field", EditorStyles.miniButton))
             {
                 GUIUtility.systemCopyBuffer = ToCSPublicField();
             }
 
-            if (GUILayout.Button("Private Field", EditorStyles.miniButtonRight))
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("Copy To C# Private Field", EditorStyles.miniButton))
             {
                 GUIUtility.systemCopyBuffer = ToCSPrivateField();
             }
@@ -450,6 +452,34 @@ namespace AIO.UEditor
             GUILayout.BeginHorizontal();
             _copyQuaternion = GUILayout.Toggle(_copyQuaternion, "Copy Quaternion");
             GUILayout.EndHorizontal();
+        }
+
+        private void SetLockState()
+        {
+            foreach (var transform in Targets)
+            {
+                var behaviours = transform.GetComponents<MonoBehaviour>();
+                foreach (var behaviour in behaviours)
+                {
+                    var type = behaviour.GetType();
+                    var attribute = type.GetCustomAttribute<LockTransformAttribute>();
+                    if (attribute.Equals(null)) continue;
+                    _lockSource = $"Some values locking by {type.Name}.";
+                    _isLock = true;
+                    _isLockPosition = attribute.IsLockPosition;
+                    _isLockRotation = attribute.IsLockRotation;
+                    _isLockScale = attribute.IsLockScale;
+                    Tools.hidden = true;
+                    return;
+                }
+            }
+
+            _lockSource = null;
+            _isLock = false;
+            _isLockPosition = false;
+            _isLockRotation = false;
+            _isLockScale = false;
+            Tools.hidden = false;
         }
 
         private void CreateEmptyParent()
@@ -465,7 +495,7 @@ namespace AIO.UEditor
             EditorGUIUtility.PingObject(parent);
         }
 
-        private static float ClampAngle(float angle)
+        private float ClampAngle(float angle)
         {
             if (angle > 180) angle -= 360;
             else if (angle < -180) angle += 360;

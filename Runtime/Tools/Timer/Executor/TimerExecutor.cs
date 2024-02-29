@@ -1,13 +1,7 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2021-11-02
-|||✩ - - - - - |*/
-
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Text;
-
-using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace AIO
 {
@@ -75,7 +69,7 @@ namespace AIO
             {
                 if (TimerSystem.TimerExecutors.ContainsKey(tid))
                 {
-                    UnityEngine.Debug.LogErrorFormat("TimerSystem.PushLoop: {0} already exists", tid);
+                    Debug.LogErrorFormat("TimerSystem.PushLoop: {0} already exists", tid);
                 }
                 else TimerSystem.TimerExecutors.Add(tid, this);
             }

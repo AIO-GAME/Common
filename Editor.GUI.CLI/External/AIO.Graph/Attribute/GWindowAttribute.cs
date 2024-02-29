@@ -1,10 +1,4 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> star fire
-|||✩ Date:     ||| -> 2023-06-26
-
-|||✩ - - - - - |*/
-
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -17,7 +11,7 @@ namespace AIO.UEditor
     /// 窗口信息
     /// </summary>
     // [ScriptIcon(IconResource = "Editor/Icon/Color/general")]
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Class)]
     public sealed class GWindowAttribute : DisplayNameAttribute
     {
         /// <summary>

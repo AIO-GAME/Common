@@ -1,10 +1,4 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-12-20
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
-
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using UnityEngine;

@@ -2,12 +2,12 @@
 
 namespace AIO
 {
-    public static partial class RHelper
+    partial class RHelper
     {
         /// <summary>
         /// Unity 计算
         /// </summary>
-        public static partial class Math
+        public static class Math
         {
             /// <summary>
             /// 两点距离

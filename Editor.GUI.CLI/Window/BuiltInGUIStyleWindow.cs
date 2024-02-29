@@ -1,16 +1,3 @@
-/* * * * * * * * * * * * * * * * * * * * * * * *
-*Copyright(C) 2021 by XiNansky
-*All rights reserved.
-*FileName:         Framework.EToolWindow
-*Author:           XiNan
-*Version:          0.1
-*UnityVersion:     2020.3.5f1c1
-*Date:             2021-07-04
-*NOWTIME:          14:11:19
-*Description:
-*History:
-* * * * * * * * * * * * * * * * * * * * * * * * */
-
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
@@ -28,7 +15,7 @@ namespace AIO.UEditor
         public BuiltInGUIStyleGraphWindow()
         {
             Array = new Dictionary<string, List<GUIStyle>>();
-            DataTabel = new Dictionary<string, GUIStyle>();
+            DataTable = new Dictionary<string, GUIStyle>();
             Vector = new Vector2();
             Height = GUILayout.Height(50);
             Width = GUILayout.Width(40);
@@ -36,7 +23,7 @@ namespace AIO.UEditor
         }
 
         private Dictionary<string, List<GUIStyle>> Array;
-        private Dictionary<string, GUIStyle> DataTabel;
+        private Dictionary<string, GUIStyle> DataTable;
 
         private Vector2 Vector;
         private GUILayoutOption Height, Width;
@@ -67,9 +54,9 @@ namespace AIO.UEditor
                     foreach (var line in File.ReadAllLines(string.Format(formatPath, "Common")))
                     {
                         var key = line.ToLower();
-                        if (DataTabel.ContainsKey(key)) continue;
-                        DataTabel.Add(key, line);
-                        list.Add(DataTabel[key]);
+                        if (DataTable.ContainsKey(key)) continue;
+                        DataTable.Add(key, line);
+                        list.Add(DataTable[key]);
                     }
 
                     versionFolds.Add("Common", false);
@@ -86,9 +73,9 @@ namespace AIO.UEditor
                     foreach (var line in File.ReadAllLines(path))
                     {
                         var key = line.ToLower();
-                        if (DataTabel.ContainsKey(key)) continue;
-                        DataTabel.Add(key, line);
-                        Array[version].Add(DataTabel[key]);
+                        if (DataTable.ContainsKey(key)) continue;
+                        DataTable.Add(key, line);
+                        Array[version].Add(DataTable[key]);
                     }
                 }
             }

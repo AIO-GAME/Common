@@ -13,7 +13,7 @@ namespace AIO
     /// <summary>
     /// IList扩展
     /// </summary>
-    public static partial class ExtendIList
+    partial class ExtendIList
     {
         /// <summary>
         /// 插入

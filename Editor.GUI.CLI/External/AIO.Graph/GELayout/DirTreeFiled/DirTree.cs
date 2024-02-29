@@ -1,10 +1,4 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-12-22
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
-
-using System;
+﻿using System;
 using System.IO;
 using System.Text;
 using UnityEngine;
@@ -81,8 +75,7 @@ namespace AIO.UEditor
         /// </summary>
         public string DirPath;
 
-        [SerializeField]
-        public DirTreeItem Root;
+        [SerializeField] public DirTreeItem Root;
 
         public int Count => Root.MaxDepth;
 

@@ -1,24 +1,15 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-06-26
-
-|||✩ - - - - - |*/
-
-using System;
+﻿using System;
 using UnityEditor;
 using UnityEngine;
 using WindowUtil = AIO.UEditor.EHelper.Window;
 
 namespace AIO.UEditor
 {
-    public partial class EmptyGraphWindow
+    partial class EmptyGraphWindow
     {
         /// <summary>
         /// 打开窗口
         /// </summary>
-        /// <param name="title">标题</param>
-        /// <param name="utility">边框</param>
-        /// <param name="focus">聚焦</param>
         /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
         /// <returns><see cref="EditorWindow"/></returns>
         protected static EditorWindow Open<T>() where T : EditorWindow

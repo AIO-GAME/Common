@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AIO
 {
-    public static partial class RHelper
+    partial class RHelper
     {
         /// <summary>
         /// 提供在特定线程上下文（SynchronizationContext）中异步执行回调函数或操作的静态方法。

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using UnityEditor;
+using UnityEditor.Android;
 using UnityEngine;
 
 namespace AIO.UEditor
@@ -56,7 +57,7 @@ namespace AIO.UEditor
             //kind有3种，分别对应PlayerSettings的Legacy，Round，Adaptive
             if (targetGroup == BuildTargetGroup.Android)
             {
-                var kind = UnityEditor.Android.AndroidPlatformIconKind.Round;
+                var kind = AndroidPlatformIconKind.Round;
 #if UNITY_2023_1_OR_NEWER
                 var icons =
  PlayerSettings.GetPlatformIcons(UnityEditor.Build.NamedBuildTarget.FromBuildTargetGroup(targetGroup), kind); 

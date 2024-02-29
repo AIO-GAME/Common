@@ -1,18 +1,10 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-07-07
-
-|||✩ - - - - - |*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
 namespace AIO
 {
-    using Unitx = Unit;
-
     /// <summary>
     /// 消耗型定时器
     /// </summary>
@@ -98,20 +90,17 @@ namespace AIO
             @string.Append("计时单位:").Append(Unit).Append("ms").AppendLine();
             @string.Append("当前时间:").Append(Slot).AppendLine();
             @string.Append("队列数量:").Append(Timers.Count);
-            if (Timers.Count > 0)
-            {
-                @string.Append("\n队列信息:\n[");
-                foreach (var item in Timers)
-                {
-                    @string.AppendLine().Append("定时单位 =").Append(item.Duration).Append("ms").Append(' ');
-                    @string.Append("创建时间 =").Append(item.CreateTime).Append("ms").Append(' ');
-                    @string.Append("结束时间 =").Append(item.EndTime).Append("ms").Append(' ');
-                }
+            if (Timers.Count <= 0) return @string.ToString();
 
-                @string.AppendLine("\n]");
+            @string.Append("\n队列信息:\n[");
+            foreach (var item in Timers)
+            {
+                @string.AppendLine().Append("定时单位 =").Append(item.Duration).Append("ms").Append(' ');
+                @string.Append("创建时间 =").Append(item.CreateTime).Append("ms").Append(' ');
+                @string.Append("结束时间 =").Append(item.EndTime).Append("ms").Append(' ');
             }
 
-            return @string.ToString();
+            return @string.AppendLine("\n]").ToString();
         }
 
         public virtual void AddTimerSource(ITimerExecutor executor)
@@ -168,7 +157,7 @@ namespace AIO
             Slot += UpdateSlot;
         }
 
-        public void SlotResest()
+        public void SlotReset()
         {
             Slot = 0;
         }

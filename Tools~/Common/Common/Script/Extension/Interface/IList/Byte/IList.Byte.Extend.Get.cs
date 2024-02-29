@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AIO
 {
-    public static partial class ExtendIList
+    partial class ExtendIList
     {
         private static T[] GetLenArrayEmtpy<T>(this IList<byte> array, ref int index)
         {
@@ -175,7 +175,8 @@ namespace AIO
         /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
         /// <param name="all">全部</param>
         /// <param name="reverse">是否反转字节序。</param>
-        public static float[] GetFloatArray(this IList<byte> array, ref int index, bool all = false, bool reverse = false)
+        public static float[] GetFloatArray(this IList<byte> array, ref int index, bool all = false,
+            bool reverse = false)
         {
             var list = GetLenArrayEmtpy<float>(array, ref index);
             if (list == null || list.Length <= 0) return list;
@@ -187,7 +188,8 @@ namespace AIO
         /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
         /// <param name="all">全部</param>
         /// <param name="reverse">是否反转字节序。</param>
-        public static double[] GetDoubleArray(this IList<byte> array, ref int index, bool all = false, bool reverse = false)
+        public static double[] GetDoubleArray(this IList<byte> array, ref int index, bool all = false,
+            bool reverse = false)
         {
             var list = GetLenArrayEmtpy<double>(array, ref index);
             if (list == null || list.Length <= 0) return list;
@@ -220,7 +222,8 @@ namespace AIO
         /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
         /// <param name="encoding">格式化</param>
         /// <param name="reverse">是否反转字节序。</param>
-        public static string[] GetStringArray(this IList<byte> array, ref int index, Encoding encoding = null, bool reverse = false)
+        public static string[] GetStringArray(this IList<byte> array, ref int index, Encoding encoding = null,
+            bool reverse = false)
         {
             var list = GetLenArrayEmtpy<string>(array, ref index);
             if (list == null || list.Length <= 0) return list;
@@ -446,7 +449,8 @@ namespace AIO
             {
                 var value = Encoding.UTF8.GetString(bytes);
                 if (string.IsNullOrEmpty(value)) throw new NullReferenceException();
-                return float.Parse(value, NumberStyles.Float | NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands);
+                return float.Parse(value,
+                    NumberStyles.Float | NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands);
             }
 
             return BitConverter.ToSingle(bytes, 0);
@@ -468,7 +472,8 @@ namespace AIO
             {
                 var value = Encoding.UTF8.GetString(bytes);
                 if (string.IsNullOrEmpty(value)) throw new NullReferenceException();
-                return float.Parse(value, NumberStyles.Float | NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands);
+                return float.Parse(value,
+                    NumberStyles.Float | NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands);
             }
 
             return BitConverter.ToDouble(bytes, 0);
@@ -501,7 +506,8 @@ namespace AIO
         /// <param name="reverse"></param>
         /// <returns></returns>
         /// <exception cref="SystemException"></exception>
-        public static string GetString(this IList<byte> array, ref int index, Encoding encoding = null, bool reverse = false)
+        public static string GetString(this IList<byte> array, ref int index, Encoding encoding = null,
+            bool reverse = false)
         {
             var len = GetLen(array, ref index);
             if (len < 0) return null;

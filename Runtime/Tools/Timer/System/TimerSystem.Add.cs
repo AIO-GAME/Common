@@ -1,16 +1,8 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-07-06
-
-|||✩ - - - - - |*/
-
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace AIO
 {
-    public static partial class TimerSystem
+    partial class TimerSystem
     {
         #region Add
 

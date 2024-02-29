@@ -1,10 +1,4 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-06-30
-
-|||✩ - - - - - |*/
-
-using UnityEditor;
+﻿using UnityEditor;
 
 namespace AIO.UEditor
 {

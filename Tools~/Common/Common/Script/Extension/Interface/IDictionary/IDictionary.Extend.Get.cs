@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace AIO
 {
-    public static partial class ExtendIDictionary
+    partial class ExtendIDictionary
     {
         /// <summary>
         /// 获取
@@ -22,7 +22,7 @@ namespace AIO
             if (dic is null) throw new ArgumentNullException(nameof(dic));
             if (key == null) throw new ArgumentNullException(nameof(key));
 
-            if (dic.ContainsKey(key)) return dic[key];
+            if (dic.TryGetValue(key, out var value)) return value;
             throw new KeyNotFoundException(nameof(key));
         }
 
@@ -37,8 +37,7 @@ namespace AIO
             if (dic is null) throw new ArgumentNullException(nameof(dic));
             if (key == null) throw new ArgumentNullException(nameof(key));
 
-            if (dic.ContainsKey(key)) return dic[key];
-            return defaultValue;
+            return dic.TryGetValue(key, out var value) ? value : defaultValue;
         }
 
         /// <summary>
@@ -52,8 +51,7 @@ namespace AIO
             if (dic is null) throw new ArgumentNullException(nameof(dic));
             if (key is null) throw new ArgumentNullException(nameof(key));
 
-            if (dic.Contains(key)) return dic[key];
-            return defaultValue;
+            return dic.Contains(key) ? dic[key] : defaultValue;
         }
 
         /// <summary>
@@ -82,8 +80,7 @@ namespace AIO
             if (dic is null) throw new ArgumentNullException(nameof(dic));
             if (string.IsNullOrEmpty(key)) throw new ArgumentNullException(nameof(key));
 
-            if (dic.Contains(key)) return dic[key];
-            return defaultValue;
+            return dic.Contains(key) ? dic[key] : defaultValue;
         }
 
         /// <summary>
@@ -187,9 +184,9 @@ namespace AIO
             if (dic is null) throw new ArgumentNullException(nameof(dic));
             if (key == null) throw new ArgumentNullException(nameof(key));
 
-            if (dic.ContainsKey(key))
+            if (dic.TryGetValue(key, out var value1))
             {
-                value = dic[key];
+                value = value1;
                 return true;
             }
 

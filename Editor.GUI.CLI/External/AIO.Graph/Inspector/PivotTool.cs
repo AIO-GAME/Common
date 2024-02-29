@@ -1,10 +1,4 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-12-07
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.EditorTools;
 using UnityEngine;
@@ -67,7 +61,7 @@ namespace AIO.UEditor
 
         public override void OnToolGUI(EditorWindow window)
         {
-            if (_target == null)  return;
+            if (_target == null) return;
 
             using (new Handles.DrawingScope())
             {

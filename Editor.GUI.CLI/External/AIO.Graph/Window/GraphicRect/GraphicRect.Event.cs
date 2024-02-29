@@ -1,14 +1,8 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-06-26
-
-|||✩ - - - - - |*/
-
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace AIO.UEditor
 {
-    public partial class GraphicRect
+    partial class GraphicRect
     {
         /// <summary>
         /// 开启输入事件监听

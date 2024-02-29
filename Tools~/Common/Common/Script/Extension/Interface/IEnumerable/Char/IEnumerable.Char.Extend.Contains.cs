@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace AIO
 {
-    public partial class ExtendIEnumerable
+    partial class ExtendIEnumerable
     {
         /// <summary>
         /// 判断集合中 是否有重复

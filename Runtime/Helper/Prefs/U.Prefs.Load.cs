@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace AIO
 {
-    public static partial class RHelper
+    partial class RHelper
     {
-        public static partial class Prefs
+        partial class Prefs
         {
             /// <summary>
             /// 加载字符串

@@ -9,7 +9,8 @@ namespace AIO.UEditor
     {
         /// <inheritdoc/>
         public UnityEditorInternalException(in Exception innerException) :
-            base("An error occured while accessing internal Unity Editor functions. This might happen if Unity makes backward-incompatible changes in their newer versions of the editor.",
+            base(
+                "An error occured while accessing internal Unity Editor functions. This might happen if Unity makes backward-incompatible changes in their newer versions of the editor.",
                 innerException)
         {
         }

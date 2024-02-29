@@ -2,7 +2,7 @@
 
 namespace AIO
 {
-    public static partial class ExtendIDictionary
+    partial class ExtendIDictionary
     {
         /// <summary>
         /// 移除存在的元素

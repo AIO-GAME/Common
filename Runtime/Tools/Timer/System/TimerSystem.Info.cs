@@ -1,24 +1,17 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-07-06
-
-|||✩ - - - - - |*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Debug = UnityEngine.Debug;
 
 namespace AIO
 {
-    using Unitx = Unit;
-
     /// <summary>
     /// 定时器 时间调度器
     /// </summary>
-    public static partial class TimerSystem
+    partial class TimerSystem
     {
         public static class Settings
         {
@@ -131,7 +124,7 @@ namespace AIO
                 }
             }
 
-            UnityEngine.Debug.Log(builder.ToString());
+            Debug.Log(builder.ToString());
         }
     }
 }

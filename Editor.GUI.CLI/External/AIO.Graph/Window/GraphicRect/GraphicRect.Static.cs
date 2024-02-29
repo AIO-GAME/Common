@@ -1,15 +1,9 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-06-26
-
-|||✩ - - - - - |*/
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 
 namespace AIO.UEditor
 {
-    public abstract partial class GraphicRect
+    partial class GraphicRect
     {
         /// <summary>
         /// 绘制矩形
@@ -65,7 +59,7 @@ namespace AIO.UEditor
         /// </summary>
         /// <param name="rect">矩形</param>
         /// <param name="cursor">鼠标样式</param>
-        public static void AddCursor(in Rect rect,MouseCursor cursor)
+        public static void AddCursor(in Rect rect, MouseCursor cursor)
         {
             EditorGUIUtility.AddCursorRect(rect, MouseCursor.SplitResizeLeftRight);
         }

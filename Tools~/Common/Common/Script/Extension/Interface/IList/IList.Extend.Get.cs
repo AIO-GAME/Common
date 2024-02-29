@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 
 namespace AIO
 {
-    public static partial class ExtendIList
+    partial class ExtendIList
     {
         /// <summary>
         /// 获取 集合 指定下标
@@ -30,8 +30,7 @@ namespace AIO
         public static T GetLast<T>(this IList<T> array)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
-            if (array.Count <= 0) return default;
-            return array[array.Count - 1];
+            return array.Count <= 0 ? default : array[array.Count - 1];
         }
 
         /// <summary>
@@ -41,10 +40,8 @@ namespace AIO
         public static T GetFirst<T>(this IList<T> array)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
-            if (array.Count <= 0) return default;
-            return array[0];
+            return array.Count <= 0 ? default : array[0];
         }
-
 
         #region 获取最小值
 
