@@ -32,7 +32,7 @@ namespace AIO
             var DoneList = Pool.List<ITimerExecutor>(); // 用于存储已经完成的任务
             var LoopList = Pool.List<ITimerExecutor>(); // 用于存储需要循环的任务
 
-            var FinshNumber = 0;
+            var FinishNumber = 0;
             lock (Timers)
             {
                 while (Timers.Count > 0 && Timers.First != null) //判断当前需要移除哪些任务
@@ -40,7 +40,7 @@ namespace AIO
                     var executor = Timers.First.Value;
                     if (executor.EndTime <= nowTime)
                     {
-                        FinshNumber++;
+                        FinishNumber++;
                         if (executor.UpdateLoop()) LoopList.Add(executor);
                         DoneList.Add(executor);
                         Timers.RemoveFirst();
@@ -49,7 +49,7 @@ namespace AIO
                 }
             }
 
-            AllCount -= FinshNumber;
+            AllCount -= FinishNumber;
             if (DoneList.Count > 0)
             {
                 DoneEvent.Invoke(DoneList);
@@ -62,7 +62,7 @@ namespace AIO
                 LoopList.Free();
             }
 
-            return FinshNumber;
+            return FinishNumber;
         }
 
         public override void OtherUpdate(long nowTime)

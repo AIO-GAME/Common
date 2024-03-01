@@ -65,14 +65,12 @@ namespace AIO
             Number = 0;
             Interval = 0;
             TID = tid;
-            if (TID != 0)
+            if (TID == 0) return;
+            if (TimerSystem.TimerExecutors.ContainsKey(tid))
             {
-                if (TimerSystem.TimerExecutors.ContainsKey(tid))
-                {
-                    Debug.LogErrorFormat("TimerSystem.PushLoop: {0} already exists", tid);
-                }
-                else TimerSystem.TimerExecutors.Add(tid, this);
+                Debug.LogErrorFormat("TimerSystem.PushLoop: {0} already exists", tid);
             }
+            else TimerSystem.TimerExecutors.Add(tid, this);
         }
 
         /// <summary>

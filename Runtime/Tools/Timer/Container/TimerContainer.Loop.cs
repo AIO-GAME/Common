@@ -37,59 +37,56 @@ namespace AIO
                 while (TimerSystem.SWITCH)
                 {
                     nowMilliseconds = Watch.ElapsedMilliseconds;
-                    if (nowMilliseconds >= Unit) //更新间隔
+                    if (nowMilliseconds < Unit) continue; //更新间隔
+                    Watch.Restart();
+                    Counter += nowMilliseconds;
+                    UpdateCacheTime += nowMilliseconds;
+
+                    if (UpdateCacheTime > TimerSystem.UPDATELISTTIME)
                     {
-                        Watch.Restart();
-                        Counter += nowMilliseconds;
-                        UpdateCacheTime += nowMilliseconds;
+                        UpdateCacheTime = 0; // 重置缓存更新时间
+                        foreach (var item in List) item.TimersUpdate();
+                    }
 
-                        if (UpdateCacheTime > TimerSystem.UPDATELISTTIME)
+                    List[0].SlotUpdate(Unit);
+                    if (RemainNum <= 0)
+                    {
+                        if (List[0].Slot >= List[0].SlotUnit)
                         {
-                            UpdateCacheTime = 0; // 重置缓存更新时间
-                            foreach (var item in List) item.TimersUpdate();
+                            List[0].SlotReset();
+                            for (var i = 1; i < List.Count; i++)
+                            {
+                                List[i].SlotUpdate(List[i - 1].Unit);
+                                if (List[i].Slot >= List[i].SlotUnit)
+                                {
+                                    List[i].OtherUpdate(Counter);
+                                    List[i].SlotReset();
+                                }
+                                else break;
+                            }
                         }
-
-                        List[0].SlotUpdate(Unit);
+                    }
+                    else
+                    {
+                        RemainNum = RemainNum - List[0].BottomUpdate(Counter);
                         if (RemainNum <= 0)
                         {
-                            if (List[0].Slot >= List[0].SlotUnit)
-                            {
-                                List[0].SlotReset();
-                                for (var i = 1; i < List.Count; i++)
-                                {
-                                    List[i].SlotUpdate(List[i - 1].Unit);
-                                    if (List[i].Slot >= List[i].SlotUnit)
-                                    {
-                                        List[i].OtherUpdate(Counter);
-                                        List[i].SlotReset();
-                                    }
-                                    else break;
-                                }
-                            }
+                            RemainNum = 0; //重新计算剩余数量 保证异步线程修改 出现数据丢失
+                            foreach (var item in List) RemainNum = RemainNum + item.AllCount;
                         }
-                        else
-                        {
-                            RemainNum = RemainNum - List[0].BottomUpdate(Counter);
-                            if (RemainNum <= 0)
-                            {
-                                RemainNum = 0; //重新计算剩余数量 保证异步线程修改 出现数据丢失
-                                foreach (var item in List) RemainNum = RemainNum + item.AllCount;
-                            }
 
-                            if (List[0].Slot >= List[0].SlotUnit)
+                        if (List[0].Slot < List[0].SlotUnit) continue;
+
+                        List[0].SlotReset();
+                        for (var i = 1; i < List.Count; i++)
+                        {
+                            List[i].SlotUpdate(List[i - 1].Unit);
+                            if (List[i].Slot >= List[i].SlotUnit)
                             {
-                                List[0].SlotReset();
-                                for (var i = 1; i < List.Count; i++)
-                                {
-                                    List[i].SlotUpdate(List[i - 1].Unit);
-                                    if (List[i].Slot >= List[i].SlotUnit)
-                                    {
-                                        List[i].OtherUpdate(Counter);
-                                        List[i].SlotReset();
-                                    }
-                                    else break;
-                                }
+                                List[i].OtherUpdate(Counter);
+                                List[i].SlotReset();
                             }
+                            else break;
                         }
                     }
                 }

@@ -1,24 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading;
-using System.Threading.Tasks;
+using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace AIO
 {
-    using UnitEx = Unit;
-
-    /// <summary>
-    /// 定时器单位回调
-    /// </summary>
-    public delegate void TimerUnitsTask(List<(long, long, long)> units);
-
+#if !UNITY_WEBGL
+    using System.Threading;
+    using System.Threading.Tasks;
+#endif
+    
     /// <summary>
     /// 定时器 时间调度器
     /// </summary>
     [IgnoreConsoleJump]
     public static partial class TimerSystem
     {
+        private static bool IsInitialize;
+
         /// <summary>
         /// 定时器单位回调
         /// </summary>
@@ -26,25 +25,18 @@ namespace AIO
         /// <param name="capacity">容量</param>
         public static void Initialize(long updateLimit = 10, int capacity = 1024 * 8)
         {
+            if (IsInitialize) return;
             Watch = Stopwatch.StartNew();
 
             //保持当前计算单位是毫秒 因为当前时间单位计算底层是纳秒
-            Unit = UnitEx.Time.SECOND * 2;
 
             TaskList = Pool.List<ITimerContainer>();
             MainList = Pool.List<ITimerOperator>();
             TimingUnits = Pool.List<(long, long, long)>();
             TimerExecutors = Pool.Dictionary<long, ITimerExecutor>();
 
-            if (TimingUnitsEvent is null)
-            {
-                TimingUnits.Add((UnitEx.Time.MS_SECOND, Unit, UnitEx.Time.MS_SECOND / Unit));
-                TimingUnits.Add((UnitEx.Time.MS_MIN, UnitEx.Time.MS_SECOND, 60));
-                TimingUnits.Add((UnitEx.Time.MS_HOUR, UnitEx.Time.MS_MIN, 60));
-                TimingUnits.Add((UnitEx.Time.MS_DAY, UnitEx.Time.MS_HOUR, 24));
-                TimingUnits.Add((UnitEx.Time.MS_WEEK, UnitEx.Time.MS_DAY, 7));
-            }
-            else TimingUnitsEvent.Invoke(TimingUnits);
+            Unit = TimerSystemSettings.DistanceUnit;
+            TimerSystemSettings.Invoke(TimingUnits);
 
             RemainNum = 0;
             UpdateCacheTime = 0;
@@ -59,11 +51,14 @@ namespace AIO
             TaskHandleToken = TaskHandleTokenSource.Token;
             ThreadHandle = Task.Factory.StartNew(Update, TaskHandleToken);
 
-            if (Settings.EnableLoopThread)
+            if (TimerSystemSettings.EnableLoopThread)
             {
                 LoopContainer = new TimerContainerLoop(Unit);
                 LoopContainer.Start();
             }
+
+            IsInitialize = true;
+            Application.quitting += Dispose;
         }
 
         static partial void Update();
@@ -88,7 +83,7 @@ namespace AIO
             if (SWITCH) TaskList.Remove(container);
         }
 
-        public static void Dispose()
+        private static void Dispose()
         {
             ToString();
             SWITCH = false;
@@ -130,12 +125,14 @@ namespace AIO
             }
             catch (Exception e)
             {
-                UnityEngine.Debug.LogException(e);
+                Debug.LogException(e);
             }
             finally
             {
-                UnityEngine.Debug.Log("定时器系统已销毁");
+                Debug.Log("定时器系统已销毁");
             }
+
+            Application.quitting -= Dispose;
         }
     }
 }

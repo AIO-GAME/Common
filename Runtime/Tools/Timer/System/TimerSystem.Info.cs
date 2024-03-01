@@ -8,19 +8,75 @@ using Debug = UnityEngine.Debug;
 
 namespace AIO
 {
+    public static class TimerSystemSettings
+    {
+        /// <summary>
+        /// 开启 循环任务线程
+        /// </summary>
+        public static bool EnableLoopThread { get; set; } = true;
+
+        /// <summary>
+        /// 计时器单位回调
+        /// </summary>
+        public static event TimerUnitsTask TimingUnitsEvent;
+
+        /// <summary>
+        /// 计时器检测单位 ms
+        /// </summary>
+        public static long DistanceUnit { get; set; } = Unit.Time.SECOND * 2;
+
+        /// <summary>
+        /// 定时器单位回调
+        /// </summary>
+        public delegate void TimerUnitsTask(List<(long, long, long)> units);
+
+        internal static void Invoke(List<(long, long, long)> units)
+        {
+            if (TimingUnitsEvent is null) Day(units);
+            else TimingUnitsEvent.Invoke(units);
+        }
+
+        public static void Week(List<(long, long, long)> units)
+        {
+            units.Add((Unit.Time.MS_SECOND, DistanceUnit, Unit.Time.MS_SECOND / DistanceUnit));
+            units.Add((Unit.Time.MS_MIN, Unit.Time.MS_SECOND, 60));
+            units.Add((Unit.Time.MS_HOUR, Unit.Time.MS_MIN, 60));
+            units.Add((Unit.Time.MS_DAY, Unit.Time.MS_HOUR, 24));
+            units.Add((Unit.Time.MS_WEEK, Unit.Time.MS_DAY, 7));
+        }
+
+        public static void Day(List<(long, long, long)> units)
+        {
+            units.Add((Unit.Time.MS_SECOND, DistanceUnit, Unit.Time.MS_SECOND / DistanceUnit));
+            units.Add((Unit.Time.MS_MIN, Unit.Time.MS_SECOND, 60));
+            units.Add((Unit.Time.MS_HOUR, Unit.Time.MS_MIN, 60));
+            units.Add((Unit.Time.MS_DAY, Unit.Time.MS_HOUR, 24));
+        }
+
+        public static void Hour(List<(long, long, long)> units)
+        {
+            units.Add((Unit.Time.MS_SECOND, DistanceUnit, Unit.Time.MS_SECOND / DistanceUnit));
+            units.Add((Unit.Time.MS_MIN, Unit.Time.MS_SECOND, 60));
+            units.Add((Unit.Time.MS_HOUR, Unit.Time.MS_MIN, 60));
+        }
+
+        public static void Min(List<(long, long, long)> units)
+        {
+            units.Add((Unit.Time.MS_SECOND, DistanceUnit, Unit.Time.MS_SECOND / DistanceUnit));
+            units.Add((Unit.Time.MS_MIN, Unit.Time.MS_SECOND, 60));
+        }
+
+        public static void Second(List<(long, long, long)> units)
+        {
+            units.Add((Unit.Time.MS_SECOND, DistanceUnit, Unit.Time.MS_SECOND / DistanceUnit));
+        }
+    }
+
     /// <summary>
     /// 定时器 时间调度器
     /// </summary>
     partial class TimerSystem
     {
-        public static class Settings
-        {
-            /// <summary>
-            /// 开启 循环任务线程
-            /// </summary>
-            public static bool EnableLoopThread { get; set; } = true;
-        }
-
         /// <summary>
         /// 计时器 精确时间刻度器
         /// </summary>
@@ -69,11 +125,6 @@ namespace AIO
         [ContextStatic] private static CancellationToken TaskHandleToken;
 
         [ContextStatic] private static CancellationTokenSource TaskHandleTokenSource;
-
-        /// <summary>
-        /// 计时器单位回调
-        /// </summary>
-        public static event TimerUnitsTask TimingUnitsEvent;
 
         internal static List<(long, long, long)> TimingUnits { get; private set; }
 

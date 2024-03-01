@@ -8,19 +8,17 @@ namespace AIO
 
         private static void AddUpdate(ITimerExecutor timer)
         {
-            for (var i = 0; i < TimingUnits.Count - 1; i++)
+            for (byte i = 0; i < TimingUnits.Count - 1; i++)
             {
                 //说明 当前 时间分级器单位 与 当前定时任务处理器 匹配
                 //当I等于最后一个分级层数时
-                if (timer.Duration <= TimingUnits[i].Item1 || i == TimingUnits.Count - 1)
-                {
-                    if (i == 0) timer.OperatorIndex = 0;
-                    else timer.OperatorIndex = (byte)(i - 1);
-                    break;
-                }
+                if (timer.Duration > TimingUnits[i].Item1 && i != TimingUnits.Count - 1) continue;
+                if (i == 0) timer.OperatorIndex = 0;
+                else timer.OperatorIndex = (byte)(i - 1);
+                break;
             }
 
-            if (Settings.EnableLoopThread && timer.Loop == -1)
+            if (TimerSystemSettings.EnableLoopThread && timer.Loop == -1)
             {
                 LoopContainer.PushUpdate(timer);
                 return;
@@ -67,6 +65,14 @@ namespace AIO
         /// </summary>
         internal static void AddLoop(List<ITimerExecutor> timers)
         {
+            if (timers is null) return;
+
+            if (timers.Count == 0)
+            {
+                timers.Free();
+                return;
+            }
+
             lock (MainList)
             {
                 for (var i = 0; i < timers.Count; i++)

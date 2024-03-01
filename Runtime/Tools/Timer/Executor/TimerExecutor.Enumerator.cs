@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using UnityEngine;
 
 namespace AIO
 {
@@ -37,7 +38,14 @@ namespace AIO
 
         protected override void xExecute()
         {
-            Runner.StartCoroutine(Delegates);
+            try
+            {
+                Runner.StartCoroutine(Delegates);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("TimerExecutorEnumerator Execute Error: " + e);
+            }
         }
     }
 }

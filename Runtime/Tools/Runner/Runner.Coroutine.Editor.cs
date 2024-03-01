@@ -13,11 +13,7 @@ namespace AIO
             private static readonly List<IEnumerator> DropItems = new List<IEnumerator>();
             private static bool M_Started;
 
-            /// <summary>
-            /// 开启Loop
-            /// </summary>
-            /// <param name="iterator">方法</param>
-            public static void StartLoop(IEnumerator iterator)
+            public static void StartCoroutine(IEnumerator iterator)
             {
                 if (iterator == null) return;
                 if (!Looper.Contains(iterator)) Looper.Add(iterator);
@@ -25,6 +21,14 @@ namespace AIO
                 if (M_Started) return;
                 M_Started = true;
                 EditorApplication.update += Update;
+            }
+
+            public static void StopCoroutine(IEnumerator iterator)
+            {
+                if (iterator == null) return;
+                if (!Looper.Contains(iterator)) return;
+                Looper.Remove(iterator);
+                instance.StopCoroutine(iterator);
             }
 
             private static void Update()
