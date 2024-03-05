@@ -14,10 +14,15 @@ namespace AIO
 
         static async void Test()
         {
-            var succeed1 =
-               await PrGCloud.MetadataUpdateAsync($"rol-files/qc/Version/Android.json",
-                    "cache-control", "no-cache");
-            Console.WriteLine(succeed1);
+            // var handle = AHandle.FTP.Create("ftpshare-hot.ingcreations.com", 21, "ftpshare-hot", "ingcreations2023",
+            //     "qc");
+            // Console.WriteLine(await handle.InitAsync());
+            // var data = await handle.UploadFileAsync("E:\\Project\\HOT\\iOS.json", "Version/iOS.json");
+            // Console.WriteLine(data);
+
+            var h2 = AHandle.FTP.Create("ftpshare-hot.ingcreations.com", 21, "ftpshare-hot", "ingcreations2023");
+            Console.WriteLine(await h2.InitAsync());
+            Console.WriteLine(await h2.DeleteDirAsync("AIO"));
         }
     }
 }

@@ -13,7 +13,7 @@ namespace AIO
 {
     partial class Runner
     {
-        [ContextStatic] private static readonly List<Action> actionQueuesFixedUpdateFunc = new List<Action>();
+        [ContextStatic] private static readonly Queue<Action> actionQueuesFixedUpdateFunc = new Queue<Action>();
 
         [ContextStatic] private static volatile bool noActionQueueToExecuteFixedUpdateFunc = true;
 
@@ -26,12 +26,12 @@ namespace AIO
 
             lock (actionQueuesFixedUpdateFunc)
             {
-                actionQueuesFixedUpdateFunc.Add(action);
+                actionQueuesFixedUpdateFunc.Enqueue(action);
                 noActionQueueToExecuteFixedUpdateFunc = false;
             }
         }
 
-        partial class ThreadMono
+        private partial class ThreadMono
         {
             /// <summary>
             /// 在FixedUpdate更新

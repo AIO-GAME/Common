@@ -12,7 +12,7 @@ namespace AIO
 {
     partial class Runner
     {
-        [ContextStatic] private static readonly List<Action> actionQueuesLateUpdateFunc = new List<Action>();
+        [ContextStatic] private static readonly Queue<Action> actionQueuesLateUpdateFunc = new Queue<Action>();
         [ContextStatic] private static volatile bool noActionQueueToExecuteLateUpdateFunc = true;
 
         /// <summary>
@@ -24,17 +24,17 @@ namespace AIO
 
             lock (actionQueuesLateUpdateFunc)
             {
-                actionQueuesLateUpdateFunc.Add(action);
+                actionQueuesLateUpdateFunc.Enqueue(action);
                 noActionQueueToExecuteLateUpdateFunc = false;
             }
         }
 
-        partial class ThreadMono
+        private partial class ThreadMono
         {
             public void LateUpdate()
             {
                 if (noActionQueueToExecuteLateUpdateFunc) return;
-                
+
                 //清空队列中 残留的操作函数
                 lock (actionQueuesLateUpdateFunc)
                 {
