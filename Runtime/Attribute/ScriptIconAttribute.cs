@@ -62,8 +62,9 @@ namespace AIO
 
         public ScriptIconAttribute([CallerFilePath] string filePath = "")
         {
-            if (filePath.StartsWith(".\\Packages\\")) FilePath = filePath.Substring(2);
-            else FilePath = filePath.Replace('\\', '/').Substring(Project);
+            FilePath = filePath.StartsWith(@".\Packages\")
+                ? filePath.Substring(2)
+                : filePath.Replace('\\', '/').Substring(Project);
         }
     }
 }

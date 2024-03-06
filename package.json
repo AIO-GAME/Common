@@ -4,19 +4,23 @@
   "description": "AIO Unity Common",
   "version": "1.0.37-preview",
   "unity": "2019.4",
+  "category": "Runtime",
   "unityRelease": "0f1",
-  "hideInEditor": true,
   "license": "MIT",
   "documentationUrl": "https://github.com/AIO-GAME/Common#readme",
   "changelogUrl": "https://github.com/AIO-GAME/Common/commits/main",
   "licensesUrl": "https://github.com/AIO-GAME/Common/blob/main/LICENSE.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AIO-GAME/Common.git"
+  },
+  "relatedPackages": {},
   "keywords": [
     "Unity",
     "Common Function"
   ],
   "author": {
-    "name": "AIO-GAME",
-    "email": "xinansky99@foxmail.com",
+    "name": "AIO GAME",
     "url": "https://github.com/AIO-GAME/Common"
   },
   "dependencies": {

@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <linker>
-       <assembly fullname="YamlDotNet" preserve="all"/>
        <assembly fullname="AIO.Attribute" preserve="all"/>
        <assembly fullname="AIO.Common" preserve="all"/>
        <assembly fullname="AIO.Ensure" preserve="all"/>
        <assembly fullname="AIO.Print" preserve="all"/>
        <assembly fullname="AIO.Print.Console" preserve="all"/>
        <assembly fullname="AIO.Print.Unity" preserve="all"/>
-       <assembly fullname="ICSharpCode.SharpZipLib" preserve="all"/>
-       <assembly fullname="YamlDotNet" preserve="all"/>
 </linker>
