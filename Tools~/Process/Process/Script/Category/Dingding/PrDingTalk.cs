@@ -60,6 +60,11 @@ namespace AIO
             [JsonProperty(PropertyName = "link")] private Hashtable TBLink;
 
             /// <summary>
+            /// link 类型
+            /// </summary>
+            [JsonProperty(PropertyName = "markdown")] private Hashtable TBMarkdown;
+
+            /// <summary>
             /// actionCard 类型
             /// </summary>
             [JsonProperty(PropertyName = "actionCard")]
@@ -153,7 +158,7 @@ namespace AIO
             public void ToMarkdown(string title, string content)
             {
                 Type = MsgType.markdown;
-                TBLink = new Hashtable
+                TBMarkdown = new Hashtable
                 {
                     ["title"] = title,
                     ["text"] = content
@@ -311,13 +316,17 @@ namespace AIO
         /// <returns>签名后路径</returns>
         private static string GetSign(string remote, string secret)
         {
-            if (string.IsNullOrEmpty(secret)) return remote;
+            if (string.IsNullOrEmpty(secret))
+                return string.Concat("https://oapi.dingtalk.com/robot/send?access_token=", remote);
 
             var timestamp = AHelper.TimeStamp.NowMillisecond;
             var stringToSign = string.Concat(timestamp, '\n', secret);
             var signData = AHelper.Encrypt.HmacSHA256(secret, stringToSign, Encoding.UTF8);
             var sign = AHelper.Base64.Serialize(signData);
-            return string.Concat(remote, "&timestamp=", timestamp, "&sign=", sign);
+            return string.Concat(
+                "https://oapi.dingtalk.com/robot/send?access_token=", remote,
+                "&timestamp=", timestamp,
+                "&sign=", sign);
         }
 
         #endregion

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using UnityEngine;
 
 namespace AIO
@@ -34,12 +35,10 @@ namespace AIO
             }
 
             if (List.Count <= 0) return;
-
             List.Sort((a, b) =>
             {
                 if (a.Index < b.Index) return -1;
-                if (a.Index > b.Index) return 1;
-                return 0;
+                return a.Index > b.Index ? 1 : 0;
             });
 
             TotalNum = RemainNum;
@@ -58,40 +57,42 @@ namespace AIO
                 {
                     nowMilliseconds = Watch.ElapsedMilliseconds;
 
-                    if (nowMilliseconds >= Unit) // 更新间隔
+                    if (nowMilliseconds < Unit)
                     {
-                        Watch.Restart();
-                        Counter += nowMilliseconds;
-                        UpdateCacheTime += nowMilliseconds;
-                        if (UpdateCacheTime > TimerSystem.UPDATELISTTIME)
-                        {
-                            UpdateCacheTime = 0; // 重置缓存更新时间
-                            foreach (var item in List) item.TimersUpdate();
-                        }
+                        Thread.Sleep(10);
+                        continue; // 更新间隔
+                    }
 
-                        List[0].SlotUpdate(Unit);
-                        RemainNum = RemainNum - List[0].BottomUpdate(Counter);
-                        if (RemainNum <= 0)
-                        {
-                            RemainNum = 0; //重新计算剩余数量 保证异步线程修改 出现数据丢失
-                            foreach (var item in List) RemainNum = RemainNum + item.AllCount;
-                            if (RemainNum <= 0) break;
-                        }
+                    Watch.Restart();
+                    Counter += nowMilliseconds;
+                    UpdateCacheTime += nowMilliseconds;
+                    if (UpdateCacheTime > TimerSystem.UPDATELISTTIME)
+                    {
+                        UpdateCacheTime = 0; // 重置缓存更新时间
+                        foreach (var item in List) item.TimersUpdate();
+                    }
 
-                        if (List[0].Slot >= List[0].SlotUnit)
+                    List[0].SlotUpdate(Unit);
+                    RemainNum = RemainNum - List[0].BottomUpdate(Counter);
+                    if (RemainNum <= 0)
+                    {
+                        RemainNum = 0; //重新计算剩余数量 保证异步线程修改 出现数据丢失
+                        foreach (var item in List) RemainNum = RemainNum + item.AllCount;
+                        if (RemainNum <= 0) break;
+                    }
+
+                    if (List[0].Slot < List[0].SlotUnit) continue;
+
+                    List[0].SlotReset();
+                    for (var i = 1; i < List.Count; i++)
+                    {
+                        List[i].SlotUpdate(List[i - 1].Unit);
+                        if (List[i].Slot >= List[i].SlotUnit)
                         {
-                            List[0].SlotReset();
-                            for (var i = 1; i < List.Count; i++)
-                            {
-                                List[i].SlotUpdate(List[i - 1].Unit);
-                                if (List[i].Slot >= List[i].SlotUnit)
-                                {
-                                    List[i].OtherUpdate(Counter);
-                                    List[i].SlotReset();
-                                }
-                                else break;
-                            }
+                            List[i].OtherUpdate(Counter);
+                            List[i].SlotReset();
                         }
+                        else break;
                     }
                 }
 #if UNITY_EDITOR
@@ -118,15 +119,11 @@ namespace AIO
 
         private void DoneCallBack(List<ITimerExecutor> list)
         {
-            Runner.StartTask(() =>
+            lock (list)
             {
-                lock (list)
-                {
-                    foreach (var item in list) item.Execute();
-                }
-
+                foreach (var item in list) Runner.Update(item.Execute);
                 list.Free();
-            });
+            }
         }
 
         private void LoopCallBack(List<ITimerExecutor> list)
@@ -134,24 +131,21 @@ namespace AIO
             for (var i = list.Count - 1; i >= 0; i--)
             {
                 var executor = list[i];
-                if (executor.OperatorIndex < List.Count)
+                if (executor.OperatorIndex >= List.Count) continue;
+                switch (executor.OperatorIndex)
                 {
-                    switch (executor.OperatorIndex)
-                    {
-                        case 0:
-                            List[0].AddTimerSource(executor);
-                            break;
-                        default:
-                            List[executor.OperatorIndex].AddTimerCache(executor);
-                            break;
-                    }
-
-                    list.RemoveAt(i);
+                    case 0:
+                        List[0].AddTimerSource(executor);
+                        break;
+                    default:
+                        List[executor.OperatorIndex].AddTimerCache(executor);
+                        break;
                 }
+
+                list.RemoveAt(i);
             }
 
-            if (list.Count > 0) TimerSystem.AddLoop(list);
-            else list.Free();
+            TimerSystem.AddLoop(list);
         }
 
         private void EvolutionCallBack(int Index, List<ITimerExecutor> list)
@@ -164,7 +158,6 @@ namespace AIO
             TimerSystem.DisposeContainer(this);
             base.Dispose();
         }
-
 
         public override string ToString()
         {

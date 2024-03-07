@@ -156,10 +156,10 @@ namespace AIO
                     if (stream is null) return false;
                     using var reader = new StreamReader(stream);
                     var lines = await reader.ReadToEndAsync();
-                    var status = lines.Trim().SplitLine()
+                    var status = lines.Trim()
+                        .SplitLine()
                         .Where(line => !line.StartsWith("d"))
                         .Any(line => line.EndsWith(dirname));
-
                     request.Abort();
                     return status;
                 }
@@ -213,7 +213,8 @@ namespace AIO
             /// <param name="pass">密码</param>
             /// <param name="timeout">超时</param>
             /// <returns>Ture:是 False:不是</returns>
-            public static async Task<bool> CheckDirAsync(string uri, string user, string pass, ushort timeout = Net.TIMEOUT)
+            public static async Task<bool> CheckDirAsync(string uri, string user, string pass,
+                ushort timeout = Net.TIMEOUT)
             {
                 try
                 {

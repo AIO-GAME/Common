@@ -19,7 +19,7 @@ namespace AIO
         /// <summary>
         /// 进度回调参数
         /// </summary>
-        private readonly AProgress progress;
+        private AProgress progress;
 
         /// <summary>
         /// 取消令牌
@@ -40,6 +40,8 @@ namespace AIO
             get => progress;
             set
             {
+                if (value is null) return;
+                if (progress is null) progress = new AProgress();
                 progress.OnProgress = value.OnProgress;
                 progress.OnBegin = value.OnBegin;
                 progress.OnComplete = value.OnComplete;

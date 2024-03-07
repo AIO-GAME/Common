@@ -53,11 +53,16 @@ namespace AIO
                     if (!await CheckFileAsync(remote, user, pass, timeout)) return true;
                     var request = CreateRequestFile(remote, user, pass, "DELE", timeout);
                     using var response = (FtpWebResponse)await request.GetResponseAsync();
+                    {
+                        response.Close();
+                        response.Dispose();
+                    }
                     request.Abort();
                     return true;
                 }
-                catch (WebException)
+                catch (WebException e)
                 {
+                    Console.WriteLine(e);
                     return false;
                 }
             }
@@ -113,17 +118,18 @@ namespace AIO
                 try
                 {
                     if (!await CheckDirAsync(remote, user, pass, timeout)) return true;
-                    var files = await GetRemoteListFileAsync(remote, user, pass, null, timeout);
-                    foreach (var target in files.Select(item => string.Concat(remote, '/', Path.GetFileName(item))))
-                    {
-                        if (!await DeleteFileAsync(target, user, pass, timeout))
-                            return false;
-                    }
 
                     var folders = await GetRemoteListDirAsync(remote, user, pass, null, timeout);
                     foreach (var target in folders.Select(item => string.Concat(remote, '/', Path.GetFileName(item))))
                     {
                         if (!await DeleteDirAsync(target, user, pass, timeout))
+                            return false;
+                    }
+
+                    var files = await GetRemoteListFileAsync(remote, user, pass, null, timeout);
+                    foreach (var target in files.Select(item => string.Concat(remote, '/', Path.GetFileName(item))))
+                    {
+                        if (!await DeleteFileAsync(target, user, pass, timeout))
                             return false;
                     }
 

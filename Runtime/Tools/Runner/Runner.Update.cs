@@ -104,71 +104,6 @@ namespace AIO
         /// <summary>
         /// 在Update中执行
         /// </summary>
-        public static void Update<T1>(Action<T1> action, T1 param1)
-        {
-            if (action is null) throw new ArgumentNullException(nameof(action));
-            lock (actionQueuesUpdateFunc)
-            {
-                actionQueuesUpdateFunc.Enqueue(new Action(Action));
-                noActionQueueToExecuteUpdateFunc = false;
-            }
-
-            return;
-            void Action() => action.Invoke(param1);
-        }
-
-        /// <summary>
-        /// 在Update中执行
-        /// </summary>
-        public static void Update<T1, T2>(Action<T1, T2> action, T1 param1, T2 param2)
-        {
-            if (action is null) throw new ArgumentNullException(nameof(action));
-            lock (actionQueuesUpdateFunc)
-            {
-                actionQueuesUpdateFunc.Enqueue(new Action(Action));
-                noActionQueueToExecuteUpdateFunc = false;
-            }
-
-            return;
-            void Action() => action.Invoke(param1, param2);
-        }
-
-        /// <summary>
-        /// 在Update中执行
-        /// </summary>
-        public static void Update<T1, T2, T3>(Action<T1, T2, T3> action, T1 param1, T2 param2, T3 param3)
-        {
-            if (action is null) throw new ArgumentNullException(nameof(action));
-            lock (actionQueuesUpdateFunc)
-            {
-                actionQueuesUpdateFunc.Enqueue(new Action(Action));
-                noActionQueueToExecuteUpdateFunc = false;
-            }
-
-            return;
-            void Action() => action.Invoke(param1, param2, param3);
-        }
-
-        /// <summary>
-        /// 在Update中执行
-        /// </summary>
-        public static void Update<T1, T2, T3, T4>(Action<T1, T2, T3, T4> action,
-            T1 param1, T2 param2, T3 param3, T4 param4)
-        {
-            if (action is null) throw new ArgumentNullException(nameof(action));
-            lock (actionQueuesUpdateFunc)
-            {
-                actionQueuesUpdateFunc.Enqueue(new Action(Action));
-                noActionQueueToExecuteUpdateFunc = false;
-            }
-
-            return;
-            void Action() => action.Invoke(param1, param2, param3, param4);
-        }
-
-        /// <summary>
-        /// 在Update中执行
-        /// </summary>
         public static void Update(Action action)
         {
             if (action is null) throw new ArgumentNullException(nameof(action));
@@ -246,7 +181,7 @@ namespace AIO
             }
         }
 
-        partial class ThreadMono
+        private partial class ThreadMono
         {
             public void Update()
             {

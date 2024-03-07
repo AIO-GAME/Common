@@ -365,13 +365,12 @@ namespace AIO
             /// <returns></returns>
             /// <exception cref="Exception"></exception>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static async Task<List<string>> GetRemoteListDirAsync(string uri, string user, string pass,
+            public static Task<List<string>> GetRemoteListDirAsync(string uri, string user, string pass,
                 string keyword = null,
                 ushort timeout = Net.TIMEOUT
             )
             {
-                return await GetRemoteListAsync(uri, user, pass, AHandle.FTP.ListType.Directory, keyword,
-                    timeout);
+                return GetRemoteListAsync(uri, user, pass, AHandle.FTP.ListType.Directory, keyword, timeout);
             }
 
             /// <summary>
@@ -446,10 +445,11 @@ namespace AIO
             /// <returns></returns>
             /// <exception cref="WebException"></exception>
             private static async Task<List<string>> GetRemoteListAsync(string uri, string user, string pass,
-                AHandle.FTP.ListType type, string keyword, ushort timeout, CancellationToken cancellationToken = default)
+                AHandle.FTP.ListType type, string keyword, ushort timeout,
+                CancellationToken cancellationToken = default)
             {
                 var infos = new List<string>();
-                var request = CreateRequestDir(uri, user, pass, "LIST", timeout, cancellationToken);
+                var request = CreateRequestDir(uri.TrimEnd('/'), user, pass, "LIST", timeout, cancellationToken);
                 try
                 {
                     using var response = await request.GetResponseAsync();
@@ -468,7 +468,15 @@ namespace AIO
                                 if (string.IsNullOrEmpty(keyword)
                                     || keyword == "*"
                                     || line.IndexOf(keyword, StringComparison.CurrentCulture) > -1)
-                                    infos.Add(line.Split(' ').Last());
+                                {
+                                    var temp = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                                    var item = string.Empty;
+                                    for (var index = 8; index < temp.Length; index++)
+                                        item = string.Concat(item, " ", temp[index]);
+
+                                    infos.Add(item.Trim(' '));
+                                }
+
                                 break;
                             }
                             case AHandle.FTP.ListType.Directory:
@@ -477,13 +485,28 @@ namespace AIO
                                 if (string.IsNullOrEmpty(keyword)
                                     || keyword == "*"
                                     || line.IndexOf(keyword, StringComparison.CurrentCulture) > -1)
-                                    infos.Add(line.Split(' ').Last());
+                                {
+                                    var temp = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                                    var item = string.Empty;
+                                    for (var index = 8; index < temp.Length; index++)
+                                        item = string.Concat(item, " ", temp[index]);
+
+                                    infos.Add(item.Trim(' '));
+                                }
+
                                 break;
                             }
                             default:
                             case AHandle.FTP.ListType.ALL:
-                                infos.Add(line.Split(' ').Last());
+                            {
+                                var temp = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                                var item = string.Empty;
+                                for (var index = 8; index < temp.Length; index++)
+                                    item = string.Concat(item, " ", temp[index]);
+
+                                infos.Add(item.Trim(' '));
                                 break;
+                            }
                         }
 
                         line = await reader.ReadLineAsync();
@@ -491,10 +514,10 @@ namespace AIO
 
                     request.Abort();
                 }
-                catch (WebException ex)
+                catch (WebException)
                 {
                     request.Abort();
-                    throw new Exception(ex.Message);
+                    return infos;
                 }
 
                 return infos;

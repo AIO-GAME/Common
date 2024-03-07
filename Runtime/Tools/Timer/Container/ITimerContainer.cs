@@ -9,6 +9,14 @@ namespace AIO
     /// </summary>
     internal interface ITimerContainer : IDisposable
     {
+        /// <summary>
+        /// 定时器ID
+        /// </summary>
+        int ID { get; }
+
+        /// <summary>
+        /// 定时器索引
+        /// </summary>
         ITimerOperator this[int index] { get; }
 
         /// <summary>
@@ -45,8 +53,6 @@ namespace AIO
         /// 开始定时器
         /// </summary>
         void Start();
-
-        int ID { get; }
 
         /// <summary>
         /// 更新刷新List时间

@@ -83,6 +83,7 @@ namespace AIO
 
         public sealed override string ToString()
         {
+#if UNITY_EDITOR
             var @string = new StringBuilder();
             @string.Clear();
             @string.Append("当前毫秒:").Append(TimerSystem.Counter).Append("ms").AppendLine();
@@ -101,6 +102,9 @@ namespace AIO
             }
 
             return @string.AppendLine("\n]").ToString();
+#else
+            return string.Empty;
+#endif
         }
 
         public virtual void AddTimerSource(ITimerExecutor executor)
@@ -124,11 +128,9 @@ namespace AIO
             lock (TimersCache)
             {
                 TimersCache.Add(executor);
-
                 if (TimersCache.Count >= MaxCount)
                 {
-                    //如果里当前数量接近容量值 则立马添加到Timers中
-                    TimersUpdate(TimersCache);
+                    TimersUpdate(TimersCache); //如果里当前数量接近容量值 则立马添加到Timers中
                     TimersCache = Pool.List<ITimerExecutor>();
                 }
             }

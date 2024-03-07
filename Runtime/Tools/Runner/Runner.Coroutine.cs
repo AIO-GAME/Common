@@ -1,26 +1,33 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace AIO
 {
     partial class Runner
     {
         #region StartCoroutine
-        
+
+        /// <summary>
+        /// 执行协程
+        /// </summary>
+        public static void StartCoroutine(Action coroutine)
+        {
+            SafeStartCoroutine(StartCoroutineActionEx(coroutine));
+        }
+
+        private static IEnumerator StartCoroutineActionEx(Action coroutine)
+        {
+            coroutine?.Invoke();
+            yield break;
+        }
+
         /// <summary>
         /// 执行协程
         /// </summary>
         public static void StartCoroutine(IEnumerator coroutine)
         {
-#if UNITY_EDITOR
-            if (Application.isPlaying)
-#endif
-                instance.StartCoroutine(coroutine);
-#if UNITY_EDITOR
-            else EditorCoroutineLooper.StartLoop( coroutine);
-#endif
+            SafeStartCoroutine(coroutine);
         }
 
         /// <summary>
@@ -29,10 +36,15 @@ namespace AIO
         public static void StartCoroutine(params IEnumerator[] coroutines)
         {
             if (coroutines.Length == 0) return;
-            foreach (var enumerator in coroutines)
-            {
-                instance.StartCoroutine(enumerator);
-            }
+            SafeStartCoroutine(coroutines);
+        }
+
+        /// <summary>
+        /// 执行协程
+        /// </summary>
+        public static void StartCoroutine(Func<IEnumerator> coroutine)
+        {
+            SafeStartCoroutine(coroutine?.Invoke());
         }
 
         /// <summary>
@@ -41,18 +53,7 @@ namespace AIO
         public static void StartCoroutine(IList<IEnumerator> coroutines)
         {
             if (coroutines is null || coroutines.Count == 0) return;
-            for (var index = 0; index < coroutines.Count; index++)
-            {
-                instance.StartCoroutine(coroutines[index]);
-            }
-        }
-
-        /// <summary>
-        /// 执行协程
-        /// </summary>
-        public static void StartCoroutine(Func<IEnumerator> coroutine)
-        {
-            instance.StartCoroutine(coroutine?.Invoke());
+            SafeStartCoroutine(coroutines);
         }
 
         /// <summary>
@@ -61,10 +62,7 @@ namespace AIO
         public static void StartCoroutine(params Func<IEnumerator>[] coroutines)
         {
             if (coroutines.Length == 0) return;
-            foreach (var enumerator in coroutines)
-            {
-                instance.StartCoroutine(enumerator?.Invoke());
-            }
+            SafeStartCoroutine(coroutines);
         }
 
         /// <summary>
@@ -73,10 +71,7 @@ namespace AIO
         public static void StartCoroutine(IList<Func<IEnumerator>> coroutines)
         {
             if (coroutines.Count == 0) return;
-            for (var index = 0; index < coroutines.Count; index++)
-            {
-                instance.StartCoroutine(coroutines[index]?.Invoke());
-            }
+            SafeStartCoroutine(coroutines);
         }
 
         #endregion
@@ -88,15 +83,25 @@ namespace AIO
         /// </summary>
         public static void StopCoroutine(IEnumerator coroutine)
         {
-            instance.StopCoroutine(coroutine);
+            SafeStopCoroutine(coroutine);
         }
 
         /// <summary>
         /// 结束协程
         /// </summary>
-        public static void StopCoroutine(Coroutine coroutine)
+        public static void StopCoroutine(params IEnumerator[] coroutines)
         {
-            instance.StopCoroutine(coroutine);
+            if (coroutines.Length == 0) return;
+            SafeStopCoroutine(coroutines);
+        }
+
+        /// <summary>
+        /// 结束协程
+        /// </summary>
+        public static void StopCoroutine(IList<IEnumerator> coroutines)
+        {
+            if (coroutines.Count == 0) return;
+            SafeStopCoroutine(coroutines);
         }
 
         /// <summary>
@@ -104,15 +109,7 @@ namespace AIO
         /// </summary>
         public static void StopCoroutine(Func<IEnumerator> coroutine)
         {
-            instance.StopCoroutine(coroutine?.Invoke());
-        }
-
-        /// <summary>
-        /// 结束协程
-        /// </summary>
-        public static void StopCoroutine(Func<Coroutine> coroutine)
-        {
-            instance.StopCoroutine(coroutine?.Invoke());
+            SafeStopCoroutine(coroutine?.Invoke());
         }
 
         /// <summary>
@@ -121,22 +118,7 @@ namespace AIO
         public static void StopCoroutine(params Func<IEnumerator>[] coroutines)
         {
             if (coroutines.Length == 0) return;
-            foreach (var coroutine in coroutines)
-            {
-                instance.StopCoroutine(coroutine?.Invoke());
-            }
-        }
-
-        /// <summary>
-        /// 结束协程
-        /// </summary>
-        public static void StopCoroutine(params Func<Coroutine>[] coroutines)
-        {
-            if (coroutines.Length == 0) return;
-            foreach (var coroutine in coroutines)
-            {
-                instance.StopCoroutine(coroutine?.Invoke());
-            }
+            SafeStopCoroutine(coroutines);
         }
 
         /// <summary>
@@ -145,22 +127,7 @@ namespace AIO
         public static void StopCoroutine(IList<Func<IEnumerator>> coroutines)
         {
             if (coroutines.Count == 0) return;
-            for (var index = 0; index < coroutines.Count; index++)
-            {
-                instance.StopCoroutine(coroutines[index]?.Invoke());
-            }
-        }
-
-        /// <summary>
-        /// 结束协程
-        /// </summary>
-        public static void StopCoroutine(IList<Func<Coroutine>> coroutines)
-        {
-            if (coroutines.Count == 0) return;
-            for (var index = 0; index < coroutines.Count; index++)
-            {
-                instance.StopCoroutine(coroutines[index]?.Invoke());
-            }
+            SafeStopCoroutine(coroutines);
         }
 
         /// <summary>

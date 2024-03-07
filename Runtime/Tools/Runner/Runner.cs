@@ -15,6 +15,13 @@ namespace AIO
     {
         private static ThreadMono instance;
 
+#if UNITY_EDITOR
+        /// <summary>
+        /// [EDITOR] 是否运行时 
+        /// </summary>
+        public static bool IsRuntime { get; private set; }
+#endif
+
         /// <summary>
         /// 是否允许线程
         /// </summary>
@@ -25,15 +32,17 @@ namespace AIO
             Initialize();
         }
 
-        /// <summary>
-        /// 初始化
-        /// </summary>
         private static void Initialize()
         {
             if (instance != null) return;
 #if UNITY_EDITOR
-            if (Application.isPlaying)
+            IsAllowThread = true;
+            EditorApplication.quitting += Dispose;
+            IsRuntime = Application.isPlaying;
+            if (IsRuntime)
             {
+#else
+                IsAllowThread = Application.platform != RuntimePlatform.WebGLPlayer;
 #endif
                 var obj = new GameObject("RunnerMainThreadExecuteRuntime")
                 {
@@ -50,11 +59,6 @@ namespace AIO
                 };
                 instance = obj.AddComponent<ThreadMono>();
             }
-
-            IsAllowThread = true;
-            EditorApplication.quitting += Dispose;
-#else
-            IsAllowThread = Application.platform != RuntimePlatform.WebGLPlayer;
 #endif
             Application.quitting += Dispose;
         }
@@ -66,6 +70,7 @@ namespace AIO
 #endif
             Application.quitting -= Dispose;
             UObject.DestroyImmediate(instance.gameObject, true);
+            instance = null;
         }
 
         [Preserve]

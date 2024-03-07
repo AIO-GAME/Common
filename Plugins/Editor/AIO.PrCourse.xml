@@ -1393,6 +1393,11 @@
             link 类型
             </summary>
         </member>
+        <member name="F:AIO.PrDingTalk.Msg.TBMarkdown">
+            <summary>
+            link 类型
+            </summary>
+        </member>
         <member name="F:AIO.PrDingTalk.Msg.TBActionCard">
             <summary>
             actionCard 类型
