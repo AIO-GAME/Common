@@ -60,6 +60,11 @@ namespace AIO
             [JsonProperty(PropertyName = "link")] private Hashtable TBLink;
 
             /// <summary>
+            /// link 类型
+            /// </summary>
+            [JsonProperty(PropertyName = "markdown")] private Hashtable TBMarkdown;
+
+            /// <summary>
             /// actionCard 类型
             /// </summary>
             [JsonProperty(PropertyName = "actionCard")]
@@ -153,7 +158,7 @@ namespace AIO
             public void ToMarkdown(string title, string content)
             {
                 Type = MsgType.markdown;
-                TBLink = new Hashtable
+                TBMarkdown = new Hashtable
                 {
                     ["title"] = title,
                     ["text"] = content
