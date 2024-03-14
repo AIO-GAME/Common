@@ -11,6 +11,8 @@ namespace AIO
         private static void SafeStartCoroutine(IEnumerator coroutine)
         {
 #if UNITY_EDITOR
+            if (instance == null)
+                Initialize();
             if (IsRuntime)
 #endif
                 instance.StartCoroutine(coroutine);
@@ -23,6 +25,8 @@ namespace AIO
         private static void SafeStartCoroutine(IList<IEnumerator> coroutines)
         {
 #if UNITY_EDITOR
+            if (instance == null)
+                Initialize();
             if (IsRuntime)
 #endif
                 for (var index = 0; index < coroutines.Count; index++)
@@ -42,6 +46,8 @@ namespace AIO
         private static void SafeStartCoroutine(IList<Func<IEnumerator>> coroutines)
         {
 #if UNITY_EDITOR
+            if (instance == null)
+                Initialize();
             if (IsRuntime)
 #endif
                 for (var index = 0; index < coroutines.Count; index++)
@@ -61,6 +67,8 @@ namespace AIO
         private static void SafeStopCoroutine(IEnumerator coroutine)
         {
 #if UNITY_EDITOR
+            if (instance == null)
+                Initialize();
             if (IsRuntime)
 #endif
                 instance.StopCoroutine(coroutine);
@@ -73,6 +81,8 @@ namespace AIO
         private static void SafeStopCoroutine(IList<IEnumerator> coroutines)
         {
 #if UNITY_EDITOR
+            if (instance == null)
+                Initialize();
             if (IsRuntime)
 #endif
                 for (var index = 0; index < coroutines.Count; index++)
@@ -92,6 +102,8 @@ namespace AIO
         private static void SafeStopCoroutine(IList<Func<IEnumerator>> coroutines)
         {
 #if UNITY_EDITOR
+            if (instance == null)
+                Initialize();
             if (IsRuntime)
 #endif
                 for (var index = 0; index < coroutines.Count; index++)

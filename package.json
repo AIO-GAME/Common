@@ -2,7 +2,7 @@
   "name": "com.aio.package",
   "displayName": "AIO Unity Common",
   "description": "AIO Unity Common",
-  "version": "1.0.38-preview",
+  "version": "1.0.39-preview",
   "unity": "2019.4",
   "category": "Runtime",
   "unityRelease": "0f1",
