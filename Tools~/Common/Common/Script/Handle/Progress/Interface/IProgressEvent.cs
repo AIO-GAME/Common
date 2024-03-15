@@ -1,17 +1,11 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-12-17
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
-
-using System;
+﻿using System;
 
 namespace AIO
 {
     /// <summary>
     /// 进度回调参数
     /// </summary>
-    public interface IProgressEvent
+    public interface IProgressEvent : IDisposable
     {
         /// <summary>
         /// 进度回调

@@ -4692,6 +4692,11 @@
         <member name="P:AIO.AProgressEvent.OnCancel">
             <inheritdoc />
         </member>
+        <member name="M:AIO.AProgressEvent.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
         <member name="T:AIO.EProgressState">
             <summary>
             进度状态
