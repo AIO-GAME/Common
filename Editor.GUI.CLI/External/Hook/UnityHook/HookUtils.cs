@@ -21,7 +21,7 @@ namespace MonoHook
             PropertyInfo p_SystemPageSize = typeof(Environment).GetProperty("SystemPageSize");
             if (p_SystemPageSize == null)
                 throw new NotSupportedException("Unsupported runtime");
-            _Pagesize = (int)p_SystemPageSize.GetValue(null, new object[0]);
+            _Pagesize = (int)p_SystemPageSize.GetValue(null, Array.Empty<object>());
             SetupFlushICacheFunc();
         }
 

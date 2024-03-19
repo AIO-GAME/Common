@@ -7,22 +7,22 @@ using MonoHook;
 
 public class QuickHook
 {
-    enum HookID
+    private enum HookID
     {
         Ctor,
         Method,
         Property,
     }
 
-    Dictionary<Type, Dictionary<string, List<MethodHook>>> hookDic;
+    private Dictionary<Type, Dictionary<string, List<MethodHook>>> hookDic;
 
-    Type type;
-    Func<string, string> replaceNameFunc;
-    Func<string, string> proxyNameFunc;
-    Func<string, string> setterNameFunc;
-    Func<string, string> getterNameFunc;
-    BindingFlags hookFlags;
-    BindingFlags selfFlags;
+    private Type type;
+    private Func<string, string> replaceNameFunc;
+    private Func<string, string> proxyNameFunc;
+    private Func<string, string> setterNameFunc;
+    private Func<string, string> getterNameFunc;
+    private BindingFlags hookFlags;
+    private BindingFlags selfFlags;
 
     public QuickHook(Type type, BindingFlags? hookFlags = null, BindingFlags? selfFlags = null)
     {
@@ -156,8 +156,8 @@ public class QuickHook
                 originalMethods = hookType.GetConstructors(hookFlags).ToList().ConvertAll(x => (MethodBase)x);
                 break;
             case HookID.Method:
-                originalMethods = hookType.GetMethods(hookFlags).Where(x => x.Name == hookMember && !x.IsGenericMethod)
-                    .ToList().ConvertAll(x => (MethodBase)x);
+                originalMethods = hookType.GetMethods(hookFlags).Where(x => x.Name == hookMember && !x.IsGenericMethod).
+                    ToList().ConvertAll(x => (MethodBase)x);
                 break;
             case HookID.Property:
                 var properties = hookType.GetProperties(hookFlags).Where(x => x.Name == hookMember).ToList();
@@ -241,15 +241,15 @@ public class QuickHook
                 // 查找方法
                 if (replaceMethods.Count != proxyMethods.Count || replaceMethods.Count == 0)
                 {
-                    var setReplaceMethods = type.GetMethods(selfFlags).Where(x => x.Name == setterNameFunc(replaceName))
-                        .ToList();
-                    var getReplaceMethods = type.GetMethods(selfFlags).Where(x => x.Name == getterNameFunc(replaceName))
-                        .ToList();
+                    var setReplaceMethods = type.GetMethods(selfFlags).
+                        Where(x => x.Name == setterNameFunc(replaceName)).ToList();
+                    var getReplaceMethods = type.GetMethods(selfFlags).
+                        Where(x => x.Name == getterNameFunc(replaceName)).ToList();
 
-                    var setProxyMethods = type.GetMethods(selfFlags).Where(x => x.Name == setterNameFunc(proxyName))
-                        .ToList();
-                    var getProxyMethods = type.GetMethods(selfFlags).Where(x => x.Name == getterNameFunc(proxyName))
-                        .ToList();
+                    var setProxyMethods = type.GetMethods(selfFlags).Where(x => x.Name == setterNameFunc(proxyName)).
+                        ToList();
+                    var getProxyMethods = type.GetMethods(selfFlags).Where(x => x.Name == getterNameFunc(proxyName)).
+                        ToList();
 
                     replaceMethods = new List<MethodInfo>(setReplaceMethods.Count * 2);
                     proxyMethods = new List<MethodInfo>(setProxyMethods.Count * 2);
@@ -312,7 +312,7 @@ public class QuickHook
         }
     }
 
-    MethodInfo FindMethodBySignature(HookID hookID, List<MethodInfo> methods, MethodBase originalMethod)
+    private MethodInfo FindMethodBySignature(HookID hookID, List<MethodInfo> methods, MethodBase originalMethod)
     {
         if (methods?.Count == 0)
             return null;
@@ -346,7 +346,8 @@ public class QuickHook
         return null;
     }
 
-    MethodInfo FindMethodBySignature(List<MethodInfo> methods, List<Type> compareParamTypes, Type compareReturnType,
+    private MethodInfo FindMethodBySignature(List<MethodInfo> methods, List<Type> compareParamTypes,
+        Type compareReturnType,
         bool searchInstance)
     {
         foreach (var method in methods)
@@ -380,14 +381,8 @@ public class QuickHook
         return null;
     }
 
-    bool TypeIsEqual(Type x, Type y)
+    private bool TypeIsEqual(Type x, Type y)
     {
-        if (x == y)
-            return true;
-
-        if (x.IsAssignableFrom(y))
-            return true;
-
-        return false;
+        return x == y || x.IsAssignableFrom(y);
     }
 }
