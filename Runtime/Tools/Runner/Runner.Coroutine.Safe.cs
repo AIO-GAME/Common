@@ -17,7 +17,7 @@ namespace AIO
 #endif
                 instance.StartCoroutine(coroutine);
 #if UNITY_EDITOR
-            else EditorCoroutineLooper.StartCoroutine(coroutine);
+            else EditorCoroutineLooper.Start(coroutine);
 #endif
         }
 
@@ -37,7 +37,7 @@ namespace AIO
             else
                 for (var index = 0; index < coroutines.Count; index++)
                 {
-                    EditorCoroutineLooper.StartCoroutine(coroutines[index]);
+                    EditorCoroutineLooper.Start(coroutines[index]);
                 }
 #endif
         }
@@ -58,7 +58,7 @@ namespace AIO
             else
                 for (var index = 0; index < coroutines.Count; index++)
                 {
-                    EditorCoroutineLooper.StartCoroutine(coroutines[index]?.Invoke());
+                    EditorCoroutineLooper.Start(coroutines[index]?.Invoke());
                 }
 #endif
         }
@@ -73,7 +73,7 @@ namespace AIO
 #endif
                 instance.StopCoroutine(coroutine);
 #if UNITY_EDITOR
-            else EditorCoroutineLooper.StopCoroutine(coroutine);
+            else EditorCoroutineLooper.Stop(coroutine);
 #endif
         }
 
@@ -93,7 +93,7 @@ namespace AIO
             else
                 for (var index = 0; index < coroutines.Count; index++)
                 {
-                    EditorCoroutineLooper.StopCoroutine(coroutines[index]);
+                    EditorCoroutineLooper.Stop(coroutines[index]);
                 }
 #endif
         }
@@ -114,7 +114,7 @@ namespace AIO
             else
                 for (var index = 0; index < coroutines.Count; index++)
                 {
-                    EditorCoroutineLooper.StopCoroutine(coroutines[index]?.Invoke());
+                    EditorCoroutineLooper.Stop(coroutines[index]?.Invoke());
                 }
 #endif
         }
