@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using DotNetDetour;
 using UnityEngine;
 #if UNITY_EDITOR
+using System.Reflection.Emit;
 using UnityEditor;
 #endif
 
@@ -207,15 +208,21 @@ namespace MonoHook
             if (proxyMethod != null)
             {
                 methodName = $"{proxyMethod.DeclaringType?.Name}.{proxyMethod.Name}";
-                var codeSize = proxyMethod.GetMethodBody().GetILAsByteArray().Length;
-                if (codeSize < minMethodBodySize)
-                    Debug.LogWarning(
-                        $"WRANING: size of method body[{methodName}] is too short({codeSize}), will random crash on IL2CPP release mode, please fill some dummy code inside");
+                if (proxyMethod is DynamicMethod)
+                {
+                }
+                else
+                {
+                    var codeSize = proxyMethod.GetMethodBody().GetILAsByteArray().Length;
+                    if (codeSize < minMethodBodySize)
+                        Debug.LogWarning(
+                            $"WRANING: size of method body[{methodName}] is too short({codeSize}), will random crash on IL2CPP release mode, please fill some dummy code inside");
 
-                if ((proxyMethod.MethodImplementationFlags & MethodImplAttributes.NoOptimization) !=
-                    MethodImplAttributes.NoOptimization)
-                    throw new Exception(
-                        $"WRANING: method [{methodName}] must has a Attribute `MethodImpl(MethodImplOptions.NoOptimization)` to prevent code call to this optimized by compiler(pass args by shared stack)");
+                    if ((proxyMethod.MethodImplementationFlags & MethodImplAttributes.NoOptimization) !=
+                        MethodImplAttributes.NoOptimization)
+                        throw new Exception(
+                            $"WRANING: method [{methodName}] must has a Attribute `MethodImpl(MethodImplOptions.NoOptimization)` to prevent code call to this optimized by compiler(pass args by shared stack)");
+                }
             }
 #endif
         }
