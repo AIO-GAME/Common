@@ -17,7 +17,7 @@ namespace AIO.UEditor
         /// </summary>
         public static class Path
         {
-            [AInit(mode: EInitAttrMode.Both, int.MaxValue)]
+            [AInit(mode: EInitAttrMode.Both, int.MinValue)]
             private static void Init()
             {
                 try

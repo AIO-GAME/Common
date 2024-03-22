@@ -265,16 +265,15 @@
             </remarks>
             <inheritdoc cref="T:System.Reflection.MemberInfo"/>
         </member>
-        <member name="M:AIO.ExtendMethodInfo.IsStatic(System.Reflection.MemberInfo)">
+        <member name="M:AIO.ExtendMethodInfo.IsOpAsync(System.Reflection.MethodInfo)">
             <summary>
-            判断一个成员是否为静态成员。
+            是否为异步方法 有 async 修饰
             </summary>
-            <param name="memberInfo">要判断的成员。</param>
-            <returns>如果成员是静态成员，则返回 true；否则返回 false。</returns>
-            <remarks>
-            静态成员属于类型，而不是对象。静态成员可以通过类型名或实例访问。
-            </remarks>
-            <inheritdoc cref="T:System.Reflection.MemberInfo"/>
+        </member>
+        <member name="M:AIO.ExtendMethodInfo.IsOpUnsafe(System.Reflection.MethodInfo)">
+            <summary>
+            是否为unsafe方法
+            </summary>
         </member>
         <member name="T:AIO.ExtendParameterInfo">
             <summary>
@@ -1644,6 +1643,20 @@
             <typeparam name="T">强转的类型</typeparam>
             <param name="target">强转的对象</param>
             <returns>转换后的对象</returns>
+        </member>
+        <member name="M:AIO.ExtendType.ToStr(System.Type)">
+            <summary>
+            转化为标准字符串
+            </summary>
+            <param name="target"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ExtendType.ToStrAlias(System.Type)">
+            <summary>
+            转化为标准字符串
+            </summary>
+            <param name="target"></param>
+            <returns></returns>
         </member>
         <member name="T:AIO.ExtendEnum">
             <summary>

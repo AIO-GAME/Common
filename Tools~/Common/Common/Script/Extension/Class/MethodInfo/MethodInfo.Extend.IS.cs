@@ -53,32 +53,24 @@ namespace AIO
         /// </remarks>
         /// <inheritdoc cref="MemberInfo"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool HasAttribute<TAttribute>(this MemberInfo element, bool inherit = true) where TAttribute : Attribute
+        public static bool HasAttribute<TAttribute>(this MemberInfo element, bool inherit = true)
+            where TAttribute : Attribute
             => element.IsDefined(typeof(TAttribute), inherit);
 
         /// <summary>
-        /// 判断一个成员是否为静态成员。
+        /// 是否为异步方法 有 async 修饰
         /// </summary>
-        /// <param name="memberInfo">要判断的成员。</param>
-        /// <returns>如果成员是静态成员，则返回 true；否则返回 false。</returns>
-        /// <remarks>
-        /// 静态成员属于类型，而不是对象。静态成员可以通过类型名或实例访问。
-        /// </remarks>
-        /// <inheritdoc cref="MemberInfo"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsStatic(this MemberInfo memberInfo)
+        public static bool IsOpAsync(this MethodInfo method)
         {
-            switch (memberInfo)
-            {
-                case FieldInfo info:
-                    return info.IsStatic;
-                case PropertyInfo info:
-                    return info.IsStatic();
-                case MethodBase @base:
-                    return @base.IsStatic;
-                default:
-                    throw new NotSupportedException();
-            }
+            return method.GetCustomAttribute(typeof(AsyncStateMachineAttribute)) != null;
+        }
+
+        /// <summary>
+        /// 是否为unsafe方法
+        /// </summary>
+        public static bool IsOpUnsafe(this MethodInfo method)
+        {
+            return method.GetCustomAttribute(typeof(UnsafeValueTypeAttribute)) != null;
         }
     }
 }
