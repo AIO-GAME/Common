@@ -94,6 +94,16 @@ namespace AIO.UEditor
 
     internal static partial class ProfilerHookTask
     {
+        /// <summary>
+        /// 转化为标准字符串 
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <param name="target">类型</param>
+        /// <returns>
+        /// namespace.class
+        ///namespace.class generic`1
+        /// </returns>
         public static string ToStrAlias(this Type target)
         {
             if (target is null) return string.Empty;
@@ -143,7 +153,33 @@ namespace AIO.UEditor
             return str;
         }
 
-        private static string ToStrAlias(this MethodInfo method)
+        public static string ToStrAlias(this ParameterInfo parameter)
+        {
+            var str = new StringBuilder();
+            foreach (var variable in parameter.GetCustomAttributes())
+            {
+                str.Append(variable.
+                    GetType().Name.
+                    ToLower().
+                    Replace("attribute", "").
+                    Replace("paramarray", "params")
+                ).Append(' ');
+            }
+
+            if (parameter.ParameterType.IsGenericParameter)
+            {
+                str.Append(parameter.ParameterType.Name);
+            }
+            else
+            {
+                str.Append(parameter.ParameterType.ToStrAlias());
+            }
+
+            return str.ToString();
+        }
+
+
+        public static string ToStrAlias(this MethodInfo method)
         {
             var str = new StringBuilder();
             str.Append(method.ReflectedType.ToStrAlias());

@@ -728,7 +728,10 @@
     <Compile Include="Script\Tools\PList\PListPrimitives\PListReal.cs" />
     <Compile Include="Script\Tools\PList\PListPrimitives\PListString.cs" />
     <Compile Include="Script\Tools\PList\PListRoot.cs" />
+    <Compile Include="Script\Tools\PoolSystem\Class\Pool.StringBuilder.cs" />
     <Compile Include="Script\Tools\PoolSystem\List\PoolSystem.cs" />
+    <Compile Include="Script\Tools\PoolSystem\List\PoolSystem.G1.cs" />
+    <Compile Include="Script\Tools\PoolSystem\List\PoolSystem.G1.Inst.cs" />
     <Compile Include="Script\Tools\PoolSystem\List\PoolSystem.Static.cs" />
     <Compile Include="Script\Tools\PoolSystem\Type\PoolTypeSystem.cs" />
     <Compile Include="Script\Tools\PoolSystem\Type\PoolTypeSystem.Static.cs" />

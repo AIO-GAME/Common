@@ -1652,10 +1652,33 @@
             <returns></returns>
         </member>
         <member name="M:AIO.ExtendType.ToStrAlias(System.Type)">
+             <summary>
+             转化为标准字符串 
+             </summary>
+             <remarks>
+             </remarks>
+             <param name="target">类型</param>
+             <returns>
+             namespace.class
+            namespace.class generic`1
+             </returns>
+        </member>
+        <member name="M:AIO.ExtendType.ToStrAlias(System.Reflection.ParameterInfo)">
             <summary>
             转化为标准字符串
             </summary>
-            <param name="target"></param>
+            <param name="parameter">参数信息</param>
+            <returns>
+            [in Type name]
+            [out Type name]
+            [params Type[] name]
+            </returns>
+        </member>
+        <member name="M:AIO.ExtendType.ToStrAlias(System.Reflection.MethodInfo)">
+            <summary>
+            转化为标准字符串
+            </summary>
+            <param name="method"></param>
             <returns></returns>
         </member>
         <member name="T:AIO.ExtendEnum">
@@ -17260,6 +17283,20 @@
             </summary>
             <param name="writer">The <see cref="T:System.Xml.XmlWriter"/> stream to which the object is serialized.</param>
         </member>
+        <member name="T:AIO.PoolStringBuilder">
+            <summary>
+            nameof(Pool_StringBuilder)
+            </summary>
+        </member>
+        <member name="M:AIO.PoolStringBuilder.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PoolStringBuilder.CreateEntity">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PoolStringBuilder.GetEID(System.Text.StringBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:AIO.PoolSystem`2">
             <summary>
             一维对象池系统
@@ -17371,6 +17408,133 @@
             <summary>
             回收所有正在使用的对象
             </summary>
+        </member>
+        <member name="T:AIO.PoolSystem`1">
+            <summary>
+            
+            </summary>
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AIO.PoolSystem`1.Instance">
+            <summary>
+            实例
+            </summary>
+        </member>
+        <member name="P:AIO.PoolSystem`1.IsInstance">
+            <summary>
+            是否存在实例
+            </summary>
+        </member>
+        <member name="M:AIO.PoolSystem`1.CreateInstance``1">
+            <summary>
+            初始化系统
+            </summary>
+        </member>
+        <member name="M:AIO.PoolSystem`1.AddSurviving(`0)">
+            <summary>
+             添加存活对象
+            </summary>
+            <param name="entity">实体</param>
+        </member>
+        <member name="M:AIO.PoolSystem`1.RemoveSurviving(`0)">
+            <summary>
+            移除存活对象
+            </summary>
+            <param name="entity">实体</param>
+        </member>
+        <member name="M:AIO.PoolSystem`1.UnInstall">
+            <summary>
+            卸载系统
+            </summary>
+        </member>
+        <member name="M:AIO.PoolSystem`1.FindAll">
+            <summary>
+            查询正在使用的对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.PoolSystem`1.Find(System.Int32@)">
+            <summary>
+            查询正在使用的对象
+            </summary>
+            <param name="id">实例ID</param>
+            <returns>实例单位对象</returns>
+        </member>
+        <member name="M:AIO.PoolSystem`1.Find(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            查询正在使用的对象
+            </summary>
+            <param name="ids">实例ID列表</param>
+            <returns>实例单位对象</returns>
+        </member>
+        <member name="M:AIO.PoolSystem`1.ClearCache">
+            <summary>
+            清理缓存数据
+            </summary>
+        </member>
+        <member name="M:AIO.PoolSystem`1.Alloc">
+            <summary>
+            分配对象
+            </summary>
+            <returns>实体</returns>
+        </member>
+        <member name="M:AIO.PoolSystem`1.Recycle(`0)">
+            <summary>
+            回收对象
+            </summary>
+            <param name="entity">实体</param>
+        </member>
+        <member name="M:AIO.PoolSystem`1.Recycle(System.Int32)">
+            <summary>
+            回收对象
+            </summary>
+            <param name="eid">实体ID</param>
+        </member>
+        <member name="M:AIO.PoolSystem`1.RecycleAll">
+            <summary>
+            回收所有正在使用的对象
+            </summary>
+        </member>
+        <member name="P:AIO.PoolSystem`1.BusyPool">
+            <summary>
+            使用中的对象
+            </summary>
+        </member>
+        <member name="P:AIO.PoolSystem`1.FreePool">
+            <summary>
+            空闲的对象
+            </summary>
+        </member>
+        <member name="M:AIO.PoolSystem`1.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:AIO.PoolSystem`1.Capacity">
+            <summary>
+            容量
+            </summary>
+        </member>
+        <member name="M:AIO.PoolSystem`1.GetEID(`0)">
+            <summary>
+             获取实体唯一ID
+            </summary>
+            <param name="entity">实体</param>
+        </member>
+        <member name="M:AIO.PoolSystem`1.Clear">
+            <summary>
+             清空缓存数据
+            </summary>
+        </member>
+        <member name="M:AIO.PoolSystem`1.CreateEntity">
+            <summary>
+            分配对象
+            </summary>
+        </member>
+        <member name="M:AIO.PoolSystem`1.Dispose">
+            <inheritdoc />
         </member>
         <member name="T:AIO.PoolTypeSystem`2">
             <summary>
