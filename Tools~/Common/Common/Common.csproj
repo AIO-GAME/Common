@@ -48,6 +48,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Buffers">
+      <HintPath>..\..\packages\system.buffers\4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
@@ -180,6 +183,24 @@
     <Compile Include="Plugins\Microsoft\System.Runtime.CompilerService\IsReadOnlyAttribute.cs" />
     <Compile Include="Plugins\Microsoft\System.Runtime.CompilerService\NullableAttribute.cs" />
     <Compile Include="Plugins\Microsoft\System.Runtime.CompilerService\NullableContextAttribute.cs" />
+    <Compile Include="Plugins\Pooled\BitHelper.cs" />
+    <Compile Include="Plugins\Pooled\ClearMode.cs" />
+    <Compile Include="Plugins\Pooled\HashHelpers.cs" />
+    <Compile Include="Plugins\Pooled\HashHelpers.SerializationInfoTable.cs" />
+    <Compile Include="Plugins\Pooled\ICollectionDebugView.cs" />
+    <Compile Include="Plugins\Pooled\IDictionaryDebugView.cs" />
+    <Compile Include="Plugins\Pooled\IReadOnlyPooledList.cs" />
+    <Compile Include="Plugins\Pooled\NonRandomizedStringEqualityComparer.cs" />
+    <Compile Include="Plugins\Pooled\PooledDictionary.cs" />
+    <Compile Include="Plugins\Pooled\PooledExtensions.cs" />
+    <Compile Include="Plugins\Pooled\PooledList.cs" />
+    <Compile Include="Plugins\Pooled\PooledQueue.cs" />
+    <Compile Include="Plugins\Pooled\PooledSet.cs" />
+    <Compile Include="Plugins\Pooled\PooledSetEqualityComparer.cs" />
+    <Compile Include="Plugins\Pooled\PooledStack.cs" />
+    <Compile Include="Plugins\Pooled\QueueDebugView.cs" />
+    <Compile Include="Plugins\Pooled\StackDebugView.cs" />
+    <Compile Include="Plugins\Pooled\ThrowHelper.cs" />
     <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\AnchorAlias.cs" />
     <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\Comment.cs" />
     <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\DocumentEnd.cs" />
@@ -443,13 +464,21 @@
     <Compile Include="Script\Extension\Class\ParameterInfo\ParameterInfo.Extend.cs" />
     <Compile Include="Script\Extension\Class\PropertyInfo\PropertyInfo.Extend.IS.cs" />
     <Compile Include="Script\Extension\Class\Socket\Socket.Extend.cs" />
-    <Compile Include="Script\Extension\Class\Sort\Sort.Decimal.cs" />
-    <Compile Include="Script\Extension\Class\Sort\Sort.Double.cs" />
-    <Compile Include="Script\Extension\Class\Sort\Sort.Extend.cs" />
-    <Compile Include="Script\Extension\Class\Sort\Sort.Float.cs" />
-    <Compile Include="Script\Extension\Class\Sort\Sort.Int16.cs" />
-    <Compile Include="Script\Extension\Class\Sort\Sort.Int32.cs" />
-    <Compile Include="Script\Extension\Class\Sort\Sort.Int64.cs" />
+    <Compile Include="Script\Extension\Class\Sort\Sort.Bubble.cs" />
+    <Compile Include="Script\Extension\Class\Sort\Sort.BubbleTwoWay.cs" />
+    <Compile Include="Script\Extension\Class\Sort\Sort.Quick.cs" />
+    <Compile Include="Script\Extension\Class\Sort\Sort.Select.cs" />
+    <Compile Include="Script\Extension\Class\Sort\Sort.Heap.cs" />
+    <Compile Include="Script\Extension\Class\Sort\Sort.Merge.cs" />
+    <Compile Include="Script\Extension\Class\Sort\Sort.Insert.cs" />
+    <Compile Include="Script\Extension\Class\Sort\Sort.Bucket.cs" />
+    <Compile Include="Script\Extension\Class\Sort\Sort.cs" />
+    <Compile Include="Script\Extension\Class\Sort\Generic.cs" />
+    <Compile Include="Script\Extension\Class\Sort\Sort.Shell.cs" />
+    <Compile Include="Script\Extension\Class\Sort\ValueType.Span.cs" />
+    <Compile Include="Script\Extension\Class\Sort\ValueType.IList.cs" />
+    <Compile Include="Script\Extension\Class\Sort\Sort.Counting.cs" />
+    <Compile Include="Script\Extension\Class\Sort\Sort.Radix.cs" />
     <Compile Include="Script\Extension\Class\Stream\Stream.Extend.cs" />
     <Compile Include="Script\Extension\Class\StringBuilder\StringBuilder.Extend.cs" />
     <Compile Include="Script\Extension\Class\String\String.Extend.Append.cs" />
@@ -509,13 +538,38 @@
     <Compile Include="Script\Extension\Interface\IList\String\IList.String.Extend.To.cs" />
     <Compile Include="Script\Extension\Interface\IList\String\IList.String.Extend.Trim.cs" />
     <Compile Include="Script\Extension\Interface\IReflect\IReflect.Extend.Get.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\Byte\ISpan.Byte.Extend.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\Int16\ISpan.Extend.Int16.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\Int16\ISpan.Extend.Int16.Remove.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\Int32\ISpan.Extend.Int32.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\Int32\ISpan.Extend.Int32.Remove.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\Int64\ISpan.Extend.Int64.Add.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\Int64\ISpan.Extend.Int64.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\Int8\ISpan.Extend.Int8.Add.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\Int8\ISpan.Extend.Int8.Remove.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\Int32\ISpan.Extend.Int32.Add.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\Int8\ISpan.Extend.Int8.cs" />
     <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Add.cs" />
     <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Copy.cs" />
     <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.cs" />
     <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Disrupt.cs" />
     <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Insert.cs" />
     <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Remove.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Slice.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\Int64\ISpan.Extend.Int64.Remove.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\Int16\ISpan.Extend.Int16.Add.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Trim.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\UInt16\ISpan.Extend.UInt16.Add.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\UInt16\ISpan.Extend.UInt16.Remove.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\UInt16\ISpan.Extend.UInt16.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\UInt32\ISpan.Extend.UInt32.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\UInt32\ISpan.Extend.UInt32.Add.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\UInt32\ISpan.Extend.UInt32.Remove.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\UInt64\ISpan.Extend.UInt64.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\UInt64\ISpan.Extend.UInt64.Add.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\UInt64\ISpan.Extend.UInt64.Remove.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\UInt8\ISpan.Extend.UInt8.Remove.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\UInt8\ISpan.Extend.UInt8.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\UInt8\ISpan.Extend.UInt8.Add.cs" />
     <Compile Include="Script\Extension\Interface\IType\IType.Extend.cs" />
     <Compile Include="Script\Extension\Struct\Byte\Byte.Extend.To.cs" />
     <Compile Include="Script\Extension\Struct\Char\Char.Extend.cs" />
@@ -855,7 +909,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3">
     </PackageReference>
     <PackageReference Include="System.Buffers" Version="4.5.1" />
-    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.3" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.2" />
   </ItemGroup>

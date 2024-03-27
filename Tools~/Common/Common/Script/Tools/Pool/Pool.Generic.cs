@@ -8,7 +8,7 @@ namespace AIO
         /// <summary>
         /// 通用
         /// </summary>
-        public static class Generic<T> where T : class, IPoolable, new()
+        public static class Generic<T> where T : IPoolable, new()
         {
             private static readonly Stack<T>
                 free = new Stack<T>();
@@ -24,7 +24,6 @@ namespace AIO
                 lock (@lock)
                 {
                     var item = constructor();
-                    item.New();
                     busy.Add(item);
                     return item;
                 }
@@ -37,10 +36,18 @@ namespace AIO
             {
                 lock (@lock)
                 {
-                    var item = Activator.CreateInstance<T>();
-                    item.New();
-                    busy.Add(item);
-                    return item;
+                    if (free.Count > 0)
+                    {
+                        var item = free.Pop();
+                        busy.Add(item);
+                        return item;
+                    }
+                    else
+                    {
+                        var item = Activator.CreateInstance<T>();
+                        busy.Add(item);
+                        return item;
+                    }
                 }
             }
 
@@ -52,7 +59,6 @@ namespace AIO
                 lock (@lock)
                 {
                     if (busy.Contains(item)) busy.Remove(item);
-                    item.Free();
                     free.Push(item);
                 }
             }

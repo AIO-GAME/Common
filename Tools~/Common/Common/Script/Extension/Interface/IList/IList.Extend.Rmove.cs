@@ -52,7 +52,7 @@ namespace AIO
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
             if (array.Count <= 1) return array;
-            var hashSet = new HashSet<T>();
+            var hashSet = Pool.HashSet<T>();
             for (var i = 0; i < array.Count; i++)
             {
                 var num = array[i];
@@ -70,6 +70,7 @@ namespace AIO
                 }
             }
 
+            hashSet.Free();
             return array;
         }
 

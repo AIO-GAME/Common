@@ -10,7 +10,7 @@ namespace AIO
         /// 转化为字符串
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string ToConverString(this byte[] bytes)
+        public static string AsString(this byte[] bytes)
         {
             return Encoding.Default.GetString(bytes);
         }
@@ -19,7 +19,7 @@ namespace AIO
         /// 获取指定字节数组转化为字符串
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string ToConverString(this byte[] bytes, in int offset, in int count)
+        public static string AsString(this byte[] bytes, in int offset, in int count)
         {
             return Encoding.Default.GetString(bytes, offset, count);
         }
@@ -28,7 +28,7 @@ namespace AIO
         /// 转化为二进制文本
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string ToHexString(this byte[] bytes)
+        public static string AsStringHex(this byte[] bytes)
         {
             return BitConverter.ToString(bytes).Replace("-", "");
         }
@@ -37,9 +37,10 @@ namespace AIO
         /// 转化为字符串 UTF8格式
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string ToConverStringUTF8(this byte[] bytes)
+        public static string AsStringUTF8(this byte[] bytes)
         {
             return Encoding.UTF8.GetString(bytes);
         }
+
     }
 }

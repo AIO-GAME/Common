@@ -18,7 +18,6 @@ namespace AIO
         /// <summary>
         /// 插入
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Insert<T>(this IList<T> list, int index, in IEnumerable<T> value)
         {
             if (list is null) throw new ArgumentNullException(nameof(list));
@@ -31,7 +30,6 @@ namespace AIO
         /// <summary>
         /// 插入
         /// </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Insert<T>(this IList<T> list, int index, in IList<T> value)
         {
             if (list is null) throw new ArgumentNullException(nameof(list));

@@ -4,7 +4,6 @@
 |*|E-Mail:     |*| xinansky99@foxmail.com
 |*|============|*/
 
-using System;
 using System.Text;
 
 namespace AIO
@@ -14,11 +13,6 @@ namespace AIO
     /// </summary>
     public sealed class PoolStringBuilder : PoolSystem<StringBuilder>
     {
-        static PoolStringBuilder()
-        {
-            CreateInstance<PoolStringBuilder>();
-        }
-
         /// <inheritdoc />
         public PoolStringBuilder()
         {

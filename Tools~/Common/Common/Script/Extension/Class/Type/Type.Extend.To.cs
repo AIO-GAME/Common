@@ -57,7 +57,12 @@ namespace AIO
         {
             if (target is null) return "type is null";
             string str;
-            if (target.IsGenericType) // 判断是否为泛型类型 
+            if (target.ContainsGenericParameters || target.IsGenericParameter)
+            {
+                // 判断是否为泛型参数
+                str = target.Name;
+            }
+            else if (target.IsGenericType) // 判断是否为泛型类型 
             {
                 var definition = target.GetGenericTypeDefinition();
                 var genericArguments = target.GetGenericArguments();
@@ -103,6 +108,7 @@ namespace AIO
         /// </returns>
         public static string ToStrAlias(this ParameterInfo parameter)
         {
+            if (parameter is null) return "parameter is null";
             var genericBuilder = new StringBuilder();
             // 获取参数的特性 param out ref 等等
             if (parameter.IsIn) genericBuilder.Append("in ");
@@ -112,11 +118,11 @@ namespace AIO
                 genericBuilder.Append("params ");
 
             // 判断类型是否为泛型参数
-
-            // 判断是否为泛型参数
-            genericBuilder.Append(parameter.ParameterType.IsGenericParameter
-                ? parameter.ParameterType.Name
-                : parameter.ParameterType.ToStrAlias());
+            if (parameter.ParameterType.ContainsGenericParameters ||
+                parameter.ParameterType.IsGenericParameter)
+                genericBuilder.Append(parameter.ParameterType.Name.Replace("&", ""));
+            else
+                genericBuilder.Append(parameter.ParameterType.ToStrAlias());
 
             return genericBuilder.Append(' ').Append(parameter.Name.ToLower()).ToString();
         }
@@ -134,6 +140,7 @@ namespace AIO
 
             str.Append(method.ReflectedType.ToStrAlias());
             str.Append(method.IsPublic ? " public" : " private");
+            str.Append(method.IsOpUnsafe() ? " unsafe" : string.Empty);
             str.Append(method.IsStatic ? " static" : " ");
             str.Append(method.ReturnType == typeof(void) ? " void " : $" {method.ReturnType.ToStrAlias()} ");
             str.Append(method.Name);
