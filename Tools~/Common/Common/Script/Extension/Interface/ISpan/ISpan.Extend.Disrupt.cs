@@ -14,9 +14,9 @@ namespace AIO
         /// <typeparam name="T">数组类型</typeparam>
         /// <param name="array">数组</param>
         /// <remarks>
-        /// 不重新分配内存 source.<see cref="MDisrupt{T}"/>
+        /// 不重新分配内存 source.<see cref="MRandom{T}"/>
         /// </remarks>
-        public static T[] MDisrupt<T>(this T[] array)
+        public static T[] MRandom<T>(this T[] array)
         {
             for (int i = 0, index = AHelper.Random.RandInt32(0, array.Length);
                  i < array.Length / 2;
@@ -37,7 +37,7 @@ namespace AIO
         /// <remarks>
         /// 并重新分配内存 source = source.<see cref="Disrupt{T}(T[])"/>
         /// </remarks>
-        public static T[] Disrupt<T>(this T[] array)
+        public static T[] Random<T>(this T[] array)
         {
             var newArray = new T[array.Length];
             for (int i = 0, index = AHelper.Random.RandInt32(0, array.Length);
