@@ -12,7 +12,7 @@ namespace AIO
         public static T[] Exclude<T>(this T[] arrays, T value = default)
         {
             if (arrays is null)
-                throw new ArgumentNullException(nameof(arrays));
+                return Array.Empty<T>();
             if (typeof(T).IsClass)
                 return arrays.Where(item => item != null && !item.Equals(value)).ToArray();
             if (typeof(T).IsValueType)

@@ -497,6 +497,10 @@
     <Compile Include="Script\Extension\Class\String\String.Extend.ToConver.cs" />
     <Compile Include="Script\Extension\Class\String\String.Extend.Trim.cs" />
     <Compile Include="Script\Extension\Class\Thread\Thread.Extend.cs" />
+    <Compile Include="Script\Extension\Class\Type\Reflection\MethodReflectionInfo.cs" />
+    <Compile Include="Script\Extension\Class\Type\Reflection\ParameterInfoReflectionInfo.cs" />
+    <Compile Include="Script\Extension\Class\Type\Reflection\ReflectionInfo.cs" />
+    <Compile Include="Script\Extension\Class\Type\Reflection\TypeReflectionInfo.cs" />
     <Compile Include="Script\Extension\Class\Type\Type.Extend.And.cs" />
     <Compile Include="Script\Extension\Class\Type\Type.Extend.Get.cs" />
     <Compile Include="Script\Extension\Class\Type\Type.Extend.IS.cs" />

@@ -58,12 +58,14 @@ namespace AIO.UEditor
         {
             str.AppendLine();
             str.AppendFormat("        private static bool HasUpdate = false;\r\n\r\n");
-            str.AppendFormat("        [MenuItem(\"Git/\" + DisplayName + \"/刷新 Refresh\", false, 1), IgnoreConsoleJump, AInit(EInitAttrMode.Editor, -1)]\r\n");
+            str.AppendFormat(
+                "        [MenuItem(\"Git/\" + DisplayName + \"/刷新 Refresh\", false, 1), IgnoreConsoleJump, AInit(EInitAttrMode.Editor, -1)]\r\n");
             str.AppendFormat("        internal static async void Refresh()\r\n").Append("        {\r\n");
             str.AppendFormat(
                 "            var ret = await PrGit.Helper.GetBehind(FullPath);\r\n");
             str.AppendFormat("            HasUpdate = ret > 0;\r\n");
-            str.Append("            if (ret < 0) Console.WriteLine($\"Git Refresh : 本地Git库版本 提交数超过 远程库版本 : {Math.Abs(ret)}\");");
+            str.Append(
+                "            if (ret < 0) Console.WriteLine($\"Git Refresh : 本地Git库版本 提交数超过 远程库版本 : {Math.Abs(ret)}\");");
             str.Append("\r\n        }\r\n");
         }
 
@@ -221,9 +223,8 @@ namespace AIO.UEditor
 
         public static bool CreateTemplate(IEnumerable<PackageInfo> infos)
         {
-            var ProjectPath = new DirectoryInfo(Application.dataPath).Parent?.FullName
-                .Replace('\\', '/')
-                .Trim('\\', '/');
+            var ProjectPath = new DirectoryInfo(Application.dataPath).Parent?.FullName.Replace('\\', '/').
+                Trim('\\', '/');
             if (string.IsNullOrEmpty(ProjectPath))
             {
                 Debug.LogError("Application.dataPath is null");
@@ -248,8 +249,8 @@ namespace AIO.UEditor
 
                 str.AppendFormat("    /// <summary>\r\n    /// Git Manager {0}\r\n    /// </summary>\r\n",
                     info.displayName);
-                
-                str.AppendFormat("    [ScriptIcon(IconResource = \"Editor/Icon/App/Git/git-tag-style-1\")]\r\n");
+              
+                str.AppendFormat("    [ScriptIcon(IconResource = \"Editor/Icon/App/Git/gitignore\")]\r\n");
                 str.AppendFormat("    internal static partial class {0}\r\n", classname).Append("    {\r\n");
                 str.AppendFormat("        internal const string URL = \"{0}\";\r\n",
                     info.resolvedPath.Replace('\\', '/').Replace(ProjectPath, "").Trim('\\', '/'));
@@ -276,14 +277,14 @@ namespace AIO.UEditor
                 FuncRemoteSetUrl(str, ++index);
 
                 str.Append("    }\r\n}");
-                savaDir.Add(string.Concat(info.name, ".cs"), str.ToString());
+                savaDir.Add(string.Concat(info.name, ".Designer.cs"), str.ToString());
             }
 
             var change = false;
             var bakDir = new DirectoryInfo(OutPath);
             if (bakDir.Exists)
             {
-                foreach (var file in bakDir.GetFiles("*.cs", SearchOption.TopDirectoryOnly))
+                foreach (var file in bakDir.GetFiles("*.Designer.cs", SearchOption.TopDirectoryOnly))
                 {
                     if (file.Name.Contains(".meta")) continue;
                     if (file.Name.StartsWith("GitUnityProject")) continue;
@@ -312,11 +313,28 @@ namespace AIO.UEditor
 
             if (savaDir.Count > 0)
             {
-                change = true;
+                var stringBuilder = new StringBuilder();
                 foreach (var item in savaDir)
                 {
                     File.WriteAllText(Path.Combine(OutPath, item.Key), item.Value, Encoding.UTF8);
+                    // 判断是否有 {info.name}.cs 文件 如果有则不生成 如果没有 则生成基础模版
+                    var file = Path.Combine(OutPath, item.Key.Replace(".Designer.cs", ".cs"));
+                    if (File.Exists(file)) continue;
+                    var filename = Path.GetFileNameWithoutExtension(file);
+                    var classname = string.Concat("Git_", filename.Replace('-', '_').Replace('.', '_')).ToUpper();
+                    stringBuilder.Clear();
+                    stringBuilder.AppendLine("namespace AIO.UEditor");
+                    stringBuilder.AppendLine("{");
+                    stringBuilder.AppendLine(
+                        "    [ScriptIcon(IconResource = \"Editor/Icon/App/Git/git-tag-style-1\")]");
+                    stringBuilder.AppendLine($"    internal static partial class {classname}");
+                    stringBuilder.AppendLine("    {");
+                    stringBuilder.AppendLine("    }");
+                    stringBuilder.AppendLine("}");
+                    File.WriteAllText(file, stringBuilder.ToString(), Encoding.UTF8);
                 }
+
+                change = true;
             }
 
             return change;
@@ -324,9 +342,8 @@ namespace AIO.UEditor
 
         public static bool CreateProject()
         {
-            var ProjectPath = Directory.GetParent(Application.dataPath)?.FullName
-                .Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar)
-                .Trim('\\', '/');
+            var ProjectPath = Directory.GetParent(Application.dataPath)?.FullName.
+                Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar).Trim('\\', '/');
             if (string.IsNullOrEmpty(ProjectPath))
             {
                 Debug.LogError("Application.dataPath is null");
@@ -346,7 +363,7 @@ namespace AIO.UEditor
             str.AppendFormat("{0}\r\n", INFO_USING);
 
             str.AppendFormat("    /// <summary>\r\n    /// Git Manager Project\r\n    /// </summary>\r\n");
-            str.AppendFormat("    internal static partial class {0}\r\n", classname).Append("    {\r\n");
+            str.AppendFormat("    partial class {0}\r\n", classname).Append("    {\r\n");
             str.AppendFormat("        internal const string URL = \"{0}\";\r\n", "./");
             str.AppendFormat("        internal const string DisplayName = \"Project\";\r\n");
             str.AppendFormat("        internal const string PackageName = \"Project\";\r\n");
@@ -380,7 +397,7 @@ namespace AIO.UEditor
             FuncRemoteSetUrl(str, ++index);
 
             str.Append("    }\r\n}");
-            var outfile = Path.Combine(OutPath, "GitUnityProject.cs");
+            var outfile = Path.Combine(OutPath, "GitUnityProject.Designer.cs");
             if (File.Exists(outfile))
             {
                 var old = File.ReadAllText(outfile, Encoding.UTF8);

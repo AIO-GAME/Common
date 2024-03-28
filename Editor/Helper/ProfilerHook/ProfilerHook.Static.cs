@@ -15,7 +15,7 @@ namespace AIO.UEditor
     {
         private static string OUTPUT_DIR => Path.Combine(EHelper.Path.Assets, "Editor/Gen");
 
-        private static string OUTPUT_FILE = Path.Combine(EHelper.Path.Assets, $"Editor/Gen/{nameof(ProfilerHook)}.cs");
+        private static string OUTPUT_FILE => Path.Combine(EHelper.Path.Assets, $"Editor/Gen/{nameof(ProfilerHook)}.cs");
 
         private const string SUMMARY = "\n/// <summary>\n/// {0}\n/// </summary>";
 
@@ -69,7 +69,7 @@ METHOD_CODE            return method;
 
         private static string Get_Method_Target(MethodInfo method)
         {
-            var CLASS_FULL_NAME = method.ReflectedType.ToStrAlias();
+            var CLASS_FULL_NAME = method.ReflectedType.ToDetails();
             var METHOD_NAME = method.Name;
             var content = new StringBuilder();
             content.Append(Template_Method_Target);
@@ -87,7 +87,7 @@ METHOD_CODE            return method;
             if (method.IsGenericMethod)
             {
                 var genericArguments = method.GetGenericArguments(); // 泛型参数
-                var genericArgumentsStr = string.Join(", ", genericArguments.Select(x => $"typeof({x.ToStrAlias()})"));
+                var genericArgumentsStr = string.Join(", ", genericArguments.Select(x => $"typeof({x.ToDetails()})"));
 
                 code.AppendLine(
                     $"            var parameters = method.MakeGenericMethod({genericArgumentsStr}).GetParameters();");
@@ -97,12 +97,12 @@ METHOD_CODE            return method;
                 for (var i = 0; i < parameters.Length; i++)
                 {
                     code.AppendLine(
-                        $"            if (parameters[{i}].ParameterType != typeof({parameters[i].ParameterType.ToStrAlias()})) continue;");
+                        $"            if (parameters[{i}].ParameterType != typeof({parameters[i].ParameterType.ToDetails()})) continue;");
                 }
 
                 // 判断返回值类型 需要考虑如果是泛型方法 返回值类型也是泛型的情况
                 code.AppendLine(
-                    $"            if (method.ReturnType != typeof({method.ReturnType.ToStrAlias()})) continue;");
+                    $"            if (method.ReturnType != typeof({method.ReturnType.ToDetails()})) continue;");
             }
             else
             {
@@ -112,11 +112,11 @@ METHOD_CODE            return method;
                 for (var i = 0; i < parameters.Length; i++)
                 {
                     code.AppendLine(
-                        $"            if (parameters[{i}].ParameterType != typeof({parameters[i].ParameterType.ToStrAlias()})) continue;");
+                        $"            if (parameters[{i}].ParameterType != typeof({parameters[i].ParameterType.ToDetails()})) continue;");
                 }
 
                 code.AppendLine(
-                    $"            if (method.ReturnType != typeof({method.ReturnType.ToStrAlias()})) continue;");
+                    $"            if (method.ReturnType != typeof({method.ReturnType.ToDetails()})) continue;");
             }
 
             content.Replace("METHOD_CODE", code.ToString());

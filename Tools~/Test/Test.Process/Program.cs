@@ -5,7 +5,11 @@ using System.Text;
 
 namespace AIO
 {
-    class MyClass<T> where T : class
+    class MyClass<T> where T : class, new()
+    {
+    }
+
+    class MyClass1<T> where T : struct
     {
     }
 
@@ -20,20 +24,6 @@ namespace AIO
         [AttributeUsage(AttributeTargets.Parameter)]
         private class PAttribute : Attribute
         {
-        }
-
-        private static unsafe T1 LoadAsset<T1, T2, T3, T4, T5, T6>(
-            in T1 obj,
-            params T2[] objs
-        )
-            where T1 : Delegate
-            where T2 : class
-            where T3 : new()
-            where T4 : struct, IComparable
-            where T5 : MyClass<T2>
-            where T6 : Enum
-        {
-            throw new NotImplementedException();
         }
 
         public class TA
@@ -66,17 +56,37 @@ namespace AIO
             }
         }
 
+
+        private static T1 LoadAsset<T1, T2, T3, T4, T5, T6>(
+            in Action<T1, T2> obj,
+            params T2[] objs
+        )
+            where T2 : class
+            where T3 : class, new()
+            where T4 : struct, IComparable
+            where T5 : MyClass<T3>
+            where T6 : Enum
+        {
+            throw new NotImplementedException();
+        }
+
+        private static T1 LoadAsset1<T1>()
+        {
+            throw new NotImplementedException();
+        }
+
         static void Test()
         {
-            // var methodInfo = typeof(Program).GetMethod("LoadAsset",
-            //     System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
-            //
-            // Console.WriteLine(typeof(MyClass<>).ToStrAlias());
-            // Console.WriteLine(methodInfo.ToStrAlias());
+            var methodInfo = typeof(Program).GetMethod(nameof(LoadAsset),
+                System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
 
-            var a = new TA(1);
-            var temp = new TA[] { new TA(1), new TA(2), new TA(3) };
-            CPrint.Log(temp.MRemove(a).Exclude());
+            Console.WriteLine(methodInfo.ToDetails());
+
+            var methodInfo1 = typeof(Program).GetMethod(nameof(LoadAsset1),
+                System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
+            Console.WriteLine(methodInfo1.ToDetails());
+            Console.WriteLine(typeof(MyClass<>).ToDetails());
+            Console.WriteLine(typeof(MyClass1<>).ToDetails());
         }
     }
 }

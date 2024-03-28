@@ -8,11 +8,10 @@ namespace AIO
     partial class Runner
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void SafeStartCoroutine(IEnumerator coroutine)
+        private static void SafeStartCoroutine(in IEnumerator coroutine)
         {
 #if UNITY_EDITOR
-            if (instance == null)
-                Initialize();
+            if (instance == null) Initialize();
             if (IsRuntime)
 #endif
                 instance.StartCoroutine(coroutine);
@@ -22,53 +21,46 @@ namespace AIO
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void SafeStartCoroutine(IList<IEnumerator> coroutines)
+        private static void SafeStartCoroutine(in IEnumerable<IEnumerator> coroutines)
         {
 #if UNITY_EDITOR
-            if (instance == null)
-                Initialize();
+            if (instance == null) Initialize();
             if (IsRuntime)
+            {
 #endif
-                for (var index = 0; index < coroutines.Count; index++)
-                {
-                    instance.StartCoroutine(coroutines[index]);
-                }
+                foreach (var enumerator in coroutines) instance.StartCoroutine(enumerator);
 #if UNITY_EDITOR
+            }
             else
-                for (var index = 0; index < coroutines.Count; index++)
-                {
-                    EditorCoroutineLooper.Start(coroutines[index]);
-                }
+            {
+                foreach (var enumerator in coroutines) EditorCoroutineLooper.Start(enumerator);
+            }
 #endif
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void SafeStartCoroutine(IList<Func<IEnumerator>> coroutines)
+        private static void SafeStartCoroutine(in IEnumerable<Func<IEnumerator>> coroutines)
         {
 #if UNITY_EDITOR
-            if (instance == null)
-                Initialize();
+            if (instance == null) Initialize();
             if (IsRuntime)
+            {
 #endif
-                for (var index = 0; index < coroutines.Count; index++)
-                {
-                    instance.StartCoroutine(coroutines[index]?.Invoke());
-                }
+                foreach (var func in coroutines) instance.StartCoroutine(func?.Invoke());
 #if UNITY_EDITOR
+            }
             else
-                for (var index = 0; index < coroutines.Count; index++)
-                {
-                    EditorCoroutineLooper.Start(coroutines[index]?.Invoke());
-                }
+            {
+                foreach (var func in coroutines) EditorCoroutineLooper.Start(func?.Invoke());
+            }
 #endif
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void SafeStopCoroutine(IEnumerator coroutine)
+        private static void SafeStopCoroutine(in IEnumerator coroutine)
         {
 #if UNITY_EDITOR
-            if (instance == null)
-                Initialize();
+            if (instance == null) Initialize();
             if (IsRuntime)
 #endif
                 instance.StopCoroutine(coroutine);
@@ -78,44 +70,38 @@ namespace AIO
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void SafeStopCoroutine(IList<IEnumerator> coroutines)
+        private static void SafeStopCoroutine(in IEnumerable<IEnumerator> coroutines)
         {
 #if UNITY_EDITOR
-            if (instance == null)
-                Initialize();
+            if (instance == null) Initialize();
             if (IsRuntime)
+            {
 #endif
-                for (var index = 0; index < coroutines.Count; index++)
-                {
-                    instance.StopCoroutine(coroutines[index]);
-                }
+                foreach (var func in coroutines) instance.StopCoroutine(func);
 #if UNITY_EDITOR
+            }
             else
-                for (var index = 0; index < coroutines.Count; index++)
-                {
-                    EditorCoroutineLooper.Stop(coroutines[index]);
-                }
+            {
+                foreach (var func in coroutines) EditorCoroutineLooper.Stop(func);
+            }
 #endif
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void SafeStopCoroutine(IList<Func<IEnumerator>> coroutines)
+        private static void SafeStopCoroutine(in IEnumerable<Func<IEnumerator>> coroutines)
         {
 #if UNITY_EDITOR
-            if (instance == null)
-                Initialize();
+            if (instance == null) Initialize();
             if (IsRuntime)
+            {
 #endif
-                for (var index = 0; index < coroutines.Count; index++)
-                {
-                    instance.StopCoroutine(coroutines[index]?.Invoke());
-                }
+                foreach (var func in coroutines) instance.StopCoroutine(func?.Invoke());
 #if UNITY_EDITOR
+            }
             else
-                for (var index = 0; index < coroutines.Count; index++)
-                {
-                    EditorCoroutineLooper.Stop(coroutines[index]?.Invoke());
-                }
+            {
+                foreach (var func in coroutines) EditorCoroutineLooper.Stop(func?.Invoke());
+            }
 #endif
         }
     }

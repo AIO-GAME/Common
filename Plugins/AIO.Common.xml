@@ -1518,6 +1518,202 @@
             <param name="value">要移除的字符串。</param>
             <returns>移除指定字符串后的新字符串，或者如果当前字符串不是以指定字符串结尾，则返回原始字符串。</returns>
         </member>
+        <member name="T:AIO.MethodReflectionInfo">
+            <summary>
+            函数反射信息
+            </summary>
+        </member>
+        <member name="P:AIO.MethodReflectionInfo.Empty">
+            <summary>
+            空
+            </summary>
+        </member>
+        <member name="P:AIO.MethodReflectionInfo.GenericArguments">
+            <summary>
+            泛型申明
+            </summary>
+        </member>
+        <member name="P:AIO.MethodReflectionInfo.ParameterNames">
+            <summary>
+            参数列表
+            </summary>
+        </member>
+        <member name="P:AIO.MethodReflectionInfo.ParameterTypes">
+            <summary>
+            参数列表
+            </summary>
+        </member>
+        <member name="P:AIO.MethodReflectionInfo.GenericConstraints">
+            <summary>
+            泛型约束
+            </summary>
+        </member>
+        <member name="P:AIO.MethodReflectionInfo.ReturnType">
+            <summary>
+            返回类型
+            </summary>
+        </member>
+        <member name="P:AIO.MethodReflectionInfo.IsAsync">
+            <summary>
+            是否为异步
+            </summary>
+        </member>
+        <member name="P:AIO.MethodReflectionInfo.FullGenericArgument">
+            <summary>
+            泛型申明
+            </summary>
+        </member>
+        <member name="P:AIO.MethodReflectionInfo.FullParameter">
+            <summary>
+            泛型参数
+            </summary>
+        </member>
+        <member name="P:AIO.MethodReflectionInfo.FullGenericConstraint">
+            <summary>
+            泛型约束
+            </summary>
+        </member>
+        <member name="M:AIO.MethodReflectionInfo.#ctor(System.Reflection.MethodInfo)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.MethodReflectionInfo.FullDescription">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.MethodReflectionInfo.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.ParameterInfoReflectionInfo">
+            <summary>
+            参数反射信息
+            </summary>
+        </member>
+        <member name="P:AIO.ParameterInfoReflectionInfo.Empty">
+            <summary>
+            空
+            </summary>
+        </member>
+        <member name="P:AIO.ParameterInfoReflectionInfo.ParameterType">
+            <summary>
+            参数类型
+            </summary>
+        </member>
+        <member name="M:AIO.ParameterInfoReflectionInfo.#ctor(System.Reflection.ParameterInfo)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ParameterInfoReflectionInfo.FullDescription">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ParameterInfoReflectionInfo.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.ReflectionInfo">
+            <summary>
+            信息别名
+            </summary>
+        </member>
+        <member name="P:AIO.ReflectionInfo.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:AIO.ReflectionInfo.Access">
+            <summary>
+            访问权限 public private protected internal
+            </summary>
+        </member>
+        <member name="P:AIO.ReflectionInfo.IsUnsafe">
+            <summary>
+            是否为不安全代码
+            </summary>
+        </member>
+        <member name="P:AIO.ReflectionInfo.IsStatic">
+            <summary>
+            是否为静态
+            </summary>
+        </member>
+        <member name="P:AIO.ReflectionInfo.IsGeneric">
+            <summary>
+            是否为泛型
+            </summary>
+        </member>
+        <member name="M:AIO.ReflectionInfo.FullDescription">
+            <summary>
+            完整描述
+            </summary>
+        </member>
+        <member name="M:AIO.ReflectionInfo.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ReflectionInfo.ToString">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ReflectionInfo.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ReflectionInfo.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ReflectionInfo.op_Implicit(AIO.ReflectionInfo)~System.String">
+            <summary>
+            隐式转换为字符串
+            </summary>
+            <param name="info"><see cref="T:AIO.ReflectionInfo"/></param>
+            <returns>字符串</returns>
+        </member>
+        <member name="T:AIO.TypeReflectionInfo">
+            <summary>
+            类型反射信息
+            </summary>
+        </member>
+        <member name="P:AIO.TypeReflectionInfo.Empty">
+            <summary>
+            空
+            </summary>
+        </member>
+        <member name="P:AIO.TypeReflectionInfo.IsGenericType">
+            <summary>
+            是否为泛型类型
+            </summary>
+        </member>
+        <member name="P:AIO.TypeReflectionInfo.FullGenericArgument">
+            <summary>
+            泛型申明
+            </summary>
+        </member>
+        <member name="P:AIO.TypeReflectionInfo.FullGenericConstraint">
+            <summary>
+            泛型约束
+            </summary>
+        </member>
+        <member name="P:AIO.TypeReflectionInfo.GenericArguments">
+            <summary>
+            泛型声明
+            </summary>
+        </member>
+        <member name="P:AIO.TypeReflectionInfo.GenericConstraints">
+            <summary>
+            泛型约束
+            </summary>
+        </member>
+        <member name="P:AIO.TypeReflectionInfo.IsArray">
+            <summary>
+            是否为数组
+            </summary>
+        </member>
+        <member name="P:AIO.TypeReflectionInfo.IsPointer">
+            <summary>
+            是否为指针
+            </summary>
+        </member>
+        <member name="M:AIO.TypeReflectionInfo.#ctor(System.Type)">
+            <inheritdoc /> 
+        </member>
+        <member name="M:AIO.TypeReflectionInfo.FullDescription">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.TypeReflectionInfo.Dispose">
+            <inheritdoc />
+        </member>
         <member name="T:AIO.ExtendType">
             <summary>
             类扩展
@@ -1915,42 +2111,27 @@
             <param name="target">强转的对象</param>
             <returns>转换后的对象</returns>
         </member>
-        <member name="M:AIO.ExtendType.ToStr(System.Type)">
+        <member name="M:AIO.ExtendType.ToDetails(System.Type)">
             <summary>
-            转化为标准字符串
+            转化为标准字符串 
             </summary>
-            <param name="target"></param>
-            <returns></returns>
+            <remarks>
+            </remarks>
+            <param name="target">类型</param>
+            <returns> <see cref="T:AIO.TypeReflectionInfo"/> </returns>
         </member>
-        <member name="M:AIO.ExtendType.ToStrAlias(System.Type)">
-             <summary>
-             转化为标准字符串 
-             </summary>
-             <remarks>
-             </remarks>
-             <param name="target">类型</param>
-             <returns>
-             namespace.class
-            namespace.class generic`1
-             </returns>
-        </member>
-        <member name="M:AIO.ExtendType.ToStrAlias(System.Reflection.ParameterInfo)">
+        <member name="M:AIO.ExtendType.ToDetails(System.Reflection.ParameterInfo)">
             <summary>
             转化为标准字符串
             </summary>
             <param name="parameter">参数信息</param>
-            <returns>
-            [in Type name]
-            [out Type name]
-            [params Type[] name]
-            </returns>
+            <returns> <see cref="T:AIO.ParameterInfoReflectionInfo"/> </returns>
         </member>
-        <member name="M:AIO.ExtendType.ToStrAlias(System.Reflection.MethodInfo)">
+        <member name="M:AIO.ExtendType.ToDetails(System.Reflection.MethodInfo)">
             <summary>
             转化为标准字符串
             </summary>
-            <param name="method"></param>
-            <returns></returns>
+            <returns> <see cref="T:AIO.MethodReflectionInfo"/> </returns>
         </member>
         <member name="T:AIO.ExtendEnum">
             <summary>
@@ -3765,24 +3946,24 @@
             自动扩容
             </summary>
         </member>
-        <member name="M:AIO.ExtendISpan.MDisrupt``1(``0[])">
+        <member name="M:AIO.ExtendISpan.MRandom``1(``0[])">
             <summary>
             随机打乱数组
             </summary>
             <typeparam name="T">数组类型</typeparam>
             <param name="array">数组</param>
             <remarks>
-            不重新分配内存 source.<see cref="M:AIO.ExtendISpan.MDisrupt``1(``0[])"/>
+            不重新分配内存 source.<see cref="M:AIO.ExtendISpan.MRandom``1(``0[])"/>
             </remarks>
         </member>
-        <member name="M:AIO.ExtendISpan.Disrupt``1(``0[])">
+        <member name="M:AIO.ExtendISpan.Random``1(``0[])">
             <summary>
             随机打乱数组
             </summary>
             <typeparam name="T">数组类型</typeparam>
             <param name="array">数组</param>
             <remarks>
-            并重新分配内存 source = source.<see cref="M:AIO.ExtendISpan.Disrupt``1(``0[])"/>
+            并重新分配内存 source = source.<see cref="!:Disrupt&lt;T&gt;(T[])"/>
             </remarks>
         </member>
         <member name="M:AIO.ExtendISpan.Insert``1(``0[],System.Int32@,``0[]@)">

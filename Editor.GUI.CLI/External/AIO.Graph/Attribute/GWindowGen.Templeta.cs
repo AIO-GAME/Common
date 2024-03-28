@@ -14,11 +14,8 @@ namespace AIO.UEditor
 |*|=============================================*/";
 
         private const string INFO_USING = @"
-    using System;
     using UnityEditor;
-    using UnityEngine;
     using AIO;
-    using System.IO;
 ";
 
         public static bool CreateProject(IDictionary<Type, GWindowAttribute> dictionary)
@@ -38,14 +35,14 @@ namespace AIO.UEditor
             {
                 str.AppendFormat("        [MenuItem(\"{0}\", priority = {1})]\r\n", pair.Value.Menu,
                     pair.Value.MenuPriority);
-                str.AppendFormat("        public static void {0}_Open()\r\n", pair.Key.FullName?.Replace(".", "_"))
-                    .Append("        {\r\n");
-                str.AppendFormat("            EHelper.Window.Open<{0}>();\r\n", pair.Key.FullName)
-                    .Append("        }\r\n");
+                str.AppendFormat("        public static void {0}_Open()\r\n", pair.Key.FullName?.Replace(".", "_")).
+                    Append("        {\r\n");
+                str.AppendFormat("            EHelper.Window.Open<{0}>();\r\n", pair.Key.FullName).
+                    Append("        }\r\n");
             }
 
             str.Append("    }\r\n}");
-            var outfile = Path.Combine(OutPath, "MenuItems.cs");
+            var outfile = Path.Combine(OutPath, "MenuItems.Designer.cs");
             if (File.Exists(outfile))
             {
                 var old = File.ReadAllText(outfile, Encoding.UTF8);
