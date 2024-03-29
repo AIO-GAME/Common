@@ -223,8 +223,7 @@ namespace AIO.UEditor
 
         public static bool CreateTemplate(IEnumerable<PackageInfo> infos)
         {
-            var ProjectPath = new DirectoryInfo(Application.dataPath).Parent?.FullName.Replace('\\', '/').
-                Trim('\\', '/');
+            var ProjectPath = EHelper.Path.Project;
             if (string.IsNullOrEmpty(ProjectPath))
             {
                 Debug.LogError("Application.dataPath is null");
@@ -249,7 +248,7 @@ namespace AIO.UEditor
 
                 str.AppendFormat("    /// <summary>\r\n    /// Git Manager {0}\r\n    /// </summary>\r\n",
                     info.displayName);
-              
+
                 str.AppendFormat("    [ScriptIcon(IconResource = \"Editor/Icon/App/Git/gitignore\")]\r\n");
                 str.AppendFormat("    internal static partial class {0}\r\n", classname).Append("    {\r\n");
                 str.AppendFormat("        internal const string URL = \"{0}\";\r\n",
@@ -301,6 +300,7 @@ namespace AIO.UEditor
                             continue;
                         }
                     }
+                    else file.Delete();
 
                     change = true;
                 }
@@ -342,8 +342,7 @@ namespace AIO.UEditor
 
         public static bool CreateProject()
         {
-            var ProjectPath = Directory.GetParent(Application.dataPath)?.FullName.
-                Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar).Trim('\\', '/');
+            var ProjectPath = EHelper.Path.Project;
             if (string.IsNullOrEmpty(ProjectPath))
             {
                 Debug.LogError("Application.dataPath is null");
