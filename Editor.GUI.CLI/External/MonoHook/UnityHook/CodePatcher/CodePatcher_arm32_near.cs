@@ -28,8 +28,8 @@ namespace MonoHook
 
         protected override byte[] GenJmpCode(void* jmpFrom, void* jmpTo)
         {
-            byte[] ret = new byte[s_jmpCode.Length];
-            int val = ((int)jmpTo - (int)jmpFrom) / 4 - 2;
+            var ret = new byte[s_jmpCode.Length];
+            var val = ((int)jmpTo - (int)jmpFrom) / 4 - 2;
 
             fixed (void* p = &ret[0])
             {

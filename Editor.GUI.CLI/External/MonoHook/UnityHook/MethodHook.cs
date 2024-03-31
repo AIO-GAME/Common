@@ -288,7 +288,6 @@ namespace MonoHook
             return true;
         }
 
-
         [StructLayout(LayoutKind.Sequential, Pack = 1)] // 好像在 IL2CPP 里无效
         private struct __ForCopy
         {
@@ -312,7 +311,7 @@ namespace MonoHook
                 {
                     throw new Exception("does not support Dynamic Method");
                 }
-        
+
                 return method.MethodHandle.GetFunctionPointer();
             }
             else
