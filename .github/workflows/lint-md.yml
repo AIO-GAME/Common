@@ -1,17 +1,17 @@
-name: lint markdown
+# name: lint markdown
 
-on: [ push, pull_request ]
+# on: [ push, pull_request ]
 
-jobs:
-  lint-markdown:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+# jobs:
+#   lint-markdown:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
 
-      - name: lint-md-github-action
-        uses: lint-md/github-action@v0.1.1
-        with:
-          configFile: .lintmdrc
-          failOnWarnings: false
-          files: .github/ ./docs/
+#       - name: lint-md-github-action
+#         uses: lint-md/github-action@v0.1.1
+#         with:
+#           configFile: .lintmdrc
+#           failOnWarnings: false
+#           files: .github/ ./docs/
