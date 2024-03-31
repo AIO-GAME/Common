@@ -8,11 +8,14 @@ namespace AIO
         /// <summary>
         /// 添加
         /// </summary>
-        public static T[] Add<T>(this T[] array, in T item)
+        /// <remarks>
+        /// 并重新分配内存 source = source.Add(1)
+        /// </remarks>
+        public static T[] Add<T, TA>(this T[] arrays, in TA item) where TA : T
         {
-            var oldLength = array.Length;
+            var oldLength = arrays.Length;
             var newArray = new T[oldLength + 1];
-            Array.Copy(array, newArray, oldLength);
+            Array.ConstrainedCopy(arrays, 0, newArray, 0, oldLength);
             newArray[oldLength] = item;
             return newArray;
         }
@@ -20,28 +23,35 @@ namespace AIO
         /// <summary>
         /// 添加
         /// </summary>
-        public static T[] Add<T>(this T[] array, params T[] items)
+        /// <remarks>
+        /// 并重新分配内存 source = source.Add(1)
+        /// </remarks>
+        public static T[] Add<T, TA>(this T[] array, params TA[] items) where TA : T
         {
             if (array == null) throw new ArgumentNullException(nameof(array));
             if (items == null || items.Length == 0) return array;
 
             var result = new T[array.Length + items.Length];
-            Array.Copy(array, result, array.Length);
-            Array.Copy(items, 0, result, array.Length, items.Length);
+            Array.ConstrainedCopy(array, 0, result, 0, array.Length);
+            Array.ConstrainedCopy(items, 0, result, array.Length, items.Length);
             return result;
         }
 
         /// <summary>
         /// 添加
         /// </summary>
-        public static T[] Add<T>(this T[] array, in ICollection<T> items)
+        /// <remarks>
+        /// 并重新分配内存 source = source.Add(1)
+        /// </remarks>
+        public static T[] Add<T, TA>(this T[] array, in ICollection<TA> items) where TA : T
         {
             if (array == null) throw new ArgumentNullException(nameof(array));
             if (items == null || items.Count == 0) return array;
 
             var result = new T[array.Length + items.Count];
-            Array.Copy(array, result, array.Length);
-            items.CopyTo(result, array.Length);
+            Array.ConstrainedCopy(array, 0, result, 0, array.Length);
+            var index = array.Length;
+            foreach (var item in items) array[index++] = item;
             return result;
         }
     }

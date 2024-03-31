@@ -86,7 +86,6 @@ namespace AIO.Internal
         /// <summary>
         /// 判断状态
         /// </summary>
-
         internal static bool NoStatus(in int status)
         {
             if (CurOutLevel < 0) return true;
@@ -100,61 +99,84 @@ namespace AIO.Internal
             var count = 0;
             foreach (var item in objs)
             {
-                str.Append(string.Format("{0}:{1}", count++, item.ToString())).Append("\r\n");
+                str.Append(count++).
+                    Append(':').
+                    Append(item is null ? "null" : item.ToString()).
+                    Append("\r\n");
             }
 
-            var message = string.Format("Count: {0}\r\n", count);
+            var message = $"Count: {count}\r\n";
             if (str.Length > 0)
             {
                 str.Insert(0, message);
                 message = str.Remove(str.Length - 2, 2).ToString();
             }
+
             return message;
         }
 
         internal static IEnumerable<char> ICollection(in ICollection objs)
         {
-            var r = string.Format("Count: {0}\r\n", objs.Count);
+            var r = $"Count: {objs.Count}\r\n";
             if (objs.Count > 0)
             {
                 var index = 1;
                 var str = new StringBuilder(r).Append("\r\n");
                 foreach (var item in objs)
-                    str.Append(index++).Append(':').Append(item.ToString()).Append("\r\n");
+                {
+                    str.Append(index++).
+                        Append(':').
+                        Append(item is null ? "null" : item.ToString()).
+                        Append("\r\n");
+                }
+
                 r = str.Remove(str.Length - 2, 2).ToString();
             }
+
             return r;
         }
 
         internal static IEnumerable<char> IList(in IList objs)
         {
-            var r = string.Format("Count: {0}\r\n", objs.Count);
+            var r = $"Count: {objs.Count}\r\n";
             if (objs.Count > 0)
             {
                 var index = 1;
                 var str = new StringBuilder(r).Append("\r\n");
                 foreach (var item in objs)
-                    str.Append(index++).Append(':').Append(item.ToString()).Append("\r\n");
+                {
+                    str.Append(index++).
+                        Append(':').
+                        Append(item is null ? "null" : item.ToString()).
+                        Append("\r\n");
+                }
+
                 r = str.Remove(str.Length - 2, 2).ToString();
             }
+
             return r;
         }
 
         internal static IEnumerable<char> IDictionary(in IDictionary objs)
         {
-            var r = string.Format("Count: {0}\r\n", objs.Count);
+            var r = $"Count: {objs.Count}\r\n";
             if (objs.Count > 0)
             {
                 var index = 1;
                 var str = new StringBuilder(r).Append("\r\n");
                 foreach (DictionaryEntry dic in objs)
                 {
-                    if (dic.Value != null)
-                        str.Append($"[{index++}]{dic.Key.ToString()}:{dic.Value.ToString()}\r\n");
-                    else str.Append($"[{index++}]{dic.Key.ToString()}:NULL\r\n");
+                    str.Append(index++).
+                        Append(':').
+                        Append(dic.Key is null ? "null" : dic.Key.ToString()).
+                        Append(':').
+                        Append(dic.Value is null ? "null" : dic.Value.ToString()).
+                        Append("\r\n");
                 }
+
                 r = str.Remove(str.Length - 2, 2).ToString();
             }
+
             return r;
         }
     }

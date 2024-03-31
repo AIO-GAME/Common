@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AIO.RainbowCore;
@@ -44,11 +45,11 @@ namespace AIO.RainbowFolders
             var isSmall = IsIconSmall(rect);
             if (!AssetIdCache.TryGetValue(guid, out var assetId))
             {
-                var text = AssetDatabase.GUIDToAssetPath(guid);
-                if (AssetDatabase.IsValidFolder(text)) AssetFolderCache[guid] = text;
+                var assetPath = AssetDatabase.GUIDToAssetPath(guid);
+                if (AssetDatabase.IsValidFolder(assetPath)) AssetFolderCache[guid] = assetPath;
                 else if (AssetFolderCache.ContainsKey(guid)) AssetFolderCache.Remove(guid);
 
-                assetId = ProjectWindowAdapter.GetMainAssetInstanceId(text);
+                assetId = ProjectWindowAdapter.GetMainAssetInstanceId(assetPath);
                 AssetIdCache[guid] = assetId;
             }
 
@@ -61,8 +62,9 @@ namespace AIO.RainbowFolders
             if (ProjectPreferences.ReplaceFolderIcons || ProjectPreferences.DrawCustomBackground)
             {
                 if (ProjectRuleset.Instance is null) return;
-                if (!AssetFolderCache.TryGetValue(guid, out var path)) return;
-                var ruleByPath = ProjectRuleset.Instance.GetRuleByPath(path, true);
+                if (!AssetFolderCache.TryGetValue(guid, out var assetPath)) return;
+
+                var ruleByPath = ProjectRuleset.Instance.GetRuleByPath(assetPath, true);
                 if (ruleByPath is null) return;
 
                 if (ProjectPreferences.DrawCustomBackground) DrawCustomBackground(rect, ruleByPath, isSmall);
@@ -135,7 +137,8 @@ namespace AIO.RainbowFolders
             var inPosition = GUIUtility.GUIToScreenPoint(rect.position + new Vector2(0f, rect.height + 2f));
             if (_multiSelection)
             {
-                var list = Selection.assetGUIDs.Select(AssetDatabase.GUIDToAssetPath).Where(AssetDatabase.IsValidFolder).ToList();
+                var list = Selection.assetGUIDs.Select(AssetDatabase.GUIDToAssetPath).
+                    Where(AssetDatabase.IsValidFolder).ToList();
                 var pathIndex = list.IndexOf(path);
                 draggableWindow.ShowWithParams(inPosition, list, pathIndex);
             }

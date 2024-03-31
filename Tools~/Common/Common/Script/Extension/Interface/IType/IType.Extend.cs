@@ -1,11 +1,11 @@
-﻿namespace AIO
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
-    using System.Runtime.InteropServices;
-    using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Text;
 
+namespace AIO
+{
     /// <summary>
     /// 类型扩展
     /// </summary>
@@ -84,7 +84,7 @@
             if (names.TryGetValue(type, out var name))
                 return name;
 
-            var text = new System.Text.StringBuilder();
+            var text = new StringBuilder();
 
             if (type.IsArray)// Array = TypeName[].
             {

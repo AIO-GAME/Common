@@ -17,7 +17,7 @@ namespace AIO.UEditor
         /// </summary>
         public static class Path
         {
-            [AInit(mode: EInitAttrMode.Both, int.MaxValue)]
+            [AInit(mode: EInitAttrMode.Both, int.MinValue)]
             private static void Init()
             {
                 try
@@ -62,37 +62,37 @@ namespace AIO.UEditor
             /// <summary>
             /// 获取当前项目的 ProjectSettings 文件夹的完整路径。
             /// </summary>
-            public static string ProjectSettings { get; private set; }
+            public static string ProjectSettings { get; private set; } = string.Empty;
 
             /// <summary>
             /// 获取当前项目的 Editor Default Resources 文件夹的完整路径。
             /// </summary>
-            public static string EditorDefaultResources { get; private set; }
+            public static string EditorDefaultResources { get; private set; } = string.Empty;
 
             /// <summary>
             /// 获取当前项目的 Backups 文件夹的完整路径。
             /// </summary>
-            public static string Backups { get; private set; }
+            public static string Backups { get; private set; } = string.Empty;
 
             /// <summary>
             /// 用户自定义设置
             /// </summary>
-            public static string UserSettings { get; private set; }
+            public static string UserSettings { get; private set; } = string.Empty;
 
             /// <summary>
             /// 项目日志文件夹路径
             /// </summary>
-            public static string Packages { get; private set; }
+            public static string Packages { get; private set; } = string.Empty;
 
             /// <summary>
             /// 项目日志文件夹路径
             /// </summary>
-            public static string Logs { get; private set; }
+            public static string Logs { get; private set; } = string.Empty;
 
             /// <summary>
             /// 获取当前项目 Streaming Assets 文件夹的完整路径。
             /// </summary>
-            public static string StreamingAssets { get; private set; }
+            public static string StreamingAssets { get; private set; } = string.Empty;
 
             /// <summary>
             /// 获取当前项目 Persistent Assets 文件夹的完整路径。
@@ -107,17 +107,17 @@ namespace AIO.UEditor
                 }
             }
 
-            private static string _PersistentData { get; set; }
+            private static string _PersistentData { get; set; } = string.Empty;
 
             /// <summary>
             /// 获取当前项目 Assets 文件夹的完整路径。
             /// </summary>
-            public static string Assets { get; private set; }
+            public static string Assets { get; private set; } = string.Empty;
 
             /// <summary>
             /// 获取当前项目 Temp 文件夹的完整路径。
             /// </summary>
-            public static string Temp { get; private set; }
+            public static string Temp { get; private set; } = string.Empty;
 
             /// <summary>
             /// 获取 Unity 编辑器的可执行文件的完整路径。
@@ -146,12 +146,12 @@ namespace AIO.UEditor
                 }
             }
 
-            private static string _EditorContents { get; set; }
+            private static string _EditorContents { get; set; } = string.Empty;
 
             /// <summary>
             /// 获取当前项目所在文件夹的完整路径。 文件分隔符为 '/' 正斜杠。
             /// </summary>
-            public static string Project { get; private set; }
+            public static string Project { get; private set; } = string.Empty;
 
             /// <summary>
             /// 获取当前项目名称。

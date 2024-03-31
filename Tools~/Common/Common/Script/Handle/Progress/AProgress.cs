@@ -1,10 +1,4 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-29
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
-
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Text;
 
@@ -264,10 +258,10 @@ namespace AIO
         /// <inheritdoc />
         public long EndValue { get; set; }
 
-	    /// <inheritdoc />
-	    public long RemainValue => TotalValue - CurrentValue;
+        /// <inheritdoc />
+        public long RemainValue => TotalValue - CurrentValue;
 
-	    /// <inheritdoc />
+        /// <inheritdoc />
         public long StartValue
         {
             get => _StartValue;

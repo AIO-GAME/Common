@@ -1,10 +1,4 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-12-17
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
-
-using System;
+﻿using System;
 
 namespace AIO
 {
@@ -72,7 +66,7 @@ namespace AIO
         /// 剩余值
         /// </summary>
         long RemainValue { get; }
-        
+
         /// <summary>
         /// 转化为字符串
         /// </summary>

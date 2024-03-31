@@ -7,7 +7,9 @@
         "UnityEditor.UI",
         "UnityEngine.UI",
         "UnityEditor.TestRunner",
-        "UnityEngine.TestRunner"
+        "UnityEngine.TestRunner",
+        "com.bbbirder.injection",
+        "com.bbbirder.directattribute"
     ],
     "includePlatforms": [
         "Editor"

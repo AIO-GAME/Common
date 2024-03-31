@@ -1,9 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
+using System.Reflection;
 
 namespace AIO
 {
+    class MyClass<T> where T : class, new()
+    {
+    }
+
+    class MyClass1<T> where T : struct
+    {
+    }
+
     class Program
     {
         private static void Main(string[] args)
@@ -12,16 +19,77 @@ namespace AIO
             Console.Read();
         }
 
-        static async void Test()
+        [AttributeUsage(AttributeTargets.Parameter)]
+        private class PAttribute : Attribute
         {
-            // var handle = AHandle.FTP.Create("ftpshare-hot.ingcreations.com", 21, "ftpshare-hot", "ingcreations2023",
-            //     "qc");
-            // Console.WriteLine(await handle.InitAsync());
-            // var data = await handle.UploadFileAsync("E:\\Project\\HOT\\iOS.json", "Version/iOS.json");
-            // Console.WriteLine(data);
-            await PrDingTalk.SendMarkdown("任务:上传谷歌云资源", "#### 任务:上传谷歌云资源 \n > 本地路径不存在\n >",
-                "51b339b8fbd7c7361de3c254d51b18b6b5437de2caf4f9ebedfc15b87c984e25",
-                "SEC6d96f1c202620a3b8f8fe4c77608917f93ccf452537933338a2c9345ed413bc7");
+        }
+
+        public class TA
+        {
+            public int a;
+
+            public TA(int b = 0)
+            {
+                a = b;
+            }
+
+            public sealed override string ToString()
+            {
+                return a.ToString();
+            }
+
+            public sealed override int GetHashCode()
+            {
+                return a.GetHashCode();
+            }
+
+            public sealed override bool Equals(object obj)
+            {
+                if (obj is TA v)
+                {
+                    return a == v.a;
+                }
+
+                return false;
+            }
+        }
+
+
+        private static void LoadAsset()
+        {
+            Console.WriteLine("11111111111111111");
+        }
+
+        private static void LoadAsset1()
+        {
+            Console.WriteLine("222222222222222");
+        }
+
+        static void Test()
+        {
+            // 将 aIntPtr 指针替换为 bIntPtr 指针
+            unsafe
+            {
+                var loadAssetMethod =
+                    typeof(Program).GetMethod(nameof(LoadAsset), BindingFlags.Static | BindingFlags.NonPublic);
+                var loadAsset1Method =
+                    typeof(Program).GetMethod(nameof(LoadAsset1), BindingFlags.Static | BindingFlags.NonPublic);
+
+                // 获取函数地址
+
+                var aIntPtr = loadAssetMethod.GetMethodBody().GetILAsByteArray().Length;
+                var bIntPtr = loadAsset1Method.GetMethodBody().GetILAsByteArray().Length;
+                Console.WriteLine(aIntPtr);
+                Console.WriteLine(bIntPtr);
+
+                LoadAsset();
+                Console.WriteLine("---------------------------");
+                LoadAsset1();
+
+                // loadAssetMethod.Invoke(null, null);
+                // Console.WriteLine("---------------------------");
+                // loadAsset1Method.Invoke(null, null);
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿#if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 
 namespace AIO
@@ -9,13 +10,25 @@ namespace AIO
     {
         private static class EditorCoroutineLooper
         {
-            private static readonly List<IEnumerator> Looper = new List<IEnumerator>();
-            private static readonly List<IEnumerator> DropItems = new List<IEnumerator>();
+            private static readonly List<IEnumerator> Looper;
+            private static readonly List<IEnumerator> DropItems;
             private static bool M_Started;
 
-            public static void StartCoroutine(IEnumerator iterator)
+            static EditorCoroutineLooper()
             {
-                if (iterator == null) return;
+                Looper = new List<IEnumerator>();
+                DropItems = new List<IEnumerator>();
+                EditorApplication.quitting += () =>
+                {
+                    Looper.Clear();
+                    DropItems.Clear();
+                    M_Started = false;
+                };
+            }
+
+            public static void Start(IEnumerator iterator)
+            {
+                if (iterator is null) return;
                 if (!Looper.Contains(iterator)) Looper.Add(iterator);
                 if (Looper.Count == 0) return;
                 if (M_Started) return;
@@ -23,9 +36,9 @@ namespace AIO
                 EditorApplication.update += Update;
             }
 
-            public static void StopCoroutine(IEnumerator iterator)
+            public static void Stop(IEnumerator iterator)
             {
-                if (iterator == null) return;
+                if (iterator is null) return;
                 if (!Looper.Contains(iterator)) return;
                 Looper.Remove(iterator);
                 instance.StopCoroutine(iterator);
@@ -35,32 +48,26 @@ namespace AIO
             {
                 if (Looper.Count > 0)
                 {
-                    using (var items = Looper.GetEnumerator())
+                    lock (Looper)
                     {
-                        while (items.MoveNext())
+                        using (var items = Looper.GetEnumerator())
                         {
-                            var item = items.Current;
-                            if (instance == null) //卸载时丢弃Looper
+                            while (items.MoveNext())
                             {
-                                DropItems.Add(item);
-                                continue;
+                                var item = items.Current;
+                                if (instance == null) //卸载时丢弃Looper
+                                {
+                                    DropItems.Add(item);
+                                    continue;
+                                }
+
+                                if (!instance.gameObject.activeInHierarchy) continue; //隐藏时别执行Loop
+                                if (item != null && !item.MoveNext()) DropItems.Add(item); //执行Loop，执行完毕也丢弃Looper
                             }
 
-                            //隐藏时别执行Loop
-                            if (!instance.gameObject.activeInHierarchy) continue;
-
-                            //执行Loop，执行完毕也丢弃Looper
-                            if (item != null && !item.MoveNext()) DropItems.Add(item);
+                            foreach (var t in DropItems.Where(t => t != null)) Looper.Remove(t); //集中处理丢弃的Looper
+                            DropItems.Clear();
                         }
-
-                        //集中处理丢弃的Looper
-                        for (var i = 0; i < DropItems.Count; i++)
-                        {
-                            if (DropItems[i] == null) continue;
-                            Looper.Remove(DropItems[i]);
-                        }
-
-                        DropItems.Clear();
                     }
 
                     if (Looper.Count > 0) return;

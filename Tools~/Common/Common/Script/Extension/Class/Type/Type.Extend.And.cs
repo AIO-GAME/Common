@@ -24,10 +24,10 @@ namespace AIO
         /// <returns>包含指定类型的基类和实现的接口列表的 <see cref="IEnumerable{Type}"/> 对象。</returns>
         public static IEnumerable<Type> BaseTypeAndInterfaces(this Type type, bool inheritedInterfaces = true)
         {
-            var types = Enumerable.Empty<Type>();
-            if (type.BaseType != null) types = types.Concat(type.BaseType.Yield());
-            types = types.Concat(type.GetInterfaces(inheritedInterfaces));
-            return types;
+            var empty = Enumerable.Empty<Type>();
+            if (type.BaseType != null) empty = empty.Concat(type.BaseType.Yield());
+            empty = empty.Concat(type.GetInterfaces(inheritedInterfaces));
+            return empty;
         }
 
         /// <summary>

@@ -1,10 +1,4 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-12-15
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
-
-using System;
+﻿using System;
 using System.Collections;
 using System.Threading;
 using System.Threading.Tasks;
@@ -207,7 +201,7 @@ namespace AIO
         /// </summary>
         protected virtual IEnumerator OnWaitCo()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />
@@ -286,6 +280,13 @@ namespace AIO
         {
             cancellationTokenSource.Dispose();
             OnDispose();
+            if (!(Event is null))
+            {
+                Event.Dispose();
+                Event = null;
+            }
+
+            GC.Collect();
         }
 
         /// <summary>

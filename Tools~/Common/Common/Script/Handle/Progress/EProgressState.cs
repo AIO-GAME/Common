@@ -1,10 +1,4 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-12-17
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
-
-namespace AIO
+﻿namespace AIO
 {
     /// <summary>
     /// 进度状态

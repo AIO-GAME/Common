@@ -223,14 +223,14 @@
             <param name="closedConstructedParameterTypes">用于构造泛型参数的类型</param>
             <returns>构造的泛型方法的 MethodInfo 对象</returns>
         </member>
-        <member name="M:AIO.ExtendMethodInfo.IsUserDefinedConversion(System.Reflection.MethodInfo)">
+        <member name="M:AIO.ExtendMethodInfo.IsUserDefinedConversion(System.Reflection.MethodBase)">
             <summary>
             检查给定方法是否为用户定义的转换运算符。
             </summary>
             <param name="method">要检查的方法</param>
             <returns>如果方法为用户定义的转换运算符，则为 true；否则为 false。</returns>
         </member>
-        <member name="M:AIO.ExtendMethodInfo.IsExtensionMethod(System.Reflection.MemberInfo)">
+        <member name="M:AIO.ExtendMethodInfo.IsExtensionMethod(System.Reflection.MethodBase)">
             <summary>
             判断一个成员是否为扩展方法。
             </summary>
@@ -239,9 +239,9 @@
             <remarks>
             扩展方法必须定义在静态类中，并且必须被 static 关键字修饰。
             </remarks>
-            <inheritdoc cref="T:System.Reflection.MemberInfo"/>
+            <inheritdoc cref="T:System.Reflection.MethodBase"/>
         </member>
-        <member name="M:AIO.ExtendMethodInfo.IsExtension(System.Reflection.MethodInfo)">
+        <member name="M:AIO.ExtendMethodInfo.IsExtension(System.Reflection.MethodBase)">
             <summary>
             判断一个方法是否为扩展方法。
             </summary>
@@ -250,9 +250,9 @@
             <remarks>
             扩展方法必须定义在静态类中，并且必须被 static 关键字修饰。
             </remarks>
-            <inheritdoc cref="T:System.Reflection.MethodInfo"/>
+            <inheritdoc cref="T:System.Reflection.MethodBase"/>
         </member>
-        <member name="M:AIO.ExtendMethodInfo.HasAttribute``1(System.Reflection.MemberInfo,System.Boolean)">
+        <member name="M:AIO.ExtendMethodInfo.HasAttribute``1(System.Reflection.MethodBase,System.Boolean)">
             <summary>
             判断指定的元素是否具有指定类型的特性。
             </summary>
@@ -263,18 +263,17 @@
             <remarks>
             特性是在编译时确定的元数据，可以用于为程序集、模块、类型、成员等元素添加元数据。
             </remarks>
-            <inheritdoc cref="T:System.Reflection.MemberInfo"/>
+            <inheritdoc cref="T:System.Reflection.MethodBase"/>
         </member>
-        <member name="M:AIO.ExtendMethodInfo.IsStatic(System.Reflection.MemberInfo)">
+        <member name="M:AIO.ExtendMethodInfo.IsOpAsync(System.Reflection.MethodBase)">
             <summary>
-            判断一个成员是否为静态成员。
+            是否为异步方法 有 async 修饰
             </summary>
-            <param name="memberInfo">要判断的成员。</param>
-            <returns>如果成员是静态成员，则返回 true；否则返回 false。</returns>
-            <remarks>
-            静态成员属于类型，而不是对象。静态成员可以通过类型名或实例访问。
-            </remarks>
-            <inheritdoc cref="T:System.Reflection.MemberInfo"/>
+        </member>
+        <member name="M:AIO.ExtendMethodInfo.IsOpUnsafe(System.Reflection.MethodBase)">
+            <summary>
+            是否为unsafe方法
+            </summary>
         </member>
         <member name="T:AIO.ExtendParameterInfo">
             <summary>
@@ -311,36 +310,34 @@
             Sort 扩展
             </summary>
         </member>
-        <member name="M:AIO.ExtendSort.SortBucket(System.Collections.Generic.IList{System.Decimal},System.Int32@)">
+        <member name="M:AIO.ExtendSort.SortBubble``1(System.Collections.Generic.IList{``0})">
             <summary>
-            桶排序
+            单向冒泡排序
             </summary>
         </member>
-        <member name="M:AIO.ExtendSort.SortBucket(System.Collections.Generic.IList{System.Double},System.Int32@)">
+        <member name="M:AIO.ExtendSort.SortBubble``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Int32}@)">
             <summary>
-            桶排序
+            单向冒泡排序
             </summary>
         </member>
-        <member name="M:AIO.ExtendSort.AutomaticArray``1(System.Array@,``0@)">
+        <member name="M:AIO.ExtendSort.SortBubbleTwoWay``1(System.Collections.Generic.IList{``0})">
             <summary>
-            自动扩容，并保存数据
+            双向冒泡排序
             </summary>
         </member>
-        <member name="M:AIO.ExtendSort.InsertIntoLinkList``1(System.Collections.Generic.LinkedList{``0},``0)">
-            <summary>  
-            按升序插入 linklist   
-            </summary>  
-            <param name="linkedList"> 要排序的链表 </param>  
-            <param name="num"> 要插入排序的数字 </param>  
-        </member>
-        <member name="M:AIO.ExtendSort.SortShell``1(System.Collections.Generic.IList{``0})">
+        <member name="M:AIO.ExtendSort.SortBubbleTwoWay``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Int32}@)">
             <summary>
-            希尔排序
+            双向冒泡排序
             </summary>
         </member>
-        <member name="M:AIO.ExtendSort.SortShell``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Int32}@)">
+        <member name="M:AIO.ExtendSort.SortQuick``1(System.Collections.Generic.IList{``0})">
             <summary>
-            希尔排序
+            快速排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortQuick``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Int32}@)">
+            <summary>
+            快速排序
             </summary>
         </member>
         <member name="M:AIO.ExtendSort.SortSelect``1(System.Collections.Generic.IList{``0})">
@@ -397,49 +394,9 @@
             插入排序
             </summary>
         </member>
-        <member name="M:AIO.ExtendSort.SortQuick``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            快速排序
-            </summary>
-        </member>
-        <member name="M:AIO.ExtendSort.SortQuick``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Int32}@)">
-            <summary>
-            快速排序
-            </summary>
-        </member>
-        <member name="M:AIO.ExtendSort.SortBubble``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            单向冒泡排序
-            </summary>
-        </member>
-        <member name="M:AIO.ExtendSort.SortBubble``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Int32}@)">
-            <summary>
-            单向冒泡排序
-            </summary>
-        </member>
-        <member name="M:AIO.ExtendSort.SortBubbleTwoWay``1(System.Collections.Generic.IList{``0})">
-            <summary>
-            双向冒泡排序
-            </summary>
-        </member>
-        <member name="M:AIO.ExtendSort.SortBubbleTwoWay``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Int32}@)">
-            <summary>
-            双向冒泡排序
-            </summary>
-        </member>
-        <member name="M:AIO.ExtendSort.SortBucket(System.Collections.Generic.IList{System.Single},System.Int32@)">
+        <member name="M:AIO.ExtendSort.SortBucket(System.Collections.Generic.IList{System.SByte})">
             <summary>
             桶排序
-            </summary>
-        </member>
-        <member name="M:AIO.ExtendSort.Bucket(System.Collections.Generic.IList{System.Int16}@)">
-            <summary>
-            桶排序
-            </summary>
-        </member>
-        <member name="M:AIO.ExtendSort.Radix(System.Collections.Generic.IList{System.Int16}@)">
-            <summary>
-            基数排序
             </summary>
         </member>
         <member name="M:AIO.ExtendSort.SortBucket(System.Collections.Generic.IList{System.Int32})">
@@ -447,29 +404,342 @@
             桶排序
             </summary>
         </member>
+        <member name="M:AIO.ExtendSort.SortBucket(System.Collections.Generic.IList{System.Int64})">
+            <summary>
+            桶排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortBucket(System.Collections.Generic.IList{System.Byte})">
+            <summary>
+            桶排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortBucket(System.Collections.Generic.IList{System.Int16}@)">
+            <summary>
+            桶排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.AutomaticArray``1(System.Array@,``0@)">
+            <summary>
+            自动扩容，并保存数据
+            </summary>
+            <remarks>
+            如果数组为空，则创建一个新数组并保存数据
+            重新分配内存并保存数据
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendSort.InsertIntoLinkList``1(System.Collections.Generic.LinkedList{``0},``0)">
+            <summary>  
+            按升序插入 linklist   
+            </summary>  
+            <param name="linkedList"> 要排序的链表 </param>  
+            <param name="num"> 要插入排序的数字 </param>  
+        </member>
+        <member name="M:AIO.ExtendSort.Sort``1(System.Collections.Generic.IList{``0},AIO.ESort@)">
+            <summary>
+            数组排序 
+            </summary>
+            <param name="array">数组</param>
+            <param name="sort">排序方式</param>
+            <returns>排序后的数组 可无需赋值</returns>
+            <remarks>支持快速排序、冒泡排序、双向冒泡排序、选择排序、插入排序、希尔排序、堆排序、归并排序、桶排序、基数排序</remarks>
+            <exception cref="T:System.ArgumentOutOfRangeException">传入的排序方式不在枚举内</exception>
+            <exception cref="T:System.ArgumentNullException">传入的数组为空</exception>
+        </member>
+        <member name="M:AIO.ExtendSort.Sort``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Int32}@,AIO.ESort@)">
+            <summary>
+            数组排序 
+            </summary>
+            <param name="array">数组</param>
+            <param name="comparer">比较器</param>
+            <param name="sort">排序方式</param>
+            <returns>排序后的数组 可无需赋值</returns>
+            <remarks>支持快速排序、冒泡排序、双向冒泡排序、选择排序、插入排序、希尔排序、堆排序、归并排序、桶排序、基数排序</remarks>
+            <exception cref="T:System.ArgumentOutOfRangeException">传入的排序方式不在枚举内</exception>
+            <exception cref="T:System.ArgumentNullException">传入的数组为空</exception>
+        </member>
+        <member name="M:AIO.ExtendSort.Sort``1(``0[],AIO.ESort@)">
+            <summary>
+            数组排序 
+            </summary>
+            <param name="array">数组</param>
+            <param name="sort">排序方式</param>
+            <returns>排序后的数组 可无需赋值</returns>
+            <remarks>支持快速排序、冒泡排序、双向冒泡排序、选择排序、插入排序、希尔排序、堆排序、归并排序、桶排序、基数排序</remarks>
+            <exception cref="T:System.ArgumentOutOfRangeException">传入的排序方式不在枚举内</exception>
+            <exception cref="T:System.ArgumentNullException">传入的数组为空</exception>
+        </member>
+        <member name="M:AIO.ExtendSort.Sort``1(``0[],System.Func{``0,``0,System.Int32}@,AIO.ESort@)">
+            <summary>
+            数组排序 
+            </summary>
+            <param name="array">数组</param>
+            <param name="comparer">比较器</param>
+            <param name="sort">排序方式</param>
+            <returns>排序后的数组 可无需赋值</returns>
+            <remarks>支持快速排序、冒泡排序、双向冒泡排序、选择排序、插入排序、希尔排序、堆排序、归并排序、桶排序、基数排序</remarks>
+            <exception cref="T:System.ArgumentOutOfRangeException">传入的排序方式不在枚举内</exception>
+            <exception cref="T:System.ArgumentNullException">传入的数组为空</exception>
+        </member>
+        <member name="M:AIO.ExtendSort.SortShell``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            希尔排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortShell``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Int32}@)">
+            <summary>
+            希尔排序
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.Sort(System.SByte[],AIO.ESort@)">
+            <summary>
+            数组排序 
+            </summary>
+            <param name="array">数组</param>
+            <param name="sort">排序方式</param>
+            <returns>排序后的数组 可无需赋值</returns>
+            <remarks>支持快速排序、冒泡排序、双向冒泡排序、选择排序、插入排序、希尔排序、堆排序、归并排序、桶排序、基数排序</remarks>
+            <exception cref="T:System.ArgumentOutOfRangeException">传入的排序方式不在枚举内</exception>
+            <exception cref="T:System.ArgumentNullException">传入的数组为空</exception>
+        </member>
+        <member name="M:AIO.ExtendSort.Sort(System.Int16[],AIO.ESort)">
+            <summary>
+            数组排序 
+            </summary>
+            <param name="array">数组</param>
+            <param name="sort">排序方式</param>
+            <returns>排序后的数组 可无需赋值</returns>
+            <remarks>支持快速排序、冒泡排序、双向冒泡排序、选择排序、插入排序、希尔排序、堆排序、归并排序、桶排序、基数排序</remarks>
+            <exception cref="T:System.ArgumentOutOfRangeException">传入的排序方式不在枚举内</exception>
+            <exception cref="T:System.ArgumentNullException">传入的数组为空</exception>
+        </member>
+        <member name="M:AIO.ExtendSort.Sort(System.UInt64[],AIO.ESort@)">
+            <summary>
+            数组排序 
+            </summary>
+            <param name="array">数组</param>
+            <param name="sort">排序方式</param>
+            <returns>排序后的数组 可无需赋值</returns>
+            <remarks>支持快速排序、冒泡排序、双向冒泡排序、选择排序、插入排序、希尔排序、堆排序、归并排序、桶排序、基数排序</remarks>
+            <exception cref="T:System.ArgumentOutOfRangeException">传入的排序方式不在枚举内</exception>
+            <exception cref="T:System.ArgumentNullException">传入的数组为空</exception>
+        </member>
+        <member name="M:AIO.ExtendSort.Sort(System.UInt32[],AIO.ESort@)">
+            <summary>
+            数组排序 
+            </summary>
+            <param name="array">数组</param>
+            <param name="sort">排序方式</param>
+            <returns>排序后的数组 可无需赋值</returns>
+            <remarks>支持快速排序、冒泡排序、双向冒泡排序、选择排序、插入排序、希尔排序、堆排序、归并排序、桶排序、基数排序</remarks>
+            <exception cref="T:System.ArgumentOutOfRangeException">传入的排序方式不在枚举内</exception>
+            <exception cref="T:System.ArgumentNullException">传入的数组为空</exception>
+        </member>
+        <member name="M:AIO.ExtendSort.Sort(System.Int32[],AIO.ESort@)">
+            <summary>
+            数组排序 
+            </summary>
+            <param name="array">数组</param>
+            <param name="sort">排序方式</param>
+            <returns>排序后的数组 可无需赋值</returns>
+            <remarks>支持快速排序、冒泡排序、双向冒泡排序、选择排序、插入排序、希尔排序、堆排序、归并排序、桶排序、基数排序</remarks>
+            <exception cref="T:System.ArgumentOutOfRangeException">传入的排序方式不在枚举内</exception>
+            <exception cref="T:System.ArgumentNullException">传入的数组为空</exception>
+        </member>
+        <member name="M:AIO.ExtendSort.Sort(System.Int64[],AIO.ESort@)">
+            <summary>
+            数组排序 
+            </summary>
+            <param name="array">数组</param>
+            <param name="sort">排序方式</param>
+            <returns>排序后的数组 可无需赋值</returns>
+            <remarks>支持快速排序、冒泡排序、双向冒泡排序、选择排序、插入排序、希尔排序、堆排序、归并排序、桶排序、基数排序</remarks>
+            <exception cref="T:System.ArgumentOutOfRangeException">传入的排序方式不在枚举内</exception>
+            <exception cref="T:System.ArgumentNullException">传入的数组为空</exception>
+        </member>
+        <member name="M:AIO.ExtendSort.Sort(System.Byte[],AIO.ESort@)">
+            <summary>
+            数组排序 
+            </summary>
+            <param name="array">数组</param>
+            <param name="sort">排序方式</param>
+            <returns>排序后的数组 可无需赋值</returns>
+            <remarks>支持快速排序、冒泡排序、双向冒泡排序、选择排序、插入排序、希尔排序、堆排序、归并排序、桶排序、基数排序</remarks>
+            <exception cref="T:System.ArgumentOutOfRangeException">传入的排序方式不在枚举内</exception>
+            <exception cref="T:System.ArgumentNullException">传入的数组为空</exception>
+        </member>
+        <member name="M:AIO.ExtendSort.Sort(System.UInt16[],AIO.ESort@)">
+            <summary>
+            数组排序 
+            </summary>
+            <param name="array">数组</param>
+            <param name="sort">排序方式</param>
+            <returns>排序后的数组 可无需赋值</returns>
+            <remarks>支持快速排序、冒泡排序、双向冒泡排序、选择排序、插入排序、希尔排序、堆排序、归并排序、桶排序、基数排序</remarks>
+            <exception cref="T:System.ArgumentOutOfRangeException">传入的排序方式不在枚举内</exception>
+            <exception cref="T:System.ArgumentNullException">传入的数组为空</exception>
+        </member>
+        <member name="M:AIO.ExtendSort.Sort(System.Collections.Generic.IList{System.UInt16},AIO.ESort@)">
+            <summary>
+            数组排序 
+            </summary>
+            <param name="array">数组</param>
+            <param name="sort">排序方式</param>
+            <returns>排序后的数组 可无需赋值</returns>
+            <remarks>支持快速排序、冒泡排序、双向冒泡排序、选择排序、插入排序、希尔排序、堆排序、归并排序、桶排序、基数排序</remarks>
+            <exception cref="T:System.ArgumentOutOfRangeException">传入的排序方式不在枚举内</exception>
+            <exception cref="T:System.ArgumentNullException">传入的数组为空</exception>
+        </member>
+        <member name="M:AIO.ExtendSort.Sort(System.Collections.Generic.IList{System.Byte},AIO.ESort@)">
+            <summary>
+            数组排序 
+            </summary>
+            <param name="array">数组</param>
+            <param name="sort">排序方式</param>
+            <returns>排序后的数组 可无需赋值</returns>
+            <remarks>支持快速排序、冒泡排序、双向冒泡排序、选择排序、插入排序、希尔排序、堆排序、归并排序、桶排序、基数排序</remarks>
+            <exception cref="T:System.ArgumentOutOfRangeException">传入的排序方式不在枚举内</exception>
+            <exception cref="T:System.ArgumentNullException">传入的数组为空</exception>
+        </member>
+        <member name="M:AIO.ExtendSort.Sort(System.Collections.Generic.IList{System.Int64},AIO.ESort@)">
+            <summary>
+            数组排序 
+            </summary>
+            <param name="array">数组</param>
+            <param name="sort">排序方式</param>
+            <returns>排序后的数组 可无需赋值</returns>
+            <remarks>支持快速排序、冒泡排序、双向冒泡排序、选择排序、插入排序、希尔排序、堆排序、归并排序、桶排序、基数排序</remarks>
+            <exception cref="T:System.ArgumentOutOfRangeException">传入的排序方式不在枚举内</exception>
+            <exception cref="T:System.ArgumentNullException">传入的数组为空</exception>
+        </member>
+        <member name="M:AIO.ExtendSort.Sort(System.Collections.Generic.IList{System.Int32},AIO.ESort@)">
+            <summary>
+            数组排序 
+            </summary>
+            <param name="array">数组</param>
+            <param name="sort">排序方式</param>
+            <returns>排序后的数组 可无需赋值</returns>
+            <remarks>支持快速排序、冒泡排序、双向冒泡排序、选择排序、插入排序、希尔排序、堆排序、归并排序、桶排序、基数排序</remarks>
+            <exception cref="T:System.ArgumentOutOfRangeException">传入的排序方式不在枚举内</exception>
+            <exception cref="T:System.ArgumentNullException">传入的数组为空</exception>
+        </member>
+        <member name="M:AIO.ExtendSort.Sort(System.Collections.Generic.IList{System.Int16},AIO.ESort@)">
+            <summary>
+            数组排序 
+            </summary>
+            <param name="array">数组</param>
+            <param name="sort">排序方式</param>
+            <returns>排序后的数组 可无需赋值</returns>
+            <remarks>支持快速排序、冒泡排序、双向冒泡排序、选择排序、插入排序、希尔排序、堆排序、归并排序、桶排序、基数排序</remarks>
+            <exception cref="T:System.ArgumentOutOfRangeException">传入的排序方式不在枚举内</exception>
+            <exception cref="T:System.ArgumentNullException">传入的数组为空</exception>
+        </member>
+        <member name="M:AIO.ExtendSort.Sort(System.Collections.Generic.IList{System.SByte},AIO.ESort@)">
+            <summary>
+            数组排序 
+            </summary>
+            <param name="array">数组</param>
+            <param name="sort">排序方式</param>
+            <returns>排序后的数组 可无需赋值</returns>
+            <remarks>支持快速排序、冒泡排序、双向冒泡排序、选择排序、插入排序、希尔排序、堆排序、归并排序、桶排序、基数排序</remarks>
+            <exception cref="T:System.ArgumentOutOfRangeException">传入的排序方式不在枚举内</exception>
+            <exception cref="T:System.ArgumentNullException">传入的数组为空</exception>
+        </member>
+        <member name="M:AIO.ExtendSort.Sort(System.Collections.Generic.IList{System.UInt32},AIO.ESort@)">
+            <summary>
+            数组排序 
+            </summary>
+            <param name="array">数组</param>
+            <param name="sort">排序方式</param>
+            <returns>排序后的数组 可无需赋值</returns>
+            <remarks>支持快速排序、冒泡排序、双向冒泡排序、选择排序、插入排序、希尔排序、堆排序、归并排序、桶排序、基数排序</remarks>
+            <exception cref="T:System.ArgumentOutOfRangeException">传入的排序方式不在枚举内</exception>
+            <exception cref="T:System.ArgumentNullException">传入的数组为空</exception>
+        </member>
+        <member name="M:AIO.ExtendSort.Sort(System.Collections.Generic.IList{System.UInt64},AIO.ESort@)">
+            <summary>
+            数组排序 
+            </summary>
+            <param name="array">数组</param>
+            <param name="sort">排序方式</param>
+            <returns>排序后的数组 可无需赋值</returns>
+            <remarks>支持快速排序、冒泡排序、双向冒泡排序、选择排序、插入排序、希尔排序、堆排序、归并排序、桶排序、基数排序</remarks>
+            <exception cref="T:System.ArgumentOutOfRangeException">传入的排序方式不在枚举内</exception>
+            <exception cref="T:System.ArgumentNullException">传入的数组为空</exception>
+        </member>
         <member name="M:AIO.ExtendSort.SortRadix(System.Collections.Generic.IList{System.Int32})">
             <summary>
             基数排序
             </summary>
         </member>
-        <member name="M:AIO.ExtendSort.SortCounting(System.Collections.Generic.IList{System.Int32})">
-            <summary>
-            计数排序
-            </summary>
-        </member>
-        <member name="M:AIO.ExtendSort.SortCounting(System.Collections.Generic.IList{System.Int64})">
-            <summary>
-            计数排序
-            </summary>
-        </member>
-        <member name="M:AIO.ExtendSort.SortRadix(System.Collections.Generic.IList{System.Int64})">
+        <member name="M:AIO.ExtendSort.SortRadix(System.Collections.Generic.IList{System.Int16}@)">
             <summary>
             基数排序
             </summary>
         </member>
-        <member name="M:AIO.ExtendSort.SortBucket(System.Collections.Generic.IList{System.Int64})">
+        <member name="M:AIO.ExtendSort.SortRadix(System.Collections.Generic.IList{System.SByte}@)">
             <summary>
-            桶排序
+            基数排序
+            </summary>
+        </member>
+        <member name="T:AIO.ESort">
+            <summary>
+            排序枚举
+            </summary>
+        </member>
+        <member name="F:AIO.ESort.Counting">
+            <summary>
+            非比较排序: 计数排序 适用于数据量大但数据范围小的情况
+            </summary>
+        </member>
+        <member name="F:AIO.ESort.Radix">
+            <summary>
+            非比较排序: 基数排序 适用于数据量大但数据范围小的情况
+            </summary>
+        </member>
+        <member name="F:AIO.ESort.Bucket">
+            <summary>
+            非比较排序: 桶排序 适用于数据量大但数据范围小的情况
+            </summary>
+        </member>
+        <member name="F:AIO.ESort.Bubble">
+            <summary>
+            比较排序: 冒泡排序 
+            </summary>
+        </member>
+        <member name="F:AIO.ESort.BubbleTwoWay">
+            <summary>
+            比较排序: 双向冒泡排序
+            </summary>
+        </member>
+        <member name="F:AIO.ESort.Select">
+            <summary>
+            比较排序: 选择排序
+            </summary>
+        </member>
+        <member name="F:AIO.ESort.Insert">
+            <summary>
+            比较排序: 插入排序
+            </summary>
+        </member>
+        <member name="F:AIO.ESort.Shell">
+            <summary>
+            比较排序: 希尔排序
+            </summary>
+        </member>
+        <member name="F:AIO.ESort.Heap">
+            <summary>
+            比较排序: 堆排序
+            </summary>
+        </member>
+        <member name="F:AIO.ESort.Merge">
+            <summary>
+            比较排序: 归并排序
+            </summary>
+        </member>
+        <member name="F:AIO.ESort.Quick">
+            <summary>
+            比较排序: 快速排序
             </summary>
         </member>
         <member name="T:AIO.StreamExtend">
@@ -1248,6 +1518,202 @@
             <param name="value">要移除的字符串。</param>
             <returns>移除指定字符串后的新字符串，或者如果当前字符串不是以指定字符串结尾，则返回原始字符串。</returns>
         </member>
+        <member name="T:AIO.MethodReflectionInfo">
+            <summary>
+            函数反射信息
+            </summary>
+        </member>
+        <member name="P:AIO.MethodReflectionInfo.Empty">
+            <summary>
+            空
+            </summary>
+        </member>
+        <member name="P:AIO.MethodReflectionInfo.GenericArguments">
+            <summary>
+            泛型申明
+            </summary>
+        </member>
+        <member name="P:AIO.MethodReflectionInfo.ParameterNames">
+            <summary>
+            参数列表
+            </summary>
+        </member>
+        <member name="P:AIO.MethodReflectionInfo.ParameterTypes">
+            <summary>
+            参数列表
+            </summary>
+        </member>
+        <member name="P:AIO.MethodReflectionInfo.GenericConstraints">
+            <summary>
+            泛型约束
+            </summary>
+        </member>
+        <member name="P:AIO.MethodReflectionInfo.ReturnType">
+            <summary>
+            返回类型
+            </summary>
+        </member>
+        <member name="P:AIO.MethodReflectionInfo.IsAsync">
+            <summary>
+            是否为异步
+            </summary>
+        </member>
+        <member name="P:AIO.MethodReflectionInfo.FullGenericArgument">
+            <summary>
+            泛型申明
+            </summary>
+        </member>
+        <member name="P:AIO.MethodReflectionInfo.FullParameter">
+            <summary>
+            参数
+            </summary>
+        </member>
+        <member name="P:AIO.MethodReflectionInfo.FullGenericConstraint">
+            <summary>
+            泛型约束
+            </summary>
+        </member>
+        <member name="M:AIO.MethodReflectionInfo.#ctor(System.Reflection.MethodInfo)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.MethodReflectionInfo.FullDescription">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.MethodReflectionInfo.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.ParameterInfoReflectionInfo">
+            <summary>
+            参数反射信息
+            </summary>
+        </member>
+        <member name="P:AIO.ParameterInfoReflectionInfo.Empty">
+            <summary>
+            空
+            </summary>
+        </member>
+        <member name="P:AIO.ParameterInfoReflectionInfo.ParameterType">
+            <summary>
+            参数类型
+            </summary>
+        </member>
+        <member name="M:AIO.ParameterInfoReflectionInfo.#ctor(System.Reflection.ParameterInfo)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ParameterInfoReflectionInfo.FullDescription">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ParameterInfoReflectionInfo.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:AIO.ReflectionInfo">
+            <summary>
+            信息别名
+            </summary>
+        </member>
+        <member name="P:AIO.ReflectionInfo.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:AIO.ReflectionInfo.Access">
+            <summary>
+            访问权限 public private protected internal
+            </summary>
+        </member>
+        <member name="P:AIO.ReflectionInfo.IsUnsafe">
+            <summary>
+            是否为不安全代码
+            </summary>
+        </member>
+        <member name="P:AIO.ReflectionInfo.IsStatic">
+            <summary>
+            是否为静态
+            </summary>
+        </member>
+        <member name="P:AIO.ReflectionInfo.IsGeneric">
+            <summary>
+            是否为泛型
+            </summary>
+        </member>
+        <member name="M:AIO.ReflectionInfo.FullDescription">
+            <summary>
+            完整描述
+            </summary>
+        </member>
+        <member name="M:AIO.ReflectionInfo.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ReflectionInfo.ToString">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ReflectionInfo.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ReflectionInfo.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ReflectionInfo.op_Implicit(AIO.ReflectionInfo)~System.String">
+            <summary>
+            隐式转换为字符串
+            </summary>
+            <param name="info"><see cref="T:AIO.ReflectionInfo"/></param>
+            <returns>字符串</returns>
+        </member>
+        <member name="T:AIO.TypeReflectionInfo">
+            <summary>
+            类型反射信息
+            </summary>
+        </member>
+        <member name="P:AIO.TypeReflectionInfo.Empty">
+            <summary>
+            空
+            </summary>
+        </member>
+        <member name="P:AIO.TypeReflectionInfo.IsGenericType">
+            <summary>
+            是否为泛型类型
+            </summary>
+        </member>
+        <member name="P:AIO.TypeReflectionInfo.FullGenericArgument">
+            <summary>
+            泛型申明
+            </summary>
+        </member>
+        <member name="P:AIO.TypeReflectionInfo.FullGenericConstraint">
+            <summary>
+            泛型约束
+            </summary>
+        </member>
+        <member name="P:AIO.TypeReflectionInfo.GenericArguments">
+            <summary>
+            泛型声明
+            </summary>
+        </member>
+        <member name="P:AIO.TypeReflectionInfo.GenericConstraints">
+            <summary>
+            泛型约束
+            </summary>
+        </member>
+        <member name="P:AIO.TypeReflectionInfo.IsArray">
+            <summary>
+            是否为数组
+            </summary>
+        </member>
+        <member name="P:AIO.TypeReflectionInfo.IsPointer">
+            <summary>
+            是否为指针
+            </summary>
+        </member>
+        <member name="M:AIO.TypeReflectionInfo.#ctor(System.Type)">
+            <inheritdoc /> 
+        </member>
+        <member name="M:AIO.TypeReflectionInfo.FullDescription">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.TypeReflectionInfo.Dispose">
+            <inheritdoc />
+        </member>
         <member name="T:AIO.ExtendType">
             <summary>
             类扩展
@@ -1637,13 +2103,37 @@
             <param name="propNames">要重置的属性名称</param>
             <param name="resetReadOnly">是否重置只读属性（默认为false）</param>
         </member>
-        <member name="M:AIO.ExtendType.To``1(System.Object)">
+        <member name="M:AIO.ExtendType.As``1(System.Object)">
             <summary>
-            使用 as 强转目标
+            转化为指定类型
             </summary>
-            <typeparam name="T">强转的类型</typeparam>
-            <param name="target">强转的对象</param>
-            <returns>转换后的对象</returns>
+        </member>
+        <member name="M:AIO.ExtendType.To``1(System.Object,System.Boolean)">
+            <summary>
+            转化为指定类型
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendType.ToDetails(System.Type)">
+            <summary>
+            转化为标准字符串 
+            </summary>
+            <remarks>
+            </remarks>
+            <param name="target">类型</param>
+            <returns> <see cref="T:AIO.TypeReflectionInfo"/> </returns>
+        </member>
+        <member name="M:AIO.ExtendType.ToDetails(System.Reflection.ParameterInfo)">
+            <summary>
+            转化为标准字符串
+            </summary>
+            <param name="parameter">参数信息</param>
+            <returns> <see cref="T:AIO.ParameterInfoReflectionInfo"/> </returns>
+        </member>
+        <member name="M:AIO.ExtendType.ToDetails(System.Reflection.MethodInfo)">
+            <summary>
+            转化为标准字符串
+            </summary>
+            <returns> <see cref="T:AIO.MethodReflectionInfo"/> </returns>
         </member>
         <member name="T:AIO.ExtendEnum">
             <summary>
@@ -3009,6 +3499,32 @@
             移除数组中指定的一组字符的所有前导匹配项。
             </summary>
         </member>
+        <member name="T:AIO.ExtendIReadOnlyDictionary">
+            <summary>
+            IReadOnlyDictionary 扩展
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendIReadOnlyDictionary.GetValue``2(System.Collections.Generic.IReadOnlyDictionary{``0,``1},``0)">
+            <summary>
+            获取值或默认值
+            </summary>
+            <param name="dictionary"> 字典 </param>
+            <param name="key"> 键 </param>
+            <typeparam name="TKey"> 键类型 </typeparam>
+            <typeparam name="TValue"> 值类型 </typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ExtendIReadOnlyDictionary.GetValue``2(System.Collections.Generic.IReadOnlyDictionary{``0,``1},``0,``1)">
+            <summary>
+            获取值或默认值
+            </summary>
+            <param name="dictionary"> 字典 </param>
+            <param name="key"> 键 </param>
+            <param name="defaultValue"> 默认值 </param>
+            <typeparam name="TKey"> 键类型 </typeparam>
+            <typeparam name="TValue"> 值类型 </typeparam>
+            <returns></returns>
+        </member>
         <member name="T:AIO.ExtendIReflect">
             <summary>
             扩展
@@ -3064,42 +3580,391 @@
             数组方法
             </summary>
         </member>
-        <member name="M:AIO.ExtendISpan.ToConverString(System.Byte[])">
+        <member name="M:AIO.ExtendISpan.MRemoveAll(System.Int16[],System.Int32)">
             <summary>
-            转化为字符串
+            移除 重复 元素 并将其移动到数组末尾
             </summary>
+            <remarks>
+            不重新分配内存 source.<see cref="M:AIO.ExtendISpan.MRemoveAll``1(``0[],``0)"/>
+            </remarks>
         </member>
-        <member name="M:AIO.ExtendISpan.ToConverString(System.Byte[],System.Int32@,System.Int32@)">
+        <member name="M:AIO.ExtendISpan.MRemoveAll(System.Int16[],System.Int64)">
             <summary>
-            获取指定字节数组转化为字符串
+            移除 重复 元素 并将其移动到数组末尾
             </summary>
+            <remarks>
+            不重新分配内存 source.<see cref="M:AIO.ExtendISpan.MRemoveAll``1(``0[],``0)"/>
+            </remarks>
         </member>
-        <member name="M:AIO.ExtendISpan.ToHexString(System.Byte[])">
+        <member name="M:AIO.ExtendISpan.Slice(System.Int32*,System.Int32@,System.Int32@)">
             <summary>
-            转化为二进制文本
+            Slice an array from start to length
             </summary>
+            <param name="array"> Array </param>
+            <param name="start"> Start index </param>
+            <param name="end"> End index </param>
+            <returns> int[] </returns>
         </member>
-        <member name="M:AIO.ExtendISpan.ToConverStringUTF8(System.Byte[])">
+        <member name="M:AIO.ExtendISpan.MRemoveAll(System.Int32[],System.Int64)">
             <summary>
-            转化为字符串 UTF8格式
+            移除 重复 元素 并将其移动到数组末尾
             </summary>
+            <remarks>
+            不重新分配内存 source.<see cref="M:AIO.ExtendISpan.MRemoveAll``1(``0[],``0)"/>
+            </remarks>
         </member>
-        <member name="M:AIO.ExtendISpan.Add``1(``0[],``0@)">
+        <member name="M:AIO.ExtendISpan.Add(System.Int64[],System.Byte@)">
             <summary>
             添加
             </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
         </member>
-        <member name="M:AIO.ExtendISpan.Add``1(``0[],``0[])">
+        <member name="M:AIO.ExtendISpan.Add(System.Int64[],System.Byte[])">
             <summary>
             添加
             </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
         </member>
-        <member name="M:AIO.ExtendISpan.Add``1(``0[],System.Collections.Generic.ICollection{``0}@)">
+        <member name="M:AIO.ExtendISpan.Add(System.Int64[],System.Collections.Generic.ICollection{System.Byte}@)">
             <summary>
             添加
             </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int64[],System.SByte@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int64[],System.SByte[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int64[],System.Collections.Generic.ICollection{System.SByte}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int64[],System.Int32@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int64[],System.Int32[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int64[],System.Collections.Generic.ICollection{System.Int32}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int64[],System.UInt32@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int64[],System.UInt32[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int64[],System.Collections.Generic.ICollection{System.UInt32}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int64[],System.Int16@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int64[],System.Int16[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int64[],System.Collections.Generic.ICollection{System.Int16}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int64[],System.UInt16@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int64[],System.UInt16[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int64[],System.Collections.Generic.ICollection{System.UInt16}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int64[],System.Int64@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int64[],System.Int64[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int64[],System.Collections.Generic.ICollection{System.Int64}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.SByte[],System.SByte@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.SByte[],System.SByte[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.SByte[],System.Collections.Generic.ICollection{System.SByte}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.MRemoveAll(System.SByte[],System.Int32)">
+            <summary>
+            移除 重复 元素 并将其移动到数组末尾
+            </summary>
+            <remarks>
+            不重新分配内存 source.<see cref="M:AIO.ExtendISpan.MRemoveAll``1(``0[],``0)"/>
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int32[],System.Byte@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int32[],System.Byte[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int32[],System.Collections.Generic.ICollection{System.Byte}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int32[],System.SByte@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int32[],System.SByte[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int32[],System.Collections.Generic.ICollection{System.SByte}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int32[],System.Int16@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int32[],System.Int16[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int32[],System.Collections.Generic.ICollection{System.Int16}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int32[],System.UInt16@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int32[],System.UInt16[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int32[],System.Collections.Generic.ICollection{System.UInt16}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add``2(``0[],``1@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add``2(``0[],``1[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add``2(``0[],System.Collections.Generic.ICollection{``1}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.CopyTo``1(``0[],``0[]@,System.Int32@)">
+            <summary>
+            复制
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendISpan.CopyTo``1(``0[],``0[]@)">
+            <summary>
+            复制
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendISpan.CopyTo``1(``0[])">
+            <summary>
+            复制
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.CopyTo()
+            </remarks>
         </member>
         <member name="M:AIO.ExtendISpan.CopyTo``1(``0[],System.Int32@)">
+            <summary>
+            复制
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.CopyTo(3)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.CopyTo``1(``0[],``0[],System.Int32@)">
+            <summary>
+            复制
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendISpan.CopyTo``1(``0[],``0[])">
             <summary>
             复制
             </summary>
@@ -3109,47 +3974,553 @@
             自动扩容
             </summary>
         </member>
-        <member name="M:AIO.ExtendISpan.Disrupt``1(``0[])">
+        <member name="M:AIO.ExtendISpan.MRandom``1(``0[])">
             <summary>
             随机打乱数组
             </summary>
             <typeparam name="T">数组类型</typeparam>
             <param name="array">数组</param>
+            <remarks>
+            不重新分配内存 source.<see cref="M:AIO.ExtendISpan.MRandom``1(``0[])"/>
+            </remarks>
         </member>
-        <member name="M:AIO.ExtendISpan.Insert``1(``0[],System.Int32@,``0[])">
+        <member name="M:AIO.ExtendISpan.Random``1(``0[])">
+            <summary>
+            随机打乱数组
+            </summary>
+            <typeparam name="T">数组类型</typeparam>
+            <param name="array">数组</param>
+            <remarks>
+            并重新分配内存 source = source.<see cref="!:Disrupt&lt;T&gt;(T[])"/>
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Insert``1(``0[],System.Int32@,``0[]@)">
             <summary>
             插入
             </summary>
+            <remarks>
+            并重新分配内存 source = source.Insert(1, new[] { 1, 2, 3 })
+            </remarks>
         </member>
         <member name="M:AIO.ExtendISpan.Insert``1(``0[],System.Int32@,System.Array@)">
             <summary>
             插入
             </summary>
+            <remarks>
+            并重新分配内存 source = source.Insert(1, new[] { 1, 2, 3 })
+            </remarks>
         </member>
         <member name="M:AIO.ExtendISpan.Insert``1(``0[],System.Int32@,``0@)">
             <summary>
             插入
             </summary>
+            <remarks>
+            并重新分配内存 source = source.Insert(1, new[] { 1, 2, 3 })
+            </remarks>
         </member>
         <member name="M:AIO.ExtendISpan.Insert``1(``0[],System.Int32,System.Collections.Generic.ICollection{``0}@)">
             <summary>
             插入
             </summary>
+            <remarks>
+            并重新分配内存 source = source.Insert(1, new[] { 1, 2, 3 })
+            </remarks>
         </member>
-        <member name="M:AIO.ExtendISpan.RemoveALL``1(``0[],``0@)">
+        <member name="M:AIO.ExtendISpan.Insert``1(``0[],System.Int32,System.Collections.Generic.IList{``0}@)">
             <summary>
-            移除
+            插入
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Insert(1, new[] { 1, 2, 3 })
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Exclude``1(``0[],``0)">
+            <summary>
+            移除 指定元素 默认移除 null
+            </summary>
+            <remarks> 不修改原始数组 </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.MExclude``1(``0[],``0)">
+            <summary>
+            将空元素移除到数组末尾
+            </summary>
+            <remarks>修改原始数组</remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.MRemoveAll``1(``0[],``0)">
+            <summary>
+            移除 重复 元素 并将其移动到数组末尾
+            </summary>
+            <remarks>修改原始数组</remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Remove``1(``0[],``0)">
+            <summary>
+            移除 重复 元素的第一个
+            </summary>
+            <remarks>修改原始数组</remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.MRemove``1(``0[],``0)">
+            <summary>
+            移除 重复 元素的第一个
+            </summary>
+            <remarks>修改原始数组</remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.MRemoveRepeat``1(``0[])">
+            <summary>
+            移除重复元素
             </summary>
         </member>
-        <member name="M:AIO.ExtendISpan.Remove``1(``0[],``0@)">
+        <member name="M:AIO.ExtendISpan.RemoveRepeat``1(``0[])">
             <summary>
-            移除
+            移除重复元素
             </summary>
+        </member>
+        <member name="M:AIO.ExtendISpan.MRemoveAt``1(``0[],System.Int32@)">
+            <summary>
+            移除 指定 下标元素
+            </summary>
+            <remarks>修改原始数组</remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.MRemoveAt``1(``0[],System.Int32[])">
+            <summary>
+            移除 指定 下标元素
+            </summary>
+            <remarks>修改原始数组</remarks>
         </member>
         <member name="M:AIO.ExtendISpan.RemoveAt``1(``0[],System.Int32@)">
             <summary>
-            移除
+            移除 指定 下标元素
             </summary>
+            <remarks>不修改原始数组</remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.RemoveAt``1(``0[],System.Int32,System.Int32[])">
+            <summary>
+            移除 指定 下标元素
+            </summary>
+            <remarks>不修改原始数组</remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Slice``1(``0[],System.Int32@,System.Int32@)">
+            <summary>
+            对数组进行切片
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Slice(1, 3)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.MRemoveAll(System.Int64[],System.Int32)">
+            <summary>
+            移除 重复 元素 并将其移动到数组末尾
+            </summary>
+            <remarks>
+            不重新分配内存 source.<see cref="M:AIO.ExtendISpan.MRemoveAll``1(``0[],``0)"/>
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int16[],System.Byte@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int16[],System.Byte[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int16[],System.Collections.Generic.ICollection{System.Byte}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int16[],System.SByte@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int16[],System.SByte[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int16[],System.Collections.Generic.ICollection{System.SByte}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int16[],System.Int16@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int16[],System.Int16[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Int16[],System.Collections.Generic.ICollection{System.Int16}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.TrimStart``1(``0[])">
+            <summary>
+            移除 数组开始指定元素
+            </summary>
+            <remarks>不修改原数组</remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.TrimStart``1(``0[],``0)">
+            <summary>
+            移除 数组开始指定元素
+            </summary>
+            <remarks>不修改原数组</remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.TrimStart``1(``0[],``0[])">
+            <summary>
+            移除 数组开始指定元素
+            </summary>
+            <remarks>不修改原数组</remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.MTrimStart``1(``0[])">
+            <summary>
+            移除 数组开始指定元素
+            </summary>
+            <remarks>修改原数组</remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.MTrimStart``1(``0[],``0)">
+            <summary>
+            移除 数组开始指定元素
+            </summary>
+            <remarks>修改原数组</remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.MTrimStart``1(``0[],``0[])">
+            <summary>
+            移除 数组开始指定元素
+            </summary>
+            <remarks>修改原数组</remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt16[],System.Byte@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt16[],System.Byte[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt16[],System.Collections.Generic.ICollection{System.Byte}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt16[],System.UInt16@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt16[],System.UInt16[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt16[],System.Collections.Generic.ICollection{System.UInt16}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.MRemoveAll(System.UInt16[],System.Int32)">
+            <summary>
+            移除 重复 元素 并将其移动到数组末尾
+            </summary>
+            <remarks>
+            不重新分配内存 source.<see cref="M:AIO.ExtendISpan.MRemoveAll``1(``0[],``0)"/>
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt32[],System.Byte@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt32[],System.Byte[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt32[],System.Collections.Generic.ICollection{System.Byte}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt32[],System.UInt16@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt32[],System.UInt16[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt32[],System.Collections.Generic.ICollection{System.UInt16}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt32[],System.UInt32@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt32[],System.UInt32[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt32[],System.Collections.Generic.ICollection{System.UInt32}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.MRemoveAll(System.UInt32[],System.Int32)">
+            <summary>
+            移除 重复 元素 并将其移动到数组末尾
+            </summary>
+            <remarks>
+            不重新分配内存 source.<see cref="M:AIO.ExtendISpan.MRemoveAll``1(``0[],``0)"/>
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt64[],System.Byte@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt64[],System.Byte[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt64[],System.Collections.Generic.ICollection{System.Byte}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt64[],System.UInt32@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt64[],System.UInt32[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt64[],System.Collections.Generic.ICollection{System.UInt32}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt64[],System.UInt16@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt64[],System.UInt16[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt64[],System.Collections.Generic.ICollection{System.UInt16}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt64[],System.UInt64@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt64[],System.UInt64[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.UInt64[],System.Collections.Generic.ICollection{System.UInt64}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.MRemoveAll(System.UInt64[],System.Int32)">
+            <summary>
+            移除 重复 元素 并将其移动到数组末尾
+            </summary>
+            <remarks>
+            不重新分配内存 source.<see cref="M:AIO.ExtendISpan.MRemoveAll``1(``0[],``0)"/>
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.MRemoveAll(System.UInt64[],System.Int64)">
+            <summary>
+            移除 重复 元素 并将其移动到数组末尾
+            </summary>
+            <remarks>
+            不重新分配内存 source.<see cref="M:AIO.ExtendISpan.MRemoveAll``1(``0[],``0)"/>
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.MRemoveAll(System.Byte[],System.Int32)">
+            <summary>
+            移除 重复 元素 并将其移动到数组末尾
+            </summary>
+            <remarks>
+            不重新分配内存 source.<see cref="M:AIO.ExtendISpan.MRemoveAll``1(``0[],``0)"/>
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.AsString(System.Byte[])">
+            <summary>
+            转化为字符串
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendISpan.AsString(System.Byte[],System.Int32@,System.Int32@)">
+            <summary>
+            获取指定字节数组转化为字符串
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendISpan.AsStringHex(System.Byte[])">
+            <summary>
+            转化为二进制文本
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendISpan.AsStringUTF8(System.Byte[])">
+            <summary>
+            转化为字符串 UTF8格式
+            </summary>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Byte[],System.Byte@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks> 
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Byte[],System.Byte[])">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
+        </member>
+        <member name="M:AIO.ExtendISpan.Add(System.Byte[],System.Collections.Generic.ICollection{System.Byte}@)">
+            <summary>
+            添加
+            </summary>
+            <remarks>
+            并重新分配内存 source = source.Add(1)
+            </remarks>
         </member>
         <member name="T:AIO.ExtendIType">
             <summary>
@@ -4691,6 +6062,11 @@
         </member>
         <member name="P:AIO.AProgressEvent.OnCancel">
             <inheritdoc />
+        </member>
+        <member name="M:AIO.AProgressEvent.Dispose">
+            <summary>
+            释放资源
+            </summary>
         </member>
         <member name="T:AIO.EProgressState">
             <summary>
@@ -17242,6 +18618,20 @@
             </summary>
             <param name="writer">The <see cref="T:System.Xml.XmlWriter"/> stream to which the object is serialized.</param>
         </member>
+        <member name="T:AIO.PoolStringBuilder">
+            <summary>
+            nameof(Pool_StringBuilder)
+            </summary>
+        </member>
+        <member name="M:AIO.PoolStringBuilder.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PoolStringBuilder.CreateEntity">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.PoolStringBuilder.GetEID(System.Text.StringBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:AIO.PoolSystem`2">
             <summary>
             一维对象池系统
@@ -17353,6 +18743,133 @@
             <summary>
             回收所有正在使用的对象
             </summary>
+        </member>
+        <member name="T:AIO.PoolSystem`1">
+            <summary>
+            
+            </summary>
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AIO.PoolSystem`1.Instance">
+            <summary>
+            实例
+            </summary>
+        </member>
+        <member name="P:AIO.PoolSystem`1.IsInstance">
+            <summary>
+            是否存在实例
+            </summary>
+        </member>
+        <member name="M:AIO.PoolSystem`1.CreateInstance``1">
+            <summary>
+            初始化系统
+            </summary>
+        </member>
+        <member name="M:AIO.PoolSystem`1.AddSurviving(`0)">
+            <summary>
+             添加存活对象
+            </summary>
+            <param name="entity">实体</param>
+        </member>
+        <member name="M:AIO.PoolSystem`1.RemoveSurviving(`0)">
+            <summary>
+            移除存活对象
+            </summary>
+            <param name="entity">实体</param>
+        </member>
+        <member name="M:AIO.PoolSystem`1.UnInstall">
+            <summary>
+            卸载系统
+            </summary>
+        </member>
+        <member name="M:AIO.PoolSystem`1.FindAll">
+            <summary>
+            查询正在使用的对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.PoolSystem`1.Find(System.Int32@)">
+            <summary>
+            查询正在使用的对象
+            </summary>
+            <param name="id">实例ID</param>
+            <returns>实例单位对象</returns>
+        </member>
+        <member name="M:AIO.PoolSystem`1.Find(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            查询正在使用的对象
+            </summary>
+            <param name="ids">实例ID列表</param>
+            <returns>实例单位对象</returns>
+        </member>
+        <member name="M:AIO.PoolSystem`1.ClearCache">
+            <summary>
+            清理缓存数据
+            </summary>
+        </member>
+        <member name="M:AIO.PoolSystem`1.Alloc">
+            <summary>
+            分配对象
+            </summary>
+            <returns>实体</returns>
+        </member>
+        <member name="M:AIO.PoolSystem`1.Recycle(`0)">
+            <summary>
+            回收对象
+            </summary>
+            <param name="entity">实体</param>
+        </member>
+        <member name="M:AIO.PoolSystem`1.Recycle(System.Int32)">
+            <summary>
+            回收对象
+            </summary>
+            <param name="eid">实体ID</param>
+        </member>
+        <member name="M:AIO.PoolSystem`1.RecycleAll">
+            <summary>
+            回收所有正在使用的对象
+            </summary>
+        </member>
+        <member name="P:AIO.PoolSystem`1.BusyPool">
+            <summary>
+            使用中的对象
+            </summary>
+        </member>
+        <member name="P:AIO.PoolSystem`1.FreePool">
+            <summary>
+            空闲的对象
+            </summary>
+        </member>
+        <member name="M:AIO.PoolSystem`1.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:AIO.PoolSystem`1.Capacity">
+            <summary>
+            容量
+            </summary>
+        </member>
+        <member name="M:AIO.PoolSystem`1.GetEID(`0)">
+            <summary>
+             获取实体唯一ID
+            </summary>
+            <param name="entity">实体</param>
+        </member>
+        <member name="M:AIO.PoolSystem`1.Clear">
+            <summary>
+             清空缓存数据
+            </summary>
+        </member>
+        <member name="M:AIO.PoolSystem`1.CreateEntity">
+            <summary>
+            分配对象
+            </summary>
+        </member>
+        <member name="M:AIO.PoolSystem`1.Dispose">
+            <inheritdoc />
         </member>
         <member name="T:AIO.PoolTypeSystem`2">
             <summary>

@@ -1,10 +1,4 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-12-17
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
-
-using System;
+﻿using System;
 
 namespace AIO
 {
@@ -33,5 +27,19 @@ namespace AIO
 
         /// <inheritdoc />
         public Action OnCancel { get; set; }
+
+        /// <summary>
+        /// 释放资源
+        /// </summary>
+        public void Dispose()
+        {
+            OnProgress = null;
+            OnComplete = null;
+            OnBegin = null;
+            OnError = null;
+            OnResume = null;
+            OnPause = null;
+            OnCancel = null;
+        }
     }
 }

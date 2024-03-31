@@ -13,17 +13,38 @@ namespace AIO
         /// </summary>
         /// <typeparam name="T">数组类型</typeparam>
         /// <param name="array">数组</param>
-        public static void Disrupt<T>(this T[] array)
+        /// <remarks>
+        /// 不重新分配内存 source.<see cref="MRandom{T}"/>
+        /// </remarks>
+        public static T[] MRandom<T>(this T[] array)
         {
-            T tmp;
-            for (int i = 0, index; i < array.Length; i++)
+            for (int i = 0, index = AHelper.Random.RandInt32(0, array.Length);
+                 i < array.Length / 2;
+                 i++)
             {
-                index = AHelper.Random.RandInt32(0, array.Length);
                 if (index == i) continue;
-                tmp = array[i];
-                array[i] = array[index];
-                array[index] = tmp;
+                (array[i], array[index]) = (array[index], array[i]);
             }
+
+            return array;
+        }
+
+        /// <summary>
+        /// 随机打乱数组
+        /// </summary>
+        /// <typeparam name="T">数组类型</typeparam>
+        /// <param name="array">数组</param>
+        /// <remarks>
+        /// 并重新分配内存 source = source.<see cref="Disrupt{T}(T[])"/>
+        /// </remarks>
+        public static T[] Random<T>(this T[] array)
+        {
+            var newArray = new T[array.Length];
+            for (int i = 0, index = AHelper.Random.RandInt32(0, array.Length);
+                 i < array.Length / 2;
+                 i++) newArray[i] = index == i ? array[i] : array[index];
+
+            return newArray;
         }
     }
 }

@@ -8,7 +8,9 @@
         "UniTask.TextMeshPro",
         "DOTween.Modules",
         "UnityEditor.UI",
-        "UnityEngine.UI"
+        "UnityEngine.UI",
+        "com.bbbirder.injection",
+        "com.bbbirder.directattribute"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
