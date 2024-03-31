@@ -41,6 +41,5 @@ namespace AIO
         {
             return Encoding.UTF8.GetString(bytes);
         }
-
     }
 }

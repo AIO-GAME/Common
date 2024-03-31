@@ -185,7 +185,6 @@ namespace AIO
                         string.Concat($"where {g.Name} : ", tempBuilder.ToString().Trim(' ', ','));
                 }
 
-
                 GenericConstraints = GenericConstraints.Exclude();
                 GenericArguments = GenericArguments.Exclude();
             }
