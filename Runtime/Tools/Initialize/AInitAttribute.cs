@@ -15,9 +15,9 @@ namespace AIO.UEditor
 
         public int Order { get; set; }
 
-        public AInitAttribute(int order = 0,
+        public AInitAttribute(int order = 0
 #if UNITY_EDITOR
-            [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = 0
+            , [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = 0
 #endif
         )
         {
@@ -28,9 +28,9 @@ namespace AIO.UEditor
             Order = order;
         }
 
-        public AInitAttribute(EInitAttrMode mode, int order = 0,
+        public AInitAttribute(EInitAttrMode mode, int order = 0
 #if UNITY_EDITOR
-            [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = 0
+            , [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = 0
 #endif
         )
         {

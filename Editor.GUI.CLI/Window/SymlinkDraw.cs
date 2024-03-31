@@ -135,6 +135,7 @@ namespace AIO.UEditor
         {
             var path = AssetDatabase.GUIDToAssetPath(guid);
             if (string.IsNullOrEmpty(path)) return;
+            if (!Directory.Exists(path)) return;
             var attribs = File.GetAttributes(path);
             if ((attribs & FOLDER_SYMLINK_ATTRIBS) == FOLDER_SYMLINK_ATTRIBS)
             {

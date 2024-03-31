@@ -289,9 +289,6 @@ namespace AIO.UEditor
                     if (file.Name.StartsWith("GitUnityProject")) continue;
                     if (savaDir.ContainsKey(file.Name))
                     {
-                        // 判断文件是否有变化
-                        // 如果有变化则删除原来的文件
-                        // 如果没有变化则不删除原来的文件
                         var old = File.ReadAllText(file.FullName, Encoding.UTF8);
                         var now = savaDir[file.Name];
                         if (old == now)
@@ -300,7 +297,7 @@ namespace AIO.UEditor
                             continue;
                         }
                     }
-                    else file.Delete();
+                    // else file.Delete();
 
                     change = true;
                 }

@@ -1,24 +1,22 @@
-﻿/*|============|*|
-|*|Author:     |*| star fire
-|*|Date:       |*| 2024-01-29
-|*|E-Mail:     |*| xinansky99@gmail.com
-|*|============|*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace AIO.UEditor
 {
     /// <summary>
     /// AInitializeOnLoad
     /// </summary>
+#if UNITY_EDITOR
     [InitializeOnLoad]
+#endif
     internal static class AInitializeOnLoad
     {
         private class Error : Exception
@@ -30,14 +28,19 @@ namespace AIO.UEditor
             }
         }
 
+#if UNITY_2022_1_OR_NEWER
+            [HideInCallstack]
+#endif
         [Conditional("UNITY_EDITOR")]
         private static void DebugLog(EInitAttrMode mode, MethodBase method)
         {
             if (method.ReflectedType is null) throw new NullReferenceException();
+#if UNITY_EDITOR
             Debug.Log(MethodsPath.TryGetValue(method.MethodHandle.Value, out var tuple)
                 ? $"<color=#F7DC6F>[Initialize] {mode} : </color> {method.ReflectedType.ToDetails()}:{method.Name} () (at {tuple.Item1}:{tuple.Item2})"
                 : $"<color=#F7DC6F>[Initialize] {mode} : </color> {method.ReflectedType.ToDetails()} : {method.Name} ()"
             );
+#endif
         }
 
         private static void DebugError(EInitAttrMode mode, MethodBase method, Exception e)
@@ -68,6 +71,7 @@ namespace AIO.UEditor
 
         private static void Processing(AInitAttribute attribute, MethodInfo method)
         {
+#if UNITY_EDITOR
             MethodsPath[method.MethodHandle.Value] = new Tuple<string, int>(
                 attribute.FilePath.Replace(Application.dataPath.Replace("Assets", ""), ""), attribute.LineNumber);
             if (attribute.Mode.HasFlag(EInitAttrMode.Editor))
@@ -81,6 +85,7 @@ namespace AIO.UEditor
                     MethodsEditor[attribute.Order].Enqueue(method);
                 }
             }
+#endif
 
             if (attribute.Mode.HasFlag(EInitAttrMode.RuntimeAfterSceneLoad))
             {
@@ -204,7 +209,7 @@ namespace AIO.UEditor
         }
 #endif
 
-        [InitializeOnEnterPlayMode, RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void RuntimeInitializeOnLoadMethod()
         {
             foreach (var method in OrdersRuntimeBeforeSceneLoad.SelectMany(item => MethodsRuntimeBeforeSceneLoad[item]))
@@ -227,7 +232,7 @@ namespace AIO.UEditor
             };
         }
 
-        [InitializeOnEnterPlayMode, RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void RuntimeInitializeAfterSceneLoadMethod()
         {
             foreach (var method in OrdersRuntimeAfterSceneLoad.SelectMany(item => MethodsRuntimeAfterSceneLoad[item]))
@@ -250,7 +255,7 @@ namespace AIO.UEditor
             };
         }
 
-        [InitializeOnEnterPlayMode, RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         private static void RuntimeInitializeAfterAssembliesLoadedMethod()
         {
             foreach (var method in OrdersRuntimeAfterAssembliesLoaded.SelectMany(item =>
@@ -274,7 +279,7 @@ namespace AIO.UEditor
             };
         }
 
-        [InitializeOnEnterPlayMode, RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
         private static void RuntimeInitializeBeforeSplashScreenMethod()
         {
             foreach (var method in OrdersRuntimeBeforeSplashScreen.SelectMany(item =>
@@ -298,7 +303,7 @@ namespace AIO.UEditor
             };
         }
 
-        [InitializeOnEnterPlayMode, RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void RuntimeInitializeSubsystemRegistrationMethod()
         {
             foreach (var method in OrdersRuntimeSubsystemRegistration.SelectMany(item =>
