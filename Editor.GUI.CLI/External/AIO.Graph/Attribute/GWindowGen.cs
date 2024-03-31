@@ -16,7 +16,7 @@ namespace AIO.UEditor
             return Path.Combine(Application.dataPath, "Editor", "Gen", "GWindow");
         }
 
-        [AInit(mode: EInitAttrMode.Editor, int.MaxValue - 2)]
+        [AInit(mode: EInitAttrMode.Editor, ushort.MaxValue - 2)]
         internal static void Generate()
         {
             var dic = new Dictionary<Type, GWindowAttribute>();

@@ -1,11 +1,12 @@
 fileFormatVersion: 2
-guid: 2ce16ae2efbd6424086108c9c7280c4b
+guid: 6da1f9d24763c0b45a5d4d923f30a845
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2
   iconMap: {}
   executionOrder: {}
-  defineConstraints: []
+  defineConstraints:
+  - '!UNITY_2020_1_OR_NEWER'
   isPreloaded: 0
   isOverridable: 1
   isExplicitlyReferenced: 0

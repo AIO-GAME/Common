@@ -1,22 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace AIO
 {
     public static partial class ExtendType
     {
         /// <summary>
-        /// 使用 as 强转目标
+        /// 转化为指定类型
         /// </summary>
-        /// <typeparam name="T">强转的类型</typeparam>
-        /// <param name="target">强转的对象</param>
-        /// <returns>转换后的对象</returns>
-        public static T To<T>(this object target) where T : class
+        public static T As<T>(this object target) where T : class
         {
             return target as T;
+        }
+
+        /// <summary>
+        /// 转化为指定类型
+        /// </summary>
+        public static T To<T>(this object? target, bool throwException = true)
+        {
+            if (target is null)
+            {
+                return throwException
+                    ? throw new ArgumentNullException(nameof(target))
+                    : (T)default;
+            }
+
+            try
+            {
+                return (T)target;
+            }
+            catch (Exception e)
+            {
+                return throwException
+                    ? throw new InvalidCastException($"Conversion failure : {e.Message}")
+                    : (T)default;
+            }
         }
 
         /// <summary>
@@ -40,7 +58,6 @@ namespace AIO
         {
             return parameter is null ? ParameterInfoReflectionInfo.Empty : new ParameterInfoReflectionInfo(parameter);
         }
-
 
         /// <summary>
         /// 转化为标准字符串

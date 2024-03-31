@@ -3,7 +3,7 @@ using DotNetDetour;
 
 namespace MonoHook
 {
-    public unsafe abstract class CodePatcher
+    public abstract unsafe class CodePatcher
     {
         public bool isValid { get; protected set; }
 

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
+using System.Reflection;
 
 namespace AIO
 {
@@ -57,36 +55,41 @@ namespace AIO
         }
 
 
-        private static T1 LoadAsset<T1, T2, T3, T4, T5, T6>(
-            in Action<T1, T2> obj,
-            params T2[] objs
-        )
-            where T2 : class
-            where T3 : class, new()
-            where T4 : struct, IComparable
-            where T5 : MyClass<T3>
-            where T6 : Enum
+        private static void LoadAsset()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("11111111111111111");
         }
 
-        private static T1 LoadAsset1<T1>()
+        private static void LoadAsset1()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("222222222222222");
         }
 
         static void Test()
         {
-            var methodInfo = typeof(Program).GetMethod(nameof(LoadAsset),
-                System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
+            // 将 aIntPtr 指针替换为 bIntPtr 指针
+            unsafe
+            {
+                var loadAssetMethod =
+                    typeof(Program).GetMethod(nameof(LoadAsset), BindingFlags.Static | BindingFlags.NonPublic);
+                var loadAsset1Method =
+                    typeof(Program).GetMethod(nameof(LoadAsset1), BindingFlags.Static | BindingFlags.NonPublic);
 
-            Console.WriteLine(methodInfo.ToDetails());
+                // 获取函数地址
 
-            var methodInfo1 = typeof(Program).GetMethod(nameof(LoadAsset1),
-                System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
-            Console.WriteLine(methodInfo1.ToDetails());
-            Console.WriteLine(typeof(MyClass<>).ToDetails());
-            Console.WriteLine(typeof(MyClass1<>).ToDetails());
+                var aIntPtr = loadAssetMethod.GetMethodBody().GetILAsByteArray().Length;
+                var bIntPtr = loadAsset1Method.GetMethodBody().GetILAsByteArray().Length;
+                Console.WriteLine(aIntPtr);
+                Console.WriteLine(bIntPtr);
+
+                LoadAsset();
+                Console.WriteLine("---------------------------");
+                LoadAsset1();
+
+                // loadAssetMethod.Invoke(null, null);
+                // Console.WriteLine("---------------------------");
+                // loadAsset1Method.Invoke(null, null);
+            }
         }
     }
 }

@@ -156,7 +156,7 @@ namespace AIO.UEditor
             DisableLog?.Invoke(null, null);
         }
 
-        [AInit(mode: EInitAttrMode.Both, int.MaxValue)]
+        [AInit(mode: EInitAttrMode.Both, int.MinValue)]
         private static void Initialize()
         {
             if (IS_EDITOR_SWITCH_ERROR) ErrorEnabled();

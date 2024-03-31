@@ -3,16 +3,13 @@
  * 对 Transform.SetPosition 进行hook的测试用例
  */
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using UnityEditor;
 using UnityEngine;
 
 namespace MonoHook.Test
 {
-    //[InitializeOnLoad]
+    //[UnityEditor.InitializeOnLoad]
     public static class Transform_SetPosition_HookTest
     {
         private static MethodHook _hook;

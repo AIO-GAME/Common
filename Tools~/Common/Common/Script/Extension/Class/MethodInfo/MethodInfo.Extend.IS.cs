@@ -12,7 +12,7 @@ namespace AIO
         /// <param name="method">要检查的方法</param>
         /// <returns>如果方法为用户定义的转换运算符，则为 true；否则为 false。</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsUserDefinedConversion(this MethodInfo method)
+        public static bool IsUserDefinedConversion(this MethodBase method)
             => method.IsSpecialName && (method.Name == "op_Implicit" || method.Name == "op_Explicit");
 
         /// <summary>
@@ -23,9 +23,9 @@ namespace AIO
         /// <remarks>
         /// 扩展方法必须定义在静态类中，并且必须被 static 关键字修饰。
         /// </remarks>
-        /// <inheritdoc cref="MemberInfo"/>
+        /// <inheritdoc cref="MethodBase"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsExtensionMethod(this MemberInfo memberInfo)
+        public static bool IsExtensionMethod(this MethodBase memberInfo)
             => memberInfo is MethodInfo methodInfo && methodInfo.IsExtension();
 
         /// <summary>
@@ -36,9 +36,9 @@ namespace AIO
         /// <remarks>
         /// 扩展方法必须定义在静态类中，并且必须被 static 关键字修饰。
         /// </remarks>
-        /// <inheritdoc cref="MethodInfo"/>
+        /// <inheritdoc cref="MethodBase"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsExtension(this MethodInfo methodInfo)
+        public static bool IsExtension(this MethodBase methodInfo)
             => methodInfo.HasAttribute<ExtensionAttribute>(false);
 
         /// <summary>
@@ -51,16 +51,16 @@ namespace AIO
         /// <remarks>
         /// 特性是在编译时确定的元数据，可以用于为程序集、模块、类型、成员等元素添加元数据。
         /// </remarks>
-        /// <inheritdoc cref="MemberInfo"/>
+        /// <inheritdoc cref="MethodBase"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool HasAttribute<TAttribute>(this MemberInfo element, bool inherit = true)
+        public static bool HasAttribute<TAttribute>(this MethodBase element, bool inherit = true)
             where TAttribute : Attribute
             => element.IsDefined(typeof(TAttribute), inherit);
 
         /// <summary>
         /// 是否为异步方法 有 async 修饰
         /// </summary>
-        public static bool IsOpAsync(this MethodInfo method)
+        public static bool IsOpAsync(this MethodBase method)
         {
             return method.GetCustomAttribute(typeof(AsyncStateMachineAttribute)) != null;
         }
@@ -68,7 +68,7 @@ namespace AIO
         /// <summary>
         /// 是否为unsafe方法
         /// </summary>
-        public static bool IsOpUnsafe(this MethodInfo method)
+        public static bool IsOpUnsafe(this MethodBase method)
         {
             return method.GetCustomAttribute(typeof(UnsafeValueTypeAttribute)) != null;
         }

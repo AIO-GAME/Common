@@ -1,10 +1,4 @@
-﻿/*|============|*|
-|*|Author:     |*| star fire
-|*|Date:       |*| 2024-01-29
-|*|E-Mail:     |*| xinansky99@gmail.com
-|*|============|*/
-
-using System;
+﻿using System;
 using System.Runtime.CompilerServices;
 
 namespace AIO.UEditor

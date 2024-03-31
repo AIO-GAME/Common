@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -171,7 +170,9 @@ namespace AIO.UEditor
                 if (type.Value.IsEnum) continue;
                 if (type.Value.IsInterface) continue;
                 foreach (var method in type.Value.GetMethods(
-                             BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic))
+                             BindingFlags.Static |
+                             BindingFlags.Public |
+                             BindingFlags.NonPublic))
                 {
                     if (!method.IsStatic) continue;
                     if (method.IsAbstract) continue;

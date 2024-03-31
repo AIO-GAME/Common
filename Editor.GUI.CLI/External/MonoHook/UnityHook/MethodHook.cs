@@ -307,7 +307,14 @@ namespace MonoHook
                 return IntPtr.Zero;
 
             if (!LDasm.IsIL2CPP())
+            {
+                if (method is DynamicMethod)
+                {
+                    throw new Exception("does not support Dynamic Method");
+                }
+        
                 return method.MethodHandle.GetFunctionPointer();
+            }
             else
             {
                 /*

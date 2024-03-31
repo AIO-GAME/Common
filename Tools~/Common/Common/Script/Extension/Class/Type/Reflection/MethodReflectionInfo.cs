@@ -72,7 +72,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 泛型参数
+        /// 参数
         /// </summary>
         public string FullParameter
         {
@@ -83,7 +83,7 @@ namespace AIO
                 for (var i = 0; i < ParameterTypes.Length; i++)
                 {
                     if (string.IsNullOrEmpty(ParameterTypes[i])) continue;
-                    str.Append(ParameterTypes[i]);
+                    str.Append(ParameterTypes[i]).Append(' ').Append(ParameterNames[i]);
                     if (i != ParameterTypes.Length - 1)
                         str.Append(", ");
                 }
@@ -154,7 +154,7 @@ namespace AIO
                     GenericArguments[index] = argument.Name;
                 }
 
-                var genericConstraints = _info.MakeGenericMethod(genericArguments).GetGenericArguments();
+                var genericConstraints = info.MakeGenericMethod(genericArguments).GetGenericArguments();
                 GenericConstraints = new string[genericConstraints.Length];
                 var tempBuilder = new StringBuilder();
                 for (var index = 0; index < genericConstraints.Length; index++)
