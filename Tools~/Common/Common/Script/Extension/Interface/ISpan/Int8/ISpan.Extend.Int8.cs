@@ -1,9 +1,6 @@
-﻿using System;
-
-namespace AIO
+﻿namespace AIO
 {
     partial class ExtendISpan
     {
-       
     }
 }

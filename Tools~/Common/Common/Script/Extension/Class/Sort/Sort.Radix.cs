@@ -238,8 +238,11 @@ namespace AIO
             var maxDigit = 0;
             if (Max == 0) maxDigit = 1;
             else
+            {
                 for (var temp = Max; temp != 0; temp /= 10)
                     maxDigit++;
+            }
+
             ArrayPool<sbyte>.Shared.Rent(array.Count);
             for (int i = 0, mod = 10, dev = 1, pos = 0; i < maxDigit; i++, dev *= 10, mod *= 10, pos = 0)
             {
@@ -270,7 +273,6 @@ namespace AIO
 
                 ArrayPool<sbyte[]>.Shared.Return(counter, true);
             }
-
 
             return array;
         }

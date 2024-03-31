@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AIO
+﻿namespace AIO
 {
     partial class ExtendISpan
     {
@@ -18,6 +16,5 @@ namespace AIO
             for (var i = 0; i < length; i++) result[i] = array[start + i];
             return result;
         }
-
     }
 }
