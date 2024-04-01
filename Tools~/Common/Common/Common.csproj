@@ -543,38 +543,100 @@
     <Compile Include="Script\Extension\Interface\IList\String\IList.String.Extend.Trim.cs" />
     <Compile Include="Script\Extension\Interface\IReadOnlyDictionary\IReadOnlyDictionary.Extend.cs" />
     <Compile Include="Script\Extension\Interface\IReflect\IReflect.Extend.Get.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\Int16\ISpan.Extend.Int16.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\Int16\ISpan.Extend.Int16.Remove.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\Int32\ISpan.Extend.Int32.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\Int32\ISpan.Extend.Int32.Remove.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\Int64\ISpan.Extend.Int64.Add.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\Int64\ISpan.Extend.Int64.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\Int8\ISpan.Extend.Int8.Add.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\Int8\ISpan.Extend.Int8.Remove.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\Int32\ISpan.Extend.Int32.Add.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\Int8\ISpan.Extend.Int8.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Add.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Copy.cs" />
     <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Disrupt.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Insert.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Remove.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Slice.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\Int64\ISpan.Extend.Int64.Remove.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\Int16\ISpan.Extend.Int16.Add.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Trim.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\UInt16\ISpan.Extend.UInt16.Add.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\UInt16\ISpan.Extend.UInt16.Remove.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\UInt16\ISpan.Extend.UInt16.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\UInt32\ISpan.Extend.UInt32.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\UInt32\ISpan.Extend.UInt32.Add.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\UInt32\ISpan.Extend.UInt32.Remove.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\UInt64\ISpan.Extend.UInt64.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\UInt64\ISpan.Extend.UInt64.Add.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\UInt64\ISpan.Extend.UInt64.Remove.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\UInt8\ISpan.Extend.UInt8.Remove.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\UInt8\ISpan.Extend.UInt8.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\UInt8\ISpan.Extend.UInt8.Add.cs" />
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Add.cs">
+      <DependentUpon>ISpan.Extend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Copy.cs">
+      <DependentUpon>ISpan.Extend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Disrupt.cs">
+      <DependentUpon>ISpan.Extend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Insert.cs">
+      <DependentUpon>ISpan.Extend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int16.Add.cs">
+      <DependentUpon>ISpan.Extend.Int16.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int16.cs">
+      <DependentUpon>ISpan.Extend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int16.Remove.cs">
+      <DependentUpon>ISpan.Extend.Int16.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int32.Add.cs" >
+      <DependentUpon>ISpan.Extend.Int32.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int32.cs" >
+      <DependentUpon>ISpan.Extend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int32.Remove.cs" >
+      <DependentUpon>ISpan.Extend.Int32.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int64.Add.cs" >
+      <DependentUpon>ISpan.Extend.Int64.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int64.cs" >
+      <DependentUpon>ISpan.Extend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int64.Remove.cs" >
+      <DependentUpon>ISpan.Extend.Int64.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int8.Add.cs" >
+      <DependentUpon>ISpan.Extend.Int8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int8.cs"  >
+      <DependentUpon>ISpan.Extend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int8.Remove.cs" >
+      <DependentUpon>ISpan.Extend.Int8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Remove.cs">
+      <DependentUpon>ISpan.Extend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Slice.cs">
+      <DependentUpon>ISpan.Extend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Trim.cs">
+      <DependentUpon>ISpan.Extend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt32.Add.cs" >
+      <DependentUpon>ISpan.Extend.UInt32.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt32.cs" >
+      <DependentUpon>ISpan.Extend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt32.Remove.cs" >
+      <DependentUpon>ISpan.Extend.UInt32.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt64.cs">
+      <DependentUpon>ISpan.Extend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt64.Add.cs">
+      <DependentUpon>ISpan.Extend.UInt64.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt64.Remove.cs">
+      <DependentUpon>ISpan.Extend.UInt64.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt16.cs">
+      <DependentUpon>ISpan.Extend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt16.Add.cs">
+      <DependentUpon>ISpan.Extend.UInt16.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt16.Remove.cs">
+      <DependentUpon>ISpan.Extend.UInt16.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt8.Add.cs" >
+      <DependentUpon>ISpan.Extend.UInt8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt8.cs"  >
+      <DependentUpon>ISpan.Extend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt8.Remove.cs"  >
+      <DependentUpon>ISpan.Extend.UInt8.cs</DependentUpon>
+    </Compile>
     <Compile Include="Script\Extension\Interface\IType\IType.Extend.cs" />
     <Compile Include="Script\Extension\Struct\Byte\Byte.Extend.To.cs" />
     <Compile Include="Script\Extension\Struct\Char\Char.Extend.cs" />

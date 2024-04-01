@@ -97,7 +97,7 @@ namespace AIO
             for (var i = len; i >= len - index; i--)
             {
                 arrays[--index] = arrays[i];
-                arrays[i] = def;
+                arrays[i]       = def;
             }
 
             return arrays;
@@ -122,7 +122,7 @@ namespace AIO
             for (var i = len; i >= len - index; i--)
             {
                 arrays[--index] = arrays[i];
-                arrays[i] = default;
+                arrays[i]       = default;
             }
 
             return arrays;
@@ -148,7 +148,7 @@ namespace AIO
             for (var i = len; i >= len - index; i--)
             {
                 arrays[--index] = arrays[i];
-                arrays[i] = def;
+                arrays[i]       = def;
             }
 
             arrays[0] = def;

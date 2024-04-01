@@ -34,7 +34,7 @@ namespace AIO
                 else if (index > 0)
                 {
                     arrays[i - index] = arrays[i];
-                    arrays[i] = default;
+                    arrays[i]         = default;
                 }
             }
 
@@ -57,7 +57,7 @@ namespace AIO
                 else if (index > 0)
                 {
                     arrays[i - index] = arrays[i];
-                    arrays[i] = default;
+                    arrays[i]         = default;
                 }
             }
 
