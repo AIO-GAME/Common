@@ -35,12 +35,12 @@ namespace AIO
 
         protected TimerContainer()
         {
-            Watch = Stopwatch.StartNew();
-            List = Pool.List<ITimerOperator>();
-            ID = NUM++;
-            Unit = 0;
+            Watch           = Stopwatch.StartNew();
+            List            = Pool.List<ITimerOperator>();
+            ID              = NUM++;
+            Unit            = 0;
             UpdateCacheTime = 0;
-            RemainNum = 0;
+            RemainNum       = 0;
         }
 
         public void Start()
@@ -48,12 +48,12 @@ namespace AIO
             if (List.Count <= 0)
             {
                 Debug.LogErrorFormat("TimerContainer.Start() -> 容器中没有操作器, 无法启动! [ID:{0}] [TYPE:{1}]", ID,
-                    GetType().FullName);
+                                     GetType().FullName);
                 return;
             }
 
             TaskHandleTokenSource = new CancellationTokenSource();
-            TaskHandleToken = TaskHandleTokenSource.Token;
+            TaskHandleToken       = TaskHandleTokenSource.Token;
             TaskHandleToken.Register(Dispose);
             TaskHandle = Task.Factory.StartNew(Update, TaskHandleToken);
         }
@@ -76,12 +76,18 @@ namespace AIO
             {
                 TaskHandleTokenSource.Dispose();
                 TaskHandleTokenSource = null;
-                TaskHandleToken = CancellationToken.None;
-                TaskHandle = null;
+                TaskHandleToken       = CancellationToken.None;
+                TaskHandle            = null;
             }
 
             if (List is null) return;
-            foreach (var item in List) item?.Dispose();
+            for (var index = 0; index < List.Count; index++)
+            {
+                if (List[index] is null) continue;
+                List[index]?.Dispose();
+                List[index] = null;
+            }
+
             List.Free();
         }
 
