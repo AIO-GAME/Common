@@ -3,13 +3,11 @@ using System.Reflection;
 
 namespace AIO
 {
-    class MyClass<T> where T : class, new()
-    {
-    }
+    class MyClass<T>
+    where T : class, new() { }
 
-    class MyClass1<T> where T : struct
-    {
-    }
+    class MyClass1<T>
+    where T : struct { }
 
     class Program
     {
@@ -20,9 +18,7 @@ namespace AIO
         }
 
         [AttributeUsage(AttributeTargets.Parameter)]
-        private class PAttribute : Attribute
-        {
-        }
+        private class PAttribute : Attribute { }
 
         public class TA
         {
@@ -67,28 +63,34 @@ namespace AIO
 
         static void Test()
         {
-            // 将 aIntPtr 指针替换为 bIntPtr 指针
-            unsafe
+            // // 将 aIntPtr 指针替换为 bIntPtr 指针
+            // unsafe
+            // {
+            //     var loadAssetMethod =
+            //         typeof(Program).GetMethod(nameof(LoadAsset), BindingFlags.Static | BindingFlags.NonPublic);
+            //     var loadAsset1Method =
+            //         typeof(Program).GetMethod(nameof(LoadAsset1), BindingFlags.Static | BindingFlags.NonPublic);
+            //
+            //     // 获取函数地址
+            //
+            //     var aIntPtr = loadAssetMethod.GetMethodBody().GetILAsByteArray().Length;
+            //     var bIntPtr = loadAsset1Method.GetMethodBody().GetILAsByteArray().Length;
+            //     Console.WriteLine(aIntPtr);
+            //     Console.WriteLine(bIntPtr);
+            //
+            //     LoadAsset();
+            //     Console.WriteLine("---------------------------");
+            //     LoadAsset1();
+            //
+            //     // loadAssetMethod.Invoke(null, null);
+            //     // Console.WriteLine("---------------------------");
+            //     // loadAsset1Method.Invoke(null, null);
+            // }
+            var content = AHelper.HTTP.Get("https://ftpshare-hot.ingcreations.com/qc/Version/Android.json");
+            Console.WriteLine(content);
+            if (string.IsNullOrEmpty(content))
             {
-                var loadAssetMethod =
-                    typeof(Program).GetMethod(nameof(LoadAsset), BindingFlags.Static | BindingFlags.NonPublic);
-                var loadAsset1Method =
-                    typeof(Program).GetMethod(nameof(LoadAsset1), BindingFlags.Static | BindingFlags.NonPublic);
-
-                // 获取函数地址
-
-                var aIntPtr = loadAssetMethod.GetMethodBody().GetILAsByteArray().Length;
-                var bIntPtr = loadAsset1Method.GetMethodBody().GetILAsByteArray().Length;
-                Console.WriteLine(aIntPtr);
-                Console.WriteLine(bIntPtr);
-
-                LoadAsset();
-                Console.WriteLine("---------------------------");
-                LoadAsset1();
-
-                // loadAssetMethod.Invoke(null, null);
-                // Console.WriteLine("---------------------------");
-                // loadAsset1Method.Invoke(null, null);
+                Console.WriteLine("请求失败");
             }
         }
     }

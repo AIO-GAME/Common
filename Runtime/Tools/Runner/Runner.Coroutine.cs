@@ -11,7 +11,7 @@ namespace AIO
         /// <summary>
         /// 执行协程
         /// </summary>
-        public static void StartCoroutine(in Action coroutine)
+        public static void StartCoroutine(Action coroutine)
         {
             SafeStartCoroutine(StartCoroutineActionEx(coroutine));
         }
@@ -25,7 +25,7 @@ namespace AIO
         /// <summary>
         /// 执行协程
         /// </summary>
-        public static void StartCoroutine(in IEnumerator coroutine)
+        public static void StartCoroutine(IEnumerator coroutine)
         {
             SafeStartCoroutine(coroutine);
         }
@@ -33,7 +33,7 @@ namespace AIO
         /// <summary>
         /// 执行协程
         /// </summary>
-        public static void StartCoroutine(in IEnumerator coroutine, params IEnumerator[] coroutines)
+        public static void StartCoroutine(IEnumerator coroutine, params IEnumerator[] coroutines)
         {
             if (coroutines.Length == 0) return;
             SafeStartCoroutine(coroutine);
@@ -43,7 +43,7 @@ namespace AIO
         /// <summary>
         /// 执行协程
         /// </summary>
-        public static void StartCoroutine(in Func<IEnumerator> coroutine)
+        public static void StartCoroutine(Func<IEnumerator> coroutine)
         {
             SafeStartCoroutine(coroutine?.Invoke());
         }
@@ -51,7 +51,7 @@ namespace AIO
         /// <summary>
         /// 执行协程
         /// </summary>
-        public static void StartCoroutine(in ICollection<IEnumerator> coroutines)
+        public static void StartCoroutine(ICollection<IEnumerator> coroutines)
         {
             if (coroutines is null || coroutines.Count == 0) return;
             SafeStartCoroutine(coroutines);
@@ -60,7 +60,7 @@ namespace AIO
         /// <summary>
         /// 执行协程
         /// </summary>
-        public static void StartCoroutine(in Func<IEnumerator> coroutine, params Func<IEnumerator>[] coroutines)
+        public static void StartCoroutine(Func<IEnumerator> coroutine, params Func<IEnumerator>[] coroutines)
         {
             SafeStartCoroutine(coroutine?.Invoke());
             SafeStartCoroutine(coroutines);
@@ -69,7 +69,7 @@ namespace AIO
         /// <summary>
         /// 执行协程
         /// </summary>
-        public static void StartCoroutine(in ICollection<Func<IEnumerator>> coroutines)
+        public static void StartCoroutine(ICollection<Func<IEnumerator>> coroutines)
         {
             if (coroutines.Count == 0) return;
             SafeStartCoroutine(coroutines);

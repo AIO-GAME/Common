@@ -13,17 +13,18 @@ namespace AIO
         /// <summary>
         /// 获取新的定时器容器
         /// </summary>
-        internal static ICollection<T> NewTimerOperator<T>() where T : TimerOperator, new()
+        internal static ICollection<T> NewTimerOperator<T>()
+        where T : TimerOperator, new()
         {
             var List = Pool.List<T>();
             foreach (var (allSlot, Uint, Slot) in TimerSystem.TimingUnits)
             {
                 var operators = Activator.CreateInstance<T>();
-                operators.Index = List.Count;
-                operators.Unit = Uint * Slot;
+                operators.Index    = List.Count;
+                operators.Unit     = Uint * Slot;
                 operators.SlotUnit = Slot;
                 operators.MaxCount = 2048;
-                operators.Slot = 0;
+                operators.Slot     = 0;
                 List.Add(operators);
             }
 
@@ -58,20 +59,20 @@ namespace AIO
         protected TimerOperator()
         {
             TimersCache = Pool.List<ITimerExecutor>();
-            Timers = Pool.LinkedList<ITimerExecutor>();
-            Slot = 0;
-            MaxCount = 2048;
+            Timers      = Pool.LinkedList<ITimerExecutor>();
+            Slot        = 0;
+            MaxCount    = 2048;
         }
 
         public TimerOperator(int index, long unit, long slotUnit, int maxCount = 2048)
         {
             TimersCache = Pool.List<ITimerExecutor>();
-            Timers = Pool.LinkedList<ITimerExecutor>();
-            Slot = 0;
-            MaxCount = maxCount;
+            Timers      = Pool.LinkedList<ITimerExecutor>();
+            Slot        = 0;
+            MaxCount    = maxCount;
 
-            Index = index;
-            Unit = unit * slotUnit;
+            Index    = index;
+            Unit     = unit * slotUnit;
             SlotUnit = slotUnit;
         }
 
@@ -85,7 +86,6 @@ namespace AIO
         {
 #if UNITY_EDITOR
             var @string = new StringBuilder();
-            @string.Clear();
             @string.Append("当前毫秒:").Append(TimerSystem.Counter).Append("ms").AppendLine();
             @string.Append("定时器序号:").Append(Index).AppendLine();
             @string.Append("计时单位:").Append(Unit).Append("ms").AppendLine();
@@ -94,12 +94,16 @@ namespace AIO
             if (Timers.Count <= 0) return @string.ToString();
 
             @string.Append("\n队列信息:\n[");
-            foreach (var item in Timers)
+            lock (Timers)
             {
-                @string.AppendLine().Append("定时单位 =").Append(item.Duration).Append("ms").Append(' ');
-                @string.Append("创建时间 =").Append(item.CreateTime).Append("ms").Append(' ');
-                @string.Append("结束时间 =").Append(item.EndTime).Append("ms").Append(' ');
+                foreach (var item in Timers)
+                {
+                    @string.AppendLine().Append("定时单位 =").Append(item.Duration).Append("ms").Append(' ');
+                    @string.Append("创建时间 =").Append(item.CreateTime).Append("ms").Append(' ');
+                    @string.Append("结束时间 =").Append(item.EndTime).Append("ms").Append(' ');
+                }
             }
+
 
             return @string.AppendLine("\n]").ToString();
 #else
@@ -166,15 +170,15 @@ namespace AIO
 
         public void ReceiveFromData(ITimerOperator @operator)
         {
-            Index = @operator.Index;
-            Slot = @operator.Slot;
+            Index    = @operator.Index;
+            Slot     = @operator.Slot;
             SlotUnit = @operator.SlotUnit;
             AllCount = @operator.AllCount;
             MaxCount = @operator.MaxCount;
-            Unit = @operator.Unit;
+            Unit     = @operator.Unit;
 
             TimersCache = @operator.TimersCache;
-            Timers = @operator.Timers;
+            Timers      = @operator.Timers;
         }
 
         public void TimersUpdate()

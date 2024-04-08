@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using AIO.UEditor;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Scripting;
@@ -27,29 +28,27 @@ namespace AIO
         /// </summary>
         public static bool IsAllowThread { get; private set; }
 
-        static Runner()
-        {
-            Initialize();
-        }
-
+#if UNITY_EDITOR
+        [AInit(EInitAttrMode.Editor | EInitAttrMode.RuntimeBeforeSplashScreen, int.MaxValue)]
         private static void Initialize()
         {
-            if (instance != null) return;
-#if UNITY_EDITOR
             IsAllowThread = true;
-            EditorApplication.quitting += Dispose;
-            IsRuntime = Application.isPlaying;
+            try
+            {
+                IsRuntime = EditorApplication.isPlaying;
+            }
+            catch (Exception)
+            {
+                IsRuntime = false;
+            }
+
             if (IsRuntime)
             {
-#else
-                IsAllowThread = Application.platform != RuntimePlatform.WebGLPlayer;
-#endif
                 var obj = new GameObject("RunnerMainThreadExecuteRuntime")
                 {
                     hideFlags = HideFlags.HideAndDontSave
                 }; //添加一个看不见的游戏物体到场景中
                 instance = obj.AddComponent<ThreadMono>();
-#if UNITY_EDITOR
             }
             else
             {
@@ -59,9 +58,30 @@ namespace AIO
                 };
                 instance = obj.AddComponent<ThreadMono>();
             }
+
+            EditorApplication.quitting += Dispose;
+            Application.quitting       += Dispose;
+        }
 #endif
+
+#if !UNITY_EDITOR
+        static Runner()
+        {
+            Initialize();
+        }
+
+        private static void Initialize()
+        {
+            if (instance != null) return;
+            IsAllowThread = Application.platform != RuntimePlatform.WebGLPlayer;
+            var obj = new GameObject("RunnerMainThreadExecuteRuntime") //添加一个看不见的游戏物体到场景中
+            {
+                hideFlags = HideFlags.HideAndDontSave
+            };
+            instance = obj.AddComponent<ThreadMono>();
             Application.quitting += Dispose;
         }
+#endif
 
         private static void Dispose()
         {
@@ -69,6 +89,7 @@ namespace AIO
             EditorApplication.quitting -= Dispose;
 #endif
             Application.quitting -= Dispose;
+            if (instance != null) return;
             UObject.DestroyImmediate(instance.gameObject, true);
             instance = null;
         }
@@ -76,15 +97,15 @@ namespace AIO
         [Preserve]
         private partial class ThreadMono : MonoBehaviour
         {
-            private List<Delegate> mActionCopiedQueueLateUpdateFunc { get; set; } // LateUpdate
+            private List<Delegate> mActionCopiedQueueLateUpdateFunc  { get; set; } // LateUpdate
             private List<Delegate> mActionCopiedQueueFixedUpdateFunc { get; set; } // FixedUpdate
-            private List<Delegate> mActionCopiedQueueUpdateFunc { get; set; } // QueueUpdate
+            private List<Delegate> mActionCopiedQueueUpdateFunc      { get; set; } // QueueUpdate
 
             public void Awake()
             {
-                mActionCopiedQueueLateUpdateFunc = Pool.List<Delegate>();
+                mActionCopiedQueueLateUpdateFunc  = Pool.List<Delegate>();
                 mActionCopiedQueueFixedUpdateFunc = Pool.List<Delegate>();
-                mActionCopiedQueueUpdateFunc = Pool.List<Delegate>();
+                mActionCopiedQueueUpdateFunc      = Pool.List<Delegate>();
                 DontDestroyOnLoad(gameObject);
             }
 

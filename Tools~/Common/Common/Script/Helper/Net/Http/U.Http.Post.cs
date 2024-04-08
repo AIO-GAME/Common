@@ -43,8 +43,8 @@ namespace AIO
                 HttpWebRequest request = null;
                 try
                 {
-                    request = CreateHttpWebRequest(remoteUrl, options.Timeout, options.Cookie);
-                    request.Method = WebRequestMethods.Http.Post;
+                    request             = CreateHttpWebRequest(remoteUrl, options.Timeout, options.Cookie);
+                    request.Method      = WebRequestMethods.Http.Post;
                     request.ContentType = options.ContentType;
                     WriteRequestStream(request, data);
                     if (data == null || data.Length == 0) request.ContentLength = 0;
@@ -90,8 +90,8 @@ namespace AIO
                 HttpWebRequest request = null;
                 try
                 {
-                    request = CreateHttpWebRequest(remoteUrl, options.Timeout, options.Cookie);
-                    request.Method = WebRequestMethods.Http.Post;
+                    request             = CreateHttpWebRequest(remoteUrl, options.Timeout, options.Cookie);
+                    request.Method      = WebRequestMethods.Http.Post;
                     request.ContentType = "application/x-www-form-urlencoded";
                     WriteRequestStream(request, data);
                     if (data == null || data.Length == 0) request.ContentLength = 0;
@@ -112,6 +112,7 @@ namespace AIO
             /// <param name="options">选项参数</param>
             public static Task<string> PostAsync(string remoteUrl, string data, Option options = default)
             {
+                options ??= new Option();
                 return PostAsync(remoteUrl, options.Encoding.GetBytes(data), options);
             }
 
@@ -138,8 +139,8 @@ namespace AIO
                 HttpWebRequest request = null;
                 try
                 {
-                    request = CreateHttpWebRequest(remoteUrl, options.Timeout, options.Cookie);
-                    request.Method = WebRequestMethods.Http.Post;
+                    request             = CreateHttpWebRequest(remoteUrl, options.Timeout, options.Cookie);
+                    request.Method      = WebRequestMethods.Http.Post;
                     request.ContentType = options.ContentType;
                     await WriteRequestStreamAsync(request, data);
                     if (data == null || data.Length == 0) request.ContentLength = 0;
@@ -159,7 +160,7 @@ namespace AIO
             /// <param name="data">上传数据</param>
             /// <param name="options">选项参数</param>
             public static Task<Stream> PostStreamAsync(string remoteUrl, string data,
-                Option options = default)
+                                                       Option options = default)
             {
                 options ??= new Option();
                 return PostStreamAsync(remoteUrl, options.Encoding.GetBytes(data), options);
@@ -183,14 +184,14 @@ namespace AIO
             /// <param name="options">选项参数</param>
             /// <returns>返回内容</returns>
             public static async Task<Stream> PostStreamAsync(string remoteUrl, byte[] data,
-                Option options = default)
+                                                             Option options = default)
             {
                 options ??= new Option();
                 HttpWebRequest request = null;
                 try
                 {
-                    request = CreateHttpWebRequest(remoteUrl, options.Timeout, options.Cookie);
-                    request.Method = WebRequestMethods.Http.Post;
+                    request             = CreateHttpWebRequest(remoteUrl, options.Timeout, options.Cookie);
+                    request.Method      = WebRequestMethods.Http.Post;
                     request.ContentType = options.ContentType;
                     await WriteRequestStreamAsync(request, data);
                     if (data == null || data.Length == 0) request.ContentLength = 0;

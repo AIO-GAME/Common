@@ -81,14 +81,17 @@ namespace AIO
             }
 
             if (List is null) return;
-            for (var index = 0; index < List.Count; index++)
+            lock (List)
             {
-                if (List[index] is null) continue;
-                List[index]?.Dispose();
-                List[index] = null;
-            }
+                for (var index = 0; index < List.Count; index++)
+                {
+                    if (List[index] is null) continue;
+                    List[index].Dispose();
+                    List[index] = null;
+                }
 
-            List.Free();
+                List.Free();
+            }
         }
 
 

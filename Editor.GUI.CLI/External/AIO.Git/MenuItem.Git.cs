@@ -19,17 +19,16 @@ namespace AIO.UEditor
         /// 生成
         /// </summary>
         [MenuItem("Git/~~~ Generate ~~~", false, 9999)]
-        [AInit(mode: EInitAttrMode.Editor, ushort.MaxValue - 1)]
         internal static void Generate()
         {
             Debug.Log($"<b><color=#5DADE2>[GIT]</color></b> {CMD_GIT} Generate");
 
             var packageInfos = AssetDatabase.FindAssets("package", new string[] { "Packages" }).
-                Select(AssetDatabase.GUIDToAssetPath).Where(x => AssetDatabase.LoadAssetAtPath<TextAsset>(x) != null).
-                Select(PackageInfo.FindForAssetPath).GroupBy(x => x.assetPath).Select(x => x.First()).Where(x =>
-                    File.Exists(Path.Combine(EHelper.Path.Project, x.resolvedPath, ".git")) ||
-                    Directory.Exists(Path.Combine(EHelper.Path.Project, x.resolvedPath, ".git"))
-                ).ToList();
+                                             Select(AssetDatabase.GUIDToAssetPath).Where(x => AssetDatabase.LoadAssetAtPath<TextAsset>(x) != null).
+                                             Select(PackageInfo.FindForAssetPath).GroupBy(x => x.assetPath).Select(x => x.First()).Where(x =>
+                                                                                                                                             File.Exists(Path.Combine(EHelper.Path.Project, x.resolvedPath, ".git")) ||
+                                                                                                                                             Directory.Exists(Path.Combine(EHelper.Path.Project, x.resolvedPath, ".git"))
+                                             ).ToList();
 
             var change = CreateProject();
             if (CreateTemplate(packageInfos)) change = true;
@@ -40,6 +39,13 @@ namespace AIO.UEditor
                 typeof(AssetDatabase).GetMethod("RefreshSettings", BindingFlags.Static | BindingFlags.Public);
             if (RefreshSettings != null) RefreshSettings.Invoke(null, null);
             CompilationPipeline.RequestScriptCompilation();
+        }
+
+        [AInit(mode: EInitAttrMode.Editor, ushort.MaxValue - 1)]
+        internal static void AutoGenerate()
+        {
+            if (EHelper.Prefs.LoadBoolean("Git.AutoGenerate"))
+                Generate();
         }
 
         /// <summary>
@@ -62,7 +68,7 @@ namespace AIO.UEditor
 #endif
 
             var RefreshSettings = typeof(AssetDatabase).GetMethod("RefreshSettings",
-                BindingFlags.Static | BindingFlags.Public);
+                                                                  BindingFlags.Static | BindingFlags.Public);
             if (RefreshSettings != null) RefreshSettings.Invoke(null, null);
 
             CompilationPipeline.RequestScriptCompilation();

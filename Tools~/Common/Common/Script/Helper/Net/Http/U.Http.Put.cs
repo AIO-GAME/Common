@@ -67,7 +67,7 @@ namespace AIO
             public static Task<string> PutAsync(string remoteUrl, string data,
                 Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
             {
-                return AutoCommonRequestAsync(remoteUrl, PUT, data, encoding, timeout, cookie);
+                return AutoCommonRequestAsync(remoteUrl, PUT, encoding.GetBytes(data), encoding, timeout, cookie);
             }
         }
     }

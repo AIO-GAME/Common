@@ -8235,6 +8235,17 @@
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
             <returns>内容</returns>
         </member>
+        <member name="M:AIO.AHelper.HTTP.DeleteAsync(System.String,System.String,System.UInt16,System.String)">
+            <summary>
+            请求删除指定的资源
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
         <member name="M:AIO.AHelper.HTTP.Download(System.String,System.String,System.Boolean,System.UInt16,System.Int32)">
             <summary>
             HTTP 下载文件
@@ -8472,7 +8483,7 @@
         </member>
         <member name="M:AIO.AHelper.HTTP.Options(System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
-            返回服务器正对特定资源所支持的HTTP请求方法
+                返回服务器正对特定资源所支持的HTTP请求方法
             </summary>
             <param name="remoteUrl">远端地址</param>
             <param name="encoding">编码</param>
@@ -8483,7 +8494,7 @@
         </member>
         <member name="M:AIO.AHelper.HTTP.Options(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
             <summary>
-            返回服务器正对特定资源所支持的HTTP请求方法
+                返回服务器正对特定资源所支持的HTTP请求方法
             </summary>
             <param name="remoteUrl">远端地址</param>
             <param name="data">数据</param>
@@ -8495,7 +8506,7 @@
         </member>
         <member name="M:AIO.AHelper.HTTP.Options(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
-            返回服务器正对特定资源所支持的HTTP请求方法
+                返回服务器正对特定资源所支持的HTTP请求方法
             </summary>
             <param name="remoteUrl">远端地址</param>
             <param name="data">数据</param>
@@ -8507,7 +8518,7 @@
         </member>
         <member name="M:AIO.AHelper.HTTP.OptionsAsync(System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
-            返回服务器正对特定资源所支持的HTTP请求方法
+                返回服务器正对特定资源所支持的HTTP请求方法
             </summary>
             <param name="remoteUrl">远端地址</param>
             <param name="encoding">编码</param>
@@ -8518,7 +8529,7 @@
         </member>
         <member name="M:AIO.AHelper.HTTP.OptionsAsync(System.String,System.Byte[],System.Text.Encoding,System.UInt16,System.String)">
             <summary>
-            返回服务器正对特定资源所支持的HTTP请求方法
+                返回服务器正对特定资源所支持的HTTP请求方法
             </summary>
             <param name="remoteUrl">远端地址</param>
             <param name="data">数据</param>
@@ -8530,7 +8541,7 @@
         </member>
         <member name="M:AIO.AHelper.HTTP.OptionsAsync(System.String,System.String,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
-            返回服务器正对特定资源所支持的HTTP请求方法
+                返回服务器正对特定资源所支持的HTTP请求方法
             </summary>
             <param name="remoteUrl">远端地址</param>
             <param name="data">数据</param>
@@ -8746,6 +8757,17 @@
             <param name="remoteUrl">远端地址</param>
             <param name="data">数据</param>
             <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+            <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>
+            <returns>内容</returns>
+        </member>
+        <member name="M:AIO.AHelper.HTTP.TraceAsync(System.String,System.String,System.UInt16,System.String)">
+            <summary>
+            回显服务器收到的请求
+            </summary>
+            <param name="remoteUrl">远端地址</param>
+            <param name="data">数据</param>
             <param name="timeout">超时时间</param>
             <param name="cookie">cookie</param>
             <exception cref="T:AIO.AExpNetGetResponseStream">异常</exception>

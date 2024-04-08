@@ -19,30 +19,30 @@ namespace AIO
         {
             private class HttpDownloadsOperation : AOperation
             {
-                private List<string> Remote { get; }
-                private string LocalPath { get; }
-                private bool IsOverWrite { get; }
-                private ushort Timeout { get; }
-                private int BufferSize { get; }
+                private List<string>                        Remote           { get; }
+                private string                              LocalPath        { get; }
+                private bool                                IsOverWrite      { get; }
+                private ushort                              Timeout          { get; }
+                private int                                 BufferSize       { get; }
                 private Dictionary<string, HttpWebResponse> httpWebResponses { get; }
-                private Dictionary<string, HttpWebRequest> httpWebRequest { get; }
-                private Dictionary<string, FileStream> fileStreams { get; }
+                private Dictionary<string, HttpWebRequest>  httpWebRequest   { get; }
+                private Dictionary<string, FileStream>      fileStreams      { get; }
 
                 public HttpDownloadsOperation(
                     IEnumerable<string> remoteUrls,
-                    string localPath,
-                    bool isOverWrite = false,
-                    ushort timeout = Net.TIMEOUT,
-                    int bufferSize = Net.BUFFER_SIZE)
+                    string              localPath,
+                    bool                isOverWrite = false,
+                    ushort              timeout     = Net.TIMEOUT,
+                    int                 bufferSize  = Net.BUFFER_SIZE)
                 {
-                    Remote = new List<string>();
-                    LocalPath = localPath;
-                    IsOverWrite = isOverWrite;
-                    Timeout = timeout;
-                    BufferSize = bufferSize;
+                    Remote           = new List<string>();
+                    LocalPath        = localPath;
+                    IsOverWrite      = isOverWrite;
+                    Timeout          = timeout;
+                    BufferSize       = bufferSize;
                     httpWebResponses = new Dictionary<string, HttpWebResponse>();
-                    httpWebRequest = new Dictionary<string, HttpWebRequest>();
-                    fileStreams = new Dictionary<string, FileStream>();
+                    httpWebRequest   = new Dictionary<string, HttpWebRequest>();
+                    fileStreams      = new Dictionary<string, FileStream>();
                     foreach (var remoteUrl in remoteUrls)
                     {
                         if (string.IsNullOrEmpty(remoteUrl))
@@ -60,7 +60,7 @@ namespace AIO
                     foreach (var remote in Remote)
                     {
                         var request = (HttpWebRequest)WebRequest.Create(new Uri(remote));
-                        request.Timeout = Timeout;
+                        request.Timeout        = Timeout;
                         httpWebRequest[remote] = request;
                     }
                 }
@@ -93,10 +93,10 @@ namespace AIO
                             var temp = outputStream.Position - Net.CODE.Length;
                             if (temp > 0) httpWebRequest[remote].AddRange(temp);
                             while (State == EProgressState.Pause) Thread.Sleep(100);
-                            httpWebResponses[remote] = (HttpWebResponse)httpWebRequest[remote].GetResponse();
-                            TotalValue += httpWebResponses[remote].ContentLength;
-                            CurrentInfo = remote;
-                            StartValue += temp;
+                            httpWebResponses[remote] =  (HttpWebResponse)httpWebRequest[remote].GetResponse();
+                            TotalValue               += httpWebResponses[remote].ContentLength;
+                            CurrentInfo              =  remote;
+                            StartValue               += temp;
                         }
                         catch (WebException e)
                         {
@@ -122,15 +122,16 @@ namespace AIO
                             var readCount = responseStream.Read(buffer, 0, BufferSize);
 
                             while (readCount > 0)
-                            {
                                 if (State == EProgressState.Running)
                                 {
                                     fileStreams[remote].Write(buffer, 0, readCount);
                                     CurrentValue += readCount;
-                                    readCount = responseStream.Read(buffer, 0, BufferSize);
+                                    readCount    =  responseStream.Read(buffer, 0, BufferSize);
                                 }
-                                else Thread.Sleep(100);
-                            }
+                                else
+                                {
+                                    Thread.Sleep(100);
+                                }
 
                             responseStream.Close();
                             httpWebResponses[remote].Close();
@@ -176,7 +177,7 @@ namespace AIO
                         {
                             var local = Path.Combine(LocalPath, Path.GetFileName(remote));
                             var outputStream = await Net.AddFileHeaderAsync(local, () => GetMD5Async(remote), IsOverWrite,
-                                cancellationToken);
+                                                                            cancellationToken);
                             if (outputStream is null)
                             {
                                 Remote.RemoveAt(index);
@@ -194,10 +195,10 @@ namespace AIO
                             var temp = outputStream.Position - Net.CODE.Length;
                             if (temp > 0) httpWebRequest[remote].AddRange(temp);
                             while (State == EProgressState.Pause) await Task.Delay(100, cancellationToken);
-                            httpWebResponses[remote] = (HttpWebResponse)await httpWebRequest[remote].GetResponseAsync();
-                            TotalValue += httpWebResponses[remote].ContentLength;
-                            CurrentInfo = remote;
-                            StartValue += temp;
+                            httpWebResponses[remote] =  (HttpWebResponse)await httpWebRequest[remote].GetResponseAsync();
+                            TotalValue               += httpWebResponses[remote].ContentLength;
+                            CurrentInfo              =  remote;
+                            StartValue               += temp;
                         }
                         catch (WebException e)
                         {
@@ -221,19 +222,17 @@ namespace AIO
                         {
                             var readCount = await responseStream.ReadAsync(buffer, 0, BufferSize, cancellationToken);
                             while (readCount > 0)
-                            {
                                 if (State == EProgressState.Running)
                                 {
                                     await fileStreams[remote].WriteAsync(buffer, 0, readCount, cancellationToken);
                                     CurrentValue += readCount;
                                     readCount = await responseStream.ReadAsync(buffer, 0, BufferSize,
-                                        cancellationToken);
+                                                                               cancellationToken);
                                 }
                                 else
                                 {
                                     await Task.Delay(100, cancellationToken);
                                 }
-                            }
 
                             responseStream.Close();
                             httpWebResponses[remote].Close();
@@ -264,11 +263,11 @@ namespace AIO
             /// <param name="timeout">超时</param>
             /// <param name="bufferSize">容量</param>
             /// <exception cref="Exception">异常</exception>
-            public static IProgressOperation Download(IEnumerable<string> remoteUrls, string localPath,
-                bool isOverWrite = false,
-                ushort timeout = Net.TIMEOUT,
-                int bufferSize = Net.BUFFER_SIZE
-            )
+            public static IProgressOperation Download(
+                IEnumerable<string> remoteUrls, string localPath,
+                bool                isOverWrite = false,
+                ushort              timeout     = Net.TIMEOUT,
+                int                 bufferSize  = Net.BUFFER_SIZE)
             {
                 return new HttpDownloadsOperation(remoteUrls, localPath, isOverWrite, timeout, bufferSize);
             }

@@ -12,7 +12,8 @@ namespace AIO.UEngine
         #region Dont Destroy
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static GameObject DontDestroyCreate<T>(string name) where T : Component
+        public static GameObject DontDestroyCreate<T>(string name)
+        where T : Component
         {
             var go = new GameObject(name);
             go.AddComponent<T>();
@@ -40,7 +41,8 @@ namespace AIO.UEngine
         /// <summary>
         /// 销毁物体
         /// </summary>
-        public static void DontDestroy<T>(in T go) where T : Component
+        public static void DontDestroy<T>(in T go)
+        where T : Component
         {
             if (go == null) return;
             Object.DontDestroyOnLoad(go);
@@ -94,7 +96,8 @@ namespace AIO.UEngine
         /// <typeparam name="T">Component</typeparam>
         /// <param name="go">父对象</param>
         /// <param name="childName">子对象名称</param>
-        public static T GetTheChildNodeComponentScripts<T>(in GameObject go, in string childName) where T : Component
+        public static T GetTheChildNodeComponentScripts<T>(in GameObject go, in string childName)
+        where T : Component
         {
             var node = go.FindTheChildNode(childName);
             return node.GetComponent<T>();
@@ -106,7 +109,8 @@ namespace AIO.UEngine
         /// <typeparam name="T"></typeparam>
         /// <param name="go"></param>
         /// <returns></returns>
-        public static T FindComponentInParent<T>(in GameObject go) where T : Component
+        public static T FindComponentInParent<T>(in GameObject go)
+        where T : Component
         {
             if (go == null) return null;
 
@@ -115,7 +119,7 @@ namespace AIO.UEngine
 
             while (component == null && trans.parent != null)
             {
-                trans = trans.parent;
+                trans     = trans.parent;
                 component = trans.GetComponent<T>();
             }
 

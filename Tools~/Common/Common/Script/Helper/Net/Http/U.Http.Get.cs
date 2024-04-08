@@ -40,9 +40,9 @@ namespace AIO
                 /// </summary>
                 public Option()
                 {
-                    Timeout = Net.TIMEOUT;
-                    Cookie = string.Empty;
-                    Encoding = Encoding.UTF8;
+                    Timeout     = Net.TIMEOUT;
+                    Cookie      = string.Empty;
+                    Encoding    = Encoding.UTF8;
                     ContentType = "application/json";
                 }
 
@@ -54,14 +54,14 @@ namespace AIO
                 /// <param name="cookie">cookie</param>
                 /// <param name="contentType"></param>
                 public Option(
-                    ushort timeout,
-                    string cookie,
+                    ushort   timeout,
+                    string   cookie,
                     Encoding encoding,
-                    string contentType)
+                    string   contentType)
                 {
-                    Timeout = timeout;
-                    Cookie = cookie;
-                    Encoding = encoding ?? Encoding.UTF8;
+                    Timeout     = timeout;
+                    Cookie      = cookie;
+                    Encoding    = encoding ?? Encoding.UTF8;
                     ContentType = contentType;
                 }
             }
@@ -73,14 +73,14 @@ namespace AIO
             /// <param name="encoding">编码</param>
             /// <param name="timeout">超时时间</param>
             /// <param name="cookie">cookie</param>
-            public static string Get(string remoteUrl,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public static string Get(string   remoteUrl,
+                                     Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
             {
                 HttpWebRequest request = null;
                 try
                 {
-                    request = CreateHttpWebRequest(remoteUrl, timeout, cookie);
-                    request.Method = WebRequestMethods.Http.Get;
+                    request             = CreateHttpWebRequest(remoteUrl, timeout, cookie);
+                    request.Method      = WebRequestMethods.Http.Get;
                     request.ContentType = "application/json; charset=UTF-8";
                     return GetResponseText(request, encoding);
                 }
@@ -98,14 +98,14 @@ namespace AIO
             /// <param name="encoding">编码</param>
             /// <param name="timeout">超时时间</param>
             /// <param name="cookie">cookie</param>
-            public static async Task<string> GetAsync(string remoteUrl,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public static async Task<string> GetAsync(string   remoteUrl,
+                                                      Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
             {
                 HttpWebRequest request = null;
                 try
                 {
-                    request = CreateHttpWebRequest(remoteUrl, timeout, cookie);
-                    request.Method = WebRequestMethods.Http.Get;
+                    request             = CreateHttpWebRequest(remoteUrl, timeout, cookie);
+                    request.Method      = WebRequestMethods.Http.Get;
                     request.ContentType = "application/json; charset=UTF-8";
                     return await GetResponseTextAsync(request, encoding);
                 }
@@ -127,8 +127,8 @@ namespace AIO
                 HttpWebRequest request = null;
                 try
                 {
-                    request = CreateHttpWebRequest(remoteUrl, timeout, cookie);
-                    request.Method = WebRequestMethods.Http.Get;
+                    request             = CreateHttpWebRequest(remoteUrl, timeout, cookie);
+                    request.Method      = WebRequestMethods.Http.Get;
                     request.ContentType = "application/json; charset=UTF-8";
                     return GetResponseStream(request);
                 }
@@ -146,13 +146,13 @@ namespace AIO
             /// <param name="timeout">超时时间</param>
             /// <param name="cookie">cookie</param>
             public static async Task<Stream> GetStreamAsync(string remoteUrl, ushort timeout = Net.TIMEOUT,
-                string cookie = null)
+                                                            string cookie = null)
             {
                 HttpWebRequest request = null;
                 try
                 {
-                    request = CreateHttpWebRequest(remoteUrl, timeout, cookie);
-                    request.Method = WebRequestMethods.Http.Get;
+                    request             = CreateHttpWebRequest(remoteUrl, timeout, cookie);
+                    request.Method      = WebRequestMethods.Http.Get;
                     request.ContentType = "application/json; charset=UTF-8";
                     return await GetResponseStreamAsync(request);
                 }
@@ -173,7 +173,7 @@ namespace AIO
             {
                 var remote = remoteUrl.Replace("\\", "/");
                 var request = WebRequest.Create(remote);
-                request.Method = WebRequestMethods.Http.Get;
+                request.Method  = WebRequestMethods.Http.Get;
                 request.Timeout = timeout;
                 using var response = request.GetResponse();
                 using var stream = response.GetResponseStream();
@@ -191,7 +191,7 @@ namespace AIO
             {
                 var remote = remoteUrl.Replace("\\", "/");
                 var request = WebRequest.Create(remote);
-                request.Method = WebRequestMethods.Http.Get;
+                request.Method  = WebRequestMethods.Http.Get;
                 request.Timeout = timeout;
                 using var response = await request.GetResponseAsync();
                 using var stream = response.GetResponseStream();
@@ -206,8 +206,8 @@ namespace AIO
             /// <param name="encoding">编码</param>
             /// <param name="timeout">超时时间</param>
             /// <param name="cookie">cookie</param>
-            public static T GetJson<T>(string remoteUrl,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public static T GetJson<T>(string   remoteUrl,
+                                       Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
             {
                 var data = Get(remoteUrl, encoding, timeout, cookie);
                 return Json.Deserialize<T>(data);
@@ -220,8 +220,8 @@ namespace AIO
             /// <param name="encoding">编码</param>
             /// <param name="timeout">超时时间</param>
             /// <param name="cookie">cookie</param>
-            public static async Task<T> GetJsonAsync<T>(string remoteUrl,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public static async Task<T> GetJsonAsync<T>(string   remoteUrl,
+                                                        Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
             {
                 var data = await GetAsync(remoteUrl, encoding, timeout, cookie);
                 return Json.Deserialize<T>(data);
@@ -234,8 +234,8 @@ namespace AIO
             /// <param name="encoding">编码</param>
             /// <param name="timeout">超时时间</param>
             /// <param name="cookie">cookie</param>
-            public static T GetXml<T>(string remoteUrl,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public static T GetXml<T>(string   remoteUrl,
+                                      Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
             {
                 var data = Get(remoteUrl, encoding, timeout, cookie);
                 return Xml.Deserialize<T>(data);
@@ -248,8 +248,8 @@ namespace AIO
             /// <param name="encoding">编码</param>
             /// <param name="timeout">超时时间</param>
             /// <param name="cookie">cookie</param>
-            public static async Task<T> GetXmlAsync<T>(string remoteUrl,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public static async Task<T> GetXmlAsync<T>(string   remoteUrl,
+                                                       Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
             {
                 var data = await GetAsync(remoteUrl, encoding, timeout, cookie);
                 return Xml.Deserialize<T>(data);
@@ -262,8 +262,8 @@ namespace AIO
             /// <param name="encoding">编码</param>
             /// <param name="timeout">超时时间</param>
             /// <param name="cookie">cookie</param>
-            public static T GetYaml<T>(string remoteUrl,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public static T GetYaml<T>(string   remoteUrl,
+                                       Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
             {
                 var data = Get(remoteUrl, encoding, timeout, cookie);
                 return Yaml.Deserialize<T>(data);
@@ -276,8 +276,8 @@ namespace AIO
             /// <param name="encoding">编码</param>
             /// <param name="timeout">超时时间</param>
             /// <param name="cookie">cookie</param>
-            public static async Task<T> GetYamlAsync<T>(string remoteUrl,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public static async Task<T> GetYamlAsync<T>(string   remoteUrl,
+                                                        Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
             {
                 var data = await GetAsync(remoteUrl, encoding, timeout, cookie);
                 return Yaml.Deserialize<T>(data);

@@ -89,9 +89,9 @@ namespace AIO
         /// <param name="name">文件名</param>
         internal HttpDownloadInfo(in string url, in string savePath, in string name)
         {
-            URL = url;
+            URL      = url;
             SavePath = savePath;
-            Name = name;
+            Name     = name;
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace AIO
         {
             Response = value;
             if (Response.Content.Headers.ContentLength != null) FileSize = (long)Response.Content.Headers.ContentLength;
-            else FileSize = 0;
+            else FileSize                                                = 0;
             return this;
         }
 
@@ -133,7 +133,7 @@ namespace AIO
 
         internal HttpDownloadInfo SetResume(in long value)
         {
-            IsResume = true;
+            IsResume       = true;
             DownloadedSize = value;
             return this;
         }
@@ -153,7 +153,10 @@ namespace AIO
 
         internal HttpDownloadInfo Finish()
         {
-            if (Stopwatch == null) Time = TimeSpan.Zero;
+            if (Stopwatch == null)
+            {
+                Time = TimeSpan.Zero;
+            }
             else
             {
                 Time = Stopwatch.Elapsed;
