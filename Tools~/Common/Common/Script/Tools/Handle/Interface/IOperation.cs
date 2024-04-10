@@ -1,20 +1,18 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Runtime.CompilerServices;
-using Object = UnityEngine.Object;
-
-#endregion
 
 namespace AIO
 {
-    public static class IHandleExtensions
+    /// <summary>
+    /// 异步处理器
+    /// </summary>
+    public static class IOperationExtensions
     {
         /// <summary>
         /// 安全转换
         /// </summary>
         /// <returns> 转换后的对象 </returns>
-        public static Object SafeCast(this IOperation<Object> operation)
+        public static object SafeCast(this IOperation operation)
         {
             return operation.Result;
         }
@@ -24,7 +22,6 @@ namespace AIO
         /// </summary>
         /// <returns> 转换后的对象 </returns>
         public static TObject SafeCast<TObject>(this IOperation<TObject> operation)
-        where TObject : Object
         {
             return operation.Result;
         }
@@ -33,7 +30,7 @@ namespace AIO
     /// <summary>
     /// 异步处理器
     /// </summary>
-    public interface IOperation : IOperationBase
+    public interface IOperation : IOperationBase, ITaskObject
     {
         /// <summary>
         /// 结果
@@ -41,25 +38,21 @@ namespace AIO
         object Result { get; }
 
         /// <summary>
-        /// 完成回调
-        /// </summary>
-        event Action<object> Completed;
-
-        /// <summary>
-        /// 获取异步等待器
-        /// </summary>
-        TaskAwaiter<object> GetAwaiter();
-
-        /// <summary>
         /// 执行
         /// </summary>
         object Invoke();
+
+        /// <summary>
+        /// 完成回调
+        /// </summary>
+        event Action<object> Completed;
     }
+
 
     /// <summary>
     /// 异步处理器
     /// </summary>
-    public interface IOperation<TObject> : IOperation
+    public interface IOperation<TObject> : IOperation, ITask<TObject>
     {
         /// <summary>
         /// 结果
@@ -72,13 +65,13 @@ namespace AIO
         new event Action<TObject> Completed;
 
         /// <summary>
-        /// 获取异步等待器
-        /// </summary>
-        new TaskAwaiter<TObject> GetAwaiter();
-
-        /// <summary>
         /// 执行
         /// </summary>
         new TObject Invoke();
+
+        /// <summary>
+        /// 获取异步等待器
+        /// </summary>
+        new TaskAwaiter<TObject> GetAwaiter();
     }
 }

@@ -206,7 +206,7 @@ namespace AIO.UEditor
 
 #if UNITY_EDITOR
         [InitializeOnLoadMethod, Conditional("UNITY_EDITOR")]
-        private static void InitializeOnLoadMethod()
+        public static void InitializeOnLoadMethod()
         {
             foreach (var method in OrdersEditor.SelectMany(item => MethodsEditor[item]))
                 try

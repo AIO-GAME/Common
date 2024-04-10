@@ -1,16 +1,11 @@
-﻿#region
-
-using System;
-using System.Collections;
-
-#endregion
+﻿using System;
 
 namespace AIO
 {
     /// <summary>
     /// 异步处理器
     /// </summary>
-    public interface IOperationBase : IEnumerator, IDisposable
+    public interface IOperationBase : IDisposable
     {
         /// <summary>
         /// 是否已经完成

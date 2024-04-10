@@ -14170,6 +14170,281 @@
             </summary>
             <param name="disposingManagedResources"></param>
         </member>
+        <member name="T:AIO.IOperationExtensions">
+            <summary>
+            异步处理器
+            </summary>
+        </member>
+        <member name="M:AIO.IOperationExtensions.SafeCast(AIO.IOperation)">
+            <summary>
+            安全转换
+            </summary>
+            <returns> 转换后的对象 </returns>
+        </member>
+        <member name="M:AIO.IOperationExtensions.SafeCast``1(AIO.IOperation{``0})">
+            <summary>
+            安全转换
+            </summary>
+            <returns> 转换后的对象 </returns>
+        </member>
+        <member name="T:AIO.IOperation">
+            <summary>
+            异步处理器
+            </summary>
+        </member>
+        <member name="P:AIO.IOperation.Result">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="M:AIO.IOperation.Invoke">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="E:AIO.IOperation.Completed">
+            <summary>
+            完成回调
+            </summary>
+        </member>
+        <member name="T:AIO.IOperation`1">
+            <summary>
+            异步处理器
+            </summary>
+        </member>
+        <member name="P:AIO.IOperation`1.Result">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="E:AIO.IOperation`1.Completed">
+            <summary>
+            完成回调
+            </summary>
+        </member>
+        <member name="M:AIO.IOperation`1.Invoke">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="M:AIO.IOperation`1.GetAwaiter">
+            <summary>
+            获取异步等待器
+            </summary>
+        </member>
+        <member name="T:AIO.IOperationAction">
+            <summary>
+            异步处理器
+            </summary>
+        </member>
+        <member name="E:AIO.IOperationAction.Completed">
+            <summary>
+            回调函数
+            </summary>
+        </member>
+        <member name="M:AIO.IOperationAction.Invoke">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="T:AIO.IOperationList">
+            <summary>
+            异步处理器
+            </summary>
+        </member>
+        <member name="P:AIO.IOperationList.Count">
+            <summary>
+            结果数量
+            </summary>
+        </member>
+        <member name="P:AIO.IOperationList.Item(System.Int32)">
+            <summary>
+            索引器
+            </summary>
+        </member>
+        <member name="P:AIO.IOperationList.Result">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="M:AIO.IOperationList.Invoke">
+            <summary>
+            获取结果
+            </summary>
+        </member>
+        <member name="E:AIO.IOperationList.Completed">
+            <summary>
+            完成回调
+            </summary>
+        </member>
+        <member name="M:AIO.IOperationList.GetEnumerator">
+            <summary>
+            获取异步等待器
+            </summary>
+        </member>
+        <member name="T:AIO.IOperationList`1">
+            <summary>
+            异步处理器
+            </summary>
+        </member>
+        <member name="P:AIO.IOperationList`1.Result">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="P:AIO.IOperationList`1.Item(System.Int32)">
+            <summary>
+            索引器
+            </summary>
+        </member>
+        <member name="E:AIO.IOperationList`1.Completed">
+            <summary>
+            完成回调
+            </summary>
+        </member>
+        <member name="M:AIO.IOperationList`1.Invoke">
+            <summary>
+            执行
+            </summary>
+        </member>
+        <member name="M:AIO.IOperationList`1.GetEnumerator">
+            <summary>
+            获取异步等待器
+            </summary>
+        </member>
+        <member name="M:AIO.IOperationList`1.GetAwaiter">
+            <summary>
+            获取异步等待器
+            </summary>
+        </member>
+        <member name="T:AIO.IOperationBase">
+            <summary>
+            异步处理器
+            </summary>
+        </member>
+        <member name="P:AIO.IOperationBase.IsDone">
+            <summary>
+            是否已经完成
+            </summary>
+        </member>
+        <member name="P:AIO.IOperationBase.Progress">
+            <summary>
+            处理进度
+            </summary>
+        </member>
+        <member name="P:AIO.IOperationBase.IsValidate">
+            <summary>
+            是否有效
+            </summary>
+        </member>
+        <member name="P:AIO.IOperationBase.IsRunning">
+            <summary>
+            是否正在运行
+            </summary>
+        </member>
+        <member name="T:AIO.ITask">
+            <summary>
+               异步任务
+            </summary>
+        </member>
+        <member name="M:AIO.ITask.GetAwaiter">
+            <summary>
+                获取异步等待器
+            </summary>
+        </member>
+        <member name="T:AIO.ITask`1">
+            <summary>
+              异步任务
+            </summary>
+        </member>
+        <member name="M:AIO.ITask`1.GetAwaiter">
+            <summary>
+                获取异步等待器
+            </summary>
+        </member>
+        <member name="T:AIO.ITaskObject">
+            <summary>
+              异步任务
+            </summary>
+        </member>
+        <member name="M:AIO.ITaskObject.GetAwaiter">
+            <summary>
+                获取异步等待器
+            </summary>
+        </member>
+        <member name="T:AIO.ITaskObjectArray">
+            <summary>
+              异步任务
+            </summary>
+        </member>
+        <member name="M:AIO.ITaskObjectArray.GetAwaiter">
+            <summary>
+                获取异步等待器
+            </summary>
+        </member>
+        <member name="T:AIO.ITaskArray`1">
+            <summary>
+              异步任务
+            </summary>
+        </member>
+        <member name="M:AIO.ITaskArray`1.GetAwaiter">
+            <summary>
+                获取异步等待器
+            </summary>
+        </member>
+        <member name="T:AIO.OperationAction">
+            <summary>
+            异步函数处理器
+            </summary>
+        </member>
+        <member name="M:AIO.OperationAction.MoveNext">
+            <returns>
+             <see langword="true" /> if the operation was successfully advanced to the next element;
+            </returns>
+        </member>
+        <member name="M:AIO.OperationAction.op_Implicit(AIO.OperationAction)~System.Action">
+            <summary>
+              Implicit conversion from <see cref="T:AIO.OperationAction" /> to <see cref="T:System.Action" />
+            </summary>
+            <param name="operationAction"><see cref="T:AIO.OperationAction" /></param>
+            <returns><see cref="T:System.Action" /></returns>
+        </member>
+        <member name="M:AIO.OperationAction.op_Implicit(AIO.OperationAction)~System.Runtime.CompilerServices.TaskAwaiter">
+            <summary>
+               Implicit conversion from <see cref="T:AIO.OperationAction" /> to <see cref="T:System.Runtime.CompilerServices.TaskAwaiter" />
+            </summary>
+            <param name="operationAction"><see cref="T:AIO.OperationAction" /></param>
+            <returns><see cref="T:System.Runtime.CompilerServices.TaskAwaiter" /></returns>
+        </member>
+        <member name="T:AIO.OperationGenerics`1">
+            <summary>
+                异步函数处理器
+            </summary>
+        </member>
+        <member name="M:AIO.OperationGenerics`1.MoveNext">
+            <returns>
+             <see langword="true" /> if the operation was successfully advanced to the next element;
+            </returns>
+        </member>
+        <member name="M:AIO.OperationGenerics`1.op_Implicit(AIO.OperationGenerics{`0})~`0">
+            <summary>
+               Implicit conversion from <see cref="T:AIO.OperationGenerics`1" /> to <see cref="!:TObject" />
+            </summary>
+            <param name="operationGenerics"><see cref="T:AIO.OperationGenerics`1" /></param>
+            <returns><see cref="!:TObject" /></returns>
+        </member>
+        <member name="M:AIO.OperationGenerics`1.op_Implicit(AIO.OperationGenerics{`0})~System.Runtime.CompilerServices.TaskAwaiter{`0}">
+            <summary>
+              Implicit conversion from <see cref="T:AIO.OperationGenerics`1" /> to <see cref="T:System.Runtime.CompilerServices.TaskAwaiter`1" />
+            </summary>
+            <param name="operationGenerics"> <see cref="T:AIO.OperationGenerics`1" /></param>
+            <returns><see cref="T:System.Runtime.CompilerServices.TaskAwaiter`1" /></returns>
+        </member>
+        <member name="T:AIO.OperationGenericsList`1">
+            <summary>
+            泛型异步处理器
+            </summary>
+        </member>
         <member name="T:AIO.HashCode">
             <summary>
             HashCode is designed to quickly compute hash codes of arbitrary objects.

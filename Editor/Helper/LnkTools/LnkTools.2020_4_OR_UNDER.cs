@@ -1,4 +1,5 @@
 ﻿#if !UNITY_2021_1_OR_NEWER
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -6,8 +7,8 @@ namespace AIO.UEditor
 {
     internal static partial class LnkToolsHelper
     {
-        private static bool IsEnableLnkTools;
-        private static float Height;
+        private static bool       IsEnableLnkTools;
+        private static float      Height;
         private static GUIContent Content_Thumbnail;
         private static GUIContent Content_Restore;
 
@@ -22,15 +23,15 @@ namespace AIO.UEditor
         [InitializeOnLoadMethod]
         private static void OnInitLnkTools()
         {
-            Content_Thumbnail = EditorGUIUtility.IconContent("ArrowNavigationLeft");
+            Content_Thumbnail         = EditorGUIUtility.IconContent("ArrowNavigationLeft");
             Content_Thumbnail.tooltip = "Thumbnail";
-            Content_Restore = EditorGUIUtility.IconContent("ArrowNavigationRight");
-            Content_Restore.tooltip = "Restore";
+            Content_Restore           = EditorGUIUtility.IconContent("ArrowNavigationRight");
+            Content_Restore.tooltip   = "Restore";
 
-            Thumbnail = EditorPrefs.GetBool("Thumbnail", false);
+            Thumbnail        = EditorPrefs.GetBool("Thumbnail", false);
             IsEnableLnkTools = EditorPrefs.GetBool(EditorPrefsTable.LnkTools_Enable, true);
             if (!IsEnableLnkTools) return;
-            Height = Data.Count * 22 - 2;
+            Height                   =  Data.Count * 22 - 2;
             SceneView.duringSceneGui += OnLnkToolsGUI;
         }
 
@@ -58,9 +59,8 @@ namespace AIO.UEditor
                     sceneView.in2DMode ? rect.y : rect.y + 10 - Height / 2,
                     30,
                     20);
-                foreach (var lnk in Data)
+                foreach (var lnk in Data.Where(lnk => lnk.ShowMode == ELnkShowMode.SceneView))
                 {
-                    if (lnk.ShowMode != ELnkShowMode.SceneView) continue;
                     switch (lnk.Mode)
                     {
                         case ELnkToolsMode.OnlyRuntime:
@@ -71,7 +71,6 @@ namespace AIO.UEditor
                             break;
                     }
 
-
                     GUI.backgroundColor = lnk.BackgroundColor;
                     GELayout.Button(rect, lnk.Content, lnk.Invoke);
                     rect.y += 22;
@@ -80,6 +79,7 @@ namespace AIO.UEditor
 
                 GUI.backgroundColor = Color.white;
             }
+            else { }
 
             Handles.EndGUI();
         }

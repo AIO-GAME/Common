@@ -24,10 +24,13 @@ namespace AIO.UEditor
 
             private static void EditorQuit(PlayModeStateChange value)
             {
-                if (value == PlayModeStateChange.ExitingPlayMode)
-                {
-                    // TO DO
-                }
+                // switch (value)
+                // {
+                //     case PlayModeStateChange.ExitingPlayMode:
+                //     case PlayModeStateChange.EnteredEditMode:
+                //         AInitializeOnLoad.InitializeOnLoadMethod();
+                //         break;
+                // }
             }
         }
 

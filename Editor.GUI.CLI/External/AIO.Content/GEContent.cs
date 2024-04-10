@@ -13,9 +13,9 @@ namespace AIO.UEditor
     /// </summary>
     public static class GEContent
     {
-        internal static readonly Dictionary<string, GUIContent> GCSetting = new Dictionary<string, GUIContent>();
         internal static readonly Dictionary<string, GUIContent> GCApp     = new Dictionary<string, GUIContent>();
         internal static readonly Dictionary<string, GUIContent> GCBuiltin = new Dictionary<string, GUIContent>();
+        internal static readonly Dictionary<string, GUIContent> GCSetting = new Dictionary<string, GUIContent>();
 
         public static GUIContent GetSetting(string name)
         {

@@ -14,7 +14,7 @@ namespace AIO.UEditor
     /// <summary>
     /// 快捷工具箱
     /// </summary>
-    internal static class LnkToolsHelper
+    internal static partial class LnkToolsHelper
     {
         public static List<LnkTools> Data
         {

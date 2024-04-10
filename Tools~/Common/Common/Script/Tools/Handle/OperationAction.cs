@@ -10,14 +10,19 @@ using System.Threading.Tasks;
 
 namespace AIO
 {
+    /// <summary>
+    /// 异步函数处理器
+    /// </summary>
     [StructLayout(LayoutKind.Auto)]
     public abstract class OperationAction : IOperationAction
     {
+#pragma warning disable  CS1591
         private IEnumerator _CO;
-        public  byte        Progress   { get; protected set; }
-        public  bool        IsDone     { get; protected set; }
-        public  bool        IsRunning  => !IsDone;
-        public  bool        IsValidate { get; protected set; }
+
+        public byte Progress   { get; protected set; }
+        public bool IsDone     { get; protected set; }
+        public bool IsRunning  => !IsDone;
+        public bool IsValidate { get; protected set; }
 
         protected IEnumerator CO
         {
@@ -32,7 +37,12 @@ namespace AIO
 
         public void Invoke()
         {
-            if (IsDone || !IsValidate) return;
+            if (!IsValidate || IsDone)
+            {
+                InvokeOnCompleted();
+                return;
+            }
+
             CreateSync();
             IsDone = true;
             InvokeOnCompleted();
@@ -40,30 +50,39 @@ namespace AIO
 
         #region IDisposable
 
-        void IDisposable.Dispose()
-        {
-            Dispose();
-        }
+        void IDisposable.Dispose() => Dispose();
 
         #endregion
 
         #region INotifyCompletion
 
-        /// <inheritdoc />
         void INotifyCompletion.OnCompleted(Action continuation)
         {
-            if (IsDone)
-                continuation?.Invoke();
-            else
-                Completed += continuation;
+            if (IsDone) continuation?.Invoke();
+            else Completed += continuation;
+        }
+
+        #endregion
+
+        #region ITask
+
+        TaskAwaiter ITask.GetAwaiter() => GetAwaiter();
+
+        #endregion
+
+        #region IOperationAction
+
+        event Action IOperationAction.Completed
+        {
+            add => Completed += value;
+            remove => Completed -= value;
         }
 
         #endregion
 
         #endregion
 
-        public event Action Completed;
-
+        public event Action            Completed;
         protected abstract TaskAwaiter CreateAsync();
         protected abstract IEnumerator CreateCoroutine();
         protected abstract void        CreateSync();
@@ -73,10 +92,14 @@ namespace AIO
 
         public TaskAwaiter GetAwaiter()
         {
-            if (IsDone || !IsValidate) return Task.CompletedTask.GetAwaiter();
+            if (IsDone || !IsValidate)
+            {
+                InvokeOnCompleted();
+                return Task.CompletedTask.GetAwaiter();
+            }
+
             return CreateAsync();
         }
-
 
         public void Reset()
         {
@@ -87,6 +110,9 @@ namespace AIO
             CO.Reset();
         }
 
+        /// <returns>
+        ///  <see langword="true" /> if the operation was successfully advanced to the next element;
+        /// </returns>
         public bool MoveNext()
         {
             if (IsDone || !IsValidate) return false;
@@ -109,20 +135,9 @@ namespace AIO
             Completed = null;
         }
 
-        public sealed override string ToString()
-        {
-            return string.Empty;
-        }
-
-        public sealed override bool Equals(object obj)
-        {
-            return false;
-        }
-
-        public sealed override int GetHashCode()
-        {
-            return 0;
-        }
+        public sealed override string ToString()         => string.Empty;
+        public sealed override bool   Equals(object obj) => false;
+        public sealed override int    GetHashCode()      => 0;
 
         #region Constructor
 
@@ -133,47 +148,29 @@ namespace AIO
             Progress   = 0;
         }
 
-
-        /// <inheritdoc />
-        protected OperationAction(Action completed) : this()
-        {
-            Completed = completed;
-        }
+        protected OperationAction(Action completed) : this() => Completed = completed;
 
         #endregion
 
         #region operator implicit
 
-        public static implicit operator Action(OperationAction operationAction)
-        {
-            return operationAction.Completed;
-        }
+        /// <summary>
+        ///   Implicit conversion from <see cref="OperationAction" /> to <see cref="Action" />
+        /// </summary>
+        /// <param name="operationAction"><see cref="OperationAction" /></param>
+        /// <returns><see cref="Action" /></returns>
+        public static implicit operator Action(OperationAction operationAction) => operationAction.Completed;
 
-        public static implicit operator TaskAwaiter(OperationAction operationAction)
-        {
-            return operationAction.GetAwaiter();
-        }
-
-        #endregion
-
-        #region AssetSystem.IHandle<TObject>
-
-        /// <inheritdoc />
-        TaskAwaiter IOperationAction.GetAwaiter()
-        {
-            return GetAwaiter();
-        }
-
-        /// <inheritdoc />
-        event Action IOperationAction.Completed
-        {
-            add => Completed += value;
-            remove => Completed -= value;
-        }
+        /// <summary>
+        ///    Implicit conversion from <see cref="OperationAction" /> to <see cref="TaskAwaiter" />
+        /// </summary>
+        /// <param name="operationAction"><see cref="OperationAction" /></param>
+        /// <returns><see cref="TaskAwaiter" /></returns>
+        public static implicit operator TaskAwaiter(OperationAction operationAction) => operationAction.GetAwaiter();
 
         #endregion
 
-        #region AssetSystem.IHandleBase
+        #region IOperationBase
 
         byte IOperationBase.Progress   => Progress;
         bool IOperationBase.IsValidate => IsValidate;

@@ -5,15 +5,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 
 #endregion
 
 namespace AIO
 {
+    /// <summary>
+    /// 泛型异步处理器
+    /// </summary>
     [StructLayout(LayoutKind.Auto)]
-    public abstract class OperationGenericsList<TObject> : OperationGenerics<TObject[]>, IOperationList<TObject>, IOperationList
+    public abstract class OperationGenericsList<TObject> : OperationGenerics<TObject[]>, IOperationList<TObject>
     {
+#pragma warning disable  CS1591
         public TObject this[int index] => IsValidate && IsDone && Result != null &&
                                           index >= 0 && index < Result.Length
             ? Result[index]
@@ -34,41 +37,20 @@ namespace AIO
         }
 
         object IOperationList.this[int index] => this[index];
-        object[] IOperationList.Result => Result.To<object[]>();
-
-        object[] IOperationList.Invoke()
-        {
-            return Invoke().To<object[]>();
-        }
-
-        TaskAwaiter<object[]> IOperationList.GetAwaiter()
-        {
-            return IsValidate
-                ? CreateAsync().To<TaskAwaiter<object[]>>()
-                : Task.FromResult<object[]>(null).GetAwaiter();
-        }
+        object[] IOperationList.               Result       => Result.To<object[]>();
+        object[] IOperationList.               Invoke()     => Invoke().To<object[]>();
+        TaskAwaiter<object[]> ITaskObjectArray.GetAwaiter() => GetAwaiter().To<TaskAwaiter<object[]>>();
 
         #endregion
 
         #region IOperationList<TObject>
 
         TObject IOperationList<TObject>.this[int index] => this[index];
-        TObject[] IOperationList<TObject>.Result => Result;
-
-        TObject[] IOperationList<TObject>.Invoke()
-        {
-            return Invoke();
-        }
-
-        TaskAwaiter<TObject[]> IOperationList<TObject>.GetAwaiter()
-        {
-            return IsValidate
-                ? CreateAsync()
-                : Task.FromResult<TObject[]>(null).GetAwaiter();
-        }
+        TObject[] IOperationList<TObject>.      Result       => Result;
+        TObject[] IOperationList<TObject>.      Invoke()     => Invoke();
+        TaskAwaiter<TObject[]> ITask<TObject[]>.GetAwaiter() => GetAwaiter();
 
         #endregion
-
 
         #region IEnumerator<TObject>
 

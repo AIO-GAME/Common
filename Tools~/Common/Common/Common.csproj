@@ -778,6 +778,14 @@
     <Compile Include="Script\Tools\Buffer\Ring\BufferRing.cs" />
     <Compile Include="Script\Tools\Buffer\Ring\BufferRing.Extend.cs" />
     <Compile Include="Script\Tools\FileCache.cs" />
+    <Compile Include="Script\Tools\Handle\Interface\IOperation.cs" />
+    <Compile Include="Script\Tools\Handle\Interface\IOperationAction.cs" />
+    <Compile Include="Script\Tools\Handle\Interface\IOperationArray.cs" />
+    <Compile Include="Script\Tools\Handle\Interface\IOperationBase.cs" />
+    <Compile Include="Script\Tools\Handle\Interface\ITask.cs" />
+    <Compile Include="Script\Tools\Handle\OperationAction.cs" />
+    <Compile Include="Script\Tools\Handle\OperationGenerics.cs" />
+    <Compile Include="Script\Tools\Handle\OperationGenericsList.cs" />
     <Compile Include="Script\Tools\HashCode\HashCode.cs" />
     <Compile Include="Script\Tools\Mail\Mail.Usage.cs" />
     <Compile Include="Script\Tools\Mail\MailHandle.cs" />
