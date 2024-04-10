@@ -1,8 +1,4 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-12-17
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Collections.Generic;
@@ -11,24 +7,48 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: FTP
+
         public partial class FTP
         {
+            /// <summary>
+            /// FTP下载文件夹
+            /// </summary>
+            /// <param name="uri">路径</param>
+            /// <param name="username">用户名</param>
+            /// <param name="password">密码</param>
+            /// <param name="localPath">本地文件路径</param>
+            /// <param name="pattern">搜索过滤</param>
+            /// <param name="option">搜索模式</param>
+            /// <param name="overwrite">是否覆盖</param>
+            /// <param name="timeout">超时</param>
+            /// <param name="bufferSize">下载缓存大小</param>
+            public static IProgressOperation DownloadDir(
+                string       uri,
+                string       username,
+                string       password,
+                string       localPath,
+                SearchOption option     = SearchOption.AllDirectories,
+                string       pattern    = "*",
+                bool         overwrite  = false,
+                ushort       timeout    = Net.TIMEOUT,
+                int          bufferSize = Net.BUFFER_SIZE
+            )
+            {
+                return new FTPDownloadDirOperation(uri, username, password, localPath, option, pattern, overwrite,
+                                                   timeout, bufferSize);
+            }
+
+            #region Nested type: FTPDownloadDirOperation
+
             private class FTPDownloadDirOperation : AOperation
             {
-                private string uri { get; }
-                private string username { get; }
-                private string password { get; }
-                private string localPath { get; }
-                private SearchOption option { get; }
-                private string pattern { get; }
-                private bool overwrite { get; }
-                private ushort timeout { get; }
-                private int bufferSize { get; }
-
                 /// <param name="uri">路径</param>
                 /// <param name="username">用户名</param>
                 /// <param name="password">密码</param>
@@ -39,31 +59,41 @@ namespace AIO
                 /// <param name="timeout">超时</param>
                 /// <param name="bufferSize">下载缓存大小</param>
                 public FTPDownloadDirOperation(
-                    string uri,
-                    string username,
-                    string password,
-                    string localPath,
-                    SearchOption option = SearchOption.AllDirectories,
-                    string pattern = "*",
-                    bool overwrite = false,
-                    ushort timeout = Net.TIMEOUT,
-                    int bufferSize = Net.BUFFER_SIZE)
+                    string       uri,
+                    string       username,
+                    string       password,
+                    string       localPath,
+                    SearchOption option     = SearchOption.AllDirectories,
+                    string       pattern    = "*",
+                    bool         overwrite  = false,
+                    ushort       timeout    = Net.TIMEOUT,
+                    int          bufferSize = Net.BUFFER_SIZE)
                 {
-                    this.uri = uri.Replace('\\', '/');
-                    this.username = username;
-                    this.password = password;
-                    this.localPath = localPath;
-                    this.option = option;
-                    this.pattern = pattern;
-                    this.overwrite = overwrite;
-                    this.timeout = timeout;
+                    this.uri        = uri.Replace('\\', '/');
+                    this.username   = username;
+                    this.password   = password;
+                    this.localPath  = localPath;
+                    this.option     = option;
+                    this.pattern    = pattern;
+                    this.overwrite  = overwrite;
+                    this.timeout    = timeout;
                     this.bufferSize = bufferSize;
                 }
+
+                private string       uri        { get; }
+                private string       username   { get; }
+                private string       password   { get; }
+                private string       localPath  { get; }
+                private SearchOption option     { get; }
+                private string       pattern    { get; }
+                private bool         overwrite  { get; }
+                private ushort       timeout    { get; }
+                private int          bufferSize { get; }
 
                 protected override void OnWait()
                 {
                     var remoteList = GetDownloadList(uri, username, password,
-                        option, pattern, timeout);
+                                                     option, pattern, timeout);
                     var dict = new Dictionary<string, FileStream>();
                     foreach (var remoteAbs in remoteList)
                     {
@@ -86,11 +116,14 @@ namespace AIO
                         {
                             var temp = outputStream.Position - Net.CODE.Length;
                             if (temp < 0) continue;
-                            TotalValue += fileSize - temp;
-                            StartValue += temp;
-                            dict[remoteAbs] = outputStream;
+                            TotalValue      += fileSize - temp;
+                            StartValue      += temp;
+                            dict[remoteAbs] =  outputStream;
                         }
-                        else StartValue += fileSize;
+                        else
+                        {
+                            StartValue += fileSize;
+                        }
                     }
 
                     var buffer = new byte[bufferSize];
@@ -106,7 +139,7 @@ namespace AIO
                         var remote = string.Concat(uri, '/', pair.Key);
                         var request = CreateRequestFile(remote, username, password, "RETR", timeout, cancellationToken);
                         request.ContentOffset = outputStream.Position - Net.CODE.Length;
-                        CurrentInfo = request.RequestUri.AbsoluteUri;
+                        CurrentInfo           = request.RequestUri.AbsoluteUri;
                         try
                         {
                             using var response = request.GetResponse();
@@ -122,7 +155,6 @@ namespace AIO
 
                                 var readCount = responseStream.Read(buffer, 0, bufferSize);
                                 while (readCount > 0)
-                                {
                                     switch (State)
                                     {
                                         case EProgressState.Cancel:
@@ -137,7 +169,6 @@ namespace AIO
                                             Thread.Sleep(100);
                                             break;
                                     }
-                                }
 
                                 Net.RemoveFileHeader(outputStream, bufferSize);
                                 outputStream.Flush();
@@ -164,7 +195,7 @@ namespace AIO
                 protected override async Task OnWaitAsync()
                 {
                     var remoteList = await GetDownloadListAsync(uri, username, password,
-                        option, pattern, timeout, cancellationToken: cancellationToken);
+                                                                option, pattern, timeout, cancellationToken: cancellationToken);
                     var dict = new Dictionary<string, FileStream>();
                     foreach (var remoteAbs in remoteList)
                     {
@@ -187,11 +218,14 @@ namespace AIO
                         {
                             var temp = outputStream.Position - Net.CODE.Length;
                             if (temp < 0) continue;
-                            TotalValue += fileSize - temp;
-                            StartValue += temp;
-                            dict[remoteAbs] = outputStream;
+                            TotalValue      += fileSize - temp;
+                            StartValue      += temp;
+                            dict[remoteAbs] =  outputStream;
                         }
-                        else StartValue += fileSize;
+                        else
+                        {
+                            StartValue += fileSize;
+                        }
                     }
 
                     var buffer = new byte[bufferSize];
@@ -207,7 +241,7 @@ namespace AIO
                         var remote = string.Concat(uri, '/', pair.Key);
                         var request = CreateRequestFile(remote, username, password, "RETR", timeout, cancellationToken);
                         request.ContentOffset = outputStream.Position - Net.CODE.Length;
-                        CurrentInfo = request.RequestUri.AbsoluteUri;
+                        CurrentInfo           = request.RequestUri.AbsoluteUri;
                         try
                         {
                             using var response = await request.GetResponseAsync();
@@ -223,7 +257,6 @@ namespace AIO
 
                                 var readCount = await responseStream.ReadAsync(buffer, 0, bufferSize, cancellationToken);
                                 while (readCount > 0)
-                                {
                                     switch (State)
                                     {
                                         case EProgressState.Cancel:
@@ -233,13 +266,12 @@ namespace AIO
                                             CurrentValue += readCount;
                                             await outputStream.WriteAsync(buffer, 0, readCount, cancellationToken);
                                             readCount = await responseStream.ReadAsync(buffer, 0, bufferSize,
-                                                cancellationToken);
+                                                                                       cancellationToken);
                                             break;
                                         default:
                                             await Task.Delay(100, cancellationToken);
                                             break;
                                     }
-                                }
 
                                 await Net.RemoveFileHeaderAsync(outputStream, bufferSize, cancellationToken);
                                 await outputStream.FlushAsync(cancellationToken);
@@ -264,33 +296,9 @@ namespace AIO
                 }
             }
 
-            /// <summary>
-            /// FTP下载文件夹
-            /// </summary>
-            /// <param name="uri">路径</param>
-            /// <param name="username">用户名</param>
-            /// <param name="password">密码</param>
-            /// <param name="localPath">本地文件路径</param>
-            /// <param name="pattern">搜索过滤</param>
-            /// <param name="option">搜索模式</param>
-            /// <param name="overwrite">是否覆盖</param>
-            /// <param name="timeout">超时</param>
-            /// <param name="bufferSize">下载缓存大小</param>
-            public static IProgressOperation DownloadDir(
-                string uri,
-                string username,
-                string password,
-                string localPath,
-                SearchOption option = SearchOption.AllDirectories,
-                string pattern = "*",
-                bool overwrite = false,
-                ushort timeout = Net.TIMEOUT,
-                int bufferSize = Net.BUFFER_SIZE
-            )
-            {
-                return new FTPDownloadDirOperation(uri, username, password, localPath, option, pattern, overwrite,
-                    timeout, bufferSize);
-            }
+            #endregion
         }
+
+        #endregion
     }
 }

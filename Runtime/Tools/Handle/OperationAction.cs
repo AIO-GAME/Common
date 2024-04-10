@@ -1,28 +1,23 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
+#endregion
+
 namespace AIO
 {
     [StructLayout(LayoutKind.Auto)]
-    public abstract partial class OperationAction : IOperationAction
+    public abstract class OperationAction : IOperationAction
     {
-        public byte         Progress   { get; protected set; }
-        public bool         IsDone     { get; protected set; }
-        public bool         IsRunning  => !IsDone;
-        public bool         IsValidate { get; protected set; }
-        public event Action Completed;
-
-        protected abstract TaskAwaiter CreateAsync();
-        protected abstract IEnumerator CreateCoroutine();
-        protected abstract void        CreateSync();
-        protected virtual  void        OnReset()     { }
-        protected virtual  void        OnDispose()   { }
-        protected virtual  void        OnCompleted() { }
-
         private IEnumerator _CO;
+        public  byte        Progress   { get; protected set; }
+        public  bool        IsDone     { get; protected set; }
+        public  bool        IsRunning  => !IsDone;
+        public  bool        IsValidate { get; protected set; }
 
         protected IEnumerator CO
         {
@@ -33,12 +28,7 @@ namespace AIO
             }
         }
 
-        public TaskAwaiter GetAwaiter()
-        {
-            if (IsDone || !IsValidate) return Task.CompletedTask.GetAwaiter();
-            return CreateAsync();
-        }
-
+        #region IOperationAction Members
 
         public void Invoke()
         {
@@ -46,6 +36,45 @@ namespace AIO
             CreateSync();
             IsDone = true;
             InvokeOnCompleted();
+        }
+
+        #region IDisposable
+
+        void IDisposable.Dispose()
+        {
+            Dispose();
+        }
+
+        #endregion
+
+        #region INotifyCompletion
+
+        /// <inheritdoc />
+        void INotifyCompletion.OnCompleted(Action continuation)
+        {
+            if (IsDone)
+                continuation?.Invoke();
+            else
+                Completed += continuation;
+        }
+
+        #endregion
+
+        #endregion
+
+        public event Action Completed;
+
+        protected abstract TaskAwaiter CreateAsync();
+        protected abstract IEnumerator CreateCoroutine();
+        protected abstract void        CreateSync();
+        protected virtual  void        OnReset()     { }
+        protected virtual  void        OnDispose()   { }
+        protected virtual  void        OnCompleted() { }
+
+        public TaskAwaiter GetAwaiter()
+        {
+            if (IsDone || !IsValidate) return Task.CompletedTask.GetAwaiter();
+            return CreateAsync();
         }
 
 
@@ -80,6 +109,21 @@ namespace AIO
             Completed = null;
         }
 
+        public sealed override string ToString()
+        {
+            return string.Empty;
+        }
+
+        public sealed override bool Equals(object obj)
+        {
+            return false;
+        }
+
+        public sealed override int GetHashCode()
+        {
+            return 0;
+        }
+
         #region Constructor
 
         protected OperationAction()
@@ -100,15 +144,25 @@ namespace AIO
 
         #region operator implicit
 
-        public static implicit operator Action(OperationAction      operationAction) => operationAction.Completed;
-        public static implicit operator TaskAwaiter(OperationAction operationAction) => operationAction.GetAwaiter();
+        public static implicit operator Action(OperationAction operationAction)
+        {
+            return operationAction.Completed;
+        }
+
+        public static implicit operator TaskAwaiter(OperationAction operationAction)
+        {
+            return operationAction.GetAwaiter();
+        }
 
         #endregion
 
         #region AssetSystem.IHandle<TObject>
 
         /// <inheritdoc />
-        TaskAwaiter IOperationAction.GetAwaiter() => GetAwaiter();
+        TaskAwaiter IOperationAction.GetAwaiter()
+        {
+            return GetAwaiter();
+        }
 
         /// <inheritdoc />
         event Action IOperationAction.Completed
@@ -128,39 +182,20 @@ namespace AIO
 
         #endregion
 
-        #region IDisposable
-
-        void IDisposable.Dispose() => Dispose();
-
-        #endregion
-
         #region IEnumerator
 
-        void IEnumerator.  Reset()    => Reset();
-        bool IEnumerator.  MoveNext() => MoveNext();
-        object IEnumerator.Current    => CO.Current;
-
-        #endregion
-
-        #region INotifyCompletion
-
-        /// <inheritdoc />
-        void INotifyCompletion.OnCompleted(Action continuation)
+        void IEnumerator.Reset()
         {
-            if (IsDone)
-            {
-                continuation?.Invoke();
-            }
-            else
-            {
-                Completed += continuation;
-            }
+            Reset();
         }
 
-        #endregion
+        bool IEnumerator.MoveNext()
+        {
+            return MoveNext();
+        }
 
-        public sealed override string ToString()         => string.Empty;
-        public sealed override bool   Equals(object obj) => false;
-        public sealed override int    GetHashCode()      => 0;
+        object IEnumerator.Current => CO.Current;
+
+        #endregion
     }
 }

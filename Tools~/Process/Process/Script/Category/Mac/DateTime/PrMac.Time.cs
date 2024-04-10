@@ -2,6 +2,8 @@
 {
     public partial class PrMac
     {
+        #region Nested type: Time
+
         /// <summary>
         /// 获取程序的执行时间
         /// </summary>
@@ -15,5 +17,7 @@
                 return Create(CMD_Time, command);
             }
         }
+
+        #endregion
     }
 }

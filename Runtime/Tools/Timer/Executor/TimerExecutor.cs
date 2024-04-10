@@ -1,16 +1,72 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Diagnostics;
 using System.Text;
 using Debug = UnityEngine.Debug;
+
+#endregion
 
 namespace AIO
 {
     /// <summary>
     /// 定时任务处理器
     /// </summary>
-    internal abstract class TimerExecutor<T> : ITimerExecutor<T> where T : Delegate
+    internal abstract class TimerExecutor<T> : ITimerExecutor<T>
+    where T : Delegate
     {
-        protected long TID { get; set; } = 0;
+        /// <summary>
+        /// 定时计算器
+        /// </summary>
+        /// <param name="duration">定时长度 单位为毫秒</param>
+        /// <param name="loop">循环次数</param>
+        /// <param name="createTime">创建时间</param>
+        /// <param name="tid">识别ID</param>
+        protected TimerExecutor(long duration, int loop, long createTime, long tid)
+        {
+            Watch      = Stopwatch.StartNew();
+            Loop       = loop;
+            Duration   = duration;
+            CreateTime = createTime;
+            EndTime    = duration + createTime;
+            Number     = 0;
+            Interval   = 0;
+            TID        = tid;
+            if (TID == 0) return;
+            if (TimerSystem.TimerExecutors.ContainsKey(tid))
+                Debug.LogErrorFormat("TimerSystem.PushLoop: {0} already exists", tid);
+            else TimerSystem.TimerExecutors.Add(tid, this);
+        }
+
+        /// <summary>
+        /// 定时计算器
+        /// </summary>
+        /// <param name="duration">定时长度 单位为毫秒</param>
+        /// <param name="loop">循环次数</param>
+        /// <param name="createTime">创建时间</param>
+        protected TimerExecutor(long duration, int loop, long createTime)
+        {
+            Watch      = Stopwatch.StartNew();
+            Loop       = loop;
+            Duration   = duration;
+            CreateTime = createTime;
+            EndTime    = duration + createTime;
+            Number     = 0;
+            Interval   = 0;
+        }
+
+        protected long TID { get; set; }
+
+        internal int Loop { get; set; }
+
+        internal byte OperatorIndex { get; set; }
+
+        /// <summary>
+        /// 获取当前时间
+        /// </summary>
+        private long CurrentTime { get; set; }
+
+        #region ITimerExecutor<T> Members
 
         long ITimerExecutor.TID
         {
@@ -26,8 +82,6 @@ namespace AIO
 
         public long Interval { get; private set; }
 
-        internal int Loop { get; set; }
-
         int ITimerExecutor.Loop
         {
             get => Loop;
@@ -35,8 +89,6 @@ namespace AIO
         }
 
         public uint Number { get; private set; }
-
-        internal byte OperatorIndex { get; set; }
 
         byte ITimerExecutor.OperatorIndex
         {
@@ -49,53 +101,6 @@ namespace AIO
         public T Delegates { get; protected set; }
 
         /// <summary>
-        /// 定时计算器
-        /// </summary>
-        /// <param name="duration">定时长度 单位为毫秒</param>
-        /// <param name="loop">循环次数</param>
-        /// <param name="createTime">创建时间</param>
-        /// <param name="tid">识别ID</param>
-        protected TimerExecutor(long duration, int loop, long createTime, long tid)
-        {
-            Watch = Stopwatch.StartNew();
-            Loop = loop;
-            Duration = duration;
-            CreateTime = createTime;
-            EndTime = duration + createTime;
-            Number = 0;
-            Interval = 0;
-            TID = tid;
-            if (TID == 0) return;
-            if (TimerSystem.TimerExecutors.ContainsKey(tid))
-            {
-                Debug.LogErrorFormat("TimerSystem.PushLoop: {0} already exists", tid);
-            }
-            else TimerSystem.TimerExecutors.Add(tid, this);
-        }
-
-        /// <summary>
-        /// 定时计算器
-        /// </summary>
-        /// <param name="duration">定时长度 单位为毫秒</param>
-        /// <param name="loop">循环次数</param>
-        /// <param name="createTime">创建时间</param>
-        protected TimerExecutor(long duration, int loop, long createTime)
-        {
-            Watch = Stopwatch.StartNew();
-            Loop = loop;
-            Duration = duration;
-            CreateTime = createTime;
-            EndTime = duration + createTime;
-            Number = 0;
-            Interval = 0;
-        }
-
-        /// <summary>
-        /// 获取当前时间
-        /// </summary>
-        private long CurrentTime { get; set; }
-
-        /// <summary>
         /// 更新循环次数
         /// 返回Ture: 可以循环
         /// 返回False:循环结束
@@ -104,20 +109,20 @@ namespace AIO
         {
             if (Loop > 1)
             {
-                Number = Number + 1; //次数增加
+                Number      = Number + 1; //次数增加
                 CurrentTime = Watch.ElapsedMilliseconds;
-                Interval = CurrentTime - (Number * Duration);
-                CreateTime = EndTime;
-                EndTime = Duration + CreateTime - Interval;
+                Interval    = CurrentTime - Number * Duration;
+                CreateTime  = EndTime;
+                EndTime     = Duration + CreateTime - Interval;
                 Loop--;
                 return true;
             }
 
             if (Loop == 1 || Loop == 0)
             {
-                Number = Number + 1; //次数增加
+                Number      = Number + 1; //次数增加
                 CurrentTime = Watch.ElapsedMilliseconds;
-                Interval = CurrentTime - (Number * Duration);
+                Interval    = CurrentTime - Number * Duration;
                 Watch.Stop();
                 Watch = null;
                 if (TID != 0 && TimerSystem.TimerExecutors.ContainsKey(TID))
@@ -127,11 +132,11 @@ namespace AIO
 
             if (Loop == -1) //无限循环
             {
-                Number = Number + 1; //次数增加
+                Number      = Number + 1; //次数增加
                 CurrentTime = Watch.ElapsedMilliseconds;
-                Interval = CurrentTime - (Number * Duration);
-                CreateTime = EndTime;
-                EndTime = Duration + CreateTime - Interval;
+                Interval    = CurrentTime - Number * Duration;
+                CreateTime  = EndTime;
+                EndTime     = Duration + CreateTime - Interval;
                 return true;
             }
 
@@ -182,6 +187,8 @@ namespace AIO
 
             if (Loop == 0) Dispose();
         }
+
+        #endregion
 
         protected abstract void xExecute();
     }

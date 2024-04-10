@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Diagnostics;
 using System.Globalization;
+
+#endregion
 
 namespace AIO
 {
@@ -15,11 +19,6 @@ namespace AIO
         public Stopwatch stopWatch;
 
         /// <summary>
-        /// 标题
-        /// </summary>
-        public string Title { get; }
-
-        /// <summary>
         /// 初始化
         /// </summary>
         /// <param name="title">消耗时间标题</param>
@@ -27,6 +26,24 @@ namespace AIO
         {
             Title = title;
         }
+
+        /// <summary>
+        /// 标题
+        /// </summary>
+        public string Title { get; }
+
+        #region IDisposable Members
+
+        /// <summary>
+        /// 释放
+        /// </summary>
+        public void Dispose()
+        {
+            stopWatch.Stop();
+            stopWatch = null;
+        }
+
+        #endregion
 
         /// <summary>
         /// 开始计时
@@ -60,15 +77,6 @@ namespace AIO
         {
             stopWatch.Stop();
             throw new Exception(string.Format(CultureInfo.CurrentCulture, "{0}=>[{1}]", Title, stopWatch.Elapsed.ToString(format)), exception);
-        }
-
-        /// <summary>
-        /// 释放
-        /// </summary>
-        public void Dispose()
-        {
-            stopWatch.Stop();
-            stopWatch = null;
         }
     }
 }

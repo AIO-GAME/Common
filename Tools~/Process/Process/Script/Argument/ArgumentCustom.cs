@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Reflection;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
@@ -65,9 +69,8 @@ namespace AIO
                 var index = i;
                 if (!(fields[i].IsPublic && !fields[i].IsStatic)) continue;
                 foreach (var item in fields[index].GetCustomAttributes())
-                {
-                    if (SubResolver(ref fields[index], item, cmd)) break;
-                }
+                    if (SubResolver(ref fields[index], item, cmd))
+                        break;
             }
         }
 
@@ -79,10 +82,8 @@ namespace AIO
             var str = new StringBuilder().Append("Command:").AppendLine();
             var fileds = GetType().GetFields();
             foreach (var field in fileds)
-            {
                 if (field.IsPublic && !field.IsStatic)
                     str.Append(field.Name).Append('=').Append(field.GetValue(this)).AppendLine();
-            }
 
             return str.ToString();
         }

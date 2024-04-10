@@ -1,23 +1,21 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-09
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: TimeStamp
+
         /// <summary>
         /// TimeStamp 时间戳
         /// </summary>
-        public partial class TimeStamp
+        public class TimeStamp
         {
-            private TimeStamp()
-            {
-            }
+            private TimeStamp() { }
 
             /// <summary>
             /// Get current timestamp / 当前时间戳，单位是毫秒
@@ -59,5 +57,7 @@ namespace AIO
                 return (time.ToUniversalTime().Ticks - 621355968000000000) / 10000000;
             }
         }
+
+        #endregion
     }
 }

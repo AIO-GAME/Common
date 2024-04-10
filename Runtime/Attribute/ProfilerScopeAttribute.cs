@@ -1,5 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Diagnostics;
+
+#endregion
+
 #if SUPPORT_PROFILER
 using System.Reflection;
 using AIO;
@@ -10,8 +15,7 @@ using UnityEngine.Profiling;
 /// <summary>
 /// 用于标记方法的性能分析器范围
 /// </summary>
-[AttributeUsage(AttributeTargets.Method, Inherited = false)]
-[Conditional("UNITY_EDITOR"), DebuggerNonUserCode]
+[AttributeUsage(AttributeTargets.Method, Inherited = false), Conditional("UNITY_EDITOR"), DebuggerNonUserCode]
 public class ProfilerScopeAttribute
 #if SUPPORT_PROFILER
     : DecoratorAttribute

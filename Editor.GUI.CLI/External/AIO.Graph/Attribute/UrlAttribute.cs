@@ -1,14 +1,25 @@
-﻿using System;
+﻿#region
+
+using System;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
     /// <summary>
     /// CSDN博客链接
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public abstract class UrlAttribute : Attribute
     {
+        private UrlAttribute() { }
+
+        protected UrlAttribute(string url)
+        {
+            URL = url;
+        }
+
         /// <summary>
         /// 链接
         /// </summary>
@@ -17,14 +28,5 @@ namespace AIO.UEditor
         public GUIContent Content { get; protected set; }
 
         public abstract void OnEnable();
-
-        private UrlAttribute()
-        {
-        }
-
-        protected UrlAttribute(string url)
-        {
-            URL = url;
-        }
     }
 }

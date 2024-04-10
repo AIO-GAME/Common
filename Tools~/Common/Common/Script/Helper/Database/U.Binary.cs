@@ -1,15 +1,21 @@
+#region
+
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: Binary
+
         /// <summary>
         /// Binary 文件 解析
         /// </summary>
-        public partial class Binary
+        public class Binary
         {
             /// <summary>
             /// 序列化 未加密
@@ -19,7 +25,7 @@ namespace AIO
                 using (var stream = new MemoryStream())
                 {
                     var bf = new BinaryFormatter(); //创建序列化的对象
-                    bf.Serialize(stream, data); //将数据序列化
+                    bf.Serialize(stream, data);     //将数据序列化
                     stream.Flush();
                     return stream.ToArray();
                 }
@@ -47,5 +53,7 @@ namespace AIO
                 return default;
             }
         }
+
+        #endregion
     }
 }

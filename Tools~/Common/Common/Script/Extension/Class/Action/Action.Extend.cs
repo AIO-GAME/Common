@@ -1,22 +1,20 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+#region
 
 using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
+#endregion
+
 namespace AIO
 {
     /// <summary>
-    /// 函数扩展
+    ///     函数扩展
     /// </summary>
-    public static partial class ExtendAction
+    public static class ExtendAction
     {
         /// <summary>
-        /// 获取当前函数执行总时间
+        ///     获取当前函数执行总时间
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long GetTotalTime(this Action action)
@@ -28,7 +26,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 获取当前函数执行总时间
+        ///     获取当前函数执行总时间
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long GetTotalTime<T1>(this Action<T1> action, in T1 arg1)
@@ -40,7 +38,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 获取当前函数执行总时间
+        ///     获取当前函数执行总时间
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long GetTotalTime<T1>(this Action<T1, T1> action, in T1 arg1, in T1 arg2)
@@ -52,7 +50,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 获取当前函数执行总时间
+        ///     获取当前函数执行总时间
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long GetTotalTime<T1>(this Action<T1, T1, T1> action, in T1 arg1, in T1 arg2, in T1 arg3)
@@ -64,7 +62,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 获取当前函数执行总时间
+        ///     获取当前函数执行总时间
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long GetTotalTime<T1>(this Action<T1, T1, T1, T1> action, in T1 arg1, in T1 arg2, in T1 arg3, in T1 arg4)
@@ -76,7 +74,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 获取当前函数执行总时间
+        ///     获取当前函数执行总时间
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long GetTotalTime<T1, T2>(this Action<T1, T2> action, in T1 arg1, in T2 arg2)
@@ -88,7 +86,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 获取当前函数执行总时间
+        ///     获取当前函数执行总时间
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long GetTotalTime<T1, T2, T3>(this Action<T1, T2, T3> action, in T1 arg1, in T2 arg2, in T3 arg3)
@@ -100,7 +98,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 获取当前函数执行总时间
+        ///     获取当前函数执行总时间
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long GetTotalTime<T1, T2, T3, T4>(this Action<T1, T2, T3, T4> action, in T1 arg1, in T2 arg2, in T3 arg3, in T4 arg4)
@@ -112,7 +110,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 获取当前函数执行总时间
+        ///     获取当前函数执行总时间
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long GetTotalTime<T1>(this Action<T1[]> action, params T1[] arg1)

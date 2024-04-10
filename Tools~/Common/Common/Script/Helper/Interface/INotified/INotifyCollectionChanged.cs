@@ -1,7 +1,11 @@
-﻿namespace AIO
-{
-    using System;
+﻿#region
 
+using System;
+
+#endregion
+
+namespace AIO
+{
     /// <summary>
     /// 通知集合 改变事件
     /// </summary>

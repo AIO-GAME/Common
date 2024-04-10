@@ -1,10 +1,4 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-08-24
-
-|||✩ - - - - - |*/
-
-namespace AIO
+﻿namespace AIO
 {
     /*
      * 例子:
@@ -22,38 +16,13 @@ namespace AIO
     /// </summary>
     public class LruCache
     {
-        /// <summary>
-        /// 节点信息
-        /// </summary>
-        public class NodeInfo
-        {
-            /// <summary>
-            /// 节点ID
-            /// </summary>
-            public int id = 0;
-
-            /// <summary>
-            /// 下一个节点
-            /// </summary>
-            public NodeInfo Next { get; set; }
-
-            /// <summary>
-            /// 上一个节点
-            /// </summary>
-            public NodeInfo Prev { get; set; }
-        }
-
         private NodeInfo[] allNodes;
-        private NodeInfo head = null;
-        private NodeInfo tail = null;
+        private NodeInfo   tail;
 
         /// <summary>
         /// 第一个节点
         /// </summary>
-        public NodeInfo First
-        {
-            get { return head; }
-        }
+        public NodeInfo First { get; private set; }
 
         /// <summary>
         /// 初始化
@@ -63,21 +32,19 @@ namespace AIO
         {
             allNodes = new NodeInfo[count];
             for (var i = 0; i < count; i++)
-            {
                 allNodes[i] = new NodeInfo
                 {
-                    id = i,
+                    id = i
                 };
-            }
 
             for (var i = 0; i < count; i++)
             {
-                allNodes[i].Next = (i + 1 < count) ? allNodes[i + 1] : null;
-                allNodes[i].Prev = (i != 0) ? allNodes[i - 1] : null;
+                allNodes[i].Next = i + 1 < count ? allNodes[i + 1] : null;
+                allNodes[i].Prev = i != 0 ? allNodes[i - 1] : null;
             }
 
-            head = allNodes[0];
-            tail = allNodes[count - 1];
+            First = allNodes[0];
+            tail  = allNodes[count - 1];
         }
 
         /// <summary>
@@ -102,15 +69,15 @@ namespace AIO
         {
             var lastTail = tail;
             lastTail.Next = node;
-            tail = node;
-            node.Prev = lastTail;
+            tail          = node;
+            node.Prev     = lastTail;
         }
 
         private void Remove(NodeInfo node)
         {
-            if (head == node)
+            if (First == node)
             {
-                head = node.Next;
+                First = node.Next;
             }
             else
             {
@@ -123,8 +90,33 @@ namespace AIO
         {
             var temp = allNodes[tail.id];
             allNodes[tail.id] = null;
-            tail = allNodes[temp.id - 1];
+            tail              = allNodes[temp.id - 1];
             return temp;
         }
+
+        #region Nested type: NodeInfo
+
+        /// <summary>
+        /// 节点信息
+        /// </summary>
+        public class NodeInfo
+        {
+            /// <summary>
+            /// 节点ID
+            /// </summary>
+            public int id;
+
+            /// <summary>
+            /// 下一个节点
+            /// </summary>
+            public NodeInfo Next { get; set; }
+
+            /// <summary>
+            /// 上一个节点
+            /// </summary>
+            public NodeInfo Prev { get; set; }
+        }
+
+        #endregion
     }
 }

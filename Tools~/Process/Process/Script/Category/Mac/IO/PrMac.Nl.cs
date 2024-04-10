@@ -1,9 +1,15 @@
-﻿using System.IO;
+﻿#region
+
+using System.IO;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrMac
     {
+        #region Nested type: Nl
+
         /// <summary>
         /// 给文件加上行号
         /// </summary>
@@ -19,5 +25,7 @@ namespace AIO
                 return Chmod.Set777(target).Link(Create(CMD_Nl, cmd));
             }
         }
+
+        #endregion
     }
 }

@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
@@ -10,9 +14,14 @@ namespace AIO
     /// </summary>
     public class ReferenceEqualityComparer : IEqualityComparer<object>
     {
-        private ReferenceEqualityComparer()
-        {
-        }
+        /// <summary>
+        /// 实例
+        /// </summary>
+        public static readonly ReferenceEqualityComparer Instance = new ReferenceEqualityComparer();
+
+        private ReferenceEqualityComparer() { }
+
+        #region IEqualityComparer<object> Members
 
         bool IEqualityComparer<object>.Equals(object a, object b)
         {
@@ -24,10 +33,7 @@ namespace AIO
             return GetHashCode(a);
         }
 
-        /// <summary>
-        /// 实例
-        /// </summary>
-        public static readonly ReferenceEqualityComparer Instance = new ReferenceEqualityComparer();
+        #endregion
 
         /// <summary>
         /// 获取哈希值
@@ -43,9 +49,14 @@ namespace AIO
     /// </summary>
     public class ReferenceEqualityComparer<T> : IEqualityComparer<T>
     {
-        private ReferenceEqualityComparer()
-        {
-        }
+        /// <summary>
+        /// 获取哈希值
+        /// </summary>
+        public static readonly ReferenceEqualityComparer<T> Instance = new ReferenceEqualityComparer<T>();
+
+        private ReferenceEqualityComparer() { }
+
+        #region IEqualityComparer<T> Members
 
         bool IEqualityComparer<T>.Equals(T a, T b)
         {
@@ -57,10 +68,7 @@ namespace AIO
             return GetHashCode(a);
         }
 
-        /// <summary>
-        /// 获取哈希值
-        /// </summary>
-        public static readonly ReferenceEqualityComparer<T> Instance = new ReferenceEqualityComparer<T>();
+        #endregion
 
         /// <summary>
         /// 获取哈希值

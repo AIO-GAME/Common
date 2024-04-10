@@ -4,15 +4,21 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+#endregion
+
 namespace AIO
 {
     public partial class PrWin
     {
+        #region Nested type: Git
+
         public static partial class Git
         {
             /// <summary>
@@ -36,7 +42,7 @@ namespace AIO
                     if (!Directory.Exists(target))
                     {
                         str.AppendFormat("\n @echo Error:{0} \n",
-                            new FileNotFoundException(nameof(target), target).Message).AppendLine();
+                                         new FileNotFoundException(nameof(target), target).Message).AppendLine();
                     }
                     else
                     {
@@ -67,7 +73,7 @@ namespace AIO
                     if (!Directory.Exists(target))
                     {
                         str.AppendFormat("\n @echo Error:{0} \n",
-                            new FileNotFoundException(nameof(target), target).Message).AppendLine();
+                                         new FileNotFoundException(nameof(target), target).Message).AppendLine();
                     }
                     else
                     {
@@ -92,7 +98,7 @@ namespace AIO
             /// <param name="quit">静默退出</param>
             public static IExecutor Push((string, string) target, bool quit = true)
             {
-                return Push(new (string, string)[] { target }, quit);
+                return Push(new[] { target }, quit);
             }
 
             /// <summary>
@@ -102,8 +108,10 @@ namespace AIO
             /// <param name="quit">静默退出</param>
             public static IExecutor Push(string target, bool quit = true)
             {
-                return Push(new string[] { target }, quit);
+                return Push(new[] { target }, quit);
             }
         }
+
+        #endregion
     }
 }

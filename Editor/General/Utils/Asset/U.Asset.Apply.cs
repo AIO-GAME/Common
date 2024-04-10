@@ -1,16 +1,16 @@
-/*|============|*|
-|*|Author:     |*| xinan
-|*|Date:       |*| 2023-06-04
-|*|E-Mail:     |*| 1398581458@qq.com
-|*|============|*/
+#region
 
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
     public partial class EHelper
     {
+        #region Nested type: Asset
+
         public partial class Asset
         {
             /// <summary>
@@ -31,5 +31,7 @@ namespace AIO.UEditor
                 if (prefab != null) PrefabUtility.SavePrefabAsset(prefab);
             }
         }
+
+        #endregion
     }
 }

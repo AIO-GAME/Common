@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -7,58 +9,20 @@ using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
+#endregion
+
 namespace AIO.UEditor
 {
     public static partial class EHelper
     {
+        #region Nested type: Path
+
         /// <summary>
         /// 提供了一些与路径相关的实用方法。
         /// 包含与程序集有关的实用方法和属性的静态类
         /// </summary>
         public static class Path
         {
-            [AInit(mode: EInitAttrMode.Both, int.MinValue)]
-            private static void Init()
-            {
-                try
-                {
-                    Project = Application.dataPath.Substring(0, Application.dataPath.LastIndexOf('/'));
-                    Prefs.SaveString("ProjectPath", Project);
-                }
-                catch (Exception)
-                {
-                    Project = Prefs.LoadString("ProjectPath");
-                    Debug.LogWarning("Failed to get project path from Unity API. Using saved path instead.");
-                }
-
-                Assets = string.Concat(Project, "/Assets");
-                StreamingAssets = string.Concat(Assets, "/StreamingAssets");
-                if (Project != null)
-                {
-                    Temp = string.Concat(Project, "/Temp");
-                    Logs = string.Concat(Project, "/Logs");
-                    Packages = string.Concat(Project, "/Packages");
-                    UserSettings = string.Concat(Project, "/UserSettings");
-
-                    ProjectSettings = string.Concat(Project, "/ProjectSettings");
-                    Backups = string.Concat(Project, "/Backups");
-                    EditorDefaultResources = string.Concat(Project, "/Editor Default Resources");
-                }
-
-                try
-                {
-                    SyncVS = typeof(Editor).Assembly.GetType("UnityEditor.SyncVS", true);
-                    SyncVS_SyncSolution = SyncVS.GetMethod("SyncSolution", BindingFlags.Static | BindingFlags.Public);
-
-                    if (SyncVS_SyncSolution == null)
-                        throw new MissingMemberException(SyncVS.ToString(), "SyncSolution");
-                }
-                catch (Exception ex)
-                {
-                    throw new UnityEditorInternalException(ex);
-                }
-            }
-
             /// <summary>
             /// 获取当前项目的 ProjectSettings 文件夹的完整路径。
             /// </summary>
@@ -158,6 +122,48 @@ namespace AIO.UEditor
             /// </summary>
             public static string ProjectName => System.IO.Path.GetFileName(Project.TrimEnd('/', '\\'));
 
+            [AInit(mode: EInitAttrMode.Both, int.MinValue)]
+            private static void Init()
+            {
+                try
+                {
+                    Project = Application.dataPath.Substring(0, Application.dataPath.LastIndexOf('/'));
+                    Prefs.SaveString("ProjectPath", Project);
+                }
+                catch (Exception)
+                {
+                    Project = Prefs.LoadString("ProjectPath");
+                    Debug.LogWarning("Failed to get project path from Unity API. Using saved path instead.");
+                }
+
+                Assets          = string.Concat(Project, "/Assets");
+                StreamingAssets = string.Concat(Assets, "/StreamingAssets");
+                if (Project != null)
+                {
+                    Temp         = string.Concat(Project, "/Temp");
+                    Logs         = string.Concat(Project, "/Logs");
+                    Packages     = string.Concat(Project, "/Packages");
+                    UserSettings = string.Concat(Project, "/UserSettings");
+
+                    ProjectSettings        = string.Concat(Project, "/ProjectSettings");
+                    Backups                = string.Concat(Project, "/Backups");
+                    EditorDefaultResources = string.Concat(Project, "/Editor Default Resources");
+                }
+
+                try
+                {
+                    SyncVS              = typeof(Editor).Assembly.GetType("UnityEditor.SyncVS", true);
+                    SyncVS_SyncSolution = SyncVS.GetMethod("SyncSolution", BindingFlags.Static | BindingFlags.Public);
+
+                    if (SyncVS_SyncSolution == null)
+                        throw new MissingMemberException(SyncVS.ToString(), "SyncSolution");
+                }
+                catch (Exception ex)
+                {
+                    throw new UnityEditorInternalException(ex);
+                }
+            }
+
             #region Assembly Projects
 
             /// <summary>
@@ -237,25 +243,13 @@ namespace AIO.UEditor
                     var editorFirstPass = EditorAssemblyFirstPassProject;
                     var editorSecondPass = EditorAssemblySecondPassProject;
 
-                    if (firstPass != null)
-                    {
-                        yield return firstPass;
-                    }
+                    if (firstPass != null) yield return firstPass;
 
-                    if (secondPass != null)
-                    {
-                        yield return secondPass;
-                    }
+                    if (secondPass != null) yield return secondPass;
 
-                    if (editorFirstPass != null)
-                    {
-                        yield return editorFirstPass;
-                    }
+                    if (editorFirstPass != null) yield return editorFirstPass;
 
-                    if (editorSecondPass != null)
-                    {
-                        yield return editorSecondPass;
-                    }
+                    if (editorSecondPass != null) yield return editorSecondPass;
                 }
             }
 
@@ -264,28 +258,16 @@ namespace AIO.UEditor
             /// </summary>
             private static string PreferredProjectPath(string path1, string path2)
             {
-                if (!File.Exists(path1) && !File.Exists(path2))
-                {
-                    return null;
-                }
+                if (!File.Exists(path1) && !File.Exists(path2)) return null;
 
-                if (!File.Exists(path1))
-                {
-                    return path2;
-                }
+                if (!File.Exists(path1)) return path2;
 
-                if (!File.Exists(path2))
-                {
-                    return path1;
-                }
+                if (!File.Exists(path2)) return path1;
 
                 var timestamp1 = File.GetLastWriteTime(path1);
                 var timestamp2 = File.GetLastWriteTime(path2);
 
-                if (timestamp1 >= timestamp2)
-                {
-                    return path1;
-                }
+                if (timestamp1 >= timestamp2) return path1;
 
                 return path2;
             }
@@ -306,20 +288,17 @@ namespace AIO.UEditor
             {
                 get
                 {
-                    if (Application.platform == RuntimePlatform.WindowsEditor)
-                    {
-                        return Environment.GetEnvironmentVariable("PATH")?.Split(';');
-                    }
+                    if (Application.platform == RuntimePlatform.WindowsEditor) return Environment.GetEnvironmentVariable("PATH")?.Split(';');
 
                     // http://stackoverflow.com/a/41318134/154502
                     var start = new ProcessStartInfo
                     {
-                        FileName = "/bin/bash",
-                        Arguments = "-l -c \"echo $PATH\"", // -l = 'login shell' to execute /etc/profile
-                        UseShellExecute = false,
-                        CreateNoWindow = true,
+                        FileName               = "/bin/bash",
+                        Arguments              = "-l -c \"echo $PATH\"", // -l = 'login shell' to execute /etc/profile
+                        UseShellExecute        = false,
+                        CreateNoWindow         = true,
                         RedirectStandardOutput = true,
-                        RedirectStandardError = true
+                        RedirectStandardError  = true
                     };
 
                     var process = Process.Start(start);
@@ -345,9 +324,7 @@ namespace AIO.UEditor
                 {
                     if (IntPtr.Size == 8 ||
                         !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432")))
-                    {
                         return Environment.GetEnvironmentVariable("ProgramFiles(x86)");
-                    }
 
                     return Environment.GetEnvironmentVariable("ProgramFiles");
                 }
@@ -360,22 +337,19 @@ namespace AIO.UEditor
             {
                 get
                 {
-                    if (Application.platform != RuntimePlatform.WindowsEditor)
-                    {
-                        return null;
-                    }
+                    if (Application.platform != RuntimePlatform.WindowsEditor) return null;
 
                     try
                     {
                         var startInfo = new ProcessStartInfo
                         {
                             FileName = System.IO.Path.Combine(ProgramFiles_X86,
-                                @"Microsoft Visual Studio\Installer\vswhere.exe"),
+                                                              @"Microsoft Visual Studio\Installer\vswhere.exe"),
                             Arguments =
                                 @"-latest -prerelease -products * -requires Microsoft.Component.MSBuild -find **\Bin\MSBuild.exe",
-                            UseShellExecute = false,
+                            UseShellExecute        = false,
                             RedirectStandardOutput = true,
-                            CreateNoWindow = true
+                            CreateNoWindow         = true
                         };
 
                         using (var vsWhere = Process.Start(startInfo))
@@ -404,10 +378,7 @@ namespace AIO.UEditor
             {
                 get
                 {
-                    if (Application.platform == RuntimePlatform.WindowsEditor)
-                    {
-                        return null;
-                    }
+                    if (Application.platform == RuntimePlatform.WindowsEditor) return null;
 
                     var path = AHelper.IO.TryPathsForFile("xbuild", environmentPaths);
 
@@ -420,7 +391,7 @@ namespace AIO.UEditor
             /// </summary>
             public static string RoslynCompiler =>
                 System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Editor) ?? string.Empty,
-                    "Data/tools/Roslyn/csc.exe");
+                                       "Data/tools/Roslyn/csc.exe");
 
             /// <summary>
             /// 项目构建工具的完整路径
@@ -430,5 +401,7 @@ namespace AIO.UEditor
 
             #endregion
         }
+
+        #endregion
     }
 }

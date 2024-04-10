@@ -1,7 +1,11 @@
 ﻿#if UNITY_EDITOR
 
+#region
+
 using System.Reflection;
 using UnityEditor;
+
+#endregion
 
 namespace AIO
 {
@@ -56,7 +60,6 @@ namespace AIO
             if (secondary != null || !typeof(T).IsValueType)
             {
                 value = (T)secondary;
-                return;
             }
         }
 

@@ -4,15 +4,21 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+#endregion
+
 namespace AIO
 {
     public partial class PrWin
     {
+        #region Nested type: Git
+
         public static partial class Git
         {
             /// <summary>
@@ -27,7 +33,7 @@ namespace AIO
             /// <param name="quit">静默退出</param>
             public static IExecutor Upload(string target, bool inputCommit = false, bool inputOrigin = false, bool quit = true)
             {
-                return Upload(new string[] { target }, inputCommit, inputOrigin, quit);
+                return Upload(new[] { target }, inputCommit, inputOrigin, quit);
             }
 
             /// <summary>
@@ -55,7 +61,7 @@ namespace AIO
                     if (!Directory.Exists(target))
                     {
                         str.AppendFormat("\n @echo Error:{0} \n",
-                            new FileNotFoundException(nameof(target), target).Message).AppendLine();
+                                         new FileNotFoundException(nameof(target), target).Message).AppendLine();
                     }
                     else
                     {
@@ -69,7 +75,10 @@ namespace AIO
                             str.AppendLine("@echo please input push origin target && @set /p originArg=");
                             str.AppendLine("@git push -u origin \"!originArg!\"");
                         }
-                        else str.AppendLine("@git push");
+                        else
+                        {
+                            str.AppendLine("@git push");
+                        }
                     }
 
                     str.AppendLine(LINE_BOTTOM);
@@ -78,5 +87,7 @@ namespace AIO
                 return Execute(str, quit);
             }
         }
+
+        #endregion
     }
 }

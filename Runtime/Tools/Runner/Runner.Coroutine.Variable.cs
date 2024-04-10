@@ -4,9 +4,13 @@
 |*|E-Mail:     |*| xinansky99@gmail.com
 |*|============|*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
@@ -50,14 +54,14 @@ namespace AIO
         public static WaitForSecondsRealtime WaitForSecondsRealtime(float k)
         {
             if (!waitForSecondsRealtime.TryGetValue(k, out var tmp))
-                waitForSecondsRealtime.Add(k, (tmp = new WaitForSecondsRealtime(k)));
+                waitForSecondsRealtime.Add(k, tmp = new WaitForSecondsRealtime(k));
             return tmp;
         }
 
         public static WaitUntil WaitUntil(Func<bool> k)
         {
             if (!waitUntil.TryGetValue(k, out var tmp))
-                waitUntil.Add(k, (tmp = new WaitUntil(k)));
+                waitUntil.Add(k, tmp = new WaitUntil(k));
             return tmp;
         }
 

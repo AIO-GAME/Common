@@ -1,8 +1,4 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-02
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Collections.Generic;
@@ -11,23 +7,38 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: HTTP
+
         public partial class HTTP
         {
+            /// <summary>
+            /// HTTP 下载文件
+            /// </summary>
+            /// <param name="remoteUrls">远端路径</param>
+            /// <param name="localPath">保存根路径</param>
+            /// <param name="isOverWrite">覆盖</param>
+            /// <param name="timeout">超时</param>
+            /// <param name="bufferSize">容量</param>
+            /// <exception cref="Exception">异常</exception>
+            public static IProgressOperation Download(
+                IEnumerable<string> remoteUrls, string localPath,
+                bool                isOverWrite = false,
+                ushort              timeout     = Net.TIMEOUT,
+                int                 bufferSize  = Net.BUFFER_SIZE)
+            {
+                return new HttpDownloadsOperation(remoteUrls, localPath, isOverWrite, timeout, bufferSize);
+            }
+
+            #region Nested type: HttpDownloadsOperation
+
             private class HttpDownloadsOperation : AOperation
             {
-                private List<string>                        Remote           { get; }
-                private string                              LocalPath        { get; }
-                private bool                                IsOverWrite      { get; }
-                private ushort                              Timeout          { get; }
-                private int                                 BufferSize       { get; }
-                private Dictionary<string, HttpWebResponse> httpWebResponses { get; }
-                private Dictionary<string, HttpWebRequest>  httpWebRequest   { get; }
-                private Dictionary<string, FileStream>      fileStreams      { get; }
-
                 public HttpDownloadsOperation(
                     IEnumerable<string> remoteUrls,
                     string              localPath,
@@ -54,6 +65,15 @@ namespace AIO
                         Remote.Add(remoteUrl.Replace("\\", "/"));
                     }
                 }
+
+                private List<string>                        Remote           { get; }
+                private string                              LocalPath        { get; }
+                private bool                                IsOverWrite      { get; }
+                private ushort                              Timeout          { get; }
+                private int                                 BufferSize       { get; }
+                private Dictionary<string, HttpWebResponse> httpWebResponses { get; }
+                private Dictionary<string, HttpWebRequest>  httpWebRequest   { get; }
+                private Dictionary<string, FileStream>      fileStreams      { get; }
 
                 protected override void OnBegin()
                 {
@@ -254,23 +274,9 @@ namespace AIO
                 }
             }
 
-            /// <summary>
-            /// HTTP 下载文件
-            /// </summary>
-            /// <param name="remoteUrls">远端路径</param>
-            /// <param name="localPath">保存根路径</param>
-            /// <param name="isOverWrite">覆盖</param>
-            /// <param name="timeout">超时</param>
-            /// <param name="bufferSize">容量</param>
-            /// <exception cref="Exception">异常</exception>
-            public static IProgressOperation Download(
-                IEnumerable<string> remoteUrls, string localPath,
-                bool                isOverWrite = false,
-                ushort              timeout     = Net.TIMEOUT,
-                int                 bufferSize  = Net.BUFFER_SIZE)
-            {
-                return new HttpDownloadsOperation(remoteUrls, localPath, isOverWrite, timeout, bufferSize);
-            }
+            #endregion
         }
+
+        #endregion
     }
 }

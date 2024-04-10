@@ -4,11 +4,15 @@
 |*|E-Mail:     |*| 1398581458@qq.com
 |*|============|*/
 
+#region
+
 using System;
 using UnityEngine;
 #if UNITY_EDITOR_WIN
 using System.Runtime.InteropServices;
 #endif
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -136,6 +140,8 @@ namespace AIO.UEditor
 
     public static partial class EHelper
     {
+        #region Nested type: Profiler
+
         /// <summary>
         /// Profiler Editor
         /// </summary>
@@ -145,7 +151,8 @@ namespace AIO.UEditor
             /// 获取 Texture 磁盘占用大小
             /// </summary>
             /// <returns>占用空间</returns>
-            public static long GetStorageMemoryTexture<T>(T obj) where T : Texture
+            public static long GetStorageMemoryTexture<T>(T obj)
+            where T : Texture
             {
                 var method = AHelper.Assembly.GetMethodInfo(
                     "UnityEditor.dll",
@@ -179,5 +186,7 @@ namespace AIO.UEditor
             }
 #endif
         }
+
+        #endregion
     }
 }

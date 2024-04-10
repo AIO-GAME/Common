@@ -1,4 +1,8 @@
-﻿using System;
+﻿#region
+
+using System;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -8,11 +12,8 @@ namespace AIO.UEditor
     public class UnityEditorInternalException : Exception
     {
         /// <inheritdoc/>
-        public UnityEditorInternalException(in Exception innerException) :
-            base(
-                "An error occured while accessing internal Unity Editor functions. This might happen if Unity makes backward-incompatible changes in their newer versions of the editor.",
-                innerException)
-        {
-        }
+        public UnityEditorInternalException(in Exception innerException) : base(
+            "An error occured while accessing internal Unity Editor functions. This might happen if Unity makes backward-incompatible changes in their newer versions of the editor.",
+            innerException) { }
     }
 }

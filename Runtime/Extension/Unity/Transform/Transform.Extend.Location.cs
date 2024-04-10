@@ -4,8 +4,12 @@
 |*|E-Mail:     |*| xinansky99@foxmail.com
 |*|============|*/
 
+#region
+
 using System;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEngine
 {
@@ -23,7 +27,7 @@ namespace AIO.UEngine
             {
                 Position = target.localPosition,
                 Rotation = target.localEulerAngles,
-                Scale = target.localScale
+                Scale    = target.localScale
             };
             return location;
         }
@@ -36,9 +40,9 @@ namespace AIO.UEngine
         public static void SetLocation(this Transform target, Location location)
         {
             if (target == null || location == Location.Null) return;
-            target.localPosition = location.Position;
+            target.localPosition    = location.Position;
             target.localEulerAngles = location.Rotation;
-            target.localScale = location.Scale;
+            target.localScale       = location.Scale;
         }
     }
 
@@ -48,6 +52,42 @@ namespace AIO.UEngine
     [Serializable]
     public struct Location : IEquatable<Location>
     {
+        /// <summary>
+        /// 局部坐标
+        /// </summary>
+        public Vector3 Position;
+
+        /// <summary>
+        /// 局部旋转
+        /// </summary>
+        public Vector3 Rotation;
+
+        /// <summary>
+        /// 局部缩放
+        /// </summary>
+        public Vector3 Scale;
+
+        public Location(Vector3 position, Vector3 rotation, Vector3 scale)
+        {
+            Position = position;
+            Rotation = rotation;
+            Scale    = scale;
+        }
+
+        /// <summary>
+        /// 是否为零
+        /// </summary>
+        public bool IsZero => Position == Vector3.zero && Rotation == Vector3.zero && Scale == Vector3.one;
+
+        /// <summary>
+        /// 是否为零
+        /// </summary>
+        public bool IsNull => Position == Vector3.zero && Rotation == Vector3.zero && Scale == Vector3.zero;
+
+        public static Location Zero => new Location(Vector3.zero, Vector3.zero, Vector3.one);
+
+        public static Location Null => new Location(Vector3.zero, Vector3.zero, Vector3.zero);
+
         public bool Equals(Location other)
         {
             return Position.Equals(other.Position) && Rotation.Equals(other.Rotation) && Scale.Equals(other.Scale);
@@ -68,42 +108,6 @@ namespace AIO.UEngine
                 return hashCode;
             }
         }
-
-        /// <summary>
-        /// 局部坐标
-        /// </summary>
-        public Vector3 Position;
-
-        /// <summary>
-        /// 局部旋转
-        /// </summary>
-        public Vector3 Rotation;
-
-        /// <summary>
-        /// 局部缩放
-        /// </summary>
-        public Vector3 Scale;
-
-        public Location(Vector3 position, Vector3 rotation, Vector3 scale)
-        {
-            Position = position;
-            Rotation = rotation;
-            Scale = scale;
-        }
-
-        /// <summary>
-        /// 是否为零
-        /// </summary>
-        public bool IsZero => Position == Vector3.zero && Rotation == Vector3.zero && Scale == Vector3.one;
-
-        /// <summary>
-        /// 是否为零
-        /// </summary>
-        public bool IsNull => Position == Vector3.zero && Rotation == Vector3.zero && Scale == Vector3.zero;
-
-        public static Location Zero => new Location(Vector3.zero, Vector3.zero, Vector3.one);
-
-        public static Location Null => new Location(Vector3.zero, Vector3.zero, Vector3.zero);
 
         /// <summary>
         /// 判断两个 Location 是否相等

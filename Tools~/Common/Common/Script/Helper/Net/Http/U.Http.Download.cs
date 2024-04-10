@@ -1,22 +1,45 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.IO;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: HTTP
+
         public partial class HTTP
         {
+            /// <summary>
+            /// HTTP 下载文件
+            /// </summary>
+            /// <param name="remoteUrl">远端路径</param>
+            /// <param name="localPath">保存路径</param>
+            /// <param name="isOverWrite">覆盖</param>
+            /// <param name="timeout">超时</param>
+            /// <param name="bufferSize">容量</param>
+            /// <exception cref="Exception">异常</exception>
+            public static IProgressOperation Download(
+                string remoteUrl,
+                string localPath,
+                bool   isOverWrite = false,
+                ushort timeout     = Net.TIMEOUT,
+                int    bufferSize  = Net.BUFFER_SIZE
+            )
+            {
+                return new HttpDownloadOperation(remoteUrl, localPath, isOverWrite, timeout, bufferSize);
+            }
+
+            #region Nested type: HttpDownloadOperation
+
             private class HttpDownloadOperation : AOperation
             {
-                private string         Remote      { get; }
-                private string         LocalPath   { get; }
-                private bool           IsOverWrite { get; }
-                private ushort         Timeout     { get; }
-                private int            BufferSize  { get; }
                 private FileStream     outputStream;
                 private HttpWebRequest request;
 
@@ -33,6 +56,12 @@ namespace AIO
                     Timeout     = timeout;
                     BufferSize  = bufferSize;
                 }
+
+                private string Remote      { get; }
+                private string LocalPath   { get; }
+                private bool   IsOverWrite { get; }
+                private ushort Timeout     { get; }
+                private int    BufferSize  { get; }
 
                 protected override void OnPause()  { }
                 protected override void OnResume() { }
@@ -179,25 +208,9 @@ namespace AIO
                 }
             }
 
-            /// <summary>
-            /// HTTP 下载文件
-            /// </summary>
-            /// <param name="remoteUrl">远端路径</param>
-            /// <param name="localPath">保存路径</param>
-            /// <param name="isOverWrite">覆盖</param>
-            /// <param name="timeout">超时</param>
-            /// <param name="bufferSize">容量</param>
-            /// <exception cref="Exception">异常</exception>
-            public static IProgressOperation Download(
-                string remoteUrl,
-                string localPath,
-                bool   isOverWrite = false,
-                ushort timeout     = Net.TIMEOUT,
-                int    bufferSize  = Net.BUFFER_SIZE
-            )
-            {
-                return new HttpDownloadOperation(remoteUrl, localPath, isOverWrite, timeout, bufferSize);
-            }
+            #endregion
         }
+
+        #endregion
     }
 }

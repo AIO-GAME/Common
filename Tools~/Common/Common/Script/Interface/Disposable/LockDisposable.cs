@@ -1,11 +1,9 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-06
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Threading;
+
+#endregion
 
 namespace AIO
 {
@@ -25,11 +23,15 @@ namespace AIO
             _exitLock = exitLock;
         }
 
+        #region IDisposable Members
+
         /// <inheritdoc />
         public void Dispose()
         {
             _exitLock();
         }
+
+        #endregion
     }
 
     /// <summary>
@@ -59,7 +61,7 @@ namespace AIO
     /// <summary>
     /// 扩展
     /// </summary>
-    public static partial class ReaderWriterLockSlimExtend
+    public static class ReaderWriterLockSlimExtend
     {
         /// <summary>
         /// Write lock class enters write lock on construction and performs exit write lock on dispose.

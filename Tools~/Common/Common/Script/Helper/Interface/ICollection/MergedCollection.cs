@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+
+#endregion
 
 namespace AIO
 {
@@ -22,6 +26,8 @@ namespace AIO
             collections = new Dictionary<Type, ICollection<T>>();
         }
 
+        #region IMergedCollection<T> Members
+
         /// <summary>
         /// 获取集合中元素的数量
         /// </summary>
@@ -36,21 +42,12 @@ namespace AIO
         public bool IsReadOnly => false;
 
         /// <summary>
-        /// 添加一个集合
-        /// </summary>
-        /// <typeparam name="TI">泛型类型</typeparam>
-        /// <param name="collection">集合</param>
-        public void Include<TI>(ICollection<TI> collection) where TI : T
-        {
-            collections.Add(typeof(TI), new VariantCollection<T, TI>(collection));
-        }
-
-        /// <summary>
         /// 是否包含某个类型的集合
         /// </summary>
         /// <typeparam name="TI">泛型类型</typeparam>
         /// <returns>是否包含某个类型的集合</returns>
-        public bool Includes<TI>() where TI : T
+        public bool Includes<TI>()
+        where TI : T
         {
             return Includes(typeof(TI));
         }
@@ -63,16 +60,6 @@ namespace AIO
         public bool Includes(Type implementationType)
         {
             return GetCollectionForType(implementationType, false) != null;
-        }
-
-        /// <summary>
-        /// 获取某个类型的集合
-        /// </summary>
-        /// <typeparam name="TI">泛型类型</typeparam>
-        /// <returns>某个类型的集合</returns>
-        public ICollection<TI> ForType<TI>() where TI : T
-        {
-            return ((VariantCollection<T, TI>)GetCollectionForType(typeof(TI))).Implementation;
         }
 
         /// <summary>
@@ -91,45 +78,6 @@ namespace AIO
         public IEnumerator<T> GetEnumerator()
         {
             return collections.Values.SelectMany(collection => collection).GetEnumerator();
-        }
-
-        /// <summary>
-        /// 获取某个元素所在的集合
-        /// </summary>
-        /// <param name="item">元素</param>
-        /// <returns>某个元素所在的集合</returns>
-        private ICollection<T> GetCollectionForItem(T item)
-        {
-            return GetCollectionForType(item.GetType());
-        }
-
-        /// <summary>
-        /// 获取某个类型的集合
-        /// </summary>
-        /// <param name="type">类型</param>
-        /// <param name="throwOnFail">是否抛出异常</param>
-        /// <returns>某个类型的集合</returns>
-        private ICollection<T> GetCollectionForType(Type type, bool throwOnFail = true)
-        {
-            if (collections.ContainsKey(type))
-            {
-                return collections[type];
-            }
-
-            foreach (var collectionByType in collections.Where(collectionByType =>
-                         collectionByType.Key.IsAssignableFrom(type)))
-            {
-                return collectionByType.Value;
-            }
-
-            if (throwOnFail)
-            {
-                throw new InvalidOperationException($"No sub-collection available for type '{type}'.");
-            }
-            else
-            {
-                return null;
-            }
         }
 
         /// <summary>
@@ -156,10 +104,7 @@ namespace AIO
         /// </summary>
         public virtual void Clear()
         {
-            foreach (var collection in collections.Values)
-            {
-                collection.Clear();
-            }
+            foreach (var collection in collections.Values) collection.Clear();
         }
 
         /// <summary>
@@ -192,6 +137,59 @@ namespace AIO
                 collection.CopyTo(array, arrayIndex + i);
                 i += collection.Count;
             }
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 添加一个集合
+        /// </summary>
+        /// <typeparam name="TI">泛型类型</typeparam>
+        /// <param name="collection">集合</param>
+        public void Include<TI>(ICollection<TI> collection)
+        where TI : T
+        {
+            collections.Add(typeof(TI), new VariantCollection<T, TI>(collection));
+        }
+
+        /// <summary>
+        /// 获取某个类型的集合
+        /// </summary>
+        /// <typeparam name="TI">泛型类型</typeparam>
+        /// <returns>某个类型的集合</returns>
+        public ICollection<TI> ForType<TI>()
+        where TI : T
+        {
+            return ((VariantCollection<T, TI>)GetCollectionForType(typeof(TI))).Implementation;
+        }
+
+        /// <summary>
+        /// 获取某个元素所在的集合
+        /// </summary>
+        /// <param name="item">元素</param>
+        /// <returns>某个元素所在的集合</returns>
+        private ICollection<T> GetCollectionForItem(T item)
+        {
+            return GetCollectionForType(item.GetType());
+        }
+
+        /// <summary>
+        /// 获取某个类型的集合
+        /// </summary>
+        /// <param name="type">类型</param>
+        /// <param name="throwOnFail">是否抛出异常</param>
+        /// <returns>某个类型的集合</returns>
+        private ICollection<T> GetCollectionForType(Type type, bool throwOnFail = true)
+        {
+            if (collections.ContainsKey(type)) return collections[type];
+
+            foreach (var collectionByType in collections.Where(collectionByType =>
+                                                                   collectionByType.Key.IsAssignableFrom(type)))
+                return collectionByType.Value;
+
+            if (throwOnFail)
+                throw new InvalidOperationException($"No sub-collection available for type '{type}'.");
+            return null;
         }
     }
 }

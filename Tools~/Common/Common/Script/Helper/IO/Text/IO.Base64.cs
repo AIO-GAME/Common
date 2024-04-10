@@ -1,9 +1,15 @@
+#region
+
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -11,7 +17,7 @@ namespace AIO
             /// </summary>
             public static T ReadBase64<T>(
                 in string path,
-                Encoding charset = null)
+                Encoding  charset = null)
             {
                 return Base64.Deserialize<T>(ReadText(path, charset));
             }
@@ -30,8 +36,9 @@ namespace AIO
             /// </summary>
             public static void WriteBase64<T>(
                 in string path,
-                in T value,
-                Encoding charset = null) where T : struct
+                in T      value,
+                Encoding  charset = null)
+            where T : struct
             {
                 WriteText(path, Base64.SerializeData(value), charset);
             }
@@ -41,7 +48,8 @@ namespace AIO
             /// </summary>
             public static void WriteBase64UTF8<T>(
                 in string path,
-                in T value) where T : struct
+                in T      value)
+            where T : struct
             {
                 WriteUTF8(path, Base64.SerializeData(value));
             }
@@ -51,11 +59,14 @@ namespace AIO
             /// </summary>
             public static void WriteBase64UTF8<T>(
                 in string path,
-                T value) where T : class
+                T         value)
+            where T : class
             {
                 if (value == null) return;
                 WriteUTF8(path, Base64.SerializeData(value));
             }
         }
+
+        #endregion
     }
 }

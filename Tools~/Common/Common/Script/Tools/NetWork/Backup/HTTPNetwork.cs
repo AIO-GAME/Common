@@ -1,9 +1,3 @@
-// /*|============|*|
-// |*|Author:     |*| xinan
-// |*|Date:       |*| 2023-10-07
-// |*|E-Mail:     |*| 1398581458@qq.com
-// |*|============|*/
-//
 // using System;
 // using System.Collections.Generic;
 // using System.IO;
@@ -240,3 +234,4 @@
 //         }
 //     }
 // }
+

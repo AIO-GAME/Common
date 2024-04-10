@@ -1,14 +1,16 @@
-﻿using System.Runtime.CompilerServices;
+﻿#region
+
+using System;
+using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
-    using System;
-    using System.Collections.Generic;
-
     public partial class ExtendString
     {
         /// <summary>
-        /// 在字符串中查找所有出现指定子字符串的位置，忽略大小写
+        ///     在字符串中查找所有出现指定子字符串的位置，忽略大小写
         /// </summary>
         /// <param name="haystack">要搜索的字符串</param>
         /// <param name="needle">要在 haystack 中搜索的子字符串</param>

@@ -32,7 +32,8 @@
         /// <summary>
         /// 反序列化
         /// </summary>
-        public static T Deserialize<T>(string data) where T : class
+        public static T Deserialize<T>(string data)
+        where T : class
         {
             return MiniJSON.Decode<T>(data);
         }

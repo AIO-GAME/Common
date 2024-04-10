@@ -4,20 +4,29 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrWin
     {
+        #region Nested type: Git
+
         /// <summary>
         /// GIT BAT 命令
         /// </summary>
         public static partial class Git
         {
+            private const           string LINE_TOP    = "@echo ─────────────────────────────────────";
+            private const           string LINE_BOTTOM = "@echo ─────────────────────────────────────&@echo.";
             private static readonly string GITPATH;
 
             static Git()
@@ -28,7 +37,7 @@ namespace AIO
                     var type = assembly.GetType("UnityEngine.Application");
                     if (type is null) continue;
                     var dataPath = type.GetProperty("dataPath",
-                        System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public);
+                                                    BindingFlags.Static | BindingFlags.Public);
                     if (dataPath is null) continue;
                     GITPATH = dataPath.GetValue(null, null) as string;
                     if (string.IsNullOrEmpty(GITPATH)) continue;
@@ -40,19 +49,14 @@ namespace AIO
                     }
 
                     GITPATH = Path.Combine(Root.FullName,
-                        string.Concat(AppDomain.CurrentDomain.BaseDirectory.GetHashCode(), ".bat"));
+                                           string.Concat(AppDomain.CurrentDomain.BaseDirectory.GetHashCode(), ".bat"));
                     break;
                 }
 
                 if (string.IsNullOrEmpty(GITPATH))
-                {
                     GITPATH = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                        string.Concat(AppDomain.CurrentDomain.BaseDirectory.GetHashCode(), ".bat"));
-                }
+                                           string.Concat(AppDomain.CurrentDomain.BaseDirectory.GetHashCode(), ".bat"));
             }
-
-            private const string LINE_TOP = "@echo ─────────────────────────────────────";
-            private const string LINE_BOTTOM = "@echo ─────────────────────────────────────&@echo.";
 
             private static string TopInfo()
             {
@@ -82,8 +86,7 @@ namespace AIO
                     str.AppendLine(LINE_TOP);
                     if (!Directory.Exists(target))
                     {
-                        str.AppendFormat("\n @echo Error:{0} \n", new FileNotFoundException(target).Message)
-                            .AppendLine();
+                        str.AppendFormat("\n @echo Error:{0} \n", new FileNotFoundException(target).Message).AppendLine();
                     }
                     else
                     {
@@ -139,5 +142,7 @@ namespace AIO
                 return Open.Path(GITPATH).Link(PrCmd.Del.ALL(GITPATH));
             }
         }
+
+        #endregion
     }
 }

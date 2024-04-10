@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEngine
 {
@@ -9,9 +13,11 @@ namespace AIO.UEngine
         /// <summary>
         /// Is the <see cref="Vector2.x"/> or <see cref="Vector2.y"/> NaN?
         /// </summary>
-        public static bool IsNaN(this Vector2 vector) =>
-            float.IsNaN(vector.x) ||
-            float.IsNaN(vector.y);
+        public static bool IsNaN(this Vector2 vector)
+        {
+            return float.IsNaN(vector.x) ||
+                   float.IsNaN(vector.y);
+        }
 
         /// <summary>
         /// 是否约等于另一个向量

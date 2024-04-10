@@ -2,20 +2,20 @@
 
 ### 常用 Method
 
-| WebRequestMethods.Ftp                          | Value   | Description     |
-|------------------------------------------------|:--------|:----------------|
-| WebRequestMethods.Ftp.MakeDirectory            | MDK     | 创建文件夹           | 
-| WebRequestMethods.Ftp.RemoveDirectory          | RMD     | 删除文件夹(要求空目录)    |
-| WebRequestMethods.Ftp.DeleteFile               | DELE    | 删除文件            |
-| WebRequestMethods.Ftp.Rename                   | RENAME  | 文件/文件夹 重命名      |
-| WebRequestMethods.Ftp.ListDirectory            | NLST    | 获取目录列表          |
-| WebRequestMethods.Ftp.ListDirectoryDetails     | LIST    | 获取目录列表(详细信息)    |
-| WebRequestMethods.Ftp.DownloadFile             | RETR    | 下载文件            |
-| WebRequestMethods.Ftp.UploadFile               | STOR    | 上传文件            |
-| WebRequestMethods.Ftp.UploadFileWithUniqueName | STOU    | 上传唯一ID文件        |
-| WebRequestMethods.Ftp.AppendFile               | APPE    | 附加文件内容          |
-| WebRequestMethods.Ftp.GetFileSize              | SIZE    | 获取文件大小          |
-| WebRequestMethods.Ftp.PrintWorkingDirectory    | PWD     | 输出工作目录          |
+| WebRequestMethods.Ftp                          | Value  | Description  |
+|------------------------------------------------|:-------|:-------------|
+| WebRequestMethods.Ftp.MakeDirectory            | MDK    | 创建文件夹        | 
+| WebRequestMethods.Ftp.RemoveDirectory          | RMD    | 删除文件夹(要求空目录) |
+| WebRequestMethods.Ftp.DeleteFile               | DELE   | 删除文件         |
+| WebRequestMethods.Ftp.Rename                   | RENAME | 文件/文件夹 重命名   |
+| WebRequestMethods.Ftp.ListDirectory            | NLST   | 获取目录列表       |
+| WebRequestMethods.Ftp.ListDirectoryDetails     | LIST   | 获取目录列表(详细信息) |
+| WebRequestMethods.Ftp.DownloadFile             | RETR   | 下载文件         |
+| WebRequestMethods.Ftp.UploadFile               | STOR   | 上传文件         |
+| WebRequestMethods.Ftp.UploadFileWithUniqueName | STOU   | 上传唯一ID文件     |
+| WebRequestMethods.Ftp.AppendFile               | APPE   | 附加文件内容       |
+| WebRequestMethods.Ftp.GetFileSize              | SIZE   | 获取文件大小       |
+| WebRequestMethods.Ftp.PrintWorkingDirectory    | PWD    | 输出工作目录       |
 
 ### 使用示例
 

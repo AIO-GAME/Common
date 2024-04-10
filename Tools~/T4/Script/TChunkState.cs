@@ -50,6 +50,6 @@ namespace AIO
         /// <summary>
         /// 
         /// </summary>
-        SealedClass,
+        SealedClass
     }
 }

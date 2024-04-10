@@ -1,9 +1,3 @@
-// /*|============|*|
-// |*|Author:     |*| xinan                
-// |*|Date:       |*| 2023-10-07               
-// |*|E-Mail:     |*| 1398581458@qq.com     
-// |*|============|*/
-//
 // namespace AIO
 // {
 //     /// <summary>
@@ -28,3 +22,4 @@
 //         T Deserialize<T>(int protocol, byte[] data);
 //     }
 // }
+

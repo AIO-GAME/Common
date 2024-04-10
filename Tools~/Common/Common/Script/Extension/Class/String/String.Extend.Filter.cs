@@ -1,11 +1,15 @@
-﻿using System.Text;
+﻿#region
+
+using System.Text;
+
+#endregion
 
 namespace AIO
 {
     public partial class ExtendString
     {
         /// <summary>
-        /// 从字符串中过滤出指定类型的字符，并返回过滤后的字符串
+        ///     从字符串中过滤出指定类型的字符，并返回过滤后的字符串
         /// </summary>
         /// <param name="s">要过滤的字符串</param>
         /// <param name="letters">是否保留字母</param>
@@ -15,11 +19,11 @@ namespace AIO
         /// <param name="punctuation">是否保留标点符号</param>
         /// <returns>过滤后的字符串</returns>
         public static string Filter(this string s,
-            in bool letters = true,
-            in bool numbers = true,
-            in bool whitespace = true,
-            in bool symbols = true,
-            in bool punctuation = true)
+                                    in   bool   letters     = true,
+                                    in   bool   numbers     = true,
+                                    in   bool   whitespace  = true,
+                                    in   bool   symbols     = true,
+                                    in   bool   punctuation = true)
         {
             var sb = new StringBuilder();
 
@@ -40,7 +44,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 从字符串中过滤出指定类型的字符，并用指定字符替换被过滤的字符
+        ///     从字符串中过滤出指定类型的字符，并用指定字符替换被过滤的字符
         /// </summary>
         /// <param name="s">要过滤的字符串</param>
         /// <param name="replacement">用于替换被过滤字符的字符</param>
@@ -52,30 +56,26 @@ namespace AIO
         /// <param name="punctuation">是否保留标点符号</param>
         /// <returns>替换后的字符串</returns>
         public static string FilterReplace(this string s,
-            in char replacement,
-            in bool merge,
-            in bool letters = true,
-            in bool numbers = true,
-            in bool whitespace = true,
-            in bool symbols = true,
-            in bool punctuation = true)
+                                           in   char   replacement,
+                                           in   bool   merge,
+                                           in   bool   letters     = true,
+                                           in   bool   numbers     = true,
+                                           in   bool   whitespace  = true,
+                                           in   bool   symbols     = true,
+                                           in   bool   punctuation = true)
         {
             var sb = new StringBuilder();
 
             var wasFiltered = false;
 
             foreach (var c in s)
-            {
                 if ((!letters && char.IsLetter(c)) ||
                     (!numbers && char.IsNumber(c)) ||
                     (!whitespace && char.IsWhiteSpace(c)) ||
                     (!symbols && char.IsSymbol(c)) ||
                     (!punctuation && char.IsPunctuation(c)))
                 {
-                    if (!merge || !wasFiltered)
-                    {
-                        sb.Append(replacement);
-                    }
+                    if (!merge || !wasFiltered) sb.Append(replacement);
 
                     wasFiltered = true;
                 }
@@ -85,13 +85,12 @@ namespace AIO
 
                     wasFiltered = false;
                 }
-            }
 
             return sb.ToString();
         }
 
         /// <summary>
-        /// 美化
+        ///     美化
         /// </summary>
         public static string Prettify(this string s)
         {
@@ -99,7 +98,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 首字母转为大写
+        ///     首字母转为大写
         /// </summary>
         public static string FirstCharacterToUpper(this string s)
         {

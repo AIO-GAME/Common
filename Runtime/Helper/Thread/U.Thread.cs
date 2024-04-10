@@ -1,11 +1,17 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Threading;
 using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
     partial class RHelper
     {
+        #region Nested type: Thread
+
         /// <summary>
         /// 提供在特定线程上下文（SynchronizationContext）中异步执行回调函数或操作的静态方法。
         /// </summary>
@@ -32,7 +38,7 @@ namespace AIO
             /// <param name="act">要执行的 Action 对象。</param>
             public static void SyncPost(Action act)
             {
-                syncContext.Post((obj) =>
+                syncContext.Post(obj =>
                 {
                     try
                     {
@@ -64,5 +70,7 @@ namespace AIO
                 SyncPost(act);
             }
         }
+
+        #endregion
     }
 }

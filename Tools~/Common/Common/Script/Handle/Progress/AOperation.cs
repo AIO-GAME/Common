@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections;
 using System.Threading;
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {
@@ -16,6 +20,16 @@ namespace AIO
         private AProgress progress;
 
         /// <summary>
+        /// 构造函数
+        /// </summary>
+        public AOperation()
+        {
+            progress                = new AProgress();
+            cancellationTokenSource = new CancellationTokenSource();
+            cancellationToken       = cancellationTokenSource.Token;
+        }
+
+        /// <summary>
         /// 取消令牌
         /// </summary>
         private CancellationTokenSource cancellationTokenSource { get; }
@@ -24,30 +38,6 @@ namespace AIO
         /// 取消令牌
         /// </summary>
         protected CancellationToken cancellationToken { get; private set; }
-
-        /// <inheritdoc />
-        public IProgressReport Report => progress;
-
-        /// <inheritdoc />
-        public IProgressEvent Event
-        {
-            get => progress;
-            set
-            {
-                if (value is null) return;
-                if (progress is null) progress = new AProgress();
-                progress.OnProgress = value.OnProgress;
-                progress.OnBegin = value.OnBegin;
-                progress.OnComplete = value.OnComplete;
-                progress.OnError = value.OnError;
-                progress.OnResume = value.OnResume;
-                progress.OnPause = value.OnPause;
-                progress.OnCancel = value.OnCancel;
-            }
-        }
-
-        /// <inheritdoc />
-        public IProgressInfo Progress => progress;
 
         /// <summary>
         /// 状态
@@ -94,15 +84,31 @@ namespace AIO
             set => progress.CurrentValue = value;
         }
 
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        public AOperation()
+        #region IProgressOperation Members
+
+        /// <inheritdoc />
+        public IProgressReport Report => progress;
+
+        /// <inheritdoc />
+        public IProgressEvent Event
         {
-            progress = new AProgress();
-            cancellationTokenSource = new CancellationTokenSource();
-            cancellationToken = cancellationTokenSource.Token;
+            get => progress;
+            set
+            {
+                if (value is null) return;
+                if (progress is null) progress = new AProgress();
+                progress.OnProgress = value.OnProgress;
+                progress.OnBegin    = value.OnBegin;
+                progress.OnComplete = value.OnComplete;
+                progress.OnError    = value.OnError;
+                progress.OnResume   = value.OnResume;
+                progress.OnPause    = value.OnPause;
+                progress.OnCancel   = value.OnCancel;
+            }
         }
+
+        /// <inheritdoc />
+        public IProgressInfo Progress => progress;
 
         /// <inheritdoc />
         public void Begin()
@@ -196,14 +202,6 @@ namespace AIO
             Finish();
         }
 
-        /// <summary>
-        /// 迭代器等待
-        /// </summary>
-        protected virtual IEnumerator OnWaitCo()
-        {
-            throw new NotImplementedException();
-        }
-
         /// <inheritdoc />
         public async Task WaitAsync()
         {
@@ -220,6 +218,38 @@ namespace AIO
             if (State != EProgressState.Running) return;
             await OnWaitAsync();
             Finish();
+        }
+
+        /// <inheritdoc />
+        public void Wait()
+        {
+            if (State != EProgressState.Running) return;
+            OnWait();
+            Finish();
+        }
+
+        /// <inheritdoc />
+        public void Dispose()
+        {
+            cancellationTokenSource.Dispose();
+            OnDispose();
+            if (!(Event is null))
+            {
+                Event.Dispose();
+                Event = null;
+            }
+
+            GC.Collect();
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 迭代器等待
+        /// </summary>
+        protected virtual IEnumerator OnWaitCo()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -239,69 +269,35 @@ namespace AIO
             return Task.CompletedTask;
         }
 
-        /// <inheritdoc />
-        public void Wait()
-        {
-            if (State != EProgressState.Running) return;
-            OnWait();
-            Finish();
-        }
-
         /// <summary>
         /// 开始
         /// </summary>
-        protected virtual void OnBegin()
-        {
-        }
+        protected virtual void OnBegin() { }
 
         /// <summary>
         /// 取消
         /// </summary>
-        protected virtual void OnCancel()
-        {
-        }
+        protected virtual void OnCancel() { }
 
         /// <summary>
         /// 暂停
         /// </summary>
-        protected virtual void OnPause()
-        {
-        }
+        protected virtual void OnPause() { }
 
         /// <summary>
         /// 恢复
         /// </summary>
-        protected virtual void OnResume()
-        {
-        }
-
-        /// <inheritdoc />
-        public void Dispose()
-        {
-            cancellationTokenSource.Dispose();
-            OnDispose();
-            if (!(Event is null))
-            {
-                Event.Dispose();
-                Event = null;
-            }
-
-            GC.Collect();
-        }
+        protected virtual void OnResume() { }
 
         /// <summary>
         /// 等待
         /// </summary>
-        protected virtual void OnWait()
-        {
-        }
+        protected virtual void OnWait() { }
 
         /// <summary>
         /// 释放
         /// </summary>
-        protected virtual void OnDispose()
-        {
-        }
+        protected virtual void OnDispose() { }
 
         /// <inheritdoc />
         public sealed override string ToString()

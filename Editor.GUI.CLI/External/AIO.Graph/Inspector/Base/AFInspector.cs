@@ -1,6 +1,10 @@
-﻿using UnityEditor;
+﻿#region
+
+using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -8,7 +12,8 @@ namespace AIO.UEditor
     /// 空 Inspector 物体属性
     /// </summary>
     //[CustomEditor(typeof(Class))]
-    public abstract class AFInspector<E> : AFEditor where E : Object
+    public abstract class AFInspector<E> : AFEditor
+    where E : Object
     {
         /// <summary>
         /// 常量 撤销标识码
@@ -65,24 +70,6 @@ namespace AIO.UEditor
             if (EditorApplication.isPlaying) OnRuntimeEnable();
         }
 
-        protected virtual void OnActivation()
-        {
-        }
-
-        /// <summary>
-        /// 运行时 Enable
-        /// </summary>
-        protected virtual void OnRuntimeEnable()
-        {
-        }
-
-        /// <summary>
-        /// 运行时 Disable
-        /// </summary>
-        protected virtual void OnRuntimeDisable()
-        {
-        }
-
         /// <inheritdoc />
         protected sealed override void OnDisable() //脚本或对象禁用时调用
         {
@@ -99,14 +86,22 @@ namespace AIO.UEditor
             OnInhibition();
         }
 
-        protected virtual void OnInhibition()
-        {
-        }
-
         /// <inheritdoc />
-        protected override void OnDestroy()
-        {
-        }
+        protected override void OnDestroy() { }
+
+        protected virtual void OnActivation() { }
+
+        /// <summary>
+        /// 运行时 Enable
+        /// </summary>
+        protected virtual void OnRuntimeEnable() { }
+
+        /// <summary>
+        /// 运行时 Disable
+        /// </summary>
+        protected virtual void OnRuntimeDisable() { }
+
+        protected virtual void OnInhibition() { }
 
         protected override void OnHeaderGUI()
         {
@@ -130,10 +125,7 @@ namespace AIO.UEditor
                 foreach (var item in URLArray)
                 {
                     GUI.enabled = !string.IsNullOrEmpty(item.URL);
-                    if (GUI.Button(new Rect(headerRect), item.Content, GEStyle.IconButton))
-                    {
-                        Application.OpenURL(item.URL);
-                    }
+                    if (GUI.Button(new Rect(headerRect), item.Content, GEStyle.IconButton)) Application.OpenURL(item.URL);
 
                     headerRect.y += EditorGUIUtility.singleLineHeight;
 
@@ -148,7 +140,7 @@ namespace AIO.UEditor
             if (IsEnableRuntimeData && EditorApplication.isPlaying)
             {
                 GUI.backgroundColor = Color.cyan;
-                GUI.color = Color.white;
+                GUI.color           = Color.white;
                 EditorGUILayout.BeginVertical(EditorStyles.helpBox);
 
                 EditorGUILayout.BeginHorizontal();
@@ -179,9 +171,7 @@ namespace AIO.UEditor
             }
         }
 
-        protected virtual void OnGUIRuntime()
-        {
-        }
+        protected virtual void OnGUIRuntime() { }
 
         /// <summary>
         /// 标记目标已改变
@@ -191,12 +181,8 @@ namespace AIO.UEditor
         {
             if (markTarget) EditorUtility.SetDirty(target);
             else
-            {
                 foreach (var item in targets)
-                {
                     EditorUtility.SetDirty(item);
-                }
-            }
 
             if (EditorApplication.isPlaying) return;
             if (target is Component component && component.gameObject.scene.IsValid())
@@ -211,8 +197,6 @@ namespace AIO.UEditor
         /// <summary>
         /// Inspector 发生改动时调用
         /// </summary>
-        protected virtual void OnChange()
-        {
-        }
+        protected virtual void OnChange() { }
     }
 }

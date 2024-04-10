@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {

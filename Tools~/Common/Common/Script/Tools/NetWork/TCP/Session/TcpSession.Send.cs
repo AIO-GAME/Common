@@ -1,12 +1,10 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-06
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Net.Sockets;
 using System.Threading;
+
+#endregion
 
 namespace AIO.Net
 {
@@ -15,15 +13,17 @@ namespace AIO.Net
         // Send buffer
         private readonly object SendLock = new object();
 
-        private NetBuffer _sendNetBufferMain;
-
         private NetBuffer _sendNetBufferFlush;
 
-        private bool Sending;
+        private NetBuffer _sendNetBufferMain;
+
+        private long SendBufferFlushOffset;
 
         private SocketAsyncEventArgs SendEventArg;
 
-        private long SendBufferFlushOffset;
+        private bool Sending;
+
+        #region INetSession Members
 
         /// <summary>
         /// Send data to the client (synchronous)
@@ -74,7 +74,7 @@ namespace AIO.Net
             lock (SendLock)
             {
                 // Check the send buffer limit
-                if (((_sendNetBufferMain.Count + buffer.Length) > OptionSendBufferLimit) && (OptionSendBufferLimit > 0))
+                if (_sendNetBufferMain.Count + buffer.Length > OptionSendBufferLimit && OptionSendBufferLimit > 0)
                 {
                     SendError(SocketError.NoBufferSpaceAvailable);
                     return false;
@@ -97,6 +97,8 @@ namespace AIO.Net
             return true;
         }
 
+        #endregion
+
         /// <summary>
         /// Try to send pending data
         /// </summary>
@@ -117,11 +119,11 @@ namespace AIO.Net
                     if (_sendNetBufferFlush.IsEmpty)
                     {
                         // Swap flush and main buffers
-                        _sendNetBufferFlush = Interlocked.Exchange(ref _sendNetBufferMain, _sendNetBufferFlush);
+                        _sendNetBufferFlush   = Interlocked.Exchange(ref _sendNetBufferMain, _sendNetBufferFlush);
                         SendBufferFlushOffset = 0;
 
                         // Update statistic
-                        BytesPending = 0;
+                        BytesPending =  0;
                         BytesSending += _sendNetBufferFlush.Count;
 
                         // Check if the flush buffer is empty
@@ -135,7 +137,9 @@ namespace AIO.Net
                         }
                     }
                     else
+                    {
                         return;
+                    }
                 }
 
                 // Call the empty send buffer handler
@@ -149,13 +153,11 @@ namespace AIO.Net
                 {
                     // Async write with the write handler
                     SendEventArg.SetBuffer(_sendNetBufferFlush.Arrays, (int)SendBufferFlushOffset,
-                        (int)(_sendNetBufferFlush.Count - SendBufferFlushOffset));
+                                           (int)(_sendNetBufferFlush.Count - SendBufferFlushOffset));
                     if (!Socket.SendAsync(SendEventArg))
                         process = ProcessSend(SendEventArg);
                 }
-                catch (ObjectDisposedException)
-                {
-                }
+                catch (ObjectDisposedException) { }
             }
         }
 
@@ -175,7 +177,7 @@ namespace AIO.Net
             {
                 // Update statistic
                 BytesSending -= size;
-                BytesSent += size;
+                BytesSent    += size;
                 Interlocked.Add(ref Server._bytesSent, size);
 
                 // Increase the flush buffer offset
@@ -195,13 +197,13 @@ namespace AIO.Net
 
             // Try to send again if the session is valid
             if (e.SocketError == SocketError.Success)
-                return true;
-            else
             {
-                SendError(e.SocketError);
-                Disconnect();
-                return false;
+                return true;
             }
+
+            SendError(e.SocketError);
+            Disconnect();
+            return false;
         }
     }
 }

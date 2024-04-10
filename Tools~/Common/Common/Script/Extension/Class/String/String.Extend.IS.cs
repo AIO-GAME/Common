@@ -5,8 +5,11 @@
 |*|=============================================*/
 
 
+#region
+
 using System;
-using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
@@ -71,14 +74,11 @@ namespace AIO
     public static partial class ExtendString
     {
         /// <summary>
-        /// 是否为单词开始
+        ///     是否为单词开始
         /// </summary>
         public static bool IsWordBeginning(this string str, in int index)
         {
-            if (string.IsNullOrEmpty(str) || index < 0 || index >= str.Length)
-            {
-                throw new ArgumentOutOfRangeException(nameof(index), "Index is out of range or string is empty");
-            }
+            if (string.IsNullOrEmpty(str) || index < 0 || index >= str.Length) throw new ArgumentOutOfRangeException(nameof(index), "Index is out of range or string is empty");
 
             var previous = index > 0 ? str[index - 1] : (char?)null;
             var current = str[index];
@@ -88,7 +88,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 判断是否为Null
+        ///     判断是否为Null
         /// </summary>
         public static bool IsNullOrEmpty(this string str)
         {

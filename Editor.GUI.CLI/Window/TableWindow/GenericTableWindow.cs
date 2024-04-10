@@ -1,10 +1,14 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using UObject = UnityEngine.Object;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -14,6 +18,13 @@ namespace AIO.UEditor
     [HelpURL("https://wanderer.blog.csdn.net/article/details/120796924")]
     public sealed class GenericTableWindow : GraphicWindow
     {
+        private const int                           Border      = 10;
+        private const int                           TitleHeight = 20;
+        private       Dictionary<string, FieldInfo> _fieldInfos = new Dictionary<string, FieldInfo>();
+        private       TableView<object>             _tableView;
+        private       UObject                       _target;
+        private       string                        _targetName;
+
         /// <summary>
         /// 打开通用表格绘制器
         /// </summary>
@@ -23,21 +34,14 @@ namespace AIO.UEditor
         {
             var window = GetWindow<GenericTableWindow>();
             window.titleContent.image = EditorGUIUtility.IconContent("ScriptableObject Icon").image;
-            window.titleContent.text = "Generic Table";
+            window.titleContent.text  = "Generic Table";
             window.OnInit(target, fieldName);
         }
-
-        private const int Border = 10;
-        private const int TitleHeight = 20;
-        private Dictionary<string, FieldInfo> _fieldInfos = new Dictionary<string, FieldInfo>();
-        private TableView<object> _tableView;
-        private UObject _target;
-        private string _targetName;
 
         private void OnInit(UObject target, string fieldName)
         {
             var fieldInfo = target.GetType().GetField(fieldName,
-                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                                                      BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
             if (fieldInfo == null)
             {
                 Debug.LogWarning($"通用表格绘制器：未从 {target.GetType().FullName} 中找到字段 {fieldName}！");
@@ -65,7 +69,7 @@ namespace AIO.UEditor
             {
                 IsEnableContextClick = false
             };
-            _target = target;
+            _target     = target;
             _targetName = $"{_target.GetType().FullName}.{fieldName} ({_target.name})";
         }
 
@@ -87,19 +91,16 @@ namespace AIO.UEditor
         private void OnBodyGUI()
         {
             var rect = new Rect(0, 0, position.width, position.height);
-            rect.x += Border;
-            rect.y += Border + TitleHeight;
-            rect.width -= Border * 2;
+            rect.x      += Border;
+            rect.y      += Border + TitleHeight;
+            rect.width  -= Border * 2;
             rect.height -= Border * 2 + TitleHeight;
             _tableView.OnGUI(rect);
         }
 
         protected override void OnUpdate()
         {
-            if (EditorApplication.isCompiling || _tableView == null || _target == null)
-            {
-                Close();
-            }
+            if (EditorApplication.isCompiling || _tableView == null || _target == null) Close();
         }
 
         private static List<object> GetDatas(object field)
@@ -126,10 +127,7 @@ namespace AIO.UEditor
             foreach (var fieldInfo in fieldInfos)
             {
                 if (!fieldInfo.IsPublic && !fieldInfo.IsDefined(typeof(SerializeField), true)) continue;
-                if (!_fieldInfos.ContainsKey(fieldInfo.Name))
-                {
-                    _fieldInfos.Add(fieldInfo.Name, fieldInfo);
-                }
+                if (!_fieldInfos.ContainsKey(fieldInfo.Name)) _fieldInfos.Add(fieldInfo.Name, fieldInfo);
             }
 
             var columns = new List<TableColumn<object>>();
@@ -138,45 +136,26 @@ namespace AIO.UEditor
                 TableColumn<object> column = null;
                 var field = item.Value;
                 if (field.FieldType.IsEnum)
-                {
                     column = GetEnumColumn(field);
-                }
                 else if (field.FieldType == typeof(string))
-                {
                     column = GetStringColumn(field);
-                }
                 else if (field.FieldType == typeof(int))
-                {
                     column = GetIntColumn(field);
-                }
                 else if (field.FieldType == typeof(float))
-                {
                     column = GetFloatColumn(field);
-                }
                 else if (field.FieldType == typeof(bool))
-                {
                     column = GetBoolColumn(field);
-                }
                 else if (field.FieldType == typeof(Vector2))
-                {
                     column = GetVector2Column(field);
-                }
                 else if (field.FieldType == typeof(Vector3))
-                {
                     column = GetVector3Column(field);
-                }
                 else if (field.FieldType == typeof(Color))
-                {
-                    column = GetColorColumn(field);
-                }
-                else if (field.FieldType.IsSubclassOf(typeof(UObject)))
-                {
-                    column = GetObjectColumn(field);
-                }
+                    column                                                     = GetColorColumn(field);
+                else if (field.FieldType.IsSubclassOf(typeof(UObject))) column = GetObjectColumn(field);
 
                 if (column != null)
                 {
-                    column.autoResize = false;
+                    column.autoResize    = false;
                     column.headerContent = new GUIContent(field.Name);
                     columns.Add(column);
                 }
@@ -189,7 +168,7 @@ namespace AIO.UEditor
         {
             var column = new TableColumn<object>
             {
-                width = 100,
+                width   = 100,
                 canSort = false,
                 Compare = null,
                 DrawCell = (rect, data, rowIndex, isSelected, isFocused) =>
@@ -210,7 +189,7 @@ namespace AIO.UEditor
         {
             var column = new TableColumn<object>
             {
-                width = 100,
+                width   = 100,
                 canSort = true,
                 Compare = (a, b) =>
                 {
@@ -236,7 +215,7 @@ namespace AIO.UEditor
         {
             var column = new TableColumn<object>
             {
-                width = 100,
+                width   = 100,
                 canSort = true,
                 Compare = (a, b) =>
                 {
@@ -262,7 +241,7 @@ namespace AIO.UEditor
         {
             var column = new TableColumn<object>
             {
-                width = 100,
+                width   = 100,
                 canSort = true,
                 Compare = (a, b) =>
                 {
@@ -288,7 +267,7 @@ namespace AIO.UEditor
         {
             var column = new TableColumn<object>
             {
-                width = 40,
+                width   = 40,
                 canSort = false,
                 Compare = null,
                 DrawCell = (rect, data, rowIndex, isSelected, isFocused) =>
@@ -309,7 +288,7 @@ namespace AIO.UEditor
         {
             var column = new TableColumn<object>
             {
-                width = 100,
+                width   = 100,
                 canSort = false,
                 Compare = null,
                 DrawCell = (rect, data, rowIndex, isSelected, isFocused) =>
@@ -330,7 +309,7 @@ namespace AIO.UEditor
         {
             var column = new TableColumn<object>
             {
-                width = 150,
+                width   = 150,
                 canSort = false,
                 Compare = null,
                 DrawCell = (rect, data, rowIndex, isSelected, isFocused) =>
@@ -351,7 +330,7 @@ namespace AIO.UEditor
         {
             var column = new TableColumn<object>
             {
-                width = 100,
+                width   = 100,
                 canSort = false,
                 Compare = null,
                 DrawCell = (rect, data, rowIndex, isSelected, isFocused) =>
@@ -372,7 +351,7 @@ namespace AIO.UEditor
         {
             var column = new TableColumn<object>
             {
-                width = 150,
+                width   = 150,
                 canSort = false,
                 Compare = null,
                 DrawCell = (rect, data, rowIndex, isSelected, isFocused) =>

@@ -1,25 +1,30 @@
 /*|============|*|
-|*|Author:     |*| xinan                
-|*|Date:       |*| 2023-10-28               
-|*|E-Mail:     |*| 1398581458@qq.com     
+|*|Author:     |*| xinan
+|*|Date:       |*| 2023-10-28
+|*|E-Mail:     |*| 1398581458@qq.com
 |*|============|*/
 
-using System;
+#region
+
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
     public partial class EHelper
     {
+        #region Nested type: Prefs
+
         public partial class Prefs
         {
-            private const int QuaternionHashCode = -1869243822;
+            private const int QuaternionHashCode  = -1869243822;
             private const int QuaternionXHashCode = 2016409937;
             private const int QuaternionYHashCode = 426061899;
             private const int QuaternionZHashCode = 684522924;
             private const int QuaternionWHashCode = 1247521960;
-            
+
             private static Quaternion CommonLoadQuaternion(in string key, in Quaternion def)
             {
                 var v = new Quaternion
@@ -126,5 +131,7 @@ namespace AIO.UEditor
 
             #endregion
         }
+
+        #endregion
     }
 }

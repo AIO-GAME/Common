@@ -1,11 +1,15 @@
+#region
+
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
     /// <summary>
     /// 写入数据 String
     /// </summary>
-    public partial interface IWriteString
+    public interface IWriteString
     {
         /// <summary>
         /// 写入字符串

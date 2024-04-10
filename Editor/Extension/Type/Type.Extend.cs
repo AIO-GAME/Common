@@ -1,14 +1,18 @@
-﻿using System;
+﻿#region
+
+using System;
+using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using UnityEditor;
+
+#endregion
 
 namespace AIO.UEditor
 {
     /// <summary>
     /// 类扩展
     /// </summary>
-    public static partial class TypeExtend
+    public static class TypeExtend
     {
         /// <summary>
         /// 返回表示指定“类型”字段的SerializedPropertyType。

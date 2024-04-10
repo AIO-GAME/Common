@@ -1,10 +1,9 @@
-﻿/*|==========|*|
-|*|Author:   |*| -> XINAN
-|*|Date:     |*| -> 2023-05-19
-|*|==========|*/
+﻿#region
 
 using System.Net.Mail;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
@@ -81,19 +80,19 @@ namespace AIO
         /// <param name="passwrod"></param>
         public MailSingleInfo(string form, string to, string passwrod = "")
         {
-            Form = form;
-            FormPort = default;
+            Form            = form;
+            FormPort        = default;
             FormDisplayName = null;
-            To = to;
-            ToDisplayName = null;
-            Passwrod = passwrod;
-            Encoding = Encoding.UTF8;
+            To              = to;
+            ToDisplayName   = null;
+            Passwrod        = passwrod;
+            Encoding        = Encoding.UTF8;
 
-            ClientDeliveryMethod = SmtpDeliveryMethod.Network;
+            ClientDeliveryMethod        = SmtpDeliveryMethod.Network;
             ClientUseDefaultCredentials = false;
-            ClientTimeout = 5000;
-            ClientHost = "smtp.qq.com";
-            ClientEnableSsl = false;
+            ClientTimeout               = 5000;
+            ClientHost                  = "smtp.qq.com";
+            ClientEnableSsl             = false;
         }
     }
 }

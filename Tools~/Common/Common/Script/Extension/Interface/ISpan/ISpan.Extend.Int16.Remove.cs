@@ -1,4 +1,8 @@
-﻿using System;
+﻿#region
+
+using System;
+
+#endregion
 
 namespace AIO
 {
@@ -17,14 +21,15 @@ namespace AIO
             var index = 0;
             var len = arrays.Length;
             for (var i = 0; i < len; i++)
-            {
-                if (arrays[i] == value) index++;
+                if (arrays[i] == value)
+                {
+                    index++;
+                }
                 else if (index > 0)
                 {
                     arrays[i - index] = arrays[i];
-                    arrays[i] = default;
+                    arrays[i]         = default;
                 }
-            }
 
             for (var i = len - index; i < len; i++) arrays[i] = default;
             return arrays;
@@ -43,14 +48,15 @@ namespace AIO
             var index = 0;
             var len = arrays.Length;
             for (var i = 0; i < len; i++)
-            {
-                if (arrays[i] == value) index++;
+                if (arrays[i] == value)
+                {
+                    index++;
+                }
                 else if (index > 0)
                 {
                     arrays[i - index] = arrays[i];
-                    arrays[i] = default;
+                    arrays[i]         = default;
                 }
-            }
 
             for (var i = len - index; i < len; i++) arrays[i] = default;
             return arrays;

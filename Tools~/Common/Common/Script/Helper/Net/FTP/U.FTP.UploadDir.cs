@@ -1,35 +1,50 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-12-17
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System.IO;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: FTP
+
         public partial class FTP
         {
+            /// <summary>
+            /// FTP上传文件夹
+            /// </summary>
+            /// <param name="uri">路径</param>
+            /// <param name="user">用户名</param>
+            /// <param name="pass">密码</param>
+            /// <param name="localPath">本地文件路径</param>
+            /// <param name="option">搜索模式</param>
+            /// <param name="pattern">匹配模式</param>
+            /// <param name="timeout">超时</param>
+            /// <param name="bufferSize">缓存大小</param>
+            public static IProgressOperation UploadDir(
+                string       uri,
+                string       user,
+                string       pass,
+                string       localPath,
+                SearchOption option     = SearchOption.AllDirectories,
+                string       pattern    = "*",
+                ushort       timeout    = Net.TIMEOUT,
+                int          bufferSize = Net.BUFFER_SIZE
+            )
+            {
+                return new FTPUploadDirOperation(uri, user, pass, localPath, option, pattern, timeout, bufferSize);
+            }
+
+            #region Nested type: FTPUploadDirOperation
+
             private class FTPUploadDirOperation : AOperation
             {
-                private string uri { get; }
-                private string user { get; }
-                private string pass { get; }
-                private string localPath { get; }
-                private SearchOption option { get; }
-                private string pattern { get; }
-                private ushort timeout { get; }
-                private int bufferSize { get; }
-
-                protected override void OnDispose()
-                {
-                    info = null;
-                }
+                private DirectoryInfo info;
 
                 /// <summary>
                 /// FTP上传文件夹
@@ -43,23 +58,37 @@ namespace AIO
                 /// <param name="timeout">超时</param>
                 /// <param name="bufferSize">缓存大小</param>
                 public FTPUploadDirOperation(
-                    string uri,
-                    string user,
-                    string pass,
-                    string localPath,
-                    SearchOption option = SearchOption.AllDirectories,
-                    string pattern = "*",
-                    ushort timeout = Net.TIMEOUT,
-                    int bufferSize = Net.BUFFER_SIZE)
+                    string       uri,
+                    string       user,
+                    string       pass,
+                    string       localPath,
+                    SearchOption option     = SearchOption.AllDirectories,
+                    string       pattern    = "*",
+                    ushort       timeout    = Net.TIMEOUT,
+                    int          bufferSize = Net.BUFFER_SIZE)
                 {
-                    this.uri = uri.Replace('\\', '/');
-                    this.user = user;
-                    this.pass = pass;
-                    this.localPath = localPath;
-                    this.option = option;
-                    this.pattern = pattern;
-                    this.timeout = timeout;
+                    this.uri        = uri.Replace('\\', '/');
+                    this.user       = user;
+                    this.pass       = pass;
+                    this.localPath  = localPath;
+                    this.option     = option;
+                    this.pattern    = pattern;
+                    this.timeout    = timeout;
                     this.bufferSize = bufferSize;
+                }
+
+                private string       uri        { get; }
+                private string       user       { get; }
+                private string       pass       { get; }
+                private string       localPath  { get; }
+                private SearchOption option     { get; }
+                private string       pattern    { get; }
+                private ushort       timeout    { get; }
+                private int          bufferSize { get; }
+
+                protected override void OnDispose()
+                {
+                    info = null;
                 }
 
                 protected override void OnWait()
@@ -85,7 +114,7 @@ namespace AIO
                         var remote = string.Concat(uri, '/', relativePath);
                         var request = CreateRequestFile(remote, user, pass, "STOR", timeout);
                         request.ContentLength = fileInfo.Length;
-                        CurrentInfo = relativePath;
+                        CurrentInfo           = relativePath;
 
                         try
                         {
@@ -95,7 +124,6 @@ namespace AIO
                                 {
                                     var contentLen = fileStream.Read(memoryBuff, 0, bufferSize);
                                     while (contentLen > 0)
-                                    {
                                         switch (State)
                                         {
                                             case EProgressState.Cancel:
@@ -111,7 +139,6 @@ namespace AIO
                                                 Thread.Sleep(100);
                                                 break;
                                         }
-                                    }
                                 }
 
                                 requestStream.Flush();
@@ -131,8 +158,6 @@ namespace AIO
                         }
                     }
                 }
-
-                private DirectoryInfo info;
 
                 protected override void OnBegin()
                 {
@@ -175,7 +200,7 @@ namespace AIO
                         var remote = string.Concat(uri, '/', relativePath);
                         var request = CreateRequestFile(remote, user, pass, "STOR", -1);
                         request.ContentLength = fileInfo.Length;
-                        CurrentInfo = relativePath;
+                        CurrentInfo           = relativePath;
                         try
                         {
                             using (var requestStream = await request.GetRequestStreamAsync())
@@ -185,7 +210,6 @@ namespace AIO
                                     var contentLen =
                                         await fileStream.ReadAsync(memoryBuff, 0, bufferSize, cancellationToken);
                                     while (contentLen > 0)
-                                    {
                                         switch (State)
                                         {
                                             case EProgressState.Cancel:
@@ -195,15 +219,14 @@ namespace AIO
                                             case EProgressState.Running:
                                                 CurrentValue += contentLen;
                                                 await requestStream.WriteAsync(memoryBuff, 0, contentLen,
-                                                    cancellationToken);
+                                                                               cancellationToken);
                                                 contentLen = await fileStream.ReadAsync(memoryBuff, 0, bufferSize,
-                                                    cancellationToken);
+                                                                                        cancellationToken);
                                                 break;
                                             default:
                                                 await Task.Delay(100, cancellationToken);
                                                 break;
                                         }
-                                    }
                                 }
 
                                 await requestStream.FlushAsync(cancellationToken);
@@ -225,30 +248,9 @@ namespace AIO
                 }
             }
 
-            /// <summary>
-            /// FTP上传文件夹
-            /// </summary>
-            /// <param name="uri">路径</param>
-            /// <param name="user">用户名</param>
-            /// <param name="pass">密码</param>
-            /// <param name="localPath">本地文件路径</param>
-            /// <param name="option">搜索模式</param>
-            /// <param name="pattern">匹配模式</param>
-            /// <param name="timeout">超时</param>
-            /// <param name="bufferSize">缓存大小</param>
-            public static IProgressOperation UploadDir(
-                string uri,
-                string user,
-                string pass,
-                string localPath,
-                SearchOption option = SearchOption.AllDirectories,
-                string pattern = "*",
-                ushort timeout = Net.TIMEOUT,
-                int bufferSize = Net.BUFFER_SIZE
-            )
-            {
-                return new FTPUploadDirOperation(uri, user, pass, localPath, option, pattern, timeout, bufferSize);
-            }
+            #endregion
         }
+
+        #endregion
     }
 }

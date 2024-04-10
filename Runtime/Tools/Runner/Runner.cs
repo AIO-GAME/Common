@@ -1,10 +1,14 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using AIO.UEditor;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Scripting;
 using UObject = UnityEngine.Object;
+
+#endregion
 
 namespace AIO
 {
@@ -113,20 +117,11 @@ namespace AIO
             {
                 instance = null;
 
-                for (var index = 0; index < mActionCopiedQueueUpdateFunc.Count; index++)
-                {
-                    mActionCopiedQueueUpdateFunc[index] = null;
-                }
+                for (var index = 0; index < mActionCopiedQueueUpdateFunc.Count; index++) mActionCopiedQueueUpdateFunc[index] = null;
 
-                for (var index = 0; index < mActionCopiedQueueFixedUpdateFunc.Count; index++)
-                {
-                    mActionCopiedQueueFixedUpdateFunc[index] = null;
-                }
+                for (var index = 0; index < mActionCopiedQueueFixedUpdateFunc.Count; index++) mActionCopiedQueueFixedUpdateFunc[index] = null;
 
-                for (var index = 0; index < mActionCopiedQueueLateUpdateFunc.Count; index++)
-                {
-                    mActionCopiedQueueLateUpdateFunc[index] = null;
-                }
+                for (var index = 0; index < mActionCopiedQueueLateUpdateFunc.Count; index++) mActionCopiedQueueLateUpdateFunc[index] = null;
 
                 mActionCopiedQueueLateUpdateFunc.Free();
                 mActionCopiedQueueFixedUpdateFunc.Free();

@@ -1,11 +1,9 @@
-﻿/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2020-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+﻿#region
 
 using System.Net.Mail;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
@@ -72,17 +70,17 @@ namespace AIO
         /// <param name="passwrod"></param>
         public MailMultipInfo(string form, string to, string passwrod = "")
         {
-            Form = form;
-            FormPort = default;
+            Form            = form;
+            FormPort        = default;
             FormDisplayName = null;
-            Passwrod = passwrod;
-            Encoding = Encoding.UTF8;
+            Passwrod        = passwrod;
+            Encoding        = Encoding.UTF8;
 
-            ClientDeliveryMethod = SmtpDeliveryMethod.Network;
+            ClientDeliveryMethod        = SmtpDeliveryMethod.Network;
             ClientUseDefaultCredentials = false;
-            ClientTimeout = 5000;
-            ClientHost = "smtp.qq.com";
-            ClientEnableSsl = false;
+            ClientTimeout               = 5000;
+            ClientHost                  = "smtp.qq.com";
+            ClientEnableSsl             = false;
         }
     }
 }

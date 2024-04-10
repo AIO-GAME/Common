@@ -5,17 +5,24 @@ using Cysharp.Threading.Tasks;
 #endif
 
 #if (ENABLE_FIXEDUPDATE_FUNCTION_CALLBACK)
+
+#region
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
     partial class Runner
     {
-        [ContextStatic] private static readonly Queue<Action> actionQueuesFixedUpdateFunc = new Queue<Action>();
+        [ContextStatic]
+        private static readonly Queue<Action> actionQueuesFixedUpdateFunc = new Queue<Action>();
 
-        [ContextStatic] private static volatile bool noActionQueueToExecuteFixedUpdateFunc = true;
+        [ContextStatic]
+        private static volatile bool noActionQueueToExecuteFixedUpdateFunc = true;
 
         /// <summary>
         /// 在FixedUpdate更新
@@ -30,6 +37,8 @@ namespace AIO
                 noActionQueueToExecuteFixedUpdateFunc = false;
             }
         }
+
+        #region Nested type: ThreadMono
 
         private partial class ThreadMono
         {
@@ -67,6 +76,8 @@ namespace AIO
                 }
             }
         }
+
+        #endregion
     }
 
 #endif

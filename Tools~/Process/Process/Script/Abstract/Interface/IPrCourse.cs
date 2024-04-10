@@ -4,10 +4,14 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {

@@ -1,11 +1,9 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-07-10
-
-|||✩ - - - - - |*/
+﻿#region
 
 using System;
 using System.Diagnostics;
+
+#endregion
 
 namespace AIO
 {
@@ -13,7 +11,8 @@ namespace AIO
     /// 单例模式
     /// </summary>
     /// <typeparam name="T">泛型</typeparam>
-    public abstract class Singleton<T> where T : IDisposable, new()
+    public abstract class Singleton<T>
+    where T : IDisposable, new()
     {
         private static T mInstance;
 
@@ -29,7 +28,15 @@ namespace AIO
                 if (mInstance == null) mInstance = Activator.CreateInstance<T>();
                 return mInstance;
             }
-            set { mInstance = value; }
+            set => mInstance = value;
+        }
+
+        /// <summary>
+        /// 是否存在实例
+        /// </summary>
+        public static bool HasInstance
+        {
+            [DebuggerStepThrough] get => mInstance != null;
         }
 
         /// <summary>
@@ -47,14 +54,6 @@ namespace AIO
         public static void ReleaseInstance()
         {
             mInstance.Dispose();
-        }
-
-        /// <summary>
-        /// 是否存在实例
-        /// </summary>
-        public static bool HasInstance
-        {
-            [DebuggerStepThrough] get { return mInstance != null; }
         }
     }
 }

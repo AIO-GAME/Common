@@ -1,53 +1,57 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
+#endregion
+
 namespace AIO.UEditor
 {
     public partial class GraphicWindow
     {
+        private static SettingsProvider provider;
+
+        static GraphicWindow()
+        {
+            GroupTable  = new Dictionary<string, List<Type>> { { "Default", new List<Type>() } };
+            WindowTypes = new Dictionary<string, GWindowAttribute>();
+
+            var graphicType = typeof(GraphicWindow);
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            foreach (var type in assembly.GetTypes())
+            {
+                if (!type.IsClass || type.IsAbstract || !type.IsSubclassOf(graphicType)) continue;
+                var attribute = type.GetCustomAttribute<GWindowAttribute>(false);
+                if (attribute is null)
+                {
+                    GroupTable["Default"].Add(type);
+                }
+                else
+                {
+                    var key = $"{attribute.Title.text}{type.FullName}";
+                    if (WindowTypes.ContainsKey(key)) continue;
+                    if (string.IsNullOrEmpty(attribute.Group)) attribute.Group = "Default";
+                    attribute.RuntimeType = type;
+                    WindowTypes.Add(key, attribute);
+                    if (!GroupTable.ContainsKey(attribute.Group)) GroupTable[attribute.Group] = new List<Type>();
+                    GroupTable[attribute.Group].Add(type);
+                }
+            }
+
+            var containerWindowType = Assembly.GetAssembly(typeof(EditorWindow)).GetType("UnityEditor.PreferenceSettingsWindow");
+            foreach (var item in GroupTable)
+                item.Value.Add(containerWindowType);
+        }
+
         private static Dictionary<string, GWindowAttribute> WindowTypes { get; }
 
         /// <summary>
         /// 组列表
         /// </summary>
         private static Dictionary<string, List<Type>> GroupTable { get; }
-
-        static GraphicWindow()
-        {
-            GroupTable = new Dictionary<string, List<Type>> { { "Default", new List<Type>() } };
-            WindowTypes = new Dictionary<string, GWindowAttribute>();
-
-            var graphicType = typeof(GraphicWindow);
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                foreach (var type in assembly.GetTypes())
-                {
-                    if (!type.IsClass || type.IsAbstract || !type.IsSubclassOf(graphicType)) continue;
-                    var attribute = type.GetCustomAttribute<GWindowAttribute>(false);
-                    if (attribute is null) GroupTable["Default"].Add(type);
-                    else
-                    {
-                        var key = $"{attribute.Title.text}{type.FullName}";
-                        if (WindowTypes.ContainsKey(key)) continue;
-                        if (string.IsNullOrEmpty(attribute.Group)) attribute.Group = "Default";
-                        attribute.RuntimeType = type;
-                        WindowTypes.Add(key, attribute);
-                        if (!GroupTable.ContainsKey(attribute.Group)) GroupTable[attribute.Group] = new List<Type>();
-                        GroupTable[attribute.Group].Add(type);
-                    }
-                }
-            }
-
-            var containerWindowType = Assembly.GetAssembly(typeof(EditorWindow))
-                .GetType("UnityEditor.PreferenceSettingsWindow");
-            foreach (var item in GroupTable)
-                item.Value.Add(containerWindowType);
-        }
-
-        private static SettingsProvider provider;
 
         /// <summary>
         /// 创建设置提供者
@@ -61,7 +65,7 @@ namespace AIO.UEditor
                 $"{nameof(AIO)}/{nameof(GWindowAttribute).Replace(nameof(Attribute), "")}",
                 SettingsScope.User);
             provider.label = "Windows Header";
-            provider.hasSearchInterestHandler = (value) =>
+            provider.hasSearchInterestHandler = value =>
             {
                 if (value.Contains("Window")) return true;
                 if (value.Contains("Header")) return true;
@@ -90,25 +94,23 @@ namespace AIO.UEditor
                     }
 
                     foreach (var window in WindowTypes)
-                    {
                         using (new EditorGUILayout.HorizontalScope(EditorStyles.helpBox))
                         {
                             EditorGUILayout.LabelField(window.Value.Group, new GUIStyle("CenteredLabel"),
-                                GUILayout.Width(50));
+                                                       GUILayout.Width(50));
                             EditorGUILayout.LabelField("|", GUILayout.Width(10));
                             EditorGUILayout.LabelField(window.Value.Order.ToString(), new GUIStyle("CenteredLabel"),
-                                GUILayout.Width(50));
+                                                       GUILayout.Width(50));
                             EditorGUILayout.LabelField("|", GUILayout.Width(10));
                             EditorGUILayout.LabelField(window.Value.Title, new GUIStyle("CenteredLabel"),
-                                GUILayout.Width(200));
+                                                       GUILayout.Width(200));
                             EditorGUILayout.LabelField("|", GUILayout.Width(10));
                             if (GUILayout.Button("Open", GUILayout.Width(50)))
                                 EHelper.Window.Open(window.Value.RuntimeType, window.Value.Title,
-                                    GroupTable[window.Value.Group]);
+                                                    GroupTable[window.Value.Group]);
                             EditorGUILayout.LabelField("|", GUILayout.Width(10));
                             EditorGUILayout.LabelField(window.Value.RuntimeType.FullName, GUILayout.ExpandWidth(true));
                         }
-                    }
 
                     EditorGUILayout.Space();
                 }

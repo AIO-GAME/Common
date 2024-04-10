@@ -1,9 +1,15 @@
-﻿using System.IO;
+﻿#region
+
+using System.IO;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrCmd
     {
+        #region Nested type: Move
+
         /// <summary>
         /// 移动或重命名 目录
         /// </summary>
@@ -18,11 +24,13 @@ namespace AIO
             public static IExecutor Execute(in string target, in string source)
             {
                 return Create().Input(string.Format(
-                    "{0} /y \"{1}\" \"{2}\"",
-                    CMD_Move,
-                    source.Replace('/', Path.PathSeparator),
-                    target.Replace('/', Path.PathSeparator)));
+                                          "{0} /y \"{1}\" \"{2}\"",
+                                          CMD_Move,
+                                          source.Replace('/', Path.PathSeparator),
+                                          target.Replace('/', Path.PathSeparator)));
             }
         }
+
+        #endregion
     }
 }

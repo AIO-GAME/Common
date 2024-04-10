@@ -1,17 +1,16 @@
-﻿/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
-
+﻿#region
 
 using System;
 using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: Status
+
         /// <summary>
         /// 状态值比较
         /// </summary>
@@ -30,7 +29,7 @@ namespace AIO
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool Square(int index, int mask)
             {
-                return (1 << index & mask) != 0;
+                return ((1 << index) & mask) != 0;
             }
 
             /// <summary>
@@ -57,8 +56,7 @@ namespace AIO
             /// <param name="source">源状态</param>
             /// <param name="status">操作状态</param>
             /// <returns>true有相交</returns>
-            [Obsolete("已过时:不推荐使用 原因:性能耗时与值类型相比 差距为几百倍 推荐使用int值", true)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [Obsolete("已过时:不推荐使用 原因:性能耗时与值类型相比 差距为几百倍 推荐使用int值", true), MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool Mix(Enum source, Enum status)
             {
                 return (source.GetHashCode() & status.GetHashCode()) != 0;
@@ -124,9 +122,9 @@ namespace AIO
             /// <param name="source">源状态</param>
             /// <param name="status">操作状态</param>
             /// <param name="b">Ture 状态添加 false 状态移除</param>
-            [Obsolete("已过时:不推荐使用 原因:性能耗时与值类型相比 差距为几百倍 推荐使用int值", true)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static T Set<T>(T source, T status, in bool b) where T : Enum
+            [Obsolete("已过时:不推荐使用 原因:性能耗时与值类型相比 差距为几百倍 推荐使用int值", true), MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static T Set<T>(T source, T status, in bool b)
+            where T : Enum
             {
                 return (T)Enum.Parse(typeof(T), Set(source.GetHashCode(), status.GetHashCode(), b).ToString());
             }
@@ -141,7 +139,7 @@ namespace AIO
             public static short Set(in short source, in short status, in bool b)
             {
                 if (b) return (short)(source | status);
-                else return (short)(source & ((~status) & 0xFFFF));
+                return (short)(source & ~status & 0xFFFF);
             }
 
             /// <summary>
@@ -154,7 +152,7 @@ namespace AIO
             public static int Set(in int source, in int status, in bool b)
             {
                 if (b) return source | status;
-                return source & (~status);
+                return source & ~status;
             }
 
             /// <summary>
@@ -167,7 +165,7 @@ namespace AIO
             public static long Set(in long source, in long status, in bool b)
             {
                 if (b) return source | status;
-                return source & (~status);
+                return source & ~status;
             }
         }
 
@@ -179,8 +177,7 @@ namespace AIO
             /// <summary>
             /// 是否有指定状态（包含指定状态，但不限于指定状态）
             /// </summary>
-            [Obsolete("已过时:不推荐使用 原因:性能耗时与值类型相比 差距为几百倍 推荐使用int值", true)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [Obsolete("已过时:不推荐使用 原因:性能耗时与值类型相比 差距为几百倍 推荐使用int值", true), MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool Has(in Enum eSource, in Enum eStatus)
             {
                 var source = eSource.GetHashCode();
@@ -236,9 +233,9 @@ namespace AIO
             /// </summary>
             /// <param name="source">源状态</param>
             /// <param name="status">操作状态</param>
-            [Obsolete("已过时:不推荐使用 原因:性能耗时与值类型相比 差距为几百倍 推荐使用int值", true)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static bool Only<T>(in T source, in T status) where T : IComparable
+            [Obsolete("已过时:不推荐使用 原因:性能耗时与值类型相比 差距为几百倍 推荐使用int值", true), MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static bool Only<T>(in T source, in T status)
+            where T : IComparable
             {
                 return source.CompareTo(status) == 0;
             }
@@ -349,12 +346,11 @@ namespace AIO
             /// <param name="source">源状态</param>
             /// <param name="status">操作状态</param>
             /// <returns>新状态</returns>
-            [Obsolete("已过时:不推荐使用 原因:性能耗时与值类型相比 差距为上千倍 推荐使用int值", true)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [Obsolete("已过时:不推荐使用 原因:性能耗时与值类型相比 差距为上千倍 推荐使用int值", true), MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static T Del<T>(in T source, in T status)
-                where T : IComparable, IComparable<T>, IConvertible, IEquatable<T>
+            where T : IComparable, IComparable<T>, IConvertible, IEquatable<T>
             {
-                return (T)Convert.ChangeType((source.GetHashCode() & (~status.GetHashCode())), typeof(T));
+                return (T)Convert.ChangeType(source.GetHashCode() & ~status.GetHashCode(), typeof(T));
             }
 
             /// <summary>
@@ -366,7 +362,7 @@ namespace AIO
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static byte Del(in byte source, in byte status)
             {
-                return (byte)(source & (~status));
+                return (byte)(source & ~status);
             }
 
             /// <summary>
@@ -378,7 +374,7 @@ namespace AIO
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static short Del(in short source, in short status)
             {
-                return (short)(source & (~status));
+                return (short)(source & ~status);
             }
 
             /// <summary>
@@ -390,7 +386,7 @@ namespace AIO
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static int Del(in int source, in int status)
             {
-                return source & (~status);
+                return source & ~status;
             }
 
             /// <summary>
@@ -402,8 +398,10 @@ namespace AIO
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static long Del(in long source, in long status)
             {
-                return source & (~status);
+                return source & ~status;
             }
         }
+
+        #endregion
     }
 }

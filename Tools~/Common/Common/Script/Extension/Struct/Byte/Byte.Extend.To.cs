@@ -1,11 +1,8 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
-
+#region
 
 using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
@@ -18,7 +15,7 @@ namespace AIO
     /// <summary>
     /// 字节扩展 包含类型 byte byte[]
     /// </summary>
-    public static partial class ExtendByte
+    public static class ExtendByte
     {
         /// <summary>
         /// 字节 转小写16进制字符

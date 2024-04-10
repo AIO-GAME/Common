@@ -4,6 +4,8 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +15,8 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
+#endregion
+
 namespace AIO
 {
     /// <summary>
@@ -20,6 +24,46 @@ namespace AIO
     /// </summary>
     public partial class PrDingTalk
     {
+        #region MsgType enum
+
+        /// <summary>
+        /// 消息类型
+        /// </summary>
+        public enum MsgType
+        {
+            /// <summary>
+            /// 空
+            /// </summary>
+            empty = 0,
+
+            /// <summary>
+            /// 文本
+            /// </summary>
+            text = 1,
+
+            /// <summary>
+            /// 链接
+            /// </summary>
+            link = 2,
+
+            /// <summary>
+            /// markdown
+            /// </summary>
+            markdown = 3,
+
+            /// <summary>
+            /// actionCard
+            /// </summary>
+            actionCard = 4,
+
+            /// <summary>
+            /// feedCard
+            /// </summary>
+            feedCard = 5
+        }
+
+        #endregion
+
         private static PrDingTalk CreateInstance()
         {
             return new PrDingTalk();
@@ -33,37 +77,13 @@ namespace AIO
             return new Msg();
         }
 
+        #region Nested type: Msg
+
         /// <summary>
         /// 消息
         /// </summary>
         public class Msg
         {
-            /// <summary>
-            /// 消息类型
-            /// </summary>
-            [JsonProperty(PropertyName = "msgtype")] [JsonConverter(typeof(StringEnumConverter))]
-            private MsgType Type = MsgType.empty;
-
-            /// <summary>
-            /// 文本类型
-            /// </summary>
-            [JsonProperty(PropertyName = "text")] private Hashtable TBText;
-
-            /// <summary>
-            /// At 类型
-            /// </summary>
-            [JsonProperty(PropertyName = "at")] private Hashtable TBAt;
-
-            /// <summary>
-            /// link 类型
-            /// </summary>
-            [JsonProperty(PropertyName = "link")] private Hashtable TBLink;
-
-            /// <summary>
-            /// link 类型
-            /// </summary>
-            [JsonProperty(PropertyName = "markdown")] private Hashtable TBMarkdown;
-
             /// <summary>
             /// actionCard 类型
             /// </summary>
@@ -71,10 +91,40 @@ namespace AIO
             private Hashtable TBActionCard;
 
             /// <summary>
+            /// At 类型
+            /// </summary>
+            [JsonProperty(PropertyName = "at")]
+            private Hashtable TBAt;
+
+            /// <summary>
             /// feedCard 类型
             /// </summary>
             [JsonProperty(PropertyName = "feedCard")]
             private Hashtable TBFeedCard;
+
+            /// <summary>
+            /// link 类型
+            /// </summary>
+            [JsonProperty(PropertyName = "link")]
+            private Hashtable TBLink;
+
+            /// <summary>
+            /// link 类型
+            /// </summary>
+            [JsonProperty(PropertyName = "markdown")]
+            private Hashtable TBMarkdown;
+
+            /// <summary>
+            /// 文本类型
+            /// </summary>
+            [JsonProperty(PropertyName = "text")]
+            private Hashtable TBText;
+
+            /// <summary>
+            /// 消息类型
+            /// </summary>
+            [JsonProperty(PropertyName = "msgtype"), JsonConverter(typeof(StringEnumConverter))] 
+            private MsgType Type = MsgType.empty;
 
             /// <summary>
             /// 转换为Json
@@ -143,10 +193,10 @@ namespace AIO
                 Type = MsgType.link;
                 TBLink = new Hashtable
                 {
-                    ["title"] = title,
-                    ["text"] = content,
+                    ["title"]      = title,
+                    ["text"]       = content,
                     ["messageUrl"] = messageUrl,
-                    ["picUrl"] = picUrl
+                    ["picUrl"]     = picUrl
                 };
             }
 
@@ -161,7 +211,7 @@ namespace AIO
                 TBMarkdown = new Hashtable
                 {
                     ["title"] = title,
-                    ["text"] = content
+                    ["text"]  = content
                 };
             }
 
@@ -173,15 +223,15 @@ namespace AIO
             /// <param name="singleTitle">单个按钮的标题</param>
             /// <param name="singleURL">点击消息跳转的URL</param>
             public void ToActionCard(
-                string title, string content,
+                string title,       string content,
                 string singleTitle, string singleURL)
             {
                 Type = MsgType.actionCard;
                 TBActionCard = new Hashtable
                 {
-                    ["title"] = title,
-                    ["text"] = content,
-                    ["singleURL"] = singleURL,
+                    ["title"]       = title,
+                    ["text"]        = content,
+                    ["singleURL"]   = singleURL,
                     ["singleTitle"] = singleTitle
                 };
             }
@@ -200,20 +250,18 @@ namespace AIO
                 Type = MsgType.actionCard;
                 TBActionCard = new Hashtable
                 {
-                    ["title"] = title,
-                    ["text"] = content,
-                    ["btns"] = new List<Hashtable>(),
+                    ["title"]          = title,
+                    ["text"]           = content,
+                    ["btns"]           = new List<Hashtable>(),
                     ["btnOrientation"] = (btnOrientation == 0 ? 0 : 1).ToString()
                 };
 
                 foreach (var item in buttons)
-                {
                     ((List<Hashtable>)TBActionCard["btns"]).Add(new Hashtable
                     {
-                        ["title"] = item.Key,
+                        ["title"]     = item.Key,
                         ["actionURL"] = item.Value
                     });
-                }
             }
 
 
@@ -230,56 +278,20 @@ namespace AIO
                 Type = MsgType.feedCard;
                 TBFeedCard = new Hashtable
                 {
-                    ["links"] = new List<Hashtable>(),
+                    ["links"] = new List<Hashtable>()
                 };
 
                 foreach (var item in links)
-                {
                     ((List<Hashtable>)TBFeedCard["links"]).Add(new Hashtable
                     {
-                        ["title"] = item.Item1,
+                        ["title"]      = item.Item1,
                         ["messageURL"] = item.Item2,
-                        ["picURL"] = item.Item3
+                        ["picURL"]     = item.Item3
                     });
-                }
             }
         }
 
-        /// <summary>
-        /// 消息类型
-        /// </summary>
-        public enum MsgType
-        {
-            /// <summary>
-            /// 空
-            /// </summary>
-            empty = 0,
-
-            /// <summary>
-            /// 文本
-            /// </summary>
-            text = 1,
-
-            /// <summary>
-            /// 链接
-            /// </summary>
-            link = 2,
-
-            /// <summary>
-            /// markdown
-            /// </summary>
-            markdown = 3,
-
-            /// <summary>
-            /// actionCard
-            /// </summary>
-            actionCard = 4,
-
-            /// <summary>
-            /// feedCard
-            /// </summary>
-            feedCard = 5,
-        }
+        #endregion
 
         #region Link
 
@@ -290,17 +302,17 @@ namespace AIO
                 if (_JsonSetting is null)
                     _JsonSetting = new JsonSerializerSettings
                     {
-                        Culture = CultureInfo.CurrentCulture,
-                        Context = new StreamingContext(StreamingContextStates.All),
-                        Formatting = Formatting.None,
-                        NullValueHandling = NullValueHandling.Ignore,
-                        DateParseHandling = DateParseHandling.DateTime,
-                        DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
-                        MissingMemberHandling = MissingMemberHandling.Ignore,
-                        ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
+                        Culture                = CultureInfo.CurrentCulture,
+                        Context                = new StreamingContext(StreamingContextStates.All),
+                        Formatting             = Formatting.None,
+                        NullValueHandling      = NullValueHandling.Ignore,
+                        DateParseHandling      = DateParseHandling.DateTime,
+                        DefaultValueHandling   = DefaultValueHandling.IgnoreAndPopulate,
+                        MissingMemberHandling  = MissingMemberHandling.Ignore,
+                        ConstructorHandling    = ConstructorHandling.AllowNonPublicDefaultConstructor,
                         CheckAdditionalContent = false,
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                        StringEscapeHandling = StringEscapeHandling.EscapeNonAscii,
+                        ReferenceLoopHandling  = ReferenceLoopHandling.Ignore,
+                        StringEscapeHandling   = StringEscapeHandling.EscapeNonAscii
                     };
                 return _JsonSetting;
             }

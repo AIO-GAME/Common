@@ -4,12 +4,18 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrGit
     {
+        #region Nested type: Commit
+
         /// <summary>
         /// <see cref="PrGit"/> <see cref="Commit"/> 提交
         /// </summary>
@@ -39,5 +45,7 @@ namespace AIO
                 return Create(target, "commit \"{0}\"", message);
             }
         }
+
+        #endregion
     }
 }

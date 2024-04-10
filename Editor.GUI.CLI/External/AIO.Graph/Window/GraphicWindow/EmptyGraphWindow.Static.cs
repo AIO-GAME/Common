@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using UnityEditor;
 using UnityEngine;
 using WindowUtil = AIO.UEditor.EHelper.Window;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -12,7 +16,8 @@ namespace AIO.UEditor
         /// </summary>
         /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
         /// <returns><see cref="EditorWindow"/></returns>
-        protected static EditorWindow Open<T>() where T : EditorWindow
+        protected static EditorWindow Open<T>()
+        where T : EditorWindow
         {
             return WindowUtil.Open<T>();
         }
@@ -25,7 +30,8 @@ namespace AIO.UEditor
         /// <param name="focus">聚焦</param>
         /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
         /// <returns><see cref="EditorWindow"/></returns>
-        protected static EditorWindow Open<T>(string title, bool utility, bool focus) where T : EditorWindow
+        protected static EditorWindow Open<T>(string title, bool utility, bool focus)
+        where T : EditorWindow
         {
             return WindowUtil.Open<T>(title, utility, focus);
         }
@@ -38,7 +44,8 @@ namespace AIO.UEditor
         /// <param name="focus">聚焦</param>
         /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
         /// <returns><see cref="EditorWindow"/></returns>
-        protected static EditorWindow Open<T>(string title, bool focus, params Type[] types) where T : EditorWindow
+        protected static EditorWindow Open<T>(string title, bool focus, params Type[] types)
+        where T : EditorWindow
         {
             return WindowUtil.Open<T>(title, focus, types);
         }
@@ -50,7 +57,8 @@ namespace AIO.UEditor
         /// <param name="types">类型数组</param>
         /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
         /// <returns><see cref="EditorWindow"/></returns>
-        protected static EditorWindow Open<T>(string title, params Type[] types) where T : EditorWindow
+        protected static EditorWindow Open<T>(string title, params Type[] types)
+        where T : EditorWindow
         {
             return WindowUtil.Open<T>(title, types);
         }
@@ -65,7 +73,7 @@ namespace AIO.UEditor
         /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
         /// <returns><see cref="EditorWindow"/></returns>
         protected static EditorWindow Open<T>(Rect rect, string title, bool utility = true, bool focus = true)
-            where T : EditorWindow
+        where T : EditorWindow
         {
             return WindowUtil.Open<T>(rect, title, utility, focus);
         }
@@ -75,7 +83,8 @@ namespace AIO.UEditor
         /// </summary>
         /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
         /// <returns><see cref="EditorWindow"/></returns>
-        protected static void Free<T>(T window) where T : EditorWindow
+        protected static void Free<T>(T window)
+        where T : EditorWindow
         {
             WindowUtil.Free(window);
         }

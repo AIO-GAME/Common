@@ -1,15 +1,12 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Text;
+
+#endregion
 
 internal class GCommandParameterNoMatchException : Exception
 {
-    public override string Message
-    {
-        get { return Messages; }
-    }
-
-    private string Messages { get; }
-
     /// <summary>
     /// 游戏命令参数不匹配
     /// </summary>
@@ -21,4 +18,8 @@ internal class GCommandParameterNoMatchException : Exception
         str.Remove(str.Length - 1, 1).Append(']');
         Messages = string.Format("未查找到指定命令 -> {0} {1}", id, str);
     }
+
+    public override string Message => Messages;
+
+    private string Messages { get; }
 }

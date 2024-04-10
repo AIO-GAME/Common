@@ -1,20 +1,19 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2024-03-25
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
+#endregion
+
 namespace AIO
 {
     /// <summary>
     /// 
     /// </summary>
-    public abstract partial class PoolSystem<T> : IDisposable where T : new()
+    public abstract partial class PoolSystem<T> : IDisposable
+    where T : new()
     {
         /// <summary>
         /// 实例
@@ -32,7 +31,8 @@ namespace AIO
         /// <summary>
         /// 初始化系统
         /// </summary>
-        protected static void CreateInstance<TY>() where TY : PoolSystem<T>, new()
+        protected static void CreateInstance<TY>()
+        where TY : PoolSystem<T>, new()
         {
             if (Instance is null) Instance = Activator.CreateInstance<TY>();
         }
@@ -66,6 +66,29 @@ namespace AIO
             Instance.Dispose();
             Instance = null;
         }
+
+        /// <summary>
+        /// 清理缓存数据
+        /// </summary>
+        public static void ClearCache()
+        {
+            Instance.Clear();
+        }
+
+        #region Allocate
+
+        /// <summary>
+        /// 分配对象
+        /// </summary>
+        /// <returns>实体</returns>
+        public static T Alloc()
+        {
+            var entity = Instance.FreePool.Count == 0 ? Instance.CreateEntity() : Instance.FreePool.Dequeue();
+            Instance.AddSurviving(entity);
+            return entity;
+        }
+
+        #endregion
 
         #region Find
 
@@ -101,29 +124,6 @@ namespace AIO
 
         #endregion
 
-        /// <summary>
-        /// 清理缓存数据
-        /// </summary>
-        public static void ClearCache()
-        {
-            Instance.Clear();
-        }
-
-        #region Allocate
-
-        /// <summary>
-        /// 分配对象
-        /// </summary>
-        /// <returns>实体</returns>
-        public static T Alloc()
-        {
-            var entity = Instance.FreePool.Count == 0 ? Instance.CreateEntity() : Instance.FreePool.Dequeue();
-            Instance.AddSurviving(entity);
-            return entity;
-        }
-
-        #endregion
-
         #region Recycle
 
         /// <summary>
@@ -149,10 +149,7 @@ namespace AIO
         /// </summary>
         public static void RecycleAll()
         {
-            foreach (var entity in Instance.BusyPool)
-            {
-                Instance.FreePool.Enqueue(entity.Value);
-            }
+            foreach (var entity in Instance.BusyPool) Instance.FreePool.Enqueue(entity.Value);
 
             Instance.BusyPool.Clear();
         }

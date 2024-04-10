@@ -1,12 +1,11 @@
-﻿/*|============|*|
-|*|Author:     |*| USER
-|*|Date:       |*| 2024-01-19
-|*|E-Mail:     |*| xinansky99@gmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {
@@ -21,11 +20,11 @@ namespace AIO
         [DebuggerHidden, DebuggerNonUserCode]
         public static async Task<bool> DeleteDirAsync(string remote, Action<string> onProgress)
         {
-            if (remote == null) throw new ArgumentNullException(nameof(remote));
-            remote = remote.Replace("\\", "/");
-            var executor = Create(Gsutil, $"-m rm -r \"gs://{remote}\"");
-            if (onProgress != null) executor.OnProgress((o, s) => { onProgress.Invoke($"Delete : {s}"); });
-            var result = await executor;
+            if (string.IsNullOrEmpty(remote)) throw new ArgumentNullException(nameof(remote));
+            var executor = Create(Gsutil, $"-m rm -r \"gs://{remote.Replace("\\", "/")}\"");
+            var result = onProgress != null
+                ? await executor.OnProgress((o, s) => { onProgress.Invoke($"Delete : {s}"); })
+                : await executor;
             return result.ExitCode == 0;
         }
 
@@ -38,11 +37,11 @@ namespace AIO
         [DebuggerHidden, DebuggerNonUserCode]
         public static bool DeleteDir(string remote, Action<string> onProgress)
         {
-            if (remote == null) throw new ArgumentNullException(nameof(remote));
-            remote = remote.Replace("\\", "/");
-            var executor = Create(Gsutil, $"-m rm -r \"gs://{remote}\"");
-            if (onProgress != null) executor.OnProgress((o, s) => { onProgress.Invoke($"Delete : {s}"); });
-            var result = executor.Sync();
+            if (string.IsNullOrEmpty(remote)) throw new ArgumentNullException(nameof(remote));
+            var executor = Create(Gsutil, $"-m rm -r \"gs://{remote.Replace("\\", "/")}\"");
+            var result = onProgress != null
+                ? executor.OnProgress((o, s) => { onProgress.Invoke($"Delete : {s}"); }).Sync()
+                : executor.Sync();
             return result.ExitCode == 0;
         }
 
@@ -51,7 +50,7 @@ namespace AIO
         /// </summary>
         /// <param name="remote">存储桶的路径，例如 my-bucket/data/text.png</param>
         /// <returns> Ture:成功 False: 失败 </returns>
-        [DebuggerHidden, DebuggerNonUserCode]
+        [DebuggerHidden, DebuggerNonUserCode, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Task<bool> DeleteDirAsync(string remote)
         {
             return DeleteDirAsync(remote, Console.WriteLine);
@@ -62,7 +61,7 @@ namespace AIO
         /// </summary>
         /// <param name="remote">存储桶的路径，例如 my-bucket/data/text.png</param>
         /// <returns> Ture:成功 False: 失败 </returns>
-        [DebuggerHidden, DebuggerNonUserCode]
+        [DebuggerHidden, DebuggerNonUserCode, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool DeleteDir(string remote)
         {
             return DeleteDir(remote, Console.WriteLine);

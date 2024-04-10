@@ -2,6 +2,8 @@
 {
     public partial class PrMac
     {
+        #region Nested type: Cal
+
         /// <summary>
         /// 显示日历
         /// </summary>
@@ -15,5 +17,7 @@
                 return Create(CMD_Cal, command);
             }
         }
+
+        #endregion
     }
 }

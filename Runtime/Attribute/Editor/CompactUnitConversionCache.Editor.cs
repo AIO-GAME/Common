@@ -1,8 +1,13 @@
 ﻿#if UNITY_EDITOR
+
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using UnityEditor;
+
+#endregion
 
 namespace AIO
 {
@@ -11,6 +16,41 @@ namespace AIO
     /// </summary>
     public partial class CompactUnitConversionCache
     {
+        /************************************************************************************************************************/
+
+        /************************************************************************************************************************/
+
+        /************************************************************************************************************************/
+
+        private static List<string> _ExponentialFormats;
+
+        /// <summary>Returns a format string to include the specified number of `digits` in an exponential number.</summary>
+        public static string GetExponentialFormat(int digits)
+        {
+            if (_ExponentialFormats == null)
+                _ExponentialFormats = new List<string>();
+
+            while (_ExponentialFormats.Count <= digits)
+                _ExponentialFormats.Add("g" + _ExponentialFormats.Count);
+
+            return _ExponentialFormats[digits];
+        }
+
+        /************************************************************************************************************************/
+
+        private static void TrimExponential(ref string valueString)
+        {
+            var length = valueString.Length;
+            if (length <= 4 ||
+                valueString[length - 4] != 'e' ||
+                valueString[length - 2] != '0')
+                return;
+
+            valueString =
+                valueString.Substring(0, length - 2) +
+                valueString[length - 1];
+        }
+
         #region Convert float
 
         /// <summary>Calculate the index of the cache to use for the given parameters.</summary>
@@ -30,7 +70,7 @@ namespace AIO
             {
                 if (_WidthCache == null)
                 {
-                    _WidthCache = UnitGUI.CreateWidthCache(EditorStyles.numberField);
+                    _WidthCache   = UnitGUI.CreateWidthCache(EditorStyles.numberField);
                     _FieldPadding = EditorStyles.numberField.padding.horizontal;
 
                     _ApproximateSymbolWidth = _WidthCache.Convert("~") - _FieldPadding;
@@ -83,11 +123,8 @@ namespace AIO
             if (cache == null)
             {
                 if (characterCount == 0)
-                {
                     cache = new ConversionCache<double, string>(value => value.ToStringCached() + Suffix);
-                }
                 else
-                {
                     cache = new ConversionCache<double, string>(value =>
                     {
                         var valueString = value.ToStringCached();
@@ -113,7 +150,6 @@ namespace AIO
                         TrimExponential(ref valueString);
                         return valueString + Suffix;
                     });
-                }
 
                 CachesDouble[characterCount] = cache;
             }
@@ -145,7 +181,7 @@ namespace AIO
             {
                 if (_WidthCache == null)
                 {
-                    _WidthCache = UnitGUI.CreateWidthCache(EditorStyles.numberField);
+                    _WidthCache   = UnitGUI.CreateWidthCache(EditorStyles.numberField);
                     _FieldPadding = EditorStyles.numberField.padding.horizontal;
 
                     _ApproximateSymbolWidth = _WidthCache.Convert("~") - _FieldPadding;
@@ -201,11 +237,8 @@ namespace AIO
             if (cache == null)
             {
                 if (characterCount == 0)
-                {
                     cache = new ConversionCache<int, string>(value => value.ToStringCached() + Suffix);
-                }
                 else
-                {
                     cache = new ConversionCache<int, string>(value =>
                     {
                         var valueString = value.ToStringCached();
@@ -231,7 +264,6 @@ namespace AIO
                         TrimExponential(ref valueString);
                         return valueString + Suffix;
                     });
-                }
 
                 CachesInt[characterCount] = cache;
             }
@@ -259,7 +291,7 @@ namespace AIO
             {
                 if (_WidthCache == null)
                 {
-                    _WidthCache = UnitGUI.CreateWidthCache(EditorStyles.numberField);
+                    _WidthCache   = UnitGUI.CreateWidthCache(EditorStyles.numberField);
                     _FieldPadding = EditorStyles.numberField.padding.horizontal;
 
                     _ApproximateSymbolWidth = _WidthCache.Convert("~") - _FieldPadding;
@@ -302,41 +334,6 @@ namespace AIO
         }
 
         #endregion
-
-        /************************************************************************************************************************/
-
-        /************************************************************************************************************************/
-
-        /************************************************************************************************************************/
-
-        private static List<string> _ExponentialFormats;
-
-        /// <summary>Returns a format string to include the specified number of `digits` in an exponential number.</summary>
-        public static string GetExponentialFormat(int digits)
-        {
-            if (_ExponentialFormats == null)
-                _ExponentialFormats = new List<string>();
-
-            while (_ExponentialFormats.Count <= digits)
-                _ExponentialFormats.Add("g" + _ExponentialFormats.Count);
-
-            return _ExponentialFormats[digits];
-        }
-
-        /************************************************************************************************************************/
-
-        private static void TrimExponential(ref string valueString)
-        {
-            var length = valueString.Length;
-            if (length <= 4 ||
-                valueString[length - 4] != 'e' ||
-                valueString[length - 2] != '0')
-                return;
-
-            valueString =
-                valueString.Substring(0, length - 2) +
-                valueString[length - 1];
-        }
     }
 }
 #endif

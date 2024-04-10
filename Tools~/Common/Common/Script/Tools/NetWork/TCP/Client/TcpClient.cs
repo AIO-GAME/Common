@@ -1,12 +1,10 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-03
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Net;
 using System.Net.Sockets;
+
+#endregion
 
 namespace AIO.Net
 {
@@ -21,34 +19,26 @@ namespace AIO.Net
         /// </summary>
         /// <param name="address">IP address</param>
         /// <param name="port">Port number</param>
-        public TcpClient(IPAddress address, int port) : this(new IPEndPoint(address, port))
-        {
-        }
+        public TcpClient(IPAddress address, int port) : this(new IPEndPoint(address, port)) { }
 
         /// <summary>
         /// Initialize TCP client with a given server IP address and port number
         /// </summary>
         /// <param name="address">IP address</param>
         /// <param name="port">Port number</param>
-        public TcpClient(string address, int port) : this(new IPEndPoint(IPAddress.Parse(address), port))
-        {
-        }
+        public TcpClient(string address, int port) : this(new IPEndPoint(IPAddress.Parse(address), port)) { }
 
         /// <summary>
         /// Initialize TCP client with a given DNS endpoint
         /// </summary>
         /// <param name="endpoint">DNS endpoint</param>
-        public TcpClient(DnsEndPoint endpoint) : this(endpoint, endpoint.Host, endpoint.Port)
-        {
-        }
+        public TcpClient(DnsEndPoint endpoint) : this(endpoint, endpoint.Host, endpoint.Port) { }
 
         /// <summary>
         /// Initialize TCP client with a given IP endpoint
         /// </summary>
         /// <param name="endpoint">IP endpoint</param>
-        public TcpClient(IPEndPoint endpoint) : this(endpoint, endpoint.Address.ToString(), endpoint.Port)
-        {
-        }
+        public TcpClient(IPEndPoint endpoint) : this(endpoint, endpoint.Address.ToString(), endpoint.Port) { }
 
         /// <summary>
         /// Initialize TCP client with a given endpoint, address and port
@@ -58,9 +48,9 @@ namespace AIO.Net
         /// <param name="port">Server port</param>
         private TcpClient(EndPoint endpoint, string address, int port)
         {
-            Id = Guid.NewGuid();
-            Address = address;
-            Port = port;
+            Id       = Guid.NewGuid();
+            Address  = address;
+            Port     = port;
             Endpoint = endpoint;
         }
 
@@ -156,84 +146,6 @@ namespace AIO.Net
             }
         }
 
-        #region Session handlers
-
-        /// <summary>
-        /// Handle client connecting notification/处理客户端连接中通知
-        /// </summary>
-        protected virtual void OnConnecting()
-        {
-        }
-
-        /// <summary>
-        /// Handle client connected notification/处理客户端连接通知
-        /// </summary>
-        protected virtual void OnConnected()
-        {
-        }
-
-        /// <summary>
-        /// Handle client disconnecting notification / 处理客户端断开连接中通知
-        /// </summary>
-        protected virtual void OnDisconnecting()
-        {
-        }
-
-        /// <summary>
-        /// Handle client disconnected notification / 处理客户端断开连接通知
-        /// </summary>
-        protected virtual void OnDisconnected()
-        {
-        }
-
-        /// <summary>
-        /// Handle buffer received notification/处理缓冲区接收通知
-        /// </summary>
-        /// <param name="buffer">Received buffer</param>
-        /// <param name="offset">Received buffer offset</param>
-        /// <param name="size">Received buffer size</param>
-        /// <remarks>
-        /// Notification is called when another chunk of buffer was received from the server
-        /// </remarks>
-        protected virtual void OnReceived(byte[] buffer, int offset, int size)
-        {
-        }
-
-        /// <summary>
-        /// Handle buffer sent notification/处理缓冲区发送通知
-        /// </summary>
-        /// <param name="sent">Size of sent buffer</param>
-        /// <param name="pending">Size of pending buffer</param>
-        /// <remarks>
-        /// Notification is called when another chunk of buffer was sent to the server.
-        /// This handler could be used to send another buffer to the server for instance when the pending size is zero.
-        /// </remarks>
-        protected virtual void OnSent(long sent, long pending)
-        {
-        }
-
-        /// <summary>
-        /// Handle empty send buffer notification/处理空发送缓冲区通知
-        /// </summary>
-        /// <remarks>
-        /// Notification is called when the send buffer is empty and ready for a new data to send.
-        /// This handler could be used to send another buffer to the server.
-        /// </remarks>
-        protected virtual void OnEmpty()
-        {
-        }
-
-        /// <summary>
-        /// Handle error notification/处理错误通知
-        /// </summary>
-        /// <param name="error">Socket error code</param>
-        protected virtual void OnError(SocketError error)
-        {
-            Console.WriteLine($"TCP client caught an error with code {error}");
-        }
-
-        #endregion
-
         #region Error handling
 
         /// <summary>
@@ -251,6 +163,70 @@ namespace AIO.Net
                 return;
 
             OnError(error);
+        }
+
+        #endregion
+
+        #region Session handlers
+
+        /// <summary>
+        /// Handle client connecting notification/处理客户端连接中通知
+        /// </summary>
+        protected virtual void OnConnecting() { }
+
+        /// <summary>
+        /// Handle client connected notification/处理客户端连接通知
+        /// </summary>
+        protected virtual void OnConnected() { }
+
+        /// <summary>
+        /// Handle client disconnecting notification / 处理客户端断开连接中通知
+        /// </summary>
+        protected virtual void OnDisconnecting() { }
+
+        /// <summary>
+        /// Handle client disconnected notification / 处理客户端断开连接通知
+        /// </summary>
+        protected virtual void OnDisconnected() { }
+
+        /// <summary>
+        /// Handle buffer received notification/处理缓冲区接收通知
+        /// </summary>
+        /// <param name="buffer">Received buffer</param>
+        /// <param name="offset">Received buffer offset</param>
+        /// <param name="size">Received buffer size</param>
+        /// <remarks>
+        /// Notification is called when another chunk of buffer was received from the server
+        /// </remarks>
+        protected virtual void OnReceived(byte[] buffer, int offset, int size) { }
+
+        /// <summary>
+        /// Handle buffer sent notification/处理缓冲区发送通知
+        /// </summary>
+        /// <param name="sent">Size of sent buffer</param>
+        /// <param name="pending">Size of pending buffer</param>
+        /// <remarks>
+        /// Notification is called when another chunk of buffer was sent to the server.
+        /// This handler could be used to send another buffer to the server for instance when the pending size is zero.
+        /// </remarks>
+        protected virtual void OnSent(long sent, long pending) { }
+
+        /// <summary>
+        /// Handle empty send buffer notification/处理空发送缓冲区通知
+        /// </summary>
+        /// <remarks>
+        /// Notification is called when the send buffer is empty and ready for a new data to send.
+        /// This handler could be used to send another buffer to the server.
+        /// </remarks>
+        protected virtual void OnEmpty() { }
+
+        /// <summary>
+        /// Handle error notification/处理错误通知
+        /// </summary>
+        /// <param name="error">Socket error code</param>
+        protected virtual void OnError(SocketError error)
+        {
+            Console.WriteLine($"TCP client caught an error with code {error}");
         }
 
         #endregion

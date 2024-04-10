@@ -3,8 +3,10 @@
     /// <summary>
     /// 验证
     /// </summary>
-    public static partial class Validate
+    public static class Validate
     {
+        #region Value enum
+
         /// <summary>A rule that defines which values are valid.</summary>
         /// https://kybernetik.com.au/animancer/api/Animancer/Value
         public enum Value
@@ -31,8 +33,10 @@
 
             /// <summary>
             /// Infinity is not allowed.</summary>
-            IsFiniteOrNaN,
+            IsFiniteOrNaN
         }
+
+        #endregion
 
 
         /// <summary>

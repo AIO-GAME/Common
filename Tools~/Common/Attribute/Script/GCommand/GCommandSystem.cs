@@ -1,21 +1,25 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 
+#endregion
+
 /// <summary>
 /// 游戏命令系统
 /// </summary>
 public static class GCommandSystem
 {
-    private const string REGEX = @"^\[\d+:\s*((""[^""]*"")|(\d+))(,\s*((""[^""]*"")|(\d+)|(True|False)))*]$";
-    private static Regex CMDRegex = new Regex(REGEX);
+    private const  string REGEX    = @"^\[\d+:\s*((""[^""]*"")|(\d+))(,\s*((""[^""]*"")|(\d+)|(True|False)))*]$";
+    private static Regex  CMDRegex = new Regex(REGEX);
 
     private static Dictionary<string, GCommandSearchDatabase> CommandSearchs;
-    private static Dictionary<int, List<GCommandAttribute>> CommandDic;
-    private static Dictionary<int, string> CommandKeyName;
+    private static Dictionary<int, List<GCommandAttribute>>   CommandDic;
+    private static Dictionary<int, string>                    CommandKeyName;
 
     /// <summary>
     /// 初始化
@@ -23,7 +27,7 @@ public static class GCommandSystem
     public static void Initialize()
     {
         CommandSearchs = new Dictionary<string, GCommandSearchDatabase>();
-        CommandDic = new Dictionary<int, List<GCommandAttribute>>();
+        CommandDic     = new Dictionary<int, List<GCommandAttribute>>();
         CommandKeyName = new Dictionary<int, string>();
     }
 
@@ -33,15 +37,9 @@ public static class GCommandSystem
     public static void Register(IEnumerable<Assembly> assemblies)
     {
         foreach (var assembly in assemblies)
-        {
-            foreach (var type in assembly.GetTypes())
-            {
-                foreach (var method in type.GetMethods())
-                {
-                    Register(type, method);
-                }
-            }
-        }
+        foreach (var type in assembly.GetTypes())
+        foreach (var method in type.GetMethods())
+            Register(type, method);
     }
 
     /// <summary>
@@ -50,12 +48,8 @@ public static class GCommandSystem
     public static void Register(Assembly assembly)
     {
         foreach (var type in assembly.GetTypes())
-        {
-            foreach (var method in type.GetMethods())
-            {
-                Register(type, method);
-            }
-        }
+        foreach (var method in type.GetMethods())
+            Register(type, method);
     }
 
     /// <summary>
@@ -63,10 +57,7 @@ public static class GCommandSystem
     /// </summary>
     public static void Register(Type type)
     {
-        foreach (var method in type.GetMethods())
-        {
-            Register(type, method);
-        }
+        foreach (var method in type.GetMethods()) Register(type, method);
     }
 
     /// <summary>
@@ -119,9 +110,15 @@ public static class GCommandSystem
                 Array.ConstrainedCopy(list, 1, labels, 0, labels.Length);
                 CommandSearchs[label].Add(new List<string>(labels), attribute);
             }
-            else CommandSearchs[label].Add(attribute);
+            else
+            {
+                CommandSearchs[label].Add(attribute);
+            }
         }
-        else throw new GCommandDuplicationKeyException(attribute.ID, attribute.FullName, CommandKeyName[attribute.ID]);
+        else
+        {
+            throw new GCommandDuplicationKeyException(attribute.ID, attribute.FullName, CommandKeyName[attribute.ID]);
+        }
     }
 
     /// <summary>
@@ -129,10 +126,7 @@ public static class GCommandSystem
     /// </summary>
     public static void Debug()
     {
-        foreach (var item in CommandSearchs)
-        {
-            Console.WriteLine(item.Value.ToString());
-        }
+        foreach (var item in CommandSearchs) Console.WriteLine(item.Value.ToString());
     }
 
     /// <summary>
@@ -141,10 +135,7 @@ public static class GCommandSystem
     public static void Export(in string path)
     {
         var str = new StringBuilder();
-        foreach (var item in CommandSearchs)
-        {
-            str.Append(item.Value.ToString());
-        }
+        foreach (var item in CommandSearchs) str.Append(item.Value);
 
         var dicroot = Path.GetDirectoryName(path);
         if (!Directory.Exists(dicroot)) Directory.CreateDirectory(dicroot);
@@ -164,21 +155,13 @@ public static class GCommandSystem
                 var argStr = CMD.Remove(0, id.ToString().Length + 1);
                 var args = argStr.Split(',');
                 var objs = new object[args.Length];
-                for (int i = 0; i < objs.Length; i++)
-                {
-                    if (int.TryParse(args[i], out int intValue))
-                    {
+                for (var i = 0; i < objs.Length; i++)
+                    if (int.TryParse(args[i], out var intValue))
                         objs[i] = intValue;
-                    }
-                    else if (bool.TryParse(args[i], out bool boolValue))
-                    {
+                    else if (bool.TryParse(args[i], out var boolValue))
                         objs[i] = boolValue;
-                    }
                     else
-                    {
                         objs[i] = args[i].Trim('\"');
-                    }
-                }
 
                 Invoke(id, objs);
                 return;
@@ -196,13 +179,11 @@ public static class GCommandSystem
         if (CommandDic.TryGetValue(cmd, out var value))
         {
             foreach (var item in value)
-            {
                 if (item.CheckParameters(obj))
                 {
                     item.Invoke(obj);
                     return;
                 }
-            }
 
             throw new GCommandParameterNoMatchException(cmd, obj);
         }
@@ -218,13 +199,11 @@ public static class GCommandSystem
         if (CommandDic.TryGetValue(cmd, out var value))
         {
             foreach (var item in value)
-            {
                 if (item.Parameters.Length == 0)
                 {
                     item.Invoke();
                     return;
                 }
-            }
 
             throw new GCommandParameterNoMatchException(cmd);
         }
@@ -235,7 +214,5 @@ public static class GCommandSystem
     /// <summary>
     /// 撤销注册命令
     /// </summary>
-    public static void UnRegister()
-    {
-    }
+    public static void UnRegister() { }
 }

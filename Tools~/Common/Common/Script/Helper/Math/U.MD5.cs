@@ -1,15 +1,21 @@
+#region
+
 using System;
 using System.IO;
 using System.Security.Cryptography;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: MD5
+
         /// <summary>
         /// 计算MD5
         /// </summary>
-        public partial class MD5
+        public class MD5
         {
             /// <summary>
             /// 通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得MD5
@@ -40,10 +46,8 @@ namespace AIO
                     int readLength; //每次读取长度
                     var output = new byte[bufferSize];
                     while ((readLength = inputStream.Read(buffer, 0, buffer.Length)) > 0)
-                    {
                         //计算MD5
                         hashAlgorithm.TransformBlock(buffer, 0, readLength, output, 0);
-                    }
 
                     //完成最后计算，必须调用(由于上一部循环已经完成所有运算，所以调用此方法时后面的两个参数都为0)
                     hashAlgorithm.TransformFinalBlock(buffer, 0, 0);
@@ -57,5 +61,7 @@ namespace AIO
                 }
             }
         }
+
+        #endregion
     }
 }

@@ -1,10 +1,53 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections;
+
+#endregion
 
 namespace AIO
 {
     partial class TimerSystem
     {
+        /// <summary>
+        /// 取出循环任务
+        /// </summary>
+        public static void Pop(long tid)
+        {
+            if (!TimerExecutors.ContainsKey(tid)) return;
+            TimerExecutors[tid].Loop = -2;
+            TimerExecutors.Remove(tid);
+        }
+
+        /// <summary>
+        /// 取出循环任务
+        /// </summary>
+        public static void Pop(string tidstrtiding)
+        {
+            var tid = tidstrtiding.GetHashCode();
+            if (TimerExecutors.ContainsKey(tid))
+            {
+                TimerExecutors[tid].Loop = -2;
+                TimerExecutors.Remove(tid);
+            }
+        }
+
+        /// <summary>
+        /// 判断任务是否存在
+        /// </summary>
+        public static bool Exist(long tid)
+        {
+            return TimerExecutors.ContainsKey(tid);
+        }
+
+        /// <summary>
+        /// 判断任务是否存在
+        /// </summary>
+        public static bool Exist(string tid)
+        {
+            return TimerExecutors.ContainsKey(tid.GetHashCode());
+        }
+
         #region Timer Executor Enumerator
 
         /// <summary>
@@ -108,44 +151,5 @@ namespace AIO
         }
 
         #endregion
-
-        /// <summary>
-        /// 取出循环任务
-        /// </summary>
-        public static void Pop(long tid)
-        {
-            if (!TimerExecutors.ContainsKey(tid)) return;
-            TimerExecutors[tid].Loop = -2;
-            TimerExecutors.Remove(tid);
-        }
-
-        /// <summary>
-        /// 取出循环任务
-        /// </summary>
-        public static void Pop(string tidstrtiding)
-        {
-            var tid = tidstrtiding.GetHashCode();
-            if (TimerExecutors.ContainsKey(tid))
-            {
-                TimerExecutors[tid].Loop = -2;
-                TimerExecutors.Remove(tid);
-            }
-        }
-
-        /// <summary>
-        /// 判断任务是否存在
-        /// </summary>
-        public static bool Exist(long tid)
-        {
-            return TimerExecutors.ContainsKey(tid);
-        }
-
-        /// <summary>
-        /// 判断任务是否存在
-        /// </summary>
-        public static bool Exist(string tid)
-        {
-            return TimerExecutors.ContainsKey(tid.GetHashCode());
-        }
     }
 }

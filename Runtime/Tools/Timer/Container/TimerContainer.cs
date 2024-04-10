@@ -1,15 +1,37 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Debug = UnityEngine.Debug;
 
+#endregion
+
 namespace AIO
 {
-    public abstract partial class TimerContainer : ITimerContainer
+    public abstract class TimerContainer : ITimerContainer
     {
         private static int NUM;
+
+        private Task TaskHandle;
+
+        protected TimerContainer()
+        {
+            Watch           = Stopwatch.StartNew();
+            List            = Pool.List<ITimerOperator>();
+            ID              = NUM++;
+            Unit            = 0;
+            UpdateCacheTime = 0;
+            RemainNum       = 0;
+        }
+
+        protected CancellationToken TaskHandleToken { get; private set; }
+
+        protected CancellationTokenSource TaskHandleTokenSource { get; private set; }
+
+        #region ITimerContainer Members
 
         public ITimerOperator this[int index] => List[index];
 
@@ -26,22 +48,6 @@ namespace AIO
         public int ID { get; }
 
         public long UpdateCacheTime { get; protected set; }
-
-        private Task TaskHandle;
-
-        protected CancellationToken TaskHandleToken { get; private set; }
-
-        protected CancellationTokenSource TaskHandleTokenSource { get; private set; }
-
-        protected TimerContainer()
-        {
-            Watch           = Stopwatch.StartNew();
-            List            = Pool.List<ITimerOperator>();
-            ID              = NUM++;
-            Unit            = 0;
-            UpdateCacheTime = 0;
-            RemainNum       = 0;
-        }
 
         public void Start()
         {
@@ -64,11 +70,6 @@ namespace AIO
             if (!TaskHandle.IsCompleted) TaskHandleTokenSource?.Cancel(true);
             else TaskHandle.Dispose();
         }
-
-        /// <summary>
-        /// 更新
-        /// </summary>
-        protected abstract void Update();
 
         public virtual void Dispose()
         {
@@ -145,5 +146,12 @@ namespace AIO
 
             timer.Free();
         }
+
+        #endregion
+
+        /// <summary>
+        /// 更新
+        /// </summary>
+        protected abstract void Update();
     }
 }

@@ -1,12 +1,18 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: HTTP
+
         public partial class HTTP
         {
             /// <summary>
@@ -204,5 +210,7 @@ namespace AIO
                 }
             }
         }
+
+        #endregion
     }
 }

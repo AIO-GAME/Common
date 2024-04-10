@@ -4,9 +4,13 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+
+#endregion
 
 namespace AIO
 {
@@ -15,6 +19,11 @@ namespace AIO
     /// </summary>
     public sealed class ResultEmpty : Result
     {
+        /// <summary>
+        /// 进程执行结果(空)
+        /// </summary>
+        public ResultEmpty() : base(null) { }
+
         /// <inheritdoc/>
         public override int ExitCode => 0;
 
@@ -42,17 +51,11 @@ namespace AIO
         /// <inheritdoc/>
         public override TimeSpan PrivilegedProcessorTime => TimeSpan.Zero;
 
-        /// <summary>
-        /// 进程执行结果(空)
-        /// </summary>
-        public ResultEmpty() : base(null)
-        {
-        }
+        /// <inheritdoc/>
+        public override ProcessStartInfo Info => null;
 
         /// <inheritdoc/>
-        public override void Dispose()
-        {
-        }
+        public override void Dispose() { }
 
         /// <inheritdoc/>
         public override IResult Finish()
@@ -65,9 +68,6 @@ namespace AIO
         {
             return this;
         }
-
-        /// <inheritdoc/>
-        public override ProcessStartInfo Info => null;
 
         /// <inheritdoc/>
         public override string ToString()
@@ -84,9 +84,7 @@ namespace AIO
         /// <summary>
         /// 进程执行器(空)
         /// </summary>
-        public ExecutorEmpty(bool enableOutput = true) : base(null, enableOutput)
-        {
-        }
+        public ExecutorEmpty(bool enableOutput = true) : base(null, enableOutput) { }
 
         /// <inheritdoc/>
         public override IResult Sync()
@@ -98,9 +96,7 @@ namespace AIO
         }
 
         /// <inheritdoc/>
-        public override void Dispose()
-        {
-        }
+        public override void Dispose() { }
 
         /// <inheritdoc/>
         public override IExecutor Input(in string message)
@@ -130,22 +126,20 @@ namespace AIO
     /// <summary>
     /// 进程构造器(空)
     /// </summary>
-    public sealed partial class PrEmpty : PrCourse
+    public sealed class PrEmpty : PrCourse
     {
         /// <summary>
         /// 进程构造器(空)
         /// </summary>
         public static PrEmpty Instance { get; } = new PrEmpty();
-        
+
         /// <summary>
         /// 进程执行器(空)
         /// </summary>
         public static IExecutor Executor { get; } = new ExecutorEmpty();
-        
+
         /// <inheritdoc/>
-        public override void Dispose()
-        {
-        }
+        public override void Dispose() { }
 
         /// <inheritdoc/>
         public override string ToString()

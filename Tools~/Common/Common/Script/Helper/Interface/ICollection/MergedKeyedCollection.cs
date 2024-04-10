@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+
+#endregion
 
 namespace AIO
 {
@@ -13,15 +17,6 @@ namespace AIO
     public class MergedKeyedCollection<TKey, TItem> : IMergedCollection<TItem>
     {
         /// <summary>
-        /// 构造函数
-        /// </summary>
-        public MergedKeyedCollection()
-        {
-            collections = new Dictionary<Type, IKeyedCollection<TKey, TItem>>();
-            collectionsLookup = new Dictionary<Type, IKeyedCollection<TKey, TItem>>();
-        }
-
-        /// <summary>
         /// 
         /// </summary>
         protected readonly Dictionary<Type, IKeyedCollection<TKey, TItem>> collections;
@@ -31,6 +26,15 @@ namespace AIO
         /// 
         /// </summary>
         protected readonly Dictionary<Type, IKeyedCollection<TKey, TItem>> collectionsLookup;
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public MergedKeyedCollection()
+        {
+            collections       = new Dictionary<Type, IKeyedCollection<TKey, TItem>>();
+            collectionsLookup = new Dictionary<Type, IKeyedCollection<TKey, TItem>>();
+        }
 
         /// <summary>
         /// 获取值
@@ -45,14 +49,14 @@ namespace AIO
                 if (key == null) throw new ArgumentNullException(nameof(key));
 
                 foreach (var collectionByType in collections.Where(collectionByType =>
-                             collectionByType.Value.Contains(key)))
-                {
+                                                                       collectionByType.Value.Contains(key)))
                     return collectionByType.Value[key];
-                }
 
                 throw new KeyNotFoundException();
             }
         }
+
+        #region IMergedCollection<TItem> Members
 
         /// <inheritdoc />
         public int Count
@@ -64,7 +68,8 @@ namespace AIO
         public bool IsReadOnly => false;
 
         /// <inheritdoc />
-        public bool Includes<TSubItem>() where TSubItem : TItem
+        public bool Includes<TSubItem>()
+        where TSubItem : TItem
         {
             return Includes(typeof(TSubItem));
         }
@@ -78,12 +83,69 @@ namespace AIO
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="item"></param>
+        public virtual void Add(TItem item)
+        {
+            GetCollectionForItem(item).Add(item);
+        }
+
+        /// <inheritdoc />
+        public void Clear()
+        {
+            foreach (var collection in collections.Values) collection.Clear();
+        }
+
+        /// <inheritdoc />
+        public bool Contains(TItem item)
+        {
+            return GetCollectionForItem(item).Contains(item);
+        }
+
+        /// <inheritdoc />
+        public bool Remove(TItem item)
+        {
+            return GetCollectionForItem(item).Remove(item);
+        }
+
+        /// <inheritdoc />
+        public void CopyTo(TItem[] array, int arrayIndex)
+        {
+            if (array == null) throw new ArgumentNullException(nameof(array));
+
+            if (arrayIndex < 0) throw new ArgumentOutOfRangeException(nameof(arrayIndex));
+
+            if (array.Length - arrayIndex < Count) throw new ArgumentException();
+
+            var i = 0;
+
+            foreach (var collection in collections.Values)
+            {
+                collection.CopyTo(array, arrayIndex + i);
+                i += collection.Count;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        IEnumerator<TItem> IEnumerable<TItem>.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <typeparam name="TSubItem"></typeparam>
         /// <returns></returns>
-        public IKeyedCollection<TKey, TSubItem> ForType<TSubItem>() where TSubItem : TItem
+        public IKeyedCollection<TKey, TSubItem> ForType<TSubItem>()
+        where TSubItem : TItem
         {
-            return ((VariantKeyedCollection<TItem, TSubItem, TKey>)GetCollectionForType(typeof(TSubItem)))
-                .implementation;
+            return ((VariantKeyedCollection<TItem, TSubItem, TKey>)GetCollectionForType(typeof(TSubItem))).implementation;
         }
 
         /// <summary>
@@ -91,7 +153,8 @@ namespace AIO
         /// </summary>
         /// <param name="collection"></param>
         /// <typeparam name="TSubItem"></typeparam>
-        public virtual void Include<TSubItem>(IKeyedCollection<TKey, TSubItem> collection) where TSubItem : TItem
+        public virtual void Include<TSubItem>(IKeyedCollection<TKey, TSubItem> collection)
+        where TSubItem : TItem
         {
             var type = typeof(TSubItem);
             var variantCollection = new VariantKeyedCollection<TItem, TSubItem, TKey>(collection);
@@ -120,13 +183,10 @@ namespace AIO
         protected IKeyedCollection<TKey, TItem> GetCollectionForType(Type type, bool throwOnFail = true)
         {
             if (type is null) throw new ArgumentNullException(nameof(type));
-            if (collectionsLookup.TryGetValue(type, out var collection))
-            {
-                return collection;
-            }
+            if (collectionsLookup.TryGetValue(type, out var collection)) return collection;
 
             foreach (var collectionByType in collections.Where(collectionByType =>
-                         collectionByType.Key.IsAssignableFrom(type)))
+                                                                   collectionByType.Key.IsAssignableFrom(type)))
             {
                 collection = collectionByType.Value;
                 collectionsLookup.Add(type, collection);
@@ -134,13 +194,8 @@ namespace AIO
             }
 
             if (throwOnFail)
-            {
                 throw new InvalidOperationException($"No sub-collection available for type '{type}'.");
-            }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         /// <summary>
@@ -156,19 +211,12 @@ namespace AIO
             // Ensure.That(nameof(key)).IsNotNull(key);
 
             foreach (var collectionsByType in collections.Where(collectionsByType =>
-                         collectionsByType.Value.Contains(key)))
-            {
+                                                                    collectionsByType.Value.Contains(key)))
                 return collectionsByType.Value;
-            }
 
             if (throwOnFail)
-            {
                 throw new InvalidOperationException($"No sub-collection available for key '{key}'.");
-            }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         /// <summary>
@@ -181,66 +229,9 @@ namespace AIO
         {
             var collection = GetCollectionForKey(key, false);
 
-            value = default(TItem);
+            value = default;
 
             return collection != null && collection.TryGetValue(key, out value);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="item"></param>
-        public virtual void Add(TItem item)
-        {
-            GetCollectionForItem(item).Add(item);
-        }
-
-        /// <inheritdoc />
-        public void Clear()
-        {
-            foreach (var collection in collections.Values)
-            {
-                collection.Clear();
-            }
-        }
-
-        /// <inheritdoc />
-        public bool Contains(TItem item)
-        {
-            return GetCollectionForItem(item).Contains(item);
-        }
-
-        /// <inheritdoc />
-        public bool Remove(TItem item)
-        {
-            return GetCollectionForItem(item).Remove(item);
-        }
-
-        /// <inheritdoc />
-        public void CopyTo(TItem[] array, int arrayIndex)
-        {
-            if (array == null)
-            {
-                throw new ArgumentNullException(nameof(array));
-            }
-
-            if (arrayIndex < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(arrayIndex));
-            }
-
-            if (array.Length - arrayIndex < Count)
-            {
-                throw new ArgumentException();
-            }
-
-            var i = 0;
-
-            foreach (var collection in collections.Values)
-            {
-                collection.CopyTo(array, arrayIndex + i);
-                i += collection.Count;
-            }
         }
 
         /// <summary>
@@ -263,16 +254,6 @@ namespace AIO
             return GetCollectionForKey(key).Remove(key);
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
-        IEnumerator<TItem> IEnumerable<TItem>.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -282,15 +263,17 @@ namespace AIO
             return new Enumerator(this);
         }
 
+        #region Nested type: Enumerator
+
         /// <summary>
         /// 
         /// </summary>
         public struct Enumerator : IEnumerator<TItem>
         {
             private Dictionary<Type, IKeyedCollection<TKey, TItem>>.Enumerator collectionsEnumerator;
-            private IKeyedCollection<TKey, TItem> currentCollection;
-            private int indexInCurrentCollection;
-            private bool exceeded;
+            private IKeyedCollection<TKey, TItem>                              currentCollection;
+            private int                                                        indexInCurrentCollection;
+            private bool                                                       exceeded;
 
             /// <inheritdoc />
             public Enumerator(MergedKeyedCollection<TKey, TItem> merged) : this()
@@ -299,9 +282,7 @@ namespace AIO
             }
 
             /// <inheritdoc />
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             /// <inheritdoc />
             public bool MoveNext()
@@ -315,15 +296,12 @@ namespace AIO
                         // There is at least a collection, start with this one
                         currentCollection = collectionsEnumerator.Current.Value;
 
-                        if (currentCollection == null)
-                        {
-                            throw new InvalidOperationException("Merged sub collection is null.");
-                        }
+                        if (currentCollection == null) throw new InvalidOperationException("Merged sub collection is null.");
                     }
                     else
                     {
                         // There is no collection at all, stop
-                        Current = default(TItem);
+                        Current  = default;
                         exceeded = true;
                         return false;
                     }
@@ -343,13 +321,10 @@ namespace AIO
                 // them all until we find an element, not just the next one
                 while (collectionsEnumerator.MoveNext())
                 {
-                    currentCollection = collectionsEnumerator.Current.Value;
+                    currentCollection        = collectionsEnumerator.Current.Value;
                     indexInCurrentCollection = 0;
 
-                    if (currentCollection == null)
-                    {
-                        throw new InvalidOperationException("Merged sub collection is null.");
-                    }
+                    if (currentCollection == null) throw new InvalidOperationException("Merged sub collection is null.");
 
                     if (indexInCurrentCollection < currentCollection.Count)
                     {
@@ -360,7 +335,7 @@ namespace AIO
                 }
 
                 // We're beyond all collections, stop
-                Current = default(TItem);
+                Current  = default;
                 exceeded = true;
                 return false;
             }
@@ -372,10 +347,7 @@ namespace AIO
             {
                 get
                 {
-                    if (exceeded)
-                    {
-                        throw new InvalidOperationException();
-                    }
+                    if (exceeded) throw new InvalidOperationException();
 
                     return Current;
                 }
@@ -386,5 +358,7 @@ namespace AIO
                 throw new InvalidOperationException();
             }
         }
+
+        #endregion
     }
 }

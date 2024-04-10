@@ -1,22 +1,29 @@
 ﻿#if UNITY_EDITOR
+
+#region
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 
+#endregion
+
 namespace AIO
 {
     partial class Runner
     {
+        #region Nested type: EditorCoroutineLooper
+
         private static class EditorCoroutineLooper
         {
             private static readonly List<IEnumerator> Looper;
             private static readonly List<IEnumerator> DropItems;
-            private static bool M_Started;
+            private static          bool              M_Started;
 
             static EditorCoroutineLooper()
             {
-                Looper = new List<IEnumerator>();
+                Looper    = new List<IEnumerator>();
                 DropItems = new List<IEnumerator>();
                 EditorApplication.quitting += () =>
                 {
@@ -32,7 +39,7 @@ namespace AIO
                 if (!Looper.Contains(iterator)) Looper.Add(iterator);
                 if (Looper.Count == 0) return;
                 if (M_Started) return;
-                M_Started = true;
+                M_Started                =  true;
                 EditorApplication.update += Update;
             }
 
@@ -61,7 +68,7 @@ namespace AIO
                                     continue;
                                 }
 
-                                if (!instance.gameObject.activeInHierarchy) continue; //隐藏时别执行Loop
+                                if (!instance.gameObject.activeInHierarchy) continue;      //隐藏时别执行Loop
                                 if (item != null && !item.MoveNext()) DropItems.Add(item); //执行Loop，执行完毕也丢弃Looper
                             }
 
@@ -74,9 +81,11 @@ namespace AIO
                 }
 
                 EditorApplication.update -= Update;
-                M_Started = false;
+                M_Started                =  false;
             }
         }
+
+        #endregion
     }
 }
 #endif

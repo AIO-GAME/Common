@@ -2,6 +2,8 @@
 {
     public partial class PrCmd
     {
+        #region Nested type: MkLink
+
         /// <summary>
         /// 符号链接
         /// </summary>
@@ -68,5 +70,7 @@
                 return Create().Input(messages);
             }
         }
+
+        #endregion
     }
 }

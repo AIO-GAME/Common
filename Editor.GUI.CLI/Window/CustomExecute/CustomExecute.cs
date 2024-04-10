@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
@@ -11,94 +13,26 @@ using UnityEngine;
 using UnityEngine.UI;
 using UObject = UnityEngine.Object;
 
+#endregion
+
 namespace AIO.UEditor
 {
-    [HelpURL("https://wanderer.blog.csdn.net/article/details/102971712")]
-    [GWindow("自定义执行器", "执行器",
-        IconResource = "Editor/Icon/App/AIO",
-        Group = "Tools",
-        Menu = "AIO/Window/Custom Execute",
-        MinSizeWidth = 600, MinSizeHeight = 600
-    )]
+    [HelpURL("https://wanderer.blog.csdn.net/article/details/102971712"), GWindow("自定义执行器", "执行器",
+                                                                                  IconResource = "Editor/Icon/App/AIO",
+                                                                                  Group = "Tools",
+                                                                                  Menu = "AIO/Window/Custom Execute",
+                                                                                  MinSizeWidth = 600, MinSizeHeight = 600
+     )]
     public class CustomExecute : GraphicWindow
     {
-        private ExecuterMode _mode = ExecuterMode.Dynamic;
-
-        #region Dynamic Field
-
-        private string _assembliesPath;
-        private List<string> _assemblies = new List<string>();
-        private string _namespace;
-        private string _code;
-        private CSharpCodeProvider _csharpCodeProvider;
-        private string _codeTemplate;
-        private Vector2 _scrollNamespace;
-        private Vector2 _scrollAssemblies;
-        private Vector2 _scrollCode;
-        private bool _isShowNamespace = false;
-        private bool _isShowAssemblies = false;
-        private bool _isShowCode = true;
-
-        #endregion
-
-        #region Static Field
-
-        private GameObject _entity;
-        private Component _target;
-        private MethodInfo _method;
-        private List<Parameter> _parameters = new List<Parameter>();
-        private string _methodName = "<None>";
-
-        private GameObject Entity
+        public enum ExecuterMode
         {
-            get => _entity;
-            set
-            {
-                if (_entity == value) return;
-                _entity = value;
-                Target = null;
-            }
+            Dynamic,
+            Static
         }
 
-        private Component Target
-        {
-            get => _target;
-            set
-            {
-                if (_target == value) return;
-                _target = value;
-                Method = null;
-            }
-        }
-
-        private MethodInfo Method
-        {
-            get => _method;
-            set
-            {
-                if (_method == value) return;
-                _method = value;
-                if (_method != null)
-                {
-                    _parameters.Clear();
-                    foreach (var t in _method.GetParameters())
-                    {
-                        _parameters.Add(new Parameter(t));
-                    }
-
-                    FormatMethodName();
-                }
-                else
-                {
-                    _parameters.Clear();
-                    _methodName = "<None>";
-                }
-            }
-        }
-
-        #endregion
-
-        private static string _projectPath = null;
+        private static string       _projectPath;
+        private        ExecuterMode _mode = ExecuterMode.Dynamic;
 
         /// <summary>
         /// 项目路径（也即是 Application.dataPath 路径的末尾去掉了 Assets）
@@ -108,20 +42,25 @@ namespace AIO.UEditor
             get
             {
                 if (string.IsNullOrEmpty(_projectPath))
-                {
                     _projectPath = Application.dataPath.Substring(0,
-                        Application.dataPath.LastIndexOf("/", StringComparison.CurrentCulture) + 1);
-                }
+                                                                  Application.dataPath.LastIndexOf("/", StringComparison.CurrentCulture) + 1);
 
                 return _projectPath;
             }
+        }
+
+        protected override void OnDisable()
+        {
+            if (_csharpCodeProvider == null) return;
+            _csharpCodeProvider.Dispose();
+            _csharpCodeProvider = null;
         }
 
         public void Initialization()
         {
             _assembliesPath =
                 EditorApplication.applicationPath.Substring(0,
-                    EditorApplication.applicationPath.LastIndexOf("/", StringComparison.CurrentCulture)) +
+                                                            EditorApplication.applicationPath.LastIndexOf("/", StringComparison.CurrentCulture)) +
                 "/Data/Managed";
 
             _assemblies.Add(typeof(Type).Assembly.Location);
@@ -152,41 +91,24 @@ namespace AIO
         protected override void OnActivation()
         {
             _csharpCodeProvider = new CSharpCodeProvider();
-            Entity = null;
-            _methodName = "<None>";
+            Entity              = null;
+            _methodName         = "<None>";
             Initialization();
-        }
-
-        protected override void OnDisable()
-        {
-            if (_csharpCodeProvider == null) return;
-            _csharpCodeProvider.Dispose();
-            _csharpCodeProvider = null;
         }
 
         protected override void OnDraw()
         {
             GUILayout.BeginHorizontal();
-            if (GUILayout.Toggle(_mode == ExecuterMode.Dynamic, "Dynamic", GEStyle.LargeButtonLeft))
-            {
-                _mode = ExecuterMode.Dynamic;
-            }
+            if (GUILayout.Toggle(_mode == ExecuterMode.Dynamic, "Dynamic", GEStyle.LargeButtonLeft)) _mode = ExecuterMode.Dynamic;
 
-            if (GUILayout.Toggle(_mode == ExecuterMode.Static, "Static", GEStyle.LargeButtonRight))
-            {
-                _mode = ExecuterMode.Static;
-            }
+            if (GUILayout.Toggle(_mode == ExecuterMode.Static, "Static", GEStyle.LargeButtonRight)) _mode = ExecuterMode.Static;
 
             GUILayout.EndHorizontal();
 
             if (_mode == ExecuterMode.Dynamic)
-            {
                 DynamicGUI();
-            }
             else
-            {
                 StaticGUI();
-            }
         }
 
 
@@ -201,7 +123,7 @@ namespace AIO
             if (_isShowNamespace)
             {
                 _scrollNamespace = GUILayout.BeginScrollView(_scrollNamespace, "TextField", GUILayout.Height(150));
-                _namespace = EditorGUILayout.TextArea(_namespace, "Label");
+                _namespace       = EditorGUILayout.TextArea(_namespace, "Label");
                 GUILayout.EndScrollView();
             }
 
@@ -218,17 +140,17 @@ namespace AIO
                 GUILayout.BeginVertical("Box", GUILayout.Height(150));
 
                 _scrollAssemblies = GUILayout.BeginScrollView(_scrollAssemblies);
-                for (int i = 0; i < _assemblies.Count; i++)
+                for (var i = 0; i < _assemblies.Count; i++)
                 {
                     GUILayout.BeginHorizontal();
                     GUILayout.Label(i + ".", GUILayout.Width(25));
                     _assemblies[i] = EditorGUILayout.TextField(_assemblies[i]);
                     if (GUILayout.Button("Browse", EditorStyles.miniButtonLeft, GUILayout.Width(50)))
                     {
-                        string initialPath = File.Exists(_assemblies[i])
+                        var initialPath = File.Exists(_assemblies[i])
                             ? Path.GetDirectoryName(_assemblies[i])
                             : _assembliesPath;
-                        string path = EditorUtility.OpenFilePanel("Browse Assembly Path", initialPath, "*.dll");
+                        var path = EditorUtility.OpenFilePanel("Browse Assembly Path", initialPath, "*.dll");
                         if (path.Length != 0)
                         {
                             _assemblies[i] = path;
@@ -247,10 +169,7 @@ namespace AIO
 
                 GUILayout.BeginHorizontal();
                 GUILayout.FlexibleSpace();
-                if (GUILayout.Button("Add", EditorStyles.miniButton, GUILayout.Width(50)))
-                {
-                    _assemblies.Add("");
-                }
+                if (GUILayout.Button("Add", EditorStyles.miniButton, GUILayout.Width(50))) _assemblies.Add("");
 
                 GUILayout.EndHorizontal();
                 GUILayout.EndScrollView();
@@ -287,7 +206,7 @@ namespace AIO
                 GUILayout.EndHorizontal();
 
                 _scrollCode = GUILayout.BeginScrollView(_scrollCode, "TextField");
-                _code = EditorGUILayout.TextArea(_code, "Label");
+                _code       = EditorGUILayout.TextArea(_code, "Label");
                 GUILayout.EndScrollView();
             }
 
@@ -296,15 +215,12 @@ namespace AIO
             #region Execute
 
             GUILayout.BeginHorizontal();
-            GUI.enabled = _code != "";
+            GUI.enabled         = _code != "";
             GUI.backgroundColor = Color.green;
-            if (GUILayout.Button("Execute", GEStyle.LargeButton))
-            {
-                DynamicExecute();
-            }
+            if (GUILayout.Button("Execute", GEStyle.LargeButton)) DynamicExecute();
 
             GUI.backgroundColor = Color.white;
-            GUI.enabled = true;
+            GUI.enabled         = true;
             GUILayout.EndHorizontal();
 
             #endregion
@@ -320,19 +236,19 @@ namespace AIO
             GUI.enabled = Entity != null;
             GUILayout.BeginHorizontal();
             GUILayout.Label("Target:", GUILayout.Width(60));
-            GUIContent content = Target != null
+            var content = Target != null
                 ? EditorGUIUtility.ObjectContent(Target, Target.GetType())
                 : new GUIContent("<None>");
             if (GUILayout.Button(content, GEStyle.MiniPopup))
             {
-                GenericMenu gm = new GenericMenu();
-                Component[] components = Entity.GetComponents<Component>();
+                var gm = new GenericMenu();
+                var components = Entity.GetComponents<Component>();
                 gm.AddItem(new GUIContent("<None>"), Target == null, () => { Target = null; });
-                for (int i = 0; i < components.Length; i++)
+                for (var i = 0; i < components.Length; i++)
                 {
-                    Component component = components[i];
+                    var component = components[i];
                     gm.AddItem(new GUIContent(component.GetType().FullName), Target == component,
-                        () => { Target = component; });
+                               () => { Target = component; });
                 }
 
                 gm.ShowAsContext();
@@ -346,17 +262,14 @@ namespace AIO
             GUILayout.Label("Method:", GUILayout.Width(60));
             if (GUILayout.Button(_methodName, GEStyle.MiniPopup))
             {
-                GenericMenu gm = new GenericMenu();
-                MethodInfo[] methods = Target.GetType().GetMethods(BindingFlags.Static | BindingFlags.Instance |
-                                                                   BindingFlags.Public | BindingFlags.NonPublic);
+                var gm = new GenericMenu();
+                var methods = Target.GetType().GetMethods(BindingFlags.Static | BindingFlags.Instance |
+                                                          BindingFlags.Public | BindingFlags.NonPublic);
                 gm.AddItem(new GUIContent("<None>"), Method == null, () => { Method = null; });
-                for (int i = 0; i < methods.Length; i++)
+                for (var i = 0; i < methods.Length; i++)
                 {
-                    MethodInfo method = methods[i];
-                    if (method.Name.Contains("get_") || method.Name.Contains("set_"))
-                    {
-                        continue;
-                    }
+                    var method = methods[i];
+                    if (method.Name.Contains("get_") || method.Name.Contains("set_")) continue;
 
                     gm.AddItem(new GUIContent(method.Name + "()"), Method == method, () => { Method = method; });
                 }
@@ -371,8 +284,8 @@ namespace AIO
             GUILayout.Label("Parameters:");
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
-            bool isValid = true;
-            for (int i = 0; i < _parameters.Count; i++)
+            var isValid = true;
+            for (var i = 0; i < _parameters.Count; i++)
             {
                 GUILayout.BeginHorizontal();
                 GUILayout.Label($"{i + 1}.{_parameters[i].Name}:", GUILayout.Width(200));
@@ -410,7 +323,7 @@ namespace AIO
                         else if (_parameters[i].IsObject)
                         {
                             _parameters[i].ObjectValue = EditorGUILayout.ObjectField(_parameters[i].ObjectValue,
-                                _parameters[i].ObjectType, true);
+                                                                                     _parameters[i].ObjectType, true);
                         }
                         else
                         {
@@ -430,15 +343,12 @@ namespace AIO
             #region Execute
 
             GUILayout.BeginHorizontal();
-            GUI.enabled = Method != null && isValid;
+            GUI.enabled         = Method != null && isValid;
             GUI.backgroundColor = Color.green;
-            if (GUILayout.Button("Execute", GEStyle.LargeButton))
-            {
-                StaticExecute();
-            }
+            if (GUILayout.Button("Execute", GEStyle.LargeButton)) StaticExecute();
 
             GUI.backgroundColor = Color.white;
-            GUI.enabled = true;
+            GUI.enabled         = true;
             GUILayout.EndHorizontal();
 
             #endregion
@@ -451,10 +361,7 @@ namespace AIO
             if (results.Errors.HasErrors)
             {
                 Debug.LogError("执行动态工具失败：工具代码存在如下编译错误！");
-                for (var i = 0; i < results.Errors.Count; i++)
-                {
-                    Debug.LogError(results.Errors[i].ToString());
-                }
+                for (var i = 0; i < results.Errors.Count; i++) Debug.LogError(results.Errors[i].ToString());
             }
             else
             {
@@ -468,14 +375,11 @@ namespace AIO
         private CompilerParameters GenerateParameters()
         {
             var compilerParameters = new CompilerParameters();
-            foreach (var assembly in _assemblies)
-            {
-                compilerParameters.ReferencedAssemblies.Add(assembly);
-            }
+            foreach (var assembly in _assemblies) compilerParameters.ReferencedAssemblies.Add(assembly);
 
             compilerParameters.GenerateExecutable = false;
-            compilerParameters.GenerateInMemory = true;
-            compilerParameters.CompilerOptions = "/unsafe /optimize";
+            compilerParameters.GenerateInMemory   = true;
+            compilerParameters.CompilerOptions    = "/unsafe /optimize";
             return compilerParameters;
         }
 
@@ -488,35 +392,28 @@ namespace AIO
         private void StaticExecute()
         {
             var parameters = new object[_parameters.Count];
-            for (var i = 0; i < _parameters.Count; i++)
-            {
-                parameters[i] = _parameters[i].GetValue();
-            }
+            for (var i = 0; i < _parameters.Count; i++) parameters[i] = _parameters[i].GetValue();
 
             if (Method.IsStatic)
             {
                 var returnValue = Method.Invoke(null, parameters);
                 if (Method.ReturnType.Name != "Void")
-                {
                     Debug.Log($"Execute {_methodName}, Return value is: " +
                               (returnValue != null ? returnValue.ToString() : "null"));
-                }
             }
             else
             {
                 var returnValue = Method.Invoke(Target, parameters);
                 if (Method.ReturnType.Name != "Void")
-                {
                     Debug.Log($"Execute {_methodName}, Return value is: " +
                               (returnValue != null ? returnValue.ToString() : "null"));
-                }
             }
         }
 
         private void FormatMethodName()
         {
             var builder = new StringBuilder();
-            builder.Append(Method.IsFamily ? "protected " : (Method.IsPublic ? "public " : "private "));
+            builder.Append(Method.IsFamily ? "protected " : Method.IsPublic ? "public " : "private ");
             if (Method.IsStatic) builder.Append("static ");
             if (Method.IsAssembly) builder.Append("internal ");
             if (Method.IsAbstract) builder.Append("abstract ");
@@ -527,10 +424,7 @@ namespace AIO
             builder.Append("(");
             for (var i = 0; i < _parameters.Count; i++)
             {
-                if (i != 0)
-                {
-                    builder.Append(", ");
-                }
+                if (i != 0) builder.Append(", ");
 
                 if (_parameters[i].Info.IsIn) builder.Append("in ");
                 if (_parameters[i].Info.IsOut) builder.Append("out ");
@@ -543,52 +437,41 @@ namespace AIO
             _methodName = builder.ToString();
         }
 
-        public enum ExecuterMode
-        {
-            Dynamic,
-            Static
-        }
-
         public class Parameter
         {
-            public ParameterInfo Info { get; private set; }
-            public string Name { get; private set; }
-            public string Type { get; private set; }
-            public bool IsEnum { get; private set; }
-            public bool IsObject { get; private set; }
-            public Type ObjectType { get; private set; }
+            public bool    BoolValue;
+            public Color   ColorValue;
+            public double  DoubleValue;
+            public Enum    EnumValue;
+            public float   FloatValue;
+            public int     IntValue;
+            public UObject ObjectValue;
 
-            public string StringValue;
-            public int IntValue;
-            public float FloatValue;
-            public double DoubleValue;
-            public bool BoolValue;
+            public string  StringValue;
             public Vector2 Vector2Value;
             public Vector3 Vector3Value;
-            public Color ColorValue;
-            public Enum EnumValue;
-            public UObject ObjectValue;
 
             public Parameter(ParameterInfo parameterInfo)
             {
-                Info = parameterInfo;
-                Name = parameterInfo.Name;
-                Type = parameterInfo.ParameterType.Name;
+                Info   = parameterInfo;
+                Name   = parameterInfo.Name;
+                Type   = parameterInfo.ParameterType.Name;
                 IsEnum = parameterInfo.ParameterType.IsEnum;
                 IsObject = parameterInfo.ParameterType == typeof(UObject) ||
                            parameterInfo.ParameterType.IsSubclassOf(typeof(UObject));
                 ObjectType = IsObject ? parameterInfo.ParameterType : null;
 
-                if (IsEnum)
-                {
-                    EnumValue = (Enum)Enum.ToObject(parameterInfo.ParameterType, 0);
-                }
+                if (IsEnum) EnumValue = (Enum)Enum.ToObject(parameterInfo.ParameterType, 0);
 
-                if (IsObject)
-                {
-                    ObjectValue = null;
-                }
+                if (IsObject) ObjectValue = null;
             }
+
+            public ParameterInfo Info       { get; private set; }
+            public string        Name       { get; private set; }
+            public string        Type       { get; private set; }
+            public bool          IsEnum     { get; private set; }
+            public bool          IsObject   { get; private set; }
+            public Type          ObjectType { get; private set; }
 
             public object GetValue()
             {
@@ -612,19 +495,83 @@ namespace AIO
                         return ColorValue;
                     default:
                         if (IsEnum)
-                        {
                             return EnumValue;
-                        }
-                        else if (IsObject)
-                        {
+                        if (IsObject)
                             return ObjectValue;
-                        }
-                        else
-                        {
-                            return null;
-                        }
+                        return null;
                 }
             }
         }
+
+        #region Dynamic Field
+
+        private string             _assembliesPath;
+        private List<string>       _assemblies = new List<string>();
+        private string             _namespace;
+        private string             _code;
+        private CSharpCodeProvider _csharpCodeProvider;
+        private string             _codeTemplate;
+        private Vector2            _scrollNamespace;
+        private Vector2            _scrollAssemblies;
+        private Vector2            _scrollCode;
+        private bool               _isShowNamespace;
+        private bool               _isShowAssemblies;
+        private bool               _isShowCode = true;
+
+        #endregion
+
+        #region Static Field
+
+        private GameObject      _entity;
+        private Component       _target;
+        private MethodInfo      _method;
+        private List<Parameter> _parameters = new List<Parameter>();
+        private string          _methodName = "<None>";
+
+        private GameObject Entity
+        {
+            get => _entity;
+            set
+            {
+                if (_entity == value) return;
+                _entity = value;
+                Target  = null;
+            }
+        }
+
+        private Component Target
+        {
+            get => _target;
+            set
+            {
+                if (_target == value) return;
+                _target = value;
+                Method  = null;
+            }
+        }
+
+        private MethodInfo Method
+        {
+            get => _method;
+            set
+            {
+                if (_method == value) return;
+                _method = value;
+                if (_method != null)
+                {
+                    _parameters.Clear();
+                    foreach (var t in _method.GetParameters()) _parameters.Add(new Parameter(t));
+
+                    FormatMethodName();
+                }
+                else
+                {
+                    _parameters.Clear();
+                    _methodName = "<None>";
+                }
+            }
+        }
+
+        #endregion
     }
 }

@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
     public partial class BufferByte
     {
+        #region IReadData Members
+
         /// <inheritdoc/> 
         public decimal ReadDecimal(bool reverse = false)
         {
@@ -15,6 +21,10 @@ namespace AIO
         {
             return Arrays.GetDecimalArray(ref ReadIndex, reverse);
         }
+
+        #endregion
+
+        #region IWriteData Members
 
         /// <inheritdoc/> 
         public void WriteDecimal(decimal value, bool reverse = false)
@@ -31,5 +41,7 @@ namespace AIO
             WriteLen(value.Count);
             foreach (var item in value) WriteDecimal(item, reverse);
         }
+
+        #endregion
     }
 }

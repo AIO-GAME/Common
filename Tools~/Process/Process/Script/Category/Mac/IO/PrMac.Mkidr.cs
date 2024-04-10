@@ -2,6 +2,8 @@
 {
     public partial class PrMac
     {
+        #region Nested type: Mkdir
+
         /// <summary>
         /// 目录相关命令
         /// </summary>
@@ -48,5 +50,7 @@
                 return Create(CMD_Mkdir, $"-m {permissions} '{target}'");
             }
         }
+
+        #endregion
     }
 }

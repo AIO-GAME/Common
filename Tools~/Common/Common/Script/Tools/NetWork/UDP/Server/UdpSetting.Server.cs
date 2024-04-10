@@ -1,10 +1,4 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-07
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
-
-namespace AIO.Net
+﻿namespace AIO.Net
 {
     /// <summary>
     /// TCP server setting 

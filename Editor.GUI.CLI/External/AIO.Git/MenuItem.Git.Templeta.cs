@@ -1,9 +1,13 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
 using PackageInfo = UnityEditor.PackageManager.PackageInfo;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -81,9 +85,9 @@ namespace AIO.UEditor
         {
             str.AppendLine();
             str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false, {2})]\r\n",
-                nameof(PrPlatform.Git), "添加 Add", index);
+                             nameof(PrPlatform.Git), "添加 Add", index);
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
-                nameof(PrPlatform.Git.Add), "        {\r\n");
+                             nameof(PrPlatform.Git.Add), "        {\r\n");
             str.AppendFormat(
                 "            await PrPlatform.Git.{0}(\r\n                {1}, \".\", false\r\n            ).Async();\r\n{2}",
                 nameof(PrPlatform.Git.Add), INFO_URL, "        }\r\n");
@@ -93,9 +97,9 @@ namespace AIO.UEditor
         {
             str.AppendLine();
             str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false, {2})]\r\n",
-                nameof(PrPlatform.Git), "拉取 Pull", index);
+                             nameof(PrPlatform.Git), "拉取 Pull", index);
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
-                nameof(PrPlatform.Git.Pull), "        {\r\n");
+                             nameof(PrPlatform.Git.Pull), "        {\r\n");
             str.AppendFormat(
                 "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
                 nameof(PrPlatform.Git.Pull), INFO_URL, "        }\r\n");
@@ -105,9 +109,9 @@ namespace AIO.UEditor
         {
             str.AppendLine();
             str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false, {2})]\r\n",
-                nameof(PrPlatform.Git), "推送 Push", index);
+                             nameof(PrPlatform.Git), "推送 Push", index);
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
-                nameof(PrPlatform.Git.Push), "        {\r\n");
+                             nameof(PrPlatform.Git.Push), "        {\r\n");
             str.AppendFormat(
                 "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
                 nameof(PrPlatform.Git.Push), $"({INFO_URL}, null)", "        }\r\n");
@@ -117,9 +121,9 @@ namespace AIO.UEditor
         {
             str.AppendLine();
             str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false, {2})]\r\n",
-                nameof(PrPlatform.Git), "提交 Commit", index);
+                             nameof(PrPlatform.Git), "提交 Commit", index);
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
-                nameof(PrPlatform.Git.Commit), "        {\r\n");
+                             nameof(PrPlatform.Git.Commit), "        {\r\n");
             str.AppendFormat(
                 "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
                 nameof(PrPlatform.Git.Commit), $"({INFO_URL},null)", "        }\r\n");
@@ -129,9 +133,9 @@ namespace AIO.UEditor
         {
             str.AppendLine();
             str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false, {2})]\r\n",
-                nameof(PrPlatform.Git), "上传 Upload", index);
+                             nameof(PrPlatform.Git), "上传 Upload", index);
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
-                nameof(PrPlatform.Git.Upload), "        {\r\n");
+                             nameof(PrPlatform.Git.Upload), "        {\r\n");
             str.AppendFormat(
                 "            await PrPlatform.Git.{0}(\r\n                {1}, false, false, false\r\n            ).Async();\r\n{2}",
                 nameof(PrPlatform.Git.Upload), INFO_URL, "        }\r\n");
@@ -141,21 +145,21 @@ namespace AIO.UEditor
         {
             str.AppendLine();
             str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false, {2})]\r\n",
-                nameof(PrPlatform.Git), "清理 Clean", index);
+                             nameof(PrPlatform.Git), "清理 Clean", index);
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
-                nameof(PrPlatform.Git.Clean), "        {\r\n");
+                             nameof(PrPlatform.Git.Clean), "        {\r\n");
             str.AppendFormat("            await PrPlatform.Git.{0}(\r\n                {1}, \"-fd -x" +
                              "\", false\r\n            ).Async();\r\n{2}",
-                nameof(PrPlatform.Git.Clean), INFO_URL, "        }\r\n");
+                             nameof(PrPlatform.Git.Clean), INFO_URL, "        }\r\n");
         }
 
         private static void FuncResetHard(StringBuilder str, int index)
         {
             str.AppendLine();
             str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false)]\r\n",
-                nameof(PrPlatform.Git), "重置 Reset/--Hard 重置 [分支 暂存区 工作区]");
+                             nameof(PrPlatform.Git), "重置 Reset/--Hard 重置 [分支 暂存区 工作区]");
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
-                nameof(PrPlatform.Git.ResetHard), "        {\r\n");
+                             nameof(PrPlatform.Git.ResetHard), "        {\r\n");
             str.AppendFormat(
                 "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
                 nameof(PrPlatform.Git.ResetHard), INFO_URL, "        }\r\n");
@@ -165,9 +169,9 @@ namespace AIO.UEditor
         {
             str.AppendLine();
             str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false)]\r\n",
-                nameof(PrPlatform.Git), "重置 Reset/--Keep 重置 [索引] 如果提交和HEAD之间的文件与HEAD不同，则重置将中止");
+                             nameof(PrPlatform.Git), "重置 Reset/--Keep 重置 [索引] 如果提交和HEAD之间的文件与HEAD不同，则重置将中止");
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
-                nameof(PrPlatform.Git.ResetKeep), "        {\r\n");
+                             nameof(PrPlatform.Git.ResetKeep), "        {\r\n");
             str.AppendFormat(
                 "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
                 nameof(PrPlatform.Git.ResetKeep), INFO_URL, "        }\r\n");
@@ -177,9 +181,9 @@ namespace AIO.UEditor
         {
             str.AppendLine();
             str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false)]\r\n",
-                nameof(PrPlatform.Git), "重置 Reset/--Merge 重置 [索引 暂存区] 更改和索引产生 重置将被终止");
+                             nameof(PrPlatform.Git), "重置 Reset/--Merge 重置 [索引 暂存区] 更改和索引产生 重置将被终止");
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
-                nameof(PrPlatform.Git.ResetMerge), "        {\r\n");
+                             nameof(PrPlatform.Git.ResetMerge), "        {\r\n");
             str.AppendFormat(
                 "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
                 nameof(PrPlatform.Git.ResetMerge), INFO_URL, "        }\r\n");
@@ -189,9 +193,9 @@ namespace AIO.UEditor
         {
             str.AppendLine();
             str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false)]\r\n",
-                nameof(PrPlatform.Git), "重置 Reset/--Mixed 重置 [分支 暂存区]");
+                             nameof(PrPlatform.Git), "重置 Reset/--Mixed 重置 [分支 暂存区]");
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
-                nameof(PrPlatform.Git.ResetMixed), "        {\r\n");
+                             nameof(PrPlatform.Git.ResetMixed), "        {\r\n");
             str.AppendFormat(
                 "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
                 nameof(PrPlatform.Git.ResetMixed), INFO_URL, "        }\r\n");
@@ -201,9 +205,9 @@ namespace AIO.UEditor
         {
             str.AppendLine();
             str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false)]\r\n",
-                nameof(PrPlatform.Git), "重置 Reset/--Soft 重置 [分支]");
+                             nameof(PrPlatform.Git), "重置 Reset/--Soft 重置 [分支]");
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
-                nameof(PrPlatform.Git.ResetSoft), "        {\r\n");
+                             nameof(PrPlatform.Git.ResetSoft), "        {\r\n");
             str.AppendFormat(
                 "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
                 nameof(PrPlatform.Git.ResetSoft), INFO_URL, "        }\r\n");
@@ -213,9 +217,9 @@ namespace AIO.UEditor
         {
             str.AppendLine();
             str.AppendFormat("        [MenuItem(\"{0}/\" + DisplayName + \"/{1}\", false, {2})]\r\n",
-                nameof(PrPlatform.Git), "设置关联远端库 RemoteSetUrl", ++index);
+                             nameof(PrPlatform.Git), "设置关联远端库 RemoteSetUrl", ++index);
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
-                nameof(PrPlatform.Git.RemoteSetUrl), "        {\r\n");
+                             nameof(PrPlatform.Git.RemoteSetUrl), "        {\r\n");
             str.AppendFormat(
                 "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
                 nameof(PrPlatform.Git.RemoteSetUrl), INFO_URL, "        }\r\n");
@@ -247,12 +251,12 @@ namespace AIO.UEditor
                 str.AppendFormat("{0}\r\n", INFO_USING);
 
                 str.AppendFormat("    /// <summary>\r\n    /// Git Manager {0}\r\n    /// </summary>\r\n",
-                    info.displayName);
+                                 info.displayName);
 
                 str.AppendFormat("    [ScriptIcon(IconResource = \"Editor/Icon/App/Git/gitignore\")]\r\n");
                 str.AppendFormat("    internal static partial class {0}\r\n", classname).Append("    {\r\n");
                 str.AppendFormat("        internal const string URL = \"{0}\";\r\n",
-                    info.resolvedPath.Replace('\\', '/').Replace(ProjectPath, "").Trim('\\', '/'));
+                                 info.resolvedPath.Replace('\\', '/').Replace(ProjectPath, "").Trim('\\', '/'));
                 str.AppendFormat("        internal const string DisplayName = \"{0}\";\r\n", info.displayName);
                 str.AppendFormat("        internal const string PackageName = \"{0}\";\r\n", info.name);
                 str.AppendFormat("{0}\r\n", INFO_FULL_PATH);

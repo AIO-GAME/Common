@@ -1,10 +1,16 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.Linq;
+
+#endregion
 
 namespace AIO
 {
     public static partial class Pool
     {
+        #region Nested type: AList
+
         /// <summary>
         /// List对象池
         /// </summary>
@@ -43,6 +49,8 @@ namespace AIO
                 }
             }
         }
+
+        #endregion
     }
 
     public static partial class PoolExtend

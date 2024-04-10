@@ -1,11 +1,17 @@
+#region
+
 using System;
 using System.IO;
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -23,8 +29,8 @@ namespace AIO
             public static async Task<bool> WriteByteArrayAsync(
                 string path,
                 byte[] bytes,
-                bool coded = false,
-                bool concat = false)
+                bool   coded  = false,
+                bool   concat = false)
             {
                 if (!coded) return await WriteAsync(path, bytes, 0, bytes.Length, concat);
                 for (var i = 0; i < bytes.Length; i++)
@@ -44,10 +50,10 @@ namespace AIO
             public static async Task<bool> WriteAsync(
                 string path,
                 byte[] bytes,
-                int offset,
-                int length,
-                bool concat,
-                int bufferSize = 4096)
+                int    offset,
+                int    length,
+                bool   concat,
+                int    bufferSize = 4096)
             {
                 var dir = Path.GetDirectoryName(path);
                 if (!string.IsNullOrEmpty(dir) && !ExistsDir(dir))
@@ -72,7 +78,7 @@ namespace AIO
                 try
                 {
                     using (var fsSource = new FileStream(path,
-                               FileMode.Open, FileAccess.Read, FileShare.ReadWrite, bufferSize, true))
+                                                         FileMode.Open, FileAccess.Read, FileShare.ReadWrite, bufferSize, true))
                     {
                         var length = (int)fsSource.Length;
                         var buffer = new byte[length];
@@ -105,5 +111,7 @@ namespace AIO
                 return Array.Empty<byte>();
             }
         }
+
+        #endregion
     }
 }

@@ -1,21 +1,14 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-06
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Net.Sockets;
+
+#endregion
 
 namespace AIO.Net
 {
     public partial class TcpClient
     {
-        /// <summary>
-        /// Receiving flag
-        /// </summary>
-        private bool Receiving;
-
         /// <summary>
         /// Receive buffer
         /// </summary>
@@ -25,6 +18,11 @@ namespace AIO.Net
         /// Receive event args
         /// </summary>
         private SocketAsyncEventArgs ReceiveEventArg;
+
+        /// <summary>
+        /// Receiving flag
+        /// </summary>
+        private bool Receiving;
 
         /// <summary>
         /// Receive data from the server (synchronous)
@@ -99,9 +97,7 @@ namespace AIO.Net
                     if (Socket.ReceiveAsync(ReceiveEventArg)) continue;
                     process = ProcessReceive(ReceiveEventArg);
                 }
-                catch (ObjectDisposedException)
-                {
-                }
+                catch (ObjectDisposedException) { }
             }
         }
 

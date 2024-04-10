@@ -1,12 +1,14 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #pragma warning disable CS0109 //
 
+#region
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 using UnityEngine.Internal;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -1458,10 +1460,10 @@ namespace AIO.UEditor
         /// <param name="includeChildren">是否包含子属性 <see cref="bool"/></param>
         /// <returns><see cref="bool"/></returns>
         public static bool SP(Vector2 pos, Vector2 size, SerializedProperty property, string label,
-            bool includeChildren = false)
+                              bool    includeChildren = false)
         {
             return EditorGUI.PropertyField(new Rect(pos - size / 2, size), property, new GUIContent(label),
-                includeChildren);
+                                           includeChildren);
         }
 
         /// <summary>
@@ -1487,7 +1489,7 @@ namespace AIO.UEditor
         /// <param name="includeChildren">是否包含子属性 <see cref="bool"/></param>
         /// <returns><see cref="bool"/></returns>
         public static bool SP(Vector2 pos, Vector2 size, SerializedProperty property, GUIContent label,
-            bool includeChildren = false)
+                              bool    includeChildren = false)
         {
             return EditorGUI.PropertyField(new Rect(pos - size / 2, size), property, label, includeChildren);
         }

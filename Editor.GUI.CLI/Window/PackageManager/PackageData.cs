@@ -1,14 +1,19 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.IO;
+
+#endregion
 
 namespace AIO.UEditor
 {
     public class PackageData
     {
-        public List<string> URL;
+        [NonSerialized]
+        public List<string> Names;
 
-        [NonSerialized] public List<string> Names;
+        public List<string> URL;
 
         public PackageData()
         {
@@ -25,10 +30,8 @@ namespace AIO.UEditor
         public string GetURL(string key)
         {
             foreach (var item in URL)
-            {
                 if (Path.GetFileName(item).Replace(".git", "") == key)
                     return item;
-            }
 
             throw new Exception("packagedata not find key");
         }

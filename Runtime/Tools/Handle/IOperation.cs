@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Runtime.CompilerServices;
 using Object = UnityEngine.Object;
+
+#endregion
 
 namespace AIO
 {

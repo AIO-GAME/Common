@@ -1,6 +1,10 @@
+#region
+
 using System;
 using System.Text;
 using System.Text.RegularExpressions;
+
+#endregion
 
 namespace AIO
 {
@@ -9,6 +13,8 @@ namespace AIO
     /// </summary>
     public partial class EnsureThat
     {
+        private static readonly Regex guidRegex = new Regex(@"[a-fA-F0-9]{8}(\-[a-fA-F0-9]{4}){3}\-[a-fA-F0-9]{12}");
+
         /// <summary>
         /// 参数名
         /// </summary>
@@ -28,10 +34,7 @@ namespace AIO
             {
                 var c = s[i];
 
-                if (i > 0 && IsWordBeginning(s, i))
-                {
-                    sb.Append(separator);
-                }
+                if (i > 0 && IsWordBeginning(s, i)) sb.Append(separator);
 
                 sb.Append(c);
             }
@@ -75,10 +78,10 @@ namespace AIO
             return
                 (!isDelimiter && isFirst) ||
                 (!isDelimiter && wasDelimiter) ||
-                (isLetter && wasLetter && isUpper && !wasUpper) || // camelCase => camel_Case
+                (isLetter && wasLetter && isUpper && !wasUpper) ||                          // camelCase => camel_Case
                 (isLetter && wasLetter && isUpper && wasUpper && !isLast && willBeLower) || // => ABBRWord => ABBR_Word
-                (isNumber && wasLetter) || // Vector3 => Vector_3
-                (isLetter && wasNumber && isUpper && willBeLower); // Word1Word => Word_1_Word, Word1word => Word_1word
+                (isNumber && wasLetter) ||                                                  // Vector3 => Vector_3
+                (isLetter && wasNumber && isUpper && willBeLower);                          // Word1Word => Word_1_Word, Word1word => Word_1word
         }
 
 
@@ -90,10 +93,7 @@ namespace AIO
 
         private static string FirstCharacterToUpper(in string s)
         {
-            if (string.IsNullOrEmpty(s) || char.IsUpper(s, 0))
-            {
-                return s;
-            }
+            if (string.IsNullOrEmpty(s) || char.IsUpper(s, 0)) return s;
 
             return char.ToUpperInvariant(s[0]) + s.Substring(1);
         }
@@ -103,8 +103,6 @@ namespace AIO
         {
             return s == null || s.Trim() == string.Empty;
         }
-
-        private static readonly Regex guidRegex = new Regex(@"[a-fA-F0-9]{8}(\-[a-fA-F0-9]{4}){3}\-[a-fA-F0-9]{12}");
 
 
         private bool StringEquals(in string x, in string y, in StringComparison? comparison = null)

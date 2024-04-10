@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Buffers;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -32,7 +36,7 @@ namespace AIO
                         var a = new byte[counter[bucket].Length + 1];
                         Array.ConstrainedCopy(counter[bucket], 0, a, 0, a.Length);
                         a[counter[bucket].Length] = item;
-                        counter[bucket] = a;
+                        counter[bucket]           = a;
                     }
                 }
 
@@ -165,7 +169,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 基数排序
+        ///     基数排序
         /// </summary>
         private static IList<int> SortRadix(IList<int> array)
         {
@@ -196,7 +200,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 基数排序
+        ///     基数排序
         /// </summary>
         private static IList<short> SortRadix(in IList<short> array)
         {
@@ -229,7 +233,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 基数排序
+        ///     基数排序
         /// </summary>
         private static IList<sbyte> SortRadix(in IList<sbyte> array)
         {
@@ -238,10 +242,8 @@ namespace AIO
             var maxDigit = 0;
             if (Max == 0) maxDigit = 1;
             else
-            {
                 for (var temp = Max; temp != 0; temp /= 10)
                     maxDigit++;
-            }
 
             ArrayPool<sbyte>.Shared.Rent(array.Count);
             for (int i = 0, mod = 10, dev = 1, pos = 0; i < maxDigit; i++, dev *= 10, mod *= 10, pos = 0)
@@ -260,7 +262,7 @@ namespace AIO
                         var a = new sbyte[counter[bucket].Length + 1];
                         Array.ConstrainedCopy(counter[bucket], 0, a, 0, a.Length);
                         a[counter[bucket].Length] = item;
-                        counter[bucket] = a;
+                        counter[bucket]           = a;
                     }
                 }
 

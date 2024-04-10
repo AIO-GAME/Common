@@ -1,18 +1,18 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+#region
 
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: Hex
+
         /// <summary>
         /// 16进制操作类
         /// </summary>
@@ -195,16 +195,16 @@ namespace AIO
             {
                 var chs = new char[16];
                 var table = lower ? HEX_DIGIT_LOWER : HEX_DIGIT;
-                chs[0] = table[(int)((value >> 60) & HEX_BIT)];
-                chs[1] = table[(int)((value >> 56) & HEX_BIT)];
-                chs[2] = table[(int)((value >> 52) & HEX_BIT)];
-                chs[3] = table[(int)((value >> 48) & HEX_BIT)];
-                chs[4] = table[(int)((value >> 44) & HEX_BIT)];
-                chs[5] = table[(int)((value >> 40) & HEX_BIT)];
-                chs[6] = table[(int)((value >> 36) & HEX_BIT)];
-                chs[7] = table[(int)((value >> 32) & HEX_BIT)];
-                chs[8] = table[(int)((value >> 28) & HEX_BIT)];
-                chs[9] = table[(int)((value >> 24) & HEX_BIT)];
+                chs[0]  = table[(int)((value >> 60) & HEX_BIT)];
+                chs[1]  = table[(int)((value >> 56) & HEX_BIT)];
+                chs[2]  = table[(int)((value >> 52) & HEX_BIT)];
+                chs[3]  = table[(int)((value >> 48) & HEX_BIT)];
+                chs[4]  = table[(int)((value >> 44) & HEX_BIT)];
+                chs[5]  = table[(int)((value >> 40) & HEX_BIT)];
+                chs[6]  = table[(int)((value >> 36) & HEX_BIT)];
+                chs[7]  = table[(int)((value >> 32) & HEX_BIT)];
+                chs[8]  = table[(int)((value >> 28) & HEX_BIT)];
+                chs[9]  = table[(int)((value >> 24) & HEX_BIT)];
                 chs[10] = table[(int)((value >> 20) & HEX_BIT)];
                 chs[11] = table[(int)((value >> 16) & HEX_BIT)];
                 chs[12] = table[(int)((value >> 12) & HEX_BIT)];
@@ -312,15 +312,11 @@ namespace AIO
                 len += offset;
                 if (len > src.Length) len = src.Length;
                 if (len > offset + 2 && src[offset] == '0')
-                {
-                    if (src[offset + 1] == 'x' || src[offset + 1] == 'X') offset += 2;
-                }
+                    if (src[offset + 1] == 'x' || src[offset + 1] == 'X')
+                        offset += 2;
 
                 var value = 0L;
-                while (offset < len)
-                {
-                    value = (value << 4) | (ToDigit(src[offset++]) & 0x00000000FFFFFFFFL);
-                }
+                while (offset < len) value = (value << 4) | (ToDigit(src[offset++]) & 0x00000000FFFFFFFFL);
 
                 return value; // &HEX_LONG;
             }
@@ -334,20 +330,18 @@ namespace AIO
                 len += offset;
                 if (len > src.Count) len = src.Count;
                 if (len > offset + 2 && src[offset] == '0')
-                {
-                    if (src[offset + 1] == 'x' || src[offset + 1] == 'X') offset += 2;
-                }
+                    if (src[offset + 1] == 'x' || src[offset + 1] == 'X')
+                        offset += 2;
 
                 var value = 0L;
-                while (offset < len)
-                {
-                    value = (value << 4) | (ToDigit(src[offset++]) & 0x00000000FFFFFFFFL);
-                }
+                while (offset < len) value = (value << 4) | (ToDigit(src[offset++]) & 0x00000000FFFFFFFFL);
 
                 return value; // &HEX_LONG;
             }
 
             #endregion
         }
+
+        #endregion
     }
 }

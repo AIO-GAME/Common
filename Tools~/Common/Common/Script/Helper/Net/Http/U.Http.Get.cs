@@ -1,71 +1,21 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: HTTP
+
         public partial class HTTP
         {
-            /// <summary>
-            /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            /// </summary>
-            public sealed class Option
-            {
-                /// <summary>
-                /// 超时时间
-                /// </summary>
-                public ushort Timeout;
-
-                /// <summary>
-                /// cookie
-                /// </summary>
-                public string Cookie;
-
-                /// <summary>
-                /// 编码:默认UTF-8
-                /// </summary>
-                public Encoding Encoding;
-
-                /// <summary>
-                /// 默认:application/x-www-form-urlencoded
-                /// </summary>
-                public string ContentType;
-
-                /// <summary>
-                /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-                /// </summary>
-                public Option()
-                {
-                    Timeout     = Net.TIMEOUT;
-                    Cookie      = string.Empty;
-                    Encoding    = Encoding.UTF8;
-                    ContentType = "application/json";
-                }
-
-                /// <summary>
-                /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-                /// </summary>
-                /// <param name="encoding">编码:默认UTF-8</param>
-                /// <param name="timeout">超时时间</param>
-                /// <param name="cookie">cookie</param>
-                /// <param name="contentType"></param>
-                public Option(
-                    ushort   timeout,
-                    string   cookie,
-                    Encoding encoding,
-                    string   contentType)
-                {
-                    Timeout     = timeout;
-                    Cookie      = cookie;
-                    Encoding    = encoding ?? Encoding.UTF8;
-                    ContentType = contentType;
-                }
-            }
-
             /// <summary>
             /// 请求获取特定的内容
             /// </summary>
@@ -282,6 +232,68 @@ namespace AIO
                 var data = await GetAsync(remoteUrl, encoding, timeout, cookie);
                 return Yaml.Deserialize<T>(data);
             }
+
+            #region Nested type: Option
+
+            /// <summary>
+            /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            /// </summary>
+            public sealed class Option
+            {
+                /// <summary>
+                /// 默认:application/x-www-form-urlencoded
+                /// </summary>
+                public string ContentType;
+
+                /// <summary>
+                /// cookie
+                /// </summary>
+                public string Cookie;
+
+                /// <summary>
+                /// 编码:默认UTF-8
+                /// </summary>
+                public Encoding Encoding;
+
+                /// <summary>
+                /// 超时时间
+                /// </summary>
+                public ushort Timeout;
+
+                /// <summary>
+                /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+                /// </summary>
+                public Option()
+                {
+                    Timeout     = Net.TIMEOUT;
+                    Cookie      = string.Empty;
+                    Encoding    = Encoding.UTF8;
+                    ContentType = "application/json";
+                }
+
+                /// <summary>
+                /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+                /// </summary>
+                /// <param name="encoding">编码:默认UTF-8</param>
+                /// <param name="timeout">超时时间</param>
+                /// <param name="cookie">cookie</param>
+                /// <param name="contentType"></param>
+                public Option(
+                    ushort   timeout,
+                    string   cookie,
+                    Encoding encoding,
+                    string   contentType)
+                {
+                    Timeout     = timeout;
+                    Cookie      = cookie;
+                    Encoding    = encoding ?? Encoding.UTF8;
+                    ContentType = contentType;
+                }
+            }
+
+            #endregion
         }
+
+        #endregion
     }
 }

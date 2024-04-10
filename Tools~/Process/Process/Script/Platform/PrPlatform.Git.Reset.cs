@@ -4,13 +4,19 @@
 
 |||✩ - - - - - |*/
 
+#region
+
 using System;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrPlatform
     {
+        #region Nested type: Git
+
         public partial class Git
         {
             /// <summary>
@@ -291,5 +297,7 @@ namespace AIO
                 }
             }
         }
+
+        #endregion
     }
 }

@@ -4,18 +4,24 @@
 
 |||✩ - - - - - |*/
 
+#region
+
 using System;
 using System.Security.Cryptography;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: FileID
+
         /// <summary>
         /// Unity File ID MD4 算法
         /// </summary>
-        public partial class FileID
+        public class FileID
         {
             /// <summary>
             /// 计算类型的 FileID
@@ -33,7 +39,7 @@ namespace AIO
                     for (var i = 3; i >= 0; --i)
                     {
                         result <<= 8;
-                        result |= hashed[i];
+                        result |=  hashed[i];
                     }
 
                     return result;
@@ -55,7 +61,7 @@ namespace AIO
                     for (var i = 3; i >= 0; --i)
                     {
                         result <<= 8;
-                        result |= hashed[i];
+                        result |=  hashed[i];
                     }
 
                     return result;
@@ -79,12 +85,14 @@ namespace AIO
                     for (var i = 3; i >= 0; --i)
                     {
                         result <<= 8;
-                        result |= hashed[i];
+                        result |=  hashed[i];
                     }
 
                     return result;
                 }
             }
         }
+
+        #endregion
     }
 }

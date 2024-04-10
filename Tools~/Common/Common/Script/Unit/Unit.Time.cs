@@ -1,15 +1,47 @@
-﻿using System;
+﻿#region
 
+using System;
+
+#endregion
 
 namespace AIO
 {
     public partial class Unit
     {
+        #region Nested type: Time
+
         /// <summary>
         /// 时间
         /// </summary>
         public static class Time
         {
+            #region DateTimeUnit enum
+
+            /// <summary>
+            /// 时间间隔
+            /// </summary>
+            public enum DateTimeUnit
+            {
+                /// <summary> 日 </summary>
+                Day = 0,
+
+                /// <summary> 周 </summary>
+                Week,
+
+                /// <summary> 月 </summary>
+                Month,
+
+                /// <summary> 季 </summary>
+                Season,
+
+                /// <summary> 年 </summary>
+                Year
+            }
+
+            #endregion
+
+            #region SencondUnit enum
+
             /// <summary>
             /// 
             /// </summary>
@@ -28,8 +60,113 @@ namespace AIO
                 NANOSECOND,
 
                 /// <summary> 100纳秒计数单位 </summary>
-                NANOSECOND_100,
+                NANOSECOND_100
             }
+
+            #endregion
+
+            /// <summary> 一周7天 </summary>
+            public const int UNIT_WEEK_DAY = 7;
+
+            /// <summary> 一天24时 </summary>
+            public const int UNIT_DAY_HOUR = 24;
+
+            /// <summary> 一时60分 </summary>
+            public const int UNIT_HOUR_MIN = 60;
+
+            /// <summary> 一分60秒 </summary>
+            public const int UNIT_MIN_SECOND = 60;
+
+            /*--------------------------------------------------------------------------------------------------------------*/
+
+            /// <summary> 秒 单位时间（秒） s </summary>
+            public const int SECOND = 1;
+
+            /// <summary> 分 单位时间（秒） s </summary>
+            public const int SECOND_MIN = SECOND * UNIT_MIN_SECOND;
+
+            /// <summary> 时 单位时间（秒） s </summary>
+            public const int SECOND_HOUR = SECOND_MIN * UNIT_HOUR_MIN;
+
+            /// <summary> 日 单位时间（秒） s </summary>
+            public const int SECOND_DAY = SECOND_HOUR * UNIT_DAY_HOUR;
+
+            /// <summary> 周 单位时间（秒） s </summary>
+            public const int SECOND_WEEK = SECOND_DAY * UNIT_WEEK_DAY;
+
+            /*--------------------------------------------------------------------------------------------------------------*/
+
+            /// <summary> 秒 单位时间（毫秒） ms </summary>
+            public const long MS_SECOND = SECOND * 1000;
+
+            /// <summary> 分 单位时间（毫秒） ms  </summary>
+            public const long MS_MIN = MS_SECOND * UNIT_MIN_SECOND;
+
+            /// <summary> 时 单位时间（毫秒） ms  </summary>
+            public const long MS_HOUR = MS_MIN * UNIT_HOUR_MIN;
+
+            /// <summary> 日 单位时间（毫秒） ms  </summary>
+            public const long MS_DAY = SECOND_DAY * UNIT_DAY_HOUR;
+
+            /// <summary> 周 单位时间（毫秒） ms  </summary>
+            public const long MS_WEEK = MS_DAY * UNIT_WEEK_DAY;
+
+            /*--------------------------------------------------------------------------------------------------------------*/
+
+            /// <summary> 秒 单位时间（微秒） μs </summary>
+            public const long μS_SECOND = MS_SECOND * 1000;
+
+            /// <summary> 分 单位时间（微秒） μs </summary>
+            public const long μS_MIN = μS_SECOND * UNIT_MIN_SECOND;
+
+            /// <summary> 时 单位时间（微秒） μs </summary>
+            public const long μS_HOUR = μS_MIN * UNIT_HOUR_MIN;
+
+            /// <summary> 天 单位时间（微秒） μs </summary>
+            public const long μS_DAY = μS_HOUR * UNIT_DAY_HOUR;
+
+            /// <summary> 周 单位时间（微秒） μs </summary>
+            public const long μS_WEEK = μS_DAY * UNIT_WEEK_DAY;
+
+            /*--------------------------------------------------------------------------------------------------------------*/
+
+            /// <summary> 秒 单位时间（纳秒） ns </summary>
+            public const long NS_SECOND = μS_SECOND * 1000;
+
+            /// <summary> 分 单位时间（纳秒） ns </summary>
+            public const long NS_MIN = NS_SECOND * UNIT_MIN_SECOND;
+
+            /// <summary> 时 单位时间（纳秒） ns </summary>
+            public const long NS_HOUR = NS_MIN * UNIT_HOUR_MIN;
+
+            /// <summary> 天 单位时间（纳秒） ns </summary>
+            public const long NS_DAY = NS_HOUR * UNIT_DAY_HOUR;
+
+            /// <summary> 周 单位时间（纳秒） ns </summary>
+            public const long NS_WEEK = NS_DAY * UNIT_WEEK_DAY;
+
+            /*--------------------------------------------------------------------------------------------------------------*/
+
+            /// <summary> 格林威治时间UTC参照点：1970年1月1日0时0分0秒 </summary>
+            public static readonly DateTime GREENWICH =
+                new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).ToLocalTime();
+
+            /*--------------------------------------------------------------------------------------------------------------*/
+
+            /// <summary> 1毫秒 </summary>
+            public static TimeSpan Milliseconds { get; } = new TimeSpan(0, 0, 0, 0, 1);
+
+            /// <summary> 1秒钟 </summary>
+            public static TimeSpan Second { get; } = new TimeSpan(0, 0, 1);
+
+            /// <summary> 1分钟 </summary>
+            public static TimeSpan Minute { get; } = new TimeSpan(0, 1, 0);
+
+            /// <summary> 1小时 </summary>
+            public static TimeSpan Hour { get; } = new TimeSpan(1, 0, 0);
+
+            /// <summary> 1天 </summary>
+            public static TimeSpan Day { get; } = new TimeSpan(1, 0, 0, 0, 0);
 
             /// <summary>
             /// 获取秒 计数单位 秒
@@ -130,130 +267,8 @@ namespace AIO
                     default: return SECOND_WEEK;
                 }
             }
-
-            /// <summary>
-            /// 时间间隔
-            /// </summary>
-            public enum DateTimeUnit
-            {
-                /// <summary> 日 </summary>
-                Day = 0,
-
-                /// <summary> 周 </summary>
-                Week,
-
-                /// <summary> 月 </summary>
-                Month,
-
-                /// <summary> 季 </summary>
-                Season,
-
-                /// <summary> 年 </summary>
-                Year,
-            }
-
-            /// <summary> 一周7天 </summary>
-            public const int UNIT_WEEK_DAY = 7;
-
-            /// <summary> 一天24时 </summary>
-            public const int UNIT_DAY_HOUR = 24;
-
-            /// <summary> 一时60分 </summary>
-            public const int UNIT_HOUR_MIN = 60;
-
-            /// <summary> 一分60秒 </summary>
-            public const int UNIT_MIN_SECOND = 60;
-
-            /*--------------------------------------------------------------------------------------------------------------*/
-
-            /// <summary> 秒 单位时间（秒） s </summary>
-            public const int SECOND = 1;
-
-            /// <summary> 分 单位时间（秒） s </summary>
-            public const int SECOND_MIN = SECOND * UNIT_MIN_SECOND;
-
-            /// <summary> 时 单位时间（秒） s </summary>
-            public const int SECOND_HOUR = SECOND_MIN * UNIT_HOUR_MIN;
-
-            /// <summary> 日 单位时间（秒） s </summary>
-            public const int SECOND_DAY = SECOND_HOUR * UNIT_DAY_HOUR;
-
-            /// <summary> 周 单位时间（秒） s </summary>
-            public const int SECOND_WEEK = SECOND_DAY * UNIT_WEEK_DAY;
-
-            /*--------------------------------------------------------------------------------------------------------------*/
-
-            /// <summary> 秒 单位时间（毫秒） ms </summary>
-            public const long MS_SECOND = SECOND * 1000;
-
-            /// <summary> 分 单位时间（毫秒） ms  </summary>
-            public const long MS_MIN = MS_SECOND * UNIT_MIN_SECOND;
-
-            /// <summary> 时 单位时间（毫秒） ms  </summary>
-            public const long MS_HOUR = MS_MIN * UNIT_HOUR_MIN;
-
-            /// <summary> 日 单位时间（毫秒） ms  </summary>
-            public const long MS_DAY = SECOND_DAY * UNIT_DAY_HOUR;
-
-            /// <summary> 周 单位时间（毫秒） ms  </summary>
-            public const long MS_WEEK = MS_DAY * UNIT_WEEK_DAY;
-
-            /*--------------------------------------------------------------------------------------------------------------*/
-
-            /// <summary> 秒 单位时间（微秒） μs </summary>
-            public const long μS_SECOND = MS_SECOND * 1000;
-
-            /// <summary> 分 单位时间（微秒） μs </summary>
-            public const long μS_MIN = μS_SECOND * UNIT_MIN_SECOND;
-
-            /// <summary> 时 单位时间（微秒） μs </summary>
-            public const long μS_HOUR = μS_MIN * UNIT_HOUR_MIN;
-
-            /// <summary> 天 单位时间（微秒） μs </summary>
-            public const long μS_DAY = μS_HOUR * UNIT_DAY_HOUR;
-
-            /// <summary> 周 单位时间（微秒） μs </summary>
-            public const long μS_WEEK = μS_DAY * UNIT_WEEK_DAY;
-
-            /*--------------------------------------------------------------------------------------------------------------*/
-
-            /// <summary> 秒 单位时间（纳秒） ns </summary>
-            public const long NS_SECOND = μS_SECOND * 1000;
-
-            /// <summary> 分 单位时间（纳秒） ns </summary>
-            public const long NS_MIN = NS_SECOND * UNIT_MIN_SECOND;
-
-            /// <summary> 时 单位时间（纳秒） ns </summary>
-            public const long NS_HOUR = NS_MIN * UNIT_HOUR_MIN;
-
-            /// <summary> 天 单位时间（纳秒） ns </summary>
-            public const long NS_DAY = NS_HOUR * UNIT_DAY_HOUR;
-
-            /// <summary> 周 单位时间（纳秒） ns </summary>
-            public const long NS_WEEK = NS_DAY * UNIT_WEEK_DAY;
-
-            /*--------------------------------------------------------------------------------------------------------------*/
-
-            /// <summary> 1毫秒 </summary>
-            public static TimeSpan Milliseconds { get; } = new TimeSpan(0, 0, 0, 0, 1);
-
-            /// <summary> 1秒钟 </summary>
-            public static TimeSpan Second { get; } = new TimeSpan(0, 0, 1);
-
-            /// <summary> 1分钟 </summary>
-            public static TimeSpan Minute { get; } = new TimeSpan(0, 1, 0);
-
-            /// <summary> 1小时 </summary>
-            public static TimeSpan Hour { get; } = new TimeSpan(1, 0, 0);
-
-            /// <summary> 1天 </summary>
-            public static TimeSpan Day { get; } = new TimeSpan(1, 0, 0, 0, 0);
-
-            /*--------------------------------------------------------------------------------------------------------------*/
-
-            /// <summary> 格林威治时间UTC参照点：1970年1月1日0时0分0秒 </summary>
-            public static readonly DateTime GREENWICH =
-                new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).ToLocalTime();
         }
+
+        #endregion
     }
 }

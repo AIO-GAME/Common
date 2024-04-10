@@ -1,12 +1,18 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
     public partial class BufferByte
     {
+        #region IReadData Members
+
         /// <inheritdoc/> 
         public float ReadFloat(bool all = false, bool reverse = false)
         {
@@ -19,6 +25,10 @@ namespace AIO
             return Arrays.GetFloatArray(ref ReadIndex, all, reverse);
         }
 
+        #endregion
+
+        #region IWriteData Members
+
         /// <inheritdoc/> 
         public void WriteFloat(float value, bool all = false, bool reverse = false)
         {
@@ -30,7 +40,9 @@ namespace AIO
         public void WriteFloatArray(ICollection<float> value, bool all, bool reverse = false)
         {
             WriteLen(value.Count);
-          foreach (var item in value) WriteFloat(item, all, reverse);
+            foreach (var item in value) WriteFloat(item, all, reverse);
         }
+
+        #endregion
     }
 }

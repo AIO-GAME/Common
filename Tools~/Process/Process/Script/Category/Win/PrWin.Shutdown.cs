@@ -2,6 +2,8 @@
 {
     public partial class PrWin
     {
+        #region Nested type: Shutdown
+
         /// <summary>
         /// windows 重启命令
         /// </summary>
@@ -39,5 +41,7 @@
                 return Create(Cmd_Shutdown, "-a");
             }
         }
+
+        #endregion
     }
 }

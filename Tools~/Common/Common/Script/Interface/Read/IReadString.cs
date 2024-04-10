@@ -1,11 +1,15 @@
+#region
+
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
     /// <summary>
     /// 读取 数据 String
     /// </summary>
-    public partial interface IReadString
+    public interface IReadString
     {
         /// <summary>
         /// 读取字符串

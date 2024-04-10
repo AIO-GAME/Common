@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿#region
+
+using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -23,15 +27,6 @@ namespace AIO.UEditor
         }
 
         /// <summary>
-        /// 矩形范围
-        /// </summary>
-        public virtual Rect RectData
-        {
-            get => Rect;
-            set => Rect = value;
-        }
-
-        /// <summary>
         /// 坐标信息
         /// </summary>
         public virtual Vector2 Position
@@ -41,7 +36,7 @@ namespace AIO.UEditor
             {
                 var rectData = Rect;
                 rectData.position = value;
-                Rect = rectData;
+                Rect              = rectData;
             }
         }
 
@@ -55,7 +50,7 @@ namespace AIO.UEditor
             {
                 var rectData = Rect;
                 rectData.x = value;
-                Rect = rectData;
+                Rect       = rectData;
             }
         }
 
@@ -69,7 +64,7 @@ namespace AIO.UEditor
             {
                 var rectData = Rect;
                 rectData.y = value;
-                Rect = rectData;
+                Rect       = rectData;
             }
         }
 
@@ -83,7 +78,7 @@ namespace AIO.UEditor
             {
                 var rectData = Rect;
                 rectData.size = value;
-                Rect = rectData;
+                Rect          = rectData;
             }
         }
 
@@ -97,7 +92,7 @@ namespace AIO.UEditor
             {
                 var rectData = Rect;
                 rectData.width = value;
-                Rect = rectData;
+                Rect           = rectData;
             }
         }
 
@@ -111,16 +106,25 @@ namespace AIO.UEditor
             {
                 var rectData = Rect;
                 rectData.height = value;
-                Rect = rectData;
+                Rect            = rectData;
             }
+        }
+
+        #region IGraphRect Members
+
+        /// <summary>
+        /// 矩形范围
+        /// </summary>
+        public virtual Rect RectData
+        {
+            get => Rect;
+            set => Rect = value;
         }
 
         /// <summary>
         /// 清空数据
         /// </summary>
-        public virtual void Clear()
-        {
-        }
+        public virtual void Clear() { }
 
         /// <summary>
         /// 释放
@@ -134,38 +138,30 @@ namespace AIO.UEditor
         }
 
         /// <summary>
-        /// 重置
-        /// </summary>
-        public virtual void Reset()
-        {
-        }
-
-        /// <summary>
         /// 进入初始化
         /// </summary>
-        public virtual void OnAwake()
-        {
-        }
+        public virtual void OnAwake() { }
+
+        #endregion
+
+        /// <summary>
+        /// 重置
+        /// </summary>
+        public virtual void Reset() { }
 
         /// <summary>
         /// 进入绘制
         /// </summary>
-        protected virtual void OnDraw()
-        {
-        }
+        protected virtual void OnDraw() { }
 
         /// <summary>
         /// 释放
         /// </summary>
-        protected virtual void OnDispose()
-        {
-        }
+        protected virtual void OnDispose() { }
 
         /// <summary>
         /// 保存数据
         /// </summary>
-        public virtual void SaveData()
-        {
-        }
+        public virtual void SaveData() { }
     }
 }

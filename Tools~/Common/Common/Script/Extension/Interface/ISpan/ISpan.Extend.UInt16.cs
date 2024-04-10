@@ -1,6 +1,4 @@
 ﻿namespace AIO
 {
-    partial class ExtendISpan
-    {
-    }
+    partial class ExtendISpan { }
 }

@@ -1,12 +1,39 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Text;
+
+#endregion
 
 /// <summary>
 /// 命令结构
 /// </summary>
 public class GCommandSearchDatabase : IDisposable
 {
+    private GCommandSearchDatabase()
+    {
+        Commands = new Dictionary<string, List<GCommandAttribute>>();
+        Child    = new Dictionary<string, GCommandSearchDatabase>();
+    }
+
+    /// <summary>
+    /// 命令结构
+    /// </summary>
+    internal GCommandSearchDatabase(string title) : this()
+    {
+        Title = title;
+    }
+
+    /// <summary>
+    /// 命令结构
+    /// </summary>
+    internal GCommandSearchDatabase(string title, GCommandSearchDatabase parent) : this()
+    {
+        Title  = title;
+        Parent = parent;
+    }
+
     /// <summary>
     /// 标题
     /// </summary>
@@ -27,38 +54,25 @@ public class GCommandSearchDatabase : IDisposable
     /// </summary>
     public Dictionary<string, GCommandSearchDatabase> Child { get; private set; }
 
-    private GCommandSearchDatabase()
-    {
-        Commands = new Dictionary<string, List<GCommandAttribute>>();
-        Child = new Dictionary<string, GCommandSearchDatabase>();
-    }
+    #region IDisposable Members
 
     /// <summary>
-    /// 命令结构
+    /// 释放
     /// </summary>
-    internal GCommandSearchDatabase(string title) : this()
+    public void Dispose()
     {
-        Title = title;
+        Commands.Clear();
+        Commands = null;
     }
 
-    /// <summary>
-    /// 命令结构
-    /// </summary>
-    internal GCommandSearchDatabase(string title, GCommandSearchDatabase parent) : this()
-    {
-        Title = title;
-        Parent = parent;
-    }
+    #endregion
 
     /// <summary>
     /// 添加
     /// </summary>
     internal void Add(GCommandAttribute attribute)
     {
-        if (!Commands.ContainsKey(attribute.Title))
-        {
-            Commands.Add(attribute.Title, new List<GCommandAttribute>());
-        }
+        if (!Commands.ContainsKey(attribute.Title)) Commands.Add(attribute.Title, new List<GCommandAttribute>());
         Commands[attribute.Title].Add(attribute);
     }
 
@@ -67,10 +81,7 @@ public class GCommandSearchDatabase : IDisposable
     /// </summary>
     private void Add(string label, GCommandAttribute attribute)
     {
-        if (!Commands.ContainsKey(label))
-        {
-            Commands.Add(label, new List<GCommandAttribute>());
-        }
+        if (!Commands.ContainsKey(label)) Commands.Add(label, new List<GCommandAttribute>());
         Commands[label].Add(attribute);
     }
 
@@ -94,15 +105,6 @@ public class GCommandSearchDatabase : IDisposable
         }
     }
 
-    /// <summary>
-    /// 释放
-    /// </summary>
-    public void Dispose()
-    {
-        Commands.Clear();
-        Commands = null;
-    }
-
     /// <inheritdoc/>
     public override string ToString()
     {
@@ -116,27 +118,24 @@ public class GCommandSearchDatabase : IDisposable
             str.Insert(0, string.Concat(parent.Title, '/'));
             parent = parent.Parent;
         }
-        all.Append("Title -> ").Append(str.ToString()).Append('\n');
+
+        all.Append("Title -> ").Append(str).Append('\n');
         str.Clear();
 
         foreach (var item in Commands)
+        foreach (var attribute in item.Value)
         {
-            foreach (var attribute in item.Value)
-            {
-                str.Append("[\n");
-                str.Append(attribute.ToString()).Append("\n]");
-            }
+            str.Append("[\n");
+            str.Append(attribute).Append("\n]");
         }
+
         if (str.Length != 0)
         {
-            all.Append("Command -> \n").Append(str.ToString()).Append('\n');
+            all.Append("Command -> \n").Append(str).Append('\n');
             str.Clear();
         }
 
-        foreach (var item in Child)
-        {
-            str.Append(item.Value.ToString()).Append('\n');
-        }
+        foreach (var item in Child) str.Append(item.Value).Append('\n');
         if (str.Length != 0)
         {
             var info = str.Replace("\n", "\n ").ToString();

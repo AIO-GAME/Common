@@ -1,14 +1,20 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using SPath = System.IO.Path;
 using SDirectory = System.IO.Directory;
 
+#endregion
+
 namespace AIO
 {
     partial class RHelper
     {
+        #region Nested type: IO
+
         partial class IO
         {
             /// <summary>
@@ -19,15 +25,14 @@ namespace AIO
             /// <param name="option">查找模式</param>
             /// <returns>以Assets路径为节点的路径数组</returns>
             public static IEnumerable<string> GetFilesRelativeAsset(
-                string value,
-                in string pattern = "*",
-                in SearchOption option = SearchOption.TopDirectoryOnly)
+                string          value,
+                in string       pattern = "*",
+                in SearchOption option  = SearchOption.TopDirectoryOnly)
             {
                 if (!SDirectory.Exists(value)) return Array.Empty<string>();
                 value = SPath.GetFullPath(value);
                 if (!value.Contains(Path.Project)) return Array.Empty<string>();
-                return AHelper.IO.GetFilesInfo(value, pattern, option)
-                    .Select(item => item.FullName.Substring(Path.Project.Length));
+                return AHelper.IO.GetFilesInfo(value, pattern, option).Select(item => item.FullName.Substring(Path.Project.Length));
             }
 
             /// <summary>
@@ -39,16 +44,15 @@ namespace AIO
             /// <param name="option">查找模式</param>
             /// <returns>以Assets路径为节点的路径数组</returns>
             public static IEnumerable<string> GetFilesRelativeAsset(
-                string value,
+                string                  value,
                 in Func<FileInfo, bool> filtration,
-                in string pattern = "*",
-                in SearchOption option = SearchOption.TopDirectoryOnly)
+                in string               pattern = "*",
+                in SearchOption         option  = SearchOption.TopDirectoryOnly)
             {
                 if (!SDirectory.Exists(value)) return Array.Empty<string>();
                 value = SPath.GetFullPath(value);
                 if (!value.Contains(Path.Project)) return Array.Empty<string>();
-                return AHelper.IO.GetFilesInfo(value, filtration, pattern, option)
-                    .Select(item => item.FullName.Substring(Path.Project.Length));
+                return AHelper.IO.GetFilesInfo(value, filtration, pattern, option).Select(item => item.FullName.Substring(Path.Project.Length));
             }
 
             /// <summary>
@@ -60,10 +64,10 @@ namespace AIO
             /// <param name="option">查找模式</param>
             /// <returns>以Assets路径为节点的路径数组</returns>
             public static IEnumerable<string> GetFilesRelativeAssetNoMeta(
-                string value,
+                string               value,
                 Func<FileInfo, bool> filtration,
-                string pattern = "*",
-                SearchOption option = SearchOption.TopDirectoryOnly)
+                string               pattern = "*",
+                SearchOption         option  = SearchOption.TopDirectoryOnly)
             {
                 if (!SDirectory.Exists(value)) return Array.Empty<string>();
                 value = SPath.GetFullPath(value);
@@ -82,9 +86,9 @@ namespace AIO
             /// <param name="option">查找模式</param>
             /// <returns>以Assets路径为节点的路径数组</returns>
             public static IEnumerable<string> GetFilesRelativeAssetNoMeta(
-                string value,
-                in string pattern = "*",
-                in SearchOption option = SearchOption.TopDirectoryOnly)
+                string          value,
+                in string       pattern = "*",
+                in SearchOption option  = SearchOption.TopDirectoryOnly)
             {
                 if (!SDirectory.Exists(value)) return Array.Empty<string>();
                 value = SPath.GetFullPath(value);
@@ -95,5 +99,7 @@ namespace AIO
                     select item.FullName.Substring(Path.Project.Length);
             }
         }
+
+        #endregion
     }
 }

@@ -2,6 +2,8 @@
 {
     partial class RHelper
     {
+        #region Nested type: Platform
+
         /// <summary>
         /// 平台工具类
         /// </summary>
@@ -30,5 +32,7 @@
                 return false;
             }
         }
+
+        #endregion
     }
 }

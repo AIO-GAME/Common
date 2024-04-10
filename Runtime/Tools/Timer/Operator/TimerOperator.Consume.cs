@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -8,28 +12,28 @@ namespace AIO
     /// </summary>
     internal class TimerOperatorConsume : TimerOperator
     {
-        private Action<List<ITimerExecutor>> DoneEvent;
-        private Action<List<ITimerExecutor>> LoopEvent;
+        private Action<List<ITimerExecutor>>      DoneEvent;
         private Action<int, List<ITimerExecutor>> EvolutionEvent;
+        private Action<List<ITimerExecutor>>      LoopEvent;
 
         public TimerOperatorConsume(
-            ITimerOperator timerOperator,
-            Action<List<ITimerExecutor>> doneEvent,
-            Action<List<ITimerExecutor>> loopEvent,
+            ITimerOperator                    timerOperator,
+            Action<List<ITimerExecutor>>      doneEvent,
+            Action<List<ITimerExecutor>>      loopEvent,
             Action<int, List<ITimerExecutor>> evolutionEvent)
         {
-            Index = timerOperator.Index;
-            Slot = timerOperator.Slot;
+            Index    = timerOperator.Index;
+            Slot     = timerOperator.Slot;
             SlotUnit = timerOperator.SlotUnit;
             AllCount = timerOperator.AllCount;
             MaxCount = timerOperator.MaxCount;
-            Unit = timerOperator.Unit;
+            Unit     = timerOperator.Unit;
 
             TimersCache = timerOperator.TimersCache;
-            Timers = timerOperator.Timers;
+            Timers      = timerOperator.Timers;
 
-            DoneEvent = doneEvent;
-            LoopEvent = loopEvent;
+            DoneEvent      = doneEvent;
+            LoopEvent      = loopEvent;
             EvolutionEvent = evolutionEvent;
         }
 
@@ -51,7 +55,10 @@ namespace AIO
                         DoneList.Add(executor);
                         Timers.RemoveFirst();
                     }
-                    else break;
+                    else
+                    {
+                        break;
+                    }
                 }
             }
 
@@ -78,7 +85,10 @@ namespace AIO
                         EvolutionList.Add(executor);
                         Timers.RemoveFirst();
                     }
-                    else break;
+                    else
+                    {
+                        break;
+                    }
                 }
             }
 
@@ -87,7 +97,10 @@ namespace AIO
                 AllCount -= EvolutionList.Count;
                 EvolutionEvent.Invoke(Index - 1, EvolutionList);
             }
-            else EvolutionList.Free();
+            else
+            {
+                EvolutionList.Free();
+            }
         }
     }
 }

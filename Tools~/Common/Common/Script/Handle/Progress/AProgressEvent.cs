@@ -1,4 +1,8 @@
-﻿using System;
+﻿#region
+
+using System;
+
+#endregion
 
 namespace AIO
 {
@@ -35,11 +39,11 @@ namespace AIO
         {
             OnProgress = null;
             OnComplete = null;
-            OnBegin = null;
-            OnError = null;
-            OnResume = null;
-            OnPause = null;
-            OnCancel = null;
+            OnBegin    = null;
+            OnError    = null;
+            OnResume   = null;
+            OnPause    = null;
+            OnCancel   = null;
         }
     }
 }

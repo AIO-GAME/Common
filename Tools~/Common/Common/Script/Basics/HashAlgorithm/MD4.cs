@@ -1,12 +1,10 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-08-11
-
-|||✩ - - - - - |*/
+﻿#region
 
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
+
+#endregion
 
 namespace AIO
 {
@@ -17,33 +15,33 @@ namespace AIO
     /// Probably not the best implementation of MD4, but it works.
     public class MD4 : HashAlgorithm
     {
-        private uint _a;
-        private uint _b;
-        private uint _c;
-        private uint _d;
+        private uint   _a;
+        private uint   _b;
+        private int    _bytesProcessed;
+        private uint   _c;
+        private uint   _d;
         private uint[] _x;
-        private int _bytesProcessed;
 
         /// <summary>
         /// Creates an instance of the MD4 class.
         /// </summary>
         public MD4()
         {
-            _x = new uint[16];
-            _a = 0x67452301;
-            _b = 0xefcdab89;
-            _c = 0x98badcfe;
-            _d = 0x10325476;
+            _x              = new uint[16];
+            _a              = 0x67452301;
+            _b              = 0xefcdab89;
+            _c              = 0x98badcfe;
+            _d              = 0x10325476;
             _bytesProcessed = 0;
         }
 
         /// <inheritdoc />
         public override void Initialize()
         {
-            _a = 0x67452301;
-            _b = 0xefcdab89;
-            _c = 0x98badcfe;
-            _d = 0x10325476;
+            _a              = 0x67452301;
+            _b              = 0xefcdab89;
+            _c              = 0x98badcfe;
+            _d              = 0x10325476;
             _bytesProcessed = 0;
         }
 
@@ -69,16 +67,13 @@ namespace AIO
 
         private void ProcessMessage(IEnumerable<byte> bytes)
         {
-            foreach (byte b in bytes)
+            foreach (var b in bytes)
             {
-                int c = _bytesProcessed & 63;
-                int i = c >> 2;
-                int s = (c & 3) << 3;
+                var c = _bytesProcessed & 63;
+                var i = c >> 2;
+                var s = (c & 3) << 3;
                 _x[i] = (_x[i] & ~((uint)255 << s)) | ((uint)b << s);
-                if (c == 63)
-                {
-                    Process16WordBlock();
-                }
+                if (c == 63) Process16WordBlock();
 
                 _bytesProcessed++;
             }
@@ -86,10 +81,7 @@ namespace AIO
 
         private static IEnumerable<byte> Bytes(byte[] bytes, int offset, int length)
         {
-            for (int i = offset; i < length; i++)
-            {
-                yield return bytes[i];
-            }
+            for (var i = offset; i < length; i++) yield return bytes[i];
         }
 
         private IEnumerable<byte> Bytes(uint word)
@@ -102,27 +94,21 @@ namespace AIO
 
         private IEnumerable<byte> Repeat(byte value, int count)
         {
-            for (int i = 0; i < count; i++)
-            {
-                yield return value;
-            }
+            for (var i = 0; i < count; i++) yield return value;
         }
 
         private IEnumerable<byte> Padding()
         {
-            return Repeat(128, 1)
-                .Concat(Repeat(0, ((_bytesProcessed + 8) & 0x7fffffc0) + 55 - _bytesProcessed))
-                .Concat(Bytes((uint)_bytesProcessed << 3))
-                .Concat(Repeat(0, 4));
+            return Repeat(128, 1).Concat(Repeat(0, ((_bytesProcessed + 8) & 0x7fffffc0) + 55 - _bytesProcessed)).Concat(Bytes((uint)_bytesProcessed << 3)).Concat(Repeat(0, 4));
         }
 
         private void Process16WordBlock()
         {
-            uint aa = _a;
-            uint bb = _b;
-            uint cc = _c;
-            uint dd = _d;
-            foreach (int k in new[] { 0, 4, 8, 12 })
+            var aa = _a;
+            var bb = _b;
+            var cc = _c;
+            var dd = _d;
+            foreach (var k in new[] { 0, 4, 8, 12 })
             {
                 aa = Round1Operation(aa, bb, cc, dd, _x[k], 3);
                 dd = Round1Operation(dd, aa, bb, cc, _x[k + 1], 7);
@@ -130,7 +116,7 @@ namespace AIO
                 bb = Round1Operation(bb, cc, dd, aa, _x[k + 3], 19);
             }
 
-            foreach (int k in new[] { 0, 1, 2, 3 })
+            foreach (var k in new[] { 0, 1, 2, 3 })
             {
                 aa = Round2Operation(aa, bb, cc, dd, _x[k], 3);
                 dd = Round2Operation(dd, aa, bb, cc, _x[k + 4], 5);
@@ -138,7 +124,7 @@ namespace AIO
                 bb = Round2Operation(bb, cc, dd, aa, _x[k + 12], 13);
             }
 
-            foreach (int k in new[] { 0, 2, 1, 3 })
+            foreach (var k in new[] { 0, 2, 1, 3 })
             {
                 aa = Round3Operation(aa, bb, cc, dd, _x[k], 3);
                 dd = Round3Operation(dd, aa, bb, cc, _x[k + 8], 9);

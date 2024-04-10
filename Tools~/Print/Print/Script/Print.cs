@@ -1,26 +1,19 @@
-﻿using System.Collections.Generic;
+﻿#region
+
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
-using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO.Internal
 {
     /// <summary>
     /// 打印输出
     /// </summary>
-    public partial class Print
+    public class Print
     {
-        /// <summary>
-        /// 输出开关
-        /// </summary>
-        internal static bool IsNotOut { get; private set; } = false;
-
-        /// <summary>
-        /// 类型
-        /// </summary>
-        internal static int CurOutLevel { get; private set; } = (int)EPrint.ALL;
-
         /// <summary>
         /// 日志
         /// </summary>
@@ -40,6 +33,21 @@ namespace AIO.Internal
         /// 异常
         /// </summary>
         internal const int EXCEPTION = 8;
+
+        /// <summary>
+        /// 宏定义
+        /// </summary>
+        internal const string MACRO_DEFINITION = "DEBUG";
+
+        /// <summary>
+        /// 输出开关
+        /// </summary>
+        internal static bool IsNotOut { get; private set; }
+
+        /// <summary>
+        /// 类型
+        /// </summary>
+        internal static int CurOutLevel { get; private set; } = (int)EPrint.ALL;
 
         /// <summary>
         /// 显示日志
@@ -65,7 +73,7 @@ namespace AIO.Internal
         [Conditional(MACRO_DEFINITION)]
         public static void Show(in EPrint type)
         {
-            IsNotOut = false;
+            IsNotOut    = false;
             CurOutLevel = type.GetHashCode();
         }
 
@@ -77,11 +85,6 @@ namespace AIO.Internal
         {
             IsNotOut = true;
         }
-
-        /// <summary>
-        /// 宏定义
-        /// </summary>
-        internal const string MACRO_DEFINITION = "DEBUG";
 
         /// <summary>
         /// 判断状态
@@ -98,12 +101,10 @@ namespace AIO.Internal
             var str = new StringBuilder();
             var count = 0;
             foreach (var item in objs)
-            {
                 str.Append(count++).
                     Append(':').
                     Append(item is null ? "null" : item.ToString()).
                     Append("\r\n");
-            }
 
             var message = $"Count: {count}\r\n";
             if (str.Length > 0)
@@ -123,12 +124,10 @@ namespace AIO.Internal
                 var index = 1;
                 var str = new StringBuilder(r).Append("\r\n");
                 foreach (var item in objs)
-                {
                     str.Append(index++).
                         Append(':').
                         Append(item is null ? "null" : item.ToString()).
                         Append("\r\n");
-                }
 
                 r = str.Remove(str.Length - 2, 2).ToString();
             }
@@ -144,12 +143,10 @@ namespace AIO.Internal
                 var index = 1;
                 var str = new StringBuilder(r).Append("\r\n");
                 foreach (var item in objs)
-                {
                     str.Append(index++).
                         Append(':').
                         Append(item is null ? "null" : item.ToString()).
                         Append("\r\n");
-                }
 
                 r = str.Remove(str.Length - 2, 2).ToString();
             }
@@ -165,14 +162,12 @@ namespace AIO.Internal
                 var index = 1;
                 var str = new StringBuilder(r).Append("\r\n");
                 foreach (DictionaryEntry dic in objs)
-                {
                     str.Append(index++).
                         Append(':').
                         Append(dic.Key is null ? "null" : dic.Key.ToString()).
                         Append(':').
                         Append(dic.Value is null ? "null" : dic.Value.ToString()).
                         Append("\r\n");
-                }
 
                 r = str.Remove(str.Length - 2, 2).ToString();
             }

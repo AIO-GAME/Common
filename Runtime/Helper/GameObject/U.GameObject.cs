@@ -1,9 +1,15 @@
-﻿using UObject = UnityEngine.Object;
+﻿#region
+
+using UObject = UnityEngine.Object;
+
+#endregion
 
 namespace AIO
 {
     partial class RHelper
     {
+        #region Nested type: GO
+
         /// <summary>
         /// GameObject 工具
         /// </summary>
@@ -18,5 +24,7 @@ namespace AIO
                 return a == null == (b == null);
             }
         }
+
+        #endregion
     }
 }

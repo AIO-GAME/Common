@@ -1,7 +1,11 @@
+#region
+
 using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -20,21 +24,19 @@ namespace AIO.UEditor
             using (new GUILayout.HorizontalScope("PR Insertion", GUILayout.Width(contents.Count * width)))
             {
                 foreach (var content in contents)
-                {
                     if (GUILayout.Button(content.Key, selected.Equals(content.Value)
-                                ? "PreLabel"
+                                             ? "PreLabel"
 #if UNITY_2020_1_OR_NEWER
-                                : "StatusBarIcon"
+                                             : "StatusBarIcon"
 #else
                                 : "IN EditColliderButton"
 #endif
-                            , GUILayout.Width(width)))
+                                       , GUILayout.Width(width)))
                     {
                         selected = content.Value;
                         cb(selected);
                         return selected;
                     }
-                }
             }
 
             return selected;
@@ -53,21 +55,19 @@ namespace AIO.UEditor
             using (new GUILayout.HorizontalScope("PR Insertion", GUILayout.Width(contents.Count * width)))
             {
                 foreach (var content in contents)
-                {
                     if (GUILayout.Button(content.Key, selected.Equals(content.Value)
-                                ? "PreLabel"
+                                             ? "PreLabel"
 #if UNITY_2020_1_OR_NEWER
-                                : "StatusBarIcon"
+                                             : "StatusBarIcon"
 #else
                                 : "IN EditColliderButton"
 #endif
-                            , GUILayout.Width(width)))
+                                       , GUILayout.Width(width)))
                     {
                         selected = content.Value;
                         cb(selected);
                         return selected;
                     }
-                }
             }
 
             return selected;
@@ -91,8 +91,8 @@ namespace AIO.UEditor
         /// <param name="helpAction">帮助回调</param>
         /// <param name="helpContent">帮助信息</param>
         /// <returns>激活状态</returns>
-        public static bool VFoldoutWithHelp(string content, bool isActive, Action helpAction = null,
-            GUIContent helpContent = null)
+        public static bool VFoldoutWithHelp(string     content, bool isActive, Action helpAction = null,
+                                            GUIContent helpContent = null)
         {
             return VFoldoutWithHelp(new GUIContent(content), isActive, helpAction, helpContent);
         }
@@ -106,7 +106,7 @@ namespace AIO.UEditor
         /// <param name="helpContent">帮助信息</param>
         /// <returns>激活状态</returns>
         public static bool VFoldoutWithHelp(GUIContent content, bool isActive, Action helpAction = null,
-            GUIContent helpContent = null)
+                                            GUIContent helpContent = null)
         {
             var controlRect = EditorGUILayout.GetControlRect();
             var iconStyle = GUI.skin.FindStyle("IconButton") ??
@@ -114,15 +114,15 @@ namespace AIO.UEditor
             if (helpAction != null)
             {
                 var helpRect = controlRect;
-                helpRect.x = controlRect.x + controlRect.width - helpRect.height;
+                helpRect.x     = controlRect.x + controlRect.width - helpRect.height;
                 helpRect.width = helpRect.height;
                 if (GUI.Button(helpRect, helpContent ?? EditorGUIUtility.IconContent("_Help"), iconStyle))
                     helpAction.Invoke();
             }
 
             var isPressedDown = controlRect.Contains(Event.current.mousePosition)
-                                && Event.current.type == EventType.MouseDown
-                                && Event.current.button == 0;
+                             && Event.current.type == EventType.MouseDown
+                             && Event.current.button == 0;
             if (isPressedDown)
             {
                 isActive = !isActive;
@@ -144,16 +144,16 @@ namespace AIO.UEditor
         /// <param name="menuAction">菜单操作</param>
         /// <returns>激活状态</returns>
         public static bool VFoldoutHeaderGroupWithHelp(
-            string content,
-            bool isActive,
-            Action helpAction = null,
-            int indent = 0,
-            Action<Rect> menuAction = null,
-            GUIContent helpContent = null
+            string       content,
+            bool         isActive,
+            Action       helpAction  = null,
+            int          indent      = 0,
+            Action<Rect> menuAction  = null,
+            GUIContent   helpContent = null
         )
         {
             return VFoldoutHeaderGroupWithHelp(new GUIContent(content), isActive, helpAction, indent, menuAction,
-                helpContent);
+                                               helpContent);
         }
 
         /// <summary>
@@ -167,36 +167,36 @@ namespace AIO.UEditor
         /// <param name="helpContent">帮助信息</param>
         /// <returns>激活状态</returns>
         public static bool VFoldoutHeaderGroupWithHelp(
-            GUIContent content,
-            bool isActive,
-            Action helpAction = null,
-            int indent = 0,
-            Action<Rect> menuAction = null,
-            GUIContent helpContent = null
+            GUIContent   content,
+            bool         isActive,
+            Action       helpAction  = null,
+            int          indent      = 0,
+            Action<Rect> menuAction  = null,
+            GUIContent   helpContent = null
         )
         {
             var headerRect = EditorGUILayout.GetControlRect();
 
             var bgRect = new Rect(headerRect)
             {
-                x = 0,
+                x     = 0,
                 width = EditorGUIUtility.currentViewWidth
             };
             var isHover = bgRect.Contains(Event.current.mousePosition);
             EditorGUI.DrawRect(bgRect, isHover ? HeaderHoverColor : HeaderNormalColor);
 
-            bgRect.y = headerRect.y - 1;
+            bgRect.y      = headerRect.y - 1;
             bgRect.height = 1;
             var color = HeaderBorderColor;
             EditorGUI.DrawRect(bgRect, color);
-            bgRect.y = headerRect.y + headerRect.height + 1;
+            bgRect.y      = headerRect.y + headerRect.height + 1;
             bgRect.height = 0.5f;
             EditorGUI.DrawRect(bgRect, color);
             headerRect.y += 1;
 
             if (indent > 0)
             {
-                headerRect.x += indent;
+                headerRect.x     += indent;
                 headerRect.width -= indent;
             }
 
@@ -205,7 +205,7 @@ namespace AIO.UEditor
             if (menuAction != null)
             {
                 var menuButtonRect = headerRect;
-                menuButtonRect.x = headerRect.x + headerRect.width - menuButtonRect.height;
+                menuButtonRect.x     = headerRect.x + headerRect.width - menuButtonRect.height;
                 menuButtonRect.width = menuButtonRect.height;
                 if (GUI.Button(menuButtonRect, EditorGUIUtility.IconContent("_Popup"), iconStyle))
                     menuAction.Invoke(menuButtonRect);
@@ -247,17 +247,17 @@ namespace AIO.UEditor
         /// <param name="menuAction">菜单操作</param>
         /// <param name="helpContent">帮助信息</param>
         /// <returns>激活状态</returns>
-        public static bool VFoldoutHeaderGroupWithHelp(Action action,
-            string content,
-            bool isActive,
-            Action helpAction = null,
-            int indent = 0,
-            Action<Rect> menuAction = null,
-            GUIContent helpContent = null
+        public static bool VFoldoutHeaderGroupWithHelp(Action       action,
+                                                       string       content,
+                                                       bool         isActive,
+                                                       Action       helpAction  = null,
+                                                       int          indent      = 0,
+                                                       Action<Rect> menuAction  = null,
+                                                       GUIContent   helpContent = null
         )
         {
             return VFoldoutHeaderGroupWithHelp(action, new GUIContent(content), isActive, helpAction, indent,
-                menuAction, helpContent);
+                                               menuAction, helpContent);
         }
 
         /// <summary>
@@ -271,37 +271,37 @@ namespace AIO.UEditor
         /// <param name="menuAction">菜单操作</param>
         /// <param name="helpContent">帮助信息</param>
         /// <returns>激活状态</returns>
-        public static bool VFoldoutHeaderGroupWithHelp(Action action,
-            GUIContent content,
-            bool isActive,
-            Action helpAction = null,
-            int indent = 0,
-            Action<Rect> menuAction = null,
-            GUIContent helpContent = null
+        public static bool VFoldoutHeaderGroupWithHelp(Action       action,
+                                                       GUIContent   content,
+                                                       bool         isActive,
+                                                       Action       helpAction  = null,
+                                                       int          indent      = 0,
+                                                       Action<Rect> menuAction  = null,
+                                                       GUIContent   helpContent = null
         )
         {
             var headerRect = EditorGUILayout.GetControlRect();
 
             var bgRect = new Rect(headerRect)
             {
-                x = 0,
+                x     = 0,
                 width = EditorGUIUtility.currentViewWidth
             };
             var isHover = bgRect.Contains(Event.current.mousePosition);
             EditorGUI.DrawRect(bgRect, isHover ? HeaderHoverColor : HeaderNormalColor);
 
-            bgRect.y = headerRect.y - 1;
+            bgRect.y      = headerRect.y - 1;
             bgRect.height = 1;
             var color = HeaderBorderColor;
             EditorGUI.DrawRect(bgRect, color);
-            bgRect.y = headerRect.y + headerRect.height + 1;
+            bgRect.y      = headerRect.y + headerRect.height + 1;
             bgRect.height = 0.5f;
             EditorGUI.DrawRect(bgRect, color);
             headerRect.y += 1;
 
             if (indent > 0)
             {
-                headerRect.x += indent;
+                headerRect.x     += indent;
                 headerRect.width -= indent;
             }
 
@@ -310,7 +310,7 @@ namespace AIO.UEditor
             if (menuAction != null)
             {
                 var menuButtonRect = headerRect;
-                menuButtonRect.x = headerRect.x + headerRect.width - menuButtonRect.height;
+                menuButtonRect.x     = headerRect.x + headerRect.width - menuButtonRect.height;
                 menuButtonRect.width = menuButtonRect.height;
                 if (GUI.Button(menuButtonRect, EditorGUIUtility.IconContent("_Popup"), iconStyle))
                     menuAction.Invoke(menuButtonRect);

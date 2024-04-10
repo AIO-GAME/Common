@@ -2,6 +2,8 @@
 {
     public sealed partial class PrMac
     {
+        #region Nested type: Chmod
+
         /// <summary>
         /// 权限相关类
         /// </summary>
@@ -89,5 +91,7 @@
                 return Set(target, 755);
             }
         }
+
+        #endregion
     }
 }

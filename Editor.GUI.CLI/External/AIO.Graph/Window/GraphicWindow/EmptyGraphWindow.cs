@@ -1,6 +1,10 @@
-﻿using UnityEditor;
+﻿#region
+
+using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -9,6 +13,16 @@ namespace AIO.UEditor
     /// </summary>
     public abstract partial class EmptyGraphWindow : EditorWindow
     {
+        /// <summary>
+        /// 当前窗口中心点
+        /// </summary>
+        /// <param name="w">宽</param>
+        /// <param name="h">高</param>
+        protected EmptyGraphWindow(float w = 800, float h = 600)
+        {
+            minSize = new Vector2(w, h);
+        }
+
         /// <summary>
         /// 当前窗口宽度
         /// </summary>
@@ -32,24 +46,11 @@ namespace AIO.UEditor
         /// <summary>
         /// 当前窗口中心点
         /// </summary>
-        /// <param name="w">宽</param>
-        /// <param name="h">高</param>
-        protected EmptyGraphWindow(float w = 800, float h = 600)
-        {
-            minSize = new Vector2(w, h);
-        }
-
-        /// <summary>
-        /// 当前窗口中心点
-        /// </summary>
         public Rect ReliablePosition { get; private set; }
 
-        /// <summary>
-        /// 转化为信息字符串
-        /// </summary>
-        public sealed override string ToString()
+        private void ModifierKeysChanged()
         {
-            return base.ToString();
+            OnModifierKeysChanged();
         }
 
         private void ShowButton(Rect rect)
@@ -57,9 +58,12 @@ namespace AIO.UEditor
             OnShowButton(rect);
         }
 
-        private void ModifierKeysChanged()
+        /// <summary>
+        /// 转化为信息字符串
+        /// </summary>
+        public sealed override string ToString()
         {
-            OnModifierKeysChanged();
+            return base.ToString();
         }
 
 

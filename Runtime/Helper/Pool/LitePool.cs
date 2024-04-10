@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
@@ -8,18 +12,9 @@ namespace AIO
     ///
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class LitePool<T> where T : CacheableLite, IDisposable, new()
+    public class LitePool<T>
+    where T : CacheableLite, IDisposable, new()
     {
-        /// <summary>
-        /// 类型名称
-        /// </summary>
-        public string Name => typeof(T).Name;
-
-        /// <summary>
-        /// 缓存数量
-        /// </summary>
-        public int CacheCount => cache.Count;
-
         private readonly List<T> cache;
 
         /// <summary>
@@ -30,6 +25,16 @@ namespace AIO
         {
             cache = new List<T>(count);
         }
+
+        /// <summary>
+        /// 类型名称
+        /// </summary>
+        public string Name => typeof(T).Name;
+
+        /// <summary>
+        /// 缓存数量
+        /// </summary>
+        public int CacheCount => cache.Count;
 
         /// <summary>
         /// 创建元素

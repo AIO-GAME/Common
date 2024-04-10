@@ -2,6 +2,8 @@
 {
     public partial class Unit
     {
+        #region Nested type: Chinese
+
         /// <summary>
         /// 中文单位
         /// </summary>
@@ -31,5 +33,7 @@
                 "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"
             };
         }
+
+        #endregion
     }
 }

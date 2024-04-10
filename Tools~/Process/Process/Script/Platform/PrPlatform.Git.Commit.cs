@@ -5,13 +5,19 @@
 |||✩ - - - - - |*/
 
 
+#region
+
 using System;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrPlatform
     {
+        #region Nested type: Git
+
         public partial class Git
         {
             /// <summary>
@@ -22,7 +28,7 @@ namespace AIO
             /// <exception cref="NotImplementedException">未实现</exception>
             /// <returns><see cref="IExecutor"/>执行器</returns>
             public static IExecutor Commit(ICollection<(string, string)> targets,
-                bool quit = false)
+                                           bool                          quit = false)
             {
                 switch (Environment.OSVersion.Platform)
                 {
@@ -107,5 +113,7 @@ namespace AIO
                 }
             }
         }
+
+        #endregion
     }
 }

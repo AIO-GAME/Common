@@ -1,9 +1,16 @@
-﻿using System;
+﻿#region
+
+using System;
+using System.IO;
+
+#endregion
 
 namespace AIO
 {
     public sealed partial class PrMac
     {
+        #region Nested type: Duti
+
         //     -s    : 选项会让 duti 从命令行读参数.
         //     -x ext: 选项会让 duti 输出参数中扩展名对应的默认应用
         //     -d uti: 打印 UTI 的默认应用.
@@ -20,7 +27,7 @@ namespace AIO
             static Duti()
             {
                 var result = Which(CMD_Duti).Sync();
-                if (!System.IO.File.Exists(result.StdOut.ToString()))
+                if (!File.Exists(result.StdOut.ToString()))
                 {
                     Console.WriteLine("{0} 未安装 程序自动安装中 Missing : {1}", CMD_Duti, result.StdOut);
                     Brew.Install(CMD_Duti).Sync();
@@ -47,5 +54,7 @@ namespace AIO
                 return Create(CMD_Duti, "-s {0} {1} {2}", appName, uti, role);
             }
         }
+
+        #endregion
     }
 }

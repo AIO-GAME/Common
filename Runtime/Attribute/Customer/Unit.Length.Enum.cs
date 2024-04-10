@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using AIO;
+
+#endregion
 
 /// <summary>
 /// 国际标准单位制中的长度单位
@@ -10,47 +14,56 @@ public enum ULength
     /// <summary>
     /// 单位 [千米] 1千米(公里)= 1,000米(公尺)= 100,000厘米(公分) = 1,000,000毫米(公厘)
     /// </summary>
-    [UDefault(1E3f)] km = 1,
+    [UDefault(1E3f)]
+    km = 1,
 
     /// <summary>
     /// 单位 [米]
     /// </summary>
-    [UDefault(1)] m = 2,
+    [UDefault(1)]
+    m = 2,
 
     /// <summary>
     /// 单位 [分米] 1分米 = 0.0001千米(km) = 0.1米(m) =10厘米(cm) = 100毫米(mm)
     /// </summary>
-    [UDefault(1E-1f)] dm = 4,
+    [UDefault(1E-1f)]
+    dm = 4,
 
     /// <summary>
     /// 单位 [厘米] 1厘米 = 10毫米 = 0.1分米 = 0.01米 = 0.00001千米
     /// </summary>
-    [UDefault(1E-2f)] cm = 8,
+    [UDefault(1E-2f)]
+    cm = 8,
 
     /// <summary>
     /// 单位 [毫米] 1毫米=0.1厘米=0.01分米=0.001米=0.000001千米
     /// </summary>
-    [UDefault(1E-4f)] mm = 16,
+    [UDefault(1E-4f)]
+    mm = 16,
 
     /// <summary>
     /// 单位 [微米] 1微米相当于1米的一百万分之一
     /// </summary>
-    [UDefault(1E-6f)] μm = 32,
+    [UDefault(1E-6f)]
+    μm = 32,
 
     /// <summary>
     /// 单位 [纳米] 1纳米=10-9米
     /// </summary>
-    [UDefault(1E-9f)] nm = 64,
+    [UDefault(1E-9f)]
+    nm = 64,
 
     /// <summary>
     /// 单位 [皮米] 1皮米=10-12米=0.001 纳米(nm) =0.000001 微米(μm)
     /// </summary>
-    [UDefault(1E-12f)] pm = 128,
+    [UDefault(1E-12f)]
+    pm = 128,
 
     /// <summary>
     /// 单位 [拍米] 1Pm =10的15次方m 1Pm= 1000000000000000m
     /// </summary>
-    [UDefault(1E-15d)] Pm,
+    [UDefault(1E-15d)]
+    Pm
 
     // /// <summary>
     // /// 单位 [马咖米] [兆米] 1兆米=1000千米=1000000米

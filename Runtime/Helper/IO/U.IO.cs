@@ -1,12 +1,18 @@
-﻿using System.Linq;
+﻿#region
+
+using System.Linq;
 using SPath = System.IO.Path;
 using SDirectory = System.IO.Directory;
 using SFile = System.IO.File;
+
+#endregion
 
 namespace AIO
 {
     partial class RHelper
     {
+        #region Nested type: IO
+
         /// <summary>
         /// IO 工具类
         /// </summary>
@@ -58,7 +64,7 @@ namespace AIO
             {
                 if (SDirectory.Exists(path)) SDirectory.Delete(path, true);
                 var metaFilePath = SPath.Combine(SPath.GetDirectoryName(path) ?? string.Empty,
-                    SPath.GetFileName(path) + ".meta");
+                                                 SPath.GetFileName(path) + ".meta");
                 if (SFile.Exists(metaFilePath)) SFile.Delete(metaFilePath);
             }
 
@@ -73,5 +79,7 @@ namespace AIO
                 return SPath.GetInvalidFileNameChars().Aggregate(filename, (current, c) => current.Replace(c, replace));
             }
         }
+
+        #endregion
     }
 }

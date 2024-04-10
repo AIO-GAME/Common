@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -9,16 +11,19 @@ using UnityEditor.Compilation;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
+#endregion
+
 #pragma warning disable CS1591
 namespace AIO
 {
     internal partial class Plugins
     {
+        #region Nested type: PluginDataEditor
+
         /// <summary>
         /// 插件管理
         /// </summary>
-        [CanEditMultipleObjects]
-        [CustomEditor(typeof(PluginData))]
+        [CanEditMultipleObjects, CustomEditor(typeof(PluginData))]
         private class PluginDataEditor : Editor
         {
             private Dictionary<string, bool> InstallList;
@@ -30,22 +35,40 @@ namespace AIO
                 InstallList = new Dictionary<string, bool>();
             }
 
-            ~PluginDataEditor()
-            {
-                InstallList.Clear();
-                InstallList = null;
-            }
-
             private void OnEnable()
             {
                 Root = Directory.GetParent(Application.dataPath);
                 InstallList.Clear();
 
                 if (serializedObject.isEditingMultipleObjects)
-                {
-                    foreach (var o in serializedObject.targetObjects) UpdateInstallInfo(o);
-                }
+                    foreach (var o in serializedObject.targetObjects)
+                        UpdateInstallInfo(o);
                 else UpdateInstallInfo(serializedObject.targetObject);
+            }
+
+            private void OnDisable()
+            {
+                if (serializedObject.targetObject is null) return;
+                serializedObject.ApplyModifiedPropertiesWithoutUndo();
+            }
+
+            private void OnValidate()
+            {
+                if (serializedObject.hasModifiedProperties)
+                {
+                    if (serializedObject.isEditingMultipleObjects)
+                        foreach (var o in serializedObject.targetObjects)
+                            UpdateInstallInfo(o);
+                    else UpdateInstallInfo(serializedObject.targetObject);
+                }
+
+                serializedObject.ApplyModifiedPropertiesWithoutUndo();
+            }
+
+            ~PluginDataEditor()
+            {
+                InstallList.Clear();
+                InstallList = null;
             }
 
             private void UpdateInstallInfo(in Object obj)
@@ -67,10 +90,7 @@ namespace AIO
                     return;
                 }
 
-                if (!GetValidDir(Application.dataPath.Replace("Assets", ""), path).Exists)
-                {
-                    EditorGUILayout.HelpBox("当前路径不存在", MessageType.Error);
-                }
+                if (!GetValidDir(Application.dataPath.Replace("Assets", ""), path).Exists) EditorGUILayout.HelpBox("当前路径不存在", MessageType.Error);
             }
 
             public override void OnInspectorGUI()
@@ -149,26 +169,6 @@ namespace AIO
                 serializedObject.Update();
             }
 
-            private void OnValidate()
-            {
-                if (serializedObject.hasModifiedProperties)
-                {
-                    if (serializedObject.isEditingMultipleObjects)
-                    {
-                        foreach (var o in serializedObject.targetObjects) UpdateInstallInfo(o);
-                    }
-                    else UpdateInstallInfo(serializedObject.targetObject);
-                }
-
-                serializedObject.ApplyModifiedPropertiesWithoutUndo();
-            }
-
-            private void OnDisable()
-            {
-                if (serializedObject.targetObject is null) return;
-                serializedObject.ApplyModifiedPropertiesWithoutUndo();
-            }
-
             internal static DirectoryInfo GetValidDir(string rootDir, string value)
             {
                 if (string.IsNullOrEmpty(value)) return null;
@@ -181,11 +181,9 @@ namespace AIO
                 {
                     var regex = new Regex(value);
                     foreach (var directory in root.GetDirectories("*.*",
-                                 value.Contains("*") ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
-                    {
+                                                                  value.Contains("*") ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
                         if (directory.Name == name && regex.Match(directory.FullName).Success)
                             return directory;
-                    }
                 }
                 catch (Exception)
                 {
@@ -219,9 +217,7 @@ namespace AIO
                     if (!string.IsNullOrEmpty(info.MacroDefinition))
                     {
                         if (info.MacroDefinition.Contains(";"))
-                        {
                             macroList.AddRange(info.MacroDefinition.Split(';'));
-                        }
                         else macroList.Add(info.MacroDefinition);
                     }
 
@@ -261,9 +257,7 @@ namespace AIO
                     if (!string.IsNullOrEmpty(info.MacroDefinition))
                     {
                         if (info.MacroDefinition.Contains(';'))
-                        {
                             macroList.AddRange(info.MacroDefinition.Split(';'));
-                        }
                         else macroList.Add(info.MacroDefinition);
                     }
 
@@ -307,7 +301,7 @@ namespace AIO
             private static void compilationStarted(object o)
             {
                 EditorUtility.DisplayProgressBar("插件", "正在编译", 0);
-                CompilationPipeline.compilationStarted -= compilationStarted;
+                CompilationPipeline.compilationStarted  -= compilationStarted;
                 CompilationPipeline.compilationFinished += compilationFinished;
             }
 
@@ -322,5 +316,7 @@ namespace AIO
                 CompilationPipeline.RequestScriptCompilation();
             }
         }
+
+        #endregion
     }
 }

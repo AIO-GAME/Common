@@ -1,12 +1,10 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-08
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Net;
 using System.Net.Sockets;
+
+#endregion
 
 namespace AIO.Net
 {
@@ -57,15 +55,13 @@ namespace AIO.Net
             try
             {
                 // Async receive with the receive handler
-                Receiving = true;
+                Receiving                      = true;
                 ReceiveEventArg.RemoteEndPoint = ReceiveEndpoint;
                 ReceiveEventArg.SetBuffer(ReceiveNetBuffer.Arrays, 0, ReceiveNetBuffer.Capacity);
                 if (!Socket.ReceiveFromAsync(ReceiveEventArg))
                     ProcessReceiveFrom(ReceiveEventArg);
             }
-            catch (ObjectDisposedException)
-            {
-            }
+            catch (ObjectDisposedException) { }
         }
     }
 }

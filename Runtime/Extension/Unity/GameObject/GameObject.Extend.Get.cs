@@ -1,5 +1,9 @@
+#region
+
 using System;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEngine
 {
@@ -11,7 +15,8 @@ namespace AIO.UEngine
         /// <typeparam name="T">组件类型</typeparam>
         /// <param name="go">父对象</param>
         /// <param name="childName">子对象名称</param>
-        public static T GetTheChildNodeComponentScripts<T>(this GameObject go, in string childName) where T : Component
+        public static T GetTheChildNodeComponentScripts<T>(this GameObject go, in string childName)
+        where T : Component
         {
             return go.FindTheChildNode(childName).GetComponent<T>(); //查找特定子节点
         }
@@ -19,14 +24,16 @@ namespace AIO.UEngine
         /// <summary>
         /// 获取或添加组件
         /// </summary>
-        public static T GetOrAddComponent<T>(this GameObject go) where T : Component
+        public static T GetOrAddComponent<T>(this GameObject go)
+        where T : Component
         {
-            T r = go.GetComponent<T>();
+            var r = go.GetComponent<T>();
             if (r == null) r = go.AddComponent<T>();
             return r;
         }
 
-        public static T GetComponentInParent<T>(this GameObject go, in bool includeInactive) where T : Component
+        public static T GetComponentInParent<T>(this GameObject go, in bool includeInactive)
+        where T : Component
         {
             if (go.activeInHierarchy && !includeInactive) return go.GetComponentInParent<T>();
 
@@ -50,10 +57,7 @@ namespace AIO.UEngine
             var tf = go.transform;
             while (tf != null)
             {
-                if (!tf.gameObject.activeSelf && !includeInactive)
-                {
-                    break;
-                }
+                if (!tf.gameObject.activeSelf && !includeInactive) break;
 
                 var r = tf.GetComponent(type);
                 if (r != null) return r;

@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
@@ -15,16 +19,14 @@ namespace AIO
             Unit = unit;
 
             for (byte i = 0; i < TimerSystem.TimingUnits.Count; i++)
-            {
                 List.Add(new TimerOperatorLoop(
-                    i,
-                    TimerSystem.TimingUnits[i].Item2,
-                    TimerSystem.TimingUnits[i].Item3,
-                    DoneCallBack,
-                    PushUpdate,
-                    EvolutionCallBack
-                ));
-            }
+                             i,
+                             TimerSystem.TimingUnits[i].Item2,
+                             TimerSystem.TimingUnits[i].Item3,
+                             DoneCallBack,
+                             PushUpdate,
+                             EvolutionCallBack
+                         ));
         }
 
         protected override void Update()
@@ -39,7 +41,7 @@ namespace AIO
                     nowMilliseconds = Watch.ElapsedMilliseconds;
                     if (nowMilliseconds < Unit) continue; //更新间隔
                     Watch.Restart();
-                    Counter += nowMilliseconds;
+                    Counter         += nowMilliseconds;
                     UpdateCacheTime += nowMilliseconds;
 
                     if (UpdateCacheTime > TimerSystem.UPDATELISTTIME)
@@ -62,7 +64,10 @@ namespace AIO
                                     List[i].OtherUpdate(Counter);
                                     List[i].SlotReset();
                                 }
-                                else break;
+                                else
+                                {
+                                    break;
+                                }
                             }
                         }
                     }
@@ -86,7 +91,10 @@ namespace AIO
                                 List[i].OtherUpdate(Counter);
                                 List[i].SlotReset();
                             }
-                            else break;
+                            else
+                            {
+                                break;
+                            }
                         }
                     }
                 }

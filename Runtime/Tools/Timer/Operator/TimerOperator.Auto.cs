@@ -1,17 +1,11 @@
-﻿using System.Threading.Tasks;
-
-namespace AIO
+﻿namespace AIO
 {
     public class TimerOperatorAuto : TimerOperator
     {
-        public TimerOperatorAuto()
-        {
-        }
+        public TimerOperatorAuto() { }
 
         public TimerOperatorAuto(byte index, long unit, long slotUnit, int maxCount = 2048) : base(index, unit,
-            slotUnit, maxCount)
-        {
-        }
+                                                                                                   slotUnit, maxCount) { }
 
         public override int BottomUpdate(long nowTime)
         {
@@ -33,7 +27,10 @@ namespace AIO
                         DoneList.Add(executor);
                         Timers.RemoveFirst();
                     }
-                    else break;
+                    else
+                    {
+                        break;
+                    }
                 }
             }
 
@@ -59,7 +56,10 @@ namespace AIO
                         EvolutionList.Add(executor);
                         Timers.RemoveFirst();
                     }
-                    else break;
+                    else
+                    {
+                        break;
+                    }
                 }
             }
 
@@ -68,7 +68,10 @@ namespace AIO
                 AllCount = AllCount - EvolutionList.Count;
                 TimerSystem.UpdateSlot(Index - 1, EvolutionList);
             }
-            else EvolutionList.Free();
+            else
+            {
+                EvolutionList.Free();
+            }
         }
     }
 }

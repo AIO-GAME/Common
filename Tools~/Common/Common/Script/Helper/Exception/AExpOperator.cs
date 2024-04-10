@@ -1,4 +1,8 @@
-﻿using System;
+﻿#region
+
+using System;
+
+#endregion
 
 namespace AIO
 {
@@ -8,18 +12,12 @@ namespace AIO
     public abstract class AExpOperator : InvalidCastException
     {
         /// <inheritdoc />
-        protected AExpOperator() : base()
-        {
-        }
+        protected AExpOperator() { }
 
         /// <inheritdoc />
-        protected AExpOperator(in string message) : base(message)
-        {
-        }
+        protected AExpOperator(in string message) : base(message) { }
 
         /// <inheritdoc />
-        protected AExpOperator(in string message, in Exception innerException) : base(message, innerException)
-        {
-        }
+        protected AExpOperator(in string message, in Exception innerException) : base(message, innerException) { }
     }
 }

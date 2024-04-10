@@ -1,11 +1,15 @@
+#region
+
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
     /// <summary>
     /// 写入指定数据类型
     /// </summary>
-    public partial interface IWriteLength
+    public interface IWriteLength
     {
         /// <summary> 写入一个长度, 0至512M </summary>
         /// 原理: 以第一个字节二进制前三位来决定长度值占用的字节数(x表示0或1)

@@ -1,19 +1,15 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
-
+#region
 
 using System;
-using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
     public static partial class ExtendString
     {
         /// <summary>
-        /// 将指定内容循环插入到字符串中
+        ///     将指定内容循环插入到字符串中
         /// </summary>
         /// <typeparam name="T">指定内容的类型</typeparam>
         /// <param name="str">原始字符串</param>

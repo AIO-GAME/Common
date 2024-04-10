@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -18,7 +22,7 @@ namespace AIO
             var oldLength = arrays.Length;
             var newArray = new sbyte[oldLength + 1];
             Array.ConstrainedCopy(arrays, 0, newArray, 0, oldLength);
-            newArray[oldLength] = (sbyte)(object)item;
+            newArray[oldLength] = (sbyte)item;
             return newArray;
         }
 

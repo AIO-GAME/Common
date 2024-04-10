@@ -1,13 +1,33 @@
-﻿using UnityEditor;
+﻿#region
+
+using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
     [GWindow("Script ID Viewer", Group = "Tools",
-        MinSizeWidth = 600, MinSizeHeight = 600
+             MinSizeWidth = 600, MinSizeHeight = 600
     )]
     public class ScriptIDWindow : GraphicWindow
     {
+        private DefaultAsset _dll;
+        private long         _dll_fid;
+        private string       _dll_guid;
+        private Object[]     _dllAssets;
+
+        private string _guid, _fid;
+
+        private MonoBehaviour _mono;
+        private string        _result;
+
+        private MonoScript _script;
+
+        private Vector2 _scroll;
+
+        private Material m_material;
+
         protected override void OnAwake()
         {
             m_material = new Material(Shader.Find("Hidden/Internal-Colored"))
@@ -31,9 +51,7 @@ namespace AIO.UEditor
             EditorGUILayout.EndVertical();
         }
 
-        private MonoBehaviour _mono;
-
-        void GetId()
+        private void GetId()
         {
             _mono = EditorGUILayout.ObjectField(_mono, typeof(MonoBehaviour), true) as MonoBehaviour;
             if (_mono)
@@ -47,9 +65,7 @@ namespace AIO.UEditor
             }
         }
 
-        private MonoScript _script;
-
-        void GetScriptId()
+        private void GetScriptId()
         {
             _script = EditorGUILayout.ObjectField(_script, typeof(MonoScript), true) as MonoScript;
             if (_script)
@@ -62,13 +78,10 @@ namespace AIO.UEditor
             }
         }
 
-        string _guid, _fid;
-        string _result;
-
-        void GetAssetFromId()
+        private void GetAssetFromId()
         {
             EditorGUILayout.BeginHorizontal();
-            _fid = EditorGUILayout.TextField("fileID", _fid);
+            _fid  = EditorGUILayout.TextField("fileID", _fid);
             _guid = EditorGUILayout.TextField("guid", _guid);
             if (GUILayout.Button("find"))
             {
@@ -78,7 +91,7 @@ namespace AIO.UEditor
                 string guid;
                 long fid;
 
-                for (int i = 0; i < assets.Length; i++)
+                for (var i = 0; i < assets.Length; i++)
                 {
                     var asset = assets[i];
                     var s = AssetDatabase.TryGetGUIDAndLocalFileIdentifier(asset, out guid, out fid);
@@ -100,15 +113,7 @@ namespace AIO.UEditor
             GUILayout.TextField(_result);
         }
 
-
-        private DefaultAsset _dll;
-        private string _dll_guid;
-        private long _dll_fid;
-        private Object[] _dllAssets;
-
-        private Vector2 _scroll;
-
-        void GetDllScriptId()
+        private void GetDllScriptId()
         {
             _dll = EditorGUILayout.ObjectField(".dll", _dll, typeof(DefaultAsset), true) as DefaultAsset;
             GUILayout.BeginHorizontal();
@@ -127,14 +132,14 @@ namespace AIO.UEditor
             if (_dllAssets != null && _dllAssets.Length > 0)
             {
                 _scroll = EditorGUILayout.BeginScrollView(_scroll, GUILayout.Width(600));
-                for (int i = 0; i < _dllAssets.Length; i++)
+                for (var i = 0; i < _dllAssets.Length; i++)
                 {
                     EditorGUILayout.BeginHorizontal();
                     GUILayout.TextField(_dllAssets[i].name);
                     if (GUILayout.Button("view", GUILayout.Width(100)))
                     {
                         var s = AssetDatabase.TryGetGUIDAndLocalFileIdentifier(_dllAssets[i], out _dll_guid,
-                            out _dll_fid);
+                                                                               out _dll_fid);
                     }
 
                     EditorGUILayout.EndHorizontal();
@@ -144,9 +149,7 @@ namespace AIO.UEditor
             }
         }
 
-        Material m_material;
-
-        void DrawLine()
+        private void DrawLine()
         {
             EditorGUILayout.Space(20);
             if (Event.current.type == EventType.Repaint)

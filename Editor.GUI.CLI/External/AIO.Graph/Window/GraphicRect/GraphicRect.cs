@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -10,6 +14,21 @@ namespace AIO.UEditor
     [DisplayName("图形矩形")]
     public abstract partial class GraphicRect : IGraphRect
     {
+        private bool isEvent;
+
+        private bool isShow;
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        protected GraphicRect()
+        {
+            Rect  = new Rect();
+            Items = new List<GraphicRect>();
+            Awake();
+            isShow = true;
+        }
+
         public string Title { get; protected set; }
 
         private Rect Rect { get; set; }
@@ -17,52 +36,19 @@ namespace AIO.UEditor
         /// <summary>
         /// 中心点
         /// </summary>
-        public Rect RectCenter => new Rect(Rect.size / 2, Rect.size);
-
-        /// <summary>
-        /// 中心点
-        /// </summary>
         public Vector2 CenterPosition => Rect.size / 2;
-
-        private bool isShow;
-
-        private bool isEvent;
 
         /// <summary>
         /// 子项
         /// </summary>
         public List<GraphicRect> Items { get; private set; }
 
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        protected GraphicRect()
-        {
-            Rect = new Rect();
-            Items = new List<GraphicRect>();
-            Awake();
-            isShow = true;
-        }
+        #region IGraphRect Members
 
         /// <summary>
-        /// 隐藏
+        /// 中心点
         /// </summary>
-        public void Hide()
-        {
-            IsEvent = false;
-            IsShow = false;
-        }
-
-        /// <summary>
-        /// 显示
-        /// </summary>
-        public void Show()
-        {
-            IsEvent = true;
-            IsShow = true;
-        }
-
-        private void Awake() => OnAwake();
+        public Rect RectCenter => new Rect(Rect.size / 2, Rect.size);
 
         /// <summary>
         /// 绘制
@@ -73,6 +59,31 @@ namespace AIO.UEditor
             if (isEvent) OnOpenEvent();
         }
 
+        #endregion
+
+        /// <summary>
+        /// 隐藏
+        /// </summary>
+        public void Hide()
+        {
+            IsEvent = false;
+            IsShow  = false;
+        }
+
+        /// <summary>
+        /// 显示
+        /// </summary>
+        public void Show()
+        {
+            IsEvent = true;
+            IsShow  = true;
+        }
+
+        private void Awake()
+        {
+            OnAwake();
+        }
+
         /// <summary>
         /// 居中
         /// </summary>
@@ -80,7 +91,7 @@ namespace AIO.UEditor
         {
             var rect = Rect;
             rect.position = (size - Rect.size) / 2;
-            Rect = rect;
+            Rect          = rect;
         }
 
         /// <summary>

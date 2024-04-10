@@ -1,19 +1,17 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+#region
 
-
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -24,8 +22,8 @@ namespace AIO
             /// <param name="searchPatterns">条件 "*value*"</param>
             /// <returns></returns>
             public static List<string> FindPaths(
-                string dir,
-                SearchOption op = SearchOption.AllDirectories,
+                string          dir,
+                SearchOption    op = SearchOption.AllDirectories,
                 params string[] searchPatterns)
             {
                 dir = dir.Replace('\\', Path.AltDirectorySeparatorChar);
@@ -56,8 +54,8 @@ namespace AIO
             /// <param name="searchPatterns">条件 "*value*"</param>
             /// <returns></returns>
             public static List<string> FindPaths(
-                string dir,
-                SearchOption op = SearchOption.AllDirectories,
+                string              dir,
+                SearchOption        op             = SearchOption.AllDirectories,
                 ICollection<string> searchPatterns = null)
             {
                 dir = dir.Replace('\\', Path.AltDirectorySeparatorChar);
@@ -75,5 +73,7 @@ namespace AIO
                 return result;
             }
         }
+
+        #endregion
     }
 }

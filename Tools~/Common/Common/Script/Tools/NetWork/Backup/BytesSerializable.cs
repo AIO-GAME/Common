@@ -1,10 +1,4 @@
-﻿// /*|✩ - - - - - |||
-// |||✩ Author:   ||| -> xi nan
-// |||✩ Date:     ||| -> 2023-06-29
-//
-// |||✩ - - - - - |*/
-//
-// using System.Collections;
+﻿// using System.Collections;
 //
 // namespace AIO
 // {
@@ -89,3 +83,4 @@
 //         }
 //     }
 // }
+

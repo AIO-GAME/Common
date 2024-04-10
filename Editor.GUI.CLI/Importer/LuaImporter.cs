@@ -1,13 +1,17 @@
 ﻿#if UNITY_2019_1_OR_NEWER
 #endif
 
-using System.IO;
-using UnityEngine;
+#region
+
 #if UNITY_2018_1_OR_NEWER && !UNITY_2020_1_OR_NEWER
 using UnityEditor.Experimental.AssetImporters;
 #else
 using UnityEditor.AssetImporters;
 #endif
+using System.IO;
+using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -22,17 +26,17 @@ namespace AIO.UEditor
         }
     }
 
-//     [CustomEditor(typeof(LuaImporter))]
-//     public class LuaImporterEditor : ScriptedImporterEditor
-//     {
-// #if UNITY_2019_1_OR_NEWER
-//         //Let the parent class know that the Apply/Revert mechanism is skipped.
-//         protected override bool needsApplyRevert => false;
-// #endif
-//         public override void OnInspectorGUI()
-//         {
-//         }
-//     }
+    //     [CustomEditor(typeof(LuaImporter))]
+    //     public class LuaImporterEditor : ScriptedImporterEditor
+    //     {
+    // #if UNITY_2019_1_OR_NEWER
+    //         //Let the parent class know that the Apply/Revert mechanism is skipped.
+    //         protected override bool needsApplyRevert => false;
+    // #endif
+    //         public override void OnInspectorGUI()
+    //         {
+    //         }
+    //     }
 }
 //     public static class ImporterUtils
 //     {

@@ -1,7 +1,11 @@
+#region
+
 using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
@@ -13,17 +17,25 @@ namespace AIO
     /// 如果使用局部类,则需要在局部类中标记
     /// </remarks>
     [AttributeUsage(
-        AttributeTargets.Class |
-        AttributeTargets.Enum |
-        AttributeTargets.Struct |
-        AttributeTargets.Interface |
-        AttributeTargets.Delegate |
-        AttributeTargets.Field |
-        AttributeTargets.Event,
-        AllowMultiple = true, Inherited = false)]
-    [Conditional("UNITY_EDITOR")]
+         AttributeTargets.Class |
+         AttributeTargets.Enum |
+         AttributeTargets.Struct |
+         AttributeTargets.Interface |
+         AttributeTargets.Delegate |
+         AttributeTargets.Field |
+         AttributeTargets.Event,
+         AllowMultiple = true, Inherited = false), Conditional("UNITY_EDITOR")]
     public sealed class ScriptIconAttribute : Attribute
     {
+        private static int _project;
+
+        public ScriptIconAttribute([CallerFilePath] string filePath = "")
+        {
+            FilePath = filePath.StartsWith(@".\Packages\")
+                ? filePath.Substring(2)
+                : filePath.Replace('\\', '/').Substring(Project);
+        }
+
         /// <summary>
         /// 相对路径图标 使用 AssetDatabase.LoadAssetAtPath 加载
         /// </summary>
@@ -56,15 +68,6 @@ namespace AIO
                     _project = Application.dataPath.LastIndexOf("/", StringComparison.CurrentCulture) + 1;
                 return _project;
             }
-        }
-
-        private static int _project;
-
-        public ScriptIconAttribute([CallerFilePath] string filePath = "")
-        {
-            FilePath = filePath.StartsWith(@".\Packages\")
-                ? filePath.Substring(2)
-                : filePath.Replace('\\', '/').Substring(Project);
         }
     }
 }

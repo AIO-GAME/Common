@@ -1,8 +1,12 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -13,20 +17,27 @@ namespace AIO.UEditor
     public class CScriptManagerGraphWindow : GraphicWindow
     {
         private List<Type> List;
-        private Vector2 Vector;
+        private Vector2    Vector;
 
         public CScriptManagerGraphWindow()
         {
-            List = new List<Type>();
+            List   = new List<Type>();
             Vector = new Vector2();
             foreach (var item in
                      from Assembly in AHelper.Assembly.GetReferenceAssemblies(AppDomain.CurrentDomain)
                      from item in Assembly.GetTypes()
                      where item.FullName != null && item.FullName.Contains("Framework")
                      select item)
-            {
                 List.Add(item);
-            }
+        }
+
+        /// <summary>
+        /// 当可脚本化对象超出作用域时调用此函数。
+        /// </summary>
+        protected override void OnDisable()
+        {
+            List.Clear();
+            List = null;
         }
 
         protected override void OnDraw()
@@ -45,7 +56,6 @@ namespace AIO.UEditor
             {
                 Vector = scope.scrollPosition;
                 foreach (var type in List)
-                {
                     using (GELayout.VHorizontal(EditorStyles.helpBox, GTOption.Width(true), GTOption.Height(60)))
                     {
                         GELayout.Space(10);
@@ -55,17 +65,7 @@ namespace AIO.UEditor
                         GELayout.Label(type.Attributes.ToString(), GTOption.Width(500));
                         GELayout.Space(10);
                     }
-                }
             }
-        }
-
-        /// <summary>
-        /// 当可脚本化对象超出作用域时调用此函数。
-        /// </summary>
-        protected override void OnDisable()
-        {
-            List.Clear();
-            List = null;
         }
     }
 }

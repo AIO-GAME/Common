@@ -4,17 +4,25 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+#endregion
+
 namespace AIO
 {
     public partial class PrWin
     {
+        #region Nested type: Git
+
         public partial class Git
         {
+            #region Nested type: Clone
+
             /// <summary>
             /// 克隆
             /// </summary>
@@ -59,9 +67,13 @@ namespace AIO
                 /// <exception cref="ArgumentNullException">targets is null<code><see cref="ArgumentNullException"/></code></exception>
                 public static IExecutor Execute(string target, string url, bool quit = true)
                 {
-                    return Execute(target, new string[] { url }, quit);
+                    return Execute(target, new[] { url }, quit);
                 }
             }
+
+            #endregion
         }
+
+        #endregion
     }
 }

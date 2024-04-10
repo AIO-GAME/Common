@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
@@ -15,6 +19,50 @@ namespace AIO
 
             if (len > array.Count) throw new SystemException("data overflow:" + len);
             return new T[len];
+        }
+
+        /// <summary>
+        /// 获取 bool 值
+        /// </summary>
+        public static bool GetBool(this IList<byte> array, ref int index)
+        {
+            return array[index++] != 0;
+        }
+
+        /// <summary>
+        /// 获取 Enum 值
+        /// </summary>
+        public static T GetEnum<T>(this IList<byte> array, ref int index)
+        where T : Enum
+        {
+            return (T)Enum.Parse(typeof(T), GetLen(array, ref index).ToString());
+        }
+
+        /// <summary>
+        /// 获取 Char 值
+        /// </summary>
+        public static char GetChar(this IList<byte> array, ref int index, bool reverse = false)
+        {
+            var bytes = GetByteArray(array, ref index, reverse);
+            return BitConverter.ToChar(bytes, 0);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public static int GetLen(this IList<byte> array, ref int index)
+        {
+            unchecked
+            {
+                var n = array[index] & 0xFF;
+                if (n < 0x20) return -1;
+                if (n < 0x40) return GetInt32(array, ref index, true) & 0x1FFFFFFF; //0x1FFFFFFF    
+                if (n < 0x80) return GetUInt16(array, ref index, true) & 0x3FFF;
+                return GetSByte(array, ref index) & 0x7F;
+            }
         }
 
         #region Array
@@ -176,7 +224,7 @@ namespace AIO
         /// <param name="all">全部</param>
         /// <param name="reverse">是否反转字节序。</param>
         public static float[] GetFloatArray(this IList<byte> array, ref int index, bool all = false,
-            bool reverse = false)
+                                            bool             reverse = false)
         {
             var list = GetLenArrayEmtpy<float>(array, ref index);
             if (list == null || list.Length <= 0) return list;
@@ -189,7 +237,7 @@ namespace AIO
         /// <param name="all">全部</param>
         /// <param name="reverse">是否反转字节序。</param>
         public static double[] GetDoubleArray(this IList<byte> array, ref int index, bool all = false,
-            bool reverse = false)
+                                              bool             reverse = false)
         {
             var list = GetLenArrayEmtpy<double>(array, ref index);
             if (list == null || list.Length <= 0) return list;
@@ -223,7 +271,7 @@ namespace AIO
         /// <param name="encoding">格式化</param>
         /// <param name="reverse">是否反转字节序。</param>
         public static string[] GetStringArray(this IList<byte> array, ref int index, Encoding encoding = null,
-            bool reverse = false)
+                                              bool             reverse = false)
         {
             var list = GetLenArrayEmtpy<string>(array, ref index);
             if (list == null || list.Length <= 0) return list;
@@ -233,7 +281,8 @@ namespace AIO
 
         /// <param name="array">要从中提取字符串的字节数组。</param>
         /// <param name="index">指向要提取的字符串的第一个字节的索引。</param>
-        public static T[] GetEnumArray<T>(this IList<byte> array, ref int index) where T : Enum
+        public static T[] GetEnumArray<T>(this IList<byte> array, ref int index)
+        where T : Enum
         {
             var list = GetLenArrayEmtpy<T>(array, ref index);
             if (list == null || list.Length <= 0) return list;
@@ -242,49 +291,6 @@ namespace AIO
         }
 
         #endregion
-
-        /// <summary>
-        /// 获取 bool 值
-        /// </summary>
-        public static bool GetBool(this IList<byte> array, ref int index)
-        {
-            return array[index++] != 0;
-        }
-
-        /// <summary>
-        /// 获取 Enum 值
-        /// </summary>
-        public static T GetEnum<T>(this IList<byte> array, ref int index) where T : Enum
-        {
-            return (T)Enum.Parse(typeof(T), GetLen(array, ref index).ToString());
-        }
-
-        /// <summary>
-        /// 获取 Char 值
-        /// </summary>
-        public static char GetChar(this IList<byte> array, ref int index, bool reverse = false)
-        {
-            var bytes = GetByteArray(array, ref index, reverse);
-            return BitConverter.ToChar(bytes, 0);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="array"></param>
-        /// <param name="index"></param>
-        /// <returns></returns>
-        public static int GetLen(this IList<byte> array, ref int index)
-        {
-            unchecked
-            {
-                var n = array[index] & 0xFF;
-                if (n < 0x20) return -1;
-                if (n < 0x40) return GetInt32(array, ref index, true) & 0x1FFFFFFF; //0x1FFFFFFF    
-                if (n < 0x80) return GetUInt16(array, ref index, true) & 0x3FFF;
-                return GetSByte(array, ref index) & 0x7F;
-            }
-        }
 
         #region Number
 
@@ -450,7 +456,7 @@ namespace AIO
                 var value = Encoding.UTF8.GetString(bytes);
                 if (string.IsNullOrEmpty(value)) throw new NullReferenceException();
                 return float.Parse(value,
-                    NumberStyles.Float | NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands);
+                                   NumberStyles.Float | NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands);
             }
 
             return BitConverter.ToSingle(bytes, 0);
@@ -473,7 +479,7 @@ namespace AIO
                 var value = Encoding.UTF8.GetString(bytes);
                 if (string.IsNullOrEmpty(value)) throw new NullReferenceException();
                 return float.Parse(value,
-                    NumberStyles.Float | NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands);
+                                   NumberStyles.Float | NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands);
             }
 
             return BitConverter.ToDouble(bytes, 0);
@@ -507,7 +513,7 @@ namespace AIO
         /// <returns></returns>
         /// <exception cref="SystemException"></exception>
         public static string GetString(this IList<byte> array, ref int index, Encoding encoding = null,
-            bool reverse = false)
+                                       bool             reverse = false)
         {
             var len = GetLen(array, ref index);
             if (len < 0) return null;
@@ -517,19 +523,11 @@ namespace AIO
             {
                 var value = new byte[len];
                 if (reverse)
-                {
                     for (var i = 0; i < len; i++)
-                    {
                         value[i] = array[index + i];
-                    }
-                }
                 else
-                {
                     for (int i = 0, j = index + len - 1; i < len; i++, j--)
-                    {
                         value[i] = array[j];
-                    }
-                }
 
                 index += len;
                 return (encoding ?? Encoding.Default).GetString(value);

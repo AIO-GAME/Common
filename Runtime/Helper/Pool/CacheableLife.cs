@@ -1,7 +1,11 @@
-﻿namespace AIO
-{
-    using UnityEngine;
+﻿#region
 
+using UnityEngine;
+
+#endregion
+
+namespace AIO
+{
     /// <summary>
     /// 快捷缓存
     /// </summary>
@@ -16,6 +20,21 @@
         ///
         /// </summary>
         public Cacheable Cacheable { get; private set; }
+
+        private void OnEnable()
+        {
+            Invoke(nameof(Recycle), Life);
+        }
+
+        private void OnDisable()
+        {
+            CancelInvoke();
+        }
+
+        private void OnValidate()
+        {
+            Cacheable = GetComponent<Cacheable>();
+        }
 
         /// <summary>
         ///
@@ -35,24 +54,9 @@
             Life = life;
         }
 
-        private void OnEnable()
-        {
-            Invoke(nameof(Recycle), Life);
-        }
-
-        private void OnDisable()
-        {
-            CancelInvoke();
-        }
-
         private void Recycle()
         {
             Cacheable.Recycle();
-        }
-
-        private void OnValidate()
-        {
-            Cacheable = GetComponent<Cacheable>();
         }
     }
 }

@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -8,9 +12,10 @@ namespace AIO
         #region 双向冒泡排序
 
         /// <summary>
-        /// 双向冒泡排序
+        ///     双向冒泡排序
         /// </summary>
-        private static IList<T> SortBubbleTwoWay<T>(IList<T> array) where T : IComparable
+        private static IList<T> SortBubbleTwoWay<T>(IList<T> array)
+        where T : IComparable
         {
             if (array.Count < 2) return array;
             int L = 0, R = array.Count - 1;
@@ -28,9 +33,7 @@ namespace AIO
                 if (flag == 0) break;
                 for (i = --R; i > L; i--)
                     if (array[i].CompareTo(array[i - 1]) < 0)
-                    {
                         array.Swap(i, i - 1);
-                    }
 
                 L++;
             }
@@ -39,7 +42,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 双向冒泡排序
+        ///     双向冒泡排序
         /// </summary>
         private static IList<T> SortBubbleTwoWay<T>(IList<T> array, in Func<T, T, int> Comparer)
         {
@@ -59,9 +62,7 @@ namespace AIO
                 if (flag == 0) break;
                 for (i = --R; i > L; i--)
                     if (Comparer(array[i], array[i - 1]) < 0)
-                    {
                         array.Swap(i, i - 1);
-                    }
 
                 L++;
             }

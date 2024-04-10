@@ -1,29 +1,31 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.EditorTools;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
     [EditorTool("Pivot Tool", typeof(Transform))]
     internal class PivotTool : EditorTool
     {
-        private Transform _target;
+        private GUIContent      _gc;
+        private Transform       _target;
         private List<Transform> Childs = new List<Transform>();
-        private GUIContent _gc;
 
         public override GUIContent toolbarIcon
         {
             get
             {
                 if (_gc == null)
-                {
                     _gc = new GUIContent
                     {
-                        image = EditorGUIUtility.IconContent("ToolHandlePivot").image,
+                        image   = EditorGUIUtility.IconContent("ToolHandlePivot").image,
                         tooltip = "Pivot Tool"
                     };
-                }
 
                 return _gc;
             }
@@ -53,10 +55,7 @@ namespace AIO.UEditor
 #endif
             _target = target as Transform;
             Childs.Clear();
-            for (int i = 0; i < _target.childCount; i++)
-            {
-                Childs.Add(_target.GetChild(i));
-            }
+            for (var i = 0; i < _target.childCount; i++) Childs.Add(_target.GetChild(i));
         }
 
         public override void OnToolGUI(EditorWindow window)

@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using UnityEditor;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -8,6 +12,11 @@ namespace AIO.UEditor
     /// </summary>
     public static partial class MenuItem_Tools
     {
+        private const string LABLE_AssestManagerWindow          = "Assest Manager";
+        private const string LABLE_BuiltInGUIStyleWindow        = "Built In GUIStyle Window";
+        private const string LABLE_BuiltInTextureWindow         = "Built In Texture Window";
+        private const string LABLE_ScriptingDefineSymbolsEditor = "Scripting Define Symbols Editor";
+
         /// <summary>
         /// 停靠窗口类型集合
         /// </summary>
@@ -52,11 +61,6 @@ namespace AIO.UEditor
         {
             EHelper.Window.Open<DependAnalysisGraphWindow>(DockedWindowTypes);
         }
-
-        private const string LABLE_AssestManagerWindow = "Assest Manager";
-        private const string LABLE_BuiltInGUIStyleWindow = "Built In GUIStyle Window";
-        private const string LABLE_BuiltInTextureWindow = "Built In Texture Window";
-        private const string LABLE_ScriptingDefineSymbolsEditor = "Scripting Define Symbols Editor";
 
         // [MenuItem("AIO/Window/" + LABLE_AssestManagerWindow, false, 101)]
         // public static void OpenAssestManagerGraphWindow()

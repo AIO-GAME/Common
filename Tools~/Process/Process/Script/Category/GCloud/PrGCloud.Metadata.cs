@@ -4,9 +4,13 @@
 |*|E-Mail:     |*| xinansky99@gmail.com
 |*|============|*/
 
+#region
+
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {

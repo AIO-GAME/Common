@@ -5,18 +5,21 @@
 |*|=============================================*/
 
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
     public static partial class ExtendString
     {
         /// <summary>
-        /// 分组
+        ///     分组
         /// </summary>
         public static string[] XSplit(this string src, in char ch)
         {
@@ -41,7 +44,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 分组一次
+        ///     分组一次
         /// </summary>
         public static (string, string) SplitOnce(this string src, in char ch)
         {
@@ -57,19 +60,17 @@ namespace AIO
         }
 
         /// <summary>
-        /// 将字符串以行拆分为数组
+        ///     将字符串以行拆分为数组
         /// </summary>
         public static string[] SplitLine(this string str)
         {
             if (string.IsNullOrWhiteSpace(str)) return Array.Empty<string>();
 
-            return XSplit(str, '\n')
-                .Select(line => line.Trim('\r', '\n'))
-                .Where(trimmedLine => !string.IsNullOrEmpty(trimmedLine)).ToArray();
+            return XSplit(str, '\n').Select(line => line.Trim('\r', '\n')).Where(trimmedLine => !string.IsNullOrEmpty(trimmedLine)).ToArray();
         }
 
         /// <summary>
-        /// 单词分割
+        ///     单词分割
         /// </summary>
         public static string SplitWords(this string s, in char separator)
         {

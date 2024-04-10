@@ -2,6 +2,8 @@
 {
     public partial class PrCmd
     {
+        #region Nested type: Mkdir
+
         /// <summary>
         /// 创建目录命令
         /// </summary>
@@ -15,5 +17,7 @@
                 return Create().Input($"mkdir \"{target.Replace("/", "\\")}\"");
             }
         }
+
+        #endregion
     }
 }

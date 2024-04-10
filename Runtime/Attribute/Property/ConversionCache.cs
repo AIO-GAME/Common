@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
@@ -13,21 +17,14 @@ namespace AIO
     /// 
     public sealed class ConversionCache<TKey, TValue>
     {
-        private sealed class CachedValue
-        {
-            public int lastFrameAccessed;
-            public TValue value;
-        }
-
-
         private readonly Dictionary<TKey, CachedValue>
             Cache = new Dictionary<TKey, CachedValue>();
 
-        private readonly List<TKey>
-            Keys = new List<TKey>();
-
         private readonly Func<TKey, TValue>
             Converter;
+
+        private readonly List<TKey>
+            Keys = new List<TKey>();
 
         private int _LastCleanupFrame;
 
@@ -35,7 +32,10 @@ namespace AIO
         /// <summary>
         /// Creates a new <see cref="ConversionCache{TKey, TValue}"/> which uses the specified delegate to convert values.
         /// </summary>
-        public ConversionCache(Func<TKey, TValue> converter) => Converter = converter;
+        public ConversionCache(Func<TKey, TValue> converter)
+        {
+            Converter = converter;
+        }
 
 
         /// <summary>
@@ -80,5 +80,15 @@ namespace AIO
 
             return cached.value;
         }
+
+        #region Nested type: CachedValue
+
+        private sealed class CachedValue
+        {
+            public int    lastFrameAccessed;
+            public TValue value;
+        }
+
+        #endregion
     }
 }

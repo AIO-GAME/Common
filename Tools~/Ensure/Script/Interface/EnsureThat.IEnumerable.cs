@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections;
-using System.Runtime.CompilerServices;
+using System.Linq;
+
+#endregion
 
 namespace AIO
 {
@@ -11,17 +15,14 @@ namespace AIO
         /// [value == null]
         /// [value[x] == null]
         /// </summary>
-
-        public void HasNoNullItem<T>(T value) where T : class, IEnumerable
+        public void HasNoNullItem<T>(T value)
+        where T : class, IEnumerable
         {
             if (!Ensure.IsActive) return;
 
             IsNotNull(value);
 
-            foreach (var item in value)
-            {
-                if (item == null) throw new ArgumentException(ExceptionMessages.Collections_HasNoNullItemFailed, paramName);
-            }
+            if (value.Cast<object>().Any(item => item == null)) throw new ArgumentException(ExceptionMessages.Collections_HasNoNullItemFailed, paramName);
         }
     }
 }

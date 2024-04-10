@@ -1,5 +1,9 @@
+#region
+
 using System;
 using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
@@ -7,7 +11,7 @@ namespace AIO
     /// 扩展 ->
     /// 定义由值类型或类实现的通用比较方法，以为排序实例创建类型特定的比较方法。
     /// </summary>
-    public static partial class ExtendIComparable
+    public static class ExtendIComparable
     {
         /// <summary>
         /// 如果第一个对象 小于 第二个对象 则返回 true。

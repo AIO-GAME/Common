@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -11,7 +15,8 @@ namespace AIO
         /// <remarks>
         /// 并重新分配内存 source = source.Add(1)
         /// </remarks>
-        public static T[] Add<T, TA>(this T[] arrays, in TA item) where TA : T
+        public static T[] Add<T, TA>(this T[] arrays, in TA item)
+        where TA : T
         {
             var oldLength = arrays.Length;
             var newArray = new T[oldLength + 1];
@@ -26,7 +31,8 @@ namespace AIO
         /// <remarks>
         /// 并重新分配内存 source = source.Add(1)
         /// </remarks>
-        public static T[] Add<T, TA>(this T[] array, params TA[] items) where TA : T
+        public static T[] Add<T, TA>(this T[] array, params TA[] items)
+        where TA : T
         {
             if (array == null) throw new ArgumentNullException(nameof(array));
             if (items == null || items.Length == 0) return array;
@@ -43,7 +49,8 @@ namespace AIO
         /// <remarks>
         /// 并重新分配内存 source = source.Add(1)
         /// </remarks>
-        public static T[] Add<T, TA>(this T[] array, in ICollection<TA> items) where TA : T
+        public static T[] Add<T, TA>(this T[] array, in ICollection<TA> items)
+        where TA : T
         {
             if (array == null) throw new ArgumentNullException(nameof(array));
             if (items == null || items.Count == 0) return array;

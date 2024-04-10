@@ -1,17 +1,16 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
-
+#region
 
 using System.Runtime.CompilerServices;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -20,7 +19,7 @@ namespace AIO
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static string ReadText(
                 in string path,
-                Encoding charset = null)
+                Encoding  charset = null)
             {
                 return (charset ?? Encoding.UTF8).GetString(ReadFile(path));
             }
@@ -34,10 +33,10 @@ namespace AIO
             /// <param name="concat">true:拼接 | false:覆盖</param>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool WriteText(
-                string path,
+                string        path,
                 StringBuilder text,
-                Encoding charset = null,
-                in bool concat = false)
+                Encoding      charset = null,
+                in bool       concat  = false)
             {
                 var b = (charset ?? Encoding.UTF8).GetBytes(text.ToString());
                 return Write(path, b, 0, b.Length, concat);
@@ -54,12 +53,14 @@ namespace AIO
             public static bool WriteText(
                 in string path,
                 in string text,
-                Encoding charset = null,
-                in bool concat = false)
+                Encoding  charset = null,
+                in bool   concat  = false)
             {
                 var b = (charset ?? Encoding.UTF8).GetBytes(text);
                 return Write(path, b, 0, b.Length, concat);
             }
         }
+
+        #endregion
     }
 }

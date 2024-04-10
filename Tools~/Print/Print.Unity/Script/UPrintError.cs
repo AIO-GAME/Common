@@ -1,6 +1,10 @@
-﻿using AIO.Internal;
+﻿#region
+
 using System.Collections;
 using System.Diagnostics;
+using AIO.Internal;
+
+#endregion
 
 namespace UnityEngine
 {
@@ -57,7 +61,8 @@ namespace UnityEngine
         /// 错误 
         /// </summary>
         [Conditional(MACRO_DEFINITION), DebuggerHidden, DebuggerNonUserCode]
-        public static void Error<T>(in T objs) where T : IEnumerable
+        public static void Error<T>(in T objs)
+        where T : IEnumerable
         {
             if (IsNotOut || NoStatus(ERROR)) return;
             if (objs == null)

@@ -39,6 +39,6 @@ namespace AIO
         /// <summary>
         /// 枚举
         /// </summary>
-        Enum,
+        Enum
     }
 }

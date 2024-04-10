@@ -1,9 +1,4 @@
-﻿/*|==========|*|
-|*|Author:   |*| -> XINAN
-|*|Date:     |*| -> 2023-05-19
-|*|==========|*/
-
-namespace AIO
+﻿namespace AIO
 {
     // /// <summary>
     // /// 邮件系统

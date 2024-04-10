@@ -1,17 +1,22 @@
-﻿namespace AIO
-{
-    using System;
-    using System.Collections.Generic;
+﻿#region
 
+using System;
+using System.Collections.Generic;
+
+#endregion
+
+namespace AIO
+{
     public partial class Pool
     {
         /// <summary>
         /// 引用释放
         /// </summary>
-        public static IDisposable Using<T>(out T value) where T : class, IDisposable, new()
+        public static IDisposable Using<T>(out T value)
+        where T : class, IDisposable, new()
         {
             var disposable = new Disposable<T>(Activator.CreateInstance<T>(),
-                release => { release.Dispose(); });
+                                               release => { release.Dispose(); });
             value = disposable.Item;
             return disposable;
         }
@@ -19,7 +24,8 @@
         /// <summary>
         /// 引用释放
         /// </summary>
-        public static IDisposable Using<T>(out T value, Action<T> onRelease) where T : class, new()
+        public static IDisposable Using<T>(out T value, Action<T> onRelease)
+        where T : class, new()
         {
             var disposable = new Disposable<T>(Activator.CreateInstance<T>(), onRelease);
             value = disposable.Item;

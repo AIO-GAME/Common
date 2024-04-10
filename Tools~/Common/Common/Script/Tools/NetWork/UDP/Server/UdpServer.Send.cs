@@ -1,74 +1,23 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-08
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Net;
 using System.Net.Sockets;
 
+#endregion
+
 namespace AIO.Net
 {
     public partial class UdpServer
     {
-        private EndPoint SendEndpoint;
-
-        private bool Sending;
-
         private NetBuffer _sendNetBuffer;
+        private EndPoint  SendEndpoint;
 
         private SocketAsyncEventArgs SendEventArg;
 
-        /// <inheritdoc />
-        public override bool MulticastAsync(byte[] buffer)
-        {
-            return SendAsync(buffer);
-        }
+        private bool Sending;
 
-        /// <inheritdoc />
-        public override int Multicast(byte[] buffer)
-        {
-            return Send(buffer);
-        }
-
-        /// <summary>
-        /// This method is invoked when an asynchronous send to operation completes
-        /// </summary>
-        private void ProcessSendTo(SocketAsyncEventArgs e)
-        {
-            Sending = false;
-
-            if (!IsStarted)
-                return;
-
-            // Check for error
-            if (e.SocketError != SocketError.Success)
-            {
-                SendError(e.SocketError);
-
-                // Call the buffer sent zero handler
-                OnSent(SendEndpoint, 0);
-
-                return;
-            }
-
-            var sent = e.BytesTransferred;
-
-            // Send some data to the client
-            if (sent > 0)
-            {
-                // Update statistic
-                BytesSending = 0;
-                BytesSent += sent;
-
-                // Clear the send buffer
-                _sendNetBuffer.Clear();
-
-                // Call the buffer sent handler
-                OnSent(SendEndpoint, sent);
-            }
-        }
+        #region INetSession Members
 
         /// <inheritdoc />
         public bool SendAsync(byte[] buffer)
@@ -135,6 +84,58 @@ namespace AIO.Net
             }
         }
 
+        #endregion
+
+        /// <inheritdoc />
+        public override bool MulticastAsync(byte[] buffer)
+        {
+            return SendAsync(buffer);
+        }
+
+        /// <inheritdoc />
+        public override int Multicast(byte[] buffer)
+        {
+            return Send(buffer);
+        }
+
+        /// <summary>
+        /// This method is invoked when an asynchronous send to operation completes
+        /// </summary>
+        private void ProcessSendTo(SocketAsyncEventArgs e)
+        {
+            Sending = false;
+
+            if (!IsStarted)
+                return;
+
+            // Check for error
+            if (e.SocketError != SocketError.Success)
+            {
+                SendError(e.SocketError);
+
+                // Call the buffer sent zero handler
+                OnSent(SendEndpoint, 0);
+
+                return;
+            }
+
+            var sent = e.BytesTransferred;
+
+            // Send some data to the client
+            if (sent > 0)
+            {
+                // Update statistic
+                BytesSending =  0;
+                BytesSent    += sent;
+
+                // Clear the send buffer
+                _sendNetBuffer.Clear();
+
+                // Call the buffer sent handler
+                OnSent(SendEndpoint, sent);
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -149,15 +150,13 @@ namespace AIO.Net
             try
             {
                 // Async write with the write handler
-                Sending = true;
+                Sending                     = true;
                 SendEventArg.RemoteEndPoint = SendEndpoint;
                 SendEventArg.SetBuffer(_sendNetBuffer.Arrays, 0, _sendNetBuffer.Count);
                 if (!Socket.SendToAsync(SendEventArg))
                     ProcessSendTo(SendEventArg);
             }
-            catch (ObjectDisposedException)
-            {
-            }
+            catch (ObjectDisposedException) { }
         }
     }
 }

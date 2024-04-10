@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿#region
+
+using UnityEngine;
+
+#endregion
 
 namespace AIO.UEngine
 {
@@ -52,7 +56,7 @@ namespace AIO.UEngine
         {
             var content = new GUIContent(text, tooltip);
             var width = style.CalculateWidth(content);
-            content.text = null;
+            content.text    = null;
             content.tooltip = null;
             return width;
         }

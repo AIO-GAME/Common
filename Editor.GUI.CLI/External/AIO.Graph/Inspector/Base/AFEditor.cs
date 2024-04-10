@@ -1,14 +1,18 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using AIO.UEngine;
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
     /// <summary>
     /// Editor 基类 无预览窗口 数据类
     /// </summary>
-    public abstract partial class AFEditor : Editor
+    public abstract class AFEditor : Editor
     {
         /// <summary>
         /// 复制、粘贴按钮的GUIContent
@@ -16,14 +20,14 @@ namespace AIO.UEditor
         protected GUIContent GCCopyPaste;
 
         /// <summary>
-        /// 开启预览窗口
-        /// </summary>
-        protected bool Preview { get; set; } = false;
-
-        /// <summary>
         /// scorll pos
         /// </summary>
         protected Vector2 Vector;
+
+        /// <summary>
+        /// 开启预览窗口
+        /// </summary>
+        protected bool Preview { get; set; } = false;
 
         /// <summary>
         /// 撤销操作名字
@@ -55,7 +59,7 @@ namespace AIO.UEditor
             SerializedPropertyDic.Clear();
             GCCopyPaste = new GUIContent
             {
-                image = EditorGUIUtility.IconContent("d_editicon.sml").image,
+                image   = EditorGUIUtility.IconContent("d_editicon.sml").image,
                 tooltip = "Copy or Paste"
             };
             URLArray = GetType().GetCustomAttributes<UrlAttribute>(false);
@@ -92,10 +96,7 @@ namespace AIO.UEditor
             else
             {
                 serializedProperty = serializedObject.FindProperty(propertyName);
-                if (serializedProperty != null)
-                {
-                    SerializedPropertyDic.Add(propertyName, serializedProperty);
-                }
+                if (serializedProperty != null) SerializedPropertyDic.Add(propertyName, serializedProperty);
             }
 
             return serializedProperty;
@@ -133,15 +134,15 @@ namespace AIO.UEditor
         private static bool IsSupportCopyPaste(SerializedProperty property)
         {
             if (property.propertyType == SerializedPropertyType.Vector2
-                || property.propertyType == SerializedPropertyType.Vector3
-                || property.propertyType == SerializedPropertyType.Vector4
-                || property.propertyType == SerializedPropertyType.Vector2Int
-                || property.propertyType == SerializedPropertyType.Vector3Int
-                || property.propertyType == SerializedPropertyType.Quaternion
-                || property.propertyType == SerializedPropertyType.Bounds
-                || property.propertyType == SerializedPropertyType.BoundsInt
-                || (property.propertyType == SerializedPropertyType.Generic && property.hasChildren &&
-                    property.type == "Location"))
+             || property.propertyType == SerializedPropertyType.Vector3
+             || property.propertyType == SerializedPropertyType.Vector4
+             || property.propertyType == SerializedPropertyType.Vector2Int
+             || property.propertyType == SerializedPropertyType.Vector3Int
+             || property.propertyType == SerializedPropertyType.Quaternion
+             || property.propertyType == SerializedPropertyType.Bounds
+             || property.propertyType == SerializedPropertyType.BoundsInt
+             || (property.propertyType == SerializedPropertyType.Generic && property.hasChildren &&
+                 property.type == "Location"))
                 return true;
             return false;
         }
@@ -186,16 +187,16 @@ namespace AIO.UEditor
             else if (property.propertyType == SerializedPropertyType.Generic && property.hasChildren &&
                      property.type == "Location")
             {
-                SerializedProperty position = property.FindPropertyRelative("Position");
-                SerializedProperty rotation = property.FindPropertyRelative("Rotation");
-                SerializedProperty scale = property.FindPropertyRelative("Scale");
+                var position = property.FindPropertyRelative("Position");
+                var rotation = property.FindPropertyRelative("Rotation");
+                var scale = property.FindPropertyRelative("Scale");
 
                 if (position != null && rotation != null && scale != null)
                 {
-                    Location location = new Location();
-                    location.Position = position.vector3Value;
-                    location.Rotation = rotation.vector3Value;
-                    location.Scale = scale.vector3Value;
+                    var location = new Location();
+                    location.Position           = position.vector3Value;
+                    location.Rotation           = rotation.vector3Value;
+                    location.Scale              = scale.vector3Value;
                     GUIUtility.systemCopyBuffer = location.LocationToJson();
                 }
             }
@@ -248,7 +249,7 @@ namespace AIO.UEditor
                         {
                             position.vector3Value = location.Position;
                             rotation.vector3Value = location.Rotation;
-                            scale.vector3Value = location.Scale;
+                            scale.vector3Value    = location.Scale;
                         }
                     }
 
@@ -309,8 +310,8 @@ namespace AIO.UEditor
         /// <param name="content">显示名称</param>
         /// <param name="isLine">自动水平布局并占用一行</param>
         /// <param name="options">布局操作</param>
-        protected void PropertyField(string propertyName, string content, bool isLine = true,
-            params GUILayoutOption[] options)
+        protected void PropertyField(string                   propertyName, string content, bool isLine = true,
+                                     params GUILayoutOption[] options)
         {
             if (isLine) EditorGUILayout.BeginHorizontal();
 
@@ -335,8 +336,8 @@ namespace AIO.UEditor
         /// <param name="includeChildren">包含子级</param>
         /// <param name="isLine">自动水平布局并占用一行</param>
         /// <param name="options">布局操作</param>
-        protected void PropertyField(string propertyName, bool includeChildren, bool isLine = true,
-            params GUILayoutOption[] options)
+        protected void PropertyField(string                   propertyName, bool includeChildren, bool isLine = true,
+                                     params GUILayoutOption[] options)
         {
             if (isLine) EditorGUILayout.BeginHorizontal();
 
@@ -362,8 +363,8 @@ namespace AIO.UEditor
         /// <param name="includeChildren">包含子级</param>
         /// <param name="isLine">自动水平布局并占用一行</param>
         /// <param name="options">布局操作</param>
-        protected void PropertyField(string propertyName, string name, bool includeChildren, bool isLine = true,
-            params GUILayoutOption[] options)
+        protected void PropertyField(string                   propertyName, string name, bool includeChildren, bool isLine = true,
+                                     params GUILayoutOption[] options)
         {
             if (isLine) EditorGUILayout.BeginHorizontal();
 

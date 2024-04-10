@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,6 +8,8 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -15,19 +19,9 @@ namespace AIO.UEditor
     [GWindow("Dll Switcher Window", Group = "Tools", MinSizeWidth = 600, MinSizeHeight = 600)]
     public class DllSwitcherWindow : GraphicWindow
     {
-        private enum PathType
-        {
-            Reference,
-            AbsolutePath
-        }
-
-        private enum DirectoryType
-        {
-            Root,
-            SpecificDirectory
-        }
-
         public const string DEFAULT_FILE_ID_OF_SCRIPT = "11500000";
+
+        private const int PreLabelWidth = 140;
 
         public Object dllFile;
 
@@ -35,21 +29,19 @@ namespace AIO.UEditor
 
         public Object srcDir;
 
+        private string dllFilePath;
+
+        private PathType dllInputPath;
+
         private Dictionary<string, string> fileIDMappingTableFromDll;
 
         private Dictionary<string, string> guidMappingTableFromScripts;
 
         private string guidOfDllFile;
 
-        private string dllFilePath;
-
-        private const int PreLabelWidth = 140;
-
-        private PathType dllInputPath;
+        private DirectoryType resDirectory;
 
         private DirectoryType srcDirectory;
-
-        private DirectoryType resDirectory;
 
         protected override void OnDraw()
         {
@@ -68,10 +60,7 @@ namespace AIO.UEditor
             {
                 EditorGUILayout.BeginHorizontal();
                 dllFilePath = EditorGUILayout.TextField(dllFilePath);
-                if (GUILayout.Button("Select", GUILayout.MaxWidth(50)))
-                {
-                    dllFilePath = EditorUtility.OpenFilePanel("Select Dll File", dllFilePath, "dll");
-                }
+                if (GUILayout.Button("Select", GUILayout.MaxWidth(50))) dllFilePath = EditorUtility.OpenFilePanel("Select Dll File", dllFilePath, "dll");
 
                 EditorGUILayout.EndHorizontal();
             }
@@ -80,31 +69,19 @@ namespace AIO.UEditor
             EditorGUILayout.LabelField("Source Code Directory", GUILayout.MaxWidth(140f));
             srcDirectory = (DirectoryType)EditorGUILayout.EnumPopup(srcDirectory, GUILayout.ExpandWidth(true));
             EditorGUILayout.EndHorizontal();
-            if (srcDirectory.Equals(DirectoryType.SpecificDirectory))
-            {
-                srcDir = EditorGUILayout.ObjectField(srcDir, typeof(Object), false);
-            }
+            if (srcDirectory.Equals(DirectoryType.SpecificDirectory)) srcDir = EditorGUILayout.ObjectField(srcDir, typeof(Object), false);
 
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Replace Dirctory", GUILayout.MaxWidth(140f));
             resDirectory = (DirectoryType)EditorGUILayout.EnumPopup(resDirectory, GUILayout.ExpandWidth(true));
             EditorGUILayout.EndHorizontal();
-            if (resDirectory.Equals(DirectoryType.SpecificDirectory))
-            {
-                replaceDir = EditorGUILayout.ObjectField(replaceDir, typeof(Object), false);
-            }
+            if (resDirectory.Equals(DirectoryType.SpecificDirectory)) replaceDir = EditorGUILayout.ObjectField(replaceDir, typeof(Object), false);
 
             EditorGUILayout.Space();
             EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("Replace From Dll To Src"))
-            {
-                replaceSriptReference(true);
-            }
+            if (GUILayout.Button("Replace From Dll To Src")) replaceSriptReference(true);
 
-            if (GUILayout.Button("Replace From Src To Dll"))
-            {
-                replaceSriptReference(false);
-            }
+            if (GUILayout.Button("Replace From Src To Dll")) replaceSriptReference(false);
 
             EditorGUILayout.EndHorizontal();
         }
@@ -112,13 +89,9 @@ namespace AIO.UEditor
         public void replaceSriptReference(bool dllToSrc)
         {
             if (resDirectory.Equals(DirectoryType.SpecificDirectory))
-            {
                 replaceSriptReferenceOfSelectDirectory(dllToSrc);
-            }
             else
-            {
                 replaceSriptReferenceOfAllScripts(dllToSrc);
-            }
         }
 
         public void replaceSriptReferenceOfSelectDirectory(bool dllToSrc = true)
@@ -138,7 +111,7 @@ namespace AIO.UEditor
 
         private void ReplaceSriptReferenceOfPath(string path, bool dllToSrc = true)
         {
-            var list = FindAllFileWithSuffixs(path, new string[] { ".asset", ".prefab", ".unity" });
+            var list = FindAllFileWithSuffixs(path, new[] { ".asset", ".prefab", ".unity" });
             for (var i = 0; i < list.Count; i++)
             {
                 EditorUtility.DisplayProgressBar("Replace Dll", list[i], i * 1f / list.Count);
@@ -151,10 +124,7 @@ namespace AIO.UEditor
 
         private void initFileIDMappingTableOfDll(bool dllToSrc = true)
         {
-            if (dllInputPath.Equals(PathType.Reference))
-            {
-                dllFilePath = AssetDatabase.GetAssetPath(dllFile);
-            }
+            if (dllInputPath.Equals(PathType.Reference)) dllFilePath = AssetDatabase.GetAssetPath(dllFile);
 
             fileIDMappingTableFromDll = new Dictionary<string, string>();
             var assembly = Assembly.LoadFrom(dllFilePath);
@@ -167,57 +137,41 @@ namespace AIO.UEditor
             {
                 array = ex.Types.Where(t => t != null).ToArray();
                 var loaderExceptions = ex.LoaderExceptions;
-                for (var i = 0; i < loaderExceptions.Length; i++)
-                {
-                    Debug.LogWarning(loaderExceptions[i]);
-                }
+                for (var i = 0; i < loaderExceptions.Length; i++) Debug.LogWarning(loaderExceptions[i]);
             }
 
             var array2 = array;
             foreach (var type in array2)
-            {
                 if (dllToSrc)
                 {
                     if (fileIDMappingTableFromDll.ContainsKey(AHelper.FileID.Compute(type).ToString()))
-                    {
                         Debug.LogWarning(string.Concat("Reduplicated GUID:", AHelper.FileID.Compute(type).ToString(),
-                            ";Script Name:", type.Name));
-                    }
+                                                       ";Script Name:", type.Name));
                     else
-                    {
                         fileIDMappingTableFromDll[AHelper.FileID.Compute(type).ToString()] = type.Name;
-                    }
                 }
                 else
                 {
                     fileIDMappingTableFromDll[type.Name] = AHelper.FileID.Compute(type).ToString();
                 }
-            }
 
-            if (!dllToSrc)
-            {
-                initGuidOfDllFile();
-            }
+            if (!dllToSrc) initGuidOfDllFile();
         }
 
         private Assembly CurrentDomain_ReflectionOnlyAssemblyResolve(object sender, ResolveEventArgs args)
         {
             Debug.LogWarning(string.Concat("Need Loading:", args.Name));
             return Assembly.ReflectionOnlyLoad(string.Concat(
-                dllFilePath.Substring(0, dllFilePath.LastIndexOf("\\", StringComparison.CurrentCulture)), "\\",
-                args.Name));
+                                                   dllFilePath.Substring(0, dllFilePath.LastIndexOf("\\", StringComparison.CurrentCulture)), "\\",
+                                                   args.Name));
         }
 
         private void InitGuidMappingTable(bool dllToSrc)
         {
             if (srcDirectory.Equals(DirectoryType.SpecificDirectory))
-            {
                 InitGuidMappingTableOfSelectScripts(dllToSrc);
-            }
             else
-            {
                 InitGuidMappingTableOfAllScripts(dllToSrc);
-            }
         }
 
         private void InitGuidMappingTableOfAllScripts(bool dllToSrc = true)
@@ -235,17 +189,11 @@ namespace AIO.UEditor
 
         private void InitGuidMappingTableOfPath(string path, bool dllToSrc = true)
         {
-            foreach (var item in FindAllFileWithSuffixs(path, new string[] { ".cs.meta", ".js.meta" }))
-            {
+            foreach (var item in FindAllFileWithSuffixs(path, new[] { ".cs.meta", ".js.meta" }))
                 if (dllToSrc)
-                {
                     guidMappingTableFromScripts[getFileNameFromPath(item)] = GetGuidFromMeta(item);
-                }
                 else
-                {
                     guidMappingTableFromScripts[GetGuidFromMeta(item)] = getFileNameFromPath(item);
-                }
-            }
         }
 
         private void initGuidOfDllFile()
@@ -260,7 +208,6 @@ namespace AIO.UEditor
             var i = 0;
             var flag = false;
             for (; i < array.Length; i++)
-            {
                 if (array[i].StartsWith("MonoBehaviour:"))
                 {
                     do
@@ -268,16 +215,12 @@ namespace AIO.UEditor
                         i++;
                     } while (!array[i].TrimStart().StartsWith("m_Script:"));
 
-                    flag = ((!dllToSrc)
-                        ? (flag | replaceGUIDAnfFileIDFromSrcToDll(ref array[i]))
-                        : (flag | replaceGUIDAnfFileIDFromDllToSrc(ref array[i])));
+                    flag = !dllToSrc
+                        ? flag | replaceGUIDAnfFileIDFromSrcToDll(ref array[i])
+                        : flag | replaceGUIDAnfFileIDFromDllToSrc(ref array[i]);
                 }
-            }
 
-            if (flag)
-            {
-                File.WriteAllLines(filePath, array);
-            }
+            if (flag) File.WriteAllLines(filePath, array);
         }
 
         private string GetGuidFromMeta(string filePath)
@@ -304,10 +247,7 @@ namespace AIO.UEditor
         {
             var result = false;
             var fileIDFrommScriptReferenceLine = getFileIDFrommScriptReferenceLine(lineStr);
-            if (fileIDFrommScriptReferenceLine == null || fileIDFrommScriptReferenceLine.Equals("11500000"))
-            {
-                return false;
-            }
+            if (fileIDFrommScriptReferenceLine == null || fileIDFrommScriptReferenceLine.Equals("11500000")) return false;
 
             if (fileIDMappingTableFromDll.TryGetValue(fileIDFrommScriptReferenceLine, out var value))
             {
@@ -317,7 +257,7 @@ namespace AIO.UEditor
                     Debug.Log(string.Concat("Replacing script reference:", value));
                     lineStr = lineStr.Replace(fileIDFrommScriptReferenceLine, "11500000");
                     lineStr = lineStr.Replace(gUIDFrommScriptReferenceLine, value2);
-                    result = true;
+                    result  = true;
                 }
                 else
                 {
@@ -336,10 +276,7 @@ namespace AIO.UEditor
         {
             var result = false;
             var gUIDFrommScriptReferenceLine = getGUIDFrommScriptReferenceLine(lineStr);
-            if (gUIDFrommScriptReferenceLine == null)
-            {
-                return false;
-            }
+            if (gUIDFrommScriptReferenceLine == null) return false;
 
             if (guidMappingTableFromScripts.TryGetValue(gUIDFrommScriptReferenceLine, out var value))
             {
@@ -348,7 +285,7 @@ namespace AIO.UEditor
                     Debug.Log(string.Concat("Replacing script reference:", value));
                     lineStr = lineStr.Replace("11500000", value2);
                     lineStr = lineStr.Replace(gUIDFrommScriptReferenceLine, guidOfDllFile);
-                    result = true;
+                    result  = true;
                 }
                 else
                 {
@@ -367,10 +304,7 @@ namespace AIO.UEditor
         {
             var num = lineStr.IndexOf("fileID:", StringComparison.CurrentCulture) + "fileID: ".Length;
             var num2 = lineStr.IndexOf(",", StringComparison.CurrentCulture) - num;
-            if (num2 <= 0)
-            {
-                return null;
-            }
+            if (num2 <= 0) return null;
 
             return lineStr.Substring(num, num2);
         }
@@ -379,10 +313,7 @@ namespace AIO.UEditor
         {
             var num = lineStr.IndexOf("guid:", StringComparison.CurrentCulture) + "guid: ".Length;
             var num2 = lineStr.LastIndexOf(",", StringComparison.CurrentCulture) - num;
-            if (num2 <= 0)
-            {
-                return null;
-            }
+            if (num2 <= 0) return null;
 
             return lineStr.Substring(num, num2);
         }
@@ -408,34 +339,34 @@ namespace AIO.UEditor
             }
             else
             {
-                if (string.IsNullOrEmpty(path))
-                {
-                    return;
-                }
+                if (string.IsNullOrEmpty(path)) return;
 
                 var files = Directory.GetFiles(path);
                 foreach (var text in files)
-                {
-                    foreach (var value in suffixs)
+                foreach (var value in suffixs)
+                    if (text.EndsWith(value))
                     {
-                        if (text.EndsWith(value))
-                        {
-                            resultList.Add(text);
-                            break;
-                        }
+                        resultList.Add(text);
+                        break;
                     }
-                }
 
                 files = Directory.GetDirectories(path);
-                foreach (var path2 in files)
-                {
-                    FindAllFileWithSuffixs(path2, suffixs, ref resultList);
-                }
+                foreach (var path2 in files) FindAllFileWithSuffixs(path2, suffixs, ref resultList);
             }
         }
 
-        private void WriteDebugFile(string[] lines, string filename)
+        private void WriteDebugFile(string[] lines, string filename) { }
+
+        private enum PathType
         {
+            Reference,
+            AbsolutePath
+        }
+
+        private enum DirectoryType
+        {
+            Root,
+            SpecificDirectory
         }
     }
 }

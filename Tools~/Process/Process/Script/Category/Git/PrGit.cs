@@ -4,10 +4,13 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
@@ -44,7 +47,7 @@ namespace AIO
 #endif
 
                 if (Info.RedirectStandardOutput) Info.StandardOutputEncoding = encoding;
-                if (Info.RedirectStandardError) Info.StandardErrorEncoding = encoding;
+                if (Info.RedirectStandardError) Info.StandardErrorEncoding   = encoding;
             }
             catch (Exception ex)
             {

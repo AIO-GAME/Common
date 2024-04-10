@@ -1,13 +1,27 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #pragma warning disable CS0109 // 
+
+#region
+
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
     public class ClassParam
     {
+        public ClassParam()
+        {
+            Using          = new List<string>();
+            Pragma         = new List<string>();
+            Generics       = new Dictionary<string, string>();
+            FunctionGroups = new Dictionary<string, List<FunctionChunk>>();
+            Header         = new StringBuilder();
+        }
+
         /// <summary>
         /// 类型
         /// </summary>
@@ -78,15 +92,6 @@ namespace AIO
         /// </summary>
         public string MacroDefinition { get; set; } = string.Empty;
 
-        public ClassParam()
-        {
-            Using = new List<string>();
-            Pragma = new List<string>();
-            Generics = new Dictionary<string, string>();
-            FunctionGroups = new Dictionary<string, List<FunctionChunk>>();
-            Header = new StringBuilder();
-        }
-
         public string GetPragma()
         {
             var sb = new StringBuilder();
@@ -130,7 +135,7 @@ namespace AIO
 
             var str = string.Format(
                 "{0}{1}{2} {3} {4}"
-                , space, accessibility, partial, Type, Name);
+              , space, accessibility, partial, Type, Name);
             sb.AppendLine(str).Append(space).Append('{');
             return sb.ToString();
         }
@@ -168,8 +173,7 @@ namespace AIO
                     foreach (var line in Chunk.Content.Split('\n'))
                     {
                         if (string.IsNullOrEmpty(line)) continue;
-                        sb.AppendLine((line[0] == '#' ? line : string.Concat(space, "    ", line))
-                            .TrimEnd('\n', '\r'));
+                        sb.AppendLine((line[0] == '#' ? line : string.Concat(space, "    ", line)).TrimEnd('\n', '\r'));
                     }
 
                     sb.AppendLine(right);

@@ -1,12 +1,10 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-08
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Net;
 using System.Net.Sockets;
+
+#endregion
 
 namespace AIO.Net
 {
@@ -18,9 +16,7 @@ namespace AIO.Net
         /// <summary>
         /// Client socket
         /// </summary>
-        private NetClient()
-        {
-        }
+        private NetClient() { }
 
         /// <summary>
         /// Create a new Net client with a given server address and port
@@ -30,9 +26,9 @@ namespace AIO.Net
         /// <param name="port">Server port</param>
         protected NetClient(EndPoint endpoint, string address, int port)
         {
-            Id = Guid.NewGuid();
-            Address = address;
-            Port = port;
+            Id       = Guid.NewGuid();
+            Address  = address;
+            Port     = port;
             Endpoint = endpoint;
         }
 
@@ -41,34 +37,26 @@ namespace AIO.Net
         /// </summary>
         /// <param name="address">IP address</param>
         /// <param name="port">Port number</param>
-        protected NetClient(IPAddress address, int port) : this(new IPEndPoint(address, port))
-        {
-        }
+        protected NetClient(IPAddress address, int port) : this(new IPEndPoint(address, port)) { }
 
         /// <summary>
         /// Initialize Net client with a given server IP address and port number
         /// </summary>
         /// <param name="address">IP address</param>
         /// <param name="port">Port number</param>
-        protected NetClient(string address, int port) : this(new IPEndPoint(IPAddress.Parse(address), port))
-        {
-        }
+        protected NetClient(string address, int port) : this(new IPEndPoint(IPAddress.Parse(address), port)) { }
 
         /// <summary>
         /// Initialize Net client with a given DNS endpoint
         /// </summary>
         /// <param name="endpoint">DNS endpoint</param>
-        protected NetClient(DnsEndPoint endpoint) : this(endpoint, endpoint.Host, endpoint.Port)
-        {
-        }
+        protected NetClient(DnsEndPoint endpoint) : this(endpoint, endpoint.Host, endpoint.Port) { }
 
         /// <summary>
         /// Initialize Net client with a given IP endpoint
         /// </summary>
         /// <param name="endpoint">IP endpoint</param>
-        protected NetClient(IPEndPoint endpoint) : this(endpoint, endpoint.Address.ToString(), endpoint.Port)
-        {
-        }
+        protected NetClient(IPEndPoint endpoint) : this(endpoint, endpoint.Address.ToString(), endpoint.Port) { }
 
         /// <summary>
         /// Client Id
@@ -125,46 +113,6 @@ namespace AIO.Net
         /// </summary>
         public long DatagramsReceived { get; protected set; }
 
-        #region Handle Events
-
-        /// <summary>
-        /// Handle client connecting notification
-        /// </summary>
-        protected virtual void OnConnecting()
-        {
-        }
-
-        /// <summary>
-        /// Handle client connected notification
-        /// </summary>
-        protected virtual void OnConnected()
-        {
-        }
-
-        /// <summary>
-        /// Handle client disconnecting notification
-        /// </summary>
-        protected virtual void OnDisconnecting()
-        {
-        }
-
-        /// <summary>
-        /// Handle client disconnected notification
-        /// </summary>
-        protected virtual void OnDisconnected()
-        {
-        }
-
-        /// <summary>
-        /// Handle error notification
-        /// </summary>
-        /// <param name="error">Socket error code</param>
-        protected virtual void OnError(SocketError error)
-        {
-        }
-
-        #endregion
-
         /// <summary>
         /// Send error notification
         /// </summary>
@@ -173,6 +121,36 @@ namespace AIO.Net
         {
             OnError(error);
         }
+
+        #region Handle Events
+
+        /// <summary>
+        /// Handle client connecting notification
+        /// </summary>
+        protected virtual void OnConnecting() { }
+
+        /// <summary>
+        /// Handle client connected notification
+        /// </summary>
+        protected virtual void OnConnected() { }
+
+        /// <summary>
+        /// Handle client disconnecting notification
+        /// </summary>
+        protected virtual void OnDisconnecting() { }
+
+        /// <summary>
+        /// Handle client disconnected notification
+        /// </summary>
+        protected virtual void OnDisconnected() { }
+
+        /// <summary>
+        /// Handle error notification
+        /// </summary>
+        /// <param name="error">Socket error code</param>
+        protected virtual void OnError(SocketError error) { }
+
+        #endregion
 
         #region Connect/Disconnect client
 
@@ -212,16 +190,12 @@ namespace AIO.Net
         /// <summary>
         /// Try to receive new data
         /// </summary>
-        protected virtual void TryReceive()
-        {
-        }
+        protected virtual void TryReceive() { }
 
         /// <summary>
         /// Clear send/receive buffers
         /// </summary>
-        protected virtual void ClearBuffers()
-        {
-        }
+        protected virtual void ClearBuffers() { }
 
         /// <summary>
         /// Create a new socket object
@@ -329,9 +303,7 @@ namespace AIO.Net
         /// <summary>
         /// Try to send pending data
         /// </summary>
-        protected virtual void TrySend()
-        {
-        }
+        protected virtual void TrySend() { }
 
         /// <inheritdoc />
         public virtual bool SendAsync(EndPoint endpoint, byte[] buffer)

@@ -1,10 +1,8 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2024-03-25
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System.Text;
+
+#endregion
 
 namespace AIO
 {

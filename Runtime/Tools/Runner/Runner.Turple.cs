@@ -1,12 +1,15 @@
-﻿using System;
-using System.Threading;
+﻿#region
+
+using System;
+
+#endregion
 
 namespace AIO
 {
     partial class Runner
     {
         #region Turple Update
-       
+
         /// <summary>
         /// 在 Update 中执行
         /// </summary>
@@ -20,7 +23,11 @@ namespace AIO
             }
 
             return;
-            void Action() => action.Invoke(param1);
+
+            void Action()
+            {
+                action.Invoke(param1);
+            }
         }
 
         /// <summary>
@@ -31,12 +38,16 @@ namespace AIO
             if (action is null) throw new ArgumentNullException(nameof(action));
             lock (actionQueuesUpdateFunc)
             {
-                actionQueuesFixedUpdateFunc.Enqueue(new Action(Action));
+                actionQueuesFixedUpdateFunc.Enqueue(Action);
                 noActionQueueToExecuteFixedUpdateFunc = false;
             }
 
             return;
-            void Action() => action.Invoke(param1);
+
+            void Action()
+            {
+                action.Invoke(param1);
+            }
         }
 
         /// <summary>
@@ -47,14 +58,18 @@ namespace AIO
             if (action is null) throw new ArgumentNullException(nameof(action));
             lock (actionQueuesUpdateFunc)
             {
-                actionQueuesLateUpdateFunc.Enqueue(new Action(Action));
+                actionQueuesLateUpdateFunc.Enqueue(Action);
                 noActionQueueToExecuteLateUpdateFunc = false;
             }
 
             return;
-            void Action() => action.Invoke(param1);
+
+            void Action()
+            {
+                action.Invoke(param1);
+            }
         }
-       
+
         /// <summary>
         /// 在 Update 中执行
         /// </summary>
@@ -68,7 +83,11 @@ namespace AIO
             }
 
             return;
-            void Action() => action.Invoke(param1, param2);
+
+            void Action()
+            {
+                action.Invoke(param1, param2);
+            }
         }
 
         /// <summary>
@@ -79,12 +98,16 @@ namespace AIO
             if (action is null) throw new ArgumentNullException(nameof(action));
             lock (actionQueuesUpdateFunc)
             {
-                actionQueuesFixedUpdateFunc.Enqueue(new Action(Action));
+                actionQueuesFixedUpdateFunc.Enqueue(Action);
                 noActionQueueToExecuteFixedUpdateFunc = false;
             }
 
             return;
-            void Action() => action.Invoke(param1, param2);
+
+            void Action()
+            {
+                action.Invoke(param1, param2);
+            }
         }
 
         /// <summary>
@@ -95,14 +118,18 @@ namespace AIO
             if (action is null) throw new ArgumentNullException(nameof(action));
             lock (actionQueuesUpdateFunc)
             {
-                actionQueuesLateUpdateFunc.Enqueue(new Action(Action));
+                actionQueuesLateUpdateFunc.Enqueue(Action);
                 noActionQueueToExecuteLateUpdateFunc = false;
             }
 
             return;
-            void Action() => action.Invoke(param1, param2);
+
+            void Action()
+            {
+                action.Invoke(param1, param2);
+            }
         }
-       
+
         /// <summary>
         /// 在 Update 中执行
         /// </summary>
@@ -116,7 +143,11 @@ namespace AIO
             }
 
             return;
-            void Action() => action.Invoke(param1, param2, param3);
+
+            void Action()
+            {
+                action.Invoke(param1, param2, param3);
+            }
         }
 
         /// <summary>
@@ -127,12 +158,16 @@ namespace AIO
             if (action is null) throw new ArgumentNullException(nameof(action));
             lock (actionQueuesUpdateFunc)
             {
-                actionQueuesFixedUpdateFunc.Enqueue(new Action(Action));
+                actionQueuesFixedUpdateFunc.Enqueue(Action);
                 noActionQueueToExecuteFixedUpdateFunc = false;
             }
 
             return;
-            void Action() => action.Invoke(param1, param2, param3);
+
+            void Action()
+            {
+                action.Invoke(param1, param2, param3);
+            }
         }
 
         /// <summary>
@@ -143,14 +178,18 @@ namespace AIO
             if (action is null) throw new ArgumentNullException(nameof(action));
             lock (actionQueuesUpdateFunc)
             {
-                actionQueuesLateUpdateFunc.Enqueue(new Action(Action));
+                actionQueuesLateUpdateFunc.Enqueue(Action);
                 noActionQueueToExecuteLateUpdateFunc = false;
             }
 
             return;
-            void Action() => action.Invoke(param1, param2, param3);
+
+            void Action()
+            {
+                action.Invoke(param1, param2, param3);
+            }
         }
-       
+
         /// <summary>
         /// 在 Update 中执行
         /// </summary>
@@ -164,7 +203,11 @@ namespace AIO
             }
 
             return;
-            void Action() => action.Invoke(param1, param2, param3, param4);
+
+            void Action()
+            {
+                action.Invoke(param1, param2, param3, param4);
+            }
         }
 
         /// <summary>
@@ -175,12 +218,16 @@ namespace AIO
             if (action is null) throw new ArgumentNullException(nameof(action));
             lock (actionQueuesUpdateFunc)
             {
-                actionQueuesFixedUpdateFunc.Enqueue(new Action(Action));
+                actionQueuesFixedUpdateFunc.Enqueue(Action);
                 noActionQueueToExecuteFixedUpdateFunc = false;
             }
 
             return;
-            void Action() => action.Invoke(param1, param2, param3, param4);
+
+            void Action()
+            {
+                action.Invoke(param1, param2, param3, param4);
+            }
         }
 
         /// <summary>
@@ -191,14 +238,18 @@ namespace AIO
             if (action is null) throw new ArgumentNullException(nameof(action));
             lock (actionQueuesUpdateFunc)
             {
-                actionQueuesLateUpdateFunc.Enqueue(new Action(Action));
+                actionQueuesLateUpdateFunc.Enqueue(Action);
                 noActionQueueToExecuteLateUpdateFunc = false;
             }
 
             return;
-            void Action() => action.Invoke(param1, param2, param3, param4);
+
+            void Action()
+            {
+                action.Invoke(param1, param2, param3, param4);
+            }
         }
-       
+
         /// <summary>
         /// 在 Update 中执行
         /// </summary>
@@ -212,7 +263,11 @@ namespace AIO
             }
 
             return;
-            void Action() => action.Invoke(param1, param2, param3, param4, param5);
+
+            void Action()
+            {
+                action.Invoke(param1, param2, param3, param4, param5);
+            }
         }
 
         /// <summary>
@@ -223,12 +278,16 @@ namespace AIO
             if (action is null) throw new ArgumentNullException(nameof(action));
             lock (actionQueuesUpdateFunc)
             {
-                actionQueuesFixedUpdateFunc.Enqueue(new Action(Action));
+                actionQueuesFixedUpdateFunc.Enqueue(Action);
                 noActionQueueToExecuteFixedUpdateFunc = false;
             }
 
             return;
-            void Action() => action.Invoke(param1, param2, param3, param4, param5);
+
+            void Action()
+            {
+                action.Invoke(param1, param2, param3, param4, param5);
+            }
         }
 
         /// <summary>
@@ -239,14 +298,18 @@ namespace AIO
             if (action is null) throw new ArgumentNullException(nameof(action));
             lock (actionQueuesUpdateFunc)
             {
-                actionQueuesLateUpdateFunc.Enqueue(new Action(Action));
+                actionQueuesLateUpdateFunc.Enqueue(Action);
                 noActionQueueToExecuteLateUpdateFunc = false;
             }
 
             return;
-            void Action() => action.Invoke(param1, param2, param3, param4, param5);
+
+            void Action()
+            {
+                action.Invoke(param1, param2, param3, param4, param5);
+            }
         }
-       
+
         /// <summary>
         /// 在 Update 中执行
         /// </summary>
@@ -260,7 +323,11 @@ namespace AIO
             }
 
             return;
-            void Action() => action.Invoke(param1, param2, param3, param4, param5, param6);
+
+            void Action()
+            {
+                action.Invoke(param1, param2, param3, param4, param5, param6);
+            }
         }
 
         /// <summary>
@@ -271,12 +338,16 @@ namespace AIO
             if (action is null) throw new ArgumentNullException(nameof(action));
             lock (actionQueuesUpdateFunc)
             {
-                actionQueuesFixedUpdateFunc.Enqueue(new Action(Action));
+                actionQueuesFixedUpdateFunc.Enqueue(Action);
                 noActionQueueToExecuteFixedUpdateFunc = false;
             }
 
             return;
-            void Action() => action.Invoke(param1, param2, param3, param4, param5, param6);
+
+            void Action()
+            {
+                action.Invoke(param1, param2, param3, param4, param5, param6);
+            }
         }
 
         /// <summary>
@@ -287,14 +358,18 @@ namespace AIO
             if (action is null) throw new ArgumentNullException(nameof(action));
             lock (actionQueuesUpdateFunc)
             {
-                actionQueuesLateUpdateFunc.Enqueue(new Action(Action));
+                actionQueuesLateUpdateFunc.Enqueue(Action);
                 noActionQueueToExecuteLateUpdateFunc = false;
             }
 
             return;
-            void Action() => action.Invoke(param1, param2, param3, param4, param5, param6);
+
+            void Action()
+            {
+                action.Invoke(param1, param2, param3, param4, param5, param6);
+            }
         }
-       
+
         /// <summary>
         /// 在 Update 中执行
         /// </summary>
@@ -308,7 +383,11 @@ namespace AIO
             }
 
             return;
-            void Action() => action.Invoke(param1, param2, param3, param4, param5, param6, param7);
+
+            void Action()
+            {
+                action.Invoke(param1, param2, param3, param4, param5, param6, param7);
+            }
         }
 
         /// <summary>
@@ -319,12 +398,16 @@ namespace AIO
             if (action is null) throw new ArgumentNullException(nameof(action));
             lock (actionQueuesUpdateFunc)
             {
-                actionQueuesFixedUpdateFunc.Enqueue(new Action(Action));
+                actionQueuesFixedUpdateFunc.Enqueue(Action);
                 noActionQueueToExecuteFixedUpdateFunc = false;
             }
 
             return;
-            void Action() => action.Invoke(param1, param2, param3, param4, param5, param6, param7);
+
+            void Action()
+            {
+                action.Invoke(param1, param2, param3, param4, param5, param6, param7);
+            }
         }
 
         /// <summary>
@@ -335,14 +418,18 @@ namespace AIO
             if (action is null) throw new ArgumentNullException(nameof(action));
             lock (actionQueuesUpdateFunc)
             {
-                actionQueuesLateUpdateFunc.Enqueue(new Action(Action));
+                actionQueuesLateUpdateFunc.Enqueue(Action);
                 noActionQueueToExecuteLateUpdateFunc = false;
             }
 
             return;
-            void Action() => action.Invoke(param1, param2, param3, param4, param5, param6, param7);
+
+            void Action()
+            {
+                action.Invoke(param1, param2, param3, param4, param5, param6, param7);
+            }
         }
-       
+
         /// <summary>
         /// 在 Update 中执行
         /// </summary>
@@ -356,7 +443,11 @@ namespace AIO
             }
 
             return;
-            void Action() => action.Invoke(param1, param2, param3, param4, param5, param6, param7, param8);
+
+            void Action()
+            {
+                action.Invoke(param1, param2, param3, param4, param5, param6, param7, param8);
+            }
         }
 
         /// <summary>
@@ -367,12 +458,16 @@ namespace AIO
             if (action is null) throw new ArgumentNullException(nameof(action));
             lock (actionQueuesUpdateFunc)
             {
-                actionQueuesFixedUpdateFunc.Enqueue(new Action(Action));
+                actionQueuesFixedUpdateFunc.Enqueue(Action);
                 noActionQueueToExecuteFixedUpdateFunc = false;
             }
 
             return;
-            void Action() => action.Invoke(param1, param2, param3, param4, param5, param6, param7, param8);
+
+            void Action()
+            {
+                action.Invoke(param1, param2, param3, param4, param5, param6, param7, param8);
+            }
         }
 
         /// <summary>
@@ -383,14 +478,18 @@ namespace AIO
             if (action is null) throw new ArgumentNullException(nameof(action));
             lock (actionQueuesUpdateFunc)
             {
-                actionQueuesLateUpdateFunc.Enqueue(new Action(Action));
+                actionQueuesLateUpdateFunc.Enqueue(Action);
                 noActionQueueToExecuteLateUpdateFunc = false;
             }
 
             return;
-            void Action() => action.Invoke(param1, param2, param3, param4, param5, param6, param7, param8);
+
+            void Action()
+            {
+                action.Invoke(param1, param2, param3, param4, param5, param6, param7, param8);
+            }
         }
-       
+
         /// <summary>
         /// 在 Update 中执行
         /// </summary>
@@ -404,7 +503,11 @@ namespace AIO
             }
 
             return;
-            void Action() => action.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9);
+
+            void Action()
+            {
+                action.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9);
+            }
         }
 
         /// <summary>
@@ -415,12 +518,16 @@ namespace AIO
             if (action is null) throw new ArgumentNullException(nameof(action));
             lock (actionQueuesUpdateFunc)
             {
-                actionQueuesFixedUpdateFunc.Enqueue(new Action(Action));
+                actionQueuesFixedUpdateFunc.Enqueue(Action);
                 noActionQueueToExecuteFixedUpdateFunc = false;
             }
 
             return;
-            void Action() => action.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9);
+
+            void Action()
+            {
+                action.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9);
+            }
         }
 
         /// <summary>
@@ -431,16 +538,22 @@ namespace AIO
             if (action is null) throw new ArgumentNullException(nameof(action));
             lock (actionQueuesUpdateFunc)
             {
-                actionQueuesLateUpdateFunc.Enqueue(new Action(Action));
+                actionQueuesLateUpdateFunc.Enqueue(Action);
                 noActionQueueToExecuteLateUpdateFunc = false;
             }
 
             return;
-            void Action() => action.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9);
+
+            void Action()
+            {
+                action.Invoke(param1, param2, param3, param4, param5, param6, param7, param8, param9);
+            }
         }
+
         #endregion
 
         #region Turple Update Fix
+
         #endregion
     }
 }

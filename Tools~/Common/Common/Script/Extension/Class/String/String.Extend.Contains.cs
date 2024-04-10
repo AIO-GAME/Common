@@ -1,14 +1,17 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
     public partial class ExtendString
     {
         /// <summary>
-        /// 判断集合中 是否有重复
+        ///     判断集合中 是否有重复
         /// </summary>
         /// <param name="chars">集合</param>
         /// <param name="targetChars">匹配集合</param>
@@ -20,7 +23,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 判断集合中 是否有重复
+        ///     判断集合中 是否有重复
         /// </summary>
         /// <param name="chars">集合</param>
         /// <param name="targetChars">匹配集合</param>
@@ -32,7 +35,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 判断集合中 是否有重复
+        ///     判断集合中 是否有重复
         /// </summary>
         /// <param name="chars">集合</param>
         /// <param name="targetChars">匹配集合</param>
@@ -41,15 +44,14 @@ namespace AIO
         {
             if (chars == null || targetChars == null) return false;
             foreach (var charx in chars)
-            {
-                if (charx == targetChars) return true;
-            }
+                if (charx == targetChars)
+                    return true;
 
             return false;
         }
 
         /// <summary>
-        /// 检查字符串是否包含指定的子字符串，忽略大小写
+        ///     检查字符串是否包含指定的子字符串，忽略大小写
         /// </summary>
         /// <param name="str">要搜索的字符串</param>
         /// <param name="needle">要在 haystack 中搜索的子字符串</param>
@@ -60,7 +62,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 检查字符串是否包含指定的子字符串，忽略大小写
+        ///     检查字符串是否包含指定的子字符串，忽略大小写
         /// </summary>
         /// <param name="str">要搜索的字符串</param>
         /// <param name="needle">要在 haystack 中搜索的子字符串</param>
@@ -72,7 +74,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 判断路径是是否包含指定字符
+        ///     判断路径是是否包含指定字符
         /// </summary>
         /// <returns>Ture:符合 False:不符合</returns>
         public static bool Contains(this string str, ICollection<int> list)
@@ -82,7 +84,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 是否包含指定字符
+        ///     是否包含指定字符
         /// </summary>
         /// <returns>Ture:符合 False:不符合</returns>
         public static bool Contains(this string str, int start, int end)

@@ -1,17 +1,17 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+#region
 
 using System;
 using System.IO;
 using System.Security.Cryptography;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -38,15 +38,12 @@ namespace AIO
                 if (string.IsNullOrEmpty(path)) throw new ArgumentNullException(nameof(path));
                 if (string.IsNullOrEmpty(directory)) throw new ArgumentNullException(nameof(directory));
 
-                if (!directory.EndsWith(Path.AltDirectorySeparatorChar.ToString()))
-                {
-                    directory += Path.AltDirectorySeparatorChar;
-                }
+                if (!directory.EndsWith(Path.AltDirectorySeparatorChar.ToString())) directory += Path.AltDirectorySeparatorChar;
 
                 try
                 {
                     // Optimization: Try a simple substring if possible
-                    path = path.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+                    path      = path.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
                     directory = directory.Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
 
                     if (path.StartsWith(directory, StringComparison.Ordinal)) return path.Substring(directory.Length);
@@ -55,8 +52,7 @@ namespace AIO
                     var pathUri = new Uri(path);
                     var folderUri = new Uri(directory);
 
-                    return Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString()
-                        .Replace('\\', Path.AltDirectorySeparatorChar));
+                    return Uri.UnescapeDataString(folderUri.MakeRelativeUri(pathUri).ToString().Replace('\\', Path.AltDirectorySeparatorChar));
                 }
                 catch (UriFormatException uriFormatException)
                 {
@@ -76,13 +72,10 @@ namespace AIO
                 {
                     using var hashAlgorithm = new MD5CryptoServiceProvider();
                     {
-                        int readLength; //每次读取长度
+                        int readLength;                    //每次读取长度
                         var output = new byte[bufferSize]; //计算MD5
                         var buffer = new byte[bufferSize];
-                        while ((readLength = inputStream.Read(buffer, 0, buffer.Length)) > 0)
-                        {
-                            hashAlgorithm.TransformBlock(buffer, 0, readLength, output, 0);
-                        }
+                        while ((readLength = inputStream.Read(buffer, 0, buffer.Length)) > 0) hashAlgorithm.TransformBlock(buffer, 0, readLength, output, 0);
 
                         //完成最后计算，必须调用(由于上一部循环已经完成所有运算，所以调用此方法时后面的两个参数都为0)
                         hashAlgorithm.TransformFinalBlock(buffer, 0, 0);
@@ -94,5 +87,7 @@ namespace AIO
                 }
             }
         }
+
+        #endregion
     }
 }

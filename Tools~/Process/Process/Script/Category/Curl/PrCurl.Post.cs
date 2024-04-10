@@ -4,20 +4,51 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrCurl
     {
         /// <summary>
+        /// HTTP POST data
+        /// </summary>
+        /// <param name="data">上传数据</param>
+        /// <param name="remote">远端地址</param>
+        /// <param name="option">可选参数</param>
+        /// <returns>结果执行器</returns>
+        [DebuggerHidden, DebuggerNonUserCode]
+        public static IExecutor Post(string remote, string data, Option option = default)
+        {
+            var str = new StringBuilder();
+            str.AppendFormat(Usage.Data, data.Replace("\"", "\\\""));
+            str.Append(Usage.XPost);
+            (option ?? new Option()).Append(str);
+            return Create().SetInArgs(str.Append(" ").Append(remote)).Execute();
+        }
+
+        #region Nested type: Option
+
+        /// <summary>
         /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
         /// </summary>
         public sealed class Option : IDisposable
         {
+            /// <summary>
+            /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            /// </summary>
+            public Option()
+            {
+                Header = new Dictionary<string, string>();
+            }
+
             /// <summary>
             /// 用户名和密码
             /// </summary>
@@ -58,13 +89,16 @@ namespace AIO
             /// </summary>
             public IDictionary<string, string> Header { get; private set; }
 
-            /// <summary>
-            /// 请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
-            /// </summary>
-            public Option()
+            #region IDisposable Members
+
+            /// <inheritdoc />
+            public void Dispose()
             {
-                Header = new Dictionary<string, string>();
+                Header?.Clear();
+                Header = null;
             }
+
+            #endregion
 
             /// <summary>
             /// 添加参数信息
@@ -74,9 +108,7 @@ namespace AIO
             {
                 if (Header != null)
                     foreach (var item in Header)
-                    {
                         str.AppendFormat(Usage.Header, item.Key, item.Value);
-                    }
 
                 if (!string.IsNullOrEmpty(userAndPassword) && userAndPassword.Contains(":"))
                     str.AppendFormat(Usage.User, userAndPassword);
@@ -111,31 +143,8 @@ namespace AIO
             {
                 Header.Add("Authorization", value);
             }
-
-            /// <inheritdoc />
-            public void Dispose()
-            {
-                Header?.Clear();
-                Header = null;
-            }
         }
 
-
-        /// <summary>
-        /// HTTP POST data
-        /// </summary>
-        /// <param name="data">上传数据</param>
-        /// <param name="remote">远端地址</param>
-        /// <param name="option">可选参数</param>
-        /// <returns>结果执行器</returns>
-        [DebuggerHidden, DebuggerNonUserCode]
-        public static IExecutor Post(string remote, string data, Option option = default)
-        {
-            var str = new StringBuilder();
-            str.AppendFormat(Usage.Data, data.Replace("\"", "\\\""));
-            str.Append(Usage.XPost);
-            (option ?? new Option()).Append(str);
-            return Create().SetInArgs(str.Append(" ").Append(remote)).Execute();
-        }
+        #endregion
     }
 }

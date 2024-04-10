@@ -1,10 +1,8 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2024-02-28
-|*|E-Mail:     |*| xinansky99@gmail.com
-|*|============|*/
+﻿#region
 
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -22,8 +20,8 @@ namespace AIO
             {
                 index = AHelper.Random.RandInt32(0, array.Count);
                 if (index == i) continue;
-                tmp = array[i];
-                array[i] = array[index];
+                tmp          = array[i];
+                array[i]     = array[index];
                 array[index] = tmp;
             }
         }

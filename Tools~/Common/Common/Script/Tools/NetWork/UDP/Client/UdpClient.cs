@@ -1,12 +1,10 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-07
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Net;
 using System.Net.Sockets;
+
+#endregion
 
 namespace AIO.Net
 {
@@ -16,6 +14,21 @@ namespace AIO.Net
     /// <remarks>Thread-safe</remarks>
     public partial class UdpClient : NetClient
     {
+        /// <inheritdoc />
+        public UdpClient(EndPoint endpoint, string address, int port) : base(endpoint, address, port) { }
+
+        /// <inheritdoc />
+        public UdpClient(IPAddress address, int port) : base(address, port) { }
+
+        /// <inheritdoc />
+        public UdpClient(string address, int port) : base(address, port) { }
+
+        /// <inheritdoc />
+        public UdpClient(DnsEndPoint endpoint) : base(endpoint) { }
+
+        /// <inheritdoc />
+        public UdpClient(IPEndPoint endpoint) : base(endpoint) { }
+
         /// <summary>
         /// Client option
         /// </summary>
@@ -27,6 +40,35 @@ namespace AIO.Net
             return new Socket(Endpoint.AddressFamily, SocketType.Dgram, ProtocolType.Udp);
         }
 
+        #region Send/Receive data
+
+        /// <inheritdoc />
+        protected override void ClearBuffers()
+        {
+            // Clear send buffers
+            SendNetBuffer.Clear();
+
+            // Update statistic
+            BytesPending = 0;
+            BytesSending = 0;
+        }
+
+        #endregion
+
+        /// <inheritdoc />
+        protected override void SendError(SocketError error)
+        {
+            // Skip disconnect errors
+            if (error == SocketError.ConnectionAborted ||
+                error == SocketError.ConnectionRefused ||
+                error == SocketError.ConnectionReset ||
+                error == SocketError.OperationAborted ||
+                error == SocketError.Shutdown)
+                return;
+
+            OnError(error);
+        }
+
         #region Multicast group
 
         /// <summary>
@@ -36,7 +78,7 @@ namespace AIO.Net
         public virtual void SetupMulticast(bool enable)
         {
             Option.ReuseAddress = enable;
-            Option.Multicast = enable;
+            Option.Multicast    = enable;
         }
 
         /// <summary>
@@ -47,10 +89,10 @@ namespace AIO.Net
         {
             if (Endpoint.AddressFamily == AddressFamily.InterNetworkV6)
                 Socket.SetSocketOption(SocketOptionLevel.IPv6, SocketOptionName.AddMembership,
-                    new IPv6MulticastOption(address));
+                                       new IPv6MulticastOption(address));
             else
                 Socket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.AddMembership,
-                    new MulticastOption(address));
+                                       new MulticastOption(address));
 
             // Call the client joined multicast group notification
             OnJoinedMulticastGroup(address);
@@ -73,10 +115,10 @@ namespace AIO.Net
         {
             if (Endpoint.AddressFamily == AddressFamily.InterNetworkV6)
                 Socket.SetSocketOption(SocketOptionLevel.IPv6, SocketOptionName.DropMembership,
-                    new IPv6MulticastOption(address));
+                                       new IPv6MulticastOption(address));
             else
                 Socket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.DropMembership,
-                    new MulticastOption(address));
+                                       new MulticastOption(address));
 
             // Call the client left multicast group notification
             OnLeftMulticastGroup(address);
@@ -89,21 +131,6 @@ namespace AIO.Net
         public virtual void LeaveMulticastGroup(string address)
         {
             LeaveMulticastGroup(IPAddress.Parse(address));
-        }
-
-        #endregion
-
-        #region Send/Receive data
-
-        /// <inheritdoc />
-        protected override void ClearBuffers()
-        {
-            // Clear send buffers
-            SendNetBuffer.Clear();
-
-            // Update statistic
-            BytesPending = 0;
-            BytesSending = 0;
         }
 
         #endregion
@@ -164,7 +191,7 @@ namespace AIO.Net
             if (ReceiveNetBuffer.Capacity == size)
             {
                 // Check the receive buffer limit
-                if (((2 * size) > Option.ReceiveBufferLimit) && (Option.ReceiveBufferLimit > 0))
+                if (2 * size > Option.ReceiveBufferLimit && Option.ReceiveBufferLimit > 0)
                 {
                     SendError(SocketError.NoBufferSpaceAvailable);
                     Disconnect();
@@ -199,8 +226,8 @@ namespace AIO.Net
             if (sent > 0)
             {
                 // Update statistic
-                BytesSending = 0;
-                BytesSent += sent;
+                BytesSending =  0;
+                BytesSent    += sent;
 
                 // Clear the send buffer
                 SendNetBuffer.Clear();
@@ -218,17 +245,13 @@ namespace AIO.Net
         /// Handle client joined multicast group notification
         /// </summary>
         /// <param name="address">IP address</param>
-        protected virtual void OnJoinedMulticastGroup(IPAddress address)
-        {
-        }
+        protected virtual void OnJoinedMulticastGroup(IPAddress address) { }
 
         /// <summary>
         /// Handle client left multicast group notification
         /// </summary>
         /// <param name="address">IP address</param>
-        protected virtual void OnLeftMulticastGroup(IPAddress address)
-        {
-        }
+        protected virtual void OnLeftMulticastGroup(IPAddress address) { }
 
         /// <summary>
         /// Handle datagram received notification
@@ -240,9 +263,7 @@ namespace AIO.Net
         /// <remarks>
         /// Notification is called when another datagram was received from some endpoint
         /// </remarks>
-        protected virtual void OnReceived(EndPoint endpoint, byte[] buffer, int offset, int size)
-        {
-        }
+        protected virtual void OnReceived(EndPoint endpoint, byte[] buffer, int offset, int size) { }
 
         /// <summary>
         /// Handle datagram sent notification
@@ -253,49 +274,8 @@ namespace AIO.Net
         /// Notification is called when a datagram was sent to the server.
         /// This handler could be used to send another datagram to the server for instance when the pending size is zero.
         /// </remarks>
-        protected virtual void OnSent(EndPoint endpoint, int sent)
-        {
-        }
+        protected virtual void OnSent(EndPoint endpoint, int sent) { }
 
         #endregion
-
-        /// <inheritdoc />
-        protected override void SendError(SocketError error)
-        {
-            // Skip disconnect errors
-            if (error == SocketError.ConnectionAborted ||
-                error == SocketError.ConnectionRefused ||
-                error == SocketError.ConnectionReset ||
-                error == SocketError.OperationAborted ||
-                error == SocketError.Shutdown)
-                return;
-
-            OnError(error);
-        }
-
-        /// <inheritdoc />
-        public UdpClient(EndPoint endpoint, string address, int port) : base(endpoint, address, port)
-        {
-        }
-
-        /// <inheritdoc />
-        public UdpClient(IPAddress address, int port) : base(address, port)
-        {
-        }
-
-        /// <inheritdoc />
-        public UdpClient(string address, int port) : base(address, port)
-        {
-        }
-
-        /// <inheritdoc />
-        public UdpClient(DnsEndPoint endpoint) : base(endpoint)
-        {
-        }
-
-        /// <inheritdoc />
-        public UdpClient(IPEndPoint endpoint) : base(endpoint)
-        {
-        }
     }
 }

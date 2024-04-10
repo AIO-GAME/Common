@@ -1,27 +1,24 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {
     [StructLayout(LayoutKind.Auto)]
     public abstract class OperationGenerics<TObject> : IOperation<TObject>, IOperation
     {
-        public event Action<TObject> Completed;
-        public  byte                 Progress   { get; protected set; }
-        public  bool                 IsDone     { get; protected set; }
-        public  TObject              Result     { get; protected set; }
-        public  bool                 IsValidate { get; protected set; }
-        public  bool                 IsRunning  => !IsDone;
-        private IEnumerator          _Coroutine;
-
-        protected abstract IEnumerator          CreateCoroutine();
-        protected abstract TaskAwaiter<TObject> CreateAsync();
-        protected abstract void                 CreateSync();
-        protected virtual  void                 OnReset()   { }
-        protected virtual  void                 OnDispose() { }
+        private IEnumerator _Coroutine;
+        public  byte        Progress   { get; protected set; }
+        public  bool        IsDone     { get; protected set; }
+        public  TObject     Result     { get; protected set; }
+        public  bool        IsValidate { get; protected set; }
+        public  bool        IsRunning  => !IsDone;
 
 
         protected IEnumerator Coroutine
@@ -33,14 +30,7 @@ namespace AIO
             }
         }
 
-        public void Reset()
-        {
-            OnReset();
-            Progress  = 0;
-            IsDone    = false;
-            Completed = null;
-            _Coroutine.Reset();
-        }
+        #region IOperation<TObject> Members
 
         public TObject Invoke()
         {
@@ -51,6 +41,34 @@ namespace AIO
             IsDone = true;
             InvokeOnCompleted();
             return Result;
+        }
+
+        #region IDisposable
+
+        void IDisposable.Dispose()
+        {
+            Dispose();
+        }
+
+        #endregion
+
+        #endregion
+
+        public event Action<TObject> Completed;
+
+        protected abstract IEnumerator          CreateCoroutine();
+        protected abstract TaskAwaiter<TObject> CreateAsync();
+        protected abstract void                 CreateSync();
+        protected virtual  void                 OnReset()   { }
+        protected virtual  void                 OnDispose() { }
+
+        public void Reset()
+        {
+            OnReset();
+            Progress  = 0;
+            IsDone    = false;
+            Completed = null;
+            _Coroutine.Reset();
         }
 
         public TaskAwaiter<TObject> GetAwaiter()
@@ -86,6 +104,21 @@ namespace AIO
             Completed = null;
         }
 
+        public sealed override string ToString()
+        {
+            return string.Empty;
+        }
+
+        public sealed override bool Equals(object obj)
+        {
+            return false;
+        }
+
+        public sealed override int GetHashCode()
+        {
+            return 0;
+        }
+
         #region Constructor
 
         protected OperationGenerics()
@@ -107,15 +140,26 @@ namespace AIO
 
         #region operator implicit
 
-        public static implicit operator TObject(OperationGenerics<TObject>              operationGenerics) => operationGenerics.Result;
-        public static implicit operator TaskAwaiter<TObject>(OperationGenerics<TObject> operationGenerics) => operationGenerics.GetAwaiter();
+        public static implicit operator TObject(OperationGenerics<TObject> operationGenerics)
+        {
+            return operationGenerics.Result;
+        }
+
+        public static implicit operator TaskAwaiter<TObject>(OperationGenerics<TObject> operationGenerics)
+        {
+            return operationGenerics.GetAwaiter();
+        }
 
         #endregion
 
         #region IHandle<TObject>
 
-        TaskAwaiter<TObject> IOperation<TObject>.GetAwaiter() => GetAwaiter();
-        TObject IOperation<TObject>.             Result       => Result;
+        TaskAwaiter<TObject> IOperation<TObject>.GetAwaiter()
+        {
+            return GetAwaiter();
+        }
+
+        TObject IOperation<TObject>.Result => Result;
 
         event Action<TObject> IOperation<TObject>.Completed
         {
@@ -134,24 +178,30 @@ namespace AIO
 
         #endregion
 
-        #region IDisposable
-
-        void IDisposable.Dispose() => Dispose();
-
-        #endregion
-
         #region IEnumerator
 
-        void IEnumerator.  Reset()    => Reset();
-        bool IEnumerator.  MoveNext() => MoveNext();
-        object IEnumerator.Current    => Coroutine.Current;
+        void IEnumerator.Reset()
+        {
+            Reset();
+        }
+
+        bool IEnumerator.MoveNext()
+        {
+            return MoveNext();
+        }
+
+        object IEnumerator.Current => Coroutine.Current;
 
         #endregion
 
         #region IOperation
 
-        object IOperation.Invoke() => Invoke();
-        object IOperation.Result   => Result;
+        object IOperation.Invoke()
+        {
+            return Invoke();
+        }
+
+        object IOperation.Result => Result;
 
         event Action<object> IOperation.Completed
         {
@@ -170,9 +220,5 @@ namespace AIO
         }
 
         #endregion
-
-        public sealed override string ToString()         => string.Empty;
-        public sealed override bool   Equals(object obj) => false;
-        public sealed override int    GetHashCode()      => 0;
     }
 }

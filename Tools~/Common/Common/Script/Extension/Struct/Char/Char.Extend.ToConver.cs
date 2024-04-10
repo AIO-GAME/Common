@@ -1,16 +1,13 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+#region
 
+using System;
+using System.Runtime.CompilerServices;
+using System.Text;
+
+#endregion
 
 namespace AIO
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Text;
-
     /// <summary>
     /// 字符扩展
     /// </summary>
@@ -31,7 +28,7 @@ namespace AIO
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte[] ToConverBytes(this char value, in Encoding encoding = null)
         {
-            return (encoding ?? Encoding.Default).GetBytes(new char[] { value });
+            return (encoding ?? Encoding.Default).GetBytes(new[] { value });
         }
 
         /// <summary>

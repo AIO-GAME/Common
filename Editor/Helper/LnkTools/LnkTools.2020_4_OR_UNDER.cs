@@ -1,10 +1,4 @@
-﻿/*|============|*|
-|*|Author:     |*| USER
-|*|Date:       |*| 2024-01-08
-|*|E-Mail:     |*| xinansky99@gmail.com
-|*|============|*/
-
-#if !UNITY_2021_1_OR_NEWER
+﻿#if !UNITY_2021_1_OR_NEWER
 using UnityEditor;
 using UnityEngine;
 

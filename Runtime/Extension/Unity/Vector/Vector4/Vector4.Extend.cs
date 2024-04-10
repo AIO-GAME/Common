@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEngine
 {
@@ -95,10 +99,12 @@ namespace AIO.UEngine
         /// <summary>
         /// Is the <see cref="Vector4.x"/> or <see cref="Vector4.y"/> or <see cref="Vector4.z"/> or <see cref="Vector4.w"/> NaN?
         /// </summary>
-        public static bool IsNaN(this Vector4 vector) =>
-            float.IsNaN(vector.x) ||
-            float.IsNaN(vector.y) ||
-            float.IsNaN(vector.z) ||
-            float.IsNaN(vector.w);
+        public static bool IsNaN(this Vector4 vector)
+        {
+            return float.IsNaN(vector.x) ||
+                   float.IsNaN(vector.y) ||
+                   float.IsNaN(vector.z) ||
+                   float.IsNaN(vector.w);
+        }
     }
 }

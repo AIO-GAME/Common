@@ -4,12 +4,18 @@
 
 |||✩ - - - - - |*/
 
+#region
+
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrGit
     {
+        #region Nested type: Helper
+
         /// <summary>
         /// <see cref="PrGit"/> <see cref="Helper"/>
         /// </summary>
@@ -65,5 +71,7 @@ namespace AIO
                 return -1;
             }
         }
+
+        #endregion
     }
 }

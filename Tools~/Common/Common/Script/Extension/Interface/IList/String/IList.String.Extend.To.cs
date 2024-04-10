@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
@@ -52,6 +56,5 @@ namespace AIO
                 value[i] = string.IsNullOrEmpty(value[i]) ? value[i] : value[i].ToUpperInvariant();
             return value;
         }
-
     }
 }

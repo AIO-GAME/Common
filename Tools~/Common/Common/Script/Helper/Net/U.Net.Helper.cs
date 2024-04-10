@@ -1,8 +1,4 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-03
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.IO;
@@ -11,12 +7,15 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using AIO;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: Net
+
         /// <summary>
         /// 网络 工具类
         /// </summary>
@@ -77,9 +76,9 @@ namespace AIO
             /// <param name="stream">文件流</param>
             /// <param name="bufferSize">容量大小</param>
             /// <param name="cancellationToken">取消令牌</param>
-            internal static async Task RemoveFileHeaderAsync(Stream stream,
-                int bufferSize = BUFFER_SIZE,
-                CancellationToken cancellationToken = default)
+            internal static async Task RemoveFileHeaderAsync(Stream            stream,
+                                                             int               bufferSize        = BUFFER_SIZE,
+                                                             CancellationToken cancellationToken = default)
             {
                 if (cancellationToken == default) cancellationToken = CancellationToken.None;
                 var headerSize = CODE.Length;
@@ -146,9 +145,9 @@ namespace AIO
             }
 
             internal static async Task<FileStream> AddFileHeaderAsync(
-                string localPath,
+                string             localPath,
                 Func<Task<string>> remoteMD5Cb,
-                bool isOverWrite = false, CancellationToken cancellationToken = default)
+                bool               isOverWrite = false, CancellationToken cancellationToken = default)
             {
                 if (cancellationToken == default) cancellationToken = CancellationToken.None;
                 localPath = localPath.Replace('/', '\\');
@@ -196,5 +195,7 @@ namespace AIO
                 return outputStream;
             }
         }
+
+        #endregion
     }
 }

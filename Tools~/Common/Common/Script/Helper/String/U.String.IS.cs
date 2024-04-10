@@ -1,14 +1,20 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Globalization;
 using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: String
+
         public partial class String
         {
             /// <summary>
@@ -24,7 +30,7 @@ namespace AIO
             /// </summary>
             public static bool IsValidateChinese(in string value)
             {
-                return Regex.IsMatch(value, $@"^[/u4e00-/u9fa5],{{0,}}$");
+                return Regex.IsMatch(value, @"^[/u4e00-/u9fa5],{0,}$");
             }
 
             /// <summary>
@@ -113,8 +119,8 @@ namespace AIO
             public static bool IsValidateDate(in string value)
             {
                 var bValids = Regex.IsMatch(value,
-                    @"^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$");
-                return (bValids && string.Compare(value, "1753-01-01", StringComparison.InvariantCulture) >= 0);
+                                            @"^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$");
+                return bValids && string.Compare(value, "1753-01-01", StringComparison.InvariantCulture) >= 0;
             }
 
             /// <summary>
@@ -139,7 +145,7 @@ namespace AIO
             public static bool IsValidateIPSect(in string value)
             {
                 return Regex.IsMatch(value,
-                    @"^（（2[0-4]\d|25[0-5]|[01]?\d\d?）\.）{2}（（2[0-4]\d|25[0-5]|[01]?\d\d?|\*）\.）（2[0-4]\d|25[0-5]|[01]?\d\d?|\*）$");
+                                     @"^（（2[0-4]\d|25[0-5]|[01]?\d\d?）\.）{2}（（2[0-4]\d|25[0-5]|[01]?\d\d?|\*）\.）（2[0-4]\d|25[0-5]|[01]?\d\d?|\*）$");
             }
 
             /// <summary>
@@ -148,7 +154,7 @@ namespace AIO
             public static bool IsValidateEmail(in string value)
             {
                 return Regex.IsMatch(value,
-                    @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
+                                     @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
             }
 
             /// <summary>
@@ -193,8 +199,8 @@ namespace AIO
                 //生日验证
                 if (DateTime.TryParse(birth, out _) == false) return false;
 
-                var arrVerifyCode = ("1,0,x,9,8,7,6,5,4,3,2").Split(',');
-                var Wi = ("7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2").Split(',');
+                var arrVerifyCode = "1,0,x,9,8,7,6,5,4,3,2".Split(',');
+                var Wi = "7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2".Split(',');
                 var Ai = value.Remove(17).ToCharArray();
                 var sum = 0;
                 for (var i = 0; i < 17; i++) sum += int.Parse(Wi[i]) * int.Parse(Ai[i].ToString());
@@ -236,16 +242,15 @@ namespace AIO
                 if (value.Length != 15) return value;
                 var iS = 0;
                 // 加权因子常数
-                var iW = new int[] { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 };
+                var iW = new[] { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 };
                 // 校验码常数
                 const string LastCode = "10X98765432";
                 // 新身份证号
                 var perIDNew = value.Substring(0, 6) + "19" + value.Substring(6, 9);
 
                 if (DateTime.TryParseExact(perIDNew.Substring(6, 8), "yyMMdd", null, DateTimeStyles.None, out var dt))
-                {
                     perIDNew = perIDNew.Substring(0, 6) + dt.ToString("yyyyMMdd") + perIDNew.Substring(14);
-                } // 出生日期无效，直接返回原字符串
+                // 出生日期无效，直接返回原字符串
                 else return value;
 
                 // 进行加权求和
@@ -263,10 +268,7 @@ namespace AIO
             /// </summary>
             public static string GetHttpHost(in string value)
             {
-                if (Uri.TryCreate(value, UriKind.Absolute, out var uriResult) && uriResult.Scheme == Uri.UriSchemeHttp)
-                {
-                    return uriResult.Host + (uriResult.IsDefaultPort ? "" : ":" + uriResult.Port);
-                }
+                if (Uri.TryCreate(value, UriKind.Absolute, out var uriResult) && uriResult.Scheme == Uri.UriSchemeHttp) return uriResult.Host + (uriResult.IsDefaultPort ? "" : ":" + uriResult.Port);
 
                 return "";
             }
@@ -276,7 +278,7 @@ namespace AIO
             /// </summary>
             public static MatchCollection GetRegexMatches(in string value, string Regex)
             {
-                return new Regex(@Regex).Matches(value);
+                return new Regex(Regex).Matches(value);
             }
 
 
@@ -285,10 +287,7 @@ namespace AIO
             /// </summary>
             public static async Task<bool> IsValidateUrl(string url, string unit = "http://")
             {
-                if (!Uri.TryCreate(url, UriKind.Absolute, out _))
-                {
-                    url = string.Concat(unit + url);
-                }
+                if (!Uri.TryCreate(url, UriKind.Absolute, out _)) url = string.Concat(unit + url);
 
                 using (var httpClient = new HttpClient())
                 {
@@ -297,7 +296,7 @@ namespace AIO
                     try
                     {
                         var response = await httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Head, url));
-                        return (response.StatusCode == HttpStatusCode.OK);
+                        return response.StatusCode == HttpStatusCode.OK;
                     }
                     catch (HttpRequestException ex) when (ex.InnerException is OperationCanceledException)
                     {
@@ -310,5 +309,7 @@ namespace AIO
                 }
             }
         }
+
+        #endregion
     }
 }

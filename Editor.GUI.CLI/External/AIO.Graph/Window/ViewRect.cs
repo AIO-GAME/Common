@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -28,46 +32,46 @@ namespace AIO.UEditor
 
         public ViewRect(float minWidth, float minHeight)
         {
-            MinWidth = minWidth;
-            MaxWidth = minWidth;
-            MinHeight = minHeight;
-            MaxHeight = minWidth;
-            IsAllowHorizontal = false;
-            IsAllowVertical = false;
+            MinWidth            = minWidth;
+            MaxWidth            = minWidth;
+            MinHeight           = minHeight;
+            MaxHeight           = minWidth;
+            IsAllowHorizontal   = false;
+            IsAllowVertical     = false;
             DragHorizontalWidth = 1;
-            DragVerticalHeight = 1;
-            IsDragHorizontal = false;
-            IsDragVertical = false;
-            IsShow = true;
+            DragVerticalHeight  = 1;
+            IsDragHorizontal    = false;
+            IsDragVertical      = false;
+            IsShow              = true;
             Current = new Rect
             {
-                width = minWidth,
-                height = minHeight,
+                width  = minWidth,
+                height = minHeight
             };
             RectDragHorizontal = new Rect();
-            RectDragVertical = new Rect();
+            RectDragVertical   = new Rect();
         }
 
         public ViewRect(float minWidth, float maxWidth, float minHeight, float maxHeight)
         {
-            MinWidth = minWidth;
-            MaxWidth = maxWidth;
-            MinHeight = minHeight;
-            MaxHeight = maxHeight;
-            IsAllowHorizontal = false;
-            IsAllowVertical = false;
+            MinWidth            = minWidth;
+            MaxWidth            = maxWidth;
+            MinHeight           = minHeight;
+            MaxHeight           = maxHeight;
+            IsAllowHorizontal   = false;
+            IsAllowVertical     = false;
             DragHorizontalWidth = 1;
-            DragVerticalHeight = 1;
-            IsDragHorizontal = false;
-            IsDragVertical = false;
-            IsShow = true;
+            DragVerticalHeight  = 1;
+            IsDragHorizontal    = false;
+            IsDragVertical      = false;
+            IsShow              = true;
             Current = new Rect
             {
-                width = (minWidth + maxWidth) / 2,
-                height = (minHeight + maxHeight) / 2,
+                width  = (minWidth + maxWidth) / 2,
+                height = (minHeight + maxHeight) / 2
             };
             RectDragHorizontal = new Rect();
-            RectDragVertical = new Rect();
+            RectDragVertical   = new Rect();
         }
 
         private Rect Current;
@@ -188,9 +192,9 @@ namespace AIO.UEditor
         {
             if (!IsShow || !IsAllowHorizontal || !IsDragHorizontal) return;
             var temp = Current.width + e.delta.x;
-            if (temp < MinWidth) Current.width = MinWidth;
+            if (temp < MinWidth) Current.width      = MinWidth;
             else if (temp > MaxWidth) Current.width = MaxWidth;
-            else Current.width = temp;
+            else Current.width                      = temp;
             e.Use();
         }
 
@@ -198,9 +202,9 @@ namespace AIO.UEditor
         {
             if (!IsShow || !IsAllowVertical || !IsDragVertical) return;
             var temp = Current.height + e.delta.y;
-            if (temp < MinHeight) Current.height = MinHeight;
+            if (temp < MinHeight) Current.height      = MinHeight;
             else if (temp > MaxHeight) Current.height = MaxHeight;
-            else Current.height = temp;
+            else Current.height                       = temp;
             e.Use();
         }
 
@@ -217,7 +221,7 @@ namespace AIO.UEditor
             {
                 rect.height -= DragVerticalHeight;
                 RectDragVertical = new Rect(rect.x, rect.y + rect.height,
-                    rect.width, DragVerticalHeight);
+                                            rect.width, DragVerticalHeight);
                 EditorGUIUtility.AddCursorRect(RectDragVertical, MouseCursor.ResizeVertical);
             }
 
@@ -225,7 +229,7 @@ namespace AIO.UEditor
             {
                 rect.width -= DragHorizontalWidth;
                 RectDragHorizontal = new Rect(rect.x + rect.width, rect.y,
-                    DragHorizontalWidth, rect.height);
+                                              DragHorizontalWidth, rect.height);
                 EditorGUIUtility.AddCursorRect(RectDragHorizontal, MouseCursor.ResizeHorizontal);
             }
 

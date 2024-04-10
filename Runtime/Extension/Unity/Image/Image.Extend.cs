@@ -1,4 +1,8 @@
+#region
+
 using UnityEngine.UI;
+
+#endregion
 
 namespace AIO.UEngine
 {
@@ -13,7 +17,7 @@ namespace AIO.UEngine
         {
             if (image == null) return;
             var color = image.color;
-            color.a = alpha;
+            color.a     = alpha;
             image.color = color;
         }
     }

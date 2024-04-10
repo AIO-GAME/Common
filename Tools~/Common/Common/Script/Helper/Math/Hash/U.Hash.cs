@@ -1,20 +1,18 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
-
+#region
 
 using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using AIO;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: Hash
+
         /// <summary>
         /// hash工具
         /// </summary>
@@ -180,5 +178,7 @@ namespace AIO
 
             #endregion
         }
+
+        #endregion
     }
 }

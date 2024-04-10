@@ -1,12 +1,10 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+#region
 
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
@@ -81,7 +79,8 @@ namespace AIO
         /// 获取 集合 最小值
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T GetMinValue<T>(this IList<T> array) where T : IComparable<T>
+        public static T GetMinValue<T>(this IList<T> array)
+        where T : IComparable<T>
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
 
@@ -151,7 +150,8 @@ namespace AIO
         /// <typeparam name="T">泛型</typeparam>
         /// <returns>极值</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T GetMaxValue<T>(this IList<T> array) where T : IComparable<T>
+        public static T GetMaxValue<T>(this IList<T> array)
+        where T : IComparable<T>
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
 
@@ -170,7 +170,8 @@ namespace AIO
         /// 获取 集合最大最小值 第一个Max 第二个Min
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static (T, T) GetMaxMinValue<T>(this IList<T> array) where T : IComparable
+        public static (T, T) GetMaxMinValue<T>(this IList<T> array)
+        where T : IComparable
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
 

@@ -1,12 +1,30 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+
+#endregion
 
 namespace AIO
 {
     public partial class Buffer<T> : IList<T>, IDisposable
     {
+        #region IDisposable Members
+
+        /// <summary>
+        /// 释放
+        /// </summary>
+        public virtual void Dispose()
+        {
+            Arrays = null;
+        }
+
+        #endregion
+
+        #region IList<T> Members
+
         /// <summary>
         /// 是否为只读
         /// </summary>
@@ -30,10 +48,8 @@ namespace AIO
         public int IndexOf(T item)
         {
             for (var i = 0; i < WriteIndex; i++)
-            {
                 if (Arrays[i].Equals(item))
                     return i;
-            }
 
             return -1;
         }
@@ -112,13 +128,11 @@ namespace AIO
         public bool Remove(T item)
         {
             for (var index = 0; index < WriteIndex; index++)
-            {
                 if (Arrays[index].Equals(item))
                 {
                     RemoveAt(index);
                     return true;
                 }
-            }
 
             return false;
         }
@@ -137,9 +151,6 @@ namespace AIO
             return GetEnumerator();
         }
 
-        /// <summary>
-        /// 释放
-        /// </summary>
-        public virtual void Dispose() { Arrays = null; }
+        #endregion
     }
 }

@@ -1,10 +1,38 @@
+#region
+
 using System;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEngine
 {
     partial class GameObjectExtend
     {
+        public static void SetTag(this GameObject trans, in string tag)
+        {
+            trans.tag = tag;
+        }
+
+        public static void SetTagAll(this GameObject trans, in string tag)
+        {
+            trans.tag = tag;
+            foreach (Transform item in trans.transform)
+            {
+                item.tag = tag;
+                if (item.childCount > 0) item.SetTagAll(tag);
+            }
+        }
+
+        public static void SetTagChildes(this GameObject trans, in string tag)
+        {
+            foreach (Transform item in trans.transform)
+            {
+                item.tag = tag;
+                if (item.childCount > 0) item.SetTagAll(tag);
+            }
+        }
+
         #region Set Parent
 
         /// <summary>
@@ -47,7 +75,7 @@ namespace AIO.UEngine
         public static void SetPosLocalX(this GameObject go, in float v1)
         {
             var gv3 = go.transform.localPosition;
-            gv3.x = v1;
+            gv3.x                      = v1;
             go.transform.localPosition = gv3;
         }
 
@@ -55,7 +83,7 @@ namespace AIO.UEngine
         public static void SetPosLocalY(this GameObject go, in float v1)
         {
             var gv3 = go.transform.localPosition;
-            gv3.y = v1;
+            gv3.y                      = v1;
             go.transform.localPosition = gv3;
         }
 
@@ -63,7 +91,7 @@ namespace AIO.UEngine
         public static void SetPosLocalZ(this GameObject go, in float v1)
         {
             var gv3 = go.transform.localPosition;
-            gv3.z = v1;
+            gv3.z                      = v1;
             go.transform.localPosition = gv3;
         }
 
@@ -71,8 +99,8 @@ namespace AIO.UEngine
         public static void SetPosLocalXY(this GameObject go, in float v1, in float v2)
         {
             var gv3 = go.transform.localPosition;
-            gv3.x = v1;
-            gv3.y = v2;
+            gv3.x                      = v1;
+            gv3.y                      = v2;
             go.transform.localPosition = gv3;
         }
 
@@ -80,8 +108,8 @@ namespace AIO.UEngine
         public static void SetPosLocalXY(this GameObject go, in Vector2 v12)
         {
             var gv3 = go.transform.localPosition;
-            gv3.x = v12.x;
-            gv3.y = v12.y;
+            gv3.x                      = v12.x;
+            gv3.y                      = v12.y;
             go.transform.localPosition = gv3;
         }
 
@@ -89,8 +117,8 @@ namespace AIO.UEngine
         public static void SetPosLocalYZ(this GameObject go, in float v1, in float v2)
         {
             var gv3 = go.transform.localPosition;
-            gv3.y = v1;
-            gv3.z = v2;
+            gv3.y                      = v1;
+            gv3.z                      = v2;
             go.transform.localPosition = gv3;
         }
 
@@ -98,8 +126,8 @@ namespace AIO.UEngine
         public static void SetPosLocalYZ(this GameObject go, in Vector2 v12)
         {
             var gv3 = go.transform.localPosition;
-            gv3.y = v12.x;
-            gv3.z = v12.y;
+            gv3.y                      = v12.x;
+            gv3.z                      = v12.y;
             go.transform.localPosition = gv3;
         }
 
@@ -107,8 +135,8 @@ namespace AIO.UEngine
         public static void SetPosLocalXZ(this GameObject go, in float v1, in float v2)
         {
             var gv3 = go.transform.localPosition;
-            gv3.x = v1;
-            gv3.z = v2;
+            gv3.x                      = v1;
+            gv3.z                      = v2;
             go.transform.localPosition = gv3;
         }
 
@@ -116,8 +144,8 @@ namespace AIO.UEngine
         public static void SetPosLocalXZ(this GameObject go, in Vector2 v12)
         {
             var gv3 = go.transform.localPosition;
-            gv3.x = v12.x;
-            gv3.z = v12.y;
+            gv3.x                      = v12.x;
+            gv3.z                      = v12.y;
             go.transform.localPosition = gv3;
         }
 
@@ -146,7 +174,7 @@ namespace AIO.UEngine
         public static void SetPosX(this GameObject go, in float v1)
         {
             var gv3 = go.transform.position;
-            gv3.x = v1;
+            gv3.x                 = v1;
             go.transform.position = gv3;
         }
 
@@ -154,7 +182,7 @@ namespace AIO.UEngine
         public static void SetPosY(this GameObject go, in float v1)
         {
             var gv3 = go.transform.position;
-            gv3.y = v1;
+            gv3.y                 = v1;
             go.transform.position = gv3;
         }
 
@@ -162,7 +190,7 @@ namespace AIO.UEngine
         public static void SetPosZ(this GameObject go, in float v1)
         {
             var gv3 = go.transform.position;
-            gv3.z = v1;
+            gv3.z                 = v1;
             go.transform.position = gv3;
         }
 
@@ -170,8 +198,8 @@ namespace AIO.UEngine
         public static void SetPosXY(this GameObject go, in float v1, in float v2)
         {
             var gv3 = go.transform.position;
-            gv3.x = v1;
-            gv3.y = v2;
+            gv3.x                 = v1;
+            gv3.y                 = v2;
             go.transform.position = gv3;
         }
 
@@ -179,8 +207,8 @@ namespace AIO.UEngine
         public static void SetPosXY(this GameObject go, in Vector2 v12)
         {
             var gv3 = go.transform.position;
-            gv3.x = v12.x;
-            gv3.y = v12.y;
+            gv3.x                 = v12.x;
+            gv3.y                 = v12.y;
             go.transform.position = gv3;
         }
 
@@ -188,8 +216,8 @@ namespace AIO.UEngine
         public static void SetPosYZ(this GameObject go, in float v1, in float v2)
         {
             var gv3 = go.transform.position;
-            gv3.y = v1;
-            gv3.z = v2;
+            gv3.y                 = v1;
+            gv3.z                 = v2;
             go.transform.position = gv3;
         }
 
@@ -197,8 +225,8 @@ namespace AIO.UEngine
         public static void SetPosYZ(this GameObject go, in Vector2 v12)
         {
             var gv3 = go.transform.position;
-            gv3.y = v12.x;
-            gv3.z = v12.y;
+            gv3.y                 = v12.x;
+            gv3.z                 = v12.y;
             go.transform.position = gv3;
         }
 
@@ -206,8 +234,8 @@ namespace AIO.UEngine
         public static void SetPosXZ(this GameObject go, in float v1, in float v2)
         {
             var gv3 = go.transform.position;
-            gv3.x = v1;
-            gv3.z = v2;
+            gv3.x                 = v1;
+            gv3.z                 = v2;
             go.transform.position = gv3;
         }
 
@@ -215,8 +243,8 @@ namespace AIO.UEngine
         public static void SetPosXZ(this GameObject go, in Vector2 v12)
         {
             var gv3 = go.transform.position;
-            gv3.x = v12.x;
-            gv3.z = v12.y;
+            gv3.x                 = v12.x;
+            gv3.z                 = v12.y;
             go.transform.position = gv3;
         }
 
@@ -303,29 +331,5 @@ namespace AIO.UEngine
         }
 
         #endregion
-
-        public static void SetTag(this GameObject trans, in string tag)
-        {
-            trans.tag = tag;
-        }
-
-        public static void SetTagAll(this GameObject trans, in string tag)
-        {
-            trans.tag = tag;
-            foreach (Transform item in trans.transform)
-            {
-                item.tag = tag;
-                if (item.childCount > 0) item.SetTagAll(tag);
-            }
-        }
-
-        public static void SetTagChildes(this GameObject trans, in string tag)
-        {
-            foreach (Transform item in trans.transform)
-            {
-                item.tag = tag;
-                if (item.childCount > 0) item.SetTagAll(tag);
-            }
-        }
     }
 }

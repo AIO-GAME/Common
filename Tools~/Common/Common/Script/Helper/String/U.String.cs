@@ -1,33 +1,37 @@
-﻿/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
-
+﻿#region
 
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
-using AIO;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: String
+
         /// <summary>
         /// 字符串工具库
         /// </summary>
         public partial class String
         {
+            private const           int         gLen = 1 * 1024 * 3;
             private static readonly StringBlock BlockTemplate;
             private static readonly StringBlock SpaceTemplate;
+
+            private static readonly char[] gHex =
+                { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+
+            private static char[] gChars;
 
             static String()
             {
                 BlockTemplate = new StringBlock("╔╗║╚╝══║", 75);
                 SpaceTemplate = new StringBlock("        ", 75);
-                CacheBuilder = new StringBuilder(1024);
+                CacheBuilder  = new StringBuilder(1024);
             }
 
             /// <summary>
@@ -69,23 +73,23 @@ namespace AIO
 
                 for (var i = intK; i > unitNum; i--)
                 {
-                    var intL = (i == intK && intM != 0) ? intM : 4;
+                    var intL = i == intK && intM != 0 ? intM : 4;
                     var four = num.Substring(index, intL); //得到一组四位数
-                    for (var j = 0; j < four.Length; j++) //内层循环在该组中的每一位数上循环
+                    for (var j = 0; j < four.Length; j++)  //内层循环在该组中的每一位数上循环
                     {
                         var n = Convert.ToInt32(four.Substring(j, 1));
                         if (n == 0)
                         {
                             if (j < four.Length - 1
-                                && Convert.ToInt32(four.Substring(j + 1, 1)) > 0
-                                && !str.ToString().EndsWith(Unit.Chinese.CNSNum[n]))
+                             && Convert.ToInt32(four.Substring(j + 1, 1)) > 0
+                             && !str.ToString().EndsWith(Unit.Chinese.CNSNum[n]))
                                 str.Append(Unit.Chinese.CNSNum[n]);
                         }
                         else
                         {
                             if (!(n == 1
-                                  && (str.ToString().EndsWith(Unit.Chinese.CNSNum[0]) | str.Length == 0)
-                                  && j == four.Length - 2))
+                               && str.ToString().EndsWith(Unit.Chinese.CNSNum[0]) | (str.Length == 0)
+                               && j == four.Length - 2))
                                 str.Append(Unit.Chinese.CNSNum[n]);
                             str.Append(Unit.Chinese.CNSDigit[four.Length - j - 1]);
                         }
@@ -97,7 +101,10 @@ namespace AIO
                         if (Convert.ToInt32(four) != 0)
                             str.Append(Unit.Chinese.CNSUnits[i - 1]); //如果所有4位不全是0则加上单位",万,",",亿,"等
                     }
-                    else str.Append(Unit.Chinese.CNSUnits[i - 1]); //处理最高位的一组,最后必须加上单位
+                    else
+                    {
+                        str.Append(Unit.Chinese.CNSUnits[i - 1]); //处理最高位的一组,最后必须加上单位
+                    }
                 }
 
                 return str.ToString();
@@ -116,23 +123,23 @@ namespace AIO
 
                 for (var i = intK; i > 0; i--)
                 {
-                    var intL = (i == intK && intM != 0) ? intM : 4;
+                    var intL = i == intK && intM != 0 ? intM : 4;
                     var four = num.Substring(index, intL); //得到一组四位数
-                    for (var j = 0; j < four.Length; j++) //内层循环在该组中的每一位数上循环
+                    for (var j = 0; j < four.Length; j++)  //内层循环在该组中的每一位数上循环
                     {
                         var n = Convert.ToInt32(four.Substring(j, 1)); //处理组中的每一位数加上所在的位
                         if (n == 0)
                         {
                             if (j < four.Length - 1
-                                && Convert.ToInt32(four.Substring(j + 1, 1)) > 0
-                                && !str.ToString().EndsWith(Unit.Chinese.CNSNum[n]))
+                             && Convert.ToInt32(four.Substring(j + 1, 1)) > 0
+                             && !str.ToString().EndsWith(Unit.Chinese.CNSNum[n]))
                                 str.Append(Unit.Chinese.CNSNum[n]);
                         }
                         else
                         {
                             if (!(n == 1
-                                  && (str.ToString().EndsWith(Unit.Chinese.CNSNum[0]) | str.Length == 0)
-                                  && j == four.Length - 2))
+                               && str.ToString().EndsWith(Unit.Chinese.CNSNum[0]) | (str.Length == 0)
+                               && j == four.Length - 2))
                                 str.Append(Unit.Chinese.CNSNum[n]);
                             str.Append(Unit.Chinese.CNSDigit[four.Length - j - 1]);
                         }
@@ -144,12 +151,6 @@ namespace AIO
                 return str.ToString();
             }
 
-            private static readonly char[] gHex =
-                { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
-
-            private static char[] gChars;
-            private const int gLen = 1 * 1024 * 3;
-
             /// <summary>
             /// 二进制转字符串
             /// </summary>
@@ -160,16 +161,13 @@ namespace AIO
             {
                 if (len * 3 > gLen) len = gLen / 3;
 
-                if (gChars == null)
-                {
-                    gChars = new char[gLen];
-                }
+                if (gChars == null) gChars = new char[gLen];
 
                 gChars[len * 3 - 1] = ' ';
                 for (var i = 0; i < len; ++i)
                 {
                     var b = buff[i];
-                    gChars[i * 3] = gHex[b >> 4];
+                    gChars[i * 3]     = gHex[b >> 4];
                     gChars[i * 3 + 1] = gHex[b & 0xF];
                     gChars[i * 3 + 2] = (i + 1) % 10 == 0 ? '\n' : ' ';
                 }
@@ -190,7 +188,7 @@ namespace AIO
                 for (var i = 0; i < len; ++i)
                 {
                     var b = buff[i];
-                    r[i * 2] = gHex[b >> 4];
+                    r[i * 2]     = gHex[b >> 4];
                     r[i * 2 + 1] = gHex[b & 0xF];
                 }
 
@@ -210,10 +208,7 @@ namespace AIO
             public static byte[] HexStringToBytes(in string hexStr)
             {
                 var r = new byte[hexStr.Length / 2];
-                for (var i = 0; i < r.Length; ++i)
-                {
-                    r[i] = (byte)(CharToByte(hexStr[i * 2]) << 4 | CharToByte(hexStr[i * 2 + 1]));
-                }
+                for (var i = 0; i < r.Length; ++i) r[i] = (byte)((CharToByte(hexStr[i * 2]) << 4) | CharToByte(hexStr[i * 2 + 1]));
 
                 return r;
             }
@@ -308,5 +303,7 @@ namespace AIO
                 return s;
             }
         }
+
+        #endregion
     }
 }

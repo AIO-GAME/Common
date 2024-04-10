@@ -1,9 +1,13 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #pragma warning disable CS0109 // 
 
+#region
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
@@ -172,7 +176,7 @@ namespace AIO
                     sb.AppendFormat("{2}/// <param name=\"{0}\">{1}</param>\r\n", param.Name, param.Comments, space);
                 else
                     sb.AppendFormat("{3}/// <param name=\"{0}\">{2} <see cref=\"{1}\"/></param>\r\n",
-                        param.Name, typename, param.Comments, space);
+                                    param.Name, typename, param.Comments, space);
             }
 
             return sb.Length == 0 ? string.Empty : sb.ToString();
@@ -182,8 +186,8 @@ namespace AIO
         /// 函数注释
         /// </summary>
         public string GetComment(
-            string def = "",
-            string ext = "",
+            string def   = "",
+            string ext   = "",
             string space = "")
         {
             var sb = new StringBuilder();
@@ -199,7 +203,7 @@ namespace AIO
                     sb.AppendFormat("{0}/// <returns>{1}</returns>\r\n", space, ReturnComments);
                 else
                     sb.AppendFormat("{0}/// <returns>{2}<see cref=\"{1}\"/></returns>\r\n", space, typename,
-                        ReturnComments);
+                                    ReturnComments);
             }
 
             return sb.Length == 0 ? string.Empty : sb.ToString().TrimEnd('\r', '\n');
@@ -214,12 +218,12 @@ namespace AIO
             if (Generics is null || Generics.Count == 0)
             {
                 sb.AppendFormat("{0}{1} {2} {3}{4} {5}({6})\r\n", space,
-                    Accessibility,
-                    ClassHelper.GetState(State),
-                    IsAsync ? "async " : string.Empty,
-                    ReturnType,
-                    Name,
-                    GetParamNames(Params));
+                                Accessibility,
+                                ClassHelper.GetState(State),
+                                IsAsync ? "async " : string.Empty,
+                                ReturnType,
+                                Name,
+                                GetParamNames(Params));
             }
             else
             {
@@ -235,14 +239,14 @@ namespace AIO
                 if (generics.Length > 0) generics.Insert(0, "where");
 
                 sb.AppendFormat("{0}{1} {2} {8}{3} {4}<{7}>({5}) {6}\r\n", space,
-                    Accessibility,
-                    ClassHelper.GetState(State),
-                    ReturnType,
-                    Name,
-                    GetParamNames(Params),
-                    generics,
-                    first.ToString().Trim(' ', ','),
-                    IsAsync ? "async " : string.Empty);
+                                Accessibility,
+                                ClassHelper.GetState(State),
+                                ReturnType,
+                                Name,
+                                GetParamNames(Params),
+                                generics,
+                                first.ToString().Trim(' ', ','),
+                                IsAsync ? "async " : string.Empty);
             }
 
             return sb.Length == 0 ? string.Empty : sb.ToString().TrimEnd('\r', '\n');

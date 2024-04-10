@@ -1,22 +1,43 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
+
+#endregion
 
 namespace AIO.UEditor
 {
     [CustomEditor(typeof(RectTransform))]
     internal sealed class RectTransformAfInspector : AFInspector<RectTransform>
     {
-        private static bool _copyQuaternion = false;
+        private static bool       _copyQuaternion;
+        private        Editor     _originalEditor;
+        private        MethodInfo _originalOnHeaderGUI;
+        private        MethodInfo _originalOnSceneGUI;
 
         private PagePainter _pagePainter;
-        private Editor _originalEditor;
-        private MethodInfo _originalOnSceneGUI;
-        private MethodInfo _originalOnHeaderGUI;
 
         protected override bool IsEnableRuntimeData => false;
-        protected override bool IsWideMode => false;
+        protected override bool IsWideMode          => false;
+
+        protected override void OnDestroy()
+        {
+            _originalOnSceneGUI  = null;
+            _originalOnHeaderGUI = null;
+            if (_originalEditor != null)
+            {
+                DestroyImmediate(_originalEditor);
+                _originalEditor = null;
+            }
+        }
+
+        private void OnSceneGUI()
+        {
+            if (_originalEditor != null && _originalOnSceneGUI != null) _originalOnSceneGUI.Invoke(_originalEditor, null);
+        }
 
         public override void DrawPreview(Rect previewArea)
         {
@@ -58,8 +79,8 @@ namespace AIO.UEditor
             _originalEditor.ReloadPreviewInstances();
         }
 
-        public override Texture2D RenderStaticPreview(string assetPath, UnityEngine.Object[] subAssets, int width,
-            int height)
+        public override Texture2D RenderStaticPreview(string assetPath, Object[] subAssets, int width,
+                                                      int    height)
         {
             return _originalEditor.RenderStaticPreview(assetPath, subAssets, width, height);
         }
@@ -74,31 +95,9 @@ namespace AIO.UEditor
             return _originalEditor.UseDefaultMargins();
         }
 
-        private void OnSceneGUI()
-        {
-            if (_originalEditor != null && _originalOnSceneGUI != null)
-            {
-                _originalOnSceneGUI.Invoke(_originalEditor, null);
-            }
-        }
-
-        protected override void OnDestroy()
-        {
-            _originalOnSceneGUI = null;
-            _originalOnHeaderGUI = null;
-            if (_originalEditor != null)
-            {
-                DestroyImmediate(_originalEditor);
-                _originalEditor = null;
-            }
-        }
-
         protected override void OnHeaderGUI()
         {
-            if (_originalEditor != null && _originalOnHeaderGUI != null)
-            {
-                _originalOnHeaderGUI.Invoke(_originalEditor, null);
-            }
+            if (_originalEditor != null && _originalOnHeaderGUI != null) _originalOnHeaderGUI.Invoke(_originalEditor, null);
         }
 
         protected override void OnActivation()
@@ -148,7 +147,7 @@ namespace AIO.UEditor
             GUILayout.BeginHorizontal();
             GUILayout.Label("Parent", GUILayout.Width(LabelWidth));
             GUI.color = Target.parent ? Color.white : Color.gray;
-            Transform parent = EditorGUILayout.ObjectField(Target.parent, typeof(Transform), true) as Transform;
+            var parent = EditorGUILayout.ObjectField(Target.parent, typeof(Transform), true) as Transform;
             if (parent != Target.parent)
             {
                 Undo.RecordObject(Target, "Change Parent " + Target.name);
@@ -163,29 +162,24 @@ namespace AIO.UEditor
             GUILayout.Label("Child Count", GUILayout.Width(LabelWidth));
             GUILayout.Label(childCount.ToString());
             GUILayout.FlexibleSpace();
-            GUI.enabled = childCount > 0;
+            GUI.enabled         = childCount > 0;
             GUI.backgroundColor = Color.red;
             if (GUILayout.Button("Detach", EditorStyles.miniButton))
-            {
                 if (EditorUtility.DisplayDialog("Prompt", "Are you sure you want to detach all children?", "Yes", "No"))
                 {
                     Undo.RecordObject(Target, "Detach Children");
                     Target.DetachChildren();
                     HasChanged();
                 }
-            }
 
             GUI.backgroundColor = Color.white;
-            GUI.enabled = true;
+            GUI.enabled         = true;
             GUILayout.EndHorizontal();
 
             GUI.backgroundColor = Color.yellow;
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Create Empty Parent", EditorStyles.miniButton))
-            {
-                CreateEmptyParent();
-            }
+            if (GUILayout.Button("Create Empty Parent", EditorStyles.miniButton)) CreateEmptyParent();
 
             GUILayout.EndHorizontal();
 
@@ -197,15 +191,9 @@ namespace AIO.UEditor
             GUI.backgroundColor = Color.yellow;
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Copy Position", EditorStyles.miniButtonLeft))
-            {
-                GUIUtility.systemCopyBuffer = Target.position.ToCopyString("F4");
-            }
+            if (GUILayout.Button("Copy Position", EditorStyles.miniButtonLeft)) GUIUtility.systemCopyBuffer = Target.position.ToCopyString("F4");
 
-            if (GUILayout.Button("Copy Anchored Position", EditorStyles.miniButtonRight))
-            {
-                GUIUtility.systemCopyBuffer = Target.anchoredPosition.ToCopyString("F2");
-            }
+            if (GUILayout.Button("Copy Anchored Position", EditorStyles.miniButtonRight)) GUIUtility.systemCopyBuffer = Target.anchoredPosition.ToCopyString("F2");
 
             GUILayout.EndHorizontal();
 
@@ -222,7 +210,7 @@ namespace AIO.UEditor
                     var x = ClampAngle(temp.x);
                     var y = ClampAngle(temp.y);
                     var z = ClampAngle(temp.z);
-                    Vector3 angle = new Vector3(x, y, z);
+                    var angle = new Vector3(x, y, z);
                     GUIUtility.systemCopyBuffer = angle.ToCopyString("F1");
                 }
             }
@@ -247,49 +235,31 @@ namespace AIO.UEditor
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Copy Scale", EditorStyles.miniButton))
-            {
-                GUIUtility.systemCopyBuffer = Target.localScale.ToCopyString("F4");
-            }
+            if (GUILayout.Button("Copy Scale", EditorStyles.miniButton)) GUIUtility.systemCopyBuffer = Target.localScale.ToCopyString("F4");
 
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Copy SizeDelta", EditorStyles.miniButton))
-            {
-                GUIUtility.systemCopyBuffer = Target.sizeDelta.ToCopyString("F2");
-            }
+            if (GUILayout.Button("Copy SizeDelta", EditorStyles.miniButton)) GUIUtility.systemCopyBuffer = Target.sizeDelta.ToCopyString("F2");
 
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Copy Name", EditorStyles.miniButtonLeft))
-            {
-                GUIUtility.systemCopyBuffer = Target.name;
-            }
+            if (GUILayout.Button("Copy Name", EditorStyles.miniButtonLeft)) GUIUtility.systemCopyBuffer = Target.name;
 
-            if (GUILayout.Button("Copy FullName", EditorStyles.miniButtonRight))
-            {
-                GUIUtility.systemCopyBuffer = Target.GetType().FullName;
-            }
+            if (GUILayout.Button("Copy FullName", EditorStyles.miniButtonRight)) GUIUtility.systemCopyBuffer = Target.GetType().FullName;
 
             GUILayout.EndHorizontal();
 
             GUI.backgroundColor = Color.green;
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Copy To C# Public Field", EditorStyles.miniButton))
-            {
-                GUIUtility.systemCopyBuffer = ToCSPublicField();
-            }
+            if (GUILayout.Button("Copy To C# Public Field", EditorStyles.miniButton)) GUIUtility.systemCopyBuffer = ToCSPublicField();
 
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Copy To C# Private Field", EditorStyles.miniButton))
-            {
-                GUIUtility.systemCopyBuffer = ToCSPrivateField();
-            }
+            if (GUILayout.Button("Copy To C# Private Field", EditorStyles.miniButton)) GUIUtility.systemCopyBuffer = ToCSPrivateField();
 
             GUILayout.EndHorizontal();
 
@@ -302,12 +272,12 @@ namespace AIO.UEditor
 
         private void CreateEmptyParent()
         {
-            GameObject parent = new GameObject("EmptyParent");
-            RectTransform rectTransform = parent.AddComponent<RectTransform>();
+            var parent = new GameObject("EmptyParent");
+            var rectTransform = parent.AddComponent<RectTransform>();
             rectTransform.SetParent(Target.parent);
             rectTransform.localPosition = Target.localPosition;
             rectTransform.localRotation = Quaternion.identity;
-            rectTransform.localScale = Vector3.one;
+            rectTransform.localScale    = Vector3.one;
             rectTransform.SetSiblingIndex(Target.GetSiblingIndex());
             Target.SetParent(rectTransform);
             Selection.activeGameObject = parent;
@@ -316,7 +286,7 @@ namespace AIO.UEditor
 
         private float ClampAngle(float angle)
         {
-            if (angle > 180) angle -= 360;
+            if (angle > 180) angle       -= 360;
             else if (angle < -180) angle += 360;
 
             return angle;
@@ -324,17 +294,17 @@ namespace AIO.UEditor
 
         private string ToCSPublicField()
         {
-            string fieldName = Target.name.Trim().Replace(" ", "");
-            string field = $"[InspectorName(\"{Target.name}\")] public GameObject {fieldName};";
+            var fieldName = Target.name.Trim().Replace(" ", "");
+            var field = $"[InspectorName(\"{Target.name}\")] public GameObject {fieldName};";
             return field;
         }
 
         private string ToCSPrivateField()
         {
-            string fieldName = Target.name.Trim().Replace(" ", "");
-            char[] fieldNames = fieldName.ToCharArray();
+            var fieldName = Target.name.Trim().Replace(" ", "");
+            var fieldNames = fieldName.ToCharArray();
             fieldNames[0] = char.ToLower(fieldNames[0]);
-            string field =
+            var field =
                 $"[InspectorName(\"{Target.GetType().FullName}\")] private GameObject _{new string(fieldNames)};";
             return field;
         }

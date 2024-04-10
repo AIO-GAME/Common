@@ -1,8 +1,12 @@
-﻿namespace AIO
-{
-    using System.Runtime.CompilerServices;
-    using System.Text;
+﻿#region
 
+using System.Runtime.CompilerServices;
+using System.Text;
+
+#endregion
+
+namespace AIO
+{
     /// <summary>
     /// 字符扩展
     /// </summary>
@@ -40,6 +44,5 @@
             for (var i = 0; i < num; i++) builder.Append(s);
             return builder.ToString();
         }
-
     }
 }

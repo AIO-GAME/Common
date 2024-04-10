@@ -4,17 +4,25 @@
 
 |||✩ - - - - - |*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+#endregion
+
 namespace AIO
 {
     public partial class PrMac
     {
+        #region Nested type: Git
+
         public partial class Git
         {
+            #region Nested type: Clone
+
             /// <summary>
             /// 克隆
             /// </summary>
@@ -65,11 +73,15 @@ namespace AIO
                 /// <returns><see cref="IExecutor"/>执行器</returns>
                 public static IExecutor Execute(string target, string urls, bool quit = true)
                 {
-                    return Execute(target, new string[] { urls }, quit);
+                    return Execute(target, new[] { urls }, quit);
                 }
 
                 #endregion
             }
+
+            #endregion
         }
+
+        #endregion
     }
 }

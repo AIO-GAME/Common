@@ -1,10 +1,15 @@
-﻿using System.IO;
+﻿#region
+
 using System.Linq;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrMac
     {
+        #region Nested type: Cat
+
         /// <summary>
         /// 文件查看相关命令
         /// </summary>
@@ -100,5 +105,7 @@ namespace AIO
                 return Create(CMD_Cat, $"-e {string.Join(" ", paths.Select(path => $"'{path.Replace('\\', '/')}'"))}");
             }
         }
+
+        #endregion
     }
 }

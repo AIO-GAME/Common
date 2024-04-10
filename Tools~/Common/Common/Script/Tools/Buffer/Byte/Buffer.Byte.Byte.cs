@@ -1,10 +1,15 @@
-﻿using System;
+﻿#region
+
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
     public partial class BufferByte
     {
+        #region IReadData Members
+
         /// <inheritdoc/> 
         public byte ReadByte()
         {
@@ -16,6 +21,10 @@ namespace AIO
         {
             return Arrays.GetByteArray(ref ReadIndex, reverse);
         }
+
+        #endregion
+
+        #region IWriteData Members
 
         /// <inheritdoc/> 
         public void WriteByte(byte value)
@@ -30,5 +39,7 @@ namespace AIO
             AutomaticExpansion(value.Count);
             Arrays.SetByteArray(ref WriteIndex, value, reverse);
         }
+
+        #endregion
     }
 }

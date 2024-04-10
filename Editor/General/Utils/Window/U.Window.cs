@@ -4,6 +4,8 @@
 
 |||✩ - - - - - |*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +16,14 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
+#endregion
+
 namespace AIO.UEditor
 {
     public partial class EHelper
     {
+        #region Nested type: Window
+
         /// <summary>
         /// Window Util
         /// </summary>
@@ -36,16 +42,18 @@ namespace AIO.UEditor
 
                 var bytes = Encoding.UTF8.GetBytes(string.Concat(type.FullName, '|', title));
                 var key = string.Join("",
-                    new MD5CryptoServiceProvider().ComputeHash(bytes).Select(b => b.ToString("x2")).ToArray());
+                                      new MD5CryptoServiceProvider().ComputeHash(bytes).Select(b => b.ToString("x2")).ToArray());
                 return key;
             }
 
-            internal static string GetWindowKey<T>(string title) where T : EditorWindow
+            internal static string GetWindowKey<T>(string title)
+            where T : EditorWindow
             {
                 return GetWindowKey(typeof(T), title);
             }
 
-            private static EditorWindow Command<T>(T window) where T : EditorWindow
+            private static EditorWindow Command<T>(T window)
+            where T : EditorWindow
             {
                 window.Show();
 #if UNITY_2020_1_OR_NEWER
@@ -67,7 +75,8 @@ namespace AIO.UEditor
             /// <param name="utility">边框</param>
             /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
             /// <returns><see cref="EditorWindow"/></returns>
-            public static T Open<T>(bool utility, bool focus) where T : EditorWindow
+            public static T Open<T>(bool utility, bool focus)
+            where T : EditorWindow
             {
                 return (T)Open(typeof(T), GTContent.Empty, utility, focus);
             }
@@ -78,7 +87,8 @@ namespace AIO.UEditor
             /// <param name="utility">边框</param>
             /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
             /// <returns><see cref="EditorWindow"/></returns>
-            public static T Open<T>(bool utility) where T : EditorWindow
+            public static T Open<T>(bool utility)
+            where T : EditorWindow
             {
                 return (T)Open(typeof(T), GTContent.Empty, utility, true);
             }
@@ -91,7 +101,8 @@ namespace AIO.UEditor
             /// <param name="utility">边框</param>
             /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
             /// <returns><see cref="EditorWindow"/></returns>
-            public static T Open<T>(GTContent title, bool utility, bool focus) where T : EditorWindow
+            public static T Open<T>(GTContent title, bool utility, bool focus)
+            where T : EditorWindow
             {
                 return (T)Open(typeof(T), title, utility, focus);
             }
@@ -103,7 +114,8 @@ namespace AIO.UEditor
             /// <param name="utility">边框</param>
             /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
             /// <returns><see cref="EditorWindow"/></returns>
-            public static T Open<T>(GTContent title, bool utility) where T : EditorWindow
+            public static T Open<T>(GTContent title, bool utility)
+            where T : EditorWindow
             {
                 return (T)Open(typeof(T), title, utility, true);
             }
@@ -116,7 +128,8 @@ namespace AIO.UEditor
             /// <param name="utility">边框</param>
             /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
             /// <returns><see cref="EditorWindow"/></returns>
-            public static T Open<T>(string title, bool utility, bool focus) where T : EditorWindow
+            public static T Open<T>(string title, bool utility, bool focus)
+            where T : EditorWindow
             {
                 return (T)Open(typeof(T), GTContent.Temp(title), utility, focus);
             }
@@ -128,7 +141,8 @@ namespace AIO.UEditor
             /// <param name="utility">边框</param>
             /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
             /// <returns><see cref="EditorWindow"/></returns>
-            public static T Open<T>(string title, bool utility) where T : EditorWindow
+            public static T Open<T>(string title, bool utility)
+            where T : EditorWindow
             {
                 return (T)Open(typeof(T), GTContent.Temp(title), utility, true);
             }
@@ -139,7 +153,8 @@ namespace AIO.UEditor
             /// <param name="title">标题</param>
             /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
             /// <returns><see cref="EditorWindow"/></returns>
-            public static T Open<T>(string title) where T : EditorWindow
+            public static T Open<T>(string title)
+            where T : EditorWindow
             {
                 return (T)Open(typeof(T), GTContent.Temp(title), false, true);
             }
@@ -151,7 +166,8 @@ namespace AIO.UEditor
             /// <param name="focus">聚焦</param>
             /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
             /// <returns><see cref="EditorWindow"/></returns>
-            public static T Open<T>(bool focus, params Type[] types) where T : EditorWindow
+            public static T Open<T>(bool focus, params Type[] types)
+            where T : EditorWindow
             {
                 return (T)Open(typeof(T), GTContent.Empty, focus, types);
             }
@@ -162,7 +178,8 @@ namespace AIO.UEditor
             /// <param name="types">类型数组</param>
             /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
             /// <returns><see cref="EditorWindow"/></returns>
-            public static T Open<T>(params Type[] types) where T : EditorWindow
+            public static T Open<T>(params Type[] types)
+            where T : EditorWindow
             {
                 return (T)Open(typeof(T), GTContent.Empty, true, types);
             }
@@ -174,7 +191,8 @@ namespace AIO.UEditor
             /// <param name="types">类型数组</param>
             /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
             /// <returns><see cref="EditorWindow"/></returns>
-            public static T Open<T>(GTContent title, params Type[] types) where T : EditorWindow
+            public static T Open<T>(GTContent title, params Type[] types)
+            where T : EditorWindow
             {
                 return (T)Open(typeof(T), title, true, types);
             }
@@ -187,7 +205,8 @@ namespace AIO.UEditor
             /// <param name="focus">聚焦</param>
             /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
             /// <returns><see cref="EditorWindow"/></returns>
-            public static T Open<T>(GTContent title, bool focus, params Type[] types) where T : EditorWindow
+            public static T Open<T>(GTContent title, bool focus, params Type[] types)
+            where T : EditorWindow
             {
                 return (T)Open(typeof(T), title, focus, types);
             }
@@ -199,7 +218,8 @@ namespace AIO.UEditor
             /// <param name="focus">聚焦</param>
             /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
             /// <returns><see cref="EditorWindow"/></returns>
-            public static T Open<T>(bool focus, ICollection<Type> types) where T : EditorWindow
+            public static T Open<T>(bool focus, ICollection<Type> types)
+            where T : EditorWindow
             {
                 return (T)Open(typeof(T), GTContent.Empty, focus, types);
             }
@@ -210,7 +230,8 @@ namespace AIO.UEditor
             /// <param name="types">类型数组</param>
             /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
             /// <returns><see cref="EditorWindow"/></returns>
-            public static T Open<T>(ICollection<Type> types) where T : EditorWindow
+            public static T Open<T>(ICollection<Type> types)
+            where T : EditorWindow
             {
                 return (T)Open(typeof(T), GTContent.Empty, true, types);
             }
@@ -222,7 +243,8 @@ namespace AIO.UEditor
             /// <param name="types">类型数组</param>
             /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
             /// <returns><see cref="EditorWindow"/></returns>
-            public static T Open<T>(GTContent title, ICollection<Type> types) where T : EditorWindow
+            public static T Open<T>(GTContent title, ICollection<Type> types)
+            where T : EditorWindow
             {
                 return (T)Open(typeof(T), title, true, types);
             }
@@ -236,9 +258,73 @@ namespace AIO.UEditor
             /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
             /// <returns><see cref="EditorWindow"/></returns>
             public static T Open<T>(GTContent title, bool focus, ICollection<Type> types)
-                where T : EditorWindow
+            where T : EditorWindow
             {
                 return (T)Open(typeof(T), title, focus, types);
+            }
+
+            /// <summary>
+            /// 打开窗口
+            /// </summary>
+            /// <param name="rect">矩形信息</param>
+            /// <param name="title">标题</param>
+            /// <param name="utility">边框</param>
+            /// <param name="focus">聚焦</param>
+            /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
+            /// <returns><see cref="EditorWindow"/></returns>
+            public static T Open<T>(Rect rect, string title, bool utility = true, bool focus = true)
+            where T : EditorWindow
+            {
+                if (string.IsNullOrEmpty(title)) title = typeof(T).Name;
+                var key = GetWindowKey<T>(title);
+                if (WindowList.TryGetValue(key, out var value)) return (T)Command(value);
+                WindowList[key] = EditorWindow.GetWindowWithRect<T>(rect, utility, title, focus);
+                WindowList[key].Show(true);
+                return (T)Command(key);
+            }
+
+            /// <summary>
+            /// 打开窗口
+            /// </summary>
+            /// <param name="type"><see cref="EditorWindow"/></param>
+            /// <param name="rect">矩形信息</param>
+            /// <param name="title">标题</param>
+            /// <param name="utility">边框</param>
+            /// <returns><see cref="EditorWindow"/></returns>
+            public static EditorWindow Open(Type type, Rect rect, string title, bool utility = true)
+            {
+                if (string.IsNullOrEmpty(title)) title = type.Name;
+                var key = GetWindowKey(type, title);
+                if (WindowList.TryGetValue(key, out var value)) return Command(value);
+                WindowList[key] = EditorWindow.GetWindowWithRect(type, rect, utility, title);
+                WindowList[key].Show(true);
+                return Command(key);
+            }
+
+
+            /// <summary>
+            /// 释放窗口
+            /// </summary>
+            /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
+            /// <returns><see cref="EditorWindow"/></returns>
+            public static void Free<T>(T window)
+            where T : EditorWindow
+            {
+                string title;
+                if (window is null)
+                {
+                    title = typeof(T).Name;
+                    var attribute = typeof(T).GetCustomAttribute<GWindowAttribute>(false);
+                    if (attribute != null) title = typeof(T).Name;
+                }
+                else
+                {
+                    title = window.titleContent.text;
+                }
+
+                var key = GetWindowKey(typeof(T), title);
+                if (!WindowList.ContainsKey(key)) return;
+                WindowList.Remove(key);
             }
 
             #region Open Type
@@ -331,7 +417,7 @@ namespace AIO.UEditor
                 var key = GetWindowKey(type, title.text);
                 if (!WindowList.ContainsKey(key) || WindowList[key] is null)
                 {
-                    WindowList[key] = ScriptableObject.CreateInstance(type) as EditorWindow;
+                    WindowList[key]              = ScriptableObject.CreateInstance(type) as EditorWindow;
                     WindowList[key].titleContent = title;
                     if (utility) WindowList[key].ShowUtility();
                     else WindowList[key].Show();
@@ -341,7 +427,10 @@ namespace AIO.UEditor
                     WindowList[key].Show();
                     WindowList[key].Focus();
                 }
-                else WindowList[key].Show();
+                else
+                {
+                    WindowList[key].Show();
+                }
 #if UNITY_2020_1_OR_NEWER
                 WindowList[key].SaveChanges();
 #endif
@@ -454,8 +543,8 @@ namespace AIO.UEditor
             /// <param name="focus">聚焦</param>
             /// <param name="type"><see cref="EditorWindow"/></param>
             /// <param name="desiredDockNextTo">组</param>
-            public static EditorWindow Open(Type type, GUIContent title, bool focus,
-                ICollection<Type> desiredDockNextTo)
+            public static EditorWindow Open(Type              type, GUIContent title, bool focus,
+                                            ICollection<Type> desiredDockNextTo)
             {
                 if (!type.IsSubclassOf(typeof(EditorWindow)))
                 {
@@ -474,7 +563,7 @@ namespace AIO.UEditor
                 var key = GetWindowKey(type, title.text);
                 if (!WindowList.ContainsKey(key) || WindowList[key] == null)
                 {
-                    WindowList[key] = ScriptableObject.CreateInstance(type) as EditorWindow;
+                    WindowList[key]              = ScriptableObject.CreateInstance(type) as EditorWindow;
                     WindowList[key].titleContent = title;
                     if (AddDock(WindowList[key], desiredDockNextTo)) return WindowList[key];
                 }
@@ -484,7 +573,10 @@ namespace AIO.UEditor
                     WindowList[key].Show(true);
                     WindowList[key].Focus();
                 }
-                else WindowList[key].Show(true);
+                else
+                {
+                    WindowList[key].Show(true);
+                }
 #if UNITY_2020_1_OR_NEWER
                 WindowList[key].SaveChanges();
 #endif
@@ -503,16 +595,14 @@ namespace AIO.UEditor
                 var containerWindowType = assembly.GetType("UnityEditor.ContainerWindow");
 
                 if (!(containerWindowType?.GetProperty("windows",
-                            BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty)
-                        ?.GetValue(null, null) is Array windowsObj)) return false;
+                                                       BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty)?.GetValue(null, null) is Array windowsObj)) return false;
                 var containerWindowRootView = containerWindowType.GetProperty("rootView", PROPERTY_BIND);
                 if (containerWindowRootView is null) return false;
 
                 var dockAreaType = assembly.GetType("UnityEditor.DockArea");
                 var dockAreaMethods = dockAreaType?.GetMethods(BindingFlags.Public | BindingFlags.Instance);
                 var dockAreaMethodAddTab = dockAreaMethods?
-                    .Where(dockAreaMethod => dockAreaMethod.Name == "AddTab")
-                    .FirstOrDefault(dockAreaMethod => dockAreaMethod.GetParameters().Length == 2);
+                   .Where(dockAreaMethod => dockAreaMethod.Name == "AddTab").FirstOrDefault(dockAreaMethod => dockAreaMethod.GetParameters().Length == 2);
                 if (dockAreaMethodAddTab is null) return false;
 
                 var viewType = assembly.GetType("UnityEditor.View");
@@ -534,7 +624,7 @@ namespace AIO.UEditor
                             if (allChild is null) continue;
                             if (!dockAreaType.IsInstanceOfType(allChild)) continue;
                             var m_Panes = dockAreaType.GetField("m_Panes",
-                                BindingFlags.NonPublic | BindingFlags.Instance);
+                                                                BindingFlags.NonPublic | BindingFlags.Instance);
                             if (!(m_Panes?.GetValue(allChild) is List<EditorWindow> mPanes)) continue;
                             foreach (var item in mPanes)
                             {
@@ -552,66 +642,8 @@ namespace AIO.UEditor
             }
 
             #endregion
-
-            /// <summary>
-            /// 打开窗口
-            /// </summary>
-            /// <param name="rect">矩形信息</param>
-            /// <param name="title">标题</param>
-            /// <param name="utility">边框</param>
-            /// <param name="focus">聚焦</param>
-            /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
-            /// <returns><see cref="EditorWindow"/></returns>
-            public static T Open<T>(Rect rect, string title, bool utility = true, bool focus = true)
-                where T : EditorWindow
-            {
-                if (string.IsNullOrEmpty(title)) title = typeof(T).Name;
-                var key = GetWindowKey<T>(title);
-                if (WindowList.TryGetValue(key, out var value)) return (T)Command(value);
-                WindowList[key] = EditorWindow.GetWindowWithRect<T>(rect, utility, title, focus);
-                WindowList[key].Show(true);
-                return (T)Command(key);
-            }
-
-            /// <summary>
-            /// 打开窗口
-            /// </summary>
-            /// <param name="type"><see cref="EditorWindow"/></param>
-            /// <param name="rect">矩形信息</param>
-            /// <param name="title">标题</param>
-            /// <param name="utility">边框</param>
-            /// <returns><see cref="EditorWindow"/></returns>
-            public static EditorWindow Open(Type type, Rect rect, string title, bool utility = true)
-            {
-                if (string.IsNullOrEmpty(title)) title = type.Name;
-                var key = GetWindowKey(type, title);
-                if (WindowList.TryGetValue(key, out var value)) return Command(value);
-                WindowList[key] = EditorWindow.GetWindowWithRect(type, rect, utility, title);
-                WindowList[key].Show(true);
-                return Command(key);
-            }
-
-
-            /// <summary>
-            /// 释放窗口
-            /// </summary>
-            /// <typeparam name="T"><see cref="EditorWindow"/></typeparam>
-            /// <returns><see cref="EditorWindow"/></returns>
-            public static void Free<T>(T window) where T : EditorWindow
-            {
-                string title;
-                if (window is null)
-                {
-                    title = typeof(T).Name;
-                    var attribute = typeof(T).GetCustomAttribute<GWindowAttribute>(false);
-                    if (attribute != null) title = typeof(T).Name;
-                }
-                else title = window.titleContent.text;
-
-                var key = GetWindowKey(typeof(T), title);
-                if (!WindowList.ContainsKey(key)) return;
-                WindowList.Remove(key);
-            }
         }
+
+        #endregion
     }
 }

@@ -4,8 +4,12 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.IO;
+
+#endregion
 
 namespace AIO
 {
@@ -14,6 +18,8 @@ namespace AIO
     /// </summary>
     public static partial class PrPlatform
     {
+        #region Nested type: Open
+
         /// <summary>
         /// 打开路径
         /// </summary>
@@ -27,7 +33,6 @@ namespace AIO
             public static IExecutor Path(string target)
             {
                 if (Directory.Exists(target) || System.IO.File.Exists(target))
-                {
                     switch (Environment.OSVersion.Platform)
                     {
                         case PlatformID.Win32NT:
@@ -40,10 +45,11 @@ namespace AIO
                             return PrMac.Open.Path(target);
                         default: throw new NotImplementedException();
                     }
-                }
 
                 throw new FileNotFoundException("The current path does not exist");
             }
         }
+
+        #endregion
     }
 }

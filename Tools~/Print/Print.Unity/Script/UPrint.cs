@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Diagnostics;
 using APrint = AIO.Internal.Print;
+
+#endregion
 
 namespace UnityEngine
 {
@@ -9,6 +13,30 @@ namespace UnityEngine
     /// </summary>
     public partial class Print : APrint
     {
+        /// <summary>
+        /// 输出异常
+        /// </summary>
+        [Conditional(MACRO_DEFINITION), DebuggerHidden, DebuggerNonUserCode]
+        public static void Exception<E, T>(in E exception, in T obj)
+        where E : Exception where T : Object
+        {
+            if (IsNotOut || NoStatus(EXCEPTION)) return;
+            Debug.unityLogger.Log(LogType.Exception, exception, obj);
+        }
+
+        /// <summary>
+        /// 输出异常
+        /// </summary>
+        [Conditional(MACRO_DEFINITION), DebuggerHidden, DebuggerNonUserCode]
+        public static void Exception<E>(in E exception)
+        where E : Exception
+        {
+            if (IsNotOut || NoStatus(EXCEPTION)) return;
+            Debug.unityLogger.Log(LogType.Exception, exception, null);
+        }
+
+        #region Nested type: Console
+
         /// <summary>
         /// 控制台
         /// </summary>
@@ -73,24 +101,6 @@ namespace UnityEngine
             #endregion
         }
 
-        /// <summary>
-        /// 输出异常
-        /// </summary>
-        [Conditional(MACRO_DEFINITION), DebuggerHidden, DebuggerNonUserCode]
-        public static void Exception<E, T>(in E exception, in T obj) where E : Exception where T : Object
-        {
-            if (IsNotOut || NoStatus(EXCEPTION)) return;
-            Debug.unityLogger.Log(LogType.Exception, exception, obj);
-        }
-
-        /// <summary>
-        /// 输出异常
-        /// </summary>
-        [Conditional(MACRO_DEFINITION), DebuggerHidden, DebuggerNonUserCode]
-        public static void Exception<E>(in E exception) where E : Exception
-        {
-            if (IsNotOut || NoStatus(EXCEPTION)) return;
-            Debug.unityLogger.Log(LogType.Exception, exception, null);
-        }
+        #endregion
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -8,6 +10,8 @@ using Debug = UnityEngine.Debug;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -23,9 +27,7 @@ namespace AIO.UEditor
         {
             public Error(EInitAttrMode mode, MethodBase method, Exception exception) : base(
                 $"{nameof(AInitializeOnLoad)} {mode} : {method.Name} Error: {exception.Message}",
-                exception.InnerException)
-            {
-            }
+                exception.InnerException) { }
         }
 
 #if UNITY_2022_1_OR_NEWER
@@ -37,8 +39,8 @@ namespace AIO.UEditor
             if (method.ReflectedType is null) throw new NullReferenceException();
 #if UNITY_EDITOR
             Debug.Log(MethodsPath.TryGetValue(method.MethodHandle.Value, out var tuple)
-                ? $"<color=#F7DC6F>[Initialize] {mode} : </color> {method.ReflectedType.ToDetails()}:{method.Name} () (at {tuple.Item1}:{tuple.Item2})"
-                : $"<color=#F7DC6F>[Initialize] {mode} : </color> {method.ReflectedType.ToDetails()} : {method.Name} ()"
+                          ? $"<color=#F7DC6F>[Initialize] {mode} : </color> {method.ReflectedType.ToDetails()}:{method.Name} () (at {tuple.Item1}:{tuple.Item2})"
+                          : $"<color=#F7DC6F>[Initialize] {mode} : </color> {method.ReflectedType.ToDetails()} : {method.Name} ()"
             );
 #endif
         }
@@ -50,23 +52,23 @@ namespace AIO.UEditor
 
 #if UNITY_EDITOR
         private static readonly Dictionary<IntPtr, Tuple<string, int>> MethodsPath;
-        private static readonly SortedSet<int> OrdersEditor;
-        private static readonly Dictionary<int, Queue<MethodInfo>> MethodsEditor;
+        private static readonly SortedSet<int>                         OrdersEditor;
+        private static readonly Dictionary<int, Queue<MethodInfo>>     MethodsEditor;
 #endif
 
-        private static readonly SortedSet<int> OrdersRuntimeBeforeSceneLoad;
+        private static readonly SortedSet<int>                     OrdersRuntimeBeforeSceneLoad;
         private static readonly Dictionary<int, Queue<MethodInfo>> MethodsRuntimeBeforeSceneLoad;
 
-        private static readonly SortedSet<int> OrdersRuntimeAfterSceneLoad;
+        private static readonly SortedSet<int>                     OrdersRuntimeAfterSceneLoad;
         private static readonly Dictionary<int, Queue<MethodInfo>> MethodsRuntimeAfterSceneLoad;
 
-        private static readonly SortedSet<int> OrdersRuntimeAfterAssembliesLoaded;
+        private static readonly SortedSet<int>                     OrdersRuntimeAfterAssembliesLoaded;
         private static readonly Dictionary<int, Queue<MethodInfo>> MethodsRuntimeAfterAssembliesLoaded;
 
-        private static readonly SortedSet<int> OrdersRuntimeBeforeSplashScreen;
+        private static readonly SortedSet<int>                     OrdersRuntimeBeforeSplashScreen;
         private static readonly Dictionary<int, Queue<MethodInfo>> MethodsRuntimeBeforeSplashScreen;
 
-        private static readonly SortedSet<int> OrdersRuntimeSubsystemRegistration;
+        private static readonly SortedSet<int>                     OrdersRuntimeSubsystemRegistration;
         private static readonly Dictionary<int, Queue<MethodInfo>> MethodsRuntimeSubsystemRegistration;
 
         private static void Processing(AInitAttribute attribute, MethodInfo method)
@@ -77,7 +79,9 @@ namespace AIO.UEditor
             if (attribute.Mode.HasFlag(EInitAttrMode.Editor))
             {
                 if (MethodsEditor.TryGetValue(attribute.Order, out var queue))
+                {
                     queue.Enqueue(method);
+                }
                 else
                 {
                     OrdersEditor.Add(attribute.Order);
@@ -90,7 +94,9 @@ namespace AIO.UEditor
             if (attribute.Mode.HasFlag(EInitAttrMode.RuntimeAfterSceneLoad))
             {
                 if (MethodsRuntimeAfterSceneLoad.TryGetValue(attribute.Order, out var queue))
+                {
                     queue.Enqueue(method);
+                }
                 else
                 {
                     OrdersRuntimeAfterSceneLoad.Add(attribute.Order);
@@ -102,7 +108,9 @@ namespace AIO.UEditor
             if (attribute.Mode.HasFlag(EInitAttrMode.RuntimeBeforeSceneLoad))
             {
                 if (MethodsRuntimeBeforeSceneLoad.TryGetValue(attribute.Order, out var queue))
+                {
                     queue.Enqueue(method);
+                }
                 else
                 {
                     OrdersRuntimeBeforeSceneLoad.Add(attribute.Order);
@@ -114,7 +122,9 @@ namespace AIO.UEditor
             if (attribute.Mode.HasFlag(EInitAttrMode.RuntimeAfterAssembliesLoaded))
             {
                 if (MethodsRuntimeAfterAssembliesLoaded.TryGetValue(attribute.Order, out var queue))
+                {
                     queue.Enqueue(method);
+                }
                 else
                 {
                     OrdersRuntimeAfterAssembliesLoaded.Add(attribute.Order);
@@ -126,7 +136,9 @@ namespace AIO.UEditor
             if (attribute.Mode.HasFlag(EInitAttrMode.RuntimeBeforeSplashScreen))
             {
                 if (MethodsRuntimeBeforeSplashScreen.TryGetValue(attribute.Order, out var queue))
+                {
                     queue.Enqueue(method);
+                }
                 else
                 {
                     OrdersRuntimeBeforeSplashScreen.Add(attribute.Order);
@@ -138,7 +150,9 @@ namespace AIO.UEditor
             if (attribute.Mode.HasFlag(EInitAttrMode.RuntimeSubsystemRegistration))
             {
                 if (MethodsRuntimeSubsystemRegistration.TryGetValue(attribute.Order, out var queue))
+                {
                     queue.Enqueue(method);
+                }
                 else
                 {
                     OrdersRuntimeSubsystemRegistration.Add(attribute.Order);
@@ -151,23 +165,23 @@ namespace AIO.UEditor
         static AInitializeOnLoad()
         {
 #if UNITY_EDITOR
-            MethodsPath = new Dictionary<IntPtr, Tuple<string, int>>();
-            OrdersEditor = new SortedSet<int>();
+            MethodsPath   = new Dictionary<IntPtr, Tuple<string, int>>();
+            OrdersEditor  = new SortedSet<int>();
             MethodsEditor = new Dictionary<int, Queue<MethodInfo>>();
 #endif
-            OrdersRuntimeBeforeSceneLoad = new SortedSet<int>();
+            OrdersRuntimeBeforeSceneLoad  = new SortedSet<int>();
             MethodsRuntimeBeforeSceneLoad = new Dictionary<int, Queue<MethodInfo>>();
 
-            OrdersRuntimeAfterSceneLoad = new SortedSet<int>();
+            OrdersRuntimeAfterSceneLoad  = new SortedSet<int>();
             MethodsRuntimeAfterSceneLoad = new Dictionary<int, Queue<MethodInfo>>();
 
-            OrdersRuntimeAfterAssembliesLoaded = new SortedSet<int>();
+            OrdersRuntimeAfterAssembliesLoaded  = new SortedSet<int>();
             MethodsRuntimeAfterAssembliesLoaded = new Dictionary<int, Queue<MethodInfo>>();
 
-            OrdersRuntimeBeforeSplashScreen = new SortedSet<int>();
+            OrdersRuntimeBeforeSplashScreen  = new SortedSet<int>();
             MethodsRuntimeBeforeSplashScreen = new Dictionary<int, Queue<MethodInfo>>();
 
-            OrdersRuntimeSubsystemRegistration = new SortedSet<int>();
+            OrdersRuntimeSubsystemRegistration  = new SortedSet<int>();
             MethodsRuntimeSubsystemRegistration = new Dictionary<int, Queue<MethodInfo>>();
 
             foreach (var type in AHelper.Assembly.GetAllType())
@@ -195,7 +209,6 @@ namespace AIO.UEditor
         private static void InitializeOnLoadMethod()
         {
             foreach (var method in OrdersEditor.SelectMany(item => MethodsEditor[item]))
-            {
                 try
                 {
                     method.Invoke(null, null);
@@ -205,7 +218,6 @@ namespace AIO.UEditor
                 {
                     DebugError(EInitAttrMode.Editor, method, e);
                 }
-            }
         }
 #endif
 
@@ -213,7 +225,6 @@ namespace AIO.UEditor
         private static void RuntimeInitializeOnLoadMethod()
         {
             foreach (var method in OrdersRuntimeBeforeSceneLoad.SelectMany(item => MethodsRuntimeBeforeSceneLoad[item]))
-            {
                 try
                 {
                     method.Invoke(null, null);
@@ -223,7 +234,6 @@ namespace AIO.UEditor
                 {
                     DebugError(EInitAttrMode.RuntimeBeforeSceneLoad, method, e);
                 }
-            }
 
             Application.quitting += () =>
             {
@@ -236,7 +246,6 @@ namespace AIO.UEditor
         private static void RuntimeInitializeAfterSceneLoadMethod()
         {
             foreach (var method in OrdersRuntimeAfterSceneLoad.SelectMany(item => MethodsRuntimeAfterSceneLoad[item]))
-            {
                 try
                 {
                     DebugLog(EInitAttrMode.RuntimeAfterSceneLoad, method);
@@ -246,7 +255,6 @@ namespace AIO.UEditor
                 {
                     DebugError(EInitAttrMode.RuntimeAfterSceneLoad, method, e);
                 }
-            }
 
             Application.quitting += () =>
             {
@@ -259,8 +267,7 @@ namespace AIO.UEditor
         private static void RuntimeInitializeAfterAssembliesLoadedMethod()
         {
             foreach (var method in OrdersRuntimeAfterAssembliesLoaded.SelectMany(item =>
-                         MethodsRuntimeAfterAssembliesLoaded[item]))
-            {
+                                                                                     MethodsRuntimeAfterAssembliesLoaded[item]))
                 try
                 {
                     DebugLog(EInitAttrMode.RuntimeAfterAssembliesLoaded, method);
@@ -270,7 +277,6 @@ namespace AIO.UEditor
                 {
                     DebugError(EInitAttrMode.RuntimeAfterAssembliesLoaded, method, e);
                 }
-            }
 
             Application.quitting += () =>
             {
@@ -283,8 +289,7 @@ namespace AIO.UEditor
         private static void RuntimeInitializeBeforeSplashScreenMethod()
         {
             foreach (var method in OrdersRuntimeBeforeSplashScreen.SelectMany(item =>
-                         MethodsRuntimeBeforeSplashScreen[item]))
-            {
+                                                                                  MethodsRuntimeBeforeSplashScreen[item]))
                 try
                 {
                     DebugLog(EInitAttrMode.RuntimeBeforeSplashScreen, method);
@@ -294,7 +299,6 @@ namespace AIO.UEditor
                 {
                     DebugError(EInitAttrMode.RuntimeBeforeSplashScreen, method, e);
                 }
-            }
 
             Application.quitting += () =>
             {
@@ -307,8 +311,7 @@ namespace AIO.UEditor
         private static void RuntimeInitializeSubsystemRegistrationMethod()
         {
             foreach (var method in OrdersRuntimeSubsystemRegistration.SelectMany(item =>
-                         MethodsRuntimeSubsystemRegistration[item]))
-            {
+                                                                                     MethodsRuntimeSubsystemRegistration[item]))
                 try
                 {
                     DebugLog(EInitAttrMode.RuntimeSubsystemRegistration, method);
@@ -318,7 +321,6 @@ namespace AIO.UEditor
                 {
                     DebugError(EInitAttrMode.RuntimeSubsystemRegistration, method, e);
                 }
-            }
 
             Application.quitting += () =>
             {

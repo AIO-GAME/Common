@@ -1,7 +1,11 @@
+#region
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+
+#endregion
 
 namespace AIO
 {
@@ -10,19 +14,14 @@ namespace AIO
     /// </summary>
     /// <typeparam name="TKey">Key泛型</typeparam>
     /// <typeparam name="TValue">Value泛型</typeparam>
-    public class BinSortedList<TKey, TValue> :
-        IBinData,
-        IDictionary<TKey, TValue>,
-        ICollection,
-        IReadOnlyDictionary<TKey, TValue>
-        where TKey : IBinData, new()
-        where TValue : IBinData, new()
+    public class BinSortedList<TKey, TValue>
+        : IBinData,
+          IDictionary<TKey, TValue>,
+          ICollection,
+          IReadOnlyDictionary<TKey, TValue>
+    where TKey : IBinData, new()
+    where TValue : IBinData, new()
     {
-        /// <summary>
-        /// 集合
-        /// </summary>
-        protected SortedList<TKey, TValue> Collection { get; }
-
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -30,6 +29,13 @@ namespace AIO
         {
             Collection = Pool.ASortedList<TKey, TValue>.New();
         }
+
+        /// <summary>
+        /// 集合
+        /// </summary>
+        protected SortedList<TKey, TValue> Collection { get; }
+
+        #region IBinData Members
 
         /// <inheritdoc />
         public void Dispose()
@@ -60,11 +66,42 @@ namespace AIO
         /// <inheritdoc />
         public void Reset()
         {
-            foreach (var item in Collection)
-            {
-                item.Value.Reset();
-            }
+            foreach (var item in Collection) item.Value.Reset();
         }
+
+
+        /// <inheritdoc />
+        public virtual object Clone()
+        {
+            var data = new BinSortedList<TKey, TValue>();
+            foreach (var item in Collection) data.Collection.Add((TKey)item.Key.Clone(), (TValue)item.Value.Clone());
+
+            return data;
+        }
+
+        #endregion
+
+        #region ICollection Members
+
+        /// <inheritdoc />
+        public void CopyTo(Array array, int index)
+        {
+            if (index < 0 || index >= array.Length) throw new ArgumentOutOfRangeException(nameof(index), "The value of arrayIndex is out of range.");
+
+            if (index + Collection.Count >= array.Length) throw new ArgumentException("The length of array is less than the number of elements in the collection.");
+
+            Array.Copy(Collection.ToArray(), 0, array, index, Collection.Count);
+        }
+
+        /// <inheritdoc />
+        public object SyncRoot => Collection;
+
+        /// <inheritdoc />
+        public bool IsSynchronized => false;
+
+        #endregion
+
+        #region IDictionary<TKey,TValue> Members
 
         /// <inheritdoc />
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
@@ -99,17 +136,11 @@ namespace AIO
         /// <inheritdoc />
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
         {
-            if (arrayIndex < 0 || arrayIndex >= array.Length)
-            {
-                throw new ArgumentOutOfRangeException(nameof(arrayIndex), "The value of arrayIndex is out of range.");
-            }
+            if (arrayIndex < 0 || arrayIndex >= array.Length) throw new ArgumentOutOfRangeException(nameof(arrayIndex), "The value of arrayIndex is out of range.");
 
             foreach (var item in Collection)
             {
-                if (arrayIndex >= array.Length)
-                {
-                    throw new ArgumentException("The length of array is less than the number of elements in the collection.");
-                }
+                if (arrayIndex >= array.Length) throw new ArgumentException("The length of array is less than the number of elements in the collection.");
 
                 array[arrayIndex++] = item;
             }
@@ -121,31 +152,9 @@ namespace AIO
             return Collection.Remove(item.Key);
         }
 
-        /// <inheritdoc />
-        public void CopyTo(Array array, int index)
-        {
-            if (index < 0 || index >= array.Length)
-            {
-                throw new ArgumentOutOfRangeException(nameof(index), "The value of arrayIndex is out of range.");
-            }
-
-            if (index + Collection.Count >= array.Length)
-            {
-                throw new ArgumentException("The length of array is less than the number of elements in the collection.");
-            }
-
-            Array.Copy(Collection.ToArray(), 0, array, index, Collection.Count);
-        }
-
 
         /// <inheritdoc cref="ICollection{T}.Count" />
         public int Count => Collection.Count;
-
-        /// <inheritdoc />
-        public object SyncRoot => Collection;
-
-        /// <inheritdoc />
-        public bool IsSynchronized => false;
 
         /// <inheritdoc />
         public bool IsReadOnly => false;
@@ -182,28 +191,21 @@ namespace AIO
         }
 
         /// <inheritdoc />
-        IEnumerable<TKey> IReadOnlyDictionary<TKey, TValue>.Keys => Keys;
-
-        /// <inheritdoc />
-        IEnumerable<TValue> IReadOnlyDictionary<TKey, TValue>.Values => Values;
-
-        /// <inheritdoc />
         public ICollection<TKey> Keys => Collection.Keys;
 
         /// <inheritdoc />
         public ICollection<TValue> Values => Collection.Values;
 
+        #endregion
+
+        #region IReadOnlyDictionary<TKey,TValue> Members
 
         /// <inheritdoc />
-        public virtual object Clone()
-        {
-            var data = new BinSortedList<TKey, TValue>();
-            foreach (var item in Collection)
-            {
-                data.Collection.Add((TKey)item.Key.Clone(), (TValue)item.Value.Clone());
-            }
+        IEnumerable<TKey> IReadOnlyDictionary<TKey, TValue>.Keys => Keys;
 
-            return data;
-        }
+        /// <inheritdoc />
+        IEnumerable<TValue> IReadOnlyDictionary<TKey, TValue>.Values => Values;
+
+        #endregion
     }
 }

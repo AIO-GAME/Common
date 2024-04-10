@@ -1,8 +1,12 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
@@ -23,11 +27,11 @@ namespace AIO
             return HashCode.Combine(Style, Content, Options);
         }
 
-        public static readonly GTContent Empty = new GTContent()
+        public static readonly GTContent Empty = new GTContent
         {
             Content = GUIContent.none,
             Options = null,
-            Style = null
+            Style   = null
         };
 
         public static bool IsNullOrEmpty(GTContent content)
@@ -145,21 +149,21 @@ namespace AIO
         {
             Content = new GUIContent(content);
             Options = new List<GUILayoutOption> { GUILayout.Width(width) };
-            Style = null;
+            Style   = null;
         }
 
         public GTContent(Texture content, float width)
         {
             Content = new GUIContent(content);
             Options = new List<GUILayoutOption> { GUILayout.Width(width) };
-            Style = null;
+            Style   = null;
         }
 
         public GTContent(GUIContent content, float width)
         {
             Content = content;
             Options = new List<GUILayoutOption> { GUILayout.Width(width) };
-            Style = null;
+            Style   = null;
         }
 
         #endregion
@@ -170,21 +174,21 @@ namespace AIO
         {
             Content = new GUIContent(content);
             Options = new List<GUILayoutOption> { GUILayout.Width(width), GUILayout.Height(height) };
-            Style = null;
+            Style   = null;
         }
 
         public GTContent(Texture content, float width, float height)
         {
             Content = new GUIContent(content);
             Options = new List<GUILayoutOption> { GUILayout.Width(width), GUILayout.Height(height) };
-            Style = null;
+            Style   = null;
         }
 
         public GTContent(GUIContent content, float width, float height)
         {
             Content = content;
             Options = new List<GUILayoutOption> { GUILayout.Width(width), GUILayout.Height(height) };
-            Style = null;
+            Style   = null;
         }
 
         #endregion
@@ -195,21 +199,21 @@ namespace AIO
         {
             Content = new GUIContent(content);
             Options = new List<GUILayoutOption>(options);
-            Style = null;
+            Style   = null;
         }
 
         public GTContent(GUIContent content, params GUILayoutOption[] options)
         {
             Content = content;
             Options = new List<GUILayoutOption>(options);
-            Style = null;
+            Style   = null;
         }
 
         public GTContent(Texture content, params GUILayoutOption[] options)
         {
             Content = new GUIContent(content);
             Options = new List<GUILayoutOption>(options);
-            Style = null;
+            Style   = null;
         }
 
         #endregion
@@ -220,21 +224,21 @@ namespace AIO
         {
             Content = content;
             Options = null;
-            Style = null;
+            Style   = null;
         }
 
         public GTContent(string content)
         {
             Content = new GUIContent(content);
             Options = null;
-            Style = null;
+            Style   = null;
         }
 
         public GTContent(Texture content)
         {
             Content = new GUIContent(content);
             Options = null;
-            Style = null;
+            Style   = null;
         }
 
         #endregion
@@ -243,14 +247,14 @@ namespace AIO
         {
             Content = GUIContent.none;
             Options = new List<GUILayoutOption>(options);
-            Style = null;
+            Style   = null;
         }
 
         private GTContent(GUILayoutOption options)
         {
             Content = GUIContent.none;
             Options = new List<GUILayoutOption> { options };
-            Style = null;
+            Style   = null;
         }
 
         public override string ToString()
@@ -258,46 +262,74 @@ namespace AIO
             return Content.ToString();
         }
 
-        public static implicit operator GTContent(Enum content) =>
-            new GTContent(content.ToString());
+        public static implicit operator GTContent(Enum content)
+        {
+            return new GTContent(content.ToString());
+        }
 
-        public static implicit operator GTContent(string content) =>
-            new GTContent(content);
+        public static implicit operator GTContent(string content)
+        {
+            return new GTContent(content);
+        }
 
-        public static implicit operator GTContent(int content) =>
-            new GTContent(content.ToString(CultureInfo.CurrentCulture));
+        public static implicit operator GTContent(int content)
+        {
+            return new GTContent(content.ToString(CultureInfo.CurrentCulture));
+        }
 
-        public static implicit operator GTContent(float content) =>
-            new GTContent(content.ToString(CultureInfo.CurrentCulture));
+        public static implicit operator GTContent(float content)
+        {
+            return new GTContent(content.ToString(CultureInfo.CurrentCulture));
+        }
 
-        public static implicit operator GTContent(long content) =>
-            new GTContent(content.ToString(CultureInfo.CurrentCulture));
+        public static implicit operator GTContent(long content)
+        {
+            return new GTContent(content.ToString(CultureInfo.CurrentCulture));
+        }
 
-        public static implicit operator GTContent(double content) =>
-            new GTContent(content.ToString(CultureInfo.CurrentCulture));
+        public static implicit operator GTContent(double content)
+        {
+            return new GTContent(content.ToString(CultureInfo.CurrentCulture));
+        }
 
-        public static implicit operator GTContent(GUIContent content) =>
-            new GTContent(content);
+        public static implicit operator GTContent(GUIContent content)
+        {
+            return new GTContent(content);
+        }
 
-        public static implicit operator GTContent(Texture content) =>
-            new GTContent(content);
+        public static implicit operator GTContent(Texture content)
+        {
+            return new GTContent(content);
+        }
 
-        public static implicit operator GTContent(GUILayoutOption content) =>
-            new GTContent(content);
+        public static implicit operator GTContent(GUILayoutOption content)
+        {
+            return new GTContent(content);
+        }
 
-        public static implicit operator GTContent(GUILayoutOption[] content) =>
-            new GTContent(content);
+        public static implicit operator GTContent(GUILayoutOption[] content)
+        {
+            return new GTContent(content);
+        }
 
-        public static implicit operator GUILayoutOption[](GTContent content) =>
-            content.Options.ToArray();
+        public static implicit operator GUILayoutOption[](GTContent content)
+        {
+            return content.Options.ToArray();
+        }
 
-        public static implicit operator List<GUILayoutOption>(GTContent content) =>
-            content.Options;
+        public static implicit operator List<GUILayoutOption>(GTContent content)
+        {
+            return content.Options;
+        }
 
-        public static implicit operator GUIContent(GTContent content) =>
-            content.Content;
+        public static implicit operator GUIContent(GTContent content)
+        {
+            return content.Content;
+        }
 
-        public static implicit operator GUIStyle(GTContent content) =>
-            content.Style;
+        public static implicit operator GUIStyle(GTContent content)
+        {
+            return content.Style;
+        }
     }
 }

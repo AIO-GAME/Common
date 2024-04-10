@@ -1,13 +1,19 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: FTP
+
         public partial class FTP
         {
             /// <summary>
@@ -20,7 +26,7 @@ namespace AIO
             /// <exception cref="WebException">异常信息</exception>
             /// <returns>删除返回信息</returns>
             public static bool DeleteFile(string remote, string user, string pass,
-                ushort timeout = Net.TIMEOUT)
+                                          ushort timeout = Net.TIMEOUT)
             {
                 try
                 {
@@ -46,7 +52,7 @@ namespace AIO
             /// <exception cref="Exception">异常信息</exception>
             /// <returns>删除返回信息</returns>
             public static async Task<bool> DeleteFileAsync(string remote, string user, string pass,
-                ushort timeout = Net.TIMEOUT)
+                                                           ushort timeout = Net.TIMEOUT)
             {
                 try
                 {
@@ -77,19 +83,19 @@ namespace AIO
             /// <exception cref="WebException">异常信息</exception>
             /// <returns>删除状态</returns>
             public static bool DeleteDir(string remote, string user, string pass,
-                ushort timeout = Net.TIMEOUT)
+                                         ushort timeout = Net.TIMEOUT)
             {
                 try
                 {
                     if (!CheckDir(remote, user, pass, timeout)) return true;
                     var files = GetRemoteListFile(remote, user, pass, null, timeout);
                     if (files.Any(item => !DeleteFile(string.Concat(remote, '/', Path.GetFileName(item)),
-                            user, pass, timeout)))
+                                                      user, pass, timeout)))
                         return false;
 
                     var folders = GetRemoteListDir(remote, user, pass, null, timeout);
                     if (folders.Any(item => !DeleteDir(string.Concat(remote, '/', Path.GetFileName(item)),
-                            user, pass, timeout)))
+                                                       user, pass, timeout)))
                         return false;
 
                     var request = CreateRequestDir(remote, user, pass, "RMD", timeout);
@@ -113,7 +119,7 @@ namespace AIO
             /// <exception cref="WebException">异常信息</exception>
             /// <returns>删除状态</returns>
             public static async Task<bool> DeleteDirAsync(string remote, string user, string pass,
-                ushort timeout = Net.TIMEOUT)
+                                                          ushort timeout = Net.TIMEOUT)
             {
                 try
                 {
@@ -121,17 +127,13 @@ namespace AIO
 
                     var folders = await GetRemoteListDirAsync(remote, user, pass, null, timeout);
                     foreach (var target in folders.Select(item => string.Concat(remote, '/', Path.GetFileName(item))))
-                    {
                         if (!await DeleteDirAsync(target, user, pass, timeout))
                             return false;
-                    }
 
                     var files = await GetRemoteListFileAsync(remote, user, pass, null, timeout);
                     foreach (var target in files.Select(item => string.Concat(remote, '/', Path.GetFileName(item))))
-                    {
                         if (!await DeleteFileAsync(target, user, pass, timeout))
                             return false;
-                    }
 
                     var request = CreateRequestDir(remote, user, pass, "RMD", timeout);
                     using var response = (FtpWebResponse)await request.GetResponseAsync();
@@ -144,5 +146,7 @@ namespace AIO
                 }
             }
         }
+
+        #endregion
     }
 }

@@ -1,6 +1,10 @@
-﻿using System.ComponentModel;
+﻿#region
+
+using System.ComponentModel;
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -10,11 +14,12 @@ namespace AIO.UEditor
     [DisplayName("左右分割图形矩形")]
     public class GraphicBisection : GraphicRect
     {
-        private Rect RightRect;
-        private Vector2 RightPosition;
-
-        private Rect LeftRect;
+        private bool    isDrag;
         private Vector2 LeftPosition;
+
+        private Rect    LeftRect;
+        private Vector2 RightPosition;
+        private Rect    RightRect;
 
         private Rect SplitRect;
 
@@ -23,12 +28,8 @@ namespace AIO.UEditor
         public GUIStyle LeftStyle { get; set; }
 
         public uint RightMinWidth { get; set; }
-        public uint LeftMinWidth { get; set; }
-        public uint SplitWidth { get; set; } = 20;
-
-        public GraphicBisection()
-        {
-        }
+        public uint LeftMinWidth  { get; set; }
+        public uint SplitWidth    { get; set; } = 20;
 
         public override void OnAwake()
         {
@@ -42,13 +43,13 @@ namespace AIO.UEditor
             if (RightRect.width < RightMinWidth && LeftRect.width < LeftMinWidth)
                 SplitRect.x = (RectData.width - SplitWidth) / 2;
 
-            SplitRect.y = RightRect.y = LeftRect.y = RectData.y;
+            SplitRect.y      = RightRect.y      = LeftRect.y      = RectData.y;
             SplitRect.height = RightRect.height = LeftRect.height = RectData.height;
-            SplitRect.width = SplitWidth;
+            SplitRect.width  = SplitWidth;
 
-            LeftRect.width = SplitRect.x;
-            LeftRect.x = RectData.x + 10;
-            RightRect.x = SplitRect.x + SplitWidth;
+            LeftRect.width  = SplitRect.x;
+            LeftRect.x      = RectData.x + 10;
+            RightRect.x     = SplitRect.x + SplitWidth;
             RightRect.width = RectData.width - RightRect.x - 10;
 
             using (new GUILayout.AreaScope(RectData))
@@ -72,26 +73,17 @@ namespace AIO.UEditor
         /// 绘制左边
         /// </summary>
         /// <param name="rect"></param>
-        protected virtual void OnDrawLeft(Rect rect)
-        {
-        }
+        protected virtual void OnDrawLeft(Rect rect) { }
 
         /// <summary>
         /// 绘制右边
         /// </summary>
         /// <param name="rect"></param>
-        protected virtual void OnDrawRight(Rect rect)
-        {
-        }
-
-        private bool isDrag;
+        protected virtual void OnDrawRight(Rect rect) { }
 
         public sealed override void EventMouseDown(in Event eventData)
         {
-            if (SplitRect.Contains(eventData.mousePosition))
-            {
-                isDrag = true;
-            }
+            if (SplitRect.Contains(eventData.mousePosition)) isDrag = true;
         }
 
         public sealed override void EventMouseUp(in Event eventData)

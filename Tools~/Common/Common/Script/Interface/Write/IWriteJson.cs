@@ -1,11 +1,15 @@
+#region
+
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
     /// <summary>
     /// 写入指定数据类型
     /// </summary>
-    public partial interface IWriteJson
+    public interface IWriteJson
     {
         /// <summary>
         /// 写入Json数据

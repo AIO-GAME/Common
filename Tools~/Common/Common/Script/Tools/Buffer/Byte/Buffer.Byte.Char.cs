@@ -1,11 +1,17 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
     public partial class BufferByte
     {
+        #region IReadData Members
+
         /// <inheritdoc/> 
         public char ReadChar(bool reverse = false)
         {
@@ -21,6 +27,10 @@ namespace AIO
             if (str.Length == 0) return Array.Empty<char>();
             return str.ToCharArray();
         }
+
+        #endregion
+
+        #region IWriteData Members
 
         /// <inheritdoc/> 
         public void WriteChar(char value, bool reverse = false)
@@ -52,5 +62,7 @@ namespace AIO
             AutomaticExpansion(bytes.Length);
             Arrays.SetByteArray(ref WriteIndex, bytes, reverse);
         }
+
+        #endregion
     }
 }

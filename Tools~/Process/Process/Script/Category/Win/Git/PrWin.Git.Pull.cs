@@ -4,15 +4,21 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+#endregion
+
 namespace AIO
 {
     public partial class PrWin
     {
+        #region Nested type: Git
+
         public static partial class Git
         {
             /// <summary>
@@ -86,8 +92,10 @@ namespace AIO
             /// <param name="quit">静默退出</param>
             public static IExecutor Pull(in string target, in bool quit = true)
             {
-                return Pull(new string[] { target }, quit);
+                return Pull(new[] { target }, quit);
             }
         }
+
+        #endregion
     }
 }

@@ -4,13 +4,19 @@
 
 |||✩ - - - - - |*/
 
+#region
+
 using System;
 using System.IO;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrGit
     {
+        #region Nested type: Fetch
+
         /// <summary>
         /// <see cref="PrGit"/> <see cref="Fetch"/>
         /// </summary>
@@ -56,5 +62,7 @@ namespace AIO
                 return Create(work, "fetch --all");
             }
         }
+
+        #endregion
     }
 }

@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿#region
+
+using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
@@ -44,7 +48,7 @@ namespace AIO
         /// </summary>
         public static GUILayoutOption[] WidthHeightExpand(in bool wValue = true, in bool hValue = true)
         {
-            return new GUILayoutOption[] { GUILayout.ExpandWidth(wValue), GUILayout.ExpandHeight(hValue) };
+            return new[] { GUILayout.ExpandWidth(wValue), GUILayout.ExpandHeight(hValue) };
         }
 
         /// <summary>

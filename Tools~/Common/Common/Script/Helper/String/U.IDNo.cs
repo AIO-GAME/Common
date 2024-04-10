@@ -1,17 +1,16 @@
-﻿/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2020-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
-
+﻿#region
 
 using System.Linq;
 using System.Text.RegularExpressions;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IDNo
+
         /// <summary>
         /// 身份证判断方法
         /// </summary>
@@ -21,26 +20,25 @@ namespace AIO
             /// 18位二代身份证号码的正则表达式
             /// </summary>
             private const string REGEX_ID_NO_18 = "^"
-                                                  + "\\d{6}" // 6位地区码
-                                                  + "(18|19|([23]\\d))\\d{2}" // 年YYYY
-                                                  + "((0[1-9])|(10|11|12))" // 月MM
-                                                  + "(([0-2][1-9])|10|20|30|31)" // 日DD
-                                                  + "\\d{3}" // 3位顺序码
-                                                  + "[0-9Xx]" // 校验码
-                                                  + "$";
+                                                + "\\d{6}"                     // 6位地区码
+                                                + "(18|19|([23]\\d))\\d{2}"    // 年YYYY
+                                                + "((0[1-9])|(10|11|12))"      // 月MM
+                                                + "(([0-2][1-9])|10|20|30|31)" // 日DD
+                                                + "\\d{3}"                     // 3位顺序码
+                                                + "[0-9Xx]"                    // 校验码
+                                                + "$";
 
             /// <summary>
             /// 加权因子
             /// </summary>
-            private static readonly int[] W = new int[] { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 };
+            private static readonly int[] W = { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 };
 
             /// <summary>
             ///  
             /// </summary>
-            private static readonly string[] CheckNumberArray = new string[]
-                { "1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2" };
+            private static readonly string[] CheckNumberArray = { "1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2" };
 
-            private static readonly string[] City = new string[]
+            private static readonly string[] City =
             {
                 null, null, null, null, null, null, null, null, null, null, null,
                 "北京", "天津", "河北", "山西", "内蒙古", null, null, null, null, null, "辽宁",
@@ -77,10 +75,7 @@ namespace AIO
             private static bool CheckIDNo18(string IDNo)
             {
                 // 匹配身份证号码的正则表达式
-                if (!Regex.IsMatch(IDNo, REGEX_ID_NO_18))
-                {
-                    return false;
-                }
+                if (!Regex.IsMatch(IDNo, REGEX_ID_NO_18)) return false;
 
                 // 校验身份证号码的验证码
                 return ValidateCheckNumber(IDNo);
@@ -128,17 +123,15 @@ namespace AIO
 
                 // 校验位是X，则表示10
                 if (IDNoArray[17].Equals('X') || IDNoArray[17].Equals('x'))
-                {
                     sum += 10;
-                }
                 else
-                {
                     sum += int.Parse(IDNoArray[17].ToString());
-                }
 
                 // 如果除11模1，则校验通过
                 return sum % 11 == 1;
             }
         }
+
+        #endregion
     }
 }

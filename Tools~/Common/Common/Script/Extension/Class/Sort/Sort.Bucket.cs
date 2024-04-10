@@ -1,10 +1,8 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2024-01-03
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -20,7 +18,7 @@ namespace AIO
             foreach (var item in array)
             {
                 var xBit = (int)((item - valueMaxMin.Item2) * coefficient);
-                var yBit = (int)(++bucketArray[xBit, 0]);
+                var yBit = (int)++bucketArray[xBit, 0];
                 bucketArray[xBit, yBit] = item;
             }
 
@@ -29,21 +27,20 @@ namespace AIO
                 // 为桶里的每一行使用插入排序
                 var insertion = new float[(int)bucketArray[j, 0]]; // 为桶里的行创建新的数组后使用插入排序
                 for (var k = 0; k < insertion.Length; k++) insertion[k] = bucketArray[j, k + 1];
-                SortInsert(insertion); // 插入排序
+                SortInsert(insertion);                                                           // 插入排序
                 for (var k = 0; k < insertion.Length; k++) bucketArray[j, k + 1] = insertion[k]; // 把排好序的结果回写到桶里
             }
 
             for (int count = 0, j = 0; j < bucketLen; j++)
-            {
                 // 将所有桶里的数据回写到原数组中
-                for (var k = 1; k <= (int)bucketArray[j, 0]; k++) array[count++] = bucketArray[j, k];
-            }
+            for (var k = 1; k <= (int)bucketArray[j, 0]; k++)
+                array[count++] = bucketArray[j, k];
 
             return array;
         }
 
         /// <summary>
-        /// 桶排序
+        ///     桶排序
         /// </summary>
         private static IList<sbyte> SortBucket(IList<sbyte> array)
         {
@@ -69,7 +66,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 桶排序
+        ///     桶排序
         /// </summary>
         private static IList<int> SortBucket(IList<int> array)
         {
@@ -95,7 +92,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 桶排序
+        ///     桶排序
         /// </summary>
         private static IList<long> SortBucket(IList<long> array)
         {
@@ -121,7 +118,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 桶排序
+        ///     桶排序
         /// </summary>
         private static IList<byte> SortBucket(IList<byte> array)
         {
@@ -227,7 +224,7 @@ namespace AIO
             foreach (var item in array)
             {
                 var xBit = (int)((item - valueMaxMin.Item2) * coefficient);
-                var yBit = (int)(++bucketArray[xBit, 0]);
+                var yBit = (int)++bucketArray[xBit, 0];
                 bucketArray[xBit, yBit] = item;
             }
 
@@ -236,15 +233,14 @@ namespace AIO
                 // 为桶里的每一行使用插入排序
                 var insertion = new double[(int)bucketArray[j, 0]]; // 为桶里的行创建新的数组后使用插入排序
                 for (var k = 0; k < insertion.Length; k++) insertion[k] = bucketArray[j, k + 1];
-                SortInsert(insertion); // 插入排序
+                SortInsert(insertion);                                                           // 插入排序
                 for (var k = 0; k < insertion.Length; k++) bucketArray[j, k + 1] = insertion[k]; // 把排好序的结果回写到桶里
             }
 
             for (int count = 0, j = 0; j < bucketLen; j++)
-            {
                 // 将所有桶里的数据回写到原数组中
-                for (var k = 1; k <= (int)bucketArray[j, 0]; k++) array[count++] = bucketArray[j, k];
-            }
+            for (var k = 1; k <= (int)bucketArray[j, 0]; k++)
+                array[count++] = bucketArray[j, k];
 
             return array;
         }
@@ -259,7 +255,7 @@ namespace AIO
             foreach (var item in array)
             {
                 var xBit = (int)((item - valueMaxMin.Item2) * coefficient);
-                var yBit = (int)(++bucketArray[xBit, 0]);
+                var yBit = (int)++bucketArray[xBit, 0];
                 bucketArray[xBit, yBit] = item;
             }
 
@@ -268,21 +264,20 @@ namespace AIO
                 // 为桶里的每一行使用插入排序
                 var insertion = new decimal[(int)bucketArray[j, 0]]; // 为桶里的行创建新的数组后使用插入排序
                 for (var k = 0; k < insertion.Length; k++) insertion[k] = bucketArray[j, k + 1];
-                SortInsert(insertion); // 插入排序
+                SortInsert(insertion);                                                           // 插入排序
                 for (var k = 0; k < insertion.Length; k++) bucketArray[j, k + 1] = insertion[k]; // 把排好序的结果回写到桶里
             }
 
             for (int count = 0, j = 0; j < bucketLen; j++)
-            {
                 // 将所有桶里的数据回写到原数组中
-                for (var k = 1; k <= (int)bucketArray[j, 0]; k++) array[count++] = bucketArray[j, k];
-            }
+            for (var k = 1; k <= (int)bucketArray[j, 0]; k++)
+                array[count++] = bucketArray[j, k];
 
             return array;
         }
 
         /// <summary>
-        /// 桶排序
+        ///     桶排序
         /// </summary>
         private static IList<short> SortBucket(in IList<short> array)
         {

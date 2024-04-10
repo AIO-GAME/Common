@@ -9,6 +9,16 @@
             Unity 输出
             </summary>
         </member>
+        <member name="M:UnityEngine.Print.Exception``2(``0@,``1@)">
+            <summary>
+            输出异常
+            </summary>
+        </member>
+        <member name="M:UnityEngine.Print.Exception``1(``0@)">
+            <summary>
+            输出异常
+            </summary>
+        </member>
         <member name="T:UnityEngine.Print.Console">
             <summary>
             控制台
@@ -44,16 +54,6 @@
         <member name="M:UnityEngine.Print.Console.DisableError">
             <summary>
             关闭 ERROR 输出
-            </summary>
-        </member>
-        <member name="M:UnityEngine.Print.Exception``2(``0@,``1@)">
-            <summary>
-            输出异常
-            </summary>
-        </member>
-        <member name="M:UnityEngine.Print.Exception``1(``0@)">
-            <summary>
-            输出异常
             </summary>
         </member>
         <member name="M:UnityEngine.Print.Assert(System.Boolean@)">
@@ -191,11 +191,6 @@
             日志
             </summary>
         </member>
-        <member name="T:UnityEngine.Print.UPrintElapse">
-            <summary>
-            执行时间
-            </summary>
-        </member>
         <member name="M:UnityEngine.Print.Run``1(System.String@,``0@,System.String@)">
             <summary>
             输出详细执行时间
@@ -276,6 +271,11 @@
             输出详细执行时间
             </summary>
         </member>
+        <member name="T:UnityEngine.Print.UPrintElapse">
+            <summary>
+            执行时间
+            </summary>
+        </member>
         <member name="M:UnityEngine.Print.Warn``1(``0@,EFormat@)">
             <summary>
             警告
@@ -306,26 +306,6 @@
             Unity 控制台输出
             </summary>
         </member>
-        <member name="F:UnityEngine.UnityConsole.WriterOut">
-            <summary>
-            Unity Log 输出
-            </summary>
-        </member>
-        <member name="F:UnityEngine.UnityConsole.WriterError">
-            <summary>
-            Unity Error 输出
-            </summary>
-        </member>
-        <member name="F:UnityEngine.UnityConsole.OriginalOut">
-            <summary>
-            源 输出
-            </summary>
-        </member>
-        <member name="F:UnityEngine.UnityConsole.OriginalError">
-            <summary>
-            源 输出
-            </summary>
-        </member>
         <member name="M:UnityEngine.UnityConsole.EnabledLog">
             <summary>
             关闭 LOG 输出
@@ -339,21 +319,6 @@
         <member name="M:UnityEngine.UnityConsole.ENABLED_ALL_NO_CONDITION">
             <summary>
             关闭 LOG 输出
-            </summary>
-        </member>
-        <member name="M:UnityEngine.UnityConsole.DisableALL">
-            <summary>
-            关闭 全部输出
-            </summary>
-        </member>
-        <member name="M:UnityEngine.UnityConsole.DisableLog">
-            <summary>
-            关闭 LOG 输出
-            </summary>
-        </member>
-        <member name="M:UnityEngine.UnityConsole.DisableError">
-            <summary>
-            关闭 ERROR 输出
             </summary>
         </member>
         <member name="F:UnityEngine.UnityConsole.UnityConsoleType.Log">
@@ -398,6 +363,41 @@
              <summary>
             
              </summary>
+        </member>
+        <member name="F:UnityEngine.UnityConsole.WriterOut">
+            <summary>
+            Unity Log 输出
+            </summary>
+        </member>
+        <member name="F:UnityEngine.UnityConsole.WriterError">
+            <summary>
+            Unity Error 输出
+            </summary>
+        </member>
+        <member name="F:UnityEngine.UnityConsole.OriginalOut">
+            <summary>
+            源 输出
+            </summary>
+        </member>
+        <member name="F:UnityEngine.UnityConsole.OriginalError">
+            <summary>
+            源 输出
+            </summary>
+        </member>
+        <member name="M:UnityEngine.UnityConsole.DisableALL">
+            <summary>
+            关闭 全部输出
+            </summary>
+        </member>
+        <member name="M:UnityEngine.UnityConsole.DisableLog">
+            <summary>
+            关闭 LOG 输出
+            </summary>
+        </member>
+        <member name="M:UnityEngine.UnityConsole.DisableError">
+            <summary>
+            关闭 ERROR 输出
+            </summary>
         </member>
     </members>
 </doc>

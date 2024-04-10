@@ -1,6 +1,11 @@
 ﻿#if UNITY_EDITOR
+
+#region
+
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
@@ -9,15 +14,21 @@ namespace AIO
     {
         /// <summary>Calls <see cref="SelfDrawerAttribute.CanCacheInspectorGUI"/>.</summary>
         public override bool CanCacheInspectorGUI(SerializedProperty property)
-            => Attribute.CanCacheInspectorGUI(property);
+        {
+            return Attribute.CanCacheInspectorGUI(property);
+        }
 
         /// <summary>Calls <see cref="SelfDrawerAttribute.GetPropertyHeight"/>.</summary>
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-            => Attribute.GetPropertyHeight(property, label);
+        {
+            return Attribute.GetPropertyHeight(property, label);
+        }
 
         /// <summary>Calls <see cref="SelfDrawerAttribute.OnGUI"/>.</summary>
         public override void OnGUI(Rect area, SerializedProperty property, GUIContent label)
-            => Attribute.OnGUI(area, property, label);
+        {
+            Attribute.OnGUI(area, property, label);
+        }
     }
 }
 #endif

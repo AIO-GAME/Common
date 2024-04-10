@@ -4,6 +4,8 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,23 +13,55 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
+#endregion
+
 namespace AIO
 {
     /// <summary>
     /// 执行器
     /// </summary>
-    public partial class Executor : IExecutorInternal
+    public class Executor : IExecutorInternal
     {
-        /// <inheritdoc/>
-        public ProcessStartInfo Info { get; }
+        /// <summary>
+        /// 回调
+        /// </summary>
+        private Action<object, string> Progress;
 
-        /// <inheritdoc/>
-        public bool EnableOutput { get; set; }
+        /// <summary>
+        /// 执行器
+        /// </summary>
+        public Executor(in ProcessStartInfo info, in bool enableOutput = true)
+        {
+            IsFinish = IsRunning = false;
+            Info     = info;
+            Pr       = new Process();
+            if (info != null) Pr.StartInfo = info;
+            inputs       = new StringBuilder();
+            EnableOutput = enableOutput;
+        }
 
         /// <summary>
         /// 执行的进程
         /// </summary>
         protected Process Pr { get; }
+
+        /// <summary>
+        /// 输出信息
+        /// </summary>
+        protected StringBuilder inputs { get; private set; }
+
+        /// <summary>
+        /// 回调
+        /// </summary>
+        protected Action<IResult> CallBack { get; private set; }
+
+        #region IExecutorInternal Members
+
+        /// <inheritdoc/>
+        public ProcessStartInfo Info { get; }
+
+        /// <inheritdoc/>
+        public bool EnableOutput { get; set; }
 
         /// <inheritdoc/>
         public IExecutor Next { get; set; }
@@ -38,28 +72,10 @@ namespace AIO
         /// <inheritdoc/>
         public bool IsFinish { get; protected set; }
 
-        /// <summary>
-        /// 输出信息
-        /// </summary>
-        protected StringBuilder inputs { get; private set; }
-
         /// <inheritdoc/>
         public TaskAwaiter<IResult> GetAwaiter()
         {
             return Task.Factory.StartNew(Sync).GetAwaiter();
-        }
-
-        /// <summary>
-        /// 执行器
-        /// </summary>
-        public Executor(in ProcessStartInfo info, in bool enableOutput = true)
-        {
-            IsFinish = IsRunning = false;
-            Info = info;
-            Pr = new Process();
-            if (info != null) Pr.StartInfo = info;
-            inputs = new StringBuilder();
-            EnableOutput = enableOutput;
         }
 
         /// <inheritdoc/>
@@ -84,7 +100,7 @@ namespace AIO
             try
             {
                 Pr.Disposed += result.ReceivedDisposed;
-                Pr.Exited += result.ReceivedExited;
+                Pr.Exited   += result.ReceivedExited;
 
                 if (Pr.StartInfo.RedirectStandardOutput)
                 {
@@ -130,7 +146,7 @@ namespace AIO
                 if (Pr.StartInfo.RedirectStandardInput) Pr.StandardInput.Close();
 
                 Pr.Disposed -= result.ReceivedDisposed;
-                Pr.Exited -= result.ReceivedExited;
+                Pr.Exited   -= result.ReceivedExited;
             }
             catch (Exception ex)
             {
@@ -194,16 +210,6 @@ namespace AIO
             return this;
         }
 
-        /// <summary>
-        /// 回调
-        /// </summary>
-        protected Action<IResult> CallBack { get;private set; }
-
-        /// <summary>
-        /// 回调
-        /// </summary>
-        private Action<object, string> Progress;
-
         /// <inheritdoc/>
         public IExecutor OnComplete(in Action<IResult> action)
         {
@@ -217,6 +223,8 @@ namespace AIO
             Progress = action;
             return this;
         }
+
+        #endregion
 
         /// <summary>
         /// 回调

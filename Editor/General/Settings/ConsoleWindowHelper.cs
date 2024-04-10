@@ -1,7 +1,4 @@
-﻿/*|==========|*|
-|*|Author:   |*| -> xi nan
-|*|Date:     |*| -> 2023-05-31
-|*|==========|*/
+﻿#region
 
 using System;
 using System.Collections.Generic;
@@ -9,22 +6,24 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using UnityEditor;
-using UnityEditor.Callbacks;
 using UnityEditorInternal;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
     /// <summary>
     /// Debug.Log 跳转 忽略指定文件 指定函数
     /// </summary>
-    public static partial class ConsoleWindowHelper
+    public static class ConsoleWindowHelper
     {
+        private const  string              textBeforeFilePath = ") (at ";
         private static ConsoleWindowConfig config;
 
         private static Type m_ConsoleWindow;
 
-        private static bool isInit = false;
+        private static bool isInit;
 
         private static Dictionary<string, bool> IgnoreClass { get; } = new Dictionary<string, bool>();
 
@@ -47,17 +46,17 @@ namespace AIO.UEditor
                     {
                         if (IgnoreClass.ContainsKey(fullName))
                         {
-                            if (!IgnoreClass[fullName] && attr.Ignore)
-                            {
-                                IgnoreClass[fullName] = true;
-                            }
+                            if (!IgnoreClass[fullName] && attr.Ignore) IgnoreClass[fullName] = true;
                         }
-                        else IgnoreClass[fullName] = attr.Ignore;
+                        else
+                        {
+                            IgnoreClass[fullName] = attr.Ignore;
+                        }
                     }
 
                     foreach (var method in type.GetMethods(
                                  BindingFlags.Instance
-                                 | BindingFlags.Static |
+                               | BindingFlags.Static |
                                  BindingFlags.DeclaredOnly |
                                  BindingFlags.Public |
                                  BindingFlags.NonPublic |
@@ -70,7 +69,10 @@ namespace AIO.UEditor
                         if (!IgnoreClass.ContainsKey(fullName)) IgnoreClass[fullName] = false;
                         string key;
                         var IsAsync = method.GetCustomAttribute<AsyncStateMachineAttribute>() != null;
-                        if (IsAsync) key = $"{fullName}/<{method.Name}>";
+                        if (IsAsync)
+                        {
+                            key = $"{fullName}/<{method.Name}>";
+                        }
                         else
                         {
                             // 获取泛型
@@ -78,35 +80,16 @@ namespace AIO.UEditor
                             {
                                 var methodDefinition = method.GetGenericMethodDefinition();
 
-                                var gList = methodDefinition.GetGenericArguments()
-                                    .SelectMany(param => param.GetGenericParameterConstraints()).ToArray();
+                                var gList = methodDefinition.GetGenericArguments().SelectMany(param => param.GetGenericParameterConstraints()).ToArray();
 
                                 var genericArgumentsStr = string.Join(",", gList.Select(param => param.FullName));
 
                                 var parameterInfo = string.Join(",", methodDefinition.GetParameters().Select(param =>
-                                        {
-                                            if (string.IsNullOrEmpty(param.ParameterType.FullName))
-                                            {
-                                                return gList[param.ParameterType.GenericParameterPosition].FullName;
-                                            }
+                                    {
+                                        if (string.IsNullOrEmpty(param.ParameterType.FullName)) return gList[param.ParameterType.GenericParameterPosition].FullName;
 
-                                            return param.ParameterType.FullName;
-                                        }))
-                                        .Replace("System.Object", "object")
-                                        .Replace("System.String", "string")
-                                        .Replace("System.Single", "float")
-                                        .Replace("System.Boolean", "bool")
-                                        .Replace("System.Double", "double")
-                                        .Replace("System.Byte", "byte")
-                                        .Replace("System.Int16", "short")
-                                        .Replace("System.Int32", "int")
-                                        .Replace("System.Int64", "long")
-                                        .Replace("System.UInt32", "uint")
-                                        .Replace("System.UInt64", "ulong")
-                                        .Replace("System.UInt16", "ushort")
-                                        .Replace("System.SByte", "sbyte")
-                                        .Replace("System.Char", "char")
-                                        .Replace("System.Decimal", "decimal")
+                                        return param.ParameterType.FullName;
+                                    })).Replace("System.Object", "object").Replace("System.String", "string").Replace("System.Single", "float").Replace("System.Boolean", "bool").Replace("System.Double", "double").Replace("System.Byte", "byte").Replace("System.Int16", "short").Replace("System.Int32", "int").Replace("System.Int64", "long").Replace("System.UInt32", "uint").Replace("System.UInt64", "ulong").Replace("System.UInt16", "ushort").Replace("System.SByte", "sbyte").Replace("System.Char", "char").Replace("System.Decimal", "decimal")
                                     ;
 
                                 key = string.IsNullOrEmpty(genericArgumentsStr)
@@ -116,22 +99,7 @@ namespace AIO.UEditor
                             else
                             {
                                 var parameterInfo = string.Join(",",
-                                        method.GetParameters().Select(param => param.ParameterType.FullName))
-                                    .Replace("System.Object", "object")
-                                    .Replace("System.String", "string")
-                                    .Replace("System.Single", "float")
-                                    .Replace("System.Boolean", "bool")
-                                    .Replace("System.Double", "double")
-                                    .Replace("System.Byte", "byte")
-                                    .Replace("System.Int16", "short")
-                                    .Replace("System.Int32", "int")
-                                    .Replace("System.Int64", "long")
-                                    .Replace("System.UInt32", "uint")
-                                    .Replace("System.UInt64", "ulong")
-                                    .Replace("System.UInt16", "ushort")
-                                    .Replace("System.SByte", "sbyte")
-                                    .Replace("System.Char", "char")
-                                    .Replace("System.Decimal", "decimal");
+                                                                method.GetParameters().Select(param => param.ParameterType.FullName)).Replace("System.Object", "object").Replace("System.String", "string").Replace("System.Single", "float").Replace("System.Boolean", "bool").Replace("System.Double", "double").Replace("System.Byte", "byte").Replace("System.Int16", "short").Replace("System.Int32", "int").Replace("System.Int64", "long").Replace("System.UInt32", "uint").Replace("System.UInt64", "ulong").Replace("System.UInt16", "ushort").Replace("System.SByte", "sbyte").Replace("System.Char", "char").Replace("System.Decimal", "decimal");
                                 key = $"{fullName}:{method.Name} ({parameterInfo})";
                             }
                         }
@@ -160,7 +128,7 @@ namespace AIO.UEditor
                 m_ConsoleWindow?.GetField("ms_ConsoleWindow", BindingFlags.Static | BindingFlags.NonPublic);
 
             var consoleWindowInstance = consoleWindowFiledInfo?.GetValue(null); //从对象字段中得到这个对象
-            var str = activeText?.GetValue(consoleWindowInstance).ToString(); //得到Log信息,用于后面解析
+            var str = activeText?.GetValue(consoleWindowInstance).ToString();   //得到Log信息,用于后面解析
 
             var (path, lineIndex) = GetSubStringInStackStr(str); //解析出对应的.cs文件全路径 和 行号 
             if (lineIndex == -1) return false;
@@ -170,14 +138,12 @@ namespace AIO.UEditor
             return true;
         }
 
-        private const string textBeforeFilePath = ") (at ";
-
         /// <summary>
         /// 这个方法主要是参考 unity源码ConsoleWindow中的StacktraceWithHyperlinks函数 
         /// </summary>
         private static (string, int) GetSubStringInStackStr(string stackStr)
         {
-            var lines = stackStr.Split(new string[] { "\n", "\r", "\t" }, StringSplitOptions.RemoveEmptyEntries);
+            var lines = stackStr.Split(new[] { "\n", "\r", "\t" }, StringSplitOptions.RemoveEmptyEntries);
 
             var count = lines.Length;
             for (var i = 0; i < count; i++)

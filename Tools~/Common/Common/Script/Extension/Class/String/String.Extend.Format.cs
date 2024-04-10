@@ -1,12 +1,15 @@
+#region
+
 using System.Linq;
-using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
     public static partial class ExtendString
     {
         /// <summary>
-        /// 格式化
+        ///     格式化
         /// </summary>
         public static string Format(this string format, params object[] formattingArgs)
         {
@@ -14,7 +17,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 格式化
+        ///     格式化
         /// </summary>
         public static string Format(this string format, params string[] formattingArgs)
         {
@@ -22,7 +25,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 格式化
+        ///     格式化
         /// </summary>
         public static string Format(this string format, params int[] formattingArgs)
         {
@@ -30,7 +33,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 格式化
+        ///     格式化
         /// </summary>
         public static string Format(this string format, int arg1, int arg2, int arg3)
         {

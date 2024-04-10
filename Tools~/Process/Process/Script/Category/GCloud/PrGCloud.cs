@@ -4,9 +4,13 @@
 |*|E-Mail:     |*| xinansky99@gmail.com
 |*|============|*/
 
+#region
+
 using System;
 using System.ComponentModel;
 using System.Runtime.Remoting.Activation;
+
+#endregion
 
 namespace AIO
 {
@@ -20,8 +24,7 @@ namespace AIO
     /// --content-encoding=unset
     /// --content-disposition=disposition
     /// </remarks>
-    [Url("https://github.com/AIO-GAME/Common/blob/main/Tools~/Process/Process/Script/Category/GCloud/PrGCloud.cs")]
-    [Description("Google PrGsutil PrGCloud Platform")]
+    [Url("https://github.com/AIO-GAME/Common/blob/main/Tools~/Process/Process/Script/Category/GCloud/PrGCloud.cs"), Description("Google PrGsutil PrGCloud Platform")]
     public static partial class PrGCloud
     {
         /// <summary>

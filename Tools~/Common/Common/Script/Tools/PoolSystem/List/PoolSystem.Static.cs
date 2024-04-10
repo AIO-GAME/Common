@@ -1,14 +1,10 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-07-11
-
-|||✩ - - - - - |*/
+﻿#region
 
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using AIO;
+
+#endregion
 
 namespace AIO
 {
@@ -27,7 +23,7 @@ namespace AIO
                 CreateInstance();
                 return mInstance;
             }
-            set { mInstance = value; }
+            set => mInstance = value;
         }
 
         /// <summary>
@@ -35,7 +31,7 @@ namespace AIO
         /// </summary>
         public static bool HasInstance
         {
-            [DebuggerStepThrough] get { return mInstance != null; }
+            [DebuggerStepThrough] get => mInstance != null;
         }
 
         /// <summary>
@@ -76,10 +72,7 @@ namespace AIO
         public static ICollection<E> GetBusyPool()
         {
             var list = Pool.List<E>();
-            foreach (var item in BusyPool)
-            {
-                list.Add(item.Value);
-            }
+            foreach (var item in BusyPool) list.Add(item.Value);
 
             return list;
         }
@@ -172,10 +165,7 @@ namespace AIO
         /// </summary>
         public static void RecycleBusy()
         {
-            foreach (var entity in BusyPool)
-            {
-                FreePool.Enqueue(entity.Value);
-            }
+            foreach (var entity in BusyPool) FreePool.Enqueue(entity.Value);
 
             BusyPool.Clear();
         }

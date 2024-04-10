@@ -1,13 +1,17 @@
-﻿using System;
+﻿#region
+
+using System;
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
     public partial class GELayout
     {
         public static string IsChangeHorizontal(GTContent label, string current, string currentSource,
-            float width = 150)
+                                                float     width = 150)
         {
             using (new EditorGUILayout.HorizontalScope())
             {
@@ -17,7 +21,10 @@ namespace AIO.UEditor
                     if (GUILayout.Button(label.Content, new GUIStyle("ToggleMixed"), GUILayout.Width(width)))
                         return currentSource;
                 }
-                else EditorGUILayout.LabelField(label.Content, GUILayout.Width(width));
+                else
+                {
+                    EditorGUILayout.LabelField(label.Content, GUILayout.Width(width));
+                }
 
                 return EditorGUILayout.TextField(current);
             }
@@ -33,14 +40,17 @@ namespace AIO.UEditor
                     if (GUILayout.Button(label.Content, new GUIStyle("ToggleMixed"), GUILayout.Width(width)))
                         return currentSource;
                 }
-                else EditorGUILayout.LabelField(label.Content, GUILayout.Width(width));
+                else
+                {
+                    EditorGUILayout.LabelField(label.Content, GUILayout.Width(width));
+                }
 
                 return EditorGUILayout.FloatField(current, GUILayout.ExpandWidth(true));
             }
         }
 
-        public static int IsChangeHorizontal(GTContent label, int current, int currentSource, int minvalue,
-            int maxvalue, float width = 150)
+        public static int IsChangeHorizontal(GTContent label,    int   current, int currentSource, int minvalue,
+                                             int       maxvalue, float width = 150)
         {
             using (new EditorGUILayout.HorizontalScope())
             {
@@ -50,14 +60,17 @@ namespace AIO.UEditor
                     if (GUILayout.Button(label.Content, new GUIStyle("ToggleMixed"), GUILayout.Width(width)))
                         return currentSource;
                 }
-                else EditorGUILayout.LabelField(label.Content, GUILayout.Width(width));
+                else
+                {
+                    EditorGUILayout.LabelField(label.Content, GUILayout.Width(width));
+                }
 
                 return EditorGUILayout.IntSlider(current, minvalue, maxvalue, GUILayout.ExpandWidth(true));
             }
         }
 
-        public static float IsChangeHorizontal(GTContent label, float current, float currentSource, float minvalue,
-            float maxvalue, float width = 150)
+        public static float IsChangeHorizontal(GTContent label,    float current, float currentSource, float minvalue,
+                                               float     maxvalue, float width = 150)
         {
             using (new EditorGUILayout.HorizontalScope())
             {
@@ -67,14 +80,17 @@ namespace AIO.UEditor
                     if (GUILayout.Button(label.Content, new GUIStyle("ToggleMixed"), GUILayout.Width(width)))
                         return currentSource;
                 }
-                else EditorGUILayout.LabelField(label.Content, GUILayout.Width(width));
+                else
+                {
+                    EditorGUILayout.LabelField(label.Content, GUILayout.Width(width));
+                }
 
                 return EditorGUILayout.Slider(current, minvalue, maxvalue, GUILayout.ExpandWidth(true));
             }
         }
 
         public static T IsChangeHorizontal<T>(GTContent label, T current, T currentSource, float width = 150)
-            where T : Enum
+        where T : Enum
         {
             using (new EditorGUILayout.HorizontalScope())
             {
@@ -84,7 +100,10 @@ namespace AIO.UEditor
                     if (GUILayout.Button(label.Content, new GUIStyle("ToggleMixed"), GUILayout.Width(width)))
                         return currentSource;
                 }
-                else EditorGUILayout.LabelField(label.Content, GUILayout.Width(width));
+                else
+                {
+                    EditorGUILayout.LabelField(label.Content, GUILayout.Width(width));
+                }
 
                 return (T)EditorGUILayout.EnumPopup(current, GUILayout.ExpandWidth(true));
             }
@@ -100,7 +119,10 @@ namespace AIO.UEditor
                     if (GUILayout.Button(label.Content, new GUIStyle("ToggleMixed"), GUILayout.Width(width)))
                         return currentSource;
                 }
-                else EditorGUILayout.LabelField(label.Content, GUILayout.Width(width));
+                else
+                {
+                    EditorGUILayout.LabelField(label.Content, GUILayout.Width(width));
+                }
 
                 return EditorGUILayout.IntField(current, GUILayout.ExpandWidth(true));
             }

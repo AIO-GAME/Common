@@ -1,20 +1,25 @@
 /*|============|*|
-|*|Author:     |*| xinan                
-|*|Date:       |*| 2023-10-28               
-|*|E-Mail:     |*| 1398581458@qq.com     
+|*|Author:     |*| xinan
+|*|Date:       |*| 2023-10-28
+|*|E-Mail:     |*| 1398581458@qq.com
 |*|============|*/
 
-using System;
+#region
+
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
     public partial class EHelper
     {
+        #region Nested type: Prefs
+
         public partial class Prefs
         {
-            private const int VectorHashCode = -702003490;
+            private const int VectorHashCode  = -702003490;
             private const int VectorXHashCode = -1068145401;
             private const int VectorYHashCode = -952238499;
             private const int VectorZHashCode = 369083993;
@@ -122,5 +127,7 @@ namespace AIO.UEditor
 
             #endregion
         }
+
+        #endregion
     }
 }

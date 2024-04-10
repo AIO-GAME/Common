@@ -1,10 +1,16 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
     public partial class BufferByte
     {
+        #region IReadData Members
+
         /// <inheritdoc/> 
         public int ReadLen()
         {
@@ -29,6 +35,10 @@ namespace AIO
             return Arrays.GetLenArray(ref ReadIndex);
         }
 
+        #endregion
+
+        #region IWriteData Members
+
         /// <inheritdoc/> 
         public void WriteLen(int value)
         {
@@ -36,9 +46,9 @@ namespace AIO
             if (value >= 0x20000000 || value < 0) throw new SystemException("value overflow , current max overflow = (2^29-1) ! invalid len:" + value);
             unchecked
             {
-                if (value < 0x80) WriteByte((byte)(value | 0x80)); // 1xx 范围0~(2^7-1)  0~(128-1)
+                if (value < 0x80) WriteByte((byte)(value | 0x80));              // 1xx 范围0~(2^7-1)  0~(128-1)
                 else if (value < 0x4000) WriteUInt16((ushort)(value | 0x4000)); // 01x 范围0~(2^14-1) 0~(16384-1)
-                else WriteInt32(value | 0x20000000); // 001 范围0~(2^29-1) 0~(536870912-1)
+                else WriteInt32(value | 0x20000000);                            // 001 范围0~(2^29-1) 0~(536870912-1)
             }
         }
 
@@ -47,9 +57,9 @@ namespace AIO
         {
             unchecked
             {
-                if (value < 0x80) WriteByte((byte)(value | 0x80)); // 1xx 范围0~(2^7-1)  0~(128-1)
+                if (value < 0x80) WriteByte((byte)(value | 0x80));              // 1xx 范围0~(2^7-1)  0~(128-1)
                 else if (value < 0x4000) WriteUInt16((ushort)(value | 0x4000)); // 01x 范围0~(2^14-1) 0~(16384-1)
-                else WriteInt32(value | 0x20000000); // 001 范围0~(2^29-1) 0~(536870912-1)
+                else WriteInt32(value | 0x20000000);                            // 001 范围0~(2^29-1) 0~(536870912-1)
             }
         }
 
@@ -59,9 +69,9 @@ namespace AIO
             unchecked
             {
                 if (value < 0) throw new SystemException("value overflow , current max overflow = (2^29-1) ! invalid len:" + value);
-                if (value < 0x80) WriteByte((byte)(value | 0x80)); // 1xx 范围0~(2^7-1)  0~(128-1)
+                if (value < 0x80) WriteByte((byte)(value | 0x80));              // 1xx 范围0~(2^7-1)  0~(128-1)
                 else if (value < 0x4000) WriteUInt16((ushort)(value | 0x4000)); // 01x 范围0~(2^14-1) 0~(16384-1)
-                else WriteInt32((ushort)value | 0x20000000); // 001 范围0~(2^29-1) 0~(536870912-1)
+                else WriteInt32((ushort)value | 0x20000000);                    // 001 范围0~(2^29-1) 0~(536870912-1)
             }
         }
 
@@ -71,7 +81,7 @@ namespace AIO
             unchecked
             {
                 if (value < 0x80) WriteByte((byte)(value | 0x80)); // 1xx 范围0~(2^7-1)  0~(128-1)
-                else WriteUInt16((ushort)(value | 0x4000)); // 01x 范围0~(2^14-1) 0~(16384-1)
+                else WriteUInt16((ushort)(value | 0x4000));        // 01x 范围0~(2^14-1) 0~(16384-1)
             }
         }
 
@@ -91,5 +101,7 @@ namespace AIO
             WriteLen(value.Count);
             foreach (var item in value) WriteLen(item);
         }
+
+        #endregion
     }
 }

@@ -1,9 +1,12 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections;
+
+#endregion
 
 namespace AIO
 {
- 
     /// <summary>
     /// 异步处理器
     /// </summary>

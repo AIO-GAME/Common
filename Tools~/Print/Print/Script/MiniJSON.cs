@@ -1,28 +1,33 @@
-﻿namespace AIO.Internal
-{
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Text;
+﻿#region
 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
+
+#endregion
+
+namespace AIO.Internal
+{
     /// <summary>
     /// Mini Json
     /// </summary>
     internal partial class MiniJSON
     {
-        private const int TOKEN_NONE = 0;
-        private const int TOKEN_CURLY_OPEN = 1;
-        private const int TOKEN_CURLY_CLOSE = 2;
-        private const int TOKEN_SQUARED_OPEN = 3;
+        private const int TOKEN_NONE          = 0;
+        private const int TOKEN_CURLY_OPEN    = 1;
+        private const int TOKEN_CURLY_CLOSE   = 2;
+        private const int TOKEN_SQUARED_OPEN  = 3;
         private const int TOKEN_SQUARED_CLOSE = 4;
-        private const int TOKEN_COLON = 5;
-        private const int TOKEN_COMMA = 6;
-        private const int TOKEN_STRING = 7;
-        private const int TOKEN_NUMBER = 8;
-        private const int TOKEN_TRUE = 9;
-        private const int TOKEN_FALSE = 10;
-        private const int TOKEN_NULL = 11;
-        private const int BUILDER_CAPACITY = 2000;
+        private const int TOKEN_COLON         = 5;
+        private const int TOKEN_COMMA         = 6;
+        private const int TOKEN_STRING        = 7;
+        private const int TOKEN_NUMBER        = 8;
+        private const int TOKEN_TRUE          = 9;
+        private const int TOKEN_FALSE         = 10;
+        private const int TOKEN_NULL          = 11;
+        private const int BUILDER_CAPACITY    = 2000;
 
         /// <summary>
         /// On decoding, this value holds the position at which the parse failed (-1 = no error).
@@ -40,26 +45,24 @@
         public static object Decode(string json)
         {
             // save the string for debug information
-            MiniJSON.lastDecode = json;
+            lastDecode = json;
 
             if (json != null)
             {
-                char[] charArray = json.ToCharArray();
-                int index = 0;
-                bool success = true;
-                object value = MiniJSON.parseValue(charArray, ref index, ref success);
+                var charArray = json.ToCharArray();
+                var index = 0;
+                var success = true;
+                var value = parseValue(charArray, ref index, ref success);
 
                 if (success)
-                    MiniJSON.lastErrorIndex = -1;
+                    lastErrorIndex = -1;
                 else
-                    MiniJSON.lastErrorIndex = index;
+                    lastErrorIndex = index;
 
                 return value;
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
 
 
@@ -71,9 +74,9 @@
         public static string Encode(object json)
         {
             var builder = new StringBuilder(BUILDER_CAPACITY);
-            var success = MiniJSON.serializeValue(json, builder);
+            var success = serializeValue(json, builder);
 
-            return (success ? builder.ToString() : null);
+            return success ? builder.ToString() : null;
         }
 
 
@@ -83,7 +86,7 @@
         /// <returns></returns>
         public static bool LastDecodeSuccessful()
         {
-            return (MiniJSON.lastErrorIndex == -1);
+            return lastErrorIndex == -1;
         }
 
 
@@ -93,7 +96,7 @@
         /// <returns></returns>
         public static int GetLastErrorIndex()
         {
-            return MiniJSON.lastErrorIndex;
+            return lastErrorIndex;
         }
 
 
@@ -104,22 +107,17 @@
         /// <returns></returns>
         public static string GetLastErrorSnippet()
         {
-            if (MiniJSON.lastErrorIndex == -1)
-            {
-                return "";
-            }
-            else
-            {
-                int startIndex = MiniJSON.lastErrorIndex - 5;
-                int endIndex = MiniJSON.lastErrorIndex + 15;
-                if (startIndex < 0)
-                    startIndex = 0;
+            if (lastErrorIndex == -1) return "";
 
-                if (endIndex >= MiniJSON.lastDecode.Length)
-                    endIndex = MiniJSON.lastDecode.Length - 1;
+            var startIndex = lastErrorIndex - 5;
+            var endIndex = lastErrorIndex + 15;
+            if (startIndex < 0)
+                startIndex = 0;
 
-                return MiniJSON.lastDecode.Substring(startIndex, endIndex - startIndex + 1);
-            }
+            if (endIndex >= lastDecode.Length)
+                endIndex = lastDecode.Length - 1;
+
+            return lastDecode.Substring(startIndex, endIndex - startIndex + 1);
         }
 
 
@@ -127,25 +125,23 @@
 
         protected static Hashtable parseObject(char[] json, ref int index)
         {
-            Hashtable table = new Hashtable();
+            var table = new Hashtable();
             int token;
 
             // {
             nextToken(json, ref index);
 
-            bool done = false;
+            var done = false;
             while (!done)
             {
                 token = lookAhead(json, index);
-                if (token == MiniJSON.TOKEN_NONE)
-                {
-                    return null;
-                }
-                else if (token == MiniJSON.TOKEN_COMMA)
+                if (token == TOKEN_NONE) return null;
+
+                if (token == TOKEN_COMMA)
                 {
                     nextToken(json, ref index);
                 }
-                else if (token == MiniJSON.TOKEN_CURLY_CLOSE)
+                else if (token == TOKEN_CURLY_CLOSE)
                 {
                     nextToken(json, ref index);
                     return table;
@@ -153,20 +149,17 @@
                 else
                 {
                     // name
-                    string name = parseString(json, ref index);
-                    if (name == null)
-                    {
-                        return null;
-                    }
+                    var name = parseString(json, ref index);
+                    if (name == null) return null;
 
                     // :
                     token = nextToken(json, ref index);
-                    if (token != MiniJSON.TOKEN_COLON)
+                    if (token != TOKEN_COLON)
                         return null;
 
                     // value
-                    bool success = true;
-                    object value = parseValue(json, ref index, ref success);
+                    var success = true;
+                    var value = parseValue(json, ref index, ref success);
                     if (!success)
                         return null;
 
@@ -180,32 +173,30 @@
 
         protected static ArrayList parseArray(char[] json, ref int index)
         {
-            ArrayList array = new ArrayList();
+            var array = new ArrayList();
 
             // [
             nextToken(json, ref index);
 
-            bool done = false;
+            var done = false;
             while (!done)
             {
-                int token = lookAhead(json, index);
-                if (token == MiniJSON.TOKEN_NONE)
-                {
-                    return null;
-                }
-                else if (token == MiniJSON.TOKEN_COMMA)
+                var token = lookAhead(json, index);
+                if (token == TOKEN_NONE) return null;
+
+                if (token == TOKEN_COMMA)
                 {
                     nextToken(json, ref index);
                 }
-                else if (token == MiniJSON.TOKEN_SQUARED_CLOSE)
+                else if (token == TOKEN_SQUARED_CLOSE)
                 {
                     nextToken(json, ref index);
                     break;
                 }
                 else
                 {
-                    bool success = true;
-                    object value = parseValue(json, ref index, ref success);
+                    var success = true;
+                    var value = parseValue(json, ref index, ref success);
                     if (!success)
                         return null;
 
@@ -221,24 +212,24 @@
         {
             switch (lookAhead(json, index))
             {
-                case MiniJSON.TOKEN_STRING:
+                case TOKEN_STRING:
                     return parseString(json, ref index);
-                case MiniJSON.TOKEN_NUMBER:
+                case TOKEN_NUMBER:
                     return parseNumber(json, ref index);
-                case MiniJSON.TOKEN_CURLY_OPEN:
+                case TOKEN_CURLY_OPEN:
                     return parseObject(json, ref index);
-                case MiniJSON.TOKEN_SQUARED_OPEN:
+                case TOKEN_SQUARED_OPEN:
                     return parseArray(json, ref index);
-                case MiniJSON.TOKEN_TRUE:
+                case TOKEN_TRUE:
                     nextToken(json, ref index);
-                    return Boolean.Parse("TRUE");
-                case MiniJSON.TOKEN_FALSE:
+                    return bool.Parse("TRUE");
+                case TOKEN_FALSE:
                     nextToken(json, ref index);
-                    return Boolean.Parse("FALSE");
-                case MiniJSON.TOKEN_NULL:
+                    return bool.Parse("FALSE");
+                case TOKEN_NULL:
                     nextToken(json, ref index);
                     return null;
-                case MiniJSON.TOKEN_NONE:
+                case TOKEN_NONE:
                     break;
             }
 
@@ -249,7 +240,7 @@
 
         protected static string parseString(char[] json, ref int index)
         {
-            string s = "";
+            var s = "";
             char c;
 
             eatWhitespace(json, ref index);
@@ -257,7 +248,7 @@
             // "
             c = json[index++];
 
-            bool complete = false;
+            var complete = false;
             while (!complete)
             {
                 if (index == json.Length)
@@ -269,7 +260,8 @@
                     complete = true;
                     break;
                 }
-                else if (c == '\\')
+
+                if (c == '\\')
                 {
                     if (index == json.Length)
                         break;
@@ -309,17 +301,17 @@
                     }
                     else if (c == 'u')
                     {
-                        int remainingLength = json.Length - index;
+                        var remainingLength = json.Length - index;
                         if (remainingLength >= 4)
                         {
-                            char[] unicodeCharArray = new char[4];
+                            var unicodeCharArray = new char[4];
                             Array.Copy(json, index, unicodeCharArray, 0, 4);
 
-                            uint codePoint = UInt32.Parse(new string(unicodeCharArray),
-                                System.Globalization.NumberStyles.HexNumber);
+                            var codePoint = uint.Parse(new string(unicodeCharArray),
+                                                       NumberStyles.HexNumber);
 
                             // convert the integer codepoint to a unicode char and add to string
-                            s += Char.ConvertFromUtf32((int)codePoint);
+                            s += char.ConvertFromUtf32((int)codePoint);
 
                             // skip 4 chars
                             index += 4;
@@ -347,13 +339,13 @@
         {
             eatWhitespace(json, ref index);
 
-            int lastIndex = getLastIndexOfNumber(json, index);
-            int charLength = (lastIndex - index) + 1;
-            char[] numberCharArray = new char[charLength];
+            var lastIndex = getLastIndexOfNumber(json, index);
+            var charLength = lastIndex - index + 1;
+            var numberCharArray = new char[charLength];
 
             Array.Copy(json, index, numberCharArray, 0, charLength);
             index = lastIndex + 1;
-            return Double.Parse(new string(numberCharArray)); // , CultureInfo.InvariantCulture);
+            return double.Parse(new string(numberCharArray)); // , CultureInfo.InvariantCulture);
         }
 
 
@@ -362,9 +354,7 @@
             int lastIndex;
             for (lastIndex = index; lastIndex < json.Length; lastIndex++)
                 if ("0123456789+-.eE".IndexOf(json[lastIndex]) == -1)
-                {
                     break;
-                }
 
             return lastIndex - 1;
         }
@@ -374,15 +364,13 @@
         {
             for (; index < json.Length; index++)
                 if (" \t\n\r".IndexOf(json[index]) == -1)
-                {
                     break;
-                }
         }
 
 
         protected static int lookAhead(char[] json, int index)
         {
-            int saveIndex = index;
+            var saveIndex = index;
             return nextToken(json, ref saveIndex);
         }
 
@@ -391,27 +379,24 @@
         {
             eatWhitespace(json, ref index);
 
-            if (index == json.Length)
-            {
-                return MiniJSON.TOKEN_NONE;
-            }
+            if (index == json.Length) return TOKEN_NONE;
 
-            char c = json[index];
+            var c = json[index];
             index++;
             switch (c)
             {
                 case '{':
-                    return MiniJSON.TOKEN_CURLY_OPEN;
+                    return TOKEN_CURLY_OPEN;
                 case '}':
-                    return MiniJSON.TOKEN_CURLY_CLOSE;
+                    return TOKEN_CURLY_CLOSE;
                 case '[':
-                    return MiniJSON.TOKEN_SQUARED_OPEN;
+                    return TOKEN_SQUARED_OPEN;
                 case ']':
-                    return MiniJSON.TOKEN_SQUARED_CLOSE;
+                    return TOKEN_SQUARED_CLOSE;
                 case ',':
-                    return MiniJSON.TOKEN_COMMA;
+                    return TOKEN_COMMA;
                 case '"':
-                    return MiniJSON.TOKEN_STRING;
+                    return TOKEN_STRING;
                 case '0':
                 case '1':
                 case '2':
@@ -423,18 +408,17 @@
                 case '8':
                 case '9':
                 case '-':
-                    return MiniJSON.TOKEN_NUMBER;
+                    return TOKEN_NUMBER;
                 case ':':
-                    return MiniJSON.TOKEN_COLON;
+                    return TOKEN_COLON;
             }
 
             index--;
 
-            int remainingLength = json.Length - index;
+            var remainingLength = json.Length - index;
 
             // false
             if (remainingLength >= 5)
-            {
                 if (json[index] == 'f' &&
                     json[index + 1] == 'a' &&
                     json[index + 2] == 'l' &&
@@ -442,37 +426,32 @@
                     json[index + 4] == 'e')
                 {
                     index += 5;
-                    return MiniJSON.TOKEN_FALSE;
+                    return TOKEN_FALSE;
                 }
-            }
 
             // true
             if (remainingLength >= 4)
-            {
                 if (json[index] == 't' &&
                     json[index + 1] == 'r' &&
                     json[index + 2] == 'u' &&
                     json[index + 3] == 'e')
                 {
                     index += 4;
-                    return MiniJSON.TOKEN_TRUE;
+                    return TOKEN_TRUE;
                 }
-            }
 
             // null
             if (remainingLength >= 4)
-            {
                 if (json[index] == 'n' &&
                     json[index + 1] == 'u' &&
                     json[index + 2] == 'l' &&
                     json[index + 3] == 'l')
                 {
                     index += 4;
-                    return MiniJSON.TOKEN_NULL;
+                    return TOKEN_NULL;
                 }
-            }
 
-            return MiniJSON.TOKEN_NONE;
+            return TOKEN_NONE;
         }
 
         #endregion
@@ -483,17 +462,10 @@
         protected static bool serializeObjectOrArray(object objectOrArray, StringBuilder builder)
         {
             if (objectOrArray is Hashtable)
-            {
                 return serializeObject((Hashtable)objectOrArray, builder);
-            }
-            else if (objectOrArray is ArrayList)
-            {
+            if (objectOrArray is ArrayList)
                 return serializeArray((ArrayList)objectOrArray, builder);
-            }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
 
@@ -501,24 +473,18 @@
         {
             builder.Append("{");
 
-            IDictionaryEnumerator e = anObject.GetEnumerator();
-            bool first = true;
+            var e = anObject.GetEnumerator();
+            var first = true;
             while (e.MoveNext())
             {
-                string key = e.Key.ToString();
-                object value = e.Value;
+                var key = e.Key.ToString();
+                var value = e.Value;
 
-                if (!first)
-                {
-                    builder.Append(", ");
-                }
+                if (!first) builder.Append(", ");
 
                 serializeString(key, builder);
                 builder.Append(":");
-                if (!serializeValue(value, builder))
-                {
-                    return false;
-                }
+                if (!serializeValue(value, builder)) return false;
 
                 first = false;
             }
@@ -532,7 +498,7 @@
         {
             builder.Append("{");
 
-            bool first = true;
+            var first = true;
             foreach (var kv in dict)
             {
                 if (!first)
@@ -554,20 +520,14 @@
         {
             builder.Append("[");
 
-            bool first = true;
-            for (int i = 0; i < anArray.Count; i++)
+            var first = true;
+            for (var i = 0; i < anArray.Count; i++)
             {
-                object value = anArray[i];
+                var value = anArray[i];
 
-                if (!first)
-                {
-                    builder.Append(", ");
-                }
+                if (!first) builder.Append(", ");
 
-                if (!serializeValue(value, builder))
-                {
-                    return false;
-                }
+                if (!serializeValue(value, builder)) return false;
 
                 first = false;
             }
@@ -583,53 +543,29 @@
             //UnityEngine.Debug.Log("type: " + t.ToString() + " isArray: " + t.IsArray);
 
             if (value == null)
-            {
                 builder.Append("null");
-            }
             else if (value.GetType().IsArray)
-            {
                 serializeArray(new ArrayList((ICollection)value), builder);
-            }
             else if (value is string)
-            {
                 serializeString((string)value, builder);
-            }
-            else if (value is Char)
-            {
+            else if (value is char)
                 serializeString(Convert.ToString((char)value), builder);
-            }
             else if (value is decimal)
-            {
                 serializeString(Convert.ToString((decimal)value), builder);
-            }
             else if (value is Hashtable)
-            {
                 serializeObject((Hashtable)value, builder);
-            }
             else if (value is Dictionary<string, string>)
-            {
                 serializeDictionary((Dictionary<string, string>)value, builder);
-            }
             else if (value is ArrayList)
-            {
                 serializeArray((ArrayList)value, builder);
-            }
-            else if ((value is Boolean) && ((Boolean)value == true))
-            {
+            else if (value is bool && (bool)value)
                 builder.Append("true");
-            }
-            else if ((value is Boolean) && ((Boolean)value == false))
-            {
+            else if (value is bool && (bool)value == false)
                 builder.Append("false");
-            }
             else if (value.GetType().IsPrimitive)
-            {
                 serializeNumber(Convert.ToDouble(value), builder);
-            }
             else
-            {
                 return false;
-            }
 
             return true;
         }
@@ -639,10 +575,10 @@
         {
             builder.Append("\"");
 
-            char[] charArray = aString.ToCharArray();
-            for (int i = 0; i < charArray.Length; i++)
+            var charArray = aString.ToCharArray();
+            for (var i = 0; i < charArray.Length; i++)
             {
-                char c = charArray[i];
+                var c = charArray[i];
                 if (c == '"')
                 {
                     builder.Append("\\\"");
@@ -673,15 +609,11 @@
                 }
                 else
                 {
-                    int codepoint = Convert.ToInt32(c);
-                    if ((codepoint >= 32) && (codepoint <= 126))
-                    {
+                    var codepoint = Convert.ToInt32(c);
+                    if (codepoint >= 32 && codepoint <= 126)
                         builder.Append(c);
-                    }
                     else
-                    {
                         builder.Append("\\u" + Convert.ToString(codepoint, 16).PadLeft(4, '0'));
-                    }
                 }
             }
 
@@ -701,14 +633,16 @@
 
     internal partial class MiniJSON
     {
-        public static T Decode<T>(string json) where T : class
+        public static T Decode<T>(string json)
+        where T : class
         {
-            return MiniJSON.Decode(json) as T;
+            return Decode(json) as T;
         }
 
-        public static T Decode<T>(StringBuilder json) where T : class
+        public static T Decode<T>(StringBuilder json)
+        where T : class
         {
-            return MiniJSON.Decode(json.ToString()) as T;
+            return Decode(json.ToString()) as T;
         }
     }
 

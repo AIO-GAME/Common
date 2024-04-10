@@ -1,8 +1,4 @@
-﻿/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+﻿#region
 
 using System;
 using System.Collections;
@@ -12,15 +8,19 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: Json
+
         /// <summary>
         /// Json 工具类
         /// </summary>
         [Description("https://www.newtonsoft.com/json/help/html/N_Newtonsoft_Json.htm")]
-        public partial class Json
+        public class Json
         {
             static Json()
             {
@@ -53,8 +53,8 @@ namespace AIO
                     //[Default:只有控制字符(例如换行符)被转义]
                     //[EscapeNonAscii:所有非ascii和控制字符(例如换行符)都会转义。]
                     //[EscapeHtml:HTML(<， >， &， '， ")和控制字符(例如换行符)被转义.]
-                    StringEscapeHandling = StringEscapeHandling.EscapeNonAscii,
-                    PreserveReferencesHandling = PreserveReferencesHandling.None,
+                    StringEscapeHandling       = StringEscapeHandling.EscapeNonAscii,
+                    PreserveReferencesHandling = PreserveReferencesHandling.None
                 };
             }
 
@@ -195,42 +195,44 @@ namespace AIO
 
             #endregion
         }
+
+        #endregion
     }
 
 
-// public class LimitPropsContractResolver : DefaultContractResolver
-// {
-//     private ICollection<string> props { get; }
-//
-//     private bool retain { get; }
-//
-//     /// <summary>
-//     /// 构造函数
-//     /// </summary>
-//     /// <param name="props">传入的属性数组</param>
-//     /// <param name="retain">true:表示props是需要保留的字段  false：表示props是要排除的字段</param>
-//     public LimitPropsContractResolver(ICollection<string> props, bool retain = true)
-//     {
-//         //指定要序列化属性的清单
-//         this.props = props;
-//         this.retain = retain;
-//     }
-//
-//     protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
-//     {
-//         IList<JsonProperty> list = base.CreateProperties(type, memberSerialization);
-//         //只保留清单有列出的属性
-//         return list.Where(p =>
-//         {
-//             if (retain)
-//             {
-//                 return props.Contains(p.PropertyName);
-//             }
-//             else
-//             {
-//                 return !props.Contains(p.PropertyName);
-//             }
-//         }).ToList();
-//     }
-// }
+    // public class LimitPropsContractResolver : DefaultContractResolver
+    // {
+    //     private ICollection<string> props { get; }
+    //
+    //     private bool retain { get; }
+    //
+    //     /// <summary>
+    //     /// 构造函数
+    //     /// </summary>
+    //     /// <param name="props">传入的属性数组</param>
+    //     /// <param name="retain">true:表示props是需要保留的字段  false：表示props是要排除的字段</param>
+    //     public LimitPropsContractResolver(ICollection<string> props, bool retain = true)
+    //     {
+    //         //指定要序列化属性的清单
+    //         this.props = props;
+    //         this.retain = retain;
+    //     }
+    //
+    //     protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
+    //     {
+    //         IList<JsonProperty> list = base.CreateProperties(type, memberSerialization);
+    //         //只保留清单有列出的属性
+    //         return list.Where(p =>
+    //         {
+    //             if (retain)
+    //             {
+    //                 return props.Contains(p.PropertyName);
+    //             }
+    //             else
+    //             {
+    //                 return !props.Contains(p.PropertyName);
+    //             }
+    //         }).ToList();
+    //     }
+    // }
 }

@@ -1,9 +1,16 @@
-﻿using UnityEngine;
+﻿#region
+
+using UnityEditor;
+using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
     partial class RHelper
     {
+        #region Nested type: Prefs
+
         /// <summary>
         /// 持久化数据
         /// </summary>
@@ -40,8 +47,8 @@ namespace AIO
             {
 #if UNITY_EDITOR
                 var key = string.Concat(Application.dataPath, "FirstInit");
-                if (UnityEditor.EditorPrefs.HasKey(key)) return false;
-                UnityEditor.EditorPrefs.SetInt(key, 1);
+                if (EditorPrefs.HasKey(key)) return false;
+                EditorPrefs.SetInt(key, 1);
 #else
                 if (PlayerPrefs.HasKey("FirstInit")) return false;
                 PlayerPrefs.SetInt("FirstInit", 1);
@@ -50,5 +57,7 @@ namespace AIO
                 return true;
             }
         }
+
+        #endregion
     }
 }

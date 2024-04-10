@@ -1,11 +1,14 @@
-﻿using System;
+﻿#region
+
 #if SUPPORT_UNITASK
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-
 #else
 using System.Threading.Tasks;
 #endif
+using System;
+
+#endregion
 
 namespace AIO
 {
@@ -24,7 +27,10 @@ namespace AIO
                 await Task.Factory.StartNew(action);
 #endif
             }
-            else Update(action);
+            else
+            {
+                Update(action);
+            }
         }
 
         /// <summary>
@@ -40,11 +46,17 @@ namespace AIO
                 await Task.Factory.StartNew(Action);
 #endif
             }
-            else Update(Action);
+            else
+            {
+                Update(Action);
+            }
 
             return;
 
-            void Action() => action.Invoke(state);
+            void Action()
+            {
+                action.Invoke(state);
+            }
         }
 
         /// <summary>
@@ -60,7 +72,10 @@ namespace AIO
                 await Task.Factory.StartNew(action);
 #endif
             }
-            else Update(action);
+            else
+            {
+                Update(action);
+            }
         }
     }
 }

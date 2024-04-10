@@ -1,21 +1,18 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Diagnostics;
+
+#endregion
 
 namespace AIO.UEditor
 {
     /// <summary>
     /// 抽屉检视器
     /// </summary>
-    [AttributeUsage(AttributeTargets.Field)]
-    [Conditional("UNITY_EDITOR")]
+    [AttributeUsage(AttributeTargets.Field), Conditional("UNITY_EDITOR")]
     public sealed class DrawerAttribute : InspectorAttribute
     {
-        public string Name { get; private set; }
-        public string Condition { get; private set; }
-        public string Style { get; private set; }
-        public bool DefaultOpened { get; private set; }
-        public bool ToggleOnLabelClick { get; private set; }
-
         /// <summary>
         /// 抽屉检视器
         /// </summary>
@@ -24,10 +21,10 @@ namespace AIO.UEditor
         /// <param name="toggleOnLabelClick">抽屉的标签是否也可点击</param>
         public DrawerAttribute(string name, bool defaultOpened = false, bool toggleOnLabelClick = true)
         {
-            Name = name;
-            Condition = null;
-            Style = null;
-            DefaultOpened = defaultOpened;
+            Name               = name;
+            Condition          = null;
+            Style              = null;
+            DefaultOpened      = defaultOpened;
             ToggleOnLabelClick = toggleOnLabelClick;
         }
 
@@ -39,12 +36,12 @@ namespace AIO.UEditor
         /// <param name="defaultOpened">默认是否打开</param>
         /// <param name="toggleOnLabelClick">抽屉的标签是否也可点击</param>
         public DrawerAttribute(string name, string condition, bool defaultOpened = false,
-            bool toggleOnLabelClick = true)
+                               bool   toggleOnLabelClick = true)
         {
-            Name = name;
-            Condition = condition;
-            Style = null;
-            DefaultOpened = defaultOpened;
+            Name               = name;
+            Condition          = condition;
+            Style              = null;
+            DefaultOpened      = defaultOpened;
             ToggleOnLabelClick = toggleOnLabelClick;
         }
 
@@ -57,13 +54,19 @@ namespace AIO.UEditor
         /// <param name="defaultOpened">默认是否打开</param>
         /// <param name="toggleOnLabelClick">抽屉的标签是否也可点击</param>
         public DrawerAttribute(string name, string condition, string style, bool defaultOpened = false,
-            bool toggleOnLabelClick = true)
+                               bool   toggleOnLabelClick = true)
         {
-            Name = name;
-            Condition = condition;
-            Style = style;
-            DefaultOpened = defaultOpened;
+            Name               = name;
+            Condition          = condition;
+            Style              = style;
+            DefaultOpened      = defaultOpened;
             ToggleOnLabelClick = toggleOnLabelClick;
         }
+
+        public string Name               { get; private set; }
+        public string Condition          { get; private set; }
+        public string Style              { get; private set; }
+        public bool   DefaultOpened      { get; private set; }
+        public bool   ToggleOnLabelClick { get; private set; }
     }
 }

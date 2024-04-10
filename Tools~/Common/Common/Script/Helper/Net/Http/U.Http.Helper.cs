@@ -1,8 +1,4 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-03
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.IO;
@@ -10,10 +6,14 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: HTTP
+
         public partial class HTTP
         {
             private static string AutoCommonRequest(
@@ -291,5 +291,7 @@ namespace AIO
                 return request;
             }
         }
+
+        #endregion
     }
 }

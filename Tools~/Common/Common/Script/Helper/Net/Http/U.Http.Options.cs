@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Text;
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {

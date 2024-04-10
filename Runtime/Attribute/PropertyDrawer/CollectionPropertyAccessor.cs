@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections;
 using System.Reflection;
 using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
@@ -14,17 +18,19 @@ namespace AIO
         /// <summary>[Internal] Creates a new <see cref="CollectionPropertyAccessor"/>.</summary>
         internal CollectionPropertyAccessor(
             PropertyAccessor parent,
-            string name,
-            FieldInfo field,
-            int elementIndex
+            string           name,
+            FieldInfo        field,
+            int              elementIndex
         ) : base(parent, name, field, GetElementType(field?.FieldType))
         {
             ElementIndex = elementIndex;
         }
 
         /// <inheritdoc/>
-        public override Type GetFieldElementType(object obj) =>
-            FieldElementType ?? GetElementType(GetField(ref obj)?.FieldType);
+        public override Type GetFieldElementType(object obj)
+        {
+            return FieldElementType ?? GetElementType(GetField(ref obj)?.FieldType);
+        }
 
         /// <summary>Returns the type of elements in the array.</summary>
         public static Type GetElementType(Type fieldType)
@@ -45,7 +51,10 @@ namespace AIO
 
 
         /// <summary>Returns the collection object targeted by this accessor.</summary>
-        public object GetCollection(object obj) => base.GetValue(obj);
+        public object GetCollection(object obj)
+        {
+            return base.GetValue(obj);
+        }
 
         /// <inheritdoc/>
         public override object GetValue(object obj)
@@ -63,17 +72,18 @@ namespace AIO
             var enumerator = ((IEnumerable)collection).GetEnumerator();
 
             for (var i = 0; i < ElementIndex; i++)
-            {
                 if (!enumerator.MoveNext())
                     return null;
-            }
 
             return enumerator.Current;
         }
 
 
         /// <summary>Sets the collection object targeted by this accessor.</summary>
-        public void SetCollection(object obj, object value) => base.SetValue(obj, value);
+        public void SetCollection(object obj, object value)
+        {
+            base.SetValue(obj, value);
+        }
 
         /// <inheritdoc/>
         public override void SetValue(object obj, object value)
@@ -99,7 +109,10 @@ namespace AIO
         /// <summary>
         /// Returns a description of this accessor's path.
         /// </summary>
-        public override string ToString() => $"{base.ToString()}[{ElementIndex}]";
+        public override string ToString()
+        {
+            return $"{base.ToString()}[{ElementIndex}]";
+        }
 
 #if UNITY_EDITOR
         /// <summary>

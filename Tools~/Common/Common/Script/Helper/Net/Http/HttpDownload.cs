@@ -1,3 +1,5 @@
+#region
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +13,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using HTTPClient11 = System.Net.Http.HttpClient;
 
+#endregion
+
 namespace AIO
 {
     /// <summary>
@@ -18,37 +22,12 @@ namespace AIO
     /// </summary>
     public class HttpDownload : IDisposable
     {
-        private static readonly byte[] CODE = new byte[] { 1, 3, 9, 3, 1, 3, 9, 3, 1 };
+        private static readonly byte[] CODE = { 1, 3, 9, 3, 1, 3, 9, 3, 1 };
 
         /// <summary>
-        /// 文件地址
+        /// Http头信息
         /// </summary>
-        public IList<string> Urls { get; }
-
-        /// <summary>
-        /// 保存地址
-        /// </summary>
-        public string SavePath { get; }
-
-        /// <summary>
-        /// Http客户端
-        /// </summary>
-        public HTTPClient11 Client { get; private set; }
-
-        /// <summary>
-        /// Http客户端
-        /// </summary>
-        private HTTPClient11 MD5Client { get; set; }
-
-        /// <summary>
-        /// 最大下载数量
-        /// </summary>
-        public int MaxDownloadNum { get; private set; }
-
-        /// <summary>
-        /// 进度回调
-        /// </summary>
-        private Action<HttpDownloadInfo> ProgressAction;
+        private readonly HttpClientHandler ClientHandler;
 
         /// <summary>
         /// 完成回调
@@ -61,9 +40,9 @@ namespace AIO
         private Action<HttpDownloadInfo> ExceptionAction;
 
         /// <summary>
-        /// Http头信息
+        /// 进度回调
         /// </summary>
-        private readonly HttpClientHandler ClientHandler;
+        private Action<HttpDownloadInfo> ProgressAction;
 
         /// <summary>
         /// 初始化
@@ -76,7 +55,7 @@ namespace AIO
             SavePath       = downloadPath;
             MaxDownloadNum = Urls.Count;
 
-            ClientHandler = new HttpClientHandler()
+            ClientHandler = new HttpClientHandler
             {
                 AutomaticDecompression =
                     DecompressionMethods.GZip | DecompressionMethods.Deflate | DecompressionMethods.None,
@@ -107,6 +86,43 @@ namespace AIO
         /// <param name="downloadPath">保存地址</param>
         public HttpDownload(in string downloadUrls, in string downloadPath)
             : this(new[] { downloadUrls }, downloadPath) { }
+
+        /// <summary>
+        /// 文件地址
+        /// </summary>
+        public IList<string> Urls { get; }
+
+        /// <summary>
+        /// 保存地址
+        /// </summary>
+        public string SavePath { get; }
+
+        /// <summary>
+        /// Http客户端
+        /// </summary>
+        public HTTPClient11 Client { get; private set; }
+
+        /// <summary>
+        /// Http客户端
+        /// </summary>
+        private HTTPClient11 MD5Client { get; set; }
+
+        /// <summary>
+        /// 最大下载数量
+        /// </summary>
+        public int MaxDownloadNum { get; private set; }
+
+        #region IDisposable Members
+
+        /// <summary>
+        /// 释放
+        /// </summary>
+        public void Dispose()
+        {
+            Client.Dispose();
+        }
+
+        #endregion
 
         /// <summary>
         /// 开启异步下载
@@ -252,14 +268,6 @@ namespace AIO
                 stream.Position = 0;
                 stream.Write(buffer, 0, buffer.Length);
             }
-        }
-
-        /// <summary>
-        /// 释放
-        /// </summary>
-        public void Dispose()
-        {
-            Client.Dispose();
         }
 
         /// <summary>

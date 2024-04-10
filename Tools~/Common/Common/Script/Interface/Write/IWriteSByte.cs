@@ -1,11 +1,15 @@
+#region
+
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
     /// <summary>
     /// 写入数据 SByte Array
     /// </summary>
-    public partial interface IWriteSByte
+    public interface IWriteSByte
     {
         /// <summary>
         /// 写入Sbyte数组

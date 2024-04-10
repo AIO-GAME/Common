@@ -2,6 +2,8 @@
 {
     public sealed partial class PrMac
     {
+        #region Nested type: Kills
+
         /// <summary>
         /// 进程相关类
         /// </summary>
@@ -15,5 +17,7 @@
                 return Create(CMD_Kill, args);
             }
         }
+
+        #endregion
     }
 }

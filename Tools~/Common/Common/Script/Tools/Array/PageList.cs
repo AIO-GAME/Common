@@ -1,13 +1,11 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-12-11
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+
+#endregion
 
 namespace AIO
 {
@@ -40,48 +38,18 @@ namespace AIO
     /// <summary>
     /// 分页列表
     /// </summary>
-    [Serializable]
-    [DebuggerDisplay("Count = {Count}")]
-    public class PageList<T> :
-        IList<T>,
-        ICollection<T>,
-        IEnumerable<T>,
-        IPageArray<T>,
-        IComparer<T>,
-        IEnumerable
+    [Serializable, DebuggerDisplay("Count = {Count}")]
+    public class PageList<T>
+        : IList<T>,
+          ICollection<T>,
+          IEnumerable<T>,
+          IPageArray<T>,
+          IComparer<T>,
+          IEnumerable
     {
-        /// <inheritdoc />
-        public int PageSize
-        {
-            get => _PageSize;
-            set
-            {
-                _PageSize = value;
-                if (_PageIndex >= PageCount) _PageIndex = PageCount - 1;
-                CurrentPageValues = GetPage(_PageIndex);
-            }
-        }
+        private int _PageIndex;
 
         private int _PageSize = 16;
-
-        private int _PageIndex = 0;
-
-        /// <inheritdoc />
-        public int PageIndex
-        {
-            get => _PageIndex;
-            set
-            {
-                _PageIndex = value;
-                CurrentPageValues = GetPage(_PageIndex);
-            }
-        }
-
-        /// <inheritdoc />
-        public int PageCount => (int)Math.Ceiling(Count / (float)PageSize);
-
-        /// <inheritdoc />
-        public T[] CurrentPageValues { get; private set; }
 
         /// <summary>
         /// 构造函数
@@ -92,38 +60,21 @@ namespace AIO
         }
 
         /// <summary>
-        /// 获取页内容
-        /// </summary>
-        private T[] GetPage(int index)
-        {
-            if (index < 0 || index >= PageCount) return Array.Empty<T>();
-            var start = index * _PageSize;
-            var end = start + _PageSize;
-            if (end > Count) end = Count;
-            var array = new T[end - start];
-            for (var i = start; i < end; i++) array[i - start] = Values[i];
-            return array;
-        }
-
-        /// <summary>
         /// 值
         /// </summary>
         protected List<T> Values { get; set; }
+
+        /// <inheritdoc />
+        public int Compare(T x, T y)
+        {
+            return Values.IndexOf(x).CompareTo(Values.IndexOf(y));
+        }
 
         /// <inheritdoc />
         public int Count => Values.Count;
 
         /// <inheritdoc />
         public bool IsReadOnly => false;
-
-        /// <summary>
-        /// 反转
-        /// </summary>
-        public void Reverse()
-        {
-            Values.Reverse();
-            CurrentPageValues = GetPage(PageIndex);
-        }
 
         /// <inheritdoc />
         public IEnumerator<T> GetEnumerator()
@@ -193,9 +144,55 @@ namespace AIO
         }
 
         /// <inheritdoc />
-        public int Compare(T x, T y)
+        public int PageSize
         {
-            return Values.IndexOf(x).CompareTo(Values.IndexOf(y));
+            get => _PageSize;
+            set
+            {
+                _PageSize = value;
+                if (_PageIndex >= PageCount) _PageIndex = PageCount - 1;
+                CurrentPageValues = GetPage(_PageIndex);
+            }
+        }
+
+        /// <inheritdoc />
+        public int PageIndex
+        {
+            get => _PageIndex;
+            set
+            {
+                _PageIndex        = value;
+                CurrentPageValues = GetPage(_PageIndex);
+            }
+        }
+
+        /// <inheritdoc />
+        public int PageCount => (int)Math.Ceiling(Count / (float)PageSize);
+
+        /// <inheritdoc />
+        public T[] CurrentPageValues { get; private set; }
+
+        /// <summary>
+        /// 获取页内容
+        /// </summary>
+        private T[] GetPage(int index)
+        {
+            if (index < 0 || index >= PageCount) return Array.Empty<T>();
+            var start = index * _PageSize;
+            var end = start + _PageSize;
+            if (end > Count) end = Count;
+            var array = new T[end - start];
+            for (var i = start; i < end; i++) array[i - start] = Values[i];
+            return array;
+        }
+
+        /// <summary>
+        /// 反转
+        /// </summary>
+        public void Reverse()
+        {
+            Values.Reverse();
+            CurrentPageValues = GetPage(PageIndex);
         }
 
         /// <summary>
@@ -210,12 +207,18 @@ namespace AIO
         /// <summary>
         /// 排序
         /// </summary>
-        public void Sort() => this.Sort(0, this.Count, (IComparer<T>)null);
+        public void Sort()
+        {
+            Sort(0, Count, null);
+        }
 
         /// <summary>
         /// 排序
         /// </summary>
-        public void Sort(IComparer<T> comparer) => this.Sort(0, this.Count, comparer);
+        public void Sort(IComparer<T> comparer)
+        {
+            Sort(0, Count, comparer);
+        }
 
         /// <summary>
         /// 排序
@@ -230,7 +233,7 @@ namespace AIO
                 throw new ArgumentException();
             var temp = Values.ToArray();
             Array.Sort(temp, index, count, comparer);
-            Values = new List<T>(temp);
+            Values            = new List<T>(temp);
             CurrentPageValues = GetPage(PageIndex);
         }
     }

@@ -4,8 +4,12 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Net;
+
+#endregion
 
 namespace AIO
 {
@@ -18,15 +22,12 @@ namespace AIO
         {
             if (string.IsNullOrEmpty(url)) return false;
             HttpWebRequest request = null;
-            if (!url.Contains("http://") && !url.Contains("https://"))
-            {
-                url = "http://" + url;
-            }
+            if (!url.Contains("http://") && !url.Contains("https://")) url = "http://" + url;
 
             try
             {
-                request = (HttpWebRequest)WebRequest.CreateDefault(new Uri(url));
-                request.Method = "HEAD";
+                request         = (HttpWebRequest)WebRequest.CreateDefault(new Uri(url));
+                request.Method  = "HEAD";
                 request.Timeout = outTime; //超时时间10秒
                 var res = (HttpWebResponse)request.GetResponse();
                 return res.StatusCode == HttpStatusCode.OK;

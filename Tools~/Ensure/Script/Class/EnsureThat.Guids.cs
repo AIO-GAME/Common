@@ -1,5 +1,8 @@
+#region
+
 using System;
-using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
@@ -12,10 +15,7 @@ namespace AIO
         {
             if (!Ensure.IsActive) return;
 
-            if (value.Equals(Guid.Empty))
-            {
-                throw new ArgumentException(ExceptionMessages.Guids_IsNotEmpty_Failed, paramName);
-            }
+            if (value.Equals(Guid.Empty)) throw new ArgumentException(ExceptionMessages.Guids_IsNotEmpty_Failed, paramName);
         }
     }
 }

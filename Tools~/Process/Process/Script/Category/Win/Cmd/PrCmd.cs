@@ -4,10 +4,14 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
@@ -16,95 +20,6 @@ namespace AIO
     /// </summary>
     public sealed partial class PrCmd : PrWin
     {
-        private sealed class ExecutorCmd : Executor
-        {
-            public ExecutorCmd(in ProcessStartInfo info) : base(info)
-            {
-            }
-
-            public override IResult Sync()
-            {
-                IResultInternal result = new Result(Pr);
-                try
-                {
-                    Pr.Disposed += result.ReceivedDisposed;
-                    Pr.Exited += result.ReceivedExited;
-
-                    if (Pr.StartInfo.RedirectStandardOutput)
-                    {
-                        Pr.OutputDataReceived += result.ReceivedOutput;
-                        Pr.OutputDataReceived += ReceiveProgress;
-                    }
-
-                    if (Pr.StartInfo.RedirectStandardError)
-                    {
-                        Pr.ErrorDataReceived += result.ReceivedError;
-                        Pr.ErrorDataReceived += ReceiveProgress;
-                    }
-
-                    var hasArgumentsMLine = false;
-                    var inputStr = inputs.ToString();
-                    if (inputs.Length > 0)
-                    {
-                        hasArgumentsMLine = inputStr.Split('\n').Length > 2;
-                        if (hasArgumentsMLine)
-                            Pr.StartInfo.Arguments = "/U /D /Q /V:ON /F:ON /E:ON";
-                        else
-                            Pr.StartInfo.Arguments = string.Concat(Pr.StartInfo.Arguments, " \" ",
-                                inputs.ToString().Substring(0, inputs.Length - 1), " \"");
-                    }
-
-                    Pr.Refresh();
-                    Pr.Start();
-                    Pr.PriorityBoostEnabled = true; // 启用优先级增强
-
-                    if (hasArgumentsMLine && Pr.StartInfo.RedirectStandardInput)
-                    {
-                        Pr.StandardInput.WriteLine("@echo off");
-                        foreach (var input in inputStr.Split('\n'))
-                        {
-                            ReceiveProgress(null, input);
-                            Pr.StandardInput.WriteLine(input.TrimEnd());
-                        }
-
-                        Pr.StandardInput.WriteLine("@exit");
-                    }
-
-                    if (Pr.StartInfo.RedirectStandardOutput) Pr.BeginOutputReadLine();
-                    if (Pr.StartInfo.RedirectStandardError) Pr.BeginErrorReadLine();
-
-                    Pr.WaitForExit();
-
-                    if (Pr.StartInfo.RedirectStandardOutput)
-                    {
-                        Pr.CancelOutputRead();
-                        Pr.OutputDataReceived -= result.ReceivedOutput;
-                    }
-
-                    if (Pr.StartInfo.RedirectStandardError)
-                    {
-                        Pr.CancelErrorRead();
-                        Pr.ErrorDataReceived -= result.ReceivedError;
-                    }
-
-                    if (Pr.StartInfo.RedirectStandardInput) Pr.StandardInput.Close();
-
-                    Pr.Disposed -= result.ReceivedDisposed;
-                    Pr.Exited -= result.ReceivedExited;
-                }
-                catch (Exception ex)
-                {
-                    result = new ResultException(Pr.StartInfo, ex);
-                }
-
-                result.Finish(inputs.ToString());
-                CallBack?.Invoke(result);
-                if (EnableOutput) result.Debug();
-                if (Next != null) result.Link(Next.Sync());
-                return result;
-            }
-        }
-
         /// <summary>
         /// HELP=>
         /// CMD [/A | /U] [/Q] [/D] [/E:ON | /E:OFF] [/F:ON | /F:OFF] [/V:ON | /V:OFF] [[/S][/C | /K] string]
@@ -153,7 +68,7 @@ namespace AIO
                 if (p.StartInfo.RedirectStandardInput) p.StartInfo.StandardInputEncoding = encoding;
 #endif
                 if (Info.RedirectStandardOutput) Info.StandardOutputEncoding = encoding;
-                if (Info.RedirectStandardError) Info.StandardErrorEncoding = encoding;
+                if (Info.RedirectStandardError) Info.StandardErrorEncoding   = encoding;
             }
             catch (Exception ex)
             {
@@ -162,6 +77,97 @@ namespace AIO
 
             return new ExecutorCmd(Info);
         }
+
+        #region Nested type: ExecutorCmd
+
+        private sealed class ExecutorCmd : Executor
+        {
+            public ExecutorCmd(in ProcessStartInfo info) : base(info) { }
+
+            public override IResult Sync()
+            {
+                IResultInternal result = new Result(Pr);
+                try
+                {
+                    Pr.Disposed += result.ReceivedDisposed;
+                    Pr.Exited   += result.ReceivedExited;
+
+                    if (Pr.StartInfo.RedirectStandardOutput)
+                    {
+                        Pr.OutputDataReceived += result.ReceivedOutput;
+                        Pr.OutputDataReceived += ReceiveProgress;
+                    }
+
+                    if (Pr.StartInfo.RedirectStandardError)
+                    {
+                        Pr.ErrorDataReceived += result.ReceivedError;
+                        Pr.ErrorDataReceived += ReceiveProgress;
+                    }
+
+                    var hasArgumentsMLine = false;
+                    var inputStr = inputs.ToString();
+                    if (inputs.Length > 0)
+                    {
+                        hasArgumentsMLine = inputStr.Split('\n').Length > 2;
+                        if (hasArgumentsMLine)
+                            Pr.StartInfo.Arguments = "/U /D /Q /V:ON /F:ON /E:ON";
+                        else
+                            Pr.StartInfo.Arguments = string.Concat(Pr.StartInfo.Arguments, " \" ",
+                                                                   inputs.ToString().Substring(0, inputs.Length - 1), " \"");
+                    }
+
+                    Pr.Refresh();
+                    Pr.Start();
+                    Pr.PriorityBoostEnabled = true; // 启用优先级增强
+
+                    if (hasArgumentsMLine && Pr.StartInfo.RedirectStandardInput)
+                    {
+                        Pr.StandardInput.WriteLine("@echo off");
+                        foreach (var input in inputStr.Split('\n'))
+                        {
+                            ReceiveProgress(null, input);
+                            Pr.StandardInput.WriteLine(input.TrimEnd());
+                        }
+
+                        Pr.StandardInput.WriteLine("@exit");
+                    }
+
+                    if (Pr.StartInfo.RedirectStandardOutput) Pr.BeginOutputReadLine();
+                    if (Pr.StartInfo.RedirectStandardError) Pr.BeginErrorReadLine();
+
+                    Pr.WaitForExit();
+
+                    if (Pr.StartInfo.RedirectStandardOutput)
+                    {
+                        Pr.CancelOutputRead();
+                        Pr.OutputDataReceived -= result.ReceivedOutput;
+                    }
+
+                    if (Pr.StartInfo.RedirectStandardError)
+                    {
+                        Pr.CancelErrorRead();
+                        Pr.ErrorDataReceived -= result.ReceivedError;
+                    }
+
+                    if (Pr.StartInfo.RedirectStandardInput) Pr.StandardInput.Close();
+
+                    Pr.Disposed -= result.ReceivedDisposed;
+                    Pr.Exited   -= result.ReceivedExited;
+                }
+                catch (Exception ex)
+                {
+                    result = new ResultException(Pr.StartInfo, ex);
+                }
+
+                result.Finish(inputs.ToString());
+                CallBack?.Invoke(result);
+                if (EnableOutput) result.Debug();
+                if (Next != null) result.Link(Next.Sync());
+                return result;
+            }
+        }
+
+        #endregion
 
         #region Create
 
@@ -183,8 +189,7 @@ namespace AIO
         /// <returns>结果执行器</returns>
         public new static IExecutor Create(in (string, string) cmd_work, in string format, params object[] args)
         {
-            return Activator.CreateInstance<PrCmd>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2)
-                .SetInArgs(format, args).Execute();
+            return Activator.CreateInstance<PrCmd>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2).SetInArgs(format, args).Execute();
         }
 
         /// <summary>
@@ -195,8 +200,7 @@ namespace AIO
         /// <returns>结果执行器</returns>
         public new static IExecutor Create(in (string, string) cmd_work, in StringBuilder args)
         {
-            return Activator.CreateInstance<PrCmd>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2)
-                .SetInArgs(args.ToString()).Execute();
+            return Activator.CreateInstance<PrCmd>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2).SetInArgs(args.ToString()).Execute();
         }
 
         /// <summary>
@@ -207,8 +211,7 @@ namespace AIO
         /// <returns>结果执行器</returns>
         public new static IExecutor Create(in (string, string) cmd_work, in string args)
         {
-            return Activator.CreateInstance<PrCmd>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2)
-                .SetInArgs(args).Execute();
+            return Activator.CreateInstance<PrCmd>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2).SetInArgs(args).Execute();
         }
 
         /// <summary>
@@ -219,8 +222,7 @@ namespace AIO
         /// <returns>结果执行器</returns>
         public new static IExecutor Create(in (string, string) cmd_work, in ICollection<string> args)
         {
-            return Activator.CreateInstance<PrCmd>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2)
-                .SetInArgs(args).Execute();
+            return Activator.CreateInstance<PrCmd>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2).SetInArgs(args).Execute();
         }
 
         /// <summary>
@@ -230,8 +232,7 @@ namespace AIO
         /// <returns>结果执行器</returns>
         public new static IExecutor Create(in (string, string) cmd_work)
         {
-            return Activator.CreateInstance<PrCmd>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2)
-                .Execute();
+            return Activator.CreateInstance<PrCmd>().SetFileName(cmd_work.Item1).SetWorkingDir(cmd_work.Item2).Execute();
         }
 
         /// <summary>

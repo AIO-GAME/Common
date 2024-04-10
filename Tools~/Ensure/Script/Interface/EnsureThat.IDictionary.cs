@@ -1,6 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
@@ -10,7 +13,6 @@ namespace AIO
         /// 验证数据 报错条件
         /// [value.Count != expected]
         /// </summary>
-
         public void SizeIs<TKey, TValue>(in IDictionary<TKey, TValue> value, in int expected)
         {
             if (!Ensure.IsActive) return;
@@ -23,7 +25,6 @@ namespace AIO
         /// 验证数据 报错条件
         /// [value.Count != expected]
         /// </summary>
-
         public void SizeIs<TKey, TValue>(in IDictionary<TKey, TValue> value, in long expected)
         {
             if (!Ensure.IsActive) return;
@@ -36,7 +37,6 @@ namespace AIO
         /// 验证数据 报错条件
         /// [value.ContainsKey(expectedKey) == false]
         /// </summary>
-
         public void IsKeyOf<TKey, TValue>(in IDictionary<TKey, TValue> value, in TKey expectedKey, in string keyLabel = null)
         {
             if (!Ensure.IsActive) return;
@@ -50,7 +50,6 @@ namespace AIO
         /// [value == null]
         /// [value.Count &lt; 1]
         /// </summary>
-
         public void HasItems<TKey, TValue>(in IDictionary<TKey, TValue> value)
         {
             if (!Ensure.IsActive) return;

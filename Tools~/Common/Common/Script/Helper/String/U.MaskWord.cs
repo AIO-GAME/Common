@@ -1,17 +1,15 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
-
+#region
 
 using System;
-using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: MaskWord
+
         /// <summary> 
         /// 屏蔽字
         /// </summary>
@@ -30,7 +28,7 @@ namespace AIO
                     var index = str.IndexOf(item, StringComparison.CurrentCulture);
                     if (index < 0) continue;
                     var value = "";
-                    if (index > 0) value = str.Substring(0, index);
+                    if (index > 0) value                        =  str.Substring(0, index);
                     for (var j = 0; j < item.Length; j++) value += '*';
                     if (str.Length > index + item.Length) value += str.Substring(index + item.Length);
                     str = value;
@@ -44,11 +42,10 @@ namespace AIO
             /// </summary>
             public static void LoadMaskWord(string context)
             {
-                if (words.Length == 0)
-                {
-                    words = context.Split(new char[] { '\n' });
-                }
+                if (words.Length == 0) words = context.Split('\n');
             }
         }
+
+        #endregion
     }
 }

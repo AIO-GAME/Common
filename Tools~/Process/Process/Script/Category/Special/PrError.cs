@@ -4,8 +4,12 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Diagnostics;
+
+#endregion
 
 namespace AIO
 {
@@ -17,16 +21,12 @@ namespace AIO
         /// <summary>
         /// 进程执行器(错误)
         /// </summary>
-        public ExecutorError(in ProcessStartInfo info) : base(info)
-        {
-        }
+        public ExecutorError(in ProcessStartInfo info) : base(info) { }
 
         /// <summary>
         /// 进程执行器(错误)
         /// </summary>
-        public ExecutorError(in ProcessStartInfo info, in bool enableOutput = true) : base(info, enableOutput)
-        {
-        }
+        public ExecutorError(in ProcessStartInfo info, in bool enableOutput = true) : base(info, enableOutput) { }
 
 
         /// <inheritdoc/>
@@ -45,6 +45,11 @@ namespace AIO
     /// </summary>
     public sealed class ResultError : Result
     {
+        /// <summary>
+        /// 进程执行结果(错误)
+        /// </summary>
+        public ResultError(Process process) : base(process) { }
+
         /// <inheritdoc/>
         public override int ExitCode => -1;
 
@@ -71,13 +76,6 @@ namespace AIO
 
         /// <inheritdoc/>
         public override TimeSpan PrivilegedProcessorTime => TimeSpan.Zero;
-
-        /// <summary>
-        /// 进程执行结果(错误)
-        /// </summary>
-        public ResultError(Process process) : base(process)
-        {
-        }
     }
 
     /// <summary>

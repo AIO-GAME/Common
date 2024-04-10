@@ -2,10 +2,12 @@
 {
     public sealed partial class PrMac
     {
+        #region Nested type: Brew
+
         /// <summary>
         /// 安装命令
         /// </summary>
-        public sealed partial class Brew
+        public sealed class Brew
         {
             /// <summary>
             /// 安装包
@@ -17,5 +19,7 @@
                 return Create(CMD_Brew, "install {0}", package);
             }
         }
+
+        #endregion
     }
 }

@@ -1,17 +1,11 @@
-/*|============|*|
-|*|Author:     |*| USER
-|*|Date:       |*| 2024-01-08
-|*|E-Mail:     |*| xinansky99@gmail.com
-|*|============|*/
-
-
 #if UNITY_2021_1_OR_NEWER
+
+#region
+
 #if !UNITY_2023_1_OR_NEWER
 using System.Runtime.CompilerServices;
 using MonoHook;
-using System;
 #endif
-
 using System.Reflection;
 using UnityEditor;
 using UnityEditor.EditorTools;
@@ -22,14 +16,15 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
+#endregion
+
 namespace AIO.UEditor
 {
     [Overlay(typeof(SceneView), "Lnk", true
 #if UNITY_2023_1_OR_NEWER
         , defaultLayout = Layout.VerticalToolbar
 #endif
-    )]
-    [Icon("Packages/com.aio.package/Resources/Editor/Icon/Setting/icon_option_button.png")]
+     ), Icon("Packages/com.aio.package/Resources/Editor/Icon/Setting/icon_option_button.png")]
     public class LnkToolOverlay : ToolbarOverlay, ITransientOverlay
 #if UNITY_2022_1_OR_NEWER
         , ICreateHorizontalToolbar, ICreateVerticalToolbar
@@ -136,13 +131,13 @@ namespace AIO.UEditor
 #endif
 
 
-        private const BindingFlags ToolBarBind = BindingFlags.Instance | BindingFlags.Public;
+        private const BindingFlags ToolBarBind    = BindingFlags.Instance | BindingFlags.Public;
         private const BindingFlags ToolBarBindNon = BindingFlags.Instance | BindingFlags.NonPublic;
-        public const string k_Id = "unity-lnk-toolbar";
+        public const  string       k_Id           = "unity-lnk-toolbar";
 
 
-        public bool visible => content?.visible ?? false;
-        private Editor m_Editor;
+        public  bool          visible => content?.visible ?? false;
+        private Editor        m_Editor;
         private VisualElement m_Content;
 
         private VisualElement content
@@ -150,12 +145,10 @@ namespace AIO.UEditor
             get
             {
                 if (m_Content == null)
-                {
                     m_Content = new VisualElement
                     {
                         name = "toolbar-overlay"
                     };
-                }
 
                 return m_Content;
             }
@@ -187,14 +180,17 @@ namespace AIO.UEditor
                 toolbar.style.unityBackgroundScaleMode = ScaleMode.ScaleToFit;
 #endif
             }
-            else toolbar.text = lnk.Content.text;
+            else
+            {
+                toolbar.text = lnk.Content.text;
+            }
 
             toolbar.style.backgroundColor = lnk.Status ? Color.gray : lnk.BackgroundColor;
-            toolbar.value = lnk.Status;
+            toolbar.value                 = lnk.Status;
             toolbar.RegisterValueChangedCallback(evt =>
             {
                 if (evt.newValue) lnk.Invoke();
-                toolbar.value = lnk.Status;
+                toolbar.value                 = lnk.Status;
                 toolbar.style.backgroundColor = lnk.Status ? Color.gray : lnk.BackgroundColor;
             });
             return toolbar;
@@ -226,7 +222,10 @@ namespace AIO.UEditor
                 toolbar.style.unityBackgroundScaleMode = ScaleMode.ScaleToFit;
 #endif
             }
-            else toolbar.text = lnk.Content.text;
+            else
+            {
+                toolbar.text = lnk.Content.text;
+            }
 
             toolbar.name = lnk.Content.text;
             return toolbar;
@@ -240,64 +239,64 @@ namespace AIO.UEditor
         /// <param name="isVertical">Ture:竖排 False:横排</param>
         private static void ChangeVisualElement(VisualElement element, int index, bool isVertical)
         {
-            element.style.alignContent = Align.Center;
-            element.style.alignItems = Align.Stretch;
-            element.style.alignSelf = Align.Auto;
-            element.style.flexDirection = FlexDirection.Row;
+            element.style.alignContent   = Align.Center;
+            element.style.alignItems     = Align.Stretch;
+            element.style.alignSelf      = Align.Auto;
+            element.style.flexDirection  = FlexDirection.Row;
             element.style.justifyContent = Justify.Center;
 
             element.style.minHeight = 20;
-            element.style.minWidth = 32;
+            element.style.minWidth  = 32;
 
-            element.style.paddingLeft = 0;
-            element.style.paddingRight = 0;
-            element.style.paddingTop = 0;
+            element.style.paddingLeft   = 0;
+            element.style.paddingRight  = 0;
+            element.style.paddingTop    = 0;
             element.style.paddingBottom = 0;
 
             if (isVertical) // 竖排 且 未折叠
             {
-                element.style.width = 37;
-                element.style.height = 20;
-                element.style.marginLeft = 0;
-                element.style.marginRight = 0;
-                element.style.marginTop = 0;
+                element.style.width        = 37;
+                element.style.height       = 20;
+                element.style.marginLeft   = 0;
+                element.style.marginRight  = 0;
+                element.style.marginTop    = 0;
                 element.style.marginBottom = 1;
 
                 if (index == 0)
                 {
-                    element.style.borderTopLeftRadius = 3;
+                    element.style.borderTopLeftRadius  = 3;
                     element.style.borderTopRightRadius = 3;
-                    element.style.marginTop = 1.5f;
+                    element.style.marginTop            = 1.5f;
                 }
 
                 if (index >= LnkToolsHelper.Data.Count - 1)
                 {
-                    element.style.borderBottomLeftRadius = 3;
+                    element.style.borderBottomLeftRadius  = 3;
                     element.style.borderBottomRightRadius = 3;
-                    element.style.marginBottom = 1.5f;
+                    element.style.marginBottom            = 1.5f;
                 }
             }
             else
             {
-                element.style.width = 32;
-                element.style.height = 20;
-                element.style.marginLeft = 0;
-                element.style.marginRight = 1;
-                element.style.marginTop = 0;
+                element.style.width        = 32;
+                element.style.height       = 20;
+                element.style.marginLeft   = 0;
+                element.style.marginRight  = 1;
+                element.style.marginTop    = 0;
                 element.style.marginBottom = 0;
 
                 if (index == 0)
                 {
-                    element.style.marginLeft = 1.5f;
-                    element.style.marginRight = 1;
+                    element.style.marginLeft             = 1.5f;
+                    element.style.marginRight            = 1;
                     element.style.borderBottomLeftRadius = 3;
-                    element.style.borderTopLeftRadius = 3;
+                    element.style.borderTopLeftRadius    = 3;
                 }
 
                 if (index >= LnkToolsHelper.Data.Count - 1)
                 {
-                    element.style.marginRight = 1.5f;
-                    element.style.borderTopRightRadius = 3;
+                    element.style.marginRight             = 1.5f;
+                    element.style.borderTopRightRadius    = 3;
                     element.style.borderBottomRightRadius = 3;
                 }
             }
@@ -312,23 +311,23 @@ namespace AIO.UEditor
         {
             element.Clear();
 
-            element.style.borderBottomLeftRadius = 2f;
-            element.style.borderBottomRightRadius = 2f;
-            element.style.borderTopLeftRadius = 2f;
-            element.style.borderTopRightRadius = 2f;
+            element.style.borderBottomLeftRadius        = 2f;
+            element.style.borderBottomRightRadius       = 2f;
+            element.style.borderTopLeftRadius           = 2f;
+            element.style.borderTopRightRadius          = 2f;
             element.style.unityBackgroundImageTintColor = Color.white;
 
-            element.style.alignItems = Align.FlexStart;
-            element.style.alignSelf = Align.Stretch;
+            element.style.alignItems   = Align.FlexStart;
+            element.style.alignSelf    = Align.Stretch;
             element.style.alignContent = Align.Auto;
             if (isVertical)
             {
-                element.style.flexDirection = FlexDirection.Column;
+                element.style.flexDirection  = FlexDirection.Column;
                 element.style.justifyContent = Justify.Center;
             }
             else
             {
-                element.style.flexDirection = FlexDirection.Row;
+                element.style.flexDirection  = FlexDirection.Row;
                 element.style.justifyContent = Justify.FlexStart;
             }
 
@@ -339,8 +338,8 @@ namespace AIO.UEditor
                 index++;
                 var toolbar = lnk.hasReturn ? GetBool(lnk) : GetVoid(lnk);
 
-                toolbar.tooltip = lnk.Content.tooltip;
-                toolbar.style.backgroundColor = lnk.BackgroundColor;
+                toolbar.tooltip                             = lnk.Content.tooltip;
+                toolbar.style.backgroundColor               = lnk.BackgroundColor;
                 toolbar.style.unityBackgroundImageTintColor = lnk.ForegroundColor;
                 ChangeVisualElement(toolbar, index, isVertical);
 
@@ -369,9 +368,7 @@ namespace AIO.UEditor
         {
             if (collapsed) return false;
 
-            if (isInToolbar && typeof(Overlay)
-                    .GetProperty("rootVisualElement", ToolBarBindNon | BindingFlags.GetProperty)
-                    ?.GetValue(this, null) is VisualElement visualElement)
+            if (isInToolbar && typeof(Overlay).GetProperty("rootVisualElement", ToolBarBindNon | BindingFlags.GetProperty)?.GetValue(this, null) is VisualElement visualElement)
                 return visualElement.parent.ClassListContains("unity-overlay-container-vertical");
 
             return layout == Layout.VerticalToolbar;

@@ -1,17 +1,13 @@
-﻿/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
-
-namespace AIO
+﻿namespace AIO
 {
     public partial class Unit
     {
+        #region Nested type: Color
+
         /// <summary>
         /// 颜色库
         /// </summary>
-        public static partial class Color
+        public static class Color
         {
             #region rich color list
 
@@ -176,5 +172,7 @@ namespace AIO
 
             #endregion
         }
+
+        #endregion
     }
 }

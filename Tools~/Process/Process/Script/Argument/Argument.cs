@@ -4,12 +4,16 @@
 
 |||✩ - - - - - |*/
 
+#region
+
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+
+#endregion
+
 namespace AIO
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
-
     /// <summary>
     /// 参数帮助类
     /// </summary>
@@ -18,7 +22,8 @@ namespace AIO
         /// <summary>
         /// 解析自定义命令
         /// </summary>
-        public static T ResolverCustomCur<T>() where T : ArgumentCustom, new()
+        public static T ResolverCustomCur<T>()
+        where T : ArgumentCustom, new()
         {
             var cmd = Activator.CreateInstance<T>();
             cmd.Resolver(string.Join(" ", Environment.GetCommandLineArgs()));
@@ -28,7 +33,8 @@ namespace AIO
         /// <summary>
         /// 解析自定义命令
         /// </summary>
-        public static T ResolverCustom<T>(in string args) where T : ArgumentCustom, new()
+        public static T ResolverCustom<T>(in string args)
+        where T : ArgumentCustom, new()
         {
             var cmd = Activator.CreateInstance<T>();
             cmd.Resolver(args);
@@ -38,7 +44,8 @@ namespace AIO
         /// <summary>
         /// 解析自定义命令
         /// </summary>
-        public static T ResolverCustom<T>(in IEnumerable<string> args) where T : ArgumentCustom, new()
+        public static T ResolverCustom<T>(in IEnumerable<string> args)
+        where T : ArgumentCustom, new()
         {
             var cmd = Activator.CreateInstance<T>();
             cmd.Resolver(string.Join(" ", args));
@@ -48,7 +55,8 @@ namespace AIO
         /// <summary>
         /// 解析默认命令
         /// </summary>
-        public static T ResolverCur<T>() where T : new()
+        public static T ResolverCur<T>()
+        where T : new()
         {
             return Resolver(Activator.CreateInstance<T>(), string.Join(" ", Environment.GetCommandLineArgs()));
         }
@@ -56,7 +64,8 @@ namespace AIO
         /// <summary>
         /// 解析默认命令
         /// </summary>
-        public static T Resolver<T>(in IEnumerable<string> args) where T : new()
+        public static T Resolver<T>(in IEnumerable<string> args)
+        where T : new()
         {
             return Resolver(Activator.CreateInstance<T>(), string.Join(" ", args));
         }
@@ -64,7 +73,8 @@ namespace AIO
         /// <summary>
         /// 解析默认命令
         /// </summary>
-        public static T Resolver<T>(in string args) where T : new()
+        public static T Resolver<T>(in string args)
+        where T : new()
         {
             return Resolver(Activator.CreateInstance<T>(), args);
         }
@@ -179,10 +189,7 @@ namespace AIO
             if (end > 0) _ = temp.Substring(0, end);
             var values = temp.Split(' ');
             var list = new int[values.Length];
-            for (var i = 0; i < list.Length; i++)
-            {
-                list[i] = int.Parse(values[i]);
-            }
+            for (var i = 0; i < list.Length; i++) list[i] = int.Parse(values[i]);
 
             return list;
         }

@@ -4,15 +4,21 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 #if UNITY_EDITOR_WIN
 using Microsoft.Win32;
 #endif
+
+#endregion
 
 
 namespace AIO.UEditor
 {
     public static partial class EHelper
     {
+        #region Nested type: SoftUtils
+
         /// <summary>
         /// windos软件检测
         /// </summary>
@@ -39,9 +45,8 @@ namespace AIO.UEditor
             {
                 var regSubKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\", false);
                 foreach (var keyName in regSubKey.GetSubKeyNames())
-                {
-                    if (keyName.Contains(softname)) return true;
-                }
+                    if (keyName.Contains(softname))
+                        return true;
 
                 return false;
             }
@@ -59,12 +64,8 @@ namespace AIO.UEditor
                         var subKey = uninstallNode.OpenSubKey(subKeyName);
                         var displayName = subKey.GetValue("DisplayName");
                         if (displayName != null)
-                        {
                             if (displayName.ToString().ToLower().Contains(System.IO.Path.GetFileName(softname).ToLower()))
-                            {
                                 return true;
-                            }
-                        }
                     }
                 }
                 catch
@@ -82,7 +83,6 @@ namespace AIO.UEditor
             {
                 var regKey = Registry.Users;
                 foreach (var keyName in regKey.GetSubKeyNames())
-                {
                     if (keyName.ToLower().Contains("classes"))
                     {
                         var subKeyName = keyName.Substring(0, keyName.Length - 8);
@@ -93,12 +93,13 @@ namespace AIO.UEditor
                             if (subName.ToLower().Contains(softname.ToLower()))
                                 return true;
                     }
-                }
 
                 return false;
             }
 
 #endif
         }
+
+        #endregion
     }
 }

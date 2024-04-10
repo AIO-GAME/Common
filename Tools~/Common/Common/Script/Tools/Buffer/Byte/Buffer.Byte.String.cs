@@ -1,9 +1,15 @@
-﻿using System.Text;
+﻿#region
+
+using System.Text;
+
+#endregion
 
 namespace AIO
 {
     public partial class BufferByte
     {
+        #region IReadData Members
+
         /// <inheritdoc/> 
         public string ReadString(Encoding encoding = null, bool reverse = false)
         {
@@ -27,6 +33,10 @@ namespace AIO
         {
             return Arrays.GetString(ref ReadIndex, Encoding.Unicode, reverse);
         }
+
+        #endregion
+
+        #region IWriteData Members
 
         /// <inheritdoc/> 
         public void WriteString(string value, Encoding encoding = null, bool reverse = false)
@@ -99,5 +109,7 @@ namespace AIO
         {
             WriteString(value, Encoding.Unicode, reverse);
         }
+
+        #endregion
     }
 }

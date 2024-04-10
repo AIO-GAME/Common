@@ -1,6 +1,4 @@
 ﻿namespace AIO.UEngine
 {
-    public static partial class ByteExtend
-    {
-    }
+    public static partial class ByteExtend { }
 }

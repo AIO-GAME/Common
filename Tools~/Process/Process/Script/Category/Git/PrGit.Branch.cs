@@ -4,12 +4,18 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrGit
     {
+        #region Nested type: Branch
+
         /// <summary>
         /// <see cref="PrGit"/> <see cref="Branch"/>
         /// </summary>
@@ -85,5 +91,7 @@ namespace AIO
                 return PrGit.Create(work, "branch {0}", args);
             }
         }
+
+        #endregion
     }
 }

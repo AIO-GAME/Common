@@ -1,11 +1,17 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Text;
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: HTTP
+
         public partial class HTTP
         {
             /// <summary>
@@ -101,8 +107,10 @@ namespace AIO
                 string   data,
                 Encoding encoding,
                 ushort   timeout = Net.TIMEOUT,
-                string   cookie  = null) =>
-                AutoCommonRequestAsync(remoteUrl, TRACE, encoding.GetBytes(data), encoding, timeout, cookie);
+                string   cookie  = null)
+            {
+                return AutoCommonRequestAsync(remoteUrl, TRACE, encoding.GetBytes(data), encoding, timeout, cookie);
+            }
 
             /// <summary>
             /// 回显服务器收到的请求
@@ -117,8 +125,12 @@ namespace AIO
                 string remoteUrl,
                 string data,
                 ushort timeout = Net.TIMEOUT,
-                string cookie  = null) =>
-                AutoCommonRequestAsync(remoteUrl, TRACE, Encoding.UTF8.GetBytes(data), Encoding.UTF8, timeout, cookie);
+                string cookie  = null)
+            {
+                return AutoCommonRequestAsync(remoteUrl, TRACE, Encoding.UTF8.GetBytes(data), Encoding.UTF8, timeout, cookie);
+            }
         }
+
+        #endregion
     }
 }

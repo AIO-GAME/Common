@@ -1,15 +1,21 @@
 /*|============|*|
-|*|Author:     |*| xinan                
-|*|Date:       |*| 2023-10-28               
-|*|E-Mail:     |*| 1398581458@qq.com     
+|*|Author:     |*| xinan
+|*|Date:       |*| 2023-10-28
+|*|E-Mail:     |*| 1398581458@qq.com
 |*|============|*/
 
+#region
+
 using UnityEditor;
+
+#endregion
 
 namespace AIO.UEditor
 {
     public partial class EHelper
     {
+        #region Nested type: Prefs
+
         public partial class Prefs
         {
             private const int BooleanHashCode = 2010873062;
@@ -135,5 +141,7 @@ namespace AIO.UEditor
 
             #endregion
         }
+
+        #endregion
     }
 }

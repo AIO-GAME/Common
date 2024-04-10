@@ -1,14 +1,12 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+#region
+
+using System.Runtime.CompilerServices;
+using System.Text;
+
+#endregion
 
 namespace AIO
 {
-    using System.Runtime.CompilerServices;
-    using System.Text;
-
     /// <summary>
     /// 字符扩展
     /// </summary>
@@ -21,7 +19,7 @@ namespace AIO
         public static bool IsSingleByte(this char value)
         {
             // 使用中文支持编码
-            return Encoding.BigEndianUnicode.GetByteCount(new char[] { value }) == 1;
+            return Encoding.BigEndianUnicode.GetByteCount(new[] { value }) == 1;
         }
 
         /// <summary>

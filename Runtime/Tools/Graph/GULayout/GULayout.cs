@@ -1,14 +1,14 @@
-﻿using System;
+﻿#region
+
+using System;
 using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
     public abstract partial class GULayout
     {
-        protected GULayout()
-        {
-        }
-
         /// <summary>
         /// 复制文本信息
         /// </summary>

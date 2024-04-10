@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -14,7 +18,8 @@ namespace AIO
         /// </summary>
         /// <typeparam name="TI">指定类型</typeparam>
         /// <returns>如果包含则为真，否则为假</returns>
-        bool Includes<TI>() where TI : T;
+        bool Includes<TI>()
+        where TI : T;
 
         /// <summary>
         /// 检查指定类型是否包含在集合中

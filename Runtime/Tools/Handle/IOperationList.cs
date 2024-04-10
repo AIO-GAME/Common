@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
@@ -21,14 +25,14 @@ namespace AIO
         object this[int index] { get; }
 
         /// <summary>
-        /// 获取结果
-        /// </summary>
-        object[] Invoke();
-
-        /// <summary>
         /// 结果
         /// </summary>
         object[] Result { get; }
+
+        /// <summary>
+        /// 获取结果
+        /// </summary>
+        object[] Invoke();
 
         /// <summary>
         /// 完成回调
@@ -52,14 +56,19 @@ namespace AIO
     public interface IOperationList<TObject> : IOperationList
     {
         /// <summary>
-        /// 获取异步等待器
-        /// </summary>
-        new IEnumerator<TObject> GetEnumerator();
-
-        /// <summary>
         /// 结果
         /// </summary>
         new TObject[] Result { get; }
+
+        /// <summary>
+        /// 索引器
+        /// </summary>
+        new TObject this[int index] { get; }
+
+        /// <summary>
+        /// 获取异步等待器
+        /// </summary>
+        new IEnumerator<TObject> GetEnumerator();
 
         /// <summary>
         /// 完成回调
@@ -75,10 +84,5 @@ namespace AIO
         /// 执行
         /// </summary>
         new TObject[] Invoke();
-
-        /// <summary>
-        /// 索引器
-        /// </summary>
-        new TObject this[int index] { get; }
     }
 }

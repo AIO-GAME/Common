@@ -1,13 +1,21 @@
 /*|============|*|
-|*|Author:     |*| xinan                
-|*|Date:       |*| 2023-05-21               
-|*|E-Mail:     |*| 1398581458@qq.com     
+|*|Author:     |*| xinan
+|*|Date:       |*| 2023-05-21
+|*|E-Mail:     |*| 1398581458@qq.com
 |*|============|*/
+
+#region
+
+using System;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrSvn
     {
+        #region Nested type: Update
+
         /// <summary>
         /// 更新 命令
         /// </summary>
@@ -21,7 +29,7 @@ namespace AIO
             /// <returns>执行器</returns>
             public static IExecutor Execute(in string work, in string args)
             {
-                if (string.IsNullOrEmpty(args)) throw new System.ArgumentNullException(nameof(args));
+                if (string.IsNullOrEmpty(args)) throw new ArgumentNullException(nameof(args));
                 return Create(work, "update {0}", args);
             }
 
@@ -35,5 +43,7 @@ namespace AIO
                 return Create(work, "update . --parents --ignore-externals");
             }
         }
+
+        #endregion
     }
 }

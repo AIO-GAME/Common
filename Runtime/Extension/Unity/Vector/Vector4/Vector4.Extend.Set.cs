@@ -1,5 +1,9 @@
-﻿using System.Runtime.CompilerServices;
+﻿#region
+
+using System.Runtime.CompilerServices;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEngine
 {
@@ -84,6 +88,7 @@ namespace AIO.UEngine
         #endregion
 
         #region YZ
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetYZ(this ref Vector4 vector, float v1, float v2)
         {
@@ -101,6 +106,7 @@ namespace AIO.UEngine
         #endregion
 
         #region YW
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetYW(this ref Vector4 vector, float v1, float v2)
         {
@@ -118,6 +124,7 @@ namespace AIO.UEngine
         #endregion
 
         #region ZW
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetZW(this ref Vector4 vector, float v1, float v2)
         {
@@ -300,9 +307,9 @@ namespace AIO.UEngine
         public static void Set(this ref Vector4 vector, in float value)
         {
             vector.x =
-            vector.y =
-            vector.z =
-            vector.w = value;
+                vector.y =
+                    vector.z =
+                        vector.w = value;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

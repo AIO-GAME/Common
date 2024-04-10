@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -8,9 +12,10 @@ namespace AIO
         #region 插入排序
 
         /// <summary>
-        /// 插入排序
+        ///     插入排序
         /// </summary>
-        private static IList<T> SortInsert<T>(IList<T> array) where T : IComparable
+        private static IList<T> SortInsert<T>(IList<T> array)
+        where T : IComparable
         {
             if (array.Count < 2) return array;
             for (int i = 1, insertions = i - 1; i < array.Count; i++, insertions = i - 1)
@@ -25,7 +30,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 插入排序
+        ///     插入排序
         /// </summary>
         private static IList<T> SortInsert<T>(IList<T> array, in Func<T, T, int> Comparer)
         {

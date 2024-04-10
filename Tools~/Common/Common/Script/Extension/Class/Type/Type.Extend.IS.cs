@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+
+#endregion
 
 namespace AIO
 {
@@ -23,7 +27,7 @@ namespace AIO
         };
 
         /// <summary>
-        /// 确定给定的源 Type 是否可以向上转换为指定的目标 Type。
+        ///     确定给定的源 Type 是否可以向上转换为指定的目标 Type。
         /// </summary>
         /// <param name="source">要检查向上转换的 Type。</param>
         /// <param name="destination">source Type 要转换成的 Type。</param>
@@ -34,7 +38,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 确定给定的源 Type 是否可以向下转换为指定的目标 Type。
+        ///     确定给定的源 Type 是否可以向下转换为指定的目标 Type。
         /// </summary>
         /// <param name="source">要检查向下转换的 Type。</param>
         /// <param name="destination">source Type 要转换成的 Type。</param>
@@ -45,7 +49,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 判断是否为数据类型
+        ///     判断是否为数据类型
         /// </summary>
         public static bool IsNumeric(this Type type)
         {
@@ -54,7 +58,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 检查类型是否可空
+        ///     检查类型是否可空
         /// </summary>
         /// <returns>如果类型是引用类型或可空类型，则返回 true</returns>
         /// <see>
@@ -66,7 +70,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 检查类型是否为引用类型
+        ///     检查类型是否为引用类型
         /// </summary>
         /// <returns>如果类型不是值类型，则返回 true</returns>
         public static bool IsReferenceType(this Type type)
@@ -75,7 +79,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 检查类型是否为 struct
+        ///     检查类型是否为 struct
         /// </summary>
         /// <returns>如果类型是值类型，但不是原始类型或枚举类型，则返回 true</returns>
         public static bool IsStruct(this Type type)
@@ -84,7 +88,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 检查类型是否可以从给定对象转换而来
+        ///     检查类型是否可以从给定对象转换而来
         /// </summary>
         public static bool IsAssignableFrom<T>(this Type type, in T value)
         {
@@ -95,7 +99,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 检查类型是否为基本类型
+        ///     检查类型是否为基本类型
         /// </summary>
         public static bool IsBasic(this Type type)
         {
@@ -114,7 +118,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 检查类型是否为静态
+        ///     检查类型是否为静态
         /// </summary>
         /// <returns>如果类型是抽象的和密封的，则返回 true（静态类）</returns>
         public static bool IsStatic(this Type type)
@@ -123,7 +127,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 检查类型是否为抽象
+        ///     检查类型是否为抽象
         /// </summary>
         /// <returns>如果类型是抽象的，则返回 true，但不要用于静态类型</returns>
         public static bool IsAbstract(this Type type)
@@ -132,7 +136,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 检查类型是否具体
+        ///     检查类型是否具体
         /// </summary>
         /// <returns>如果类型不是抽象的、接口或包含泛型参数，则返回 true</returns>
         public static bool IsConcrete(this Type type)
@@ -141,7 +145,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 判断一个类型是否能通过另一个类型构造而来
+        ///     判断一个类型是否能通过另一个类型构造而来
         /// </summary>
         public static bool IsMakeGenericTypeVia(this Type openConstructedType, Type closedConstructedType)
         {
@@ -167,8 +171,7 @@ namespace AIO
                         return false;
                 }
 
-                return openConstructedType.GetGenericParameterConstraints()
-                    .All(constraint => constraint.IsAssignableFrom(closedConstructedType));
+                return openConstructedType.GetGenericParameterConstraints().All(constraint => constraint.IsAssignableFrom(closedConstructedType));
             }
 
             while (openConstructedType != null && openConstructedType.ContainsGenericParameters)
@@ -190,13 +193,13 @@ namespace AIO
                     if (!closedConstructedType.IsArray || closedConstructedType.GetArrayRank() != openConstructedType.GetArrayRank())
                         return false;
 
-                    openConstructedType = openConstructedType.GetElementType();
+                    openConstructedType   = openConstructedType.GetElementType();
                     closedConstructedType = closedConstructedType.GetElementType();
                 }
                 else if (openConstructedType.IsByRef)
                 {
                     if (!closedConstructedType.IsByRef) return false;
-                    openConstructedType = openConstructedType.GetElementType();
+                    openConstructedType   = openConstructedType.GetElementType();
                     closedConstructedType = closedConstructedType.GetElementType();
                 }
                 else
@@ -210,8 +213,8 @@ namespace AIO
         }
 
         /// <summary>
-        /// 使用另一个关闭构造类型的类型参数，将开放式构造类型解析为已关闭构造类型。
-        /// 请务必小心谨慎，并且确保所有的泛型参数和类型都正确地指定和解析，以避免出现意外行为和错误结果。
+        ///     使用另一个关闭构造类型的类型参数，将开放式构造类型解析为已关闭构造类型。
+        ///     请务必小心谨慎，并且确保所有的泛型参数和类型都正确地指定和解析，以避免出现意外行为和错误结果。
         /// </summary>
         /// <param name="openConstructedType">要解析的开放式构造类型。</param>
         /// <param name="closedConstructedType">将用于解析的已关闭构造类型。</param>
@@ -219,10 +222,10 @@ namespace AIO
         /// <param name="safe">如果为 true，则在无法安全地将开放式构造类型解析为已关闭构造类型时引发异常。如果为 false，则回退到不安全的行为，这可能会导致错误的结果或异常。</param>
         /// <returns>使用已关闭构造类型的类型参数实例化时与开放式构造类型对应的已关闭构造类型。</returns>
         public static Type MakeGenericTypeVia(
-            this Type openConstructedType,
-            in Type closedConstructedType,
-            in IDictionary<Type, Type> resolvedGenericParameters,
-            in bool safe = true)
+            this Type                    openConstructedType,
+            in   Type                    closedConstructedType,
+            in   IDictionary<Type, Type> resolvedGenericParameters,
+            in   bool                    safe = true)
         {
             if (openConstructedType is null) throw new ArgumentNullException(nameof(openConstructedType));
             if (closedConstructedType is null) throw new ArgumentNullException(nameof(closedConstructedType));
@@ -256,7 +259,6 @@ namespace AIO
                 var openConstructedGenericArguments = openConstructedType.GetGenericArguments();
 
                 foreach (var inheritedCloseConstructedType in closedConstructedType.AndBaseTypeAndInterfaces())
-                {
                     if (inheritedCloseConstructedType.IsGenericType &&
                         inheritedCloseConstructedType.GetGenericTypeDefinition() == openConstructedGenericDefinition)
                     {
@@ -265,16 +267,13 @@ namespace AIO
                         var closedConstructedGenericArguments = new Type[openConstructedGenericArguments.Length];
 
                         for (var i = 0; i < openConstructedGenericArguments.Length; i++)
-                        {
                             closedConstructedGenericArguments[i] = openConstructedGenericArguments[i].MakeGenericTypeVia(
                                 inheritedClosedConstructedGenericArguments[i],
                                 resolvedGenericParameters,
-                                safe: false);
-                        }
+                                false);
 
                         return openConstructedGenericDefinition.MakeGenericType(closedConstructedGenericArguments);
                     }
-                }
 
                 throw new GenericClosingException(openConstructedType, closedConstructedType);
             }
@@ -287,8 +286,7 @@ namespace AIO
                 var openConstructedElementType = openConstructedType.GetElementType();
                 var closedConstructedElementType = closedConstructedType.GetElementType();
 
-                return openConstructedElementType.MakeGenericTypeVia(closedConstructedElementType, resolvedGenericParameters, safe: false)
-                    .MakeArrayType(openConstructedType.GetArrayRank());
+                return openConstructedElementType.MakeGenericTypeVia(closedConstructedElementType, resolvedGenericParameters, false).MakeArrayType(openConstructedType.GetArrayRank());
             }
 
             if (openConstructedType.IsByRef)
@@ -299,7 +297,7 @@ namespace AIO
                 var openConstructedElementType = openConstructedType.GetElementType();
                 var closedConstructedElementType = closedConstructedType.GetElementType();
 
-                return openConstructedElementType.MakeGenericTypeVia(closedConstructedElementType, resolvedGenericParameters, safe: false).MakeByRefType();
+                return openConstructedElementType.MakeGenericTypeVia(closedConstructedElementType, resolvedGenericParameters, false).MakeByRefType();
             }
 
             throw new NotImplementedException();

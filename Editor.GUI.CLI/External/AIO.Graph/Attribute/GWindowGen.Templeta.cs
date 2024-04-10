@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -34,7 +38,7 @@ namespace AIO.UEditor
             foreach (var pair in dictionary)
             {
                 str.AppendFormat("        [MenuItem(\"{0}\", priority = {1})]\r\n", pair.Value.Menu,
-                    pair.Value.MenuPriority);
+                                 pair.Value.MenuPriority);
                 str.AppendFormat("        public static void {0}_Open()\r\n", pair.Key.FullName?.Replace(".", "_")).
                     Append("        {\r\n");
                 str.AppendFormat("            EHelper.Window.Open<{0}>();\r\n", pair.Key.FullName).

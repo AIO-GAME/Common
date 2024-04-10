@@ -1,11 +1,15 @@
+#region
+
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEngine
 {
     /// <summary>
     /// Color扩展
     /// </summary>
-    public static partial class ColorExtend
+    public static class ColorExtend
     {
         /// <summary>
         /// 设置透明度

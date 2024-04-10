@@ -1,8 +1,4 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-12-07
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Collections.Generic;
@@ -11,12 +7,14 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
+#endregion
+
 namespace AIO.UEditor
 {
     /// <summary>
     /// 快捷工具箱
     /// </summary>
-    internal static partial class LnkToolsHelper
+    internal static class LnkToolsHelper
     {
         public static List<LnkTools> Data
         {
@@ -37,9 +35,7 @@ namespace AIO.UEditor
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
                 if (!assembly.GetName().Name.Contains("Editor")) continue;
-                types.AddRange(assembly.GetTypes()
-                    .Where(type => !type.IsEnum)
-                    .Where(type => !type.IsInterface));
+                types.AddRange(assembly.GetTypes().Where(type => !type.IsEnum).Where(type => !type.IsInterface));
             }
 
             try
@@ -71,6 +67,24 @@ namespace AIO.UEditor
 
     internal class LnkTools
     {
+        public LnkTools(MethodInfo method)
+        {
+            var attribute = method.GetCustomAttribute<LnkToolsAttribute>();
+
+            Content = SetContent(attribute, method);
+            ForegroundColor = ColorUtility.TryParseHtmlString(attribute.ForegroundColor, out var color1)
+                ? color1
+                : Color.white;
+            BackgroundColor = ColorUtility.TryParseHtmlString(attribute.BackgroundColor, out var color2)
+                ? color2
+                : new Color(0.3592f, 0.3592f, 0.3592f); //#616161
+            Mode     = attribute.Mode;
+            Priority = attribute.Priority;
+            Method   = method;
+            ShowMode = attribute.ShowMode;
+            if (Method is null) throw new NullReferenceException(nameof(Method));
+        }
+
         public GUIContent Content { get; }
 
         /// <summary>
@@ -103,80 +117,60 @@ namespace AIO.UEditor
         /// </summary>
         public ELnkShowMode ShowMode { get; set; } = ELnkShowMode.SceneView;
 
-        private static GUIContent SetContent(LnkToolsAttribute attribute, MethodInfo method)
-        {
-            GUIContent Temp = null;
-            if (!string.IsNullOrEmpty(attribute.IconBuiltin))
-            {
-                Temp = EditorGUIUtility.IconContent(attribute.IconBuiltin);
-                Temp.text = string.Empty;
-            }
-            else if (!string.IsNullOrEmpty(attribute.IconRelative))
-                Temp = new GUIContent
-                {
-                    image = AssetDatabase.LoadAssetAtPath<Texture2D>(attribute.IconRelative)
-                };
-            else if (!string.IsNullOrEmpty(attribute.IconResource))
-                Temp = new GUIContent
-                {
-                    image = Resources.Load<Texture2D>(attribute.IconResource)
-                };
-
-            if (Temp?.image is null)
-            {
-                Temp = new GUIContent
-                {
-                    text = string.IsNullOrEmpty(attribute.Text) ? method.Name : attribute.Text,
-                    tooltip = attribute.Tooltip
-                };
-            }
-            else Temp.tooltip = attribute.Tooltip;
-
-            return Temp;
-        }
-
         public bool hasIcon => Content.image != null;
 
         public bool hasReturn => Method.ReturnType == typeof(bool);
-
-        public LnkTools(MethodInfo method)
-        {
-            var attribute = method.GetCustomAttribute<LnkToolsAttribute>();
-
-            Content = SetContent(attribute, method);
-            ForegroundColor = ColorUtility.TryParseHtmlString(attribute.ForegroundColor, out var color1)
-                ? color1
-                : Color.white;
-            BackgroundColor = ColorUtility.TryParseHtmlString(attribute.BackgroundColor, out var color2)
-                ? color2
-                : new Color(0.3592f, 0.3592f, 0.3592f); //#616161
-            Mode = attribute.Mode;
-            Priority = attribute.Priority;
-            Method = method;
-            ShowMode = attribute.ShowMode;
-            if (Method is null) throw new NullReferenceException(nameof(Method));
-        }
 
         /// <summary>
         /// 是否被选中
         /// </summary>
         public bool Status { get; private set; }
 
+        private static GUIContent SetContent(LnkToolsAttribute attribute, MethodInfo method)
+        {
+            GUIContent Temp = null;
+            if (!string.IsNullOrEmpty(attribute.IconBuiltin))
+            {
+                Temp      = EditorGUIUtility.IconContent(attribute.IconBuiltin);
+                Temp.text = string.Empty;
+            }
+            else if (!string.IsNullOrEmpty(attribute.IconRelative))
+            {
+                Temp = new GUIContent
+                {
+                    image = AssetDatabase.LoadAssetAtPath<Texture2D>(attribute.IconRelative)
+                };
+            }
+            else if (!string.IsNullOrEmpty(attribute.IconResource))
+            {
+                Temp = new GUIContent
+                {
+                    image = Resources.Load<Texture2D>(attribute.IconResource)
+                };
+            }
+
+            if (Temp?.image is null)
+                Temp = new GUIContent
+                {
+                    text    = string.IsNullOrEmpty(attribute.Text) ? method.Name : attribute.Text,
+                    tooltip = attribute.Tooltip
+                };
+            else Temp.tooltip = attribute.Tooltip;
+
+            return Temp;
+        }
+
         public void Invoke(object obj, object[] parameters)
         {
             if (hasReturn)
-            {
                 Status = (bool)Method.Invoke(obj, parameters);
-            }
             else Method.Invoke(obj, parameters);
         }
 
         public void Invoke()
         {
             if (hasReturn)
-            {
                 Status = (bool)Method.Invoke(null, null);
-            }
             else Method.Invoke(null, null);
         }
     }

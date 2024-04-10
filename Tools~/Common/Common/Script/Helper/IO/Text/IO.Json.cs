@@ -1,10 +1,16 @@
+#region
+
 using System.Runtime.CompilerServices;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -13,7 +19,7 @@ namespace AIO
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static T ReadJson<T>(
                 in string path,
-                Encoding charset = null)
+                Encoding  charset = null)
             {
                 return Json.Deserialize<T>(ReadText(path, charset));
             }
@@ -33,9 +39,9 @@ namespace AIO
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void WriteJson<T>(
                 in string path,
-                in T value,
-                in bool concat = false,
-                Encoding charset = null)
+                in T      value,
+                in bool   concat  = false,
+                Encoding  charset = null)
             {
                 if (value == null) return;
                 WriteText(path, Json.Serialize(value), charset, concat);
@@ -47,12 +53,14 @@ namespace AIO
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void WriteJsonUTF8<T>(
                 in string path,
-                in T text,
-                in bool concat = false)
+                in T      text,
+                in bool   concat = false)
             {
                 if (text == null) return;
                 WriteUTF8(path, Json.Serialize(text), concat);
             }
         }
+
+        #endregion
     }
 }

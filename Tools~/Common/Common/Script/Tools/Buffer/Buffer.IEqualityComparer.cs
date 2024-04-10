@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
     public partial class Buffer<T> : IEqualityComparer<Buffer<T>>
     {
+        #region IEqualityComparer<Buffer<T>> Members
+
         /// <inheritdoc/>
         public bool Equals(Buffer<T> x, Buffer<T> y)
         {
@@ -25,5 +31,7 @@ namespace AIO
             code += obj.Arrays.GetHashCode();
             return code;
         }
+
+        #endregion
     }
 }

@@ -1,10 +1,14 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -16,21 +20,19 @@ namespace AIO.UEditor
             return Path.Combine(Application.dataPath, "Editor", "Gen", "GWindow");
         }
 
-        [AInit(mode: EInitAttrMode.Editor, ushort.MaxValue - 2)]
+        [AInit(EInitAttrMode.Editor, ushort.MaxValue - 2)]
         internal static void Generate()
         {
             var dic = new Dictionary<Type, GWindowAttribute>();
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            foreach (var type in assembly.GetTypes())
             {
-                foreach (var type in assembly.GetTypes())
-                {
-                    if (type.IsAbstract || !type.IsClass || !type.IsSubclassOf(typeof(EditorWindow))) continue;
-                    var attribute = type.GetCustomAttribute<GWindowAttribute>();
-                    if (attribute is null) continue;
-                    ScriptIcon.SetIcon(attribute.FilePath, attribute.GetTexture2D());
-                    if (string.IsNullOrEmpty(attribute.Menu)) continue;
-                    dic.Add(type, attribute);
-                }
+                if (type.IsAbstract || !type.IsClass || !type.IsSubclassOf(typeof(EditorWindow))) continue;
+                var attribute = type.GetCustomAttribute<GWindowAttribute>();
+                if (attribute is null) continue;
+                ScriptIcon.SetIcon(attribute.FilePath, attribute.GetTexture2D());
+                if (string.IsNullOrEmpty(attribute.Menu)) continue;
+                dic.Add(type, attribute);
             }
 
             var change = CreateProject(dic);

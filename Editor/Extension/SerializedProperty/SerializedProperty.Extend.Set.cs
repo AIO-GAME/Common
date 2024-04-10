@@ -1,7 +1,11 @@
-﻿namespace AIO.UEditor
-{
-    using UnityEditor;
+﻿#region
 
+using UnityEditor;
+
+#endregion
+
+namespace AIO.UEditor
+{
     public partial class SerializedPropertyExtend
     {
         /// <summary>

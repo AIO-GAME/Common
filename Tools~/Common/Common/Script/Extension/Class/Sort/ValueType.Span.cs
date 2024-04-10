@@ -1,11 +1,15 @@
-﻿using System;
+﻿#region
+
+using System;
+
+#endregion
 
 namespace AIO
 {
     partial class ExtendSort
     {
         /// <summary>
-        /// 数组排序 
+        ///     数组排序
         /// </summary>
         /// <param name="array">数组</param>
         /// <param name="sort">排序方式</param>
@@ -19,24 +23,24 @@ namespace AIO
             if (array.Length <= 1) return array;
             _ = sort switch
             {
-                ESort.Bubble => SortBubble(array),
+                ESort.Bubble       => SortBubble(array),
                 ESort.BubbleTwoWay => SortBubbleTwoWay(array),
-                ESort.Select => SortSelect(array),
-                ESort.Insert => SortInsert(array),
-                ESort.Shell => SortShell(array),
-                ESort.Heap => SortHeap(array),
-                ESort.Merge => SortMerge(array),
-                ESort.Quick => SortQuick(array),
-                ESort.Bucket => SortBucket(array),
-                ESort.Radix => SortRadix(array),
-                ESort.Counting => SortCounting(array),
-                _ => throw new ArgumentOutOfRangeException(nameof(sort), sort, "传入的排序方式不支持")
+                ESort.Select       => SortSelect(array),
+                ESort.Insert       => SortInsert(array),
+                ESort.Shell        => SortShell(array),
+                ESort.Heap         => SortHeap(array),
+                ESort.Merge        => SortMerge(array),
+                ESort.Quick        => SortQuick(array),
+                ESort.Bucket       => SortBucket(array),
+                ESort.Radix        => SortRadix(array),
+                ESort.Counting     => SortCounting(array),
+                _                  => throw new ArgumentOutOfRangeException(nameof(sort), sort, "传入的排序方式不支持")
             };
             return array;
         }
 
         /// <summary>
-        /// 数组排序 
+        ///     数组排序
         /// </summary>
         /// <param name="array">数组</param>
         /// <param name="sort">排序方式</param>
@@ -50,24 +54,24 @@ namespace AIO
             if (array.Length <= 1) return array;
             _ = sort switch
             {
-                ESort.Bubble => SortBubble(array),
+                ESort.Bubble       => SortBubble(array),
                 ESort.BubbleTwoWay => SortBubbleTwoWay(array),
-                ESort.Select => SortSelect(array),
-                ESort.Insert => SortInsert(array),
-                ESort.Shell => SortShell(array),
-                ESort.Heap => SortHeap(array),
-                ESort.Merge => SortMerge(array),
-                ESort.Quick => SortQuick(array),
-                ESort.Bucket => SortBucket(array),
-                ESort.Radix => SortRadix(array),
-                ESort.Counting => SortCounting(array),
-                _ => throw new ArgumentOutOfRangeException(nameof(sort), sort, "传入的排序方式不支持")
+                ESort.Select       => SortSelect(array),
+                ESort.Insert       => SortInsert(array),
+                ESort.Shell        => SortShell(array),
+                ESort.Heap         => SortHeap(array),
+                ESort.Merge        => SortMerge(array),
+                ESort.Quick        => SortQuick(array),
+                ESort.Bucket       => SortBucket(array),
+                ESort.Radix        => SortRadix(array),
+                ESort.Counting     => SortCounting(array),
+                _                  => throw new ArgumentOutOfRangeException(nameof(sort), sort, "传入的排序方式不支持")
             };
             return array;
         }
 
         /// <summary>
-        /// 数组排序 
+        ///     数组排序
         /// </summary>
         /// <param name="array">数组</param>
         /// <param name="sort">排序方式</param>
@@ -81,24 +85,24 @@ namespace AIO
             if (array.Length <= 1) return array;
             _ = sort switch
             {
-                ESort.Bubble => SortBubble(array),
+                ESort.Bubble       => SortBubble(array),
                 ESort.BubbleTwoWay => SortBubbleTwoWay(array),
-                ESort.Select => SortSelect(array),
-                ESort.Insert => SortInsert(array),
-                ESort.Shell => SortShell(array),
-                ESort.Heap => SortHeap(array),
-                ESort.Merge => SortMerge(array),
-                ESort.Quick => SortQuick(array),
-                ESort.Bucket => SortBucket(array),
-                ESort.Radix => SortRadix(array),
-                ESort.Counting => SortCounting(array),
-                _ => throw new ArgumentOutOfRangeException(nameof(sort), sort, "传入的排序方式不支持")
+                ESort.Select       => SortSelect(array),
+                ESort.Insert       => SortInsert(array),
+                ESort.Shell        => SortShell(array),
+                ESort.Heap         => SortHeap(array),
+                ESort.Merge        => SortMerge(array),
+                ESort.Quick        => SortQuick(array),
+                ESort.Bucket       => SortBucket(array),
+                ESort.Radix        => SortRadix(array),
+                ESort.Counting     => SortCounting(array),
+                _                  => throw new ArgumentOutOfRangeException(nameof(sort), sort, "传入的排序方式不支持")
             };
             return array;
         }
 
         /// <summary>
-        /// 数组排序 
+        ///     数组排序
         /// </summary>
         /// <param name="array">数组</param>
         /// <param name="sort">排序方式</param>
@@ -112,24 +116,24 @@ namespace AIO
             if (array.Length <= 1) return array;
             _ = sort switch
             {
-                ESort.Bubble => SortBubble(array),
+                ESort.Bubble       => SortBubble(array),
                 ESort.BubbleTwoWay => SortBubbleTwoWay(array),
-                ESort.Select => SortSelect(array),
-                ESort.Insert => SortInsert(array),
-                ESort.Shell => SortShell(array),
-                ESort.Heap => SortHeap(array),
-                ESort.Merge => SortMerge(array),
-                ESort.Quick => SortQuick(array),
-                ESort.Bucket => SortBucket(array),
-                ESort.Radix => SortRadix(array),
-                ESort.Counting => SortCounting(array),
-                _ => throw new ArgumentOutOfRangeException(nameof(sort), sort, "传入的排序方式不支持")
+                ESort.Select       => SortSelect(array),
+                ESort.Insert       => SortInsert(array),
+                ESort.Shell        => SortShell(array),
+                ESort.Heap         => SortHeap(array),
+                ESort.Merge        => SortMerge(array),
+                ESort.Quick        => SortQuick(array),
+                ESort.Bucket       => SortBucket(array),
+                ESort.Radix        => SortRadix(array),
+                ESort.Counting     => SortCounting(array),
+                _                  => throw new ArgumentOutOfRangeException(nameof(sort), sort, "传入的排序方式不支持")
             };
             return array;
         }
 
         /// <summary>
-        /// 数组排序 
+        ///     数组排序
         /// </summary>
         /// <param name="array">数组</param>
         /// <param name="sort">排序方式</param>
@@ -143,24 +147,24 @@ namespace AIO
             if (array.Length <= 1) return array;
             _ = sort switch
             {
-                ESort.Bubble => SortBubble(array),
+                ESort.Bubble       => SortBubble(array),
                 ESort.BubbleTwoWay => SortBubbleTwoWay(array),
-                ESort.Select => SortSelect(array),
-                ESort.Insert => SortInsert(array),
-                ESort.Shell => SortShell(array),
-                ESort.Heap => SortHeap(array),
-                ESort.Merge => SortMerge(array),
-                ESort.Quick => SortQuick(array),
-                ESort.Bucket => SortBucket(array),
-                ESort.Radix => SortRadix(array),
-                ESort.Counting => SortCounting(array),
-                _ => throw new ArgumentOutOfRangeException(nameof(sort), sort, "传入的排序方式不支持")
+                ESort.Select       => SortSelect(array),
+                ESort.Insert       => SortInsert(array),
+                ESort.Shell        => SortShell(array),
+                ESort.Heap         => SortHeap(array),
+                ESort.Merge        => SortMerge(array),
+                ESort.Quick        => SortQuick(array),
+                ESort.Bucket       => SortBucket(array),
+                ESort.Radix        => SortRadix(array),
+                ESort.Counting     => SortCounting(array),
+                _                  => throw new ArgumentOutOfRangeException(nameof(sort), sort, "传入的排序方式不支持")
             };
             return array;
         }
 
         /// <summary>
-        /// 数组排序 
+        ///     数组排序
         /// </summary>
         /// <param name="array">数组</param>
         /// <param name="sort">排序方式</param>
@@ -174,24 +178,24 @@ namespace AIO
             if (array.Length <= 1) return array;
             _ = sort switch
             {
-                ESort.Bubble => SortBubble(array),
+                ESort.Bubble       => SortBubble(array),
                 ESort.BubbleTwoWay => SortBubbleTwoWay(array),
-                ESort.Select => SortSelect(array),
-                ESort.Insert => SortInsert(array),
-                ESort.Shell => SortShell(array),
-                ESort.Heap => SortHeap(array),
-                ESort.Merge => SortMerge(array),
-                ESort.Quick => SortQuick(array),
-                ESort.Bucket => SortBucket(array),
-                ESort.Radix => SortRadix(array),
-                ESort.Counting => SortCounting(array),
-                _ => throw new ArgumentOutOfRangeException(nameof(sort), sort, "传入的排序方式不支持")
+                ESort.Select       => SortSelect(array),
+                ESort.Insert       => SortInsert(array),
+                ESort.Shell        => SortShell(array),
+                ESort.Heap         => SortHeap(array),
+                ESort.Merge        => SortMerge(array),
+                ESort.Quick        => SortQuick(array),
+                ESort.Bucket       => SortBucket(array),
+                ESort.Radix        => SortRadix(array),
+                ESort.Counting     => SortCounting(array),
+                _                  => throw new ArgumentOutOfRangeException(nameof(sort), sort, "传入的排序方式不支持")
             };
             return array;
         }
 
         /// <summary>
-        /// 数组排序 
+        ///     数组排序
         /// </summary>
         /// <param name="array">数组</param>
         /// <param name="sort">排序方式</param>
@@ -205,24 +209,24 @@ namespace AIO
             if (array.Length <= 1) return array;
             _ = sort switch
             {
-                ESort.Bubble => SortBubble(array),
+                ESort.Bubble       => SortBubble(array),
                 ESort.BubbleTwoWay => SortBubbleTwoWay(array),
-                ESort.Select => SortSelect(array),
-                ESort.Insert => SortInsert(array),
-                ESort.Shell => SortShell(array),
-                ESort.Heap => SortHeap(array),
-                ESort.Merge => SortMerge(array),
-                ESort.Quick => SortQuick(array),
-                ESort.Bucket => SortBucket(array),
-                ESort.Radix => SortRadix(array),
-                ESort.Counting => SortCounting(array),
-                _ => throw new ArgumentOutOfRangeException(nameof(sort), sort, "传入的排序方式不支持")
+                ESort.Select       => SortSelect(array),
+                ESort.Insert       => SortInsert(array),
+                ESort.Shell        => SortShell(array),
+                ESort.Heap         => SortHeap(array),
+                ESort.Merge        => SortMerge(array),
+                ESort.Quick        => SortQuick(array),
+                ESort.Bucket       => SortBucket(array),
+                ESort.Radix        => SortRadix(array),
+                ESort.Counting     => SortCounting(array),
+                _                  => throw new ArgumentOutOfRangeException(nameof(sort), sort, "传入的排序方式不支持")
             };
             return array;
         }
 
         /// <summary>
-        /// 数组排序 
+        ///     数组排序
         /// </summary>
         /// <param name="array">数组</param>
         /// <param name="sort">排序方式</param>
@@ -236,18 +240,18 @@ namespace AIO
             if (array.Length <= 1) return array;
             _ = sort switch
             {
-                ESort.Bubble => SortBubble(array),
+                ESort.Bubble       => SortBubble(array),
                 ESort.BubbleTwoWay => SortBubbleTwoWay(array),
-                ESort.Select => SortSelect(array),
-                ESort.Insert => SortInsert(array),
-                ESort.Shell => SortShell(array),
-                ESort.Heap => SortHeap(array),
-                ESort.Merge => SortMerge(array),
-                ESort.Quick => SortQuick(array),
-                ESort.Bucket => SortBucket(array),
-                ESort.Radix => SortRadix(array),
-                ESort.Counting => SortCounting(array),
-                _ => throw new ArgumentOutOfRangeException(nameof(sort), sort, "传入的排序方式不支持")
+                ESort.Select       => SortSelect(array),
+                ESort.Insert       => SortInsert(array),
+                ESort.Shell        => SortShell(array),
+                ESort.Heap         => SortHeap(array),
+                ESort.Merge        => SortMerge(array),
+                ESort.Quick        => SortQuick(array),
+                ESort.Bucket       => SortBucket(array),
+                ESort.Radix        => SortRadix(array),
+                ESort.Counting     => SortCounting(array),
+                _                  => throw new ArgumentOutOfRangeException(nameof(sort), sort, "传入的排序方式不支持")
             };
             return array;
         }

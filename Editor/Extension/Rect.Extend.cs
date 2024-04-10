@@ -1,5 +1,9 @@
-﻿using UnityEngine;
+﻿#region
+
 using UnityEditor;
+using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {

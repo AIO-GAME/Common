@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.IO;
 using System.Reflection;
 using UnityEngine;
+
+#endregion
 
 namespace AIO
 {

@@ -1,16 +1,15 @@
-﻿/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
-
+﻿#region
 
 using System.IO;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -19,16 +18,14 @@ namespace AIO
             public static void CopyChildNode(
                 in string sourceFilePath,
                 in string destinationFilePath,
-                in bool overwrite = false)
+                in bool   overwrite = false)
             {
                 if (!ExistsDir(sourceFilePath)) return;
                 foreach (var SFile in Directory.GetFileSystemEntries(sourceFilePath)) //遍历所有的文件和目录
-                {
                     //如果是文件夹 则继续拷贝
                     if (ExistsDir(SFile)) CopyDirPart(SFile, destinationFilePath, overwrite);
                     //如果是文件 则直接放入当前文件夹下
                     else CopyFile(SFile, Path.Combine(destinationFilePath, GetFileName(SFile)), overwrite);
-                }
             }
 
             /// <summary>
@@ -40,12 +37,11 @@ namespace AIO
             public static void CopyDirPart(
                 in string sourceFilePath,
                 in string destinationFilePath,
-                in bool overwrite = false)
+                in bool   overwrite = false)
             {
                 if (!ExistsDir(sourceFilePath)) return;
                 var DestDir = Path.Combine(destinationFilePath, GetFileName(sourceFilePath));
                 foreach (var SFile in Directory.GetFileSystemEntries(sourceFilePath)) //遍历所有的文件和目录
-                {
                     if (ExistsDir(SFile))
                     {
                         var current = Path.Combine(DestDir, GetFileName(SFile));
@@ -58,7 +54,6 @@ namespace AIO
                         if (!ExistsDir(DestDir)) CreateDir(DestDir);
                         CopyFile(SFile, scaleName, overwrite);
                     }
-                }
             }
 
             /// <summary>
@@ -70,7 +65,7 @@ namespace AIO
             public static void CopyDirAll(
                 in string sourceFilePath,
                 in string destinationFilePath,
-                in bool overwrite = false)
+                in bool   overwrite = false)
             {
                 //如果目标路径不存在,则创建目标路径
                 if (!ExistsDir(destinationFilePath)) CreateDir(destinationFilePath);
@@ -95,7 +90,7 @@ namespace AIO
             public static bool CopyFile(
                 in string fromPath,
                 in string toPath,
-                in bool overwrite = false)
+                in bool   overwrite = false)
             {
                 if (!ExistsFile(fromPath)) return false; //源文件路径 不存在
                 var dir = Path.GetDirectoryName(toPath);
@@ -115,7 +110,7 @@ namespace AIO
             public static bool CopyFile(
                 in string sourceFilePath,
                 in string destinationFilePath,
-                in int bufferSize = 81920
+                in int    bufferSize = 81920
             )
             {
                 if (string.IsNullOrEmpty(destinationFilePath)) return false;
@@ -135,14 +130,13 @@ namespace AIO
                     int bytesRead;
 
                     // 循环读取源文件的内容，并写入目标文件的文件流
-                    while ((bytesRead = sourceStream.Read(buffer, 0, buffer.Length)) > 0)
-                    {
-                        destinationStream.Write(buffer, 0, bytesRead);
-                    }
+                    while ((bytesRead = sourceStream.Read(buffer, 0, buffer.Length)) > 0) destinationStream.Write(buffer, 0, bytesRead);
                 }
 
                 return true;
             }
         }
+
+        #endregion
     }
 }

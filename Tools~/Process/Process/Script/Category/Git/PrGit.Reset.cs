@@ -4,12 +4,18 @@
 
 |||✩ - - - - - |*/
 
+#region
+
 using System;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrGit
     {
+        #region Nested type: Reset
+
         /// <summary>
         /// <see cref="PrGit"/> <see cref="Reset"/> 重置
         /// </summary>
@@ -88,5 +94,7 @@ namespace AIO
                 return Create(work, "reset --keep");
             }
         }
+
+        #endregion
     }
 }

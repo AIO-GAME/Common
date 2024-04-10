@@ -1,8 +1,12 @@
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
@@ -11,14 +15,9 @@ namespace AIO
     /// </summary>
     internal sealed class TimerContainerConsume : TimerContainer
     {
-        /// <summary>
-        /// 当前辅助定时器总数量
-        /// </summary>
-        private int TotalNum { get; }
-
         public TimerContainerConsume(long unit, long counter, List<ITimerOperator> operators)
         {
-            Unit = unit;
+            Unit    = unit;
             Counter = counter;
 
             var isSort = true;
@@ -44,6 +43,11 @@ namespace AIO
             TotalNum = RemainNum;
         }
 
+        /// <summary>
+        /// 当前辅助定时器总数量
+        /// </summary>
+        private int TotalNum { get; }
+
         protected override void Update()
         {
             TaskHandleToken.ThrowIfCancellationRequested();
@@ -64,7 +68,7 @@ namespace AIO
                     }
 
                     Watch.Restart();
-                    Counter += nowMilliseconds;
+                    Counter         += nowMilliseconds;
                     UpdateCacheTime += nowMilliseconds;
                     if (UpdateCacheTime > TimerSystem.UPDATELISTTIME)
                     {
@@ -92,7 +96,10 @@ namespace AIO
                             List[i].OtherUpdate(Counter);
                             List[i].SlotReset();
                         }
-                        else break;
+                        else
+                        {
+                            break;
+                        }
                     }
                 }
 #if UNITY_EDITOR

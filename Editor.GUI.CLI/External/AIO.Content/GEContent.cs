@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -10,7 +14,7 @@ namespace AIO.UEditor
     public static class GEContent
     {
         internal static readonly Dictionary<string, GUIContent> GCSetting = new Dictionary<string, GUIContent>();
-        internal static readonly Dictionary<string, GUIContent> GCApp = new Dictionary<string, GUIContent>();
+        internal static readonly Dictionary<string, GUIContent> GCApp     = new Dictionary<string, GUIContent>();
         internal static readonly Dictionary<string, GUIContent> GCBuiltin = new Dictionary<string, GUIContent>();
 
         public static GUIContent GetSetting(string name)
@@ -40,7 +44,7 @@ namespace AIO.UEditor
                 GCSetting[name] = new GUIContent(Resources.Load<Texture>($"Editor/Icon/Setting/{name}"));
             return new GUIContent(GCSetting[name].image, tooltip);
         }
-        
+
         public static GUIContent NewSettingCustom(string path, string tooltip)
         {
             if (!GCSetting.ContainsKey(path))
@@ -86,19 +90,13 @@ namespace AIO.UEditor
         public static void LoadSetting()
         {
             GCSetting.Clear();
-            foreach (var texture in Resources.LoadAll<Texture2D>("Editor/Icon/Setting"))
-            {
-                GCSetting[texture.name] = new GUIContent(texture);
-            }
+            foreach (var texture in Resources.LoadAll<Texture2D>("Editor/Icon/Setting")) GCSetting[texture.name] = new GUIContent(texture);
         }
 
         public static void LoadApp()
         {
             GCApp.Clear();
-            foreach (var texture in Resources.LoadAll<Texture2D>("Editor/Icon/App"))
-            {
-                GCApp[texture.name] = new GUIContent(texture);
-            }
+            foreach (var texture in Resources.LoadAll<Texture2D>("Editor/Icon/App")) GCApp[texture.name] = new GUIContent(texture);
         }
     }
 }

@@ -1,9 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using AIO.Internal;
+
+#endregion
 
 namespace AIO
 {

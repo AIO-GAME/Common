@@ -1,12 +1,18 @@
+#region
+
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -17,12 +23,12 @@ namespace AIO
             /// <param name="option">查询模式</param>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static async Task DeleteFileAsync(
-                string folder,
-                string pattern,
+                string       folder,
+                string       pattern,
                 SearchOption option)
             {
                 await Task.Run(() =>
-                    Parallel.ForEach(GetFilesInfo(folder, pattern, option), file => { DeleteFile(file); })
+                                   Parallel.ForEach(GetFilesInfo(folder, pattern, option), file => { DeleteFile(file); })
                 );
             }
 
@@ -53,9 +59,9 @@ namespace AIO
             /// </summary>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static async Task DeleteDirAsync(
-                string directory,
+                string       directory,
                 SearchOption option = SearchOption.AllDirectories,
-                bool isAll = false)
+                bool         isAll  = false)
             {
                 await DeleteDirAsync(new DirectoryInfo(directory), option, isAll);
             }
@@ -66,15 +72,13 @@ namespace AIO
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static async Task DeleteDirAsync(
                 DirectoryInfo director,
-                SearchOption option = SearchOption.AllDirectories,
-                bool isAll = false)
+                SearchOption  option = SearchOption.AllDirectories,
+                bool          isAll  = false)
             {
                 if (!director.Exists) return;
                 if (isAll)
-                {
                     await Task.Run(() =>
-                        Parallel.ForEach(director.GetFiles("*", option), file => { DeleteFile(file); }));
-                }
+                                       Parallel.ForEach(director.GetFiles("*", option), file => { DeleteFile(file); }));
 
                 director.Delete(isAll);
             }
@@ -85,11 +89,11 @@ namespace AIO
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static async Task DeleteDirAsync(
                 IEnumerable<string> directors,
-                SearchOption option = SearchOption.AllDirectories,
-                bool isAll = false)
+                SearchOption        option = SearchOption.AllDirectories,
+                bool                isAll  = false)
             {
                 await Task.Run(() =>
-                    Parallel.ForEach(directors, folder => { DeleteDir(new DirectoryInfo(folder), option, isAll); }));
+                                   Parallel.ForEach(directors, folder => { DeleteDir(new DirectoryInfo(folder), option, isAll); }));
             }
 
             /// <summary>
@@ -98,12 +102,14 @@ namespace AIO
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static async Task DeleteDirAsync(
                 IEnumerable<DirectoryInfo> directors,
-                SearchOption option = SearchOption.AllDirectories,
-                bool isAll = false)
+                SearchOption               option = SearchOption.AllDirectories,
+                bool                       isAll  = false)
             {
                 await Task.Run(() =>
-                    Parallel.ForEach(directors, folder => { DeleteDir(folder, option, isAll); }));
+                                   Parallel.ForEach(directors, folder => { DeleteDir(folder, option, isAll); }));
             }
         }
+
+        #endregion
     }
 }

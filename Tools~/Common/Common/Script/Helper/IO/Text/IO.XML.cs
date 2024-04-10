@@ -1,10 +1,16 @@
+#region
+
 using System.Runtime.CompilerServices;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -13,7 +19,7 @@ namespace AIO
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static T ReadXml<T>(
                 in string path,
-                Encoding charset = null)
+                Encoding  charset = null)
             {
                 return Xml.Deserialize<T>(ReadText(path, charset));
             }
@@ -34,8 +40,8 @@ namespace AIO
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void WriteXml<T>(
                 in string path,
-                in T value,
-                Encoding charset = null)
+                in T      value,
+                Encoding  charset = null)
             {
                 if (value == null) return;
                 WriteText(path, Xml.Serialize(value), charset);
@@ -47,11 +53,13 @@ namespace AIO
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void WriteXmlUTF8<T>(
                 in string path,
-                in T value)
+                in T      value)
             {
                 if (value == null) return;
                 WriteUTF8(path, Xml.Serialize(value));
             }
         }
+
+        #endregion
     }
 }

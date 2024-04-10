@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -9,7 +13,7 @@ namespace AIO
             if (array.Count < 2) return array; // 求最大最小值
             var mixin = array.GetMaxMinValue();
             var bucket = new int[mixin.Item1 - mixin.Item2 + 1]; // 初始化新组并赋值数组长度比实际个数大一
-            var bias = -mixin.Item2; // 正填充
+            var bias = -mixin.Item2;                             // 正填充
             for (var i = 0; i < bucket.Length; i++) bucket[i] = 0;
             foreach (var item in array) bucket[item + bias]++;
 
@@ -18,14 +22,15 @@ namespace AIO
             unchecked
             {
                 while (arrayIndex < array.Count)
-                {
                     if (bucket[bucketIndex] != 0)
                     {
                         array[arrayIndex++] = (ushort)(bucketIndex - bias);
                         bucket[bucketIndex]--;
                     }
-                    else bucketIndex++;
-                }
+                    else
+                    {
+                        bucketIndex++;
+                    }
             }
 
             return array;
@@ -36,7 +41,7 @@ namespace AIO
             if (array.Count < 2) return array; // 求最大最小值
             var mixin = array.GetMaxMinValue();
             var bucket = new int[mixin.Item1 - mixin.Item2 + 1]; // 初始化新组并赋值数组长度比实际个数大一
-            var bias = -mixin.Item2; // 正填充
+            var bias = -mixin.Item2;                             // 正填充
             for (var i = 0; i < bucket.Length; i++) bucket[i] = 0;
             foreach (var item in array) bucket[item + bias]++;
 
@@ -45,14 +50,15 @@ namespace AIO
             unchecked
             {
                 while (arrayIndex < array.Count)
-                {
                     if (bucket[bucketIndex] != 0)
                     {
                         array[arrayIndex++] = (short)(bucketIndex - bias);
                         bucket[bucketIndex]--;
                     }
-                    else bucketIndex++;
-                }
+                    else
+                    {
+                        bucketIndex++;
+                    }
             }
 
             return array;
@@ -63,7 +69,7 @@ namespace AIO
             if (array.Count < 2) return array; // 求最大最小值
             var mixin = array.GetMaxMinValue();
             var bucket = new int[mixin.Item1 - mixin.Item2 + 1]; // 初始化新组并赋值数组长度比实际个数大一
-            var bias = -mixin.Item2; // 正填充
+            var bias = -mixin.Item2;                             // 正填充
             for (var i = 0; i < bucket.Length; i++) bucket[i] = 0;
             foreach (var item in array) bucket[item + bias]++;
 
@@ -72,14 +78,15 @@ namespace AIO
             unchecked
             {
                 while (arrayIndex < array.Count)
-                {
                     if (bucket[bucketIndex] != 0)
                     {
                         array[arrayIndex++] = (sbyte)(bucketIndex - bias);
                         bucket[bucketIndex]--;
                     }
-                    else bucketIndex++;
-                }
+                    else
+                    {
+                        bucketIndex++;
+                    }
             }
 
             return array;
@@ -97,14 +104,15 @@ namespace AIO
             var arrayIndex = 0;
             var bucketIndex = 0; // 反填充
             while (arrayIndex < array.Count)
-            {
                 if (bucket[bucketIndex] != 0)
                 {
                     array[arrayIndex++] = bucketIndex - bias;
                     bucket[bucketIndex]--;
                 }
-                else bucketIndex++;
-            }
+                else
+                {
+                    bucketIndex++;
+                }
 
             return array;
         }
@@ -121,14 +129,15 @@ namespace AIO
             var arrayIndex = 0;
             var bucketIndex = 0; // 反填充
             while (arrayIndex < array.Count)
-            {
                 if (bucket[bucketIndex] != 0)
                 {
                     array[arrayIndex++] = bucketIndex - bias;
                     bucket[bucketIndex]--;
                 }
-                else bucketIndex++;
-            }
+                else
+                {
+                    bucketIndex++;
+                }
 
             return array;
         }
@@ -138,7 +147,7 @@ namespace AIO
             if (array.Count < 2) return array; // 求最大最小值
             var mixin = array.GetMaxMinValue();
             var bucket = new int[mixin.Item1 - mixin.Item2 + 1]; // 初始化新组并赋值数组长度比实际个数大一
-            var bias = -mixin.Item2; // 正填充
+            var bias = -mixin.Item2;                             // 正填充
             for (var i = 0; i < bucket.Length; i++) bucket[i] = 0;
             foreach (var item in array) bucket[item + bias]++;
 
@@ -147,14 +156,15 @@ namespace AIO
             unchecked
             {
                 while (arrayIndex < array.Count)
-                {
                     if (bucket[bucketIndex] != 0)
                     {
                         array[arrayIndex++] = (byte)(bucketIndex - bias);
                         bucket[bucketIndex]--;
                     }
-                    else bucketIndex++;
-                }
+                    else
+                    {
+                        bucketIndex++;
+                    }
             }
 
             return array;
@@ -172,14 +182,15 @@ namespace AIO
             var arrayIndex = 0;
             ulong bucketIndex = 0; // 反填充
             while (arrayIndex < array.Count)
-            {
                 if (bucket[bucketIndex] != 0)
                 {
                     array[arrayIndex++] = bucketIndex - bias;
                     bucket[bucketIndex]--;
                 }
-                else bucketIndex++;
-            }
+                else
+                {
+                    bucketIndex++;
+                }
 
             return array;
         }

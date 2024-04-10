@@ -1,5 +1,8 @@
+#region
+
 using System;
-using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
@@ -9,8 +12,8 @@ namespace AIO
         /// 验证数据 报错条件
         /// [param.CompareTo(value) != 0]
         /// </summary>
-
-        public void Is<T>(in T param, in T value) where T : struct, IComparable<T>
+        public void Is<T>(in T param, in T value)
+        where T : struct, IComparable<T>
         {
             if (!Ensure.IsActive) return;
             if (param.CompareTo(value) != 0)
@@ -21,8 +24,8 @@ namespace AIO
         /// 验证数据 报错条件
         /// [param.CompareTo(value) == 0]
         /// </summary>
-
-        public void IsNot<T>(in T param, in T value) where T : struct, IComparable<T>
+        public void IsNot<T>(in T param, in T value)
+        where T : struct, IComparable<T>
         {
             if (!Ensure.IsActive) return;
             if (param.CompareTo(value) == 0)
@@ -33,8 +36,8 @@ namespace AIO
         /// 验证数据 报错条件
         /// [param.CompareTo(value) >= 0]
         /// </summary>
-
-        public void IsLt<T>(in T param, in T value) where T : struct, IComparable<T>
+        public void IsLt<T>(in T param, in T value)
+        where T : struct, IComparable<T>
         {
             if (!Ensure.IsActive) return;
             if (param.CompareTo(value) >= 0)
@@ -45,8 +48,8 @@ namespace AIO
         /// 验证数据 报错条件
         /// [param.CompareTo(value) > 0]
         /// </summary>
-
-        public void IsLte<T>(in T param, in T value) where T : struct, IComparable<T>
+        public void IsLte<T>(in T param, in T value)
+        where T : struct, IComparable<T>
         {
             if (!Ensure.IsActive) return;
             if (param.CompareTo(value) > 0)
@@ -57,8 +60,8 @@ namespace AIO
         /// 验证数据 报错条件
         /// [param.CompareTo(value) &lt;= 0]
         /// </summary>
-
-        public void IsGt<T>(in T param, in T value) where T : struct, IComparable<T>
+        public void IsGt<T>(in T param, in T value)
+        where T : struct, IComparable<T>
         {
             if (!Ensure.IsActive) return;
             if (param.CompareTo(value) <= 0)
@@ -69,8 +72,8 @@ namespace AIO
         /// 验证数据 报错条件
         /// [param.CompareTo(value) &lt; 0]
         /// </summary>
-
-        public void IsGte<T>(in T param, in T value) where T : struct, IComparable<T>
+        public void IsGte<T>(in T param, in T value)
+        where T : struct, IComparable<T>
         {
             if (!Ensure.IsActive) return;
             if (param.CompareTo(value) < 0)
@@ -82,8 +85,8 @@ namespace AIO
         /// [param.CompareTo(min) &lt; 0]
         /// [param.CompareTo(max) > 0]
         /// </summary>
-
-        public void IsInRange<T>(in T param, in T min, in T max) where T : struct, IComparable<T>
+        public void IsInRange<T>(in T param, in T min, in T max)
+        where T : struct, IComparable<T>
         {
             if (!Ensure.IsActive) return;
 

@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Diagnostics;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -7,20 +11,14 @@ namespace AIO.UEditor
     /// 类成员场景处理器特性
     /// </summary>
     [Conditional("UNITY_EDITOR")]
-    public abstract class SceneHandlerAttribute : Attribute
-    {
-
-    }
+    public abstract class SceneHandlerAttribute : Attribute { }
 
     /// <summary>
     /// 移动手柄处理器（支持 Vector2、Vector3 类型）
     /// </summary>
-    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    [Conditional("UNITY_EDITOR")]
+    [AttributeUsage(AttributeTargets.Field), Conditional("UNITY_EDITOR")]
     public sealed class MoveHandlerAttribute : SceneHandlerAttribute
     {
-        public string Display { get; private set; }
-
         /// <summary>
         /// 移动手柄处理器（支持 Vector2、Vector3 类型）
         /// </summary>
@@ -29,17 +27,16 @@ namespace AIO.UEditor
         {
             Display = display;
         }
+
+        public string Display { get; private set; }
     }
 
     /// <summary>
     /// 半径手柄处理器（支持 float、int 类型）
     /// </summary>
-    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    [Conditional("UNITY_EDITOR")]
+    [AttributeUsage(AttributeTargets.Field), Conditional("UNITY_EDITOR")]
     public sealed class RadiusHandlerAttribute : SceneHandlerAttribute
     {
-        public string Display { get; private set; }
-
         /// <summary>
         /// 半径手柄处理器（支持 float、int 类型）
         /// </summary>
@@ -48,17 +45,16 @@ namespace AIO.UEditor
         {
             Display = display;
         }
+
+        public string Display { get; private set; }
     }
 
     /// <summary>
     /// 包围盒处理器（支持 Bounds 类型）
     /// </summary>
-    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    [Conditional("UNITY_EDITOR")]
+    [AttributeUsage(AttributeTargets.Field), Conditional("UNITY_EDITOR")]
     public sealed class BoundsHandlerAttribute : SceneHandlerAttribute
     {
-        public string Display { get; private set; }
-
         /// <summary>
         /// 包围盒处理器（支持 Bounds 类型）
         /// </summary>
@@ -67,17 +63,16 @@ namespace AIO.UEditor
         {
             Display = display;
         }
+
+        public string Display { get; private set; }
     }
 
     /// <summary>
     /// 方向处理器（支持 Vector2、Vector3 类型）
     /// </summary>
-    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    [Conditional("UNITY_EDITOR")]
+    [AttributeUsage(AttributeTargets.Field), Conditional("UNITY_EDITOR")]
     public sealed class DirectionHandlerAttribute : SceneHandlerAttribute
     {
-        public bool IsDynamic { get; private set; }
-
         /// <summary>
         /// 方向处理器（支持 Vector2、Vector3 类型）
         /// </summary>
@@ -86,17 +81,26 @@ namespace AIO.UEditor
         {
             IsDynamic = isDynamic;
         }
+
+        public bool IsDynamic { get; private set; }
     }
 
     /// <summary>
     /// 圆形区域处理器（支持 float 类型）
     /// </summary>
-    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    [Conditional("UNITY_EDITOR")]
+    [AttributeUsage(AttributeTargets.Field), Conditional("UNITY_EDITOR")]
     public sealed class CircleAreaHandlerAttribute : SceneHandlerAttribute
     {
-        public Axis Direction { get; private set; }
-        public bool IsDynamic { get; private set; }
+        #region Axis enum
+
+        public enum Axis
+        {
+            X,
+            Y,
+            Z
+        }
+
+        #endregion
 
         /// <summary>
         /// 圆形区域处理器（支持 float 类型）
@@ -109,11 +113,7 @@ namespace AIO.UEditor
             IsDynamic = isDynamic;
         }
 
-        public enum Axis
-        {
-            X,
-            Y,
-            Z
-        }
+        public Axis Direction { get; private set; }
+        public bool IsDynamic { get; private set; }
     }
 }

@@ -1,7 +1,11 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #pragma warning disable CS0109 // 
 
+#region
+
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -11,33 +15,33 @@ namespace AIO
         private static IEnumerable<FunctionChunk> GetFieldStruct()
         {
             var chunks = new List<FunctionChunk>();
-            foreach (var type in new string[]
-                     {
-                         "Bounds",
-                         "BoundsInt",
-                         "RectInt",
-                         "Rect",
-                     })
+            foreach (var type in new[]
+            {
+                "Bounds",
+                "BoundsInt",
+                "RectInt",
+                "Rect"
+            })
             {
                 var value = new FunctionParam(type, "value", "value") { Comments = "值" };
-                foreach (var item in new string[] { "string", "GUIContent", "Texture" })
+                foreach (var item in new[] { "string", "GUIContent", "Texture" })
                 {
                     var label = new FunctionParam(item, "label", "label") { Comments = "标签" };
                     if (item == "Texture") label.Output = "new GUIContent(label)";
-                    var paramsList = new FunctionParam[][]
+                    var paramsList = new[]
                     {
-                        new FunctionParam[] { value, Options, },
-                        new FunctionParam[] { label, value, Options, },
+                        new[] { value, Options },
+                        new[] { label, value, Options }
                     };
                     foreach (var param in paramsList)
                     {
                         var chunk = new FunctionChunk
                         {
-                            State = TChunkState.NewStatic,
-                            Comments = $"绘制 {type}",
-                            Name = "Field",
-                            Params = param,
-                            ReturnType = type,
+                            State      = TChunkState.NewStatic,
+                            Comments   = $"绘制 {type}",
+                            Name       = "Field",
+                            Params     = param,
+                            ReturnType = type
                         };
                         var api = $"EditorGUILayout.{char.ToUpper(type[0])}{type.Substring(1, type.Length - 1)}Field";
                         chunk.Content = $"return {api}({chunk.GetParamValues()});";
@@ -46,32 +50,32 @@ namespace AIO
                 }
             }
 
-            foreach (var type in new string[]
-                     {
-                         "Vector2Int",
-                         "Vector3Int",
-                         "Vector4", "Vector3",
-                         "Vector2",
-                     })
+            foreach (var type in new[]
+            {
+                "Vector2Int",
+                "Vector3Int",
+                "Vector4", "Vector3",
+                "Vector2"
+            })
             {
                 var value = new FunctionParam(type, "value", "value") { Comments = "值" };
-                foreach (var item in new string[] { "string", "GUIContent", "Texture" })
+                foreach (var item in new[] { "string", "GUIContent", "Texture" })
                 {
                     var label = new FunctionParam(item, "label", "label") { Comments = "标签" };
                     if (item == "Texture") label.Output = "new GUIContent(label)";
-                    var paramsList = new FunctionParam[][]
+                    var paramsList = new[]
                     {
-                        new FunctionParam[] { label, value, Options, },
+                        new[] { label, value, Options }
                     };
                     foreach (var param in paramsList)
                     {
                         var chunk = new FunctionChunk
                         {
-                            State = TChunkState.NewStatic,
-                            Comments = $"绘制 {type}",
-                            Name = "Field",
-                            Params = param,
-                            ReturnType = type,
+                            State      = TChunkState.NewStatic,
+                            Comments   = $"绘制 {type}",
+                            Name       = "Field",
+                            Params     = param,
+                            ReturnType = type
                         };
                         var api = $"EditorGUILayout.{char.ToUpper(type[0])}{type.Substring(1, type.Length - 1)}Field";
                         chunk.Content = $"return {api}({chunk.GetParamValues()});";
@@ -87,38 +91,38 @@ namespace AIO
         private static IEnumerable<FunctionChunk> GetFieldDelayed()
         {
             var chunks = new List<FunctionChunk>();
-            foreach (var type in new string[]
-                     {
-                         "float",
-                         "int",
-                         "double",
-                         "text"
-                     })
+            foreach (var type in new[]
+            {
+                "float",
+                "int",
+                "double",
+                "text"
+            })
             {
                 var value = new FunctionParam(type == "text" ? "string" : type, "value", "value") { Comments = "值" };
-                foreach (var item in new string[] { "string", "GUIContent", "Texture" })
+                foreach (var item in new[] { "string", "GUIContent", "Texture" })
                 {
                     var label = new FunctionParam(item, "label", "label")
                     {
                         Comments = "标签"
                     };
                     if (item == "Texture") label.Output = "new GUIContent(label)";
-                    var paramsList = new FunctionParam[][]
+                    var paramsList = new[]
                     {
-                        new FunctionParam[] { value, Options, },
-                        new FunctionParam[] { label, value, Options, },
-                        new FunctionParam[] { value, Style, Options, },
-                        new FunctionParam[] { label, value, Style, Options, },
+                        new[] { value, Options },
+                        new[] { label, value, Options },
+                        new[] { value, Style, Options },
+                        new[] { label, value, Style, Options }
                     };
                     foreach (var param in paramsList)
                     {
                         var chunk = new FunctionChunk
                         {
-                            State = TChunkState.NewStatic,
-                            Comments = $"绘制 {value.Type}",
-                            Name = "FieldDelayed",
-                            Params = param,
-                            ReturnType = value.Type,
+                            State      = TChunkState.NewStatic,
+                            Comments   = $"绘制 {value.Type}",
+                            Name       = "FieldDelayed",
+                            Params     = param,
+                            ReturnType = value.Type
                         };
                         var api =
                             $"EditorGUILayout.Delayed{char.ToUpper(type[0])}{type.Substring(1, type.Length - 1)}Field";
@@ -135,35 +139,35 @@ namespace AIO
         private static IEnumerable<FunctionChunk> GetFieldNumber()
         {
             var chunks = new List<FunctionChunk>();
-            foreach (var type in new string[]
-                     {
-                         "float",
-                         "int",
-                         "double",
-                         "long"
-                     })
+            foreach (var type in new[]
+            {
+                "float",
+                "int",
+                "double",
+                "long"
+            })
             {
                 var value = new FunctionParam(type, "value", "value") { Comments = "值" };
-                foreach (var item in new string[] { "string", "GUIContent", "Texture" })
+                foreach (var item in new[] { "string", "GUIContent", "Texture" })
                 {
                     var label = new FunctionParam(item, "label", "label") { Comments = "标签" };
                     if (item == "Texture") label.Output = "new GUIContent(label)";
-                    var paramsList = new FunctionParam[][]
+                    var paramsList = new[]
                     {
-                        new FunctionParam[] { value, Options, },
-                        new FunctionParam[] { value, Style, Options, },
-                        new FunctionParam[] { label, value, Options, },
-                        new FunctionParam[] { label, value, Style, Options, },
+                        new[] { value, Options },
+                        new[] { value, Style, Options },
+                        new[] { label, value, Options },
+                        new[] { label, value, Style, Options }
                     };
                     foreach (var param in paramsList)
                     {
                         var chunk = new FunctionChunk
                         {
-                            State = TChunkState.NewStatic,
-                            Comments = $"绘制 {value.Type}",
-                            Name = "Field",
-                            Params = param,
-                            ReturnType = value.Type,
+                            State      = TChunkState.NewStatic,
+                            Comments   = $"绘制 {value.Type}",
+                            Name       = "Field",
+                            Params     = param,
+                            ReturnType = value.Type
                         };
                         var api =
                             $"EditorGUILayout.{char.ToUpper(type[0])}{type.Substring(1, type.Length - 1)}Field";
@@ -181,28 +185,28 @@ namespace AIO
         {
             var chunks = new List<FunctionChunk>();
             var value = new FunctionParam("AnimationCurve", "value", "value") { Comments = "值" };
-            var color = new FunctionParam("Color", "color", "color") { Comments = "颜色" };
-            var ranges = new FunctionParam("Rect", "ranges", "ranges") { Comments = "区间值" };
-            foreach (var item in new string[] { "string", "GUIContent", "Texture" })
+            var color = new FunctionParam("Color", "color", "color") { Comments          = "颜色" };
+            var ranges = new FunctionParam("Rect", "ranges", "ranges") { Comments        = "区间值" };
+            foreach (var item in new[] { "string", "GUIContent", "Texture" })
             {
                 var label = new FunctionParam(item, "label", "label") { Comments = "标签" };
                 if (item == "Texture") label.Output = "new GUIContent(label)";
-                var paramsList = new FunctionParam[][]
+                var paramsList = new[]
                 {
-                    new FunctionParam[] { value, Options, },
-                    new FunctionParam[] { label, value, Options, },
-                    new FunctionParam[] { value, color, ranges, Options, },
-                    new FunctionParam[] { label, value, color, ranges, Options, },
+                    new[] { value, Options },
+                    new[] { label, value, Options },
+                    new[] { value, color, ranges, Options },
+                    new[] { label, value, color, ranges, Options }
                 };
                 foreach (var param in paramsList)
                 {
                     var chunk = new FunctionChunk
                     {
-                        State = TChunkState.NewStatic,
-                        Comments = $"绘制 {value.Type}",
-                        Name = "Field",
-                        Params = param,
-                        ReturnType = value.Type,
+                        State      = TChunkState.NewStatic,
+                        Comments   = $"绘制 {value.Type}",
+                        Name       = "Field",
+                        Params     = param,
+                        ReturnType = value.Type
                     };
                     chunk.Content = $"return EditorGUILayout.CurveField({chunk.GetParamValues()});";
                     chunks.Add(chunk);
@@ -216,29 +220,29 @@ namespace AIO
         private static IEnumerable<FunctionChunk> GetColor()
         {
             var chunks = new List<FunctionChunk>();
-            var value = new FunctionParam("Color", "value", "value") { Comments = "值" };
+            var value = new FunctionParam("Color", "value", "value") { Comments                           = "值" };
             var showEyedropper = new FunctionParam("bool", "showEyedropper", "showEyedropper") { Comments = "颜色" };
-            var showAlpha = new FunctionParam("bool", "showAlpha", "showAlpha") { Comments = "区间值" };
-            var hdr = new FunctionParam("bool", "hdr", "hdr") { Comments = "区间值" };
-            foreach (var item in new string[] { "string", "GUIContent", "Texture" })
+            var showAlpha = new FunctionParam("bool", "showAlpha", "showAlpha") { Comments                = "区间值" };
+            var hdr = new FunctionParam("bool", "hdr", "hdr") { Comments                                  = "区间值" };
+            foreach (var item in new[] { "string", "GUIContent", "Texture" })
             {
                 var label = new FunctionParam(item, "label", "label") { Comments = "标签" };
                 if (item != "GUIContent") label.Output = "new GUIContent(label)";
-                var paramsList = new FunctionParam[][]
+                var paramsList = new[]
                 {
-                    new FunctionParam[] { value, Options, },
-                    new FunctionParam[] { label, value, Options, },
-                    new FunctionParam[] { label, value, showEyedropper, showAlpha, hdr, Options, },
+                    new[] { value, Options },
+                    new[] { label, value, Options },
+                    new[] { label, value, showEyedropper, showAlpha, hdr, Options }
                 };
                 foreach (var param in paramsList)
                 {
                     var chunk = new FunctionChunk
                     {
-                        State = TChunkState.NewStatic,
-                        Comments = $"绘制 {value.Type}",
-                        Name = "Field",
-                        Params = param,
-                        ReturnType = value.Type,
+                        State      = TChunkState.NewStatic,
+                        Comments   = $"绘制 {value.Type}",
+                        Name       = "Field",
+                        Params     = param,
+                        ReturnType = value.Type
                     };
                     chunk.Content = $"return EditorGUILayout.ColorField({chunk.GetParamValues()});";
                     chunks.Add(chunk);
@@ -253,25 +257,25 @@ namespace AIO
         {
             var chunks = new List<FunctionChunk>();
             var value = new FunctionParam("Gradient", "value", "value") { Comments = "值" };
-            foreach (var item in new string[] { "string", "GUIContent", "Texture" })
+            foreach (var item in new[] { "string", "GUIContent", "Texture" })
             {
                 var label = new FunctionParam(item, "label", "label") { Comments = "标签" };
                 if (item != "GUIContent") label.Output = "new GUIContent(label)";
-                var paramsList = new FunctionParam[][]
+                var paramsList = new[]
                 {
-                    new FunctionParam[] { value, Options, },
-                    new FunctionParam[] { label, value, Options, },
+                    new[] { value, Options },
+                    new[] { label, value, Options }
                 };
                 foreach (var param in paramsList)
                 {
                     var chunk = new FunctionChunk
                     {
-                        State = TChunkState.NewStatic,
-                        Comments = $"绘制 {value.Type}",
-                        Name = "Field",
-                        Params = param,
+                        State           = TChunkState.NewStatic,
+                        Comments        = $"绘制 {value.Type}",
+                        Name            = "Field",
+                        Params          = param,
                         MacroDefinition = "UNITY_2019_1_OR_NEWER",
-                        ReturnType = value.Type,
+                        ReturnType      = value.Type
                     };
                     chunk.Content = $"return EditorGUILayout.GradientField({chunk.GetParamValues()});";
                     chunks.Add(chunk);
@@ -286,26 +290,26 @@ namespace AIO
         {
             var chunks = new List<FunctionChunk>();
             var value = new FunctionParam("string", "value", "value") { Comments = "值" };
-            foreach (var item in new string[] { "string", "GUIContent", "Texture" })
+            foreach (var item in new[] { "string", "GUIContent", "Texture" })
             {
                 var label = new FunctionParam(item, "label", "label") { Comments = "标签" };
                 if (item == "Texture") label.Output = "new GUIContent(label)";
-                var paramsList = new FunctionParam[][]
+                var paramsList = new[]
                 {
-                    new FunctionParam[] { value, Options, },
-                    new FunctionParam[] { label, value, Options, },
-                    new FunctionParam[] { value, Style, Options, },
-                    new FunctionParam[] { label, value, Style, Options, },
+                    new[] { value, Options },
+                    new[] { label, value, Options },
+                    new[] { value, Style, Options },
+                    new[] { label, value, Style, Options }
                 };
                 foreach (var param in paramsList)
                 {
                     var chunk = new FunctionChunk
                     {
-                        State = TChunkState.NewStatic,
-                        Comments = $"绘制 {value.Type}",
-                        Name = "Field",
-                        Params = param,
-                        ReturnType = value.Type,
+                        State      = TChunkState.NewStatic,
+                        Comments   = $"绘制 {value.Type}",
+                        Name       = "Field",
+                        Params     = param,
+                        ReturnType = value.Type
                     };
                     chunk.Content = $"return EditorGUILayout.TextField({chunk.GetParamValues()});";
                     chunks.Add(chunk);
@@ -326,27 +330,27 @@ namespace AIO
                 Comments = "是否允许选择场景物体"
             };
             var allowSceneObjects1 = new FunctionParam(allowSceneObjects) { Output = "typeof(T), allowSceneObjects" };
-            foreach (var item in new string[] { "string", "GUIContent", "Texture" })
+            foreach (var item in new[] { "string", "GUIContent", "Texture" })
             {
                 var label = new FunctionParam(item, "label", "label") { Comments = "标签" };
                 if (item == "Texture") label.Output = "new GUIContent(label)";
-                var paramsList = new FunctionParam[][]
+                var paramsList = new[]
                 {
-                    new FunctionParam[] { value, allowSceneObjects1, Options, },
-                    new FunctionParam[] { value, type, allowSceneObjects, Options, },
-                    new FunctionParam[] { label, value, type, allowSceneObjects, Options, },
-                    new FunctionParam[] { label, value, allowSceneObjects1, Options, },
+                    new[] { value, allowSceneObjects1, Options },
+                    new[] { value, type, allowSceneObjects, Options },
+                    new[] { label, value, type, allowSceneObjects, Options },
+                    new[] { label, value, allowSceneObjects1, Options }
                 };
                 foreach (var param in paramsList)
                 {
                     var chunk = new FunctionChunk
                     {
-                        State = TChunkState.NewStatic,
-                        Comments = $"绘制 Object",
-                        Name = "Field",
-                        Generics = new Dictionary<string, string> { { "T", "UnityEngine.Object" } },
-                        Params = param,
-                        ReturnType = value.Type,
+                        State      = TChunkState.NewStatic,
+                        Comments   = "绘制 Object",
+                        Name       = "Field",
+                        Generics   = new Dictionary<string, string> { { "T", "UnityEngine.Object" } },
+                        Params     = param,
+                        ReturnType = value.Type
                     };
                     chunk.Content = $"return (T)EditorGUILayout.ObjectField({chunk.GetParamValues()});";
                     chunks.Add(chunk);
@@ -355,23 +359,23 @@ namespace AIO
 
             chunks.Add(new FunctionChunk
             {
-                State = TChunkState.NewStatic,
-                Comments = $"绘制 Object",
-                Name = "Field",
-                Generics = new Dictionary<string, string> { { "T", "UnityEngine.Object" } },
-                Params = new[] { value, type, Options, },
-                Content = "return (T)EditorGUILayout.ObjectField(value, type, true, options);",
-                ReturnType = value.Type,
+                State      = TChunkState.NewStatic,
+                Comments   = "绘制 Object",
+                Name       = "Field",
+                Generics   = new Dictionary<string, string> { { "T", "UnityEngine.Object" } },
+                Params     = new[] { value, type, Options },
+                Content    = "return (T)EditorGUILayout.ObjectField(value, type, true, options);",
+                ReturnType = value.Type
             });
             chunks.Add(new FunctionChunk
             {
-                State = TChunkState.NewStatic,
-                Comments = $"绘制 Object",
-                Name = "Field",
-                Generics = new Dictionary<string, string> { { "T", "UnityEngine.Object" } },
-                Params = new[] { value, Options, },
-                Content = "return (T)EditorGUILayout.ObjectField(value, typeof(T), true, options);",
-                ReturnType = value.Type,
+                State      = TChunkState.NewStatic,
+                Comments   = "绘制 Object",
+                Name       = "Field",
+                Generics   = new Dictionary<string, string> { { "T", "UnityEngine.Object" } },
+                Params     = new[] { value, Options },
+                Content    = "return (T)EditorGUILayout.ObjectField(value, typeof(T), true, options);",
+                ReturnType = value.Type
             });
             return chunks;
         }
@@ -381,26 +385,26 @@ namespace AIO
         {
             var chunks = new List<FunctionChunk>();
             var value = new FunctionParam("int", "value", "value") { Comments = "值" };
-            foreach (var item in new string[] { "string", "GUIContent", "Texture" })
+            foreach (var item in new[] { "string", "GUIContent", "Texture" })
             {
                 var label = new FunctionParam(item, "label", "label") { Comments = "标签" };
                 if (item == "Texture") label.Output = "new GUIContent(label)";
-                var paramsList = new FunctionParam[][]
+                var paramsList = new[]
                 {
-                    new FunctionParam[] { value, Options, },
-                    new FunctionParam[] { label, value, Options, },
-                    new FunctionParam[] { value, Style, Options, },
-                    new FunctionParam[] { label, value, Style, Options, },
+                    new[] { value, Options },
+                    new[] { label, value, Options },
+                    new[] { value, Style, Options },
+                    new[] { label, value, Style, Options }
                 };
                 foreach (var param in paramsList)
                 {
                     var chunk = new FunctionChunk
                     {
-                        State = TChunkState.NewStatic,
-                        Comments = $"绘制 Layer",
-                        Name = "Layer",
-                        Params = param,
-                        ReturnType = value.Type,
+                        State      = TChunkState.NewStatic,
+                        Comments   = "绘制 Layer",
+                        Name       = "Layer",
+                        Params     = param,
+                        ReturnType = value.Type
                     };
                     chunk.Content = $"return EditorGUILayout.LayerField({chunk.GetParamValues()});";
                     chunks.Add(chunk);
@@ -415,26 +419,26 @@ namespace AIO
         {
             var chunks = new List<FunctionChunk>();
             var value = new FunctionParam("string", "value", "value") { Comments = "值" };
-            foreach (var item in new string[] { "string", "GUIContent", "Texture" })
+            foreach (var item in new[] { "string", "GUIContent", "Texture" })
             {
                 var label = new FunctionParam(item, "label", "label") { Comments = "标签" };
                 if (item == "Texture") label.Output = "new GUIContent(label)";
-                var paramsList = new FunctionParam[][]
+                var paramsList = new[]
                 {
-                    new FunctionParam[] { value, Options, },
-                    new FunctionParam[] { label, value, Options, },
-                    new FunctionParam[] { value, Style, Options, },
-                    new FunctionParam[] { label, value, Style, Options, },
+                    new[] { value, Options },
+                    new[] { label, value, Options },
+                    new[] { value, Style, Options },
+                    new[] { label, value, Style, Options }
                 };
                 foreach (var param in paramsList)
                 {
                     var chunk = new FunctionChunk
                     {
-                        State = TChunkState.NewStatic,
-                        Comments = $"绘制 密码文本框",
-                        Name = "Password",
-                        Params = param,
-                        ReturnType = value.Type,
+                        State      = TChunkState.NewStatic,
+                        Comments   = "绘制 密码文本框",
+                        Name       = "Password",
+                        Params     = param,
+                        ReturnType = value.Type
                     };
                     chunk.Content = $"return EditorGUILayout.PasswordField({chunk.GetParamValues()});";
                     chunks.Add(chunk);

@@ -1,10 +1,14 @@
-﻿using System.IO;
+﻿#region
+
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
 using PackageInfo = UnityEditor.PackageManager.PackageInfo;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -23,7 +27,7 @@ namespace AIO.UEditor
         {
             Debug.Log($"<b><color=#5DADE2>[GIT]</color></b> {CMD_GIT} Generate");
 
-            var packageInfos = AssetDatabase.FindAssets("package", new string[] { "Packages" }).
+            var packageInfos = AssetDatabase.FindAssets("package", new[] { "Packages" }).
                                              Select(AssetDatabase.GUIDToAssetPath).Where(x => AssetDatabase.LoadAssetAtPath<TextAsset>(x) != null).
                                              Select(PackageInfo.FindForAssetPath).GroupBy(x => x.assetPath).Select(x => x.First()).Where(x =>
                                                                                                                                              File.Exists(Path.Combine(EHelper.Path.Project, x.resolvedPath, ".git")) ||
@@ -41,7 +45,7 @@ namespace AIO.UEditor
             CompilationPipeline.RequestScriptCompilation();
         }
 
-        [AInit(mode: EInitAttrMode.Editor, ushort.MaxValue - 1)]
+        [AInit(EInitAttrMode.Editor, ushort.MaxValue - 1)]
         internal static void AutoGenerate()
         {
             if (EHelper.Prefs.LoadBoolean("Git.AutoGenerate"))

@@ -1,5 +1,9 @@
-﻿using System.ComponentModel;
+﻿#region
+
 using System;
+using System.ComponentModel;
+
+#endregion
 
 namespace AIO
 {
@@ -212,6 +216,6 @@ namespace AIO
         /// <summary>
         /// In the player on the Playstation 5.
         /// </summary>
-        PS5 = 38, // 0x00000026
+        PS5 = 38 // 0x00000026
     }
 }

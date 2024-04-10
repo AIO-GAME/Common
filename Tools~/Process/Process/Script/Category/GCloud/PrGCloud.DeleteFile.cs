@@ -4,12 +4,16 @@
 |*|E-Mail:     |*| xinansky99@gmail.com
 |*|============|*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {
@@ -54,8 +58,9 @@ namespace AIO
             }
 
             var executor = Create(Gsutil, $"-m rm {messages}");
-            if (onProgress != null) executor.OnProgress((o, s) => { onProgress.Invoke($"Delete : {s}"); });
-            var result = await executor;
+            var result = onProgress != null
+                ? await executor.OnProgress((o, s) => { onProgress.Invoke($"Delete : {s}"); })
+                : await executor;
             return result.ExitCode == 0;
         }
 
@@ -87,7 +92,7 @@ namespace AIO
         [DebuggerHidden, DebuggerNonUserCode]
         public static bool DeleteFile(string remote)
         {
-            return DeleteFile(new string[] { remote }, Console.WriteLine);
+            return DeleteFile(new[] { remote }, Console.WriteLine);
         }
 
         /// <summary>
@@ -99,7 +104,7 @@ namespace AIO
         [DebuggerHidden, DebuggerNonUserCode]
         public static bool DeleteFile(string remote, Action<string> onProgress)
         {
-            return DeleteFile(new string[] { remote }, onProgress);
+            return DeleteFile(new[] { remote }, onProgress);
         }
 
         /// <summary>
@@ -133,7 +138,7 @@ namespace AIO
         [DebuggerHidden, DebuggerNonUserCode]
         public static Task<bool> DeleteFileAsync(string remote, Action<string> onProgress)
         {
-            return DeleteFileAsync(new string[] { remote }, onProgress);
+            return DeleteFileAsync(new[] { remote }, onProgress);
         }
 
         /// <summary>
@@ -144,7 +149,7 @@ namespace AIO
         [DebuggerHidden, DebuggerNonUserCode]
         public static Task<bool> DeleteFileAsync(string remote)
         {
-            return DeleteFileAsync(new string[] { remote }, Console.WriteLine);
+            return DeleteFileAsync(new[] { remote }, Console.WriteLine);
         }
     }
 }

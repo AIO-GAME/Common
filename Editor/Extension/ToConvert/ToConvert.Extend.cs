@@ -1,6 +1,10 @@
-﻿using System.Collections;
+﻿#region
+
+using System.Collections;
 using AIO.UEngine;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -86,8 +90,8 @@ namespace AIO.UEditor
         public static string ToCopyString(this Bounds value, string format)
         {
             return string.Format("Bounds({0}f,{1}f,{2}f,{3}f,{4}f,{5}f)"
-                , value.center.x.ToString(format), value.center.y.ToString(format), value.center.z.ToString(format)
-                , value.size.x.ToString(format), value.size.y.ToString(format), value.size.z.ToString(format));
+                               , value.center.x.ToString(format), value.center.y.ToString(format), value.center.z.ToString(format)
+                               , value.size.x.ToString(format), value.size.y.ToString(format), value.size.z.ToString(format));
         }
 
         /// <summary>
@@ -98,8 +102,8 @@ namespace AIO.UEditor
         public static string ToCopyString(this BoundsInt value)
         {
             return string.Format("BoundsInt({0},{1},{2},{3},{4},{5})"
-                , value.position.x, value.position.y, value.position.z
-                , value.size.x, value.size.y, value.size.z);
+                               , value.position.x, value.position.y, value.position.z
+                               , value.size.x, value.size.y, value.size.z);
         }
 
         /// <summary>
@@ -120,9 +124,7 @@ namespace AIO.UEditor
 
             if (float.TryParse(vector2[0], out var x) &&
                 float.TryParse(vector2[1], out var y))
-            {
                 return new Vector2(x, y);
-            }
 
             return defaultValue;
         }
@@ -302,10 +304,10 @@ namespace AIO.UEditor
             if (location.IsNull) return null;
             return AHelper.Json.Serialize(new Hashtable
             {
-                ["type"] = "Location",
+                ["type"]     = "Location",
                 ["Position"] = location.Position.ToCopyString("F4"),
                 ["Rotation"] = location.Rotation.ToCopyString("F4"),
-                ["Scale"] = location.Scale.ToCopyString("F4")
+                ["Scale"]    = location.Scale.ToCopyString("F4")
             });
         }
 
@@ -324,7 +326,7 @@ namespace AIO.UEditor
             {
                 Position = jsonData["Position"].ToString().ToPasteVector3(Vector3.zero),
                 Rotation = jsonData["Rotation"].ToString().ToPasteVector3(Vector3.zero),
-                Scale = jsonData["Scale"].ToString().ToPasteVector3(Vector3.zero)
+                Scale    = jsonData["Scale"].ToString().ToPasteVector3(Vector3.zero)
             };
             return location;
         }

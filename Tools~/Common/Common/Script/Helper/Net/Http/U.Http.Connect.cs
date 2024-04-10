@@ -1,12 +1,17 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Text;
 using System.Threading.Tasks;
-using AIO;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: HTTP
+
         public partial class HTTP
         {
             /// <summary>
@@ -103,5 +108,7 @@ namespace AIO
                 return AutoCommonRequestAsync(remoteUrl, CONNECT, data, encoding, timeout, cookie);
             }
         }
+
+        #endregion
     }
 }

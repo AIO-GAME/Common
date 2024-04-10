@@ -2,6 +2,8 @@
 {
     public partial class PrMac
     {
+        #region Nested type: Shell
+
         /// <summary>
         /// Shell 运行
         /// </summary>
@@ -15,5 +17,7 @@
                 return Create(CMD_Sh, args);
             }
         }
+
+        #endregion
     }
 }

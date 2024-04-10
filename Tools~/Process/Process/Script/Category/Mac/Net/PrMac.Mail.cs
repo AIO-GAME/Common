@@ -2,6 +2,8 @@
 {
     public partial class PrMac
     {
+        #region Nested type: Mail
+
         /// <summary>
         /// 阅读和发送电子邮件
         /// </summary>
@@ -15,5 +17,7 @@
                 return Create(CMD_Mail, command);
             }
         }
+
+        #endregion
     }
 }

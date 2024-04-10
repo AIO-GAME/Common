@@ -1,15 +1,24 @@
-﻿
-#if UNITY_EDITOR
+﻿#if UNITY_EDITOR
+
+#region
+
 using System;
 using System.Collections;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
+#endregion
+
 namespace AIO
 {
     internal static partial class UnitGUI
     {
+        /// <summary>
+        /// The <see cref="EditorGUIUtility.labelWidth"/> from before <see cref="BeginTightLabel"/>.
+        /// </summary>
+        private static float _TightLabelWidth;
+
         /// <summary>
         /// Returns <see cref="EditorGUIUtility.singleLineHeight"/>.
         /// </summary>
@@ -31,7 +40,7 @@ namespace AIO
                 {
                     var indentLevel = EditorGUI.indentLevel;
                     EditorGUI.indentLevel = 1;
-                    _IndentSize = EditorGUI.IndentedRect(new Rect()).x;
+                    _IndentSize           = EditorGUI.IndentedRect(new Rect()).x;
                     EditorGUI.indentLevel = indentLevel;
                 }
 
@@ -45,16 +54,14 @@ namespace AIO
             get
             {
                 if (_MiniButton == null)
-                {
                     _MiniButton = new GUIStyle(EditorStyles.miniButton)
                     {
-                        margin = new RectOffset(0, 0, 2, 0),
-                        padding = new RectOffset(2, 3, 2, 2),
-                        alignment = TextAnchor.MiddleCenter,
+                        margin      = new RectOffset(0, 0, 2, 0),
+                        padding     = new RectOffset(2, 3, 2, 2),
+                        alignment   = TextAnchor.MiddleCenter,
                         fixedHeight = LineHeight,
-                        fixedWidth = LineHeight - 1
+                        fixedWidth  = LineHeight - 1
                     };
-                }
 
                 return _MiniButton;
             }
@@ -63,7 +70,10 @@ namespace AIO
         /// <summary>
         /// Wrapper around <see cref="UnityEditorInternal.InternalEditorUtility.RepaintAllViews"/>.
         /// </summary>
-        public static void RepaintEverything() => InternalEditorUtility.RepaintAllViews();
+        public static void RepaintEverything()
+        {
+            InternalEditorUtility.RepaintAllViews();
+        }
 
         /// <summary>
         /// Begins a vertical layout group using the given style and decreases the
@@ -94,16 +104,11 @@ namespace AIO
         }
 
         /// <summary>
-        /// The <see cref="EditorGUIUtility.labelWidth"/> from before <see cref="BeginTightLabel"/>.
-        /// </summary>
-        private static float _TightLabelWidth;
-
-        /// <summary>
         /// Stores the <see cref="EditorGUIUtility.labelWidth"/> and changes it to the exact width of the `label`.
         /// </summary>
         public static string BeginTightLabel(string label)
         {
-            _TightLabelWidth = EditorGUIUtility.labelWidth;
+            _TightLabelWidth            = EditorGUIUtility.labelWidth;
             EditorGUIUtility.labelWidth = CalculateLabelWidth(label) + EditorGUI.indentLevel * IndentSize;
             return GetNarrowText(label);
         }
@@ -128,7 +133,7 @@ namespace AIO
                 return text;
 
             if (_NarrowTextCache == null)
-                _NarrowTextCache = new ConversionCache<string, string>((str) => str.Replace(" ", ""));
+                _NarrowTextCache = new ConversionCache<string, string>(str => str.Replace(" ", ""));
 
             return _NarrowTextCache.Convert(text);
         }
@@ -146,8 +151,9 @@ namespace AIO
         /// <summary>
         /// Invokes `onDrop` if the <see cref="Event.current"/> is a drag and drop event inside the `dropArea`.
         /// </summary>
-        public static void HandleDragAndDrop<T>(Rect dropArea, Func<T, bool> validate, Action<T> onDrop,
-            DragAndDropVisualMode mode = DragAndDropVisualMode.Link) where T : class
+        public static void HandleDragAndDrop<T>(Rect                  dropArea, Func<T, bool> validate, Action<T> onDrop,
+                                                DragAndDropVisualMode mode = DragAndDropVisualMode.Link)
+        where T : class
         {
             if (!dropArea.Contains(Event.current.mousePosition))
                 return;
@@ -173,11 +179,12 @@ namespace AIO
         /// <summary>
         /// Updates the <see cref="DragAndDrop.visualMode"/> or calls `onDrop` for each of the `objects`.
         /// </summary>
-        private static void TryDrop<T>(IEnumerable objects,
-            Func<T, bool> validate,
-            Action<T> onDrop,
-            bool isDrop,
-            DragAndDropVisualMode mode) where T : class
+        private static void TryDrop<T>(IEnumerable           objects,
+                                       Func<T, bool>         validate,
+                                       Action<T>             onDrop,
+                                       bool                  isDrop,
+                                       DragAndDropVisualMode mode)
+        where T : class
         {
             if (objects == null)
                 return;
@@ -197,11 +204,9 @@ namespace AIO
                         DragAndDrop.visualMode = mode;
                         break;
                     }
-                    else
-                    {
-                        onDrop(t);
-                        droppedAny = true;
-                    }
+
+                    onDrop(t);
+                    droppedAny = true;
                 }
             }
 
@@ -223,17 +228,17 @@ namespace AIO
                     return GUILayoutUtility.GetRect(0, LineHeight);
 
                 case SpacingMode.Before:
-                    rect = GUILayoutUtility.GetRect(0, LineHeight + StandardSpacing);
+                    rect      =  GUILayoutUtility.GetRect(0, LineHeight + StandardSpacing);
                     rect.yMin += StandardSpacing;
                     return rect;
 
                 case SpacingMode.After:
-                    rect = GUILayoutUtility.GetRect(0, LineHeight + StandardSpacing);
+                    rect      =  GUILayoutUtility.GetRect(0, LineHeight + StandardSpacing);
                     rect.yMax -= StandardSpacing;
                     return rect;
 
                 case SpacingMode.BeforeAndAfter:
-                    rect = GUILayoutUtility.GetRect(0, LineHeight + StandardSpacing * 2);
+                    rect      =  GUILayoutUtility.GetRect(0, LineHeight + StandardSpacing * 2);
                     rect.yMin += StandardSpacing;
                     rect.yMax -= StandardSpacing;
                     return rect;

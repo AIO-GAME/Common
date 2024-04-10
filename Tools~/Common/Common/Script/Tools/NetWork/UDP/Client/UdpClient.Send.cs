@@ -1,12 +1,10 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-08
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Net;
 using System.Net.Sockets;
+
+#endregion
 
 namespace AIO.Net
 {
@@ -21,15 +19,13 @@ namespace AIO.Net
             try
             {
                 // Async write with the write handler
-                Sending = true;
+                Sending                     = true;
                 SendEventArg.RemoteEndPoint = SendEndpoint;
                 SendEventArg.SetBuffer(SendNetBuffer.Arrays, 0, SendNetBuffer.Count);
                 if (!Socket.SendToAsync(SendEventArg))
                     ProcessSendTo(SendEventArg);
             }
-            catch (ObjectDisposedException)
-            {
-            }
+            catch (ObjectDisposedException) { }
         }
 
         /// <inheritdoc />

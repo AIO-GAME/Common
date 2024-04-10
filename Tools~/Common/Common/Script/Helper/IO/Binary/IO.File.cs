@@ -1,14 +1,9 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
-
-
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -28,10 +23,12 @@ namespace AIO
             public static bool WriteFile(
                 in string Path,
                 in byte[] Bytes,
-                in bool Concat = false)
+                in bool   Concat = false)
             {
                 return Write(Path, Bytes, 0, Bytes.Length, Concat);
             }
         }
+
+        #endregion
     }
 }

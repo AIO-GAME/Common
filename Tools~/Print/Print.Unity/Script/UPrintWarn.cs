@@ -1,6 +1,10 @@
-﻿using System.Collections;
+﻿#region
+
+using System.Collections;
 using System.Diagnostics;
 using AIO.Internal;
+
+#endregion
 
 namespace UnityEngine
 {
@@ -57,7 +61,8 @@ namespace UnityEngine
         /// 警告
         /// </summary>
         [Conditional(MACRO_DEFINITION), DebuggerHidden, DebuggerNonUserCode]
-        public static void Warn<T>(in T objs) where T : IEnumerable
+        public static void Warn<T>(in T objs)
+        where T : IEnumerable
         {
             if (IsNotOut || NoStatus(WARNING)) return;
             if (objs == null)

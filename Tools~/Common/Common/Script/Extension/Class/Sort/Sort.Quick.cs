@@ -1,11 +1,9 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2024-03-27
-|*|E-Mail:     |*| xinansky99@gmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -14,16 +12,18 @@ namespace AIO
         #region 快速排序
 
         /// <summary>
-        /// 快速排序
+        ///     快速排序
         /// </summary>
-        private static IList<T> SortQuick<T>(IList<T> array) where T : IComparable
+        private static IList<T> SortQuick<T>(IList<T> array)
+        where T : IComparable
         {
             if (array.Count < 2) return array;
             Quick(array, 0, array.Count - 1);
             return array;
         }
 
-        private static void Quick<T>(in IList<T> a, in int l, in int r) where T : IComparable
+        private static void Quick<T>(in IList<T> a, in int l, in int r)
+        where T : IComparable
         {
             if (l < r)
             {
@@ -45,7 +45,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 快速排序
+        ///     快速排序
         /// </summary>
         private static IList<T> SortQuick<T>(IList<T> array, in Func<T, T, int> Comparer)
         {

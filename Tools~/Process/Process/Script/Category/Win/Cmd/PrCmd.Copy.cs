@@ -2,6 +2,8 @@
 {
     public partial class PrCmd
     {
+        #region Nested type: Copy
+
         /// <summary>
         /// 复制
         /// </summary>
@@ -82,5 +84,7 @@
                 return Create().Input(string.Format("{0} \"{1}\" /A /D \"{2}\" /V /Y /L /Z", CMD_Copy, source.Replace('/', '\\'), target.Replace('/', '\\')));
             }
         }
+
+        #endregion
     }
 }

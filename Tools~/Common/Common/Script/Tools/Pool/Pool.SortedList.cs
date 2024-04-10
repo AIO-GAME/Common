@@ -1,10 +1,16 @@
+#region
+
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
     public partial class Pool
     {
         private static readonly object @lock = new object();
+
+        #region Nested type: ASortedList
 
         /// <summary>
         /// Dictionary 对象池
@@ -24,10 +30,7 @@ namespace AIO
             {
                 lock (@lock)
                 {
-                    if (free.Count == 0)
-                    {
-                        free.Push(new SortedList<K, V>());
-                    }
+                    if (free.Count == 0) free.Push(new SortedList<K, V>());
 
                     var array = free.Pop();
 
@@ -50,6 +53,8 @@ namespace AIO
                 }
             }
         }
+
+        #endregion
     }
 
     public static partial class PoolExtend

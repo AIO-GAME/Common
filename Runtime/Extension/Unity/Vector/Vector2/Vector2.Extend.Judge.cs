@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEngine
 {
@@ -35,7 +39,7 @@ namespace AIO.UEngine
         Right = 3,
 
         /// <summary> 右上 </summary>
-        RightUp = 4,
+        RightUp = 4
     }
 
     partial class VectorExtend
@@ -53,8 +57,8 @@ namespace AIO.UEngine
         {
             // 获取宽 高
             var X = V1.x - target.x;
-            var Y = (target.y - V1.y);
-            var Cos = (Y / Math.Sqrt(X * X + Y * Y)); // Cos角度
+            var Y = target.y - V1.y;
+            var Cos = Y / Math.Sqrt(X * X + Y * Y);              // Cos角度
             if (Cos > 0) return Cos >= Math.Cos(90 - Value / 2); // 左半轴角度
             if (Cos < 0) return Cos <= Math.Cos(90 + Value / 2); // 右半轴角度
             return true;
@@ -77,7 +81,7 @@ namespace AIO.UEngine
         public static Direction2D JudgeDirection(this Vector2 V1, in Vector2 target)
         {
             if (V1 == target) return Direction2D.Overlap;
-            var Dir = (target - V1).normalized; //位置差，方向
+            var Dir = (target - V1).normalized;        //位置差，方向
             var YDot = Vector2.Dot(Vector2.down, Dir); //点乘判断前后：
             var XDot = Vector2.Dot(Vector2.left, Dir); //点乘判断左右：
             // dot > 0 方向基本相同，夹角在0°到90°之间，< 0 方向基本相反，夹角在90°到180°之间 = 0 正交，相互垂直
@@ -85,11 +89,11 @@ namespace AIO.UEngine
             var weight = 0;
 
             // 点乘(0,-1) 方向为上 点乘(0,1) 方向为下
-            if (YDot < 0) weight += 1;
+            if (YDot < 0) weight      += 1;
             else if (YDot > 0) weight -= 1;
 
             // 点乘(-1,0) 方向为右 点乘(1,0) 方向为左
-            if (XDot < 0) weight += 3;
+            if (XDot < 0) weight      += 3;
             else if (XDot > 0) weight -= 3;
 
             return (Direction2D)weight;
@@ -104,8 +108,8 @@ namespace AIO.UEngine
         {
             var Dot = Vector2.Distance(Vector2.left, (target - V1).normalized);
             if (Dot < 0) return 1;
-            else if (Dot > 0) return -1;
-            else return 0;
+            if (Dot > 0) return -1;
+            return 0;
         }
 
         /// <summary>

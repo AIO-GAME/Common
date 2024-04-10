@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEngine
 {
@@ -69,10 +73,7 @@ namespace AIO.UEngine
 
                 var split = str.ToString().Split('.');
                 var index = new int[split.Length];
-                for (var i = split.Length - 1; i >= 0; i--)
-                {
-                    index[split.Length - i - 1] = int.Parse(split[i]);
-                }
+                for (var i = split.Length - 1; i >= 0; i--) index[split.Length - i - 1] = int.Parse(split[i]);
 
                 return index;
             }
@@ -83,14 +84,12 @@ namespace AIO.UEngine
         /// <summary>
         /// 获取全部子物体相同组件
         /// </summary>
-        public static List<T> GetChildesComponents<T>(this Transform trans) where T : Component
+        public static List<T> GetChildesComponents<T>(this Transform trans)
+        where T : Component
         {
             if (trans.childCount <= 0) return new List<T>();
             var list = new List<T>();
-            for (var i = 0; i < trans.childCount; i++)
-            {
-                list.AddRange(trans.GetChild(i).GetComponents<T>());
-            }
+            for (var i = 0; i < trans.childCount; i++) list.AddRange(trans.GetChild(i).GetComponents<T>());
 
             return list;
         }

@@ -48,6 +48,6 @@
         /// <summary>
         /// 角度为-180度。
         /// </summary>
-        DegreesS180 = -180,
+        DegreesS180 = -180
     }
 }

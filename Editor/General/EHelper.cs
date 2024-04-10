@@ -1,13 +1,10 @@
-/*|============|*|
-|*|Author:     |*| xi nan
-|*|Date:       |*| 2023-06-04
-|*|E-Mail:     |*| 1398581458@qq.com
-|*|============|*/
+#region
 
 using System;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Rendering;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -16,6 +13,18 @@ namespace AIO.UEditor
     /// </summary>
     public static partial class EHelper
     {
+        private const string kFirstEnterUnity = "FirstEnterUnity"; //是否首次进入unity
+
+        public static bool FirstEnterUnity
+        {
+            get
+            {
+                if (!SessionState.GetBool(kFirstEnterUnity, true)) return true;
+                SessionState.SetBool(kFirstEnterUnity, false);
+                return false;
+            }
+        }
+
         /// <summary>
         /// 是否为命令行模式
         /// </summary>
@@ -32,18 +41,6 @@ namespace AIO.UEditor
 #endif
         }
 
-        private const string kFirstEnterUnity = "FirstEnterUnity"; //是否首次进入unity
-
-        public static bool FirstEnterUnity
-        {
-            get
-            {
-                if (!SessionState.GetBool(kFirstEnterUnity, true)) return true;
-                SessionState.SetBool(kFirstEnterUnity, false);
-                return false;
-            }
-        }
-
         public static void DisplayProgressBar(string title, string info, float progress)
         {
             if (IsCMD()) Console.WriteLine($"[{title}/{progress * 100:00}] {info}");
@@ -52,7 +49,10 @@ namespace AIO.UEditor
 
         public static void DisplayDialog(string title, string info, string ok)
         {
-            if (IsCMD()) Console.WriteLine($"[{title}] {info}");
+            if (IsCMD())
+            {
+                Console.WriteLine($"[{title}] {info}");
+            }
             else
             {
                 EditorUtility.ClearProgressBar();

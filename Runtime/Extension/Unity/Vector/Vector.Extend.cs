@@ -3,7 +3,5 @@
     /// <summary>
     /// Vector 扩展
     /// </summary>
-    public static partial class VectorExtend
-    {
-    }
+    public static partial class VectorExtend { }
 }

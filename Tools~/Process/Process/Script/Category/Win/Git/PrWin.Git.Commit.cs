@@ -4,17 +4,25 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+#endregion
+
 namespace AIO
 {
     public partial class PrWin
     {
+        #region Nested type: Git
+
         public partial class Git
         {
+            #region Nested type: Commit
+
             /// <summary>
             /// 提交命令
             /// </summary>
@@ -43,14 +51,14 @@ namespace AIO
                         if (!Directory.Exists(target))
                         {
                             str.AppendFormat("\n @echo Error:{0} \n",
-                                new FileNotFoundException(nameof(target), target).Message).AppendLine();
+                                             new FileNotFoundException(nameof(target), target).Message).AppendLine();
                         }
                         else
                         {
                             str.AppendLine(string.Format("@echo {0}", Path.GetFileName(target)));
                             str.AppendLine(string.Format("@cd /d \"{0}\"", target));
                             str.AppendLine(string.Format("@set commitArg={0}",
-                                item2 ?? "default submission information"));
+                                                         item2 ?? "default submission information"));
                             str.AppendLine("@git commit -m \"!commitArg!\"");
                         }
 
@@ -73,14 +81,14 @@ namespace AIO
                     if (targets.Count == 0) return new PrEmpty().Execute();
 
                     var str = new StringBuilder();
-                    str.AppendLine($"@set /p commitArg=请输入提交信息 && @echo.");
+                    str.AppendLine("@set /p commitArg=请输入提交信息 && @echo.");
                     foreach (var target in targets)
                     {
                         str.AppendLine(LINE_TOP);
                         if (!Directory.Exists(target))
                         {
                             str.AppendFormat("\n @echo Error:{0} \n",
-                                new FileNotFoundException(nameof(target), target).Message).AppendLine();
+                                             new FileNotFoundException(nameof(target), target).Message).AppendLine();
                         }
                         else
                         {
@@ -104,7 +112,7 @@ namespace AIO
                 /// <exception cref="ArgumentNullException">targets is null<code><see cref="ArgumentNullException"/></code></exception>
                 public static IExecutor Execute(string target, bool quit = true)
                 {
-                    return Execute(new string[] { target }, quit);
+                    return Execute(new[] { target }, quit);
                 }
 
                 /// <summary>
@@ -119,9 +127,13 @@ namespace AIO
                 /// <exception cref="ArgumentNullException">targets is null<code><see cref="ArgumentNullException"/></code></exception>
                 public static IExecutor Execute((string, string) target, bool quit = true)
                 {
-                    return Execute(new (string, string)[] { target }, quit);
+                    return Execute(new[] { target }, quit);
                 }
             }
+
+            #endregion
         }
+
+        #endregion
     }
 }

@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
-     partial class ExtendIList
+    partial class ExtendIList
     {
         /// <summary>
         /// 从指定字节数组中 获取多个字节转化为大写16进制字符串

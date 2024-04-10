@@ -4,9 +4,14 @@
 
 |||✩ - - - - - |*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using UnityEditor;
+
+#endregion
+
 #if UNITY_2023_1_OR_NEWER
 using UnityEditor.Build;
 #endif
@@ -15,6 +20,8 @@ namespace AIO.UEditor
 {
     public partial class EHelper
     {
+        #region Nested type: Setting
+
         /// <summary>
         /// 设置功能函数
         /// </summary>
@@ -33,8 +40,8 @@ namespace AIO.UEditor
                 return string.IsNullOrEmpty(str) ? Array.Empty<string>() : str.Split(';');
             }
 
-            private static void SetScriptingDefineSymbolsForGroup(BuildTargetGroup buildTargetGroup,
-                IEnumerable<string> verify)
+            private static void SetScriptingDefineSymbolsForGroup(BuildTargetGroup    buildTargetGroup,
+                                                                  IEnumerable<string> verify)
             {
                 var str = string.Join(";", verify);
 #if UNITY_2023_1_OR_NEWER
@@ -75,5 +82,7 @@ namespace AIO.UEditor
                 SetScriptingDefineSymbolsForGroup(buildTargetGroup, verify);
             }
         }
+
+        #endregion
     }
 }

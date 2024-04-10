@@ -1,14 +1,45 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
     [IgnoreConsoleJump]
     public static partial class GELayout
     {
+        private static Color HeaderBorderColor
+        {
+            get
+            {
+                var shade = EditorGUIUtility.isProSkin ? 0.12f : 0.6f;
+                return new Color(shade, shade, shade, 1);
+            }
+        }
+
+        private static Color HeaderNormalColor
+        {
+            get
+            {
+                var shade = EditorGUIUtility.isProSkin ? 62f / 255f : 205f / 255f;
+                return new Color(shade, shade, shade, 1);
+            }
+        }
+
+        private static Color HeaderHoverColor
+        {
+            get
+            {
+                var shade = EditorGUIUtility.isProSkin ? 70f / 255f : 215f / 255f;
+                return new Color(shade, shade, shade, 1);
+            }
+        }
+
         #region List
 
         /// <summary>
@@ -24,8 +55,8 @@ namespace AIO.UEditor
         /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle"/></param>
         /// <returns>true:呈现子对象,false:隐藏<see cref="bool"/></returns>
         private static bool FieldList<T>(GTContent label,
-            IList<T> array, bool foldout, Action tips, Action<int> showFunc, Func<T> addFunc,
-            GUIStyle labelStyle, GUIStyle bgStyle)
+                                         IList<T>  array,      bool     foldout, Action tips, Action<int> showFunc, Func<T> addFunc,
+                                         GUIStyle  labelStyle, GUIStyle bgStyle)
         {
             if (showFunc is null)
             {
@@ -40,9 +71,8 @@ namespace AIO.UEditor
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField(label.Content, labelStyle);
                 if (addFunc != null)
-                {
-                    if (GUILayout.Button("+", GUILayout.Width(20))) array.Add(addFunc.Invoke());
-                }
+                    if (GUILayout.Button("+", GUILayout.Width(20)))
+                        array.Add(addFunc.Invoke());
 
                 EditorGUILayout.EndHorizontal();
 
@@ -69,8 +99,8 @@ namespace AIO.UEditor
         }
 
         private static void FieldList<T>(GTContent label,
-            IList<T> array, Action tips, Action<int> showFunc, Func<T> addFunc,
-            GUIStyle labelStyle, GUIStyle bgStyle)
+                                         IList<T>  array,      Action   tips, Action<int> showFunc, Func<T> addFunc,
+                                         GUIStyle  labelStyle, GUIStyle bgStyle)
         {
             if (showFunc is null)
             {
@@ -84,9 +114,8 @@ namespace AIO.UEditor
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField(label, labelStyle ?? GUIStyle.none);
             if (addFunc != null)
-            {
-                if (GUILayout.Button("+", GUILayout.Width(20))) array.Add(addFunc.Invoke());
-            }
+                if (GUILayout.Button("+", GUILayout.Width(20)))
+                    array.Add(addFunc.Invoke());
 
             EditorGUILayout.EndHorizontal();
 
@@ -165,32 +194,5 @@ namespace AIO.UEditor
 #endif
 
         #endregion
-
-        private static Color HeaderBorderColor
-        {
-            get
-            {
-                var shade = EditorGUIUtility.isProSkin ? 0.12f : 0.6f;
-                return new Color(shade, shade, shade, 1);
-            }
-        }
-
-        private static Color HeaderNormalColor
-        {
-            get
-            {
-                var shade = EditorGUIUtility.isProSkin ? 62f / 255f : 205f / 255f;
-                return new Color(shade, shade, shade, 1);
-            }
-        }
-
-        private static Color HeaderHoverColor
-        {
-            get
-            {
-                var shade = EditorGUIUtility.isProSkin ? 70f / 255f : 215f / 255f;
-                return new Color(shade, shade, shade, 1);
-            }
-        }
     }
 }

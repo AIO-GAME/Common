@@ -1,10 +1,4 @@
-﻿// /*|============|*|
-// |*|Author:     |*| Star fire
-// |*|Date:       |*| 2023-12-07
-// |*|E-Mail:     |*| xinansky99@foxmail.com
-// |*|============|*/
-//
-// using System;
+﻿// using System;
 // using System.Collections.Generic;
 // using System.Reflection;
 // using UnityEditor;
@@ -1740,3 +1734,4 @@
 //         #endregion
 //     }
 // }
+

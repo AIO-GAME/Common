@@ -4,15 +4,21 @@
 
 |||✩ - - - - - |*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+#endregion
+
 namespace AIO
 {
     public partial class PrMac
     {
+        #region Nested type: Git
+
         public partial class Git
         {
             /// <summary>
@@ -25,7 +31,7 @@ namespace AIO
             /// <returns></returns>
             public static IExecutor Upload(string target, bool inputCommit = false, bool inputOrigin = false, bool quit = true)
             {
-                return Upload(new string[] { target }, inputCommit, inputOrigin, quit);
+                return Upload(new[] { target }, inputCommit, inputOrigin, quit);
             }
 
             /// <summary>
@@ -50,7 +56,10 @@ namespace AIO
                     str.AppendLine("TIP=\"\"");
                     str.AppendLine("read -p \"$TIP\" commitArg");
                 }
-                else str.AppendLine("commitArg=default submission information");
+                else
+                {
+                    str.AppendLine("commitArg=default submission information");
+                }
 
                 foreach (var target in targets)
                 {
@@ -73,7 +82,10 @@ namespace AIO
                             str.AppendLine("read -p \"$TIP\" originArg");
                             str.AppendLine("git push -u origin \"${originArg}\"");
                         }
-                        else str.AppendLine("git push");
+                        else
+                        {
+                            str.AppendLine("git push");
+                        }
                     }
 
                     str.AppendLine(LINE_BOTTOM);
@@ -82,5 +94,7 @@ namespace AIO
                 return Execute(str, quit);
             }
         }
+
+        #endregion
     }
 }

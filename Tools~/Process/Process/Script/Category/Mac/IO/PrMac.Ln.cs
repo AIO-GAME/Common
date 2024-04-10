@@ -2,6 +2,8 @@
 {
     public partial class PrMac
     {
+        #region Nested type: Ln
+
         // 指令名称 : ln
         //     使用权限 : 所有使用者
         //     使用方式 : ln [options] source dist，其中 option 的格式为 :
@@ -68,5 +70,7 @@
                 return Create(CMD_Ln, args);
             }
         }
+
+        #endregion
     }
 }

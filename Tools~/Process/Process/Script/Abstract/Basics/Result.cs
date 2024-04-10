@@ -4,9 +4,13 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Diagnostics;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
@@ -27,34 +31,36 @@ namespace AIO
 
         internal const string NULL = "NULL";
 
+        internal Result(Process process)
+        {
+            Pr          = process;
+            StdOut      = new StringBuilder();
+            StdError    = new StringBuilder();
+            StdALL      = new StringBuilder();
+            StdExited   = new StringBuilder();
+            StdDisposed = new StringBuilder();
+        }
+
         /// <summary>
         /// Process
         /// </summary>
         protected Process Pr { get; }
 
-        internal Result(Process process)
-        {
-            Pr = process;
-            StdOut = new StringBuilder();
-            StdError = new StringBuilder();
-            StdALL = new StringBuilder();
-            StdExited = new StringBuilder();
-            StdDisposed = new StringBuilder();
-        }
+        #region IResultInternal Members
 
         /// <inheritdoc/>
         public virtual IResult Finish()
         {
             StdALL.AppendFormat(FORMAT_ALL,
-                ExitCode,
-                Pr.StartInfo.FileName,
-                Pr.StartInfo.Arguments,
-                Pr.StartInfo.WorkingDirectory,
-                NULL,
-                StdOut,
-                StdError,
-                StdExited,
-                StdDisposed);
+                                ExitCode,
+                                Pr.StartInfo.FileName,
+                                Pr.StartInfo.Arguments,
+                                Pr.StartInfo.WorkingDirectory,
+                                NULL,
+                                StdOut,
+                                StdError,
+                                StdExited,
+                                StdDisposed);
             return this;
         }
 
@@ -63,15 +69,15 @@ namespace AIO
         {
             if (string.IsNullOrEmpty(messages)) return Finish();
             StdALL.AppendFormat(FORMAT_ALL,
-                ExitCode,
-                Pr.StartInfo.FileName,
-                Pr.StartInfo.Arguments,
-                Pr.StartInfo.WorkingDirectory,
-                messages.Substring(0, messages.Length - 1),
-                StdOut,
-                StdError,
-                StdExited,
-                StdDisposed);
+                                ExitCode,
+                                Pr.StartInfo.FileName,
+                                Pr.StartInfo.Arguments,
+                                Pr.StartInfo.WorkingDirectory,
+                                messages.Substring(0, messages.Length - 1),
+                                StdOut,
+                                StdError,
+                                StdExited,
+                                StdDisposed);
             return this;
         }
 
@@ -80,10 +86,14 @@ namespace AIO
         {
             if (Next == null)
             {
-                Next = result;
+                Next        = result;
                 result.Last = this;
             }
-            else Next.Link(result);
+            else
+            {
+                Next.Link(result);
+            }
+
             return this;
         }
 
@@ -92,6 +102,8 @@ namespace AIO
         {
             Pr?.Dispose();
         }
+
+        #endregion
 
         #region 接口
 

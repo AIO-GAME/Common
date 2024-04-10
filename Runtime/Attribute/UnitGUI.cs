@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
@@ -11,22 +15,69 @@ namespace AIO
     {
         // The "g" format gives a lower case 'e' for exponentials instead of upper case 'E'.
         private static readonly ConversionCache<float, string>
-            FloatToString = new ConversionCache<float, string>((value) => $"{value:g}");
+            FloatToString = new ConversionCache<float, string>(value => $"{value:g}");
 
         private static readonly ConversionCache<double, string>
-            DoubleToString = new ConversionCache<double, string>((value) => $"{value:g}");
+            DoubleToString = new ConversionCache<double, string>(value => $"{value:g}");
 
         private static readonly ConversionCache<int, string>
-            IntToString = new ConversionCache<int, string>((value) => $"{value:g}");
+            IntToString = new ConversionCache<int, string>(value => $"{value:g}");
 
         /// <summary>[Animancer Extension]
         /// Calls <see cref="float.ToString(string)"/> using <c>"g"</c> as the format and caches the result.
         /// </summary>
-        public static string ToStringCached(this float value) => FloatToString.Convert(value);
+        public static string ToStringCached(this float value)
+        {
+            return FloatToString.Convert(value);
+        }
 
-        public static string ToStringCached(this double value) => DoubleToString.Convert(value);
+        public static string ToStringCached(this double value)
+        {
+            return DoubleToString.Convert(value);
+        }
 
-        public static string ToStringCached(this int value) => IntToString.Convert(value);
+        public static string ToStringCached(this int value)
+        {
+            return IntToString.Convert(value);
+        }
+
+        /// <summary>
+        /// Returns true and uses the current event if it is <see cref="EventType.MouseUp"/> inside the specified
+        /// `area`.
+        /// </summary>
+        public static bool TryUseClickEvent(Rect area, int button = -1)
+        {
+            var currentEvent = Event.current;
+            if (currentEvent.type == EventType.MouseUp &&
+                (button < 0 || currentEvent.button == button) &&
+                area.Contains(currentEvent.mousePosition))
+            {
+                GUI.changed = true;
+                currentEvent.Use();
+
+                if (currentEvent.button == 2)
+                    Deselect();
+
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Returns true and uses the current event if it is <see cref="EventType.MouseUp"/> inside the last GUI Layout
+        /// <see cref="Rect"/> that was drawn.
+        /// </summary>
+        public static bool TryUseClickEventInLastRect(int button = -1)
+        {
+            return TryUseClickEvent(GUILayoutUtility.GetLastRect(), button);
+        }
+
+        /// <summary>Deselects any selected IMGUI control.</summary>
+        public static void Deselect()
+        {
+            GUIUtility.keyboardControl = 0;
+        }
 
         #region Standard Values
 
@@ -55,7 +106,7 @@ namespace AIO
         {
             get
             {
-                if (Math.Abs(_ToggleWidth - (-1)) < 0)
+                if (Math.Abs(_ToggleWidth - -1) < 0)
                 {
                     GUI.skin.toggle.CalcMinMaxWidth(GUIContent.none, out _, out var maxWidth);
                     _ToggleWidth = Mathf.Ceil(maxWidth);
@@ -118,8 +169,8 @@ namespace AIO
         /// Divides the given `area` such that the fields associated with both labels will have equal space
         /// remaining after the labels themselves.
         /// </summary>
-        public static void SplitHorizontally(Rect area, string label0, string label1,
-            out float width0, out float width1, out Rect rect0, out Rect rect1)
+        public static void SplitHorizontally(Rect      area,   string    label0, string   label1,
+                                             out float width0, out float width1, out Rect rect0, out Rect rect1)
         {
             width0 = CalculateLabelWidth(label0);
             width1 = CalculateLabelWidth(label1);
@@ -130,7 +181,7 @@ namespace AIO
 
             var remainingWidth = area.width - width0 - width1 - Padding;
             rect0.width = width0 + remainingWidth * 0.5f;
-            rect1.xMin = rect0.xMax + Padding;
+            rect1.xMin  = rect0.xMax + Padding;
         }
 
 
@@ -138,14 +189,17 @@ namespace AIO
         /// Creates a <see cref="ConversionCache{TKey, TValue}"/> for calculating the GUI width occupied by text using the
         /// specified `style`.
         /// </summary>
-        public static ConversionCache<string, float> CreateWidthCache(GUIStyle style) => new ConversionCache<string, float>(text =>
+        public static ConversionCache<string, float> CreateWidthCache(GUIStyle style)
         {
-            var content = new GUIContent(text);
-            style.CalcMinMaxWidth(content, out _, out var maxWidth);
-            var width = Mathf.Ceil(maxWidth);
-            content.text = null;
-            return width;
-        });
+            return new ConversionCache<string, float>(text =>
+            {
+                var content = new GUIContent(text);
+                style.CalcMinMaxWidth(content, out _, out var maxWidth);
+                var width = Mathf.Ceil(maxWidth);
+                content.text = null;
+                return width;
+            });
+        }
 
 
         private static ConversionCache<string, float> _LabelWidthCache;
@@ -167,7 +221,7 @@ namespace AIO
         #region Labels
 
         private static GUIStyle _WeightLabelStyle;
-        private static float _WeightLabelWidth = -1;
+        private static float    _WeightLabelWidth = -1;
 
         /// <summary>
         /// Draws a label showing the `weight` aligned to the right side of the `area` and reduces its
@@ -187,11 +241,11 @@ namespace AIO
                 var content = new GUIContent("0.0");
                 _WeightLabelStyle.CalcMinMaxWidth(content, out _, out var maxWidth);
                 _WeightLabelWidth = Mathf.Ceil(maxWidth);
-                content.text = null;
+                content.text      = null;
             }
 
             _WeightLabelStyle.normal.textColor = Color.Lerp(Color.grey, TextColor, weight);
-            _WeightLabelStyle.fontStyle = isExact ? FontStyle.Normal : FontStyle.Italic;
+            _WeightLabelStyle.fontStyle        = isExact ? FontStyle.Normal : FontStyle.Italic;
 
             var weightArea = StealFromRight(ref area, _WeightLabelWidth);
 
@@ -227,7 +281,7 @@ namespace AIO
                 return "???";
 
             if (_ShortWeightCache == null)
-                _ShortWeightCache = new ConversionCache<float, string>((value) =>
+                _ShortWeightCache = new ConversionCache<float, string>(value =>
                 {
                     if (value < -9.5f) return $"{value:F0}";
                     if (value < -0.5f) return $"{value:F0}.";
@@ -246,37 +300,5 @@ namespace AIO
         private static ConversionCache<string, string> _NarrowTextCache;
 
         #endregion
-
-        /// <summary>
-        /// Returns true and uses the current event if it is <see cref="EventType.MouseUp"/> inside the specified
-        /// `area`.
-        /// </summary>
-        public static bool TryUseClickEvent(Rect area, int button = -1)
-        {
-            var currentEvent = Event.current;
-            if (currentEvent.type == EventType.MouseUp &&
-                (button < 0 || currentEvent.button == button) &&
-                area.Contains(currentEvent.mousePosition))
-            {
-                GUI.changed = true;
-                currentEvent.Use();
-
-                if (currentEvent.button == 2)
-                    Deselect();
-
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Returns true and uses the current event if it is <see cref="EventType.MouseUp"/> inside the last GUI Layout
-        /// <see cref="Rect"/> that was drawn.
-        /// </summary>
-        public static bool TryUseClickEventInLastRect(int button = -1) => TryUseClickEvent(GUILayoutUtility.GetLastRect(), button);
-
-        /// <summary>Deselects any selected IMGUI control.</summary>
-        public static void Deselect() => GUIUtility.keyboardControl = 0;
     }
 }

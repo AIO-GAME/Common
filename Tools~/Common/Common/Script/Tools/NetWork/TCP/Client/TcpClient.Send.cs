@@ -1,23 +1,126 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-06
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Net.Sockets;
 using System.Threading;
 
+#endregion
+
 namespace AIO.Net
 {
     public partial class TcpClient
     {
-        private readonly object SendLock = new object();
-        private bool Sending;
-        private NetBuffer _sendNetBufferMain;
-        private NetBuffer _sendNetBufferFlush;
-        private SocketAsyncEventArgs SendEventArg;
-        private long SendBufferFlushOffset;
+        private readonly object               SendLock = new object();
+        private          NetBuffer            _sendNetBufferFlush;
+        private          NetBuffer            _sendNetBufferMain;
+        private          long                 SendBufferFlushOffset;
+        private          SocketAsyncEventArgs SendEventArg;
+        private          bool                 Sending;
+
+
+        /// <summary>
+        /// Try to send pending data
+        /// </summary>
+        private void TrySend()
+        {
+            if (!IsConnected) return;
+
+            var empty = false;
+            var process = true;
+
+            while (process)
+            {
+                process = false;
+
+                lock (SendLock)
+                {
+                    // Is previous socket send in progress?
+                    if (_sendNetBufferFlush.IsEmpty)
+                    {
+                        // Swap flush and main buffers
+                        _sendNetBufferFlush   = Interlocked.Exchange(ref _sendNetBufferMain, _sendNetBufferFlush);
+                        SendBufferFlushOffset = 0;
+
+                        // Update statistic
+                        BytesPending =  0;
+                        BytesSending += _sendNetBufferFlush.Count;
+
+                        // Check if the flush buffer is empty
+                        if (_sendNetBufferFlush.IsEmpty)
+                        {
+                            // Need to call empty send buffer handler
+                            empty = true;
+
+                            // End sending process
+                            Sending = false;
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
+                // Call the empty send buffer handler
+                if (empty)
+                {
+                    OnEmpty();
+                    return;
+                }
+
+                try
+                {
+                    // Async write with the write handler
+                    SendEventArg.SetBuffer(_sendNetBufferFlush.Arrays, (int)SendBufferFlushOffset,
+                                           (int)(_sendNetBufferFlush.Count - SendBufferFlushOffset));
+                    if (!Socket.SendAsync(SendEventArg))
+                        process = ProcessSend(SendEventArg);
+                }
+                catch (ObjectDisposedException) { }
+            }
+        }
+
+        /// <summary>
+        /// This method is invoked when an asynchronous send operation completes
+        /// </summary>
+        private bool ProcessSend(SocketAsyncEventArgs e)
+        {
+            if (!IsConnected) return false;
+
+            var size = e.BytesTransferred;
+
+            // Send some data to the server
+            if (size > 0)
+            {
+                // Update statistic
+                BytesSending -= size;
+                BytesSent    += size;
+
+                // Increase the flush buffer offset
+                SendBufferFlushOffset += size;
+
+                // Successfully send the whole flush buffer
+                if (SendBufferFlushOffset == _sendNetBufferFlush.Count)
+                {
+                    // Clear the flush buffer
+                    _sendNetBufferFlush.Clear();
+                    SendBufferFlushOffset = 0;
+                }
+
+                // Call the buffer sent handler
+                OnSent(size, BytesPending + BytesSending);
+            }
+
+            // Try to send again if the client is valid
+            if (e.SocketError == SocketError.Success)
+            {
+                return true;
+            }
+
+            SendError(e.SocketError);
+            DisconnectAsync();
+            return false;
+        }
 
         #region Send Synchronous
 
@@ -171,110 +274,5 @@ namespace AIO.Net
         }
 
         #endregion
-
-
-        /// <summary>
-        /// Try to send pending data
-        /// </summary>
-        private void TrySend()
-        {
-            if (!IsConnected) return;
-
-            var empty = false;
-            var process = true;
-
-            while (process)
-            {
-                process = false;
-
-                lock (SendLock)
-                {
-                    // Is previous socket send in progress?
-                    if (_sendNetBufferFlush.IsEmpty)
-                    {
-                        // Swap flush and main buffers
-                        _sendNetBufferFlush = Interlocked.Exchange(ref _sendNetBufferMain, _sendNetBufferFlush);
-                        SendBufferFlushOffset = 0;
-
-                        // Update statistic
-                        BytesPending = 0;
-                        BytesSending += _sendNetBufferFlush.Count;
-
-                        // Check if the flush buffer is empty
-                        if (_sendNetBufferFlush.IsEmpty)
-                        {
-                            // Need to call empty send buffer handler
-                            empty = true;
-
-                            // End sending process
-                            Sending = false;
-                        }
-                    }
-                    else
-                        return;
-                }
-
-                // Call the empty send buffer handler
-                if (empty)
-                {
-                    OnEmpty();
-                    return;
-                }
-
-                try
-                {
-                    // Async write with the write handler
-                    SendEventArg.SetBuffer(_sendNetBufferFlush.Arrays, (int)SendBufferFlushOffset,
-                        (int)(_sendNetBufferFlush.Count - SendBufferFlushOffset));
-                    if (!Socket.SendAsync(SendEventArg))
-                        process = ProcessSend(SendEventArg);
-                }
-                catch (ObjectDisposedException)
-                {
-                }
-            }
-        }
-
-        /// <summary>
-        /// This method is invoked when an asynchronous send operation completes
-        /// </summary>
-        private bool ProcessSend(SocketAsyncEventArgs e)
-        {
-            if (!IsConnected) return false;
-
-            var size = e.BytesTransferred;
-
-            // Send some data to the server
-            if (size > 0)
-            {
-                // Update statistic
-                BytesSending -= size;
-                BytesSent += size;
-
-                // Increase the flush buffer offset
-                SendBufferFlushOffset += size;
-
-                // Successfully send the whole flush buffer
-                if (SendBufferFlushOffset == _sendNetBufferFlush.Count)
-                {
-                    // Clear the flush buffer
-                    _sendNetBufferFlush.Clear();
-                    SendBufferFlushOffset = 0;
-                }
-
-                // Call the buffer sent handler
-                OnSent(size, BytesPending + BytesSending);
-            }
-
-            // Try to send again if the client is valid
-            if (e.SocketError == SocketError.Success)
-                return true;
-            else
-            {
-                SendError(e.SocketError);
-                DisconnectAsync();
-                return false;
-            }
-        }
     }
 }

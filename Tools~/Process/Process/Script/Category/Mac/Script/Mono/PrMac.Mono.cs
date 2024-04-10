@@ -1,4 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
+using System.IO;
+
+#endregion
 
 namespace AIO
 {
@@ -7,20 +12,25 @@ namespace AIO
     /// </summary>
     public sealed partial class PrMac
     {
+        #region Nested type: Mono
+
         /// <summary>
         /// Mono
         /// </summary>
-        public static partial class Mono
+        public static class Mono
         {
             static Mono()
             {
                 var result = Which(CMD_Mono).Sync();
-                if (!System.IO.File.Exists(result.StdOut.ToString()))
+                if (!File.Exists(result.StdOut.ToString()))
                 {
                     Console.WriteLine("mono 未安装 程序自动安装中");
                     Brew.Install(CMD_Mono).Sync();
                 }
-                else Console.WriteLine("mono 已安装 不需要重新安装");
+                else
+                {
+                    Console.WriteLine("mono 已安装 不需要重新安装");
+                }
             }
 
             //all:      application handles all roles for the given UTI.
@@ -39,5 +49,7 @@ namespace AIO
                 return Create(CMD_Mono, $"{exe} {string.Join(" ", command)}");
             }
         }
+
+        #endregion
     }
 }

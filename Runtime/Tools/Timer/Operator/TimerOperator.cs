@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
@@ -10,52 +14,6 @@ namespace AIO
     /// </summary>
     public abstract class TimerOperator : ITimerOperator
     {
-        /// <summary>
-        /// 获取新的定时器容器
-        /// </summary>
-        internal static ICollection<T> NewTimerOperator<T>()
-        where T : TimerOperator, new()
-        {
-            var List = Pool.List<T>();
-            foreach (var (allSlot, Uint, Slot) in TimerSystem.TimingUnits)
-            {
-                var operators = Activator.CreateInstance<T>();
-                operators.Index    = List.Count;
-                operators.Unit     = Uint * Slot;
-                operators.SlotUnit = Slot;
-                operators.MaxCount = 2048;
-                operators.Slot     = 0;
-                List.Add(operators);
-            }
-
-            return List;
-        }
-
-        public int Index { get; protected set; }
-
-        public long Unit { get; protected set; }
-
-        public long SlotUnit { get; protected set; }
-
-        public LinkedList<ITimerExecutor> Timers { get; protected set; }
-
-        public List<ITimerExecutor> TimersCache { get; protected set; }
-
-        /// <summary>
-        /// 计算当前瞬间 定时器全部数量
-        /// </summary>
-        public int AllCount { get; internal set; }
-
-        int ITimerOperator.AllCount
-        {
-            get => AllCount;
-            set => AllCount = value;
-        }
-
-        public int MaxCount { get; protected set; }
-
-        public long Slot { get; protected set; }
-
         protected TimerOperator()
         {
             TimersCache = Pool.List<ITimerExecutor>();
@@ -75,6 +33,33 @@ namespace AIO
             Unit     = unit * slotUnit;
             SlotUnit = slotUnit;
         }
+
+        /// <summary>
+        /// 计算当前瞬间 定时器全部数量
+        /// </summary>
+        public int AllCount { get; internal set; }
+
+        #region ITimerOperator Members
+
+        public int Index { get; protected set; }
+
+        public long Unit { get; protected set; }
+
+        public long SlotUnit { get; protected set; }
+
+        public LinkedList<ITimerExecutor> Timers { get; protected set; }
+
+        public List<ITimerExecutor> TimersCache { get; protected set; }
+
+        int ITimerOperator.AllCount
+        {
+            get => AllCount;
+            set => AllCount = value;
+        }
+
+        public int MaxCount { get; protected set; }
+
+        public long Slot { get; protected set; }
 
         public void Dispose()
         {
@@ -191,6 +176,33 @@ namespace AIO
             }
         }
 
+        public abstract int BottomUpdate(long nowTime);
+
+        public abstract void OtherUpdate(long nowTime);
+
+        #endregion
+
+        /// <summary>
+        /// 获取新的定时器容器
+        /// </summary>
+        internal static ICollection<T> NewTimerOperator<T>()
+        where T : TimerOperator, new()
+        {
+            var List = Pool.List<T>();
+            foreach (var (allSlot, Uint, Slot) in TimerSystem.TimingUnits)
+            {
+                var operators = Activator.CreateInstance<T>();
+                operators.Index    = List.Count;
+                operators.Unit     = Uint * Slot;
+                operators.SlotUnit = Slot;
+                operators.MaxCount = 2048;
+                operators.Slot     = 0;
+                List.Add(operators);
+            }
+
+            return List;
+        }
+
         /// <summary>
         /// 更新链表
         /// </summary>
@@ -269,9 +281,5 @@ namespace AIO
                 executors.Free();
             }
         }
-
-        public abstract int BottomUpdate(long nowTime);
-
-        public abstract void OtherUpdate(long nowTime);
     }
 }

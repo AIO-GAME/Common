@@ -1,12 +1,18 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: DataEncrypt
+
         /// <summary>
         /// 数据加密解密
         /// </summary>
@@ -14,31 +20,31 @@ namespace AIO
         {
             internal static readonly byte[] RGBKey =
             {
-                (byte)20,
+                20,
                 (byte)'b',
                 (byte)'l',
                 (byte)'a',
                 (byte)'z',
                 (byte)'e',
-                (byte)141,
+                141,
                 (byte)'j',
                 (byte)'o',
                 (byte)'y',
-                (byte)21,
+                21,
                 (byte)'p',
                 (byte)'r',
                 (byte)'0',
                 (byte)'j',
-                (byte)'6',
+                (byte)'6'
             };
 
             internal static readonly byte[] RGBIV =
             {
-                (byte)131,
+                131,
                 (byte)'L',
                 (byte)'L',
                 (byte)'M',
-                (byte)167,
+                167,
                 (byte)'s',
                 (byte)'t',
                 (byte)'e',
@@ -49,7 +55,7 @@ namespace AIO
                 (byte)'e',
                 (byte)'a',
                 (byte)'m',
-                (byte)201,
+                201
             };
 
             #region Encrypt
@@ -156,5 +162,7 @@ namespace AIO
 
             #endregion
         }
+
+        #endregion
     }
 }

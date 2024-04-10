@@ -1,12 +1,16 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
     /// <summary>
     /// IReadOnlyDictionary 扩展
     /// </summary>
-    public static partial class ExtendIReadOnlyDictionary
+    public static class ExtendIReadOnlyDictionary
     {
         /// <summary>
         /// 获取值或默认值
@@ -18,7 +22,7 @@ namespace AIO
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TValue GetValue<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary,
-            TKey key)
+                                                    TKey                                   key)
         {
             return dictionary.TryGetValue(key, out var value) ? value : default;
         }
@@ -34,7 +38,7 @@ namespace AIO
         /// <returns></returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TValue GetValue<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary,
-            TKey key, TValue defaultValue)
+                                                    TKey                                   key, TValue defaultValue)
         {
             return dictionary.TryGetValue(key, out var value) ? value : defaultValue;
         }

@@ -2,6 +2,8 @@
 {
     public partial class PrMac
     {
+        #region Nested type: Write
+
         /// <summary>
         /// 给另一用户发送报文
         /// </summary>
@@ -15,5 +17,7 @@
                 return Create(CMD_Write, command);
             }
         }
+
+        #endregion
     }
 }

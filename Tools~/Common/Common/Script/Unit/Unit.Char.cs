@@ -1,16 +1,12 @@
-﻿/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
-
-namespace AIO
+﻿namespace AIO
 {
     /// <summary>
     /// 单位
     /// </summary>
     public static partial class Unit
     {
+        #region Nested type: Char
+
         /// <summary>
         /// 只读变量
         /// </summary>
@@ -197,11 +193,6 @@ namespace AIO
             public const int N9 = 57;
 
             /// <summary>
-            /// 数字
-            /// </summary>
-            public static int[] Number = new int[] { N0, N1, N2, N3, N4, N5, N6, N7, N8, N9 };
-
-            /// <summary>
             /// :
             /// </summary>
             public const int Colon = 58;
@@ -258,11 +249,6 @@ namespace AIO
             /// </summary>
             public const int EZ = 90;
 
-            /// <summary>
-            /// 大写A-大写Z
-            /// </summary>
-            public static int[] EAlphaBet = new int[] { EA, EZ };
-
             /// 91 [
             /// 92 /　
             /// 92 /
@@ -309,9 +295,21 @@ namespace AIO
             public const int ez = 122;
 
             /// <summary>
+            /// 数字
+            /// </summary>
+            public static int[] Number = { N0, N1, N2, N3, N4, N5, N6, N7, N8, N9 };
+
+            /// <summary>
+            /// 大写A-大写Z
+            /// </summary>
+            public static int[] EAlphaBet = { EA, EZ };
+
+            /// <summary>
             /// 小写e-小写z
             /// </summary>
-            public static int[] eAlphaBet = new int[] { ea, ez };
+            public static int[] eAlphaBet = { ea, ez };
         }
+
+        #endregion
     }
 }

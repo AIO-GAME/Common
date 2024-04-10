@@ -1,9 +1,15 @@
-﻿using UnityEngine;
+﻿#region
+
+using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
     partial class GraphicRect
     {
+        #region IGraphRect Members
+
         /// <summary>
         /// 开启输入事件监听
         /// </summary>
@@ -11,7 +17,6 @@ namespace AIO.UEditor
         {
             if (IsEvent == false) return;
             if (Event.current != null)
-            {
                 switch (Event.current.type)
                 {
                     case EventType.ExecuteCommand:
@@ -98,209 +103,160 @@ namespace AIO.UEditor
                         break;
 #endif
                 }
-            }
         }
 
         /// <summary>
         /// 事件类型 验证命令
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventValidateCommand(in Event eventData)
-        {
-        }
+        public virtual void EventValidateCommand(in Event eventData) { }
 
         /// <summary>
         /// 事件类型 触摸抬起
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventTouchUp(in Event eventData)
-        {
-        }
+        public virtual void EventTouchUp(in Event eventData) { }
 
         /// <summary>
         /// 事件类型 触摸静止
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventTouchStationary(in Event eventData)
-        {
-        }
+        public virtual void EventTouchStationary(in Event eventData) { }
 
         /// <summary>
         /// 事件类型 触摸移动
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventTouchMove(in Event eventData)
-        {
-        }
+        public virtual void EventTouchMove(in Event eventData) { }
 
         /// <summary>
         /// 事件类型 触摸进入
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventTouchEnter(in Event eventData)
-        {
-        }
+        public virtual void EventTouchEnter(in Event eventData) { }
 
         /// <summary>
         /// 事件类型 触摸离开
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventTouchLeave(in Event eventData)
-        {
-        }
+        public virtual void EventTouchLeave(in Event eventData) { }
 
         /// <summary>
         /// 事件类型 触摸按下
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventTouchDown(in Event eventData)
-        {
-        }
+        public virtual void EventTouchDown(in Event eventData) { }
 
         /// <summary>
         /// 事件类型 滚轮滚动
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventScrollWheel(in Event eventData)
-        {
-        }
+        public virtual void EventScrollWheel(in Event eventData) { }
 
         /// <summary>
         /// 事件类型 执行命令
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventExecuteCommand(in Event eventData)
-        {
-        }
+        public virtual void EventExecuteCommand(in Event eventData) { }
 
         /// <summary>
         /// 事件类型 鼠标抬起
         /// </summary>
         /// <param name="eventData"></param>
         /// <param name="keyCode"></param>
-        public virtual void EventKeyUp(in Event eventData, in KeyCode keyCode)
-        {
-        }
+        public virtual void EventKeyUp(in Event eventData, in KeyCode keyCode) { }
 
         /// <summary>
         /// 事件类型 鼠标按下
         /// </summary>
         /// <param name="eventData"></param>
         /// <param name="keyCode"></param>
-        public virtual void EventKeyDown(in Event eventData, in KeyCode keyCode)
-        {
-        }
+        public virtual void EventKeyDown(in Event eventData, in KeyCode keyCode) { }
 
         /// <summary>
         /// 事件类型 拖拽更新
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventDragUpdated(in Event eventData)
-        {
-        }
+        public virtual void EventDragUpdated(in Event eventData) { }
 
         /// <summary>
         /// 事件类型 拖拽执行
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventDragPerform(in Event eventData)
-        {
-        }
+        public virtual void EventDragPerform(in Event eventData) { }
 
         /// <summary>
         /// 事件类型 拖拽退出
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventDragExited(in Event eventData)
-        {
-        }
+        public virtual void EventDragExited(in Event eventData) { }
 
         /// <summary>
         /// 事件类型 重绘
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventRepaint(in Event eventData)
-        {
-        }
+        public virtual void EventRepaint(in Event eventData) { }
 
         /// <summary>
         /// 事件类型 布局
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventLayout(in Event eventData)
-        {
-        }
+        public virtual void EventLayout(in Event eventData) { }
 
         /// <summary>
         /// 事件类型 忽略
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventIgnore(in Event eventData)
-        {
-        }
+        public virtual void EventIgnore(in Event eventData) { }
 
         /// <summary>
         /// 事件类型 失去焦点
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventUsed(in Event eventData)
-        {
-        }
+        public virtual void EventUsed(in Event eventData) { }
 
         /// <summary>
         /// 事件类型 右键点击
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventContextClick(in Event eventData)
-        {
-        }
+        public virtual void EventContextClick(in Event eventData) { }
 
         /// <summary>
         /// 事件类型 鼠标离开窗口
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventMouseLeaveWindow(in Event eventData)
-        {
-        }
+        public virtual void EventMouseLeaveWindow(in Event eventData) { }
 
         /// <summary>
         /// 事件类型 鼠标进入窗口
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventMouseEnterWindow(in Event eventData)
-        {
-        }
+        public virtual void EventMouseEnterWindow(in Event eventData) { }
 
         /// <summary>
         /// 事件类型 鼠标离开
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventMouseMove(in Event eventData)
-        {
-        }
+        public virtual void EventMouseMove(in Event eventData) { }
 
         /// <summary>
         /// 事件类型 鼠标拖拽
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventMouseDrag(in Event eventData)
-        {
-        }
+        public virtual void EventMouseDrag(in Event eventData) { }
 
         /// <summary>
         /// 事件类型 鼠标抬起
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventMouseUp(in Event eventData)
-        {
-        }
+        public virtual void EventMouseUp(in Event eventData) { }
 
         /// <summary>
         /// 事件类型 鼠标按下
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void EventMouseDown(in Event eventData)
-        {
-        }
+        public virtual void EventMouseDown(in Event eventData) { }
+
+        #endregion
     }
 }
