@@ -14342,6 +14342,26 @@
             是否正在运行
             </summary>
         </member>
+        <member name="T:AIO.IOperationAction`1">
+            <summary>
+            IOperationFunc
+            </summary>
+        </member>
+        <member name="P:AIO.IOperationAction`1.Result">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="E:AIO.IOperationAction`1.Completed">
+            <summary>
+            回调函数
+            </summary>
+        </member>
+        <member name="M:AIO.IOperationAction`1.Invoke">
+            <summary>
+            执行
+            </summary>
+        </member>
         <member name="T:AIO.ITask">
             <summary>
                异步任务
@@ -14410,6 +14430,30 @@
             <returns><see cref="T:System.Action" /></returns>
         </member>
         <member name="M:AIO.OperationAction.op_Implicit(AIO.OperationAction)~System.Runtime.CompilerServices.TaskAwaiter">
+            <summary>
+               Implicit conversion from <see cref="T:AIO.OperationAction" /> to <see cref="T:System.Runtime.CompilerServices.TaskAwaiter" />
+            </summary>
+            <param name="operationAction"><see cref="T:AIO.OperationAction" /></param>
+            <returns><see cref="T:System.Runtime.CompilerServices.TaskAwaiter" /></returns>
+        </member>
+        <member name="T:AIO.OperationAction`1">
+            <summary>
+            异步函数处理器
+            </summary>
+        </member>
+        <member name="M:AIO.OperationAction`1.MoveNext">
+            <returns>
+             <see langword="true" /> if the operation was successfully advanced to the next element;
+            </returns>
+        </member>
+        <member name="M:AIO.OperationAction`1.op_Implicit(AIO.OperationAction{`0})~System.Action{`0}">
+            <summary>
+              Implicit conversion from <see cref="T:AIO.OperationAction" /> to <see cref="T:System.Action" />
+            </summary>
+            <param name="operationAction"><see cref="T:AIO.OperationAction" /></param>
+            <returns><see cref="T:System.Action" /></returns>
+        </member>
+        <member name="M:AIO.OperationAction`1.op_Implicit(AIO.OperationAction{`0})~System.Runtime.CompilerServices.TaskAwaiter{`0}">
             <summary>
                Implicit conversion from <see cref="T:AIO.OperationAction" /> to <see cref="T:System.Runtime.CompilerServices.TaskAwaiter" />
             </summary>

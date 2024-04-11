@@ -55,7 +55,6 @@ namespace AIO
             }
 
             CreateSync();
-            IsDone = true;
             InvokeOnCompleted();
             return Result;
         }
@@ -72,7 +71,7 @@ namespace AIO
         public TaskAwaiter<TObject> GetAwaiter()
         {
             TaskAwaiter<TObject> Awaiter;
-            if (!IsValidate) Awaiter = Task.FromException<TObject>(new Exception("Operation is not valid")).GetAwaiter();
+            if (!IsValidate) Awaiter = Task.FromResult(Result).GetAwaiter();
             else if (IsDone) Awaiter = Task.FromResult(Result).GetAwaiter();
             else Awaiter             = CreateAsync();
 

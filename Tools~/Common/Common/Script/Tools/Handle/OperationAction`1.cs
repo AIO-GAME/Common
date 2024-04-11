@@ -14,7 +14,7 @@ namespace AIO
     /// 异步函数处理器
     /// </summary>
     [StructLayout(LayoutKind.Auto)]
-    public abstract class OperationAction : IOperationAction
+    public abstract class OperationAction<T> : IOperationAction<T>
     {
 #pragma warning disable  CS1591
         private IEnumerator _CO;
@@ -23,6 +23,7 @@ namespace AIO
         public bool IsDone     { get; protected set; }
         public bool IsRunning  => !IsDone;
         public bool IsValidate { get; protected set; }
+        public T    Result     { get; protected set; }
 
         protected IEnumerator CO
         {
@@ -35,16 +36,17 @@ namespace AIO
 
         #region IOperationAction Members
 
-        public void Invoke()
+        public T Invoke()
         {
             if (!IsValidate || IsDone)
             {
                 InvokeOnCompleted();
-                return;
+                return Result;
             }
 
             CreateSync();
             InvokeOnCompleted();
+            return Result;
         }
 
         #region IDisposable
@@ -58,43 +60,46 @@ namespace AIO
         void INotifyCompletion.OnCompleted(Action continuation)
         {
             if (IsDone) continuation?.Invoke();
-            else Completed += continuation;
+            else Completed += _ => continuation?.Invoke();
         }
 
         #endregion
 
         #region ITask
 
-        TaskAwaiter ITask.GetAwaiter() => GetAwaiter();
+        TaskAwaiter<T> ITask<T>.GetAwaiter() => GetAwaiter();
 
         #endregion
 
         #region IOperationAction
 
-        event Action IOperationAction.Completed
+        event Action<T> IOperationAction<T>.Completed
         {
             add => Completed += value;
             remove => Completed -= value;
         }
 
-        #endregion
+        T IOperationAction<T>.Result   => Result;
+        T IOperationAction<T>.Invoke() => Invoke();
 
         #endregion
 
-        public event Action            Completed;
-        protected abstract TaskAwaiter CreateAsync();
-        protected abstract IEnumerator CreateCoroutine();
-        protected abstract void        CreateSync();
-        protected virtual  void        OnReset()     { }
-        protected virtual  void        OnDispose()   { }
-        protected virtual  void        OnCompleted() { }
+        #endregion
 
-        public TaskAwaiter GetAwaiter()
+        public event Action<T>            Completed;
+        protected abstract TaskAwaiter<T> CreateAsync();
+        protected abstract IEnumerator    CreateCoroutine();
+        protected abstract void           CreateSync();
+        protected virtual  void           OnReset()     { }
+        protected virtual  void           OnDispose()   { }
+        protected virtual  void           OnCompleted() { }
+
+        public TaskAwaiter<T> GetAwaiter()
         {
             if (IsDone || !IsValidate)
             {
                 InvokeOnCompleted();
-                return Task.CompletedTask.GetAwaiter();
+                return Task.FromResult(default(T)).GetAwaiter();
             }
 
             return CreateAsync();
@@ -130,7 +135,7 @@ namespace AIO
             IsDone   = true;
             OnCompleted();
             if (Completed == null) return;
-            Completed.Invoke();
+            Completed.Invoke(Result);
             Completed = null;
         }
 
@@ -147,7 +152,7 @@ namespace AIO
             Progress   = 0;
         }
 
-        protected OperationAction(Action completed) : this() => Completed = completed;
+        protected OperationAction(Action<T> completed) : this() => Completed = completed;
 
         #endregion
 
@@ -158,14 +163,14 @@ namespace AIO
         /// </summary>
         /// <param name="operationAction"><see cref="OperationAction" /></param>
         /// <returns><see cref="Action" /></returns>
-        public static implicit operator Action(OperationAction operationAction) => operationAction.Completed;
+        public static implicit operator Action<T>(OperationAction<T> operationAction) => operationAction.Completed;
 
         /// <summary>
         ///    Implicit conversion from <see cref="OperationAction" /> to <see cref="TaskAwaiter" />
         /// </summary>
         /// <param name="operationAction"><see cref="OperationAction" /></param>
         /// <returns><see cref="TaskAwaiter" /></returns>
-        public static implicit operator TaskAwaiter(OperationAction operationAction) => operationAction.GetAwaiter();
+        public static implicit operator TaskAwaiter<T>(OperationAction<T> operationAction) => operationAction.GetAwaiter();
 
         #endregion
 
@@ -180,17 +185,9 @@ namespace AIO
 
         #region IEnumerator
 
-        void IEnumerator.Reset()
-        {
-            Reset();
-        }
-
-        bool IEnumerator.MoveNext()
-        {
-            return MoveNext();
-        }
-
-        object IEnumerator.Current => CO.Current;
+        void IEnumerator.  Reset()    => Reset();
+        bool IEnumerator.  MoveNext() => MoveNext();
+        object IEnumerator.Current    => CO.Current;
 
         #endregion
     }
