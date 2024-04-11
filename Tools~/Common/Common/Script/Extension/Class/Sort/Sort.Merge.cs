@@ -16,7 +16,7 @@ namespace AIO
         ///     数据量:1000以下适用
         /// </summary>
         private static IList<T> SortMerge<T>(IList<T> array)
-        where T : IComparable
+        where T : IComparable<T>, IComparable
         {
             return array.Count < 2 ? array : MergeSort(array, 0, array.Count - 1);
         }
@@ -31,7 +31,7 @@ namespace AIO
         }
 
         private static IList<T> MergeSort<T>(in IList<T> array, in int left, in int right)
-        where T : IComparable
+        where T : IComparable<T>, IComparable
         {
             if (left >= right) return array;
             var median = (left + right) / 2; //计算出中间值
@@ -41,7 +41,7 @@ namespace AIO
         }
 
         private static IList<T> Merge<T>(in IList<T> array, in int left, in int median, in int right)
-        where T : IComparable
+        where T : IComparable<T>, IComparable
         {
             var LAL = median - left + 1; //左数组长度
             var RAL = right - median;    //右数组长度

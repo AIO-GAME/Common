@@ -433,7 +433,7 @@
                 按升序插入 linklist
             </summary>
             <param name="linkedList"> 要排序的链表 </param>
-            <param name="num"> 要插入排序的数字 </param>
+            <param name="number"> 要插入排序的数字 </param>
         </member>
         <member name="M:AIO.ExtendSort.Sort``1(System.Collections.Generic.IList{``0},AIO.ESort@)">
             <summary>

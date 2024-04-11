@@ -15,7 +15,7 @@ namespace AIO
         ///     快速排序
         /// </summary>
         private static IList<T> SortQuick<T>(IList<T> array)
-        where T : IComparable
+        where T : IComparable<T>, IComparable
         {
             if (array.Count < 2) return array;
             Quick(array, 0, array.Count - 1);
@@ -23,7 +23,7 @@ namespace AIO
         }
 
         private static void Quick<T>(in IList<T> a, in int l, in int r)
-        where T : IComparable
+        where T : IComparable<T>, IComparable
         {
             if (l < r)
             {

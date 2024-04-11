@@ -57,12 +57,12 @@ namespace AIO
                 {
                     lock (Looper)
                     {
-                        using (var items = Looper.GetEnumerator())
+                        for (var i = 0; i < Looper.Count; i++)
                         {
-                            while (items.MoveNext())
+                            while (Looper[i].MoveNext())
                             {
-                                var item = items.Current;
-                                if (instance == null) //卸载时丢弃Looper
+                                var item = Looper[i];
+                                if (!instance) //卸载时丢弃Looper
                                 {
                                     DropItems.Add(item);
                                     continue;
@@ -71,10 +71,10 @@ namespace AIO
                                 if (!instance.gameObject.activeInHierarchy) continue;      //隐藏时别执行Loop
                                 if (item != null && !item.MoveNext()) DropItems.Add(item); //执行Loop，执行完毕也丢弃Looper
                             }
-
-                            foreach (var t in DropItems.Where(t => t != null)) Looper.Remove(t); //集中处理丢弃的Looper
-                            DropItems.Clear();
                         }
+
+                        foreach (var t in DropItems.Where(t => t != null)) Looper.Remove(t); //集中处理丢弃的Looper
+                        DropItems.Clear();
                     }
 
                     if (Looper.Count > 0) return;

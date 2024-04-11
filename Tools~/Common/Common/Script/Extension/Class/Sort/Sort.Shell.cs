@@ -15,7 +15,7 @@ namespace AIO
         ///     希尔排序
         /// </summary>
         private static IList<T> SortShell<T>(IList<T> array)
-        where T : IComparable
+        where T : IComparable<T>, IComparable
         {
             if (array.Count < 2) return array;
             var gap = array.Count / 2;

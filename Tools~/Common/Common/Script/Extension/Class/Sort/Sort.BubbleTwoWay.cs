@@ -15,7 +15,7 @@ namespace AIO
         ///     双向冒泡排序
         /// </summary>
         private static IList<T> SortBubbleTwoWay<T>(IList<T> array)
-        where T : IComparable
+        where T : IComparable<T>, IComparable
         {
             if (array.Count < 2) return array;
             int L = 0, R = array.Count - 1;

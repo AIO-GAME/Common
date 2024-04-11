@@ -16,7 +16,7 @@ namespace AIO
         ///     数据量:1000以下适用
         /// </summary>
         private static IList<T> SortHeap<T>(IList<T> array)
-        where T : IComparable
+        where T : IComparable<T>, IComparable
         {
             if (array.Count < 2) return array;
             for (var i = array.Count / 2 - 1; i >= 0; i--) HeapSort_MaxHeaping(array, i, array.Count);
@@ -34,7 +34,7 @@ namespace AIO
         ///     将指定的结点调整为堆。
         /// </summary>
         private static void HeapSort_MaxHeaping<T>(in IList<T> array, in int index, in int size)
-        where T : IComparable
+        where T : IComparable<T>, IComparable
         {
             var left = 2 * index + 1;
             var right = 2 * (index + 1);

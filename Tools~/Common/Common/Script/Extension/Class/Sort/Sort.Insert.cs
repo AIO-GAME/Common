@@ -15,7 +15,7 @@ namespace AIO
         ///     插入排序
         /// </summary>
         private static IList<T> SortInsert<T>(IList<T> array)
-        where T : IComparable
+        where T : IComparable<T>, IComparable
         {
             if (array.Count < 2) return array;
             for (int i = 1, insertions = i - 1; i < array.Count; i++, insertions = i - 1)

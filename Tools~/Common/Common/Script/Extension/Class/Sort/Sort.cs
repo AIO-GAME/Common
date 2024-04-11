@@ -94,27 +94,27 @@ namespace AIO
         ///     按升序插入 linklist
         /// </summary>
         /// <param name="linkedList"> 要排序的链表 </param>
-        /// <param name="num"> 要插入排序的数字 </param>
-        private static void InsertIntoLinkList<T>(LinkedList<T> linkedList, T num)
+        /// <param name="number"> 要插入排序的数字 </param>
+        private static void InsertIntoLinkList<T>(LinkedList<T> linkedList, T number)
         where T : IComparable
         {
             // 链表为空时，插入到第一位  
             if (linkedList.Count <= 0)
             {
-                linkedList.AddFirst(num);
+                linkedList.AddFirst(number);
             }
             else
             {
                 foreach (var node in
                          from i in linkedList
-                         where i.CompareTo(num) > 0
+                         where i.CompareTo(number) > 0
                          select linkedList.Find(i))
                 {
-                    linkedList.AddBefore(node, num);
+                    linkedList.AddBefore(node, number);
                     return;
                 }
 
-                linkedList.AddLast(num);
+                linkedList.AddLast(number);
             }
         }
     }

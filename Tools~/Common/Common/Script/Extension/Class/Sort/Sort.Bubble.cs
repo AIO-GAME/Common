@@ -15,7 +15,7 @@ namespace AIO
         ///     单向冒泡排序
         /// </summary>
         private static IList<T> SortBubble<T>(IList<T> array)
-        where T : IComparable
+        where T : IComparable<T>, IComparable
         {
             if (array.Count < 2) return array;
             var len = array.Count - 1;
