@@ -45,7 +45,7 @@ namespace AIO
             }
 
             CreateSync();
-            InvokeOnCompleted();
+            if (IsDone) InvokeOnCompleted();
             return Result;
         }
 

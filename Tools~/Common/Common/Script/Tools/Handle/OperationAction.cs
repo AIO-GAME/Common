@@ -44,7 +44,7 @@ namespace AIO
             }
 
             CreateSync();
-            InvokeOnCompleted();
+            if (IsDone) InvokeOnCompleted();
         }
 
         #region IDisposable
