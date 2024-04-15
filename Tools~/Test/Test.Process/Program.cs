@@ -53,7 +53,7 @@ namespace AIO
 
         private static void LoadAsset()
         {
-            Console.WriteLine("11111111111111111");
+            Console.WriteLine("11111111111111111".GetHashCode());
         }
 
         private static void LoadAsset1()
@@ -86,11 +86,31 @@ namespace AIO
             //     // Console.WriteLine("---------------------------");
             //     // loadAsset1Method.Invoke(null, null);
             // }
-            var content = AHelper.HTTP.Get("https://ftpshare-hot.ingcreations.com/qc/Version/Android.json");
-            Console.WriteLine(content);
-            if (string.IsNullOrEmpty(content))
+            // var content = AHelper.HTTP.Get("https://ftpshare-hot.ingcreations.com/qc/Version/Android.json");
+            // Console.WriteLine(content);
+            // if (string.IsNullOrEmpty(content))
+            // {
+            //     Console.WriteLine("请求失败");
+            // }
+
+
+            var index = 0;
+            var dis = new DisplayList<int>();
+            dis.Add(++index, "ACC", index);
+            dis.Add(++index, "ABB", index);
+            dis.Add(++index, "ABBB", index);
+            dis.Add(++index, "B", index);
+            dis.Add(++index, "C", index);
+            dis.Add(++index, "a", index);
+            dis.Add(++index, "b", index);
+            dis.Add(++index, "c", index);
+            dis.Add(++index, "*", index);
+            dis.Add(++index, "$", index);
+
+            dis.Sort();
+            foreach (var variable in dis)
             {
-                Console.WriteLine("请求失败");
+                Console.WriteLine(variable + " " + dis.GetDisplay(variable.Key));
             }
         }
     }

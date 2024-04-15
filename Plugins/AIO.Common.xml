@@ -12843,6 +12843,11 @@
             构造函数
             </summary>
         </member>
+        <member name="M:AIO.DisplayList`1.#ctor(System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
         <member name="P:AIO.DisplayList`1.Keys">
             <summary>
             键值
@@ -12878,6 +12883,9 @@
             当前页内容
             </summary>
         </member>
+        <member name="P:AIO.DisplayList`1.Count">
+            <inheritdoc cref="T:System.Collections.Generic.List`1"/>
+        </member>
         <member name="M:AIO.DisplayList`1.Remove(System.Collections.Generic.KeyValuePair{System.String,`0})">
             <summary>
             移除
@@ -12885,24 +12893,26 @@
             <param name="item"></param>
             <returns></returns>
         </member>
-        <member name="P:AIO.DisplayList`1.Count">
-            <inheritdoc cref="T:System.Collections.Generic.List`1"/>
+        <member name="M:AIO.DisplayList`1.Add(System.Collections.Generic.KeyValuePair{System.String,`0})">
+            <inheritdoc />
         </member>
-        <member name="P:AIO.DisplayList`1.IsReadOnly">
+        <member name="M:AIO.DisplayList`1.Contains(System.Collections.Generic.KeyValuePair{System.String,`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.DisplayList`1.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.DisplayList`1.CopyTo(System.Collections.Generic.KeyValuePair{System.String,`0}[],System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.DisplayList`1.System#Collections#Generic#ICollection{T}#IsReadOnly">
             <inheritdoc cref="T:System.Collections.Generic.List`1"/>
         </member>
         <member name="M:AIO.DisplayList`1.ContainsKey(System.String)">
             <inheritdoc />
         </member>
-        <member name="M:AIO.DisplayList`1.Add(System.String,`0)">
-            <inheritdoc />
-        </member>
         <member name="M:AIO.DisplayList`1.Remove(System.String)">
-            <summary>
-            移除
-            </summary>
-            <param name="key">键值</param>
-            <returns>Ture:成功 False:失败</returns>
+            <inheritdoc />
         </member>
         <member name="M:AIO.DisplayList`1.TryGetValue(System.String,`0@)">
             <inheritdoc />
@@ -12910,51 +12920,29 @@
         <member name="P:AIO.DisplayList`1.Item(System.String)">
             <inheritdoc />
         </member>
-        <member name="M:AIO.DisplayList`1.Add(System.Collections.Generic.KeyValuePair{System.String,`0})">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.DisplayList`1.Clear">
-            <inheritdoc cref="T:System.Collections.Generic.List`1"/>
-        </member>
-        <member name="M:AIO.DisplayList`1.Contains(System.Collections.Generic.KeyValuePair{System.String,`0})">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.DisplayList`1.CopyTo(System.Collections.Generic.KeyValuePair{System.String,`0}[],System.Int32)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.DisplayList`1.GetEnumerator">
-            <inheritdoc />
-        </member>
         <member name="M:AIO.DisplayList`1.Dispose">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.DisplayList`1.Remove(`0)">
             <inheritdoc />
         </member>
         <member name="M:AIO.DisplayList`1.IndexOf(`0)">
             <inheritdoc />
         </member>
-        <member name="M:AIO.DisplayList`1.Insert(System.Int32,`0)">
-            <inheritdoc />
-        </member>
-        <member name="P:AIO.DisplayList`1.Item(System.Int32)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.DisplayList`1.Add(`0)">
-            <inheritdoc />
-        </member>
-        <member name="M:AIO.DisplayList`1.Contains(`0)">
-            <inheritdoc />
-        </member>
         <member name="M:AIO.DisplayList`1.CopyTo(`0[],System.Int32)">
             <inheritdoc />
+        </member>
+        <member name="M:AIO.DisplayList`1.Clear">
+            <inheritdoc cref="T:System.Collections.Generic.List`1"/>
         </member>
         <member name="M:AIO.DisplayList`1.GetPage(System.Int32)">
             <summary>
             获取页内容
             </summary>
         </member>
-        <member name="M:AIO.DisplayList`1.Add(System.String,System.String,`0)">
+        <member name="M:AIO.DisplayList`1.Sort">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="M:AIO.DisplayList`1.Add(System.Int32,System.String@,`0@)">
             <summary>
             添加
             </summary>
@@ -12962,27 +12950,68 @@
             <param name="display">显示值</param>
             <param name="value">值</param>
         </member>
-        <member name="M:AIO.DisplayList`1.RemoveAt(System.Int32)">
+        <member name="M:AIO.DisplayList`1.Add(System.Int32,System.Char@,`0@)">
+            <summary>
+            添加
+            </summary>
+            <param name="key">键值</param>
+            <param name="display">显示值</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:AIO.DisplayList`1.Add(System.String,System.String@,`0@)">
+            <summary>
+            添加
+            </summary>
+            <param name="key">键值</param>
+            <param name="display">显示值</param>
+            <param name="value">值</param>
+        </member>
+        <member name="E:AIO.DisplayList`1.OnCompare">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="M:AIO.DisplayList`1.RemoveAt(System.Int32@)">
             <summary>
             移除
             </summary>
             <param name="index">指定下标</param>
             <returns>Ture:成功 False:失败</returns>
         </member>
-        <member name="M:AIO.DisplayList`1.GetValue(System.String)">
+        <member name="M:AIO.DisplayList`1.GetValue(System.String@)">
             <summary>
             获取值
             </summary>
+            <param name="key">键值</param>
+            <returns>if found <see cref="!:T"/>; otherwise <c>default</c></returns>
         </member>
-        <member name="M:AIO.DisplayList`1.GetValue(System.Int32)">
+        <member name="M:AIO.DisplayList`1.GetValue(System.Int32@)">
             <summary>
             获取值
             </summary>
+            <param name="index">下标</param>
+            <returns>if found <see cref="!:T"/>; otherwise <c>default</c></returns>
         </member>
-        <member name="M:AIO.DisplayList`1.GetDisplay(System.String)">
+        <member name="M:AIO.DisplayList`1.GetValueOrDefault(System.Int32@,`0@)">
+            <summary>
+            获取值
+            </summary>
+            <param name="index">下标</param>
+            <param name="defaultValue">默认值</param>
+            <returns>if found <see cref="!:T"/>; otherwise <paramref name="defaultValue"/></returns>
+        </member>
+        <member name="M:AIO.DisplayList`1.GetDisplay(System.String@)">
             <summary>
             获取显示值
             </summary>
+            <param name="key">键值</param>
+            <returns>if found <see cref="T:System.String"/>; otherwise <c>string.Empty</c></returns>
+        </member>
+        <member name="M:AIO.DisplayList`1.FindIndex(System.Func{`0,System.Boolean})">
+            <summary>
+            获取下标
+            </summary>
+            <param name="predicate">条件</param>
         </member>
         <member name="T:AIO.PageDictionary`2">
             <summary>

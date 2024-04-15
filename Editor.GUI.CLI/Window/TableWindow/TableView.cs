@@ -196,7 +196,7 @@ namespace AIO.UEditor
             _selectionDatas.Clear();
             foreach (var itemID in selectedIds)
             {
-                var item = _items.Find(it => { return it.id == itemID; });
+                var item = _items.Find(it => it.id == itemID);
                 if (item != null) _selectionDatas.Add(item.Data);
             }
 
