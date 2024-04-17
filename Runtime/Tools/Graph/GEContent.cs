@@ -1,8 +1,10 @@
 ﻿#region
 
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 #endregion
 
@@ -33,9 +35,13 @@ namespace AIO.UEditor
 
         public static GUIContent GetBuiltin(string name)
         {
+#if UNITY_EDITOR
             if (GCBuiltin.TryGetValue(name, out var builtin)) return builtin;
             GCBuiltin[name] = EditorGUIUtility.IconContent(name);
             return GCBuiltin[name];
+#else
+            return GUIContent.none;
+#endif
         }
 
         public static GUIContent NewSetting(string name, string tooltip)

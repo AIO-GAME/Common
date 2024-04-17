@@ -74,6 +74,8 @@ namespace AIO.UEditor
             RectDragVertical   = new Rect();
         }
 
+        public static implicit operator Rect(ViewRect viewRect) => viewRect.Current;
+
         private Rect Current;
 
         /// <summary>
