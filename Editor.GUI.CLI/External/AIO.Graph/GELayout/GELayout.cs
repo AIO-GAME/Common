@@ -3,8 +3,11 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using AIO.RainbowCore.RList.Editor;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Object = UnityEngine.Object;
 
 #endregion
 
@@ -43,17 +46,17 @@ namespace AIO.UEditor
         #region List
 
         /// <summary>
-        /// 绘制 List 列表
+        ///     绘制 List 列表
         /// </summary>
-        /// <param name="label">标签 <see cref="string"/></param>
-        /// <param name="array">显示的折叠状态 <see cref="IList&lt;T&gt;"/></param>
-        /// <param name="foldout">显示的折叠状态 <see cref="bool"/></param>
-        /// <param name="tips">提示信息 <see cref="Action"/></param>
-        /// <param name="showFunc">显示回调函数 <see cref="Action"/></param>
-        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;"/></param>
-        /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle"/></param>
-        /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle"/></param>
-        /// <returns>true:呈现子对象,false:隐藏<see cref="bool"/></returns>
+        /// <param name="label">标签 <see cref="string" /></param>
+        /// <param name="array">显示的折叠状态 <see cref="IList&lt;T&gt;" /></param>
+        /// <param name="foldout">显示的折叠状态 <see cref="bool" /></param>
+        /// <param name="tips">提示信息 <see cref="Action" /></param>
+        /// <param name="showFunc">显示回调函数 <see cref="Action" /></param>
+        /// <param name="addFunc">添加回调函数 <see cref="Func&lt;T&gt;" /></param>
+        /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle" /></param>
+        /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle" /></param>
+        /// <returns>true:呈现子对象,false:隐藏<see cref="bool" /></returns>
         private static bool FieldList<T>(GTContent label,
                                          IList<T>  array,      bool     foldout, Action tips, Action<int> showFunc, Func<T> addFunc,
                                          GUIStyle  labelStyle, GUIStyle bgStyle)
@@ -145,7 +148,7 @@ namespace AIO.UEditor
         #region 隔行
 
         /// <summary>
-        /// 分隔符
+        ///     分隔符
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Separator()
@@ -154,7 +157,7 @@ namespace AIO.UEditor
         }
 
         /// <summary>
-        /// 分隔符
+        ///     分隔符
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Separator(int num)
@@ -163,7 +166,7 @@ namespace AIO.UEditor
         }
 
         /// <summary>
-        /// 隔行
+        ///     隔行
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Space()
@@ -172,7 +175,7 @@ namespace AIO.UEditor
         }
 
         /// <summary>
-        /// 隔行
+        ///     隔行
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Space(float width)
@@ -183,7 +186,7 @@ namespace AIO.UEditor
 #if UNITY_2019_1_OR_NEWER
 
         /// <summary>
-        /// 隔行
+        ///     隔行
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Space(int num, float width, bool expand = true)
@@ -194,5 +197,100 @@ namespace AIO.UEditor
 #endif
 
         #endregion
+
+        public static T FieldObject<T>(Rect rect, T obj, bool allowSceneObject, GUIStyle objStyle, GUIStyle minStyle)
+        where T : Object
+        {
+            return (T)FieldObject(rect, obj, typeof(T), allowSceneObject, objStyle, minStyle);
+        }
+
+        public static Object FieldObject(Rect rect, Object obj, bool allowSceneObject = false)
+        {
+            return FieldObject(rect, obj, typeof(Object), allowSceneObject);
+        }
+
+        public static Object FieldObject(Rect rect, Object obj, GUIStyle objStyle, GUIStyle minStyle = null)
+        {
+            return FieldObject(rect, obj, typeof(Object), false, objStyle, minStyle);
+        }
+
+        public static Object FieldObject(Rect rect, Object obj, Type type, bool allowSceneObject, GUIStyle objStyle = null, GUIStyle minStyle = null)
+        {
+            var guiContent = EditorGUIUtility.ObjectContent(obj, type);
+            guiContent.text = obj ? AssetDatabase.GetAssetPath(obj) : guiContent.text;
+
+            if (objStyle == null) objStyle = GEStyle.ObjectField; 
+            if (minStyle == null) minStyle = GEStyle.ObjectFieldButton;
+
+            GUI.Box(rect, string.Empty, objStyle);
+            var height = Mathf.Min(rect.height - 2, rect.width);
+            var rectObj = new Rect(rect.x + 5, rect.y + 1, rect.width - height - 15, height);
+            var controlID = GUIUtility.GetControlID(FocusType.Passive, rectObj);
+            if (EditorGUI.DropdownButton(rectObj, guiContent, FocusType.Passive, GEStyle.DDItemStyle))
+            {
+                if (obj)
+                {
+                    UnityEditor.Selection.activeObject = obj;
+                    EditorGUIUtility.PingObject(obj);
+                }
+            }
+
+            var rectMini = new Rect(rectObj.x + rectObj.width + 3, rect.y + 1, height, height);
+
+
+            if (EditorGUI.DropdownButton(rectMini, GUIContent.none, FocusType.Passive, minStyle))
+            {
+                EditorGUIUtility.ShowObjectPicker<Object>(obj, allowSceneObject, string.Empty, 0);
+                obj = EditorGUIUtility.GetObjectPickerObject();
+            }
+
+            // 判断当前是否有资源拖拽到控件上
+            switch (Event.current.GetTypeForControl(controlID))
+            {
+                case EventType.DragUpdated:
+                case EventType.DragPerform:
+                {
+                    if (GUI.enabled)
+                    {
+                        if (!rectObj.Contains(Event.current.mousePosition)) break;
+                        if (DragAndDrop.objectReferences.Length != 1) break;
+                        if (DragAndDrop.objectReferences[0].GetType() != type) break;
+                        if (!allowSceneObject && !EditorUtility.IsPersistent(DragAndDrop.objectReferences[0]))
+                        {
+                            DragAndDrop.visualMode = DragAndDropVisualMode.Rejected;
+                            break;
+                        }
+
+                        DragAndDrop.visualMode = DragAndDropVisualMode.Link;
+                        if (Event.current.type == EventType.DragPerform)
+                        {
+                            DragAndDrop.AcceptDrag();
+                            obj         = DragAndDrop.objectReferences[0];
+                            GUI.changed = true;
+                            DragAndDrop.PrepareStartDrag();
+                            DragAndDrop.activeControlID = 0;
+                        }
+
+                        Event.current.Use();
+                    }
+
+                    break;
+                }
+                case EventType.DragExited:
+                {
+                    if (GUI.enabled)
+                    {
+                        if (!rectObj.Contains(Event.current.mousePosition)) break;
+                        DragAndDrop.activeControlID = controlID;
+                        DragAndDrop.visualMode      = DragAndDropVisualMode.Rejected;
+                        HandleUtility.Repaint();
+                    }
+
+                    break;
+                }
+            }
+
+            return obj;
+        }
     }
 }

@@ -18,6 +18,19 @@ namespace AIO.UEditor
         internal static readonly Dictionary<string, GUIContent> GCApp     = new Dictionary<string, GUIContent>();
         internal static readonly Dictionary<string, GUIContent> GCBuiltin = new Dictionary<string, GUIContent>();
         internal static readonly Dictionary<string, GUIContent> GCSetting = new Dictionary<string, GUIContent>();
+        internal static readonly Dictionary<string, GUIContent> GCTemp    = new Dictionary<string, GUIContent>();
+
+        /// <summary>
+        /// 修改提示
+        /// </summary>
+        public static GUIContent SetTooltips(this GUIContent content, string tooltip)
+        {
+            content.tooltip = tooltip;
+            if (string.IsNullOrEmpty(content.text)) return content;
+            if (!GCTemp.ContainsKey(content.text))
+                GCTemp[content.text] = content;
+            return content;
+        }
 
         public static GUIContent GetSetting(string name)
         {
