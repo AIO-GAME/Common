@@ -88,8 +88,14 @@ namespace AIO.UEditor
         /// </summary>
         public bool IsAllowVertical;
 
+        /// <summary>
+        /// 拖拽宽度
+        /// </summary>
         public float DragHorizontalWidth;
 
+        /// <summary>
+        /// 拖拽高度
+        /// </summary>
         public float DragVerticalHeight;
 
         /// <summary>
@@ -210,28 +216,26 @@ namespace AIO.UEditor
             e.Use();
         }
 
-        public void Draw(Action onDraw, GUIStyle style = null)
+        public void Draw(Action<Rect> onDraw, GUIStyle style = null)
         {
             if (!IsShow) return;
             Draw(Current, onDraw, style);
         }
 
-        public void Draw(Rect rect, Action onDraw, GUIStyle style = null)
+        public void Draw(Rect rect, Action<Rect> onDraw, GUIStyle style = null)
         {
             if (!IsShow) return;
             if (IsAllowVertical)
             {
                 rect.height -= DragVerticalHeight;
-                RectDragVertical = new Rect(rect.x, rect.y + rect.height,
-                                            rect.width, DragVerticalHeight);
+                RectDragVertical.Set(rect.x, rect.y + rect.height, rect.width, DragVerticalHeight);
                 EditorGUIUtility.AddCursorRect(RectDragVertical, MouseCursor.ResizeVertical);
             }
 
             if (IsAllowHorizontal)
             {
                 rect.width -= DragHorizontalWidth;
-                RectDragHorizontal = new Rect(rect.x + rect.width, rect.y,
-                                              DragHorizontalWidth, rect.height);
+                RectDragHorizontal.Set(rect.x + rect.width, rect.y, DragHorizontalWidth, rect.height);
                 EditorGUIUtility.AddCursorRect(RectDragHorizontal, MouseCursor.ResizeHorizontal);
             }
 
@@ -239,7 +243,7 @@ namespace AIO.UEditor
             {
                 if (style is null) GUILayout.BeginArea(rect);
                 else GUILayout.BeginArea(rect, style);
-                onDraw?.Invoke();
+                onDraw?.Invoke(rect);
                 GUILayout.EndArea();
             }
             catch (Exception)

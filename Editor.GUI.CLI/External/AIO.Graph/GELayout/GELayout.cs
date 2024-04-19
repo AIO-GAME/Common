@@ -219,14 +219,15 @@ namespace AIO.UEditor
             var guiContent = EditorGUIUtility.ObjectContent(obj, type);
             guiContent.text = obj ? AssetDatabase.GetAssetPath(obj) : guiContent.text;
 
-            if (objStyle == null) objStyle = GEStyle.ObjectField; 
+            if (objStyle == null) objStyle = GEStyle.ObjectField;
             if (minStyle == null) minStyle = GEStyle.ObjectFieldButton;
 
             GUI.Box(rect, string.Empty, objStyle);
+
             var height = Mathf.Min(rect.height - 2, rect.width);
-            var rectObj = new Rect(rect.x + 5, rect.y + 1, rect.width - height - 15, height);
-            var controlID = GUIUtility.GetControlID(FocusType.Passive, rectObj);
-            if (EditorGUI.DropdownButton(rectObj, guiContent, FocusType.Passive, GEStyle.DDItemStyle))
+            var cell = new Rect(rect.x + 5, rect.y + 1, rect.width - height - 5, height);
+            var controlID = GUIUtility.GetControlID(FocusType.Passive, cell);
+            if (EditorGUI.DropdownButton(cell, guiContent, FocusType.Passive, GEStyle.DDItemStyle))
             {
                 if (obj)
                 {
@@ -235,27 +236,50 @@ namespace AIO.UEditor
                 }
             }
 
-            var rectMini = new Rect(rectObj.x + rectObj.width + 3, rect.y + 1, height, height);
-
-
-            if (EditorGUI.DropdownButton(rectMini, GUIContent.none, FocusType.Passive, minStyle))
+            cell.x     += cell.width;
+            cell.width =  height;
+            if (EditorGUI.DropdownButton(cell, GUIContent.none, FocusType.Passive, minStyle))
             {
-                EditorGUIUtility.ShowObjectPicker<Object>(obj, allowSceneObject, string.Empty, 0);
-                obj = EditorGUIUtility.GetObjectPickerObject();
+                if (GUI.enabled)
+                {
+                    var searchFilter = typeof(SceneAsset).IsAssignableFrom(type) ? "t:Scene" : $"t:{type.Name}";
+                    EditorGUIUtility.ShowObjectPicker<Object>(obj, allowSceneObject, searchFilter, controlID);
+                }
             }
 
-            // 判断当前是否有资源拖拽到控件上
-            switch (Event.current.GetTypeForControl(controlID))
+            switch (Event.current.GetTypeForControl(controlID)) // 判断当前是否有资源拖拽到控件上
             {
+                case EventType.ExecuteCommand:
+                    if (Event.current.commandName == "ObjectSelectorUpdated" && controlID == EditorGUIUtility.GetObjectPickerControlID())
+                    {
+                        obj = EditorGUIUtility.GetObjectPickerObject();
+                        Event.current.Use();
+                    }
+
+                    break;
+
+                case EventType.KeyDown:
+                    if (GUI.enabled)
+                    {
+                        if (Event.current.keyCode == KeyCode.Delete)
+                        {
+                            obj = null;
+                            Event.current.Use();
+                        }
+                    }
+
+                    break;
+
                 case EventType.DragUpdated:
                 case EventType.DragPerform:
                 {
                     if (GUI.enabled)
                     {
-                        if (!rectObj.Contains(Event.current.mousePosition)) break;
+                        if (!rect.Contains(Event.current.mousePosition)) break;
                         if (DragAndDrop.objectReferences.Length != 1) break;
-                        if (DragAndDrop.objectReferences[0].GetType() != type) break;
-                        if (!allowSceneObject && !EditorUtility.IsPersistent(DragAndDrop.objectReferences[0]))
+                        var target = DragAndDrop.objectReferences[0];
+                        if (!type.IsInstanceOfType(target)) break;
+                        if (!allowSceneObject && !EditorUtility.IsPersistent(target))
                         {
                             DragAndDrop.visualMode = DragAndDropVisualMode.Rejected;
                             break;
@@ -265,8 +289,7 @@ namespace AIO.UEditor
                         if (Event.current.type == EventType.DragPerform)
                         {
                             DragAndDrop.AcceptDrag();
-                            obj         = DragAndDrop.objectReferences[0];
-                            GUI.changed = true;
+                            obj = DragAndDrop.objectReferences[0];
                             DragAndDrop.PrepareStartDrag();
                             DragAndDrop.activeControlID = 0;
                         }
@@ -280,7 +303,7 @@ namespace AIO.UEditor
                 {
                     if (GUI.enabled)
                     {
-                        if (!rectObj.Contains(Event.current.mousePosition)) break;
+                        if (!cell.Contains(Event.current.mousePosition)) break;
                         DragAndDrop.activeControlID = controlID;
                         DragAndDrop.visualMode      = DragAndDropVisualMode.Rejected;
                         HandleUtility.Repaint();
