@@ -8,7 +8,7 @@ using UnityEditor;
 
 #endregion
 
-namespace AIO.UEditor
+namespace AIO
 {
     /// <summary>
     /// 图标
@@ -94,16 +94,24 @@ namespace AIO.UEditor
 
         public static GUIContent NewBuiltin(string name)
         {
+#if UNITY_EDITOR
             if (!GCBuiltin.ContainsKey(name))
                 GCBuiltin[name] = EditorGUIUtility.IconContent(name);
             return new GUIContent(GCBuiltin[name].image);
+#else
+            return new GUIContent(name);
+#endif
         }
 
         public static GUIContent NewBuiltin(string name, string tooltip)
         {
+#if UNITY_EDITOR
             if (!GCBuiltin.ContainsKey(name))
                 GCBuiltin[name] = EditorGUIUtility.IconContent(name);
             return new GUIContent(GCBuiltin[name].image, tooltip);
+#else
+            return new GUIContent(name, tooltip);
+#endif
         }
 
         public static void LoadSetting()
