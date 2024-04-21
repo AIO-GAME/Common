@@ -1,6 +1,7 @@
 ﻿#region
 
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 #endregion
@@ -34,14 +35,14 @@ namespace AIO
         /// </summary>
         public static GUILayoutOption Width(in float value)
         {
-            if (!Table.TryGetValue(Type.Width, out var dic))
+            if (!Table.TryGetValue(Type.Width, out var dictionary))
             {
-                Table.Add(Type.Width, dic = new Dictionary<float, GUILayoutOption>(8) { { value, GUILayout.Width(value) } });
+                Table.Add(Type.Width, dictionary = new Dictionary<float, GUILayoutOption>(8) { { value, GUILayout.Width(value) } });
             }
 
-            if (!dic.TryGetValue(value, out var option))
+            if (!dictionary.TryGetValue(value, out var option))
             {
-                dic[value] = option = GUILayout.Width(value);
+                option = dictionary[value] = GUILayout.Width(value);
             }
 
             return option;
@@ -52,11 +53,11 @@ namespace AIO
         /// </summary>
         public static GUILayoutOption Width(in int value)
         {
-            if (!Table.TryGetValue(Type.Width, out var dic))
-                Table[Type.Width] = dic = new Dictionary<float, GUILayoutOption>(8) { { value, GUILayout.Width(value) } };
+            if (!Table.TryGetValue(Type.Width, out var dictionary))
+                Table[Type.Width] = dictionary = new Dictionary<float, GUILayoutOption>(8) { { value, GUILayout.Width(value) } };
 
-            if (!dic.TryGetValue(value, out var option))
-                dic[value] = option = GUILayout.Width(value);
+            if (!dictionary.TryGetValue(value, out var option))
+                dictionary[value] = option = GUILayout.Width(value);
 
             return option;
         }
@@ -94,11 +95,11 @@ namespace AIO
         /// </summary>
         public static GUILayoutOption WidthMin(in float value)
         {
-            if (!Table.TryGetValue(Type.MinWidth, out var dic))
-                Table[Type.MinWidth] = dic = new Dictionary<float, GUILayoutOption>(8) { { value, GUILayout.MinWidth(value) } };
+            if (!Table.TryGetValue(Type.MinWidth, out var dictionary))
+                Table[Type.MinWidth] = dictionary = new Dictionary<float, GUILayoutOption>(8) { { value, GUILayout.MinWidth(value) } };
 
-            if (!dic.TryGetValue(value, out var option))
-                dic[value] = option = GUILayout.Width(value);
+            if (!dictionary.TryGetValue(value, out var option))
+                dictionary[value] = option = GUILayout.MinWidth(value);
 
             return option;
         }
@@ -108,11 +109,39 @@ namespace AIO
         /// </summary>
         public static GUILayoutOption WidthMax(in float value)
         {
-            if (!Table.TryGetValue(Type.MaxWidth, out var dic))
-                Table[Type.MaxWidth] = dic = new Dictionary<float, GUILayoutOption>(8) { { value, GUILayout.MaxWidth(value) } };
+            if (!Table.TryGetValue(Type.MaxWidth, out var dictionary))
+                Table[Type.MaxWidth] = dictionary = new Dictionary<float, GUILayoutOption>(8) { { value, GUILayout.MaxWidth(value) } };
 
-            if (!dic.TryGetValue(value, out var option))
-                dic[value] = option = GUILayout.Width(value);
+            if (!dictionary.TryGetValue(value, out var option))
+                dictionary[value] = option = GUILayout.MaxWidth(value);
+
+            return option;
+        }
+
+        /// <summary>
+        /// 宽度 最小
+        /// </summary>
+        public static GUILayoutOption MinWidth(in float value)
+        {
+            if (!Table.TryGetValue(Type.MinWidth, out var dictionary))
+                Table[Type.MinWidth] = dictionary = new Dictionary<float, GUILayoutOption>(8) { { value, GUILayout.MinWidth(value) } };
+
+            if (!dictionary.TryGetValue(value, out var option))
+                dictionary[value] = option = GUILayout.MinWidth(value);
+
+            return option;
+        }
+
+        /// <summary>
+        /// 宽度 最大
+        /// </summary>
+        public static GUILayoutOption MaxWidth(in float value)
+        {
+            if (!Table.TryGetValue(Type.MaxWidth, out var dictionary))
+                Table[Type.MaxWidth] = dictionary = new Dictionary<float, GUILayoutOption>(8) { { value, GUILayout.MaxWidth(value) } };
+
+            if (!dictionary.TryGetValue(value, out var option))
+                dictionary[value] = option = GUILayout.MaxWidth(value);
 
             return option;
         }
@@ -122,11 +151,11 @@ namespace AIO
         /// </summary>
         public static GUILayoutOption Height(in float value)
         {
-            if (!Table.TryGetValue(Type.Height, out var dic))
-                Table[Type.Height] = dic = new Dictionary<float, GUILayoutOption>(8) { { value, GUILayout.Height(value) } };
+            if (!Table.TryGetValue(Type.Height, out var dictionary))
+                Table[Type.Height] = dictionary = new Dictionary<float, GUILayoutOption>(8) { { value, GUILayout.Height(value) } };
 
-            if (!dic.TryGetValue(value, out var option))
-                dic[value] = option = GUILayout.Width(value);
+            if (!dictionary.TryGetValue(value, out var option))
+                dictionary[value] = option = GUILayout.Height(value);
 
             return option;
         }
@@ -152,11 +181,11 @@ namespace AIO
         /// </summary>
         public static GUILayoutOption HeightMin(in float value)
         {
-            if (!Table.TryGetValue(Type.MinHeight, out var dic))
-                Table[Type.MinHeight] = dic = new Dictionary<float, GUILayoutOption>(8) { { value, GUILayout.MinHeight(value) } };
+            if (!Table.TryGetValue(Type.MinHeight, out var dictionary))
+                Table[Type.MinHeight] = dictionary = new Dictionary<float, GUILayoutOption>(8) { { value, GUILayout.MinHeight(value) } };
 
-            if (!dic.TryGetValue(value, out var option))
-                dic[value] = option = GUILayout.Width(value);
+            if (!dictionary.TryGetValue(value, out var option))
+                dictionary[value] = option = GUILayout.MinHeight(value);
 
             return option;
         }
@@ -166,11 +195,39 @@ namespace AIO
         /// </summary>
         public static GUILayoutOption HeightMax(in float value)
         {
-            if (!Table.TryGetValue(Type.MaxHeight, out var dic))
-                Table[Type.MaxHeight] = dic = new Dictionary<float, GUILayoutOption>(8) { { value, GUILayout.MaxHeight(value) } };
+            if (!Table.TryGetValue(Type.MaxHeight, out var dictionary))
+                Table[Type.MaxHeight] = dictionary = new Dictionary<float, GUILayoutOption>(8) { { value, GUILayout.MaxHeight(value) } };
 
-            if (!dic.TryGetValue(value, out var option))
-                dic[value] = option = GUILayout.Width(value);
+            if (!dictionary.TryGetValue(value, out var option))
+                dictionary[value] = option = GUILayout.MaxHeight(value);
+
+            return option;
+        }
+
+        /// <summary>
+        /// 高度 最小
+        /// </summary>
+        public static GUILayoutOption MinHeight(in float value)
+        {
+            if (!Table.TryGetValue(Type.MinHeight, out var dictionary))
+                Table[Type.MinHeight] = dictionary = new Dictionary<float, GUILayoutOption>(8) { { value, GUILayout.MinHeight(value) } };
+
+            if (!dictionary.TryGetValue(value, out var option))
+                dictionary[value] = option = GUILayout.MinHeight(value);
+
+            return option;
+        }
+
+        /// <summary>
+        /// 高度 最大
+        /// </summary>
+        public static GUILayoutOption MaxHeight(in float value)
+        {
+            if (!Table.TryGetValue(Type.MaxHeight, out var dictionary))
+                Table[Type.MaxHeight] = dictionary = new Dictionary<float, GUILayoutOption>(8) { { value, GUILayout.MaxHeight(value) } };
+
+            if (!dictionary.TryGetValue(value, out var option))
+                dictionary[value] = option = GUILayout.MaxHeight(value);
 
             return option;
         }

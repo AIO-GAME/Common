@@ -12,17 +12,22 @@ using UnityEngine;
 namespace AIO.UEditor
 {
     /// <summary>
-    /// 图形窗口
+    ///     图形窗口
     /// </summary>
     public abstract partial class GraphicWindow : EmptyGraphWindow, IGraphRect
     {
         /// <summary>
-        /// 组名 编写额外的窗口
+        ///     组名 编写额外的窗口
         /// </summary>
         public string Group { get; private set; }
 
         /// <summary>
-        /// 组列表
+        ///     控件ID
+        /// </summary>
+        protected int ControlId { get; private set; }
+
+        /// <summary>
+        ///     组列表
         /// </summary>
         /// <param name="key">键值</param>
         /// <param name="type">类型</param>
@@ -34,7 +39,7 @@ namespace AIO.UEditor
         }
 
         /// <summary>
-        /// 组列表
+        ///     组列表
         /// </summary>
         /// <param name="key">键值</param>
         /// <typeparam name="T">类型</typeparam>
@@ -48,7 +53,7 @@ namespace AIO.UEditor
         }
 
         /// <summary>
-        /// 组列表
+        ///     组列表
         /// </summary>
         /// <param name="key">键值</param>
         /// <param name="type">类型</param>
@@ -60,7 +65,7 @@ namespace AIO.UEditor
         }
 
         /// <summary>
-        /// 组列表
+        ///     组列表
         /// </summary>
         /// <param name="key">键值</param>
         /// <typeparam name="T">类型</typeparam>
@@ -71,7 +76,7 @@ namespace AIO.UEditor
         }
 
         /// <summary>
-        /// 视图元素
+        ///     视图元素
         /// </summary>
         protected List<GraphicRect> GraphicItems { get; private set; }
 
@@ -101,7 +106,7 @@ namespace AIO.UEditor
         }
 
         /// <summary>
-        /// 有效程序集
+        ///     有效程序集
         /// </summary>
         protected static Assembly[] Assemblies { get; private set; }
 
@@ -129,13 +134,14 @@ namespace AIO.UEditor
             }
             else
             {
-                foreach (var type in from assembly in Assemblies
-                                     from type in assembly.GetTypes()
-                                     where type != GetType() && type.IsSubclassOf(subtype)
-                                     let attribute = type.GetCustomAttribute<GWindowAttribute>(false)
-                                     where !string.IsNullOrEmpty(attribute?.Group)
-                                     where Group.Equals(attribute.Group)
-                                     select type) AddGroup(Group, type);
+                foreach (var type
+                         in from assembly in Assemblies
+                            from type in assembly.GetTypes()
+                            where type != GetType() && type.IsSubclassOf(subtype)
+                            let attribute = type.GetCustomAttribute<GWindowAttribute>(false)
+                            where !string.IsNullOrEmpty(attribute?.Group)
+                            where Group.Equals(attribute.Group)
+                            select type) AddGroup(Group, type);
             }
         }
 
@@ -220,6 +226,7 @@ namespace AIO.UEditor
         public void Draw()
         {
             OnDraw();
+            ControlId = GUIUtility.GetControlID(FocusType.Passive, position);
         }
 
         public void Clear()
@@ -237,29 +244,29 @@ namespace AIO.UEditor
         #region virtual
 
         /// <summary>
-        /// 激活
+        ///     激活
         /// </summary>
         protected virtual void OnActivation() { }
 
         /// <summary>
-        /// 初始化皮肤格式化
+        ///     初始化皮肤格式化
         /// </summary>
         protected virtual void OnGUIStyle() { }
 
         protected virtual void OnDraw() { }
 
         /// <summary>
-        /// 清除
+        ///     清除
         /// </summary>
         protected virtual void OnClear() { }
 
         /// <summary>
-        /// 脚本启用时调用
+        ///     脚本启用时调用
         /// </summary>
         protected virtual void OnAwake() { }
 
         /// <summary>
-        /// 在所有可见窗口上每秒调用多次。
+        ///     在所有可见窗口上每秒调用多次。
         /// </summary>
         protected virtual void OnUpdate() { }
 
@@ -268,17 +275,17 @@ namespace AIO.UEditor
         #region event
 
         /// <summary>
-        /// 开启输入事件监听
+        ///     开启输入事件监听
         /// </summary>
         public void OnOpenEvent()
         {
             if (Event.current == null) return;
-            switch (Event.current.type)
+            if (Event.current.keyCode == KeyCode.None) return;
+            switch (Event.current.GetTypeForControl(ControlId))
             {
                 case EventType.ContextClick:
                     EventContextClick(Event.current);
                     break;
-
                 case EventType.MouseUp:
                     EventMouseUp(Event.current);
                     break;
@@ -362,153 +369,153 @@ namespace AIO.UEditor
         }
 
         /// <summary>
-        ///  验证一个特殊的命令(例如复制和粘贴)。
+        ///     验证一个特殊的命令(例如复制和粘贴)。
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventValidateCommand(in Event eventData) { }
 
         /// <summary>
-        /// 直接操作装置(手指、笔)离开屏幕。
+        ///     直接操作装置(手指、笔)离开屏幕。
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventTouchUp(in Event eventData) { }
 
         /// <summary>
-        /// 直接操作装置(手指、笔)静止事件(长触)
+        ///     直接操作装置(手指、笔)静止事件(长触)
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventTouchStationary(in Event eventData) { }
 
         /// <summary>
-        /// 直接操纵装置(手指、笔)在屏幕上移动(拖动)。
+        ///     直接操纵装置(手指、笔)在屏幕上移动(拖动)。
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventTouchMove(in Event eventData) { }
 
         /// <summary>
-        /// 直接操作装置(手指、笔)进入屏幕。
+        ///     直接操作装置(手指、笔)进入屏幕。
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventTouchEnter(in Event eventData) { }
 
         /// <summary>
-        /// 直接操作装置(手指、笔)离开屏幕。
+        ///     直接操作装置(手指、笔)离开屏幕。
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventTouchLeave(in Event eventData) { }
 
         /// <summary>
-        /// 直接操作装置(手指、笔)触摸屏幕。
+        ///     直接操作装置(手指、笔)触摸屏幕。
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventTouchDown(in Event eventData) { }
 
         /// <summary>
-        /// 滚轮被移动了。
+        ///     滚轮被移动了。
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventScrollWheel(in Event eventData) { }
 
         /// <summary>
-        /// 执行一个特殊的命令。复制粘贴
+        ///     执行一个特殊的命令。复制粘贴
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventExecuteCommand(in Event eventData) { }
 
         /// <summary>
-        /// 松开一个键盘键。
+        ///     松开一个键盘键。
         /// </summary>
         /// <param name="eventData">数据</param>
         /// <param name="keyCode">按键类型</param>
         public virtual void EventKeyUp(in Event eventData, in KeyCode keyCode) { }
 
         /// <summary>
-        /// 按了一个键盘键。
+        ///     按了一个键盘键。
         /// </summary>
         /// <param name="eventData">数据</param>
         /// <param name="keyCode">按键类型</param>
         public virtual void EventKeyDown(in Event eventData, in KeyCode keyCode) { }
 
         /// <summary>
-        /// 编辑器:拖放操作更新。
+        ///     编辑器:拖放操作更新。
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventDragUpdated(in Event eventData) { }
 
         /// <summary>
-        /// 仅限编辑器:执行拖放操作。
+        ///     仅限编辑器:执行拖放操作。
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventDragPerform(in Event eventData) { }
 
         /// <summary>
-        /// 仅限编辑器:拖放操作退出。
+        ///     仅限编辑器:拖放操作退出。
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventDragExited(in Event eventData) { }
 
         /// <summary>
-        /// 重绘事件。每帧发送一个。
+        ///     重绘事件。每帧发送一个。
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventRepaint(in Event eventData) { }
 
         /// <summary>
-        /// 一个布局事件。
+        ///     一个布局事件。
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventLayout(in Event eventData) { }
 
         /// <summary>
-        /// 事件应该被忽略。
+        ///     事件应该被忽略。
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventIgnore(in Event eventData) { }
 
         /// <summary>
-        /// 已经处理的事件
+        ///     已经处理的事件
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventUsed(in Event eventData) { }
 
         /// <summary>
-        /// 鼠标右键单击
+        ///     鼠标右键单击
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventContextClick(in Event eventData) { }
 
         /// <summary>
-        /// 鼠标离开窗口
+        ///     鼠标离开窗口
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventMouseLeaveWindow(in Event eventData) { }
 
         /// <summary>
-        /// 鼠标进入窗口
+        ///     鼠标进入窗口
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventMouseEnterWindow(in Event eventData) { }
 
         /// <summary>
-        /// 鼠标移动
+        ///     鼠标移动
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventMouseMove(in Event eventData) { }
 
         /// <summary>
-        /// 鼠标拖拽
+        ///     鼠标拖拽
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventMouseDrag(in Event eventData) { }
 
         /// <summary>
-        /// 鼠标送开
+        ///     鼠标送开
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventMouseUp(in Event eventData) { }
 
         /// <summary>
-        /// 鼠标按下
+        ///     鼠标按下
         /// </summary>
         /// <param name="eventData">数据</param>
         public virtual void EventMouseDown(in Event eventData) { }
@@ -516,11 +523,13 @@ namespace AIO.UEditor
         #endregion
 
         /// <summary>
-        /// 创建设置提供者
+        ///     创建设置提供者
         /// </summary>
         /// <param name="path">路径</param>
         /// <param name="scope">面板类型</param>
-        /// <returns><see cref="SettingsProvider"/></returns>
+        /// <returns>
+        ///     <see cref="SettingsProvider" />
+        /// </returns>
         protected static GraphicSettingsProvider CreateSettingsProvider(string        path,
                                                                         SettingsScope scope = SettingsScope.User)
         {

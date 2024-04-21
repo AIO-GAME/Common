@@ -15,7 +15,7 @@ namespace AIO.UEditor
         {
             var columns = state.columns;
             if (columns == null || columns.Length == 0) return;
-            var residue = maxWidth - 18;
+            var residue = maxWidth - 13;
             residue = columns.
                       Where((t,                    i) => i != index).
                       Aggregate(residue, (current, t) => current - t.width);

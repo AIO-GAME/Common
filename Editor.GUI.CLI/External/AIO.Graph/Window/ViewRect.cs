@@ -166,16 +166,21 @@ namespace AIO.UEditor
 
         public void ContainsHorizontal(Event e)
         {
+            ContainsHorizontal(e.mousePosition);
+        }
+
+        public void ContainsHorizontal(Vector2 point)
+        {
             if (!IsShow || !IsAllowHorizontal)
             {
                 if (IsDragHorizontal) IsDragHorizontal = false;
                 return;
             }
 
-            IsDragHorizontal = RectDragHorizontal.Contains(e.mousePosition);
+            IsDragHorizontal = RectDragHorizontal.Contains(point);
         }
 
-        public void ContainsVertical(Event e)
+        public void ContainsVertical(Vector2 point)
         {
             if (!IsShow || !IsAllowVertical)
             {
@@ -183,7 +188,12 @@ namespace AIO.UEditor
                 return;
             }
 
-            IsDragVertical = RectDragVertical.Contains(e.mousePosition);
+            IsDragVertical = RectDragVertical.Contains(point);
+        }
+
+        public void ContainsVertical(Event e)
+        {
+            ContainsVertical(e.mousePosition);
         }
 
         public void CancelHorizontal()
@@ -198,6 +208,7 @@ namespace AIO.UEditor
 
         public void DragHorizontal(Event e)
         {
+            if (e == null) return;
             if (!IsShow || !IsAllowHorizontal || !IsDragHorizontal) return;
             var temp = Current.width + e.delta.x;
             if (temp < MinWidth) Current.width      = MinWidth;
@@ -208,6 +219,7 @@ namespace AIO.UEditor
 
         public void DragVertical(Event e)
         {
+            if (e == null) return;
             if (!IsShow || !IsAllowVertical || !IsDragVertical) return;
             var temp = Current.height + e.delta.y;
             if (temp < MinHeight) Current.height      = MinHeight;
@@ -222,7 +234,7 @@ namespace AIO.UEditor
             Draw(Current, onDraw, style);
         }
 
-        public void Draw(Rect rect, Action<Rect> onDraw, GUIStyle style = null)
+        private void Draw(Rect rect, Action<Rect> onDraw, GUIStyle style = null)
         {
             if (!IsShow) return;
             if (IsAllowVertical)
@@ -239,16 +251,20 @@ namespace AIO.UEditor
                 EditorGUIUtility.AddCursorRect(RectDragHorizontal, MouseCursor.ResizeHorizontal);
             }
 
-            try
+            if (style != null) GUI.Box(rect, GUIContent.none, style);
+            using (new GUI.ClipScope(rect))
             {
-                if (style is null) GUILayout.BeginArea(rect);
-                else GUILayout.BeginArea(rect, style);
-                onDraw?.Invoke(rect);
-                GUILayout.EndArea();
-            }
-            catch (Exception)
-            {
-                //  ignored
+                if (onDraw == null) return;
+                rect.x = 0;
+                rect.y = 0;
+                try
+                {
+                    onDraw.Invoke(rect);
+                }
+                catch (Exception)
+                {
+                    //  ignored
+                }
             }
         }
     }

@@ -91,7 +91,7 @@ namespace AIO.UEditor
 
         protected void DrawVersion(string version)
         {
-            using (new GUILayout.AreaScope(new Rect(0, position.height - 20, position.width, 20)))
+            using (new GUI.GroupScope(new Rect(0, position.height - 20, position.width, 20)))
             {
                 GUILayout.Label($"Version {version}", EditorStyles.centeredGreyMiniLabel);
             }
