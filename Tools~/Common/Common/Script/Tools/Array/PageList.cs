@@ -40,12 +40,7 @@ namespace AIO
     /// </summary>
     [Serializable, DebuggerDisplay("Count = {Count}")]
     public class PageList<T>
-        : IList<T>,
-          ICollection<T>,
-          IEnumerable<T>,
-          IPageArray<T>,
-          IComparer<T>,
-          IEnumerable
+        : IList<T>, IPageArray<T>, IComparer<T>
     {
         private int _PageIndex;
 
@@ -54,24 +49,59 @@ namespace AIO
         /// <summary>
         /// 构造函数
         /// </summary>
-        public PageList()
+        public PageList(int capacity)
         {
-            Values = new List<T>();
+            Capacity = capacity;
+            Values   = new T[capacity];
         }
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public PageList() => Values = new T[Capacity];
 
         /// <summary>
         /// 值
         /// </summary>
-        protected List<T> Values { get; set; }
+        protected T[] Values { get; set; }
 
         /// <inheritdoc />
-        public int Compare(T x, T y)
+        public int Compare(T x, T y) => Comparer<T>.Default.Compare(x, y);
+
+        /// <inheritdoc />
+        public int Count => WriteIndex;
+
+        /// <summary>
+        /// 容量
+        /// </summary>
+        public int Capacity = 8;
+
+        /// <summary>
+        /// 写入索引
+        /// </summary>
+        private int WriteOffset;
+
+        /// <summary>
+        /// 写入索引
+        /// </summary>
+        protected int WriteIndex
         {
-            return Values.IndexOf(x).CompareTo(Values.IndexOf(y));
+            get => WriteOffset;
+            set
+            {
+                if (value < 0) return;
+                if (value > Capacity)
+                {
+                    var newCapacity = Capacity * 2;
+                    if (newCapacity < value) newCapacity = value;
+                    var newValues = new T[newCapacity];
+                    Values.CopyTo(newValues, 0);
+                    Values   = newValues;
+                    Capacity = newCapacity;
+                }
+                else WriteOffset = value;
+            }
         }
-
-        /// <inheritdoc />
-        public int Count => Values.Count;
 
         /// <inheritdoc />
         public bool IsReadOnly => false;
@@ -79,61 +109,71 @@ namespace AIO
         /// <inheritdoc />
         public IEnumerator<T> GetEnumerator()
         {
-            return Values.GetEnumerator();
+            for (var i = 0; i < WriteIndex; i++) yield return Values[i];
         }
 
         /// <inheritdoc />
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
-        public void Add(T item)
-        {
-            Values.Add(item);
-        }
+        public void Add(T item) => Values[WriteIndex++] = item;
 
         /// <inheritdoc />
         public void Clear()
         {
-            Values.Clear();
+            Values = new T[Capacity];
         }
 
         /// <inheritdoc />
         public bool Contains(T item)
         {
-            return Values.Contains(item);
+            for (var i = 0; i < WriteIndex; i++)
+            {
+                if (Values[i].Equals(item)) return true;
+            }
+
+            return false;
         }
 
         /// <inheritdoc />
-        public void CopyTo(T[] array, int arrayIndex)
-        {
-            Values.CopyTo(array, arrayIndex);
-        }
+        public void CopyTo(T[] array, int arrayIndex) => Values.CopyTo(array, arrayIndex);
 
         /// <inheritdoc />
         public bool Remove(T item)
         {
-            return Values.Remove(item);
+            var index = Array.IndexOf(Values, item);
+            if (index < 0) return false;
+            for (var i = index; i < WriteIndex - 1; i++) Values[i] = Values[i + 1];
+            WriteIndex--;
+            return true;
         }
 
         /// <inheritdoc />
         public int IndexOf(T item)
         {
-            return Values.IndexOf(item);
+            for (var i = 0; i < WriteIndex; i++)
+            {
+                if (Values[i].Equals(item)) return i;
+            }
+
+            return -1;
         }
 
         /// <inheritdoc />
         public void Insert(int index, T item)
         {
-            Values.Insert(index, item);
+            if (index < 0 || index >= WriteIndex) return;
+            for (var i = WriteIndex; i > index; i--) Values[i] = Values[i - 1];
+            Values[index] = item;
+            WriteIndex++;
         }
 
         /// <inheritdoc />
         public void RemoveAt(int index)
         {
-            Values.RemoveAt(index);
+            if (index < 0 || index >= WriteIndex) return;
+            for (var i = index; i < WriteIndex - 1; i++) Values[i] = Values[i + 1];
+            WriteIndex--;
         }
 
         /// <inheritdoc />
@@ -180,7 +220,7 @@ namespace AIO
             if (index < 0 || index >= PageCount) return Array.Empty<T>();
             var start = index * _PageSize;
             var end = start + _PageSize;
-            if (end > Count) end = Count;
+            if (end > WriteIndex) end = WriteIndex;
             var array = new T[end - start];
             for (var i = start; i < end; i++) array[i - start] = Values[i];
             return array;
@@ -191,16 +231,11 @@ namespace AIO
         /// </summary>
         public void Reverse()
         {
-            Values.Reverse();
-            CurrentPageValues = GetPage(PageIndex);
-        }
+            for (var i = 0; i < WriteIndex / 2; i++)
+            {
+                (Values[i], Values[WriteIndex - i - 1]) = (Values[WriteIndex - i - 1], Values[i]);
+            }
 
-        /// <summary>
-        /// 排序
-        /// </summary>
-        public void Sort(Comparison<T> comparison)
-        {
-            Values.Sort(comparison);
             CurrentPageValues = GetPage(PageIndex);
         }
 
@@ -209,7 +244,7 @@ namespace AIO
         /// </summary>
         public void Sort()
         {
-            Sort(0, Count, null);
+            Sort(0, WriteIndex, Comparer<T>.Default);
         }
 
         /// <summary>
@@ -217,7 +252,7 @@ namespace AIO
         /// </summary>
         public void Sort(IComparer<T> comparer)
         {
-            Sort(0, Count, comparer);
+            Sort(0, WriteIndex, comparer);
         }
 
         /// <summary>
@@ -229,11 +264,9 @@ namespace AIO
                 throw new IndexOutOfRangeException();
             if (count < 0)
                 throw new ArgumentException();
-            if (Values.Count - index < count)
+            if (Values.Length - index < count)
                 throw new ArgumentException();
-            var temp = Values.ToArray();
-            Array.Sort(temp, index, count, comparer);
-            Values            = new List<T>(temp);
+            Array.Sort(Values, index, count, comparer);
             CurrentPageValues = GetPage(PageIndex);
         }
     }
