@@ -5124,7 +5124,7 @@ namespace AIO.UEditor
         public new static bool VFoldoutHeaderGroup(Action action, string label, bool foldout, GUIStyle style = null)
         {
 #if UNITY_2019_1_OR_NEWER
-            foldout = EditorGUILayout.ToggleLeft(label, foldout, style ?? "FoldoutHeader", GTOption.WidthExpand(true));
+            foldout = EditorGUILayout.ToggleLeft(label, foldout, style ?? "FoldoutHeader", GTOptions.WidthExpand(true));
 #else
             foldout = EditorGUILayout.ToggleLeft(label, foldout, style ?? "GUIEditor.BreadcrumbLeft", GTOption.WidthExpand(true));
 #endif
@@ -5149,7 +5149,7 @@ namespace AIO.UEditor
         public new static bool VFoldoutHeaderGroup(Action action, GUIContent label, bool foldout, GUIStyle style = null)
         {
 #if UNITY_2019_1_OR_NEWER
-            foldout = EditorGUILayout.ToggleLeft(label, foldout, style ?? "FoldoutHeader", GTOption.WidthExpand(true));
+            foldout = EditorGUILayout.ToggleLeft(label, foldout, style ?? "FoldoutHeader", GTOptions.WidthExpand(true));
 #else
             foldout = EditorGUILayout.ToggleLeft(label, foldout, style ?? "GUIEditor.BreadcrumbLeft", GTOption.WidthExpand(true));
 #endif

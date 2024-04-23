@@ -44,7 +44,7 @@ namespace AIO.UEditor
         /// 获取描述信息
         /// </summary>
         public static Dictionary<T, string> GetDescription<T>()
-        where T : struct, Enum
+            where T : struct, Enum
         {
             var type = typeof(T);
             var DescriptionDic = new Dictionary<T, string>();
@@ -100,7 +100,7 @@ namespace AIO.UEditor
         /// 更新
         /// </summary>
         public GraphicEnum Update<T>(in T type)
-        where T : struct, Enum
+            where T : struct, Enum
         {
             return Update(type, false, false);
         }
@@ -109,17 +109,18 @@ namespace AIO.UEditor
         /// 更新
         /// </summary>
         public GraphicEnum Update<T>(in T type, in bool showName, in bool multipleChoice)
-        where T : struct, Enum
+            where T : struct, Enum
         {
-            ShowName                 = showName;
-            MultipleChoice           = multipleChoice;
-            EnumValue                = type;
-            Info                     = EnumInfo.Create<T>();
-            menu                     = new GenericMenu();
-            menu.allowDuplicateNames = false;
+            ShowName = showName;
+            MultipleChoice = multipleChoice;
+            EnumValue = type;
+            Info = EnumInfo.Create<T>();
+            menu = new GenericMenu
+            {
+                allowDuplicateNames = false
+            };
             foreach (var description in Info.DescriptionDic)
-                menu.AddItem(
-                    new GUIContent(description.Value),
+                menu.AddItem(new GUIContent(description.Value),
                     EnumValue.GetHashCode() == description.Key.GetHashCode(),
                     () => EnumValue = description.Key);
 
@@ -130,7 +131,7 @@ namespace AIO.UEditor
         /// 更新
         /// </summary>
         public GraphicEnum Update<T>(in T type, in bool showName)
-        where T : struct, Enum
+            where T : struct, Enum
         {
             return Update(type, showName, false);
         }

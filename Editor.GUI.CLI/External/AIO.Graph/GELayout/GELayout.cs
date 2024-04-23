@@ -3,10 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using AIO.RainbowCore.RList.Editor;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
 #endregion
@@ -58,7 +56,8 @@ namespace AIO.UEditor
         /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle" /></param>
         /// <returns>true:呈现子对象,false:隐藏<see cref="bool" /></returns>
         private static bool FieldList<T>(GTContent label,
-                                         IList<T>  array,      bool     foldout, Action tips, Action<int> showFunc, Func<T> addFunc,
+                                         IList<T>  array, bool foldout, Action tips, Action<int> showFunc,
+                                         Func<T>   addFunc,
                                          GUIStyle  labelStyle, GUIStyle bgStyle)
         {
             if (showFunc is null)
@@ -160,9 +159,9 @@ namespace AIO.UEditor
         ///     分隔符
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Separator(int num)
+        public static void Separator(int number)
         {
-            for (var i = 0; i < num; i++) EditorGUILayout.Separator();
+            for (var i = 0; i < number; i++) EditorGUILayout.Separator();
         }
 
         /// <summary>
@@ -189,9 +188,9 @@ namespace AIO.UEditor
         ///     隔行
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Space(int num, float width, bool expand = true)
+        public static void Space(int number, float width, bool expand = true)
         {
-            for (var i = 0; i < num; i++) EditorGUILayout.Space(width, expand);
+            for (var i = 0; i < number; i++) EditorGUILayout.Space(width, expand);
         }
 
 #endif
@@ -199,7 +198,7 @@ namespace AIO.UEditor
         #endregion
 
         public static T FieldObject<T>(Rect rect, T obj, bool allowSceneObject, GUIStyle objStyle, GUIStyle minStyle)
-        where T : Object
+            where T : Object
         {
             return (T)FieldObject(rect, obj, typeof(T), allowSceneObject, objStyle, minStyle);
         }
@@ -214,7 +213,12 @@ namespace AIO.UEditor
             return FieldObject(rect, obj, typeof(Object), false, objStyle, minStyle);
         }
 
-        public static Object FieldObject(Rect rect, Object obj, Type type, bool allowSceneObject, GUIStyle objStyle = null, GUIStyle minStyle = null)
+        public static Object FieldObject(
+            Rect     rect,
+            Object   obj, Type type,
+            bool     allowSceneObject,
+            GUIStyle objStyle = null,
+            GUIStyle minStyle = null)
         {
             var guiContent = EditorGUIUtility.ObjectContent(obj, type);
             guiContent.text = obj ? AssetDatabase.GetAssetPath(obj) : guiContent.text;
@@ -224,8 +228,8 @@ namespace AIO.UEditor
 
             GUI.Box(rect, string.Empty, objStyle);
 
-            var height = Mathf.Min(rect.height - 2, rect.width);
-            var cell = new Rect(rect.x + 5, rect.y + 1, rect.width - height - 5, height);
+            var height    = Mathf.Min(rect.height - 2, rect.width);
+            var cell      = new Rect(rect.x + 5, rect.y + 1, rect.width - height - 5, height);
             var controlID = GUIUtility.GetControlID(FocusType.Passive, cell);
             if (EditorGUI.DropdownButton(cell, guiContent, FocusType.Passive, GEStyle.DDItemStyle))
             {
@@ -250,7 +254,8 @@ namespace AIO.UEditor
             switch (Event.current.GetTypeForControl(controlID)) // 判断当前是否有资源拖拽到控件上
             {
                 case EventType.ExecuteCommand:
-                    if (Event.current.commandName == "ObjectSelectorUpdated" && controlID == EditorGUIUtility.GetObjectPickerControlID())
+                    if (Event.current.commandName == "ObjectSelectorUpdated" &&
+                        controlID == EditorGUIUtility.GetObjectPickerControlID())
                     {
                         obj = EditorGUIUtility.GetObjectPickerObject();
                         Event.current.Use();

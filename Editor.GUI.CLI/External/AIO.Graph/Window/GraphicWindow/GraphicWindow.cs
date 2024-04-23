@@ -19,7 +19,7 @@ namespace AIO.UEditor
         /// <summary>
         ///     组名 编写额外的窗口
         /// </summary>
-        public string Group { get; private set; }
+        public string Group { get; }
 
         /// <summary>
         ///     控件ID
@@ -46,8 +46,8 @@ namespace AIO.UEditor
         private static void AddGroup<T>(string key)
         where T : EditorWindow
         {
-            var type = typeof(T);
-            if (!GroupTable.ContainsKey(key)) GroupTable.Add(key, new List<Type>());
+            if (!GroupTable.ContainsKey(key)) GroupTable[key] = new List<Type>();
+            var type                                          = typeof(T);
             if (GroupTable[key].Contains(type)) return;
             GroupTable[key].Add(type);
         }
@@ -60,8 +60,9 @@ namespace AIO.UEditor
         private static IEnumerable<Type> GetGroup(string key, Type type)
         {
             if (type is null) return Array.Empty<Type>();
-            if (!GroupTable.ContainsKey(key)) return Array.Empty<Type>();
-            return GroupTable[key].Where(item => item != type).ToArray();
+            return GroupTable.TryGetValue(key, out var value)
+                ? value.Where(item => item != type)
+                : Array.Empty<Type>();
         }
 
         /// <summary>
@@ -70,10 +71,7 @@ namespace AIO.UEditor
         /// <param name="key">键值</param>
         /// <typeparam name="T">类型</typeparam>
         private static IEnumerable<Type> GetGroup<T>(string key)
-        where T : EditorWindow
-        {
-            return GetGroup(key, typeof(T));
-        }
+        where T : EditorWindow => GetGroup(key, typeof(T));
 
         /// <summary>
         ///     视图元素
@@ -88,14 +86,14 @@ namespace AIO.UEditor
             {
                 minSize = new Vector2
                 {
-                    x = attribute.MinSizeWidth == 0 ? minSize.x : attribute.MinSizeWidth,
-                    y = attribute.MinSizeHeight == 0 ? minSize.y : attribute.MinSizeHeight
+                    x = attribute.MinSizeWidth == 0 ? minSize.x : attribute.MinSizeWidth
+                  , y = attribute.MinSizeHeight == 0 ? minSize.y : attribute.MinSizeHeight
                 };
 
                 maxSize = new Vector2
                 {
-                    x = attribute.MaxSizeWidth == 0 ? maxSize.x : attribute.MaxSizeWidth,
-                    y = attribute.MaxSizeHeight == 0 ? maxSize.y : attribute.MaxSizeHeight
+                    x = attribute.MaxSizeWidth == 0 ? maxSize.x : attribute.MaxSizeWidth
+                  , y = attribute.MaxSizeHeight == 0 ? maxSize.y : attribute.MaxSizeHeight
                 };
                 if (string.IsNullOrEmpty(attribute.Group)) return;
                 Group = attribute.Group;
@@ -108,40 +106,40 @@ namespace AIO.UEditor
         /// <summary>
         ///     有效程序集
         /// </summary>
-        protected static Assembly[] Assemblies { get; private set; }
+        protected static ICollection<Assembly> Assemblies { get; private set; }
 
         private void RefreshGroup()
         {
-            var subtype = typeof(EditorWindow);
+            var subtype  = typeof(EditorWindow);
+            var typeSelf = GetType();
             if (Assemblies is null)
             {
-                var list = new List<Assembly>();
+                Assemblies = new List<Assembly>();
                 foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
                 {
                     if (!assembly.FullName.Contains("Editor")) continue;
-                    list.Add(assembly);
+                    Assemblies.Add(assembly);
                     foreach (var type in assembly.GetTypes())
                     {
-                        if (type == GetType() || !type.IsSubclassOf(subtype)) continue;
+                        if (type == typeSelf || !type.IsSubclassOf(subtype)) continue;
                         var attribute = type.GetCustomAttribute<GWindowAttribute>(false);
                         if (string.IsNullOrEmpty(attribute?.Group)) continue;
                         if (!Group.Equals(attribute.Group)) continue;
                         AddGroup(Group, type);
                     }
                 }
-
-                Assemblies = list.ToArray();
             }
             else
             {
                 foreach (var type
                          in from assembly in Assemblies
                             from type in assembly.GetTypes()
-                            where type != GetType() && type.IsSubclassOf(subtype)
+                            where type != typeSelf && type.IsSubclassOf(subtype)
                             let attribute = type.GetCustomAttribute<GWindowAttribute>(false)
                             where !string.IsNullOrEmpty(attribute?.Group)
                             where Group.Equals(attribute.Group)
-                            select type) AddGroup(Group, type);
+                            select type
+                        ) AddGroup(Group, type);
             }
         }
 
@@ -158,8 +156,8 @@ namespace AIO.UEditor
                 try
                 {
                     position = new Rect(new Vector2(
-                                            (Screen.currentResolution.width - minSize.x) / 2,
-                                            (Screen.currentResolution.height - minSize.y) / 2),
+                                                    (Screen.currentResolution.width - minSize.x) / 2,
+                                                    (Screen.currentResolution.height - minSize.y) / 2),
                                         minSize);
                 }
                 catch
@@ -173,16 +171,10 @@ namespace AIO.UEditor
         }
 
         /// <inheritdoc />
-        protected sealed override void OnGUI()
-        {
-            Draw();
-        }
+        protected sealed override void OnGUI() { Draw(); }
 
         /// <inheritdoc />
-        protected sealed override void Awake()
-        {
-            OnAwake();
-        }
+        protected sealed override void Awake() { OnAwake(); }
 
         /// <inheritdoc />
         protected sealed override void Update()
@@ -229,15 +221,9 @@ namespace AIO.UEditor
             ControlId = GUIUtility.GetControlID(FocusType.Passive, position);
         }
 
-        public void Clear()
-        {
-            OnClear();
-        }
+        public void Clear() { OnClear(); }
 
-        void IGraphRect.OnAwake()
-        {
-            OnAwake();
-        }
+        void IGraphRect.OnAwake() => OnAwake();
 
         void IDisposable.Dispose() { }
 
@@ -253,6 +239,9 @@ namespace AIO.UEditor
         /// </summary>
         protected virtual void OnGUIStyle() { }
 
+        /// <summary>
+        ///    绘制
+        /// </summary>
         protected virtual void OnDraw() { }
 
         /// <summary>
@@ -280,7 +269,6 @@ namespace AIO.UEditor
         public void OnOpenEvent()
         {
             if (Event.current == null) return;
-            if (Event.current.keyCode == KeyCode.None) return;
             switch (Event.current.GetTypeForControl(ControlId))
             {
                 case EventType.ContextClick:
@@ -329,7 +317,6 @@ namespace AIO.UEditor
                     break;
 
                 case EventType.KeyDown:
-
                     EventKeyDown(Event.current, Event.current.keyCode);
                     break;
                 case EventType.KeyUp:

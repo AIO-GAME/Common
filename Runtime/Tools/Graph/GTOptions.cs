@@ -11,7 +11,7 @@ namespace AIO
     /// <summary>
     /// GUI 选项
     /// </summary>
-    public static class GTOption
+    public static class GTOptions
     {
         private enum Type
         {

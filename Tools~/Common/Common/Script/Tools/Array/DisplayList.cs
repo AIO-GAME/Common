@@ -107,7 +107,8 @@ namespace AIO
         public bool Contains(KeyValuePair<string, T> item) => ContainsKey(item.Key);
 
         /// <inheritdoc />
-        public IEnumerator<KeyValuePair<string, T>> GetEnumerator() => Keys.Select((t, i) => new KeyValuePair<string, T>(t, Values[i])).GetEnumerator();
+        public IEnumerator<KeyValuePair<string, T>> GetEnumerator() =>
+            Keys.Select((t, i) => new KeyValuePair<string, T>(t, Values[i])).GetEnumerator();
 
         /// <inheritdoc />
         public void CopyTo(KeyValuePair<string, T>[] array, int arrayIndex)
@@ -115,8 +116,8 @@ namespace AIO
             if (array == null) throw new ArgumentNullException(nameof(array));
             if (arrayIndex < 0) throw new ArgumentOutOfRangeException(nameof(arrayIndex));
             if (array.Length - arrayIndex < Count)
-                throw new ArgumentException(
-                    "The number of elements in the source ICollection<T> is greater than the available space from arrayIndex to the end of the destination array.");
+                throw new
+                    ArgumentException("The number of elements in the source ICollection<T> is greater than the available space from arrayIndex to the end of the destination array.");
 
             for (var i = 0; i < Count; i++) array[i + arrayIndex] = new KeyValuePair<string, T>(Keys[i], Values[i]);
         }
@@ -198,10 +199,7 @@ namespace AIO
         }
 
         /// <inheritdoc />
-        public int IndexOf(T item)
-        {
-            return Values.IndexOf(item);
-        }
+        public int IndexOf(T item) { return Values.IndexOf(item); }
 
         void IList<T>.Insert(int index, T item)
         {
@@ -234,7 +232,7 @@ namespace AIO
             if (arrayIndex < 0) throw new ArgumentOutOfRangeException(nameof(arrayIndex));
             if (array.Length - arrayIndex < Count)
                 throw new ArgumentException(
-                    "The number of elements in the source ICollection<T> is greater than the available space from arrayIndex to the end of the destination array.");
+                                            "The number of elements in the source ICollection<T> is greater than the available space from arrayIndex to the end of the destination array.");
 
             for (var i = 0; i < Count; i++) array[i + arrayIndex] = Values[i];
         }
@@ -256,10 +254,10 @@ namespace AIO
         {
             _PageIndex = index;
             if (index < 0 || index >= PageCount) return null;
-            var start = index * PageSize;
-            var end = start + PageSize;
-            if (end > Count) end = Count;
-            var array = new T[end - start];
+            var start                                          = index * PageSize;
+            var end                                            = start + PageSize;
+            if (end > Count) end                               = Count;
+            var array                                          = new T[end - start];
             for (var i = start; i < end; i++) array[i - start] = Values[i];
 
             CurrentPageValues = array;
@@ -279,7 +277,6 @@ namespace AIO
                 Values.Swap(i, swap);
             }
         }
-
 
         /// <summary>
         /// 添加
@@ -333,10 +330,7 @@ namespace AIO
         /// </summary>
         public event Func<string, string, int> OnCompare;
 
-        private static int Compare(string a, string b)
-        {
-            return string.Compare(b, a, StringComparison.Ordinal);
-        }
+        private static int Compare(string a, string b) { return string.Compare(b, a, StringComparison.Ordinal); }
 
         /// <summary>
         /// 移除
@@ -357,20 +351,14 @@ namespace AIO
         /// </summary>
         /// <param name="key">键值</param>
         /// <returns>if found <see cref="T"/>; otherwise <c>default</c></returns>
-        public T GetValue(in string key)
-        {
-            return !Keys.Contains(key) ? default : Values[Keys.IndexOf(key)];
-        }
+        public T GetValue(in string key) { return !Keys.Contains(key) ? default : Values[Keys.IndexOf(key)]; }
 
         /// <summary>
         /// 获取值
         /// </summary>
         /// <param name="index">下标</param>
         /// <returns>if found <see cref="T"/>; otherwise <c>default</c></returns>
-        public T GetValue(in int index)
-        {
-            return index < 0 || index >= Keys.Count ? default : Values[index];
-        }
+        public T GetValue(in int index) { return index < 0 || index >= Keys.Count ? default : Values[index]; }
 
         /// <summary>
         /// 获取值

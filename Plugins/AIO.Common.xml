@@ -13189,6 +13189,11 @@
             分页列表
             </summary>
         </member>
+        <member name="M:AIO.PageList`1.#ctor(System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
         <member name="M:AIO.PageList`1.#ctor">
             <summary>
             构造函数
@@ -13204,6 +13209,21 @@
         </member>
         <member name="P:AIO.PageList`1.Count">
             <inheritdoc />
+        </member>
+        <member name="F:AIO.PageList`1.Capacity">
+            <summary>
+            容量
+            </summary>
+        </member>
+        <member name="F:AIO.PageList`1.WriteOffset">
+            <summary>
+            写入索引
+            </summary>
+        </member>
+        <member name="P:AIO.PageList`1.WriteIndex">
+            <summary>
+            写入索引
+            </summary>
         </member>
         <member name="P:AIO.PageList`1.IsReadOnly">
             <inheritdoc />
@@ -13263,11 +13283,6 @@
             反转
             </summary>
         </member>
-        <member name="M:AIO.PageList`1.Sort(System.Comparison{`0})">
-            <summary>
-            排序
-            </summary>
-        </member>
         <member name="M:AIO.PageList`1.Sort">
             <summary>
             排序
@@ -13281,6 +13296,11 @@
         <member name="M:AIO.PageList`1.Sort(System.Int32,System.Int32,System.Collections.Generic.IComparer{`0})">
             <summary>
             排序
+            </summary>
+        </member>
+        <member name="M:AIO.PageList`1.Dispose">
+            <summary>
+            释放资源
             </summary>
         </member>
         <member name="T:AIO.GBean">

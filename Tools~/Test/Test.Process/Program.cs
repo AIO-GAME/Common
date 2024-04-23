@@ -24,20 +24,11 @@ namespace AIO
         {
             public int a;
 
-            public TA(int b = 0)
-            {
-                a = b;
-            }
+            public TA(int b = 0) { a = b; }
 
-            public sealed override string ToString()
-            {
-                return a.ToString();
-            }
+            public sealed override string ToString() { return a.ToString(); }
 
-            public sealed override int GetHashCode()
-            {
-                return a.GetHashCode();
-            }
+            public sealed override int GetHashCode() { return a.GetHashCode(); }
 
             public sealed override bool Equals(object obj)
             {
@@ -50,16 +41,9 @@ namespace AIO
             }
         }
 
+        private static void LoadAsset() { Console.WriteLine("11111111111111111".GetHashCode()); }
 
-        private static void LoadAsset()
-        {
-            Console.WriteLine("11111111111111111".GetHashCode());
-        }
-
-        private static void LoadAsset1()
-        {
-            Console.WriteLine("222222222222222");
-        }
+        private static void LoadAsset1() { Console.WriteLine("222222222222222"); }
 
         static void Test()
         {
@@ -94,23 +78,38 @@ namespace AIO
             // }
 
 
-            var index = 0;
-            var dis = new DisplayList<int>();
-            dis.Add(++index, "ACC", index);
-            dis.Add(++index, "ABB", index);
-            dis.Add(++index, "ABBB", index);
-            dis.Add(++index, "B", index);
-            dis.Add(++index, "C", index);
-            dis.Add(++index, "a", index);
-            dis.Add(++index, "b", index);
-            dis.Add(++index, "c", index);
-            dis.Add(++index, "*", index);
-            dis.Add(++index, "$", index);
+            // var index = 0;
+            // var dis = new DisplayList<int>();
+            // dis.Add(++index, "ACC", index);
+            // dis.Add(++index, "ABB", index);
+            // dis.Add(++index, "ABBB", index);
+            // dis.Add(++index, "B", index);
+            // dis.Add(++index, "C", index);
+            // dis.Add(++index, "a", index);
+            // dis.Add(++index, "b", index);
+            // dis.Add(++index, "c", index);
+            // dis.Add(++index, "*", index);
+            // dis.Add(++index, "$", index);
+            //
+            // dis.Sort();
+            // foreach (var variable in dis)
+            // {
+            //     Console.WriteLine(variable + " " + dis.GetDisplay(variable.Key));
+            // }
 
+            var index = 0;
+            var dis   = new PageList<int>();
+            for (var i = 0; i < 32; i++)
+            {
+                dis.Add(++index);
+            }
+
+
+            Console.WriteLine("--------------------");
             dis.Sort();
             foreach (var variable in dis)
             {
-                Console.WriteLine(variable + " " + dis.GetDisplay(variable.Key));
+                Console.WriteLine(variable + " ");
             }
         }
     }
