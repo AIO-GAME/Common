@@ -36,9 +36,9 @@ namespace AIO
         private static void HeapSort_MaxHeaping<T>(in IList<T> array, in int index, in int size)
         where T : IComparable<T>, IComparable
         {
-            var left = 2 * index + 1;
-            var right = 2 * (index + 1);
-            var large = index;
+            var left                                                            = 2 * index + 1;
+            var right                                                           = 2 * (index + 1);
+            var large                                                           = index;
             if (left < size && array[left].CompareTo(array[large]) > 0) large   = left;
             if (right < size && array[right].CompareTo(array[large]) > 0) large = right;
             if (index != large)
@@ -69,12 +69,11 @@ namespace AIO
         /// <summary>
         ///     将指定的结点调整为堆。
         /// </summary>
-        private static void HeapSort_MaxHeaping<T>(in IList<T>        array, in int index, in int size,
-                                                   in Func<T, T, int> Comparer)
+        private static void HeapSort_MaxHeaping<T>(in IList<T> array, in int index, in int size, in Func<T, T, int> Comparer)
         {
-            var left = 2 * index + 1;
-            var right = 2 * (index + 1);
-            var large = index;
+            var left                                                            = 2 * index + 1;
+            var right                                                           = 2 * (index + 1);
+            var large                                                           = index;
             if (left < size && Comparer(array[left], array[large]) > 0) large   = left;
             if (right < size && Comparer(array[right], array[large]) > 0) large = right;
             if (index != large)

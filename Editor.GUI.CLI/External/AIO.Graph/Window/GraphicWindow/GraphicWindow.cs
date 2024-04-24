@@ -86,14 +86,12 @@ namespace AIO.UEditor
             {
                 minSize = new Vector2
                 {
-                    x = attribute.MinSizeWidth == 0 ? minSize.x : attribute.MinSizeWidth
-                  , y = attribute.MinSizeHeight == 0 ? minSize.y : attribute.MinSizeHeight
+                    x = attribute.MinSizeWidth == 0 ? minSize.x : attribute.MinSizeWidth, y = attribute.MinSizeHeight == 0 ? minSize.y : attribute.MinSizeHeight
                 };
 
                 maxSize = new Vector2
                 {
-                    x = attribute.MaxSizeWidth == 0 ? maxSize.x : attribute.MaxSizeWidth
-                  , y = attribute.MaxSizeHeight == 0 ? maxSize.y : attribute.MaxSizeHeight
+                    x = attribute.MaxSizeWidth == 0 ? maxSize.x : attribute.MaxSizeWidth, y = attribute.MaxSizeHeight == 0 ? maxSize.y : attribute.MaxSizeHeight
                 };
                 if (string.IsNullOrEmpty(attribute.Group)) return;
                 Group = attribute.Group;
@@ -217,7 +215,16 @@ namespace AIO.UEditor
 
         public void Draw()
         {
-            OnDraw();
+            try { OnDraw(); }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+                Close();
+                EHelper.Window.Free(this);
+                GUIUtility.ExitGUI();
+                return;
+            }
+
             ControlId = GUIUtility.GetControlID(FocusType.Passive, position);
         }
 
@@ -517,8 +524,7 @@ namespace AIO.UEditor
         /// <returns>
         ///     <see cref="SettingsProvider" />
         /// </returns>
-        protected static GraphicSettingsProvider CreateSettingsProvider(string        path,
-                                                                        SettingsScope scope = SettingsScope.User)
+        protected static GraphicSettingsProvider CreateSettingsProvider(string path, SettingsScope scope = SettingsScope.User)
         {
             return new GraphicSettingsProvider($"AIO/{path}", scope);
         }

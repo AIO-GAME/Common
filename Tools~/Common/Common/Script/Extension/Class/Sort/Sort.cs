@@ -98,12 +98,7 @@ namespace AIO
         private static void InsertIntoLinkList<T>(LinkedList<T> linkedList, T number)
         where T : IComparable
         {
-            // 链表为空时，插入到第一位  
-            if (linkedList.Count <= 0)
-            {
-                linkedList.AddFirst(number);
-            }
-            else
+            if (linkedList.Count > 0)
             {
                 foreach (var node in
                          from i in linkedList
@@ -113,9 +108,9 @@ namespace AIO
                     linkedList.AddBefore(node, number);
                     return;
                 }
-
-                linkedList.AddLast(number);
             }
+
+            linkedList.AddLast(number); // 链表为空时，插入到第一位  
         }
     }
 }

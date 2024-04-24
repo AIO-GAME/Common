@@ -99,15 +99,16 @@ namespace AIO
 
             var index = 0;
             var dis   = new PageList<int>();
-            for (var i = 0; i < 32; i++)
+            for (var i = 11; i >= 0; i--) dis.Add(++index * 10);
+            dis.Update();
+            foreach (var variable in dis.CurrentPageValues)
             {
-                dis.Add(++index);
+                Console.WriteLine(variable + " ");
             }
 
-
             Console.WriteLine("--------------------");
-            dis.Sort();
-            foreach (var variable in dis)
+            dis.Sort((a, b) => a.CompareTo(b));
+            foreach (var variable in dis.CurrentPageValues)
             {
                 Console.WriteLine(variable + " ");
             }

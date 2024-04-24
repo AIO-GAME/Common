@@ -340,6 +340,11 @@
                 快速排序
             </summary>
         </member>
+        <member name="M:AIO.ExtendSort.SortQuick``1(System.Collections.Generic.IList{``0},System.Int32@,System.Int32@,System.Func{``0,``0,System.Int32}@)">
+            <summary>
+                快速排序
+            </summary>
+        </member>
         <member name="M:AIO.ExtendSort.SortSelect``1(System.Collections.Generic.IList{``0})">
             <summary>
                 选择排序 数据量:100以下适用
@@ -13225,6 +13230,11 @@
             写入索引
             </summary>
         </member>
+        <member name="M:AIO.PageList`1.Update">
+            <summary>
+            更新
+            </summary>
+        </member>
         <member name="P:AIO.PageList`1.IsReadOnly">
             <inheritdoc />
         </member>
@@ -13283,20 +13293,33 @@
             反转
             </summary>
         </member>
-        <member name="M:AIO.PageList`1.Sort">
-            <summary>
-            排序
-            </summary>
-        </member>
         <member name="M:AIO.PageList`1.Sort(System.Collections.Generic.IComparer{`0})">
             <summary>
             排序
             </summary>
+            <param name="comparer"> 比较器 </param>
+        </member>
+        <member name="M:AIO.PageList`1.Sort(System.Func{`0,`0,System.Int32})">
+            <summary>
+            排序
+            </summary>
+            <param name="comparer"> 比较器 </param>
+        </member>
+        <member name="M:AIO.PageList`1.Sort(System.Int32,System.Int32,System.Func{`0,`0,System.Int32})">
+            <summary>
+            排序
+            </summary>
+            <param name="index"> 下标 </param>
+            <param name="count"> 数量 </param>
+            <param name="comparer"> 比较器 </param>
         </member>
         <member name="M:AIO.PageList`1.Sort(System.Int32,System.Int32,System.Collections.Generic.IComparer{`0})">
             <summary>
             排序
             </summary>
+            <param name="index"> 下标 </param>
+            <param name="count"> 数量 </param>
+            <param name="comparer"> 比较器 </param>
         </member>
         <member name="M:AIO.PageList`1.Dispose">
             <summary>

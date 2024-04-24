@@ -12,10 +12,7 @@ namespace AIO.UEditor
     [StructLayout(LayoutKind.Auto)]
     public partial struct ViewRect
     {
-        public static implicit operator Rect(ViewRect viewRect)
-        {
-            return viewRect.Current;
-        }
+        public static implicit operator Rect(ViewRect viewRect) { return viewRect.Current; }
 
         /// <summary>
         ///     是否显示
@@ -46,25 +43,25 @@ namespace AIO.UEditor
 
         public ViewRect(float minWidth, float minHeight, DragStretchType allowDragStretch = DragStretchType.None)
         {
-            MinWidth = minWidth;
-            MaxWidth = minWidth;
+            MinWidth  = minWidth;
+            MaxWidth  = minWidth;
             MinHeight = minHeight;
             MaxHeight = minWidth;
 
             DragStretchHorizontalWidth = 1;
-            DragStretchVerticalHeight = 1;
+            DragStretchVerticalHeight  = 1;
 
             AllowDragStretch = allowDragStretch;
-            DragStretch = DragStretchType.None;
+            DragStretch      = DragStretchType.None;
 
             IsShow = true;
             Current = new Rect
             {
-                width = minWidth,
+                width  = minWidth,
                 height = minHeight
             };
             RectDragHorizontal = new Rect();
-            RectDragVertical = new Rect();
+            RectDragVertical   = new Rect();
         }
 
         /// <summary>
@@ -112,7 +109,6 @@ namespace AIO.UEditor
             set => Current.center = value;
         }
 
-
         public void Draw(Action<Rect> onDraw, GUIStyle style = null)
         {
             if (IsShow) Draw(Current, onDraw, style);
@@ -149,9 +145,9 @@ namespace AIO.UEditor
             }
 
             if (style != null) GUI.Box(rect, GUIContent.none, style);
-            using (new GUI.ClipScope(rect))
+            if (onDraw == null) return;
+            using (new GUI.GroupScope(rect))
             {
-                if (onDraw == null) return;
                 rect.x = 0;
                 rect.y = 0;
                 try
