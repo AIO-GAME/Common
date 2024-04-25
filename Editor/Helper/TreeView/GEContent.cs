@@ -2,9 +2,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-#if UNITY_EDITOR
 using UnityEditor;
-#endif
 
 #endregion
 
@@ -48,70 +46,58 @@ namespace AIO
 
         public static GUIContent GetBuiltin(string name)
         {
-#if UNITY_EDITOR
             if (GCBuiltin.TryGetValue(name, out var builtin)) return builtin;
             GCBuiltin[name] = EditorGUIUtility.IconContent(name);
             return GCBuiltin[name];
-#else
-            return GUIContent.none;
-#endif
         }
 
         public static GUIContent NewSetting(string name, string tooltip)
         {
             if (!GCSetting.ContainsKey(name))
-                GCSetting[name] = new GUIContent(Resources.Load<Texture>($"Editor/Icon/Setting/{name}"));
-            return new GUIContent(GCSetting[name].image, tooltip);
+                GCSetting[name] = EditorGUIUtility.TrIconContent(Resources.Load<Texture>($"Editor/Icon/Setting/{name}"), tooltip);
+            return EditorGUIUtility.TrIconContent(GCSetting[name].image, tooltip);
         }
 
         public static GUIContent NewSettingCustom(string path, string tooltip)
         {
             if (!GCSetting.ContainsKey(path))
-                GCSetting[path] = new GUIContent(Resources.Load<Texture>(path));
-            return new GUIContent(GCSetting[path].image, tooltip);
+                GCSetting[path] = EditorGUIUtility.TrIconContent(Resources.Load<Texture>(path));
+            return EditorGUIUtility.TrIconContent(GCSetting[path].image, tooltip);
         }
 
         public static GUIContent NewSetting(string name)
         {
             if (!GCSetting.ContainsKey(name))
-                GCSetting[name] = new GUIContent(Resources.Load<Texture>($"Editor/Icon/Setting/{name}"));
-            return new GUIContent(GCSetting[name].image);
+                GCSetting[name] = EditorGUIUtility.TrIconContent(Resources.Load<Texture>($"Editor/Icon/Setting/{name}"));
+            return EditorGUIUtility.TrIconContent(GCSetting[name].image);
         }
 
         public static GUIContent NewApp(string name)
         {
             if (!GCApp.ContainsKey(name))
                 GCApp[name] = new GUIContent(Resources.Load<Texture>($"Editor/Icon/App/{name}"));
-            return new GUIContent(GCApp[name].image);
+            return EditorGUIUtility.TrIconContent(GCApp[name].image);
         }
 
         public static GUIContent NewApp(string name, string tooltip)
         {
             if (!GCApp.ContainsKey(name))
-                GCApp[name] = new GUIContent(Resources.Load<Texture>($"Editor/Icon/App/{name}"));
-            return new GUIContent(GCApp[name].image, tooltip);
+                GCApp[name] = EditorGUIUtility.TrIconContent(Resources.Load<Texture>($"Editor/Icon/App/{name}"));
+            return EditorGUIUtility.TrIconContent(GCApp[name].image, tooltip);
         }
 
         public static GUIContent NewBuiltin(string name)
         {
-#if UNITY_EDITOR
             if (!GCBuiltin.ContainsKey(name))
                 GCBuiltin[name] = EditorGUIUtility.IconContent(name);
-            return new GUIContent(GCBuiltin[name].image);
-#else
-            return new GUIContent(name);
-#endif
+            return EditorGUIUtility.TrIconContent(GCBuiltin[name].image);
         }
 
         public static GUIContent NewBuiltin(string name, string tooltip)
         {
-#if UNITY_EDITOR
             if (!GCBuiltin.ContainsKey(name))
                 GCBuiltin[name] = EditorGUIUtility.IconContent(name);
-            return new GUIContent(GCBuiltin[name].image, tooltip);
-#else
-            return new GUIContent(name, tooltip);
-#endif
+            return EditorGUIUtility.TrIconContent(GCBuiltin[name].image, tooltip);
         }
 
         public static void LoadSetting()

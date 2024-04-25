@@ -88,16 +88,33 @@ namespace AIO.UEditor
         /// <summary>
         ///     按键按下
         /// </summary>
-        /// <param name="keyCode"> 按键 </param>
+        /// <param name="evt"> 按键事件 </param>
         /// <param name="item"> 选中组件 </param>
-        protected virtual void OnEventKeyDown(Event keyCode, TreeViewItem item) { }
+        protected virtual void OnEventKeyDown(Event evt, TreeViewItem item)
+        {
+            switch (evt.keyCode)
+            {
+                case KeyCode.DownArrow: // 数字键盘 下键
+                {
+                    var temp = item.id + 1;
+                    ReloadAndSelect(temp >= Count ? 0 : temp);
+                    break;
+                }
+                case KeyCode.UpArrow: // 数字键盘 上键
+                {
+                    var temp = item.id - 1;
+                    ReloadAndSelect(temp < 0 ? Count - 1 : temp);
+                    break;
+                }
+            }
+        }
 
         /// <summary>
         ///     按键抬起
         /// </summary>
-        /// <param name="keyCode"> 按键 </param>
+        /// <param name="evt"> 按键事件 </param>
         /// <param name="item"> 选中组件 </param>
-        protected virtual void OnEventKeyUp(Event keyCode, TreeViewItem item) { }
+        protected virtual void OnEventKeyUp(Event evt, TreeViewItem item) { }
 
         #endregion
 
@@ -279,11 +296,16 @@ namespace AIO.UEditor
         protected sealed override void SelectionChanged(IList<int> selectedIds)
         {
             if (rootItem.children.Count == 0) return;
-            if (selectedIds.Count == 0) return;
-            if (rootItem.children.Count < selectedIds.Count) return;
-            SetSelection(selectedIds, TreeViewSelectionOptions.RevealAndFrame);
+            if (selectedIds is null || selectedIds.Count == 0) return;
+            var count = rootItem.children.Count;
+            var temp  = selectedIds.ToList();
+            for (var i = 0; i < temp.Count; i++)
+                if (temp[i] >= count)
+                    temp.Remove(i);
+            if (temp.Count == 0) return;
+            SetSelection(temp, TreeViewSelectionOptions.RevealAndFrame);
             if (OnSingleSelectionChanged is null) return;
-            foreach (var index in selectedIds) OnSingleSelectionChanged.Invoke(rootItem.children[index].id);
+            foreach (var index in temp) OnSingleSelectionChanged.Invoke(index);
         }
 
         /// <inheritdoc />

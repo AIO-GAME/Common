@@ -22,6 +22,11 @@ namespace AIO.UEditor
         /// </summary>
         protected int ContentID;
 
+        /// <summary>
+        ///   主列索引
+        /// </summary>
+        protected int MainColumnIndex = 0;
+
         protected TreeViewBasics(TreeViewState state, MultiColumnHeader header) : base(state, header)
         {
             multiColumnHeader.SetSorting(0, false);
@@ -29,6 +34,11 @@ namespace AIO.UEditor
         }
 
         #region 工具函数
+
+        public void SetLabel(string     label)          => multiColumnHeader.GetColumn(0).headerContent = EditorGUIUtility.TrTextContent(label);
+        public void SetLabel(string     label, int col) => multiColumnHeader.GetColumn(col).headerContent = EditorGUIUtility.TrTextContent(label);
+        public void SetLabel(GUIContent label)          => multiColumnHeader.GetColumn(0).headerContent = label;
+        public void SetLabel(GUIContent label, int col) => multiColumnHeader.GetColumn(col).headerContent = label;
 
         private void SortingChanged(MultiColumnHeader header)
         {
@@ -145,7 +155,7 @@ namespace AIO.UEditor
         {
             base.OnGUI(rect);
             ContentID = GUIUtility.GetControlID(FocusType.Passive, rect);
-            multiColumnHeader.state.AutoWidth(rect.width);
+            multiColumnHeader.state.AutoWidth(rect.width, MainColumnIndex);
 
             OnDraw(rect);
             if (Event.current.type == EventType.MouseDown
@@ -238,6 +248,12 @@ namespace AIO.UEditor
             return base.DoesItemMatchSearch(item, search);
         }
 
+        /// <summary>
+        ///    搜索内容改变
+        /// </summary>
+        /// <param name="newSearch">新搜索内容</param>
+        protected override void SearchChanged(string newSearch) { }
+
         #endregion
 
         #region abstract
@@ -282,8 +298,15 @@ namespace AIO.UEditor
             bool   sort
         ) => new MultiColumnHeaderState.Column
         {
-            headerContent         = new GUIContent(name), width                 = width, minWidth               = min, maxWidth = max, sortedAscending = true,
-            headerTextAlignment   = TextAlignment.Center, sortingArrowAlignment = TextAlignment.Center, canSort = sort, autoResize = true,
+            headerContent         = new GUIContent(name),
+            width                 = width,
+            minWidth              = min,
+            maxWidth              = max,
+            sortedAscending       = true,
+            headerTextAlignment   = TextAlignment.Center,
+            sortingArrowAlignment = TextAlignment.Center,
+            canSort               = sort,
+            autoResize            = true,
             allowToggleVisibility = false
         };
 

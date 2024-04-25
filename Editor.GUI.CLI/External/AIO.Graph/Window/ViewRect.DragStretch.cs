@@ -21,7 +21,7 @@ namespace AIO.UEditor
         /// <summary>
         ///     是否允许 横向拖拽
         /// </summary>
-        public bool IsAllowHorizontal
+        public bool IsAllowDragStretchHorizontal
         {
             get => AllowDragStretch.HasFlag(DragStretchType.Horizontal);
             set
@@ -34,7 +34,7 @@ namespace AIO.UEditor
         /// <summary>
         ///     是否允许 竖向拖拽
         /// </summary>
-        public bool IsAllowVertical
+        public bool IsAllowDragStretchVertical
         {
             get => AllowDragStretch.HasFlag(DragStretchType.Vertical);
             set
@@ -110,17 +110,17 @@ namespace AIO.UEditor
             switch (type)
             {
                 case DragStretchType.Horizontal:
-                    if (!IsShow || !IsAllowHorizontal) IsDragStretchHorizontal = false;
+                    if (!IsShow || !IsAllowDragStretchHorizontal) IsDragStretchHorizontal = false;
                     else IsDragStretchHorizontal                               = RectDragHorizontal.Contains(point);
                     return IsDragStretchHorizontal;
                 case DragStretchType.Vertical:
-                    if (!IsShow || !IsAllowVertical) IsDragStretchVertical = false;
+                    if (!IsShow || !IsAllowDragStretchVertical) IsDragStretchVertical = false;
                     else IsDragStretchVertical                             = RectDragVertical.Contains(point);
                     return IsDragStretchVertical;
                 case DragStretchType.Both:
                     if (IsShow) return IsDragStretchHorizontal || IsDragStretchVertical;
-                    IsDragStretchHorizontal = IsAllowHorizontal && RectDragHorizontal.Contains(point);
-                    IsDragStretchVertical   = IsAllowVertical && RectDragVertical.Contains(point);
+                    IsDragStretchHorizontal = IsAllowDragStretchHorizontal && RectDragHorizontal.Contains(point);
+                    IsDragStretchVertical   = IsAllowDragStretchVertical && RectDragVertical.Contains(point);
                     return IsDragStretchHorizontal || IsDragStretchVertical;
                 case DragStretchType.None:
                 default:
@@ -162,7 +162,7 @@ namespace AIO.UEditor
             {
                 case DragStretchType.Horizontal:
                 {
-                    if (!IsAllowHorizontal || !IsDragStretchHorizontal) return;
+                    if (!IsAllowDragStretchHorizontal || !IsDragStretchHorizontal) return;
                     var tempX = Current.width + e.delta.x;
                     if (tempX < MinWidth) Current.width      = MinWidth;
                     else if (tempX > MaxWidth) Current.width = MaxWidth;
@@ -171,7 +171,7 @@ namespace AIO.UEditor
                 }
                 case DragStretchType.Vertical:
                 {
-                    if (!IsAllowVertical || !IsDragStretchVertical) return;
+                    if (!IsAllowDragStretchVertical || !IsDragStretchVertical) return;
                     var tempY = Current.height + e.delta.y;
                     if (tempY < MinHeight) Current.height      = MinHeight;
                     else if (tempY > MaxHeight) Current.height = MaxHeight;
@@ -180,13 +180,13 @@ namespace AIO.UEditor
                 }
                 case DragStretchType.Both:
                 {
-                    if (!IsAllowHorizontal || !IsDragStretchHorizontal) return;
+                    if (!IsAllowDragStretchHorizontal || !IsDragStretchHorizontal) return;
                     var tempX = Current.width + e.delta.x;
                     if (tempX < MinWidth) Current.width      = MinWidth;
                     else if (tempX > MaxWidth) Current.width = MaxWidth;
                     else Current.width                       = tempX;
 
-                    if (!IsAllowVertical || !IsDragStretchVertical) break;
+                    if (!IsAllowDragStretchVertical || !IsDragStretchVertical) break;
                     var tempY = Current.height + e.delta.y;
                     if (tempY < MinHeight) Current.height      = MinHeight;
                     else if (tempY > MaxHeight) Current.height = MaxHeight;

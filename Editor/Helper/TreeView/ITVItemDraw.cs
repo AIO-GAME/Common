@@ -46,10 +46,10 @@ namespace AIO.UEditor
         /// <summary>
         ///     绘制
         /// </summary>
-        /// <param name="cellRect"> 单元格矩形 </param>
+        /// <param name="cell"> 单元格矩形 </param>
         /// <param name="col"> 列 </param>
         /// <param name="args"> 行参数 </param>
-        void OnDraw(Rect cellRect, int col, ref RowGUIArgs args);
+        void OnDraw(Rect cell, int col, ref RowGUIArgs args);
 
         /// <summary>
         ///     是否允许改变展开状态
