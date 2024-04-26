@@ -4,7 +4,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 
 #endregion
 
@@ -13,7 +12,7 @@ namespace AIO
     /// <summary>
     /// 分页
     /// </summary>
-    public interface IPageArray<out T>
+    public interface IPageArray<T> : ICollection<T>
     {
         /// <summary>
         /// 页大小
@@ -280,9 +279,29 @@ namespace AIO
         {
             if (index < 0) throw new IndexOutOfRangeException();
             if (count <= 0) return;
-            if (WriteOffset - index < count) throw new IndexOutOfRangeException();
-            ExtendSort.Quick(Values, index, count - 1, comparer);
+            var span = WriteOffset - index;
+            if (span < count) throw new IndexOutOfRangeException();
+            Array.Sort(Values, index, count, GeneraComparer.To(comparer));
             CurrentPageValues = GetPage(_PageIndex);
+        }
+
+        private class GeneraComparer : IComparer<T>
+        {
+            private static readonly GeneraComparer Default = new GeneraComparer();
+
+            private Func<T, T, int> Comparer;
+
+            private GeneraComparer() { }
+
+            public static IComparer<T> To(Func<T, T, int> comparer)
+            {
+                Default.Comparer = comparer;
+                return Default;
+            }
+
+            public int Compare(T x, T y) => Comparer(x, y);
+
+            public static implicit operator Func<T, T, int>(GeneraComparer comparer) => comparer.Comparer;
         }
 
         /// <summary>
@@ -295,7 +314,8 @@ namespace AIO
         {
             if (index < 0) throw new IndexOutOfRangeException();
             if (count <= 0) return;
-            if (WriteOffset - index < count) throw new IndexOutOfRangeException();
+            var span = WriteOffset - index;
+            if (span < count) throw new IndexOutOfRangeException();
             Array.Sort(Values, index, count, comparer);
             CurrentPageValues = GetPage(_PageIndex);
         }

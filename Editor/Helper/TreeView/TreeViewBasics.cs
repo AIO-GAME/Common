@@ -42,50 +42,59 @@ namespace AIO.UEditor
 
         private void SortingChanged(MultiColumnHeader header)
         {
-            OnSorting(header.sortedColumnIndex, header.IsSortedAscending(header.sortedColumnIndex));
-            Reload();
+            if (OnSorting(header.sortedColumnIndex, header.IsSortedAscending(header.sortedColumnIndex)))
+            {
+                Reload();
+            }
         }
 
         /// <summary>
         /// 重载并选中
         /// </summary>
-        public void ReloadAndSelect() => ReloadAndSelect(Array.Empty<int>());
+        public void ReloadAndSelect()
+        {
+            Reload();
+            SetFocus();
+        }
+
+        /// <summary>
+        /// 选中
+        /// </summary>
+        public void Select(int index)
+        {
+            if (Count == 0 || Count <= index || index < 0)
+            {
+                SetFocus();
+                return;
+            }
+
+            SelectionChanged(new[] { index });
+            SetFocus();
+        }
+
+        /// <summary>
+        /// 选中
+        /// </summary>
+        public void Select(IList<int> hashCodes)
+        {
+            if (hashCodes.Count > 0) SelectionChanged(hashCodes);
+            SetFocus();
+        }
 
         /// <summary>
         /// 重载并选中
         /// </summary>
         public void ReloadAndSelect(int hc)
         {
-            if (Count == 0)
+            if (Count == 0 || Count <= hc || hc < 0)
             {
-                Reload();
                 SetFocus();
                 return;
             }
 
-            ReloadAndSelect(new[]
-            {
-                Mathf.Clamp(hc, 0, Count - 1)
-            });
-        }
-
-        /// <summary>
-        /// 重载并选中
-        /// </summary>
-        public void ReloadAndSelect(int hc1, int hc2)
-        {
-            if (Count == 0)
-            {
-                Reload();
-                SetFocus();
-                return;
-            }
-
-            var max = Count - 1;
-            ReloadAndSelect(new[]
-            {
-                Mathf.Clamp(hc1, 0, max), Mathf.Clamp(hc2, 0, max)
-            });
+            Reload();
+            SelectionChanged(new[] { hc });
+            SetFocus();
         }
 
         /// <summary>
@@ -284,7 +293,8 @@ namespace AIO.UEditor
         /// </summary>
         /// <param name="col"> 列 </param>
         /// <param name="ascending"> 是否升序 </param>
-        protected virtual void OnSorting(int col, bool ascending) { }
+        /// <returns> 是否重新加载 </returns>
+        protected virtual bool OnSorting(int col, bool ascending) => false;
 
         #endregion
 

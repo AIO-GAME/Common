@@ -73,10 +73,7 @@ namespace AIO
 
             return;
 
-            void Action()
-            {
-                action.Invoke(state);
-            }
+            void Action() { action.Invoke(state); }
         }
 
         /// <summary>

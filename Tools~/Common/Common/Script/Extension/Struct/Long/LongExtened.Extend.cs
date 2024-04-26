@@ -29,11 +29,11 @@ namespace AIO
             if (size < 0) return "Unknown";
             if (size == 0) return "0 B";
 
-            double bytes = size;
-            ushort suffixIndex = 0;
-            var limit = unitStr.Length - 1;
+            double bytes                                         = size;
+            ushort suffixIndex                                   = 0;
+            int    limit                                         = unitStr.Length - 1;
             while (bytes >= 1024 && suffixIndex++ < limit) bytes /= 1024;
-            return $"{bytes.ToString($"N{retain}").TrimEnd('0', '.')} {unitStr[suffixIndex]}";
+            return $"{bytes.ToString($"N{retain}").TrimEnd('0').TrimEnd('.')} {unitStr[suffixIndex]}";
         }
 
         /// <summary>
@@ -47,9 +47,9 @@ namespace AIO
         {
             if (size == 0) return "0 B";
 
-            double bytes = size;
-            ushort suffixIndex = 0;
-            var limit = unitStr.Length - 1;
+            double bytes                                         = size;
+            ushort suffixIndex                                   = 0;
+            var    limit                                         = unitStr.Length - 1;
             while (bytes >= 1024 && suffixIndex++ < limit) bytes /= 1024;
             return $"{bytes.ToString($"N{retain}").TrimEnd('0', '.')} {unitStr[suffixIndex]}";
         }
@@ -79,10 +79,7 @@ namespace AIO
         /// </summary>
         /// <param name="ms">Milliseconds</param>
         /// <returns>String with time period representation</returns>
-        public static string ToConverseTimePeriod(this long ms)
-        {
-            return ToConverseTimePeriod((double)ms);
-        }
+        public static string ToConverseTimePeriod(this long ms) { return ToConverseTimePeriod((double)ms); }
 
         /// <summary>
         /// Generate time period string. Will return a pretty string of ns, mcs, ms, s, m, h based on the given nanoseconds.
@@ -93,14 +90,14 @@ namespace AIO
         {
             var sb = new StringBuilder();
 
-            var nanoseconds = (long)(ms * 1000.0 * 1000.0);
+            var nanoseconds    = (long)(ms * 1000.0 * 1000.0);
             var absNanoseconds = Math.Abs(nanoseconds);
 
             if (absNanoseconds >= 60 * 60 * 1000000000L)
             {
-                var hours = nanoseconds / (60 * 60 * 1000000000L);
-                var minutes = nanoseconds % (60 * 60 * 1000000000L) / 1000000000 / 60;
-                var seconds = nanoseconds % (60 * 60 * 1000000000L) / 1000000000 % 60;
+                var hours        = nanoseconds / (60 * 60 * 1000000000L);
+                var minutes      = nanoseconds % (60 * 60 * 1000000000L) / 1000000000 / 60;
+                var seconds      = nanoseconds % (60 * 60 * 1000000000L) / 1000000000 % 60;
                 var milliseconds = nanoseconds % (60 * 60 * 1000000000L) % 1000000000 / 1000000;
                 sb.Append(hours);
                 sb.Append(':');
@@ -117,8 +114,8 @@ namespace AIO
             }
             else if (absNanoseconds >= 60 * 1000000000L)
             {
-                var minutes = nanoseconds / (60 * 1000000000L);
-                var seconds = nanoseconds % (60 * 1000000000L) / 1000000000;
+                var minutes      = nanoseconds / (60 * 1000000000L);
+                var seconds      = nanoseconds % (60 * 1000000000L) / 1000000000;
                 var milliseconds = nanoseconds % (60 * 1000000000L) % 1000000000 / 1000000;
                 sb.Append(minutes);
                 sb.Append(':');
@@ -132,7 +129,7 @@ namespace AIO
             }
             else if (absNanoseconds >= 1000000000)
             {
-                var seconds = nanoseconds / 1000000000;
+                var seconds      = nanoseconds / 1000000000;
                 var milliseconds = nanoseconds % 1000000000 / 1000000;
                 sb.Append(seconds);
                 sb.Append('.');

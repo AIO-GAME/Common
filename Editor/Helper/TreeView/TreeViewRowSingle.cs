@@ -97,13 +97,17 @@ namespace AIO.UEditor
                 case KeyCode.DownArrow: // 数字键盘 下键
                 {
                     var temp = item.id + 1;
-                    ReloadAndSelect(temp >= Count ? 0 : temp);
+                    var id   = temp >= Count ? 0 : temp;
+                    SetSelection(new[] { id }, TreeViewSelectionOptions.RevealAndFrame);
+                    InvokeSelectionChanged(id);
                     break;
                 }
                 case KeyCode.UpArrow: // 数字键盘 上键
                 {
                     var temp = item.id - 1;
-                    ReloadAndSelect(temp < 0 ? Count - 1 : temp);
+                    var id   = temp < 0 ? Count - 1 : temp;
+                    SetSelection(new[] { id }, TreeViewSelectionOptions.RevealAndFrame);
+                    InvokeSelectionChanged(id);
                     break;
                 }
             }

@@ -342,8 +342,25 @@
         </member>
         <member name="M:AIO.ExtendSort.SortQuick``1(System.Collections.Generic.IList{``0},System.Int32@,System.Int32@,System.Func{``0,``0,System.Int32}@)">
             <summary>
-                快速排序
+               快速排序
             </summary>
+            <param name="array">数组</param>
+            <param name="index">索引</param>
+            <param name="count">数量</param>
+            <param name="comparer">比较器</param>
+            <typeparam name="T">泛型</typeparam>
+            <returns>返回排序后的数组</returns>
+        </member>
+        <member name="M:AIO.ExtendSort.SortQuick``1(System.Collections.Generic.IList{``0},System.Int32@,System.Int32@,System.Collections.Generic.IComparer{``0}@)">
+            <summary>
+               快速排序
+            </summary>
+            <param name="array">数组</param>
+            <param name="index">索引</param>
+            <param name="count">数量</param>
+            <param name="comparer">比较器</param>
+            <typeparam name="T">泛型</typeparam>
+            <returns>返回排序后的数组</returns>
         </member>
         <member name="M:AIO.ExtendSort.SortSelect``1(System.Collections.Generic.IList{``0})">
             <summary>
@@ -388,6 +405,38 @@
                 归并排序
                 数据量:1000以下适用
             </summary>
+        </member>
+        <member name="M:AIO.ExtendSort.SortMerge``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@,System.Func{``0,``0,System.Int32}@)">
+            <summary>
+              归并排序
+            </summary>
+            <param name="array">数组</param>
+            <param name="left">左边</param>
+            <param name="right">右边</param>
+            <param name="comparer">比较器</param>
+            <typeparam name="T">泛型</typeparam>
+            <returns>返回排序后的数组</returns>
+        </member>
+        <member name="M:AIO.ExtendSort.SortMerge``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@,System.Collections.Generic.IComparer{``0}@)">
+            <summary>
+              归并排序
+            </summary>
+            <param name="array">数组</param>
+            <param name="left">左边</param>
+            <param name="right">右边</param>
+            <param name="comparer">比较器</param>
+            <typeparam name="T">泛型</typeparam>
+            <returns>返回排序后的数组</returns>
+        </member>
+        <member name="M:AIO.ExtendSort.SortMerge``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@)">
+            <summary>
+              归并排序
+            </summary>
+            <param name="array">数组</param>
+            <param name="left">左边</param>
+            <param name="right">右边</param>
+            <typeparam name="T">泛型</typeparam>
+            <returns>返回排序后的数组</returns>
         </member>
         <member name="M:AIO.ExtendSort.SortInsert``1(System.Collections.Generic.IList{``0})">
             <summary>

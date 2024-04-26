@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace AIO
@@ -96,22 +97,37 @@ namespace AIO
             // {
             //     Console.WriteLine(variable + " " + dis.GetDisplay(variable.Key));
             // }
-
-            var index = 0;
+            //
             var dis   = new PageList<int>();
-            for (var i = 11; i >= 0; i--) dis.Add(++index * 10);
+            for (var i = 10000; i >= 0; i--) dis.Add(AHelper.Random.RandInt32(0, 10000));
+            dis.PageSize = 3;
             dis.Update();
+            var curTime = DateTime.Now;
+            dis.Sort(new ComparerA());
+            Console.WriteLine($"排序耗时 : {DateTime.Now - curTime}");
             foreach (var variable in dis.CurrentPageValues)
             {
                 Console.WriteLine(variable + " ");
             }
 
             Console.WriteLine("--------------------");
+            curTime = DateTime.Now;
             dis.Sort((a, b) => a.CompareTo(b));
+            Console.WriteLine($"排序耗时 : {DateTime.Now - curTime}");
             foreach (var variable in dis.CurrentPageValues)
             {
                 Console.WriteLine(variable + " ");
             }
+        }
+
+        public class ComparerA : IComparer<int>
+        {
+            public int Compare(int x, int y) { return x.CompareTo(y); }
+        }
+
+        public class ComparerB : IComparer<int>
+        {
+            public int Compare(int x, int y) { return y.CompareTo(x); }
         }
     }
 }
