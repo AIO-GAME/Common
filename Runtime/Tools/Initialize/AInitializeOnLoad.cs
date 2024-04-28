@@ -31,7 +31,7 @@ namespace AIO.UEditor
         }
 
 #if UNITY_2022_1_OR_NEWER
-            [HideInCallstack]
+        [HideInCallstack]
 #endif
         [Conditional("UNITY_EDITOR")]
         private static void DebugLog(EInitAttrMode mode, MethodBase method)

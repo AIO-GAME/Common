@@ -57,6 +57,19 @@ namespace AIO
         /// <summary>
         /// 添加
         /// </summary>
+        public static void Add<T>(this IList<T> array, in T a1, in T a2, in T a3, in T a4, in T a5)
+        {
+            if (array is null) throw new ArgumentNullException(nameof(array));
+            array.Add(a1);
+            array.Add(a2);
+            array.Add(a3);
+            array.Add(a4);
+            array.Add(a5);
+        }
+
+        /// <summary>
+        /// 添加
+        /// </summary>
         public static void Add<T>(this IList<T> array, IEnumerable<T> arr)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));

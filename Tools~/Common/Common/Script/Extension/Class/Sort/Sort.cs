@@ -75,6 +75,40 @@ namespace AIO
     public static partial class ExtendSort
     {
         /// <summary>
+        ///    比较器
+        /// </summary>
+        /// <param name="comparer">比较器</param>
+        /// <typeparam name="T">泛型</typeparam>
+        /// <returns>返回比较器</returns>
+        internal static IComparer<T> Comparer<T>(Func<T, T, int> comparer) => new GeneraComparer<T>(comparer);
+
+        /// <summary>
+        ///    比较器
+        /// </summary>
+        /// <param name="comparer">比较器</param>
+        /// <typeparam name="T">泛型</typeparam>
+        /// <returns>返回比较器</returns>
+        internal static IComparer<T> Comparer<T>(Comparison<T> comparer) => new ComparisonComparer<T>(comparer);
+
+        internal class GeneraComparer<T> : IComparer<T>
+        {
+            private readonly Func<T, T, int> Comparer;
+
+            public GeneraComparer(Func<T, T, int> func) { Comparer = func; }
+
+            public int Compare(T x, T y) => Comparer(x, y);
+        }
+
+        internal class ComparisonComparer<T> : IComparer<T>
+        {
+            private readonly Comparison<T> Comparer;
+
+            public ComparisonComparer(Comparison<T> func) { Comparer = func; }
+
+            public int Compare(T x, T y) => Comparer(x, y);
+        }
+
+        /// <summary>
         ///     自动扩容，并保存数据
         /// </summary>
         /// <remarks>

@@ -145,7 +145,13 @@ namespace AIO
         }
 
         /// <inheritdoc />
-        public void CopyTo(T[] array, int arrayIndex) => Values.CopyTo(array, arrayIndex);
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            if (array is null) throw new ArgumentNullException(nameof(array));
+            if (arrayIndex < 0) throw new IndexOutOfRangeException();
+            if (array.Length - arrayIndex < WriteOffset) throw new IndexOutOfRangeException();
+            Array.ConstrainedCopy(Values, 0, array, arrayIndex, WriteOffset);
+        }
 
         /// <inheritdoc />
         public bool Remove(T item)
@@ -281,27 +287,8 @@ namespace AIO
             if (count <= 0) return;
             var span = WriteOffset - index;
             if (span < count) throw new IndexOutOfRangeException();
-            Array.Sort(Values, index, count, GeneraComparer.To(comparer));
+            Array.Sort(Values, index, count, ExtendSort.Comparer(comparer));
             CurrentPageValues = GetPage(_PageIndex);
-        }
-
-        private class GeneraComparer : IComparer<T>
-        {
-            private static readonly GeneraComparer Default = new GeneraComparer();
-
-            private Func<T, T, int> Comparer;
-
-            private GeneraComparer() { }
-
-            public static IComparer<T> To(Func<T, T, int> comparer)
-            {
-                Default.Comparer = comparer;
-                return Default;
-            }
-
-            public int Compare(T x, T y) => Comparer(x, y);
-
-            public static implicit operator Func<T, T, int>(GeneraComparer comparer) => comparer.Comparer;
         }
 
         /// <summary>

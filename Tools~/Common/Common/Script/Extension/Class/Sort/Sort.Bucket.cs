@@ -27,7 +27,7 @@ namespace AIO
                 // 为桶里的每一行使用插入排序
                 var insertion                                           = new float[(int)bucketArray[j, 0]]; // 为桶里的行创建新的数组后使用插入排序
                 for (var k = 0; k < insertion.Length; k++) insertion[k] = bucketArray[j, k + 1];
-                SortInsert(insertion);                                                           // 插入排序
+                SortInsert(insertion, 0, insertion.Length - 1);                                  // 插入排序
                 for (var k = 0; k < insertion.Length; k++) bucketArray[j, k + 1] = insertion[k]; // 把排好序的结果回写到桶里
             }
 
@@ -233,7 +233,7 @@ namespace AIO
                 // 为桶里的每一行使用插入排序
                 var insertion                                           = new double[(int)bucketArray[j, 0]]; // 为桶里的行创建新的数组后使用插入排序
                 for (var k = 0; k < insertion.Length; k++) insertion[k] = bucketArray[j, k + 1];
-                SortInsert(insertion);                                                           // 插入排序
+                SortInsert(insertion, 0, insertion.Length - 1);                                  // 插入排序                  
                 for (var k = 0; k < insertion.Length; k++) bucketArray[j, k + 1] = insertion[k]; // 把排好序的结果回写到桶里
             }
 
@@ -264,7 +264,7 @@ namespace AIO
                 // 为桶里的每一行使用插入排序
                 var insertion                                           = new decimal[(int)bucketArray[j, 0]]; // 为桶里的行创建新的数组后使用插入排序
                 for (var k = 0; k < insertion.Length; k++) insertion[k] = bucketArray[j, k + 1];
-                SortInsert(insertion);                                                           // 插入排序
+                SortInsert(insertion, 0, insertion.Length - 1);                                  // 插入排序                                                  
                 for (var k = 0; k < insertion.Length; k++) bucketArray[j, k + 1] = insertion[k]; // 把排好序的结果回写到桶里
             }
 
@@ -279,6 +279,8 @@ namespace AIO
         /// <summary>
         ///     桶排序
         /// </summary>
+        /// <param name="array">数组</param>
+        /// <returns>返回排序后的数组</returns>
         private static IList<short> SortBucket(in IList<short> array)
         {
             if (array.Count < 2) return array;

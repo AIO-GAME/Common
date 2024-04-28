@@ -14,16 +14,22 @@ namespace AIO
         /// <summary>
         ///     插入排序
         /// </summary>
-        private static IList<T> SortInsert<T>(IList<T> array)
-        where T : IComparable<T>, IComparable
+        /// <param name="array">数组</param>
+        /// <param name="start">右边界</param>
+        /// <param name="end">结束边界</param>
+        /// <typeparam name="T">泛型</typeparam>
+        /// <returns>返回排序后的数组</returns>
+        private static IList<T> SortInsert<T>(IList<T> array, int start, int end)
+        where T : IComparable<T>
         {
-            if (array.Count < 2) return array;
-            for (int i = 1, insertions = i - 1; i < array.Count; i++, insertions = i - 1)
+            if (end - start < 2) return array;
+            for (int i = start + 1, j = start; i <= end; j = i++)
             {
-                var undervalue = array[i];
-                while (insertions >= 0 && undervalue.CompareTo(array[insertions]) < 0)
-                    array[insertions + 1] = array[insertions--];
-                array[insertions + 1] = undervalue;
+                var key = array[i];
+                while (j >= 0 && array[j].CompareTo(key) > 0)
+                    array[j + 1] = array[j--];
+
+                array[j + 1] = key;
             }
 
             return array;
@@ -32,15 +38,22 @@ namespace AIO
         /// <summary>
         ///     插入排序
         /// </summary>
-        private static IList<T> SortInsert<T>(IList<T> array, in Func<T, T, int> Comparer)
+        /// <param name="array">数组</param>
+        /// <param name="start">右边界</param>
+        /// <param name="end">结束边界</param>
+        /// <param name="comparer">比较器</param>
+        /// <typeparam name="T">泛型</typeparam>
+        /// <returns>返回排序后的数组</returns>
+        private static IList<T> SortInsert<T>(IList<T> array, int start, int end, in IComparer<T> comparer)
         {
-            if (array.Count < 2) return array;
-            for (int i = 1, insertions = i - 1; i < array.Count; i++, insertions = i - 1)
+            if (end - start < 2) return array;
+            for (int i = start + 1, j = start; i <= end; j = i++)
             {
-                var undervalue = array[i];
-                while (insertions >= 0 && Comparer(undervalue, array[insertions]) < 0)
-                    array[insertions + 1] = array[insertions--];
-                array[insertions + 1] = undervalue;
+                var key = array[i];
+                while (j >= 0 && comparer.Compare(array[j], key) > 0)
+                    array[j + 1] = array[j--];
+
+                array[j + 1] = key;
             }
 
             return array;

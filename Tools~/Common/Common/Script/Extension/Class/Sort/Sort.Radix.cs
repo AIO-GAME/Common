@@ -13,27 +13,27 @@ namespace AIO
         private static IList<byte> SortRadix(in IList<byte> array)
         {
             if (array.Count < 2) return array;
-            var Max = array.GetMaxValue();
+            var Max      = array.GetMaxValue();
             var maxDigit = 0;
             if (Max == 0) maxDigit = 1;
             else
                 for (var temp = Max; temp != 0; temp /= 10)
                     maxDigit++;
-            ArrayPool<byte>.Shared.Rent(array.Count);
             for (int i = 0, mod = 10, dev = 1, pos = 0; i < maxDigit; i++, dev *= 10, mod *= 10, pos = 0)
             {
-                var counter = new byte[mod * 2][];
+                var counter = ArrayPool<byte[]>.Shared.Rent(mod * 2);
                 foreach (var item in array)
                 {
                     // 遍历数组 将数组依照 当前排序位数中的值 进行插入
                     var bucket = item % mod / dev + mod;
                     if (counter[bucket] is null)
                     {
-                        counter[bucket] = new[] { item };
+                        counter[bucket]    = ArrayPool<byte>.Shared.Rent(1);
+                        counter[bucket][0] = item;
                     }
                     else
                     {
-                        var a = new byte[counter[bucket].Length + 1];
+                        var a = ArrayPool<byte>.Shared.Rent(counter[bucket].Length + 1);
                         Array.ConstrainedCopy(counter[bucket], 0, a, 0, a.Length);
                         a[counter[bucket].Length] = item;
                         counter[bucket]           = a;
@@ -53,7 +53,6 @@ namespace AIO
 
             return array;
         }
-
 
         private static IList<uint> SortRadix(IList<uint> array)
         {
@@ -86,7 +85,7 @@ namespace AIO
         private static IList<long> SortRadix(IList<long> array)
         {
             if (array.Count < 2) return array;
-            var Max = array.GetMaxValue();
+            var Max      = array.GetMaxValue();
             var maxDigit = 0;
             if (Max == 0) maxDigit = 1;
             else
@@ -117,10 +116,10 @@ namespace AIO
         {
             var len = (uint)array.Count;
             if (len < 2) return array;
-            var bucket = new LinkedList<ushort>[len];
+            var bucket                              = new LinkedList<ushort>[len];
             for (var i = 0; i < len; i++) bucket[i] = new LinkedList<ushort>();
 
-            var max = array.GetMaxMinValue();
+            var max  = array.GetMaxMinValue();
             var diff = max.Item1 - max.Item2 + 1;
             foreach (var item in array)
             {
@@ -140,7 +139,7 @@ namespace AIO
         private static IList<ulong> SortRadix(IList<ulong> array)
         {
             if (array.Count < 2) return array;
-            var Max = array.GetMaxValue();
+            var Max      = array.GetMaxValue();
             var maxDigit = 0;
             if (Max == 0) maxDigit = 1;
             else
@@ -205,7 +204,7 @@ namespace AIO
         private static IList<short> SortRadix(in IList<short> array)
         {
             if (array.Count < 2) return array;
-            var Max = array.GetMaxValue();
+            var Max      = array.GetMaxValue();
             var maxDigit = 0;
             if (Max == 0) maxDigit = 1;
             else
@@ -238,7 +237,7 @@ namespace AIO
         private static IList<sbyte> SortRadix(in IList<sbyte> array)
         {
             if (array.Count < 2) return array;
-            var Max = array.GetMaxValue();
+            var Max      = array.GetMaxValue();
             var maxDigit = 0;
             if (Max == 0) maxDigit = 1;
             else

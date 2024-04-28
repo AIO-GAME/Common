@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace AIO
@@ -98,26 +99,90 @@ namespace AIO
             //     Console.WriteLine(variable + " " + dis.GetDisplay(variable.Key));
             // }
             //
-            var dis   = new PageList<int>();
-            for (var i = 10000; i >= 0; i--) dis.Add(AHelper.Random.RandInt32(0, 10000));
-            dis.PageSize = 3;
-            dis.Update();
-            var curTime = DateTime.Now;
-            dis.Sort(new ComparerA());
-            Console.WriteLine($"排序耗时 : {DateTime.Now - curTime}");
-            foreach (var variable in dis.CurrentPageValues)
-            {
-                Console.WriteLine(variable + " ");
-            }
+            var dis = new PageList<int>();
+            dis.PageSize = 10;
 
+            // for (var i = 10000; i >= 0; i--) dis.Add(AHelper.Random.RandInt32(0, 10000));
+            // dis.PageSize = 3;
+            // dis.Update();
+            var c       = new ComparerA();
+            var index   = 0;
+            var curTime = DateTime.Now;
+            // dis.Sort(c);
+            // Console.WriteLine($"排序耗时 : {DateTime.Now - curTime} -> Array.Sort");
+            // foreach (var variable in dis.CurrentPageValues)
+            // {
+            //     Console.WriteLine(variable + " ");
+            // }
+            //
+            // dis.Clear();
+            // for (var i = 10000; i >= 0; i--) dis.Add(AHelper.Random.RandInt32(0, 10000));
+            // dis.PageSize = 3;
+            // dis.Update();
+            // Console.WriteLine("--------------------");
+            // curTime = DateTime.Now;
+            // dis.Sort((a, b) => a.CompareTo(b));
+            // Console.WriteLine($"排序耗时 : {DateTime.Now - curTime} ->  Array.Sort");
+            // foreach (var variable in dis.CurrentPageValues)
+            // {
+            //     Console.WriteLine(variable + " ");
+            // }
+
+            //
+            // dis.Clear();
+            // for (var i = 10000; i >= 0; i--) dis.Add(AHelper.Random.RandInt32(0, 10000));
+            // dis.Update();
+            // Console.WriteLine("--------------------");
+            // curTime = DateTime.Now;
+            // dis.Sort(c);
+            // Console.WriteLine($"排序耗时 : {DateTime.Now - curTime} -> 堆排序");
+            // var index = 0;
+            // foreach (var variable in dis)
+            // {
+            //     if (index++ > dis.PageSize) break;
+            //     Console.WriteLine(variable + " ");
+            // }
+
+            dis.Clear();
+            dis.Add(new int[] { 124, 3334, 3675, 8329, 8329, 5341 });
+
+            dis.Update();
             Console.WriteLine("--------------------");
             curTime = DateTime.Now;
-            dis.Sort((a, b) => a.CompareTo(b));
-            Console.WriteLine($"排序耗时 : {DateTime.Now - curTime}");
-            foreach (var variable in dis.CurrentPageValues)
+            dis.Sort(c, ESort.Select);
+            Console.WriteLine($"排序耗时 : {DateTime.Now - curTime} -> 快速排序");
+            index = 0;
+            foreach (var variable in dis)
             {
-                Console.WriteLine(variable + " ");
+                if (index++ > dis.PageSize) break;
+                Console.WriteLine("                     " + variable);
             }
+
+            // dis.Clear();
+            // for (var i = 10000; i >= 0; i--) dis.Add(AHelper.Random.RandInt32(0, 10000));
+            // dis.PageSize = 3;
+            // dis.Update();
+            // Console.WriteLine("--------------------");
+            // curTime = DateTime.Now;
+            // dis.Sort(c, ESort.Quick);
+            // Console.WriteLine($"排序耗时 : {DateTime.Now - curTime} -> 快速排序");
+            // foreach (var variable in dis.CurrentPageValues)
+            // {
+            //     Console.WriteLine(variable + " ");
+            // }
+            //
+            // dis.Clear();
+            // for (var i = 10000; i >= 0; i--) dis.Add(AHelper.Random.RandInt32(0, 10000));
+            // dis.PageSize = 3;
+            // dis.Update();
+            // Console.WriteLine("--------------------");
+            // curTime = DateTime.Now;
+            // dis.Sort(c, ESort.Merge);
+            // Console.WriteLine($"排序耗时 : {DateTime.Now - curTime} -> 归并排序");
+            // foreach (var variable in dis.CurrentPageValues)
+            // {
+            //     Console.WriteLine(variable + " ");
+            // }
         }
 
         public class ComparerA : IComparer<int>

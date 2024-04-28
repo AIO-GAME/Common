@@ -473,7 +473,7 @@
     <Compile Include="Script\Extension\Class\Sort\Sort.Insert.cs" />
     <Compile Include="Script\Extension\Class\Sort\Sort.Bucket.cs" />
     <Compile Include="Script\Extension\Class\Sort\Sort.cs" />
-    <Compile Include="Script\Extension\Class\Sort\Generic.cs" />
+    <Compile Include="Script\Extension\Class\Sort\ValueType.Generic.cs" />
     <Compile Include="Script\Extension\Class\Sort\Sort.Shell.cs" />
     <Compile Include="Script\Extension\Class\Sort\ValueType.Span.cs" />
     <Compile Include="Script\Extension\Class\Sort\ValueType.IList.cs" />

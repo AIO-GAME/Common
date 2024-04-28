@@ -9,26 +9,27 @@ namespace AIO
 {
     partial class ExtendSort
     {
-        #region 选择排序
-
         /// <summary>
         ///     选择排序 数据量:100以下适用
         /// </summary>
-        private static IList<T> SortSelect<T>(IList<T> array)
-        where T : IComparable<T>, IComparable
+        /// <param name="array">数组</param>
+        /// <param name="start">索引</param>
+        /// <param name="end">数量</param>
+        /// <param name="comparer">比较器</param>
+        /// <typeparam name="T">泛型</typeparam>
+        private static IList<T> SortSelect<T>(IList<T> array, int start, int end, in IComparer<T> comparer)
         {
-            if (array.Count < 2) return array;
-            for (int i = 0, minIndex = i; i < array.Count - 1; i++, minIndex = i)
+            if (end - start < 2) return array;
+            for (var a = start; a < end; a++)
             {
-                var minVal = array[i];
-                for (var j = i + 1; j < array.Count; j++)
-                    if (minVal.CompareTo(array[j]) > 0)
-                    {
-                        minVal   = array[j];
+                var minIndex = a;
+                for (var j = a + 1; j <= end; j++)
+                {
+                    if (comparer.Compare(array[j], array[minIndex]) < 0)
                         minIndex = j;
-                    }
+                }
 
-                array.Swap(i, minIndex);
+                if (minIndex != a) (array[a], array[minIndex]) = (array[minIndex], array[a]);
             }
 
             return array;
@@ -37,25 +38,26 @@ namespace AIO
         /// <summary>
         ///     选择排序 数据量:100以下适用
         /// </summary>
-        private static IList<T> SortSelect<T>(IList<T> array, in Func<T, T, int> Comparer)
+        /// <param name="array">数组</param>
+        /// <param name="start">索引</param>
+        /// <param name="end">数量</param>
+        /// <typeparam name="T">泛型</typeparam>
+        /// <returns>返回排序后的数组</returns>
+        private static IList<T> SortSelect<T>(IList<T> array, int start, int end) where T : IComparable<T>
         {
-            if (array.Count < 2) return array;
-            for (int i = 0, minIndex = i; i < array.Count - 1; i++, minIndex = i)
+            if (end - start < 2) return array;
+            for (var a = start; a < end; a++)
             {
-                var minVal = array[i];
-                for (var j = i + 1; j < array.Count; j++)
-                    if (Comparer(minVal, array[j]) > 0)
-                    {
-                        minVal   = array[j];
-                        minIndex = j;
-                    }
+                var minIndex = a;
+                for (var j = a + 1; j <= end; j++)
+                {
+                    if (array[j].CompareTo(array[minIndex]) < 0) minIndex = j;
+                }
 
-                array.Swap(i, minIndex);
+                if (minIndex != a) (array[a], array[minIndex]) = (array[minIndex], array[a]);
             }
 
             return array;
         }
-
-        #endregion
     }
 }
