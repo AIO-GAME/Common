@@ -1,19 +1,18 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Diagnostics;
+
+#endregion
 
 namespace AIO
 {
     /// <summary>
     /// 锁定 Transform 组件，仅可标记 HTBehaviour 的子类，挂载后将锁定目标 GameObject 的 Transform 组件，禁止在检视面板修改属性值
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    [Conditional("UNITY_EDITOR")]
+    [AttributeUsage(AttributeTargets.Class), Conditional("UNITY_EDITOR")]
     public sealed class LockTransformAttribute : Attribute
     {
-        public bool IsLockPosition { get; private set; }
-        public bool IsLockRotation { get; private set; }
-        public bool IsLockScale { get; private set; }
-
         /// <summary>
         /// 锁定 Transform 组件，仅可标记 HTBehaviour 的子类，挂载后将锁定目标 GameObject 的 Transform 组件，禁止在检视面板修改属性值
         /// </summary>
@@ -24,7 +23,11 @@ namespace AIO
         {
             IsLockPosition = isLockPosition;
             IsLockRotation = isLockRotation;
-            IsLockScale = isLockScale;
+            IsLockScale    = isLockScale;
         }
+
+        public bool IsLockPosition { get; private set; }
+        public bool IsLockRotation { get; private set; }
+        public bool IsLockScale    { get; private set; }
     }
 }

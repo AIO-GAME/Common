@@ -1,9 +1,15 @@
-﻿using System;
+﻿#region
+
+using System;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: Guid
+
         /// <summary>
         /// 生成一个新的 GUID 对象。
         /// </summary>
@@ -40,5 +46,7 @@ namespace AIO
                 return s.Substring(0, s.Length - 2);
             }
         }
+
+        #endregion
     }
 }

@@ -1,56 +1,56 @@
 {
-    "name": "AIO.Core.Editor",
-    "references": [
-        "AIO.Core.Runtime",
-        "YooAsset",
-        "YooAsset.Editor",
-        "UnityEditor.UI",
-        "UnityEngine.UI",
-        "UnityEditor.TestRunner",
-        "UnityEngine.TestRunner",
-        "com.bbbirder.injection",
-        "com.bbbirder.directattribute"
-    ],
-    "includePlatforms": [
-        "Editor"
-    ],
-    "excludePlatforms": [],
-    "allowUnsafeCode": true,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [
-        {
-            "name": "com.tencent.webglwxsdk",
-            "expression": "",
-            "define": "SUPPORT_WEBGL_WX"
-        },
-        {
-            "name": "com.cysharp.unitask",
-            "expression": "",
-            "define": "SUPPORT_UNITASK"
-        },
-        {
-            "name": "com.demigiant.dotween",
-            "expression": "",
-            "define": "SUPPORT_DOTWEEN"
-        },
-        {
-            "name": "com.unity.textmeshpro",
-            "expression": "",
-            "define": "SUPPORT_TEXTMESHPRO"
-        },
-        {
-            "name": "com.self.fgui",
-            "expression": "",
-            "define": "SUPPORT_FGUI"
-        },
-        {
-            "name": "com.aio.package",
-            "expression": "[1.0.0,2.0.0)",
-            "define": "AIO_1X_OR_NEWER"
-        }
-    ],
-    "noEngineReferences": false
+  "name": "AIO.Core.Editor",
+  "references": [
+    "AIO.Core.Runtime",
+    "YooAsset",
+    "YooAsset.Editor",
+    "UnityEditor.UI",
+    "UnityEngine.UI",
+    "UnityEditor.TestRunner",
+    "UnityEngine.TestRunner",
+    "com.bbbirder.injection",
+    "com.bbbirder.directattribute"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": true,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [
+    {
+      "name": "com.tencent.webglwxsdk",
+      "expression": "",
+      "define": "SUPPORT_WEBGL_WX"
+    },
+    {
+      "name": "com.cysharp.unitask",
+      "expression": "",
+      "define": "SUPPORT_UNITASK"
+    },
+    {
+      "name": "com.demigiant.dotween",
+      "expression": "",
+      "define": "SUPPORT_DOTWEEN"
+    },
+    {
+      "name": "com.unity.textmeshpro",
+      "expression": "",
+      "define": "SUPPORT_TEXTMESHPRO"
+    },
+    {
+      "name": "com.self.fgui",
+      "expression": "",
+      "define": "SUPPORT_FGUI"
+    },
+    {
+      "name": "com.aio.package",
+      "expression": "[1.0.0,2.0.0)",
+      "define": "AIO_1X_OR_NEWER"
+    }
+  ],
+  "noEngineReferences": false
 }

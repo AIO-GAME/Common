@@ -1,13 +1,11 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-03
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+
+#endregion
 
 namespace AIO.Net
 {
@@ -17,6 +15,25 @@ namespace AIO.Net
     /// <remarks>Not thread-safe.</remarks>
     public class HttpResponse
     {
+        // HTTP response mime table
+        private static readonly Dictionary<string, string> _mimeTable;
+
+        // HTTP response body
+        private int  _bodyIndex;
+        private int  _bodyLength;
+        private bool _bodyLengthProvided;
+        private int  _bodySize;
+
+        // HTTP response cache
+        private int _cacheSize;
+
+        // HTTP response status phrase
+
+        // HTTP response protocol
+
+        // HTTP response headers
+        private List<(string, string)> _headers = new List<(string, string)>();
+
         static HttpResponse()
         {
             _mimeTable = new Dictionary<string, string>
@@ -151,18 +168,6 @@ namespace AIO.Net
         public long Headers => _headers.Count;
 
         /// <summary>
-        /// Get the HTTP response header by index
-        /// </summary>
-        public (string, string) Header(int i)
-        {
-            Debug.Assert((i < _headers.Count), "Index out of bounds!");
-            if (i >= _headers.Count)
-                return ("", "");
-
-            return _headers[i];
-        }
-
-        /// <summary>
         /// Get the HTTP response body as string
         /// </summary>
         public string Body => Cache.ExtractString(_bodyIndex, _bodySize);
@@ -193,16 +198,28 @@ namespace AIO.Net
         internal NetBuffer Cache { get; } = new NetBuffer();
 
         /// <summary>
+        /// Get the HTTP response header by index
+        /// </summary>
+        public (string, string) Header(int i)
+        {
+            Debug.Assert(i < _headers.Count, "Index out of bounds!");
+            if (i >= _headers.Count)
+                return ("", "");
+
+            return _headers[i];
+        }
+
+        /// <summary>
         /// Get string from the current HTTP response
         /// </summary>
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             sb.AppendLine($"Status: {Status}");
             sb.AppendLine($"Status phrase: {StatusPhrase}");
             sb.AppendLine($"Protocol: {Protocol}");
             sb.AppendLine($"Headers: {Headers}");
-            for (int i = 0; i < Headers; i++)
+            for (var i = 0; i < Headers; i++)
             {
                 var header = Header(i);
                 sb.AppendLine($"{header.Item1} : {header.Item2}");
@@ -218,14 +235,14 @@ namespace AIO.Net
         /// </summary>
         public HttpResponse Clear()
         {
-            IsErrorSet = false;
-            Status = 0;
+            IsErrorSet   = false;
+            Status       = 0;
             StatusPhrase = "";
-            Protocol = "";
+            Protocol     = "";
             _headers.Clear();
-            _bodyIndex = 0;
-            _bodySize = 0;
-            _bodyLength = 0;
+            _bodyIndex          = 0;
+            _bodySize           = 0;
+            _bodyLength         = 0;
             _bodyLengthProvided = false;
 
             Cache.Clear();
@@ -489,7 +506,7 @@ namespace AIO.Net
         public HttpResponse SetContentType(string extension)
         {
             // Try to lookup the content type in mime table
-            if (_mimeTable.TryGetValue(extension, out string mime))
+            if (_mimeTable.TryGetValue(extension, out var mime))
                 return SetHeader("Content-Type", mime);
 
             return this;
@@ -528,10 +545,10 @@ namespace AIO.Net
         /// <param name="secure">Cookie secure flag (default is true)</param>
         /// <param name="strict">Cookie strict flag (default is true)</param>
         /// <param name="httpOnly">Cookie HTTP-only flag (default is true)</param>
-        public HttpResponse SetCookie(string name, string value, int maxAge = 86400, string path = "",
-            string domain = "", bool secure = true, bool strict = true, bool httpOnly = true)
+        public HttpResponse SetCookie(string name,        string value,         int  maxAge = 86400, string path     = "",
+                                      string domain = "", bool   secure = true, bool strict = true,  bool   httpOnly = true)
         {
-            string key = "Set-Cookie";
+            var key = "Set-Cookie";
 
             // Append the HTTP response header's key
             Cache.Write(key);
@@ -539,7 +556,7 @@ namespace AIO.Net
             Cache.Write(": ");
 
             // Append the HTTP response header's value
-            int valueIndex = Cache.Count;
+            var valueIndex = Cache.Count;
 
             // Append cookie
             Cache.Write(name);
@@ -588,13 +605,13 @@ namespace AIO.Net
 
             Cache.Write("\r\n");
 
-            int index = Cache.Count;
+            var index = Cache.Count;
 
             // Append the HTTP response body
             Cache.Write(body);
-            _bodyIndex = index;
-            _bodySize = body.Length;
-            _bodyLength = body.Length;
+            _bodyIndex          = index;
+            _bodySize           = body.Length;
+            _bodyLength         = body.Length;
             _bodyLengthProvided = true;
             return this;
         }
@@ -612,9 +629,9 @@ namespace AIO.Net
             var index = Cache.Count;
 
             // Append the HTTP response body
-            _bodyIndex = index;
-            _bodySize = 0;
-            _bodyLength = 0;
+            _bodyIndex          = index;
+            _bodySize           = 0;
+            _bodyLength         = 0;
             _bodyLengthProvided = true;
             return this;
         }
@@ -630,13 +647,13 @@ namespace AIO.Net
 
             Cache.Write("\r\n");
 
-            int index = Cache.Count;
+            var index = Cache.Count;
 
             // Append the HTTP response body
             Cache.Write(body);
-            _bodyIndex = index;
-            _bodySize = body.Count;
-            _bodyLength = body.Count;
+            _bodyIndex          = index;
+            _bodySize           = body.Count;
+            _bodyLength         = body.Count;
             _bodyLengthProvided = true;
             return this;
         }
@@ -652,13 +669,13 @@ namespace AIO.Net
 
             Cache.Write("\r\n");
 
-            int index = Cache.Count;
+            var index = Cache.Count;
 
             // Append the HTTP response body
             Cache.Write(body);
-            _bodyIndex = index;
-            _bodySize = body.Count;
-            _bodyLength = body.Count;
+            _bodyIndex          = index;
+            _bodySize           = body.Count;
+            _bodyLength         = body.Count;
             _bodyLengthProvided = true;
             return this;
         }
@@ -677,9 +694,9 @@ namespace AIO.Net
             var index = Cache.Count;
 
             // Clear the HTTP response body
-            _bodyIndex = index;
-            _bodySize = 0;
-            _bodyLength = length;
+            _bodyIndex          = index;
+            _bodySize           = 0;
+            _bodyLength         = length;
             _bodyLengthProvided = true;
             return this;
         }
@@ -712,8 +729,8 @@ namespace AIO.Net
         /// <param name="status">Error status</param>
         /// <param name="content">Error content (default is "")</param>
         /// <param name="contentType">Error content type (default is "text/plain; charset=UTF-8")</param>
-        public HttpResponse MakeErrorResponse(int status, string content = "",
-            string contentType = "text/plain; charset=UTF-8")
+        public HttpResponse MakeErrorResponse(int    status, string content = "",
+                                              string contentType = "text/plain; charset=UTF-8")
         {
             Clear();
             SetBegin(status);
@@ -739,8 +756,10 @@ namespace AIO.Net
         /// </summary>
         /// <param name="content">String content (default is "")</param>
         /// <param name="contentType">Content type (default is "text/plain; charset=UTF-8")</param>
-        public HttpResponse MakeGetResponse(string content = "", string contentType = "text/plain; charset=UTF-8") =>
-            MakeGetResponse(content.ToCharArray(), contentType);
+        public HttpResponse MakeGetResponse(string content = "", string contentType = "text/plain; charset=UTF-8")
+        {
+            return MakeGetResponse(content.ToCharArray(), contentType);
+        }
 
         /// <summary>
         /// Make GET response
@@ -748,7 +767,7 @@ namespace AIO.Net
         /// <param name="content">String content as a span of characters</param>
         /// <param name="contentType">Content type (default is "text/plain; charset=UTF-8")</param>
         public HttpResponse MakeGetResponse(ICollection<char> content,
-            string contentType = "text/plain; charset=UTF-8")
+                                            string            contentType = "text/plain; charset=UTF-8")
         {
             Clear();
             SetBegin(200);
@@ -816,36 +835,20 @@ namespace AIO.Net
         /// Make TRACE response
         /// </summary>
         /// <param name="request">HTTP request</param>
-        public HttpResponse MakeTraceResponse(HttpRequest request) => MakeTraceResponse(request.Cache.Arrays);
-
-        // HTTP response status phrase
-
-        // HTTP response protocol
-
-        // HTTP response headers
-        private List<(string, string)> _headers = new List<(string, string)>();
-
-        // HTTP response body
-        private int _bodyIndex;
-        private int _bodySize;
-        private int _bodyLength;
-        private bool _bodyLengthProvided;
-
-        // HTTP response cache
-        private int _cacheSize;
-
-        // HTTP response mime table
-        private static readonly Dictionary<string, string> _mimeTable;
+        public HttpResponse MakeTraceResponse(HttpRequest request)
+        {
+            return MakeTraceResponse(request.Cache.Arrays);
+        }
 
         // Is pending parts of HTTP response
         internal bool IsPendingHeader()
         {
-            return (!IsErrorSet && (_bodyIndex == 0));
+            return !IsErrorSet && _bodyIndex == 0;
         }
 
         internal bool IsPendingBody()
         {
-            return (!IsErrorSet && (_bodyIndex > 0) && (_bodySize > 0));
+            return !IsErrorSet && _bodyIndex > 0 && _bodySize > 0;
         }
 
         // Receive parts of HTTP response
@@ -855,24 +858,24 @@ namespace AIO.Net
             Cache.Write(buffer, offset, size);
 
             // Try to seek for HTTP header separator
-            for (int i = _cacheSize; i < Cache.Count; i++)
+            for (var i = _cacheSize; i < Cache.Count; i++)
             {
                 // Check for the request cache out of bounds
-                if ((i + 3) >= Cache.Count)
+                if (i + 3 >= Cache.Count)
                     break;
 
                 // Check for the header separator
-                if ((Cache[i + 0] == '\r') && (Cache[i + 1] == '\n') && (Cache[i + 2] == '\r') &&
-                    (Cache[i + 3] == '\n'))
+                if (Cache[i + 0] == '\r' && Cache[i + 1] == '\n' && Cache[i + 2] == '\r' &&
+                    Cache[i + 3] == '\n')
                 {
-                    int index = 0;
+                    var index = 0;
 
                     // Set the error flag for a while...
                     IsErrorSet = true;
 
                     // Parse protocol version
-                    int protocolIndex = index;
-                    int protocolSize = 0;
+                    var protocolIndex = index;
+                    var protocolSize = 0;
                     while (Cache[index] != ' ')
                     {
                         protocolSize++;
@@ -882,16 +885,16 @@ namespace AIO.Net
                     }
 
                     index++;
-                    if ((index >= Cache.Count))
+                    if (index >= Cache.Count)
                         return false;
                     Protocol = Cache.ExtractString(protocolIndex, protocolSize);
 
                     // Parse status code
-                    int statusIndex = index;
-                    int statusSize = 0;
+                    var statusIndex = index;
+                    var statusSize = 0;
                     while (Cache[index] != ' ')
                     {
-                        if ((Cache[index] < '0') || (Cache[index] > '9'))
+                        if (Cache[index] < '0' || Cache[index] > '9')
                             return false;
                         statusSize++;
                         index++;
@@ -900,7 +903,7 @@ namespace AIO.Net
                     }
 
                     Status = 0;
-                    for (int j = statusIndex; j < (statusIndex + statusSize); j++)
+                    for (var j = statusIndex; j < statusIndex + statusSize; j++)
                     {
                         Status *= 10;
                         Status += Cache[j] - '0';
@@ -911,8 +914,8 @@ namespace AIO.Net
                         return false;
 
                     // Parse status phrase
-                    int statusPhraseIndex = index;
-                    int statusPhraseSize = 0;
+                    var statusPhraseIndex = index;
+                    var statusPhraseSize = 0;
                     while (Cache[index] != '\r')
                     {
                         statusPhraseSize++;
@@ -922,7 +925,7 @@ namespace AIO.Net
                     }
 
                     index++;
-                    if ((index >= Cache.Count) || (Cache[index] != '\n'))
+                    if (index >= Cache.Count || Cache[index] != '\n')
                         return false;
                     index++;
                     if (index >= Cache.Count)
@@ -930,11 +933,11 @@ namespace AIO.Net
                     StatusPhrase = Cache.ExtractString(statusPhraseIndex, statusPhraseSize);
 
                     // Parse headers
-                    while ((index < Cache.Count) && (index < i))
+                    while (index < Cache.Count && index < i)
                     {
                         // Parse header name
-                        int headerNameIndex = index;
-                        int headerNameSize = 0;
+                        var headerNameIndex = index;
+                        var headerNameSize = 0;
                         while (Cache[index] != ':')
                         {
                             headerNameSize++;
@@ -962,8 +965,8 @@ namespace AIO.Net
                         }
 
                         // Parse header value
-                        int headerValueIndex = index;
-                        int headerValueSize = 0;
+                        var headerValueIndex = index;
+                        var headerValueSize = 0;
                         while (Cache[index] != '\r')
                         {
                             headerValueSize++;
@@ -975,7 +978,7 @@ namespace AIO.Net
                         }
 
                         index++;
-                        if ((index >= Cache.Count) || (Cache[index] != '\n'))
+                        if (index >= Cache.Count || Cache[index] != '\n')
                             return false;
                         index++;
                         if (index >= Cache.Count)
@@ -986,21 +989,21 @@ namespace AIO.Net
                             return false;
 
                         // Add a new header
-                        string headerName = Cache.ExtractString(headerNameIndex, headerNameSize);
-                        string headerValue = Cache.ExtractString(headerValueIndex, headerValueSize);
+                        var headerName = Cache.ExtractString(headerNameIndex, headerNameSize);
+                        var headerValue = Cache.ExtractString(headerValueIndex, headerValueSize);
                         _headers.Add((headerName, headerValue));
 
                         // Try to find the body content length
                         if (string.Compare(headerName, "Content-Length", StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             _bodyLength = 0;
-                            for (int j = headerValueIndex; j < (headerValueIndex + headerValueSize); j++)
+                            for (var j = headerValueIndex; j < headerValueIndex + headerValueSize; j++)
                             {
-                                if ((Cache[j] < '0') || (Cache[j] > '9'))
+                                if (Cache[j] < '0' || Cache[j] > '9')
                                     return false;
-                                _bodyLength *= 10;
-                                _bodyLength += Cache[j] - '0';
-                                _bodyLengthProvided = true;
+                                _bodyLength         *= 10;
+                                _bodyLength         += Cache[j] - '0';
+                                _bodyLengthProvided =  true;
                             }
                         }
                     }
@@ -1010,7 +1013,7 @@ namespace AIO.Net
 
                     // Update the body index and size
                     _bodyIndex = i + 4;
-                    _bodySize = Cache.Count - i - 4;
+                    _bodySize  = Cache.Count - i - 4;
 
                     // Update the parsed cache size
                     _cacheSize = Cache.Count;
@@ -1020,7 +1023,7 @@ namespace AIO.Net
             }
 
             // Update the parsed cache size
-            _cacheSize = (Cache.Count >= 3) ? (Cache.Count - 3) : 0;
+            _cacheSize = Cache.Count >= 3 ? Cache.Count - 3 : 0;
 
             return false;
         }
@@ -1051,11 +1054,11 @@ namespace AIO.Net
                 // Check the body content to find the response body end
                 if (_bodySize >= 4)
                 {
-                    int index = _bodyIndex + _bodySize - 4;
+                    var index = _bodyIndex + _bodySize - 4;
 
                     // Was the body fully received?
-                    if ((Cache[index + 0] == '\r') && (Cache[index + 1] == '\n') && (Cache[index + 2] == '\r') &&
-                        (Cache[index + 3] == '\n'))
+                    if (Cache[index + 0] == '\r' && Cache[index + 1] == '\n' && Cache[index + 2] == '\r' &&
+                        Cache[index + 3] == '\n')
                     {
                         _bodyLength = _bodySize;
                         return true;

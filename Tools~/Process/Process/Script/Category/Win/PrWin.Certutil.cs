@@ -2,6 +2,8 @@
 {
     public partial class PrWin
     {
+        #region Nested type: Certutil
+
         /// <summary>
         /// Certutil 命令
         /// </summary>
@@ -15,5 +17,7 @@
                 return Create(CMD_Certutil, "-hashfile \"{0}\" MD5", target.Replace('/', '\\'));
             }
         }
+
+        #endregion
     }
 }

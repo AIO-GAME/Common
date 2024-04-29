@@ -1,4 +1,8 @@
-﻿using System.Reflection;
+﻿#region
+
+using System.Reflection;
+
+#endregion
 
 namespace AIO
 {
@@ -23,7 +27,7 @@ namespace AIO
         /// Returns the first <typeparamref name="TAttribute"/> attribute on the `member` or <c>null</c> if there is none.
         /// </summary>
         public static TAttribute GetAttribute<TAttribute>(this ICustomAttributeProvider member, bool inherit = false)
-            where TAttribute : class
+        where TAttribute : class
         {
             var type = typeof(TAttribute);
             if (member.IsDefined(type, inherit))

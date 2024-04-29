@@ -2,6 +2,8 @@
 {
     public partial class PrMac
     {
+        #region Nested type: Mesg
+
         /// <summary>
         /// 允许或拒绝接收报文
         /// </summary>
@@ -15,5 +17,7 @@
                 return Create(CMD_Mesg, command);
             }
         }
+
+        #endregion
     }
 }

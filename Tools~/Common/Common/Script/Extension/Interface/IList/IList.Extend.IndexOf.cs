@@ -1,8 +1,12 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {
@@ -35,10 +39,8 @@ namespace AIO
             if (items is null) throw new ArgumentNullException(nameof(items));
             var tuples = new List<(int, T)>();
             for (var i = 0; i < items.Count; i++)
-            {
                 if (list.Contains(items[i]))
                     tuples.Add((i, items[i]));
-            }
 
             return tuples;
         }

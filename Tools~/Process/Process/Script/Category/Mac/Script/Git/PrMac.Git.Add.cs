@@ -4,21 +4,26 @@
 
 |||✩ - - - - - |*/
 
-using System;
+#region
+
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrMac
     {
+        #region Nested type: Git
+
         public partial class Git
         {
+            #region Nested type: Add
+
             /// <summary>
             /// 添加
             /// </summary>
-            public partial class Add
+            public class Add
             {
                 /// <summary>
                 /// 执行 <see cref="PrMac"/> <see cref="Git"/> <see cref="Add"/>
@@ -68,6 +73,10 @@ namespace AIO
                     return Execute(target, ".", quit);
                 }
             }
+
+            #endregion
         }
+
+        #endregion
     }
 }

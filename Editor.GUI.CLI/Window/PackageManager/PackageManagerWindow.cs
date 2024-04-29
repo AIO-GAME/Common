@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -11,13 +15,22 @@ namespace AIO.UEditor
     {
         public const string PACKAGE_CLONE_FILE = "AutoGit.ini";
 
-        protected Vector2 Vector;
+        private string FolderTmep;
 
         protected PackageData Package;
 
         private bool PackageDataOnGUISwitch;
 
         private string PackagesPath;
+
+        protected Vector2 Vector;
+
+        protected override void OnDisable()
+        {
+            if (string.IsNullOrEmpty(PackagesPath)) return;
+            if (Package is null) return;
+            AHelper.IO.WriteJsonUTF8(Path.Combine(PackagesPath, PACKAGE_CLONE_FILE), Package);
+        }
 
         protected override void OnActivation()
         {
@@ -28,7 +41,10 @@ namespace AIO.UEditor
                 Package = AHelper.IO.ReadJsonUTF8<PackageData>(FilePath);
                 if (Package.URL == null) Package.URL = new List<string>();
             }
-            else Package = new PackageData { URL = new List<string>() };
+            else
+            {
+                Package = new PackageData { URL = new List<string>() };
+            }
 
             Package.Names = new List<string>();
         }
@@ -38,7 +54,7 @@ namespace AIO.UEditor
             EditorGUILayout.LabelField("Git安装包管理", new GUIStyle("PreLabel"));
             EditorGUILayout.Space();
             PackageDataOnGUISwitch = EditorGUILayout.ToggleLeft("URL List", PackageDataOnGUISwitch, "FoldoutHeader",
-                GUILayout.ExpandWidth(true));
+                                                                GUILayout.ExpandWidth(true));
             if (PackageDataOnGUISwitch) PackageDataOnGUI();
             EditorGUILayout.Space();
             PackageFolderListOnGUI();
@@ -51,30 +67,19 @@ namespace AIO.UEditor
             {
                 EditorGUILayout.BeginHorizontal();
                 Package.URL[i] = EditorGUILayout.TextField($"NO.{i + 1}", Package.URL[i]);
-                if (GUILayout.Button("-", GUILayout.Width(20)))
-                {
-                    Package.URL.RemoveAt(i);
-                }
+                if (GUILayout.Button("-", GUILayout.Width(20))) Package.URL.RemoveAt(i);
 
                 EditorGUILayout.EndHorizontal();
             }
 
             EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("+"))
-            {
-                Package.URL.Add("");
-            }
+            if (GUILayout.Button("+")) Package.URL.Add("");
 
-            if (GUILayout.Button("-", GUILayout.Width(20)))
-            {
-                Package.URL.RemoveAt(Package.URL.Count - 1);
-            }
+            if (GUILayout.Button("-", GUILayout.Width(20))) Package.URL.RemoveAt(Package.URL.Count - 1);
 
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.EndVertical();
         }
-
-        private string FolderTmep;
 
         private void PackageFolderListOnGUI()
         {
@@ -92,7 +97,7 @@ namespace AIO.UEditor
                     if (GUILayout.Button("Pull", GUILayout.Width(75)))
                     {
                         var path = Path.Combine(PackagesPath, Package.Names[i]);
-                        PrPlatform.Git.Pull(path, false).Async();
+                        PrPlatform.Git.Pull(path).Async();
                     }
 
                     if (GUILayout.Button("Del", GUILayout.Width(75)))
@@ -106,7 +111,7 @@ namespace AIO.UEditor
                     if (GUILayout.Button("Clone", GUILayout.Width(75)))
                     {
                         var url = Package.GetURL(Package.Names[i]);
-                        PrPlatform.Git.Clone(PackagesPath, url, false).Async();
+                        PrPlatform.Git.Clone(PackagesPath, url).Async();
                     }
                 }
 
@@ -116,10 +121,7 @@ namespace AIO.UEditor
             EditorGUILayout.Space();
             EditorGUILayout.BeginHorizontal(GUILayout.ExpandWidth(true));
             var width = Mathf.FloorToInt(position.width / 5 - 5);
-            if (GUILayout.Button("Clone All", GUILayout.Width(width), GUILayout.ExpandWidth(true)))
-            {
-                PrPlatform.Git.Clone(PackagesPath, Package.URL, false).Async();
-            }
+            if (GUILayout.Button("Clone All", GUILayout.Width(width), GUILayout.ExpandWidth(true))) PrPlatform.Git.Clone(PackagesPath, Package.URL).Async();
 
             if (GUILayout.Button("Pull  All", GUILayout.Width(width), GUILayout.ExpandWidth(true)))
             {
@@ -130,7 +132,7 @@ namespace AIO.UEditor
                     if (info.Exists) list.Add(info.FullName);
                 }
 
-                PrPlatform.Git.Add(list, ".", false).Async();
+                PrPlatform.Git.Add(list).Async();
             }
 
             if (GUILayout.Button("Del All", GUILayout.Width(width), GUILayout.ExpandWidth(true)))
@@ -139,10 +141,7 @@ namespace AIO.UEditor
                 {
                     await Task.Factory.StartNew(() =>
                     {
-                        foreach (var item in Package.Names)
-                        {
-                            PrPlatform.Folder.Del(Path.Combine(PackagesPath, item));
-                        }
+                        foreach (var item in Package.Names) PrPlatform.Folder.Del(Path.Combine(PackagesPath, item));
                     });
                     AssetDatabase.Refresh();
                 }
@@ -153,13 +152,6 @@ namespace AIO.UEditor
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.Space();
             EditorGUILayout.EndVertical();
-        }
-
-        protected override void OnDisable()
-        {
-            if (string.IsNullOrEmpty(PackagesPath)) return;
-            if (Package is null) return;
-            AHelper.IO.WriteJsonUTF8(Path.Combine(PackagesPath, PACKAGE_CLONE_FILE), Package);
         }
     }
 }

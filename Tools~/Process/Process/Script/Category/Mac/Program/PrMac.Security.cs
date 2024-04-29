@@ -1,9 +1,15 @@
-﻿using System.IO;
+﻿#region
+
+using System.IO;
+
+#endregion
 
 namespace AIO
 {
     public sealed partial class PrMac
     {
+        #region Nested type: Security
+
         /// <summary>
         ///
         /// </summary>
@@ -15,10 +21,12 @@ namespace AIO
             public static IExecutor CMS(string target)
             {
                 if (!target.Contains("mobileprovision")) throw new FileNotFoundException("[PrMac Security] file path not exist mobileprovision");
-                if (!System.IO.File.Exists(target)) throw new FileNotFoundException($"[PrMac Security] file path not exist {target}");
+                if (!File.Exists(target)) throw new FileNotFoundException($"[PrMac Security] file path not exist {target}");
                 var cmd = string.Format("cms -D -i {0}", target);
                 return Create(CMD_Security, cmd);
             }
         }
+
+        #endregion
     }
 }

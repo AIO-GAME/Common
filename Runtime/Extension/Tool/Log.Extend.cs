@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿#region
+
+using UnityEditor;
+using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
@@ -7,12 +12,6 @@ namespace AIO
     /// </summary>
     public static class ExtendLogTool
     {
-#if UNITY_EDITOR
-        private const string InfoPrefix = "<b><color=cyan>[AF.Info]</color></b> ";
-        private const string WarningPrefix = "<b><color=yellow>[AF.Warning]</color></b> ";
-        private const string ErrorPrefix = "<b><color=red>[AF.Error]</color></b> ";
-#endif
-
         /// <summary>
         /// 转换为超链接文本（仅在编辑器中控制台生效）
         /// </summary>
@@ -42,8 +41,8 @@ namespace AIO
 
             var name = behaviour.GetType().FullName;
 #if UNITY_EDITOR
-            var monoScript = UnityEditor.MonoScript.FromMonoBehaviour(behaviour);
-            var path = UnityEditor.AssetDatabase.GetAssetPath(monoScript);
+            var monoScript = MonoScript.FromMonoBehaviour(behaviour);
+            var path = AssetDatabase.GetAssetPath(monoScript);
             return $"<a href=\"{path}\" line=\"{line}\">{name}</a>";
 #else
             return name;
@@ -63,8 +62,8 @@ namespace AIO
 
             var name = scriptableObject.GetType().FullName;
 #if UNITY_EDITOR
-            var monoScript = UnityEditor.MonoScript.FromScriptableObject(scriptableObject);
-            var path = UnityEditor.AssetDatabase.GetAssetPath(monoScript);
+            var monoScript = MonoScript.FromScriptableObject(scriptableObject);
+            var path = AssetDatabase.GetAssetPath(monoScript);
             return $"<a href=\"{path}\" line=\"{line}\">{name}</a>";
 #else
             return name;
@@ -139,5 +138,10 @@ namespace AIO
             Debug.LogWarning(content, context);
 #endif
         }
+#if UNITY_EDITOR
+        private const string InfoPrefix    = "<b><color=cyan>[AF.Info]</color></b> ";
+        private const string WarningPrefix = "<b><color=yellow>[AF.Warning]</color></b> ";
+        private const string ErrorPrefix   = "<b><color=red>[AF.Error]</color></b> ";
+#endif
     }
 }

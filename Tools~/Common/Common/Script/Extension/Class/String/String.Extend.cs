@@ -1,13 +1,9 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
-
+#region
 
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
@@ -32,42 +28,42 @@ namespace AIO
     */
 
     /// <summary>
-    /// 字符工具类
+    ///     字符工具类
     /// </summary>
     public static partial class ExtendString
     {
         /// <summary>
-        /// 获取字符串中某个字符左右两侧的部分。
+        ///     获取字符串中某个字符左右两侧的部分。
         /// </summary>
         /// <param name="str">指定的字符串。</param>
         /// <param name="c">要查找的字符。</param>
         /// <param name="before">输出参数，表示 c 左侧的字符串。</param>
         /// <param name="after">输出参数，表示 c 右侧的字符串。</param>
         /// <remarks>
-        /// 如果字符串中不包含指定的字符，则 before 为整个字符串，after 为 null。
+        ///     如果字符串中不包含指定的字符，则 before 为整个字符串，after 为 null。
         /// </remarks>
         public static void PartsAround(
             this string str,
-            in char c,
-            out string before,
-            out string after)
+            in   char   c,
+            out  string before,
+            out  string after)
         {
             var index = str.IndexOf(c);
 
             if (index > 0)
             {
                 before = str.Substring(0, index);
-                after = str.Substring(index + 1);
+                after  = str.Substring(index + 1);
             }
             else
             {
                 before = str;
-                after = null;
+                after  = null;
             }
         }
 
         /// <summary>
-        /// 获取字符串中某个字符右侧的部分。
+        ///     获取字符串中某个字符右侧的部分。
         /// </summary>
         /// <param name="str">指定的字符串。</param>
         /// <param name="c">要查找的字符。</param>
@@ -81,7 +77,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 将字符串中多个指定字符替换为另一个字符。
+        ///     将字符串中多个指定字符替换为另一个字符。
         /// </summary>
         /// <param name="str">指定的字符串。</param>
         /// <param name="haystacks">要替换的字符集合。</param>
@@ -91,16 +87,13 @@ namespace AIO
         {
             var sb = new StringBuilder();
 
-            foreach (var current in str)
-            {
-                sb.Append(haystacks.Contains(current) ? replacement : current);
-            }
+            foreach (var current in str) sb.Append(haystacks.Contains(current) ? replacement : current);
 
             return sb.ToString();
         }
 
         /// <summary>
-        /// 转化为小写
+        ///     转化为小写
         /// </summary>
         public static void XToLower(this string str)
         {
@@ -113,17 +106,14 @@ namespace AIO
                     for (var i = 0; i < str.Length; ++i)
                     {
                         var c = pstr[i];
-                        if (c >= 'A' && c <= 'Z')
-                        {
-                            pstr[i] = (char)('a' + (c - 'A'));
-                        }
+                        if (c >= 'A' && c <= 'Z') pstr[i] = (char)('a' + (c - 'A'));
                     }
                 }
             }
         }
 
         /// <summary>
-        /// 转化为大写
+        ///     转化为大写
         /// </summary>
         public static void XToUpper(this string str)
         {
@@ -136,17 +126,14 @@ namespace AIO
                     for (var i = 0; i < str.Length; ++i)
                     {
                         var c = pstr[i];
-                        if (c >= 'a' && c <= 'z')
-                        {
-                            pstr[i] = (char)('A' + (c - 'a'));
-                        }
+                        if (c >= 'a' && c <= 'z') pstr[i] = (char)('A' + (c - 'a'));
                     }
                 }
             }
         }
 
         /// <summary>
-        /// 转化为小写
+        ///     转化为小写
         /// </summary>
         public static void XToLower(this string str, in int idx)
         {
@@ -156,16 +143,13 @@ namespace AIO
                 fixed (char* pstr = str)
                 {
                     var c = pstr[idx];
-                    if (c >= 'A' && c <= 'Z')
-                    {
-                        pstr[idx] = (char)('a' + (c - 'a'));
-                    }
+                    if (c >= 'A' && c <= 'Z') pstr[idx] = (char)('a' + (c - 'a'));
                 }
             }
         }
 
         /// <summary>
-        /// 转化为大写
+        ///     转化为大写
         /// </summary>
         public static void XToUpper(this string str, in int idx)
         {
@@ -175,16 +159,13 @@ namespace AIO
                 fixed (char* pstr = str)
                 {
                     var c = pstr[idx];
-                    if (c >= 'a' && c <= 'z')
-                    {
-                        pstr[idx] = (char)('a' + (c - 'a'));
-                    }
+                    if (c >= 'a' && c <= 'z') pstr[idx] = (char)('a' + (c - 'a'));
                 }
             }
         }
 
         /// <summary>
-        /// 重复
+        ///     重复
         /// </summary>
         public static string Repeat(this string str, in int repeat)
         {
@@ -194,7 +175,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 比较Null值
+        ///     比较Null值
         /// </summary>
         public static string EqualsNull(this string str)
         {
@@ -203,22 +184,19 @@ namespace AIO
 
 
         /// <summary>
-        /// 字符串反转
+        ///     字符串反转
         /// </summary>
         public static string Reverse(this string str)
         {
             var a = str.ToCharArray();
             var l = a.Length;
-            for (var i = 0; i < l / 2; i++)
-            {
-                (a[i], a[l - 1 - i]) = (a[l - 1 - i], a[i]);
-            }
+            for (var i = 0; i < l / 2; i++) (a[i], a[l - 1 - i]) = (a[l - 1 - i], a[i]);
 
             return new string(a);
         }
 
         /// <summary>
-        /// 重复N此 复制传入数据
+        ///     重复N此 复制传入数据
         /// </summary>
         public static string Clone(this string str, in uint num)
         {
@@ -229,7 +207,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 重复N此 复制传入数据
+        ///     重复N此 复制传入数据
         /// </summary>
         public static string Clone(this char str, in uint num)
         {

@@ -4,20 +4,46 @@
 
 |||✩ - - - - - |*/
 
-using System;
-using UnityEditor;
-using UnityEngine;
+#region
 
+using UnityEditor;
+
+#endregion
 
 namespace AIO.UEditor
 {
     public partial class EHelper
     {
+        #region Nested type: Prefs
+
         /// <summary>
         /// Prefs
         /// </summary>
         public static partial class Prefs
         {
+            private static int _CODE;
+
+            private static int CODE
+            {
+                get
+                {
+                    if (_CODE != 0) return _CODE;
+                    var key = string.Concat(typeof(Prefs).FullName, "CODE");
+                    if (EditorPrefs.HasKey(key))
+                    {
+                        _CODE = EditorPrefs.GetInt(key);
+                    }
+                    else
+                    {
+                        _CODE = System.IO.Path.Combine(System.IO.Path.GetTempPath(),
+                                                       System.IO.Path.GetTempFileName()).GetHashCode();
+                        EditorPrefs.SetInt(key, _CODE);
+                    }
+
+                    return _CODE;
+                }
+            }
+
             /// <summary>
             /// 判断是否存在Key
             /// </summary>
@@ -42,27 +68,6 @@ namespace AIO.UEditor
                 EditorPrefs.DeleteKey(key);
             }
 
-            private static int CODE
-            {
-                get
-                {
-                    if (_CODE != 0) return _CODE;
-                    var key = string.Concat(typeof(Prefs).FullName, "CODE");
-                    if (EditorPrefs.HasKey(key)) _CODE = EditorPrefs.GetInt(key);
-                    else
-                    {
-                        _CODE = System.IO.Path.Combine(System.IO.Path.GetTempPath(),
-                                System.IO.Path.GetTempFileName())
-                            .GetHashCode();
-                        EditorPrefs.SetInt(key, _CODE);
-                    }
-
-                    return _CODE;
-                }
-            }
-
-            private static int _CODE;
-
             private static string CombineKey(in string field)
             {
                 return string.Concat(CODE, field.GetHashCode());
@@ -83,5 +88,7 @@ namespace AIO.UEditor
                 return string.Concat(CODE, typeof(T).FullName, field.GetHashCode(), code);
             }
         }
+
+        #endregion
     }
 }

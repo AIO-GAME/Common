@@ -1,10 +1,16 @@
-﻿using System;
+﻿#region
+
+using System;
 using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
     partial class RHelper
     {
+        #region Nested type: Prefs
+
         partial class Prefs
         {
             /// <summary>
@@ -80,7 +86,8 @@ namespace AIO
             /// <param name="def">默认值</param>
             /// <typeparam name="T">枚举泛型</typeparam>
             /// <returns>返回值</returns>
-            public static T LoadEnum<T>(in string key, in T def = default) where T : Enum
+            public static T LoadEnum<T>(in string key, in T def = default)
+            where T : Enum
             {
                 if (PlayerPrefs.HasKey(string.Concat(key, "_Enum"))) return def;
                 return (T)Enum.Parse(typeof(T), PlayerPrefs.GetInt(key).ToString());
@@ -111,5 +118,7 @@ namespace AIO
                 return PlayerPrefs.GetFloat(key);
             }
         }
+
+        #endregion
     }
 }

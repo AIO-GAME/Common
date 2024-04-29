@@ -4,8 +4,12 @@
 |*|E-Mail:     |*| xinansky99@foxmail.com
 |*|============|*/
 
+#region
+
 using System.Diagnostics;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
@@ -26,13 +30,13 @@ namespace AIO
         /// <returns>结果执行器</returns>
         [DebuggerHidden, DebuggerNonUserCode]
         public static IExecutor UploadFile(string remote, string localPath,
-            string userAndPassword = null,
-            string userAgent = null,
-            string output = null,
-            bool include = false,
-            bool verbose = false,
-            bool fail = false,
-            bool silent = false
+                                           string userAndPassword = null,
+                                           string userAgent       = null,
+                                           string output          = null,
+                                           bool   include         = false,
+                                           bool   verbose         = false,
+                                           bool   fail            = false,
+                                           bool   silent          = false
         )
         {
             var str = new StringBuilder();

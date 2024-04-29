@@ -4,8 +4,12 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Diagnostics;
+
+#endregion
 
 namespace AIO
 {
@@ -14,11 +18,17 @@ namespace AIO
     /// </summary>
     public sealed class PrNative : PrCourse
     {
+        /// <inheritdoc/>
+        public override IExecutor Execute()
+        {
+            return new ExecutorNative(Info);
+        }
+
+        #region Nested type: ExecutorNative
+
         private sealed class ExecutorNative : Executor
         {
-            public ExecutorNative(ProcessStartInfo info) : base(info)
-            {
-            }
+            public ExecutorNative(ProcessStartInfo info) : base(info) { }
 
             public override IResult Sync()
             {
@@ -37,7 +47,10 @@ namespace AIO
                         process.Kill();
                         result = new ResultException(process.StartInfo, ex);
                     }
-                    else result = new ResultException(Pr.StartInfo, ex);
+                    else
+                    {
+                        result = new ResultException(Pr.StartInfo, ex);
+                    }
                 }
 
                 result.Finish(inputs.ToString());
@@ -47,10 +60,6 @@ namespace AIO
             }
         }
 
-        /// <inheritdoc/>
-        public override IExecutor Execute()
-        {
-            return new ExecutorNative(Info);
-        }
+        #endregion
     }
 }

@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
@@ -22,7 +26,7 @@ namespace AIO
             if (p.StartInfo.RedirectStandardInput) p.StartInfo.StandardInputEncoding = encoding;
 #endif
                 if (Info.RedirectStandardOutput) Info.StandardOutputEncoding = encoding;
-                if (Info.RedirectStandardError) Info.StandardErrorEncoding = encoding;
+                if (Info.RedirectStandardError) Info.StandardErrorEncoding   = encoding;
             }
             catch (Exception ex)
             {

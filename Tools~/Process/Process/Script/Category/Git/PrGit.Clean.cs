@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrGit
     {
+        #region Nested type: Clean
+
         /// <summary>
         /// <see cref="PrGit"/> <see cref="Clean"/> 清理命令
         /// usage: git clean [-d] [-f] [-i] [-n] [-q] [-e (pattern)] [-x | -X] [--] (paths)...
@@ -145,5 +151,7 @@ namespace AIO
                 return Create(work, "clean -fd -x");
             }
         }
+
+        #endregion
     }
 }

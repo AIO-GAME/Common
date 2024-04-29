@@ -1,8 +1,4 @@
-﻿/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+﻿#region
 
 using System;
 using System.IO;
@@ -10,10 +6,14 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: Xml
+
         /// <summary>
         /// XML 工具类
         /// </summary>
@@ -23,9 +23,9 @@ namespace AIO
             /// 序列化
             /// </summary>
             public static string Serialize<T>(
-                in T sourceObj,
-                in string xmlRootName = null,
-                in Encoding encoding = null)
+                in T        sourceObj,
+                in string   xmlRootName = null,
+                in Encoding encoding    = null)
             {
                 if (sourceObj == null) return string.Empty;
                 try
@@ -60,7 +60,7 @@ namespace AIO
             /// 反序列化
             /// </summary>
             public static T Deserialize<T>(
-                in string value,
+                in string   value,
                 in Encoding encoding = null)
             {
                 var data = (encoding ?? Encoding.Default).GetBytes(value.Trim());
@@ -73,5 +73,7 @@ namespace AIO
                 }
             }
         }
+
+        #endregion
     }
 }

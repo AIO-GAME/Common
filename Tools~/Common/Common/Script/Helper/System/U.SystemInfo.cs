@@ -1,19 +1,19 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+#region
 
 using System;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: SystemInfo
+
         /// <summary>
         /// 设备信息 .NET API
         /// </summary>
-        public partial class SystemInfo
+        public class SystemInfo
         {
             /// <summary>
             /// 获取用户设备名
@@ -71,5 +71,7 @@ namespace AIO
                 return Environment.TickCount;
             }
         }
+
+        #endregion
     }
 }

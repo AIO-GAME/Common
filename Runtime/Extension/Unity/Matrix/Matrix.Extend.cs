@@ -3,7 +3,5 @@
     /// <summary>
     /// 矩阵扩展
     /// </summary>
-    public static partial class MatrixExtend
-    {
-    }
+    public static class MatrixExtend { }
 }

@@ -4,12 +4,18 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrGit
     {
+        #region Nested type: Checkout
+
         /// <summary>
         /// <see cref="PrGit"/> <see cref="Checkout"/> 切换检出
         /// </summary>
@@ -38,5 +44,7 @@ namespace AIO
                 return Create(work, "checkout {0}", branchName);
             }
         }
+
+        #endregion
     }
 }

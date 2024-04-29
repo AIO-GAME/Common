@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
+
+#endregion
 
 // ReSharper disable NonReadonlyMemberInGetHashCode
 
@@ -11,8 +15,8 @@ namespace AIO
     /// </summary>
     public class HashCode
     {
-        private int _dummyPrimitive;
         private const int num = 23;
+        private       int _dummyPrimitive;
 
         public void Add<T>(T value)
         {
@@ -117,7 +121,7 @@ namespace AIO
                    EqualityComparer<T7>.Default.GetHashCode(value7) * num +
                    EqualityComparer<T8>.Default.GetHashCode(value8);
         }
-        
+
         [Obsolete("HashCode is a mutable struct and should not be compared with other HashCodes.", true)]
         public sealed override bool Equals(object obj)
         {

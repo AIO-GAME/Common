@@ -1,13 +1,16 @@
-﻿using System.Linq;
-using System.Runtime.CompilerServices;
+﻿#region
+
+using System.Linq;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
     public static partial class ExtendString
     {
         /// <summary>
-        /// 在最前添加指定字符到指定长度
+        ///     在最前添加指定字符到指定长度
         /// </summary>
         public static string AppendToFrontChar(this string str, in char paddingChar, in int length)
         {
@@ -20,7 +23,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 合并字符 前面
+        ///     合并字符 前面
         /// </summary>
         public static string AppendToFront(this string str, params string[] strings)
         {
@@ -31,7 +34,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 在最前添加指定字符
+        ///     在最前添加指定字符
         /// </summary>
         public static string AppendToFront(this string str, params char[] chars)
         {
@@ -39,7 +42,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 在最后添加指定字符到指定字节长度
+        ///     在最后添加指定字符到指定字节长度
         /// </summary>
         public static string AppendToLastChar(this string str, in char paddingChar, in int byteLength)
         {
@@ -52,7 +55,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 合并字符 后面
+        ///     合并字符 后面
         /// </summary>
         public static string AppendToLast(this string str, params string[] strings)
         {
@@ -62,7 +65,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 在最后添加指定字符到指定长度
+        ///     在最后添加指定字符到指定长度
         /// </summary>
         public static string AppendToLast(this string str, params char[] chars)
         {

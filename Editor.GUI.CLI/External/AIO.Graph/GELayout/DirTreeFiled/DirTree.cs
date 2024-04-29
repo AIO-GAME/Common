@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.IO;
 using System.Text;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -11,48 +15,23 @@ namespace AIO.UEditor
     [Serializable]
     public class DirTree
     {
-        #region Option
-
         /// <summary>
-        /// 目录深度
+        /// 目录
         /// </summary>
-        public int OptionDirDepth = 1;
+        public string DirPath;
 
-        /// <summary>
-        /// 是否支持搜索文件
-        /// </summary>
-        public bool OptionSearchFiles;
+        [SerializeField]
+        public DirTreeItem Root;
 
-        /// <summary>
-        /// 搜索文件的搜索模式 正则表达式
-        /// </summary>
-        public string OptionSearchPatternFile = ".";
+        public DirTree() { }
 
-        /// <summary>
-        /// 搜索文件夹的搜索模式 正则表达式
-        /// </summary>
-        public string OptionSearchPatternFolder = ".";
-
-        public void UpdateOption()
+        public DirTree(string directoryPath, int optionDirDepth = 1)
         {
-            if (!Directory.Exists(DirPath)) return;
-            foreach (var item in Root)
-            {
-                item.MaxDepth = OptionDirDepth;
-                item.OptionSearchFile = OptionSearchFiles;
-                item.OptionSearchPatternFile = OptionSearchPatternFile;
-                item.OptionSearchPatternFolder = OptionSearchPatternFolder;
-                item.UpdatePaths();
-            }
-
-            OnUpdateOption();
+            CreateTree(
+                DirPath        = directoryPath,
+                OptionDirDepth = optionDirDepth
+            );
         }
-
-        protected virtual void OnUpdateOption()
-        {
-        }
-
-        #endregion
 
         public string this[int index]
         {
@@ -70,37 +49,18 @@ namespace AIO.UEditor
             }
         }
 
-        /// <summary>
-        /// 目录
-        /// </summary>
-        public string DirPath;
-
-        [SerializeField] public DirTreeItem Root;
-
         public int Count => Root.MaxDepth;
-
-        public DirTree()
-        {
-        }
-
-        public DirTree(string directoryPath, int optionDirDepth = 1)
-        {
-            CreateTree(
-                DirPath = directoryPath,
-                OptionDirDepth = optionDirDepth
-            );
-        }
 
         protected void CreateTree(
             string info,
-            int maxDepth
+            int    maxDepth
         )
         {
             if (string.IsNullOrEmpty(info)) info = nameof(string.Empty);
             Root = DirTreeItem.Create(info, maxDepth,
-                OptionSearchFiles,
-                OptionSearchPatternFolder,
-                OptionSearchPatternFile);
+                                      OptionSearchFiles,
+                                      OptionSearchPatternFolder,
+                                      OptionSearchPatternFile);
             UpdateOption();
         }
 
@@ -138,5 +98,46 @@ namespace AIO.UEditor
         {
             return DirPath;
         }
+
+        #region Option
+
+        /// <summary>
+        /// 目录深度
+        /// </summary>
+        public int OptionDirDepth = 1;
+
+        /// <summary>
+        /// 是否支持搜索文件
+        /// </summary>
+        public bool OptionSearchFiles;
+
+        /// <summary>
+        /// 搜索文件的搜索模式 正则表达式
+        /// </summary>
+        public string OptionSearchPatternFile = ".";
+
+        /// <summary>
+        /// 搜索文件夹的搜索模式 正则表达式
+        /// </summary>
+        public string OptionSearchPatternFolder = ".";
+
+        public void UpdateOption()
+        {
+            if (!Directory.Exists(DirPath)) return;
+            foreach (var item in Root)
+            {
+                item.MaxDepth                  = OptionDirDepth;
+                item.OptionSearchFile          = OptionSearchFiles;
+                item.OptionSearchPatternFile   = OptionSearchPatternFile;
+                item.OptionSearchPatternFolder = OptionSearchPatternFolder;
+                item.UpdatePaths();
+            }
+
+            OnUpdateOption();
+        }
+
+        protected virtual void OnUpdateOption() { }
+
+        #endregion
     }
 }

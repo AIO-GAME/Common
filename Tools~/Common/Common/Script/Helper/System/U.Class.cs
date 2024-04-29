@@ -1,19 +1,17 @@
-/*---------------------------------------------*
-||Author:        |*|XiNan                    |*|
-||Date:          |*|2021-07-08               |*|
-||Time:          |*|11:44:51                 |*|
-||E-Mail:        |*|1398581458@qq.com        |*|
-||---------------------------------------------*/
+#region
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: Class
+
         /// <summary>
         /// 类工具
         /// </summary>
@@ -79,21 +77,19 @@ namespace AIO
                     if (type != null) return type;
                 }
 
-                for (var i = 0; (i < assemblyArrayLength); ++i)
+                for (var i = 0; i < assemblyArrayLength; ++i)
                 {
                     var typeArray = assemblyArray[i].GetTypes();
                     var typeArrayLength = typeArray.Length;
                     for (var j = 0; j < typeArrayLength; ++j)
-                    {
                         if (typeArray[j].Name.Equals(typeName))
-                        {
                             return typeArray[j];
-                        }
-                    }
                 }
 
                 return null;
             }
         }
+
+        #endregion
     }
 }

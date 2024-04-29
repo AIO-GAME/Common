@@ -8,6 +8,8 @@ namespace AIO
 {
     public partial class PrWin
     {
+        #region Nested type: Comp
+
         /// <summary>
         /// 比较
         /// </summary>
@@ -34,10 +36,10 @@ namespace AIO
             public static IExecutor Decimal(string source, string target, bool caseASCII = false, bool skipOffline = false)
             {
                 return Create(CMD_Comp, "\"{0}\" \"{1}\" /D {2} {3} /M",
-                    source.Replace('/', '\\'),
-                    target.Replace('/', '\\'),
-                    caseASCII ? "/C" : "",
-                    skipOffline ? "/OFF[LINE]" : ""
+                              source.Replace('/', '\\'),
+                              target.Replace('/', '\\'),
+                              caseASCII ? "/C" : "",
+                              skipOffline ? "/OFF[LINE]" : ""
                 );
             }
 
@@ -51,10 +53,10 @@ namespace AIO
             public static IExecutor DecimalASCII(string source, string target, bool caseASCII = false, bool skipOffline = false)
             {
                 return Create(CMD_Comp, "\"{0}\" \"{1}\" /D /A {2} {3} /M",
-                    source.Replace('/', '\\'),
-                    target.Replace('/', '\\'),
-                    caseASCII ? "/C" : "",
-                    skipOffline ? "/OFF[LINE]" : ""
+                              source.Replace('/', '\\'),
+                              target.Replace('/', '\\'),
+                              caseASCII ? "/C" : "",
+                              skipOffline ? "/OFF[LINE]" : ""
                 );
             }
 
@@ -68,10 +70,10 @@ namespace AIO
             public static IExecutor DecimalASCIILineNumbers(string source, string target, bool caseASCII = false, bool skipOffline = false)
             {
                 return Create(CMD_Comp, "\"{0}\" \"{1}\" /D /A /L {2} {3} /M",
-                    source.Replace('/', '\\'),
-                    target.Replace('/', '\\'),
-                    caseASCII ? "/C" : "",
-                    skipOffline ? "/OFF[LINE]" : ""
+                              source.Replace('/', '\\'),
+                              target.Replace('/', '\\'),
+                              caseASCII ? "/C" : "",
+                              skipOffline ? "/OFF[LINE]" : ""
                 );
             }
 
@@ -85,10 +87,10 @@ namespace AIO
             public static IExecutor ASCII(string source, string target, bool caseASCII = false, bool skipOffline = false)
             {
                 return Create(CMD_Comp, "\"{0}\" \"{1}\" /A {2} {3} /M",
-                    source.Replace('/', '\\'),
-                    target.Replace('/', '\\'),
-                    caseASCII ? "/C" : "",
-                    skipOffline ? "/OFF[LINE]" : ""
+                              source.Replace('/', '\\'),
+                              target.Replace('/', '\\'),
+                              caseASCII ? "/C" : "",
+                              skipOffline ? "/OFF[LINE]" : ""
                 );
             }
 
@@ -102,10 +104,10 @@ namespace AIO
             public static IExecutor ASCIILineNumbers(string source, string target, bool caseASCII = false, bool skipOffline = false)
             {
                 return Create(CMD_Comp, "\"{0}\" \"{1}\" /A /L {2} {3} /M",
-                    source.Replace('/', '\\'),
-                    target.Replace('/', '\\'),
-                    caseASCII ? "/C" : "",
-                    skipOffline ? "/OFF[LINE]" : ""
+                              source.Replace('/', '\\'),
+                              target.Replace('/', '\\'),
+                              caseASCII ? "/C" : "",
+                              skipOffline ? "/OFF[LINE]" : ""
                 );
             }
 
@@ -119,10 +121,10 @@ namespace AIO
             public static IExecutor LineNumbers(string source, string target, bool caseASCII = false, bool skipOffline = false)
             {
                 return Create(CMD_Comp, "\"{0}\" \"{1}\" /L {2} {3} /M",
-                    source.Replace('/', '\\'),
-                    target.Replace('/', '\\'),
-                    caseASCII ? "/C" : "",
-                    skipOffline ? "/OFF[LINE]" : ""
+                              source.Replace('/', '\\'),
+                              target.Replace('/', '\\'),
+                              caseASCII ? "/C" : "",
+                              skipOffline ? "/OFF[LINE]" : ""
                 );
             }
 
@@ -137,11 +139,11 @@ namespace AIO
             public static IExecutor SpecifiedLineNumber(string source, string target, int lineIndex, bool caseASCII = true, bool skipOffline = true)
             {
                 return Create(CMD_Comp, "\"{0}\" \"{1}\" /L /N={2}{3} {4} /M",
-                    source.Replace('/', '\\'),
-                    target.Replace('/', '\\'),
-                    lineIndex,
-                    caseASCII ? "/C" : "",
-                    skipOffline ? "/OFF[LINE]" : ""
+                              source.Replace('/', '\\'),
+                              target.Replace('/', '\\'),
+                              lineIndex,
+                              caseASCII ? "/C" : "",
+                              skipOffline ? "/OFF[LINE]" : ""
                 );
             }
 
@@ -156,11 +158,11 @@ namespace AIO
             public static IExecutor SpecifiedLineASCII(string source, string target, int lineIndex, bool caseASCII = true, bool skipOffline = true)
             {
                 return Create(CMD_Comp, "\"{0}\" \"{1}\" /A /N={2}{3} {4} /M",
-                    source.Replace('/', '\\'),
-                    target.Replace('/', '\\'),
-                    lineIndex,
-                    caseASCII ? "/C" : "",
-                    skipOffline ? "/OFF[LINE]" : ""
+                              source.Replace('/', '\\'),
+                              target.Replace('/', '\\'),
+                              lineIndex,
+                              caseASCII ? "/C" : "",
+                              skipOffline ? "/OFF[LINE]" : ""
                 );
             }
 
@@ -175,13 +177,15 @@ namespace AIO
             public static IExecutor SpecifiedLineDecimal(string source, string target, int lineIndex, bool caseASCII = true, bool skipOffline = true)
             {
                 return Create(CMD_Comp, "\"{0}\" \"{1}\" /A /N={2}{3} {4} /M",
-                    source.Replace('/', '\\'),
-                    target.Replace('/', '\\'),
-                    lineIndex,
-                    caseASCII ? "/C" : "",
-                    skipOffline ? "/OFF[LINE]" : ""
+                              source.Replace('/', '\\'),
+                              target.Replace('/', '\\'),
+                              lineIndex,
+                              caseASCII ? "/C" : "",
+                              skipOffline ? "/OFF[LINE]" : ""
                 );
             }
         }
+
+        #endregion
     }
 }

@@ -1,8 +1,12 @@
 ﻿namespace AIO
 {
+    #region
+
 #if !PORTABLE
     using System.Configuration;
 #endif
+
+    #endregion
 
     /// <summary>
     /// 选择提供者
@@ -12,6 +16,5 @@
 #else
     public class DefaultProvider : LocalFileSettingsProvider
 #endif
-    {
-    }
+    { }
 }

@@ -1,10 +1,14 @@
-﻿using System.Diagnostics;
+﻿#region
+
+using System.Diagnostics;
 using System.Reflection;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -19,9 +23,9 @@ namespace AIO.UEditor
          * 如果不小心LockReloadAssemblies3次 但是只UnlockReloadAssemblies了一次 那么还是不会重载 必须也要但是只UnlockReloadAssemblies3次
          */
 
-        private const string MenuEnableManualReload = "AIO/Tools/Script/Manual Reload Domain Open";
+        private const string MenuEnableManualReload      = "AIO/Tools/Script/Manual Reload Domain Open";
         private const string menuDispensableManualReload = "AIO/Tools/Script/Manual Reload Domain Close";
-        private const string MenuReloadDomain = "AIO/Tools/Script/Unlock Reload";
+        private const string MenuReloadDomain            = "AIO/Tools/Script/Unlock Reload";
 
         private const string kManualReloadDomain = "ManualReloadDomain";
 
@@ -43,11 +47,6 @@ namespace AIO.UEditor
         private static Stopwatch _CompileSW;
 
         /// <summary>
-        /// 是否手动reload
-        /// </summary>
-        private static bool _IsManualReload => PlayerPrefs.GetInt(kManualReloadDomain, -1) == 1;
-
-        /// <summary>
         /// 缓存数据 域重载之后数据会变成false 如果不是false 那么就要重载
         /// </summary>
         private static bool _TempData;
@@ -59,6 +58,11 @@ namespace AIO.UEditor
         private static MethodInfo _CanReloadAssembliesMethod;
 
         /// <summary>
+        /// 是否手动reload
+        /// </summary>
+        private static bool _IsManualReload => PlayerPrefs.GetInt(kManualReloadDomain, -1) == 1;
+
+        /// <summary>
         /// 是否锁住
         /// </summary>
         private static bool IsLocked
@@ -66,11 +70,9 @@ namespace AIO.UEditor
             get
             {
                 if (_CanReloadAssembliesMethod is null)
-                {
                     // source: https://github.com/Unity-Technologies/UnityCsReference/blob/master/Editor/Mono/EditorApplication.bindings.cs#L154
                     _CanReloadAssembliesMethod = typeof(EditorApplication).GetMethod("CanReloadAssemblies",
-                        BindingFlags.NonPublic | BindingFlags.Static);
-                }
+                                                                                     BindingFlags.NonPublic | BindingFlags.Static);
 
                 if (_CanReloadAssembliesMethod is null)
                 {
@@ -92,8 +94,8 @@ namespace AIO.UEditor
 
             //**************不需要这个可以注释********************************
 #if UNITY_2019_1_OR_NEWER
-            CompilationPipeline.compilationStarted -= OnCompilationStarted;
-            CompilationPipeline.compilationStarted += OnCompilationStarted;
+            CompilationPipeline.compilationStarted  -= OnCompilationStarted;
+            CompilationPipeline.compilationStarted  += OnCompilationStarted;
             CompilationPipeline.compilationFinished -= OnCompilationFinished;
             CompilationPipeline.compilationFinished += OnCompilationFinished;
 #endif
@@ -102,8 +104,8 @@ namespace AIO.UEditor
             // 域重载事件监听
             AssemblyReloadEvents.beforeAssemblyReload -= OnBeforeAssemblyReload;
             AssemblyReloadEvents.beforeAssemblyReload += OnBeforeAssemblyReload;
-            AssemblyReloadEvents.afterAssemblyReload -= OnAfterAssemblyReload;
-            AssemblyReloadEvents.afterAssemblyReload += OnAfterAssemblyReload;
+            AssemblyReloadEvents.afterAssemblyReload  -= OnAfterAssemblyReload;
+            AssemblyReloadEvents.afterAssemblyReload  += OnAfterAssemblyReload;
 
             EditorApplication.playModeStateChanged -= EditorApplication_playModeStateChanged;
             EditorApplication.playModeStateChanged += EditorApplication_playModeStateChanged;
@@ -238,7 +240,7 @@ namespace AIO.UEditor
             //编辑器设置 project setting->editor->enterPlayModeSetting
 #if UNITY_2019_1_OR_NEWER
             EditorSettings.enterPlayModeOptionsEnabled = true;
-            EditorSettings.enterPlayModeOptions = EnterPlayModeOptions.DisableDomainReload;
+            EditorSettings.enterPlayModeOptions        = EnterPlayModeOptions.DisableDomainReload;
 #endif
             LockReloadDomain();
         }

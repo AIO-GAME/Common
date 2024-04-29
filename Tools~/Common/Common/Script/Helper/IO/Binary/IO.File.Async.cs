@@ -1,10 +1,15 @@
-using System.Runtime.CompilerServices;
+#region
+
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -24,10 +29,12 @@ namespace AIO
             public static Task<bool> WriteFileAsync(
                 string Path,
                 byte[] Bytes,
-                bool Concat = false)
+                bool   Concat = false)
             {
                 return WriteAsync(Path, Bytes, 0, Bytes.Length, Concat);
             }
         }
+
+        #endregion
     }
 }

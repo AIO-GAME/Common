@@ -1,12 +1,18 @@
-﻿using System.IO;
+﻿#region
+
+using System.IO;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
     public static partial class Behavior
     {
+        #region Nested type: PostProcessBuild
+
         public static class PostProcessBuild
         {
             [PostProcessBuild(1)]
@@ -17,5 +23,7 @@ namespace AIO.UEditor
                 File.Copy(Application.dataPath + "/README.md", Path.GetDirectoryName(pathToBuiltProject) + "/README.md", true);
             }
         }
+
+        #endregion
     }
 }

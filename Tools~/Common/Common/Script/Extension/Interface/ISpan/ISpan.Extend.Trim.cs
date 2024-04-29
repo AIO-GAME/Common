@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Linq;
+
+#endregion
 
 namespace AIO
 {
@@ -20,10 +24,8 @@ namespace AIO
             var len = arrays.Length - 1;
             var def = default(T);
             for (var i = 0; i <= len; i++)
-            {
                 if (arrays[i].Equals(def)) index++;
                 else break;
-            }
 
             if (index == 0) return arrays;
             var newArrays = new T[arrays.Length - index];
@@ -41,10 +43,8 @@ namespace AIO
             var index = 0;
             var len = arrays.Length - 1;
             for (var i = 0; i <= len; i++)
-            {
                 if (arrays[i].Equals(value)) index++;
                 else break;
-            }
 
             if (index == 0) return arrays;
             var newArrays = new T[arrays.Length - index];
@@ -62,10 +62,8 @@ namespace AIO
             var index = 0;
             var len = arrays.Length - 1;
             for (var i = 0; i <= len; i++)
-            {
                 if (values.Contains(arrays[i])) index++;
                 else break;
-            }
 
             if (index == 0) return arrays;
             var newArrays = new T[arrays.Length - index];
@@ -88,16 +86,14 @@ namespace AIO
             var len = arrays.Length - 1;
             var def = default(T);
             for (var i = 0; i <= len; i++)
-            {
                 if (arrays[i].Equals(def)) index++;
                 else break;
-            }
 
             if (index == 0) return arrays;
             for (var i = len; i >= len - index; i--)
             {
                 arrays[--index] = arrays[i];
-                arrays[i] = def;
+                arrays[i]       = def;
             }
 
             return arrays;
@@ -113,16 +109,14 @@ namespace AIO
             var index = 0;
             var len = arrays.Length - 1;
             for (var i = 0; i <= len; i++)
-            {
                 if (arrays[i].Equals(value)) index++;
                 else break;
-            }
 
             if (index == 0) return arrays;
             for (var i = len; i >= len - index; i--)
             {
                 arrays[--index] = arrays[i];
-                arrays[i] = default;
+                arrays[i]       = default;
             }
 
             return arrays;
@@ -139,16 +133,14 @@ namespace AIO
             var len = arrays.Length - 1;
             var def = default(T);
             for (var i = 0; i <= len; i++)
-            {
                 if (values.Contains(arrays[i])) index++;
                 else break;
-            }
 
             if (index == 0) return arrays;
             for (var i = len; i >= len - index; i--)
             {
                 arrays[--index] = arrays[i];
-                arrays[i] = def;
+                arrays[i]       = def;
             }
 
             arrays[0] = def;

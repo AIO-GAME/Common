@@ -4,18 +4,23 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+#endregion
+
 namespace AIO
 {
     public partial class PrWin
     {
+        #region Nested type: Git
+
         public static partial class Git
         {
-
             /// <summary>
             /// 设置远端镜像库
             /// </summary>
@@ -23,7 +28,7 @@ namespace AIO
             /// <param name="quit">静默退出</param>
             public static IExecutor RemoteSetUrl(string target, bool quit = true)
             {
-                return RemoteSetUrl(new string[] { target }, quit);
+                return RemoteSetUrl(new[] { target }, quit);
             }
 
             /// <summary>
@@ -42,7 +47,7 @@ namespace AIO
                     if (!Directory.Exists(target))
                     {
                         str.AppendFormat("\n @echo Error:{0} \n",
-                            new FileNotFoundException(nameof(target), target).Message).AppendLine();
+                                         new FileNotFoundException(nameof(target), target).Message).AppendLine();
                     }
                     else
                     {
@@ -64,7 +69,8 @@ namespace AIO
 
                 return Execute(str, quit);
             }
-
         }
+
+        #endregion
     }
 }

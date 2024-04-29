@@ -1,16 +1,16 @@
-/*|============|*|
-|*|Author:     |*| xinan
-|*|Date:       |*| 2023-06-04
-|*|E-Mail:     |*| 1398581458@qq.com
-|*|============|*/
+#region
 
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
     public partial class EHelper
     {
+        #region Nested type: Asset
+
         public partial class Asset
         {
             /// <summary>
@@ -76,10 +76,10 @@ namespace AIO.UEditor
                     var go = Object.Instantiate(o, parent, true) as GameObject;
                     if (go != null)
                     {
-                        go.name = o.name;
+                        go.name                    = o.name;
                         go.transform.localPosition = pos;
                         go.transform.localRotation = rot;
-                        go.transform.localScale = scale;
+                        go.transform.localScale    = scale;
                         return go;
                     }
                 }
@@ -93,12 +93,15 @@ namespace AIO.UEditor
             /// <param name="assetPath">资源路径</param>
             /// <param name="parent">父物体</param>
             /// <returns>实体</returns>
-            public static T LoadAndInstance<T>(string assetPath, Transform parent) where T : Component
+            public static T LoadAndInstance<T>(string assetPath, Transform parent)
+            where T : Component
             {
                 var r = LoadAndInstance(assetPath, parent);
                 if (r != null) return r.GetComponent<T>() ?? r.AddComponent<T>();
                 return null;
             }
         }
+
+        #endregion
     }
 }

@@ -7,12 +7,14 @@ public enum EFormat
     /// 默认 直接调用 ToString
     /// </summary>
     None = 0,
+
     /// <summary>
     /// Json格式
     /// </summary>
     Json = 1,
+
     /// <summary>
     /// 数组格式
     /// </summary>
-    Array =2,
+    Array = 2
 }

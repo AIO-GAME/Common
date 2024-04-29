@@ -1,15 +1,21 @@
 /*|============|*|
-|*|Author:     |*| xinan                
-|*|Date:       |*| 2023-05-21               
-|*|E-Mail:     |*| 1398581458@qq.com     
+|*|Author:     |*| xinan
+|*|Date:       |*| 2023-05-21
+|*|E-Mail:     |*| 1398581458@qq.com
 |*|============|*/
 
+#region
+
 using System;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrSvn
     {
+        #region Nested type: Add
+
         /// <summary>
         /// 添加命令
         /// </summary>
@@ -59,5 +65,7 @@ namespace AIO
                 return Create(work, $"add {path} --parents");
             }
         }
+
+        #endregion
     }
 }

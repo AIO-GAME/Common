@@ -2,6 +2,8 @@
 {
     public partial class PrMac
     {
+        #region Nested type: Ping
+
         /// <summary>
         /// 给一个网络主机发送回应请求
         /// </summary>
@@ -15,5 +17,7 @@
                 return Create(CMD_Ping, command);
             }
         }
+
+        #endregion
     }
 }

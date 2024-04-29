@@ -1,8 +1,4 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-02
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Collections.Generic;
@@ -11,23 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHandle
     {
+        #region Nested type: HTTP
+
         /// <summary>
         /// HTTP 处理器
         /// </summary>
         public sealed class HTTP : IDisposable
         {
             /// <summary>
-            /// 创建HTTP处理器
+            /// 构造函数
             /// </summary>
-            /// <param name="remoteURL">远端路径</param>
-            /// <returns>处理器</returns>
-            public static HTTP Create(string remoteURL)
+            /// <param name="remoteURL">远端跟路径</param>
+            private HTTP(string remoteURL)
             {
-                return new HTTP(remoteURL);
+                RemoteURL = remoteURL;
             }
 
             /// <summary>
@@ -60,13 +59,26 @@ namespace AIO
             /// </summary>
             public Encoding Encoding { get; set; } = Encoding.UTF8;
 
+            #region IDisposable Members
+
             /// <summary>
-            /// 构造函数
+            /// 释放
             /// </summary>
-            /// <param name="remoteURL">远端跟路径</param>
-            private HTTP(string remoteURL)
+            public void Dispose()
             {
-                RemoteURL = remoteURL;
+                RemoteURL = null;
+            }
+
+            #endregion
+
+            /// <summary>
+            /// 创建HTTP处理器
+            /// </summary>
+            /// <param name="remoteURL">远端路径</param>
+            /// <returns>处理器</returns>
+            public static HTTP Create(string remoteURL)
+            {
+                return new HTTP(remoteURL);
             }
 
             #region Delete
@@ -152,8 +164,8 @@ namespace AIO
             /// <param name="remotePath">远端需要下载文件路径</param>
             /// <param name="aProgress">进度回调</param>
             /// <param name="isOverWrite">是否覆盖</param>
-            public void Download(string savePath, string remotePath,
-                IProgressEvent aProgress = default, bool isOverWrite = false)
+            public void Download(string         savePath,            string remotePath,
+                                 IProgressEvent aProgress = default, bool   isOverWrite = false)
             {
                 var sourcePath = Path.Combine(RemoteURL, remotePath);
                 var targetPath = Path.Combine(savePath, Path.GetFileName(remotePath));
@@ -169,8 +181,8 @@ namespace AIO
             /// <param name="remotePath">远端需要下载文件路径</param>
             /// <param name="aProgress">进度回调</param>
             /// <param name="isOverWrite">是否覆盖</param>
-            public void Download(string savePath, IEnumerable<string> remotePath,
-                IProgressEvent aProgress = default, bool isOverWrite = false)
+            public void Download(string         savePath,            IEnumerable<string> remotePath,
+                                 IProgressEvent aProgress = default, bool                isOverWrite = false)
             {
                 var sourcePath = remotePath.Select(path => Path.Combine(RemoteURL, path)).ToArray();
                 var operation = AHelper.HTTP.Download(sourcePath, savePath, isOverWrite, TimeOut, BufferSize);
@@ -185,8 +197,8 @@ namespace AIO
             /// <param name="remotePath">远端需要下载文件路径</param>
             /// <param name="aProgress">进度回调</param>
             /// <param name="isOverWrite">是否覆盖</param>
-            public Task DownloadAsync(string savePath, string remotePath,
-                IProgressEvent aProgress = default, bool isOverWrite = false)
+            public Task DownloadAsync(string         savePath,            string remotePath,
+                                      IProgressEvent aProgress = default, bool   isOverWrite = false)
             {
                 var sourcePath = Path.Combine(RemoteURL, remotePath);
                 var targetPath = Path.Combine(savePath, Path.GetFileName(remotePath));
@@ -202,8 +214,8 @@ namespace AIO
             /// <param name="remotePath">远端需要下载文件路径</param>
             /// <param name="aProgress">进度回调</param>
             /// <param name="isOverWrite">是否覆盖</param>
-            public Task DownloadAsync(string savePath, IEnumerable<string> remotePath,
-                IProgressEvent aProgress = default, bool isOverWrite = false)
+            public Task DownloadAsync(string         savePath,            IEnumerable<string> remotePath,
+                                      IProgressEvent aProgress = default, bool                isOverWrite = false)
             {
                 var sourcePath = remotePath.Select(remote => Path.Combine(RemoteURL, Path.GetFileName(remote))).ToArray();
                 var operation = AHelper.HTTP.Download(sourcePath, savePath, isOverWrite, TimeOut, BufferSize);
@@ -662,9 +674,9 @@ namespace AIO
             {
                 return new AHelper.HTTP.Option
                 {
-                    Encoding = Encoding,
-                    Timeout = TimeOut,
-                    Cookie = Cookie,
+                    Encoding    = Encoding,
+                    Timeout     = TimeOut,
+                    Cookie      = Cookie,
                     ContentType = ContentType
                 };
             }
@@ -799,14 +811,8 @@ namespace AIO
             }
 
             #endregion
-
-            /// <summary>
-            /// 释放
-            /// </summary>
-            public void Dispose()
-            {
-                RemoteURL = null;
-            }
         }
+
+        #endregion
     }
 }

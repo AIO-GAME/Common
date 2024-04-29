@@ -1,11 +1,17 @@
+#region
+
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -31,11 +37,13 @@ namespace AIO
                 string path,
                 string text,
                 string charset,
-                bool concat = false)
+                bool   concat = false)
             {
                 var b = Encoding.GetEncoding(charset).GetBytes(text);
                 return await WriteAsync(path, b, 0, b.Length, concat);
             }
         }
+
+        #endregion
     }
 }

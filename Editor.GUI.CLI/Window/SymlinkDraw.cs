@@ -1,3 +1,5 @@
+#region
+
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -11,6 +13,8 @@ using Debug = UnityEngine.Debug;
 #if UNITY_EDITOR_WIN
 using Microsoft.Win32.SafeHandles;
 #endif
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -29,38 +33,36 @@ namespace AIO.UEditor
         // Style used to draw the symlink indicator in the project view.
         private static GUIStyle _SymlinkMarkerStyle;
 
+        // Style used to draw the symlink indicator in the project view.
+        private static GUIStyle _SymlinkErrorStyle;
+
+        private static bool _ShowSymlink;
+
         private static GUIStyle SymlinkMarkerStyle
         {
             get
             {
                 if (_SymlinkMarkerStyle is null)
-                {
                     _SymlinkMarkerStyle = new GUIStyle(EditorStyles.label)
                     {
-                        normal = { textColor = new Color(.2f, .8f, .2f, .8f) },
+                        normal    = { textColor = new Color(.2f, .8f, .2f, .8f) },
                         alignment = TextAnchor.MiddleRight
                     };
-                }
 
                 return _SymlinkMarkerStyle;
             }
         }
-
-        // Style used to draw the symlink indicator in the project view.
-        private static GUIStyle _SymlinkErrorStyle;
 
         private static GUIStyle SymlinkErrorStyle
         {
             get
             {
                 if (_SymlinkErrorStyle is null)
-                {
                     _SymlinkErrorStyle = new GUIStyle(EditorStyles.label)
                     {
-                        normal = { textColor = new Color(0.7f, 0.3f, 0.4f, 0.7f) },
+                        normal    = { textColor = new Color(0.7f, 0.3f, 0.4f, 0.7f) },
                         alignment = TextAnchor.MiddleRight
                     };
-                }
 
                 return _SymlinkErrorStyle;
             }
@@ -69,7 +71,7 @@ namespace AIO.UEditor
         [SettingsProvider]
         protected static SettingsProvider SettingsProvider()
         {
-            var provider = new GraphicSettingsProvider($"AIO/Symlink", SettingsScope.User)
+            var provider = new GraphicSettingsProvider("AIO/Symlink", SettingsScope.User)
             {
                 label = "Symlink Tool",
                 guiHandler = delegate
@@ -82,13 +84,9 @@ namespace AIO.UEditor
                         SetShowSymlink(!GetShowSymlink());
                         _ShowSymlink = !_ShowSymlink;
                         if (_ShowSymlink)
-                        {
                             EditorApplication.projectWindowItemOnGUI += OnProjectWindowItemGUI;
-                        }
                         else
-                        {
                             EditorApplication.projectWindowItemOnGUI -= OnProjectWindowItemGUI;
-                        }
                     }
 
                     GUILayout.Space(10);
@@ -101,8 +99,6 @@ namespace AIO.UEditor
             return provider;
         }
 
-        private static bool _ShowSymlink;
-
         /// <summary>
         /// Static constructor subscribes to projectWindowItemOnGUI delegate.
         /// </summary>
@@ -110,21 +106,24 @@ namespace AIO.UEditor
         private static void Initialize()
         {
             _ShowSymlink = GetShowSymlink();
-            if (_ShowSymlink)
-            {
-                EditorApplication.projectWindowItemOnGUI += OnProjectWindowItemGUI;
-            }
+            if (_ShowSymlink) EditorApplication.projectWindowItemOnGUI += OnProjectWindowItemGUI;
         }
 
         /// <summary>
         /// 显示符号链接
         /// </summary>
-        private static bool GetShowSymlink() => EditorPrefs.GetBool(typeof(SymlinkDraw).FullName, true);
+        private static bool GetShowSymlink()
+        {
+            return EditorPrefs.GetBool(typeof(SymlinkDraw).FullName, true);
+        }
 
         /// <summary>
         /// 显示符号链接
         /// </summary>
-        private static void SetShowSymlink(bool value) => EditorPrefs.SetBool(typeof(SymlinkDraw).FullName, value);
+        private static void SetShowSymlink(bool value)
+        {
+            EditorPrefs.SetBool(typeof(SymlinkDraw).FullName, value);
+        }
 
         /// <summary>
         /// Draw a little indicator if folder is a symlink
@@ -135,10 +134,11 @@ namespace AIO.UEditor
         {
             var path = AssetDatabase.GUIDToAssetPath(guid);
             if (string.IsNullOrEmpty(path)) return;
+            if (!Directory.Exists(path)) return;
             var attribs = File.GetAttributes(path);
             if ((attribs & FOLDER_SYMLINK_ATTRIBS) == FOLDER_SYMLINK_ATTRIBS)
             {
-                r.x = r.width;
+                r.x     = r.width;
                 r.width = 30;
                 if (GUI.Button(r, "<->", SymlinkMarkerStyle))
                 {
@@ -186,7 +186,7 @@ namespace AIO.UEditor
                 return;
             }
 
-            var sourceFolderName = sourceFolderPath.Split(new char[] { '/', '\\' }).LastOrDefault();
+            var sourceFolderName = sourceFolderPath.Split('/', '\\').LastOrDefault();
 
             if (string.IsNullOrEmpty(sourceFolderName))
             {
@@ -206,7 +206,7 @@ namespace AIO.UEditor
                 targetPath = Path.GetDirectoryName(targetPath);
 
             // Get path to project.
-            var pathToProject = Application.dataPath.Split(new string[] { "/Assets" }, StringSplitOptions.None)[0];
+            var pathToProject = Application.dataPath.Split(new[] { "/Assets" }, StringSplitOptions.None)[0];
 
             targetPath = $"{pathToProject}/{targetPath}/{sourceFolderName}";
 
@@ -257,9 +257,9 @@ namespace AIO.UEditor
                 sourcePath = string.Empty;
 
             var splitOutput =
-                outputPath.Split(new char[] { Path.PathSeparator }, StringSplitOptions.RemoveEmptyEntries);
+                outputPath.Split(new[] { Path.PathSeparator }, StringSplitOptions.RemoveEmptyEntries);
             var splitSource =
-                sourcePath.Split(new char[] { Path.PathSeparator }, StringSplitOptions.RemoveEmptyEntries);
+                sourcePath.Split(new[] { Path.PathSeparator }, StringSplitOptions.RemoveEmptyEntries);
 
             var max = Mathf.Min(splitOutput.Length, splitSource.Length);
             var i = 0;
@@ -273,15 +273,9 @@ namespace AIO.UEditor
             var newSplitCount = hopUpCount + splitSource.Length - i;
             var newSplitTarget = new string[newSplitCount];
             var j = 0;
-            for (; j < hopUpCount; ++j)
-            {
-                newSplitTarget[j] = "..";
-            }
+            for (; j < hopUpCount; ++j) newSplitTarget[j] = "..";
 
-            for (max = newSplitTarget.Length; j < max; ++j, ++i)
-            {
-                newSplitTarget[j] = splitSource[i];
-            }
+            for (max = newSplitTarget.Length; j < max; ++j, ++i) newSplitTarget[j] = splitSource[i];
 
             return string.Join(Path.PathSeparator.ToString(), newSplitTarget);
         }
@@ -290,16 +284,16 @@ namespace AIO.UEditor
         {
             command = command.Replace("\"", "\"\"");
 
-            var proc = new Process()
+            var proc = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = "/bin/bash",
-                    Arguments = "-c \"" + command + "\"",
-                    UseShellExecute = false,
+                    FileName               = "/bin/bash",
+                    Arguments              = "-c \"" + command + "\"",
+                    UseShellExecute        = false,
                     RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    CreateNoWindow = true
+                    RedirectStandardError  = true,
+                    CreateNoWindow         = true
                 }
             };
 
@@ -313,22 +307,6 @@ namespace AIO.UEditor
             }
         }
 
-#if UNITY_EDITOR_WIN
-
-        [DllImport("kernel32.dll", EntryPoint = "CreateFileW", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern SafeFileHandle CreateFile(string lpFileName, int dwDesiredAccess, int dwShareMode,
-            IntPtr securityAttributes, int dwCreationDisposition, int dwFlagsAndAttributes, IntPtr hTemplateFile);
-
-        [DllImport("kernel32.dll", EntryPoint = "GetFinalPathNameByHandleW", CharSet = CharSet.Unicode,
-            SetLastError = true)]
-        private static extern int GetFinalPathNameByHandle([In] SafeFileHandle hFile, [Out] StringBuilder lpszFilePath,
-            [In] int cchFilePath, [In] int dwFlags);
-
-        private const int CREATION_DISPOSITION_OPEN_EXISTING = 3;
-        private const int FILE_FLAG_BACKUP_SEMANTICS = 0x02000000;
-
-#endif
-
         public static string GetRealPath(string path)
         {
             if (!Directory.Exists(path) && !File.Exists(path))
@@ -339,7 +317,7 @@ namespace AIO.UEditor
 
 #if UNITY_EDITOR_WIN
             var directoryHandle = CreateFile(path, 0, 2, IntPtr.Zero,
-                CREATION_DISPOSITION_OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, IntPtr.Zero); //Handle file / folder
+                                             CREATION_DISPOSITION_OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, IntPtr.Zero); //Handle file / folder
 
             if (directoryHandle.IsInvalid)
             {
@@ -356,10 +334,7 @@ namespace AIO.UEditor
                 return path;
             }
 
-            if (result.Length >= 4 && result[0] == '\\' && result[1] == '\\' && result[2] == '?' && result[3] == '\\')
-            {
-                return result.ToString().Substring(4); // "\\?\" remove
-            }
+            if (result.Length >= 4 && result[0] == '\\' && result[1] == '\\' && result[2] == '?' && result[3] == '\\') return result.ToString().Substring(4); // "\\?\" remove
 
             return result.ToString();
 
@@ -370,5 +345,21 @@ namespace AIO.UEditor
             return path;
 #endif
         }
+
+#if UNITY_EDITOR_WIN
+
+        [DllImport("kernel32.dll", EntryPoint = "CreateFileW", CharSet = CharSet.Unicode, SetLastError = true)]
+        private static extern SafeFileHandle CreateFile(string lpFileName,         int dwDesiredAccess,       int dwShareMode,
+                                                        IntPtr securityAttributes, int dwCreationDisposition, int dwFlagsAndAttributes, IntPtr hTemplateFile);
+
+        [DllImport("kernel32.dll", EntryPoint = "GetFinalPathNameByHandleW", CharSet = CharSet.Unicode,
+                   SetLastError = true)]
+        private static extern int GetFinalPathNameByHandle([In] SafeFileHandle hFile,       [Out] StringBuilder lpszFilePath,
+                                                           [In] int            cchFilePath, [In]  int           dwFlags);
+
+        private const int CREATION_DISPOSITION_OPEN_EXISTING = 3;
+        private const int FILE_FLAG_BACKUP_SEMANTICS         = 0x02000000;
+
+#endif
     }
 }

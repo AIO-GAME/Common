@@ -1,13 +1,11 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-06
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+
+#endregion
 
 namespace AIO
 {
@@ -19,25 +17,29 @@ namespace AIO
     /// <remarks>Thread-safe.</remarks>
     public class FileCache : IDisposable
     {
+        #region Delegates
+
         /// <summary>
         /// 
         /// </summary>
         public delegate bool InsertHandler(FileCache cache, string key, byte[] value, TimeSpan timeout);
 
-        private readonly ReaderWriterLockSlim _lockEx;
-        private Dictionary<string, MemCacheEntry> EntriesByKey;
-        private Dictionary<string, HashSet<string>> EntriesByPath;
-        private Dictionary<string, FileCacheEntry> PathsByKey;
+        #endregion
+
+        private readonly ReaderWriterLockSlim                _lockEx;
+        private          Dictionary<string, MemCacheEntry>   EntriesByKey;
+        private          Dictionary<string, HashSet<string>> EntriesByPath;
+        private          Dictionary<string, FileCacheEntry>  PathsByKey;
 
         /// <summary>
         /// 
         /// </summary>
         public FileCache()
         {
-            _lockEx = new ReaderWriterLockSlim();
-            EntriesByKey = new Dictionary<string, MemCacheEntry>();
+            _lockEx       = new ReaderWriterLockSlim();
+            EntriesByKey  = new Dictionary<string, MemCacheEntry>();
             EntriesByPath = new Dictionary<string, HashSet<string>>();
-            PathsByKey = new Dictionary<string, FileCacheEntry>();
+            PathsByKey    = new Dictionary<string, FileCacheEntry>();
         }
 
         /// <summary>
@@ -131,8 +133,156 @@ namespace AIO
         /// <returns>'true' if the cache value was removed, 'false' if the given key was not found</returns>
         public bool Remove(string key)
         {
-            using (new LockWrite(_lockEx)) return EntriesByKey.Remove(key);
+            using (new LockWrite(_lockEx))
+            {
+                return EntriesByKey.Remove(key);
+            }
         }
+
+        #region Nested type: FileCacheEntry
+
+        private class FileCacheEntry
+        {
+            private readonly InsertHandler     _handler;
+            private readonly string            _path;
+            private readonly string            _prefix;
+            private readonly TimeSpan          _timespan;
+            private readonly FileSystemWatcher _watcher;
+
+            public FileCacheEntry(FileCache cache, string prefix, string path, string filter, InsertHandler handler,
+                                  TimeSpan  timespan)
+            {
+                _prefix   = prefix;
+                _path     = path;
+                _handler  = handler;
+                _timespan = timespan;
+                _watcher  = new FileSystemWatcher();
+
+                // Start the filesystem watcher
+                StartWatcher(cache, path, filter);
+            }
+
+            private void StartWatcher(FileCache cache, string path, string filter)
+            {
+                var entry = this;
+
+                // Initialize a new filesystem watcher
+                _watcher.Created               += (sender, e) => OnCreated(sender, e, cache, entry);
+                _watcher.Changed               += (sender, e) => OnChanged(sender, e, cache, entry);
+                _watcher.Deleted               += (sender, e) => OnDeleted(sender, e, cache, entry);
+                _watcher.Renamed               += (sender, e) => OnRenamed(sender, e, cache, entry);
+                _watcher.Path                  =  path;
+                _watcher.IncludeSubdirectories =  true;
+                _watcher.Filter                =  filter;
+                _watcher.NotifyFilter          =  NotifyFilters.FileName | NotifyFilters.LastWrite;
+                _watcher.EnableRaisingEvents   =  true;
+            }
+
+            public void StopWatcher()
+            {
+                _watcher.Dispose();
+            }
+
+            private static bool IsDirectory(string path)
+            {
+                try
+                {
+                    // Skip directory updates
+                    if (File.GetAttributes(path).HasFlag(FileAttributes.Directory))
+                        return true;
+                }
+                catch (Exception)
+                {
+                    // 
+                }
+
+                return false;
+            }
+
+            private static void OnCreated(object sender, FileSystemEventArgs e, FileCache cache, FileCacheEntry entry)
+            {
+                var key = e.FullPath.Replace('\\', Path.PathSeparator).Replace(string.Concat(entry._path, "/"), entry._prefix);
+                var file = e.FullPath.Replace('\\', Path.PathSeparator);
+
+                // Skip missing files
+                if (!File.Exists(file))
+                    return;
+                // Skip directory updates
+                if (IsDirectory(file))
+                    return;
+
+                cache.InsertFileInternal(entry._path, file, key, entry._timespan, entry._handler);
+            }
+
+            private static void OnChanged(object sender, FileSystemEventArgs e, FileCache cache, FileCacheEntry entry)
+            {
+                if (e.ChangeType != WatcherChangeTypes.Changed)
+                    return;
+
+                var key = e.FullPath.Replace('\\', Path.PathSeparator).Replace(string.Concat(entry._path, "/"), entry._prefix);
+                var file = e.FullPath.Replace('\\', Path.PathSeparator);
+
+                // Skip missing files
+                if (!File.Exists(file))
+                    return;
+                // Skip directory updates
+                if (IsDirectory(file))
+                    return;
+
+                cache.InsertFileInternal(entry._path, file, key, entry._timespan, entry._handler);
+            }
+
+            private static void OnDeleted(object sender, FileSystemEventArgs e, FileCache cache, FileCacheEntry entry)
+            {
+                var key = e.FullPath.Replace('\\', Path.PathSeparator).Replace(string.Concat(entry._path, "/"), entry._prefix);
+                var file = e.FullPath.Replace('\\', Path.PathSeparator);
+
+                cache.RemoveFileInternal(entry._path, key);
+            }
+
+            private static void OnRenamed(object sender, RenamedEventArgs e, FileCache cache, FileCacheEntry entry)
+            {
+                var oldKey = e.OldFullPath.Replace('\\', Path.PathSeparator).Replace(string.Concat(entry._path, "/"), entry._prefix);
+                var oldFile = e.OldFullPath.Replace('\\', Path.PathSeparator);
+                var newKey = e.FullPath.Replace('\\', Path.PathSeparator).Replace(string.Concat(entry._path, "/"), entry._prefix);
+                var newFile = e.FullPath.Replace('\\', Path.PathSeparator);
+
+                // Skip missing files
+                if (!File.Exists(newFile))
+                    return;
+                // Skip directory updates
+                if (IsDirectory(newFile))
+                    return;
+
+                cache.RemoveFileInternal(entry._path, oldKey);
+                cache.InsertFileInternal(entry._path, newFile, newKey, entry._timespan, entry._handler);
+            }
+        }
+
+        #endregion
+
+        #region Nested type: MemCacheEntry
+
+        private class MemCacheEntry
+        {
+            public MemCacheEntry(byte[] value, TimeSpan timespan = new TimeSpan())
+            {
+                Value    = value;
+                Timespan = timespan;
+            }
+
+            public byte[] Value { get; set; }
+
+            public TimeSpan Timespan { get; set; }
+        }
+
+        private class MemCacheEntry<T> : MemCacheEntry
+        {
+            public MemCacheEntry(T value, TimeSpan timespan = new TimeSpan()) :
+                base(AHelper.Binary.Serialize(value), timespan) { }
+        }
+
+        #endregion
 
         #region Cache management methods
 
@@ -145,8 +295,8 @@ namespace AIO
         /// <param name="timeout">Cache timeout (default is 0 - no timeout)</param>
         /// <param name="handler">Cache insert handler (default is 'return cache.Add(key, value, timeout)')</param>
         /// <returns>'true' if the cache path was setup, 'false' if failed to setup the cache path</returns>
-        public bool InsertPath(string path, string prefix = "/", string filter = "*.*",
-            TimeSpan timeout = new TimeSpan(), InsertHandler handler = null)
+        public bool InsertPath(string   path,                     string        prefix  = "/", string filter = "*.*",
+                               TimeSpan timeout = new TimeSpan(), InsertHandler handler = null)
         {
             handler ??= (cache, key, value, timespan) => cache.Add(key, value, timespan);
 
@@ -221,150 +371,6 @@ namespace AIO
 
         #endregion
 
-        private class MemCacheEntry
-        {
-            public byte[] Value { get; set; }
-
-            public TimeSpan Timespan { get; set; }
-
-            public MemCacheEntry(byte[] value, TimeSpan timespan = new TimeSpan())
-            {
-                Value = value;
-                Timespan = timespan;
-            }
-        }
-
-        private class MemCacheEntry<T> : MemCacheEntry
-        {
-            public MemCacheEntry(T value, TimeSpan timespan = new TimeSpan()) :
-                base(AHelper.Binary.Serialize(value), timespan)
-            {
-            }
-        }
-
-        private class FileCacheEntry
-        {
-            private readonly string _prefix;
-            private readonly string _path;
-            private readonly InsertHandler _handler;
-            private readonly TimeSpan _timespan;
-            private readonly FileSystemWatcher _watcher;
-
-            public FileCacheEntry(FileCache cache, string prefix, string path, string filter, InsertHandler handler,
-                TimeSpan timespan)
-            {
-                _prefix = prefix;
-                _path = path;
-                _handler = handler;
-                _timespan = timespan;
-                _watcher = new FileSystemWatcher();
-
-                // Start the filesystem watcher
-                StartWatcher(cache, path, filter);
-            }
-
-            private void StartWatcher(FileCache cache, string path, string filter)
-            {
-                var entry = this;
-
-                // Initialize a new filesystem watcher
-                _watcher.Created += (sender, e) => OnCreated(sender, e, cache, entry);
-                _watcher.Changed += (sender, e) => OnChanged(sender, e, cache, entry);
-                _watcher.Deleted += (sender, e) => OnDeleted(sender, e, cache, entry);
-                _watcher.Renamed += (sender, e) => OnRenamed(sender, e, cache, entry);
-                _watcher.Path = path;
-                _watcher.IncludeSubdirectories = true;
-                _watcher.Filter = filter;
-                _watcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite;
-                _watcher.EnableRaisingEvents = true;
-            }
-
-            public void StopWatcher()
-            {
-                _watcher.Dispose();
-            }
-
-            private static bool IsDirectory(string path)
-            {
-                try
-                {
-                    // Skip directory updates
-                    if (File.GetAttributes(path).HasFlag(FileAttributes.Directory))
-                        return true;
-                }
-                catch (Exception)
-                {
-                    // 
-                }
-
-                return false;
-            }
-
-            private static void OnCreated(object sender, FileSystemEventArgs e, FileCache cache, FileCacheEntry entry)
-            {
-                var key = e.FullPath.Replace('\\', Path.PathSeparator)
-                    .Replace(string.Concat(entry._path, "/"), entry._prefix);
-                var file = e.FullPath.Replace('\\', Path.PathSeparator);
-
-                // Skip missing files
-                if (!File.Exists(file))
-                    return;
-                // Skip directory updates
-                if (IsDirectory(file))
-                    return;
-
-                cache.InsertFileInternal(entry._path, file, key, entry._timespan, entry._handler);
-            }
-
-            private static void OnChanged(object sender, FileSystemEventArgs e, FileCache cache, FileCacheEntry entry)
-            {
-                if (e.ChangeType != WatcherChangeTypes.Changed)
-                    return;
-
-                var key = e.FullPath.Replace('\\', Path.PathSeparator)
-                    .Replace(string.Concat(entry._path, "/"), entry._prefix);
-                var file = e.FullPath.Replace('\\', Path.PathSeparator);
-
-                // Skip missing files
-                if (!File.Exists(file))
-                    return;
-                // Skip directory updates
-                if (IsDirectory(file))
-                    return;
-
-                cache.InsertFileInternal(entry._path, file, key, entry._timespan, entry._handler);
-            }
-
-            private static void OnDeleted(object sender, FileSystemEventArgs e, FileCache cache, FileCacheEntry entry)
-            {
-                var key = e.FullPath.Replace('\\', Path.PathSeparator)
-                    .Replace(string.Concat(entry._path, "/"), entry._prefix);
-                var file = e.FullPath.Replace('\\', Path.PathSeparator);
-
-                cache.RemoveFileInternal(entry._path, key);
-            }
-
-            private static void OnRenamed(object sender, RenamedEventArgs e, FileCache cache, FileCacheEntry entry)
-            {
-                var oldKey = e.OldFullPath.Replace('\\', Path.PathSeparator)
-                    .Replace(string.Concat(entry._path, "/"), entry._prefix);
-                var oldFile = e.OldFullPath.Replace('\\', Path.PathSeparator);
-                var newKey = e.FullPath.Replace('\\', Path.PathSeparator)
-                    .Replace(string.Concat(entry._path, "/"), entry._prefix);
-                var newFile = e.FullPath.Replace('\\', Path.PathSeparator);
-
-                // Skip missing files
-                if (!File.Exists(newFile))
-                    return;
-                // Skip directory updates
-                if (IsDirectory(newFile))
-                    return;
-
-                cache.RemoveFileInternal(entry._path, oldKey);
-                cache.InsertFileInternal(entry._path, newFile, newKey, entry._timespan, entry._handler);
-            }
-        }
-
         #region Internal
 
         private bool InsertFileInternal(string path, string file, string key, TimeSpan timeout, InsertHandler handler)
@@ -407,8 +413,8 @@ namespace AIO
             }
         }
 
-        private bool InsertPathInternal(string root, string path, string prefix, TimeSpan timeout,
-            InsertHandler handler)
+        private bool InsertPathInternal(string        root, string path, string prefix, TimeSpan timeout,
+                                        InsertHandler handler)
         {
             try
             {
@@ -499,10 +505,8 @@ namespace AIO
             if (!_disposed)
             {
                 if (disposingManagedResources)
-                {
                     // Dispose managed resources here...
                     Clear();
-                }
 
                 // Dispose unmanaged resources here...
 

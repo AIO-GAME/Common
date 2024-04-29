@@ -150,7 +150,6 @@ namespace MonoHook
 #endif
         }
 
-
         private static void* s_ptr_flush_icache_arm32, s_ptr_flush_icache_arm64;
 
         private static byte[] s_flush_icache_arm32 = new byte[]

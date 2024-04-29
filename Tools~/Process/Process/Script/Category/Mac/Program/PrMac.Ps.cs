@@ -2,6 +2,8 @@
 {
     public sealed partial class PrMac
     {
+        #region Nested type: Ps
+
         /// <summary>
         /// 显示进程当前状态
         /// </summary>
@@ -15,5 +17,7 @@
                 return Create(CMD_Ps, args);
             }
         }
+
+        #endregion
     }
 }

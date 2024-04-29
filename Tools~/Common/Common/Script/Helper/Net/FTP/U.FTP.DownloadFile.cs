@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,40 +8,93 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: FTP
+
         public partial class FTP
         {
+            /// <summary>
+            /// FTP下载文件
+            /// </summary>
+            /// <param name="uri">路径</param>
+            /// <param name="username">用户名</param>
+            /// <param name="password">密码</param>
+            /// <param name="localPath">本地文件路径</param>
+            /// <param name="overwrite">是否覆盖</param>
+            /// <param name="timeout">超时</param>
+            /// <param name="bufferSize">下载缓存大小</param>
+            public static IProgressOperation DownloadFile(
+                string uri,
+                string username,
+                string password,
+                string localPath,
+                bool   overwrite  = false,
+                ushort timeout    = Net.TIMEOUT,
+                int    bufferSize = Net.BUFFER_SIZE)
+            {
+                return new FTPDownloadFileOperation(uri, username, password, localPath, overwrite, timeout, bufferSize);
+            }
+
+            /// <summary>
+            /// 获取文件下载列表
+            /// </summary>
+            private static IEnumerable<string> GetDownloadList(string       uri, string username, string password,
+                                                               SearchOption option        = SearchOption.AllDirectories,
+                                                               string       searchPattern = "*",
+                                                               ushort       timeout       = Net.TIMEOUT, string abs = null
+            )
+            {
+                var remoteList =
+                    GetRemoteList(uri, username, password, AHandle.FTP.ListType.File, searchPattern, timeout).Select(file => string.Concat(abs, '/', Path.GetFileName(file)).Trim('/')).ToList();
+
+                if (option != SearchOption.AllDirectories) return remoteList;
+
+                foreach (var absPath in GetRemoteList(
+                             uri, username, password, AHandle.FTP.ListType.Directory, searchPattern, timeout).Select(Path.GetFileName))
+                {
+                    var collection = GetDownloadList(
+                        string.Concat(uri, '/', absPath), username, password, option, searchPattern, timeout,
+                        string.Concat(abs, '/', absPath).Trim('/'));
+                    remoteList.AddRange(collection);
+                }
+
+                return remoteList;
+            }
+
+            #region Nested type: FTPDownloadFileOperation
+
             private class FTPDownloadFileOperation : AOperation
             {
-                private string uri { get; }
-                private string username { get; }
-                private string password { get; }
-                private string localPath { get; }
-                private bool overwrite { get; }
-                private ushort timeout { get; }
-                private int bufferSize { get; }
-
-
                 public FTPDownloadFileOperation(
                     string uri,
                     string username,
                     string password,
                     string localPath,
-                    bool overwrite,
+                    bool   overwrite,
                     ushort timeout,
-                    int bufferSize)
+                    int    bufferSize)
                 {
-                    this.uri = uri.Replace('\\', '/');
-                    this.username = username;
-                    this.password = password;
-                    this.localPath = localPath;
-                    this.overwrite = overwrite;
-                    this.timeout = timeout;
+                    this.uri        = uri.Replace('\\', '/');
+                    this.username   = username;
+                    this.password   = password;
+                    this.localPath  = localPath;
+                    this.overwrite  = overwrite;
+                    this.timeout    = timeout;
                     this.bufferSize = bufferSize;
                 }
+
+                private string uri        { get; }
+                private string username   { get; }
+                private string password   { get; }
+                private string localPath  { get; }
+                private bool   overwrite  { get; }
+                private ushort timeout    { get; }
+                private int    bufferSize { get; }
 
                 protected override void OnWait()
                 {
@@ -65,7 +120,7 @@ namespace AIO
 
                         if (!outputStream.CanWrite)
                         {
-                            State = EProgressState.Finish;
+                            State      =  EProgressState.Finish;
                             StartValue += fileSize;
                             return;
                         }
@@ -76,9 +131,9 @@ namespace AIO
 
                         using var response = request.GetResponse();
 
-                        TotalValue = fileSize - temp;
+                        TotalValue  = fileSize - temp;
                         CurrentInfo = response.ResponseUri.AbsoluteUri;
-                        StartValue = temp;
+                        StartValue  = temp;
 
                         using (var responseStream = response.GetResponseStream())
                         {
@@ -93,7 +148,6 @@ namespace AIO
                             var buffer = new byte[bufferSize];
                             var readCount = responseStream.Read(buffer, 0, bufferSize);
                             while (readCount > 0)
-                            {
                                 switch (State)
                                 {
                                     case EProgressState.Cancel:
@@ -108,7 +162,6 @@ namespace AIO
                                         Thread.Sleep(100);
                                         break;
                                 }
-                            }
 
                             Net.RemoveFileHeader(outputStream, bufferSize);
                             outputStream.Flush();
@@ -151,7 +204,7 @@ namespace AIO
 
                         if (!outputStream.CanWrite)
                         {
-                            State = EProgressState.Finish;
+                            State      =  EProgressState.Finish;
                             StartValue += fileSize;
                             return;
                         }
@@ -161,9 +214,9 @@ namespace AIO
                         if (temp > 0) request.ContentOffset = temp;
 
                         using var response = await request.GetResponseAsync();
-                        TotalValue = fileSize - temp;
+                        TotalValue  = fileSize - temp;
                         CurrentInfo = response.ResponseUri.AbsoluteUri;
-                        StartValue = temp;
+                        StartValue  = temp;
 
                         using (var responseStream = response.GetResponseStream())
                         {
@@ -177,7 +230,6 @@ namespace AIO
                             var buffer = new byte[bufferSize];
                             var readCount = await responseStream.ReadAsync(buffer, 0, bufferSize, cancellationToken);
                             while (readCount > 0)
-                            {
                                 switch (State)
                                 {
                                     case EProgressState.Cancel:
@@ -187,13 +239,12 @@ namespace AIO
                                         CurrentValue += readCount;
                                         await outputStream.WriteAsync(buffer, 0, readCount, cancellationToken);
                                         readCount = await responseStream.ReadAsync(buffer, 0, bufferSize,
-                                            cancellationToken);
+                                                                                   cancellationToken);
                                         break;
                                     default:
                                         await Task.Delay(100, cancellationToken);
                                         break;
                                 }
-                            }
 
                             await Net.RemoveFileHeaderAsync(outputStream, bufferSize, cancellationToken);
                             await outputStream.FlushAsync(cancellationToken);
@@ -212,56 +263,9 @@ namespace AIO
                 }
             }
 
-            /// <summary>
-            /// FTP下载文件
-            /// </summary>
-            /// <param name="uri">路径</param>
-            /// <param name="username">用户名</param>
-            /// <param name="password">密码</param>
-            /// <param name="localPath">本地文件路径</param>
-            /// <param name="overwrite">是否覆盖</param>
-            /// <param name="timeout">超时</param>
-            /// <param name="bufferSize">下载缓存大小</param>
-            public static IProgressOperation DownloadFile(
-                string uri,
-                string username,
-                string password,
-                string localPath,
-                bool overwrite = false,
-                ushort timeout = Net.TIMEOUT,
-                int bufferSize = Net.BUFFER_SIZE)
-            {
-                return new FTPDownloadFileOperation(uri, username, password, localPath, overwrite, timeout, bufferSize);
-            }
-
-            /// <summary>
-            /// 获取文件下载列表
-            /// </summary>
-            private static IEnumerable<string> GetDownloadList(string uri, string username, string password,
-                SearchOption option = SearchOption.AllDirectories,
-                string searchPattern = "*",
-                ushort timeout = Net.TIMEOUT, string abs = null
-            )
-            {
-                var remoteList =
-                    GetRemoteList(uri, username, password, AHandle.FTP.ListType.File, searchPattern, timeout)
-                        .Select(file => string.Concat(abs, '/', Path.GetFileName(file)).Trim('/'))
-                        .ToList();
-
-                if (option != SearchOption.AllDirectories) return remoteList;
-
-                foreach (var absPath in GetRemoteList(
-                                 uri, username, password, AHandle.FTP.ListType.Directory, searchPattern, timeout)
-                             .Select(Path.GetFileName))
-                {
-                    var collection = GetDownloadList(
-                        string.Concat(uri, '/', absPath), username, password, option, searchPattern, timeout,
-                        string.Concat(abs, '/', absPath).Trim('/'));
-                    remoteList.AddRange(collection);
-                }
-
-                return remoteList;
-            }
+            #endregion
         }
+
+        #endregion
     }
 }

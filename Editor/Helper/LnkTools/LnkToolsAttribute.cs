@@ -1,11 +1,9 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-12-07
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -15,6 +13,33 @@ namespace AIO.UEditor
     [AttributeUsage(AttributeTargets.Method, Inherited = false)]
     public sealed class LnkToolsAttribute : Attribute
     {
+        public LnkToolsAttribute(
+            ELnkToolsMode mode     = ELnkToolsMode.AllMode,
+            int           priority = int.MaxValue)
+        {
+            Mode     = mode;
+            Priority = priority;
+        }
+
+        public LnkToolsAttribute(string        text,
+                                 ELnkToolsMode mode     = ELnkToolsMode.AllMode,
+                                 int           priority = int.MaxValue)
+        {
+            Text     = text;
+            Mode     = mode;
+            Priority = priority;
+        }
+
+        public LnkToolsAttribute(string        text, string tooltip,
+                                 ELnkToolsMode mode     = ELnkToolsMode.AllMode,
+                                 int           priority = int.MaxValue)
+        {
+            Text     = text;
+            Tooltip  = tooltip;
+            Mode     = mode;
+            Priority = priority;
+        }
+
         /// <summary>
         /// 工具名称
         /// </summary>
@@ -64,39 +89,15 @@ namespace AIO.UEditor
         /// 显示模式
         /// </summary>
         public ELnkShowMode ShowMode { get; set; } = ELnkShowMode.SceneView;
-
-        public LnkToolsAttribute(
-            ELnkToolsMode mode = ELnkToolsMode.AllMode,
-            int priority = int.MaxValue)
-        {
-            Mode = mode;
-            Priority = priority;
-        }
-
-        public LnkToolsAttribute(string text,
-            ELnkToolsMode mode = ELnkToolsMode.AllMode,
-            int priority = int.MaxValue)
-        {
-            Text = text;
-            Mode = mode;
-            Priority = priority;
-        }
-
-        public LnkToolsAttribute(string text, string tooltip,
-            ELnkToolsMode mode = ELnkToolsMode.AllMode,
-            int priority = int.MaxValue)
-        {
-            Text = text;
-            Tooltip = tooltip;
-            Mode = mode;
-            Priority = priority;
-        }
     }
 
     public enum ELnkShowMode
     {
-        [InspectorName("Editor bar")] Toolbar,
-        [InspectorName("Scene 窗口")] SceneView,
+        [InspectorName("Editor bar")]
+        Toolbar,
+
+        [InspectorName("Scene 窗口")]
+        SceneView,
         // GameView,
     }
 
@@ -108,16 +109,19 @@ namespace AIO.UEditor
         /// <summary>
         /// 所有模式
         /// </summary>
-        [InspectorName("全部模式")] AllMode,
+        [InspectorName("全部模式")]
+        AllMode,
 
         /// <summary>
         /// 仅在运行时
         /// </summary>
-        [InspectorName("运行时")] OnlyRuntime,
+        [InspectorName("运行时")]
+        OnlyRuntime,
 
         /// <summary>
         /// 仅在编辑时
         /// </summary>
-        [InspectorName("编辑器")] OnlyEditor
+        [InspectorName("编辑器")]
+        OnlyEditor
     }
 }

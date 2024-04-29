@@ -1,8 +1,12 @@
+#region
+
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
 using PackageInfo = UnityEditor.PackageManager.PackageInfo;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -12,23 +16,31 @@ namespace AIO.UEditor
     [GWindow("Built In GUI Style View", Group = "Tools", MinSizeWidth = 600, MinSizeHeight = 600)]
     public class BuiltInGUIStyleGraphWindow : GraphicWindow
     {
+        private Dictionary<string, List<GUIStyle>> Array;
+        private GUIStyle                           Content, Label;
+        private Dictionary<string, GUIStyle>       DataTable;
+        private GUILayoutOption                    Height, Width;
+        private string                             search = "";
+
+        private Vector2 Vector;
+
+        private Dictionary<string, bool> versionFolds;
+
         public BuiltInGUIStyleGraphWindow()
         {
-            Array = new Dictionary<string, List<GUIStyle>>();
-            DataTable = new Dictionary<string, GUIStyle>();
-            Vector = new Vector2();
-            Height = GUILayout.Height(50);
-            Width = GUILayout.Width(40);
+            Array        = new Dictionary<string, List<GUIStyle>>();
+            DataTable    = new Dictionary<string, GUIStyle>();
+            Vector       = new Vector2();
+            Height       = GUILayout.Height(50);
+            Width        = GUILayout.Width(40);
             versionFolds = new Dictionary<string, bool>();
         }
 
-        private Dictionary<string, List<GUIStyle>> Array;
-        private Dictionary<string, GUIStyle> DataTable;
-
-        private Vector2 Vector;
-        private GUILayoutOption Height, Width;
-        private GUIStyle Content, Label;
-        private string search = "";
+        protected override void OnDisable()
+        {
+            Array.Clear();
+            versionFolds.Clear();
+        }
 
         protected override void OnActivation()
         {
@@ -38,7 +50,7 @@ namespace AIO.UEditor
 
         protected override void OnDraw()
         {
-            if (Label == null) Label = new GUIStyle("SearchTextField");
+            if (Label == null) Label     = new GUIStyle("SearchTextField");
             if (Content == null) Content = new GUIStyle("DD HeaderStyle");
 
             if (Array.Count == 0)
@@ -46,7 +58,7 @@ namespace AIO.UEditor
                 Array.Clear();
                 var formatPath = PackageInfo.FindForAssembly(typeof(GEStyle).Assembly).resolvedPath +
                                  "/Resources/Editor/Graph/Style/{0}.txt";
-                var versions = new string[] { "2019", "2020", "2021", "2022", "2023", "2024", "2025" };
+                var versions = new[] { "2019", "2020", "2021", "2022", "2023", "2024", "2025" };
 
                 if (File.Exists(string.Format(formatPath, "Common")))
                 {
@@ -81,7 +93,7 @@ namespace AIO.UEditor
             }
 
             using (new GUILayout.HorizontalScope(EditorStyles.helpBox, GUILayout.ExpandWidth(true),
-                       GUILayout.Height(30)))
+                                                 GUILayout.Height(30)))
             {
                 search = EditorGUILayout.TextField(search, Label);
                 if (GUILayout.Button("Find", GUILayout.Width(50))) FindSearchStyles();
@@ -99,18 +111,14 @@ namespace AIO.UEditor
             // }
         }
 
-        private Dictionary<string, bool> versionFolds;
-
         private void DrawContext()
         {
             foreach (var keyValuePair in Array)
-            {
                 versionFolds[keyValuePair.Key] = GELayout.VFoldoutHeader(
                     delegate { DrawListItem(keyValuePair.Value); },
                     string.Concat(keyValuePair.Key, '[', keyValuePair.Value.Count, ']'),
                     versionFolds[keyValuePair.Key]
                 );
-            }
         }
 
         private void DrawListItem(IEnumerable<GUIStyle> collection)
@@ -121,7 +129,6 @@ namespace AIO.UEditor
             }
 
             foreach (var style in collection)
-            {
                 using (new GUILayout.VerticalScope(GUILayout.ExpandWidth(true)))
                 {
                     using (new GUILayout.HorizontalScope(EditorStyles.helpBox))
@@ -147,13 +154,6 @@ namespace AIO.UEditor
                         GULayout.Space(10);
                     }
                 }
-            }
-        }
-
-        protected override void OnDisable()
-        {
-            Array.Clear();
-            versionFolds.Clear();
         }
     }
 }

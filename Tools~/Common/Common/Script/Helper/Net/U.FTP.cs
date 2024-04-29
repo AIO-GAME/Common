@@ -1,18 +1,14 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-12-18
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
-
-namespace AIO
+﻿namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: FTP
+
         /// <summary>
         /// FTP
         /// </summary>
-        public partial class FTP
-        {
-        }
+        public partial class FTP { }
+
+        #endregion
     }
 }

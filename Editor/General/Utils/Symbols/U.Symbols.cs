@@ -4,10 +4,15 @@
 
 |||✩ - - - - - |*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+
+#endregion
+
 #if UNITY_2023_1_OR_NEWER
 using UnityEditor.Build;
 #endif
@@ -16,6 +21,8 @@ namespace AIO.UEditor
 {
     public partial class EHelper
     {
+        #region Nested type: Symbols
+
         /// <summary>
         /// Symbols
         /// </summary>
@@ -70,7 +77,7 @@ namespace AIO.UEditor
             public static void DelScriptingDefine(string value)
             {
                 if (string.IsNullOrEmpty(value)) return;
-                DelScriptingDefine(EditorUserBuildSettings.selectedBuildTargetGroup, new string[] { value });
+                DelScriptingDefine(EditorUserBuildSettings.selectedBuildTargetGroup, new[] { value });
             }
 
             /// <summary>
@@ -79,7 +86,7 @@ namespace AIO.UEditor
             public static void DelScriptingDefine(BuildTargetGroup buildTargetGroup, string value)
             {
                 if (string.IsNullOrEmpty(value)) return;
-                DelScriptingDefine(buildTargetGroup, new string[] { value });
+                DelScriptingDefine(buildTargetGroup, new[] { value });
             }
 
             /// <summary>
@@ -148,7 +155,7 @@ namespace AIO.UEditor
             public static void AddScriptingDefine(string value)
             {
                 if (string.IsNullOrEmpty(value)) return;
-                AddScriptingDefine(EditorUserBuildSettings.selectedBuildTargetGroup, new string[] { value });
+                AddScriptingDefine(EditorUserBuildSettings.selectedBuildTargetGroup, new[] { value });
             }
 
             /// <summary>
@@ -157,7 +164,7 @@ namespace AIO.UEditor
             public static void AddScriptingDefine(BuildTargetGroup buildTargetGroup, string value)
             {
                 if (string.IsNullOrEmpty(value)) return;
-                AddScriptingDefine(buildTargetGroup, new string[] { value });
+                AddScriptingDefine(buildTargetGroup, new[] { value });
             }
 
             /// <summary>
@@ -219,5 +226,7 @@ namespace AIO.UEditor
 
             #endregion
         }
+
+        #endregion
     }
 }

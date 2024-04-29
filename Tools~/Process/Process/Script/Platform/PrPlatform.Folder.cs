@@ -4,15 +4,21 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
+using System;
+
+#endregion
+
 namespace AIO
 {
-    using System;
-
     /// <summary>
     /// 命令 无需判断平台
     /// </summary>
     public partial class PrPlatform
     {
+        #region Nested type: Folder
+
         /// <summary>
         /// 文件夹命令
         /// </summary>
@@ -178,5 +184,7 @@ namespace AIO
                 }
             }
         }
+
+        #endregion
     }
 }

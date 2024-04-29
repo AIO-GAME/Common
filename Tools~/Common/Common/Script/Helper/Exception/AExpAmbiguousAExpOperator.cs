@@ -1,4 +1,8 @@
-﻿using System;
+﻿#region
+
+using System;
+
+#endregion
 
 namespace AIO
 {
@@ -9,8 +13,6 @@ namespace AIO
     {
         /// <inheritdoc />
         public AExpAmbiguousAExpOperator(in string symbol, in Type leftType, in Type rightType) : base(
-            $"Ambiguous use of operator '{symbol}' between types '{leftType?.ToString() ?? "null"}' and '{rightType?.ToString() ?? "null"}'.")
-        {
-        }
+            $"Ambiguous use of operator '{symbol}' between types '{leftType?.ToString() ?? "null"}' and '{rightType?.ToString() ?? "null"}'.") { }
     }
 }

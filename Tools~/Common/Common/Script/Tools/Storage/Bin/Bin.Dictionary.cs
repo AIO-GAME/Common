@@ -1,6 +1,10 @@
+#region
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -9,17 +13,12 @@ namespace AIO
     /// </summary>
     /// <typeparam name="K">Key泛型</typeparam>
     /// <typeparam name="V">Value泛型</typeparam>
-    public class BinDictionary<K, V> :
-        IBinData,
-        IDictionary<K, V>
-        where K : IBinData, new()
-        where V : IBinData, new()
+    public class BinDictionary<K, V>
+        : IBinData,
+          IDictionary<K, V>
+    where K : IBinData, new()
+    where V : IBinData, new()
     {
-        /// <summary>
-        /// 集合
-        /// </summary>
-        protected Dictionary<K, V> Collection { get; }
-
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -27,6 +26,13 @@ namespace AIO
         {
             Collection = Pool.ADictionary<K, V>.New();
         }
+
+        /// <summary>
+        /// 集合
+        /// </summary>
+        protected Dictionary<K, V> Collection { get; }
+
+        #region IBinData Members
 
         /// <inheritdoc />
         public void Dispose()
@@ -57,11 +63,21 @@ namespace AIO
         /// <inheritdoc />
         public void Reset()
         {
-            foreach (var item in Collection)
-            {
-                item.Value.Reset();
-            }
+            foreach (var item in Collection) item.Value.Reset();
         }
+
+        /// <inheritdoc />
+        public virtual object Clone()
+        {
+            var data = new BinDictionary<K, V>();
+            foreach (var item in Collection) data.Collection.Add((K)item.Key.Clone(), (V)item.Value.Clone());
+
+            return data;
+        }
+
+        #endregion
+
+        #region IDictionary<K,V> Members
 
         /// <inheritdoc />
         public IEnumerator<KeyValuePair<K, V>> GetEnumerator()
@@ -96,17 +112,11 @@ namespace AIO
         /// <inheritdoc />
         public void CopyTo(KeyValuePair<K, V>[] array, int arrayIndex)
         {
-            if (arrayIndex < 0 || arrayIndex >= array.Length)
-            {
-                throw new ArgumentOutOfRangeException(nameof(arrayIndex), "The value of arrayIndex is out of range.");
-            }
+            if (arrayIndex < 0 || arrayIndex >= array.Length) throw new ArgumentOutOfRangeException(nameof(arrayIndex), "The value of arrayIndex is out of range.");
 
             foreach (var item in Collection)
             {
-                if (arrayIndex >= array.Length)
-                {
-                    throw new ArgumentException("The length of array is less than the number of elements in the collection.");
-                }
+                if (arrayIndex >= array.Length) throw new ArgumentException("The length of array is less than the number of elements in the collection.");
 
                 array[arrayIndex++] = item;
             }
@@ -161,16 +171,6 @@ namespace AIO
         /// <inheritdoc />
         public ICollection<V> Values => Collection.Values;
 
-        /// <inheritdoc />
-        public virtual object Clone()
-        {
-            var data = new BinDictionary<K, V>();
-            foreach (var item in Collection)
-            {
-                data.Collection.Add((K)item.Key.Clone(), (V)item.Value.Clone());
-            }
-
-            return data;
-        }
+        #endregion
     }
 }

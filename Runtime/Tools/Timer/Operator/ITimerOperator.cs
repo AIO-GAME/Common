@@ -1,9 +1,13 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
-    public partial interface ITimerOperator : IDisposable
+    public interface ITimerOperator : IDisposable
     {
         /// <summary>
         /// 时间层级序列

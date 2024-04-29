@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -10,9 +14,7 @@ namespace AIO
         /// <summary>
         /// Creates a new <see cref="UnitsAttribute"/>.
         /// </summary>
-        protected UnitsAttribute()
-        {
-        }
+        protected UnitsAttribute() { }
 
         /// <summary>
         /// The validation rule applied to the value.
@@ -23,7 +25,7 @@ namespace AIO
         /// The converters used to generate display strings for each of the fields.
         /// </summary>
         public IList<CompactUnitConversionCache> DisplayConverters { get; protected set; }
-        
+
         /// <summary>[Editor-Only]
         /// The index of the <see cref="DisplayConverters"/> for the attributed serialized value.
         /// </summary>
@@ -59,7 +61,7 @@ namespace AIO
                 return defaultValue;
             return value;
         }
-        
+
         /// <summary>[Editor-Only]
         /// Returns the value that should be displayed for a given field.
         /// </summary>

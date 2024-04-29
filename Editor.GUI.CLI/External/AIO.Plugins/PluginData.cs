@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿#region
+
+using UnityEngine;
+
+#endregion
 
 #pragma warning disable CS1591
 namespace AIO
@@ -35,7 +39,5 @@ namespace AIO
         public string Introduction;
     }
 
-    internal partial class Plugins
-    {
-    }
+    internal partial class Plugins { }
 }

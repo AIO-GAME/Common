@@ -1,10 +1,8 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-03
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System.Net;
+
+#endregion
 
 namespace AIO.Net
 {
@@ -21,7 +19,7 @@ namespace AIO.Net
         /// <param name="port">Port number</param>
         public HttpClient(IPAddress address, int port) : base(address, port)
         {
-            Request = new HttpRequest();
+            Request  = new HttpRequest();
             Response = new HttpResponse();
         }
 
@@ -32,7 +30,7 @@ namespace AIO.Net
         /// <param name="port">Port number</param>
         public HttpClient(string address, int port) : base(address, port)
         {
-            Request = new HttpRequest();
+            Request  = new HttpRequest();
             Response = new HttpResponse();
         }
 
@@ -42,7 +40,7 @@ namespace AIO.Net
         /// <param name="endpoint">DNS endpoint</param>
         public HttpClient(DnsEndPoint endpoint) : base(endpoint)
         {
-            Request = new HttpRequest();
+            Request  = new HttpRequest();
             Response = new HttpResponse();
         }
 
@@ -52,7 +50,7 @@ namespace AIO.Net
         /// <param name="endpoint">IP endpoint</param>
         public HttpClient(IPEndPoint endpoint) : base(endpoint)
         {
-            Request = new HttpRequest();
+            Request  = new HttpRequest();
             Response = new HttpResponse();
         }
 
@@ -72,29 +70,40 @@ namespace AIO.Net
         /// Send the current HTTP request (synchronous)
         /// </summary>
         /// <returns>Size of sent data</returns>
-        public long SendRequest() => SendRequest(Request);
+        public long SendRequest()
+        {
+            return SendRequest(Request);
+        }
 
         /// <summary>
         /// Send the HTTP request (synchronous)
         /// </summary>
         /// <param name="request">HTTP request</param>
         /// <returns>Size of sent data</returns>
-        public long SendRequest(HttpRequest request) =>
-            Send(request.Cache.Arrays, request.Cache.Offset, request.Cache.Count);
+        public long SendRequest(HttpRequest request)
+        {
+            return Send(request.Cache.Arrays, request.Cache.Offset, request.Cache.Count);
+        }
 
         /// <summary>
         /// Send the HTTP request body (synchronous)
         /// </summary>
         /// <param name="body">HTTP request body</param>
         /// <returns>Size of sent data</returns>
-        public long SendRequestBody(string body) => Send(body);
+        public long SendRequestBody(string body)
+        {
+            return Send(body);
+        }
 
         /// <summary>
         /// Send the HTTP request body (synchronous)
         /// </summary>
         /// <param name="buffer">HTTP request body buffer</param>
         /// <returns>Size of sent data</returns>
-        public long SendRequestBody(byte[] buffer) => Send(buffer);
+        public long SendRequestBody(byte[] buffer)
+        {
+            return Send(buffer);
+        }
 
         /// <summary>
         /// Send the HTTP request body (synchronous)
@@ -103,35 +112,49 @@ namespace AIO.Net
         /// <param name="offset">HTTP request body buffer offset</param>
         /// <param name="size">HTTP request body size</param>
         /// <returns>Size of sent data</returns>
-        public long SendRequestBody(byte[] buffer, long offset, long size) => Send(buffer, (int)offset, (int)size);
+        public long SendRequestBody(byte[] buffer, long offset, long size)
+        {
+            return Send(buffer, (int)offset, (int)size);
+        }
 
         /// <summary>
         /// Send the current HTTP request (asynchronous)
         /// </summary>
         /// <returns>'true' if the current HTTP request was successfully sent, 'false' if the session is not connected</returns>
-        public bool SendRequestAsync() => SendRequestAsync(Request);
+        public bool SendRequestAsync()
+        {
+            return SendRequestAsync(Request);
+        }
 
         /// <summary>
         /// Send the HTTP request (asynchronous)
         /// </summary>
         /// <param name="request">HTTP request</param>
         /// <returns>'true' if the current HTTP request was successfully sent, 'false' if the session is not connected</returns>
-        public bool SendRequestAsync(HttpRequest request) =>
-            SendAsync(request.Cache.Arrays, request.Cache.Offset, request.Cache.Count);
+        public bool SendRequestAsync(HttpRequest request)
+        {
+            return SendAsync(request.Cache.Arrays, request.Cache.Offset, request.Cache.Count);
+        }
 
         /// <summary>
         /// Send the HTTP request body (asynchronous)
         /// </summary>
         /// <param name="body">HTTP request body</param>
         /// <returns>'true' if the HTTP request body was successfully sent, 'false' if the session is not connected</returns>
-        public bool SendRequestBodyAsync(string body) => SendAsync(body);
+        public bool SendRequestBodyAsync(string body)
+        {
+            return SendAsync(body);
+        }
 
         /// <summary>
         /// Send the HTTP request body (asynchronous)
         /// </summary>
         /// <param name="buffer">HTTP request body buffer</param>
         /// <returns>'true' if the HTTP request body was successfully sent, 'false' if the session is not connected</returns>
-        public bool SendRequestBodyAsync(byte[] buffer) => SendAsync(buffer);
+        public bool SendRequestBodyAsync(byte[] buffer)
+        {
+            return SendAsync(buffer);
+        }
 
         /// <summary>
         /// Send the HTTP request body (asynchronous)
@@ -140,7 +163,10 @@ namespace AIO.Net
         /// <param name="offset">HTTP request body buffer offset</param>
         /// <param name="size">HTTP request body size</param>
         /// <returns>'true' if the HTTP request body was successfully sent, 'false' if the session is not connected</returns>
-        public bool SendRequestBodyAsync(byte[] buffer, int offset, int size) => SendAsync(buffer, offset, size);
+        public bool SendRequestBodyAsync(byte[] buffer, int offset, int size)
+        {
+            return SendAsync(buffer, offset, size);
+        }
 
         #endregion
 
@@ -200,18 +226,14 @@ namespace AIO.Net
         /// </summary>
         /// <remarks>Notification is called when HTTP response header was received from the server.</remarks>
         /// <param name="response">HTTP request</param>
-        protected virtual void OnReceivedResponseHeader(HttpResponse response)
-        {
-        }
+        protected virtual void OnReceivedResponseHeader(HttpResponse response) { }
 
         /// <summary>
         /// Handle HTTP response received notification
         /// </summary>
         /// <remarks>Notification is called when HTTP response was received from the server.</remarks>
         /// <param name="response">HTTP response</param>
-        protected virtual void OnReceivedResponse(HttpResponse response)
-        {
-        }
+        protected virtual void OnReceivedResponse(HttpResponse response) { }
 
         /// <summary>
         /// Handle HTTP response error notification
@@ -219,9 +241,7 @@ namespace AIO.Net
         /// <remarks>Notification is called when HTTP response error was received from the server.</remarks>
         /// <param name="response">HTTP response</param>
         /// <param name="error">HTTP response error</param>
-        protected virtual void OnReceivedResponseError(HttpResponse response, string error)
-        {
-        }
+        protected virtual void OnReceivedResponseError(HttpResponse response, string error) { }
 
         #endregion
     }

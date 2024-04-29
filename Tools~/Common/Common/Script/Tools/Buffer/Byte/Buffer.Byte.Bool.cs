@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
     public partial class BufferByte
     {
+        #region IReadData Members
+
         /// <inheritdoc/> 
         public bool ReadBool()
         {
@@ -15,6 +21,10 @@ namespace AIO
         {
             return Arrays.GetBoolArray(ref ReadIndex, reverse);
         }
+
+        #endregion
+
+        #region IWriteData Members
 
         /// <inheritdoc/> 
         public void WriteBool(bool b)
@@ -30,5 +40,7 @@ namespace AIO
             AutomaticExpansion(value.Count);
             Arrays.SetBoolArray(ref WriteIndex, value, reverse);
         }
+
+        #endregion
     }
 }

@@ -4,9 +4,13 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Diagnostics;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
@@ -15,6 +19,36 @@ namespace AIO
     /// </summary>
     public sealed class ResultException : IResultInternal
     {
+        private const string FORMAT_ALL = @"- ExitCode  : {0}
+- FileName  : {1}
+- Arguments : {2}
+- WorkDir   : {3}
+- Messages  : {4}
+- Exception : {5}";
+
+        /// <summary>
+        /// 进程执行结果(异常)
+        /// </summary>
+        public ResultException(in ProcessStartInfo info, in Exception exception) : this(exception)
+        {
+            Info = info;
+        }
+
+        /// <summary>
+        /// 进程执行结果(异常)
+        /// </summary>
+        public ResultException(in Exception exception)
+        {
+            Exception   = exception;
+            StdError    = new StringBuilder(Exception.ToString());
+            StdOut      = new StringBuilder();
+            StdALL      = new StringBuilder();
+            StdDisposed = new StringBuilder();
+            StdExited   = new StringBuilder();
+        }
+
+        private Exception Exception { get; }
+
         #region Interface
 
         /// <inheritdoc/>
@@ -73,10 +107,13 @@ namespace AIO
         {
             if (Next == null)
             {
-                Next = presult;
+                Next         = presult;
                 presult.Last = this;
             }
-            else Next.Link(presult);
+            else
+            {
+                Next.Link(presult);
+            }
 
             return this;
         }
@@ -128,36 +165,6 @@ namespace AIO
         }
 
         #endregion
-
-        private const string FORMAT_ALL = @"- ExitCode  : {0}
-- FileName  : {1}
-- Arguments : {2}
-- WorkDir   : {3}
-- Messages  : {4}
-- Exception : {5}";
-
-        private Exception Exception { get; }
-
-        /// <summary>
-        /// 进程执行结果(异常)
-        /// </summary>
-        public ResultException(in ProcessStartInfo info, in Exception exception) : this(exception)
-        {
-            Info = info;
-        }
-
-        /// <summary>
-        /// 进程执行结果(异常)
-        /// </summary>
-        public ResultException(in Exception exception)
-        {
-            Exception = exception;
-            StdError = new StringBuilder(Exception.ToString());
-            StdOut = new StringBuilder();
-            StdALL = new StringBuilder();
-            StdDisposed = new StringBuilder();
-            StdExited = new StringBuilder();
-        }
     }
 
     /// <summary>
@@ -165,22 +172,22 @@ namespace AIO
     /// </summary>
     public sealed class ExecutorException : Executor
     {
-        private Exception Exception { get; }
-
         /// <summary>
         /// 进程执行器(异常)
         /// </summary>
-        public ExecutorException(in ProcessStartInfo info, in Exception exception) : base(info, true)
+        public ExecutorException(in ProcessStartInfo info, in Exception exception) : base(info)
         {
             Exception = exception;
         }
+
+        private Exception Exception { get; }
 
         /// <inheritdoc/>
         public override IResult Sync()
         {
             IsRunning = true;
             var result = new ResultException(Pr.StartInfo, Exception);
-            IsFinish = true;
+            IsFinish  = true;
             IsRunning = false;
             result.Finish(inputs.ToString());
             if (EnableOutput) result.Debug();
@@ -194,16 +201,16 @@ namespace AIO
     /// </summary>
     public sealed class PrException : PrCourse
     {
-        private Exception Exception { get; }
-
         /// <summary>
         /// 进程构造器(异常)
         /// </summary>
         public PrException(in Exception exception)
         {
             Exception = exception;
-            Info = new ProcessStartInfo();
+            Info      = new ProcessStartInfo();
         }
+
+        private Exception Exception { get; }
 
         /// <inheritdoc/>
         public override IExecutor Execute()
@@ -215,10 +222,9 @@ namespace AIO
     /// <summary>
     /// 进程构造器(异常)
     /// </summary>
-    public sealed class PrException<T> : PrCourse where T : Exception, new()
+    public sealed class PrException<T> : PrCourse
+    where T : Exception, new()
     {
-        private T Exception { get; }
-
         /// <summary>
         /// 进程构造器(异常)
         /// </summary>
@@ -235,20 +241,20 @@ namespace AIO
             Exception = exception;
         }
 
+        private T Exception { get; }
+
         /// <inheritdoc/>
         public override IExecutor Execute()
         {
             return new ExecutorException(Info, Exception);
         }
 
-        private static TException CreateException<TException>(string message) where TException : Exception
+        private static TException CreateException<TException>(string message)
+        where TException : Exception
         {
             var constructor = typeof(TException).GetConstructor(new[] { typeof(string) });
 
-            if (constructor == null)
-            {
-                throw new ArgumentException($"Type {typeof(TException).FullName} does not have a constructor that takes a single string argument.");
-            }
+            if (constructor == null) throw new ArgumentException($"Type {typeof(TException).FullName} does not have a constructor that takes a single string argument.");
 
             return (TException)constructor.Invoke(new object[] { message });
         }

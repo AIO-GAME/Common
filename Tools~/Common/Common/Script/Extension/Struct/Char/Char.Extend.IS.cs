@@ -1,4 +1,8 @@
-﻿using System.Runtime.CompilerServices;
+﻿#region
+
+using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
@@ -65,10 +69,10 @@ namespace AIO
             return
                 (!isDelimiter && isFirst) ||
                 (!isDelimiter && wasDelimiter) ||
-                (isLetter && wasLetter && isUpper && !wasUpper) || // camelCase => camel_Case
+                (isLetter && wasLetter && isUpper && !wasUpper) ||                          // camelCase => camel_Case
                 (isLetter && wasLetter && isUpper && wasUpper && !isLast && willBeLower) || // => ABBRWord => ABBR_Word
-                (isNumber && wasLetter) || // Vector3 => Vector_3
-                (isLetter && wasNumber && isUpper && willBeLower); // Word1Word => Word_1_Word, Word1word => Word_1word
+                (isNumber && wasLetter) ||                                                  // Vector3 => Vector_3
+                (isLetter && wasNumber && isUpper && willBeLower);                          // Word1Word => Word_1_Word, Word1word => Word_1word
         }
     }
 }

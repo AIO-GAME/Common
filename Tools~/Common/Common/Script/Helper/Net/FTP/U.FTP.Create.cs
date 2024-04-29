@@ -1,11 +1,17 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Net;
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: FTP
+
         public partial class FTP
         {
             /// <summary>
@@ -16,7 +22,7 @@ namespace AIO
             /// <param name="pass">密码</param>
             /// <param name="timeout">超时</param>
             public static bool CreateDir(string uri, string user, string pass,
-                ushort timeout = Net.TIMEOUT)
+                                         ushort timeout = Net.TIMEOUT)
             {
                 try
                 {
@@ -32,7 +38,7 @@ namespace AIO
                 {
 #if DEBUG
                     Console.WriteLine("{0} {2}:{3}@{1} ->\n {4}",
-                        nameof(CreateDir), ex.Response.ResponseUri, user, pass, ex.Message);
+                                      nameof(CreateDir), ex.Response.ResponseUri, user, pass, ex.Message);
 #endif
                     return false;
                 }
@@ -46,7 +52,7 @@ namespace AIO
             /// <param name="pass">密码</param>
             /// <param name="timeout">超时</param>
             public static async Task<bool> CreateDirAsync(string remote, string user, string pass,
-                ushort timeout = Net.TIMEOUT)
+                                                          ushort timeout = Net.TIMEOUT)
             {
                 try
                 {
@@ -63,7 +69,7 @@ namespace AIO
                 {
 #if DEBUG
                     Console.WriteLine("{0} {2}:{3}@{1} ->\n {4}",
-                        nameof(CreateDirAsync), ex.Response.ResponseUri, user, pass, ex.Message);
+                                      nameof(CreateDirAsync), ex.Response.ResponseUri, user, pass, ex.Message);
 #endif
                     return false;
                 }
@@ -78,8 +84,8 @@ namespace AIO
             /// <param name="currentName">当前名称</param>
             /// <param name="newName">新名称</param>
             /// <param name="timeout">超时</param>
-            public static bool ReName(string uri, string user, string pass, string currentName,
-                string newName, ushort timeout = Net.TIMEOUT)
+            public static bool ReName(string uri,     string user, string pass, string currentName,
+                                      string newName, ushort timeout = Net.TIMEOUT)
             {
                 try
                 {
@@ -95,7 +101,7 @@ namespace AIO
                 {
 #if DEBUG
                     Console.WriteLine("{0} {2}:{3}@{1} ->\n {4}",
-                        nameof(ReName), ex.Response.ResponseUri, user, pass, ex.Message);
+                                      nameof(ReName), ex.Response.ResponseUri, user, pass, ex.Message);
 #endif
                     return false;
                 }
@@ -110,8 +116,8 @@ namespace AIO
             /// <param name="currentName">当前名称</param>
             /// <param name="newName">新名称</param>
             /// <param name="timeout">超时</param>
-            public static async Task<bool> ReNameAsync(string uri, string user, string pass, string currentName,
-                string newName, ushort timeout = Net.TIMEOUT)
+            public static async Task<bool> ReNameAsync(string uri,     string user, string pass, string currentName,
+                                                       string newName, ushort timeout = Net.TIMEOUT)
             {
                 try
                 {
@@ -127,7 +133,7 @@ namespace AIO
                 {
 #if DEBUG
                     Console.WriteLine("{0} {2}:{3}@{1} ->\n {4}",
-                        nameof(ReNameAsync), ex.Response.ResponseUri, user, pass, ex.Message);
+                                      nameof(ReNameAsync), ex.Response.ResponseUri, user, pass, ex.Message);
 #endif
                     return false;
                 }
@@ -144,7 +150,7 @@ namespace AIO
             /// <param name="newName">新名称</param>
             /// <param name="timeout">超时</param>
             public static bool Move(string uri, string user, string pass, string currentName, string newName,
-                ushort timeout = Net.TIMEOUT)
+                                    ushort timeout = Net.TIMEOUT)
             {
                 return ReName(uri, user, pass, currentName, newName, timeout);
             }
@@ -158,11 +164,13 @@ namespace AIO
             /// <param name="currentName">当前名称</param>
             /// <param name="newName">新名称</param>
             /// <param name="timeout">超时</param>
-            public static Task<bool> MoveAsync(string uri, string user, string pass, string currentName,
-                string newName, ushort timeout = Net.TIMEOUT)
+            public static Task<bool> MoveAsync(string uri,     string user, string pass, string currentName,
+                                               string newName, ushort timeout = Net.TIMEOUT)
             {
                 return ReNameAsync(uri, user, pass, currentName, newName, timeout);
             }
         }
+
+        #endregion
     }
 }

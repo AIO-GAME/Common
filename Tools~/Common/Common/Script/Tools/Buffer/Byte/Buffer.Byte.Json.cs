@@ -1,9 +1,15 @@
-﻿using System.Text;
+﻿#region
+
+using System.Text;
+
+#endregion
 
 namespace AIO
 {
     public partial class BufferByte
     {
+        #region IReadData Members
+
         /// <inheritdoc/> 
         public T ReadJson<T>(Encoding encoding = null, bool reverse = false)
         {
@@ -28,6 +34,10 @@ namespace AIO
             return AHelper.Json.Deserialize<T>(ReadString(Encoding.Unicode, reverse));
         }
 
+        #endregion
+
+        #region IWriteData Members
+
         /// <inheritdoc/> 
         public void WriteJson<T>(T value, Encoding encoding = null, bool reverse = false)
         {
@@ -51,5 +61,7 @@ namespace AIO
         {
             WriteString(AHelper.Json.Serialize(value), Encoding.Unicode, reverse);
         }
+
+        #endregion
     }
 }

@@ -1,11 +1,17 @@
+#region
+
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using AIO.PList;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -53,5 +59,7 @@ namespace AIO
                 });
             }
         }
+
+        #endregion
     }
 }

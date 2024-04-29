@@ -1,25 +1,23 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-09
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Security.Cryptography;
 using System.Text;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: Encrypt
+
         /// <summary>
         /// Encrypt 加密
         /// </summary>
-        public partial class Encrypt
+        public class Encrypt
         {
-            private Encrypt()
-            {
-            }
+            private Encrypt() { }
 
             /// <summary>
             /// HmacSHA256 单向散列函数
@@ -52,5 +50,7 @@ namespace AIO
                 return mac.ComputeHash(messageBytes);
             }
         }
+
+        #endregion
     }
 }

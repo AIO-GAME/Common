@@ -1,16 +1,44 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
     /// <summary>
     /// 类型扩展
     /// </summary>
-    public static partial class ExtendIType
+    public static class ExtendIType
     {
+        private static readonly Dictionary<Type, string>
+            TypeNames = new Dictionary<Type, string>
+            {
+                { typeof(object), "object" },
+                { typeof(void), "void" },
+                { typeof(bool), "bool" },
+                { typeof(byte), "byte" },
+                { typeof(sbyte), "sbyte" },
+                { typeof(char), "char" },
+                { typeof(string), "string" },
+                { typeof(short), "short" },
+                { typeof(int), "int" },
+                { typeof(long), "long" },
+                { typeof(ushort), "ushort" },
+                { typeof(uint), "uint" },
+                { typeof(ulong), "ulong" },
+                { typeof(float), "float" },
+                { typeof(double), "double" },
+                { typeof(decimal), "decimal" }
+            };
+
+        private static readonly Dictionary<Type, string>
+            FullTypeNames = new Dictionary<Type, string>(TypeNames);
+
         /// <summary>
         /// 获取申明的全部构造函数
         /// </summary>
@@ -33,42 +61,14 @@ namespace AIO
 
                 if (parameters.Length != ctorParams.Length) continue;
                 for (var j = 0; j < ctorParams.Length; ++j)
-                {
                     if (ctorParams[j].ParameterType != parameters[j])
-                    {
                         continue;
-                    }
-                }
 
                 return ctor;
             }
 
             return null;
         }
-
-        private static readonly Dictionary<Type, string>
-          TypeNames = new Dictionary<Type, string>
-          {
-                { typeof(object), "object" },
-                { typeof(void), "void" },
-                { typeof(bool), "bool" },
-                { typeof(byte), "byte" },
-                { typeof(sbyte), "sbyte" },
-                { typeof(char), "char" },
-                { typeof(string), "string" },
-                { typeof(short), "short" },
-                { typeof(int), "int" },
-                { typeof(long), "long" },
-                { typeof(ushort), "ushort" },
-                { typeof(uint), "uint" },
-                { typeof(ulong), "ulong" },
-                { typeof(float), "float" },
-                { typeof(double), "double" },
-                { typeof(decimal), "decimal" },
-          };
-
-        private static readonly Dictionary<Type, string>
-            FullTypeNames = new Dictionary<Type, string>(TypeNames);
 
         /// <summary>
         /// 获取C#中类型的名称
@@ -86,7 +86,7 @@ namespace AIO
 
             var text = new StringBuilder();
 
-            if (type.IsArray)// Array = TypeName[].
+            if (type.IsArray) // Array = TypeName[].
             {
                 text.Append(type.GetElementType().GetNameCS(fullName));
 
@@ -99,7 +99,7 @@ namespace AIO
                 goto Return;
             }
 
-            if (type.IsPointer)// Pointer = TypeName*.
+            if (type.IsPointer) // Pointer = TypeName*.
             {
                 text.Append(type.GetElementType().GetNameCS(fullName));
                 text.Append('*');
@@ -107,14 +107,14 @@ namespace AIO
                 goto Return;
             }
 
-            if (type.IsGenericParameter)// Generic Parameter = TypeName (for unspecified generic parameters).
+            if (type.IsGenericParameter) // Generic Parameter = TypeName (for unspecified generic parameters).
             {
                 text.Append(type.Name);
                 goto Return;
             }
 
             var underlyingType = Nullable.GetUnderlyingType(type);
-            if (underlyingType != null)// Nullable = TypeName != null ?
+            if (underlyingType != null) // Nullable = TypeName != null ?
             {
                 text.Append(underlyingType.GetNameCS(fullName));
                 text.Append('?');
@@ -124,7 +124,7 @@ namespace AIO
 
             // Other Type = Namespace.NestedTypes.TypeName<GenericArguments>.
 
-            if (fullName && type.Namespace != null)// Namespace.
+            if (fullName && type.Namespace != null) // Namespace.
             {
                 text.Append(type.Namespace);
                 text.Append('.');
@@ -132,7 +132,7 @@ namespace AIO
 
             var genericArguments = 0;
 
-            if (type.DeclaringType != null)// Account for Nested Types.
+            if (type.DeclaringType != null) // Account for Nested Types.
             {
                 // Count the nesting level.
                 var nesting = 1;
@@ -149,7 +149,7 @@ namespace AIO
                     // Walk out to the current nesting level.
                     // This avoids the need to make a list of types in the nest or to insert type names instead of appending them.
                     declaringType = type;
-                    for (int i = nesting; i >= 0; i--)
+                    for (var i = nesting; i >= 0; i--)
                         declaringType = declaringType.DeclaringType;
 
                     // Nested Type Name.
@@ -161,7 +161,7 @@ namespace AIO
             // Type Name.
             AppendNameAndGenericArguments(text, type, fullName, genericArguments);
 
-        Return:// Remember and return the name.
+            Return: // Remember and return the name.
             name = text.ToString();
             names.Add(type, name);
             return name;

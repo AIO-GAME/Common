@@ -1,12 +1,10 @@
-﻿/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2021-11-04                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+﻿#region
 
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -17,7 +15,8 @@ namespace AIO
     /// <see>
     ///     <cref>https://ifeve.com/dissecting-disruptor-whats-so-special/</cref>
     /// </see>
-    public sealed class BufferRing<T> : Buffer<T> where T : struct
+    public sealed class BufferRing<T> : Buffer<T>
+    where T : struct
     {
         /// <summary>
         /// 存储队列 该队列专门存储数据作为对象池
@@ -29,6 +28,26 @@ namespace AIO
         /// 读写队列 该队列专门处理数据读写
         /// </summary>
         private readonly Queue<T[]> UsedDic;
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public BufferRing(int capacity = 4096)
+        {
+            UsedDic = new Queue<T[]>();
+            if (!FreedDic.ContainsKey(capacity))
+                FreedDic.Add(capacity, new ConcurrentQueue<T[]>());
+            Capacity = capacity;
+            AddLast();
+        }
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public BufferRing(IList<T> buffer, int capacity = 4096) : this(capacity)
+        {
+            Write(buffer);
+        }
 
         /// <summary>
         /// 容量
@@ -69,7 +88,7 @@ namespace AIO
             get
             {
                 if (UsedDic.Count == 0) return 0;
-                return ((UsedDic.Count - 1) * Capacity) + WriteIndex - ReadIndex;
+                return (UsedDic.Count - 1) * Capacity + WriteIndex - ReadIndex;
             }
         }
 
@@ -91,37 +110,17 @@ namespace AIO
         public override T[] ToArray()
         {
             var len = WriteIndex - ReadIndex; //当前数组剩余长度
-            if (len < 0) throw new ArgumentOutOfRangeException($"Ring Buffer Error : WriteIndex - ReadIndex < 0 !!!");
+            if (len < 0) throw new ArgumentOutOfRangeException("Ring Buffer Error : WriteIndex - ReadIndex < 0 !!!");
             var bytes = new T[UsedDic.Count * Capacity + len]; //全部数据
             var index = 0;
             foreach (var item in UsedDic.ToArray())
             {
                 if (index == UsedDic.Count - 1) break;
-                Array.Copy(item, 0, bytes, index++ * (Capacity), Capacity);
+                Array.Copy(item, 0, bytes, index++ * Capacity, Capacity);
             }
 
             Array.Copy(Arrays, ReadIndex, bytes, (UsedDic.Count - 1) * Capacity, len);
             return bytes;
-        }
-
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        public BufferRing(int capacity = 4096)
-        {
-            UsedDic = new Queue<T[]>();
-            if (!FreedDic.ContainsKey(capacity))
-                FreedDic.Add(capacity, new ConcurrentQueue<T[]>());
-            Capacity = capacity;
-            AddLast();
-        }
-
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        public BufferRing(IList<T> buffer, int capacity = 4096) : this(capacity)
-        {
-            Write(buffer);
         }
 
         /// <summary>
@@ -182,7 +181,7 @@ namespace AIO
             if (Buffer.Length < Offset + count)
                 Console.WriteLine($"Buffer List length < count, buffer length: {Buffer.Length} {Offset} {count}");
 
-            var length = this.Count;
+            var length = Count;
             // 传入读取长度 比 存储容量小的时候 则默认读取 存储容量的最大值 并将实际读取长度返回
             if (length < count) count = length;
 
@@ -196,7 +195,7 @@ namespace AIO
                 {
                     // 队列数组剩余容量 大于 实际需要拷贝长度 则正常拷贝
                     Array.Copy(First, ReadIndex, Buffer, alreadyCopyCount + Offset, n);
-                    ReadIndex += n;
+                    ReadIndex        += n;
                     alreadyCopyCount += n;
                 }
                 else
@@ -227,9 +226,7 @@ namespace AIO
             while (alreadyCopyCount < count)
             {
                 if (WriteIndex == Capacity) //如果写入的开始位置 等于 容量 则在队列新增一个数组
-                {
                     AddLast();
-                }
 
                 var n = count - alreadyCopyCount;
                 if (Capacity - WriteIndex > n) //写入数组长度 大余 实际写入长度 正常写入
@@ -238,7 +235,7 @@ namespace AIO
                     for (var i = alreadyCopyCount + offset; i < n; i++)
                         Arrays[WriteIndex + i] = buffer[i];
 
-                    WriteIndex += count - alreadyCopyCount;
+                    WriteIndex       += count - alreadyCopyCount;
                     alreadyCopyCount += n;
                 }
                 else //否则 则只会写入当前写入数组容量最大值为止 再次进入 写入位置 容量大小判断 进入循环
@@ -248,7 +245,7 @@ namespace AIO
                         Arrays[WriteIndex + i] = buffer[i];
 
                     alreadyCopyCount += Capacity - WriteIndex;
-                    WriteIndex = Capacity;
+                    WriteIndex       =  Capacity;
                 }
             }
         }

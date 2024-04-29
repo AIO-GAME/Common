@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
     public static partial class Pool
     {
+        #region Nested type: AHashSet
+
         /// <summary>
         /// HashSet对象池
         /// </summary>
@@ -22,10 +28,7 @@ namespace AIO
             {
                 lock (@lock)
                 {
-                    if (free.Count == 0)
-                    {
-                        free.Push(new HashSet<T>());
-                    }
+                    if (free.Count == 0) free.Push(new HashSet<T>());
 
                     var array = free.Pop();
 
@@ -48,6 +51,8 @@ namespace AIO
                 }
             }
         }
+
+        #endregion
     }
 
     public static partial class PoolExtend

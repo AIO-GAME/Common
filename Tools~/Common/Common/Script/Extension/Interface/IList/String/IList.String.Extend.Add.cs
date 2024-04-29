@@ -1,6 +1,4 @@
 ﻿namespace AIO
 {
-    partial class ExtendIList
-    {
-    }
+    partial class ExtendIList { }
 }

@@ -4,9 +4,13 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Diagnostics;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
@@ -15,6 +19,30 @@ namespace AIO
     /// </summary>
     public interface IResultInternal : IResult
     {
+        /// <summary>
+        /// 执行文件
+        /// </summary>
+        [DebuggerHidden, DebuggerNonUserCode]
+        ProcessStartInfo Info { get; }
+
+        /// <summary>
+        /// 获取关联进程的基本优先级
+        /// </summary>
+        [DebuggerHidden, DebuggerNonUserCode]
+        int BasePriority { get; }
+
+        /// <summary>
+        /// 获取关联进程的终端服务会话标识符。
+        /// </summary>
+        [DebuggerHidden, DebuggerNonUserCode]
+        int SessionId { get; }
+
+        /// <summary>
+        /// 获取关联进程的唯一标识符。
+        /// </summary>
+        [DebuggerHidden, DebuggerNonUserCode]
+        int Id { get; }
+
         /// <summary>
         /// 完成
         /// </summary>
@@ -26,12 +54,6 @@ namespace AIO
         /// </summary>
         [DebuggerHidden, DebuggerNonUserCode]
         IResult Finish(in string inputs);
-
-        /// <summary>
-        /// 执行文件
-        /// </summary>
-        [DebuggerHidden, DebuggerNonUserCode]
-        ProcessStartInfo Info { get; }
 
         /// <summary>
         /// 输出回调
@@ -56,24 +78,6 @@ namespace AIO
         /// </summary>
         [DebuggerHidden, DebuggerNonUserCode]
         void ReceivedDisposed(object sender, EventArgs e);
-
-        /// <summary>
-        /// 获取关联进程的基本优先级
-        /// </summary>
-        [DebuggerHidden, DebuggerNonUserCode]
-        int BasePriority { get; }
-
-        /// <summary>
-        /// 获取关联进程的终端服务会话标识符。
-        /// </summary>
-        [DebuggerHidden, DebuggerNonUserCode]
-        int SessionId { get; }
-
-        /// <summary>
-        /// 获取关联进程的唯一标识符。
-        /// </summary>
-        [DebuggerHidden, DebuggerNonUserCode]
-        int Id { get; }
     }
 
     /// <summary>
@@ -92,12 +96,6 @@ namespace AIO
         /// </summary>
         [DebuggerHidden, DebuggerNonUserCode]
         IResult Last { get; set; }
-
-        /// <summary>
-        /// 链接
-        /// </summary>
-        [DebuggerHidden, DebuggerNonUserCode]
-        IResult Link(in IResult result);
 
         /// <summary>
         /// 输出信息
@@ -164,5 +162,11 @@ namespace AIO
         /// </summary>
         [DebuggerHidden, DebuggerNonUserCode]
         TimeSpan PrivilegedProcessorTime { get; }
+
+        /// <summary>
+        /// 链接
+        /// </summary>
+        [DebuggerHidden, DebuggerNonUserCode]
+        IResult Link(in IResult result);
     }
 }

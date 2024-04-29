@@ -4,17 +4,23 @@
 
 |||✩ - - - - - |*/
 
+#region
+
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrMac
     {
+        #region Nested type: Git
+
         public partial class Git
         {
+            #region Nested type: Reset
+
             /// <summary>
             /// 清理
             /// </summary>
@@ -168,6 +174,10 @@ namespace AIO
                     return Execute(work, "--keep", quit);
                 }
             }
+
+            #endregion
         }
+
+        #endregion
     }
 }

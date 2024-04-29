@@ -1,47 +1,50 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-08
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
-using System.Net;
+
+#endregion
 
 #pragma warning disable CS1591
 namespace AIO.Net
 {
     public static class ExtendNetSession
     {
-        public static int Send<C>(this C session, byte[] buffer, int offset, int size) where C : INetSession
+        public static int Send<C>(this C session, byte[] buffer, int offset, int size)
+        where C : INetSession
         {
             var data = new byte[size];
             Array.Copy(buffer, offset, data, 0, size);
             return session.Send(data);
         }
 
-        public static int Send<C>(this C session, byte[] buffer) where C : INetSession
+        public static int Send<C>(this C session, byte[] buffer)
+        where C : INetSession
         {
             return session.Send(buffer);
         }
 
-        public static int Send<C, T>(this C session, T data) where C : INetSession
+        public static int Send<C, T>(this C session, T data)
+        where C : INetSession
         {
             return session.Send(AHelper.Binary.Serialize(data));
         }
 
-        public static bool SendAsync<C>(this C session, byte[] buffer) where C : INetSession
+        public static bool SendAsync<C>(this C session, byte[] buffer)
+        where C : INetSession
         {
             return session.SendAsync(buffer);
         }
 
-        public static bool SendAsync<C>(this C session, byte[] buffer, int offset, int size) where C : INetSession
+        public static bool SendAsync<C>(this C session, byte[] buffer, int offset, int size)
+        where C : INetSession
         {
             var data = new byte[size];
             Array.Copy(buffer, offset, data, 0, size);
             return session.SendAsync(data);
         }
 
-        public static bool SendAsync<C, T>(this C session, T data) where C : INetSession
+        public static bool SendAsync<C, T>(this C session, T data)
+        where C : INetSession
         {
             return session.SendAsync(AHelper.Binary.Serialize(data));
         }
@@ -67,8 +70,10 @@ namespace AIO.Net
         /// <param name="session"></param>
         /// <param name="data">data to multicast</param>
         /// <returns>Size of multicasted datagram</returns>
-        public static int Multicast<T>(this INetSession session, T data) =>
-            session.Multicast(AHelper.Binary.Serialize(data));
+        public static int Multicast<T>(this INetSession session, T data)
+        {
+            return session.Multicast(AHelper.Binary.Serialize(data));
+        }
 
         /// <summary>
         /// Multicast datagram to the prepared multicast endpoint (asynchronous)
@@ -91,8 +96,11 @@ namespace AIO.Net
         /// <param name="session"></param>
         /// <param name="data">data to multicast</param>
         /// <returns>'true' if the text was successfully multicasted, 'false' if the text was not multicasted</returns>
-        public static bool MulticastAsync<C, T>(this C session, T data) where C : INetSession =>
-            session.MulticastAsync(AHelper.Binary.Serialize(data));
+        public static bool MulticastAsync<C, T>(this C session, T data)
+        where C : INetSession
+        {
+            return session.MulticastAsync(AHelper.Binary.Serialize(data));
+        }
     }
 
     /// <summary>

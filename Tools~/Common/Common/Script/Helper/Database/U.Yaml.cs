@@ -1,21 +1,21 @@
-﻿/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+﻿#region
 
 using System.IO;
 using AIO.YamlDotNet.Serialization;
 using AIO.YamlDotNet.Serialization.NamingConventions;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: Yaml
+
         /// <summary>
         /// Yaml 解析
         /// </summary>
-        public partial class Yaml
+        public class Yaml
         {
             /// <summary>
             /// 序列化
@@ -23,8 +23,7 @@ namespace AIO
             public static string Serialize(in object data)
             {
                 // 创建Yaml序列化器
-                var serializer = new SerializerBuilder().WithIndentedSequences()
-                    .WithNamingConvention(CamelCaseNamingConvention.Instance).Build();
+                var serializer = new SerializerBuilder().WithIndentedSequences().WithNamingConvention(CamelCaseNamingConvention.Instance).Build();
                 return serializer.Serialize(data);
             }
 
@@ -44,11 +43,10 @@ namespace AIO
             /// </summary>
             public static T Deserialize<T>(in string data)
             {
-                return new DeserializerBuilder()
-                    .WithNamingConvention(UnderscoredNamingConvention.Instance)
-                    .Build()
-                    .Deserialize<T>(data);
+                return new DeserializerBuilder().WithNamingConvention(UnderscoredNamingConvention.Instance).Build().Deserialize<T>(data);
             }
         }
+
+        #endregion
     }
 }

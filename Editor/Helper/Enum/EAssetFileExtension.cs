@@ -15,6 +15,6 @@
         mat,
         shader,
         ttf,
-        cs,
+        cs
     }
 }

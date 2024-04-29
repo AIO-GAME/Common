@@ -1,10 +1,16 @@
+#region
+
 using System.Runtime.CompilerServices;
 using AIO.PList;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -54,5 +60,7 @@ namespace AIO
                 root.Save(path, PListFormat.Binary);
             }
         }
+
+        #endregion
     }
 }

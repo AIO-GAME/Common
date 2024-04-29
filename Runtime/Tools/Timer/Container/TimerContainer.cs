@@ -1,15 +1,37 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Debug = UnityEngine.Debug;
 
+#endregion
+
 namespace AIO
 {
-    public abstract partial class TimerContainer : ITimerContainer
+    public abstract class TimerContainer : ITimerContainer
     {
         private static int NUM;
+
+        private Task TaskHandle;
+
+        protected TimerContainer()
+        {
+            Watch           = Stopwatch.StartNew();
+            List            = Pool.List<ITimerOperator>();
+            ID              = NUM++;
+            Unit            = 0;
+            UpdateCacheTime = 0;
+            RemainNum       = 0;
+        }
+
+        protected CancellationToken TaskHandleToken { get; private set; }
+
+        protected CancellationTokenSource TaskHandleTokenSource { get; private set; }
+
+        #region ITimerContainer Members
 
         public ITimerOperator this[int index] => List[index];
 
@@ -27,33 +49,17 @@ namespace AIO
 
         public long UpdateCacheTime { get; protected set; }
 
-        private Task TaskHandle;
-
-        protected CancellationToken TaskHandleToken { get; private set; }
-
-        protected CancellationTokenSource TaskHandleTokenSource { get; private set; }
-
-        protected TimerContainer()
-        {
-            Watch = Stopwatch.StartNew();
-            List = Pool.List<ITimerOperator>();
-            ID = NUM++;
-            Unit = 0;
-            UpdateCacheTime = 0;
-            RemainNum = 0;
-        }
-
         public void Start()
         {
             if (List.Count <= 0)
             {
                 Debug.LogErrorFormat("TimerContainer.Start() -> 容器中没有操作器, 无法启动! [ID:{0}] [TYPE:{1}]", ID,
-                    GetType().FullName);
+                                     GetType().FullName);
                 return;
             }
 
             TaskHandleTokenSource = new CancellationTokenSource();
-            TaskHandleToken = TaskHandleTokenSource.Token;
+            TaskHandleToken       = TaskHandleTokenSource.Token;
             TaskHandleToken.Register(Dispose);
             TaskHandle = Task.Factory.StartNew(Update, TaskHandleToken);
         }
@@ -65,24 +71,28 @@ namespace AIO
             else TaskHandle.Dispose();
         }
 
-        /// <summary>
-        /// 更新
-        /// </summary>
-        protected abstract void Update();
-
         public virtual void Dispose()
         {
             if (TaskHandleTokenSource != null)
             {
                 TaskHandleTokenSource.Dispose();
                 TaskHandleTokenSource = null;
-                TaskHandleToken = CancellationToken.None;
-                TaskHandle = null;
+                TaskHandleToken       = CancellationToken.None;
+                TaskHandle            = null;
             }
 
             if (List is null) return;
-            foreach (var item in List) item?.Dispose();
-            List.Free();
+            lock (List)
+            {
+                for (var index = 0; index < List.Count; index++)
+                {
+                    if (List[index] is null) continue;
+                    List[index].Dispose();
+                    List[index] = null;
+                }
+
+                List.Free();
+            }
         }
 
 
@@ -136,5 +146,12 @@ namespace AIO
 
             timer.Free();
         }
+
+        #endregion
+
+        /// <summary>
+        /// 更新
+        /// </summary>
+        protected abstract void Update();
     }
 }

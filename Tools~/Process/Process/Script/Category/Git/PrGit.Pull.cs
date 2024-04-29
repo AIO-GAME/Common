@@ -4,12 +4,18 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrGit
     {
+        #region Nested type: Pull
+
         /// <summary>
         /// <see cref="PrGit"/> <see cref="Pull"/> 拉取
         /// </summary>
@@ -62,5 +68,7 @@ namespace AIO
                 return Create(work, "pull origin {0} --verbose --ff-only --progress --autostash --recurse-submodules", branch);
             }
         }
+
+        #endregion
     }
 }

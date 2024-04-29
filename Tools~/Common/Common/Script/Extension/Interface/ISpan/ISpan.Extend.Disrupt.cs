@@ -1,10 +1,4 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2024-02-28
-|*|E-Mail:     |*| xinansky99@gmail.com
-|*|============|*/
-
-namespace AIO
+﻿namespace AIO
 {
     partial class ExtendISpan
     {
@@ -35,7 +29,7 @@ namespace AIO
         /// <typeparam name="T">数组类型</typeparam>
         /// <param name="array">数组</param>
         /// <remarks>
-        /// 并重新分配内存 source = source.<see cref="Disrupt{T}(T[])"/>
+        /// 并重新分配内存 source = source.<see cref="Random{T}(T[])"/>
         /// </remarks>
         public static T[] Random<T>(this T[] array)
         {

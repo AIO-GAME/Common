@@ -1,18 +1,18 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-12-18
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -46,9 +46,9 @@ namespace AIO
             /// <param name="option">搜索模式</param>
             /// <returns>所有文件夹名称</returns>
             public static IEnumerable<DirectoryInfo> GetDirsInfo(
-                string path,
-                string pattern = "*",
-                SearchOption option = SearchOption.TopDirectoryOnly)
+                string       path,
+                string       pattern = "*",
+                SearchOption option  = SearchOption.TopDirectoryOnly)
             {
                 path = path.Replace('\\', Path.AltDirectorySeparatorChar);
                 return !Directory.Exists(path)
@@ -65,10 +65,10 @@ namespace AIO
             /// <param name="option">搜索模式</param>
             /// <returns>所有文件夹名称</returns>
             public static IEnumerable<DirectoryInfo> GetDirsInfo(
-                string path,
+                string                    path,
                 Func<DirectoryInfo, bool> filtration,
-                string pattern = "*",
-                SearchOption option = SearchOption.TopDirectoryOnly)
+                string                    pattern = "*",
+                SearchOption              option  = SearchOption.TopDirectoryOnly)
             {
                 path = path.Replace('\\', Path.AltDirectorySeparatorChar);
                 return !Directory.Exists(path)
@@ -84,9 +84,9 @@ namespace AIO
             /// <param name="option">搜索模式</param>
             /// <returns>所有文件夹名称</returns>
             public static IEnumerable<string> GetDirs(
-                string path,
-                string pattern = "*",
-                SearchOption option = SearchOption.TopDirectoryOnly)
+                string       path,
+                string       pattern = "*",
+                SearchOption option  = SearchOption.TopDirectoryOnly)
             {
                 return GetDirsInfo(path, pattern, option).Select(item => item.FullName.Replace('\\', '/'));
             }
@@ -100,10 +100,10 @@ namespace AIO
             /// <param name="option">搜索模式</param>
             /// <returns>所有文件夹名称</returns>
             public static IEnumerable<string> GetDirs(
-                in string path,
+                in string                    path,
                 in Func<DirectoryInfo, bool> filtration,
-                in string pattern = "*",
-                in SearchOption option = SearchOption.TopDirectoryOnly)
+                in string                    pattern = "*",
+                in SearchOption              option  = SearchOption.TopDirectoryOnly)
             {
                 return GetDirsInfo(path, filtration, pattern, option).Select(item => item.FullName.Replace('\\', '/'));
             }
@@ -112,9 +112,9 @@ namespace AIO
             /// 获取该文件夹下所有文件夹名 不含子文件夹 不包含自己
             /// </summary>
             public static IEnumerable<string> GetDirsName(
-                in string path,
-                in string pattern = "*",
-                in SearchOption option = SearchOption.TopDirectoryOnly)
+                in string       path,
+                in string       pattern = "*",
+                in SearchOption option  = SearchOption.TopDirectoryOnly)
             {
                 return GetDirsInfo(path, pattern, option).Select(item => item.Name);
             }
@@ -123,10 +123,10 @@ namespace AIO
             /// 获取该文件夹下所有文件夹名 不含子文件夹 不包含自己
             /// </summary>
             public static IEnumerable<string> GetDirsName(
-                in string path,
+                in string                    path,
                 in Func<DirectoryInfo, bool> filtration,
-                in string pattern = "*",
-                in SearchOption option = SearchOption.TopDirectoryOnly)
+                in string                    pattern = "*",
+                in SearchOption              option  = SearchOption.TopDirectoryOnly)
             {
                 return GetDirsInfo(path, filtration, pattern, option).Select(item => item.Name);
             }
@@ -161,5 +161,7 @@ namespace AIO
                 return !ExistsDir(path) ? DateTime.MinValue : Directory.GetCreationTimeUtc(path);
             }
         }
+
+        #endregion
     }
 }

@@ -1,3 +1,5 @@
+#region
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +13,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using HTTPClient11 = System.Net.Http.HttpClient;
 
+#endregion
+
 namespace AIO
 {
     /// <summary>
@@ -18,7 +22,70 @@ namespace AIO
     /// </summary>
     public class HttpDownload : IDisposable
     {
-        private static readonly byte[] CODE = new byte[] { 1, 3, 9, 3, 1, 3, 9, 3, 1 };
+        private static readonly byte[] CODE = { 1, 3, 9, 3, 1, 3, 9, 3, 1 };
+
+        /// <summary>
+        /// Http头信息
+        /// </summary>
+        private readonly HttpClientHandler ClientHandler;
+
+        /// <summary>
+        /// 完成回调
+        /// </summary>
+        private Action<HttpDownloadInfo> CompleteAction;
+
+        /// <summary>
+        /// 完成回调
+        /// </summary>
+        private Action<HttpDownloadInfo> ExceptionAction;
+
+        /// <summary>
+        /// 进度回调
+        /// </summary>
+        private Action<HttpDownloadInfo> ProgressAction;
+
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="downloadUrls">下载地址</param>
+        /// <param name="downloadPath">保存地址</param>
+        public HttpDownload(in IList<string> downloadUrls, in string downloadPath)
+        {
+            Urls           = downloadUrls;
+            SavePath       = downloadPath;
+            MaxDownloadNum = Urls.Count;
+
+            ClientHandler = new HttpClientHandler
+            {
+                AutomaticDecompression =
+                    DecompressionMethods.GZip | DecompressionMethods.Deflate | DecompressionMethods.None,
+                UseProxy          = false,
+                UseCookies        = false,
+                AllowAutoRedirect = false
+            };
+        }
+
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="downloadUrls">下载地址</param>
+        /// <param name="downloadPath">保存地址</param>
+        /// <param name="handler">表头参数</param>
+        public HttpDownload(in IList<string> downloadUrls, in string downloadPath, in HttpClientHandler handler)
+        {
+            Urls           = downloadUrls;
+            SavePath       = downloadPath;
+            MaxDownloadNum = Urls.Count;
+            ClientHandler  = handler;
+        }
+
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="downloadUrls">下载地址</param>
+        /// <param name="downloadPath">保存地址</param>
+        public HttpDownload(in string downloadUrls, in string downloadPath)
+            : this(new[] { downloadUrls }, downloadPath) { }
 
         /// <summary>
         /// 文件地址
@@ -45,70 +112,17 @@ namespace AIO
         /// </summary>
         public int MaxDownloadNum { get; private set; }
 
-        /// <summary>
-        /// 进度回调
-        /// </summary>
-        private Action<HttpDownloadInfo> ProgressAction;
+        #region IDisposable Members
 
         /// <summary>
-        /// 完成回调
+        /// 释放
         /// </summary>
-        private Action<HttpDownloadInfo> CompleteAction;
-
-        /// <summary>
-        /// 完成回调
-        /// </summary>
-        private Action<HttpDownloadInfo> ExceptionAction;
-
-        /// <summary>
-        /// Http头信息
-        /// </summary>
-        private readonly HttpClientHandler ClientHandler;
-
-        /// <summary>
-        /// 初始化
-        /// </summary>
-        /// <param name="downloadUrls">下载地址</param>
-        /// <param name="downloadPath">保存地址</param>
-        public HttpDownload(in IList<string> downloadUrls, in string downloadPath)
+        public void Dispose()
         {
-            Urls = downloadUrls;
-            SavePath = downloadPath;
-            MaxDownloadNum = Urls.Count;
-
-            ClientHandler = new HttpClientHandler()
-            {
-                AutomaticDecompression =
-                    DecompressionMethods.GZip | DecompressionMethods.Deflate | DecompressionMethods.None,
-                UseProxy = false,
-                UseCookies = false,
-                AllowAutoRedirect = false,
-            };
+            Client.Dispose();
         }
 
-        /// <summary>
-        /// 初始化
-        /// </summary>
-        /// <param name="downloadUrls">下载地址</param>
-        /// <param name="downloadPath">保存地址</param>
-        /// <param name="handler">表头参数</param>
-        public HttpDownload(in IList<string> downloadUrls, in string downloadPath, in HttpClientHandler handler)
-        {
-            Urls = downloadUrls;
-            SavePath = downloadPath;
-            MaxDownloadNum = Urls.Count;
-            ClientHandler = handler;
-        }
-
-        /// <summary>
-        /// 初始化
-        /// </summary>
-        /// <param name="downloadUrls">下载地址</param>
-        /// <param name="downloadPath">保存地址</param>
-        public HttpDownload(in string downloadUrls, in string downloadPath) : this(new string[] { downloadUrls },
-            downloadPath)
-        {
-        }
+        #endregion
 
         /// <summary>
         /// 开启异步下载
@@ -132,10 +146,7 @@ namespace AIO
             var count = 0;
             while (count < Urls.Count)
             {
-                for (var i = 0; i < task.Length && count < Urls.Count; i++)
-                {
-                    task[i] = DownloadFileAsync(count++);
-                }
+                for (var i = 0; i < task.Length && count < Urls.Count; i++) task[i] = DownloadFileAsync(count++);
 
                 await Task.WhenAll(task);
             }
@@ -177,24 +188,20 @@ namespace AIO
                                     {
                                         // 下载完整的文件
                                         stream.Position = 0;
-                                        var local5 = BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", "")
-                                            .ToLower();
+                                        var local5 = BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", "").ToLower();
                                         if (local5 != info.MD5)
                                         {
                                             stream.Close();
-                                            stream.Dispose();
                                             fileInfo.Delete();
                                         }
                                         else
                                         {
                                             stream.Close();
-                                            stream.Dispose();
                                             return;
                                         }
                                     }
 
                                     stream.Close();
-                                    stream.Dispose();
                                 }
                             }
 
@@ -204,18 +211,17 @@ namespace AIO
 
                     info.SetCancellationTokenSource(new CancellationTokenSource());
                     using (var response = await Client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead,
-                               info.GetToken()))
+                                                                 info.GetToken()))
                     {
                         info.Start().SetResponse(response);
                         if (string.IsNullOrEmpty(info.MD5))
                         {
-                            var expectedMd5Bytes = MD5.Create()
-                                .ComputeHash(new MemoryStream(await response.Content.ReadAsByteArrayAsync()));
+                            var expectedMd5Bytes = MD5.Create().ComputeHash(new MemoryStream(await response.Content.ReadAsByteArrayAsync()));
                             info.SetMD5(BitConverter.ToString(expectedMd5Bytes).Replace("-", "").ToLower());
                         }
 
                         using (var fileStream = new FileStream(info.FullPath, FileMode.Append, FileAccess.Write,
-                                   FileShare.None, 4096, useAsync: true))
+                                                               FileShare.None, 4096, true))
                         {
                             using (var contentStream = await response.Content.ReadAsStreamAsync())
                             {
@@ -234,7 +240,6 @@ namespace AIO
                             }
 
                             fileStream.Close();
-                            fileStream.Dispose();
                         }
                     }
                 }
@@ -258,19 +263,11 @@ namespace AIO
             {
                 var buffer = new byte[stream.Length - headerSize];
                 stream.Position = headerSize;
-                _ = stream.Read(buffer, 0, buffer.Length);
+                _               = stream.Read(buffer, 0, buffer.Length);
                 stream.SetLength(buffer.Length);
                 stream.Position = 0;
                 stream.Write(buffer, 0, buffer.Length);
             }
-        }
-
-        /// <summary>
-        /// 释放
-        /// </summary>
-        public void Dispose()
-        {
-            Client.Dispose();
         }
 
         /// <summary>

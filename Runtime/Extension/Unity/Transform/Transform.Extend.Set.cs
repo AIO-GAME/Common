@@ -1,17 +1,45 @@
-﻿using System.Runtime.CompilerServices;
+﻿#region
+
+using System.Runtime.CompilerServices;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEngine
 {
     partial class TransformExtend
     {
+        /// <summary>
+        /// 给定一个单位长度的旋转轴(x, y, z)和一个角度θ。对应的四元数为：q=((x,y,z)sinθ2, cosθ2)
+        /// </summary>
+        public static void SetLocalRotation(this Transform trans, in float x, in float y, in float z)
+        {
+            trans.localRotation = Quaternion.Euler(x, y, z);
+        }
+
+        /// <summary>
+        /// 给定一个单位长度的旋转轴(x, y, z)和一个角度θ。对应的四元数为：q=((x,y,z)sinθ2, cosθ2)
+        /// </summary>
+        public static void SetLocalRotation(this Transform trans, in Vector3 v)
+        {
+            trans.localRotation = Quaternion.Euler(v);
+        }
+
+        /// <summary>
+        /// 给定一个单位长度的旋转轴(x, y, z)和一个角度θ。对应的四元数为：q=((x,y,z)sinθ2, cosθ2)
+        /// </summary>
+        public static void SetLocalRotation(this Transform trans, in Quaternion v)
+        {
+            trans.localRotation = v;
+        }
+
         #region Set Pos Local
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetPosLocalX(this Transform trans, in float v1)
         {
             var gv3 = trans.localPosition;
-            gv3.x = v1;
+            gv3.x               = v1;
             trans.localPosition = gv3;
         }
 
@@ -19,7 +47,7 @@ namespace AIO.UEngine
         public static void SetPosLocalY(this Transform trans, in float v1)
         {
             var gv3 = trans.localPosition;
-            gv3.y = v1;
+            gv3.y               = v1;
             trans.localPosition = gv3;
         }
 
@@ -27,7 +55,7 @@ namespace AIO.UEngine
         public static void SetPosLocalZ(this Transform trans, in float v1)
         {
             var gv3 = trans.localPosition;
-            gv3.z = v1;
+            gv3.z               = v1;
             trans.localPosition = gv3;
         }
 
@@ -35,8 +63,8 @@ namespace AIO.UEngine
         public static void SetPosLocalXY(this Transform trans, in float v1, in float v2)
         {
             var gv3 = trans.localPosition;
-            gv3.x = v1;
-            gv3.y = v2;
+            gv3.x               = v1;
+            gv3.y               = v2;
             trans.localPosition = gv3;
         }
 
@@ -44,8 +72,8 @@ namespace AIO.UEngine
         public static void SetPosLocalXY(this Transform trans, in Vector2 v12)
         {
             var gv3 = trans.localPosition;
-            gv3.x = v12.x;
-            gv3.y = v12.y;
+            gv3.x               = v12.x;
+            gv3.y               = v12.y;
             trans.localPosition = gv3;
         }
 
@@ -53,8 +81,8 @@ namespace AIO.UEngine
         public static void SetPosLocalYZ(this Transform trans, in float v1, in float v2)
         {
             var gv3 = trans.localPosition;
-            gv3.y = v1;
-            gv3.z = v2;
+            gv3.y               = v1;
+            gv3.z               = v2;
             trans.localPosition = gv3;
         }
 
@@ -62,8 +90,8 @@ namespace AIO.UEngine
         public static void SetPosLocalYZ(this Transform trans, in Vector2 v12)
         {
             var gv3 = trans.localPosition;
-            gv3.y = v12.x;
-            gv3.z = v12.y;
+            gv3.y               = v12.x;
+            gv3.z               = v12.y;
             trans.localPosition = gv3;
         }
 
@@ -71,8 +99,8 @@ namespace AIO.UEngine
         public static void SetPosLocalXZ(this Transform trans, in float v1, in float v2)
         {
             var gv3 = trans.localPosition;
-            gv3.x = v1;
-            gv3.z = v2;
+            gv3.x               = v1;
+            gv3.z               = v2;
             trans.localPosition = gv3;
         }
 
@@ -80,8 +108,8 @@ namespace AIO.UEngine
         public static void SetPosLocalXZ(this Transform trans, in Vector2 v12)
         {
             var gv3 = trans.localPosition;
-            gv3.x = v12.x;
-            gv3.z = v12.y;
+            gv3.x               = v12.x;
+            gv3.z               = v12.y;
             trans.localPosition = gv3;
         }
 
@@ -111,7 +139,7 @@ namespace AIO.UEngine
         public static void SetPosX(this Transform trans, in float v1)
         {
             var gv3 = trans.position;
-            gv3.x = v1;
+            gv3.x          = v1;
             trans.position = gv3;
         }
 
@@ -119,7 +147,7 @@ namespace AIO.UEngine
         public static void SetPosY(this Transform trans, in float v1)
         {
             var gv3 = trans.position;
-            gv3.y = v1;
+            gv3.y          = v1;
             trans.position = gv3;
         }
 
@@ -127,7 +155,7 @@ namespace AIO.UEngine
         public static void SetPosZ(this Transform trans, in float v1)
         {
             var gv3 = trans.position;
-            gv3.z = v1;
+            gv3.z          = v1;
             trans.position = gv3;
         }
 
@@ -135,8 +163,8 @@ namespace AIO.UEngine
         public static void SetPosXY(this Transform trans, in float v1, in float v2)
         {
             var gv3 = trans.position;
-            gv3.x = v1;
-            gv3.y = v2;
+            gv3.x          = v1;
+            gv3.y          = v2;
             trans.position = gv3;
         }
 
@@ -144,8 +172,8 @@ namespace AIO.UEngine
         public static void SetPosXY(this Transform trans, in Vector2 v12)
         {
             var gv3 = trans.position;
-            gv3.x = v12.x;
-            gv3.y = v12.y;
+            gv3.x          = v12.x;
+            gv3.y          = v12.y;
             trans.position = gv3;
         }
 
@@ -153,8 +181,8 @@ namespace AIO.UEngine
         public static void SetPosYZ(this Transform trans, in float v1, in float v2)
         {
             var gv3 = trans.position;
-            gv3.y = v1;
-            gv3.z = v2;
+            gv3.y          = v1;
+            gv3.z          = v2;
             trans.position = gv3;
         }
 
@@ -162,8 +190,8 @@ namespace AIO.UEngine
         public static void SetPosYZ(this Transform trans, in Vector2 v12)
         {
             var gv3 = trans.position;
-            gv3.y = v12.x;
-            gv3.z = v12.y;
+            gv3.y          = v12.x;
+            gv3.z          = v12.y;
             trans.position = gv3;
         }
 
@@ -171,8 +199,8 @@ namespace AIO.UEngine
         public static void SetPosXZ(this Transform trans, in float v1, in float v2)
         {
             var gv3 = trans.position;
-            gv3.x = v1;
-            gv3.z = v2;
+            gv3.x          = v1;
+            gv3.z          = v2;
             trans.position = gv3;
         }
 
@@ -180,8 +208,8 @@ namespace AIO.UEngine
         public static void SetPosXZ(this Transform trans, in Vector2 v12)
         {
             var gv3 = trans.position;
-            gv3.x = v12.x;
-            gv3.z = v12.y;
+            gv3.x          = v12.x;
+            gv3.z          = v12.y;
             trans.position = gv3;
         }
 
@@ -211,7 +239,7 @@ namespace AIO.UEngine
         public static void SetScaleX(this Transform trans, in float v1)
         {
             var gv3 = trans.localScale;
-            gv3.x = v1;
+            gv3.x            = v1;
             trans.localScale = gv3;
         }
 
@@ -219,7 +247,7 @@ namespace AIO.UEngine
         public static void SetScaleY(this Transform trans, in float v1)
         {
             var gv3 = trans.localScale;
-            gv3.y = v1;
+            gv3.y            = v1;
             trans.localScale = gv3;
         }
 
@@ -227,7 +255,7 @@ namespace AIO.UEngine
         public static void SetScaleZ(this Transform trans, in float v1)
         {
             var gv3 = trans.localScale;
-            gv3.z = v1;
+            gv3.z            = v1;
             trans.localScale = gv3;
         }
 
@@ -235,8 +263,8 @@ namespace AIO.UEngine
         public static void SetScaleXY(this Transform trans, in float v1)
         {
             var gv3 = trans.localScale;
-            gv3.x = v1;
-            gv3.y = v1;
+            gv3.x            = v1;
+            gv3.y            = v1;
             trans.localScale = gv3;
         }
 
@@ -244,8 +272,8 @@ namespace AIO.UEngine
         public static void SetScaleXY(this Transform trans, in Vector2 v12)
         {
             var gv3 = trans.localScale;
-            gv3.x = v12.x;
-            gv3.y = v12.y;
+            gv3.x            = v12.x;
+            gv3.y            = v12.y;
             trans.localScale = gv3;
         }
 
@@ -253,8 +281,8 @@ namespace AIO.UEngine
         public static void SetScaleXY(this Transform trans, in float v1, in float v2)
         {
             var gv3 = trans.localScale;
-            gv3.x = v1;
-            gv3.y = v2;
+            gv3.x            = v1;
+            gv3.y            = v2;
             trans.localScale = gv3;
         }
 
@@ -262,8 +290,8 @@ namespace AIO.UEngine
         public static void SetScaleXZ(this Transform trans, in float v1)
         {
             var gv3 = trans.localScale;
-            gv3.x = v1;
-            gv3.z = v1;
+            gv3.x            = v1;
+            gv3.z            = v1;
             trans.localScale = gv3;
         }
 
@@ -271,8 +299,8 @@ namespace AIO.UEngine
         public static void SetScaleXZ(this Transform trans, in Vector2 v12)
         {
             var gv3 = trans.localScale;
-            gv3.x = v12.x;
-            gv3.z = v12.y;
+            gv3.x            = v12.x;
+            gv3.z            = v12.y;
             trans.localScale = gv3;
         }
 
@@ -280,8 +308,8 @@ namespace AIO.UEngine
         public static void SetScaleXZ(this Transform trans, in float v1, in float v2)
         {
             var gv3 = trans.localScale;
-            gv3.x = v1;
-            gv3.z = v2;
+            gv3.x            = v1;
+            gv3.z            = v2;
             trans.localScale = gv3;
         }
 
@@ -289,8 +317,8 @@ namespace AIO.UEngine
         public static void SetScaleYZ(this Transform trans, in float v1)
         {
             var gv3 = trans.localScale;
-            gv3.y = v1;
-            gv3.z = v1;
+            gv3.y            = v1;
+            gv3.z            = v1;
             trans.localScale = gv3;
         }
 
@@ -298,8 +326,8 @@ namespace AIO.UEngine
         public static void SetScaleYZ(this Transform trans, in Vector2 v12)
         {
             var gv3 = trans.localScale;
-            gv3.y = v12.x;
-            gv3.z = v12.y;
+            gv3.y            = v12.x;
+            gv3.z            = v12.y;
             trans.localScale = gv3;
         }
 
@@ -307,8 +335,8 @@ namespace AIO.UEngine
         public static void SetScaleYZ(this Transform trans, in float v1, in float v2)
         {
             var gv3 = trans.localScale;
-            gv3.y = v1;
-            gv3.z = v2;
+            gv3.y            = v1;
+            gv3.z            = v2;
             trans.localScale = gv3;
         }
 
@@ -365,29 +393,5 @@ namespace AIO.UEngine
         }
 
         #endregion
-
-        /// <summary>
-        /// 给定一个单位长度的旋转轴(x, y, z)和一个角度θ。对应的四元数为：q=((x,y,z)sinθ2, cosθ2)
-        /// </summary>
-        public static void SetLocalRotation(this Transform trans, in float x, in float y, in float z)
-        {
-            trans.localRotation = Quaternion.Euler(x, y, z);
-        }
-
-        /// <summary>
-        /// 给定一个单位长度的旋转轴(x, y, z)和一个角度θ。对应的四元数为：q=((x,y,z)sinθ2, cosθ2)
-        /// </summary>
-        public static void SetLocalRotation(this Transform trans, in Vector3 v)
-        {
-            trans.localRotation = Quaternion.Euler(v);
-        }
-
-        /// <summary>
-        /// 给定一个单位长度的旋转轴(x, y, z)和一个角度θ。对应的四元数为：q=((x,y,z)sinθ2, cosθ2)
-        /// </summary>
-        public static void SetLocalRotation(this Transform trans, in Quaternion v)
-        {
-            trans.localRotation = v;
-        }
     }
 }

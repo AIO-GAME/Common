@@ -1,13 +1,109 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
     partial class RHelper
     {
+        #region Nested type: Prefs
+
         partial class Prefs
         {
+            /// <summary>
+            /// 保存为Vector
+            /// </summary>
+            public static void SaveVector2(in string key, in Vector2 value)
+            {
+                PlayerPrefs.SetFloat(string.Concat(key, "_v2_x"), value.x);
+                PlayerPrefs.SetFloat(string.Concat(key, "_v2_y"), value.y);
+                PlayerPrefs.Save();
+            }
+
+            /// <summary>
+            /// 保存为Vector
+            /// </summary>
+            public static void SaveVector3(in string key, in Vector3 value)
+            {
+                PlayerPrefs.SetFloat(string.Concat(key, "_v3_x"), value.x);
+                PlayerPrefs.SetFloat(string.Concat(key, "_v3_y"), value.y);
+                PlayerPrefs.SetFloat(string.Concat(key, "_v3_z"), value.z);
+                PlayerPrefs.Save();
+            }
+
+            /// <summary>
+            /// 保存为Vector
+            /// </summary>
+            public static void SaveVector4(in string key, in Vector4 value)
+            {
+                PlayerPrefs.SetFloat(string.Concat(key, "_v4_x"), value.x);
+                PlayerPrefs.SetFloat(string.Concat(key, "_v4_y"), value.y);
+                PlayerPrefs.SetFloat(string.Concat(key, "_v4_z"), value.z);
+                PlayerPrefs.SetFloat(string.Concat(key, "_v4_w"), value.w);
+                PlayerPrefs.Save();
+            }
+
+            /// <summary>
+            /// 保存为Quaternion
+            /// </summary>
+            public static void SaveQuaternion(in string key, in Quaternion value)
+            {
+                PlayerPrefs.SetFloat(key + "_Quaternion_x", value.x);
+                PlayerPrefs.SetFloat(key + "_Quaternion_y", value.y);
+                PlayerPrefs.SetFloat(key + "_Quaternion_z", value.z);
+                PlayerPrefs.SetFloat(key + "_Quaternion_w", value.w);
+                PlayerPrefs.Save();
+            }
+
+            /// <summary>
+            /// 保存为Dictionary
+            /// </summary>
+            public static void SaveDictionary<K, V>(in string key, in IDictionary<K, V> values)
+            {
+                PlayerPrefs.SetString(string.Concat(key, "_IDictionary"), AHelper.Json.Serialize(values));
+                PlayerPrefs.Save();
+            }
+
+            /// <summary>
+            /// 保存为List
+            /// </summary>
+            public static void SaveList<V>(in string key, in IList<V> values)
+            {
+                PlayerPrefs.SetString(string.Concat(key, "_IList"), AHelper.Json.Serialize(values));
+                PlayerPrefs.Save();
+            }
+
+            /// <summary>
+            /// 保存为Collection
+            /// </summary>
+            public static void SaveCollection<V>(in string key, in ICollection<V> values)
+            {
+                PlayerPrefs.SetString(string.Concat(key, "_ICollection"), AHelper.Json.Serialize(values));
+                PlayerPrefs.Save();
+            }
+
+            /// <summary>
+            /// 保存为JsonData
+            /// </summary>
+            public static void SaveJsonData<T>(in string key, in T value)
+            {
+                PlayerPrefs.SetString(string.Concat(key, "_Json"), AHelper.Json.Serialize(value));
+                PlayerPrefs.Save();
+            }
+
+            /// <summary>
+            /// 保存为Float
+            /// </summary>
+            public static void SaveFloat(in string key, in float value)
+            {
+                PlayerPrefs.SetFloat(string.Concat(key, "_Float"), value);
+                PlayerPrefs.Save();
+            }
+
             #region String
 
             /// <summary>
@@ -141,7 +237,8 @@ namespace AIO
             /// <summary>
             /// 保存为Enum
             /// </summary>
-            public static void SaveEnum<T1, T2>(T1 key, in string field, T2 value) where T2 : struct, Enum
+            public static void SaveEnum<T1, T2>(T1 key, in string field, T2 value)
+            where T2 : struct, Enum
             {
                 var fullName = key.GetType().FullName;
                 if (!string.IsNullOrEmpty(fullName))
@@ -154,7 +251,8 @@ namespace AIO
             /// <summary>
             /// 保存为Enum
             /// </summary>
-            public static void SaveEnum<T1, T2>(T1 key, T2 value) where T2 : struct, Enum
+            public static void SaveEnum<T1, T2>(T1 key, T2 value)
+            where T2 : struct, Enum
             {
                 var fullName = key.GetType().FullName;
                 if (!string.IsNullOrEmpty(fullName))
@@ -165,96 +263,8 @@ namespace AIO
             }
 
             #endregion
-
-            /// <summary>
-            /// 保存为Vector
-            /// </summary>
-            public static void SaveVector2(in string key, in Vector2 value)
-            {
-                PlayerPrefs.SetFloat(string.Concat(key, "_v2_x"), value.x);
-                PlayerPrefs.SetFloat(string.Concat(key, "_v2_y"), value.y);
-                PlayerPrefs.Save();
-            }
-
-            /// <summary>
-            /// 保存为Vector
-            /// </summary>
-            public static void SaveVector3(in string key, in Vector3 value)
-            {
-                PlayerPrefs.SetFloat(string.Concat(key, "_v3_x"), value.x);
-                PlayerPrefs.SetFloat(string.Concat(key, "_v3_y"), value.y);
-                PlayerPrefs.SetFloat(string.Concat(key, "_v3_z"), value.z);
-                PlayerPrefs.Save();
-            }
-
-            /// <summary>
-            /// 保存为Vector
-            /// </summary>
-            public static void SaveVector4(in string key, in Vector4 value)
-            {
-                PlayerPrefs.SetFloat(string.Concat(key, "_v4_x"), value.x);
-                PlayerPrefs.SetFloat(string.Concat(key, "_v4_y"), value.y);
-                PlayerPrefs.SetFloat(string.Concat(key, "_v4_z"), value.z);
-                PlayerPrefs.SetFloat(string.Concat(key, "_v4_w"), value.w);
-                PlayerPrefs.Save();
-            }
-
-            /// <summary>
-            /// 保存为Quaternion
-            /// </summary>
-            public static void SaveQuaternion(in string key, in Quaternion value)
-            {
-                PlayerPrefs.SetFloat(key + "_Quaternion_x", value.x);
-                PlayerPrefs.SetFloat(key + "_Quaternion_y", value.y);
-                PlayerPrefs.SetFloat(key + "_Quaternion_z", value.z);
-                PlayerPrefs.SetFloat(key + "_Quaternion_w", value.w);
-                PlayerPrefs.Save();
-            }
-
-            /// <summary>
-            /// 保存为Dictionary
-            /// </summary>
-            public static void SaveDictionary<K, V>(in string key, in IDictionary<K, V> values)
-            {
-                PlayerPrefs.SetString(string.Concat(key, "_IDictionary"), AHelper.Json.Serialize(values));
-                PlayerPrefs.Save();
-            }
-
-            /// <summary>
-            /// 保存为List
-            /// </summary>
-            public static void SaveList<V>(in string key, in IList<V> values)
-            {
-                PlayerPrefs.SetString(string.Concat(key, "_IList"), AHelper.Json.Serialize(values));
-                PlayerPrefs.Save();
-            }
-
-            /// <summary>
-            /// 保存为Collection
-            /// </summary>
-            public static void SaveCollection<V>(in string key, in ICollection<V> values)
-            {
-                PlayerPrefs.SetString(string.Concat(key, "_ICollection"), AHelper.Json.Serialize(values));
-                PlayerPrefs.Save();
-            }
-
-            /// <summary>
-            /// 保存为JsonData
-            /// </summary>
-            public static void SaveJsonData<T>(in string key, in T value)
-            {
-                PlayerPrefs.SetString(string.Concat(key, "_Json"), AHelper.Json.Serialize(value));
-                PlayerPrefs.Save();
-            }
-
-            /// <summary>
-            /// 保存为Float
-            /// </summary>
-            public static void SaveFloat(in string key, in float value)
-            {
-                PlayerPrefs.SetFloat(string.Concat(key, "_Float"), value);
-                PlayerPrefs.Save();
-            }
         }
+
+        #endregion
     }
 }

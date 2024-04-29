@@ -1,7 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
@@ -28,12 +31,8 @@ namespace AIO
 
             var hashSet = new HashSet<T>();
             foreach (var item in array)
-            {
                 if (!hashSet.Add(item) && compare(item, hashSet.First()))
-                {
                     return true;
-                }
-            }
 
             return false;
         }

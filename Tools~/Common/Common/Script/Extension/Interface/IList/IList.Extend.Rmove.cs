@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
+
+#endregion
 
 namespace AIO
 {
@@ -27,13 +31,11 @@ namespace AIO
 
             int i = 0, j = 0;
             for (; i < array.Count; i++)
-            {
                 if (!match(array[i]))
                 {
                     if (j != i) array[j] = array[i];
                     j++;
                 }
-            }
 
             var count = array.Count - j;
             if (count > 0)
@@ -57,17 +59,11 @@ namespace AIO
             {
                 var num = array[i];
                 if (hashSet.Count == 0 || !hashSet.Contains(num))
-                {
                     hashSet.Add(num);
-                }
                 else if (array is List<T> list)
-                {
                     list.RemoveAll(x => Equals(x, num));
-                }
                 else
-                {
                     array.RemoveAt(i--);
-                }
             }
 
             hashSet.Free();

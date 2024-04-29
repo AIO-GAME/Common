@@ -4,17 +4,25 @@
 
 |||✩ - - - - - |*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+#endregion
+
 namespace AIO
 {
     public partial class PrMac
     {
+        #region Nested type: Git
+
         public partial class Git
         {
+            #region Nested type: Commit
+
             /// <summary>
             /// 提交命令
             /// </summary>
@@ -102,7 +110,7 @@ namespace AIO
                 /// <exception cref="ArgumentNullException">targets is null<code><see cref="ArgumentNullException"/></code></exception>
                 public static IExecutor Execute(string target, bool quit = true)
                 {
-                    return Execute(new string[] { target }, quit);
+                    return Execute(new[] { target }, quit);
                 }
 
                 /// <summary>
@@ -117,9 +125,13 @@ namespace AIO
                 /// <exception cref="ArgumentNullException">targets is null<code><see cref="ArgumentNullException"/></code></exception>
                 public static IExecutor Execute((string, string) target, bool quit = true)
                 {
-                    return Execute(new (string, string)[] { target }, quit);
+                    return Execute(new[] { target }, quit);
                 }
             }
+
+            #endregion
         }
+
+        #endregion
     }
 }

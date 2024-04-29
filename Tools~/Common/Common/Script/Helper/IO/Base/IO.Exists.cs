@@ -1,16 +1,16 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+#region
 
 using System.IO;
 using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -93,5 +93,7 @@ namespace AIO
                 return ExistsFileEx(path) && ExistsDirEx(path);
             }
         }
+
+        #endregion
     }
 }

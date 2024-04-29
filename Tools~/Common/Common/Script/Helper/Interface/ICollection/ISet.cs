@@ -1,7 +1,11 @@
-﻿namespace AIO
-{
-    using System.Collections.Generic;
+﻿#region
 
+using System.Collections.Generic;
+
+#endregion
+
+namespace AIO
+{
     /// <summary>
     /// 这是一个泛型集合接口，保证其元素的唯一性，这个唯一性是由某个比较器定义的。它还支持基本的集合操作，如并集、交集、补集和排他补集。
     /// </summary>

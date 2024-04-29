@@ -1,12 +1,9 @@
-﻿/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-11-21                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+﻿#region
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {

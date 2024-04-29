@@ -1,10 +1,9 @@
-﻿/*|==========|*|
-|*|Author:   |*| -> XINAN
-|*|Date:     |*| -> 2023-06-06
-|*|==========|*/
+﻿#region
 
 using System;
 using System.Security.Cryptography;
+
+#endregion
 
 namespace AIO
 {
@@ -15,7 +14,8 @@ namespace AIO
     /// </summary>
     internal class CRC32Algorithm : HashAlgorithm
     {
-        private uint _currentCrc;
+        private static readonly SafeProxy _proxy = new SafeProxy();
+        private                 uint      _currentCrc;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CRC32Algorithm"/> class.
@@ -50,8 +50,7 @@ namespace AIO
         {
             if (BitConverter.IsLittleEndian)
                 return new[] { (byte)_currentCrc, (byte)(_currentCrc >> 8), (byte)(_currentCrc >> 16), (byte)(_currentCrc >> 24) };
-            else
-                return new[] { (byte)(_currentCrc >> 24), (byte)(_currentCrc >> 16), (byte)(_currentCrc >> 8), (byte)_currentCrc };
+            return new[] { (byte)(_currentCrc >> 24), (byte)(_currentCrc >> 16), (byte)(_currentCrc >> 8), (byte)_currentCrc };
         }
 
 
@@ -128,7 +127,7 @@ namespace AIO
                 throw new ArgumentOutOfRangeException("length", "Length of data should be less than array length - 4 bytes of CRC data");
             var crc = Append(0, input, offset, length);
             var r = offset + length;
-            input[r] = (byte)crc;
+            input[r]     = (byte)crc;
             input[r + 1] = (byte)(crc >> 8);
             input[r + 2] = (byte)(crc >> 16);
             input[r + 3] = (byte)(crc >> 24);
@@ -171,17 +170,11 @@ namespace AIO
             return Append(0, input, 0, input.Length) == 0x2144DF1C;
         }
 
-
-        private static readonly SafeProxy _proxy = new SafeProxy();
-
         private static uint AppendInternal(uint initial, byte[] input, int offset, int length)
         {
             if (length > 0)
-            {
                 return _proxy.Append(initial, input, offset, length);
-            }
-            else
-                return initial;
+            return initial;
         }
     }
 }

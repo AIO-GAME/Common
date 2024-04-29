@@ -1,5 +1,9 @@
-﻿using UnityEditor.IMGUI.Controls;
+﻿#region
+
+using UnityEditor.IMGUI.Controls;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -27,16 +31,17 @@ namespace AIO.UEditor
     /// 表格视图列元素
     /// </summary>
     /// <typeparam name="T">数据类型</typeparam>
-    public sealed class TableColumn<T> : MultiColumnHeaderState.Column where T : class, new()
+    public sealed class TableColumn<T> : MultiColumnHeaderState.Column
+    where T : class, new()
     {
-        /// <summary>
-        /// 绘制列元素的方法
-        /// </summary>
-        public DrawCellMethod<T> DrawCell;
-
         /// <summary>
         /// 对比列元素的方法
         /// </summary>
         public CompareMethod<T> Compare;
+
+        /// <summary>
+        /// 绘制列元素的方法
+        /// </summary>
+        public DrawCellMethod<T> DrawCell;
     }
 }

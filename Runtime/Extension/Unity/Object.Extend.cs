@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UObject = UnityEngine.Object;
+
+#endregion
 
 namespace AIO.UEngine
 {
@@ -40,7 +44,8 @@ namespace AIO.UEngine
         /// <param name="obj"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static T AsUnityNull<T>(this T obj) where T : UObject
+        public static T AsUnityNull<T>(this T obj)
+        where T : UObject
         {
             // Converts a Unity pseudo-null to a real null, allowing for coalesce operators.
             // e.g.: destroyedObject.AsUnityNull() ?? otherObject
@@ -50,7 +55,8 @@ namespace AIO.UEngine
         /// <summary>
         /// 排除Unity空引用
         /// </summary>
-        public static IEnumerable<T> NotUnityNull<T>(this IEnumerable<T> enumerable) where T : UObject
+        public static IEnumerable<T> NotUnityNull<T>(this IEnumerable<T> enumerable)
+        where T : UObject
         {
             return enumerable.Where(i => i != null);
         }

@@ -4,6 +4,7 @@
   "description": "AIO Unity Common",
   "version": "1.0.40-preview",
   "unity": "2019.4",
+  "type": "library",
   "category": "Runtime",
   "unityRelease": "0f1",
   "license": "MIT",

@@ -1,19 +1,15 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Reflection;
 using UnityEditor;
+
+#endregion
 
 namespace AIO
 {
     public partial class PropertyAccessor
     {
-        /************************************************************************************************************************/
-
-        /// <summary>The accessor for the field which this accessor is nested inside.</summary>
-        public readonly PropertyAccessor Parent;
-
-        /// <summary>The name of the field wrapped by this accessor.</summary>
-        public readonly string Name;
-
         /// <summary>The field wrapped by this accessor.</summary>
         protected readonly FieldInfo Field;
 
@@ -23,20 +19,25 @@ namespace AIO
         /// </summary>
         protected readonly Type FieldElementType;
 
+        /// <summary>The name of the field wrapped by this accessor.</summary>
+        public readonly string Name;
+        /************************************************************************************************************************/
+
+        /// <summary>The accessor for the field which this accessor is nested inside.</summary>
+        public readonly PropertyAccessor Parent;
+
         /************************************************************************************************************************/
 
         /// <summary>[Internal] Creates a new <see cref="PropertyAccessor"/>.</summary>
         internal PropertyAccessor(PropertyAccessor parent, string name, FieldInfo field)
-            : this(parent, name, field, field?.FieldType)
-        {
-        }
+            : this(parent, name, field, field?.FieldType) { }
 
         /// <summary>Creates a new <see cref="PropertyAccessor"/>.</summary>
         protected PropertyAccessor(PropertyAccessor parent, string name, FieldInfo field, Type fieldElementType)
         {
-            Parent = parent;
-            Name = name;
-            Field = field;
+            Parent           = parent;
+            Name             = name;
+            Field            = field;
             FieldElementType = fieldElementType;
         }
 
@@ -122,7 +123,9 @@ namespace AIO
         /// Returns the <see cref="Field"/> if there is one, otherwise calls <see cref="GetField(ref object)"/>.
         /// </summary>
         public FieldInfo GetField(object obj)
-            => Field ?? GetField(ref obj);
+        {
+            return Field ?? GetField(ref obj);
+        }
 
         /************************************************************************************************************************/
 
@@ -131,7 +134,9 @@ namespace AIO
         /// and returns its <see cref="FieldInfo.FieldType"/>.
         /// </summary>
         public virtual Type GetFieldElementType(object obj)
-            => FieldElementType ?? GetField(ref obj)?.FieldType;
+        {
+            return FieldElementType ?? GetField(ref obj)?.FieldType;
+        }
 
         /// <summary>
         /// Gets the value of the from the <see cref="Parent"/> (if there is one), then uses it to get and return
@@ -167,8 +172,7 @@ namespace AIO
         {
             if (Parent != null)
                 return $"{Parent}.{Name}";
-            else
-                return Name;
+            return Name;
         }
 
 #if UNITY_EDITOR

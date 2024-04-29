@@ -2,6 +2,8 @@
 {
     public partial class PrCmd
     {
+        #region Nested type: Shrpubw
+
         /// <summary>
         /// windows 共享文件夹
         /// </summary>
@@ -23,5 +25,7 @@
                 return PrCmd.Create().Input(messages);
             }
         }
+
+        #endregion
     }
 }

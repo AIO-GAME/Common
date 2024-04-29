@@ -1,5 +1,9 @@
+#region
+
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -16,7 +20,7 @@ namespace AIO.UEditor
         public static string Path(
             string label,
             string value,
-            string tips = "Please select the path",
+            string tips        = "Please select the path",
             string defaultName = "", float width = 50)
         {
             EditorGUILayout.BeginHorizontal();
@@ -39,9 +43,9 @@ namespace AIO.UEditor
         /// <param name="width">宽度</param>
         public static string Path(
             GTContent label,
-            string value,
-            string tips = "Please select the path",
-            string defaultName = "", float width = 50)
+            string    value,
+            string    tips        = "Please select the path",
+            string    defaultName = "", float width = 50)
         {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField(label);

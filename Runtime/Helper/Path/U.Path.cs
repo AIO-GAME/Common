@@ -1,10 +1,16 @@
-﻿using System.IO;
+﻿#region
+
+using System.IO;
 using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
     partial class RHelper
     {
+        #region Nested type: Path
+
         /// <summary>
         /// 提供了一些与路径相关的实用方法。
         /// 包含与程序集有关的实用方法和属性的静态类
@@ -13,10 +19,10 @@ namespace AIO
         {
             static Path()
             {
-                Assets = Application.dataPath;
-                Project = Directory.GetParent(Assets)?.FullName.Replace('\\', System.IO.Path.AltDirectorySeparatorChar);
+                Assets              = Application.dataPath;
+                Project             = Directory.GetParent(Assets)?.FullName.Replace('\\', System.IO.Path.AltDirectorySeparatorChar);
                 StreamingAssetsPath = Application.streamingAssetsPath;
-                PersistentDataPath = Application.persistentDataPath;
+                PersistentDataPath  = Application.persistentDataPath;
             }
 
             /// <summary>
@@ -39,5 +45,7 @@ namespace AIO
             /// </summary>
             public static string Project { get; }
         }
+
+        #endregion
     }
 }

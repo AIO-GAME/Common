@@ -9,7 +9,5 @@ namespace AIO
     /// <summary>
     /// Utils Unity Engine
     /// </summary>
-    public static partial class RHelper
-    {
-    }
+    public static partial class RHelper { }
 }

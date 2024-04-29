@@ -1,7 +1,11 @@
-﻿namespace AIO
-{
-    using System.Collections.Generic;
+﻿#region
 
+using System.Collections.Generic;
+
+#endregion
+
+namespace AIO
+{
     /// <summary>
     /// 对象池
     /// </summary>

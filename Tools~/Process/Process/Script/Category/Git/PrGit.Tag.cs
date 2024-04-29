@@ -4,12 +4,18 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrGit
     {
+        #region Nested type: Tag
+
         /// <summary>
         /// <see cref="PrGit"/> <see cref="Tag"/>
         /// </summary>
@@ -24,8 +30,8 @@ namespace AIO
             /// <returns><see cref="IExecutor"/> – 执行器</returns>
             public static IExecutor Add(in string work, in string tagName, in string commit = null)
             {
-                return PrGit.Create(work, "tag -a {0} -m \"{1}\"",
-                    tagName, string.IsNullOrEmpty(commit) ? tagName : commit);
+                return Create(work, "tag -a {0} -m \"{1}\"",
+                              tagName, string.IsNullOrEmpty(commit) ? tagName : commit);
             }
 
             /// <summary>
@@ -37,8 +43,10 @@ namespace AIO
             public static IExecutor Execute(in string work, in string args)
             {
                 if (string.IsNullOrEmpty(args)) throw new ArgumentNullException(nameof(args));
-                return PrGit.Create(work, "tag {0}", args);
+                return Create(work, "tag {0}", args);
             }
         }
+
+        #endregion
     }
 }

@@ -1,8 +1,12 @@
 ﻿#if UNITY_EDITOR
 
+#region
+
 using System;
 using System.Reflection;
 using UnityEditor;
+
+#endregion
 
 namespace AIO
 {
@@ -15,14 +19,18 @@ namespace AIO
         /// Calls <see cref="GetField(object)"/> with the <see cref="SerializedObject.targetObject"/>.
         /// </summary>
         public FieldInfo GetField(SerializedObject serializedObject)
-            => serializedObject != null ? GetField(serializedObject.targetObject) : null;
+        {
+            return serializedObject != null ? GetField(serializedObject.targetObject) : null;
+        }
 
         /// <summary>
         /// Calls <see cref="GetField(SerializedObject)"/> with the
         /// <see cref="SerializedProperty.serializedObject"/>.
         /// </summary>
         public FieldInfo GetField(SerializedProperty serializedProperty)
-            => serializedProperty != null ? GetField(serializedProperty.serializedObject) : null;
+        {
+            return serializedProperty != null ? GetField(serializedProperty.serializedObject) : null;
+        }
 
 
         /// <summary>
@@ -30,28 +38,36 @@ namespace AIO
         /// <see cref="SerializedObject.targetObject"/>.
         /// </summary>
         public Type GetFieldElementType(SerializedObject serializedObject)
-            => serializedObject != null ? GetFieldElementType(serializedObject.targetObject) : null;
+        {
+            return serializedObject != null ? GetFieldElementType(serializedObject.targetObject) : null;
+        }
 
         /// <summary>
         /// Calls <see cref="GetFieldElementType(SerializedObject)"/> with the
         /// <see cref="SerializedProperty.serializedObject"/>.
         /// </summary>
         public Type GetFieldElementType(SerializedProperty serializedProperty)
-            => serializedProperty != null ? GetFieldElementType(serializedProperty.serializedObject) : null;
+        {
+            return serializedProperty != null ? GetFieldElementType(serializedProperty.serializedObject) : null;
+        }
 
         /// <summary>
         /// Gets the value of the from the <see cref="Parent"/> (if there is one), then uses it to get and return
         /// the value of the <see cref="Field"/>.
         /// </summary>
         public object GetValue(SerializedObject serializedObject)
-            => serializedObject != null ? GetValue(serializedObject.targetObject) : null;
+        {
+            return serializedObject != null ? GetValue(serializedObject.targetObject) : null;
+        }
 
         /// <summary>
         /// Gets the value of the from the <see cref="Parent"/> (if there is one), then uses it to get and return
         /// the value of the <see cref="Field"/>.
         /// </summary>
         public object GetValue(SerializedProperty serializedProperty)
-            => serializedProperty != null ? GetValue(serializedProperty.serializedObject.targetObject) : null;
+        {
+            return serializedProperty != null ? GetValue(serializedProperty.serializedObject.targetObject) : null;
+        }
 
         /// <summary>
         /// Gets the value of the from the <see cref="Parent"/> (if there is one), then uses it to set the value

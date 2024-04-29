@@ -4,12 +4,16 @@
 |*|E-Mail:     |*| xinansky99@gmail.com
 |*|============|*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {
@@ -45,8 +49,8 @@ namespace AIO
         /// <param name="metadata">元数据</param>
         /// <returns> Ture:成功 False: 失败 </returns>
         [DebuggerHidden, DebuggerNonUserCode]
-        public static bool UploadDir(string remote, string location,
-            IDictionary<string, string> metadata, Action<string> onProgress)
+        public static bool UploadDir(string                      remote,   string         location,
+                                     IDictionary<string, string> metadata, Action<string> onProgress)
         {
             location = location.Replace('\\', '/').TrimEnd('/');
             if (!Directory.Exists(location)) return false;
@@ -74,12 +78,15 @@ namespace AIO
         [DebuggerHidden, DebuggerNonUserCode]
         public static async Task<bool> UploadDirAsync(string remote, string location, Action<string> onProgress)
         {
+            if (string.IsNullOrEmpty(remote)) throw new ArgumentNullException(nameof(remote));
+            if (string.IsNullOrEmpty(location)) throw new ArgumentNullException(nameof(location));
             location = location.Replace('\\', '/').TrimEnd('/');
             if (!Directory.Exists(location)) return false;
             var messages = string.Format(CMD_STR_UploadDir, location, remote.Replace('\\', '/').TrimEnd('/'));
             var executor = Create(Gsutil, messages);
-            if (onProgress != null) executor.OnProgress((o, s) => { onProgress.Invoke($"Uploading {s}"); });
-            var result = await executor;
+            var result = onProgress != null
+                ? await executor.OnProgress((o, s) => { onProgress.Invoke($"Uploading : {s}"); })
+                : await executor;
             return result.ExitCode == 0;
         }
 
@@ -92,9 +99,14 @@ namespace AIO
         /// <param name="metadata">元数据</param>
         /// <returns> Ture:成功 False: 失败 </returns>
         [DebuggerHidden, DebuggerNonUserCode]
-        public static async Task<bool> UploadDirAsync(string remote, string location,
-            IDictionary<string, string> metadata, Action<string> onProgress)
+        public static async Task<bool> UploadDirAsync(
+            string                      remote,
+            string                      location,
+            IDictionary<string, string> metadata,
+            Action<string>              onProgress)
         {
+            if (string.IsNullOrEmpty(remote)) throw new ArgumentNullException(nameof(remote));
+            if (string.IsNullOrEmpty(location)) throw new ArgumentNullException(nameof(location));
             location = location.Replace('\\', '/').TrimEnd('/');
             if (!Directory.Exists(location)) return false;
             var messages = new StringBuilder();
@@ -106,8 +118,9 @@ namespace AIO
 
             messages.AppendFormat(CMD_STR_UploadDir, location, remote.Replace('\\', '/').TrimEnd('/'));
             var executor = Create(Gsutil, messages.ToString());
-            if (onProgress != null) executor.OnProgress((o, s) => { onProgress.Invoke($"Uploading {s}"); });
-            var result = await executor;
+            var result = onProgress != null
+                ? await executor.OnProgress((o, s) => { onProgress.Invoke($"Uploading : {s}"); })
+                : await executor;
             return result.ExitCode == 0;
         }
 
@@ -120,8 +133,11 @@ namespace AIO
         /// <param name="value">元数据value</param>
         /// <returns> Ture:成功 False: 失败 </returns>
         [DebuggerHidden, DebuggerNonUserCode]
-        public static Task<bool> UploadDirAsync(string remote, string location,
-            string key, string value)
+        public static Task<bool> UploadDirAsync(
+            string remote,
+            string location,
+            string key,
+            string value)
         {
             if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(value))
                 return UploadDirAsync(remote, location, Console.WriteLine);
@@ -139,8 +155,12 @@ namespace AIO
         /// <param name="value">元数据value</param>
         /// <returns> Ture:成功 False: 失败 </returns>
         [DebuggerHidden, DebuggerNonUserCode]
-        public static Task<bool> UploadDirAsync(string remote, string location,
-            string key, string value, Action<string> onProgress)
+        public static Task<bool> UploadDirAsync(
+            string         remote,
+            string         location,
+            string         key,
+            string         value,
+            Action<string> onProgress)
         {
             if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(value))
                 return UploadDirAsync(remote, location, Console.WriteLine);
@@ -156,7 +176,9 @@ namespace AIO
         /// <param name="metadata">元数据</param>
         /// <returns> Ture:成功 False: 失败 </returns>
         [DebuggerHidden, DebuggerNonUserCode]
-        public static Task<bool> UploadDirAsync(string remote, string location,
+        public static Task<bool> UploadDirAsync(
+            string                      remote,
+            string                      location,
             IDictionary<string, string> metadata)
         {
             if (metadata is null || metadata.Count == 0)
@@ -185,8 +207,11 @@ namespace AIO
         /// <param name="value">元数据value</param>
         /// <returns> Ture:成功 False: 失败 </returns>
         [DebuggerHidden, DebuggerNonUserCode]
-        public static bool UploadDir(string remote, string location,
-            string key, string value)
+        public static bool UploadDir(
+            string remote,
+            string location,
+            string key,
+            string value)
         {
             if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(value))
                 return UploadDir(remote, location, Console.WriteLine);
@@ -204,8 +229,12 @@ namespace AIO
         /// <param name="value">元数据value</param>
         /// <returns> Ture:成功 False: 失败 </returns>
         [DebuggerHidden, DebuggerNonUserCode]
-        public static bool UploadDir(string remote, string location,
-            string key, string value, Action<string> onProgress)
+        public static bool UploadDir(
+            string         remote,
+            string         location,
+            string         key,
+            string         value,
+            Action<string> onProgress)
         {
             if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(value))
                 return UploadDir(remote, location, Console.WriteLine);
@@ -221,7 +250,9 @@ namespace AIO
         /// <param name="metadata">元数据</param>
         /// <returns> Ture:成功 False: 失败 </returns>
         [DebuggerHidden, DebuggerNonUserCode]
-        public static bool UploadDir(string remote, string location,
+        public static bool UploadDir(
+            string                      remote,
+            string                      location,
             IDictionary<string, string> metadata)
         {
             if (metadata is null || metadata.Count == 0)

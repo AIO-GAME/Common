@@ -1,13 +1,16 @@
-﻿using System;
-using System.Runtime.CompilerServices;
+﻿#region
+
+using System;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
     public static partial class ExtendString
     {
         /// <summary>
-        /// 获取字节长度
+        ///     获取字节长度
         /// </summary>
         public static int GetBytesLength(this string str)
         {
@@ -15,13 +18,13 @@ namespace AIO
         }
 
         /// <summary>
-        /// 获取闭合字符段
+        ///     获取闭合字符段
         /// </summary>
         public static string GetOcclusion(this string str, string label, char runit = '{', char lunit = '}')
         {
             var SIndex = str.LastIndexOf(label, StringComparison.OrdinalIgnoreCase);
-            var State = 0; //状态开关 表达闭合
-            var Index = 0; //下标
+            var State = 0;    //状态开关 表达闭合
+            var Index = 0;    //下标
             var Falg = false; //标志开关
             var Passages = str.Substring(SIndex, str.Length - SIndex);
             foreach (var item in Passages)
@@ -44,7 +47,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 获取闭合字符段
+        ///     获取闭合字符段
         /// </summary>
         public static string SetOcclusion(this string str, string content, char runit = '{', char lunit = '}')
         {

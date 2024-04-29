@@ -1,13 +1,16 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.IO;
-using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
     public static partial class ExtendString
     {
         /// <summary>
-        /// 获取文件名 HasExtension = false 没有扩展名
+        ///     获取文件名 HasExtension = false 没有扩展名
         /// </summary>
         public static string PathGetFileName(this string filePath, in bool HasExtension = true)
         {
@@ -16,7 +19,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 获取路径
+        ///     获取路径
         /// </summary>
         public static string PathCombine(this string str1, params string[] str2)
         {
@@ -27,7 +30,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 获取路径
+        ///     获取路径
         /// </summary>
         public static string PathCombine(this string str1, string str2)
         {
@@ -35,7 +38,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 获取路径
+        ///     获取路径
         /// </summary>
         public static string PathCombine(this string str1, string str2, string str3)
         {
@@ -43,7 +46,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 获取路径
+        ///     获取路径
         /// </summary>
         public static string PathCombine(this string str1, string str2, string str3, string str4)
         {
@@ -51,7 +54,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 获取文件扩展名
+        ///     获取文件扩展名
         /// </summary>
         public static string PathGetExtension(this string filePath)
         {
@@ -59,7 +62,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 修改文件扩展名
+        ///     修改文件扩展名
         /// </summary>
         public static string PathChangeExtension(this string filePath, string extension)
         {
@@ -67,7 +70,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 一个新的规范化字符串，其文本值与此字符串相同，但其二进制表示形式符合范式
+        ///     一个新的规范化字符串，其文本值与此字符串相同，但其二进制表示形式符合范式
         /// </summary>
         public static string PathNormalize(this string path)
         {
@@ -76,7 +79,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 获取根目录 I:\
+        ///     获取根目录 I:\
         /// </summary>
         public static string PathGetRoot(this string filePath)
         {
@@ -84,7 +87,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 获取上一级目录
+        ///     获取上一级目录
         /// </summary>
         public static string PathGetLastFloder(this string filePath)
         {

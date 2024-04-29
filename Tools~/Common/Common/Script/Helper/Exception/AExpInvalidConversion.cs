@@ -1,4 +1,8 @@
-﻿using System;
+﻿#region
+
+using System;
+
+#endregion
 
 namespace AIO
 {
@@ -10,23 +14,17 @@ namespace AIO
         /// <summary>
         /// 构造函数
         /// </summary>
-        public AExpInvalidConversion()
-        {
-        }
+        public AExpInvalidConversion() { }
 
         /// <summary>
         /// 构造函数
         /// </summary>
-        public AExpInvalidConversion(in string message) : base(message)
-        {
-        }
+        public AExpInvalidConversion(in string message) : base(message) { }
 
         /// <summary>
         /// 构造函数
         /// </summary>
         public AExpInvalidConversion(in string message, in Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
     }
 }

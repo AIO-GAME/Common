@@ -4,15 +4,21 @@
 
 |||✩ - - - - - |*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
+#endregion
+
 namespace AIO
 {
     public partial class PrPlatform
     {
+        #region Nested type: Git
+
         public partial class Git
         {
             /// <summary>
@@ -21,10 +27,10 @@ namespace AIO
             private static List<string> GetValidUrl(string target, IEnumerable<string> urls)
             {
                 return (from item in urls
-                    let name = Path.GetFileName(item).Replace(".git", "").Replace(".ssh", "")
-                    let path = Path.Combine(target, name)
-                    where !Directory.Exists(path)
-                    select item).ToList();
+                        let name = Path.GetFileName(item).Replace(".git", "").Replace(".ssh", "")
+                        let path = Path.Combine(target, name)
+                        where !Directory.Exists(path)
+                        select item).ToList();
             }
 
 
@@ -68,13 +74,15 @@ namespace AIO
                     case PlatformID.Win32S:
                     case PlatformID.Win32Windows:
                     case PlatformID.WinCE:
-                        return PrWin.Git.Clone.Execute(target, GetValidUrl(target, new string[] { url }), quit);
+                        return PrWin.Git.Clone.Execute(target, GetValidUrl(target, new[] { url }), quit);
                     case PlatformID.MacOSX:
                     case PlatformID.Unix:
-                        return PrMac.Git.Clone.Execute(target, GetValidUrl(target, new string[] { url }), quit);
+                        return PrMac.Git.Clone.Execute(target, GetValidUrl(target, new[] { url }), quit);
                     default: throw new NotImplementedException();
                 }
             }
         }
+
+        #endregion
     }
 }

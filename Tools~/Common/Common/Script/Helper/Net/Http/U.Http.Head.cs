@@ -1,11 +1,17 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Text;
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: HTTP
+
         public partial class HTTP
         {
             /// <summary>
@@ -17,8 +23,8 @@ namespace AIO
             /// <param name="cookie">cookie</param>
             /// <exception cref="AExpNetGetResponseStream">异常</exception>
             /// <returns>内容</returns>
-            public static string Head(string remoteUrl,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public static string Head(string   remoteUrl,
+                                      Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
             {
                 return AutoCommonRequest(remoteUrl, HEAD, Array.Empty<byte>(), encoding, timeout, cookie);
             }
@@ -33,8 +39,8 @@ namespace AIO
             /// <param name="cookie">cookie</param>
             /// <exception cref="AExpNetGetResponseStream">异常</exception>
             /// <returns>内容</returns>
-            public static string Head(string remoteUrl, byte[] data,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public static string Head(string   remoteUrl,       byte[] data,
+                                      Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
             {
                 return AutoCommonRequest(remoteUrl, HEAD, data, encoding, timeout, cookie);
             }
@@ -49,8 +55,8 @@ namespace AIO
             /// <param name="cookie">cookie</param>
             /// <exception cref="AExpNetGetResponseStream">异常</exception>
             /// <returns>内容</returns>
-            public static string Head(string remoteUrl, string data,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public static string Head(string   remoteUrl,       string data,
+                                      Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
             {
                 return AutoCommonRequest(remoteUrl, HEAD, data, encoding, timeout, cookie);
             }
@@ -64,8 +70,8 @@ namespace AIO
             /// <param name="cookie">cookie</param>
             /// <exception cref="AExpNetGetResponseStream">异常</exception>
             /// <returns>内容</returns>
-            public static Task<string> HeadAsync(string remoteUrl,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public static Task<string> HeadAsync(string   remoteUrl,
+                                                 Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
             {
                 return AutoCommonRequestAsync(remoteUrl, HEAD, Array.Empty<byte>(), encoding, timeout, cookie);
             }
@@ -80,8 +86,8 @@ namespace AIO
             /// <param name="cookie">cookie</param>
             /// <exception cref="AExpNetGetResponseStream">异常</exception>
             /// <returns>内容</returns>
-            public static Task<string> HeadAsync(string remoteUrl, byte[] data,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public static Task<string> HeadAsync(string   remoteUrl,       byte[] data,
+                                                 Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
             {
                 return AutoCommonRequestAsync(remoteUrl, HEAD, data, encoding, timeout, cookie);
             }
@@ -96,11 +102,13 @@ namespace AIO
             /// <param name="cookie">cookie</param>
             /// <exception cref="AExpNetGetResponseStream">异常</exception>
             /// <returns>内容</returns>
-            public static Task<string> HeadAsync(string remoteUrl, string data,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public static Task<string> HeadAsync(string   remoteUrl,       string data,
+                                                 Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
             {
                 return AutoCommonRequestAsync(remoteUrl, HEAD, data, encoding, timeout, cookie);
             }
         }
+
+        #endregion
     }
 }

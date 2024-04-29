@@ -1,4 +1,8 @@
+#region
+
 using System;
+
+#endregion
 
 namespace AIO
 {
@@ -7,7 +11,8 @@ namespace AIO
         /// <summary>
         /// 验证数据 报错条件 value == null
         /// </summary>
-        public void IsNotNull<T>(in T? value) where T : struct
+        public void IsNotNull<T>(in T? value)
+        where T : struct
         {
             if (!Ensure.IsActive) return;
 

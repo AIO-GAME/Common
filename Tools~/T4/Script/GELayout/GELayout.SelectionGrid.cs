@@ -1,7 +1,11 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #pragma warning disable CS0109 // 
 
+#region
+
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -21,32 +25,32 @@ namespace AIO
             };
 
             foreach (var label in new List<FunctionParam>
-                     {
-                         new FunctionParam("GUIContent[]", "content", "content"),
-                         new FunctionParam("IEnumerable<GUIContent>", "content", "GTContent.Temp(content)"),
+            {
+                new FunctionParam("GUIContent[]", "content", "content"),
+                new FunctionParam("IEnumerable<GUIContent>", "content", "GTContent.Temp(content)"),
 
-                         new FunctionParam("string[]", "content", "content"),
-                         new FunctionParam("ICollection<string>", "content", "GTContent.Temp(content)"),
+                new FunctionParam("string[]", "content", "content"),
+                new FunctionParam("ICollection<string>", "content", "GTContent.Temp(content)"),
 
-                         new FunctionParam("Texture[]", "content", "GTContent.Temp(content)"),
-                         new FunctionParam("ICollection<Texture>", "content", "GTContent.Temp(content)"),
-                     })
+                new FunctionParam("Texture[]", "content", "GTContent.Temp(content)"),
+                new FunctionParam("ICollection<Texture>", "content", "GTContent.Temp(content)")
+            })
             {
                 label.Comments = "An array of text, image and tooltips for the button.";
-                var paramsList = new List<FunctionParam[]>()
+                var paramsList = new List<FunctionParam[]>
                 {
-                    new FunctionParam[] { selected, label, xCount, Options, },
-                    new FunctionParam[] { selected, label, xCount, Style, Options, },
+                    new[] { selected, label, xCount, Options },
+                    new[] { selected, label, xCount, Style, Options }
                 };
                 foreach (var param in paramsList)
                 {
                     var chunk = new FunctionChunk
                     {
-                        State = TChunkState.Static,
-                        Comments = "Make a Selection Grid",
-                        Name = "Selection",
-                        Params = param,
-                        ReturnType = "int",
+                        State      = TChunkState.Static,
+                        Comments   = "Make a Selection Grid",
+                        Name       = "Selection",
+                        Params     = param,
+                        ReturnType = "int"
                     };
                     chunk.Content = $"return GUILayout.SelectionGrid({chunk.GetParamValues()});";
                     chunks.Add(chunk);

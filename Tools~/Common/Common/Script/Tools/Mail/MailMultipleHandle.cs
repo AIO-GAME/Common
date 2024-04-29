@@ -1,11 +1,10 @@
-﻿/*|==========|*|
-|*|Author:   |*| -> XINAN
-|*|Date:     |*| -> 2023-05-19
-|*|==========|*/
+﻿#region
 
 using System;
 using System.Net;
 using System.Net.Mail;
+
+#endregion
 
 namespace AIO
 {
@@ -23,18 +22,18 @@ namespace AIO
         {
             Addresser = new MailAddress(Info.Form, Info.FormDisplayName, Info.Encoding);
 
-            SmtpClient = new SmtpClient();
-            SmtpClient.Host = Info.ClientHost; //地址
-            SmtpClient.EnableSsl = Info.ClientEnableSsl; //是否启用SSL
-            SmtpClient.Timeout = Info.ClientTimeout; //超时
-            SmtpClient.DeliveryMethod = SmtpDeliveryMethod.Network; //连接方式
-            SmtpClient.UseDefaultCredentials = false; //默认凭证
-            SmtpClient.Credentials = new NetworkCredential(Addresser.Address, Info.Passwrod); //创建网络凭证
+            SmtpClient                       = new SmtpClient();
+            SmtpClient.Host                  = Info.ClientHost;                                         //地址
+            SmtpClient.EnableSsl             = Info.ClientEnableSsl;                                    //是否启用SSL
+            SmtpClient.Timeout               = Info.ClientTimeout;                                      //超时
+            SmtpClient.DeliveryMethod        = SmtpDeliveryMethod.Network;                              //连接方式
+            SmtpClient.UseDefaultCredentials = false;                                                   //默认凭证
+            SmtpClient.Credentials           = new NetworkCredential(Addresser.Address, Info.Passwrod); //创建网络凭证
 
-            MailMessage = new MailMessage();
-            MailMessage.From = Addresser; //发件人
-            MailMessage.IsBodyHtml = true; //是否支持内容为HTML
-            MailMessage.Priority = MailPriority.High; //优先级
+            MailMessage            = new MailMessage();
+            MailMessage.From       = Addresser;         //发件人
+            MailMessage.IsBodyHtml = true;              //是否支持内容为HTML
+            MailMessage.Priority   = MailPriority.High; //优先级
 
             Subject = subject;
         }
@@ -45,12 +44,8 @@ namespace AIO
         public void AddRecipients(params MailAddress[] Recipients)
         {
             foreach (var item in Recipients)
-            {
                 if (!MailMessage.To.Contains(item))
-                {
                     MailMessage.To.Add(item);
-                }
-            }
         }
 
         /// <summary>
@@ -59,12 +54,8 @@ namespace AIO
         public void AddRecipients(params string[] Recipients)
         {
             foreach (var item in Recipients)
-            {
                 if (!MailMessage.To.Contains(new MailAddress(item)))
-                {
                     MailMessage.To.Add(item);
-                }
-            }
         }
 
         /// <summary>
@@ -73,12 +64,8 @@ namespace AIO
         public void RemoveRecipients(params MailAddress[] Recipients)
         {
             foreach (var item in Recipients)
-            {
                 if (MailMessage.To.Contains(item))
-                {
                     MailMessage.To.Remove(item);
-                }
-            }
         }
 
         /// <summary>
@@ -89,10 +76,7 @@ namespace AIO
             foreach (var item in Recipients)
             {
                 var t = new MailAddress(item);
-                if (MailMessage.To.Contains(t))
-                {
-                    MailMessage.To.Remove(t); //收件人
-                }
+                if (MailMessage.To.Contains(t)) MailMessage.To.Remove(t); //收件人
             }
         }
 
@@ -134,7 +118,7 @@ namespace AIO
             }
 
             MailMessage.Subject = Label; //标题
-            MailMessage.Body = Body; //内容
+            MailMessage.Body    = Body;  //内容
             SendMail(CallBack);
         }
     }

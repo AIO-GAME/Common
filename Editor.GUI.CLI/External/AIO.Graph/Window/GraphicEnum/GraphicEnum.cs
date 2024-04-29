@@ -1,9 +1,13 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -15,6 +19,22 @@ namespace AIO.UEditor
     {
         private static Dictionary<int, EnumInfo> Data;
 
+        private object EnumValue;
+
+        private EnumInfo Info;
+
+        private GenericMenu menu;
+
+        /// <summary>
+        /// 单项选择
+        /// </summary>
+        public bool MultipleChoice;
+
+        /// <summary>
+        /// 显示名称
+        /// </summary>
+        public bool ShowName;
+
         static GraphicEnum()
         {
             Data = new Dictionary<int, EnumInfo>();
@@ -23,7 +43,8 @@ namespace AIO.UEditor
         /// <summary>
         /// 获取描述信息
         /// </summary>
-        public static Dictionary<T, string> GetDescription<T>() where T : struct, Enum
+        public static Dictionary<T, string> GetDescription<T>()
+            where T : struct, Enum
         {
             var type = typeof(T);
             var DescriptionDic = new Dictionary<T, string>();
@@ -75,26 +96,11 @@ namespace AIO.UEditor
             return Enum.Parse(type, EnumValue.ToString());
         }
 
-        private EnumInfo Info;
-
-        /// <summary>
-        /// 显示名称
-        /// </summary>
-        public bool ShowName;
-
-        /// <summary>
-        /// 单项选择
-        /// </summary>
-        public bool MultipleChoice;
-
-        private GenericMenu menu;
-
-        private object EnumValue;
-
         /// <summary>
         /// 更新
         /// </summary>
-        public GraphicEnum Update<T>(in T type) where T : struct, Enum
+        public GraphicEnum Update<T>(in T type)
+            where T : struct, Enum
         {
             return Update(type, false, false);
         }
@@ -102,21 +108,21 @@ namespace AIO.UEditor
         /// <summary>
         /// 更新
         /// </summary>
-        public GraphicEnum Update<T>(in T type, in bool showName, in bool multipleChoice) where T : struct, Enum
+        public GraphicEnum Update<T>(in T type, in bool showName, in bool multipleChoice)
+            where T : struct, Enum
         {
             ShowName = showName;
             MultipleChoice = multipleChoice;
             EnumValue = type;
             Info = EnumInfo.Create<T>();
-            menu = new GenericMenu();
-            menu.allowDuplicateNames = false;
-            foreach (var description in Info.DescriptionDic)
+            menu = new GenericMenu
             {
-                menu.AddItem(
-                    new GUIContent(description.Value),
+                allowDuplicateNames = false
+            };
+            foreach (var description in Info.DescriptionDic)
+                menu.AddItem(new GUIContent(description.Value),
                     EnumValue.GetHashCode() == description.Key.GetHashCode(),
                     () => EnumValue = description.Key);
-            }
 
             return this;
         }
@@ -124,7 +130,8 @@ namespace AIO.UEditor
         /// <summary>
         /// 更新
         /// </summary>
-        public GraphicEnum Update<T>(in T type, in bool showName) where T : struct, Enum
+        public GraphicEnum Update<T>(in T type, in bool showName)
+            where T : struct, Enum
         {
             return Update(type, showName, false);
         }

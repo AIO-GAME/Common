@@ -25,6 +25,6 @@ namespace AIO
         /// <summary>
         /// 
         /// </summary>
-        Out,
+        Out
     }
 }

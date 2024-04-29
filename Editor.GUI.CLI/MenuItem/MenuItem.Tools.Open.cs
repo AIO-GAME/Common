@@ -1,11 +1,17 @@
-﻿using System.IO;
+﻿#region
+
+using System.IO;
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
     public static partial class MenuItem_Tools
     {
+        private const string Title = "AIO/Tools/Open/Editor Application/";
+
         [MenuItem("AIO/Home Page", false, -100)]
         public static void OpenHome()
         {
@@ -42,8 +48,6 @@ namespace AIO.UEditor
             await PrPlatform.Open.Path(Application.temporaryCachePath);
         }
 
-        private const string Title = "AIO/Tools/Open/Editor Application/";
-
         [MenuItem(Title + "Application Contents Path")]
         public static async void OpenApplicationContentsPath()
         {
@@ -54,7 +58,7 @@ namespace AIO.UEditor
         public static async void OpenTools()
         {
             var path = Path.Combine(EditorApplication.applicationContentsPath,
-                "Tools"
+                                    "Tools"
             );
             await PrPlatform.Open.Path(path);
         }
@@ -63,7 +67,7 @@ namespace AIO.UEditor
         public static async void OpenManagedDll()
         {
             var path = Path.Combine(EditorApplication.applicationContentsPath,
-                "Managed"
+                                    "Managed"
             );
             await PrPlatform.Open.Path(path);
         }
@@ -72,7 +76,7 @@ namespace AIO.UEditor
         public static async void OpenCGIncludes()
         {
             var path = Path.Combine(EditorApplication.applicationContentsPath,
-                "CGIncludes"
+                                    "CGIncludes"
             );
             await PrPlatform.Open.Path(path);
         }
@@ -83,7 +87,7 @@ namespace AIO.UEditor
         public static async void Openil2cpp_cpp()
         {
             var path = Path.Combine(EditorApplication.applicationContentsPath,
-                "il2cpp", "libil2cpp"
+                                    "il2cpp", "libil2cpp"
             );
             await PrPlatform.Open.Path(path);
         }
@@ -92,7 +96,7 @@ namespace AIO.UEditor
         public static async void Openil2cpp_mono()
         {
             var path = Path.Combine(EditorApplication.applicationContentsPath,
-                "il2cpp", "libmono"
+                                    "il2cpp", "libmono"
             );
             await PrPlatform.Open.Path(path);
         }
@@ -101,7 +105,7 @@ namespace AIO.UEditor
         public static async void Openil2cpp_build()
         {
             var path = Path.Combine(EditorApplication.applicationContentsPath,
-                "il2cpp", "build"
+                                    "il2cpp", "build"
             );
             await PrPlatform.Open.Path(path);
         }
@@ -110,7 +114,7 @@ namespace AIO.UEditor
         public static async void Openil2cpp_external()
         {
             var path = Path.Combine(EditorApplication.applicationContentsPath,
-                "il2cpp", "external"
+                                    "il2cpp", "external"
             );
             await PrPlatform.Open.Path(path);
         }
@@ -123,7 +127,7 @@ namespace AIO.UEditor
         public static async void OpenApplicationPathPlaybackEnginesAndroid()
         {
             var path = Path.Combine(EditorApplication.applicationContentsPath,
-                "PlaybackEngines", "AndroidPlayer"
+                                    "PlaybackEngines", "AndroidPlayer"
             );
             await PrPlatform.Open.Path(path);
         }
@@ -132,7 +136,7 @@ namespace AIO.UEditor
         public static async void OpenApplicationPathPlaybackEnginesIOS()
         {
             var path = Path.Combine(EditorApplication.applicationContentsPath,
-                "PlaybackEngines", "iOSSupport"
+                                    "PlaybackEngines", "iOSSupport"
             );
             await PrPlatform.Open.Path(path);
         }
@@ -141,7 +145,7 @@ namespace AIO.UEditor
         public static async void OpenApplicationPathPlaybackEnginesWebGL()
         {
             var path = Path.Combine(EditorApplication.applicationContentsPath,
-                "PlaybackEngines", "WebGLSupport"
+                                    "PlaybackEngines", "WebGLSupport"
             );
             await PrPlatform.Open.Path(path);
         }
@@ -150,7 +154,7 @@ namespace AIO.UEditor
         public static async void OpenApplicationPathPlaybackEnginesWindows()
         {
             var path = Path.Combine(EditorApplication.applicationContentsPath,
-                "PlaybackEngines", "windowsstandalonesupport"
+                                    "PlaybackEngines", "windowsstandalonesupport"
             );
             await PrPlatform.Open.Path(path);
         }
@@ -160,31 +164,58 @@ namespace AIO.UEditor
 #if UNITY_EDITOR_WIN
 
         [MenuItem("AIO/Win/" + nameof(PrWin.Open.Calc) + " - 计算器")]
-        public static async void OpenCalc() => await PrWin.Open.Calc();
+        public static async void OpenCalc()
+        {
+            await PrWin.Open.Calc();
+        }
 
         [MenuItem("AIO/Win/" + nameof(PrWin.Open.Devmgmt) + " - 设备管理器")]
-        public static async void OpenDevmgmt() => await PrWin.Open.Devmgmt();
+        public static async void OpenDevmgmt()
+        {
+            await PrWin.Open.Devmgmt();
+        }
 
         [MenuItem("AIO/Win/" + nameof(PrWin.Open.Notepad) + " - 记事本")]
-        public static async void OpenNotepad() => await PrWin.Open.Notepad();
+        public static async void OpenNotepad()
+        {
+            await PrWin.Open.Notepad();
+        }
 
         [MenuItem("AIO/Win/" + nameof(PrWin.Open.Mspaint) + " - 画图")]
-        public static async void OpenMspaint() => await PrWin.Open.Mspaint();
+        public static async void OpenMspaint()
+        {
+            await PrWin.Open.Mspaint();
+        }
 
         [MenuItem("AIO/Win/" + nameof(PrWin.Open.Mstsc) + " - 远程桌面")]
-        public static async void OpenMstsc() => await PrWin.Open.Mstsc();
+        public static async void OpenMstsc()
+        {
+            await PrWin.Open.Mstsc();
+        }
 
         [MenuItem("AIO/Win/" + nameof(PrWin.Open.Explorer) + " - 资源管理器")]
-        public static async void OpenExplorer() => await PrWin.Open.Explorer();
+        public static async void OpenExplorer()
+        {
+            await PrWin.Open.Explorer();
+        }
 
         [MenuItem("AIO/Win/" + nameof(PrWin.Open.Diskmgmt) + " - 磁盘管理")]
-        public static async void OpenDiskmgmt() => await PrWin.Open.Diskmgmt();
+        public static async void OpenDiskmgmt()
+        {
+            await PrWin.Open.Diskmgmt();
+        }
 
         [MenuItem("AIO/Win/" + nameof(PrWin.Open.Fsmgmt) + " - 共享文件夹管理器")]
-        public static async void OpenFsmgmt() => await PrWin.Open.Fsmgmt();
+        public static async void OpenFsmgmt()
+        {
+            await PrWin.Open.Fsmgmt();
+        }
 
         [MenuItem("AIO/Win/" + nameof(PrWin.Open.Lusrmgr) + " - 本地用户和组")]
-        public static async void OpenLusrmgr() => await PrWin.Open.Lusrmgr();
+        public static async void OpenLusrmgr()
+        {
+            await PrWin.Open.Lusrmgr();
+        }
 
         // [MenuItem("AIO/Win/" + nameof(PrWin.Open.Perfmon) + " - 性能监视器")]
         // public static async void OpenPerfmon() => await PrWin.Open.Perfmon();

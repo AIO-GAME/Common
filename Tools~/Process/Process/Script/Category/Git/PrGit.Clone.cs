@@ -4,12 +4,18 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrGit
     {
+        #region Nested type: Clone
+
         /// <summary>
         /// <see cref="PrGit"/> <see cref="Clone"/> 克隆
         /// </summary>
@@ -30,7 +36,7 @@ namespace AIO
                     throw new ArgumentNullException(string.Concat("branch not a valid string : ", branch));
 
                 return Create(work,
-                    $"clone --recursive --shallow-submodules --progress --verbose --depth 1 -b {branch} \"{url.TrimEnd('/', '\\')}\"");
+                              $"clone --recursive --shallow-submodules --progress --verbose --depth 1 -b {branch} \"{url.TrimEnd('/', '\\')}\"");
             }
 
             /// <summary>
@@ -51,7 +57,7 @@ namespace AIO
                     throw new ArgumentNullException(string.Concat("alias not a valid dir : ", alias));
 
                 return Create(work,
-                    $"clone --recursive --shallow-submodules --progress --verbose --depth 1 -b {branch} \"{url.TrimEnd('/', '\\')}\" {alias}");
+                              $"clone --recursive --shallow-submodules --progress --verbose --depth 1 -b {branch} \"{url.TrimEnd('/', '\\')}\" {alias}");
             }
 
             /// <summary>
@@ -70,7 +76,7 @@ namespace AIO
                     throw new ArgumentNullException(string.Concat("Url not a valid branch : ", tag));
 
                 return Create(work,
-                    $"clone --recursive --shallow-submodules --progress --verbose --depth 1 --branch {tag} \"{url.TrimEnd('/', '\\')}\" {alias}");
+                              $"clone --recursive --shallow-submodules --progress --verbose --depth 1 --branch {tag} \"{url.TrimEnd('/', '\\')}\" {alias}");
             }
 
             /// <summary>
@@ -88,7 +94,7 @@ namespace AIO
                     throw new ArgumentNullException(string.Concat("Url not a valid branch : ", tag));
 
                 return Create(work,
-                    $"clone --recursive --shallow-submodules --progress --verbose --depth 1 --branch {tag} \"{url.TrimEnd('/', '\\')}\"");
+                              $"clone --recursive --shallow-submodules --progress --verbose --depth 1 --branch {tag} \"{url.TrimEnd('/', '\\')}\"");
             }
 
             /// <summary>
@@ -102,7 +108,7 @@ namespace AIO
                 if (string.IsNullOrEmpty(url))
                     throw new ArgumentException(string.Concat("Url not a valid address : ", url));
                 return Create(work,
-                    $"clone --recursive --shallow-submodules --progress --verbose --depth 1 \"{url.TrimEnd('/', '\\')}\"");
+                              $"clone --recursive --shallow-submodules --progress --verbose --depth 1 \"{url.TrimEnd('/', '\\')}\"");
             }
 
             /// <summary>
@@ -117,5 +123,7 @@ namespace AIO
                 return Create(work, "clone {0}", args);
             }
         }
+
+        #endregion
     }
 }

@@ -1,7 +1,11 @@
-﻿#if UNITY_EDITOR
+﻿#region
+
+using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
 #endif
-using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
@@ -18,25 +22,27 @@ namespace AIO
         /// <summary> [Editor-Only]
         /// Determines how many lines tall the `property` should be.
         /// </summary>
-        protected virtual int GetLineCount(SerializedProperty property, GUIContent label) =>
-            EditorGUIUtility.wideMode ? 1 : 2;
+        protected virtual int GetLineCount(SerializedProperty property, GUIContent label)
+        {
+            return EditorGUIUtility.wideMode ? 1 : 2;
+        }
 
         /// <summary>[Editor-Only]
         /// Draws this attribute's fields for the `property`.
         /// </summary>
         public abstract void OnGUI(Rect area, SerializedProperty property, GUIContent label);
 
-        protected void DoOptionalBeforeGUI(bool isOptional, Rect area, out Rect toggleArea, out bool guiWasEnabled,
-            out float previousLabelWidth)
+        protected void DoOptionalBeforeGUI(bool      isOptional, Rect area, out Rect toggleArea, out bool guiWasEnabled,
+                                           out float previousLabelWidth)
         {
-            toggleArea = area;
-            guiWasEnabled = GUI.enabled;
+            toggleArea         = area;
+            guiWasEnabled      = GUI.enabled;
             previousLabelWidth = EditorGUIUtility.labelWidth;
             if (!isOptional) return;
 
             toggleArea.x += previousLabelWidth;
 
-            toggleArea.width = UnitGUI.ToggleWidth;
+            toggleArea.width            =  UnitGUI.ToggleWidth;
             EditorGUIUtility.labelWidth += toggleArea.width;
 
             EditorGUIUtility.AddCursorRect(toggleArea, MouseCursor.Arrow);
@@ -45,7 +51,6 @@ namespace AIO
             // get priority for input events, so we disable the other controls during those events in its area.
             var currentEvent = Event.current;
             if (guiWasEnabled && toggleArea.Contains(currentEvent.mousePosition))
-            {
                 switch (currentEvent.type)
                 {
                     case EventType.Repaint:
@@ -56,7 +61,6 @@ namespace AIO
                         GUI.enabled = false;
                         break;
                 }
-            }
         }
 
         #region Do Special Field
@@ -69,8 +73,8 @@ namespace AIO
         /// This method treats most <see cref="EventType"/>s normally, but for <see cref="EventType.Repaint"/> it
         /// instead draws a text field with the converted string.
         /// </remarks>
-        protected static double DoSpecialField(Rect area, GUIContent label, double value,
-            CompactUnitConversionCache toString)
+        protected static double DoSpecialField(Rect                       area, GUIContent label, double value,
+                                               CompactUnitConversionCache toString)
         {
             if (label != null && !string.IsNullOrEmpty(label.text))
             {
@@ -178,8 +182,8 @@ namespace AIO
         /// This method treats most <see cref="EventType"/>s normally, but for <see cref="EventType.Repaint"/> it
         /// instead draws a text field with the converted string.
         /// </remarks>
-        public static float DoSpecialField(Rect area, GUIContent label, float value,
-            CompactUnitConversionCache toString)
+        public static float DoSpecialField(Rect                       area, GUIContent label, float value,
+                                           CompactUnitConversionCache toString)
         {
             if (label != null && !string.IsNullOrEmpty(label.text))
             {

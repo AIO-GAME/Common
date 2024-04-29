@@ -4,50 +4,27 @@
 
 |||✩ - - - - - |*/
 
+#region
+
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using Debug = UnityEngine.Debug;
 
+#endregion
+
 namespace AIO.UEditor
 {
     public static partial class EHelper
     {
+        #region Nested type: Program
+
         /// <summary>
         /// 程序设置
         /// </summary>
         public class Program
         {
-#if UNITY_EDITOR_WIN
-
-            #region WIN32API
-
-            private delegate bool EnumWindowsCallBack(IntPtr hwnd, IntPtr lParam);
-
-            [DllImport("user32", CharSet = CharSet.Unicode)]
-            private static extern bool SetWindowTextW(IntPtr hwnd, string title);
-
-            //回调指针，值
-            [DllImport("user32")]
-            private static extern int EnumWindows(EnumWindowsCallBack lpEnumFunc, IntPtr lParam);
-
-            [DllImport("user32")]
-            private static extern uint GetWindowThreadProcessId(IntPtr hWnd, ref IntPtr lpdwProcessId);
-
-            [DllImport("user32")]
-            private static extern bool CloseWindow(IntPtr hwnd);
-
-            [DllImport("user32")]
-            private static extern int SendMessageA(IntPtr hWnd, int wMsg, int wParam, IntPtr lParam);
-
-            [DllImport("shell32")]
-            private static extern IntPtr ExtractIcon(int hInst, string lpszExeFileName, int nIconIndex);
-
-            #endregion
-
-#endif
-
             /// <summary>
             /// 当前窗口句柄
             /// </summary>
@@ -57,7 +34,7 @@ namespace AIO.UEditor
             static Program()
             {
                 var handle = (IntPtr)Process.GetCurrentProcess().Id; //获取进程ID
-                EnumWindows(EnumWindCallback, handle); //枚举查找本窗口
+                EnumWindows(EnumWindCallback, handle);               //枚举查找本窗口
             }
 #endif
 
@@ -109,6 +86,36 @@ namespace AIO.UEditor
             return false;
 #endif
             }
+#if UNITY_EDITOR_WIN
+
+            #region WIN32API
+
+            private delegate bool EnumWindowsCallBack(IntPtr hwnd, IntPtr lParam);
+
+            [DllImport("user32", CharSet = CharSet.Unicode)]
+            private static extern bool SetWindowTextW(IntPtr hwnd, string title);
+
+            //回调指针，值
+            [DllImport("user32")]
+            private static extern int EnumWindows(EnumWindowsCallBack lpEnumFunc, IntPtr lParam);
+
+            [DllImport("user32")]
+            private static extern uint GetWindowThreadProcessId(IntPtr hWnd, ref IntPtr lpdwProcessId);
+
+            [DllImport("user32")]
+            private static extern bool CloseWindow(IntPtr hwnd);
+
+            [DllImport("user32")]
+            private static extern int SendMessageA(IntPtr hWnd, int wMsg, int wParam, IntPtr lParam);
+
+            [DllImport("shell32")]
+            private static extern IntPtr ExtractIcon(int hInst, string lpszExeFileName, int nIconIndex);
+
+            #endregion
+
+#endif
         }
+
+        #endregion
     }
 }

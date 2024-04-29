@@ -1,9 +1,15 @@
-﻿using System.Linq;
+﻿#region
+
+using System.Linq;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: Hash
+
         /// <summary>
         /// hash工具
         /// </summary>
@@ -98,5 +104,7 @@ namespace AIO
                 }
             }
         }
+
+        #endregion
     }
 }

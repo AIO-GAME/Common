@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
@@ -6,15 +8,22 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
+#endregion
+
 namespace AIO
 {
     /// <summary>
     /// 单位属性
     /// </summary>
     [Conditional(Strings.UnityEditor)]
-    public partial class UnitAttribute : SelfDrawerAttribute
+    public class UnitAttribute : SelfDrawerAttribute
     {
         private UnitsAttribute _unitsAttribute;
+
+        /// <summary>
+        /// Creates a new <see cref="UnitsAttribute"/>.
+        /// </summary>
+        protected UnitAttribute() { }
 
         public IReadOnlyList<double> MultipliersDouble { get; private set; }
 
@@ -22,11 +31,25 @@ namespace AIO
 
         public IList<CompactUnitConversionCache> DisplayConverters { get; protected set; }
 
-        /// <summary>
-        /// Creates a new <see cref="UnitsAttribute"/>.
-        /// </summary>
-        protected UnitAttribute()
+        private void Check(string type)
         {
+            if (_unitsAttribute == null)
+                switch (type)
+                {
+                    case "double":
+                        _unitsAttribute = new UnitsDoubleAttribute(MultipliersDouble, DisplayConverters, UnitIndex);
+                        break;
+                    case "float":
+                        _unitsAttribute = new UnitsFloatAttribute(MultipliersDouble, DisplayConverters, UnitIndex);
+                        break;
+                    case "long":
+                        _unitsAttribute = new UnitsLongAttribute(MultipliersDouble, DisplayConverters, UnitIndex);
+                        break;
+                    case "int":
+                        _unitsAttribute = new UnitsInt32Attribute(MultipliersDouble, DisplayConverters, UnitIndex);
+                        break;
+                    default: return;
+                }
         }
 
         #region Construction
@@ -36,8 +59,7 @@ namespace AIO
         /// </summary>
         public UnitAttribute(string suffix)
         {
-            SetUnits(new double[] { 1 }, new CompactUnitConversionCache[] { new CompactUnitConversionCache(suffix) },
-                0);
+            SetUnits(new double[] { 1 }, new[] { new CompactUnitConversionCache(suffix) });
         }
 
         /// <summary>Creates a new <see cref="UnitAttribute"/>.</summary>
@@ -49,7 +71,7 @@ namespace AIO
             foreach (var item in data)
             {
                 multipliers[i] = item.Key;
-                suffixes[i] = item.Value;
+                suffixes[i]    = item.Value;
                 i++;
             }
 
@@ -67,7 +89,7 @@ namespace AIO
 
         /// <summary>[Editor-Only] Sets the unit details.</summary>
         protected void SetUnits(IReadOnlyList<double> multipliers, IList<CompactUnitConversionCache> displayConverters,
-            int unitIndex = 0)
+                                int                   unitIndex = 0)
         {
             if (multipliers.Count != displayConverters.Count)
                 throw new ArgumentException(
@@ -79,50 +101,28 @@ namespace AIO
 
             MultipliersDouble = multipliers;
             DisplayConverters = displayConverters;
-            UnitIndex = unitIndex;
+            UnitIndex         = unitIndex;
         }
 
         #endregion
-
-        private void Check(string type)
-        {
-            if (_unitsAttribute == null)
-            {
-                switch (type)
-                {
-                    case "double":
-                        _unitsAttribute = new UnitsDoubleAttribute(MultipliersDouble, DisplayConverters, UnitIndex);
-                        break;
-                    case "float":
-                        _unitsAttribute = new UnitsFloatAttribute(MultipliersDouble, DisplayConverters, UnitIndex);
-                        break;
-                    case "long":
-                        _unitsAttribute = new UnitsLongAttribute(MultipliersDouble, DisplayConverters, UnitIndex);
-                        break;
-                    case "int":
-                        _unitsAttribute = new UnitsInt32Attribute(MultipliersDouble, DisplayConverters, UnitIndex);
-                        break;
-                    default: return;
-                }
-            }
-        }
 
 #if UNITY_EDITOR
         public override void OnGUI(Rect area, SerializedProperty property, GUIContent label)
         {
             Check(property.type);
             if (_unitsAttribute is null)
-            {
                 EditorGUI.LabelField(area, label.text, $"[Error] Unit {property.type} is not supported",
-                    EditorStyles.helpBox);
-            }
+                                     EditorStyles.helpBox);
             else _unitsAttribute.OnGUI(area, property, label);
         }
 
         /// <summary> [Editor-Only]
         /// Determines how many lines tall the `property` should be.
         /// </summary>
-        private int GetLineCount(SerializedProperty property, GUIContent label) => EditorGUIUtility.wideMode ? 1 : 2;
+        private int GetLineCount(SerializedProperty property, GUIContent label)
+        {
+            return EditorGUIUtility.wideMode ? 1 : 2;
+        }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {

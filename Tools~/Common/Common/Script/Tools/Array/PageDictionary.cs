@@ -1,13 +1,11 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-12-04
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+
+#endregion
 
 namespace AIO
 {
@@ -16,9 +14,31 @@ namespace AIO
     /// </summary>
     public class PageDictionary<T1, T2> : IDisposable, IDictionary<T1, T2>
     {
-        ICollection<T2> IDictionary<T1, T2>.Values => Values;
+        /// <summary>
+        /// 当前页内容
+        /// </summary>
+        private KeyValuePair<T1, T2>[] _CurrentPage;
 
-        ICollection<T1> IDictionary<T1, T2>.Keys => Keys;
+        /// <summary>
+        /// 当前页键值
+        /// </summary>
+        private T1[] _CurrentPageKeys;
+
+        /// <summary>
+        /// 当前页内容
+        /// </summary>
+        private T2[] _CurrentPageValues;
+
+        private int _PageIndex = 1;
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public PageDictionary()
+        {
+            Keys   = new List<T1>();
+            Values = new List<T2>();
+        }
 
         /// <summary>
         /// 键值
@@ -43,8 +63,6 @@ namespace AIO
             get => _PageIndex;
             set => GetPage(value);
         }
-
-        private int _PageIndex = 1;
 
         /// <summary>
         /// 总页数
@@ -92,52 +110,11 @@ namespace AIO
             }
         }
 
-        /// <summary>
-        /// 当前页内容
-        /// </summary>
-        private T2[] _CurrentPageValues;
+        #region IDictionary<T1,T2> Members
 
-        /// <summary>
-        /// 当前页键值
-        /// </summary>
-        private T1[] _CurrentPageKeys;
+        ICollection<T2> IDictionary<T1, T2>.Values => Values;
 
-        /// <summary>
-        /// 当前页内容
-        /// </summary>
-        private KeyValuePair<T1, T2>[] _CurrentPage;
-
-        /// <summary>
-        /// 获取页内容
-        /// </summary>
-        private void GetPage(int index)
-        {
-            _PageIndex = index;
-            if (index < 0 || index >= PageCount)
-            {
-                _CurrentPageValues = Array.Empty<T2>();
-                _CurrentPageKeys = Array.Empty<T1>();
-                _CurrentPage = Array.Empty<KeyValuePair<T1, T2>>();
-                return;
-            }
-
-            var start = index * PageSize;
-            var end = start + PageSize;
-            if (end > Count) end = Count;
-            var array = new T2[end - start];
-            var array2 = new T1[end - start];
-            var array3 = new KeyValuePair<T1, T2>[end - start];
-            for (var i = start; i < end; i++)
-            {
-                array[i - start] = Values[i];
-                array2[i - start] = Keys[i];
-                array3[i - start] = new KeyValuePair<T1, T2>(Keys[i], Values[i]);
-            }
-
-            _CurrentPageValues = array;
-            _CurrentPageKeys = array2;
-            _CurrentPage = array3;
-        }
+        ICollection<T1> IDictionary<T1, T2>.Keys => Keys;
 
         /// <summary>
         /// 移除
@@ -156,15 +133,6 @@ namespace AIO
         public bool IsReadOnly => false;
 
         /// <summary>
-        /// 构造函数
-        /// </summary>
-        public PageDictionary()
-        {
-            Keys = new List<T1>();
-            Values = new List<T2>();
-        }
-
-        /// <summary>
         /// 添加
         /// </summary>
         /// <param name="key">键值</param>
@@ -174,7 +142,7 @@ namespace AIO
             if (Keys.Contains(key))
             {
                 var index = Keys.IndexOf(key);
-                Keys[index] = key;
+                Keys[index]   = key;
                 Values[index] = value;
             }
             else
@@ -225,6 +193,94 @@ namespace AIO
             set => Add(key, value);
         }
 
+        /// <inheritdoc />
+        public void Add(KeyValuePair<T1, T2> item)
+        {
+            Add(item.Key, item.Value);
+        }
+
+        /// <inheritdoc />
+        public void Clear()
+        {
+            Keys.Clear();
+            Values.Clear();
+            PageIndex = 1;
+        }
+
+        /// <inheritdoc />
+        public bool Contains(KeyValuePair<T1, T2> item)
+        {
+            return ContainsKey(item.Key);
+        }
+
+        /// <inheritdoc />
+        public void CopyTo(KeyValuePair<T1, T2>[] array, int arrayIndex)
+        {
+            if (array == null) throw new ArgumentNullException(nameof(array));
+            if (arrayIndex < 0) throw new ArgumentOutOfRangeException(nameof(arrayIndex));
+            if (array.Length - arrayIndex < Count)
+                throw new ArgumentException(
+                    "The number of elements in the source ICollection<T> is greater than the available space from arrayIndex to the end of the destination array.");
+
+            for (var i = 0; i < Count; i++) array[i + arrayIndex] = new KeyValuePair<T1, T2>(Keys[i], Values[i]);
+        }
+
+        /// <inheritdoc />
+        public IEnumerator<KeyValuePair<T1, T2>> GetEnumerator()
+        {
+            return Keys.Select((t, i) => new KeyValuePair<T1, T2>(t, Values[i])).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        #endregion
+
+        #region IDisposable Members
+
+        /// <inheritdoc />
+        public void Dispose()
+        {
+            Keys   = null;
+            Values = null;
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 获取页内容
+        /// </summary>
+        private void GetPage(int index)
+        {
+            _PageIndex = index;
+            if (index < 0 || index >= PageCount)
+            {
+                _CurrentPageValues = Array.Empty<T2>();
+                _CurrentPageKeys   = Array.Empty<T1>();
+                _CurrentPage       = Array.Empty<KeyValuePair<T1, T2>>();
+                return;
+            }
+
+            var start = index * PageSize;
+            var end = start + PageSize;
+            if (end > Count) end = Count;
+            var array = new T2[end - start];
+            var array2 = new T1[end - start];
+            var array3 = new KeyValuePair<T1, T2>[end - start];
+            for (var i = start; i < end; i++)
+            {
+                array[i - start]  = Values[i];
+                array2[i - start] = Keys[i];
+                array3[i - start] = new KeyValuePair<T1, T2>(Keys[i], Values[i]);
+            }
+
+            _CurrentPageValues = array;
+            _CurrentPageKeys   = array2;
+            _CurrentPage       = array3;
+        }
+
         /// <summary>
         /// 移除
         /// </summary>
@@ -255,59 +311,6 @@ namespace AIO
         {
             if (index < 0 || index >= Keys.Count) return default;
             return Values[index];
-        }
-
-        /// <inheritdoc />
-        public void Add(KeyValuePair<T1, T2> item)
-        {
-            Add(item.Key, item.Value);
-        }
-
-        /// <inheritdoc />
-        public void Clear()
-        {
-            Keys.Clear();
-            Values.Clear();
-            PageIndex = 1;
-        }
-
-        /// <inheritdoc />
-        public bool Contains(KeyValuePair<T1, T2> item)
-        {
-            return ContainsKey(item.Key);
-        }
-
-        /// <inheritdoc />
-        public void CopyTo(KeyValuePair<T1, T2>[] array, int arrayIndex)
-        {
-            if (array == null) throw new ArgumentNullException(nameof(array));
-            if (arrayIndex < 0) throw new ArgumentOutOfRangeException(nameof(arrayIndex));
-            if (array.Length - arrayIndex < Count)
-                throw new ArgumentException(
-                    "The number of elements in the source ICollection<T> is greater than the available space from arrayIndex to the end of the destination array.");
-
-            for (var i = 0; i < Count; i++)
-            {
-                array[i + arrayIndex] = new KeyValuePair<T1, T2>(Keys[i], Values[i]);
-            }
-        }
-
-        /// <inheritdoc />
-        public void Dispose()
-        {
-            Keys = null;
-            Values = null;
-        }
-
-        /// <inheritdoc />
-        public IEnumerator<KeyValuePair<T1, T2>> GetEnumerator()
-        {
-            return Keys.Select((t, i) => new KeyValuePair<T1, T2>(t, Values[i])).GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
         }
     }
 }

@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Diagnostics;
+
+#endregion
 
 namespace AIO
 {
@@ -75,15 +79,15 @@ namespace AIO
         /// <summary>
         /// 执行回调
         /// </summary>
-        [DebuggerHidden]
-        [DebuggerStepThrough]
+        [DebuggerHidden, DebuggerStepThrough]
         void Execute();
     }
 
     /// <summary>
     /// 定时任务处理器
     /// </summary>
-    internal interface ITimerExecutor<out T> : ITimerExecutor where T : Delegate
+    internal interface ITimerExecutor<out T> : ITimerExecutor
+    where T : Delegate
     {
         /// <summary>
         /// 当前携带任务

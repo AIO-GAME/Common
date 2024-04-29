@@ -1,17 +1,17 @@
-/*|============|*|
-|*|Author:     |*| xinan
-|*|Date:       |*| 2023-06-04
-|*|E-Mail:     |*| 1398581458@qq.com
-|*|============|*/
+#region
 
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 
+#endregion
+
 namespace AIO.UEditor
 {
     public partial class EHelper
     {
+        #region Nested type: Asset
+
         public partial class Asset
         {
             /// <summary>
@@ -22,9 +22,7 @@ namespace AIO.UEditor
             /// <returns>路径</returns>
             public static IList<string> SearchDirs(string filter, string folder)
             {
-                return AssetDatabase.FindAssets(filter, new string[] { folder })
-                    .Select(AssetDatabase.GUIDToAssetPath)
-                    .ToList();
+                return AssetDatabase.FindAssets(filter, new[] { folder }).Select(AssetDatabase.GUIDToAssetPath).ToList();
             }
 
             /// <summary>
@@ -35,10 +33,10 @@ namespace AIO.UEditor
             /// <returns>路径</returns>
             public static IList<string> SearchDirs(string filter, string[] folder)
             {
-                return AssetDatabase.FindAssets(filter, folder)
-                    .Select(AssetDatabase.GUIDToAssetPath)
-                    .ToList();
+                return AssetDatabase.FindAssets(filter, folder).Select(AssetDatabase.GUIDToAssetPath).ToList();
             }
         }
+
+        #endregion
     }
 }

@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEngine
 {
@@ -9,58 +13,19 @@ namespace AIO.UEngine
     /// </summary>
     public static partial class GoUtils
     {
-        #region Dont Destroy
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static GameObject DontDestroyCreate<T>(string name) where T : Component
-        {
-            var go = new GameObject(name);
-            go.AddComponent<T>();
-            Object.DontDestroyOnLoad(go);
-            return go;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static GameObject DontDestroyCreate(string name)
-        {
-            var go = new GameObject(name);
-            Object.DontDestroyOnLoad(go);
-            return go;
-        }
-
-        /// <summary>
-        /// 不可销毁物体
-        /// </summary>
-        public static void DontDestroy(in GameObject go)
-        {
-            if (go == null) return;
-            Object.DontDestroyOnLoad(go);
-        }
-
-        /// <summary>
-        /// 销毁物体
-        /// </summary>
-        public static void DontDestroy<T>(in T go) where T : Component
-        {
-            if (go == null) return;
-            Object.DontDestroyOnLoad(go);
-        }
-
-        #endregion
-
         public static void DestroyGo(Object obj)
         {
             if (obj == null) return;
 
             var go = obj as GameObject;
-            if (go != null) Object.Destroy(go);
+            if (go != null)
+            {
+                Object.Destroy(go);
+            }
             else
             {
                 var c = obj as Component;
-                if (c)
-                {
-                    Object.Destroy(c.gameObject);
-                }
+                if (c) Object.Destroy(c.gameObject);
             }
         }
 
@@ -94,7 +59,8 @@ namespace AIO.UEngine
         /// <typeparam name="T">Component</typeparam>
         /// <param name="go">父对象</param>
         /// <param name="childName">子对象名称</param>
-        public static T GetTheChildNodeComponentScripts<T>(in GameObject go, in string childName) where T : Component
+        public static T GetTheChildNodeComponentScripts<T>(in GameObject go, in string childName)
+        where T : Component
         {
             var node = go.FindTheChildNode(childName);
             return node.GetComponent<T>();
@@ -106,7 +72,8 @@ namespace AIO.UEngine
         /// <typeparam name="T"></typeparam>
         /// <param name="go"></param>
         /// <returns></returns>
-        public static T FindComponentInParent<T>(in GameObject go) where T : Component
+        public static T FindComponentInParent<T>(in GameObject go)
+        where T : Component
         {
             if (go == null) return null;
 
@@ -115,7 +82,7 @@ namespace AIO.UEngine
 
             while (component == null && trans.parent != null)
             {
-                trans = trans.parent;
+                trans     = trans.parent;
                 component = trans.GetComponent<T>();
             }
 
@@ -146,5 +113,46 @@ namespace AIO.UEngine
 
             return r;
         }
+
+        #region Dont Destroy
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static GameObject DontDestroyCreate<T>(string name)
+        where T : Component
+        {
+            var go = new GameObject(name);
+            go.AddComponent<T>();
+            Object.DontDestroyOnLoad(go);
+            return go;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static GameObject DontDestroyCreate(string name)
+        {
+            var go = new GameObject(name);
+            Object.DontDestroyOnLoad(go);
+            return go;
+        }
+
+        /// <summary>
+        /// 不可销毁物体
+        /// </summary>
+        public static void DontDestroy(in GameObject go)
+        {
+            if (go == null) return;
+            Object.DontDestroyOnLoad(go);
+        }
+
+        /// <summary>
+        /// 销毁物体
+        /// </summary>
+        public static void DontDestroy<T>(in T go)
+        where T : Component
+        {
+            if (go == null) return;
+            Object.DontDestroyOnLoad(go);
+        }
+
+        #endregion
     }
 }

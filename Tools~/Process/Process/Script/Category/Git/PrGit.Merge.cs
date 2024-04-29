@@ -4,13 +4,19 @@
 
 |||✩ - - - - - |*/
 
+#region
+
 using System;
 using System.IO;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrGit
     {
+        #region Nested type: Merge
+
         /// <summary>
         /// <see cref="PrGit"/> <see cref="Merge"/>
         /// </summary>
@@ -29,5 +35,7 @@ namespace AIO
                 return Create(work, "commit {0}", args);
             }
         }
+
+        #endregion
     }
 }

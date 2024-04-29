@@ -4,10 +4,14 @@
 |*|E-Mail:     |*| xinansky99@gmail.com
 |*|============|*/
 
+#region
+
 using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {
@@ -24,9 +28,7 @@ namespace AIO
             remote = remote.Replace("\\", "/");
             var result = Create(Gsutil, $"ls \"gs://{remote}\"").Sync();
             var content = result.StdOut.ToString();
-            return !string.IsNullOrEmpty(content) && content.TrimStart("gs://")
-                .Split(new[] { "gs://" }, StringSplitOptions.RemoveEmptyEntries)
-                .Any(line => line.Trim().EndsWith(remote));
+            return !string.IsNullOrEmpty(content) && content.TrimStart("gs://").Split(new[] { "gs://" }, StringSplitOptions.RemoveEmptyEntries).Any(line => line.Trim().EndsWith(remote));
         }
 
         /// <summary>
@@ -40,9 +42,7 @@ namespace AIO
             remote = remote.Replace("\\", "/");
             var result = await Create(Gsutil, $"ls \"gs://{remote}\"");
             var content = result.StdOut.ToString();
-            return !string.IsNullOrEmpty(content) && content.TrimStart("gs://")
-                .Split(new[] { "gs://" }, StringSplitOptions.RemoveEmptyEntries)
-                .Any(line => line.Trim().EndsWith(remote));
+            return !string.IsNullOrEmpty(content) && content.TrimStart("gs://").Split(new[] { "gs://" }, StringSplitOptions.RemoveEmptyEntries).Any(line => line.Trim().EndsWith(remote));
         }
     }
 }

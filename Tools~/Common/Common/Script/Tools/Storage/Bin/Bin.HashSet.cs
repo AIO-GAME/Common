@@ -1,3 +1,5 @@
+#region
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,29 +9,22 @@ using System.Runtime.Serialization;
 using System.Security;
 using System.Security.Permissions;
 
+#endregion
+
 namespace AIO
 {
     /// <summary>
     /// 列表存储
     /// </summary>
-    [DebuggerDisplay("Count = {Count}")]
-    [SecurityCritical]
-    [Description("列表存储")]
-    [DisplayName("列表存储")]
-    [HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
-    public class BinHashSet<T> :
-        IBinData,
-        ISerializable,
-        IDeserializationCallback,
-        ISet<T>,
-        IReadOnlyCollection<T>
-        where T : IBinData, new()
+    [DebuggerDisplay("Count = {Count}"), SecurityCritical, Description("列表存储"), DisplayName("列表存储"), HostProtection(SecurityAction.LinkDemand, MayLeakOnAbort = true)]
+    public class BinHashSet<T>
+        : IBinData,
+          ISerializable,
+          IDeserializationCallback,
+          ISet<T>,
+          IReadOnlyCollection<T>
+    where T : IBinData, new()
     {
-        /// <summary>
-        /// 集合
-        /// </summary>
-        protected HashSet<T> Collection { get; }
-
         /// <summary>
         /// 初始化
         /// </summary>
@@ -37,6 +32,13 @@ namespace AIO
         {
             Collection = Pool.AHashSet<T>.New();
         }
+
+        /// <summary>
+        /// 集合
+        /// </summary>
+        protected HashSet<T> Collection { get; }
+
+        #region IBinData Members
 
         /// <summary>
         /// 执行与释放或重置非托管资源关联的应用程序定义的任务
@@ -58,6 +60,62 @@ namespace AIO
         {
             buffer.WriteDataArray(Collection);
         }
+
+        /// <summary>
+        /// 重置
+        /// </summary>
+        public void Reset()
+        {
+            foreach (var item in Collection) item.Reset();
+        }
+
+        /// <inheritdoc />
+        public virtual object Clone()
+        {
+            var data = new BinHashSet<T>();
+            foreach (var item in Collection) data.Collection.Add((T)item.Clone());
+
+            return data;
+        }
+
+        #endregion
+
+        #region IDeserializationCallback Members
+
+        /// <summary>在整个对象图形已经反序列化时运行。</summary>
+        /// <param name="sender">
+        ///   启动回调的对象。
+        ///    当前未实现该参数的功能。
+        /// </param>
+        public void OnDeserialization(object sender)
+        {
+            Collection.OnDeserialization(sender);
+        }
+
+        #endregion
+
+        #region ISerializable Members
+
+        /// <summary>
+        ///   使用将目标对象序列化所需的数据填充 <see cref="T:System.Runtime.Serialization.SerializationInfo" />。
+        /// </summary>
+        /// <param name="info">
+        ///   要填充数据的 <see cref="T:System.Runtime.Serialization.SerializationInfo" />。
+        /// </param>
+        /// <param name="context">
+        ///   此序列化的目标（请参见 <see cref="T:System.Runtime.Serialization.StreamingContext" />）。
+        /// </param>
+        /// <exception cref="T:System.Security.SecurityException">
+        ///   调用方没有所要求的权限。
+        /// </exception>
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            Collection.GetObjectData(info, context);
+        }
+
+        #endregion
+
+        #region ISet<T> Members
 
         /// <summary>返回一个循环访问集合的枚举器。</summary>
         /// <returns>用于循环访问集合的枚举数。</returns>
@@ -241,17 +299,11 @@ namespace AIO
         /// </exception>
         public void CopyTo(T[] array, int arrayIndex)
         {
-            if (arrayIndex < 0 || arrayIndex >= array.Length)
-            {
-                throw new ArgumentOutOfRangeException(nameof(arrayIndex), "The value of arrayIndex is out of range.");
-            }
+            if (arrayIndex < 0 || arrayIndex >= array.Length) throw new ArgumentOutOfRangeException(nameof(arrayIndex), "The value of arrayIndex is out of range.");
 
             foreach (var item in Collection)
             {
-                if (arrayIndex >= array.Length)
-                {
-                    throw new ArgumentException("The length of array is less than the number of elements in the collection.");
-                }
+                if (arrayIndex >= array.Length) throw new ArgumentException("The length of array is less than the number of elements in the collection.");
 
                 array[arrayIndex++] = item;
             }
@@ -291,54 +343,6 @@ namespace AIO
         /// </returns>
         public bool IsReadOnly => false;
 
-        /// <summary>
-        ///   使用将目标对象序列化所需的数据填充 <see cref="T:System.Runtime.Serialization.SerializationInfo" />。
-        /// </summary>
-        /// <param name="info">
-        ///   要填充数据的 <see cref="T:System.Runtime.Serialization.SerializationInfo" />。
-        /// </param>
-        /// <param name="context">
-        ///   此序列化的目标（请参见 <see cref="T:System.Runtime.Serialization.StreamingContext" />）。
-        /// </param>
-        /// <exception cref="T:System.Security.SecurityException">
-        ///   调用方没有所要求的权限。
-        /// </exception>
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            Collection.GetObjectData(info, context);
-        }
-
-        /// <summary>在整个对象图形已经反序列化时运行。</summary>
-        /// <param name="sender">
-        ///   启动回调的对象。
-        ///    当前未实现该参数的功能。
-        /// </param>
-        public void OnDeserialization(object sender)
-        {
-            Collection.OnDeserialization(sender);
-        }
-
-        /// <summary>
-        /// 重置
-        /// </summary>
-        public void Reset()
-        {
-            foreach (var item in Collection)
-            {
-                item.Reset();
-            }
-        }
-
-        /// <inheritdoc />
-        public virtual object Clone()
-        {
-            var data = new BinHashSet<T>();
-            foreach (var item in Collection)
-            {
-                data.Collection.Add((T)item.Clone());
-            }
-
-            return data;
-        }
+        #endregion
     }
 }

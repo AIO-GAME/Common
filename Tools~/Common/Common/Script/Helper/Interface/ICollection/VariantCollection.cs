@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+
+#endregion
 
 namespace AIO
 {
@@ -10,7 +14,8 @@ namespace AIO
     /// </summary>
     /// <typeparam name="TBase"></typeparam>
     /// <typeparam name="TImplementation"></typeparam>
-    public class VariantCollection<TBase, TImplementation> : ICollection<TBase> where TImplementation : TBase
+    public class VariantCollection<TBase, TImplementation> : ICollection<TBase>
+    where TImplementation : TBase
     {
         /// <summary>
         /// 初始化VariantCollection对象，
@@ -25,6 +30,8 @@ namespace AIO
         /// 数据
         /// </summary>
         public ICollection<TImplementation> Implementation { get; }
+
+        #region ICollection<TBase> Members
 
         /// <summary>
         /// 获取 Implementation 中包含的元素数。
@@ -116,5 +123,7 @@ namespace AIO
         {
             return GetEnumerator();
         }
+
+        #endregion
     }
 }

@@ -1,12 +1,10 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-06
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Net.Sockets;
 using System.Threading;
+
+#endregion
 
 namespace AIO.Net
 {
@@ -52,19 +50,19 @@ namespace AIO.Net
             if (IsConnected || IsConnecting) return false;
 
             // Setup buffers
-            _receiveNetBuffer = new NetBuffer();
-            _sendNetBufferMain = new NetBuffer();
+            _receiveNetBuffer   = new NetBuffer();
+            _sendNetBufferMain  = new NetBuffer();
             _sendNetBufferFlush = new NetBuffer();
 
             // Setup event args
-            ConnectEventArg = new SocketAsyncEventArgs();
-            ConnectEventArg.RemoteEndPoint = Endpoint;
-            ConnectEventArg.Completed += OnAsyncCompleted;
+            ConnectEventArg                =  new SocketAsyncEventArgs();
+            ConnectEventArg.RemoteEndPoint =  Endpoint;
+            ConnectEventArg.Completed      += OnAsyncCompleted;
 
-            ReceiveEventArg = new SocketAsyncEventArgs();
+            ReceiveEventArg           =  new SocketAsyncEventArgs();
             ReceiveEventArg.Completed += OnAsyncCompleted;
 
-            SendEventArg = new SocketAsyncEventArgs();
+            SendEventArg           =  new SocketAsyncEventArgs();
             SendEventArg.Completed += OnAsyncCompleted;
 
             // Create a new client socket
@@ -92,7 +90,7 @@ namespace AIO.Net
                 // Reset event args
                 ConnectEventArg.Completed -= OnAsyncCompleted;
                 ReceiveEventArg.Completed -= OnAsyncCompleted;
-                SendEventArg.Completed -= OnAsyncCompleted;
+                SendEventArg.Completed    -= OnAsyncCompleted;
 
                 // Call the client disconnecting handler
                 OnDisconnecting();
@@ -136,9 +134,9 @@ namespace AIO.Net
             _sendNetBufferFlush.Reserve(Option.SendBufferSize);
 
             // Reset statistic
-            BytesPending = 0;
-            BytesSending = 0;
-            BytesSent = 0;
+            BytesPending  = 0;
+            BytesSending  = 0;
+            BytesSent     = 0;
             BytesReceived = 0;
 
             // Update the connected flag
@@ -167,7 +165,7 @@ namespace AIO.Net
             // Reset event args
             ConnectEventArg.Completed -= OnAsyncCompleted;
             ReceiveEventArg.Completed -= OnAsyncCompleted;
-            SendEventArg.Completed -= OnAsyncCompleted;
+            SendEventArg.Completed    -= OnAsyncCompleted;
 
             // Call the client disconnecting handler
             OnDisconnecting();
@@ -179,9 +177,7 @@ namespace AIO.Net
                     // Shutdown the socket associated with the client
                     Socket.Shutdown(SocketShutdown.Both);
                 }
-                catch (SocketException)
-                {
-                }
+                catch (SocketException) { }
 
                 // Close the client socket
                 Socket.Close();
@@ -197,16 +193,14 @@ namespace AIO.Net
                 // Update the client socket disposed flag
                 IsSocketDisposed = true;
             }
-            catch (ObjectDisposedException)
-            {
-            }
+            catch (ObjectDisposedException) { }
 
             // Update the connected flag
             IsConnected = false;
 
             // Update sending/receiving flags
             Receiving = false;
-            Sending = false;
+            Sending   = false;
 
             // Clear send/receive buffers
             ClearBuffers();
@@ -236,18 +230,18 @@ namespace AIO.Net
                 return false;
 
             // Setup buffers
-            _receiveNetBuffer = new NetBuffer();
-            _sendNetBufferMain = new NetBuffer();
+            _receiveNetBuffer   = new NetBuffer();
+            _sendNetBufferMain  = new NetBuffer();
             _sendNetBufferFlush = new NetBuffer();
 
             // Setup event args
-            ConnectEventArg = new SocketAsyncEventArgs();
-            ConnectEventArg.RemoteEndPoint = Endpoint;
-            ConnectEventArg.Completed += OnAsyncCompleted;
-            ReceiveEventArg = new SocketAsyncEventArgs();
-            ReceiveEventArg.Completed += OnAsyncCompleted;
-            SendEventArg = new SocketAsyncEventArgs();
-            SendEventArg.Completed += OnAsyncCompleted;
+            ConnectEventArg                =  new SocketAsyncEventArgs();
+            ConnectEventArg.RemoteEndPoint =  Endpoint;
+            ConnectEventArg.Completed      += OnAsyncCompleted;
+            ReceiveEventArg                =  new SocketAsyncEventArgs();
+            ReceiveEventArg.Completed      += OnAsyncCompleted;
+            SendEventArg                   =  new SocketAsyncEventArgs();
+            SendEventArg.Completed         += OnAsyncCompleted;
 
             // Create a new client socket
             Socket = CreateSocket();
@@ -276,7 +270,10 @@ namespace AIO.Net
         /// Disconnect the client (asynchronous)
         /// </summary>
         /// <returns>'true' if the client was successfully disconnected, 'false' if the client is already disconnected</returns>
-        public virtual bool DisconnectAsync() => Disconnect();
+        public virtual bool DisconnectAsync()
+        {
+            return Disconnect();
+        }
 
         /// <summary>
         /// Reconnect the client (asynchronous)
@@ -324,9 +321,9 @@ namespace AIO.Net
                 _sendNetBufferFlush.Reserve(Option.SendBufferSize);
 
                 // Reset statistic
-                BytesPending = 0;
-                BytesSending = 0;
-                BytesSent = 0;
+                BytesPending  = 0;
+                BytesSending  = 0;
+                BytesSent     = 0;
                 BytesReceived = 0;
 
                 // Update the connected flag

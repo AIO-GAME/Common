@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,12 +8,15 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using AIO;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: FTP
+
         public partial class FTP
         {
             /// <summary>
@@ -52,9 +57,9 @@ namespace AIO
             /// <param name="cancellationToken">取消令牌</param>
             /// <returns></returns>
             /// <exception cref="Exception"></exception>
-            public static async Task<string> GetTextAsync(string uri, string user, string pass,
-                ushort timeout = Net.TIMEOUT,
-                CancellationToken cancellationToken = default)
+            public static async Task<string> GetTextAsync(string            uri, string user, string pass,
+                                                          ushort            timeout           = Net.TIMEOUT,
+                                                          CancellationToken cancellationToken = default)
             {
                 try
                 {
@@ -108,9 +113,9 @@ namespace AIO
             /// <param name="timeout">超时</param>
             /// <param name="cancellationToken">取消令牌</param>
             /// <returns>MD5</returns>
-            public static async Task<string> GetMD5Async(string uri, string user, string pass,
-                ushort timeout = Net.TIMEOUT,
-                CancellationToken cancellationToken = default)
+            public static async Task<string> GetMD5Async(string            uri, string user, string pass,
+                                                         ushort            timeout           = Net.TIMEOUT,
+                                                         CancellationToken cancellationToken = default)
             {
                 if (cancellationToken == default) cancellationToken = CancellationToken.None;
                 try
@@ -169,9 +174,9 @@ namespace AIO
             /// <param name="cancellationToken">取消令牌</param>
             /// <returns>大小</returns>
             /// <exception cref="Exception"></exception>
-            public static async Task<long> GetFileSizeAsync(string uri, string user, string pass,
-                ushort timeout = Net.TIMEOUT,
-                CancellationToken cancellationToken = default)
+            public static async Task<long> GetFileSizeAsync(string            uri, string user, string pass,
+                                                            ushort            timeout           = Net.TIMEOUT,
+                                                            CancellationToken cancellationToken = default)
             {
                 long fileSize;
                 try
@@ -205,8 +210,8 @@ namespace AIO
             /// <exception cref="Exception"></exception>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static List<string> GetRemoteListFile(string uri, string user, string pass,
-                string keyword = null,
-                ushort timeout = Net.TIMEOUT
+                                                         string keyword = null,
+                                                         ushort timeout = Net.TIMEOUT
             )
             {
                 return GetRemoteList(uri, user, pass, AHandle.FTP.ListType.File, keyword, timeout);
@@ -227,8 +232,8 @@ namespace AIO
             /// <exception cref="Exception"></exception>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static List<string> GetRemoteListDir(string uri, string user, string pass,
-                string keyword = null,
-                ushort timeout = Net.TIMEOUT
+                                                        string keyword = null,
+                                                        ushort timeout = Net.TIMEOUT
             )
             {
                 return GetRemoteList(uri, user, pass, AHandle.FTP.ListType.Directory, keyword, timeout);
@@ -249,8 +254,8 @@ namespace AIO
             /// <exception cref="Exception"></exception>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static List<string> GetRemoteList(string uri, string user, string pass,
-                string keyword = null,
-                ushort timeout = Net.TIMEOUT
+                                                     string keyword = null,
+                                                     ushort timeout = Net.TIMEOUT
             )
             {
                 return GetRemoteList(uri, user, pass, AHandle.FTP.ListType.ALL, keyword, timeout);
@@ -274,8 +279,8 @@ namespace AIO
             /// <param name="timeout">超时</param>
             /// <returns></returns>
             /// <exception cref="WebException"></exception>
-            private static List<string> GetRemoteList(string uri, string user, string pass,
-                AHandle.FTP.ListType type, string keyword, ushort timeout)
+            private static List<string> GetRemoteList(string               uri,  string user,    string pass,
+                                                      AHandle.FTP.ListType type, string keyword, ushort timeout)
             {
                 var infos = new List<string>();
                 try
@@ -295,8 +300,8 @@ namespace AIO
                             {
                                 if (line.StartsWith("d")) break;
                                 if (string.IsNullOrEmpty(keyword)
-                                    || keyword == "*"
-                                    || line.IndexOf(keyword, StringComparison.CurrentCulture) > -1)
+                                 || keyword == "*"
+                                 || line.IndexOf(keyword, StringComparison.CurrentCulture) > -1)
                                     infos.Add(line.Split(' ').Last());
                                 break;
                             }
@@ -304,8 +309,8 @@ namespace AIO
                             {
                                 if (!line.StartsWith("d")) break;
                                 if (string.IsNullOrEmpty(keyword)
-                                    || keyword == "*"
-                                    || line.IndexOf(keyword, StringComparison.CurrentCulture) > -1)
+                                 || keyword == "*"
+                                 || line.IndexOf(keyword, StringComparison.CurrentCulture) > -1)
                                     infos.Add(line.Split(' ').Last());
                                 break;
                             }
@@ -344,8 +349,8 @@ namespace AIO
             /// <exception cref="Exception"></exception>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static async Task<List<string>> GetRemoteListFileAsync(string uri, string user, string pass,
-                string keyword = null,
-                ushort timeout = Net.TIMEOUT
+                                                                          string keyword = null,
+                                                                          ushort timeout = Net.TIMEOUT
             )
             {
                 return await GetRemoteListAsync(uri, user, pass, AHandle.FTP.ListType.File, keyword, timeout);
@@ -366,8 +371,8 @@ namespace AIO
             /// <exception cref="Exception"></exception>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Task<List<string>> GetRemoteListDirAsync(string uri, string user, string pass,
-                string keyword = null,
-                ushort timeout = Net.TIMEOUT
+                                                                   string keyword = null,
+                                                                   ushort timeout = Net.TIMEOUT
             )
             {
                 return GetRemoteListAsync(uri, user, pass, AHandle.FTP.ListType.Directory, keyword, timeout);
@@ -388,8 +393,8 @@ namespace AIO
             /// <exception cref="Exception"></exception>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static async Task<List<string>> GetRemoteListAsync(string uri, string user, string pass,
-                string keyword = null,
-                ushort timeout = Net.TIMEOUT
+                                                                      string keyword = null,
+                                                                      ushort timeout = Net.TIMEOUT
             )
             {
                 return await GetRemoteListAsync(uri, user, pass, AHandle.FTP.ListType.ALL, keyword, timeout);
@@ -398,23 +403,20 @@ namespace AIO
             /// <summary>
             /// 获取文件下载列表
             /// </summary>
-            private static async Task<IEnumerable<string>> GetDownloadListAsync(string uri, string user, string pass,
-                SearchOption option = SearchOption.AllDirectories,
-                string pattern = "*",
-                ushort timeout = Net.TIMEOUT, string abs = null, CancellationToken cancellationToken = default
+            private static async Task<IEnumerable<string>> GetDownloadListAsync(string       uri, string user, string pass,
+                                                                                SearchOption option  = SearchOption.AllDirectories,
+                                                                                string       pattern = "*",
+                                                                                ushort       timeout = Net.TIMEOUT, string abs = null, CancellationToken cancellationToken = default
             )
             {
                 var remoteList =
                     (await GetRemoteListAsync(uri, user, pass, AHandle.FTP.ListType.File, pattern, timeout,
-                        cancellationToken))
-                    .Select(file => string.Concat(abs, '/', Path.GetFileName(file)).Trim('/'))
-                    .ToList();
+                                              cancellationToken)).Select(file => string.Concat(abs, '/', Path.GetFileName(file)).Trim('/')).ToList();
 
                 if (option != SearchOption.AllDirectories) return remoteList;
 
                 foreach (var absPath in (await GetRemoteListAsync(
-                             uri, user, pass, AHandle.FTP.ListType.Directory, pattern, timeout, cancellationToken))
-                         .Select(Path.GetFileName))
+                             uri, user, pass, AHandle.FTP.ListType.Directory, pattern, timeout, cancellationToken)).Select(Path.GetFileName))
                 {
                     var collection = GetDownloadList(
                         string.Concat(uri, '/', absPath), user, pass, option, pattern, timeout,
@@ -444,9 +446,9 @@ namespace AIO
             /// <param name="cancellationToken">取消令牌</param>
             /// <returns></returns>
             /// <exception cref="WebException"></exception>
-            private static async Task<List<string>> GetRemoteListAsync(string uri, string user, string pass,
-                AHandle.FTP.ListType type, string keyword, ushort timeout,
-                CancellationToken cancellationToken = default)
+            private static async Task<List<string>> GetRemoteListAsync(string               uri,  string user,    string pass,
+                                                                       AHandle.FTP.ListType type, string keyword, ushort timeout,
+                                                                       CancellationToken    cancellationToken = default)
             {
                 var infos = new List<string>();
                 var request = CreateRequestDir(uri.TrimEnd('/'), user, pass, "LIST", timeout, cancellationToken);
@@ -466,8 +468,8 @@ namespace AIO
                             {
                                 if (line.StartsWith("d")) break;
                                 if (string.IsNullOrEmpty(keyword)
-                                    || keyword == "*"
-                                    || line.IndexOf(keyword, StringComparison.CurrentCulture) > -1)
+                                 || keyword == "*"
+                                 || line.IndexOf(keyword, StringComparison.CurrentCulture) > -1)
                                 {
                                     var temp = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                                     var item = string.Empty;
@@ -483,8 +485,8 @@ namespace AIO
                             {
                                 if (!line.StartsWith("d")) break;
                                 if (string.IsNullOrEmpty(keyword)
-                                    || keyword == "*"
-                                    || line.IndexOf(keyword, StringComparison.CurrentCulture) > -1)
+                                 || keyword == "*"
+                                 || line.IndexOf(keyword, StringComparison.CurrentCulture) > -1)
                                 {
                                     var temp = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                                     var item = string.Empty;
@@ -523,5 +525,7 @@ namespace AIO
                 return infos;
             }
         }
+
+        #endregion
     }
 }

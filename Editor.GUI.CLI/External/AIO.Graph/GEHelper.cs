@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using UnityEditor;
@@ -6,10 +8,23 @@ using UnityEditor.EditorTools;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
+#endregion
+
 namespace AIO.UEditor
 {
     public static class GEHelper
     {
+        /// <summary>
+        /// 按钮
+        /// </summary>
+        public static float Knob(Vector2                  knobSize,        float value,       float minValue, float maxValue, string unit,
+                                 Color                    backgroundColor, Color activeColor, bool  showValue,
+                                 params GUILayoutOption[] options)
+        {
+            return EditorGUILayout.Knob(knobSize, value, minValue, maxValue, unit, backgroundColor, activeColor,
+                                        showValue, options);
+        }
+
         #region 获取编辑器控件的矩形 GetControlRect
 
         /*
@@ -77,7 +92,8 @@ namespace AIO.UEditor
 
         /// <summary> 目标对象的 EditorTool Attribute </summary>
         /// <param name="tools">工具对象</param>
-        public static void EditorToolbar<T>(IList<T> tools) where T : EditorTool
+        public static void EditorToolbar<T>(IList<T> tools)
+        where T : EditorTool
         {
             EditorGUILayout.EditorToolbar(tools);
         }
@@ -145,17 +161,6 @@ namespace AIO.UEditor
         }
 
         #endregion
-
-        /// <summary>
-        /// 按钮
-        /// </summary>
-        public static float Knob(Vector2 knobSize, float value, float minValue, float maxValue, string unit,
-            Color backgroundColor, Color activeColor, bool showValue,
-            params GUILayoutOption[] options)
-        {
-            return EditorGUILayout.Knob(knobSize, value, minValue, maxValue, unit, backgroundColor, activeColor,
-                showValue, options);
-        }
 
         #region CopyAction
 

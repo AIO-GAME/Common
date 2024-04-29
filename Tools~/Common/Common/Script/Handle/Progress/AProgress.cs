@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Diagnostics;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
@@ -10,14 +14,9 @@ namespace AIO
     public partial class AProgress : IDisposable
     {
         /// <summary>
-        /// 精度器
+        /// 缓存当前值
         /// </summary>
-        private Stopwatch Watch;
-
-        /// <summary>
-        /// 间隔数量
-        /// </summary>
-        private long _IntervalQuantity;
+        private long _CatchCurrent;
 
         /// <summary>
         /// 当前值
@@ -25,9 +24,9 @@ namespace AIO
         private long _CurrentValue;
 
         /// <summary>
-        /// 缓存当前值
+        /// 间隔数量
         /// </summary>
-        private long _CatchCurrent;
+        private long _IntervalQuantity;
 
         /// <summary>
         /// 开始值
@@ -35,9 +34,42 @@ namespace AIO
         private long _StartValue;
 
         /// <summary>
+        /// 精度器
+        /// </summary>
+        private Stopwatch Watch;
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public AProgress()
+        {
+            State       = EProgressState.Ready;
+            _StartValue = _CurrentValue = _CatchCurrent = TotalValue = Speed = 0;
+            Watch       = new Stopwatch();
+        }
+
+        /// <summary>
         /// 记录时间
         /// </summary>
         private DateTime RecordTime { get; set; }
+
+        #region IProgressEvent Members
+
+        /// <inheritdoc />
+        public void Dispose()
+        {
+            OnComplete?.Invoke(this);
+            Watch      = null;
+            OnProgress = null;
+            OnBegin    = null;
+            OnComplete = null;
+            OnError    = null;
+            OnResume   = null;
+            OnPause    = null;
+            OnCancel   = null;
+        }
+
+        #endregion
 
         /// <summary>
         /// 更新
@@ -49,19 +81,9 @@ namespace AIO
             Watch.Stop();
             _IntervalQuantity = _CurrentValue - _CatchCurrent;
             if (_IntervalQuantity > 0) Speed = (long)(_IntervalQuantity / tempSecond);
-            else Speed = 0;
+            else Speed                       = 0;
             _CatchCurrent = _CurrentValue;
             Watch.Restart();
-        }
-
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        public AProgress()
-        {
-            State = EProgressState.Ready;
-            _StartValue = _CurrentValue = _CatchCurrent = TotalValue = Speed = 0;
-            Watch = new Stopwatch();
         }
 
         /// <summary>
@@ -69,7 +91,7 @@ namespace AIO
         /// </summary>
         public void Begin()
         {
-            RecordTime = StartTime = DateTime.UtcNow;
+            RecordTime    = StartTime     = DateTime.UtcNow;
             _CatchCurrent = _CurrentValue = _StartValue;
             StartProgress = Progress;
             Watch.Start();
@@ -82,9 +104,9 @@ namespace AIO
         {
             Watch.Stop();
             RemainingTime += DateTime.UtcNow - RecordTime;
-            EndTime = DateTime.UtcNow;
-            LastProgress = Progress;
-            EndValue = _CurrentValue;
+            EndTime       =  DateTime.UtcNow;
+            LastProgress  =  Progress;
+            EndValue      =  _CurrentValue;
         }
 
         /// <summary>
@@ -92,7 +114,7 @@ namespace AIO
         /// </summary>
         public void Resume()
         {
-            RecordTime = DateTime.UtcNow;
+            RecordTime    = DateTime.UtcNow;
             _CatchCurrent = _CurrentValue;
             Watch.Start();
         }
@@ -113,20 +135,6 @@ namespace AIO
         {
             Watch.Stop();
             RemainingTime += DateTime.UtcNow - RecordTime;
-        }
-
-        /// <inheritdoc />
-        public void Dispose()
-        {
-            OnComplete?.Invoke(this);
-            Watch = null;
-            OnProgress = null;
-            OnBegin = null;
-            OnComplete = null;
-            OnError = null;
-            OnResume = null;
-            OnPause = null;
-            OnCancel = null;
         }
 
         /// <inheritdoc />
@@ -152,6 +160,8 @@ namespace AIO
 
     public partial class AProgress : IProgressEvent
     {
+        #region IProgressEvent Members
+
         /// <inheritdoc />
         public Action<IProgressInfo> OnProgress { get; set; }
 
@@ -172,18 +182,22 @@ namespace AIO
 
         /// <inheritdoc />
         public Action OnCancel { get; set; }
+
+        #endregion
     }
 
     public partial class AProgress : IProgressInfo
     {
+        private long _Total;
+
+        #region IProgressInfo Members
+
         /// <inheritdoc />
         public long TotalValue
         {
             get => _Total + _StartValue;
             set => _Total = value;
         }
-
-        private long _Total;
 
         /// <inheritdoc />
         public long Speed { get; private set; }
@@ -224,10 +238,14 @@ namespace AIO
         {
             return $"{Progress}% [{CurrentStr}/{TotalStr}] {CurrentInfo} {Speed.ToConverseStringFileSize()}/s";
         }
+
+        #endregion
     }
 
     public partial class AProgress : IProgressReport
     {
+        #region IProgressReport Members
+
         /// <inheritdoc />
         public EProgressState State { get; set; }
 
@@ -268,7 +286,7 @@ namespace AIO
             set
             {
                 if (value <= 0) return;
-                EndValue = _CatchCurrent = _CurrentValue = _StartValue = value;
+                EndValue      = _CatchCurrent = _CurrentValue = _StartValue = value;
                 StartProgress = Progress;
             }
         }
@@ -286,5 +304,7 @@ namespace AIO
                 $"{"From To Value",-16} : [{StartValue.ToConverseStringFileSize()} - {EndValue.ToConverseStringFileSize()}] {VirtualValue.ToConverseStringFileSize()}");
             return str.ToString();
         }
+
+        #endregion
     }
 }

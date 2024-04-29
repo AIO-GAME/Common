@@ -4,16 +4,24 @@ using Cysharp.Threading.Tasks;
 #endif
 
 #if (ENABLE_LATEUPDATE_FUNCTION_CALLBACK)
+
+#region
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
     partial class Runner
     {
-        [ContextStatic] private static readonly Queue<Action> actionQueuesLateUpdateFunc = new Queue<Action>();
-        [ContextStatic] private static volatile bool noActionQueueToExecuteLateUpdateFunc = true;
+        [ContextStatic]
+        private static readonly Queue<Action> actionQueuesLateUpdateFunc = new Queue<Action>();
+
+        [ContextStatic]
+        private static volatile bool noActionQueueToExecuteLateUpdateFunc = true;
 
         /// <summary>
         /// 在LateUpdate更新
@@ -28,6 +36,8 @@ namespace AIO
                 noActionQueueToExecuteLateUpdateFunc = false;
             }
         }
+
+        #region Nested type: ThreadMono
 
         private partial class ThreadMono
         {
@@ -63,6 +73,8 @@ namespace AIO
                 }
             }
         }
+
+        #endregion
     }
 
 #endif

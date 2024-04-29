@@ -1,8 +1,12 @@
+#region
+
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Threading;
+
+#endregion
 
 namespace AIO
 {
@@ -11,6 +15,19 @@ namespace AIO
     /// </summary>
     public sealed class HttpDownloadInfo : IDisposable
     {
+        /// <summary>
+        /// 下载信息
+        /// </summary>
+        /// <param name="url">下载地址</param>
+        /// <param name="savePath">保存文件夹</param>
+        /// <param name="name">文件名</param>
+        internal HttpDownloadInfo(in string url, in string savePath, in string name)
+        {
+            URL      = url;
+            SavePath = savePath;
+            Name     = name;
+        }
+
         /// <summary>
         /// 下载地址
         /// </summary>
@@ -81,18 +98,18 @@ namespace AIO
         /// </summary>
         private CancellationTokenSource CancelToken { get; set; }
 
+        #region IDisposable Members
+
         /// <summary>
-        /// 下载信息
+        /// 释放
         /// </summary>
-        /// <param name="url">下载地址</param>
-        /// <param name="savePath">保存文件夹</param>
-        /// <param name="name">文件名</param>
-        internal HttpDownloadInfo(in string url, in string savePath, in string name)
+        public void Dispose()
         {
-            URL = url;
-            SavePath = savePath;
-            Name = name;
+            CancelToken?.Dispose();
+            Response?.Dispose();
         }
+
+        #endregion
 
         /// <summary>
         /// 取消下载
@@ -121,7 +138,7 @@ namespace AIO
         {
             Response = value;
             if (Response.Content.Headers.ContentLength != null) FileSize = (long)Response.Content.Headers.ContentLength;
-            else FileSize = 0;
+            else FileSize                                                = 0;
             return this;
         }
 
@@ -133,7 +150,7 @@ namespace AIO
 
         internal HttpDownloadInfo SetResume(in long value)
         {
-            IsResume = true;
+            IsResume       = true;
             DownloadedSize = value;
             return this;
         }
@@ -153,7 +170,10 @@ namespace AIO
 
         internal HttpDownloadInfo Finish()
         {
-            if (Stopwatch == null) Time = TimeSpan.Zero;
+            if (Stopwatch == null)
+            {
+                Time = TimeSpan.Zero;
+            }
             else
             {
                 Time = Stopwatch.Elapsed;
@@ -168,15 +188,6 @@ namespace AIO
         {
             MD5 = md5;
             return this;
-        }
-
-        /// <summary>
-        /// 释放
-        /// </summary>
-        public void Dispose()
-        {
-            CancelToken?.Dispose();
-            Response?.Dispose();
         }
     }
 }

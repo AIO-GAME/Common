@@ -1,15 +1,12 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+#region
 
+using System.Runtime.CompilerServices;
+using System.Text;
+
+#endregion
 
 namespace AIO
 {
-    using System.Runtime.CompilerServices;
-    using System.Text;
-
     public partial class ExtendChar
     {
         /// <summary>
@@ -19,7 +16,7 @@ namespace AIO
         public static int GetBytesLength(this char value)
         {
             // 使用中文支持编码
-            return Encoding.BigEndianUnicode.GetByteCount(new char[] { value });
+            return Encoding.BigEndianUnicode.GetByteCount(new[] { value });
         }
 
         /// <summary>

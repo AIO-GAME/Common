@@ -2,10 +2,12 @@
 {
     public sealed partial class PrMac
     {
+        #region Nested type: Open
+
         /// <summary>
         /// 打开指令
         /// </summary>
-        public sealed partial class Open
+        public sealed class Open
         {
             /// <summary>
             /// 打开文件
@@ -21,7 +23,7 @@
             /// </summary>
             public static IExecutor Shell(in string target)
             {
-                return Duti.DefaultPrograms("com.apple.Terminal", "public.shell-script", "all").Link(Path(target));
+                return Duti.DefaultPrograms("com.apple.Terminal", "public.shell-script").Link(Path(target));
             }
 
             /// <summary>
@@ -32,5 +34,7 @@
                 return Create(CMD_Open, "{0} '{1}'", command, target.Replace('\\', '/'));
             }
         }
+
+        #endregion
     }
 }

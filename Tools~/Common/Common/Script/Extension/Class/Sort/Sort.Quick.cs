@@ -1,11 +1,9 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2024-03-27
-|*|E-Mail:     |*| xinansky99@gmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -14,65 +12,71 @@ namespace AIO
         #region 快速排序
 
         /// <summary>
-        /// 快速排序
+        ///    快速排序
         /// </summary>
-        private static IList<T> SortQuick<T>(IList<T> array) where T : IComparable
+        /// <param name="array">数组</param>
+        /// <param name="start">索引</param>
+        /// <param name="end">数量</param>
+        /// <param name="comparer">比较器</param>
+        /// <typeparam name="T">泛型</typeparam>
+        /// <returns>返回排序后的数组</returns>
+        internal static IList<T> SortQuick<T>(IList<T> array, in int start, in int end, in IComparer<T> comparer)
         {
-            if (array.Count < 2) return array;
-            Quick(array, 0, array.Count - 1);
+            if (array.Count >= 2) Quick(array, start, end, comparer);
             return array;
-        }
-
-        private static void Quick<T>(in IList<T> a, in int l, in int r) where T : IComparable
-        {
-            if (l < r)
-            {
-                var i = l;
-                var j = r;
-                var x = a[i];
-                while (i < j)
-                {
-                    while (i < j && a[j].CompareTo(x) > 0) j--;
-                    if (i < j) a[i++] = a[j];
-                    while (i < j && a[i].CompareTo(x) < 0) i++;
-                    if (i < j) a[j--] = a[i];
-                }
-
-                a[i] = x;
-                Quick(a, l, i - 1);
-                Quick(a, i + 1, r);
-            }
         }
 
         /// <summary>
-        /// 快速排序
+        ///    快速排序
         /// </summary>
-        private static IList<T> SortQuick<T>(IList<T> array, in Func<T, T, int> Comparer)
+        /// <param name="array">数组</param>
+        /// <param name="start">索引</param>
+        /// <param name="end">数量</param>
+        /// <typeparam name="T">泛型</typeparam>
+        /// <returns>返回排序后的数组</returns>
+        internal static IList<T> SortQuick<T>(IList<T> array, in int start, in int end) where T : IComparable<T>
         {
-            if (array.Count < 2) return array;
-            Quick(array, 0, array.Count - 1, Comparer);
+            if (array.Count >= 2) Quick(array, start, end);
             return array;
         }
 
-        private static void Quick<T>(in IList<T> a, in int l, in int r, in Func<T, T, int> Comparer)
+        private static void Quick<T>(in IList<T> a, in int l, in int r, in IComparer<T> comparer)
         {
-            if (l < r)
+            if (l >= r) return;
+            var i = l;
+            var j = r;
+            var x = a[i];
+            while (i < j)
             {
-                var i = l;
-                var j = r;
-                var x = a[i];
-                while (i < j)
-                {
-                    while (i < j && Comparer(x, a[j]) > 0) j--;
-                    if (i < j) a[i++] = a[j];
-                    while (i < j && Comparer(x, a[i]) < 0) i++;
-                    if (i < j) a[j--] = a[i];
-                }
-
-                a[i] = x;
-                Quick(a, l, i - 1, Comparer);
-                Quick(a, i + 1, r, Comparer);
+                while (i < j && comparer.Compare(x, a[j]) < 0) j--;
+                if (i < j) a[i++] = a[j];
+                while (i < j && comparer.Compare(x, a[i]) > 0) i++;
+                if (i < j) a[j--] = a[i];
             }
+
+            a[i] = x;
+            Quick(a, l, i - 1, comparer);
+            Quick(a, i + 1, r, comparer);
+        }
+
+        private static void Quick<T>(in IList<T> a, in int l, in int r)
+        where T : IComparable<T>
+        {
+            if (l >= r) return;
+            var i = l;
+            var j = r;
+            var x = a[i];
+            while (i < j)
+            {
+                while (i < j && a[j].CompareTo(x) < 0) j--;
+                if (i < j) a[i++] = a[j];
+                while (i < j && a[i].CompareTo(x) > 0) i++;
+                if (i < j) a[j--] = a[i];
+            }
+
+            a[i] = x;
+            Quick(a, l, i - 1);
+            Quick(a, i + 1, r);
         }
 
         #endregion

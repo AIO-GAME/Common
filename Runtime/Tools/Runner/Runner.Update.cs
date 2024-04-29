@@ -6,10 +6,14 @@ using Cysharp.Threading.Tasks;
 #endif
 
 #if (ENABLE_UPDATE_FUNCTION_CALLBACK)
+
+#region
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
@@ -18,88 +22,14 @@ namespace AIO
         /// <summary>
         /// Update等待队列
         /// </summary>
-        [ContextStatic] private static readonly Queue<Delegate> actionQueuesUpdateFunc = new Queue<Delegate>();
+        [ContextStatic]
+        private static readonly Queue<Delegate> actionQueuesUpdateFunc = new Queue<Delegate>();
 
         /// <summary>
         /// 执行状态
         /// </summary>
-        [ContextStatic] private static volatile bool noActionQueueToExecuteUpdateFunc = true;
-
-        #region 协程
-
-        /// <summary>
-        /// 执行协程
-        /// </summary>
-        public static void Update(IEnumerator coroutine)
-        {
-#if SUPPORT_UNITASK
-            coroutine.ToUniTask().Preserve().SuppressCancellationThrow();
-#else
-            instance.StartCoroutine(coroutine);
-#endif
-        }
-
-        /// <summary>
-        /// 执行协程
-        /// </summary>
-        public static void Update(Func<IEnumerator> coroutine)
-        {
-#if SUPPORT_UNITASK
-            coroutine.Invoke().ToUniTask().Preserve().SuppressCancellationThrow();
-#else
-            instance.StartCoroutine(coroutine?.Invoke());
-#endif
-        }
-
-        /// <summary>
-        /// 执行协程
-        /// </summary>
-        public static void Update(params Func<IEnumerator>[] coroutines)
-        {
-            if (coroutines.Length == 0) return;
-            foreach (var coroutine in coroutines)
-            {
-#if SUPPORT_UNITASK
-                coroutine.Invoke().ToUniTask().Preserve().SuppressCancellationThrow();
-#else
-                instance.StartCoroutine(coroutine?.Invoke());
-#endif
-            }
-        }
-
-        /// <summary>
-        /// 执行协程
-        /// </summary>
-        public static void Update(IList<Func<IEnumerator>> coroutines)
-        {
-            if (coroutines is null || coroutines.Count == 0) return;
-            for (var index = 0; index < coroutines.Count; index++)
-            {
-#if SUPPORT_UNITASK
-                coroutines[index]?.Invoke().ToUniTask().Preserve().SuppressCancellationThrow();
-#else
-                instance.StartCoroutine(coroutines[index]?.Invoke());
-#endif
-            }
-        }
-
-        /// <summary>
-        /// 执行协程
-        /// </summary>
-        public static void Update(params IEnumerator[] coroutines)
-        {
-            if (coroutines.Length == 0) return;
-            foreach (var coroutine in coroutines)
-            {
-#if SUPPORT_UNITASK
-                coroutine.ToUniTask().Preserve().SuppressCancellationThrow();
-#else
-                    instance.StartCoroutine(coroutine);
-#endif
-            }
-        }
-
-        #endregion
+        [ContextStatic]
+        private static volatile bool noActionQueueToExecuteUpdateFunc = true;
 
         /// <summary>
         /// 在Update中执行
@@ -181,6 +111,8 @@ namespace AIO
             }
         }
 
+        #region Nested type: ThreadMono
+
         private partial class ThreadMono
         {
             public void Update()
@@ -216,6 +148,84 @@ namespace AIO
                 }
             }
         }
+
+        #endregion
+
+        #region 协程
+
+        /// <summary>
+        /// 执行协程
+        /// </summary>
+        public static void Update(IEnumerator coroutine)
+        {
+#if SUPPORT_UNITASK
+            coroutine.ToUniTask().Preserve().SuppressCancellationThrow();
+#else
+            instance.StartCoroutine(coroutine);
+#endif
+        }
+
+        /// <summary>
+        /// 执行协程
+        /// </summary>
+        public static void Update(Func<IEnumerator> coroutine)
+        {
+#if SUPPORT_UNITASK
+            coroutine.Invoke().ToUniTask().Preserve().SuppressCancellationThrow();
+#else
+            instance.StartCoroutine(coroutine?.Invoke());
+#endif
+        }
+
+        /// <summary>
+        /// 执行协程
+        /// </summary>
+        public static void Update(params Func<IEnumerator>[] coroutines)
+        {
+            if (coroutines.Length == 0) return;
+            foreach (var coroutine in coroutines)
+            {
+#if SUPPORT_UNITASK
+                coroutine.Invoke().ToUniTask().Preserve().SuppressCancellationThrow();
+#else
+                instance.StartCoroutine(coroutine?.Invoke());
+#endif
+            }
+        }
+
+        /// <summary>
+        /// 执行协程
+        /// </summary>
+        public static void Update(IList<Func<IEnumerator>> coroutines)
+        {
+            if (coroutines is null || coroutines.Count == 0) return;
+            for (var index = 0; index < coroutines.Count; index++)
+            {
+#if SUPPORT_UNITASK
+                coroutines[index]?.Invoke().ToUniTask().Preserve().SuppressCancellationThrow();
+#else
+                instance.StartCoroutine(coroutines[index]?.Invoke());
+#endif
+            }
+        }
+
+        /// <summary>
+        /// 执行协程
+        /// </summary>
+        public static void Update(params IEnumerator[] coroutines)
+        {
+            if (coroutines.Length == 0) return;
+            foreach (var coroutine in coroutines)
+            {
+#if SUPPORT_UNITASK
+                coroutine.ToUniTask().Preserve().SuppressCancellationThrow();
+#else
+                instance.StartCoroutine(coroutine);
+#endif
+            }
+        }
+
+        #endregion
     }
 
 #endif

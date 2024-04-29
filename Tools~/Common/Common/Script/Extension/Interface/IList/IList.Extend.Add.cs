@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -13,9 +17,8 @@ namespace AIO
             if (array is null) throw new ArgumentNullException(nameof(array), "The input array is null.");
             if (others is null) return;
             foreach (var t in others)
-            {
-                if (!array.Contains(t)) array.Add(t);
-            }
+                if (!array.Contains(t))
+                    array.Add(t);
         }
 
         /// <summary>
@@ -54,6 +57,19 @@ namespace AIO
         /// <summary>
         /// 添加
         /// </summary>
+        public static void Add<T>(this IList<T> array, in T a1, in T a2, in T a3, in T a4, in T a5)
+        {
+            if (array is null) throw new ArgumentNullException(nameof(array));
+            array.Add(a1);
+            array.Add(a2);
+            array.Add(a3);
+            array.Add(a4);
+            array.Add(a5);
+        }
+
+        /// <summary>
+        /// 添加
+        /// </summary>
         public static void Add<T>(this IList<T> array, IEnumerable<T> arr)
         {
             if (array is null) throw new ArgumentNullException(nameof(array));
@@ -86,16 +102,15 @@ namespace AIO
             if (array is null) throw new ArgumentNullException(nameof(array));
             if (others == null || others.Count == 0) return;
 
-            if (start < 0) start = 0;
+            if (start < 0) start            = 0;
             if (start > others.Count) start = others.Count;
 
-            if (end < start) end = start;
+            if (end < start) end        = start;
             if (end > others.Count) end = others.Count;
 
             if (start < others.Count - 1 && end > start)
-            {
-                for (var i = start; i < end; ++i) array.Add(others[i]);
-            }
+                for (var i = start; i < end; ++i)
+                    array.Add(others[i]);
         }
     }
 }

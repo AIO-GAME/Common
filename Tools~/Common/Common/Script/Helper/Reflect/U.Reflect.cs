@@ -1,18 +1,18 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-06-29
-
-|||✩ - - - - - |*/
+﻿#region
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: Reflect
+
         /// <summary>
         /// 反射工具库
         /// </summary>
@@ -100,9 +100,7 @@ namespace AIO
             /// <returns>所有类型集合</returns>
             public static Type[] GetTypesInRunTimeAssemblies(Func<Type, bool> filter)
             {
-                return AppDomain.CurrentDomain.GetAssemblies()
-                    .SelectMany(assembly => assembly.GetTypes().Where(filter))
-                    .ToArray();
+                return AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes().Where(filter)).ToArray();
             }
 
             /// <summary>
@@ -111,9 +109,7 @@ namespace AIO
             /// <returns>所有类型集合</returns>
             public static Type[] GetTypesInAllAssemblies()
             {
-                return AppDomain.CurrentDomain.GetAssemblies()
-                    .SelectMany(assembly => assembly.GetTypes())
-                    .ToArray();
+                return AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => assembly.GetTypes()).ToArray();
             }
 
             /// <summary>
@@ -124,10 +120,12 @@ namespace AIO
             public static Type[] GetTypesInAllAssemblies(Func<Type, bool> filter)
             {
                 return (from t1 in AppDomain.CurrentDomain.GetAssemblies()
-                    from t in t1.GetTypes()
-                    where filter(t)
-                    select t).ToArray();
+                        from t in t1.GetTypes()
+                        where filter(t)
+                        select t).ToArray();
             }
         }
+
+        #endregion
     }
 }

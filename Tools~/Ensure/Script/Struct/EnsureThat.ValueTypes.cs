@@ -1,4 +1,8 @@
+#region
+
 using System;
+
+#endregion
 
 namespace AIO
 {
@@ -8,14 +12,12 @@ namespace AIO
         /// 验证数据 报错条件
         /// [default(T).Equals(param)]
         /// </summary>
-        public void IsNotDefault<T>(in T param) where T : struct
+        public void IsNotDefault<T>(in T param)
+        where T : struct
         {
             if (!Ensure.IsActive) return;
 
-            if (default(T).Equals(param))
-            {
-                throw new ArgumentException(ExceptionMessages.ValueTypes_IsNotDefault_Failed, paramName);
-            }
+            if (default(T).Equals(param)) throw new ArgumentException(ExceptionMessages.ValueTypes_IsNotDefault_Failed, paramName);
         }
     }
 }

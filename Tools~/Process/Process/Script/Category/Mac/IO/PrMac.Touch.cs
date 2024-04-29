@@ -1,13 +1,19 @@
-﻿using System.IO;
+﻿#region
+
+using System.IO;
+
+#endregion
 
 namespace AIO
 {
     public sealed partial class PrMac
     {
+        #region Nested type: Touch
+
         /// <summary>
         /// 更新文件的访问和修改时间
         /// </summary>
-        public sealed partial class Touch
+        public sealed class Touch
         {
             /// <summary>
             /// 执行
@@ -19,5 +25,7 @@ namespace AIO
                 return Chmod.Set777(target).Link(Create(CMD_Touch, cmd));
             }
         }
+
+        #endregion
     }
 }

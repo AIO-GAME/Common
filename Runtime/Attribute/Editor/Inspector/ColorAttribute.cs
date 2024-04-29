@@ -1,20 +1,18 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Diagnostics;
+
+#endregion
 
 namespace AIO.UEditor
 {
     /// <summary>
     /// 颜色检视器
     /// </summary>
-    [AttributeUsage(AttributeTargets.Field)]
-    [Conditional("UNITY_EDITOR")]
+    [AttributeUsage(AttributeTargets.Field), Conditional("UNITY_EDITOR")]
     public sealed class ColorAttribute : InspectorAttribute
     {
-        public float R { get; private set; }
-        public float G { get; private set; }
-        public float B { get; private set; }
-        public float A { get; private set; }
-
         /// <summary>
         /// 颜色检视器
         /// </summary>
@@ -29,5 +27,10 @@ namespace AIO.UEditor
             B = b;
             A = a;
         }
+
+        public float R { get; private set; }
+        public float G { get; private set; }
+        public float B { get; private set; }
+        public float A { get; private set; }
     }
 }

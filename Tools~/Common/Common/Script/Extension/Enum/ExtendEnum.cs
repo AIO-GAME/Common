@@ -1,29 +1,25 @@
-﻿/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+﻿#region
 
-
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
+using System.Reflection;
+
+#endregion
 
 namespace AIO
 {
-    using System;
-    using System.ComponentModel;
-    using System.Reflection;
-
     /// <summary>
     /// 枚举扩展
     /// </summary>
-    public static partial class ExtendEnum
+    public static class ExtendEnum
     {
         /// <summary>
         /// 获取属性值
         /// </summary>
-        public static T GetAttribute<T>(this Enum value) where T : Attribute
+        public static T GetAttribute<T>(this Enum value)
+        where T : Attribute
         {
             var fieldInfo = value.GetType().GetField(value.ToString());
             var attributes = (T[])fieldInfo.GetCustomAttributes(typeof(T), false);
@@ -33,7 +29,8 @@ namespace AIO
         /// <summary>
         /// Gets attributes on an enum member, eg. enum E { [Attr] A }
         /// </summary>
-        public static IEnumerable<T> GetAttributeOfEnumMember<T>(this Enum enumVal) where T : Attribute
+        public static IEnumerable<T> GetAttributeOfEnumMember<T>(this Enum enumVal)
+        where T : Attribute
         {
             var type = enumVal.GetType();
             var memInfo = type.GetMember(enumVal.ToString());
@@ -44,7 +41,8 @@ namespace AIO
         /// <summary>
         /// 获取指定描述列表
         /// </summary>
-        public static Dictionary<T, string> GetDescriptionDic<T>(this T value) where T : struct, Enum
+        public static Dictionary<T, string> GetDescriptionDic<T>(this T value)
+        where T : struct, Enum
         {
             var type = typeof(T);
             var descriptionDic = new Dictionary<T, string>();
@@ -64,7 +62,8 @@ namespace AIO
         /// <summary>
         /// 获取自定义属性值
         /// </summary>
-        public static string GetDescription<T>(this T value) where T : struct, Enum
+        public static string GetDescription<T>(this T value)
+        where T : struct, Enum
         {
             var description = value.ToString();
             var fieldInfo = value.GetType().GetField(description);

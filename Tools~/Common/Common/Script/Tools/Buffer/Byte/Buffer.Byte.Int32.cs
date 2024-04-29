@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
     public partial class BufferByte
     {
+        #region IReadData Members
+
         /// <inheritdoc/> 
         public int ReadInt32(bool reverse = false)
         {
@@ -15,6 +21,10 @@ namespace AIO
         {
             return Arrays.GetInt32Array(ref ReadIndex, reverse);
         }
+
+        #endregion
+
+        #region IWriteData Members
 
         /// <inheritdoc/> 
         public void WriteInt32(int value, bool reverse = false)
@@ -28,7 +38,9 @@ namespace AIO
         {
             WriteLen(value.Count);
             AutomaticExpansion(value.Count * 4);
-          foreach (var item in value) Arrays.SetInt32(ref WriteIndex, item, reverse);
+            foreach (var item in value) Arrays.SetInt32(ref WriteIndex, item, reverse);
         }
+
+        #endregion
     }
 }

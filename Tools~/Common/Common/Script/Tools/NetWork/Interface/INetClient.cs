@@ -1,11 +1,9 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-08
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Net;
+
+#endregion
 
 namespace AIO.Net
 {
@@ -31,6 +29,11 @@ namespace AIO.Net
         /// </summary>
         /// <returns>'true' if the client was successfully reconnected, 'false' if the client is already reconnected</returns>
         bool Reconnect();
+
+        /// <summary>
+        /// Receive datagram from the server (asynchronous)
+        /// </summary>
+        void ReceiveAsync();
 
         #region Send
 
@@ -137,10 +140,5 @@ namespace AIO.Net
         bool SendAsync(EndPoint endpoint, byte[] buffer);
 
         #endregion
-
-        /// <summary>
-        /// Receive datagram from the server (asynchronous)
-        /// </summary>
-        void ReceiveAsync();
     }
 }

@@ -1,9 +1,15 @@
+#region
+
 using System.IO;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         /// <summary>
         /// IO工具类
         /// </summary>
@@ -18,7 +24,7 @@ namespace AIO
             public static void MoveFile(
                 string source,
                 string target,
-                bool overlay = false
+                bool   overlay = false
             )
             {
                 source = source.Replace('\\', Path.AltDirectorySeparatorChar);
@@ -48,7 +54,7 @@ namespace AIO
             public static void MoveDir(
                 string source,
                 string target,
-                bool overlay = false
+                bool   overlay = false
             )
             {
                 source = source.Replace('\\', Path.AltDirectorySeparatorChar);
@@ -63,5 +69,7 @@ namespace AIO
                 Directory.Move(source, target);
             }
         }
+
+        #endregion
     }
 }

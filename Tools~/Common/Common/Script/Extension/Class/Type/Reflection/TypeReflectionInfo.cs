@@ -1,94 +1,27 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using AIO.YamlDotNet;
+
+#endregion
 
 namespace AIO
 {
     /// <summary>
-    /// 类型反射信息
+    ///     类型反射信息
     /// </summary>
     public class TypeReflectionInfo : ReflectionInfo
     {
         private Type _info;
-
-        /// <summary>
-        /// 空
-        /// </summary>
-        public static TypeReflectionInfo Empty { get; } = new TypeReflectionInfo();
-
-        /// <summary>
-        /// 是否为泛型类型
-        /// </summary>
-        public bool IsGenericType { get; protected set; }
-
-        /// <summary>
-        /// 泛型申明
-        /// </summary>
-        public string FullGenericArgument
-        {
-            get
-            {
-                if (GenericArguments is null || GenericArguments.Length == 0) return string.Empty;
-                var str = new StringBuilder();
-                for (var i = 0; i < GenericArguments.Length; i++)
-                {
-                    if (string.IsNullOrEmpty(GenericArguments[i])) continue;
-                    str.Append(GenericArguments[i]);
-                    if (i != GenericArguments.Length - 1)
-                        str.Append(", ");
-                }
-
-                return str.ToString();
-            }
-        }
-
-        /// <summary>
-        /// 泛型约束
-        /// </summary>
-        public string FullGenericConstraint
-        {
-            get
-            {
-                if (GenericConstraints is null || GenericConstraints.Length == 0) return string.Empty;
-                var str = new StringBuilder();
-                for (var i = 0; i < GenericConstraints.Length; i++)
-                {
-                    str.Append(GenericConstraints[i]);
-                    if (i != GenericConstraints.Length - 1) str.Append(", ");
-                }
-
-                return str.ToString();
-            }
-        }
-
-        /// <summary>
-        /// 泛型声明
-        /// </summary>
-        public string[] GenericArguments { get; private set; }
-
-        /// <summary>
-        /// 泛型约束
-        /// </summary>
-        public string[] GenericConstraints { get; private set; }
-
-        /// <summary>
-        /// 是否为数组
-        /// </summary>
-        public bool IsArray { get; protected set; }
-
-        /// <summary>
-        /// 是否为指针
-        /// </summary>
-        public bool IsPointer { get; protected set; }
 
         private TypeReflectionInfo()
         {
             Name = "type is null";
         }
 
-        /// <inheritdoc /> 
+        /// <inheritdoc />
         internal TypeReflectionInfo(Type info)
         {
             if (info is null)
@@ -98,15 +31,15 @@ namespace AIO
             }
 
             _info = info;
-            Access = info.IsPublic ? "public" :
-                info.IsNotPublic ? "private" :
+            Access = info.IsPublic  ? "public" :
+                info.IsNotPublic    ? "private" :
                 info.IsNestedFamily ? "protected" : "internal";
-            IsUnsafe = info.IsSecurityCritical;
-            IsStatic = info.IsAbstract && info.IsSealed;
-            IsGeneric = info.IsGenericType;
+            IsUnsafe      = info.IsSecurityCritical;
+            IsStatic      = info.IsAbstract && info.IsSealed;
+            IsGeneric     = info.IsGenericType;
             IsGenericType = info.IsGenericType;
-            IsArray = info.IsArray;
-            IsPointer = info.IsPointer;
+            IsArray       = info.IsArray;
+            IsPointer     = info.IsPointer;
             if (info == typeof(void))
             {
                 Name = "void";
@@ -119,13 +52,15 @@ namespace AIO
                 var genericArguments = info.GetGenericArguments();
                 var genericTypeStr = definition.FullName;
                 if (string.IsNullOrEmpty(genericTypeStr))
+                {
                     Name = definition.Name;
+                }
                 else
                 {
                     Name = genericTypeStr.Substring(0, genericTypeStr.IndexOf('`'));
                     GenericArguments = genericArguments.Select(genericArgument => genericArgument.IsGenericParameter
-                        ? genericArgument.Name
-                        : new TypeReflectionInfo(genericArgument).ToString()).ToArray();
+                                                                   ? genericArgument.Name
+                                                                   : new TypeReflectionInfo(genericArgument).ToString()).ToArray();
                     if (info.IsGenericTypeDefinition)
                     {
                         var genericConstraints = _info.MakeGenericType(genericArguments).GetGenericArguments();
@@ -149,8 +84,8 @@ namespace AIO
                                 tempBuilder.Append("struct, ");
 
                             tempBuilder.Append(string.Join(",", g.
-                                GetGenericParameterConstraints().
-                                Select(c => c.ToDetails())));
+                                                                GetGenericParameterConstraints().
+                                                                Select(c => c.ToDetails())));
 
                             if (hasNotNullableValueTypeConstraint)
                                 tempBuilder.Replace("System.ValueType", "");
@@ -174,9 +109,7 @@ namespace AIO
             else if (info.IsArray)
             {
                 if (info.ContainsGenericParameters)
-                {
-                    Name = info.Name;
-                }
+                    Name  = info.Name;
                 else Name = info.GetElementType().ToDetails() + "[]";
             }
             else if (info.IsByRef)
@@ -187,29 +120,102 @@ namespace AIO
             {
                 Name = info.GetElementType().ToDetails() + "*";
             }
-            else Name = info.FullName;
+            else
+            {
+                Name = info.FullName;
+            }
 
             if (string.IsNullOrEmpty(Name)) throw new NotSupportedException("type is null");
             Name = Name.
-                Replace("System.Void", "void").
-                Replace("System.String", "string").
-                Replace("System.Int32", "int").
-                Replace("System.Single", "float").
-                Replace("System.Boolean", "bool").
-                Replace("System.Object", "object").
-                Replace("System.Byte", "byte").
-                Replace("System.Char", "char").
-                Replace("System.Double", "double").
-                Replace("System.UInt32", "uint").
-                Replace("System.UInt64", "ulong").
-                Replace("System.UInt16", "ushort").
-                Replace("System.Int64", "long").
-                Replace("System.Int16", "short").
-                Replace("System.SByte", "sbyte").
-                Replace("System.Decimal", "decimal").
-                Replace("&", "").
-                Replace('+', '.');
+                   Replace("System.Void", "void").
+                   Replace("System.String", "string").
+                   Replace("System.Int32", "int").
+                   Replace("System.Single", "float").
+                   Replace("System.Boolean", "bool").
+                   Replace("System.Object", "object").
+                   Replace("System.Byte", "byte").
+                   Replace("System.Char", "char").
+                   Replace("System.Double", "double").
+                   Replace("System.UInt32", "uint").
+                   Replace("System.UInt64", "ulong").
+                   Replace("System.UInt16", "ushort").
+                   Replace("System.Int64", "long").
+                   Replace("System.Int16", "short").
+                   Replace("System.SByte", "sbyte").
+                   Replace("System.Decimal", "decimal").
+                   Replace("&", "").
+                   Replace('+', '.');
         }
+
+        /// <summary>
+        ///     空
+        /// </summary>
+        public static TypeReflectionInfo Empty { get; } = new TypeReflectionInfo();
+
+        /// <summary>
+        ///     是否为泛型类型
+        /// </summary>
+        public bool IsGenericType { get; protected set; }
+
+        /// <summary>
+        ///     泛型申明
+        /// </summary>
+        public string FullGenericArgument
+        {
+            get
+            {
+                if (GenericArguments is null || GenericArguments.Length == 0) return string.Empty;
+                var str = new StringBuilder();
+                for (var i = 0; i < GenericArguments.Length; i++)
+                {
+                    if (string.IsNullOrEmpty(GenericArguments[i])) continue;
+                    str.Append(GenericArguments[i]);
+                    if (i != GenericArguments.Length - 1)
+                        str.Append(", ");
+                }
+
+                return str.ToString();
+            }
+        }
+
+        /// <summary>
+        ///     泛型约束
+        /// </summary>
+        public string FullGenericConstraint
+        {
+            get
+            {
+                if (GenericConstraints is null || GenericConstraints.Length == 0) return string.Empty;
+                var str = new StringBuilder();
+                for (var i = 0; i < GenericConstraints.Length; i++)
+                {
+                    str.Append(GenericConstraints[i]);
+                    if (i != GenericConstraints.Length - 1) str.Append(", ");
+                }
+
+                return str.ToString();
+            }
+        }
+
+        /// <summary>
+        ///     泛型声明
+        /// </summary>
+        public string[] GenericArguments { get; private set; }
+
+        /// <summary>
+        ///     泛型约束
+        /// </summary>
+        public string[] GenericConstraints { get; private set; }
+
+        /// <summary>
+        ///     是否为数组
+        /// </summary>
+        public bool IsArray { get; protected set; }
+
+        /// <summary>
+        ///     是否为指针
+        /// </summary>
+        public bool IsPointer { get; protected set; }
 
         /// <inheritdoc />
         protected override string FullDescription()
@@ -218,7 +224,7 @@ namespace AIO
             var str = new StringBuilder
             {
                 Capacity = 32,
-                Length = 0
+                Length   = 0
             };
             str.Append(Name);
             var temp = FullGenericArgument;
@@ -231,9 +237,9 @@ namespace AIO
         /// <inheritdoc />
         public override void Dispose()
         {
-            GenericArguments = null;
+            GenericArguments   = null;
             GenericConstraints = null;
-            _info = null;
+            _info              = null;
         }
     }
 }

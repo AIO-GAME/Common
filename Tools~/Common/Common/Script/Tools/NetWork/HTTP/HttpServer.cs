@@ -1,12 +1,10 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-07
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.IO;
 using System.Net;
+
+#endregion
 
 namespace AIO.Net
 {
@@ -117,10 +115,8 @@ namespace AIO.Net
             if (!_disposed)
             {
                 if (disposingManagedResources)
-                {
                     // Dispose managed resources here...
                     Cache.Dispose();
-                }
 
                 // Dispose unmanaged resources here...
 

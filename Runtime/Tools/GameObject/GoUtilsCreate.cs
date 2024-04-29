@@ -1,5 +1,9 @@
+#region
+
 using UnityEngine;
 using Object = UnityEngine.Object;
+
+#endregion
 
 namespace AIO.UEngine
 {
@@ -34,25 +38,25 @@ namespace AIO.UEngine
         }
 
 
-        public static GameObject CreateGameObject(in string name, in Transform parent, in Vector3 localPos,
-            in Vector3 localEulerAngles)
+        public static GameObject CreateGameObject(in string  name, in Transform parent, in Vector3 localPos,
+                                                  in Vector3 localEulerAngles)
         {
             var obj = new GameObject(name);
             obj.transform.SetParent(parent, false);
-            obj.transform.localPosition = localPos;
+            obj.transform.localPosition    = localPos;
             obj.transform.localEulerAngles = localEulerAngles;
             return obj;
         }
 
 
-        public static GameObject CreateGameObject(in string name, in Transform parent, in Vector3 localPos,
-            in Vector3 localEulerAngles, in Vector3 localScale)
+        public static GameObject CreateGameObject(in string  name,             in Transform parent, in Vector3 localPos,
+                                                  in Vector3 localEulerAngles, in Vector3   localScale)
         {
             var obj = new GameObject(name);
             obj.transform.SetParent(parent, false);
-            obj.transform.localPosition = localPos;
+            obj.transform.localPosition    = localPos;
             obj.transform.localEulerAngles = localEulerAngles;
-            obj.transform.localScale = localScale;
+            obj.transform.localScale       = localScale;
             return obj;
         }
 
@@ -78,20 +82,20 @@ namespace AIO.UEngine
         {
             var obj = new GameObject();
             obj.SetParent(parent, false);
-            obj.transform.localPosition = localPos;
+            obj.transform.localPosition    = localPos;
             obj.transform.localEulerAngles = localEulerAngles;
             return obj;
         }
 
 
         public static GameObject CreateGameObject(in Transform parent, in Vector3 localPos, in Vector3 localEulerAngles,
-            in Vector3 localScale)
+                                                  in Vector3   localScale)
         {
             var obj = new GameObject();
             obj.SetParent(parent, false);
-            obj.transform.localPosition = localPos;
+            obj.transform.localPosition    = localPos;
             obj.transform.localEulerAngles = localEulerAngles;
-            obj.transform.localScale = localScale;
+            obj.transform.localScale       = localScale;
             return obj;
         }
 
@@ -115,7 +119,7 @@ namespace AIO.UEngine
             {
                 transform =
                 {
-                    localPosition = localPos,
+                    localPosition    = localPos,
                     localEulerAngles = localEulerAngles
                 }
             };
@@ -124,15 +128,15 @@ namespace AIO.UEngine
 
 
         public static GameObject CreateGameObject(in Vector3 localPos, in Vector3 localEulerAngles,
-            in Vector3 localScale)
+                                                  in Vector3 localScale)
         {
             var obj = new GameObject
             {
                 transform =
                 {
-                    localPosition = localPos,
+                    localPosition    = localPos,
                     localEulerAngles = localEulerAngles,
-                    localScale = localScale
+                    localScale       = localScale
                 }
             };
             return obj;
@@ -158,7 +162,7 @@ namespace AIO.UEngine
             {
                 transform =
                 {
-                    localPosition = localPos,
+                    localPosition    = localPos,
                     localEulerAngles = localEulerAngles
                 }
             };
@@ -166,16 +170,16 @@ namespace AIO.UEngine
         }
 
 
-        public static GameObject CreateGameObject(in string name, in Vector3 localPos, in Vector3 localEulerAngles,
-            in Vector3 localScale)
+        public static GameObject CreateGameObject(in string  name, in Vector3 localPos, in Vector3 localEulerAngles,
+                                                  in Vector3 localScale)
         {
             var obj = new GameObject(name)
             {
                 transform =
                 {
-                    localPosition = localPos,
+                    localPosition    = localPos,
                     localEulerAngles = localEulerAngles,
-                    localScale = localScale
+                    localScale       = localScale
                 }
             };
             return obj;
@@ -185,20 +189,23 @@ namespace AIO.UEngine
 
         #region Create Add Component
 
-        public static T1 CreateAddComponentWithGet<T1>(string name, Transform parent) where T1 : Component
+        public static T1 CreateAddComponentWithGet<T1>(string name, Transform parent)
+        where T1 : Component
         {
             var obj = new GameObject(name);
             obj.SetParent(parent, false);
             return obj.AddComponent<T1>();
         }
 
-        public static T CreateAddComponent<T>(string name) where T : Component
+        public static T CreateAddComponent<T>(string name)
+        where T : Component
         {
             var obj = new GameObject(name);
             return obj.AddComponent<T>();
         }
 
-        public static GameObject CreateAddComponent<T1, T2>(string name) where T1 : Component where T2 : Component
+        public static GameObject CreateAddComponent<T1, T2>(string name)
+        where T1 : Component where T2 : Component
         {
             var obj = new GameObject(name);
             obj.AddComponent<T1>();
@@ -207,7 +214,7 @@ namespace AIO.UEngine
         }
 
         public static GameObject CreateAddComponent<T1, T2, T3>(string name)
-            where T1 : Component where T2 : Component where T3 : Component
+        where T1 : Component where T2 : Component where T3 : Component
         {
             var obj = new GameObject(name);
             obj.AddComponent<T1>();
@@ -216,14 +223,16 @@ namespace AIO.UEngine
             return obj;
         }
 
-        public static GameObject CreateAddComponent<T1>(string name, params T1[] components) where T1 : Component
+        public static GameObject CreateAddComponent<T1>(string name, params T1[] components)
+        where T1 : Component
         {
             var obj = new GameObject(name);
             foreach (var item in components) obj.AddComponent(item.GetType());
             return obj;
         }
 
-        public static GameObject CreateAddComponent<T1>(string name, Transform parent) where T1 : Component
+        public static GameObject CreateAddComponent<T1>(string name, Transform parent)
+        where T1 : Component
         {
             var obj = new GameObject(name);
             obj.AddComponent<T1>();
@@ -232,7 +241,7 @@ namespace AIO.UEngine
         }
 
         public static GameObject CreateAddComponent<T1, T2>(string name, Transform parent)
-            where T1 : Component where T2 : Component
+        where T1 : Component where T2 : Component
         {
             var obj = new GameObject(name);
             obj.AddComponent<T1>();
@@ -242,7 +251,7 @@ namespace AIO.UEngine
         }
 
         public static GameObject CreateAddComponent<T1, T2, T3>(string name, Transform parent)
-            where T1 : Component where T2 : Component where T3 : Component
+        where T1 : Component where T2 : Component where T3 : Component
         {
             var obj = new GameObject(name);
             obj.AddComponent<T1>();
@@ -253,7 +262,7 @@ namespace AIO.UEngine
         }
 
         public static GameObject CreateAddComponent<T1>(string name, Transform parent, params T1[] components)
-            where T1 : Component
+        where T1 : Component
         {
             var obj = new GameObject(name);
             foreach (var item in components) obj.AddComponent(item.GetType());
@@ -263,7 +272,7 @@ namespace AIO.UEngine
 
 
         public static GameObject CreateAddComponent<T1>(string name, Transform parent, Vector3 vector)
-            where T1 : Component
+        where T1 : Component
         {
             var obj = new GameObject(name);
             obj.AddComponent<T1>();
@@ -274,7 +283,7 @@ namespace AIO.UEngine
 
 
         public static GameObject CreateAddComponent<T1, T2>(string name, Transform parent, Vector3 vector)
-            where T1 : Component where T2 : Component
+        where T1 : Component where T2 : Component
         {
             var obj = new GameObject(name);
             obj.AddComponent<T1>();
@@ -286,7 +295,7 @@ namespace AIO.UEngine
 
 
         public static GameObject CreateAddComponent<T1, T2, T3>(string name, Transform parent, Vector3 vector)
-            where T1 : Component where T2 : Component where T3 : Component
+        where T1 : Component where T2 : Component where T3 : Component
         {
             var obj = new GameObject(name);
             obj.AddComponent<T1>();
@@ -298,8 +307,9 @@ namespace AIO.UEngine
         }
 
 
-        public static GameObject CreateAddComponent<T1>(string name, Transform parent, Vector3 vector,
-            params T1[] components) where T1 : Component
+        public static GameObject CreateAddComponent<T1>(string      name, Transform parent, Vector3 vector,
+                                                        params T1[] components)
+        where T1 : Component
         {
             var obj = new GameObject(name);
             foreach (var item in components) obj.AddComponent(item.GetType());
@@ -325,28 +335,28 @@ namespace AIO.UEngine
         {
             if (original.Equals(null)) return null;
             var go = Object.Instantiate(original, parent, false);
-            go.name = original.name;
+            go.name                    = original.name;
             go.transform.localPosition = localPos;
             return go;
         }
 
         public static GameObject Instantiate(in GameObject original, in string name, in Transform parent,
-            in Vector3 localPos)
+                                             in Vector3    localPos)
         {
             if (original.Equals(null)) return null;
             var go = Object.Instantiate(original, parent, true);
-            go.name = name;
+            go.name                    = name;
             go.transform.localPosition = localPos;
             return go;
         }
 
 
         public static GameObject Instantiate(in GameObject original, in Transform parent, in Vector3 localPos,
-            in Quaternion localRot)
+                                             in Quaternion localRot)
         {
             if (original.Equals(null)) return null;
             var go = Object.Instantiate(original, parent, false);
-            go.name = original.name;
+            go.name                    = original.name;
             go.transform.localPosition = localPos;
             go.transform.localRotation = localRot;
             return go;
@@ -354,19 +364,20 @@ namespace AIO.UEngine
 
 
         public static GameObject Instantiate(in GameObject original, in Transform parent, in Vector3 localPos,
-            in Quaternion localRot, in Vector3 localScale)
+                                             in Quaternion localRot, in Vector3   localScale)
         {
             if (original.Equals(null)) return null;
             var go = Object.Instantiate(original, parent, false);
-            go.name = original.name;
+            go.name                    = original.name;
             go.transform.localPosition = localPos;
             go.transform.localRotation = localRot;
-            go.transform.localScale = localScale;
+            go.transform.localScale    = localScale;
             return go;
         }
 
 
-        public static T Instantiate<T>(in GameObject original, in Transform parent) where T : Component
+        public static T Instantiate<T>(in GameObject original, in Transform parent)
+        where T : Component
         {
             if (original.Equals(null)) return null;
             var go = Object.Instantiate(original, parent);
@@ -377,7 +388,7 @@ namespace AIO.UEngine
         }
 
         public static T Instantiate<T>(in GameObject original, in Transform parent, in Vector3 localPos)
-            where T : Component
+        where T : Component
         {
             if (original.Equals(null)) return null;
             var r = Instantiate<T>(original, parent);
@@ -386,7 +397,8 @@ namespace AIO.UEngine
         }
 
         public static T Instantiate<T>(in GameObject original, in Transform parent, in Vector3 localPos,
-            in Quaternion localRot) where T : Component
+                                       in Quaternion localRot)
+        where T : Component
         {
             if (original.Equals(null)) return null;
             var r = Instantiate<T>(original, parent);
@@ -397,14 +409,15 @@ namespace AIO.UEngine
         }
 
         public static T Instantiate<T>(in GameObject original, in Transform parent, in Vector3 localPos,
-            in Quaternion localRot, in Vector3 scale) where T : Component
+                                       in Quaternion localRot, in Vector3   scale)
+        where T : Component
         {
             if (original.Equals(null)) return null;
             var r = Instantiate<T>(original, parent);
             var t = r.transform;
             t.localPosition = localPos;
             t.localRotation = localRot;
-            t.localScale = scale;
+            t.localScale    = scale;
             return r;
         }
 

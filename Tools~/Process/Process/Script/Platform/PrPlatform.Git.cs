@@ -11,11 +11,13 @@ namespace AIO
     /// </summary>
     public partial class PrPlatform
     {
+        #region Nested type: Git
+
         /// <summary>
         /// Git命令
         /// </summary>
-        public static partial class Git
-        {
-        }
+        public static partial class Git { }
+
+        #endregion
     }
 }

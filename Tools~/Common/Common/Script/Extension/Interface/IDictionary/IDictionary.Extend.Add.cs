@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -11,12 +15,8 @@ namespace AIO
         {
             if (dict == null || others == null) return;
             foreach (var kv in others)
-            {
                 if (!dict.ContainsKey(kv.Key))
-                {
                     dict.Add(kv.Key, kv.Value);
-                }
-            }
         }
     }
 }

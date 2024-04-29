@@ -1,14 +1,12 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-03
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+
+#endregion
 
 namespace AIO.Net
 {
@@ -18,6 +16,27 @@ namespace AIO.Net
     /// <remarks>Not thread-safe.</remarks>
     public class HttpRequest
     {
+        // HTTP request cookies
+        private readonly List<(string, string)> _cookies = new List<(string, string)>();
+
+        // HTTP request method
+
+        // HTTP request URL
+
+        // HTTP request protocol
+
+        // HTTP request headers
+        private readonly List<(string, string)> _headers = new List<(string, string)>();
+
+        // HTTP request body
+        private int  _bodyIndex;
+        private int  _bodyLength;
+        private bool _bodyLengthProvided;
+        private int  _bodySize;
+
+        // HTTP request cache
+        private int _cacheSize;
+
         /// <summary>
         /// Initialize an empty HTTP request
         /// </summary>
@@ -40,7 +59,7 @@ namespace AIO.Net
         /// <summary>
         /// Is the HTTP request empty?
         /// </summary>
-        public bool IsEmpty => (Cache.Count > 0);
+        public bool IsEmpty => Cache.Count > 0;
 
         /// <summary>
         /// Is the HTTP request error flag set?
@@ -68,27 +87,9 @@ namespace AIO.Net
         public long Headers => _headers.Count;
 
         /// <summary>
-        /// Get the HTTP request header by index
-        /// </summary>
-        public (string, string) Header(int i)
-        {
-            Debug.Assert((i < _headers.Count), "Index out of bounds!");
-            return i >= _headers.Count ? ("", "") : _headers[i];
-        }
-
-        /// <summary>
         /// Get the HTTP request cookies count
         /// </summary>
         public long Cookies => _cookies.Count;
-
-        /// <summary>
-        /// Get the HTTP request cookie by index
-        /// </summary>
-        public (string, string) Cookie(int i)
-        {
-            Debug.Assert((i < _cookies.Count), "Index out of bounds!");
-            return i >= _cookies.Count ? ("", "") : _cookies[i];
-        }
 
         /// <summary>
         /// Get the HTTP request body as string
@@ -121,6 +122,24 @@ namespace AIO.Net
         internal NetBuffer Cache { get; } = new NetBuffer();
 
         /// <summary>
+        /// Get the HTTP request header by index
+        /// </summary>
+        public (string, string) Header(int i)
+        {
+            Debug.Assert(i < _headers.Count, "Index out of bounds!");
+            return i >= _headers.Count ? ("", "") : _headers[i];
+        }
+
+        /// <summary>
+        /// Get the HTTP request cookie by index
+        /// </summary>
+        public (string, string) Cookie(int i)
+        {
+            Debug.Assert(i < _cookies.Count, "Index out of bounds!");
+            return i >= _cookies.Count ? ("", "") : _cookies[i];
+        }
+
+        /// <summary>
         /// Get string from the current HTTP request
         /// </summary>
         public override string ToString()
@@ -147,14 +166,14 @@ namespace AIO.Net
         public HttpRequest Clear()
         {
             IsErrorSet = false;
-            Method = "";
-            Url = "";
-            Protocol = "";
+            Method     = "";
+            Url        = "";
+            Protocol   = "";
             _headers.Clear();
             _cookies.Clear();
-            _bodyIndex = 0;
-            _bodySize = 0;
-            _bodyLength = 0;
+            _bodyIndex          = 0;
+            _bodySize           = 0;
+            _bodyLength         = 0;
             _bodyLengthProvided = false;
 
             Cache.Clear();
@@ -277,9 +296,9 @@ namespace AIO.Net
 
             // Append the HTTP request body
             Cache.Write(body);
-            _bodyIndex = index;
-            _bodySize = length;
-            _bodyLength = length;
+            _bodyIndex          = index;
+            _bodySize           = length;
+            _bodyLength         = length;
             _bodyLengthProvided = true;
             return this;
         }
@@ -300,9 +319,9 @@ namespace AIO.Net
             var index = Cache.Count;
 
             // Append the HTTP request body
-            _bodyIndex = index;
-            _bodySize = length;
-            _bodyLength = length;
+            _bodyIndex          = index;
+            _bodySize           = length;
+            _bodyLength         = length;
             _bodyLengthProvided = true;
             return this;
         }
@@ -322,9 +341,9 @@ namespace AIO.Net
 
             // Append the HTTP request body
             Cache.Write(body);
-            _bodyIndex = index;
-            _bodySize = body.Count;
-            _bodyLength = body.Count;
+            _bodyIndex          = index;
+            _bodySize           = body.Count;
+            _bodyLength         = body.Count;
             _bodyLengthProvided = true;
             return this;
         }
@@ -343,9 +362,9 @@ namespace AIO.Net
             var index = Cache.Count;
 
             // Clear the HTTP request body
-            _bodyIndex = index;
-            _bodySize = 0;
-            _bodyLength = length;
+            _bodyIndex          = index;
+            _bodySize           = 0;
+            _bodyLength         = length;
             _bodyLengthProvided = true;
             return this;
         }
@@ -381,8 +400,10 @@ namespace AIO.Net
         /// <param name="content">String content</param>
         /// <param name="contentType">Content type (default is "text/plain; charset=UTF-8")</param>
         public HttpRequest
-            MakePostRequest(string url, string content, string contentType = "text/plain; charset=UTF-8") =>
-            MakePostRequest(url, content.ToCharArray(), contentType);
+            MakePostRequest(string url, string content, string contentType = "text/plain; charset=UTF-8")
+        {
+            return MakePostRequest(url, content.ToCharArray(), contentType);
+        }
 
         /// <summary>
         /// Make POST request
@@ -391,7 +412,7 @@ namespace AIO.Net
         /// <param name="content">String content as a span of characters</param>
         /// <param name="contentType">Content type (default is "text/plain; charset=UTF-8")</param>
         public HttpRequest MakePostRequest(string url, ICollection<char> content,
-            string contentType = "text/plain; charset=UTF-8")
+                                           string contentType = "text/plain; charset=UTF-8")
         {
             Clear();
             SetBegin("POST", url);
@@ -424,8 +445,10 @@ namespace AIO.Net
         /// <param name="content">String content</param>
         /// <param name="contentType">Content type (default is "text/plain; charset=UTF-8")</param>
         public HttpRequest
-            MakePutRequest(string url, string content, string contentType = "text/plain; charset=UTF-8") =>
-            MakePutRequest(url, content.ToCharArray(), contentType);
+            MakePutRequest(string url, string content, string contentType = "text/plain; charset=UTF-8")
+        {
+            return MakePutRequest(url, content.ToCharArray(), contentType);
+        }
 
         /// <summary>
         /// Make PUT request
@@ -434,7 +457,7 @@ namespace AIO.Net
         /// <param name="content">String content as a span of characters</param>
         /// <param name="contentType">Content type (default is "text/plain; charset=UTF-8")</param>
         public HttpRequest MakePutRequest(string url, ICollection<char> content,
-            string contentType = "text/plain; charset=UTF-8")
+                                          string contentType = "text/plain; charset=UTF-8")
         {
             Clear();
             SetBegin("PUT", url);
@@ -496,36 +519,15 @@ namespace AIO.Net
             return this;
         }
 
-        // HTTP request method
-
-        // HTTP request URL
-
-        // HTTP request protocol
-
-        // HTTP request headers
-        private readonly List<(string, string)> _headers = new List<(string, string)>();
-
-        // HTTP request cookies
-        private readonly List<(string, string)> _cookies = new List<(string, string)>();
-
-        // HTTP request body
-        private int _bodyIndex;
-        private int _bodySize;
-        private int _bodyLength;
-        private bool _bodyLengthProvided;
-
-        // HTTP request cache
-        private int _cacheSize;
-
         // Is pending parts of HTTP request
         internal bool IsPendingHeader()
         {
-            return (!IsErrorSet && (_bodyIndex == 0));
+            return !IsErrorSet && _bodyIndex == 0;
         }
 
         internal bool IsPendingBody()
         {
-            return (!IsErrorSet && (_bodyIndex > 0) && (_bodySize > 0));
+            return !IsErrorSet && _bodyIndex > 0 && _bodySize > 0;
         }
 
         internal bool ReceiveHeader(byte[] buffer, int offset, int Count)
@@ -537,23 +539,23 @@ namespace AIO.Net
             for (var i = _cacheSize; i < Cache.Count; i++)
             {
                 // Check for the request cache out of bounds
-                if ((i + 3) >= Cache.Count)
+                if (i + 3 >= Cache.Count)
                     break;
 
                 // Check for the header separator
-                if ((Cache[i + 0] == '\r') && 
-                    (Cache[i + 1] == '\n') && 
-                    (Cache[i + 2] == '\r') &&
-                    (Cache[i + 3] == '\n'))
+                if (Cache[i + 0] == '\r' &&
+                    Cache[i + 1] == '\n' &&
+                    Cache[i + 2] == '\r' &&
+                    Cache[i + 3] == '\n')
                 {
-                    int index = 0;
+                    var index = 0;
 
                     // Set the error flag for a while...
                     IsErrorSet = true;
 
                     // Parse method
-                    int methodIndex = index;
-                    int methodSize = 0;
+                    var methodIndex = index;
+                    var methodSize = 0;
                     while (Cache[index] != ' ')
                     {
                         methodSize++;
@@ -568,8 +570,8 @@ namespace AIO.Net
                     Method = Cache.ExtractString(methodIndex, methodSize);
 
                     // Parse URL
-                    int urlIndex = index;
-                    int urlSize = 0;
+                    var urlIndex = index;
+                    var urlSize = 0;
                     while (Cache[index] != ' ')
                     {
                         urlSize++;
@@ -584,8 +586,8 @@ namespace AIO.Net
                     Url = Cache.ExtractString(urlIndex, urlSize);
 
                     // Parse protocol version
-                    int protocolIndex = index;
-                    int protocolSize = 0;
+                    var protocolIndex = index;
+                    var protocolSize = 0;
                     while (Cache[index] != '\r')
                     {
                         protocolSize++;
@@ -595,7 +597,7 @@ namespace AIO.Net
                     }
 
                     index++;
-                    if ((index >= Cache.Count) || (Cache[index] != '\n'))
+                    if (index >= Cache.Count || Cache[index] != '\n')
                         return false;
                     index++;
                     if (index >= Cache.Count)
@@ -603,11 +605,11 @@ namespace AIO.Net
                     Protocol = Cache.ExtractString(protocolIndex, protocolSize);
 
                     // Parse headers
-                    while ((index < Cache.Count) && (index < i))
+                    while (index < Cache.Count && index < i)
                     {
                         // Parse header name
-                        int headerNameIndex = index;
-                        int headerNameSize = 0;
+                        var headerNameIndex = index;
+                        var headerNameSize = 0;
                         while (Cache[index] != ':')
                         {
                             headerNameSize++;
@@ -635,8 +637,8 @@ namespace AIO.Net
                         }
 
                         // Parse header value
-                        int headerValueIndex = index;
-                        int headerValueSize = 0;
+                        var headerValueIndex = index;
+                        var headerValueSize = 0;
                         while (Cache[index] != '\r')
                         {
                             headerValueSize++;
@@ -648,7 +650,7 @@ namespace AIO.Net
                         }
 
                         index++;
-                        if ((index >= Cache.Count) || (Cache[index] != '\n'))
+                        if (index >= Cache.Count || Cache[index] != '\n')
                             return false;
                         index++;
                         if (index >= Cache.Count)
@@ -659,21 +661,21 @@ namespace AIO.Net
                             return false;
 
                         // Add a new header
-                        string headerName = Cache.ExtractString(headerNameIndex, headerNameSize);
-                        string headerValue = Cache.ExtractString(headerValueIndex, headerValueSize);
+                        var headerName = Cache.ExtractString(headerNameIndex, headerNameSize);
+                        var headerValue = Cache.ExtractString(headerValueIndex, headerValueSize);
                         _headers.Add((headerName, headerValue));
 
                         // Try to find the body content length
                         if (string.Compare(headerName, "Content-Length", StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             _bodyLength = 0;
-                            for (int j = headerValueIndex; j < (headerValueIndex + headerValueSize); j++)
+                            for (var j = headerValueIndex; j < headerValueIndex + headerValueSize; j++)
                             {
-                                if ((Cache[j] < '0') || (Cache[j] > '9'))
+                                if (Cache[j] < '0' || Cache[j] > '9')
                                     return false;
-                                _bodyLength *= 10;
-                                _bodyLength += Cache[j] - '0';
-                                _bodyLengthProvided = true;
+                                _bodyLength         *= 10;
+                                _bodyLength         += Cache[j] - '0';
+                                _bodyLengthProvided =  true;
                             }
                         }
 
@@ -687,7 +689,7 @@ namespace AIO.Net
                             var nameSize = 0;
                             var cookieIndex = index;
                             var cookieSize = 0;
-                            for (var j = headerValueIndex; j < (headerValueIndex + headerValueSize); j++)
+                            for (var j = headerValueIndex; j < headerValueIndex + headerValueSize; j++)
                             {
                                 if (Cache[j] == ' ')
                                 {
@@ -696,12 +698,12 @@ namespace AIO.Net
                                         if (name)
                                         {
                                             nameIndex = current;
-                                            nameSize = j - current;
+                                            nameSize  = j - current;
                                         }
                                         else
                                         {
                                             cookieIndex = current;
-                                            cookieSize = j - current;
+                                            cookieSize  = j - current;
                                         }
                                     }
 
@@ -716,17 +718,17 @@ namespace AIO.Net
                                         if (name)
                                         {
                                             nameIndex = current;
-                                            nameSize = j - current;
+                                            nameSize  = j - current;
                                         }
                                         else
                                         {
                                             cookieIndex = current;
-                                            cookieSize = j - current;
+                                            cookieSize  = j - current;
                                         }
                                     }
 
                                     token = false;
-                                    name = false;
+                                    name  = false;
                                     continue;
                                 }
 
@@ -737,38 +739,38 @@ namespace AIO.Net
                                         if (name)
                                         {
                                             nameIndex = current;
-                                            nameSize = j - current;
+                                            nameSize  = j - current;
                                         }
                                         else
                                         {
                                             cookieIndex = current;
-                                            cookieSize = j - current;
+                                            cookieSize  = j - current;
                                         }
 
                                         // Validate the cookie
-                                        if ((nameSize > 0) && (cookieSize > 0))
+                                        if (nameSize > 0 && cookieSize > 0)
                                         {
                                             // Add the cookie to the corresponding collection
                                             _cookies.Add((Cache.ExtractString(nameIndex, nameSize),
-                                                Cache.ExtractString(cookieIndex, cookieSize)));
+                                                          Cache.ExtractString(cookieIndex, cookieSize)));
 
                                             // Resset the current cookie values
-                                            nameIndex = j;
-                                            nameSize = 0;
+                                            nameIndex   = j;
+                                            nameSize    = 0;
                                             cookieIndex = j;
-                                            cookieSize = 0;
+                                            cookieSize  = 0;
                                         }
                                     }
 
                                     token = false;
-                                    name = true;
+                                    name  = true;
                                     continue;
                                 }
 
                                 if (!token)
                                 {
                                     current = j;
-                                    token = true;
+                                    token   = true;
                                 }
                             }
 
@@ -778,21 +780,19 @@ namespace AIO.Net
                                 if (name)
                                 {
                                     nameIndex = current;
-                                    nameSize = headerValueIndex + headerValueSize - current;
+                                    nameSize  = headerValueIndex + headerValueSize - current;
                                 }
                                 else
                                 {
                                     cookieIndex = current;
-                                    cookieSize = headerValueIndex + headerValueSize - current;
+                                    cookieSize  = headerValueIndex + headerValueSize - current;
                                 }
 
                                 // Validate the cookie
-                                if ((nameSize > 0) && (cookieSize > 0))
-                                {
+                                if (nameSize > 0 && cookieSize > 0)
                                     // Add the cookie to the corresponding collection
                                     _cookies.Add((Cache.ExtractString(nameIndex, nameSize),
-                                        Cache.ExtractString(cookieIndex, cookieSize)));
-                                }
+                                                  Cache.ExtractString(cookieIndex, cookieSize)));
                             }
                         }
                     }
@@ -802,7 +802,7 @@ namespace AIO.Net
 
                     // Update the body index and Count
                     _bodyIndex = i + 4;
-                    _bodySize = Cache.Count - i - 4;
+                    _bodySize  = Cache.Count - i - 4;
 
                     // Update the parsed cache Count
                     _cacheSize = Cache.Count;
@@ -812,7 +812,7 @@ namespace AIO.Net
             }
 
             // Update the parsed cache Count
-            _cacheSize = (Cache.Count >= 3) ? (Cache.Count - 3) : 0;
+            _cacheSize = Cache.Count >= 3 ? Cache.Count - 3 : 0;
 
             return false;
         }
@@ -848,7 +848,7 @@ namespace AIO.Net
                     Method == "TRACE")
                 {
                     _bodyLength = 0;
-                    _bodySize = 0;
+                    _bodySize   = 0;
                     return true;
                 }
 
@@ -858,8 +858,8 @@ namespace AIO.Net
                     var index = _bodyIndex + _bodySize - 4;
 
                     // Was the body fully received?
-                    if ((Cache[index + 0] == '\r') && (Cache[index + 1] == '\n') && (Cache[index + 2] == '\r') &&
-                        (Cache[index + 3] == '\n'))
+                    if (Cache[index + 0] == '\r' && Cache[index + 1] == '\n' && Cache[index + 2] == '\r' &&
+                        Cache[index + 3] == '\n')
                     {
                         _bodyLength = _bodySize;
                         return true;

@@ -1,16 +1,21 @@
 /*|============|*|
-|*|Author:     |*| xinan                
-|*|Date:       |*| 2023-10-28               
-|*|E-Mail:     |*| 1398581458@qq.com     
+|*|Author:     |*| xinan
+|*|Date:       |*| 2023-10-28
+|*|E-Mail:     |*| 1398581458@qq.com
 |*|============|*/
 
-using System.Globalization;
+#region
+
 using UnityEditor;
+
+#endregion
 
 namespace AIO.UEditor
 {
     public partial class EHelper
     {
+        #region Nested type: Prefs
+
         public partial class Prefs
         {
             private const int JsonHashCode = -1107827892;
@@ -121,5 +126,7 @@ namespace AIO.UEditor
 
             #endregion
         }
+
+        #endregion
     }
 }

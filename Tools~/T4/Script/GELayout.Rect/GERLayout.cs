@@ -1,9 +1,13 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #pragma warning disable CS0109 //
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+
+#endregion
 
 namespace AIO
 {
@@ -11,43 +15,12 @@ namespace AIO
     {
         private static FunctionParam _Style;
 
-        private static FunctionParam Style
-        {
-            get
-            {
-                if (_Style is null)
-                {
-                    _Style = new FunctionParam("GUIStyle", "style", "style")
-                    {
-                        Comments = "样式",
-                    };
-                }
-
-                return _Style;
-            }
-        }
-
         private static FunctionParam _Options;
 
-        private static FunctionParam Options
-        {
-            get
-            {
-                if (_Options != null) return _Options;
-                _Options = new FunctionParam("GUILayoutOption", "options", "options")
-                {
-                    Comments = "排版格式",
-                    IsParams = true
-                };
-                return _Options;
-            }
-        }
-
-        public GERLayoutSingleton() : base()
+        public GERLayoutSingleton()
         {
             var methods = GetType().GetMethods(BindingFlags.Static | BindingFlags.NonPublic);
             foreach (var method in methods)
-            {
                 try
                 {
                     var attr = method.GetCustomAttribute<FuncParamAttribute>();
@@ -71,7 +44,6 @@ namespace AIO
                 {
                     Console.WriteLine(e);
                 }
-            }
 
             Comments = "Layout";
             Header.AppendLine("/*|✩ - - - - - |||");
@@ -85,11 +57,39 @@ namespace AIO
             Using.Add("UnityEngine");
             Using.Add("UnityEditor");
             Using.Add("UnityEngine.Internal");
-            NameSpace = "AIO.UEditor";
-            Name = "GELayout";
-            IsPartial = true;
-            State = TChunkState.None;
+            NameSpace     = "AIO.UEditor";
+            Name          = "GELayout";
+            IsPartial     = true;
+            State         = TChunkState.None;
             Accessibility = "public";
+        }
+
+        private static FunctionParam Style
+        {
+            get
+            {
+                if (_Style is null)
+                    _Style = new FunctionParam("GUIStyle", "style", "style")
+                    {
+                        Comments = "样式"
+                    };
+
+                return _Style;
+            }
+        }
+
+        private static FunctionParam Options
+        {
+            get
+            {
+                if (_Options != null) return _Options;
+                _Options = new FunctionParam("GUILayoutOption", "options", "options")
+                {
+                    Comments = "排版格式",
+                    IsParams = true
+                };
+                return _Options;
+            }
         }
     }
 }

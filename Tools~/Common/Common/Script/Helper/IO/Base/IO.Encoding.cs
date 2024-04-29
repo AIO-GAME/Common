@@ -1,15 +1,9 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
-
-using System.Runtime.CompilerServices;
-
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -22,12 +16,14 @@ namespace AIO
                 {
                     if (n == 64) continue;
                     if ((state & n) == n) state &= ~n;
-                    else state |= n;
+                    else state                  |= n;
                     n *= 2;
                 }
 
                 return (byte)state;
             }
         }
+
+        #endregion
     }
 }

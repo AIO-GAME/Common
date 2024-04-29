@@ -1,18 +1,18 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Diagnostics;
+
+#endregion
 
 namespace AIO.UEditor
 {
     /// <summary>
     /// 公共属性检视器
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property)]
-    [Conditional("UNITY_EDITOR")]
+    [AttributeUsage(AttributeTargets.Property), Conditional("UNITY_EDITOR")]
     public sealed class PropertyDisplayAttribute : InspectorAttribute
     {
-        public string Text { get; private set; }
-        public bool DisplayOnlyRuntime { get; private set; }
-
         /// <summary>
         /// 公共属性检视器
         /// </summary>
@@ -20,8 +20,11 @@ namespace AIO.UEditor
         /// <param name="displayOnlyRuntime">是否仅在编辑器运行时显示</param>
         public PropertyDisplayAttribute(string text = null, bool displayOnlyRuntime = true)
         {
-            Text = text;
+            Text               = text;
             DisplayOnlyRuntime = displayOnlyRuntime;
         }
+
+        public string Text               { get; private set; }
+        public bool   DisplayOnlyRuntime { get; private set; }
     }
 }

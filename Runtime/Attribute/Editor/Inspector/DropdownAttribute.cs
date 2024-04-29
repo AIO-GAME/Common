@@ -1,20 +1,18 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Diagnostics;
+
+#endregion
 
 namespace AIO.UEditor
 {
     /// <summary>
     /// 下拉框检视器（支持 string、int、float 类型）
     /// </summary>
-    [AttributeUsage(AttributeTargets.Field)]
-    [Conditional("UNITY_EDITOR")]
+    [AttributeUsage(AttributeTargets.Field), Conditional("UNITY_EDITOR")]
     public sealed class DropdownAttribute : InspectorAttribute
     {
-#if UNITY_EDITOR
-        public Type ValueType { get; private set; }
-        public object[] Values { get; private set; }
-        public string[] DisplayOptions { get; private set; }
-#endif
         /// <summary>
         /// 下拉框检视器（string、int、float）
         /// </summary>
@@ -22,8 +20,8 @@ namespace AIO.UEditor
         public DropdownAttribute(params string[] values)
         {
 #if UNITY_EDITOR
-            ValueType = typeof(string);
-            Values = values;
+            ValueType      = typeof(string);
+            Values         = values;
             DisplayOptions = values;
 #endif
         }
@@ -35,12 +33,12 @@ namespace AIO.UEditor
         public DropdownAttribute(params int[] values)
         {
 #if UNITY_EDITOR
-            ValueType = typeof(int);
-            Values = new object[values.Length];
+            ValueType      = typeof(int);
+            Values         = new object[values.Length];
             DisplayOptions = new string[values.Length];
-            for (int i = 0; i < values.Length; i++)
+            for (var i = 0; i < values.Length; i++)
             {
-                Values[i] = values[i];
+                Values[i]         = values[i];
                 DisplayOptions[i] = values[i].ToString();
             }
 #endif
@@ -53,15 +51,20 @@ namespace AIO.UEditor
         public DropdownAttribute(params float[] values)
         {
 #if UNITY_EDITOR
-            ValueType = typeof(float);
-            Values = new object[values.Length];
+            ValueType      = typeof(float);
+            Values         = new object[values.Length];
             DisplayOptions = new string[values.Length];
-            for (int i = 0; i < values.Length; i++)
+            for (var i = 0; i < values.Length; i++)
             {
-                Values[i] = values[i];
+                Values[i]         = values[i];
                 DisplayOptions[i] = values[i].ToString();
             }
 #endif
         }
+#if UNITY_EDITOR
+        public Type     ValueType      { get; private set; }
+        public object[] Values         { get; private set; }
+        public string[] DisplayOptions { get; private set; }
+#endif
     }
 }

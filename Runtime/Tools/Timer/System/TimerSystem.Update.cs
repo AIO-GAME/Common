@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
@@ -25,16 +29,13 @@ namespace AIO
                     var updateCacheTime = Watch.ElapsedMilliseconds;
                     if (updateCacheTime < Unit) continue; //更新间隔
                     Watch.Restart();
-                    Counter += updateCacheTime;
+                    Counter         += updateCacheTime;
                     UpdateCacheTime += updateCacheTime;
 
                     if (UpdateCacheTime > UPDATELISTTIME)
                     {
                         UpdateCacheTime = 0; // 重置缓存更新时间
-                        for (var i = 0; i < MainList.Count; i++)
-                        {
-                            MainList[i].TimersUpdate();
-                        }
+                        for (var i = 0; i < MainList.Count; i++) MainList[i].TimersUpdate();
                     }
 
                     lock (MainList)
@@ -49,9 +50,7 @@ namespace AIO
                                 {
                                     MainList[i].SlotUpdate(MainList[i - 1].Unit);
                                     if (MainList[i].Slot >= MainList[i].SlotUnit)
-                                    {
                                         MainList[i].SlotReset();
-                                    }
                                     else break;
                                 }
                             }
@@ -77,7 +76,10 @@ namespace AIO
                                         MainList[i].OtherUpdate(Counter);
                                         MainList[i].SlotReset();
                                     }
-                                    else break;
+                                    else
+                                    {
+                                        break;
+                                    }
                                 }
                             }
                         }

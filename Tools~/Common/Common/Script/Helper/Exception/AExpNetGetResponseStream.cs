@@ -1,11 +1,9 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-03
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Net;
+
+#endregion
 
 namespace AIO
 {
@@ -17,15 +15,11 @@ namespace AIO
         /// <inheritdoc />
         public AExpNetGetResponseStream(
             in string message, in WebResponse response) :
-            base(message, new Exception("GetResponseStream is Null"), WebExceptionStatus.ReceiveFailure, response)
-        {
-        }
-       
+            base(message, new Exception("GetResponseStream is Null"), WebExceptionStatus.ReceiveFailure, response) { }
+
         /// <inheritdoc />
         public AExpNetGetResponseStream(
             in string message) :
-            base(message, new Exception("GetResponseStream is Null"), WebExceptionStatus.ReceiveFailure, null)
-        {
-        }
+            base(message, new Exception("GetResponseStream is Null"), WebExceptionStatus.ReceiveFailure, null) { }
     }
 }

@@ -1,12 +1,17 @@
-﻿using System;
+﻿#region
+
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHandle
     {
+        #region Nested type: FTP
+
         /// <summary>
         /// FTP 处理器
         /// </summary>
@@ -97,13 +102,13 @@ namespace AIO
             /// <param name="iEvent">回调</param>
             /// <param name="searchPattern">搜索字段</param>
             /// <param name="searchOption">搜索模式</param>
-            public async Task<bool> UploadDirAsync(string localPath, string remotePath, IProgressEvent iEvent,
-                SearchOption searchOption = SearchOption.AllDirectories,
-                string searchPattern = "*")
+            public async Task<bool> UploadDirAsync(string       localPath, string remotePath, IProgressEvent iEvent,
+                                                   SearchOption searchOption  = SearchOption.AllDirectories,
+                                                   string       searchPattern = "*")
             {
                 var remote = string.Concat(URI, '/', remotePath);
                 var handler = AHelper.FTP.UploadDir(remote, User, Pass, localPath,
-                    searchOption, searchPattern, TimeOut, BufferSize);
+                                                    searchOption, searchPattern, TimeOut, BufferSize);
                 handler.Event = iEvent;
                 handler.Begin();
                 await handler.WaitAsync();
@@ -118,10 +123,10 @@ namespace AIO
             /// <param name="iEvent">回调</param>
             /// <param name="isOverWrite">是否重写</param>
             public async Task<bool> DownloadFileAsync(string localPath, string remotePath, IProgressEvent iEvent = null,
-                bool isOverWrite = false)
+                                                      bool   isOverWrite = false)
             {
                 var handler = AHelper.FTP.DownloadFile(string.Concat(URI, '/', remotePath), User, Pass,
-                    localPath, isOverWrite, TimeOut, BufferSize);
+                                                       localPath, isOverWrite, TimeOut, BufferSize);
                 handler.Event = iEvent;
                 handler.Begin();
                 await handler.WaitAsync();
@@ -137,7 +142,7 @@ namespace AIO
             public Task<List<string>> GetListAsync(string remotePath = null, string keyword = null)
             {
                 return AHelper.FTP.GetRemoteListAsync(string.Concat(URI, '/', remotePath), User, Pass,
-                    keyword, TimeOut);
+                                                      keyword, TimeOut);
             }
 
             /// <summary>
@@ -149,7 +154,7 @@ namespace AIO
             public Task<List<string>> GetListFileAsync(string remotePath = null, string keyword = null)
             {
                 return AHelper.FTP.GetRemoteListFileAsync(string.Concat(URI, '/', remotePath), User, Pass,
-                    keyword, TimeOut);
+                                                          keyword, TimeOut);
             }
 
             /// <summary>
@@ -188,7 +193,7 @@ namespace AIO
             public List<string> GetListDir(string remotePath = null, string keyword = "")
             {
                 return AHelper.FTP.GetRemoteListDir(string.Concat(URI, '/', remotePath), User, Pass,
-                    keyword, TimeOut);
+                                                    keyword, TimeOut);
             }
 
             /// <summary>
@@ -200,7 +205,7 @@ namespace AIO
             public Task<List<string>> GetListDirAsync(string remotePath = null, string keyword = null)
             {
                 return AHelper.FTP.GetRemoteListDirAsync(string.Concat(URI, '/', remotePath), User, Pass,
-                    keyword, TimeOut);
+                                                         keyword, TimeOut);
             }
 
             /// <summary>
@@ -212,14 +217,14 @@ namespace AIO
             /// <param name="searchOption">搜索模式</param>
             /// <param name="isOverWrite">是否重写</param>
             public async Task<bool> DownloadDirAsync(
-                string localPath,
-                IProgressEvent iEvent = null,
-                SearchOption searchOption = SearchOption.AllDirectories,
-                string searchPattern = "*",
-                bool isOverWrite = false)
+                string         localPath,
+                IProgressEvent iEvent        = null,
+                SearchOption   searchOption  = SearchOption.AllDirectories,
+                string         searchPattern = "*",
+                bool           isOverWrite   = false)
             {
                 var handler = AHelper.FTP.DownloadDir(URI, User, Pass,
-                    localPath, searchOption, searchPattern, isOverWrite, TimeOut, BufferSize);
+                                                      localPath, searchOption, searchPattern, isOverWrite, TimeOut, BufferSize);
                 handler.Event = iEvent;
                 handler.Begin();
                 await handler.WaitAsync();
@@ -246,16 +251,16 @@ namespace AIO
             /// <param name="searchOption">搜索模式</param>
             /// <param name="isOverWrite">是否重写</param>
             public async Task<bool> DownloadDirAsync(
-                string localPath,
-                string remotePath,
-                IProgressEvent iEvent = null,
-                SearchOption searchOption = SearchOption.AllDirectories,
-                string searchPattern = "*",
-                bool isOverWrite = false)
+                string         localPath,
+                string         remotePath,
+                IProgressEvent iEvent        = null,
+                SearchOption   searchOption  = SearchOption.AllDirectories,
+                string         searchPattern = "*",
+                bool           isOverWrite   = false)
             {
                 var handler = AHelper.FTP.DownloadDir(string.Concat(URI, '/', remotePath), User, Pass,
-                    localPath, searchOption, searchPattern, isOverWrite,
-                    TimeOut, BufferSize);
+                                                      localPath, searchOption, searchPattern, isOverWrite,
+                                                      TimeOut, BufferSize);
                 handler.Event = iEvent;
                 handler.Begin();
                 await handler.WaitAsync();
@@ -269,12 +274,12 @@ namespace AIO
             /// <param name="iEvent">回调</param>
             /// <param name="searchPattern">搜索字段</param>
             /// <param name="searchOption">搜索模式</param>
-            public async Task<bool> UploadDirAsync(string localPath, IProgressEvent iEvent,
-                SearchOption searchOption = SearchOption.AllDirectories,
-                string searchPattern = "*")
+            public async Task<bool> UploadDirAsync(string       localPath, IProgressEvent iEvent,
+                                                   SearchOption searchOption  = SearchOption.AllDirectories,
+                                                   string       searchPattern = "*")
             {
                 var handler = AHelper.FTP.UploadDir(URI, User, Pass, localPath,
-                    searchOption, searchPattern, TimeOut, BufferSize);
+                                                    searchOption, searchPattern, TimeOut, BufferSize);
                 handler.Event = iEvent;
                 handler.Begin();
                 await handler.WaitAsync();
@@ -291,7 +296,7 @@ namespace AIO
             {
                 var remote = string.Concat(URI, '/', remotePath);
                 var handler = AHelper.FTP.UploadFile(remote, User, Pass, localPath, TimeOut,
-                    BufferSize);
+                                                     BufferSize);
                 handler.Event = iEvent;
                 handler.Begin();
                 await handler.WaitAsync();
@@ -308,7 +313,7 @@ namespace AIO
             {
                 var remote = string.Concat(URI, '/', remotePath);
                 var handler = AHelper.FTP.UploadFile(remote, User, Pass, localPath, TimeOut,
-                    BufferSize);
+                                                     BufferSize);
                 handler.Event = iEvent;
                 handler.Begin();
                 await handler.WaitAsync();
@@ -329,5 +334,7 @@ namespace AIO
                 return handler.Report.State == EProgressState.Finish;
             }
         }
+
+        #endregion
     }
 }

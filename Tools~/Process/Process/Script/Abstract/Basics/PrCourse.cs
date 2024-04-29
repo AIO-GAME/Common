@@ -4,12 +4,16 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Security;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
@@ -18,22 +22,6 @@ namespace AIO
     /// </summary>
     public abstract partial class PrCourse : IPrCourse, IPrCourseRead
     {
-        /// <inheritdoc/>
-        public ProcessStartInfo Info { get; protected set; }
-
-        /// <inheritdoc/>
-        public bool EnableOutput { get; set; } = true;
-
-        /// <summary>
-        /// 开启日志
-        /// </summary>
-        public static bool IsLog { get; set; } = true;
-
-        /// <summary>
-        /// 是否捕获异常
-        /// </summary>
-        public static bool IsCache { get; set; } = false;
-
         /// <summary>
         /// 编码
         /// </summary>
@@ -46,6 +34,18 @@ namespace AIO
         {
             Info = new ProcessStartInfo();
         }
+
+        /// <summary>
+        /// 开启日志
+        /// </summary>
+        public static bool IsLog { get; set; } = true;
+
+        /// <summary>
+        /// 是否捕获异常
+        /// </summary>
+        public static bool IsCache { get; set; } = false;
+
+        #region IPrCourse Members
 
         /// <inheritdoc/>
         public virtual IExecutor Execute()
@@ -215,5 +215,17 @@ namespace AIO
             Info.WorkingDirectory = workDir;
             return this;
         }
+
+        #endregion
+
+        #region IPrCourseRead Members
+
+        /// <inheritdoc/>
+        public ProcessStartInfo Info { get; protected set; }
+
+        /// <inheritdoc/>
+        public bool EnableOutput { get; set; } = true;
+
+        #endregion
     }
 }

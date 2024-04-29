@@ -1,18 +1,20 @@
-﻿/*|==========|*|
-|*|Author:   |*| -> XINAN
-|*|Date:     |*| -> 2023-06-06
-|*|==========|*/
+﻿#region
 
 using System;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: String
+
         public partial class String
         {
-            [ThreadStatic] private static StringBuilder CacheBuilder;
+            [ThreadStatic]
+            private static StringBuilder CacheBuilder;
 
             /// <summary>
             /// 字符串格式化
@@ -123,5 +125,7 @@ namespace AIO
                 return str.Remove(index); //"assets/config/test.unity3d" --> "assets/config/test"
             }
         }
+
+        #endregion
     }
 }

@@ -1,8 +1,13 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
+#endregion
 
 namespace AIO
 {
@@ -33,7 +38,7 @@ namespace AIO
             if (values == null || values.Length <= 0)
                 return default;
 
-            var index = UnityEngine.Random.Range(0, values.Length);
+            var index = Random.Range(0, values.Length);
             return values[index];
         }
 
@@ -48,7 +53,7 @@ namespace AIO
             if (values == null || values.Count <= 0)
                 return default;
 
-            int index = UnityEngine.Random.Range(0, values.Count);
+            var index = Random.Range(0, values.Count);
             return values[index];
         }
 
@@ -59,15 +64,11 @@ namespace AIO
         /// <param name="action2">Action2</param>
         public static void RandomExecute(Action action1, Action action2)
         {
-            var value = UnityEngine.Random.Range(0, 10);
+            var value = Random.Range(0, 10);
             if (value < 5)
-            {
                 action1?.Invoke();
-            }
             else
-            {
                 action2?.Invoke();
-            }
         }
 
         /// <summary>
@@ -78,19 +79,13 @@ namespace AIO
         /// <param name="action3">Action3</param>
         public static void RandomExecute(Action action1, Action action2, Action action3)
         {
-            var value = UnityEngine.Random.Range(0, 9);
+            var value = Random.Range(0, 9);
             if (value < 3)
-            {
                 action1?.Invoke();
-            }
             else if (value < 6)
-            {
                 action2?.Invoke();
-            }
             else
-            {
                 action3?.Invoke();
-            }
         }
 
         /// <summary>
@@ -102,7 +97,7 @@ namespace AIO
             if (values == null || values.Length <= 0)
                 return;
 
-            var index = UnityEngine.Random.Range(0, values.Length);
+            var index = Random.Range(0, values.Length);
             values[index]?.Invoke();
         }
 
@@ -187,7 +182,7 @@ namespace AIO
         /// <param name="maxZ">Z最大值</param>
         /// <returns>目标值</returns>
         public static Vector3 Clamp(this Vector3 value, float minX, float minY, float minZ, float maxX, float maxY,
-            float maxZ)
+                                    float        maxZ)
         {
             value.x = Mathf.Clamp(value.x, minX, maxX);
             value.y = Mathf.Clamp(value.y, minY, maxY);

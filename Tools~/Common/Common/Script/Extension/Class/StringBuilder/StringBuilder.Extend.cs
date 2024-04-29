@@ -1,15 +1,19 @@
-﻿using System.Runtime.CompilerServices;
+﻿#region
+
+using System.Runtime.CompilerServices;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
     /// <summary>
-    /// 可变字符串扩展
+    ///     可变字符串扩展
     /// </summary>
     public static class ExtendStringBuilder
     {
         /// <summary>
-        /// 添加
+        ///     添加
         /// </summary>
         /// <param name="sb">可变字符串</param>
         /// <param name="format">格式化</param>

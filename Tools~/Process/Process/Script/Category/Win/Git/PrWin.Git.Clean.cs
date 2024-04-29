@@ -4,15 +4,23 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrWin
     {
+        #region Nested type: Git
+
         public partial class Git
         {
+            #region Nested type: Clean
+
             /// <summary>
             /// 清理
             /// </summary>
@@ -91,6 +99,10 @@ namespace AIO
                     return Execute(target, "-fd", quit);
                 }
             }
+
+            #endregion
         }
+
+        #endregion
     }
 }

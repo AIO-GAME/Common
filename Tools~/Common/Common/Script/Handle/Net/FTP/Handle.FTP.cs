@@ -1,16 +1,128 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.IO;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHandle
     {
+        #region Nested type: FTP
+
         /// <summary>
         /// FTP 处理器
         /// </summary>
         public sealed partial class FTP : IDisposable
         {
+            #region ListType enum
+
+            /// <summary>
+            /// 获取列表类型
+            /// </summary>
+            public enum ListType
+            {
+                /// <summary>
+                /// 文件
+                /// </summary>
+                File = 0,
+
+                /// <summary>
+                /// 文件夹
+                /// </summary>
+                Directory = 1,
+
+                /// <summary>
+                /// 文件和文件夹
+                /// </summary>
+                ALL = 2
+            }
+
+            #endregion
+
+            /// <summary>
+            /// 构造函数
+            /// </summary>
+            /// <param name="server">服务器IP</param>
+            /// <param name="user">用户名</param>
+            /// <param name="pass">密码</param>
+            /// <param name="absolute">远端默认跟文件夹</param>
+            /// <param name="port">端口</param>
+            public FTP(string server, string user, string pass, string absolute, int port = 21)
+            {
+                Server = server;
+                User   = user;
+                Pass   = pass;
+                Port   = port;
+                if (string.IsNullOrEmpty(absolute))
+                {
+                    URI = string.Concat("ftp://", Server, ':', Port);
+                }
+                else
+                {
+                    Absolute = absolute.Replace('\\', '/').Trim('/', '\\');
+                    URI      = string.Concat("ftp://", Server, ':', Port, '/', Absolute);
+                }
+            }
+
+            /// <summary>
+            /// 指定FTP连接成功后的当前目录, 如果不指定即默认为根目录
+            /// </summary>
+            public string URI { get; private set; }
+
+            /// <summary>
+            /// FTP服务器IP地址
+            /// </summary>
+            public string Server { get; private set; }
+
+            /// <summary>
+            /// FTP服务器端口
+            /// </summary>
+            public int Port { get; private set; }
+
+            /// <summary>
+            /// FTP用户名
+            /// </summary>
+            public string User { get; private set; }
+
+            /// <summary>
+            /// FTP密码
+            /// </summary>
+            public string Pass { get; private set; }
+
+            /// <summary>
+            /// FTP服务器上的目录
+            /// </summary>
+            public string Absolute { get; private set; }
+
+            /// <summary>
+            /// 超时时间
+            /// </summary>
+            public ushort TimeOut { get; set; } = AHelper.Net.TIMEOUT;
+
+            /// <summary>
+            /// 缓存大小
+            /// </summary>
+            public int BufferSize { get; set; } = AHelper.Net.BUFFER_SIZE;
+
+            #region IDisposable Members
+
+            /// <summary>
+            /// 释放
+            /// </summary>
+            public void Dispose()
+            {
+                Server   = null;
+                User     = null;
+                Pass     = null;
+                Absolute = null;
+                URI      = null;
+            }
+
+            #endregion
+
             /// <summary>
             /// 创建HTTP处理器
             /// </summary>
@@ -64,92 +176,6 @@ namespace AIO
             }
 
             /// <summary>
-            /// 获取列表类型
-            /// </summary>
-            public enum ListType
-            {
-                /// <summary>
-                /// 文件
-                /// </summary>
-                File = 0,
-
-                /// <summary>
-                /// 文件夹
-                /// </summary>
-                Directory = 1,
-
-                /// <summary>
-                /// 文件和文件夹
-                /// </summary>
-                ALL = 2
-            }
-
-            /// <summary>
-            /// 指定FTP连接成功后的当前目录, 如果不指定即默认为根目录
-            /// </summary>
-            public string URI { get; private set; }
-
-            /// <summary>
-            /// FTP服务器IP地址
-            /// </summary>
-            public string Server { get; private set; }
-
-            /// <summary>
-            /// FTP服务器端口
-            /// </summary>
-            public int Port { get; private set; }
-
-            /// <summary>
-            /// FTP用户名
-            /// </summary>
-            public string User { get; private set; }
-
-            /// <summary>
-            /// FTP密码
-            /// </summary>
-            public string Pass { get; private set; }
-
-            /// <summary>
-            /// FTP服务器上的目录
-            /// </summary>
-            public string Absolute { get; private set; }
-
-            /// <summary>
-            /// 超时时间
-            /// </summary>
-            public ushort TimeOut { get; set; } = AHelper.Net.TIMEOUT;
-
-            /// <summary>
-            /// 缓存大小
-            /// </summary>
-            public int BufferSize { get; set; } = AHelper.Net.BUFFER_SIZE;
-
-            /// <summary>
-            /// 构造函数
-            /// </summary>
-            /// <param name="server">服务器IP</param>
-            /// <param name="user">用户名</param>
-            /// <param name="pass">密码</param>
-            /// <param name="absolute">远端默认跟文件夹</param>
-            /// <param name="port">端口</param>
-            public FTP(string server, string user, string pass, string absolute, int port = 21)
-            {
-                Server = server;
-                User = user;
-                Pass = pass;
-                Port = port;
-                if (string.IsNullOrEmpty(absolute))
-                {
-                    URI = string.Concat("ftp://", Server, ':', Port);
-                }
-                else
-                {
-                    Absolute = absolute.Replace('\\', '/').Trim('/', '\\');
-                    URI = string.Concat("ftp://", Server, ':', Port, '/', Absolute);
-                }
-            }
-
-            /// <summary>
             /// 初始化
             /// </summary>
             public bool Init()
@@ -174,7 +200,7 @@ namespace AIO
             public override string ToString()
             {
                 return string.Concat("ServerIP: ", Server, " UserName: ", User, " Password: ", Pass,
-                    " RemotePath: ", Absolute);
+                                     " RemotePath: ", Absolute);
             }
 
             /// <summary>
@@ -271,14 +297,14 @@ namespace AIO
             /// <param name="iEvent">回调</param>
             /// <param name="searchPattern">搜索字段</param>
             /// <param name="searchOption">搜索模式</param>
-            public bool UploadDir(string localPath, string remotePath,
-                IProgressEvent iEvent = null,
-                SearchOption searchOption = SearchOption.AllDirectories,
-                string searchPattern = "*")
+            public bool UploadDir(string         localPath, string remotePath,
+                                  IProgressEvent iEvent        = null,
+                                  SearchOption   searchOption  = SearchOption.AllDirectories,
+                                  string         searchPattern = "*")
             {
                 var remote = string.Concat(URI, '/', remotePath);
                 var handler = AHelper.FTP.UploadDir(remote, User, Pass,
-                    localPath, searchOption, searchPattern, TimeOut, BufferSize);
+                                                    localPath, searchOption, searchPattern, TimeOut, BufferSize);
                 handler.Event = iEvent;
                 handler.Begin();
                 handler.Wait();
@@ -295,7 +321,7 @@ namespace AIO
             {
                 var remote = string.Concat(URI, '/', remotePath);
                 var handler = AHelper.FTP.UploadFile(remote, User, Pass, localPath, TimeOut,
-                    BufferSize);
+                                                     BufferSize);
                 handler.Event = iEvent;
                 handler.Begin();
                 handler.Wait();
@@ -309,13 +335,13 @@ namespace AIO
             /// <param name="iEvent">回调</param>
             /// <param name="searchPattern">搜索字段</param>
             /// <param name="searchOption">搜索模式</param>
-            public bool UploadDir(string localPath,
-                IProgressEvent iEvent = null,
-                SearchOption searchOption = SearchOption.AllDirectories,
-                string searchPattern = "*")
+            public bool UploadDir(string         localPath,
+                                  IProgressEvent iEvent        = null,
+                                  SearchOption   searchOption  = SearchOption.AllDirectories,
+                                  string         searchPattern = "*")
             {
                 var handler = AHelper.FTP.UploadDir(URI, User, Pass,
-                    localPath, searchOption, searchPattern, TimeOut, BufferSize);
+                                                    localPath, searchOption, searchPattern, TimeOut, BufferSize);
                 handler.Event = iEvent;
                 handler.Begin();
                 handler.Wait();
@@ -330,11 +356,11 @@ namespace AIO
             /// <param name="iEvent">回调</param>
             /// <param name="isOverWrite">是否重写</param>
             public bool DownloadFile(string localPath, string remotePath, IProgressEvent iEvent = null,
-                bool isOverWrite = false)
+                                     bool   isOverWrite = false)
             {
                 var handler = AHelper.FTP.DownloadFile(string.Concat(URI, '/', remotePath), User, Pass,
-                    localPath, isOverWrite,
-                    TimeOut, BufferSize);
+                                                       localPath, isOverWrite,
+                                                       TimeOut, BufferSize);
                 handler.Event = iEvent;
                 handler.Begin();
                 handler.Wait();
@@ -351,16 +377,16 @@ namespace AIO
             /// <param name="searchOption">搜索模式</param>
             /// <param name="isOverWrite">是否重写</param>
             public bool DownloadDir(
-                string localPath,
-                string remotePath,
-                IProgressEvent iEvent = null,
-                SearchOption searchOption = SearchOption.AllDirectories,
-                string searchPattern = "*",
-                bool isOverWrite = false)
+                string         localPath,
+                string         remotePath,
+                IProgressEvent iEvent        = null,
+                SearchOption   searchOption  = SearchOption.AllDirectories,
+                string         searchPattern = "*",
+                bool           isOverWrite   = false)
             {
                 var handler = AHelper.FTP.DownloadDir(string.Concat(URI, '/', remotePath), User, Pass,
-                    localPath, searchOption, searchPattern, isOverWrite,
-                    TimeOut, BufferSize);
+                                                      localPath, searchOption, searchPattern, isOverWrite,
+                                                      TimeOut, BufferSize);
                 handler.Event = iEvent;
                 handler.Begin();
                 handler.Wait();
@@ -376,15 +402,15 @@ namespace AIO
             /// <param name="searchOption">搜索模式</param>
             /// <param name="isOverWrite">是否重写</param>
             public bool DownloadDir(
-                string localPath,
-                IProgressEvent iEvent = null,
-                SearchOption searchOption = SearchOption.AllDirectories,
-                string searchPattern = "*",
-                bool isOverWrite = false)
+                string         localPath,
+                IProgressEvent iEvent        = null,
+                SearchOption   searchOption  = SearchOption.AllDirectories,
+                string         searchPattern = "*",
+                bool           isOverWrite   = false)
             {
                 var handler = AHelper.FTP.DownloadDir(URI, User, Pass,
-                    localPath, searchOption, searchPattern, isOverWrite,
-                    TimeOut, BufferSize);
+                                                      localPath, searchOption, searchPattern, isOverWrite,
+                                                      TimeOut, BufferSize);
                 handler.Event = iEvent;
                 handler.Begin();
                 handler.Wait();
@@ -410,7 +436,7 @@ namespace AIO
             public List<string> GetList(string remotePath = null, string keyword = null)
             {
                 return AHelper.FTP.GetRemoteList(string.Concat(URI, '/', remotePath), User, Pass,
-                    keyword, TimeOut);
+                                                 keyword, TimeOut);
             }
 
             /// <summary>
@@ -422,7 +448,7 @@ namespace AIO
             public List<string> GetListFile(string remotePath = null, string keyword = null)
             {
                 return AHelper.FTP.GetRemoteListFile(string.Concat(URI, '/', remotePath), User, Pass,
-                    keyword, TimeOut);
+                                                     keyword, TimeOut);
             }
 
             /// <summary>
@@ -451,18 +477,8 @@ namespace AIO
             {
                 return AHelper.FTP.CheckDir(string.Concat(URI, '/', remotePath), User, Pass, TimeOut);
             }
-
-            /// <summary>
-            /// 释放
-            /// </summary>
-            public void Dispose()
-            {
-                Server = null;
-                User = null;
-                Pass = null;
-                Absolute = null;
-                URI = null;
-            }
         }
+
+        #endregion
     }
 }

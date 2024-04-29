@@ -1,16 +1,16 @@
-/*|============|*|
-|*|Author:     |*| xinan
-|*|Date:       |*| 2023-06-04
-|*|E-Mail:     |*| 1398581458@qq.com
-|*|============|*/
+#region
 
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
     public partial class EHelper
     {
+        #region Nested type: Asset
+
         /// <summary>
         /// 资源
         /// </summary>
@@ -24,5 +24,7 @@ namespace AIO.UEditor
                 EditorUtility.SetDirty(obj);
             }
         }
+
+        #endregion
     }
 }

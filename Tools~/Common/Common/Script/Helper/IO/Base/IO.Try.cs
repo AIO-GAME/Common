@@ -1,20 +1,53 @@
-﻿/*|============|*|
-|*|Author:     |*| USER
-|*|Date:       |*| 2024-01-13
-|*|E-Mail:     |*| xinansky99@gmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
+            /// <summary>
+            /// 删除文件夹
+            /// </summary>
+            public static bool TryDeleteDir(
+                in DirectoryInfo directory,
+                in SearchOption  option = SearchOption.AllDirectories,
+                in bool          isAll  = false)
+            {
+                if (!directory.Exists) return false;
+                try
+                {
+                    if (isAll) Parallel.ForEach(directory.GetFiles("*", option), file => { DeleteFile(file); });
+                    directory.Delete(isAll);
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+
+            /// <summary>
+            /// 删除文件夹
+            /// </summary>
+            public static bool TryDeleteDir(
+                in string       director,
+                in SearchOption option = SearchOption.AllDirectories,
+                in bool         isAll  = false)
+            {
+                return TryDeleteDir(new DirectoryInfo(director), option, isAll);
+            }
+
             #region Delete File
 
             /// <summary>
@@ -94,50 +127,19 @@ namespace AIO
             /// <param name="pattern">匹配模式</param>
             /// <param name="option">查询模式</param>
             public static IDictionary<string, bool> TryDeleteFile(
-                in string folder,
-                in string pattern,
+                in string       folder,
+                in string       pattern,
                 in SearchOption option = SearchOption.AllDirectories)
             {
                 var enumerable = Pool.Dictionary<string, bool>();
                 Parallel.ForEach(GetFilesInfo(folder, pattern, option),
-                    file => { enumerable[file.FullName] = TryDeleteFile(file); });
+                                 file => { enumerable[file.FullName] = TryDeleteFile(file); });
                 return enumerable;
             }
 
             #endregion
-
-            /// <summary>
-            /// 删除文件夹
-            /// </summary>
-            public static bool TryDeleteDir(
-                in DirectoryInfo directory,
-                in SearchOption option = SearchOption.AllDirectories,
-                in bool isAll = false)
-            {
-                if (!directory.Exists) return false;
-                try
-                {
-                    if (isAll) Parallel.ForEach(directory.GetFiles("*", option), file => { DeleteFile(file); });
-                    directory.Delete(isAll);
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
-
-                return true;
-            }
-
-            /// <summary>
-            /// 删除文件夹
-            /// </summary>
-            public static bool TryDeleteDir(
-                in string director,
-                in SearchOption option = SearchOption.AllDirectories,
-                in bool isAll = false)
-            {
-                return TryDeleteDir(new DirectoryInfo(director), option, isAll);
-            }
         }
+
+        #endregion
     }
 }

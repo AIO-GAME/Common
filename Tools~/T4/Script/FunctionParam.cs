@@ -4,6 +4,31 @@ namespace AIO
 {
     public class FunctionParam
     {
+        public FunctionParam() { }
+
+        public FunctionParam(FunctionParam param)
+        {
+            Type     = param.Type;
+            Name     = param.Name;
+            Output   = param.Output;
+            IsParams = param.IsParams;
+            Comments = param.Comments;
+        }
+
+        public FunctionParam(string type, string name)
+        {
+            Type   = type;
+            Name   = name;
+            Output = Name;
+        }
+
+        public FunctionParam(string type, string name, string output)
+        {
+            Type   = type;
+            Name   = name;
+            Output = output;
+        }
+
         /// <summary>
         /// 参数修饰符
         /// </summary>
@@ -17,7 +42,7 @@ namespace AIO
         /// <summary>
         /// 是否可选参数
         /// </summary>
-        public bool IsParams { get; set; } = false;
+        public bool IsParams { get; set; }
 
         /// <summary>
         /// 参数名
@@ -38,32 +63,5 @@ namespace AIO
         /// 默认值
         /// </summary>
         public string Default { get; set; }
-        
-        public FunctionParam()
-        {
-        }
-
-        public FunctionParam(FunctionParam param)
-        {
-            Type = param.Type;
-            Name = param.Name;
-            Output = param.Output;
-            IsParams = param.IsParams;
-            Comments = param.Comments;
-        }
-
-        public FunctionParam(string type, string name)
-        {
-            Type = type;
-            Name = name;
-            Output = Name;
-        }
-
-        public FunctionParam(string type, string name, string output)
-        {
-            Type = type;
-            Name = name;
-            Output = output;
-        }
     }
 }

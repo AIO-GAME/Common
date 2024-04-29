@@ -1,10 +1,16 @@
+#region
+
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -35,7 +41,7 @@ namespace AIO
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static async Task<bool> WriteJsonAsync<T>(
                 string path, T value,
-                bool concat = false,
+                bool   concat  = false,
                 string charset = "utf-8")
             {
                 if (value == null) return false;
@@ -48,12 +54,14 @@ namespace AIO
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static async Task<bool> WriteJsonUTF8Async<T>(
                 string path,
-                T text,
-                bool concat = false)
+                T      text,
+                bool   concat = false)
             {
                 if (text == null) return false;
                 return await WriteUTF8Async(path, Json.Serialize(text), concat);
             }
         }
+
+        #endregion
     }
 }

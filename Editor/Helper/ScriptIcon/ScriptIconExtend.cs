@@ -1,14 +1,12 @@
-﻿/*|============|*|
-|*|Author:     |*| USER
-|*|Date:       |*| 2024-01-29
-|*|E-Mail:     |*| xinansky99@gmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -24,23 +22,16 @@ namespace AIO.UEditor
         {
             if (PlayerPrefs.GetInt("ScriptIconAttribute.AutoGenerate", 1) != 1) return;
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            foreach (var type in assembly.GetTypes())
+            foreach (var attribute in type.GetCustomAttributes<ScriptIconAttribute>(false))
             {
-                foreach (var type in assembly.GetTypes())
+                if (!string.IsNullOrEmpty(attribute.IconResource))
                 {
-                    foreach (var attribute in type.GetCustomAttributes<ScriptIconAttribute>(false))
-                    {
-                        if (!string.IsNullOrEmpty(attribute.IconResource))
-                        {
-                            SetIconResource(attribute.FilePath, attribute.IconResource);
-                            continue;
-                        }
-
-                        if (!string.IsNullOrEmpty(attribute.IconRelative))
-                        {
-                            SetIconRelative(attribute.FilePath, attribute.IconRelative);
-                        }
-                    }
+                    SetIconResource(attribute.FilePath, attribute.IconResource);
+                    continue;
                 }
+
+                if (!string.IsNullOrEmpty(attribute.IconRelative)) SetIconRelative(attribute.FilePath, attribute.IconRelative);
             }
         }
 

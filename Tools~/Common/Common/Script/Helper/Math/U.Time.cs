@@ -1,30 +1,26 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
-
+#region
 
 using System;
 using System.Text;
-using AIO;
 using EDateTimeUnit = AIO.Unit.Time.DateTimeUnit;
 using ESecondUnit = AIO.Unit.Time.SencondUnit;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
-        private AHelper()
-        {
-        }
+        private AHelper() { }
 
         private static AHelper Instance { get; } = new AHelper();
+
+        #region Nested type: Time
 
         /// <summary>
         /// 时间方法库
         /// </summary>
-        public partial class Time
+        public class Time
         {
             /// <summary>
             /// 前天开始时间 单位毫秒
@@ -78,8 +74,8 @@ namespace AIO
             /// <summary>
             /// 格式化时间，参数：格林威治时间，格式化格式（具体见文件末尾）
             /// </summary>
-            public static string Format(in long time, in string format = "yyyy-MM-dd 00:00:00",
-                ESecondUnit unit = ESecondUnit.MILLISCOND)
+            public static string Format(in long     time, in string format = "yyyy-MM-dd 00:00:00",
+                                        ESecondUnit unit = ESecondUnit.MILLISCOND)
             {
                 return TimeZoneInfo.ConvertTimeToUtc(GetDateTime(time, unit)).ToString(format);
             }
@@ -138,10 +134,10 @@ namespace AIO
             {
                 switch (unit)
                 {
-                    case ESecondUnit.SECOND: return date.Ticks / 10000000;
-                    case ESecondUnit.MILLISCOND: return date.Ticks / 10000;
+                    case ESecondUnit.SECOND:      return date.Ticks / 10000000;
+                    case ESecondUnit.MILLISCOND:  return date.Ticks / 10000;
                     case ESecondUnit.MICROSECOND: return date.Ticks / 10;
-                    case ESecondUnit.NANOSECOND: return date.Ticks * 100;
+                    case ESecondUnit.NANOSECOND:  return date.Ticks * 100;
                     case ESecondUnit.NANOSECOND_100:
                     default: return date.Ticks;
                 }
@@ -162,9 +158,9 @@ namespace AIO
             /// <param name="DateType">获取类型 年 季 月 周 日</param>
             /// <param name="unit">时间搓 单位 纳秒 微秒 毫秒 秒</param>
             public static long GetTimeStartByType(
-                in long time,
+                in long          time,
                 in EDateTimeUnit DateType,
-                in ESecondUnit unit = ESecondUnit.MILLISCOND)
+                in ESecondUnit   unit = ESecondUnit.MILLISCOND)
             {
                 var T = GetDateTime(time, unit);
                 switch (DateType)
@@ -179,7 +175,7 @@ namespace AIO
                         T = T.AddDays(-T.Day + 1);
                         break;
                     case EDateTimeUnit.Season:
-                        var time1 = T.AddMonths(0 - ((T.Month - 1) % 3));
+                        var time1 = T.AddMonths(0 - (T.Month - 1) % 3);
                         T = time1.AddDays(-time1.Day + 1);
                         break;
                     case EDateTimeUnit.Year:
@@ -197,9 +193,9 @@ namespace AIO
             /// <param name="DateType">获取类型 年 季 月 周 日</param>
             /// <param name="unit">时间搓 单位 纳秒 微秒 毫秒 秒</param>
             public static long GetTimeEndByType(
-                in long time,
+                in long          time,
                 in EDateTimeUnit DateType,
-                in ESecondUnit unit = ESecondUnit.MILLISCOND)
+                in ESecondUnit   unit = ESecondUnit.MILLISCOND)
             {
                 var T = GetDateTime(time, unit);
                 switch (DateType)
@@ -214,7 +210,7 @@ namespace AIO
                         T = T.AddDays(DateTime.DaysInMonth(T.Year, T.Month) - T.Day);
                         break;
                     case EDateTimeUnit.Season:
-                        T = T.AddMonths(2 - ((T.Month - 1) % 3));
+                        T = T.AddMonths(2 - (T.Month - 1) % 3);
                         T = T.AddDays(DateTime.DaysInMonth(T.Year, T.Month) - T.Day);
                         break;
                     case EDateTimeUnit.Year:
@@ -230,7 +226,7 @@ namespace AIO
             /// 获取时间倒计时字符串表示(ms) 01:59:08
             /// </summary>
             public static string GetCountDown(
-                in long time,
+                in long        time,
                 in ESecondUnit unit = ESecondUnit.MILLISCOND)
             {
                 var buff = new StringBuilder();
@@ -255,7 +251,7 @@ namespace AIO
             /// 获取传入时间距离当前时间的文字描述
             /// </summary>
             public static string GetPreHumanityTime(
-                long time,
+                long           time,
                 in ESecondUnit unit = ESecondUnit.MILLISCOND)
             {
                 if (time <= 0) return "传入值错误";
@@ -288,28 +284,6 @@ namespace AIO
                 return buff.ToString();
             }
 
-            #region 时间比较
-
-            /// <summary>
-            /// 与当前时间比较 如果小于当前时间为Ture
-            /// </summary>
-            public static bool CompareNowTime(in DateTime dateTime)
-            {
-                return DateTime.Now > dateTime;
-            }
-
-            /// <summary>
-            /// 与当前时间比较 如果小于当前时间为Ture
-            /// </summary>
-            public static bool CompareNowTime(
-                in long time,
-                in ESecondUnit unit = ESecondUnit.MILLISCOND)
-            {
-                return GetCurrTime(unit) > time;
-            }
-
-            #endregion
-
             /// <summary>
             /// 求离最近发表时间的函数
             /// </summary>
@@ -336,7 +310,7 @@ namespace AIO
             public static bool CompareDateDay(
                 in string today,
                 in string writeDate,
-                in int n)
+                in int    n)
             {
                 var dateTime = Convert.ToDateTime(today);
                 var WriteDate = Convert.ToDateTime(writeDate).AddDays(n);
@@ -349,7 +323,7 @@ namespace AIO
             public static string GetDisTime(
                 in DateTime dateBegin,
                 in DateTime dateEnd,
-                in string format = "HH:mm:ss")
+                in string   format = "HH:mm:ss")
             {
                 return GetDisTime(dateBegin.Ticks, dateEnd.Ticks, format);
             }
@@ -358,8 +332,8 @@ namespace AIO
             /// 获取两时间相差
             /// </summary>
             public static string GetDisTime(
-                in long dateBegin,
-                in long dateEnd,
+                in long   dateBegin,
+                in long   dateEnd,
                 in string format = "HH:mm:ss")
             {
                 return (new TimeSpan(dateEnd) - new TimeSpan(dateBegin)).ToString(format);
@@ -369,15 +343,39 @@ namespace AIO
             /// 判断是否同日
             /// </summary>
             public static bool IsToday(
-                in long time1,
-                in long time2,
+                in long        time1,
+                in long        time2,
                 in ESecondUnit unit = ESecondUnit.MILLISCOND)
             {
                 var dt1 = GetDateTime(time1, unit);
                 var dt2 = GetDateTime(time2, unit);
-                return (dt1.Day == dt2.Day);
+                return dt1.Day == dt2.Day;
             }
+
+            #region 时间比较
+
+            /// <summary>
+            /// 与当前时间比较 如果小于当前时间为Ture
+            /// </summary>
+            public static bool CompareNowTime(in DateTime dateTime)
+            {
+                return DateTime.Now > dateTime;
+            }
+
+            /// <summary>
+            /// 与当前时间比较 如果小于当前时间为Ture
+            /// </summary>
+            public static bool CompareNowTime(
+                in long        time,
+                in ESecondUnit unit = ESecondUnit.MILLISCOND)
+            {
+                return GetCurrTime(unit) > time;
+            }
+
+            #endregion
         }
+
+        #endregion
     }
 }
 /*

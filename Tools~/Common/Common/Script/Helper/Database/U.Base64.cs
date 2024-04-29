@@ -1,23 +1,22 @@
-﻿/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+﻿#region
 
 using System;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: Base64
+
         /// <summary>
         /// Base64 文件 解析
         /// </summary>
-        public partial class Base64
+        public class Base64
         {
             /// <summary>
             /// 序列化 未加密
@@ -35,7 +34,8 @@ namespace AIO
             /// <summary>
             /// 序列化 未加密
             /// </summary>
-            public static string SerializeData<T>(in T data) where T : struct
+            public static string SerializeData<T>(in T data)
+            where T : struct
             {
                 using (var stream = new MemoryStream())
                 {
@@ -77,5 +77,7 @@ namespace AIO
                 }
             }
         }
+
+        #endregion
     }
 }

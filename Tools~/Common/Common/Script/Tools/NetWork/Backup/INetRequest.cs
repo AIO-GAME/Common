@@ -1,9 +1,3 @@
-// /*|============|*|
-// |*|Author:     |*| xinan
-// |*|Date:       |*| 2023-10-07
-// |*|E-Mail:     |*| 1398581458@qq.com
-// |*|============|*/
-//
 // using System;
 // using System.IO;
 // using System.Threading.Tasks;
@@ -36,3 +30,4 @@
 //         void Send(Action<INetResponse> callback);
 //     }
 // }
+

@@ -1,14 +1,21 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
     public static partial class Pool
     {
+        #region Nested type: Generic
+
         /// <summary>
         /// 通用
         /// </summary>
-        public static class Generic<T> where T : IPoolable, new()
+        public static class Generic<T>
+        where T : IPoolable, new()
         {
             private static readonly Stack<T>
                 free = new Stack<T>();
@@ -63,5 +70,7 @@ namespace AIO
                 }
             }
         }
+
+        #endregion
     }
 }

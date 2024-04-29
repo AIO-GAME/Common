@@ -1,22 +1,22 @@
-﻿/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-11-21                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+﻿#region
 
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: Random
+
         /// <summary>
         /// 随机数工具类
         /// </summary>
-        public partial class Random
+        public class Random
         {
             private static System.Random random;
 
@@ -24,6 +24,39 @@ namespace AIO
             {
                 random = new System.Random(System.Guid.NewGuid().GetHashCode());
             }
+
+            #region Rand Double
+
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <returns></returns>
+            public static double RandDouble()
+            {
+                var bytes = new byte[8];
+                random.NextBytes(bytes);
+                return BitConverter.ToDouble(bytes, 0);
+            }
+
+            #endregion
+
+            #region Next
+
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="minValue"></param>
+            /// <param name="maxValue"></param>
+            /// <returns></returns>
+            /// <exception cref="ArgumentException"></exception>
+            public static long NextLong(long minValue, long maxValue)
+            {
+                if (minValue > maxValue)
+                    throw new ArgumentException("minValue is great than maxValue", nameof(minValue));
+                return minValue + (long)(random.NextDouble() * (maxValue - minValue));
+            }
+
+            #endregion
 
             #region Refresh
 
@@ -66,16 +99,12 @@ namespace AIO
             {
                 var arr = new T[count];
                 while (count >= 0)
-                {
                     foreach (var item in array)
-                    {
                         if (random.Next(0, 2) == 0)
                         {
                             arr[--count] = item;
                             if (count == 0) return arr;
                         }
-                    }
-                }
 
                 return arr;
             }
@@ -90,7 +119,7 @@ namespace AIO
             public static T[] RandArray<T>(in int count, in IList<T> array)
             {
                 var arr = new T[count];
-                for (int i = 0; i < arr.Length; i++) arr[i] = array[random.Next(0, array.Count)];
+                for (var i = 0; i < arr.Length; i++) arr[i] = array[random.Next(0, array.Count)];
                 return arr;
             }
 
@@ -121,19 +150,12 @@ namespace AIO
                 var arr = new Dictionary<T1, T2>(array);
                 if (arr.Count == 0 || count >= arr.Count) return arr;
                 while (count < arr.Count)
-                {
                     foreach (var item in array)
-                    {
                         if (random.Next(0, 2) == 0 && arr.ContainsKey(item.Key))
                         {
                             arr.Remove(item.Key);
-                            if (count >= arr.Count)
-                            {
-                                return arr;
-                            }
+                            if (count >= arr.Count) return arr;
                         }
-                    }
-                }
 
                 return arr;
             }
@@ -212,7 +234,7 @@ namespace AIO
             /// <param name="lower">下限-包含</param>
             /// <param name="upper">上限-不包含</param>
             public static KeyValuePair<T1, T2> RandArrayValue<T1, T2>(in IDictionary<T1, T2> array, in int lower,
-                int upper)
+                                                                      int                    upper)
             {
                 if (upper > array.Count) upper = array.Count;
                 if (lower >= upper) throw new ArgumentException("lower value should less upper value");
@@ -329,10 +351,7 @@ namespace AIO
                 if (max > byte.MaxValue + 1) throw new ArgumentException("lower value should less upper value");
 
                 var arr = new byte[count];
-                for (var i = 0; i < arr.Length; i++)
-                {
-                    arr[i] = (byte)random.Next(min, max);
-                }
+                for (var i = 0; i < arr.Length; i++) arr[i] = (byte)random.Next(min, max);
 
                 return arr;
             }
@@ -410,10 +429,7 @@ namespace AIO
                 var bytes = new byte[2 * count];
                 random.NextBytes(bytes);
                 var array = new ushort[count];
-                for (int i = 0, index = 0; i < bytes.Length; i += 2, index++)
-                {
-                    array[index] = BitConverter.ToUInt16(bytes, i);
-                }
+                for (int i = 0, index = 0; i < bytes.Length; i += 2, index++) array[index] = BitConverter.ToUInt16(bytes, i);
 
                 return array;
             }
@@ -455,10 +471,7 @@ namespace AIO
                 var bytes = new byte[4 * count];
                 random.NextBytes(bytes);
                 var array = new uint[count];
-                for (int i = 0, index = 0; i < bytes.Length; i += 4, index++)
-                {
-                    array[index] = BitConverter.ToUInt32(bytes, i);
-                }
+                for (int i = 0, index = 0; i < bytes.Length; i += 4, index++) array[index] = BitConverter.ToUInt32(bytes, i);
 
                 return array;
             }
@@ -500,10 +513,7 @@ namespace AIO
                 var bytes = new byte[8 * count];
                 random.NextBytes(bytes);
                 var array = new ulong[count];
-                for (int i = 0, index = 0; i < bytes.Length; i += 8, index++)
-                {
-                    array[index] = BitConverter.ToUInt64(bytes, i);
-                }
+                for (int i = 0, index = 0; i < bytes.Length; i += 8, index++) array[index] = BitConverter.ToUInt64(bytes, i);
 
                 return array;
             }
@@ -540,10 +550,7 @@ namespace AIO
                 var bytes = new byte[2 * count];
                 random.NextBytes(bytes);
                 var array = new short[count];
-                for (int i = 0, index = 0; i < bytes.Length; i += 2, index++)
-                {
-                    array[index] = BitConverter.ToInt16(bytes, i);
-                }
+                for (int i = 0, index = 0; i < bytes.Length; i += 2, index++) array[index] = BitConverter.ToInt16(bytes, i);
 
                 return array;
             }
@@ -576,8 +583,10 @@ namespace AIO
             {
                 var arr = new int[count];
                 if (hasRepeat)
+                {
                     for (var i = 0; i < arr.Length; i++)
                         arr[i] = random.Next(minValue, maxValue);
+                }
                 else
                 {
                     if (maxValue - minValue < count)
@@ -676,10 +685,7 @@ namespace AIO
                 var bytes = new byte[8 * count];
                 random.NextBytes(bytes);
                 var array = new long[count];
-                for (int i = 0, index = 0; i < bytes.Length; i += 8, index++)
-                {
-                    array[index] = BitConverter.ToInt64(bytes, i);
-                }
+                for (int i = 0, index = 0; i < bytes.Length; i += 8, index++) array[index] = BitConverter.ToInt64(bytes, i);
 
                 return array;
             }
@@ -716,21 +722,6 @@ namespace AIO
                     if (!hasInfinity && float.IsInfinity(value)) continue;
                     return value;
                 }
-            }
-
-            #endregion
-
-            #region Rand Double
-
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <returns></returns>
-            public static double RandDouble()
-            {
-                var bytes = new byte[8];
-                random.NextBytes(bytes);
-                return BitConverter.ToDouble(bytes, 0);
             }
 
             #endregion
@@ -775,24 +766,8 @@ namespace AIO
             }
 
             #endregion
-
-            #region Next
-
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="minValue"></param>
-            /// <param name="maxValue"></param>
-            /// <returns></returns>
-            /// <exception cref="ArgumentException"></exception>
-            public static long NextLong(long minValue, long maxValue)
-            {
-                if (minValue > maxValue)
-                    throw new ArgumentException("minValue is great than maxValue", nameof(minValue));
-                return minValue + (long)(random.NextDouble() * (maxValue - minValue));
-            }
-
-            #endregion
         }
+
+        #endregion
     }
 }

@@ -6,10 +6,10 @@
     /// <typeparam name="TBase"></typeparam>
     /// <typeparam name="TImplementation"></typeparam>
     /// <typeparam name="TKey"></typeparam>
-    public class VariantKeyedCollection<TBase, TImplementation, TKey> :
-        VariantCollection<TBase, TImplementation>,
-        IKeyedCollection<TKey, TBase>
-        where TImplementation : TBase
+    public class VariantKeyedCollection<TBase, TImplementation, TKey>
+        : VariantCollection<TBase, TImplementation>,
+          IKeyedCollection<TKey, TBase>
+    where TImplementation : TBase
     {
         /// <inheritdoc />
         public VariantKeyedCollection(in IKeyedCollection<TKey, TImplementation> implementation) : base(implementation)
@@ -17,14 +17,16 @@
             this.implementation = implementation;
         }
 
-        /// <inheritdoc />
-        public TBase this[TKey key] => implementation[key];
-
 
         /// <summary>
         /// 
         /// </summary>
         public IKeyedCollection<TKey, TImplementation> implementation { get; private set; }
+
+        #region IKeyedCollection<TKey,TBase> Members
+
+        /// <inheritdoc />
+        public TBase this[TKey key] => implementation[key];
 
         /// <inheritdoc />
         public bool TryGetValue(TKey key, out TBase value)
@@ -47,5 +49,7 @@
         }
 
         TBase IKeyedCollection<TKey, TBase>.this[int index] => implementation[index];
+
+        #endregion
     }
 }

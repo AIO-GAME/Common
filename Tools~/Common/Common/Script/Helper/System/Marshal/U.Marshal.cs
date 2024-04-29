@@ -1,8 +1,4 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+#region
 
 using System;
 using System.Reflection;
@@ -11,6 +7,8 @@ using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Security;
 using SMarshal = System.Runtime.InteropServices.Marshal;
+
+#endregion
 
 namespace AIO
 {
@@ -53,6 +51,8 @@ namespace AIO
 
     public partial class AHelper
     {
+        #region Nested type: Marshal
+
         /// <summary>
         /// SMarshal 类
         /// </summary>
@@ -1369,5 +1369,7 @@ namespace AIO
 
             #endregion
         }
+
+        #endregion
     }
 }

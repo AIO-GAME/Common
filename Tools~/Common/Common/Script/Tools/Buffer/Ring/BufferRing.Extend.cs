@@ -1,11 +1,9 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2024-01-03
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.IO;
+
+#endregion
 
 namespace AIO
 {
@@ -28,7 +26,7 @@ namespace AIO
                 {
                     stream.Write(buffer.First, buffer.ReadOffset, n);
                     buffer.ReadOffset += n;
-                    alreadyCopyCount += n;
+                    alreadyCopyCount  += n;
                 }
                 else
                 {
@@ -48,23 +46,20 @@ namespace AIO
             var alreadyCopyCount = 0;
             while (alreadyCopyCount < count)
             {
-                if (buffer.WriteOffset == buffer.Capacity)
-                {
-                    buffer.AddLast();
-                }
+                if (buffer.WriteOffset == buffer.Capacity) buffer.AddLast();
 
                 var n = count - alreadyCopyCount;
                 if (buffer.Capacity - buffer.WriteOffset > n)
                 {
-                    _ = stream.Read(buffer, buffer.WriteOffset, n);
+                    _                  =  stream.Read(buffer, buffer.WriteOffset, n);
                     buffer.WriteOffset += count - alreadyCopyCount;
-                    alreadyCopyCount += n;
+                    alreadyCopyCount   += n;
                 }
                 else
                 {
-                    _ = stream.Read(buffer, buffer.WriteOffset, buffer.Capacity - buffer.WriteOffset);
-                    alreadyCopyCount += buffer.Capacity - buffer.WriteOffset;
-                    buffer.WriteOffset = buffer.Capacity;
+                    _                  =  stream.Read(buffer, buffer.WriteOffset, buffer.Capacity - buffer.WriteOffset);
+                    alreadyCopyCount   += buffer.Capacity - buffer.WriteOffset;
+                    buffer.WriteOffset =  buffer.Capacity;
                 }
             }
         }

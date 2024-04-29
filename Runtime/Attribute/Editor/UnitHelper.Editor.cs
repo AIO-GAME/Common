@@ -1,10 +1,15 @@
 ﻿#if UNITY_EDITOR
+
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
+
+#endregion
 
 namespace AIO
 {
@@ -29,15 +34,13 @@ namespace AIO
         {
             if (property.hasMultipleDifferentValues &&
                 property.serializedObject.targetObject != targetObject as Object)
-            {
                 property = new SerializedObject(targetObject as Object).FindProperty(property.propertyPath);
-            }
 
             switch (property.propertyType)
             {
                 case SerializedPropertyType.Boolean: return property.boolValue;
-                case SerializedPropertyType.Float: return property.floatValue;
-                case SerializedPropertyType.String: return property.stringValue;
+                case SerializedPropertyType.Float:   return property.floatValue;
+                case SerializedPropertyType.String:  return property.stringValue;
 
                 case SerializedPropertyType.Integer:
                 case SerializedPropertyType.Character:
@@ -49,19 +52,19 @@ namespace AIO
                 case SerializedPropertyType.Vector3: return property.vector3Value;
                 case SerializedPropertyType.Vector4: return property.vector4Value;
 
-                case SerializedPropertyType.Quaternion: return property.quaternionValue;
-                case SerializedPropertyType.Color: return property.colorValue;
+                case SerializedPropertyType.Quaternion:     return property.quaternionValue;
+                case SerializedPropertyType.Color:          return property.colorValue;
                 case SerializedPropertyType.AnimationCurve: return property.animationCurveValue;
 
-                case SerializedPropertyType.Rect: return property.rectValue;
+                case SerializedPropertyType.Rect:   return property.rectValue;
                 case SerializedPropertyType.Bounds: return property.boundsValue;
 
                 case SerializedPropertyType.Vector2Int: return property.vector2IntValue;
                 case SerializedPropertyType.Vector3Int: return property.vector3IntValue;
-                case SerializedPropertyType.RectInt: return property.rectIntValue;
-                case SerializedPropertyType.BoundsInt: return property.boundsIntValue;
+                case SerializedPropertyType.RectInt:    return property.rectIntValue;
+                case SerializedPropertyType.BoundsInt:  return property.boundsIntValue;
 
-                case SerializedPropertyType.ObjectReference: return property.objectReferenceValue;
+                case SerializedPropertyType.ObjectReference:  return property.objectReferenceValue;
                 case SerializedPropertyType.ExposedReference: return property.exposedReferenceValue;
 
                 case SerializedPropertyType.FixedBufferSize: return property.fixedBufferSize;
@@ -107,7 +110,7 @@ namespace AIO
                     string.Compare(propertyPath, nameStartIndex - 6, ArrayDataPrefix, 0, 12) == 0)
                 {
                     var index = int.Parse(propertyPath.Substring(nameStartIndex + 6,
-                        propertyPath.Length - nameStartIndex - 7));
+                                                                 propertyPath.Length - nameStartIndex - 7));
 
                     var nameEndIndex = nameStartIndex - 6;
                     nameStartIndex = propertyPath.LastIndexOf('.', nameEndIndex - 1);
@@ -118,12 +121,12 @@ namespace AIO
                     if (nameStartIndex >= 0)
                     {
                         parent = GetAccessor(property, propertyPath.Substring(0, nameStartIndex), ref type);
-                        field = GetField(parent, property, type, elementName);
+                        field  = GetField(parent, property, type, elementName);
                     }
                     else
                     {
                         parent = null;
-                        field = GetField(type, elementName);
+                        field  = GetField(type, elementName);
                     }
 
                     accessor = new CollectionPropertyAccessor(parent, elementName, field, index);
@@ -133,12 +136,12 @@ namespace AIO
                     if (nameStartIndex >= 0)
                     {
                         elementName = propertyPath.Substring(nameStartIndex + 1);
-                        parent = GetAccessor(property, propertyPath.Substring(0, nameStartIndex), ref type);
+                        parent      = GetAccessor(property, propertyPath.Substring(0, nameStartIndex), ref type);
                     }
                     else
                     {
                         elementName = propertyPath;
-                        parent = null;
+                        parent      = null;
                     }
 
                     var field = GetField(parent, property, type, elementName);
@@ -169,7 +172,7 @@ namespace AIO
         /// <summary>Returns a field with the specified `name` in the `declaringType` or any of its base types.</summary>
         /// <remarks>Uses the <see cref="InstanceBindings"/>.</remarks>
         internal static FieldInfo GetField(PropertyAccessor accessor, SerializedProperty property, Type declaringType,
-            string name)
+                                           string           name)
         {
             declaringType = accessor?.GetFieldElementType(property) ?? declaringType;
             return GetField(declaringType, name);

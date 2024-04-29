@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
@@ -9,6 +13,10 @@ namespace AIO
     /// </summary>
     public class Cacheable : MonoBehaviour
     {
+        private bool checkIn;
+
+        private HashSet<ICacheableHandler> handlers;
+
         /// <summary>
         ///
         /// </summary>
@@ -23,23 +31,15 @@ namespace AIO
             Prefab = cacheable;
         }
 
-        private bool checkIn;
-
-        private HashSet<ICacheableHandler> handlers;
+        /// <summary>
+        ///
+        /// </summary>
+        protected virtual void OnCheckIn() { }
 
         /// <summary>
         ///
         /// </summary>
-        protected virtual void OnCheckIn()
-        {
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        protected virtual void OnCheckOut()
-        {
-        }
+        protected virtual void OnCheckOut() { }
 
         /// <summary>
         ///
@@ -81,7 +81,6 @@ namespace AIO
 
             if (handlers != null)
                 foreach (var h in handlers)
-                {
                     try
                     {
                         h.OnCheckOut();
@@ -90,7 +89,6 @@ namespace AIO
                     {
                         Debug.LogException(e);
                     }
-                }
 
             CancelInvoke();
             StopAllCoroutines();
@@ -105,7 +103,6 @@ namespace AIO
 
             if (handlers == null) return;
             foreach (var h in handlers)
-            {
                 try
                 {
                     h.OnCheckOut();
@@ -114,7 +111,6 @@ namespace AIO
                 {
                     Debug.LogException(e);
                 }
-            }
         }
     }
 }

@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -56,14 +60,10 @@ namespace AIO.UEditor
             }
 
             if (objectsWithDeadLinks.Count > 0)
-            {
                 //Set the selection in the editor
                 Selection.objects = objectsWithDeadLinks.ToArray();
-            }
             else
-            {
                 Debug.Log("No GameObjects missing scripts! Yay!");
-            }
         }
     }
 }

@@ -4,15 +4,21 @@
 
 |||✩ - - - - - |*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+#endregion
+
 namespace AIO
 {
     public partial class PrMac
     {
+        #region Nested type: Git
+
         public partial class Git
         {
             /// <summary>
@@ -97,8 +103,10 @@ namespace AIO
             /// <param name="quit">静默退出</param>
             public static IExecutor Pull(string target, bool quit = true)
             {
-                return Pull(new string[] { target }, quit);
+                return Pull(new[] { target }, quit);
             }
         }
+
+        #endregion
     }
 }

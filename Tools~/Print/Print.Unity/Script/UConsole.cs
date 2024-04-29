@@ -4,9 +4,13 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.IO;
 using System.Text;
+
+#endregion
 
 namespace UnityEngine
 {
@@ -15,30 +19,6 @@ namespace UnityEngine
     /// </summary>
     internal static class UnityConsole
     {
-        #region :: FIELDS
-
-        /// <summary>
-        /// Unity Log 输出
-        /// </summary>
-        private static UnityTextWriter WriterOut;
-
-        /// <summary>
-        /// Unity Error 输出
-        /// </summary>
-        private static UnityTextWriter WriterError;
-
-        /// <summary>
-        /// 源 输出
-        /// </summary>
-        private static TextWriter OriginalOut;
-
-        /// <summary>
-        /// 源 输出
-        /// </summary>
-        private static TextWriter OriginalError;
-
-        #endregion
-
         /// <summary>
         /// 关闭 LOG 输出
         /// </summary>
@@ -47,7 +27,7 @@ namespace UnityEngine
             if (WriterOut == null)
             {
                 OriginalOut = Console.Out;
-                WriterOut = new UnityTextWriter(UnityConsoleType.Log);
+                WriterOut   = new UnityTextWriter(UnityConsoleType.Log);
                 Console.SetOut(WriterOut);
             }
         }
@@ -60,7 +40,7 @@ namespace UnityEngine
             if (WriterError == null)
             {
                 OriginalError = Console.Error;
-                WriterError = new UnityTextWriter(UnityConsoleType.Error);
+                WriterError   = new UnityTextWriter(UnityConsoleType.Error);
                 Console.SetError(WriterError);
             }
         }
@@ -74,50 +54,7 @@ namespace UnityEngine
             EnabledError();
         }
 
-        #region :: DISABLE
-
-        /// <summary>
-        /// 关闭 全部输出
-        /// </summary>
-        internal static void DisableALL()
-        {
-            DisableLog();
-            DisableError();
-        }
-
-        /// <summary>
-        /// 关闭 LOG 输出
-        /// </summary>
-        internal static void DisableLog()
-        {
-            if (WriterOut != null)
-            {
-                WriterOut.SetPrint(false);
-                WriterOut.Close();
-                WriterOut.Dispose();
-                WriterOut = null;
-                if (OriginalOut != null) Console.SetOut(OriginalOut);
-                Console.Clear();
-            }
-        }
-
-        /// <summary>
-        /// 关闭 ERROR 输出
-        /// </summary>
-        internal static void DisableError()
-        {
-            if (WriterError != null)
-            {
-                WriterError.SetPrint(false);
-                WriterError.Close();
-                WriterError.Dispose();
-                WriterError = null;
-                if (OriginalError != null) Console.SetOut(OriginalError);
-                Console.Clear();
-            }
-        }
-
-        #endregion
+        #region Nested type: UnityConsoleType
 
         internal enum UnityConsoleType
         {
@@ -129,8 +66,12 @@ namespace UnityEngine
             /// <summary>
             /// 错误输出
             /// </summary>
-            Error,
+            Error
         }
+
+        #endregion
+
+        #region Nested type: UnityTextWriter
 
         /// <summary>
         /// Unity 重置定向 输出
@@ -142,11 +83,11 @@ namespace UnityEngine
         {
             #region :: FIELDS
 
-            private const string TAG_LOG = "<color=#B3E5FC><b>[LOG]</b></color> ";
-            private const string TAG_ERROR = "<color=#E91E63><b>[ERROR]</b></color> ";
-            private bool IsPrint;
-            private StringBuilder Buffer { get; }
-            private UnityConsoleType Type { get; }
+            private const string           TAG_LOG   = "<color=#B3E5FC><b>[LOG]</b></color> ";
+            private const string           TAG_ERROR = "<color=#E91E63><b>[ERROR]</b></color> ";
+            private       bool             IsPrint;
+            private       StringBuilder    Buffer { get; }
+            private       UnityConsoleType Type   { get; }
 
             #endregion
 
@@ -155,7 +96,7 @@ namespace UnityEngine
             public UnityTextWriter(UnityConsoleType type)
             {
                 Buffer = new StringBuilder();
-                Type = type;
+                Type   = type;
                 SetPrint(true);
             }
 
@@ -203,7 +144,7 @@ namespace UnityEngine
                 string str;
                 lock (this)
                 {
-                    str = Buffer.ToString();
+                    str           = Buffer.ToString();
                     Buffer.Length = 0;
                 }
 
@@ -219,7 +160,6 @@ namespace UnityEngine
                 {
                     var len = value.Length;
                     if (len > 0)
-                    {
                         lock (this)
                         {
                             var lastChar = value[len - 1];
@@ -234,7 +174,6 @@ namespace UnityEngine
                                 Buffer.Append(value, 0, len);
                             }
                         }
-                    }
                 }
             }
 
@@ -246,13 +185,9 @@ namespace UnityEngine
                 lock (this)
                 {
                     if (value == '\n')
-                    {
                         FlushNoLock();
-                    }
                     else
-                    {
                         Buffer.Append(value);
-                    }
                 }
             }
 
@@ -262,7 +197,6 @@ namespace UnityEngine
             public override void Write(char[] value, int index, int count)
             {
                 if (count > 0)
-                {
                     lock (this)
                     {
                         var lastChar = value[index + count - 1];
@@ -277,7 +211,6 @@ namespace UnityEngine
                             Buffer.Append(value, index, count);
                         }
                     }
-                }
             }
 
             /// <summary>
@@ -287,5 +220,76 @@ namespace UnityEngine
 
             #endregion
         }
+
+        #endregion
+
+        #region :: FIELDS
+
+        /// <summary>
+        /// Unity Log 输出
+        /// </summary>
+        private static UnityTextWriter WriterOut;
+
+        /// <summary>
+        /// Unity Error 输出
+        /// </summary>
+        private static UnityTextWriter WriterError;
+
+        /// <summary>
+        /// 源 输出
+        /// </summary>
+        private static TextWriter OriginalOut;
+
+        /// <summary>
+        /// 源 输出
+        /// </summary>
+        private static TextWriter OriginalError;
+
+        #endregion
+
+        #region :: DISABLE
+
+        /// <summary>
+        /// 关闭 全部输出
+        /// </summary>
+        internal static void DisableALL()
+        {
+            DisableLog();
+            DisableError();
+        }
+
+        /// <summary>
+        /// 关闭 LOG 输出
+        /// </summary>
+        internal static void DisableLog()
+        {
+            if (WriterOut != null)
+            {
+                WriterOut.SetPrint(false);
+                WriterOut.Close();
+                WriterOut.Dispose();
+                WriterOut = null;
+                if (OriginalOut != null) Console.SetOut(OriginalOut);
+                Console.Clear();
+            }
+        }
+
+        /// <summary>
+        /// 关闭 ERROR 输出
+        /// </summary>
+        internal static void DisableError()
+        {
+            if (WriterError != null)
+            {
+                WriterError.SetPrint(false);
+                WriterError.Close();
+                WriterError.Dispose();
+                WriterError = null;
+                if (OriginalError != null) Console.SetOut(OriginalError);
+                Console.Clear();
+            }
+        }
+
+        #endregion
     }
 }

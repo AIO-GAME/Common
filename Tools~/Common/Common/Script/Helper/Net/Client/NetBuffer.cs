@@ -1,8 +1,12 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
@@ -11,48 +15,14 @@ namespace AIO
     /// </summary>
     internal class NetBuffer
     {
-        private byte[] _arrays;
-        private int _count;
-        private int _offset;
-
-        /// <summary>
-        /// Is the buffer empty?
-        /// </summary>
-        public bool IsEmpty => (_arrays == null) || (_count == 0);
-
-        /// <summary>
-        /// Bytes memory buffer
-        /// </summary>
-        public byte[] Arrays => _arrays;
-
-        /// <summary>
-        /// Bytes memory buffer capacity
-        /// </summary>
-        public int Capacity => _arrays.Length;
-
-        /// <summary>
-        /// Bytes memory buffer size
-        /// </summary>
-        public int Count => _count;
-
-        /// <summary>
-        /// Bytes memory buffer offset
-        /// </summary>
-        public int Offset => _offset;
-
-        /// <summary>
-        /// Buffer indexer operator
-        /// </summary>
-        public byte this[long index] => _arrays[index];
-
         /// <summary>
         /// Initialize a new expandable buffer with zero capacity
         /// </summary>
         public NetBuffer()
         {
-            _arrays = Array.Empty<byte>();
-            _count = 0;
-            _offset = 0;
+            Arrays = Array.Empty<byte>();
+            Count  = 0;
+            Offset = 0;
         }
 
         /// <summary>
@@ -60,9 +30,9 @@ namespace AIO
         /// </summary>
         public NetBuffer(long capacity)
         {
-            _arrays = new byte[capacity];
-            _count = 0;
-            _offset = 0;
+            Arrays = new byte[capacity];
+            Count  = 0;
+            Offset = 0;
         }
 
         /// <summary>
@@ -70,10 +40,40 @@ namespace AIO
         /// </summary>
         public NetBuffer(byte[] arrays)
         {
-            _arrays = arrays;
-            _count = arrays.Length;
-            _offset = 0;
+            Arrays = arrays;
+            Count  = arrays.Length;
+            Offset = 0;
         }
+
+        /// <summary>
+        /// Is the buffer empty?
+        /// </summary>
+        public bool IsEmpty => Arrays == null || Count == 0;
+
+        /// <summary>
+        /// Bytes memory buffer
+        /// </summary>
+        public byte[] Arrays { get; private set; }
+
+        /// <summary>
+        /// Bytes memory buffer capacity
+        /// </summary>
+        public int Capacity => Arrays.Length;
+
+        /// <summary>
+        /// Bytes memory buffer size
+        /// </summary>
+        public int Count { get; private set; }
+
+        /// <summary>
+        /// Bytes memory buffer offset
+        /// </summary>
+        public int Offset { get; private set; }
+
+        /// <summary>
+        /// Buffer indexer operator
+        /// </summary>
+        public byte this[long index] => Arrays[index];
 
         #region Memory buffer methods
 
@@ -82,14 +82,14 @@ namespace AIO
         /// </summary>
         public override string ToString()
         {
-            return ExtractString(0, _count);
+            return ExtractString(0, Count);
         }
 
         // Clear the current buffer and its offset
         public void Clear()
         {
-            _count = 0;
-            _offset = 0;
+            Count  = 0;
+            Offset = 0;
         }
 
         /// <summary>
@@ -97,11 +97,11 @@ namespace AIO
         /// </summary>
         public string ExtractString(long offset, long size)
         {
-            Debug.Assert(((offset + size) <= Count), "Invalid offset & size!");
-            if ((offset + size) > Count)
+            Debug.Assert(offset + size <= Count, "Invalid offset & size!");
+            if (offset + size > Count)
                 throw new ArgumentException("Invalid offset & size!", nameof(offset));
 
-            return Encoding.UTF8.GetString(_arrays, (int)offset, (int)size);
+            return Encoding.UTF8.GetString(Arrays, (int)offset, (int)size);
         }
 
         /// <summary>
@@ -109,19 +109,21 @@ namespace AIO
         /// </summary>
         public void Remove(int offset, int size)
         {
-            Debug.Assert(((offset + size) <= Count), "Invalid offset & size!");
-            if ((offset + size) > Count)
+            Debug.Assert(offset + size <= Count, "Invalid offset & size!");
+            if (offset + size > Count)
                 throw new ArgumentException("Invalid offset & size!", nameof(offset));
 
-            Array.Copy(_arrays, offset + size, _arrays, offset, _count - size - offset);
-            _count -= size;
-            if (_offset >= (offset + size))
-                _offset -= size;
-            else if (_offset >= offset)
+            Array.Copy(Arrays, offset + size, Arrays, offset, Count - size - offset);
+            Count -= size;
+            if (Offset >= offset + size)
             {
-                _offset -= _offset - offset;
-                if (_offset > Count)
-                    _offset = Count;
+                Offset -= size;
+            }
+            else if (Offset >= offset)
+            {
+                Offset -= Offset - offset;
+                if (Offset > Count)
+                    Offset = Count;
             }
         }
 
@@ -130,15 +132,15 @@ namespace AIO
         /// </summary>
         public void Reserve(long capacity)
         {
-            Debug.Assert((capacity >= 0), "Invalid reserve capacity!");
+            Debug.Assert(capacity >= 0, "Invalid reserve capacity!");
             if (capacity < 0)
                 throw new ArgumentException("Invalid reserve capacity!", nameof(capacity));
 
             if (capacity > Capacity)
             {
-                byte[] data = new byte[Math.Max(capacity, 2 * Capacity)];
-                Array.Copy(_arrays, 0, data, 0, _count);
-                _arrays = data;
+                var data = new byte[Math.Max(capacity, 2 * Capacity)];
+                Array.Copy(Arrays, 0, data, 0, Count);
+                Arrays = data;
             }
         }
 
@@ -146,21 +148,21 @@ namespace AIO
         public void Resize(int size)
         {
             Reserve(size);
-            _count = size;
-            if (_offset > _count)
-                _offset = _count;
+            Count = size;
+            if (Offset > Count)
+                Offset = Count;
         }
 
         // Shift the current buffer offset
         public void Shift(int offset)
         {
-            _offset += offset;
+            Offset += offset;
         }
 
         // Unshift the current buffer offset
         public void Unshift(int offset)
         {
-            _offset -= offset;
+            Offset -= offset;
         }
 
         #endregion
@@ -174,9 +176,9 @@ namespace AIO
         /// <returns>Count of append bytes</returns>
         public long Write(byte value)
         {
-            Reserve(_count + 1);
-            _arrays[_count] = value;
-            _count += 1;
+            Reserve(Count + 1);
+            Arrays[Count] =  value;
+            Count         += 1;
             return 1;
         }
 
@@ -187,9 +189,9 @@ namespace AIO
         /// <returns>Count of append bytes</returns>
         public long Write(byte[] buffer)
         {
-            Reserve(_count + buffer.Length);
-            Array.Copy(buffer, 0, _arrays, _count, buffer.Length);
-            _count += buffer.Length;
+            Reserve(Count + buffer.Length);
+            Array.Copy(buffer, 0, Arrays, Count, buffer.Length);
+            Count += buffer.Length;
             return buffer.Length;
         }
 
@@ -202,9 +204,9 @@ namespace AIO
         /// <returns>Count of append bytes</returns>
         public long Write(byte[] buffer, int offset, int size)
         {
-            Reserve(_count + size);
-            Array.Copy(buffer, offset, _arrays, _count, size);
-            _count += size;
+            Reserve(Count + size);
+            Array.Copy(buffer, offset, Arrays, Count, size);
+            Count += size;
             return size;
         }
 
@@ -215,9 +217,9 @@ namespace AIO
         /// <returns>Count of append bytes</returns>
         public long Write(ICollection<byte> buffer)
         {
-            Reserve(_count + buffer.Count);
-            buffer.CopyTo(_arrays.ToArray(), (int)_count);
-            _count += buffer.Count;
+            Reserve(Count + buffer.Count);
+            buffer.CopyTo(Arrays.ToArray(), Count);
+            Count += buffer.Count;
             return buffer.Count;
         }
 
@@ -226,7 +228,10 @@ namespace AIO
         /// </summary>
         /// <param name="netBuffer">Buffer to append</param>
         /// <returns>Count of append bytes</returns>
-        public long Write(NetBuffer netBuffer) => Write(netBuffer.Arrays);
+        public long Write(NetBuffer netBuffer)
+        {
+            return Write(netBuffer.Arrays);
+        }
 
         /// <summary>
         /// Append the given text in UTF-8 encoding
@@ -236,9 +241,9 @@ namespace AIO
         public long Write(string text)
         {
             var length = Encoding.UTF8.GetMaxByteCount(text.Length);
-            Reserve(_count + length);
-            var result = Encoding.UTF8.GetBytes(text, 0, text.Length, _arrays, (int)_count);
-            _count += result;
+            Reserve(Count + length);
+            var result = Encoding.UTF8.GetBytes(text, 0, text.Length, Arrays, Count);
+            Count += result;
             return result;
         }
 
@@ -250,9 +255,9 @@ namespace AIO
         public long Write(ICollection<char> text)
         {
             var length = Encoding.UTF8.GetMaxByteCount(text.Count);
-            Reserve(_count + length);
-            var result = Encoding.UTF8.GetBytes(text.ToArray(), 0, text.Count, _arrays, (int)_count);
-            _count += result;
+            Reserve(Count + length);
+            var result = Encoding.UTF8.GetBytes(text.ToArray(), 0, text.Count, Arrays, Count);
+            Count += result;
             return result;
         }
 

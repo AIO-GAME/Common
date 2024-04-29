@@ -1,7 +1,11 @@
-﻿namespace AIO.UEditor
-{
-    using UnityEditor;
+﻿#region
 
+using UnityEditor;
+
+#endregion
+
+namespace AIO.UEditor
+{
     public partial class SerializedPropertyExtend
     {
         /// <summary>
@@ -15,8 +19,8 @@
             switch (property.propertyType)
             {
                 case SerializedPropertyType.Boolean: return property.boolValue == default;
-                case SerializedPropertyType.Float: return property.floatValue == 0;
-                case SerializedPropertyType.String: return property.stringValue == "";
+                case SerializedPropertyType.Float:   return property.floatValue == 0;
+                case SerializedPropertyType.String:  return property.stringValue == "";
 
                 case SerializedPropertyType.Integer:
                 case SerializedPropertyType.Character:
@@ -28,19 +32,19 @@
                 case SerializedPropertyType.Vector3: return property.vector3Value == default;
                 case SerializedPropertyType.Vector4: return property.vector4Value == default;
 
-                case SerializedPropertyType.Quaternion: return property.quaternionValue == default;
-                case SerializedPropertyType.Color: return property.colorValue == default;
+                case SerializedPropertyType.Quaternion:     return property.quaternionValue == default;
+                case SerializedPropertyType.Color:          return property.colorValue == default;
                 case SerializedPropertyType.AnimationCurve: return property.animationCurveValue == default;
 
-                case SerializedPropertyType.Rect: return property.rectValue == default;
+                case SerializedPropertyType.Rect:   return property.rectValue == default;
                 case SerializedPropertyType.Bounds: return property.boundsValue == default;
 
                 case SerializedPropertyType.Vector2Int: return property.vector2IntValue == default;
                 case SerializedPropertyType.Vector3Int: return property.vector3IntValue == default;
-                case SerializedPropertyType.RectInt: return property.rectIntValue.Equals(default);
-                case SerializedPropertyType.BoundsInt: return property.boundsIntValue == default;
+                case SerializedPropertyType.RectInt:    return property.rectIntValue.Equals(default);
+                case SerializedPropertyType.BoundsInt:  return property.boundsIntValue == default;
 
-                case SerializedPropertyType.ObjectReference: return property.objectReferenceValue == default;
+                case SerializedPropertyType.ObjectReference:  return property.objectReferenceValue == default;
                 case SerializedPropertyType.ExposedReference: return property.exposedReferenceValue == default;
 
                 case SerializedPropertyType.FixedBufferSize: return property.fixedBufferSize == default;

@@ -1,11 +1,17 @@
+#region
+
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -41,5 +47,7 @@ namespace AIO
                 return await WriteTextAsync(path, text.ToString(), "utf-8", concat);
             }
         }
+
+        #endregion
     }
 }

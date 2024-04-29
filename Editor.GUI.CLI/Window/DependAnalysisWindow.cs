@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -13,22 +17,29 @@ namespace AIO.UEditor
     [GWindow("查询资源引用", Group = "Tools", MinSizeWidth = 600, MinSizeHeight = 600)]
     public class DependAnalysisGraphWindow : GraphicWindow
     {
-        private static Object[] targetObjects;
-        private static int targetCount;
+        private static Object[]   targetObjects;
+        private static int        targetCount;
+        private        Object[][] beDependArr;
 
-        private bool[] foldoutArr;
-        private Object[][] beDependArr;
-        private Vector2 scrollPos;
-        private string[] withoutExtensions = new string[] { ".prefab", ".unity", ".mat", ".asset", ".controller" };
+        private bool[]   foldoutArr;
+        private Vector2  scrollPos;
+        private string[] withoutExtensions = { ".prefab", ".unity", ".mat", ".asset", ".controller" };
+
+        protected override void OnDisable()
+        {
+            targetObjects = null;
+            beDependArr   = null;
+            foldoutArr    = null;
+        }
 
         protected override void OnActivation()
         {
             targetObjects = Selection.GetFiltered<Object>(SelectionMode.Assets);
-            targetCount = targetObjects?.Length ?? 0;
+            targetCount   = targetObjects?.Length ?? 0;
             if (targetCount == 0) return;
 
             beDependArr = new Object[targetCount][];
-            foldoutArr = new bool[targetCount];
+            foldoutArr  = new bool[targetCount];
             for (var i = 0; i < targetCount; i++) beDependArr[i] = GetBeDepend(targetObjects[i]);
             EditorStyles.foldout.richText = true;
         }
@@ -83,8 +94,7 @@ namespace AIO.UEditor
             if (string.IsNullOrEmpty(path)) return null;
             var guid = AssetDatabase.AssetPathToGUID(path);
             var files = Directory.GetFiles(Application.dataPath, "*",
-                    SearchOption.AllDirectories).Where(s => withoutExtensions.Contains(Path.GetExtension(s).ToLower()))
-                .ToArray();
+                                           SearchOption.AllDirectories).Where(s => withoutExtensions.Contains(Path.GetExtension(s).ToLower())).ToArray();
             var objects = new List<Object>();
             foreach (var file in files)
             {
@@ -95,28 +105,20 @@ namespace AIO.UEditor
                 {
                     var depends = AssetDatabase.GetDependencies(assetPath, false);
                     if (depends != null)
-                    {
                         foreach (var dep in depends)
-                        {
                             if (dep == path)
                             {
                                 objects.Add(AssetDatabase.LoadAssetAtPath<Object>(assetPath));
                                 break;
                             }
-                        }
-                    }
                 }
-                else if (Regex.IsMatch(readText, guid)) objects.Add(AssetDatabase.LoadAssetAtPath<Object>(assetPath));
+                else if (Regex.IsMatch(readText, guid))
+                {
+                    objects.Add(AssetDatabase.LoadAssetAtPath<Object>(assetPath));
+                }
             }
 
             return objects.ToArray();
-        }
-
-        protected override void OnDisable()
-        {
-            targetObjects = null;
-            beDependArr = null;
-            foldoutArr = null;
         }
     }
 }

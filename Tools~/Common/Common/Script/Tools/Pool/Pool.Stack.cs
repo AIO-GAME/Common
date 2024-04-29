@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
     public static partial class Pool
     {
+        #region Nested type: AStack
+
         /// <summary>
         /// Stack对象池
         /// </summary>
@@ -22,10 +28,7 @@ namespace AIO
             {
                 lock (@lock)
                 {
-                    if (free.Count == 0)
-                    {
-                        free.Push(new Stack<T>());
-                    }
+                    if (free.Count == 0) free.Push(new Stack<T>());
 
                     var array = free.Pop();
 
@@ -48,6 +51,8 @@ namespace AIO
                 }
             }
         }
+
+        #endregion
     }
 
     /// <summary>

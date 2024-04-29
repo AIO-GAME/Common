@@ -1,9 +1,15 @@
-﻿using System.IO;
+﻿#region
+
+using System.IO;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrMac
     {
+        #region Nested type: Cp
+
         /// <summary>
         /// 复制
         /// </summary>
@@ -31,8 +37,10 @@ namespace AIO
                 if (!Directory.Exists(Path.GetDirectoryName(target)))
                     executor.Link(Mkdir.Directory(Path.GetDirectoryName(target)));
                 return executor.Link(Create(CMD_Cp, "{0} '{1}' '{2}'", command, source.Replace('\\', '/'),
-                    target.Replace('\\', '/')));
+                                            target.Replace('\\', '/')));
             }
         }
+
+        #endregion
     }
 }

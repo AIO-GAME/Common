@@ -4,12 +4,16 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Security;
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {
@@ -57,15 +61,13 @@ namespace AIO
         /// <summary>
         /// 同步运行
         /// </summary>
-        [SecurityCritical]
-        [DebuggerHidden, DebuggerNonUserCode]
+        [SecurityCritical, DebuggerHidden, DebuggerNonUserCode]
         IResult Sync();
 
         /// <summary>
         /// 异步运行
         /// </summary>
-        [SecurityCritical]
-        [DebuggerHidden, DebuggerNonUserCode]
+        [SecurityCritical, DebuggerHidden, DebuggerNonUserCode]
         Task<IResult> Async();
 
         /// <summary>

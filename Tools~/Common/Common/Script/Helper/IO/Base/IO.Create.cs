@@ -1,10 +1,15 @@
+#region
+
 using System.IO;
-using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -22,8 +27,13 @@ namespace AIO
                     info.Delete(true);
                     info.Create();
                 }
-                else info.Create();
+                else
+                {
+                    info.Create();
+                }
             }
         }
+
+        #endregion
     }
 }

@@ -1,16 +1,39 @@
-﻿using System;
+﻿#region
+
 #if SUPPORT_UNITASK
+using TaskAwaiter = Cysharp.Threading.Tasks.UniTask.Awaiter;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-
 #else
+using TaskAwaiter = System.Runtime.CompilerServices.TaskAwaiter;
 using System.Threading.Tasks;
 #endif
+using System;
+
+#endregion
 
 namespace AIO
 {
     partial class Runner
     {
+#if SUPPORT_UNITASK
+        /// <summary>
+        /// 开一个新的作业执行函数
+        /// </summary>
+        public static async void StartTask<T>(T action)
+        where T : System.Collections.IEnumerator
+        {
+            if (IsAllowThread)
+            {
+                await action;
+            }
+            else
+            {
+                Update(action);
+            }
+        }
+#endif
+
         /// <summary>
         /// 开一个新的作业执行函数
         /// </summary>
@@ -24,7 +47,10 @@ namespace AIO
                 await Task.Factory.StartNew(action);
 #endif
             }
-            else Update(action);
+            else
+            {
+                Update(action);
+            }
         }
 
         /// <summary>
@@ -40,11 +66,14 @@ namespace AIO
                 await Task.Factory.StartNew(Action);
 #endif
             }
-            else Update(Action);
+            else
+            {
+                Update(Action);
+            }
 
             return;
 
-            void Action() => action.Invoke(state);
+            void Action() { action.Invoke(state); }
         }
 
         /// <summary>
@@ -60,7 +89,10 @@ namespace AIO
                 await Task.Factory.StartNew(action);
 #endif
             }
-            else Update(action);
+            else
+            {
+                Update(action);
+            }
         }
     }
 }

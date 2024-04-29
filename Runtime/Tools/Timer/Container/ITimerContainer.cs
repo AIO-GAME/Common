@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+
+#endregion
 
 namespace AIO
 {
@@ -45,6 +49,11 @@ namespace AIO
         int RemainNum { get; }
 
         /// <summary>
+        /// 更新刷新List时间
+        /// </summary>
+        long UpdateCacheTime { get; }
+
+        /// <summary>
         /// 取消定时器
         /// </summary>
         void Cancel();
@@ -53,11 +62,6 @@ namespace AIO
         /// 开始定时器
         /// </summary>
         void Start();
-
-        /// <summary>
-        /// 更新刷新List时间
-        /// </summary>
-        long UpdateCacheTime { get; }
 
         string ToString();
 

@@ -1,15 +1,23 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Diagnostics;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
+#endregion
+
 namespace AIO
 {
+    #region
+
 #if !UNITY_WEBGL
     using System.Threading;
     using System.Threading.Tasks;
 #endif
-    
+
+    #endregion
+
     /// <summary>
     /// 定时器 时间调度器
     /// </summary>
@@ -30,26 +38,26 @@ namespace AIO
 
             //保持当前计算单位是毫秒 因为当前时间单位计算底层是纳秒
 
-            TaskList = Pool.List<ITimerContainer>();
-            MainList = Pool.List<ITimerOperator>();
-            TimingUnits = Pool.List<(long, long, long)>();
+            TaskList       = Pool.List<ITimerContainer>();
+            MainList       = Pool.List<ITimerOperator>();
+            TimingUnits    = Pool.List<(long, long, long)>();
             TimerExecutors = Pool.Dictionary<long, ITimerExecutor>();
 
             Unit = TimerSystemSettings.DistanceUnit;
             TimerSystemSettings.Invoke(TimingUnits);
 
-            RemainNum = 0;
+            RemainNum       = 0;
             UpdateCacheTime = 0;
-            Capacity = capacity;
-            UPDATELISTTIME = updateLimit;
+            Capacity        = capacity;
+            UPDATELISTTIME  = updateLimit;
 
             RegisterList();
 
             SWITCH = true;
 
             TaskHandleTokenSource = new CancellationTokenSource();
-            TaskHandleToken = TaskHandleTokenSource.Token;
-            ThreadHandle = Task.Factory.StartNew(Update, TaskHandleToken);
+            TaskHandleToken       = TaskHandleTokenSource.Token;
+            ThreadHandle          = Task.Factory.StartNew(Update, TaskHandleToken);
 
             if (TimerSystemSettings.EnableLoopThread)
             {
@@ -57,7 +65,7 @@ namespace AIO
                 LoopContainer.Start();
             }
 
-            IsInitialize = true;
+            IsInitialize         =  true;
             Application.quitting += Dispose;
         }
 
@@ -69,10 +77,7 @@ namespace AIO
         private static void RegisterList()
         {
             MainList.Clear();
-            for (byte i = 0; i < TimingUnits.Count; i++)
-            {
-                MainList.Add(new TimerOperatorAuto(i, TimingUnits[i].Item2, TimingUnits[i].Item3));
-            }
+            for (byte i = 0; i < TimingUnits.Count; i++) MainList.Add(new TimerOperatorAuto(i, TimingUnits[i].Item2, TimingUnits[i].Item3));
         }
 
         /// <summary>
@@ -116,9 +121,7 @@ namespace AIO
                 }
 
                 if (!ThreadHandle.IsCompleted)
-                {
                     TaskHandleTokenSource.Cancel(true);
-                }
                 else ThreadHandle.Dispose();
 
                 Watch = null;

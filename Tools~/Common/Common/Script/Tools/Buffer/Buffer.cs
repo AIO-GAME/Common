@@ -1,11 +1,15 @@
+#region
+
 using System;
+
+#endregion
 
 namespace AIO
 {
     /// <summary>
     /// 数据缓存留
     /// </summary>
-    public partial class Buffer
+    public class Buffer
     {
         /// <summary>
         /// 默认容量:32B = 256bit
@@ -18,27 +22,19 @@ namespace AIO
         public const int MAX_CAPACITY = 1024 * 1024 * 4;
 
         /// <summary>
-        /// 当前写入位置
-        /// </summary>
-        protected int WriteIndex;
-
-        /// <summary>
         /// 当前读取位置
         /// </summary>
         protected int ReadIndex;
 
         /// <summary>
+        /// 当前写入位置
+        /// </summary>
+        protected int WriteIndex;
+
+        /// <summary>
         /// 初始化
         /// </summary>
         protected Buffer()
-        {
-            WriteIndex = ReadIndex = 0;
-        }
-
-        /// <summary> 
-        /// 清空
-        /// </summary>
-        public virtual void Clear()
         {
             WriteIndex = ReadIndex = 0;
         }
@@ -79,6 +75,14 @@ namespace AIO
         /// 数据缓存:容量
         /// </summary>
         public virtual int Capacity { get; protected set; }
+
+        /// <summary> 
+        /// 清空
+        /// </summary>
+        public virtual void Clear()
+        {
+            WriteIndex = ReadIndex = 0;
+        }
 
         /// <summary>
         /// 跳过

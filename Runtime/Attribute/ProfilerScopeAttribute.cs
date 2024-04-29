@@ -1,6 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Diagnostics;
-#if !UNITY_EDITOR && UNITY_2020_1_OR_NEWER
+
+#endregion
+
+#if SUPPORT_PROFILER
 using System.Reflection;
 using AIO;
 using com.bbbirder.injection;
@@ -10,16 +15,15 @@ using UnityEngine.Profiling;
 /// <summary>
 /// 用于标记方法的性能分析器范围
 /// </summary>
-[AttributeUsage(AttributeTargets.Method, Inherited = false)]
-[Conditional("UNITY_EDITOR"), DebuggerNonUserCode]
+[AttributeUsage(AttributeTargets.Method, Inherited = false), Conditional("UNITY_EDITOR"), DebuggerNonUserCode]
 public class ProfilerScopeAttribute
-#if !UNITY_EDITOR && UNITY_2020_1_OR_NEWER
+#if SUPPORT_PROFILER
     : DecoratorAttribute
 #else
     : Attribute
 #endif
 {
-#if !UNITY_EDITOR && UNITY_2020_1_OR_NEWER
+#if SUPPORT_PROFILER
     public ProfilerScopeAttribute()
     {
     }

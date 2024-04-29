@@ -1,9 +1,15 @@
-﻿using UnityEngine;
+﻿#region
+
+using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
     partial class RHelper
     {
+        #region Nested type: Math
+
         /// <summary>
         /// Unity 计算
         /// </summary>
@@ -73,5 +79,7 @@ namespace AIO
                 return false;
             }
         }
+
+        #endregion
     }
 }

@@ -134,7 +134,7 @@ public class QuickHook
         hookDic.Clear();
     }
 
-    bool Internal_Hook(Type hookType, HookID hookID, string hookMember, string replaceName, string proxyName,
+    private bool Internal_Hook(Type hookType, HookID hookID, string hookMember, string replaceName, string proxyName,
         bool ignoreError = false)
     {
         if (!hookDic.TryGetValue(hookType, out var typeToHooks))

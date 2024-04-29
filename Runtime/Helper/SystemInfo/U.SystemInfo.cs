@@ -1,16 +1,55 @@
-﻿using UnityEngine;
+﻿#region
+
+using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.Rendering;
+
+#endregion
 
 namespace AIO
 {
     partial class RHelper
     {
+        #region Nested type: SystemInfo
+
         /// <summary>
         /// 设备信息 Unity API 2019_or_new
         /// </summary>
         public static partial class SystemInfo
         {
+            /// <summary>
+            /// 最大立方地图纹理大小
+            /// </summary>
+            public static int MaxCubemapSize()
+            {
+                return UnityEngine.SystemInfo.maxCubemapSize;
+            }
+
+            /// <summary>
+            /// 最大的纹理尺寸
+            /// </summary>
+            public static int MaxTextureSize()
+            {
+                return UnityEngine.SystemInfo.maxTextureSize;
+            }
+
+#if UNITY_2020_1_OR_NEWER
+            /// <summary>
+            /// 是否 使用Shader绑定常量缓冲区时的最小缓冲区偏移量(以字节为单位)。 SetConstantBuffer或Material.SetConstantBuffer。
+            /// </summary>
+            public static bool IsMinConstantBufferOffsetAlignment()
+            {
+                return UnityEngine.SystemInfo.constantBufferOffsetAlignment == 0;
+            }
+#endif
+
+            /// <summary>
+            /// 是否 支持指定格式
+            /// </summary>
+            public static bool IsFormatSupported(GraphicsFormat format, FormatUsage usage)
+            {
+                return UnityEngine.SystemInfo.IsFormatSupported(format, usage);
+            }
 #if UNITY_2019_1_OR_NEWER
             /// <summary>
             /// 是否支持镶嵌着色器
@@ -119,32 +158,6 @@ namespace AIO
             }
 #endif
 
-            /// <summary>
-            /// 最大立方地图纹理大小
-            /// </summary>
-            public static int MaxCubemapSize()
-            {
-                return UnityEngine.SystemInfo.maxCubemapSize;
-            }
-
-            /// <summary>
-            /// 最大的纹理尺寸
-            /// </summary>
-            public static int MaxTextureSize()
-            {
-                return UnityEngine.SystemInfo.maxTextureSize;
-            }
-
-#if UNITY_2020_1_OR_NEWER
-            /// <summary>
-            /// 是否 使用Shader绑定常量缓冲区时的最小缓冲区偏移量(以字节为单位)。 SetConstantBuffer或Material.SetConstantBuffer。
-            /// </summary>
-            public static bool IsMinConstantBufferOffsetAlignment()
-            {
-                return UnityEngine.SystemInfo.constantBufferOffsetAlignment == 0;
-            }
-#endif
-
 #if UNITY_2019_1_OR_NEWER
             /// <summary>
             /// 指示此设备是否支持给定的顶点属性格式和维度组合。
@@ -180,14 +193,6 @@ namespace AIO
                 return UnityEngine.SystemInfo.GetGraphicsFormat(format);
             }
 #endif
-
-            /// <summary>
-            /// 是否 支持指定格式
-            /// </summary>
-            public static bool IsFormatSupported(GraphicsFormat format, FormatUsage usage)
-            {
-                return UnityEngine.SystemInfo.IsFormatSupported(format, usage);
-            }
 
 #if UNITY_2019_1_OR_NEWER
             /// <summary>
@@ -227,15 +232,24 @@ namespace AIO
             }
 #endif
         }
+
+        #endregion
     }
 
     public static partial class RHelper
     {
+        #region Nested type: SystemInfo
+
         /// <summary>
         /// 设备信息 Unity API
         /// </summary>
         public static partial class SystemInfo
         {
+            /// <summary>
+            /// SystemInfo字符串属性返回的值，该属性在当前平台上不受支持。
+            /// Value returned by UnityEngine. SystemInfo string properties which are not supported on the current platform.
+            /// </summary>
+            public const string UnsupportedIdentifier = UnityEngine.SystemInfo.unsupportedIdentifier;
 #if UNITY_2019_1_OR_NEWER
             /// <summary>
             /// 当前渲染器是否直接支持绑定常量缓冲区
@@ -246,12 +260,6 @@ namespace AIO
                 return UnityEngine.SystemInfo.supportsSetConstantBuffer;
             }
 #endif
-
-            /// <summary>
-            /// SystemInfo字符串属性返回的值，该属性在当前平台上不受支持。
-            /// Value returned by UnityEngine. SystemInfo string properties which are not supported on the current platform.
-            /// </summary>
-            public const string UnsupportedIdentifier = UnityEngine.SystemInfo.unsupportedIdentifier;
 
             /// <summary>
             /// 获取设备电池状态
@@ -321,114 +329,6 @@ namespace AIO
             {
                 return UnityEngine.SystemInfo.deviceUniqueIdentifier;
             }
-
-            #region Graphics Device
-
-            /// <summary>
-            /// 获取图形设备ID 显卡的唯一标识符ID。
-            /// </summary>
-            public static int GetGraphicsDeviceID()
-            {
-                return UnityEngine.SystemInfo.graphicsDeviceID;
-            }
-
-            /// <summary>
-            /// 显卡的名称
-            /// </summary>
-            public static string GetGraphicsDeviceName()
-            {
-                return UnityEngine.SystemInfo.graphicsDeviceName;
-            }
-
-            /// <summary>
-            /// 图形设备类型 显卡的类型
-            /// </summary>
-            public static GraphicsDeviceType GetGraphicsDeviceType()
-            {
-                return UnityEngine.SystemInfo.graphicsDeviceType;
-            }
-
-            /// <summary>
-            /// 图形设备供应商 显卡的供应商
-            /// </summary>
-            public static string GetGraphicsDeviceVendor()
-            {
-                return UnityEngine.SystemInfo.graphicsDeviceVendor;
-            }
-
-            /// <summary>
-            /// 设备厂商ID 显卡供应商的唯一识别码ID
-            /// </summary>
-            public static int GetGraphicsDeviceVendorID()
-            {
-                return UnityEngine.SystemInfo.graphicsDeviceVendorID;
-            }
-
-            /// <summary>
-            /// 图形设备版本 显卡的类型和版本
-            /// </summary>
-            public static string GetGraphicsDeviceVersion()
-            {
-                return UnityEngine.SystemInfo.graphicsDeviceVersion;
-            }
-
-            /// <summary>
-            /// 图形内存大小 显存大小
-            /// </summary>
-            public static int GetGraphicsMemorySize()
-            {
-                return UnityEngine.SystemInfo.graphicsMemorySize;
-            }
-
-            /// <summary>
-            /// 是否支持多线程渲染
-            /// </summary>
-            public static bool IsGraphicsMultiThreaded()
-            {
-                return UnityEngine.SystemInfo.graphicsMultiThreaded;
-            }
-
-            /// <summary>
-            /// 图形着色器水平 显卡着色器的级别。
-            /// </summary>
-            public static int GetGraphicsShaderLevel()
-            {
-                return UnityEngine.SystemInfo.graphicsShaderLevel;
-            }
-
-            /// <summary>
-            /// 图形UV是否从顶部开始
-            /// </summary>
-            public static bool IsGraphicsUVStartsAtTop()
-            {
-                return UnityEngine.SystemInfo.graphicsUVStartsAtTop;
-            }
-
-            /// <summary>
-            /// 是否 在碎片着色器中 有动态统一数组索引
-            /// </summary>
-            public static bool IsDynamicUniformArrayIndexingInFragmentShaders()
-            {
-                return UnityEngine.SystemInfo.hasDynamicUniformArrayIndexingInFragmentShaders;
-            }
-
-            /// <summary>
-            /// 是否 GPU上有隐藏表面去除
-            /// </summary>
-            public static bool IsHiddenSurfaceRemovalOnGPU()
-            {
-                return UnityEngine.SystemInfo.hasHiddenSurfaceRemovalOnGPU;
-            }
-
-            /// <summary>
-            /// GPU提供了什么NPOT(两种尺寸的非电源)纹理支持
-            /// </summary>
-            public static NPOTSupport GetNpotSupport()
-            {
-                return UnityEngine.SystemInfo.npotSupport;
-            }
-
-            #endregion
 
             /// <summary>
             /// 返回运行游戏的操作系统家族
@@ -747,6 +647,116 @@ namespace AIO
             {
                 return UnityEngine.SystemInfo.usesReversedZBuffer;
             }
+
+            #region Graphics Device
+
+            /// <summary>
+            /// 获取图形设备ID 显卡的唯一标识符ID。
+            /// </summary>
+            public static int GetGraphicsDeviceID()
+            {
+                return UnityEngine.SystemInfo.graphicsDeviceID;
+            }
+
+            /// <summary>
+            /// 显卡的名称
+            /// </summary>
+            public static string GetGraphicsDeviceName()
+            {
+                return UnityEngine.SystemInfo.graphicsDeviceName;
+            }
+
+            /// <summary>
+            /// 图形设备类型 显卡的类型
+            /// </summary>
+            public static GraphicsDeviceType GetGraphicsDeviceType()
+            {
+                return UnityEngine.SystemInfo.graphicsDeviceType;
+            }
+
+            /// <summary>
+            /// 图形设备供应商 显卡的供应商
+            /// </summary>
+            public static string GetGraphicsDeviceVendor()
+            {
+                return UnityEngine.SystemInfo.graphicsDeviceVendor;
+            }
+
+            /// <summary>
+            /// 设备厂商ID 显卡供应商的唯一识别码ID
+            /// </summary>
+            public static int GetGraphicsDeviceVendorID()
+            {
+                return UnityEngine.SystemInfo.graphicsDeviceVendorID;
+            }
+
+            /// <summary>
+            /// 图形设备版本 显卡的类型和版本
+            /// </summary>
+            public static string GetGraphicsDeviceVersion()
+            {
+                return UnityEngine.SystemInfo.graphicsDeviceVersion;
+            }
+
+            /// <summary>
+            /// 图形内存大小 显存大小
+            /// </summary>
+            public static int GetGraphicsMemorySize()
+            {
+                return UnityEngine.SystemInfo.graphicsMemorySize;
+            }
+
+            /// <summary>
+            /// 是否支持多线程渲染
+            /// </summary>
+            public static bool IsGraphicsMultiThreaded()
+            {
+                return UnityEngine.SystemInfo.graphicsMultiThreaded;
+            }
+
+            /// <summary>
+            /// 图形着色器水平 显卡着色器的级别。
+            /// </summary>
+            public static int GetGraphicsShaderLevel()
+            {
+                return UnityEngine.SystemInfo.graphicsShaderLevel;
+            }
+
+            /// <summary>
+            /// 图形UV是否从顶部开始
+            /// </summary>
+            public static bool IsGraphicsUVStartsAtTop()
+            {
+                return UnityEngine.SystemInfo.graphicsUVStartsAtTop;
+            }
+
+            /// <summary>
+            /// 是否 在碎片着色器中 有动态统一数组索引
+            /// </summary>
+            public static bool IsDynamicUniformArrayIndexingInFragmentShaders()
+            {
+                return UnityEngine.SystemInfo.hasDynamicUniformArrayIndexingInFragmentShaders;
+            }
+
+            /// <summary>
+            /// 是否 GPU上有隐藏表面去除
+            /// </summary>
+            public static bool IsHiddenSurfaceRemovalOnGPU()
+            {
+                return UnityEngine.SystemInfo.hasHiddenSurfaceRemovalOnGPU;
+            }
+
+            /// <summary>
+            /// GPU提供了什么NPOT(两种尺寸的非电源)纹理支持
+            /// </summary>
+            public static NPOTSupport GetNpotSupport()
+            {
+                return UnityEngine.SystemInfo.npotSupport;
+            }
+
+            #endregion
         }
+
+        #endregion
     }
 }

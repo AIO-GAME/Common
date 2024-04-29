@@ -1,20 +1,18 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-12-11
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 
+#endregion
+
 namespace AIO
 {
     /// <summary>
     /// 分页
     /// </summary>
-    public interface IPageArray<out T>
+    public interface IPageArray<T> : ICollection<T>
     {
         /// <summary>
         /// 页大小
@@ -40,149 +38,159 @@ namespace AIO
     /// <summary>
     /// 分页列表
     /// </summary>
-    [Serializable]
-    [DebuggerDisplay("Count = {Count}")]
-    public class PageList<T> :
-        IList<T>,
-        ICollection<T>,
-        IEnumerable<T>,
-        IPageArray<T>,
-        IComparer<T>,
-        IEnumerable
+    [Serializable, DebuggerDisplay("Count = {Count}")]
+    public class PageList<T> : IList<T>, IPageArray<T>, IComparer<T>, IDisposable
     {
-        /// <inheritdoc />
-        public int PageSize
-        {
-            get => _PageSize;
-            set
-            {
-                _PageSize = value;
-                if (_PageIndex >= PageCount) _PageIndex = PageCount - 1;
-                CurrentPageValues = GetPage(_PageIndex);
-            }
-        }
+        private int _PageIndex;
 
         private int _PageSize = 16;
 
-        private int _PageIndex = 0;
-
-        /// <inheritdoc />
-        public int PageIndex
-        {
-            get => _PageIndex;
-            set
-            {
-                _PageIndex = value;
-                CurrentPageValues = GetPage(_PageIndex);
-            }
-        }
-
-        /// <inheritdoc />
-        public int PageCount => (int)Math.Ceiling(Count / (float)PageSize);
-
-        /// <inheritdoc />
-        public T[] CurrentPageValues { get; private set; }
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public PageList(int capacity) : this() { Capacity = capacity; }
 
         /// <summary>
         /// 构造函数
         /// </summary>
         public PageList()
         {
-            Values = new List<T>();
-        }
-
-        /// <summary>
-        /// 获取页内容
-        /// </summary>
-        private T[] GetPage(int index)
-        {
-            if (index < 0 || index >= PageCount) return Array.Empty<T>();
-            var start = index * _PageSize;
-            var end = start + _PageSize;
-            if (end > Count) end = Count;
-            var array = new T[end - start];
-            for (var i = start; i < end; i++) array[i - start] = Values[i];
-            return array;
+            Values            = new T[Capacity];
+            CurrentPageValues = Array.Empty<T>();
         }
 
         /// <summary>
         /// 值
         /// </summary>
-        protected List<T> Values { get; set; }
+        protected T[] Values { get; set; }
 
         /// <inheritdoc />
-        public int Count => Values.Count;
+        public int Compare(T x, T y) => Comparer<T>.Default.Compare(x, y);
+
+        /// <inheritdoc />
+        public int Count => WriteOffset;
+
+        /// <summary>
+        /// 容量
+        /// </summary>
+        public int Capacity = 8;
+
+        /// <summary>
+        /// 写入索引
+        /// </summary>
+        private int WriteOffset;
+
+        /// <summary>
+        /// 写入索引
+        /// </summary>
+        protected int WriteIndex
+        {
+            get => WriteOffset;
+            set
+            {
+                if (value < 0) return;
+                if (value >= Capacity)
+                {
+                    while (value >= Capacity)
+                    {
+                        Capacity <<= 1;
+                        if (int.MaxValue - Capacity < 0) throw new OutOfMemoryException();
+                    }
+
+                    var newValues = new T[Capacity];
+                    Values.CopyTo(newValues, 0);
+                    Values = newValues;
+                }
+                else WriteOffset = value;
+            }
+        }
+
+        /// <summary>
+        /// 更新
+        /// </summary>
+        public void Update() { CurrentPageValues = GetPage(_PageIndex); }
 
         /// <inheritdoc />
         public bool IsReadOnly => false;
 
-        /// <summary>
-        /// 反转
-        /// </summary>
-        public void Reverse()
-        {
-            Values.Reverse();
-            CurrentPageValues = GetPage(PageIndex);
-        }
-
         /// <inheritdoc />
         public IEnumerator<T> GetEnumerator()
         {
-            return Values.GetEnumerator();
+            for (var i = 0; i < WriteOffset; i++) yield return Values[i];
         }
 
         /// <inheritdoc />
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
-        public void Add(T item)
-        {
-            Values.Add(item);
-        }
+        public void Add(T item) => Values[++WriteIndex - 1] = item;
 
         /// <inheritdoc />
         public void Clear()
         {
-            Values.Clear();
+            Values            = new T[Capacity];
+            WriteOffset       = 0;
+            CurrentPageValues = Array.Empty<T>();
         }
 
         /// <inheritdoc />
         public bool Contains(T item)
         {
-            return Values.Contains(item);
+            for (var i = 0; i < WriteOffset; i++)
+            {
+                if (Values[i].Equals(item)) return true;
+            }
+
+            return false;
         }
 
         /// <inheritdoc />
         public void CopyTo(T[] array, int arrayIndex)
         {
-            Values.CopyTo(array, arrayIndex);
+            if (array is null) throw new ArgumentNullException(nameof(array));
+            if (arrayIndex < 0) throw new IndexOutOfRangeException();
+            if (array.Length - arrayIndex < WriteOffset) throw new IndexOutOfRangeException();
+            Array.ConstrainedCopy(Values, 0, array, arrayIndex, WriteOffset);
         }
 
         /// <inheritdoc />
         public bool Remove(T item)
         {
-            return Values.Remove(item);
+            var index = Array.IndexOf(Values, item);
+            if (index < 0) return false;
+            for (var i = index; i < WriteOffset - 1; i++) Values[i] = Values[i + 1];
+            WriteIndex--;
+            CurrentPageValues = GetPage(_PageIndex);
+            return true;
         }
 
         /// <inheritdoc />
         public int IndexOf(T item)
         {
-            return Values.IndexOf(item);
+            for (var i = 0; i < WriteOffset; i++)
+            {
+                if (Values[i].Equals(item)) return i;
+            }
+
+            return -1;
         }
 
         /// <inheritdoc />
         public void Insert(int index, T item)
         {
-            Values.Insert(index, item);
+            if (index < 0 || index >= WriteOffset) return;
+            for (var i = WriteOffset; i > index; i--) Values[i] = Values[i - 1];
+            Values[index] = item;
+            WriteIndex++;
         }
 
         /// <inheritdoc />
         public void RemoveAt(int index)
         {
-            Values.RemoveAt(index);
+            if (index < 0 || index >= WriteOffset) return;
+            for (var i = index; i < WriteOffset - 1; i++) Values[i] = Values[i + 1];
+            WriteIndex--;
+            CurrentPageValues = GetPage(_PageIndex);
         }
 
         /// <inheritdoc />
@@ -193,45 +201,119 @@ namespace AIO
         }
 
         /// <inheritdoc />
-        public int Compare(T x, T y)
+        public int PageSize
         {
-            return Values.IndexOf(x).CompareTo(Values.IndexOf(y));
+            get => _PageSize;
+            set
+            {
+                _PageSize = value;
+                var count                           = PageCount;
+                if (_PageIndex >= count) _PageIndex = count - 1;
+                CurrentPageValues = GetPage(_PageIndex);
+            }
+        }
+
+        /// <inheritdoc />
+        public int PageIndex
+        {
+            get => _PageIndex;
+            set
+            {
+                if (value < 0)
+                {
+                    _PageIndex        = 0;
+                    CurrentPageValues = GetPage(_PageIndex);
+                    return;
+                }
+
+                var count = PageCount;
+                if (value >= count) _PageIndex = count - 1;
+                else _PageIndex                = value;
+                CurrentPageValues = GetPage(_PageIndex);
+            }
+        }
+
+        /// <inheritdoc />
+        public int PageCount => (int)Math.Ceiling(Count / (float)_PageSize);
+
+        /// <inheritdoc />
+        public T[] CurrentPageValues { get; private set; }
+
+        /// <summary>
+        /// 获取页内容
+        /// </summary>
+        private T[] GetPage(int index)
+        {
+            if (index < 0 || index >= PageCount) return Array.Empty<T>();
+            var start = index * _PageSize;
+            var end   = start + _PageSize;
+
+            if (end > WriteOffset) end = WriteOffset;
+            var des                    = new T[end - start];
+            Array.ConstrainedCopy(Values, start, des, 0, des.Length);
+            return des;
+        }
+
+        /// <summary>
+        /// 反转
+        /// </summary>
+        public void Reverse()
+        {
+            for (var i = 0; i < WriteOffset / 2; i++) Values.Swap(i, WriteOffset - i - 1);
+            CurrentPageValues = GetPage(_PageIndex);
         }
 
         /// <summary>
         /// 排序
         /// </summary>
-        public void Sort(Comparison<T> comparison)
+        /// <param name="comparer"> 比较器 </param>
+        public void Sort(IComparer<T> comparer) => Sort(0, WriteOffset, comparer);
+
+        /// <summary>
+        /// 排序
+        /// </summary>
+        /// <param name="comparer"> 比较器 </param>
+        public void Sort(Func<T, T, int> comparer) => Sort(0, WriteOffset, comparer);
+
+        /// <summary>
+        /// 排序
+        /// </summary>
+        /// <param name="index"> 下标 </param>
+        /// <param name="count"> 数量 </param>
+        /// <param name="comparer"> 比较器 </param>
+        public void Sort(int index, int count, Func<T, T, int> comparer)
         {
-            Values.Sort(comparison);
-            CurrentPageValues = GetPage(PageIndex);
+            if (index < 0) throw new IndexOutOfRangeException();
+            if (count <= 0) return;
+            var span = WriteOffset - index;
+            if (span < count) throw new IndexOutOfRangeException();
+            Array.Sort(Values, index, count, ExtendSort.Comparer(comparer));
+            CurrentPageValues = GetPage(_PageIndex);
         }
 
         /// <summary>
         /// 排序
         /// </summary>
-        public void Sort() => this.Sort(0, this.Count, (IComparer<T>)null);
-
-        /// <summary>
-        /// 排序
-        /// </summary>
-        public void Sort(IComparer<T> comparer) => this.Sort(0, this.Count, comparer);
-
-        /// <summary>
-        /// 排序
-        /// </summary>
+        /// <param name="index"> 下标 </param>
+        /// <param name="count"> 数量 </param>
+        /// <param name="comparer"> 比较器 </param>
         public void Sort(int index, int count, IComparer<T> comparer)
         {
-            if (index < 0)
-                throw new IndexOutOfRangeException();
-            if (count < 0)
-                throw new ArgumentException();
-            if (Values.Count - index < count)
-                throw new ArgumentException();
-            var temp = Values.ToArray();
-            Array.Sort(temp, index, count, comparer);
-            Values = new List<T>(temp);
-            CurrentPageValues = GetPage(PageIndex);
+            if (index < 0) throw new IndexOutOfRangeException();
+            if (count <= 0) return;
+            var span = WriteOffset - index;
+            if (span < count) throw new IndexOutOfRangeException();
+            Array.Sort(Values, index, count, comparer);
+            CurrentPageValues = GetPage(_PageIndex);
+        }
+
+        /// <summary>
+        /// 释放资源
+        /// </summary>
+        public void Dispose()
+        {
+            Values            = null;
+            CurrentPageValues = null;
         }
     }
 }

@@ -4,12 +4,18 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrGit
     {
+        #region Nested type: Add
+
         /// <summary>
         /// <see cref="PrGit"/> <see cref="Add"/> 添加命令
         /// usage: git add [(options)] [--] (pathspec)...
@@ -97,5 +103,7 @@ namespace AIO
                 return Create(work, "add --all --update");
             }
         }
+
+        #endregion
     }
 }

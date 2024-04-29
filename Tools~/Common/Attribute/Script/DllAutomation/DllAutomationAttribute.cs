@@ -1,6 +1,4 @@
-﻿
-#if !UNITY
-
+﻿#if !UNITY
 using System;
 using System.Reflection;
 

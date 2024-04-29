@@ -212,16 +212,6 @@
             打印输出
             </summary>
         </member>
-        <member name="P:AIO.Internal.Print.IsNotOut">
-            <summary>
-            输出开关
-            </summary>
-        </member>
-        <member name="P:AIO.Internal.Print.CurOutLevel">
-            <summary>
-            类型
-            </summary>
-        </member>
         <member name="F:AIO.Internal.Print.LOG">
             <summary>
             日志
@@ -240,6 +230,21 @@
         <member name="F:AIO.Internal.Print.EXCEPTION">
             <summary>
             异常
+            </summary>
+        </member>
+        <member name="F:AIO.Internal.Print.MACRO_DEFINITION">
+            <summary>
+            宏定义
+            </summary>
+        </member>
+        <member name="P:AIO.Internal.Print.IsNotOut">
+            <summary>
+            输出开关
+            </summary>
+        </member>
+        <member name="P:AIO.Internal.Print.CurOutLevel">
+            <summary>
+            类型
             </summary>
         </member>
         <member name="M:AIO.Internal.Print.Level(EPrint@)">
@@ -262,11 +267,6 @@
             关闭日志
             </summary>
         </member>
-        <member name="F:AIO.Internal.Print.MACRO_DEFINITION">
-            <summary>
-            宏定义
-            </summary>
-        </member>
         <member name="M:AIO.Internal.Print.NoStatus(System.Int32@)">
             <summary>
             判断状态
@@ -282,16 +282,21 @@
             计算时间精度
             </summary>
         </member>
-        <member name="P:AIO.PrintElapse.Title">
-            <summary>
-            标题
-            </summary>
-        </member>
         <member name="M:AIO.PrintElapse.#ctor(System.String)">
             <summary>
             初始化
             </summary>
             <param name="title">消耗时间标题</param>
+        </member>
+        <member name="P:AIO.PrintElapse.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="M:AIO.PrintElapse.Dispose">
+            <summary>
+            释放
+            </summary>
         </member>
         <member name="M:AIO.PrintElapse.Start">
             <summary>
@@ -312,11 +317,6 @@
         <member name="M:AIO.PrintElapse.Exception(System.Exception,System.String)">
             <summary>
             异常信息
-            </summary>
-        </member>
-        <member name="M:AIO.PrintElapse.Dispose">
-            <summary>
-            释放
             </summary>
         </member>
     </members>

@@ -1,5 +1,9 @@
-﻿using UnityEngine;
+﻿#region
+
+using UnityEngine;
 using UnityEngine.UI;
+
+#endregion
 
 namespace AIO.UEngine
 {
@@ -11,7 +15,8 @@ namespace AIO.UEngine
         /// <summary>
         /// 设置材质
         /// </summary>
-        public static void SetMat<T>(this T graphic, Material material) where T : MaskableGraphic
+        public static void SetMat<T>(this T graphic, Material material)
+        where T : MaskableGraphic
         {
             graphic.material = material;
             graphic.SetMaterialDirty();
@@ -30,7 +35,8 @@ namespace AIO.UEngine
         /// <summary>
         /// 材质清空
         /// </summary>
-        public static void MatClear<T>(this T grap) where T : MaskableGraphic
+        public static void MatClear<T>(this T grap)
+        where T : MaskableGraphic
         {
             grap.material = null;
             grap.SetMaterialDirty();

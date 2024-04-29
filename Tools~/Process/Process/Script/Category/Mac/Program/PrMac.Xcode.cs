@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.IO;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
@@ -27,15 +31,17 @@ namespace AIO
         /// <summary>
         ///
         /// </summary>
-        ReleaseForRunning,
+        ReleaseForRunning
     }
 
     public sealed partial class PrMac
     {
+        #region Nested type: Xcode
+
         /// <summary>
         /// Xcode 进程命令
         /// </summary>
-        public sealed partial class Xcode
+        public sealed class Xcode
         {
             /// <summary>
             /// 
@@ -239,5 +245,7 @@ namespace AIO
                 return str.ToString();
             }
         }
+
+        #endregion
     }
 }

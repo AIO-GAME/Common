@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Net.Sockets;
+
+#endregion
 
 namespace AIO.Net
 {
@@ -15,16 +19,11 @@ namespace AIO.Net
         /// <param name="server">TCP server</param>
         public TcpSession(TcpServer server)
         {
-            Id = Guid.NewGuid();
-            Server = server;
+            Id                      = Guid.NewGuid();
+            Server                  = server;
             OptionReceiveBufferSize = server.Option.ReceiveBufferSize;
-            OptionSendBufferSize = server.Option.SendBufferSize;
+            OptionSendBufferSize    = server.Option.SendBufferSize;
         }
-
-        /// <summary>
-        /// Session Id
-        /// </summary>
-        public Guid Id { get; }
 
         /// <summary>
         /// Server
@@ -76,153 +75,12 @@ namespace AIO.Net
         /// </summary>
         public int OptionSendBufferSize { get; set; } = 8192;
 
-        #region Connect/Disconnect session
+        #region INetSession Members
 
         /// <summary>
-        /// Is the session connected?
+        /// Session Id
         /// </summary>
-        public bool IsConnected { get; private set; }
-
-        /// <summary>
-        /// Connect the session
-        /// </summary>
-        /// <param name="socket">Session socket</param>
-        internal void Connect(Socket socket)
-        {
-            Socket = socket;
-
-            // Update the session socket disposed flag
-            IsSocketDisposed = false;
-
-            // Setup buffers
-            _receiveNetBuffer = new NetBuffer();
-            _sendNetBufferMain = new NetBuffer();
-            _sendNetBufferFlush = new NetBuffer();
-
-            // Setup event args
-            ReceiveEventArg = new SocketAsyncEventArgs();
-            ReceiveEventArg.Completed += OnAsyncCompleted;
-            SendEventArg = new SocketAsyncEventArgs();
-            SendEventArg.Completed += OnAsyncCompleted;
-
-            // Apply the option: keep alive
-            if (Server.Option.KeepAlive)
-                Socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
-            // if (Server.OptionTcpKeepAliveTime >= 0)
-            //     Socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveTime, Server.OptionTcpKeepAliveTime);
-            // if (Server.OptionTcpKeepAliveInterval >= 0)
-            //     Socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveInterval, Server.OptionTcpKeepAliveInterval);
-            // if (Server.OptionTcpKeepAliveRetryCount >= 0)
-            //     Socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveRetryCount, Server.OptionTcpKeepAliveRetryCount);
-            // Apply the option: no delay
-            if (Server.Option.NoDelay)
-                Socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.NoDelay, true);
-
-            // Prepare receive & send buffers
-            _receiveNetBuffer.Reserve(OptionReceiveBufferSize);
-            _sendNetBufferMain.Reserve(OptionSendBufferSize);
-            _sendNetBufferFlush.Reserve(OptionSendBufferSize);
-
-            // Reset statistic
-            BytesPending = 0;
-            BytesSending = 0;
-            BytesSent = 0;
-            BytesReceived = 0;
-
-            // Call the session connecting handler
-            OnConnecting();
-
-            // Call the session connecting handler in the server
-            Server.OnConnectingInternal(this);
-
-            // Update the connected flag
-            IsConnected = true;
-
-            // Try to receive something from the client
-            ReceiveAsync();
-
-            // Check the socket disposed state: in some rare cases it might be disconnected while receiving!
-            if (IsSocketDisposed) return;
-
-            // Call the session connected handler
-            OnConnected();
-
-            // Call the session connected handler in the server
-            Server.OnConnectedInternal(this);
-
-            // Call the empty send buffer handler
-            if (_sendNetBufferMain.IsEmpty)
-                OnEmpty();
-        }
-
-        /// <summary>
-        /// Disconnect the session
-        /// </summary>
-        /// <returns>'true' if the section was successfully disconnected, 'false' if the section is already disconnected</returns>
-        public virtual bool Disconnect()
-        {
-            if (!IsConnected)
-                return false;
-
-            // Reset event args
-            ReceiveEventArg.Completed -= OnAsyncCompleted;
-            SendEventArg.Completed -= OnAsyncCompleted;
-
-            // Call the session disconnecting handler
-            OnDisconnecting();
-
-            // Call the session disconnecting handler in the server
-            Server.OnDisconnectingInternal(this);
-
-            try
-            {
-                try
-                {
-                    // Shutdown the socket associated with the client
-                    Socket.Shutdown(SocketShutdown.Both);
-                }
-                catch (SocketException)
-                {
-                }
-
-                // Close the session socket
-                Socket.Close();
-
-                // Dispose the session socket
-                Socket.Dispose();
-
-                // Dispose event arguments
-                ReceiveEventArg.Dispose();
-                SendEventArg.Dispose();
-
-                // Update the session socket disposed flag
-                IsSocketDisposed = true;
-            }
-            catch (ObjectDisposedException)
-            {
-            }
-
-            // Update the connected flag
-            IsConnected = false;
-
-            // Update sending/receiving flags
-            Receiving = false;
-            Sending = false;
-
-            // Clear send/receive buffers
-            ClearBuffers();
-
-            // Call the session disconnected handler
-            OnDisconnected();
-
-            // Call the session disconnected handler in the server
-            Server.OnDisconnectedInternal(this);
-
-            // Unregister session
-            Server.UnregisterSession(Id);
-
-            return true;
-        }
+        public Guid Id { get; }
 
         #endregion
 
@@ -276,83 +134,6 @@ namespace AIO.Net
 
         #endregion
 
-        #region Session handlers
-
-        /// <summary>
-        /// Handle client connecting notification
-        /// </summary>
-        protected virtual void OnConnecting()
-        {
-        }
-
-        /// <summary>
-        /// Handle client connected notification
-        /// </summary>
-        protected virtual void OnConnected()
-        {
-        }
-
-        /// <summary>
-        /// Handle client disconnecting notification
-        /// </summary>
-        protected virtual void OnDisconnecting()
-        {
-        }
-
-        /// <summary>
-        /// Handle client disconnected notification
-        /// </summary>
-        protected virtual void OnDisconnected()
-        {
-        }
-
-        /// <summary>
-        /// Handle buffer received notification
-        /// </summary>
-        /// <param name="buffer">Received buffer</param>
-        /// <param name="offset">Received buffer offset</param>
-        /// <param name="size">Received buffer size</param>
-        /// <remarks>
-        /// Notification is called when another chunk of buffer was received from the client
-        /// </remarks>
-        protected virtual void OnReceived(byte[] buffer, int offset, int size)
-        {
-        }
-
-        /// <summary>
-        /// Handle buffer sent notification
-        /// </summary>
-        /// <param name="sent">Size of sent buffer</param>
-        /// <param name="pending">Size of pending buffer</param>
-        /// <remarks>
-        /// Notification is called when another chunk of buffer was sent to the client.
-        /// This handler could be used to send another buffer to the client for instance when the pending size is zero.
-        /// </remarks>
-        protected virtual void OnSent(long sent, long pending)
-        {
-        }
-
-        /// <summary>
-        /// Handle empty send buffer notification
-        /// </summary>
-        /// <remarks>
-        /// Notification is called when the send buffer is empty and ready for a new data to send.
-        /// This handler could be used to send another buffer to the client.
-        /// </remarks>
-        protected virtual void OnEmpty()
-        {
-        }
-
-        /// <summary>
-        /// Handle error notification
-        /// </summary>
-        /// <param name="error">Socket error code</param>
-        protected virtual void OnError(SocketError error)
-        {
-        }
-
-        #endregion
-
         #region Error handling
 
         /// <summary>
@@ -371,6 +152,213 @@ namespace AIO.Net
 
             OnError(error);
         }
+
+        #endregion
+
+        #region Connect/Disconnect session
+
+        /// <summary>
+        /// Is the session connected?
+        /// </summary>
+        public bool IsConnected { get; private set; }
+
+        /// <summary>
+        /// Connect the session
+        /// </summary>
+        /// <param name="socket">Session socket</param>
+        internal void Connect(Socket socket)
+        {
+            Socket = socket;
+
+            // Update the session socket disposed flag
+            IsSocketDisposed = false;
+
+            // Setup buffers
+            _receiveNetBuffer   = new NetBuffer();
+            _sendNetBufferMain  = new NetBuffer();
+            _sendNetBufferFlush = new NetBuffer();
+
+            // Setup event args
+            ReceiveEventArg           =  new SocketAsyncEventArgs();
+            ReceiveEventArg.Completed += OnAsyncCompleted;
+            SendEventArg              =  new SocketAsyncEventArgs();
+            SendEventArg.Completed    += OnAsyncCompleted;
+
+            // Apply the option: keep alive
+            if (Server.Option.KeepAlive)
+                Socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
+            // if (Server.OptionTcpKeepAliveTime >= 0)
+            //     Socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveTime, Server.OptionTcpKeepAliveTime);
+            // if (Server.OptionTcpKeepAliveInterval >= 0)
+            //     Socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveInterval, Server.OptionTcpKeepAliveInterval);
+            // if (Server.OptionTcpKeepAliveRetryCount >= 0)
+            //     Socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.TcpKeepAliveRetryCount, Server.OptionTcpKeepAliveRetryCount);
+            // Apply the option: no delay
+            if (Server.Option.NoDelay)
+                Socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.NoDelay, true);
+
+            // Prepare receive & send buffers
+            _receiveNetBuffer.Reserve(OptionReceiveBufferSize);
+            _sendNetBufferMain.Reserve(OptionSendBufferSize);
+            _sendNetBufferFlush.Reserve(OptionSendBufferSize);
+
+            // Reset statistic
+            BytesPending  = 0;
+            BytesSending  = 0;
+            BytesSent     = 0;
+            BytesReceived = 0;
+
+            // Call the session connecting handler
+            OnConnecting();
+
+            // Call the session connecting handler in the server
+            Server.OnConnectingInternal(this);
+
+            // Update the connected flag
+            IsConnected = true;
+
+            // Try to receive something from the client
+            ReceiveAsync();
+
+            // Check the socket disposed state: in some rare cases it might be disconnected while receiving!
+            if (IsSocketDisposed) return;
+
+            // Call the session connected handler
+            OnConnected();
+
+            // Call the session connected handler in the server
+            Server.OnConnectedInternal(this);
+
+            // Call the empty send buffer handler
+            if (_sendNetBufferMain.IsEmpty)
+                OnEmpty();
+        }
+
+        /// <summary>
+        /// Disconnect the session
+        /// </summary>
+        /// <returns>'true' if the section was successfully disconnected, 'false' if the section is already disconnected</returns>
+        public virtual bool Disconnect()
+        {
+            if (!IsConnected)
+                return false;
+
+            // Reset event args
+            ReceiveEventArg.Completed -= OnAsyncCompleted;
+            SendEventArg.Completed    -= OnAsyncCompleted;
+
+            // Call the session disconnecting handler
+            OnDisconnecting();
+
+            // Call the session disconnecting handler in the server
+            Server.OnDisconnectingInternal(this);
+
+            try
+            {
+                try
+                {
+                    // Shutdown the socket associated with the client
+                    Socket.Shutdown(SocketShutdown.Both);
+                }
+                catch (SocketException) { }
+
+                // Close the session socket
+                Socket.Close();
+
+                // Dispose the session socket
+                Socket.Dispose();
+
+                // Dispose event arguments
+                ReceiveEventArg.Dispose();
+                SendEventArg.Dispose();
+
+                // Update the session socket disposed flag
+                IsSocketDisposed = true;
+            }
+            catch (ObjectDisposedException) { }
+
+            // Update the connected flag
+            IsConnected = false;
+
+            // Update sending/receiving flags
+            Receiving = false;
+            Sending   = false;
+
+            // Clear send/receive buffers
+            ClearBuffers();
+
+            // Call the session disconnected handler
+            OnDisconnected();
+
+            // Call the session disconnected handler in the server
+            Server.OnDisconnectedInternal(this);
+
+            // Unregister session
+            Server.UnregisterSession(Id);
+
+            return true;
+        }
+
+        #endregion
+
+        #region Session handlers
+
+        /// <summary>
+        /// Handle client connecting notification
+        /// </summary>
+        protected virtual void OnConnecting() { }
+
+        /// <summary>
+        /// Handle client connected notification
+        /// </summary>
+        protected virtual void OnConnected() { }
+
+        /// <summary>
+        /// Handle client disconnecting notification
+        /// </summary>
+        protected virtual void OnDisconnecting() { }
+
+        /// <summary>
+        /// Handle client disconnected notification
+        /// </summary>
+        protected virtual void OnDisconnected() { }
+
+        /// <summary>
+        /// Handle buffer received notification
+        /// </summary>
+        /// <param name="buffer">Received buffer</param>
+        /// <param name="offset">Received buffer offset</param>
+        /// <param name="size">Received buffer size</param>
+        /// <remarks>
+        /// Notification is called when another chunk of buffer was received from the client
+        /// </remarks>
+        protected virtual void OnReceived(byte[] buffer, int offset, int size) { }
+
+        /// <summary>
+        /// Handle buffer sent notification
+        /// </summary>
+        /// <param name="sent">Size of sent buffer</param>
+        /// <param name="pending">Size of pending buffer</param>
+        /// <remarks>
+        /// Notification is called when another chunk of buffer was sent to the client.
+        /// This handler could be used to send another buffer to the client for instance when the pending size is zero.
+        /// </remarks>
+        protected virtual void OnSent(long sent, long pending) { }
+
+        /// <summary>
+        /// Handle empty send buffer notification
+        /// </summary>
+        /// <remarks>
+        /// Notification is called when the send buffer is empty and ready for a new data to send.
+        /// This handler could be used to send another buffer to the client.
+        /// </remarks>
+        protected virtual void OnEmpty() { }
+
+        /// <summary>
+        /// Handle error notification
+        /// </summary>
+        /// <param name="error">Socket error code</param>
+        protected virtual void OnError(SocketError error) { }
 
         #endregion
 

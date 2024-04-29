@@ -1,6 +1,10 @@
-﻿using System.Globalization;
+﻿#region
+
+using System.Globalization;
 using System.Text;
 using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
@@ -22,10 +26,12 @@ namespace AIO
             return ColorUtility.ToHtmlStringRGBA(color);
         }
 
+        #region Nested type: Color
+
         /// <summary>
         /// 颜色工具类
         /// </summary>
-        public static partial class Color
+        public static class Color
         {
             /// <summary>
             /// 颜色 R G B A
@@ -33,9 +39,9 @@ namespace AIO
             public static UnityEngine.Color IntToColor(uint col)
             {
                 var b = (byte)(col & 0xff);
-                var g = (byte)(col >> 8 & 0xff);
-                var r = (byte)(col >> 16 & 0xff);
-                var a = (byte)(col >> 24 & 0xff);
+                var g = (byte)((col >> 8) & 0xff);
+                var r = (byte)((col >> 16) & 0xff);
+                var a = (byte)((col >> 24) & 0xff);
                 return new Color32(r, g, b, a);
             }
 
@@ -45,9 +51,9 @@ namespace AIO
             public static uint ColorToInt(in UnityEngine.Color col)
             {
                 return (uint)(col.b * 255) |
-                       ((uint)(col.g * 255) << 8 & 0xff00) |
-                       ((uint)(col.r * 255) << 16 & 0xff0000) |
-                       ((uint)(col.a * 255) << 24 & 0xff000000);
+                       (((uint)(col.g * 255) << 8) & 0xff00) |
+                       (((uint)(col.r * 255) << 16) & 0xff0000) |
+                       (((uint)(col.a * 255) << 24) & 0xff000000);
             }
 
             /// <summary>
@@ -58,9 +64,9 @@ namespace AIO
                 // RGBA 顺序不可改
                 var cb = new StringBuilder("#");
                 AHelper.Hex.ToHex((byte)(col & 0xff), cb);
-                AHelper.Hex.ToHex((byte)(col >> 8 & 0xff), cb);
-                AHelper.Hex.ToHex((byte)(col >> 16 & 0xff), cb);
-                AHelper.Hex.ToHex((byte)(col >> 24 & 0xff), cb);
+                AHelper.Hex.ToHex((byte)((col >> 8) & 0xff), cb);
+                AHelper.Hex.ToHex((byte)((col >> 16) & 0xff), cb);
+                AHelper.Hex.ToHex((byte)((col >> 24) & 0xff), cb);
                 return cb.ToString();
             }
 
@@ -121,5 +127,7 @@ namespace AIO
                 return new Color32(br, bg, bb, ba);
             }
         }
+
+        #endregion
     }
 }

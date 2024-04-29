@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -21,46 +25,16 @@ namespace AIO
     /// 
     public sealed partial class CompactUnitConversionCache
     {
-        /************************************************************************************************************************/
-
-        /// <summary>The suffix added to the end of each value.</summary>
-        public readonly string Suffix;
-
-        /// <summary>The <see cref="Suffix"/> with a <c>~</c> before it to indicate an approximation.</summary>
-        public readonly string ApproximateSuffix;
-
-        /// <summary>The value <c>0</c> with the <see cref="Suffix"/>.</summary>
-        public readonly string ConvertedZero;
-
-        /// <summary>The value <c>0</c> with the <see cref="ApproximateSuffix"/>.</summary>
-        public readonly string ConvertedSmallPositive;
-
-        /// <summary>The value <c>-0</c> with the <see cref="ApproximateSuffix"/>.</summary>
-        public readonly string ConvertedSmallNegative;
-
-        /// <summary>The caches for each character count.</summary>
-        /// <remarks><c>this[x]</c> is a cache that outputs strings with <c>x</c> characters.</remarks>
-        private List<ConversionCache<double, string>> CachesDouble = new List<ConversionCache<double, string>>();
-
-        /// <summary>The caches for each character count.</summary>
-        /// <remarks><c>this[x]</c> is a cache that outputs strings with <c>x</c> characters.</remarks>
-        private List<ConversionCache<int, string>> CachesInt = new List<ConversionCache<int, string>>();
-
-        /************************************************************************************************************************/
-
-        /// <summary>The character(s) used to separate decimal values in the current OS language.</summary>
-        public static string _DecimalSeparator;
-
         /// <summary>Values smaller than this become <c>0~</c> or <c>-0~</c>.</summary>
         public const float SmallExponentialThreshold = 0.0001f;
 
         /// <summary>Values larger than this can't be approximated.</summary>
         public const float LargeExponentialThreshold = 9999999f;
 
-#if UNITY_EDITOR
-        /// <summary>The pixel width of the <see cref="Suffix"/> when drawn by <see cref="UnityEditor.EditorStyles.numberField"/>.</summary>
-#endif
-        public float _SuffixWidth;
+        /************************************************************************************************************************/
+
+        /// <summary>The character(s) used to separate decimal values in the current OS language.</summary>
+        public static string _DecimalSeparator;
 
 #if UNITY_EDITOR
         /// <summary>Strings mapped to the width they would require for a <see cref="UnityEditor.EditorStyles.numberField"/>.</summary>
@@ -77,14 +51,43 @@ namespace AIO
 #endif
         public static float _ApproximateSymbolWidth;
 
+        /// <summary>The <see cref="Suffix"/> with a <c>~</c> before it to indicate an approximation.</summary>
+        public readonly string ApproximateSuffix;
+
+        /// <summary>The value <c>-0</c> with the <see cref="ApproximateSuffix"/>.</summary>
+        public readonly string ConvertedSmallNegative;
+
+        /// <summary>The value <c>0</c> with the <see cref="ApproximateSuffix"/>.</summary>
+        public readonly string ConvertedSmallPositive;
+
+        /// <summary>The value <c>0</c> with the <see cref="Suffix"/>.</summary>
+        public readonly string ConvertedZero;
+        /************************************************************************************************************************/
+
+        /// <summary>The suffix added to the end of each value.</summary>
+        public readonly string Suffix;
+
+#if UNITY_EDITOR
+        /// <summary>The pixel width of the <see cref="Suffix"/> when drawn by <see cref="UnityEditor.EditorStyles.numberField"/>.</summary>
+#endif
+        public float _SuffixWidth;
+
+        /// <summary>The caches for each character count.</summary>
+        /// <remarks><c>this[x]</c> is a cache that outputs strings with <c>x</c> characters.</remarks>
+        private List<ConversionCache<double, string>> CachesDouble = new List<ConversionCache<double, string>>();
+
+        /// <summary>The caches for each character count.</summary>
+        /// <remarks><c>this[x]</c> is a cache that outputs strings with <c>x</c> characters.</remarks>
+        private List<ConversionCache<int, string>> CachesInt = new List<ConversionCache<int, string>>();
+
 
         /************************************************************************************************************************/
         /// <summary>Creates a new <see cref="CompactUnitConversionCache"/>.</summary>
         public CompactUnitConversionCache(string suffix)
         {
-            Suffix = suffix;
-            ApproximateSuffix = "~" + suffix;
-            ConvertedZero = "0" + Suffix;
+            Suffix                 = suffix;
+            ApproximateSuffix      = "~" + suffix;
+            ConvertedZero          = "0" + Suffix;
             ConvertedSmallPositive = "0" + ApproximateSuffix;
             ConvertedSmallNegative = "-0" + ApproximateSuffix;
         }

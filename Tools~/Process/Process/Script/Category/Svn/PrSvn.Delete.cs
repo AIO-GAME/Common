@@ -1,15 +1,21 @@
 /*|============|*|
-|*|Author:     |*| xinan                
-|*|Date:       |*| 2023-05-21               
-|*|E-Mail:     |*| 1398581458@qq.com     
+|*|Author:     |*| xinan
+|*|Date:       |*| 2023-05-21
+|*|E-Mail:     |*| 1398581458@qq.com
 |*|============|*/
 
+#region
+
 using System;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrSvn
     {
+        #region Nested type: Delete
+
         /// <summary>
         /// 删除 命令
         /// </summary>
@@ -78,8 +84,10 @@ namespace AIO
             /// <returns>执行器</returns>
             public static IExecutor ALLWithChnage(in string work)
             {
-                return Create(work, $"delete -force over-there");
+                return Create(work, "delete -force over-there");
             }
         }
+
+        #endregion
     }
 }

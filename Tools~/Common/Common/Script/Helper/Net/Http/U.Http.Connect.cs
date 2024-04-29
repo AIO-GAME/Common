@@ -1,12 +1,17 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Text;
 using System.Threading.Tasks;
-using AIO;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: HTTP
+
         public partial class HTTP
         {
             /// <summary>
@@ -18,8 +23,8 @@ namespace AIO
             /// <param name="cookie">cookie</param>
             /// <exception cref="AExpNetGetResponseStream">异常</exception>
             /// <returns>内容</returns>
-            public static string Connect(string remoteUrl,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public static string Connect(string   remoteUrl,
+                                         Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
             {
                 return AutoCommonRequest(remoteUrl, CONNECT, Array.Empty<byte>(), encoding, timeout, cookie);
             }
@@ -34,8 +39,8 @@ namespace AIO
             /// <param name="cookie">cookie</param>
             /// <exception cref="AExpNetGetResponseStream">异常</exception>
             /// <returns>内容</returns>
-            public static string Connect(string remoteUrl, byte[] data,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public static string Connect(string   remoteUrl,       byte[] data,
+                                         Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
             {
                 return AutoCommonRequest(remoteUrl, CONNECT, data, encoding, timeout, cookie);
             }
@@ -50,8 +55,8 @@ namespace AIO
             /// <param name="cookie">cookie</param>
             /// <exception cref="AExpNetGetResponseStream">异常</exception>
             /// <returns>内容</returns>
-            public static string Connect(string remoteUrl, string data,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public static string Connect(string   remoteUrl,       string data,
+                                         Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
             {
                 return AutoCommonRequest(remoteUrl, CONNECT, data, encoding, timeout, cookie);
             }
@@ -65,8 +70,8 @@ namespace AIO
             /// <param name="cookie">cookie</param>
             /// <exception cref="AExpNetGetResponseStream">异常</exception>
             /// <returns>内容</returns>
-            public static Task<string> ConnectAsync(string remoteUrl,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public static Task<string> ConnectAsync(string   remoteUrl,
+                                                    Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
             {
                 return AutoCommonRequestAsync(remoteUrl, CONNECT, Array.Empty<byte>(), encoding, timeout, cookie);
             }
@@ -81,8 +86,8 @@ namespace AIO
             /// <param name="cookie">cookie</param>
             /// <exception cref="AExpNetGetResponseStream">异常</exception>
             /// <returns>内容</returns>
-            public static Task<string> ConnectAsync(string remoteUrl, byte[] data,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public static Task<string> ConnectAsync(string   remoteUrl,       byte[] data,
+                                                    Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
             {
                 return AutoCommonRequestAsync(remoteUrl, CONNECT, data, encoding, timeout, cookie);
             }
@@ -97,11 +102,13 @@ namespace AIO
             /// <param name="cookie">cookie</param>
             /// <exception cref="AExpNetGetResponseStream">异常</exception>
             /// <returns>内容</returns>
-            public static Task<string> ConnectAsync(string remoteUrl, string data,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public static Task<string> ConnectAsync(string   remoteUrl,       string data,
+                                                    Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
             {
                 return AutoCommonRequestAsync(remoteUrl, CONNECT, data, encoding, timeout, cookie);
             }
         }
+
+        #endregion
     }
 }

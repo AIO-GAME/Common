@@ -4,7 +4,11 @@
 |*|E-Mail:     |*| xinansky99@gmail.com
 |*|============|*/
 
+#region
+
 using System;
+
+#endregion
 
 namespace AIO.UEditor
 {

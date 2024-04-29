@@ -151,12 +151,12 @@
         /// 
         /// </summary>
         public const string CMD_Open = "open";
-        
+
         /// <summary>
         /// 
         /// </summary>
         public const string CMD_Kill = "kill";
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -165,18 +165,16 @@
         /// <summary>
         /// 
         /// </summary>
-        public const string CMD_Security= "security";
-        
+        public const string CMD_Security = "security";
+
         /// <summary>
         /// 
         /// </summary>
         public const string CMD_Ps = "ps";
-          
+
         /// <summary>
         /// 
         /// </summary>
         public const string CMD_Xcodebuild = "/usr/bin/xcodebuild";
-
-
     }
 }

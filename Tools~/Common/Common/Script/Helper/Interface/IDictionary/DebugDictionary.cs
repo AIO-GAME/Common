@@ -1,12 +1,18 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+
+#endregion
 
 namespace AIO
 {
     public partial class DebugDictionary<TKey, TValue> : IDictionary
     {
+        #region IDictionary Members
+
         /// <inheritdoc cref="IDictionary.this[object]" />
         public object this[object key]
         {
@@ -24,7 +30,10 @@ namespace AIO
         public bool IsSynchronized => ((ICollection)dictionary).IsSynchronized;
 
         /// <inheritdoc cref="IDictionary.Contains(object)" />
-        public bool Contains(object key) => ContainsKey((TKey)key);
+        public bool Contains(object key)
+        {
+            return ContainsKey((TKey)key);
+        }
 
         /// <inheritdoc cref="ICollection.SyncRoot" />
         public object SyncRoot => ((ICollection)dictionary).SyncRoot;
@@ -36,16 +45,30 @@ namespace AIO
         ICollection IDictionary.Keys => ((IDictionary)dictionary).Keys;
 
         /// <inheritdoc cref="IDictionary.GetEnumerator()" />
-        IDictionaryEnumerator IDictionary.GetEnumerator() => ((IDictionary)dictionary).GetEnumerator();
+        IDictionaryEnumerator IDictionary.GetEnumerator()
+        {
+            return ((IDictionary)dictionary).GetEnumerator();
+        }
 
         /// <inheritdoc cref="IDictionary.Remove(object)" />
-        public void Remove(object key) => Remove((TKey)key);
+        public void Remove(object key)
+        {
+            Remove((TKey)key);
+        }
 
         /// <inheritdoc cref="IDictionary.Add(object, object)" />
-        public void Add(object key, object value) => Add((TKey)key, (TValue)value);
+        public void Add(object key, object value)
+        {
+            Add((TKey)key, (TValue)value);
+        }
 
         /// <inheritdoc cref="ICollection.CopyTo(Array, int)" />
-        public void CopyTo(Array array, int index) => ((ICollection)dictionary).CopyTo(array, index);
+        public void CopyTo(Array array, int index)
+        {
+            ((ICollection)dictionary).CopyTo(array, index);
+        }
+
+        #endregion
     }
 
     /// <summary>
@@ -58,6 +81,18 @@ namespace AIO
         // 字典对象，用于存储键值对。
         private readonly Dictionary<TKey, TValue> dictionary = new Dictionary<TKey, TValue>();
 
+        /// <summary>
+        /// 标题，用于在调试信息中区分不同的字典对象。
+        /// </summary>
+        public string label { get; set; } = "Dictionary";
+
+        /// <summary>
+        /// 是否输出调试信息的开关。
+        /// </summary>
+        public bool debug { get; set; } = false;
+
+        #region IDictionary<TKey,TValue> Members
+
         /// <inheritdoc />
         public TValue this[TKey key]
         {
@@ -69,16 +104,6 @@ namespace AIO
             }
         }
 
-        /// <summary>
-        /// 标题，用于在调试信息中区分不同的字典对象。
-        /// </summary>
-        public string label { get; set; } = "Dictionary";
-
-        /// <summary>
-        /// 是否输出调试信息的开关。
-        /// </summary>
-        public bool debug { get; set; } = false;
-
         /// <inheritdoc cref="IDictionary"/> />
         public int Count => dictionary.Count;
 
@@ -89,7 +114,10 @@ namespace AIO
         public ICollection<TValue> Values => dictionary.Values;
 
         /// <inheritdoc />
-        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => dictionary.GetEnumerator();
+        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
+        {
+            return dictionary.GetEnumerator();
+        }
 
         /// <summary>
         /// 从字典中移除所有的键值对。
@@ -112,13 +140,22 @@ namespace AIO
         }
 
         /// <inheritdoc />
-        public bool Contains(KeyValuePair<TKey, TValue> item) => dictionary.Contains(item);
+        public bool Contains(KeyValuePair<TKey, TValue> item)
+        {
+            return dictionary.Contains(item);
+        }
 
         /// <inheritdoc />
-        public bool ContainsKey(TKey key) => dictionary.ContainsKey(key);
+        public bool ContainsKey(TKey key)
+        {
+            return dictionary.ContainsKey(key);
+        }
 
         /// <inheritdoc />
-        public bool TryGetValue(TKey key, out TValue value) => dictionary.TryGetValue(key, out value);
+        public bool TryGetValue(TKey key, out TValue value)
+        {
+            return dictionary.TryGetValue(key, out value);
+        }
 
         /// <inheritdoc />
         public bool Remove(TKey key)
@@ -132,20 +169,31 @@ namespace AIO
             ((ICollection<KeyValuePair<TKey, TValue>>)dictionary).IsReadOnly;
 
         /// <inheritdoc />
-        void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item) =>
+        void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item)
+        {
             ((ICollection<KeyValuePair<TKey, TValue>>)dictionary).Add(item);
+        }
 
 
         /// <inheritdoc />
-        public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex) =>
+        public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
+        {
             ((ICollection<KeyValuePair<TKey, TValue>>)dictionary).CopyTo(array, arrayIndex);
+        }
 
         /// <inheritdoc />
-        bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item) =>
-            ((ICollection<KeyValuePair<TKey, TValue>>)dictionary).Remove(item);
+        bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item)
+        {
+            return ((ICollection<KeyValuePair<TKey, TValue>>)dictionary).Remove(item);
+        }
 
         /// <inheritdoc />
-        IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)dictionary).GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable)dictionary).GetEnumerator();
+        }
+
+        #endregion
 
         /// <summary>
         /// 输出调试信息的私有方法，根据 debug 和 label 属性判断是否输出。

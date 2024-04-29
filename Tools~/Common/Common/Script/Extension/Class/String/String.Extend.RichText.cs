@@ -1,18 +1,9 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
-
-
-using System.Runtime.CompilerServices;
-
 namespace AIO
 {
     public static partial class ExtendString
     {
         /// <summary>
-        /// 富文本 字号
+        ///     富文本 字号
         /// </summary>
         /// <param name="content"></param>
         /// <param name="s">字号大小</param>
@@ -22,7 +13,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 富文本 颜色
+        ///     富文本 颜色
         /// </summary>
         /// <param name="content"></param>
         /// <param name="c">颜色值</param>
@@ -32,7 +23,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 富文本 斜体
+        ///     富文本 斜体
         /// </summary>
         public static string RichI(this string content)
         {
@@ -40,7 +31,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 富文本 加粗
+        ///     富文本 加粗
         /// </summary>
         public static string RichB(this string content)
         {
@@ -48,7 +39,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 富文本 加粗 斜体
+        ///     富文本 加粗 斜体
         /// </summary>
         public static string RichBI(this string content)
         {
@@ -56,7 +47,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 富文本 字号 加粗
+        ///     富文本 字号 加粗
         /// </summary>
         /// <param name="content"></param>
         /// <param name="s">字号大小</param>
@@ -66,7 +57,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 富文本 字号 斜体
+        ///     富文本 字号 斜体
         /// </summary>
         /// <param name="content"></param>
         /// <param name="s">字号大小</param>
@@ -76,7 +67,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 富文本 字号 颜色
+        ///     富文本 字号 颜色
         /// </summary>
         /// <param name="content"></param>
         /// <param name="s">字号大小</param>
@@ -87,7 +78,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 富文本 颜色 加粗
+        ///     富文本 颜色 加粗
         /// </summary>
         /// <param name="content"></param>
         /// <param name="c">颜色值</param>
@@ -97,7 +88,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 富文本 颜色 斜体
+        ///     富文本 颜色 斜体
         /// </summary>
         /// <param name="content"></param>
         /// <param name="c">颜色值</param>
@@ -107,7 +98,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 富文本 字号 加粗 斜体
+        ///     富文本 字号 加粗 斜体
         /// </summary>
         /// <param name="content"></param>
         /// <param name="s">字号大小</param>
@@ -117,7 +108,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 富文本 颜色 字号 加粗
+        ///     富文本 颜色 字号 加粗
         /// </summary>
         /// <param name="content"></param>
         /// <param name="s">字号大小</param>
@@ -128,7 +119,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 富文本 颜色 字号 斜体
+        ///     富文本 颜色 字号 斜体
         /// </summary>
         /// <param name="content"></param>
         /// <param name="s">字号大小</param>
@@ -139,7 +130,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 富文本 颜色 加粗 斜体
+        ///     富文本 颜色 加粗 斜体
         /// </summary>
         /// <param name="content"></param>
         /// <param name="c">颜色值</param>
@@ -149,7 +140,7 @@ namespace AIO
         }
 
         /// <summary>
-        /// 富文本 颜色 字号 加粗 斜体
+        ///     富文本 颜色 字号 加粗 斜体
         /// </summary>
         /// <param name="content"></param>
         /// <param name="s">字号大小</param>

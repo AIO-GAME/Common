@@ -2,6 +2,8 @@
 {
     public partial class PrWin
     {
+        #region Nested type: XCopy
+
         /// <summary>
         /// 复制文件夹
         /// </summary>
@@ -16,7 +18,7 @@
             public static IExecutor Execute(string target, string source, string args)
             {
                 return Create(CMD_Xcopy, "\"{0}\" {2} \"{1}\"", source.Replace('/', '\\'), target.Replace('/', '\\'),
-                    args);
+                              args);
             }
 
             /// <summary>
@@ -28,8 +30,8 @@
             public static IExecutor Directory(string target, string source, bool isAll = true)
             {
                 return Create(CMD_Xcopy, "\"{0}\" {2} {3} \"{1}\"",
-                    source.Replace('/', '\\'), target.Replace('/', '\\'),
-                    isAll ? "/s /e" : "/s", "/y /i /v /f /c /g /h /r");
+                              source.Replace('/', '\\'), target.Replace('/', '\\'),
+                              isAll ? "/s /e" : "/s", "/y /i /v /f /c /g /h /r");
             }
 
             /// <summary>
@@ -41,8 +43,8 @@
             public static IExecutor NetDirectory(string target, string source, bool isAll = true)
             {
                 return Create(CMD_Xcopy, "\"{0}\" {2} {3} \"{1}\"",
-                    source.Replace('/', '\\'), target.Replace('/', '\\'),
-                    isAll ? "/e" : "s", "/y /i /v /f /c /g /h /r /z /COMPRESS");
+                              source.Replace('/', '\\'), target.Replace('/', '\\'),
+                              isAll ? "/e" : "s", "/y /i /v /f /c /g /h /r /z /COMPRESS");
             }
 
             /// <summary>
@@ -54,8 +56,8 @@
             public static IExecutor BigFile(string target, string source, bool isAll = true)
             {
                 return Create(CMD_Xcopy, "\"{0}\" {2} {3} \"{1}\"",
-                    source.Replace('/', '\\'), target.Replace('/', '\\'),
-                    isAll ? "/e" : "s", "/y /-i /v /f /c /g /h /r /j");
+                              source.Replace('/', '\\'), target.Replace('/', '\\'),
+                              isAll ? "/e" : "s", "/y /-i /v /f /c /g /h /r /j");
             }
 
             /// <summary>
@@ -67,8 +69,8 @@
             public static IExecutor DirectoryTree(string target, string source, bool isAll = true)
             {
                 return Create(CMD_Xcopy, "\"{0}\" {2} {3} \"{1}\"",
-                    source.Replace('/', '\\'),
-                    target.Replace('/', '\\'), isAll ? "/t /e" : "/t", "/y /-i /v /f /c /g /h /r");
+                              source.Replace('/', '\\'),
+                              target.Replace('/', '\\'), isAll ? "/t /e" : "/t", "/y /-i /v /f /c /g /h /r");
             }
 
             /// <summary>
@@ -80,9 +82,11 @@
             public static IExecutor NetDirectoryTree(string target, string source, bool isAll = true)
             {
                 return Create(CMD_Xcopy, "\"{0}\" {2} {3} \"{1}\"",
-                    source.Replace('/', '\\'),
-                    target.Replace('/', '\\'), isAll ? "/t /e" : "/t", "/y /-i /v /f /c /g /h /r /z");
+                              source.Replace('/', '\\'),
+                              target.Replace('/', '\\'), isAll ? "/t /e" : "/t", "/y /-i /v /f /c /g /h /r /z");
             }
         }
+
+        #endregion
     }
 }

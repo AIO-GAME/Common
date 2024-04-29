@@ -2,6 +2,8 @@
 {
     public sealed partial class PrMac
     {
+        #region Nested type: DirCmp
+
         /// <summary>
         /// 文件夹比较相关命令
         /// </summary>
@@ -40,5 +42,7 @@
                 return Create(CMD_DirCmp, $"-S \"{path1.Replace('\\', '/')}\" \"{path2.Replace('\\', '/')}\"");
             }
         }
+
+        #endregion
     }
 }

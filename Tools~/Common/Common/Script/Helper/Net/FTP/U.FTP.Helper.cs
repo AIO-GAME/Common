@@ -1,32 +1,31 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-17
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: FTP
+
         public partial class FTP
         {
+            private static List<FtpWebRequest> Pool = new List<FtpWebRequest>();
+
             private static string FixShortcuts(string remote)
             {
                 // 修复远程地址中的短划线和协议前缀
-                return remote
-                    .Replace('\\', '/') // 将反斜杠替换为正斜杠
-                    .Replace("///", "/") // 将连续的两个斜杠替换为一个斜杠
-                    .Replace("//", "/") // 将连续的两个斜杠替换为一个斜杠
-                    .Replace("ftp:/", "ftp://") // 将 "ftp:/ "替换为 "ftp://"
-                    .Trim('/', '\\', ' '); // 去除字符串开头和结尾的斜杠和空格
+                return remote.Replace('\\', '/')         // 将反斜杠替换为正斜杠
+                             .Replace("///", "/")        // 将连续的两个斜杠替换为一个斜杠
+                             .Replace("//", "/")         // 将连续的两个斜杠替换为一个斜杠
+                             .Replace("ftp:/", "ftp://") // 将 "ftp:/ "替换为 "ftp://"
+                             .Trim('/', '\\', ' ');      // 去除字符串开头和结尾的斜杠和空格
             }
-
-            private static List<FtpWebRequest> Pool = new List<FtpWebRequest>();
 
             /// <summary>
             /// 创建一个FTP请求
@@ -40,8 +39,8 @@ namespace AIO
             /// 用于取消请求的令牌，如果请求被取消，则会抛出<see cref="OperationCanceledException"/>
             /// </param>
             /// <returns>创建的FTP请求</returns>
-            private static FtpWebRequest CreateRequestFile(string remote, string user, string pass, string method,
-                int timeout = Net.TIMEOUT, CancellationToken cancellationToken = default)
+            private static FtpWebRequest CreateRequestFile(string remote,                string            user, string pass, string method,
+                                                           int    timeout = Net.TIMEOUT, CancellationToken cancellationToken = default)
             {
                 // 如果远程地址没有以"ftp://"开头，则在前面添加上
                 if (!remote.StartsWith("ftp://")) remote = string.Concat("ftp://", remote);
@@ -93,9 +92,9 @@ namespace AIO
             /// 用于取消请求的令牌，如果请求被取消，则会抛出<see cref="OperationCanceledException"/>
             /// </param>
             /// <returns>创建的FTP请求</returns>
-            private static FtpWebRequest CreateRequestDir(string remote, string user, string pass, string method,
-                int timeout = Net.TIMEOUT
-                , CancellationToken cancellationToken = default
+            private static FtpWebRequest CreateRequestDir(string            remote, string user, string pass, string method,
+                                                          int               timeout           = Net.TIMEOUT
+                                                        , CancellationToken cancellationToken = default
             )
             {
                 // 如果远程地址没有以"ftp://"开头，则在前面添加上
@@ -136,5 +135,7 @@ namespace AIO
                 return request;
             }
         }
+
+        #endregion
     }
 }

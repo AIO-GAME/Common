@@ -1,12 +1,9 @@
-﻿/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+﻿#region
 
 using System;
 using System.Collections.Generic;
-using System.Text;
+
+#endregion
 
 namespace AIO
 {
@@ -22,20 +19,76 @@ namespace AIO
     public sealed partial class BufferByte : Buffer<byte>, IWriteData, IReadData
     {
         /// <inheritdoc/>
-        public BufferByte()
-        {
-        }
+        public BufferByte() { }
 
         /// <inheritdoc/>
-        public BufferByte(byte[] bytes, int index = 0, int count = 0) : base(bytes, index, count)
-        {
-        }
+        public BufferByte(byte[] bytes, int index = 0, int count = 0) : base(bytes, index, count) { }
 
 
         /// <inheritdoc/>
-        public BufferByte(int capacity) : base(capacity)
+        public BufferByte(int capacity) : base(capacity) { }
+
+        #region IReadData Members
+
+        /// <summary>
+        /// 读取数据
+        /// </summary>
+        /// <typeparam name="T">泛型</typeparam>
+        /// <returns>值</returns>
+        public T ReadData<T>()
+        where T : IBinDeserialize, new()
         {
+            var data = new T();
+            data.Deserialize(this);
+            return data;
         }
+
+        /// <summary>
+        /// 读取数据
+        /// </summary>
+        /// <typeparam name="T">泛型</typeparam>
+        /// <returns>值</returns>
+        public void ReadDataArray<T>(ICollection<T> collection)
+        where T : IBinDeserialize, new()
+        {
+            var len = ReadLen();
+            for (var i = 0; i < len; i++)
+            {
+                var data = new T();
+                data.Deserialize(this);
+                collection.Add(data);
+            }
+        }
+
+        #endregion
+
+        #region IWriteData Members
+
+        /// <summary>
+        /// 写入二进制数据
+        /// </summary>
+        /// <param name="buffer">数据</param>
+        public void WriteData<T>(T buffer)
+        where T : IBinSerialize, new()
+        {
+            if (buffer == null) throw new ArgumentNullException(nameof(buffer));
+            buffer.Serialize(this);
+        }
+
+        /// <summary>
+        /// 读取数据
+        /// </summary>
+        /// <typeparam name="T">泛型</typeparam>
+        /// <returns>值</returns>
+        public void WriteDataArray<T>(ICollection<T> collection)
+        where T : IBinSerialize, new()
+        {
+            if (collection == null) throw new ArgumentNullException(nameof(collection));
+            WriteLen(collection.Count);
+            foreach (var item in collection) item.Serialize(this);
+        }
+
+        #endregion
 
         private void AutomaticExpansion(int place)
         {
@@ -58,11 +111,9 @@ namespace AIO
         {
             if (count <= 0) return new BufferByte();
             if (start + count > WriteIndex)
-            {
                 throw new Exception(
                     string.Format("数组越界: start + count > source length -> {0} + {1} = {2}",
-                        start, count, WriteIndex));
-            }
+                                  start, count, WriteIndex));
 
             var buffer = new byte[count];
             Array.ConstrainedCopy(Arrays, start, buffer, 0, count);
@@ -86,57 +137,7 @@ namespace AIO
         public override string ToString()
         {
             return string.Concat("Byte Buffer:{ offset = ", ReadIndex, ", top=", WriteIndex, ", data = ",
-                AHelper.Hex.ToHex(ToArray()), '}');
-        }
-
-        /// <summary>
-        /// 读取数据
-        /// </summary>
-        /// <typeparam name="T">泛型</typeparam>
-        /// <returns>值</returns>
-        public T ReadData<T>() where T : IBinDeserialize, new()
-        {
-            var data = new T();
-            data.Deserialize(this);
-            return data;
-        }
-
-        /// <summary>
-        /// 读取数据
-        /// </summary>
-        /// <typeparam name="T">泛型</typeparam>
-        /// <returns>值</returns>
-        public void ReadDataArray<T>(ICollection<T> collection) where T : IBinDeserialize, new()
-        {
-            var len = ReadLen();
-            for (var i = 0; i < len; i++)
-            {
-                var data = new T();
-                data.Deserialize(this);
-                collection.Add(data);
-            }
-        }
-
-        /// <summary>
-        /// 写入二进制数据
-        /// </summary>
-        /// <param name="buffer">数据</param>
-        public void WriteData<T>(T buffer) where T : IBinSerialize, new()
-        {
-            if (buffer == null) throw new ArgumentNullException(nameof(buffer));
-            buffer.Serialize(this);
-        }
-
-        /// <summary>
-        /// 读取数据
-        /// </summary>
-        /// <typeparam name="T">泛型</typeparam>
-        /// <returns>值</returns>
-        public void WriteDataArray<T>(ICollection<T> collection) where T : IBinSerialize, new()
-        {
-            if (collection == null) throw new ArgumentNullException(nameof(collection));
-            WriteLen(collection.Count);
-            foreach (var item in collection) item.Serialize(this);
+                                 AHelper.Hex.ToHex(ToArray()), '}');
         }
 
         /// <inheritdoc/>

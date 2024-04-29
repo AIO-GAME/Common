@@ -1,9 +1,11 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #pragma warning disable CS0109 // 
 
-using System;
+#region
+
 using System.Collections.Generic;
-using System.Reflection;
+
+#endregion
 
 namespace AIO
 {
@@ -15,46 +17,46 @@ namespace AIO
             var chunks = new List<FunctionChunk>();
 
 
-            foreach (var item in new string[] { "GUIContent", "string", "int", "bool" })
+            foreach (var item in new[] { "GUIContent", "string", "int", "bool" })
             {
                 var label = new FunctionParam(item, "label", "label") { Comments = "第一个标签" };
                 if (item != "GUIContent" && item != "string") label.Output = "label.ToString()";
-                var paramsList = new FunctionParam[][]
+                var paramsList = new[]
                 {
-                    new FunctionParam[] { label, Options },
-                    new FunctionParam[] { label, Style, Options, },
+                    new[] { label, Options },
+                    new[] { label, Style, Options }
                 };
                 foreach (var param in paramsList)
                 {
                     var chunk = new FunctionChunk
                     {
-                        State = TChunkState.NewStatic,
-                        Comments = $"绘制 标签文本框",
-                        Name = "Label",
-                        Params = param,
+                        State    = TChunkState.NewStatic,
+                        Comments = "绘制 标签文本框",
+                        Name     = "Label",
+                        Params   = param
                     };
                     chunk.Content = $"EditorGUILayout.LabelField({chunk.GetParamValues()});";
                     chunks.Add(chunk);
                 }
             }
 
-            foreach (var item in new string[] { "GUIContent", "string", })
+            foreach (var item in new[] { "GUIContent", "string" })
             {
-                var label = new FunctionParam(item, "label", "label") { Comments = "第一个标签" };
+                var label = new FunctionParam(item, "label", "label") { Comments    = "第一个标签" };
                 var label2 = new FunctionParam(item, "label2", "label2") { Comments = "向右显示的标签" };
-                var paramsList = new FunctionParam[][]
+                var paramsList = new[]
                 {
-                    new FunctionParam[] { label, label2, Options },
-                    new FunctionParam[] { label, label2, Style, Options, },
+                    new[] { label, label2, Options },
+                    new[] { label, label2, Style, Options }
                 };
                 foreach (var param in paramsList)
                 {
                     var chunk = new FunctionChunk
                     {
-                        State = TChunkState.NewStatic,
-                        Comments = $"绘制 标签文本框",
-                        Name = "Label",
-                        Params = param,
+                        State    = TChunkState.NewStatic,
+                        Comments = "绘制 标签文本框",
+                        Name     = "Label",
+                        Params   = param
                     };
                     chunk.Content = $"EditorGUILayout.LabelField({chunk.GetParamValues()});";
                     chunks.Add(chunk);
@@ -69,31 +71,31 @@ namespace AIO
         {
             var chunks = new List<FunctionChunk>();
             var followingStyle = new FunctionParam("GUIStyle", "followingStyle", "followingStyle")
-                { Comments = "后面的显示风格", };
+                { Comments = "后面的显示风格" };
             var labelStyle = new FunctionParam("GUIStyle", "labelStyle", "labelStyle")
-                { Comments = "显示风格", };
+                { Comments = "显示风格" };
             var followingStyle1 = new FunctionParam("[UnityEngine.Internal.DefaultValue(\"\\\"Button\\\"\")] GUIStyle",
-                    "followingStyle", "followingStyle")
-                { Comments = "后面的显示风格", };
+                                                    "followingStyle", "followingStyle")
+                { Comments = "后面的显示风格" };
 
-            foreach (var item in new string[] { "GUIContent", "string", "int", "bool" })
+            foreach (var item in new[] { "GUIContent", "string", "int", "bool" })
             {
                 var label = new FunctionParam(item, "label", "label") { Comments = "第一个标签" };
                 if (item != "GUIContent" && item != "string") label.Output = "label.ToString()";
-                var paramsList = new FunctionParam[][]
+                var paramsList = new[]
                 {
-                    new FunctionParam[] { label },
-                    new FunctionParam[] { label, followingStyle1 },
-                    new FunctionParam[] { label, followingStyle, labelStyle, },
+                    new[] { label },
+                    new[] { label, followingStyle1 },
+                    new[] { label, followingStyle, labelStyle }
                 };
                 foreach (var param in paramsList)
                 {
                     var chunk = new FunctionChunk
                     {
-                        State = TChunkState.NewStatic,
-                        Comments = $"绘制 可选择标签",
-                        Name = "LabelPrefix",
-                        Params = param,
+                        State    = TChunkState.NewStatic,
+                        Comments = "绘制 可选择标签",
+                        Name     = "LabelPrefix",
+                        Params   = param
                     };
                     chunk.Content = $"EditorGUILayout.PrefixLabel({chunk.GetParamValues()});";
                     chunks.Add(chunk);
@@ -107,23 +109,23 @@ namespace AIO
         private static IEnumerable<FunctionChunk> GetLabelSelectable()
         {
             var chunks = new List<FunctionChunk>();
-            foreach (var item in new string[] { "string", "int" })
+            foreach (var item in new[] { "string", "int" })
             {
                 var label = new FunctionParam(item, "label", "label") { Comments = "第一个标签" };
                 if (item != "string") label.Output = "label.ToString()";
-                var paramsList = new FunctionParam[][]
+                var paramsList = new[]
                 {
-                    new FunctionParam[] { label, Options, },
-                    new FunctionParam[] { label, Style, Options, }
+                    new[] { label, Options },
+                    new[] { label, Style, Options }
                 };
                 foreach (var param in paramsList)
                 {
                     var chunk = new FunctionChunk
                     {
-                        State = TChunkState.NewStatic,
-                        Comments = $"绘制 可选择标签",
-                        Name = "LabelSelectable",
-                        Params = param,
+                        State    = TChunkState.NewStatic,
+                        Comments = "绘制 可选择标签",
+                        Name     = "LabelSelectable",
+                        Params   = param
                     };
                     chunk.Content = $"EditorGUILayout.SelectableLabel({chunk.GetParamValues()});";
                     chunks.Add(chunk);

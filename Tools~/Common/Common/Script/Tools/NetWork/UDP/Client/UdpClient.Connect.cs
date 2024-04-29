@@ -1,12 +1,10 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-08
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Net;
 using System.Net.Sockets;
+
+#endregion
 
 namespace AIO.Net
 {
@@ -20,13 +18,13 @@ namespace AIO.Net
 
             // Setup buffers
             ReceiveNetBuffer = new NetBuffer();
-            SendNetBuffer = new NetBuffer();
+            SendNetBuffer    = new NetBuffer();
 
             // Setup event args
-            ReceiveEventArg = new SocketAsyncEventArgs();
+            ReceiveEventArg           =  new SocketAsyncEventArgs();
             ReceiveEventArg.Completed += OnAsyncCompleted;
-            SendEventArg = new SocketAsyncEventArgs();
-            SendEventArg.Completed += OnAsyncCompleted;
+            SendEventArg              =  new SocketAsyncEventArgs();
+            SendEventArg.Completed    += OnAsyncCompleted;
 
             // Create a new client socket
             Socket = CreateSocket();
@@ -38,7 +36,7 @@ namespace AIO.Net
             Socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, Option.ReuseAddress);
             // Apply the option: exclusive address use
             Socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ExclusiveAddressUse,
-                Option.ExclusiveAddressUse);
+                                   Option.ExclusiveAddressUse);
             // Apply the option: dual mode (this option must be applied before receiving/sending)
             if (Socket.AddressFamily == AddressFamily.InterNetworkV6)
                 Socket.DualMode = Option.DualMode;
@@ -50,12 +48,14 @@ namespace AIO.Net
             {
                 // Bind the acceptor socket to the endpoint
                 if (Option.Multicast)
+                {
                     Socket.Bind(Endpoint);
+                }
                 else
                 {
                     var endpoint =
                         new IPEndPoint(
-                            (Endpoint.AddressFamily == AddressFamily.InterNetworkV6)
+                            Endpoint.AddressFamily == AddressFamily.InterNetworkV6
                                 ? IPAddress.IPv6Any
                                 : IPAddress.Any, 0);
                     Socket.Bind(endpoint);
@@ -68,7 +68,7 @@ namespace AIO.Net
 
                 // Reset event args
                 ReceiveEventArg.Completed -= OnAsyncCompleted;
-                SendEventArg.Completed -= OnAsyncCompleted;
+                SendEventArg.Completed    -= OnAsyncCompleted;
 
                 // Call the client disconnecting handler
                 OnDisconnecting();
@@ -98,11 +98,11 @@ namespace AIO.Net
             ReceiveNetBuffer.Reserve(Option.ReceiveBufferSize);
 
             // Reset statistic
-            BytesPending = 0;
-            BytesSending = 0;
-            BytesSent = 0;
-            BytesReceived = 0;
-            DatagramsSent = 0;
+            BytesPending      = 0;
+            BytesSending      = 0;
+            BytesSent         = 0;
+            BytesReceived     = 0;
+            DatagramsSent     = 0;
             DatagramsReceived = 0;
 
             // Update the connected flag
@@ -122,7 +122,7 @@ namespace AIO.Net
 
             // Reset event args
             ReceiveEventArg.Completed -= OnAsyncCompleted;
-            SendEventArg.Completed -= OnAsyncCompleted;
+            SendEventArg.Completed    -= OnAsyncCompleted;
 
             // Call the client disconnecting handler
             OnDisconnecting();
@@ -142,16 +142,14 @@ namespace AIO.Net
                 // Update the client socket disposed flag
                 IsSocketDisposed = true;
             }
-            catch (ObjectDisposedException)
-            {
-            }
+            catch (ObjectDisposedException) { }
 
             // Update the connected flag
             IsConnected = false;
 
             // Update sending/receiving flags
             Receiving = false;
-            Sending = false;
+            Sending   = false;
 
             // Clear send/receive buffers
             ClearBuffers();

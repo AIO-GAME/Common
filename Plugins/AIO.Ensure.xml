@@ -38,20 +38,13 @@
         </member>
         <member name="M:AIO.StringExtension.Inject(System.String,System.Object[])">
             <summary>
-            ��ָ�������ж�Ӧ������ַ�����ʾ��ʽ�滻Ϊָ���ַ����еĸ�ʽ������ַ�����ʽʹ��ռλ����{0}��{1}�ȡ�
+            格式化字符串
             </summary>
-            <param name="format">�����ַ�����ʽ��</param>
-            <param name="formattingArgs">����Ҫ��ʽ����ע�뵽�ַ����е�ֵ�Ķ������顣</param>
-            <returns>����ʽ���滻Ϊ��Ӧ������ַ�����ʾ��ʽ����ַ���������</returns>
         </member>
         <member name="M:AIO.StringExtension.Inject(System.String,System.String[])">
             <summary>
-            ��ָ�������ж�Ӧ������ַ�����ʾ��ʽ�滻Ϊָ���ַ����еĸ�ʽ������ַ�����ʽʹ��ռλ����{0}��{1}�ȡ�
-            �˷�������һ�����������أ���������һ���ַ�����������Ƕ������顣
+            格式化字符串
             </summary>
-            <param name="format">�����ַ�����ʽ��</param>
-            <param name="formattingArgs">����Ҫ��ʽ����ע�뵽�ַ����е�ֵ���ַ������顣</param>
-            <returns>����ʽ���滻Ϊ��Ӧ������ַ�����ʾ��ʽ����ַ���������</returns>
         </member>
         <member name="T:AIO.EnsureThat">
             <summary>
@@ -216,6 +209,12 @@
             [typeof(T).IsAssignableFrom(param) == false]
             </summary>
         </member>
+        <member name="M:AIO.EnsureThat.Any``1(System.Collections.Generic.ICollection{``0}@,System.Func{``0,System.Boolean}@)">
+            <summary>
+            验证数据 报错条件
+            [!value.Any(predicate)]
+            </summary>
+        </member>
         <member name="M:AIO.EnsureThat.HasItems``1(``0@)">
             <summary>
             验证数据 报错条件
@@ -252,12 +251,6 @@
             <summary>
             验证数据 报错条件
             [value.Count != expected]
-            </summary>
-        </member>
-        <member name="M:AIO.EnsureThat.Any``1(System.Collections.Generic.ICollection{``0}@,System.Func{``0,System.Boolean}@)">
-            <summary>
-            验证数据 报错条件
-            [!value.Any(predicate)]
             </summary>
         </member>
         <member name="M:AIO.EnsureThat.Is``1(``0@,``0@)">

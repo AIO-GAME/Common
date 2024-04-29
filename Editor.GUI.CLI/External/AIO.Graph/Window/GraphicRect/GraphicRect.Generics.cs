@@ -1,18 +1,21 @@
-﻿using UnityEditor;
+﻿#region
+
+using UnityEditor;
+
+#endregion
 
 namespace AIO.UEditor
 {
-    public abstract class GraphicRect<T> : GraphicRect where T : EditorWindow
+    public abstract class GraphicRect<T> : GraphicRect
+    where T : EditorWindow
     {
-        public T Window { get; }
-
-        protected GraphicRect()
-        {
-        }
+        protected GraphicRect() { }
 
         public GraphicRect(T window)
         {
             Window = window;
         }
+
+        public T Window { get; }
     }
 }

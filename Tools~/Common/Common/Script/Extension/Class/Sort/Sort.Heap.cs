@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -8,80 +12,84 @@ namespace AIO
         #region 堆排序
 
         /// <summary>
-        /// 堆排序
-        /// 数据量:1000以下适用
+        ///     堆排序
         /// </summary>
-        private static IList<T> SortHeap<T>(IList<T> array) where T : IComparable
+        /// <param name="array">数组</param>
+        /// <param name="start">右边界</param>
+        /// <param name="end">结束边界</param>
+        /// <param name="comparer">比较器</param>
+        /// <typeparam name="T">泛型</typeparam>
+        /// <returns>返回排序后的数组</returns>
+        public static IList<T> SortHeap<T>(IList<T> array, int start, int end, in IComparer<T> comparer)
         {
-            if (array.Count < 2) return array;
-            for (var i = (array.Count / 2) - 1; i >= 0; i--)
+            if (end - start < 2) return array;
+            for (var i = end / 2; i >= start; i--) HeapSort_MaxHeaping(array, i, end, comparer);
+            for (var i = end; i > start; i--)
             {
-                HeapSort_MaxHeaping(array, i, array.Count);
-            }
-
-            for (var i = array.Count - 1; i > 0; i--)
-            {
-                array.Swap(0, i);
-                HeapSort_MaxHeaping(array, 0, i);
+                (array[0], array[i]) = (array[i], array[0]);
+                HeapSort_MaxHeaping(array, 0, i - 1, comparer);
             }
 
             return array;
         }
 
         /// <summary>
-        /// 将指定的结点调整为堆。
+        ///     堆排序
         /// </summary>
-        private static void HeapSort_MaxHeaping<T>(in IList<T> array, in int index, in int size)
-            where T : IComparable
+        /// <param name="array">数组</param>
+        /// <param name="start">右边界</param>
+        /// <param name="end">结束边界</param>
+        /// <typeparam name="T">泛型</typeparam>
+        /// <returns>返回排序后的数组</returns>
+        private static IList<T> SortHeap<T>(IList<T> array, int start, int end)
+        where T : IComparable<T>
         {
-            var left = (2 * index) + 1;
-            var right = 2 * (index + 1);
-            var large = index;
-            if (left < size && array[left].CompareTo(array[large]) > 0) large = left;
-            if (right < size && array[right].CompareTo(array[large]) > 0) large = right;
-            if (index != large)
-            {
-                array.Swap(index, large);
-                HeapSort_MaxHeaping(array, large, size);
-            }
-        }
+            if (end - start < 2) return array;
+            for (var i = end / 2 - 1; i >= start; i--) HeapSort_MaxHeaping(array, i, end);
 
-        /// <summary>
-        /// 堆排序
-        /// 数据量:1000以下适用
-        /// </summary>
-        private static IList<T> SortHeap<T>(in IList<T> array, in Func<T, T, int> Comparer)
-        {
-            if (array.Count < 2) return array;
-            for (int i = (array.Count / 2) - 1; i >= 0; i--)
+            for (var i = end - 1; i > start; i--)
             {
-                HeapSort_MaxHeaping(array, i, array.Count, Comparer);
-            }
-
-            for (int i = array.Count - 1; i > 0; i--)
-            {
-                array.Swap(0, i);
-                HeapSort_MaxHeaping(array, 0, i, Comparer);
+                (array[0], array[i]) = (array[i], array[0]);
+                HeapSort_MaxHeaping(array, 0, i - 1);
             }
 
             return array;
         }
 
-        /// <summary>
-        /// 将指定的结点调整为堆。
-        /// </summary>
-        private static void HeapSort_MaxHeaping<T>(in IList<T> array, in int index, in int size,
-            in Func<T, T, int> Comparer)
+        private static void HeapSort_MaxHeaping<T>(IList<T> array, int index, in int size)
+        where T : IComparable<T>
         {
-            var left = (2 * index) + 1;
-            var right = 2 * (index + 1);
-            var large = index;
-            if (left < size && Comparer(array[left], array[large]) > 0) large = left;
-            if (right < size && Comparer(array[right], array[large]) > 0) large = right;
-            if (index != large)
+            int left, right, large;
+            while (true)
             {
-                array.Swap(index, large);
-                HeapSort_MaxHeaping(array, large, size, Comparer);
+                left  = (index << 1) + 1;
+                right = (index + 1) << 1;
+                large = index;
+
+                if (left < size && array[left].CompareTo(array[large]) > 0) large   = left;
+                if (right < size && array[right].CompareTo(array[large]) > 0) large = right;
+                if (index == large) return;
+
+                (array[index], array[large]) = (array[large], array[index]);
+                index                        = large;
+            }
+        }
+
+        private static void HeapSort_MaxHeaping<T>(IList<T> array, int index, int size, in IComparer<T> comparer)
+        {
+            int left, right, large;
+            while (true)
+            {
+                left  = (index << 1) + 1;
+                right = (index + 1) << 1;
+                large = index;
+
+                if (left < size && comparer.Compare(array[left], array[large]) > 0) large   = left;
+                if (right < size && comparer.Compare(array[right], array[large]) > 0) large = right;
+                if (index == large) return;
+
+                (array[index], array[large]) = (array[large], array[index]);
+                index                        = large;
             }
         }
 

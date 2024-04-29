@@ -2,10 +2,12 @@
 {
     public sealed partial class PrMac
     {
+        #region Nested type: OsaScript
+
         /// <summary>
         /// Bundle ID
         /// </summary>
-        public sealed partial class OsaScript
+        public sealed class OsaScript
         {
             /// <summary>
             /// 执行查询Bundle ID
@@ -23,5 +25,7 @@
                 return Create(CMD_OsaScript, "{0} \"{1}\"", args, package);
             }
         }
+
+        #endregion
     }
 }

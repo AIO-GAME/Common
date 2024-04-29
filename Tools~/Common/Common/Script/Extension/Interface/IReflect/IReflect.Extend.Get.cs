@@ -1,22 +1,26 @@
-﻿using System.Reflection;
+﻿#region
+
+using System.Reflection;
 using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
     /// <summary>
     /// 扩展
     /// </summary>
-    public static partial class ExtendIReflect
+    public static class ExtendIReflect
     {
         /// <summary>
         /// 申明
         /// </summary>
         internal const BindingFlags DeclaredFlags =
-                   BindingFlags.NonPublic |
-                   BindingFlags.Public |
-                   BindingFlags.Instance |
-                   BindingFlags.Static |
-                   BindingFlags.DeclaredOnly;
+            BindingFlags.NonPublic |
+            BindingFlags.Public |
+            BindingFlags.Instance |
+            BindingFlags.Static |
+            BindingFlags.DeclaredOnly;
 
         /// <summary>
         /// 获取申明的指定属性
@@ -27,12 +31,8 @@ namespace AIO
             var props = GetDeclaredProperties(type);
 
             for (var i = 0; i < props.Length; ++i)
-            {
                 if (props[i].Name == propertyName)
-                {
                     return props[i];
-                }
-            }
 
             return null;
         }
@@ -46,12 +46,8 @@ namespace AIO
             var props = GetDeclaredFields(type);
 
             for (var i = 0; i < props.Length; ++i)
-            {
                 if (props[i].Name == propertyName)
-                {
                     return props[i];
-                }
-            }
 
             return null;
         }
@@ -65,12 +61,8 @@ namespace AIO
             var methods = GetDeclaredMethods(type);
 
             for (var i = 0; i < methods.Length; ++i)
-            {
                 if (methods[i].Name == methodName)
-                {
                     return methods[i];
-                }
-            }
 
             return null;
         }
@@ -84,12 +76,8 @@ namespace AIO
             var members = GetDeclaredMembers(type);
 
             for (var i = 0; i < members.Length; ++i)
-            {
                 if (members[i].Name == memberName)
-                {
                     return members[i];
-                }
-            }
 
             return null;
         }

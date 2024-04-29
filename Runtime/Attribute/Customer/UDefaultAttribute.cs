@@ -1,4 +1,8 @@
-﻿using System;
+﻿#region
+
+using System;
+
+#endregion
 
 namespace AIO
 {
@@ -8,11 +12,6 @@ namespace AIO
     [AttributeUsage(AttributeTargets.Field)]
     internal class UDefaultAttribute : Attribute
     {
-        /// <summary>
-        /// 单位换算默认单位
-        /// </summary>
-        public double Unit { get; }
-
         /// <inheritdoc />
         public UDefaultAttribute(double unit)
         {
@@ -42,5 +41,10 @@ namespace AIO
         {
             Unit = unit;
         }
+
+        /// <summary>
+        /// 单位换算默认单位
+        /// </summary>
+        public double Unit { get; }
     }
 }

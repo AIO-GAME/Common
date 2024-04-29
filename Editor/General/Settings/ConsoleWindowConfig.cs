@@ -1,18 +1,18 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2024-01-03
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
     [Serializable]
     public class ConsoleWindowConfig : ScriptableObject
     {
+        private static ConsoleWindowConfig _instance;
+
         /// <summary>
         /// 白名单
         /// </summary>
@@ -23,8 +23,6 @@ namespace AIO.UEditor
         /// </summary>
         public string[] BlackList;
 
-        private static ConsoleWindowConfig _instance;
-
         /// <summary>
         /// 获取本地资源包地址
         /// </summary>
@@ -33,19 +31,17 @@ namespace AIO.UEditor
             if (_instance != null) return _instance;
             var objects = EHelper.IO.GetScriptableObjects<ConsoleWindowConfig>();
             if (objects != null && objects.Length > 0)
-            {
                 foreach (var asset in objects)
                 {
                     if (asset is null) continue;
                     _instance = asset;
                     return _instance;
                 }
-            }
 
             if (_instance is null)
             {
                 _instance = CreateInstance<ConsoleWindowConfig>();
-                _instance.Assemblies = new string[]
+                _instance.Assemblies = new[]
                 {
                     "AIO.Core.Runtime",
                     "AIO.Asset.Runtime",
@@ -58,8 +54,7 @@ namespace AIO.UEditor
                     "Assembly-CSharp",
                 };
                 _instance.BlackList = new string[]
-                {
-                };
+                    { };
                 AssetDatabase.CreateAsset(_instance, $"Assets/Editor/{nameof(ConsoleWindowConfig)}.asset");
                 AssetDatabase.SaveAssets();
             }

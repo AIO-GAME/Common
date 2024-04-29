@@ -4,15 +4,21 @@
 
 |||✩ - - - - - |*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+#endregion
+
 namespace AIO
 {
     public partial class PrMac
     {
+        #region Nested type: Git
+
         public partial class Git
         {
             /// <summary>
@@ -44,7 +50,10 @@ namespace AIO
                             str.AppendLine(string.Format("originArg={0}", t.Item2));
                             str.AppendLine("git push -u origin \"${originArg}\"");
                         }
-                        else str.AppendLine("git push");
+                        else
+                        {
+                            str.AppendLine("git push");
+                        }
                     }
 
                     str.AppendLine(LINE_BOTTOM);
@@ -88,7 +97,7 @@ namespace AIO
             /// <returns></returns>
             public static IExecutor Push((string, string) target, bool quit = true)
             {
-                return Push(new (string, string)[] { target }, quit);
+                return Push(new[] { target }, quit);
             }
 
             /// <summary>
@@ -99,8 +108,10 @@ namespace AIO
             /// <returns></returns>
             public static IExecutor Push(string target, bool quit = true)
             {
-                return Push(new string[] { target }, quit);
+                return Push(new[] { target }, quit);
             }
         }
+
+        #endregion
     }
 }

@@ -1,6 +1,10 @@
+#region
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -8,17 +12,12 @@ namespace AIO
     /// 数据队列
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class BinStack<T> :
-        IBinData,
-        ICollection,
-        IReadOnlyCollection<T>
-        where T : IBinData, new()
+    public class BinStack<T>
+        : IBinData,
+          ICollection,
+          IReadOnlyCollection<T>
+    where T : IBinData, new()
     {
-        /// <summary>
-        /// 集合
-        /// </summary>
-        protected Stack<T> Collection { get; }
-
         /// <summary>
         /// 初始化
         /// </summary>
@@ -26,6 +25,13 @@ namespace AIO
         {
             Collection = Pool.AStack<T>.New();
         }
+
+        /// <summary>
+        /// 集合
+        /// </summary>
+        protected Stack<T> Collection { get; }
+
+        #region IBinData Members
 
         /// <summary>
         /// 执行与释放或重置非托管资源关联的应用程序定义的任务。
@@ -61,12 +67,18 @@ namespace AIO
             foreach (var item in Collection) item.Reset();
         }
 
-        /// <summary>返回一个循环访问集合的枚举器。</summary>
-        /// <returns>用于循环访问集合的枚举数。</returns>
-        public IEnumerator<T> GetEnumerator()
+        /// <inheritdoc />
+        public virtual object Clone()
         {
-            return ((IEnumerable<T>)Collection).GetEnumerator();
+            var data = new BinStack<T>();
+            foreach (var item in Collection) data.Collection.Push((T)item.Clone());
+
+            return data;
         }
+
+        #endregion
+
+        #region ICollection Members
 
         /// <summary>返回循环访问集合的枚举数。</summary>
         /// <returns>
@@ -102,15 +114,9 @@ namespace AIO
         /// </exception>
         public void CopyTo(Array array, int index)
         {
-            if (index < 0 || index >= array.Length)
-            {
-                throw new ArgumentOutOfRangeException(nameof(index), "The value of arrayIndex is out of range.");
-            }
+            if (index < 0 || index >= array.Length) throw new ArgumentOutOfRangeException(nameof(index), "The value of arrayIndex is out of range.");
 
-            if (index + Collection.Count >= array.Length)
-            {
-                throw new ArgumentException("The length of array is less than the number of elements in the collection.");
-            }
+            if (index + Collection.Count >= array.Length) throw new ArgumentException("The length of array is less than the number of elements in the collection.");
 
             Array.Copy(Collection.ToArray(), 0, array, index, Collection.Count);
         }
@@ -139,20 +145,21 @@ namespace AIO
         /// </returns>
         public bool IsSynchronized => false;
 
+        #endregion
+
+        #region IReadOnlyCollection<T> Members
+
+        /// <summary>返回一个循环访问集合的枚举器。</summary>
+        /// <returns>用于循环访问集合的枚举数。</returns>
+        public IEnumerator<T> GetEnumerator()
+        {
+            return ((IEnumerable<T>)Collection).GetEnumerator();
+        }
+
         /// <summary>获取集合中的元素数。</summary>
         /// <returns>集合中的元素数。</returns>
         int IReadOnlyCollection<T>.Count => Collection.Count;
 
-        /// <inheritdoc />
-        public virtual object Clone()
-        {
-            var data = new BinStack<T>();
-            foreach (var item in Collection)
-            {
-                data.Collection.Push((T)item.Clone());
-            }
-
-            return data;
-        }
+        #endregion
     }
 }

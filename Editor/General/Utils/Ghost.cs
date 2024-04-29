@@ -1,26 +1,26 @@
-/*|============|*|
-|*|Author:     |*| xinan
-|*|Date:       |*| 2024-01-06
-|*|E-Mail:     |*| xinansky99@gmail.com
-|*|============|*/
+#region
 
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using UnityEditor;
 
+#endregion
+
 namespace AIO.UEditor
 {
     public static partial class EHelper
     {
+        #region Nested type: Ghost
+
         /// <summary>
         /// 安装管理 Ghost
         /// </summary>
         public static class Ghost
         {
             private const string ScopeName_OpenUpmCN = "package.openupm.cn";
-            private const string ScopeName_OpenUpm = "package.openupm.com";
-            private const string ScopeUrl_OpenUpmCN = "https://package.openupm.cn";
-            private const string ScopeUrl_OpenUpm = "https://package.openupm.com";
+            private const string ScopeName_OpenUpm   = "package.openupm.com";
+            private const string ScopeUrl_OpenUpmCN  = "https://package.openupm.cn";
+            private const string ScopeUrl_OpenUpm    = "https://package.openupm.com";
 
             /// <summary>
             /// OpenUpm 安装
@@ -36,12 +36,12 @@ namespace AIO.UEditor
                 if (isCN)
                 {
                     name = ScopeName_OpenUpmCN;
-                    url = ScopeUrl_OpenUpmCN;
+                    url  = ScopeUrl_OpenUpmCN;
                 }
                 else
                 {
                     name = ScopeName_OpenUpm;
-                    url = ScopeUrl_OpenUpm;
+                    url  = ScopeUrl_OpenUpm;
                 }
 
                 var path = System.IO.Path.Combine(Path.Packages, "manifest.json");
@@ -59,8 +59,8 @@ namespace AIO.UEditor
 
                     scopedRegistries.Add(new JObject
                     {
-                        ["name"] = name,
-                        ["url"] = url,
+                        ["name"]   = name,
+                        ["url"]    = url,
                         ["scopes"] = new JArray { scopes }
                     });
                 }
@@ -70,8 +70,8 @@ namespace AIO.UEditor
                     {
                         new JObject
                         {
-                            ["name"] = name,
-                            ["url"] = url,
+                            ["name"]   = name,
+                            ["url"]    = url,
                             ["scopes"] = new JArray { scopes }
                         }
                     };
@@ -80,8 +80,7 @@ namespace AIO.UEditor
                 save: ;
                 await AHelper.IO.WriteJsonUTF8Async(path, manifest);
                 // 判断是否允许自动刷新
-                if (EditorPrefs.GetBool("AllowAutoRefresh"))
-                    AssetDatabase.Refresh();
+                if (EditorPrefs.GetBool("AllowAutoRefresh")) AssetDatabase.Refresh();
             }
 
             /// <summary>
@@ -104,17 +103,18 @@ namespace AIO.UEditor
                         if (scopedRegistries[index].Value<JArray>("scopes") is JArray scopesArray)
                         {
                             for (var i = scopesArray.Count - 1; i >= 0; i--)
-                            {
                                 if (scopesArray[i].Value<string>() == scopes)
                                 {
                                     scopesArray.RemoveAt(i);
                                     break;
                                 }
-                            }
 
                             if (scopesArray.Count == 0) scopedRegistries.RemoveAt(index);
                         }
-                        else scopedRegistries.RemoveAt(index);
+                        else
+                        {
+                            scopedRegistries.RemoveAt(index);
+                        }
                     }
 
                     if (scopedRegistries.Count == 0) manifest.Remove("scopedRegistries");
@@ -124,5 +124,7 @@ namespace AIO.UEditor
                 AssetDatabase.Refresh();
             }
         }
+
+        #endregion
     }
 }

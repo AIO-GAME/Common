@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEngine
 {
@@ -16,7 +20,7 @@ namespace AIO.UEngine
         }
 
         public static void SetVector3Int(this BufferByte buffer, ref int index, in Vector3Int value,
-            in bool reverse = false)
+                                         in   bool       reverse = false)
         {
             buffer.SetInt32(ref index, value.x, reverse);
             buffer.SetInt32(ref index, value.y, reverse);
@@ -43,7 +47,7 @@ namespace AIO.UEngine
         #region Vector3
 
         public static Vector3 GetVector3(this IList<byte> array, ref int index, in bool all = false,
-            in bool reverse = false)
+                                         in   bool        reverse = false)
         {
             return new Vector3(
                 array.GetFloat(ref index, all, reverse),
@@ -52,7 +56,7 @@ namespace AIO.UEngine
         }
 
         public static void SetVector3(this BufferByte buffer, ref int index, in Vector3 value, in bool all = false,
-            in bool reverse = false)
+                                      in   bool       reverse = false)
         {
             buffer.SetFloat(ref index, value.x, all, reverse);
             buffer.SetFloat(ref index, value.y, all, reverse);
@@ -68,7 +72,7 @@ namespace AIO.UEngine
         }
 
         public static void WriteVector3(this BufferByte buffer, in Vector3 value, in bool all = false,
-            in bool reverse = false)
+                                        in   bool       reverse = false)
         {
             buffer.WriteFloat(value.x, all, reverse);
             buffer.WriteFloat(value.y, all, reverse);

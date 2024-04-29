@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,6 +10,8 @@ using UnityEditor.Compilation;
 using UnityEngine;
 using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 using UGUIStyle = UnityEngine.GUIStyle;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -113,9 +117,7 @@ namespace AIO.UEditor
 
             var common = new Dictionary<string, int>();
             var sb = new StringBuilder();
-            foreach (var item in dict
-                         .Where(item => item.Value >= validVersionNum)
-                         .Where(item => !common.ContainsKey(item.Key)))
+            foreach (var item in dict.Where(item => item.Value >= validVersionNum).Where(item => !common.ContainsKey(item.Key)))
             {
                 common.Add(item.Key, item.Value);
                 sb.AppendLine(item.Key);
@@ -153,8 +155,8 @@ namespace AIO.UEditor
 
         private static void CalcNumber(
             IDictionary<string, int> dictionary,
-            IEnumerable<string> liens,
-            out IList<string> list)
+            IEnumerable<string>      liens,
+            out IList<string>        list)
         {
             list = new List<string>();
             foreach (var name in liens)

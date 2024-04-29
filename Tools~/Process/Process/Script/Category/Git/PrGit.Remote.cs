@@ -4,12 +4,18 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrGit
     {
+        #region Nested type: Remote
+
         /// <summary>
         /// <see cref="PrGit"/> <see cref="Remote"/> 远端
         /// </summary>
@@ -110,8 +116,10 @@ namespace AIO
             {
                 if (string.IsNullOrEmpty(oldRemoteName)) throw new ArgumentNullException();
                 if (string.IsNullOrEmpty(newRemoteName)) throw new ArgumentNullException();
-                return Create(work, new string[] { "remote rename {0} {1}", oldRemoteName, newRemoteName });
+                return Create(work, new[] { "remote rename {0} {1}", oldRemoteName, newRemoteName });
             }
         }
+
+        #endregion
     }
 }

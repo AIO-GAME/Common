@@ -1,5 +1,8 @@
+#region
+
 using System;
-using System.Runtime.CompilerServices;
+
+#endregion
 
 namespace AIO
 {
@@ -8,7 +11,6 @@ namespace AIO
         /// <summary>
         /// 验证数据 报错条件 value == false
         /// </summary>
-
         public void IsTrue(in bool value)
         {
             if (!Ensure.IsActive) return;
@@ -19,7 +21,6 @@ namespace AIO
         /// <summary>
         /// 验证数据 报错条件 value == true
         /// </summary>
-
         public void IsFalse(in bool value)
         {
             if (!Ensure.IsActive) return;

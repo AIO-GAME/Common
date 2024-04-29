@@ -1,9 +1,15 @@
-﻿using System;
+﻿#region
+
+using System;
+
+#endregion
 
 namespace AIO
 {
     public partial class Pool
     {
+        #region Nested type: Disposable
+
         /// <summary>
         /// An <see cref="IDisposable"/> to allow pooled objects to be acquired and released within <c>using</c>
         /// statements instead of needing to manually release everything.
@@ -25,7 +31,7 @@ namespace AIO
             /// </summary>
             public Disposable(T item, Action<T> onRelease)
             {
-                Item = item;
+                Item      = item;
                 OnRelease = onRelease;
             }
 
@@ -34,5 +40,7 @@ namespace AIO
                 OnRelease?.Invoke(Item);
             }
         }
+
+        #endregion
     }
 }

@@ -1,10 +1,8 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2024-03-25
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -13,6 +11,15 @@ namespace AIO
     /// </summary>
     partial class PoolSystem<T>
     {
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public PoolSystem()
+        {
+            FreePool = Pool.Queue<T>();
+            BusyPool = Pool.Dictionary<int, T>();
+        }
+
         /// <summary>
         /// 使用中的对象
         /// </summary>
@@ -24,18 +31,20 @@ namespace AIO
         protected Queue<T> FreePool { get; private set; }
 
         /// <summary>
-        /// 构造函数
-        /// </summary>
-        public PoolSystem()
-        {
-            FreePool = Pool.Queue<T>();
-            BusyPool = Pool.Dictionary<int, T>();
-        }
-
-        /// <summary>
         /// 容量
         /// </summary>
         public int Capacity { get; set; }
+
+        #region IDisposable Members
+
+        /// <inheritdoc />
+        public virtual void Dispose()
+        {
+            BusyPool.Free();
+            FreePool.Free();
+        }
+
+        #endregion
 
         /// <summary>
         ///  获取实体唯一ID
@@ -59,12 +68,5 @@ namespace AIO
         /// 分配对象
         /// </summary>
         protected abstract T CreateEntity();
-
-        /// <inheritdoc />
-        public virtual void Dispose()
-        {
-            BusyPool.Free();
-            FreePool.Free();
-        }
     }
 }

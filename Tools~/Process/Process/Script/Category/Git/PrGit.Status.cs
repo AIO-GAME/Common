@@ -4,13 +4,19 @@
 
 |||✩ - - - - - |*/
 
+#region
+
 using System;
 using System.IO;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrGit
     {
+        #region Nested type: Status
+
         /// <summary>
         /// <see cref="PrGit"/> <see cref="Status"/> 状态
         /// </summary>
@@ -40,5 +46,7 @@ namespace AIO
                 return Create(work, "status");
             }
         }
+
+        #endregion
     }
 }

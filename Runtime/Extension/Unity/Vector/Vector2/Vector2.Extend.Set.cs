@@ -1,8 +1,12 @@
-﻿namespace AIO.UEngine
-{
-    using System.Runtime.CompilerServices;
-    using UnityEngine;
+﻿#region
 
+using System.Runtime.CompilerServices;
+using UnityEngine;
+
+#endregion
+
+namespace AIO.UEngine
+{
     partial class VectorExtend
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

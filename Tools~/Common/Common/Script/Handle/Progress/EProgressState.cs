@@ -33,6 +33,6 @@
         /// <summary>
         /// 失败
         /// </summary>
-        Fail,
+        Fail
     }
 }

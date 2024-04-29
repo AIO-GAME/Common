@@ -318,6 +318,16 @@
             命令结构
             </summary>
         </member>
+        <member name="M:GCommandSearchDatabase.#ctor(System.String)">
+            <summary>
+            命令结构
+            </summary>
+        </member>
+        <member name="M:GCommandSearchDatabase.#ctor(System.String,GCommandSearchDatabase)">
+            <summary>
+            命令结构
+            </summary>
+        </member>
         <member name="P:GCommandSearchDatabase.Title">
             <summary>
             标题
@@ -338,14 +348,9 @@
             父标题
             </summary>
         </member>
-        <member name="M:GCommandSearchDatabase.#ctor(System.String)">
+        <member name="M:GCommandSearchDatabase.Dispose">
             <summary>
-            命令结构
-            </summary>
-        </member>
-        <member name="M:GCommandSearchDatabase.#ctor(System.String,GCommandSearchDatabase)">
-            <summary>
-            命令结构
+            释放
             </summary>
         </member>
         <member name="M:GCommandSearchDatabase.Add(GCommandAttribute)">
@@ -363,11 +368,6 @@
             添加
             </summary>
         </member>
-        <member name="M:GCommandSearchDatabase.Dispose">
-            <summary>
-            释放
-            </summary>
-        </member>
         <member name="M:GCommandSearchDatabase.ToString">
             <inheritdoc/>
         </member>
@@ -378,24 +378,9 @@
             验证函数同样要求 并且不能包含参数
             </summary>
         </member>
-        <member name="P:GCommandAttribute.ID">
+        <member name="F:GCommandAttribute.Category">
             <summary>
-            命令ID
-            </summary>
-        </member>
-        <member name="F:GCommandAttribute.Validation">
-            <summary>
-            验证函数
-            </summary>
-        </member>
-        <member name="P:GCommandAttribute.Title">
-            <summary>
-            标题
-            </summary>
-        </member>
-        <member name="P:GCommandAttribute.HeaderList">
-            <summary>
-            标题分段列表
+            该类别的命令可以帮助您浏览它
             </summary>
         </member>
         <member name="F:GCommandAttribute.Help">
@@ -413,17 +398,29 @@
             可以搜索命令的快速名称(使其简短以快速访问命令)
             </summary>
         </member>
-        <member name="F:GCommandAttribute.Category">
+        <member name="F:GCommandAttribute.Validation">
             <summary>
-            该类别的命令可以帮助您浏览它
+            验证函数
             </summary>
-        </member>
-        <member name="M:GCommandAttribute.ToString">
-            <inheritdoc/>
         </member>
         <member name="M:GCommandAttribute.#ctor(System.Int32)">
             <summary>
             游戏命令
+            </summary>
+        </member>
+        <member name="P:GCommandAttribute.ID">
+            <summary>
+            命令ID
+            </summary>
+        </member>
+        <member name="P:GCommandAttribute.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:GCommandAttribute.HeaderList">
+            <summary>
+            标题分段列表
             </summary>
         </member>
         <member name="P:GCommandAttribute.CommandMethod">
@@ -450,6 +447,9 @@
             <summary>
             全局命名
             </summary>
+        </member>
+        <member name="M:GCommandAttribute.ToString">
+            <inheritdoc/>
         </member>
         <member name="T:GCommandSystem">
             <summary>

@@ -4,8 +4,12 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
 using System.Diagnostics;
+
+#endregion
 
 namespace AIO
 {

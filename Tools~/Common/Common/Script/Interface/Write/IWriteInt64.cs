@@ -1,11 +1,15 @@
+#region
+
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
     /// <summary>
     /// 写入指定数据类型
     /// </summary>
-    public partial interface IWriteInt64
+    public interface IWriteInt64
     {
         /// <summary>
         /// 写入指定数据类型

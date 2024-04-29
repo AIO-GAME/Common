@@ -1,18 +1,18 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Diagnostics;
+
+#endregion
 
 namespace AIO.UEditor
 {
     /// <summary>
     /// 通用菜单检视器（支持 string 类型）
     /// </summary>
-    [AttributeUsage(AttributeTargets.Field)]
-    [Conditional("UNITY_EDITOR")]
+    [AttributeUsage(AttributeTargets.Field), Conditional("UNITY_EDITOR")]
     public sealed class GenericMenuAttribute : InspectorAttribute
     {
-        public string GenerateMenu { get; private set; }
-        public string ChooseMenu { get; private set; }
-
         /// <summary>
         /// 通用菜单检视器（支持 string 类型）
         /// </summary>
@@ -21,7 +21,10 @@ namespace AIO.UEditor
         public GenericMenuAttribute(string generateMenu, string chooseMenu = null)
         {
             GenerateMenu = generateMenu;
-            ChooseMenu = chooseMenu;
+            ChooseMenu   = chooseMenu;
         }
+
+        public string GenerateMenu { get; private set; }
+        public string ChooseMenu   { get; private set; }
     }
 }

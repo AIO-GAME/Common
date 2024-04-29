@@ -4,12 +4,19 @@
 |*|E-Mail:        |*|1398581458@qq.com         |*|
 |*|=============================================*/
 
+#region
+
 using System;
+using System.IO;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrWin
     {
+        #region Nested type: Open
+
         /// <summary>
         /// 开启命令或操作
         /// </summary>
@@ -22,7 +29,7 @@ namespace AIO
             /// <returns>执行器</returns>
             public static IExecutor Path(in string target)
             {
-                if (System.IO.File.Exists(target)) return Path(target, EPrVerb.RunAs);
+                if (File.Exists(target)) return Path(target, EPrVerb.RunAs);
                 return Create<PrNative>(target);
             }
 
@@ -374,5 +381,7 @@ namespace AIO
                 return Activator.CreateInstance<PrCmd>().SetInArgs(PrCmd.CMD_ARGS).Execute().Input("diskmgmt.msc");
             }
         }
+
+        #endregion
     }
 }

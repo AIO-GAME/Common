@@ -1,19 +1,25 @@
 /*|============|*|
-|*|Author:     |*| xinan                
-|*|Date:       |*| 2023-10-28               
-|*|E-Mail:     |*| 1398581458@qq.com     
+|*|Author:     |*| xinan
+|*|Date:       |*| 2023-10-28
+|*|E-Mail:     |*| 1398581458@qq.com
 |*|============|*/
+
+#region
 
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
     public partial class EHelper
     {
+        #region Nested type: Prefs
+
         public partial class Prefs
         {
-            private const int BoundsHashCode = -727533002;
+            private const int BoundsHashCode        = -727533002;
             private const int BoundsCenterXHashCode = 2080814867;
             private const int BoundsCenterYHashCode = -1823740566;
             private const int BoundsCenterZHashCode = -55975405;
@@ -139,5 +145,7 @@ namespace AIO.UEditor
 
             #endregion
         }
+
+        #endregion
     }
 }

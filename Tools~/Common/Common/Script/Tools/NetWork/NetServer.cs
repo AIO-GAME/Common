@@ -1,12 +1,10 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-08
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Net;
 using System.Net.Sockets;
+
+#endregion
 
 namespace AIO.Net
 {
@@ -15,9 +13,47 @@ namespace AIO.Net
     /// </summary>
     public abstract class NetServer : INetServer
     {
-        private NetServer()
+        private NetServer() { }
+
+        /// <summary>
+        /// Initialize Net server with a given endpoint, address and port
+        /// </summary>
+        /// <param name="endpoint">Endpoint</param>
+        /// <param name="address">Server address</param>
+        /// <param name="port">Server port</param>
+        protected NetServer(EndPoint endpoint, string address, int port)
         {
+            Id       = Guid.NewGuid();
+            Address  = address;
+            Port     = port;
+            Endpoint = endpoint;
         }
+
+        /// <summary>
+        /// Initialize Net server with a given endpoint, address and port
+        /// </summary>
+        /// <param name="address">Server address</param>
+        /// <param name="port">Server port</param>
+        protected NetServer(IPAddress address, int port) : this(new IPEndPoint(address, port)) { }
+
+        /// <summary>
+        /// Initialize Net server with a given endpoint, address and port
+        /// </summary>
+        /// <param name="address">Server address</param>
+        /// <param name="port">Server port</param>
+        protected NetServer(string address, int port) : this(new IPEndPoint(IPAddress.Parse(address), port)) { }
+
+        /// <summary>
+        /// Initialize Net server with a given endpoint, address and port
+        /// </summary>
+        /// <param name="endpoint">Server endpoint</param>
+        protected NetServer(DnsEndPoint endpoint) : this(endpoint, endpoint.Host, endpoint.Port) { }
+
+        /// <summary>
+        /// Initialize Net server with a given endpoint, address and port
+        /// </summary>
+        /// <param name="endpoint">Server endpoint</param>
+        protected NetServer(IPEndPoint endpoint) : this(endpoint, endpoint.Address.ToString(), endpoint.Port) { }
 
         /// <summary>
         /// Client Id
@@ -44,53 +80,45 @@ namespace AIO.Net
         /// </summary>
         public bool IsStarted { get; protected set; }
 
-        /// <summary>
-        /// Initialize Net server with a given endpoint, address and port
-        /// </summary>
-        /// <param name="endpoint">Endpoint</param>
-        /// <param name="address">Server address</param>
-        /// <param name="port">Server port</param>
-        protected NetServer(EndPoint endpoint, string address, int port)
+        #region INetServer Members
+
+        /// <inheritdoc />
+        public virtual bool MulticastAsync(byte[] buffer)
         {
-            Id = Guid.NewGuid();
-            Address = address;
-            Port = port;
-            Endpoint = endpoint;
+            throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Initialize Net server with a given endpoint, address and port
-        /// </summary>
-        /// <param name="address">Server address</param>
-        /// <param name="port">Server port</param>
-        protected NetServer(IPAddress address, int port) : this(new IPEndPoint(address, port))
+        /// <inheritdoc />
+        public virtual int Multicast(byte[] buffer)
         {
+            throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Initialize Net server with a given endpoint, address and port
-        /// </summary>
-        /// <param name="address">Server address</param>
-        /// <param name="port">Server port</param>
-        protected NetServer(string address, int port) : this(new IPEndPoint(IPAddress.Parse(address), port))
+        /// <inheritdoc />
+        public bool SendAsync(INetSession session, byte[] buffer)
         {
+            return session.SendAsync(buffer);
         }
 
-        /// <summary>
-        /// Initialize Net server with a given endpoint, address and port
-        /// </summary>
-        /// <param name="endpoint">Server endpoint</param>
-        protected NetServer(DnsEndPoint endpoint) : this(endpoint, endpoint.Host, endpoint.Port)
+        /// <inheritdoc />
+        public int Send(INetSession session, byte[] buffer)
         {
+            return session.Send(buffer);
         }
 
-        /// <summary>
-        /// Initialize Net server with a given endpoint, address and port
-        /// </summary>
-        /// <param name="endpoint">Server endpoint</param>
-        protected NetServer(IPEndPoint endpoint) : this(endpoint, endpoint.Address.ToString(), endpoint.Port)
+        /// <inheritdoc />
+        public int Receive(INetSession session, byte[] buffer, int offset, int size)
         {
+            return session.Receive(buffer, offset, size);
         }
+
+        /// <inheritdoc />
+        public void ReceiveAsync(INetSession session)
+        {
+            session.ReceiveAsync();
+        }
+
+        #endregion
 
         /// <summary>
         /// Create a new socket object
@@ -112,6 +140,24 @@ namespace AIO.Net
         /// </summary>
         /// <returns>'true' if the server was successfully started, 'false' if the server failed to start</returns>
         public abstract bool Start();
+
+        /// <inheritdoc />
+        public sealed override string ToString()
+        {
+            return base.ToString();
+        }
+
+        /// <inheritdoc />
+        public sealed override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        /// <inheritdoc />
+        public sealed override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
 
         #region IDisposable implementation
 
@@ -144,9 +190,7 @@ namespace AIO.Net
         /// <summary>
         /// Clear send/receive buffers
         /// </summary>
-        protected virtual void ClearBuffers()
-        {
-        }
+        protected virtual void ClearBuffers() { }
 
         /// <summary>
         /// Send error notification
@@ -196,37 +240,27 @@ namespace AIO.Net
         /// Handle error notification
         /// </summary>
         /// <param name="error">Socket error code</param>
-        protected virtual void OnError(SocketError error)
-        {
-        }
+        protected virtual void OnError(SocketError error) { }
 
         /// <summary>
         /// Handle server starting notification
         /// </summary>
-        protected virtual void OnStarting()
-        {
-        }
+        protected virtual void OnStarting() { }
 
         /// <summary>
         /// Handle server started notification
         /// </summary>
-        protected virtual void OnStarted()
-        {
-        }
+        protected virtual void OnStarted() { }
 
         /// <summary>
         /// Handle server stopping notification
         /// </summary>
-        protected virtual void OnStopping()
-        {
-        }
+        protected virtual void OnStopping() { }
 
         /// <summary>
         /// Handle server stopped notification
         /// </summary>
-        protected virtual void OnStopped()
-        {
-        }
+        protected virtual void OnStopped() { }
 
         /// <summary>
         /// Handle datagram received notification
@@ -238,9 +272,7 @@ namespace AIO.Net
         /// <remarks>
         /// Notification is called when another datagram was received from some endpoint
         /// </remarks>
-        protected virtual void OnReceived(EndPoint endpoint, byte[] buffer, int offset, int size)
-        {
-        }
+        protected virtual void OnReceived(EndPoint endpoint, byte[] buffer, int offset, int size) { }
 
         /// <summary>
         /// Handle datagram sent notification
@@ -251,64 +283,8 @@ namespace AIO.Net
         /// Notification is called when a datagram was sent to the client.
         /// This handler could be used to send another datagram to the client for instance when the pending size is zero.
         /// </remarks>
-        protected virtual void OnSent(EndPoint endpoint, int sent)
-        {
-        }
+        protected virtual void OnSent(EndPoint endpoint, int sent) { }
 
         #endregion
-
-        /// <inheritdoc />
-        public virtual bool MulticastAsync(byte[] buffer)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public virtual int Multicast(byte[] buffer)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public bool SendAsync(INetSession session, byte[] buffer)
-        {
-            return session.SendAsync(buffer);
-        }
-
-        /// <inheritdoc />
-        public int Send(INetSession session, byte[] buffer)
-        {
-            return session.Send(buffer);
-        }
-
-        /// <inheritdoc />
-        public int Receive(INetSession session, byte[] buffer, int offset, int size)
-        {
-            return session.Receive(buffer, offset, size);
-        }
-
-        /// <inheritdoc />
-        public void ReceiveAsync(INetSession session)
-        {
-            session.ReceiveAsync();
-        }
-
-        /// <inheritdoc />
-        public sealed override string ToString()
-        {
-            return base.ToString();
-        }
-
-        /// <inheritdoc />
-        public sealed override bool Equals(object obj)
-        {
-            return base.Equals(obj);
-        }
-
-        /// <inheritdoc />
-        public sealed override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
     }
 }

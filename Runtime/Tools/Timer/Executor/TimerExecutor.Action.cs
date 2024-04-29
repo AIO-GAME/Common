@@ -1,4 +1,8 @@
-﻿using System;
+﻿#region
+
+using System;
+
+#endregion
 
 namespace AIO
 {
@@ -15,7 +19,7 @@ namespace AIO
         /// <param name="createTime">创建时间</param>
         /// <param name="delegateValue">委托函数</param>
         internal TimerExecutorAction(long duration, int loop, long createTime, Action delegateValue) : base(duration,
-            loop, createTime)
+                                                                                                            loop, createTime)
         {
             Delegates = delegateValue;
         }

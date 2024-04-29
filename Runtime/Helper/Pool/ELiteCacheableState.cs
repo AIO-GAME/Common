@@ -1,4 +1,8 @@
-﻿using System.ComponentModel;
+﻿#region
+
+using System.ComponentModel;
+
+#endregion
 
 namespace AIO
 {
@@ -10,11 +14,13 @@ namespace AIO
         /// <summary>
         /// 等待
         /// </summary>
-        [Description("等待")] Idle,
+        [Description("等待")]
+        Idle,
 
         /// <summary>
         /// 运行中
         /// </summary>
-        [Description("运行中")] Running,
+        [Description("运行中")]
+        Running
     }
 }

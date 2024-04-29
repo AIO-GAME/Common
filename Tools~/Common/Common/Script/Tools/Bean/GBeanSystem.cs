@@ -1,10 +1,14 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {
@@ -24,11 +28,6 @@ namespace AIO
         internal static BufferByte Bean;
 
         /// <summary>
-        /// 进度回调
-        /// </summary>
-        public static Action<float> Progress { get; set; }
-
-        /// <summary>
         /// 目标存储读取路径
         /// </summary>
         internal static string TargetPath;
@@ -37,10 +36,15 @@ namespace AIO
 
         static GBeanSystem()
         {
-            Data = new Dictionary<int, GBean>();
+            Data      = new Dictionary<int, GBean>();
             MD5Crypto = new MD5CryptoServiceProvider();
             MD5Crypto.Initialize();
         }
+
+        /// <summary>
+        /// 进度回调
+        /// </summary>
+        public static Action<float> Progress { get; set; }
 
         /// <summary>
         /// 获取二进制MD5码
@@ -66,28 +70,26 @@ namespace AIO
             var attributeType = typeof(GBeanRegisterAttribute);
             var gBeanType = typeof(GBean);
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            foreach (var type in assembly.GetTypes())
             {
-                foreach (var type in assembly.GetTypes())
-                {
-                    if (type.IsAbstract) continue;
-                    var attribute = type.GetCustomAttribute(attributeType, false);
-                    if (type.IsSubclassOf(gBeanType))
+                if (type.IsAbstract) continue;
+                var attribute = type.GetCustomAttribute(attributeType, false);
+                if (type.IsSubclassOf(gBeanType))
+                    if (attribute is GBeanRegisterAttribute gBean)
                     {
-                        if (attribute is GBeanRegisterAttribute gBean)
+                        if (!Data.ContainsKey(gBean.ID))
                         {
-                            if (!Data.ContainsKey(gBean.ID))
-                            {
-                                Data.Add(gBean.ID, (GBean)Activator.CreateInstance(type));
-                                Data[gBean.ID].Initialize();
-                            }
-                            else
-                                throw new Exception(string.Format(
-                                    "GBean 出现重复 ID !!! 请检查 Info => ID : {0} | Current Type Name : {1} | Exist Type Name : {2}",
-                                    gBean.ID, type.FullName, Data[gBean.ID].GetType().FullName
-                                ));
+                            Data.Add(gBean.ID, (GBean)Activator.CreateInstance(type));
+                            Data[gBean.ID].Initialize();
+                        }
+                        else
+                        {
+                            throw new Exception(string.Format(
+                                                    "GBean 出现重复 ID !!! 请检查 Info => ID : {0} | Current Type Name : {1} | Exist Type Name : {2}",
+                                                    gBean.ID, type.FullName, Data[gBean.ID].GetType().FullName
+                                                ));
                         }
                     }
-                }
             }
         }
 
@@ -109,7 +111,7 @@ namespace AIO
             {
                 var ids = Bean.ReadLen();
                 Console.WriteLine("Load 总数据长度: {0} -> IDS: {1}", Bean.WriteOffset, ids);
-                for (int i = 0; i < ids; i++)
+                for (var i = 0; i < ids; i++)
                 {
                     var id = Bean.ReadInt32();
                     var md5 = Bean.ReadStringUTF8();
@@ -124,22 +126,25 @@ namespace AIO
                         {
                             Data[id].Deserialize(buffer);
                             Console.WriteLine("数据块ID: {0} -> 写入下标: {1} -> 数据长度: {2} -> MD5: {3}",
-                                id, startIndex, bufferCount, md5);
+                                              id, startIndex, bufferCount, md5);
                         }
                         else
+                        {
                             Console.WriteLine("数据块ID: {0} -> 写入下标: {1} -> 数据长度: {2} -> MD5: {3} != {4} => 数据MD5验证失败",
-                                id, startIndex, bufferCount, md5, GetMD5(buffer.ToArray()));
+                                              id, startIndex, bufferCount, md5, GetMD5(buffer.ToArray()));
+                        }
                     }
                     else
+                    {
                         Console.WriteLine("数据块ID: {0} -> 写入下标: {1} -> 数据长度: {2} -> MD5: {3} =>  未查询到指定数据ID",
-                            id, startIndex, bufferCount, md5);
+                                          id, startIndex, bufferCount, md5);
+                    }
 
                     Bean.Skip(bufferCount);
                 }
             }));
 
             if (Bean != null && Bean.WriteOffset > 0 && Progress != null)
-            {
                 task.Add(Task.Factory.StartNew(() =>
                 {
                     while (Bean.Count != 0)
@@ -150,7 +155,6 @@ namespace AIO
 
                     Progress.Invoke(1);
                 }));
-            }
 
             return Task.WhenAny(task.ToArray());
         }
@@ -177,7 +181,7 @@ namespace AIO
                 root.Write(bytes.ToArray());
 
                 Console.WriteLine("数据块ID: {0} -> 写入下标: {1} -> 数据长度: {2} -> MD5: {3}",
-                    item.Key, startindex, bytes.Count, md5);
+                                  item.Key, startindex, bytes.Count, md5);
             }
 
             Console.WriteLine("Save 总数据长度: {0} -> IDS: {1}", root.Count, Data.Count);
@@ -189,10 +193,7 @@ namespace AIO
         /// </summary>
         public static void Clean()
         {
-            foreach (var item in Data)
-            {
-                item.Value.Clean();
-            }
+            foreach (var item in Data) item.Value.Clean();
         }
 
         /// <summary>
@@ -200,10 +201,7 @@ namespace AIO
         /// </summary>
         public static void Reset()
         {
-            foreach (var item in Data)
-            {
-                item.Value.Reset();
-            }
+            foreach (var item in Data) item.Value.Reset();
         }
     }
 }

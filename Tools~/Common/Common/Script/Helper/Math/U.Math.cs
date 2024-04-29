@@ -1,22 +1,37 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+#region
 
 using System.Collections.Generic;
 using System.Linq;
 using SMath = System.Math;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: Math
+
         /// <summary>
         /// 数学库
         /// </summary>
         public class Math
         {
+            /// <summary>
+            /// 单位
+            /// </summary>
+            public const double EARTH_RADIUS = 6378137;
+
+            /// <summary>
+            /// 单位
+            /// </summary>
+            public const float Deg2Rad = 0.0174532924F;
+
+            /// <summary>
+            /// 单位
+            /// </summary>
+            public const float Rad2Deg = 57.29578F;
+
             /// <summary>
             /// 判断当前值是2的几次幂
             /// </summary>
@@ -93,7 +108,7 @@ namespace AIO
             /// <returns>如果层级在掩码中，返回 true；否则返回 false。</returns>
             public static bool InMask(in int layer, in int mask)
             {
-                return (1 << layer & mask) != 0;
+                return ((1 << layer) & mask) != 0;
             }
 
             /// <summary>
@@ -115,7 +130,7 @@ namespace AIO
             /// <returns>如果层级不在掩码中，返回 true；否则返回 false。</returns>
             public static bool OutMask(in int layer, in int mask)
             {
-                return (1 << layer & mask) == 0;
+                return ((1 << layer) & mask) == 0;
             }
 
             /// <summary>
@@ -126,7 +141,7 @@ namespace AIO
             /// <returns>如果层级不在掩码中，返回 true；否则返回 false。</returns>
             public static bool OutMask(in long layer, in long mask)
             {
-                return (1 << (int)layer & (int)mask) == 0;
+                return ((1 << (int)layer) & (int)mask) == 0;
             }
 
             /// <summary>
@@ -164,21 +179,6 @@ namespace AIO
                     r[i] = weights[i] / sum;
                 return r;
             }
-
-            /// <summary>
-            /// 单位
-            /// </summary>
-            public const double EARTH_RADIUS = 6378137;
-
-            /// <summary>
-            /// 单位
-            /// </summary>
-            public const float Deg2Rad = 0.0174532924F;
-
-            /// <summary>
-            /// 单位
-            /// </summary>
-            public const float Rad2Deg = 57.29578F;
 
             /// <summary>
             /// 计算两个点之间的直线距离。
@@ -350,7 +350,7 @@ namespace AIO
                 if (value > 1000)
                 {
                     value /= 1000;
-                    value = SMath.Round(value, 2);
+                    value =  SMath.Round(value, 2);
                     return value + "km";
                 }
 
@@ -360,5 +360,7 @@ namespace AIO
                 }
             }
         }
+
+        #endregion
     }
 }

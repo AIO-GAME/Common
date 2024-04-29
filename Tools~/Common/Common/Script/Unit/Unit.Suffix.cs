@@ -2,6 +2,8 @@
 {
     public partial class Unit
     {
+        #region Nested type: Suffix
+
         /// <summary>
         /// 后缀
         /// </summary>
@@ -10,57 +12,59 @@
             /// <summary>
             /// 图片文件后缀
             /// </summary>
-            public static readonly string[] TextureSuffix = new string[] { ".png", ".bmp", ".jpeg", ".jpg", ".psd" };
+            public static readonly string[] TextureSuffix = { ".png", ".bmp", ".jpeg", ".jpg", ".psd" };
 
             /// <summary>
             /// 视频文件后缀
             /// </summary>
-            public static readonly string[] VideoSuffix = new string[] { ".mp4", ".avi" };
+            public static readonly string[] VideoSuffix = { ".mp4", ".avi" };
 
             /// <summary>
             /// 音频文件后缀
             /// </summary>
-            public static readonly string[] SoundSuffix = new string[] { ".mp3", ".ogg" };
+            public static readonly string[] SoundSuffix = { ".mp3", ".ogg" };
 
             /// <summary>
             /// 文本文件后缀
             /// </summary>
-            public static readonly string[] TextSuffix = new string[] { ".txt", ".json", ".xml" };
+            public static readonly string[] TextSuffix = { ".txt", ".json", ".xml" };
 
             /// <summary>
             /// shader文件后缀
             /// </summary>
-            public static readonly string[] ShaderSuffix = new string[] { ".shader" };
+            public static readonly string[] ShaderSuffix = { ".shader" };
 
             /// <summary>
             /// 字体后缀
             /// </summary>
-            public static readonly string[] FontSuffix = new string[] { ".ttf" };
+            public static readonly string[] FontSuffix = { ".ttf" };
 
             /// <summary>
             /// 动画文件后缀
             /// </summary>
-            public static readonly string[] Animation = new string[] { ".anim" };
+            public static readonly string[] Animation = { ".anim" };
 
             /// <summary>
             /// 控制器文件后缀
             /// </summary>
-            public static readonly string[] Animator = new string[] { ".controller" };
+            public static readonly string[] Animator = { ".controller" };
 
             /// <summary>
             /// 材质文件后缀
             /// </summary>
-            public static readonly string[] Material = new string[] { ".mat" };
+            public static readonly string[] Material = { ".mat" };
 
             /// <summary>
             /// 预制体文件后缀
             /// </summary>
-            public static readonly string[] PrefabSuffix = new string[] { ".prefab" };
+            public static readonly string[] PrefabSuffix = { ".prefab" };
 
             /// <summary>
             /// 渲染纹理后缀
             /// </summary>
-            public static readonly string[] RTextureSuffix = new string[] { ".renderTexture" };
+            public static readonly string[] RTextureSuffix = { ".renderTexture" };
         }
+
+        #endregion
     }
 }

@@ -1,8 +1,4 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-03
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.IO;
@@ -10,33 +6,91 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
+#endregion
+
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: HTTP
+
         public partial class HTTP
         {
-            private static Task<string> AutoCommonRequestAsync(string remoteUrl, string method, string data,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            private static string AutoCommonRequest(
+                string   remoteUrl,
+                string   method,
+                string   data,
+                Encoding encoding,
+                ushort   timeout = Net.TIMEOUT,
+                string   cookie  = null)
+            {
+                encoding ??= Encoding.UTF8;
+                return AutoCommonRequest(remoteUrl, method, encoding.GetBytes(data), encoding, timeout, cookie);
+            }
+
+            private static string AutoCommonRequest(
+                string remoteUrl,
+                string method,
+                string data,
+                ushort timeout = Net.TIMEOUT,
+                string cookie  = null)
+            {
+                return AutoCommonRequest(remoteUrl, method, Encoding.UTF8.GetBytes(data), Encoding.UTF8, timeout, cookie);
+            }
+
+            private static string AutoCommonRequest(
+                string   remoteUrl,
+                string   method,
+                Encoding encoding = null,
+                ushort   timeout  = Net.TIMEOUT,
+                string   cookie   = null)
+            {
+                return AutoCommonRequest(remoteUrl, method, Array.Empty<byte>(), encoding, timeout, cookie);
+            }
+
+            private static Task<string> AutoCommonRequestAsync(
+                string   remoteUrl, string method,
+                string   data,
+                Encoding encoding,
+                ushort   timeout = Net.TIMEOUT,
+                string   cookie  = null)
+
             {
                 encoding ??= Encoding.UTF8;
                 return AutoCommonRequestAsync(remoteUrl, method, encoding.GetBytes(data), encoding, timeout, cookie);
             }
 
-            private static Task<string> AutoCommonRequestAsync(string remoteUrl, string method,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            private static Task<string> AutoCommonRequestAsync(
+                string remoteUrl, string method,
+                string data,
+                ushort timeout = Net.TIMEOUT,
+                string cookie  = null)
+            {
+                return AutoCommonRequestAsync(remoteUrl, method, Encoding.UTF8.GetBytes(data), Encoding.UTF8, timeout, cookie);
+            }
+
+            private static Task<string> AutoCommonRequestAsync(
+                string   remoteUrl,
+                string   method,
+                Encoding encoding = null,
+                ushort   timeout  = Net.TIMEOUT,
+                string   cookie   = null)
             {
                 return AutoCommonRequestAsync(remoteUrl, method, Array.Empty<byte>(), encoding, timeout, cookie);
             }
 
-            private static async Task<string> AutoCommonRequestAsync(string remoteUrl, string method,
-                byte[] data,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            private static async Task<string> AutoCommonRequestAsync(
+                string   remoteUrl,
+                string   method,
+                byte[]   data,
+                Encoding encoding = null,
+                ushort   timeout  = Net.TIMEOUT,
+                string   cookie   = null)
             {
                 HttpWebRequest request = null;
                 try
                 {
-                    request = CreateHttpWebRequest(remoteUrl, timeout, cookie);
+                    request        = CreateHttpWebRequest(remoteUrl, timeout, cookie);
                     request.Method = method;
                     await WriteRequestStreamAsync(request, data);
                     if (data != null) request.ContentType = "application/json";
@@ -49,26 +103,18 @@ namespace AIO
                 }
             }
 
-            private static string AutoCommonRequest(string remoteUrl, string method, string data,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
-            {
-                encoding ??= Encoding.UTF8;
-                return AutoCommonRequest(remoteUrl, method, encoding.GetBytes(data), encoding, timeout, cookie);
-            }
-
-            private static string AutoCommonRequest(string remoteUrl, string method,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
-            {
-                return AutoCommonRequest(remoteUrl, method, Array.Empty<byte>(), encoding, timeout, cookie);
-            }
-
-            private static string AutoCommonRequest(string remoteUrl, string method, byte[] data,
-                Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            private static string AutoCommonRequest(
+                string   remoteUrl,
+                string   method,
+                byte[]   data,
+                Encoding encoding = null,
+                ushort   timeout  = Net.TIMEOUT,
+                string   cookie   = null)
             {
                 HttpWebRequest request = null;
                 try
                 {
-                    request = CreateHttpWebRequest(remoteUrl, timeout, cookie);
+                    request        = CreateHttpWebRequest(remoteUrl, timeout, cookie);
                     request.Method = method;
                     WriteRequestStream(request, data);
                     if (data != null) request.ContentType = "application/json";
@@ -88,7 +134,7 @@ namespace AIO
                 WebResponse response = null;
                 try
                 {
-                    response = request.GetResponse();
+                    response       = request.GetResponse();
                     responseStream = response.GetResponseStream();
                     if (responseStream is null) throw new AExpNetGetResponseStream("HTTP", response);
                     stream = new StreamReader(responseStream, encoding ?? Encoding.UTF8);
@@ -100,8 +146,9 @@ namespace AIO
 
                     return retString;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    Console.WriteLine(e.Message);
                     stream?.Close();
                     responseStream?.Close();
                     response?.Close();
@@ -116,7 +163,7 @@ namespace AIO
                 WebResponse response = null;
                 try
                 {
-                    response = await request.GetResponseAsync();
+                    response       = await request.GetResponseAsync();
                     responseStream = response.GetResponseStream();
                     if (responseStream is null) throw new AExpNetGetResponseStream("HTTP", response);
                     stream = new StreamReader(responseStream, encoding ?? Encoding.UTF8);
@@ -144,7 +191,7 @@ namespace AIO
                 WebResponse response = null;
                 try
                 {
-                    response = request.GetResponse();
+                    response       = request.GetResponse();
                     responseStream = response.GetResponseStream();
                     if (responseStream is null) throw new AExpNetGetResponseStream("HTTP", response);
                     stream = new BufferedStream(responseStream);
@@ -168,7 +215,7 @@ namespace AIO
                 WebResponse response = null;
                 try
                 {
-                    response = await request.GetResponseAsync();
+                    response       = await request.GetResponseAsync();
                     responseStream = response.GetResponseStream();
                     if (responseStream is null) throw new AExpNetGetResponseStream("HTTP", response);
                     stream = new BufferedStream(responseStream);
@@ -193,7 +240,7 @@ namespace AIO
                 try
                 {
                     request.ContentLength = data.Length;
-                    requestStream = request.GetRequestStream();
+                    requestStream         = request.GetRequestStream();
                     requestStream.Write(data, 0, data.Length);
                     requestStream.Close();
                 }
@@ -216,7 +263,7 @@ namespace AIO
                 try
                 {
                     request.ContentLength = data.Length;
-                    requestStream = await request.GetRequestStreamAsync();
+                    requestStream         = await request.GetRequestStreamAsync();
                     await requestStream.WriteAsync(data, 0, data.Length);
                     requestStream.Close();
                 }
@@ -227,15 +274,15 @@ namespace AIO
             }
 
             private static HttpWebRequest CreateHttpWebRequest(string remoteUrl,
-                ushort timeout = Net.TIMEOUT, string cookie = null)
+                                                               ushort timeout = Net.TIMEOUT, string cookie = null)
             {
                 var remote = remoteUrl.Replace('\\', Path.DirectorySeparatorChar);
                 var request = (HttpWebRequest)WebRequest.Create(remote);
-                request.Date = DateTime.Now;
-                request.Timeout = timeout;
-                request.AllowAutoRedirect = true;
+                request.Date                         = DateTime.Now;
+                request.Timeout                      = timeout;
+                request.AllowAutoRedirect            = true;
                 request.MaximumAutomaticRedirections = 1;
-                request.AutomaticDecompression = DecompressionMethods.GZip;
+                request.AutomaticDecompression       = DecompressionMethods.GZip;
 
                 if (string.IsNullOrEmpty(cookie)) return request;
 
@@ -244,5 +291,7 @@ namespace AIO
                 return request;
             }
         }
+
+        #endregion
     }
 }

@@ -1,9 +1,15 @@
-﻿namespace AIO
-{
-    using System.Collections.Generic;
+﻿#region
 
+using System.Collections.Generic;
+
+#endregion
+
+namespace AIO
+{
     public static partial class Pool
     {
+        #region Nested type: AQueue
+
         /// <summary>
         /// Queue对象池
         /// </summary>
@@ -22,10 +28,7 @@
             {
                 lock (@lock)
                 {
-                    if (free.Count == 0)
-                    {
-                        free.Push(new Queue<T>());
-                    }
+                    if (free.Count == 0) free.Push(new Queue<T>());
 
                     var array = free.Pop();
 
@@ -48,6 +51,8 @@
                 }
             }
         }
+
+        #endregion
     }
 
     public static partial class PoolExtend

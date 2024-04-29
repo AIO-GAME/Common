@@ -1,35 +1,24 @@
-﻿using System;
+﻿#region
+
+using System;
+using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Linq;
+
+#endregion
 
 /// <summary>
 /// 命令属性
 /// 放置在 构造函数 抽象函数 非静态函数 虚函数 重写函数 函数泛型 都会自动过滤
 /// 验证函数同样要求 并且不能包含参数
 /// </summary>
-[AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
+[AttributeUsage(AttributeTargets.Method, Inherited = false)]
 public class GCommandAttribute : Attribute
 {
     /// <summary>
-    /// 命令ID
+    /// 该类别的命令可以帮助您浏览它
     /// </summary>
-    public int ID { get; }
-
-    /// <summary>
-    /// 验证函数
-    /// </summary>
-    public string Validation;
-
-    /// <summary>
-    /// 标题
-    /// </summary>
-    public string Title { get { return HeaderList[0]; } }
-
-    /// <summary>
-    /// 标题分段列表
-    /// </summary>
-    public string[] HeaderList { get; private set; }
+    public string Category;
 
     /// <summary>
     /// 一些帮助显示，以便用户理解命令
@@ -47,23 +36,9 @@ public class GCommandAttribute : Attribute
     public string QuickName;
 
     /// <summary>
-    /// 该类别的命令可以帮助您浏览它
+    /// 验证函数
     /// </summary>
-    public string Category;
-
-    /// <inheritdoc/>
-    public override string ToString()
-    {
-        return string.Format(" ID:{0}\n 执行函数:{1}\n 参数信息:{2}\n 验证函数:{3}\n 帮助信息:{4}\n 命令指令:{5}",
-            ID, GetMethodInfo(CommandMethod), GetParameterInfo(Parameters), GetMethodInfo(ValidationMethod), Help, GetCommand());
-    }
-
-    internal string GetCommand()
-    {
-        if (Parameters == null || Parameters.Length == 0) return string.Format("[{0}]", ID);
-        var info = Parameters.Select((param) => { return param.ParameterType.Name; }).ToArray();
-        return string.Format("[{0}:{1}]", ID, string.Join(",", info));
-    }
+    public string Validation;
 
     /// <summary>
     /// 游戏命令
@@ -75,26 +50,20 @@ public class GCommandAttribute : Attribute
         HeaderList = Name.Split('/');
     }
 
-    internal static string GetMethodInfo(in MethodInfo Method)
-    {
-        if (Method is null) return "Null";
-        var str = new StringBuilder();
-        str.AppendFormat("{0}", Method.Name);
-        return str.ToString();
-    }
+    /// <summary>
+    /// 命令ID
+    /// </summary>
+    public int ID { get; }
 
-    internal static string GetParameterInfo(params ParameterInfo[] parameters)
-    {
-        if (parameters is null || parameters.Length == 0) return "Null";
-        var str = new StringBuilder();
-        str.Append('(');
-        foreach (var parameter in parameters)
-        {
-            str.AppendFormat("[{0}_{1}|{2}],", parameter.Position, parameter.Name, parameter.ParameterType.Name);
-        }
-        str.Remove(str.Length - 1, 1).Append(')');
-        return str.ToString();
-    }
+    /// <summary>
+    /// 标题
+    /// </summary>
+    public string Title => HeaderList[0];
+
+    /// <summary>
+    /// 标题分段列表
+    /// </summary>
+    public string[] HeaderList { get; private set; }
 
     /// <summary>
     /// 方法
@@ -119,13 +88,46 @@ public class GCommandAttribute : Attribute
     /// <summary>
     /// 全局命名
     /// </summary>
-    internal string FullName { get { return string.Format("{0}.{1}", RuntimeType.FullName, CommandMethod.Name); } }
+    internal string FullName => string.Format("{0}.{1}", RuntimeType.FullName, CommandMethod.Name);
+
+    /// <inheritdoc/>
+    public override string ToString()
+    {
+        return string.Format(" ID:{0}\n 执行函数:{1}\n 参数信息:{2}\n 验证函数:{3}\n 帮助信息:{4}\n 命令指令:{5}",
+                             ID, GetMethodInfo(CommandMethod), GetParameterInfo(Parameters), GetMethodInfo(ValidationMethod), Help, GetCommand());
+    }
+
+    internal string GetCommand()
+    {
+        if (Parameters == null || Parameters.Length == 0) return string.Format("[{0}]", ID);
+        var info = Parameters.Select(param => { return param.ParameterType.Name; }).ToArray();
+        return string.Format("[{0}:{1}]", ID, string.Join(",", info));
+    }
+
+    internal static string GetMethodInfo(in MethodInfo Method)
+    {
+        if (Method is null) return "Null";
+        var str = new StringBuilder();
+        str.AppendFormat("{0}", Method.Name);
+        return str.ToString();
+    }
+
+    internal static string GetParameterInfo(params ParameterInfo[] parameters)
+    {
+        if (parameters is null || parameters.Length == 0) return "Null";
+        var str = new StringBuilder();
+        str.Append('(');
+        foreach (var parameter in parameters) str.AppendFormat("[{0}_{1}|{2}],", parameter.Position, parameter.Name, parameter.ParameterType.Name);
+
+        str.Remove(str.Length - 1, 1).Append(')');
+        return str.ToString();
+    }
 
     internal void Update(Type type, MethodInfo method)
     {
-        RuntimeType = type;
+        RuntimeType   = type;
         CommandMethod = method;
-        Parameters = method.GetParameters();
+        Parameters    = method.GetParameters();
         if (!string.IsNullOrEmpty(Validation))
         {
             ValidationMethod = type.GetMethod(Validation, BindingFlags.Static);
@@ -150,12 +152,9 @@ public class GCommandAttribute : Attribute
     {
         if (Parameters.Length != args.Length) return false;
         foreach (var item in Parameters)
-        {
             if (item.ParameterType != args[item.Position].GetType())
-            {
                 return false;
-            }
-        }
+
         return true;
     }
 
@@ -163,12 +162,9 @@ public class GCommandAttribute : Attribute
     {
         if (CommandMethod is null) return;
         if (ValidationMethod != null)
-        {
             if ((bool)ValidationMethod.Invoke(null, null))
-            {
                 CommandMethod.Invoke(null, args);
-            }
-        }
+
         CommandMethod.Invoke(null, args);
     }
 
@@ -176,12 +172,9 @@ public class GCommandAttribute : Attribute
     {
         if (CommandMethod is null) return;
         if (ValidationMethod != null)
-        {
             if ((bool)ValidationMethod.Invoke(null, null))
-            {
                 CommandMethod.Invoke(null, null);
-            }
-        }
+
         CommandMethod.Invoke(null, null);
     }
 }

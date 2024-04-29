@@ -1,8 +1,12 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.IO;
 using UnityEditor;
 using UnityEditor.Android;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -85,10 +89,8 @@ namespace AIO.UEditor
 
             // 遍历本场景目录下所有的目录或者文件
             foreach (var currentDir in directoryDIRArray)
-            {
                 // 递归调用方法，找到文件，则使用 AssetImporter 类，标记“包名”与 “后缀名”
                 JudgeDirOrFileByRecursive(currentDir);
-            }
 
             AssetDatabase.RemoveUnusedAssetBundleNames();
             //强制删除所有AssetBundle名称  
@@ -125,16 +127,10 @@ namespace AIO.UEditor
             var fileSystemInfoArray = directoryInfoObj?.GetFileSystemInfos();
             if (fileSystemInfoArray is null) return;
             foreach (var fileInfo in fileSystemInfoArray)
-            {
-                if (fileInfo is FileInfo fileInfoObj) // 文件类型
-                {
-                    RemoveFileABLabel(fileInfoObj); // 修改此文件的 AssetBundle 标签
-                }
-                else // 目录类型
-                {
+                if (fileInfo is FileInfo fileInfoObj)    // 文件类型
+                    RemoveFileABLabel(fileInfoObj);      // 修改此文件的 AssetBundle 标签
+                else                                     // 目录类型
                     JudgeDirOrFileByRecursive(fileInfo); // 如果是目录，则递归调用
-                }
-            }
         }
 
         /// <summary>
@@ -159,10 +155,7 @@ namespace AIO.UEditor
 
             // 给资源文件移除 AB 名称
             var tmpImportObj = AssetImporter.GetAtPath(strAssetFilePath);
-            if (tmpImportObj != null)
-            {
-                tmpImportObj.assetBundleName = null;
-            }
+            if (tmpImportObj != null) tmpImportObj.assetBundleName = null;
         }
     }
 }

@@ -1,4 +1,8 @@
+#region
+
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEngine
 {
@@ -16,7 +20,7 @@ namespace AIO.UEngine
         /// <summary> 居中向上 </summary>
         public static void StretchCenterTop(this RectTransform tran, Vector2 size)
         {
-            tran.pivot = new Vector2(0.5f, 1);
+            tran.pivot     = new Vector2(0.5f, 1);
             tran.anchorMin = new Vector2(0.5f, 1);
             tran.anchorMax = new Vector2(0.5f, 1);
             tran.sizeDelta = size;
@@ -27,7 +31,7 @@ namespace AIO.UEngine
         {
             tran.anchorMin = new Vector2(0, 1);
             tran.anchorMax = new Vector2(0, 1);
-            tran.pivot = new Vector2(0, 1);
+            tran.pivot     = new Vector2(0, 1);
             tran.sizeDelta = size;
         }
 
@@ -36,7 +40,7 @@ namespace AIO.UEngine
         {
             tran.anchorMin = new Vector2(0, 0);
             tran.anchorMax = new Vector2(0, 0);
-            tran.pivot = new Vector2(0, 0);
+            tran.pivot     = new Vector2(0, 0);
             tran.sizeDelta = size;
         }
 
@@ -45,7 +49,7 @@ namespace AIO.UEngine
         {
             tran.anchorMin = Vector2.one;
             tran.anchorMax = Vector2.one;
-            tran.pivot = Vector2.one;
+            tran.pivot     = Vector2.one;
             tran.sizeDelta = size;
         }
     }

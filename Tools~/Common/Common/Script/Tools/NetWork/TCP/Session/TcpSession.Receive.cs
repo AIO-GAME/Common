@@ -1,22 +1,21 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-11-06
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
+﻿#region
 
 using System;
 using System.Net.Sockets;
 using System.Threading;
 
+#endregion
+
 namespace AIO.Net
 {
     public partial class TcpSession
     {
-        private bool Receiving;
-
         private NetBuffer _receiveNetBuffer;
 
         private SocketAsyncEventArgs ReceiveEventArg;
+        private bool                 Receiving;
+
+        #region INetSession Members
 
         /// <summary>
         /// Receive data from the client (synchronous)
@@ -74,11 +73,11 @@ namespace AIO.Net
                     if (Socket.ReceiveAsync(ReceiveEventArg)) continue;
                     process = ProcessReceive(ReceiveEventArg);
                 }
-                catch (ObjectDisposedException)
-                {
-                }
+                catch (ObjectDisposedException) { }
             }
         }
+
+        #endregion
 
         /// <summary>
         /// This method is invoked when an asynchronous receive operation completes

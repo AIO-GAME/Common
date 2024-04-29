@@ -1,13 +1,10 @@
-﻿/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2020-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
-
+﻿#region
 
 using System;
 using System.Net;
 using System.Net.Mail;
+
+#endregion
 
 namespace AIO
 {
@@ -19,17 +16,107 @@ namespace AIO
         /// <summary>
         /// Smtp客户端
         /// </summary>
-        public SmtpClient SmtpClient { get; protected set; } = null;
+        public SmtpClient SmtpClient { get; protected set; }
 
         /// <summary>
         /// 邮件主体
         /// </summary>
-        public MailMessage MailMessage { get; protected set; } = null;
+        public MailMessage MailMessage { get; protected set; }
 
         /// <summary>
         /// 发件人
         /// </summary>
-        public MailAddress Addresser { get; protected set; } = null;
+        public MailAddress Addresser { get; protected set; }
+
+        #region Custom Arribute
+
+        /// <summary>
+        /// 默认标题
+        /// </summary>
+        public string Subject { get; protected set; } = "";
+
+        #endregion
+
+        #region IDisposable Members
+
+        /// <inheritdoc />
+        public virtual void Dispose()
+        {
+            SmtpClient  = null;
+            MailMessage = null;
+            Addresser   = null;
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 添加 抄送人
+        /// </summary>
+        public void AddCRecipients(params MailAddress[] CRecipients)
+        {
+            foreach (var item in CRecipients)
+                if (!MailMessage.CC.Contains(item))
+                    MailMessage.CC.Add(item);
+        }
+
+        /// <summary>
+        /// 添加 抄送人
+        /// </summary>
+        public void AddCRecipients(params string[] CRecipients)
+        {
+            foreach (var item in CRecipients)
+                if (!MailMessage.CC.Contains(new MailAddress(item)))
+                    MailMessage.CC.Add(item);
+        }
+
+        /// <summary>
+        /// 清空抄送人
+        /// </summary>
+        public void ClearCRecipients(params MailAddress[] CRecipients)
+        {
+            MailMessage.CC.Clear();
+        }
+
+        /// <summary>
+        /// 移除 抄送人
+        /// </summary>
+        public void RemoveCRecipients(params MailAddress[] CRecipients)
+        {
+            foreach (var item in CRecipients)
+                if (MailMessage.CC.Contains(item))
+                    MailMessage.CC.Remove(item);
+        }
+
+        /// <summary>
+        /// 移除 抄送人
+        /// </summary>
+        public void RemoveCRecipients(params string[] CRecipients)
+        {
+            foreach (var item in CRecipients)
+            {
+                var t = new MailAddress(item);
+                if (MailMessage.CC.Contains(t)) MailMessage.CC.Remove(t);
+            }
+        }
+
+        /// <summary>
+        /// 发送邮件
+        /// </summary>
+        protected async void SendMail(Action CallBack = null)
+        {
+            try
+            {
+                await SmtpClient.SendMailAsync(MailMessage);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            finally
+            {
+                CallBack?.Invoke();
+            }
+        }
 
         #region MailMessage
 
@@ -92,106 +179,5 @@ namespace AIO
         }
 
         #endregion
-
-        #region Custom Arribute
-
-        /// <summary>
-        /// 默认标题
-        /// </summary>
-        public string Subject { get; protected set; } = "";
-
-        #endregion
-
-        /// <summary>
-        /// 添加 抄送人
-        /// </summary>
-        public void AddCRecipients(params MailAddress[] CRecipients)
-        {
-            foreach (var item in CRecipients)
-            {
-                if (!MailMessage.CC.Contains(item))
-                {
-                    MailMessage.CC.Add(item);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 添加 抄送人
-        /// </summary>
-        public void AddCRecipients(params string[] CRecipients)
-        {
-            foreach (var item in CRecipients)
-            {
-                if (!MailMessage.CC.Contains(new MailAddress(item)))
-                {
-                    MailMessage.CC.Add(item);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 清空抄送人
-        /// </summary>
-        public void ClearCRecipients(params MailAddress[] CRecipients)
-        {
-            MailMessage.CC.Clear();
-        }
-
-        /// <summary>
-        /// 移除 抄送人
-        /// </summary>
-        public void RemoveCRecipients(params MailAddress[] CRecipients)
-        {
-            foreach (var item in CRecipients)
-            {
-                if (MailMessage.CC.Contains(item))
-                {
-                    MailMessage.CC.Remove(item);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 移除 抄送人
-        /// </summary>
-        public void RemoveCRecipients(params string[] CRecipients)
-        {
-            foreach (var item in CRecipients)
-            {
-                var t = new MailAddress(item);
-                if (MailMessage.CC.Contains(t))
-                {
-                    MailMessage.CC.Remove(t);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 发送邮件
-        /// </summary>
-        protected async void SendMail(Action CallBack = null)
-        {
-            try
-            {
-                await SmtpClient.SendMailAsync(MailMessage);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-            finally
-            {
-                CallBack?.Invoke();
-            }
-        }
-
-        /// <inheritdoc />
-        public virtual void Dispose()
-        {
-            SmtpClient = null;
-            MailMessage = null;
-            Addresser = null;
-        }
     }
 }

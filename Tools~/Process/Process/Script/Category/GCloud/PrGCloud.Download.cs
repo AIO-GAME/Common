@@ -4,10 +4,14 @@
 |*|E-Mail:     |*| xinansky99@gmail.com
 |*|============|*/
 
+#region
+
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+
+#endregion
 
 namespace AIO
 {
@@ -66,8 +70,8 @@ namespace AIO
         /// <param name="onProgress">进度回调</param>
         /// <returns> Ture:成功 False: 失败 </returns>
         [DebuggerHidden, DebuggerNonUserCode]
-        public static bool DownloadDir(string remote, string location, bool overwrite = false,
-            Action<string> onProgress = null)
+        public static bool DownloadDir(string         remote, string location, bool overwrite = false,
+                                       Action<string> onProgress = null)
         {
             location = location.Replace("\\", "/").TrimEnd('/');
             if (Directory.Exists(location))
@@ -78,10 +82,7 @@ namespace AIO
 
             Directory.CreateDirectory(location);
             remote = remote.Replace("\\", "/").TrimEnd('/');
-            var result = Create(Gsutil, $"-m cp -r \"gs://{remote}/*\" \"{location}\"").OnProgress((o, s) =>
-            {
-                onProgress?.Invoke($"Downloading : {s}");
-            }).Sync();
+            var result = Create(Gsutil, $"-m cp -r \"gs://{remote}/*\" \"{location}\"").OnProgress((o, s) => { onProgress?.Invoke($"Downloading : {s}"); }).Sync();
             return result.ExitCode == 0;
         }
 
@@ -94,8 +95,8 @@ namespace AIO
         /// <param name="onProgress">进度回调</param>
         /// <returns> Ture:成功 False: 失败 </returns>
         [DebuggerHidden, DebuggerNonUserCode]
-        public static async Task<bool> DownloadDirAsync(string remote, string location, bool overwrite = false,
-            Action<string> onProgress = null)
+        public static async Task<bool> DownloadDirAsync(string         remote, string location, bool overwrite = false,
+                                                        Action<string> onProgress = null)
         {
             location = location.Replace("\\", "/").TrimEnd('/');
             if (Directory.Exists(location))
@@ -106,10 +107,7 @@ namespace AIO
 
             Directory.CreateDirectory(location);
             remote = remote.Replace("\\", "/").TrimEnd('/');
-            var result = await Create(Gsutil, $"-m cp -r \"gs://{remote}/*\" \"{location}\"").OnProgress((o, s) =>
-            {
-                onProgress?.Invoke($"Downloading : {s}");
-            });
+            var result = await Create(Gsutil, $"-m cp -r \"gs://{remote}/*\" \"{location}\"").OnProgress((o, s) => { onProgress?.Invoke($"Downloading : {s}"); });
             return result.ExitCode == 0;
         }
     }

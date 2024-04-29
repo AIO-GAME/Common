@@ -1,18 +1,18 @@
-/*|============|*|
-|*|Author:     |*| xinan
-|*|Date:       |*| 2023-06-04
-|*|E-Mail:     |*| 1398581458@qq.com
-|*|============|*/
+#region
 
 using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
+#endregion
+
 namespace AIO.UEditor
 {
     public partial class EHelper
     {
+        #region Nested type: Asset
+
         public partial class Asset
         {
             /// <summary>
@@ -57,10 +57,7 @@ namespace AIO.UEditor
                 foreach (var obj in Selection.GetFiltered(typeof(Object), SelectionMode.Assets))
                 {
                     var assets = AssetDatabase.GetAssetPath(obj);
-                    if (!string.IsNullOrEmpty(assets) && File.Exists(assets))
-                    {
-                        assets = System.IO.Path.GetDirectoryName(assets);
-                    }
+                    if (!string.IsNullOrEmpty(assets) && File.Exists(assets)) assets = System.IO.Path.GetDirectoryName(assets);
 
                     r.Remove(assets);
                     r.Add(assets);
@@ -69,5 +66,7 @@ namespace AIO.UEditor
                 return r.ToArray();
             }
         }
+
+        #endregion
     }
 }

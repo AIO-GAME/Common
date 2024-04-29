@@ -1,22 +1,28 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
+#endregion
+
 namespace AIO
 {
     /// <summary>
     /// 单位属性
     /// </summary>
-    internal partial class UnitsLongAttribute : UnitsAttribute
+    internal class UnitsLongAttribute : UnitsAttribute
     {
+        private Dictionary<double, long> MultipliersDic = new Dictionary<double, long>();
+
         /// <summary>Creates a new <see cref="UnitsAttribute"/>.</summary>
         public UnitsLongAttribute(IReadOnlyList<double> multipliers, IList<CompactUnitConversionCache> suffixes, int unitIndex = 0)
         {
-            Multipliers = multipliers;
-            UnitIndex = unitIndex;
+            Multipliers       = multipliers;
+            UnitIndex         = unitIndex;
             DisplayConverters = suffixes;
         }
 
@@ -24,8 +30,6 @@ namespace AIO
         /// The value to display if the actual value is <see cref="float.NaN"/>.
         /// </summary>
         public long DefaultValue { get; set; }
-
-        private Dictionary<double, long> MultipliersDic = new Dictionary<double, long>();
 
         /// <summary>[Editor-Only] The unit conversion ratios.</summary>
         /// <remarks><c>valueInUnitX = valueInBaseUnits * Multipliers[x];</c></remarks>
@@ -129,20 +133,26 @@ namespace AIO
 
                 if (Multipliers[i] <= Math.Abs(displayValue))
                 {
-                    display = displayValue / (long)Multipliers[i];
-                    displayValue %= (display * (long)Multipliers[i]);
+                    display      =  displayValue / (long)Multipliers[i];
+                    displayValue %= display * (long)Multipliers[i];
                 }
 
                 if (!MultipliersDic.ContainsKey(Multipliers[i])) MultipliersDic.Add(Multipliers[i], display);
                 else MultipliersDic[Multipliers[i]] = display;
 
-                if (hasLabel) fieldArea.xMin = area.xMin;
+                if (hasLabel)
+                {
+                    fieldArea.xMin = area.xMin;
+                }
                 else if (i < last)
                 {
                     fieldArea.width = width;
-                    fieldArea.xMax = Mathf.Round(fieldArea.xMax);
+                    fieldArea.xMax  = Mathf.Round(fieldArea.xMax);
                 }
-                else fieldArea.xMax = area.xMax;
+                else
+                {
+                    fieldArea.xMax = area.xMax;
+                }
 
                 EditorGUI.BeginChangeCheck();
 
@@ -151,13 +161,10 @@ namespace AIO
                 if (EditorGUI.EndChangeCheck())
                 {
                     value = 0;
-                    foreach (var multiplier in Multipliers)
-                    {
-                        value += MultipliersDic[multiplier] * (long)multiplier;
-                    }
+                    foreach (var multiplier in Multipliers) value += MultipliersDic[multiplier] * (long)multiplier;
                 }
 
-                label = null;
+                label    = null;
                 hasLabel = false;
 
                 fieldArea.x += fieldArea.width + EditorGUIUtility.standardVerticalSpacing;
@@ -170,7 +177,7 @@ namespace AIO
 
         private void DoOptionalAfterGUI(bool isOptional, Rect area, ref long value, long defaultValue, bool guiWasEnabled, float previousLabelWidth)
         {
-            GUI.enabled = guiWasEnabled;
+            GUI.enabled                 = guiWasEnabled;
             EditorGUIUtility.labelWidth = previousLabelWidth;
 
             if (!isOptional)
@@ -191,10 +198,8 @@ namespace AIO
             EditorGUI.indentLevel = indentLevel;
 
             if (isEnabled != wasEnabled)
-            {
                 // value = isEnabled ? defaultValue : double.NaN;
                 UnitGUI.Deselect();
-            }
         }
 #endif
     }

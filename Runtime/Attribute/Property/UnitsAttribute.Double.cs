@@ -1,16 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region
 
+using System;
+using System.Collections.Generic;
+using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
     internal class UnitsDoubleAttribute : UnitsAttribute
     {
         private Dictionary<double, double> MultipliersDic = new Dictionary<double, double>();
+
+        /// <summary>Creates a new <see cref="UnitsAttribute"/>.</summary>
+        public UnitsDoubleAttribute(IReadOnlyList<double> multipliers, IList<CompactUnitConversionCache> suffixes,
+                                    int                   unitIndex = 0)
+        {
+            Multipliers       = multipliers;
+            UnitIndex         = unitIndex;
+            DisplayConverters = suffixes;
+        }
 
         /// <summary>[Editor-Only] The unit conversion ratios.</summary>
         /// <remarks><c>valueInUnitX = valueInBaseUnits * Multipliers[x];</c></remarks>
@@ -20,15 +32,6 @@ namespace AIO
         /// The value to display if the actual value is <see cref="float.NaN"/>.
         /// </summary>
         public double DefaultValue { get; set; }
-
-        /// <summary>Creates a new <see cref="UnitsAttribute"/>.</summary>
-        public UnitsDoubleAttribute(IReadOnlyList<double> multipliers, IList<CompactUnitConversionCache> suffixes,
-            int unitIndex = 0)
-        {
-            Multipliers = multipliers;
-            UnitIndex = unitIndex;
-            DisplayConverters = suffixes;
-        }
 
 #if UNITY_EDITOR
 
@@ -41,7 +44,7 @@ namespace AIO
             area.height = EditorGUIUtility.singleLineHeight;
 
             DoOptionalBeforeGUI(IsOptional, area, out var toggleArea, out var guiWasEnabled,
-                out var previousLabelWidth);
+                                out var previousLabelWidth);
 
             var hasLabel = label != null && !string.IsNullOrEmpty(label.text);
             Rect allFieldArea;
@@ -98,40 +101,41 @@ namespace AIO
                 if (Multipliers[i] <= Math.Abs(displayValue))
                 {
                     if (Multipliers.Count == 1)
-                    {
-                        display = displayValue / Multipliers[i];
-                    }
+                        display  = displayValue / Multipliers[i];
                     else display = Math.Floor(displayValue / Multipliers[i]);
 
-                    displayValue %= (display * Multipliers[i]);
+                    displayValue %= display * Multipliers[i];
                 }
 
                 if (!MultipliersDic.ContainsKey(Multipliers[i])) MultipliersDic.Add(Multipliers[i], display);
                 else MultipliersDic[Multipliers[i]] = display;
 
-                if (hasLabel) fieldArea.xMin = area.xMin;
+                if (hasLabel)
+                {
+                    fieldArea.xMin = area.xMin;
+                }
                 else if (i < last)
                 {
                     fieldArea.width = width;
-                    fieldArea.xMax = Mathf.Round(fieldArea.xMax);
+                    fieldArea.xMax  = Mathf.Round(fieldArea.xMax);
                 }
-                else fieldArea.xMax = area.xMax;
+                else
+                {
+                    fieldArea.xMax = area.xMax;
+                }
 
                 EditorGUI.BeginChangeCheck();
 
                 MultipliersDic[Multipliers[i]] = DoSpecialField(fieldArea, label, MultipliersDic[Multipliers[i]],
-                    DisplayConverters[i]);
+                                                                DisplayConverters[i]);
 
                 if (EditorGUI.EndChangeCheck())
                 {
                     value = 0;
-                    foreach (var multiplier in Multipliers)
-                    {
-                        value += MultipliersDic[multiplier] * multiplier;
-                    }
+                    foreach (var multiplier in Multipliers) value += MultipliersDic[multiplier] * multiplier;
                 }
 
-                label = null;
+                label    = null;
                 hasLabel = false;
 
                 fieldArea.x += fieldArea.width + EditorGUIUtility.standardVerticalSpacing;
@@ -142,10 +146,10 @@ namespace AIO
             Validate.ValueRule(ref value, Rule);
         }
 
-        private void DoOptionalAfterGUI(bool isOptional, Rect area, ref double value, double defaultValue,
-            bool guiWasEnabled, float previousLabelWidth)
+        private void DoOptionalAfterGUI(bool isOptional,    Rect  area, ref double value, double defaultValue,
+                                        bool guiWasEnabled, float previousLabelWidth)
         {
-            GUI.enabled = guiWasEnabled;
+            GUI.enabled                 = guiWasEnabled;
             EditorGUIUtility.labelWidth = previousLabelWidth;
 
             if (!isOptional)
@@ -175,8 +179,8 @@ namespace AIO
         /// <summary>[Editor-Only]
         /// Begins a GUI property block to be ended by EndProperty
         /// </summary>
-        protected static void BeginProperty(Rect area, SerializedProperty property, ref GUIContent label,
-            out double value)
+        protected static void BeginProperty(Rect       area, SerializedProperty property, ref GUIContent label,
+                                            out double value)
         {
             label = EditorGUI.BeginProperty(area, label, property);
             EditorGUI.BeginChangeCheck();

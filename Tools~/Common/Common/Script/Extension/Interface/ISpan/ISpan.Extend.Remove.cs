@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Linq;
+
+#endregion
 
 namespace AIO
 {
@@ -29,14 +33,15 @@ namespace AIO
             if (arrays is null) throw new ArgumentNullException(nameof(arrays));
             var index = 0;
             for (var i = 0; i < arrays.Length; i++)
-            {
-                if (arrays[i] != null && arrays[i].Equals(value)) index++;
+                if (arrays[i] != null && arrays[i].Equals(value))
+                {
+                    index++;
+                }
                 else if (index > 0)
                 {
                     arrays[i - index] = arrays[i];
-                    arrays[i] = default;
+                    arrays[i]         = default;
                 }
-            }
 
             for (var i = arrays.Length - index; i < arrays.Length; i++) arrays[i] = default;
             return arrays;
@@ -52,14 +57,15 @@ namespace AIO
 
             var index = 0;
             for (var i = 0; i < arrays.Length; i++)
-            {
-                if (arrays[i] != null && arrays[i].Equals(value)) index++;
+                if (arrays[i] != null && arrays[i].Equals(value))
+                {
+                    index++;
+                }
                 else if (index > 0)
                 {
                     arrays[i - index] = arrays[i];
-                    arrays[i] = default;
+                    arrays[i]         = default;
                 }
-            }
 
             for (var i = arrays.Length - index; i < arrays.Length; i++) arrays[i] = default;
             return arrays;
@@ -137,12 +143,8 @@ namespace AIO
             if (array.Length <= 0) return Array.Empty<T>();
             var hashSet = Pool.HashSet<T>();
             foreach (var num in array)
-            {
                 if (hashSet.Count == 0 || !hashSet.Contains(num))
-                {
                     hashSet.Add(num);
-                }
-            }
 
             var newArray = hashSet.ToArray();
             hashSet.Free();
@@ -217,8 +219,10 @@ namespace AIO
             var newArray = new T[arrays.Length - indexes.Length];
             indexes.MRemoveRepeat().Sort();
             for (int i = 0, offset = 0, ids = 0; i <= len && index >= 0 && index <= len; i++)
-            {
-                if (index > i) newArray[offset++] = arrays[i];
+                if (index > i)
+                {
+                    newArray[offset++] = arrays[i];
+                }
                 else
                 {
                     if (ids == indexes.Length)
@@ -229,7 +233,6 @@ namespace AIO
 
                     index = indexes[ids++];
                 }
-            }
 
 
             return newArray;

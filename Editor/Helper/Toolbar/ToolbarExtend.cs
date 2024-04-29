@@ -1,9 +1,10 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2024-01-29
-|*|E-Mail:     |*| xinansky99@gmail.com
-|*|============|*/
+﻿#region
 
+#if !UNITY_2019_1_OR_NEWER
+using UnityEngine.Experimental.UIElements;
+#else
+using System.Threading.Tasks;
+#endif
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-#if !UNITY_2019_1_OR_NEWER
-using UnityEngine.Experimental.UIElements;
-#else
-using System.Threading.Tasks;
-#endif
+#endregion
 
 
 namespace AIO.UEditor
@@ -69,8 +66,7 @@ namespace AIO.UEditor
             if (toolbars is null || toolbars.Length <= 0) return;
             while (true)
             {
-                var toolbar = TOOLBAR_TYPE.GetField("m_Root", BindingFlags.NonPublic | BindingFlags.Instance)
-                    ?.GetValue(toolbars[0]) as VisualElement;
+                var toolbar = TOOLBAR_TYPE.GetField("m_Root", BindingFlags.NonPublic | BindingFlags.Instance)?.GetValue(toolbars[0]) as VisualElement;
 
                 if (toolbar is null)
                 {
@@ -82,19 +78,15 @@ namespace AIO.UEditor
 #if UNITY_2022_1_OR_NEWER && !UNITY_2023_1_OR_NEWER
                     .Q<VisualElement>("ToolbarContainerContent")
 #endif
-                    .Q<VisualElement>("ToolbarZonePlayMode")
-                    .Q<VisualElement>("PlayMode")
-                    .Children()
-                    .First();
+                          .Q<VisualElement>("ToolbarZonePlayMode").Q<VisualElement>("PlayMode").Children().First();
 
                 if (temp is null) break;
 
                 if (Application.isEditor)
-                {
                     foreach (var lnk in from lnk in LnkToolsHelper.Data
-                             where lnk.ShowMode == ELnkShowMode.Toolbar
-                             where lnk.Mode == ELnkToolsMode.OnlyEditor || lnk.Mode == ELnkToolsMode.AllMode
-                             select lnk)
+                                        where lnk.ShowMode == ELnkShowMode.Toolbar
+                                        where lnk.Mode == ELnkToolsMode.OnlyEditor || lnk.Mode == ELnkToolsMode.AllMode
+                                        select lnk)
                     {
                         if (toolbarElements.TryGetValue(lnk.Content, out var value))
                             if (value != null)
@@ -103,13 +95,11 @@ namespace AIO.UEditor
                         toolbarElements[lnk.Content] = LnkToolOverlay.GetVoid(lnk);
                         temp.Add(toolbarElements[lnk.Content]);
                     }
-                }
                 else if (Application.isPlaying)
-                {
                     foreach (var lnk in from lnk in LnkToolsHelper.Data
-                             where lnk.ShowMode == ELnkShowMode.Toolbar
-                             where lnk.Mode == ELnkToolsMode.OnlyRuntime || lnk.Mode == ELnkToolsMode.AllMode
-                             select lnk)
+                                        where lnk.ShowMode == ELnkShowMode.Toolbar
+                                        where lnk.Mode == ELnkToolsMode.OnlyRuntime || lnk.Mode == ELnkToolsMode.AllMode
+                                        select lnk)
                     {
                         if (toolbarElements.TryGetValue(lnk.Content, out var value))
                             if (value != null)
@@ -118,7 +108,6 @@ namespace AIO.UEditor
                         toolbarElements[lnk.Content] = LnkToolOverlay.GetVoid(lnk);
                         temp.Add(toolbarElements[lnk.Content]);
                     }
-                }
 
                 break;
             }

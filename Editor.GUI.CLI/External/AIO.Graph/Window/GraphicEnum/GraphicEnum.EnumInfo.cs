@@ -1,10 +1,16 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO.UEditor
 {
     public partial class GraphicEnum
     {
+        #region Nested type: EnumInfo
+
         /// <summary>
         /// 枚举信息
         /// </summary>
@@ -32,7 +38,7 @@ namespace AIO.UEditor
                 if (!Data.ContainsKey(code))
                 {
                     var info = new EnumInfo();
-                    info.Name = type.Name;
+                    info.Name           = type.Name;
                     info.DescriptionDic = GetDescription(type);
 
                     Data.Add(code, info);
@@ -49,5 +55,7 @@ namespace AIO.UEditor
                 return Create(typeof(T));
             }
         }
+
+        #endregion
     }
 }

@@ -1,7 +1,11 @@
+#region
+
 using System.IO;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -35,13 +39,9 @@ namespace AIO.UEditor
 
                 //判断是否是文本文件
                 if (IsTextTypeFile(fileName))
-                {
                     ChangeFormat(absoluteAssetPath);
-                }
                 else
-                {
                     Debug.Log("不是文本文件");
-                }
             }
             else
             {

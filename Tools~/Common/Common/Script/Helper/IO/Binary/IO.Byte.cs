@@ -1,16 +1,16 @@
-/*|============================================|*|
-|*|Author:        |*|XiNan                     |*|
-|*|Date:          |*|2022-05-10                |*|
-|*|E-Mail:        |*|1398581458@qq.com         |*|
-|*|=============================================*/
+#region
 
 using System;
 using System.IO;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -26,10 +26,10 @@ namespace AIO
             /// 写入数据
             /// </summary>
             public static bool WriteByteArray(
-                string path,
+                string    path,
                 in byte[] bytes,
-                in bool coded = false,
-                in bool concat = false)
+                in bool   coded  = false,
+                in bool   concat = false)
             {
                 path = path.Replace('\\', Path.AltDirectorySeparatorChar);
                 if (!coded) return Write(path, bytes, 0, bytes.Length, concat);
@@ -48,12 +48,12 @@ namespace AIO
             /// <param name="concat">true:拼接 | false:覆盖</param>
             /// <param name="bufferSize">缓冲区大小</param>
             public static bool Write(
-                string path,
+                string    path,
                 in byte[] bytes,
-                in int offset,
-                in int length,
-                in bool concat,
-                in int bufferSize = 4096)
+                in int    offset,
+                in int    length,
+                in bool   concat,
+                in int    bufferSize = 4096)
             {
                 path = path.Replace('\\', Path.AltDirectorySeparatorChar);
                 var dir = Path.GetDirectoryName(path);
@@ -82,7 +82,7 @@ namespace AIO
                 try
                 {
                     using (var fsSource = new FileStream(path,
-                               FileMode.Open, FileAccess.Read, FileShare.ReadWrite, bufferSize, true))
+                                                         FileMode.Open, FileAccess.Read, FileShare.ReadWrite, bufferSize, true))
                     {
                         var length = (int)fsSource.Length;
                         var buffer = new byte[length];
@@ -115,5 +115,7 @@ namespace AIO
                 return Array.Empty<byte>();
             }
         }
+
+        #endregion
     }
 }

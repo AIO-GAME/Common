@@ -1,22 +1,19 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2023-12-18
-|*|E-Mail:     |*| xinansky99@foxmail.com
-|*|============|*/
-
+﻿#region
 
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
-using AIO;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -50,9 +47,7 @@ namespace AIO
             /// <returns>如果找到该文件，则返回完整路径，否则返回 null。</returns>
             public static string TryPathsForFile(string fileName, in IEnumerable<string> directories)
             {
-                return directories
-                    .Select(directory => Path.Combine(directory, fileName).Replace('\\', '/'))
-                    .FirstOrDefault(File.Exists);
+                return directories.Select(directory => Path.Combine(directory, fileName).Replace('\\', '/')).FirstOrDefault(File.Exists);
             }
 
             /// <summary>
@@ -75,10 +70,10 @@ namespace AIO
             /// <param name="option">搜查模式</param>
             /// <returns>所有文件信息数组</returns>
             public static IEnumerable<FileInfo> GetFilesInfo(
-                string path,
+                string               path,
                 Func<FileInfo, bool> filtration,
-                string pattern = "*",
-                SearchOption option = SearchOption.TopDirectoryOnly)
+                string               pattern = "*",
+                SearchOption         option  = SearchOption.TopDirectoryOnly)
             {
                 path = path.Replace('\\', Path.AltDirectorySeparatorChar);
                 return !Directory.Exists(path)
@@ -90,9 +85,9 @@ namespace AIO
             /// 获取当前所有文件夹中所有文件信息
             /// </summary>
             public static IEnumerable<FileInfo> GetFilesInfo(
-                string path,
-                string pattern = "*",
-                SearchOption option = SearchOption.TopDirectoryOnly)
+                string       path,
+                string       pattern = "*",
+                SearchOption option  = SearchOption.TopDirectoryOnly)
             {
                 path = path.Replace('\\', Path.AltDirectorySeparatorChar);
                 return !Directory.Exists(path)
@@ -105,8 +100,8 @@ namespace AIO
             /// </summary>
             public static IEnumerable<FileInfo> GetFilesInfo(
                 in DirectoryInfo value,
-                in string pattern = "*",
-                in SearchOption option = SearchOption.TopDirectoryOnly)
+                in string        pattern = "*",
+                in SearchOption  option  = SearchOption.TopDirectoryOnly)
             {
                 return !value.Exists ? Array.Empty<FileInfo>() : value.GetFiles(pattern, option);
             }
@@ -119,9 +114,9 @@ namespace AIO
             /// <param name="option">搜索模式</param>
             /// <returns>所有文件夹 绝对路径</returns>
             public static IEnumerable<string> GetFiles(
-                in string path,
-                in string pattern = "*",
-                in SearchOption option = SearchOption.TopDirectoryOnly)
+                in string       path,
+                in string       pattern = "*",
+                in SearchOption option  = SearchOption.TopDirectoryOnly)
             {
                 return GetFilesInfo(path, pattern, option).Select(item => item.FullName);
             }
@@ -135,10 +130,10 @@ namespace AIO
             /// <param name="option">搜索模式</param>
             /// <returns>所有文件夹 绝对路径</returns>
             public static IEnumerable<string> GetFiles(
-                in string path,
+                in string               path,
                 in Func<FileInfo, bool> filtration,
-                in string pattern = "*",
-                in SearchOption option = SearchOption.TopDirectoryOnly)
+                in string               pattern = "*",
+                in SearchOption         option  = SearchOption.TopDirectoryOnly)
             {
                 return GetFilesInfo(path, filtration, pattern, option).Select(item => item.FullName);
             }
@@ -151,13 +146,12 @@ namespace AIO
             /// <param name="option">搜索模式</param>
             /// <returns>所有文件夹 相对路径</returns>
             public static IEnumerable<string> GetFilesRelative(
-                in string path,
-                in string pattern = "*",
-                in SearchOption option = SearchOption.TopDirectoryOnly)
+                in string       path,
+                in string       pattern = "*",
+                in SearchOption option  = SearchOption.TopDirectoryOnly)
             {
                 var len = path.Length + 1;
-                return GetFilesInfo(path, pattern, option)
-                    .Select(item => item.FullName.Substring(len).Replace('\\', '/'));
+                return GetFilesInfo(path, pattern, option).Select(item => item.FullName.Substring(len).Replace('\\', '/'));
             }
 
             /// <summary>
@@ -169,14 +163,13 @@ namespace AIO
             /// <param name="option">搜索模式</param>
             /// <returns>所有文件夹 相对路径</returns>
             public static IEnumerable<string> GetFilesRelative(
-                in string path,
+                in string               path,
                 in Func<FileInfo, bool> filtration,
-                in string pattern = "*",
-                in SearchOption option = SearchOption.TopDirectoryOnly)
+                in string               pattern = "*",
+                in SearchOption         option  = SearchOption.TopDirectoryOnly)
             {
                 var len = path.Length + 1;
-                return GetFilesInfo(path, filtration, pattern, option)
-                    .Select(item => item.FullName.Substring(len).Replace('\\', '/'));
+                return GetFilesInfo(path, filtration, pattern, option).Select(item => item.FullName.Substring(len).Replace('\\', '/'));
             }
 
             /// <summary>
@@ -187,9 +180,9 @@ namespace AIO
             /// <param name="option">搜索模式</param>
             /// <returns>所有文件名称</returns>
             public static IEnumerable<string> GetFilesName(
-                in string path,
-                in string pattern = "*",
-                in SearchOption option = SearchOption.TopDirectoryOnly)
+                in string       path,
+                in string       pattern = "*",
+                in SearchOption option  = SearchOption.TopDirectoryOnly)
             {
                 return GetFilesInfo(path, pattern, option).Select(item => item.Name);
             }
@@ -203,10 +196,10 @@ namespace AIO
             /// <param name="option">搜索模式</param>
             /// <returns>所有文件名称</returns>
             public static IEnumerable<string> GetFilesName(
-                in string path,
+                in string               path,
                 in Func<FileInfo, bool> filtration,
-                in string pattern = "*",
-                in SearchOption option = SearchOption.TopDirectoryOnly)
+                in string               pattern = "*",
+                in SearchOption         option  = SearchOption.TopDirectoryOnly)
             {
                 return GetFilesInfo(path, filtration, pattern, option).Select(item => item.Name);
             }
@@ -441,5 +434,7 @@ namespace AIO
                 return await fileStream.GetSHA512Async(bufferSize);
             }
         }
+
+        #endregion
     }
 }

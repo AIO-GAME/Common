@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,27 +8,29 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
+#endregion
+
 namespace AIO.UEditor
 {
     public partial class EHelper
     {
+        #region Nested type: IO
+
         /// <summary>
         /// Unity Editor IO Utils
         /// </summary>
-        public static partial class IO
+        public static class IO
         {
             /// <summary>
             /// 获取指定文件夹下的ScriptableObject
             /// </summary>
             /// <param name="folder">文件夹</param>
-            public static T[] GetScriptableObjects<T>(params string[] folder) where T : ScriptableObject
+            public static T[] GetScriptableObjects<T>(params string[] folder)
+            where T : ScriptableObject
             {
                 var pattern = $"t:{typeof(T).Name}";
-                if (folder is null || folder.Length == 0) folder = new string[] { "Assets" };
-                return AssetDatabase.FindAssets(pattern, folder)
-                    .Select(AssetDatabase.GUIDToAssetPath)
-                    .Select(AssetDatabase.LoadAssetAtPath<T>)
-                    .Where(value => value != null).ToArray();
+                if (folder is null || folder.Length == 0) folder = new[] { "Assets" };
+                return AssetDatabase.FindAssets(pattern, folder).Select(AssetDatabase.GUIDToAssetPath).Select(AssetDatabase.LoadAssetAtPath<T>).Where(value => value != null).ToArray();
             }
 
             /// <summary>
@@ -36,15 +40,13 @@ namespace AIO.UEditor
             /// <param name="folder">文件夹</param>
             /// <returns>预制件数组</returns>
             public static T[] GetAssetsRes<T>(
-                string pattern,
+                string          pattern,
                 params string[] folder
-            ) where T : Object
+            )
+            where T : Object
             {
                 if (string.IsNullOrEmpty(pattern)) pattern = $"t:{typeof(T).Name}";
-                return AssetDatabase.FindAssets(pattern, folder)
-                    .Select(AssetDatabase.GUIDToAssetPath)
-                    .Select(AssetDatabase.LoadAssetAtPath<T>)
-                    .Where(value => value != null).ToArray();
+                return AssetDatabase.FindAssets(pattern, folder).Select(AssetDatabase.GUIDToAssetPath).Select(AssetDatabase.LoadAssetAtPath<T>).Where(value => value != null).ToArray();
             }
 
             /// <summary>
@@ -55,16 +57,14 @@ namespace AIO.UEditor
             /// <param name="filtration">过滤函数 Ture:过滤 False:不过滤</param>
             /// <returns>预制件数组</returns>
             public static IEnumerable<T> GetAssetsRes<T>(
-                in string pattern,
-                Func<T, bool> filtration,
+                in string       pattern,
+                Func<T, bool>   filtration,
                 params string[] folder
-            ) where T : Object
+            )
+            where T : Object
             {
                 if (string.IsNullOrEmpty(pattern)) return Array.Empty<T>();
-                return AssetDatabase.FindAssets(pattern, folder)
-                    .Select(AssetDatabase.GUIDToAssetPath)
-                    .Select(AssetDatabase.LoadAssetAtPath<T>)
-                    .Where(value => value != null && !filtration(value));
+                return AssetDatabase.FindAssets(pattern, folder).Select(AssetDatabase.GUIDToAssetPath).Select(AssetDatabase.LoadAssetAtPath<T>).Where(value => value != null && !filtration(value));
             }
 
             /// <summary>
@@ -74,7 +74,7 @@ namespace AIO.UEditor
             /// <param name="folders">文件夹</param>
             /// <returns>路径数组</returns>
             public static IEnumerable<string> GetAssetsPath(
-                in string pattern,
+                in     string   pattern,
                 params string[] folders)
             {
                 if (string.IsNullOrEmpty(pattern)) return Array.Empty<string>();
@@ -89,14 +89,12 @@ namespace AIO.UEditor
             /// <param name="folders">文件夹</param>
             /// <returns>路径数组</returns>
             public static IEnumerable<string> GetAssetsPath(
-                in string pattern,
+                in string          pattern,
                 Func<string, bool> filtration,
-                params string[] folders)
+                params string[]    folders)
             {
                 if (string.IsNullOrEmpty(pattern)) return Array.Empty<string>();
-                return AssetDatabase.FindAssets(pattern, folders)
-                    .Select(AssetDatabase.GUIDToAssetPath)
-                    .Where(value => !filtration.Invoke(value)).ToArray();
+                return AssetDatabase.FindAssets(pattern, folders).Select(AssetDatabase.GUIDToAssetPath).Where(value => !filtration.Invoke(value)).ToArray();
             }
 
             /// <summary>
@@ -107,7 +105,7 @@ namespace AIO.UEditor
             /// <returns>预制件数组</returns>
             public static IEnumerable<GameObject> GetAssetPrefabs(
                 Func<GameObject, bool> filtration,
-                params string[] folder)
+                params string[]        folder)
             {
                 return GetAssetsRes("t:Prefab", filtration, folder);
             }
@@ -140,7 +138,7 @@ namespace AIO.UEditor
             /// <returns>预制件数组</returns>
             public static IEnumerable<AnimationClip> GetAssetClips(
                 Func<AnimationClip, bool> filtration,
-                params string[] folder)
+                params string[]           folder)
             {
                 return GetAssetsRes("t:Animation", filtration, folder);
             }
@@ -148,7 +146,8 @@ namespace AIO.UEditor
             /// <summary>
             /// 获取预制件身上的组件
             /// </summary>
-            public static IEnumerable<T> GetAssetPrefabs<T>(params string[] folders) where T : Component
+            public static IEnumerable<T> GetAssetPrefabs<T>(params string[] folders)
+            where T : Component
             {
                 var list = new List<T>();
                 foreach (var asset in GetAssetsRes<GameObject>("t:Prefab", folders))
@@ -174,7 +173,7 @@ namespace AIO.UEditor
             /// <returns>预制件数组</returns>
             public static IEnumerable<string> GetAssetPrefabsPath(
                 Func<string, bool> filtration,
-                params string[] folders)
+                params string[]    folders)
             {
                 return GetAssetsPath("t:Prefab", filtration, folders);
             }
@@ -187,17 +186,15 @@ namespace AIO.UEditor
             /// <param name="option">查找模式</param>
             /// <returns>以Assets路径为节点的路径数组</returns>
             public static IEnumerable<string> GetFilesRelativeAsset(
-                string value,
-                in string pattern = "*",
-                in SearchOption option = SearchOption.TopDirectoryOnly)
+                string          value,
+                in string       pattern = "*",
+                in SearchOption option  = SearchOption.TopDirectoryOnly)
             {
                 if (!Directory.Exists(value)) return Array.Empty<string>();
                 value = System.IO.Path.GetFullPath(value).Replace('\\', System.IO.Path.AltDirectorySeparatorChar);
                 if (!value.Contains(Path.Project)) return Array.Empty<string>();
                 var len = Path.Project.Length + 1;
-                return AHelper.IO
-                    .GetFilesInfo(value, pattern, option)
-                    .Select(item => item.FullName.Substring(len).Replace('\\', '/'));
+                return AHelper.IO.GetFilesInfo(value, pattern, option).Select(item => item.FullName.Substring(len).Replace('\\', '/'));
             }
 
             /// <summary>
@@ -209,18 +206,16 @@ namespace AIO.UEditor
             /// <param name="option">查找模式</param>
             /// <returns>以Assets路径为节点的路径数组</returns>
             public static IEnumerable<string> GetFilesRelativeAsset(
-                string value,
+                string                  value,
                 in Func<FileInfo, bool> filtration,
-                in string pattern = "*",
-                in SearchOption option = SearchOption.TopDirectoryOnly)
+                in string               pattern = "*",
+                in SearchOption         option  = SearchOption.TopDirectoryOnly)
             {
                 if (!Directory.Exists(value)) return Array.Empty<string>();
                 value = System.IO.Path.GetFullPath(value).Replace('\\', System.IO.Path.AltDirectorySeparatorChar);
                 if (!value.Contains(Path.Project)) return Array.Empty<string>();
                 var len = Path.Project.Length + 1;
-                return AHelper.IO
-                    .GetFilesInfo(value, filtration, pattern, option)
-                    .Select(item => item.FullName.Substring(len).Replace('\\', '/'));
+                return AHelper.IO.GetFilesInfo(value, filtration, pattern, option).Select(item => item.FullName.Substring(len).Replace('\\', '/'));
             }
 
             /// <summary>
@@ -232,18 +227,18 @@ namespace AIO.UEditor
             /// <param name="option">查找模式</param>
             /// <returns>以Assets路径为节点的路径数组</returns>
             public static IEnumerable<string> GetFilesRelativeAssetNoMeta(
-                string value,
+                string               value,
                 Func<FileInfo, bool> filtration,
-                string pattern = "*",
-                SearchOption option = SearchOption.TopDirectoryOnly)
+                string               pattern = "*",
+                SearchOption         option  = SearchOption.TopDirectoryOnly)
             {
                 if (!Directory.Exists(value)) return Array.Empty<string>();
                 value = System.IO.Path.GetFullPath(value).Replace('\\', System.IO.Path.AltDirectorySeparatorChar);
                 if (!value.Contains(Path.Project)) return Array.Empty<string>();
                 var len = Path.Project.Length + 1;
                 return from item in AHelper.IO.GetFilesInfo(value, filtration, pattern, option)
-                    where !item.Extension.Contains(".meta")
-                    select item.FullName.Substring(len).Replace('\\', '/');
+                       where !item.Extension.Contains(".meta")
+                       select item.FullName.Substring(len).Replace('\\', '/');
             }
 
             /// <summary>
@@ -254,18 +249,20 @@ namespace AIO.UEditor
             /// <param name="option">查找模式</param>
             /// <returns>以Assets路径为节点的路径数组</returns>
             public static IEnumerable<string> GetFilesRelativeAssetNoMeta(
-                string value,
-                in SearchOption option = SearchOption.TopDirectoryOnly,
-                in string pattern = "*")
+                string          value,
+                in SearchOption option  = SearchOption.TopDirectoryOnly,
+                in string       pattern = "*")
             {
                 if (!Directory.Exists(value)) return Array.Empty<string>();
                 value = System.IO.Path.GetFullPath(value).Replace('\\', System.IO.Path.AltDirectorySeparatorChar);
                 if (!value.StartsWith(Path.Project)) return Array.Empty<string>();
                 var len = Path.Project.Length + 1;
                 return from item in AHelper.IO.GetFilesInfo(value, pattern, option)
-                    where !item.Extension.Contains(".meta")
-                    select item.FullName.Substring(len).Replace('\\', '/');
+                       where !item.Extension.Contains(".meta")
+                       select item.FullName.Substring(len).Replace('\\', '/');
             }
         }
+
+        #endregion
     }
 }

@@ -1,13 +1,9 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-07-11
-
-|||✩ - - - - - |*/
+﻿#region
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using AIO;
+
+#endregion
 
 namespace AIO
 {
@@ -16,17 +12,27 @@ namespace AIO
     /// </summary>
     /// <typeparam name="E">对象池泛型</typeparam>
     /// <typeparam name="T">实体泛型</typeparam>
-    public abstract partial class PoolTypeSystem<T, E> : IDisposable where T : PoolTypeSystem<T, E>, new()
+    public abstract partial class PoolTypeSystem<T, E> : IDisposable
+    where T : PoolTypeSystem<T, E>, new()
     {
         /// <summary>
         /// 构造函数
         /// </summary>
         public PoolTypeSystem()
         {
-            BusyPool = Pool.Dictionary<int, List<E>>();
-            FreePool = Pool.Dictionary<int, Queue<E>>();
+            BusyPool  = Pool.Dictionary<int, List<E>>();
+            FreePool  = Pool.Dictionary<int, Queue<E>>();
             Surviving = Pool.Dictionary<int, E>();
         }
+
+        #region IDisposable Members
+
+        /// <summary>
+        /// 释放
+        /// </summary>
+        public virtual void Dispose() { }
+
+        #endregion
 
         /// <summary>
         ///  获取实体唯一ID
@@ -46,15 +52,6 @@ namespace AIO
         /// <summary>
         ///  清空缓存数据
         /// </summary>
-        protected virtual void ClearCache()
-        {
-        }
-
-        /// <summary>
-        /// 释放
-        /// </summary>
-        public virtual void Dispose()
-        {
-        }
+        protected virtual void ClearCache() { }
     }
 }

@@ -1,17 +1,18 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Diagnostics;
+
+#endregion
 
 namespace AIO.UEditor
 {
     /// <summary>
     /// 激活状态检视器 - 参数condition为激活条件判断方法的名称，返回值必须为bool
     /// </summary>
-    [AttributeUsage(AttributeTargets.Field)]
-    [Conditional("UNITY_EDITOR")]
+    [AttributeUsage(AttributeTargets.Field), Conditional("UNITY_EDITOR")]
     public sealed class EnableAttribute : InspectorAttribute
     {
-        public string Condition { get; private set; }
-
         /// <summary>
         /// 激活状态检视器
         /// </summary>
@@ -20,5 +21,7 @@ namespace AIO.UEditor
         {
             Condition = condition;
         }
+
+        public string Condition { get; private set; }
     }
 }

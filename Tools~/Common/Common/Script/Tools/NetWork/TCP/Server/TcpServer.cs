@@ -1,9 +1,13 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+
+#endregion
 
 namespace AIO.Net
 {
@@ -11,41 +15,33 @@ namespace AIO.Net
     /// TCP server is used to connect, disconnect and manage TCP sessions
     /// </summary>
     /// <remarks>Thread-safe</remarks>
-    public partial class TcpServer : NetServer
+    public class TcpServer : NetServer
     {
         /// <summary>
         /// Initialize TCP server with a given IP address and port number / 使用给定的IP地址和端口号初始化TCP服务器
         /// </summary>
         /// <param name="address">IP address</param>
         /// <param name="port">Port number</param>
-        public TcpServer(IPAddress address, int port) : this(new IPEndPoint(address, port))
-        {
-        }
+        public TcpServer(IPAddress address, int port) : this(new IPEndPoint(address, port)) { }
 
         /// <summary>
         /// Initialize TCP server with a given IP address and port number / 使用给定的IP地址和端口号初始化TCP服务器
         /// </summary>
         /// <param name="address">IP address</param>
         /// <param name="port">Port number</param>
-        public TcpServer(string address, int port) : this(new IPEndPoint(IPAddress.Parse(address), port))
-        {
-        }
+        public TcpServer(string address, int port) : this(new IPEndPoint(IPAddress.Parse(address), port)) { }
 
         /// <summary>
         /// Initialize TCP server with a given DNS endpoint / 使用给定的DNS端点初始化TCP服务器
         /// </summary>
         /// <param name="endpoint">DNS endpoint</param>
-        public TcpServer(DnsEndPoint endpoint) : base(endpoint, endpoint.Host, endpoint.Port)
-        {
-        }
+        public TcpServer(DnsEndPoint endpoint) : base(endpoint, endpoint.Host, endpoint.Port) { }
 
         /// <summary>
         /// Initialize TCP server with a given IP endpoint / 使用给定的IP端点初始化TCP服务器
         /// </summary>
         /// <param name="endpoint">IP endpoint</param>
-        public TcpServer(IPEndPoint endpoint) : base(endpoint, endpoint.Address.ToString(), endpoint.Port)
-        {
-        }
+        public TcpServer(IPEndPoint endpoint) : base(endpoint, endpoint.Address.ToString(), endpoint.Port) { }
 
         /// <summary>
         /// Number of sessions connected to the server / 连接到服务器的会话数
@@ -72,10 +68,39 @@ namespace AIO.Net
         /// </summary>
         public NetSettingServer Option { get; } = new NetSettingServer();
 
+        #region Session factory
+
+        /// <summary>
+        /// Create TCP session factory method
+        /// </summary>
+        /// <returns>TCP session</returns>
+        protected virtual TcpSession CreateSession()
+        {
+            return new TcpSession(this);
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Send error notification
+        /// </summary>
+        /// <param name="error">Socket error code</param>
+        protected override void SendError(SocketError error)
+        {
+            // Skip disconnect errors
+            if (error == SocketError.ConnectionAborted ||
+                error == SocketError.ConnectionRefused ||
+                error == SocketError.ConnectionReset ||
+                error == SocketError.OperationAborted ||
+                error == SocketError.Shutdown
+               ) return;
+            OnError(error);
+        }
+
         #region Start/Stop server
 
         // Server acceptor
-        private Socket AcceptorSocket;
+        private Socket               AcceptorSocket;
         private SocketAsyncEventArgs AcceptorEventArg;
 
         // Server statistic
@@ -112,7 +137,7 @@ namespace AIO.Net
             if (IsStarted) return false;
 
             // Setup acceptor event arg
-            AcceptorEventArg = new SocketAsyncEventArgs();
+            AcceptorEventArg           =  new SocketAsyncEventArgs();
             AcceptorEventArg.Completed += OnAsyncCompleted;
 
             // Create a new acceptor socket
@@ -123,10 +148,10 @@ namespace AIO.Net
 
             // Apply the option: reuse address
             AcceptorSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress,
-                Option.ReuseAddress);
+                                           Option.ReuseAddress);
             // Apply the option: exclusive address use
             AcceptorSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ExclusiveAddressUse,
-                Option.ExclusiveAddressUse);
+                                           Option.ExclusiveAddressUse);
             // Apply the option: dual mode (this option must be applied before listening)
             if (AcceptorSocket.AddressFamily == AddressFamily.InterNetworkV6)
                 AcceptorSocket.DualMode = Option.DualMode;
@@ -143,8 +168,8 @@ namespace AIO.Net
             AcceptorSocket.Listen(Option.AcceptorBacklog);
 
             // Reset statistic
-            _bytesPending = 0;
-            _bytesSent = 0;
+            _bytesPending  = 0;
+            _bytesSent     = 0;
             _bytesReceived = 0;
 
             // Update the started flag
@@ -190,9 +215,7 @@ namespace AIO.Net
                 // Update the acceptor socket disposed flag
                 IsSocketDisposed = true;
             }
-            catch (ObjectDisposedException)
-            {
-            }
+            catch (ObjectDisposedException) { }
 
             // Disconnect all sessions
             DisconnectAll();
@@ -248,7 +271,9 @@ namespace AIO.Net
                 session.Connect(e.AcceptSocket);
             }
             else
+            {
                 SendError(e.SocketError);
+            }
 
             // Accept the next client connection
             if (IsAccepting)
@@ -265,19 +290,6 @@ namespace AIO.Net
                 return;
 
             ProcessAccept(e);
-        }
-
-        #endregion
-
-        #region Session factory
-
-        /// <summary>
-        /// Create TCP session factory method
-        /// </summary>
-        /// <returns>TCP session</returns>
-        protected virtual TcpSession CreateSession()
-        {
-            return new TcpSession(this);
         }
 
         #endregion
@@ -381,33 +393,25 @@ namespace AIO.Net
         /// Handle session connecting notification
         /// </summary>
         /// <param name="session">Connecting session</param>
-        protected virtual void OnConnecting(TcpSession session)
-        {
-        }
+        protected virtual void OnConnecting(TcpSession session) { }
 
         /// <summary>
         /// Handle session connected notification
         /// </summary>
         /// <param name="session">Connected session</param>
-        protected virtual void OnConnected(TcpSession session)
-        {
-        }
+        protected virtual void OnConnected(TcpSession session) { }
 
         /// <summary>
         /// Handle session disconnecting notification
         /// </summary>
         /// <param name="session">Disconnecting session</param>
-        protected virtual void OnDisconnecting(TcpSession session)
-        {
-        }
+        protected virtual void OnDisconnecting(TcpSession session) { }
 
         /// <summary>
         /// Handle session disconnected notification
         /// </summary>
         /// <param name="session">Disconnected session</param>
-        protected virtual void OnDisconnected(TcpSession session)
-        {
-        }
+        protected virtual void OnDisconnected(TcpSession session) { }
 
         internal void OnConnectingInternal(TcpSession session)
         {
@@ -430,21 +434,5 @@ namespace AIO.Net
         }
 
         #endregion
-
-        /// <summary>
-        /// Send error notification
-        /// </summary>
-        /// <param name="error">Socket error code</param>
-        protected override void SendError(SocketError error)
-        {
-            // Skip disconnect errors
-            if (error == SocketError.ConnectionAborted ||
-                error == SocketError.ConnectionRefused ||
-                error == SocketError.ConnectionReset ||
-                error == SocketError.OperationAborted ||
-                error == SocketError.Shutdown
-               ) return;
-            OnError(error);
-        }
     }
 }

@@ -1,9 +1,15 @@
-﻿using UnityEditor;
+﻿#region
+
+using UnityEditor;
+
+#endregion
 
 namespace AIO.UEditor
 {
     public static partial class Behavior
     {
+        #region Nested type: InitializeOnLoadMethod
+
         /// <summary>
         /// 编辑器行为时间监听
         /// </summary>
@@ -12,17 +18,22 @@ namespace AIO.UEditor
             [InitializeOnLoadMethod]
             private static void Initialize()
             {
-                EditorApplication.playModeStateChanged -= EidtorQuit;
-                EditorApplication.playModeStateChanged += EidtorQuit;
+                EditorApplication.playModeStateChanged -= EditorQuit;
+                EditorApplication.playModeStateChanged += EditorQuit;
             }
 
-            private static void EidtorQuit(PlayModeStateChange value)
+            private static void EditorQuit(PlayModeStateChange value)
             {
-                if (value == PlayModeStateChange.ExitingPlayMode)
-                {
-                    // TO DO
-                }
+                // switch (value)
+                // {
+                //     case PlayModeStateChange.ExitingPlayMode:
+                //     case PlayModeStateChange.EnteredEditMode:
+                //         AInitializeOnLoad.InitializeOnLoadMethod();
+                //         break;
+                // }
             }
         }
+
+        #endregion
     }
 }

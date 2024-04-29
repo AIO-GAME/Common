@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
     public partial class PrCmd
     {
+        #region Nested type: Del
+
         /// <summary>
         /// 删除 不区分文件与目录
         /// </summary>
@@ -57,5 +63,7 @@ namespace AIO
                 return Create().Input(string.Format("{0} \"{1}\" /f /q /a {2}", CMD_Del, target.Replace('/', '\\'), attributes));
             }
         }
+
+        #endregion
     }
 }

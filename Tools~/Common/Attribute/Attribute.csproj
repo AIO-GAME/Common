@@ -1,112 +1,112 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FB87A31E-75AD-48A0-85B1-6BD42BDC4B81}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AIO</RootNamespace>
-    <AssemblyName>AIO.Attribute</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>bin\Debug\AIO.Attribute.xml</DocumentationFile>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>bin\Release\AIO.Attribute.xml</DocumentationFile>
-    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Script\Common\VisibleToOtherModulesAttribute.cs" />
-    <Compile Include="Script\DllAutomation\DllAutomation.Async.cs" />
-    <Compile Include="Script\DllAutomation\DllAutomation.cs" />
-    <Compile Include="Script\DllAutomation\DllAutomation.Sync.cs" />
-    <Compile Include="Script\DllAutomation\DllAutomationAttribute.cs" />
-    <Compile Include="Script\DllAutomation\IDllAutomation.cs" />
-    <Compile Include="Script\SettingsProvider\DefaultProvider.cs" />
-    <Compile Include="Script\SettingsProvider\PortableSettingsProvider.cs" />
-    <Compile Include="Script\SettingsProvider\Settings.cs" />
-    <Compile Include="Script\SettingsProvider\TestSettingsProvider.cs" />
-    <Compile Include="Script\SystemAutomation\ISystemAutomation.cs" />
-    <Compile Include="Script\SystemAutomation\SystemAutomation.Async.cs" />
-    <Compile Include="Script\SystemAutomation\SystemAutomation.cs" />
-    <Compile Include="Script\SystemAutomation\SystemAttribute.cs" />
-    <Compile Include="Script\SystemAutomation\SystemAutomation.Sync.cs" />
-    <Compile Include="Script\Enum\ERuntimePlatform.cs" />
-    <Compile Include="Script\GCommand\Exception\GCommandDuplicationKeyException.cs" />
-    <Compile Include="Script\GCommand\Exception\GCommandException.cs" />
-    <Compile Include="Script\GCommand\Exception\GCommandInvokeException.cs" />
-    <Compile Include="Script\GCommand\Exception\GCommandNotFoundException.cs" />
-    <Compile Include="Script\GCommand\Exception\GCommandNotSupportedException.cs" />
-    <Compile Include="Script\GCommand\Exception\GCommandParameterException.cs" />
-    <Compile Include="Script\GCommand\Exception\GCommandResolverException.cs" />
-    <Compile Include="Script\GCommand\Exception\GCommandVerifyException.cs" />
-    <Compile Include="Script\GCommand\GCommandSearchDatabase.cs" />
-    <Compile Include="Script\GCommand\GCommandAttribute.cs" />
-    <Compile Include="Script\GCommand\GCommandSystem.cs" />
-    <Compile Include="Setting\Strings.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PreBuildEvent>@cd /d $(SolutionDir)
-@cd ..
-@set cur=%25cd%25\Plugins\
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{FB87A31E-75AD-48A0-85B1-6BD42BDC4B81}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>AIO</RootNamespace>
+        <AssemblyName>AIO.Attribute</AssemblyName>
+        <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+        <Deterministic>true</Deterministic>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE;UNITY;</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <DocumentationFile>bin\Debug\AIO.Attribute.xml</DocumentationFile>
+        <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>DEBUG;TRACE;UNITY;</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <DocumentationFile>bin\Release\AIO.Attribute.xml</DocumentationFile>
+        <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    </PropertyGroup>
+    <PropertyGroup>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="System"/>
+        <Reference Include="System.Configuration"/>
+        <Reference Include="System.Core"/>
+        <Reference Include="System.Xml.Linq"/>
+        <Reference Include="Microsoft.CSharp"/>
+        <Reference Include="System.Data"/>
+        <Reference Include="System.Xml"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="Script\Common\VisibleToOtherModulesAttribute.cs"/>
+        <Compile Include="Script\DllAutomation\DllAutomation.Async.cs"/>
+        <Compile Include="Script\DllAutomation\DllAutomation.cs"/>
+        <Compile Include="Script\DllAutomation\DllAutomation.Sync.cs"/>
+        <Compile Include="Script\DllAutomation\DllAutomationAttribute.cs"/>
+        <Compile Include="Script\DllAutomation\IDllAutomation.cs"/>
+        <Compile Include="Script\SettingsProvider\DefaultProvider.cs"/>
+        <Compile Include="Script\SettingsProvider\PortableSettingsProvider.cs"/>
+        <Compile Include="Script\SettingsProvider\Settings.cs"/>
+        <Compile Include="Script\SettingsProvider\TestSettingsProvider.cs"/>
+        <Compile Include="Script\SystemAutomation\ISystemAutomation.cs"/>
+        <Compile Include="Script\SystemAutomation\SystemAutomation.Async.cs"/>
+        <Compile Include="Script\SystemAutomation\SystemAutomation.cs"/>
+        <Compile Include="Script\SystemAutomation\SystemAttribute.cs"/>
+        <Compile Include="Script\SystemAutomation\SystemAutomation.Sync.cs"/>
+        <Compile Include="Script\Enum\ERuntimePlatform.cs"/>
+        <Compile Include="Script\GCommand\Exception\GCommandDuplicationKeyException.cs"/>
+        <Compile Include="Script\GCommand\Exception\GCommandException.cs"/>
+        <Compile Include="Script\GCommand\Exception\GCommandInvokeException.cs"/>
+        <Compile Include="Script\GCommand\Exception\GCommandNotFoundException.cs"/>
+        <Compile Include="Script\GCommand\Exception\GCommandNotSupportedException.cs"/>
+        <Compile Include="Script\GCommand\Exception\GCommandParameterException.cs"/>
+        <Compile Include="Script\GCommand\Exception\GCommandResolverException.cs"/>
+        <Compile Include="Script\GCommand\Exception\GCommandVerifyException.cs"/>
+        <Compile Include="Script\GCommand\GCommandSearchDatabase.cs"/>
+        <Compile Include="Script\GCommand\GCommandAttribute.cs"/>
+        <Compile Include="Script\GCommand\GCommandSystem.cs"/>
+        <Compile Include="Setting\Strings.cs"/>
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <PropertyGroup>
+        <PreBuildEvent>@cd /d $(SolutionDir)
+            @cd ..
+            @set cur=%25cd%25\Plugins\
 
-@set dllname=$(TargetName)
-@if exist %25cur%25%25dllname%25.dll (
-@del /s /q %25cur%25%25dllname%25.dll
-)
-@if exist %25cur%25%25dllname%25.xml (
-@del /s /q %25cur%25%25dllname%25.xml
-)
-</PreBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PostBuildEvent>@set CUR_DLL=$(ProjectDir)$(OutDir)
-@cd /d $(SolutionDir)
-@cd ..
-@set cur=%25cd%25\Plugins\
+            @set dllname=$(TargetName)
+            @if exist %25cur%25%25dllname%25.dll (
+            @del /s /q %25cur%25%25dllname%25.dll
+            )
+            @if exist %25cur%25%25dllname%25.xml (
+            @del /s /q %25cur%25%25dllname%25.xml
+            )
+        </PreBuildEvent>
+    </PropertyGroup>
+    <PropertyGroup>
+        <PostBuildEvent>@set CUR_DLL=$(ProjectDir)$(OutDir)
+            @cd /d $(SolutionDir)
+            @cd ..
+            @set cur=%25cd%25\Plugins\
 
-@set dllname=$(TargetName)
-@if exist %25CUR_DLL%25%25dllname%25.dll (
-@copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll
-)
-@if exist %25CUR_DLL%25%25dllname%25.xml (
-@copy /y /v %25CUR_DLL%25%25dllname%25.xml %25cur%25%25dllname%25.xml
-)
-</PostBuildEvent>
-  </PropertyGroup>
+            @set dllname=$(TargetName)
+            @if exist %25CUR_DLL%25%25dllname%25.dll (
+            @copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll
+            )
+            @if exist %25CUR_DLL%25%25dllname%25.xml (
+            @copy /y /v %25CUR_DLL%25%25dllname%25.xml %25cur%25%25dllname%25.xml
+            )
+        </PostBuildEvent>
+    </PropertyGroup>
 </Project>

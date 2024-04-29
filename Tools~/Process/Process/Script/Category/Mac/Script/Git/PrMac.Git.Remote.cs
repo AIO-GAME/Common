@@ -4,15 +4,21 @@
 
 |||✩ - - - - - |*/
 
+#region
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
+#endregion
+
 namespace AIO
 {
     public partial class PrMac
     {
+        #region Nested type: Git
+
         public partial class Git
         {
             /// <summary>
@@ -22,7 +28,7 @@ namespace AIO
             /// <param name="quit">自动退出</param>
             public static IExecutor RemoteSetUrl(string targets, bool quit = true)
             {
-                return RemoteSetUrl(new string[] { targets }, quit);
+                return RemoteSetUrl(new[] { targets }, quit);
             }
 
             /// <summary>
@@ -70,5 +76,7 @@ namespace AIO
                 return Execute(str, quit);
             }
         }
+
+        #endregion
     }
 }

@@ -4,8 +4,12 @@
 |*|E-Mail:     |*| xinansky99@foxmail.com
 |*|============|*/
 
+#region
+
 using System;
 using System.Collections.Generic;
+
+#endregion
 
 namespace AIO
 {
@@ -50,7 +54,7 @@ namespace AIO
         /// <param name="messageUrl">图片地址</param>
         /// <param name="picUrl">消息链接</param>
         public static IExecutor SendLink(
-            string title, string content, string messageUrl, string picUrl,
+            string title,  string content, string messageUrl, string picUrl,
             string remote, string secret = null)
         {
             var data = new Msg();
@@ -66,7 +70,7 @@ namespace AIO
         /// <param name="title">标题</param>
         /// <param name="content">内容</param>
         public static IExecutor SendMarkdown(
-            string title, string content,
+            string title,  string content,
             string remote, string secret = null)
         {
             var data = new Msg();
@@ -84,7 +88,7 @@ namespace AIO
         /// <param name="singleTitle">单个按钮的标题</param>
         /// <param name="singleURL">点击消息跳转的URL</param>
         public static IExecutor SendActionCard(
-            string title, string content, string singleTitle, string singleURL,
+            string title,  string content, string singleTitle, string singleURL,
             string remote, string secret = null)
         {
             var data = new Msg();
@@ -102,7 +106,7 @@ namespace AIO
         /// <param name="buttons">按钮 ket:按钮标题 value:点击按钮触发的URL</param>
         /// <param name="btnOrientation">0：按钮竖直排列 other：按钮横向排列</param>
         public static IExecutor SendActionCard(
-            string title, string content, IDictionary<string, string> buttons, int btnOrientation,
+            string title,  string content, IDictionary<string, string> buttons, int btnOrientation,
             string remote, string secret = null)
         {
             var data = new Msg();
@@ -121,7 +125,7 @@ namespace AIO
         /// item1[picURL]:单条信息后面图片的URL
         /// </param>
         public static IExecutor SendFeedCard(IEnumerable<Tuple<string, string, string>> links,
-            string remote, string secret = null)
+                                             string                                     remote, string secret = null)
         {
             var data = new Msg();
             data.ToFeedCard(links);
@@ -148,8 +152,8 @@ namespace AIO
         /// 430104              含有不合适的图片      请确认发送的内容合法
         /// 430105              含有不合适的内容      请确认发送的内容合法
         /// </returns>
-        public static IExecutor SendData(Msg data,
-            string remote, string secret = null)
+        public static IExecutor SendData(Msg    data,
+                                         string remote, string secret = null)
         {
             return Post(remote, secret, data);
         }

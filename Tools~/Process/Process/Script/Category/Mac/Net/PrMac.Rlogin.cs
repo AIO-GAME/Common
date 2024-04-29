@@ -2,6 +2,8 @@
 {
     public partial class PrMac
     {
+        #region Nested type: Rlogin
+
         /// <summary>
         /// 远程登录
         /// </summary>
@@ -15,5 +17,7 @@
                 return Create(CMD_Rlogin, command);
             }
         }
+
+        #endregion
     }
 }

@@ -73,6 +73,6 @@
         /// <summary>
         /// Unity Shader
         /// </summary>
-        UnityShader,
+        UnityShader
     }
 }

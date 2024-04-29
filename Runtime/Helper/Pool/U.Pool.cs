@@ -1,10 +1,16 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using UnityEngine;
+
+#endregion
 
 namespace AIO
 {
     partial class RHelper
     {
+        #region Nested type: Pool
+
         /// <summary>
         /// 对象池
         /// </summary>
@@ -23,7 +29,8 @@ namespace AIO
             /// <param name="parent">父物体</param>
             /// <typeparam name="T"></typeparam>
             /// <returns></returns>
-            public static T CheckOut<T>(in Object prefab, in Transform parent = null) where T : Cacheable
+            public static T CheckOut<T>(in Object prefab, in Transform parent = null)
+            where T : Cacheable
             {
                 switch (prefab)
                 {
@@ -46,7 +53,8 @@ namespace AIO
             /// <param name="parent"></param>
             /// <typeparam name="T"></typeparam>
             /// <returns></returns>
-            public static T CheckOut<T>(in GameObject prefab, in Transform parent = null) where T : Cacheable
+            public static T CheckOut<T>(in GameObject prefab, in Transform parent = null)
+            where T : Cacheable
             {
                 return CheckOut(prefab.GetComponent<T>(), parent);
             }
@@ -58,7 +66,8 @@ namespace AIO
             /// <param name="parent"></param>
             /// <typeparam name="T"></typeparam>
             /// <returns></returns>
-            public static T CheckOut<T>(in Component prefab, in Transform parent = null) where T : Cacheable
+            public static T CheckOut<T>(in Component prefab, in Transform parent = null)
+            where T : Cacheable
             {
                 return CheckOut(prefab.GetComponent<T>(), parent);
             }
@@ -70,7 +79,8 @@ namespace AIO
             /// <param name="parent"></param>
             /// <typeparam name="T"></typeparam>
             /// <returns></returns>
-            public static T CheckOut<T>(in T prefab, in Transform parent = null) where T : Cacheable
+            public static T CheckOut<T>(in T prefab, in Transform parent = null)
+            where T : Cacheable
             {
                 if (!Cache.TryGetValue(prefab, out var cache))
                 {
@@ -120,13 +130,11 @@ namespace AIO
             public static void Reduce(in Cacheable prefab, in int count)
             {
                 if (Cache.TryGetValue(prefab, out var cache))
-                {
                     while (cache.Count > count)
                     {
                         var c = cache.Pop();
                         if (c) Object.Destroy(c.gameObject);
                     }
-                }
             }
 
             /// <summary>
@@ -136,13 +144,11 @@ namespace AIO
             public static void ReduceAll(in int count)
             {
                 foreach (var cache in Cache.Values)
-                {
                     while (cache.Count > count)
                     {
                         var c = cache.Pop();
                         if (c) Object.Destroy(c.gameObject);
                     }
-                }
             }
 
             /// <summary>
@@ -162,5 +168,7 @@ namespace AIO
                 }
             }
         }
+
+        #endregion
     }
 }

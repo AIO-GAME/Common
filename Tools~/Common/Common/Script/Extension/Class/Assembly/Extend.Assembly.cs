@@ -1,23 +1,21 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-06-27
-
-|||✩ - - - - - |*/
+﻿#region
 
 using System;
 using System.IO;
 using System.Reflection;
 
+#endregion
+
 namespace AIO
 {
     /// <summary>
-    /// 程序集扩展
+    ///     程序集扩展
     /// </summary>
-    public static partial class ExtendAssembly
+    public static class ExtendAssembly
     {
         /// <summary>
-        /// 程序集目录的完整路径，没有最后的斜杠 |
-        /// Full path to the assembly directory, without final slash
+        ///     程序集目录的完整路径，没有最后的斜杠 |
+        ///     Full path to the assembly directory, without final slash
         /// </summary>
         public static string Directory(this Assembly assembly)
         {

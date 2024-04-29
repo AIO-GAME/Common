@@ -2,6 +2,8 @@
 {
     public partial class PrMac
     {
+        #region Nested type: Ftp
+
         /// <summary>
         /// 在本地主机与远程主机之间传输文件
         /// </summary>
@@ -15,5 +17,7 @@
                 return Create(CMD_Ftp, command);
             }
         }
+
+        #endregion
     }
 }

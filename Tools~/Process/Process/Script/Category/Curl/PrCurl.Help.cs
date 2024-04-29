@@ -4,8 +4,12 @@
 |*|E-Mail:     |*| xinansky99@foxmail.com
 |*|============|*/
 
+#region
+
 using System.Diagnostics;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {

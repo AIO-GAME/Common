@@ -56,5 +56,5 @@ public enum EPrint
     /// <summary>
     /// 日志 警告 错误 异常
     /// </summary>
-    ALL = Log | Warn | Error | Exception,
+    ALL = Log | Warn | Error | Exception
 }

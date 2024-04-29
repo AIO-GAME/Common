@@ -1,10 +1,16 @@
+#region
+
 using System.Runtime.CompilerServices;
 using System.Text;
+
+#endregion
 
 namespace AIO
 {
     public partial class AHelper
     {
+        #region Nested type: IO
+
         public partial class IO
         {
             /// <summary>
@@ -26,9 +32,9 @@ namespace AIO
             /// <param name="concat">Ture:追加 False:覆盖</param>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool WriteUnicode(
-                in string path,
+                in string        path,
                 in StringBuilder text,
-                in bool concat = false)
+                in bool          concat = false)
             {
                 return WriteText(path, text.ToString(), Encoding.Unicode, concat);
             }
@@ -43,10 +49,12 @@ namespace AIO
             public static bool WriteUnicode(
                 in string path,
                 in string text,
-                in bool concat = false)
+                in bool   concat = false)
             {
                 return WriteText(path, text, Encoding.Unicode, concat);
             }
         }
+
+        #endregion
     }
 }
