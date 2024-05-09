@@ -47,8 +47,47 @@ namespace AIO
 
         private static void LoadAsset1() { Console.WriteLine("222222222222222"); }
 
+        private class MyClass
+        {
+            /// <summary>
+            ///  领奖状态(0-待领奖 1-已领奖)
+            /// </summary>
+            public int DrawState;
+
+            /// <summary>
+            /// 任务状态(0-待完成 1-已完成)
+            /// </summary>
+            public int FinishState;
+
+            public int TaskId;
+        }
+
         static void Test()
         {
+            var list = new List<MyClass>();
+            for (var i = 1; i <= 3; i++) list.Add(new MyClass { DrawState = 0, FinishState = 1, TaskId = i });
+            for (var i = 1; i <= 3; i++) list.Add(new MyClass { DrawState = 0, FinishState = 0, TaskId = 3 + i });
+            for (var i = 1; i <= 3; i++) list.Add(new MyClass { DrawState = 1, FinishState = 1, TaskId = i + 6 });
+
+
+            var sort = list.OrderBy(a => a.DrawState).ThenByDescending(a => a.FinishState).ThenBy(a => a.TaskId).ToList();
+            foreach (var item in sort)
+            {
+                if (item.FinishState == 1 && item.DrawState == 0)
+                {
+                    Console.WriteLine("ID:" + item.TaskId + "可领奖");
+                    continue;
+                }
+
+                if (item.FinishState == 0)
+                {
+                    Console.WriteLine("ID:" + item.TaskId + "未完成");
+                    continue;
+                }
+
+                Console.WriteLine("ID:" + item.TaskId + "已领奖");
+            }
+
             // // 将 aIntPtr 指针替换为 bIntPtr 指针
             // unsafe
             // {
@@ -143,20 +182,20 @@ namespace AIO
             //     Console.WriteLine(variable + " ");
             // }
 
-            dis.Clear();
-            dis.Add(new int[] { 124, 3334, 3675, 8329, 8329, 5341 });
-
-            dis.Update();
-            Console.WriteLine("--------------------");
-            curTime = DateTime.Now;
-            dis.Sort(c, ESort.Select);
-            Console.WriteLine($"排序耗时 : {DateTime.Now - curTime} -> 快速排序");
-            index = 0;
-            foreach (var variable in dis)
-            {
-                if (index++ > dis.PageSize) break;
-                Console.WriteLine("                     " + variable);
-            }
+            // dis.Clear();
+            // dis.Add(new int[] { 124, 3334, 3675, 8329, 8329, 5341 });
+            //
+            // dis.Update();
+            // Console.WriteLine("--------------------");
+            // curTime = DateTime.Now;
+            // dis.Sort(c, ESort.Select);
+            // Console.WriteLine($"排序耗时 : {DateTime.Now - curTime} -> 快速排序");
+            // index = 0;
+            // foreach (var variable in dis)
+            // {
+            //     if (index++ > dis.PageSize) break;
+            //     Console.WriteLine("                     " + variable);
+            // }
 
             // dis.Clear();
             // for (var i = 10000; i >= 0; i--) dis.Add(AHelper.Random.RandInt32(0, 10000));
