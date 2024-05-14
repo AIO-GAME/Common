@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Threading.Tasks;
 using AIO;
 
@@ -24,7 +25,7 @@ namespace UnityEngine
         where T : IEnumerable<Action>
         {
             if (IsNotOut || NoStatus(LOG)) return;
-            var all = new UPrintElapse(title).Start();
+            var all   = new UPrintElapse(title).Start();
             var index = 1;
             foreach (var action in actions)
                 using (var p = new UPrintElapse(index++.ToString()).Start())
@@ -291,7 +292,7 @@ namespace UnityEngine
         where T : IEnumerable<Task>
         {
             if (IsNotOut || NoStatus(LOG)) return;
-            var all = new UPrintElapse(title).Start();
+            var all   = new UPrintElapse(title).Start();
             var index = 1;
             foreach (var action in actions)
                 using (var p = new UPrintElapse(index++.ToString()).Start())
@@ -347,11 +348,10 @@ namespace UnityEngine
         {
             public UPrintElapse(in string title) : base(title) { }
 
-            public override void Finish(string format = "g")
+            protected internal override void Finish(string format = "g")
             {
                 stopWatch.Stop();
-                Log(string.Format("{0} {1} {2}",
-                                  $"[<color=#E47833><b>{stopWatch.Elapsed.ToString(format)}</b></color>]".PadRight(30), "->", Title));
+                Log($"{$"[<color=#E47833><b>{stopWatch.Elapsed.ToString(format, CultureInfo.CurrentCulture)}</b></color>]",-30} -> {Title}");
             }
         }
 

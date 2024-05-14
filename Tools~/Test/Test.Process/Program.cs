@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 
@@ -64,6 +65,21 @@ namespace AIO
 
         static void Test()
         {
+            var path = "E:\\Project\\AIO\\com.whoot.gf.security\\Runtime\\Encryptions\\MD5Encryption.cs";
+            var testA    = File.OpenRead(path);
+            CPrint.Run("A", () =>
+            {
+                Console.WriteLine(testA.GetMD5());
+            });
+            CPrint.Run("B", () =>
+            {
+                Console.WriteLine(testA.MD5String());
+            });
+
+            Console.WriteLine(PrWin.Certutil.MD5(path).Sync().ToString());
+            return;
+
+
             var list = new List<MyClass>();
             for (var i = 1; i <= 3; i++) list.Add(new MyClass { DrawState = 0, FinishState = 1, TaskId = i });
             for (var i = 1; i <= 3; i++) list.Add(new MyClass { DrawState = 0, FinishState = 0, TaskId = 3 + i });

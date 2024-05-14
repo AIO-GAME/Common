@@ -480,8 +480,10 @@
     <Compile Include="Script\Extension\Class\Sort\ValueType.IList.cs" />
     <Compile Include="Script\Extension\Class\Sort\Sort.Counting.cs" />
     <Compile Include="Script\Extension\Class\Sort\Sort.Radix.cs" />
-    <Compile Include="Script\Extension\Class\Stream\Stream.Extend.cs" />
+    <Compile Include="Script\Extension\Class\Stream\Stream.Extend.Encrypt.cs" />
     <Compile Include="Script\Extension\Class\StringBuilder\StringBuilder.Extend.cs" />
+    <Compile Include="Script\Extension\Class\String\String.Extend.MD5Encryption.cs" />
+    <Compile Include="Script\Extension\Class\String\String.Extend.Encrypt.cs" />
     <Compile Include="Script\Extension\Class\String\String.Extend.Append.cs" />
     <Compile Include="Script\Extension\Class\String\String.Extend.Contains.cs" />
     <Compile Include="Script\Extension\Class\String\String.Extend.cs" />
@@ -743,6 +745,8 @@
     <Compile Include="Script\Interface\Write\IWriteUInt16.cs" />
     <Compile Include="Script\Interface\Write\IWriteUInt32.cs" />
     <Compile Include="Script\Interface\Write\IWriteUInt64.cs" />
+    <Compile Include="Script\Security\Encryptions\AESEncryption.cs" />
+    <Compile Include="Script\Security\Encryptions\DESCEncryption.cs" />
     <Compile Include="Script\Tools\Array\DisplayList.cs" />
     <Compile Include="Script\Tools\Array\PageDictionary.cs" />
     <Compile Include="Script\Tools\Array\PageList.cs" />

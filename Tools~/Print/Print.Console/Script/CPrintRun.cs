@@ -34,7 +34,7 @@ namespace AIO
         where T : IEnumerable<Task>
         {
             if (IsNotOut || NoStatus(LOG)) return;
-            var all = new CPrintElapse(title).Start();
+            var all   = new CPrintElapse(title).Start();
             var index = 1;
             foreach (var action in actions)
                 using (var p = new CPrintElapse(index++.ToString()).Start())
@@ -54,7 +54,7 @@ namespace AIO
         where T : IEnumerable<Action>
         {
             if (IsNotOut || NoStatus(LOG)) return;
-            var all = new CPrintElapse(title).Start();
+            var all   = new CPrintElapse(title).Start();
             var index = 1;
             foreach (var action in actions)
                 using (var p = new CPrintElapse(index++.ToString()).Start())
@@ -99,7 +99,10 @@ namespace AIO
         ///  输出详细执行时间
         /// </summary>
         [Conditional(MACRO_DEFINITION)]
-        public static void Run(in string title, in Action action0, in Action action1, in Action action2,
+        public static void Run(in string title,
+                               in Action action0,
+                               in Action action1,
+                               in Action action2,
                                in string format = "g")
         {
             if (IsNotOut || NoStatus(LOG)) return;
@@ -116,8 +119,12 @@ namespace AIO
         /// 输出详细执行时间
         /// </summary>
         [Conditional(MACRO_DEFINITION)]
-        public static void Run(in string title,   in Action action0, in Action action1, in Action action2,
-                               in Action action3, in string format = "g")
+        public static void Run(in string title,
+                               in Action action0,
+                               in Action action1,
+                               in Action action2,
+                               in Action action3,
+                               in string format = "g")
         {
             if (IsNotOut || NoStatus(LOG)) return;
             using (var p = new CPrintElapse(title).Start())
@@ -148,8 +155,11 @@ namespace AIO
         /// 输出详细执行时间
         /// </summary>
         [Conditional(MACRO_DEFINITION)]
-        public static void Run<T, V>(in string title, in Action<T, V> action, in T tValue, in V vValue,
-                                     in string format = "g")
+        public static void Run<T, V>(in string       title,
+                                     in Action<T, V> action,
+                                     in T            tValue,
+                                     in V            vValue,
+                                     in string       format = "g")
         {
             if (IsNotOut || NoStatus(LOG)) return;
             using (var p = new CPrintElapse(title).Start())
@@ -163,8 +173,12 @@ namespace AIO
         /// 输出详细执行时间
         /// </summary>
         [Conditional(MACRO_DEFINITION)]
-        public static void Run<T, V, W>(in string title,  in Action<T, V, W> action, in T tValue, in V vValue,
-                                        in W      wValue, in string          format = "g")
+        public static void Run<T, V, W>(in string          title,
+                                        in Action<T, V, W> action,
+                                        in T               tValue,
+                                        in V               vValue,
+                                        in W               wValue,
+                                        in string          format = "g")
         {
             if (IsNotOut || NoStatus(LOG)) return;
             using (var p = new CPrintElapse(title).Start())
@@ -178,8 +192,13 @@ namespace AIO
         /// 输出详细执行时间
         /// </summary>
         [Conditional(MACRO_DEFINITION)]
-        public static void Run<T, V, W, Z>(in string title,  in Action<T, V, W, Z> action, in T      tValue, in V vValue,
-                                           in W      wValue, in Z                  zValue, in string format = "g")
+        public static void Run<T, V, W, Z>(in string             title,
+                                           in Action<T, V, W, Z> action,
+                                           in T                  tValue,
+                                           in V                  vValue,
+                                           in W                  wValue,
+                                           in Z                  zValue,
+                                           in string             format = "g")
         {
             if (IsNotOut || NoStatus(LOG)) return;
             using (var p = new CPrintElapse(title).Start())
@@ -198,10 +217,10 @@ namespace AIO
         {
             public CPrintElapse(string title) : base(title) { }
 
-            public override void Finish(string format = "g")
+            protected internal override void Finish(string format = "g")
             {
                 stopWatch.Stop();
-                Log(string.Format(CultureInfo.CurrentCulture, "{0}=>[{1}]", Title, stopWatch.Elapsed.ToString(format)));
+                Log($"{$"{stopWatch.Elapsed.ToString(format, CultureInfo.CurrentCulture)}",-10} -> {Title}");
             }
         }
 
