@@ -63,28 +63,32 @@ namespace AIO
             public int TaskId;
         }
 
-        static void Test()
+        private static void Test()
         {
             var path = "E:\\Project\\AIO\\com.whoot.gf.security\\Runtime\\Encryptions\\MD5Encryption.cs";
-            var testA    = File.OpenRead(path);
-            CPrint.Run("A", () =>
+            var tA2  = File.Open(path, FileMode.Open, FileAccess.Read);
+            Console.WriteLine(tA2.GetMD5());
+            tA2.Close();
+            CPrint.Run("A1", () =>
             {
+                var testA = File.Open(path, FileMode.Open, FileAccess.Read);
                 Console.WriteLine(testA.GetMD5());
+                testA.Close();
             });
-            CPrint.Run("B", () =>
+            CPrint.Run("A2", () =>
             {
-                Console.WriteLine(testA.MD5String());
+                var testA1 = File.Open(path, FileMode.Open, FileAccess.Read);
+                Console.WriteLine(testA1.GetMD5Digest());
+                testA1.Close();
             });
-
-            Console.WriteLine(PrWin.Certutil.MD5(path).Sync().ToString());
+            Console.WriteLine("-------------------");
+            Console.WriteLine(PrWin.Certutil.GetMD5(path));
             return;
-
 
             var list = new List<MyClass>();
             for (var i = 1; i <= 3; i++) list.Add(new MyClass { DrawState = 0, FinishState = 1, TaskId = i });
             for (var i = 1; i <= 3; i++) list.Add(new MyClass { DrawState = 0, FinishState = 0, TaskId = 3 + i });
             for (var i = 1; i <= 3; i++) list.Add(new MyClass { DrawState = 1, FinishState = 1, TaskId = i + 6 });
-
 
             var sort = list.OrderBy(a => a.DrawState).ThenByDescending(a => a.FinishState).ThenBy(a => a.TaskId).ToList();
             foreach (var item in sort)

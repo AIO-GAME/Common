@@ -1,0 +1,58 @@
+﻿<#@ template language="C#" linePragmas="true" visibility="public"#>
+<#@ output extension=".cs" encoding="utf-8" #>
+<#
+    var NUMBER = new[]
+    {
+        "bool",
+        "sbyte",
+        "short",
+        "int",
+        "long",
+        "byte",
+        "ushort",
+        "uint",
+        "ulong",
+        "char",
+        "string",
+        "float",
+        "double",
+        "decimal"
+    };
+#>
+using System;
+using System.Runtime.InteropServices;
+
+namespace AIO.Security
+{
+    partial struct NChar
+    {
+<#
+    foreach (var item in NUMBER)
+    {
+#>
+        #region <#= item #>
+
+        /// <param name="value"> <see cref="<#= item #>"/> </param>
+        public NChar(<#= item #> value = default)
+        {
+            _value    = 0;
+            _offset   = 0;
+            _oldValue = ' ';
+            try
+            {
+                Value = Convert.ToChar(value);
+            }
+            catch
+            {
+                Console.WriteLine($"无法将{value}变为{Value.GetType()},已改为{char.MinValue}");
+                Value = char.MinValue;
+            }
+        }
+
+        #endregion
+
+<#
+    }
+#>
+    }
+}

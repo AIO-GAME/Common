@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.NUnit", "Test\Test.NUn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T4", "T4\T4.csproj", "{DAE98AF0-7556-4CD9-86D9-3859586EE956}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security", "Common\Security\Security.csproj", "{FB87A31E-75AD-48A0-85B1-6BD42BDC4B81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -303,6 +305,8 @@ Global
 		{DAE98AF0-7556-4CD9-86D9-3859586EE956}.Release|x64.Build.0 = Release|x64
 		{DAE98AF0-7556-4CD9-86D9-3859586EE956}.Release|x86.ActiveCfg = Release|x86
 		{DAE98AF0-7556-4CD9-86D9-3859586EE956}.Release|x86.Build.0 = Release|x86
+		{FB87A31E-75AD-48A0-85B1-6BD42BDC4B81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB87A31E-75AD-48A0-85B1-6BD42BDC4B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,5 +9,7 @@
   &lt;Assembly Path="C:\Users\admin\.nuget\packages\system.buffers\4.5.1\ref\net45\System.Buffers.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\admin\.nuget\packages\system.numerics.vectors\4.5.0\ref\net46\System.Numerics.Vectors.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\admin\.nuget\packages\system.runtime.compilerservices.unsafe\4.5.3\ref\net461\System.Runtime.CompilerServices.Unsafe.dll" /&gt;&#xD;
+  &lt;Assembly Path="D:\JetBrains\JetBrains Rider 2023.2.1\plugins\rider-plugins-for-tea\dotnet\JetBrains.TextTemplating.dll" /&gt;&#xD;
+  &lt;Assembly Path="D:\JetBrains\JetBrains Rider 2023.2.1\lib\ReSharperHost\EnvDTE.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
 	</wpf:ResourceDictionary>

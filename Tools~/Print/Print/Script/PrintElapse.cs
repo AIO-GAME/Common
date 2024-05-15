@@ -61,7 +61,7 @@ namespace AIO
         /// <summary>
         /// 完成
         /// </summary>
-        /// <param name="format"></param>
+        /// <param name="format">时间格式</param>
         protected internal abstract void Finish(string format = "g");
 
         /// <summary>

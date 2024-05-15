@@ -778,96 +778,180 @@
                 缓冲区大小
             </summary>
         </member>
-        <member name="M:AIO.StreamExtend.GetMD5(System.IO.Stream,System.Int64)">
+        <member name="M:AIO.StreamExtend.GetMD5(System.IO.Stream,System.Int32)">
             <summary>
-                获取MD5
+                获取 MD5
             </summary>
-            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得MD5
-            实现稍微复杂，但可使用与传输文件或接收文件时同步计算MD5值
-            可自定义缓冲区大小，计算速度较快
             <param name="stream">流数据</param>
             <param name="bufferSize">容器大小</param>
-            <returns>MD5</returns>
-        </member>
-        <member name="M:AIO.StreamExtend.GetMD5Async(System.IO.Stream,System.Int64,System.Threading.CancellationToken)">
-            <summary>
-                获取MD5
-            </summary>
+            <returns>MD5 value</returns>
+            <remarks>
             通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得MD5
             实现稍微复杂，但可使用与传输文件或接收文件时同步计算MD5值
             可自定义缓冲区大小，计算速度较快
+            </remarks>
+        </member>
+        <member name="M:AIO.StreamExtend.GetMD5Async(System.IO.Stream,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                获取MD5
+            </summary>
             <param name="stream">流数据</param>
             <param name="bufferSize">容器大小</param>
             <param name="cancellationToken">取消令牌</param>
+            <remarks>
+            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得MD5
+            实现稍微复杂，但可使用与传输文件或接收文件时同步计算MD5值
+            可自定义缓冲区大小，计算速度较快
+            </remarks>
             <returns>MD5</returns>
         </member>
-        <member name="M:AIO.StreamExtend.GetSHA1Async(System.IO.Stream,System.Int64,System.Threading.CancellationToken)">
+        <member name="M:AIO.StreamExtend.GetMD5Digest(System.IO.Stream,System.Int32)">
+            <summary>
+            计算文件的sha256 摘要值
+            </summary>
+            <param name="stream">数据流</param>
+            <param name="bufferSize">容器大小</param>
+            <returns>sha256摘要字符串</returns>
+        </member>
+        <member name="M:AIO.StreamExtend.GetSHA1(System.IO.Stream,System.Int32)">
+            <summary>
+                获取 SHA1
+            </summary>
+            <param name="stream">流数据</param>
+            <param name="bufferSize">容器大小</param>
+            <returns>SHA1 value</returns>
+            <remarks>
+            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得SHA1
+            实现稍微复杂，但可使用与传输文件或接收文件时同步计算SHA1值
+            可自定义缓冲区大小，计算速度较快
+            </remarks>
+        </member>
+        <member name="M:AIO.StreamExtend.GetSHA1Async(System.IO.Stream,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 获取SHA1
             </summary>
             <param name="stream">流数据</param>
             <param name="bufferSize">容器大小</param>
             <param name="cancellationToken">取消令牌</param>
+            <remarks>
+            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得SHA1
+            实现稍微复杂，但可使用与传输文件或接收文件时同步计算SHA1值
+            可自定义缓冲区大小，计算速度较快
+            </remarks>
             <returns>SHA1</returns>
         </member>
-        <member name="M:AIO.StreamExtend.GetSHA1(System.IO.Stream,System.Int64)">
+        <member name="M:AIO.StreamExtend.GetSHA1Digest(System.IO.Stream,System.Int32)">
             <summary>
-                获取SHA1
+            计算文件的sha256 摘要值
             </summary>
+            <param name="stream">数据流</param>
             <param name="bufferSize">容器大小</param>
-            <param name="stream">流数据</param>
-            <returns>SHA1</returns>
+            <returns>sha256摘要字符串</returns>
         </member>
-        <member name="M:AIO.StreamExtend.GetSHA256Async(System.IO.Stream,System.Int64,System.Threading.CancellationToken)">
+        <member name="M:AIO.StreamExtend.GetSHA256(System.IO.Stream,System.Int32)">
+            <summary>
+                获取 SHA256
+            </summary>
+            <param name="stream">流数据</param>
+            <param name="bufferSize">容器大小</param>
+            <returns>SHA256 value</returns>
+            <remarks>
+            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得SHA256
+            实现稍微复杂，但可使用与传输文件或接收文件时同步计算SHA256值
+            可自定义缓冲区大小，计算速度较快
+            </remarks>
+        </member>
+        <member name="M:AIO.StreamExtend.GetSHA256Async(System.IO.Stream,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 获取SHA256
             </summary>
             <param name="stream">流数据</param>
             <param name="bufferSize">容器大小</param>
             <param name="cancellationToken">取消令牌</param>
-            <returns>SHA1</returns>
+            <remarks>
+            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得SHA256
+            实现稍微复杂，但可使用与传输文件或接收文件时同步计算SHA256值
+            可自定义缓冲区大小，计算速度较快
+            </remarks>
+            <returns>SHA256</returns>
         </member>
-        <member name="M:AIO.StreamExtend.GetSHA256(System.IO.Stream,System.Int64)">
+        <member name="M:AIO.StreamExtend.GetSHA256Digest(System.IO.Stream,System.Int32)">
             <summary>
-                获取SHA256
+            计算文件的sha256 摘要值
             </summary>
+            <param name="stream">数据流</param>
             <param name="bufferSize">容器大小</param>
-            <param name="stream">流数据</param>
-            <returns>SHA1</returns>
+            <returns>sha256摘要字符串</returns>
         </member>
-        <member name="M:AIO.StreamExtend.GetSHA384Async(System.IO.Stream,System.Int64,System.Threading.CancellationToken)">
+        <member name="M:AIO.StreamExtend.GetSHA384(System.IO.Stream,System.Int32)">
+            <summary>
+                获取 SHA384
+            </summary>
+            <param name="stream">流数据</param>
+            <param name="bufferSize">容器大小</param>
+            <returns>SHA384 value</returns>
+            <remarks>
+            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得SHA384
+            实现稍微复杂，但可使用与传输文件或接收文件时同步计算SHA384值
+            可自定义缓冲区大小，计算速度较快
+            </remarks>
+        </member>
+        <member name="M:AIO.StreamExtend.GetSHA384Async(System.IO.Stream,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 获取SHA384
             </summary>
             <param name="stream">流数据</param>
             <param name="bufferSize">容器大小</param>
             <param name="cancellationToken">取消令牌</param>
-            <returns>SHA1</returns>
+            <remarks>
+            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得SHA384
+            实现稍微复杂，但可使用与传输文件或接收文件时同步计算SHA384值
+            可自定义缓冲区大小，计算速度较快
+            </remarks>
+            <returns>SHA384</returns>
         </member>
-        <member name="M:AIO.StreamExtend.GetSHA384(System.IO.Stream,System.Int64)">
+        <member name="M:AIO.StreamExtend.GetSHA384Digest(System.IO.Stream,System.Int32)">
             <summary>
-                获取SHA384
+            计算文件的sha256 摘要值
             </summary>
+            <param name="stream">数据流</param>
             <param name="bufferSize">容器大小</param>
-            <param name="stream">流数据</param>
-            <returns>SHA1</returns>
+            <returns>sha256摘要字符串</returns>
         </member>
-        <member name="M:AIO.StreamExtend.GetSHA512Async(System.IO.Stream,System.Int64,System.Threading.CancellationToken)">
+        <member name="M:AIO.StreamExtend.GetSHA512(System.IO.Stream,System.Int32)">
+            <summary>
+                获取 SHA512
+            </summary>
+            <param name="stream">流数据</param>
+            <param name="bufferSize">容器大小</param>
+            <returns>SHA512 value</returns>
+            <remarks>
+            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得SHA512
+            实现稍微复杂，但可使用与传输文件或接收文件时同步计算SHA512值
+            可自定义缓冲区大小，计算速度较快
+            </remarks>
+        </member>
+        <member name="M:AIO.StreamExtend.GetSHA512Async(System.IO.Stream,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 获取SHA512
             </summary>
             <param name="stream">流数据</param>
             <param name="bufferSize">容器大小</param>
             <param name="cancellationToken">取消令牌</param>
-            <returns>SHA1</returns>
+            <remarks>
+            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得SHA512
+            实现稍微复杂，但可使用与传输文件或接收文件时同步计算SHA512值
+            可自定义缓冲区大小，计算速度较快
+            </remarks>
+            <returns>SHA512</returns>
         </member>
-        <member name="M:AIO.StreamExtend.GetSHA512(System.IO.Stream,System.Int64)">
+        <member name="M:AIO.StreamExtend.GetSHA512Digest(System.IO.Stream,System.Int32)">
             <summary>
-                获取SHA512
+            计算文件的sha256 摘要值
             </summary>
+            <param name="stream">数据流</param>
             <param name="bufferSize">容器大小</param>
-            <param name="stream">流数据</param>
-            <returns>SHA1</returns>
+            <returns>sha256摘要字符串</returns>
         </member>
         <member name="T:AIO.ExtendStringBuilder">
             <summary>
@@ -887,28 +971,28 @@
                 字符工具类
             </summary>
         </member>
-        <member name="M:AIO.ExtendString.MD5String(System.String)">
+        <member name="M:AIO.ExtendString.GetMD5Digest(System.String)">
             <summary>
                 对字符串进行MD5摘要
             </summary>
             <param name="message">需要摘要的字符串</param>
             <returns>MD5摘要字符串</returns>
         </member>
-        <member name="M:AIO.ExtendString.MD5String2(System.String)">
+        <member name="M:AIO.ExtendString.GetMD5Digest2(System.String)">
             <summary>
                 对字符串进行MD5二次摘要
             </summary>
             <param name="message">需要摘要的字符串</param>
             <returns>MD5摘要字符串</returns>
         </member>
-        <member name="M:AIO.ExtendString.MD5String3(System.String)">
+        <member name="M:AIO.ExtendString.GetMD5Digest3(System.String)">
             <summary>
             MD5 三次摘要算法
             </summary>
             <param name="s">需要摘要的字符串</param>
             <returns>MD5摘要字符串</returns>
         </member>
-        <member name="M:AIO.ExtendString.MD5String(System.String,System.String)">
+        <member name="M:AIO.ExtendString.GetMD5Digest(System.String,System.String)">
             <summary>
                 对字符串进行MD5加盐摘要
             </summary>
@@ -916,7 +1000,7 @@
             <param name="salt">盐</param>
             <returns>MD5摘要字符串</returns>
         </member>
-        <member name="M:AIO.ExtendString.MD5String2(System.String,System.String)">
+        <member name="M:AIO.ExtendString.GetMD5Digest2(System.String,System.String)">
             <summary>
                 对字符串进行MD5二次加盐摘要
             </summary>
@@ -924,33 +1008,12 @@
             <param name="salt">盐</param>
             <returns>MD5摘要字符串</returns>
         </member>
-        <member name="M:AIO.ExtendString.MD5String3(System.String,System.String)">
+        <member name="M:AIO.ExtendString.GetMD5Digest3(System.String,System.String)">
             <summary>
             MD5 三次摘要算法
             </summary>
             <param name="s">需要摘要的字符串</param>
             <param name="salt">盐</param>
-            <returns>MD5摘要字符串</returns>
-        </member>
-        <member name="M:AIO.ExtendString.MDFile(System.String)">
-            <summary>
-            获取文件的MD5值
-            </summary>
-            <param name="fileName">需要求MD5值的文件的文件名及路径</param>
-            <returns>MD5摘要字符串</returns>
-        </member>
-        <member name="M:AIO.ExtendString.SHA256(System.IO.Stream)">
-            <summary>
-            计算文件的sha256
-            </summary>
-            <param name="stream"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.ExtendString.MD5String(System.IO.Stream)">
-            <summary>
-            获取数据流的MD5摘要值
-            </summary>
-            <param name="stream"></param>
             <returns>MD5摘要字符串</returns>
         </member>
         <member name="M:AIO.ExtendString.EncryptBase64(System.String,System.Text.Encoding)">
@@ -6775,12 +6838,12 @@
             获取文件属性
             </summary>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFileMD5(System.String,System.Int64)">
+        <member name="M:AIO.AHelper.IO.GetFileMD5(System.String,System.Int32)">
             <summary>
             获取文件的MD5值
             </summary>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFileMD5Async(System.String,System.Int64)">
+        <member name="M:AIO.AHelper.IO.GetFileMD5Async(System.String,System.Int32)">
             <summary>
             获取文件的MD5值
             </summary>
@@ -6795,7 +6858,7 @@
                <paramref name="path" /> 不存在
             </exception>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFileSHA1Async(System.String,System.Int64)">
+        <member name="M:AIO.AHelper.IO.GetFileSHA1Async(System.String,System.Int32)">
             <summary>
             获取文件SHA1
             </summary>
@@ -6816,7 +6879,7 @@
                <paramref name="path" /> 不存在
             </exception>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFileSHA256Async(System.String,System.Int64)">
+        <member name="M:AIO.AHelper.IO.GetFileSHA256Async(System.String,System.Int32)">
             <summary>
             获取文件SHA256
             </summary>
@@ -6837,7 +6900,7 @@
                <paramref name="path" /> 不存在
             </exception>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFileSHA384Async(System.String,System.Int64)">
+        <member name="M:AIO.AHelper.IO.GetFileSHA384Async(System.String,System.Int32)">
             <summary>
             获取文件SHA384
             </summary>
@@ -6858,7 +6921,7 @@
                <paramref name="path" /> 不存在
             </exception>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFileSHA512Async(System.String,System.Int64)">
+        <member name="M:AIO.AHelper.IO.GetFileSHA512Async(System.String,System.Int32)">
             <summary>
             获取文件SHA512
             </summary>
@@ -12952,215 +13015,6 @@
             <summary>
             写入指定数据类型
             </summary>
-        </member>
-        <member name="T:AIO.Security.AESEncryption">
-            <summary>
-            AES加密
-            </summary>
-        </member>
-        <member name="M:AIO.Security.AESEncryption.GenerateAesKey(System.Int32)">
-            <summary>
-            生成符合AES加密规则的密钥
-            </summary>
-            <param name="length"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AIO.Security.AESEncryption.AESEncrypt(System.String,System.String,System.Security.Cryptography.CipherMode)">
-            <summary>
-            对称加密算法AES(块式加密算法)
-            </summary>
-            <param name="encryptString">待加密字符串</param>
-            <param name="encryptKey">加密密钥，须半角字符</param>
-            <param name="mode">加密模式</param>
-            <returns>加密结果字符串</returns>
-        </member>
-        <member name="M:AIO.Security.AESEncryption.AESEncrypt(System.String,System.Security.Cryptography.Aes)">
-            <summary>
-            对称加密算法AES加密(块式加密算法)
-            </summary>
-            <param name="encryptString">待加密字符串</param>
-            <param name="options">加密选项</param>
-            <returns>加密结果字符串</returns>
-        </member>
-        <member name="M:AIO.Security.AESEncryption.AESEncrypt(System.String,System.Byte[],System.Security.Cryptography.CipherMode)">
-            <summary>
-            对称加密算法AES加密(块式加密算法)
-            </summary>
-            <param name="encryptString">待加密字符串</param>
-            <param name="encryptKey">加密密钥，须半角字符</param>
-            <param name="mode">加密模式</param>
-            <returns>加密结果字符串</returns>
-        </member>
-        <member name="M:AIO.Security.AESEncryption.AESDecrypt(System.String,System.String,System.Security.Cryptography.CipherMode)">
-            <summary>
-            对称加密算法AES解密字符串
-            </summary>
-            <param name="decryptString">待解密的字符串</param>
-            <param name="decryptKey">解密密钥,和加密密钥相同</param>
-            <param name="mode">加密模式</param>
-            <returns>解密成功返回解密后的字符串,失败返回空</returns>
-        </member>
-        <member name="M:AIO.Security.AESEncryption.AESDecrypt(System.String,System.Security.Cryptography.Aes)">
-            <summary>
-            对称加密算法AES解密字符串
-            </summary>
-            <param name="decryptString">待解密的字符串</param>
-            <param name="options">加密选项</param>
-            <returns>解密成功返回解密后的字符串,失败返回空</returns>
-        </member>
-        <member name="M:AIO.Security.AESEncryption.AESDecrypt(System.String,System.Byte[],System.Security.Cryptography.CipherMode)">
-            <summary>
-            对称加密算法AES解密字符串
-            </summary>
-            <param name="decryptString">待解密的字符串</param>
-            <param name="decryptKey">解密密钥,和加密密钥相同</param>
-            <param name="mode">加密模式</param>
-            <returns>解密成功返回解密后的字符串,失败返回空</returns>
-        </member>
-        <member name="M:AIO.Security.AESEncryption.GetSubString(System.String,System.Int32,System.String)">
-            <summary>
-            按字节长度(按字节,一个汉字为2个字节)取得某字符串的一部分
-            </summary>
-            <param name="sourceString">源字符串</param>
-            <param name="length">所取字符串字节长度</param>
-            <param name="tailString">附加字符串(当字符串不够长时，尾部所添加的字符串，一般为"...")</param>
-            <returns>某字符串的一部分</returns>
-        </member>
-        <member name="M:AIO.Security.AESEncryption.GetSubString(System.String,System.Int32,System.Int32,System.String)">
-            <summary>
-            按字节长度(按字节,一个汉字为2个字节)取得某字符串的一部分
-            </summary>
-            <param name="sourceString">源字符串</param>
-            <param name="startIndex">索引位置，以0开始</param>
-            <param name="length">所取字符串字节长度</param>
-            <param name="tailString">附加字符串(当字符串不够长时，尾部所添加的字符串，一般为"...")</param>
-            <returns>某字符串的一部分</returns>
-        </member>
-        <member name="M:AIO.Security.AESEncryption.AESEncryptStream(System.IO.FileStream,System.String,System.Security.Cryptography.CipherMode)">
-            <summary>
-            加密文件流
-            </summary>
-            <param name="fs">需要加密的文件流</param>
-            <param name="decryptKey">加密密钥</param>
-            <param name="mode">加密模式</param>
-            <returns>加密流</returns>
-        </member>
-        <member name="M:AIO.Security.AESEncryption.AESEncryptStream(System.IO.FileStream,System.Byte[],System.Security.Cryptography.CipherMode)">
-            <summary>
-            加密文件流
-            </summary>
-            <param name="fs">需要加密的文件流</param>
-            <param name="decryptKey">加密密钥</param>
-            <param name="mode">加密模式</param>
-            <returns>加密流</returns>
-        </member>
-        <member name="M:AIO.Security.AESEncryption.AESDecryptStream(System.IO.FileStream,System.String,System.Security.Cryptography.CipherMode)">
-            <summary>
-            解密文件流
-            </summary>
-            <param name="fs">需要解密的文件流</param>
-            <param name="decryptKey">解密密钥</param>
-            <param name="mode">加密模式</param>
-            <returns>加密流</returns>
-        </member>
-        <member name="M:AIO.Security.AESEncryption.AESDecryptStream(System.IO.FileStream,System.Byte[],System.Security.Cryptography.CipherMode)">
-            <summary>
-            解密文件流
-            </summary>
-            <param name="fs">需要解密的文件流</param>
-            <param name="decryptKey">解密密钥</param>
-            <param name="mode">加密模式</param>
-            <returns>加密流</returns>
-        </member>
-        <member name="M:AIO.Security.AESEncryption.AESEncryptFile(System.IO.FileStream,System.String,System.String,System.Security.Cryptography.CipherMode)">
-            <summary>
-            对指定文件AES加密
-            </summary>
-            <param name="input">源文件流</param>
-            <param name="key">加密密钥</param>
-            <param name="mode">加密模式</param>
-            <param name="outputPath">输出文件路径</param>
-        </member>
-        <member name="M:AIO.Security.AESEncryption.AESDecryptFile(System.IO.FileStream,System.String,System.String,System.Security.Cryptography.CipherMode)">
-            <summary>
-            对指定的文件AES解密
-            </summary>
-            <param name="input">源文件流</param>
-            <param name="key">解密密钥</param>
-            <param name="mode">加密模式</param>
-            <param name="outputPath">输出文件路径</param>
-        </member>
-        <member name="M:AIO.Security.DESCEncryption.DesEncrypt(System.String,System.String)">
-            <summary> 
-            加密字符串
-            加密密钥必须为8位
-            </summary> 
-            <param name="strText">被加密的字符串</param> 
-            <param name="key">8位长度密钥</param> 
-            <returns>加密后的数据</returns> 
-        </member>
-        <member name="M:AIO.Security.DESCEncryption.DesEncrypt(System.String,System.Byte[],System.Byte[])">
-            <summary> 
-            加密字符串
-            加密密钥必须为8位
-            </summary> 
-            <param name="strText">被加密的字符串</param>
-            <param name="desKey"></param>
-            <param name="desIV"></param>
-            <returns>加密后的数据</returns> 
-        </member>
-        <member name="M:AIO.Security.DESCEncryption.DesEncrypt(System.IO.FileStream,System.String,System.String)">
-            <summary>
-            DES加密文件
-            </summary>
-            <param name="fin">文件输入流</param>
-            <param name="outFilePath">文件输出路径</param>
-            <param name="key">加密密钥</param>
-        </member>
-        <member name="M:AIO.Security.DESCEncryption.DesEncrypt(System.IO.FileStream,System.String,System.Byte[],System.Byte[])">
-            <summary>
-            DES加密文件
-            </summary>
-            <param name="fin">文件输入流</param>
-            <param name="outFilePath">文件输出路径</param>
-            <param name="desKey"></param>
-            <param name="desIV"></param>
-        </member>
-        <member name="M:AIO.Security.DESCEncryption.DesDecrypt(System.IO.FileStream,System.String,System.String)">
-            <summary>
-            DES解密文件
-            </summary>
-            <param name="fin">输入文件流</param>
-            <param name="outFilePath">文件输出路径</param>
-            <param name="sDecrKey">解密密钥</param>
-        </member>
-        <member name="M:AIO.Security.DESCEncryption.DesDecrypt(System.IO.FileStream,System.String,System.Byte[],System.Byte[])">
-            <summary>
-            DES解密文件
-            </summary>
-            <param name="fin">输入文件流</param>
-            <param name="outFilePath">文件输出路径</param>
-            <param name="desKey"></param>
-            <param name="desIV"></param>
-        </member>
-        <member name="M:AIO.Security.DESCEncryption.DesDecrypt(System.String,System.String)">
-            <summary>
-                DES解密算法
-                密钥为8位
-            </summary>
-            <param name="pToDecrypt">需要解密的字符串</param>
-            <param name="sKey">密钥</param>
-            <returns>解密后的数据</returns>
-        </member>
-        <member name="M:AIO.Security.DESCEncryption.DesDecrypt(System.String,System.Byte[],System.Byte[])">
-            <summary>
-                DES解密算法
-                密钥为8位
-            </summary>
-            <param name="pToDecrypt">需要解密的字符串</param>
-            <param name="desKey"></param>
-            <param name="desIV"></param>
-            <returns>解密后的数据</returns>
         </member>
         <member name="T:AIO.DisplayList`1">
             <summary>

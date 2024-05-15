@@ -193,6 +193,11 @@
     <Compile Include="Script\Category\Win\Git\PrWin.Git.Upload.cs" />
     <Compile Include="Script\Category\Win\Git\PrWin.Git.Reset.cs" />
     <Compile Include="Script\Category\Win\PrWin.Certutil.cs" />
+    <Compile Include="Script\Category\Win\PrWin.Certutil.Get.Generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrWin.Certutil.Get.Generated.tt</DependentUpon>
+    </Compile>
     <Compile Include="Script\Category\Win\PrWin.Comp.cs" />
     <Compile Include="Script\Category\Win\PrWin.MkLink.cs" />
     <Compile Include="Script\Category\Win\PrWin.Open.cs" />
@@ -224,6 +229,12 @@
       <Project>{b0d5708a-7c94-4bcb-805d-a718034e5724}</Project>
       <Name>Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Script\Category\Win\PrWin.Certutil.Get.Generated.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PrWin.Certutil.Get.Generated.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

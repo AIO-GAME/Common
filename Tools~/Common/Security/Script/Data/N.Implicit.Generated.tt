@@ -1,0 +1,162 @@
+<#@ template language="C#" linePragmas="true" visibility="public" hostspecific="True"#>
+<#@ output extension=".cs" encoding="utf-8" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ include file="Manager.ttinclude"#>
+<#
+    var NUMBER = new Dictionary<string, string>
+    {
+        ["NBool"] = "bool",
+        ["NSByte"] = "sbyte",
+        ["NShort"] = "short",
+        ["NInt"] = "int",
+        ["NLong"] = "long",
+        ["NByte"] = "byte",
+        ["NUShort"] = "ushort",
+        ["NUInt"] = "uint",
+        ["NULong"] = "ulong",
+        ["NChar"] = "char",
+        ["NString"] = "string",
+        ["NFloat"] = "float",
+        ["NDouble"] = "double",
+        ["NDecimal"] = "decimal",
+    };
+
+    var TO = new Dictionary<string, IList<string>> // Value to Key
+    {
+        ["NChar"] = [ "char", "byte", "ushort"],
+        ["NShort"] = [ "byte", "sbyte", "char", ],
+        ["NInt"] = [ "byte", "sbyte", "char", "short", "ushort",],
+        ["NLong"] = [  "byte", "sbyte","char", "short", "ushort", "int", "uint"],
+        ["NUShort"] = [ "byte",  "char",  ],
+        ["NUInt"] = [ "byte",  "char",  "ushort", ],
+        ["NULong"] = [ "byte",  "char",  "ushort", "uint", ],
+        ["NFloat"] = [ "byte",  "short", "ushort", "int", "uint", "long", "ulong", ],
+        ["NDouble"] = [ "byte",    "short", "ushort", "int", "uint", "long", "ulong", "float", ],
+        ["NDecimal"] = [ "byte",    "short", "ushort", "int", "uint", "long", "ulong", "float", "double", ],
+    };
+
+    var FORM = new Dictionary<string, IList<string>> // Key to Value
+    {
+        ["NChar"] = [ "long", "int", "uint", "ulong", ],
+        ["NInt"] = [ "char", "long", ],
+    };
+
+    foreach (var key in TO.Keys.ToArray())
+    {
+        var count = TO[key].Count;
+        if (count <= 0) continue;
+        for (var i = 0; i < count; i++)
+        {
+            var type = TO[key][i];
+            if (string.IsNullOrEmpty(type)) continue;
+            foreach (var pair in NUMBER.Where(pair => pair.Value == type))
+            {
+                TO[key].Add(pair.Key);
+                break;
+            }
+        }
+    }
+
+    foreach (var key in FORM.Keys.ToArray())
+    {
+        var count = FORM[key].Count;
+        if (count == 0) continue;
+        for (var i = 0; i < count; i++)
+        {
+            var type = FORM[key][i];
+            if (string.IsNullOrEmpty(type)) continue;
+            foreach (var pair in NUMBER.Where(pair => pair.Value == type))
+            {
+                FORM[key].Add(pair.Key);
+                break;
+            }
+        }
+    }
+    Initialize();
+    var manager = new Manager(Host, GenerationEnvironment, false, "Security")
+    {
+        OutputPath = Path.GetDirectoryName(Host.TemplateFile),
+    };
+#>
+
+using System;
+using System.IO;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Globalization;
+using System.Runtime.InteropServices;
+
+namespace AIO.Security
+{
+<#
+    foreach (var pair in NUMBER)
+    {
+        manager.StartBlock($"{pair.Key}.cs", "Data");
+#>
+    #region <#= pair.Key #>
+
+    /// <summary>
+    /// <#= pair.Key #> is <see cref="<#= pair.Value #>"/>
+    /// </summary>
+    [Serializable, ComVisible(true)]
+    partial struct <#= pair.Key #>
+    { 
+        /// <param name="value"> <see cref="<#= pair.Value #>"/> </param>
+        public static implicit operator <#= pair.Key #>(<#= pair.Value #> value) => new <#= pair.Key #>(value);
+
+        /// <param name="value"> <see cref="<#= pair.Key #>"/> </param>
+        public static implicit operator <#= pair.Value #>(<#= pair.Key #> value) => value.Value;
+<#
+        if (FORM.TryGetValue(pair.Key, out var fValue))
+        {
+            foreach (var item in fValue.Distinct())
+            {
+                if (item == pair.Value || item == pair.Key) continue;
+#>
+<#
+                if (NUMBER.ContainsKey(item))
+                {
+#>
+
+        /// <param name="value"> <see cref="<#= item #>"/> </param>
+        public static implicit operator <#= item #>(<#= pair.Key #> value) => new <#= item #>(value.Value);
+<#
+                }
+                else
+                {
+#>
+
+        /// <param name="value"> <see cref="<#= pair.Key #>"/> </param>
+        public static implicit operator <#= item #>(<#= pair.Key #> value) => (<#= item #>)value.Value;
+<#
+                }
+            }
+        }
+#>
+<#
+        if (TO.TryGetValue(pair.Key, out var tValue))
+        {
+            foreach (var item in tValue.Distinct())
+            {
+                if (item == pair.Value || item == pair.Key) continue;
+#>
+
+        /// <param name="value"> <see cref="<#= item #>"/> </param>
+        public static implicit operator <#= pair.Key #>(<#= item #> value) => new <#= pair.Key #>(value);
+<#
+            }
+        }
+#>
+
+    }
+
+    #endregion
+
+<#
+        manager.EndBlock();
+    }
+#>
+}
