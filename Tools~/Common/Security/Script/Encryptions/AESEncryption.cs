@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Buffers;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -364,15 +363,13 @@ namespace AIO.Security
         {
             using var fileStream    = new FileStream(outputPath, FileMode.Create);
             using var decryptStream = AESDecryptStream(input, key, mode);
-            var       bytes         = ArrayPool<byte>.Shared.Rent(1024);
+            var       bytes         = new byte[1024];
             while (true)
             {
                 var count = decryptStream.Read(bytes, 0, bytes.Length);
                 fileStream.Write(bytes, 0, count);
                 if (count < bytes.Length) break;
             }
-
-            ArrayPool<byte>.Shared.Return(bytes);
         }
     }
 }

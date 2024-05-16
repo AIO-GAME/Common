@@ -1,4 +1,6 @@
-﻿namespace AIO.Security
+﻿using System.Runtime.InteropServices;
+
+namespace AIO.Security
 {
     public partial struct NBool
     {

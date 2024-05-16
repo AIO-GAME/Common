@@ -1,10 +1,14 @@
-﻿using System;
+﻿
+
+
+using System;
 using System.Runtime.InteropServices;
 
 namespace AIO.Security
 {
     partial struct NDecimal
     {
+
         #region bool
 
         /// <param name="value"> <see cref="bool"/> </param>
@@ -25,6 +29,7 @@ namespace AIO.Security
         }
 
         #endregion
+
 
         #region sbyte
 
@@ -47,6 +52,7 @@ namespace AIO.Security
 
         #endregion
 
+
         #region short
 
         /// <param name="value"> <see cref="short"/> </param>
@@ -67,6 +73,7 @@ namespace AIO.Security
         }
 
         #endregion
+
 
         #region int
 
@@ -89,6 +96,7 @@ namespace AIO.Security
 
         #endregion
 
+
         #region long
 
         /// <param name="value"> <see cref="long"/> </param>
@@ -109,6 +117,7 @@ namespace AIO.Security
         }
 
         #endregion
+
 
         #region byte
 
@@ -131,6 +140,7 @@ namespace AIO.Security
 
         #endregion
 
+
         #region ushort
 
         /// <param name="value"> <see cref="ushort"/> </param>
@@ -151,6 +161,7 @@ namespace AIO.Security
         }
 
         #endregion
+
 
         #region uint
 
@@ -173,6 +184,7 @@ namespace AIO.Security
 
         #endregion
 
+
         #region ulong
 
         /// <param name="value"> <see cref="ulong"/> </param>
@@ -193,6 +205,7 @@ namespace AIO.Security
         }
 
         #endregion
+
 
         #region char
 
@@ -215,6 +228,7 @@ namespace AIO.Security
 
         #endregion
 
+
         #region string
 
         /// <param name="value"> <see cref="string"/> </param>
@@ -235,6 +249,7 @@ namespace AIO.Security
         }
 
         #endregion
+
 
         #region float
 
@@ -257,6 +272,7 @@ namespace AIO.Security
 
         #endregion
 
+
         #region double
 
         /// <param name="value"> <see cref="double"/> </param>
@@ -278,6 +294,7 @@ namespace AIO.Security
 
         #endregion
 
+
         #region decimal
 
         /// <param name="value"> <see cref="decimal"/> </param>
@@ -298,6 +315,7 @@ namespace AIO.Security
         }
 
         #endregion
+
 
     }
 }

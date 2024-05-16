@@ -1,9 +1,11 @@
 <#@ template language="C#" linePragmas="true" visibility="public" hostspecific="True"#>
-<#@ output extension=".cs" encoding="utf-8" #>
-<#@ import namespace="System.Collections.Generic" #>
-<#@ import namespace="System.Linq" #>
-<#@ include file="Manager.ttinclude"#>
-<#
+<#@ assembly name="mscorlib"
+#><#@ assembly name="System.Core"
+#><#@ output extension=".cs" encoding="utf-8" 
+#><#@ import namespace="System.Collections.Generic"
+#><#@ import namespace="System.Linq"
+#><#@ include file="Manager.ttinclude"
+#><#
     var NUMBER = new Dictionary<string, string>
     {
         ["NBool"] = "bool",
@@ -24,22 +26,103 @@
 
     var TO = new Dictionary<string, IList<string>> // Value to Key
     {
-        ["NChar"] = [ "char", "byte", "ushort"],
-        ["NShort"] = [ "byte", "sbyte", "char", ],
-        ["NInt"] = [ "byte", "sbyte", "char", "short", "ushort",],
-        ["NLong"] = [  "byte", "sbyte","char", "short", "ushort", "int", "uint"],
-        ["NUShort"] = [ "byte",  "char",  ],
-        ["NUInt"] = [ "byte",  "char",  "ushort", ],
-        ["NULong"] = [ "byte",  "char",  "ushort", "uint", ],
-        ["NFloat"] = [ "byte",  "short", "ushort", "int", "uint", "long", "ulong", ],
-        ["NDouble"] = [ "byte",    "short", "ushort", "int", "uint", "long", "ulong", "float", ],
-        ["NDecimal"] = [ "byte",    "short", "ushort", "int", "uint", "long", "ulong", "float", "double", ],
+        ["NChar"] = new List<string>
+        {
+            "char",
+            "byte",
+            "ushort"
+        },
+        ["NShort"] = new List<string>
+        {
+            "byte",
+            "sbyte",
+            "char",
+        },
+        ["NInt"] = new List<string>
+        {
+            "byte",
+            "sbyte",
+            "char",
+            "short",
+            "ushort",
+        },
+        ["NLong"] = new List<string>
+        {
+            "byte",
+            "sbyte",
+            "char",
+            "short",
+            "ushort",
+            "int",
+            "uint"
+        },
+        ["NUShort"] = new List<string>
+        {
+            "byte",
+            "char",
+        },
+        ["NUInt"] = new List<string>
+        {
+            "byte",
+            "char",
+            "ushort",
+        },
+        ["NULong"] = new List<string>
+        {
+            "byte",
+            "char",
+            "ushort",
+            "uint",
+        },
+        ["NFloat"] = new List<string>
+        {
+            "byte",
+            "short",
+            "ushort",
+            "int",
+            "uint",
+            "long",
+            "ulong",
+        },
+        ["NDouble"] = new List<string>
+        {
+            "byte",
+            "short",
+            "ushort",
+            "int",
+            "uint",
+            "long",
+            "ulong",
+            "float",
+        },
+        ["NDecimal"] = new List<string>
+        {
+            "byte",
+            "short",
+            "ushort",
+            "int",
+            "uint",
+            "long",
+            "ulong",
+            "float",
+            "double",
+        },
     };
 
     var FORM = new Dictionary<string, IList<string>> // Key to Value
     {
-        ["NChar"] = [ "long", "int", "uint", "ulong", ],
-        ["NInt"] = [ "char", "long", ],
+        ["NChar"] = new List<string>
+        {
+            "long",
+            "int",
+            "uint",
+            "ulong",
+        },
+        ["NInt"] = new List<string>
+        {
+            "char",
+            "long",
+        },
     };
 
     foreach (var key in TO.Keys.ToArray())
@@ -73,13 +156,17 @@
             }
         }
     }
+    
     Initialize();
-    var manager = new Manager(Host, GenerationEnvironment, false, "Security")
+    
+    var manager = new Manager(Host, GenerationEnvironment, "Security")
     {
         OutputPath = Path.GetDirectoryName(Host.TemplateFile),
     };
 #>
-
+<#
+    manager.StartHeader();
+#>
 using System;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -88,16 +175,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Globalization;
 using System.Runtime.InteropServices;
-
-namespace AIO.Security
-{
+<#
+    manager.EndHeader();
+#>
 <#
     foreach (var pair in NUMBER)
     {
-        manager.StartBlock($"{pair.Key}.cs", "Data");
+        manager.StartBlock($"{pair.Key}.Implicit.Generated.cs");
 #>
-    #region <#= pair.Key #>
 
+namespace AIO.Security
+{
     /// <summary>
     /// <#= pair.Key #> is <see cref="<#= pair.Value #>"/>
     /// </summary>
@@ -115,12 +203,9 @@ namespace AIO.Security
             foreach (var item in fValue.Distinct())
             {
                 if (item == pair.Value || item == pair.Key) continue;
-#>
-<#
                 if (NUMBER.ContainsKey(item))
                 {
 #>
-
         /// <param name="value"> <see cref="<#= item #>"/> </param>
         public static implicit operator <#= item #>(<#= pair.Key #> value) => new <#= item #>(value.Value);
 <#
@@ -128,7 +213,6 @@ namespace AIO.Security
                 else
                 {
 #>
-
         /// <param name="value"> <see cref="<#= pair.Key #>"/> </param>
         public static implicit operator <#= item #>(<#= pair.Key #> value) => (<#= item #>)value.Value;
 <#
@@ -143,20 +227,16 @@ namespace AIO.Security
             {
                 if (item == pair.Value || item == pair.Key) continue;
 #>
-
         /// <param name="value"> <see cref="<#= item #>"/> </param>
         public static implicit operator <#= pair.Key #>(<#= item #> value) => new <#= pair.Key #>(value);
 <#
             }
         }
 #>
-
     }
-
-    #endregion
-
+}
 <#
         manager.EndBlock();
     }
+    manager.Process();
 #>
-}

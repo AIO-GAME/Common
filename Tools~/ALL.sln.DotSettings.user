@@ -1,15 +1,19 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CTenncent_005CScript_005Ccom_002Eself_002Epackage_005CTools_007E_005CResources_005CPlugins_005CUnityEditor_002ECoreModule_002Edll/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CTenncent_005CScript_005Ccom_002Eself_002Epackage_005CTools_007E_005CResources_005CPlugins_005CUnityEditor_002Exml/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CTenncent_005CScript_005Ccom_002Eself_002Epackage_005CTools_007E_005CResources_005CPlugins_005CUnityEngine_002Edll/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CTenncent_005CScript_005Ccom_002Eself_002Epackage_005CTools_007E_005CResources_005CPlugins_005CUnityEngine_002EImageConversionModule_002Edll/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CTenncent_005CScript_005Ccom_002Eself_002Epackage_005CTools_007E_005CResources_005CPlugins_005CUnityEngine_002EIMGUIModule_002Edll/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=E_003A_005CTenncent_005CScript_005Ccom_002Eself_002Epackage_005CTools_007E_005CResources_005CPlugins_005CUnityEngine_002ETextRenderingModule_002Edll/@EntryIndexedValue">True</s:Boolean>
+	
+	
+	
+	
+	
+	
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Users\admin\.nuget\packages\system.buffers\4.5.1\ref\net45\System.Buffers.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\admin\.nuget\packages\system.numerics.vectors\4.5.0\ref\net46\System.Numerics.Vectors.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\admin\.nuget\packages\system.runtime.compilerservices.unsafe\4.5.3\ref\net461\System.Runtime.CompilerServices.Unsafe.dll" /&gt;&#xD;
   &lt;Assembly Path="D:\JetBrains\JetBrains Rider 2023.2.1\plugins\rider-plugins-for-tea\dotnet\JetBrains.TextTemplating.dll" /&gt;&#xD;
   &lt;Assembly Path="D:\JetBrains\JetBrains Rider 2023.2.1\lib\ReSharperHost\EnvDTE.dll" /&gt;&#xD;
+  &lt;Assembly Path="D:\JetBrains\JetBrains Rider 2023.2.1\lib\ReSharperHost\EnvDTE80.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Users\admin\AppData\Local\Temp\TextTemplating\Security\Script\Data\N.Implicit.Generated\GeneratedTransformation.exe" /&gt;&#xD;
+  &lt;Assembly Path="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.Core.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Windows\Microsoft.NET\Framework64\v4.0.30319\System.Core.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
 	</wpf:ResourceDictionary>
