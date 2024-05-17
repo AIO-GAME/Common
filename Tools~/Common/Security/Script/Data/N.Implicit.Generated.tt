@@ -1,7 +1,4 @@
-<#@ template language="C#" linePragmas="true" visibility="public" hostspecific="True"#>
-<#@ assembly name="mscorlib"
-#><#@ assembly name="System.Core"
-#><#@ output extension=".cs" encoding="utf-8" 
+<#@ template language="C#" visibility="public" hostspecific="True"
 #><#@ import namespace="System.Collections.Generic"
 #><#@ import namespace="System.Linq"
 #><#@ include file="Manager.ttinclude"
@@ -156,34 +153,22 @@
             }
         }
     }
-    
-    Initialize();
-    
+
     var manager = new Manager(Host, GenerationEnvironment, "Security")
     {
         OutputPath = Path.GetDirectoryName(Host.TemplateFile),
     };
-#>
-<#
     manager.StartHeader();
-#>
+ #>
+/* auto-generated */
 using System;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Globalization;
 using System.Runtime.InteropServices;
 <#
     manager.EndHeader();
-#>
-<#
     foreach (var pair in NUMBER)
     {
-        manager.StartBlock($"{pair.Key}.Implicit.Generated.cs");
+        manager.StartBlockTemplateName($"{pair.Key}.Implicit.cs", $"{pair.Key}.cs");
 #>
-
 namespace AIO.Security
 {
     /// <summary>
@@ -191,13 +176,13 @@ namespace AIO.Security
     /// </summary>
     [Serializable, ComVisible(true)]
     partial struct <#= pair.Key #>
-    { 
+    {
         /// <param name="value"> <see cref="<#= pair.Value #>"/> </param>
         public static implicit operator <#= pair.Key #>(<#= pair.Value #> value) => new <#= pair.Key #>(value);
 
         /// <param name="value"> <see cref="<#= pair.Key #>"/> </param>
         public static implicit operator <#= pair.Value #>(<#= pair.Key #> value) => value.Value;
-<#
+<# 
         if (FORM.TryGetValue(pair.Key, out var fValue))
         {
             foreach (var item in fValue.Distinct())
@@ -209,28 +194,26 @@ namespace AIO.Security
         /// <param name="value"> <see cref="<#= item #>"/> </param>
         public static implicit operator <#= item #>(<#= pair.Key #> value) => new <#= item #>(value.Value);
 <#
-                }
-                else
-                {
-#>
+    } 
+    else 
+    {
+#> 
         /// <param name="value"> <see cref="<#= pair.Key #>"/> </param>
         public static implicit operator <#= item #>(<#= pair.Key #> value) => (<#= item #>)value.Value;
 <#
                 }
             }
         }
-#>
-<#
         if (TO.TryGetValue(pair.Key, out var tValue))
         {
             foreach (var item in tValue.Distinct())
             {
                 if (item == pair.Value || item == pair.Key) continue;
-#>
+#>      
         /// <param name="value"> <see cref="<#= item #>"/> </param>
         public static implicit operator <#= pair.Key #>(<#= item #> value) => new <#= pair.Key #>(value);
 <#
-            }
+            } 
         }
 #>
     }

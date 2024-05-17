@@ -13,6 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <LangVersion>8</LangVersion>
+    <PublicSign>false</PublicSign>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,6 +41,9 @@
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -51,6 +55,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Script\Data\Manager.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Manager.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Data\N.Implicit.Generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>N.Implicit.Generated.tt</DependentUpon>
+    </Compile>
     <Compile Include="Script\Data\N.Operator.Generated.cs">
       <DependentUpon>N.Operator.Generated.tt</DependentUpon>
     </Compile>
@@ -58,27 +72,43 @@
       <DependentUpon>N.Override.Generated.tt</DependentUpon>
     </Compile>
     <Compile Include="Script\Data\NBool.cs" />
+    <Compile Include="Script\Data\NBool.Implicit.cs" />
     <Compile Include="Script\Data\NByte.cs" />
+    <Compile Include="Script\Data\NByte.Implicit.cs" />
     <Compile Include="Script\Data\NChar.Construction.Generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>NChar.Construction.Generated.tt</DependentUpon>
     </Compile>
     <Compile Include="Script\Data\NChar.cs" />
+    <Compile Include="Script\Data\NChar.Implicit.cs" />
     <Compile Include="Script\Data\NDecimal.Construction.Generated.cs">
-      <DependentUpon>NDecimal.Construction.Generated.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>NDecimal.Construction.Generated.tt</DependentUpon>
     </Compile>
     <Compile Include="Script\Data\NDecimal.cs" />
+    <Compile Include="Script\Data\NDecimal.Implicit.cs" />
     <Compile Include="Script\Data\NDouble.cs" />
+    <Compile Include="Script\Data\NDouble.Implicit.cs" />
     <Compile Include="Script\Data\NFloat.cs" />
+    <Compile Include="Script\Data\NFloat.Implicit.cs" />
     <Compile Include="Script\Data\NInt.cs" />
+    <Compile Include="Script\Data\NInt.Implicit.cs" />
     <Compile Include="Script\Data\NLong.cs" />
+    <Compile Include="Script\Data\NLong.Implicit.cs" />
     <Compile Include="Script\Data\NSByte.cs" />
+    <Compile Include="Script\Data\NSByte.Implicit.cs" />
     <Compile Include="Script\Data\NShort.cs" />
+    <Compile Include="Script\Data\NShort.Implicit.cs" />
     <Compile Include="Script\Data\NString.cs" />
+    <Compile Include="Script\Data\NString.Implicit.cs" />
     <Compile Include="Script\Data\NUInt.cs" />
+    <Compile Include="Script\Data\NUInt.Implicit.cs" />
     <Compile Include="Script\Data\NULong.cs" />
+    <Compile Include="Script\Data\NULong.Implicit.cs" />
     <Compile Include="Script\Data\NUShort.cs" />
+    <Compile Include="Script\Data\NUShort.Implicit.cs" />
     <Compile Include="Script\Encryptions\AESEncryption.cs" />
     <Compile Include="Script\Encryptions\DESCEncryption.cs" />
     <Compile Include="Script\Encryptions\SecurityUtil.cs" />
@@ -86,6 +116,7 @@
   <ItemGroup>
     <Content Include="Script\Data\Manager.ttinclude">
       <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Manager.cs</LastGenOutput>
     </Content>
     <Content Include="Script\Data\N.Implicit.Generated.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -110,9 +141,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

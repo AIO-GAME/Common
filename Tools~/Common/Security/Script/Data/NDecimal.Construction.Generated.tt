@@ -1,4 +1,4 @@
-﻿<#@ template language="C#" linePragmas="true" visibility="public"#>
+﻿<#@ template language="C#" linePragmas="true" visibility="public" compilerOptions="optimize+" debug="true"#>
 <#@ output extension=".cs" encoding="utf-8" #>
 <#
     var NUMBER = new[]

@@ -1,22 +1,31 @@
-﻿<#@ assembly name="mscorlib"
+﻿<#@ assembly name="EnvDTE"
 #><#@ assembly name="System.Core"
-#><#@ assembly name="EnvDTE" 
 #><#@ import namespace="System.IO"
 #><#@ import namespace="System.Collections.Generic" 
 #><#@ import namespace="System.Linq" 
 #><#@ import namespace="System.Text"
-#><#@ import namespace="EnvDTE" 
+#><#@ import namespace="EnvDTE"
 #><#@ import namespace="Microsoft.VisualStudio.TextTemplating"#>
 <#+
-    //JetBrains.EnvDTE.Client
-    //JetBrains.EnvDTE.Host
-
     public class Manager
     {
         private struct Block
         {
+            /// <summary>
+            /// 文件名称
+            /// </summary>
             public string Name;
+
+            /// <summary>
+            /// 模版名称
+            /// </summary>
+            public string TemplateName;
+
+            /// <summary>
+            /// 文件夹名称
+            /// </summary>
             public string FolderName;
+
             public int Start, Length;
         }
 
@@ -28,6 +37,10 @@
         private readonly StringBuilder template;
         public string OutputPath { get; set; }
 
+        private ITextTemplatingEngineHost Host { get; }
+
+        public string FileExtension { get; set; } = ".cs";
+
         /// <param name="host"> Host object </param>
         /// <param name="template"> Template content </param>
         /// <param name="executingProjectName"> Name of the project that is executing the template </param>
@@ -35,7 +48,8 @@
         {
             this.template = template;
             OutputPath = string.Empty;
-            strategy = new VSManagementStrategy(host, executingProjectName);
+            Host = host;
+            strategy = new VSManagementStrategy(Host, executingProjectName);
         }
 
         public void StartBlock(string name)
@@ -43,6 +57,16 @@
             currentBlock = new Block
             {
                 Name = name,
+                Start = template.Length
+            };
+        }
+
+        public void StartBlockTemplateName(string name, string templateName)
+        {
+            currentBlock = new Block
+            {
+                Name = name,
+                TemplateName = templateName,
                 Start = template.Length
             };
         }
@@ -57,54 +81,70 @@
             };
         }
 
-        public void StartFooter() { footerBlock.Start = template.Length; }
-        public void EndFooter() { footerBlock.Length = template.Length - footerBlock.Start; }
-        public void StartHeader() { headerBlock.Start = template.Length; }
-        public void EndHeader() { headerBlock.Length = template.Length - headerBlock.Start; }
-
         public void EndBlock()
         {
             currentBlock.Length = template.Length - currentBlock.Start;
             blocks.Add(currentBlock);
         }
 
+        public void StartFooter() { footerBlock.Start = template.Length; }
+        public void EndFooter() { footerBlock.Length = template.Length - footerBlock.Start; }
+
+        public void StartHeader() { headerBlock.Start = template.Length; }
+        public void EndHeader() { headerBlock.Length = template.Length - headerBlock.Start; }
+
         public void Process()
         {
             var header = template.ToString(headerBlock.Start, headerBlock.Length);
             var footer = template.ToString(footerBlock.Start, footerBlock.Length);
             blocks.Reverse();
-
+            // 让模板引擎知道我们已经完成了 不要再生成任何内容
+            Host.SetOutputEncoding(Encoding.UTF8, true);
+            Host.SetFileExtension(FileExtension);
             foreach (var block in blocks)
             {
-                var fileName = Path.Combine(OutputPath, block.Name);
-                var content = string.Concat(header, template.ToString(block.Start, block.Length), footer);
-
-                if (string.IsNullOrWhiteSpace(block.FolderName))
-                    strategy.CreateFile(OutputPath, block.Name, content);
-                else
-                    strategy.CreateFile(OutputPath, block.Name, block.FolderName, content);
-
-                template.Remove(block.Start, block.Length);
+                var content = template.ToString(block.Start, block.Length);
+                if (string.IsNullOrEmpty(content)) continue;
+                try
+				{
+                    content = string.Concat(header, content, footer);
+                    strategy.CreateFile(block, content, OutputPath);
+                    template.Remove(block.Start, block.Length);
+				}
+				catch (Exception e)
+				{
+					throw e;
+				}
             }
+
+            template.Clear();
         }
 
         private class VSManagementStrategy
         {
-            private EnvDTE.Project project;
-            private EnvDTE.ProjectItem templateProjectItem;
-            private EnvDTE.DTE _dte;
-            private ITextTemplatingEngineHost _host;
+            private EnvDTE.Project project { get; }
+            private EnvDTE.ProjectItem templateProjectItem { get; }
+            private EnvDTE.DTE dte { get; }
+            private ITextTemplatingEngineHost host { get; }
 
             internal VSManagementStrategy(ITextTemplatingEngineHost host, string executingProjectName)
             {
-                var provider = (IServiceProvider)host;
-                if (provider == null) throw new ArgumentNullException(nameof(host), "Could not obtain host ServiceProvider");
-                var service = provider.GetService(typeof(EnvDTE.DTE)); // 获取当前活动的DTE对象 
-                _dte = (EnvDTE.DTE)service ?? throw new ArgumentNullException(nameof(_dte), "Could not obtain DTE from host");
-                templateProjectItem = _dte.Solution.FindProjectItem(host.TemplateFile);
-                _host = host;
+                try
+                {
+                    var provider = host as IServiceProvider;
+                    if (provider == null) throw new ArgumentNullException(nameof(host), "Could not obtain host ServiceProvider");
+                    var service = provider.GetService(typeof(EnvDTE.DTE)); // 获取当前活动的 DTE 对象 
+                    dte = (EnvDTE.DTE)service ?? throw new ArgumentNullException(nameof(dte), "Could not obtain DTE from host");
+                    templateProjectItem = dte.Solution.FindProjectItem(host.TemplateFile);
+                    this.host = host;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw new Exception("Could not obtain DTE from host");
+                }
 
-                var projects = _dte.Solution.Projects;
+                var projects = dte.Solution.Projects;
                 foreach (var proj in projects.Cast<EnvDTE.Project>().Where(proj => proj.Name == executingProjectName))
                 {
                     project = proj;
@@ -112,40 +152,47 @@
                 }
             }
 
-            internal void CreateFile(string outputPath, string fileName, string content)
+            internal void CreateFile(Block block, string content, string outputPath = null)
             {
-                var path = Path.Combine(outputPath, fileName);
-                Console.WriteLine($"Creating file at path: {path}");
-                File.WriteAllText(path, content);
-                project.ProjectItems.AddFromFile(path);
-            }
-
-            internal void CreateFile(string outputPath, string fileName, string folderName, string content)
-            {
+                if (string.IsNullOrEmpty(block.Name)) return;
                 var projItems = project.ProjectItems;
                 ProjectItem folder = null;
-                var folderExists = false;
-                foreach (var projItem in projItems.Cast<ProjectItem>().Where(projItem => projItem.Name == folderName))
+                if (!string.IsNullOrEmpty(block.FolderName))
                 {
-                    folderExists = true;
-                    folder = projItem;
-                    break;
+                    var folderExists = false;
+                    foreach (var projItem in projItems.Cast<ProjectItem>().Where(projItem => projItem.Name == block.FolderName))
+                    {
+                        folderExists = true;
+                        folder = projItem;
+                        break;
+                    }
+                    if (!folderExists) folder = projItems.AddFolder(block.FolderName);
                 }
-
-                if (!folderExists) folder = projItems.AddFolder(folderName);
-
-                var templateDirectory = Path.GetDirectoryName(_host.TemplateFile);
-                if (string.IsNullOrEmpty(templateDirectory))
+                folder ??= (ProjectItem)templateProjectItem.Collection.Parent;
+                // 获取 ProjectItem 的绝对路径
+                var directoryPath = string.IsNullOrEmpty(outputPath)
+                    ? folder.ToString()
+                    : outputPath;
+                if (string.IsNullOrEmpty(directoryPath))
                 {
-                    Console.WriteLine($"Template directory is null or empty -> [{_host.TemplateFile}]");
+                    Console.WriteLine($"Directory path is null or empty -> [{directoryPath}]");
                     return;
                 }
-                var directoryPath = Path.Combine(templateDirectory, folder.Name);
-                var filePath = Path.Combine(directoryPath, fileName);
-                var fullPath = Path.Combine(directoryPath, fileName);
-                File.WriteAllText(fullPath, content);
+
+                var filePath = Path.Combine(directoryPath, block.Name);
+                var fullPath = Path.Combine(directoryPath, block.Name);
+
+                // 如果文件路径比对 除了扩展名和模版路径不同 其余相同 则跳过
+                if (File.Exists(fullPath) && File.ReadAllText(fullPath) == content) return;
+                File.WriteAllText(fullPath, content, Encoding.UTF8);
+                var projectItem = folder.ProjectItems.AddFromFile(filePath); // 然后将文件添加到项目中
+                if (!string.IsNullOrEmpty(block.TemplateName))
+                { // 然后将该文件设置 DependentUpon 为模板文件
+                    projectItem.Properties.Item("DependentUpon").Value = Path.GetFileName(host.TemplateFile);
+                    projectItem.Properties.Item("AutoGen").Value = true;
+                    projectItem.Properties.Item("DesignTime").Value = true;
+                }
                 Console.WriteLine($"Creating file at path: {fullPath}");
-                folder.ProjectItems.AddFromFile(filePath);
             }
         }
     }
