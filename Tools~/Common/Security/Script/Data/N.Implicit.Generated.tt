@@ -196,7 +196,6 @@ namespace AIO.Security
 <#
     } 
     else 
-    {
 #> 
         /// <param name="value"> <see cref="<#= pair.Key #>"/> </param>
         public static implicit operator <#= item #>(<#= pair.Key #> value) => (<#= item #>)value.Value;
