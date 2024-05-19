@@ -1,6 +1,10 @@
-﻿<#@ assembly name="EnvDTE"
+<#@ assembly name="EnvDTE"
 #><#@ assembly name="System.Core"
+#><#@ assembly name="System.Xml"
+#><#@ assembly name="System.Xml.Linq"
 #><#@ import namespace="System.IO"
+#><#@ import namespace="System.Xml"
+#><#@ import namespace="System.Xml.Linq"
 #><#@ import namespace="System.Collections.Generic" 
 #><#@ import namespace="System.Linq" 
 #><#@ import namespace="System.Text"
@@ -87,54 +91,145 @@
             blocks.Add(currentBlock);
         }
 
-        public void StartFooter() { footerBlock.Start = template.Length; }
-        public void EndFooter() { footerBlock.Length = template.Length - footerBlock.Start; }
+        public void StartFooter()
+        {
+            footerBlock.Start = template.Length;
+        }
 
-        public void StartHeader() { headerBlock.Start = template.Length; }
-        public void EndHeader() { headerBlock.Length = template.Length - headerBlock.Start; }
+        public void EndFooter()
+        {
+            footerBlock.Length = template.Length - footerBlock.Start;
+        }
+
+        public void StartHeader()
+        {
+            headerBlock.Start = template.Length;
+        }
+
+        public void EndHeader()
+        {
+            headerBlock.Length = template.Length - headerBlock.Start;
+        }
 
         public void Process()
         {
             var header = template.ToString(headerBlock.Start, headerBlock.Length);
             var footer = template.ToString(footerBlock.Start, footerBlock.Length);
             blocks.Reverse();
-            // 让模板引擎知道我们已经完成了 不要再生成任何内容
             Host.SetOutputEncoding(Encoding.UTF8, true);
             Host.SetFileExtension(FileExtension);
+
+            var projectDirectory = Path.GetDirectoryName(Host.TemplateFile);
+            var projectFilePath = string.Empty;
+            while (!string.IsNullOrEmpty(projectDirectory))
+            {
+                projectFilePath = Directory.GetFiles(projectDirectory, "*.csproj").FirstOrDefault();
+                if (projectFilePath != null) break;
+                projectDirectory = Directory.GetParent(projectDirectory)?.FullName;
+            }
+
+            if (string.IsNullOrEmpty(projectFilePath)) return;
+            var project = Path.GetDirectoryName(Host.TemplateFile).Substring(projectDirectory.Length + 1);
+            var dict = new Dictionary<string, Block>();
             foreach (var block in blocks)
             {
                 var content = template.ToString(block.Start, block.Length);
                 if (string.IsNullOrEmpty(content)) continue;
+                content = string.Concat(header, content, footer);
                 try
-				{
-                    content = string.Concat(header, content, footer);
+                {
                     strategy.CreateFile(block, content, OutputPath);
                     template.Remove(block.Start, block.Length);
-				}
-				catch (Exception e)
-				{
-					throw e;
-				}
+                    dict[string.Concat(project, '\\', block.Name)] = block;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
 
             template.Clear();
+            if (dict.Count == 0) return;
+            template.AppendLine($"//{projectFilePath}");
+            var document = XDocument.Load(projectFilePath);
+            if (document.Root is null) return;
+            var rn = document.Root?.Name.Namespace;
+            var rn_ItemGroup = XName.Get("ItemGroup", rn.NamespaceName);
+            var rn_Compile = XName.Get("Compile", rn.NamespaceName);
+            var rn_DependentUpon = XName.Get("DependentUpon", rn.NamespaceName);
+            var rn_DesignTime = XName.Get("DesignTime", rn.NamespaceName);
+            var rn_AutoGen = XName.Get("AutoGen", rn.NamespaceName);
+            var rn_Include = XName.Get("Include", rn.NamespaceName);
+
+            var last = new Dictionary<string, string>();
+            var removeList = new List<XElement>();
+
+            foreach (var itemGroup in document.Root.Nodes())
+            {
+                if (itemGroup is not XElement element || element.Name != rn_ItemGroup) continue;
+                foreach (var compile in element.Descendants(rn_Compile))
+                {
+                    var attribute = compile.Attribute("Include");
+                    if (attribute is null) continue;
+                    if (last.ContainsKey(attribute.Value)) // 如果已经处理过，需要移除多余的节点
+                    {
+                        removeList.Add(compile);
+                        continue;
+                    }
+                    if (!dict.TryGetValue(attribute.Value, out var block)) continue;
+
+                    var dependentUpon = compile.Element(rn_DependentUpon);
+                    if (dependentUpon is null) compile.Add(new XElement(rn_DependentUpon, block.TemplateName));
+                    else dependentUpon.Value = block.TemplateName;
+
+                    var designTime = compile.Element(rn_DesignTime);
+                    if (designTime is null) compile.Add(new XElement(rn_DesignTime, "True"));
+                    else designTime.Value = "True";
+
+                    var autoGen = compile.Element(rn_AutoGen);
+                    if (autoGen is null) compile.Add(new XElement(rn_AutoGen, "True"));
+                    else autoGen.Value = "True";
+
+                    template.AppendLine($"// <auto>{attribute.Value}</>");
+                    dict.Remove(attribute.Value);
+                    last[attribute.Value] = block.TemplateName;
+                }
+            }
+
+            foreach (var element in removeList) element.Remove();
+
+            if (dict.Count > 0)
+            {
+                var itemGroup = new XElement(rn_ItemGroup);
+                foreach (var pair in dict)
+                {
+                    itemGroup.Add(new XElement(rn_Compile,
+                                               new XAttribute("Include", pair.Key),
+                                               new XElement(rn_DependentUpon, pair.Value.TemplateName),
+                                               new XElement(rn_DesignTime, "True"),
+                                               new XElement(rn_AutoGen, "True")));
+                }
+                document.Root.Add(itemGroup);
+            }
+
+            document.Save(projectFilePath);
+            template.AppendLine($"// <date>{DateTime.Now:yyyy-MM-dd HH:mm:ss}</>");
         }
 
         private class VSManagementStrategy
         {
-            private EnvDTE.Project project { get; }
-            private EnvDTE.ProjectItem templateProjectItem { get; }
-            private EnvDTE.DTE dte { get; }
+            private Project project { get; }
+            private ProjectItem templateProjectItem { get; }
+            private DTE dte { get; }
             private ITextTemplatingEngineHost host { get; }
 
             internal VSManagementStrategy(ITextTemplatingEngineHost host, string executingProjectName)
             {
                 try
                 {
-                    var provider = host as IServiceProvider;
-                    if (provider == null) throw new ArgumentNullException(nameof(host), "Could not obtain host ServiceProvider");
-                    var service = provider.GetService(typeof(EnvDTE.DTE)); // 获取当前活动的 DTE 对象 
-                    dte = (EnvDTE.DTE)service ?? throw new ArgumentNullException(nameof(dte), "Could not obtain DTE from host");
+                    if (host is not IServiceProvider provider) throw new ArgumentNullException(nameof(host), "Could not obtain host ServiceProvider");
+                    var service = provider.GetService(typeof(DTE)); // 获取当前活动的 DTE 对象 
+                    dte = (DTE)service ?? throw new ArgumentNullException(nameof(dte), "Could not obtain DTE from host");
                     templateProjectItem = dte.Solution.FindProjectItem(host.TemplateFile);
                     this.host = host;
                 }
@@ -169,30 +264,16 @@
                     if (!folderExists) folder = projItems.AddFolder(block.FolderName);
                 }
                 folder ??= (ProjectItem)templateProjectItem.Collection.Parent;
-                // 获取 ProjectItem 的绝对路径
-                var directoryPath = string.IsNullOrEmpty(outputPath)
-                    ? folder.ToString()
-                    : outputPath;
+                var directoryPath = string.IsNullOrEmpty(outputPath) ? folder.ToString() : outputPath;
                 if (string.IsNullOrEmpty(directoryPath))
                 {
                     Console.WriteLine($"Directory path is null or empty -> [{directoryPath}]");
                     return;
                 }
 
-                var filePath = Path.Combine(directoryPath, block.Name);
                 var fullPath = Path.Combine(directoryPath, block.Name);
-
-                // 如果文件路径比对 除了扩展名和模版路径不同 其余相同 则跳过
                 if (File.Exists(fullPath) && File.ReadAllText(fullPath) == content) return;
                 File.WriteAllText(fullPath, content, Encoding.UTF8);
-                var projectItem = folder.ProjectItems.AddFromFile(filePath); // 然后将文件添加到项目中
-                if (!string.IsNullOrEmpty(block.TemplateName))
-                { // 然后将该文件设置 DependentUpon 为模板文件
-                    projectItem.Properties.Item("DependentUpon").Value = Path.GetFileName(host.TemplateFile);
-                    projectItem.Properties.Item("AutoGen").Value = true;
-                    projectItem.Properties.Item("DesignTime").Value = true;
-                }
-                Console.WriteLine($"Creating file at path: {fullPath}");
             }
         }
     }
