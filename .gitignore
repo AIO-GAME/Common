@@ -124,3 +124,6 @@ FakesAssemblies/
 
 # WinMerge
 *.bak
+
+# Rider
+*.sln.DotSettings.user
