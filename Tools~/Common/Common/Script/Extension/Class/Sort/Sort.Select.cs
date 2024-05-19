@@ -24,10 +24,8 @@ namespace AIO
             {
                 var minIndex = a;
                 for (var j = a + 1; j <= end; j++)
-                {
                     if (comparer.Compare(array[j], array[minIndex]) < 0)
                         minIndex = j;
-                }
 
                 if (minIndex != a) (array[a], array[minIndex]) = (array[minIndex], array[a]);
             }
@@ -43,16 +41,16 @@ namespace AIO
         /// <param name="end">数量</param>
         /// <typeparam name="T">泛型</typeparam>
         /// <returns>返回排序后的数组</returns>
-        private static IList<T> SortSelect<T>(IList<T> array, int start, int end) where T : IComparable<T>
+        private static IList<T> SortSelect<T>(IList<T> array, int start, int end)
+        where T : IComparable<T>
         {
             if (end - start < 2) return array;
             for (var a = start; a < end; a++)
             {
                 var minIndex = a;
                 for (var j = a + 1; j <= end; j++)
-                {
-                    if (array[j].CompareTo(array[minIndex]) < 0) minIndex = j;
-                }
+                    if (array[j].CompareTo(array[minIndex]) < 0)
+                        minIndex = j;
 
                 if (minIndex != a) (array[a], array[minIndex]) = (array[minIndex], array[a]);
             }

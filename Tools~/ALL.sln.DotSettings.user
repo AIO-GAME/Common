@@ -6,6 +6,8 @@
 	
 	
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
-  &lt;Assembly Path="D:\JetBrains\JetBrains Rider 2023.2.1\plugins\rider-plugins-for-tea\dotnet\JetBrains.EnvDTE.Client.dll" /&gt;&#xD;
+  &lt;Assembly Path="C:\Program Files\JetBrains\Rider\r2r\2024.1.0R\F3ED220D717CEA1DB4BBB28076AFB13\EnvDTE.dll" /&gt;&#xD;
+  &lt;Assembly Path="H:\Microsoft\nuget\vc_packages\Microsoft.VisualStudio.Interop.17.9.37000\lib\net472\Microsoft.VisualStudio.Interop.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
+	<s:String x:Key="/Default/Environment/Hierarchy/Build/SolutionBuilderNext/UserFileLoggerFolder/@EntryValue">H:\Microsoft\cachel\JetBrains\Rider2024.1\log\SolutionBuilder</s:String>
 	</wpf:ResourceDictionary>

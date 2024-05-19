@@ -312,7 +312,7 @@
         </member>
         <member name="M:AIO.ExtendSort.SortBubble``1(System.Collections.Generic.IList{``0},System.Int32@,System.Int32@)">
             <summary>
-            单向冒泡排序
+                单向冒泡排序
             </summary>
             <param name="array">数组</param>
             <param name="start">右边界</param>
@@ -354,7 +354,7 @@
         </member>
         <member name="M:AIO.ExtendSort.SortQuick``1(System.Collections.Generic.IList{``0},System.Int32@,System.Int32@,System.Collections.Generic.IComparer{``0}@)">
             <summary>
-               快速排序
+                快速排序
             </summary>
             <param name="array">数组</param>
             <param name="start">索引</param>
@@ -365,7 +365,7 @@
         </member>
         <member name="M:AIO.ExtendSort.SortQuick``1(System.Collections.Generic.IList{``0},System.Int32@,System.Int32@)">
             <summary>
-               快速排序
+                快速排序
             </summary>
             <param name="array">数组</param>
             <param name="start">索引</param>
@@ -416,7 +416,7 @@
         </member>
         <member name="M:AIO.ExtendSort.SortMerge``1(System.Collections.Generic.IList{``0}@,System.Int32,System.Int32,System.Collections.Generic.IComparer{``0}@)">
             <summary>
-              归并排序
+                归并排序
             </summary>
             <param name="array">数组</param>
             <param name="start">右边界</param>
@@ -427,7 +427,7 @@
         </member>
         <member name="M:AIO.ExtendSort.SortMerge``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@)">
             <summary>
-              归并排序
+                归并排序
             </summary>
             <param name="array">数组</param>
             <param name="start">右边界</param>
@@ -485,7 +485,7 @@
         </member>
         <member name="M:AIO.ExtendSort.Comparer``1(System.Func{``0,``0,System.Int32})">
             <summary>
-               比较器
+                比较器
             </summary>
             <param name="comparer">比较器</param>
             <typeparam name="T">泛型</typeparam>
@@ -493,7 +493,7 @@
         </member>
         <member name="M:AIO.ExtendSort.Comparer``1(System.Comparison{``0})">
             <summary>
-               比较器
+                比较器
             </summary>
             <param name="comparer">比较器</param>
             <typeparam name="T">泛型</typeparam>
@@ -9242,7 +9242,7 @@
         </member>
         <member name="P:AIO.AHelper.Json.JSONNormalSettings">
             <summary>
-            Json默认设置
+            Json 默认设置
             </summary>
         </member>
         <member name="M:AIO.AHelper.Json.Serialize(System.Object@)">

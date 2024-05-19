@@ -1,1049 +1,1118 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B0D5708A-7C94-4BCB-805D-A718034E5724}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AIO</RootNamespace>
-    <AssemblyName>AIO.Common</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-    <LangVersion>8</LangVersion>
-    <RuntimeIdentifiers>win;linux-x64;osx-x64</RuntimeIdentifiers>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>bin\Debug\AIO.Common.xml</DocumentationFile>
-    <NoWarn>CS8600;</NoWarn>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>bin\Release\AIO.Common.xml</DocumentationFile>
-    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
-    <NoWarn>CS8600;CS0809;CS8632;CS8603;CS0649;CS0809;CS8632;</NoWarn>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-  </PropertyGroup>
-  <PropertyGroup>
-    <RunPostBuildEvent>Always</RunPostBuildEvent>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Buffers">
-      <HintPath>..\..\packages\system.buffers\4.3.0\lib\net461\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.BZip2\BZip2.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.BZip2\BZip2Constants.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.BZip2\BZip2Exception.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.BZip2\BZip2InputStream.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.BZip2\BZip2OutputStream.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Checks\Adler32.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Checks\BZip2Crc.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Checks\Crc32.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Checks\IChecksum.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\CompletedFileHandler.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\DirectoryEventArgs.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\DirectoryFailureHandler.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\ExtendedPathFilter.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\FileFailureHandler.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\FileSystemScanner.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\INameTransform.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\IScanFilter.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\NameAndSizeFilter.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\NameFilter.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\PathFilter.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\ProcessFileHandler.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\ProgressEventArgs.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\ProgressHandler.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\ScanEventArgs.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\ScanFailureEventArgs.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\StreamUtils.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\WindowsPathUtils.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Encryp\PkzipClassic.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Encryp\PkzipClassicCryptoBase.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Encryp\PkzipClassicDecryptCryptoTrans.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Encryp\PkzipClassicEncryptCryptoTrans.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Encryp\PkzipClassicManaged.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Encryp\ZipAESStream.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Encryp\ZipAESTransform.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.GZip\GZip.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.GZip\GZipConstants.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.GZip\GZipException.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.GZip\GZipInputStream.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.GZip\GZipOutputStream.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Lzw\LzwConstants.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Lzw\LzwException.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Lzw\LzwInputStream.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\InvalidHeaderException.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\ProgressMessageHandler.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\TarArchive.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\TarBuffer.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\TarEntry.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\TarException.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\TarHeader.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\TarInputStream.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\TarOutputStream.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\Deflater.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\DeflaterConstants.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\DeflaterEngine.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\DeflaterHuffman.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\DeflaterOutputStream.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\DeflaterPending.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\DeflateStrategy.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\Inflater.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\InflaterDynHeader.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\InflaterHuffmanTree.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\InflaterInputBuffer.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\InflaterInputStream.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\OutputWindow.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\PendingBuffer.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\StreamManipulator.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\BaseArchiveStorage.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\CompressionMethod.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\DescriptorData.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\DiskArchiveStorage.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\DynamicDiskDataSource.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\EncryptionAlgorithm.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\EntryPatchData.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ExtendedUnixData.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\FastZip.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\FastZipEvents.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\FileUpdateMode.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\GeneralBitFlags.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\HostSystemID.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\IArchiveStorage.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\IDynamicDataSource.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\IEntryFactory.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\IStaticDataSource.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ITaggedData.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ITaggedDataFactory.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\KeysRequiredEventArgs.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\MemoryArchiveStorage.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\NTTaggedData.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\RawTaggedData.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\StaticDiskDataSource.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\TestOperation.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\TestStatus.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\TestStrategy.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\UseZip64.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\WindowsNameTransform.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipConstants.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipEntry.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipEntryFactory.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipException.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipExtraData.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipFile.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipHelperStream.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipInputStream.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipNameTransform.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipOutputStream.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipTestResultHandler.cs" />
-    <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib\SharpZipBaseException.cs" />
-    <Compile Include="Plugins\Microsoft\Microsoft.CodeAnalysis\EmbeddedAttribute.cs" />
-    <Compile Include="Plugins\Microsoft\System.Collections.Generic\DeconstructionExtensions.cs" />
-    <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\AllowNullAttribute.cs" />
-    <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\DisallowNullAttribute.cs" />
-    <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\DoesNotReturnAttribute.cs" />
-    <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\DoesNotReturnIfAttribute.cs" />
-    <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\MaybeNullAttribute.cs" />
-    <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\MaybeNullWhenAttribute.cs" />
-    <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\MemberNotNullAttribute.cs" />
-    <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\MemberNotNullWhenAttribute.cs" />
-    <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\NotNullAttribute.cs" />
-    <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\NotNullIfNotNullAttribute.cs" />
-    <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\NotNullWhenAttribute.cs" />
-    <Compile Include="Plugins\Microsoft\System.Runtime.CompilerService\IsReadOnlyAttribute.cs" />
-    <Compile Include="Plugins\Microsoft\System.Runtime.CompilerService\NullableAttribute.cs" />
-    <Compile Include="Plugins\Microsoft\System.Runtime.CompilerService\NullableContextAttribute.cs" />
-    <Compile Include="Plugins\Pooled\BitHelper.cs" />
-    <Compile Include="Plugins\Pooled\ClearMode.cs" />
-    <Compile Include="Plugins\Pooled\HashHelpers.cs" />
-    <Compile Include="Plugins\Pooled\HashHelpers.SerializationInfoTable.cs" />
-    <Compile Include="Plugins\Pooled\ICollectionDebugView.cs" />
-    <Compile Include="Plugins\Pooled\IDictionaryDebugView.cs" />
-    <Compile Include="Plugins\Pooled\IReadOnlyPooledList.cs" />
-    <Compile Include="Plugins\Pooled\NonRandomizedStringEqualityComparer.cs" />
-    <Compile Include="Plugins\Pooled\PooledDictionary.cs" />
-    <Compile Include="Plugins\Pooled\PooledExtensions.cs" />
-    <Compile Include="Plugins\Pooled\PooledList.cs" />
-    <Compile Include="Plugins\Pooled\PooledQueue.cs" />
-    <Compile Include="Plugins\Pooled\PooledSet.cs" />
-    <Compile Include="Plugins\Pooled\PooledSetEqualityComparer.cs" />
-    <Compile Include="Plugins\Pooled\PooledStack.cs" />
-    <Compile Include="Plugins\Pooled\QueueDebugView.cs" />
-    <Compile Include="Plugins\Pooled\StackDebugView.cs" />
-    <Compile Include="Plugins\Pooled\ThrowHelper.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\AnchorAlias.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\Comment.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\DocumentEnd.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\DocumentStart.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\EventType.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\IParsingEventVisitor.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\MappingEnd.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\MappingStart.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\MappingStyle.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\NodeEvent.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\ParsingEvent.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\Scalar.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\SequenceEnd.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\SequenceStart.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\SequenceStyle.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\StreamEnd.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\StreamStart.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Anchor.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\AnchorAlias.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\BlockEnd.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\BlockEntry.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\BlockMappingStart.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\BlockSequenceStart.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Comment.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\DocumentEnd.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\DocumentStart.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Error.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\FlowEntry.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\FlowMappingEnd.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\FlowMappingStart.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\FlowSequenceEnd.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\FlowSequenceStart.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Key.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Scalar.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\StreamEnd.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\StreamStart.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Tag.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\TagDirective.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Token.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Value.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\VersionDirective.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\AnchorName.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\AnchorNotFoundException.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\CharacterAnalyzer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\Constants.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\Cursor.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\Emitter.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\EmitterSettings.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\EmitterState.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\ForwardAnchorNotSupportedExcep.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\HashCode.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\IEmitter.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\ILookAheadBuffer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\InsertionQueue.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\IParser.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\IScanner.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\LookAheadBuffer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\Mark.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\MaximumRecursionLevelReachedEx.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\MergingParser.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\Parser.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\ParserExtensions.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\ParserState.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\RecursionLevel.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\ScalarStyle.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\Scanner.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\SemanticErrorException.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\SimpleKey.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\StringLookAheadBuffer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\SyntaxErrorException.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\TagDirectiveCollection.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\TagName.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\Version.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\YamlException.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\ConcurrentObjectPool.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\ExpressionExtensions.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\GenericCollectionToNonGenericA.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\GenericDictionaryToNonGenericA.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\IOrderedDictionary.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\Lazy.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\NumberExtensions.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\OrderedDictionary.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\ReadOnlyCollectionExtensions.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\StringBuilderPool.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\ThrowHelper.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\DocumentLoadingState.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\EmitterState.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\IYamlVisitor.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\LibYamlEventStream.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlAliasNode.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlDocument.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlMappingNode.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlNode.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlNodeIdentityEqualityCompar.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlNodeType.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlScalarNode.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlSequenceNode.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlStream.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlVisitor.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlVisitorBase.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Buffe\ITypeDiscriminatingNodeDeseria.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Buffe\ITypeDiscriminator.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Buffe\KeyValueTypeDiscriminator.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Buffe\ParserBuffer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Buffe\TypeDiscriminatingNodeDeserial.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Buffe\UniqueKeyTypeDiscriminator.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Conve\DateTimeConverter.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Conve\GuidConverter.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Conve\SystemTypeConverter.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Event\ChainedEventEmitter.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Event\JsonEventEmitter.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Event\TypeAssigningEventEmitter.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Event\WriterEventEmitter.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Namin\CamelCaseNamingConvention.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Namin\HyphenatedNamingConvention.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Namin\LowerCaseNamingConvention.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Namin\NullNamingConvention.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Namin\PascalCaseNamingConvention.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Namin\UnderscoredNamingConvention.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\ArrayNodeDeserializer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\CollectionDeserializer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\CollectionNodeDeserializer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\DictionaryDeserializer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\DictionaryNodeDeserializer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\EnumerableNodeDeserializer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\NullNodeDeserializer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\ObjectNodeDeserializer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\ScalarNodeDeserializer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\StaticArrayNodeDeserializer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\StaticCollectionNodeDeserializ.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\StaticDictionaryNodeDeserializ.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\TypeConverterNodeDeserializer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\YamlConvertibleNodeDeserialize.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\YamlSerializableNodeDeserializ.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeT\DefaultContainersNodeTypeResol.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeT\MappingNodeTypeResolver.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeT\PreventUnknownTagsNodeTypeReso.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeT\TagNodeTypeResolver.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeT\TypeNameInTagNodeTypeResolver.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeT\YamlConvertibleTypeResolver.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeT\YamlSerializableTypeResolver.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\AnchorAssigner.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\AnchorAssigningObjectGraphVisi.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\ChainedObjectGraphVisitor.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\CommentsObjectGraphVisitor.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\CustomSerializationObjectGraph.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\DefaultExclusiveObjectGraphVis.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\DefaultObjectFactory.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\DefaultValuesObjectGraphVisito.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\EmittingObjectGraphVisitor.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\FullObjectGraphTraversalStrate.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\LambdaObjectFactory.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\ObjectFactoryBase.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\PreProcessingPhaseObjectGraphV.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\RoundtripObjectGraphTraversalS.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\StaticObjectFactory.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Schem\CoreSchema.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Schem\DefaultSchema.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Schem\FailsafeSchema.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Schem\JsonSchema.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\CachedTypeInspector.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\CompositeTypeInspector.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\NamingConventionTypeInspector.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\ReadableAndWritablePropertiesT.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\ReadableFieldsTypeInspector.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\ReadablePropertiesTypeInspecto.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\TypeInspectorSkeleton.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\WritablePropertiesTypeInspecto.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeR\DynamicTypeResolver.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeR\StaticTypeResolver.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\IPostDeserializationCallback.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\ITypeConverter.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\NullTypeConverter.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\ObjectAnchorCollection.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\ReflectionTypeConverter.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\ReflectionUtility.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\SerializerState.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\StringExtensions.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\TypeConverter.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Value\AliasValueDeserializer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Value\NodeValueDeserializer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\AliasEventInfo.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\BuilderSkeleton.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\DefaultValuesHandling.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\Deserializer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\DeserializerBuilder.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\EmissionPhaseObjectGraphVisito.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\EventInfo.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IAliasProvider.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IDeserializer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IEventEmitter.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\INamingConvention.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\INodeDeserializer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\INodeTypeResolver.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IObjectAccessor.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IObjectDescriptor.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IObjectFactory.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IObjectGraphTraversalStrategy.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IObjectGraphVisitor.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IPropertyDescriptor.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IRegistrationLocationSelection.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ISerializer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ITrackingRegistrationLocationS.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ITypeInspector.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ITypeResolver.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IValueDeserializer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IValuePromise.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IValueSerializer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IYamlConvertible.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IYamlSerializable.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IYamlTypeConverter.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\LazyComponentRegistrationList.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\LazyComponentRegistrationListE.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\MappingEndEventInfo.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\MappingStartEventInfo.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\Nothing.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ObjectDescriptor.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ObjectDescriptorExtensions.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ObjectDeserializer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ObjectEventInfo.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ObjectGraphTraversalStrategyFa.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ObjectSerializer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\PropertyDescriptor.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ScalarEventInfo.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\SequenceEndEventInfo.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\SequenceStartEventInfo.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\Serializer.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\SerializerBuilder.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\Settings.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\StaticBuilderSkeleton.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\StaticContext.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\StaticDeserializerBuilder.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\StaticSerializerBuilder.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\StreamFragment.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\TagMappings.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\WrapperFactory.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlAttributeOverrides.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlAttributeOverridesInspecto.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlAttributesTypeInspector.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlFormatter.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlIgnoreAttribute.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlMemberAttribute.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlSerializableAttribute.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlStaticContextAttribute.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet\CultureInfoAdapter.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet\PropertyInfoExtensions.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet\ReflectionExtensions.cs" />
-    <Compile Include="Plugins\YamlDotNet\YamlDotNet\StandardRegexOptions.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Script\Algorithms\LruCache.cs" />
-    <Compile Include="Script\Basics\HashAlgorithm\MD4.cs" />
-    <Compile Include="Script\Extension\Class\Action\Action.Extend.cs" />
-    <Compile Include="Script\Extension\Class\AppDomain\Extend.AppDomain.cs" />
-    <Compile Include="Script\Extension\Class\Assembly\Extend.Assembly.cs" />
-    <Compile Include="Script\Extension\Class\FieldInfo\FieldInfo.Extend.IS.cs" />
-    <Compile Include="Script\Extension\Class\IntPtr\IntPtr.Extend.cs" />
-    <Compile Include="Script\Extension\Class\IntPtr\IntPtr.Extend.ToConver.cs" />
-    <Compile Include="Script\Extension\Class\MethodBase\MethodBase.Extend.Get.cs" />
-    <Compile Include="Script\Extension\Class\MethodInfo\MethodInfo.Extend.cs" />
-    <Compile Include="Script\Extension\Class\MethodInfo\MethodInfo.Extend.IS.cs" />
-    <Compile Include="Script\Extension\Class\ParameterInfo\ParameterInfo.Extend.cs" />
-    <Compile Include="Script\Extension\Class\PropertyInfo\PropertyInfo.Extend.IS.cs" />
-    <Compile Include="Script\Extension\Class\Socket\Socket.Extend.cs" />
-    <Compile Include="Script\Extension\Class\Sort\Sort.Bubble.cs" />
-    <Compile Include="Script\Extension\Class\Sort\Sort.BubbleTwoWay.cs" />
-    <Compile Include="Script\Extension\Class\Sort\Sort.Quick.cs" />
-    <Compile Include="Script\Extension\Class\Sort\Sort.Select.cs" />
-    <Compile Include="Script\Extension\Class\Sort\Sort.Heap.cs" />
-    <Compile Include="Script\Extension\Class\Sort\Sort.Merge.cs" />
-    <Compile Include="Script\Extension\Class\Sort\Sort.Insert.cs" />
-    <Compile Include="Script\Extension\Class\Sort\Sort.Bucket.cs" />
-    <Compile Include="Script\Extension\Class\Sort\Sort.cs" />
-    <Compile Include="Script\Extension\Class\Sort\ValueType.Generic.cs" />
-    <Compile Include="Script\Extension\Class\Sort\Sort.Shell.cs" />
-    <Compile Include="Script\Extension\Class\Sort\ValueType.Span.cs" />
-    <Compile Include="Script\Extension\Class\Sort\ValueType.IList.cs" />
-    <Compile Include="Script\Extension\Class\Sort\Sort.Counting.cs" />
-    <Compile Include="Script\Extension\Class\Sort\Sort.Radix.cs" />
-    <Compile Include="Script\Extension\Class\Stream\Stream.Extend.Encrypt.cs" />
-    <Compile Include="Script\Extension\Class\Stream\Stream.Extend.Encrypt.Generated.cs">
-      <DependentUpon>Stream.Extend.Encrypt.Generated.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Class\StringBuilder\StringBuilder.Extend.cs" />
-    <Compile Include="Script\Extension\Class\String\String.Extend.MD5Encryption.cs" />
-    <Compile Include="Script\Extension\Class\String\String.Extend.Encrypt.cs" />
-    <Compile Include="Script\Extension\Class\String\String.Extend.Append.cs" />
-    <Compile Include="Script\Extension\Class\String\String.Extend.Contains.cs" />
-    <Compile Include="Script\Extension\Class\String\String.Extend.cs" />
-    <Compile Include="Script\Extension\Class\String\String.Extend.Filter.cs" />
-    <Compile Include="Script\Extension\Class\String\String.Extend.Format.cs" />
-    <Compile Include="Script\Extension\Class\String\String.Extend.Get.cs" />
-    <Compile Include="Script\Extension\Class\String\String.Extend.Indexes.cs" />
-    <Compile Include="Script\Extension\Class\String\String.Extend.Insert.cs" />
-    <Compile Include="Script\Extension\Class\String\String.Extend.IS.cs" />
-    <Compile Include="Script\Extension\Class\String\String.Extend.Path.cs" />
-    <Compile Include="Script\Extension\Class\String\String.Extend.RichText.cs" />
-    <Compile Include="Script\Extension\Class\String\String.Extend.Split.cs" />
-    <Compile Include="Script\Extension\Class\String\String.Extend.To.cs" />
-    <Compile Include="Script\Extension\Class\String\String.Extend.ToConver.cs" />
-    <Compile Include="Script\Extension\Class\String\String.Extend.Trim.cs" />
-    <Compile Include="Script\Extension\Class\Thread\Thread.Extend.cs" />
-    <Compile Include="Script\Extension\Class\Type\Reflection\MethodReflectionInfo.cs" />
-    <Compile Include="Script\Extension\Class\Type\Reflection\ParameterInfoReflectionInfo.cs" />
-    <Compile Include="Script\Extension\Class\Type\Reflection\ReflectionInfo.cs" />
-    <Compile Include="Script\Extension\Class\Type\Reflection\TypeReflectionInfo.cs" />
-    <Compile Include="Script\Extension\Class\Type\Type.Extend.And.cs" />
-    <Compile Include="Script\Extension\Class\Type\Type.Extend.Get.cs" />
-    <Compile Include="Script\Extension\Class\Type\Type.Extend.IS.cs" />
-    <Compile Include="Script\Extension\Class\Type\Type.Extend.Reset.cs" />
-    <Compile Include="Script\Extension\Class\Type\Type.Extend.To.cs" />
-    <Compile Include="Script\Extension\Enum\ExtendEnum.cs" />
-    <Compile Include="Script\Extension\Exception\GenericClosingException.cs" />
-    <Compile Include="Script\Extension\Interface\Empty.cs" />
-    <Compile Include="Script\Extension\Interface\ICollection\ICollection.Extend.Find.cs" />
-    <Compile Include="Script\Extension\Interface\IComparable\IComparable.Extend.cs" />
-    <Compile Include="Script\Extension\Interface\ICustomAttributeProvider\ICustomAttributeProvider.Extend.cs" />
-    <Compile Include="Script\Extension\Interface\IDictionary\IDictionary.Extend.Add.cs" />
-    <Compile Include="Script\Extension\Interface\IDictionary\IDictionary.Extend.cs" />
-    <Compile Include="Script\Extension\Interface\IDictionary\IDictionary.Extend.Get.cs" />
-    <Compile Include="Script\Extension\Interface\IDictionary\IDictionary.Extend.Remove.cs" />
-    <Compile Include="Script\Extension\Interface\IDictionary\IDictionary.Extend.Set.cs" />
-    <Compile Include="Script\Extension\Interface\IDictionary\IDictionary.Extend.Swap.cs" />
-    <Compile Include="Script\Extension\Interface\IEnumerable\Byte\IEnumerable.Byte.Extend.cs" />
-    <Compile Include="Script\Extension\Interface\IEnumerable\Char\IEnumerable.Char.Extend.Contains.cs" />
-    <Compile Include="Script\Extension\Interface\IEnumerable\IEnumerable.Extend.Contains.cs" />
-    <Compile Include="Script\Extension\Interface\IEnumerable\IEnumerable.Extend.cs" />
-    <Compile Include="Script\Extension\Interface\IEnumerable\IEnumerable.Extend.Find.cs" />
-    <Compile Include="Script\Extension\Interface\IEnumerable\IEnumerable.Extend.To.cs" />
-    <Compile Include="Script\Extension\Interface\IList\Byte\IList.Byte.Extend.cs" />
-    <Compile Include="Script\Extension\Interface\IList\Byte\IList.Byte.Extend.Get.cs" />
-    <Compile Include="Script\Extension\Interface\IList\Byte\IList.Byte.Extend.Set.cs" />
-    <Compile Include="Script\Extension\Interface\IList\IList.Extend.cs" />
-    <Compile Include="Script\Extension\Interface\IList\IList.Extend.Add.cs" />
-    <Compile Include="Script\Extension\Interface\IList\IList.Extend.Disrupt.cs" />
-    <Compile Include="Script\Extension\Interface\IList\IList.Extend.Exist.cs" />
-    <Compile Include="Script\Extension\Interface\IList\IList.Extend.Get.cs" />
-    <Compile Include="Script\Extension\Interface\IList\IList.Extend.IndexOf.cs" />
-    <Compile Include="Script\Extension\Interface\IList\IList.Extend.Insert.cs" />
-    <Compile Include="Script\Extension\Interface\IList\IList.Extend.Rmove.cs" />
-    <Compile Include="Script\Extension\Interface\IList\IList.Extend.Set.cs" />
-    <Compile Include="Script\Extension\Interface\IList\IList.Extend.Swap.cs" />
-    <Compile Include="Script\Extension\Interface\IList\String\IList.String.Extend.Add.cs" />
-    <Compile Include="Script\Extension\Interface\IList\String\IList.String.Extend.Pad.cs" />
-    <Compile Include="Script\Extension\Interface\IList\String\IList.String.Extend.To.cs" />
-    <Compile Include="Script\Extension\Interface\IList\String\IList.String.Extend.Trim.cs" />
-    <Compile Include="Script\Extension\Interface\IReadOnlyDictionary\IReadOnlyDictionary.Extend.cs" />
-    <Compile Include="Script\Extension\Interface\IReflect\IReflect.Extend.Get.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.cs" />
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Add.cs">
-      <DependentUpon>ISpan.Extend.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Copy.cs">
-      <DependentUpon>ISpan.Extend.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Disrupt.cs">
-      <DependentUpon>ISpan.Extend.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Insert.cs">
-      <DependentUpon>ISpan.Extend.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int16.Add.cs">
-      <DependentUpon>ISpan.Extend.Int16.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int16.cs">
-      <DependentUpon>ISpan.Extend.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int16.Remove.cs">
-      <DependentUpon>ISpan.Extend.Int16.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int32.Add.cs">
-      <DependentUpon>ISpan.Extend.Int32.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int32.cs">
-      <DependentUpon>ISpan.Extend.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int32.Remove.cs">
-      <DependentUpon>ISpan.Extend.Int32.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int64.Add.cs">
-      <DependentUpon>ISpan.Extend.Int64.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int64.cs">
-      <DependentUpon>ISpan.Extend.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int64.Remove.cs">
-      <DependentUpon>ISpan.Extend.Int64.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int8.Add.cs">
-      <DependentUpon>ISpan.Extend.Int8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int8.cs">
-      <DependentUpon>ISpan.Extend.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int8.Remove.cs">
-      <DependentUpon>ISpan.Extend.Int8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Remove.cs">
-      <DependentUpon>ISpan.Extend.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Slice.cs">
-      <DependentUpon>ISpan.Extend.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Trim.cs">
-      <DependentUpon>ISpan.Extend.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt32.Add.cs">
-      <DependentUpon>ISpan.Extend.UInt32.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt32.cs">
-      <DependentUpon>ISpan.Extend.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt32.Remove.cs">
-      <DependentUpon>ISpan.Extend.UInt32.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt64.cs">
-      <DependentUpon>ISpan.Extend.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt64.Add.cs">
-      <DependentUpon>ISpan.Extend.UInt64.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt64.Remove.cs">
-      <DependentUpon>ISpan.Extend.UInt64.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt16.cs">
-      <DependentUpon>ISpan.Extend.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt16.Add.cs">
-      <DependentUpon>ISpan.Extend.UInt16.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt16.Remove.cs">
-      <DependentUpon>ISpan.Extend.UInt16.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt8.Add.cs">
-      <DependentUpon>ISpan.Extend.UInt8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt8.cs">
-      <DependentUpon>ISpan.Extend.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt8.Remove.cs">
-      <DependentUpon>ISpan.Extend.UInt8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Extension\Interface\IType\IType.Extend.cs" />
-    <Compile Include="Script\Extension\Struct\Byte\Byte.Extend.To.cs" />
-    <Compile Include="Script\Extension\Struct\Char\Char.Extend.cs" />
-    <Compile Include="Script\Extension\Struct\Char\Char.Extend.Get.cs" />
-    <Compile Include="Script\Extension\Struct\Char\Char.Extend.IS.cs" />
-    <Compile Include="Script\Extension\Struct\Char\Char.Extend.Judge.cs" />
-    <Compile Include="Script\Extension\Struct\Char\Char.Extend.ToConver.cs" />
-    <Compile Include="Script\Extension\Struct\Long\LongExtened.Extend.cs" />
-    <Compile Include="Script\Handle\AHandle.cs" />
-    <Compile Include="Script\Handle\Net\FTP\Handle.FTP.cs" />
-    <Compile Include="Script\Handle\Net\FTP\Handle.FTP.Task.cs" />
-    <Compile Include="Script\Handle\Net\HTTP\Handle.HTTP.cs" />
-    <Compile Include="Script\Handle\Progress\AOperation.cs" />
-    <Compile Include="Script\Handle\Progress\AProgress.cs" />
-    <Compile Include="Script\Handle\Progress\AProgressEvent.cs" />
-    <Compile Include="Script\Handle\Progress\EProgressState.cs" />
-    <Compile Include="Script\Handle\Progress\Interface\IProgressEvent.cs" />
-    <Compile Include="Script\Handle\Progress\Interface\IProgressInfo.cs" />
-    <Compile Include="Script\Handle\Progress\Interface\IProgressOperation.cs" />
-    <Compile Include="Script\Handle\Progress\Interface\IProgressReport.cs" />
-    <Compile Include="Script\Helper\Database\U.Encrypt.cs" />
-    <Compile Include="Script\Helper\Database\U.FileID.cs" />
-    <Compile Include="Script\Helper\Exception\AExpNetGetResponseStream.cs" />
-    <Compile Include="Script\Helper\IO\Base\IO.GetDir.cs" />
-    <Compile Include="Script\Helper\IO\Base\IO.GetFile.cs" />
-    <Compile Include="Script\Helper\IO\Base\IO.Try.cs" />
-    <Compile Include="Script\Helper\Net\Client\NetBuffer.cs" />
-    <Compile Include="Script\Helper\Net\FTP\U.FTP.Check.cs" />
-    <Compile Include="Script\Helper\Net\FTP\U.FTP.Create.cs" />
-    <Compile Include="Script\Helper\Net\FTP\U.FTP.Delete.cs" />
-    <Compile Include="Script\Helper\Net\FTP\U.FTP.DownloadFile.cs" />
-    <Compile Include="Script\Helper\Net\FTP\U.FTP.DownloadDir.cs" />
-    <Compile Include="Script\Helper\Net\FTP\U.FTP.Get.cs" />
-    <Compile Include="Script\Helper\Net\FTP\U.FTP.Helper.cs" />
-    <Compile Include="Script\Helper\Net\FTP\U.FTP.UploadDir.cs" />
-    <Compile Include="Script\Helper\Net\FTP\U.FTP.UploadFile.cs" />
-    <Compile Include="Script\Helper\Net\HTTP\U.Http.Connect.cs" />
-    <Compile Include="Script\Helper\Net\HTTP\U.Http.Delete.cs" />
-    <Compile Include="Script\Helper\Net\HTTP\U.Http.Download.cs" />
-    <Compile Include="Script\Helper\Net\HTTP\U.Http.Downloads.cs" />
-    <Compile Include="Script\Helper\Net\HTTP\U.Http.Get.cs" />
-    <Compile Include="Script\Helper\Net\HTTP\U.Http.Head.cs" />
-    <Compile Include="Script\Helper\Net\HTTP\U.Http.Helper.cs" />
-    <Compile Include="Script\Helper\Net\HTTP\U.Http.Options.cs" />
-    <Compile Include="Script\Helper\Net\HTTP\U.Http.Post.cs" />
-    <Compile Include="Script\Helper\Net\HTTP\U.Http.Put.cs" />
-    <Compile Include="Script\Helper\Net\HTTP\U.Http.Trace.cs" />
-    <Compile Include="Script\Helper\Net\U.FTP.cs" />
-    <Compile Include="Script\Helper\Net\U.HTTP.cs" />
-    <Compile Include="Script\Helper\Net\U.Net.cs" />
-    <Compile Include="Script\Helper\Net\U.Net.Helper.cs" />
-    <Compile Include="Script\Helper\Reflect\U.Reflect.cs" />
-    <Compile Include="Script\Helper\Time\UTimeStamp.cs" />
-    <Compile Include="Script\Interface\Disposable\LockDisposable.cs" />
-    <Compile Include="Script\Interface\ILoad.cs" />
-    <Compile Include="Script\Interface\ISave.cs" />
-    <Compile Include="Script\Interface\Read\IReadBool.cs" />
-    <Compile Include="Script\Interface\Read\IReadByte.cs" />
-    <Compile Include="Script\Interface\Read\IReadChar.cs" />
-    <Compile Include="Script\Interface\Read\IReadData.cs" />
-    <Compile Include="Script\Interface\Read\IReadDecimal.cs" />
-    <Compile Include="Script\Interface\Read\IReadDouble.cs" />
-    <Compile Include="Script\Interface\Read\IReadEnum.cs" />
-    <Compile Include="Script\Interface\Read\IReadFloat.cs" />
-    <Compile Include="Script\Interface\Read\IReadICollection.cs" />
-    <Compile Include="Script\Interface\Read\IReadIDictionary.cs" />
-    <Compile Include="Script\Interface\Read\IReadIList.cs" />
-    <Compile Include="Script\Interface\Read\IReadInt16.cs" />
-    <Compile Include="Script\Interface\Read\IReadInt32.cs" />
-    <Compile Include="Script\Interface\Read\IReadInt64.cs" />
-    <Compile Include="Script\Interface\Read\IReadJson.cs" />
-    <Compile Include="Script\Interface\Read\IReadLength.cs" />
-    <Compile Include="Script\Interface\Read\IReadSByte.cs" />
-    <Compile Include="Script\Interface\Read\IReadString.cs" />
-    <Compile Include="Script\Interface\Read\IReadUInt16.cs" />
-    <Compile Include="Script\Interface\Read\IReadUInt32.cs" />
-    <Compile Include="Script\Interface\Read\IReadUInt64.cs" />
-    <Compile Include="Script\Interface\Storage\IBinData.cs" />
-    <Compile Include="Script\Interface\Storage\IBinDeserialize.cs" />
-    <Compile Include="Script\Interface\Storage\IBinSerialize.cs" />
-    <Compile Include="Script\Interface\Storage\IBinStorage.cs" />
-    <Compile Include="Script\Interface\Storage\IDeserialize.cs" />
-    <Compile Include="Script\Interface\Storage\IReset.cs" />
-    <Compile Include="Script\Interface\Storage\ISerialize.cs" />
-    <Compile Include="Script\Interface\Write\IWriteBool.cs" />
-    <Compile Include="Script\Interface\Write\IWriteByte.cs" />
-    <Compile Include="Script\Interface\Write\IWriteChar.cs" />
-    <Compile Include="Script\Interface\Write\IWriteData.cs" />
-    <Compile Include="Script\Interface\Write\IWriteDecimal.cs" />
-    <Compile Include="Script\Interface\Write\IWriteDouble.cs" />
-    <Compile Include="Script\Interface\Write\IWriteEnum.cs" />
-    <Compile Include="Script\Interface\Write\IWriteFloat.cs" />
-    <Compile Include="Script\Interface\Write\IWriteICollection.cs" />
-    <Compile Include="Script\Interface\Write\IWriteIDictionary.cs" />
-    <Compile Include="Script\Interface\Write\IWriteIList.cs" />
-    <Compile Include="Script\Interface\Write\IWriteInt16.cs" />
-    <Compile Include="Script\Interface\Write\IWriteInt32.cs" />
-    <Compile Include="Script\Interface\Write\IWriteInt64.cs" />
-    <Compile Include="Script\Interface\Write\IWriteJson.cs" />
-    <Compile Include="Script\Interface\Write\IWriteLength.cs" />
-    <Compile Include="Script\Interface\Write\IWriteSByte.cs" />
-    <Compile Include="Script\Interface\Write\IWriteString.cs" />
-    <Compile Include="Script\Interface\Write\IWriteUInt16.cs" />
-    <Compile Include="Script\Interface\Write\IWriteUInt32.cs" />
-    <Compile Include="Script\Interface\Write\IWriteUInt64.cs" />
-    <Compile Include="Script\Tools\Array\DisplayList.cs" />
-    <Compile Include="Script\Tools\Array\PageDictionary.cs" />
-    <Compile Include="Script\Tools\Array\PageList.cs" />
-    <Compile Include="Script\Tools\Bean\GBean.cs" />
-    <Compile Include="Script\Tools\Bean\GBeanRegisterAttribute.cs" />
-    <Compile Include="Script\Tools\Bean\GBeanSystem.cs" />
-    <Compile Include="Script\Tools\Buffer\Buffer.cs" />
-    <Compile Include="Script\Tools\Buffer\Buffer.Extend.cs" />
-    <Compile Include="Script\Tools\Buffer\Buffer.Generics.cs" />
-    <Compile Include="Script\Tools\Buffer\Buffer.ICloneable.cs" />
-    <Compile Include="Script\Tools\Buffer\Buffer.IEqualityComparer.cs" />
-    <Compile Include="Script\Tools\Buffer\Buffer.IList.cs" />
-    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Bool.cs" />
-    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Byte.cs" />
-    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Char.cs" />
-    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.cs" />
-    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Decimal.cs" />
-    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Double.cs" />
-    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Enum.cs" />
-    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Float.cs" />
-    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.ICollection.cs" />
-    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.IDictionary.cs" />
-    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.IList.cs" />
-    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Int16.cs" />
-    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Int32.cs" />
-    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Int64.cs" />
-    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Json.cs" />
-    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Len.cs" />
-    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.SByte.cs" />
-    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.String.cs" />
-    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.UInt16.cs" />
-    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.UInt32.cs" />
-    <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.UInt64.cs" />
-    <Compile Include="Script\Tools\Buffer\Ring\BufferRing.cs" />
-    <Compile Include="Script\Tools\Buffer\Ring\BufferRing.Extend.cs" />
-    <Compile Include="Script\Tools\FileCache.cs" />
-    <Compile Include="Script\Tools\Handle\Interface\IOperation.cs" />
-    <Compile Include="Script\Tools\Handle\Interface\IOperationAction.cs" />
-    <Compile Include="Script\Tools\Handle\Interface\IOperationArray.cs" />
-    <Compile Include="Script\Tools\Handle\Interface\IOperationBase.cs" />
-    <Compile Include="Script\Tools\Handle\Interface\IOperationAction`1.cs" />
-    <Compile Include="Script\Tools\Handle\Interface\ITask.cs" />
-    <Compile Include="Script\Tools\Handle\OperationAction.cs" />
-    <Compile Include="Script\Tools\Handle\OperationAction`1.cs" />
-    <Compile Include="Script\Tools\Handle\OperationGenerics.cs" />
-    <Compile Include="Script\Tools\Handle\OperationGenericsList.cs" />
-    <Compile Include="Script\Tools\HashCode\HashCode.cs" />
-    <Compile Include="Script\Tools\Mail\Mail.Usage.cs" />
-    <Compile Include="Script\Tools\Mail\MailHandle.cs" />
-    <Compile Include="Script\Tools\Mail\MailMultipInfo.cs" />
-    <Compile Include="Script\Tools\Mail\MailMultipleHandle.cs" />
-    <Compile Include="Script\Tools\Mail\MailSingleHandle.cs" />
-    <Compile Include="Script\Tools\Mail\MailSingleInfo.cs" />
-    <Compile Include="Script\Tools\NetWork\Backup\BytesSerializable.cs" />
-    <Compile Include="Script\Tools\NetWork\Backup\DownloadInfo.cs" />
-    <Compile Include="Script\Tools\NetWork\Backup\HTTPNetwork.cs" />
-    <Compile Include="Script\Tools\NetWork\Backup\HTTPRequest.cs" />
-    <Compile Include="Script\Tools\NetWork\Backup\HTTPResponse.cs" />
-    <Compile Include="Script\Tools\NetWork\Backup\IHTTPRequest.cs" />
-    <Compile Include="Script\Tools\NetWork\Backup\INetCryptography.cs" />
-    <Compile Include="Script\Tools\NetWork\Backup\INetGuard.cs" />
-    <Compile Include="Script\Tools\NetWork\Backup\INetRequest.cs" />
-    <Compile Include="Script\Tools\NetWork\Backup\INetResponse.cs" />
-    <Compile Include="Script\Tools\NetWork\Backup\INetSerialization.cs" />
-    <Compile Include="Script\Tools\NetWork\Backup\INetwork.cs" />
-    <Compile Include="Script\Tools\NetWork\Backup\Network.cs" />
-    <Compile Include="Script\Tools\NetWork\HTTP\HttpClient.cs" />
-    <Compile Include="Script\Tools\NetWork\HTTP\HttpRequest.cs" />
-    <Compile Include="Script\Tools\NetWork\HTTP\HttpResponse.cs" />
-    <Compile Include="Script\Tools\NetWork\HTTP\HttpServer.cs" />
-    <Compile Include="Script\Tools\NetWork\HTTP\HttpSession.cs" />
-    <Compile Include="Script\Tools\NetWork\Interface\INet.cs" />
-    <Compile Include="Script\Tools\NetWork\Interface\INetClient.cs" />
-    <Compile Include="Script\Tools\NetWork\Interface\INetServer.cs" />
-    <Compile Include="Script\Tools\NetWork\Interface\INetSession.cs" />
-    <Compile Include="Script\Tools\NetWork\Interface\IWebSocket.cs" />
-    <Compile Include="Script\Tools\NetWork\NetClient.cs" />
-    <Compile Include="Script\Tools\NetWork\NetServer.cs" />
-    <Compile Include="Script\Tools\NetWork\NetSetting.cs" />
-    <Compile Include="Script\Tools\NetWork\TCP\Client\TcpClient.Connect.cs" />
-    <Compile Include="Script\Tools\NetWork\TCP\Client\TcpClient.cs" />
-    <Compile Include="Script\Tools\NetWork\TCP\Client\TcpClient.Receive.cs" />
-    <Compile Include="Script\Tools\NetWork\TCP\Client\TcpClient.Send.cs" />
-    <Compile Include="Script\Tools\NetWork\TCP\Client\TcpSetting.Client.cs" />
-    <Compile Include="Script\Tools\NetWork\TCP\Server\TcpServer.cs" />
-    <Compile Include="Script\Tools\NetWork\TCP\Server\TcpSetting.Server.cs" />
-    <Compile Include="Script\Tools\NetWork\TCP\Session\TcpSession.cs" />
-    <Compile Include="Script\Tools\NetWork\TCP\Session\TcpSession.Receive.cs" />
-    <Compile Include="Script\Tools\NetWork\TCP\Session\TcpSession.Send.cs" />
-    <Compile Include="Script\Tools\NetWork\UDP\Client\UdpClient.Connect.cs" />
-    <Compile Include="Script\Tools\NetWork\UDP\Client\UdpClient.cs" />
-    <Compile Include="Script\Tools\NetWork\UDP\Client\UdpClient.Receive.cs" />
-    <Compile Include="Script\Tools\NetWork\UDP\Client\UdpClient.Send.cs" />
-    <Compile Include="Script\Tools\NetWork\UDP\Client\UdpSetting.Client.cs" />
-    <Compile Include="Script\Tools\NetWork\UDP\Server\UdpServer.cs" />
-    <Compile Include="Script\Tools\NetWork\UDP\Server\UdpServer.Receive.cs" />
-    <Compile Include="Script\Tools\NetWork\UDP\Server\UdpServer.Send.cs" />
-    <Compile Include="Script\Tools\NetWork\UDP\Server\UdpSetting.Server.cs" />
-    <Compile Include="Script\Tools\PList\IPListElement.cs" />
-    <Compile Include="Script\Tools\PList\PListBinaryReader.cs" />
-    <Compile Include="Script\Tools\PList\PListBinaryWriter.cs" />
-    <Compile Include="Script\Tools\PList\PListContainer\PListArray.cs" />
-    <Compile Include="Script\Tools\PList\PListContainer\PListDict.cs" />
-    <Compile Include="Script\Tools\PList\PListElement.cs" />
-    <Compile Include="Script\Tools\PList\PListElementFactory.cs" />
-    <Compile Include="Script\Tools\PList\PListExceptions\PListException.cs" />
-    <Compile Include="Script\Tools\PList\PListExceptions\PListFormatException.cs" />
-    <Compile Include="Script\Tools\PList\PListFormat.cs" />
-    <Compile Include="Script\Tools\PList\PListPrimitives\PListBool.cs" />
-    <Compile Include="Script\Tools\PList\PListPrimitives\PListData.cs" />
-    <Compile Include="Script\Tools\PList\PListPrimitives\PListDate.cs" />
-    <Compile Include="Script\Tools\PList\PListPrimitives\PListFill.cs" />
-    <Compile Include="Script\Tools\PList\PListPrimitives\PListInteger.cs" />
-    <Compile Include="Script\Tools\PList\PListPrimitives\PListNull.cs" />
-    <Compile Include="Script\Tools\PList\PListPrimitives\PListReal.cs" />
-    <Compile Include="Script\Tools\PList\PListPrimitives\PListString.cs" />
-    <Compile Include="Script\Tools\PList\PListRoot.cs" />
-    <Compile Include="Script\Tools\PoolSystem\Class\Pool.StringBuilder.cs" />
-    <Compile Include="Script\Tools\PoolSystem\List\PoolSystem.cs" />
-    <Compile Include="Script\Tools\PoolSystem\List\PoolSystem.G1.cs" />
-    <Compile Include="Script\Tools\PoolSystem\List\PoolSystem.G1.Inst.cs" />
-    <Compile Include="Script\Tools\PoolSystem\List\PoolSystem.Static.cs" />
-    <Compile Include="Script\Tools\PoolSystem\Type\PoolTypeSystem.cs" />
-    <Compile Include="Script\Tools\PoolSystem\Type\PoolTypeSystem.Static.cs" />
-    <Compile Include="Script\Tools\Pool\Pool.cs" />
-    <Compile Include="Script\Tools\Pool\Pool.Dictionary.cs" />
-    <Compile Include="Script\Tools\Pool\Pool.Dispose.cs" />
-    <Compile Include="Script\Tools\Pool\Pool.Generic.cs" />
-    <Compile Include="Script\Tools\Pool\Pool.HashSet.cs" />
-    <Compile Include="Script\Tools\Pool\Pool.LinkedList.cs" />
-    <Compile Include="Script\Tools\Pool\Pool.List.cs" />
-    <Compile Include="Script\Tools\Pool\Pool.Queue.cs" />
-    <Compile Include="Script\Tools\Pool\Pool.SortedList.cs" />
-    <Compile Include="Script\Tools\Pool\Pool.Stack.cs" />
-    <Compile Include="Script\Tools\Pool\Pool.Using.cs" />
-    <Compile Include="Script\Tools\Singleton\Singleton.cs" />
-    <Compile Include="Script\Tools\Storage\Bin\Bin.Dictionary.cs" />
-    <Compile Include="Script\Tools\Storage\Bin\Bin.HashSet.cs" />
-    <Compile Include="Script\Tools\Storage\Bin\Bin.List.cs" />
-    <Compile Include="Script\Tools\Storage\Bin\Bin.Queue.cs" />
-    <Compile Include="Script\Tools\Storage\Bin\Bin.SortedList.cs" />
-    <Compile Include="Script\Tools\Storage\Bin\Bin.Stack.cs" />
-    <Compile Include="Script\Tools\Storage\Storage.cs" />
-    <Compile Include="Script\Tools\Storage\Storage.List.cs" />
-    <Compile Include="Script\Tools\Storage\StorageFile.cs" />
-    <Compile Include="Script\Tools\Version.cs" />
-    <Compile Include="Script\Unit\ScriptType.cs" />
-    <Compile Include="Script\Unit\Unit.Char.cs" />
-    <Compile Include="Script\Unit\Unit.Chinese.cs" />
-    <Compile Include="Script\Unit\Unit.Color.cs" />
-    <Compile Include="Script\Unit\Unit.Suffix.cs" />
-    <Compile Include="Script\Unit\Unit.Time.cs" />
-    <Compile Include="Script\Helper\Database\U.Base64.cs" />
-    <Compile Include="Script\Helper\Database\U.Binary.cs" />
-    <Compile Include="Script\Helper\Database\U.DataEncrypt.cs" />
-    <Compile Include="Script\Helper\Database\U.HashTable.cs" />
-    <Compile Include="Script\Helper\Database\U.Json.NewtonSoft.cs" />
-    <Compile Include="Script\Helper\Database\U.Xml.cs" />
-    <Compile Include="Script\Helper\Database\U.Yaml.cs" />
-    <Compile Include="Script\Helper\Exception\AExpAmbiguousAExpOperator.cs" />
-    <Compile Include="Script\Helper\Exception\AExpInvalidConversion.cs" />
-    <Compile Include="Script\Helper\Exception\AexpInvalidAExpOperator.cs" />
-    <Compile Include="Script\Helper\Exception\AExpOperator.cs" />
-    <Compile Include="Script\Helper\Exception\AexpUnexpectedEnumValue.cs" />
-    <Compile Include="Script\Helper\Guid\U.Guid.cs" />
-    <Compile Include="Script\Helper\Interface\ICollection\IKeyedCollection.cs" />
-    <Compile Include="Script\Helper\Interface\ICollection\IMergedCollection.cs" />
-    <Compile Include="Script\Helper\Interface\ICollection\ISet.cs" />
-    <Compile Include="Script\Helper\Interface\ICollection\MergedCollection.cs" />
-    <Compile Include="Script\Helper\Interface\ICollection\MergedKeyedCollection.cs" />
-    <Compile Include="Script\Helper\Interface\ICollection\VariantCollection.cs" />
-    <Compile Include="Script\Helper\Interface\ICollection\VariantKeyedCollection.cs" />
-    <Compile Include="Script\Helper\Interface\IDictionary\DebugDictionary.cs" />
-    <Compile Include="Script\Helper\Interface\IDictionary\FlexibleDictionary.cs" />
-    <Compile Include="Script\Helper\Interface\IEqualityComparer\ReferenceEqualityComparer.cs" />
-    <Compile Include="Script\Helper\Interface\INotified\INotifiedCollectionItem.cs" />
-    <Compile Include="Script\Helper\Interface\INotified\INotifyCollectionChanged.cs" />
-    <Compile Include="Script\Helper\Interface\IPoolable.cs" />
-    <Compile Include="Script\Helper\IO\Base\IO.Clear.cs" />
-    <Compile Include="Script\Helper\IO\Base\IO.Copy.cs" />
-    <Compile Include="Script\Helper\IO\Base\IO.Create.Async.cs" />
-    <Compile Include="Script\Helper\IO\Base\IO.Create.cs" />
-    <Compile Include="Script\Helper\IO\Base\IO.Delete.Async.cs" />
-    <Compile Include="Script\Helper\IO\Base\IO.Delete.cs" />
-    <Compile Include="Script\Helper\IO\Base\IO.Encoding.cs" />
-    <Compile Include="Script\Helper\IO\Base\IO.Exists.cs" />
-    <Compile Include="Script\Helper\IO\Base\IO.Find.cs" />
-    <Compile Include="Script\Helper\IO\Base\IO.Get.cs" />
-    <Compile Include="Script\Helper\IO\Base\IO.Move.cs" />
-    <Compile Include="Script\Helper\IO\Binary\IO.Byte.Async.cs" />
-    <Compile Include="Script\Helper\IO\Binary\IO.Byte.cs" />
-    <Compile Include="Script\Helper\IO\Binary\IO.File.Async.cs" />
-    <Compile Include="Script\Helper\IO\Binary\IO.File.cs" />
-    <Compile Include="Script\Helper\IO\Binary\IO.Zip.Compress.cs" />
-    <Compile Include="Script\Helper\IO\Binary\IO.Zip.Uncompressed.cs" />
-    <Compile Include="Script\Helper\IO\Text\IO.Base64.Async.cs" />
-    <Compile Include="Script\Helper\IO\Text\IO.Base64.cs" />
-    <Compile Include="Script\Helper\IO\Text\IO.Json.Async.cs" />
-    <Compile Include="Script\Helper\IO\Text\IO.Json.cs" />
-    <Compile Include="Script\Helper\IO\Text\IO.PList.Async.cs" />
-    <Compile Include="Script\Helper\IO\Text\IO.PList.cs" />
-    <Compile Include="Script\Helper\IO\Text\IO.Text.Async.cs" />
-    <Compile Include="Script\Helper\IO\Text\IO.Text.cs" />
-    <Compile Include="Script\Helper\IO\Text\IO.Text.Unicode.Async.cs" />
-    <Compile Include="Script\Helper\IO\Text\IO.Text.Unicode.cs" />
-    <Compile Include="Script\Helper\IO\Text\IO.Text.UTF8.Async.cs" />
-    <Compile Include="Script\Helper\IO\Text\IO.Text.UTF8.cs" />
-    <Compile Include="Script\Helper\IO\Text\IO.XML.Async.cs" />
-    <Compile Include="Script\Helper\IO\Text\IO.XML.cs" />
-    <Compile Include="Script\Helper\IO\Text\IO.Yaml.Async.cs" />
-    <Compile Include="Script\Helper\IO\Text\IO.Yaml.cs" />
-    <Compile Include="Script\Helper\Math\Hash\CRC32Algorithm.cs" />
-    <Compile Include="Script\Helper\Math\Hash\SafeProxy.cs" />
-    <Compile Include="Script\Helper\Math\Hash\U.Hash.cs" />
-    <Compile Include="Script\Helper\Math\Hash\U.Hash.Get.cs" />
-    <Compile Include="Script\Helper\Math\U.Hex.cs" />
-    <Compile Include="Script\Helper\Math\U.Math.cs" />
-    <Compile Include="Script\Helper\Math\U.MD5.cs" />
-    <Compile Include="Script\Helper\Math\U.Random.cs" />
-    <Compile Include="Script\Helper\Math\U.Status.cs" />
-    <Compile Include="Script\Helper\Math\U.Time.cs" />
-    <Compile Include="Script\Helper\Net\HTTP\HttpDownload.cs" />
-    <Compile Include="Script\Helper\Net\HTTP\HttpDownloadInfo.cs" />
-    <Compile Include="Script\Helper\String\StringBlock.cs" />
-    <Compile Include="Script\Helper\String\U.IDNo.cs" />
-    <Compile Include="Script\Helper\String\U.MaskWord.cs" />
-    <Compile Include="Script\Helper\String\U.String.Builder.cs" />
-    <Compile Include="Script\Helper\String\U.String.cs" />
-    <Compile Include="Script\Helper\String\U.String.IS.cs" />
-    <Compile Include="Script\Helper\System\Marshal\Define.cs" />
-    <Compile Include="Script\Helper\System\Marshal\U.Marshal.cs" />
-    <Compile Include="Script\Helper\System\U.Assembly.cs" />
-    <Compile Include="Script\Helper\System\U.Class.cs" />
-    <Compile Include="Script\Helper\System\U.GC.cs" />
-    <Compile Include="Script\Helper\System\U.SystemInfo.cs" />
-    <Compile Include="Script\Helper\AHelper.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3">
-    </PackageReference>
-    <PackageReference Include="System.Buffers" Version="4.3.0" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.3" />
-    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.2" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Plugins\Microsoft" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Script\Extension\Class\Stream\Stream.Extend.Encrypt.Generated.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Stream.Extend.Encrypt.Generated.cs</LastGenOutput>
-    </Content>
-    <Content Include="Script\Helper\Net\FTP\FTP.md" />
-    <Content Include="Script\Helper\Net\Http\HTTP.md" />
-    <Content Include="Script\Tools\Tuple\Tuple.Generated.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Tuple.Generated.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>@set CUR_DLL=$(ProjectDir)$(OutDir)
-@cd /d $(SolutionDir)
-@cd ..
-@set cur=%25cd%25\Plugins\
-@if not exist %cur% (
-@exit
-)
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{B0D5708A-7C94-4BCB-805D-A718034E5724}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>AIO</RootNamespace>
+        <AssemblyName>AIO.Common</AssemblyName>
+        <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+        <Deterministic>true</Deterministic>
+        <LangVersion>8</LangVersion>
+        <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+        <RestorePackagesPath>$(SolutionDir)packages</RestorePackagesPath>
+        <RuntimeIdentifiers>win;linux-x64;osx-x64</RuntimeIdentifiers>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <DocumentationFile>bin\Debug\AIO.Common.xml</DocumentationFile>
+        <NoWarn>CS8600;</NoWarn>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <DebugType>pdbonly</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <DocumentationFile>bin\Release\AIO.Common.xml</DocumentationFile>
+        <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+        <NoWarn>CS8600;CS0809;CS8632;CS8603;CS0649;CS0809;CS8632;</NoWarn>
+    </PropertyGroup>
+    <PropertyGroup>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    </PropertyGroup>
+    <PropertyGroup>
+        <RunPostBuildEvent>Always</RunPostBuildEvent>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.BZip2\BZip2.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.BZip2\BZip2Constants.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.BZip2\BZip2Exception.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.BZip2\BZip2InputStream.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.BZip2\BZip2OutputStream.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Checks\Adler32.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Checks\BZip2Crc.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Checks\Crc32.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Checks\IChecksum.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\CompletedFileHandler.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\DirectoryEventArgs.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\DirectoryFailureHandler.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\ExtendedPathFilter.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\FileFailureHandler.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\FileSystemScanner.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\INameTransform.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\IScanFilter.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\NameAndSizeFilter.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\NameFilter.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\PathFilter.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\ProcessFileHandler.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\ProgressEventArgs.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\ProgressHandler.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\ScanEventArgs.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\ScanFailureEventArgs.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\StreamUtils.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Core\WindowsPathUtils.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Encryp\PkzipClassic.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Encryp\PkzipClassicCryptoBase.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Encryp\PkzipClassicDecryptCryptoTrans.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Encryp\PkzipClassicEncryptCryptoTrans.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Encryp\PkzipClassicManaged.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Encryp\ZipAESStream.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Encryp\ZipAESTransform.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.GZip\GZip.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.GZip\GZipConstants.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.GZip\GZipException.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.GZip\GZipInputStream.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.GZip\GZipOutputStream.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Lzw\LzwConstants.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Lzw\LzwException.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Lzw\LzwInputStream.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\InvalidHeaderException.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\ProgressMessageHandler.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\TarArchive.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\TarBuffer.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\TarEntry.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\TarException.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\TarHeader.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\TarInputStream.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Tar\TarOutputStream.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\Deflater.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\DeflaterConstants.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\DeflaterEngine.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\DeflaterHuffman.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\DeflaterOutputStream.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\DeflaterPending.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\DeflateStrategy.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\Inflater.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\InflaterDynHeader.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\InflaterHuffmanTree.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\InflaterInputBuffer.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\InflaterInputStream.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\OutputWindow.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\PendingBuffer.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip.Co\StreamManipulator.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\BaseArchiveStorage.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\CompressionMethod.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\DescriptorData.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\DiskArchiveStorage.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\DynamicDiskDataSource.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\EncryptionAlgorithm.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\EntryPatchData.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ExtendedUnixData.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\FastZip.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\FastZipEvents.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\FileUpdateMode.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\GeneralBitFlags.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\HostSystemID.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\IArchiveStorage.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\IDynamicDataSource.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\IEntryFactory.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\IStaticDataSource.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ITaggedData.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ITaggedDataFactory.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\KeysRequiredEventArgs.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\MemoryArchiveStorage.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\NTTaggedData.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\RawTaggedData.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\StaticDiskDataSource.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\TestOperation.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\TestStatus.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\TestStrategy.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\UseZip64.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\WindowsNameTransform.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipConstants.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipEntry.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipEntryFactory.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipException.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipExtraData.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipFile.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipHelperStream.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipInputStream.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipNameTransform.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipOutputStream.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib.Zip\ZipTestResultHandler.cs"/>
+        <Compile Include="Plugins\ICSharpCode.SharpZipLib\ICSharpCode.SharpZipLib\SharpZipBaseException.cs"/>
+        <Compile Include="Plugins\Microsoft\Microsoft.CodeAnalysis\EmbeddedAttribute.cs"/>
+        <Compile Include="Plugins\Microsoft\System.Collections.Generic\DeconstructionExtensions.cs"/>
+        <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\AllowNullAttribute.cs"/>
+        <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\DisallowNullAttribute.cs"/>
+        <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\DoesNotReturnAttribute.cs"/>
+        <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\DoesNotReturnIfAttribute.cs"/>
+        <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\MaybeNullAttribute.cs"/>
+        <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\MaybeNullWhenAttribute.cs"/>
+        <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\MemberNotNullAttribute.cs"/>
+        <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\MemberNotNullWhenAttribute.cs"/>
+        <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\NotNullAttribute.cs"/>
+        <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\NotNullIfNotNullAttribute.cs"/>
+        <Compile Include="Plugins\Microsoft\System.Diagnostics.CodeAnalysi\NotNullWhenAttribute.cs"/>
+        <Compile Include="Plugins\Microsoft\System.Runtime.CompilerService\IsReadOnlyAttribute.cs"/>
+        <Compile Include="Plugins\Microsoft\System.Runtime.CompilerService\NullableAttribute.cs"/>
+        <Compile Include="Plugins\Microsoft\System.Runtime.CompilerService\NullableContextAttribute.cs"/>
+        <Compile Include="Plugins\Pooled\BitHelper.cs"/>
+        <Compile Include="Plugins\Pooled\ClearMode.cs"/>
+        <Compile Include="Plugins\Pooled\HashHelpers.cs"/>
+        <Compile Include="Plugins\Pooled\HashHelpers.SerializationInfoTable.cs"/>
+        <Compile Include="Plugins\Pooled\ICollectionDebugView.cs"/>
+        <Compile Include="Plugins\Pooled\IDictionaryDebugView.cs"/>
+        <Compile Include="Plugins\Pooled\IReadOnlyPooledList.cs"/>
+        <Compile Include="Plugins\Pooled\NonRandomizedStringEqualityComparer.cs"/>
+        <Compile Include="Plugins\Pooled\PooledDictionary.cs"/>
+        <Compile Include="Plugins\Pooled\PooledExtensions.cs"/>
+        <Compile Include="Plugins\Pooled\PooledList.cs"/>
+        <Compile Include="Plugins\Pooled\PooledQueue.cs"/>
+        <Compile Include="Plugins\Pooled\PooledSet.cs"/>
+        <Compile Include="Plugins\Pooled\PooledSetEqualityComparer.cs"/>
+        <Compile Include="Plugins\Pooled\PooledStack.cs"/>
+        <Compile Include="Plugins\Pooled\QueueDebugView.cs"/>
+        <Compile Include="Plugins\Pooled\StackDebugView.cs"/>
+        <Compile Include="Plugins\Pooled\ThrowHelper.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\AnchorAlias.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\Comment.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\DocumentEnd.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\DocumentStart.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\EventType.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\IParsingEventVisitor.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\MappingEnd.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\MappingStart.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\MappingStyle.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\NodeEvent.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\ParsingEvent.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\Scalar.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\SequenceEnd.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\SequenceStart.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\SequenceStyle.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\StreamEnd.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Events\StreamStart.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Anchor.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\AnchorAlias.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\BlockEnd.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\BlockEntry.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\BlockMappingStart.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\BlockSequenceStart.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Comment.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\DocumentEnd.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\DocumentStart.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Error.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\FlowEntry.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\FlowMappingEnd.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\FlowMappingStart.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\FlowSequenceEnd.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\FlowSequenceStart.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Key.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Scalar.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\StreamEnd.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\StreamStart.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Tag.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\TagDirective.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Token.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\Value.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core.Tokens\VersionDirective.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\AnchorName.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\AnchorNotFoundException.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\CharacterAnalyzer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\Constants.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\Cursor.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\Emitter.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\EmitterSettings.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\EmitterState.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\ForwardAnchorNotSupportedExcep.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\HashCode.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\IEmitter.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\ILookAheadBuffer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\InsertionQueue.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\IParser.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\IScanner.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\LookAheadBuffer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\Mark.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\MaximumRecursionLevelReachedEx.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\MergingParser.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\Parser.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\ParserExtensions.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\ParserState.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\RecursionLevel.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\ScalarStyle.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\Scanner.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\SemanticErrorException.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\SimpleKey.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\StringLookAheadBuffer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\SyntaxErrorException.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\TagDirectiveCollection.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\TagName.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\Version.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Core\YamlException.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\ConcurrentObjectPool.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\ExpressionExtensions.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\GenericCollectionToNonGenericA.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\GenericDictionaryToNonGenericA.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\IOrderedDictionary.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\Lazy.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\NumberExtensions.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\OrderedDictionary.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\ReadOnlyCollectionExtensions.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\StringBuilderPool.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Helpers\ThrowHelper.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\DocumentLoadingState.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\EmitterState.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\IYamlVisitor.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\LibYamlEventStream.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlAliasNode.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlDocument.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlMappingNode.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlNode.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlNodeIdentityEqualityCompar.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlNodeType.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlScalarNode.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlSequenceNode.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlStream.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlVisitor.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.RepresentationModel\YamlVisitorBase.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Buffe\ITypeDiscriminatingNodeDeseria.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Buffe\ITypeDiscriminator.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Buffe\KeyValueTypeDiscriminator.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Buffe\ParserBuffer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Buffe\TypeDiscriminatingNodeDeserial.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Buffe\UniqueKeyTypeDiscriminator.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Conve\DateTimeConverter.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Conve\GuidConverter.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Conve\SystemTypeConverter.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Event\ChainedEventEmitter.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Event\JsonEventEmitter.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Event\TypeAssigningEventEmitter.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Event\WriterEventEmitter.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Namin\CamelCaseNamingConvention.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Namin\HyphenatedNamingConvention.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Namin\LowerCaseNamingConvention.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Namin\NullNamingConvention.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Namin\PascalCaseNamingConvention.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Namin\UnderscoredNamingConvention.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\ArrayNodeDeserializer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\CollectionDeserializer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\CollectionNodeDeserializer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\DictionaryDeserializer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\DictionaryNodeDeserializer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\EnumerableNodeDeserializer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\NullNodeDeserializer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\ObjectNodeDeserializer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\ScalarNodeDeserializer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\StaticArrayNodeDeserializer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\StaticCollectionNodeDeserializ.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\StaticDictionaryNodeDeserializ.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\TypeConverterNodeDeserializer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\YamlConvertibleNodeDeserialize.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeD\YamlSerializableNodeDeserializ.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeT\DefaultContainersNodeTypeResol.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeT\MappingNodeTypeResolver.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeT\PreventUnknownTagsNodeTypeReso.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeT\TagNodeTypeResolver.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeT\TypeNameInTagNodeTypeResolver.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeT\YamlConvertibleTypeResolver.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.NodeT\YamlSerializableTypeResolver.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\AnchorAssigner.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\AnchorAssigningObjectGraphVisi.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\ChainedObjectGraphVisitor.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\CommentsObjectGraphVisitor.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\CustomSerializationObjectGraph.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\DefaultExclusiveObjectGraphVis.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\DefaultObjectFactory.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\DefaultValuesObjectGraphVisito.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\EmittingObjectGraphVisitor.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\FullObjectGraphTraversalStrate.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\LambdaObjectFactory.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\ObjectFactoryBase.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\PreProcessingPhaseObjectGraphV.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\RoundtripObjectGraphTraversalS.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Objec\StaticObjectFactory.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Schem\CoreSchema.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Schem\DefaultSchema.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Schem\FailsafeSchema.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Schem\JsonSchema.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\CachedTypeInspector.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\CompositeTypeInspector.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\NamingConventionTypeInspector.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\ReadableAndWritablePropertiesT.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\ReadableFieldsTypeInspector.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\ReadablePropertiesTypeInspecto.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\TypeInspectorSkeleton.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeI\WritablePropertiesTypeInspecto.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeR\DynamicTypeResolver.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.TypeR\StaticTypeResolver.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\IPostDeserializationCallback.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\ITypeConverter.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\NullTypeConverter.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\ObjectAnchorCollection.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\ReflectionTypeConverter.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\ReflectionUtility.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\SerializerState.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\StringExtensions.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Utili\TypeConverter.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Value\AliasValueDeserializer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization.Value\NodeValueDeserializer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\AliasEventInfo.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\BuilderSkeleton.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\DefaultValuesHandling.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\Deserializer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\DeserializerBuilder.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\EmissionPhaseObjectGraphVisito.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\EventInfo.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IAliasProvider.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IDeserializer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IEventEmitter.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\INamingConvention.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\INodeDeserializer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\INodeTypeResolver.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IObjectAccessor.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IObjectDescriptor.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IObjectFactory.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IObjectGraphTraversalStrategy.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IObjectGraphVisitor.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IPropertyDescriptor.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IRegistrationLocationSelection.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ISerializer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ITrackingRegistrationLocationS.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ITypeInspector.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ITypeResolver.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IValueDeserializer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IValuePromise.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IValueSerializer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IYamlConvertible.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IYamlSerializable.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\IYamlTypeConverter.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\LazyComponentRegistrationList.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\LazyComponentRegistrationListE.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\MappingEndEventInfo.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\MappingStartEventInfo.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\Nothing.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ObjectDescriptor.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ObjectDescriptorExtensions.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ObjectDeserializer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ObjectEventInfo.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ObjectGraphTraversalStrategyFa.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ObjectSerializer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\PropertyDescriptor.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\ScalarEventInfo.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\SequenceEndEventInfo.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\SequenceStartEventInfo.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\Serializer.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\SerializerBuilder.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\Settings.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\StaticBuilderSkeleton.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\StaticContext.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\StaticDeserializerBuilder.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\StaticSerializerBuilder.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\StreamFragment.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\TagMappings.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\WrapperFactory.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlAttributeOverrides.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlAttributeOverridesInspecto.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlAttributesTypeInspector.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlFormatter.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlIgnoreAttribute.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlMemberAttribute.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlSerializableAttribute.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet.Serialization\YamlStaticContextAttribute.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet\CultureInfoAdapter.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet\PropertyInfoExtensions.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet\ReflectionExtensions.cs"/>
+        <Compile Include="Plugins\YamlDotNet\YamlDotNet\StandardRegexOptions.cs"/>
+        <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="Script\Algorithms\LruCache.cs"/>
+        <Compile Include="Script\Basics\HashAlgorithm\MD4.cs"/>
+        <Compile Include="Script\Extension\Class\Action\Action.Extend.cs"/>
+        <Compile Include="Script\Extension\Class\AppDomain\Extend.AppDomain.cs"/>
+        <Compile Include="Script\Extension\Class\Assembly\Extend.Assembly.cs"/>
+        <Compile Include="Script\Extension\Class\FieldInfo\FieldInfo.Extend.IS.cs"/>
+        <Compile Include="Script\Extension\Class\IntPtr\IntPtr.Extend.cs"/>
+        <Compile Include="Script\Extension\Class\IntPtr\IntPtr.Extend.ToConver.cs"/>
+        <Compile Include="Script\Extension\Class\MethodBase\MethodBase.Extend.Get.cs"/>
+        <Compile Include="Script\Extension\Class\MethodInfo\MethodInfo.Extend.cs"/>
+        <Compile Include="Script\Extension\Class\MethodInfo\MethodInfo.Extend.IS.cs"/>
+        <Compile Include="Script\Extension\Class\ParameterInfo\ParameterInfo.Extend.cs"/>
+        <Compile Include="Script\Extension\Class\PropertyInfo\PropertyInfo.Extend.IS.cs"/>
+        <Compile Include="Script\Extension\Class\Socket\Socket.Extend.cs"/>
+        <Compile Include="Script\Extension\Class\Sort\Sort.Bubble.cs">
+            <DependentUpon>Sort.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\Sort\Sort.BubbleTwoWay.cs">
+            <DependentUpon>Sort.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\Sort\Sort.Quick.cs">
+            <DependentUpon>Sort.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\Sort\Sort.Select.cs">
+            <DependentUpon>Sort.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\Sort\Sort.Heap.cs">
+            <DependentUpon>Sort.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\Sort\Sort.Merge.cs">
+            <DependentUpon>Sort.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\Sort\Sort.Insert.cs">
+            <DependentUpon>Sort.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\Sort\Sort.Bucket.cs">
+            <DependentUpon>Sort.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\Sort\Sort.cs"/>
+        <Compile Include="Script\Extension\Class\Sort\ValueType.cs" />
+        <Compile Include="Script\Extension\Class\Sort\ValueType.Generic.cs">
+            <DependentUpon>ValueType.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\Sort\Sort.Shell.cs">
+            <DependentUpon>Sort.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\Sort\ValueType.Span.cs">
+            <DependentUpon>ValueType.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\Sort\ValueType.IList.cs">
+            <DependentUpon>ValueType.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\Sort\Sort.Counting.cs">
+            <DependentUpon>Sort.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\Sort\Sort.Radix.cs">
+            <DependentUpon>Sort.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\Stream\Stream.Extend.Encrypt.cs"/>
+        <Compile Include="Script\Extension\Class\Stream\Stream.Extend.Encrypt.Generated.cs">
+            <DependentUpon>Stream.Extend.Encrypt.Generated.tt</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\StringBuilder\StringBuilder.Extend.cs"/>
+        <Compile Include="Script\Extension\Class\String\String.Extend.MD5Encryption.cs">
+            <DependentUpon>String.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\String\String.Extend.Encrypt.cs">
+            <DependentUpon>String.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\String\String.Extend.Append.cs">
+            <DependentUpon>String.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\String\String.Extend.Contains.cs">
+            <DependentUpon>String.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\String\String.Extend.cs"/>
+        <Compile Include="Script\Extension\Class\String\String.Extend.Filter.cs">
+            <DependentUpon>String.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\String\String.Extend.Format.cs">
+            <DependentUpon>String.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\String\String.Extend.Get.cs">
+            <DependentUpon>String.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\String\String.Extend.Indexes.cs">
+            <DependentUpon>String.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\String\String.Extend.Insert.cs">
+            <DependentUpon>String.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\String\String.Extend.IS.cs">
+            <DependentUpon>String.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\String\String.Extend.Path.cs">
+            <DependentUpon>String.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\String\String.Extend.RichText.cs">
+            <DependentUpon>String.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\String\String.Extend.Split.cs">
+            <DependentUpon>String.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\String\String.Extend.To.cs">
+            <DependentUpon>String.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\String\String.Extend.ToConver.cs">
+            <DependentUpon>String.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\String\String.Extend.Trim.cs">
+            <DependentUpon>String.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Class\Thread\Thread.Extend.cs"/>
+        <Compile Include="Script\Extension\Class\Type\Reflection\MethodReflectionInfo.cs"/>
+        <Compile Include="Script\Extension\Class\Type\Reflection\ParameterInfoReflectionInfo.cs"/>
+        <Compile Include="Script\Extension\Class\Type\Reflection\ReflectionInfo.cs"/>
+        <Compile Include="Script\Extension\Class\Type\Reflection\TypeReflectionInfo.cs"/>
+        <Compile Include="Script\Extension\Class\Type\Type.Extend.And.cs"/>
+        <Compile Include="Script\Extension\Class\Type\Type.Extend.Get.cs"/>
+        <Compile Include="Script\Extension\Class\Type\Type.Extend.IS.cs"/>
+        <Compile Include="Script\Extension\Class\Type\Type.Extend.Reset.cs"/>
+        <Compile Include="Script\Extension\Class\Type\Type.Extend.To.cs"/>
+        <Compile Include="Script\Extension\Enum\ExtendEnum.cs"/>
+        <Compile Include="Script\Extension\Exception\GenericClosingException.cs"/>
+        <Compile Include="Script\Extension\Interface\Empty.cs"/>
+        <Compile Include="Script\Extension\Interface\ICollection\ICollection.Extend.Find.cs"/>
+        <Compile Include="Script\Extension\Interface\IComparable\IComparable.Extend.cs"/>
+        <Compile Include="Script\Extension\Interface\ICustomAttributeProvider\ICustomAttributeProvider.Extend.cs"/>
+        <Compile Include="Script\Extension\Interface\IDictionary\IDictionary.Extend.Add.cs"/>
+        <Compile Include="Script\Extension\Interface\IDictionary\IDictionary.Extend.cs"/>
+        <Compile Include="Script\Extension\Interface\IDictionary\IDictionary.Extend.Get.cs"/>
+        <Compile Include="Script\Extension\Interface\IDictionary\IDictionary.Extend.Remove.cs"/>
+        <Compile Include="Script\Extension\Interface\IDictionary\IDictionary.Extend.Set.cs"/>
+        <Compile Include="Script\Extension\Interface\IDictionary\IDictionary.Extend.Swap.cs"/>
+        <Compile Include="Script\Extension\Interface\IEnumerable\Byte\IEnumerable.Byte.Extend.cs"/>
+        <Compile Include="Script\Extension\Interface\IEnumerable\Char\IEnumerable.Char.Extend.Contains.cs"/>
+        <Compile Include="Script\Extension\Interface\IEnumerable\IEnumerable.Extend.Contains.cs"/>
+        <Compile Include="Script\Extension\Interface\IEnumerable\IEnumerable.Extend.cs"/>
+        <Compile Include="Script\Extension\Interface\IEnumerable\IEnumerable.Extend.Find.cs"/>
+        <Compile Include="Script\Extension\Interface\IEnumerable\IEnumerable.Extend.To.cs"/>
+        <Compile Include="Script\Extension\Interface\IList\Byte\IList.Byte.Extend.cs"/>
+        <Compile Include="Script\Extension\Interface\IList\Byte\IList.Byte.Extend.Get.cs"/>
+        <Compile Include="Script\Extension\Interface\IList\Byte\IList.Byte.Extend.Set.cs"/>
+        <Compile Include="Script\Extension\Interface\IList\IList.Extend.cs"/>
+        <Compile Include="Script\Extension\Interface\IList\IList.Extend.Add.cs"/>
+        <Compile Include="Script\Extension\Interface\IList\IList.Extend.Disrupt.cs"/>
+        <Compile Include="Script\Extension\Interface\IList\IList.Extend.Exist.cs"/>
+        <Compile Include="Script\Extension\Interface\IList\IList.Extend.Get.cs"/>
+        <Compile Include="Script\Extension\Interface\IList\IList.Extend.IndexOf.cs"/>
+        <Compile Include="Script\Extension\Interface\IList\IList.Extend.Insert.cs"/>
+        <Compile Include="Script\Extension\Interface\IList\IList.Extend.Rmove.cs"/>
+        <Compile Include="Script\Extension\Interface\IList\IList.Extend.Set.cs"/>
+        <Compile Include="Script\Extension\Interface\IList\IList.Extend.Swap.cs"/>
+        <Compile Include="Script\Extension\Interface\IList\String\IList.String.Extend.Add.cs"/>
+        <Compile Include="Script\Extension\Interface\IList\String\IList.String.Extend.Pad.cs"/>
+        <Compile Include="Script\Extension\Interface\IList\String\IList.String.Extend.To.cs"/>
+        <Compile Include="Script\Extension\Interface\IList\String\IList.String.Extend.Trim.cs"/>
+        <Compile Include="Script\Extension\Interface\IReadOnlyDictionary\IReadOnlyDictionary.Extend.cs"/>
+        <Compile Include="Script\Extension\Interface\IReflect\IReflect.Extend.Get.cs"/>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.cs"/>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Add.cs">
+            <DependentUpon>ISpan.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Copy.cs">
+            <DependentUpon>ISpan.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Disrupt.cs">
+            <DependentUpon>ISpan.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Insert.cs">
+            <DependentUpon>ISpan.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int16.Add.cs">
+            <DependentUpon>ISpan.Extend.Int16.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int16.cs">
+            <DependentUpon>ISpan.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int16.Remove.cs">
+            <DependentUpon>ISpan.Extend.Int16.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int32.Add.cs">
+            <DependentUpon>ISpan.Extend.Int32.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int32.cs">
+            <DependentUpon>ISpan.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int32.Remove.cs">
+            <DependentUpon>ISpan.Extend.Int32.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int64.Add.cs">
+            <DependentUpon>ISpan.Extend.Int64.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int64.cs">
+            <DependentUpon>ISpan.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int64.Remove.cs">
+            <DependentUpon>ISpan.Extend.Int64.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int8.Add.cs">
+            <DependentUpon>ISpan.Extend.Int8.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int8.cs">
+            <DependentUpon>ISpan.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Int8.Remove.cs">
+            <DependentUpon>ISpan.Extend.Int8.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Remove.cs">
+            <DependentUpon>ISpan.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Slice.cs">
+            <DependentUpon>ISpan.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.Trim.cs">
+            <DependentUpon>ISpan.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt32.Add.cs">
+            <DependentUpon>ISpan.Extend.UInt32.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt32.cs">
+            <DependentUpon>ISpan.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt32.Remove.cs">
+            <DependentUpon>ISpan.Extend.UInt32.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt64.cs">
+            <DependentUpon>ISpan.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt64.Add.cs">
+            <DependentUpon>ISpan.Extend.UInt64.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt64.Remove.cs">
+            <DependentUpon>ISpan.Extend.UInt64.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt16.cs">
+            <DependentUpon>ISpan.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt16.Add.cs">
+            <DependentUpon>ISpan.Extend.UInt16.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt16.Remove.cs">
+            <DependentUpon>ISpan.Extend.UInt16.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt8.Add.cs">
+            <DependentUpon>ISpan.Extend.UInt8.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt8.cs">
+            <DependentUpon>ISpan.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\ISpan\ISpan.Extend.UInt8.Remove.cs">
+            <DependentUpon>ISpan.Extend.UInt8.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Interface\IType\IType.Extend.cs"/>
+        <Compile Include="Script\Extension\Struct\Byte\Byte.Extend.To.cs"/>
+        <Compile Include="Script\Extension\Struct\Char\Char.Extend.cs"/>
+        <Compile Include="Script\Extension\Struct\Char\Char.Extend.Get.cs"/>
+        <Compile Include="Script\Extension\Struct\Char\Char.Extend.IS.cs"/>
+        <Compile Include="Script\Extension\Struct\Char\Char.Extend.Judge.cs"/>
+        <Compile Include="Script\Extension\Struct\Char\Char.Extend.ToConver.cs"/>
+        <Compile Include="Script\Extension\Struct\Long\LongExtened.Extend.cs"/>
+        <Compile Include="Script\Handle\AHandle.cs"/>
+        <Compile Include="Script\Handle\Net\FTP\Handle.FTP.cs"/>
+        <Compile Include="Script\Handle\Net\FTP\Handle.FTP.Task.cs"/>
+        <Compile Include="Script\Handle\Net\HTTP\Handle.HTTP.cs"/>
+        <Compile Include="Script\Handle\Progress\AOperation.cs"/>
+        <Compile Include="Script\Handle\Progress\AProgress.cs"/>
+        <Compile Include="Script\Handle\Progress\AProgressEvent.cs"/>
+        <Compile Include="Script\Handle\Progress\EProgressState.cs"/>
+        <Compile Include="Script\Handle\Progress\Interface\IProgressEvent.cs"/>
+        <Compile Include="Script\Handle\Progress\Interface\IProgressInfo.cs"/>
+        <Compile Include="Script\Handle\Progress\Interface\IProgressOperation.cs"/>
+        <Compile Include="Script\Handle\Progress\Interface\IProgressReport.cs"/>
+        <Compile Include="Script\Helper\Database\U.Encrypt.cs"/>
+        <Compile Include="Script\Helper\Database\U.FileID.cs"/>
+        <Compile Include="Script\Helper\Exception\AExpNetGetResponseStream.cs"/>
+        <Compile Include="Script\Helper\IO\Base\IO.GetDir.cs"/>
+        <Compile Include="Script\Helper\IO\Base\IO.GetFile.cs"/>
+        <Compile Include="Script\Helper\IO\Base\IO.Try.cs"/>
+        <Compile Include="Script\Helper\Net\Client\NetBuffer.cs"/>
+        <Compile Include="Script\Helper\Net\FTP\U.FTP.Check.cs"/>
+        <Compile Include="Script\Helper\Net\FTP\U.FTP.Create.cs"/>
+        <Compile Include="Script\Helper\Net\FTP\U.FTP.Delete.cs"/>
+        <Compile Include="Script\Helper\Net\FTP\U.FTP.DownloadFile.cs"/>
+        <Compile Include="Script\Helper\Net\FTP\U.FTP.DownloadDir.cs"/>
+        <Compile Include="Script\Helper\Net\FTP\U.FTP.Get.cs"/>
+        <Compile Include="Script\Helper\Net\FTP\U.FTP.Helper.cs"/>
+        <Compile Include="Script\Helper\Net\FTP\U.FTP.UploadDir.cs"/>
+        <Compile Include="Script\Helper\Net\FTP\U.FTP.UploadFile.cs"/>
+        <Compile Include="Script\Helper\Net\HTTP\U.Http.Connect.cs"/>
+        <Compile Include="Script\Helper\Net\HTTP\U.Http.Delete.cs"/>
+        <Compile Include="Script\Helper\Net\HTTP\U.Http.Download.cs"/>
+        <Compile Include="Script\Helper\Net\HTTP\U.Http.Downloads.cs"/>
+        <Compile Include="Script\Helper\Net\HTTP\U.Http.Get.cs"/>
+        <Compile Include="Script\Helper\Net\HTTP\U.Http.Head.cs"/>
+        <Compile Include="Script\Helper\Net\HTTP\U.Http.Helper.cs"/>
+        <Compile Include="Script\Helper\Net\HTTP\U.Http.Options.cs"/>
+        <Compile Include="Script\Helper\Net\HTTP\U.Http.Post.cs"/>
+        <Compile Include="Script\Helper\Net\HTTP\U.Http.Put.cs"/>
+        <Compile Include="Script\Helper\Net\HTTP\U.Http.Trace.cs"/>
+        <Compile Include="Script\Helper\Net\U.FTP.cs"/>
+        <Compile Include="Script\Helper\Net\U.HTTP.cs"/>
+        <Compile Include="Script\Helper\Net\U.Net.cs"/>
+        <Compile Include="Script\Helper\Net\U.Net.Helper.cs"/>
+        <Compile Include="Script\Helper\Reflect\U.Reflect.cs"/>
+        <Compile Include="Script\Helper\Time\UTimeStamp.cs"/>
+        <Compile Include="Script\Interface\Disposable\LockDisposable.cs"/>
+        <Compile Include="Script\Interface\ILoad.cs"/>
+        <Compile Include="Script\Interface\ISave.cs"/>
+        <Compile Include="Script\Interface\Read\IReadBool.cs"/>
+        <Compile Include="Script\Interface\Read\IReadByte.cs"/>
+        <Compile Include="Script\Interface\Read\IReadChar.cs"/>
+        <Compile Include="Script\Interface\Read\IReadData.cs"/>
+        <Compile Include="Script\Interface\Read\IReadDecimal.cs"/>
+        <Compile Include="Script\Interface\Read\IReadDouble.cs"/>
+        <Compile Include="Script\Interface\Read\IReadEnum.cs"/>
+        <Compile Include="Script\Interface\Read\IReadFloat.cs"/>
+        <Compile Include="Script\Interface\Read\IReadICollection.cs"/>
+        <Compile Include="Script\Interface\Read\IReadIDictionary.cs"/>
+        <Compile Include="Script\Interface\Read\IReadIList.cs"/>
+        <Compile Include="Script\Interface\Read\IReadInt16.cs"/>
+        <Compile Include="Script\Interface\Read\IReadInt32.cs"/>
+        <Compile Include="Script\Interface\Read\IReadInt64.cs"/>
+        <Compile Include="Script\Interface\Read\IReadJson.cs"/>
+        <Compile Include="Script\Interface\Read\IReadLength.cs"/>
+        <Compile Include="Script\Interface\Read\IReadSByte.cs"/>
+        <Compile Include="Script\Interface\Read\IReadString.cs"/>
+        <Compile Include="Script\Interface\Read\IReadUInt16.cs"/>
+        <Compile Include="Script\Interface\Read\IReadUInt32.cs"/>
+        <Compile Include="Script\Interface\Read\IReadUInt64.cs"/>
+        <Compile Include="Script\Interface\Storage\IBinData.cs"/>
+        <Compile Include="Script\Interface\Storage\IBinDeserialize.cs"/>
+        <Compile Include="Script\Interface\Storage\IBinSerialize.cs"/>
+        <Compile Include="Script\Interface\Storage\IBinStorage.cs"/>
+        <Compile Include="Script\Interface\Storage\IDeserialize.cs"/>
+        <Compile Include="Script\Interface\Storage\IReset.cs"/>
+        <Compile Include="Script\Interface\Storage\ISerialize.cs"/>
+        <Compile Include="Script\Interface\Write\IWriteBool.cs"/>
+        <Compile Include="Script\Interface\Write\IWriteByte.cs"/>
+        <Compile Include="Script\Interface\Write\IWriteChar.cs"/>
+        <Compile Include="Script\Interface\Write\IWriteData.cs"/>
+        <Compile Include="Script\Interface\Write\IWriteDecimal.cs"/>
+        <Compile Include="Script\Interface\Write\IWriteDouble.cs"/>
+        <Compile Include="Script\Interface\Write\IWriteEnum.cs"/>
+        <Compile Include="Script\Interface\Write\IWriteFloat.cs"/>
+        <Compile Include="Script\Interface\Write\IWriteICollection.cs"/>
+        <Compile Include="Script\Interface\Write\IWriteIDictionary.cs"/>
+        <Compile Include="Script\Interface\Write\IWriteIList.cs"/>
+        <Compile Include="Script\Interface\Write\IWriteInt16.cs"/>
+        <Compile Include="Script\Interface\Write\IWriteInt32.cs"/>
+        <Compile Include="Script\Interface\Write\IWriteInt64.cs"/>
+        <Compile Include="Script\Interface\Write\IWriteJson.cs"/>
+        <Compile Include="Script\Interface\Write\IWriteLength.cs"/>
+        <Compile Include="Script\Interface\Write\IWriteSByte.cs"/>
+        <Compile Include="Script\Interface\Write\IWriteString.cs"/>
+        <Compile Include="Script\Interface\Write\IWriteUInt16.cs"/>
+        <Compile Include="Script\Interface\Write\IWriteUInt32.cs"/>
+        <Compile Include="Script\Interface\Write\IWriteUInt64.cs"/>
+        <Compile Include="Script\Tools\Array\DisplayList.cs"/>
+        <Compile Include="Script\Tools\Array\PageDictionary.cs"/>
+        <Compile Include="Script\Tools\Array\PageList.cs"/>
+        <Compile Include="Script\Tools\Bean\GBean.cs"/>
+        <Compile Include="Script\Tools\Bean\GBeanRegisterAttribute.cs"/>
+        <Compile Include="Script\Tools\Bean\GBeanSystem.cs"/>
+        <Compile Include="Script\Tools\Buffer\Buffer.cs"/>
+        <Compile Include="Script\Tools\Buffer\Buffer.Extend.cs"/>
+        <Compile Include="Script\Tools\Buffer\Buffer.Generics.cs"/>
+        <Compile Include="Script\Tools\Buffer\Buffer.ICloneable.cs"/>
+        <Compile Include="Script\Tools\Buffer\Buffer.IEqualityComparer.cs"/>
+        <Compile Include="Script\Tools\Buffer\Buffer.IList.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Bool.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Byte.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Char.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Decimal.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Double.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Enum.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Float.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.ICollection.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.IDictionary.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.IList.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Int16.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Int32.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Int64.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Json.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Len.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.SByte.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.String.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.UInt16.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.UInt32.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.UInt64.cs"/>
+        <Compile Include="Script\Tools\Buffer\Ring\BufferRing.cs"/>
+        <Compile Include="Script\Tools\Buffer\Ring\BufferRing.Extend.cs"/>
+        <Compile Include="Script\Tools\FileCache.cs"/>
+        <Compile Include="Script\Tools\Handle\Interface\IOperation.cs"/>
+        <Compile Include="Script\Tools\Handle\Interface\IOperationAction.cs"/>
+        <Compile Include="Script\Tools\Handle\Interface\IOperationArray.cs"/>
+        <Compile Include="Script\Tools\Handle\Interface\IOperationBase.cs"/>
+        <Compile Include="Script\Tools\Handle\Interface\IOperationAction`1.cs"/>
+        <Compile Include="Script\Tools\Handle\Interface\ITask.cs"/>
+        <Compile Include="Script\Tools\Handle\OperationAction.cs"/>
+        <Compile Include="Script\Tools\Handle\OperationAction`1.cs"/>
+        <Compile Include="Script\Tools\Handle\OperationGenerics.cs"/>
+        <Compile Include="Script\Tools\Handle\OperationGenericsList.cs"/>
+        <Compile Include="Script\Tools\HashCode\HashCode.cs"/>
+        <Compile Include="Script\Tools\Mail\Mail.Usage.cs"/>
+        <Compile Include="Script\Tools\Mail\MailHandle.cs"/>
+        <Compile Include="Script\Tools\Mail\MailMultipInfo.cs"/>
+        <Compile Include="Script\Tools\Mail\MailMultipleHandle.cs"/>
+        <Compile Include="Script\Tools\Mail\MailSingleHandle.cs"/>
+        <Compile Include="Script\Tools\Mail\MailSingleInfo.cs"/>
+        <Compile Include="Script\Tools\NetWork\Backup\BytesSerializable.cs"/>
+        <Compile Include="Script\Tools\NetWork\Backup\DownloadInfo.cs"/>
+        <Compile Include="Script\Tools\NetWork\Backup\HTTPNetwork.cs"/>
+        <Compile Include="Script\Tools\NetWork\Backup\HTTPRequest.cs"/>
+        <Compile Include="Script\Tools\NetWork\Backup\HTTPResponse.cs"/>
+        <Compile Include="Script\Tools\NetWork\Backup\IHTTPRequest.cs"/>
+        <Compile Include="Script\Tools\NetWork\Backup\INetCryptography.cs"/>
+        <Compile Include="Script\Tools\NetWork\Backup\INetGuard.cs"/>
+        <Compile Include="Script\Tools\NetWork\Backup\INetRequest.cs"/>
+        <Compile Include="Script\Tools\NetWork\Backup\INetResponse.cs"/>
+        <Compile Include="Script\Tools\NetWork\Backup\INetSerialization.cs"/>
+        <Compile Include="Script\Tools\NetWork\Backup\INetwork.cs"/>
+        <Compile Include="Script\Tools\NetWork\Backup\Network.cs"/>
+        <Compile Include="Script\Tools\NetWork\HTTP\HttpClient.cs"/>
+        <Compile Include="Script\Tools\NetWork\HTTP\HttpRequest.cs"/>
+        <Compile Include="Script\Tools\NetWork\HTTP\HttpResponse.cs"/>
+        <Compile Include="Script\Tools\NetWork\HTTP\HttpServer.cs"/>
+        <Compile Include="Script\Tools\NetWork\HTTP\HttpSession.cs"/>
+        <Compile Include="Script\Tools\NetWork\Interface\INet.cs"/>
+        <Compile Include="Script\Tools\NetWork\Interface\INetClient.cs"/>
+        <Compile Include="Script\Tools\NetWork\Interface\INetServer.cs"/>
+        <Compile Include="Script\Tools\NetWork\Interface\INetSession.cs"/>
+        <Compile Include="Script\Tools\NetWork\Interface\IWebSocket.cs"/>
+        <Compile Include="Script\Tools\NetWork\NetClient.cs"/>
+        <Compile Include="Script\Tools\NetWork\NetServer.cs"/>
+        <Compile Include="Script\Tools\NetWork\NetSetting.cs"/>
+        <Compile Include="Script\Tools\NetWork\TCP\Client\TcpClient.Connect.cs"/>
+        <Compile Include="Script\Tools\NetWork\TCP\Client\TcpClient.cs"/>
+        <Compile Include="Script\Tools\NetWork\TCP\Client\TcpClient.Receive.cs"/>
+        <Compile Include="Script\Tools\NetWork\TCP\Client\TcpClient.Send.cs"/>
+        <Compile Include="Script\Tools\NetWork\TCP\Client\TcpSetting.Client.cs"/>
+        <Compile Include="Script\Tools\NetWork\TCP\Server\TcpServer.cs"/>
+        <Compile Include="Script\Tools\NetWork\TCP\Server\TcpSetting.Server.cs"/>
+        <Compile Include="Script\Tools\NetWork\TCP\Session\TcpSession.cs"/>
+        <Compile Include="Script\Tools\NetWork\TCP\Session\TcpSession.Receive.cs"/>
+        <Compile Include="Script\Tools\NetWork\TCP\Session\TcpSession.Send.cs"/>
+        <Compile Include="Script\Tools\NetWork\UDP\Client\UdpClient.Connect.cs"/>
+        <Compile Include="Script\Tools\NetWork\UDP\Client\UdpClient.cs"/>
+        <Compile Include="Script\Tools\NetWork\UDP\Client\UdpClient.Receive.cs"/>
+        <Compile Include="Script\Tools\NetWork\UDP\Client\UdpClient.Send.cs"/>
+        <Compile Include="Script\Tools\NetWork\UDP\Client\UdpSetting.Client.cs"/>
+        <Compile Include="Script\Tools\NetWork\UDP\Server\UdpServer.cs"/>
+        <Compile Include="Script\Tools\NetWork\UDP\Server\UdpServer.Receive.cs"/>
+        <Compile Include="Script\Tools\NetWork\UDP\Server\UdpServer.Send.cs"/>
+        <Compile Include="Script\Tools\NetWork\UDP\Server\UdpSetting.Server.cs"/>
+        <Compile Include="Script\Tools\PList\IPListElement.cs"/>
+        <Compile Include="Script\Tools\PList\PListBinaryReader.cs"/>
+        <Compile Include="Script\Tools\PList\PListBinaryWriter.cs"/>
+        <Compile Include="Script\Tools\PList\PListContainer\PListArray.cs"/>
+        <Compile Include="Script\Tools\PList\PListContainer\PListDict.cs"/>
+        <Compile Include="Script\Tools\PList\PListElement.cs"/>
+        <Compile Include="Script\Tools\PList\PListElementFactory.cs"/>
+        <Compile Include="Script\Tools\PList\PListExceptions\PListException.cs"/>
+        <Compile Include="Script\Tools\PList\PListExceptions\PListFormatException.cs"/>
+        <Compile Include="Script\Tools\PList\PListFormat.cs"/>
+        <Compile Include="Script\Tools\PList\PListPrimitives\PListBool.cs"/>
+        <Compile Include="Script\Tools\PList\PListPrimitives\PListData.cs"/>
+        <Compile Include="Script\Tools\PList\PListPrimitives\PListDate.cs"/>
+        <Compile Include="Script\Tools\PList\PListPrimitives\PListFill.cs"/>
+        <Compile Include="Script\Tools\PList\PListPrimitives\PListInteger.cs"/>
+        <Compile Include="Script\Tools\PList\PListPrimitives\PListNull.cs"/>
+        <Compile Include="Script\Tools\PList\PListPrimitives\PListReal.cs"/>
+        <Compile Include="Script\Tools\PList\PListPrimitives\PListString.cs"/>
+        <Compile Include="Script\Tools\PList\PListRoot.cs"/>
+        <Compile Include="Script\Tools\PoolSystem\Class\Pool.StringBuilder.cs"/>
+        <Compile Include="Script\Tools\PoolSystem\List\PoolSystem.cs"/>
+        <Compile Include="Script\Tools\PoolSystem\List\PoolSystem.G1.cs"/>
+        <Compile Include="Script\Tools\PoolSystem\List\PoolSystem.G1.Inst.cs"/>
+        <Compile Include="Script\Tools\PoolSystem\List\PoolSystem.Static.cs"/>
+        <Compile Include="Script\Tools\PoolSystem\Type\PoolTypeSystem.cs"/>
+        <Compile Include="Script\Tools\PoolSystem\Type\PoolTypeSystem.Static.cs"/>
+        <Compile Include="Script\Tools\Pool\Pool.cs"/>
+        <Compile Include="Script\Tools\Pool\Pool.Dictionary.cs"/>
+        <Compile Include="Script\Tools\Pool\Pool.Dispose.cs"/>
+        <Compile Include="Script\Tools\Pool\Pool.Generic.cs"/>
+        <Compile Include="Script\Tools\Pool\Pool.HashSet.cs"/>
+        <Compile Include="Script\Tools\Pool\Pool.LinkedList.cs"/>
+        <Compile Include="Script\Tools\Pool\Pool.List.cs"/>
+        <Compile Include="Script\Tools\Pool\Pool.Queue.cs"/>
+        <Compile Include="Script\Tools\Pool\Pool.SortedList.cs"/>
+        <Compile Include="Script\Tools\Pool\Pool.Stack.cs"/>
+        <Compile Include="Script\Tools\Pool\Pool.Using.cs"/>
+        <Compile Include="Script\Tools\Singleton\Singleton.cs"/>
+        <Compile Include="Script\Tools\Storage\Bin\Bin.Dictionary.cs"/>
+        <Compile Include="Script\Tools\Storage\Bin\Bin.HashSet.cs"/>
+        <Compile Include="Script\Tools\Storage\Bin\Bin.List.cs"/>
+        <Compile Include="Script\Tools\Storage\Bin\Bin.Queue.cs"/>
+        <Compile Include="Script\Tools\Storage\Bin\Bin.SortedList.cs"/>
+        <Compile Include="Script\Tools\Storage\Bin\Bin.Stack.cs"/>
+        <Compile Include="Script\Tools\Storage\Storage.cs"/>
+        <Compile Include="Script\Tools\Storage\Storage.List.cs"/>
+        <Compile Include="Script\Tools\Storage\StorageFile.cs"/>
+        <Compile Include="Script\Tools\Version.cs"/>
+        <Compile Include="Script\Unit\ScriptType.cs"/>
+        <Compile Include="Script\Unit\Unit.Char.cs"/>
+        <Compile Include="Script\Unit\Unit.Chinese.cs"/>
+        <Compile Include="Script\Unit\Unit.Color.cs"/>
+        <Compile Include="Script\Unit\Unit.Suffix.cs"/>
+        <Compile Include="Script\Unit\Unit.Time.cs"/>
+        <Compile Include="Script\Helper\Database\U.Base64.cs"/>
+        <Compile Include="Script\Helper\Database\U.Binary.cs"/>
+        <Compile Include="Script\Helper\Database\U.DataEncrypt.cs"/>
+        <Compile Include="Script\Helper\Database\U.HashTable.cs"/>
+        <Compile Include="Script\Helper\Database\U.Json.NewtonSoft.cs"/>
+        <Compile Include="Script\Helper\Database\U.Xml.cs"/>
+        <Compile Include="Script\Helper\Database\U.Yaml.cs"/>
+        <Compile Include="Script\Helper\Exception\AExpAmbiguousAExpOperator.cs"/>
+        <Compile Include="Script\Helper\Exception\AExpInvalidConversion.cs"/>
+        <Compile Include="Script\Helper\Exception\AexpInvalidAExpOperator.cs"/>
+        <Compile Include="Script\Helper\Exception\AExpOperator.cs"/>
+        <Compile Include="Script\Helper\Exception\AexpUnexpectedEnumValue.cs"/>
+        <Compile Include="Script\Helper\Guid\U.Guid.cs"/>
+        <Compile Include="Script\Helper\Interface\ICollection\IKeyedCollection.cs"/>
+        <Compile Include="Script\Helper\Interface\ICollection\IMergedCollection.cs"/>
+        <Compile Include="Script\Helper\Interface\ICollection\ISet.cs"/>
+        <Compile Include="Script\Helper\Interface\ICollection\MergedCollection.cs"/>
+        <Compile Include="Script\Helper\Interface\ICollection\MergedKeyedCollection.cs"/>
+        <Compile Include="Script\Helper\Interface\ICollection\VariantCollection.cs"/>
+        <Compile Include="Script\Helper\Interface\ICollection\VariantKeyedCollection.cs"/>
+        <Compile Include="Script\Helper\Interface\IDictionary\DebugDictionary.cs"/>
+        <Compile Include="Script\Helper\Interface\IDictionary\FlexibleDictionary.cs"/>
+        <Compile Include="Script\Helper\Interface\IEqualityComparer\ReferenceEqualityComparer.cs"/>
+        <Compile Include="Script\Helper\Interface\INotified\INotifiedCollectionItem.cs"/>
+        <Compile Include="Script\Helper\Interface\INotified\INotifyCollectionChanged.cs"/>
+        <Compile Include="Script\Helper\Interface\IPoolable.cs"/>
+        <Compile Include="Script\Helper\IO\Base\IO.Clear.cs"/>
+        <Compile Include="Script\Helper\IO\Base\IO.Copy.cs"/>
+        <Compile Include="Script\Helper\IO\Base\IO.Create.Async.cs"/>
+        <Compile Include="Script\Helper\IO\Base\IO.Create.cs"/>
+        <Compile Include="Script\Helper\IO\Base\IO.Delete.Async.cs"/>
+        <Compile Include="Script\Helper\IO\Base\IO.Delete.cs"/>
+        <Compile Include="Script\Helper\IO\Base\IO.Encoding.cs"/>
+        <Compile Include="Script\Helper\IO\Base\IO.Exists.cs"/>
+        <Compile Include="Script\Helper\IO\Base\IO.Find.cs"/>
+        <Compile Include="Script\Helper\IO\Base\IO.Get.cs"/>
+        <Compile Include="Script\Helper\IO\Base\IO.Move.cs"/>
+        <Compile Include="Script\Helper\IO\Binary\IO.Byte.Async.cs"/>
+        <Compile Include="Script\Helper\IO\Binary\IO.Byte.cs"/>
+        <Compile Include="Script\Helper\IO\Binary\IO.File.Async.cs"/>
+        <Compile Include="Script\Helper\IO\Binary\IO.File.cs"/>
+        <Compile Include="Script\Helper\IO\Binary\IO.Zip.Compress.cs"/>
+        <Compile Include="Script\Helper\IO\Binary\IO.Zip.Uncompressed.cs"/>
+        <Compile Include="Script\Helper\IO\Text\IO.Base64.Async.cs"/>
+        <Compile Include="Script\Helper\IO\Text\IO.Base64.cs"/>
+        <Compile Include="Script\Helper\IO\Text\IO.Json.Async.cs"/>
+        <Compile Include="Script\Helper\IO\Text\IO.Json.cs"/>
+        <Compile Include="Script\Helper\IO\Text\IO.PList.Async.cs"/>
+        <Compile Include="Script\Helper\IO\Text\IO.PList.cs"/>
+        <Compile Include="Script\Helper\IO\Text\IO.Text.Async.cs"/>
+        <Compile Include="Script\Helper\IO\Text\IO.Text.cs"/>
+        <Compile Include="Script\Helper\IO\Text\IO.Text.Unicode.Async.cs"/>
+        <Compile Include="Script\Helper\IO\Text\IO.Text.Unicode.cs"/>
+        <Compile Include="Script\Helper\IO\Text\IO.Text.UTF8.Async.cs"/>
+        <Compile Include="Script\Helper\IO\Text\IO.Text.UTF8.cs"/>
+        <Compile Include="Script\Helper\IO\Text\IO.XML.Async.cs"/>
+        <Compile Include="Script\Helper\IO\Text\IO.XML.cs"/>
+        <Compile Include="Script\Helper\IO\Text\IO.Yaml.Async.cs"/>
+        <Compile Include="Script\Helper\IO\Text\IO.Yaml.cs"/>
+        <Compile Include="Script\Helper\Math\Hash\CRC32Algorithm.cs"/>
+        <Compile Include="Script\Helper\Math\Hash\SafeProxy.cs"/>
+        <Compile Include="Script\Helper\Math\Hash\U.Hash.cs"/>
+        <Compile Include="Script\Helper\Math\Hash\U.Hash.Get.cs"/>
+        <Compile Include="Script\Helper\Math\U.Hex.cs"/>
+        <Compile Include="Script\Helper\Math\U.Math.cs"/>
+        <Compile Include="Script\Helper\Math\U.MD5.cs"/>
+        <Compile Include="Script\Helper\Math\U.Random.cs"/>
+        <Compile Include="Script\Helper\Math\U.Status.cs"/>
+        <Compile Include="Script\Helper\Math\U.Time.cs"/>
+        <Compile Include="Script\Helper\Net\HTTP\HttpDownload.cs"/>
+        <Compile Include="Script\Helper\Net\HTTP\HttpDownloadInfo.cs"/>
+        <Compile Include="Script\Helper\String\StringBlock.cs"/>
+        <Compile Include="Script\Helper\String\U.IDNo.cs"/>
+        <Compile Include="Script\Helper\String\U.MaskWord.cs"/>
+        <Compile Include="Script\Helper\String\U.String.Builder.cs"/>
+        <Compile Include="Script\Helper\String\U.String.cs"/>
+        <Compile Include="Script\Helper\String\U.String.IS.cs"/>
+        <Compile Include="Script\Helper\System\Marshal\Define.cs"/>
+        <Compile Include="Script\Helper\System\Marshal\U.Marshal.cs"/>
+        <Compile Include="Script\Helper\System\U.Assembly.cs"/>
+        <Compile Include="Script\Helper\System\U.Class.cs"/>
+        <Compile Include="Script\Helper\System\U.GC.cs"/>
+        <Compile Include="Script\Helper\System\U.SystemInfo.cs"/>
+        <Compile Include="Script\Helper\AHelper.cs"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+            <HintPath>$(NUGET_PACKAGES)\newtonsoft.json\13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+        </Reference>
+        <Reference Include="System.Buffers">
+            <HintPath>$(NUGET_PACKAGES)\system.buffers\4.3.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
+        </Reference>
+        <Reference Include="System"/>
+        <Reference Include="System.Core"/>
+        <Reference Include="System.Numerics"/>
+        <Reference Include="System.Xml.Linq"/>
+        <Reference Include="Microsoft.CSharp"/>
+        <Reference Include="System.Net.Http"/>
+        <Reference Include="System.Xml"/>
+        <None Include="app.config"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3">
+            <ExcludeAssets>all</ExcludeAssets>
+        </PackageReference>
+        <PackageReference Include="System.Buffers" Version="4.3.0">
+            <ExcludeAssets>all</ExcludeAssets>
+        </PackageReference>
+        <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.*">
+            <ExcludeAssets>all</ExcludeAssets>
+        </PackageReference>
+        <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.*">
+            <ExcludeAssets>all</ExcludeAssets>
+        </PackageReference>
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Plugins\Microsoft"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="Script\Extension\Class\Stream\Stream.Extend.Encrypt.Generated.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>Stream.Extend.Encrypt.Generated.cs</LastGenOutput>
+        </Content>
+        <Content Include="Script\Helper\Net\FTP\FTP.md"/>
+        <Content Include="Script\Helper\Net\Http\HTTP.md"/>
+        <Content Include="Script\Tools\Tuple\Tuple.Generated.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>Tuple.Generated.cs</LastGenOutput>
+        </Content>
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <PropertyGroup>
+        <PostBuildEvent>@set CUR_DLL=$(ProjectDir)$(OutDir)
+            @cd /d $(SolutionDir)
+            @cd ..
+            @set cur=%25cd%25\Plugins\
+            @if not exist %cur% (
+            @exit
+            )
 
-@set dllname=$(TargetName)
-@if exist %25CUR_DLL%25%25dllname%25.dll (
-@copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll
-)
-@if exist %25CUR_DLL%25%25dllname%25.xml (
-@copy /y /v %25CUR_DLL%25%25dllname%25.xml %25cur%25%25dllname%25.xml
-)
-</PostBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PreBuildEvent>@cd /d $(SolutionDir)
-@cd ..
-@set cur=%25cd%25\Plugins\
-@cd /d $(SolutionDir)
-@cd ..
-@set cur=%25cd%25\Plugins\
+            @set dllname=$(TargetName)
+            @if exist %25CUR_DLL%25%25dllname%25.dll (
+            @copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll
+            )
+            @if exist %25CUR_DLL%25%25dllname%25.xml (
+            @copy /y /v %25CUR_DLL%25%25dllname%25.xml %25cur%25%25dllname%25.xml
+            )
+        </PostBuildEvent>
+    </PropertyGroup>
+    <PropertyGroup>
+        <PreBuildEvent>@cd /d $(SolutionDir)
+            @cd ..
+            @set cur=%25cd%25\Plugins\
+            @cd /d $(SolutionDir)
+            @cd ..
+            @set cur=%25cd%25\Plugins\
 
-@set dllname=$(TargetName)
-@if exist %25cur%25%25dllname%25.dll (
-@del /s /q %25cur%25%25dllname%25.dll
-)
-@if exist %25cur%25%25dllname%25.xml (
-@del /s /q %25cur%25%25dllname%25.xml
-)
-</PreBuildEvent>
-  </PropertyGroup>
+            @set dllname=$(TargetName)
+            @if exist %25cur%25%25dllname%25.dll (
+            @del /s /q %25cur%25%25dllname%25.dll
+            )
+            @if exist %25cur%25%25dllname%25.xml (
+            @del /s /q %25cur%25%25dllname%25.xml
+            )
+        </PreBuildEvent>
+    </PropertyGroup>
 </Project>

@@ -129,7 +129,8 @@
             }
 
             if (string.IsNullOrEmpty(projectFilePath)) return;
-            var project = Path.GetDirectoryName(Host.TemplateFile).Substring(projectDirectory.Length + 1);
+            var temp = string.IsNullOrEmpty(OutputPath) ? Path.GetDirectoryName(Host.TemplateFile) : OutputPath;
+            var project = temp.Substring(projectDirectory.Length + 1);
             var dict = new Dictionary<string, Block>();
             foreach (var block in blocks)
             {
@@ -149,8 +150,8 @@
             }
 
             template.Clear();
+            template.AppendLine($"//{project}");
             if (dict.Count == 0) return;
-            template.AppendLine($"//{projectFilePath}");
             var document = XDocument.Load(projectFilePath);
             if (document.Root is null) return;
             var rn = document.Root?.Name.Namespace;

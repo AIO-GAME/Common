@@ -59,7 +59,7 @@ namespace AIO
             }
 
             /// <summary>
-            /// Json默认设置
+            /// Json 默认设置
             /// </summary>
             public static JsonSerializerSettings JSONNormalSettings { get; }
 

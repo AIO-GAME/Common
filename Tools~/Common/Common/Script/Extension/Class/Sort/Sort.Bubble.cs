@@ -10,7 +10,7 @@ namespace AIO
     partial class ExtendSort
     {
         /// <summary>
-        /// 单向冒泡排序
+        ///     单向冒泡排序
         /// </summary>
         /// <param name="array">数组</param>
         /// <param name="start">右边界</param>

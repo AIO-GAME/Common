@@ -64,43 +64,6 @@
             支持的区域性
             </summary>
         </member>
-        <member name="T:AIO.Security.NInt">
-            <summary>
-            NInt is <see cref="T:System.Int32"/>
-            </summary>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Equality(AIO.Security.NInt,AIO.Security.NInt)">
-            <param name="a"> <see cref="T:AIO.Security.NInt"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NInt"/> </param>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Equality(AIO.Security.NInt,System.Int32)">
-            <param name="a"> <see cref="T:AIO.Security.NInt"/> </param>
-            <param name="b"> <see cref="T:System.Int32"/> </param>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Inequality(AIO.Security.NInt,AIO.Security.NInt)">
-            <param name="a"> <see cref="T:AIO.Security.NInt"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NInt"/> </param>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Inequality(AIO.Security.NInt,System.Int32)">
-            <param name="a"> <see cref="T:AIO.Security.NInt"/> </param>
-            <param name="b"> <see cref="T:System.Int32"/> </param>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Addition(AIO.Security.NInt,AIO.Security.NInt)">
-            <param name="a"> <see cref="T:AIO.Security.NInt"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NInt"/> </param>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Addition(AIO.Security.NInt,System.Int32)">
-            <param name="a"> <see cref="T:AIO.Security.NInt"/> </param>
-            <param name="b"> <see cref="T:System.Int32"/> </param>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Subtraction(AIO.Security.NInt,AIO.Security.NInt)">
-            <param name="a"> <see cref="T:AIO.Security.NInt"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NInt"/> </param>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Subtraction(AIO.Security.NInt,System.Int32)">
-            <param name="a"> <see cref="T:AIO.Security.NInt"/> </param>
-            <param name="b"> <see cref="T:System.Int32"/> </param>
-        </member>
         <member name="M:AIO.Security.NInt.Equals(System.Object)">
             <inheritdoc/>
         </member>
@@ -124,91 +87,6 @@
             <param name="provider"> 格式化提供者 </param>
             <typeparam name="T"> 格式化提供者类型 </typeparam>
             <returns> <see cref="T:System.String"/> </returns>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Implicit(System.Int32)~AIO.Security.NInt">
-            <param name="value"> <see cref="T:System.Int32"/> </param>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Implicit(AIO.Security.NInt)~System.Int32">
-            <param name="value"> <see cref="T:AIO.Security.NInt"/> </param>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Implicit(AIO.Security.NInt)~System.Char">
-            <param name="value"> <see cref="T:AIO.Security.NInt"/> </param>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Implicit(AIO.Security.NInt)~System.Int64">
-            <param name="value"> <see cref="T:AIO.Security.NInt"/> </param>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Implicit(AIO.Security.NInt)~AIO.Security.NChar">
-            <param name="value"> <see cref="T:AIO.Security.NChar"/> </param>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Implicit(AIO.Security.NInt)~AIO.Security.NLong">
-            <param name="value"> <see cref="T:AIO.Security.NLong"/> </param>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Implicit(System.Byte)~AIO.Security.NInt">
-            <param name="value"> <see cref="T:System.Byte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Implicit(System.SByte)~AIO.Security.NInt">
-            <param name="value"> <see cref="T:System.SByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Implicit(System.Char)~AIO.Security.NInt">
-            <param name="value"> <see cref="T:System.Char"/> </param>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Implicit(System.Int16)~AIO.Security.NInt">
-            <param name="value"> <see cref="T:System.Int16"/> </param>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Implicit(System.UInt16)~AIO.Security.NInt">
-            <param name="value"> <see cref="T:System.UInt16"/> </param>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Implicit(AIO.Security.NByte)~AIO.Security.NInt">
-            <param name="value"> <see cref="T:AIO.Security.NByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Implicit(AIO.Security.NSByte)~AIO.Security.NInt">
-            <param name="value"> <see cref="T:AIO.Security.NSByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Implicit(AIO.Security.NChar)~AIO.Security.NInt">
-            <param name="value"> <see cref="T:AIO.Security.NChar"/> </param>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Implicit(AIO.Security.NShort)~AIO.Security.NInt">
-            <param name="value"> <see cref="T:AIO.Security.NShort"/> </param>
-        </member>
-        <member name="M:AIO.Security.NInt.op_Implicit(AIO.Security.NUShort)~AIO.Security.NInt">
-            <param name="value"> <see cref="T:AIO.Security.NUShort"/> </param>
-        </member>
-        <member name="T:AIO.Security.NLong">
-            <summary>
-            NLong is <see cref="T:System.Int64"/>
-            </summary>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Equality(AIO.Security.NLong,AIO.Security.NLong)">
-            <param name="a"> <see cref="T:AIO.Security.NLong"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NLong"/> </param>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Equality(AIO.Security.NLong,System.Int64)">
-            <param name="a"> <see cref="T:AIO.Security.NLong"/> </param>
-            <param name="b"> <see cref="T:System.Int64"/> </param>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Inequality(AIO.Security.NLong,AIO.Security.NLong)">
-            <param name="a"> <see cref="T:AIO.Security.NLong"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NLong"/> </param>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Inequality(AIO.Security.NLong,System.Int64)">
-            <param name="a"> <see cref="T:AIO.Security.NLong"/> </param>
-            <param name="b"> <see cref="T:System.Int64"/> </param>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Addition(AIO.Security.NLong,AIO.Security.NLong)">
-            <param name="a"> <see cref="T:AIO.Security.NLong"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NLong"/> </param>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Addition(AIO.Security.NLong,System.Int64)">
-            <param name="a"> <see cref="T:AIO.Security.NLong"/> </param>
-            <param name="b"> <see cref="T:System.Int64"/> </param>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Subtraction(AIO.Security.NLong,AIO.Security.NLong)">
-            <param name="a"> <see cref="T:AIO.Security.NLong"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NLong"/> </param>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Subtraction(AIO.Security.NLong,System.Int64)">
-            <param name="a"> <see cref="T:AIO.Security.NLong"/> </param>
-            <param name="b"> <see cref="T:System.Int64"/> </param>
         </member>
         <member name="M:AIO.Security.NLong.Equals(System.Object)">
             <inheritdoc/>
@@ -234,91 +112,6 @@
             <typeparam name="T"> 格式化提供者类型 </typeparam>
             <returns> <see cref="T:System.String"/> </returns>
         </member>
-        <member name="M:AIO.Security.NLong.op_Implicit(System.Int64)~AIO.Security.NLong">
-            <param name="value"> <see cref="T:System.Int64"/> </param>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Implicit(AIO.Security.NLong)~System.Int64">
-            <param name="value"> <see cref="T:AIO.Security.NLong"/> </param>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Implicit(System.Byte)~AIO.Security.NLong">
-            <param name="value"> <see cref="T:System.Byte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Implicit(System.SByte)~AIO.Security.NLong">
-            <param name="value"> <see cref="T:System.SByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Implicit(System.Char)~AIO.Security.NLong">
-            <param name="value"> <see cref="T:System.Char"/> </param>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Implicit(System.Int16)~AIO.Security.NLong">
-            <param name="value"> <see cref="T:System.Int16"/> </param>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Implicit(System.UInt16)~AIO.Security.NLong">
-            <param name="value"> <see cref="T:System.UInt16"/> </param>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Implicit(System.Int32)~AIO.Security.NLong">
-            <param name="value"> <see cref="T:System.Int32"/> </param>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Implicit(System.UInt32)~AIO.Security.NLong">
-            <param name="value"> <see cref="T:System.UInt32"/> </param>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Implicit(AIO.Security.NByte)~AIO.Security.NLong">
-            <param name="value"> <see cref="T:AIO.Security.NByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Implicit(AIO.Security.NSByte)~AIO.Security.NLong">
-            <param name="value"> <see cref="T:AIO.Security.NSByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Implicit(AIO.Security.NChar)~AIO.Security.NLong">
-            <param name="value"> <see cref="T:AIO.Security.NChar"/> </param>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Implicit(AIO.Security.NShort)~AIO.Security.NLong">
-            <param name="value"> <see cref="T:AIO.Security.NShort"/> </param>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Implicit(AIO.Security.NUShort)~AIO.Security.NLong">
-            <param name="value"> <see cref="T:AIO.Security.NUShort"/> </param>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Implicit(AIO.Security.NInt)~AIO.Security.NLong">
-            <param name="value"> <see cref="T:AIO.Security.NInt"/> </param>
-        </member>
-        <member name="M:AIO.Security.NLong.op_Implicit(AIO.Security.NUInt)~AIO.Security.NLong">
-            <param name="value"> <see cref="T:AIO.Security.NUInt"/> </param>
-        </member>
-        <member name="T:AIO.Security.NShort">
-            <summary>
-            NShort is <see cref="T:System.Int16"/>
-            </summary>
-        </member>
-        <member name="M:AIO.Security.NShort.op_Equality(AIO.Security.NShort,AIO.Security.NShort)">
-            <param name="a"> <see cref="T:AIO.Security.NShort"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NShort"/> </param>
-        </member>
-        <member name="M:AIO.Security.NShort.op_Equality(AIO.Security.NShort,System.Int16)">
-            <param name="a"> <see cref="T:AIO.Security.NShort"/> </param>
-            <param name="b"> <see cref="T:System.Int16"/> </param>
-        </member>
-        <member name="M:AIO.Security.NShort.op_Inequality(AIO.Security.NShort,AIO.Security.NShort)">
-            <param name="a"> <see cref="T:AIO.Security.NShort"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NShort"/> </param>
-        </member>
-        <member name="M:AIO.Security.NShort.op_Inequality(AIO.Security.NShort,System.Int16)">
-            <param name="a"> <see cref="T:AIO.Security.NShort"/> </param>
-            <param name="b"> <see cref="T:System.Int16"/> </param>
-        </member>
-        <member name="M:AIO.Security.NShort.op_Addition(AIO.Security.NShort,AIO.Security.NShort)">
-            <param name="a"> <see cref="T:AIO.Security.NShort"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NShort"/> </param>
-        </member>
-        <member name="M:AIO.Security.NShort.op_Addition(AIO.Security.NShort,System.Int16)">
-            <param name="a"> <see cref="T:AIO.Security.NShort"/> </param>
-            <param name="b"> <see cref="T:System.Int16"/> </param>
-        </member>
-        <member name="M:AIO.Security.NShort.op_Subtraction(AIO.Security.NShort,AIO.Security.NShort)">
-            <param name="a"> <see cref="T:AIO.Security.NShort"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NShort"/> </param>
-        </member>
-        <member name="M:AIO.Security.NShort.op_Subtraction(AIO.Security.NShort,System.Int16)">
-            <param name="a"> <see cref="T:AIO.Security.NShort"/> </param>
-            <param name="b"> <see cref="T:System.Int16"/> </param>
-        </member>
         <member name="M:AIO.Security.NShort.Equals(System.Object)">
             <inheritdoc/>
         </member>
@@ -342,67 +135,6 @@
             <param name="provider"> 格式化提供者 </param>
             <typeparam name="T"> 格式化提供者类型 </typeparam>
             <returns> <see cref="T:System.String"/> </returns>
-        </member>
-        <member name="M:AIO.Security.NShort.op_Implicit(System.Int16)~AIO.Security.NShort">
-            <param name="value"> <see cref="T:System.Int16"/> </param>
-        </member>
-        <member name="M:AIO.Security.NShort.op_Implicit(AIO.Security.NShort)~System.Int16">
-            <param name="value"> <see cref="T:AIO.Security.NShort"/> </param>
-        </member>
-        <member name="M:AIO.Security.NShort.op_Implicit(System.Byte)~AIO.Security.NShort">
-            <param name="value"> <see cref="T:System.Byte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NShort.op_Implicit(System.SByte)~AIO.Security.NShort">
-            <param name="value"> <see cref="T:System.SByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NShort.op_Implicit(System.Char)~AIO.Security.NShort">
-            <param name="value"> <see cref="T:System.Char"/> </param>
-        </member>
-        <member name="M:AIO.Security.NShort.op_Implicit(AIO.Security.NByte)~AIO.Security.NShort">
-            <param name="value"> <see cref="T:AIO.Security.NByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NShort.op_Implicit(AIO.Security.NSByte)~AIO.Security.NShort">
-            <param name="value"> <see cref="T:AIO.Security.NSByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NShort.op_Implicit(AIO.Security.NChar)~AIO.Security.NShort">
-            <param name="value"> <see cref="T:AIO.Security.NChar"/> </param>
-        </member>
-        <member name="T:AIO.Security.NUInt">
-            <summary>
-            NUInt is <see cref="T:System.UInt32"/>
-            </summary>
-        </member>
-        <member name="M:AIO.Security.NUInt.op_Equality(AIO.Security.NUInt,AIO.Security.NUInt)">
-            <param name="a"> <see cref="T:AIO.Security.NUInt"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NUInt"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUInt.op_Equality(AIO.Security.NUInt,System.UInt32)">
-            <param name="a"> <see cref="T:AIO.Security.NUInt"/> </param>
-            <param name="b"> <see cref="T:System.UInt32"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUInt.op_Inequality(AIO.Security.NUInt,AIO.Security.NUInt)">
-            <param name="a"> <see cref="T:AIO.Security.NUInt"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NUInt"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUInt.op_Inequality(AIO.Security.NUInt,System.UInt32)">
-            <param name="a"> <see cref="T:AIO.Security.NUInt"/> </param>
-            <param name="b"> <see cref="T:System.UInt32"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUInt.op_Addition(AIO.Security.NUInt,AIO.Security.NUInt)">
-            <param name="a"> <see cref="T:AIO.Security.NUInt"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NUInt"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUInt.op_Addition(AIO.Security.NUInt,System.UInt32)">
-            <param name="a"> <see cref="T:AIO.Security.NUInt"/> </param>
-            <param name="b"> <see cref="T:System.UInt32"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUInt.op_Subtraction(AIO.Security.NUInt,AIO.Security.NUInt)">
-            <param name="a"> <see cref="T:AIO.Security.NUInt"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NUInt"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUInt.op_Subtraction(AIO.Security.NUInt,System.UInt32)">
-            <param name="a"> <see cref="T:AIO.Security.NUInt"/> </param>
-            <param name="b"> <see cref="T:System.UInt32"/> </param>
         </member>
         <member name="M:AIO.Security.NUInt.Equals(System.Object)">
             <inheritdoc/>
@@ -428,67 +160,6 @@
             <typeparam name="T"> 格式化提供者类型 </typeparam>
             <returns> <see cref="T:System.String"/> </returns>
         </member>
-        <member name="M:AIO.Security.NUInt.op_Implicit(System.UInt32)~AIO.Security.NUInt">
-            <param name="value"> <see cref="T:System.UInt32"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUInt.op_Implicit(AIO.Security.NUInt)~System.UInt32">
-            <param name="value"> <see cref="T:AIO.Security.NUInt"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUInt.op_Implicit(System.Byte)~AIO.Security.NUInt">
-            <param name="value"> <see cref="T:System.Byte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUInt.op_Implicit(System.Char)~AIO.Security.NUInt">
-            <param name="value"> <see cref="T:System.Char"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUInt.op_Implicit(System.UInt16)~AIO.Security.NUInt">
-            <param name="value"> <see cref="T:System.UInt16"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUInt.op_Implicit(AIO.Security.NByte)~AIO.Security.NUInt">
-            <param name="value"> <see cref="T:AIO.Security.NByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUInt.op_Implicit(AIO.Security.NChar)~AIO.Security.NUInt">
-            <param name="value"> <see cref="T:AIO.Security.NChar"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUInt.op_Implicit(AIO.Security.NUShort)~AIO.Security.NUInt">
-            <param name="value"> <see cref="T:AIO.Security.NUShort"/> </param>
-        </member>
-        <member name="T:AIO.Security.NULong">
-            <summary>
-            NULong is <see cref="T:System.UInt64"/>
-            </summary>
-        </member>
-        <member name="M:AIO.Security.NULong.op_Equality(AIO.Security.NULong,AIO.Security.NULong)">
-            <param name="a"> <see cref="T:AIO.Security.NULong"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NULong"/> </param>
-        </member>
-        <member name="M:AIO.Security.NULong.op_Equality(AIO.Security.NULong,System.UInt64)">
-            <param name="a"> <see cref="T:AIO.Security.NULong"/> </param>
-            <param name="b"> <see cref="T:System.UInt64"/> </param>
-        </member>
-        <member name="M:AIO.Security.NULong.op_Inequality(AIO.Security.NULong,AIO.Security.NULong)">
-            <param name="a"> <see cref="T:AIO.Security.NULong"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NULong"/> </param>
-        </member>
-        <member name="M:AIO.Security.NULong.op_Inequality(AIO.Security.NULong,System.UInt64)">
-            <param name="a"> <see cref="T:AIO.Security.NULong"/> </param>
-            <param name="b"> <see cref="T:System.UInt64"/> </param>
-        </member>
-        <member name="M:AIO.Security.NULong.op_Addition(AIO.Security.NULong,AIO.Security.NULong)">
-            <param name="a"> <see cref="T:AIO.Security.NULong"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NULong"/> </param>
-        </member>
-        <member name="M:AIO.Security.NULong.op_Addition(AIO.Security.NULong,System.UInt64)">
-            <param name="a"> <see cref="T:AIO.Security.NULong"/> </param>
-            <param name="b"> <see cref="T:System.UInt64"/> </param>
-        </member>
-        <member name="M:AIO.Security.NULong.op_Subtraction(AIO.Security.NULong,AIO.Security.NULong)">
-            <param name="a"> <see cref="T:AIO.Security.NULong"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NULong"/> </param>
-        </member>
-        <member name="M:AIO.Security.NULong.op_Subtraction(AIO.Security.NULong,System.UInt64)">
-            <param name="a"> <see cref="T:AIO.Security.NULong"/> </param>
-            <param name="b"> <see cref="T:System.UInt64"/> </param>
-        </member>
         <member name="M:AIO.Security.NULong.Equals(System.Object)">
             <inheritdoc/>
         </member>
@@ -512,73 +183,6 @@
             <param name="provider"> 格式化提供者 </param>
             <typeparam name="T"> 格式化提供者类型 </typeparam>
             <returns> <see cref="T:System.String"/> </returns>
-        </member>
-        <member name="M:AIO.Security.NULong.op_Implicit(System.UInt64)~AIO.Security.NULong">
-            <param name="value"> <see cref="T:System.UInt64"/> </param>
-        </member>
-        <member name="M:AIO.Security.NULong.op_Implicit(AIO.Security.NULong)~System.UInt64">
-            <param name="value"> <see cref="T:AIO.Security.NULong"/> </param>
-        </member>
-        <member name="M:AIO.Security.NULong.op_Implicit(System.Byte)~AIO.Security.NULong">
-            <param name="value"> <see cref="T:System.Byte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NULong.op_Implicit(System.Char)~AIO.Security.NULong">
-            <param name="value"> <see cref="T:System.Char"/> </param>
-        </member>
-        <member name="M:AIO.Security.NULong.op_Implicit(System.UInt16)~AIO.Security.NULong">
-            <param name="value"> <see cref="T:System.UInt16"/> </param>
-        </member>
-        <member name="M:AIO.Security.NULong.op_Implicit(System.UInt32)~AIO.Security.NULong">
-            <param name="value"> <see cref="T:System.UInt32"/> </param>
-        </member>
-        <member name="M:AIO.Security.NULong.op_Implicit(AIO.Security.NByte)~AIO.Security.NULong">
-            <param name="value"> <see cref="T:AIO.Security.NByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NULong.op_Implicit(AIO.Security.NChar)~AIO.Security.NULong">
-            <param name="value"> <see cref="T:AIO.Security.NChar"/> </param>
-        </member>
-        <member name="M:AIO.Security.NULong.op_Implicit(AIO.Security.NUShort)~AIO.Security.NULong">
-            <param name="value"> <see cref="T:AIO.Security.NUShort"/> </param>
-        </member>
-        <member name="M:AIO.Security.NULong.op_Implicit(AIO.Security.NUInt)~AIO.Security.NULong">
-            <param name="value"> <see cref="T:AIO.Security.NUInt"/> </param>
-        </member>
-        <member name="T:AIO.Security.NUShort">
-            <summary>
-            NUShort is <see cref="T:System.UInt16"/>
-            </summary>
-        </member>
-        <member name="M:AIO.Security.NUShort.op_Equality(AIO.Security.NUShort,AIO.Security.NUShort)">
-            <param name="a"> <see cref="T:AIO.Security.NUShort"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NUShort"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUShort.op_Equality(AIO.Security.NUShort,System.UInt16)">
-            <param name="a"> <see cref="T:AIO.Security.NUShort"/> </param>
-            <param name="b"> <see cref="T:System.UInt16"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUShort.op_Inequality(AIO.Security.NUShort,AIO.Security.NUShort)">
-            <param name="a"> <see cref="T:AIO.Security.NUShort"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NUShort"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUShort.op_Inequality(AIO.Security.NUShort,System.UInt16)">
-            <param name="a"> <see cref="T:AIO.Security.NUShort"/> </param>
-            <param name="b"> <see cref="T:System.UInt16"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUShort.op_Addition(AIO.Security.NUShort,AIO.Security.NUShort)">
-            <param name="a"> <see cref="T:AIO.Security.NUShort"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NUShort"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUShort.op_Addition(AIO.Security.NUShort,System.UInt16)">
-            <param name="a"> <see cref="T:AIO.Security.NUShort"/> </param>
-            <param name="b"> <see cref="T:System.UInt16"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUShort.op_Subtraction(AIO.Security.NUShort,AIO.Security.NUShort)">
-            <param name="a"> <see cref="T:AIO.Security.NUShort"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NUShort"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUShort.op_Subtraction(AIO.Security.NUShort,System.UInt16)">
-            <param name="a"> <see cref="T:AIO.Security.NUShort"/> </param>
-            <param name="b"> <see cref="T:System.UInt16"/> </param>
         </member>
         <member name="M:AIO.Security.NUShort.Equals(System.Object)">
             <inheritdoc/>
@@ -604,45 +208,6 @@
             <typeparam name="T"> 格式化提供者类型 </typeparam>
             <returns> <see cref="T:System.String"/> </returns>
         </member>
-        <member name="M:AIO.Security.NUShort.op_Implicit(System.UInt16)~AIO.Security.NUShort">
-            <param name="value"> <see cref="T:System.UInt16"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUShort.op_Implicit(AIO.Security.NUShort)~System.UInt16">
-            <param name="value"> <see cref="T:AIO.Security.NUShort"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUShort.op_Implicit(System.Byte)~AIO.Security.NUShort">
-            <param name="value"> <see cref="T:System.Byte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUShort.op_Implicit(System.Char)~AIO.Security.NUShort">
-            <param name="value"> <see cref="T:System.Char"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUShort.op_Implicit(AIO.Security.NByte)~AIO.Security.NUShort">
-            <param name="value"> <see cref="T:AIO.Security.NByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NUShort.op_Implicit(AIO.Security.NChar)~AIO.Security.NUShort">
-            <param name="value"> <see cref="T:AIO.Security.NChar"/> </param>
-        </member>
-        <member name="T:AIO.Security.NBool">
-            <summary>
-            NBool is <see cref="T:System.Boolean"/>
-            </summary>
-        </member>
-        <member name="M:AIO.Security.NBool.op_Equality(AIO.Security.NBool,AIO.Security.NBool)">
-            <param name="a"> <see cref="T:AIO.Security.NBool"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NBool"/> </param>
-        </member>
-        <member name="M:AIO.Security.NBool.op_Equality(AIO.Security.NBool,System.Boolean)">
-            <param name="a"> <see cref="T:AIO.Security.NBool"/> </param>
-            <param name="b"> <see cref="T:System.Boolean"/> </param>
-        </member>
-        <member name="M:AIO.Security.NBool.op_Inequality(AIO.Security.NBool,AIO.Security.NBool)">
-            <param name="a"> <see cref="T:AIO.Security.NBool"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NBool"/> </param>
-        </member>
-        <member name="M:AIO.Security.NBool.op_Inequality(AIO.Security.NBool,System.Boolean)">
-            <param name="a"> <see cref="T:AIO.Security.NBool"/> </param>
-            <param name="b"> <see cref="T:System.Boolean"/> </param>
-        </member>
         <member name="M:AIO.Security.NBool.Equals(System.Object)">
             <inheritdoc/>
         </member>
@@ -662,49 +227,6 @@
         </member>
         <member name="M:AIO.Security.NBool.op_LogicalNot(AIO.Security.NBool)">
             <param name="a"> <see cref="T:AIO.Security.NBool"/> </param>
-        </member>
-        <member name="M:AIO.Security.NBool.op_Implicit(System.Boolean)~AIO.Security.NBool">
-            <param name="value"> <see cref="T:System.Boolean"/> </param>
-        </member>
-        <member name="M:AIO.Security.NBool.op_Implicit(AIO.Security.NBool)~System.Boolean">
-            <param name="value"> <see cref="T:AIO.Security.NBool"/> </param>
-        </member>
-        <member name="T:AIO.Security.NByte">
-            <summary>
-            NByte is <see cref="T:System.Byte"/>
-            </summary>
-        </member>
-        <member name="M:AIO.Security.NByte.op_Equality(AIO.Security.NByte,AIO.Security.NByte)">
-            <param name="a"> <see cref="T:AIO.Security.NByte"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NByte.op_Equality(AIO.Security.NByte,System.Byte)">
-            <param name="a"> <see cref="T:AIO.Security.NByte"/> </param>
-            <param name="b"> <see cref="T:System.Byte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NByte.op_Inequality(AIO.Security.NByte,AIO.Security.NByte)">
-            <param name="a"> <see cref="T:AIO.Security.NByte"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NByte.op_Inequality(AIO.Security.NByte,System.Byte)">
-            <param name="a"> <see cref="T:AIO.Security.NByte"/> </param>
-            <param name="b"> <see cref="T:System.Byte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NByte.op_Addition(AIO.Security.NByte,AIO.Security.NByte)">
-            <param name="a"> <see cref="T:AIO.Security.NByte"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NByte.op_Addition(AIO.Security.NByte,System.Byte)">
-            <param name="a"> <see cref="T:AIO.Security.NByte"/> </param>
-            <param name="b"> <see cref="T:System.Byte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NByte.op_Subtraction(AIO.Security.NByte,AIO.Security.NByte)">
-            <param name="a"> <see cref="T:AIO.Security.NByte"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NByte.op_Subtraction(AIO.Security.NByte,System.Byte)">
-            <param name="a"> <see cref="T:AIO.Security.NByte"/> </param>
-            <param name="b"> <see cref="T:System.Byte"/> </param>
         </member>
         <member name="M:AIO.Security.NByte.Equals(System.Object)">
             <inheritdoc/>
@@ -735,49 +257,6 @@
         </member>
         <member name="M:AIO.Security.NByte.#ctor(System.Int32)">
             <param name="value"> <see cref="T:System.Byte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NByte.op_Implicit(System.Byte)~AIO.Security.NByte">
-            <param name="value"> <see cref="T:System.Byte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NByte.op_Implicit(AIO.Security.NByte)~System.Byte">
-            <param name="value"> <see cref="T:AIO.Security.NByte"/> </param>
-        </member>
-        <member name="T:AIO.Security.NChar">
-            <summary>
-            NChar is <see cref="T:System.Char"/>
-            </summary>
-        </member>
-        <member name="M:AIO.Security.NChar.op_Equality(AIO.Security.NChar,AIO.Security.NChar)">
-            <param name="a"> <see cref="T:AIO.Security.NChar"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NChar"/> </param>
-        </member>
-        <member name="M:AIO.Security.NChar.op_Equality(AIO.Security.NChar,System.Char)">
-            <param name="a"> <see cref="T:AIO.Security.NChar"/> </param>
-            <param name="b"> <see cref="T:System.Char"/> </param>
-        </member>
-        <member name="M:AIO.Security.NChar.op_Inequality(AIO.Security.NChar,AIO.Security.NChar)">
-            <param name="a"> <see cref="T:AIO.Security.NChar"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NChar"/> </param>
-        </member>
-        <member name="M:AIO.Security.NChar.op_Inequality(AIO.Security.NChar,System.Char)">
-            <param name="a"> <see cref="T:AIO.Security.NChar"/> </param>
-            <param name="b"> <see cref="T:System.Char"/> </param>
-        </member>
-        <member name="M:AIO.Security.NChar.op_Addition(AIO.Security.NChar,AIO.Security.NChar)">
-            <param name="a"> <see cref="T:AIO.Security.NChar"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NChar"/> </param>
-        </member>
-        <member name="M:AIO.Security.NChar.op_Addition(AIO.Security.NChar,System.Char)">
-            <param name="a"> <see cref="T:AIO.Security.NChar"/> </param>
-            <param name="b"> <see cref="T:System.Char"/> </param>
-        </member>
-        <member name="M:AIO.Security.NChar.op_Subtraction(AIO.Security.NChar,AIO.Security.NChar)">
-            <param name="a"> <see cref="T:AIO.Security.NChar"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NChar"/> </param>
-        </member>
-        <member name="M:AIO.Security.NChar.op_Subtraction(AIO.Security.NChar,System.Char)">
-            <param name="a"> <see cref="T:AIO.Security.NChar"/> </param>
-            <param name="b"> <see cref="T:System.Char"/> </param>
         </member>
         <member name="M:AIO.Security.NChar.Equals(System.Object)">
             <inheritdoc/>
@@ -835,85 +314,6 @@
         <member name="M:AIO.Security.NChar.#ctor(System.Decimal)">
             <param name="value"> <see cref="T:System.Decimal"/> </param>
         </member>
-        <member name="M:AIO.Security.NChar.op_Implicit(System.Char)~AIO.Security.NChar">
-            <param name="value"> <see cref="T:System.Char"/> </param>
-        </member>
-        <member name="M:AIO.Security.NChar.op_Implicit(AIO.Security.NChar)~System.Char">
-            <param name="value"> <see cref="T:AIO.Security.NChar"/> </param>
-        </member>
-        <member name="M:AIO.Security.NChar.op_Implicit(AIO.Security.NChar)~System.Int64">
-            <param name="value"> <see cref="T:AIO.Security.NChar"/> </param>
-        </member>
-        <member name="M:AIO.Security.NChar.op_Implicit(AIO.Security.NChar)~System.Int32">
-            <param name="value"> <see cref="T:AIO.Security.NChar"/> </param>
-        </member>
-        <member name="M:AIO.Security.NChar.op_Implicit(AIO.Security.NChar)~System.UInt32">
-            <param name="value"> <see cref="T:AIO.Security.NChar"/> </param>
-        </member>
-        <member name="M:AIO.Security.NChar.op_Implicit(AIO.Security.NChar)~System.UInt64">
-            <param name="value"> <see cref="T:AIO.Security.NChar"/> </param>
-        </member>
-        <member name="M:AIO.Security.NChar.op_Implicit(AIO.Security.NChar)~AIO.Security.NLong">
-            <param name="value"> <see cref="T:AIO.Security.NLong"/> </param>
-        </member>
-        <member name="M:AIO.Security.NChar.op_Implicit(AIO.Security.NChar)~AIO.Security.NInt">
-            <param name="value"> <see cref="T:AIO.Security.NInt"/> </param>
-        </member>
-        <member name="M:AIO.Security.NChar.op_Implicit(AIO.Security.NChar)~AIO.Security.NUInt">
-            <param name="value"> <see cref="T:AIO.Security.NUInt"/> </param>
-        </member>
-        <member name="M:AIO.Security.NChar.op_Implicit(AIO.Security.NChar)~AIO.Security.NULong">
-            <param name="value"> <see cref="T:AIO.Security.NULong"/> </param>
-        </member>
-        <member name="M:AIO.Security.NChar.op_Implicit(System.Byte)~AIO.Security.NChar">
-            <param name="value"> <see cref="T:System.Byte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NChar.op_Implicit(System.UInt16)~AIO.Security.NChar">
-            <param name="value"> <see cref="T:System.UInt16"/> </param>
-        </member>
-        <member name="M:AIO.Security.NChar.op_Implicit(AIO.Security.NByte)~AIO.Security.NChar">
-            <param name="value"> <see cref="T:AIO.Security.NByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NChar.op_Implicit(AIO.Security.NUShort)~AIO.Security.NChar">
-            <param name="value"> <see cref="T:AIO.Security.NUShort"/> </param>
-        </member>
-        <member name="T:AIO.Security.NSByte">
-            <summary>
-            NSByte is <see cref="T:System.SByte"/>
-            </summary>
-        </member>
-        <member name="M:AIO.Security.NSByte.op_Equality(AIO.Security.NSByte,AIO.Security.NSByte)">
-            <param name="a"> <see cref="T:AIO.Security.NSByte"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NSByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NSByte.op_Equality(AIO.Security.NSByte,System.SByte)">
-            <param name="a"> <see cref="T:AIO.Security.NSByte"/> </param>
-            <param name="b"> <see cref="T:System.SByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NSByte.op_Inequality(AIO.Security.NSByte,AIO.Security.NSByte)">
-            <param name="a"> <see cref="T:AIO.Security.NSByte"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NSByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NSByte.op_Inequality(AIO.Security.NSByte,System.SByte)">
-            <param name="a"> <see cref="T:AIO.Security.NSByte"/> </param>
-            <param name="b"> <see cref="T:System.SByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NSByte.op_Addition(AIO.Security.NSByte,AIO.Security.NSByte)">
-            <param name="a"> <see cref="T:AIO.Security.NSByte"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NSByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NSByte.op_Addition(AIO.Security.NSByte,System.SByte)">
-            <param name="a"> <see cref="T:AIO.Security.NSByte"/> </param>
-            <param name="b"> <see cref="T:System.SByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NSByte.op_Subtraction(AIO.Security.NSByte,AIO.Security.NSByte)">
-            <param name="a"> <see cref="T:AIO.Security.NSByte"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NSByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NSByte.op_Subtraction(AIO.Security.NSByte,System.SByte)">
-            <param name="a"> <see cref="T:AIO.Security.NSByte"/> </param>
-            <param name="b"> <see cref="T:System.SByte"/> </param>
-        </member>
         <member name="M:AIO.Security.NSByte.Equals(System.Object)">
             <inheritdoc/>
         </member>
@@ -938,33 +338,6 @@
             <typeparam name="T"> 格式化提供者类型 </typeparam>
             <returns> <see cref="T:System.String"/> </returns>
         </member>
-        <member name="M:AIO.Security.NSByte.op_Implicit(System.SByte)~AIO.Security.NSByte">
-            <param name="value"> <see cref="T:System.SByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NSByte.op_Implicit(AIO.Security.NSByte)~System.SByte">
-            <param name="value"> <see cref="T:AIO.Security.NSByte"/> </param>
-        </member>
-        <member name="T:AIO.Security.NString">
-            <summary>
-            NString is <see cref="T:System.String"/>
-            </summary>
-        </member>
-        <member name="M:AIO.Security.NString.op_Equality(AIO.Security.NString,AIO.Security.NString)">
-            <param name="a"> <see cref="T:AIO.Security.NString"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NString"/> </param>
-        </member>
-        <member name="M:AIO.Security.NString.op_Equality(AIO.Security.NString,System.String)">
-            <param name="a"> <see cref="T:AIO.Security.NString"/> </param>
-            <param name="b"> <see cref="T:System.String"/> </param>
-        </member>
-        <member name="M:AIO.Security.NString.op_Inequality(AIO.Security.NString,AIO.Security.NString)">
-            <param name="a"> <see cref="T:AIO.Security.NString"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NString"/> </param>
-        </member>
-        <member name="M:AIO.Security.NString.op_Inequality(AIO.Security.NString,System.String)">
-            <param name="a"> <see cref="T:AIO.Security.NString"/> </param>
-            <param name="b"> <see cref="T:System.String"/> </param>
-        </member>
         <member name="M:AIO.Security.NString.Equals(System.Object)">
             <inheritdoc/>
         </member>
@@ -978,49 +351,6 @@
             <param name="provider"> 格式化提供者 </param>
             <typeparam name="T"> 格式化提供者类型 </typeparam>
             <returns> <see cref="T:System.String"/> </returns>
-        </member>
-        <member name="M:AIO.Security.NString.op_Implicit(System.String)~AIO.Security.NString">
-            <param name="value"> <see cref="T:System.String"/> </param>
-        </member>
-        <member name="M:AIO.Security.NString.op_Implicit(AIO.Security.NString)~System.String">
-            <param name="value"> <see cref="T:AIO.Security.NString"/> </param>
-        </member>
-        <member name="T:AIO.Security.NFloat">
-            <summary>
-            NFloat is <see cref="T:System.Single"/>
-            </summary>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Equality(AIO.Security.NFloat,AIO.Security.NFloat)">
-            <param name="a"> <see cref="T:AIO.Security.NFloat"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NFloat"/> </param>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Equality(AIO.Security.NFloat,System.Single)">
-            <param name="a"> <see cref="T:AIO.Security.NFloat"/> </param>
-            <param name="b"> <see cref="T:System.Single"/> </param>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Inequality(AIO.Security.NFloat,AIO.Security.NFloat)">
-            <param name="a"> <see cref="T:AIO.Security.NFloat"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NFloat"/> </param>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Inequality(AIO.Security.NFloat,System.Single)">
-            <param name="a"> <see cref="T:AIO.Security.NFloat"/> </param>
-            <param name="b"> <see cref="T:System.Single"/> </param>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Addition(AIO.Security.NFloat,AIO.Security.NFloat)">
-            <param name="a"> <see cref="T:AIO.Security.NFloat"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NFloat"/> </param>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Addition(AIO.Security.NFloat,System.Single)">
-            <param name="a"> <see cref="T:AIO.Security.NFloat"/> </param>
-            <param name="b"> <see cref="T:System.Single"/> </param>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Subtraction(AIO.Security.NFloat,AIO.Security.NFloat)">
-            <param name="a"> <see cref="T:AIO.Security.NFloat"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NFloat"/> </param>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Subtraction(AIO.Security.NFloat,System.Single)">
-            <param name="a"> <see cref="T:AIO.Security.NFloat"/> </param>
-            <param name="b"> <see cref="T:System.Single"/> </param>
         </member>
         <member name="M:AIO.Security.NFloat.Equals(System.Object)">
             <inheritdoc/>
@@ -1046,91 +376,6 @@
             <typeparam name="T"> 格式化提供者类型 </typeparam>
             <returns> <see cref="T:System.String"/> </returns>
         </member>
-        <member name="M:AIO.Security.NFloat.op_Implicit(System.Single)~AIO.Security.NFloat">
-            <param name="value"> <see cref="T:System.Single"/> </param>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Implicit(AIO.Security.NFloat)~System.Single">
-            <param name="value"> <see cref="T:AIO.Security.NFloat"/> </param>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Implicit(System.Byte)~AIO.Security.NFloat">
-            <param name="value"> <see cref="T:System.Byte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Implicit(System.Int16)~AIO.Security.NFloat">
-            <param name="value"> <see cref="T:System.Int16"/> </param>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Implicit(System.UInt16)~AIO.Security.NFloat">
-            <param name="value"> <see cref="T:System.UInt16"/> </param>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Implicit(System.Int32)~AIO.Security.NFloat">
-            <param name="value"> <see cref="T:System.Int32"/> </param>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Implicit(System.UInt32)~AIO.Security.NFloat">
-            <param name="value"> <see cref="T:System.UInt32"/> </param>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Implicit(System.Int64)~AIO.Security.NFloat">
-            <param name="value"> <see cref="T:System.Int64"/> </param>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Implicit(System.UInt64)~AIO.Security.NFloat">
-            <param name="value"> <see cref="T:System.UInt64"/> </param>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Implicit(AIO.Security.NByte)~AIO.Security.NFloat">
-            <param name="value"> <see cref="T:AIO.Security.NByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Implicit(AIO.Security.NShort)~AIO.Security.NFloat">
-            <param name="value"> <see cref="T:AIO.Security.NShort"/> </param>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Implicit(AIO.Security.NUShort)~AIO.Security.NFloat">
-            <param name="value"> <see cref="T:AIO.Security.NUShort"/> </param>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Implicit(AIO.Security.NInt)~AIO.Security.NFloat">
-            <param name="value"> <see cref="T:AIO.Security.NInt"/> </param>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Implicit(AIO.Security.NUInt)~AIO.Security.NFloat">
-            <param name="value"> <see cref="T:AIO.Security.NUInt"/> </param>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Implicit(AIO.Security.NLong)~AIO.Security.NFloat">
-            <param name="value"> <see cref="T:AIO.Security.NLong"/> </param>
-        </member>
-        <member name="M:AIO.Security.NFloat.op_Implicit(AIO.Security.NULong)~AIO.Security.NFloat">
-            <param name="value"> <see cref="T:AIO.Security.NULong"/> </param>
-        </member>
-        <member name="T:AIO.Security.NDouble">
-            <summary>
-            NDouble is <see cref="T:System.Double"/>
-            </summary>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Equality(AIO.Security.NDouble,AIO.Security.NDouble)">
-            <param name="a"> <see cref="T:AIO.Security.NDouble"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NDouble"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Equality(AIO.Security.NDouble,System.Double)">
-            <param name="a"> <see cref="T:AIO.Security.NDouble"/> </param>
-            <param name="b"> <see cref="T:System.Double"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Inequality(AIO.Security.NDouble,AIO.Security.NDouble)">
-            <param name="a"> <see cref="T:AIO.Security.NDouble"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NDouble"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Inequality(AIO.Security.NDouble,System.Double)">
-            <param name="a"> <see cref="T:AIO.Security.NDouble"/> </param>
-            <param name="b"> <see cref="T:System.Double"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Addition(AIO.Security.NDouble,AIO.Security.NDouble)">
-            <param name="a"> <see cref="T:AIO.Security.NDouble"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NDouble"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Addition(AIO.Security.NDouble,System.Double)">
-            <param name="a"> <see cref="T:AIO.Security.NDouble"/> </param>
-            <param name="b"> <see cref="T:System.Double"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Subtraction(AIO.Security.NDouble,AIO.Security.NDouble)">
-            <param name="a"> <see cref="T:AIO.Security.NDouble"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NDouble"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Subtraction(AIO.Security.NDouble,System.Double)">
-            <param name="a"> <see cref="T:AIO.Security.NDouble"/> </param>
-            <param name="b"> <see cref="T:System.Double"/> </param>
-        </member>
         <member name="M:AIO.Security.NDouble.Equals(System.Object)">
             <inheritdoc/>
         </member>
@@ -1154,97 +399,6 @@
             <param name="provider"> 格式化提供者 </param>
             <typeparam name="T"> 格式化提供者类型 </typeparam>
             <returns> <see cref="T:System.String"/> </returns>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Implicit(System.Double)~AIO.Security.NDouble">
-            <param name="value"> <see cref="T:System.Double"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Implicit(AIO.Security.NDouble)~System.Double">
-            <param name="value"> <see cref="T:AIO.Security.NDouble"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Implicit(System.Byte)~AIO.Security.NDouble">
-            <param name="value"> <see cref="T:System.Byte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Implicit(System.Int16)~AIO.Security.NDouble">
-            <param name="value"> <see cref="T:System.Int16"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Implicit(System.UInt16)~AIO.Security.NDouble">
-            <param name="value"> <see cref="T:System.UInt16"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Implicit(System.Int32)~AIO.Security.NDouble">
-            <param name="value"> <see cref="T:System.Int32"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Implicit(System.UInt32)~AIO.Security.NDouble">
-            <param name="value"> <see cref="T:System.UInt32"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Implicit(System.Int64)~AIO.Security.NDouble">
-            <param name="value"> <see cref="T:System.Int64"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Implicit(System.UInt64)~AIO.Security.NDouble">
-            <param name="value"> <see cref="T:System.UInt64"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Implicit(System.Single)~AIO.Security.NDouble">
-            <param name="value"> <see cref="T:System.Single"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Implicit(AIO.Security.NByte)~AIO.Security.NDouble">
-            <param name="value"> <see cref="T:AIO.Security.NByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Implicit(AIO.Security.NShort)~AIO.Security.NDouble">
-            <param name="value"> <see cref="T:AIO.Security.NShort"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Implicit(AIO.Security.NUShort)~AIO.Security.NDouble">
-            <param name="value"> <see cref="T:AIO.Security.NUShort"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Implicit(AIO.Security.NInt)~AIO.Security.NDouble">
-            <param name="value"> <see cref="T:AIO.Security.NInt"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Implicit(AIO.Security.NUInt)~AIO.Security.NDouble">
-            <param name="value"> <see cref="T:AIO.Security.NUInt"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Implicit(AIO.Security.NLong)~AIO.Security.NDouble">
-            <param name="value"> <see cref="T:AIO.Security.NLong"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Implicit(AIO.Security.NULong)~AIO.Security.NDouble">
-            <param name="value"> <see cref="T:AIO.Security.NULong"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDouble.op_Implicit(AIO.Security.NFloat)~AIO.Security.NDouble">
-            <param name="value"> <see cref="T:AIO.Security.NFloat"/> </param>
-        </member>
-        <member name="T:AIO.Security.NDecimal">
-            <summary>
-            NDecimal is <see cref="T:System.Decimal"/>
-            </summary>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Equality(AIO.Security.NDecimal,AIO.Security.NDecimal)">
-            <param name="a"> <see cref="T:AIO.Security.NDecimal"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NDecimal"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Equality(AIO.Security.NDecimal,System.Decimal)">
-            <param name="a"> <see cref="T:AIO.Security.NDecimal"/> </param>
-            <param name="b"> <see cref="T:System.Decimal"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Inequality(AIO.Security.NDecimal,AIO.Security.NDecimal)">
-            <param name="a"> <see cref="T:AIO.Security.NDecimal"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NDecimal"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Inequality(AIO.Security.NDecimal,System.Decimal)">
-            <param name="a"> <see cref="T:AIO.Security.NDecimal"/> </param>
-            <param name="b"> <see cref="T:System.Decimal"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Addition(AIO.Security.NDecimal,AIO.Security.NDecimal)">
-            <param name="a"> <see cref="T:AIO.Security.NDecimal"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NDecimal"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Addition(AIO.Security.NDecimal,System.Decimal)">
-            <param name="a"> <see cref="T:AIO.Security.NDecimal"/> </param>
-            <param name="b"> <see cref="T:System.Decimal"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Subtraction(AIO.Security.NDecimal,AIO.Security.NDecimal)">
-            <param name="a"> <see cref="T:AIO.Security.NDecimal"/> </param>
-            <param name="b"> <see cref="T:AIO.Security.NDecimal"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Subtraction(AIO.Security.NDecimal,System.Decimal)">
-            <param name="a"> <see cref="T:AIO.Security.NDecimal"/> </param>
-            <param name="b"> <see cref="T:System.Decimal"/> </param>
         </member>
         <member name="M:AIO.Security.NDecimal.Equals(System.Object)">
             <inheritdoc/>
@@ -1311,66 +465,6 @@
         </member>
         <member name="M:AIO.Security.NDecimal.#ctor(System.Decimal)">
             <param name="value"> <see cref="T:System.Decimal"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Implicit(System.Decimal)~AIO.Security.NDecimal">
-            <param name="value"> <see cref="T:System.Decimal"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Implicit(AIO.Security.NDecimal)~System.Decimal">
-            <param name="value"> <see cref="T:AIO.Security.NDecimal"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Implicit(System.Byte)~AIO.Security.NDecimal">
-            <param name="value"> <see cref="T:System.Byte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Implicit(System.Int16)~AIO.Security.NDecimal">
-            <param name="value"> <see cref="T:System.Int16"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Implicit(System.UInt16)~AIO.Security.NDecimal">
-            <param name="value"> <see cref="T:System.UInt16"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Implicit(System.Int32)~AIO.Security.NDecimal">
-            <param name="value"> <see cref="T:System.Int32"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Implicit(System.UInt32)~AIO.Security.NDecimal">
-            <param name="value"> <see cref="T:System.UInt32"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Implicit(System.Int64)~AIO.Security.NDecimal">
-            <param name="value"> <see cref="T:System.Int64"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Implicit(System.UInt64)~AIO.Security.NDecimal">
-            <param name="value"> <see cref="T:System.UInt64"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Implicit(System.Single)~AIO.Security.NDecimal">
-            <param name="value"> <see cref="T:System.Single"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Implicit(System.Double)~AIO.Security.NDecimal">
-            <param name="value"> <see cref="T:System.Double"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Implicit(AIO.Security.NByte)~AIO.Security.NDecimal">
-            <param name="value"> <see cref="T:AIO.Security.NByte"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Implicit(AIO.Security.NShort)~AIO.Security.NDecimal">
-            <param name="value"> <see cref="T:AIO.Security.NShort"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Implicit(AIO.Security.NUShort)~AIO.Security.NDecimal">
-            <param name="value"> <see cref="T:AIO.Security.NUShort"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Implicit(AIO.Security.NInt)~AIO.Security.NDecimal">
-            <param name="value"> <see cref="T:AIO.Security.NInt"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Implicit(AIO.Security.NUInt)~AIO.Security.NDecimal">
-            <param name="value"> <see cref="T:AIO.Security.NUInt"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Implicit(AIO.Security.NLong)~AIO.Security.NDecimal">
-            <param name="value"> <see cref="T:AIO.Security.NLong"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Implicit(AIO.Security.NULong)~AIO.Security.NDecimal">
-            <param name="value"> <see cref="T:AIO.Security.NULong"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Implicit(AIO.Security.NFloat)~AIO.Security.NDecimal">
-            <param name="value"> <see cref="T:AIO.Security.NFloat"/> </param>
-        </member>
-        <member name="M:AIO.Security.NDecimal.op_Implicit(AIO.Security.NDouble)~AIO.Security.NDecimal">
-            <param name="value"> <see cref="T:AIO.Security.NDouble"/> </param>
         </member>
         <member name="T:AIO.Security.AESEncryption">
             <summary>

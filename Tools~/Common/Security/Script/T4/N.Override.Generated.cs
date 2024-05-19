@@ -1,4 +1,4 @@
-﻿//F:\Unity\AIO2022-03-08\Packages\com.aio.package\Tools~\Common\Security\Security.csproj
+﻿//Script\Data
 // <auto>Script\Data\NDecimal.Operator.cs</>
 // <auto>Script\Data\NDouble.Operator.cs</>
 // <auto>Script\Data\NFloat.Operator.cs</>
@@ -13,4 +13,4 @@
 // <auto>Script\Data\NShort.Operator.cs</>
 // <auto>Script\Data\NLong.Operator.cs</>
 // <auto>Script\Data\NInt.Operator.cs</>
-// <date>2024-05-20 00:35:58</>
+// <date>2024-05-20 00:42:29</>

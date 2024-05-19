@@ -45,6 +45,9 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>H:\Microsoft\nuget\vc_packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -55,92 +58,71 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Script\Data\Manager.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Manager.ttinclude</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Data\N.Implicit.Generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>N.Implicit.Generated.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Script\Data\N.Operator.Generated.cs">
+    <Compile Include="Script\Data\NBool.cs" />
+    <Compile Include="Script\Data\NByte.cs" />
+    <Compile Include="Script\Data\NChar.cs" />
+    <Compile Include="Script\Data\NDecimal.cs" />
+    <Compile Include="Script\Data\NDouble.cs" />
+    <Compile Include="Script\Data\NFloat.cs" />
+    <Compile Include="Script\Data\NInt.cs" />
+    <Compile Include="Script\Data\NLong.cs" />
+    <Compile Include="Script\Data\NSByte.cs" />
+    <Compile Include="Script\Data\NShort.cs" />
+    <Compile Include="Script\Data\NString.cs" />
+    <Compile Include="Script\Data\NUInt.cs" />
+    <Compile Include="Script\Data\NULong.cs" />
+    <Compile Include="Script\Data\NUShort.cs" />
+    <Compile Include="Script\Encryptions\AESEncryption.cs" />
+    <Compile Include="Script\Encryptions\DESCEncryption.cs" />
+    <Compile Include="Script\Encryptions\SecurityUtil.cs" />
+    <Compile Include="Script\T4\N.Operator.Generated.cs">
       <DependentUpon>N.Operator.Generated.tt</DependentUpon>
     </Compile>
-    <Compile Include="Script\Data\N.Override.Generated.cs">
+    <Compile Include="Script\T4\N.Override.Generated.cs">
       <DependentUpon>N.Override.Generated.tt</DependentUpon>
     </Compile>
-    <Compile Include="Script\Data\NBool.cs" />
-    <Compile Include="Script\Data\NBool.Implicit.cs" />
-    <Compile Include="Script\Data\NByte.cs" />
-    <Compile Include="Script\Data\NByte.Implicit.cs" />
-    <Compile Include="Script\Data\NChar.Construction.Generated.cs">
+    <Compile Include="Script\T4\NChar.Construction.Generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NChar.Construction.Generated.tt</DependentUpon>
     </Compile>
-    <Compile Include="Script\Data\NChar.cs" />
-    <Compile Include="Script\Data\NChar.Implicit.cs" />
-    <Compile Include="Script\Data\NDecimal.Construction.Generated.cs">
+    <Compile Include="Script\T4\NDecimal.Construction.Generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NDecimal.Construction.Generated.tt</DependentUpon>
     </Compile>
-    <Compile Include="Script\Data\NDecimal.cs" />
-    <Compile Include="Script\Data\NDecimal.Implicit.cs" />
-    <Compile Include="Script\Data\NDouble.cs" />
-    <Compile Include="Script\Data\NDouble.Implicit.cs" />
-    <Compile Include="Script\Data\NFloat.cs" />
-    <Compile Include="Script\Data\NFloat.Implicit.cs" />
-    <Compile Include="Script\Data\NInt.cs" />
-    <Compile Include="Script\Data\NInt.Implicit.cs" />
-    <Compile Include="Script\Data\NLong.cs" />
-    <Compile Include="Script\Data\NLong.Implicit.cs" />
-    <Compile Include="Script\Data\NSByte.cs" />
-    <Compile Include="Script\Data\NSByte.Implicit.cs" />
-    <Compile Include="Script\Data\NShort.cs" />
-    <Compile Include="Script\Data\NShort.Implicit.cs" />
-    <Compile Include="Script\Data\NString.cs" />
-    <Compile Include="Script\Data\NString.Implicit.cs" />
-    <Compile Include="Script\Data\NUInt.cs" />
-    <Compile Include="Script\Data\NUInt.Implicit.cs" />
-    <Compile Include="Script\Data\NULong.cs" />
-    <Compile Include="Script\Data\NULong.Implicit.cs" />
-    <Compile Include="Script\Data\NUShort.cs" />
-    <Compile Include="Script\Data\NUShort.Implicit.cs" />
-    <Compile Include="Script\Encryptions\AESEncryption.cs" />
-    <Compile Include="Script\Encryptions\DESCEncryption.cs" />
-    <Compile Include="Script\Encryptions\SecurityUtil.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Script\Data\Manager.ttinclude">
+    <Content Include="Script\T4\Manager.ttinclude">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Manager.cs</LastGenOutput>
     </Content>
-    <Content Include="Script\Data\N.Implicit.Generated.tt">
+    <Content Include="Script\T4\N.Implicit.Generated.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>N.Implicit.Generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Script\Data\N.Operator.Generated.tt">
+    <Content Include="Script\T4\N.Operator.Generated.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>N.Operator.Generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Script\Data\N.Override.Generated.tt">
+    <Content Include="Script\T4\N.Override.Generated.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>N.Override.Generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Script\Data\NChar.Construction.Generated.tt">
+    <Content Include="Script\T4\NChar.Construction.Generated.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>NChar.Construction.Generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Script\Data\NDecimal.Construction.Generated.tt">
+    <Content Include="Script\T4\NDecimal.Construction.Generated.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>NDecimal.Construction.Generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
@@ -172,4 +154,168 @@
             )
         </PostBuildEvent>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Script\Data\NDecimal.Implicit.cs">
+      <DependentUpon>NDecimal.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NDouble.Implicit.cs">
+      <DependentUpon>NDouble.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NFloat.Implicit.cs">
+      <DependentUpon>NFloat.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NString.Implicit.cs">
+      <DependentUpon>NString.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NChar.Implicit.cs">
+      <DependentUpon>NChar.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NULong.Implicit.cs">
+      <DependentUpon>NULong.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NUInt.Implicit.cs">
+      <DependentUpon>NUInt.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NUShort.Implicit.cs">
+      <DependentUpon>NUShort.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NByte.Implicit.cs">
+      <DependentUpon>NByte.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NLong.Implicit.cs">
+      <DependentUpon>NLong.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NInt.Implicit.cs">
+      <DependentUpon>NInt.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NShort.Implicit.cs">
+      <DependentUpon>NShort.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NSByte.Implicit.cs">
+      <DependentUpon>NSByte.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NBool.Implicit.cs">
+      <DependentUpon>NBool.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Script\Data\NDecimal.Operator.cs">
+      <DependentUpon>NDecimal.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NDouble.Operator.cs">
+      <DependentUpon>NDouble.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NFloat.Operator.cs">
+      <DependentUpon>NFloat.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NString.Operator.cs">
+      <DependentUpon>NString.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NSByte.Operator.cs">
+      <DependentUpon>NSByte.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NChar.Operator.cs">
+      <DependentUpon>NChar.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NByte.Operator.cs">
+      <DependentUpon>NByte.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NBool.Operator.cs">
+      <DependentUpon>NBool.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NUShort.Operator.cs">
+      <DependentUpon>NUShort.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NULong.Operator.cs">
+      <DependentUpon>NULong.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NUInt.Operator.cs">
+      <DependentUpon>NUInt.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NShort.Operator.cs">
+      <DependentUpon>NShort.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NLong.Operator.cs">
+      <DependentUpon>NLong.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Script\Data\NInt.Operator.cs">
+      <DependentUpon>NInt.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup />
+  <ItemGroup />
+  <ItemGroup />
+  <ItemGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="Script\Data\NChar.Construction.cs">
+      <DependentUpon>NChar.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Script\Data\NDecimal.Construction.cs">
+      <DependentUpon>NDecimal.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
 </Project>

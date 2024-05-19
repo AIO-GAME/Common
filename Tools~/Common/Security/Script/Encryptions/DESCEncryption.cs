@@ -196,7 +196,7 @@ namespace AIO.Security
             des.IV  = Encoding.ASCII.GetBytes(sKey.Substring(0, 8));
             using var cs = new CryptoStream(ms, des.CreateDecryptor(), CryptoStreamMode.Write);
             cs.Write(inputByteArray, 0, inputByteArray.Length);
-            cs.FlushFinalBlock();
+            cs.FlushFinalBlock(); 
             return Encoding.Default.GetString(ms.ToArray());
         }
 
