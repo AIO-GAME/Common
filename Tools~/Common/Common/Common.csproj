@@ -14,9 +14,11 @@
         <Deterministic>true</Deterministic>
         <LangVersion>8</LangVersion>
         <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
-        <RestorePackagesPath>$(SolutionDir)packages</RestorePackagesPath>
+        <RestorePackagesPath Condition=" '$(NUGET_PACKAGES)' != '' ">$(NUGET_PACKAGES)</RestorePackagesPath>
+        <RestorePackagesPath Condition=" '$(NUGET_PACKAGES)' == '' ">$(USERPROFILE)\.nuget\packages</RestorePackagesPath>
         <RuntimeIdentifiers>win;linux-x64;osx-x64</RuntimeIdentifiers>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <PublicSign>false</PublicSign>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <DebugSymbols>true</DebugSymbols>
@@ -695,11 +697,21 @@
         <Compile Include="Script\Extension\Interface\IType\IType.Extend.cs"/>
         <Compile Include="Script\Extension\Struct\Byte\Byte.Extend.To.cs"/>
         <Compile Include="Script\Extension\Struct\Char\Char.Extend.cs"/>
-        <Compile Include="Script\Extension\Struct\Char\Char.Extend.Get.cs"/>
-        <Compile Include="Script\Extension\Struct\Char\Char.Extend.IS.cs"/>
-        <Compile Include="Script\Extension\Struct\Char\Char.Extend.Judge.cs"/>
-        <Compile Include="Script\Extension\Struct\Char\Char.Extend.ToConver.cs"/>
-        <Compile Include="Script\Extension\Struct\Long\LongExtened.Extend.cs"/>
+        <Compile Include="Script\Extension\Struct\Char\Char.Extend.Get.cs">
+            <DependentUpon>Char.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Struct\Char\Char.Extend.IS.cs">
+            <DependentUpon>Char.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Struct\Char\Char.Extend.Judge.cs">
+            <DependentUpon>Char.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Struct\Char\Char.Extend.ToConver.cs">
+            <DependentUpon>Char.Extend.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Extension\Struct\Long\LongExtened.Extend.cs">
+            <DependentUpon>Char.Extend.cs</DependentUpon>
+        </Compile>
         <Compile Include="Script\Handle\AHandle.cs"/>
         <Compile Include="Script\Handle\Net\FTP\Handle.FTP.cs"/>
         <Compile Include="Script\Handle\Net\FTP\Handle.FTP.Task.cs"/>
@@ -809,27 +821,67 @@
         <Compile Include="Script\Tools\Buffer\Buffer.ICloneable.cs"/>
         <Compile Include="Script\Tools\Buffer\Buffer.IEqualityComparer.cs"/>
         <Compile Include="Script\Tools\Buffer\Buffer.IList.cs"/>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Bool.cs"/>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Byte.cs"/>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Char.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Bool.cs">
+            <DependentUpon>Buffer.Byte.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Byte.cs">
+            <DependentUpon>Buffer.Byte.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Char.cs">
+            <DependentUpon>Buffer.Byte.cs</DependentUpon>
+        </Compile>
         <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.cs"/>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Decimal.cs"/>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Double.cs"/>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Enum.cs"/>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Float.cs"/>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.ICollection.cs"/>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.IDictionary.cs"/>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.IList.cs"/>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Int16.cs"/>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Int32.cs"/>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Int64.cs"/>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Json.cs"/>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Len.cs"/>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.SByte.cs"/>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.String.cs"/>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.UInt16.cs"/>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.UInt32.cs"/>
-        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.UInt64.cs"/>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Decimal.cs">
+            <DependentUpon>Buffer.Byte.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Double.cs">
+            <DependentUpon>Buffer.Byte.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Enum.cs">
+            <DependentUpon>Buffer.Byte.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Float.cs">
+            <DependentUpon>Buffer.Byte.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.ICollection.cs">
+            <DependentUpon>Buffer.Byte.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.IDictionary.cs">
+            <DependentUpon>Buffer.Byte.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.IList.cs">
+            <DependentUpon>Buffer.Byte.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Int16.cs">
+            <DependentUpon>Buffer.Byte.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Int32.cs">
+            <DependentUpon>Buffer.Byte.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Int64.cs">
+            <DependentUpon>Buffer.Byte.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Json.cs">
+            <DependentUpon>Buffer.Byte.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.Len.cs">
+            <DependentUpon>Buffer.Byte.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.SByte.cs">
+            <DependentUpon>Buffer.Byte.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.String.cs">
+            <DependentUpon>Buffer.Byte.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.UInt16.cs">
+            <DependentUpon>Buffer.Byte.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.UInt32.cs">
+            <DependentUpon>Buffer.Byte.cs</DependentUpon>
+        </Compile>
+        <Compile Include="Script\Tools\Buffer\Byte\Buffer.Byte.UInt64.cs">
+            <DependentUpon>Buffer.Byte.cs</DependentUpon>
+        </Compile>
         <Compile Include="Script\Tools\Buffer\Ring\BufferRing.cs"/>
         <Compile Include="Script\Tools\Buffer\Ring\BufferRing.Extend.cs"/>
         <Compile Include="Script\Tools\FileCache.cs"/>
@@ -1036,10 +1088,12 @@
     </ItemGroup>
     <ItemGroup>
         <Reference Include="Newtonsoft.Json">
-            <HintPath>$(NUGET_PACKAGES)\newtonsoft.json\13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+            <HintPath Condition=" '$(NUGET_PACKAGES)' != '' ">$(NUGET_PACKAGES)\newtonsoft.json\13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+            <HintPath Condition=" '$(NUGET_PACKAGES)' == '' ">$(USERPROFILE)\.nuget\packages\newtonsoft.json\13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
         </Reference>
         <Reference Include="System.Buffers">
-            <HintPath>$(NUGET_PACKAGES)\system.buffers\4.3.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
+            <HintPath Condition=" '$(NUGET_PACKAGES)' != '' ">$(NUGET_PACKAGES)\system.buffers\4.3.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
+            <HintPath Condition=" '$(NUGET_PACKAGES)' == '' ">$(USERPROFILE)\.nuget\packages\system.buffers\4.3.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
         </Reference>
         <Reference Include="System"/>
         <Reference Include="System.Core"/>
@@ -1049,14 +1103,13 @@
         <Reference Include="System.Net.Http"/>
         <Reference Include="System.Xml"/>
         <None Include="app.config"/>
+        <Content Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3">
             <ExcludeAssets>all</ExcludeAssets>
         </PackageReference>
-        <PackageReference Include="System.Buffers" Version="4.3.0">
-            <ExcludeAssets>all</ExcludeAssets>
-        </PackageReference>
+        <PackageReference Include="System.Buffers" Version="4.3.0" />
         <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.5.*">
             <ExcludeAssets>all</ExcludeAssets>
         </PackageReference>
