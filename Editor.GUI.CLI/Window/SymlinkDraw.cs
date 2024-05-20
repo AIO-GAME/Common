@@ -38,6 +38,10 @@ namespace AIO.UEditor
 
         private static bool _ShowSymlink;
 
+        // #ABEBC6
+        private static readonly Color BackgroundColor = new Color(.7f, .9f, .8f, .8f);
+        private static readonly Color ErrorColor      = new Color(.9f, .1f, .3f, .8f);
+
         private static GUIStyle SymlinkMarkerStyle
         {
             get
@@ -45,7 +49,7 @@ namespace AIO.UEditor
                 if (_SymlinkMarkerStyle is null)
                     _SymlinkMarkerStyle = new GUIStyle(EditorStyles.label)
                     {
-                        normal    = { textColor = new Color(.2f, .8f, .2f, .8f) },
+                        normal    = { textColor = BackgroundColor }, // #2ECC71
                         alignment = TextAnchor.MiddleRight
                     };
 
@@ -60,7 +64,7 @@ namespace AIO.UEditor
                 if (_SymlinkErrorStyle is null)
                     _SymlinkErrorStyle = new GUIStyle(EditorStyles.label)
                     {
-                        normal    = { textColor = new Color(0.7f, 0.3f, 0.4f, 0.7f) },
+                        normal    = { textColor = ErrorColor }, // #E91E63
                         alignment = TextAnchor.MiddleRight
                     };
 
@@ -112,47 +116,60 @@ namespace AIO.UEditor
         /// <summary>
         /// 显示符号链接
         /// </summary>
-        private static bool GetShowSymlink()
-        {
-            return EditorPrefs.GetBool(typeof(SymlinkDraw).FullName, true);
-        }
+        private static bool GetShowSymlink() { return EditorPrefs.GetBool(typeof(SymlinkDraw).FullName, true); }
 
         /// <summary>
         /// 显示符号链接
         /// </summary>
-        private static void SetShowSymlink(bool value)
-        {
-            EditorPrefs.SetBool(typeof(SymlinkDraw).FullName, value);
-        }
+        private static void SetShowSymlink(bool value) { EditorPrefs.SetBool(typeof(SymlinkDraw).FullName, value); }
 
         /// <summary>
         /// Draw a little indicator if folder is a symlink
         /// </summary>
         /// <param name="guid"></param>
         /// <param name="r"></param>
-        private static async void OnProjectWindowItemGUI(string guid, Rect r)
+        private static void OnProjectWindowItemGUI(string guid, Rect r)
         {
             var path = AssetDatabase.GUIDToAssetPath(guid);
             if (string.IsNullOrEmpty(path)) return;
             if (!Directory.Exists(path)) return;
             var attribs = File.GetAttributes(path);
-            if ((attribs & FOLDER_SYMLINK_ATTRIBS) == FOLDER_SYMLINK_ATTRIBS)
+            if ((attribs & FOLDER_SYMLINK_ATTRIBS) != FOLDER_SYMLINK_ATTRIBS) return;
+            r.x     = r.x + r.width - 7;
+            r.width = 7;
+            Draw(r, path);
+        }
+
+        private static async void Draw(Rect rect, string path)
+        {
+            EditorGUI.DrawRect(rect, BackgroundColor);
+            if (!GUI.Button(rect, GUIContent.none, SymlinkMarkerStyle)) return;
+            var realPath = GetRealPath(path).Replace('\\', '/');
+            try
             {
-                r.x     = r.width;
-                r.width = 30;
-                if (GUI.Button(r, "<->", SymlinkMarkerStyle))
-                {
-                    var realPath = GetRealPath(path).Replace('\\', '/');
-                    try
-                    {
-                        var result = await PrPlatform.Open.Path(realPath).Async();
-                        if (result.ExitCode != 0) EditorUtility.RevealInFinder(realPath);
-                    }
-                    catch
-                    {
-                        EditorUtility.RevealInFinder(realPath);
-                    }
-                }
+                var result = await PrPlatform.Open.Path(realPath).Async();
+                if (result.ExitCode != 0) EditorUtility.RevealInFinder(realPath);
+            }
+            catch
+            {
+                EditorUtility.RevealInFinder(realPath);
+            }
+        }
+
+        private static async void ErrorDraw(Rect rect, string path = null)
+        {
+            EditorGUI.DrawRect(rect, ErrorColor);
+            if (!GUI.Button(rect, GUIContent.none, SymlinkErrorStyle)) return;
+            if (string.IsNullOrEmpty(path)) return;
+            var realPath = GetRealPath(path).Replace('\\', '/');
+            try
+            {
+                var result = await PrPlatform.Open.Path(realPath).Async();
+                if (result.ExitCode != 0) EditorUtility.RevealInFinder(realPath);
+            }
+            catch
+            {
+                EditorUtility.RevealInFinder(realPath);
             }
         }
 
@@ -161,17 +178,11 @@ namespace AIO.UEditor
         /// Add a menu item in the Assets/Create category to add symlinks to directories.
         /// </summary>
         [MenuItem("Assets/Create/Folder (Absolute Symlink)", false, 20)]
-        private static void SymlinkAbsolute()
-        {
-            Symlink(true);
-        }
+        private static void SymlinkAbsolute() { Symlink(true); }
 
         // Create a relative symbolic link
         [MenuItem("Assets/Create/Folder (Relative Symlink)", false, 21)]
-        private static void SymlinkRelative()
-        {
-            Symlink(false);
-        }
+        private static void SymlinkRelative() { Symlink(false); }
 
         private static void Symlink(bool absolute)
         {
@@ -196,9 +207,7 @@ namespace AIO.UEditor
 
             var activeObject = Selection.activeObject;
 
-            var targetPath = activeObject != null ? AssetDatabase.GetAssetPath(activeObject) : null;
-
-            if (string.IsNullOrEmpty(targetPath)) targetPath = "Assets";
+            var targetPath = AssetDatabase.GetAssetPath(activeObject) ?? "Assets";
 
             var attribs = File.GetAttributes(targetPath);
 
@@ -213,7 +222,7 @@ namespace AIO.UEditor
             if (Directory.Exists(targetPath))
             {
                 Debug.LogWarning(
-                    $"A folder already exists at this location, aborting link.\n{sourceFolderPath} -> {targetPath}");
+                                 $"A folder already exists at this location, aborting link.\n{sourceFolderPath} -> {targetPath}");
                 return;
             }
 
@@ -235,17 +244,15 @@ namespace AIO.UEditor
                     // For some reason, OSX doesn't want to create a symlink with quotes around the paths, so escape the spaces instead.
                     sourcePath = sourcePath.Replace(" ", "\\ ");
                     targetPath = targetPath.Replace(" ", "\\ ");
-                    var command = $"ln -s {sourcePath} {targetPath}";
-                    ExecuteBashCommand(command);
+                    ExecuteBashCommand($"ln -s {sourcePath} {targetPath}");
                     break;
                 }
                 case RuntimePlatform.LinuxEditor:
                 // Is Linux the same as OSX?
-                default:
-                    break;
+                default: break;
             }
 
-            Debug.Log(string.Format("Created symlink: {0} <=> {1}", targetPath, sourceFolderPath));
+            Debug.Log($"Created symlink: {targetPath} <=> {sourceFolderPath}");
             AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
         }
 
@@ -262,17 +269,17 @@ namespace AIO.UEditor
                 sourcePath.Split(new[] { Path.PathSeparator }, StringSplitOptions.RemoveEmptyEntries);
 
             var max = Mathf.Min(splitOutput.Length, splitSource.Length);
-            var i = 0;
+            var i   = 0;
             while (i < max)
             {
                 if (splitOutput[i] != splitSource[i]) break;
                 ++i;
             }
 
-            var hopUpCount = splitOutput.Length - i - 1;
-            var newSplitCount = hopUpCount + splitSource.Length - i;
-            var newSplitTarget = new string[newSplitCount];
-            var j = 0;
+            var hopUpCount                                = splitOutput.Length - i - 1;
+            var newSplitCount                             = hopUpCount + splitSource.Length - i;
+            var newSplitTarget                            = new string[newSplitCount];
+            var j                                         = 0;
             for (; j < hopUpCount; ++j) newSplitTarget[j] = "..";
 
             for (max = newSplitTarget.Length; j < max; ++j, ++i) newSplitTarget[j] = splitSource[i];
@@ -325,7 +332,7 @@ namespace AIO.UEditor
                 return path;
             }
 
-            var result = new StringBuilder(512);
+            var result  = new StringBuilder(512);
             var mResult = GetFinalPathNameByHandle(directoryHandle, result, result.Capacity, 0);
 
             if (mResult < 0)
@@ -334,7 +341,8 @@ namespace AIO.UEditor
                 return path;
             }
 
-            if (result.Length >= 4 && result[0] == '\\' && result[1] == '\\' && result[2] == '?' && result[3] == '\\') return result.ToString().Substring(4); // "\\?\" remove
+            if (result.Length >= 4 && result[0] == '\\' && result[1] == '\\' && result[2] == '?' && result[3] == '\\')
+                return result.ToString().Substring(4); // "\\?\" remove
 
             return result.ToString();
 
@@ -349,13 +357,20 @@ namespace AIO.UEditor
 #if UNITY_EDITOR_WIN
 
         [DllImport("kernel32.dll", EntryPoint = "CreateFileW", CharSet = CharSet.Unicode, SetLastError = true)]
-        private static extern SafeFileHandle CreateFile(string lpFileName,         int dwDesiredAccess,       int dwShareMode,
-                                                        IntPtr securityAttributes, int dwCreationDisposition, int dwFlagsAndAttributes, IntPtr hTemplateFile);
+        private static extern SafeFileHandle CreateFile(string lpFileName,
+                                                        int    dwDesiredAccess,
+                                                        int    dwShareMode,
+                                                        IntPtr securityAttributes,
+                                                        int    dwCreationDisposition,
+                                                        int    dwFlagsAndAttributes,
+                                                        IntPtr hTemplateFile);
 
         [DllImport("kernel32.dll", EntryPoint = "GetFinalPathNameByHandleW", CharSet = CharSet.Unicode,
-                   SetLastError = true)]
-        private static extern int GetFinalPathNameByHandle([In] SafeFileHandle hFile,       [Out] StringBuilder lpszFilePath,
-                                                           [In] int            cchFilePath, [In]  int           dwFlags);
+                      SetLastError = true)]
+        private static extern int GetFinalPathNameByHandle([In]  SafeFileHandle hFile,
+                                                           [Out] StringBuilder  lpszFilePath,
+                                                           [In]  int            cchFilePath,
+                                                           [In]  int            dwFlags);
 
         private const int CREATION_DISPOSITION_OPEN_EXISTING = 3;
         private const int FILE_FLAG_BACKUP_SEMANTICS         = 0x02000000;
