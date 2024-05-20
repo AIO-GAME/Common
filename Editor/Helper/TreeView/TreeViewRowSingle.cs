@@ -134,7 +134,6 @@ namespace AIO.UEditor
              || args.newName == args.originalName
                ) return;
             OnRename(args);
-            EndRename();
         }
 
         /// <summary>
