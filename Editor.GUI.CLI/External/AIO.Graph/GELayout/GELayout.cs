@@ -295,7 +295,6 @@ namespace AIO.UEditor
                         {
                             DragAndDrop.AcceptDrag();
                             obj = DragAndDrop.objectReferences[0];
-                            DragAndDrop.PrepareStartDrag();
                             DragAndDrop.activeControlID = 0;
                         }
 

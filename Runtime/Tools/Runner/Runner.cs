@@ -46,22 +46,12 @@ namespace AIO
                 IsRuntime = false;
             }
 
-            if (IsRuntime)
+            var obj = new GameObject //添加一个看不见的游戏物体到场景中
             {
-                var obj = new GameObject("RunnerMainThreadExecuteRuntime")
-                {
-                    hideFlags = HideFlags.HideAndDontSave
-                }; //添加一个看不见的游戏物体到场景中
-                instance = obj.AddComponent<ThreadMono>();
-            }
-            else
-            {
-                var obj = new GameObject("RunnerMainThreadExecuteEditor")
-                {
-                    hideFlags = HideFlags.HideAndDontSave
-                };
-                instance = obj.AddComponent<ThreadMono>();
-            }
+                hideFlags = HideFlags.HideAndDontSave,
+                name      = IsRuntime ? "RunnerMainThreadExecuteRuntime" : "RunnerMainThreadExecuteEditor",
+            };
+            instance = obj.AddComponent<ThreadMono>();
 
             EditorApplication.quitting += Dispose;
             Application.quitting       += Dispose;
@@ -93,7 +83,7 @@ namespace AIO
             EditorApplication.quitting -= Dispose;
 #endif
             Application.quitting -= Dispose;
-            if (instance != null) return;
+            if (instance) return;
             UObject.DestroyImmediate(instance.gameObject, true);
             instance = null;
         }

@@ -25,9 +25,8 @@ namespace AIO.UEditor
     {
         private class Error : Exception
         {
-            public Error(EInitAttrMode mode, MethodBase method, Exception exception) : base(
-                $"{nameof(AInitializeOnLoad)} {mode} : {method.Name} Error: {exception.Message}",
-                exception.InnerException) { }
+            public Error(EInitAttrMode mode, MethodBase method, Exception exception)
+                : base($"{nameof(AInitializeOnLoad)} {mode} : {method.Name} Error: {exception.Message}", exception.InnerException) { }
         }
 
 #if UNITY_2022_1_OR_NEWER
@@ -41,14 +40,11 @@ namespace AIO.UEditor
             Debug.Log(MethodsPath.TryGetValue(method.MethodHandle.Value, out var tuple)
                           ? $"<color=#F7DC6F>[Initialize] {mode} : </color> {method.ReflectedType.ToDetails()}:{method.Name} () (at {tuple.Item1}:{tuple.Item2})"
                           : $"<color=#F7DC6F>[Initialize] {mode} : </color> {method.ReflectedType.ToDetails()} : {method.Name} ()"
-            );
+                     );
 #endif
         }
 
-        private static void DebugError(EInitAttrMode mode, MethodBase method, Exception e)
-        {
-            Debug.LogException(new Error(mode, method, e));
-        }
+        private static void DebugError(EInitAttrMode mode, MethodBase method, Exception e) { Debug.LogException(new Error(mode, method, e)); }
 
 #if UNITY_EDITOR
         private static readonly Dictionary<IntPtr, Tuple<string, int>> MethodsPath;
@@ -56,26 +52,24 @@ namespace AIO.UEditor
         private static readonly Dictionary<int, Queue<MethodInfo>>     MethodsEditor;
 #endif
 
-        private static readonly SortedSet<int>                     OrdersRuntimeBeforeSceneLoad;
+        private static readonly SortedSet<int> OrdersRuntimeBeforeSceneLoad;
+        private static readonly SortedSet<int> OrdersRuntimeAfterSceneLoad;
+        private static readonly SortedSet<int> OrdersRuntimeAfterAssembliesLoaded;
+        private static readonly SortedSet<int> OrdersRuntimeBeforeSplashScreen;
+        private static readonly SortedSet<int> OrdersRuntimeSubsystemRegistration;
+
         private static readonly Dictionary<int, Queue<MethodInfo>> MethodsRuntimeBeforeSceneLoad;
-
-        private static readonly SortedSet<int>                     OrdersRuntimeAfterSceneLoad;
         private static readonly Dictionary<int, Queue<MethodInfo>> MethodsRuntimeAfterSceneLoad;
-
-        private static readonly SortedSet<int>                     OrdersRuntimeAfterAssembliesLoaded;
         private static readonly Dictionary<int, Queue<MethodInfo>> MethodsRuntimeAfterAssembliesLoaded;
-
-        private static readonly SortedSet<int>                     OrdersRuntimeBeforeSplashScreen;
         private static readonly Dictionary<int, Queue<MethodInfo>> MethodsRuntimeBeforeSplashScreen;
-
-        private static readonly SortedSet<int>                     OrdersRuntimeSubsystemRegistration;
         private static readonly Dictionary<int, Queue<MethodInfo>> MethodsRuntimeSubsystemRegistration;
 
         private static void Processing(AInitAttribute attribute, MethodInfo method)
         {
 #if UNITY_EDITOR
             MethodsPath[method.MethodHandle.Value] = new Tuple<string, int>(
-                attribute.FilePath.Replace(Application.dataPath.Replace("Assets", ""), ""), attribute.LineNumber);
+                                                                            attribute.FilePath.Replace(Application.dataPath.Replace("Assets", ""), ""),
+                                                                            attribute.LineNumber);
             if (attribute.Mode.HasFlag(EInitAttrMode.Editor))
             {
                 if (MethodsEditor.TryGetValue(attribute.Order, out var queue))
@@ -189,9 +183,9 @@ namespace AIO.UEditor
                 if (type.Value.IsEnum) continue;
                 if (type.Value.IsInterface) continue;
                 foreach (var method in type.Value.GetMethods(
-                             BindingFlags.Static |
-                             BindingFlags.Public |
-                             BindingFlags.NonPublic))
+                                                             BindingFlags.Static |
+                                                             BindingFlags.Public |
+                                                             BindingFlags.NonPublic))
                 {
                     if (!method.IsStatic) continue;
                     if (method.IsAbstract) continue;

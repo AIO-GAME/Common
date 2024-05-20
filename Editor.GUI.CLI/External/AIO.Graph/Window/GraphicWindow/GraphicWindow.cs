@@ -189,7 +189,6 @@ namespace AIO.UEditor
             EHelper.Window.Free(this);
 #if UNITY_2021_1_OR_NEWER || !UNITY_2020_1_OR_NEWER
             AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
 #endif
         }
 

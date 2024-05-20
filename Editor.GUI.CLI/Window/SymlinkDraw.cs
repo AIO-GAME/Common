@@ -147,7 +147,11 @@ namespace AIO.UEditor
             var realPath = GetRealPath(path).Replace('\\', '/');
             try
             {
-                var result = await PrPlatform.Open.Path(realPath).Async();
+                var executor = PrPlatform.Open.Path(realPath);
+                var temp     = executor.EnableOutput;
+                executor.EnableOutput = false;
+                var result = await executor.Async();
+                executor.EnableOutput = temp;
                 if (result.ExitCode != 0) EditorUtility.RevealInFinder(realPath);
             }
             catch
