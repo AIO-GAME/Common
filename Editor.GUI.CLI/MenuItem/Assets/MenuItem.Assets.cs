@@ -1,68 +1,52 @@
-﻿#if AIO_USERADMIN
+﻿using System.Diagnostics;
 using System.IO;
 using UnityEditor;
 using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
 namespace AIO.UEditor
 {
-    public static partial class EditorMenu_Assets
+    internal static class EditorMenu_Assets
     {
-        private const string AIO_DLL_TITLE = "Assets/Open C# Project AIO DLL";
-        private const string AIO_NET_TITLE = "Assets/Open C# Project Net DLL";
+        private const string AIO_DLL_TITLE = "AIO/Solution/AIO C# Project";
+        private const string AIO_NET_TITLE = "AIO/Solution/NET C# Project";
+
+        private static PackageInfo PackageInfo;
+
+        private static PackageInfo GetPackageInfo() => PackageInfo ?? (PackageInfo = PackageInfo.FindForAssembly(typeof(EditorMenu_Assets).Assembly));
+
+        private static void Run(string work)
+        {
+            var exe = EditorPrefs.GetString("kScriptsDefaultApp");
+            if (string.IsNullOrEmpty(exe))
+            {
+                var result = EditorUtility.DisplayDialog("Warning",
+                                                         "Please set the external script editor in the Unity preferences.",
+                                                         "Open Preferences",
+                                                         "Cancel");
+                if (result) SettingsService.OpenUserPreferences("Preferences/External Tools");
+                return;
+            }
+
+            Process.Start(new ProcessStartInfo
+            {
+                FileName               = exe,
+                Arguments              = $"\"{Path.Combine(GetPackageInfo().resolvedPath, "Tools~", $"{work}.sln")}\"",
+                UseShellExecute        = false,
+                RedirectStandardOutput = true,
+                CreateNoWindow         = true
+            });
+        }
 
         [MenuItem(AIO_DLL_TITLE, true, 1000)]
-        public static bool OpenDllProject()
-        {
-            var info = PackageInfo.FindForAssembly(typeof(EditorMenu_Assets).Assembly);
-            var path = Path.Combine(info.resolvedPath, "Tools~", "ALL.sln");
-            return File.Exists(path);
-        }
+        private static bool OpenDllProject() => File.Exists(Path.Combine(GetPackageInfo().resolvedPath, "Tools~", $"{nameof(ALL)}.sln"));
 
         [MenuItem(AIO_NET_TITLE, true, 1000)]
-        public static bool OpenNetProject()
-        {
-            var info = PackageInfo.FindForAssembly(typeof(EditorMenu_Assets).Assembly);
-            var path = Path.Combine(info.resolvedPath, "Tools~", "Net.sln");
-            return File.Exists(path);
-        }
+        private static bool OpenNetProject() => File.Exists(Path.Combine(GetPackageInfo().resolvedPath, "Tools~", $"{nameof(Net)}.sln"));
 
-#if UNITY_EDITOR_WIN
         [MenuItem(AIO_DLL_TITLE)]
-        public static async void OpenDllProjectWIN()
-        {
-            var info = PackageInfo.FindForAssembly(typeof(EditorMenu_Assets).Assembly);
-            var executor = PrCmd.Create().Input(
-                $"start \"AIO DLL Project\" {Path.Combine(info.resolvedPath, "Tools~", "ALL.sln")} /B /Max /HIGH");
-            (await executor.Async()).Debug();
-        }
+        private static void ALL() => Run(nameof(ALL));
 
         [MenuItem(AIO_NET_TITLE)]
-        public static async void OpenNetProjectWIN()
-        {
-            var info = PackageInfo.FindForAssembly(typeof(EditorMenu_Assets).Assembly);
-            var executor = PrCmd.Create().Input(
-                $"start \"AIO DLL Project\" {Path.Combine(info.resolvedPath, "Tools~", "Net.sln")} /B /Max /HIGH");
-            (await executor.Async()).Debug();
-        }
-#endif
-
-#if UNITY_EDITOR_OSX
-        [MenuItem(AIO_DLL_TITLE)]
-        public static async void OpenDllProjectOSX()
-        {
-            var info = PackageInfo.FindForAssembly(typeof(EditorMenu_Assets).Assembly);
-            var executor = PrMac.Open.Path(Path.Combine(info.resolvedPath, "Tools~", "ALL.sln"));
-            (await executor.Async()).Debug();
-        }
-
-        [MenuItem(AIO_NET_TITLE)]
-        public static async void OpenNetProjectWIN()
-        {
-            var info = PackageInfo.FindForAssembly(typeof(EditorMenu_Assets).Assembly);
-            var executor = PrMac.Open.Path(Path.Combine(info.resolvedPath, "Tools~", "Net.sln"));
-            (await executor.Async()).Debug();
-        }
-#endif
+        private static void Net() => Run(nameof(Net));
     }
 }
-#endif

@@ -127,3 +127,4 @@ FakesAssemblies/
 
 # Rider
 *.sln.DotSettings.user
+*.csproj.DotSettings

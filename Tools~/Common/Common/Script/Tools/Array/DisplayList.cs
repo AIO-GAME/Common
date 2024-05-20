@@ -350,14 +350,14 @@ namespace AIO
         /// 获取值
         /// </summary>
         /// <param name="key">键值</param>
-        /// <returns>if found <see cref="T"/>; otherwise <c>default</c></returns>
+        /// <returns>value; otherwise <c>default</c></returns>
         public T GetValue(in string key) { return !Keys.Contains(key) ? default : Values[Keys.IndexOf(key)]; }
 
         /// <summary>
         /// 获取值
         /// </summary>
         /// <param name="index">下标</param>
-        /// <returns>if found <see cref="T"/>; otherwise <c>default</c></returns>
+        /// <returns>value; otherwise <c>default</c></returns>
         public T GetValue(in int index) { return index < 0 || index >= Keys.Count ? default : Values[index]; }
 
         /// <summary>
@@ -365,7 +365,7 @@ namespace AIO
         /// </summary>
         /// <param name="index">下标</param>
         /// <param name="defaultValue">默认值</param>
-        /// <returns>if found <see cref="T"/>; otherwise <paramref name="defaultValue"/></returns>
+        /// <returns>value; otherwise <paramref name="defaultValue"/></returns>
         public T GetValueOrDefault(in int index, in T defaultValue = default)
         {
             return index < 0 || index >= Keys.Count ? defaultValue : Values[index];

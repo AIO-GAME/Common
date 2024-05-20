@@ -12,6 +12,9 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+    <RestorePackagesPath Condition=" '$(NUGET_PACKAGES)' != '' ">$(NUGET_PACKAGES)</RestorePackagesPath>
+    <RestorePackagesPath Condition=" '$(NUGET_PACKAGES)' == '' ">$(USERPROFILE)\.nuget\packages</RestorePackagesPath>
     <LangVersion>8</LangVersion>
     <PublicSign>false</PublicSign>
   </PropertyGroup>
@@ -45,8 +48,9 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>H:\Microsoft\nuget\vc_packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath Condition=" '$(NUGET_PACKAGES)' != '' ">$(NUGET_PACKAGES)\newtonsoft.json\13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath Condition=" '$(NUGET_PACKAGES)' == '' ">$(USERPROFILE)\.nuget\packages\newtonsoft.json\13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -122,7 +126,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <Content Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

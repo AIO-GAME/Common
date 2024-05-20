@@ -132,10 +132,11 @@ namespace AIO
         #region operator implicit
 
         /// <summary>
-        ///    Implicit conversion from <see cref="OperationGenerics{TObject}" /> to <see cref="TObject" />
+        ///    Implicit conversion from <see cref="OperationGenerics{TObject}" /> to TObject
         /// </summary>
         /// <param name="operationGenerics"><see cref="OperationGenerics{TObject}" /></param>
-        /// <returns><see cref="TObject" /></returns>
+        /// <typeparamref name="TObject">泛型</typeparamref>
+        /// <returns>TObject 目标类型</returns>
         public static implicit operator TObject(OperationGenerics<TObject> operationGenerics) => operationGenerics.Result;
 
         /// <summary>

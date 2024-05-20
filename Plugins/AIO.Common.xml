@@ -13167,14 +13167,14 @@
             获取值
             </summary>
             <param name="key">键值</param>
-            <returns>if found <see cref="!:T"/>; otherwise <c>default</c></returns>
+            <returns>value; otherwise <c>default</c></returns>
         </member>
         <member name="M:AIO.DisplayList`1.GetValue(System.Int32@)">
             <summary>
             获取值
             </summary>
             <param name="index">下标</param>
-            <returns>if found <see cref="!:T"/>; otherwise <c>default</c></returns>
+            <returns>value; otherwise <c>default</c></returns>
         </member>
         <member name="M:AIO.DisplayList`1.GetValueOrDefault(System.Int32@,`0@)">
             <summary>
@@ -13182,7 +13182,7 @@
             </summary>
             <param name="index">下标</param>
             <param name="defaultValue">默认值</param>
-            <returns>if found <see cref="!:T"/>; otherwise <paramref name="defaultValue"/></returns>
+            <returns>value; otherwise <paramref name="defaultValue"/></returns>
         </member>
         <member name="M:AIO.DisplayList`1.GetDisplay(System.String@)">
             <summary>
@@ -14723,10 +14723,11 @@
         </member>
         <member name="M:AIO.OperationGenerics`1.op_Implicit(AIO.OperationGenerics{`0})~`0">
             <summary>
-               Implicit conversion from <see cref="T:AIO.OperationGenerics`1" /> to <see cref="!:TObject" />
+               Implicit conversion from <see cref="T:AIO.OperationGenerics`1" /> to TObject
             </summary>
             <param name="operationGenerics"><see cref="T:AIO.OperationGenerics`1" /></param>
-            <returns><see cref="!:TObject" /></returns>
+            <typeparamref name="TObject">泛型</typeparamref>
+            <returns>TObject 目标类型</returns>
         </member>
         <member name="M:AIO.OperationGenerics`1.op_Implicit(AIO.OperationGenerics{`0})~System.Runtime.CompilerServices.TaskAwaiter{`0}">
             <summary>

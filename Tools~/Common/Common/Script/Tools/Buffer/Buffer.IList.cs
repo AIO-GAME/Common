@@ -16,10 +16,7 @@ namespace AIO
         /// <summary>
         /// 释放
         /// </summary>
-        public virtual void Dispose()
-        {
-            Arrays = null;
-        }
+        public virtual void Dispose() { Arrays = null; }
 
         #endregion
 
@@ -95,30 +92,21 @@ namespace AIO
         /// 添加指定元素
         /// </summary>
         /// <param name="item">元素</param>
-        public void Add(T item)
-        {
-            Insert(WriteIndex, item);
-        }
+        public void Add(T item) { Insert(WriteIndex, item); }
 
         /// <summary>
         /// 确定序列是否包含指定的元素使用的默认相等比较器。
         /// </summary>
         /// <param name="item">要在其中定位某个值的序列。</param>
         /// <returns>true 如果源序列包含具有指定的值; 的元素否则为 false。</returns>
-        public bool Contains(T item)
-        {
-            return Arrays.Contains(item);
-        }
+        public bool Contains(T item) { return Arrays.Contains(item); }
 
         /// <summary>
         /// 复制
         /// </summary>
         /// <param name="array">目标数组</param>
         /// <param name="arrayIndex">数组下标</param>
-        public void CopyTo(T[] array, int arrayIndex)
-        {
-            Array.Copy(array, arrayIndex, Arrays, 0, WriteIndex);
-        }
+        public void CopyTo(T[] array, int arrayIndex) { Array.Copy(array, arrayIndex, Arrays, 0, WriteIndex); }
 
         /// <summary>
         /// 移除指定元素
@@ -143,13 +131,13 @@ namespace AIO
         /// <returns>返回指定元素</returns>
         public IEnumerator<T> GetEnumerator()
         {
-            return ((IEnumerable<T>)Arrays).GetEnumerator();
+            for (var index = 0; index < Arrays.Length; index++)
+            {
+                yield return Arrays[index];
+            }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() { return Arrays.GetEnumerator(); }
 
         #endregion
     }
