@@ -38,9 +38,10 @@ namespace AIO.UEditor
 
         private static bool _ShowSymlink;
 
-        // #ABEBC6
-        private static readonly Color BackgroundColor = new Color(.7f, .9f, .8f, .8f);
-        private static readonly Color ErrorColor      = new Color(.9f, .1f, .3f, .8f);
+        //#A3E4D7 转化为 Color 类型 0.64f, 0.89f, 0.84f, 0.5f
+        private static readonly Color BackgroundColor = new Color(0.64f, 0.89f, 0.84f, 0.0f);
+        //#2ECC71 转化为 Color 类型 0.18f, 0.8f, 0.44f, 0.5f
+        private static readonly Color ErrorColor      = new Color(0.18f, 0.8f, 0.44f, 0.3f);
 
         private static GUIStyle SymlinkMarkerStyle
         {
@@ -109,6 +110,12 @@ namespace AIO.UEditor
         [InitializeOnLoadMethod]
         private static void Initialize()
         {
+            // 创建渐变 从左到右
+            texture = new Texture2D(2, 1) { wrapMode = TextureWrapMode.Clamp, };
+            texture.SetPixel(0, 0, BackgroundColor);
+            texture.SetPixel(2, 0, ErrorColor);
+            texture.Apply();
+
             _ShowSymlink = GetShowSymlink();
             if (_ShowSymlink) EditorApplication.projectWindowItemOnGUI += OnProjectWindowItemGUI;
         }
@@ -135,14 +142,16 @@ namespace AIO.UEditor
             if (!Directory.Exists(path)) return;
             var attribs = File.GetAttributes(path);
             if ((attribs & FOLDER_SYMLINK_ATTRIBS) != FOLDER_SYMLINK_ATTRIBS) return;
-            r.x     = r.x + r.width - 7;
-            r.width = 7;
+            r.x     += r.width - 15; //7
+            r.width =  15;
             Draw(r, path);
         }
 
         private static async void Draw(Rect rect, string path)
         {
-            EditorGUI.DrawRect(rect, BackgroundColor);
+            // EditorGUI.DrawRect(rect, BackgroundColor);
+            DrawGradientRect(rect);
+
             if (!GUI.Button(rect, GUIContent.none, SymlinkMarkerStyle)) return;
             var realPath = GetRealPath(path).Replace('\\', '/');
             try
@@ -158,6 +167,16 @@ namespace AIO.UEditor
             {
                 EditorUtility.RevealInFinder(realPath);
             }
+        }
+
+        private static Texture2D texture;
+
+        private static void DrawGradientRect(Rect rect)
+        {
+            // 绘制渐变颜色的矩形
+            Handles.BeginGUI();
+            GUI.DrawTexture(rect, texture, ScaleMode.StretchToFill, true); // 使用矩形工具绘制带有纹理的矩形
+            Handles.EndGUI();
         }
 
         private static async void ErrorDraw(Rect rect, string path = null)
