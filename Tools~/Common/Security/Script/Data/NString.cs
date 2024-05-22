@@ -35,7 +35,5 @@
 
         public static NString operator +(NString a, NString b) => new NString(a.Value + b.Value);
         public static NString operator +(NString a, string  b) => new NString(a.Value + b);
-
-
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AIO.Security
+﻿namespace AIO.Security
 {
     public partial struct NShort
     {
@@ -44,18 +42,6 @@ namespace AIO.Security
             _offset   = 0;
             _oldValue = 0;
             Value     = val > short.MaxValue ? short.MaxValue : (short)val;
-        }
-
-        public static NShort operator ++(NShort a)
-        {
-            a.Value++;
-            return a;
-        }
-
-        public static NShort operator --(NShort a)
-        {
-            a.Value--;
-            return a;
         }
 
         public static NShort operator *(NShort a, NShort b) => new NShort(a.Value * b.Value);

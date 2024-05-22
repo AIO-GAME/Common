@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.InteropServices;
-
-namespace AIO.Security
+﻿namespace AIO.Security
 {
     public partial struct NChar
     {
@@ -29,20 +26,8 @@ namespace AIO.Security
             }
         }
 
-        public static NChar operator ++(NChar a)
-        {
-            a.Value++;
-            return a;
-        }
-
-        public static NChar operator --(NChar a)
-        {
-            a.Value--;
-            return a;
-        }
-
-        public static NChar operator +(NChar a, int   b) => new NChar(a.Value + b);
-        public static NChar operator -(NChar a, int   b) => new NChar(a.Value - b);
+        public static NChar operator +(NChar a, int b) => new NChar(a.Value + b);
+        public static NChar operator -(NChar a, int b) => new NChar(a.Value - b);
 
         public static NChar operator *(NChar a, NChar b) => new NChar(a.Value * b.Value);
         public static NChar operator *(NChar a, int   b) => new NChar(a.Value * b);

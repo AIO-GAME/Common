@@ -2,44 +2,54 @@
 // Changes to this file may cause incorrect behavior and will be lost if the code is regenerated.
 
 using System;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Globalization;
 
 namespace AIO.Security
 {
     partial struct NShort
     { 
-        /// <inheritdoc/>
-        public override bool Equals(object obj) => obj switch
+        /// <param name="a"> <see cref="NShort"/> </param>
+        /// <param name="b"> <see cref="NShort"/> </param>
+        public static bool operator ==(NShort a, NShort b) => a.Value == b.Value;
+
+        /// <param name="a"> <see cref="NShort"/> </param>
+        /// <param name="b"> <see cref="short"/> </param>
+        public static bool operator ==(NShort a, short b) => a.Value == b;
+
+        /// <param name="a"> <see cref="NShort"/> </param>
+        /// <param name="b"> <see cref="NShort"/> </param>
+        public static bool operator !=(NShort a, NShort b) => a.Value != b.Value;
+
+        /// <param name="a"> <see cref="NShort"/> </param>
+        /// <param name="b"> <see cref="short"/> </param>
+        public static bool operator !=(NShort a, short b) => a.Value != b;
+        /// <param name="a"> <see cref="NShort"/> </param>
+        public static NShort operator --(NShort a)
         {
-            NShort a => Value.Equals(a.Value),
-            short b  => Value.Equals(b),
-            _       => false
-        };
+            a.Value--;
+            return a;
+        }
 
-        /// <inheritdoc/>
-        public override int GetHashCode() => Value.GetHashCode();
+        /// <param name="a"> <see cref="NShort"/> </param>
+        public static NShort operator ++(NShort a)
+        {
+            a.Value++;
+            return a;
+        }
 
-        /// <inheritdoc/>
-        public override string ToString() => Value.ToString(CultureInfo.CurrentCulture);
+        /// <param name="a"> <see cref="NShort"/> </param>
+        /// <param name="b"> <see cref="NShort"/> </param>
+        public static NShort operator +(NShort a, NShort b) => new NShort(a.Value + b.Value);
 
-        /// <param name="provider"> 格式化提供者 </param>
-        /// <typeparam name="T"> 格式化提供者类型 </typeparam>
-        /// <returns> <see cref="string"/> </returns>
-        public string ToString<T>(T provider) where T : IFormatProvider => Value.ToString(provider);
+        /// <param name="a"> <see cref="NShort"/> </param>
+        /// <param name="b"> <see cref="short"/> </param>
+        public static NShort operator +(NShort a, short b) => new NShort(a.Value + b);
 
-        /// <param name="format"> 格式化字符串 </param>
-        /// <returns> <see cref="string"/> </returns>
-        public string ToString(string format) => Value.ToString(format, CultureInfo.CurrentCulture);
+        /// <param name="a"> <see cref="NShort"/> </param>
+        /// <param name="b"> <see cref="NShort"/> </param>
+        public static NShort operator -(NShort a, NShort b) => new NShort(a.Value - b.Value);
 
-        /// <param name="format"> 格式化字符串 </param>
-        /// <param name="provider"> 格式化提供者 </param>
-        /// <typeparam name="T"> 格式化提供者类型 </typeparam>
-        /// <returns> <see cref="string"/> </returns>
-        public string ToString<T>(string format, T provider) where T : IFormatProvider => Value.ToString(format, provider);
+        /// <param name="a"> <see cref="NShort"/> </param>
+        /// <param name="b"> <see cref="short"/> </param>
+        public static NShort operator -(NShort a, short b) => new NShort(a.Value - b);
     }
 }

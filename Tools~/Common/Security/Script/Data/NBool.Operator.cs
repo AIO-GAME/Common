@@ -2,34 +2,25 @@
 // Changes to this file may cause incorrect behavior and will be lost if the code is regenerated.
 
 using System;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Globalization;
 
 namespace AIO.Security
 {
     partial struct NBool
     { 
-        /// <inheritdoc/>
-        public override bool Equals(object obj) => obj switch
-        {
-            NBool a => Value.Equals(a.Value),
-            bool b  => Value.Equals(b),
-            _       => false
-        };
+        /// <param name="a"> <see cref="NBool"/> </param>
+        /// <param name="b"> <see cref="NBool"/> </param>
+        public static bool operator ==(NBool a, NBool b) => a.Value == b.Value;
 
-        /// <inheritdoc/>
-        public override int GetHashCode() => Value.GetHashCode();
+        /// <param name="a"> <see cref="NBool"/> </param>
+        /// <param name="b"> <see cref="bool"/> </param>
+        public static bool operator ==(NBool a, bool b) => a.Value == b;
 
-        /// <inheritdoc/>
-        public override string ToString() => Value.ToString(CultureInfo.CurrentCulture);
+        /// <param name="a"> <see cref="NBool"/> </param>
+        /// <param name="b"> <see cref="NBool"/> </param>
+        public static bool operator !=(NBool a, NBool b) => a.Value != b.Value;
 
-        /// <param name="provider"> 格式化提供者 </param>
-        /// <typeparam name="T"> 格式化提供者类型 </typeparam>
-        /// <returns> <see cref="string"/> </returns>
-        public string ToString<T>(T provider) where T : IFormatProvider => Value.ToString(provider);
+        /// <param name="a"> <see cref="NBool"/> </param>
+        /// <param name="b"> <see cref="bool"/> </param>
+        public static bool operator !=(NBool a, bool b) => a.Value != b;
     }
 }

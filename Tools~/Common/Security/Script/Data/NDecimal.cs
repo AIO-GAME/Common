@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-
-namespace AIO.Security
+﻿namespace AIO.Security
 {
     public partial struct NDecimal
     {
@@ -28,18 +25,6 @@ namespace AIO.Security
                 _offset   = SecurityUtil.RandomInt();
                 _value    = value + _offset;
             }
-        }
-
-        public static NDecimal operator ++(NDecimal a)
-        {
-            a.Value++;
-            return a;
-        }
-
-        public static NDecimal operator --(NDecimal a)
-        {
-            a.Value--;
-            return a;
         }
 
         public static NDecimal operator *(NDecimal a, NDecimal b) => new NDecimal(a.Value * b.Value);

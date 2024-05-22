@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AIO.Security
+﻿namespace AIO.Security
 {
     public partial struct NUInt
     {
@@ -44,18 +42,6 @@ namespace AIO.Security
             _offset   = 0;
             _oldValue = 0;
             Value     = (uint)val;
-        }
-
-        public static NUInt operator ++(NUInt a)
-        {
-            a.Value++;
-            return a;
-        }
-
-        public static NUInt operator --(NUInt a)
-        {
-            a.Value--;
-            return a;
         }
 
         public static NUInt operator *(NUInt a, NUInt b) => new NUInt(a.Value * b.Value);

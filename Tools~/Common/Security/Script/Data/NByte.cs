@@ -47,18 +47,6 @@ namespace AIO.Security
             Value     = value > byte.MaxValue ? byte.MaxValue : (byte)value;
         }
 
-        public static NByte operator ++(NByte a)
-        {
-            a.Value++;
-            return a;
-        }
-
-        public static NByte operator --(NByte a)
-        {
-            a.Value--;
-            return a;
-        }
-
         public static NByte operator *(NByte a, NByte b) => new NByte(a.Value * b.Value);
         public static NByte operator *(NByte a, byte  b) => new NByte(a.Value * b);
 

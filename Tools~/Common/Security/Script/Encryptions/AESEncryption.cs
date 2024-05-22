@@ -46,8 +46,8 @@ namespace AIO.Security
             aes.IV   = Keys;
             aes.Mode = mode;
             using var rijndaelEncrypt = aes.CreateEncryptor();
-            var       inputData       = Encoding.UTF8.GetBytes(encryptString);
-            var       encryptedData   = rijndaelEncrypt.TransformFinalBlock(inputData, 0, inputData.Length);
+            var inputData = Encoding.UTF8.GetBytes(encryptString);
+            var encryptedData = rijndaelEncrypt.TransformFinalBlock(inputData, 0, inputData.Length);
             return Convert.ToBase64String(encryptedData);
         }
 
@@ -60,8 +60,8 @@ namespace AIO.Security
         public static string AESEncrypt(this string encryptString, Aes options)
         {
             using var rijndaelEncrypt = options.CreateEncryptor();
-            var       inputData       = Encoding.UTF8.GetBytes(encryptString);
-            var       encryptedData   = rijndaelEncrypt.TransformFinalBlock(inputData, 0, inputData.Length);
+            var inputData = Encoding.UTF8.GetBytes(encryptString);
+            var encryptedData = rijndaelEncrypt.TransformFinalBlock(inputData, 0, inputData.Length);
             return Convert.ToBase64String(encryptedData);
         }
 
@@ -79,8 +79,8 @@ namespace AIO.Security
             aes.IV   = Keys;
             aes.Mode = mode;
             using var rijndaelEncrypt = aes.CreateEncryptor();
-            var       inputData       = Encoding.UTF8.GetBytes(encryptString);
-            var       encryptedData   = rijndaelEncrypt.TransformFinalBlock(inputData, 0, inputData.Length);
+            var inputData = Encoding.UTF8.GetBytes(encryptString);
+            var encryptedData = rijndaelEncrypt.TransformFinalBlock(inputData, 0, inputData.Length);
             return Convert.ToBase64String(encryptedData);
         }
 
@@ -102,8 +102,8 @@ namespace AIO.Security
                 aes.IV   = Keys;
                 aes.Mode = mode;
                 using var rijndaelDecrypt = aes.CreateDecryptor();
-                var       inputData       = Convert.FromBase64String(decryptString);
-                var       decryptedData   = rijndaelDecrypt.TransformFinalBlock(inputData, 0, inputData.Length);
+                var inputData = Convert.FromBase64String(decryptString);
+                var decryptedData = rijndaelDecrypt.TransformFinalBlock(inputData, 0, inputData.Length);
                 return Encoding.UTF8.GetString(decryptedData);
             }
             catch
@@ -123,8 +123,8 @@ namespace AIO.Security
             try
             {
                 using var rijndaelDecrypt = options.CreateDecryptor();
-                var       inputData       = Convert.FromBase64String(decryptString);
-                var       decryptedData   = rijndaelDecrypt.TransformFinalBlock(inputData, 0, inputData.Length);
+                var inputData = Convert.FromBase64String(decryptString);
+                var decryptedData = rijndaelDecrypt.TransformFinalBlock(inputData, 0, inputData.Length);
                 return Encoding.UTF8.GetString(decryptedData);
             }
             catch
@@ -149,8 +149,8 @@ namespace AIO.Security
                 aes.IV   = Keys;
                 aes.Mode = mode;
                 using var rijndaelDecrypt = aes.CreateDecryptor();
-                var       inputData       = Convert.FromBase64String(decryptString);
-                var       decryptedData   = rijndaelDecrypt.TransformFinalBlock(inputData, 0, inputData.Length);
+                var inputData = Convert.FromBase64String(decryptString);
+                var decryptedData = rijndaelDecrypt.TransformFinalBlock(inputData, 0, inputData.Length);
                 return Encoding.UTF8.GetString(decryptedData);
             }
             catch
@@ -219,7 +219,7 @@ namespace AIO.Security
             }
 
             var anResultFlag = new int[length];
-            var nFlag        = 0;
+            var nFlag = 0;
             //字节大于127为双字节字符
             for (var i = startIndex; i < endIndex; i++)
             {
@@ -257,9 +257,10 @@ namespace AIO.Security
         /// <param name="decryptKey">加密密钥</param>
         /// <param name="mode">加密模式</param>
         /// <returns>加密流</returns>
-        public static CryptoStream AESEncryptStream(this FileStream fs,
-                                                    string          decryptKey,
-                                                    CipherMode      mode = CipherMode.CBC)
+        public static CryptoStream AESEncryptStream(
+            this FileStream fs,
+            string          decryptKey,
+            CipherMode      mode = CipherMode.CBC)
         {
             decryptKey = GetSubString(decryptKey, 32, "");
             decryptKey = decryptKey.PadRight(32, ' ');
@@ -278,9 +279,10 @@ namespace AIO.Security
         /// <param name="decryptKey">加密密钥</param>
         /// <param name="mode">加密模式</param>
         /// <returns>加密流</returns>
-        public static CryptoStream AESEncryptStream(this FileStream fs,
-                                                    byte[]          decryptKey,
-                                                    CipherMode      mode = CipherMode.CBC)
+        public static CryptoStream AESEncryptStream(
+            this FileStream fs,
+            byte[]          decryptKey,
+            CipherMode      mode = CipherMode.CBC)
         {
             using var aes = Aes.Create();
             aes.Key  = decryptKey;
@@ -297,9 +299,10 @@ namespace AIO.Security
         /// <param name="decryptKey">解密密钥</param>
         /// <param name="mode">加密模式</param>
         /// <returns>加密流</returns>
-        public static CryptoStream AESDecryptStream(this FileStream fs,
-                                                    string          decryptKey,
-                                                    CipherMode      mode = CipherMode.CBC)
+        public static CryptoStream AESDecryptStream(
+            this FileStream fs,
+            string          decryptKey,
+            CipherMode      mode = CipherMode.CBC)
         {
             decryptKey = GetSubString(decryptKey, 32, "");
             decryptKey = decryptKey.PadRight(32, ' ');
@@ -318,9 +321,10 @@ namespace AIO.Security
         /// <param name="decryptKey">解密密钥</param>
         /// <param name="mode">加密模式</param>
         /// <returns>加密流</returns>
-        public static CryptoStream AESDecryptStream(this FileStream fs,
-                                                    byte[]          decryptKey,
-                                                    CipherMode      mode = CipherMode.CBC)
+        public static CryptoStream AESDecryptStream(
+            this FileStream fs,
+            byte[]          decryptKey,
+            CipherMode      mode = CipherMode.CBC)
         {
             using var aes = Aes.Create();
             aes.Key  = decryptKey;
@@ -337,14 +341,15 @@ namespace AIO.Security
         /// <param name="key">加密密钥</param>
         /// <param name="mode">加密模式</param>
         /// <param name="outputPath">输出文件路径</param>
-        public static void AESEncryptFile(this FileStream input,
-                                          string          outputPath,
-                                          string          key,
-                                          CipherMode      mode = CipherMode.CBC)
+        public static void AESEncryptFile(
+            this FileStream input,
+            string          outputPath,
+            string          key,
+            CipherMode      mode = CipherMode.CBC)
         {
-            using var fileStream    = new FileStream(outputPath, FileMode.Create);
+            using var fileStream = new FileStream(outputPath, FileMode.Create);
             using var encryptStream = AESEncryptStream(fileStream, key, mode);
-            var       bytes         = new byte[input.Length];
+            var bytes = new byte[input.Length];
             _ = input.Read(bytes, 0, bytes.Length);
             encryptStream.Write(bytes, 0, bytes.Length);
         }
@@ -356,14 +361,15 @@ namespace AIO.Security
         /// <param name="key">解密密钥</param>
         /// <param name="mode">加密模式</param>
         /// <param name="outputPath">输出文件路径</param>
-        public static void AESDecryptFile(this FileStream input,
-                                          string          outputPath,
-                                          string          key,
-                                          CipherMode      mode = CipherMode.CBC)
+        public static void AESDecryptFile(
+            this FileStream input,
+            string          outputPath,
+            string          key,
+            CipherMode      mode = CipherMode.CBC)
         {
-            using var fileStream    = new FileStream(outputPath, FileMode.Create);
+            using var fileStream = new FileStream(outputPath, FileMode.Create);
             using var decryptStream = AESDecryptStream(input, key, mode);
-            var       bytes         = new byte[1024];
+            var bytes = new byte[1024];
             while (true)
             {
                 var count = decryptStream.Read(bytes, 0, bytes.Length);

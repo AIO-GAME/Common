@@ -33,19 +33,28 @@ namespace AIO.Security
         /// 随机整数
         /// </summary>
         /// <returns> <see cref="int"/> </returns>
-        public static int RandomInt() { return _random.Next(-RandomRange, RandomRange); }
+        public static int RandomInt()
+        {
+            return _random.Next(-RandomRange, RandomRange);
+        }
 
         /// <summary>
         /// 随机无符号整数
         /// </summary>
         /// <returns> <see cref="uint"/> </returns>
-        public static uint RandomUInt() { return (uint)_random.Next(0, RandomRange); }
+        public static uint RandomUInt()
+        {
+            return (uint)_random.Next(0, RandomRange);
+        }
 
         /// <summary>
         /// 随机短整数
         /// </summary>
         /// <returns> <see cref="ushort"/> </returns>
-        public static ushort RandomUShort() { return (ushort)_random.Next(0, 100); }
+        public static ushort RandomUShort()
+        {
+            return (ushort)_random.Next(0, 100);
+        }
 
         private const string _randomChars = "ABCDEFGHIJKLMNOPQRSTUWVXYZ0123456789abcdefghijklmnopqrstuvwxyz";
 
@@ -72,6 +81,9 @@ namespace AIO.Security
         /// </summary>
         public static event Action OnMemoryModify;
 
-        internal static void OnDetected() { OnMemoryModify?.Invoke(); }
+        internal static void OnDetected()
+        {
+            OnMemoryModify?.Invoke();
+        }
     }
 }

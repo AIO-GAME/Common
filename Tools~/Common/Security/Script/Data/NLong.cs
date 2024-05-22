@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AIO.Security
+﻿namespace AIO.Security
 {
     public partial struct NLong
     {
@@ -35,18 +33,6 @@ namespace AIO.Security
             _offset   = 0;
             _oldValue = 0;
             Value     = val;
-        }
-
-        public static NLong operator ++(NLong a)
-        {
-            a.Value++;
-            return a;
-        }
-
-        public static NLong operator --(NLong a)
-        {
-            a.Value--;
-            return a;
         }
 
         public static NLong operator *(NLong a, NLong b) => new NLong(a.Value * b.Value);

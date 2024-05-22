@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AIO.Security
+﻿namespace AIO.Security
 {
     public partial struct NFloat
     {
@@ -40,20 +38,8 @@ namespace AIO.Security
             Value     = val;
         }
 
-        public static NFloat operator ++(NFloat a)
-        {
-            a.Value++;
-            return a;
-        }
-
-        public static NFloat operator --(NFloat a)
-        {
-            a.Value--;
-            return a;
-        }
-
-        public static NFloat operator +(NFloat a, int    b) => new NFloat(a.Value + b);
-        public static NFloat operator -(NFloat a, int    b) => new NFloat(a.Value - b);
+        public static NFloat operator +(NFloat a, int b) => new NFloat(a.Value + b);
+        public static NFloat operator -(NFloat a, int b) => new NFloat(a.Value - b);
 
         public static NFloat operator *(NFloat a, NFloat b) => new NFloat(a.Value * b.Value);
         public static NFloat operator *(NFloat a, float  b) => new NFloat(a.Value * b);
