@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AIO.Security
+﻿namespace AIO.Security
 {
     public partial struct NULong
     {
@@ -43,18 +41,6 @@ namespace AIO.Security
             _offset   = 0;
             _oldValue = 0;
             Value     = (ulong)val;
-        }
-
-        public static NULong operator ++(NULong a)
-        {
-            a.Value++;
-            return a;
-        }
-
-        public static NULong operator --(NULong a)
-        {
-            a.Value--;
-            return a;
         }
 
         public static NULong operator *(NULong a, NULong b) => new NULong(a.Value * b.Value);

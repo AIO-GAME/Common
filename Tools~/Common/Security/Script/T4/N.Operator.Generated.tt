@@ -21,6 +21,7 @@
         new("NDouble", "double"),
         new("NDecimal", "decimal"),
     };
+    
     var FLOAT = new Dictionary<string, string>
     {
         ["NFloat"] = "float.Epsilon",
@@ -116,6 +117,20 @@ namespace AIO.Security
         if (ADD_SUB.ContainsKey(pair.Item1))
         {
 #>
+        /// <param name="a"> <see cref="<#= pair.Item1 #>"/> </param>
+        public static <#= pair.Item1 #> operator --(<#= pair.Item1 #> a)
+        {
+            a.Value--;
+            return a;
+        }
+
+        /// <param name="a"> <see cref="<#= pair.Item1 #>"/> </param>
+        public static <#= pair.Item1 #> operator ++(<#= pair.Item1 #> a)
+        {
+            a.Value++;
+            return a;
+        }
+
         /// <param name="a"> <see cref="<#= pair.Item1 #>"/> </param>
         /// <param name="b"> <see cref="<#= pair.Item1 #>"/> </param>
         public static <#= pair.Item1 #> operator +(<#= pair.Item1 #> a, <#= pair.Item1 #> b) => new <#= pair.Item1 #>(a.Value + b.Value);

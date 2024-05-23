@@ -5,6 +5,9 @@ using System.Text;
 
 namespace AIO.Security
 {
+    /// <summary>
+    /// 解密算法
+    /// </summary>
     public static class DESCEncryption
     {
         /// <summary> 
@@ -18,9 +21,9 @@ namespace AIO.Security
         {
             if (key.Length < 8) throw new Exception("密钥长度无效，密钥必须是8位！");
 
-            var       ret            = new StringBuilder();
-            using var des            = DES.Create();
-            var       inputByteArray = Encoding.Default.GetBytes(strText);
+            var ret = new StringBuilder();
+            using var des = DES.Create();
+            var inputByteArray = Encoding.Default.GetBytes(strText);
             des.Key = Encoding.ASCII.GetBytes(key.Substring(0, 8));
             des.IV  = Encoding.ASCII.GetBytes(key.Substring(0, 8));
             using var ms = new MemoryStream();
@@ -41,9 +44,9 @@ namespace AIO.Security
         /// <returns>加密后的数据</returns> 
         public static string DesEncrypt(this string strText, byte[] desKey, byte[] desIV)
         {
-            var       ret            = new StringBuilder();
-            using var des            = DES.Create();
-            var       inputByteArray = Encoding.Default.GetBytes(strText);
+            var ret = new StringBuilder();
+            using var des = DES.Create();
+            var inputByteArray = Encoding.Default.GetBytes(strText);
             des.Key = desKey;
             des.IV  = desIV;
             using var ms = new MemoryStream();
@@ -73,14 +76,14 @@ namespace AIO.Security
                 0xCD,
                 0xEF
             };
-            var       byKey      = Encoding.UTF8.GetBytes(key.Substring(0, 8));
+            var byKey = Encoding.UTF8.GetBytes(key.Substring(0, 8));
             using var fileStream = new FileStream(outFilePath, FileMode.OpenOrCreate, FileAccess.Write);
             fileStream.SetLength(0);
-            var       bin         = new byte[100];
-            long      lengthTotal = 0;
-            var       length      = fin.Length;
-            using var des         = DES.Create();
-            var       encStream   = new CryptoStream(fileStream, des.CreateEncryptor(byKey, iv), CryptoStreamMode.Write);
+            var bin = new byte[100];
+            long lengthTotal = 0;
+            var length = fin.Length;
+            using var des = DES.Create();
+            var encStream = new CryptoStream(fileStream, des.CreateEncryptor(byKey, iv), CryptoStreamMode.Write);
             while (lengthTotal < length)
             {
                 var len = fin.Read(bin, 0, 100);
@@ -100,11 +103,11 @@ namespace AIO.Security
         {
             using var fileStream = new FileStream(outFilePath, FileMode.OpenOrCreate, FileAccess.Write);
             fileStream.SetLength(0);
-            var       bin         = new byte[100];
-            long      lengthTotal = 0;
-            var       length      = fin.Length;
-            using var des         = DES.Create();
-            var       encStream   = new CryptoStream(fileStream, des.CreateEncryptor(desKey, desIV), CryptoStreamMode.Write);
+            var bin = new byte[100];
+            long lengthTotal = 0;
+            var length = fin.Length;
+            using var des = DES.Create();
+            var encStream = new CryptoStream(fileStream, des.CreateEncryptor(desKey, desIV), CryptoStreamMode.Write);
             while (lengthTotal < length)
             {
                 var len = fin.Read(bin, 0, 100);
@@ -132,14 +135,14 @@ namespace AIO.Security
                 0xCD,
                 0xEF
             };
-            var       byKey      = Encoding.UTF8.GetBytes(sDecrKey.Substring(0, 8));
+            var byKey = Encoding.UTF8.GetBytes(sDecrKey.Substring(0, 8));
             using var fileStream = new FileStream(outFilePath, FileMode.OpenOrCreate, FileAccess.Write);
             fileStream.SetLength(0);
-            var       bin         = new byte[100];
-            long      lengthTotal = 0;
-            var       length      = fin.Length;
-            using var des         = DES.Create();
-            var       encStream   = new CryptoStream(fileStream, des.CreateDecryptor(byKey, iv), CryptoStreamMode.Write);
+            var bin = new byte[100];
+            long lengthTotal = 0;
+            var length = fin.Length;
+            using var des = DES.Create();
+            var encStream = new CryptoStream(fileStream, des.CreateDecryptor(byKey, iv), CryptoStreamMode.Write);
             while (lengthTotal < length)
             {
                 var len = fin.Read(bin, 0, 100);
@@ -159,11 +162,11 @@ namespace AIO.Security
         {
             using var fileStream = new FileStream(outFilePath, FileMode.OpenOrCreate, FileAccess.Write);
             fileStream.SetLength(0);
-            var       bin         = new byte[100];
-            long      lengthTotal = 0;
-            var       length      = fin.Length;
-            using var des         = DES.Create();
-            var       encStream   = new CryptoStream(fileStream, des.CreateDecryptor(desKey, desIV), CryptoStreamMode.Write);
+            var bin = new byte[100];
+            long lengthTotal = 0;
+            var length = fin.Length;
+            using var des = DES.Create();
+            var encStream = new CryptoStream(fileStream, des.CreateDecryptor(desKey, desIV), CryptoStreamMode.Write);
             while (lengthTotal < length)
             {
                 var len = fin.Read(bin, 0, 100);
@@ -183,9 +186,9 @@ namespace AIO.Security
         {
             if (sKey.Length < 8) throw new Exception("密钥长度无效，密钥必须是8位！");
 
-            using var ms             = new MemoryStream();
-            using var des            = DES.Create();
-            var       inputByteArray = new byte[pToDecrypt.Length / 2];
+            using var ms = new MemoryStream();
+            using var des = DES.Create();
+            var inputByteArray = new byte[pToDecrypt.Length / 2];
             for (var x = 0; x < pToDecrypt.Length / 2; x++)
             {
                 var i = Convert.ToInt32(pToDecrypt.Substring(x * 2, 2), 16);
@@ -196,7 +199,7 @@ namespace AIO.Security
             des.IV  = Encoding.ASCII.GetBytes(sKey.Substring(0, 8));
             using var cs = new CryptoStream(ms, des.CreateDecryptor(), CryptoStreamMode.Write);
             cs.Write(inputByteArray, 0, inputByteArray.Length);
-            cs.FlushFinalBlock(); 
+            cs.FlushFinalBlock();
             return Encoding.Default.GetString(ms.ToArray());
         }
 
@@ -210,9 +213,9 @@ namespace AIO.Security
         /// <returns>解密后的数据</returns>
         public static string DesDecrypt(this string pToDecrypt, byte[] desKey, byte[] desIV)
         {
-            using var ms             = new MemoryStream();
-            using var des            = DES.Create();
-            var       inputByteArray = new byte[pToDecrypt.Length / 2];
+            using var ms = new MemoryStream();
+            using var des = DES.Create();
+            var inputByteArray = new byte[pToDecrypt.Length / 2];
             for (var x = 0; x < pToDecrypt.Length / 2; x++)
             {
                 var i = Convert.ToInt32(pToDecrypt.Substring(x * 2, 2), 16);

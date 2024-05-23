@@ -37,6 +37,9 @@ namespace AIO.Security
         }
 
         /// <param name="a"> <see cref="NBool"/> </param>
-        public static bool operator !(NBool a) { return !a.Value; }
+        public static bool operator !(NBool a)
+        {
+            return !a.Value;
+        }
     }
 }

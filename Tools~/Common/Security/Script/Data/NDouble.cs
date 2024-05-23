@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-
-namespace AIO.Security
+﻿namespace AIO.Security
 {
     public partial struct NDouble
     {
@@ -41,23 +38,11 @@ namespace AIO.Security
             Value     = val;
         }
 
-        public static NDouble operator ++(NDouble a)
-        {
-            a.Value++;
-            return a;
-        }
+        public static NDouble operator +(NDouble a, float b) => new NDouble(a.Value + b);
+        public static NDouble operator +(NDouble a, int   b) => new NDouble(a.Value + b);
 
-        public static NDouble operator --(NDouble a)
-        {
-            a.Value--;
-            return a;
-        }
-
-        public static NDouble operator +(NDouble a, float   b) => new NDouble(a.Value + b);
-        public static NDouble operator +(NDouble a, int     b) => new NDouble(a.Value + b);
-
-        public static NDouble operator -(NDouble a, float   b) => new NDouble(a.Value - b);
-        public static NDouble operator -(NDouble a, int     b) => new NDouble(a.Value - b);
+        public static NDouble operator -(NDouble a, float b) => new NDouble(a.Value - b);
+        public static NDouble operator -(NDouble a, int   b) => new NDouble(a.Value - b);
 
         public static NDouble operator *(NDouble a, NDouble b) => new NDouble(a.Value * b.Value);
         public static NDouble operator *(NDouble a, double  b) => new NDouble(a.Value * b);

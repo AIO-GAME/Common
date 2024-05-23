@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-
-namespace AIO.Security
+﻿namespace AIO.Security
 {
     public partial struct NInt
     {
@@ -36,18 +33,6 @@ namespace AIO.Security
             _offset   = 0;
             _oldValue = 0;
             Value     = val;
-        }
-
-        public static NInt operator ++(NInt a)
-        {
-            a.Value++;
-            return a;
-        }
-
-        public static NInt operator --(NInt a)
-        {
-            a.Value--;
-            return a;
         }
 
         public static NInt operator *(NInt a, NInt b) => new NInt(a.Value * b.Value);

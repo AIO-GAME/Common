@@ -2,44 +2,54 @@
 // Changes to this file may cause incorrect behavior and will be lost if the code is regenerated.
 
 using System;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Globalization;
 
 namespace AIO.Security
 {
     partial struct NDecimal
     { 
-        /// <inheritdoc/>
-        public override bool Equals(object obj) => obj switch
+        /// <param name="a"> <see cref="NDecimal"/> </param>
+        /// <param name="b"> <see cref="NDecimal"/> </param>
+        public static bool operator ==(NDecimal a, NDecimal b) => Math.Abs(a.Value - b.Value) <= decimal.Zero;
+
+        /// <param name="a"> <see cref="NDecimal"/> </param>
+        /// <param name="b"> <see cref="decimal"/> </param>
+        public static bool operator ==(NDecimal a, decimal b) => Math.Abs(a.Value - b) <= decimal.Zero;
+
+        /// <param name="a"> <see cref="NDecimal"/> </param>
+        /// <param name="b"> <see cref="NDecimal"/> </param>
+        public static bool operator !=(NDecimal a, NDecimal b) => Math.Abs(a.Value - b.Value) > decimal.Zero;
+
+        /// <param name="a"> <see cref="NDecimal"/> </param>
+        /// <param name="b"> <see cref="decimal"/> </param>
+        public static bool operator !=(NDecimal a, decimal b) => Math.Abs(a.Value - b) > decimal.Zero;
+        /// <param name="a"> <see cref="NDecimal"/> </param>
+        public static NDecimal operator --(NDecimal a)
         {
-            NDecimal a => Value.Equals(a.Value),
-            decimal b  => Value.Equals(b),
-            _       => false
-        };
+            a.Value--;
+            return a;
+        }
 
-        /// <inheritdoc/>
-        public override int GetHashCode() => Value.GetHashCode();
+        /// <param name="a"> <see cref="NDecimal"/> </param>
+        public static NDecimal operator ++(NDecimal a)
+        {
+            a.Value++;
+            return a;
+        }
 
-        /// <inheritdoc/>
-        public override string ToString() => Value.ToString(CultureInfo.CurrentCulture);
+        /// <param name="a"> <see cref="NDecimal"/> </param>
+        /// <param name="b"> <see cref="NDecimal"/> </param>
+        public static NDecimal operator +(NDecimal a, NDecimal b) => new NDecimal(a.Value + b.Value);
 
-        /// <param name="provider"> 格式化提供者 </param>
-        /// <typeparam name="T"> 格式化提供者类型 </typeparam>
-        /// <returns> <see cref="string"/> </returns>
-        public string ToString<T>(T provider) where T : IFormatProvider => Value.ToString(provider);
+        /// <param name="a"> <see cref="NDecimal"/> </param>
+        /// <param name="b"> <see cref="decimal"/> </param>
+        public static NDecimal operator +(NDecimal a, decimal b) => new NDecimal(a.Value + b);
 
-        /// <param name="format"> 格式化字符串 </param>
-        /// <returns> <see cref="string"/> </returns>
-        public string ToString(string format) => Value.ToString(format, CultureInfo.CurrentCulture);
+        /// <param name="a"> <see cref="NDecimal"/> </param>
+        /// <param name="b"> <see cref="NDecimal"/> </param>
+        public static NDecimal operator -(NDecimal a, NDecimal b) => new NDecimal(a.Value - b.Value);
 
-        /// <param name="format"> 格式化字符串 </param>
-        /// <param name="provider"> 格式化提供者 </param>
-        /// <typeparam name="T"> 格式化提供者类型 </typeparam>
-        /// <returns> <see cref="string"/> </returns>
-        public string ToString<T>(string format, T provider) where T : IFormatProvider => Value.ToString(format, provider);
+        /// <param name="a"> <see cref="NDecimal"/> </param>
+        /// <param name="b"> <see cref="decimal"/> </param>
+        public static NDecimal operator -(NDecimal a, decimal b) => new NDecimal(a.Value - b);
     }
 }

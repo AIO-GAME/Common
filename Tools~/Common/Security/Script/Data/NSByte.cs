@@ -44,18 +44,6 @@
             Value = val > sbyte.MaxValue ? sbyte.MaxValue : (sbyte)val;
         }
 
-        public static NSByte operator ++(NSByte a)
-        {
-            a.Value++;
-            return a;
-        }
-
-        public static NSByte operator --(NSByte a)
-        {
-            a.Value--;
-            return a;
-        }
-
         public static NSByte operator *(NSByte a, NSByte b) => new NSByte(a.Value * b.Value);
         public static NSByte operator *(NSByte a, sbyte  b) => new NSByte(a.Value * b);
 
@@ -64,6 +52,5 @@
 
         public static NSByte operator %(NSByte a, NSByte b) => new NSByte(a.Value % b.Value);
         public static NSByte operator %(NSByte a, sbyte  b) => new NSByte(a.Value % b);
-
     }
 }
