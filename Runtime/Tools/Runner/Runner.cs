@@ -80,6 +80,7 @@ namespace AIO
         private static void Dispose()
         {
 #if UNITY_EDITOR
+            IsRuntime                  =  false;
             EditorApplication.quitting -= Dispose;
 #endif
             Application.quitting -= Dispose;

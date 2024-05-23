@@ -144,6 +144,7 @@ namespace AIO.UEditor
                         catch (Exception)
                         {
                             GUIUtility.ExitGUI();
+                            return;
                         }
 
                         if (i == count)

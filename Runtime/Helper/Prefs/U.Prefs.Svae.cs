@@ -230,6 +230,7 @@ namespace AIO
             /// </summary>
             public static void SaveEnum(string key, Enum value)
             {
+                if (string.IsNullOrEmpty(key)) return;
                 PlayerPrefs.SetInt(string.Concat(key, "_Enum"), value.GetHashCode());
                 PlayerPrefs.Save();
             }
@@ -237,29 +238,35 @@ namespace AIO
             /// <summary>
             /// 保存为Enum
             /// </summary>
-            public static void SaveEnum<T1, T2>(T1 key, in string field, T2 value)
+            public static void SaveEnum<T2>(string key, in string field, T2 value)
             where T2 : struct, Enum
             {
-                var fullName = key.GetType().FullName;
-                if (!string.IsNullOrEmpty(fullName))
-                {
-                    PlayerPrefs.SetInt(string.Concat(fullName.GetHashCode(), field.GetHashCode()), value.GetHashCode());
-                    PlayerPrefs.Save();
-                }
+                if (string.IsNullOrEmpty(key)) return;
+                PlayerPrefs.SetInt(string.Concat(key, field, "_Enum"), value.GetHashCode());
+                PlayerPrefs.Save();
             }
 
             /// <summary>
             /// 保存为Enum
             /// </summary>
-            public static void SaveEnum<T1, T2>(T1 key, T2 value)
+            public static void SaveEnum<T2>(string key, T2 value)
             where T2 : struct, Enum
             {
-                var fullName = key.GetType().FullName;
-                if (!string.IsNullOrEmpty(fullName))
-                {
-                    PlayerPrefs.SetInt(string.Concat(fullName.GetHashCode()), value.GetHashCode());
-                    PlayerPrefs.Save();
-                }
+                if (string.IsNullOrEmpty(key)) return;
+                PlayerPrefs.SetInt(string.Concat(key, "_Enum"), value.GetHashCode());
+                PlayerPrefs.Save();
+            }
+
+            /// <summary>
+            /// 保存为Enum
+            /// </summary>
+            public static void SaveEnum<T2>(T2 value)
+            where T2 : struct, Enum
+            {
+                var key = typeof(T2).FullName;
+                if (string.IsNullOrEmpty(key)) return;
+                PlayerPrefs.SetInt(string.Concat(key, "_Enum"), value.GetHashCode());
+                PlayerPrefs.Save();
             }
 
             #endregion
