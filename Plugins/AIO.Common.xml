@@ -14421,6 +14421,267 @@
             </summary>
             <param name="disposingManagedResources"></param>
         </member>
+        <member name="T:AIO.GenerateBuilder">
+            <summary>
+            生成器
+            </summary>
+        </member>
+        <member name="F:AIO.GenerateBuilder.Builder">
+            <summary>
+            生成器
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.ToString">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.GenerateBuilder.indent">
+            <summary>
+             缩进
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.IncBlock">
+            <summary>
+               添加一个代码块
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.DecBlock">
+            <summary>
+              减少一个代码块
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.WriteHeader(System.String)">
+            <summary>
+            写入头部
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.WriteLine">
+            <summary>
+             写入一行
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.WriteLine(System.String)">
+            <summary>
+             写入一行
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.WriteLine(System.String,System.Object[])">
+            <summary>
+             写入一行
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.IncIndent">
+            <summary>
+              增加缩进
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.DecIndent">
+            <summary>
+             减少缩进
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.Save(System.String,System.Text.Encoding)">
+            <summary>
+             保存文件
+            </summary>
+            <param name="filePath"> 文件路径 </param>
+            <param name="encoding"> 编码 </param>
+            <exception cref="T:System.Exception"> 保存文件错误 </exception>
+        </member>
+        <member name="M:AIO.GenerateBuilder.Reset">
+            <summary>
+            重置
+            </summary>
+        </member>
+        <member name="T:AIO.ScriptTextBuilder">
+            <summary>
+               代码生成器
+            </summary>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.Reset">
+            <summary>
+            重置
+            </summary>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.IncNamespace(System.String)">
+            <summary>
+              添加命名空间
+            </summary>
+            <param name="ns"> 命名空间 </param>
+            <exception cref="T:System.Exception">命名空间已经开始</exception>
+            <exception cref="T:System.ArgumentNullException">参数为空</exception>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.DecNamespace">
+            <summary>
+             减少命名空间
+            </summary>
+            <exception cref="T:System.Exception">命名空间未开始</exception>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotSummary(System.String)">
+            <summary>
+            summary 注释
+            </summary>
+            <param name="value"> 注释内容 </param>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotSummary(System.String[])">
+            <summary>
+            summary 注释
+            </summary>
+            <param name="values"> 注释内容 </param>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotDate">
+            <summary>
+            date 注释
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotDate(System.DateTime)">
+            <summary>
+            date 注释
+            </summary>
+            <param name="value"> 时间 </param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotEmail(System.String)">
+            <summary>
+            email 注释
+            </summary>
+            <param name="value"> 邮箱 </param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotAuthor(System.String)">
+            <summary>
+            author 注释
+            </summary>
+            <param name="value"> 作者 </param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotSee(System.String)">
+            <summary>
+            see 注释
+            </summary>
+            <param name="value"> 参考 </param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotHref(System.String)">
+            <summary>
+            href 注释
+            </summary>
+            <param name="value"> 链接 </param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotRemarks(System.String)">
+            <summary>
+            remarks 注释
+            </summary>
+            <param name="value"> 备注 </param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.WriteGoto(System.String)">
+            <summary>
+            写入 goto
+            </summary>
+            <param name="tag"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.WriteUsing(System.String)">
+            <summary>
+            写入 using
+            </summary>
+            <param name="ns"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.WriteUsing(System.String[])">
+            <summary>
+            写入 using
+            </summary>
+            <param name="ns"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroRegion(System.String)">
+            <summary>
+            写入 宏开始
+            </summary>
+            <param name="region"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroEndRegion">
+            <summary>
+            写入 宏开始
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroDefine(System.String)">
+            <summary>
+            写入 宏define
+            </summary>
+            <param name="define"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroUnDefine">
+            <summary>
+            写入 宏undef
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroIf(System.String)">
+            <summary>
+            写入 宏if
+            </summary>
+            <param name="condition"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroElseIf(System.String)">
+            <summary>
+            写入 宏else if
+            </summary>
+            <param name="condition"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroElse">
+            <summary>
+            写入 宏else
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroEndIf">
+            <summary>
+            写入 宏结束
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroError(System.String)">
+            <summary>
+            写入错误
+            </summary>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroWarning(System.String)">
+            <summary>
+            写入警告
+            </summary>
+            <param name="warning"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroPragma(System.String)">
+            <summary>
+             写入标记
+            </summary>
+            <param name="pragma"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroPragmaWarning(System.String)">
+            <summary>
+              写入标记
+            </summary>
+            <param name="warning"></param>
+            <returns></returns>
+        </member>
         <member name="T:AIO.IOperationExtensions">
             <summary>
             异步处理器

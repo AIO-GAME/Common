@@ -17,9 +17,16 @@ namespace AIO
 #if UNITY_EDITOR
             while (!instance) Initialize();
             if (IsRuntime)
+                try
+                {
 #endif
-                instance.StartCoroutine(coroutine);
+                    instance.StartCoroutine(coroutine);
 #if UNITY_EDITOR
+                }
+                catch (Exception e)
+                {
+                    UnityEngine.Debug.LogError(e);
+                }
             else EditorCoroutineLooper.Start(coroutine);
 #endif
         }

@@ -40,8 +40,9 @@ namespace AIO.UEditor
 
         //#A3E4D7 转化为 Color 类型 0.64f, 0.89f, 0.84f, 0.5f
         private static readonly Color BackgroundColor = new Color(0.64f, 0.89f, 0.84f, 0.0f);
+
         //#2ECC71 转化为 Color 类型 0.18f, 0.8f, 0.44f, 0.5f
-        private static readonly Color ErrorColor      = new Color(0.18f, 0.8f, 0.44f, 0.3f);
+        private static readonly Color ErrorColor = new Color(0.18f, 0.8f, 0.44f, 0.3f);
 
         private static GUIStyle SymlinkMarkerStyle
         {
@@ -120,6 +121,15 @@ namespace AIO.UEditor
             if (_ShowSymlink) EditorApplication.projectWindowItemOnGUI += OnProjectWindowItemGUI;
         }
 
+        private static void Textures()
+        {
+            // 创建渐变 从左到右
+            texture = new Texture2D(2, 1) { wrapMode = TextureWrapMode.Clamp, };
+            texture.SetPixel(0, 0, BackgroundColor);
+            texture.SetPixel(2, 0, ErrorColor);
+            texture.Apply();
+        }
+
         /// <summary>
         /// 显示符号链接
         /// </summary>
@@ -175,6 +185,7 @@ namespace AIO.UEditor
         {
             // 绘制渐变颜色的矩形
             Handles.BeginGUI();
+            if (!texture) Textures();
             GUI.DrawTexture(rect, texture, ScaleMode.StretchToFill, true); // 使用矩形工具绘制带有纹理的矩形
             Handles.EndGUI();
         }

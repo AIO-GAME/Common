@@ -121,7 +121,8 @@ namespace AIO.UEditor
                     {
                         if (type == typeSelf || !type.IsSubclassOf(subtype)) continue;
                         var attribute = type.GetCustomAttribute<GWindowAttribute>(false);
-                        if (string.IsNullOrEmpty(attribute?.Group)) continue;
+                        if (attribute is null) continue;
+                        if (string.IsNullOrEmpty(attribute.Group)) continue;
                         if (!Group.Equals(attribute.Group)) continue;
                         AddGroup(Group, type);
                     }
