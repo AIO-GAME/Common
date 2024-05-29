@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 #endregion
 
-namespace AIO.UEditor
+namespace AIO.UEngine
 {
     /// <summary>
     /// 激活状态检视器 - 参数condition为激活条件判断方法的名称，返回值必须为bool

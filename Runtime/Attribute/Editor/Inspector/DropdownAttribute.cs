@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 #endregion
 
-namespace AIO.UEditor
+namespace AIO.UEngine
 {
     /// <summary>
     /// 下拉框检视器（支持 string、int、float 类型）

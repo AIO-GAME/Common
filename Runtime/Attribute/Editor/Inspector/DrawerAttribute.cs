@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 #endregion
 
-namespace AIO.UEditor
+namespace AIO.UEngine
 {
     /// <summary>
     /// 抽屉检视器
@@ -35,7 +35,9 @@ namespace AIO.UEditor
         /// <param name="condition">显示条件判断方法的名称，返回值必须为bool</param>
         /// <param name="defaultOpened">默认是否打开</param>
         /// <param name="toggleOnLabelClick">抽屉的标签是否也可点击</param>
-        public DrawerAttribute(string name, string condition, bool defaultOpened = false,
+        public DrawerAttribute(string name,
+                               string condition,
+                               bool   defaultOpened      = false,
                                bool   toggleOnLabelClick = true)
         {
             Name               = name;
@@ -53,7 +55,10 @@ namespace AIO.UEditor
         /// <param name="style">GUI样式</param>
         /// <param name="defaultOpened">默认是否打开</param>
         /// <param name="toggleOnLabelClick">抽屉的标签是否也可点击</param>
-        public DrawerAttribute(string name, string condition, string style, bool defaultOpened = false,
+        public DrawerAttribute(string name,
+                               string condition,
+                               string style,
+                               bool   defaultOpened      = false,
                                bool   toggleOnLabelClick = true)
         {
             Name               = name;

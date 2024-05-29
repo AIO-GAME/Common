@@ -5,22 +5,23 @@ using System.Diagnostics;
 
 #endregion
 
-namespace AIO.UEditor
+namespace AIO.UEngine
 {
     /// <summary>
     /// 标签检视器
     /// </summary>
-    [AttributeUsage(AttributeTargets.Field), Conditional("UNITY_EDITOR")]
-    public sealed class LabelAttribute : InspectorAttribute
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property), Conditional("UNITY_EDITOR")]
+    public class LabelAttribute : InspectorAttribute
     {
-        /// <summary>
-        /// 标签检视器
-        /// </summary>
-        /// <param name="name">标签</param>
-        public LabelAttribute(string name)
+        public LabelAttribute(string name) { Name = name; }
+
+        public LabelAttribute(string name, int order)
         {
-            Name = name;
+            Name  = name;
+            Order = order;
         }
+
+        public int Order { get; private set; }
 
         public string Name { get; private set; }
     }

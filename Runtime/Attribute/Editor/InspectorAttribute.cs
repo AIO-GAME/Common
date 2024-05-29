@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 #endregion
 
-namespace AIO.UEditor
+namespace AIO.UEngine
 {
     /// <summary>
     /// 类成员检视器特性

@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 #endregion
 
-namespace AIO.UEditor
+namespace AIO.UEngine
 {
     /// <summary>
     /// 通用菜单检视器（支持 string 类型）
