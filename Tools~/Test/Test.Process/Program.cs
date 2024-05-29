@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Reflection;
+using Newtonsoft.Json;
 
 namespace AIO
 {
@@ -11,6 +15,34 @@ namespace AIO
 
     class MyClass1<T>
     where T : struct { }
+
+    public class Message
+    {
+        public string message;
+        public int    code;
+
+        public Data data;
+        public long serverTime;
+
+        public class Data
+        {
+            public string request_id;
+            public string conversation_id;
+        }
+    }
+
+    public class Message2
+    {
+        public string message;
+        public int    code;
+        public Data   data;
+        public long   serverTime;
+
+        public class Data
+        {
+            public string answer;
+        }
+    }
 
     class Program
     {
@@ -63,26 +95,77 @@ namespace AIO
             public int TaskId;
         }
 
-        private static void Test()
+        private static async void Test1()
         {
-            var path = "E:\\Project\\AIO\\com.whoot.gf.security\\Runtime\\Encryptions\\MD5Encryption.cs";
-            var tA2  = File.Open(path, FileMode.Open, FileAccess.Read);
-            Console.WriteLine(tA2.GetMD5());
-            tA2.Close();
-            CPrint.Run("A1", () =>
+            var handle = AHandle.HTTP.Create("http://172.16.0.135:21203/chat/create-conversation");
+            handle.TimeOut = 10000;
+            var stop = new System.Diagnostics.Stopwatch();
+            stop.Start();
+            var temp = await handle.GetAsync();
+            stop.Stop();
+            Console.WriteLine("请求耗时:" + stop.ElapsedMilliseconds);
+            var data = JsonConvert.DeserializeObject<Message>(temp);
+
+            var question = "怎么养成良好的学习习惯";
+            var url      = "http://172.16.0.135:21203/chat/query?cId=" + data.data.conversation_id + "&question=" + question;
+            var handle2  = AHandle.HTTP.Create(url);
+            handle2.TimeOut = 10000;
+            var stop2 = new System.Diagnostics.Stopwatch();
+            stop2.Start();
+            var temp2 = await handle2.GetAsync();
+            stop2.Stop();
+            var data2 = AHelper.Json.Deserialize<Message2>(temp2);
+
+            var index2 = 0;
+            foreach (var VARIABLE in data2.data.answer)
             {
-                var testA = File.Open(path, FileMode.Open, FileAccess.Read);
-                Console.WriteLine(testA.GetMD5());
-                testA.Close();
-            });
-            CPrint.Run("A2", () =>
+                index2++;
+            }
+
+            Console.WriteLine("请求耗时:" + stop2.ElapsedMilliseconds + "文本长度:" + index2);
+            Console.WriteLine(data2.data.answer);
+        }
+
+        private static async void Test()
+        {
+            var appid         = "ad3364e0-1f24-4052-9b7a-0a31482a1b64";
+            var authorization = "bce-v3/ALTAK-X9eR0WLiq1DOY8sqtNETS/6a9c4a1e39bb687c9ca942891934883c59653d77";
+            var host          = "https://qianfan.baidubce.com";
+            var client        = new WebClient();
+            client.Headers.Set("Content-Type", "application/json");
+            client.Headers.Set("Accept", "application/json");
+            client.Headers.Set("Authorization", "Bearer " + authorization);
+            client.Encoding = System.Text.Encoding.UTF8;
+            // 设置方法为POST
+            var table = new Hashtable
             {
-                var testA1 = File.Open(path, FileMode.Open, FileAccess.Read);
-                Console.WriteLine(testA1.GetMD5Digest());
-                testA1.Close();
-            });
-            Console.WriteLine("-------------------");
-            Console.WriteLine(PrWin.Certutil.GetMD5(path));
+                {
+                    "app_id", appid
+                },
+            };
+            var temp = client.UploadString(host + "/v2/app/conversation", JsonConvert.SerializeObject(table));
+            client.Dispose();
+            var data = JsonConvert.DeserializeObject<Dictionary<string, String>>(temp);
+            Console.WriteLine(temp);
+
+            var client2 = new WebClient();
+            client2.Headers.Set("Content-Type", "application/json");
+            client2.Headers.Set("Accept", "application/json");
+            client2.Headers.Set("Authorization", "Bearer " + authorization);
+
+            var reqData = new Hashtable();
+            reqData["app_id"]          = appid;
+            reqData["conversation_id"] = data["conversation_id"];
+            reqData["query"]           = "怎么养成良好的学习习惯";
+            reqData["stream"]          = false;
+            
+            var stop2 = new System.Diagnostics.Stopwatch();
+            stop2.Start();
+            var temp2 = client2.UploadString(host + "/v2/app/conversation/runs", JsonConvert.SerializeObject(reqData));
+            stop2.Stop();
+            Console.WriteLine("请求耗时:" + stop2.ElapsedMilliseconds);
+            client2.Dispose();
+            Console.WriteLine(temp2);
             return;
 
             var list = new List<MyClass>();
