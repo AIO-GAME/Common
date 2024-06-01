@@ -198,8 +198,13 @@ namespace AIO.UEditor
             {
                 case EventType.KeyDown:
                 {
-                    OnEventKeyDown(evt, rootItem.children[state.selectedIDs[0]]);
-                    Event.current.Use();
+                    if (rootItem.children.Count == 0) return;
+                    if (state.selectedIDs[0] < rootItem.children.Count)
+                    {
+                        OnEventKeyDown(evt, rootItem.children[state.selectedIDs[0]]);
+                        Event.current.Use();
+                    }
+
                     break;
                 }
                 case EventType.KeyUp:
