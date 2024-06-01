@@ -32,10 +32,9 @@ exclude:
       - "*.meta"
       - "*.asmdef"
       - "*.tt"
-
-# 指定Qodana 扫描 solution 文件
+  
 dot-net:
-  solution: "ALL.sln"
+  solution: ~/Tools/ALL.sln
 
 #Execute shell command before Qodana execution (Applied in CI/CD pipeline)
 #bootstrap: sh ./prepare-qodana.sh
