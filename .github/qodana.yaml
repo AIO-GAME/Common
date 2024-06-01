@@ -33,6 +33,10 @@ exclude:
       - "*.asmdef"
       - "*.tt"
 
+dotnet:
+  solution: "AIO.sln"
+
+
 #Execute shell command before Qodana execution (Applied in CI/CD pipeline)
 #bootstrap: sh ./prepare-qodana.sh
 
