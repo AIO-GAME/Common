@@ -32,9 +32,6 @@ exclude:
       - "*.meta"
       - "*.asmdef"
       - "*.tt"
-  
-dot-net:
-  solution: ~/Tools/ALL.sln
 
 #Execute shell command before Qodana execution (Applied in CI/CD pipeline)
 #bootstrap: sh ./prepare-qodana.sh

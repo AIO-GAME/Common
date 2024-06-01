@@ -1,4 +1,3 @@
-
 namespace AIO
 {
     /// <summary>
@@ -37,9 +36,6 @@ namespace AIO
         /// <summary>
         /// 运行期间设置
         /// </summary>
-        public static void OnRuntimeMethodLoad(in bool isActive)
-        {
-            IsActive = isActive;
-        }
+        public static void OnRuntimeMethodLoad(in bool isActive) { IsActive = isActive; }
     }
 }
