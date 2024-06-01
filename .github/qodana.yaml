@@ -34,7 +34,7 @@ exclude:
       - "*.tt"
 
 dotnet:
-  solution: "AIO.sln"
+  solution: "Tools~/AIO.sln"
 
 
 #Execute shell command before Qodana execution (Applied in CI/CD pipeline)
