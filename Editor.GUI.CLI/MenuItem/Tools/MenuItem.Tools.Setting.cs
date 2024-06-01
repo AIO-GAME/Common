@@ -3,8 +3,11 @@
 using System;
 using System.IO;
 using UnityEditor;
-using UnityEditor.Android;
 using UnityEngine;
+
+#if UNITY_ANDROID
+using UnityEditor.Android;
+#endif
 
 #endregion
 
@@ -16,10 +19,7 @@ namespace AIO.UEditor
         private const string Icon_Path = @"Assets\Arts\Icons\{0}\{1}.png";
 
         [MenuItem("AIO/Tools/Setting/Icon/App/Active Build Target")]
-        public static void SetAppIconsActiveBuildTarget()
-        {
-            SetIcons("APP", EditorUserBuildSettings.selectedBuildTargetGroup);
-        }
+        public static void SetAppIconsActiveBuildTarget() { SetIcons("APP", EditorUserBuildSettings.selectedBuildTargetGroup); }
 
         [MenuItem("AIO/Tools/Setting/Icon/App/Android")]
         public static void SetAppIconsAndroid()
@@ -30,16 +30,10 @@ namespace AIO.UEditor
         }
 
         [MenuItem("AIO/Tools/Setting/Icon/App/WebGL")]
-        public static void SetAppIconsWebGL()
-        {
-            SetIcons("APP", BuildTargetGroup.WebGL);
-        }
+        public static void SetAppIconsWebGL() { SetIcons("APP", BuildTargetGroup.WebGL); }
 
         [MenuItem("AIO/Tools/Setting/Icon/App/IOS")]
-        public static void SetAppIconiOS()
-        {
-            SetIcons("APP", BuildTargetGroup.iOS);
-        }
+        public static void SetAppIconiOS() { SetIcons("APP", BuildTargetGroup.iOS); }
 
         private static void SetIcons(string iconPrefixName, BuildTargetGroup targetGroup)
         {
@@ -80,11 +74,10 @@ namespace AIO.UEditor
             Debug.LogFormat("Set {0} Icon Complete", iconPrefixName);
         }
 
-
         [MenuItem("AIO/Tools/Clean AssetBundle Name")]
         public static void Text()
         {
-            var dirTempInfo = new DirectoryInfo(Application.dataPath);
+            var dirTempInfo       = new DirectoryInfo(Application.dataPath);
             var directoryDIRArray = dirTempInfo.GetDirectories();
 
             // 遍历本场景目录下所有的目录或者文件
@@ -93,7 +86,7 @@ namespace AIO.UEditor
                 JudgeDirOrFileByRecursive(currentDir);
 
             AssetDatabase.RemoveUnusedAssetBundleNames();
-            //强制删除所有AssetBundle名称  
+            //强制删除所有AssetBundle名称
             foreach (var abName in AssetDatabase.GetAllAssetBundleNames())
             {
                 Console.WriteLine($"ab : {abName}");
@@ -123,12 +116,12 @@ namespace AIO.UEditor
             }
 
             // 得到当前目录下一级的文件信息集合
-            var directoryInfoObj = fileSystemInfo as DirectoryInfo; // 文件信息转为目录信息
+            var directoryInfoObj    = fileSystemInfo as DirectoryInfo; // 文件信息转为目录信息
             var fileSystemInfoArray = directoryInfoObj?.GetFileSystemInfos();
             if (fileSystemInfoArray is null) return;
             foreach (var fileInfo in fileSystemInfoArray)
-                if (fileInfo is FileInfo fileInfoObj)    // 文件类型
-                    RemoveFileABLabel(fileInfoObj);      // 修改此文件的 AssetBundle 标签
+                if (fileInfo is FileInfo)                // 文件类型
+                    RemoveFileABLabel(fileInfo);         // 修改此文件的 AssetBundle 标签
                 else                                     // 目录类型
                     JudgeDirOrFileByRecursive(fileInfo); // 如果是目录，则递归调用
         }
@@ -137,7 +130,7 @@ namespace AIO.UEditor
         /// 给文件移除 Asset Bundle 标记
         /// </summary>
         /// <param name="fileInfoObj">文件（文件信息）</param>
-        private static void RemoveFileABLabel(FileInfo fileInfoObj)
+        private static void RemoveFileABLabel(FileSystemInfo fileInfoObj)
         {
             // 调试信息
             //Debug.Log("fileInfoObj.Name = " + fileInfoObj.Name);
@@ -150,12 +143,13 @@ namespace AIO.UEditor
             // 得到 AB 包名称
             var strABName = string.Empty;
             // 获取资源文件的相对路径
-            var tmpIndex = fileInfoObj.FullName.IndexOf("Assets");
+            var tmpIndex         = fileInfoObj.FullName.IndexOf("Assets", StringComparison.CurrentCulture);
             var strAssetFilePath = fileInfoObj.FullName.Substring(tmpIndex); // 得到文件相对路径
 
             // 给资源文件移除 AB 名称
             var tmpImportObj = AssetImporter.GetAtPath(strAssetFilePath);
-            if (tmpImportObj != null) tmpImportObj.assetBundleName = null;
+            if (tmpImportObj)
+                tmpImportObj.assetBundleName = null;
         }
     }
 }

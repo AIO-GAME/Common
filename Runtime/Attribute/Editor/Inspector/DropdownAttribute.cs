@@ -2,6 +2,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Globalization;
 
 #endregion
 
@@ -21,8 +22,13 @@ namespace AIO.UEngine
         {
 #if UNITY_EDITOR
             ValueType      = typeof(string);
-            Values         = values;
+            Values         = new object[values.Length];
             DisplayOptions = values;
+            for (var i = 0; i < values.Length; i++)
+            {
+                Values[i]         = values[i];
+                DisplayOptions[i] = values[i].ToString(CultureInfo.CurrentCulture);
+            }
 #endif
         }
 
@@ -57,7 +63,7 @@ namespace AIO.UEngine
             for (var i = 0; i < values.Length; i++)
             {
                 Values[i]         = values[i];
-                DisplayOptions[i] = values[i].ToString();
+                DisplayOptions[i] = values[i].ToString(CultureInfo.CurrentCulture);
             }
 #endif
         }

@@ -25,14 +25,15 @@ namespace AIO.RainbowCore
 
         public static readonly Color SEPARATOR_CLR_2_PRO = new Color(0.22f, 0.22f, 0.22f, 1f);
 
-        public static void CreateAsset<T>(string baseName, string forcedPath = "") where T : ScriptableObject
+        public static void CreateAsset<T>(string baseName, string forcedPath = "")
+        where T : ScriptableObject
         {
             if (baseName.Contains("/"))
             {
                 throw new ArgumentException("Base name should not contain slashes");
             }
 
-            T val = ScriptableObject.CreateInstance<T>();
+            T      val = ScriptableObject.CreateInstance<T>();
             string text;
             if (!string.IsNullOrEmpty(forcedPath))
             {
@@ -62,8 +63,8 @@ namespace AIO.RainbowCore
         public static IEnumerable<EditorWindow> GetAllWindowsByType(string type)
         {
             return from obj in Resources.FindObjectsOfTypeAll(typeof(EditorWindow))
-                where obj.GetType().ToString() == type
-                select (EditorWindow)obj;
+                   where obj.GetType().ToString() == type
+                   select (EditorWindow)obj;
         }
 
         private static GUIStyle ToolbarSearchTextFieldPopup
@@ -116,12 +117,13 @@ namespace AIO.RainbowCore
 
         private static GUIStyle _ToolbarSearchCancelButton;
 
-
-        public static bool SearchField(ref string query, ref Enum filter, Enum defaultFilter,
-            params GUILayoutOption[] options)
+        public static bool SearchField(ref string               query,
+                                       ref Enum                 filter,
+                                       Enum                     defaultFilter,
+                                       params GUILayoutOption[] options)
         {
-            var value = query;
-            var objB = filter;
+            var value  = query;
+            var objB   = filter;
             var result = false;
             GUILayout.BeginHorizontal();
             //"ToolbarSearchTextFieldPopup"
@@ -129,8 +131,8 @@ namespace AIO.RainbowCore
             rect.width -= 18f;
             var position = rect;
             position.width = 20f;
-            filter = EditorGUI.EnumPopup(position, filter, "label");
-            if (!object.Equals(filter, objB))
+            filter         = EditorGUI.EnumPopup(position, filter, "label");
+            if (!Equals(filter, objB))
             {
                 result = true;
             }
@@ -142,13 +144,13 @@ namespace AIO.RainbowCore
             }
 
             var position2 = rect;
-            position2.x += rect.width;
-            position2.width = 18f;
+            position2.x     += rect.width;
+            position2.width =  18f;
             if (GUI.Button(position2, "", ToolbarSearchCancelButton))
             {
-                query = string.Empty;
-                filter = defaultFilter;
-                result = true;
+                query                      = string.Empty;
+                filter                     = defaultFilter;
+                result                     = true;
                 GUIUtility.keyboardControl = 0;
             }
 

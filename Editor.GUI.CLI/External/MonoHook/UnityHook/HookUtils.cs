@@ -1,7 +1,6 @@
 ﻿#if !(UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX)
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using UnityEngine;
@@ -17,8 +16,8 @@ namespace MonoHook
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate void DelegateFlushICache(void* code, int size);
 
-        private static DelegateFlushICache flush_icache;
-        private static readonly long _Pagesize;
+        private static          DelegateFlushICache flush_icache;
+        private static readonly long                _Pagesize;
 
         static HookUtils()
         {
@@ -57,7 +56,7 @@ namespace MonoHook
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
             uint oldProtect;
             bool ret = VirtualProtect(ptr, (uint)size, Protection.PAGE_EXECUTE_READWRITE, out oldProtect);
-            UnityEngine.Debug.Assert(ret);
+            Debug.Assert(ret);
 #else
             SetMemPerms(ptr,(ulong)size,MmapProts.PROT_READ | MmapProts.PROT_WRITE | MmapProts.PROT_EXEC);
 #endif
@@ -77,25 +76,21 @@ namespace MonoHook
 
         public static KeyValuePair<long, long> GetPageAlignedAddr(long code, int size)
         {
-            long pagesize = _Pagesize;
+            long pagesize  = _Pagesize;
             long startPage = (code) & ~(pagesize - 1);
-            long endPage = (code + size + pagesize - 1) & ~(pagesize - 1);
+            long endPage   = (code + size + pagesize - 1) & ~(pagesize - 1);
             return new KeyValuePair<long, long>(startPage, endPage);
         }
 
-
-        private const int PRINT_SPLIT = 4;
+        private const int PRINT_SPLIT    = 4;
         private const int PRINT_COL_SIZE = PRINT_SPLIT * 4;
 
         public static string HexToString(void* ptr, int size, int offset = 0)
         {
-            Func<IntPtr, string> formatAddr = (IntPtr addr__) =>
-                IntPtr.Size == 4 ? $"0x{(uint)addr__:x}" : $"0x{(ulong)addr__:x}";
-
             byte* addr = (byte*)ptr;
 
             StringBuilder sb = new StringBuilder(1024);
-            sb.AppendLine($"addr:{formatAddr(new IntPtr(addr))}");
+            sb.AppendLine($"addr:{FormatAddr(new IntPtr(addr))}");
 
             addr += offset;
             size += Math.Abs(offset);
@@ -103,7 +98,7 @@ namespace MonoHook
             int count = 0;
             while (true)
             {
-                sb.Append($"\r\n{formatAddr(new IntPtr(addr + count))}: ");
+                sb.Append($"\r\n{FormatAddr(new IntPtr(addr + count))}: ");
                 for (int i = 1; i < PRINT_COL_SIZE + 1; i++)
                 {
                     if (count >= size)
@@ -119,6 +114,8 @@ namespace MonoHook
 
             END: ;
             return sb.ToString();
+
+            string FormatAddr(IntPtr addr__) => IntPtr.Size == 4 ? $"0x{(uint)addr__:x}" : $"0x{(ulong)addr__:x}";
         }
 
         private static void SetupFlushICacheFunc()
@@ -130,16 +127,14 @@ namespace MonoHook
             if (IntPtr.Size == 4)
             {
                 // never release, so save GCHandle is unnecessary
-                s_ptr_flush_icache_arm32 = GCHandle.Alloc(s_flush_icache_arm32, GCHandleType.Pinned).
-                    AddrOfPinnedObject().ToPointer();
+                s_ptr_flush_icache_arm32 = GCHandle.Alloc(s_flush_icache_arm32, GCHandleType.Pinned).AddrOfPinnedObject().ToPointer();
                 SetAddrFlagsToRWX(new IntPtr(s_ptr_flush_icache_arm32), s_flush_icache_arm32.Length);
                 flush_icache =
                     Marshal.GetDelegateForFunctionPointer<DelegateFlushICache>(new IntPtr(s_ptr_flush_icache_arm32));
             }
             else
             {
-                s_ptr_flush_icache_arm64 = GCHandle.Alloc(s_flush_icache_arm64, GCHandleType.Pinned).
-                    AddrOfPinnedObject().ToPointer();
+                s_ptr_flush_icache_arm64 = GCHandle.Alloc(s_flush_icache_arm64, GCHandleType.Pinned).AddrOfPinnedObject().ToPointer();
                 SetAddrFlagsToRWX(new IntPtr(s_ptr_flush_icache_arm64), s_flush_icache_arm64.Length);
                 flush_icache =
                     Marshal.GetDelegateForFunctionPointer<DelegateFlushICache>(new IntPtr(s_ptr_flush_icache_arm64));
@@ -169,12 +164,12 @@ namespace MonoHook
             0x00, 0x88, 0xBD, 0xE8, // POP             {R11,PC}
 
             //                         __clear_cache                           ; CODE XREF: j___clear_cache+8↑j
-            0x80, 0x00, 0x2D, 0xE9, // PUSH            { R7 }
+            0x80, 0x00, 0x2D, 0xE9,                         // PUSH            { R7 }
             0x02, 0x70, 0x00, 0xE3, 0x0F, 0x70, 0x40, 0xE3, // MOV             R7, #0xF0002
-            0x00, 0x20, 0xA0, 0xE3, // MOV             R2, #0
-            0x00, 0x00, 0x00, 0xEF, // SVC             0
-            0x80, 0x00, 0xBD, 0xE8, // POP             {R7}
-            0x1E, 0xFF, 0x2F, 0xE1, // BX              LR
+            0x00, 0x20, 0xA0, 0xE3,                         // MOV             R2, #0
+            0x00, 0x00, 0x00, 0xEF,                         // SVC             0
+            0x80, 0x00, 0xBD, 0xE8,                         // POP             {R7}
+            0x1E, 0xFF, 0x2F, 0xE1,                         // BX              LR
         };
 
         private static byte[] s_flush_icache_arm64 = new byte[] // X0: code, W1: size
@@ -233,27 +228,28 @@ namespace MonoHook
             0xC0, 0x03, 0x5F, 0xD6, // RET
         };
 
-
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
         [Flags]
         public enum Protection
         {
-            PAGE_NOACCESS = 0x01,
-            PAGE_READONLY = 0x02,
-            PAGE_READWRITE = 0x04,
-            PAGE_WRITECOPY = 0x08,
-            PAGE_EXECUTE = 0x10,
-            PAGE_EXECUTE_READ = 0x20,
+            PAGE_NOACCESS          = 0x01,
+            PAGE_READONLY          = 0x02,
+            PAGE_READWRITE         = 0x04,
+            PAGE_WRITECOPY         = 0x08,
+            PAGE_EXECUTE           = 0x10,
+            PAGE_EXECUTE_READ      = 0x20,
             PAGE_EXECUTE_READWRITE = 0x40,
             PAGE_EXECUTE_WRITECOPY = 0x80,
-            PAGE_GUARD = 0x100,
-            PAGE_NOCACHE = 0x200,
-            PAGE_WRITECOMBINE = 0x400
+            PAGE_GUARD             = 0x100,
+            PAGE_NOCACHE           = 0x200,
+            PAGE_WRITECOMBINE      = 0x400
         }
 
         [DllImport("kernel32")]
-        public static extern bool VirtualProtect(IntPtr lpAddress, uint dwSize, Protection flNewProtect,
-            out uint lpflOldProtect);
+        public static extern bool VirtualProtect(IntPtr     lpAddress,
+                                                 uint       dwSize,
+                                                 Protection flNewProtect,
+                                                 out uint   lpflOldProtect);
 
 #else
         [Flags]

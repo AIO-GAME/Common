@@ -1,14 +1,11 @@
-﻿#region
+﻿#region namespace
 
 #if SUPPORT_UNITASK
-using TaskAwaiter = Cysharp.Threading.Tasks.UniTask.Awaiter;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-#else
-using TaskAwaiter = System.Runtime.CompilerServices.TaskAwaiter;
-using System.Threading.Tasks;
 #endif
 using System;
+using System.Threading.Tasks;
 
 #endregion
 

@@ -37,13 +37,15 @@ namespace AIO.UEditor
         [MenuItem("CONTEXT/Transform/Copy/Location")]
         public static void CopyLocation(MenuCommand cmd)
         {
-            if (cmd.context is Transform trans) GUIUtility.systemCopyBuffer = trans.GetLocation().LocationToJson();
+            var trans                              = cmd.context as Transform;
+            if (trans) GUIUtility.systemCopyBuffer = trans.GetLocation().LocationToJson();
         }
 
         [MenuItem("CONTEXT/Transform/Paste/Location")]
         public static void PasteLocation(MenuCommand cmd)
         {
-            if (!(cmd.context is Transform trans) || string.IsNullOrEmpty(GUIUtility.systemCopyBuffer)) return;
+            var trans = cmd.context as Transform;
+            if (!trans || string.IsNullOrEmpty(GUIUtility.systemCopyBuffer)) return;
             var location = GUIUtility.systemCopyBuffer.JsonToLocation();
             if (location == Location.Null) return;
             Undo.RecordObject(trans, "Paste Location");
@@ -93,10 +95,7 @@ namespace AIO.UEditor
             };
         }
 
-        protected override void OnInhibition()
-        {
-            Tools.hidden = false;
-        }
+        protected override void OnInhibition() { Tools.hidden = false; }
 
         protected override void OnGUI()
         {
@@ -143,9 +142,10 @@ namespace AIO.UEditor
                         }
                         else
                         {
-                            var x = ClampAngle(Target.rotation.eulerAngles.x);
-                            var y = ClampAngle(Target.rotation.eulerAngles.y);
-                            var z = ClampAngle(Target.rotation.eulerAngles.z);
+                            var v3    = Target.rotation.eulerAngles;
+                            var x     = ClampAngle(v3.x);
+                            var y     = ClampAngle(v3.y);
+                            var z     = ClampAngle(v3.z);
                             var angle = new Vector3(x, y, z);
                             GUIUtility.systemCopyBuffer = angle.ToCopyString("F1");
                         }
@@ -248,9 +248,10 @@ namespace AIO.UEditor
                         }
                         else
                         {
-                            var x = ClampAngle(Target.localRotation.eulerAngles.x);
-                            var y = ClampAngle(Target.localRotation.eulerAngles.y);
-                            var z = ClampAngle(Target.localRotation.eulerAngles.z);
+                            var v3    = Target.localRotation.eulerAngles;
+                            var x     = ClampAngle(v3.x);
+                            var y     = ClampAngle(v3.y);
+                            var z     = ClampAngle(v3.z);
                             var angle = new Vector3(x, y, z);
                             GUIUtility.systemCopyBuffer = angle.ToCopyString("F1");
                         }
@@ -295,7 +296,7 @@ namespace AIO.UEditor
                     var gm = new GenericMenu();
                     gm.AddItem(new GUIContent("Reset LocalScale But Ignore Child"), false, () =>
                     {
-                        var pos = new Vector3[Target.childCount];
+                        var pos   = new Vector3[Target.childCount];
                         var scale = new Vector3[Target.childCount];
                         for (var i = 0; i < Target.childCount; i++)
                         {
@@ -356,11 +357,12 @@ namespace AIO.UEditor
             GUI.color = Color.white;
             GUILayout.EndHorizontal();
 
-            GUI.enabled = !_isLock && Target.childCount > 0;
+            var count = Target.childCount;
+            GUI.enabled = !_isLock && count > 0;
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Child Count", GUILayout.Width(LabelWidth));
-            GUILayout.Label(Target.childCount.ToString());
+            GUILayout.Label(count.ToString());
             GUILayout.FlexibleSpace();
             GUI.backgroundColor = Color.red;
             if (GUILayout.Button("Detach", EditorStyles.miniButton))
@@ -431,7 +433,7 @@ namespace AIO.UEditor
                 var behaviours = transform.GetComponents<MonoBehaviour>();
                 foreach (var behaviour in behaviours)
                 {
-                    var type = behaviour.GetType();
+                    var type      = behaviour.GetType();
                     var attribute = type.GetCustomAttribute<LockTransformAttribute>();
                     if (attribute.Equals(null)) continue;
                     _lockSource     = $"Some values locking by {type.Name}.";
@@ -475,13 +477,13 @@ namespace AIO.UEditor
         private string ToCSPublicField()
         {
             var fieldName = Target.name.Trim().Replace(" ", "");
-            var field = $"[InspectorName(\"{Target.name}\")] public GameObject {fieldName};";
+            var field     = $"[InspectorName(\"{Target.name}\")] public GameObject {fieldName};";
             return field;
         }
 
         private string ToCSPrivateField()
         {
-            var fieldName = Target.name.Trim().Replace(" ", "");
+            var fieldName  = Target.name.Trim().Replace(" ", "");
             var fieldNames = fieldName.ToCharArray();
             fieldNames[0] = char.ToLower(fieldNames[0]);
             var field =

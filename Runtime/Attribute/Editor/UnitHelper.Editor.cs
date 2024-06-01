@@ -100,8 +100,8 @@ namespace AIO
 
             if (!pathToAccessor.TryGetValue(propertyPath, out var accessor))
             {
-                var nameStartIndex = propertyPath.LastIndexOf('.');
-                string elementName;
+                var              nameStartIndex = propertyPath.LastIndexOf('.');
+                string           elementName;
                 PropertyAccessor parent;
 
                 // Array.
@@ -171,8 +171,10 @@ namespace AIO
 
         /// <summary>Returns a field with the specified `name` in the `declaringType` or any of its base types.</summary>
         /// <remarks>Uses the <see cref="InstanceBindings"/>.</remarks>
-        internal static FieldInfo GetField(PropertyAccessor accessor, SerializedProperty property, Type declaringType,
-                                           string           name)
+        internal static FieldInfo GetField(PropertyAccessor   accessor,
+                                           SerializedProperty property,
+                                           Type               declaringType,
+                                           string             name)
         {
             declaringType = accessor?.GetFieldElementType(property) ?? declaringType;
             return GetField(declaringType, name);
@@ -251,7 +253,7 @@ namespace AIO
 
                 case SerializedPropertyType.FixedBufferSize:
                     throw new InvalidOperationException(
-                        $"{nameof(SetValue)} failed: {nameof(SerializedProperty)}.{nameof(SerializedProperty.fixedBufferSize)} is read-only.");
+                                                        $"{nameof(SetValue)} failed: {nameof(SerializedProperty)}.{nameof(SerializedProperty.fixedBufferSize)} is read-only.");
 
                 case SerializedPropertyType.Gradient:
                     GradientValue.SetValue(property, value, null);

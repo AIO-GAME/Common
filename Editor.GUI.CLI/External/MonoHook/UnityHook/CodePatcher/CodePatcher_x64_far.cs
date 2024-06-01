@@ -17,8 +17,8 @@ namespace MonoHook
         {
             // 由于 rax 会被函数作为返回值修改，并且不会被做为参数使用，因此修改是安全的
             0x48, 0xB8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // mov rax, <jmpTo>
-            0x50, // push rax
-            0xC3 // ret
+            0x50,                                                       // push rax
+            0xC3                                                        // ret
         };
 
         //protected static readonly byte[] s_jmpCode2 = new byte[] // 14 bytes
@@ -28,9 +28,7 @@ namespace MonoHook
         //};
 
         public CodePatcher_x64_far(IntPtr target, IntPtr replace, IntPtr proxy) : base(target, replace, proxy,
-            s_jmpCode.Length)
-        {
-        }
+                                                                                       s_jmpCode.Length) { }
 
         protected override byte[] GenJmpCode(void* jmpFrom, void* jmpTo)
         {
@@ -39,12 +37,12 @@ namespace MonoHook
             fixed (void* p = &ret[0])
             {
                 byte* ptr = (byte*)p;
-                *ptr++ = 0x48;
-                *ptr++ = 0xB8;
-                *(long*)ptr = (long)jmpTo;
-                ptr += 8;
-                *ptr++ = 0x50;
-                *ptr++ = 0xC3;
+                *ptr++      =  0x48;
+                *ptr++      =  0xB8;
+                *(long*)ptr =  (long)jmpTo;
+                ptr         += 8;
+                *ptr++      =  0x50;
+                *ptr++      =  0xC3;
             }
 
             return ret;

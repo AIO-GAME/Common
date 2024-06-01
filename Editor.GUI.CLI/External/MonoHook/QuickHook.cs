@@ -16,22 +16,22 @@ public class QuickHook
 
     private Dictionary<Type, Dictionary<string, List<MethodHook>>> hookDic;
 
-    private Type type;
+    private Type                 type;
     private Func<string, string> replaceNameFunc;
     private Func<string, string> proxyNameFunc;
     private Func<string, string> setterNameFunc;
     private Func<string, string> getterNameFunc;
-    private BindingFlags hookFlags;
-    private BindingFlags selfFlags;
+    private BindingFlags         hookFlags;
+    private BindingFlags         selfFlags;
 
     public QuickHook(Type type, BindingFlags? hookFlags = null, BindingFlags? selfFlags = null)
     {
-        this.type = type;
-        hookDic = new Dictionary<Type, Dictionary<string, List<MethodHook>>>();
+        this.type       = type;
+        hookDic         = new Dictionary<Type, Dictionary<string, List<MethodHook>>>();
         replaceNameFunc = x => x;
-        proxyNameFunc = x => x + "Proxy";
-        setterNameFunc = x => "set_" + x;
-        getterNameFunc = x => "get_" + x;
+        proxyNameFunc   = x => x + "Proxy";
+        setterNameFunc  = x => "set_" + x;
+        getterNameFunc  = x => "get_" + x;
 
         var defaultFlags = BindingFlags.FlattenHierarchy | BindingFlags.Static | BindingFlags.Instance |
                            BindingFlags.NonPublic | BindingFlags.Public;
@@ -39,25 +39,27 @@ public class QuickHook
         this.selfFlags = selfFlags ?? defaultFlags;
     }
 
-    public QuickHook(object inst) : this(inst.GetType())
-    {
-    }
+    public QuickHook(object inst) : this(inst.GetType()) { }
 
-    public QuickHook(Type type, Func<string, string> replaceNameFunc, Func<string, string> proxyNameFunc,
-        Func<string, string> setterNameFunc, Func<string, string> getterNameFunc,
-        BindingFlags? hookFlags = null, BindingFlags? selfFlags = null) : this(type, hookFlags, selfFlags)
+    public QuickHook(Type                 type,
+                     Func<string, string> replaceNameFunc,
+                     Func<string, string> proxyNameFunc,
+                     Func<string, string> setterNameFunc,
+                     Func<string, string> getterNameFunc,
+                     BindingFlags?        hookFlags = null,
+                     BindingFlags?        selfFlags = null) : this(type, hookFlags, selfFlags)
     {
         this.replaceNameFunc = replaceNameFunc;
-        this.proxyNameFunc = proxyNameFunc;
-        this.setterNameFunc = setterNameFunc;
-        this.getterNameFunc = getterNameFunc;
+        this.proxyNameFunc   = proxyNameFunc;
+        this.setterNameFunc  = setterNameFunc;
+        this.getterNameFunc  = getterNameFunc;
     }
 
     public int HookCtor(Type hookType, string replaceName = null, string proxyName = null)
     {
         var counter = 0;
         while (Internal_Hook(hookType, HookID.Ctor, string.Empty, replaceName ?? replaceNameFunc("Ctor"),
-                   proxyName ?? proxyNameFunc("Ctor"), counter > 0))
+                             proxyName ?? proxyNameFunc("Ctor"), counter > 0))
         {
             counter++;
         }
@@ -69,7 +71,7 @@ public class QuickHook
     {
         var counter = 0;
         while (Internal_Hook(hookType, HookID.Method, hookMethod, replaceName ?? replaceNameFunc(hookMethod),
-                   proxyName ?? proxyNameFunc(hookMethod), counter > 0))
+                             proxyName ?? proxyNameFunc(hookMethod), counter > 0))
         {
             counter++;
         }
@@ -81,7 +83,7 @@ public class QuickHook
     {
         var counter = 0;
         while (Internal_Hook(hookType, HookID.Property, hookProperty, replaceName ?? replaceNameFunc(hookProperty),
-                   proxyName ?? proxyNameFunc(hookProperty), counter > 0))
+                             proxyName ?? proxyNameFunc(hookProperty), counter > 0))
         {
             counter++;
         }
@@ -89,10 +91,7 @@ public class QuickHook
         return counter;
     }
 
-    public void UnHookCtor(Type hookType)
-    {
-        UnHookMethod(hookType, string.Empty);
-    }
+    public void UnHookCtor(Type hookType) { UnHookMethod(hookType, string.Empty); }
 
     public void UnHookMethod(Type hookType, string hookMethod)
     {
@@ -134,8 +133,12 @@ public class QuickHook
         hookDic.Clear();
     }
 
-    private bool Internal_Hook(Type hookType, HookID hookID, string hookMember, string replaceName, string proxyName,
-        bool ignoreError = false)
+    private bool Internal_Hook(Type   hookType,
+                               HookID hookID,
+                               string hookMember,
+                               string replaceName,
+                               string proxyName,
+                               bool   ignoreError = false)
     {
         if (!hookDic.TryGetValue(hookType, out var typeToHooks))
         {
@@ -156,8 +159,7 @@ public class QuickHook
                 originalMethods = hookType.GetConstructors(hookFlags).ToList().ConvertAll(x => (MethodBase)x);
                 break;
             case HookID.Method:
-                originalMethods = hookType.GetMethods(hookFlags).Where(x => x.Name == hookMember && !x.IsGenericMethod).
-                    ToList().ConvertAll(x => (MethodBase)x);
+                originalMethods = hookType.GetMethods(hookFlags).Where(x => x.Name == hookMember && !x.IsGenericMethod).ToList().ConvertAll(x => (MethodBase)x);
                 break;
             case HookID.Property:
                 var properties = hookType.GetProperties(hookFlags).Where(x => x.Name == hookMember).ToList();
@@ -200,9 +202,9 @@ public class QuickHook
             return false;
         }
 
-        var methodHook = default(MethodHook);
+        var methodHook     = default(MethodHook);
         var replaceMethods = default(List<MethodInfo>);
-        var proxyMethods = default(List<MethodInfo>);
+        var proxyMethods   = default(List<MethodInfo>);
 
         switch (hookID)
         {
@@ -210,17 +212,17 @@ public class QuickHook
             case HookID.Method:
             {
                 replaceMethods = type.GetMethods(selfFlags).Where(x => x.Name == replaceName).ToList();
-                proxyMethods = type.GetMethods(selfFlags).Where(x => x.Name == proxyName).ToList();
+                proxyMethods   = type.GetMethods(selfFlags).Where(x => x.Name == proxyName).ToList();
             }
                 break;
             case HookID.Property:
             {
                 // 查找属性
                 var replaceProperties = type.GetProperties(selfFlags).Where(x => x.Name == replaceName).ToList();
-                var proxyProperties = type.GetProperties(selfFlags).Where(x => x.Name == proxyName).ToList();
+                var proxyProperties   = type.GetProperties(selfFlags).Where(x => x.Name == proxyName).ToList();
 
                 replaceMethods = new List<MethodInfo>(replaceProperties.Count * 2);
-                proxyMethods = new List<MethodInfo>(proxyProperties.Count * 2);
+                proxyMethods   = new List<MethodInfo>(proxyProperties.Count * 2);
 
                 foreach (var item in replaceProperties)
                 {
@@ -241,18 +243,14 @@ public class QuickHook
                 // 查找方法
                 if (replaceMethods.Count != proxyMethods.Count || replaceMethods.Count == 0)
                 {
-                    var setReplaceMethods = type.GetMethods(selfFlags).
-                        Where(x => x.Name == setterNameFunc(replaceName)).ToList();
-                    var getReplaceMethods = type.GetMethods(selfFlags).
-                        Where(x => x.Name == getterNameFunc(replaceName)).ToList();
+                    var setReplaceMethods = type.GetMethods(selfFlags).Where(x => x.Name == setterNameFunc(replaceName)).ToList();
+                    var getReplaceMethods = type.GetMethods(selfFlags).Where(x => x.Name == getterNameFunc(replaceName)).ToList();
 
-                    var setProxyMethods = type.GetMethods(selfFlags).Where(x => x.Name == setterNameFunc(proxyName)).
-                        ToList();
-                    var getProxyMethods = type.GetMethods(selfFlags).Where(x => x.Name == getterNameFunc(proxyName)).
-                        ToList();
+                    var setProxyMethods = type.GetMethods(selfFlags).Where(x => x.Name == setterNameFunc(proxyName)).ToList();
+                    var getProxyMethods = type.GetMethods(selfFlags).Where(x => x.Name == getterNameFunc(proxyName)).ToList();
 
                     replaceMethods = new List<MethodInfo>(setReplaceMethods.Count * 2);
-                    proxyMethods = new List<MethodInfo>(setProxyMethods.Count * 2);
+                    proxyMethods   = new List<MethodInfo>(setProxyMethods.Count * 2);
 
                     replaceMethods.AddRange(setReplaceMethods);
                     replaceMethods.AddRange(getReplaceMethods);
@@ -267,7 +265,7 @@ public class QuickHook
         foreach (var originalMethod in originalMethods)
         {
             var replaceMethod = FindMethodBySignature(hookID, replaceMethods, originalMethod);
-            var proxyMethod = FindMethodBySignature(hookID, proxyMethods, originalMethod);
+            var proxyMethod   = FindMethodBySignature(hookID, proxyMethods, originalMethod);
             if (replaceMethod != null && proxyMethod != null)
             {
                 methodHook = new MethodHook(originalMethod, replaceMethod, proxyMethod);
@@ -275,15 +273,15 @@ public class QuickHook
                 {
                     case HookID.Ctor:
                         Debug.Log(
-                            $"Successfully hooked {hookID}. {hookType} ({originalMethod}) -> {type} ({replaceMethod}),");
+                                  $"Successfully hooked {hookID}. {hookType} ({originalMethod}) -> {type} ({replaceMethod}),");
                         break;
                     case HookID.Method:
                         Debug.Log(
-                            $"Successfully hooked {hookID}. {hookType} ({originalMethod}) -> {type} ({replaceMethod}),");
+                                  $"Successfully hooked {hookID}. {hookType} ({originalMethod}) -> {type} ({replaceMethod}),");
                         break;
                     case HookID.Property:
                         Debug.Log(
-                            $"Successfully hooked {hookID} . {hookType} ({originalMethod}) -> {type} ({replaceMethod}),");
+                                  $"Successfully hooked {hookID} . {hookType} ({originalMethod}) -> {type} ({replaceMethod}),");
                         break;
                     default:
                         Debug.Log($"Successfully hooked {hookID}.");
@@ -299,7 +297,7 @@ public class QuickHook
             if (!ignoreError)
             {
                 Debug.LogError(
-                    $"Failed to hook {hookID}. No method {replaceName} or {proxyName} found in type {type}, or their signatures do not match.");
+                               $"Failed to hook {hookID}. No method {replaceName} or {proxyName} found in type {type}, or their signatures do not match.");
             }
 
             return false;
@@ -331,7 +329,7 @@ public class QuickHook
 
         // 查找实例方法
         var compareParamTypes = originalMethod.GetParameters().ToList().ConvertAll(x => x.ParameterType);
-        var method = FindMethodBySignature(methods, compareParamTypes, compareReturnType, true);
+        var method            = FindMethodBySignature(methods, compareParamTypes, compareReturnType, true);
         if (method != null)
             return method;
 
@@ -346,9 +344,10 @@ public class QuickHook
         return null;
     }
 
-    private MethodInfo FindMethodBySignature(List<MethodInfo> methods, List<Type> compareParamTypes,
-        Type compareReturnType,
-        bool searchInstance)
+    private MethodInfo FindMethodBySignature(List<MethodInfo> methods,
+                                             List<Type>       compareParamTypes,
+                                             Type             compareReturnType,
+                                             bool             searchInstance)
     {
         foreach (var method in methods)
         {
@@ -381,8 +380,5 @@ public class QuickHook
         return null;
     }
 
-    private bool TypeIsEqual(Type x, Type y)
-    {
-        return x == y || x.IsAssignableFrom(y);
-    }
+    private bool TypeIsEqual(Type x, Type y) { return x == y || x.IsAssignableFrom(y); }
 }

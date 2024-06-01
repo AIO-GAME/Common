@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AIO.UEditor;
@@ -30,10 +31,7 @@ namespace AIO
 
             private DirectoryInfo Root;
 
-            private PluginDataEditor()
-            {
-                InstallList = new Dictionary<string, bool>();
-            }
+            private PluginDataEditor() { InstallList = new Dictionary<string, bool>(); }
 
             private void OnEnable()
             {
@@ -48,7 +46,7 @@ namespace AIO
 
             private void OnDisable()
             {
-                if (serializedObject.targetObject is null) return;
+                if (!serializedObject.targetObject) return;
                 serializedObject.ApplyModifiedPropertiesWithoutUndo();
             }
 
@@ -73,9 +71,9 @@ namespace AIO
 
             private void UpdateInstallInfo(in Object obj)
             {
-                if (obj is null) return;
-                var serialized = new SerializedObject(obj);
-                var Name = serialized.FindProperty("Name");
+                if (!obj) return;
+                var serialized         = new SerializedObject(obj);
+                var Name               = serialized.FindProperty("Name");
                 var TargetRelativePath = serialized.FindProperty("TargetRelativePath");
                 if (string.IsNullOrEmpty(Name.stringValue)) return;
                 if (string.IsNullOrEmpty(TargetRelativePath.stringValue)) return;
@@ -102,12 +100,12 @@ namespace AIO
 
                 foreach (var o in serializedObject.targetObjects)
                 {
-                    var serialized = new SerializedObject(o);
-                    var Name = serialized.FindProperty("Name");
+                    var serialized         = new SerializedObject(o);
+                    var Name               = serialized.FindProperty("Name");
                     var SourceRelativePath = serialized.FindProperty("SourceRelativePath");
                     var TargetRelativePath = serialized.FindProperty("TargetRelativePath");
-                    var MacroDefinition = serialized.FindProperty("MacroDefinition");
-                    var Introduction = serialized.FindProperty("Introduction");
+                    var MacroDefinition    = serialized.FindProperty("MacroDefinition");
+                    var Introduction       = serialized.FindProperty("Introduction");
 
                     EditorGUILayout.BeginVertical(new GUIStyle("ChannelStripBg"));
 
@@ -180,10 +178,11 @@ namespace AIO
                 try
                 {
                     var regex = new Regex(value);
-                    foreach (var directory in root.GetDirectories("*.*",
-                                                                  value.Contains("*") ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
-                        if (directory.Name == name && regex.Match(directory.FullName).Success)
-                            return directory;
+                    foreach (var directory in root.GetDirectories("*.*", value.Contains("*")
+                                                                      ? SearchOption.AllDirectories
+                                                                      : SearchOption.TopDirectoryOnly)
+                                                  .Where(directory => directory.Name == name && regex.Match(directory.FullName).Success)
+                            ) return directory;
                 }
                 catch (Exception)
                 {
@@ -195,8 +194,8 @@ namespace AIO
 
             internal static async Task Initialize(IEnumerable<PluginData> infos)
             {
-                var dataPath = Directory.GetParent(Application.dataPath)?.FullName;
-                var list = new List<Task>();
+                var dataPath  = Directory.GetParent(Application.dataPath)?.FullName;
+                var list      = new List<Task>();
                 var macroList = new List<string>();
                 foreach (var info in infos)
                 {
@@ -242,8 +241,8 @@ namespace AIO
 
             internal static async Task UnInitialize(IEnumerable<PluginData> infos)
             {
-                var dataPath = Directory.GetParent(Application.dataPath)?.FullName;
-                var list = new List<Task>();
+                var dataPath  = Directory.GetParent(Application.dataPath)?.FullName;
+                var list      = new List<Task>();
                 var macroList = new List<string>();
                 foreach (var info in infos)
                 {
@@ -282,15 +281,9 @@ namespace AIO
                 }
             }
 
-            internal static Task Initialize(PluginData info)
-            {
-                return Initialize(new[] { info });
-            }
+            internal static Task Initialize(PluginData info) { return Initialize(new[] { info }); }
 
-            internal static Task UnInitialize(PluginData info)
-            {
-                return UnInitialize(new[] { info });
-            }
+            internal static Task UnInitialize(PluginData info) { return UnInitialize(new[] { info }); }
 
             private static void compilationStarted()
             {

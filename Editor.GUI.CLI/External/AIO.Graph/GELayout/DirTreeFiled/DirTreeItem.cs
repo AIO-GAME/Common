@@ -104,12 +104,10 @@ namespace AIO.UEditor
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
 
-        public static DirTreeItem Create(string info, int maxDepth,
+        public static DirTreeItem Create(string info,
+                                         int    maxDepth,
                                          bool   optionSearchFile,
                                          string optionSearchPatternFolder,
                                          string optionSearchPatternFile)

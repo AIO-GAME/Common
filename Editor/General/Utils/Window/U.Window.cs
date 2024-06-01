@@ -307,7 +307,7 @@ namespace AIO.UEditor
             where T : EditorWindow
             {
                 string title;
-                if (window is null)
+                if (!window)
                 {
                     title = typeof(T).Name;
                     var attribute                = typeof(T).GetCustomAttribute<GWindowAttribute>(false);
@@ -393,7 +393,7 @@ namespace AIO.UEditor
                 if (string.IsNullOrEmpty(title.text)) title.text = type.Name;
 
                 var key = GetWindowKey(type, title.text);
-                if (!WindowList.ContainsKey(key) || WindowList[key] is null)
+                if (!WindowList.ContainsKey(key) || !WindowList[key])
                 {
                     WindowList[key]              = ScriptableObject.CreateInstance(type) as EditorWindow;
                     WindowList[key].titleContent = title;
@@ -575,25 +575,27 @@ namespace AIO.UEditor
                 var viewType        = assembly.GetType("UnityEditor.View");
                 var viewAllChildren = viewType?.GetProperty("allChildren", PROPERTY_BIND);
                 if (viewAllChildren is null) return false;
-                foreach (var desired in desiredDockNextTo)
+                var bind = BindingFlags.NonPublic | BindingFlags.Instance;
+                var type = instance.GetType();
+                foreach (var desired in desiredDockNextTo.Where(desired => desired == type))
                 {
-                    if (desired is null) continue;
-                    if (desired == instance.GetType()) continue;
-                    foreach (var window in windowsObj)
+                    foreach (var v1 in windowsObj
+                                       .Cast<object>()
+                                       .Where(window => window != null)
+                                       .Where(window => !window.Equals(instance))
+                                       .Select(window => containerWindowRootView.GetValue(window, null))
+                                       .Where(v1 => v1 != null))
                     {
-                        if (window is null) continue;
-                        if (window.Equals(instance)) continue;
-                        var v1 = containerWindowRootView.GetValue(window, null);
-                        if (v1 is null) continue;
                         if (!(viewAllChildren.GetValue(v1, null) is Array v2)) continue;
-                        foreach (var allChild in v2)
+                        foreach (var allChild in v2
+                                                 .Cast<object>()
+                                                 .Where(allChild => allChild != null)
+                                                 .Where(allChild => dockAreaType.IsInstanceOfType(allChild))
+                                )
                         {
-                            if (allChild is null) continue;
-                            if (!dockAreaType.IsInstanceOfType(allChild)) continue;
-                            if (!(dockAreaType.GetField("m_Panes", BindingFlags.NonPublic | BindingFlags.Instance)?.GetValue(allChild) is List<EditorWindow>
-                                    mPanes)) continue;
-                            if (mPanes.Where(item => !(item is null)).Where(item => item != instance).All(item => item.GetType() != desired)) continue;
-                            dockAreaMethodAddTab.Invoke(allChild, new object[] { instance, false });
+                            if (!(dockAreaType.GetField("m_Panes", bind)?.GetValue(allChild) is List<EditorWindow> mPanes)) continue;
+                            if (mPanes.Where(item => item).Where(item => item != instance).All(item => item.GetType() != desired)) continue;
+                            dockAreaMethodAddTab.Invoke(allChild, new object[] { instance, false, });
                             return true;
                         }
                     }

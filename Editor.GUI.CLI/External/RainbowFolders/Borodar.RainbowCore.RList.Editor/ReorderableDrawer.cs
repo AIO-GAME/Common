@@ -37,12 +37,12 @@ namespace AIO.RainbowCore.RList.Editor
 
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
 		{
-			return GetList(property, base.attribute as ReorderableAttribute, "array")?.GetHeight() ?? EditorGUIUtility.singleLineHeight;
+			return GetList(property, attribute as ReorderableAttribute, "array")?.GetHeight() ?? EditorGUIUtility.singleLineHeight;
 		}
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
-			ReorderableList list = GetList(property, base.attribute as ReorderableAttribute, "array");
+			ReorderableList list = GetList(property, attribute as ReorderableAttribute, "array");
 			if (list != null)
 			{
 				list.DoList(EditorGUI.IndentedRect(position), label);

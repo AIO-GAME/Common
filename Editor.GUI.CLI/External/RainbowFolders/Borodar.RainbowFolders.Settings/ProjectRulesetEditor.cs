@@ -48,23 +48,21 @@ namespace AIO.RainbowFolders.Settings
         protected void OnEnable()
         {
             EDITORS.Add(this);
-            _foldersProperty = base.serializedObject.FindProperty("Rules");
+            _foldersProperty = serializedObject.FindProperty("Rules");
             _reorderableList = new ReorderableList(_foldersProperty)
             {
-                label = new GUIContent("Search Results"),
+                label              = new GUIContent("Search Results"),
                 elementDisplayType = ReorderableList.ElementDisplayType.SingleLine,
-                expandable = false,
-                headerHeight = 4f,
-                paginate = true,
-                pageSize = 10
+                expandable         = false,
+                headerHeight       = 4f,
+                paginate           = true,
+                pageSize           = 10
             };
             _reorderableList.onChangedCallback += delegate { OnRulesetChange(); };
-            Undo.undoRedoPerformed =
-                (Undo.UndoRedoCallback)Delegate.Remove(Undo.undoRedoPerformed,
-                    new Undo.UndoRedoCallback(OnRulesetChange));
-            Undo.undoRedoPerformed =
-                (Undo.UndoRedoCallback)Delegate.Combine(Undo.undoRedoPerformed,
-                    new Undo.UndoRedoCallback(OnRulesetChange));
+            Undo.undoRedoPerformed = (Undo.UndoRedoCallback)Delegate.Remove
+                (Undo.undoRedoPerformed, new Undo.UndoRedoCallback(OnRulesetChange));
+            Undo.undoRedoPerformed = (Undo.UndoRedoCallback)Delegate.Combine
+                (Undo.undoRedoPerformed, new Undo.UndoRedoCallback(OnRulesetChange));
         }
 
         protected void OnDisable()
@@ -73,14 +71,14 @@ namespace AIO.RainbowFolders.Settings
             ClearHiddenFlags();
             Undo.undoRedoPerformed =
                 (Undo.UndoRedoCallback)Delegate.Remove(Undo.undoRedoPerformed,
-                    new Undo.UndoRedoCallback(OnRulesetChange));
+                                                       new Undo.UndoRedoCallback(OnRulesetChange));
         }
 
         public override void OnInspectorGUI()
         {
             GUILayout.Space(6f);
             var searchTab = SearchTab;
-            SearchTab = GUILayout.Toolbar(SearchTab, new string[] { "Filter by folder", "Filter by key" });
+            SearchTab   =  GUILayout.Toolbar(SearchTab, new string[] { "Filter by folder", "Filter by key" });
             ForceUpdate |= SearchTab != searchTab;
             EditorGUILayout.BeginVertical("AvatarMappingBox");
             GUILayout.Space(6f);
@@ -109,17 +107,14 @@ namespace AIO.RainbowFolders.Settings
             ForceUpdate = false;
         }
 
-        private static void OnRulesetChange()
-        {
-            ProjectRuleset.OnRulesetChange();
-        }
+        private static void OnRulesetChange() { ProjectRuleset.OnRulesetChange(); }
 
         private void DrawSearchByFolderPanel(bool forceUpdate)
         {
             var asset = Asset;
             Asset = (DefaultAsset)EditorGUILayout.ObjectField(Asset, typeof(DefaultAsset), false);
             if (!forceUpdate && Asset == asset) return;
-            if (Asset is null)
+            if (!Asset)
             {
                 ClearHiddenFlags();
             }
@@ -138,15 +133,15 @@ namespace AIO.RainbowFolders.Settings
             if (!Equals(_filter, Filter.All))
             {
                 var rect = GUILayoutUtility.GetRect(GUIContent.none, "MiniLabel");
-                rect.y += 1f;
-                rect.width = 55f;
+                rect.y     += 1f;
+                rect.width =  55f;
                 GUI.Label(rect, $"➔ {_filter}", "MiniLabel");
             }
 
             GUILayout.FlexibleSpace();
             var matchCase = _matchCase;
             _matchCase = EditorGUILayout.ToggleLeft("Match case", _matchCase, "MiniLabel", GUILayout.Width(83f));
-            var flag2 = _matchCase != matchCase;
+            var flag2    = _matchCase != matchCase;
             var useRegex = _useRegex;
             _useRegex = EditorGUILayout.ToggleLeft("Regex", _useRegex, "MiniLabel", GUILayout.Width(58f));
             var flag3 = _useRegex != useRegex;
@@ -178,15 +173,15 @@ namespace AIO.RainbowFolders.Settings
             }
 
             _foldersProperty.serializedObject.ApplyModifiedProperties();
-            _reorderableList.canAdd = true;
+            _reorderableList.canAdd       = true;
             _reorderableList.headerHeight = 4f;
-            _reorderableList.paginate = true;
+            _reorderableList.paginate     = true;
         }
 
         private void ApplyHiddenFlagsByAsset()
         {
             var assetPath = AssetDatabase.GetAssetPath(Asset);
-            var fileName = Path.GetFileName(assetPath);
+            var fileName  = Path.GetFileName(assetPath);
             foreach (var rule in ((ProjectRuleset)target).Rules)
             {
                 bool flag;
@@ -207,9 +202,9 @@ namespace AIO.RainbowFolders.Settings
                 rule.IsHidden = !flag;
             }
 
-            _reorderableList.canAdd = false;
+            _reorderableList.canAdd       = false;
             _reorderableList.headerHeight = 18f;
-            _reorderableList.paginate = false;
+            _reorderableList.paginate     = false;
         }
 
         private void ApplyHiddenFlagsByKey()
@@ -218,7 +213,7 @@ namespace AIO.RainbowFolders.Settings
             for (var i = 0; i < _foldersProperty.arraySize; i++)
             {
                 var arrayElementAtIndex = _foldersProperty.GetArrayElementAtIndex(i);
-                var serializedProperty = arrayElementAtIndex.FindPropertyRelative("IsHidden");
+                var serializedProperty  = arrayElementAtIndex.FindPropertyRelative("IsHidden");
                 if (_filter is Filter filter)
                 {
                     switch (filter)
@@ -243,9 +238,9 @@ namespace AIO.RainbowFolders.Settings
             }
 
             _foldersProperty.serializedObject.ApplyModifiedProperties();
-            _reorderableList.canAdd = false;
+            _reorderableList.canAdd       = false;
             _reorderableList.headerHeight = 18f;
-            _reorderableList.paginate = false;
+            _reorderableList.paginate     = false;
         }
 
         private Regex MakeRegexFromQuery()

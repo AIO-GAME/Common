@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
@@ -70,10 +71,7 @@ namespace AIO
         /// <summary>
         /// Wrapper around <see cref="UnityEditorInternal.InternalEditorUtility.RepaintAllViews"/>.
         /// </summary>
-        public static void RepaintEverything()
-        {
-            InternalEditorUtility.RepaintAllViews();
-        }
+        public static void RepaintEverything() { InternalEditorUtility.RepaintAllViews(); }
 
         /// <summary>
         /// Begins a vertical layout group using the given style and decreases the
@@ -116,11 +114,7 @@ namespace AIO
         /// <summary>
         /// Reverts <see cref="EditorGUIUtility.labelWidth"/> to its previous value.
         /// </summary>
-        public static void EndTightLabel()
-        {
-            EditorGUIUtility.labelWidth = _TightLabelWidth;
-        }
-
+        public static void EndTightLabel() { EditorGUIUtility.labelWidth = _TightLabelWidth; }
 
         /// <summary>
         /// Returns the `text` without any spaces if <see cref="EditorGUIUtility.wideMode"/> is false.
@@ -138,7 +132,6 @@ namespace AIO
             return _NarrowTextCache.Convert(text);
         }
 
-
         /// <summary>Loads an icon texture and sets it to use <see cref="FilterMode.Bilinear"/>.</summary>
         public static Texture LoadIcon(string name)
         {
@@ -151,7 +144,9 @@ namespace AIO
         /// <summary>
         /// Invokes `onDrop` if the <see cref="Event.current"/> is a drag and drop event inside the `dropArea`.
         /// </summary>
-        public static void HandleDragAndDrop<T>(Rect                  dropArea, Func<T, bool> validate, Action<T> onDrop,
+        public static void HandleDragAndDrop<T>(Rect                  dropArea,
+                                                Func<T, bool>         validate,
+                                                Action<T>             onDrop,
                                                 DragAndDropVisualMode mode = DragAndDropVisualMode.Link)
         where T : class
         {
@@ -191,29 +186,23 @@ namespace AIO
 
             var droppedAny = false;
 
-            foreach (var obj in objects)
+            foreach (var t in from object obj in objects select obj as T into t where t != null && (validate == null || validate(t)) select t)
             {
-                var t = obj as T;
+                Deselect();
 
-                if (t != null && (validate == null || validate(t)))
+                if (!isDrop)
                 {
-                    Deselect();
-
-                    if (!isDrop)
-                    {
-                        DragAndDrop.visualMode = mode;
-                        break;
-                    }
-
-                    onDrop(t);
-                    droppedAny = true;
+                    DragAndDrop.visualMode = mode;
+                    break;
                 }
+
+                onDrop(t);
+                droppedAny = true;
             }
 
             if (droppedAny)
                 GUIUtility.ExitGUI();
         }
-
 
         /// <summary>
         /// Uses <see cref="GUILayoutUtility.GetRect(float, float)"/> to get a <see cref="Rect"/> occupying a single

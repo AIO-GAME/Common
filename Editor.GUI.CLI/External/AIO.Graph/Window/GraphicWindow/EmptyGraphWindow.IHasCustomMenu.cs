@@ -12,9 +12,6 @@ namespace AIO.UEditor
         /// 添加自定义菜单项
         /// </summary>
         /// <param name="menu">菜单信息</param>
-        public void AddItemsToMenu(GenericMenu menu)
-        {
-            OnAddItemsToMenu(menu);
-        }
+        public void AddItemsToMenu(GenericMenu menu) { OnAddItemsToMenu(menu); }
     }
 }

@@ -30,7 +30,8 @@ namespace AIO.UEditor
             Priority = priority;
         }
 
-        public LnkToolsAttribute(string        text, string tooltip,
+        public LnkToolsAttribute(string        text,
+                                 string        tooltip,
                                  ELnkToolsMode mode     = ELnkToolsMode.AllMode,
                                  int           priority = int.MaxValue)
         {

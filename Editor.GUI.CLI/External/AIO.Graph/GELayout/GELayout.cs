@@ -55,10 +55,14 @@ namespace AIO.UEditor
         /// <param name="labelStyle">标签显示风格 <see cref="GUIStyle" /></param>
         /// <param name="bgStyle">背景显示风格 <see cref="GUIStyle" /></param>
         /// <returns>true:呈现子对象,false:隐藏<see cref="bool" /></returns>
-        private static bool FieldList<T>(GTContent label,
-                                         IList<T>  array, bool foldout, Action tips, Action<int> showFunc,
-                                         Func<T>   addFunc,
-                                         GUIStyle  labelStyle, GUIStyle bgStyle)
+        private static bool FieldList<T>(GTContent   label,
+                                         IList<T>    array,
+                                         bool        foldout,
+                                         Action      tips,
+                                         Action<int> showFunc,
+                                         Func<T>     addFunc,
+                                         GUIStyle    labelStyle,
+                                         GUIStyle    bgStyle)
         {
             if (showFunc is null)
             {
@@ -100,9 +104,13 @@ namespace AIO.UEditor
             return foldout;
         }
 
-        private static void FieldList<T>(GTContent label,
-                                         IList<T>  array,      Action   tips, Action<int> showFunc, Func<T> addFunc,
-                                         GUIStyle  labelStyle, GUIStyle bgStyle)
+        private static void FieldList<T>(GTContent   label,
+                                         IList<T>    array,
+                                         Action      tips,
+                                         Action<int> showFunc,
+                                         Func<T>     addFunc,
+                                         GUIStyle    labelStyle,
+                                         GUIStyle    bgStyle)
         {
             if (showFunc is null)
             {
@@ -150,10 +158,7 @@ namespace AIO.UEditor
         ///     分隔符
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Separator()
-        {
-            EditorGUILayout.Separator();
-        }
+        public static void Separator() { EditorGUILayout.Separator(); }
 
         /// <summary>
         ///     分隔符
@@ -168,19 +173,13 @@ namespace AIO.UEditor
         ///     隔行
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Space()
-        {
-            EditorGUILayout.Space();
-        }
+        public static void Space() { EditorGUILayout.Space(); }
 
         /// <summary>
         ///     隔行
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Space(float width)
-        {
-            EditorGUILayout.Space(width);
-        }
+        public static void Space(float width) { EditorGUILayout.Space(width); }
 
 #if UNITY_2019_1_OR_NEWER
 
@@ -198,7 +197,7 @@ namespace AIO.UEditor
         #endregion
 
         public static T FieldObject<T>(Rect rect, T obj, bool allowSceneObject, GUIStyle objStyle, GUIStyle minStyle)
-            where T : Object
+        where T : Object
         {
             return (T)FieldObject(rect, obj, typeof(T), allowSceneObject, objStyle, minStyle);
         }
@@ -215,7 +214,8 @@ namespace AIO.UEditor
 
         public static Object FieldObject(
             Rect     rect,
-            Object   obj, Type type,
+            Object   obj,
+            Type     type,
             bool     allowSceneObject,
             GUIStyle objStyle = null,
             GUIStyle minStyle = null)
@@ -294,7 +294,7 @@ namespace AIO.UEditor
                         if (Event.current.type == EventType.DragPerform)
                         {
                             DragAndDrop.AcceptDrag();
-                            obj = DragAndDrop.objectReferences[0];
+                            obj                         = DragAndDrop.objectReferences[0];
                             DragAndDrop.activeControlID = 0;
                         }
 

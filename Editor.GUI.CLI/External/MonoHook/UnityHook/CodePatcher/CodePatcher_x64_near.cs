@@ -13,8 +13,6 @@ namespace MonoHook
     /// </summary>
     public class CodePatcher_x64_near : CodePatcher_x86 // x64_near pathcer code is same to x86
     {
-        public CodePatcher_x64_near(IntPtr target, IntPtr replace, IntPtr proxy) : base(target, replace, proxy)
-        {
-        }
+        public CodePatcher_x64_near(IntPtr target, IntPtr replace, IntPtr proxy) : base(target, replace, proxy) { }
     }
 }

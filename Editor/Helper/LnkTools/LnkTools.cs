@@ -149,7 +149,7 @@ namespace AIO.UEditor
                 };
             }
 
-            if (Temp?.image is null)
+            if (!Temp?.image)
                 Temp = new GUIContent
                 {
                     text    = string.IsNullOrEmpty(attribute.Text) ? method.Name : attribute.Text,

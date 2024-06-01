@@ -1,6 +1,7 @@
 ﻿#region
 
 using System;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -31,40 +32,33 @@ namespace AIO.UEditor
             if (_instance != null) return _instance;
             var objects = EHelper.IO.GetScriptableObjects<ConsoleWindowConfig>();
             if (objects != null && objects.Length > 0)
-                foreach (var asset in objects)
+                foreach (var asset in objects.Where(asset => asset))
                 {
-                    if (asset is null) continue;
                     _instance = asset;
                     return _instance;
                 }
 
-            if (_instance is null)
+            if (_instance) return _instance;
+            _instance = CreateInstance<ConsoleWindowConfig>();
+            _instance.Assemblies = new[]
             {
-                _instance = CreateInstance<ConsoleWindowConfig>();
-                _instance.Assemblies = new[]
-                {
-                    "AIO.Core.Runtime",
-                    "AIO.Asset.Runtime",
-                    "AIO.FGUI.Runtime",
-                    "AIO.Hybridclr.Runtime",
-                    "AIO.CLI.YooAsset.Runtime",
-                    "Assembly-CSharp-Editor",
-                    "Assembly-CSharp-Editor-firstpass",
-                    "Assembly-CSharp-firstpass",
-                    "Assembly-CSharp",
-                };
-                _instance.BlackList = new string[]
-                    { };
-                AssetDatabase.CreateAsset(_instance, $"Assets/Editor/{nameof(ConsoleWindowConfig)}.asset");
-                AssetDatabase.SaveAssets();
-            }
+                "AIO.Core.Runtime",
+                "AIO.Asset.Runtime",
+                "AIO.FGUI.Runtime",
+                "AIO.Hybridclr.Runtime",
+                "AIO.CLI.YooAsset.Runtime",
+                "Assembly-CSharp-Editor",
+                "Assembly-CSharp-Editor-firstpass",
+                "Assembly-CSharp-firstpass",
+                "Assembly-CSharp",
+            };
+            _instance.BlackList = Array.Empty<string>();
+            AssetDatabase.CreateAsset(_instance, $"Assets/Editor/{nameof(ConsoleWindowConfig)}.asset");
+            AssetDatabase.SaveAssets();
 
             return _instance;
         }
 
-        public void Save()
-        {
-            EditorUtility.SetDirty(this);
-        }
+        public void Save() { EditorUtility.SetDirty(this); }
     }
 }

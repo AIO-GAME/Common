@@ -49,33 +49,31 @@ namespace AIO.UEditor
             if (beDependArr == null) return;
             if (beDependArr.Length != targetCount) return;
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
-            for (int i = 0, count = 0; i < targetCount; i++)
+            for (var i = 0; i < targetCount; i++)
             {
-                count = beDependArr[i] == null ? 0 : beDependArr[i].Length;
+                var count   = beDependArr[i] == null ? 0 : beDependArr[i].Length;
                 var objName = Path.GetFileName(AssetDatabase.GetAssetPath(targetObjects[i]));
                 var info = count == 0
                     ? $"<color=yellow>{objName}【{count}】</color>"
                     : $"{objName}【{count}】";
                 foldoutArr[i] = EditorGUILayout.Foldout(foldoutArr[i], info);
-                if (foldoutArr[i])
+                if (!foldoutArr[i]) continue;
+                if (count > 0)
                 {
-                    if (count > 0)
-                    {
-                        foreach (var obj in beDependArr[i])
-                        {
-                            EditorGUILayout.BeginHorizontal();
-                            GUILayout.Space(15);
-                            EditorGUILayout.ObjectField(obj, typeof(Object), true);
-                            EditorGUILayout.EndHorizontal();
-                        }
-                    }
-                    else
+                    foreach (var obj in beDependArr[i])
                     {
                         EditorGUILayout.BeginHorizontal();
                         GUILayout.Space(15);
-                        EditorGUILayout.LabelField("【Null】");
+                        EditorGUILayout.ObjectField(obj, typeof(Object), true);
                         EditorGUILayout.EndHorizontal();
                     }
+                }
+                else
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    GUILayout.Space(15);
+                    EditorGUILayout.LabelField("【Null】");
+                    EditorGUILayout.EndHorizontal();
                 }
             }
 
@@ -94,23 +92,23 @@ namespace AIO.UEditor
             if (string.IsNullOrEmpty(path)) return null;
             var guid = AssetDatabase.AssetPathToGUID(path);
             var files = Directory.GetFiles(Application.dataPath, "*",
-                                           SearchOption.AllDirectories).Where(s => withoutExtensions.Contains(Path.GetExtension(s).ToLower())).ToArray();
+                                           SearchOption.AllDirectories)
+                                 .Where(s => withoutExtensions.Contains(Path.GetExtension(s).ToLower()))
+                                 .ToArray();
             var objects = new List<Object>();
             foreach (var file in files)
             {
                 var assetPath = "Assets" + file.Replace(Application.dataPath, "");
-                var readText = File.ReadAllText(file);
+                var readText  = File.ReadAllText(file);
 
                 if (!readText.StartsWith("%YAML"))
                 {
                     var depends = AssetDatabase.GetDependencies(assetPath, false);
-                    if (depends != null)
-                        foreach (var dep in depends)
-                            if (dep == path)
-                            {
-                                objects.Add(AssetDatabase.LoadAssetAtPath<Object>(assetPath));
-                                break;
-                            }
+                    if (depends == null) continue;
+                    if (depends.Any(s => s == path))
+                    {
+                        objects.Add(AssetDatabase.LoadAssetAtPath<Object>(assetPath));
+                    }
                 }
                 else if (Regex.IsMatch(readText, guid))
                 {

@@ -46,10 +46,7 @@ namespace AIO.UEditor
         protected virtual bool IsEnableBaseInspectorGUI => false;
 
         /// <inheritdoc />
-        protected override void Awake()
-        {
-            Vector = new Vector2();
-        }
+        protected override void Awake() { Vector = new Vector2(); }
 
         /// <inheritdoc />
         protected sealed override void OnEnable()
@@ -73,7 +70,7 @@ namespace AIO.UEditor
         /// <inheritdoc />
         protected sealed override void OnDisable() //脚本或对象禁用时调用
         {
-            if (target is null) return;
+            if (!target) return;
             if (target.Equals(null)) return;
             EditorUtility.SetDirty(target);
             Undo.RecordObject(target, string.Concat(UNDO, UndoName));
@@ -103,10 +100,7 @@ namespace AIO.UEditor
 
         protected virtual void OnInhibition() { }
 
-        protected override void OnHeaderGUI()
-        {
-            base.OnHeaderGUI();
-        }
+        protected override void OnHeaderGUI() { base.OnHeaderGUI(); }
 
         /// <summary>
         /// 执行这一个函数来一个自定义检视面板
@@ -161,7 +155,7 @@ namespace AIO.UEditor
             if (GUI.changed)
             {
                 OnChange();
-                if (target is null) return;
+                if (!target) return;
                 EditorUtility.SetDirty(target);
                 Undo.RecordObject(target, string.Concat(UNDO, UndoName));
                 SerObj?.SetIsDifferentCacheDirty();
@@ -185,7 +179,8 @@ namespace AIO.UEditor
                     EditorUtility.SetDirty(item);
 
             if (EditorApplication.isPlaying) return;
-            if (target is Component component && component.gameObject.scene.IsValid())
+            var component = target as Component;
+            if (component && component.gameObject.scene.IsValid())
                 EditorSceneManager.MarkSceneDirty(component.gameObject.scene);
         }
 

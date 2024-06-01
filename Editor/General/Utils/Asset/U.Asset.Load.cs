@@ -97,8 +97,7 @@ namespace AIO.UEditor
             where T : Component
             {
                 var r = LoadAndInstance(assetPath, parent);
-                if (r != null) return r.GetComponent<T>() ?? r.AddComponent<T>();
-                return null;
+                return r.TryGetComponent<T>(out var c) ? c : r.AddComponent<T>();
             }
         }
 

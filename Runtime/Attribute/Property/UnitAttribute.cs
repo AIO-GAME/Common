@@ -57,17 +57,14 @@ namespace AIO
         /// <summary>
         /// Creates a new <see cref="UnitAttribute"/>.
         /// </summary>
-        public UnitAttribute(string suffix)
-        {
-            SetUnits(new double[] { 1 }, new[] { new CompactUnitConversionCache(suffix) });
-        }
+        public UnitAttribute(string suffix) { SetUnits(new double[] { 1 }, new[] { new CompactUnitConversionCache(suffix) }); }
 
         /// <summary>Creates a new <see cref="UnitAttribute"/>.</summary>
         public UnitAttribute(IDictionary<double, string> data, int unitIndex = 0)
         {
             var multipliers = new double[data.Count];
-            var suffixes = new string[data.Count];
-            var i = 0;
+            var suffixes    = new string[data.Count];
+            var i           = 0;
             foreach (var item in data)
             {
                 multipliers[i] = item.Key;
@@ -88,16 +85,17 @@ namespace AIO
         }
 
         /// <summary>[Editor-Only] Sets the unit details.</summary>
-        protected void SetUnits(IReadOnlyList<double> multipliers, IList<CompactUnitConversionCache> displayConverters,
-                                int                   unitIndex = 0)
+        protected void SetUnits(IReadOnlyList<double>             multipliers,
+                                IList<CompactUnitConversionCache> displayConverters,
+                                int                               unitIndex = 0)
         {
             if (multipliers.Count != displayConverters.Count)
                 throw new ArgumentException(
-                    $"[Units] {nameof(MultipliersDouble)} and {nameof(DisplayConverters)} must have the same Length.");
+                                            $"[Units] {nameof(MultipliersDouble)} and {nameof(DisplayConverters)} must have the same Length.");
 
             if (unitIndex < 0 || unitIndex >= multipliers.Count)
                 throw new ArgumentOutOfRangeException(
-                    $"[Units] {nameof(UnitIndex)} must be an index in the {nameof(MultipliersDouble)} array.");
+                                                      $"[Units] {nameof(UnitIndex)} must be an index in the {nameof(MultipliersDouble)} array.");
 
             MultipliersDouble = multipliers;
             DisplayConverters = displayConverters;
@@ -119,10 +117,7 @@ namespace AIO
         /// <summary> [Editor-Only]
         /// Determines how many lines tall the `property` should be.
         /// </summary>
-        private int GetLineCount(SerializedProperty property, GUIContent label)
-        {
-            return EditorGUIUtility.wideMode ? 1 : 2;
-        }
+        private int GetLineCount(SerializedProperty property, GUIContent label) { return EditorGUIUtility.wideMode ? 1 : 2; }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {

@@ -149,7 +149,7 @@ namespace AIO.RainbowFolders
                     IEnumerable<TreeViewItem> firstColumnItems = GetFirstColumnItems(windowsCache[j]);
                     if (firstColumnItems != null)
                     {
-                        TreeViewItem treeViewItem = firstColumnItems.FirstOrDefault((TreeViewItem item) => item.id == assetId);
+                        TreeViewItem treeViewItem = firstColumnItems.FirstOrDefault(item => item.id == assetId);
                         if (treeViewItem != null)
                         {
                             return treeViewItem.hasChildren;

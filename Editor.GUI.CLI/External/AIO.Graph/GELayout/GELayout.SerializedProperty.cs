@@ -18,10 +18,7 @@ namespace AIO.UEditor
         }
 
         /// <summary> SerializedProperty创建一个字段 </summary>
-        public static bool SP(SerializedProperty property, params GUILayoutOption[] options)
-        {
-            return EditorGUILayout.PropertyField(property, options);
-        }
+        public static bool SP(SerializedProperty property, params GUILayoutOption[] options) { return EditorGUILayout.PropertyField(property, options); }
 
         /// <summary> SerializedProperty创建一个字段 </summary>
         public static bool SP(SerializedProperty property, GUIContent label, params GUILayoutOption[] options)
@@ -30,7 +27,9 @@ namespace AIO.UEditor
         }
 
         /// <summary> SerializedProperty创建一个字段 </summary>
-        public static bool SP(SerializedProperty       property, GUIContent label, bool includeChildren,
+        public static bool SP(SerializedProperty       property,
+                              GUIContent               label,
+                              bool                     includeChildren,
                               params GUILayoutOption[] options)
         {
             return EditorGUILayout.PropertyField(property, label, includeChildren, options);
@@ -62,7 +61,10 @@ namespace AIO.UEditor
         /// <param name="ranges">限制曲线的矩形</param>
         /// <param name="label">可选标签</param>
         /// <param name="options">排版格式</param>
-        public static void SPCurve(SerializedProperty       value, Color color, Rect ranges, GUIContent label,
+        public static void SPCurve(SerializedProperty       value,
+                                   Color                    color,
+                                   Rect                     ranges,
+                                   GUIContent               label,
                                    params GUILayoutOption[] options)
         {
             EditorGUILayout.CurveField(value, color, ranges, label, options);
@@ -85,10 +87,7 @@ namespace AIO.UEditor
         }
 
         /// <summary> 物体文本框 FieldObject </summary>
-        public static void SPObject(SerializedProperty property, params GUILayoutOption[] options)
-        {
-            EditorGUILayout.ObjectField(property, options);
-        }
+        public static void SPObject(SerializedProperty property, params GUILayoutOption[] options) { EditorGUILayout.ObjectField(property, options); }
 
         /// <summary> 物体文本框 FieldObject </summary>
         public static void SPObject<T>(SerializedProperty property, params GUILayoutOption[] options)
@@ -112,10 +111,7 @@ namespace AIO.UEditor
         /// <summary> 延迟文本 string </summary>
         /// <param name="value">值</param>
         /// <param name="options">排版格式</param>
-        public static void SPTextDelayed(SerializedProperty value, params GUILayoutOption[] options)
-        {
-            EditorGUILayout.DelayedTextField(value, options);
-        }
+        public static void SPTextDelayed(SerializedProperty value, params GUILayoutOption[] options) { EditorGUILayout.DelayedTextField(value, options); }
 
         #endregion
 
@@ -127,7 +123,10 @@ namespace AIO.UEditor
         /// <param name="rightValue">右边值</param>
         /// <param name="label">标签</param>
         /// <param name="options">排版格式</param>
-        public static void SPSlider(SerializedProperty       property, float leftValue, float rightValue, GUIContent label,
+        public static void SPSlider(SerializedProperty       property,
+                                    float                    leftValue,
+                                    float                    rightValue,
+                                    GUIContent               label,
                                     params GUILayoutOption[] options)
         {
             EditorGUILayout.Slider(property, leftValue, rightValue, options);
@@ -139,7 +138,10 @@ namespace AIO.UEditor
         /// <param name="rightValue">右边值</param>
         /// <param name="label">标签</param>
         /// <param name="options">排版格式</param>
-        public static void SPSlider(SerializedProperty       property, float leftValue, float rightValue, string label,
+        public static void SPSlider(SerializedProperty       property,
+                                    float                    leftValue,
+                                    float                    rightValue,
+                                    string                   label,
                                     params GUILayoutOption[] options)
         {
             EditorGUILayout.Slider(property, leftValue, rightValue, options);
@@ -150,7 +152,9 @@ namespace AIO.UEditor
         /// <param name="leftValue">左边值</param>
         /// <param name="rightValue">右边值</param>
         /// <param name="options">排版格式</param>
-        public static void SPSlider(SerializedProperty       property, float leftValue, float rightValue,
+        public static void SPSlider(SerializedProperty       property,
+                                    float                    leftValue,
+                                    float                    rightValue,
                                     params GUILayoutOption[] options)
         {
             EditorGUILayout.Slider(property, leftValue, rightValue, options);
@@ -162,7 +166,10 @@ namespace AIO.UEditor
         /// <param name="leftValue">左边值</param>
         /// <param name="rightValue">右边值</param>
         /// <param name="options">排版格式</param>
-        public static float SPSlider(GUIContent               label, float value, float leftValue, float rightValue,
+        public static float SPSlider(GUIContent               label,
+                                     float                    value,
+                                     float                    leftValue,
+                                     float                    rightValue,
                                      params GUILayoutOption[] options)
         {
             return EditorGUILayout.Slider(label, value, leftValue, rightValue, options);
@@ -184,10 +191,7 @@ namespace AIO.UEditor
         /// <summary> 延迟文本 float </summary>
         /// <param name="value">值</param>
         /// <param name="options">排版格式</param>
-        public static void SPFloatDelayed(SerializedProperty value, params GUILayoutOption[] options)
-        {
-            EditorGUILayout.DelayedFloatField(value, options);
-        }
+        public static void SPFloatDelayed(SerializedProperty value, params GUILayoutOption[] options) { EditorGUILayout.DelayedFloatField(value, options); }
 
         #endregion
 
@@ -199,7 +203,10 @@ namespace AIO.UEditor
         /// <param name="rightValue">右边值</param>
         /// <param name="label">标签</param>
         /// <param name="options">排版格式</param>
-        public static void SPIntSlider(SerializedProperty       property, int leftValue, int rightValue, string label,
+        public static void SPIntSlider(SerializedProperty       property,
+                                       int                      leftValue,
+                                       int                      rightValue,
+                                       string                   label,
                                        params GUILayoutOption[] options)
         {
             EditorGUILayout.IntSlider(property, leftValue, rightValue, label, options);
@@ -211,7 +218,10 @@ namespace AIO.UEditor
         /// <param name="rightValue">右边值</param>
         /// <param name="label">标签</param>
         /// <param name="options">排版格式</param>
-        public static void SPIntSlider(SerializedProperty       property, int leftValue, int rightValue, GUIContent label,
+        public static void SPIntSlider(SerializedProperty       property,
+                                       int                      leftValue,
+                                       int                      rightValue,
+                                       GUIContent               label,
                                        params GUILayoutOption[] options)
         {
             EditorGUILayout.IntSlider(property, leftValue, rightValue, label, options);
@@ -222,7 +232,9 @@ namespace AIO.UEditor
         /// <param name="leftValue">左边值</param>
         /// <param name="rightValue">右边值</param>
         /// <param name="options">排版格式</param>
-        public static void SPIntSlider(SerializedProperty       property, int leftValue, int rightValue,
+        public static void SPIntSlider(SerializedProperty       property,
+                                       int                      leftValue,
+                                       int                      rightValue,
                                        params GUILayoutOption[] options)
         {
             EditorGUILayout.IntSlider(property, leftValue, rightValue, options);
@@ -237,7 +249,9 @@ namespace AIO.UEditor
         /// <param name="displayedOptions">一个具有用户可以选择的显示选项的数组</param>
         /// <param name="optionValues">包含每个选项的值的数组</param>
         /// <param name="options">排版格式</param>
-        public static void SPIntPopup(SerializedProperty       property, GUIContent[] displayedOptions, int[] optionValues,
+        public static void SPIntPopup(SerializedProperty       property,
+                                      GUIContent[]             displayedOptions,
+                                      int[]                    optionValues,
                                       params GUILayoutOption[] options)
         {
             EditorGUILayout.IntPopup(property, displayedOptions, optionValues, options);
@@ -249,8 +263,11 @@ namespace AIO.UEditor
         /// <param name="optionValues">包含每个选项的值的数组</param>
         /// <param name="label">标签</param>
         /// <param name="options">排版格式</param>
-        public static void SPIntPopup(SerializedProperty property, GUIContent[]             displayedOptions, int[] optionValues,
-                                      GUIContent         label,    params GUILayoutOption[] options)
+        public static void SPIntPopup(SerializedProperty       property,
+                                      GUIContent[]             displayedOptions,
+                                      int[]                    optionValues,
+                                      GUIContent               label,
+                                      params GUILayoutOption[] options)
         {
             EditorGUILayout.IntPopup(property, displayedOptions, optionValues, label, options);
         }
@@ -271,10 +288,7 @@ namespace AIO.UEditor
         /// <summary> 延迟文本 int </summary>
         /// <param name="value">值</param>
         /// <param name="options">排版格式</param>
-        public static void SPIntDelayed(SerializedProperty value, params GUILayoutOption[] options)
-        {
-            EditorGUILayout.DelayedIntField(value, options);
-        }
+        public static void SPIntDelayed(SerializedProperty value, params GUILayoutOption[] options) { EditorGUILayout.DelayedIntField(value, options); }
 
         #endregion
     }

@@ -60,7 +60,6 @@ namespace AIO
             EditorGUI.EndProperty();
         }
 
-
         public override void OnGUI(Rect area, SerializedProperty property, GUIContent label)
         {
             BeginProperty(area, property, ref label, out var value);
@@ -78,7 +77,7 @@ namespace AIO
 
             DoOptionalBeforeGUI(IsOptional, area, out var toggleArea, out var guiWasEnabled, out var previousLabelWidth);
 
-            var hasLabel = label != null && !string.IsNullOrEmpty(label.text);
+            var  hasLabel = label != null && !string.IsNullOrEmpty(label.text);
             Rect allFieldArea;
 
             if (isMultiLine)
@@ -103,9 +102,9 @@ namespace AIO
 
             // Count the number of active fields.
             var count = 0;
-            var last = 0;
+            var last  = 0;
             var index = 0;
-            var max = 1d;
+            var max   = 1d;
             foreach (var multiplier in Multipliers)
             {
                 if (!double.IsNaN(multiplier))
@@ -118,10 +117,10 @@ namespace AIO
                 max *= multiplier;
             }
 
-            var width = (allFieldArea.width - EditorGUIUtility.standardVerticalSpacing * (count - 1)) / count;
+            var width     = (allFieldArea.width - EditorGUIUtility.standardVerticalSpacing * (count - 1)) / count;
             var fieldArea = new Rect(allFieldArea.x, allFieldArea.y, width, allFieldArea.height);
 
-            var displayValue = GetDisplayValue(value, DefaultValue);
+            var displayValue = value;
 
             // Draw the active fields.
             label.text = string.Concat(label.text, " -> [", displayValue.ToString("0.##"), "]");

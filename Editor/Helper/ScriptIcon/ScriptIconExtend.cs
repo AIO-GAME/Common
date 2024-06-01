@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -21,9 +22,10 @@ namespace AIO.UEditor
         private static void Generate()
         {
             if (PlayerPrefs.GetInt("ScriptIconAttribute.AutoGenerate", 1) != 1) return;
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-            foreach (var type in assembly.GetTypes())
-            foreach (var attribute in type.GetCustomAttributes<ScriptIconAttribute>(false))
+            foreach (var attribute in from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                                      from type in assembly.GetTypes()
+                                      from attribute in type.GetCustomAttributes<ScriptIconAttribute>(false)
+                                      select attribute)
             {
                 if (!string.IsNullOrEmpty(attribute.IconResource))
                 {
@@ -42,7 +44,7 @@ namespace AIO.UEditor
             if (!_iconCache.TryGetValue(addr, out var guid))
             {
                 var asset = Resources.Load<Texture2D>(addr);
-                if (asset != null)
+                if (asset)
                 {
                     AssetDatabase.TryGetGUIDAndLocalFileIdentifier(asset.GetInstanceID(), out guid, out long _);
                     _iconCache[addr] = guid;
@@ -55,7 +57,7 @@ namespace AIO.UEditor
 
         public static void SetIcon(string local, Texture asset)
         {
-            if (local.StartsWith("Library") || asset is null) return;
+            if (local.StartsWith("Library") || !asset) return;
             AssetDatabase.TryGetGUIDAndLocalFileIdentifier(asset.GetInstanceID(), out var guid, out long _);
             if (string.IsNullOrEmpty(guid)) return;
             SetIcon(local, guid);
@@ -78,7 +80,7 @@ namespace AIO.UEditor
             var ScriptMeta = string.Concat(local, ".meta");
             if (!File.Exists(ScriptMeta)) return;
             var ydata = AHelper.IO.ReadYaml<Dictionary<object, object>>(ScriptMeta);
-            var icon = $"{{fileID: 2800000, guid: {guid}, type: 3}}";
+            var icon  = $"{{fileID: 2800000, guid: {guid}, type: 3}}";
             if (!ydata.ContainsKey("MonoImporter"))
             {
                 ydata["MonoImporter"] = new Dictionary<object, object>

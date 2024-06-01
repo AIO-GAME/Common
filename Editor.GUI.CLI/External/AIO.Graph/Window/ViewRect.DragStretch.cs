@@ -8,10 +8,10 @@ namespace AIO.UEditor
         [Flags]
         public enum DragStretchType : byte
         {
-            None       = 0
-          , Horizontal = 1
-          , Vertical   = 2
-          , Both       = Horizontal | Vertical
+            None       = 0,
+            Horizontal = 1,
+            Vertical   = 2,
+            Both       = Horizontal | Vertical
         }
 
         private DragStretchType AllowDragStretch;
@@ -95,10 +95,7 @@ namespace AIO.UEditor
         /// </summary>
         /// <param name="eventData"> 事件 </param>
         /// <param name="type"> 类型 </param>
-        public bool ContainsDragStretch(Event eventData, DragStretchType type)
-        {
-            return ContainsDragStretch(eventData.mousePosition, type);
-        }
+        public bool ContainsDragStretch(Event eventData, DragStretchType type) { return ContainsDragStretch(eventData.mousePosition, type); }
 
         /// <summary>
         ///     判断是否在拖拽区域内
@@ -111,11 +108,11 @@ namespace AIO.UEditor
             {
                 case DragStretchType.Horizontal:
                     if (!IsShow || !IsAllowDragStretchHorizontal) IsDragStretchHorizontal = false;
-                    else IsDragStretchHorizontal                               = RectDragHorizontal.Contains(point);
+                    else IsDragStretchHorizontal                                          = RectDragHorizontal.Contains(point);
                     return IsDragStretchHorizontal;
                 case DragStretchType.Vertical:
                     if (!IsShow || !IsAllowDragStretchVertical) IsDragStretchVertical = false;
-                    else IsDragStretchVertical                             = RectDragVertical.Contains(point);
+                    else IsDragStretchVertical                                        = RectDragVertical.Contains(point);
                     return IsDragStretchVertical;
                 case DragStretchType.Both:
                     if (IsShow) return IsDragStretchHorizontal || IsDragStretchVertical;

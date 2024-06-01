@@ -11,7 +11,10 @@ namespace AIO.UEngine
     {
         #region Vector4
 
-        public static void SetVector4(this BufferByte buffer, ref int index, in Vector4 value, in bool all = false,
+        public static void SetVector4(this BufferByte buffer,
+                                      ref  int        index,
+                                      in   Vector4    value,
+                                      in   bool       all     = false,
                                       in   bool       reverse = false)
         {
             buffer.SetFloat(ref index, value.x, all, reverse);
@@ -23,23 +26,27 @@ namespace AIO.UEngine
         public static Vector4 ReadVector4(this BufferByte buffer, in bool all = false, in bool reverse = false)
         {
             return new Vector4(
-                buffer.ReadFloat(all, reverse),
-                buffer.ReadFloat(all, reverse),
-                buffer.ReadFloat(all, reverse),
-                buffer.ReadFloat(all, reverse));
+                               buffer.ReadFloat(all, reverse),
+                               buffer.ReadFloat(all, reverse),
+                               buffer.ReadFloat(all, reverse),
+                               buffer.ReadFloat(all, reverse));
         }
 
-        public static Vector4 GetVector4(this IList<byte> array, ref int index, in bool all = false,
+        public static Vector4 GetVector4(this IList<byte> array,
+                                         ref  int         index,
+                                         in   bool        all     = false,
                                          in   bool        reverse = false)
         {
             return new Vector4(
-                array.GetFloat(ref index, all, reverse),
-                array.GetFloat(ref index, all, reverse),
-                array.GetFloat(ref index, all, reverse),
-                array.GetFloat(ref index, all, reverse));
+                               array.GetFloat(ref index, all, reverse),
+                               array.GetFloat(ref index, all, reverse),
+                               array.GetFloat(ref index, all, reverse),
+                               array.GetFloat(ref index, all, reverse));
         }
 
-        public static void WriteVector4(this BufferByte buffer, in Vector4 value, in bool all = false,
+        public static void WriteVector4(this BufferByte buffer,
+                                        in   Vector4    value,
+                                        in   bool       all     = false,
                                         in   bool       reverse = false)
         {
             buffer.WriteFloat(value.x, all, reverse);

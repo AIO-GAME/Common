@@ -1,4 +1,4 @@
-﻿#region
+﻿#region namespace
 
 using System;
 using System.Collections.Generic;
@@ -15,6 +15,10 @@ namespace AIO
     /// <summary>
     /// Unity线程
     /// </summary>
+    /// <c>开启协程</c>
+    /// <code>
+    /// Runner.StartTask(() => { });
+    /// </code>
     [Preserve]
     public static partial class Runner
     {
@@ -22,7 +26,7 @@ namespace AIO
 
 #if UNITY_EDITOR
         /// <summary>
-        /// [EDITOR] 是否运行时 
+        /// [EDITOR] 是否运行时
         /// </summary>
         public static bool IsRuntime { get; private set; }
 #endif

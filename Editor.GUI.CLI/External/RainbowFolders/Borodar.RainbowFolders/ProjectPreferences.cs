@@ -23,16 +23,13 @@ namespace AIO.RainbowFolders
             {
                 OnUpdate = onUpdate;
                 if (string.IsNullOrEmpty(key)) throw new ArgumentNullException(nameof(key));
-                Key = key;
-                Label = label;
+                Key          = key;
+                Label        = label;
                 DefaultValue = defaultValue;
                 Update();
             }
 
-            public void Update()
-            {
-                OnUpdate?.Invoke(Value);
-            }
+            public void Update() { OnUpdate?.Invoke(Value); }
 
             public void Draw()
             {
@@ -42,10 +39,7 @@ namespace AIO.RainbowFolders
 
             protected abstract void OnDraw();
 
-            public static implicit operator T(EditorPrefsItem<T> s)
-            {
-                return s.Value;
-            }
+            public static implicit operator T(EditorPrefsItem<T> s) { return s.Value; }
         }
 
         internal class EditorPrefsString : EditorPrefsItem<string>
@@ -57,14 +51,12 @@ namespace AIO.RainbowFolders
             }
 
             public EditorPrefsString(string key, GUIContent label, string defaultValue, Action<string> onUpdate = null)
-                : base(key, label, defaultValue, onUpdate)
-            {
-            }
+                : base(key, label, defaultValue, onUpdate) { }
 
             protected override void OnDraw()
             {
                 EditorGUIUtility.labelWidth = 100f;
-                Value = EditorGUILayout.TextField(Label, Value);
+                Value                       = EditorGUILayout.TextField(Label, Value);
             }
         }
 
@@ -83,14 +75,9 @@ namespace AIO.RainbowFolders
             }
 
             public EditorPrefsModifierKey(string key, GUIContent label, EventModifiers defaultValue, Action<EventModifiers> onUpdate = null)
-                : base(key, label, defaultValue, onUpdate)
-            {
-            }
+                : base(key, label, defaultValue, onUpdate) { }
 
-            protected override void OnDraw()
-            {
-                Value = (EventModifiers)EditorGUILayout.EnumPopup(Label, Value);
-            }
+            protected override void OnDraw() { Value = (EventModifiers)EditorGUILayout.EnumPopup(Label, Value); }
         }
 
         internal class EditorPrefsBoolean : EditorPrefsItem<bool>
@@ -107,9 +94,7 @@ namespace AIO.RainbowFolders
             }
 
             protected EditorPrefsBoolean(string key, GUIContent label, bool defaultValue, Action<bool> onUpdate = null)
-                : base(key, label, defaultValue, onUpdate)
-            {
-            }
+                : base(key, label, defaultValue, onUpdate) { }
 
             protected override void OnDraw()
             {
@@ -119,22 +104,15 @@ namespace AIO.RainbowFolders
                 }
             }
 
-            protected virtual void OnChange(bool value)
-            {
-            }
+            protected virtual void OnChange(bool value) { }
         }
 
         internal class EditorPrefsBooleanRepaint : EditorPrefsBoolean
         {
             public EditorPrefsBooleanRepaint(string key, GUIContent label, bool defaultValue, Action<bool> onUpdate = null)
-                : base(key, label, defaultValue, onUpdate)
-            {
-            }
+                : base(key, label, defaultValue, onUpdate) { }
 
-            protected override void OnChange(bool value)
-            {
-                EditorApplication.RepaintProjectWindow();
-            }
+            protected override void OnChange(bool value) { EditorApplication.RepaintProjectWindow(); }
         }
 
         internal static EditorPrefsString HOME_FOLDER_PREF;
@@ -171,40 +149,41 @@ namespace AIO.RainbowFolders
         [InitializeOnLoadMethod]
         public static void Initialize()
         {
-            var array = Application.dataPath.Split('/');
+            var array       = Application.dataPath.Split('/');
             var projectName = array[array.Length - 2];
 
-            var label = new GUIContent("Folder Location", "Change this setting to the new location of the \"Rainbow Folders\" if you move the folder around in your project.");
+            var label = new GUIContent("Folder Location",
+                                       "Change this setting to the new location of the \"Rainbow Folders\" if you move the folder around in your project.");
             HOME_FOLDER_PREF = new EditorPrefsString(string.Concat("AIO.RainbowFolders.HomeFolder.", projectName),
-                label, "Assets/Editor/Setting/ProjectRule", v => { HomeFolder = v; });
+                                                     label, "Assets/Editor/Setting/ProjectRule", v => { HomeFolder = v; });
 
             var label2 = new GUIContent("Modifier Key", "Modifier key that is used to show configuration dialogue when clicking on a folder icon.");
             MODIFIER_KEY_PREF = new EditorPrefsModifierKey(string.Concat("AIO.RainbowFolders.EditMod.", projectName),
-                label2, EventModifiers.Alt, v => { ModifierKey = v; });
+                                                           label2, EventModifiers.Alt, v => { ModifierKey = v; });
 
             var label3 = new GUIContent("绘制 项目树", "Draw Project Tree");
             PROJECT_TREE_PREF = new EditorPrefsBooleanRepaint(string.Concat("AIO.RainbowFolders.ShowProjectTree.", projectName),
-                label3, true, v => { ShowProjectTree = v; });
+                                                              label3, true, v => { ShowProjectTree = v; });
 
             var label4 = new GUIContent("绘制 行阴影", "Draw Project Row Shading");
             ROW_SHADING_PREF = new EditorPrefsBooleanRepaint(string.Concat("AIO.RainbowFolders.RowShading.", projectName),
-                label4, true, v => { DrawRowShading = v; });
+                                                             label4, true, v => { DrawRowShading = v; });
 
             var label5 = new GUIContent("绘制 文件夹 背景色", "Draw Project Foldouts Background");
             EP_DRAW_CUSTOM_BACKGROUND = new EditorPrefsBooleanRepaint(string.Concat("AIO.RainbowFolders.DrawCustomBackground.", projectName),
-                label5, true, v => { DrawCustomBackground = v; });
+                                                                      label5, true, v => { DrawCustomBackground = v; });
 
             var label6 = new GUIContent("绘制 文件夹 自定义ICON", "Draw Project Replace Folder Icons");
             EP_REPLACE_FOLDERICONS = new EditorPrefsBooleanRepaint(string.Concat("AIO.RainbowFolders.ReplaceFolderIcons.", projectName),
-                label6, true, v => { ReplaceFolderIcons = v; });
+                                                                   label6, true, v => { ReplaceFolderIcons = v; });
 
             var label7 = new GUIContent("开启 插件", "enable / disable");
             EP_ENABLE = new EditorPrefsBooleanRepaint(string.Concat("AIO.RainbowFolders.Enable.", projectName),
-                label7, true, v =>
-                {
-                    Enable = v;
-                    if (Enable) RainbowFoldersGUI.Initialize();
-                });
+                                                      label7, true, v =>
+                                                      {
+                                                          Enable = v;
+                                                          if (Enable) RainbowFoldersGUI.Initialize();
+                                                      });
         }
 
         [SettingsProvider]

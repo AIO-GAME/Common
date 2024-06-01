@@ -47,14 +47,9 @@ namespace MonoHook
 
         public static void UninstallByTag(string tag)
         {
-            foreach (var hook in _hooks.Values.
-                         ToList().
-                         Where(hook => hook.tag == tag)) hook.Uninstall();
+            foreach (var hook in _hooks.Values.ToList().Where(hook => hook.tag == tag)) hook.Uninstall();
         }
 
-        public static List<MethodHook> GetAllHooks()
-        {
-            return _hooks.Values.ToList();
-        }
+        public static List<MethodHook> GetAllHooks() { return _hooks.Values.ToList(); }
     }
 }

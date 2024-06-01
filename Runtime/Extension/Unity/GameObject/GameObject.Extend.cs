@@ -62,7 +62,7 @@ namespace AIO.UEngine
             for (int i = 0, max = ts.childCount; i < max; ++i)
             {
                 var child = ts.GetChild(i).gameObject;
-                if (r) child.Foreach(r, act);
+                if (r) child.Foreach(true, act);
                 act(child);
             }
         }
@@ -106,20 +106,16 @@ namespace AIO.UEngine
 
         #region Clone
 
-        public static GameObject Clone(this GameObject obj)
-        {
-            return Object.Instantiate(obj);
-        }
+        public static GameObject Clone(this GameObject obj) { return Object.Instantiate(obj); }
 
-        public static GameObject Clone(this GameObject obj, in Transform transform)
-        {
-            return Object.Instantiate(obj, transform);
-        }
+        public static GameObject Clone(this GameObject obj, in Transform transform) { return Object.Instantiate(obj, transform); }
 
-        public static GameObject Clone(this GameObject obj, in Vector3 postion, in Quaternion rotation,
+        public static GameObject Clone(this GameObject obj,
+                                       in   Vector3    position,
+                                       in   Quaternion rotation,
                                        in   Transform  trans)
         {
-            return Object.Instantiate(obj, postion, rotation, trans);
+            return Object.Instantiate(obj, position, rotation, trans);
         }
 
         public static T Clone<T>(this T obj)
@@ -134,10 +130,10 @@ namespace AIO.UEngine
             return Object.Instantiate(obj, trans);
         }
 
-        public static T Clone<T>(this T obj, in Vector3 postion, in Quaternion rotation, in Transform trans)
+        public static T Clone<T>(this T obj, in Vector3 position, in Quaternion rotation, in Transform trans)
         where T : Object
         {
-            return Object.Instantiate(obj, postion, rotation, trans);
+            return Object.Instantiate(obj, position, rotation, trans);
         }
 
         #endregion
@@ -150,10 +146,7 @@ namespace AIO.UEngine
             Destroy(obj.GetComponent<T>());
         }
 
-        public static void RemoveComponent(this GameObject obj, in string comp)
-        {
-            Destroy(obj.GetComponent(comp));
-        }
+        public static void RemoveComponent(this GameObject obj, in string comp) { Destroy(obj.GetComponent(comp)); }
 
         #endregion
     }

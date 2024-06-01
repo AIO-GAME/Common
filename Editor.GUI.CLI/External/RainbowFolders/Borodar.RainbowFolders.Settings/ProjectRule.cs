@@ -39,71 +39,71 @@ namespace AIO.RainbowFolders.Settings
 
         public ProjectRule(ProjectRule value)
         {
-            Type = value.Type;
-            Key = value.Key;
-            Ordinal = value.Ordinal;
-            Priority = value.Priority;
-            IconType = value.IconType;
-            SmallIcon = value.SmallIcon;
-            LargeIcon = value.LargeIcon;
-            IsIconRecursive = value.IsIconRecursive;
-            BackgroundType = value.BackgroundType;
-            BackgroundTexture = value.BackgroundTexture;
+            Type                  = value.Type;
+            Key                   = value.Key;
+            Ordinal               = value.Ordinal;
+            Priority              = value.Priority;
+            IconType              = value.IconType;
+            SmallIcon             = value.SmallIcon;
+            LargeIcon             = value.LargeIcon;
+            IsIconRecursive       = value.IsIconRecursive;
+            BackgroundType        = value.BackgroundType;
+            BackgroundTexture     = value.BackgroundTexture;
             IsBackgroundRecursive = value.IsBackgroundRecursive;
         }
 
         public ProjectRule(KeyType type, string key)
         {
             Type = type;
-            Key = key;
+            Key  = key;
         }
 
         public ProjectRule(KeyType type, string key, ProjectIcon iconType)
         {
-            Type = type;
-            Key = key;
-            IconType = iconType;
+            Type      = type;
+            Key       = key;
+            IconType  = iconType;
             SmallIcon = null;
             LargeIcon = null;
         }
 
         public ProjectRule(KeyType type, string key, Texture2D smallIcon, Texture2D largeIcon)
         {
-            Type = type;
-            Key = key;
-            IconType = ProjectIcon.Custom;
+            Type      = type;
+            Key       = key;
+            IconType  = ProjectIcon.Custom;
             SmallIcon = smallIcon;
             LargeIcon = largeIcon;
         }
 
         public ProjectRule(KeyType type, string key, CoreBackground background)
         {
-            Type = type;
-            Key = key;
-            BackgroundType = background;
+            Type              = type;
+            Key               = key;
+            BackgroundType    = background;
             BackgroundTexture = null;
         }
 
         public ProjectRule(KeyType type, string key, Texture2D background)
         {
-            Type = type;
-            Key = key;
-            IconType = ProjectIcon.Custom;
+            Type              = type;
+            Key               = key;
+            IconType          = ProjectIcon.Custom;
             BackgroundTexture = background;
         }
 
         public void CopyFrom(ProjectRule target)
         {
-            Type = target.Type;
-            Key = target.Key;
-            Ordinal = target.Ordinal;
-            Priority = target.Priority;
-            IconType = target.IconType;
-            SmallIcon = target.SmallIcon;
-            LargeIcon = target.LargeIcon;
-            IsIconRecursive = target.IsIconRecursive;
-            BackgroundType = target.BackgroundType;
-            BackgroundTexture = target.BackgroundTexture;
+            Type                  = target.Type;
+            Key                   = target.Key;
+            Ordinal               = target.Ordinal;
+            Priority              = target.Priority;
+            IconType              = target.IconType;
+            SmallIcon             = target.SmallIcon;
+            LargeIcon             = target.LargeIcon;
+            IsIconRecursive       = target.IsIconRecursive;
+            BackgroundType        = target.BackgroundType;
+            BackgroundTexture     = target.BackgroundTexture;
             IsBackgroundRecursive = target.IsBackgroundRecursive;
         }
 
@@ -113,8 +113,8 @@ namespace AIO.RainbowFolders.Settings
 
             if (IconType == ProjectIcon.Custom)
             {
-                if (SmallIcon is null) return false;
-                if (LargeIcon is null) return false;
+                if (!SmallIcon) return false;
+                if (!LargeIcon) return false;
             }
 
             return true;
@@ -123,44 +123,30 @@ namespace AIO.RainbowFolders.Settings
         public bool HasSmallIcon()
         {
             if (IconType == 0) return false;
-            if (HasCustomIcon()) return SmallIcon is null;
+            if (HasCustomIcon()) return !SmallIcon;
             return true;
         }
 
         public bool HasLargeIcon()
         {
             if (IconType == 0) return false;
-            if (HasCustomIcon()) return LargeIcon is null;
+            if (HasCustomIcon()) return !LargeIcon;
             return true;
         }
 
-        public bool HasCustomIcon()
-        {
-            return IconType == ProjectIcon.Custom;
-        }
+        public bool HasCustomIcon() { return IconType == ProjectIcon.Custom; }
 
         public bool HasBackground()
         {
             if (BackgroundType == 0) return false;
-            if (HasCustomBackground()) return BackgroundTexture is null;
+            if (HasCustomBackground()) return !BackgroundTexture;
             return true;
         }
 
-        public bool HasCustomBackground()
-        {
-            return BackgroundType == CoreBackground.Custom;
-        }
+        public bool HasCustomBackground() { return BackgroundType == CoreBackground.Custom; }
 
-        public bool HasAtLeastOneTexture()
-        {
-            if (HasIcon()) return true;
-            return HasBackground();
-        }
+        public bool HasAtLeastOneTexture() { return HasIcon() || HasBackground(); }
 
-        public bool IsRecursive()
-        {
-            if (IsIconRecursive) return true;
-            return IsBackgroundRecursive;
-        }
+        public bool IsRecursive() { return IsIconRecursive || IsBackgroundRecursive; }
     }
 }

@@ -38,7 +38,7 @@ namespace AIO.UEditor
                 if (!config.Assemblies.Contains(assembly.GetName().Name)) continue;
                 foreach (var type in assembly.GetTypes())
                 {
-                    var attr = type.GetCustomAttribute<IgnoreConsoleJumpAttribute>();
+                    var attr     = type.GetCustomAttribute<IgnoreConsoleJumpAttribute>();
                     var fullName = type.FullName;
                     // 获取Type的真实文件路径地址 使用Net framework实现
                     if (string.IsNullOrEmpty(fullName)) continue;
@@ -55,20 +55,20 @@ namespace AIO.UEditor
                     }
 
                     foreach (var method in type.GetMethods(
-                                 BindingFlags.Instance
-                               | BindingFlags.Static |
-                                 BindingFlags.DeclaredOnly |
-                                 BindingFlags.Public |
-                                 BindingFlags.NonPublic |
-                                 BindingFlags.FlattenHierarchy
-                             ))
+                                                           BindingFlags.Instance
+                                                         | BindingFlags.Static |
+                                                           BindingFlags.DeclaredOnly |
+                                                           BindingFlags.Public |
+                                                           BindingFlags.NonPublic |
+                                                           BindingFlags.FlattenHierarchy
+                                                          ))
                     {
                         if (!method.HasAttribute<IgnoreConsoleJumpAttribute>()) continue;
                         var methodAttr = method.GetCustomAttribute<IgnoreConsoleJumpAttribute>();
                         if (methodAttr is null) continue;
                         if (!IgnoreClass.ContainsKey(fullName)) IgnoreClass[fullName] = false;
                         string key;
-                        var IsAsync = method.GetCustomAttribute<AsyncStateMachineAttribute>() != null;
+                        var    IsAsync = method.GetCustomAttribute<AsyncStateMachineAttribute>() != null;
                         if (IsAsync)
                         {
                             key = $"{fullName}/<{method.Name}>";
@@ -84,12 +84,25 @@ namespace AIO.UEditor
 
                                 var genericArgumentsStr = string.Join(",", gList.Select(param => param.FullName));
 
-                                var parameterInfo = string.Join(",", methodDefinition.GetParameters().Select(param =>
-                                    {
-                                        if (string.IsNullOrEmpty(param.ParameterType.FullName)) return gList[param.ParameterType.GenericParameterPosition].FullName;
-
-                                        return param.ParameterType.FullName;
-                                    })).Replace("System.Object", "object").Replace("System.String", "string").Replace("System.Single", "float").Replace("System.Boolean", "bool").Replace("System.Double", "double").Replace("System.Byte", "byte").Replace("System.Int16", "short").Replace("System.Int32", "int").Replace("System.Int64", "long").Replace("System.UInt32", "uint").Replace("System.UInt64", "ulong").Replace("System.UInt16", "ushort").Replace("System.SByte", "sbyte").Replace("System.Char", "char").Replace("System.Decimal", "decimal")
+                                var parameterInfo = string.Join(",", methodDefinition.GetParameters()
+                                                                                     .Select(param => string.IsNullOrEmpty(param.ParameterType.FullName)
+                                                                                                 ? gList[param.ParameterType.GenericParameterPosition].FullName
+                                                                                                 : param.ParameterType.FullName))
+                                                          .Replace("System.Object", "object")
+                                                          .Replace("System.String", "string")
+                                                          .Replace("System.Single", "float")
+                                                          .Replace("System.Boolean", "bool")
+                                                          .Replace("System.Double", "double")
+                                                          .Replace("System.Byte", "byte")
+                                                          .Replace("System.Int16", "short")
+                                                          .Replace("System.Int32", "int")
+                                                          .Replace("System.Int64", "long")
+                                                          .Replace("System.UInt32", "uint")
+                                                          .Replace("System.UInt64", "ulong")
+                                                          .Replace("System.UInt16", "ushort")
+                                                          .Replace("System.SByte", "sbyte")
+                                                          .Replace("System.Char", "char")
+                                                          .Replace("System.Decimal", "decimal")
                                     ;
 
                                 key = string.IsNullOrEmpty(genericArgumentsStr)
@@ -98,8 +111,22 @@ namespace AIO.UEditor
                             }
                             else
                             {
-                                var parameterInfo = string.Join(",",
-                                                                method.GetParameters().Select(param => param.ParameterType.FullName)).Replace("System.Object", "object").Replace("System.String", "string").Replace("System.Single", "float").Replace("System.Boolean", "bool").Replace("System.Double", "double").Replace("System.Byte", "byte").Replace("System.Int16", "short").Replace("System.Int32", "int").Replace("System.Int64", "long").Replace("System.UInt32", "uint").Replace("System.UInt64", "ulong").Replace("System.UInt16", "ushort").Replace("System.SByte", "sbyte").Replace("System.Char", "char").Replace("System.Decimal", "decimal");
+                                var parameterInfo = string.Join(",", method.GetParameters().Select(param => param.ParameterType.FullName))
+                                                          .Replace("System.Object", "object")
+                                                          .Replace("System.String", "string")
+                                                          .Replace("System.Single", "float")
+                                                          .Replace("System.Boolean", "bool")
+                                                          .Replace("System.Double", "double")
+                                                          .Replace("System.Byte", "byte")
+                                                          .Replace("System.Int16", "short")
+                                                          .Replace("System.Int32", "int")
+                                                          .Replace("System.Int64", "long")
+                                                          .Replace("System.UInt32", "uint")
+                                                          .Replace("System.UInt64", "ulong")
+                                                          .Replace("System.UInt16", "ushort")
+                                                          .Replace("System.SByte", "sbyte")
+                                                          .Replace("System.Char", "char")
+                                                          .Replace("System.Decimal", "decimal");
                                 key = $"{fullName}:{method.Name} ({parameterInfo})";
                             }
                         }
@@ -127,8 +154,8 @@ namespace AIO.UEditor
             var consoleWindowFiledInfo = //ms_ConsoleWindow 是ConsoleWindow的对象字段
                 m_ConsoleWindow?.GetField("ms_ConsoleWindow", BindingFlags.Static | BindingFlags.NonPublic);
 
-            var consoleWindowInstance = consoleWindowFiledInfo?.GetValue(null); //从对象字段中得到这个对象
-            var str = activeText?.GetValue(consoleWindowInstance).ToString();   //得到Log信息,用于后面解析
+            var consoleWindowInstance = consoleWindowFiledInfo?.GetValue(null);                 //从对象字段中得到这个对象
+            var str                   = activeText?.GetValue(consoleWindowInstance).ToString(); //得到Log信息,用于后面解析
 
             var (path, lineIndex) = GetSubStringInStackStr(str); //解析出对应的.cs文件全路径 和 行号 
             if (lineIndex == -1) return false;
@@ -155,18 +182,18 @@ namespace AIO.UEditor
                 if (lines[i][filePathIndex] == '<') continue;
 
                 var filePathPart = lines[i].Substring(filePathIndex);
-                var lineIndex = filePathPart.LastIndexOf(":", StringComparison.Ordinal);
+                var lineIndex    = filePathPart.LastIndexOf(":", StringComparison.Ordinal);
                 if (lineIndex <= 0) continue;
 
                 var endLineIndex = filePathPart.LastIndexOf(")", StringComparison.Ordinal);
                 if (endLineIndex <= 0) continue;
 
                 var lineString = filePathPart.Substring(lineIndex + 1, endLineIndex - (lineIndex + 1));
-                var filePath = filePathPart.Substring(0, lineIndex);
+                var filePath   = filePathPart.Substring(0, lineIndex);
 
                 if (config.BlackList.Any(black => lines[i].StartsWith(black))) continue;
                 var isContinue = false;
-                var temp = lines[i];
+                var temp       = lines[i];
                 foreach (var ignore in IgnoreClass)
                 {
                     if (!temp.StartsWith(ignore.Key)) continue;

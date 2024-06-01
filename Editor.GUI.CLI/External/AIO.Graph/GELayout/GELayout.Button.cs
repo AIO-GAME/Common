@@ -12,7 +12,7 @@ namespace AIO.UEditor
     public partial class GELayout
     {
         /// <summary>
-        /// Make a Selection Grid 
+        /// Make a Selection Grid
         /// </summary>
         /// <param name="selected">The index of the selected button. <see cref="int"/></param>
         /// <param name="contents">An array of text, image and tooltips for the button.</param>
@@ -43,7 +43,7 @@ namespace AIO.UEditor
         }
 
         /// <summary>
-        /// Make a Selection Grid 
+        /// Make a Selection Grid
         /// </summary>
         /// <param name="selected">The index of the selected button. <see cref="int"/></param>
         /// <param name="contents">An array of text, image and tooltips for the button.</param>
@@ -75,7 +75,7 @@ namespace AIO.UEditor
 
 
         /// <summary>
-        /// 绘制 空间视图 
+        /// 绘制 空间视图
         /// </summary>
         /// <returns><see cref="EditorGUILayout.HorizontalScope"/></returns>
         public static EditorGUILayout.ScrollViewScope VScrollView(Vector2 v2)
@@ -381,7 +381,7 @@ namespace AIO.UEditor
             };
             var isHover = bgRect.Contains(Event.current.mousePosition);
             EditorGUI.DrawRect(bgRect, isHover ? HeaderHoverColor : HeaderNormalColor);
-            
+
             bgRect.y      = rect.y - 1;
             bgRect.height = 1;
             var color = HeaderBorderColor;

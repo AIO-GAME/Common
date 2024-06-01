@@ -36,36 +36,36 @@ namespace AIO.RainbowFolders.Settings
             {
                 try
                 {
-                    if (_instance is null)
+                    if (!_instance)
                     {
                         foreach (var ruleset in AssetDatabase
-                                     .FindAssets($"t:{nameof(ProjectRuleset)}", new string[] { "Assets" })
-                                     .Select(AssetDatabase.GUIDToAssetPath)
-                                     .Select(AssetDatabase.LoadAssetAtPath<ProjectRuleset>))
+                                                .FindAssets($"t:{nameof(ProjectRuleset)}", new string[] { "Assets" })
+                                                .Select(AssetDatabase.GUIDToAssetPath)
+                                                .Select(AssetDatabase.LoadAssetAtPath<ProjectRuleset>)
+                                                .Where(ruleset => ruleset))
                         {
-                            if (ruleset is null) continue;
                             _instance = ruleset;
                             break;
                         }
                     }
 
-                    if (_instance is null)
+                    if (!_instance)
                     {
                         foreach (var ruleset in AssetDatabase
-                                     .FindAssets($"t:{nameof(ProjectRuleset)}", new string[] { "Packages" })
-                                     .Select(AssetDatabase.GUIDToAssetPath)
-                                     .Select(AssetDatabase.LoadAssetAtPath<ProjectRuleset>))
+                                                .FindAssets($"t:{nameof(ProjectRuleset)}", new string[] { "Packages" })
+                                                .Select(AssetDatabase.GUIDToAssetPath)
+                                                .Select(AssetDatabase.LoadAssetAtPath<ProjectRuleset>)
+                                                .Where(ruleset => ruleset))
                         {
-                            if (ruleset is null) continue;
                             _instance = ruleset;
                             break;
                         }
                     }
 
-                    if (_instance is null)
+                    if (!_instance)
                     {
-                        var ruleset = Resources.Load<ProjectRuleset>($"Editor/RainbowAssets/{nameof(ProjectRuleset)}");
-                        if (ruleset != null) _instance = ruleset;
+                        var ruleset            = Resources.Load<ProjectRuleset>($"Editor/RainbowAssets/{nameof(ProjectRuleset)}");
+                        if (ruleset) _instance = ruleset;
                     }
                 }
                 catch (Exception)
@@ -73,18 +73,16 @@ namespace AIO.RainbowFolders.Settings
                     // ignored
                 }
 
-                if (_instance is null)
+                if (!_instance)
                 {
                     var path = Path.Combine(Application.dataPath, "Editor", "Gen", "Settings");
                     if (!Directory.Exists(path)) Directory.CreateDirectory(path);
                     _instance = CreateInstance<ProjectRuleset>();
-                    AssetDatabase.CreateAsset(_instance,
-                        $"Assets/Editor/Gen/Settings/{nameof(ProjectRuleset)}.asset");
+                    AssetDatabase.CreateAsset(_instance, $"Assets/Editor/Gen/Settings/{nameof(ProjectRuleset)}.asset");
                 }
 
-                if (_instance is null)
-                    throw new NullReferenceException(
-                        $"Can't find {nameof(ProjectRuleset)} in project. Please try to reimport Rainbow Folders package.");
+                if (!_instance)
+                    throw new NullReferenceException($"Can't find {nameof(ProjectRuleset)} in project. Please try to reimport Rainbow Folders package.");
 
                 _instance.UpdateOrdinals();
                 OnRulesetChange = _instance.UpdateOrdinals;
@@ -103,39 +101,34 @@ namespace AIO.RainbowFolders.Settings
         public static void ShowInspector(DefaultAsset asset = null)
         {
             Selection.activeObject = Instance;
-            EditorApplication.delayCall = (EditorApplication.CallbackFunction)Delegate.Combine(
-                EditorApplication.delayCall, (EditorApplication.CallbackFunction)delegate
+            EditorApplication.delayCall = (EditorApplication.CallbackFunction)Delegate.Combine
+                (EditorApplication.delayCall, (EditorApplication.CallbackFunction)delegate
                 {
-                    EditorApplication.delayCall = (EditorApplication.CallbackFunction)Delegate.Combine(
-                        EditorApplication.delayCall, (EditorApplication.CallbackFunction)delegate
+                    EditorApplication.delayCall = (EditorApplication.CallbackFunction)Delegate.Combine
+                        (EditorApplication.delayCall, (EditorApplication.CallbackFunction)(() =>
                         {
                             foreach (var EDITOR in ProjectRulesetEditor.EDITORS)
                             {
-                                EDITOR.Asset = asset;
+                                EDITOR.Asset       = asset;
                                 EDITOR.ForceUpdate = true;
-                                EDITOR.SearchTab = 0;
+                                EDITOR.SearchTab   = 0;
                                 EDITOR.Repaint();
                             }
-                        });
+                        }));
                 });
         }
 
         public ProjectRule GetRule(ProjectRule match)
         {
-            if (IsNullOrEmpty(Rules) || match == null)
-            {
-                return null;
-            }
-
-            return Rules.Find(x => x.Type == match.Type && x.Key == match.Key);
+            return IsNullOrEmpty(Rules) || match == null ? null : Rules.Find(x => x.Type == match.Type && x.Key == match.Key);
         }
 
         public ProjectRule GetRuleByPath(string folderPath, bool allowRecursive = false)
         {
             if (IsNullOrEmpty(Rules)) return null;
 
-            var assetNameFromPath = GetAssetNameFromPath(folderPath);
-            ProjectRule result = null;
+            var         assetNameFromPath = GetAssetNameFromPath(folderPath);
+            ProjectRule result            = null;
             if (allowRecursive)
             {
                 foreach (var item in _rulesByNameRecursive
@@ -164,7 +157,7 @@ namespace AIO.RainbowFolders.Settings
         public void UpdateRule(ProjectRule match, ProjectRule value)
         {
             Undo.RecordObject(this, "Modify Rainbow Folder Settings");
-            ProjectRule rule = GetRule(match);
+            var rule = GetRule(match);
             if (rule != null)
             {
                 if (value.HasAtLeastOneTexture())
@@ -216,7 +209,7 @@ namespace AIO.RainbowFolders.Settings
                 return;
             }
 
-            projectRule.IconType = value.IconType;
+            projectRule.IconType  = value.IconType;
             projectRule.SmallIcon = value.SmallIcon;
             projectRule.LargeIcon = value.LargeIcon;
             SaveSetting();
@@ -232,15 +225,12 @@ namespace AIO.RainbowFolders.Settings
                 return;
             }
 
-            projectRule.BackgroundType = value.BackgroundType;
+            projectRule.BackgroundType    = value.BackgroundType;
             projectRule.BackgroundTexture = value.BackgroundTexture;
             SaveSetting();
         }
 
-        public void ChangeRuleIconsByPath(string path, ProjectIcon icon)
-        {
-            ChangeRuleIcons(new ProjectRule(ProjectRule.KeyType.Path, path, icon));
-        }
+        public void ChangeRuleIconsByPath(string path, ProjectIcon icon) { ChangeRuleIcons(new ProjectRule(ProjectRule.KeyType.Path, path, icon)); }
 
         public void ChangeRuleBackgroundByPath(string path, CoreBackground background)
         {
@@ -309,8 +299,8 @@ namespace AIO.RainbowFolders.Settings
 
         private static void ReplaceWithHighestPriority(
             ref ProjectRule result,
-            ProjectRule replacement,
-            bool recursive = false)
+            ProjectRule     replacement,
+            bool            recursive = false)
         {
             if (result == null)
             {
