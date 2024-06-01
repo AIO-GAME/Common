@@ -1,58 +1,20 @@
-
-*.log
-*.DS_Store
-*.sln
-
-# Unity
 !*.dll.meta
 !*.asset.meta
 !*.asmdef.meta
 !*.cs.meta
 !*.meta
-.git/
-.vs/
-.idea/
-.gradle/
-.consulo/
-[Bb]uild/
-[Bb]uilds/
-[Tt]emp/
-[Oo]bj/
-[Ll]ogs/
-[Bb]in/
-[Oo]bj/
-[Pp]ackages/
+!*.[Cc]ache/
 
-
-# Visual Studio 6 build log
-*.plg
-
-# Visual Studio 6 workspace options file
-*.opt
-
-# Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
-bld/
-[Bb]in/
-[Oo]bj/
-[Oo]ut/
-[Ll]og/
-
-# MSTest test Results
-[Tt]est[Rr]esult*/
-[Bb]uild[Ll]og.*
-
-# NUNIT
-*.VisualState.xml
-TestResult.xml
-
-# Visual C++ cache files
-ipch/
+# 
+*.DS_Store
+*.rej
+*.orig
+*.git
+*.bak
+*.sln.DotSettings.user
+*.csproj.DotSettings
+*.mdf
+*.ldf
 *.aps
 *.ncb
 *.opendb
@@ -61,70 +23,60 @@ ipch/
 *.cachefile
 *.VC.db
 *.VC.VC.opendb
-
-# Visual Studio profiler
+*.opt
+*.plg
+*.log
+*.sln
 *.psess
 *.vsp
 *.vspx
 *.sap
-
-# ReSharper is a .NET coding add-in
-_ReSharper*/
+*.[Cc]ache
+*.VisualState.xml
+*.TestResult.xml
 *.[Rr]e[Ss]harper
 *.DotSettings.user
-
-# DotCover is a Code Coverage Tool
-*.dotCover
-
-# NuGet Packages
-*.nupkg
-
-# Microsoft Azure Emulator
-ecf/
-rcf/
-
-# Windows Store app package directories and files
-AppPackages/
-BundleArtifacts/
-Package.StoreAssociation.xml
-_pkginfo.txt
-
-# Visual Studio cache files
-# files ending in .cache can be ignored
-*.[Cc]ache
-# but keep track of directories ending in .cache
-!*.[Cc]ache/
-
-# SQL Server files
-*.mdf
-*.ldf
-
-# Business Intelligence projects
 *.rdl.data
 *.bim.layout
 *.bim_*.settings
-
-# Microsoft Fakes
-FakesAssemblies/
-
-# Visual Studio 6 build log
-*.plg
-
-# Visual Studio 6 workspace options file
-*.opt
-
-# JetBrains Rider
-.idea/
+*.dotCover
+*.nupkg
 *.sln.iml
 
-# git
-*.rej
-*.orig
-*.git
+_pkginfo.txt
+[Pp]ackage.StoreAssociation.xml
 
-# WinMerge
-*.bak
+[Bb]uild[Ll]og.*
+_ReSharper*/
 
-# Rider
-*.sln.DotSettings.user
-*.csproj.DotSettings
+.git/
+.vs/
+.idea/
+.gradle/
+.consulo/
+
+# 按照字母顺序排列
+[Aa]ppPackages/
+[Bb]in/
+[Bb]ld/
+[Bb]undleArtifacts/
+[Bb]uild/
+[Bb]uilds/
+[Bb]uildOutput/
+[Dd]ebug/
+[Dd]ebugPublic/
+[Ee]cf/
+[Ff]akesAssemblies/
+[Tt]emp/
+[Tt]est[Rr]esult*/
+[Ii]pch/
+[Rr]cf/
+[Rr]elease/
+[Rr]eleases/
+[Pp]ackages/
+[Oo]bj/
+[Oo]ut/
+[Ll]ogs/
+[Ll]og/
+[Xx]64/
+[Xx]86/

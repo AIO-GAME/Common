@@ -3,7 +3,7 @@ on:
     branches:
       - main
 
-name: Generate a list of contributors
+name: 🧪 CI Generate a list of contributors
 
 jobs:
   contrib-readme-en-job:
@@ -15,7 +15,7 @@ jobs:
         with:
           image_size: 64
           readme_path: .github/README.md
-          use_username: true 
+          use_username: true
           commit_message: "🤖 [contrib-readme-action] : updated readme"
           committer_username: "Action Contrib Readme"
           committer_email: "xinansky99@gmail.com"
