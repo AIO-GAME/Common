@@ -1,39 +1,35 @@
-# Copyright (C) Markus Franz Xaver Johannes Oberhumer
+name: 🧪 CI Greetings
 
-# see https://docs.github.com/en/actions/managing-issues-and-pull-requests/closing-inactive-issues
-# see https://github.com/actions/stale
+on: [ pull_request_target, issues ]
 
-# Automatically closing issues is far from perfect, but then we only
-# have limited resources and this approach favors issues that people
-# actually care about.
-#
-# also see:
-#   "Should I Stale or Should I Close? An Analysis of a Bot that Closes
-#    Abandoned Issues and Pull Request".
-#   https://igorwiese.com/images/papers/Paper_BotSE_19.pdf
-
-name: 🧪 GitHub - Close stale issues
-on:
-  schedule: [ cron: "50 0 * * 1" ] # run weekly Monday 00:50 UTC
-  workflow_dispatch:
 jobs:
-  job-close-stale-issues:
-    if: github.repository_owner == 'upx' && github.repository == 'upx/upx'
-    name: Close stale issues
+  greeting:
     runs-on: ubuntu-latest
     permissions:
       issues: write
       pull-requests: write
     steps:
-      - uses: actions/stale@v9
+      - uses: actions/first-interaction@v1
         with:
-          operations-per-run: 300
-          exempt-all-milestones: true
-          exempt-issue-labels: 'blocker,bug,enhancement,help wanted,regression'
-          days-before-stale: 90
-          days-before-close: 30
-          stale-issue-message: 'This issue is stale because it has been open for 90 days with no activity. Please remove the stale label or add a comment or this issue will be closed in 30 days.'
-          stale-pr-message: 'This PR is stale because it has been open for 90 days with no activity. Please remove the stale label or add a comment or this PR will be closed in 30 days.'
-          close-issue-message: 'This issue was closed because it has been stalled for 30 days with no activity. Please feel free to reopen.'
-          close-pr-message: 'This PR was closed because it has been stalled for 30 days with no activity. Please feel free to reopen.'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+          issue-message: "Hello @${{ github.actor }} , thank you for submitting an issue!"
+          pr-message: "Hello @${{ github.actor }} , thank you submitting a pull request!"
+          issuesOpened: |
+            ### English
+            👋 @{{ author }} Thank you for raising an issue.
+            We will will investigate into the matter and get back to you as soon as possible.
+            Please make sure you have given us as much context as possible.
+            ### 中文
+            👋 @{{ author }} 感谢您提出问题。
+            我们将调查此问题并尽快回复您。
+            请确保您尽可能提供尽可能多的上下文。
+          
+          pullRequestOpened: |
+            ### English
+            👋 @{{ author }}
+            Thank you for raising your pull request.
+            Please make sure you have followed our contributing guidelines. We will review it as soon as possible.
+            ### 中文
+            👋 @{{ author }}
+            感谢您提出拉取请求。
+            请确保您已遵循我们的贡献准则。我们将尽快审查它。

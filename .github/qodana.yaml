@@ -6,7 +6,12 @@ version: "1.0"
 linter: jetbrains/qodana-dotnet:2023.3
 include:
   - name: CheckDependencyLicenses
-    
+    paths:
+      - "Editor"
+      - "Editor.GUI.CLI"
+      - "Runtime"
+      - "Plugins"
+
 #Specify IDE code to run analysis without container (Applied in CI/CD pipeline)
 ide: QDNET
 
@@ -22,7 +27,8 @@ profile:
 exclude:
   - name: All
     paths:
-      - "Resources/Editor"
+      - "Tools~"
+      - "Resources"
       - "*.meta"
       - "*.asmdef"
       - "*.tt"

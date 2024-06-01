@@ -9,7 +9,6 @@ on:
       - '*.*.*'
     branches: # Specify your branches here
       - main
-      - master
       - '1.*'
 jobs:
   qodana:
