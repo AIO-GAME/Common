@@ -1,4 +1,4 @@
-﻿#region
+﻿#region namespace
 
 using System.Collections;
 using AIO.UEngine;
@@ -21,10 +21,7 @@ namespace AIO.UEditor
         /// <param name="value">Vector2值</param>
         /// <param name="format">格式</param>
         /// <returns>Copy字符串</returns>
-        public static string ToCopyString(this Vector2 value, string format)
-        {
-            return $"Vector2({value.x.ToString(format)}f,{value.y.ToString(format)}f)";
-        }
+        public static string ToCopyString(this Vector2 value, string format) { return $"Vector2({value.x.ToString(format)}f,{value.y.ToString(format)}f)"; }
 
         /// <summary>
         /// Vector3转换为标准Copy字符串
@@ -54,20 +51,14 @@ namespace AIO.UEditor
         /// </summary>
         /// <param name="value">Vector2Int值</param>
         /// <returns>Copy字符串</returns>
-        public static string ToCopyString(this Vector2Int value)
-        {
-            return $"Vector2Int({value.x},{value.y})";
-        }
+        public static string ToCopyString(this Vector2Int value) { return $"Vector2Int({value.x},{value.y})"; }
 
         /// <summary>
         /// Vector3Int转换为标准Copy字符串
         /// </summary>
         /// <param name="value">Vector3Int值</param>
         /// <returns>Copy字符串</returns>
-        public static string ToCopyString(this Vector3Int value)
-        {
-            return $"Vector3Int({value.x},{value.y},{value.z})";
-        }
+        public static string ToCopyString(this Vector3Int value) { return $"Vector3Int({value.x},{value.y},{value.z})"; }
 
         /// <summary>
         /// Quaternion转换为标准Copy字符串

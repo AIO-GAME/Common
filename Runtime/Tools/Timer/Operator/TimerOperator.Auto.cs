@@ -37,7 +37,7 @@
             AllCount = AllCount - LoopList.Count - DoneList.Count;
             TimerSystem.AddLoop(LoopList);
 
-            foreach (var executor in DoneList) Runner.Update(executor.Execute);
+            foreach (var executor in DoneList) Runner.PushUpdate(executor.Execute);
             DoneList.Free();
 
             return FinishNumber;

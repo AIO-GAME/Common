@@ -809,6 +809,11 @@
         <Compile Include="Script\Interface\Write\IWriteUInt16.cs"/>
         <Compile Include="Script\Interface\Write\IWriteUInt32.cs"/>
         <Compile Include="Script\Interface\Write\IWriteUInt64.cs"/>
+        <Compile Include="Script\Tools\Action\Action.Generated.cs">
+          <AutoGen>True</AutoGen>
+          <DesignTime>True</DesignTime>
+          <DependentUpon>Action.Generated.tt</DependentUpon>
+        </Compile>
         <Compile Include="Script\Tools\Array\DisplayList.cs"/>
         <Compile Include="Script\Tools\Array\PageDictionary.cs"/>
         <Compile Include="Script\Tools\Array\PageList.cs"/>
@@ -1129,6 +1134,10 @@
         </Content>
         <Content Include="Script\Helper\Net\FTP\FTP.md"/>
         <Content Include="Script\Helper\Net\Http\HTTP.md"/>
+        <Content Include="Script\Tools\Action\Action.Generated.tt">
+          <Generator>TextTemplatingFileGenerator</Generator>
+          <LastGenOutput>Action.Generated.cs</LastGenOutput>
+        </Content>
         <Content Include="Script\Tools\Tuple\Tuple.Generated.tt">
             <Generator>TextTemplatingFileGenerator</Generator>
             <LastGenOutput>Tuple.Generated.cs</LastGenOutput>

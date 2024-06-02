@@ -13016,6 +13016,371 @@
             写入指定数据类型
             </summary>
         </member>
+        <member name="T:AIO.ActionAsync">
+            <summary>
+            Action to enumerator or async task.
+            </summary>
+        </member>
+        <member name="M:AIO.ActionAsync.#ctor(System.Action)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync.Reset">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.ActionAsync.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync.GetAwaiter">
+            <summary>
+            Get the awaiter.
+            </summary>
+        </member>
+        <member name="M:AIO.ActionAsync.Create(System.Action)">
+            <summary>
+            Create a new instance of the <see cref="T:AIO.ActionAsync"/> class.
+            </summary>
+            <param name="action">The action to invoke.</param>
+            <returns>A new instance of the <see cref="T:AIO.ActionAsync`1"/> class.</returns>
+        </member>
+        <member name="M:AIO.ActionAsync.Create``1(System.Action{``0},``0)">
+            <summary>
+            Create a new instance of the <see cref="T:AIO.ActionAsync`1"/> class.
+            </summary>
+            <typeparam name="T1">The type of the 1th parameter.</typeparam>
+            <param name="action">The action to invoke.</param>
+            <returns>A new instance of the <see cref="T:AIO.ActionAsync`1"/> class.</returns>
+        </member>
+        <member name="M:AIO.ActionAsync.Create``2(System.Action{``0,``1},``0,``1)">
+            <summary>
+            Create a new instance of the <see cref="T:AIO.ActionAsync`2"/> class.
+            </summary>
+            <typeparam name="T1">The type of the 1th parameter.</typeparam>
+            <typeparam name="T2">The type of the 2th parameter.</typeparam>
+            <param name="action">The action to invoke.</param>
+            <returns>A new instance of the <see cref="T:AIO.ActionAsync`1"/> class.</returns>
+        </member>
+        <member name="M:AIO.ActionAsync.Create``3(System.Action{``0,``1,``2},``0,``1,``2)">
+            <summary>
+            Create a new instance of the <see cref="T:AIO.ActionAsync`3"/> class.
+            </summary>
+            <typeparam name="T1">The type of the 1th parameter.</typeparam>
+            <typeparam name="T2">The type of the 2th parameter.</typeparam>
+            <typeparam name="T3">The type of the 3th parameter.</typeparam>
+            <param name="action">The action to invoke.</param>
+            <returns>A new instance of the <see cref="T:AIO.ActionAsync`1"/> class.</returns>
+        </member>
+        <member name="M:AIO.ActionAsync.Create``4(System.Action{``0,``1,``2,``3},``0,``1,``2,``3)">
+            <summary>
+            Create a new instance of the <see cref="T:AIO.ActionAsync`4"/> class.
+            </summary>
+            <typeparam name="T1">The type of the 1th parameter.</typeparam>
+            <typeparam name="T2">The type of the 2th parameter.</typeparam>
+            <typeparam name="T3">The type of the 3th parameter.</typeparam>
+            <typeparam name="T4">The type of the 4th parameter.</typeparam>
+            <param name="action">The action to invoke.</param>
+            <returns>A new instance of the <see cref="T:AIO.ActionAsync`1"/> class.</returns>
+        </member>
+        <member name="M:AIO.ActionAsync.Create``5(System.Action{``0,``1,``2,``3,``4},``0,``1,``2,``3,``4)">
+            <summary>
+            Create a new instance of the <see cref="T:AIO.ActionAsync`5"/> class.
+            </summary>
+            <typeparam name="T1">The type of the 1th parameter.</typeparam>
+            <typeparam name="T2">The type of the 2th parameter.</typeparam>
+            <typeparam name="T3">The type of the 3th parameter.</typeparam>
+            <typeparam name="T4">The type of the 4th parameter.</typeparam>
+            <typeparam name="T5">The type of the 5th parameter.</typeparam>
+            <param name="action">The action to invoke.</param>
+            <returns>A new instance of the <see cref="T:AIO.ActionAsync`1"/> class.</returns>
+        </member>
+        <member name="M:AIO.ActionAsync.Create``6(System.Action{``0,``1,``2,``3,``4,``5},``0,``1,``2,``3,``4,``5)">
+            <summary>
+            Create a new instance of the <see cref="T:AIO.ActionAsync`6"/> class.
+            </summary>
+            <typeparam name="T1">The type of the 1th parameter.</typeparam>
+            <typeparam name="T2">The type of the 2th parameter.</typeparam>
+            <typeparam name="T3">The type of the 3th parameter.</typeparam>
+            <typeparam name="T4">The type of the 4th parameter.</typeparam>
+            <typeparam name="T5">The type of the 5th parameter.</typeparam>
+            <typeparam name="T6">The type of the 6th parameter.</typeparam>
+            <param name="action">The action to invoke.</param>
+            <returns>A new instance of the <see cref="T:AIO.ActionAsync`1"/> class.</returns>
+        </member>
+        <member name="M:AIO.ActionAsync.Create``7(System.Action{``0,``1,``2,``3,``4,``5,``6},``0,``1,``2,``3,``4,``5,``6)">
+            <summary>
+            Create a new instance of the <see cref="T:AIO.ActionAsync`7"/> class.
+            </summary>
+            <typeparam name="T1">The type of the 1th parameter.</typeparam>
+            <typeparam name="T2">The type of the 2th parameter.</typeparam>
+            <typeparam name="T3">The type of the 3th parameter.</typeparam>
+            <typeparam name="T4">The type of the 4th parameter.</typeparam>
+            <typeparam name="T5">The type of the 5th parameter.</typeparam>
+            <typeparam name="T6">The type of the 6th parameter.</typeparam>
+            <typeparam name="T7">The type of the 7th parameter.</typeparam>
+            <param name="action">The action to invoke.</param>
+            <returns>A new instance of the <see cref="T:AIO.ActionAsync`1"/> class.</returns>
+        </member>
+        <member name="M:AIO.ActionAsync.Create``8(System.Action{``0,``1,``2,``3,``4,``5,``6,``7},``0,``1,``2,``3,``4,``5,``6,``7)">
+            <summary>
+            Create a new instance of the <see cref="T:AIO.ActionAsync`8"/> class.
+            </summary>
+            <typeparam name="T1">The type of the 1th parameter.</typeparam>
+            <typeparam name="T2">The type of the 2th parameter.</typeparam>
+            <typeparam name="T3">The type of the 3th parameter.</typeparam>
+            <typeparam name="T4">The type of the 4th parameter.</typeparam>
+            <typeparam name="T5">The type of the 5th parameter.</typeparam>
+            <typeparam name="T6">The type of the 6th parameter.</typeparam>
+            <typeparam name="T7">The type of the 7th parameter.</typeparam>
+            <typeparam name="T8">The type of the 8th parameter.</typeparam>
+            <param name="action">The action to invoke.</param>
+            <returns>A new instance of the <see cref="T:AIO.ActionAsync`1"/> class.</returns>
+        </member>
+        <member name="M:AIO.ActionAsync.Create``9(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8},``0,``1,``2,``3,``4,``5,``6,``7,``8)">
+            <summary>
+            Create a new instance of the <see cref="T:AIO.ActionAsync`9"/> class.
+            </summary>
+            <typeparam name="T1">The type of the 1th parameter.</typeparam>
+            <typeparam name="T2">The type of the 2th parameter.</typeparam>
+            <typeparam name="T3">The type of the 3th parameter.</typeparam>
+            <typeparam name="T4">The type of the 4th parameter.</typeparam>
+            <typeparam name="T5">The type of the 5th parameter.</typeparam>
+            <typeparam name="T6">The type of the 6th parameter.</typeparam>
+            <typeparam name="T7">The type of the 7th parameter.</typeparam>
+            <typeparam name="T8">The type of the 8th parameter.</typeparam>
+            <typeparam name="T9">The type of the 9th parameter.</typeparam>
+            <param name="action">The action to invoke.</param>
+            <returns>A new instance of the <see cref="T:AIO.ActionAsync`1"/> class.</returns>
+        </member>
+        <member name="T:AIO.ActionAsync`1">
+            <summary>
+            Action to enumerator or async task.
+            </summary>
+        </member>
+        <member name="M:AIO.ActionAsync`1.#ctor(System.Action{`0},`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`1.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`1.Reset">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.ActionAsync`1.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`1.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`1.GetAwaiter">
+            <summary>
+            Get the awaiter.
+            </summary>
+        </member>
+        <member name="T:AIO.ActionAsync`2">
+            <summary>
+            Action to enumerator or async task.
+            </summary>
+        </member>
+        <member name="M:AIO.ActionAsync`2.#ctor(System.Action{`0,`1},`0,`1)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`2.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`2.Reset">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.ActionAsync`2.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`2.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`2.GetAwaiter">
+            <summary>
+            Get the awaiter.
+            </summary>
+        </member>
+        <member name="T:AIO.ActionAsync`3">
+            <summary>
+            Action to enumerator or async task.
+            </summary>
+        </member>
+        <member name="M:AIO.ActionAsync`3.#ctor(System.Action{`0,`1,`2},`0,`1,`2)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`3.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`3.Reset">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.ActionAsync`3.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`3.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`3.GetAwaiter">
+            <summary>
+            Get the awaiter.
+            </summary>
+        </member>
+        <member name="T:AIO.ActionAsync`4">
+            <summary>
+            Action to enumerator or async task.
+            </summary>
+        </member>
+        <member name="M:AIO.ActionAsync`4.#ctor(System.Action{`0,`1,`2,`3},`0,`1,`2,`3)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`4.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`4.Reset">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.ActionAsync`4.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`4.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`4.GetAwaiter">
+            <summary>
+            Get the awaiter.
+            </summary>
+        </member>
+        <member name="T:AIO.ActionAsync`5">
+            <summary>
+            Action to enumerator or async task.
+            </summary>
+        </member>
+        <member name="M:AIO.ActionAsync`5.#ctor(System.Action{`0,`1,`2,`3,`4},`0,`1,`2,`3,`4)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`5.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`5.Reset">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.ActionAsync`5.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`5.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`5.GetAwaiter">
+            <summary>
+            Get the awaiter.
+            </summary>
+        </member>
+        <member name="T:AIO.ActionAsync`6">
+            <summary>
+            Action to enumerator or async task.
+            </summary>
+        </member>
+        <member name="M:AIO.ActionAsync`6.#ctor(System.Action{`0,`1,`2,`3,`4,`5},`0,`1,`2,`3,`4,`5)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`6.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`6.Reset">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.ActionAsync`6.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`6.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`6.GetAwaiter">
+            <summary>
+            Get the awaiter.
+            </summary>
+        </member>
+        <member name="T:AIO.ActionAsync`7">
+            <summary>
+            Action to enumerator or async task.
+            </summary>
+        </member>
+        <member name="M:AIO.ActionAsync`7.#ctor(System.Action{`0,`1,`2,`3,`4,`5,`6},`0,`1,`2,`3,`4,`5,`6)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`7.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`7.Reset">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.ActionAsync`7.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`7.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`7.GetAwaiter">
+            <summary>
+            Get the awaiter.
+            </summary>
+        </member>
+        <member name="T:AIO.ActionAsync`8">
+            <summary>
+            Action to enumerator or async task.
+            </summary>
+        </member>
+        <member name="M:AIO.ActionAsync`8.#ctor(System.Action{`0,`1,`2,`3,`4,`5,`6,`7},`0,`1,`2,`3,`4,`5,`6,`7)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`8.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`8.Reset">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.ActionAsync`8.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`8.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`8.GetAwaiter">
+            <summary>
+            Get the awaiter.
+            </summary>
+        </member>
+        <member name="T:AIO.ActionAsync`9">
+            <summary>
+            Action to enumerator or async task.
+            </summary>
+        </member>
+        <member name="M:AIO.ActionAsync`9.#ctor(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8},`0,`1,`2,`3,`4,`5,`6,`7,`8)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`9.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`9.Reset">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.ActionAsync`9.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`9.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`9.GetAwaiter">
+            <summary>
+            Get the awaiter.
+            </summary>
+        </member>
         <member name="T:AIO.DisplayList`1">
             <summary>
             显示列表

@@ -149,8 +149,12 @@ namespace AIO
             private readonly TimeSpan          _timespan;
             private readonly FileSystemWatcher _watcher;
 
-            public FileCacheEntry(FileCache cache, string prefix, string path, string filter, InsertHandler handler,
-                                  TimeSpan  timespan)
+            public FileCacheEntry(FileCache     cache,
+                                  string        prefix,
+                                  string        path,
+                                  string        filter,
+                                  InsertHandler handler,
+                                  TimeSpan      timespan)
             {
                 _prefix   = prefix;
                 _path     = path;
@@ -178,10 +182,7 @@ namespace AIO
                 _watcher.EnableRaisingEvents   =  true;
             }
 
-            public void StopWatcher()
-            {
-                _watcher.Dispose();
-            }
+            public void StopWatcher() { _watcher.Dispose(); }
 
             private static bool IsDirectory(string path)
             {
@@ -201,7 +202,7 @@ namespace AIO
 
             private static void OnCreated(object sender, FileSystemEventArgs e, FileCache cache, FileCacheEntry entry)
             {
-                var key = e.FullPath.Replace('\\', Path.PathSeparator).Replace(string.Concat(entry._path, "/"), entry._prefix);
+                var key  = e.FullPath.Replace('\\', Path.PathSeparator).Replace(string.Concat(entry._path, "/"), entry._prefix);
                 var file = e.FullPath.Replace('\\', Path.PathSeparator);
 
                 // Skip missing files
@@ -219,7 +220,7 @@ namespace AIO
                 if (e.ChangeType != WatcherChangeTypes.Changed)
                     return;
 
-                var key = e.FullPath.Replace('\\', Path.PathSeparator).Replace(string.Concat(entry._path, "/"), entry._prefix);
+                var key  = e.FullPath.Replace('\\', Path.PathSeparator).Replace(string.Concat(entry._path, "/"), entry._prefix);
                 var file = e.FullPath.Replace('\\', Path.PathSeparator);
 
                 // Skip missing files
@@ -234,7 +235,7 @@ namespace AIO
 
             private static void OnDeleted(object sender, FileSystemEventArgs e, FileCache cache, FileCacheEntry entry)
             {
-                var key = e.FullPath.Replace('\\', Path.PathSeparator).Replace(string.Concat(entry._path, "/"), entry._prefix);
+                var key  = e.FullPath.Replace('\\', Path.PathSeparator).Replace(string.Concat(entry._path, "/"), entry._prefix);
                 var file = e.FullPath.Replace('\\', Path.PathSeparator);
 
                 cache.RemoveFileInternal(entry._path, key);
@@ -242,9 +243,9 @@ namespace AIO
 
             private static void OnRenamed(object sender, RenamedEventArgs e, FileCache cache, FileCacheEntry entry)
             {
-                var oldKey = e.OldFullPath.Replace('\\', Path.PathSeparator).Replace(string.Concat(entry._path, "/"), entry._prefix);
+                var oldKey  = e.OldFullPath.Replace('\\', Path.PathSeparator).Replace(string.Concat(entry._path, "/"), entry._prefix);
                 var oldFile = e.OldFullPath.Replace('\\', Path.PathSeparator);
-                var newKey = e.FullPath.Replace('\\', Path.PathSeparator).Replace(string.Concat(entry._path, "/"), entry._prefix);
+                var newKey  = e.FullPath.Replace('\\', Path.PathSeparator).Replace(string.Concat(entry._path, "/"), entry._prefix);
                 var newFile = e.FullPath.Replace('\\', Path.PathSeparator);
 
                 // Skip missing files
@@ -295,8 +296,11 @@ namespace AIO
         /// <param name="timeout">Cache timeout (default is 0 - no timeout)</param>
         /// <param name="handler">Cache insert handler (default is 'return cache.Add(key, value, timeout)')</param>
         /// <returns>'true' if the cache path was setup, 'false' if failed to setup the cache path</returns>
-        public bool InsertPath(string   path,                     string        prefix  = "/", string filter = "*.*",
-                               TimeSpan timeout = new TimeSpan(), InsertHandler handler = null)
+        public bool InsertPath(string        path,
+                               string        prefix  = "/",
+                               string        filter  = "*.*",
+                               TimeSpan      timeout = new TimeSpan(),
+                               InsertHandler handler = null)
         {
             handler ??= (cache, key, value, timespan) => cache.Add(key, value, timespan);
 
@@ -346,10 +350,7 @@ namespace AIO
         /// </summary>
         /// <param name="path">Path to remove</param>
         /// <returns>'true' if the cache path was removed, 'false' if the given path was not found</returns>
-        public bool RemovePath(string path)
-        {
-            return RemovePathInternal(path);
-        }
+        public bool RemovePath(string path) { return RemovePathInternal(path); }
 
         /// <summary>
         /// Clear the memory cache
@@ -413,7 +414,10 @@ namespace AIO
             }
         }
 
-        private bool InsertPathInternal(string        root, string path, string prefix, TimeSpan timeout,
+        private bool InsertPathInternal(string        root,
+                                        string        path,
+                                        string        prefix,
+                                        TimeSpan      timeout,
                                         InsertHandler handler)
         {
             try

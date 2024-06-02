@@ -1,5 +1,9 @@
-﻿using System.Linq;
+﻿#region namespace
+
+using System.Linq;
 using UnityEditor.IMGUI.Controls;
+
+#endregion
 
 namespace AIO.UEditor
 {

@@ -1,6 +1,6 @@
 #if UNITY_2021_1_OR_NEWER
 
-#region
+#region namespace
 
 #if !UNITY_2023_1_OR_NEWER
 using System.Runtime.CompilerServices;

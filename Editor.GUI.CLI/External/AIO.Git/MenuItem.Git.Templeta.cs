@@ -1,8 +1,9 @@
-﻿#region
+﻿#region namespace
 
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 using PackageInfo = UnityEditor.PackageManager.PackageInfo;
@@ -286,10 +287,10 @@ namespace AIO.UEditor
             var bakDir = new DirectoryInfo(OutPath);
             if (bakDir.Exists)
             {
-                foreach (var file in bakDir.GetFiles("*.Designer.cs", SearchOption.TopDirectoryOnly))
+                foreach (var file in bakDir.GetFiles("*.Designer.cs", SearchOption.TopDirectoryOnly)
+                                           .Where(file => !file.Name.Contains(".meta"))
+                                           .Where(file => !file.Name.StartsWith("GitUnityProject")))
                 {
-                    if (file.Name.Contains(".meta")) continue;
-                    if (file.Name.StartsWith("GitUnityProject")) continue;
                     if (savaDir.ContainsKey(file.Name))
                     {
                         var old = File.ReadAllText(file.FullName, Encoding.UTF8);
@@ -311,33 +312,29 @@ namespace AIO.UEditor
                 bakDir.Create();
             }
 
-            if (savaDir.Count > 0)
+            if (savaDir.Count <= 0) return change;
+            var stringBuilder = new StringBuilder();
+            foreach (var item in savaDir)
             {
-                var stringBuilder = new StringBuilder();
-                foreach (var item in savaDir)
-                {
-                    File.WriteAllText(Path.Combine(OutPath, item.Key), item.Value, Encoding.UTF8);
-                    // 判断是否有 {info.name}.cs 文件 如果有则不生成 如果没有 则生成基础模版
-                    var file = Path.Combine(OutPath, item.Key.Replace(".Designer.cs", ".cs"));
-                    if (File.Exists(file)) continue;
-                    var filename  = Path.GetFileNameWithoutExtension(file);
-                    var classname = string.Concat("Git_", filename.Replace('-', '_').Replace('.', '_')).ToUpper();
-                    stringBuilder.Clear();
-                    stringBuilder.AppendLine("namespace AIO.UEditor");
-                    stringBuilder.AppendLine("{");
-                    stringBuilder.AppendLine(
-                                             "    [ScriptIcon(IconResource = \"Editor/Icon/App/Git/git-tag-style-1\")]");
-                    stringBuilder.AppendLine($"    internal static partial class {classname}");
-                    stringBuilder.AppendLine("    {");
-                    stringBuilder.AppendLine("    }");
-                    stringBuilder.AppendLine("}");
-                    File.WriteAllText(file, stringBuilder.ToString(), Encoding.UTF8);
-                }
-
-                change = true;
+                File.WriteAllText(Path.Combine(OutPath, item.Key), item.Value, Encoding.UTF8);
+                // 判断是否有 {info.name}.cs 文件 如果有则不生成 如果没有 则生成基础模版
+                var file = Path.Combine(OutPath, item.Key.Replace(".Designer.cs", ".cs"));
+                if (File.Exists(file)) continue;
+                var filename  = Path.GetFileNameWithoutExtension(file);
+                var classname = string.Concat("Git_", filename.Replace('-', '_').Replace('.', '_')).ToUpper();
+                stringBuilder.Clear();
+                stringBuilder.AppendLine("namespace AIO.UEditor");
+                stringBuilder.AppendLine("{");
+                stringBuilder.AppendLine(
+                                         "    [ScriptIcon(IconResource = \"Editor/Icon/App/Git/git-tag-style-1\")]");
+                stringBuilder.AppendLine($"    internal static partial class {classname}");
+                stringBuilder.AppendLine("    {");
+                stringBuilder.AppendLine("    }");
+                stringBuilder.AppendLine("}");
+                File.WriteAllText(file, stringBuilder.ToString(), Encoding.UTF8);
             }
 
-            return change;
+            return true;
         }
 
         public static bool CreateProject()

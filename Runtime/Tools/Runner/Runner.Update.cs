@@ -1,17 +1,9 @@
-﻿#define ENABLE_UPDATE_FUNCTION_CALLBACK
+﻿#region namespace
 
-
+using System.Collections;
 #if SUPPORT_UNITASK
 using Cysharp.Threading.Tasks;
 #endif
-
-#if (ENABLE_UPDATE_FUNCTION_CALLBACK)
-
-#region
-
-using System;
-using System.Collections;
-using System.Collections.Generic;
 
 #endregion
 
@@ -19,214 +11,52 @@ namespace AIO
 {
     partial class Runner
     {
-        /// <summary>
-        /// Update等待队列
-        /// </summary>
-        [ContextStatic]
-        private static readonly Queue<Delegate> actionQueuesUpdateFunc = new Queue<Delegate>();
-
-        /// <summary>
-        /// 执行状态
-        /// </summary>
-        [ContextStatic]
-        private static volatile bool noActionQueueToExecuteUpdateFunc = true;
-
-        /// <summary>
-        /// 在Update中执行
-        /// </summary>
-        public static void Update(Action action)
-        {
-            if (action is null) throw new ArgumentNullException(nameof(action));
-            lock (actionQueuesUpdateFunc)
-            {
-                actionQueuesUpdateFunc.Enqueue(action);
-                noActionQueueToExecuteUpdateFunc = false;
-            }
-        }
-
-        /// <summary>
-        /// 在Update中执行
-        /// </summary>
-        public static void Update(params Delegate[] delegates)
-        {
-            if (delegates.Length == 0) return;
-            lock (actionQueuesUpdateFunc)
-            {
-                actionQueuesUpdateFunc.Enqueue(delegates.Length == 1 ? delegates[0] : Delegate.Combine(delegates));
-                noActionQueueToExecuteUpdateFunc = false;
-            }
-        }
-
-        /// <summary>
-        /// 在Update中执行
-        /// </summary>
-        public static void Update(Delegate action)
-        {
-            if (action is null) throw new ArgumentNullException(nameof(action));
-            lock (actionQueuesUpdateFunc)
-            {
-                actionQueuesUpdateFunc.Enqueue(action);
-                noActionQueueToExecuteUpdateFunc = false;
-            }
-        }
-
-        /// <summary>
-        /// 在Update中执行
-        /// </summary>
-        public static void Update(Action action1, Action action2)
-        {
-            if (action1 is null) throw new ArgumentNullException(nameof(action1));
-            if (action2 is null) throw new ArgumentNullException(nameof(action2));
-            lock (actionQueuesUpdateFunc)
-            {
-                actionQueuesUpdateFunc.Enqueue(Delegate.Combine(action1, action2));
-                noActionQueueToExecuteUpdateFunc = false;
-            }
-        }
-
-        /// <summary>
-        /// 在Update中执行
-        /// </summary>
-        public static void Update(params Action[] actions)
-        {
-            if (actions.Length == 0) return;
-            lock (actionQueuesUpdateFunc)
-            {
-                foreach (var action in actions) actionQueuesUpdateFunc.Enqueue(action);
-                noActionQueueToExecuteUpdateFunc = false;
-            }
-        }
-
-        /// <summary>
-        /// 在Update中执行
-        /// </summary>
-        public static void Update(IList<Action> actions)
-        {
-            if (actions is null) throw new ArgumentNullException(nameof(actions));
-            if (actions.Count == 0) return;
-            lock (actionQueuesUpdateFunc)
-            {
-                for (var index = 0; index < actions.Count; index++) actionQueuesUpdateFunc.Enqueue(actions[index]);
-                noActionQueueToExecuteUpdateFunc = false;
-            }
-        }
-
         #region Nested type: ThreadMono
 
-        private partial class ThreadMono
+        partial class ThreadMono
         {
+            private bool mIsUpdateExe;
+
+            private IEnumerator UpdateAction()
+            {
+                mIsUpdateExe = true;
+                while (QueueCopiedUpdate.Count > 0)
+                {
+                    if (!QueueCopiedUpdate.TryDequeue(out var action)) continue;
+                    action?.DynamicInvoke();
+                }
+
+                mIsUpdateExe = false;
+                yield break;
+            }
+
+            private void UpdateQueue()
+            {
+                QueuesDelegateUpdateState = true;      //并开启执行状态
+                while (QueuesDelegateUpdate.Count > 0) //将等待队列中的操作 复制到执行队列中
+                {
+                    if (!QueuesDelegateUpdate.TryDequeue(out var action)) continue;
+                    QueueCopiedUpdate.Enqueue(action);
+                }
+
+                QueuesDelegateUpdateState = false; //并开启执行状态
+            }
+
             public void Update()
             {
-                //判断当前是否有操作正在执行
-                if (noActionQueueToExecuteUpdateFunc) return;
-
-                //清空队列中 残留的操作函数
-                lock (actionQueuesUpdateFunc)
+                if (!QueuesCoroutineState && !QueuesCoroutine.IsEmpty) UpdateCoroutine();
+                if (!QueuesDelegateUpdateState && !QueuesDelegateUpdate.IsEmpty) UpdateQueue();
+                if (!mIsUpdateExe && !QueueCopiedUpdate.IsEmpty)
                 {
-                    if (actionQueuesUpdateFunc.Count == 0) return;
-                    noActionQueueToExecuteUpdateFunc = true; //并开启执行状态
-                    lock (mActionCopiedQueueUpdateFunc)
-                    {
-                        mActionCopiedQueueUpdateFunc.AddRange(actionQueuesUpdateFunc); //将等待队列中的操作 复制到执行队列中
-                        actionQueuesUpdateFunc.Clear();
-                        var tempArray = Delegate.Combine(mActionCopiedQueueUpdateFunc.ToArray());
-                        mActionCopiedQueueUpdateFunc.Clear();
 #if SUPPORT_UNITASK
-                        Action().ToUniTask().Preserve().SuppressCancellationThrow();
+                    UpdateAction().ToUniTask().Preserve().SuppressCancellationThrow();
 #else
-                        StartCoroutine(Action());
+                    StartCoroutine(UpdateAction());
 #endif
-                        return;
-
-                        IEnumerator Action()
-                        {
-                            tempArray?.DynamicInvoke();
-                            tempArray = null;
-                            yield break;
-                        }
-                    }
                 }
             }
         }
 
         #endregion
-
-        #region 协程
-
-        /// <summary>
-        /// 执行协程
-        /// </summary>
-        public static void Update(IEnumerator coroutine)
-        {
-#if SUPPORT_UNITASK
-            coroutine.ToUniTask().Preserve().SuppressCancellationThrow();
-#else
-            instance.StartCoroutine(coroutine);
-#endif
-        }
-
-        /// <summary>
-        /// 执行协程
-        /// </summary>
-        public static void Update(Func<IEnumerator> coroutine)
-        {
-#if SUPPORT_UNITASK
-            coroutine.Invoke().ToUniTask().Preserve().SuppressCancellationThrow();
-#else
-            instance.StartCoroutine(coroutine?.Invoke());
-#endif
-        }
-
-        /// <summary>
-        /// 执行协程
-        /// </summary>
-        public static void Update(params Func<IEnumerator>[] coroutines)
-        {
-            if (coroutines.Length == 0) return;
-            foreach (var coroutine in coroutines)
-            {
-#if SUPPORT_UNITASK
-                coroutine.Invoke().ToUniTask().Preserve().SuppressCancellationThrow();
-#else
-                instance.StartCoroutine(coroutine?.Invoke());
-#endif
-            }
-        }
-
-        /// <summary>
-        /// 执行协程
-        /// </summary>
-        public static void Update(IList<Func<IEnumerator>> coroutines)
-        {
-            if (coroutines is null || coroutines.Count == 0) return;
-            for (var index = 0; index < coroutines.Count; index++)
-            {
-#if SUPPORT_UNITASK
-                coroutines[index]?.Invoke().ToUniTask().Preserve().SuppressCancellationThrow();
-#else
-                instance.StartCoroutine(coroutines[index]?.Invoke());
-#endif
-            }
-        }
-
-        /// <summary>
-        /// 执行协程
-        /// </summary>
-        public static void Update(params IEnumerator[] coroutines)
-        {
-            if (coroutines.Length == 0) return;
-            foreach (var coroutine in coroutines)
-            {
-#if SUPPORT_UNITASK
-                coroutine.ToUniTask().Preserve().SuppressCancellationThrow();
-#else
-                instance.StartCoroutine(coroutine);
-#endif
-            }
-        }
-
-        #endregion
     }
-
-#endif
 }

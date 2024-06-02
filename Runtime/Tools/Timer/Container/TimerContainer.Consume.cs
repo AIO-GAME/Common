@@ -128,7 +128,7 @@ namespace AIO
         {
             lock (list)
             {
-                foreach (var item in list) Runner.Update(item.Execute);
+                foreach (var item in list) Runner.PushUpdate(item.Execute);
                 list.Free();
             }
         }

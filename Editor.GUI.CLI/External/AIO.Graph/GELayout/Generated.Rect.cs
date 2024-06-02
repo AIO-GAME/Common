@@ -1,7 +1,7 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #pragma warning disable CS0109 //
 
-#region
+#region namespace
 
 using System;
 using UnityEditor;

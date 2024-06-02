@@ -1,7 +1,7 @@
 ﻿#region namespace
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using AIO.UEditor;
 using UnityEditor;
 using UnityEngine;
@@ -22,40 +22,62 @@ namespace AIO
     [Preserve]
     public static partial class Runner
     {
-        private static ThreadMono instance;
-
 #if UNITY_EDITOR
         /// <summary>
         /// [EDITOR] 是否运行时
         /// </summary>
-        public static bool IsRuntime { get; private set; }
-#endif
+        private static bool IsRuntime { get; set; }
 
-        /// <summary>
-        /// 是否允许线程
-        /// </summary>
-        public static bool IsAllowThread { get; private set; }
+        private static GameObject RunnerMainEditor;
 
-#if UNITY_EDITOR
-        [AInit(EInitAttrMode.Editor | EInitAttrMode.RuntimeBeforeSplashScreen, int.MaxValue)]
-        private static void Initialize()
+        [InitializeOnLoadMethod]
+        private static void EditorInitialize()
         {
+            EditorApplication.playModeStateChanged -= EditorPlayModeStateChanged;
+            EditorApplication.playModeStateChanged += EditorPlayModeStateChanged;
+        }
+
+        [AInit(EInitAttrMode.Editor)]
+        private static void InitializeEditor() { EditorPlayModeStateChanged(PlayModeStateChange.EnteredEditMode); }
+
+        [AInit(EInitAttrMode.RuntimeAfterAssembliesLoaded)]
+        private static void InitializeRuntime() { EditorPlayModeStateChanged(PlayModeStateChange.EnteredPlayMode); }
+
+        private static void EditorPlayModeStateChanged(PlayModeStateChange editor)
+        {
+            IsRuntime     = editor == PlayModeStateChange.EnteredPlayMode;
             IsAllowThread = true;
-            try
+            if (IsRuntime)
             {
-                IsRuntime = EditorApplication.isPlaying;
+                DataInitialize();
+                if (!RunnerMainRuntime)
+                {
+                    RunnerMainRuntime = new GameObject()
+                    {
+                        hideFlags = HideFlags.HideAndDontSave,
+                        name      = nameof(RunnerMainRuntime)
+                    };
+                }
+
+                if (!RunnerMainRuntime.TryGetComponent(out instance))
+                    instance = RunnerMainRuntime.AddComponent<ThreadMono>();
             }
-            catch (Exception)
+            else
             {
-                IsRuntime = false;
+                if (!RunnerMainEditor)
+                {
+                    RunnerMainEditor = new GameObject()
+                    {
+                        hideFlags = HideFlags.HideAndDontSave,
+                        name      = nameof(RunnerMainEditor)
+                    };
+                }
+
+                if (!RunnerMainEditor.TryGetComponent(out instance))
+                    instance = RunnerMainEditor.AddComponent<ThreadMono>();
             }
 
-            var obj = new GameObject //添加一个看不见的游戏物体到场景中
-            {
-                hideFlags = HideFlags.HideAndDontSave,
-                name      = IsRuntime ? "RunnerMainThreadExecuteRuntime" : "RunnerMainThreadExecuteEditor",
-            };
-            instance = obj.AddComponent<ThreadMono>();
+            if (!instance) throw new Exception("Runner Main Thread Execute instance is null");
 
             EditorApplication.quitting += Dispose;
             Application.quitting       += Dispose;
@@ -65,18 +87,14 @@ namespace AIO
 #if !UNITY_EDITOR
         static Runner()
         {
-            Initialize();
-        }
-
-        private static void Initialize()
-        {
-            if (instance != null) return;
+            DataInitialize();
             IsAllowThread = Application.platform != RuntimePlatform.WebGLPlayer;
-            var obj = new GameObject("RunnerMainThreadExecuteRuntime") //添加一个看不见的游戏物体到场景中
+            RunnerMainThreadExecuteRuntime = new GameObject() //添加一个看不见的游戏物体到场景中
             {
-                hideFlags = HideFlags.HideAndDontSave
+                hideFlags = HideFlags.HideAndDontSave,
+                name = nameof(RunnerMainThreadExecuteRuntime)
             };
-            instance = obj.AddComponent<ThreadMono>();
+            instance = RunnerMainThreadExecuteRuntime.AddComponent<ThreadMono>();
             Application.quitting += Dispose;
         }
 #endif
@@ -93,18 +111,40 @@ namespace AIO
             instance = null;
         }
 
+        private static void DataInitialize()
+        {
+            if (QueuesDelegateUpdate == null) QueuesDelegateUpdate           = new ConcurrentQueue<Delegate>();
+            if (QueuesDelegateUpdateFixed == null) QueuesDelegateUpdateFixed = new ConcurrentQueue<Delegate>();
+            if (QueuesDelegateUpdateLate == null) QueuesDelegateUpdateLate   = new ConcurrentQueue<Delegate>();
+        }
+
+        /// <summary>
+        /// 是否允许线程
+        /// </summary>
+        public static bool IsAllowThread { get; private set; }
+
+        [ContextStatic] private static GameObject                RunnerMainRuntime;
+        [ContextStatic] private static ThreadMono                instance;
+        [ContextStatic] private static ConcurrentQueue<Delegate> QueuesDelegateUpdateFixed;
+        [ContextStatic] private static ConcurrentQueue<Delegate> QueuesDelegateUpdate;
+        [ContextStatic] private static ConcurrentQueue<Delegate> QueuesDelegateUpdateLate;
+
+        [ContextStatic] private static volatile bool QueuesDelegateUpdateFixedState = true;
+        [ContextStatic] private static volatile bool QueuesDelegateUpdateState      = true;
+        [ContextStatic] private static volatile bool QueuesDelegateUpdateLateState  = true;
+
         [Preserve]
         private partial class ThreadMono : MonoBehaviour
         {
-            private List<Delegate> mActionCopiedQueueLateUpdateFunc  { get; set; } // LateUpdate
-            private List<Delegate> mActionCopiedQueueFixedUpdateFunc { get; set; } // FixedUpdate
-            private List<Delegate> mActionCopiedQueueUpdateFunc      { get; set; } // QueueUpdate
+            private ConcurrentQueue<Delegate> QueueCopiedUpdateLate;  // LateUpdate
+            private ConcurrentQueue<Delegate> QueueCopiedUpdateFixed; // FixedUpdate
+            private ConcurrentQueue<Delegate> QueueCopiedUpdate;      // QueueUpdate
 
             public void Awake()
             {
-                mActionCopiedQueueLateUpdateFunc  = Pool.List<Delegate>();
-                mActionCopiedQueueFixedUpdateFunc = Pool.List<Delegate>();
-                mActionCopiedQueueUpdateFunc      = Pool.List<Delegate>();
+                QueueCopiedUpdateLate  = new ConcurrentQueue<Delegate>();
+                QueueCopiedUpdateFixed = new ConcurrentQueue<Delegate>();
+                QueueCopiedUpdate      = new ConcurrentQueue<Delegate>();
                 DontDestroyOnLoad(gameObject);
             }
 
@@ -112,15 +152,26 @@ namespace AIO
             {
                 instance = null;
 
-                for (var index = 0; index < mActionCopiedQueueUpdateFunc.Count; index++) mActionCopiedQueueUpdateFunc[index] = null;
+                lock (QueueCopiedUpdateLate) // 释放 mActionCopiedQueueLateUpdateFunc
+                {
+                    while (QueueCopiedUpdateLate.Count > 0)
+                        QueueCopiedUpdateLate.TryDequeue(out _);
+                    QueueCopiedUpdateLate = null;
+                }
 
-                for (var index = 0; index < mActionCopiedQueueFixedUpdateFunc.Count; index++) mActionCopiedQueueFixedUpdateFunc[index] = null;
+                lock (QueueCopiedUpdateFixed)
+                {
+                    while (QueueCopiedUpdateFixed.Count > 0)
+                        QueueCopiedUpdateFixed.TryDequeue(out _);
+                    QueueCopiedUpdateFixed = null;
+                }
 
-                for (var index = 0; index < mActionCopiedQueueLateUpdateFunc.Count; index++) mActionCopiedQueueLateUpdateFunc[index] = null;
-
-                mActionCopiedQueueLateUpdateFunc.Free();
-                mActionCopiedQueueFixedUpdateFunc.Free();
-                mActionCopiedQueueUpdateFunc.Free();
+                lock (QueueCopiedUpdateLate)
+                {
+                    while (QueueCopiedUpdate.Count > 0)
+                        QueueCopiedUpdate.TryDequeue(out _);
+                    QueueCopiedUpdate = null;
+                }
             }
         }
     }

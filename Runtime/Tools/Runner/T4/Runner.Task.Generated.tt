@@ -1,0 +1,86 @@
+<#@ template language="C#" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#
+    var summary = "/// <summary>\n        /// {0}\n        /// </summary>";
+
+    var number = 9;
+    var summaryParams = string.Format(summary, $"Starts a task on a thread pool or the main thread.");
+#>
+using System;
+using System.Collections;
+#if SUPPORT_UNITASK
+using Cysharp.Threading.Tasks;
+#else
+using System.Threading.Tasks;
+#endif
+
+namespace AIO
+{
+    partial class Runner
+    {
+<#
+    for (int i = 0; i <= number; i++)
+    {
+        var T = string.Join(", ", Enumerable.Range(0, i).Select(x => $"T{x + 1}"));
+        if (i >= 1) T = $"<{T}>";
+        var parameters = string.Join(", ", Enumerable.Range(0, i).Select(x => $"T{x + 1} t{x + 1}"));
+        var arguments = string.Join(", ", Enumerable.Range(0, i).Select(x => $"t{x + 1}"));
+#>     
+        <#= summaryParams #>
+<#
+        for (var j = 1; j <= i; j++)
+        {
+#>
+        /// <typeparam name="T<#= j #>">The type of the <#= j #>th parameter.</typeparam>
+<#
+        }
+#>
+        /// <param name="action">The coroutine to start.</param>
+        public static async void StartTask<#= T #>(Action<#= T #> action<#= string.Concat((i > 0 ? ", " : ""), parameters) #>)
+        {
+            if (IsAllowThread)
+            {
+#if SUPPORT_UNITASK
+                await UniTask.RunOnThreadPool(<#= i > 0 ? "Action" : "action" #>);
+#else
+                await Task.Factory.StartNew(<#= i > 0 ? "Action" : "action" #>);
+#endif
+            }
+            else
+            {
+                PushUpdate(action<#= (i > 0 ? ", " : "") + arguments #>);
+            }
+<#
+        if (i > 0)
+        {
+#>
+            return;
+            void Action() { action?.Invoke(<#= arguments #>); }
+<#
+        }
+#>
+        }
+<#
+    }
+#>
+
+#if SUPPORT_UNITASK
+        /// <summary>
+        /// Starts a task on a thread pool or the main thread.
+        /// </summary>
+        public static async void StartTask(IEnumerator action)
+        {
+            if (IsAllowThread)
+            {
+                await action;
+            }
+            else
+            {
+                PushUpdate(action);
+            }
+        }
+#endif
+    }
+}

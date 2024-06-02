@@ -1,16 +1,10 @@
-﻿#define ENABLE_FIXEDUPDATE_FUNCTION_CALLBACK
-
-#if SUPPORT_UNITASK
-using Cysharp.Threading.Tasks;
-#endif
-
-#if (ENABLE_FIXEDUPDATE_FUNCTION_CALLBACK)
-
-#region
+﻿#region namespace
 
 using System;
 using System.Collections;
-using System.Collections.Generic;
+#if SUPPORT_UNITASK
+using Cysharp.Threading.Tasks;
+#endif
 
 #endregion
 
@@ -18,67 +12,48 @@ namespace AIO
 {
     partial class Runner
     {
-        [ContextStatic]
-        private static readonly Queue<Action> actionQueuesFixedUpdateFunc = new Queue<Action>();
-
-        [ContextStatic]
-        private static volatile bool noActionQueueToExecuteFixedUpdateFunc = true;
-
-        /// <summary>
-        /// 在FixedUpdate更新
-        /// </summary>
-        public static void UpdateFixed(Action action)
-        {
-            if (action == null) throw new ArgumentNullException(nameof(action));
-
-            lock (actionQueuesFixedUpdateFunc)
-            {
-                actionQueuesFixedUpdateFunc.Enqueue(action);
-                noActionQueueToExecuteFixedUpdateFunc = false;
-            }
-        }
-
         #region Nested type: ThreadMono
 
-        private partial class ThreadMono
+        partial class ThreadMono
         {
-            /// <summary>
-            /// 在FixedUpdate更新
-            /// </summary>
+            private bool mIsUpdateFixedExe;
+
+            private IEnumerator UpdateFixAction()
+            {
+                mIsUpdateFixedExe = true;
+                while (QueueCopiedUpdateFixed.Count > 0)
+                {
+                    if (!QueueCopiedUpdateFixed.TryDequeue(out var action)) continue;
+                    action?.DynamicInvoke();
+                }
+
+                mIsUpdateFixedExe = false;
+                yield break;
+            }
+
             public void FixedUpdate()
             {
-                if (noActionQueueToExecuteFixedUpdateFunc) return;
-                //清空队列中 残留的操作函数
-                lock (actionQueuesFixedUpdateFunc)
+                if (QueuesDelegateUpdateLateState) return;        //判断当前是否有操作正在执行
+                if (QueuesDelegateUpdateFixed.Count == 0) return; //清空队列中 残留的操作函数
+                QueuesDelegateUpdateLateState = true;             //并开启执行状态
+                while (QueuesDelegateUpdateFixed.Count > 0)       //将等待队列中的操作 复制到执行队列中
                 {
-                    if (actionQueuesFixedUpdateFunc.Count == 0) return;
-                    noActionQueueToExecuteFixedUpdateFunc = true; //并开启执行状态
-                    lock (mActionCopiedQueueFixedUpdateFunc)
-                    {
-                        mActionCopiedQueueFixedUpdateFunc.AddRange(actionQueuesFixedUpdateFunc); //将等待队列中的操作 复制到执行队列中
-                        actionQueuesFixedUpdateFunc.Clear();
-                        var tempArray = Delegate.Combine(mActionCopiedQueueFixedUpdateFunc.ToArray());
-                        mActionCopiedQueueFixedUpdateFunc.Clear();
-#if SUPPORT_UNITASK
-                        Action().ToUniTask().Preserve().SuppressCancellationThrow();
-#else
-                        StartCoroutine(Action());
-#endif
-                        return;
+                    if (!QueuesDelegateUpdateFixed.TryDequeue(out var action)) continue;
+                    QueueCopiedUpdateFixed.Enqueue(action);
+                }
 
-                        IEnumerator Action()
-                        {
-                            tempArray?.DynamicInvoke();
-                            tempArray = null;
-                            yield break;
-                        }
-                    }
+                QueuesDelegateUpdateLateState = false; //并开启执行状态
+                if (!mIsUpdateFixedExe)
+                {
+#if SUPPORT_UNITASK
+                    UpdateFixAction().ToUniTask().Preserve().SuppressCancellationThrow();
+#else
+                    StartCoroutine(UpdateFixAction());
+#endif
                 }
             }
         }
 
         #endregion
     }
-
-#endif
 }
