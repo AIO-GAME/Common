@@ -17,12 +17,13 @@ using UObject = UnityEngine.Object;
 
 namespace AIO.UEditor
 {
-    [HelpURL("https://wanderer.blog.csdn.net/article/details/102971712"), GWindow("自定义执行器", "执行器",
-                                                                                  IconResource = "Editor/Icon/App/AIO",
-                                                                                  Group = "Tools",
-                                                                                  Menu = "AIO/Window/Custom Execute",
-                                                                                  MinSizeWidth = 600, MinSizeHeight = 600
-     )]
+    [HelpURL("https://wanderer.blog.csdn.net/article/details/102971712")]
+    [GWindow("自定义执行器", "执行器",
+                IconResource = "Editor/Icon/App/AIO",
+                Group = "Tools",
+                Menu = "AIO/Window/Custom Execute",
+                MinSizeWidth = 600, MinSizeHeight = 600
+            )]
     public class CustomExecute : GraphicWindow
     {
         public enum ExecuterMode
@@ -111,7 +112,6 @@ namespace AIO
                 StaticGUI();
         }
 
-
         private void DynamicGUI()
         {
             #region Namespace
@@ -196,7 +196,7 @@ namespace AIO
 
                 if (GUILayout.Button("Clear Console", EditorStyles.miniButtonRight))
                 {
-                    var logEntries = Type.GetType("UnityEditor.LogEntries,UnityEditor");
+                    var logEntries  = Type.GetType("UnityEditor.LogEntries,UnityEditor");
                     var clearMethod = logEntries?.GetMethod("Clear", BindingFlags.Static | BindingFlags.Public);
                     clearMethod?.Invoke(null, null);
                     GUI.FocusControl(null);
@@ -233,45 +233,41 @@ namespace AIO
             Entity = EditorGUILayout.ObjectField(Entity, typeof(GameObject), true) as GameObject;
             GUILayout.EndHorizontal();
 
-            GUI.enabled = Entity != null;
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Target:", GUILayout.Width(60));
-            var content = Target != null
-                ? EditorGUIUtility.ObjectContent(Target, Target.GetType())
-                : new GUIContent("<None>");
-            if (GUILayout.Button(content, GEStyle.MiniPopup))
+            using (new EditorGUI.DisabledScope(Entity))
             {
-                var gm = new GenericMenu();
-                var components = Entity.GetComponents<Component>();
-                gm.AddItem(new GUIContent("<None>"), Target == null, () => { Target = null; });
-                for (var i = 0; i < components.Length; i++)
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Target:", GUILayout.Width(60));
+                var content = Target ? EditorGUIUtility.ObjectContent(Target, Target.GetType()) : new GUIContent("<None>");
+                if (GUILayout.Button(content, GEStyle.MiniPopup))
                 {
-                    var component = components[i];
-                    gm.AddItem(new GUIContent(component.GetType().FullName), Target == component,
-                               () => { Target = component; });
+                    var gm         = new GenericMenu();
+                    var components = Entity.GetComponents<Component>();
+                    gm.AddItem(new GUIContent("<None>"), !Target, () => { Target = null; });
+                    foreach (var component in components)
+                    {
+                        var component1 = component;
+                        gm.AddItem(new GUIContent(component.GetType().FullName), Target == component, () => { Target = component1; });
+                    }
+
+                    gm.ShowAsContext();
                 }
 
-                gm.ShowAsContext();
+                GUILayout.EndHorizontal();
             }
 
-            GUILayout.EndHorizontal();
-            GUI.enabled = true;
-
-            GUI.enabled = Target != null;
+            GUI.enabled = Target;
             GUILayout.BeginHorizontal();
             GUILayout.Label("Method:", GUILayout.Width(60));
             if (GUILayout.Button(_methodName, GEStyle.MiniPopup))
             {
-                var gm = new GenericMenu();
-                var methods = Target.GetType().GetMethods(BindingFlags.Static | BindingFlags.Instance |
-                                                          BindingFlags.Public | BindingFlags.NonPublic);
+                var gm      = new GenericMenu();
+                var methods = Target.GetType().GetMethods(BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
                 gm.AddItem(new GUIContent("<None>"), Method == null, () => { Method = null; });
-                for (var i = 0; i < methods.Length; i++)
+                foreach (var method in methods)
                 {
-                    var method = methods[i];
                     if (method.Name.Contains("get_") || method.Name.Contains("set_")) continue;
-
-                    gm.AddItem(new GUIContent(method.Name + "()"), Method == method, () => { Method = method; });
+                    var method1 = method;
+                    gm.AddItem(new GUIContent(method.Name + "()"), Method == method, () => { Method = method1; });
                 }
 
                 gm.ShowAsContext();
@@ -365,9 +361,9 @@ namespace AIO
             }
             else
             {
-                var assembly = results.CompiledAssembly;
-                Type type = assembly.DefinedTypes.First(t => t.Name == "DynamicClass");
-                var method = type.GetMethod("DynamicMethod", BindingFlags.Static | BindingFlags.NonPublic);
+                var  assembly = results.CompiledAssembly;
+                Type type     = assembly.DefinedTypes.First(t => t.Name == "DynamicClass");
+                var  method   = type.GetMethod("DynamicMethod", BindingFlags.Static | BindingFlags.NonPublic);
                 method?.Invoke(null, null);
             }
         }
@@ -391,7 +387,7 @@ namespace AIO
 
         private void StaticExecute()
         {
-            var parameters = new object[_parameters.Count];
+            var parameters                                            = new object[_parameters.Count];
             for (var i = 0; i < _parameters.Count; i++) parameters[i] = _parameters[i].GetValue();
 
             if (Method.IsStatic)

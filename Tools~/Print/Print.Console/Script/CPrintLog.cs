@@ -127,6 +127,22 @@ namespace AIO
         /// 日志
         /// </summary>
         [Conditional(MACRO_DEFINITION)]
+        public static void Log(in string str)
+        {
+            if (IsNotOut || NoStatus(LOG)) return;
+            if (str == null)
+            {
+                Console.WriteLine("{0} is null", nameof(str));
+                return;
+            }
+
+            Console.WriteLine(str);
+        }
+
+        /// <summary>
+        /// 日志
+        /// </summary>
+        [Conditional(MACRO_DEFINITION)]
         public static void LogFormat<T1>(in string format, in T1 arg1)
         {
             if (IsNotOut || NoStatus(LOG)) return;

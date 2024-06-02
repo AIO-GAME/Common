@@ -17,10 +17,7 @@ namespace AIO
             /// 加载 Byte Array
             /// </summary>
             /// <param name="path">路径</param>
-            public static byte[] ReadByteArray(string path)
-            {
-                return Read(path);
-            }
+            public static byte[] ReadByteArray(string path) { return Read(path); }
 
             /// <summary>
             /// 写入数据
@@ -81,8 +78,7 @@ namespace AIO
                 if (!ExistsFile(path)) return Array.Empty<byte>();
                 try
                 {
-                    using (var fsSource = new FileStream(path,
-                                                         FileMode.Open, FileAccess.Read, FileShare.ReadWrite, bufferSize, true))
+                    using (var fsSource = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, bufferSize, true))
                     {
                         var length = (int)fsSource.Length;
                         var buffer = new byte[length];
@@ -91,7 +87,7 @@ namespace AIO
                         while (offset < length)
                         {
                             var count = System.Math.Min(bufferSize, length - offset);
-                            var n = fsSource.ReadAsync(buffer, offset, count).GetAwaiter().GetResult();
+                            var n     = fsSource.ReadAsync(buffer, offset, count).GetAwaiter().GetResult();
                             if (n == 0) break; // 到达文件末尾
                             offset += n;
                         }
@@ -99,7 +95,7 @@ namespace AIO
                         if (length >= 3 && buffer[0] == 0xef && buffer[1] == 0xbb && buffer[2] == 0xbf)
                         {
                             var copyLength = buffer.Length - 3;
-                            var dataNew = new byte[copyLength];
+                            var dataNew    = new byte[copyLength];
                             System.Buffer.BlockCopy(buffer, 3, dataNew, 0, copyLength);
                             return dataNew;
                         }

@@ -248,7 +248,8 @@ namespace AIO.UEditor
                 {
                     var packageInfo = PackageInfo.FindForAssembly(assembly);
                     var runtimePath = Path.Combine(project, packageInfo.resolvedPath);
-                    foreach (var item in new DirectoryInfo(runtimePath).GetFiles("*", SearchOption.AllDirectories).Where(f => f.Extension == ".dll" || f.Extension == ".asmdef"))
+                    foreach (var item in new DirectoryInfo(runtimePath).GetFiles("*", SearchOption.AllDirectories)
+                                                                       .Where(f => f.Extension == ".dll" || f.Extension == ".asmdef"))
                     {
                         if (assemblyName != item.Name.Replace(item.Extension, "")) continue;
                         var type = item.Extension.Contains("dll") ? EAssembliesType.DLL : EAssembliesType.ADF;
@@ -271,15 +272,9 @@ namespace AIO.UEditor
             DLL
         }
 
-        public static void Enable()
-        {
-            Enable(GetEnable());
-        }
+        public static void Enable() { Enable(GetEnable()); }
 
-        public static void Disable()
-        {
-            Disable(GetDisable());
-        }
+        public static void Disable() { Disable(GetDisable()); }
 
         private static void Enable(IDictionary<string, EAssembliesType> dictionary)
         {
@@ -302,7 +297,7 @@ namespace AIO.UEditor
                         AssetDatabase.SaveAssets();
 #else
                         AssetDatabase.SaveAssetIfDirty(
-                            AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>(assetPath));
+                                                       AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>(assetPath));
 #endif
                         break;
                     case EAssembliesType.DLL:
@@ -337,16 +332,17 @@ namespace AIO.UEditor
                         AssetDatabase.SaveAssets();
 #else
                         AssetDatabase.SaveAssetIfDirty(
-                            AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>(assetPath));
+                                                       AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>(assetPath));
 #endif
                         break;
                     case EAssembliesType.DLL:
                         var importer = (PluginImporter)AssetImporter.GetAtPath(assetPath);
-                        if (importer is null) break;
+                        if (!importer) break;
                         importer.SetCompatibleWithAnyPlatform(false);
                         importer.SetCompatibleWithEditor(true);
                         importer.SaveAndReimport();
                         break;
+                    default: throw new ArgumentOutOfRangeException();
                 }
             }
 

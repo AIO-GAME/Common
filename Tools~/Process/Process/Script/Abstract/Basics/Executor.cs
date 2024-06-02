@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -73,10 +74,7 @@ namespace AIO
         public bool IsFinish { get; protected set; }
 
         /// <inheritdoc/>
-        public TaskAwaiter<IResult> GetAwaiter()
-        {
-            return Task.Factory.StartNew(Sync).GetAwaiter();
-        }
+        public TaskAwaiter<IResult> GetAwaiter() { return Task.Factory.StartNew(Sync).GetAwaiter(); }
 
         /// <inheritdoc/>
         public virtual IExecutor Link(in IExecutor next)
@@ -161,10 +159,7 @@ namespace AIO
         }
 
         /// <inheritdoc/>
-        public Task<IResult> Async()
-        {
-            return Task.Factory.StartNew(Sync);
-        }
+        public Task<IResult> Async() { return Task.Factory.StartNew(Sync); }
 
         /// <inheritdoc/>
         public virtual void Dispose()
@@ -187,9 +182,8 @@ namespace AIO
         {
             if (IsRunning) throw new Exception("Call before the Run function executes");
             if (messages == null || messages.Count == 0) return this;
-            foreach (var item in messages)
+            foreach (var item in messages.Where(item => !string.IsNullOrEmpty(item)))
             {
-                if (string.IsNullOrEmpty(item)) continue;
                 inputs.AppendLine(item);
             }
 
@@ -201,9 +195,8 @@ namespace AIO
         {
             if (IsRunning) throw new Exception("Call before the Run function executes");
             if (messages == null || messages.Length == 0) return this;
-            foreach (var item in messages)
+            foreach (var item in messages.Where(item => !string.IsNullOrEmpty(item)))
             {
-                if (string.IsNullOrEmpty(item)) continue;
                 inputs.AppendLine(item.TrimEnd());
             }
 
@@ -229,17 +222,11 @@ namespace AIO
         /// <summary>
         /// 回调
         /// </summary>
-        protected void ReceiveProgress(object sender, DataReceivedEventArgs e)
-        {
-            Progress?.Invoke(sender, e.Data);
-        }
+        protected void ReceiveProgress(object sender, DataReceivedEventArgs e) { Progress?.Invoke(sender, e.Data); }
 
         /// <summary>
         /// 回调
         /// </summary>
-        protected void ReceiveProgress(object sender, string e)
-        {
-            Progress?.Invoke(sender, e);
-        }
+        protected void ReceiveProgress(object sender, string e) { Progress?.Invoke(sender, e); }
     }
 }

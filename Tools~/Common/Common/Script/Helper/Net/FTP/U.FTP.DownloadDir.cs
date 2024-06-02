@@ -103,14 +103,14 @@ namespace AIO
                             return;
                         }
 
-                        var remote = string.Concat(uri, '/', remoteAbs);
+                        var remote   = string.Concat(uri, '/', remoteAbs);
                         var fileSize = GetFileSize(remote, username, password, timeout);
                         if (fileSize <= 0) continue;
 
                         var outputStream = Net.AddFileHeader(
-                            Path.Combine(localPath, remoteAbs),
-                            () => GetMD5(remote, username, password, timeout),
-                            overwrite);
+                                                             Path.Combine(localPath, remoteAbs),
+                                                             () => GetMD5(remote, username, password, timeout),
+                                                             overwrite);
                         if (outputStream is null) continue;
                         if (outputStream.CanWrite)
                         {
@@ -136,8 +136,8 @@ namespace AIO
                         }
 
                         using var outputStream = pair.Value;
-                        var remote = string.Concat(uri, '/', pair.Key);
-                        var request = CreateRequestFile(remote, username, password, "RETR", timeout, cancellationToken);
+                        var       remote       = string.Concat(uri, '/', pair.Key);
+                        var       request      = CreateRequestFile(remote, username, password, "RETR", timeout, cancellationToken);
                         request.ContentOffset = outputStream.Position - Net.CODE.Length;
                         CurrentInfo           = request.RequestUri.AbsoluteUri;
                         try
@@ -172,7 +172,7 @@ namespace AIO
 
                                 Net.RemoveFileHeader(outputStream, bufferSize);
                                 outputStream.Flush();
-                                outputStream.Dispose();
+                                outputStream.Close();
                             }
 
                             request.Abort();
@@ -181,7 +181,6 @@ namespace AIO
                         {
                             State = EProgressState.Fail;
                             outputStream.Close();
-                            outputStream.Dispose();
                             File.Delete(string.Concat(localPath, '/', pair.Key));
                             Event.OnError?.Invoke(ex);
                             request.Abort();
@@ -205,14 +204,14 @@ namespace AIO
                             return;
                         }
 
-                        var remote = string.Concat(uri, '/', remoteAbs);
+                        var remote   = string.Concat(uri, '/', remoteAbs);
                         var fileSize = await GetFileSizeAsync(remote, username, password, timeout, cancellationToken);
                         if (fileSize <= 0) continue;
 
                         var outputStream = await Net.AddFileHeaderAsync(
-                            Path.Combine(localPath, remoteAbs),
-                            () => GetMD5Async(remote, username, password, timeout, cancellationToken),
-                            overwrite);
+                                                                        Path.Combine(localPath, remoteAbs),
+                                                                        () => GetMD5Async(remote, username, password, timeout, cancellationToken),
+                                                                        overwrite);
                         if (outputStream is null) continue;
                         if (outputStream.CanWrite)
                         {
@@ -238,8 +237,8 @@ namespace AIO
                         }
 
                         using var outputStream = pair.Value;
-                        var remote = string.Concat(uri, '/', pair.Key);
-                        var request = CreateRequestFile(remote, username, password, "RETR", timeout, cancellationToken);
+                        var       remote       = string.Concat(uri, '/', pair.Key);
+                        var       request      = CreateRequestFile(remote, username, password, "RETR", timeout, cancellationToken);
                         request.ContentOffset = outputStream.Position - Net.CODE.Length;
                         CurrentInfo           = request.RequestUri.AbsoluteUri;
                         try
@@ -275,7 +274,7 @@ namespace AIO
 
                                 await Net.RemoveFileHeaderAsync(outputStream, bufferSize, cancellationToken);
                                 await outputStream.FlushAsync(cancellationToken);
-                                outputStream.Dispose();
+                                outputStream.Close();
                             }
 
                             request.Abort();
@@ -284,7 +283,6 @@ namespace AIO
                         {
                             State = EProgressState.Fail;
                             outputStream.Close();
-                            outputStream.Dispose();
                             File.Delete(string.Concat(localPath, '/', pair.Key));
                             Event.OnError?.Invoke(ex);
                             request.Abort();

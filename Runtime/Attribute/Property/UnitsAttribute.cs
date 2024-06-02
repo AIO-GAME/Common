@@ -39,37 +39,11 @@ namespace AIO
         /// <summary>[Editor-Only]
         /// Returns the value that should be displayed for a given field.
         /// </summary>
-        public static float GetDisplayValue(float value, float defaultValue)
-        {
-            return float.IsNaN(value) ? defaultValue : value;
-        }
+        public static float GetDisplayValue(float value, float defaultValue) { return float.IsNaN(value) ? defaultValue : value; }
 
         /// <summary>[Editor-Only]
         /// Returns the value that should be displayed for a given field.
         /// </summary>
-        public static double GetDisplayValue(double value, double defaultValue)
-        {
-            return double.IsNaN(value) ? defaultValue : value;
-        }
-
-        /// <summary>[Editor-Only]
-        /// Returns the value that should be displayed for a given field.
-        /// </summary>
-        public static long GetDisplayValue(long value, long defaultValue)
-        {
-            if (value > long.MaxValue || value < long.MinValue)
-                return defaultValue;
-            return value;
-        }
-
-        /// <summary>[Editor-Only]
-        /// Returns the value that should be displayed for a given field.
-        /// </summary>
-        public static int GetDisplayValue(int value, int defaultValue)
-        {
-            if (value > int.MaxValue || value < int.MinValue)
-                return defaultValue;
-            return value;
-        }
+        public static double GetDisplayValue(double value, double defaultValue) { return double.IsNaN(value) ? defaultValue : value; }
     }
 }

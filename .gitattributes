@@ -18,6 +18,8 @@
 
 * text=auto
 
+Tools~ merge=ours
+
 ###############################################################################
 # Set default behavior for command prompt diff.
 #

@@ -1,4 +1,4 @@
-﻿#region
+﻿#region namespace
 
 using System.Collections.Generic;
 using System.IO;
@@ -15,8 +15,15 @@ namespace AIO.UEditor
     {
         private static IEnumerable<PackageInfo> GetInfo()
         {
-            var packageInfos = AssetDatabase.FindAssets("package", new[] { "Packages" }).Select(AssetDatabase.GUIDToAssetPath).Where(x => AssetDatabase.LoadAssetAtPath<TextAsset>(x) != null).Select(PackageInfo.FindForAssetPath).GroupBy(x => x.assetPath).Select(x => x.First()).Where(x => File.Exists(Path.Combine(x.resolvedPath, ".git")) ||
-                                                                                                                                                                                                                                                                                                Directory.Exists(Path.Combine(x.resolvedPath, ".git"))).ToList();
+            var packageInfos = AssetDatabase.FindAssets("package", new[] { "Packages" })
+                                            .Select(AssetDatabase.GUIDToAssetPath)
+                                            .Where(x => AssetDatabase.LoadAssetAtPath<TextAsset>(x) != null)
+                                            .Select(PackageInfo.FindForAssetPath)
+                                            .GroupBy(x => x.assetPath)
+                                            .Select(x => x.First())
+                                            .Where(x => File.Exists(Path.Combine(x.resolvedPath, ".git"))
+                                                     || Directory.Exists(Path.Combine(x.resolvedPath, ".git")))
+                                            .ToList();
             return packageInfos;
         }
 

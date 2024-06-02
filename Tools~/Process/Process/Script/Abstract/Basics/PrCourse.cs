@@ -30,10 +30,7 @@ namespace AIO
         /// <summary>
         /// 创建进程构造器
         /// </summary>
-        public PrCourse()
-        {
-            Info = new ProcessStartInfo();
-        }
+        public PrCourse() { Info = new ProcessStartInfo(); }
 
         /// <summary>
         /// 开启日志
@@ -48,16 +45,10 @@ namespace AIO
         #region IPrCourse Members
 
         /// <inheritdoc/>
-        public virtual IExecutor Execute()
-        {
-            return new Executor(Info, EnableOutput);
-        }
+        public virtual IExecutor Execute() { return new Executor(Info, EnableOutput); }
 
         /// <inheritdoc/>
-        public virtual void Dispose()
-        {
-            Info = null;
-        }
+        public virtual void Dispose() { Info = null; }
 
         /// <inheritdoc/>
         public IPrCourse SetInEncoding(Encoding defEncoding)

@@ -312,7 +312,7 @@
         </member>
         <member name="M:AIO.ExtendSort.SortBubble``1(System.Collections.Generic.IList{``0},System.Int32@,System.Int32@)">
             <summary>
-            单向冒泡排序
+                单向冒泡排序
             </summary>
             <param name="array">数组</param>
             <param name="start">右边界</param>
@@ -354,7 +354,7 @@
         </member>
         <member name="M:AIO.ExtendSort.SortQuick``1(System.Collections.Generic.IList{``0},System.Int32@,System.Int32@,System.Collections.Generic.IComparer{``0}@)">
             <summary>
-               快速排序
+                快速排序
             </summary>
             <param name="array">数组</param>
             <param name="start">索引</param>
@@ -365,7 +365,7 @@
         </member>
         <member name="M:AIO.ExtendSort.SortQuick``1(System.Collections.Generic.IList{``0},System.Int32@,System.Int32@)">
             <summary>
-               快速排序
+                快速排序
             </summary>
             <param name="array">数组</param>
             <param name="start">索引</param>
@@ -416,7 +416,7 @@
         </member>
         <member name="M:AIO.ExtendSort.SortMerge``1(System.Collections.Generic.IList{``0}@,System.Int32,System.Int32,System.Collections.Generic.IComparer{``0}@)">
             <summary>
-              归并排序
+                归并排序
             </summary>
             <param name="array">数组</param>
             <param name="start">右边界</param>
@@ -427,7 +427,7 @@
         </member>
         <member name="M:AIO.ExtendSort.SortMerge``1(System.Collections.Generic.IList{``0}@,System.Int32@,System.Int32@)">
             <summary>
-              归并排序
+                归并排序
             </summary>
             <param name="array">数组</param>
             <param name="start">右边界</param>
@@ -485,7 +485,7 @@
         </member>
         <member name="M:AIO.ExtendSort.Comparer``1(System.Func{``0,``0,System.Int32})">
             <summary>
-               比较器
+                比较器
             </summary>
             <param name="comparer">比较器</param>
             <typeparam name="T">泛型</typeparam>
@@ -493,7 +493,7 @@
         </member>
         <member name="M:AIO.ExtendSort.Comparer``1(System.Comparison{``0})">
             <summary>
-               比较器
+                比较器
             </summary>
             <param name="comparer">比较器</param>
             <typeparam name="T">泛型</typeparam>
@@ -770,7 +770,7 @@
         </member>
         <member name="T:AIO.StreamExtend">
             <summary>
-                nameof(StreamExtend)
+                流数据扩展
             </summary>
         </member>
         <member name="F:AIO.StreamExtend.BUFFER_SIZE">
@@ -778,96 +778,180 @@
                 缓冲区大小
             </summary>
         </member>
-        <member name="M:AIO.StreamExtend.GetMD5(System.IO.Stream,System.Int64)">
+        <member name="M:AIO.StreamExtend.GetMD5(System.IO.Stream,System.Int32)">
             <summary>
-                获取MD5
+                获取 MD5
             </summary>
-            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得MD5
-            实现稍微复杂，但可使用与传输文件或接收文件时同步计算MD5值
-            可自定义缓冲区大小，计算速度较快
             <param name="stream">流数据</param>
             <param name="bufferSize">容器大小</param>
-            <returns>MD5</returns>
-        </member>
-        <member name="M:AIO.StreamExtend.GetMD5Async(System.IO.Stream,System.Int64,System.Threading.CancellationToken)">
-            <summary>
-                获取MD5
-            </summary>
+            <returns>MD5 value</returns>
+            <remarks>
             通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得MD5
             实现稍微复杂，但可使用与传输文件或接收文件时同步计算MD5值
             可自定义缓冲区大小，计算速度较快
+            </remarks>
+        </member>
+        <member name="M:AIO.StreamExtend.GetMD5Async(System.IO.Stream,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+                获取MD5
+            </summary>
             <param name="stream">流数据</param>
             <param name="bufferSize">容器大小</param>
             <param name="cancellationToken">取消令牌</param>
+            <remarks>
+            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得MD5
+            实现稍微复杂，但可使用与传输文件或接收文件时同步计算MD5值
+            可自定义缓冲区大小，计算速度较快
+            </remarks>
             <returns>MD5</returns>
         </member>
-        <member name="M:AIO.StreamExtend.GetSHA1Async(System.IO.Stream,System.Int64,System.Threading.CancellationToken)">
+        <member name="M:AIO.StreamExtend.GetMD5Digest(System.IO.Stream,System.Int32)">
+            <summary>
+            计算文件的sha256 摘要值
+            </summary>
+            <param name="stream">数据流</param>
+            <param name="bufferSize">容器大小</param>
+            <returns>sha256摘要字符串</returns>
+        </member>
+        <member name="M:AIO.StreamExtend.GetSHA1(System.IO.Stream,System.Int32)">
+            <summary>
+                获取 SHA1
+            </summary>
+            <param name="stream">流数据</param>
+            <param name="bufferSize">容器大小</param>
+            <returns>SHA1 value</returns>
+            <remarks>
+            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得SHA1
+            实现稍微复杂，但可使用与传输文件或接收文件时同步计算SHA1值
+            可自定义缓冲区大小，计算速度较快
+            </remarks>
+        </member>
+        <member name="M:AIO.StreamExtend.GetSHA1Async(System.IO.Stream,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 获取SHA1
             </summary>
             <param name="stream">流数据</param>
             <param name="bufferSize">容器大小</param>
             <param name="cancellationToken">取消令牌</param>
+            <remarks>
+            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得SHA1
+            实现稍微复杂，但可使用与传输文件或接收文件时同步计算SHA1值
+            可自定义缓冲区大小，计算速度较快
+            </remarks>
             <returns>SHA1</returns>
         </member>
-        <member name="M:AIO.StreamExtend.GetSHA1(System.IO.Stream,System.Int64)">
+        <member name="M:AIO.StreamExtend.GetSHA1Digest(System.IO.Stream,System.Int32)">
             <summary>
-                获取SHA1
+            计算文件的sha256 摘要值
             </summary>
+            <param name="stream">数据流</param>
             <param name="bufferSize">容器大小</param>
-            <param name="stream">流数据</param>
-            <returns>SHA1</returns>
+            <returns>sha256摘要字符串</returns>
         </member>
-        <member name="M:AIO.StreamExtend.GetSHA256Async(System.IO.Stream,System.Int64,System.Threading.CancellationToken)">
+        <member name="M:AIO.StreamExtend.GetSHA256(System.IO.Stream,System.Int32)">
+            <summary>
+                获取 SHA256
+            </summary>
+            <param name="stream">流数据</param>
+            <param name="bufferSize">容器大小</param>
+            <returns>SHA256 value</returns>
+            <remarks>
+            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得SHA256
+            实现稍微复杂，但可使用与传输文件或接收文件时同步计算SHA256值
+            可自定义缓冲区大小，计算速度较快
+            </remarks>
+        </member>
+        <member name="M:AIO.StreamExtend.GetSHA256Async(System.IO.Stream,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 获取SHA256
             </summary>
             <param name="stream">流数据</param>
             <param name="bufferSize">容器大小</param>
             <param name="cancellationToken">取消令牌</param>
-            <returns>SHA1</returns>
+            <remarks>
+            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得SHA256
+            实现稍微复杂，但可使用与传输文件或接收文件时同步计算SHA256值
+            可自定义缓冲区大小，计算速度较快
+            </remarks>
+            <returns>SHA256</returns>
         </member>
-        <member name="M:AIO.StreamExtend.GetSHA256(System.IO.Stream,System.Int64)">
+        <member name="M:AIO.StreamExtend.GetSHA256Digest(System.IO.Stream,System.Int32)">
             <summary>
-                获取SHA256
+            计算文件的sha256 摘要值
             </summary>
+            <param name="stream">数据流</param>
             <param name="bufferSize">容器大小</param>
-            <param name="stream">流数据</param>
-            <returns>SHA1</returns>
+            <returns>sha256摘要字符串</returns>
         </member>
-        <member name="M:AIO.StreamExtend.GetSHA384Async(System.IO.Stream,System.Int64,System.Threading.CancellationToken)">
+        <member name="M:AIO.StreamExtend.GetSHA384(System.IO.Stream,System.Int32)">
+            <summary>
+                获取 SHA384
+            </summary>
+            <param name="stream">流数据</param>
+            <param name="bufferSize">容器大小</param>
+            <returns>SHA384 value</returns>
+            <remarks>
+            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得SHA384
+            实现稍微复杂，但可使用与传输文件或接收文件时同步计算SHA384值
+            可自定义缓冲区大小，计算速度较快
+            </remarks>
+        </member>
+        <member name="M:AIO.StreamExtend.GetSHA384Async(System.IO.Stream,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 获取SHA384
             </summary>
             <param name="stream">流数据</param>
             <param name="bufferSize">容器大小</param>
             <param name="cancellationToken">取消令牌</param>
-            <returns>SHA1</returns>
+            <remarks>
+            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得SHA384
+            实现稍微复杂，但可使用与传输文件或接收文件时同步计算SHA384值
+            可自定义缓冲区大小，计算速度较快
+            </remarks>
+            <returns>SHA384</returns>
         </member>
-        <member name="M:AIO.StreamExtend.GetSHA384(System.IO.Stream,System.Int64)">
+        <member name="M:AIO.StreamExtend.GetSHA384Digest(System.IO.Stream,System.Int32)">
             <summary>
-                获取SHA384
+            计算文件的sha256 摘要值
             </summary>
+            <param name="stream">数据流</param>
             <param name="bufferSize">容器大小</param>
-            <param name="stream">流数据</param>
-            <returns>SHA1</returns>
+            <returns>sha256摘要字符串</returns>
         </member>
-        <member name="M:AIO.StreamExtend.GetSHA512Async(System.IO.Stream,System.Int64,System.Threading.CancellationToken)">
+        <member name="M:AIO.StreamExtend.GetSHA512(System.IO.Stream,System.Int32)">
+            <summary>
+                获取 SHA512
+            </summary>
+            <param name="stream">流数据</param>
+            <param name="bufferSize">容器大小</param>
+            <returns>SHA512 value</returns>
+            <remarks>
+            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得SHA512
+            实现稍微复杂，但可使用与传输文件或接收文件时同步计算SHA512值
+            可自定义缓冲区大小，计算速度较快
+            </remarks>
+        </member>
+        <member name="M:AIO.StreamExtend.GetSHA512Async(System.IO.Stream,System.Int32,System.Threading.CancellationToken)">
             <summary>
                 获取SHA512
             </summary>
             <param name="stream">流数据</param>
             <param name="bufferSize">容器大小</param>
             <param name="cancellationToken">取消令牌</param>
-            <returns>SHA1</returns>
+            <remarks>
+            通过HashAlgorithm的TransformBlock方法对流进行叠加运算获得SHA512
+            实现稍微复杂，但可使用与传输文件或接收文件时同步计算SHA512值
+            可自定义缓冲区大小，计算速度较快
+            </remarks>
+            <returns>SHA512</returns>
         </member>
-        <member name="M:AIO.StreamExtend.GetSHA512(System.IO.Stream,System.Int64)">
+        <member name="M:AIO.StreamExtend.GetSHA512Digest(System.IO.Stream,System.Int32)">
             <summary>
-                获取SHA512
+            计算文件的sha256 摘要值
             </summary>
+            <param name="stream">数据流</param>
             <param name="bufferSize">容器大小</param>
-            <param name="stream">流数据</param>
-            <returns>SHA1</returns>
+            <returns>sha256摘要字符串</returns>
         </member>
         <member name="T:AIO.ExtendStringBuilder">
             <summary>
@@ -886,6 +970,75 @@
             <summary>
                 字符工具类
             </summary>
+        </member>
+        <member name="M:AIO.ExtendString.GetMD5Digest(System.String)">
+            <summary>
+                对字符串进行MD5摘要
+            </summary>
+            <param name="message">需要摘要的字符串</param>
+            <returns>MD5摘要字符串</returns>
+        </member>
+        <member name="M:AIO.ExtendString.GetMD5Digest2(System.String)">
+            <summary>
+                对字符串进行MD5二次摘要
+            </summary>
+            <param name="message">需要摘要的字符串</param>
+            <returns>MD5摘要字符串</returns>
+        </member>
+        <member name="M:AIO.ExtendString.GetMD5Digest3(System.String)">
+            <summary>
+            MD5 三次摘要算法
+            </summary>
+            <param name="s">需要摘要的字符串</param>
+            <returns>MD5摘要字符串</returns>
+        </member>
+        <member name="M:AIO.ExtendString.GetMD5Digest(System.String,System.String)">
+            <summary>
+                对字符串进行MD5加盐摘要
+            </summary>
+            <param name="message">需要摘要的字符串</param>
+            <param name="salt">盐</param>
+            <returns>MD5摘要字符串</returns>
+        </member>
+        <member name="M:AIO.ExtendString.GetMD5Digest2(System.String,System.String)">
+            <summary>
+                对字符串进行MD5二次加盐摘要
+            </summary>
+            <param name="message">需要摘要的字符串</param>
+            <param name="salt">盐</param>
+            <returns>MD5摘要字符串</returns>
+        </member>
+        <member name="M:AIO.ExtendString.GetMD5Digest3(System.String,System.String)">
+            <summary>
+            MD5 三次摘要算法
+            </summary>
+            <param name="s">需要摘要的字符串</param>
+            <param name="salt">盐</param>
+            <returns>MD5摘要字符串</returns>
+        </member>
+        <member name="M:AIO.ExtendString.EncryptBase64(System.String,System.Text.Encoding)">
+            <summary>
+            Base64加密
+            </summary>
+            <param name="str">需要加密的字符串</param>
+            <param name="encoding">编码方式</param>
+            <returns>加密后的数据</returns>
+        </member>
+        <member name="M:AIO.ExtendString.DecryptBase64(System.String,System.Text.Encoding)">
+            <summary>
+            Base64解密
+            </summary>
+            <param name="str">需要解密的字符串</param>
+            <param name="encoding">编码方式</param>
+            <returns>解密后的数据</returns>
+        </member>
+        <member name="M:AIO.ExtendString.GetSHA256(System.String,System.Text.Encoding)">
+            <summary>
+            SHA256函数
+            </summary>
+            <param name="str">原始字符串</param>
+            <param name="encoding">编码方式</param>
+            <returns>SHA256结果(返回长度为44字节的字符串)</returns>
         </member>
         <member name="M:AIO.ExtendString.AppendToFrontChar(System.String,System.Char@,System.Int32@)">
             <summary>
@@ -6685,12 +6838,12 @@
             获取文件属性
             </summary>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFileMD5(System.String,System.Int64)">
+        <member name="M:AIO.AHelper.IO.GetFileMD5(System.String,System.Int32)">
             <summary>
             获取文件的MD5值
             </summary>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFileMD5Async(System.String,System.Int64)">
+        <member name="M:AIO.AHelper.IO.GetFileMD5Async(System.String,System.Int32)">
             <summary>
             获取文件的MD5值
             </summary>
@@ -6705,7 +6858,7 @@
                <paramref name="path" /> 不存在
             </exception>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFileSHA1Async(System.String,System.Int64)">
+        <member name="M:AIO.AHelper.IO.GetFileSHA1Async(System.String,System.Int32)">
             <summary>
             获取文件SHA1
             </summary>
@@ -6726,7 +6879,7 @@
                <paramref name="path" /> 不存在
             </exception>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFileSHA256Async(System.String,System.Int64)">
+        <member name="M:AIO.AHelper.IO.GetFileSHA256Async(System.String,System.Int32)">
             <summary>
             获取文件SHA256
             </summary>
@@ -6747,7 +6900,7 @@
                <paramref name="path" /> 不存在
             </exception>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFileSHA384Async(System.String,System.Int64)">
+        <member name="M:AIO.AHelper.IO.GetFileSHA384Async(System.String,System.Int32)">
             <summary>
             获取文件SHA384
             </summary>
@@ -6768,7 +6921,7 @@
                <paramref name="path" /> 不存在
             </exception>
         </member>
-        <member name="M:AIO.AHelper.IO.GetFileSHA512Async(System.String,System.Int64)">
+        <member name="M:AIO.AHelper.IO.GetFileSHA512Async(System.String,System.Int32)">
             <summary>
             获取文件SHA512
             </summary>
@@ -9089,7 +9242,7 @@
         </member>
         <member name="P:AIO.AHelper.Json.JSONNormalSettings">
             <summary>
-            Json默认设置
+            Json 默认设置
             </summary>
         </member>
         <member name="M:AIO.AHelper.Json.Serialize(System.Object@)">
@@ -12863,6 +13016,371 @@
             写入指定数据类型
             </summary>
         </member>
+        <member name="T:AIO.ActionAsync">
+            <summary>
+            Action to enumerator or async task.
+            </summary>
+        </member>
+        <member name="M:AIO.ActionAsync.#ctor(System.Action)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync.Reset">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.ActionAsync.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync.GetAwaiter">
+            <summary>
+            Get the awaiter.
+            </summary>
+        </member>
+        <member name="M:AIO.ActionAsync.Create(System.Action)">
+            <summary>
+            Create a new instance of the <see cref="T:AIO.ActionAsync"/> class.
+            </summary>
+            <param name="action">The action to invoke.</param>
+            <returns>A new instance of the <see cref="T:AIO.ActionAsync`1"/> class.</returns>
+        </member>
+        <member name="M:AIO.ActionAsync.Create``1(System.Action{``0},``0)">
+            <summary>
+            Create a new instance of the <see cref="T:AIO.ActionAsync`1"/> class.
+            </summary>
+            <typeparam name="T1">The type of the 1th parameter.</typeparam>
+            <param name="action">The action to invoke.</param>
+            <returns>A new instance of the <see cref="T:AIO.ActionAsync`1"/> class.</returns>
+        </member>
+        <member name="M:AIO.ActionAsync.Create``2(System.Action{``0,``1},``0,``1)">
+            <summary>
+            Create a new instance of the <see cref="T:AIO.ActionAsync`2"/> class.
+            </summary>
+            <typeparam name="T1">The type of the 1th parameter.</typeparam>
+            <typeparam name="T2">The type of the 2th parameter.</typeparam>
+            <param name="action">The action to invoke.</param>
+            <returns>A new instance of the <see cref="T:AIO.ActionAsync`1"/> class.</returns>
+        </member>
+        <member name="M:AIO.ActionAsync.Create``3(System.Action{``0,``1,``2},``0,``1,``2)">
+            <summary>
+            Create a new instance of the <see cref="T:AIO.ActionAsync`3"/> class.
+            </summary>
+            <typeparam name="T1">The type of the 1th parameter.</typeparam>
+            <typeparam name="T2">The type of the 2th parameter.</typeparam>
+            <typeparam name="T3">The type of the 3th parameter.</typeparam>
+            <param name="action">The action to invoke.</param>
+            <returns>A new instance of the <see cref="T:AIO.ActionAsync`1"/> class.</returns>
+        </member>
+        <member name="M:AIO.ActionAsync.Create``4(System.Action{``0,``1,``2,``3},``0,``1,``2,``3)">
+            <summary>
+            Create a new instance of the <see cref="T:AIO.ActionAsync`4"/> class.
+            </summary>
+            <typeparam name="T1">The type of the 1th parameter.</typeparam>
+            <typeparam name="T2">The type of the 2th parameter.</typeparam>
+            <typeparam name="T3">The type of the 3th parameter.</typeparam>
+            <typeparam name="T4">The type of the 4th parameter.</typeparam>
+            <param name="action">The action to invoke.</param>
+            <returns>A new instance of the <see cref="T:AIO.ActionAsync`1"/> class.</returns>
+        </member>
+        <member name="M:AIO.ActionAsync.Create``5(System.Action{``0,``1,``2,``3,``4},``0,``1,``2,``3,``4)">
+            <summary>
+            Create a new instance of the <see cref="T:AIO.ActionAsync`5"/> class.
+            </summary>
+            <typeparam name="T1">The type of the 1th parameter.</typeparam>
+            <typeparam name="T2">The type of the 2th parameter.</typeparam>
+            <typeparam name="T3">The type of the 3th parameter.</typeparam>
+            <typeparam name="T4">The type of the 4th parameter.</typeparam>
+            <typeparam name="T5">The type of the 5th parameter.</typeparam>
+            <param name="action">The action to invoke.</param>
+            <returns>A new instance of the <see cref="T:AIO.ActionAsync`1"/> class.</returns>
+        </member>
+        <member name="M:AIO.ActionAsync.Create``6(System.Action{``0,``1,``2,``3,``4,``5},``0,``1,``2,``3,``4,``5)">
+            <summary>
+            Create a new instance of the <see cref="T:AIO.ActionAsync`6"/> class.
+            </summary>
+            <typeparam name="T1">The type of the 1th parameter.</typeparam>
+            <typeparam name="T2">The type of the 2th parameter.</typeparam>
+            <typeparam name="T3">The type of the 3th parameter.</typeparam>
+            <typeparam name="T4">The type of the 4th parameter.</typeparam>
+            <typeparam name="T5">The type of the 5th parameter.</typeparam>
+            <typeparam name="T6">The type of the 6th parameter.</typeparam>
+            <param name="action">The action to invoke.</param>
+            <returns>A new instance of the <see cref="T:AIO.ActionAsync`1"/> class.</returns>
+        </member>
+        <member name="M:AIO.ActionAsync.Create``7(System.Action{``0,``1,``2,``3,``4,``5,``6},``0,``1,``2,``3,``4,``5,``6)">
+            <summary>
+            Create a new instance of the <see cref="T:AIO.ActionAsync`7"/> class.
+            </summary>
+            <typeparam name="T1">The type of the 1th parameter.</typeparam>
+            <typeparam name="T2">The type of the 2th parameter.</typeparam>
+            <typeparam name="T3">The type of the 3th parameter.</typeparam>
+            <typeparam name="T4">The type of the 4th parameter.</typeparam>
+            <typeparam name="T5">The type of the 5th parameter.</typeparam>
+            <typeparam name="T6">The type of the 6th parameter.</typeparam>
+            <typeparam name="T7">The type of the 7th parameter.</typeparam>
+            <param name="action">The action to invoke.</param>
+            <returns>A new instance of the <see cref="T:AIO.ActionAsync`1"/> class.</returns>
+        </member>
+        <member name="M:AIO.ActionAsync.Create``8(System.Action{``0,``1,``2,``3,``4,``5,``6,``7},``0,``1,``2,``3,``4,``5,``6,``7)">
+            <summary>
+            Create a new instance of the <see cref="T:AIO.ActionAsync`8"/> class.
+            </summary>
+            <typeparam name="T1">The type of the 1th parameter.</typeparam>
+            <typeparam name="T2">The type of the 2th parameter.</typeparam>
+            <typeparam name="T3">The type of the 3th parameter.</typeparam>
+            <typeparam name="T4">The type of the 4th parameter.</typeparam>
+            <typeparam name="T5">The type of the 5th parameter.</typeparam>
+            <typeparam name="T6">The type of the 6th parameter.</typeparam>
+            <typeparam name="T7">The type of the 7th parameter.</typeparam>
+            <typeparam name="T8">The type of the 8th parameter.</typeparam>
+            <param name="action">The action to invoke.</param>
+            <returns>A new instance of the <see cref="T:AIO.ActionAsync`1"/> class.</returns>
+        </member>
+        <member name="M:AIO.ActionAsync.Create``9(System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8},``0,``1,``2,``3,``4,``5,``6,``7,``8)">
+            <summary>
+            Create a new instance of the <see cref="T:AIO.ActionAsync`9"/> class.
+            </summary>
+            <typeparam name="T1">The type of the 1th parameter.</typeparam>
+            <typeparam name="T2">The type of the 2th parameter.</typeparam>
+            <typeparam name="T3">The type of the 3th parameter.</typeparam>
+            <typeparam name="T4">The type of the 4th parameter.</typeparam>
+            <typeparam name="T5">The type of the 5th parameter.</typeparam>
+            <typeparam name="T6">The type of the 6th parameter.</typeparam>
+            <typeparam name="T7">The type of the 7th parameter.</typeparam>
+            <typeparam name="T8">The type of the 8th parameter.</typeparam>
+            <typeparam name="T9">The type of the 9th parameter.</typeparam>
+            <param name="action">The action to invoke.</param>
+            <returns>A new instance of the <see cref="T:AIO.ActionAsync`1"/> class.</returns>
+        </member>
+        <member name="T:AIO.ActionAsync`1">
+            <summary>
+            Action to enumerator or async task.
+            </summary>
+        </member>
+        <member name="M:AIO.ActionAsync`1.#ctor(System.Action{`0},`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`1.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`1.Reset">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.ActionAsync`1.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`1.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`1.GetAwaiter">
+            <summary>
+            Get the awaiter.
+            </summary>
+        </member>
+        <member name="T:AIO.ActionAsync`2">
+            <summary>
+            Action to enumerator or async task.
+            </summary>
+        </member>
+        <member name="M:AIO.ActionAsync`2.#ctor(System.Action{`0,`1},`0,`1)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`2.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`2.Reset">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.ActionAsync`2.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`2.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`2.GetAwaiter">
+            <summary>
+            Get the awaiter.
+            </summary>
+        </member>
+        <member name="T:AIO.ActionAsync`3">
+            <summary>
+            Action to enumerator or async task.
+            </summary>
+        </member>
+        <member name="M:AIO.ActionAsync`3.#ctor(System.Action{`0,`1,`2},`0,`1,`2)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`3.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`3.Reset">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.ActionAsync`3.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`3.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`3.GetAwaiter">
+            <summary>
+            Get the awaiter.
+            </summary>
+        </member>
+        <member name="T:AIO.ActionAsync`4">
+            <summary>
+            Action to enumerator or async task.
+            </summary>
+        </member>
+        <member name="M:AIO.ActionAsync`4.#ctor(System.Action{`0,`1,`2,`3},`0,`1,`2,`3)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`4.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`4.Reset">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.ActionAsync`4.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`4.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`4.GetAwaiter">
+            <summary>
+            Get the awaiter.
+            </summary>
+        </member>
+        <member name="T:AIO.ActionAsync`5">
+            <summary>
+            Action to enumerator or async task.
+            </summary>
+        </member>
+        <member name="M:AIO.ActionAsync`5.#ctor(System.Action{`0,`1,`2,`3,`4},`0,`1,`2,`3,`4)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`5.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`5.Reset">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.ActionAsync`5.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`5.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`5.GetAwaiter">
+            <summary>
+            Get the awaiter.
+            </summary>
+        </member>
+        <member name="T:AIO.ActionAsync`6">
+            <summary>
+            Action to enumerator or async task.
+            </summary>
+        </member>
+        <member name="M:AIO.ActionAsync`6.#ctor(System.Action{`0,`1,`2,`3,`4,`5},`0,`1,`2,`3,`4,`5)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`6.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`6.Reset">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.ActionAsync`6.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`6.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`6.GetAwaiter">
+            <summary>
+            Get the awaiter.
+            </summary>
+        </member>
+        <member name="T:AIO.ActionAsync`7">
+            <summary>
+            Action to enumerator or async task.
+            </summary>
+        </member>
+        <member name="M:AIO.ActionAsync`7.#ctor(System.Action{`0,`1,`2,`3,`4,`5,`6},`0,`1,`2,`3,`4,`5,`6)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`7.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`7.Reset">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.ActionAsync`7.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`7.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`7.GetAwaiter">
+            <summary>
+            Get the awaiter.
+            </summary>
+        </member>
+        <member name="T:AIO.ActionAsync`8">
+            <summary>
+            Action to enumerator or async task.
+            </summary>
+        </member>
+        <member name="M:AIO.ActionAsync`8.#ctor(System.Action{`0,`1,`2,`3,`4,`5,`6,`7},`0,`1,`2,`3,`4,`5,`6,`7)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`8.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`8.Reset">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.ActionAsync`8.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`8.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`8.GetAwaiter">
+            <summary>
+            Get the awaiter.
+            </summary>
+        </member>
+        <member name="T:AIO.ActionAsync`9">
+            <summary>
+            Action to enumerator or async task.
+            </summary>
+        </member>
+        <member name="M:AIO.ActionAsync`9.#ctor(System.Action{`0,`1,`2,`3,`4,`5,`6,`7,`8},`0,`1,`2,`3,`4,`5,`6,`7,`8)">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`9.MoveNext">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`9.Reset">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.ActionAsync`9.Current">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`9.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:AIO.ActionAsync`9.GetAwaiter">
+            <summary>
+            Get the awaiter.
+            </summary>
+        </member>
         <member name="T:AIO.DisplayList`1">
             <summary>
             显示列表
@@ -13014,14 +13532,14 @@
             获取值
             </summary>
             <param name="key">键值</param>
-            <returns>if found <see cref="!:T"/>; otherwise <c>default</c></returns>
+            <returns>value; otherwise <c>default</c></returns>
         </member>
         <member name="M:AIO.DisplayList`1.GetValue(System.Int32@)">
             <summary>
             获取值
             </summary>
             <param name="index">下标</param>
-            <returns>if found <see cref="!:T"/>; otherwise <c>default</c></returns>
+            <returns>value; otherwise <c>default</c></returns>
         </member>
         <member name="M:AIO.DisplayList`1.GetValueOrDefault(System.Int32@,`0@)">
             <summary>
@@ -13029,7 +13547,7 @@
             </summary>
             <param name="index">下标</param>
             <param name="defaultValue">默认值</param>
-            <returns>if found <see cref="!:T"/>; otherwise <paramref name="defaultValue"/></returns>
+            <returns>value; otherwise <paramref name="defaultValue"/></returns>
         </member>
         <member name="M:AIO.DisplayList`1.GetDisplay(System.String@)">
             <summary>
@@ -14268,6 +14786,267 @@
             </summary>
             <param name="disposingManagedResources"></param>
         </member>
+        <member name="T:AIO.GenerateBuilder">
+            <summary>
+            生成器
+            </summary>
+        </member>
+        <member name="F:AIO.GenerateBuilder.Builder">
+            <summary>
+            生成器
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.ToString">
+            <inheritdoc />
+        </member>
+        <member name="P:AIO.GenerateBuilder.indent">
+            <summary>
+             缩进
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.IncBlock">
+            <summary>
+               添加一个代码块
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.DecBlock">
+            <summary>
+              减少一个代码块
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.WriteHeader(System.String)">
+            <summary>
+            写入头部
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.WriteLine">
+            <summary>
+             写入一行
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.WriteLine(System.String)">
+            <summary>
+             写入一行
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.WriteLine(System.String,System.Object[])">
+            <summary>
+             写入一行
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.IncIndent">
+            <summary>
+              增加缩进
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.DecIndent">
+            <summary>
+             减少缩进
+            </summary>
+        </member>
+        <member name="M:AIO.GenerateBuilder.Save(System.String,System.Text.Encoding)">
+            <summary>
+             保存文件
+            </summary>
+            <param name="filePath"> 文件路径 </param>
+            <param name="encoding"> 编码 </param>
+            <exception cref="T:System.Exception"> 保存文件错误 </exception>
+        </member>
+        <member name="M:AIO.GenerateBuilder.Reset">
+            <summary>
+            重置
+            </summary>
+        </member>
+        <member name="T:AIO.ScriptTextBuilder">
+            <summary>
+               代码生成器
+            </summary>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.Reset">
+            <summary>
+            重置
+            </summary>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.IncNamespace(System.String)">
+            <summary>
+              添加命名空间
+            </summary>
+            <param name="ns"> 命名空间 </param>
+            <exception cref="T:System.Exception">命名空间已经开始</exception>
+            <exception cref="T:System.ArgumentNullException">参数为空</exception>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.DecNamespace">
+            <summary>
+             减少命名空间
+            </summary>
+            <exception cref="T:System.Exception">命名空间未开始</exception>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotSummary(System.String)">
+            <summary>
+            summary 注释
+            </summary>
+            <param name="value"> 注释内容 </param>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotSummary(System.String[])">
+            <summary>
+            summary 注释
+            </summary>
+            <param name="values"> 注释内容 </param>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotDate">
+            <summary>
+            date 注释
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotDate(System.DateTime)">
+            <summary>
+            date 注释
+            </summary>
+            <param name="value"> 时间 </param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotEmail(System.String)">
+            <summary>
+            email 注释
+            </summary>
+            <param name="value"> 邮箱 </param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotAuthor(System.String)">
+            <summary>
+            author 注释
+            </summary>
+            <param name="value"> 作者 </param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotSee(System.String)">
+            <summary>
+            see 注释
+            </summary>
+            <param name="value"> 参考 </param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotHref(System.String)">
+            <summary>
+            href 注释
+            </summary>
+            <param name="value"> 链接 </param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotRemarks(System.String)">
+            <summary>
+            remarks 注释
+            </summary>
+            <param name="value"> 备注 </param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.WriteGoto(System.String)">
+            <summary>
+            写入 goto
+            </summary>
+            <param name="tag"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.WriteUsing(System.String)">
+            <summary>
+            写入 using
+            </summary>
+            <param name="ns"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.WriteUsing(System.String[])">
+            <summary>
+            写入 using
+            </summary>
+            <param name="ns"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroRegion(System.String)">
+            <summary>
+            写入 宏开始
+            </summary>
+            <param name="region"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroEndRegion">
+            <summary>
+            写入 宏开始
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroDefine(System.String)">
+            <summary>
+            写入 宏define
+            </summary>
+            <param name="define"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroUnDefine">
+            <summary>
+            写入 宏undef
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroIf(System.String)">
+            <summary>
+            写入 宏if
+            </summary>
+            <param name="condition"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroElseIf(System.String)">
+            <summary>
+            写入 宏else if
+            </summary>
+            <param name="condition"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroElse">
+            <summary>
+            写入 宏else
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroEndIf">
+            <summary>
+            写入 宏结束
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroError(System.String)">
+            <summary>
+            写入错误
+            </summary>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroWarning(System.String)">
+            <summary>
+            写入警告
+            </summary>
+            <param name="warning"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroPragma(System.String)">
+            <summary>
+             写入标记
+            </summary>
+            <param name="pragma"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.MacroPragmaWarning(System.String)">
+            <summary>
+              写入标记
+            </summary>
+            <param name="warning"></param>
+            <returns></returns>
+        </member>
         <member name="T:AIO.IOperationExtensions">
             <summary>
             异步处理器
@@ -14570,10 +15349,11 @@
         </member>
         <member name="M:AIO.OperationGenerics`1.op_Implicit(AIO.OperationGenerics{`0})~`0">
             <summary>
-               Implicit conversion from <see cref="T:AIO.OperationGenerics`1" /> to <see cref="!:TObject" />
+               Implicit conversion from <see cref="T:AIO.OperationGenerics`1" /> to TObject
             </summary>
             <param name="operationGenerics"><see cref="T:AIO.OperationGenerics`1" /></param>
-            <returns><see cref="!:TObject" /></returns>
+            <typeparamref name="TObject">泛型</typeparamref>
+            <returns>TObject 目标类型</returns>
         </member>
         <member name="M:AIO.OperationGenerics`1.op_Implicit(AIO.OperationGenerics{`0})~System.Runtime.CompilerServices.TaskAwaiter{`0}">
             <summary>

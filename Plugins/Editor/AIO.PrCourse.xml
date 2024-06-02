@@ -5608,13 +5608,137 @@
         </member>
         <member name="T:AIO.PrWin.Certutil">
             <summary>
-            Certutil 命令
+            <see cref="T:AIO.PrWin.Certutil"/> 命令
             </summary>
+        </member>
+        <member name="M:AIO.PrWin.Certutil.Custom(System.String,System.String)">
+            <summary>
+             <see cref="M:AIO.PrWin.Certutil.MD5(System.String)"/> 算法 计算 <see cref="!:target"/>
+            </summary>
+            <param name="target"> 目标文件路径 </param>
+            <param name="type"> 类型 </param>
+            <returns> 执行器 </returns>
+        </member>
+        <member name="M:AIO.PrWin.Certutil.GetCustom(System.String,System.String)">
+            <summary>
+            获取 <see cref="!:target"/> 的 自定义算法 值
+            </summary>
+            <param name="target"> 目标文件路径 </param>
+            <param name="type"> 类型 </param>
+            <returns> 自定义算法 值 </returns>
+        </member>
+        <member name="M:AIO.PrWin.Certutil.GetCustomAsync(System.String,System.String)">
+            <summary>
+            获取 <see cref="!:target"/> 的 自定义算法 值
+            </summary>
+            <param name="target"> 目标文件路径 </param>
+            <param name="type"> 类型 </param>
+            <returns> 自定义算法 值 </returns>
         </member>
         <member name="M:AIO.PrWin.Certutil.MD5(System.String)">
             <summary>
-            计算MD5
+             <see cref="M:AIO.PrWin.Certutil.MD5(System.String)"/> 算法 计算 <see cref="!:target"/>
             </summary>
+            <param name="target"> 目标文件路径 </param>
+            <returns> 执行器 </returns>
+        </member>
+        <member name="M:AIO.PrWin.Certutil.GetMD5(System.String)">
+            <summary>
+            获取 <see cref="!:target"/> 的 <see cref="M:AIO.PrWin.Certutil.MD5(System.String)"/> 值
+            </summary>
+            <param name="target"> 目标文件路径 </param>
+            <returns> MD5 值 </returns>
+        </member>
+        <member name="M:AIO.PrWin.Certutil.GetMD5Async(System.String)">
+            <summary>
+            获取 <see cref="!:target"/> 的 <see cref="M:AIO.PrWin.Certutil.MD5(System.String)"/> 值
+            </summary>
+            <param name="target"> 目标文件路径 </param>
+            <returns> MD5 值 </returns>
+        </member>
+        <member name="M:AIO.PrWin.Certutil.SHA1(System.String)">
+            <summary>
+             <see cref="M:AIO.PrWin.Certutil.SHA1(System.String)"/> 算法 计算 <see cref="!:target"/>
+            </summary>
+            <param name="target"> 目标文件路径 </param>
+            <returns> 执行器 </returns>
+        </member>
+        <member name="M:AIO.PrWin.Certutil.GetSHA1(System.String)">
+            <summary>
+            获取 <see cref="!:target"/> 的 <see cref="M:AIO.PrWin.Certutil.SHA1(System.String)"/> 值
+            </summary>
+            <param name="target"> 目标文件路径 </param>
+            <returns> SHA1 值 </returns>
+        </member>
+        <member name="M:AIO.PrWin.Certutil.GetSHA1Async(System.String)">
+            <summary>
+            获取 <see cref="!:target"/> 的 <see cref="M:AIO.PrWin.Certutil.SHA1(System.String)"/> 值
+            </summary>
+            <param name="target"> 目标文件路径 </param>
+            <returns> SHA1 值 </returns>
+        </member>
+        <member name="M:AIO.PrWin.Certutil.SHA256(System.String)">
+            <summary>
+             <see cref="M:AIO.PrWin.Certutil.SHA256(System.String)"/> 算法 计算 <see cref="!:target"/>
+            </summary>
+            <param name="target"> 目标文件路径 </param>
+            <returns> 执行器 </returns>
+        </member>
+        <member name="M:AIO.PrWin.Certutil.GetSHA256(System.String)">
+            <summary>
+            获取 <see cref="!:target"/> 的 <see cref="M:AIO.PrWin.Certutil.SHA256(System.String)"/> 值
+            </summary>
+            <param name="target"> 目标文件路径 </param>
+            <returns> SHA256 值 </returns>
+        </member>
+        <member name="M:AIO.PrWin.Certutil.GetSHA256Async(System.String)">
+            <summary>
+            获取 <see cref="!:target"/> 的 <see cref="M:AIO.PrWin.Certutil.SHA256(System.String)"/> 值
+            </summary>
+            <param name="target"> 目标文件路径 </param>
+            <returns> SHA256 值 </returns>
+        </member>
+        <member name="M:AIO.PrWin.Certutil.SHA384(System.String)">
+            <summary>
+             <see cref="M:AIO.PrWin.Certutil.SHA384(System.String)"/> 算法 计算 <see cref="!:target"/>
+            </summary>
+            <param name="target"> 目标文件路径 </param>
+            <returns> 执行器 </returns>
+        </member>
+        <member name="M:AIO.PrWin.Certutil.GetSHA384(System.String)">
+            <summary>
+            获取 <see cref="!:target"/> 的 <see cref="M:AIO.PrWin.Certutil.SHA384(System.String)"/> 值
+            </summary>
+            <param name="target"> 目标文件路径 </param>
+            <returns> SHA384 值 </returns>
+        </member>
+        <member name="M:AIO.PrWin.Certutil.GetSHA384Async(System.String)">
+            <summary>
+            获取 <see cref="!:target"/> 的 <see cref="M:AIO.PrWin.Certutil.SHA384(System.String)"/> 值
+            </summary>
+            <param name="target"> 目标文件路径 </param>
+            <returns> SHA384 值 </returns>
+        </member>
+        <member name="M:AIO.PrWin.Certutil.SHA512(System.String)">
+            <summary>
+             <see cref="M:AIO.PrWin.Certutil.SHA512(System.String)"/> 算法 计算 <see cref="!:target"/>
+            </summary>
+            <param name="target"> 目标文件路径 </param>
+            <returns> 执行器 </returns>
+        </member>
+        <member name="M:AIO.PrWin.Certutil.GetSHA512(System.String)">
+            <summary>
+            获取 <see cref="!:target"/> 的 <see cref="M:AIO.PrWin.Certutil.SHA512(System.String)"/> 值
+            </summary>
+            <param name="target"> 目标文件路径 </param>
+            <returns> SHA512 值 </returns>
+        </member>
+        <member name="M:AIO.PrWin.Certutil.GetSHA512Async(System.String)">
+            <summary>
+            获取 <see cref="!:target"/> 的 <see cref="M:AIO.PrWin.Certutil.SHA512(System.String)"/> 值
+            </summary>
+            <param name="target"> 目标文件路径 </param>
+            <returns> SHA512 值 </returns>
         </member>
         <member name="T:AIO.PrWin.Comp">
             <summary>
@@ -6116,11 +6240,6 @@
             </summary>
             <param name="cmd">CMD路径:NoNull</param>
             <returns>结果执行器</returns>
-        </member>
-        <member name="F:AIO.PrWin.CMD_Certutil">
-            <summary>
-            
-            </summary>
         </member>
         <member name="F:AIO.PrWin.CMD_Copy">
             <summary>

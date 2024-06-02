@@ -30,41 +30,38 @@ namespace AIO.RainbowCore.RList
         public string surrogateProperty;
 
         public ReorderableAttribute()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         public ReorderableAttribute(string elementNameProperty)
-            : this(add: true, remove: true, draggable: true, elementNameProperty)
-        {
-        }
+            : this(add: true, remove: true, draggable: true, elementNameProperty) { }
 
         public ReorderableAttribute(string elementNameProperty, string elementIconPath)
-            : this(add: true, remove: true, draggable: true, elementNameProperty, null, elementIconPath)
-        {
-        }
+            : this(add: true, remove: true, draggable: true, elementNameProperty, null, elementIconPath) { }
 
         public ReorderableAttribute(string elementNameProperty, string elementNameOverride, string elementIconPath)
-            : this(add: true, remove: true, draggable: true, elementNameProperty, elementNameOverride, elementIconPath)
-        {
-        }
+            : this(add: true, remove: true, draggable: true, elementNameProperty, elementNameOverride, elementIconPath) { }
 
-        public ReorderableAttribute(bool add, bool remove, bool draggable, string elementNameProperty,
-            string elementIconPath)
-            : this(add, remove, draggable, elementNameProperty, null, elementIconPath)
-        {
-        }
+        public ReorderableAttribute(bool   add,
+                                    bool   remove,
+                                    bool   draggable,
+                                    string elementNameProperty,
+                                    string elementIconPath)
+            : this(add, remove, draggable, elementNameProperty, null, elementIconPath) { }
 
-        public ReorderableAttribute(bool add, bool remove, bool draggable, string elementNameProperty = null,
-            string elementNameOverride = null, string elementIconPath = null)
+        public ReorderableAttribute(bool   add,
+                                    bool   remove,
+                                    bool   draggable,
+                                    string elementNameProperty = null,
+                                    string elementNameOverride = null,
+                                    string elementIconPath     = null)
         {
-            this.add = add;
-            this.remove = remove;
-            this.draggable = draggable;
+            this.add                 = add;
+            this.remove              = remove;
+            this.draggable           = draggable;
             this.elementNameProperty = elementNameProperty;
             this.elementNameOverride = elementNameOverride;
-            this.elementIconPath = elementIconPath;
-            sortable = true;
+            this.elementIconPath     = elementIconPath;
+            sortable                 = true;
         }
     }
 }

@@ -16,10 +16,7 @@ namespace AIO
         /// <summary>
         /// 构建一个指定容量的Buffer
         /// </summary>
-        protected Buffer(int capacity = CAPACITY)
-        {
-            Arrays = new T[capacity < 8 ? 8 : capacity];
-        }
+        protected Buffer(int capacity = CAPACITY) { Arrays = new T[capacity < 8 ? 8 : capacity]; }
         //
         // /// <summary>
         // /// 构建一个指定数据的ByteBuffer
@@ -80,7 +77,7 @@ namespace AIO
                 {
                     // 每次扩大一倍 +1是防止i=0导致死循环
                     while (c < value) c = (c << 1) + 1;
-                    var newArray = new T[c];
+                    var newArray        = new T[c];
                     Array.ConstrainedCopy(Arrays, 0, newArray, 0, WriteIndex);
                     Arrays = newArray;
                 }
@@ -96,19 +93,13 @@ namespace AIO
         /// 自动扩容一杯
         /// </summary>
         /// <remarks>Reserve the buffer of the given capacity</remarks>
-        public void Reserve()
-        {
-            Capacity = Arrays.Length << (1 + 1);
-        }
+        public void Reserve() { Capacity = Arrays.Length << (1 + 1); }
 
         /// <summary>
         /// 自动扩容
         /// </summary>
         /// <remarks>Reserve the buffer of the given capacity</remarks>
-        public void Reserve(int capacity)
-        {
-            Capacity = capacity;
-        }
+        public void Reserve(int capacity) { Capacity = capacity; }
 
         /// <summary> 
         /// 获取有效字节数组
@@ -125,18 +116,12 @@ namespace AIO
         /// <summary> 
         /// 将指定字节缓冲区数据写入当前缓存区
         /// </summary>
-        public virtual void Write(Buffer<T> data)
-        {
-            Write(data.Arrays, data.ReadIndex, data.Count);
-        }
+        public virtual void Write(Buffer<T> data) { Write(data.Arrays, data.ReadIndex, data.Count); }
 
         /// <summary> 
         /// 将指定字节缓冲区数据写入当前缓存区
         /// </summary>
-        public virtual void Write(ICollection<T> bytes)
-        {
-            Write(bytes, 0, bytes.Count);
-        }
+        public virtual void Write(ICollection<T> bytes) { Write(bytes, 0, bytes.Count); }
 
         /// <summary>
         /// 写入byte数组(从position开始写入len个)
@@ -146,7 +131,7 @@ namespace AIO
             if (len <= 0) return;
             if (pos >= len) throw new IndexOutOfRangeException("pos should have less than len");
 
-            var EndIndex = WriteIndex + len;
+            var EndIndex                                         = WriteIndex + len;
             if (Arrays.Length < EndIndex) Capacity               = EndIndex;
             for (var i = pos; i < len; i++) Arrays[WriteIndex++] = bytes[i];
             WriteIndex = EndIndex;
@@ -160,9 +145,9 @@ namespace AIO
             if (len <= 0) return;
             if (pos >= len) throw new IndexOutOfRangeException("pos should have less than len");
 
-            var EndIndex = WriteIndex + len;
+            var EndIndex                           = WriteIndex + len;
             if (Arrays.Length < EndIndex) Capacity = EndIndex;
-            var i = pos;
+            var i                                  = pos;
             foreach (var item in bytes)
             {
                 if (i++ >= len) break;

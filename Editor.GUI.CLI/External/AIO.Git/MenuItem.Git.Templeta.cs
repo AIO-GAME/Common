@@ -1,8 +1,9 @@
-﻿#region
+﻿#region namespace
 
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 using PackageInfo = UnityEditor.PackageManager.PackageInfo;
@@ -52,10 +53,9 @@ namespace AIO.UEditor
             str.AppendLine();
             str.Append("        [MenuItem(\"Git/\" + DisplayName + \"/打开 Open\", false, 0)]\r\n");
             str.Append("        internal static async void Open()\r\n").Append("        {\r\n");
-            str.Append(
-                "            Selection.activeObject = AssetDatabase.LoadAssetAtPath<TextAsset>(Path.Combine(URL, \"package.json\"));\r\n");
-            str.Append(
-                "            await PrPlatform.Open.Path(FullPath);\r\n").Append("        }\r\n");
+            str.Append("            Selection.activeObject = AssetDatabase.LoadAssetAtPath<TextAsset>(Path.Combine(URL, \"package.json\"));\r\n");
+            str.Append("            await PrPlatform.Open.Path(FullPath);\r\n")
+               .Append("        }\r\n");
         }
 
         private static void FuncRefresh(StringBuilder str)
@@ -63,13 +63,13 @@ namespace AIO.UEditor
             str.AppendLine();
             str.AppendFormat("        private static bool HasUpdate = false;\r\n\r\n");
             str.AppendFormat(
-                "        [MenuItem(\"Git/\" + DisplayName + \"/刷新 Refresh\", false, 1), IgnoreConsoleJump, AInit(EInitAttrMode.Editor, -1)]\r\n");
+                             "        [MenuItem(\"Git/\" + DisplayName + \"/刷新 Refresh\", false, 1), IgnoreConsoleJump, AInit(EInitAttrMode.Editor, -1)]\r\n");
             str.AppendFormat("        internal static async void Refresh()\r\n").Append("        {\r\n");
             str.AppendFormat(
-                "            var ret = await PrGit.Helper.GetBehind(FullPath);\r\n");
+                             "            var ret = await PrGit.Helper.GetBehind(FullPath);\r\n");
             str.AppendFormat("            HasUpdate = ret > 0;\r\n");
             str.Append(
-                "            if (ret < 0) Console.WriteLine($\"Git Refresh : 本地Git库版本 提交数超过 远程库版本 : {Math.Abs(ret)}\");");
+                       "            if (ret < 0) Console.WriteLine($\"Git Refresh : 本地Git库版本 提交数超过 远程库版本 : {Math.Abs(ret)}\");");
             str.Append("\r\n        }\r\n");
         }
 
@@ -89,8 +89,8 @@ namespace AIO.UEditor
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
                              nameof(PrPlatform.Git.Add), "        {\r\n");
             str.AppendFormat(
-                "            await PrPlatform.Git.{0}(\r\n                {1}, \".\", false\r\n            ).Async();\r\n{2}",
-                nameof(PrPlatform.Git.Add), INFO_URL, "        }\r\n");
+                             "            await PrPlatform.Git.{0}(\r\n                {1}, \".\", false\r\n            ).Async();\r\n{2}",
+                             nameof(PrPlatform.Git.Add), INFO_URL, "        }\r\n");
         }
 
         private static void FuncPull(StringBuilder str, int index)
@@ -101,8 +101,8 @@ namespace AIO.UEditor
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
                              nameof(PrPlatform.Git.Pull), "        {\r\n");
             str.AppendFormat(
-                "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
-                nameof(PrPlatform.Git.Pull), INFO_URL, "        }\r\n");
+                             "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
+                             nameof(PrPlatform.Git.Pull), INFO_URL, "        }\r\n");
         }
 
         private static void FuncPush(StringBuilder str, int index)
@@ -113,8 +113,8 @@ namespace AIO.UEditor
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
                              nameof(PrPlatform.Git.Push), "        {\r\n");
             str.AppendFormat(
-                "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
-                nameof(PrPlatform.Git.Push), $"({INFO_URL}, null)", "        }\r\n");
+                             "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
+                             nameof(PrPlatform.Git.Push), $"({INFO_URL}, null)", "        }\r\n");
         }
 
         private static void FuncCommit(StringBuilder str, int index)
@@ -125,8 +125,8 @@ namespace AIO.UEditor
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
                              nameof(PrPlatform.Git.Commit), "        {\r\n");
             str.AppendFormat(
-                "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
-                nameof(PrPlatform.Git.Commit), $"({INFO_URL},null)", "        }\r\n");
+                             "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
+                             nameof(PrPlatform.Git.Commit), $"({INFO_URL},null)", "        }\r\n");
         }
 
         private static void FuncUpload(StringBuilder str, int index)
@@ -137,8 +137,8 @@ namespace AIO.UEditor
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
                              nameof(PrPlatform.Git.Upload), "        {\r\n");
             str.AppendFormat(
-                "            await PrPlatform.Git.{0}(\r\n                {1}, false, false, false\r\n            ).Async();\r\n{2}",
-                nameof(PrPlatform.Git.Upload), INFO_URL, "        }\r\n");
+                             "            await PrPlatform.Git.{0}(\r\n                {1}, false, false, false\r\n            ).Async();\r\n{2}",
+                             nameof(PrPlatform.Git.Upload), INFO_URL, "        }\r\n");
         }
 
         private static void FuncClean(StringBuilder str, int index)
@@ -161,8 +161,8 @@ namespace AIO.UEditor
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
                              nameof(PrPlatform.Git.ResetHard), "        {\r\n");
             str.AppendFormat(
-                "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
-                nameof(PrPlatform.Git.ResetHard), INFO_URL, "        }\r\n");
+                             "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
+                             nameof(PrPlatform.Git.ResetHard), INFO_URL, "        }\r\n");
         }
 
         private static void FuncResetKeep(StringBuilder str, int index)
@@ -173,8 +173,8 @@ namespace AIO.UEditor
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
                              nameof(PrPlatform.Git.ResetKeep), "        {\r\n");
             str.AppendFormat(
-                "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
-                nameof(PrPlatform.Git.ResetKeep), INFO_URL, "        }\r\n");
+                             "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
+                             nameof(PrPlatform.Git.ResetKeep), INFO_URL, "        }\r\n");
         }
 
         private static void FuncResetMerge(StringBuilder str, int index)
@@ -185,8 +185,8 @@ namespace AIO.UEditor
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
                              nameof(PrPlatform.Git.ResetMerge), "        {\r\n");
             str.AppendFormat(
-                "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
-                nameof(PrPlatform.Git.ResetMerge), INFO_URL, "        }\r\n");
+                             "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
+                             nameof(PrPlatform.Git.ResetMerge), INFO_URL, "        }\r\n");
         }
 
         private static void FuncResetMixed(StringBuilder str, int index)
@@ -197,8 +197,8 @@ namespace AIO.UEditor
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
                              nameof(PrPlatform.Git.ResetMixed), "        {\r\n");
             str.AppendFormat(
-                "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
-                nameof(PrPlatform.Git.ResetMixed), INFO_URL, "        }\r\n");
+                             "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
+                             nameof(PrPlatform.Git.ResetMixed), INFO_URL, "        }\r\n");
         }
 
         private static void FuncResetSoft(StringBuilder str, int index)
@@ -209,8 +209,8 @@ namespace AIO.UEditor
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
                              nameof(PrPlatform.Git.ResetSoft), "        {\r\n");
             str.AppendFormat(
-                "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
-                nameof(PrPlatform.Git.ResetSoft), INFO_URL, "        }\r\n");
+                             "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
+                             nameof(PrPlatform.Git.ResetSoft), INFO_URL, "        }\r\n");
         }
 
         private static void FuncRemoteSetUrl(StringBuilder str, int index)
@@ -221,8 +221,8 @@ namespace AIO.UEditor
             str.AppendFormat("        internal static async void {0}()\r\n{1}",
                              nameof(PrPlatform.Git.RemoteSetUrl), "        {\r\n");
             str.AppendFormat(
-                "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
-                nameof(PrPlatform.Git.RemoteSetUrl), INFO_URL, "        }\r\n");
+                             "            await PrPlatform.Git.{0}(\r\n                {1}, false\r\n            ).Async();\r\n{2}",
+                             nameof(PrPlatform.Git.RemoteSetUrl), INFO_URL, "        }\r\n");
         }
 
         public static bool CreateTemplate(IEnumerable<PackageInfo> infos)
@@ -237,7 +237,7 @@ namespace AIO.UEditor
             var OutPath = GetOutPath();
 
             var savaDir = new Dictionary<string, string>();
-            var str = new StringBuilder();
+            var str     = new StringBuilder();
             int index;
 
             foreach (var info in infos)
@@ -287,10 +287,10 @@ namespace AIO.UEditor
             var bakDir = new DirectoryInfo(OutPath);
             if (bakDir.Exists)
             {
-                foreach (var file in bakDir.GetFiles("*.Designer.cs", SearchOption.TopDirectoryOnly))
+                foreach (var file in bakDir.GetFiles("*.Designer.cs", SearchOption.TopDirectoryOnly)
+                                           .Where(file => !file.Name.Contains(".meta"))
+                                           .Where(file => !file.Name.StartsWith("GitUnityProject")))
                 {
-                    if (file.Name.Contains(".meta")) continue;
-                    if (file.Name.StartsWith("GitUnityProject")) continue;
                     if (savaDir.ContainsKey(file.Name))
                     {
                         var old = File.ReadAllText(file.FullName, Encoding.UTF8);
@@ -312,33 +312,29 @@ namespace AIO.UEditor
                 bakDir.Create();
             }
 
-            if (savaDir.Count > 0)
+            if (savaDir.Count <= 0) return change;
+            var stringBuilder = new StringBuilder();
+            foreach (var item in savaDir)
             {
-                var stringBuilder = new StringBuilder();
-                foreach (var item in savaDir)
-                {
-                    File.WriteAllText(Path.Combine(OutPath, item.Key), item.Value, Encoding.UTF8);
-                    // 判断是否有 {info.name}.cs 文件 如果有则不生成 如果没有 则生成基础模版
-                    var file = Path.Combine(OutPath, item.Key.Replace(".Designer.cs", ".cs"));
-                    if (File.Exists(file)) continue;
-                    var filename = Path.GetFileNameWithoutExtension(file);
-                    var classname = string.Concat("Git_", filename.Replace('-', '_').Replace('.', '_')).ToUpper();
-                    stringBuilder.Clear();
-                    stringBuilder.AppendLine("namespace AIO.UEditor");
-                    stringBuilder.AppendLine("{");
-                    stringBuilder.AppendLine(
-                        "    [ScriptIcon(IconResource = \"Editor/Icon/App/Git/git-tag-style-1\")]");
-                    stringBuilder.AppendLine($"    internal static partial class {classname}");
-                    stringBuilder.AppendLine("    {");
-                    stringBuilder.AppendLine("    }");
-                    stringBuilder.AppendLine("}");
-                    File.WriteAllText(file, stringBuilder.ToString(), Encoding.UTF8);
-                }
-
-                change = true;
+                File.WriteAllText(Path.Combine(OutPath, item.Key), item.Value, Encoding.UTF8);
+                // 判断是否有 {info.name}.cs 文件 如果有则不生成 如果没有 则生成基础模版
+                var file = Path.Combine(OutPath, item.Key.Replace(".Designer.cs", ".cs"));
+                if (File.Exists(file)) continue;
+                var filename  = Path.GetFileNameWithoutExtension(file);
+                var classname = string.Concat("Git_", filename.Replace('-', '_').Replace('.', '_')).ToUpper();
+                stringBuilder.Clear();
+                stringBuilder.AppendLine("namespace AIO.UEditor");
+                stringBuilder.AppendLine("{");
+                stringBuilder.AppendLine(
+                                         "    [ScriptIcon(IconResource = \"Editor/Icon/App/Git/git-tag-style-1\")]");
+                stringBuilder.AppendLine($"    internal static partial class {classname}");
+                stringBuilder.AppendLine("    {");
+                stringBuilder.AppendLine("    }");
+                stringBuilder.AppendLine("}");
+                File.WriteAllText(file, stringBuilder.ToString(), Encoding.UTF8);
             }
 
-            return change;
+            return true;
         }
 
         public static bool CreateProject()
@@ -353,10 +349,10 @@ namespace AIO.UEditor
             var git = Path.Combine(ProjectPath, ".git");
             if (!Directory.Exists(git)) return false;
 
-            var OutPath = GetOutPath();
+            var OutPath   = GetOutPath();
             var classname = "Git_Project".ToUpper();
-            var str = new StringBuilder();
-            var index = 100;
+            var str       = new StringBuilder();
+            var index     = 100;
             str.Clear();
             str.AppendFormat(INFO_TIP, DateTime.Now.ToString("yyyy-MM-dd")).Append("\r\n\r\n");
             str.AppendFormat("namespace {0}\r\n{1}", typeof(PackageGen).Namespace, "{");

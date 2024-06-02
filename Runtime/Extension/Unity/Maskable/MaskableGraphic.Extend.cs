@@ -22,10 +22,10 @@ namespace AIO.UEngine
             graphic.SetMaterialDirty();
         }
 
-        /// <summary>
-        /// 设置材质
-        /// </summary>
-        /// <param name="path">材质文件路径</param>
+        // /// <summary>
+        // /// 设置材质
+        // /// </summary>
+        // /// <param name="path">材质文件路径</param>
         //public static void SetMat<T>(this T grap, string path) where T : MaskableGraphic
         //{
         //    grap.material = UIMaterialKit.GetMaterial(path);

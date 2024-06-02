@@ -20,7 +20,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 表格数据
         /// </summary>
-        private List<T> _datas;
+        private List<T> _list;
 
         /// <summary>
         /// 所有的元素绘制项
@@ -60,9 +60,9 @@ namespace AIO.UEditor
         /// <summary>
         /// 表格视图
         /// </summary>
-        /// <param name="datas">表格视图数据</param>
+        /// <param name="list">表格视图数据</param>
         /// <param name="columns">表格视图的所有列</param>
-        public TableView(List<T> datas, List<TableColumn<T>> columns) : base(new TreeViewState())
+        public TableView(List<T> list, List<TableColumn<T>> columns) : base(new TreeViewState())
         {
             showAlternatingRowBackgrounds = true;
             showBorder                    = true;
@@ -72,13 +72,13 @@ namespace AIO.UEditor
             multiColumnHeader.sortingChanged        += OnSortingChanged;
             multiColumnHeader.visibleColumnsChanged += OnVisibleColumnsChanged;
 
-            _datas          = datas;
+            _list           = list;
             _selectionDatas = new List<T>();
             _rootItem       = new TableViewItem<T>(-1, -1, null);
             _items          = new List<TableViewItem<T>>();
-            for (var i = 0; i < _datas.Count; i++)
+            foreach (var item in _list)
             {
-                _items.Add(new TableViewItem<T>(_idSign, 0, _datas[i]));
+                _items.Add(new TableViewItem<T>(_idSign, 0, item));
                 _idSign += 1;
             }
 
@@ -120,10 +120,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 构造根节点
         /// </summary>
-        protected override TreeViewItem BuildRoot()
-        {
-            return _rootItem;
-        }
+        protected override TreeViewItem BuildRoot() { return _rootItem; }
 
         /// <summary>
         /// 构造所有行
@@ -150,12 +147,12 @@ namespace AIO.UEditor
         /// </summary>
         protected override void RowGUI(RowGUIArgs args)
         {
-            var item = args.item as TableViewItem<T>;
+            var item           = args.item as TableViewItem<T>;
             var visibleColumns = args.GetNumVisibleColumns();
             for (var i = 0; i < visibleColumns; i++)
             {
                 var cellRect = args.GetCellRect(i);
-                var index = args.GetColumn(i);
+                var index    = args.GetColumn(i);
                 CenterRectUsingSingleLineHeight(ref cellRect);
                 var column = multiColumnHeader.GetColumn(index) as TableColumn<T>;
                 column.DrawCell?.Invoke(cellRect, item.Data, args.row, args.selected, args.focused);
@@ -206,10 +203,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 是否允许多选
         /// </summary>
-        protected override bool CanMultiSelect(TreeViewItem item)
-        {
-            return IsCanMultiSelect;
-        }
+        protected override bool CanMultiSelect(TreeViewItem item) { return IsCanMultiSelect; }
 
         /// <summary>
         /// 绘制表格视图
@@ -255,7 +249,7 @@ namespace AIO.UEditor
         private void OnSortingChanged(MultiColumnHeader columnheader)
         {
             var isAscending = multiColumnHeader.IsSortedAscending(multiColumnHeader.sortedColumnIndex);
-            var column = multiColumnHeader.GetColumn(multiColumnHeader.sortedColumnIndex) as TableColumn<T>;
+            var column      = multiColumnHeader.GetColumn(multiColumnHeader.sortedColumnIndex) as TableColumn<T>;
             if (column.Compare != null)
             {
                 _items.Sort((a, b) =>
@@ -271,10 +265,7 @@ namespace AIO.UEditor
         /// <summary>
         /// 当列激活状态改变
         /// </summary>
-        private void OnVisibleColumnsChanged(MultiColumnHeader columnheader)
-        {
-            Reload();
-        }
+        private void OnVisibleColumnsChanged(MultiColumnHeader columnheader) { Reload(); }
 
         /// <summary>
         /// 添加数据
@@ -282,10 +273,10 @@ namespace AIO.UEditor
         /// <param name="data">数据</param>
         public void AddData(T data)
         {
-            if (_datas.Contains(data))
+            if (_list.Contains(data))
                 return;
 
-            _datas.Add(data);
+            _list.Add(data);
             _items.Add(new TableViewItem<T>(_idSign, 0, data));
             _idSign += 1;
             Reload();
@@ -300,10 +291,10 @@ namespace AIO.UEditor
             for (var i = 0; i < datas.Count; i++)
             {
                 var data = datas[i];
-                if (_datas.Contains(data))
+                if (_list.Contains(data))
                     continue;
 
-                _datas.Add(data);
+                _list.Add(data);
                 _items.Add(new TableViewItem<T>(_idSign, 0, data));
                 _idSign += 1;
             }
@@ -317,10 +308,10 @@ namespace AIO.UEditor
         /// <param name="data">数据</param>
         public void DeleteData(T data)
         {
-            if (!_datas.Contains(data))
+            if (!_list.Contains(data))
                 return;
 
-            _datas.Remove(data);
+            _list.Remove(data);
             var item = _items.Find(i => { return i.Data == data; });
             if (item != null) _items.Remove(item);
 
@@ -336,10 +327,10 @@ namespace AIO.UEditor
             for (var i = 0; i < datas.Count; i++)
             {
                 var data = datas[i];
-                if (!_datas.Contains(data))
+                if (!_list.Contains(data))
                     continue;
 
-                _datas.Remove(data);
+                _list.Remove(data);
                 var item = _items.Find(t => { return t.Data == data; });
                 if (item != null) _items.Remove(item);
             }
@@ -353,7 +344,7 @@ namespace AIO.UEditor
         /// <param name="data">数据</param>
         public void SelectData(T data)
         {
-            if (!_datas.Contains(data))
+            if (!_list.Contains(data))
                 return;
 
             var item = _items.Find(i => { return i.Data == data; });
@@ -367,7 +358,7 @@ namespace AIO.UEditor
         /// <param name="options">选中的操作</param>
         public void SelectData(T data, TreeViewSelectionOptions options)
         {
-            if (!_datas.Contains(data))
+            if (!_list.Contains(data))
                 return;
 
             var item = _items.Find(i => { return i.Data == data; });
@@ -384,7 +375,7 @@ namespace AIO.UEditor
             for (var i = 0; i < datas.Count; i++)
             {
                 var data = datas[i];
-                if (!_datas.Contains(data))
+                if (!_list.Contains(data))
                     continue;
 
                 var item = _items.Find(t => { return t.Data == data; });
@@ -405,7 +396,7 @@ namespace AIO.UEditor
             for (var i = 0; i < datas.Count; i++)
             {
                 var data = datas[i];
-                if (!_datas.Contains(data))
+                if (!_list.Contains(data))
                     continue;
 
                 var item = _items.Find(t => { return t.Data == data; });
@@ -420,7 +411,7 @@ namespace AIO.UEditor
         /// </summary>
         public void ClearData()
         {
-            _datas.Clear();
+            _list.Clear();
             _items.Clear();
             Reload();
         }

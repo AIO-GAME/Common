@@ -63,10 +63,7 @@ namespace AIO.UEditor
                 return window;
             }
 
-            private static EditorWindow Command(string key)
-            {
-                return Command(WindowList[key]);
-            }
+            private static EditorWindow Command(string key) { return Command(WindowList[key]); }
 
             /// <summary>
             /// 打开窗口
@@ -276,7 +273,7 @@ namespace AIO.UEditor
             where T : EditorWindow
             {
                 if (string.IsNullOrEmpty(title)) title = typeof(T).Name;
-                var key = GetWindowKey<T>(title);
+                var key                                = GetWindowKey<T>(title);
                 if (WindowList.TryGetValue(key, out var value)) return (T)Command(value);
                 WindowList[key] = EditorWindow.GetWindowWithRect<T>(rect, utility, title, focus);
                 WindowList[key].Show(true);
@@ -294,13 +291,12 @@ namespace AIO.UEditor
             public static EditorWindow Open(Type type, Rect rect, string title, bool utility = true)
             {
                 if (string.IsNullOrEmpty(title)) title = type.Name;
-                var key = GetWindowKey(type, title);
+                var key                                = GetWindowKey(type, title);
                 if (WindowList.TryGetValue(key, out var value)) return Command(value);
                 WindowList[key] = EditorWindow.GetWindowWithRect(type, rect, utility, title);
                 WindowList[key].Show(true);
                 return Command(key);
             }
-
 
             /// <summary>
             /// 释放窗口
@@ -311,10 +307,10 @@ namespace AIO.UEditor
             where T : EditorWindow
             {
                 string title;
-                if (window is null)
+                if (!window)
                 {
                     title = typeof(T).Name;
-                    var attribute = typeof(T).GetCustomAttribute<GWindowAttribute>(false);
+                    var attribute                = typeof(T).GetCustomAttribute<GWindowAttribute>(false);
                     if (attribute != null) title = typeof(T).Name;
                 }
                 else
@@ -333,40 +329,28 @@ namespace AIO.UEditor
             /// 打开窗口
             /// </summary>
             /// <param name="type"><see cref="EditorWindow"/></param>
-            public static EditorWindow Open(Type type)
-            {
-                return Open(type, string.Empty, false, true);
-            }
+            public static EditorWindow Open(Type type) { return Open(type, string.Empty, false, true); }
 
             /// <summary>
             /// 打开窗口
             /// </summary>
             /// <param name="type"><see cref="EditorWindow"/></param>
             /// <param name="title">标题</param>
-            public static EditorWindow Open(Type type, string title)
-            {
-                return Open(type, title, false, true);
-            }
+            public static EditorWindow Open(Type type, string title) { return Open(type, title, false, true); }
 
             /// <summary>
             /// 打开窗口
             /// </summary>
             /// <param name="type"><see cref="EditorWindow"/></param>
             /// <param name="title">标题</param>
-            public static EditorWindow Open(Type type, GTContent title)
-            {
-                return Open(type, title, false, true);
-            }
+            public static EditorWindow Open(Type type, GTContent title) { return Open(type, title, false, true); }
 
             /// <summary>
             /// 打开窗口
             /// </summary>
             /// <param name="type"><see cref="EditorWindow"/></param>
             /// <param name="utility">边框</param>
-            public static EditorWindow Open(Type type, bool utility)
-            {
-                return Open(type, GTContent.Empty, utility, true);
-            }
+            public static EditorWindow Open(Type type, bool utility) { return Open(type, GTContent.Empty, utility, true); }
 
             /// <summary>
             /// 打开窗口
@@ -374,10 +358,7 @@ namespace AIO.UEditor
             /// <param name="type"><see cref="EditorWindow"/></param>
             /// <param name="utility">边框</param>
             /// <param name="focus">聚焦</param>
-            public static EditorWindow Open(Type type, bool utility, bool focus)
-            {
-                return Open(type, GTContent.Empty, utility, focus);
-            }
+            public static EditorWindow Open(Type type, bool utility, bool focus) { return Open(type, GTContent.Empty, utility, focus); }
 
             /// <summary>
             /// 打开窗口
@@ -386,10 +367,7 @@ namespace AIO.UEditor
             /// <param name="utility">边框</param>
             /// <param name="title">标题</param>
             /// <param name="focus">聚焦</param>
-            public static EditorWindow Open(Type type, GTContent title, bool utility, bool focus)
-            {
-                return Open(type, title.Content, utility, focus);
-            }
+            public static EditorWindow Open(Type type, GTContent title, bool utility, bool focus) { return Open(type, title.Content, utility, focus); }
 
             /// <summary>
             /// 打开窗口
@@ -408,14 +386,14 @@ namespace AIO.UEditor
 
                 if (string.IsNullOrEmpty(title.text))
                 {
-                    var attribute = type.GetCustomAttribute<GWindowAttribute>(false);
+                    var attribute                = type.GetCustomAttribute<GWindowAttribute>(false);
                     if (attribute != null) title = attribute.Title;
                 }
 
                 if (string.IsNullOrEmpty(title.text)) title.text = type.Name;
 
                 var key = GetWindowKey(type, title.text);
-                if (!WindowList.ContainsKey(key) || WindowList[key] is null)
+                if (!WindowList.ContainsKey(key) || !WindowList[key])
                 {
                     WindowList[key]              = ScriptableObject.CreateInstance(type) as EditorWindow;
                     WindowList[key].titleContent = title;
@@ -443,20 +421,14 @@ namespace AIO.UEditor
             /// </summary>
             /// <param name="type"><see cref="EditorWindow"/></param>
             /// <param name="desiredDockNextTo">组</param>
-            public static EditorWindow Open(Type type, ICollection<Type> desiredDockNextTo)
-            {
-                return Open(type, GTContent.Empty, true, desiredDockNextTo);
-            }
+            public static EditorWindow Open(Type type, ICollection<Type> desiredDockNextTo) { return Open(type, GTContent.Empty, true, desiredDockNextTo); }
 
             /// <summary>
             /// 打开窗口
             /// </summary>
             /// <param name="type"><see cref="EditorWindow"/></param>
             /// <param name="desiredDockNextTo">组</param>
-            public static EditorWindow Open(Type type, params Type[] desiredDockNextTo)
-            {
-                return Open(type, GTContent.Empty, true, desiredDockNextTo);
-            }
+            public static EditorWindow Open(Type type, params Type[] desiredDockNextTo) { return Open(type, GTContent.Empty, true, desiredDockNextTo); }
 
             /// <summary>
             /// 打开窗口
@@ -486,10 +458,7 @@ namespace AIO.UEditor
             /// <param name="title">标题</param>
             /// <param name="type"><see cref="EditorWindow"/></param>
             /// <param name="desiredDockNextTo">组</param>
-            public static EditorWindow Open(Type type, GTContent title, params Type[] desiredDockNextTo)
-            {
-                return Open(type, title, true, desiredDockNextTo);
-            }
+            public static EditorWindow Open(Type type, GTContent title, params Type[] desiredDockNextTo) { return Open(type, title, true, desiredDockNextTo); }
 
             /// <summary>
             /// 打开窗口
@@ -497,10 +466,7 @@ namespace AIO.UEditor
             /// <param name="title">标题</param>
             /// <param name="type"><see cref="EditorWindow"/></param>
             /// <param name="desiredDockNextTo">组</param>
-            public static EditorWindow Open(Type type, GUIContent title, params Type[] desiredDockNextTo)
-            {
-                return Open(type, title, true, desiredDockNextTo);
-            }
+            public static EditorWindow Open(Type type, GUIContent title, params Type[] desiredDockNextTo) { return Open(type, title, true, desiredDockNextTo); }
 
             /// <summary>
             /// 打开窗口
@@ -543,8 +509,7 @@ namespace AIO.UEditor
             /// <param name="focus">聚焦</param>
             /// <param name="type"><see cref="EditorWindow"/></param>
             /// <param name="desiredDockNextTo">组</param>
-            public static EditorWindow Open(Type              type, GUIContent title, bool focus,
-                                            ICollection<Type> desiredDockNextTo)
+            public static EditorWindow Open(Type type, GUIContent title, bool focus, ICollection<Type> desiredDockNextTo)
             {
                 if (!type.IsSubclassOf(typeof(EditorWindow)))
                 {
@@ -554,7 +519,7 @@ namespace AIO.UEditor
 
                 if (string.IsNullOrEmpty(title.text))
                 {
-                    var attribute = type.GetCustomAttribute<GWindowAttribute>(false);
+                    var attribute                = type.GetCustomAttribute<GWindowAttribute>(false);
                     if (attribute != null) title = attribute.GetTitle();
                 }
 
@@ -595,45 +560,43 @@ namespace AIO.UEditor
                 var containerWindowType = assembly.GetType("UnityEditor.ContainerWindow");
 
                 if (!(containerWindowType?.GetProperty("windows",
-                                                       BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty)?.GetValue(null, null) is Array windowsObj)) return false;
+                                                       BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty)
+                                         ?.GetValue(null, null) is Array windowsObj)) return false;
                 var containerWindowRootView = containerWindowType.GetProperty("rootView", PROPERTY_BIND);
                 if (containerWindowRootView is null) return false;
 
-                var dockAreaType = assembly.GetType("UnityEditor.DockArea");
+                var dockAreaType    = assembly.GetType("UnityEditor.DockArea");
                 var dockAreaMethods = dockAreaType?.GetMethods(BindingFlags.Public | BindingFlags.Instance);
                 var dockAreaMethodAddTab = dockAreaMethods?
-                   .Where(dockAreaMethod => dockAreaMethod.Name == "AddTab").FirstOrDefault(dockAreaMethod => dockAreaMethod.GetParameters().Length == 2);
+                                           .Where(dockAreaMethod => dockAreaMethod.Name == "AddTab")
+                                           .FirstOrDefault(dockAreaMethod => dockAreaMethod.GetParameters().Length == 2);
                 if (dockAreaMethodAddTab is null) return false;
 
-                var viewType = assembly.GetType("UnityEditor.View");
+                var viewType        = assembly.GetType("UnityEditor.View");
                 var viewAllChildren = viewType?.GetProperty("allChildren", PROPERTY_BIND);
                 if (viewAllChildren is null) return false;
-                foreach (var desired in desiredDockNextTo)
+                var bind = BindingFlags.NonPublic | BindingFlags.Instance;
+                var type = instance.GetType();
+                foreach (var desired in desiredDockNextTo.Where(desired => desired == type))
                 {
-                    if (desired is null) continue;
-                    if (desired == instance.GetType()) continue;
-                    foreach (var window in windowsObj)
+                    foreach (var v1 in windowsObj
+                                       .Cast<object>()
+                                       .Where(window => window != null)
+                                       .Where(window => !window.Equals(instance))
+                                       .Select(window => containerWindowRootView.GetValue(window, null))
+                                       .Where(v1 => v1 != null))
                     {
-                        if (window is null) continue;
-                        if (window.Equals(instance)) continue;
-                        var v1 = containerWindowRootView.GetValue(window, null);
-                        if (v1 is null) continue;
                         if (!(viewAllChildren.GetValue(v1, null) is Array v2)) continue;
-                        foreach (var allChild in v2)
+                        foreach (var allChild in v2
+                                                 .Cast<object>()
+                                                 .Where(allChild => allChild != null)
+                                                 .Where(allChild => dockAreaType.IsInstanceOfType(allChild))
+                                )
                         {
-                            if (allChild is null) continue;
-                            if (!dockAreaType.IsInstanceOfType(allChild)) continue;
-                            var m_Panes = dockAreaType.GetField("m_Panes",
-                                                                BindingFlags.NonPublic | BindingFlags.Instance);
-                            if (!(m_Panes?.GetValue(allChild) is List<EditorWindow> mPanes)) continue;
-                            foreach (var item in mPanes)
-                            {
-                                if (item is null) continue;
-                                if (item == instance) continue;
-                                if (item.GetType() != desired) continue;
-                                dockAreaMethodAddTab.Invoke(allChild, new object[] { instance, false });
-                                return true;
-                            }
+                            if (!(dockAreaType.GetField("m_Panes", bind)?.GetValue(allChild) is List<EditorWindow> mPanes)) continue;
+                            if (mPanes.Where(item => item).Where(item => item != instance).All(item => item.GetType() != desired)) continue;
+                            dockAreaMethodAddTab.Invoke(allChild, new object[] { instance, false, });
+                            return true;
                         }
                     }
                 }

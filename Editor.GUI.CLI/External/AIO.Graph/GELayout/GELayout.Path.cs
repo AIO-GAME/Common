@@ -9,7 +9,7 @@ namespace AIO.UEditor
 {
     public partial class GELayout
     {
-        /// <summary>  
+        /// <summary>
         /// 绘制字段 string 路径
         /// </summary>
         /// <param name="label">标题</param>
@@ -21,7 +21,8 @@ namespace AIO.UEditor
             string label,
             string value,
             string tips        = "Please select the path",
-            string defaultName = "", float width = 50)
+            string defaultName = "",
+            float  width       = 50)
         {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField(label);
@@ -33,7 +34,7 @@ namespace AIO.UEditor
             return value;
         }
 
-        /// <summary>  
+        /// <summary>
         /// 绘制字段 string 路径
         /// </summary>
         /// <param name="label">标题</param>
@@ -45,7 +46,8 @@ namespace AIO.UEditor
             GTContent label,
             string    value,
             string    tips        = "Please select the path",
-            string    defaultName = "", float width = 50)
+            string    defaultName = "",
+            float     width       = 50)
         {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField(label);

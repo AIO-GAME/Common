@@ -1,10 +1,5 @@
-﻿#region
+﻿#region namespace
 
-#if !UNITY_2019_1_OR_NEWER
-using UnityEngine.Experimental.UIElements;
-#else
-using System.Threading.Tasks;
-#endif
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +8,13 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-#endregion
+#if !UNITY_2019_1_OR_NEWER
+using UnityEngine.Experimental.UIElements;
+#elif UNITY_2021_1_OR_NEWER
+using System.Threading.Tasks;
+#endif
 
+#endregion
 
 namespace AIO.UEditor
 {
@@ -27,8 +27,8 @@ namespace AIO.UEditor
 
         private static ScriptableObject ms_CurrentToolbar;
 
-        private static readonly FieldInfo ONGUI_HANDLER_FIELDINFO = containterType.GetField("m_OnGUIHandler",
-            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        private static readonly FieldInfo ONGUI_HANDLER_FIELDINFO =
+            containterType.GetField("m_OnGUIHandler", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
 #if UNITY_2020_1_OR_NEWER
         private static readonly Type GUIVIEW_TYPE = typeof(Editor).Assembly.GetType("UnityEditor.GUIView");
@@ -36,11 +36,11 @@ namespace AIO.UEditor
         private static readonly Type backendType =
             typeof(Editor).Assembly.GetType("UnityEditor.IWindowBackend");
 
-        private static readonly PropertyInfo guiBackend = GUIVIEW_TYPE.GetProperty("windowBackend",
-            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        private static readonly PropertyInfo guiBackend =
+            GUIVIEW_TYPE.GetProperty("windowBackend", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
-        private static readonly PropertyInfo VISUALTREE_PROPERTYINFO = backendType.GetProperty("visualTree",
-            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        private static readonly PropertyInfo VISUALTREE_PROPERTYINFO =
+            backendType.GetProperty("visualTree", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
 #else
         private static readonly Type GUIVIEW_TYPE = typeof(Editor).Assembly.GetType("UnityEditor.GUIView");
@@ -120,12 +120,12 @@ namespace AIO.UEditor
 #if !UNITY_2021_1_OR_NEWER
         private static void OnUpdate()
         {
-            if (ms_CurrentToolbar != null) return;
+            if (ms_CurrentToolbar) return;
             var toolbars = Resources.FindObjectsOfTypeAll(TOOLBAR_TYPE);
             ms_CurrentToolbar = toolbars.Length > 0 ? (ScriptableObject)toolbars[0] : null;
-            if (ms_CurrentToolbar is null) return;
+            if (!ms_CurrentToolbar) return;
 #if UNITY_2020_1_OR_NEWER
-            var backend = guiBackend.GetValue(ms_CurrentToolbar);
+            var backend  = guiBackend.GetValue(ms_CurrentToolbar);
             var elements = VISUALTREE_PROPERTYINFO.GetValue(backend, null) as VisualElement;
 #else
             var elements = VISUALTREE_PROPERTYINFO.GetValue(ms_CurrentToolbar, null) as VisualElement;
@@ -149,9 +149,9 @@ namespace AIO.UEditor
             if (Application.isEditor)
             {
                 foreach (var lnk in from lnk in LnkToolsHelper.Data
-                         where lnk.ShowMode == ELnkShowMode.Toolbar
-                         where lnk.Mode == ELnkToolsMode.OnlyEditor || lnk.Mode == ELnkToolsMode.AllMode
-                         select lnk)
+                                    where lnk.ShowMode == ELnkShowMode.Toolbar
+                                    where lnk.Mode == ELnkToolsMode.OnlyEditor || lnk.Mode == ELnkToolsMode.AllMode
+                                    select lnk)
                 {
                     if (GUI.Button(rect, lnk.Content, GEStyle.TEtoolbarbutton))
                     {
@@ -164,9 +164,9 @@ namespace AIO.UEditor
             else if (Application.isPlaying)
             {
                 foreach (var lnk in from lnk in LnkToolsHelper.Data
-                         where lnk.ShowMode == ELnkShowMode.Toolbar
-                         where lnk.Mode == ELnkToolsMode.OnlyRuntime || lnk.Mode == ELnkToolsMode.AllMode
-                         select lnk)
+                                    where lnk.ShowMode == ELnkShowMode.Toolbar
+                                    where lnk.Mode == ELnkToolsMode.OnlyRuntime || lnk.Mode == ELnkToolsMode.AllMode
+                                    select lnk)
                 {
                     if (GUI.Button(rect, lnk.Content, GEStyle.TEtoolbarbutton))
                     {

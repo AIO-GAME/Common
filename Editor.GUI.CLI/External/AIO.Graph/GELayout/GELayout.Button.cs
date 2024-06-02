@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace AIO.UEditor
     public partial class GELayout
     {
         /// <summary>
-        /// Make a Selection Grid 
+        /// Make a Selection Grid
         /// </summary>
         /// <param name="selected">The index of the selected button. <see cref="int"/></param>
         /// <param name="contents">An array of text, image and tooltips for the button.</param>
@@ -23,27 +24,26 @@ namespace AIO.UEditor
         {
             using (new GUILayout.HorizontalScope("PR Insertion", GUILayout.Width(contents.Count * width)))
             {
-                foreach (var content in contents)
-                    if (GUILayout.Button(content.Key, selected.Equals(content.Value)
-                                             ? "PreLabel"
+                foreach (var content in contents.Where(content => GUILayout.Button(content.Key, selected.Equals(content.Value)
+                                                                                       ? "PreLabel"
 #if UNITY_2020_1_OR_NEWER
                                              : "StatusBarIcon"
 #else
-                                             : "IN EditColliderButton"
+                                                                                       : "IN EditColliderButton"
 #endif
-                                       , GUILayout.Width(width)))
-                    {
-                        selected = content.Value;
-                        cb(selected);
-                        return selected;
-                    }
+                                                                                 , GUILayout.Width(width))))
+                {
+                    selected = content.Value;
+                    cb(selected);
+                    return selected;
+                }
             }
 
             return selected;
         }
 
         /// <summary>
-        /// Make a Selection Grid 
+        /// Make a Selection Grid
         /// </summary>
         /// <param name="selected">The index of the selected button. <see cref="int"/></param>
         /// <param name="contents">An array of text, image and tooltips for the button.</param>
@@ -54,34 +54,29 @@ namespace AIO.UEditor
         {
             using (new GUILayout.HorizontalScope("PR Insertion", GUILayout.Width(contents.Count * width)))
             {
-                foreach (var content in contents)
-                    if (GUILayout.Button(content.Key, selected.Equals(content.Value)
-                                             ? "PreLabel"
+                foreach (var content in contents.Where(content => GUILayout.Button(content.Key, selected.Equals(content.Value)
+                                                                                       ? "PreLabel"
 #if UNITY_2020_1_OR_NEWER
                                              : "StatusBarIcon"
 #else
-                                             : "IN EditColliderButton"
+                                                                                       : "IN EditColliderButton"
 #endif
-                                       , GUILayout.Width(width)))
-                    {
-                        selected = content.Value;
-                        cb(selected);
-                        return selected;
-                    }
+                                                                                 , GUILayout.Width(width))))
+                {
+                    selected = content.Value;
+                    cb(selected);
+                    return selected;
+                }
             }
 
             return selected;
         }
 
-
         /// <summary>
-        /// 绘制 空间视图 
+        /// 绘制 空间视图
         /// </summary>
         /// <returns><see cref="EditorGUILayout.HorizontalScope"/></returns>
-        public static EditorGUILayout.ScrollViewScope VScrollView(Vector2 v2)
-        {
-            return new EditorGUILayout.ScrollViewScope(v2);
-        }
+        public static EditorGUILayout.ScrollViewScope VScrollView(Vector2 v2) { return new EditorGUILayout.ScrollViewScope(v2); }
 
         /// <summary>
         /// 绘制 折叠视图 带帮助按钮
@@ -95,10 +90,10 @@ namespace AIO.UEditor
             string     content,
             bool       isActive,
             Action     helpAction  = null,
-            GUIContent helpContent = null)
-            => VFoldoutWithHelp(
-                EditorGUILayout.GetControlRect(), EditorGUIUtility.TrTempContent(content), isActive, helpAction, helpContent
-            );
+            GUIContent helpContent = null) => VFoldoutWithHelp(
+                                                               EditorGUILayout.GetControlRect(), EditorGUIUtility.TrTempContent(content), isActive, helpAction,
+                                                               helpContent
+                                                              );
 
         /// <summary>
         /// 绘制 折叠视图 带帮助按钮
@@ -112,10 +107,9 @@ namespace AIO.UEditor
             GUIContent content,
             bool       isActive,
             Action     helpAction  = null,
-            GUIContent helpContent = null)
-            => VFoldoutWithHelp(
-                EditorGUILayout.GetControlRect(), content, isActive, helpAction, helpContent
-            );
+            GUIContent helpContent = null) => VFoldoutWithHelp(
+                                                               EditorGUILayout.GetControlRect(), content, isActive, helpAction, helpContent
+                                                              );
 
         /// <summary>
         /// 绘制 折叠视图 带帮助按钮
@@ -176,8 +170,9 @@ namespace AIO.UEditor
             Action<Rect> menuAction  = null,
             GUIContent   helpContent = null
         ) => VFoldoutHeaderGroupWithHelp(
-            EditorGUILayout.GetControlRect(), EditorGUIUtility.TrTempContent(content), isActive, helpAction, indent, menuAction, helpContent
-        );
+                                         EditorGUILayout.GetControlRect(), EditorGUIUtility.TrTempContent(content), isActive, helpAction, indent, menuAction,
+                                         helpContent
+                                        );
 
         /// <summary>
         /// 绘制 折叠视图 带帮助按钮
@@ -197,8 +192,8 @@ namespace AIO.UEditor
             Action<Rect> menuAction  = null,
             GUIContent   helpContent = null
         ) => VFoldoutHeaderGroupWithHelp(
-            EditorGUILayout.GetControlRect(), content, isActive, helpAction, indent, menuAction, helpContent
-        );
+                                         EditorGUILayout.GetControlRect(), content, isActive, helpAction, indent, menuAction, helpContent
+                                        );
 
         /// <summary>
         /// 绘制 折叠视图 带帮助按钮
@@ -279,7 +274,6 @@ namespace AIO.UEditor
             return isActive;
         }
 
-
         /// <summary>
         /// 绘制 折叠视图 带帮助按钮
         /// </summary>
@@ -300,8 +294,9 @@ namespace AIO.UEditor
             Action<Rect> menuAction  = null,
             GUIContent   helpContent = null
         ) => VFoldoutHeaderGroupWithHelp(
-            EditorGUILayout.GetControlRect(), action, EditorGUIUtility.TrTempContent(content), isActive, helpAction, indent, menuAction, helpContent
-        );
+                                         EditorGUILayout.GetControlRect(), action, EditorGUIUtility.TrTempContent(content), isActive, helpAction, indent,
+                                         menuAction, helpContent
+                                        );
 
         /// <summary>
         /// 绘制 折叠视图 带帮助按钮
@@ -325,8 +320,8 @@ namespace AIO.UEditor
             Action<Rect> menuAction  = null,
             GUIContent   helpContent = null
         ) => VFoldoutHeaderGroupWithHelp(
-            rect, action, EditorGUIUtility.TrTempContent(content), isActive, helpAction, indent, menuAction, helpContent
-        );
+                                         rect, action, EditorGUIUtility.TrTempContent(content), isActive, helpAction, indent, menuAction, helpContent
+                                        );
 
         /// <summary>
         /// 绘制 折叠视图 带帮助按钮
@@ -348,8 +343,8 @@ namespace AIO.UEditor
             Action<Rect> menuAction  = null,
             GUIContent   helpContent = null
         ) => VFoldoutHeaderGroupWithHelp(
-            EditorGUILayout.GetControlRect(), action, content, isActive, helpAction, indent, menuAction, helpContent
-        );
+                                         EditorGUILayout.GetControlRect(), action, content, isActive, helpAction, indent, menuAction, helpContent
+                                        );
 
         /// <summary>
         /// 绘制 折叠视图 带帮助按钮
@@ -381,7 +376,7 @@ namespace AIO.UEditor
             };
             var isHover = bgRect.Contains(Event.current.mousePosition);
             EditorGUI.DrawRect(bgRect, isHover ? HeaderHoverColor : HeaderNormalColor);
-            
+
             bgRect.y      = rect.y - 1;
             bgRect.height = 1;
             var color = HeaderBorderColor;

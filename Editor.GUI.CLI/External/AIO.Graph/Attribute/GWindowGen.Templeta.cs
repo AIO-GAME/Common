@@ -12,40 +12,39 @@ namespace AIO.UEditor
     [ScriptIcon(IconResource = "Editor/Icon/Color/general")]
     internal static partial class GWindowGen
     {
-        private const string INFO_TIP = @"/*|============================================|*|
-|*|Author:        |*|Automatic Generation      |*|
-|*|Date:          |*|{0}                |*|
-|*|=============================================*/";
-
-        private const string INFO_USING = @"
-    using UnityEditor;
-    using AIO;
-";
+        private const string INFO_TIP = @"/*|================================|*|
+|*|      Automatic Generation      |*|
+|*|================================|*/";
 
         private static bool CreateProject(IDictionary<Type, GWindowAttribute> dictionary)
         {
             var OutPath   = GetOutPath();
             var classname = "GWindowGen".ToUpper();
-            var str       = new StringBuilder();
-            str.AppendFormat(INFO_TIP, DateTime.Now.ToString("yyyy-MM-dd"))
-               .Append("\r\n\r\n")
-               .AppendFormat("namespace {0}\r\n{1}", typeof(GWindowGen).Namespace, "{")
-               .AppendFormat("{0}\r\n", INFO_USING)
-               .AppendFormat("    /// <summary>\r\n    /// GWindow Manager\r\n    /// </summary>\r\n")
-               .AppendFormat("    [ScriptIcon(IconResource = \"Editor/Icon/Color/general\")]\r\n")
-               .AppendFormat("    internal static partial class {0}\r\n", classname)
-               .Append("    {\r\n");
+            var str       = new ScriptTextBuilder();
+            str.WriteHeader(INFO_TIP).WriteLine();
+            str.IncNamespace(typeof(GWindowGen).Namespace);
+            str.WriteUsing("System");
+            str.WriteUsing("UnityEditor");
+            str.WriteUsing("AIO");
+            str.WriteLine();
+            str.AnnotSummary("GWindow Manager");
+            str.AnnotDate();
+            str.WriteLine("internal static partial class {0}", classname);
+            str.IncBlock();
 
             foreach (var pair in dictionary)
             {
-                str.AppendFormat("        [MenuItem(\"{0}\", priority = {1})]\r\n", pair.Value.Menu.Trim('\\', '/', ' '), pair.Value.MenuPriority)
-                   .AppendFormat("        public static void {0}_Open()\r\n", pair.Key.FullName?.Replace(".", "_"))
-                   .Append("        {\r\n")
-                   .AppendFormat("            EHelper.Window.Open<{0}>();\r\n", pair.Key.FullName)
-                   .Append("        }\r\n");
+                str.WriteLine("[MenuItem(\"{0}\", priority = {1})]", pair.Value.Menu.Trim('\\', '/', ' '), pair.Value.MenuPriority)
+                   .WriteLine("public static void {0}_Open()", pair.Key.FullName?.Replace(".", "_"))
+                   .IncBlock()
+                   .WriteLine("EHelper.Window.Open<{0}>({1});", pair.Key.FullName, string.Join(", ", pair.Value.Dock))
+                   .DecBlock()
+                   .WriteLine();
             }
 
-            str.Append("    }\r\n}");
+            str.DecBlock();
+            str.DecNamespace();
+
             var outfile = Path.Combine(OutPath, "MenuItems.Designer.cs");
             if (File.Exists(outfile))
             {
@@ -53,8 +52,7 @@ namespace AIO.UEditor
                 if (old == str.ToString()) return false;
             }
 
-            if (!Directory.Exists(OutPath)) Directory.CreateDirectory(OutPath);
-            File.WriteAllText(outfile, str.ToString(), Encoding.UTF8);
+            str.Save(outfile);
             return true;
         }
     }

@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -28,8 +29,8 @@ namespace AIO.UEditor
                 if (!extension.Contains("prefab")) continue;
 
                 var full = Path.Combine(path, file);
-                var a = AssetDatabase.LoadAssetAtPath<GameObject>(file);
-                if (a is null) continue;
+                var a    = AssetDatabase.LoadAssetAtPath<GameObject>(file);
+                if (!a) continue;
                 rootObjects.Add(file, a);
             }
 
@@ -38,23 +39,14 @@ namespace AIO.UEditor
             foreach (var g in rootObjects)
             {
                 var trans = g.Value.GetComponentsInChildren<Transform>();
-                foreach (var tran in trans)
+                foreach (var obj in from tran in trans
+                                    let components = tran.GetComponents<Component>()
+                                    where !components.All(currentComponent => currentComponent)
+                                    select tran.gameObject)
                 {
-                    var components = tran.GetComponents<Component>();
-                    for (var i = 0; i < components.Length; i++)
-                    {
-                        var currentComponent = components[i];
-
-                        //If the component is null, that means it's a missing script!
-                        if (currentComponent == null)
-                        {
-                            //Add the sinner to our naughty-list
-                            objectsWithDeadLinks.Add(tran.gameObject);
-                            Selection.activeGameObject = tran.gameObject;
-                            Debug.LogFormat("{0} -> has a missing script! \n{1}", g.Key, tran.gameObject); //Console中输出
-                            break;
-                        }
-                    }
+                    objectsWithDeadLinks.Add(obj);
+                    Selection.activeGameObject = obj;
+                    Debug.LogFormat("{0} -> has a missing script! \n{1}", g.Key, obj); //Console中输出
                 }
                 //Get all components on the GameObject, then loop through them
             }

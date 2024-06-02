@@ -29,7 +29,7 @@ namespace AIO.UEditor
         {
             if (StylesDic.ContainsKey(styleName)) return StylesDic[styleName];
 
-            var s = GUI.skin.FindStyle(styleName);
+            var s            = GUI.skin.FindStyle(styleName);
             if (s == null) s = EditorGUIUtility.GetBuiltinSkin(EditorSkin.Inspector).FindStyle(styleName);
             if (s == null)
             {
@@ -55,12 +55,12 @@ namespace AIO.UEditor
 
         public static void Gen()
         {
-            var sb = new StringBuilder();
+            var sb           = new StringBuilder();
             var unityVersion = Application.unityVersion.Split('.')[0];
             foreach (var style in GUI.skin.customStyles) sb.AppendLine(style.name);
             AHelper.IO.WriteUTF8(
-                PackageInfo.FindForAssembly(typeof(GEStyle).Assembly).resolvedPath +
-                $"/Resources/Editor/Graph/Style/{unityVersion}.txt", sb.ToString());
+                                 PackageInfo.FindForAssembly(typeof(GEStyle).Assembly).resolvedPath +
+                                 $"/Resources/Editor/Graph/Style/{unityVersion}.txt", sb.ToString());
             AssetDatabase.Refresh();
 #if UNITY_2020_1_OR_NEWER
             AssetDatabase.RefreshSettings();
@@ -98,26 +98,26 @@ namespace AIO.UEditor
         [MenuItem("AIO/Gen/Common GUIStyle")]
         public static void GenCommon()
         {
-            var dict = new Dictionary<string, int>();
+            var dict        = new Dictionary<string, int>();
             var versionList = new Dictionary<string, IList<string>>();
             var formatPathCS = PackageInfo.FindForAssembly(typeof(GEStyle).Assembly).resolvedPath +
                                "/Editor.GUI.CLI/External/AIO.Graph/GEStyle/U.GUIStyle.{0}.cs";
             var formatPath = PackageInfo.FindForAssembly(typeof(GEStyle).Assembly).resolvedPath +
                              "/Resources/Editor/Graph/Style/{0}.txt";
-            var versions = new string[] { "2019", "2020", "2021", "2022", "2023", "2024", "2025" };
-            var validVersionNum = 0;
+            var versions        = new string[] { "2019", "2020", "2021", "2022", "2023", "2024", "2025" };
+            var validVersionNumber = 0;
             foreach (var version in versions)
             {
                 var path = string.Format(formatPath, version);
                 if (!File.Exists(path)) continue;
                 CalcNumber(dict, File.ReadAllLines(path), out var list);
                 versionList.Add(version, list);
-                validVersionNum++;
+                validVersionNumber++;
             }
 
             var common = new Dictionary<string, int>();
-            var sb = new StringBuilder();
-            foreach (var item in dict.Where(item => item.Value >= validVersionNum).Where(item => !common.ContainsKey(item.Key)))
+            var sb     = new StringBuilder();
+            foreach (var item in dict.Where(item => item.Value >= validVersionNumber).Where(item => !common.ContainsKey(item.Key)))
             {
                 common.Add(item.Key, item.Value);
                 sb.AppendLine(item.Key);

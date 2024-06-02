@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 #endregion
 
-namespace AIO.UEditor
+namespace AIO.UEngine
 {
     /// <summary>
     /// 按钮检视器
@@ -33,13 +33,15 @@ namespace AIO.UEditor
             /// <summary>
             /// 只在运行模式激活
             /// </summary>
-            Playmode
+            PlayMode
         }
 
         #endregion
 
-        public ButtonAttribute(string text  = null, EnableMode mode = EnableMode.Always, string style = "Button",
-                               int    order = 0)
+        public ButtonAttribute(string     text  = null,
+                               EnableMode mode  = EnableMode.Always,
+                               string     style = "Button",
+                               int        order = 0)
         {
             Text  = text;
             Mode  = mode;

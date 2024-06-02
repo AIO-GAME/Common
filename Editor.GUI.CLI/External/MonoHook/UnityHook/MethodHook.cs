@@ -1,4 +1,6 @@
-﻿/*
+﻿#region namespace
+
+/*
  Desc: 一个可以运行时 Hook Mono 方法的工具，让你可以无需修改 UnityEditor.dll 等文件就可以重写其函数功能
  Author: Misaka Mikoto
  Github: https://github.com/Misaka-Mikoto-Tech/MonoHook
@@ -11,9 +13,11 @@ using DotNetDetour;
 using UnityEngine;
 #if UNITY_EDITOR
 using System.Reflection.Emit;
-using UnityEditor;
 #endif
 
+#if !UNITY_2020_3_OR_NEWER
+using UnityEditor;
+#endif
 
 /*
 >>>>>>> 原始 UnityEditor.LogEntries.Clear 一型(.net 4.x)
@@ -62,6 +66,8 @@ il2cpp:00000000003DE728 A2 56 47 F9                             LDR             
 il2cpp:00000000003DE72C F3 03 01 2A                             MOV             W19, W1                                             |
  */
 
+#endregion
+
 namespace MonoHook
 {
     /// <summary>
@@ -70,12 +76,12 @@ namespace MonoHook
     public unsafe class MethodHook : IDisposable
     {
         public string tag;
-        public bool isHooked { get; private set; }
-        public bool isPlayModeHook { get; private set; }
+        public bool   isHooked       { get; private set; }
+        public bool   isPlayModeHook { get; private set; }
 
-        public MethodBase targetMethod { get; private set; } // 需要被hook的目标方法
+        public MethodBase targetMethod      { get; private set; } // 需要被hook的目标方法
         public MethodBase replacementMethod { get; private set; } // 被hook后的替代方法
-        public MethodBase proxyMethod { get; private set; } // 目标方法的代理方法(可以通过此方法调用被hook后的原方法)
+        public MethodBase proxyMethod       { get; private set; } // 目标方法的代理方法(可以通过此方法调用被hook后的原方法)
 
         private IntPtr _targetPtr; // 目标方法被 jit 后的地址指针
         private IntPtr _replacementPtr;
@@ -85,7 +91,7 @@ namespace MonoHook
 
 #if UNITY_EDITOR && !UNITY_2020_3_OR_NEWER
         /// <summary>
-        /// call `MethodInfo.MethodHandle.GetFunctionPointer()` 
+        /// call `MethodInfo.MethodHandle.GetFunctionPointer()`
         /// will visit static class `UnityEditor.IMGUI.Controls.TreeViewGUI.Styles` and invoke its static constructor,
         /// and init static filed `foldout`, but `GUISKin.current` is null now,
         /// so we should wait until `GUISKin.current` has a valid value
@@ -105,13 +111,15 @@ namespace MonoHook
         /// <param name="replacementMethod">替换方法</param>
         /// <param name="proxyMethod">如果还需要调用原始目标方法，可以通过此参数的方法调用，如果不需要可以填 null</param>
         /// <param name="data"></param>
-        public MethodHook(MethodBase targetMethod, MethodBase replacementMethod, MethodBase proxyMethod = null,
-            string data = "")
+        public MethodHook(MethodBase targetMethod,
+                          MethodBase replacementMethod,
+                          MethodBase proxyMethod = null,
+                          string     data        = "")
         {
-            this.targetMethod = targetMethod;
+            this.targetMethod      = targetMethod;
             this.replacementMethod = replacementMethod;
-            this.proxyMethod = proxyMethod;
-            this.tag = data;
+            this.proxyMethod       = proxyMethod;
+            this.tag               = data;
 
             CheckMethod();
         }
@@ -201,27 +209,25 @@ namespace MonoHook
                         targetMethod.GetMethodBody().GetILAsByteArray().Length; // GetMethodBody can not call on il2cpp
                     if (codeSize < minMethodBodySize)
                         Debug.LogWarning(
-                            $"WRANING: you can not hook method [{methodName}], cause its method body is too short({codeSize}), will random crash on IL2CPP release mode");
+                                         $"WRANING: you can not hook method [{methodName}], cause its method body is too short({codeSize}), will random crash on IL2CPP release mode");
                 }
             }
 
             if (proxyMethod != null)
             {
                 methodName = $"{proxyMethod.DeclaringType?.Name}.{proxyMethod.Name}";
-                if (proxyMethod is DynamicMethod)
-                {
-                }
+                if (proxyMethod is DynamicMethod) { }
                 else
                 {
                     var codeSize = proxyMethod.GetMethodBody().GetILAsByteArray().Length;
                     if (codeSize < minMethodBodySize)
                         Debug.LogWarning(
-                            $"WRANING: size of method body[{methodName}] is too short({codeSize}), will random crash on IL2CPP release mode, please fill some dummy code inside");
+                                         $"WRANING: size of method body[{methodName}] is too short({codeSize}), will random crash on IL2CPP release mode, please fill some dummy code inside");
 
                     if ((proxyMethod.MethodImplementationFlags & MethodImplAttributes.NoOptimization) !=
                         MethodImplAttributes.NoOptimization)
                         throw new Exception(
-                            $"WRANING: method [{methodName}] must has a Attribute `MethodImpl(MethodImplOptions.NoOptimization)` to prevent code call to this optimized by compiler(pass args by shared stack)");
+                                            $"WRANING: method [{methodName}] must has a Attribute `MethodImpl(MethodImplOptions.NoOptimization)` to prevent code call to this optimized by compiler(pass args by shared stack)");
                 }
             }
 #endif
@@ -264,9 +270,9 @@ namespace MonoHook
         /// </summary>
         private bool GetFunctionAddr()
         {
-            _targetPtr = GetFunctionAddr(targetMethod);
+            _targetPtr      = GetFunctionAddr(targetMethod);
             _replacementPtr = GetFunctionAddr(replacementMethod);
-            _proxyPtr = GetFunctionAddr(proxyMethod);
+            _proxyPtr       = GetFunctionAddr(proxyMethod);
 
             if (_targetPtr == IntPtr.Zero || _replacementPtr == IntPtr.Zero)
                 return false;
@@ -277,7 +283,7 @@ namespace MonoHook
             if (_replacementPtr == _targetPtr)
             {
                 throw new Exception(
-                    $"the addresses of target method {targetMethod.Name} and replacement method {replacementMethod.Name} can not be same");
+                                    $"the addresses of target method {targetMethod.Name} and replacement method {replacementMethod.Name} can not be same");
             }
 
             if (LDasm.IsThumb(_targetPtr) || LDasm.IsThumb(_replacementPtr))
@@ -291,7 +297,7 @@ namespace MonoHook
         [StructLayout(LayoutKind.Sequential, Pack = 1)] // 好像在 IL2CPP 里无效
         private struct __ForCopy
         {
-            public long __dummy;
+            public long       __dummy;
             public MethodBase method;
         }
 
@@ -363,7 +369,7 @@ namespace MonoHook
                         sizeof(IntPtr) * 2; // offset of Il2CppReflectionMethod::const MethodInfo *method;
 
                     long methodPtr = 0;
-                    methodPtr = *(long*)ptrData;
+                    methodPtr  = *(long*)ptrData;
                     methodAddr = new IntPtr(*(long*)methodPtr); // MethodInfo::Il2CppMethodPointer methodPointer;
                 }
                 else
@@ -399,9 +405,6 @@ namespace MonoHook
 
         #endregion
 
-        public void Dispose()
-        {
-            Uninstall();
-        }
+        public void Dispose() { Uninstall(); }
     }
 }

@@ -40,8 +40,8 @@ namespace AIO.UEditor
 
         private void OnInit(UObject target, string fieldName)
         {
-            var fieldInfo = target.GetType().GetField(fieldName,
-                                                      BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            var fieldInfo = target.GetType()
+                                  .GetField(fieldName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
             if (fieldInfo == null)
             {
                 Debug.LogWarning($"通用表格绘制器：未从 {target.GetType().FullName} 中找到字段 {fieldName}！");
@@ -134,7 +134,7 @@ namespace AIO.UEditor
             foreach (var item in _fieldInfos)
             {
                 TableColumn<object> column = null;
-                var field = item.Value;
+                var                 field  = item.Value;
                 if (field.FieldType.IsEnum)
                     column = GetEnumColumn(field);
                 else if (field.FieldType == typeof(string))
@@ -195,7 +195,7 @@ namespace AIO.UEditor
                 {
                     var x = (string)field.GetValue(a);
                     var y = (string)field.GetValue(b);
-                    return x.CompareTo(y);
+                    return string.Compare(x, y, StringComparison.CurrentCulture);
                 },
                 DrawCell = (rect, data, rowIndex, isSelected, isFocused) =>
                 {

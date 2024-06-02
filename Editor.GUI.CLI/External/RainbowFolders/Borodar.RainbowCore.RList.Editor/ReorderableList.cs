@@ -22,8 +22,11 @@ namespace AIO.RainbowCore.RList.Editor
 
         public delegate void DrawFooterDelegate(Rect rect);
 
-        public delegate void DrawElementDelegate(Rect rect, SerializedProperty element, GUIContent label, bool selected,
-            bool focused);
+        public delegate void DrawElementDelegate(Rect               rect,
+                                                 SerializedProperty element,
+                                                 GUIContent         label,
+                                                 bool               selected,
+                                                 bool               focused);
 
         public delegate void ActionDelegate(ReorderableList list);
 
@@ -31,8 +34,8 @@ namespace AIO.RainbowCore.RList.Editor
 
         public delegate void AddDropdownDelegate(Rect buttonRect, ReorderableList list);
 
-        public delegate Object DragDropReferenceDelegate(Object[] references,
-            ReorderableList list);
+        public delegate Object DragDropReferenceDelegate(Object[]        references,
+                                                         ReorderableList list);
 
         public delegate void DragDropAppendDelegate(Object reference, ReorderableList list);
 
@@ -44,8 +47,9 @@ namespace AIO.RainbowCore.RList.Editor
 
         public delegate GUIContent GetElementLabelDelegate(SerializedProperty element);
 
-        public delegate void SurrogateCallback(SerializedProperty element, Object objectReference,
-            ReorderableList list);
+        public delegate void SurrogateCallback(SerializedProperty element,
+                                               Object             objectReference,
+                                               ReorderableList    list);
 
         private static class Style
         {
@@ -102,42 +106,42 @@ namespace AIO.RainbowCore.RList.Editor
 
             static Style()
             {
-                iconToolbarPlus = EditorGUIUtility.TrIconContent("Toolbar Plus", "| Add to list");
+                iconToolbarPlus     = EditorGUIUtility.TrIconContent("Toolbar Plus", "| Add to list");
                 iconToolbarPlusMore = EditorGUIUtility.TrIconContent("Toolbar Plus More", "| Choose to add to list");
-                iconToolbarMinus = EditorGUIUtility.TrIconContent("Toolbar Minus", "| Remove selection from list");
-                iconPagePrev = EditorGUIUtility.TrIconContent("Animation.PrevKey", "| Previous page");
-                iconPageNext = EditorGUIUtility.TrIconContent("Animation.NextKey", "| Next page");
-                iconPagePopup = EditorGUIUtility.TrIconContent("UnityEditor.HierarchyWindow", "| Select page");
+                iconToolbarMinus    = EditorGUIUtility.TrIconContent("Toolbar Minus", "| Remove selection from list");
+                iconPagePrev        = EditorGUIUtility.TrIconContent("Animation.PrevKey", "| Previous page");
+                iconPageNext        = EditorGUIUtility.TrIconContent("Animation.NextKey", "| Next page");
+                iconPagePopup       = EditorGUIUtility.TrIconContent("UnityEditor.HierarchyWindow", "| Select page");
                 paginationText = new GUIStyle
                 {
-                    margin = new RectOffset(2, 2, 0, 0),
+                    margin   = new RectOffset(2, 2, 0, 0),
                     fontSize = EditorStyles.miniTextField.fontSize,
-                    font = EditorStyles.miniFont,
+                    font     = EditorStyles.miniFont,
                     normal =
                     {
                         textColor = EditorStyles.miniTextField.normal.textColor
                     },
                     alignment = TextAnchor.UpperLeft,
-                    clipping = TextClipping.Clip
+                    clipping  = TextClipping.Clip
                 };
                 pageSizeTextField = new GUIStyle("RL Footer")
                 {
-                    alignment = TextAnchor.MiddleLeft,
-                    clipping = TextClipping.Clip,
-                    fixedHeight = 0f,
-                    padding = new RectOffset(3, 0, 0, 0),
-                    overflow = new RectOffset(0, 0, -2, -3),
+                    alignment     = TextAnchor.MiddleLeft,
+                    clipping      = TextClipping.Clip,
+                    fixedHeight   = 0f,
+                    padding       = new RectOffset(3, 0, 0, 0),
+                    overflow      = new RectOffset(0, 0, -2, -3),
                     contentOffset = new Vector2(0f, -1f),
-                    font = EditorStyles.miniFont,
-                    fontSize = EditorStyles.miniTextField.fontSize,
-                    fontStyle = FontStyle.Normal,
-                    wordWrap = false,
+                    font          = EditorStyles.miniFont,
+                    fontSize      = EditorStyles.miniTextField.fontSize,
+                    fontStyle     = FontStyle.Normal,
+                    wordWrap      = false,
                     normal =
                     {
                         textColor = EditorStyles.miniTextField.normal.textColor
                     }
                 };
-                draggingHandle = new GUIStyle("RL DragHandle");
+                draggingHandle   = new GUIStyle("RL DragHandle");
                 headerBackground = new GUIStyle("RL Header");
                 footerBackground = new GUIStyle("RL Footer");
                 paginationHeader = new GUIStyle("RL Element")
@@ -150,7 +154,7 @@ namespace AIO.RainbowCore.RList.Editor
                 };
                 verticalLabel = new GUIStyle(EditorStyles.label)
                 {
-                    alignment = TextAnchor.UpperLeft,
+                    alignment     = TextAnchor.UpperLeft,
                     contentOffset = new Vector2(10f, 3f)
                 };
                 boxBackground = new GUIStyle("RL Background")
@@ -159,17 +163,17 @@ namespace AIO.RainbowCore.RList.Editor
                 };
                 preButton = new GUIStyle("RL FooterButton");
 
-                expandButton = EditorGUIUtility.TrIconContent(GetIconName(nameof(expandButton)));
+                expandButton         = EditorGUIUtility.TrIconContent(GetIconName(nameof(expandButton)));
                 expandButton.tooltip = "Expand All Elements";
 
-                collapseButton = EditorGUIUtility.TrIconContent(GetIconName(nameof(collapseButton)));
+                collapseButton         = EditorGUIUtility.TrIconContent(GetIconName(nameof(collapseButton)));
                 collapseButton.tooltip = "Collapse All Elements";
 
-                sortAscending = EditorGUIUtility.TrIconContent("align_vertically_bottom");
-                sortAscending.tooltip = "Sort Ascending";
-                sortDescending = EditorGUIUtility.TrIconContent("align_vertically_top");
+                sortAscending          = EditorGUIUtility.TrIconContent("align_vertically_bottom");
+                sortAscending.tooltip  = "Sort Ascending";
+                sortDescending         = EditorGUIUtility.TrIconContent("align_vertically_top");
                 sortDescending.tooltip = "Sort Descending";
-                listIcon = EditorGUIUtility.TrIconContent("align_horizontally_right");
+                listIcon               = EditorGUIUtility.TrIconContent("align_horizontally_right");
             }
         }
 
@@ -216,15 +220,15 @@ namespace AIO.RainbowCore.RList.Editor
 
             internal DragList(int length)
             {
-                Length = length;
+                Length     = length;
                 StartIndex = 0;
-                elements = new DragElement[length];
+                elements   = new DragElement[length];
             }
 
             internal void Resize(int start, int length)
             {
                 StartIndex = start;
-                Length = length;
+                Length     = length;
                 if (elements.Length != length)
                 {
                     Array.Resize(ref elements, length);
@@ -256,15 +260,9 @@ namespace AIO.RainbowCore.RList.Editor
                 }
             }
 
-            internal void SortByPosition()
-            {
-                Array.Sort(elements, (a, b) => a.desiredRect.center.y.CompareTo(b.desiredRect.center.y));
-            }
+            internal void SortByPosition() { Array.Sort(elements, (a, b) => a.desiredRect.center.y.CompareTo(b.desiredRect.center.y)); }
 
-            internal int GetIndexFromSelection(int index)
-            {
-                return Array.FindIndex(elements, t => t.startIndex == index);
-            }
+            internal int GetIndexFromSelection(int index) { return Array.FindIndex(elements, t => t.startIndex == index); }
         }
 
         private struct DragElement
@@ -302,25 +300,26 @@ namespace AIO.RainbowCore.RList.Editor
 
             internal void RecordState()
             {
-                states = new Dictionary<int, bool>();
+                states     = new Dictionary<int, bool>();
                 isExpanded = property.isExpanded;
                 Iterate(this, property,
-                    delegate(DragElement e, SerializedProperty p, int index) { e.states[index] = p.isExpanded; });
+                        delegate(DragElement e, SerializedProperty p, int index) { e.states[index] = p.isExpanded; });
             }
 
             internal void RestoreState(SerializedProperty value)
             {
                 value.isExpanded = isExpanded;
                 Iterate(this, value,
-                    delegate(DragElement e, SerializedProperty p, int index) { p.isExpanded = e.states[index]; });
+                        delegate(DragElement e, SerializedProperty p, int index) { p.isExpanded = e.states[index]; });
             }
 
-            private static void Iterate(DragElement element, SerializedProperty property,
-                Action<DragElement, SerializedProperty, int> action)
+            private static void Iterate(DragElement                                  element,
+                                        SerializedProperty                           property,
+                                        Action<DragElement, SerializedProperty, int> action)
             {
                 var serializedProperty = property.Copy();
-                var endProperty = serializedProperty.GetEndProperty();
-                var num = 0;
+                var endProperty        = serializedProperty.GetEndProperty();
+                var num                = 0;
                 while (serializedProperty.NextVisible(enterChildren: true) &&
                        !SerializedProperty.EqualContents(serializedProperty, endProperty))
                 {
@@ -335,10 +334,7 @@ namespace AIO.RainbowCore.RList.Editor
         {
             private Dictionary<int, Rect> animIDs;
 
-            public SlideGroup()
-            {
-                animIDs = new Dictionary<int, Rect>();
-            }
+            public SlideGroup() { animIDs = new Dictionary<int, Rect>(); }
 
             public Rect GetRect(int id, Rect r, float easing)
             {
@@ -356,7 +352,7 @@ namespace AIO.RainbowCore.RList.Editor
                 var rect = animIDs[id];
                 if (rect.y == r.y) return r;
 
-                var num = r.y - rect.y;
+                var num  = r.y - rect.y;
                 var num2 = Mathf.Abs(num);
                 if (num2 > rect.height * 2f)
                 {
@@ -375,15 +371,7 @@ namespace AIO.RainbowCore.RList.Editor
 
             public Rect SetRect(int id, Rect rect)
             {
-                if (animIDs.ContainsKey(id))
-                {
-                    animIDs[id] = rect;
-                }
-                else
-                {
-                    animIDs.Add(id, rect);
-                }
-
+                animIDs[id] = rect;
                 return rect;
             }
         }
@@ -419,15 +407,9 @@ namespace AIO.RainbowCore.RList.Editor
                 return total;
             }
 
-            internal int GetPageForIndex(int index)
-            {
-                return !usePagination ? 0 : Mathf.FloorToInt(index / (float)pageSize);
-            }
+            internal int GetPageForIndex(int index) { return !usePagination ? 0 : Mathf.FloorToInt(index / (float)pageSize); }
 
-            internal int GetPageCount(int total)
-            {
-                return !usePagination ? 1 : Mathf.CeilToInt(total / (float)pageSize);
-            }
+            internal int GetPageCount(int total) { return !usePagination ? 1 : Mathf.CeilToInt(total / (float)pageSize); }
 
             internal bool GetVisibleRange(int total, out int start, out int end)
             {
@@ -435,12 +417,12 @@ namespace AIO.RainbowCore.RList.Editor
                 {
                     var num = pageSize;
                     start = Mathf.Clamp(page * num, 0, total - 1);
-                    end = Mathf.Min(start + num, total);
+                    end   = Mathf.Min(start + num, total);
                     return true;
                 }
 
                 start = 0;
-                end = total;
+                end   = total;
                 return false;
             }
         }
@@ -493,20 +475,11 @@ namespace AIO.RainbowCore.RList.Editor
                 }
             }
 
-            public ListSelection()
-            {
-                indexes = new List<int>();
-            }
+            public ListSelection() { indexes = new List<int>(); }
 
-            public ListSelection(IEnumerable<int> indexes)
-            {
-                this.indexes = new List<int>(indexes);
-            }
+            public ListSelection(IEnumerable<int> indexes) { this.indexes = new List<int>(indexes); }
 
-            public bool Contains(int index)
-            {
-                return indexes.Contains(index);
-            }
+            public bool Contains(int index) { return indexes.Contains(index); }
 
             public void Clear()
             {
@@ -577,10 +550,7 @@ namespace AIO.RainbowCore.RList.Editor
                 }
             }
 
-            public int[] ToArray()
-            {
-                return indexes.ToArray();
-            }
+            public int[] ToArray() { return indexes.ToArray(); }
 
             public ListSelection Clone()
             {
@@ -686,33 +656,29 @@ namespace AIO.RainbowCore.RList.Editor
                 Append(to);
             }
 
-            public IEnumerator<int> GetEnumerator()
-            {
-                return ((IEnumerable<int>)indexes).GetEnumerator();
-            }
+            public IEnumerator<int> GetEnumerator() { return ((IEnumerable<int>)indexes).GetEnumerator(); }
 
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                return ((IEnumerable<int>)indexes).GetEnumerator();
-            }
+            IEnumerator IEnumerable.GetEnumerator() { return ((IEnumerable<int>)indexes).GetEnumerator(); }
         }
 
         private static class ListSort
         {
             private delegate int SortComparision(SerializedProperty p1, SerializedProperty p2);
 
-            internal static void SortOnProperty(SerializedProperty list, int length, bool descending,
-                string propertyName)
+            internal static void SortOnProperty(SerializedProperty list,
+                                                int                length,
+                                                bool               descending,
+                                                string             propertyName)
             {
                 BubbleSort(list, length, delegate(SerializedProperty p1, SerializedProperty p2)
                 {
-                    SerializedProperty serializedProperty = p1.FindPropertyRelative(propertyName);
+                    SerializedProperty serializedProperty  = p1.FindPropertyRelative(propertyName);
                     SerializedProperty serializedProperty2 = p2.FindPropertyRelative(propertyName);
                     if (serializedProperty != null && serializedProperty2 != null &&
                         serializedProperty.propertyType == serializedProperty2.propertyType)
                     {
                         int num = Compare(serializedProperty, serializedProperty2, descending,
-                            serializedProperty.propertyType);
+                                          serializedProperty.propertyType);
                         if (!descending)
                         {
                             return num;
@@ -725,8 +691,10 @@ namespace AIO.RainbowCore.RList.Editor
                 });
             }
 
-            internal static void SortOnType(SerializedProperty list, int length, bool descending,
-                SerializedPropertyType type)
+            internal static void SortOnType(SerializedProperty     list,
+                                            int                    length,
+                                            bool                   descending,
+                                            SerializedPropertyType type)
             {
                 BubbleSort(list, length, delegate(SerializedProperty p1, SerializedProperty p2)
                 {
@@ -751,8 +719,10 @@ namespace AIO.RainbowCore.RList.Editor
                 }
             }
 
-            private static int Compare(SerializedProperty p1, SerializedProperty p2, bool descending,
-                SerializedPropertyType type)
+            private static int Compare(SerializedProperty     p1,
+                                       SerializedProperty     p2,
+                                       bool                   descending,
+                                       SerializedPropertyType type)
             {
                 if (p1 == null || p2 == null)
                 {
@@ -833,16 +803,14 @@ namespace AIO.RainbowCore.RList.Editor
             }
 
             public Surrogate(Type type)
-                : this(type, null)
-            {
-            }
+                : this(type, null) { }
 
             public Surrogate(Type type, SurrogateCallback callback)
             {
-                this.type = type;
+                this.type     = type;
                 this.callback = callback;
-                enabled = true;
-                exactType = false;
+                enabled       = true;
+                exactType     = false;
             }
 
             public void Invoke(SerializedProperty element, Object objectReference, ReorderableList list)
@@ -857,16 +825,12 @@ namespace AIO.RainbowCore.RList.Editor
         private class InvalidListException : InvalidOperationException
         {
             public InvalidListException()
-                : base("ReorderableList serializedProperty must be an array")
-            {
-            }
+                : base("ReorderableList serializedProperty must be an array") { }
         }
 
         private class MissingListException : ArgumentNullException
         {
-            public MissingListException() : base($"ReorderableList serializedProperty is null")
-            {
-            }
+            public MissingListException() : base($"ReorderableList serializedProperty is null") { }
         }
 
         private static class Internals
@@ -881,16 +845,19 @@ namespace AIO.RainbowCore.RList.Editor
 
             static Internals()
             {
-                dragDropValidation = Type.GetType("UnityEditor.EditorGUI, UnityEditor")?
-                    .GetMethod("ValidateObjectFieldAssignment", BindingFlags.Static | BindingFlags.NonPublic);
+                dragDropValidation = Type.GetType("UnityEditor.EditorGUI, UnityEditor")
+                                         ?
+                                         .GetMethod("ValidateObjectFieldAssignment", BindingFlags.Static | BindingFlags.NonPublic);
                 appendDragDrop = typeof(SerializedProperty).GetMethod("AppendFoldoutPPtrValue",
-                    BindingFlags.Instance | BindingFlags.NonPublic);
+                                                                      BindingFlags.Instance | BindingFlags.NonPublic);
             }
 
-            internal static Object ValidateObjectDragAndDrop(Object[] references,
-                SerializedProperty property, Type type, bool exactType)
+            internal static Object ValidateObjectDragAndDrop(Object[]           references,
+                                                             SerializedProperty property,
+                                                             Type               type,
+                                                             bool               exactType)
             {
-                dragDropValidationParams = GetParams(ref dragDropValidationParams, 3);
+                dragDropValidationParams    = GetParams(ref dragDropValidationParams, 3);
                 dragDropValidationParams[0] = references;
                 dragDropValidationParams[1] = type;
                 dragDropValidationParams[2] = property;
@@ -899,7 +866,7 @@ namespace AIO.RainbowCore.RList.Editor
 
             internal static void AppendDragAndDropValue(Object obj, SerializedProperty list)
             {
-                appendDragDropParams = GetParams(ref appendDragDropParams, 1);
+                appendDragDropParams    = GetParams(ref appendDragDropParams, 1);
                 appendDragDropParams[0] = obj;
                 appendDragDrop.Invoke(list, appendDragDropParams);
             }
@@ -1063,12 +1030,12 @@ namespace AIO.RainbowCore.RList.Editor
                     return list.arraySize;
                 }
 
-                int num = list.arraySize;
+                int      num           = list.arraySize;
                 Object[] targetObjects = list.serializedObject.targetObjects;
                 for (int i = 0; i < targetObjects.Length; i++)
                 {
                     num = Mathf.Min(new SerializedObject(targetObjects[i]).FindProperty(list.propertyPath).arraySize,
-                        num);
+                                    num);
                 }
 
                 return num;
@@ -1128,24 +1095,28 @@ namespace AIO.RainbowCore.RList.Editor
         public event ActionDelegate onChangedCallback;
 
         public ReorderableList(SerializedProperty list)
-            : this(list, canAdd: true, canRemove: true, draggable: true)
-        {
-        }
+            : this(list, canAdd: true, canRemove: true, draggable: true) { }
 
         public ReorderableList(SerializedProperty list, bool canAdd, bool canRemove, bool draggable)
-            : this(list, canAdd, canRemove, draggable, ElementDisplayType.Auto, null, null, null)
-        {
-        }
+            : this(list, canAdd, canRemove, draggable, ElementDisplayType.Auto, null, null, null) { }
 
-        public ReorderableList(SerializedProperty list, bool canAdd, bool canRemove, bool draggable,
-            ElementDisplayType elementDisplayType, string elementNameProperty, Texture elementIcon)
-            : this(list, canAdd, canRemove, draggable, elementDisplayType, elementNameProperty, null, elementIcon)
-        {
-        }
+        public ReorderableList(SerializedProperty list,
+                               bool               canAdd,
+                               bool               canRemove,
+                               bool               draggable,
+                               ElementDisplayType elementDisplayType,
+                               string             elementNameProperty,
+                               Texture            elementIcon)
+            : this(list, canAdd, canRemove, draggable, elementDisplayType, elementNameProperty, null, elementIcon) { }
 
-        public ReorderableList(SerializedProperty list, bool canAdd, bool canRemove, bool draggable,
-            ElementDisplayType elementDisplayType, string elementNameProperty, string elementNameOverride,
-            Texture elementIcon)
+        public ReorderableList(SerializedProperty list,
+                               bool               canAdd,
+                               bool               canRemove,
+                               bool               draggable,
+                               ElementDisplayType elementDisplayType,
+                               string             elementNameProperty,
+                               string             elementNameOverride,
+                               Texture            elementIcon)
         {
             if (list == null)
             {
@@ -1167,33 +1138,33 @@ namespace AIO.RainbowCore.RList.Editor
                 this.list = list;
             }
 
-            this.canAdd = canAdd;
-            this.canRemove = canRemove;
-            this.draggable = draggable;
-            this.elementDisplayType = elementDisplayType;
+            this.canAdd              = canAdd;
+            this.canRemove           = canRemove;
+            this.draggable           = draggable;
+            this.elementDisplayType  = elementDisplayType;
             this.elementNameProperty = elementNameProperty;
             this.elementNameOverride = elementNameOverride;
-            this.elementIcon = elementIcon;
-            id = GetHashCode();
-            list.isExpanded = true;
-            label = new GUIContent(list.displayName);
-            pageInfoContent = new GUIContent();
-            pageSizeContent = new GUIContent();
-            verticalSpacing = EditorGUIUtility.standardVerticalSpacing;
-            headerHeight = 18f;
-            paginationHeight = 18f;
-            footerHeight = 13f;
-            slideEasing = 0.15f;
-            expandable = true;
-            elementLabels = true;
-            showDefaultBackground = true;
-            multipleSelection = true;
-            pagination = default(Pagination);
-            elementLabel = new GUIContent();
-            dragList = new DragList(0);
-            selection = new ListSelection();
-            slideGroup = new SlideGroup();
-            elementRects = new Rect[0];
+            this.elementIcon         = elementIcon;
+            id                       = GetHashCode();
+            list.isExpanded          = true;
+            label                    = new GUIContent(list.displayName);
+            pageInfoContent          = new GUIContent();
+            pageSizeContent          = new GUIContent();
+            verticalSpacing          = EditorGUIUtility.standardVerticalSpacing;
+            headerHeight             = 18f;
+            paginationHeight         = 18f;
+            footerHeight             = 13f;
+            slideEasing              = 0.15f;
+            expandable               = true;
+            elementLabels            = true;
+            showDefaultBackground    = true;
+            multipleSelection        = true;
+            pagination               = default(Pagination);
+            elementLabel             = new GUIContent();
+            dragList                 = new DragList(0);
+            selection                = new ListSelection();
+            slideGroup               = new SlideGroup();
+            elementRects             = new Rect[0];
         }
 
         public float GetHeight()
@@ -1222,7 +1193,7 @@ namespace AIO.RainbowCore.RList.Editor
             }
             else
             {
-                controlID = GUIUtility.GetControlID(selectionHash, FocusType.Keyboard, rect);
+                controlID         = GUIUtility.GetControlID(selectionHash, FocusType.Keyboard, rect);
                 dragDropControlID = GUIUtility.GetControlID(dragAndDropHash, FocusType.Passive, rect);
                 DrawHeader(rect2, titleLabel);
                 if (list.isExpanded)
@@ -1230,10 +1201,10 @@ namespace AIO.RainbowCore.RList.Editor
                     if (doPagination)
                     {
                         var rect3 = rect2;
-                        rect3.y += rect2.height + 16f;
-                        rect3.height = paginationHeight;
-                        rect3.width -= 1;
-                        rect3.xMin += 1;
+                        rect3.y      += rect2.height + 16f;
+                        rect3.height =  paginationHeight;
+                        rect3.width  -= 1;
+                        rect3.xMin   += 1;
                         DrawPaginationHeader(rect3);
                         rect2.yMax = rect3.yMax - 1f;
                     }
@@ -1281,7 +1252,8 @@ namespace AIO.RainbowCore.RList.Editor
             EditorGUI.indentLevel = indentLevel;
         }
 
-        public SerializedProperty AddItem<T>(T item) where T : Object
+        public SerializedProperty AddItem<T>(T item)
+        where T : Object
         {
             SerializedProperty serializedProperty = AddItem();
             if (serializedProperty != null)
@@ -1365,15 +1337,9 @@ namespace AIO.RainbowCore.RList.Editor
             return -1;
         }
 
-        public void GrabKeyboardFocus()
-        {
-            GUIUtility.keyboardControl = id;
-        }
+        public void GrabKeyboardFocus() { GUIUtility.keyboardControl = id; }
 
-        public bool HasKeyboardControl()
-        {
-            return GUIUtility.keyboardControl == id;
-        }
+        public bool HasKeyboardControl() { return GUIUtility.keyboardControl == id; }
 
         public void ReleaseKeyboardFocus()
         {
@@ -1432,7 +1398,7 @@ namespace AIO.RainbowCore.RList.Editor
                 return 28f;
             }
 
-            float num = 0f;
+            float num  = 0f;
             float num2 = elementSpacing;
             pagination.GetVisibleRange(length, out var start, out var end);
             for (int i = start; i < end; i++)
@@ -1451,7 +1417,7 @@ namespace AIO.RainbowCore.RList.Editor
             }
 
             float propertyHeight = EditorGUI.GetPropertyHeight(element, GetElementLabel(element, elementLabels),
-                IsElementExpandable(element));
+                                                               IsElementExpandable(element));
             return (propertyHeight > 0f) ? (propertyHeight + 4f) : propertyHeight;
         }
 
@@ -1472,8 +1438,8 @@ namespace AIO.RainbowCore.RList.Editor
 
         private Rect GetElementRenderRect(SerializedProperty element, Rect elementRect)
         {
-            float num = (draggable ? 20 : 5);
-            Rect result = elementRect;
+            float num    = (draggable ? 20 : 5);
+            Rect  result = elementRect;
             result.xMin += (IsElementExpandable(element) ? (num + 10f) : num);
             result.xMax -= 6f;
             result.yMin += 1f;
@@ -1489,11 +1455,11 @@ namespace AIO.RainbowCore.RList.Editor
             }
 
             HandleDragAndDrop(rect, Event.current);
-            var flag = elementDisplayType != ElementDisplayType.SingleLine;
+            var flag  = elementDisplayType != ElementDisplayType.SingleLine;
             var rect2 = rect;
-            rect2.xMin += 6f;
-            rect2.xMax -= flag ? 95f : 55f;
-            rect2.height = 15f;
+            rect2.xMin   += 6f;
+            rect2.xMax   -= flag ? 95f : 55f;
+            rect2.height =  15f;
             rect2.y++;
             titleLabel = EditorGUI.BeginProperty(rect2, titleLabel, list);
             if (this.drawHeaderCallback != null)
@@ -1580,10 +1546,10 @@ namespace AIO.RainbowCore.RList.Editor
             SerializedProperty arrayElementAtIndex = list.GetArrayElementAtIndex(0);
             if (arrayElementAtIndex.propertyType == SerializedPropertyType.Generic)
             {
-                GenericMenu genericMenu = new GenericMenu();
+                GenericMenu        genericMenu        = new GenericMenu();
                 SerializedProperty serializedProperty = arrayElementAtIndex.Copy();
-                SerializedProperty endProperty = serializedProperty.GetEndProperty();
-                bool enterChildren = true;
+                SerializedProperty endProperty        = serializedProperty.GetEndProperty();
+                bool               enterChildren      = true;
                 while (serializedProperty.NextVisible(enterChildren) &&
                        !SerializedProperty.EqualContents(serializedProperty, endProperty))
                 {
@@ -1625,17 +1591,17 @@ namespace AIO.RainbowCore.RList.Editor
 
             if (evt.type == EventType.Repaint)
             {
-                Rect rect2 = rect;
-                float num3 = (rect2.yMin = (rect2.yMax = rect.yMin + 2f));
-                float num4 = elementSpacing;
+                Rect  rect2 = rect;
+                float num3  = (rect2.yMin = (rect2.yMax = rect.yMin + 2f));
+                float num4  = elementSpacing;
                 pagination.GetVisibleRange(length, out var start, out var end);
                 for (int i = start; i < end; i++)
                 {
                     SerializedProperty arrayElementAtIndex = list.GetArrayElementAtIndex(i);
-                    rect2.y = rect2.yMax;
-                    rect2.height = GetElementHeight(arrayElementAtIndex);
-                    elementRects[i] = rect2;
-                    rect2.yMax += num4;
+                    rect2.y         =  rect2.yMax;
+                    rect2.height    =  GetElementHeight(arrayElementAtIndex);
+                    elementRects[i] =  rect2;
+                    rect2.yMax      += num4;
                 }
             }
         }
@@ -1654,7 +1620,7 @@ namespace AIO.RainbowCore.RList.Editor
                 {
                     bool flag = selection.Contains(i);
                     DrawElement(list.GetArrayElementAtIndex(i), GetElementDrawRect(i, elementRects[i]), flag,
-                        flag && GUIUtility.keyboardControl == controlID);
+                                flag && GUIUtility.keyboardControl == controlID);
                 }
             }
             else
@@ -1664,14 +1630,14 @@ namespace AIO.RainbowCore.RList.Editor
                     return;
                 }
 
-                int length = dragList.Length;
+                int length  = dragList.Length;
                 int length2 = selection.Length;
                 int j;
                 for (j = 0; j < length2; j++)
                 {
                     DragElement value = dragList[j];
                     value.desiredRect.y = dragPosition - value.dragOffset;
-                    dragList[j] = value;
+                    dragList[j]         = value;
                 }
 
                 j = length;
@@ -1685,22 +1651,22 @@ namespace AIO.RainbowCore.RList.Editor
                     }
 
                     Rect rect2 = value2.rect;
-                    int num = value2.startIndex;
-                    int num2 = ((dragDirection > 0) ? (length2 - 1) : 0);
-                    int num3 = ((dragDirection > 0) ? (-1) : length2);
+                    int  num   = value2.startIndex;
+                    int  num2  = ((dragDirection > 0) ? (length2 - 1) : 0);
+                    int  num3  = ((dragDirection > 0) ? (-1) : length2);
                     for (int num4 = num2; num4 != num3; num4 -= dragDirection)
                     {
                         DragElement dragElement = dragList[num4];
                         if (dragElement.Overlaps(rect2, num, dragDirection))
                         {
                             rect2.y -= dragElement.rect.height * (float)dragDirection;
-                            num += dragDirection;
+                            num     += dragDirection;
                         }
                     }
 
                     DrawElement(value2.property, GetElementDrawRect(j, rect2), selected: false, focused: false);
                     value2.desiredRect = rect2;
-                    dragList[j] = value2;
+                    dragList[j]        = value2;
                 }
             }
         }
@@ -1718,18 +1684,18 @@ namespace AIO.RainbowCore.RList.Editor
                 {
                     Style.elementBackground.Draw(rect, isHover: false, selected, selected, focused);
                     EditorGUI.DrawRect(new Rect(rect.x + 1f, rect.y + rect.height - 2f, rect.width - 3f, 1f),
-                        new Color(0f, 0f, 0f, 0.2f));
+                                       new Color(0f, 0f, 0f, 0.2f));
                 }
 
                 if (current.type == EventType.Repaint && draggable)
                 {
                     Style.draggingHandle.Draw(
-                        new Rect(rect.x + 5f, rect.y + 14f, 10f, rect.height - (rect.height - 6f)), isHover: false,
-                        isActive: false, on: false, hasKeyboardFocus: false);
+                                              new Rect(rect.x + 5f, rect.y + 14f, 10f, rect.height - (rect.height - 6f)), isHover: false,
+                                              isActive: false, on: false, hasKeyboardFocus: false);
                 }
 
-                GUIContent contents = GetElementLabel(element, elementLabels);
-                Rect elementRenderRect = GetElementRenderRect(element, rect);
+                GUIContent contents          = GetElementLabel(element, elementLabels);
+                Rect       elementRenderRect = GetElementRenderRect(element, rect);
                 if (this.drawElementCallback != null)
                 {
                     this.drawElementCallback(elementRenderRect, element, contents, selected, focused);
@@ -1762,9 +1728,9 @@ namespace AIO.RainbowCore.RList.Editor
             string text = ((this.getElementNameCallback == null)
                 ? GetElementName(element, elementNameProperty, elementNameOverride)
                 : this.getElementNameCallback(element));
-            elementLabel.text = ((!string.IsNullOrEmpty(text)) ? text : element.displayName);
+            elementLabel.text    = ((!string.IsNullOrEmpty(text)) ? text : element.displayName);
             elementLabel.tooltip = element.tooltip;
-            elementLabel.image = elementIcon;
+            elementLabel.image   = elementIcon;
             return elementLabel;
         }
 
@@ -1841,7 +1807,7 @@ namespace AIO.RainbowCore.RList.Editor
             }
 
             string text = string.Empty;
-            int num = 0;
+            int    num  = 0;
             for (int i = 0; i < 32; i++)
             {
                 if (((1 << i) & mask) != 0)
@@ -1872,12 +1838,12 @@ namespace AIO.RainbowCore.RList.Editor
                 Style.footerBackground.Draw(rect, isHover: false, isActive: false, on: false, hasKeyboardFocus: false);
             }
 
-            var rect2 = new Rect(rect.xMin + 4f, rect.y - 3f, 25f, 13f);
+            var rect2    = new Rect(rect.xMin + 4f, rect.y - 3f, 25f, 13f);
             var position = new Rect(rect.xMax - 29f, rect.y - 3f, 25f, 13f);
             EditorGUI.BeginDisabledGroup(!canAdd);
             if (GUI.Button(rect2,
-                    onAddDropdownCallback != null ? Style.iconToolbarPlusMore : Style.iconToolbarPlus,
-                    Style.preButton))
+                           onAddDropdownCallback != null ? Style.iconToolbarPlusMore : Style.iconToolbarPlus,
+                           Style.preButton))
             {
                 if (this.onAddDropdownCallback != null)
                 {
@@ -1915,16 +1881,16 @@ namespace AIO.RainbowCore.RList.Editor
 
         private void DrawPaginationHeader(Rect rect)
         {
-            var length = Length;
+            var length    = Length;
             var pageCount = pagination.GetPageCount(length);
-            var num = Mathf.Clamp(pagination.page, 0, pageCount - 1);
+            var num       = Mathf.Clamp(pagination.page, 0, pageCount - 1);
             if (num != pagination.page)
             {
                 pagination.page = num;
                 HandleUtility.Repaint();
             }
 
-            var position = new Rect(rect.xMin + 4f, rect.y - 1f, 17f, 14f);
+            var position  = new Rect(rect.xMin + 4f, rect.y - 1f, 17f, 14f);
             var position2 = new Rect(position.xMax, rect.y - 1f, 17f, 14f);
             var position3 = new Rect(position2.xMax, rect.y - 1f, 17f, 14f);
             if (Event.current.type == EventType.Repaint)
@@ -1934,9 +1900,9 @@ namespace AIO.RainbowCore.RList.Editor
 
             pageInfoContent.text = $"{pagination.page + 1} / {pageCount}";
             var position4 = rect;
-            position4.width = Style.paginationText.CalcSize(pageInfoContent).x;
-            position4.x = rect.xMax - position4.width - 7f;
-            position4.y += 2f;
+            position4.width =  Style.paginationText.CalcSize(pageInfoContent).x;
+            position4.x     =  rect.xMax - position4.width - 7f;
+            position4.y     += 2f;
             GUI.Label(position4, pageInfoContent, Style.paginationText);
             if (GUI.Button(position, Style.iconPagePrev, Style.preButton))
             {
@@ -1950,7 +1916,7 @@ namespace AIO.RainbowCore.RList.Editor
                 {
                     int num2 = i;
                     genericMenu.AddItem(new GUIContent($"Page {i + 1}"), i == pagination.page, OnPageDropDownSelect,
-                        num2);
+                                        num2);
                 }
 
                 genericMenu.DropDown(position2);
@@ -1963,13 +1929,13 @@ namespace AIO.RainbowCore.RList.Editor
 
             pageSizeContent.text = length.ToString();
             GUIStyle pageSizeTextField = Style.pageSizeTextField;
-            Texture image = Style.listIcon.image;
-            float num3 = position3.xMax + 5f;
-            float num4 = position4.xMin - 5f - num3;
-            float num5 = image.width + 2;
-            float num6 = pageSizeTextField.CalcSize(pageSizeContent).x + 50f + num5;
-            Rect position5 = rect;
-            position5.x = num3 + (num4 - num6) / 2f;
+            Texture  image             = Style.listIcon.image;
+            float    num3              = position3.xMax + 5f;
+            float    num4              = position4.xMin - 5f - num3;
+            float    num5              = image.width + 2;
+            float    num6              = pageSizeTextField.CalcSize(pageSizeContent).x + 50f + num5;
+            Rect     position5         = rect;
+            position5.x     = num3 + (num4 - num6) / 2f;
             position5.width = num6 - num5;
             EditorGUI.BeginChangeCheck();
             EditorGUIUtility.labelWidth = num5;
@@ -1980,14 +1946,11 @@ namespace AIO.RainbowCore.RList.Editor
             if (EditorGUI.EndChangeCheck())
             {
                 pagination.pageSize = Mathf.Clamp(value, 0, length);
-                pagination.page = Mathf.Min(pagination.GetPageCount(length) - 1, pagination.page);
+                pagination.page     = Mathf.Min(pagination.GetPageCount(length) - 1, pagination.page);
             }
         }
 
-        private void OnPageDropDownSelect(object userData)
-        {
-            pagination.page = (int)userData;
-        }
+        private void OnPageDropDownSelect(object userData) { pagination.page = (int)userData; }
 
         private void DispatchChange()
         {
@@ -2004,13 +1967,13 @@ namespace AIO.RainbowCore.RList.Editor
             if (element.isInstantiatedPrefab)
             {
                 genericMenu.AddItem(
-                    new GUIContent(string.Concat("Revert ", GetElementLabel(element, allowElementLabel: true).text,
-                        " to Prefab")), on: false, selection.RevertValues, list);
+                                    new GUIContent(string.Concat("Revert ", GetElementLabel(element, allowElementLabel: true).text,
+                                                                 " to Prefab")), on: false, selection.RevertValues, list);
                 genericMenu.AddSeparator(string.Empty);
             }
 
             HandleSharedContextClick(evt, genericMenu, "Duplicate Array Element", "Delete Array Element",
-                "Move Array Element");
+                                     "Move Array Element");
         }
 
         private void HandleMultipleContextClick(Event evt)
@@ -2023,11 +1986,14 @@ namespace AIO.RainbowCore.RList.Editor
             }
 
             HandleSharedContextClick(evt, genericMenu, "Duplicate Array Elements", "Delete Array Elements",
-                "Move Array Elements");
+                                     "Move Array Elements");
         }
 
-        private void HandleSharedContextClick(Event evt, GenericMenu menu, string duplicateLabel, string deleteLabel,
-            string moveLabel)
+        private void HandleSharedContextClick(Event       evt,
+                                              GenericMenu menu,
+                                              string      duplicateLabel,
+                                              string      deleteLabel,
+                                              string      moveLabel)
         {
             menu.AddItem(new GUIContent(duplicateLabel), on: false, HandleDuplicate, list);
             menu.AddItem(new GUIContent(deleteLabel), on: false, HandleDelete, list);
@@ -2050,13 +2016,13 @@ namespace AIO.RainbowCore.RList.Editor
 
         private void HandleMoveElement(object userData)
         {
-            int num = (int)userData;
-            int page = pagination.page;
-            int num2 = pagination.pageSize;
-            int num3 = num * num2 - page * num2;
-            int num4 = ((num3 > 0) ? 1 : (-1));
+            int num    = (int)userData;
+            int page   = pagination.page;
+            int num2   = pagination.pageSize;
+            int num3   = num * num2 - page * num2;
+            int num4   = ((num3 > 0) ? 1 : (-1));
             int length = Length;
-            int num5 = 0;
+            int num5   = 0;
             for (int i = 0; i < selection.Length; i++)
             {
                 int num6 = selection[i] + num3;
@@ -2065,18 +2031,17 @@ namespace AIO.RainbowCore.RList.Editor
 
             num3 -= num5;
             UpdateDragList(0f, 0, length);
-            List<DragElement> list =
-                new List<DragElement>(dragList.Elements.Where((DragElement t) => !selection.Contains(t.startIndex)));
+            var elements = new List<DragElement>(dragList.Elements.Where(t => !selection.Contains(t.startIndex)));
             selection.Sort();
             for (int j = 0; j < selection.Length; j++)
             {
-                int num7 = selection[j];
+                int num7               = selection[j];
                 int indexFromSelection = dragList.GetIndexFromSelection(num7);
-                int index = Mathf.Clamp(num7 + num3, 0, list.Count);
-                list.Insert(index, dragList[indexFromSelection]);
+                int index              = Mathf.Clamp(num7 + num3, 0, elements.Count);
+                elements.Insert(index, dragList[indexFromSelection]);
             }
 
-            dragList.Elements = list.ToArray();
+            dragList.Elements = elements.ToArray();
             ReorderDraggedElements(num4, 0, null);
             pagination.page = num;
             HandleUtility.Repaint();
@@ -2107,9 +2072,9 @@ namespace AIO.RainbowCore.RList.Editor
                     }
 
                     Object[] objectReferences = DragAndDrop.objectReferences;
-                    Object[] array = new Object[1];
-                    bool flag = false;
-                    Object[] array2 = objectReferences;
+                    Object[] array            = new Object[1];
+                    bool     flag             = false;
+                    Object[] array2           = objectReferences;
                     for (int i = 0; i < array2.Length; i++)
                     {
                         Object @object = (array[0] = array2[i]);
@@ -2120,7 +2085,7 @@ namespace AIO.RainbowCore.RList.Editor
                             if (evt.type == EventType.DragPerform)
                             {
                                 AppendDragAndDropValue(object2);
-                                flag = true;
+                                flag                        = true;
                                 DragAndDrop.activeControlID = 0;
                             }
                             else
@@ -2188,7 +2153,7 @@ namespace AIO.RainbowCore.RList.Editor
                 if (selection.Length > 0 && UpdateDragPosition(evt.mousePosition, rect, dragList))
                 {
                     GUIUtility.keyboardControl = controlID;
-                    dragging = true;
+                    dragging                   = true;
                 }
 
                 evt.Use();
@@ -2206,8 +2171,8 @@ namespace AIO.RainbowCore.RList.Editor
                         if (CanSelect(selectionIndex))
                         {
                             DoSelection(selectionIndex,
-                                GUIUtility.keyboardControl == 0 || GUIUtility.keyboardControl == controlID ||
-                                evt.button == 2, evt);
+                                        GUIUtility.keyboardControl == 0 || GUIUtility.keyboardControl == controlID ||
+                                        evt.button == 2, evt);
                         }
                         else
                         {
@@ -2235,7 +2200,7 @@ namespace AIO.RainbowCore.RList.Editor
                         {
                             dragging = false;
                             ReorderDraggedElements(dragDirection, dragList.StartIndex,
-                                delegate { dragList.SortByPosition(); });
+                                                   delegate { dragList.SortByPosition(); });
                         }
                         else
                         {
@@ -2272,7 +2237,7 @@ namespace AIO.RainbowCore.RList.Editor
                         GUIUtility.hotControl = 0;
                         if (dragging)
                         {
-                            dragging = false;
+                            dragging  = false;
                             selection = beforeDragSelection;
                         }
 
@@ -2314,12 +2279,12 @@ namespace AIO.RainbowCore.RList.Editor
 
             if (draggable)
             {
-                dragging = false;
+                dragging     = false;
                 dragPosition = (pressPosition = evt.mousePosition.y);
                 pagination.GetVisibleRange(Length, out var start, out var end);
                 UpdateDragList(dragPosition, start, end);
                 selection.Trim(start, end);
-                beforeDragSelection = selection.Clone();
+                beforeDragSelection   = selection.Clone();
                 GUIUtility.hotControl = controlID;
             }
 
@@ -2337,14 +2302,14 @@ namespace AIO.RainbowCore.RList.Editor
             for (int i = start; i < end; i++)
             {
                 SerializedProperty arrayElementAtIndex = list.GetArrayElementAtIndex(i);
-                Rect rect = elementRects[i];
-                DragElement dragElement = default(DragElement);
-                dragElement.property = arrayElementAtIndex;
-                dragElement.dragOffset = dragPosition - rect.y;
-                dragElement.rect = rect;
+                Rect               rect                = elementRects[i];
+                DragElement        dragElement         = default(DragElement);
+                dragElement.property    = arrayElementAtIndex;
+                dragElement.dragOffset  = dragPosition - rect.y;
+                dragElement.rect        = rect;
                 dragElement.desiredRect = rect;
-                dragElement.selected = selection.Contains(i);
-                dragElement.startIndex = i;
+                dragElement.selected    = selection.Contains(i);
+                dragElement.startIndex  = i;
                 DragElement value = dragElement;
                 dragList[i - start] = value;
             }
@@ -2354,10 +2319,10 @@ namespace AIO.RainbowCore.RList.Editor
 
         private bool UpdateDragPosition(Vector2 position, Rect bounds, DragList dragList)
         {
-            int index = 0;
-            int index2 = selection.Length - 1;
+            int   index      = 0;
+            int   index2     = selection.Length - 1;
             float dragOffset = dragList[index].dragOffset;
-            float num = dragList[index2].rect.height - dragList[index2].dragOffset;
+            float num        = dragList[index2].rect.height - dragList[index2].dragOffset;
             dragPosition = Mathf.Clamp(position.y, bounds.yMin + dragOffset, bounds.yMax - num);
             if (Mathf.Abs(dragPosition - pressPosition) > 1f)
             {
@@ -2384,7 +2349,7 @@ namespace AIO.RainbowCore.RList.Editor
             while (--num > -1)
             {
                 int indexFromSelection = dragList.GetIndexFromSelection(selection[num]);
-                int num2 = indexFromSelection + offset;
+                int num2               = indexFromSelection + offset;
                 selection[num] = num2;
                 list.MoveArrayElement(dragList[indexFromSelection].startIndex, num2);
             }
@@ -2451,15 +2416,7 @@ namespace AIO.RainbowCore.RList.Editor
             return selection.Any((int s) => IsPositionWithinElement(position, s));
         }
 
-        private bool IsPositionWithinElement(Vector2 position, int index)
-        {
-            if (!CanSelect(index))
-            {
-                return false;
-            }
-
-            return elementRects[index].Contains(position);
-        }
+        private bool IsPositionWithinElement(Vector2 position, int index) { return CanSelect(index) && elementRects[index].Contains(position); }
 
         private bool IsElementExpandable(SerializedProperty element)
         {

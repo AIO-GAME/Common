@@ -312,7 +312,7 @@
             <summary>
             完成
             </summary>
-            <param name="format"></param>
+            <param name="format">时间格式</param>
         </member>
         <member name="M:AIO.PrintElapse.Exception(System.Exception,System.String)">
             <summary>

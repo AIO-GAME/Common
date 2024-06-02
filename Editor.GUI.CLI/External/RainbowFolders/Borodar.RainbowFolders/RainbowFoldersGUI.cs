@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using AIO.RainbowCore;
@@ -30,13 +29,13 @@ namespace AIO.RainbowFolders
             {
                 EditorApplication.projectWindowItemOnGUI += ProjectWindowItemOnGUI;
                 EditorApplication.projectWindowItemOnGUI += DrawEditIcon;
-                Enabled = true;
+                Enabled                                  =  true;
             }
             else if (Enabled)
             {
                 EditorApplication.projectWindowItemOnGUI -= ProjectWindowItemOnGUI;
                 EditorApplication.projectWindowItemOnGUI -= DrawEditIcon;
-                Enabled = false;
+                Enabled                                  =  false;
             }
         }
 
@@ -49,7 +48,7 @@ namespace AIO.RainbowFolders
                 if (AssetDatabase.IsValidFolder(assetPath)) AssetFolderCache[guid] = assetPath;
                 else if (AssetFolderCache.ContainsKey(guid)) AssetFolderCache.Remove(guid);
 
-                assetId = ProjectWindowAdapter.GetMainAssetInstanceId(assetPath);
+                assetId            = ProjectWindowAdapter.GetMainAssetInstanceId(assetPath);
                 AssetIdCache[guid] = assetId;
             }
 
@@ -61,7 +60,7 @@ namespace AIO.RainbowFolders
 
             if (ProjectPreferences.ReplaceFolderIcons || ProjectPreferences.DrawCustomBackground)
             {
-                if (ProjectRuleset.Instance is null) return;
+                if (!ProjectRuleset.Instance) return;
                 if (!AssetFolderCache.TryGetValue(guid, out var assetPath)) return;
 
                 var ruleByPath = ProjectRuleset.Instance.GetRuleByPath(assetPath, true);
@@ -77,9 +76,9 @@ namespace AIO.RainbowFolders
             if (Mathf.FloorToInt((rect.y - 4f) / 16f % 2f) == 0)
             {
                 var rect2 = new Rect(rect);
-                rect2.width += rect.x + 16f;
+                rect2.width  += rect.x + 16f;
                 rect2.height += 1f;
-                rect2.x = 0f;
+                rect2.x      =  0f;
                 EditorGUI.DrawRect(rect2, ROW_SHADING_COLOR);
                 rect2.height = 1f;
                 EditorGUI.DrawRect(rect2, ROW_SHADING_COLOR);
@@ -90,18 +89,17 @@ namespace AIO.RainbowFolders
 
         private static void DrawProjectTree(Rect rect, int id)
         {
-            var rect2 = new Rect(rect) { width = 128f };
+            var rect2    = new Rect(rect) { width = 128f };
             var position = rect2;
             position.x -= 144f;
             GUI.DrawTexture(position, ProjectEditorUtility.GetFoldoutLevelsIcon());
             if (!IsRootItem(rect) && !ProjectWindowAdapter.HasChildren(id))
             {
                 position.width = 16f;
-                position.x = rect.x - 16f;
+                position.x     = rect.x - 16f;
                 GUI.DrawTexture(position, ProjectEditorUtility.GetFoldoutIcon());
             }
         }
-
 
         private static void DrawEditIcon(string guid, Rect rect)
         {
@@ -111,9 +109,9 @@ namespace AIO.RainbowFolders
                 return;
             }
 
-            var isSmall = IsIconSmall(rect);
-            var iconRect = GetIconRect(rect, isSmall);
-            var flag = rect.Contains(Event.current.mousePosition);
+            var isSmall    = IsIconSmall(rect);
+            var iconRect   = GetIconRect(rect, isSmall);
+            var flag       = rect.Contains(Event.current.mousePosition);
             var isSelected = !IsSelected(guid);
             _multiSelection = isSelected ? !flag && _multiSelection : flag || _multiSelection;
             if (!flag && (isSelected || !_multiSelection)) return;
@@ -134,11 +132,10 @@ namespace AIO.RainbowFolders
         private static void ShowPopupWindow(Rect rect, string path)
         {
             var draggableWindow = RainbowFoldersPopup.GetDraggableWindow();
-            var inPosition = GUIUtility.GUIToScreenPoint(rect.position + new Vector2(0f, rect.height + 2f));
+            var inPosition      = GUIUtility.GUIToScreenPoint(rect.position + new Vector2(0f, rect.height + 2f));
             if (_multiSelection)
             {
-                var list = Selection.assetGUIDs.Select(AssetDatabase.GUIDToAssetPath).
-                    Where(AssetDatabase.IsValidFolder).ToList();
+                var list      = Selection.assetGUIDs.Select(AssetDatabase.GUIDToAssetPath).Where(AssetDatabase.IsValidFolder).ToList();
                 var pathIndex = list.IndexOf(path);
                 draggableWindow.ShowWithParams(inPosition, list, pathIndex);
             }
@@ -185,18 +182,15 @@ namespace AIO.RainbowFolders
             if (rule.HasCustomIcon()) texture2D = isSmall ? rule.SmallIcon : rule.LargeIcon;
             else
             {
-                var icons = ProjectIconsStorage.GetIcons(rule.IconType);
+                var icons                    = ProjectIconsStorage.GetIcons(rule.IconType);
                 if (icons != null) texture2D = isSmall ? icons.Item2 : icons.Item1;
             }
 
-            if (texture2D is null) return;
+            if (!texture2D) return;
             ProjectWindowAdapter.ApplyIconByPath(assetId, texture2D, isSmall);
         }
 
-        private static bool IsIconSmall(Rect rect)
-        {
-            return rect.width > rect.height;
-        }
+        private static bool IsIconSmall(Rect rect) { return rect.width > rect.height; }
 
         private static Rect GetIconRect(Rect rect, bool isSmall)
         {
@@ -216,26 +210,20 @@ namespace AIO.RainbowFolders
         {
             if (isSmall)
             {
-                rect.x += 17f;
+                rect.x     += 17f;
                 rect.width -= 17f;
             }
             else
             {
-                rect.y += rect.width;
+                rect.y      += rect.width;
                 rect.height -= rect.width;
             }
 
             return rect;
         }
 
-        private static bool IsSelected(string guid)
-        {
-            return Selection.assetGUIDs.Contains(guid);
-        }
+        private static bool IsSelected(string guid) { return Selection.assetGUIDs.Contains(guid); }
 
-        private static bool IsRootItem(Rect rect)
-        {
-            return rect.x <= 20f;
-        }
+        private static bool IsRootItem(Rect rect) { return rect.x <= 20f; }
     }
 }

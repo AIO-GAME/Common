@@ -16,16 +16,13 @@ namespace AIO
         /// <summary>
         /// 计算时间精度
         /// </summary>
-        public Stopwatch stopWatch;
+        protected Stopwatch stopWatch;
 
         /// <summary>
         /// 初始化
         /// </summary>
         /// <param name="title">消耗时间标题</param>
-        public PrintElapse(string title)
-        {
-            Title = title;
-        }
+        public PrintElapse(string title) { Title = title; }
 
         /// <summary>
         /// 标题
@@ -59,24 +56,21 @@ namespace AIO
         /// <summary>
         /// 时间重置
         /// </summary>
-        public void Restart()
-        {
-            stopWatch.Restart();
-        }
+        public void Restart() { stopWatch.Restart(); }
 
         /// <summary>
         /// 完成
         /// </summary>
-        /// <param name="format"></param>
-        public abstract void Finish(string format = "g");
+        /// <param name="format">时间格式</param>
+        protected internal abstract void Finish(string format = "g");
 
         /// <summary>
         /// 异常信息
         /// </summary>
-        public void Exception(Exception exception, string format = "g")
+        protected void Exception(Exception exception, string format = "g")
         {
             stopWatch.Stop();
-            throw new Exception(string.Format(CultureInfo.CurrentCulture, "{0}=>[{1}]", Title, stopWatch.Elapsed.ToString(format)), exception);
+            throw new Exception($"{$"{stopWatch.Elapsed.ToString(format, CultureInfo.CurrentCulture)}",-30} -> {Title}", exception);
         }
     }
 }

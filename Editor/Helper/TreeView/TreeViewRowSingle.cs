@@ -1,4 +1,4 @@
-﻿#region
+﻿#region namespace
 
 using System;
 using System.Collections.Generic;
@@ -134,7 +134,6 @@ namespace AIO.UEditor
              || args.newName == args.originalName
                ) return;
             OnRename(args);
-            EndRename();
         }
 
         /// <summary>
@@ -199,8 +198,13 @@ namespace AIO.UEditor
             {
                 case EventType.KeyDown:
                 {
-                    OnEventKeyDown(evt, rootItem.children[state.selectedIDs[0]]);
-                    Event.current.Use();
+                    if (rootItem.children.Count == 0) return;
+                    if (state.selectedIDs[0] < rootItem.children.Count)
+                    {
+                        OnEventKeyDown(evt, rootItem.children[state.selectedIDs[0]]);
+                        Event.current.Use();
+                    }
+
                     break;
                 }
                 case EventType.KeyUp:

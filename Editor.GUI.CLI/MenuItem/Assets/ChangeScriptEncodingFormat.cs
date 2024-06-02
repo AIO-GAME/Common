@@ -27,6 +27,7 @@ namespace AIO.UEditor
                 var relativeAssetPath = AssetDatabase.GetAssetPath(selectedObject);
                 // 获取项目根目录路径
                 var projectPath = Path.GetDirectoryName(Application.dataPath);
+                if (string.IsNullOrEmpty(projectPath)) throw new DirectoryNotFoundException("项目根目录路径为空");
                 // 获取选定对象的绝对路径
                 var absoluteAssetPath = Path.Combine(projectPath, relativeAssetPath);
                 // 获取选定对象的文件名（包括后缀）
@@ -51,10 +52,7 @@ namespace AIO.UEditor
 
         // 如果项目视图中有选中的对象，则启用右键菜单项
         [MenuItem("Assets/脚本改格式：GB2312->UTF8无BOM", true)]
-        private static bool ValidateCustomMenu()
-        {
-            return Selection.activeObject != null;
-        }
+        private static bool ValidateCustomMenu() { return Selection.activeObject != null; }
 
         /// <summary>
         /// 判断该文件是否是CSharp文件

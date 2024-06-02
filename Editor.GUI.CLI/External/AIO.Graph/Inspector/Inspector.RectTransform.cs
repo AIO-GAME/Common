@@ -39,61 +39,33 @@ namespace AIO.UEditor
             if (_originalEditor != null && _originalOnSceneGUI != null) _originalOnSceneGUI.Invoke(_originalEditor, null);
         }
 
-        public override void DrawPreview(Rect previewArea)
-        {
-            _originalEditor.DrawPreview(previewArea);
-        }
+        public override void DrawPreview(Rect previewArea) { _originalEditor.DrawPreview(previewArea); }
 
-        public override string GetInfoString()
-        {
-            return _originalEditor.GetInfoString();
-        }
+        public override string GetInfoString() { return _originalEditor.GetInfoString(); }
 
-        public override GUIContent GetPreviewTitle()
-        {
-            return _originalEditor.GetPreviewTitle();
-        }
+        public override GUIContent GetPreviewTitle() { return _originalEditor.GetPreviewTitle(); }
 
-        public override bool HasPreviewGUI()
-        {
-            return _originalEditor.HasPreviewGUI();
-        }
+        public override bool HasPreviewGUI() { return _originalEditor.HasPreviewGUI(); }
 
-        public override void OnInteractivePreviewGUI(Rect r, GUIStyle background)
-        {
-            _originalEditor.OnInteractivePreviewGUI(r, background);
-        }
+        public override void OnInteractivePreviewGUI(Rect r, GUIStyle background) { _originalEditor.OnInteractivePreviewGUI(r, background); }
 
-        public override void OnPreviewGUI(Rect r, GUIStyle background)
-        {
-            _originalEditor.OnPreviewGUI(r, background);
-        }
+        public override void OnPreviewGUI(Rect r, GUIStyle background) { _originalEditor.OnPreviewGUI(r, background); }
 
-        public override void OnPreviewSettings()
-        {
-            _originalEditor.OnPreviewSettings();
-        }
+        public override void OnPreviewSettings() { _originalEditor.OnPreviewSettings(); }
 
-        public override void ReloadPreviewInstances()
-        {
-            _originalEditor.ReloadPreviewInstances();
-        }
+        public override void ReloadPreviewInstances() { _originalEditor.ReloadPreviewInstances(); }
 
-        public override Texture2D RenderStaticPreview(string assetPath, Object[] subAssets, int width,
-                                                      int    height)
+        public override Texture2D RenderStaticPreview(string   assetPath,
+                                                      Object[] subAssets,
+                                                      int      width,
+                                                      int      height)
         {
             return _originalEditor.RenderStaticPreview(assetPath, subAssets, width, height);
         }
 
-        public override bool RequiresConstantRepaint()
-        {
-            return _originalEditor.RequiresConstantRepaint();
-        }
+        public override bool RequiresConstantRepaint() { return _originalEditor.RequiresConstantRepaint(); }
 
-        public override bool UseDefaultMargins()
-        {
-            return _originalEditor.UseDefaultMargins();
-        }
+        public override bool UseDefaultMargins() { return _originalEditor.UseDefaultMargins(); }
 
         protected override void OnHeaderGUI()
         {
@@ -132,10 +104,7 @@ namespace AIO.UEditor
             _pagePainter.Painting();
         }
 
-        private void PropertyGUI()
-        {
-            _originalEditor.OnInspectorGUI();
-        }
+        private void PropertyGUI() { _originalEditor.OnInspectorGUI(); }
 
         private void HierarchyGUI()
         {
@@ -193,7 +162,8 @@ namespace AIO.UEditor
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("Copy Position", EditorStyles.miniButtonLeft)) GUIUtility.systemCopyBuffer = Target.position.ToCopyString("F4");
 
-            if (GUILayout.Button("Copy Anchored Position", EditorStyles.miniButtonRight)) GUIUtility.systemCopyBuffer = Target.anchoredPosition.ToCopyString("F2");
+            if (GUILayout.Button("Copy Anchored Position", EditorStyles.miniButtonRight))
+                GUIUtility.systemCopyBuffer = Target.anchoredPosition.ToCopyString("F2");
 
             GUILayout.EndHorizontal();
 
@@ -206,10 +176,10 @@ namespace AIO.UEditor
                 }
                 else
                 {
-                    var temp = Target.rotation.eulerAngles;
-                    var x = ClampAngle(temp.x);
-                    var y = ClampAngle(temp.y);
-                    var z = ClampAngle(temp.z);
+                    var temp  = Target.rotation.eulerAngles;
+                    var x     = ClampAngle(temp.x);
+                    var y     = ClampAngle(temp.y);
+                    var z     = ClampAngle(temp.z);
                     var angle = new Vector3(x, y, z);
                     GUIUtility.systemCopyBuffer = angle.ToCopyString("F1");
                 }
@@ -223,10 +193,10 @@ namespace AIO.UEditor
                 }
                 else
                 {
-                    var temp = Target.localRotation.eulerAngles;
-                    var x = ClampAngle(temp.x);
-                    var y = ClampAngle(temp.y);
-                    var z = ClampAngle(temp.z);
+                    var temp  = Target.localRotation.eulerAngles;
+                    var x     = ClampAngle(temp.x);
+                    var y     = ClampAngle(temp.y);
+                    var z     = ClampAngle(temp.z);
                     var angle = new Vector3(x, y, z);
                     GUIUtility.systemCopyBuffer = angle.ToCopyString("F1");
                 }
@@ -272,7 +242,7 @@ namespace AIO.UEditor
 
         private void CreateEmptyParent()
         {
-            var parent = new GameObject("EmptyParent");
+            var parent        = new GameObject("EmptyParent");
             var rectTransform = parent.AddComponent<RectTransform>();
             rectTransform.SetParent(Target.parent);
             rectTransform.localPosition = Target.localPosition;
@@ -295,13 +265,13 @@ namespace AIO.UEditor
         private string ToCSPublicField()
         {
             var fieldName = Target.name.Trim().Replace(" ", "");
-            var field = $"[InspectorName(\"{Target.name}\")] public GameObject {fieldName};";
+            var field     = $"[InspectorName(\"{Target.name}\")] public GameObject {fieldName};";
             return field;
         }
 
         private string ToCSPrivateField()
         {
-            var fieldName = Target.name.Trim().Replace(" ", "");
+            var fieldName  = Target.name.Trim().Replace(" ", "");
             var fieldNames = fieldName.ToCharArray();
             fieldNames[0] = char.ToLower(fieldNames[0]);
             var field =

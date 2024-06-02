@@ -240,19 +240,13 @@ namespace AIO
             /// </summary>
             /// <param name="file">文件路径</param>
             /// <returns>文件名</returns>
-            public static string GetFileExtension(string file)
-            {
-                return Path.GetExtension(file);
-            }
+            public static string GetFileExtension(string file) { return Path.GetExtension(file); }
 
             /// <summary>
             /// 获取当前所有文件夹中所有文件信息
             /// </summary>
             /// <param name="value">文件夹路径</param>
-            public static FileInfo GetFileInfo(string value)
-            {
-                return new FileInfo(value);
-            }
+            public static FileInfo GetFileInfo(string value) { return new FileInfo(value); }
 
             /// <summary>
             /// 获取最后写入时间
@@ -284,7 +278,7 @@ namespace AIO
             /// <summary>
             /// 获取文件的MD5值
             /// </summary>
-            public static string GetFileMD5(string path, long bufferSize = StreamExtend.BUFFER_SIZE)
+            public static string GetFileMD5(string path, int bufferSize = StreamExtend.BUFFER_SIZE)
             {
                 path = path.Replace('\\', Path.AltDirectorySeparatorChar);
                 if (!ExistsFile(path)) throw new FileNotFoundException($"获取文件的哈希值 参数错误 <{path}>, 不存在");
@@ -295,7 +289,7 @@ namespace AIO
             /// <summary>
             /// 获取文件的MD5值
             /// </summary>
-            public static async Task<string> GetFileMD5Async(string path, long bufferSize = StreamExtend.BUFFER_SIZE)
+            public static async Task<string> GetFileMD5Async(string path, int bufferSize = StreamExtend.BUFFER_SIZE)
             {
                 path = path.Replace('\\', Path.AltDirectorySeparatorChar);
                 if (!ExistsFile(path)) throw new FileNotFoundException($"获取文件的哈希值 参数错误 <{path}>, 不存在");
@@ -328,7 +322,7 @@ namespace AIO
             /// <exception cref="FileNotFoundException">
             ///    <paramref name="path" /> 不存在
             /// </exception>
-            public static async Task<string> GetFileSHA1Async(string path, long bufferSize = StreamExtend.BUFFER_SIZE)
+            public static async Task<string> GetFileSHA1Async(string path, int bufferSize = StreamExtend.BUFFER_SIZE)
             {
                 path = path.Replace('\\', Path.AltDirectorySeparatorChar);
                 if (!ExistsFile(path)) throw new FileNotFoundException($"获取文件的哈希值 参数错误 <{path}>, 不存在");
@@ -360,7 +354,7 @@ namespace AIO
             /// <exception cref="FileNotFoundException">
             ///    <paramref name="path" /> 不存在
             /// </exception>
-            public static async Task<string> GetFileSHA256Async(string path, long bufferSize = StreamExtend.BUFFER_SIZE)
+            public static async Task<string> GetFileSHA256Async(string path, int bufferSize = StreamExtend.BUFFER_SIZE)
             {
                 path = path.Replace('\\', Path.AltDirectorySeparatorChar);
                 if (!ExistsFile(path)) throw new FileNotFoundException($"获取文件的哈希值 参数错误 <{path}>, 不存在");
@@ -393,7 +387,7 @@ namespace AIO
             /// <exception cref="FileNotFoundException">
             ///    <paramref name="path" /> 不存在
             /// </exception>
-            public static async Task<string> GetFileSHA384Async(string path, long bufferSize = StreamExtend.BUFFER_SIZE)
+            public static async Task<string> GetFileSHA384Async(string path, int bufferSize = StreamExtend.BUFFER_SIZE)
             {
                 path = path.Replace('\\', Path.AltDirectorySeparatorChar);
                 if (!ExistsFile(path)) throw new FileNotFoundException($"获取文件的哈希值 参数错误 <{path}>, 不存在");
@@ -426,7 +420,7 @@ namespace AIO
             /// <exception cref="FileNotFoundException">
             ///    <paramref name="path" /> 不存在
             /// </exception>
-            public static async Task<string> GetFileSHA512Async(string path, long bufferSize = StreamExtend.BUFFER_SIZE)
+            public static async Task<string> GetFileSHA512Async(string path, int bufferSize = StreamExtend.BUFFER_SIZE)
             {
                 path = path.Replace('\\', Path.AltDirectorySeparatorChar);
                 if (!ExistsFile(path)) throw new FileNotFoundException($"获取文件的哈希值 参数错误 <{path}>, 不存在");

@@ -10,7 +10,9 @@ namespace AIO.UEditor
 {
     public partial class GELayout
     {
-        public static string IsChangeHorizontal(GTContent label, string current, string currentSource,
+        public static string IsChangeHorizontal(GTContent label,
+                                                string    current,
+                                                string    currentSource,
                                                 float     width = 150)
         {
             using (new EditorGUILayout.HorizontalScope())
@@ -49,8 +51,12 @@ namespace AIO.UEditor
             }
         }
 
-        public static int IsChangeHorizontal(GTContent label,    int   current, int currentSource, int minvalue,
-                                             int       maxvalue, float width = 150)
+        public static int IsChangeHorizontal(GTContent label,
+                                             int       current,
+                                             int       currentSource,
+                                             int       minvalue,
+                                             int       maxvalue,
+                                             float     width = 150)
         {
             using (new EditorGUILayout.HorizontalScope())
             {
@@ -69,8 +75,12 @@ namespace AIO.UEditor
             }
         }
 
-        public static float IsChangeHorizontal(GTContent label,    float current, float currentSource, float minvalue,
-                                               float     maxvalue, float width = 150)
+        public static float IsChangeHorizontal(GTContent label,
+                                               float     current,
+                                               float     currentSource,
+                                               float     minvalue,
+                                               float     maxvalue,
+                                               float     width = 150)
         {
             using (new EditorGUILayout.HorizontalScope())
             {

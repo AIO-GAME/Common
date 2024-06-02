@@ -47,25 +47,16 @@ namespace AIO
         /// <summary>
         /// 隐式转化为数组
         /// </summary>
-        public static implicit operator T[](in Buffer<T> Buffer)
-        {
-            return Buffer.ToArray();
-        }
+        public static implicit operator T[](in Buffer<T> Buffer) { return Buffer.ToArray(); }
 
         /// <summary>
         /// 隐式转化为数组
         /// </summary>
-        public static implicit operator HashSet<T>(in Buffer<T> Buffer)
-        {
-            return new HashSet<T>(Buffer.ToArray());
-        }
+        public static implicit operator HashSet<T>(in Buffer<T> Buffer) { return new HashSet<T>(Buffer.ToArray()); }
 
         /// <summary>
         /// 隐式转化为List
         /// </summary>
-        public static implicit operator List<T>(in Buffer<T> Buffer)
-        {
-            return new List<T>(Buffer.ToArray());
-        }
+        public static implicit operator List<T>(in Buffer<T> Buffer) { return new List<T>(Buffer.ToArray()); }
     }
 }

@@ -196,40 +196,40 @@ namespace AIO.UEditor
             /// </summary>
             public static string RuntimeAssemblyFirstPassProject =>
                 PreferredProjectPath
-                (
-                    System.IO.Path.Combine(Project, ProjectName + ".Plugins.csproj"),
-                    System.IO.Path.Combine(Project, "Assembly-CSharp-firstpass.csproj")
-                );
+                    (
+                     System.IO.Path.Combine(Project, ProjectName + ".Plugins.csproj"),
+                     System.IO.Path.Combine(Project, "Assembly-CSharp-firstpass.csproj")
+                    );
 
             /// <summary>
             /// 获取程序集的第二编译阶段所对应的项目文件的完整路径
             /// </summary>
             public static string RuntimeAssemblySecondPassProject =>
                 PreferredProjectPath
-                (
-                    System.IO.Path.Combine(Project, ProjectName + ".csproj"),
-                    System.IO.Path.Combine(Project, "Assembly-CSharp.csproj")
-                );
+                    (
+                     System.IO.Path.Combine(Project, ProjectName + ".csproj"),
+                     System.IO.Path.Combine(Project, "Assembly-CSharp.csproj")
+                    );
 
             /// <summary>
             /// 获取编辑器程序集的第一编译阶段所对应的项目文件的完整路径
             /// </summary>
             public static string EditorAssemblyFirstPassProject =>
                 PreferredProjectPath
-                (
-                    System.IO.Path.Combine(Project, ProjectName + ".Editor.csproj"),
-                    System.IO.Path.Combine(Project, "Assembly-CSharp-Editor-firstpass.csproj")
-                );
+                    (
+                     System.IO.Path.Combine(Project, ProjectName + ".Editor.csproj"),
+                     System.IO.Path.Combine(Project, "Assembly-CSharp-Editor-firstpass.csproj")
+                    );
 
             /// <summary>
             /// 获取编辑器程序集的第二编译阶段所对应的项目文件的完整路径
             /// </summary>
             public static string EditorAssemblySecondPassProject =>
                 PreferredProjectPath
-                (
-                    System.IO.Path.Combine(Project, ProjectName + ".Editor.Plugins.csproj"),
-                    System.IO.Path.Combine(Project, "Assembly-CSharp-Editor.csproj")
-                );
+                    (
+                     System.IO.Path.Combine(Project, ProjectName + ".Editor.Plugins.csproj"),
+                     System.IO.Path.Combine(Project, "Assembly-CSharp-Editor.csproj")
+                    );
 
             /// <summary>
             /// 获取所有与程序集相关的项目文件的完整路径
@@ -238,9 +238,9 @@ namespace AIO.UEditor
             {
                 get
                 {
-                    var firstPass = RuntimeAssemblyFirstPassProject;
-                    var secondPass = RuntimeAssemblySecondPassProject;
-                    var editorFirstPass = EditorAssemblyFirstPassProject;
+                    var firstPass        = RuntimeAssemblyFirstPassProject;
+                    var secondPass       = RuntimeAssemblySecondPassProject;
+                    var editorFirstPass  = EditorAssemblyFirstPassProject;
                     var editorSecondPass = EditorAssemblySecondPassProject;
 
                     if (firstPass != null) yield return firstPass;
@@ -396,8 +396,7 @@ namespace AIO.UEditor
             /// <summary>
             /// 项目构建工具的完整路径
             /// </summary>
-            public static string ProjectBuilder =>
-                Application.platform == RuntimePlatform.WindowsEditor ? MSBuild : XBuild;
+            public static string ProjectBuilder => Application.platform == RuntimePlatform.WindowsEditor ? MSBuild : XBuild;
 
             #endregion
         }

@@ -22,10 +22,7 @@ namespace AIO
         /// <param name="sourceValue">源浮点数</param>
         /// <param name="targetValue">目标浮点数</param>
         /// <returns>是否约等于</returns>
-        public static bool Approximately(this float sourceValue, float targetValue)
-        {
-            return Mathf.Approximately(sourceValue, targetValue);
-        }
+        public static bool Approximately(this float sourceValue, float targetValue) { return Mathf.Approximately(sourceValue, targetValue); }
 
         /// <summary>
         /// 从数组中随机获取一个值
@@ -108,9 +105,9 @@ namespace AIO
         /// <returns>加密后的字符串</returns>
         public static string MD5Encrypt(this string value)
         {
-            var md5 = new MD5CryptoServiceProvider();
+            var md5      = new MD5CryptoServiceProvider();
             var fromData = Encoding.UTF8.GetBytes(value);
-            var toData = md5.ComputeHash(fromData);
+            var toData   = md5.ComputeHash(fromData);
             md5.Dispose();
             return Convert.ToBase64String(toData);
         }
@@ -120,10 +117,7 @@ namespace AIO
         /// </summary>
         /// <param name="value">Vector3值</param>
         /// <returns>四元素</returns>
-        public static Quaternion ToQuaternion(this Vector3 value)
-        {
-            return Quaternion.Euler(value);
-        }
+        public static Quaternion ToQuaternion(this Vector3 value) { return Quaternion.Euler(value); }
 
         /// <summary>
         /// 限制目标值在最小值与最大值之间
@@ -181,7 +175,12 @@ namespace AIO
         /// <param name="maxY">Y最大值</param>
         /// <param name="maxZ">Z最大值</param>
         /// <returns>目标值</returns>
-        public static Vector3 Clamp(this Vector3 value, float minX, float minY, float minZ, float maxX, float maxY,
+        public static Vector3 Clamp(this Vector3 value,
+                                    float        minX,
+                                    float        minY,
+                                    float        minZ,
+                                    float        maxX,
+                                    float        maxY,
                                     float        maxZ)
         {
             value.x = Mathf.Clamp(value.x, minX, maxX);

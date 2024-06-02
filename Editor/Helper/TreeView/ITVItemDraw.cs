@@ -1,5 +1,9 @@
-﻿using UnityEditor.IMGUI.Controls;
+﻿#region namespace
+
+using UnityEditor.IMGUI.Controls;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {

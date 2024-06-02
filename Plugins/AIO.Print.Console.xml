@@ -39,6 +39,11 @@
             日志
             </summary>
         </member>
+        <member name="M:AIO.CPrint.Log(System.String@)">
+            <summary>
+            日志
+            </summary>
+        </member>
         <member name="M:AIO.CPrint.LogFormat``1(System.String@,``0@)">
             <summary>
             日志

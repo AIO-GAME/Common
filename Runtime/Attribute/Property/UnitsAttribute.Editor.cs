@@ -22,17 +22,17 @@ namespace AIO
         /// <summary> [Editor-Only]
         /// Determines how many lines tall the `property` should be.
         /// </summary>
-        protected virtual int GetLineCount(SerializedProperty property, GUIContent label)
-        {
-            return EditorGUIUtility.wideMode ? 1 : 2;
-        }
+        protected virtual int GetLineCount(SerializedProperty property, GUIContent label) { return EditorGUIUtility.wideMode ? 1 : 2; }
 
         /// <summary>[Editor-Only]
         /// Draws this attribute's fields for the `property`.
         /// </summary>
         public abstract void OnGUI(Rect area, SerializedProperty property, GUIContent label);
 
-        protected void DoOptionalBeforeGUI(bool      isOptional, Rect area, out Rect toggleArea, out bool guiWasEnabled,
+        protected void DoOptionalBeforeGUI(bool      isOptional,
+                                           Rect      area,
+                                           out Rect  toggleArea,
+                                           out bool  guiWasEnabled,
                                            out float previousLabelWidth)
         {
             toggleArea         = area;
@@ -73,7 +73,9 @@ namespace AIO
         /// This method treats most <see cref="EventType"/>s normally, but for <see cref="EventType.Repaint"/> it
         /// instead draws a text field with the converted string.
         /// </remarks>
-        protected static double DoSpecialField(Rect                       area, GUIContent label, double value,
+        protected static double DoSpecialField(Rect                       area,
+                                               GUIContent                 label,
+                                               double                     value,
                                                CompactUnitConversionCache toString)
         {
             if (label != null && !string.IsNullOrEmpty(label.text))
@@ -182,7 +184,9 @@ namespace AIO
         /// This method treats most <see cref="EventType"/>s normally, but for <see cref="EventType.Repaint"/> it
         /// instead draws a text field with the converted string.
         /// </remarks>
-        public static float DoSpecialField(Rect                       area, GUIContent label, float value,
+        public static float DoSpecialField(Rect                       area,
+                                           GUIContent                 label,
+                                           float                      value,
                                            CompactUnitConversionCache toString)
         {
             if (label != null && !string.IsNullOrEmpty(label.text))

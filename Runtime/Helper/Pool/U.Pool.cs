@@ -32,17 +32,13 @@ namespace AIO
             public static T CheckOut<T>(in Object prefab, in Transform parent = null)
             where T : Cacheable
             {
-                switch (prefab)
-                {
-                    case GameObject @object:
-                        return CheckOut<T>(@object, parent);
-                    case Component component:
-                        return CheckOut<T>(component, parent);
-                    default:
-                        Debug.LogError($"Can't instantiate Object:{prefab}");
-                        break;
-                }
+                var go = prefab as GameObject;
+                if (go) return CheckOut<T>(go, parent);
 
+                var component = prefab as Component;
+                if (component) return CheckOut<T>(component, parent);
+
+                Debug.LogError($"Can't instantiate Object:{prefab}");
                 return null;
             }
 

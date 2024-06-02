@@ -75,7 +75,7 @@ namespace AIO
     public static partial class ExtendSort
     {
         /// <summary>
-        ///    比较器
+        ///     比较器
         /// </summary>
         /// <param name="comparer">比较器</param>
         /// <typeparam name="T">泛型</typeparam>
@@ -83,30 +83,12 @@ namespace AIO
         internal static IComparer<T> Comparer<T>(Func<T, T, int> comparer) => new GeneraComparer<T>(comparer);
 
         /// <summary>
-        ///    比较器
+        ///     比较器
         /// </summary>
         /// <param name="comparer">比较器</param>
         /// <typeparam name="T">泛型</typeparam>
         /// <returns>返回比较器</returns>
         internal static IComparer<T> Comparer<T>(Comparison<T> comparer) => new ComparisonComparer<T>(comparer);
-
-        internal class GeneraComparer<T> : IComparer<T>
-        {
-            private readonly Func<T, T, int> Comparer;
-
-            public GeneraComparer(Func<T, T, int> func) { Comparer = func; }
-
-            public int Compare(T x, T y) => Comparer(x, y);
-        }
-
-        internal class ComparisonComparer<T> : IComparer<T>
-        {
-            private readonly Comparison<T> Comparer;
-
-            public ComparisonComparer(Comparison<T> func) { Comparer = func; }
-
-            public int Compare(T x, T y) => Comparer(x, y);
-        }
 
         /// <summary>
         ///     自动扩容，并保存数据
@@ -133,7 +115,6 @@ namespace AIO
         where T : IComparable
         {
             if (linkedList.Count > 0)
-            {
                 foreach (var node in
                          from i in linkedList
                          where i.CompareTo(number) > 0
@@ -142,9 +123,48 @@ namespace AIO
                     linkedList.AddBefore(node, number);
                     return;
                 }
-            }
 
             linkedList.AddLast(number); // 链表为空时，插入到第一位  
         }
+
+        #region Nested type: ComparisonComparer
+
+        internal class ComparisonComparer<T> : IComparer<T>
+        {
+            private readonly Comparison<T> Comparer;
+
+            public ComparisonComparer(Comparison<T> func)
+            {
+                Comparer = func;
+            }
+
+            #region IComparer<T> Members
+
+            public int Compare(T x, T y) => Comparer(x, y);
+
+            #endregion
+        }
+
+        #endregion
+
+        #region Nested type: GeneraComparer
+
+        internal class GeneraComparer<T> : IComparer<T>
+        {
+            private readonly Func<T, T, int> Comparer;
+
+            public GeneraComparer(Func<T, T, int> func)
+            {
+                Comparer = func;
+            }
+
+            #region IComparer<T> Members
+
+            public int Compare(T x, T y) => Comparer(x, y);
+
+            #endregion
+        }
+
+        #endregion
     }
 }

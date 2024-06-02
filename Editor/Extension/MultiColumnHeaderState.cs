@@ -1,5 +1,9 @@
-﻿using System.Linq;
+﻿#region namespace
+
+using System.Linq;
 using UnityEditor.IMGUI.Controls;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -16,9 +20,7 @@ namespace AIO.UEditor
             var columns = state.columns;
             if (columns == null || columns.Length == 0) return;
             var residue = maxWidth - 13;
-            residue = columns.
-                      Where((t,                    i) => i != index).
-                      Aggregate(residue, (current, t) => current - t.width);
+            residue                   = columns.Where((t, i) => i != index).Aggregate(residue, (current, t) => current - t.width);
             columns[index].width      = residue < 100 ? 100 : residue;
             columns[index].autoResize = true;
         }

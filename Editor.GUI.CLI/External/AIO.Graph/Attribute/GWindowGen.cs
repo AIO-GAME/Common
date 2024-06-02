@@ -15,10 +15,7 @@ namespace AIO.UEditor
     [ScriptIcon(IconResource = "Editor/Icon/Color/general")]
     internal static partial class GWindowGen
     {
-        private static string GetOutPath()
-        {
-            return Path.Combine(Application.dataPath, "Editor", "Gen", "GWindow");
-        }
+        private static string GetOutPath() { return Path.Combine(Application.dataPath, "Editor", "Gen", "GWindow"); }
 
         [AInit(EInitAttrMode.Editor, ushort.MaxValue - 2)]
         internal static void Generate()
@@ -28,11 +25,11 @@ namespace AIO.UEditor
             foreach (var type in assembly.GetTypes())
             {
                 if (type.IsAbstract || !type.IsClass || !type.IsSubclassOf(typeof(EditorWindow))) continue;
-                var attribute = type.GetCustomAttribute<GWindowAttribute>();
-                if (attribute is null) continue;
-                ScriptIcon.SetIcon(attribute.FilePath, attribute.GetTexture2D());
-                if (string.IsNullOrEmpty(attribute.Menu)) continue;
-                dic.Add(type, attribute);
+                var attr = type.GetCustomAttribute<GWindowAttribute>();
+                if (attr is null) continue;
+                ScriptIcon.SetIcon(attr.FilePath, attr.GetTexture2D());
+                if (string.IsNullOrEmpty(attr.Menu)) continue;
+                dic.Add(type, attr);
             }
 
             var change = CreateProject(dic);

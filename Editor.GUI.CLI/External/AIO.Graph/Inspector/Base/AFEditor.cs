@@ -189,7 +189,7 @@ namespace AIO.UEditor
             {
                 var position = property.FindPropertyRelative("Position");
                 var rotation = property.FindPropertyRelative("Rotation");
-                var scale = property.FindPropertyRelative("Scale");
+                var scale    = property.FindPropertyRelative("Scale");
 
                 if (position != null && rotation != null && scale != null)
                 {
@@ -240,7 +240,7 @@ namespace AIO.UEditor
                 {
                     var position = property.FindPropertyRelative("Position");
                     var rotation = property.FindPropertyRelative("Rotation");
-                    var scale = property.FindPropertyRelative("Scale");
+                    var scale    = property.FindPropertyRelative("Scale");
 
                     if (position != null && rotation != null && scale != null)
                     {
@@ -310,7 +310,9 @@ namespace AIO.UEditor
         /// <param name="content">显示名称</param>
         /// <param name="isLine">自动水平布局并占用一行</param>
         /// <param name="options">布局操作</param>
-        protected void PropertyField(string                   propertyName, string content, bool isLine = true,
+        protected void PropertyField(string                   propertyName,
+                                     string                   content,
+                                     bool                     isLine = true,
                                      params GUILayoutOption[] options)
         {
             if (isLine) EditorGUILayout.BeginHorizontal();
@@ -336,7 +338,9 @@ namespace AIO.UEditor
         /// <param name="includeChildren">包含子级</param>
         /// <param name="isLine">自动水平布局并占用一行</param>
         /// <param name="options">布局操作</param>
-        protected void PropertyField(string                   propertyName, bool includeChildren, bool isLine = true,
+        protected void PropertyField(string                   propertyName,
+                                     bool                     includeChildren,
+                                     bool                     isLine = true,
                                      params GUILayoutOption[] options)
         {
             if (isLine) EditorGUILayout.BeginHorizontal();
@@ -359,11 +363,14 @@ namespace AIO.UEditor
         /// 制作一个序列化属性字段
         /// </summary>
         /// <param name="propertyName">属性名称</param>
-        /// <param name="name">显示名称</param>
+        /// <param name="contentName">显示名称</param>
         /// <param name="includeChildren">包含子级</param>
         /// <param name="isLine">自动水平布局并占用一行</param>
         /// <param name="options">布局操作</param>
-        protected void PropertyField(string                   propertyName, string name, bool includeChildren, bool isLine = true,
+        protected void PropertyField(string                   propertyName,
+                                     string                   contentName,
+                                     bool                     includeChildren,
+                                     bool                     isLine = true,
                                      params GUILayoutOption[] options)
         {
             if (isLine) EditorGUILayout.BeginHorizontal();
@@ -371,7 +378,7 @@ namespace AIO.UEditor
             var serializedProperty = GetProperty(propertyName);
             if (serializedProperty != null)
             {
-                EditorGUILayout.PropertyField(serializedProperty, new GUIContent(name), includeChildren, options);
+                EditorGUILayout.PropertyField(serializedProperty, new GUIContent(contentName), includeChildren, options);
                 DrawCopyPaste(serializedProperty);
             }
             else

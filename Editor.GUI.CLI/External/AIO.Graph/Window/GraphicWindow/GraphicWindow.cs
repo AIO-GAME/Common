@@ -121,7 +121,8 @@ namespace AIO.UEditor
                     {
                         if (type == typeSelf || !type.IsSubclassOf(subtype)) continue;
                         var attribute = type.GetCustomAttribute<GWindowAttribute>(false);
-                        if (string.IsNullOrEmpty(attribute?.Group)) continue;
+                        if (attribute is null) continue;
+                        if (string.IsNullOrEmpty(attribute.Group)) continue;
                         if (!Group.Equals(attribute.Group)) continue;
                         AddGroup(Group, type);
                     }
@@ -189,7 +190,6 @@ namespace AIO.UEditor
             EHelper.Window.Free(this);
 #if UNITY_2021_1_OR_NEWER || !UNITY_2020_1_OR_NEWER
             AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
 #endif
         }
 

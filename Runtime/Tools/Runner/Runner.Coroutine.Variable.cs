@@ -1,12 +1,7 @@
-﻿/*|============|*|
-|*|Author:     |*| Star fire
-|*|Date:       |*| 2024-03-18
-|*|E-Mail:     |*| xinansky99@gmail.com
-|*|============|*/
-
-#region
+﻿#region
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,27 +15,31 @@ namespace AIO
         /// 等待一帧
         /// </summary>
         /// <remarks>公共Coroutine变量</remarks>
-        public static WaitForEndOfFrame WaitForEndOfFrame = new WaitForEndOfFrame();
+        public static readonly WaitForEndOfFrame WaitForEndOfFrame = new WaitForEndOfFrame();
 
         /// <summary>
         /// 等待下一帧
         /// </summary>
         /// <remarks>公共Coroutine变量</remarks>
-        public static WaitForFixedUpdate WaitForFixedUpdate = new WaitForFixedUpdate();
+        public static readonly WaitForFixedUpdate WaitForFixedUpdate = new WaitForFixedUpdate();
 
-        //需要用函数获得动态存储的Coroutine变量，采用键值对以免重复添加与快速查找
-        private static readonly Dictionary<float, WaitForSeconds> waitForSeconds =
-            new Dictionary<float, WaitForSeconds>();
+        private static readonly Dictionary<float, WaitForSeconds>         waitForSeconds         = new Dictionary<float, WaitForSeconds>(32);
+        private static readonly Dictionary<float, WaitForSecondsRealtime> waitForSecondsRealtime = new Dictionary<float, WaitForSecondsRealtime>(32);
+        private static readonly Dictionary<Func<bool>, WaitUntil>         waitUntil              = new Dictionary<Func<bool>, WaitUntil>(32);
+        private static readonly Dictionary<Func<bool>, WaitWhile>         waitWhile              = new Dictionary<Func<bool>, WaitWhile>(32);
 
-        private static readonly Dictionary<float, WaitForSecondsRealtime> waitForSecondsRealtime =
-            new Dictionary<float, WaitForSecondsRealtime>();
-
-        private static readonly Dictionary<Func<bool>, WaitUntil> waitUntil =
-            new Dictionary<Func<bool>, WaitUntil>();
-
-        private static readonly Dictionary<Func<bool>, WaitWhile> waitWhile =
-            new Dictionary<Func<bool>, WaitWhile>();
-
+        private class YieldReturnNull : IEnumerator
+        {
+            public object Current => null;
+            public bool MoveNext() => false;
+            public void Reset() { }
+        }
+        
+        /// <summary>
+        /// 空的协程变量
+        /// </summary>
+        public static readonly IEnumerator YieldReturn = new YieldReturnNull();
+        
         /// <summary>
         /// 获取协程变量
         /// </summary>
@@ -51,69 +50,76 @@ namespace AIO
             return tmp;
         }
 
+        /// <summary>
+        /// 等待实时时间
+        /// </summary>
+        /// <param name="k"> 等待时间 </param>
+        /// <returns> 返回协程变量 </returns>
         public static WaitForSecondsRealtime WaitForSecondsRealtime(float k)
         {
             if (!waitForSecondsRealtime.TryGetValue(k, out var tmp))
-                waitForSecondsRealtime.Add(k, tmp = new WaitForSecondsRealtime(k));
+                waitForSecondsRealtime[k] = tmp = new WaitForSecondsRealtime(k);
             return tmp;
         }
 
+        /// <summary>
+        /// 等待直到条件为真
+        /// </summary>
         public static WaitUntil WaitUntil(Func<bool> k)
         {
             if (!waitUntil.TryGetValue(k, out var tmp))
-                waitUntil.Add(k, tmp = new WaitUntil(k));
+                waitUntil[k] = tmp = new WaitUntil(k);
             return tmp;
         }
 
+        /// <summary>
+        /// 等待直到条件为假
+        /// </summary>
         public static WaitWhile WaitWhile(Func<bool> k)
         {
             if (!waitWhile.TryGetValue(k, out var tmp))
-                waitWhile.Add(k, tmp = new WaitWhile(k));
+                waitWhile[k] = tmp = new WaitWhile(k);
             return tmp;
         }
 
-        //删除协程变量，若一个协程变量会被长期使用则尽量不要删除
-        public static void DeleteWaitForSeconds(float k)
-        {
-            waitForSeconds.Remove(k);
-        }
+        /// <summary>
+        /// 删除协程变量
+        /// </summary>
+        public static void WaitForSecondsDelete(float k) { waitForSeconds.Remove(k); }
 
-        public static void DeleteWaitForSecondsRealtime(float k)
-        {
-            waitForSecondsRealtime.Remove(k);
-        }
+        /// <summary>
+        /// 删除协程变量
+        /// </summary>
+        public static void WaitForSecondsRealtimeDelete(float k) { waitForSecondsRealtime.Remove(k); }
 
-        public static void DeleteWaitUntil(Func<bool> k)
-        {
-            waitUntil.Remove(k);
-        }
+        /// <summary>
+        /// 删除协程变量
+        /// </summary>
+        public static void WaitUntilDelete(Func<bool> k) { waitUntil.Remove(k); }
 
-        public static void DeleteWaitWhile(Func<bool> k)
-        {
-            waitWhile.Remove(k);
-        }
+        /// <summary>
+        /// 删除协程变量
+        /// </summary>
+        public static void WaitWhileDelete(Func<bool> k) { waitWhile.Remove(k); }
 
         /// <summary>
         /// 清空协程变量
         /// </summary>
-        public static void ClearWaitForSeconds()
-        {
-            waitForSeconds.Clear();
-        }
+        public static void WaitForSecondsClear() { waitForSeconds.Clear(); }
 
-        public static void ClearWaitForSecondsRealtime()
-        {
-            waitForSecondsRealtime.Clear();
-        }
+        /// <summary>
+        /// 清空协程变量
+        /// </summary>
+        public static void WaitForSecondsRealtimeClear() { waitForSecondsRealtime.Clear(); }
 
-        public static void ClearWaitUntil()
-        {
-            waitUntil.Clear();
-        }
+        /// <summary>
+        /// 清空协程变量
+        /// </summary>
+        public static void WaitUntilClear() { waitUntil.Clear(); }
 
-        public static void ClearWaitWhile()
-        {
-            waitWhile.Clear();
-        }
+        /// <summary>
+        /// 清空协程变量
+        /// </summary>
+        public static void WaitWhileClear() { waitWhile.Clear(); }
     }
 }

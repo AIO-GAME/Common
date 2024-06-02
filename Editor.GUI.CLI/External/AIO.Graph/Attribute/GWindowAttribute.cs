@@ -63,6 +63,8 @@ namespace AIO.UEditor
         /// </summary>
         public int Order;
 
+        public string[] Dock;
+
         /// <summary>
         /// 运行时 窗口类型
         /// </summary>
@@ -76,8 +78,8 @@ namespace AIO.UEditor
                 text    = title,
                 tooltip = tooltip
             };
-            if (filePath.StartsWith(".\\Packages\\")) FilePath = filePath.Substring(2);
-            else FilePath                                      = filePath.Replace('\\', '/');
+            FilePath = filePath.StartsWith(@".\Packages\") ? filePath.Substring(2) : filePath.Replace('\\', '/');
+            Dock     = Array.Empty<string>();
         }
 
         /// <summary>

@@ -13,7 +13,7 @@ namespace AIO
         private static IList<byte> SortRadix(in IList<byte> array)
         {
             if (array.Count < 2) return array;
-            var Max      = array.GetMaxValue();
+            var Max = array.GetMaxValue();
             var maxDigit = 0;
             if (Max == 0) maxDigit = 1;
             else
@@ -85,7 +85,7 @@ namespace AIO
         private static IList<long> SortRadix(IList<long> array)
         {
             if (array.Count < 2) return array;
-            var Max      = array.GetMaxValue();
+            var Max = array.GetMaxValue();
             var maxDigit = 0;
             if (Max == 0) maxDigit = 1;
             else
@@ -116,10 +116,10 @@ namespace AIO
         {
             var len = (uint)array.Count;
             if (len < 2) return array;
-            var bucket                              = new LinkedList<ushort>[len];
+            var bucket = new LinkedList<ushort>[len];
             for (var i = 0; i < len; i++) bucket[i] = new LinkedList<ushort>();
 
-            var max  = array.GetMaxMinValue();
+            var max = array.GetMaxMinValue();
             var diff = max.Item1 - max.Item2 + 1;
             foreach (var item in array)
             {
@@ -139,7 +139,7 @@ namespace AIO
         private static IList<ulong> SortRadix(IList<ulong> array)
         {
             if (array.Count < 2) return array;
-            var Max      = array.GetMaxValue();
+            var Max = array.GetMaxValue();
             var maxDigit = 0;
             if (Max == 0) maxDigit = 1;
             else
@@ -204,7 +204,7 @@ namespace AIO
         private static IList<short> SortRadix(in IList<short> array)
         {
             if (array.Count < 2) return array;
-            var Max      = array.GetMaxValue();
+            var Max = array.GetMaxValue();
             var maxDigit = 0;
             if (Max == 0) maxDigit = 1;
             else
@@ -237,7 +237,7 @@ namespace AIO
         private static IList<sbyte> SortRadix(in IList<sbyte> array)
         {
             if (array.Count < 2) return array;
-            var Max      = array.GetMaxValue();
+            var Max = array.GetMaxValue();
             var maxDigit = 0;
             if (Max == 0) maxDigit = 1;
             else

@@ -91,8 +91,8 @@ namespace AIO.UEditor
             public static async void UnInstallOpenUpm(string scopes, bool isCN = false)
             {
                 AssetDatabase.SaveAssets();
-                var name = isCN ? ScopeName_OpenUpmCN : ScopeName_OpenUpm;
-                var path = System.IO.Path.Combine(Path.Packages, "manifest.json");
+                var name     = isCN ? ScopeName_OpenUpmCN : ScopeName_OpenUpm;
+                var path     = System.IO.Path.Combine(Path.Packages, "manifest.json");
                 var manifest = await AHelper.IO.ReadJsonUTF8Async<JObject>(path);
                 manifest.Value<JObject>("dependencies")?.Remove(scopes);
                 if (manifest.Value<JArray>("scopedRegistries") is JArray scopedRegistries)

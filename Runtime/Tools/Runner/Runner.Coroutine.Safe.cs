@@ -15,11 +15,17 @@ namespace AIO
         private static void SafeStartCoroutine(in IEnumerator coroutine)
         {
 #if UNITY_EDITOR
-            if (instance == null) Initialize();
             if (IsRuntime)
+                try
+                {
 #endif
-                instance.StartCoroutine(coroutine);
+                    QueuesCoroutine.TryAdd(coroutine, false);
 #if UNITY_EDITOR
+                }
+                catch (Exception e)
+                {
+                    UnityEngine.Debug.LogError(e);
+                }
             else EditorCoroutineLooper.Start(coroutine);
 #endif
         }
@@ -28,11 +34,10 @@ namespace AIO
         private static void SafeStartCoroutine(in IEnumerable<IEnumerator> coroutines)
         {
 #if UNITY_EDITOR
-            if (instance == null) Initialize();
             if (IsRuntime)
             {
 #endif
-                foreach (var enumerator in coroutines) instance.StartCoroutine(enumerator);
+                foreach (var enumerator in coroutines) QueuesCoroutine.TryAdd(enumerator, false);
 #if UNITY_EDITOR
             }
             else
@@ -46,11 +51,10 @@ namespace AIO
         private static void SafeStartCoroutine(in IEnumerable<Func<IEnumerator>> coroutines)
         {
 #if UNITY_EDITOR
-            if (instance == null) Initialize();
             if (IsRuntime)
             {
 #endif
-                foreach (var func in coroutines) instance.StartCoroutine(func?.Invoke());
+                foreach (var func in coroutines) QueuesCoroutine.TryAdd(func.Invoke(), false);
 #if UNITY_EDITOR
             }
             else
@@ -64,7 +68,6 @@ namespace AIO
         private static void SafeStopCoroutine(in IEnumerator coroutine)
         {
 #if UNITY_EDITOR
-            if (instance == null) Initialize();
             if (IsRuntime)
 #endif
                 instance.StopCoroutine(coroutine);
@@ -77,16 +80,15 @@ namespace AIO
         private static void SafeStopCoroutine(in IEnumerable<IEnumerator> coroutines)
         {
 #if UNITY_EDITOR
-            if (instance == null) Initialize();
             if (IsRuntime)
             {
 #endif
-                foreach (var func in coroutines) instance.StopCoroutine(func);
+                foreach (var enumerator in coroutines) instance.StopCoroutine(enumerator);
 #if UNITY_EDITOR
             }
             else
             {
-                foreach (var func in coroutines) EditorCoroutineLooper.Stop(func);
+                foreach (var enumerator in coroutines) EditorCoroutineLooper.Stop(enumerator);
             }
 #endif
         }
@@ -95,16 +97,15 @@ namespace AIO
         private static void SafeStopCoroutine(in IEnumerable<Func<IEnumerator>> coroutines)
         {
 #if UNITY_EDITOR
-            if (instance == null) Initialize();
             if (IsRuntime)
             {
 #endif
-                foreach (var func in coroutines) instance.StopCoroutine(func?.Invoke());
+                foreach (var func in coroutines) instance.StopCoroutine(func.Invoke());
 #if UNITY_EDITOR
             }
             else
             {
-                foreach (var func in coroutines) EditorCoroutineLooper.Stop(func?.Invoke());
+                foreach (var func in coroutines) EditorCoroutineLooper.Stop(func.Invoke());
             }
 #endif
         }

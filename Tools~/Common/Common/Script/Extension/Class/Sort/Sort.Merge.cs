@@ -12,7 +12,7 @@ namespace AIO
         #region 归并排序
 
         /// <summary>
-        ///   归并排序
+        ///     归并排序
         /// </summary>
         /// <param name="array">数组</param>
         /// <param name="start">右边界</param>
@@ -30,7 +30,7 @@ namespace AIO
         }
 
         /// <summary>
-        ///   归并排序
+        ///     归并排序
         /// </summary>
         /// <param name="array">数组</param>
         /// <param name="start">右边界</param>
@@ -52,8 +52,8 @@ namespace AIO
         {
             var lal = median - left + 1; //左数组长度
             var ral = right - median;    //右数组长度
-            var la  = new T[lal];
-            var ra  = new T[ral];
+            var la = new T[lal];
+            var ra = new T[ral];
 
             // 给左右两边数组 初始化内容
             for (var i = 0; i < lal; i++) la[i] = array[left + i];
@@ -94,20 +94,19 @@ namespace AIO
         {
             var LAL = median - left + 1; //左数组长度
             var RAL = right - median;    //右数组长度
-            var LA  = new T[LAL];
-            var RA  = new T[RAL];
+            var LA = new T[LAL];
+            var RA = new T[RAL];
 
             // 给左右两边数组 初始化内容
             for (var i = 0; i < LAL; i++) LA[i] = array[left + i];
             for (var i = 0; i < RAL; i++) RA[i] = array[median + 1 + i];
 
             for (int i = 0, j = 0, k = 0; i < right - left + 1; i++)
-            { // 遍历 从左边0开始 到右边截止长度-左边起始开始位置+1
+                // 遍历 从左边0开始 到右边截止长度-左边起始开始位置+1
                 if (j < LAL)
                 { // 如果 J小于左边数组长度
                     if (k < RAL)
                     { // K小于右边数组长度
-
                         if (comparer.Compare(LA[j], RA[k]) <= 0)
                             array[left + i]  = LA[j++];
                         else array[left + i] = RA[k++];
@@ -125,7 +124,6 @@ namespace AIO
                         array[left + i + n - k] = RA[n];
                     return array;
                 }
-            }
 
             return array;
         }

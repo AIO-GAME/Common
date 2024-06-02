@@ -94,6 +94,21 @@ namespace AIO
             }
 
             /// <summary>
+            /// 加载Enum
+            /// </summary>
+            /// <param name="def">默认值</param>
+            /// <typeparam name="T">枚举泛型</typeparam>
+            /// <returns>返回值</returns>
+            public static T LoadEnum<T>(in T def = default)
+            where T : Enum
+            {
+                var fullName = typeof(T).FullName;
+                if (string.IsNullOrEmpty(fullName)) return def;
+                if (PlayerPrefs.HasKey(string.Concat(fullName, "_Enum"))) return def;
+                return (T)Enum.Parse(typeof(T), PlayerPrefs.GetInt(fullName).ToString());
+            }
+
+            /// <summary>
             /// 加载Json数据
             /// </summary>
             /// <param name="key">key</param>

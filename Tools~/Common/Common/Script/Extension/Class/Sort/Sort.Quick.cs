@@ -12,7 +12,7 @@ namespace AIO
         #region 快速排序
 
         /// <summary>
-        ///    快速排序
+        ///     快速排序
         /// </summary>
         /// <param name="array">数组</param>
         /// <param name="start">索引</param>
@@ -27,14 +27,15 @@ namespace AIO
         }
 
         /// <summary>
-        ///    快速排序
+        ///     快速排序
         /// </summary>
         /// <param name="array">数组</param>
         /// <param name="start">索引</param>
         /// <param name="end">数量</param>
         /// <typeparam name="T">泛型</typeparam>
         /// <returns>返回排序后的数组</returns>
-        internal static IList<T> SortQuick<T>(IList<T> array, in int start, in int end) where T : IComparable<T>
+        internal static IList<T> SortQuick<T>(IList<T> array, in int start, in int end)
+        where T : IComparable<T>
         {
             if (array.Count >= 2) Quick(array, start, end);
             return array;

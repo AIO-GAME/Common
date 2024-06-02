@@ -1,4 +1,4 @@
-﻿#region
+﻿#region namespace
 
 using System.IO;
 using System.Linq;
@@ -27,14 +27,19 @@ namespace AIO.UEditor
         {
             Debug.Log($"<b><color=#5DADE2>[GIT]</color></b> {CMD_GIT} Generate");
 
-            var packageInfos = AssetDatabase.FindAssets("package", new[] { "Packages" }).
-                                             Select(AssetDatabase.GUIDToAssetPath).Where(x => AssetDatabase.LoadAssetAtPath<TextAsset>(x) != null).
-                                             Select(PackageInfo.FindForAssetPath).GroupBy(x => x.assetPath).Select(x => x.First()).Where(x =>
-                                                                                                                                             File.Exists(Path.Combine(EHelper.Path.Project, x.resolvedPath, ".git")) ||
-                                                                                                                                             Directory.Exists(Path.Combine(EHelper.Path.Project, x.resolvedPath, ".git"))
-                                             ).ToList();
+            var packageInfos = AssetDatabase.FindAssets("package", new[] { "Packages" })
+                                            .Select(AssetDatabase.GUIDToAssetPath)
+                                            .Where(x => AssetDatabase.LoadAssetAtPath<TextAsset>(x) != null)
+                                            .Select(PackageInfo.FindForAssetPath)
+                                            .GroupBy(x => x.assetPath)
+                                            .Select(x => x.First())
+                                            .Where(x =>
+                                                       File.Exists(Path.Combine(EHelper.Path.Project, x.resolvedPath, ".git")) ||
+                                                       Directory.Exists(Path.Combine(EHelper.Path.Project, x.resolvedPath, ".git"))
+                                                  )
+                                            .ToList();
 
-            var change = CreateProject();
+            var change                               = CreateProject();
             if (CreateTemplate(packageInfos)) change = true;
             if (!change) return;
 
@@ -78,9 +83,6 @@ namespace AIO.UEditor
             CompilationPipeline.RequestScriptCompilation();
         }
 
-        private static string GetOutPath()
-        {
-            return Path.Combine(EHelper.Path.Assets, "Editor", "Gen", "Git");
-        }
+        private static string GetOutPath() { return Path.Combine(EHelper.Path.Assets, "Editor", "Gen", "Git"); }
     }
 }

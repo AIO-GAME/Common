@@ -146,18 +146,16 @@ namespace AIO.UEditor
 
             if (style != null) GUI.Box(rect, GUIContent.none, style);
             if (onDraw == null) return;
-            using (new GUI.GroupScope(rect))
+            var scope = new GUI.GroupScope(rect);
+            rect.x = 0;
+            rect.y = 0;
+            try
             {
-                rect.x = 0;
-                rect.y = 0;
-                try
-                {
-                    onDraw.Invoke(rect);
-                }
-                catch (Exception)
-                {
-                    //  ignored
-                }
+                onDraw.Invoke(rect);
+            }
+            finally
+            {
+                scope.Dispose();
             }
         }
     }

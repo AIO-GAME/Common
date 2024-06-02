@@ -1,4 +1,4 @@
-﻿#region
+﻿#region namespace
 
 using System;
 using System.Collections;
@@ -25,11 +25,11 @@ namespace AIO.UEditor
         where TSetting : ScriptableObject
         {
             var settingType = typeof(TSetting);
-            var guids = AssetDatabase.FindAssets($"t:{settingType.Name}");
+            var guids       = AssetDatabase.FindAssets($"t:{settingType.Name}");
             if (guids.Length == 0)
             {
                 Debug.LogWarning($"Create new {settingType.Name}.asset");
-                var setting = ScriptableObject.CreateInstance<TSetting>();
+                var setting  = ScriptableObject.CreateInstance<TSetting>();
                 var filePath = $"Assets/{settingType.Name}.asset";
                 AssetDatabase.CreateAsset(setting, filePath);
                 AssetDatabase.SaveAssets();
@@ -40,9 +40,8 @@ namespace AIO.UEditor
             {
                 if (guids.Length != 1)
                 {
-                    foreach (var guid in guids)
+                    foreach (var path in guids.Select(AssetDatabase.GUIDToAssetPath))
                     {
-                        var path = AssetDatabase.GUIDToAssetPath(guid);
                         Debug.LogWarning($"Found multiple file : {path}");
                     }
 
@@ -50,7 +49,7 @@ namespace AIO.UEditor
                 }
 
                 var filePath = AssetDatabase.GUIDToAssetPath(guids[0]);
-                var setting = AssetDatabase.LoadAssetAtPath<TSetting>(filePath);
+                var setting  = AssetDatabase.LoadAssetAtPath<TSetting>(filePath);
                 return setting;
             }
         }
@@ -67,7 +66,7 @@ namespace AIO.UEditor
             if (guids.Length == 0)
             {
                 Debug.LogWarning($"Create new {settingType.Name}.asset");
-                var setting = ScriptableObject.CreateInstance(settingType);
+                var setting  = ScriptableObject.CreateInstance(settingType);
                 var filePath = $"Assets/{settingType.Name}.asset";
                 AssetDatabase.CreateAsset(setting, filePath);
                 AssetDatabase.SaveAssets();
@@ -78,9 +77,8 @@ namespace AIO.UEditor
             {
                 if (guids.Length != 1)
                 {
-                    foreach (var guid in guids)
+                    foreach (var path in guids.Select(AssetDatabase.GUIDToAssetPath))
                     {
-                        var path = AssetDatabase.GUIDToAssetPath(guid);
                         Debug.LogWarning($"Found multiple file : {path}");
                     }
 
@@ -88,7 +86,7 @@ namespace AIO.UEditor
                 }
 
                 var filePath = AssetDatabase.GUIDToAssetPath(guids[0]);
-                var setting = AssetDatabase.LoadAssetAtPath(filePath, settingType);
+                var setting  = AssetDatabase.LoadAssetAtPath(filePath, settingType);
                 return (ScriptableObject)setting;
             }
         }
@@ -135,9 +133,9 @@ namespace AIO.UEditor
                 }
 
                 var definedLayerCount = (int)GetDefinedLayerCount.Invoke(null, null);
-                var layerNames = new string[definedLayerCount];
-                var layerValues = new int[definedLayerCount];
-                var parameters = new object[] { layerNames, layerValues };
+                var layerNames        = new string[definedLayerCount];
+                var layerValues       = new int[definedLayerCount];
+                var parameters        = new object[] { layerNames, layerValues };
                 layerNames  = (string[])parameters[0];
                 layerValues = (int[])parameters[1];
                 GetDefinedLayers.Invoke(null, parameters);
@@ -156,13 +154,13 @@ namespace AIO.UEditor
             public static void Set(byte layerIndex, string nameValue)
             {
                 if (layerIndex >= 31) return;
-                var str = AHelper.IO.ReadUTF8("ProjectSettings/TagManager.asset");
+                var str         = AHelper.IO.ReadUTF8("ProjectSettings/TagManager.asset");
                 var headerIndex = str.IndexOf("TagManager:", StringComparison.CurrentCulture);
-                var header = str.Substring(0, headerIndex);
-                var sb = new StringBuilder(str.Substring(headerIndex));
-                var asset = AHelper.Yaml.Deserialize<Hashtable>(sb.ToString());
-                var TagManager = (Dictionary<object, object>)asset["TagManager"];
-                var layers = (List<object>)TagManager["layers"];
+                var header      = str.Substring(0, headerIndex);
+                var sb          = new StringBuilder(str.Substring(headerIndex));
+                var asset       = AHelper.Yaml.Deserialize<Hashtable>(sb.ToString());
+                var TagManager  = (Dictionary<object, object>)asset["TagManager"];
+                var layers      = (List<object>)TagManager["layers"];
                 layers[layerIndex]   = nameValue;
                 TagManager["layers"] = layers;
                 sb.Clear();
@@ -176,10 +174,7 @@ namespace AIO.UEditor
             /// </summary>
             /// <param name="agr">层级信息</param>
             /// <param name="order">Ture:从头开始 False:从尾开始</param>
-            public static void Add(string agr, bool order = true)
-            {
-                Add(new[] { agr }, order);
-            }
+            public static void Add(string agr, bool order = true) { Add(new[] { agr }, order); }
 
             /// <summary>
             /// 添加层级信息
@@ -189,14 +184,14 @@ namespace AIO.UEditor
             public static void Add(IList<string> agrList, bool order = true)
             {
                 if (agrList.Count <= 0) return;
-                var str = AHelper.IO.ReadUTF8("ProjectSettings/TagManager.asset");
+                var str         = AHelper.IO.ReadUTF8("ProjectSettings/TagManager.asset");
                 var headerIndex = str.IndexOf("TagManager:", StringComparison.CurrentCulture);
-                var header = str.Substring(0, headerIndex);
-                var sb = new StringBuilder(str.Substring(headerIndex));
-                var asset = AHelper.Yaml.Deserialize<Hashtable>(sb.ToString());
-                var TagManager = (Dictionary<object, object>)asset["TagManager"];
-                var layers = (List<object>)TagManager["layers"];
-                var index = 0;
+                var header      = str.Substring(0, headerIndex);
+                var sb          = new StringBuilder(str.Substring(headerIndex));
+                var asset       = AHelper.Yaml.Deserialize<Hashtable>(sb.ToString());
+                var TagManager  = (Dictionary<object, object>)asset["TagManager"];
+                var layers      = (List<object>)TagManager["layers"];
+                var index       = 0;
                 if (order)
                     for (var i = 0; i < 32; i++)
                     {
@@ -224,18 +219,12 @@ namespace AIO.UEditor
             /// <summary>
             /// 判断是否有该层级
             /// </summary>
-            public static bool Has(int value)
-            {
-                return GetInfo().ContainsKey(value);
-            }
+            public static bool Has(int value) { return GetInfo().ContainsKey(value); }
 
             /// <summary>
             /// 判断是否有该层级
             /// </summary>
-            public static bool Has(string value)
-            {
-                return GetInfo().Any(item => value == item.Value);
-            }
+            public static bool Has(string value) { return GetInfo().Any(item => value == item.Value); }
 
             /// <summary>
             /// 判断是否有该层级

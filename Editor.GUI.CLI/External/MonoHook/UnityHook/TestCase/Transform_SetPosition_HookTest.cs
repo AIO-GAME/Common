@@ -14,10 +14,7 @@ namespace MonoHook.Test
     {
         private static MethodHook _hook;
 
-        static Transform_SetPosition_HookTest()
-        {
-            Init();
-        }
+        static Transform_SetPosition_HookTest() { Init(); }
 
         public static void Init()
         {
@@ -25,12 +22,12 @@ namespace MonoHook.Test
             {
                 Type type = typeof(Transform);
                 MethodInfo miTarget = type.GetMethod("set_position_Injected",
-                    BindingFlags.Instance | BindingFlags.NonPublic);
+                                                     BindingFlags.Instance | BindingFlags.NonPublic);
 
                 MethodInfo miReplacement = typeof(Transform_SetPosition_HookTest).GetMethod("SetPositionNew",
-                    BindingFlags.Static | BindingFlags.NonPublic);
+                                                                                            BindingFlags.Static | BindingFlags.NonPublic);
                 MethodInfo miProxy = typeof(Transform_SetPosition_HookTest).GetMethod("SetPositionProxy",
-                    BindingFlags.Static | BindingFlags.NonPublic);
+                                                                                      BindingFlags.Static | BindingFlags.NonPublic);
 
                 _hook = new MethodHook(miTarget, miReplacement, miProxy);
                 _hook.Install();
@@ -48,7 +45,7 @@ namespace MonoHook.Test
         private static void SetPositionProxy(Transform t, ref Vector3 value)
         {
             // dummy code
-            Debug.Log("something" + t.ToString());
+            Debug.Log("something" + t);
         }
     }
 }

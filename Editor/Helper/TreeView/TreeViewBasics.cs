@@ -1,8 +1,12 @@
-﻿using System;
+﻿#region namespace
+
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
+
+#endregion
 
 namespace AIO.UEditor
 {
@@ -144,6 +148,7 @@ namespace AIO.UEditor
                         catch (Exception)
                         {
                             GUIUtility.ExitGUI();
+                            return;
                         }
 
                         if (i == count)

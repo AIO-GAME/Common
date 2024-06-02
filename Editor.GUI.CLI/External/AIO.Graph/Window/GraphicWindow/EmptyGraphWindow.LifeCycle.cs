@@ -7,9 +7,6 @@ using UnityEngine;
 
 namespace AIO.UEditor
 {
-    /// <summary>
-    /// EmptyGraphWindow
-    /// </summary>
     partial class EmptyGraphWindow
     {
         /// <summary>
@@ -17,10 +14,10 @@ namespace AIO.UEditor
         /// </summary>
         protected virtual void Awake() { }
 
-        /// <summary>
-        /// CreateGUl在编辑器窗口的rootVisualElement准备填充时被调用。
-        /// </summary>
-        protected virtual void CreateGUI() { }
+        // /// <summary>
+        // /// CreateGUl在编辑器窗口的rootVisualElement准备填充时被调用。
+        // /// </summary>
+        // protected virtual void CreateGUI() { }
 
         /// <summary>
         /// 该函数在加载对象时被调用。
@@ -32,54 +29,51 @@ namespace AIO.UEditor
         /// </summary>
         protected virtual void OnGUI() { }
 
-        /// <summary>
-        /// 当编辑器窗口作为选项卡添加时调用。放入选项卡 在选项卡被添加 都会触发
-        /// </summary>
-        protected virtual void OnAddedAsTab() { }
-
-        /// <summary>
-        /// 在拖放过程中调用。当一个编辑器窗口标签被分离时，此函数没有文档。
-        /// </summary>
-        protected virtual void OnTabDetached() { }
-
-        /// <summary>
-        /// 当打开编辑器窗口时调用。此函数未记录。
-        /// </summary>
-        protected virtual void OnBecameVisible() { }
-
-        /// <summary>
-        /// 当编辑器窗口关闭时调用。此函数没有记录。
-        /// </summary>
-        protected virtual void OnBecameInvisible() { }
-
-        /// <summary>
-        /// 当主窗口移动时调用。
-        /// </summary>
-        protected virtual void OnMainWindowMove() { }
-
-        /// <summary>
-        /// 当场景被打开时调用。此函数没有记录。
-        /// </summary>
-        protected virtual void OnDidOpenScene() { }
-
-        /// <summary>
-        /// 用于在层次结构中的对象或对象组发生更改时发送的消息的处理程序。
-        /// </summary>
-        protected virtual void OnHierarchyChange() { }
-
-        /// <summary>
-        /// 当窗口获得键盘焦点时调用。
-        /// </summary>
-        protected virtual void OnFocus() { }
+        // /// <summary>
+        // /// 当编辑器窗口作为选项卡添加时调用。放入选项卡 在选项卡被添加 都会触发
+        // /// </summary>
+        // protected virtual void OnAddedAsTab() { }
+        //
+        // /// <summary>
+        // /// 在拖放过程中调用。当一个编辑器窗口标签被分离时，此函数没有文档。
+        // /// </summary>
+        // protected virtual void OnTabDetached() { }
+        //
+        // /// <summary>
+        // /// 当打开编辑器窗口时调用。此函数未记录。
+        // /// </summary>
+        // protected virtual void OnBecameVisible() { }
+        //
+        // /// <summary>
+        // /// 当编辑器窗口关闭时调用。此函数没有记录。
+        // /// </summary>
+        // protected virtual void OnBecameInvisible() { }
+        //
+        // /// <summary>
+        // /// 当主窗口移动时调用。
+        // /// </summary>
+        // protected virtual void OnMainWindowMove() { }
+        //
+        // /// <summary>
+        // /// 当场景被打开时调用。此函数没有记录。
+        // /// </summary>
+        // protected virtual void OnDidOpenScene() { }
+        //
+        // /// <summary>
+        // /// 用于在层次结构中的对象或对象组发生更改时发送的消息的处理程序。
+        // /// </summary>
+        // protected virtual void OnHierarchyChange() { }
+        //
+        // /// <summary>
+        // /// 当窗口获得键盘焦点时调用。
+        // /// </summary>
+        // protected virtual void OnFocus() { }
 
         /// <summary>
         /// 对窗口的内容执行保存操作。
         /// </summary>
 #if UNITY_2020_1_OR_NEWER
-        public override void SaveChanges()
-        {
-            base.SaveChanges();
-        }
+        public override void SaveChanges() { base.SaveChanges(); }
 #else
         public virtual void SaveChanges()
         {
@@ -100,10 +94,7 @@ namespace AIO.UEditor
         /// 在更改此EditorWindow的UI缩放时调用。
         /// </summary>
 #if UNITY_2020_1_OR_NEWER
-        protected override void OnBackingScaleFactorChanged()
-        {
-            base.OnBackingScaleFactorChanged();
-        }
+        protected override void OnBackingScaleFactorChanged() { base.OnBackingScaleFactorChanged(); }
 #else
         protected virtual void OnBackingScaleFactorChanged()
         {
@@ -130,25 +121,25 @@ namespace AIO.UEditor
         /// </summary>
         protected virtual void OnDestroy() { }
 
-        /// <summary>
-        /// 每当选择发生变化时调用。
-        /// </summary>
-        protected virtual void OnSelectionChange() { }
-
-        /// <summary>
-        /// 每当项目状态更改时发送的消息的处理程序。
-        /// </summary>
-        protected virtual void OnProjectChange() { }
-
-        /// <summary>
-        /// 当窗口失去键盘焦点时调用。
-        /// </summary>
-        protected virtual void OnLostFocus() { }
-
-        /// <summary>
-        /// 重置为默认值。
-        /// </summary>
-        protected virtual void Reset() { }
+        // /// <summary>
+        // /// 每当选择发生变化时调用。
+        // /// </summary>
+        // protected virtual void OnSelectionChange() { }
+        //
+        // /// <summary>
+        // /// 每当项目状态更改时发送的消息的处理程序。
+        // /// </summary>
+        // protected virtual void OnProjectChange() { }
+        //
+        // /// <summary>
+        // /// 当窗口失去键盘焦点时调用。
+        // /// </summary>
+        // protected virtual void OnLostFocus() { }
+        //
+        // /// <summary>
+        // /// 重置为默认值。
+        // /// </summary>
+        // protected virtual void Reset() { }
 
         /// <summary>
         /// 将自定义菜单项添加到编辑器窗口。

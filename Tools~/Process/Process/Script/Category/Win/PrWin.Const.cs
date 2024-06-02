@@ -9,11 +9,6 @@ namespace AIO
     public partial class PrWin
     {
         /// <summary>
-        /// 
-        /// </summary>
-        public const string CMD_Certutil = "certutil";
-
-        /// <summary>
         /// 适用于 复制文件
         /// HELP => 
         /// /A          : [仅复制有存档属性集的文件 但不更改属性]

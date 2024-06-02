@@ -2,10 +2,11 @@
 
 using System;
 using System.Diagnostics;
+using System.Globalization;
 
 #endregion
 
-namespace AIO.UEditor
+namespace AIO.UEngine
 {
     /// <summary>
     /// 下拉框检视器（支持 string、int、float 类型）
@@ -21,8 +22,13 @@ namespace AIO.UEditor
         {
 #if UNITY_EDITOR
             ValueType      = typeof(string);
-            Values         = values;
+            Values         = new object[values.Length];
             DisplayOptions = values;
+            for (var i = 0; i < values.Length; i++)
+            {
+                Values[i]         = values[i];
+                DisplayOptions[i] = values[i].ToString(CultureInfo.CurrentCulture);
+            }
 #endif
         }
 
@@ -57,7 +63,7 @@ namespace AIO.UEditor
             for (var i = 0; i < values.Length; i++)
             {
                 Values[i]         = values[i];
-                DisplayOptions[i] = values[i].ToString();
+                DisplayOptions[i] = values[i].ToString(CultureInfo.CurrentCulture);
             }
 #endif
         }

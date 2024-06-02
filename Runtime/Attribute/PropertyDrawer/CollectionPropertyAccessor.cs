@@ -27,10 +27,7 @@ namespace AIO
         }
 
         /// <inheritdoc/>
-        public override Type GetFieldElementType(object obj)
-        {
-            return FieldElementType ?? GetElementType(GetField(ref obj)?.FieldType);
-        }
+        public override Type GetFieldElementType(object obj) { return FieldElementType ?? GetElementType(GetField(ref obj)?.FieldType); }
 
         /// <summary>Returns the type of elements in the array.</summary>
         public static Type GetElementType(Type fieldType)
@@ -45,16 +42,12 @@ namespace AIO
                 return fieldType.GetGenericArguments()[0];
 
             Debug.LogWarning(
-                $"{nameof(AIO)}.{nameof(CollectionPropertyAccessor)}: unable to determine element type for {fieldType}");
+                             $"{nameof(AIO)}.{nameof(CollectionPropertyAccessor)}: unable to determine element type for {fieldType}");
             return fieldType;
         }
 
-
         /// <summary>Returns the collection object targeted by this accessor.</summary>
-        public object GetCollection(object obj)
-        {
-            return base.GetValue(obj);
-        }
+        public object GetCollection(object obj) { return base.GetValue(obj); }
 
         /// <inheritdoc/>
         public override object GetValue(object obj)
@@ -78,12 +71,8 @@ namespace AIO
             return enumerator.Current;
         }
 
-
         /// <summary>Sets the collection object targeted by this accessor.</summary>
-        public void SetCollection(object obj, object value)
-        {
-            base.SetValue(obj, value);
-        }
+        public void SetCollection(object obj, object value) { base.SetValue(obj, value); }
 
         /// <inheritdoc/>
         public override void SetValue(object obj, object value)
@@ -101,18 +90,14 @@ namespace AIO
                 }
                 default:
                     throw new InvalidOperationException(
-                        $"{nameof(SetValue)} failed: field doesn't implement {nameof(IList)}.");
+                                                        $"{nameof(SetValue)} failed: field doesn't implement {nameof(IList)}.");
             }
         }
-
 
         /// <summary>
         /// Returns a description of this accessor's path.
         /// </summary>
-        public override string ToString()
-        {
-            return $"{base.ToString()}[{ElementIndex}]";
-        }
+        public override string ToString() { return $"{base.ToString()}[{ElementIndex}]"; }
 
 #if UNITY_EDITOR
         /// <summary>
