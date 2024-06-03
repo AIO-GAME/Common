@@ -4,6 +4,7 @@ import json
 import os
 import subprocess
 import stat
+from tqdm import tqdm
 
 
 def get_local_tags() -> set[str]:
@@ -25,12 +26,12 @@ def get_remote_tags(remote_name='origin') -> set[str]:
 
 
 def delete_local_tag(tag) -> None:
-    os.system(f'git tag -d {tag}')
+    subprocess.run(['git', 'tag', '-d', tag], check=True)
     print(f"Deleted local tag {tag}")
 
 
 def delete_remote_tag() -> None:
-    os.system('git fetch --prune origin +refs/tags/*:refs/tags/*')
+    subprocess.run(['git', 'fetch', '--prune', 'origin', '+refs/tags/*:refs/tags/*'], check=True)
     local_tags = get_local_tags()
     remote_tags = get_remote_tags()
     tags_to_delete = local_tags - remote_tags
@@ -41,7 +42,8 @@ def delete_remote_tag() -> None:
 
 # 处理只读文件删除问题的回调函数
 def remove_readonly(func, path, _) -> None:
-    os.chmod(path, stat.S_IWRITE)
+    # os.chmod(path, stat.S_IWRITE)
+    subprocess.run(['attrib', '-R', path], shell=True)
     func(path)
 
 
@@ -50,7 +52,6 @@ def delete_folder(folder_path) -> None:
     try:
         if os.path.exists(folder_path):
             shutil.rmtree(folder_path, onerror=remove_readonly)
-            print(f"文件夹 '{folder_path}' 已成功删除。")
         else:
             print(f"文件夹 '{folder_path}' 不存在。")
     except Exception as exp:
@@ -67,7 +68,7 @@ def read_current_branch() -> str:
 
 
 def read_current_version() -> str:
-    os.system("git fetch --tags")
+    subprocess.run(['git', 'fetch', '--tags'], check=True)
     tags = os.popen("git tag").read().split("\n")
     # 所有标签去掉空字符串 -preview标签去掉preview 然后按照version排序
     tags = sorted([tag.replace("-preview", "") for tag in tags if tag], key=lambda x: tuple(map(int, x.split("."))))
@@ -76,39 +77,46 @@ def read_current_version() -> str:
 
 # 切换上一级目录
 os.chdir(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-
+# subprocess.run(['cd', '..'], check=True, shell=True)
 current_path = os.getcwd()
 print("当前路径: " + current_path)
+
+username = "Star fire"
+email = "xinansky99@gmail.com"
+print("用户名称: " + username)
+print("用户邮箱: " + email)
 
 # 是否为preview版本
 is_preview = True
 
 # 忽略列表
 ignore_list = [
-    ".chglog",
+    "Tools~",
+    ".chglog/*",
     "*.yaml",
     "*.yml",
-    "Tools~",
-    ".github/API_USAGE/",
-    ".github/ISSUE_TEMPLATE/",
-    ".github/PULL_REQUEST_TEMPLATE/",
-    ".github/Template/",
-    ".github/workflows/",
+    ".github/API_USAGE/*",
+    ".github/ISSUE_TEMPLATE/*",
+    ".github/PULL_REQUEST_TEMPLATE/*",
+    ".github/Template/*",
+    ".github/workflows/*",
     ".github/*.py",
     ".github/*.sh",
     ".github/*.bat",
 ]
+
 github = os.popen("git remote get-url origin").read().strip()
-print("github 地址: " + github)
+print("仓库地址: " + github)
+current_branch = read_current_branch()  # 读取当前分支
+print("仓库分支: " + current_branch)
 
-delete_remote_tag()
-# 读取当前分支
-current_branch = read_current_branch()
+steps = [
+    ("删除不存在的标签", lambda: delete_remote_tag()),
+]
+for step_description, step_function in tqdm(steps, desc="检查标签"):
+    step_function()
 
-# 读取当前版本号
-version = read_current_version()
-print("当前版本号: " + version)
-
+version = read_current_version()  # 读取当前版本号
 # 递增版本号
 version_list = version.split(".")
 if is_preview:
@@ -126,41 +134,48 @@ with open("package.json", "r+") as f:
         f.seek(0)
         json.dump(package, f, indent=2)
         print("写入新版本号成功: {0} -> {1}".format(current_version, new_version))
-    f.close()
+        f.close()
 
 # 上传到远程仓库 捕获异常
-if current_version == new_version:
-    print("版本号没有变化")
-else:
+if current_version != new_version:
     try:
-        os.system("git pull")
-        os.system("git add package.json")
-        os.system("git commit -m \"✨ up version {0} -> {1}\"".format(current_branch, new_version))
-        os.system("git push origin " + current_branch)
+        subprocess.run(['git', 'pull'], check=True)
+        subprocess.run(['git', 'add', 'package.json'], check=True)
+        subprocess.run(['git', 'commit', '-m', f"✨ up version {current_branch} -> {new_version}"], check=True)
+        subprocess.run(['git', 'push', 'origin', current_branch], check=True)
         print("上传到远程仓库({0})成功".format(current_branch))
     except Exception as e:
         print("上传到远程仓库({0})失败".format(current_branch))
         print(e)
 
+steps = [
+    ("设置用户名",
+     lambda: subprocess.run(['git', 'config', 'user.name', username], check=True, stdout=-3, stderr=-3)),
+    ("设置邮箱",
+     lambda: subprocess.run(['git', 'config', 'user.email', email], check=True, stdout=-3, stderr=-3)),
+    ("开启GPG签名",
+     lambda: subprocess.run(['git', 'config', 'commit.gpgSign', 'true'], check=True, stdout=-3, stderr=-3)),
+]
+for step_description, step_function in tqdm(steps, desc="设置环境"):
+    step_function()
 # 克隆指定分支 到目标文件夹路径
 os.chdir(os.path.dirname(current_path))
 new_branch_path = os.path.join(os.path.dirname(current_path), new_version)
-print("新分支路径: " + new_branch_path + " 是否存在: " + str(os.path.exists(new_branch_path)))
+new_branch = "release/{0}_{1}".format(new_version, str(int(time.time())))
 
+steps = []
 if os.path.exists(new_branch_path) is False:
-    cmd = "git clone {0} -b {1} --single-branch {2}".format(github, current_branch, new_branch_path)
-    os.system(cmd)
+    steps.append(("克隆指定分支",
+                  lambda: subprocess.run(['git', 'clone', github, '-b', current_branch, '--single-branch', new_branch_path], check=True, stdout=-3, stderr=-3)))
 
 # 切换环境变量路径 为指定分支路径
-os.chdir(new_branch_path)
-os.system("git reset --hard")
-os.system("git pull")
-
-# 在当前分支的基础上创建新的分支 并切换到新的分支
-# 在远端创建分支
-new_branch = "release/{0}_{1}".format(new_version, str(int(time.time())))
-os.system("git checkout -b {0}".format(new_branch))
-print("创建新的分支成功: {0}".format(new_branch))
+steps.append(("切换路径", lambda: os.chdir(new_branch_path)))
+steps.append(("重置分支", lambda: subprocess.run(['git', 'reset', '--hard'], check=True, stdout=-3, stderr=-3)))
+steps.append(("拉取分支", lambda: subprocess.run(['git', 'pull'], check=True, stdout=-3, stderr=-3)))
+steps.append(("切换分支", lambda: subprocess.run(['git', 'checkout', current_branch], check=True, stdout=-3, stderr=-3)))
+for step_description, step_function in tqdm(steps, desc="创建分支", total=len(steps)):
+    step_function()
+print("创建分支: {0}".format(new_branch))
 
 # 在新的分支上忽略指定文件和文件夹 如果没有则创建 如果有则拼接
 with open(os.path.join(new_branch_path, ".gitignore"), "a+") as f:
@@ -169,24 +184,45 @@ with open(os.path.join(new_branch_path, ".gitignore"), "a+") as f:
             f.write(ignore + "\n")
         else:
             f.write("/" + ignore + "\n")
-    print("忽略文件和文件夹成功")
+    print("修改成功: .gitignore ")
 
 # 删除指定文件和文件夹
-for ignore in ignore_list:
-    os.system("git rm -r --cached " + ignore)
-    print("删除文件和文件夹成功: " + ignore)
+errorList = []
+for ignore in tqdm(ignore_list, desc="删除列表"):
+    try:
+        subprocess.run(['git', 'rm', '-r', '--cached', ignore], check=True, stdout=-3, stderr=-3)
+        subprocess.run(['git', 'clean', '-fdx', ignore], check=True, stdout=-3, stderr=-3)
+    except subprocess.CalledProcessError as e:
+        errorList.append(ignore)
 
-os.system("git add .")
-os.system("git commit -m \"✨ up version\"")
-os.system("git push origin {0}".format(new_branch))  # 上传到远程仓库
-# 使用 GPG 签名
-os.system("git tag -a {0} -m \"✨ up version {1}\"".format(new_version, new_version))  # 在新的分支上创建新的tag
-os.system("git push origin {0}".format(new_version))  # 上传到远程仓库
+if len(errorList) > 0:
+    for error in errorList:
+        print("删除失败: " + error)
+else:
+    print("删除成功")
 
-# 删除远端分支
-os.system("git push origin --delete {0}".format(new_branch))
-
-# 切换回当前分支
-os.chdir(current_path)
-delete_folder(new_branch_path)
+steps = [
+    ("设置用户名",
+     lambda: subprocess.run(['git', 'config', 'user.name', username], check=True, stdout=-3, stderr=-3)),
+    ("设置邮箱",
+     lambda: subprocess.run(['git', 'config', 'user.email', email], check=True, stdout=-3, stderr=-3)),
+    ("开启签名",
+     lambda: subprocess.run(['git', 'config', 'commit.gpgSign', 'true'], check=True, stdout=-3, stderr=-3)),
+    ("添加文件",
+     lambda: subprocess.run(['git', 'add', '.'], check=True, stdout=-3, stderr=-3)),
+    ("提交文件",
+     lambda: subprocess.run(['git', 'commit', '-s', '-m', f"✨ up version {version} -> {new_version}"], check=True, stdout=-3, stderr=-3)),
+    ("创建标签",
+     lambda: subprocess.run(['git', 'tag', '-s', new_version, '-m', f"✨ up version {version} -> {new_version}"], check=True, stdout=-3, stderr=-3)),
+    ("推送分支",
+     lambda: subprocess.run(['git', 'push', 'origin', new_branch], check=True, stdout=-3, stderr=-3)),
+    ("推送标签",
+     lambda: subprocess.run(['git', 'push', 'origin', new_version], check=True, stdout=-3, stderr=-3)),
+    ("删除分支",
+     lambda: subprocess.run(['git', 'push', 'origin', '--delete', new_branch], check=True, stdout=-3, stderr=-3)),
+    ("切换路径", lambda: os.chdir(current_path)),
+    ("删除目标", lambda: delete_folder(new_branch_path)),
+]
+for step_description, step_function in tqdm(steps, desc="上传标签"):
+    step_function()
 print("升级标签版本成功")
