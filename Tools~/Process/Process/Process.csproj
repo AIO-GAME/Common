@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{119376CD-BF44-4E12-A558-DEB3D2723D5A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AIO</RootNamespace>
+    <AssemblyName>AIO.PrCourse</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+    <RestorePackagesPath Condition=" '$(NUGET_PACKAGES)' != '' ">$(NUGET_PACKAGES)</RestorePackagesPath>
+    <RestorePackagesPath Condition=" '$(NUGET_PACKAGES)' == '' ">$(USERPROFILE)\.nuget\packages</RestorePackagesPath>
+    <LangVersion>8</LangVersion>
+    <PublicSign>false</PublicSign>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>bin\Debug\AIO.PrCourse.xml</DocumentationFile>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\AIO.PrCourse.xml</DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath Condition=" '$(NUGET_PACKAGES)' != '' ">$(NUGET_PACKAGES)\newtonsoft.json\13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath Condition=" '$(NUGET_PACKAGES)' == '' ">$(USERPROFILE)\.nuget\packages\newtonsoft.json\13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Script\Abstract\Basics\Executor.cs" />
+    <Compile Include="Script\Abstract\Basics\PrCourse.cs" />
+    <Compile Include="Script\Abstract\Basics\PrCourseStatic.cs" />
+    <Compile Include="Script\Abstract\Basics\Result.cs" />
+    <Compile Include="Script\Abstract\EPrVerb.cs" />
+    <Compile Include="Script\Abstract\Extend.cs" />
+    <Compile Include="Script\Abstract\Interface\IExecutor.cs" />
+    <Compile Include="Script\Abstract\Interface\IPrCourse.cs" />
+    <Compile Include="Script\Abstract\Interface\IResult.cs" />
+    <Compile Include="Script\Argument\Argument.cs" />
+    <Compile Include="Script\Argument\ArgumentAttribute.cs" />
+    <Compile Include="Script\Argument\ArgumentCustom.cs" />
+    <Compile Include="Script\Argument\EArgLabel.cs" />
+    <Compile Include="Script\Argument\UnityArgsCommand.cs" />
+    <Compile Include="Script\Category\Curl\PrCurl.cs" />
+    <Compile Include="Script\Category\Curl\PrCurl.Help.cs" >
+      <DependentUpon>PrCurl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Curl\PrCurl.Post.cs" >
+      <DependentUpon>PrCurl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Curl\PrCurl.Remote.cs" >
+      <DependentUpon>PrCurl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Curl\PrCurl.UploadFile.cs" >
+      <DependentUpon>PrCurl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Curl\PrCurl.Version.cs" >
+      <DependentUpon>PrCurl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Dingding\PrDingTalk.cs" />
+    <Compile Include="Script\Category\Dingding\PrDingding.Send.cs" />
+    <Compile Include="Script\Category\GCloud\PrGCloud.cs" />
+    <Compile Include="Script\Category\GCloud\PrGCloud.DeleteDir.cs" >
+      <DependentUpon>PrGCloud.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\GCloud\PrGCloud.DeleteFile.cs" >
+      <DependentUpon>PrGCloud.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\GCloud\PrGCloud.Download.cs" >
+      <DependentUpon>PrGCloud.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\GCloud\PrGCloud.Exists.cs" >
+      <DependentUpon>PrGCloud.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\GCloud\PrGCloud.Get.cs" >
+      <DependentUpon>PrGCloud.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\GCloud\PrGCloud.Metadata.cs" >
+      <DependentUpon>PrGCloud.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\GCloud\PrGCloud.Read.cs" >
+      <DependentUpon>PrGCloud.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\GCloud\PrGCloud.UploadDir.cs" >
+      <DependentUpon>PrGCloud.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\GCloud\PrGCloud.UploadFile.cs" >
+      <DependentUpon>PrGCloud.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Git\PrGit.Add.cs" >
+      <DependentUpon>PrGit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Git\PrGit.CheckOut.cs" >
+      <DependentUpon>PrGit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Git\PrGit.Clean.cs" >
+      <DependentUpon>PrGit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Git\PrGit.Clone.cs" >
+      <DependentUpon>PrGit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Git\PrGit.Commit.cs" >
+      <DependentUpon>PrGit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Git\PrGit.Fetch.cs" >
+      <DependentUpon>PrGit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Git\PrGit.Init.cs" >
+      <DependentUpon>PrGit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Git\PrGit.Merge.cs" >
+      <DependentUpon>PrGit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Git\PrGit.Pull.cs" >
+      <DependentUpon>PrGit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Git\PrGit.Remote.cs" >
+      <DependentUpon>PrGit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Git\PrGit.Reset.cs" >
+      <DependentUpon>PrGit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Git\PrGit.Status.cs" >
+      <DependentUpon>PrGit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Git\PrGit.Submodule.cs" >
+      <DependentUpon>PrGit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Git\PrGit.Helper.cs" >
+      <DependentUpon>PrGit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Git\PrGit.Tag.cs" >
+      <DependentUpon>PrGit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Mac\DateTime\PrMac.Cal.cs" />
+    <Compile Include="Script\Category\Mac\DateTime\PrMac.Time.cs" />
+    <Compile Include="Script\Category\Mac\IO\PrMac.Cat.cs" />
+    <Compile Include="Script\Category\Mac\IO\PrMac.Chmod.cs" />
+    <Compile Include="Script\Category\Mac\IO\PrMac.Compare.cs" />
+    <Compile Include="Script\Category\Mac\IO\PrMac.Cp.cs" />
+    <Compile Include="Script\Category\Mac\IO\PrMac.Ln.cs" />
+    <Compile Include="Script\Category\Mac\IO\PrMac.Mkidr.cs" />
+    <Compile Include="Script\Category\Mac\IO\PrMac.Move.cs" />
+    <Compile Include="Script\Category\Mac\IO\PrMac.Nl.cs" />
+    <Compile Include="Script\Category\Mac\IO\PrMac.Open.cs" />
+    <Compile Include="Script\Category\Mac\IO\PrMac.Osascript.cs" />
+    <Compile Include="Script\Category\Mac\IO\PrMac.Rm.cs" />
+    <Compile Include="Script\Category\Mac\IO\PrMac.Touch.cs" />
+    <Compile Include="Script\Category\Mac\IO\PrMac.Uniq.cs" />
+    <Compile Include="Script\Category\Mac\IO\PrMac.Which.cs" />
+    <Compile Include="Script\Category\Mac\Net\PrMac.Ftp.cs" />
+    <Compile Include="Script\Category\Mac\Net\PrMac.Mail.cs" />
+    <Compile Include="Script\Category\Mac\Net\PrMac.Mesg.cs" />
+    <Compile Include="Script\Category\Mac\Net\PrMac.Ping.cs" />
+    <Compile Include="Script\Category\Mac\Net\PrMac.Rcp.cs" />
+    <Compile Include="Script\Category\Mac\Net\PrMac.Rlogin.cs" />
+    <Compile Include="Script\Category\Mac\Net\PrMac.Rsh.cs" />
+    <Compile Include="Script\Category\Mac\Net\PrMac.Telnet.cs" />
+    <Compile Include="Script\Category\Mac\Net\PrMac.Write.cs" />
+    <Compile Include="Script\Category\Mac\Program\PrMac.Brew.cs" />
+    <Compile Include="Script\Category\Mac\Program\PrMac.Duti.cs" />
+    <Compile Include="Script\Category\Mac\Program\PrMac.Kill.cs" />
+    <Compile Include="Script\Category\Mac\Program\PrMac.Ps.cs" />
+    <Compile Include="Script\Category\Mac\Program\PrMac.Security.cs" />
+    <Compile Include="Script\Category\Mac\Program\PrMac.Sudo.cs" />
+    <Compile Include="Script\Category\Mac\Program\PrMac.Xcode.cs" />
+    <Compile Include="Script\Category\Mac\Script\Git\PrMac.Git.Add.cs" >
+      <DependentUpon>PrGit.Git.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Mac\Script\Git\PrMac.Git.Clean.cs" >
+      <DependentUpon>PrGit.Git.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Mac\Script\Git\PrMac.Git.Clone.cs" >
+      <DependentUpon>PrGit.Git.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Mac\Script\Git\PrMac.Git.Commit.cs" >
+      <DependentUpon>PrGit.Git.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Mac\Script\Git\PrMac.Git.cs" />
+    <Compile Include="Script\Category\Mac\Script\Git\PrMac.Git.Pull.cs" >
+      <DependentUpon>PrGit.Git.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Mac\Script\Git\PrMac.Git.Push.cs" >
+      <DependentUpon>PrGit.Git.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Mac\Script\Git\PrMac.Git.Remote.cs" >
+      <DependentUpon>PrGit.Git.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Mac\Script\Git\PrMac.Git.Reset.cs" >
+      <DependentUpon>PrGit.Git.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Mac\Script\Git\PrMac.Git.Upload.cs" >
+      <DependentUpon>PrGit.Git.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Mac\Script\Mono\PrMac.Mono.cs" />
+    <Compile Include="Script\Category\Mac\Script\Shell\PrMac.Shell.cs" />
+    <Compile Include="Script\Category\Svn\PrSvn.Add.cs" >
+      <DependentUpon>PrSvn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Svn\PrSvn.Cat.cs" >
+      <DependentUpon>PrSvn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Svn\PrSvn.Commit.cs" >
+      <DependentUpon>PrSvn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Svn\PrSvn.cs" />
+    <Compile Include="Script\Category\Svn\PrSvn.Delete.cs" >
+      <DependentUpon>PrSvn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Svn\PrSvn.Diff.cs" >
+      <DependentUpon>PrSvn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Svn\PrSvn.Help.cs" >
+      <DependentUpon>PrSvn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Svn\PrSvn.Infos.cs" >
+      <DependentUpon>PrSvn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Svn\PrSvn.List.cs" >
+      <DependentUpon>PrSvn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Svn\PrSvn.Log.cs" >
+      <DependentUpon>PrSvn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Svn\PrSvn.Merge.cs" >
+      <DependentUpon>PrSvn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Svn\PrSvn.Mkdir.cs" >
+      <DependentUpon>PrSvn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Svn\PrSvn.Resolved.cs" >
+      <DependentUpon>PrSvn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Svn\PrSvn.Revert.cs" >
+      <DependentUpon>PrSvn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Svn\PrSvn.Status.cs" >
+      <DependentUpon>PrSvn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Svn\PrSvn.Switch.cs" >
+      <DependentUpon>PrSvn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Svn\PrSvn.Update.cs" >
+      <DependentUpon>PrSvn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Svn\PrSvn.CheckOut.cs" >
+      <DependentUpon>PrSvn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Win\Cmd\PrCmd.Copy.cs" />
+    <Compile Include="Script\Category\Win\Cmd\PrCmd.cs" />
+    <Compile Include="Script\Category\Special\PrException.cs" />
+    <Compile Include="Script\Category\Special\PrEmpty.cs" />
+    <Compile Include="Script\Category\Special\PrError.cs" />
+    <Compile Include="Script\Category\Special\PrNative.cs" />
+    <Compile Include="Script\Category\Git\PrGit.cs" />
+    <Compile Include="Script\Category\Git\PrGit.Branch.cs" >
+      <DependentUpon>PrGit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Git\PrGit.Push.cs" >
+      <DependentUpon>PrGit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Mac\PrMac.cs" />
+    <Compile Include="Script\Category\Mac\PrMac.Const.cs" />
+    <Compile Include="Script\Category\Win\Cmd\PrCmd.Del.cs" />
+    <Compile Include="Script\Category\Win\Cmd\PrCmd.Mkdir.cs" />
+    <Compile Include="Script\Category\Win\Cmd\PrCmd.Move.cs" />
+    <Compile Include="Script\Category\Win\Cmd\PrCmd.Rmdir.cs" />
+    <Compile Include="Script\Category\Win\Cmd\PrCmd.Shrpubw.cs" />
+    <Compile Include="Script\Category\Win\Git\PrWin.Git.Add.cs" />
+    <Compile Include="Script\Category\Win\Git\PrWin.Git.Clean.cs" />
+    <Compile Include="Script\Category\Win\Git\PrWin.Git.Clone.cs" />
+    <Compile Include="Script\Category\Win\Git\PrWin.Git.Commit.cs" />
+    <Compile Include="Script\Category\Win\Git\PrWin.Git.Pull.cs" />
+    <Compile Include="Script\Category\Win\Git\PrWin.Git.Push.cs" />
+    <Compile Include="Script\Category\Win\Git\PrWin.Git.Remote.cs" />
+    <Compile Include="Script\Category\Win\Git\PrWin.Git.Upload.cs" />
+    <Compile Include="Script\Category\Win\Git\PrWin.Git.Reset.cs" />
+    <Compile Include="Script\Category\Win\PrWin.Certutil.cs" />
+    <Compile Include="Script\Category\Win\PrWin.Certutil.Get.Generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrWin.Certutil.Get.Generated.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Category\Win\PrWin.Comp.cs" />
+    <Compile Include="Script\Category\Win\PrWin.MkLink.cs" />
+    <Compile Include="Script\Category\Win\PrWin.Open.cs" />
+    <Compile Include="Script\Category\Win\PrWin.Shutdown.cs" />
+    <Compile Include="Script\Category\Win\PrWin.XCopy.cs" />
+    <Compile Include="Script\Platform\PrPlatform.File.cs" />
+    <Compile Include="Script\Platform\PrPlatform.Folder.cs" />
+    <Compile Include="Script\Platform\PrPlatform.Git.Add.cs" >
+      <DependentUpon>PrPlatform.Git.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Platform\PrPlatform.Git.Clean.cs" >
+      <DependentUpon>PrPlatform.Git.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Platform\PrPlatform.Git.Clone.cs" >
+      <DependentUpon>PrPlatform.Git.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Platform\PrPlatform.Git.Commit.cs" >
+      <DependentUpon>PrPlatform.Git.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Platform\PrPlatform.Git.cs" />
+    <Compile Include="Script\Platform\PrPlatform.Git.Pull.cs" >
+      <DependentUpon>PrPlatform.Git.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Platform\PrPlatform.Git.Push.cs" >
+      <DependentUpon>PrPlatform.Git.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Platform\PrPlatform.Git.Remote.cs" >
+      <DependentUpon>PrPlatform.Git.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Platform\PrPlatform.Git.Reset.cs" >
+      <DependentUpon>PrPlatform.Git.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Platform\PrPlatform.cs" />
+    <Compile Include="Script\Category\Win\Git\PrWin.Git.cs" />
+    <Compile Include="Script\Category\Win\PrWin.cs" />
+    <Compile Include="Script\Category\Win\PrWin.Const.cs" />
+    <Compile Include="Script\Platform\PrPlatform.Git.Upload.cs" >
+      <DependentUpon>PrPlatform.Git.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Script\Utils\NetUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common\Common.csproj">
+      <Project>{b0d5708a-7c94-4bcb-805d-a718034e5724}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Script\Category\Win\PrWin.Certutil.Get.Generated.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PrWin.Certutil.Get.Generated.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>@set CUR_DLL=$(ProjectDir)$(OutDir)
+@cd /d $(SolutionDir)
+@cd ..
+@set cur=%25cd%25\Plugins\Editor\
+
+@set dllname=$(TargetName)
+@if exist %25CUR_DLL%25%25dllname%25.dll (
+@copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll
+)
+@if exist %25CUR_DLL%25%25dllname%25.xml (
+@copy /y /v %25CUR_DLL%25%25dllname%25.xml %25cur%25%25dllname%25.xml
+)
+</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>@cd /d $(SolutionDir)
+@cd ..
+@set cur=%25cd%25\Plugins\Editor\
+
+@set dllname=$(TargetName)
+@if exist %25cur%25%25dllname%25.dll (
+@del /s /q %25cur%25%25dllname%25.dll
+)
+@if exist %25cur%25%25dllname%25.xml (
+@del /s /q %25cur%25%25dllname%25.xml
+)
+</PreBuildEvent>
+  </PropertyGroup>
+</Project>

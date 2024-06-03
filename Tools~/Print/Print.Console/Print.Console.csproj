@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{4C98440C-2870-4138-92B3-C2CF28B6ACBF}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>AIO</RootNamespace>
+        <AssemblyName>AIO.Print.Console</AssemblyName>
+        <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+        <Deterministic>true</Deterministic>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <DocumentationFile>bin\Debug\AIO.Print.Console.xml</DocumentationFile>
+        <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <DocumentationFile>bin\Release\AIO.Print.Console.xml</DocumentationFile>
+        <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    </PropertyGroup>
+    <PropertyGroup>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="System"/>
+        <Reference Include="System.Core"/>
+        <Reference Include="Microsoft.CSharp"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="Script\CPrintLog.cs"/>
+        <Compile Include="Script\CPrintRun.cs"/>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Print\Print.csproj">
+            <Project>{7ae3a71e-5b2c-4e5f-86bc-31668e6f8e69}</Project>
+            <Name>Print</Name>
+            <Private>False</Private>
+        </ProjectReference>
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <PropertyGroup>
+        <PostBuildEvent>@set CUR_DLL=$(ProjectDir)$(OutDir)
+            @cd /d $(SolutionDir)
+            @cd ..
+            @set cur=%25cd%25\Plugins\
+
+            @set dllname=$(TargetName)
+            @if exist %25CUR_DLL%25%25dllname%25.dll (
+            @copy /y /v %25CUR_DLL%25%25dllname%25.dll %25cur%25%25dllname%25.dll
+            )
+            @if exist %25CUR_DLL%25%25dllname%25.xml (
+            @copy /y /v %25CUR_DLL%25%25dllname%25.xml %25cur%25%25dllname%25.xml
+            )
+        </PostBuildEvent>
+    </PropertyGroup>
+    <PropertyGroup>
+        <PreBuildEvent>@cd /d $(SolutionDir)
+            @cd ..
+            @set cur=%25cd%25\Plugins\
+
+            @set dllname=$(TargetName)
+            @if exist %25cur%25%25dllname%25.dll (
+            @del /s /q %25cur%25%25dllname%25.dll
+            )
+            @if exist %25cur%25%25dllname%25.xml (
+            @del /s /q %25cur%25%25dllname%25.xml
+            )
+        </PreBuildEvent>
+    </PropertyGroup>
+</Project>

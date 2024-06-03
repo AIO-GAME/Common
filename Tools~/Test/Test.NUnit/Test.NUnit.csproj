@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+
+    <RootNamespace>ALL.Test</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageReference Include="NUnit" Version="3.13.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+    <PackageReference Include="coverlet.collector" Version="3.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Attribute\Attribute.csproj" />
+    <ProjectReference Include="..\..\Common\Common\Common.csproj" />
+    <ProjectReference Include="..\..\Ensure\Ensure.csproj" />
+    <ProjectReference Include="..\..\Print\Print.Console\Print.Console.csproj" />
+    <ProjectReference Include="..\..\Print\Print.Unity\Print.Unity.csproj" />
+    <ProjectReference Include="..\..\Print\Print\Print.csproj" />
+    <ProjectReference Include="..\..\Process\Process\Process.csproj" />
+  </ItemGroup>
+
+</Project>

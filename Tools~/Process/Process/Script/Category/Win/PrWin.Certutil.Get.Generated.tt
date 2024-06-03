@@ -1,0 +1,79 @@
+<#@ template language="C#" linePragmas="true" visibility="public"#>
+<#@ output extension=".cs" encoding="utf-8" #>
+<#
+    var types = new[]
+    {
+        "MD5",
+        "SHA1",
+        "SHA256",
+        "SHA384",
+        "SHA512"
+    };
+#>
+using System;
+using System.IO;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace AIO
+{
+    partial class PrWin
+    {    
+        partial class Certutil
+        { 
+<#
+    foreach (var type in types)
+    {
+#>
+            #region <#= type #>
+      
+            /// <summary>
+            ///  <see cref="<#= type #>"/> 算法 计算 <see cref="target"/>
+            /// </summary>
+            /// <param name="target"> 目标文件路径 </param>
+            /// <returns> 执行器 </returns>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static IExecutor <#= type #>(string target) 
+                => Create(cmd, "-hashfile \"{0}\" <#= type #>", target.Replace('/', '\\'));
+
+            /// <summary>
+            /// 获取 <see cref="target"/> 的 <see cref="<#= type #>"/> 值
+            /// </summary>
+            /// <param name="target"> 目标文件路径 </param>
+            /// <returns> <#= type #> 值 </returns>
+            public static string Get<#= type #>(string target)
+            {
+                var executor = <#= type #>(target);
+                var temp     = executor.EnableOutput;
+                executor.EnableOutput = false;
+                var value = executor.Sync().StdOut.ToString().Split('\n')[1].Trim();
+                executor.EnableOutput = temp;
+                return value;
+            }
+
+            /// <summary>
+            /// 获取 <see cref="target"/> 的 <see cref="<#= type #>"/> 值
+            /// </summary>
+            /// <param name="target"> 目标文件路径 </param>
+            /// <returns> <#= type #> 值 </returns>
+            public static async Task<string> Get<#= type #>Async(string target)
+            {
+                var executor = <#= type #>(target);
+                var temp     = executor.EnableOutput;
+                executor.EnableOutput = false;
+                var result = await executor.Async();
+                var value  = result.StdOut.ToString().Split('\n')[1].Trim();
+                executor.EnableOutput = temp;
+                return value;
+            }
+
+            #endregion
+
+<#
+    }
+#>
+        }
+    }
+}
