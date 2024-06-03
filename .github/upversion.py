@@ -143,9 +143,9 @@ if current_version != new_version:
         subprocess.run(['git', 'add', 'package.json'], check=True)
         subprocess.run(['git', 'commit', '-m', f"✨ up version {current_branch} -> {new_version}"], check=True)
         subprocess.run(['git', 'push', 'origin', current_branch], check=True)
-        print("上传到远程仓库({0})成功".format(current_branch))
+        print("推送分支: ({0})成功".format(current_branch))
     except Exception as e:
-        print("上传到远程仓库({0})失败".format(current_branch))
+        print("推送分支: ({0})失败".format(current_branch))
         print(e)
 
 steps = [
