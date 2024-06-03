@@ -81,4 +81,15 @@ _ReSharper*/
 [Ll]ogs/
 [Ll]og/
 [Xx]64/
-[Xx]86/
+[Xx]86//Tools~
+/.chglog/*
+*.yaml
+*.yml
+/.github/API_USAGE/*
+/.github/ISSUE_TEMPLATE/*
+/.github/PULL_REQUEST_TEMPLATE/*
+/.github/Template/*
+/.github/workflows/*
+/.github/*.py
+/.github/*.sh
+/.github/*.bat
