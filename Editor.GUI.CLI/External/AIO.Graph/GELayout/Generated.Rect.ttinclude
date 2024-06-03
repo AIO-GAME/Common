@@ -1,0 +1,5 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" linePragmas="true" visibility="public"#>
+<#@ output extension=".cs" encoding="utf-8" #>
+<#@ assembly name="$(SolutionDir)Packages\com.aio.package\Plugins\Editor\AIO.T4.dll" #>
+<#@ import namespace="AIO" #>
+<#= new GERLayoutSingleton().GetAllText() #>
