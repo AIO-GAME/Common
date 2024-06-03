@@ -9,19 +9,21 @@
 # 8. 上传到远程仓库
 # 9. 切换回当前分支
 # 10. 删除新的分支
-
+import shutil
+import time
 import json
 import os
 import subprocess
+import stat
 
 
-def get_local_tags():
+def get_local_tags() -> set[str]:
     result = subprocess.run(['git', 'tag'], stdout=subprocess.PIPE)
     tags = result.stdout.decode('utf-8').split()
     return set(tags)
 
 
-def get_remote_tags(remote_name='origin'):
+def get_remote_tags(remote_name='origin') -> set[str]:
     result = subprocess.run(['git', 'ls-remote', '--tags', remote_name], stdout=subprocess.PIPE)
     remote_tags_output = result.stdout.decode('utf-8')
     remote_tags = set()
@@ -33,7 +35,7 @@ def get_remote_tags(remote_name='origin'):
     return remote_tags
 
 
-def delete_local_tag(tag):
+def delete_local_tag(tag) -> None:
     os.system(f'git tag -d {tag}')
     print(f"Deleted local tag {tag}")
 
@@ -46,6 +48,25 @@ def delete_remote_tag() -> None:
 
     for tag in tags_to_delete:
         delete_local_tag(tag)
+
+
+# 处理只读文件删除问题的回调函数
+def remove_readonly(func, path, _) -> None:
+    os.chmod(path, stat.S_IWRITE)
+    func(path)
+
+
+# 删除文件夹
+def delete_folder(folder_path) -> None:
+    try:
+        if os.path.exists(folder_path):
+            shutil.rmtree(folder_path, onerror=remove_readonly)
+            print(f"文件夹 '{folder_path}' 已成功删除。")
+        else:
+            print(f"文件夹 '{folder_path}' 不存在。")
+    except Exception as exp:
+        print(f"文件夹 '{folder_path}' 删除失败。")
+        print(exp)
 
 
 def read_current_branch() -> str:
@@ -88,7 +109,10 @@ ignore_list = [
     ".github/*.sh",
     ".github/*.bat",
 ]
+github = os.popen("git remote get-url origin").read().strip()
+print("github 地址: " + github)
 
+delete_remote_tag()
 # 读取当前分支
 current_branch = read_current_branch()
 
@@ -122,7 +146,7 @@ else:
     try:
         os.system("git pull")
         os.system("git add package.json")
-        os.system("git commit -m \"✨ up version\"")
+        os.system("git commit -m \"✨ up version {0} -> {1}\"".format(current_branch, new_version))
         os.system("git push origin " + current_branch)
         print("上传到远程仓库({0})成功".format(current_branch))
     except Exception as e:
@@ -130,18 +154,24 @@ else:
         print(e)
 
 # 克隆指定分支 到目标文件夹路径
-new_branch_path = os.path.join(current_path, new_version)
-if os.path.exists(new_branch_path) is False:
-    os.system("git clone -b {0} --single-branch {1} {2}".format(current_branch, current_path, new_version))
+os.chdir(os.path.dirname(current_path))
+new_branch_path = os.path.join(os.path.dirname(current_path), new_version)
+print("新分支路径: " + new_branch_path + " 是否存在: " + str(os.path.exists(new_branch_path)))
 
-print("新分支路径: " + new_branch_path)
+if os.path.exists(new_branch_path) is False:
+    cmd = "git clone {0} -b {1} --single-branch {2}".format(github, current_branch, new_branch_path)
+    os.system(cmd)
+
 # 切换环境变量路径 为指定分支路径
 os.chdir(new_branch_path)
 os.system("git reset --hard")
+os.system("git pull")
 
 # 在当前分支的基础上创建新的分支 并切换到新的分支
-os.system("git checkout -b release/" + new_version)
-print("创建新的分支成功: release/" + new_version)
+# 在远端创建分支
+new_branch = "release/{0}_{1}".format(new_version, str(int(time.time())))
+os.system("git checkout -b {0}".format(new_branch))
+print("创建新的分支成功: {0}".format(new_branch))
 
 # 在新的分支上忽略指定文件和文件夹 如果没有则创建 如果有则拼接
 with open(os.path.join(new_branch_path, ".gitignore"), "a+") as f:
@@ -157,22 +187,17 @@ for ignore in ignore_list:
     os.system("git rm -r --cached " + ignore)
     print("删除文件和文件夹成功: " + ignore)
 
-# 在新的分支上创建新的tag
-os.system("git tag -a {0} -m \"✨ up version {1}\"".format(new_version, new_version))
-os.system("git push origin " + new_version)
-
-# 上传到远程仓库
 os.system("git add .")
 os.system("git commit -m \"✨ up version\"")
-os.system("git push origin release/" + new_version)
+os.system("git push origin {0}".format(new_branch))  # 上传到远程仓库
+# 使用 GPG 签名
+os.system("git tag -a {0} -m \"✨ up version {1}\"".format(new_version, new_version))  # 在新的分支上创建新的tag
+os.system("git push origin {0}".format(new_version))  # 上传到远程仓库
 
-# 推送标签
-os.system("git push origin " + new_version)
-
-# # 删除新的分支
-# os.system("git branch -D release/" + new_version)
-# print("删除新的分支成功")
-
+# 删除远端分支
+os.system("git push origin --delete {0}".format(new_branch))
 
 # 切换回当前分支
 os.chdir(current_path)
+delete_folder(new_branch_path)
+print("升级标签版本成功")
