@@ -172,7 +172,7 @@ if os.path.exists(new_branch_path) is False:
 steps.append(("切换路径", lambda: os.chdir(new_branch_path)))
 steps.append(("重置分支", lambda: subprocess.run(['git', 'reset', '--hard'], check=True, stdout=-3, stderr=-3)))
 steps.append(("拉取分支", lambda: subprocess.run(['git', 'pull'], check=True, stdout=-3, stderr=-3)))
-steps.append(("切换分支", lambda: subprocess.run(['git', 'checkout', current_branch], check=True, stdout=-3, stderr=-3)))
+steps.append(("切换分支", lambda: subprocess.run(['git', 'checkout', '-b', new_branch], check=True, stdout=-3, stderr=-3)))
 for step_description, step_function in tqdm(steps, desc="创建分支", total=len(steps)):
     step_function()
 print("创建分支: {0}".format(new_branch))
@@ -202,6 +202,7 @@ else:
     print("删除成功")
 
 steps = [
+    ("删除标签", lambda: delete_remote_tag()),
     ("设置用户名",
      lambda: subprocess.run(['git', 'config', 'user.name', username], check=True, stdout=-3, stderr=-3)),
     ("设置邮箱",
@@ -211,11 +212,11 @@ steps = [
     ("添加文件",
      lambda: subprocess.run(['git', 'add', '.'], check=True, stdout=-3, stderr=-3)),
     ("提交文件",
-     lambda: subprocess.run(['git', 'commit', '-s', '-m', f"✨ up version {version} -> {new_version}"], check=True, stdout=-3, stderr=-3)),
-    ("创建标签",
-     lambda: subprocess.run(['git', 'tag', '-s', new_version, '-m', f"✨ up version {version} -> {new_version}"], check=True, stdout=-3, stderr=-3)),
+     lambda: subprocess.run(['git', 'commit', '-s', '-m', f"✨ up version {current_version} -> {new_version}"], check=True, stdout=-3, stderr=-3)),
     ("推送分支",
      lambda: subprocess.run(['git', 'push', 'origin', new_branch], check=True, stdout=-3, stderr=-3)),
+    ("创建标签",
+     lambda: subprocess.run(['git', 'tag', '-s', new_version, '-m', f"✨ up version {current_version} -> {new_version}"], check=True, stdout=-3, stderr=-3)),
     ("推送标签",
      lambda: subprocess.run(['git', 'push', 'origin', new_version], check=True, stdout=-3, stderr=-3)),
     ("删除分支",
