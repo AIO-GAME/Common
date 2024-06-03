@@ -10,9 +10,9 @@
 # 9. 切换回当前分支
 # 10. 删除新的分支
 
+import json
 # 当前文件夹路径
 import os
-import json
 
 
 def read_current_branch() -> str:
@@ -42,10 +42,18 @@ is_preview = True
 
 # 忽略列表
 ignore_list = [
-    ".git",
-    ".idea",
+    ".chglog",
     "*.yaml",
-    "*.yml"
+    "*.yml",
+    "Tools~",
+    ".github/API_USAGE/",
+    ".github/ISSUE_TEMPLATE/",
+    ".github/PULL_REQUEST_TEMPLATE/",
+    ".github/Template/",
+    ".github/workflows/",
+    ".github/*.py",
+    ".github/*.sh",
+    ".github/*.bat",
 ]
 
 # 读取当前分支
@@ -66,44 +74,69 @@ new_version = ".".join(version_list)
 # 写入新版本号
 with open("package.json", "r+") as f:
     package = json.load(f)
-    package["version"] = new_version
-    f.seek(0)
-    json.dump(package, f, indent=2)
+    current_version = package["version"]
+    if current_version != new_version:
+        package["version"] = new_version
+        f.seek(0)
+        json.dump(package, f, indent=2)
+        print("写入新版本号成功: {0} -> {1}".format(current_version, new_version))
     f.close()
-print("写入新版本号成功: " + new_version)
 
 # 上传到远程仓库 捕获异常
-try:
-    os.system("git add package.json")
-    os.system("git commit -m 'up version'")
-    os.system("git push origin " + current_branch)
-    print("上传到远程仓库({0})成功".format(current_branch))
-except Exception as e:
-    print("上传到远程仓库({0})失败".format(current_branch))
-    print(e)
+if current_version == new_version:
+    print("版本号没有变化")
+else:
+    try:
+        os.system("git pull")
+        os.system("git add package.json")
+        os.system("git commit -m \"✨ up version\"")
+        os.system("git push origin " + current_branch)
+        print("上传到远程仓库({0})成功".format(current_branch))
+    except Exception as e:
+        print("上传到远程仓库({0})失败".format(current_branch))
+        print(e)
 
-# 
-# # 在当前分支的基础上创建新的分支 并切换到新的分支
-# os.system("git checkout -b release/" + new_version)
-# 
-# # 在新的分支上忽略指定文件和文件夹
-# with open(".gitignore", "a") as f:
-#     for ignore in ignore_list:
-#         f.write(ignore + "\n")
-#     print("忽略文件和文件夹成功")
-# 
-# # 上传到远程仓库
-# os.system("git add .")
-# os.system("git commit -m 'up version'")
-# os.system("git push origin release/" + new_version)
-# 
-# # 在新的分支上创建新的tag
-# os.system("git tag -a " + new_version + " -m 'up version'")
-# os.system("git push origin " + new_version)
-# 
-# # 切换回当前分支
-# os.system("git checkout " + current_branch)
-# 
+# 克隆指定分支 到目标文件夹路径
+new_branch_path = os.path.join(current_path, new_version)
+if os.path.exists(new_branch_path) is False:
+    os.system("git clone -b {0} --single-branch {1} {2}".format(current_branch, current_path, new_version))
+
+print("新分支路径: " + new_branch_path)
+# 切换环境变量路径 为指定分支路径
+os.chdir(new_branch_path)
+os.system("git reset --hard")
+
+# 在当前分支的基础上创建新的分支 并切换到新的分支
+os.system("git checkout -b release/" + new_version)
+print("创建新的分支成功: release/" + new_version)
+
+# 在新的分支上忽略指定文件和文件夹 如果没有则创建 如果有则拼接
+with open(os.path.join(new_branch_path, ".gitignore"), "a+") as f:
+    for ignore in ignore_list:
+        if ignore.startswith("*"):
+            f.write(ignore + "\n")
+        else:
+            f.write("/" + ignore + "\n")
+    print("忽略文件和文件夹成功")
+
+# 删除指定文件和文件夹
+for ignore in ignore_list:
+    os.system("git rm -r --cached " + ignore)
+    print("删除文件和文件夹成功: " + ignore)
+
+# 在新的分支上创建新的tag
+os.system("git tag -a {0} -m \"✨ up version {1}\"".format(new_version, new_version))
+os.system("git push origin " + new_version)
+
+# 上传到远程仓库
+os.system("git add .")
+os.system("git commit -m \"✨ up version\"")
+os.system("git push origin release/" + new_version)
+
 # # 删除新的分支
 # os.system("git branch -D release/" + new_version)
 # print("删除新的分支成功")
+
+
+# 切换回当前分支
+os.chdir(current_path)
