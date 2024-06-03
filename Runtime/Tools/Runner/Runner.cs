@@ -89,12 +89,12 @@ namespace AIO
         {
             DataInitialize();
             IsAllowThread = Application.platform != RuntimePlatform.WebGLPlayer;
-            RunnerMainThreadExecuteRuntime = new GameObject() //添加一个看不见的游戏物体到场景中
+            RunnerMainRuntime = new GameObject() //添加一个看不见的游戏物体到场景中
             {
                 hideFlags = HideFlags.HideAndDontSave,
-                name = nameof(RunnerMainThreadExecuteRuntime)
+                name = nameof(RunnerMainRuntime)
             };
-            instance = RunnerMainThreadExecuteRuntime.AddComponent<ThreadMono>();
+            instance = RunnerMainRuntime.AddComponent<ThreadMono>();
             Application.quitting += Dispose;
         }
 #endif
@@ -166,7 +166,7 @@ namespace AIO
                     QueueCopiedUpdateFixed = null;
                 }
 
-                lock (QueueCopiedUpdateLate)
+                lock (QueueCopiedUpdate)
                 {
                     while (QueueCopiedUpdate.Count > 0)
                         QueueCopiedUpdate.TryDequeue(out _);
