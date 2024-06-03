@@ -11,8 +11,41 @@
 # 10. 删除新的分支
 
 import json
-# 当前文件夹路径
 import os
+import subprocess
+
+
+def get_local_tags():
+    result = subprocess.run(['git', 'tag'], stdout=subprocess.PIPE)
+    tags = result.stdout.decode('utf-8').split()
+    return set(tags)
+
+
+def get_remote_tags(remote_name='origin'):
+    result = subprocess.run(['git', 'ls-remote', '--tags', remote_name], stdout=subprocess.PIPE)
+    remote_tags_output = result.stdout.decode('utf-8')
+    remote_tags = set()
+    for line in remote_tags_output.strip().split('\n'):
+        if line:
+            tag_ref = line.split()[1]
+            if tag_ref.startswith('refs/tags/'):
+                remote_tags.add(tag_ref[len('refs/tags/'):])
+    return remote_tags
+
+
+def delete_local_tag(tag):
+    os.system(f'git tag -d {tag}')
+    print(f"Deleted local tag {tag}")
+
+
+def delete_remote_tag() -> None:
+    os.system('git fetch --prune origin +refs/tags/*:refs/tags/*')
+    local_tags = get_local_tags()
+    remote_tags = get_remote_tags()
+    tags_to_delete = local_tags - remote_tags
+
+    for tag in tags_to_delete:
+        delete_local_tag(tag)
 
 
 def read_current_branch() -> str:
@@ -132,6 +165,9 @@ os.system("git push origin " + new_version)
 os.system("git add .")
 os.system("git commit -m \"✨ up version\"")
 os.system("git push origin release/" + new_version)
+
+# 推送标签
+os.system("git push origin " + new_version)
 
 # # 删除新的分支
 # os.system("git branch -D release/" + new_version)
