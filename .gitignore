@@ -49,6 +49,8 @@ _pkginfo.txt
 [Bb]uild[Ll]og.*
 _ReSharper*/
 
+*.*.*-[Pp]review/
+*.*.*/
 .git/
 .vs/
 .idea/
