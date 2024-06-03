@@ -49,8 +49,6 @@ _pkginfo.txt
 [Bb]uild[Ll]og.*
 _ReSharper*/
 
-*.*.*-[Pp]review/
-*.*.*/
 .git/
 .vs/
 .idea/
@@ -82,3 +80,4 @@ _ReSharper*/
 [Ll]og/
 [Xx]64/
 [Xx]86/
+!Editor.GUI.CLI
