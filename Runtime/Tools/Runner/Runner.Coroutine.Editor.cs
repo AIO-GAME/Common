@@ -17,17 +17,18 @@ namespace AIO
         private static class EditorCoroutineLooper
         {
             private static readonly ConcurrentDictionary<IEnumerator, bool> Looper;
-            private static          bool                                    M_Started;
+            private static          bool                                    Started;
 
             static EditorCoroutineLooper()
             {
                 Looper                     =  new ConcurrentDictionary<IEnumerator, bool>();
+                EditorApplication.quitting -= DisposeEditorLooper;
                 EditorApplication.quitting += DisposeEditorLooper;
             }
 
             private static void DisposeEditorLooper()
             {
-                M_Started = false;
+                Started = false;
                 Looper.Clear();
                 EditorApplication.quitting -= DisposeEditorLooper;
             }
@@ -36,8 +37,9 @@ namespace AIO
             {
                 if (iterator is null) return;
                 if (!Looper.ContainsKey(iterator)) Looper.TryAdd(iterator, false);
-                if (Looper.IsEmpty || M_Started) return;
-                M_Started                =  true;
+                if (Looper.IsEmpty || Started) return;
+                Started                  =  true;
+                EditorApplication.update -= Update;
                 EditorApplication.update += Update;
             }
 
@@ -58,21 +60,21 @@ namespace AIO
                         {
                             Looper.Clear();
                             EditorApplication.update -= Update;
-                            M_Started                =  false;
+                            Started                  =  false;
                             return;
                         }
 
-                        if (!instance.gameObject.activeInHierarchy) continue;            // 隐藏时别执行Loop
-                        if (!current.MoveNext()) Looper.TryUpdate(current, true, false); // 执行完毕则标记为true
+                        if (!instance.gameObject.activeInHierarchy) continue; // 隐藏时别执行Loop
+                        if (!current.MoveNext())                              // 执行完毕则标记为true
+                            Looper.TryUpdate(current, true, false);
                     }
 
-                    //集中处理丢弃的Looper value为true的
-                    Looper.Where(pair => pair.Value).Select(pair => pair.Key).ToList().ForEach(key => Looper.TryRemove(key, out _));
+                    Looper.Where(pair => pair.Value).Select(pair => pair.Key).ToList().ForEach(key => Looper.TryRemove(key, out _)); //集中处理丢弃的Looper value为true的
                     if (Looper.Count > 0) return;
                 }
 
                 EditorApplication.update -= Update;
-                M_Started                =  false;
+                Started                  =  false;
             }
         }
     }

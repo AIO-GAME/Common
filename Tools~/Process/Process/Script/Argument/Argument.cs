@@ -1,10 +1,4 @@
-﻿/*|✩ - - - - - |||
-|||✩ Author:   ||| -> xi nan
-|||✩ Date:     ||| -> 2023-06-26
-
-|||✩ - - - - - |*/
-
-#region
+﻿#region
 
 using System;
 using System.Collections.Generic;

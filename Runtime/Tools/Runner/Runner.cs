@@ -7,6 +7,10 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Scripting;
 using UObject = UnityEngine.Object;
+#if SUPPORT_UNITASK
+using System.Threading;
+using Cysharp.Threading.Tasks;
+#endif
 
 #endregion
 
@@ -16,6 +20,21 @@ namespace AIO
     /// Unity线程
     /// </summary>
     /// <c>开启协程</c>
+    /// <code>
+    /// 1: Runner.StartCoroutine(T);
+    /// 2: Runner.StartCoroutine(T());
+    /// 3: Runner.StartCoroutine(T, T1, T2);
+    /// 4: Runner.StartCoroutine(T(), T1(), T2());
+    /// 5: Runner.StartCoroutine(mono, T1, T2);
+    /// 6: Runner.StartCoroutine(mono, T1(), T2());
+    /// IEnumerator Test() => WaitForEndOfFrame;
+    /// </code>
+    /// <c>关闭协程</c>
+    /// 1: Runner.StopCoroutine(Test);
+    /// 2: Runner.StopCoroutine(mono);
+    /// 3: Runner.StopCoroutine(mono, Test);
+    /// 4: Runner.StopCoroutine(Test());
+    /// <c>开启线程</c>
     /// <code>
     /// Runner.StartTask(() => { });
     /// </code>
@@ -78,23 +97,30 @@ namespace AIO
             }
 
             if (!instance) throw new Exception("Runner Main Thread Execute instance is null");
-
+#if SUPPORT_UNITASK
+            GetCancellationTokenOnDestroy = instance.GetCancellationTokenOnDestroy();
+#endif
             EditorApplication.quitting += Dispose;
             Application.quitting       += Dispose;
         }
 #endif
-
+#if SUPPORT_UNITASK
+        private static CancellationToken GetCancellationTokenOnDestroy;
+#endif
 #if !UNITY_EDITOR
         static Runner()
         {
             DataInitialize();
             IsAllowThread = Application.platform != RuntimePlatform.WebGLPlayer;
-            RunnerMainThreadExecuteRuntime = new GameObject() //添加一个看不见的游戏物体到场景中
+            RunnerMainRuntime = new GameObject() //添加一个看不见的游戏物体到场景中
             {
                 hideFlags = HideFlags.HideAndDontSave,
-                name = nameof(RunnerMainThreadExecuteRuntime)
+                name = nameof(RunnerMainRuntime)
             };
-            instance = RunnerMainThreadExecuteRuntime.AddComponent<ThreadMono>();
+            instance = RunnerMainRuntime.AddComponent<ThreadMono>();
+#if SUPPORT_UNITASK
+            GetCancellationTokenOnDestroy = instance.GetCancellationTokenOnDestroy();
+#endif
             Application.quitting += Dispose;
         }
 #endif
@@ -166,7 +192,7 @@ namespace AIO
                     QueueCopiedUpdateFixed = null;
                 }
 
-                lock (QueueCopiedUpdateLate)
+                lock (QueueCopiedUpdate)
                 {
                     while (QueueCopiedUpdate.Count > 0)
                         QueueCopiedUpdate.TryDequeue(out _);

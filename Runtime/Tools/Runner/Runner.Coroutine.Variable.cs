@@ -30,16 +30,16 @@ namespace AIO
 
         private class YieldReturnNull : IEnumerator
         {
-            public object Current => null;
-            public bool MoveNext() => false;
-            public void Reset() { }
+            public object Current    => null;
+            public bool   MoveNext() => false;
+            public void   Reset()    { }
         }
-        
+
         /// <summary>
         /// 空的协程变量
         /// </summary>
         public static readonly IEnumerator YieldReturn = new YieldReturnNull();
-        
+
         /// <summary>
         /// 获取协程变量
         /// </summary>

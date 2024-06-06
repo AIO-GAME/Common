@@ -1,10 +1,4 @@
-﻿/*|============|*|
-|*|Author:     |*| USER
-|*|Date:       |*| 2024-01-11
-|*|E-Mail:     |*| xinansky99@gmail.com
-|*|============|*/
-
-#region
+﻿#region
 
 using System;
 using System.ComponentModel;

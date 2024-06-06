@@ -161,7 +161,7 @@ namespace AIO
         }
 #>
         /// <param name="func">The function to be invoked.</param>
-        public static void <#= actionName #><#= i >= 1 ? $"<{T}>" : "" #>(Func<<#= T + (i > 0 ? ", " : "") #>IEnumerator> func<#= string.Concat((i > 0 ? ", " : "" ), parameters)#>) { QueuesCoroutine.TryAdd(func.Invoke(<#= arguments #>), false); }
+        public static void <#= actionName #><#= i >= 1 ? $"<{T}>" : "" #>(Func<<#= T + (i > 0 ? ", " : "") #>IEnumerator> func<#= string.Concat((i > 0 ? ", " : "" ), parameters)#>) { QueuesCoroutine.TryAdd(func.Invoke(<#= arguments #>), CoroutineData.Create()); }
 <#
     }
 #>

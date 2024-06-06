@@ -227,14 +227,14 @@ namespace AIO
         /// Pushes the specified update action to the update queue.
         /// </summary>
         /// <param name="func">The function to be invoked.</param>
-        public static void PushUpdate(Func<IEnumerator> func) { QueuesCoroutine.TryAdd(func.Invoke(), false); }
+        public static void PushUpdate(Func<IEnumerator> func) { QueuesCoroutine.TryAdd(func.Invoke(), CoroutineData.Create()); }
      
         /// <summary>
         /// Pushes the specified update action to the update queue.
         /// </summary>
         /// <typeparam name="T1">The type of the 1th parameter.</typeparam>
         /// <param name="func">The function to be invoked.</param>
-        public static void PushUpdate<T1>(Func<T1, IEnumerator> func, T1 t1) { QueuesCoroutine.TryAdd(func.Invoke(t1), false); }
+        public static void PushUpdate<T1>(Func<T1, IEnumerator> func, T1 t1) { QueuesCoroutine.TryAdd(func.Invoke(t1), CoroutineData.Create()); }
      
         /// <summary>
         /// Pushes the specified update action to the update queue.
@@ -242,7 +242,7 @@ namespace AIO
         /// <typeparam name="T1">The type of the 1th parameter.</typeparam>
         /// <typeparam name="T2">The type of the 2th parameter.</typeparam>
         /// <param name="func">The function to be invoked.</param>
-        public static void PushUpdate<T1, T2>(Func<T1, T2, IEnumerator> func, T1 t1, T2 t2) { QueuesCoroutine.TryAdd(func.Invoke(t1, t2), false); }
+        public static void PushUpdate<T1, T2>(Func<T1, T2, IEnumerator> func, T1 t1, T2 t2) { QueuesCoroutine.TryAdd(func.Invoke(t1, t2), CoroutineData.Create()); }
      
         /// <summary>
         /// Pushes the specified update action to the update queue.
@@ -251,7 +251,7 @@ namespace AIO
         /// <typeparam name="T2">The type of the 2th parameter.</typeparam>
         /// <typeparam name="T3">The type of the 3th parameter.</typeparam>
         /// <param name="func">The function to be invoked.</param>
-        public static void PushUpdate<T1, T2, T3>(Func<T1, T2, T3, IEnumerator> func, T1 t1, T2 t2, T3 t3) { QueuesCoroutine.TryAdd(func.Invoke(t1, t2, t3), false); }
+        public static void PushUpdate<T1, T2, T3>(Func<T1, T2, T3, IEnumerator> func, T1 t1, T2 t2, T3 t3) { QueuesCoroutine.TryAdd(func.Invoke(t1, t2, t3), CoroutineData.Create()); }
 
         #endregion
     }
