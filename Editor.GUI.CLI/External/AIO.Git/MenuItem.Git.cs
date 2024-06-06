@@ -22,30 +22,22 @@ namespace AIO.UEditor
         /// <summary>
         /// 生成
         /// </summary>
-        [MenuItem("Git/~~~ Generate ~~~", false, 9999)]
+        [MenuItem("Git/[ Generate Code ->", false, 9999)]
         internal static void Generate()
         {
             Debug.Log($"<b><color=#5DADE2>[GIT]</color></b> {CMD_GIT} Generate");
-
-            var packageInfos = AssetDatabase.FindAssets("package", new[] { "Packages" })
-                                            .Select(AssetDatabase.GUIDToAssetPath)
-                                            .Where(x => AssetDatabase.LoadAssetAtPath<TextAsset>(x) != null)
-                                            .Select(PackageInfo.FindForAssetPath)
-                                            .GroupBy(x => x.assetPath)
-                                            .Select(x => x.First())
-                                            .Where(x =>
-                                                       File.Exists(Path.Combine(EHelper.Path.Project, x.resolvedPath, ".git")) ||
-                                                       Directory.Exists(Path.Combine(EHelper.Path.Project, x.resolvedPath, ".git"))
-                                                  )
-                                            .ToList();
-
-            var change                               = CreateProject();
-            if (CreateTemplate(packageInfos)) change = true;
+            var change = CreateProject() || CreateTemplate
+                (AssetDatabase.FindAssets("package", new[] { "Packages" })
+                              .Select(AssetDatabase.GUIDToAssetPath)
+                              .Where(x => AssetDatabase.LoadAssetAtPath<TextAsset>(x) != null)
+                              .Select(PackageInfo.FindForAssetPath)
+                              .GroupBy(x => x.assetPath)
+                              .Select(x => x.First())
+                              .Where(x => AHelper.IO.Exists(Path.Combine(EHelper.Path.Project, x.resolvedPath, ".git"))));
             if (!change) return;
 
             AssetDatabase.Refresh();
-            var RefreshSettings =
-                typeof(AssetDatabase).GetMethod("RefreshSettings", BindingFlags.Static | BindingFlags.Public);
+            var RefreshSettings = typeof(AssetDatabase).GetMethod("RefreshSettings", BindingFlags.Static | BindingFlags.Public);
             if (RefreshSettings != null) RefreshSettings.Invoke(null, null);
             CompilationPipeline.RequestScriptCompilation();
         }
@@ -53,14 +45,13 @@ namespace AIO.UEditor
         [AInit(EInitAttrMode.Editor, ushort.MaxValue - 1)]
         internal static void AutoGenerate()
         {
-            if (EHelper.Prefs.LoadBoolean("Git.AutoGenerate"))
-                Generate();
+            if (EHelper.Prefs.LoadBoolean("Git.AutoGenerate")) Generate();
         }
 
         /// <summary>
         /// 生成
         /// </summary>
-        [MenuItem("Git/~~~ Clean ~~~", false, 9999)]
+        [MenuItem("Git/[ Clear Code ->", false, 9999)]
         internal static void Clean()
         {
             var OutPath = GetOutPath();
@@ -76,8 +67,7 @@ namespace AIO.UEditor
             AssetDatabase.RefreshSettings();
 #endif
 
-            var RefreshSettings = typeof(AssetDatabase).GetMethod("RefreshSettings",
-                                                                  BindingFlags.Static | BindingFlags.Public);
+            var RefreshSettings = typeof(AssetDatabase).GetMethod("RefreshSettings", BindingFlags.Static | BindingFlags.Public);
             if (RefreshSettings != null) RefreshSettings.Invoke(null, null);
 
             CompilationPipeline.RequestScriptCompilation();

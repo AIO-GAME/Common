@@ -3,6 +3,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 #endregion
 
@@ -11,7 +12,7 @@ namespace AIO
     partial class Runner
     {
         #region StartCoroutine
-     
+
         /// <summary>
         /// 执行协程
         /// </summary>
@@ -20,19 +21,32 @@ namespace AIO
         /// <summary>
         /// 执行协程
         /// </summary>
-        public static void StartCoroutine(ICollection<IEnumerator> coroutines)
+        public static void StartCoroutine(MonoBehaviour behaviour, IEnumerator coroutine) { SafeStartCoroutine(behaviour, coroutine); }
+
+        /// <summary>
+        /// 执行协程
+        /// </summary>
+        public static void StartCoroutine(MonoBehaviour behaviour, Func<IEnumerator> coroutine) { SafeStartCoroutine(behaviour, coroutine.Invoke()); }
+
+        /// <summary>
+        /// 执行协程
+        /// </summary>
+        public static void StartCoroutine(params IEnumerator[] coroutines) { SafeStartCoroutine(coroutines); }
+
+        /// <summary>
+        /// 执行协程
+        /// </summary>
+        public static void StartCoroutine(params Func<IEnumerator>[] coroutines)
         {
-            if (coroutines is null || coroutines.Count == 0) return;
-            SafeStartCoroutine(coroutines);
+            foreach (var func in coroutines) SafeStartCoroutine(func.Invoke());
         }
 
         /// <summary>
         /// 执行协程
         /// </summary>
-        public static void StartCoroutine(ICollection<Func<IEnumerator>> coroutines)
+        public static void StartCoroutine(MonoBehaviour behaviour, params Func<IEnumerator>[] coroutines)
         {
-            if (coroutines.Count == 0) return;
-            SafeStartCoroutine(coroutines);
+            foreach (var func in coroutines) SafeStartCoroutine(behaviour, func.Invoke());
         }
 
         #endregion
@@ -42,12 +56,22 @@ namespace AIO
         /// <summary>
         /// 结束协程
         /// </summary>
-        public static void StopCoroutine(in IEnumerator coroutine) { SafeStopCoroutine(coroutine); }
+        public static void StopCoroutine(MonoBehaviour behaviour) { SafeStopCoroutine(behaviour); }
 
         /// <summary>
         /// 结束协程
         /// </summary>
-        public static void StopCoroutine(in IEnumerator coroutine, params IEnumerator[] coroutines)
+        public static void StopCoroutine(MonoBehaviour behaviour, IEnumerator coroutine) { SafeStopCoroutine(behaviour, coroutine); }
+
+        /// <summary>
+        /// 结束协程
+        /// </summary>
+        public static void StopCoroutine(IEnumerator coroutine) { SafeStopCoroutine(coroutine); }
+
+        /// <summary>
+        /// 结束协程
+        /// </summary>
+        public static void StopCoroutine(IEnumerator coroutine, params IEnumerator[] coroutines)
         {
             SafeStopCoroutine(coroutine);
             SafeStopCoroutine(coroutines);
@@ -56,16 +80,12 @@ namespace AIO
         /// <summary>
         /// 结束协程
         /// </summary>
-        public static void StopCoroutine(in ICollection<IEnumerator> coroutines)
-        {
-            if (coroutines.Count == 0) return;
-            SafeStopCoroutine(coroutines);
-        }
+        public static void StopCoroutine(IEnumerable<IEnumerator> coroutines) { SafeStopCoroutine(coroutines); }
 
         /// <summary>
         /// 结束协程
         /// </summary>
-        public static void StopCoroutine(in Func<IEnumerator> coroutine) { SafeStopCoroutine(coroutine.Invoke()); }
+        public static void StopCoroutine(Func<IEnumerator> coroutine) { SafeStopCoroutine(coroutine.Invoke()); }
 
         /// <summary>
         /// 结束协程
@@ -73,7 +93,7 @@ namespace AIO
         public static void StopCoroutine(in Func<IEnumerator> coroutine, params Func<IEnumerator>[] coroutines)
         {
             SafeStopCoroutine(coroutine?.Invoke());
-            SafeStopCoroutine(coroutines);
+            foreach (var func in coroutines) SafeStopCoroutine(func?.Invoke());
         }
 
         /// <summary>
@@ -82,7 +102,7 @@ namespace AIO
         public static void StopCoroutine(in ICollection<Func<IEnumerator>> coroutines)
         {
             if (coroutines.Count == 0) return;
-            SafeStopCoroutine(coroutines);
+            foreach (var func in coroutines) SafeStopCoroutine(func?.Invoke());
         }
 
         /// <summary>
