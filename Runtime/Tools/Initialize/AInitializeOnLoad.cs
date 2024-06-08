@@ -18,14 +18,11 @@ namespace AIO.UEditor
     /// <summary>
     /// AInitializeOnLoad
     /// </summary>
-#if UNITY_EDITOR
-    [InitializeOnLoad]
-#endif
     internal static class AInitializeOnLoad
     {
         private class Error : Exception
         {
-            public Error(EInitAttrMode mode, MethodBase method, Exception exception)
+            public Error(EInitAttrMode mode, MemberInfo method, Exception exception)
                 : base($"{nameof(AInitializeOnLoad)} {mode} : {method.Name} Error: {exception.Message}", exception.InnerException) { }
         }
 
@@ -44,11 +41,11 @@ namespace AIO.UEditor
 #endif
         }
 
-        private static void DebugError(EInitAttrMode mode, MethodBase method, Exception e) { Debug.LogException(new Error(mode, method, e)); }
+        private static void DebugError(EInitAttrMode mode, MemberInfo method, Exception e) { Debug.LogException(new Error(mode, method, e)); }
 
 #if UNITY_EDITOR
-        private static readonly Dictionary<IntPtr, Tuple<string, int>> MethodsPath;
         private static readonly SortedSet<int>                         OrdersEditor;
+        private static readonly Dictionary<IntPtr, Tuple<string, int>> MethodsPath;
         private static readonly Dictionary<int, Queue<MethodInfo>>     MethodsEditor;
 #endif
 
@@ -64,94 +61,90 @@ namespace AIO.UEditor
         private static readonly Dictionary<int, Queue<MethodInfo>> MethodsRuntimeBeforeSplashScreen;
         private static readonly Dictionary<int, Queue<MethodInfo>> MethodsRuntimeSubsystemRegistration;
 
-        private static void Processing(AInitAttribute attribute, MethodInfo method)
+        private static void Processing(AInitAttribute attr, MethodInfo method)
         {
 #if UNITY_EDITOR
-            MethodsPath[method.MethodHandle.Value] = new Tuple<string, int>(
-                                                                            attribute.FilePath.Replace(Application.dataPath.Replace("Assets", ""), ""),
-                                                                            attribute.LineNumber);
-            if (attribute.Mode.HasFlag(EInitAttrMode.Editor))
+            var root = Application.dataPath.Replace("Assets", "");
+            MethodsPath[method.MethodHandle.Value] = new Tuple<string, int>(attr.FilePath.Replace(root, ""), attr.LineNumber);
+            if (attr.Mode.HasFlag(EInitAttrMode.Editor))
             {
-                if (MethodsEditor.TryGetValue(attribute.Order, out var queue))
+                if (!MethodsEditor.TryGetValue(attr.Order, out var queue))
                 {
-                    queue.Enqueue(method);
+                    OrdersEditor.Add(attr.Order);
+                    MethodsEditor[attr.Order] = queue = new Queue<MethodInfo>();
                 }
-                else
-                {
-                    OrdersEditor.Add(attribute.Order);
-                    MethodsEditor.Add(attribute.Order, new Queue<MethodInfo>());
-                    MethodsEditor[attribute.Order].Enqueue(method);
-                }
+
+                queue.Enqueue(method);
             }
 #endif
 
-            if (attribute.Mode.HasFlag(EInitAttrMode.RuntimeAfterSceneLoad))
+            if (attr.Mode.HasFlag(EInitAttrMode.RuntimeAfterSceneLoad))
             {
-                if (MethodsRuntimeAfterSceneLoad.TryGetValue(attribute.Order, out var queue))
+                if (MethodsRuntimeAfterSceneLoad.TryGetValue(attr.Order, out var queue))
                 {
                     queue.Enqueue(method);
                 }
                 else
                 {
-                    OrdersRuntimeAfterSceneLoad.Add(attribute.Order);
-                    MethodsRuntimeAfterSceneLoad.Add(attribute.Order, new Queue<MethodInfo>());
-                    MethodsRuntimeAfterSceneLoad[attribute.Order].Enqueue(method);
+                    OrdersRuntimeAfterSceneLoad.Add(attr.Order);
+                    MethodsRuntimeAfterSceneLoad.Add(attr.Order, new Queue<MethodInfo>());
+                    MethodsRuntimeAfterSceneLoad[attr.Order].Enqueue(method);
                 }
             }
 
-            if (attribute.Mode.HasFlag(EInitAttrMode.RuntimeBeforeSceneLoad))
+            if (attr.Mode.HasFlag(EInitAttrMode.RuntimeBeforeSceneLoad))
             {
-                if (MethodsRuntimeBeforeSceneLoad.TryGetValue(attribute.Order, out var queue))
+                if (MethodsRuntimeBeforeSceneLoad.TryGetValue(attr.Order, out var queue))
                 {
                     queue.Enqueue(method);
                 }
                 else
                 {
-                    OrdersRuntimeBeforeSceneLoad.Add(attribute.Order);
-                    MethodsRuntimeBeforeSceneLoad.Add(attribute.Order, new Queue<MethodInfo>());
-                    MethodsRuntimeBeforeSceneLoad[attribute.Order].Enqueue(method);
+                    OrdersRuntimeBeforeSceneLoad.Add(attr.Order);
+                    MethodsRuntimeBeforeSceneLoad.Add(attr.Order, new Queue<MethodInfo>());
+                    MethodsRuntimeBeforeSceneLoad[attr.Order].Enqueue(method);
                 }
             }
 
-            if (attribute.Mode.HasFlag(EInitAttrMode.RuntimeAfterAssembliesLoaded))
+            if (attr.Mode.HasFlag(EInitAttrMode.RuntimeAfterAssembliesLoaded))
             {
-                if (MethodsRuntimeAfterAssembliesLoaded.TryGetValue(attribute.Order, out var queue))
+                if (MethodsRuntimeAfterAssembliesLoaded.TryGetValue(attr.Order, out var queue))
                 {
                     queue.Enqueue(method);
                 }
                 else
                 {
-                    OrdersRuntimeAfterAssembliesLoaded.Add(attribute.Order);
-                    MethodsRuntimeAfterAssembliesLoaded.Add(attribute.Order, new Queue<MethodInfo>());
-                    MethodsRuntimeAfterAssembliesLoaded[attribute.Order].Enqueue(method);
+                    OrdersRuntimeAfterAssembliesLoaded.Add(attr.Order);
+                    MethodsRuntimeAfterAssembliesLoaded.Add(attr.Order, new Queue<MethodInfo>());
+                    MethodsRuntimeAfterAssembliesLoaded[attr.Order].Enqueue(method);
                 }
             }
 
-            if (attribute.Mode.HasFlag(EInitAttrMode.RuntimeBeforeSplashScreen))
+            if (attr.Mode.HasFlag(EInitAttrMode.RuntimeBeforeSplashScreen))
             {
-                if (MethodsRuntimeBeforeSplashScreen.TryGetValue(attribute.Order, out var queue))
+                if (MethodsRuntimeBeforeSplashScreen.TryGetValue(attr.Order, out var queue))
                 {
                     queue.Enqueue(method);
                 }
                 else
                 {
-                    OrdersRuntimeBeforeSplashScreen.Add(attribute.Order);
-                    MethodsRuntimeBeforeSplashScreen.Add(attribute.Order, new Queue<MethodInfo>());
-                    MethodsRuntimeBeforeSplashScreen[attribute.Order].Enqueue(method);
+                    OrdersRuntimeBeforeSplashScreen.Add(attr.Order);
+                    MethodsRuntimeBeforeSplashScreen.Add(attr.Order, new Queue<MethodInfo>());
+                    MethodsRuntimeBeforeSplashScreen[attr.Order].Enqueue(method);
                 }
             }
 
-            if (attribute.Mode.HasFlag(EInitAttrMode.RuntimeSubsystemRegistration))
+            if (attr.Mode.HasFlag(EInitAttrMode.RuntimeSubsystemRegistration))
             {
-                if (MethodsRuntimeSubsystemRegistration.TryGetValue(attribute.Order, out var queue))
+                if (MethodsRuntimeSubsystemRegistration.TryGetValue(attr.Order, out var queue))
                 {
                     queue.Enqueue(method);
                 }
                 else
                 {
-                    OrdersRuntimeSubsystemRegistration.Add(attribute.Order);
-                    MethodsRuntimeSubsystemRegistration.Add(attribute.Order, new Queue<MethodInfo>());
-                    MethodsRuntimeSubsystemRegistration[attribute.Order].Enqueue(method);
+                    OrdersRuntimeSubsystemRegistration.Add(attr.Order);
+                    MethodsRuntimeSubsystemRegistration.Add(attr.Order, new Queue<MethodInfo>());
+                    MethodsRuntimeSubsystemRegistration[attr.Order].Enqueue(method);
                 }
             }
         }
@@ -163,18 +156,14 @@ namespace AIO.UEditor
             OrdersEditor  = new SortedSet<int>();
             MethodsEditor = new Dictionary<int, Queue<MethodInfo>>();
 #endif
-            OrdersRuntimeBeforeSceneLoad  = new SortedSet<int>();
-            MethodsRuntimeBeforeSceneLoad = new Dictionary<int, Queue<MethodInfo>>();
-
-            OrdersRuntimeAfterSceneLoad  = new SortedSet<int>();
-            MethodsRuntimeAfterSceneLoad = new Dictionary<int, Queue<MethodInfo>>();
-
+            OrdersRuntimeBeforeSceneLoad        = new SortedSet<int>();
+            MethodsRuntimeBeforeSceneLoad       = new Dictionary<int, Queue<MethodInfo>>();
+            OrdersRuntimeAfterSceneLoad         = new SortedSet<int>();
+            MethodsRuntimeAfterSceneLoad        = new Dictionary<int, Queue<MethodInfo>>();
             OrdersRuntimeAfterAssembliesLoaded  = new SortedSet<int>();
             MethodsRuntimeAfterAssembliesLoaded = new Dictionary<int, Queue<MethodInfo>>();
-
-            OrdersRuntimeBeforeSplashScreen  = new SortedSet<int>();
-            MethodsRuntimeBeforeSplashScreen = new Dictionary<int, Queue<MethodInfo>>();
-
+            OrdersRuntimeBeforeSplashScreen     = new SortedSet<int>();
+            MethodsRuntimeBeforeSplashScreen    = new Dictionary<int, Queue<MethodInfo>>();
             OrdersRuntimeSubsystemRegistration  = new SortedSet<int>();
             MethodsRuntimeSubsystemRegistration = new Dictionary<int, Queue<MethodInfo>>();
 
@@ -182,10 +171,7 @@ namespace AIO.UEditor
             {
                 if (type.Value.IsEnum) continue;
                 if (type.Value.IsInterface) continue;
-                foreach (var method in type.Value.GetMethods(
-                                                             BindingFlags.Static |
-                                                             BindingFlags.Public |
-                                                             BindingFlags.NonPublic))
+                foreach (var method in type.Value.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic))
                 {
                     if (!method.IsStatic) continue;
                     if (method.IsAbstract) continue;
@@ -212,6 +198,16 @@ namespace AIO.UEditor
                 {
                     DebugError(EInitAttrMode.Editor, method, e);
                 }
+
+            EditorApplication.quitting += quit;
+            return;
+
+            void quit()
+            {
+                EditorApplication.quitting -= quit;
+                MethodsEditor.Clear();
+                OrdersEditor.Clear();
+            }
         }
 #endif
 
@@ -229,11 +225,21 @@ namespace AIO.UEditor
                     DebugError(EInitAttrMode.RuntimeBeforeSceneLoad, method, e);
                 }
 
-            Application.quitting += () =>
+            Application.quitting += quit;
+#if UNITY_EDITOR
+            EditorApplication.quitting += quit;
+#endif
+            return;
+
+            void quit()
             {
+                Application.quitting -= quit;
+#if UNITY_EDITOR
+                EditorApplication.quitting -= quit;
+#endif
                 OrdersRuntimeBeforeSceneLoad.Clear();
                 MethodsRuntimeBeforeSceneLoad.Clear();
-            };
+            }
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
@@ -250,18 +256,27 @@ namespace AIO.UEditor
                     DebugError(EInitAttrMode.RuntimeAfterSceneLoad, method, e);
                 }
 
-            Application.quitting += () =>
+            Application.quitting += quit;
+#if UNITY_EDITOR
+            EditorApplication.quitting += quit;
+#endif
+            return;
+
+            void quit()
             {
+                Application.quitting -= quit;
+#if UNITY_EDITOR
+                EditorApplication.quitting -= quit;
+#endif
                 OrdersRuntimeAfterSceneLoad.Clear();
                 MethodsRuntimeAfterSceneLoad.Clear();
-            };
+            }
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         private static void RuntimeInitializeAfterAssembliesLoadedMethod()
         {
-            foreach (var method in OrdersRuntimeAfterAssembliesLoaded.SelectMany(item =>
-                                                                                     MethodsRuntimeAfterAssembliesLoaded[item]))
+            foreach (var method in OrdersRuntimeAfterAssembliesLoaded.SelectMany(item => MethodsRuntimeAfterAssembliesLoaded[item]))
                 try
                 {
                     DebugLog(EInitAttrMode.RuntimeAfterAssembliesLoaded, method);
@@ -272,18 +287,27 @@ namespace AIO.UEditor
                     DebugError(EInitAttrMode.RuntimeAfterAssembliesLoaded, method, e);
                 }
 
-            Application.quitting += () =>
+            Application.quitting += quit;
+#if UNITY_EDITOR
+            EditorApplication.quitting += quit;
+#endif
+            return;
+
+            void quit()
             {
+                Application.quitting -= quit;
+#if UNITY_EDITOR
+                EditorApplication.quitting -= quit;
+#endif
                 OrdersRuntimeAfterAssembliesLoaded.Clear();
                 MethodsRuntimeAfterAssembliesLoaded.Clear();
-            };
+            }
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
         private static void RuntimeInitializeBeforeSplashScreenMethod()
         {
-            foreach (var method in OrdersRuntimeBeforeSplashScreen.SelectMany(item =>
-                                                                                  MethodsRuntimeBeforeSplashScreen[item]))
+            foreach (var method in OrdersRuntimeBeforeSplashScreen.SelectMany(item => MethodsRuntimeBeforeSplashScreen[item]))
                 try
                 {
                     DebugLog(EInitAttrMode.RuntimeBeforeSplashScreen, method);
@@ -294,18 +318,27 @@ namespace AIO.UEditor
                     DebugError(EInitAttrMode.RuntimeBeforeSplashScreen, method, e);
                 }
 
-            Application.quitting += () =>
+            Application.quitting += quit;
+#if UNITY_EDITOR
+            EditorApplication.quitting += quit;
+#endif
+            return;
+
+            void quit()
             {
+                Application.quitting -= quit;
+#if UNITY_EDITOR
+                EditorApplication.quitting -= quit;
+#endif
                 OrdersRuntimeBeforeSplashScreen.Clear();
                 MethodsRuntimeBeforeSplashScreen.Clear();
-            };
+            }
         }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void RuntimeInitializeSubsystemRegistrationMethod()
         {
-            foreach (var method in OrdersRuntimeSubsystemRegistration.SelectMany(item =>
-                                                                                     MethodsRuntimeSubsystemRegistration[item]))
+            foreach (var method in OrdersRuntimeSubsystemRegistration.SelectMany(item => MethodsRuntimeSubsystemRegistration[item]))
                 try
                 {
                     DebugLog(EInitAttrMode.RuntimeSubsystemRegistration, method);
@@ -316,11 +349,21 @@ namespace AIO.UEditor
                     DebugError(EInitAttrMode.RuntimeSubsystemRegistration, method, e);
                 }
 
-            Application.quitting += () =>
+            Application.quitting += quit;
+#if UNITY_EDITOR
+            EditorApplication.quitting += quit;
+#endif
+            return;
+
+            void quit()
             {
+                Application.quitting -= quit;
+#if UNITY_EDITOR
+                EditorApplication.quitting -= quit;
+#endif
                 OrdersRuntimeSubsystemRegistration.Clear();
                 MethodsRuntimeSubsystemRegistration.Clear();
-            };
+            }
         }
     }
 }
