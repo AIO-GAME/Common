@@ -18,8 +18,7 @@ namespace AIO
         /// <param name="loop">循环次数</param>
         /// <param name="createTime">创建时间</param>
         /// <param name="delegateValue">委托函数</param>
-        internal TimerExecutorAction(long duration, int loop, long createTime, Action delegateValue) : base(duration,
-                                                                                                            loop, createTime)
+        internal TimerExecutorAction(long duration, int loop, long createTime, Action delegateValue) : base(duration, loop, createTime)
         {
             Delegates = delegateValue;
         }
@@ -32,15 +31,11 @@ namespace AIO
         /// <param name="loop">循环次数</param>
         /// <param name="createTime">创建时间</param>
         /// <param name="delegateValue">委托函数</param>
-        internal TimerExecutorAction(long tid, long duration, int loop, long createTime, Action delegateValue) : base(
-            duration, loop, createTime, tid)
+        internal TimerExecutorAction(long tid, long duration, int loop, long createTime, Action delegateValue) : base(duration, loop, createTime, tid)
         {
             Delegates = delegateValue;
         }
 
-        protected override void xExecute()
-        {
-            Delegates.Invoke();
-        }
+        protected override void xExecute() { Delegates.Invoke(); }
     }
 }
