@@ -35,21 +35,18 @@ namespace AIO.UEditor
         /// </summary>
         public bool ShowName;
 
-        static GraphicEnum()
-        {
-            Data = new Dictionary<int, EnumInfo>();
-        }
+        static GraphicEnum() { Data = new Dictionary<int, EnumInfo>(); }
 
         /// <summary>
         /// 获取描述信息
         /// </summary>
         public static Dictionary<T, string> GetDescription<T>()
-            where T : struct, Enum
+        where T : struct, Enum
         {
-            var type = typeof(T);
+            var type           = typeof(T);
             var DescriptionDic = new Dictionary<T, string>();
-            var index = 0;
-            var values = Enum.GetValues(type);
+            var index          = 0;
+            var values         = Enum.GetValues(type);
             foreach (var field in type.GetFields(BindingFlags.Public | BindingFlags.Static))
             {
                 var attribute = field.GetCustomAttribute(typeof(DescriptionAttribute), false);
@@ -67,8 +64,8 @@ namespace AIO.UEditor
         public static Dictionary<object, string> GetDescription(in Type type)
         {
             var DescriptionDic = new Dictionary<object, string>();
-            var index = 0;
-            var values = Enum.GetValues(type);
+            var index          = 0;
+            var values         = Enum.GetValues(type);
             foreach (var field in type.GetFields(BindingFlags.Public | BindingFlags.Static))
             {
                 var attribute = field.GetCustomAttribute(typeof(DescriptionAttribute), false);
@@ -83,24 +80,18 @@ namespace AIO.UEditor
         /// <summary>
         /// 获取值
         /// </summary>
-        public T GetValue<T>()
-        {
-            return (T)EnumValue;
-        }
+        public T GetValue<T>() { return (T)EnumValue; }
 
         /// <summary>
         /// 获取值
         /// </summary>
-        public object GetValue(in Type type)
-        {
-            return Enum.Parse(type, EnumValue.ToString());
-        }
+        public object GetValue(in Type type) { return Enum.Parse(type, EnumValue.ToString()); }
 
         /// <summary>
         /// 更新
         /// </summary>
         public GraphicEnum Update<T>(in T type)
-            where T : struct, Enum
+        where T : struct, Enum
         {
             return Update(type, false, false);
         }
@@ -109,20 +100,20 @@ namespace AIO.UEditor
         /// 更新
         /// </summary>
         public GraphicEnum Update<T>(in T type, in bool showName, in bool multipleChoice)
-            where T : struct, Enum
+        where T : struct, Enum
         {
-            ShowName = showName;
+            ShowName       = showName;
             MultipleChoice = multipleChoice;
-            EnumValue = type;
-            Info = EnumInfo.Create<T>();
+            EnumValue      = type;
+            Info           = EnumInfo.Create<T>();
             menu = new GenericMenu
             {
                 allowDuplicateNames = false
             };
             foreach (var description in Info.DescriptionDic)
                 menu.AddItem(new GUIContent(description.Value),
-                    EnumValue.GetHashCode() == description.Key.GetHashCode(),
-                    () => EnumValue = description.Key);
+                             EnumValue.GetHashCode() == description.Key.GetHashCode(),
+                             () => EnumValue = description.Key);
 
             return this;
         }
@@ -131,7 +122,7 @@ namespace AIO.UEditor
         /// 更新
         /// </summary>
         public GraphicEnum Update<T>(in T type, in bool showName)
-            where T : struct, Enum
+        where T : struct, Enum
         {
             return Update(type, showName, false);
         }
