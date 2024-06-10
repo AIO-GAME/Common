@@ -1,27 +1,26 @@
-```
-██╗   ██╗███╗   ██╗██╗████████╗██╗   ██╗  ██████╗ ██████╗ ███╗   ███╗███╗   ███╗ ██████╗ ███╗   ██╗
-██║   ██║████╗  ██║██║╚══██╔══╝╚██╗ ██╔╝ ██╔════╝██╔═══██╗████╗ ████║████╗ ████║██╔═══██╗████╗  ██║
-██║   ██║██╔██╗ ██║██║   ██║    ╚████╔╝  ██║     ██║   ██║██╔████╔██║██╔████╔██║██║   ██║██╔██╗ ██║
-██║   ██║██║╚██╗██║██║   ██║     ╚██╔╝   ██║     ██║   ██║██║╚██╔╝██║██║╚██╔╝██║██║   ██║██║╚██╗██║
-╚██████╔╝██║ ╚████║██║   ██║      ██║    ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║ ╚═╝ ██║╚██████╔╝██║ ╚████║
- ╚═════╝ ╚═╝  ╚═══╝╚═╝   ╚═╝      ╚═╝     ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
-```
-<h1 align="center">AIO Unity Common</h1>
-<p align="center"><strong>C# Basic universal library Easily match frame components</strong></p>
+<p align="center"> 
+<img src="RES/Logo.svg" width="256" height="256" alt="https://github.com/AIO-GAME"> 
+</p>
+<p align="center" style="font-size: 24px;"> 
+<b>Unity Asset Common</b> 
+</p>
 <p align="center"><a href="README_EN.md">English</a> | 简体中文</p>
 <p align="center">
-<a href="https://github.com/AIO-Game/Common"><img src="https://img.shields.io/github/stars/AIO-GAME/Common?label=Star&link=https%3A%2F%2Fgithub.com%2FAIO-GAME%2FCommon" /></a>
-<a href="https://github.com/AIO-Game/Common"><img src="https://img.shields.io/github/license/AIO-Game/Common" /></a>
-<a href="https://github.com/AIO-Game/Common"><img src="https://img.shields.io/github/languages/code-size/AIO-Game/Common?label=size" /></a>
-<a href="https://github.com/AIO-Game/Common"><img src="https://img.shields.io/github/issues/AIO-GAME/Common" /></a>
-<a href="https://www.codetriage.com/aio-game/common"><img src="https://www.codetriage.com/aio-game/common/badges/users.svg" /></a>
-</p>
-<p align="center">
-<a href="https://github.com/AIO-GAME/Common/tags"><img alt="" src="https://img.shields.io/github/package-json/version/AIO-GAME/Common"></a>
-<a href="https://openupm.com/packages/com.aio.package/"><img src="https://img.shields.io/npm/v/com.aio.package?label=openupm&amp;registry_uri=https://package.openupm.com" /></a>
+<a href="https://github.com/AIO-GAME/Common/security/policy"> 
+<img alt="" src="https://img.shields.io/github/package-json/unity/AIO-GAME/Common"> 
+</a>
+<a href="https://github.com/AIO-Game/Common">
+<img src="https://img.shields.io/github/license/AIO-Game/Common" alt=""/>
+</a>
+<a href="https://github.com/AIO-Game/Common">
+<img src="https://img.shields.io/github/languages/code-size/AIO-Game/Common?label=size" alt=""/>
+</a>
+<a href="https://openupm.com/packages/com.aio.package/">
+<img src="https://img.shields.io/npm/v/com.aio.package?label=openupm&amp;registry_uri=https://package.openupm.com" alt=""/>
+</a>
 </p>
 
-## ⚙ Install
+## ⚙ 安装
 
 <details>
 <summary>
@@ -52,7 +51,7 @@
 <span style="color: deepskyblue; "><b>Unity PackageManager</b></span>
 </summary>
 
-openupm 中国版
+> open upm *中国版*
 
 ~~~
 Name: package.openupm.cn
@@ -60,7 +59,7 @@ URL: https://package.openupm.cn
 Scope(s): com.aio.package
 ~~~
 
-openupm 国际版
+> open upm *国际版*
 
 ~~~
 Name: package.openupm.com
@@ -75,7 +74,7 @@ Scope(s): com.aio.package
 <span style="color: deepskyblue; "><b>Command Line</b></span>
 </summary>
 
-openupm-cli
+> open *upm-cli*
 
 ~~~
 openupm add com.aio.package
@@ -83,14 +82,14 @@ openupm add com.aio.package
 
 </details>
 
-## ⭐ About
+## ⭐ 关于
 
-- **这是 Unity 通用API 工具函数调用包。它提供了一套函数调用工具来帮助开发者快速搭建项目**
+- **这是 Unity 通用API 工具函数调用包。** 它提供了一套函数调用工具来帮助开发者快速搭建项目
 - ✅ **支持 Unity 2019.4 及以上版本**
 - ✅ **支持 Android/iOS/Windows/Mac/WebGL**
-- ✅ **支持 .NET 4.x**
+- ✅ **支持 .NET 4.x and .NET Standard 2.0**
 
-## 📖 Documentation
+## 📖 文档
 
 For more info please see | [Documentation](./README.md)
 or [Wiki](https://github.com/AIO-GAME/Common/wiki)
@@ -103,14 +102,14 @@ or [Wiki](https://github.com/AIO-GAME/Common/wiki)
 | [🪞 -> **_Print_**](https://github.com/AIO-GAME/Common/wiki/Print)        | <i>.net core or Unity Output Log</i>        |
 | [🪞 -> **_Ensure_**](https://github.com/AIO-GAME/Common/wiki/Ensure)      | <i>All Platform Check Exception</i>         |
 | [🪞️ -> **_PrCourse_**](https://github.com/AIO-GAME/Common/wiki/PrCourse) | <i>All Platform Process Execution</i>       |
-| [🪞️ -> **_PrDingding_**](./API_USAGE/Process/PrDingding.md)   | <i>钉钉机器人</i>                                |
+| [🪞️ -> **_PrDingding_**](./API_USAGE/Process/PrDingding.md)              | <i>钉钉机器人</i>                                |
 
-## 🔗 Third-Party References & Tools
+## 🔗 依赖
 
-| Doc                                                                 | Description                                 |
-|:--------------------------------------------------------------------|:--------------------------------------------|
-| [RainbowFolders](https://bitbucket.org/chromiumembedded/cef)        ||
-| [MirrorNetworking](https://github.com/MirrorNetworking/Mirror)      ||
+| Doc                                                            | Description                  |
+|:---------------------------------------------------------------|:-----------------------------|
+| [RainbowFolders](https://bitbucket.org/chromiumembedded/cef)   | 文件夹增强插件Rainbow Folders       |
+| [MirrorNetworking](https://github.com/MirrorNetworking/Mirror) | Unity高性能网络库Mirror Networking |
 
 ## ✨ 贡献者
 
@@ -125,26 +124,13 @@ or [Wiki](https://github.com/AIO-GAME/Common/wiki)
                     <sub><b>xinansky</b></sub>
                 </a>
             </td>
-            <td align="center">
-                <a href="https://github.com/Starkappa">
-                    <img src="https://avatars.githubusercontent.com/u/155533864?v=4" width="64;" alt="Starkappa"/>
-                    <br />
-                    <sub><b>Starkappa</b></sub>
-                </a>
-            </td>
-            <td align="center">
-                <a href="https://github.com/xcarray">
-                    <img src="https://avatars.githubusercontent.com/u/6380068?v=4" width="64;" alt="xcarray"/>
-                    <br />
-                    <sub><b>xcarray</b></sub>
-                </a>
-            </td>
 		</tr>
 	<tbody>
+
 </table>
 <!-- readme: collaborators,contributors -end -->
 
-## 📢 Thanks
+## 📢 致谢
 
 - **谢谢您选择我们的扩展包。**
 - **如果此软件包对您有所帮助。**

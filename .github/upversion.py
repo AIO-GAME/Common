@@ -1,10 +1,33 @@
-import shutil
-import time
 import json
 import os
+import shutil
 import subprocess
-import stat
+import time
+
+import requests
 from tqdm import tqdm
+
+
+def get_latest_github_tag(repo_url) -> str | None:
+    # 从仓库 URL 提取用户和仓库名称
+    repo_path = repo_url.split("https://github.com/")[1].replace(".git", "")
+    print(f"Fetching tags from {repo_path}")
+    api_url = f"https://api.github.com/repos/{repo_path}/tags"
+
+    response = requests.get(api_url, timeout=10)
+
+    if response.status_code == 200:
+        tags = response.json()
+        if tags:
+            latest_tag = tags[0]['name']
+            print(f"Latest tag: {latest_tag}")
+            return latest_tag
+        else:
+            print("No tags found.")
+            return None
+    else:
+        print(f"Failed to fetch tags: {response.status_code}")
+        return None
 
 
 def get_local_tags() -> set[str]:
@@ -40,14 +63,12 @@ def delete_remote_tag() -> None:
         delete_local_tag(tag)
 
 
-# 处理只读文件删除问题的回调函数
 def remove_readonly(func, path, _) -> None:
     # os.chmod(path, stat.S_IWRITE)
     subprocess.run(['attrib', '-R', path], shell=True)
     func(path)
 
 
-# 删除文件夹
 def delete_folder(folder_path) -> None:
     try:
         if os.path.exists(folder_path):
@@ -59,30 +80,43 @@ def delete_folder(folder_path) -> None:
         print(exp)
 
 
-def read_current_branch() -> str:
+def read_current_branch() -> str:  # 判断当前分支
     branches = os.popen("git branch").read().split("\n")
-    # 判断当前分支
     for branch in branches:
         if branch.startswith("*"):
             return branch.replace("* ", "")
 
 
-def read_current_version() -> str:
-    subprocess.run(['git', 'fetch', '--tags'], check=True)
-    tags = os.popen("git tag").read().split("\n")
-    # 所有标签去掉空字符串 -preview标签去掉preview 然后按照version排序
-    tags = sorted([tag.replace("-preview", "") for tag in tags if tag], key=lambda x: tuple(map(int, x.split("."))))
-    return tags[-1]
+def read_local_username() -> str:
+    result = subprocess.run(['git', 'config', 'user.name'], stdout=subprocess.PIPE)
+    return result.stdout.decode('utf-8').strip()
+
+
+def read_local_email() -> str:
+    result = subprocess.run(['git', 'config', 'user.email'], stdout=subprocess.PIPE)
+    return result.stdout.decode('utf-8').strip()
+
+
+def read_current_version() -> str | None:
+    try:
+        subprocess.run(['git', 'fetch', '--tags'], check=True)
+        tags = os.popen("git tag").read().split("\n")
+        if len(tags) == 0:  # 需要判断是否有标签列表
+            return None
+        # 所有标签去掉空字符串 -preview标签去掉preview 然后按照version排序 1.2.3-preview -> 1.3.0-preview
+        tags = sorted([tag.replace("-preview", "") for tag in tags if tag], key=lambda x: list(map(int, x.split("."))))
+        return tags[-1]
+    except Exception:
+        return None
 
 
 # 切换上一级目录
 os.chdir(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-# subprocess.run(['cd', '..'], check=True, shell=True)
 current_path = os.getcwd()
 print("当前路径: " + current_path)
 
-username = "Star fire"
-email = "xinansky99@gmail.com"
+username = read_local_username()
+email = read_local_email()
 print("用户名称: " + username)
 print("用户邮箱: " + email)
 
@@ -91,7 +125,6 @@ is_preview = True
 
 # 忽略列表
 ignore_list = [
-    "Tools~",
     ".chglog/*",
     "*.yaml",
     "*.yml",
@@ -117,24 +150,28 @@ for step_description, step_function in tqdm(steps, desc="检查标签"):
     step_function()
 
 version = read_current_version()  # 读取当前版本号
-# 递增版本号
-version_list = version.split(".")
-if is_preview:
-    version_list[2] = str(int(version_list[2]) + 1) + "-preview"
+if version is None:
+    version = "1.0.0" + ("-preview" if is_preview else "")
+    new_version = "1.0.0" + ("-preview" if is_preview else "")
 else:
-    version_list[2] = str(int(version_list[2]) + 1)
-new_version = ".".join(version_list)
+    # 递增版本号
+    version_list = version.split(".")
+    if is_preview:
+        version_list[2] = str(int(version_list[2]) + 1) + "-preview"
+    else:
+        version_list[2] = str(int(version_list[2]) + 1)
+    new_version = ".".join(version_list)
+print("版本号: {0} -> {1}".format(version, new_version))
 
 # 写入新版本号
 with open("package.json", "r+") as f:
     package = json.load(f)
     current_version = package["version"]
-    if current_version != new_version:
-        package["version"] = new_version
-        f.seek(0)
-        json.dump(package, f, indent=2)
-        print("写入新版本号成功: {0} -> {1}".format(current_version, new_version))
-        f.close()
+    package["version"] = new_version
+    f.seek(0)
+    json.dump(package, f, indent=2)
+    print("写入配置: 版本号 {0} -> {1}".format(current_version, new_version))
+    f.close()
 
 # 上传到远程仓库 捕获异常
 if current_version != new_version:
@@ -143,9 +180,9 @@ if current_version != new_version:
         subprocess.run(['git', 'add', 'package.json'], check=True)
         subprocess.run(['git', 'commit', '-m', f"✨ up version {current_branch} -> {new_version}"], check=True)
         subprocess.run(['git', 'push', 'origin', current_branch], check=True)
-        print("推送分支: ({0})成功".format(current_branch))
+        print("推送仓库: ({0})成功".format(current_branch))
     except Exception as e:
-        print("推送分支: ({0})失败".format(current_branch))
+        print("推送仓库: ({0})失败".format(current_branch))
         print(e)
 
 steps = [
@@ -201,6 +238,14 @@ if len(errorList) > 0:
 else:
     print("删除成功")
 
+# 写入新版本号
+with open("package.json", "r+") as f:
+    package = json.load(f)
+    package["type"] = "module"
+    f.seek(0)
+    json.dump(package, f, indent=2)
+    f.close()
+
 steps = [
     ("删除标签", lambda: delete_remote_tag()),
     ("设置用户名",
@@ -226,4 +271,5 @@ steps = [
 ]
 for step_description, step_function in tqdm(steps, desc="上传标签"):
     step_function()
+
 print("升级标签版本成功")
