@@ -2,7 +2,7 @@
 <img src="RES/Logo.svg" width="256" height="256" alt="https://github.com/AIO-GAME"> 
 </p>
 <p align="center" style="font-size: 24px;"> 
-<b>Unity Asset Common</b> 
+<b>Unity Common Code</b> 
 </p>
 <p align="center"><a href="README_EN.md">简体中文</a> | English</p>
 <p align="center">
