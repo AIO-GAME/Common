@@ -4,7 +4,7 @@
   "description": "AIO Unity Common",
   "version": "1.0.46-preview",
   "unity": "2019.4",
-  "type": "library",
+  "type": "module",
   "category": "Runtime",
   "unityRelease": "0f1",
   "license": "MIT",
@@ -27,4 +27,4 @@
   "dependencies": {
     "com.unity.nuget.newtonsoft-json": "3.0.2"
   }
-}
+}}
