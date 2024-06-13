@@ -14886,6 +14886,51 @@
             </summary>
             <exception cref="T:System.Exception">命名空间未开始</exception>
         </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotCode(System.String)">
+            <summary>
+            summary 注释
+            </summary>
+            <param name="content"> 注释内容 </param>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotCode(System.String[])">
+            <summary>
+            summary 注释
+            </summary>
+            <param name="contents"> 注释内容 </param>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotReturns(System.String)">
+            <summary>
+            summary 注释
+            </summary>
+            <param name="content"> 注释内容 </param>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotExpressionCref(System.String,System.String)">
+            <summary>
+            summary 注释
+            </summary>
+            <param name="cref"> cref </param>
+            <param name="content"> 注释内容 </param>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotTypeParam(System.String,System.String)">
+            <summary>
+            summary 注释
+            </summary>
+            <param name="name"> 参数名 </param>
+            <param name="content"> 注释内容 </param>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotC(System.String)">
+            <summary>
+            summary 注释
+            </summary>
+            <param name="content"> 注释内容 </param>
+        </member>
+        <member name="M:AIO.ScriptTextBuilder.AnnotParam(System.String,System.String)">
+            <summary>
+            summary 注释
+            </summary>
+            <param name="param"> 参数名 </param>
+            <param name="content"> 内容 </param>
+        </member>
         <member name="M:AIO.ScriptTextBuilder.AnnotSummary(System.String)">
             <summary>
             summary 注释

@@ -57,6 +57,94 @@ namespace AIO
         /// <summary>
         /// summary 注释
         /// </summary>
+        /// <param name="content"> 注释内容 </param>
+        public ScriptTextBuilder AnnotCode(string content)
+        {
+            if (IsNullOrEmpty(content)) return this;
+            Builder.AppendFormat("{0}/// <code>{1}", indent, NewLine);
+            Builder.AppendFormat("{0}/// {1}{2}", indent, content, NewLine);
+            Builder.AppendFormat("{0}/// </code>{1}", indent, NewLine);
+            return this;
+        }
+
+        /// <summary>
+        /// summary 注释
+        /// </summary>
+        /// <param name="contents"> 注释内容 </param>
+        public ScriptTextBuilder AnnotCode(params string[] contents)
+        {
+            Builder.AppendFormat("{0}/// <code>{1}", indent, NewLine);
+            for (var i = 1; i < contents.Length; i++)
+            {
+                if (IsNullOrEmpty(contents[i])) continue;
+                Builder.AppendFormat("{0}/// {1}{2}", indent, contents[i], NewLine);
+            }
+
+            Builder.AppendFormat("{0}/// </code>{1}", indent, NewLine);
+            return this;
+        }
+
+        /// <summary>
+        /// summary 注释
+        /// </summary>
+        /// <param name="content"> 注释内容 </param>
+        public ScriptTextBuilder AnnotReturns(string content)
+        {
+            if (IsNullOrEmpty(content)) return this;
+            Builder.AppendFormat("{0}/// <returns>{1}</returns>{2}", indent, content, NewLine);
+            return this;
+        }
+
+        /// <summary>
+        /// summary 注释
+        /// </summary>
+        /// <param name="cref"> cref </param>
+        /// <param name="content"> 注释内容 </param>
+        public ScriptTextBuilder AnnotExpressionCref(string cref, string content)
+        {
+            if (IsNullOrEmpty(content)) return this;
+            Builder.AppendFormat("{0}/// <expression cref=\"{1}\">{2}</expression>{3}", indent, cref, content, NewLine);
+            return this;
+        }
+
+        /// <summary>
+        /// summary 注释
+        /// </summary>
+        /// <param name="name"> 参数名 </param>
+        /// <param name="content"> 注释内容 </param>
+        public ScriptTextBuilder AnnotTypeParam(string name, string content)
+        {
+            if (IsNullOrEmpty(content)) return this;
+            Builder.AppendFormat("{0}/// <typeparam name=\"{1}\">{2}</typeparam>{3}", indent, name, content, NewLine);
+            return this;
+        }
+
+        /// <summary>
+        /// summary 注释
+        /// </summary>
+        /// <param name="content"> 注释内容 </param>
+        public ScriptTextBuilder AnnotC(string content)
+        {
+            if (IsNullOrEmpty(content)) return this;
+            Builder.AppendFormat("{0}/// <c>{1}</c>{2}", indent, content, NewLine);
+            return this;
+        }
+
+        /// <summary>
+        /// summary 注释
+        /// </summary>
+        /// <param name="param"> 参数名 </param>
+        /// <param name="content"> 内容 </param>
+        public ScriptTextBuilder AnnotParam(string param, string content)
+        {
+            if (IsNullOrEmpty(param)) return this;
+            Builder.AppendFormat("{0}/// <param name=\"{1}\">{2}</param>{3}", indent, param, content, NewLine);
+            return this;
+        }
+
+        /// <summary>
+        /// summary 注释
+        /// </summary>
         /// <param name="value"> 注释内容 </param>
         public ScriptTextBuilder AnnotSummary(string value)
         {
