@@ -55,7 +55,7 @@ namespace AIO.UEditor
             /// <param name="icon">图标路径</param>
             public static void ChangeICON(string icon)
             {
-                if (!File.Exists(icon)) throw new IOException(icon);
+                if (!File.Exists(icon)) return;
 #if UNITY_EDITOR_WIN
                 var result = ExtractIcon(0, icon.Replace('\\', '/'), 0);
                 try
