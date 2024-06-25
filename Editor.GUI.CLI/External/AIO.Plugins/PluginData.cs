@@ -11,6 +11,7 @@ namespace AIO
     /// 插件信息
     /// </summary>
     [CreateAssetMenu(menuName = "Plugins/AIO Data", fileName = nameof(PluginData))]
+    [PreferBinarySerialization]
     internal class PluginData : ScriptableObject
     {
         /// <summary>

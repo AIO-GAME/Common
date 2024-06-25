@@ -11,6 +11,7 @@ namespace AIO.UEditor
     /// <summary>
     /// 自定义窗口基类
     /// </summary>
+    [PreferBinarySerialization]
     public abstract partial class EmptyGraphWindow : EditorWindow
     {
         /// <summary>
@@ -18,10 +19,7 @@ namespace AIO.UEditor
         /// </summary>
         /// <param name="w">宽</param>
         /// <param name="h">高</param>
-        protected EmptyGraphWindow(float w = 800, float h = 600)
-        {
-            minSize = new Vector2(w, h);
-        }
+        protected EmptyGraphWindow(float w = 800, float h = 600) { minSize = new Vector2(w, h); }
 
         /// <summary>
         /// 当前窗口宽度
@@ -48,24 +46,14 @@ namespace AIO.UEditor
         /// </summary>
         public Rect ReliablePosition { get; private set; }
 
-        private void ModifierKeysChanged()
-        {
-            OnModifierKeysChanged();
-        }
+        private void ModifierKeysChanged() { OnModifierKeysChanged(); }
 
-        private void ShowButton(Rect rect)
-        {
-            OnShowButton(rect);
-        }
+        private void ShowButton(Rect rect) { OnShowButton(rect); }
 
         /// <summary>
         /// 转化为信息字符串
         /// </summary>
-        public sealed override string ToString()
-        {
-            return base.ToString();
-        }
-
+        public sealed override string ToString() { return base.ToString(); }
 
         /// <summary>
         /// 标记目标已改变
