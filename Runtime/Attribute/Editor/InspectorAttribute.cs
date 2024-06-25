@@ -1,7 +1,7 @@
 ﻿#region
 
-using System;
 using System.Diagnostics;
+using UnityEngine;
 
 #endregion
 
@@ -11,5 +11,5 @@ namespace AIO.UEngine
     /// 类成员检视器特性
     /// </summary>
     [Conditional("UNITY_EDITOR")]
-    public abstract class InspectorAttribute : Attribute { }
+    public abstract class InspectorAttribute : PropertyAttribute { }
 }

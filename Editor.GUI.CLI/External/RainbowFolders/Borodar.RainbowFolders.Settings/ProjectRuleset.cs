@@ -10,6 +10,7 @@ using UnityEngine.Serialization;
 
 namespace AIO.RainbowFolders.Settings
 {
+    [PreferBinarySerialization]
     [CreateAssetMenu(menuName = "Plugins/Project Ruleset", fileName = nameof(ProjectRuleset))]
     [HelpURL("https://www.borodar.com/stuff/rainbowfolders/docs/quickstart_v2.1.0.pdf")]
     internal class ProjectRuleset : ScriptableObject
