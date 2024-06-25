@@ -146,7 +146,7 @@ namespace AIO.RainbowFolders
         /// </summary>
         public static bool Enable;
 
-        [InitializeOnLoadMethod]
+        [AInit(EInitAttrMode.Both)]
         public static void Initialize()
         {
             var array       = Application.dataPath.Split('/');
