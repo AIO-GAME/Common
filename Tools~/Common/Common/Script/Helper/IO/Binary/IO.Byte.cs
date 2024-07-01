@@ -66,7 +66,19 @@ namespace AIO
             }
 
             /// <summary>
-            /// 异步读取
+            /// 读取
+            /// </summary>
+            /// <param name="path">路径</param>
+            /// <param name="bufferSize">缓冲区大小</param>
+            public static Stream ReadStream(string path, in int bufferSize = 4096)
+            {
+                path = path.Replace('\\', Path.AltDirectorySeparatorChar);
+                if (!ExistsFile(path)) return Stream.Null;
+                return new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, bufferSize, false);
+            }
+
+            /// <summary>
+            /// 读取
             /// </summary>
             /// <param name="path">路径</param>
             /// <param name="bufferSize">缓冲区大小</param>
