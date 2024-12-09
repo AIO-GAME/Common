@@ -49,7 +49,8 @@ namespace AIO
             }
 
             private static Task<string> AutoCommonRequestAsync(
-                string   remoteUrl, string method,
+                string   remoteUrl,
+                string   method,
                 string   data,
                 Encoding encoding,
                 ushort   timeout = Net.TIMEOUT,
@@ -61,7 +62,8 @@ namespace AIO
             }
 
             private static Task<string> AutoCommonRequestAsync(
-                string remoteUrl, string method,
+                string remoteUrl,
+                string method,
                 string data,
                 ushort timeout = Net.TIMEOUT,
                 string cookie  = null)
@@ -129,9 +131,9 @@ namespace AIO
 
             private static string GetResponseText(WebRequest request, Encoding encoding)
             {
-                Stream responseStream = null;
-                StreamReader stream = null;
-                WebResponse response = null;
+                Stream       responseStream = null;
+                StreamReader stream         = null;
+                WebResponse  response       = null;
                 try
                 {
                     response       = request.GetResponse();
@@ -158,9 +160,9 @@ namespace AIO
 
             private static async Task<string> GetResponseTextAsync(WebRequest request, Encoding encoding)
             {
-                Stream responseStream = null;
-                StreamReader stream = null;
-                WebResponse response = null;
+                Stream       responseStream = null;
+                StreamReader stream         = null;
+                WebResponse  response       = null;
                 try
                 {
                     response       = await request.GetResponseAsync();
@@ -186,9 +188,9 @@ namespace AIO
 
             private static Stream GetResponseStream(WebRequest request)
             {
-                Stream responseStream = null;
-                BufferedStream stream = null;
-                WebResponse response = null;
+                Stream         responseStream = null;
+                BufferedStream stream         = null;
+                WebResponse    response       = null;
                 try
                 {
                     response       = request.GetResponse();
@@ -210,9 +212,9 @@ namespace AIO
 
             private static async Task<Stream> GetResponseStreamAsync(WebRequest request)
             {
-                Stream responseStream = null;
-                BufferedStream stream = null;
-                WebResponse response = null;
+                Stream         responseStream = null;
+                BufferedStream stream         = null;
+                WebResponse    response       = null;
                 try
                 {
                     response       = await request.GetResponseAsync();
@@ -250,7 +252,6 @@ namespace AIO
                 }
             }
 
-
             private static async Task WriteRequestStreamAsync(WebRequest request, byte[] data)
             {
                 if (data is null || data.Length == 0)
@@ -273,10 +274,12 @@ namespace AIO
                 }
             }
 
-            private static HttpWebRequest CreateHttpWebRequest(string remoteUrl,
-                                                               ushort timeout = Net.TIMEOUT, string cookie = null)
+            private static HttpWebRequest CreateHttpWebRequest(
+                string remoteUrl,
+                ushort timeout = Net.TIMEOUT,
+                string cookie  = null)
             {
-                var remote = remoteUrl.Replace('\\', Path.DirectorySeparatorChar);
+                var remote  = remoteUrl.Replace('\\', Path.DirectorySeparatorChar);
                 var request = (HttpWebRequest)WebRequest.Create(remote);
                 request.Date                         = DateTime.Now;
                 request.Timeout                      = timeout;

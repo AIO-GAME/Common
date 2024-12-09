@@ -16,6 +16,8 @@ namespace AIO
 
         public partial class HTTP
         {
+            #region Get
+
             /// <summary>
             /// 请求获取特定的内容
             /// </summary>
@@ -24,14 +26,50 @@ namespace AIO
             /// <param name="timeout">超时时间</param>
             /// <param name="cookie">cookie</param>
             public static string Get(string   remoteUrl,
-                                     Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+                                     Encoding encoding = null,
+                                     ushort   timeout  = Net.TIMEOUT,
+                                     string   cookie   = null) => Get(remoteUrl, Format.Json, encoding, timeout, cookie);
+
+            /// <summary>
+            /// 请求获取特定的内容
+            /// </summary>
+            /// <param name="remoteUrl">路径</param>
+            /// <param name="encoding">编码</param>
+            /// <param name="timeout">超时时间</param>
+            /// <param name="cookie">cookie</param>
+            public static Task<string> GetAsync(string   remoteUrl,
+                                                Encoding encoding = null,
+                                                ushort   timeout  = Net.TIMEOUT,
+                                                string   cookie   = null) => GetAsync(remoteUrl, Format.Json, encoding, timeout, cookie);
+
+            /// <summary>
+            /// 请求获取特定的内容
+            /// </summary>
+            /// <param name="remoteUrl">路径</param>
+            /// <param name="encoding">编码</param>
+            /// <param name="format">格式</param>
+            /// <param name="timeout">超时时间</param>
+            /// <param name="cookie">cookie</param>
+            public static string Get(string   remoteUrl,
+                                     Format   format   = Format.Json,
+                                     Encoding encoding = null,
+                                     ushort   timeout  = Net.TIMEOUT,
+                                     string   cookie   = null)
             {
                 HttpWebRequest request = null;
                 try
                 {
-                    request             = CreateHttpWebRequest(remoteUrl, timeout, cookie);
-                    request.Method      = WebRequestMethods.Http.Get;
-                    request.ContentType = "application/json; charset=UTF-8";
+                    request        = CreateHttpWebRequest(remoteUrl, timeout, cookie);
+                    request.Method = WebRequestMethods.Http.Get;
+                    var application = format switch
+                    {
+                        Format.Json => "application/json;",
+                        Format.Xml  => "application/xml;",
+                        Format.Yaml => "application/x-yaml;",
+                        _           => "application/json;",
+                    };
+                    var charset = encoding?.BodyName ?? "UTF-8";
+                    request.ContentType = $"{application} {charset}";
                     return GetResponseText(request, encoding);
                 }
                 catch (Exception)
@@ -45,18 +83,30 @@ namespace AIO
             /// 请求获取特定的内容
             /// </summary>
             /// <param name="remoteUrl">路径</param>
+            /// <param name="format">格式</param>
             /// <param name="encoding">编码</param>
             /// <param name="timeout">超时时间</param>
             /// <param name="cookie">cookie</param>
             public static async Task<string> GetAsync(string   remoteUrl,
-                                                      Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+                                                      Format   format   = Format.Json,
+                                                      Encoding encoding = null,
+                                                      ushort   timeout  = Net.TIMEOUT,
+                                                      string   cookie   = null)
             {
                 HttpWebRequest request = null;
                 try
                 {
-                    request             = CreateHttpWebRequest(remoteUrl, timeout, cookie);
-                    request.Method      = WebRequestMethods.Http.Get;
-                    request.ContentType = "application/json; charset=UTF-8";
+                    request        = CreateHttpWebRequest(remoteUrl, timeout, cookie);
+                    request.Method = WebRequestMethods.Http.Get;
+                    var application = format switch
+                    {
+                        Format.Json => "application/json;",
+                        Format.Xml  => "application/xml;",
+                        Format.Yaml => "application/x-yaml;",
+                        _           => "application/json;",
+                    };
+                    var charset = encoding?.BodyName ?? "UTF-8";
+                    request.ContentType = $"{application} {charset}";
                     return await GetResponseTextAsync(request, encoding);
                 }
                 catch (Exception)
@@ -65,6 +115,10 @@ namespace AIO
                     return string.Empty;
                 }
             }
+
+            #endregion
+
+            #region GetStream
 
             /// <summary>
             /// 请求获取特定的内容
@@ -95,8 +149,9 @@ namespace AIO
             /// <param name="remoteUrl">路径</param>
             /// <param name="timeout">超时时间</param>
             /// <param name="cookie">cookie</param>
-            public static async Task<Stream> GetStreamAsync(string remoteUrl, ushort timeout = Net.TIMEOUT,
-                                                            string cookie = null)
+            public static async Task<Stream> GetStreamAsync(string remoteUrl,
+                                                            ushort timeout = Net.TIMEOUT,
+                                                            string cookie  = null)
             {
                 HttpWebRequest request = null;
                 try
@@ -113,6 +168,10 @@ namespace AIO
                 }
             }
 
+            #endregion
+
+            #region GetMD5
+
             /// <summary>
             /// HTTP 下载文件
             /// </summary>
@@ -121,12 +180,12 @@ namespace AIO
             /// <exception cref="Exception">异常</exception>
             public static string GetMD5(string remoteUrl, ushort timeout = Net.TIMEOUT)
             {
-                var remote = remoteUrl.Replace("\\", "/");
+                var remote  = remoteUrl.Replace("\\", "/");
                 var request = WebRequest.Create(remote);
                 request.Method  = WebRequestMethods.Http.Get;
                 request.Timeout = timeout;
                 using var response = request.GetResponse();
-                using var stream = response.GetResponseStream();
+                using var stream   = response.GetResponseStream();
                 if (stream is null) throw new AExpNetGetResponseStream("HTTP", response);
                 return stream.GetMD5();
             }
@@ -139,98 +198,85 @@ namespace AIO
             /// <exception cref="Exception">异常</exception>
             public static async Task<string> GetMD5Async(string remoteUrl, ushort timeout = Net.TIMEOUT)
             {
-                var remote = remoteUrl.Replace("\\", "/");
+                var remote  = remoteUrl.Replace("\\", "/");
                 var request = WebRequest.Create(remote);
                 request.Method  = WebRequestMethods.Http.Get;
                 request.Timeout = timeout;
                 using var response = await request.GetResponseAsync();
-                using var stream = response.GetResponseStream();
+                using var stream   = response.GetResponseStream();
                 if (stream is null) throw new AExpNetGetResponseStream("HTTP", response);
                 return await stream.GetMD5Async();
             }
 
+            #endregion
+
             /// <summary>
-            /// 请求获取特定的内容
+            /// 编码格式
             /// </summary>
-            /// <param name="remoteUrl">路径</param>
-            /// <param name="encoding">编码</param>
-            /// <param name="timeout">超时时间</param>
-            /// <param name="cookie">cookie</param>
-            public static T GetJson<T>(string   remoteUrl,
-                                       Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public enum Format
             {
-                var data = Get(remoteUrl, encoding, timeout, cookie);
-                return Json.Deserialize<T>(data);
+                /// <summary>
+                /// Json
+                /// </summary>
+                Json,
+
+                /// <summary>
+                /// Xml
+                /// </summary>
+                Xml,
+
+                /// <summary>
+                /// Yaml
+                /// </summary>
+                Yaml
             }
 
             /// <summary>
             /// 请求获取特定的内容
             /// </summary>
             /// <param name="remoteUrl">路径</param>
+            /// <param name="format">格式</param>
             /// <param name="encoding">编码</param>
             /// <param name="timeout">超时时间</param>
             /// <param name="cookie">cookie</param>
-            public static async Task<T> GetJsonAsync<T>(string   remoteUrl,
-                                                        Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public static T Get<T>(string   remoteUrl,
+                                   Format   format   = Format.Json,
+                                   Encoding encoding = null,
+                                   ushort   timeout  = Net.TIMEOUT,
+                                   string   cookie   = null)
             {
-                var data = await GetAsync(remoteUrl, encoding, timeout, cookie);
-                return Json.Deserialize<T>(data);
+                var data = Get(remoteUrl, format, encoding, timeout, cookie);
+                return format switch
+                {
+                    Format.Json => Json.Deserialize<T>(data),
+                    Format.Xml  => Xml.Deserialize<T>(data),
+                    Format.Yaml => Yaml.Deserialize<T>(data),
+                    _           => throw new ArgumentOutOfRangeException(nameof(format), format, null)
+                };
             }
 
             /// <summary>
             /// 请求获取特定的内容
             /// </summary>
             /// <param name="remoteUrl">路径</param>
+            /// <param name="format">格式</param>
             /// <param name="encoding">编码</param>
             /// <param name="timeout">超时时间</param>
             /// <param name="cookie">cookie</param>
-            public static T GetXml<T>(string   remoteUrl,
-                                      Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
+            public static async Task<T> GetAsync<T>(string   remoteUrl,
+                                                    Format   format   = Format.Json,
+                                                    Encoding encoding = null,
+                                                    ushort   timeout  = Net.TIMEOUT,
+                                                    string   cookie   = null)
             {
-                var data = Get(remoteUrl, encoding, timeout, cookie);
-                return Xml.Deserialize<T>(data);
-            }
-
-            /// <summary>
-            /// 请求获取特定的内容
-            /// </summary>
-            /// <param name="remoteUrl">路径</param>
-            /// <param name="encoding">编码</param>
-            /// <param name="timeout">超时时间</param>
-            /// <param name="cookie">cookie</param>
-            public static async Task<T> GetXmlAsync<T>(string   remoteUrl,
-                                                       Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
-            {
-                var data = await GetAsync(remoteUrl, encoding, timeout, cookie);
-                return Xml.Deserialize<T>(data);
-            }
-
-            /// <summary>
-            /// 请求获取特定的内容
-            /// </summary>
-            /// <param name="remoteUrl">路径</param>
-            /// <param name="encoding">编码</param>
-            /// <param name="timeout">超时时间</param>
-            /// <param name="cookie">cookie</param>
-            public static T GetYaml<T>(string   remoteUrl,
-                                       Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
-            {
-                var data = Get(remoteUrl, encoding, timeout, cookie);
-                return Yaml.Deserialize<T>(data);
-            }
-
-            /// <summary>
-            /// 请求获取特定的内容
-            /// </summary>
-            /// <param name="remoteUrl">路径</param>
-            /// <param name="encoding">编码</param>
-            /// <param name="timeout">超时时间</param>
-            /// <param name="cookie">cookie</param>
-            public static async Task<T> GetYamlAsync<T>(string   remoteUrl,
-                                                        Encoding encoding = null, ushort timeout = Net.TIMEOUT, string cookie = null)
-            {
-                var data = await GetAsync(remoteUrl, encoding, timeout, cookie);
-                return Yaml.Deserialize<T>(data);
+                var data = await GetAsync(remoteUrl, format, encoding, timeout, cookie);
+                return format switch
+                {
+                    Format.Json => Json.Deserialize<T>(data),
+                    Format.Xml  => Xml.Deserialize<T>(data),
+                    Format.Yaml => Yaml.Deserialize<T>(data),
+                    _           => throw new ArgumentOutOfRangeException(nameof(format), format, null)
+                };
             }
 
             #region Nested type: Option

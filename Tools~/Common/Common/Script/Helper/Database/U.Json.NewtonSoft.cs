@@ -53,7 +53,7 @@ namespace AIO
                     //[Default:只有控制字符(例如换行符)被转义]
                     //[EscapeNonAscii:所有非ascii和控制字符(例如换行符)都会转义。]
                     //[EscapeHtml:HTML(<， >， &， '， ")和控制字符(例如换行符)被转义.]
-                    StringEscapeHandling       = StringEscapeHandling.EscapeNonAscii,
+                    StringEscapeHandling       = StringEscapeHandling.Default,
                     PreserveReferencesHandling = PreserveReferencesHandling.None
                 };
             }
