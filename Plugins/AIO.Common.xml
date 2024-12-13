@@ -7305,9 +7305,16 @@
             <param name="concat">true:拼接 | false:覆盖</param>
             <param name="bufferSize">缓冲区大小</param>
         </member>
+        <member name="M:AIO.AHelper.IO.ReadStream(System.String,System.Int32@)">
+            <summary>
+            读取
+            </summary>
+            <param name="path">路径</param>
+            <param name="bufferSize">缓冲区大小</param>
+        </member>
         <member name="M:AIO.AHelper.IO.Read(System.String,System.Int32@)">
             <summary>
-            异步读取
+            读取
             </summary>
             <param name="path">路径</param>
             <param name="bufferSize">缓冲区大小</param>
@@ -8510,6 +8517,26 @@
             <param name="timeout">超时时间</param>
             <param name="cookie">cookie</param>
         </member>
+        <member name="M:AIO.AHelper.HTTP.Get(System.String,AIO.AHelper.HTTP.Format,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteUrl">路径</param>
+            <param name="encoding">编码</param>
+            <param name="format">格式</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
+        <member name="M:AIO.AHelper.HTTP.GetAsync(System.String,AIO.AHelper.HTTP.Format,System.Text.Encoding,System.UInt16,System.String)">
+            <summary>
+            请求获取特定的内容
+            </summary>
+            <param name="remoteUrl">路径</param>
+            <param name="format">格式</param>
+            <param name="encoding">编码</param>
+            <param name="timeout">超时时间</param>
+            <param name="cookie">cookie</param>
+        </member>
         <member name="M:AIO.AHelper.HTTP.GetStream(System.String,System.UInt16,System.String)">
             <summary>
             请求获取特定的内容
@@ -8542,56 +8569,42 @@
             <param name="timeout">超时</param>
             <exception cref="T:System.Exception">异常</exception>
         </member>
-        <member name="M:AIO.AHelper.HTTP.GetJson``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="T:AIO.AHelper.HTTP.Format">
+            <summary>
+            编码格式
+            </summary>
+        </member>
+        <member name="F:AIO.AHelper.HTTP.Format.Json">
+            <summary>
+            Json
+            </summary>
+        </member>
+        <member name="F:AIO.AHelper.HTTP.Format.Xml">
+            <summary>
+            Xml
+            </summary>
+        </member>
+        <member name="F:AIO.AHelper.HTTP.Format.Yaml">
+            <summary>
+            Yaml
+            </summary>
+        </member>
+        <member name="M:AIO.AHelper.HTTP.Get``1(System.String,AIO.AHelper.HTTP.Format,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             请求获取特定的内容
             </summary>
             <param name="remoteUrl">路径</param>
+            <param name="format">格式</param>
             <param name="encoding">编码</param>
             <param name="timeout">超时时间</param>
             <param name="cookie">cookie</param>
         </member>
-        <member name="M:AIO.AHelper.HTTP.GetJsonAsync``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
+        <member name="M:AIO.AHelper.HTTP.GetAsync``1(System.String,AIO.AHelper.HTTP.Format,System.Text.Encoding,System.UInt16,System.String)">
             <summary>
             请求获取特定的内容
             </summary>
             <param name="remoteUrl">路径</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-        </member>
-        <member name="M:AIO.AHelper.HTTP.GetXml``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <param name="remoteUrl">路径</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-        </member>
-        <member name="M:AIO.AHelper.HTTP.GetXmlAsync``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <param name="remoteUrl">路径</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-        </member>
-        <member name="M:AIO.AHelper.HTTP.GetYaml``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <param name="remoteUrl">路径</param>
-            <param name="encoding">编码</param>
-            <param name="timeout">超时时间</param>
-            <param name="cookie">cookie</param>
-        </member>
-        <member name="M:AIO.AHelper.HTTP.GetYamlAsync``1(System.String,System.Text.Encoding,System.UInt16,System.String)">
-            <summary>
-            请求获取特定的内容
-            </summary>
-            <param name="remoteUrl">路径</param>
+            <param name="format">格式</param>
             <param name="encoding">编码</param>
             <param name="timeout">超时时间</param>
             <param name="cookie">cookie</param>
@@ -8783,6 +8796,30 @@
             <param name="data">上传数据</param>
             <param name="options">选项参数</param>
         </member>
+        <member name="M:AIO.AHelper.HTTP.Post``1(System.String,``0,AIO.AHelper.HTTP.Option)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="data">上传数据</param>
+            <param name="options">选项参数</param>
+        </member>
+        <member name="M:AIO.AHelper.HTTP.Post``1(System.String,System.String,AIO.AHelper.HTTP.Option)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="data">上传数据</param>
+            <param name="options">选项参数</param>
+        </member>
+        <member name="M:AIO.AHelper.HTTP.Post``2(System.String,``0,AIO.AHelper.HTTP.Option)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="data">上传数据</param>
+            <param name="options">选项参数</param>
+        </member>
         <member name="M:AIO.AHelper.HTTP.Post(System.String,AIO.AHelper.HTTP.Option)">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
@@ -8824,6 +8861,14 @@
         <member name="M:AIO.AHelper.HTTP.PostAsync(System.String,System.String,AIO.AHelper.HTTP.Option)">
             <summary>
             请求服务器接受所指定的文档作为对所标识的URI的新的从属实体 
+            </summary>
+            <param name="remoteUrl">远端路径</param>
+            <param name="data">上传数据</param>
+            <param name="options">选项参数</param>
+        </member>
+        <member name="M:AIO.AHelper.HTTP.PostAsync``2(System.String,``0,AIO.AHelper.HTTP.Option)">
+            <summary>
+            请求服务器接受所指定的文档作为对所标识的URI的新的从属实体
             </summary>
             <param name="remoteUrl">远端路径</param>
             <param name="data">上传数据</param>
@@ -9121,6 +9166,11 @@
         <member name="M:AIO.AHelper.TimeStamp.ConvertDateTime(System.DateTime)">
             <summary>
              DateTime时间格式转换为Unix时间戳格式
+            </summary>
+        </member>
+        <member name="P:AIO.AHelper.TimeStamp.UtcNowTimeStamp">
+            <summary>
+            获取时间戳
             </summary>
         </member>
         <member name="T:AIO.AHelper.Base64">
